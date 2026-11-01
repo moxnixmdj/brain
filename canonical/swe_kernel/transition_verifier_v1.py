@@ -91,7 +91,7 @@ def capture(root: Path, args: dict) -> dict[str, str | None]:
         raise ValueError('TRANSITION_SOURCE_COUNT_LIMIT')
     if args.get('operation') == 'split_module' and target.is_file():
         tree = ast.parse(target.read_text(encoding='utf-8'))
-        paths.extend(target.parent / (fn.name + '.py') for fn in tree.body if isinstance(fn, ast.FunctionDef))
+        paths.extend(target.parent / (fn.name + '.py') for fn in tree.body if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
     result = {}
     total = 0
     for path in paths:

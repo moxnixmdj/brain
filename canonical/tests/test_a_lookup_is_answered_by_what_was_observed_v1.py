@@ -85,11 +85,21 @@ class AnObservationIsAnAnswer(unittest.TestCase):
 
 
 class ItNeverChangesAVerdict(unittest.TestCase):
-    def test_a_row_with_no_observation_leaves_everything_alone(self) -> None:
+    def test_a_row_with_no_observation_still_hands_over_what_it_produced(self) -> None:
+        """The observation is the FIRST thing offered, never the only one.
+
+        Superseded law: this test used to assert that a row with no ``observed_effect`` leaves
+        ``answer`` unset.  That was true when the observation was the only projection, and it
+        is the same defect one level down -- the row had ``rows``/``row_count`` in hand and the
+        caller got nothing.  ``deliver_surface`` now hands those over, so the assertion is that
+        the PASS yields a payload, not that it yields silence.
+        """
         result = _result()
         result["execution"][0]["result"].pop("observed_effect")
         self.assertEqual(shape.deliver_observation(result), [])
-        self.assertIsNone(result.get("answer"))
+        self.assertIsNone(result.get("answer"))  # observation alone does not invent one
+        shape.deliver(STATE_GOAL, result, None)
+        self.assertIsNotNone(result.get("answer"))
         self.assertTrue(result["pass"])
         self.assertEqual(result["status"],
                          "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED")

@@ -1,0 +1,218 @@
+{
+  "action_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1",
+  "action_intent_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1",
+  "action_intent_path": null,
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "The hardcore inventory was written at the start of the round and every number in it described a tree that four merges have since moved. A ranked problem list whose board is stale reads as a plan for work that is already done: three of its top four items are closed, and the census moved 36 -> 38 served. This rewrites the board section, adds the round's landed changes with the delta each bought, and names the eleven refusals that are actually left.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
+      "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_nothing_to_do_is_an_answer_with_the_proof_v1.py",
+      ".github/workflows/swe-advanced-census.yml",
+      "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The document and the tree it describes were measured at different times, and the document had no entry that could show which of its numbers had been superseded.",
+  "canonical_base_commit": "9483dff2059b6fbaec9e27457510591a8d36369b",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The document and the tree it describes were measured at different times, and the document had no entry that could show which of its numbers had been superseded.",
+  "date": "2026-11-01",
+  "expected_parent_change": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
+  "expected_parent_frontier_change": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+  "falsification_condition": "If any number in the document disagrees with a board run on the tree it names, this action was wrong.",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intent": "Keep the problem inventory equal to the board, or it stops being an inventory.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "9483dff2059b6fbaec9e27457510591a8d36369b",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "AN_ALREADY_HELD_STATE_IS_AN_ANSWER_ONLY_WITH_ITS_PROOF",
+    "measured_effect": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.5,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/declared_input_derivation_v1.py",
+    "canonical/runtime/capability_selection_retrieval_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+    "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+    "execution_guard/swe_advanced_probe_v1.py",
+    "execution_guard/swe_capability_matrix_v1.py",
+    "hardcore_swe_surface_probe_20261030.py"
+  ],
+  "progress_evidence_paths": [
+    "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
+  ],
+  "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
+  "recursive_obs": {
+    "canonical_base_commit": "9483dff2059b6fbaec9e27457510591a8d36369b",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
+      "A_REFUSAL_THAT_NAMED_ITS_FAMILY_INSTEAD_OF_ITS_SLOT",
+      "THE_SILENT_WIDENING_OF_AN_EDIT_SCOPE_TO_THE_ANCESTOR_TREE",
+      "CERTIFICATION_OF_A_RUN_THAT_MOVED_FILES_THE_SENTENCE_NEVER_NAMED"
+    ],
+    "expected_parent_level_state_change": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "REPORTING_ALREADY_SATISFIED_WITHOUT_READING_ANYTHING__REJECTED_THAT_IS_THE_P2_LIE_ONE_LAYER_DOWN; MAKING_THE_REWRITE_IDEMPOTENT_AND_CALLING_THAT_SUCCESS__REJECTED_THE_REWRITE_IS_THE_MACHINES_OWN_OPINION; TREATING_NO_FLAKY_TEST_DETECTED_THE_SAME_WAY__REJECTED_MEASURED_ITS_CI_IS_RED_NOT_FLAKY",
+      "intrinsic_or_path_specific": "Path-specific: one declaration reader, one pass-through in the adapter, one branch order in the door.",
+      "surviving_causal_blocker": "Success was defined as 'my edit differed from my input'."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_ROUTE_NO_NEW_ADAPTER_METHOD_NO_NEW_VERDICT_INVENTED",
+      "existing_inherited_routes_checked": "PASS__REQUESTED_STATE_ALREADY_HOLDS and its BASELINE_ALREADY_PASSES producer already existed, and the polyglot adapter already carried an operation/reason/evidence report; this action reuses all three.",
+      "external_existing_routes_checked": "Terraform's 'no changes' plan and dbt's idempotent state report are the same idea in other ecosystems: a no-op is a result, reported with the diff that proves it. Not adopted as code, only as the criterion.",
+      "surviving_gap": "NO_FLAKY_TEST_DETECTED stays a refusal, because measurement showed the fixture's CI is red for a missing PYTHONPATH, not flaky; that is a workflow-repair gap, listed in the inventory."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_MATRIX_REAL_COUNT",
+        "TURNING_REFUSALS_INTO_PASSES"
+      ],
+      "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
+      "surviving_necessity": "The machine could only answer 'who calls X' for a single file; for a tree it computed the answer and discarded it."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_PROJECTION_THE_EXISTING_SHA256_ROW_CACHE_AND_THE_EXISTING_FLOOR_IDIOM"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "ONE_A_B_MATRIX_RUN_WITH_THE_CHANGE_STASHED_TO_SEPARATE_THIS_CHANGE_FROM_MAIN_MOVING",
+      "search_stop_decision": "EACH_GATE_WAS_MEASURED_BY_WHAT_MOVED_ON_DISK_RATHER_THAN_BY_WHAT_THE_CODE_CLAIMED__THE_FALSE_PASSES_WERE_FOUND_THAT_WAY_AND_NOT_BY_READING_THE_DECLARATIONS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": false,
+      "losing_routes_reason": "The word-mention law certifies nothing and fails an honest row; deleting the declarations cost a real surface case; and widening the contract of a 70 KB adapter in the same change as the gate that refuses its over-reach would have been two unmeasured moves at once.",
+      "routes_ranked": [
+        "READ_THE_ROW_AND_THE_MOVED_FILES_INSTEAD_OF_THE_SENTENCE_VOCABULARY_AND_THE_DECLARATION__SELECTED",
+        "ADD_A_LAW_THAT_AN_EFFECT_NAME_MUST_APPEAR_IN_ITS_ADAPTER__MEASURED_AND_REJECTED_0_OFFENDERS_OVER_122_ROWS",
+        "DELETE_THE_FOUR_CHOREOGRAPHY_DECLARATIONS__TRIED_AND_REVERTED_THE_ROW_IMPLEMENTS_ALL_FOUR",
+        "TEACH_THE_CHOREOGRAPHER_THE_STATED_EFFECT__REQUIRES_A_CONTRACT_CHANGE_RECORDED_AS_THE_SURVIVING_GAP"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__EACH_GATE_IS_VERIFIED_BY_WHAT_MOVED_ON_DISK_AND_THE_PROBE_RECORDS_THE_SAME_DIFF"
+    },
+    "real_outcome": "Find the callers of binding_view in canonical/runtime delivers ['_execute', '_prefer_the_writing_repair', 'admit', 'build_plan', 'compile_against_live_registry'] instead of refusing for size.",
+    "required_capability": "A_GATE_THAT_READS_THE_ANSWER_IT_ASKED_FOR_AND_A_CACHE_KEYED_BY_WHAT_IT_DESCRIBES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Every defect was measured in this repository on this tree."
+    },
+    "routes_considered": [
+      "RAISE_THE_CAP__PAYS_FOR_THE_WHOLE_PARSE",
+      "NEW_SUMMARY_FORMAT__TWO_THINGS_TO_KEEP_IN_SYNC",
+      "BOUNDED_SECTION_READ_AND_TREE_KEYED_CACHE__CHOSEN"
+    ],
+    "selected_route": "READ_THE_ROW_AND_THE_MOVED_FILES_INSTEAD_OF_THE_SENTENCE_VOCABULARY",
+    "selected_surviving_route": "READ_THE_ROW_AND_THE_MOVED_FILES_INSTEAD_OF_THE_SENTENCE_VOCABULARY",
+    "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
+    "why_selected_route_is_fastest_sufficient": "Three edits of a few lines each, six tests, and the census re-measures in six seconds. Each one removes a gate and reads a fact already on hand, so nothing new is computed and nothing new can be wrong."
+  },
+  "required_capability": "EVIDENCE_THAT_NAMES_THE_FACT_IT_WAS_DECIDED_ON",
+  "resolution": "The end-of-round board is a row in the document, each landed change carries its measured delta, and the remaining refusals are listed by their own names.",
+  "route_id": "THE_INVENTORY_IS_THE_BOARD",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "THE_INVENTORY_IS_THE_BOARD",
+  "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "dfc8c41a76345dd970533a68b66677b7d2dc908f",
+          "path": "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
+        }
+      ],
+      "decisive_question": "IS_THE_DOCUMENTS_BOARD_THE_TREES_BOARD",
+      "falsifier_id": "A_STALE_BOARD_IS_CLOSE_ENOUGH",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
+      "proposal_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The effect gate gains a third reading (what moved), the choreographer loses a silent scope widening, the binder loses a curated word list that only ever refused work the row could do, and R3 keeps its meaning by naming the slot when the binder already knows it."
+}

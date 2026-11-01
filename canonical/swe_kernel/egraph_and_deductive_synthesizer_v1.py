@@ -86,6 +86,8 @@ def _collect_project_bad_tests(project_root: Path, pkg_dir: Path | None = None) 
     py_paths = [str(project_root)]
     if pkg_dir and pkg_dir.is_dir():
         py_paths.insert(0, str(pkg_dir))
+        if (pkg_dir / "__init__.py").is_file():
+            py_paths.insert(0, str(pkg_dir.parent))
     elif (project_root / "pkg").is_dir():
         py_paths.insert(0, str(project_root / "pkg"))
     elif (project_root / "app").is_dir():
@@ -114,6 +116,8 @@ def _verify_no_new_test_failures(
     py_paths = [str(project_root)]
     if pkg_dir and pkg_dir.is_dir():
         py_paths.insert(0, str(pkg_dir))
+        if (pkg_dir / "__init__.py").is_file():
+            py_paths.insert(0, str(pkg_dir.parent))
     elif (project_root / "pkg").is_dir():
         py_paths.insert(0, str(project_root / "pkg"))
     elif (project_root / "app").is_dir():
@@ -823,6 +827,9 @@ def _locate_test_file_for_module(mod_path: Path, explicit_test_path: Path | None
     cand = tests_dir / f"test_{mod_path.stem}.py"
     if cand.is_file() and not prefer_new:
         return cand
+    sib_cand = mod_path.parent / f"test_{mod_path.stem}.py"
+    if sib_cand.is_file() and not prefer_new:
+        return sib_cand
     if tests_dir.is_dir():
         existing = sorted(tests_dir.glob("test_*.py"))
         if existing and not prefer_new:
@@ -851,40 +858,104 @@ def _module_import_expr(mod_path: Path, test_path: Path, proj_root: Path) -> tup
     return f"import {mod_path.stem}", mod_path.stem
 
 
+def _candidate_values_for_param(arg: ast.arg) -> list[Any]:
+    nm = arg.arg.lower()
+    ann = ast.unparse(arg.annotation).lower() if arg.annotation is not None else ""
+    if "bool" in ann or nm.startswith(("is_", "has_", "allow_", "use_")):
+        return [True, False]
+    if "mapping" in ann or "dict" in ann or nm in {"artifact", "data", "payload", "obj", "entry", "mapping", "record", "args", "request"}:
+        return [{"functions": ["alpha", "beta"], "count": 2}, {}]
+    if "str" in ann or nm in {"goal", "text", "name", "symbol", "query", "prefix", "suffix", "line", "raw", "message"}:
+        return ["list every function in mod.py", "alpha", ""]
+    if "list" in ann or "sequence" in ann or "iterable" in ann or nm in {"items", "xs", "values", "rows", "lines", "parts"}:
+        return [[1, 2, 3], []]
+    if "float" in ann:
+        return [2.5, 0.0, -1.5]
+    return [2, 0, -2, 5, "abc", [1, 2, 3], {}]
+
+
 def _sample_function_io(mod_path: Path, fn_name: str) -> list[tuple[tuple[Any, ...], Any]]:
+    import importlib.util
+
     src = mod_path.read_text(encoding="utf-8")
     tree = ast.parse(src)
     fn_nodes = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == fn_name]
     if not fn_nodes:
         return []
-    arity = len(fn_nodes[0].args.args)
-    ns: dict[str, Any] = {"__name__": "__sample__"}
-    sys_added = str(mod_path.parent)
-    sys.path.insert(0, sys_added)
+    fnode = fn_nodes[0]
+    pos_args = [a for a in fnode.args.args if a.arg not in {"self", "cls"}]
+    n_defaults = len(fnode.args.defaults)
+    req_arity = max(0, len(pos_args) - n_defaults)
+    arity = len(pos_args)
+
+    proj = _find_project_root(mod_path)
+    added_paths: list[str] = []
+    for p_str in (str(mod_path.parent), str(proj)):
+        if p_str not in sys.path:
+            sys.path.insert(0, p_str)
+            added_paths.append(p_str)
     try:
-        exec(compile(src, str(mod_path), "exec"), ns)  # noqa: S102
-        fn = ns[fn_name]
-        candidates: list[tuple[Any, ...]]
+        fn = None
+        try:
+            spec = importlib.util.spec_from_file_location(f"_sample_{mod_path.stem}", str(mod_path))
+            if spec and spec.loader:
+                mod_obj = importlib.util.module_from_spec(spec)
+                sys.modules[spec.name] = mod_obj
+                spec.loader.exec_module(mod_obj)
+                fn = getattr(mod_obj, fn_name, None)
+        except Exception:
+            ns: dict[str, Any] = {"__name__": "__sample__", "__file__": str(mod_path)}
+            exec(compile(src, str(mod_path), "exec"), ns)  # noqa: S102
+            fn = ns.get(fn_name)
+        if not callable(fn):
+            return []
+
+        candidates: list[tuple[Any, ...]] = []
         if arity == 0:
             candidates = [()]
         elif arity == 1:
-            candidates = [([1, 2, 3],), ([],), (0,), (1,), (5,), (-3,), ("abc",)]
+            p0_vals = _candidate_values_for_param(pos_args[0])
+            candidates = [(v,) for v in p0_vals] + [([1, 2, 3],), ([],), (0,), (1,), (5,), (-3,), ("abc",)]
+            if req_arity == 0:
+                candidates.insert(0, ())
         elif arity == 2:
             candidates = [(2, 3), (0, 5), (-2, 4), (6, 7), (10, 0)]
+            p0_vals = _candidate_values_for_param(pos_args[0])[:3]
+            p1_vals = _candidate_values_for_param(pos_args[1])[:3]
+            for v0 in p0_vals:
+                for v1 in p1_vals:
+                    cand = (v0, v1)
+                    if cand not in candidates:
+                        candidates.append(cand)
+            if req_arity == 1:
+                for v0 in p0_vals:
+                    candidates.append((v0,))
         else:
-            candidates = [tuple(range(1, arity + 1)), tuple([0] * arity)]
+            use_n = req_arity if req_arity > 0 else arity
+            first_tuple = tuple(_candidate_values_for_param(a)[0] for a in pos_args[:use_n])
+            candidates = [first_tuple, tuple(range(1, use_n + 1)), tuple([0] * use_n)]
+
         pairs: list[tuple[tuple[Any, ...], Any]] = []
+        seen_args: set[str] = set()
         for args in candidates:
+            key_r = repr(args)
+            if key_r in seen_args:
+                continue
+            seen_args.add(key_r)
             try:
                 out = fn(*args)
                 if isinstance(out, (int, float, str, bool, list, tuple, dict, type(None))):
+                    # Ensure `repr(out)` is round-trip literal evaluable in generated unittest
+                    ast.literal_eval(repr(out))
+                    ast.literal_eval(repr(args))
                     pairs.append((args, out))
             except Exception:
                 continue
         return pairs
     finally:
-        if sys.path and sys.path[0] == sys_added:
-            sys.path.pop(0)
+        for p_str in added_paths:
+            if p_str in sys.path:
+                sys.path.remove(p_str)
 
 
 def author_verified_tests(
@@ -979,7 +1050,7 @@ def author_verified_tests(
         }
 
     is_coverage = bool("coverage" in low and ("raise" in low or "increase" in low or "%" in low))
-    prefer_new = bool("case where" in low or is_coverage or (explicit_test_path is not None and not explicit_test_path.exists()))
+    prefer_new = bool("case where" in low or "docstring" in low or is_coverage or (explicit_test_path is not None and not explicit_test_path.exists()))
     test_file = _locate_test_file_for_module(mod_path, explicit_test_path, prefer_new=prefer_new)
     orig_test = test_file.read_text(encoding="utf-8") if test_file.is_file() else None
 
@@ -1016,7 +1087,7 @@ def author_verified_tests(
         if not crashing:
             return {"verified": False, "gate": "FAIL", "reason": "NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED"}
 
-    target_fns = [f for f in all_fns if f.name == fn_name] if fn_name else all_fns
+    target_fns = ([f for f in all_fns if f.name == fn_name] if fn_name else all_fns)[:12]
     if not target_fns:
         return {"verified": False, "gate": "FAIL", "reason": "NO_TARGET_FUNCTIONS_FOUND"}
 
@@ -1027,6 +1098,13 @@ def author_verified_tests(
     methods: list[str] = []
     extra_imports: list[str] = []
 
+    if "docstring" in low:
+        extra_imports.append("import doctest")
+        methods.append(
+            "    def test_module_doctests(self) -> None:\n"
+            f"        res = doctest.testmod({mod_alias}, verbose=False)\n"
+            "        self.assertEqual(res.failed, 0)\n"
+        )
     if is_property:
         try:
             import hypothesis  # noqa: F401
@@ -1115,6 +1193,8 @@ def author_verified_tests(
     if orig_test is None:
         # Newly created standalone test file: verify the newly authored test file itself executes cleanly
         py_paths = [str(mod_path.parent), str(proj)]
+        if (mod_path.parent / "__init__.py").is_file():
+            py_paths.insert(0, str(mod_path.parent.parent))
         runner_code = (
             f"import io, sys, unittest; sys.path[:0] = {py_paths!r}; "
             f"suite = unittest.defaultTestLoader.discover({str(test_file.parent)!r}, pattern={test_file.name!r}); "
@@ -1859,7 +1939,7 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
     if "one module per" in low or ("split" in low and target.is_file() and "smaller functions" not in low):
         original = target.read_text(encoding="utf-8")
         tree = ast.parse(original)
-        funcs = [n for n in tree.body if isinstance(n, ast.FunctionDef)]
+        funcs = [n for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))]
         if len(funcs) < 2:
             return {"verified": False, "gate": "FAIL", "reason": "SPLIT_MODULE_NEEDS_MULTIPLE_FUNCTIONS"}
         destinations = [target.parent / f"{fn.name}.py" for fn in funcs]
@@ -1883,6 +1963,7 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
             prefix = '.' if is_pkg else ''
             shim_lines[fn.lineno - 1:fn.end_lineno] = [f"from {prefix}{fn.name} import {fn.name}\n"]
         shim = ''.join(shim_lines)
+
         ast.parse(shim)
         edits[target] = shim.encode('utf-8')
         with contracts.FileEdits(edits) as transaction:
@@ -2301,6 +2382,281 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
             "gate": "PASS",
             "operation": "safe_helper_refactor",
             "helper": helper_name,
+            "target_file": str(target),
+            "target_sha256": _sha256_bytes(target.read_bytes()),
+        }
+
+    # 9. Remove unused imports (`Remove unused imports from <file>.py` via native `ruff --select F401 --fix` + AST fallback)
+    if "unused import" in low and target.is_file():
+        original = target.read_text(encoding="utf-8")
+        ruff_bin = shutil.which("ruff")
+        removed_names: list[str] = []
+        if ruff_bin:
+            _run_cmd([ruff_bin, "check", "--select", "F401", "--fix", "--isolated", "--no-cache", str(target)], cwd=target.parent)
+            updated = target.read_text(encoding="utf-8")
+        else:
+            tree = ast.parse(original)
+            used_ids = {
+                n.id for n in ast.walk(tree)
+                if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)
+            }
+            lines = original.splitlines()
+            drop_lines: set[int] = set()
+            for st in tree.body:
+                if isinstance(st, ast.Import) and len(st.names) == 1:
+                    bound = st.names[0].asname or st.names[0].name.split(".")[0]
+                    if bound not in used_ids and st.lineno == (st.end_lineno or st.lineno):
+                        drop_lines.add(st.lineno)
+                        removed_names.append(bound)
+                elif isinstance(st, ast.ImportFrom) and st.module != "__future__" and len(st.names) == 1:
+                    bound = st.names[0].asname or st.names[0].name
+                    if bound != "*" and bound not in used_ids and st.lineno == (st.end_lineno or st.lineno):
+                        drop_lines.add(st.lineno)
+                        removed_names.append(bound)
+            updated = ("\n".join(ln for idx, ln in enumerate(lines, 1) if idx not in drop_lines) + "\n") if drop_lines else original
+            if updated != original:
+                target.write_text(updated, encoding="utf-8")
+        if updated == original:
+            return {"verified": False, "gate": "FAIL", "reason": "NO_UNUSED_IMPORTS_FOUND"}
+        ast.parse(updated)
+        ok, tail = _verify_no_new_test_failures(proj, target.parent, before_bad, [target])
+        if not ok:
+            target.write_text(original, encoding="utf-8")
+            return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_UNUSED_IMPORT_REMOVAL", "detail": tail[:300]}
+        return {
+            "verified": True,
+            "gate": "PASS",
+            "operation": "remove_unused_imports",
+            "removed": removed_names,
+            "target_file": str(target),
+            "target_sha256": _sha256_bytes(target.read_bytes()),
+        }
+
+    # 10. Multi-caller hygiene-safe AST function inliner (`Inline the helper/function <fn> in <file>.py into all its callers`)
+    if "inline" in low and target.is_file():
+        original = target.read_text(encoding="utf-8")
+        tree = ast.parse(original)
+        m_fn = re.search(
+            r"\binline\s+(?:the\s+)?(?:single[- ]use\s+)?(?:helper\s+|function\s+)?`?([A-Za-z_][A-Za-z0-9_]*)`?",
+            goal,
+            re.IGNORECASE,
+        )
+        helper_nm = m_fn.group(1) if m_fn else ""
+        if not helper_nm:
+            return {"verified": False, "gate": "FAIL", "reason": "INLINE_TARGET_FUNCTION_NOT_STATED"}
+        fn_defs = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == helper_nm]
+        if len(fn_defs) != 1:
+            return {"verified": False, "gate": "FAIL", "reason": f"INLINE_TARGET_NOT_UNIQUE:{helper_nm}"}
+        hnode = fn_defs[0]
+        if hnode.decorator_list or hnode.args.vararg or hnode.args.kwarg or hnode.args.posonlyargs:
+            return {"verified": False, "gate": "FAIL", "reason": "INLINE_UNSUPPORTED_SIGNATURE"}
+
+        # Body may have optional docstring + pure local assignments + final `return <expr>`
+        body_stmts = list(hnode.body)
+        if body_stmts and isinstance(body_stmts[0], ast.Expr) and isinstance(body_stmts[0].value, ast.Constant) and isinstance(body_stmts[0].value.value, str):
+            body_stmts = body_stmts[1:]
+        import copy as _copy
+        local_env: dict[str, ast.expr] = {}
+        ok_body = bool(body_stmts) and isinstance(body_stmts[-1], ast.Return) and body_stmts[-1].value is not None
+        if ok_body:
+            for bst in body_stmts[:-1]:
+                if isinstance(bst, ast.Assign) and len(bst.targets) == 1 and isinstance(bst.targets[0], ast.Name):
+                    lhs = bst.targets[0].id
+                    # Substitute prior local bindings into rhs
+                    class _LocalSub(ast.NodeTransformer):
+                        def visit_Name(self, n: ast.Name) -> ast.AST:
+                            if isinstance(n.ctx, ast.Load) and n.id in local_env:
+                                return _copy.deepcopy(local_env[n.id])
+                            return n
+                    local_env[lhs] = _LocalSub().visit(_copy.deepcopy(bst.value))
+                else:
+                    ok_body = False
+                    break
+        if not ok_body:
+            return {"verified": False, "gate": "FAIL", "reason": "INLINE_REQUIRES_PURE_EXPRESSION_BODY"}
+        ret_template = _copy.deepcopy(body_stmts[-1].value)  # type: ignore[attr-defined]
+        if local_env:
+            class _FinalLocalSub(ast.NodeTransformer):
+                def visit_Name(self, n: ast.Name) -> ast.AST:
+                    if isinstance(n.ctx, ast.Load) and n.id in local_env:
+                        return _copy.deepcopy(local_env[n.id])
+                    return n
+            ret_template = _FinalLocalSub().visit(ret_template)
+
+        # Reject recursive helpers
+        if any(isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == helper_nm for n in ast.walk(hnode)):
+            return {"verified": False, "gate": "FAIL", "reason": "INLINE_RECURSIVE_FUNCTION"}
+
+        # Refuse if external modules in the package import or call `helper_nm` from `target.stem`
+        for sib in target.parent.rglob("*.py"):
+            if sib.resolve() == target.resolve() or "__pycache__" in sib.parts:
+                continue
+            sib_txt = sib.read_text(encoding="utf-8", errors="replace")
+            if target.stem in sib_txt and re.search(rf"\b{re.escape(helper_nm)}\b", sib_txt):
+                return {"verified": False, "gate": "FAIL", "reason": f"INLINE_REFERENCED_EXTERNALLY:{sib.name}"}
+
+        param_names = [a.arg for a in hnode.args.args]
+        defaults_list = list(hnode.args.defaults)
+        default_map: dict[str, ast.expr] = {}
+        if defaults_list:
+            for p_nm, d_expr in zip(param_names[-len(defaults_list):], defaults_list):
+                default_map[p_nm] = d_expr
+
+        inlined_sites = 0
+        abort_reason = ""
+
+        class _CallInliner(ast.NodeTransformer):
+            def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST | None:
+                if node.name == helper_nm and node.lineno == hnode.lineno:
+                    return None
+                return self.generic_visit(node)
+
+            def visit_Call(self, node: ast.Call) -> ast.AST:
+                nonlocal inlined_sites, abort_reason
+                node = self.generic_visit(node)  # type: ignore[assignment]
+                if isinstance(node.func, ast.Name) and node.func.id == helper_nm:
+                    bound_args: dict[str, ast.expr] = {}
+                    if len(node.args) > len(param_names):
+                        abort_reason = "INLINE_CALL_ARITY_MISMATCH"
+                        return node
+                    for p_nm, arg_expr in zip(param_names, node.args):
+                        if isinstance(arg_expr, ast.Starred):
+                            abort_reason = "INLINE_STARRED_ARG"
+                            return node
+                        bound_args[p_nm] = arg_expr
+                    for kw in node.keywords:
+                        if kw.arg is None or kw.arg not in param_names or kw.arg in bound_args:
+                            abort_reason = "INLINE_INVALID_KEYWORD_ARG"
+                            return node
+                        bound_args[kw.arg] = kw.value
+                    for p_nm in param_names:
+                        if p_nm not in bound_args:
+                            if p_nm in default_map:
+                                bound_args[p_nm] = _copy.deepcopy(default_map[p_nm])
+                            else:
+                                abort_reason = f"INLINE_MISSING_ARG:{p_nm}"
+                                return node
+                    # Ensure every parameter referenced more than once in `ret_template` receives a side-effect-free arg
+                    ref_counts: dict[str, int] = {}
+                    for sub in ast.walk(ret_template):
+                        if isinstance(sub, ast.Name) and isinstance(sub.ctx, ast.Load) and sub.id in bound_args:
+                            ref_counts[sub.id] = ref_counts.get(sub.id, 0) + 1
+                    for p_nm, cnt in ref_counts.items():
+                        if cnt > 1 and any(isinstance(x, ast.Call) for x in ast.walk(bound_args[p_nm])):
+                            abort_reason = f"INLINE_IMPURE_MULTIUSE_ARG:{p_nm}"
+                            return node
+
+                    class _ParamSub(ast.NodeTransformer):
+                        def visit_Name(self, n: ast.Name) -> ast.AST:
+                            if isinstance(n.ctx, ast.Load) and n.id in bound_args:
+                                return _copy.deepcopy(bound_args[n.id])
+                            return n
+
+                    inlined_sites += 1
+                    return _ParamSub().visit(_copy.deepcopy(ret_template))
+                return node
+
+        new_tree = _CallInliner().visit(_copy.deepcopy(tree))
+        if abort_reason:
+            return {"verified": False, "gate": "FAIL", "reason": abort_reason}
+        if inlined_sites == 0:
+            return {"verified": False, "gate": "FAIL", "reason": f"INLINE_HELPER_HAS_ZERO_CALLERS:{helper_nm}"}
+        if "only caller" in low and inlined_sites != 1:
+            return {"verified": False, "gate": "FAIL", "reason": f"INLINE_NOT_SINGLE_CALLER:sites={inlined_sites}"}
+        ast.fix_missing_locations(new_tree)
+        # Refuse if non-call references to `helper_nm` still remain
+        if any(isinstance(n, ast.Name) and n.id == helper_nm for n in ast.walk(new_tree)):
+            return {"verified": False, "gate": "FAIL", "reason": f"INLINE_NON_CALL_REFERENCE_REMAINS:{helper_nm}"}
+
+        updated = ast.unparse(new_tree) + "\n"
+        ast.parse(updated)
+        target.write_text(updated, encoding="utf-8")
+        ok, tail = _verify_no_new_test_failures(proj, target.parent, before_bad, [target])
+        if not ok:
+            target.write_text(original, encoding="utf-8")
+            return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_INLINE", "detail": tail[:300]}
+        return {
+            "verified": True,
+            "gate": "PASS",
+            "operation": "inline_function",
+            "inlined_symbol": helper_nm,
+            "inlined_call_sites": inlined_sites,
+            "target_file": str(target),
+            "target_sha256": _sha256_bytes(target.read_bytes()),
+        }
+
+    # 11. Detect and repair Python unbounded memory retention / mutable default leak
+    if "memory leak" in low and target.is_file():
+        original = target.read_text(encoding="utf-8")
+        tree = ast.parse(original)
+        import copy as _copy
+        new_tree = _copy.deepcopy(tree)
+        fixes: list[str] = []
+
+        # Pattern A: Mutable default arguments (`def f(x, cache=[]):` or `cache={}`)
+        for node in ast.walk(new_tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.args.defaults:
+                n_defs = len(node.args.defaults)
+                def_params = node.args.args[-n_defs:]
+                guard_stmts: list[ast.stmt] = []
+                new_defaults: list[ast.expr] = []
+                for p_arg, d_val in zip(def_params, node.args.defaults):
+                    if isinstance(d_val, (ast.List, ast.Dict, ast.Set)) and not getattr(d_val, "elts", None) and not getattr(d_val, "keys", None):
+                        ctor = "[]" if isinstance(d_val, ast.List) else ("{}" if isinstance(d_val, ast.Dict) else "set()")
+                        new_defaults.append(ast.Constant(value=None))
+                        guard_stmts.extend(ast.parse(f"if {p_arg.arg} is None:\n    {p_arg.arg} = {ctor}\n").body)
+                        fixes.append(f"mutable_default:{node.name}.{p_arg.arg}")
+                    else:
+                        new_defaults.append(d_val)
+                if guard_stmts:
+                    node.args.defaults = new_defaults
+                    insert_at = 1 if (node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Constant)) else 0
+                    node.body = node.body[:insert_at] + guard_stmts + node.body[insert_at:]
+
+        # Pattern B: Unbounded module-level list/dict cache (`_CACHE[k] = v` or `_HISTORY.append(x)` without eviction)
+        mod_containers: dict[str, str] = {}
+        for st in new_tree.body:
+            if isinstance(st, ast.Assign) and len(st.targets) == 1 and isinstance(st.targets[0], ast.Name):
+                if isinstance(st.value, ast.Dict):
+                    mod_containers[st.targets[0].id] = "dict"
+                elif isinstance(st.value, ast.List):
+                    mod_containers[st.targets[0].id] = "list"
+        if mod_containers:
+            for node in ast.walk(new_tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    fn_txt = ast.unparse(node)
+                    new_body: list[ast.stmt] = []
+                    for st in node.body:
+                        if isinstance(st, ast.Assign) and len(st.targets) == 1 and isinstance(st.targets[0], ast.Subscript):
+                            sub_v = st.targets[0].value
+                            if isinstance(sub_v, ast.Name) and mod_containers.get(sub_v.id) == "dict" and ".pop(" not in fn_txt and ".clear(" not in fn_txt:
+                                cap_guard = ast.parse(f"if len({sub_v.id}) >= 256:\n    {sub_v.id}.pop(next(iter({sub_v.id})))\n").body
+                                new_body.extend(cap_guard)
+                                fixes.append(f"bounded_dict_cache:{sub_v.id}")
+                        elif isinstance(st, ast.Expr) and isinstance(st.value, ast.Call) and isinstance(st.value.func, ast.Attribute):
+                            recv = st.value.func.value
+                            if isinstance(recv, ast.Name) and mod_containers.get(recv.id) == "list" and st.value.func.attr == "append" and "del " not in fn_txt and ".pop(" not in fn_txt:
+                                cap_guard = ast.parse(f"if len({recv.id}) >= 256:\n    del {recv.id}[:-255]\n").body
+                                new_body.extend(cap_guard)
+                                fixes.append(f"bounded_list_history:{recv.id}")
+                        new_body.append(st)
+                    node.body = new_body
+
+        if not fixes:
+            return {"verified": False, "gate": "FAIL", "reason": "NO_MEMORY_RETENTION_LEAK_DETECTED"}
+        ast.fix_missing_locations(new_tree)
+        updated = ast.unparse(new_tree) + "\n"
+        ast.parse(updated)
+        target.write_text(updated, encoding="utf-8")
+        ok, tail = _verify_no_new_test_failures(proj, target.parent, before_bad, [target])
+        if not ok:
+            target.write_text(original, encoding="utf-8")
+            return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_MEMORY_FIX", "detail": tail[:300]}
+        return {
+            "verified": True,
+            "gate": "PASS",
+            "operation": "fix_memory_leak",
+            "fixes_applied": fixes,
             "target_file": str(target),
             "target_sha256": _sha256_bytes(target.read_bytes()),
         }

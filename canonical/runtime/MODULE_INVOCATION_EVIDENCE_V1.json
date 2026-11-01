@@ -46934,7 +46934,7 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "affb66767bac8268b4f03551476a04ac583473140f5fcc7a328e2bc80455d029",
+   "sha256": "c013a4bb763a3fd2879b4c3d70231fb2f45c2795557ce38f87307ce8b947df6a",
    "tests": {
     "canonical/tests/test_live_brain_route_admission_v1.py": "932a84c1673e5451d6b6aaa6c5fe291db996036f37586ade3cea2bae7ae09c5c"
    }
@@ -97739,12 +97739,11 @@
  },
  "remeasurement": {
   "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
-  "junit_cases_observed": 405,
+  "junit_cases_observed": 452,
   "measured_platform": "linux",
   "measured_python": "3.11",
   "modules": [
-   "canonical/runtime/meta_learning_policy_v9.py",
-   "canonical/runtime/universal_learning_meta_policy_router_v9.py"
+   "canonical/runtime/live_brain_route_admission_v1.py"
   ],
   "refused": [],
   "tool": "canonical/runtime/module_invocation_evidence_v1.py --remeasure",

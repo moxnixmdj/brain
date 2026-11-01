@@ -76,6 +76,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     elif op in {
         "split_module", "replace_deprecated", "add_type_hints", "extract_constant",
         "format_python", "remove_dead_code", "lint_and_fix", "move_module", "safe_helper_refactor",
+        "remove_unused_imports", "inline_function", "fix_memory_leak",
     }:
         res = engine.structural_refactor_python(target, goal_spec)
     elif op in {"git_commit", "git_branch_and_commit", "git_cherry_pick", "git_worktree", "git_revert", "git_rebase"}:

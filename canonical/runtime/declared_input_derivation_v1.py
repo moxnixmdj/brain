@@ -135,6 +135,20 @@ _SWE_VERBS = ('rename',
  'type-check',
  'typecheck',
  'review',
+ 'translate ',
+ 'transpile',
+ 'into idiomatic ',
+ 'into rust',
+ 'into go',
+ 'into typescript',
+ 'into javascript',
+ 'to rust',
+ 'to go',
+ 'to typescript',
+ 'to javascript',
+ 'merge conflict',
+ 'untrusted input',
+ 'taint flow',
  'localize',
  'fault',
  'traceback',
@@ -298,6 +312,15 @@ _SWE_VERBS = ('rename',
  'pull request',
  'why does ',
  'is red',
+ 'postcondition',
+ 'symbolic',
+ 'counterexample',
+ 'crosshair',
+ 'rust',
+ 'golang',
+ 'typescript',
+ 'panic',
+ 'borrow',
  'debugger',
  'asynchronous',
  'run in parallel',
@@ -540,6 +563,18 @@ _STATED_COUNT = re.compile(
     r"(?:[\w-]+\s+){0,3}(?:commits?|entries|rows|lines?|branches?)\b", re.IGNORECASE)
 
 
+# The revisions a sentence can name.  Closed on purpose and closed to things that are not
+# revisions: a bare hex-looking word is only a revision when the sentence is about history,
+# which is exactly when this slot is being bound (``stated_git_operations`` decides that).
+# ``HEAD``, ``HEAD~3``, ``HEAD^``, ``main``, ``v1.2`` and a commit id all reduce to one token
+# git itself resolves; nothing here guesses what the sentence meant.
+_STATED_REVISION = re.compile(
+    r"\bHEAD(?:[~^]\d*)?\b"
+    r"|\b(?:the\s+)?(?:last|latest|current|previous|prior)\s+commit\b"
+    r"|\b[0-9a-f]{7,40}\b",
+    re.IGNORECASE)
+
+
 _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
     (name, re.compile(pattern, re.I)) for name, pattern in (
         # history: an explicit git log, the word history, or "the last N commits"
@@ -547,7 +582,7 @@ _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
                 r"(?:\s+\w+){0,3}\s+commits?\b"),
         # a status question about the working tree
         ("status", r"\bgit\s+status\b|\bworking\s+tree\b|\buncommitted\b|\bstatus\b"),
-        ("diff", r"\bgit\s+diff\b|\bdiff\b"),
+        ("diff", r"\bgit\s+diff\b|\bdiff\b|\b(?:show|what|print|display|inspect)\b[^\n]{0,30}?\bstaged\s+changes?\b"),
         ("blame", r"\bblame\b|\bwho\s+wrote\b|\bwho\s+touched\b|\bwho\s+(?:last\s+)?changed\b"),
         # An imperative or a question about branches -- never the bare noun.
         # Measured 2026-10-29: with `\bbranch(?:es)?\b`, "Branch out the new feature
@@ -687,6 +722,13 @@ def stated_git_operations(goal: str) -> tuple[str, ...]:
     prose = front.prose_only(goal)
     if re.search(r"\bchangelog\b", prose, re.IGNORECASE):
         return ()
+    if re.search(
+        r"\b(?:diff|patch|contents?|changes?)\s+of\s+the\s+(?:last|latest|most\s+recent)\s+commit\b"
+        r"|\bshow\s+(?:me\s+)?the\s+(?:last|latest|most\s+recent)\s+commit\b",
+        prose,
+        re.IGNORECASE,
+    ):
+        return ("show",)
     stated = tuple(name for name, pattern in _GIT_OPERATION_GRAMMAR if pattern.search(prose))
     if set(stated) == {"status", "diff"} and not re.search(r"\bstatus\b", prose, re.IGNORECASE):
         stated = ("diff",)
@@ -1285,8 +1327,28 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         destination = _scope_gc._path_named_after_output_verb(goal, root)
         subjects = [f for f in files if f != destination]
         scope = None
+        scope_target = ""      # what INSIDE the repository the sentence pointed at
         if len(directories) == 1:
-            scope = directories[0]
+            # A STATED DIRECTORY MAY SIT INSIDE THE REPOSITORY, NOT AT ITS ROOT.
+            #
+            # Measured 2026-11-01: "Commit the current changes in <pkg> with the message
+            # 'fix calc'" bound ``repo_root`` to ``<pkg>`` itself and the adapter refused
+            # NOT_A_GIT_REPOSITORY -- the package is a directory in a repository, not a
+            # repository.  The sentence named a subtree; the scope is the repository that
+            # contains it and the target is the subtree's path inside that repository.
+            # Walking UP never widens authority: the first enclosing ``.git`` is the one
+            # git would use from that directory, and anything above it is a different
+            # repository the caller never named.
+            stated = directories[0]
+            owner = (pathlib.Path(root) / stated).resolve()
+            top = pathlib.Path(root).resolve()
+            while owner != top and not (owner / ".git").exists():
+                owner = owner.parent
+            if (owner / ".git").exists() and owner != (pathlib.Path(root) / stated).resolve():
+                scope_target = owner and (pathlib.Path(root) / stated).resolve().relative_to(owner).as_posix()
+                scope = owner.relative_to(top).as_posix()
+            else:
+                scope = stated
         elif not directories:
             if subjects and stated_git_operations(goal) == ("commit",):
                 # File-scoped commits are not whole-parent commit authority.
@@ -1310,6 +1372,10 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                         target = subjects[0]  # the adapter independently rejects outside scope
                     out["target"] = {"value": target, "rule": "GIT_TARGET_IS_THE_STATED_FILE",
                                      "evidence": subjects[0]}
+                elif scope_target:
+                    out["target"] = {"value": scope_target,
+                                     "rule": "GIT_TARGET_IS_THE_STATED_SUBTREE",
+                                     "evidence": scope_target}
                 elif not subjects:
                     out["target"] = {"value": "", "rule": "UNQUALIFIED_REPOSITORY_OPERATION",
                                      "evidence": scope}
@@ -1327,6 +1393,65 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if len(stated) == 1:
             out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
                          "evidence": stated[0]}
+            if stated[0] == "diff" and re.search(r"\bstaged\b|\b--cached\b", str(goal or ""), re.I):
+                out["staged_only"] = {"value": True, "rule": "GIT_STAGED_DIFF_STATED", "evidence": "staged"}
+    if "rev" in keys:
+        # THE SENTENCE STATED WHICH REVISION, SO THE SLOT MUST CARRY IT.
+        #
+        # Measured 2026-11-01: "Show me the diff of <pkg>/calc.py against HEAD~1" was answered
+        # by ``git diff HEAD``.  The row had no ``rev`` slot, so the sentence's own object --
+        # the revision whose hunk IS the answer -- was dropped on the floor, and the empty
+        # diff of a clean tree was certified as a PASS.  What is bound here is only what the
+        # sentence states: a revision token, or the phrase the sentence uses for one.  A
+        # sentence that names no revision binds nothing, and the adapter's own default (the
+        # working tree against HEAD) then applies -- unchanged, byte for byte.
+        text = str(goal or "")
+        rev_value, rev_evidence = None, None
+        named = _STATED_REVISION.search(text)
+        if named:
+            token = named.group(0).strip()
+            low_token = token.lower()
+            if low_token in ("the last commit", "the latest commit", "the current commit"):
+                rev_value = "HEAD"
+            elif low_token == "the previous commit":
+                rev_value = "HEAD~1"
+            else:
+                rev_value = token
+            rev_evidence = token
+        if rev_value:
+            out["rev"] = {"value": rev_value, "rule": "REVISION_FROM_STATED_SENTENCE",
+                          "evidence": rev_evidence}
+        else:
+            # A git read whose sentence names no revision reads the current commit, and the
+            # receipt says so instead of leaving the slot to a default inside the adapter:
+            # an answer that does not name the trees it compared cannot be checked by the
+            # caller who asked the question.
+            out["rev"] = {"value": "HEAD", "rule": "REVISION_NOT_STATED_CURRENT_COMMIT",
+                          "evidence": ""}
+    if "staged" in keys:
+        # WHICH CHANGES THE SENTENCE MEANT, SAID OUT LOUD.
+        #
+        # "Commit the staged changes" names the index; "commit the current changes in
+        # <pkg>" names the working tree.  Both used to arrive as the adapter's default
+        # (commit the index), so the second one died with COMMIT_PRODUCED_NO_NEW_OBJECT
+        # over an unstaged edit it had been told about.  The word the sentence uses is
+        # the whole difference, and it is already in the row's own keywords.
+        text = str(goal or "").lower()
+        op_value = (out.get("op") or {}).get("value")
+        if op_value == "commit":
+            if re.search(r"\bstaged\b|\bindex\b", text):
+                out["staged"] = {"value": True, "rule": "COMMIT_TARGETS_THE_INDEX_AS_STATED",
+                                 "evidence": "staged"}
+            else:
+                out["staged"] = {"value": False, "rule": "COMMIT_TARGETS_THE_STATED_CHANGES",
+                                 "evidence": "changes"}
+        else:
+            # A slot the row declares is bound for every sentence the row can answer, so the
+            # receipt states why it does not apply instead of leaving the input unbound --
+            # an unbound declared input makes the whole typed plan undecisive, which is how
+            # adding this slot briefly refused every git READ (measured 2026-11-01).
+            out["staged"] = {"value": True, "rule": "STAGING_NOT_APPLICABLE_TO_THIS_OPERATION",
+                             "evidence": op_value or ""}
     if "limit" in keys:
         m = _STATED_COUNT.search(str(goal or ""))
         if m:
@@ -1354,6 +1479,28 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if value:
                 out["message"] = {"value": value, "rule": "MESSAGE_FROM_STATED_QUOTED_TEXT",
                                   "evidence": value[:48]}
+            elif op_value == "commit" and re.search(
+                    r"\b(?:a\s+)?(?:clear|sensible|good|descriptive|appropriate|meaningful)\s+message\b"
+                    r"|\bmessage\s+of\s+your\s+(?:choosing|own)\b", text, re.I):
+                # THE SENTENCE DELEGATED THE WORDING, SO THE CHANGE SUPPLIES IT.
+                #
+                # Measured 2026-11-01: "Commit the changes in <pkg> with a clear message" was
+                # refused R13_DECLARED_INPUT_UNBINDABLE:message -- the sentence states a message
+                # obligation and hands the wording to the committer, and the contract had no way
+                # to say "compose it from what actually changed".  What must NOT happen is the
+                # old failure this replaced: an invented constant ("Update pkg") that describes
+                # nothing.  The adapter composes the subject from the staged diff, so the message
+                # is a fact about the commit rather than a guess about the sentence.
+                out["message"] = {"value": "", "rule": "MESSAGE_DELEGATED_TO_THE_STAGED_DIFF",
+                                  "evidence": "clear message"}
+    if "message_source" in keys:
+        # Which of the two ways the message came about, stated in the receipt.
+        message_rule = (out.get("message") or {}).get("rule") or ""
+        out["message_source"] = {
+            "value": ("DELEGATED_STAGED_DIFF" if message_rule == "MESSAGE_DELEGATED_TO_THE_STAGED_DIFF"
+                      else "STATED"),
+            "rule": "MESSAGE_SOURCE_DECLARED",
+            "evidence": message_rule or "no_message_slot_used"}
     if ({"symbol", "new_symbol", "function_name", "new_function"} & keys
             and _CREATES_A_FUNCTION.search(str(goal or ""))):
         fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
@@ -1655,6 +1802,67 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if "test_path" in keys:
                     t_val = tst_m.group(1) if tst_m else ""
                     out["test_path"] = {"value": t_val, "rule": "SPEC_TEST_PATH_STATED", "evidence": t_val or "default"}
+    if cid_str == "git.history.bisect_regression.v1" and "source_root" in keys and "source_root" not in out:
+        if files:
+            out["source_root"] = {"value": files[0], "rule": "BISECT_SOURCE_ROOT_FROM_STATED_FILE", "evidence": files[0]}
+        elif stated_dirs:
+            out["source_root"] = {"value": stated_dirs[0], "rule": "BISECT_SOURCE_ROOT_FROM_STATED_DIR", "evidence": stated_dirs[0]}
+        else:
+            for match in _PATH_RE.finditer(goal_str):
+                raw_t = match.group(0).rstrip(".,;:)\"'")
+                cand_t = pathlib.Path(raw_t)
+                if cand_t.is_absolute() and cand_t.exists():
+                    out["source_root"] = {"value": raw_t, "rule": "BISECT_SOURCE_ROOT_FROM_STATED_ABS_PATH", "evidence": raw_t}
+                    break
+    if cid_str == "python.contract.check.crosshair.v1" and "target_path" in keys and "target_path" not in out:
+        py_targets = [f for f in files if f.endswith(".py")]
+        if len(py_targets) == 1:
+            out["target_path"] = {"value": py_targets[0], "rule": "CROSSHAIR_TARGET_FROM_STATED_PY_FILE", "evidence": py_targets[0]}
+    if cid_str == "python.refactor.extract_function.v1":
+        py_targets = [f for f in files if f.endswith(".py")]
+        if len(py_targets) == 1 and re.search(r"\bloop\b", goal_str, re.I):
+            rel_py = py_targets[0]
+            abs_py = (pathlib.Path(root) / rel_py).resolve()
+            if abs_py.is_file() and pathlib.Path(root).resolve() in abs_py.parents:
+                rel_norm = abs_py.relative_to(pathlib.Path(root).resolve()).as_posix()
+                tree_ef = _tree_of(root, rel_norm)
+                loop_hits: list[tuple[str, ast.AST]] = []
+                for top_n in tree_ef.body:
+                    if isinstance(top_n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        for sub_n in ast.walk(top_n):
+                            if isinstance(sub_n, (ast.For, ast.AsyncFor, ast.While)):
+                                loop_hits.append((top_n.name, sub_n))
+                    elif isinstance(top_n, ast.ClassDef):
+                        for m_n in top_n.body:
+                            if isinstance(m_n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                                for sub_n in ast.walk(m_n):
+                                    if isinstance(sub_n, (ast.For, ast.AsyncFor, ast.While)):
+                                        loop_hits.append((f"{top_n.name}.{m_n.name}", sub_n))
+                if len(loop_hits) == 1:
+                    q_loop, l_node = loop_hits[0]
+                    s_line = getattr(l_node, "lineno", None)
+                    e_line = getattr(l_node, "end_lineno", None)
+                    m_new = _NAMED_NEW.search(goal_str) or re.search(
+                        r"\binto\s+(?:a\s+)?new\s+function\s+(?:named\s+|called\s+)?([A-Za-z_][A-Za-z0-9_]*)\b",
+                        goal_str,
+                        re.I,
+                    )
+                    if s_line and e_line and m_new and _NAME_RE.match(m_new.group(1)):
+                        proj_p = abs_py.parent
+                        if proj_p.name in ("pkg", "src", "app") and (proj_p.parent / "tests").is_dir():
+                            sr_abs = proj_p.parent
+                        else:
+                            sr_abs = proj_p
+                        sr_rel = sr_abs.relative_to(pathlib.Path(root).resolve()).as_posix()
+                        mod_rel_inner = abs_py.relative_to(sr_abs).as_posix()
+                        out.setdefault("source_root", {"value": sr_rel, "rule": "EXTRACT_LOOP_SOURCE_ROOT", "evidence": sr_rel})
+                        out["module"] = {"value": mod_rel_inner, "rule": "EXTRACT_LOOP_MODULE_REL", "evidence": rel_norm}
+                        out["qualname"] = {"value": q_loop, "rule": "EXTRACT_LOOP_UNIQUE_ENCLOSING_FN", "evidence": f"{rel_norm}:{q_loop}"}
+                        out["start_line"] = {"value": int(s_line), "rule": "SEMANTIC_UNIQUE_LOOP_SPAN_FROM_AST", "evidence": f"L{s_line}-L{e_line}"}
+                        out["end_line"] = {"value": int(e_line), "rule": "SEMANTIC_UNIQUE_LOOP_SPAN_FROM_AST", "evidence": f"L{s_line}-L{e_line}"}
+                        out.setdefault("new_name", {"value": m_new.group(1), "rule": "EXTRACT_LOOP_NEW_NAME_STATED", "evidence": m_new.group(1)})
+                        if (sr_abs / "tests").is_dir() and "run_tests" in keys:
+                            out["run_tests"] = {"value": ["tests"], "rule": "EXTRACT_LOOP_SIBLING_TESTS", "evidence": f"{sr_rel}/tests"}
     swe_k = _derive_swe_kernel_inputs(goal_str, cid_str, keys, files, stated_dirs, root)
     if swe_k:
         for key, value in swe_k.items():
@@ -1714,18 +1922,32 @@ def _derive_swe_kernel_inputs(
                 op = "cpp_fix_off_by_one"
             elif any(w in low for w in ("repair", "fix", "compile")):
                 op = "cpp_repair"
+        elif rs_files and any(w in low for w in ("fix", "repair", "panic", "borrow", "compile", "bug")):
+            op, tgt = "rust_repair", rs_files[0]
         elif rs_files and any(w in low for w in ("add", "implement", "create")):
             op, tgt = "rust_add_function", rs_files[0]
+        elif go_files and any(w in low for w in ("fix", "repair", "panic", "nil", "compile", "bug")):
+            op, tgt = "go_repair", go_files[0]
         elif go_files and any(w in low for w in ("add", "implement", "create")):
             op, tgt = "go_add_function", go_files[0]
         elif java_files and any(w in low for w in ("add", "implement", "create")):
             op, tgt = "java_add_method", java_files[0]
-        elif "port" in low and "function" in low and py_files and ts_files:
-            op, tgt, proj_root = "port_python_to_js", py_files[0], ts_files[0]
-        elif "port" in low and "function" in low and py_files and re.search(r"\bto\s+go\b", low):
+        elif re.search(r"\b(?:port|translate|transpile|convert)\b", low) and py_files and ts_files:
+            dest_f = ts_files[0]
+            op = "port_python_to_ts" if dest_f.endswith(".ts") else "port_python_to_js"
+            tgt, proj_root = py_files[0], dest_f
+        elif re.search(r"\b(?:port|translate|transpile|convert)\b", low) and py_files and (go_files or re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?go(?:lang)?\b", low)):
             op, tgt = "port_python_to_go", py_files[0]
-        elif "port" in low and "function" in low and py_files and re.search(r"\bto\s+rust\b", low):
+            if go_files:
+                proj_root = go_files[0]
+        elif re.search(r"\b(?:port|translate|transpile|convert)\b", low) and py_files and (rs_files or re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?rust\b", low)):
             op, tgt = "port_python_to_rust", py_files[0]
+            if rs_files:
+                proj_root = rs_files[0]
+        elif re.search(r"\b(?:port|translate|transpile|convert)\b", low) and py_files and re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?typescript\b", low):
+            op, tgt = "port_python_to_ts", py_files[0]
+        elif re.search(r"\b(?:port|translate|transpile|convert)\b", low) and py_files and re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?javascript\b", low):
+            op, tgt = "port_python_to_js", py_files[0]
         elif ts_files and "type declaration" in low:
             op, tgt = "ts_generate_declarations", ts_files[0]
         elif ts_files:
@@ -1733,6 +1955,8 @@ def _derive_swe_kernel_inputs(
             proj_root = str(pathlib.PurePosixPath(tgt).parent)
             if "rename" in low:
                 op = "ts_rename_symbol"
+            elif any(w in low for w in ("fix", "repair", "null", "undefined", "crash", "bug")):
+                op = "ts_repair"
             elif any(w in low for w in ("add", "implement", "create")):
                 op = "ts_add_function"
         elif sql_files and any(w in low for w in ("not null", "constraint", "column", "alter")):
@@ -1765,6 +1989,8 @@ def _derive_swe_kernel_inputs(
             op, tgt = "requirements_add_dependency", stated_dirs[0]
         elif make_files and "target" in low and "add" in low:
             op, tgt = "makefile_add_target", make_files[0]
+        elif re.search(r"^\s*(?:please\s+)?run\s+`?make\s+[a-z0-9_.-]+`?", low) and (make_files or stated_dirs):
+            op, tgt = "run_make_target", (make_files[0] if make_files else stated_dirs[0])
         elif "vendor" in low and "dependenc" in low and (stated_dirs or files):
             op = "vendor_dependencies"
             tgt = stated_dirs[0] if stated_dirs else files[0]
@@ -1822,9 +2048,26 @@ def _derive_swe_kernel_inputs(
             op, tgt = "advance_mutation_kill", py_sources[0]
         elif "docstring" in low and "test" in low and py_sources:
             op, tgt = "tests_from_docstrings", py_sources[0]
-        elif "regression test" in low and "reproduces" in low and "fix" not in low and py_sources:
-            op, tgt = "write_regression_test", py_sources[0]
-        elif re.search(r"\b(?:write|add|create)\s+(?:a\s+)?(?:unit\s+tests?|test\s+case|test\s+for\s+the\s+case)\b", low) and "add a function" not in low and "implement this issue" not in low and not re.search(r"\badd\s+a\s+[a-z_]\w*\s+function\b", low) and py_sources:
+        elif "regression test" in low and "reproduces" in low and "fix" not in low and (py_sources or py_tests):
+            op = "write_regression_test"
+            if py_sources:
+                tgt = py_sources[0]
+            else:
+                tf_abs = (pathlib.Path(root) / py_tests[0]).resolve()
+                stem_mod = tf_abs.name.removeprefix("test_").removesuffix("_test.py")
+                if not stem_mod.endswith(".py"):
+                    stem_mod += ".py"
+                proj_base = tf_abs.parent.parent if tf_abs.parent.name in ("tests", "test") else tf_abs.parent
+                sib_cands = [proj_base / "pkg" / stem_mod, proj_base / "src" / stem_mod, proj_base / stem_mod]
+                found_sib = next((c for c in sib_cands if c.is_file()), None)
+                tgt = (
+                    found_sib.relative_to(pathlib.Path(root).resolve()).as_posix()
+                    if found_sib and pathlib.Path(root).resolve() in found_sib.parents
+                    else (str(found_sib) if found_sib else py_tests[0])
+                )
+        elif "docstring" in low and "test" in low and py_sources:
+            op, tgt = "tests_from_docstrings", py_sources[0]
+        elif re.search(r"\b(?:write|add|create|generate|synthesize|author)\s+(?:a\s+|missing\s+)?(?:unit\s+tests?|test\s+case|test\s+for\s+the\s+case)\b", low) and "add a function" not in low and "implement this issue" not in low and not re.search(r"\badd\s+a\s+[a-z_]\w*\s+function\b", low) and py_sources:
             op, tgt = "write_unit_test", py_sources[0]
         elif re.search(r"--[a-z0-9_-]+", low) and ("flag" in low or "cli" in low or "command-line" in low) and py_sources:
             op, tgt = "add_cli_flag", py_sources[0]
@@ -1865,6 +2108,12 @@ def _derive_swe_kernel_inputs(
             op, tgt = "extract_constant", py_sources[0]
         elif "lint" in low and "fix" in low and len(py_sources) == 1 and "javascript" not in low:
             op, tgt = "lint_and_fix", py_sources[0]
+        elif "unused import" in low and any(w in low for w in ("remove", "delete", "drop", "strip", "clean")) and py_sources:
+            op, tgt = "remove_unused_imports", py_sources[0]
+        elif "inline" in low and py_sources and "only caller" not in low:
+            op, tgt = "inline_function", py_sources[0]
+        elif "memory leak" in low and any(w in low for w in ("fix", "repair")) and py_sources:
+            op, tgt = "fix_memory_leak", py_sources[0]
         elif re.match(r"^\s*(?:please\s+)?(?:re)?format\b", low) and len(py_sources) == 1:
             op, tgt = "format_python", py_sources[0]
         elif "worktree" in low and "git" in low and stated_dirs:
@@ -1874,10 +2123,16 @@ def _derive_swe_kernel_inputs(
         elif "rebase" in low and "branch" in low and stated_dirs:
             op, tgt = "git_rebase", stated_dirs[0]
         elif "cherry-pick" in low and ("branch" in low or "onto " in low):
-            op, tgt = "git_cherry_pick", (files[0] if files else (stated_dirs[0] if stated_dirs else ""))
-        elif re.search(r"\bcreate\s+(?:a\s+|the\s+)?branch\b", low) and (files or stated_dirs):
-            op, tgt = "git_branch_and_commit", (files[0] if files else stated_dirs[0])
-        elif re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\b", low) and "staged" not in low and (files or stated_dirs):
+            # A REPOSITORY OPERATION THAT NAMES NO PATH IS SCOPED TO THE REPOSITORY.  This is the
+            # same rule ``git.repository.operate.v1`` has used since it was written
+            # (``UNQUALIFIED_REPOSITORY_OPERATION`` -> scope "."); the swe lane required a path
+            # and therefore refused "Cherry-pick the last commit onto a new branch" before the
+            # capability was ever consulted.  Measured 2026-11-01: the op and the adapter both
+            # exist (``git_cherry_pick``), and the sentence names the operation and its object.
+            op, tgt = "git_cherry_pick", (files[0] if files else (stated_dirs[0] if stated_dirs else "."))
+        elif re.search(r"\bcreate\s+(?:a\s+|the\s+)?branch\b", low):
+            op, tgt = "git_branch_and_commit", (files[0] if files else (stated_dirs[0] if stated_dirs else "."))
+        elif re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\b", low) and "staged" not in low:
             op, tgt = "git_commit", (stated_dirs[0] if stated_dirs else files[0])
 
         if not op or not tgt:
@@ -1947,8 +2202,27 @@ def _derive_swe_kernel_inputs(
             op, tgt = "migration_plan", stated_dirs[0]
         elif "design document" in low and "splitting" in low and stated_dirs:
             op, tgt = "package_split_design", stated_dirs[0]
-        elif "changelog" in low and "commits" in low and (stated_dirs or files):
-            op, tgt = "git_changelog", (stated_dirs[0] if stated_dirs else files[0])
+        elif "changelog" in low and "commits" in low:
+            # Same law, same reason: "Write the changelog entry for the last three commits" names
+            # the history, not a directory, and the repository is the scope that history lives in.
+            op, tgt = "git_changelog", (stated_dirs[0] if stated_dirs else (files[0] if files else "."))
+        elif (
+            re.search(r"\b(?:show|print|display|find|get)\s+(?:me\s+)?(?:the\s+)?(?:definition|signature|implementation)\s+of\b", low)
+            or re.search(r"\bwhere\s+is\s+\S+(?:\s+\S+){0,2}\s+defined\b", low)
+        ) and (files or stated_dirs):
+            op, tgt = "show_definition", (files[0] if files else stated_dirs[0])
+        elif re.search(r"\b(?:which|what)\s+(?:modules?|files?)\s+import\b|\bwho\s+imports\b|\bimporters\s+of\b", low) and (stated_dirs or files):
+            op, tgt = "which_modules_import", (stated_dirs[-1] if stated_dirs else files[0])
+        elif ("import cycle" in low or "circular import" in low or "cyclic import" in low) and (stated_dirs or files):
+            op, tgt = "import_cycles", (stated_dirs[0] if stated_dirs else files[0])
+        elif ("class hierarchy" in low or "subclasses of" in low or "inheritance hierarchy" in low or "mro of" in low) and (files or stated_dirs):
+            op, tgt = "class_hierarchy", (files[0] if files else stated_dirs[0])
+        elif re.search(r"^\s*(?:please\s+)?run\s+(?:the\s+)?(?:unit\s+)?tests?\s+(?:in|for|from)\b", low) and any("test" in pathlib.PurePosixPath(f).name for f in files):
+            op, tgt = "run_single_test", [f for f in files if "test" in pathlib.PurePosixPath(f).name][0]
+        elif re.search(r"\btrace\s+the\s+value\s+of\b", low) and files:
+            op, tgt = "trace_value_provenance", files[0]
+        elif "flaky" in low and any(w in low for w in ("find", "detect", "tell me if", "whether", "rerun")) and "quarantine" not in low and "answer.json" not in low and (files or stated_dirs):
+            op, tgt = "find_flaky_tests", (files[0] if files else stated_dirs[0])
 
         if not op or not tgt:
             return None

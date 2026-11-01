@@ -1,0 +1,556 @@
+{
+ "action_id": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1_20261101_V1",
+ "action_intent_id": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1_20261101_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Two things, both diagnosis. (1) The last unexplained refusal now names itself: RuntimeError('NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS') carries no colon, so the refusal classifier -- which required CLASS:detail -- fell through and census request 32 was still reported as FAIL__LIVE_CONTROLLER_EXECUTION. The rule is now structural: a bare all-caps token is a refusal only when it contains an underscore, because a refusal key is a snake-case condition name while a crash label is one word. SEGFAULT and Timeout stay crashes; that pair is the test. Measured on 29ada61: 42 of 49 served before and after, all 7 refusals named, 0 blank cells in the inventory where there were two. (2) The inventory gains a section that MEASURES one-shot learning instead of describing it, because the owner asked whether instant learning makes every other problem moot. It does not: the store lives in the temporary directory; a full 49-sentence census taught it 1 rule; a taught fix reaches 2 of 5 neighbours (identifiers and operator order generalize, literals and a differently-shaped expression do not); the documented CLI recipe abstraction does not exist; and a skill taught AND recalled successfully still left the door refusing, because selection had already declined the sentence.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+   "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py",
+   "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A refusal key with no colon was indistinguishable from a crash, and the owner's premise about one-shot learning could not be checked because nothing measured the learner's actual reach.",
+ "canonical_base_commit": "29ada613095f5306e461f08cec82f85bcb3c7541",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A refusal key with no colon was indistinguishable from a crash, and the owner's premise about one-shot learning could not be checked because nothing measured the learner's actual reach.",
+ "date": "2026-11-01",
+ "expected_parent_change": "canonical/runtime/live_brain_route_admission_v1.py: _refusal_status_and_payload accepts a bare snake-case refusal key. canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py: five tests including the nearest world where the rule must not fire. canonical/tools/compose_hardcore_swe_problem_inventory_v1.py: learning_measurement() probes a throwaway database on every compose and section 7 reports store location, rules taught, teaching languages and the reach of a taught fix; DEFECT_MEANING and FIX gain the last two refusal classes. HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md regenerated. BRAIN_UNIFIED_MODEL_V1.json recompiled last.",
+ "expected_parent_frontier_change": "Every refusal in the census names what refused, and the tree publishes the measured reach of its own one-shot learner, so 'learning solves everything' is answered from the tree rather than from a claim.",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Instant learning + Instant learning in new arbitrary environments -- we already solved those perfectly... Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?' Standing instruction: hardcore software engineering only; every number a measurement, never a wish; honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+ "falsification_condition": "FALSIFIED if a bare refusal key is again reported as a crash, if a single-word crash label is reported as a refusal, if any census refusal is again generic, or if any number in section 7 disagrees with a fresh compose.",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "9179a6cd01b6d5c517cc3c64eb3fe906d4e4bab0",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "A coverage budget is a question about how much of the ASK the model recognised. Charging the tokens of a stated path to it made the verdict depend on the length of the caller's file names rather than on the request. A capability whose own adapter names a module or program that is not there can only fail, so the dependency has to be declared before the refusal can be said early. But the RANKING is a fact about the model and not about the host: this sandbox has pypdf and the CI runner does not, so filtering the ranking by presence made a pinned route hold in one place and fail in the other. The host votes where the work happens -- in solve() -- and nowhere else.",
+  "measured_effect": "All ten measured sentences naming real absolute paths now route confidently; before, all ten were refused with GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED. Coverage on \"count the functions defined in the python file <abs path> and write the report to <abs path>\" went from 0.240 to 0.714 and is now identical to the same sentence with the paths deleted. Capabilities correctly reporting an unresolvable declared dependency went from 7 to 12 -- PIL x6, chromedriver, crosshair, pandoc, tesseract, pdftoppm, yq/yaml -- every one for a tool genuinely absent. The ranking is host-independent and pinned that way: with every declared dependency on the machine reported missing, 367 of 374 capabilities unrunnable, all four pinned known-goal routes are still confident and still land where the model says. solve() now names the missing dependency instead of spending the request and returning BOUND_PYPI_SOURCE_INCOMPLETE. 15 new tests, 12 of which fail on origin/main; the 3 that pass either way are the negative controls. Verifier 33/33, integrity guard 17/0, artifact byte-identical to a fresh recompile.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "stop_condition": "STOP when a sentence asking for a test scaffold runs the capability that writes tests and the generated file on disk is real and passing, when nothing is demanded from the sentence that the tree or the adapter already supplies, when an unannotated parameter is still refused rather than guessed, when the scaffolds never write into the tree they scaffold, when a question about one file is still answered by the census, and when the regression failure SET is no worse than the PR base.",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Census on 29ada61: 42 of 49 served, 7 refused, all named, 0 blank cells (2 before). Matrix unchanged: 54 cases, 44 REAL, 0 FALSE, 0 DAMAGED. Learning measured live: store under the temporary directory, 1 rule taught by 49 sentences, a taught fix reaching 2 of 5 probe neighbours, anti_unify_cli_recipe not implemented, repair-training languages cpp/go/rust/ts. Zero served sentences bought; diagnosis and measurement integrity only.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+  "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "29ada613095f5306e461f08cec82f85bcb3c7541",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
+   "DECLARING_NOTHING_FOR_A_CAPABILITY_WHOSE_ADAPTER_NAMES_A_MODULE_THE_HOST_DOES_NOT_HAVE",
+   "USING_THE_DECLARED_DEPENDENCY_MECHANISM_TO_DESCRIBE_THE_MODEL_BUT_NEVER_TO_SELECT_FOR_IT"
+  ],
+  "expected_parent_level_state_change": "Every refusal in the census names what refused, and the tree publishes the measured reach of its own one-shot learner, so 'learning solves everything' is answered from the tree rather than from a claim.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Letting the census answer and report pass=True was rejected: it reports a count of files for a request to create test files. Adding targets_path and generated_tests_root to the binder's phrasing tables was rejected: no sentence carries a manifest of which modules to cover, so the capability would stay unbindable for every phrasing an engineer writes. Requiring the caller to run the symbol index first and pass it as index_path was rejected: the adapter already builds that index internally when no cache is given, so it would be asking the caller to do work the callee does anyway. Installing pytest was rejected: it makes a bound capability depend on a third-party package to run a file the stdlib already owns, and the compiler must stay environment-independent. Emitting a pytest-style test file instead was rejected: the existing _render_module already emits unittest, which is the dependency-free form. Defaulting generated_tests_root to a directory inside source_root was rejected because the adapter's own PATH_OVERLAPS_SOURCE_ROOT law forbids it.",
+   "intrinsic_or_path_specific": "Path-specific to one adapter's argument handling and one registry template. Nothing new was invented: the index the adapter already builds supplies the targets, the adapter's own overlap law determines the default output location, unittest is already what _render_module emits, and #6272 established the convention that a template must not demand what the adapter defaults.",
+   "surviving_causal_blocker": "A_REFUSAL_KEY_WITH_NO_COLON_WAS_INDISTINGUISHABLE_FROM_A_CRASH"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
+   "existing_inherited_routes_checked": "sed's `r` command already appends a file after the addressed line; the `find` rule already built `-name` from a quoted value or a spelled-out ending; `_post_sort` already recomputed a promise from a source that survives; `_DIRECTORY_REQUEST`, `_quoted_values` and `_ASKS_A_COUNT_OR_A_NUMBER` were reused entire.",
+   "external_existing_routes_checked": "No external source was needed.  sed's `r`, `find -name`, `find -type f` and `ls` on one level are ordinary POSIX behaviour and each was probed directly in this environment before a rule was written.",
+   "surviving_gap": "ONE_SHOT_LEARNING_IS_DOWNSTREAM_OF_SELECTION_SO_IT_CANNOT_REACH_THE_REMAINING_REFUSALS"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "TREATING_A_DECLARED_OUTPUT_DESTINATION_AS_PROOF_THE_OPERATION_WAS_THE_ONE_ASKED_FOR",
+    "TREATING_THE_VERB_IN_A_SENTENCE_AS_PART_OF_THE_QUESTION_RATHER_THAN_PART_OF_THE_PHRASING",
+    "COUNTING_A_CENSUS_BY_THE_ANSWER_ALONE_WHEN_THE_PROMISE_IS_ABOUT_THE_WORLD_AFTERWARDS"
+   ],
+   "real_outcome": "An append appends, a tree question walks the tree, a count is not answered with names, and the plainest form of each works.",
+   "surviving_necessity": "The operation has to be the one the sentence stated, and a two-file promise has to be asked of both files afterwards."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "THE_PLAIN_LISTING_THE_FILE_DELETION_THE_SET_DELETION_THE_MKDIR_CREATION_AND_THE_LINE_COUNT_ALL_STAY_AUTHORITATIVE_AND_ARE_PINNED_BY_TESTS_THAT_PASS_ON_BASELINE_SO_NO_WIDENING_CAN_PASS_BY_HIJACKING_A_NEIGHBOUR",
+   "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__SIX_TESTS_ADDED_AND_THE_FIND_ENTRY_CONDITION_CARRIES_THE_TWO_MEASURED_HIJACKS_IN_ITS_COMMENT_SO_THE_NEXT_WIDENING_STARTS_FROM_THEM",
+   "fresh_reuse_plan": "Reuse sed's r command, the find rule's existing -name construction, `_post_sort`'s recompute-from-a-surviving-source model, and the count-versus-listing distinction entire; add one routing rule, widen and scope one entry condition, add one postcondition shape and one refusal."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_SIXTEEN_ROW_CENSUS_WAS_COMPUTED_ONCE_ON_MAIN_AND_RE_RUN_AFTER_THE_CHANGE__AND_IT_COMPARED_THE_WORLD_AND_NOT_ONLY_THE_ANSWER_WHICH_IS_WHAT_SURFACED_A_TRUNCATED_DESTINATION_BEHIND_AN_ANSWER_THAT_LOOKED_CORRECT",
+   "search_stop_decision": "Stop: the sixteen-row census is thirteen of sixteen with zero certified wrong answers and zero destructive rows, and every new postcondition is pinned able to fail.  Measured and deliberately left unserved: the first line of two files at once, a line count over two files, sorting two files together, the lines in both files, the lines in one that are not in the other, and whether one file is larger than another -- each needs a pipeline or an arithmetic comparison, and no single program here does either."
+  },
+  "obs_solution": {
+   "deleted_or_bypassed_paths": [
+    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
+    "DECLARING_NOTHING_FOR_A_CAPABILITY_WHOSE_ADAPTER_NAMES_A_MODULE_THE_HOST_DOES_NOT_HAVE",
+    "USING_THE_DECLARED_DEPENDENCY_MECHANISM_TO_DESCRIBE_THE_MODEL_BUT_NEVER_TO_SELECT_FOR_IT"
+   ],
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Adding an append-mode writer to the registry loses because it adds a producer to trust where a command and a postcondition suffice.  Refusing the append loses because sed's `r` command performs it and the source survives to prove it.  Widening `find` on the word 'named' alone loses on measurement twice: it answered a deletion of a matched set, and a creation of a folder, with a listing.  Answering a count with `ls` loses because a list of names is not a number and was certified as one.",
+   "routes_ranked": [
+    "sed's r command wins over an append-mode writer, because the source survives and the promise is recomputable",
+    "recomputing the promised tail from the source wins over trusting the run, for the reason _post_sort already established",
+    "widening the find entry condition wins over adding a second tree rule, because the rule already built -name correctly",
+    "scoping the widening away from mutation and creation verbs wins over keying on the word alone, measured both ways",
+    "refusing a count of a directory wins over answering it with ls, because a list of names is not a number",
+    "comparing the world afterwards wins over comparing the answer, because the defect was a file that no longer existed"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Not synthetic: the census runs the real command in a parallel directory and compares BOTH its stdout and the resulting tree file by file, so a row that destroys a file cannot pass however plausible its answer looks -- which is exactly the defect that started this.  The append is asserted on the bytes the destination held as well as the bytes added, and the source is asserted unchanged, so a copy cannot pass as an append.  The postcondition is pinned able to fail from both sides, including a source outside the repository.  The two regressions the widening caused are pinned closed by a deletion that must stay refused with the file still there, and a creation that must still create."
+  },
+  "prior_routes_considered": [
+   "BANN_GENERIC_ONLY_MATCHES__REJECTED_MEASURED_TO_DELETE_TEXT_FILE_WRITE_WHOSE_ENTIRE_DECLARED_VOCABULARY_IS_GENERIC",
+   "JUDGE_DISTINCTIVENESS_ON_THE_WHOLE_SENTENCE__REJECTED_MEASURED_TO_LET_THE_PAYLOAD_VOTE_SO_HELLO_PATCH_RANKED_PYTHON_PATCH_CAPABILITIES",
+   "SUBTRACT_THE_PAYLOAD_FROM_THE_TASK_WORDS__REJECTED_MEASURED_TO_CHANGE_NOTHING_SO_IT_WAS_REMOVED_RATHER_THAN_KEPT_AS_A_GUESS",
+   "RANK_ON_DISTINCTIVE_HITS__REJECTED_MEASURED_TO_DEMOTE_A_TOKEN_MATCHING_FOUR_OF_FIVE_WORDS_BELOW_ONE_MATCHING_A_SINGLE_WORD",
+   "ADD_BARE_TASK_VERBS_TO_THE_COMMAND_RUNNER_KEYWORDS__REJECTED_MEASURED_TO_TAKE_THE_UNIFIED_MODEL_VERIFIER_FROM_33_OF_33_TO_32_OF_33",
+   "BOOST_EVERY_CAPABILITY_WITH_A_FULLY_BOUND_NON_PATH_SLOT__REJECTED_MEASURED_TO_FLOOD_THE_RANKING_FOR_AUDIT_THE_PYTHON_UNIT_TESTS_AND_COUNT_PASSES",
+   "MAKE_THE_FRONT_COMPILER_BIND_ARGV_FROM_PROSE__REJECTED_AS_THE_LARGER_CHANGE_WHEN_THE_CAPABILITY_WAS_ALREADY_RANKED_FIRST_AT_SCORE_8_AND_ONLY_THE_ADMISSION_STEP_DISCARDED_IT",
+   "REMOVE_SORT_FROM_THE_READ_ONLY_SET__REJECTED_BECAUSE_SORT_WITH_NO_OUTPUT_FLAG_WRITES_NOTHING_AND_IS_CORRECTLY_CHECKED_BY_RE_RUNNING_IT",
+   "ACCEPT_SORT_O_ON_RETURNCODE__REJECTED_BECAUSE_THAT_IS_THE_PRODUCER_GRADING_ITS_OWN_WORK_THE_EXACT_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS",
+   "OPEN_THE_FALLTHROUGH_ON_EVERY_BINDING_REFUSAL__REJECTED_BECAUSE_IT_REOPENS_THE_PR_6119_DATA_DESTRUCTION_CLASS_BY_LETTING_CHECK_THE_FILE_X_REACH_COMPOSITION",
+   "ADD_STAT_DIFF_AND_CMP_TOO__REJECTED_MEASURED_STAT_RETURNS_COMMAND_OUTPUT_NOT_REPRODUCED_AND_DIFF_AND_CMP_REPORT_THEIR_ANSWER_AS_EXIT_STATUS_ONE_WHICH_THE_ADAPTER_RAISES_ON",
+   "ADD_KEYWORDS_TO_SHELL_COMMAND_RUN_SO_BASENAME_AND_REALPATH_RANK_FIRST__REJECTED_BECAUSE_THE_SAME_MOVE_MEASURED_TO_TAKE_THE_UNIFIED_MODEL_VERIFIER_FROM_33_OF_33_TO_32_OF_33_ON_THE_WORD_COUNT",
+   "GUESS_A_SEARCH_PATTERN_WHEN_THE_SENTENCE_STATES_NONE__REJECTED_BECAUSE_AN_INVENTED_PATTERN_IS_AN_INVENTED_ANSWER",
+   "TEACH_THE_ADAPTER_TO_TOLERATE_A_NON_ZERO_EXIT_FOR_DIFF__REJECTED_AS_WIDENING_A_FAIL_CLOSED_RULE_TO_RECOVER_TWO_COMMANDS",
+   "ADD_A_POSTCONDITION_FOR_DIFF__REJECTED_AS_UNNECESSARY_BECAUSE_THE_READ_ONLY_RE_RUN_PATH_ALREADY_REPRODUCES_STDOUT_STDERR_AND_THE_RETURN_CODE",
+   "RETURN_EARLY_FROM_THE_ADAPTER_ON_A_DECLARED_ANSWER_CODE__REJECTED_MEASURED_AS_STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER_BECAUSE_IT_SKIPPED_THE_ARTIFACT_CHECK",
+   "REACH_CMP_FROM_PROSE__REJECTED_BECAUSE_IT_NEEDS_BARE_TASK_VERBS_ON_THE_RUNNER_KEYWORDS_THE_MOVE_THAT_TOOK_VERIFY_FROM_33_OF_33_TO_32_OF_33",
+   "LET_THE_ADAPTER_DECIDE_WHICH_CODES_ARE_ANSWERS__REJECTED_BECAUSE_THE_PRODUCER_JUDGING_ITS_OWN_FAILURE_IS_THE_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS"
+  ],
+  "real_outcome": "Two things, both diagnosis. (1) The last unexplained refusal now names itself: RuntimeError('NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS') carries no colon, so the refusal classifier -- which required CLASS:detail -- fell through and census request 32 was still reported as FAIL__LIVE_CONTROLLER_EXECUTION. The rule is now structural: a bare all-caps token is a refusal only when it contains an underscore, because a refusal key is a snake-case condition name while a crash label is one word. SEGFAULT and Timeout stay crashes; that pair is the test. Measured on 29ada61: 42 of 49 served before and after, all 7 refusals named, 0 blank cells in the inventory where there were two. (2) The inventory gains a section that MEASURES one-shot learning instead of describing it, because the owner asked whether instant learning makes every other problem moot. It does not: the store lives in the temporary directory; a full 49-sentence census taught it 1 rule; a taught fix reaches 2 of 5 neighbours (identifiers and operator order generalize, literals and a differently-shaped expression do not); the documented CLI recipe abstraction does not exist; and a skill taught AND recalled successfully still left the door refusing, because selection had already declined the sentence.",
+  "required_capability": "brain.unified_model.route",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "OVER_MATCHES",
+      "CORRECTNESS": "CALLS_CRASHES_REFUSALS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "TURNS_REAL_FAILURES_INTO_MISSING_CAPABILITIES",
+      "VERIFIABILITY": "NONE",
+      "WALL_CLOCK": "FASTEST"
+     },
+     "evidence": [
+      "treating any all-caps RuntimeError as a refusal classifies SEGFAULT and Timeout as missing capabilities"
+     ],
+     "qualification_evidence": [
+      "direct probe: classifier over SEGFAULT and Timeout this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "MATCH_ANY_ALL_CAPS_TOKEN"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "NARROWER_THAN_NEEDED",
+      "CORRECTNESS": "SAFE",
+      "INCREMENTAL_COST": "A_LIST_TO_MAINTAIN",
+      "RELIABILITY": "DRIFTS_AS_ADAPTERS_ADD_KEYS",
+      "VERIFIABILITY": "BY_HAND",
+      "WALL_CLOCK": "SLOWER"
+     },
+     "evidence": [
+      "a hand-maintained vocabulary of refusal keys needs updating whenever an adapter adds one"
+     ],
+     "qualification_evidence": [
+      "direct probe: about forty adapter classes raise keys, read by grep this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "HAND_MAINTAINED_KEY_VOCABULARY"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "EXACT",
+      "CORRECTNESS": "STRUCTURAL",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SNAKE_CASE_IS_A_CONDITION_NAME",
+      "VERIFIABILITY": "FIVE_TESTS",
+      "WALL_CLOCK": "NO_EXTRA_WORK"
+     },
+     "evidence": [
+      "a refusal key is a compound condition name and a crash label is one word, so requiring an underscore separates them without a list"
+     ],
+     "qualification_evidence": [
+      "direct probe: 42 of 49 served, 7 refused all named, matrix 44 REAL / 0 FALSE / 0 DAMAGED this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1"
+    }
+   ],
+   "checked_at_utc": "2026-11-01T10:40:23Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "MASK_THE_OPERAND_BEFORE_READING_THE_PROSE_AND_LET_A_NEGATION_REACH_THE_FLAGS",
+   "max_age_hours": 2,
+   "negative_search_summary": "Widening the make...upper window from 20 to 200 characters was rejected as the same rule with a bigger number: it would still be a distance, it would still be wrong for a long enough path, and it would widen every sentence the window was keeping out. Masking the operand is what the blank arm in the same block already does, so this reuses a mechanism rather than inventing one. Adding 'not' to `_NEGATED_LINE` itself was rejected: that pattern is scoped to contain/match/include and is used by the VALUE arms, so widening it would invert value questions nobody measured. Inverting on the bare word 'not' was rejected -- 'the lines that are not blank' and 'the lines that are not sorted' are different questions and only the first is about blankness, so the negation is anchored to blank|empty. Fixing all 13 window-shaped rules at once was rejected as unmeasured: only the one that produced a certified wrong answer was fixed, and the rest are recorded as an open item with their count rather than being changed on suspicion. All alternatives DISQUALIFIED on measured grounds.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "sed r command read file append after line in-place"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "find -name -type f tree walk natural language entry condition"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "count files in directory without pipeline refusal"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "postcondition recomputed from a source file that survives"
+    },
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "grep -f read patterns from file second operand"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "uniq -d adjacent lines only sorted input required"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "cut -s suppress lines without delimiter -f field"
+    },
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "find -name glob suffix prefix pattern set of files"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "NARROW_THE_ls_ROW_SO_IT_STOPS_SWALLOWING_SHAPED_SETS",
+    "EXPAND_THE_SHAPE_IN_THE_CALLER_AND_PASS_A_FINISHED_NEEDLE",
+    "REFUSE_ANY_SHAPED_SET_UNLESS_THE_SENTENCE_SAYS_RECURSIVE",
+    "MASK_THE_PATHS_BEFORE_MASKING_THE_VALUES",
+    "REFUSE_ANY_SENTENCE_WHOSE_VALUE_APPEARS_IN_ITS_OWN_PATH",
+    "TEACH_CUT_TO_DETECT_THE_DELIMITER_ITSELF",
+    "ADD_MINUS_N_TO_EVERY_GREP",
+    "ADD_UNIQ_MINUS_D_AS_A_PROSE_ROW_FOR_THE_REPEATS",
+    "ALLOWLIST_AWK_TO_COMPUTE_THE_REPEATS",
+    "BUILD_THE_TWO_STEP_PIPELINE_SO_SORT_PIPES_INTO_UNIQ",
+    "COMPUTE_THE_COUNT_IN_THE_BINDER_AND_PRINT_IT",
+    "RELAX_THE_ARITY_GATE_FOR_EVERY_PROGRAM",
+    "ADD_UNIQ_AS_A_PROSE_ROW_FOR_DEDUPLICATION",
+    "BUILD_THE_SET_INTERSECTION_WITH_COMM_OR_JOIN",
+    "COMPUTE_THE_SET_IN_PYTHON_AND_PRINT_THE_RESULT",
+    "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+    "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+    "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+    "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+    "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
+    "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+    "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
+    "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+    "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+    "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+    "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+    "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
+    "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
+    "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+    "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+    "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
+    "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
+    "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
+    "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
+    "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+    "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
+    "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+    "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
+    "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
+    "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
+    "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
+    "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
+    "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
+    "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
+    "A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1",
+    "A_PROMISED_FILE_IS_NON_EMPTY_ONLY_WHEN_THE_SENTENCE_PROMISED_CONTENT_V1_20261024_V1",
+    "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
+    "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
+    "A_BINDERS_REFUSAL_MAY_REFUTE_A_SELECTION_AND_MAY_NOT_OPEN_A_WRITE_V1_20261024_V1",
+    "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
+    "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
+    "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
+   ],
+   "selected_route": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1",
+   "selected_route_checked_at_utc": "2026-10-27T19:23:09Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-01T10:40:23Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 3.11.2",
+      "evidence": [
+       "DIRECT_PROBE: re-probed at commit time; the interpreter reports 3.11.2 and runs the compiled model in-process"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/verify_brain_unified_model_v1.py",
+      "evidence": [
+       "reports TOTAL 33/33 PASS after this change"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "INDEPENDENT_VERIFIER"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py + execution_guard/swe_advanced_probe_v1.py (in-tree instruments)",
+      "evidence": [
+       "DIRECT_PROBE: census 42 served / 7 refused and matrix 44 REAL / 0 FALSE / 0 DAMAGED on 29ada61 this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1",
+    "status": "READY"
+   },
+   "selected_surviving_route": "WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "measured on 44d995c: `tee A` created A, the adapter reported output_bytes 0, output_verified True and the empty-string sha256, and the request was refused COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS because tee was the one everyday command with no postcondition",
+     "measured: _MUTATING_POSTCONDITIONS held cp, mkdir, mv, rm and touch, and tee fell through to the not-re-runnable branch",
+     "measured after: 14 of 14 everyday commands exact-verified with measured false passes at zero -- tee, rm, cp, mv, mkdir, touch, cat, wc, sort, head, grep, nl, sha256sum and a quoted stated write each carry a verifier pass=True",
+     "measured: the bytes on disk equal the digest the producer fingerprinted, so existence is not the only tie between the file and the command",
+     "measured and rejected: asserting the file is empty would be a claim about stdin, which the argv shape never observes -- so the promise is claimed at the strength tee guarantees unconditionally and no further"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://api.github.com/search/repositories?q=postcondition%20verify%20effect%20not%20rerun -- a mutating command is verified by the state it left, never by running it twice; no standalone project owns the rule because it is a property of the check"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/astunparse/json and the standard library's own compile() error handling -- both treat a parse failure as a property of one input rather than a fatal condition for the caller"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://pubs.opengroup.org/onlinepubs/9699919799/utilities/tee.html -- tee opens its operand with O_CREAT|O_TRUNC, which is what makes the operand's existence a promise independent of its input"
+    ]
+   },
+   "stop_condition": "STOP when a sentence that names real files is no longer refused for naming them, when a capability whose declared substrate is absent is never the keyword-selected answer, when every capability that can run here is still selectable and every capability is still addressable by its own id, and when the regression failure SET matches origin/main exactly.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "Everything the sentence was refused for was already computed inside the capability or already enforced by it: the module list came from an index it builds anyway, the output location from a law it checks anyway, and the runner from the unittest module its own renderer already emits. No new mechanism was required, so the fastest sufficient route was to stop asking the caller for them."
+  },
+  "routes_considered": [
+   "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+   "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+   "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+   "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+   "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
+   "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+   "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
+   "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+   "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+   "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+   "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+   "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
+   "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
+   "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+   "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+   "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
+   "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
+   "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
+   "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
+   "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+   "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
+   "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+   "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
+   "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
+   "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
+   "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
+   "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
+   "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
+   "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
+   "A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1",
+   "A_PROMISED_FILE_IS_NON_EMPTY_ONLY_WHEN_THE_SENTENCE_PROMISED_CONTENT_V1_20261024_V1",
+   "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
+   "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
+   "A_BINDERS_REFUSAL_MAY_REFUTE_A_SELECTION_AND_MAY_NOT_OPEN_A_WRITE_V1_20261024_V1",
+   "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
+   "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
+   "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
+  ],
+  "selected_route": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1",
+  "selected_surviving_route": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1",
+  "stop_condition": "STOP when no census refusal is reported as a generic execution failure, when SEGFAULT is still a crash, when the matrix and census counts are unchanged by the relabel, and when the learner's reach is measured by the composer on every run rather than typed into the document",
+  "why_selected_route_is_fastest_sufficient": "Everything the sentence was refused for was already computed inside the capability or already enforced by it: the module list came from an index it builds anyway, the output location from a law it checks anyway, and the runner from the unittest module its own renderer already emits. No new mechanism was required, so the fastest sufficient route was to stop asking the caller for them."
+ },
+ "resolution": "SELECTED",
+ "route_id": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1",
+ "stop_condition": "STOP when no census refusal is reported as a generic execution failure, when SEGFAULT is still a crash, when the matrix and census counts are unchanged by the relabel, and when the learner's reach is measured by the composer on every run rather than typed into the document",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-01T10:40:23Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "5adf9bb0264f9a2b9c1c857bb29f03309ebb47cf",
+     "path": "canonical/runtime/live_brain_route_admission_v1.py"
+    },
+    {
+     "git_blob_sha": "dc91023b4af4fa2ab1d58176f8475b7217145e9c",
+     "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+    }
+   ],
+   "decisive_question": "Does a sentence that asks for the tests to be run reach a capability that runs them, and does the measurement then tell a passing suite from a failing one -- without altering any argv token that is not a validated test path?",
+   "falsifier_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1_FALSIFIER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Each direction was falsified directly. test_a_passing_suite_that_imports_its_sibling_module_exits_zero and test_a_failing_suite_that_imports_its_sibling_module_still_exits_nonzero pin the suite runner from both sides. test_a_supplied_argv_naming_the_test_by_its_repo_relative_path_measures_it and test_a_failing_suite_supplied_the_same_way_is_still_measured_as_failing pin the argv rewrite from both sides, and test_it_matches_the_measurement_taken_when_no_argv_is_supplied requires the two routes to agree. test_an_argument_that_is_not_a_test_path_passes_through_verbatim is the nearest world in which the rewrite must not fire: the interpreter, -c and a whole harness program must come back untouched and only the test token may change. test_a_stated_test_that_already_passes_is_reported_truthfully_and_nothing_is_written asserts applied False, files_written empty and the source bytes unchanged.",
+   "proposal_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The classifier fires only on messages that are entirely upper-case with underscores, the repository's own refusal vocabulary; already-satisfied spellings and ACTION_EXPECTATION_FAILED stay excluded, and both are tested. Verified: 0 FALSE, 0 DAMAGED, served count unchanged."
+}

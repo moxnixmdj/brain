@@ -1942,7 +1942,10 @@
         "release notes",
         "port",
         "declarations",
-        "pull request"
+        "pull request",
+        "translate",
+        "transpile",
+        "make"
       ],
       "limitations": [
         "Compiler-, CST-, SQLite-, TOML-, Make-, and YAML-verified polyglot code, packaging, and CI workflow transformer; refuses closed when no applicable defect/transform exists or verification fails."
@@ -1958,7 +1961,9 @@
         "code.build.pyproject.edit",
         "code.build.makefile.lint_target",
         "code.ci.workflow.configure",
-        "code.ci.flaky.quarantine"
+        "code.ci.flaky.quarantine",
+        "code.polyglot.translate.verified",
+        "build.makefile.execute.verified"
       ],
       "requires": [],
       "result_fields": [
@@ -3020,8 +3025,11 @@
           "capability_id": "git.repository.operate.v1",
           "limit": "${input.limit}",
           "message": "${input.message}",
+          "message_source": "${input.message_source}",
           "op": "${input.op}",
           "repo_root": "${input.repo_root}",
+          "rev": "${input.rev}",
+          "staged": "${input.staged}",
           "target": "${input.target}"
         },
         "expect": {
@@ -4005,7 +4013,7 @@
         "fail-closed"
       ],
       "limitations": [
-        "Enumerates every producer\u00d7artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
+        "Enumerates every producer×artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
       ],
       "platforms": [
         "linux",
@@ -4654,7 +4662,7 @@
         "oracle"
       ],
       "limitations": [
-        "Evidence\u2192contract 5-kernel, deterministic"
+        "Evidence→contract 5-kernel, deterministic"
       ],
       "platforms": [
         "linux"
@@ -4822,7 +4830,7 @@
         "backward"
       ],
       "limitations": [
-        "Fault\u2192patch 5-kernel, deterministic"
+        "Fault→patch 5-kernel, deterministic"
       ],
       "platforms": [
         "linux"
@@ -5140,7 +5148,7 @@
         "navigation"
       ],
       "limitations": [
-        "Contract-gated issue \u2192 symbol \u2192 crossfile"
+        "Contract-gated issue → symbol → crossfile"
       ],
       "platforms": [
         "linux"
@@ -5201,7 +5209,7 @@
         "mutation"
       ],
       "limitations": [
-        "Patch\u2192review 5-kernel, deterministic"
+        "Patch→review 5-kernel, deterministic"
       ],
       "platforms": [
         "linux"
@@ -6343,7 +6351,7 @@
         "behavior"
       ],
       "limitations": [
-        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) \u2014 deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
+        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) — deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
         "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
         "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
         "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
@@ -6801,7 +6809,7 @@
       "limitations": [
         "requires a JSON task file whose edits are choreograph ops (rename_symbol, move_symbol); free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
         "move_symbol creates a missing target module by declared intent; multi-line import statements, multi-line decorator spans, and aliased-from-import rewrite shapes fail closed rather than guess.",
-        "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' \u2014 edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
+        "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' — edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
         "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
       ],
       "platforms": [
@@ -8407,7 +8415,7 @@
               {
                 "line": 4,
                 "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py",
-                "redacted": "AKIA\u202620",
+                "redacted": "AKIA…20",
                 "signature": "aws_access_key_id"
               }
             ],
@@ -8840,7 +8848,11 @@
         "endpoint",
         "client",
         "traversal",
-        "metric"
+        "metric",
+        "unused imports",
+        "inline",
+        "memory leak",
+        "generate unit tests"
       ],
       "limitations": [
         "Python source, test, concurrency, performance, structural refactoring, and standalone-git writer verified by AST re-parse, behavioral equivalence, and clean subprocess test execution with rollback."
@@ -8858,7 +8870,10 @@
         "python.source.format.ast_verified",
         "python.refactor.structural.module",
         "python.refactor.dead.unused.remove",
-        "git.branch.operate"
+        "git.branch.operate",
+        "python.refactor.inline_function",
+        "python.refactor.unused_imports.removed",
+        "python.perf.memory_leak.fixed"
       ],
       "requires": [],
       "result_fields": [
@@ -9075,7 +9090,7 @@
         "slice"
       ],
       "limitations": [
-        "Never-miss \u2192 pipeline \u2192 audit \u2192 measurement"
+        "Never-miss → pipeline → audit → measurement"
       ],
       "platforms": [
         "linux"
@@ -9646,7 +9661,14 @@
         "schema",
         "log",
         "pull request",
-        "trace"
+        "trace",
+        "definition",
+        "importers",
+        "import_cycles",
+        "class_hierarchy",
+        "flaky",
+        "stability",
+        "provenance"
       ],
       "limitations": [
         "Read-only diagnostic, profiling, security, coverage, and architecture document producer; never modifies existing source files in place."
@@ -9669,7 +9691,14 @@
         "software.analysis.dead.unused.find",
         "software.analysis.lint.static_triage",
         "software.analysis.mutation.score",
-        "javascript.tests.run.execution"
+        "javascript.tests.run.execution",
+        "python.tests.execution",
+        "software.analysis.definition.lookup",
+        "software.analysis.importers.reverse_graph",
+        "software.analysis.import_cycles.tarjan_scc",
+        "software.analysis.class_hierarchy.c3_mro",
+        "software.analysis.flaky.stability_verdict",
+        "software.analysis.provenance.value_flow"
       ],
       "requires": [],
       "result_fields": [
@@ -9687,7 +9716,13 @@
         "dead_symbols",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "definitions",
+        "importing_modules",
+        "import_cycles",
+        "class_hierarchy",
+        "flaky_tests",
+        "provenance_steps"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py",
@@ -10059,7 +10094,7 @@
         "architecture"
       ],
       "limitations": [
-        "CEGIS(T) loop synthesize\u2192verify (CrossHair symbolic + concrete) \u2192 counterexample \u2192 resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+        "CEGIS(T) loop synthesize→verify (CrossHair symbolic + concrete) → counterexample → resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
       ],
       "platforms": [
         "linux",
@@ -10132,7 +10167,7 @@
         "change-impact"
       ],
       "limitations": [
-        "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+        "Cross-file atomic choreography inside repair loop: patch→choreograph via 86k/221k symbol graph→change-impact 2070/2096 slice→dual-oracle verify→gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
       ],
       "platforms": [
         "linux",
@@ -10207,7 +10242,7 @@
         "counterexample"
       ],
       "limitations": [
-        "HTN loop: CEGIS(T) 24/12 DPLL(T) \u2192 hypothesis 50\u00d7 \u2192 concrete 13 \u2192 choreograph 221k \u2192 slice 50 \u2192 gate \u2014 until pass or budget. Loop not DAG. Deterministic 0 model $0."
+        "HTN loop: CEGIS(T) 24/12 DPLL(T) → hypothesis 50× → concrete 13 → choreograph 221k → slice 50 → gate — until pass or budget. Loop not DAG. Deterministic 0 model $0."
       ],
       "platforms": [
         "linux",
@@ -10477,7 +10512,7 @@
         "verification"
       ],
       "limitations": [
-        "Dual-oracle \u2192 test intelligence \u2192 pipeline \u2192 provenance coupling"
+        "Dual-oracle → test intelligence → pipeline → provenance coupling"
       ],
       "platforms": [
         "linux"
@@ -11357,7 +11392,7 @@
         "40x"
       ],
       "limitations": [
-        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop \u2014 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop — 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
       ],
       "platforms": [
         "linux",

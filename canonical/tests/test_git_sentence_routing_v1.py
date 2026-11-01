@@ -153,8 +153,13 @@ class TheCapabilityIsReal(unittest.TestCase):
         self.assertEqual(entry["incremental_spend_usd"], 0)
         # `message` is declared because ONE operation (commit) needs it; it binds
         # by proof, not by request -- see ACommitMessageIsCopiedAndNeverInvented.
+        # `repo_root`/`target` say WHERE, and `rev` says WHICH REVISION: the row was
+        # certified for "the diff against HEAD~1" while its contract had no slot for a
+        # revision, so the answer was the diff against HEAD.  A slot the sentence can
+        # state has to exist before the sentence can be answered (measured 2026-11-01).
         self.assertEqual(sorted(entry["action_template"]["args"]),
-                         ["capability_id", "limit", "message", "op"])
+                         ["capability_id", "limit", "message", "message_source", "op",
+                          "repo_root", "rev", "staged", "target"])
         self.assertIn("git.history.read", entry["provides"])
         self.assertTrue(entry["source"]["adapter_path"].endswith("git_repository_operate.py"))
 

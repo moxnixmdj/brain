@@ -44,6 +44,10 @@ _HERE = str(pathlib.Path(__file__).resolve().parent)
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 from swe_git_fixture_v1 import seed_repository  # noqa: E402
+# The matrix marks a case REAL only if the gate it names actually ran. Without ruff/mypy/coverage
+# a green gate is `PASS_SYNTAX_ONLY`/`PASS_BASELINE_ONLY`, which is a fact about the image. Same
+# rule as the census: restore once, then refuse to mark anything if the substrate is still absent.
+from substrate_precondition_v1 import precondition  # noqa: E402
 
 WORK = ROOT / "canonical/astra_runtime/tmp/frontier_matrix"
 
@@ -246,8 +250,17 @@ def case(name: str, goal, oracle, lane: str, timeout: int = 60,
     ``allow`` names the files the request itself asks to change.  Anything ELSE that moves is
     damage: an agent that edits a file nobody asked it to touch is worse than one that refuses.
     """
-    CASES.append(dict(name=name, goal=goal, oracle=oracle, lane=lane, timeout=timeout,
-                      allow=allow))
+    # THE FIXTURE DIRECTORY IS KEYED ON REGISTRATION, NOT ON THE LABEL.
+    #
+    # ``build()`` names its directory after the case and **rmtree**s it before writing, so two cases
+    # sharing a label shared a directory and destroyed each other's fixture: ``measure_coverage`` is
+    # registered twice, once in the toolchain lane (over ``pkg``) and once in the analysis lane (over
+    # ``cov/calc.py``), and one wiped the other's tree mid-run.  That is also why the headline count
+    # and the distinct-name count disagreed by one (44 cases, 43 names) and why the REAL list printed
+    # a name twice.  Registration index makes the directory unique whatever the label is, so a future
+    # duplicate label cannot silently merge two fixtures again.
+    CASES.append(dict(name=name, dir="%03d_%s" % (len(CASES) + 1, name), goal=goal, oracle=oracle,
+                      lane=lane, timeout=timeout, allow=allow))
 
 
 def _repair(base, result=None):
@@ -636,7 +649,7 @@ def markdown(rows: list[dict]) -> str:
     for r in rows:
         mark = {"REAL": "**REAL**", "FALSE": "**FALSE**", "refused": "refused",
                 "DAMAGE": "**DAMAGE**"}.get(r["mark"], r["mark"])
-        base_rel = "canonical/astra_runtime/tmp/frontier_matrix/%s/" % r["case"]
+        base_rel = "canonical/astra_runtime/tmp/frontier_matrix/%s/" % r["dir"]
         shown = r["goal"].replace(base_rel, "").replace("|", "\\|")
         out.append("| %s | `%s` | %s | %d | `%s` |"
                    % (r["lane"], shown, mark, r["ms"], str(r["status"])[:60]))
@@ -698,8 +711,21 @@ def _report_preconditions() -> None:
         print("  WARNING: %d leftover spool artifacts; a run must start from a clean scratch "
               "or two runs are not comparable" % len(pre["leftovers"]))
 
-def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = False) -> int:
+def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = False,
+        allow_incomplete_substrate: bool = False, restore_if_missing: bool = True) -> int:
     from canonical.runtime import live_brain_route_admission_v1 as door
+
+    # A MARK IS ONLY REAL IF THE GATE IT NAMES RAN.  Without ruff/mypy/pytest the review gates
+    # answer PASS_SYNTAX_ONLY / PASS_BASELINE_ONLY; marking that row REAL is a claim about this
+    # image.  The census next door has the same gate, from the same owner.
+    # The verdict goes to stderr: `--json` writes the board to stdout, and a banner inside that
+    # JSON makes every consumer's parse fail -- a gate that breaks the instrument it guards.
+    substrate = precondition(allow_incomplete=allow_incomplete_substrate,
+                             restore_if_missing=restore_if_missing, out=sys.stderr)
+    if not substrate.usable:
+        print("MATRIX_NOT_MEASURED: SUBSTRATE_INCOMPLETE -- %s" % substrate.reason)
+        print("  A mark printed here would be a fact about this image, not about the tree.")
+        return 2
 
     WORK.mkdir(parents=True, exist_ok=True)
     if not (as_json or as_markdown):
@@ -708,7 +734,7 @@ def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = Fals
     for spec in CASES:
         if lane and spec["lane"] != lane:
             continue
-        base = build(spec["name"], spec["lane"])
+        base = build(spec["dir"], spec["lane"])
         goal = spec["goal"](base)
         before = {p.relative_to(ROOT).as_posix(): digest(p)
                   for p in base.rglob("*") if p.is_file()}
@@ -745,9 +771,9 @@ def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = Fals
         mark = ("REAL" if (passed and world)
                 else "FALSE" if passed
                 else "DAMAGE" if damaged else "refused")
-        rows.append(dict(case=spec["name"], lane=spec["lane"], goal=goal, status=status,
-                         passed=passed, world=world, ms=elapsed_ms, damaged=damaged,
-                         note=note, mark=mark))
+        rows.append(dict(case=spec["name"], dir=spec["dir"], lane=spec["lane"], goal=goal,
+                         status=status, passed=passed, world=world, ms=elapsed_ms,
+                         damaged=damaged, note=note, mark=mark))
         if not (as_json or as_markdown):
             tail = ("DAMAGED:" + ",".join(d.split("/")[-1] for d in damaged[:3])) if damaged else ""
             print(f"{spec['lane']:10s} {spec['name']:22s} {mark:8s} {elapsed_ms:7d}ms "
@@ -787,5 +813,11 @@ if __name__ == "__main__":
     ap.add_argument("--lane")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--markdown", action="store_true")
+    ap.add_argument("--no-restore", action="store_true",
+                    help="verify the substrate but do not restore it")
+    ap.add_argument("--allow-incomplete-substrate", action="store_true",
+                    help="mark anyway, with the environment caveat printed first")
     ns = ap.parse_args()
-    sys.exit(run(ns.lane, ns.json, ns.markdown))
+    sys.exit(run(ns.lane, ns.json, ns.markdown,
+                 allow_incomplete_substrate=ns.allow_incomplete_substrate,
+                 restore_if_missing=not ns.no_restore))

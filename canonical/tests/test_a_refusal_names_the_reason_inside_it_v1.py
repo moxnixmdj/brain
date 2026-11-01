@@ -58,6 +58,28 @@ def test_the_six_polyglot_refusals_are_six_different_statuses():
     assert "FAIL_CLOSED__CAPABILITY_REFUSED_POLYGLOT_REFUSED" not in statuses
 
 
+def test_a_chain_deeper_than_two_still_ends_at_the_reason():
+    """The door wraps what the adapter raised, so the chain grows from the outside.
+
+    Measured on main at 85e2b81: once the door began keeping the adapter's key, the same refusal
+    arrived as ``CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM``. A single
+    unwrap reported the middle token, and six distinct refusals collapsed onto one class again --
+    5 distinct classes where there had been 9. The reason is the last token, however deep it is.
+    """
+    status, _reason, payload = _classify(
+        "CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM")
+    assert status == "FAIL_CLOSED__CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM"
+    assert payload["class"] == "CPP_NO_APPLICABLE_TRANSFORM"
+
+
+def test_unwrapping_stops_at_the_last_token_and_keeps_the_payload():
+    """A chain that ends in ``TOKEN:detail`` keeps the detail and stops unwrapping."""
+    status, _reason, payload = _classify(
+        "CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_FLAKY_TEST_DETECTED:suite.txt")
+    assert status == "FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED"
+    assert payload["class"] == "NO_FLAKY_TEST_DETECTED"
+
+
 def test_a_two_level_class_promotes_the_inner_token():
     """``OUTER:INNER:detail`` -- the middle token is the class, the rest is the detail."""
     status, _reason, payload = _classify("OUTER_REFUSED:INNER_TOKEN_REASON:the detail b")
@@ -83,6 +105,30 @@ def test_the_payload_carries_the_capability_that_refused():
 # --------------------------------------------------------------------------------------
 # ...and the nearest worlds in which it must NOT be called a capability refusal.
 # --------------------------------------------------------------------------------------
+
+def test_a_bare_compound_refusal_key_is_a_refusal():
+    """A refusal key does not have to carry a detail.
+
+    ``NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS`` is one of the repository's own keys and says
+    everything it has to say, but it has no colon, so it was reported as a controller crash.
+    Measured on main at 29ada61: census request 32, the last unexplained row in the inventory.
+    """
+    status, reason, payload = _classify("NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS")
+    assert status == "FAIL_CLOSED__CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS"
+    assert payload["class"] == "NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS"
+    assert reason == "CAPABILITY_REFUSED:NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS"
+
+
+@pytest.mark.parametrize("message", ["SEGFAULT", "Timeout", "KeyError", "CRASHED"])
+def test_a_single_shouting_word_is_still_a_crash(message):
+    """The rule is structural, not "anything in capitals is a refusal".
+
+    A refusal key is a snake-case condition name -- a compound of words. A crash label is one word.
+    This is the nearest world in which the bare-key rule must not fire, and it is what keeps the
+    rule honest rather than a blanket ``[A-Z]+`` match.
+    """
+    assert _classify(message) is None
+
 
 @pytest.mark.parametrize(
     "message",

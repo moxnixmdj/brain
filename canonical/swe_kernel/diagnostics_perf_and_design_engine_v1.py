@@ -588,14 +588,49 @@ def review_api_design(target: Path) -> dict[str, Any]:
     }
 
 
+# THE TABLE RECORDS THE FIXED VERSION, AND THE AUDIT COMPARES AGAINST IT.
+#
+# Measured 2026-11-01 on main 6aa5dab: `requests==2.32.3`, `pyyaml==6.0.1` and
+# `cryptography==43.0.0` -- every one of them already past its fix -- were reported as
+# VULNERABLE, because the audit flagged a package by MEMBERSHIP in this dict and never compared
+# the pinned version to the fixed one.  The door stamped PASS with exact semantic acceptance over
+# it.  An engineer acting on that report pins backwards, into the vulnerable version.  A false
+# finding is worse than no finding: it spends trust.
+#
+# What the audit can honestly claim is now stated in the artifact: it compares the pinned version
+# against the fixed version for the packages in this table, and it lists every dependency the
+# table cannot judge under `unchecked_dependencies` instead of letting silence read as safety.
+# The table is a pinned subset, and the artifact says so (`advisory_table`).
 _KNOWN_ADVISORIES = {
-    "pyyaml": ("<5.4", "CVE-2020-14343: arbitrary code execution via yaml.load"),
-    "urllib3": ("<1.26.5", "CVE-2021-33503: catastrophic backtracking in URL authority parser"),
-    "requests": ("<2.31.0", "CVE-2023-32681: unintended Proxy-Authorization header leak"),
-    "flask": ("<2.2.5", "CVE-2023-30861: session cookie disclosure under caching proxy"),
-    "jinja2": ("<3.1.3", "CVE-2024-22195: XSS in xmlattr filter"),
-    "cryptography": ("<41.0.6", "CVE-2023-49083: NULL pointer dereference in PKCS12 parsing"),
+    "pyyaml": ("5.4", "CVE-2020-14343: arbitrary code execution via yaml.load"),
+    "urllib3": ("1.26.5", "CVE-2021-33503: catastrophic backtracking in URL authority parser"),
+    "requests": ("2.31.0", "CVE-2023-32681: unintended Proxy-Authorization header leak"),
+    "flask": ("2.2.5", "CVE-2023-30861: session cookie disclosure under caching proxy"),
+    "jinja2": ("3.1.3", "CVE-2024-22195: XSS in xmlattr filter"),
+    "cryptography": ("41.0.6", "CVE-2023-49083: NULL pointer dereference in PKCS12 parsing"),
 }
+
+
+_VERSION_RE = re.compile(r"^\s*v?(\d+(?:\.\d+)*)")
+
+
+def _version_tuple(text: str) -> tuple[int, ...] | None:
+    """The leading numeric release of a version string, or None when it has none.
+
+    Deliberately not `packaging`: this engine is stdlib-only by construction, and a PEP 440
+    parser is not needed to compare two releases.  A pre-release suffix sorts by its numeric
+    release, which is the conservative direction for a vulnerability check (2.31.0rc1 has the
+    same numeric release as 2.31.0, so it is not called vulnerable past the fix).
+    """
+    m = _VERSION_RE.match(str(text or ""))
+    if not m:
+        return None
+    return tuple(int(part) for part in m.group(1).split("."))
+
+
+def _pinned_version(spec: str) -> tuple[int, ...] | None:
+    m = re.search(r"==\s*([0-9][0-9A-Za-z.*+!-]*)", spec)
+    return _version_tuple(m.group(1)) if m else None
 
 
 def audit_dependency_vulnerabilities(target: Path) -> dict[str, Any]:
@@ -631,13 +666,25 @@ def audit_dependency_vulnerabilities(target: Path) -> dict[str, Any]:
 
     vulnerabilities: list[dict[str, Any]] = []
     unpinned: list[str] = []
+    unchecked: list[str] = []
     for spec in deps:
         pkg = re.split(r"[><=~!;\[\s]", spec.strip(), maxsplit=1)[0].lower()
         if "==" not in spec:
             unpinned.append(spec)
-        if pkg in _KNOWN_ADVISORIES:
-            fixed_range, cve_desc = _KNOWN_ADVISORIES[pkg]
-            vulnerabilities.append({"package": pkg, "spec": spec, "safe_constraint": fixed_range, "advisory": cve_desc})
+        if pkg not in _KNOWN_ADVISORIES:
+            # SILENCE IS NOT A CLEAN BILL OF HEALTH.
+            unchecked.append(pkg)
+            continue
+        fixed, cve_desc = _KNOWN_ADVISORIES[pkg]
+        fixed_v, pinned_v = _version_tuple(fixed), _pinned_version(spec)
+        if pinned_v is None:
+            # Unpinned or a range: the installed version is not in the sentence, so the honest
+            # answer is "cannot judge this one", not "vulnerable" and not "safe".
+            unchecked.append(pkg)
+            continue
+        if pinned_v < fixed_v:
+            vulnerabilities.append({"package": pkg, "spec": spec, "fixed_in": fixed,
+                                    "advisory": cve_desc})
 
     return {
         "verified": True,
@@ -649,6 +696,12 @@ def audit_dependency_vulnerabilities(target: Path) -> dict[str, Any]:
         "vulnerability_count": len(vulnerabilities),
         "vulnerabilities": vulnerabilities,
         "unpinned_dependencies": unpinned,
+        # What this audit CANNOT see.  A pinned advisory table of
+        # %d packages is not an advisory database; a dependency it does not
+        # carry is reported here rather than assumed clean.
+        "unchecked_dependencies": sorted(set(unchecked)),
+        "advisory_table_packages": len(_KNOWN_ADVISORIES),
+        "coverage_note": "ADVISORY_TABLE_IS_A_PINNED_SUBSET:%d" % len(_KNOWN_ADVISORIES),
     }
 
 
@@ -1270,3 +1323,381 @@ def review_pull_request_changes(target: Path, goal: str, *, brain_root: Path) ->
         "finding_count": len(findings),
         "findings": findings,
     }
+
+
+# ---------------------------------------------------------------------------
+# Incremental Semantic Graph, Test Runner, Value Provenance & Flakiness Engines
+# ---------------------------------------------------------------------------
+
+def show_symbol_definition(target: Path, symbol: str | None, goal: str, *, repo_root: Path) -> dict[str, Any]:
+    """Locate exact symbol definition(s) using the persistent incremental semantic graph."""
+    from canonical.swe_kernel import incremental_semantic_graph_v1 as sg
+
+    sym = (symbol or "").strip()
+    if not sym:
+        m = re.search(
+            r"\b(?:definition|signature|implementation|source)\s+of\s+(?:the\s+)?(?:function\s+|class\s+|method\s+|symbol\s+)?`?([A-Za-z_][A-Za-z0-9_.]*)`?"
+            r"|\bwhere\s+is\s+(?:the\s+)?(?:function\s+|class\s+|method\s+|symbol\s+)?`?([A-Za-z_][A-Za-z0-9_.]*)`?\s+defined\b",
+            goal,
+            re.IGNORECASE,
+        )
+        if m:
+            sym = (m.group(1) or m.group(2) or "").strip()
+    if not sym:
+        return {"verified": False, "gate": "FAIL", "reason": "DEFINITION_SYMBOL_NOT_STATED"}
+
+    rel_scope = target.resolve().relative_to(repo_root.resolve()).as_posix()
+    res = sg.query_definition(repo_root, rel_scope, sym)
+    defs = res.get("definitions") or []
+    if not defs:
+        return {"verified": False, "gate": "FAIL", "reason": f"SYMBOL_DEFINITION_NOT_FOUND:{sym}"}
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "show_definition",
+        "symbol": sym,
+        "scope_path": rel_scope,
+        "definition_count": len(defs),
+        "definitions": defs,
+        "primary_definition": defs[0],
+    }
+
+
+def find_importing_modules(target: Path, symbol: str | None, goal: str, *, repo_root: Path) -> dict[str, Any]:
+    """Return every module in scope that imports the target module or symbol."""
+    from canonical.swe_kernel import incremental_semantic_graph_v1 as sg
+
+    tgt_mod = ""
+    m = re.search(
+        r"\b(?:which|what)\s+(?:modules?|files?)\s+import\s+`?([A-Za-z0-9_./-]+)`?"
+        r"|\bwho\s+imports\s+`?([A-Za-z0-9_./-]+)`?"
+        r"|\bimporters\s+of\s+`?([A-Za-z0-9_./-]+)`?",
+        goal,
+        re.IGNORECASE,
+    )
+    if m:
+        tgt_mod = (m.group(1) or m.group(2) or m.group(3) or "").strip().rstrip(".,;?)")
+    if not tgt_mod and symbol:
+        tgt_mod = symbol
+
+    # If `target` is a file (e.g. `Which modules import X/a.py`), search its enclosing package/directory
+    # unless a broader directory was also named in `goal`.
+    scope_dir: Path
+    dir_matches: list[Path] = []
+    for raw_tok in re.findall(r"[A-Za-z0-9_./-]+", goal):
+        clean_tok = raw_tok.rstrip(".,;?)")
+        cand = (repo_root / clean_tok).resolve()
+        if cand.is_dir() and (cand == repo_root.resolve() or repo_root.resolve() in cand.parents):
+            dir_matches.append(cand)
+    if dir_matches:
+        scope_dir = dir_matches[-1]
+        if not tgt_mod and target.is_file():
+            tgt_mod = target.resolve().relative_to(repo_root.resolve()).as_posix()
+    elif target.is_dir():
+        scope_dir = target
+    else:
+        scope_dir = target.parent
+        if not tgt_mod:
+            tgt_mod = target.resolve().relative_to(repo_root.resolve()).as_posix()
+
+    if not tgt_mod:
+        return {"verified": False, "gate": "FAIL", "reason": "IMPORT_TARGET_NOT_STATED"}
+
+    rel_scope = scope_dir.resolve().relative_to(repo_root.resolve()).as_posix()
+    res = sg.query_importers_of(repo_root, rel_scope, tgt_mod)
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "which_modules_import",
+        "target": tgt_mod,
+        "scope_path": rel_scope,
+        "importer_count": res["importer_count"],
+        "importing_modules": res["importing_modules"],
+        "importers": res["importers"],
+    }
+
+
+def detect_import_cycles(target: Path, *, repo_root: Path) -> dict[str, Any]:
+    """Detect all strongly-connected import cycles via iterative Tarjan O(V+E) SCC."""
+    from canonical.swe_kernel import incremental_semantic_graph_v1 as sg
+
+    scope = target if target.is_dir() else target.parent
+    rel_scope = scope.resolve().relative_to(repo_root.resolve()).as_posix()
+    res = sg.query_import_cycles(repo_root, rel_scope)
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "import_cycles",
+        "scope_path": rel_scope,
+        "files_indexed": res["files_indexed"],
+        "import_edges": res["import_edges"],
+        "has_cycles": res["has_cycles"],
+        "cycle_count": res["cycle_count"],
+        "import_cycles": res["import_cycles"],
+    }
+
+
+def inspect_class_hierarchy(target: Path, symbol: str | None, goal: str, *, repo_root: Path) -> dict[str, Any]:
+    """Compute static C3 MRO, bases, subclasses, and methods across scope."""
+    from canonical.swe_kernel import incremental_semantic_graph_v1 as sg
+
+    cls_nm = ""
+    m = re.search(
+        r"\b(?:hierarchy|subclasses|superclasses|bases|mro|inheritance)\s+of\s+(?:the\s+)?(?:class\s+)?`?([A-Za-z_][A-Za-z0-9_]*)`?",
+        goal,
+        re.IGNORECASE,
+    )
+    if m and m.group(1).lower() not in {"the", "all", "every", "classes", "file", "module"} and not (repo_root / m.group(1)).exists():
+        cls_nm = m.group(1)
+    elif symbol and symbol not in {"auto", "class_hierarchy", target.stem}:
+        cls_nm = symbol.strip()
+    rel_scope = target.resolve().relative_to(repo_root.resolve()).as_posix()
+    res = sg.query_class_hierarchy(repo_root, rel_scope, cls_nm or None)
+    if res["class_count"] == 0 and cls_nm:
+        res = sg.query_class_hierarchy(repo_root, rel_scope, None)
+    if res["class_count"] == 0:
+        return {"verified": False, "gate": "FAIL", "reason": "NO_CLASSES_IN_SCOPE"}
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "class_hierarchy",
+        "scope_path": rel_scope,
+        "class_count": res["class_count"],
+        "class_hierarchy": res["class_hierarchy"],
+    }
+
+
+def run_single_test_target(target: Path, goal: str) -> dict[str, Any]:
+    """Execute a specific Python test file or test suite and return real execution records."""
+    proj = _find_project_root(target)
+    if target.is_file():
+        test_files = [target]
+    else:
+        test_files = sorted(
+            p for p in target.rglob("*.py")
+            if "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
+        )
+    if not test_files:
+        return {"verified": False, "gate": "FAIL", "reason": "NO_TEST_FILES_FOUND"}
+
+    runner_script = (
+        "import importlib.util, io, json, pathlib, sys, time, unittest\n"
+        f"proj = pathlib.Path({str(proj.resolve())!r})\n"
+        f"files = [pathlib.Path(p) for p in {[str(p.resolve()) for p in test_files]!r}]\n"
+        "for d in {str(proj), *(str(f.parent) for f in files)}:\n"
+        "    if d not in sys.path:\n"
+        "        sys.path.insert(0, d)\n"
+        "records = []\n"
+        "total_run = 0\n"
+        "total_failed = 0\n"
+        "for tf in files:\n"
+        "    t0 = time.perf_counter()\n"
+        "    suite = unittest.defaultTestLoader.discover(str(tf.parent), pattern=tf.name)\n"
+        "    buf = io.StringIO()\n"
+        "    res = unittest.TextTestRunner(stream=buf, verbosity=2).run(suite)\n"
+        "    dt_ms = round((time.perf_counter() - t0) * 1000.0, 2)\n"
+        "    bad = len(res.failures) + len(res.errors)\n"
+        "    total_run += res.testsRun\n"
+        "    total_failed += bad\n"
+        "    records.append({\n"
+        "        'test_file': str(tf),\n"
+        "        'tests': res.testsRun,\n"
+        "        'passed': res.testsRun - bad,\n"
+        "        'failed': bad,\n"
+        "        'duration_ms': dt_ms,\n"
+        "        'failures': [t.id() for t, _ in (res.failures + res.errors)],\n"
+        "    })\n"
+        "print(json.dumps({'tests': total_run, 'passed': total_run - total_failed, 'failed': total_failed, 'exit_code': 0 if (total_run > 0 and total_failed == 0) else 1, 'records': records}))\n"
+    )
+    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_script], cwd=proj, timeout=45)
+    if rc != 0 or not out.strip():
+        return {"verified": False, "gate": "FAIL", "reason": f"TEST_RUNNER_SUBPROCESS_ERROR:{err[:200]}"}
+    payload = json.loads(out.strip().splitlines()[-1])
+    if int(payload.get("tests") or 0) == 0:
+        return {"verified": False, "gate": "FAIL", "reason": "ZERO_TESTS_DISCOVERED"}
+    if int(payload.get("failed") or 0) > 0:
+        return {
+            "verified": False,
+            "gate": "FAIL",
+            "reason": f"TEST_SUITE_FAILED:failed={payload['failed']}",
+            **payload,
+        }
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "run_single_test",
+        **payload,
+    }
+
+
+def trace_value_provenance_in_file(target: Path, symbol: str | None, goal: str) -> dict[str, Any]:
+    """Static AST def-use + statement-by-statement value-flow slice for `<var>` in `<fn>`."""
+    if not target.is_file():
+        return {"verified": False, "gate": "FAIL", "reason": "PROVENANCE_TARGET_MUST_BE_FILE"}
+    src = target.read_text(encoding="utf-8", errors="replace")
+    tree = ast.parse(src, filename=str(target))
+
+    m_var = re.search(r"\bvalue\s+of\s+`?([A-Za-z_][A-Za-z0-9_]*)`?", goal, re.IGNORECASE)
+    var_name = m_var.group(1) if m_var else ""
+    m_fn = re.search(r"\bthrough\s+(?:the\s+)?(?:function\s+)?`?([A-Za-z_][A-Za-z0-9_]*)`?", goal, re.IGNORECASE)
+    fn_name = m_fn.group(1) if m_fn else (symbol or "")
+
+    fn_nodes = [
+        n for n in ast.walk(tree)
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and (not fn_name or n.name == fn_name)
+    ]
+    if not fn_nodes:
+        return {"verified": False, "gate": "FAIL", "reason": f"PROVENANCE_FUNCTION_NOT_FOUND:{fn_name}"}
+    fnode = fn_nodes[0]
+
+    # Collect ordered def/use/return steps affecting `var_name` (or all tracked locals if var_name empty)
+    tracked: set[str] = {var_name} if var_name else {a.arg for a in fnode.args.args}
+    steps: list[dict[str, Any]] = []
+    for a in fnode.args.args:
+        if not var_name or a.arg == var_name:
+            steps.append({
+                "line": fnode.lineno,
+                "kind": "parameter_binding",
+                "variable": a.arg,
+                "statement": f"param {a.arg}",
+                "depends_on": [],
+            })
+
+    for stmt in ast.walk(fnode):
+        if isinstance(stmt, ast.Assign):
+            rhs_names = sorted({n.id for n in ast.walk(stmt.value) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)})
+            lhs_names = [n.id for t in stmt.targets for n in ast.walk(t) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)]
+            if any(nm in tracked for nm in lhs_names) or (var_name and var_name in rhs_names):
+                for nm in lhs_names:
+                    if not var_name or var_name in rhs_names or nm == var_name:
+                        tracked.add(nm)
+                steps.append({
+                    "line": stmt.lineno,
+                    "kind": "assignment",
+                    "targets": lhs_names,
+                    "statement": ast.unparse(stmt)[:200],
+                    "depends_on": rhs_names,
+                })
+        elif isinstance(stmt, ast.AugAssign) and isinstance(stmt.target, ast.Name):
+            nm = stmt.target.id
+            rhs_names = sorted({n.id for n in ast.walk(stmt.value) if isinstance(n, ast.Name)})
+            if nm in tracked or (var_name and var_name in rhs_names):
+                tracked.add(nm)
+                steps.append({
+                    "line": stmt.lineno,
+                    "kind": "augmented_assignment",
+                    "targets": [nm],
+                    "statement": ast.unparse(stmt)[:200],
+                    "depends_on": sorted({nm, *rhs_names}),
+                })
+        elif isinstance(stmt, ast.Return) and stmt.value is not None:
+            ret_names = sorted({n.id for n in ast.walk(stmt.value) if isinstance(n, ast.Name)})
+            if not var_name or any(nm in tracked for nm in ret_names):
+                steps.append({
+                    "line": stmt.lineno,
+                    "kind": "return_sink",
+                    "targets": ["<return>"],
+                    "statement": ast.unparse(stmt)[:200],
+                    "depends_on": ret_names,
+                })
+
+    steps.sort(key=lambda r: (int(r["line"]), r["kind"]))
+    if not steps:
+        return {"verified": False, "gate": "FAIL", "reason": f"VARIABLE_NOT_REFERENCED_IN_FUNCTION:{var_name}:{fnode.name}"}
+
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "trace_value_provenance",
+        "file": str(target),
+        "function": fnode.name,
+        "variable": var_name or "all_params",
+        "step_count": len(steps),
+        "provenance_steps": steps,
+    }
+
+
+def detect_flaky_tests(target: Path, goal: str) -> dict[str, Any]:
+    """Detect flaky tests via AST nondeterminism analysis + repeated isolated runs."""
+    proj = _find_project_root(target)
+    test_files = [target] if target.is_file() else sorted(
+        p for p in target.rglob("*.py")
+        if "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
+    )
+    if not test_files:
+        return {"verified": False, "gate": "FAIL", "reason": "NO_TEST_FILES_FOR_FLAKY_SCAN"}
+
+    static_hazards: list[dict[str, Any]] = []
+    for tf in test_files:
+        txt = tf.read_text(encoding="utf-8", errors="replace")
+        try:
+            tree = ast.parse(txt, filename=str(tf))
+        except SyntaxError:
+            continue
+        has_seed = "seed(" in txt
+        for fn in [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name.startswith("test_")]:
+            fn_src = ast.unparse(fn)
+            reasons: list[str] = []
+            if re.search(r"\brandom\.(?:random|randint|choice|shuffle|uniform)\b", fn_src) and not has_seed and "seed(" not in fn_src:
+                reasons.append("UNSEEDED_RANDOMNESS")
+            if re.search(r"\btime\.sleep\b", fn_src) and re.search(r"\btime\.(?:time|perf_counter|monotonic)\b", fn_src):
+                reasons.append("WALL_CLOCK_TIMING_SENSITIVITY")
+            if re.search(r"\bthreading\.Thread\b", fn_src) and "Lock" not in txt:
+                reasons.append("UNSYNCHRONIZED_THREAD_RACE")
+            if reasons:
+                static_hazards.append({
+                    "test_file": str(tf),
+                    "test_name": fn.name,
+                    "line": fn.lineno,
+                    "hazards": reasons,
+                })
+
+    # Run 3 independent executions and compare failure sets
+    run_failures: list[set[str]] = []
+    for _ in range(3):
+        probe = (
+            "import io, json, pathlib, sys, unittest\n"
+            f"files = [pathlib.Path(p) for p in {[str(p.resolve()) for p in test_files]!r}]\n"
+            f"sys.path.insert(0, {str(proj.resolve())!r})\n"
+            "bad = []\n"
+            "for tf in files:\n"
+            "    if str(tf.parent) not in sys.path:\n"
+            "        sys.path.insert(0, str(tf.parent))\n"
+            "    suite = unittest.defaultTestLoader.discover(str(tf.parent), pattern=tf.name)\n"
+            "    res = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0).run(suite)\n"
+            "    bad.extend(t.id() for t, _ in (res.failures + res.errors))\n"
+            "print(json.dumps(sorted(set(bad))))\n"
+        )
+        rc, out, _ = _run_cmd([sys.executable, "-B", "-c", probe], cwd=proj, timeout=30)
+        if rc == 0 and out.strip():
+            run_failures.append(set(json.loads(out.strip().splitlines()[-1])))
+
+    all_seen = set().union(*run_failures) if run_failures else set()
+    always_seen = set.intersection(*run_failures) if run_failures else set()
+    intermittent = sorted(all_seen - always_seen)
+
+    flaky_items = [
+        {"test": t_id, "evidence": "INTERMITTENT_OUTCOME_ACROSS_3_RUNS"}
+        for t_id in intermittent
+    ] + [
+        {"test": f"{h['test_file']}::{h['test_name']}", "line": h["line"], "evidence": ",".join(h["hazards"])}
+        for h in static_hazards
+    ]
+
+    # When the request asks to FIND a flaky test ("Find the flaky test in X") rather than asking
+    # IF a test is flaky ("tell me if it is flaky"), refuse honestly when zero flakiness exists!
+    asks_whether = bool(re.search(r"\b(?:if|whether)\b.*\bflaky\b", goal, re.IGNORECASE))
+    if not flaky_items and not asks_whether:
+        return {"verified": False, "gate": "FAIL", "reason": "NO_FLAKY_TESTS_FOUND_SUITE_IS_DETERMINISTIC"}
+
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "operation": "find_flaky_tests",
+        "is_flaky": bool(flaky_items),
+        "flaky_count": len(flaky_items),
+        "flaky_tests": flaky_items,
+        "deterministic_failures": sorted(always_seen),
+        "trials_executed": len(run_failures),
+    }
+

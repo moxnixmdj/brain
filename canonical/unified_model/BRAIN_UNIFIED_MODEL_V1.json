@@ -20770,15 +20770,17 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
-    "source_sha256": "ff8a88ee57363168b03812973da64a56a2e7ce843660f38f2b06c313ec906bbe",
+    "source_sha256": "b722f086fbca27412495d07d7c7c165135b63a258f89bd5a51c591ab9c590fe9",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
+    "build.makefile.execute.verified",
     "code.build.makefile.lint_target",
     "code.build.pyproject.edit",
     "code.ci.flaky.quarantine",
     "code.ci.workflow.configure",
     "code.polyglot.transform.verified",
+    "code.polyglot.translate.verified",
     "code.source.write.polyglot"
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
@@ -20830,6 +20832,9 @@
     "port",
     "declarations",
     "pull request",
+    "translate",
+    "transpile",
+    "make",
     "code",
     "transform_and_verify",
     "v1",
@@ -20838,7 +20843,8 @@
     "build",
     "pyproject",
     "target",
-    "configure"
+    "configure",
+    "execute"
    ],
    "verification": {
     "evidence_path": null,
@@ -21861,7 +21867,7 @@
     "source_executable": null,
     "source_module": "subprocess",
     "source_path": "canonical/runtime/bound_capabilities/git_bisect_regression.py",
-    "source_sha256": "319091c56085f670dd4214222787dc1bde1afc3ae2224dab39e428f712983baa",
+    "source_sha256": "6a7f3a9f430e85074240b37f888aeea3faca07ca34220c606defa0c5d50b12b5",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -21928,8 +21934,11 @@
    "input_names": [
     "limit",
     "message",
+    "message_source",
     "op",
     "repo_root",
+    "rev",
+    "staged",
     "target"
    ],
    "kind": "BOUND_CAPABILITY",
@@ -21943,7 +21952,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-    "source_sha256": "d7aa010514b322a3bbf65ad7c84730a3043ab1a0117ad50a3158b4749dbcede9",
+    "source_sha256": "42b1089819c66ffcacb1e4bdc0da07e56bf00c39b8a1dda6f463d1c2f719b28c",
     "source_type": "brain_bound_system_tool"
    },
    "provides": [
@@ -25622,9 +25631,11 @@
      "ast",
      "hashlib",
      "json",
+     "os",
      "pathlib",
      "re",
      "ruff",
+     "shutil",
      "subprocess",
      "sys"
     ],
@@ -27689,13 +27700,16 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_swe_transform_and_synthesize_v1.py",
-    "source_sha256": "e40e8e620fcd5e19661bce6be3716a2c2a374a86b62547a39221bf3254ccc72c",
+    "source_sha256": "8586cb836dc59b45cca6432c9d8d964a8c5fb1f4d2f8837e76d3145023001af8",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
     "git.branch.operate",
+    "python.perf.memory_leak.fixed",
     "python.refactor.dead.unused.remove",
+    "python.refactor.inline_function",
     "python.refactor.structural.module",
+    "python.refactor.unused_imports.removed",
     "python.source.format.ast_verified",
     "python.source.write.swe_transform",
     "python.swe.concurrency.parallel",
@@ -27758,6 +27772,10 @@
     "client",
     "traversal",
     "metric",
+    "unused imports",
+    "inline",
+    "memory leak",
+    "generate unit tests",
     "swe",
     "transform_and_synthesize",
     "v1",
@@ -27776,7 +27794,14 @@
     "unused",
     "remove",
     "git",
-    "operate"
+    "operate",
+    "function",
+    "imports",
+    "removed",
+    "perf",
+    "memory",
+    "leak",
+    "fixed"
    ],
    "verification": {
     "evidence_path": null,
@@ -28604,20 +28629,27 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py",
-    "source_sha256": "66966e76fd7e87234da8013be866e392a194adaa503e6872c6931d8df51c3e20",
+    "source_sha256": "4ffdc0cfd9900fbe4559b49b4ffb240ac7b4036eeeea9ce001bde58f766df904",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
     "javascript.tests.run.execution",
+    "python.tests.execution",
     "software.analysis.api_design.review",
     "software.analysis.architecture.adr_and_migration",
+    "software.analysis.class_hierarchy.c3_mro",
     "software.analysis.coverage.measured",
     "software.analysis.dead.unused.find",
+    "software.analysis.definition.lookup",
     "software.analysis.explain.root_cause",
+    "software.analysis.flaky.stability_verdict",
     "software.analysis.git.blame_and_changelog",
+    "software.analysis.import_cycles.tarjan_scc",
+    "software.analysis.importers.reverse_graph",
     "software.analysis.lint.static_triage",
     "software.analysis.mutation.score",
     "software.analysis.profile.hotspot",
+    "software.analysis.provenance.value_flow",
     "software.analysis.race_and_fuzz.inspect",
     "software.analysis.security.vulnerability_audit",
     "software.analysis.suite.runner_verdict"
@@ -28667,6 +28699,13 @@
     "log",
     "pull request",
     "trace",
+    "definition",
+    "importers",
+    "import_cycles",
+    "class_hierarchy",
+    "flaky",
+    "stability",
+    "provenance",
     "software",
     "analysis",
     "diagnose_and_architect",
@@ -28692,7 +28731,21 @@
     "score",
     "javascript",
     "tests",
-    "execution"
+    "execution",
+    "python",
+    "lookup",
+    "reverse",
+    "graph",
+    "import",
+    "cycles",
+    "tarjan",
+    "scc",
+    "class",
+    "hierarchy",
+    "c3",
+    "mro",
+    "value",
+    "flow"
    ],
    "verification": {
     "evidence_path": null,
@@ -29161,6 +29214,7 @@
      "difflib",
      "hashlib",
      "importlib",
+     "inspect",
      "json",
      "keyword",
      "os",
@@ -29197,7 +29251,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "7ddd9b7ea598ef6a41db79ff58a6904b933aaf2ebacb034ff2d4a26348d38b34",
+    "source_sha256": "83d02df7d910c7dfaba721131b20a609395f6f9d39affcc2435ef114c00e9976",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30866,10 +30920,10 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 228,
+  "knowledge_documents": 231,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6566,
-  "routing_tokens": 2341,
+  "research_index_records": 6574,
+  "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
   "source_index_modules": 1905
@@ -30877,7 +30931,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3db61ebbabef731ea13e05f2568929b6bc22f8805f0230e59427a97b6c9882fa"
+  "value": "125ea535465100cb985999ef4882adca6c1a9cfa2eac4f8975b6195c1063c96d"
  },
  "engines": [
   {
@@ -32433,7 +32487,8 @@
     "code.polyglot.transform_and_verify.v1": 471.0
    },
    "c3": {
-    "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1": 471.0
+    "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1": 314.666667,
+    "software.analysis.diagnose_and_architect.v1": 314.666667
    },
    "c8": {
     "canonical/runtime/professional_r12_c8_nonvacuity_v1.py.auto.v1": 471.0
@@ -33915,12 +33970,16 @@
     "code.polyglot.transform_and_verify.v1": 471.0
    },
    "class": {
-    "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1": 136.0,
-    "python.refactor.move_symbol.v1": 204.0,
-    "python.software.repair.route.v1": 136.0,
-    "python.software.request.semantic_behavior.compile.v1": 136.0,
-    "python.source.definition_count.v1": 204.0,
-    "python.source.symbols.index.ast": 204.0
+    "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1": 119.25,
+    "python.refactor.move_symbol.v1": 178.875,
+    "python.software.repair.route.v1": 119.25,
+    "python.software.request.semantic_behavior.compile.v1": 119.25,
+    "python.source.definition_count.v1": 178.875,
+    "python.source.symbols.index.ast": 178.875,
+    "software.analysis.diagnose_and_architect.v1": 119.25
+   },
+   "class_hierarchy": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
    },
    "classes": {
     "python.source.audit.ast": 314.666667,
@@ -34645,6 +34704,9 @@
     "engine:REPAIR_CYCLE": 236.5,
     "software.repair.choreograph.crossfile.v1": 354.75
    },
+   "cycles": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
+   },
    "data": {
     "python.source.taint_flow.v1": 706.5
    },
@@ -34725,10 +34787,11 @@
     "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1": 471.0
    },
    "definition": {
-    "python.refactor.move_function.v1": 284.4,
-    "python.source.add_function.v1": 284.4,
-    "python.source.definition_count.v1": 189.6,
-    "python.source.symbols.resolve.v1": 189.6
+    "python.refactor.move_function.v1": 237.5,
+    "python.source.add_function.v1": 237.5,
+    "python.source.definition_count.v1": 158.333333,
+    "python.source.symbols.resolve.v1": 158.333333,
+    "software.analysis.diagnose_and_architect.v1": 158.333333
    },
    "definition_count": {
     "python.source.definition_count.v1": 471.0
@@ -35212,6 +35275,9 @@
     "python.source.taint_flow.v1": 314.666667,
     "shell.command.run": 314.666667
    },
+   "execute": {
+    "code.polyglot.transform_and_verify.v1": 471.0
+   },
    "executed": {
     "python.source.dead_code.v1": 706.5
    },
@@ -35483,8 +35549,9 @@
     "software.repair.choreograph.crossfile.v1": 472.0
    },
    "fixed": {
-    "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1": 314.666667,
-    "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1": 314.666667
+    "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1": 236.5,
+    "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1": 236.5,
+    "python.swe.transform_and_synthesize.v1": 236.5
    },
    "fixture": {
     "python.tests.generate.scaffold.v1": 471.0
@@ -35493,11 +35560,13 @@
     "python.swe.transform_and_synthesize.v1": 706.5
    },
    "flaky": {
-    "code.polyglot.transform_and_verify.v1": 314.666667,
-    "python.tests.mutation_score.v1": 314.666667
+    "code.polyglot.transform_and_verify.v1": 236.5,
+    "python.tests.mutation_score.v1": 236.5,
+    "software.analysis.diagnose_and_architect.v1": 236.5
    },
    "flow": {
-    "python.source.taint_flow.v1": 706.5
+    "python.source.taint_flow.v1": 472.0,
+    "software.analysis.diagnose_and_architect.v1": 314.666667
    },
    "footprint": {
     "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1": 314.666667,
@@ -35568,20 +35637,21 @@
     "software.review.synthesis.supercomposer.v1": 314.666667
    },
    "function": {
-    "brain.module.function.invoke": 64.533333,
-    "python.fault.localize.dynamic.dataflow.v1": 96.8,
-    "python.feature.implement_function_spec.v1": 96.8,
-    "python.refactor.extract_function.v1": 96.8,
-    "python.refactor.inline_helper.v1": 96.8,
-    "python.refactor.move_function.v1": 96.8,
-    "python.refactor.move_symbol.v1": 96.8,
-    "python.software.request.semantic_behavior.compile.v1": 64.533333,
-    "python.source.add_function.v1": 96.8,
-    "python.source.add_parameter.v1": 96.8,
-    "python.source.dead_code.v1": 96.8,
-    "python.source.definition_count.v1": 96.8,
-    "python.source.symbols.index.ast": 96.8,
-    "software.repair.choreograph.crossfile.v1": 96.8
+    "brain.module.function.invoke": 60.625,
+    "python.fault.localize.dynamic.dataflow.v1": 90.9375,
+    "python.feature.implement_function_spec.v1": 90.9375,
+    "python.refactor.extract_function.v1": 90.9375,
+    "python.refactor.inline_helper.v1": 90.9375,
+    "python.refactor.move_function.v1": 90.9375,
+    "python.refactor.move_symbol.v1": 90.9375,
+    "python.software.request.semantic_behavior.compile.v1": 60.625,
+    "python.source.add_function.v1": 90.9375,
+    "python.source.add_parameter.v1": 90.9375,
+    "python.source.dead_code.v1": 90.9375,
+    "python.source.definition_count.v1": 90.9375,
+    "python.source.symbols.index.ast": 90.9375,
+    "python.swe.transform_and_synthesize.v1": 60.625,
+    "software.repair.choreograph.crossfile.v1": 90.9375
    },
    "functions": {
     "python.source.audit.ast": 314.666667,
@@ -35646,7 +35716,7 @@
    },
    "generate": {
     "image.qr.generate.qrencode": 189.6,
-    "python.swe.transform_and_synthesize.v1": 189.6,
+    "python.swe.transform_and_synthesize.v1": 284.4,
     "python.tests.generate.scaffold.v1": 189.6,
     "python.tests.synthesize.pynguin.v1": 189.6
    },
@@ -35730,8 +35800,9 @@
     "git.history.bisect_regression.v1": 706.5
    },
    "graph": {
-    "chart.raster.scene_graph.v1": 314.666667,
-    "python.source.symbols.index.ast": 314.666667
+    "chart.raster.scene_graph.v1": 236.5,
+    "python.source.symbols.index.ast": 236.5,
+    "software.analysis.diagnose_and_architect.v1": 236.5
    },
    "greater": {
     "evidence.claim_spec.bind.explicit_comparison.stdlib": 471.0
@@ -35828,6 +35899,9 @@
    },
    "helper": {
     "python.refactor.inline_helper.v1": 706.5
+   },
+   "hierarchy": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
    },
    "higher": {
     "evidence.claim_spec.bind.explicit_comparison.stdlib": 471.0
@@ -35958,16 +36032,24 @@
     "python.feature.implement_function_spec.v1": 471.0
    },
    "import": {
-    "python.refactor.move_symbol.v1": 284.4,
-    "python.refactor.rename_symbol.v1": 284.4,
-    "python.source.symbols.resolve.v1": 189.6,
-    "software.repair.choreograph.crossfile.v1": 284.4
+    "python.refactor.move_symbol.v1": 237.5,
+    "python.refactor.rename_symbol.v1": 237.5,
+    "python.source.symbols.resolve.v1": 158.333333,
+    "software.analysis.diagnose_and_architect.v1": 158.333333,
+    "software.repair.choreograph.crossfile.v1": 237.5
+   },
+   "import_cycles": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
    },
    "imported": {
     "software.repair.choreograph.crossfile.v1": 706.5
    },
+   "importers": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
+   },
    "imports": {
-    "python.source.audit.ast": 471.0
+    "python.source.audit.ast": 314.666667,
+    "python.swe.transform_and_synthesize.v1": 472.0
    },
    "improvement": {
     "engine:IMPROVEMENT_CYCLE": 471.0
@@ -36026,8 +36108,9 @@
     "software.repair.choreograph.crossfile.v1": 354.75
    },
    "inline": {
-    "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1": 314.666667,
-    "python.refactor.inline_helper.v1": 314.666667
+    "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1": 236.5,
+    "python.refactor.inline_helper.v1": 236.5,
+    "python.swe.transform_and_synthesize.v1": 236.5
    },
    "inline_helper": {
     "python.refactor.inline_helper.v1": 471.0
@@ -36291,6 +36374,9 @@
     "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1": 236.5,
     "canonical/runtime/professional_quality_leaf_binder_v1.py.auto.v1": 236.5,
     "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1": 236.5
+   },
+   "leak": {
+    "python.swe.transform_and_synthesize.v1": 706.5
    },
    "leaked": {
     "python.source.secret_scan.v1": 471.0
@@ -36811,7 +36897,8 @@
     "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1": 471.0
    },
    "lookup": {
-    "python.source.symbols.resolve.v1": 471.0
+    "python.source.symbols.resolve.v1": 314.666667,
+    "software.analysis.diagnose_and_architect.v1": 314.666667
    },
    "loop": {
     "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1": 119.25,
@@ -36844,7 +36931,8 @@
     "python.repo.pr_realize.v1": 471.0
    },
    "make": {
-    "python.software.repair.apply.verified.v1": 706.5
+    "code.polyglot.transform_and_verify.v1": 314.666667,
+    "python.software.repair.apply.verified.v1": 472.0
    },
    "makefile": {
     "code.polyglot.transform_and_verify.v1": 471.0
@@ -36932,6 +37020,9 @@
    "memoization": {
     "python.swe.transform_and_synthesize.v1": 471.0
    },
+   "memory": {
+    "python.swe.transform_and_synthesize.v1": 706.5
+   },
    "merge": {
     "python.vcs.merge_conflict.resolve.v1": 472.0,
     "software.repair.choreograph.crossfile.v1": 472.0
@@ -37013,6 +37104,9 @@
    },
    "move_symbol": {
     "python.refactor.move_symbol.v1": 471.0
+   },
+   "mro": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
    },
    "msgpack": {
     "auto.npm.msgpack-msgpack": 314.666667,
@@ -37753,9 +37847,10 @@
     "pdf.extract.text.pypdf": 2826.0
    },
    "perf": {
-    "git.history.bisect_regression.v1": 236.5,
-    "python.review.diff_perf_gate.v1": 236.5,
-    "software.review.gate.composer.v1": 236.5
+    "git.history.bisect_regression.v1": 189.6,
+    "python.review.diff_perf_gate.v1": 189.6,
+    "python.swe.transform_and_synthesize.v1": 189.6,
+    "software.review.gate.composer.v1": 189.6
    },
    "performance": {
     "python.review.diff_perf_gate.v1": 314.666667,
@@ -38227,14 +38322,15 @@
     "software.repair.loop.cegis_hypothesis.v1": 314.666667
    },
    "provenance": {
-    "decision.synthesis.typed.stdlib": 106.222222,
-    "pypi.provenance.audit_live_artifact": 106.222222,
-    "python.fault.provenance.fusion.v1": 106.222222,
-    "python.fault.provenance.interprocedural.value.v1": 106.222222,
-    "python.provenance.coupling.supercomposer.v1": 106.222222,
-    "python.software.repair.guided.provenance.coupled.v1": 106.222222,
-    "source.authority.identity.ror": 106.222222,
-    "source.evidence.extract.objective_grounded.stdlib": 106.222222
+    "decision.synthesis.typed.stdlib": 95.8,
+    "pypi.provenance.audit_live_artifact": 95.8,
+    "python.fault.provenance.fusion.v1": 95.8,
+    "python.fault.provenance.interprocedural.value.v1": 95.8,
+    "python.provenance.coupling.supercomposer.v1": 95.8,
+    "python.software.repair.guided.provenance.coupled.v1": 95.8,
+    "software.analysis.diagnose_and_architect.v1": 95.8,
+    "source.authority.identity.ror": 95.8,
+    "source.evidence.extract.objective_grounded.stdlib": 95.8
    },
    "public": {
     "canonical/runtime/cursorbench_public_score_nonidentifiability_v1.py.auto.v1": 236.5,
@@ -38583,74 +38679,75 @@
     "python.repo.diff_apply_full_testgate.v1": 471.0
    },
    "python": {
-    "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1": 15.594203,
-    "code.multilanguage.parse.tree_sitter.v1": 15.594203,
-    "python.contract.check.crosshair.v1": 15.594203,
-    "python.contract.issue_orchestration.fusion.v1": 15.594203,
-    "python.evidence.contract.supercomposer.v1": 15.594203,
-    "python.fault.localize.dynamic.dataflow.v1": 15.594203,
-    "python.fault.patch.supercomposer.v1": 15.594203,
-    "python.fault.provenance.fusion.v1": 15.594203,
-    "python.fault.provenance.interprocedural.value.v1": 15.594203,
-    "python.feature.implement_function_spec.v1": 15.594203,
-    "python.issue.natural_language.parse_edit_intent.v1": 15.594203,
-    "python.orchestration.symbol.supercomposer.v1": 15.594203,
-    "python.patch.review.supercomposer.v1": 15.594203,
-    "python.patch.search.test_guided.ast.v1": 15.594203,
-    "python.pipeline.allowlist_gate.v1": 15.594203,
-    "python.pr.land.composer.v1": 15.594203,
-    "python.provenance.coupling.supercomposer.v1": 15.594203,
-    "python.refactor.add_parameter.v1": 15.594203,
-    "python.refactor.extract_function.v1": 15.594203,
-    "python.refactor.inline_helper.v1": 15.594203,
-    "python.refactor.move_function.v1": 15.594203,
-    "python.refactor.move_symbol.v1": 15.594203,
-    "python.refactor.rename_parameter.v1": 15.594203,
-    "python.refactor.rename_symbol.v1": 15.594203,
-    "python.refactor.test_scaffold.fusion.v1": 15.594203,
-    "python.repo.diff_apply_full_testgate.v1": 15.594203,
-    "python.repo.pr_realize.v1": 15.594203,
-    "python.repository.acceptance.measure.v1": 15.594203,
-    "python.review.diff_coverage_gate.v1": 15.594203,
-    "python.review.diff_mutation_gate.v1": 15.594203,
-    "python.review.diff_perf_gate.v1": 15.594203,
-    "python.review.diff_security_gate.v1": 15.594203,
-    "python.review.diff_static_triage.v1": 15.594203,
-    "python.review.diff_type_gate.v1": 15.594203,
-    "python.software.issue_to_pr.orchestrate.v1": 15.594203,
-    "python.software.repair.apply.verified.v1": 15.594203,
-    "python.software.repair.guided.provenance.coupled.v1": 15.594203,
-    "python.software.repair.loop.coupled.ast.v1": 15.594203,
-    "python.software.repair.loop.strict_progress.ast.v1": 15.594203,
-    "python.software.repair.loop.test_guided.ast.v1": 15.594203,
-    "python.software.repair.measured_acceptance.v1": 15.594203,
-    "python.software.repair.route.v1": 15.594203,
-    "python.software.repair.semantic_acceptance.v1": 15.594203,
-    "python.software.request.semantic_behavior.compile.v1": 15.594203,
-    "python.source.add_function.v1": 15.594203,
-    "python.source.add_parameter.v1": 15.594203,
-    "python.source.audit.ast": 15.594203,
-    "python.source.change_impact.testselect.v1": 15.594203,
-    "python.source.complexity.v1": 15.594203,
-    "python.source.crossfile_edit.choreograph.v1": 15.594203,
-    "python.source.dead_code.v1": 15.594203,
-    "python.source.definition_count.v1": 15.594203,
-    "python.source.secret_scan.v1": 15.594203,
-    "python.source.symbols.index.ast": 15.594203,
-    "python.source.symbols.resolve.v1": 15.594203,
-    "python.source.taint_flow.v1": 15.594203,
-    "python.source.test_adequacy.v1": 15.594203,
-    "python.swe.transform_and_synthesize.v1": 15.594203,
-    "python.symbol.resolve.standalone.v1": 15.594203,
-    "python.task.acceptance.measured.objective.v1": 15.594203,
-    "python.test.pipeline.verifier.v1": 15.594203,
-    "python.tests.advance.mutation_kill.v1": 15.594203,
-    "python.tests.audit.unittest": 15.594203,
-    "python.tests.generate.scaffold.v1": 15.594203,
-    "python.tests.mutation_score.v1": 15.594203,
-    "python.tests.synthesize.pynguin.v1": 15.594203,
-    "python.vcs.merge_conflict.resolve.v1": 15.594203,
-    "software.hardcore.kernel.orchestrate.v1": 15.594203
+    "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1": 15.4,
+    "code.multilanguage.parse.tree_sitter.v1": 15.4,
+    "python.contract.check.crosshair.v1": 15.4,
+    "python.contract.issue_orchestration.fusion.v1": 15.4,
+    "python.evidence.contract.supercomposer.v1": 15.4,
+    "python.fault.localize.dynamic.dataflow.v1": 15.4,
+    "python.fault.patch.supercomposer.v1": 15.4,
+    "python.fault.provenance.fusion.v1": 15.4,
+    "python.fault.provenance.interprocedural.value.v1": 15.4,
+    "python.feature.implement_function_spec.v1": 15.4,
+    "python.issue.natural_language.parse_edit_intent.v1": 15.4,
+    "python.orchestration.symbol.supercomposer.v1": 15.4,
+    "python.patch.review.supercomposer.v1": 15.4,
+    "python.patch.search.test_guided.ast.v1": 15.4,
+    "python.pipeline.allowlist_gate.v1": 15.4,
+    "python.pr.land.composer.v1": 15.4,
+    "python.provenance.coupling.supercomposer.v1": 15.4,
+    "python.refactor.add_parameter.v1": 15.4,
+    "python.refactor.extract_function.v1": 15.4,
+    "python.refactor.inline_helper.v1": 15.4,
+    "python.refactor.move_function.v1": 15.4,
+    "python.refactor.move_symbol.v1": 15.4,
+    "python.refactor.rename_parameter.v1": 15.4,
+    "python.refactor.rename_symbol.v1": 15.4,
+    "python.refactor.test_scaffold.fusion.v1": 15.4,
+    "python.repo.diff_apply_full_testgate.v1": 15.4,
+    "python.repo.pr_realize.v1": 15.4,
+    "python.repository.acceptance.measure.v1": 15.4,
+    "python.review.diff_coverage_gate.v1": 15.4,
+    "python.review.diff_mutation_gate.v1": 15.4,
+    "python.review.diff_perf_gate.v1": 15.4,
+    "python.review.diff_security_gate.v1": 15.4,
+    "python.review.diff_static_triage.v1": 15.4,
+    "python.review.diff_type_gate.v1": 15.4,
+    "python.software.issue_to_pr.orchestrate.v1": 15.4,
+    "python.software.repair.apply.verified.v1": 15.4,
+    "python.software.repair.guided.provenance.coupled.v1": 15.4,
+    "python.software.repair.loop.coupled.ast.v1": 15.4,
+    "python.software.repair.loop.strict_progress.ast.v1": 15.4,
+    "python.software.repair.loop.test_guided.ast.v1": 15.4,
+    "python.software.repair.measured_acceptance.v1": 15.4,
+    "python.software.repair.route.v1": 15.4,
+    "python.software.repair.semantic_acceptance.v1": 15.4,
+    "python.software.request.semantic_behavior.compile.v1": 15.4,
+    "python.source.add_function.v1": 15.4,
+    "python.source.add_parameter.v1": 15.4,
+    "python.source.audit.ast": 15.4,
+    "python.source.change_impact.testselect.v1": 15.4,
+    "python.source.complexity.v1": 15.4,
+    "python.source.crossfile_edit.choreograph.v1": 15.4,
+    "python.source.dead_code.v1": 15.4,
+    "python.source.definition_count.v1": 15.4,
+    "python.source.secret_scan.v1": 15.4,
+    "python.source.symbols.index.ast": 15.4,
+    "python.source.symbols.resolve.v1": 15.4,
+    "python.source.taint_flow.v1": 15.4,
+    "python.source.test_adequacy.v1": 15.4,
+    "python.swe.transform_and_synthesize.v1": 15.4,
+    "python.symbol.resolve.standalone.v1": 15.4,
+    "python.task.acceptance.measured.objective.v1": 15.4,
+    "python.test.pipeline.verifier.v1": 15.4,
+    "python.tests.advance.mutation_kill.v1": 15.4,
+    "python.tests.audit.unittest": 15.4,
+    "python.tests.generate.scaffold.v1": 15.4,
+    "python.tests.mutation_score.v1": 15.4,
+    "python.tests.synthesize.pynguin.v1": 15.4,
+    "python.vcs.merge_conflict.resolve.v1": 15.4,
+    "software.analysis.diagnose_and_architect.v1": 15.4,
+    "software.hardcore.kernel.orchestrate.v1": 15.4
    },
    "python.contract.check.crosshair.v1": {
     "python.contract.check.crosshair.v1": 2826.0
@@ -39234,6 +39331,9 @@
     "shell.command.run": 236.5,
     "software.repair.choreograph.crossfile.v1": 236.5
    },
+   "removed": {
+    "python.swe.transform_and_synthesize.v1": 471.0
+   },
    "rename": {
     "python.issue.natural_language.parse_edit_intent.v1": 136.0,
     "python.refactor.rename_parameter.v1": 136.0,
@@ -39375,6 +39475,9 @@
    },
    "reused": {
     "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": 471.0
+   },
+   "reverse": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
    },
    "revert": {
     "python.swe.transform_and_synthesize.v1": 471.0
@@ -39907,6 +40010,9 @@
    },
    "scan": {
     "python.source.secret_scan.v1": 471.0
+   },
+   "scc": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
    },
    "scene": {
     "chart.raster.scene_graph.v1": 471.0
@@ -40486,8 +40592,9 @@
     "sqlite.table.verify_against_json_records": 2826.0
    },
    "stability": {
-    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py.auto.v1": 314.666667,
-    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1": 314.666667
+    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py.auto.v1": 236.5,
+    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1": 236.5,
+    "software.analysis.diagnose_and_architect.v1": 236.5
    },
    "stable": {
     "web.release.verify.independent_http": 471.0
@@ -40824,6 +40931,9 @@
    "target_role_escape_frontier_v1.py.auto.v1": {
     "canonical/runtime/target_role_escape_frontier_v1.py.auto.v1": 706.5
    },
+   "tarjan": {
+    "software.analysis.diagnose_and_architect.v1": 471.0
+   },
    "task": {
     "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1": 54.111111,
     "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1": 54.111111,
@@ -41058,7 +41168,7 @@
     "python.software.repair.loop.test_guided.ast.v1": 74.153846,
     "python.source.change_impact.testselect.v1": 74.153846,
     "python.source.test_adequacy.v1": 111.230769,
-    "python.swe.transform_and_synthesize.v1": 74.153846,
+    "python.swe.transform_and_synthesize.v1": 111.230769,
     "python.tests.advance.mutation_kill.v1": 74.153846,
     "python.tests.audit.unittest": 74.153846,
     "python.tests.generate.scaffold.v1": 74.153846,
@@ -41223,9 +41333,15 @@
    "transformation": {
     "python.refactor.test_scaffold.fusion.v1": 471.0
    },
+   "translate": {
+    "code.polyglot.transform_and_verify.v1": 471.0
+   },
    "transmutation": {
     "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1": 314.666667,
     "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1": 314.666667
+   },
+   "transpile": {
+    "code.polyglot.transform_and_verify.v1": 471.0
    },
    "transport": {
     "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py.auto.v1": 471.0
@@ -41411,7 +41527,7 @@
    },
    "unused": {
     "python.source.dead_code.v1": 189.6,
-    "python.swe.transform_and_synthesize.v1": 189.6,
+    "python.swe.transform_and_synthesize.v1": 284.4,
     "software.analysis.diagnose_and_architect.v1": 189.6,
     "software.repair.choreograph.crossfile.v1": 284.4
    },
@@ -42019,11 +42135,12 @@
     "canonical/runtime/v9_route_bundle_triage_verifier_v1.py.auto.v1": 706.5
    },
    "value": {
-    "chart.raster.curve_value_query.v1": 158.333333,
-    "docx.document.create_from_json_record": 158.333333,
-    "python.fault.provenance.interprocedural.value.v1": 158.333333,
-    "python.refactor.add_parameter.v1": 237.5,
-    "python.source.add_parameter.v1": 237.5
+    "chart.raster.curve_value_query.v1": 136.0,
+    "docx.document.create_from_json_record": 136.0,
+    "python.fault.provenance.interprocedural.value.v1": 136.0,
+    "python.refactor.add_parameter.v1": 204.0,
+    "python.source.add_parameter.v1": 204.0,
+    "software.analysis.diagnose_and_architect.v1": 136.0
    },
    "vcs": {
     "python.vcs.merge_conflict.resolve.v1": 471.0
@@ -43095,76 +43212,79 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 25893,
+   "bytes": 30584,
    "headings": [
     "Every hardcore software-engineering problem, measured",
     "§0 The answer in one paragraph",
     "§1 The measured surface",
-    "§2 The eleven hardcore capability classes that refuse",
-    "2.1 Polyglot editing — the largest single absence",
-    "2.2 The classes with no row at all",
-    "2.3 The class where the row claims what it does not do",
+    "§2 The eleven hardcore capability classes",
+    "2.1 Polyglot — the class where the refusal is the most specific",
+    "2.2 The refusal convention is uniform, and that is why §3 can be trusted",
     "§3 The plumbing defects, with counts",
-    "3.1 The magnets: five rows absorb most of the traffic",
-    "§4 The substrate: restorable in one command, still missing real tools",
+    "3.0 What each refusal actually said",
+    "3.1 The magnets: rows chosen for many sentences",
+    "§4 The substrate",
     "§5 Structural gaps the census cannot see",
     "§6 The order to fix it in",
+    "§7 Instant learning, measured rather than described",
+    "7.1 Why this cannot be the answer to the remaining problems",
+    "7.2 What instant learning is genuinely worth",
     "Appendix: all 49 sentences, classified",
     "What this document is not"
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
-   "sha256": "054c90be50453acd5d807e02d6184f0db601b808d4cfc50f7667dda1ae94e74b",
-   "summary": "Measured 2026-10-31 on main `b37f118` with the substrate restored (`scripts/restore_substrate_v1.py`). Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md` records one round of repairs; this document is the whole problem list, ordered so that the next hour of work buys the most capability. Nothing here is a wish — every number is a measur",
+   "sha256": "9a347f711f96e0e5534f01cca5fa0348c6528fa0e1658b04f5f13ec50c936c1f",
+   "summary": "Measured 2026-11-01 on the tree of `29ada61` (branched from main `29ada61`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
    "terms": {
-    "10": 13,
-    "23": 11,
-    "49": 13,
-    "absent": 9,
-    "add": 19,
-    "answer": 8,
-    "build": 13,
+    "11": 8,
+    "42": 8,
+    "49": 9,
+    "add": 20,
+    "answer": 10,
     "calc.py": 12,
-    "capability": 18,
+    "cannot": 10,
+    "capability": 19,
+    "capability_refused": 12,
     "census": 11,
-    "ci": 12,
-    "classes": 8,
-    "design": 11,
-    "every": 11,
-    "function": 19,
-    "gap": 9,
-    "gate": 8,
+    "ci": 9,
+    "class": 14,
+    "code.polyglot.transform_and_verify.v1": 17,
+    "design": 10,
+    "each": 8,
+    "every": 17,
+    "fix": 10,
+    "fixture": 9,
+    "function": 21,
     "git": 11,
-    "live_controller_execution": 13,
-    "machine": 10,
-    "matrix": 8,
-    "measured": 10,
-    "no": 38,
-    "none": 16,
-    "not": 30,
-    "nothing": 8,
-    "one": 14,
-    "package": 9,
-    "perf": 8,
+    "machine": 9,
+    "measured": 12,
+    "no": 30,
+    "none": 11,
+    "not": 25,
+    "one": 18,
+    "package": 10,
     "pkg": 29,
-    "polyglot": 10,
+    "polyglot": 17,
+    "python.swe.transform_and_synthesize.v1": 14,
     "real": 15,
-    "refusal": 9,
-    "review": 13,
-    "route_admission_rejected": 13,
-    "row": 38,
-    "rows": 17,
-    "run": 10,
-    "sentence": 14,
-    "sentences": 10,
-    "so": 14,
-    "software.repair.choreograph.crossfile.v1": 10,
-    "stated_answer_not_provided": 10,
-    "stated_swe_effect_unserved": 12,
-    "substrate": 14,
-    "test": 9,
-    "tests": 15,
-    "x1": 9
+    "refactor": 9,
+    "refusal": 15,
+    "request": 9,
+    "review": 10,
+    "row": 21,
+    "rows": 16,
+    "run": 11,
+    "same": 9,
+    "selection": 10,
+    "sentence": 18,
+    "sentences": 17,
+    "served": 56,
+    "so": 16,
+    "software.analysis.diagnose_and_architect.v1": 12,
+    "substrate": 9,
+    "test": 12,
+    "tests": 16
    },
    "title": "Every hardcore software-engineering problem, measured",
    "title_terms": [
@@ -43345,6 +43465,186 @@
     "measured",
     "problems",
     "software-engineering"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 19005,
+   "headings": [
+    "Every hardcore software-engineering problem, measured — 2026-11-01",
+    "§0 The answer in one paragraph",
+    "§1 The boards, as they stand today",
+    "§2 What actually works (so the fixes below are aimed correctly)",
+    "§3 The problems, ranked",
+    "P1 — The substrate is empty, and the machine measures a smaller brain than it has",
+    "P2 — A served answer can be false, and \"exact semantic acceptance\" certifies it",
+    "P3 — A refusal is reported as a controller crash",
+    "P4 — Three slot shapes cannot be bound, so the sentence dies before any row runs",
+    "P5 — \"Nothing to do\" is not an answer the door can give",
+    "P6 — Whole capability classes have no row",
+    "P7 — The served count is not a correctness count, and the reach is degenerate",
+    "P8 — Measurement debt",
+    "P9 — Deadlines and cost discipline",
+    "P10 — Two registries",
+    "P11 — Write authority on an unstated repository",
+    "§4 Fix order, with the delta each one is expected to buy",
+    "§4b Merged 2026-11-01 (this round)",
+    "§5 What this branch already changes (unmerged)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md",
+   "sha256": "8ba2d55923cddebb63776c2e1c88c9db7df0093aecf76865448ed84081e12970",
+   "summary": "Measured on **`origin/main` = `6aa5dab`** (fetched this session; the branch `arena/3918bb60-brain` is based on it) inside a clean worktree, with the repository's own instruments:",
+   "terms": {
+    "10": 8,
+    "11": 8,
+    "12": 9,
+    "13": 8,
+    "18": 13,
+    "2026-11-01": 8,
+    "35": 8,
+    "43": 6,
+    "absent": 8,
+    "add": 11,
+    "answer": 12,
+    "audit": 8,
+    "bare": 9,
+    "branch": 10,
+    "cannot": 7,
+    "canonical": 7,
+    "capability": 8,
+    "census": 29,
+    "ci": 7,
+    "commit": 8,
+    "dependency": 10,
+    "door": 7,
+    "every": 8,
+    "false": 15,
+    "fixed": 8,
+    "image": 9,
+    "matrix": 16,
+    "measured": 14,
+    "no": 18,
+    "not": 21,
+    "nothing": 8,
+    "one": 15,
+    "oracle": 7,
+    "own": 7,
+    "pass": 14,
+    "real": 21,
+    "refusal": 8,
+    "refusals": 10,
+    "requests": 7,
+    "rows": 17,
+    "run": 7,
+    "sentences": 8,
+    "served": 21,
+    "so": 9,
+    "test": 9,
+    "three": 7,
+    "two": 14,
+    "version": 8
+   },
+   "title": "Every hardcore software-engineering problem, measured — 2026-11-01",
+   "title_terms": [
+    "2026-11-01",
+    "every",
+    "hardcore",
+    "measured",
+    "problem",
+    "software-engineering"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 45877,
+   "headings": [
+    "The complete problem inventory — hardcore software engineering",
+    "0. The scoreboard",
+    "1. The eleven axes, sentence by sentence",
+    "1.1 All 49 sentences",
+    "2. The 13 refusals, and what each one really is",
+    "2.1 What is already written behind those refusals — measured, not inferred",
+    "3. The capability matrix: 44 of 54 registrations (53 distinct cases)",
+    "4. The six defect classes behind all 23 refusals",
+    "D1 — Declaration blindness (≈8 cases). The biggest problem in the machine.",
+    "D2 — A dropped stated argument (1 case, and it is a **false pass**).",
+    "D3 — Silent verification degradation (3 adapters).",
+    "D4 — A row exists and the sentence never reaches it (6 cases today, 7 before #6525).",
+    "D5 — The fixture cannot decide the sentence (5 cases).",
+    "D6 — The stated end state already holds and the machine refuses instead of saying so (2–6 cases).",
+    "5. The substrate: one command, and it is measured",
+    "6. Speed",
+    "7. Verification debt",
+    "8. What 'the most advanced software engineer' still requires, axis by axis",
+    "9. The queue, ordered by cases gained per hour of work",
+    "10. Three things that are true and uncomfortable",
+    "Appendix A — the exact commands",
+    "Appendix B — the ten matrix refusals, verbatim (after #6525)",
+    "Appendix C — how every number in this document was produced"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_ALL_PROBLEMS_20261101_V4.md",
+   "sha256": "c2528c7d969ec71931db3103714a86849e9778c50da1bac451df00ebdd661b29",
+   "summary": "**Measured 2026-11-01 on `f9134956`** (origin/main `05762527` plus #6525, re-measured after the merge). Every number below comes from a run in this checkout, not from a plan. Re-measure with the commands in Appendix A. The revision rule for this document: a number that a later measurement contradicts is replaced, and the measurement it replaced is kept beside it whenever the contradiction itself w",
+   "terms": {
+    "45": 12,
+    "6525": 22,
+    "add": 27,
+    "all": 15,
+    "already": 44,
+    "astra_runtime": 53,
+    "cannot": 16,
+    "canonical": 57,
+    "capability": 13,
+    "capability_refused": 18,
+    "cases": 14,
+    "census": 15,
+    "code.polyglot.transform_and_verify.v1": 16,
+    "declaration": 19,
+    "design": 13,
+    "diff": 14,
+    "door": 15,
+    "every": 15,
+    "file": 14,
+    "fix": 16,
+    "fixture": 34,
+    "function": 20,
+    "git": 16,
+    "head": 16,
+    "implemented": 15,
+    "machine": 15,
+    "matrix": 18,
+    "measured": 16,
+    "no": 55,
+    "not": 45,
+    "nothing": 14,
+    "now": 13,
+    "one": 36,
+    "pass": 14,
+    "pkg": 41,
+    "real": 21,
+    "repository": 18,
+    "review": 13,
+    "row": 32,
+    "rows": 17,
+    "same": 18,
+    "sentence": 25,
+    "so": 26,
+    "swe_advanced_probe": 46,
+    "test": 23,
+    "tests": 20,
+    "tmp": 56,
+    "two": 20
+   },
+   "title": "The complete problem inventory — hardcore software engineering",
+   "title_terms": [
+    "complete",
+    "engineering",
+    "hardcore",
+    "inventory",
+    "problem",
+    "software"
    ]
   },
   {
@@ -44006,6 +44306,90 @@
     "problem",
     "software",
     "v4"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 17562,
+   "headings": [
+    "Every hardcore software-engineering problem, measured — 2026-11-01",
+    "§0 The answer in one paragraph",
+    "§1 The measured surface",
+    "§2 The problems, ranked",
+    "P1 — A PASS hands over nothing (reach: every question, 33 of 34 census, 37 of 42 matrix)",
+    "P2 — A question answered by silence is certified (reach: 8 census sentences)",
+    "P3 — Rows under-declare their own result (reach: every projection, present and future)",
+    "P4 — Eleven absences, and four refusals that are correct",
+    "P5 — `FAIL__LIVE_CONTROLLER_EXECUTION` hides the row's own reason (reach: 7 census, 3 matrix)",
+    "P6 — \"Make sure it compiles\" without a compiler",
+    "P7 — One effect's proof lives outside the repository",
+    "P8 — Substrate: the verification power is Python-only",
+    "§3 Structural gaps neither instrument can see",
+    "§4 The order to fix it in",
+    "What this document is not"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEMS_20261101_V1.md",
+   "sha256": "8dfa89ed0685f6a80dde025e92a0834a483e48e52dc07f9c9c6acfe731bd8bbb",
+   "summary": "Measured today on `main` `34124aa` (PRs #6498 and #6504 merged), substrate restored (`python3 scripts/restore_substrate_v1.py` → `SUBSTRATE_READY`, 10/10 modules, parser 0.20.4 match), by `execution_guard/swe_capability_matrix_v1.py`, `execution_guard/swe_advanced_probe_v1.py`, and two extra passes written for this document that re-run the same fixtures and record what the census does not: **wheth",
+   "terms": {
+    "10": 10,
+    "34": 7,
+    "42": 7,
+    "49": 8,
+    "absence": 6,
+    "absent": 7,
+    "add": 9,
+    "already": 12,
+    "answer": 19,
+    "cause": 6,
+    "census": 14,
+    "compiler": 6,
+    "correct": 7,
+    "document": 7,
+    "door": 6,
+    "every": 8,
+    "file": 8,
+    "fix": 9,
+    "four": 6,
+    "function": 7,
+    "machine": 9,
+    "matrix": 12,
+    "measured": 9,
+    "ms": 10,
+    "no": 25,
+    "not": 22,
+    "nothing": 12,
+    "null": 7,
+    "one": 17,
+    "only": 7,
+    "output_path": 6,
+    "pass": 11,
+    "polyglot_refused": 6,
+    "question": 8,
+    "ranked": 6,
+    "real": 13,
+    "refusal": 9,
+    "refusals": 6,
+    "reports": 6,
+    "repository": 6,
+    "right": 7,
+    "row": 23,
+    "rows": 8,
+    "run": 7,
+    "same": 12,
+    "sentence": 6,
+    "sentences": 11,
+    "served": 6
+   },
+   "title": "Every hardcore software-engineering problem, measured — 2026-11-01",
+   "title_terms": [
+    "2026-11-01",
+    "every",
+    "hardcore",
+    "measured",
+    "problem",
+    "software-engineering"
    ]
   },
   {
@@ -60307,67 +60691,68 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 7793,
+   "bytes": 10186,
    "headings": [
     "SWE transformation and retained-plan reuse: bounded implementation batch",
     "Implemented",
-    "Measurements",
+    "Measurements before current-main integration",
     "Evidence and governance",
     "Boundaries and remaining plan",
-    "Reproduction"
+    "Reproduction",
+    "Integrated current-main qualification"
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.md",
-   "sha256": "a02b6ee0c2456e2c8cceca5f48ccd4db514d9f0d3657afa4ed49d1adaa5b4a56",
+   "sha256": "76569ac6e660205fb46a4bb2dd9eeef436b4ca189b40302b06b102c8031c4c71",
    "summary": "Date: 2026-11-01. Base: `05762527e13e2d3345032f9b365df17b661c781f`. Authority: NONE. These are agent-produced sandbox measurements, not independent capability receipts, terminal credit, or evidence of universal mastery.",
    "terms": {
-    "17": 3,
-    "23": 3,
-    "actual": 5,
-    "advanced": 3,
-    "after": 3,
-    "against": 4,
+    "15": 4,
+    "17": 6,
+    "23": 6,
+    "actual": 6,
+    "against": 5,
     "arbitrary": 4,
-    "archive": 5,
-    "base": 3,
-    "baseline": 3,
-    "before": 4,
+    "archive": 7,
+    "baseline": 4,
+    "before": 6,
     "bounded": 5,
-    "broader": 3,
-    "canonical": 3,
-    "census": 4,
-    "changes": 4,
-    "checks": 4,
-    "child": 4,
+    "census": 7,
+    "changes": 6,
+    "checks": 5,
+    "child": 7,
     "compiler": 4,
-    "edits": 3,
-    "environment": 3,
-    "evidence": 7,
+    "edits": 4,
+    "evidence": 8,
     "existing": 6,
-    "failed": 7,
-    "failures": 3,
-    "including": 3,
-    "learning": 7,
+    "failed": 9,
+    "failures": 4,
+    "functions": 4,
+    "integrated": 4,
+    "integration": 5,
+    "learning": 8,
+    "measurements": 4,
     "model": 4,
-    "no": 9,
-    "not": 18,
-    "only": 3,
-    "passed": 5,
-    "proof": 3,
-    "public": 3,
-    "refused": 3,
-    "restart": 3,
-    "reuse": 3,
-    "rows": 3,
-    "run": 7,
-    "separate": 4,
-    "served": 3,
-    "six": 4,
+    "no": 13,
+    "not": 25,
+    "only": 4,
+    "passed": 10,
+    "qualification": 5,
+    "refused": 5,
+    "remain": 4,
+    "remains": 4,
+    "restart": 4,
+    "reuse": 4,
+    "rows": 4,
+    "run": 8,
+    "separate": 5,
+    "served": 4,
+    "six": 6,
+    "skill": 4,
     "source": 4,
-    "split": 3,
+    "split": 4,
+    "subtests": 4,
     "test": 4,
-    "tests": 10,
-    "transformation": 3,
+    "tests": 11,
     "were": 4
    },
    "title": "SWE transformation and retained-plan reuse: bounded implementation batch",
@@ -60408,10 +60793,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1022,
+  "included_source_count": 1025,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "75fa82b36ddbb2e4d790f6ca949c96e08f40910e4572624e7f4da938b9bd9201"
+  "source_tree_digest": "0ff7fef955c7303f14f9412ddb7f242be57052ae91606e1d25e9df1c2482a78d"
  },
  "research_index": [
   {
@@ -176502,7 +176887,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
    "schema": "SWE_TRANSFORM_REUSE_BATCH_MEASUREMENT_V1",
-   "sha256": "b47faf05b4cf31bf7bc6aaa6581268fbe98aaca536fff95510cc2ed90bad6126",
+   "sha256": "0d7219cd62e8f7d1ce1512acaa79ef4d0861fb099d52adfb79d7d4c41854f597",
    "status": "",
    "terms": {
     "20261101": 1,
@@ -204550,6 +204935,51 @@
    }
   },
   {
+   "action_id": "A_PASS_HANDS_OVER_WHAT_THE_ROW_FOUND_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_PASS_HANDS_OVER_WHAT_THE_ROW_FOUND_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_PASS_HANDS_OVER_WHAT_THE_ROW_FOUND_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "65424d17547299b23537acbb632a4b8ac4668da8b6b41b27bbffc53a62663c1b",
+   "status": "",
+   "terms": {
+    "2026-11-01": 1,
+    "20261101": 1,
+    "34": 3,
+    "34124aa": 1,
+    "42": 3,
+    "49": 2,
+    "49-sentence": 1,
+    "54": 2,
+    "54-case": 1,
+    "77": 1,
+    "a_pass_hands_over_what_the_row_found_v1_20261101_v1": 1,
+    "adr_markdown": 1,
+    "advanced": 1,
+    "already": 1,
+    "answer": 4,
+    "answer_shape_v1.asked": 1,
+    "because": 1,
+    "become": 1,
+    "caller": 2,
+    "capability": 1,
+    "census": 2,
+    "delivered": 2,
+    "every": 2,
+    "findings": 2,
+    "hands": 2,
+    "matrix": 2,
+    "none": 2,
+    "nothing": 2,
+    "one": 3,
+    "pass": 3,
+    "row": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_PASS_THAT_DID_NOT_SERVE_THE_SENTENCE_IS_NOT_A_PASS_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -205359,6 +205789,51 @@
     "substitute": 4,
     "v1": 2,
     "whether": 2
+   }
+  },
+  {
+   "action_id": "A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b8e8e16c4024e406cd7c1c6743717e34df077045809fbdd8eca85661a77d4f39",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_refusal_key_may_carry_no_detail_and_learning_is_measured_v1": 1,
+    "a_refusal_key_may_carry_no_detail_and_learning_is_measured_v1_20261101_v1": 1,
+    "about": 1,
+    "actual": 1,
+    "answered": 1,
+    "because": 1,
+    "carry": 1,
+    "census": 1,
+    "checked": 1,
+    "claim": 1,
+    "colon": 1,
+    "crash": 1,
+    "detail": 1,
+    "every": 1,
+    "everything": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "indistinguishable": 1,
+    "key": 2,
+    "learner": 2,
+    "learning": 3,
+    "may": 1,
+    "measured": 3,
+    "names": 1,
+    "no": 2,
+    "not": 1,
+    "nothing": 1,
+    "one-shot": 2,
+    "reach": 2,
+    "refusal": 3,
+    "tree": 2,
+    "v1": 2
    }
   },
   {
@@ -206579,6 +207054,51 @@
    }
   },
   {
+   "action_id": "A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f4eb165193b0d7ab9148a46ce6c6c35a29ed4b61f09d8d721a3a3529245e8104",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_refusal_names_the_reason_inside_it_v1": 1,
+    "a_stated_revision_is_the_revision_that_is_read_v1_20261101_v1": 1,
+    "about": 3,
+    "answer": 1,
+    "answered": 2,
+    "ask": 1,
+    "binding": 1,
+    "cannot": 1,
+    "certified": 1,
+    "change": 1,
+    "commit": 1,
+    "confused": 1,
+    "declared_input_derivation_v1": 1,
+    "declares": 1,
+    "diff": 1,
+    "different": 1,
+    "empty": 2,
+    "even": 1,
+    "false": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "git": 2,
+    "had": 1,
+    "head": 1,
+    "hunk": 1,
+    "no": 3,
+    "question": 2,
+    "read": 2,
+    "revision": 7,
+    "sentence": 2,
+    "so": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -206646,6 +207166,51 @@
     "token": 3,
     "true": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2becf98c58049b741aec63ee38a0954ed38bc6b1584569a2b7c808495bc7022d",
+   "status": "",
+   "terms": {
+    "11": 2,
+    "18": 1,
+    "18-sentence": 1,
+    "20261101": 1,
+    "204": 1,
+    "38": 1,
+    "44": 1,
+    "49-sentence": 1,
+    "54-case": 1,
+    "a_the_inventory_is_the_board_at_the_end_of_the_round_20261101_v1": 1,
+    "advanced": 1,
+    "after": 1,
+    "been": 1,
+    "board": 2,
+    "bought": 1,
+    "carries": 1,
+    "census": 1,
+    "changes": 1,
+    "claim": 1,
+    "criterion": 1,
+    "damaged": 1,
+    "delta": 1,
+    "describes": 1,
+    "document": 4,
+    "each": 2,
+    "had": 2,
+    "inventory": 2,
+    "measured": 3,
+    "no": 2,
+    "now": 2,
+    "superseded": 2,
+    "tree": 2
    }
   },
   {
@@ -208259,6 +208824,51 @@
    }
   },
   {
+   "action_id": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "76c7749d90ee66d88f38cf0d1d6044b917a4734f01ce60a2f4cdef9bc455b700",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "anything": 1,
+    "chosen": 1,
+    "claims": 1,
+    "dashes": 1,
+    "defect": 1,
+    "every": 2,
+    "every_refusal_has_a_meaning_and_a_fix_v1": 1,
+    "every_refusal_has_a_meaning_and_a_fix_v1_20261101_v1": 1,
+    "exactly": 1,
+    "fix": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 1,
+    "hand": 1,
+    "hour": 1,
+    "inventory": 2,
+    "list": 1,
+    "makes": 1,
+    "meaning": 2,
+    "names": 1,
+    "next": 1,
+    "place": 1,
+    "published": 1,
+    "queue": 1,
+    "re-deriving": 1,
+    "refusal": 2,
+    "rows": 1,
+    "so": 1,
+    "table": 1,
+    "tally": 1,
+    "two": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -208775,6 +209385,51 @@
     "surface": 2,
     "swe": 5,
     "tiers": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "HARDCORE_SWE_INCREMENTAL_SEMANTIC_GRAPH_AND_COMPOUND_KERNEL_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/HARDCORE_SWE_INCREMENTAL_SEMANTIC_GRAPH_AND_COMPOUND_KERNEL_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/HARDCORE_SWE_INCREMENTAL_SEMANTIC_GRAPH_AND_COMPOUND_KERNEL_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2088cf3a3d25d268bb3f9b422f8d2a0a1173aa6bbc1081c79bec34d41cc0e7fc",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "25": 1,
+    "59": 1,
+    "a3ab9a4f": 1,
+    "bisect": 2,
+    "bugs": 1,
+    "census": 1,
+    "changelog": 2,
+    "cherry-pick": 2,
+    "choreography": 1,
+    "compound": 1,
+    "concrete": 1,
+    "counterexample": 1,
+    "coupled": 2,
+    "crosshair": 2,
+    "crystallization": 1,
+    "discovery": 1,
+    "door": 1,
+    "episodes": 1,
+    "execution": 1,
+    "exposed": 1,
+    "false": 1,
+    "front": 1,
+    "git": 2,
+    "hardcore": 3,
+    "hardcore_swe_incremental_semantic_graph_and_compound_kernel_v1_20261101_v1": 2,
+    "ms": 2,
+    "polyglot": 2,
+    "python": 2,
+    "repair": 4,
+    "swe": 3,
     "v1": 2
    }
   },
@@ -209474,6 +210129,51 @@
     "stop_measuring_an_entry_the_verdict_never_reads_and_persist_the_receipt_so_a_timeout_reports_what_it_reached": 1,
     "the_heartbeat_produced_nothing_on_seventeen_of_twenty_runs_and_still_hit_its_timeout_after_the_duplicated_entry_was_removed__measured_2026_10_27_run_40476270088_one_entry_thirty_seven_families_at_fifty_instances_was_cancelled_at_40m00s_and_returned_no_receipt_because_the_receipt_is_assembled_once_at_the_end": 1,
     "the_run_writes_its_receipt_after_every_family__an_interrupted_run_therefore_reports_every_family_it_finished_and_names_every_family_it_never_reached__the_receipt_carries_run_complete_and_pending_families__an_incomplete_run_is_never_alive__and_the_workflow_renders_the_summary_from_the_partial_receipt": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "946b9234b314b08a7905063da91bdb44172dc916eb3168ed5d86fc0481612d6a",
+   "status": "",
+   "terms": {
+    "0.0": 1,
+    "20261101": 1,
+    "623-program": 1,
+    "across": 1,
+    "action": 2,
+    "because": 1,
+    "being": 1,
+    "change": 1,
+    "colleague": 1,
+    "cumulative": 1,
+    "earned": 1,
+    "environments": 1,
+    "equality": 1,
+    "every": 1,
+    "experience": 1,
+    "fast": 1,
+    "fingerprints": 1,
+    "forgotten": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "installs": 1,
+    "instead": 1,
+    "learned": 1,
+    "learned_once_is_fast_on_the_next_machine_v1_20261101_v1": 2,
+    "learning": 1,
+    "local": 1,
+    "machine": 4,
+    "memory": 2,
+    "moment": 1,
+    "next": 2,
+    "one": 3,
+    "set": 2,
     "v1": 2
    }
   },
@@ -213481,6 +214181,51 @@
     "true": 1,
     "true_capability_scheduler_measurement_20261014_v1": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "TWO_CASES_NEVER_SHARE_A_FIXTURE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/TWO_CASES_NEVER_SHARE_A_FIXTURE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TWO_CASES_NEVER_SHARE_A_FIXTURE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "aa0a3622b4b2a16a07f144e3326fb4452fd5a5b76b763f1c487b8b3e28eb8179",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "42": 1,
+    "43": 2,
+    "44": 2,
+    "56f43613": 1,
+    "build": 1,
+    "built": 1,
+    "case": 1,
+    "cases": 2,
+    "cause": 1,
+    "command": 1,
+    "commit": 2,
+    "counted": 1,
+    "deliverable": 1,
+    "directory": 2,
+    "distinct": 1,
+    "double-counting": 1,
+    "every": 1,
+    "fixture": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hand-typed": 1,
+    "headline": 1,
+    "instrument": 1,
+    "inventory": 1,
+    "listing": 1,
+    "matrix": 1,
+    "measure_coverage": 2,
+    "measured": 1,
+    "measurement": 1,
+    "names": 2,
+    "two": 2,
+    "v1": 2
    }
   },
   {
@@ -217948,33 +218693,46 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "990c69d24a3d7e31d8743fd7fa37eea6791f7191803e9691a476c4b8804e8ec0",
+   "sha256": "b5ecfba1d7324d593b9f91d12f194c7848a3f888773da34f342e1c24715ffb96",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
-   "symbol_count": 12,
+   "symbol_count": 19,
    "symbols": [
     "_artifact_path",
     "_bounded",
+    "_deliver_artifact_fallback",
+    "_extract_complexity_observation",
+    "_field_rank",
     "_is_answer_value",
     "_narrow",
     "_observation_hit",
     "_project",
     "_read_artifact",
     "_read_sections",
+    "_tokens",
+    "answer_surface",
     "asked",
     "deliver",
     "deliver_observation",
+    "deliver_surface",
+    "lift_named_answer",
     "main"
    ],
    "terms": {
     "answer": 2,
+    "answer_surface": 1,
     "artifact": 1,
     "artifact_path": 1,
     "asked": 1,
     "bounded": 1,
     "count": 1,
     "deliver": 2,
+    "deliver_artifact_fallback": 1,
     "deliver_observation": 1,
+    "deliver_surface": 1,
+    "extract_complexity_observation": 1,
+    "field_rank": 1,
     "is_answer_value": 1,
+    "lift_named_answer": 1,
     "main": 1,
     "narrow": 1,
     "never": 1,
@@ -217986,6 +218744,7 @@
     "refuse": 1,
     "return": 1,
     "shape": 1,
+    "tokens": 1,
     "v1": 1
    }
   },
@@ -221797,7 +222556,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_static_triage.py",
-   "sha256": "90c2af1fd382e102d78f593a47dc01af937b4aaa61f37f8f0be7a2d2be4e7a99",
+   "sha256": "2304126f16ff7bf8d78320ab4545e6f0f7c21d6ee1555355a376f28ee90dc5cf",
    "summary": "python.review.diff_static_triage.v1 — the review gate on the produced diff.",
    "symbol_count": 6,
    "symbols": [
@@ -221936,7 +222695,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "df7f6b55c18998204fb6b8f3c80a87808c6e76602f8a9bcfeddea732ad303e11",
+   "sha256": "10bf5f7589e64535c09e7a62715d94d808bff74f8d46bf3344446023c6c7127a",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
    "symbol_count": 16,
    "symbols": [
@@ -234244,7 +235003,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "373f3e3da31eabf9723e2f0fe6cc8856ee0a7d25b9fcb9cc9d7ff0e221e8b927",
+   "sha256": "764b931f5766b0cdc25c4cb6d2b0ebbb44f8bb1923ffcf19c17e7f73236d1e33",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [
@@ -248437,11 +249196,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "affb66767bac8268b4f03551476a04ac583473140f5fcc7a328e2bc80455d029",
+   "sha256": "c013a4bb763a3fd2879b4c3d70231fb2f45c2795557ce38f87307ce8b947df6a",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 103,
+   "symbol_count": 104,
    "symbols": [
     "LocalExecutionFailure",
+    "_already_satisfied_evidence",
     "_asks_only_for_a_plan",
     "_bind_requested_contract_checks",
     "_blind_change_evidence",
@@ -248463,8 +249223,7 @@
     "_declares_it_does_not_write",
     "_declares_no_source_write_authority",
     "_destructive_targets",
-    "_effect_landed_outside_the_named_subject",
-    "_empty_test_selection"
+    "_effect_landed_outside_the_named_subject"
    ],
    "terms": {
     "admission": 2,
@@ -248699,7 +249458,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "584bf1879d7990a5afd3d3681d99fb275a3aacd484ddb59e3cbf0df2735f3413",
+   "sha256": "c8e1818c6630f71b0d1f8a0fa12d3231b7d81e3dd2919fbcbe9f4ad745baad79",
    "summary": "Live integrated Brain V1.",
    "symbol_count": 28,
    "symbols": [
@@ -278117,9 +278876,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "a90142a6673d72a09a16d3fcfc76a29e3703d4e382f6a9ce93bb7c189ea32e8a",
+   "sha256": "6a32188595d81b079de4782b717f2f9117c9853c5edc3d4cde67054060383837",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
-   "symbol_count": 17,
+   "symbol_count": 18,
    "symbols": [
     "_effect_consistent",
     "_execution_template",
@@ -278137,6 +278896,7 @@
     "implementation_effect_error",
     "is_swe_request",
     "plan_report",
+    "split_compound_swe_goal",
     "stated_family_token"
    ],
    "terms": {
@@ -278162,6 +278922,7 @@
     "resolve_family": 1,
     "row_surface": 1,
     "scoped": 1,
+    "split_compound_swe_goal": 1,
     "stated_family_token": 1,
     "states_a_repair": 1,
     "swe": 1,
@@ -283207,9 +283968,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "748c60c8fe7be4047dc30da1435ce76976dfbbd5cc1a53555a5c6ef0eab59bf4",
+   "sha256": "5607f8ae5c2aeef90d24ade13f81fd1737aee4f9f0d896f5460232bfb56c67c6",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_fp_key",
     "_goal_key",
@@ -283219,6 +283980,7 @@
     "fingerprint",
     "recall",
     "remember",
+    "replayable",
     "shape_of",
     "similarity",
     "stats"
@@ -283240,6 +284002,7 @@
     "over": 1,
     "recall": 1,
     "remember": 1,
+    "replayable": 1,
     "save": 1,
     "seen": 1,
     "shape_of": 1,

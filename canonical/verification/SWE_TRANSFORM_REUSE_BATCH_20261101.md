@@ -13,7 +13,7 @@ Authority: NONE. These are agent-produced sandbox measurements, not independent 
 - Compiler stdout/stderr are separate and bounded, drained concurrently without a shell. Deadline handling reuses the existing reaper; the new single-command path cleans POSIX process groups after timeout, including descendant pipe holders.
 - Existing transfer learning now reports interface action/reset calls (including fingerprint probes), persistence failures, the actual recalled-candidate count and its bounded 500-record retention policy. Chunked learning uses accumulated model state before the original prior.
 
-## Measurements
+## Measurements before current-main integration
 
 The durable machine-readable summary is `SWE_TRANSFORM_REUSE_BATCH_20261101.json` in this directory.
 
@@ -62,3 +62,17 @@ Focused tests:
 ```
 
 The JSON summary records the complete broader test argv, failed case IDs, source hashes, observed census and learner counters. Use the repository's normal substrate restoration before running compiler/parser tests. Run the existing model/integrity checks against the current tree; do not conceal the disclosed baseline failures with historical fixtures or loader patches.
+
+## Integrated current-main qualification
+
+Integrated `073540db10dc8f56d5193281f24f2bd32f13550e` on the same working branch rather than replacing its maintained semantic graph, skill crystallizer, goal-DAG and cross-machine transfer changes. Kept action-availability checks before counting replay attempts; preserved staged/collision-checked split behavior for the supported self-contained functions, async functions and classes. Also fixed an integration regression: structured capability refusals must retain their top-level diagnostic `reason`, not only the nested payload.
+
+- Merged SWE/learning/new-main targeted tests: **84 passed in 9.88 s**.
+- Refusal-reason/transform/restart regressions: **102 passed, 15 subtests passed in 8.90 s**.
+- Final 30-module integrated run: **445 passed, 6 failed, 1 skipped, 24 subtests passed in 81.54 s**. All six remaining failed cases also fail against an actual separate archive of `073540db` (2.25 s). This is not a full baseline comparison and the archive does not contain Git metadata.
+- The additional missing-top-level-reason failure observed during integration was fixed and is no longer in the final six failures.
+- Integrated census: **41 served, 8 refused of 49**, no census-detected unauthorized edits. The gain over the earlier 34 is primarily reuse of incoming main changes, not an isolated attribution to this patch. The optimization speedup request remains correctly refused. The census remains a shape/effect census, not a general semantic oracle.
+- Final broader-run resource measurement: elapsed **82.14 s**, child user **71.58 s**, child system **7.69 s**, maximum child RSS **228,676 KiB**; not an aggregate process-tree peak. Learner fixture counts remain 23/15/23/23 actions and 17/8/17/17 resets.
+- Targeted official evidence refresh leaves **21** stale rows fail-closed; incoming main had **22**. The Root3 V2 collection blocker is still present. Compilation alone or an alpha-renamed syntactic twin is not general behavioral qualification of the incoming skill store; no permanent-learning claim is adopted from its module name/docstring.
+
+The initial measurements above remain historical measurements of the original repair commit. The JSON `integration` object records current-main qualification separately. The complete six-phase objective remains incomplete; no autonomy expansion is made.
