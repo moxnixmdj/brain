@@ -110,6 +110,63 @@ def _edit_node(raw,lines,target,desc,replacer):
  start,end,rb=span
  if raw[start:end]==rb:return None
  return {"start":start,"end":end,"replacement":rb,"mutation":desc}
+FOCUS_BONUS_MAX=10000
+FOCUS_DECAY_PER_LINE=100
+FOCUS_WINDOW_LINES=100
+
+def _focus_bonus(line,focus):
+ """How much a candidate site is favoured by the stack that failed.
+
+ Measured 2026-11-01 on pluggy at 3fc9e561 (injected `and`->`or` at src/pluggy/_manager.py:247,
+ 7 of 226 tests failing). The failing run's traceback names `_manager.py:251`, which is INSIDE the
+ branch the faulty predicate chose: `elif not verified or hook.has_spec():` raised from
+ `self._verify_hook(...)` four lines below it. The old rule was a binary +/-2-line window, so the
+ one site that mattered scored exactly zero while 64 slots went to line-142 constant flips. The
+ guided search reported OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS while the single-file search over
+ the same file found the repair -- a localized search is only as good as this function.
+
+ A raise site and the condition that sent control there are the same fact a few lines apart, so
+ proximity is graded instead of thresholded: the stack's own line is strongest, its neighbourhood
+ decays linearly, and nothing in the file is ever discarded (a distant site still outranks an
+ unranked sibling by its symbol score). Distance is clamped, so the bonus can never go negative and
+ reorder two equally-ranked sites behind a third.
+ """
+ if not focus:return 0
+ d=min(abs(line-f) for f in focus)
+ if d>FOCUS_WINDOW_LINES:return 0
+ return max(0,FOCUS_BONUS_MAX-FOCUS_DECAY_PER_LINE*d)
+
+
+FOCUS_CONDITION_BONUS=20000
+
+def _branch_condition_lines(tree,focus):
+ """The `if`/`elif` conditions guarding the lines the failing stack names.
+
+ Measured 2026-11-01 on pluggy 3fc9e561 with `and`->`or` injected at src/pluggy/_manager.py:247.
+ The stack names 251, which is INSIDE the branch that the faulty condition sent control into:
+
+     247:  elif not verified or hook.has_spec():      <- the fault
+     251:      self._verify_hook(hook, hookimpl)       <- the raise the stack names
+
+ A raise site and its guarding condition are the same fact one branch apart, and proximity alone
+ cannot express that: with graded distance the true site scored 9600 while eight unrelated constant
+ guesses three lines from another frame scored 9700 and crowded it out of the pool. Control entered
+ that branch BECAUSE its test evaluated true, so the test line is the prime suspect whenever the
+ stack lands in a branch body. This is read from the AST, not guessed from indentation.
+ """
+ out=set()
+ if not focus:return out
+ for node in ast.walk(tree):
+  if not isinstance(node,ast.If) or not node.body:
+   continue
+  body=node.body
+  start=min(getattr(x,"lineno",10**9) for x in body)
+  end=max(getattr(x,"end_lineno",getattr(x,"lineno",0)) or 0 for x in body)
+  if any(start<=f<=end for f in focus):
+   out.add(int(getattr(node,"lineno",0) or 0))
+ return out
+
+
 def _pool(row,tests,per_file):
  p=row["path"]
  try:
@@ -118,13 +175,14 @@ def _pool(row,tests,per_file):
  nums,strings=_PATCH._test_literals(tests)
  ranges=[(s["lineno"],s["end_lineno"],s["score"]) for s in row["symbols"] if s["score"]>0]
  focus=set(row.get("focus") or ())
+ cond_lines=_branch_condition_lines(tree,focus)
  out=[]
  renderer=_PATCH._CandidateRenderer(text,tree)
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings,p):
   line=desc.get("lineno") or 0
   sym_score=max([score for a,b,score in ranges if a<=line<=b] or [0])
-  focus_near=any(a<=line<=b for a,b in ((n,n) for n in focus)) or \
-     any(abs(line-f)<=2 for f in focus)
+  focus_near=_focus_bonus(line,focus)
+  if line in cond_lines:focus_near+=FOCUS_CONDITION_BONUS
   _ef=row.get("_ev_freq") or {}
   if _ef:
    # EXECUTION-EVIDENCE RANKING LAW: inside an evidence span the trace IS
@@ -134,13 +192,13 @@ def _pool(row,tests,per_file):
    # zone). Hot-loop lines first, then plain executed, then the rest.
    _hot=min(1.0,_ef.get(line,0)/8.0)
    if any(a<=line<=b for a,b in (row.get("_ev_spans") or ())):
-    priority=20000*_hot+(10000 if focus_near else 0)
+    priority=20000*_hot+focus_near
    else:
-    priority=sym_score+(10000 if focus_near else 0)+(2000*_hot if _hot>0 else 0)
+    priority=sym_score+focus_near+(2000*_hot if _hot>0 else 0)
   else:
    # traceback-frame proximity dominates: a site ON/next-to a line the
    # stack names is the evidence-first candidate, not early-line trivia
-   priority=sym_score+(10000 if focus_near else 0)
+   priority=sym_score+focus_near
   e=renderer.edit(key,desc,replacer)
   if e is not None:
    e["family"]=desc.get("family") or "legacy"

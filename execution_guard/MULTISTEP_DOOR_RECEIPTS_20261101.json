@@ -1,0 +1,40 @@
+{
+ "schema": "PROJECT_BRAIN_MULTISTEP_DOOR_RECEIPTS_V1",
+ "repo": "pluggy",
+ "commit": "3fc9e561ea7e72a95549673d79ebdaf4a9fae829",
+ "injected": {"file": "src/pluggy/_manager.py", "line": 247,
+              "before": "elif not verified and hook.has_spec():",
+              "after": "elif not verified or hook.has_spec():"},
+ "note": "Four phrasings of the same task, each measured through the front door on 2026-11-01. The capability-level path (stated source file + stated test file, called directly) succeeds; these are the DOOR receipts, and every one of them returns no edit.",
+ "attempts": [
+  {"sentence": "Fix the failing tests in <repo>. The suite reports: <failing output>. The fault is in src/pluggy/_manager.py. Restore the behaviour the tests expect.",
+   "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+   "row": "python.software.repair.apply.verified.v1",
+   "why": "STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+   "reading": "Naming the fault location makes the request a DIAGNOSIS, and a repair row may not answer one. The capability never ran."},
+  {"sentence": "Fix the failing tests in <repo>. The suite reports: <failing output>. Restore the behaviour the tests expect.",
+   "status": "FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT",
+   "row": "python.software.repair.apply.verified.v1",
+   "why": "CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET / ACTION_EXPECTATION_FAILED:output_verified:OBSERVED=False",
+   "reading": "The capability executed against the discovered corpus and produced no verified edit, so the door refused. This is the only receipt that measures the repair itself, and it is a capability result, not a routing one."},
+  {"sentence": "Fix the failing tests in testing/test_pluginmanager.py so the suite passes. ...",
+   "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+   "row": null,
+   "why": "RuntimeError:REFUSING_BROAD_REPO_MUTATION",
+   "reading": "A test file named at repository scope reads as a broad mutation; the door refuses before selecting a row."},
+  {"sentence": "Repair the python source file src/pluggy/_manager.py so that the unit tests in testing/test_pluginmanager.py pass.",
+   "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+   "row": null,
+   "why": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+   "reading": "The idiom that names both a source file and its test file compiles to nothing for this shape, even though it is the sentence the repair adapters themselves document."}
+ ],
+ "capability_level_success": {
+  "call": "python_repair_apply_verified_v1.run({source_root, test_paths: [testing/test_pluginmanager.py], output_path, timeout_s: 120})",
+  "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+  "applied": true,
+  "files_written": ["src/pluggy/_manager.py"],
+  "post_apply_test_returncode": 0,
+  "elapsed_s_approx": 18,
+  "requires": "an operator-supplied source root and the exact failing test file"
+ }
+}

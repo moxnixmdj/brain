@@ -296,8 +296,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     # GATE 2 -- a bounded repair must actually be found and verified.  The
     # engine restores the source itself; only its verified patches are used.
     intermediate=output.parent/(".apply_repair_"+output.name)
+    # THE IMPORT ROOT IS NOT THE COMMON PATH.  `exec_root` is where the suite is RUN (the common
+    # parent of the source root and the tests), which is the right cwd and the wrong module root.
+    # Measured 2026-11-01 on pluggy 3fc9e561 in a src layout: `exec_root` is the repository, so the
+    # guided search was handed "." and built PYTHONPATH from the repository instead of `src/`; the
+    # package could not be imported, the two import-failure tests replaced the injected bug in every
+    # baseline, and every candidate was scored against a suite that was red for an unrelated reason.
+    # The result was OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS while a search rooted at `src/` found
+    # the repair in 12 seconds.  The caller's stated source root is the module root; keep using it.
     repair=_REPAIR.run({
-        "source_root":_rel(repo,exec_root) if exec_root!=repo else ".",
+        "source_root":_rel(repo,source_root) if source_root!=repo else ".",
         "test_paths":[_rel(repo,p) for p in test_paths],
         "test_argv":argv,
         "output_path":_rel(repo,intermediate),

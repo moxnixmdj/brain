@@ -817,6 +817,26 @@ def _import_root_dirs(dirs: list[str], paths: list[str]) -> list[str]:
             if any((p / n / "__init__.py").is_file() for n in names) and str(p) not in roots:
                 roots.append(str(p))
                 break
+    # A SRC LAYOUT IS BELOW THE ROOT, NOT ABOVE IT.
+    #
+    # The walk above only looks at parents, so a project whose package lives in `src/`
+    # (`repo/src/pluggy/__init__.py`) was invisible and the package could not be imported.  The
+    # suite then failed for its import, not for its bug, and every candidate scored the same as the
+    # baseline.  Measured 2026-11-01 on pluggy 3fc9e561 through the front door, which binds
+    # source_root to the REPOSITORY: baseline `2 failed, 77 passed`, the two failures being import
+    # shadowing rather than the injected defect, and the guided search returned
+    # OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS.  Rooted at `src/` directly the same search found
+    # the repair in 12 s.  Only conventional layout directories are tried, and only one that
+    # actually contains a package the tests import by name -- the same non-shadowing property the
+    # parent walk has.
+    for d in dirs:
+        base = pathlib.Path(d)
+        for candidate in (base, *(base / part for part in ("src", "lib", "python"))):
+            if not candidate.is_dir():
+                continue
+            if any((candidate / n / "__init__.py").is_file() for n in names) \
+                    and str(candidate) not in roots:
+                roots.append(str(candidate))
     return roots
 
 

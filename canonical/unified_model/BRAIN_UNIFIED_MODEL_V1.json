@@ -24160,7 +24160,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "71a31b6484e85b944e8653443aec6de7630fa7f7765c91cab002898cc71abd28",
+    "source_sha256": "1be9c259bcd5bd491d245e2100eed52c3476a95b0120e2b415ed3195324a8f13",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25932,7 +25932,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "3f5f144b67fa323e7c9707ae8cc2e8e0879d1878564428d8abc682db12e858c1",
+    "source_sha256": "f8dbd662af413cbf01d27f126f335c86d13c3dc7c1ef432b232921b12d0a51bd",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -26109,7 +26109,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "324e7266815bd87b61d431b12ec7cd681b0e9bff3d8a4586ea08a60a458bc5d7",
+    "source_sha256": "421f311c9b944bacb8098f1af48d30febf94df624da4eff69b5e2b1ef766bb5f",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -30932,7 +30932,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "46e55fd175442d3811ad51fbaba024cb80d5bd5996601a5342f7b8291d23178e"
+  "value": "1e9faaaab0da8ef48444d08a2ab6e4fd24c5073ba33d11c6688c219330d64127"
  },
  "engines": [
   {
@@ -43213,7 +43213,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 38836,
+   "bytes": 42046,
    "headings": [
     "Every hardcore software-engineering problem, measured",
     "§0 The answer in one paragraph",
@@ -43232,61 +43232,63 @@
     "7.2 What instant learning is genuinely worth",
     "Appendix: all 49 sentences, classified",
     "What this document is not",
-    "§8 The multi-step instrument: what a real repository says"
+    "§8 The multi-step instrument: what a real repository says",
+    "8.1 Two levels, measured separately",
+    "8.2 The four sentences, and why each one fails"
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
-   "sha256": "19df2abd80fa39b4d5615460e0e8b299fee35a7d0129cfdb91f60275a98731b8",
-   "summary": "Measured 2026-11-01 on the tree of `8d515959b7` (branched from main `8d515959b7`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
+   "sha256": "355adab6d1c81a86dc7213cd443e3282b308a006e1c55ebbce8c0565e06309a5",
+   "summary": "Measured 2026-11-01 on the tree of `e529c7b` (branched from main `e529c7b`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
    "terms": {
     "add": 20,
-    "answer": 12,
-    "bug": 13,
+    "answer": 14,
+    "bug": 12,
     "calc.py": 12,
     "cannot": 14,
-    "capability": 26,
+    "capability": 34,
     "capability_refused": 14,
-    "census": 16,
+    "census": 15,
     "class": 14,
     "code.polyglot.transform_and_verify.v1": 17,
-    "every": 19,
-    "false": 10,
-    "fix": 11,
+    "every": 20,
+    "failing": 12,
+    "file": 20,
+    "fix": 12,
     "fixture": 15,
     "function": 22,
     "git": 12,
-    "instrument": 10,
     "machine": 19,
-    "measured": 18,
-    "no": 39,
-    "none": 12,
-    "not": 44,
-    "nothing": 11,
-    "now": 14,
-    "number": 13,
-    "one": 26,
-    "own": 13,
+    "measured": 20,
+    "no": 42,
+    "none": 13,
+    "not": 51,
+    "nothing": 14,
+    "now": 15,
+    "number": 15,
+    "one": 32,
+    "own": 14,
     "pkg": 29,
     "polyglot": 16,
     "python.swe.transform_and_synthesize.v1": 14,
-    "real": 20,
-    "refusal": 16,
-    "repair": 12,
-    "repository": 14,
-    "request": 11,
-    "row": 25,
+    "real": 19,
+    "refusal": 17,
+    "repair": 17,
+    "repository": 15,
+    "request": 13,
+    "row": 27,
     "rows": 16,
-    "run": 14,
-    "same": 15,
+    "run": 15,
+    "same": 19,
     "selection": 14,
-    "sentence": 25,
-    "sentences": 19,
+    "sentence": 31,
+    "sentences": 20,
     "served": 55,
-    "so": 25,
-    "software.analysis.diagnose_and_architect.v1": 12,
-    "test": 14,
+    "so": 28,
+    "test": 22,
     "tests": 18,
-    "than": 12
+    "than": 13,
+    "three": 13
    },
    "title": "Every hardcore software-engineering problem, measured",
    "title_terms": [
@@ -60873,7 +60875,7 @@
   "included_source_count": 1026,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "bf1f9aa60793da8a58a66a50201e4a19f27f0d9e3e3f458512dbd28e016833bc"
+  "source_tree_digest": "fb4b45374fc99c45a9ae9d1676faec9873fa4a19b01c91010878df4e77080db9"
  },
  "research_index": [
   {

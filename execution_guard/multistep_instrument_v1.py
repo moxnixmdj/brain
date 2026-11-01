@@ -261,7 +261,12 @@ def restore(name: str) -> None:
     spec = REPOS[name]
     repo = WORK / name
     subprocess.run(["git", "-C", str(repo), "checkout", "--", "."], capture_output=True, timeout=120)
-    subprocess.run(["git", "-C", str(repo), "reset", "--hard", "-q", "HEAD~1"],
+    # Reset to the PIN, not to HEAD~1: a crashed run can leave more than one commit behind, and
+    # "one commit back" then restores a state that is still mutated. Measured 2026-11-01: a stale
+    # injection commit survived a restore and the next run reported SUITE_NOT_GREEN_BEFORE_SEEDING,
+    # which reads as "the fixture is broken" rather than "the harness leaked".
+    target = spec.get("commit") or "HEAD~1"
+    subprocess.run(["git", "-C", str(repo), "reset", "--hard", "-q", target],
                    capture_output=True, timeout=120)
     subprocess.run(["git", "-C", str(repo), "clean", "-qfd"], capture_output=True, timeout=120)
     del spec
@@ -269,9 +274,15 @@ def restore(name: str) -> None:
 
 # --------------------------------------------------------------------------- the loop
 
+# THE SENTENCE A USER ACTUALLY WRITES. The first version added "The fault is in <file>", which is
+# operator help the machine did not earn -- and it also made the front door read the request as a
+# DIAGNOSIS (it refuses `STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY` for a repair row), so the
+# task was not measuring repair at all. The location stays in the record for attribution and is
+# withheld from the sentence, which is the harder and the honest version: localization has to find
+# it. `file` remains a parameter so the same instrument can measure the hinted variant on purpose.
 ISSUE = (
     "Fix the failing tests in {repo}. The suite reports:\n\n{observation}\n\n"
-    "The fault is in {file}. Restore the behaviour the tests expect."
+    "Restore the behaviour the tests expect."
 )
 
 

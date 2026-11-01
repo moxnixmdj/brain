@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `8d515959b7` (branched from main `8d515959b7`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `e529c7b` (branched from main `e529c7b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **41 served / 8 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 86 ms  p90 577 ms  max 1578 ms |
+| matrix latency | median 94 ms  p90 643 ms  max 1875 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -261,7 +261,7 @@ That split decides the order, because it decides what a number means:
 
 | # | move | measured reach | why at this position |
 |---|---|---|---|
-| 1 | **produce an edit at all on a foreign repository**: the door selects a repair row, runs it, and the tree is untouched (§8: measured 0 of 2) | the census says 84%, a real repository says 0 | everything above is one step deep, and the first step that is not one step deep fails before repair quality is even tested |
+| 1 | **let the sentence reach the capability that can already do it**: the repair works when called with a source root and one failing test file, and three admissions still stop the same task arriving as a sentence (§8: measured 0 of 2) | the capability path passes, the door path does not | the work is done and unreachable, which is cheaper to fix than doing it again |
 | 2 | **selection** for the 3 remaining sentences | 3 sentence(s) | cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |
 | 3 | **capability** for the 0 remaining sentences | 0 sentence(s) | real work, but a small ceiling; do it after the instrument exists |
 | 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, `rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows can never run, and no row may pretend otherwise |
@@ -449,20 +449,17 @@ rather than a request.
 
 | multi-step property | value |
 |---|---|
-| tasks scored | **2** (of 3 attempted) |
+| tasks scored | **2** (of 2 attempted) |
 | solved end to end | **0** |
-| attempts spent | 4 |
+| attempts spent | 2 |
 | attempts that edited a source file | **0** |
-| tasks ending at `REFUSED_WITH_NO_EDIT` | 2 |
-
-*iniconfig produced no observable injected bug at the accepted blast
-radius (1-25 failing cases, at most 40% of a suite), so it is an instrument limitation
-and is excluded from the score rather than counted as a pass.*
+| tasks ending at `REFUSED_WITH_NO_EDIT` | 1 |
+| tasks ending at `NO_ROW_SELECTED` | 1 |
 
 | task | injected bug | attempts | files the machine edited | outcome |
 |---|---|---|---|---|
-| pluggy | `elif not verified and hook.has_spec():` -> `elif not verified or hook.has_spec():` | 2 | **0** | `REFUSED_WITH_NO_EDIT` |
-| click | `if (self.nargs != 1 or self.multiple) and value == (` -> `if (self.nargs != 1 or self.multiple) or value == ()` | 2 | **0** | `REFUSED_WITH_NO_EDIT` |
+| pluggy | `elif not verified and hook.has_spec():` -> `elif not verified or hook.has_spec():` | 1 | **0** | `REFUSED_WITH_NO_EDIT` |
+| click | `if (self.nargs != 1 or self.multiple) and value == (` -> `if (self.nargs != 1 or self.multiple) or value == ()` | 1 | **0** | `NO_ROW_SELECTED` |
 
 **The single-step census says 84%. The multi-step instrument says 0 of 2.** The gap is not repair quality — it is that no
 edit is produced at all. The door selects `python.software.repair.apply.verified.v1`, runs
@@ -486,6 +483,49 @@ stable and re-running reproduces the same injected bug and the same stage. The f
 version of the instrument claimed pinning in a comment while cloning the default branch;
 that is corrected here for the same reason the other false numbers were: a claim in a
 comment is not a measurement.
+
+### 8.1 Two levels, measured separately
+
+The number above is the sentence-level number, and it is still zero. Underneath it,
+the capability can now do the job when it is called with what it needs:
+
+| level | caller must supply | measured status |
+|---|---|---|
+| capability, called directly | the source root and the exact failing test file | **`PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE`**, applied `true`, post-apply suite rc `0`, one file written |
+| the front door, given a sentence | nothing | **no edit**, four different refusals |
+
+The capability path fixed itself twice on the way here, and both defects were found by
+running a third party's code rather than reading ours:
+
+* **the search could not see the fault.** The stack names the line that RAISED, not the
+  condition that sent control there. On pluggy the raise is at `_manager.py:251` and the
+  faulty predicate at `:247`; the evidence rule was a +/-2-line window, so the one site
+  that mattered scored zero while 24 slots filled with unrelated constant guesses.
+  Graded proximity was not enough either -- the true site scored 9600 and eight
+  constants three lines from another frame scored 9700. The rule that works is the one
+  the language already states: a frame inside a branch body implicates that branch's own
+  condition. With it the same guided search returns the correct repair in 12 seconds.
+* **the suite could not import the package.** The import roots were derived by walking
+  PARENTS only, so a `src/` layout was invisible; the baseline then failed for its
+  import, every candidate scored the same as the baseline, and the search reported no
+  repair existed. Rooted where the package actually lives, the same search succeeds.
+
+### 8.2 The four sentences, and why each one fails
+
+| sentence names | refusal | which layer refused |
+|---|---|---|
+| the repo, the failing output **and the fault file** | `STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1` | Naming the fault location makes the request a DIAGNOSIS, and a repair row may not answer one. The capability never ran. |
+| the repo and the failing output | `CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET / ACTION_EXPECTATION_FAILED:outp` | The capability executed against the discovered corpus and produced no verified edit, so the door refused. This is the only receipt that measures the r |
+| a test file at repository scope | `RuntimeError:REFUSING_BROAD_REPO_MUTATION` | A test file named at repository scope reads as a broad mutation; the door refuses before selecting a row. |
+| the source file and its test file | `RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP` | The idiom that names both a source file and its test file compiles to nothing for this shape, even though it is the sentence the repair adapters thems |
+
+Three of those four refusals are admissions, and one is a result: only the second sentence
+let the capability run, and it ran and produced no verified edit against the discovered
+corpus. Naming the fault makes the request a diagnosis a repair row may not answer;
+naming a test file at repository scope reads as a broad mutation; naming both a source
+file and its test file compiles to nothing. So the gap is not one gate but three,
+each of which can be closed independently, and none of which is a claim about repair
+quality.
 
 What this does **not** yet measure: whether a *correct* edit would be accepted, because no
 edit is produced. The next hour is not about repair quality — it is about the missing path

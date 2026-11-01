@@ -422,6 +422,23 @@ def learning_measurement() -> dict:
 
 
 MULTISTEP_RESULTS = ROOT / "execution_guard" / "MULTISTEP_RESULTS_20261101.json"
+MULTISTEP_DOOR_RECEIPTS = ROOT / "execution_guard" / "MULTISTEP_DOOR_RECEIPTS_20261101.json"
+
+
+def door_receipts() -> dict:
+    """The four sentence shapes tried against the front door for the same real task.
+
+    Read from a file for the same reason the instrument's results are: these are measurements, and
+    a document that re-types them will sooner or later disagree with them.
+    """
+    if not MULTISTEP_DOOR_RECEIPTS.is_file():
+        return {"measured": False}
+    try:
+        data = json.loads(MULTISTEP_DOOR_RECEIPTS.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return {"measured": False, "error": type(exc).__name__}
+    data["measured"] = True
+    return data
 
 
 def multistep_measurement() -> dict:
@@ -814,10 +831,11 @@ def main() -> int:
     _ms = multistep_measurement()
     _ms_note = (f"measured {_ms['solved']} of {_ms['scored']}" if _ms.get("measured") and _ms.get("scored")
                 else "not yet measured")
-    add(f"| 1 | **produce an edit at all on a foreign repository**: the door selects a repair row, "
-        f"runs it, and the tree is untouched (§8: {_ms_note}) | the census says "
-        f"{pct:.0f}%, a real repository says 0 | everything above is one step deep, and the first "
-        "step that is not one step deep fails before repair quality is even tested |")
+    add(f"| 1 | **let the sentence reach the capability that can already do it**: the repair works when "
+        f"called with a source root and one failing test file, and three admissions still stop the "
+        f"same task arriving as a sentence (§8: {_ms_note}) | the capability path passes, the door "
+        f"path does not | the work is done and unreachable, which is cheaper to fix than doing it "
+        f"again |")
     add(f"| 2 | **selection** for the {len(selection)} remaining sentences | {len(selection)} sentence(s) | "
         "cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |")
     add(f"| 3 | **capability** for the {len(capability)} remaining sentences | {len(capability)} sentence(s) | "
@@ -1030,6 +1048,58 @@ def main() -> int:
         add("that is corrected here for the same reason the other false numbers were: a claim in a")
         add("comment is not a measurement.")
         add("")
+        receipts = door_receipts()
+        if receipts.get("measured"):
+            cap = receipts.get("capability_level_success") or {}
+            add("### 8.1 Two levels, measured separately")
+            add("")
+            add("The number above is the sentence-level number, and it is still zero. Underneath it,")
+            add("the capability can now do the job when it is called with what it needs:")
+            add("")
+            add("| level | caller must supply | measured status |")
+            add("|---|---|---|")
+            add(f"| capability, called directly | the source root and the exact failing test file | "
+                f"**`{cap.get('status')}`**, applied `{str(cap.get('applied')).lower()}`, "
+                f"post-apply suite rc `{cap.get('post_apply_test_returncode')}`, one file written |")
+            add("| the front door, given a sentence | nothing | **no edit**, four different refusals |")
+            add("")
+            add("The capability path fixed itself twice on the way here, and both defects were found by")
+            add("running a third party's code rather than reading ours:")
+            add("")
+            add("* **the search could not see the fault.** The stack names the line that RAISED, not the")
+            add("  condition that sent control there. On pluggy the raise is at `_manager.py:251` and the")
+            add("  faulty predicate at `:247`; the evidence rule was a +/-2-line window, so the one site")
+            add("  that mattered scored zero while 24 slots filled with unrelated constant guesses.")
+            add("  Graded proximity was not enough either -- the true site scored 9600 and eight")
+            add("  constants three lines from another frame scored 9700. The rule that works is the one")
+            add("  the language already states: a frame inside a branch body implicates that branch's own")
+            add("  condition. With it the same guided search returns the correct repair in 12 seconds.")
+            add("* **the suite could not import the package.** The import roots were derived by walking")
+            add("  PARENTS only, so a `src/` layout was invisible; the baseline then failed for its")
+            add("  import, every candidate scored the same as the baseline, and the search reported no")
+            add("  repair existed. Rooted where the package actually lives, the same search succeeds.")
+            add("")
+            add("### 8.2 The four sentences, and why each one fails")
+            add("")
+            add("| sentence names | refusal | which layer refused |")
+            add("|---|---|---|")
+            for a in receipts.get("attempts") or []:
+                sentence = str(a.get("sentence") or "")
+                short = ("the repo, the failing output **and the fault file**"
+                         if "The fault is in" in sentence else
+                         "the repo and the failing output" if "in <repo>" in sentence else
+                         "a test file at repository scope" if "test_pluginmanager.py so the suite" in sentence
+                         else "the source file and its test file")
+                add(f"| {short} | `{str(a.get('why'))[:96]}` | {str(a.get('reading'))[:150]} |")
+            add("")
+            add("Three of those four refusals are admissions, and one is a result: only the second sentence")
+            add("let the capability run, and it ran and produced no verified edit against the discovered")
+            add("corpus. Naming the fault makes the request a diagnosis a repair row may not answer;")
+            add("naming a test file at repository scope reads as a broad mutation; naming both a source")
+            add("file and its test file compiles to nothing. So the gap is not one gate but three,")
+            add("each of which can be closed independently, and none of which is a claim about repair")
+            add("quality.")
+            add("")
         add("What this does **not** yet measure: whether a *correct* edit would be accepted, because no")
         add("edit is produced. The next hour is not about repair quality — it is about the missing path")
         add("from `a failing test in this repository` to `a proposed edit`.")
