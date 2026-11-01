@@ -4169,6 +4169,42 @@ def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = 
         return False
 
 
+def _stated_paths_outside_the_root(goal: str, root: pathlib.Path) -> list[str]:
+    """Paths the sentence states that this door cannot reach, when it reaches nothing else.
+
+    A path outside the tree the compiler is rooted at is not a repository path at all
+    -- see ``goal_compiler._repo_paths_uncached``, which used to spell ``/tmp/x/calc.py``
+    as the repository-relative ``tmp/x/calc.py`` and bind a file that does not exist.
+    With that alias gone such a sentence has no path at all, and the generic refusals
+    on those paths blame the machine for a scope fact: measured 2026-11-01, the same
+    shape reported ``GOAL_INPUT_BINDING_REQUIRED`` for a repair and
+    ``GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH`` for a rename, neither of which
+    says "that file is not in this workspace".
+
+    The list is returned only when the sentence states no repository path -- a goal
+    that names an in-scope file keeps the reading it had, whatever else it mentions in
+    passing.  This is a scope fact stated plainly, not a new capability.
+    """
+    root = pathlib.Path(root).resolve()
+    outside: list[str] = []
+    try:
+        if goal_compiler._repo_paths(goal, root):
+            return outside
+        stated = composer_route.extract_paths(goal)
+    except Exception:  # noqa: BLE001 - an unreadable sentence names nothing here
+        return outside
+    for raw in stated:
+        if not str(raw).startswith("/"):
+            continue
+        try:
+            resolved = pathlib.Path(str(raw)).resolve()
+        except (OSError, ValueError):
+            continue
+        if resolved != root and root not in resolved.parents and str(raw) not in outside:
+            outside.append(str(raw))
+    return outside
+
+
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
@@ -5733,6 +5769,22 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     """
     original_request = request
     goal = str((request or {}).get("goal") or "").strip()
+    # A STATED PATH THIS ROOT CANNOT REACH IS A SCOPE FACT, NOT A MISSING CAPABILITY.
+    #
+    # One gate, before anything compiles: a sentence whose only stated paths lie
+    # outside the tree this door is rooted at is answered by name.  Left to the
+    # families below, the same shape surfaced as three different machine failures
+    # (STATED_SWE_EFFECT_UNSERVED, GOAL_INPUT_BINDING_REQUIRED,
+    # GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH), none of which says the file is
+    # not in this workspace -- and one of which also let the command run.
+    _outside = _stated_paths_outside_the_root(goal, ROOT)
+    if _outside:
+        return _fail(str((request or {}).get("task_id") or ""),
+                     "FAIL_CLOSED__STATED_PATH_OUTSIDE_THE_WORKSPACE",
+                     "STATED_PATH_OUTSIDE_THE_WORKSPACE", perf_counter_ns(),
+                     executed=False,
+                     reason="STATED_PATH_OUTSIDE_THE_WORKSPACE:" + ",".join(_outside[:3]),
+                     outside_the_workspace=_outside[:3])
     early_selection = None
     primary_selection = None
     context = None

@@ -230,6 +230,21 @@ def _repo_paths_uncached(goal, root):
                 except ValueError:
                     pass
                 continue
+            # AN ABSOLUTE PATH OUTSIDE THE REPOSITORY IS NOT A REPOSITORY PATH, AND IT
+            # MUST NOT BE REWRITTEN INTO ONE.
+            #
+            # Falling through here joined the token onto the repository root, so
+            # `/tmp/ws/calc.py` became the SPELLING `tmp/ws/calc.py` bound to the
+            # path `<repo>/tmp/ws/calc.py`.  Measured 2026-11-01: `Format
+            # /tmp/ws_probe5/calc.py.` formatted the caller's file and then reported
+            # FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED, because the declared output
+            # was the phantom `<repo>/tmp/ws_probe5/calc.py`, which the adapter
+            # correctly could not find (CLI_EXPECTED_OUTPUT_MISSING).  The same
+            # alias is a wrong-file hazard: if `<repo>/tmp/ws/calc.py` happened to
+            # exist, the sentence about `/tmp/ws/calc.py` would have edited THAT
+            # file and reported success.  A path outside the tree this compiler is
+            # rooted at is not bound at all; the layers above say why.
+            continue
         p=(rr/raw).resolve()
         if p==rr or rr in p.parents:
             candidates.append((raw,p))
