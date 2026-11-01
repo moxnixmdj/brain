@@ -79,13 +79,9 @@ def test_historical_cross_issue_transfer_against_the_same_capable_solver(tmp_pat
     original_teacher = teaching['target'].read_bytes()
     taught = execute('teach', tmp_path, teaching)
     assert teaching['target'].read_bytes() == original_teacher
-    if family == 'boundary':
-        assert taught['result']['crystallized'] is True
-    else:
-        # A real insertion-only lesson remains outside the current token/twin
-        # representation. Record refusal, never substitute expert held-out code.
-        assert taught['result']['crystallized'] is False
-        assert taught['result']['reason'] == 'FAILED_MUTATED_TWIN_VERIFICATION'
+    # Insertion lessons now use scoped Python anchors/parameter bindings rather
+    # than whole-module regex patterns; keep the same pinned tasks and tests.
+    assert taught['result']['crystallized'] is True
     cold_case = build_case(tmp_path, held_id, 'baseline')
     cold_case['args']['retained_learning']['enabled'] = False
     warm_case = build_case(tmp_path, held_id, 'learning_enabled')
@@ -95,10 +91,11 @@ def test_historical_cross_issue_transfer_against_the_same_capable_solver(tmp_pat
     runs = {arm: execute('apply', tmp_path, c) for arm, c in cases.items()}
     audits = {arm: execute('audit', tmp_path, c) for arm, c in cases.items()}
     assert len({taught['pid'], *(r['pid'] for r in runs.values())}) == 3
-    expected_success = family == 'boundary'
     for arm, run in runs.items():
+        retained_transfer = family == 'zero_consumption' and arm == 'learning_enabled'
+        expected_success = family == 'boundary' or retained_transfer
         result = run['result']
-        assert result['repair_search_invocations'] == 1
+        assert result['repair_search_invocations'] == (0 if retained_transfer else 1)
         assert result['pass'] is expected_success
         assert result['applied'] is expected_success
         if expected_success:
@@ -111,7 +108,9 @@ def test_historical_cross_issue_transfer_against_the_same_capable_solver(tmp_pat
             assert audits[arm]['result']['returncode'] != 0
             assert cases[arm]['target'].read_bytes() == originals[arm]
             assert result['files_written'] == []
-    assert runs['learning_enabled']['result']['retained_learning']['hit'] is False
+    assert runs['learning_enabled']['result']['retained_learning']['hit'] is (family == 'zero_consumption')
+    if family == 'zero_consumption':
+        assert runs['learning_enabled']['result']['retained_learning']['oracle_calls'] >= 2
     assert all(p.read_bytes() == data for p, data in protected.items())
     # Upstream regression consumer and extra audit are separate actual executions.
     record_property('historical_repair_run', json.dumps({

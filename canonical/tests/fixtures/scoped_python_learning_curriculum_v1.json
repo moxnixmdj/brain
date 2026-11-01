@@ -1,0 +1,31 @@
+{
+  "baseline": "Same maintained solver; explicit scoped retained_learning disabled",
+  "frozen_before_runtime_edits": true,
+  "full_upstream_repository_coverage": false,
+  "heldout_expert_source_to_apply": false,
+  "historical_provenance_sha256": "03f40f762631d279a626ce6e99f50199304976ec5e2e5ceaff5029c28bea213a",
+  "independent_certification": false,
+  "negative_controls": [
+    "misleading inclusive threshold similarity",
+    "declared source revision mismatch",
+    "earlier syntactic decoy rejected before later valid location"
+  ],
+  "pairs": [
+    [
+      "bits_capacity",
+      "unit_boundary"
+    ],
+    [
+      "ichunked_zero",
+      "chunked_even_zero"
+    ]
+  ],
+  "repetitions": 2,
+  "schema": "SCOPED_PYTHON_LEARNING_CURRICULUM_V1",
+  "solver_bounds": {
+    "max_guided_files": 2,
+    "max_guided_symbols_per_file": 2,
+    "max_pair_candidates": 12,
+    "mutations_per_file": 24
+  }
+}

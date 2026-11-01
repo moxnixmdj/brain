@@ -9,6 +9,7 @@ arbitrary task correctness, permanent availability or universal instant learning
 from __future__ import annotations
 
 import ast
+import itertools
 import copy
 import hashlib
 import json
@@ -23,6 +24,8 @@ import sqlite3
 import tempfile
 import time
 from typing import Any, Callable, Mapping
+
+from canonical.swe_kernel import python_scoped_edit_rule_v1 as _PY_EDIT
 
 from canonical.swe_kernel.skill_verification_contract_v1 import (
     KINDS, VerificationResult, applicable, evaluate, normalize_contract, source_sha256,
@@ -111,6 +114,10 @@ def _malformed_rule_reason(rule: Mapping[str, Any]) -> str | None:
     Checked structurally rather than by trying it on a sample, because a correct rule simply may
     not match an arbitrary sample and "did not apply here" is not "is not a rule".
     """
+    if rule.get('pattern_format') not in (None, _PY_EDIT.FORMAT):
+        return 'UNKNOWN_PATTERN_FORMAT'
+    if rule.get('pattern_format') == _PY_EDIT.FORMAT and rule.get('language') != 'python':
+        return 'PYTHON_FORMAT_REQUIRES_PYTHON'
     for field in ("pattern_tokens", "replacement_tokens"):
         tokens = rule.get(field)
         if not isinstance(tokens, list) or not tokens:
@@ -137,6 +144,9 @@ def skill_identity(rule: Mapping[str, Any]) -> str:
             "err": rule.get("error_class"),
             "pat": rule.get("pattern_tokens"),
             "rep": rule.get("replacement_tokens"),
+            **({'python_edit': {k: rule.get(k) for k in
+                 ('pattern_format', 'python_scope', 'parameter_bindings', 'generator', 'asynchronous')}}
+               if rule.get('pattern_format') else {}),
         },
         separators=(",", ":"),
     )
@@ -274,12 +284,15 @@ def _tokenize_code(snippet: str, *, case_insensitive_kw: bool = False) -> list[t
     return out
 
 
-def anti_unify_code_rule(
+def _anti_unify_token_rule(
     before_snippet: str,
     after_snippet: str,
     *,
     language: str = "python",
     error_class: str = "GENERIC",
+    _prepared: bool = False,
+    _python_lex: bool = False,
+    _initial_ident_map: dict | None = None,
 ) -> dict[str, Any] | None:
     """Generalize a concrete `before_snippet -> after_snippet` code fix into a parameterized rule.
 
@@ -298,7 +311,7 @@ def anti_unify_code_rule(
     # generalize to the exact local bug hunk rather than over-constraining surrounding lines.
     b_lines = before_clean.splitlines()
     a_lines = after_clean.splitlines()
-    if len(b_lines) > 1 or len(a_lines) > 1:
+    if not _prepared and (len(b_lines) > 1 or len(a_lines) > 1):
         p_idx = 0
         while p_idx < len(b_lines) and p_idx < len(a_lines) and b_lines[p_idx] == a_lines[p_idx]:
             p_idx += 1
@@ -315,10 +328,14 @@ def anti_unify_code_rule(
             before_clean = b_hunk
             after_clean = a_hunk
     sql_mode = language.lower() == "sql"
-    toks_b = _tokenize_code(before_clean, case_insensitive_kw=sql_mode)
-    toks_a = _tokenize_code(after_clean, case_insensitive_kw=sql_mode)
+    if _python_lex:
+        toks_b = [(k, v) for k, v, _, _ in _PY_EDIT.tokens(before_clean, _KEYWORDS_KEEP)]
+        toks_a = [(k, v) for k, v, _, _ in _PY_EDIT.tokens(after_clean, _KEYWORDS_KEEP)]
+    else:
+        toks_b = _tokenize_code(before_clean, case_insensitive_kw=sql_mode)
+        toks_a = _tokenize_code(after_clean, case_insensitive_kw=sql_mode)
 
-    ident_map: dict[str, str] = {}
+    ident_map: dict[str, str] = dict(_initial_ident_map or {})
     # IDENTIFIERS WERE NEVER THE ONLY THING A REPAIR GENERALIZES OVER.
     #
     # ``return t - 1`` -> ``return t`` is a repair about an off-by-one, not about the literal 1: the
@@ -400,7 +417,33 @@ def anti_unify_code_rule(
     }
 
 
+def anti_unify_code_rule(before_snippet: str, after_snippet: str, *,
+                         language: str = 'python', error_class: str = 'GENERIC'):
+    rule = _anti_unify_token_rule(before_snippet, after_snippet,
+                                 language=language, error_class=error_class)
+    if language.lower() != 'python' or (rule is not None and
+            _apply_token_rule(before_snippet, rule) == after_snippet):
+        return rule
+    return _PY_EDIT.compile_rule(before_snippet, after_snippet, error_class,
+                                 _anti_unify_token_rule, skill_identity) or rule
+
+
+def iter_crystallized_code_rule_candidates(source_text, rule):
+    if rule.get('pattern_format') == _PY_EDIT.FORMAT:
+        yield from _PY_EDIT.candidates(source_text, rule, _apply_token_rule)
+    elif rule.get('pattern_format') is None:
+        candidate = _apply_token_rule(source_text, rule)
+        if candidate is not None:
+            yield candidate
+
+
 def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> str | None:
+    """First proposal only; scoped recall verifies bounded alternative locations."""
+    return next(iter_crystallized_code_rule_candidates(source_text, rule), None)
+
+
+def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
+                      _python_lex=False, _initial_bindings=None, _anchored=False) -> str | None:
     """Match ``rule['pattern_tokens']`` against ``source_text`` via unification and rewrite."""
     sql_mode = str(rule.get("language") or "") == "sql"
     pat_non_ws = [(k, v) for k, v in (rule.get("pattern_tokens") or []) if k != "ws"]
@@ -409,32 +452,34 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
 
     # Tokenize source with byte/char offsets so exact surrounding formatting is preserved.
     src_tokens: list[tuple[str, str, int, int]] = []
-    pos = 0
-    n = len(source_text)
-    while pos < n:
-        m = _TOKEN_RE.match(source_text, pos)
-        if not m:
-            src_tokens.append(("other", source_text[pos], pos, pos + 1))
-            pos += 1
-            continue
-        kind = m.lastgroup or "other"
-        val = m.group(0)
-        if kind == "ident":
-            probe = val.upper() if sql_mode else val
-            if val in _KEYWORDS_KEEP or probe in _KEYWORDS_KEEP:
-                kind = "kw"
-        if kind != "ws":
-            src_tokens.append((kind, val, m.start(), m.end()))
-        pos = m.end()
-
+    if _python_lex:
+        src_tokens = [(k, v, a, b) for k, v, a, b in _PY_EDIT.tokens(source_text, _KEYWORDS_KEEP) if k != 'ws']
+    else:
+        pos = 0
+        n = len(source_text)
+        while pos < n:
+            m = _TOKEN_RE.match(source_text, pos)
+            if not m:
+                src_tokens.append(("other", source_text[pos], pos, pos + 1))
+                pos += 1
+                continue
+            kind = m.lastgroup or "other"
+            val = m.group(0)
+            if kind == "ident":
+                probe = val.upper() if sql_mode else val
+                if val in _KEYWORDS_KEEP or probe in _KEYWORDS_KEEP:
+                    kind = "kw"
+            if kind != "ws":
+                src_tokens.append((kind, val, m.start(), m.end()))
+            pos = m.end()
     plen = len(pat_non_ws)
     if len(src_tokens) < plen:
         return None
 
     existing_idents = {val for kind, val, _, _ in src_tokens if kind == "ident"}
 
-    for start_idx in range(len(src_tokens) - plen + 1):
-        bindings: dict[str, str] = {}
+    for start_idx in range(1 if _anchored else len(src_tokens) - plen + 1):
+        bindings: dict[str, str] = dict(_initial_bindings or {})
         matched = True
         for offset, (pk, pv) in enumerate(pat_non_ws):
             sk, sv, _, _ = src_tokens[start_idx + offset]
@@ -494,13 +539,18 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
                     fresh_bindings[rv] = cand
                 out_parts.append(fresh_bindings[rv])
             elif rk == "ws" and "\n" in rv:
-                out_parts.append("\n" + indent)
+                out_parts.append(rv if _python_lex else "\n" + indent)
             else:
                 out_parts.append(rv)
         if not matched:
             continue
 
-        candidate = source_text[:span_start] + "".join(out_parts) + source_text[span_end:]
+        replacement = "".join(out_parts)
+        if _python_lex:
+            lines = replacement.splitlines(keepends=True)
+            replacement = ''.join(line if i == 0 or not line.strip() else indent + line
+                                  for i, line in enumerate(lines))
+        candidate = source_text[:span_start] + replacement + source_text[span_end:]
         if candidate != source_text:
             return candidate
     return None
@@ -510,7 +560,7 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
 # 2. Mutated-Twin Counterfeit Filter (Rejects Rote Memorization)
 # ---------------------------------------------------------------------------
 
-def _alpha_mutate_snippet(snippet: str, *, language: str = "python") -> tuple[str, dict[str, str]]:
+def _alpha_mutate_snippet(snippet: str, *, language: str = "python", preserve_builtins: bool = False) -> tuple[str, dict[str, str]]:
     """Alpha-rename every non-keyword identifier to a distinct synthetic name."""
     if language.lower() == 'python':
         # The polyglot regex does not understand Python bytes/raw prefixes,
@@ -527,7 +577,8 @@ def _alpha_mutate_snippet(snippet: str, *, language: str = "python") -> tuple[st
             for token in tokenize.generate_tokens(io.StringIO(snippet).readline):
                 name=token.string
                 if (token.type==tokenize.NAME and name not in _KEYWORDS_KEEP
-                        and not keyword.iskeyword(name) and not keyword.issoftkeyword(name)):
+                        and not keyword.iskeyword(name) and not keyword.issoftkeyword(name)
+                        and not (preserve_builtins and name in _PY_EDIT.BUILTINS)):
                     replacement=rename_map.setdefault(name,f"_twin_sym_{len(rename_map)}_{name[:4]}")
                     edits.append((offsets[token.start[0]-1]+token.start[1],
                                   offsets[token.end[0]-1]+token.end[1],replacement))
@@ -557,13 +608,20 @@ def verify_rule_on_mutated_twin(
     before_snippet: str,
     rule: Mapping[str, Any],
     twin_oracle: Callable[[str], bool] | None = None,
+    expected_after_snippet: str | None = None,
 ) -> bool:
     """Check transport to a constructed alpha-renamed twin, not project semantics."""
     lang = str(rule.get("language") or "python")
-    mutated_before, rename_map = _alpha_mutate_snippet(before_snippet, language=lang)
+    scoped = rule.get("pattern_format") == _PY_EDIT.FORMAT
+    mutated_before, rename_map = _alpha_mutate_snippet(before_snippet, language=lang, preserve_builtins=scoped)
     if not rename_map or mutated_before == before_snippet:
         return False
-    rewritten = apply_crystallized_code_rule(mutated_before, rule)
+    if scoped and expected_after_snippet is not None:
+        expected = _PY_EDIT.renamed(expected_after_snippet, rename_map, _KEYWORDS_KEEP)
+        rewritten = next((c for c in itertools.islice(iter_crystallized_code_rule_candidates(mutated_before, rule), 64)
+                          if c == expected), None)
+    else:
+        rewritten = apply_crystallized_code_rule(mutated_before, rule)
     if not rewritten or rewritten == mutated_before:
         return False
     # Anti-memorization invariant: no original identifier may leak into the mutated twin's output.
@@ -660,10 +718,12 @@ class VerifiedSkillStore:
             if result is not None:
                 twin_evidence = result
             return result is not None
-        if not verify_rule_on_mutated_twin(before_snippet, rule, twin_oracle=observe_twin if twin_oracle else None):
+        if not verify_rule_on_mutated_twin(before_snippet, rule, twin_oracle=observe_twin if twin_oracle else None,
+                                           expected_after_snippet=after_snippet):
             return {"crystallized": False, "reason": "FAILED_MUTATED_TWIN_VERIFICATION"}
 
-        if contract is not None and apply_crystallized_code_rule(before_snippet, rule) != after_snippet:
+        if contract is not None and not any(c == after_snippet for c in itertools.islice(
+                iter_crystallized_code_rule_candidates(before_snippet, rule), 64)):
             return {"crystallized": False, "reason": "RULE_DOES_NOT_REPRODUCE_VERIFIED_EXAMPLE"}
         rule['record_version'] = 1
         rule['state'] = 'ACTIVE'
@@ -769,34 +829,34 @@ class VerifiedSkillStore:
                 continue
             if recorded is not None and recorded['verification_kind'] != required_verification_kind:
                 continue
-            candidate = apply_crystallized_code_rule(source_text, rule)
-            if candidate is None or candidate == source_text:
-                continue
-            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-            if verification is not None:
-                conn = _connect(self.db_path)
-                try:
-                    with conn:
-                        # Verification can take seconds. Do not return an artifact
-                        # invalidated/deleted by another writer while it was running.
-                        conn.execute('BEGIN IMMEDIATE')
-                        live = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (rule['skill_id'],)).fetchone()
-                        if live is None or json.loads(live[0]) != rule:
-                            continue
-                        conn.execute(
-                            "UPDATE crystallized_skills SET verified_hits = verified_hits + 1 WHERE skill_id = ?",
-                            (rule["skill_id"],),
-                        )
-                finally:
-                    conn.close()
-                return {
-                    "skill_id": rule["skill_id"],
-                    "skeleton_fp": rule["skeleton_fp"],
-                    "patched_source": candidate,
-                    "from_crystallized_memory": True,
-                    "verification": verification,
-                    "whole_task_correctness_proved": False,
-                }
+            for candidate in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
+                if candidate is None or candidate == source_text:
+                    continue
+                verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                if verification is not None:
+                    conn = _connect(self.db_path)
+                    try:
+                        with conn:
+                            # Verification can take seconds. Do not return an artifact
+                            # invalidated/deleted by another writer while it was running.
+                            conn.execute('BEGIN IMMEDIATE')
+                            live = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (rule['skill_id'],)).fetchone()
+                            if live is None or json.loads(live[0]) != rule:
+                                break  # stop this invalidated rule, not only this location
+                            conn.execute(
+                                "UPDATE crystallized_skills SET verified_hits = verified_hits + 1 WHERE skill_id = ?",
+                                (rule["skill_id"],),
+                            )
+                    finally:
+                        conn.close()
+                    return {
+                        "skill_id": rule["skill_id"],
+                        "skeleton_fp": rule["skeleton_fp"],
+                        "patched_source": candidate,
+                        "from_crystallized_memory": True,
+                        "verification": verification,
+                        "whole_task_correctness_proved": False,
+                    }
         return None
 
     # ------------------------------------------------------------------ portability
