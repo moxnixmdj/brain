@@ -1,0 +1,9 @@
+{
+ "measured_on": "2026-11-01",
+ "source": "canonical/runtime/expect_discrimination_v1.py",
+ "capabilities": 155,
+ "constant_expects": 59,
+ "dead_and_uncovered": 8,
+ "discrimination_pct": 94.8,
+ "note": "Ratchet baseline. These are the numbers this tree was in when the measurement was first put on a schedule. Lowering is progress; raising a tolerance to pass is forbidden."
+}
