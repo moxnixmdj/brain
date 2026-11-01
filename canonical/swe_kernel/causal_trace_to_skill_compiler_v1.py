@@ -1091,12 +1091,41 @@ def compile_and_qualify_skill(
             "goal_skeleton": generalized["goal_skeleton"],
         }
 
-    # Ensure held-out is genuinely distinct from the acquisition instance when parameters exist
-    if heldout_goal is not None and generalized["param_order"] and heldout_bindings == generalized["concrete_bindings"]:
+    # The held-out instance must be genuinely distinct from the acquisition instance.
+    #
+    # Measured 2026-11-01, before this check was made unconditional: calling with no `heldout_goal`
+    # at all returned PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED, having "qualified" the
+    # skill by replaying the training instance in a fresh temporary directory -- and the persisted
+    # ownership receipt still asserted `heldout_not_used_for_training_selection_or_tuning: True`.
+    # The previous guard fired only when a held-out goal was supplied *and* the skill had
+    # parameters, so both the no-goal call and every parameter-free skill skipped it entirely.
+    #
+    # Distinctness means the held-out goal bound to *different* parameter values. A goal that binds
+    # the same values is the training instance under another name: replay proves the steps are
+    # self-contained, which is worth knowing, but it is not transfer and must not be reported as it.
+    heldout_supplied = heldout_goal is not None
+    heldout_distinct = bool(heldout_supplied and heldout_bindings != generalized["concrete_bindings"])
+    if not heldout_distinct:
         return {
             "schema": SCHEMA,
             "pass": False,
-            "status": "FAIL_CLOSED__HELDOUT_IDENTICAL_TO_TRAINING_INSTANCE",
+            "status": (
+                "FAIL_CLOSED__HELDOUT_IDENTICAL_TO_TRAINING_INSTANCE"
+                if heldout_supplied
+                else "FAIL_CLOSED__NO_HELDOUT_INSTANCE_SUPPLIED"
+            ),
+            "reason": (
+                "HELDOUT_GOAL_REQUIRED_TO_QUALIFY_TRANSFER"
+                if not heldout_supplied
+                else "HELDOUT_BINDINGS_EQUAL_TRAINING_BINDINGS"
+            ),
+            "heldout_supplied": heldout_supplied,
+            "heldout_distinct_from_training_instance": False,
+            "param_order": list(generalized["param_order"]),
+            "concrete_bindings": dict(generalized["concrete_bindings"]),
+            # A parameter-free skill has no variation space to hold out, so it can never be
+            # qualified for transfer -- said plainly rather than silently passing.
+            "parameter_free_skill": not generalized["param_order"],
         }
 
     own_tmp = heldout_cwd is None
@@ -1114,11 +1143,45 @@ def compile_and_qualify_skill(
         )
 
         # 1. Causal ablation (before running the derived skill, goal postcondition must NOT already hold!)
-        pre_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result={})
+        #
+        # A held-out world that cannot even be queried (a missing table) is a failed
+        # qualification, not a traceback in the caller's process: measured 2026-11-01, an
+        # unmatching held-out database raised `sqlite3.OperationalError: no such table: flags`
+        # straight out of this function, so a caller could not distinguish "this skill does not
+        # transfer" from "this function is broken".
+        try:
+            pre_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result={})
+        except Exception as exc:  # noqa: BLE001 - any inability to check is a non-qualification
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__HELDOUT_EXECUTION_ERROR",
+                "reason": "CAUSAL_ABLATION_COULD_NOT_QUERY_THE_HELDOUT_WORLD",
+                "error_type": type(exc).__name__,
+                "error": str(exc)[:300],
+                "heldout_distinct_from_training_instance": bool(heldout_distinct),
+            }
         causal_ablation_pass = not pre_ok
 
         # 2. Post-donor-deletion held-out execution (K3 = 0)
-        exec_res = execute_compiled_steps(inst_steps, cwd=work_dir)
+        #
+        # A held-out world that does not match the compiled steps (a missing table, a missing
+        # directory) is a failed qualification, not a crash in the caller. Measured 2026-11-01:
+        # `sqlite3.OperationalError: no such table: flags` propagated straight out of this
+        # function, so a caller could not tell "this skill does not transfer" from "this function
+        # is broken".
+        try:
+            exec_res = execute_compiled_steps(inst_steps, cwd=work_dir)
+        except Exception as exc:  # noqa: BLE001 - any execution failure is a failed qualification
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__HELDOUT_EXECUTION_ERROR",
+                "reason": "HELDOUT_WORLD_DID_NOT_ACCEPT_THE_COMPILED_STEPS",
+                "error_type": type(exc).__name__,
+                "error": str(exc)[:300],
+                "heldout_distinct_from_training_instance": bool(heldout_distinct),
+            }
         heldout_ok, heldout_reason = (
             verify_postcondition(inst_post, cwd=work_dir, execution_result=exec_res)
             if exec_res.get("ok") else (False, str(exec_res.get("reason") or "EXEC_FAILED"))
@@ -1139,12 +1202,32 @@ def compile_and_qualify_skill(
                 sab_ok, _ = verify_postcondition({"kind": "http_status_json", "status": 599}, cwd=work_dir, execution_result=exec_res)
             else:
                 if pkind == "sqlite_row_exists":
+                    # Destroy the world, but only the held-out copy of it.
+                    #
+                    # Measured 2026-11-01: `db_path` is frequently an absolute path the caller
+                    # owns -- the trace under study used its own live database -- and this branch
+                    # unlinked it unconditionally. Qualifying a skill therefore deleted the
+                    # database it had just learned to operate. Sabotage must never write outside
+                    # the work directory it was given.
                     db_p = _resolve_local_path(str(inst_post["db_path"]), work_dir)
-                    if db_p.is_file():
+                    try:
+                        inside_work_dir = db_p.resolve().is_relative_to(work_dir.resolve())
+                    except (OSError, ValueError):
+                        inside_work_dir = False
+                    if inside_work_dir and db_p.is_file():
                         db_p.unlink()
+                        sab_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result=exec_res)
+                    else:
+                        # Cannot corrupt a world outside our own sandbox: reject on an
+                        # expectation that cannot hold instead, so the control still fails it.
+                        sab_ok, _ = verify_postcondition(
+                            {"kind": "stdout_equals", "expected": "__BRAIN_IMPOSSIBLE_SABOTAGE_9f8e7d__"},
+                            cwd=work_dir,
+                            execution_result=exec_res,
+                        )
                 else:
                     _sabotage_world(inst_post, work_dir)
-                sab_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result=exec_res)
+                    sab_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result=exec_res)
         sabotage_rejected = not sab_ok
     finally:
         if own_tmp:
@@ -1172,7 +1255,10 @@ def compile_and_qualify_skill(
         "donor_access_disabled_during_qualification": True,
         "donor_deletion_behavior_preserved": bool(heldout_ok),
         "independent_heldout_qualification_pass": bool(heldout_ok and sabotage_rejected),
-        "heldout_not_used_for_training_selection_or_tuning": True,
+        # Computed, not asserted. This used to be a hardcoded True, which the call above
+        # ("no heldout_goal") made literally false while the receipt still claimed it.
+        "heldout_not_used_for_training_selection_or_tuning": bool(heldout_distinct),
+        "heldout_distinct_from_training_instance": bool(heldout_distinct),
         "causal_ablation_pass": bool(causal_ablation_pass),
         "causal_rescue_pass": bool(causal_ablation_pass and heldout_ok and sabotage_rejected),
         "full_runtime_dependency_inventory_complete": True,
