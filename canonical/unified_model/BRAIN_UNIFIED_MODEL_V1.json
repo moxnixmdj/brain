@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6604,
+  "research_index_records": 6606,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3af781b758ff162b630aba158fca634161957a54b583323624cf047ff41f54bd"
+  "value": "34523ef1c84bebb220ee7fc8875fea2aa57e2b35a99aa7eece2299d24b4f954c"
  },
  "engines": [
   {
@@ -170766,6 +170766,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/RASTER_ANCHOR_KNOWN_COUNTEREXAMPLE_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RASTER_ANCHOR_KNOWN_COUNTEREXAMPLE_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "65302d0cd5c3ee5d38bd8d5ec1b9b9ef1165cfc251d642afee11e77e605146cf",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "anchor": 1,
+    "counterexample": 1,
+    "known": 1,
+    "raster": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -213005,6 +213024,51 @@
     "the_delegation_chain_v1_through_v8_resolves_end_to_end_with_no_hole_and_the_four_independently_verified_patch_transfer_families_power5_hinge_gaussian_tanh_become_library_hits_at_zero_learned_bytes_as_the_frozen_precommit_authorizes_instead_of_every_caller_above_v3_crashing": 1,
     "v1": 2,
     "v3": 1
+   }
+  },
+  {
+   "action_id": "REINSPECT_RASTER_CHART_CLAIMS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/REINSPECT_RASTER_CHART_CLAIMS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REINSPECT_RASTER_CHART_CLAIMS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "457b8d699e0374594ed04f4709ba66d98ba7a80a33c5e8bdaf190a92d5973e9d",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "acceptance": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "become": 1,
+    "benchmark": 1,
+    "capabilities": 1,
+    "chart": 2,
+    "claims": 1,
+    "classified": 1,
+    "constant": 1,
+    "dead": 1,
+    "externally": 1,
+    "flag": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "image": 1,
+    "measurement": 2,
+    "moves": 1,
+    "no": 2,
+    "nothing": 1,
+    "own": 1,
+    "pass": 1,
+    "pixels": 1,
+    "producer": 1,
+    "raster": 1,
+    "re-inspector": 1,
+    "re-opened": 1,
+    "re-readable": 1,
+    "reinspect": 1,
+    "reinspect_raster_chart_claims_v1_20261102": 1,
+    "rested": 1,
+    "three": 2
    }
   },
   {
