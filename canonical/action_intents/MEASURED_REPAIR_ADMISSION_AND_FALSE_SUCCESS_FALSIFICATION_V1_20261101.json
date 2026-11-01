@@ -50,14 +50,18 @@
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
   "canonical_base_commit": "18519cd194a6890544073c7d5343946127a475cd",
-  "constructive_gap_for_open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
   "expected_obligation_discharge_lcb": 0,
-  "expected_obligation_unlock_lcb": "0/13",
-  "interpretation": "Scope discharged is this PR's own defect set, not a benchmark obligation. The four claims above were asserted by the tree itself and are now measured and refused; no obligation outside this scope is claimed.",
+  "expected_obligation_unlock_lcb": "1/10",
+  "interpretation": "A FORECAST, NOT A MEASUREMENT, and no benchmark row changed. The three coding obligations are gated by a closed-loop solver that returned REPAIRED_AND_VERIFIED for an edit which passed the visible tests without reading its inputs. A coding score measured through that solver does not establish the capability it is credited for, so honest repair admission is a constructive gap for those three obligations, not a discharge of them. The 1/10 unlock bound is my estimate of the probability that removing this false-success mode is a precondition anyone can use; it is not a measured quantity and is recorded as such.",
   "open_obligation_ids": [],
-  "scope_complete_discharge": true,
+  "scope_complete_discharge": false,
   "stop_condition": "STOP when the falsification registry reports 0 bad rows and each repaired verifier refuses its counterexample.",
-  "success_probability_lcb": 0.95,
+  "success_probability_lcb": "9/10",
   "wall_clock_cost_ub": 1
  },
  "measured_effect": "Before: 0/5 honest repairs on the planted two-file bug (lookup table, held-out 110.0/85.0); compile_and_qualify_skill PASS with no held-out instance; caller database deleted by the sabotage control; grounded_action_v1.act VERIFIED_ACTION on an absent directory; falsification registry unrunnable as a script, 4/96 readable, two premises inverted and one fixture-absent case reported as affirmed. After: 5/5 honest repairs (held-out 100.0/295.0); qualification refused without a distinct held-out instance; databases intact; absent stated path refused at admission; registry 95/98 proven able to fail, 0 bad, 3 untested.",
