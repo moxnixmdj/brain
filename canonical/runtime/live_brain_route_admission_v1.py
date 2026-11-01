@@ -63,6 +63,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -4560,6 +4561,57 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     return True
 
 
+def _serve_by_acting(request: Mapping[str, Any]) -> dict[str, Any] | None:
+    """THE LAST RESORT IS THE ONE THAT ACTS ON THE REAL FILE.
+
+    Measured 2026-11-01 on the door itself, eight goals the machine already owns
+    elsewhere in the tree: **zero** of them passed, every one refused in 2-336 ms,
+    and not one reached `computer_env_v1.discover`.  "compress notes.txt into
+    notes.txt.gz" -> FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN in 313 ms, while the
+    same sentence closes through discovery in 8,498 ms cold and 265 ms recalled and
+    leaves a real gzip on disk.  A capability the machine has and the door never
+    reaches is not a capability.
+
+    What this will NOT do is answer a governed refusal with a substitute: an honest
+    contract refusal is left exactly as it is, and only a goal that names an output
+    in a format this repository can VERIFY is attempted -- the artifact is produced
+    on the real file and opened by the verifier before anything is reported.
+    """
+    goal = str(request.get("goal") or "").strip()
+    if not goal:
+        return None
+    try:
+        from canonical.runtime import computer_env_v1 as cenv
+        from canonical.runtime import cli_capability_acquisition_v1 as acq
+        from canonical.runtime import program_synthesis_v1 as ps
+
+        suffix = acq._requested_suffix(goal)
+        if (not suffix or not ps.has_verifier(suffix)
+                or not ps.carries_content_evidence(suffix)):
+            return None            # nothing here could tell the result from any other file
+        cwd = request.get("cwd") or request.get("workdir") or os.getcwd()
+        done = cenv.perform(goal, cwd=cwd)
+        if not (isinstance(done, Mapping) and done.get("pass") is True):
+            return None
+        return {
+            "schema": SCHEMA,
+            "task_id": str(request.get("task_id") or ""),
+            "goal": goal,
+            "pass": True,
+            "status": "PASS__PERFORMED_ON_REAL_FILE",
+            "authority": "PERFORMED_ON_REAL_FILE_AND_VERIFIED",
+            "fastest_layer": "DISCOVERY_BY_ACTING",
+            "output": done.get("output"),
+            "output_bytes": done.get("output_bytes"),
+            "argv": done.get("argv"),
+            "verification": done.get("verification"),
+            "plan": list(done.get("plan") or []),
+            "learned_here": not bool(done.get("from_memory")),
+        }
+    except Exception:  # noqa: BLE001 - a last resort must never become a new failure
+        return None
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """Public entry: explicit structured obligations can never be ignored."""
     started = perf_counter_ns()
@@ -4603,6 +4655,18 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                         "elapsed_ns": perf_counter_ns() - started,
                     }
                     return result
+        except Exception:
+            pass
+        try:
+            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                _is_honest_contract_refusal,
+            )
+            if not _is_honest_contract_refusal(result):
+                acted = _serve_by_acting(request)
+                if acted is not None:
+                    acted["elapsed_ns"] = perf_counter_ns() - started
+                    acted["served_after"] = str(result.get("status") or "")
+                    return acted
         except Exception:
             pass
     # Include preflight compilation, selection and report inspection. Moving

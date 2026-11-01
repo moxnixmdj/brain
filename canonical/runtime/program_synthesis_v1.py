@@ -345,6 +345,17 @@ def suffix_for_name(name: str) -> str:
 _HEAD_BYTES = 512
 
 
+def has_verifier(suffix: str) -> bool:
+    """Is there anything at all that can tell this format from any other?
+
+    A route may only promise work it can check.  ``.py`` has no verifier here --
+    it is bytes that happen to be source -- and a goal that produces one is not
+    something this machine can close by acting.
+    """
+    key = str(suffix or "").lower()
+    return key in _ROUND_TRIP or bool(_magic_for(key))
+
+
 def verifier_version() -> str:
     """A name for the CHECKING RULES, computed from the rules themselves.
 
