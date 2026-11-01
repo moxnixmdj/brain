@@ -30871,7 +30871,7 @@
   "engines": 26,
   "knowledge_documents": 230,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6569,
+  "research_index_records": 6570,
   "routing_tokens": 2341,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30880,7 +30880,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c4e385ec67a91f7308a9c2cbe5286153b4c48e7e169707dec64c7cfe7c8fa611"
+  "value": "504a9128c9a559c8f48cb291cb6b3b99a07731d2760d03e8ad9ddb8d07e3c37d"
  },
  "engines": [
   {
@@ -43098,7 +43098,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 26912,
+   "bytes": 27494,
    "headings": [
     "Every hardcore software-engineering problem, measured",
     "§0 The answer in one paragraph",
@@ -43117,8 +43117,8 @@
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
-   "sha256": "dcb2b109df7b118b27a66d43d146d8bc6eb29fa17a570e6a2b4df5e0e7930796",
-   "summary": "Measured 2026-11-01 on the tree of `d2319b53c4` (branched from main `82876db593`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
+   "sha256": "8c45ec074dfe2f69c8d467807f83900627e35bce8c15623b94f686362c109656",
+   "summary": "Measured 2026-11-01 on the tree of `730c5e3` (branched from main `730c5e3`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
    "terms": {
     "11": 10,
     "44": 7,
@@ -43137,10 +43137,10 @@
     "every": 13,
     "fix": 8,
     "function": 17,
-    "git": 10,
+    "git": 11,
     "machine": 8,
     "measured": 9,
-    "no": 23,
+    "no": 24,
     "none": 11,
     "not": 22,
     "one": 14,
@@ -43152,12 +43152,12 @@
     "real": 14,
     "refactor": 9,
     "refusal": 14,
-    "review": 10,
-    "row": 17,
+    "review": 11,
+    "row": 21,
     "rows": 16,
     "run": 11,
     "runnable": 8,
-    "sentence": 10,
+    "sentence": 14,
     "sentences": 17,
     "served": 50,
     "so": 14,
@@ -60602,7 +60602,7 @@
   "included_source_count": 1024,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "446f17c18da35fd9a32d7cf52d48bc4ebde2b20ae38ea6fc3fb055a881f66fb6"
+  "source_tree_digest": "a7fa803c01113b26e599d778bb724f3ac6b9ec792c525caa84ff8083e6c164f9"
  },
  "research_index": [
   {
@@ -208564,6 +208564,51 @@
     "successor": 1,
     "v1": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "76c7749d90ee66d88f38cf0d1d6044b917a4734f01ce60a2f4cdef9bc455b700",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "anything": 1,
+    "chosen": 1,
+    "claims": 1,
+    "dashes": 1,
+    "defect": 1,
+    "every": 2,
+    "every_refusal_has_a_meaning_and_a_fix_v1": 1,
+    "every_refusal_has_a_meaning_and_a_fix_v1_20261101_v1": 1,
+    "exactly": 1,
+    "fix": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 1,
+    "hand": 1,
+    "hour": 1,
+    "inventory": 2,
+    "list": 1,
+    "makes": 1,
+    "meaning": 2,
+    "names": 1,
+    "next": 1,
+    "place": 1,
+    "published": 1,
+    "queue": 1,
+    "re-deriving": 1,
+    "refusal": 2,
+    "rows": 1,
+    "so": 1,
+    "table": 1,
+    "tally": 1,
+    "two": 1,
+    "v1": 2
    }
   },
   {

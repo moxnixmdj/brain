@@ -74,6 +74,12 @@ DEFECT_MEANING = {
         "no test in the stated suite is flaky, so there is no quarantine to write",
     "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION":
         "the move collides: both stated files already define the symbol",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY":
+        "a repository sentence was routed to a Python transformer, and the sentence names no "
+        "repository for the transformer to stand in",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED":
+        "a sentence about commits was routed to the architect row, which read history without being "
+        "given a repository to read it from",
 }
 
 # The honest cheapest fix, per refusal class.  "None" means the refusal is correct and the fix is
@@ -109,6 +115,12 @@ FIX = {
         "none on the machine — the suite is not flaky; a better fixture is the fix",
     "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION":
         "none — the refusal is correct and the sentence is ill-posed",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY":
+        "selection: a sentence whose verb is a repository operation belongs to the git row, and that "
+        "row then refuses `cherry-pick` by name instead of a Python transformer refusing a repository",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED":
+        "derive `repo_root` from the working directory, and give a changelog its own row: it writes a "
+        "document from history, which is neither a read nor an architecture review",
 }
 
 CLASS_STORY = {

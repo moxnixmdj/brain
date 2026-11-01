@@ -1,0 +1,386 @@
+{
+ "action_id": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1",
+ "action_intent_id": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1_20261101_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Two refusals in the published inventory printed an em dash where the meaning and the fix belong: TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY and GIT_READ_TARGET_NOT_SPECIFIED, both new on main. Reading them shows the same cause twice: a sentence whose verb is a repository operation was routed to a row that is not a git row. 'Cherry-pick the last commit onto a new branch' selects python.swe.transform_and_synthesize.v1, a Python transformer, which refuses because there is no repository for it to stand in; 'Write the changelog entry for the last three commits' selects software.analysis.diagnose_and_architect.v1, which read history without a repository to read it from. Neither refusal is a git-engine failure and neither is a missing transform; both are selection, and the row that should have received them already exists and already refuses by name what it cannot do. The inventory now records the meaning and the fix for both, so the list has no unexplained row.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py",
+   "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The inventory's defect table had two rows whose meaning and fix were dashes, which makes the list a tally in exactly the place it claims to be a work queue.",
+ "canonical_base_commit": "730c5e394a842ab0b1b1193cd4e52bbbc62a6956",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The inventory's defect table had two rows whose meaning and fix were dashes, which makes the list a tally in exactly the place it claims to be a work queue.",
+ "date": "2026-11-01",
+ "expected_parent_change": "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py: DEFECT_MEANING and FIX gain entries for TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY and GIT_READ_TARGET_NOT_SPECIFIED, both stating that the refusal is selection rather than a missing engine and naming the row that should have received the sentence. HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md regenerated. canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled last.",
+ "expected_parent_frontier_change": "Every refusal in the published inventory names what it is and what would fix it, so the next hour can be chosen without re-deriving anything by hand.",
+ "explicit_user_authorization": "Owner instruction this session: the complete list of every hardcore software-engineering problem, every number a measurement and never a wish, honest numbers even when they contradict the previous claim; the answers already exist so wire what is there; the optimal thing in the fastest way and only the right way. No external model, zero spend, fail closed.",
+ "falsification_condition": "FALSIFIED if any counted refusal class still has no meaning or no fix in the published table, or if the counts disagree with a fresh run of the census.",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Census on 730c5e3: 38 of 49 served, 11 refused, 9 distinct classes; matrix 44 of 54 real, 0 FALSE, 0 DAMAGED. Zero rows of the defect table are blank after the change; two were before.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "execution_guard/swe_capability_matrix_v1.py",
+  "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "730c5e394a842ab0b1b1193cd4e52bbbc62a6956",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
+   "READING_THE_HOST_ONLY_FROM_IN_NAME",
+   "WIDENING_A_STATED_REGION_TO_ITS_NEIGHBOURS"
+  ],
+  "expected_parent_level_state_change": "Every refusal in the published inventory names what it is and what would fix it, so the next hour can be chosen without re-deriving anything by hand.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETING_THE_BRANCH_RESTORES_SEVEN_INDISTINGUISHABLE_EXECUTION_FAILURES",
+   "intrinsic_or_path_specific": "GENERAL__ANY_EFFECT_THE_REGISTRY_DOES_NOT_DECLARE",
+   "surviving_causal_blocker": "TWO_REFUSALS_PRINTED_A_DASH_WHERE_THE_MEANING_AND_THE_FIX_BELONG"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "ONE_ORACLE_PREDICATE__NO_NEW_CAPABILITY_NO_NEW_ROW",
+   "existing_inherited_routes_checked": [
+    "live_brain_route_admission_v1._REFUSAL_CLASS_RE",
+    "live_brain_route_admission_v1._ALREADY_SATISFIED_RE",
+    "live_brain_route_admission_v1._may_supersede_a_failed_attempt",
+    "the <CLASS>:<detail> refusal convention across ~40 adapter classes (grep)"
+   ],
+   "external_existing_routes_checked": "None needed.",
+   "surviving_gap": "A_RESIDUAL_ONE_CASE_FLICKER_REMAINS__43_IN_ONE_OF_SIX_RUNS__AND_IS_NOT_YET_ATTRIBUTED_TO_A_NAMED_CASE"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_SERVED_COUNT",
+    "REMOVING_ROWS_TO_LOOK_CAPABLE"
+   ],
+   "real_outcome": "A refusal that names its own reason is reported as that reason, so the gaps that remain are readable as distinct missing capabilities instead of one generic failure count.",
+   "surviving_necessity": "A wrong answer costs more than a refusal: it spends the caller's trust on top of the request."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_REGISTRATION_INDEX_THE_REGISTRY_ALREADY_HAS__NO_NEW_MECHANISM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+   "search_stop_decision": "STOPPED_WHEN_A_GREP_SHOWED_THE_CONVENTION_ALREADY_EXISTED_ACROSS_ABOUT_FORTY_CLASSES"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Renaming one case fixes today's collision and leaves the next one unprotected; deduping the report hides the collision instead of removing it.",
+   "routes_ranked": [
+    "KEY_THE_FIXTURE_ON_REGISTRATION_INDEX__CHOSEN",
+    "RENAME_ONE_CASE",
+    "DEDUPE_THE_REPORT"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THREE_CONSECUTIVE_MATRIX_RUNS_AND_A_THREE_TEST_SUITE"
+  },
+  "real_outcome": "Two refusals in the published inventory printed an em dash where the meaning and the fix belong: TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY and GIT_READ_TARGET_NOT_SPECIFIED, both new on main. Reading them shows the same cause twice: a sentence whose verb is a repository operation was routed to a row that is not a git row. 'Cherry-pick the last commit onto a new branch' selects python.swe.transform_and_synthesize.v1, a Python transformer, which refuses because there is no repository for it to stand in; 'Write the changelog entry for the last three commits' selects software.analysis.diagnose_and_architect.v1, which read history without a repository to read it from. Neither refusal is a git-engine failure and neither is a missing transform; both are selection, and the row that should have received them already exists and already refuses by name what it cannot do. The inventory now records the meaning and the fix for both, so the list has no unexplained row.",
+  "required_capability": "An instrument that counts each case once and gives each case its own fixture.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME",
+      "CORRECTNESS": "SAME",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "REQUIRES_RE_DERIVATION_EACH_ROUND",
+      "VERIFIABILITY": "NONE",
+      "WALL_CLOCK": "SLOWER"
+     },
+     "evidence": [
+      "leaving the two rows blank keeps the list honest about the count and silent about the cause"
+     ],
+     "qualification_evidence": [
+      "direct probe: grep for the em-dash cell found 2 rows this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "LEAVE_THE_TWO_ROWS_BLANK"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "EXACT",
+      "CORRECTNESS": "NAMES_THE_CAUSE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "READ_FROM_THE_CENSUS",
+      "VERIFIABILITY": "ZERO_BLANK_CELLS",
+      "WALL_CLOCK": "NO_EXTRA_WORK"
+     },
+     "evidence": [
+      "both refusals name a repository that the sentence does not state, and the git row that should receive them already exists"
+     ],
+     "qualification_evidence": [
+      "direct probe: door.solve on #45 and #46 returns the two refusal keys this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1"
+    }
+   ],
+   "checked_at_utc": "2026-11-01T05:19:06Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "REPORT_EVERY_FAILED_ATTEMPT_AS_FAIL__LIVE_CONTROLLER_EXECUTION",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external engine needed: a grep over canonical/runtime/bound_capabilities and canonical/swe_kernel found about forty distinct <CLASS>:<detail> classes already raised by adapters, so the information had been emitted all along and only the door's parser was narrow.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python extract loop of a named function into a helper ast span"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python extract function"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "derive a statement span from a function body without reprinting the module"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "rope 1.15.0 libcst latest release python 3.11 support"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-01T05:19:06Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3.11 stdlib (ast, json, pathlib, re, sys)",
+      "evidence": [
+       "DIRECT_PROBE: the 3.11 interpreter ran the classifier over the seven real adapter messages and returned six distinct classes this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/declared_input_derivation_v1.py + canonical/runtime/goal_front_compiler_v1.py (in-tree, no new package)",
+      "evidence": [
+       "BRAIN_INHERITED: the <CLASS>:<detail> convention is already emitted by ~40 adapter classes"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "execution_guard/swe_advanced_probe_v1.py + execution_guard/swe_capability_matrix_v1.py (in-tree instruments)",
+      "evidence": [
+       "DIRECT_PROBE: census 38 served / 11 refused and matrix 44 REAL on 730c5e3 this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/declared_input_derivation_v1.py already computes start_line/end_line from a host function's statement runs (the extract-region block)",
+     "canonical/runtime/bound_capabilities/python_refactor_extract_function.py already performs the extraction and returns gate PASS given qualname=total and lines 3-4"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "modelcitizendeveloper survey 1.104.1: only LibCST, RedBaron and Bowler fully preserve formatting; Rope does text-based modification with partial round-trip fidelity"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org/project/rope 1.15.0: 'the world's most advanced open source Python refactoring library', LGPL v3+, 'Most Python syntax up to Python 3.10 is supported'"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "github.com/Instagram/LibCST README: a CST that keeps all formatting details (comments, whitespace, parentheses), for automated refactoring"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE_THE_MAGNET_ROWS__MEASURED_TO_PRODUCE_FOUR_WRONG_ANSWERS",
+   "BUILD_A_SEPARATE_EFFECT_GATE__DUPLICATES_THE_EXISTING_TABLE",
+   "ADD_FOUR_CLASSES_TO_THE_EXISTING_TABLE__CHOSEN"
+  ],
+  "selected_route": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1",
+  "selected_surviving_route": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1",
+  "stop_condition": "STOP when no row of the defect table is blank, when every counted class has a meaning and a fix, and when the numbers still match a fresh run of the instrument",
+  "why_selected_route_is_fastest_sufficient": "The adapter already performs this extraction correctly -- called with qualname=total and lines 3-4 it returns gate PASS and one edit -- so the refusal was never a missing capability. The derivation module already had a block that computes a span from a host function's statements; it was unreachable because the binder wrote a 0 first and because the host phrase pattern only knew 'in <name>'. Two rules reuse both, no new module, and the alternative -- teaching the adapter to guess a region -- would have made the door invent what the sentence did not say."
+ },
+ "route_id": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "EVERY_REFUSAL_HAS_A_MEANING_AND_A_FIX_V1",
+ "stop_condition": "STOP when no row of the defect table is blank, when every counted class has a meaning and a fix, and when the numbers still match a fresh run of the instrument",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-01T05:19:06Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "a4bfe3d2a2c02ace9a0eef32cb8153a5edb9f551",
+     "path": "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py"
+    },
+    {
+     "git_blob_sha": "31cb818c7f16448234bb7282387f76bbb3943a2b",
+     "path": "execution_guard/swe_advanced_probe_v1.py"
+    }
+   ],
+   "decisive_question": "MAY_A_REVIEW_ANSWER_UNCLEAR_AND_STILL_BE_COUNTED_AS_HAVING_RUN",
+   "falsifier_id": "RESTORE_gate_PASS_AND_SEE_THE_CASE_FLICKER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_ADAPTER_ALREADY_EXTRACTS_THE_STATED_LOOP_WITH_GATE_PASS_WHEN_GIVEN_QUALNAME_total_AND_LINES_3_4__NOTHING_WAS_MISSING_BUT_THE_ORDER_OF_THE_TWO_ANSWERS_AND_NO_OTHER_REQUEST_IN_THE_49_CASE_CENSUS_CHANGED_VERDICT",
+   "proposal_id": "A_REVIEW_MAY_ANSWER_UNCLEAR_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. Documentation and the composer's dictionaries only; no runtime path changes."
+}
