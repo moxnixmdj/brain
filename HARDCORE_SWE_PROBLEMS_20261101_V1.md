@@ -58,6 +58,16 @@ Ranked by capability bought per hour:
 | matrix latency | median **88 ms**, p90 529 ms, max 3 373 ms | median 102 ms |
 | live verified registry | 443 rows, **87 software-engineering rows**, 110 declare `output_path` | 440 rows, 88 SWE |
 
+**Two documents, one day, different trees.** `HARDCORE_SWE_CURRENT_PROBLEMS_20261101.md`
+reports 4 served / 49 and 21 REAL, measured on the unmerged branch
+`arena/9acd8a8c-brain` at `c4c74d7`; this document is measured on merged `main` `34124aa`.
+Both are honest measurements of what each tree does — the same instrument, one week of merges
+apart — and neither is a correction of the other. Where they disagree, the tree is named.
+
+**Substrate.** That document also reports 2 of 10 required Python modules present. After
+`python3 scripts/restore_substrate_v1.py` this tree reports `SUBSTRATE_READY`, 10/10. A census
+run before the restore measures the image, not the machine — §P8.
+
 **Retraction.** `HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md` §0 states the brain answers
 "4 of 49" advanced sentences. That number is stale by the time it was read: the same
 instrument on the merged tree says 36 of 49. The document's *conclusion* (the gap is
