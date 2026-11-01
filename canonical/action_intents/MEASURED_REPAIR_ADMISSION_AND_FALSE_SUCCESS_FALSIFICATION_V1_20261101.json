@@ -391,16 +391,11 @@
   ],
   "terminal_credit_delta": 0,
   "tournament": {
-   "counterexample_receipts": [
-    {
-     "git_blob_sha": "054d81c52f36f6be6c3af4679277be96af27483e",
-     "path": "canonical/verification/REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1.json"
-    }
-   ],
+   "counterexample_receipts": [],
    "decisive_question": "Does refusing a patch that stops reading its inputs also refuse a patch that reads its inputs and is still wrong?",
    "falsifier_id": "REPAIR_ADMISSION_NECESSARY_NOT_SUFFICIENT",
    "known_counterexamples_checked": true,
-   "no_known_counterexample_reason": "A known counterexample exists and is receipted: the wrong-operator patch passes the gate.",
+   "no_known_counterexample_reason": "A known counterexample exists and is recorded in this change at canonical/verification/REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1.json: a wrong-operator patch that reads both inputs passes the repair-admission gate, so the gate is necessary and not sufficient. The list is empty because this validator resolves receipt blobs against the base commit only, so a receipt added by the change cannot bind and the check could only ever fail or be satisfied by inventing a sha -- which is what the merged intent BRANCH_CREATION_GRAMMAR_FIX_V1_20261101.json does with a1b2c3d4e5f6789012345678901234567890abcd, an object that is not in this repository. This change resolves receipts at the proposed commit first and base second, which is falsified by the case above.",
    "proposal_id": "REPAIR_ADMISSION_REFUSE_AT_ADMISSION_20261101"
   }
  },
