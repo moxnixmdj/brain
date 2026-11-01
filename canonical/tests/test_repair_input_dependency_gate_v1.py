@@ -63,9 +63,8 @@ def test_dropping_one_of_two_parameters_is_refused():
         "def f(a, b):\n"
         "    return a * 2\n"
     )
-    assert gate_mod.lost_dependencies("def f(a, b):\n    return a + b\n", after) == [
-        {"function": "f", "parameter": "b"}
-    ]
+    lost = gate_mod.lost_dependencies("def f(a, b):\n    return a + b\n", after)
+    assert [(item["function"], item["parameter"]) for item in lost] == [("f", "b")]
 
 
 def test_unparseable_source_is_refused_not_guessed():
@@ -113,13 +112,38 @@ def test_nested_function_parameters_are_not_attributed_outward():
         "    return inner(1)\n"
     )
     uses = gate_mod.parameter_use(source)
-    assert uses["outer"] == frozenset()
-    assert uses["inner"] == frozenset({"x"})
+    assert uses["outer"] == frozenset(), "inner's reads leaked outward"
+    # Inputs are keyed by signature position, so `x` is slot `pos#0`.
+    assert uses["inner"] == frozenset({"pos#0"})
 
 
 def test_varargs_and_kwargs_are_tracked():
     source = "def f(*args, **kwargs):\n    return len(args) + len(kwargs)\n"
-    assert gate_mod.parameter_use(source)["f"] == frozenset({"args", "kwargs"})
+    assert gate_mod.parameter_use(source)["f"] == frozenset({"vararg", "kwargs"})
+
+
+# --------------------------------------------------------------------------- renames are not losses
+def test_renaming_a_positional_parameter_is_not_a_lost_dependency():
+    """Measured 2026-11-01: the first version keyed on names and refused this outright."""
+    before = "def area(w, h):\n    return w * h\n"
+    after = "def area(width, height):\n    return width * height\n"
+    assert gate_mod.lost_dependencies(before, after) == []
+    assert gate_mod.gate(before, after)["status"] == gate_mod.PASS
+
+
+def test_renaming_a_keyword_only_parameter_is_not_a_lost_dependency():
+    before = "def f(a, *, flag):\n    return a if flag else 0\n"
+    after = "def f(a, *, enabled):\n    return a if enabled else 0\n"
+    assert gate_mod.gate(before, after)["status"] == gate_mod.PASS
+
+
+def test_a_rename_does_not_excuse_discarding_a_different_input():
+    """The rule still bites when the patch renames one parameter and drops another's use."""
+    before = "def f(a, b):\n    return a + b\n"
+    after = "def f(alpha, beta):\n    return alpha * 2\n"
+    lost = gate_mod.lost_dependencies(before, after)
+    assert [item["slot"] for item in lost] == ["pos#1"]
+    assert lost[0]["parameter"] == "b"
 
 
 def test_the_verdict_carries_no_authority():

@@ -30,6 +30,21 @@ that removes a genuinely unused parameter read, which is why the refusal is a na
 the offending parameter listed, and why `terminal_authority` is false: a caller may override with
 knowledge this module does not have.
 
+INPUTS ARE IDENTIFIED BY POSITION, NOT BY NAME
+----------------------------------------------
+Measured 2026-11-01 on the first version of this module: it compared parameter *names*, so a patch
+that only renamed `def area(w, h)` to `def area(width, height)` was refused as
+`PATCH_STOPPED_READING_ITS_INPUTS: area(h), area(w)`. Renaming a parameter is the most benign
+honest edit there is, and refusing it would have made the gate an obstacle to correct work. The
+first audit missed this because none of the seven real diffs it was run over happened to rename
+anything -- a small sample that agreed with the gate for an uninteresting reason.
+
+Inputs are therefore keyed by their position in the signature: the second positional parameter
+before the patch is the second positional parameter after it, whatever it is called. A patch that
+stops reading that slot is still refused; a patch that renames it now passes. Removing a parameter
+outright still reduces the set, and is still refused -- conservatively, since a signature change
+is a different question from a repair.
+
 WHAT IT IS NOT
 --------------
 Not a verifier, not a held-out test generator, and not a correctness proof. A patch can lose no
@@ -50,16 +65,22 @@ class GateError(RuntimeError):
     """Raised when the gate cannot decide honestly."""
 
 
-def _arg_names(node: ast.FunctionDef | ast.AsyncFunctionDef) -> list[str]:
+def _slots(node: ast.FunctionDef | ast.AsyncFunctionDef) -> list[tuple[str, str]]:
+    """(slot key, parameter name) for every parameter, in signature order.
+
+    The slot key is positional so that renaming a parameter does not read as discarding it.
+    """
     args = node.args
-    names = [a.arg for a in args.posonlyargs]
-    names += [a.arg for a in args.args]
-    names += [a.arg for a in args.kwonlyargs]
+    slots: list[tuple[str, str]] = []
+    for idx, a in enumerate(list(args.posonlyargs) + list(args.args)):
+        slots.append((f"pos#{idx}", a.arg))
+    for idx, a in enumerate(args.kwonlyargs):
+        slots.append((f"kwonly#{idx}", a.arg))
     if args.vararg:
-        names.append(args.vararg.arg)
+        slots.append(("vararg", args.vararg.arg))
     if args.kwarg:
-        names.append(args.kwarg.arg)
-    return names
+        slots.append(("kwargs", args.kwarg.arg))
+    return slots
 
 
 def _body_loads(node: ast.AST) -> set[str]:
@@ -88,9 +109,8 @@ def parameter_use(source_text: str) -> dict[str, frozenset[str]]:
     uses: dict[str, frozenset[str]] = {}
     for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            params = set(_arg_names(node))
             loaded = _body_loads(node)
-            uses[node.name] = frozenset(params & loaded)
+            uses[node.name] = frozenset(slot for slot, name in _slots(node) if name in loaded)
     return uses
 
 
@@ -102,9 +122,25 @@ def lost_dependencies(before_source: str, after_source: str) -> list[dict[str, s
     for name, used_before in before.items():
         if name not in after:
             continue  # a deleted function is a different question, decided elsewhere
-        for parameter in sorted(used_before - after[name]):
-            lost.append({"function": name, "parameter": parameter})
+        for slot in sorted(used_before - after[name]):
+            lost.append({
+                "function": name,
+                "slot": slot,
+                "parameter": _names_by_slot(before_source, name).get(slot, slot),
+            })
     return lost
+
+
+def _names_by_slot(source_text: str, function_name: str) -> dict[str, str]:
+    """Slot key -> parameter name, for reporting a refusal in the caller's own vocabulary."""
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        return {}
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == function_name:
+            return {slot: param for slot, param in _slots(node)}
+    return {}
 
 
 def gate(before_source: str, after_source: str) -> dict[str, Any]:
