@@ -3,7 +3,7 @@
  "source": "canonical/runtime/expect_discrimination_v1.py",
  "capabilities": 155,
  "constant_expects": 59,
- "dead_and_uncovered": 8,
- "discrimination_pct": 94.8,
- "note": "Ratchet baseline. These are the numbers this tree was in when the measurement was first put on a schedule. Lowering is progress; raising a tolerance to pass is forbidden."
+ "dead_and_uncovered": 5,
+ "discrimination_pct": 96.8,
+ "note": "Ratchet baseline. Lowering is progress; raising a tolerance to pass is forbidden. Moved from 8/94.8% after archive_verify_gnu_tar, sqlite_verify_cli and xlsx_verify_openpyxl named their verified artifact under output_path + output_sha256, so the independent artifact check can re-read the bytes instead of trusting the adapter's own boolean."
 }
