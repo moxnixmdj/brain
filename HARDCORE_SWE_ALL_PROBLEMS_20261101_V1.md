@@ -40,8 +40,12 @@ rewriting `return a - b` to `return a + b`). The problems are, in order of what 
    `CONTRACT_NOT_STATED` class.
 5. **Two of the 14 refusals were "nothing to do"** — the requested state already held, and the door
    had a status for exactly that it did not use. Fixed on this branch (census 35 → 37 served).
-6. **Whole capability classes are absent**, and the census's *served* count hides it, because only
-   **8 rows** answer all 36 served requests and **three of them answer 31**.
+6. **Whole capability classes are absent**, and the census's *served* count hides it, because a
+   handful of rows answer almost every served request. The eleven refusals left on `origin/main`
+   today are, by name: C++ repair ×2 (`CPP_NO_APPLICABLE_TRANSFORM`), SQL DDL
+   (`SQL_UNSUPPORTED_DDL_EDIT`), a red (not flaky) CI fixture (`NO_FLAKY_TEST_DETECTED`),
+   benchmark-vs-`HEAD~1`, race-condition finding, regression-test authoring, commit bisect,
+   a symbol move that collides (`TARGET_SYMBOL_COLLISION:add`), cherry-pick, and a changelog entry.
 
 ---
 
@@ -52,6 +56,7 @@ rewriting `return a - b` to `return a + b`). The problems are, in order of what 
 | 18 ordinary sentences (filesystem oracle) | **9 / 18**, mean 193 ms | **11 / 18**, mean 215 ms |
 | 28-task surface ladder | 28/28 reached, **27 PASS**, 1 refused by design, 0 false PASS | 27 PASS |
 | 49-sentence advanced census (no oracle) | 36 served / **13 refused** | 36 served / 13 refused |
+| **2026-11-01 end of round, `origin/main` after four merges** | — | **38 served / 11 refused**, matrix **44 REAL / 0 FALSE / 0 DAMAGED**, 18-sentence **11/18**, mean 204 ms |
 | 54-case capability matrix | **42 REAL** / 0 FALSE / 0 DAMAGED, median 79 ms | **44 REAL** / 0 FALSE / 0 DAMAGED, median 73 ms |
 | 2026-11-01 re-measure, bare venv vs restored, clean `origin/main` | 41 REAL, exit 0 | 43 REAL, exit 0 |
 
@@ -235,6 +240,21 @@ Items 1–4 are worth more capability than items 6–10: 1 and 4 are pure measur
 wins, 2 and 3 are already-written code.
 
 ---
+
+## §4b Merged 2026-11-01 (this round)
+
+Five changes landed, each with a test that is red on the previous commit and green on its own:
+
+| PR | defect | measured |
+|---|---|---|
+| #6497 | an adapter's `RuntimeError("GUARD_KEY:detail")` refusal was reported as a controller crash | 7 of 13 census refusals reclassified, cause preserved in `refusal_payload` |
+| #6497 | the dependency audit flagged by package NAME, never comparing the pinned version | 3 safe versions → 0 findings; `requests==2.19.0` → `fixed_in 2.31.0` |
+| #6524 | the census and the matrix printed boards on an image with 0 of 10 tools | bare image: 41 REAL / exit 0 → **NOT_MEASURED / exit 2**; restored: 43 REAL |
+| #6526 | "pin the dependencies" and "vendor the dependency" over a manifest declaring none were REFUSALS | census **35 → 37 served**; matrix unchanged (43 REAL / 0 FALSE) |
+| #6526 | the census floor in CI was 5 while the census served 35 | floor raised to 35: eleven refusals can no longer regress silently |
+
+`origin/main` at the end of the round: census **38 of 49**, matrix **44 REAL / 0 FALSE / 0 DAMAGED**,
+18-sentence probe **11 of 18** at 204 ms mean.
 
 ## §5 What this branch already changes (unmerged)
 

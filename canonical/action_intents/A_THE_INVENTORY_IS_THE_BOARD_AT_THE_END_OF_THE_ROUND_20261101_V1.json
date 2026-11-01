@@ -1,9 +1,9 @@
 {
-  "action_id": "A_NOTHING_TO_DO_IS_AN_ANSWER_WITH_THE_PROOF_20261101_V1",
-  "action_intent_id": "A_NOTHING_TO_DO_IS_AN_ANSWER_WITH_THE_PROOF_20261101_V1",
+  "action_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1",
+  "action_intent_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1",
   "action_intent_path": null,
   "action_kind": "GOVERNANCE_GUARD",
-  "action_summary": "Two of the advanced census's fourteen refusals are requests whose end state already holds: \"Pin the dependency versions in <proj>/pyproject.toml\" and \"Vendor the single dependency of the project in <proj>/pkg\", over manifests that declare no dependencies at all. Both came back FAIL_CLOSED__CAPABILITY_REFUSED_POLYGLOT_REFUSED, and the cause was one line of reasoning: the pin routine rewrote the dependency array, saw its output identical to its input, and called that a failure. Its own rewrite is not evidence; the declaration is. The engine now reads the declared dependencies (project.dependencies, optional-dependency groups, dev arrays), and when none of them is unpinned it answers ALREADY_SATISFIED with the list it read and the reason (PYPROJECT_DECLARES_NO_DEPENDENCIES / PYPROJECT_DEPENDENCIES_ALREADY_PINNED); the vendor routine answers the same way when nothing is declared. The adapter stops flattening that verdict into a refusal, and the door's already-satisfied branch now runs BEFORE its refusal-spelling branch, because ALREADY_SATISFIED has the shape of a guard key and was being classified as one. Negative controls hold: an unpinned manifest is still edited, and a manifest that declares a dependency is never reported as already vendored.",
+  "action_summary": "The hardcore inventory was written at the start of the round and every number in it described a tree that four merges have since moved. A ranked problem list whose board is stale reads as a plan for work that is already done: three of its top four items are closed, and the census moved 36 -> 38 served. This rewrites the board section, adds the round's landed changes with the delta each bought, and names the eleven refusals that are actually left.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -38,23 +38,23 @@
     "route_class": "REUSE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::'Nothing to do' was inferred from the absence of an edit the machine itself would have made, instead of from the artifact the sentence is about -- and the answer it produced was a refusal, whose meaning is the opposite of the truth it had measured.",
-  "canonical_base_commit": "4bb90430ebb4a018b9d640c7647fa853876a251a",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The document and the tree it describes were measured at different times, and the document had no entry that could show which of its numbers had been superseded.",
+  "canonical_base_commit": "9483dff2059b6fbaec9e27457510591a8d36369b",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "'Nothing to do' was inferred from the absence of an edit the machine itself would have made, instead of from the artifact the sentence is about -- and the answer it produced was a refusal, whose meaning is the opposite of the truth it had measured.",
+  "causal_blocker": "The document and the tree it describes were measured at different times, and the document had no entry that could show which of its numbers had been superseded.",
   "date": "2026-11-01",
-  "expected_parent_change": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
-  "expected_parent_frontier_change": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
+  "expected_parent_change": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
+  "expected_parent_frontier_change": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
   "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
-  "falsification_condition": "If a manifest that declares an unpinned dependency is ever answered already-satisfied, if a request whose state does not hold is ever answered that way, or if the matrix loses a REAL mark, this action was wrong.",
+  "falsification_condition": "If any number in the document disagrees with a board run on the tree it names, this action was wrong.",
   "governance_change": true,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
-  "intent": "Answer the request that is already satisfied with the artifact that proves it.",
+  "intent": "Keep the problem inventory equal to the board, or it stops being an inventory.",
   "load_bearing_primary": {
-    "canonical_base_commit": "4bb90430ebb4a018b9d640c7647fa853876a251a",
+    "canonical_base_commit": "9483dff2059b6fbaec9e27457510591a8d36369b",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -63,13 +63,13 @@
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/13",
     "interpretation": "AN_ALREADY_HELD_STATE_IS_AN_ANSWER_ONLY_WITH_ITS_PROOF",
-    "measured_effect": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
+    "measured_effect": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": 0.5,
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
+  "measured_effect": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/runtime/declared_input_derivation_v1.py",
@@ -82,16 +82,11 @@
     "hardcore_swe_surface_probe_20261030.py"
   ],
   "progress_evidence_paths": [
-    "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
-    "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
-    "canonical/runtime/live_brain_route_admission_v1.py",
-    "canonical/tests/test_nothing_to_do_is_an_answer_with_the_proof_v1.py",
-    ".github/workflows/swe-advanced-census.yml",
     "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
-    "canonical_base_commit": "4bb90430ebb4a018b9d640c7647fa853876a251a",
+    "canonical_base_commit": "9483dff2059b6fbaec9e27457510591a8d36369b",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
@@ -99,7 +94,7 @@
       "THE_SILENT_WIDENING_OF_AN_EDIT_SCOPE_TO_THE_ANCESTOR_TREE",
       "CERTIFICATION_OF_A_RUN_THAT_MOVED_FILES_THE_SENTENCE_NEVER_NAMED"
     ],
-    "expected_parent_level_state_change": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
+    "expected_parent_level_state_change": "The inventory now carries the end-of-round board measured on origin/main after the four merges of this session: 49-sentence advanced census 38 served / 11 refused (each refusal named), 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18-sentence probe 11 of 18 at a 204 ms mean, and the five landed changes with the measured delta each one bought. No claim in the document is now a number from a superseded tree, which was the standing criterion for the whole document.",
     "iteration_limit": 4,
     "obs_blocker": {
       "delete_bypass_substitute_options": "REPORTING_ALREADY_SATISFIED_WITHOUT_READING_ANYTHING__REJECTED_THAT_IS_THE_P2_LIE_ONE_LAYER_DOWN; MAKING_THE_REWRITE_IDEMPOTENT_AND_CALLING_THAT_SUCCESS__REJECTED_THE_REWRITE_IS_THE_MACHINES_OWN_OPINION; TREATING_NO_FLAKY_TEST_DETECTED_THE_SAME_WAY__REJECTED_MEASURED_ITS_CI_IS_RED_NOT_FLAKY",
@@ -172,10 +167,10 @@
     "why_selected_route_is_fastest_sufficient": "Three edits of a few lines each, six tests, and the census re-measures in six seconds. Each one removes a gate and reads a fact already on hand, so nothing new is computed and nothing new can be wrong."
   },
   "required_capability": "EVIDENCE_THAT_NAMES_THE_FACT_IT_WAS_DECIDED_ON",
-  "resolution": "The engine reads the dependency declaration and reports already-satisfied with that list; the adapter passes the verdict through; the door's already-satisfied branch precedes its refusal-spelling branch and carries the evidence into the answer.",
-  "route_id": "PROVE_THE_STATE_THEN_ANSWER",
+  "resolution": "The end-of-round board is a row in the document, each landed change carries its measured delta, and the remaining refusals are listed by their own names.",
+  "route_id": "THE_INVENTORY_IS_THE_BOARD",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "PROVE_THE_STATE_THEN_ANSWER",
+  "selected_route": "THE_INVENTORY_IS_THE_BOARD",
   "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -208,15 +203,15 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "10cfc9032e324c1c9bed612e8b0fe7c12740445f",
-          "path": "canonical/swe_kernel/polyglot_build_ci_engine_v1.py"
+          "git_blob_sha": "dfc8c41a76345dd970533a68b66677b7d2dc908f",
+          "path": "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
         }
       ],
-      "decisive_question": "IS_THE_END_STATE_PROVEN_FROM_THE_ARTIFACT_OR_FROM_THE_MACHINES_OWN_EDIT",
-      "falsifier_id": "AN_UNCHANGED_REWRITE_OUTRANKS_THE_DECLARATION",
+      "decisive_question": "IS_THE_DOCUMENTS_BOARD_THE_TREES_BOARD",
+      "falsifier_id": "A_STALE_BOARD_IS_CLOSE_ENOUGH",
       "known_counterexamples_checked": true,
       "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
-      "proposal_id": "A_NOTHING_TO_DO_IS_AN_ANSWER_WITH_THE_PROOF_20261101_V1"
+      "proposal_id": "A_THE_INVENTORY_IS_THE_BOARD_AT_THE_END_OF_THE_ROUND_20261101_V1"
     }
   },
   "weakens_existing_guard": "No guard is weakened. The effect gate gains a third reading (what moved), the choreographer loses a silent scope widening, the binder loses a curated word list that only ever refused work the row could do, and R3 keeps its meaning by naming the slot when the binder already knows it."
