@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::`program_synthesis_v1.verify_round_trip` ended with `return True, \"NO_VERIFIER_FOR_FORMAT\"` for any suffix outside its 13-entry table, and the table had no entry for .jpg, .tar.gz, or any digest, so the learning channel's only gate was the NAME of the file.",
-  "canonical_base_commit": "073540db10dc8f56d5193281f24f2bd32f13550e",
+  "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -80,7 +80,7 @@
     "canonical/runtime/environment_learning_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "073540db10dc8f56d5193281f24f2bd32f13550e",
+    "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
@@ -236,7 +236,7 @@
           "route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1"
         }
       ],
-      "checked_at_utc": "2026-11-01T11:31:17Z",
+      "checked_at_utc": "2026-11-01T11:35:54Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -276,7 +276,7 @@
       "selected_route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-01T11:31:17Z",
+        "checked_at_utc": "2026-11-01T11:35:54Z",
         "execution_dependencies": [
           {
             "dependency": "python3 stdlib (tarfile, gzip, lzma, bz2, zipfile, csv, json, sqlite3, re)",
@@ -373,7 +373,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-01T11:30:22Z",
+    "checked_at_utc": "2026-11-01T11:35:54Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
