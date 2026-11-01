@@ -1,0 +1,432 @@
+{
+  "action_id": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+  "action_intent_id": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "The verifier that every discovery path calls returned True for any format it had no check for, and for compound names it was handed the outer wrapper only. Measured on 073540d with an empty transfer store, discover() closed SIX of eight goal families over bytes nothing checked: png->jpg by ['run_unexpand'] (a whitespace tool), pkg.tar.gz by ['run_gzip'] (a gzip of one file), data.csv by ['run_tar'] (a tarball), commit-log.txt by ['run_md5sum.textutils']. Each was remembered as proven, so the falseness was durable. Now: container ownership is checked before any parser (a tar called out.csv is not a csv however happily csv.reader reads it), the LONGEST suffix the table knows is the one whose verifier must be satisfied (pathlib says .gz for pkg.tar.gz and that answer was the bug), a digest has a width, a table has a separator, and a format that cannot carry evidence (.txt/.md) or that needs two layers this channel resets between (.tar.gz) is REFUSED BY NAME at 0 ms instead of being closed or paid 95 s for. Census 7/8 closed with 6 false -> 3/8 closed with 0 false.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::`program_synthesis_v1.verify_round_trip` ended with `return True, \"NO_VERIFIER_FOR_FORMAT\"` for any suffix outside its 13-entry table, and the table had no entry for .jpg, .tar.gz, or any digest, so the learning channel's only gate was the NAME of the file.",
+  "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "`program_synthesis_v1.verify_round_trip` ended with `return True, \"NO_VERIFIER_FOR_FORMAT\"` for any suffix outside its 13-entry table, and the table had no entry for .jpg, .tar.gz, or any digest, so the learning channel's only gate was the NAME of the file.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/runtime/program_synthesis_v1.py: `_CONTAINER_SIGNS`/`_CONTAINER_OWNER` + `container_mismatch()` (a negative test run before any parser), `suffix_for_name()` (the longest suffix the verifier table knows), compound entries for .tar.gz/.tgz/.tar.bz2/.tar.xz, digest-width entries for .sha256/.sha1/.md5, a JPEG structure check, `carries_content_evidence()`, and a .csv entry that requires a separator. cli_capability_acquisition_v1._requested_suffix() asks the verifier table which suffix was asked for. computer_env_v1.discover() refuses an evidence-free format and a two-layer format before running anything, and never returns a PASS status for a goal it failed to verify.",
+  "expected_parent_frontier_change": "A discovery that names a format now proves the format: the learning store stops recording plans over bytes nothing checked, and refuses by name where no check exists.",
+  "explicit_user_authorization": "Owner instruction this session: hardcore software engineering only, all the hardcore SWE problems listed with measurements; the answers already exist in the tree so wire what is there rather than invent; do the optimal thing in the fastest way and only the right way; report honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+  "falsification_condition": "FALSIFIED if any goal whose artifact is not the requested format is reported closed, or if any suffix outside the verifier table returns True, or if a re-run of the eight-family census finds a closed family whose bytes the verifier does not own.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Census, empty transfer store, discover() called directly, eight goal families never mentioned to the machine. BEFORE (073540d): 7/8 closed; 6 of the closures false (png->jpg, tar.gz, csv, sha256, git-log, plus a text goal); .tar.gz took 4,766 ms to close falsely. AFTER: 3/8 closed -- .gz, .xz, .sha256 -- each one re-verified by parser AND container ownership, 0 false. Refusals are named and immediate: OPEN__FORMAT_CARRIES_NO_EVIDENCE 0 ms (was 97,595 ms then PASS), OPEN__FORMAT_NEEDS_A_CHAIN_THIS_CHANNEL_CANNOT_KEEP 0 ms (was 95,616 ms then PASS with an empty plan). 14 new tests, 0.99 s. Store after the census contains only re-verified episodes; it no longer records a plan over unchecked bytes.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/transfer_learning_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/runtime/environment_learning_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
+      "READING_THE_HOST_ONLY_FROM_IN_NAME",
+      "WIDENING_A_STATED_REGION_TO_ITS_NEIGHBOURS"
+    ],
+    "expected_parent_level_state_change": "A discovery that names a format now proves the format: the learning store stops recording plans over bytes nothing checked, and refuses by name where no check exists.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_BRANCH_RESTORES_SEVEN_INDISTINGUISHABLE_EXECUTION_FAILURES",
+      "intrinsic_or_path_specific": "GENERAL__ANY_EFFECT_THE_REGISTRY_DOES_NOT_DECLARE",
+      "surviving_causal_blocker": "THE_VERIFIER_ANSWERED_A_QUESTION_ABOUT_THE_NAME_INSTEAD_OF_A_QUESTION_ABOUT_THE_BYTES"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ONE_ORACLE_PREDICATE__NO_NEW_CAPABILITY_NO_NEW_ROW",
+      "existing_inherited_routes_checked": [
+        "live_brain_route_admission_v1._REFUSAL_CLASS_RE",
+        "live_brain_route_admission_v1._ALREADY_SATISFIED_RE",
+        "live_brain_route_admission_v1._may_supersede_a_failed_attempt",
+        "the <CLASS>:<detail> refusal convention across ~40 adapter classes (grep)"
+      ],
+      "external_existing_routes_checked": "None needed.",
+      "surviving_gap": "NONE_FOR_DIAGNOSIS__THE_SEVEN_REFUSALS_ARE_NOW_NAMED_AND_EACH_NAMES_A_CAPABILITY_THE_ENGINE_LACKS_(RUST_CPP_AST_REPAIR_SQL_DDL_MIGRATION_DEPENDENCY_VENDORING_FLAKE_QUARANTINE)"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_SERVED_COUNT",
+        "REMOVING_ROWS_TO_LOOK_CAPABLE"
+      ],
+      "real_outcome": "A refusal that names its own reason is reported as that reason, so the gaps that remain are readable as distinct missing capabilities instead of one generic failure count.",
+      "surviving_necessity": "A wrong answer costs more than a refusal: it spends the caller's trust on top of the request."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_CONVENTION_EVERY_ADAPTER_ALREADY_SPEAKS__ADD_ONE_PURE_CLASSIFIER"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+      "search_stop_decision": "STOPPED_WHEN_A_GREP_SHOWED_THE_CONVENTION_ALREADY_EXISTED_ACROSS_ABOUT_FORTY_CLASSES"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Reporting the outer wrapper only was rejected because it leaves six different problems sharing one status. Dropping the branch entirely was rejected because it restores seven indistinguishable execution failures.",
+      "routes_ranked": [
+        "PROMOTE_THE_INNER_CLASS__CHOSEN",
+        "REPORT_THE_OUTER_WRAPPER_ONLY",
+        "KEEP_THE_GENERIC_FAILURE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_CENSUS_IS_THE_ORACLE_AND_EACH_FIXTURE_IS_REAL_BYTES_FROM_A_REAL_TOOL"
+    },
+    "real_outcome": "A goal is reported closed only when the file that appeared really is the format the goal named, and every path that cannot check that says so in its own name.",
+    "required_capability": "program_synthesis_v1.verify_round_trip as a FORMAT OWNER (parser + container signature), with the longest declared suffix as the thing being asked for",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "FALSE_POSITIVE_MEASURED",
+            "INCREMENTAL_COST": "ZERO_CODE",
+            "RELIABILITY": "csv.reader accepts a tar",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "Measured 2026-11-01: csv.reader parsed a tar archive as one unquoted row, and gzip.open read the wrapper of pkg.tar.gz while saying nothing about the tar inside, so 'the library opened it' accepted two files that were not the requested format."
+          ],
+          "qualification_evidence": [
+            "direct probe: verify_round_trip(tar-bytes-named-.csv) returned True before the change and CONTAINER_MISMATCH:tar after"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "TRUST_THE_PARSER_THAT_OPENS_IT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WORKS_FOR_TODAY",
+            "CORRECTNESS": "PARTIAL",
+            "INCREMENTAL_COST": "ONE_ENTRY_PER_FORMAT",
+            "RELIABILITY": "SAYS_NOTHING_ABOUT_THE_NEXT_FORMAT",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "The table went from 13 to 20 entries in the first attempt at this fix and six of the eight census families were still closed over unchecked bytes, because an entry-less format still passed and pkg.tar.gz was still asked about as .gz."
+          ],
+          "qualification_evidence": [
+            "direct probe: with 20 entries and no container test, 'dump data.db into data.csv' closed at 1,695 ms on plan ['run_gcov-dump']"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "ADD_ONE_TABLE_ENTRY_PER_BROKEN_FORMAT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NONE",
+            "CORRECTNESS": "SAME_NAME_NOT_SAME_BYTES",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "the name is exactly what lied",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "The plans that lied were named correctly for the tool that ran -- run_gzip for .gz, run_sha256sum for .sha256 -- and the artifact was still the wrong thing; the name of a program is a guess about what it does, not a check on what it wrote."
+          ],
+          "qualification_evidence": [
+            "direct probe: 'hash blob.bin into blob.sha256' closed on run_sha256sum in 970 ms while the target file did not exist on disk at all"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "CHECK_THAT_THE_PROGRAM_NAME_MATCHES_THE_SUFFIX"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SIX_FALSE_CLOSURES_ELIMINATED",
+            "CORRECTNESS": "CONTAINER_OWNERSHIP_PLUS_PARSER",
+            "INCREMENTAL_COST": "ONE_FUNCTION_AND_ONE_512_BYTE_READ",
+            "RELIABILITY": "A_FORMAT_WITH_NO_VERIFIER_IS_REFUSED_BY_NAME",
+            "VERIFIABILITY": "FOURTEEN_TESTS_AND_A_CENSUS",
+            "WALL_CLOCK": "TWO_95_S_MISREPORTS_BECOME_0_MS_REFUSALS"
+          },
+          "evidence": [
+            "Census on 073540d, empty store: 7/8 closed, 6 false. After: 3/8 closed (gz, xz, sha256), each re-opened by parser AND container ownership, 0 false; .txt and .tar.gz refuse at 0 ms by name instead of 97,595 ms and 95,616 ms spent before a PASS they had not earned."
+          ],
+          "qualification_evidence": [
+            "direct probe: 14 new tests pass in 0.99 s; 52 program-synthesis/transfer tests and 19 discovery/format tests pass; the census was run before and after on the same machine"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T11:35:54Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "RETURN_TRUE_FOR_EVERY_FORMAT_WITH_NO_VERIFIER",
+      "max_age_hours": 24,
+      "negative_search_summary": "The table of verifiers and the magic table already existed in this repository (program_synthesis_v1._ROUND_TRIP, empirical_cli_probe_v1._MAGIC_BY_SUFFIX); nothing external was needed. The missing piece was the negative test and the longest-suffix rule, both of which are arithmetic on tables that were already there.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "verify a produced file is really the format the goal named"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "python stdlib tarfile gzip lzma bz2 csv file type detection"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "magic number file signature container detection without libmagic"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "gzip gzip stream versus tar.gz compound suffix pathlib suffix"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T11:35:54Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib (tarfile, gzip, lzma, bz2, zipfile, csv, json, sqlite3, re)",
+            "evidence": [
+              "DIRECT_PROBE: the interpreter read a real .tar.gz, a gzip-of-one-file and a 64-digit digest; 14 new tests passed in 0.99 s"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/program_synthesis_v1.py + computer_env_v1.py + cli_capability_acquisition_v1.py (in-tree, no new package)",
+            "evidence": [
+              "DIRECT_PROBE: 52 program-synthesis/transfer tests + 19 discovery/format tests pass on this tree; the eight-family census ran twice, before and after"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the real programs the learner acts out (gzip, xz, sha256sum, tar and the 623-entry PATH)",
+            "evidence": [
+              "DIRECT_PROBE: installed_programs() returned 623 programs; gzip and xz each closed a goal whose bytes the verifier then opened"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/declared_input_derivation_v1.py already computes start_line/end_line from a host function's statement runs (the extract-region block)",
+          "canonical/runtime/bound_capabilities/python_refactor_extract_function.py already performs the extraction and returns gate PASS given qualname=total and lines 3-4"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "modelcitizendeveloper survey 1.104.1: only LibCST, RedBaron and Bowler fully preserve formatting; Rope does text-based modification with partial round-trip fidelity"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/project/rope 1.15.0: 'the world's most advanced open source Python refactoring library', LGPL v3+, 'Most Python syntax up to Python 3.10 is supported'"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "github.com/Instagram/LibCST README: a CST that keeps all formatting details (comments, whitespace, parentheses), for automated refactoring"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "DELETE_THE_MAGNET_ROWS__MEASURED_TO_PRODUCE_FOUR_WRONG_ANSWERS",
+      "BUILD_A_SEPARATE_EFFECT_GATE__DUPLICATES_THE_EXISTING_TABLE",
+      "ADD_FOUR_CLASSES_TO_THE_EXISTING_TABLE__CHOSEN"
+    ],
+    "selected_route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+    "selected_surviving_route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+    "stop_condition": "STOP when every suffix the table declares either has a verifier that rejects bytes belonging to another format or is refused by name before any program runs, and the census reports zero closures over unchecked bytes.",
+    "why_selected_route_is_fastest_sufficient": "The table of verifiers already existed; the fix is the negative test that was missing from it. One 512-byte read, one longest-prefix lookup, and two refusals placed before the search -- no new dependency, no new tool, and the two goals that used to cost 95 s to mis-report now cost 0 ms to refuse correctly."
+  },
+  "route_id": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1",
+  "stop_condition": "STOP when every suffix the table declares either has a verifier that rejects bytes belonging to another format or is refused by name before any program runs, and the census reports zero closures over unchecked bytes.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T11:35:54Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "f39ab7396f0b31cdfe18fad6a6d2b4856572cc79",
+          "path": "canonical/runtime/program_synthesis_v1.py"
+        },
+        {
+          "git_blob_sha": "f677fe0da94e4229c72dd3b71677d2c3ca817d53",
+          "path": "canonical/runtime/computer_env_v1.py"
+        },
+        {
+          "git_blob_sha": "495c0597564d6f6f7dbef4db48ed043099272553",
+          "path": "canonical/runtime/cli_capability_acquisition_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_A_FORMAT_WITH_NO_VERIFIER_BE_REPORTED_AS_VERIFIED",
+      "falsifier_id": "CLOSE_A_GOAL_ON_BYTES_OF_ANOTHER_FORMAT_AND_WATCH_IT_BE_REMEMBERED",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_ADAPTER_ALREADY_EXTRACTS_THE_STATED_LOOP_WITH_GATE_PASS_WHEN_GIVEN_QUALNAME_total_AND_LINES_3_4__NOTHING_WAS_MISSING_BUT_THE_ORDER_OF_THE_TWO_ANSWERS_AND_NO_OTHER_REQUEST_IN_THE_49_CASE_CENSUS_CHANGED_VERDICT",
+      "proposal_id": "VERIFICATION_THAT_CAN_BE_SKIPPED_IS_NOT_VERIFICATION_V1_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The recalled-plan path still re-executes and re-verifies (`_verify_plan`), and verification now also rejects bytes belonging to another container, which is strictly more than before."
+}
