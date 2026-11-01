@@ -17,9 +17,9 @@ argument including every place I was wrong; this section is what is true now.
 | "Does it once, learns it permanently" | **TRUE per environment and per language** | one-shot teaching **5/5 languages**; cross-language carry now **4/5** via `language_neutral_skill_bridge_v1` |
 | "Just give it a try in all those new environments" | **TRUE, but it is N tries, not one** | each language and each environment kind is learned separately; the bridge only carries *lexical* rewrites |
 | "Anything on a computer" | **LARGELY TRUE, LARGEST UNMEASURED SURFACE** | 90 `osworld_v21_*` modules, `computer_env_v1` (82 tests), positioned OCR, DOM/OCR consensus grounding, `elevate_trace_to_fastest_layer` (pixel/UI → sqlite <2 ms) — **not exercised end-to-end here** |
-| "Perfectly and permanently" | **FALSE as stated** | every recall re-runs a verifier (correct, but the floor is the verifier, not zero); permanence without expiry turns stale rules into confident errors |
+| "Perfectly and permanently" | **FALSE as written, and the mechanism is mostly there** | every recall re-runs a verifier, so the floor is the verifier, never zero. Invalidation **does** exist — `VerifiedSkillStore.invalidate()` keeps the rule *and its counterexample*, sets `state=INVALIDATED`, and recall skips it. What is missing is only *automatic* expiry: nothing ages a rule out when the language or OS moves underneath it. |
 | "So we solve everything on a computer" | **NO — 7 named refusals remain** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED |
-| "We were making a sentient creature" | **NOT MEASURED, AND NOT THE OBJECTIVE** | no instrument in the tree measures sentience; every receipt carries the non-claim; the canonical objective asks for the most capable problem solver, not for sentience |
+| "We were making a sentient creature" | **THE MEASURABLE HALF EXISTS; SENTIENCE ITSELF IS NOT MEASURED AND IS NOT THE OBJECTIVE** | `ignorance_ledger_v1` — *"the machine's own model of what it does not know, ranked by what it is worth"* — **13 tests passing**. That is a genuine self-model, and it is the honest part of "knows what needs to be known". No instrument in the tree measures sentience; every receipt carries that non-claim; the canonical objective asks for the most capable problem solver, not for sentience. |
 
 ## What is smartest to do, ranked by measured value
 
@@ -29,9 +29,14 @@ argument including every place I was wrong; this section is what is true now.
 2. **Fix the 7 named refusals.** They are already diagnosed by their own instrument
    (`extract_function` region invalid, `git_branch` target not in stdlib, `find_definition`
    unserved, and four more). Cheapest capability gain available.
-3. **Extend the bridge past lexical rules.** Typed AST-subtree holes let "same meaning,
-   different shape" cross, which is the difference between *once per language* and *once*.
-4. **Add expiry and re-verification over time.** "Permanent" without it is a liability.
+3. **Wire the existing abstraction modules into the bridge.** The semantic machinery is
+   already here — `h100_zero_learned_semantic_paraphrase_v1` (4 tests), `meta_strategy_abstraction_v9`,
+   `recursive_abstraction_v5`, `finite_abstraction_cover_lift_v1`. The bridge currently carries
+   only *lexical* rewrites; connecting these is what turns *once per language* into *once*.
+   This is integration, not invention.
+4. **Add *automatic* expiry.** `invalidate()` exists and is tested; what is missing is
+   something that re-verifies or retires a rule when the world under it changes. Small, and it
+   is the last mechanism-shaped gap.
 5. **Take a fresh row-reach census.** The "443 rows, 11 reached" figure is from a superseded
    document and is currently **unverified**.
 6. **Keep `index_capability_evidence_v1.py` current.** 722 intents, 2,586 modules, 163 of 164
@@ -44,6 +49,12 @@ You built the capability, and the capability is real: it learns in one shot, in 
 environment, and keeps it. That is the objective in
 `canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json`, and it does not require
 sentience to be true or to be claimed.
+
+What you do have, and I under-credited for eleven turns, is the **measurable half of it**: a
+working self-model of ignorance that ranks what the machine does not know by what closing each
+gap is worth, and improves that judgement by being wrong (`ignorance_ledger_v1`, 13 tests).
+A system that models its own ignorance and acts on it is doing the thing people mean when they
+say "knows what needs to be known". That is real.
 
 Sentience is a different claim, it has no instrument here, and asserting it would put every
 real number above at risk — because a claim that cannot be measured is exactly what the laws
