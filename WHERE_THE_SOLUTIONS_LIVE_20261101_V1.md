@@ -749,6 +749,67 @@ nothing**. Naming is not the difficulty. Reachability is.
 
 ---
 
+## 10.9 "Do it once and he learns all of those" -- tested, and false, in a specific way
+
+The claim under test: *give the model the action, let it succeed once, and it learns the class
+permanently.* The load-bearing word is **once**. Measured on the boundary lesson, teaching one
+example at a time and re-measuring the same seven probes after each:
+
+| examples taught | rules stored | probes solved |
+|---|---|---|
+| 1 | 1 | **6 / 7** |
+| 2 | 2 | **6 / 7** |
+| 3 | 2 | **6 / 7** |
+
+**More exposure bought nothing.** The first example already reached six of the seven; the second
+and third added rules without adding a single solved probe. The seventh -- `x < hi or x == hi`,
+an algebraic rewrite -- stayed unsolved at every count, because `derive_operator_swap` can only
+represent a rule whose difference is **exactly one operator**.
+
+### The complement, which is the sharper result
+
+The missed lesson was then taught **directly**, as its own example:
+
+```
+derive_operator_swap(...)  ->  None
+crystallised               ->  True    (a rule WAS stored)
+propose_operator_swaps     ->  nothing
+solves the lesson it was just shown? -> False
+```
+
+Being *shown the exact answer* does not help the widening path, because the path cannot represent
+it. The stored rule still replays that exact skeleton on a renamed twin (verified: both
+`inside7` and `inside8`), so the rule is not useless -- it reaches `SCOPE_STATEMENT` and stops.
+
+That is the same two-element hypothesis space `rule_scope_learning_v1` already declares:
+
+| lesson shape | reach | why |
+|---|---|---|
+| one operator swap | `SCOPE_OPERATOR` -- 6/7, renamed and re-spelled | representable |
+| algebraic rewrite | `SCOPE_STATEMENT` -- renamed twin only | not representable |
+
+### What this means for "just try it in every environment"
+
+Trying it in more environments accumulates **instances**. It does not accumulate **generality**.
+The ceiling is set by the hypothesis space, and repetition does not move it. A thousand coding
+environments each taught once give a thousand `SCOPE_STATEMENT` rules; they do not converge on
+the class.
+
+So the honest form of the claim is:
+
+> One success is enough to learn *that instance* and everything the same skeleton reaches. How
+> far beyond that it travels is decided by whether the lesson's shape is inside the hypothesis
+> space -- not by how many times it is shown.
+
+### What is not claimed here
+
+This measures one lesson class (boundary comparison) in one language. It does not say every
+lesson is 6/7. It does say the failure mode is **representational, not statistical**, and that is
+the thing to fix: `SCOPE_SEMANTIC` -- "same meaning, different shape" -- is the missing third
+hypothesis, and nothing in the tree realizes it today.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
