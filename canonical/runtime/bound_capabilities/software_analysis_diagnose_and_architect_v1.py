@@ -107,7 +107,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     elif op in {"design_adr", "migration_plan", "package_split_design"}:
         res = engine.synthesize_architecture_artifact(target, goal_spec)
     elif op in {"git_changelog", "git_diff_ref", "git_blame_line"}:
-        res = engine.git_read_history_analysis(target, goal_spec, brain_root=repo)
+        res = engine.git_read_history_analysis(target or repo, goal_spec, brain_root=repo)
     elif op == "trace_data_flow":
         if target is None:
             raise RuntimeError("TRACE_FLOW_TARGET_MISSING")
@@ -128,6 +128,34 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         if target is None:
             raise RuntimeError("PR_REVIEW_TARGET_MISSING")
         res = engine.review_pull_request_changes(target, goal_spec, brain_root=repo)
+    elif op == "show_definition":
+        if target is None:
+            raise RuntimeError("SHOW_DEFINITION_TARGET_MISSING")
+        res = engine.show_symbol_definition(target, fn_name, goal_spec, repo_root=repo)
+    elif op == "which_modules_import":
+        if target is None:
+            raise RuntimeError("IMPORTERS_TARGET_MISSING")
+        res = engine.find_importing_modules(target, fn_name, goal_spec, repo_root=repo)
+    elif op == "import_cycles":
+        if target is None:
+            raise RuntimeError("IMPORT_CYCLES_TARGET_MISSING")
+        res = engine.detect_import_cycles(target, repo_root=repo)
+    elif op == "class_hierarchy":
+        if target is None:
+            raise RuntimeError("CLASS_HIERARCHY_TARGET_MISSING")
+        res = engine.inspect_class_hierarchy(target, fn_name, goal_spec, repo_root=repo)
+    elif op == "run_single_test":
+        if target is None:
+            raise RuntimeError("RUN_TEST_TARGET_MISSING")
+        res = engine.run_single_test_target(target, goal_spec)
+    elif op == "trace_value_provenance":
+        if target is None:
+            raise RuntimeError("PROVENANCE_TARGET_MISSING")
+        res = engine.trace_value_provenance_in_file(target, fn_name, goal_spec)
+    elif op == "find_flaky_tests":
+        if target is None:
+            raise RuntimeError("FLAKY_TEST_TARGET_MISSING")
+        res = engine.detect_flaky_tests(target, goal_spec)
     else:
         raise RuntimeError("DIAGNOSE_ARCHITECT_UNSUPPORTED_OPERATION:" + op)
 

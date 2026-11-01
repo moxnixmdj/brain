@@ -32,13 +32,25 @@ import tempfile
 from typing import Any
 
 
-def _safe_path(repo: pathlib.Path, raw: str, *, allow_root: bool = False) -> pathlib.Path:
-    p = (repo / str(raw or "")).resolve()
+def _safe_path(
+    repo: pathlib.Path,
+    raw: str,
+    *,
+    allow_root: bool = False,
+    allow_temp_read: bool = False,
+) -> pathlib.Path:
+    raw_s = str(raw or "")
+    cand = pathlib.Path(raw_s)
+    p = cand.resolve() if cand.is_absolute() else (repo / raw_s).resolve()
     if allow_root and p == repo:
         return p
-    if p == repo or repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    return p
+    if repo in p.parents:
+        return p
+    if allow_temp_read:
+        tmp_root = pathlib.Path(tempfile.gettempdir()).resolve()
+        if p == tmp_root or tmp_root in p.parents:
+            return p
+    raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
 
 def _git(cwd: pathlib.Path, *args: str, timeout: int = 20) -> subprocess.CompletedProcess[str]:
@@ -56,13 +68,20 @@ def _find_git_root(start: pathlib.Path, repo: pathlib.Path) -> pathlib.Path:
     if r.returncode != 0:
         raise RuntimeError("NOT_A_GIT_REPOSITORY")
     top = pathlib.Path(r.stdout.strip()).resolve()
-    if top != repo and repo not in top.parents:
+    tmp_root = pathlib.Path(tempfile.gettempdir()).resolve()
+    if top != repo and repo not in top.parents and top != tmp_root and tmp_root not in top.parents:
         raise RuntimeError("GIT_ROOT_OUTSIDE_REPOSITORY")
     return top
 
 
-def _has_tests(tree_root: pathlib.Path) -> bool:
-    for p in tree_root.rglob("*.py"):
+def _has_tests(target: pathlib.Path) -> bool:
+    if target.is_file():
+        return target.suffix == ".py" and (
+            target.name.startswith("test_")
+            or target.name.endswith("_test.py")
+            or "def test" in target.read_text(encoding="utf-8", errors="replace")
+        )
+    for p in target.rglob("*.py"):
         if ".git" in p.parts or "__pycache__" in p.parts:
             continue
         if p.name.startswith("test_") or p.name.endswith("_test.py"):
@@ -75,22 +94,75 @@ def _suite_root(tree_root: pathlib.Path) -> pathlib.Path:
     return tree_root / "tests" if (tree_root / "tests").is_dir() else tree_root
 
 
-def _run_suite(tree_root: pathlib.Path, timeout: int = 20) -> tuple[int, str]:
-    if not _has_tests(tree_root):
+_PLAIN_SUITE_CODE = (
+    "import importlib.util, pathlib, sys, unittest\n"
+    "target = pathlib.Path(sys.argv[1]).resolve()\n"
+    "files = [target] if target.is_file() else sorted(p for p in target.rglob('*.py') if '__pycache__' not in p.parts and (p.name.startswith('test_') or p.name.endswith('_test.py')))\n"
+    "ran = 0\n"
+    "for i, tf in enumerate(files):\n"
+    "    sp = importlib.util.spec_from_file_location(f'_bt_{i}_{tf.stem}', tf)\n"
+    "    mod = importlib.util.module_from_spec(sp)\n"
+    "    sp.loader.exec_module(mod)\n"
+    "    for k, v in vars(mod).items():\n"
+    "        if isinstance(v, type) and issubclass(v, unittest.TestCase) and v is not unittest.TestCase:\n"
+    "            r = unittest.TestResult()\n"
+    "            unittest.defaultTestLoader.loadTestsFromTestCase(v).run(r)\n"
+    "            ran += r.testsRun\n"
+    "            if r.failures or r.errors: sys.exit(1)\n"
+    "        elif k.startswith('test_') and callable(v) and not isinstance(v, type):\n"
+    "            v()\n"
+    "            ran += 1\n"
+    "sys.exit(0 if ran > 0 else 2)\n"
+)
+
+
+def _run_suite(target: pathlib.Path, timeout: int = 20, work_root: pathlib.Path | None = None) -> tuple[int, str]:
+    if not target.exists() or not _has_tests(target):
         return 0, "NO_TESTS"
+    base_dir = work_root or (target.parent if target.is_file() else target)
+    py_paths = [str(base_dir)]
+    for sub in ("src", "pkg"):
+        if (base_dir / sub).is_dir():
+            py_paths.append(str(base_dir / sub))
+    if os.environ.get("PYTHONPATH"):
+        py_paths.append(os.environ["PYTHONPATH"])
     env = dict(os.environ)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
-    env["PYTHONPATH"] = str(tree_root) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
-    start_dir = str(_suite_root(tree_root))
+    env["PYTHONPATH"] = os.pathsep.join(py_paths)
+
+    if target.is_file():
+        proc_plain = subprocess.run(
+            [sys.executable, "-B", "-c", _PLAIN_SUITE_CODE, str(target)],
+            cwd=str(base_dir),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            env=env,
+        )
+        if proc_plain.returncode != 2:
+            return proc_plain.returncode, ((proc_plain.stderr or "") + (proc_plain.stdout or ""))[-400:]
+
+    start_dir = str(_suite_root(target))
     proc = subprocess.run(
-        [sys.executable, "-B", "-m", "unittest", "discover", "-s", start_dir, "-t", str(tree_root)],
-        cwd=str(tree_root),
+        [sys.executable, "-B", "-m", "unittest", "discover", "-s", start_dir, "-t", str(base_dir)],
+        cwd=str(base_dir),
         capture_output=True,
         text=True,
         timeout=timeout,
         env=env,
     )
-    return proc.returncode, (proc.stderr or proc.stdout)[-400:]
+    combined = (proc.stderr or "") + "\n" + (proc.stdout or "")
+    if proc.returncode == 0 and "Ran 0 tests" in combined:
+        proc_plain = subprocess.run(
+            [sys.executable, "-B", "-c", _PLAIN_SUITE_CODE, start_dir],
+            cwd=str(base_dir),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            env=env,
+        )
+        return proc_plain.returncode, ((proc_plain.stderr or "") + (proc_plain.stdout or ""))[-400:]
+    return proc.returncode, combined[-400:]
 
 
 def _effective_complexity(fn_node: ast.FunctionDef | ast.AsyncFunctionDef) -> int:
@@ -219,7 +291,7 @@ def _bisect_in_worktree(wt: pathlib.Path, commits: list[str], suite_rel: str,
         co = _git(wt, "reset", "--hard", "--quiet", sha, timeout=120)
         if co.returncode != 0:
             raise RuntimeError("GIT_CHECKOUT_FAILED:" + sha)
-        rc, _tail = _run_suite(wt / suite_rel if suite_rel != "." else wt)
+        rc, _tail = _run_suite(wt / suite_rel if suite_rel != "." else wt, work_root=wt)
         ok = rc == 0
         probed.append({"commit": sha, "index": idx, "pass": ok, "returncode": rc})
         return ok
@@ -300,7 +372,7 @@ def _attribute_perf_regression(git_root: pathlib.Path) -> dict[str, Any]:
 
 def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
-    src = _safe_path(repo, str(args.get("source_root") or "."), allow_root=True)
+    src = _safe_path(repo, str(args.get("source_root") or "."), allow_root=True, allow_temp_read=True)
     if not src.exists():
         raise RuntimeError("SOURCE_ROOT_MISSING")
     out = _safe_path(repo, str(args.get("output_path") or ""), allow_root=False)
@@ -318,24 +390,29 @@ def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
     # bisected the REPOSITORY's own suite (red on main) and answered "the first commit broke
     # it" -- naming the oldest commit of an unrelated history, after a 35 s clone.  A path
     # git does not track is refused here, in milliseconds, before anything is materialised.
-    suite_dir = src if src.is_dir() else src.parent
-    suite_rel = suite_dir.relative_to(git_root).as_posix() if suite_dir != git_root else "."
+    probe_target = src
+    suite_rel = probe_target.relative_to(git_root).as_posix() if probe_target != git_root else "."
     tracked = _git(git_root, "ls-tree", "-r", "--name-only", "HEAD", "--", suite_rel or ".")
     if tracked.returncode != 0 or not tracked.stdout.strip():
         raise RuntimeError("NAMED_TEST_NOT_IN_GIT_HISTORY:" + (suite_rel or "."))
 
-    head_rc, _head_tail = _run_suite(suite_dir)
-    if head_rc != 0 and _has_tests(suite_dir):
+    head_rc, _head_tail = _run_suite(probe_target, work_root=git_root)
+    if head_rc != 0 and _has_tests(probe_target):
         details = _bisect_commits(git_root, commits, suite_rel)
     else:
         if len(commits) < 2:
             raise RuntimeError("INSUFFICIENT_COMMITS_FOR_REGRESSION_ANALYSIS")
         details = _attribute_perf_regression(git_root)
 
+    git_root_rel = (
+        git_root.relative_to(repo).as_posix()
+        if git_root != repo and repo in git_root.parents
+        else ("." if git_root == repo else str(git_root))
+    )
     report = {
         "schema": "PROJECT_BRAIN_GIT_BISECT_REGRESSION_V1",
         "adapter": "git_bisect_regression",
-        "git_root": git_root.relative_to(repo).as_posix() if git_root != repo else ".",
+        "git_root": git_root_rel,
         **details,
     }
     out.parent.mkdir(parents=True, exist_ok=True)

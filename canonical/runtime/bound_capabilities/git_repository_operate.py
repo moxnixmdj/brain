@@ -148,6 +148,22 @@ def _head(cwd: pathlib.Path) -> str:
         return ""
 
 
+def _shallow_info(cwd: pathlib.Path) -> tuple[bool, set[str]]:
+    try:
+        ans = _git(cwd, "rev-parse", "--is-shallow-repository", check=False).strip().lower()
+        is_shallow = ans == "true"
+        if not is_shallow:
+            return False, set()
+        git_dir = _git(cwd, "rev-parse", "--git-dir", check=False).strip()
+        shallow_file = (cwd / git_dir / "shallow") if git_dir else (cwd / ".git" / "shallow")
+        shas = set()
+        if shallow_file.is_file():
+            shas = {ln.strip() for ln in shallow_file.read_text(encoding="utf-8", errors="replace").splitlines() if ln.strip()}
+        return True, shas
+    except Exception:
+        return False, set()
+
+
 # --------------------------------------------------------------------- readers
 # Each reader returns (rows, observed_effect) where observed_effect is what an
 # independent plumbing command must agree with.
@@ -157,7 +173,9 @@ _LOG_FMT = "%H%x1f%an%x1f%aI%x1f%s"
 
 def _op_log(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     n = _limit(args)
-    raw = _git(cwd, "log", "-n", str(n), "--format=" + _LOG_FMT, "--")
+    target = _target(args, cwd)
+    log_tail = ["--", target] if target else ["--"]
+    raw = _git(cwd, "log", "-n", str(n), "--format=" + _LOG_FMT, *log_tail)
     rows = []
     for line in raw.splitlines():
         if not line.strip():
@@ -165,13 +183,18 @@ def _op_log(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
         sha, author, date, subject = (line.split("\x1f") + ["", "", "", ""])[:4]
         rows.append({"sha": sha, "author": author, "date": date, "subject": subject})
     # independence: rev-list counts the same history through plumbing
-    independent = len(_git(cwd, "rev-list", "--max-count=" + str(n), "HEAD").split())
+    independent = len(_git(cwd, "rev-list", "--max-count=" + str(n), "HEAD", *log_tail).split())
     if independent != len(rows):
         _fail("INDEPENDENT_CHECK_DISAGREES:log:" + str(independent) + "!=" + str(len(rows)))
+    is_shallow, shallow_shas = _shallow_info(cwd)
+    truncated = bool(is_shallow and (len(rows) < n or any(r["sha"] in shallow_shas for r in rows)))
     return rows, {"op": "log", "limit": n,
                   "head_sha": _head(cwd),
                   "commit_count": len(rows),
-                  "oldest_sha": rows[-1]["sha"] if rows else ""}
+                  "oldest_sha": rows[-1]["sha"] if rows else "",
+                  "shallow_repository": is_shallow,
+                  "truncated_by_shallow_clone": truncated,
+                  "history_completeness": "TRUNCATED_BY_SHALLOW_CLONE" if truncated else "COMPLETE"}
 
 
 def _op_status(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
@@ -235,6 +258,8 @@ def _numstat_rows(raw: str) -> list[dict[str, Any]]:
 def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     target = _target(args, cwd)
     tracked = _tracked(cwd, target)
+    staged_flag = args.get("staged_only")
+    staged_only = staged_flag is True or str(staged_flag or "").lower() in ("true", "1", "yes")
     # THE REVISION THE SENTENCE NAMED IS THE REVISION THAT GETS DIFFED.
     #
     # Measured 2026-11-01: "Show me the diff of <pkg>/calc.py against HEAD~1" was answered
@@ -245,7 +270,7 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     # ``op/target/repo_root/limit/message`` and no slot for a revision at all, so the stated
     # revision could not reach the adapter even in principle.  It now can, and an empty patch
     # is only ever reported for the revision the caller asked about.
-    rev = str(args.get("rev") or "").strip() or "HEAD"
+    rev = str(args.get("rev") or args.get("base_rev") or "").strip() or "HEAD"
     if rev.startswith("-"):
         _fail("REV_MAY_NOT_BE_AN_OPTION:" + rev)
     # independence: a stated revision must RESOLVE, and must be a commit -- otherwise a typo
@@ -253,6 +278,10 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     rev_sha = _git(cwd, "rev-parse", "--verify", "--quiet", rev + "^{commit}", check=False).strip()
     if not rev_sha:
         _fail("STATED_REVISION_NOT_FOUND:" + rev)
+    if staged_only:
+        spec = ["diff", "--cached", "--numstat", "--"] + ([target] if target else [])
+        rows = _numstat_rows(_git(cwd, *spec, check=False))
+        patch_text = _git(cwd, *(("diff", "--cached", "--", target) if target else ("diff", "--cached")))
     # AN UNTRACKED FILE HAS NO HISTORY, BUT IT DOES HAVE A DIFFERENCE.
     #
     # The difference between nothing and the file is a fact, and git already
@@ -262,7 +291,7 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     # the plainest question about a brand-new file unanswerable.  ``--no-index``
     # exits 1 when the inputs differ, so its exit code is not a failure signal
     # here; the patch and the numstat are.
-    if target and not tracked and (cwd / target).is_file():
+    elif target and not tracked and (cwd / target).is_file():
         rows = _numstat_rows(_git(cwd, "diff", "--no-index", "--numstat", "--", "/dev/null", target,
                                   check=False))
         patch_text = _git(cwd, "diff", "--no-index", "--", "/dev/null", target, check=False)
@@ -279,7 +308,8 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     # as a diff (that was the false PASS).
     if rows and "@@" not in patch_text:
         _fail("INDEPENDENT_CHECK_DISAGREES:diff:NO_PATCH_BODY")
-    return rows, {"op": "diff", "target": target, "tracked": tracked, "file_count": len(rows),
+    return rows, {"op": "diff", "target": target, "tracked": tracked, "staged_only": staged_only,
+                  "file_count": len(rows),
                   # The revision is part of the ANSWER, not an internal detail: the receipt
                   # has to say which two trees were compared, in the commit id git resolved.
                   "rev": rev, "rev_sha": rev_sha,
@@ -293,15 +323,16 @@ def _op_show(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     rev = str(args.get("target") or "HEAD").strip() or "HEAD"
     if rev.startswith("-"):
         _fail("TARGET_MAY_NOT_BE_AN_OPTION:" + rev)
-    raw = _git(cwd, "show", "--stat", "--format=" + _LOG_FMT, rev)
+    raw = _git(cwd, "show", "--stat", "-p", "--format=" + _LOG_FMT, rev)
     head, _, body = raw.partition("\n")
     sha, author, date, subject = (head.split("\x1f") + ["", "", "", ""])[:4]
-    rows = [{"sha": sha, "author": author, "date": date, "subject": subject}]
+    rows = [{"sha": sha, "author": author, "date": date, "subject": subject, "patch": body}]
     # independence: the object must exist as a commit through cat-file
     kind = _git(cwd, "cat-file", "-t", sha).strip()
     if kind != "commit":
         _fail("INDEPENDENT_CHECK_DISAGREES:show:object_type=" + kind)
     return rows, {"op": "show", "rev": rev, "sha": sha, "object_type": kind,
+                  "patch": body,
                   "body_bytes": len(body.encode("utf-8")),
                   "patch_sha256": _sha(body.encode("utf-8"))}
 
@@ -334,12 +365,17 @@ def _op_blame(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
         if proc.returncode != 0:
             unreachable.append(s)
     total = int((_git(cwd, "rev-list", "--count", "HEAD", check=False) or "0").strip() or 0)
+    is_shallow, shallow_shas = _shallow_info(cwd)
+    truncated = bool(is_shallow and any(r["sha"] in shallow_shas for r in rows))
     return rows, {"op": "blame", "target": target, "line_count": len(rows),
                   "distinct_commits": len({r["sha"] for r in rows
                                            if r["sha"] and set(r["sha"]) != {"0"}}),
                   "uncommitted_lines": uncommitted,
                   "history_depth": total,
-                  "unreachable": unreachable}
+                  "unreachable": unreachable,
+                  "shallow_repository": is_shallow,
+                  "truncated_by_shallow_clone": truncated,
+                  "history_completeness": "TRUNCATED_BY_SHALLOW_CLONE" if truncated else "COMPLETE"}
 
 
 def _op_branch(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
@@ -430,12 +466,28 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     if not isinstance(args, Mapping):
         _fail("ARGS_NOT_OBJECT")
-    cwd = _safe_dir(repo, args.get("repo_root") if args.get("repo_root") else ".")
-    if not _is_repo(cwd):
-        _fail("NOT_A_GIT_REPOSITORY:" + str(cwd.relative_to(repo) if cwd != repo else "."))
     op = str(args.get("op") or "").strip().lower()
     if op not in OPS:
         _fail("OP_NOT_DECLARED:" + (op or "<empty>") + ":declared=" + ",".join(OPS))
+    cwd = _safe_dir(repo, args.get("repo_root") if args.get("repo_root") else ".")
+    if not _is_repo(cwd):
+        if op in ("log", "status", "diff", "show", "blame"):
+            owner = cwd
+            while owner != repo and not (owner / ".git").exists():
+                owner = owner.parent
+            if _is_repo(owner):
+                sub_rel = cwd.relative_to(owner).as_posix()
+                ls_proc = subprocess.run(
+                    [*_BASE, "ls-files", "--", sub_rel],
+                    cwd=str(owner), capture_output=True, text=True,
+                    env={**os.environ, **_ENV}, timeout=15,
+                )
+                if ls_proc.returncode == 0 and ls_proc.stdout.strip():
+                    orig_target = str(args.get("target") or "").strip()
+                    args = {**args, "target": (f"{sub_rel}/{orig_target}" if orig_target else sub_rel)}
+                    cwd = owner
+        if not _is_repo(cwd):
+            _fail("NOT_A_GIT_REPOSITORY:" + str(cwd.relative_to(repo) if cwd != repo else "."))
     # A READ operation's report is an artifact of the run, not a promise the
     # sentence made, so an unstated destination gets a deterministic repo-local
     # path instead of a refusal.  A stated destination is honoured and still

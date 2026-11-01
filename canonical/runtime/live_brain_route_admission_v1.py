@@ -1280,6 +1280,19 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
             # no test to verify it came back as "REVIEW_RAN..." -- the right refusal shape, the wrong
             # name, and a caller reading the status would go looking for a review that never existed.
             _is_review = "review" in str(selected)
+            _review_findings = None
+            try:
+                _out_rel = str((action.get("args") or {}).get("output_path") or "")
+                if _out_rel and (ROOT / _out_rel).is_file():
+                    _rdoc = json.loads((ROOT / _out_rel).read_text(encoding="utf-8", errors="replace"))
+                    if isinstance(_rdoc, Mapping):
+                        _review_findings = {
+                            k: _rdoc[k]
+                            for k in ("gate", "errors", "blocking_findings", "advisory_findings", "findings", "syntax_errors", "mypy", "ruff")
+                            if k in _rdoc
+                        }
+            except Exception:
+                _review_findings = None
             return _fail(task_id,
                          ("FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT" if _is_review
                           else "FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT"),
@@ -1287,6 +1300,7 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                           else "CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET"),
                          started, executed=True, reviewed=_is_review,
                          review_verdict_field=_verdict_field,
+                         review_findings=_review_findings,
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          reason=type(exc).__name__ + ":" + str(exc),
                          executor=LOCAL_EXECUTION_PROOF, tool_executed=True)
@@ -2005,6 +2019,13 @@ _CHANGE_IMPACT_REQUEST_RE = re.compile(
 
 _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     (_ANSWER_REQUEST_RE, _ANSWER_SURFACE_RE, "STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY"),
+    (re.compile(r"\b(?:translate|transpile|port|convert)\b[^\n]{0,160}?\b(?:into|to)\s+(?:idiomatic\s+)?"
+                r"\b(?:rust|go|golang|typescript|javascript|c\+\+|cpp|java|python)\b", re.IGNORECASE),
+     re.compile(r"\b(?:code\.polyglot\.translate|transpil\w*|port_python|polyglot\.transform)\b", re.IGNORECASE),
+     "STATED_LANGUAGE_TRANSLATION_NOT_PROVIDED_BY_CAPABILITY"),
+    (re.compile(r"\b(?:summarize|summarizing|summarization)\b", re.IGNORECASE),
+     re.compile(r"\bsummar\w*\b", re.IGNORECASE),
+     "STATED_SUMMARIZATION_NOT_PROVIDED_BY_CAPABILITY"),
     # "for security ISSUES" is how an engineer says it, and the row did not read it: measured
     # 2026-10-29, "Review <f> for security issues" matched no stated effect at all, so the
     # declaration shortlist came back empty and the ranker was free to propose a gate composer.
@@ -2129,8 +2150,10 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      # every one means FAULT or ARTIFACT provenance (python.fault.provenance.fusion.v1,
      # pypi.provenance.audit_live_artifact) -- none of them can say who changed a line, and
      # admitting them would be the same false answer this row exists to refuse.
-     re.compile(r"\bblame\b|\bauthor(?:ed|ship)?\b|\bcommitter\b|\bshortlog\b|\bchangelog\b|"
-                r"\battribution\b", re.IGNORECASE),
+     # Alphanumeric boundaries match both dotted (`git.changelog`) and underscore-joined
+     # (`git.history.perf_attribution`, `software.analysis.git.blame_and_changelog`) tokens.
+     re.compile(r"(?<![A-Za-z0-9])(?:blame|author(?:ed|ship)?|committer|shortlog|changelog|"
+                r"attribution)(?![A-Za-z0-9])", re.IGNORECASE),
      "STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY"),
     # A HISTORY SEARCH IS NOT A TEST SELECTION.  Measured 2026-10-29 on a fresh tree:
     # "Bisect the regression that broke the test in <T>" returned PASS with
@@ -2140,7 +2163,7 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # honest end state and a real bisect capability is admitted by the same declaration.
     (re.compile(r"\bbisect\b|\bwhich commit\b|\bregression that broke\b|"
                 r"\bwhen did\b[^.\n]{0,40}?\bbreak\b", re.IGNORECASE),
-     re.compile(r"\bbisect\b", re.IGNORECASE),
+     re.compile(r"(?<![A-Za-z0-9])bisect(?![A-Za-z0-9])", re.IGNORECASE),
      "STATED_BISECT_NOT_PROVIDED_BY_CAPABILITY"),
     # A MEASUREMENT OF THE REPOSITORY IS NOT A DELIVERABLE.  Measured 2026-10-29: "Set up CI to
     # run the tests in <D>" returned PASS from python.repository.acceptance.measure.v1, which
@@ -3297,6 +3320,13 @@ def sentence_promises_a_change(goal: str) -> bool:
     if _asks_only_for_a_plan(text):
         return False
     for m in _CHANGE_VERB_RE.finditer(text):
+        if m.group(0).lower() == "commit":
+            pre_toks = text[:m.start()].rstrip().split()
+            if pre_toks and pre_toks[-1].strip(",.:;()\"'").lower() in {
+                "which", "what", "the", "a", "an", "that", "this", "last",
+                "latest", "first", "previous", "prior", "every", "each",
+            }:
+                continue
         tail = text[m.end():m.end() + 24].lstrip()
         if not tail:
             continue
@@ -3642,7 +3672,10 @@ def _effect_landed_outside_the_named_subject(goal: str, moved: "Sequence[str]",
     # produce (measured: the capability matrix's `repair_test_file` lane).
     # A cross-language port, TypeScript declaration generation, benchmark harness creation,
     # or module relocation reads or relocates the named source file and writes the requested sibling destination.
-    if re.search(r"\bport\b|\btype\s+declarations?\b|\bmove\s+(?:the\s+)?module\b|\badd\s+a\s+benchmark\b", str(goal or ""), re.I):
+    if (
+        re.search(r"\b(?:port|translate|transpile)\b|\btype\s+declarations?\b|\bmove\s+(?:the\s+)?module\b|\badd\s+a\s+benchmark\b", str(goal or ""), re.I)
+        or re.search(r"\bconvert\b[^\n]{0,160}?\b(?:to|into)\s+(?:idiomatic\s+)?(?:rust|go|golang|typescript|javascript)\b", str(goal or ""), re.I)
+    ):
         return ""
     named = [raw for raw in _stated_paths(goal)
              if (ROOT / raw).is_file() and not _TEST_FILE_SHAPE.search(raw)]
@@ -4585,6 +4618,8 @@ def _typed_plan_is_stated(request: Any) -> bool:
         # an effect family, the row that DECLARES that family is the answer; the family's own
         # plan then runs through the same gate chain, so nothing is skipped by being first.
         token = _typed.stated_family_token(goal)
+        if token == "symbol" and re.search(r"\b(?:callers?|who\s+calls|call\s+graph)\b", prose, re.IGNORECASE):
+            return True
         if token in (
             _typed.GIT_FAMILY_TOKEN,
             "extract",
@@ -4593,6 +4628,10 @@ def _typed_plan_is_stated(request: Any) -> bool:
             "mutation",
             "perf",
             "lint",
+            "diff_static_triage",
+            "merge_conflict",
+            "taint_flow",
+            "crosshair",
             "polyglot.transform_and_verify",
             "swe.transform_and_synthesize",
             "diagnose_and_architect",
@@ -4722,13 +4761,6 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
             return _fail(task_id, "FAIL_CLOSED__CONTRACT_CHECKS_UNBOUND",
                          "CONTRACT_CHECKS_UNBOUND", started, executed=False, reason=str(exc))
     crossfile_spec = compiled.get("crossfile_task_binding")
-    normalized = front.normalize_goal(goal)
-    future_artifacts = _future_artifacts(normalized)
-    # ask memory what it knows about work like this, before deciding anything
-    recalled = _recall_for(normalized)
-    # Taken before ANY branch can execute, so the composed early-returns are held to
-    # the same evidence as the single-capability path.
-    world_before = observe_world(normalized)
     admission = route_admission(normalized, compiled, admissible)
     admission["front_compiler_rules"] = list((compiled.get("front_compiler") or {}).get("rules_applied") or [])
     if admission.get("admitted") is not True:
@@ -5161,6 +5193,8 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
 
 _LEARNABLE_STATUSES = frozenset({
     "FAIL__RAW_GOAL_COMPILATION_GAP",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_POLYGLOT_REFUSED",
+    "FAIL_CLOSED__CAPABILITY_EXECUTION_FAILED",
 })
 
 
@@ -5319,6 +5353,43 @@ def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
                     return retry
         except Exception as exc:
             learned["error"] = type(exc).__name__ + ":" + str(exc)[:200]
+
+    # Verified skill crystallizer & general computer-environment synthesis fallback
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        learned["verified_skill_store_rules"] = VerifiedSkillStore().count()
+    except Exception:
+        pass
+
+    if not learned.get("registered"):
+        try:
+            from canonical.runtime import computer_env_v1 as cenv
+
+            stated_paths = [abs_p for _raw_p, abs_p in goal_compiler._repo_paths(goal, ROOT)]
+            work_dir = (stated_paths[0].parent if stated_paths and stated_paths[0].is_file()
+                        else (stated_paths[0] if stated_paths and stated_paths[0].is_dir() else None))
+            if work_dir is not None and work_dir.is_dir():
+                c_res = cenv.perform(goal, str(work_dir))
+                learned["computer_env_status"] = c_res.get("status")
+                if c_res.get("pass") is True and c_res.get("verified") is True:
+                    learned["attempted"] = True
+                    return {
+                        "schema": LIVE_SCHEMA,
+                        "status": "PASS__COMPUTER_ENV_LEARNED_AND_VERIFIED",
+                        "pass": True,
+                        "task_id": str((request or {}).get("task_id") or ""),
+                        "goal": goal,
+                        "executed": True,
+                        "semantic_acceptance_complete": True,
+                        "computer_env_result": c_res,
+                        "learning": learned,
+                        "learned_this_turn": True,
+                        "model_dependency_count": 0,
+                        "incremental_spend_usd": 0,
+                    }
+        except Exception:
+            pass
 
     result["learning"] = learned
     result["learned_this_turn"] = False
@@ -5509,6 +5580,89 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             result["status"] = "FAIL_CLOSED__CROSSFILE_TASK_NOT_REINSPECTED"
             result["failure_class"] = "CROSSFILE_TASK_NOT_REINSPECTED"
         return result
+    if (
+        isinstance(request, Mapping)
+        and not request.get("_compound_substep")
+        and not request.get("_typed_swe_plan")
+        and "contract_checks" not in request
+        and goal
+    ):
+        try:
+            from canonical.runtime import swe_typed_plan_v1 as _c_typed
+            _clauses = _c_typed.split_compound_swe_goal(goal, ROOT)
+        except Exception:
+            _clauses = None
+        if _clauses and len(_clauses) >= 2:
+            from canonical.swe_kernel.goal_dag_executor_v1 import execute_transactional_goal_dag
+
+            _snap_rels: list[str] = []
+            for _raw_p, _abs_p in goal_compiler._repo_paths(goal, ROOT):
+                _d = _abs_p if _abs_p.is_dir() else _abs_p.parent
+                if _d.is_dir() and _d != ROOT and ROOT in _d.parents:
+                    _rel_d = _d.relative_to(ROOT).as_posix()
+                    if _rel_d not in _snap_rels:
+                        _snap_rels.append(_rel_d)
+
+            def _solve_dag_stage(_subgoal: str, _idx: int) -> dict[str, Any]:
+                _sub_req = {
+                    "task_id": f"{request.get('task_id')}_step{_idx + 1}",
+                    "goal": _subgoal,
+                    "_compound_substep": True,
+                }
+                _sres = _solve_request(_sub_req)
+                if not _sres.get("compiled_capability_id"):
+                    _sres["compiled_capability_id"] = _capability_id_of(_sres)
+                return _sres
+
+            _dag = execute_transactional_goal_dag(
+                root=ROOT,
+                stages=_clauses,
+                stage_solver=_solve_dag_stage,
+                scope_paths=_snap_rels,
+            )
+            _receipts = list(_dag.get("stage_receipts") or [])
+            if _dag.get("ok") is not True:
+                _f_idx = _dag.get("failed_stage_index")
+                _f_res = _dag.get("failed_result") or {}
+                return _fail(
+                    str(request.get("task_id") or ""),
+                    "FAIL_CLOSED__COMPOUND_SWE_STEP_FAILED",
+                    "COMPOUND_SWE_STEP_FAILED",
+                    perf_counter_ns(),
+                    executed=True,
+                    failed_step_index=_f_idx,
+                    failed_clause=_dag.get("failed_stage_goal"),
+                    step_status=_f_res.get("status") or _dag.get("reason"),
+                    rolled_back=True,
+                    compound_steps=[
+                        {"clause": r.get("clause"), "status": r.get("status"), "capability_id": r.get("capability_id")}
+                        for r in _receipts
+                    ],
+                )
+            _cids = [str(r["capability_id"]) for r in _receipts if r.get("capability_id")]
+            _merged_exec = [item for r in _receipts for item in (r.get("execution") or [])]
+            _answers = [r["answer"] for r in _receipts if r.get("answer") is not None]
+            return {
+                "schema": LIVE_SCHEMA,
+                "status": "PASS__COMPOUND_SWE_MULTI_STEP_VERIFIED",
+                "pass": True,
+                "task_id": str(request.get("task_id") or ""),
+                "goal": goal,
+                "executed": True,
+                "semantic_acceptance_complete": True,
+                "compiled_capability_id": _cids[-1] if _cids else None,
+                "selected_plan": _cids,
+                "execution": _merged_exec,
+                "compound_steps": [
+                    {"clause": r.get("clause"), "status": r.get("status"), "capability_id": r.get("capability_id")}
+                    for r in _receipts
+                ],
+                "environment_profile": _dag.get("environment_declarations"),
+                "changed_files": _dag.get("changed_files"),
+                "answer": _answers[-1] if len(_answers) == 1 else (_answers if _answers else None),
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
     # Preserve upstream's plan-first optimization for an explicitly stated
     # family, after the stricter staged-crossfile grammar above. Planning faults
     # may fall back; an executed adapter's verdict must never be replaced.

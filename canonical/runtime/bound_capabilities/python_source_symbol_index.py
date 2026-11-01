@@ -570,7 +570,7 @@ def _parse_batch_subprocess(batch):
     return rows
 
 
-def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False, cached_loader=None):
+def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False, cached_loader=None, use_sqlite_cache=False):
     """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, source_root_arg)
@@ -600,6 +600,26 @@ def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False,
         ordered_rels.append(rel)
         to_parse.append((rel, sha, str(path), json_only))
 
+    sql_cache = None
+    repo_prefix = f"{repo}::"
+    if use_sqlite_cache and to_parse:
+        try:
+            from canonical.swe_kernel.incremental_semantic_graph_v1 import SymbolRowSQLiteCache
+            sql_cache = SymbolRowSQLiteCache()
+            sql_hits = sql_cache.get_many([(repo_prefix + r, s) for r, s, _, _ in to_parse], mode=0)
+            if sql_hits:
+                still_needed = []
+                for item in to_parse:
+                    hit_payload = sql_hits.get((repo_prefix + item[0], item[1]))
+                    if isinstance(hit_payload, dict) and hit_payload.get("sha256") == item[1]:
+                        modules_by_rel[item[0]] = hit_payload
+                        reused += 1
+                    else:
+                        still_needed.append(item)
+                to_parse = still_needed
+        except Exception:
+            sql_cache = None
+
     if len(to_parse) >= 64 and (os.cpu_count() or 1) > 1:
         from concurrent.futures import ThreadPoolExecutor
         workers = min(os.cpu_count() or 1, 4)
@@ -610,11 +630,16 @@ def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False,
     else:
         results = [_parse_single_module_worker(item) for item in to_parse]
 
+    new_sql_rows = []
     for (_rel_item, _sha_item, _, _jo_item), (kind, payload) in zip(to_parse, results):
         if kind in ("ok", "ok_json"):
             modules_by_rel[payload["path"]] = payload
+            if use_sqlite_cache and kind == "ok_json" and sql_cache is not None:
+                new_sql_rows.append((repo_prefix + payload["path"], payload["sha256"], json.dumps(payload, separators=(",", ":"))))
         else:
             unparseable.append(payload)
+    if sql_cache is not None and new_sql_rows:
+        sql_cache.put_many(new_sql_rows, mode=0)
 
     modules = [modules_by_rel[r] for r in ordered_rels if r in modules_by_rel]
 
@@ -680,6 +705,7 @@ def run(args, root):
         repo,
         json_only=True,
         cached_loader=lambda: _cached_modules(output) or _cached_modules_for_tree(output, source_root_rel),
+        use_sqlite_cache=True,
     )
     modules = report["modules"]
     unparseable = report["unparseable"]

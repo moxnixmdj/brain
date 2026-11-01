@@ -401,7 +401,27 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         "            importlib.import_module(m)\n"
         "        except SystemExit:\n"
         "            pass\n"
-        "    total_ran += _brain_run_suites(targets)\n"
+        "    try:\n"
+        "        total_ran += _brain_run_suites(targets)\n"
+        "    except ImportError as _imp_exc:\n"
+        "        if not any(_t in str(_imp_exc) for _t in ('pytest', 'exceptiongroup', 'pluggy', 'iniconfig')):\n"
+        "            raise\n"
+        "        import inspect as _insp, unittest as _ut\n"
+        "        _suite = _ut.TestLoader().discover(start_dir=str(tdir), top_level_dir=str(proj if (tdir == proj or (tdir / '__init__.py').is_file()) else tdir))\n"
+        "        _res = _ut.TestResult(); _suite.run(_res)\n"
+        "        if _res.failures or _res.errors:\n"
+        "            raise AssertionError((_res.failures + _res.errors)[0][1])\n"
+        "        total_ran += int(_res.testsRun)\n"
+        "        for _i, _tf in enumerate(targets):\n"
+        "            if 'unittest.TestCase' in _tf.read_text(encoding='utf-8', errors='replace') and _res.testsRun > 0:\n"
+        "                continue\n"
+        "            _sp = importlib.util.spec_from_file_location(f'_fb_t_{_i}_{_tf.stem}', _tf)\n"
+        "            if _sp and _sp.loader:\n"
+        "                _tm = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(_tm)\n"
+        "                for _fn_n, _fn_o in vars(_tm).items():\n"
+        "                    if _fn_n.startswith('test_') and callable(_fn_o) and not isinstance(_fn_o, type):\n"
+        "                        if not [p for p in _insp.signature(_fn_o).parameters.values() if p.default is _insp.Parameter.empty]:\n"
+        "                            _fn_o(); total_ran += 1\n"
         "if total_ran <= 0:\n"
         "    raise RuntimeError('NO_TESTS_EXECUTED')\n"
         "print(json.dumps({'ok': True, 'ran': total_ran}))\n"
@@ -455,23 +475,40 @@ def _purge_pyc(path: pathlib.Path) -> None:
                     pass
 
 
-def _inproc_sieve(proj: pathlib.Path, test_dir: pathlib.Path) -> tuple[bool, int]:
-    """Sub-millisecond in-process unittest sieve to reject 99% of failing mutants before clean child replay."""
+def _inproc_sieve(
+    proj: pathlib.Path,
+    test_dir: pathlib.Path,
+    prioritized_tests: list[pathlib.Path] | None = None,
+) -> tuple[bool, int]:
+    """Sub-millisecond in-process unittest + plain-pytest-fn sieve before clean child replay."""
     import importlib
+    import importlib.util
+    import inspect
     import unittest
 
     if not test_dir.is_dir():
         return False, 0
     proj_str = str(proj.resolve())
-    added_path = False
+    extra_paths: list[str] = []
+    for cand_dir in (proj.resolve(), proj.resolve() / "src", proj.resolve() / "pkg"):
+        s = str(cand_dir)
+        if cand_dir.is_dir() and s not in sys.path:
+            sys.path.insert(0, s)
+            extra_paths.append(s)
     old_dont_write = sys.dont_write_bytecode
     sys.dont_write_bytecode = True
     try:
-        if proj_str not in sys.path:
-            sys.path.insert(0, proj_str)
-            added_path = True
+        local_top_pkgs = {
+            (d.stem if d.is_file() else d.name)
+            for d in proj.iterdir()
+            if (d.is_dir() and not d.name.startswith((".", "__"))) or d.suffix == ".py"
+        }
         importlib.invalidate_caches()
         for k, v in list(sys.modules.items()):
+            top_k = k.split(".", 1)[0]
+            if top_k in local_top_pkgs and top_k not in getattr(sys, "stdlib_module_names", frozenset()):
+                sys.modules.pop(k, None)
+                continue
             f = getattr(v, "__file__", None)
             if f:
                 try:
@@ -484,13 +521,47 @@ def _inproc_sieve(proj: pathlib.Path, test_dir: pathlib.Path) -> tuple[bool, int
         suite = unittest.TestLoader().discover(start_dir=str(test_dir), top_level_dir=top_str)
         res = unittest.TestResult()
         suite.run(res)
-        return (not res.failures and not res.errors and res.testsRun > 0), int(res.testsRun)
+        if res.failures or res.errors:
+            return False, int(res.testsRun)
+        plain_ran = 0
+        test_files = [
+            p for p in sorted(test_dir.rglob("*.py"))
+            if "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
+        ]
+        if prioritized_tests:
+            prio_set = {p.resolve() for p in prioritized_tests}
+            test_files.sort(key=lambda p: (0 if p.resolve() in prio_set else 1, str(p)))
+        for idx, tf in enumerate(test_files):
+            src_txt = tf.read_text(encoding="utf-8", errors="replace")
+            if "unittest.TestCase" in src_txt and res.testsRun > 0:
+                continue
+            spec = importlib.util.spec_from_file_location(f"_sieve_t_{idx}_{tf.stem}", tf)
+            if spec is None or spec.loader is None:
+                continue
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            for name, obj in vars(mod).items():
+                if name.startswith("test_") and callable(obj) and not isinstance(obj, type):
+                    sig = inspect.signature(obj)
+                    req_params = [
+                        par for par in sig.parameters.values()
+                        if par.default is inspect.Parameter.empty
+                        and par.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+                    ]
+                    if req_params:
+                        # Parameterized/fixture pytest function: delegate to _verify_project
+                        return True, max(1, int(res.testsRun) + plain_ran + 1)
+                    obj()
+                    plain_ran += 1
+        total_ran = int(res.testsRun) + plain_ran
+        return total_ran > 0, total_ran
     except BaseException:
         return False, 0
     finally:
         sys.dont_write_bytecode = old_dont_write
-        if added_path and proj_str in sys.path:
-            sys.path.remove(proj_str)
+        for s in extra_paths:
+            if s in sys.path:
+                sys.path.remove(s)
 # ---------------------------------------------------------------------------
 _CONFLICT_RE = re.compile(
     r"^<<<<<<<[^\n]*\n(.*?)^=======\n(.*?)^>>>>>>>[^\n]*\n?",
@@ -955,6 +1026,7 @@ def _try_concurrency_lock_synthesis(proj: pathlib.Path, test_dir: pathlib.Path, 
 # ---------------------------------------------------------------------------
 def _try_test_guided_repair(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path]) -> list[pathlib.Path] | None:
     snap = {p: p.read_bytes() for p in focus}
+    per_file_cands: dict[pathlib.Path, list[str]] = {}
     for p in focus:
         src = snap[p].decode("utf-8", errors="replace")
         try:
@@ -1046,6 +1118,30 @@ def _try_test_guided_repair(proj: pathlib.Path, test_dir: pathlib.Path, focus: l
                         candidates.append("".join(g_lines))
 
         seen_cands: set[str] = set()
+        deduped_cands: list[str] = []
+        # 0. Prepend any crystallized skill from VerifiedSkillStore for Python repair
+        try:
+            from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+            for rule in VerifiedSkillStore().lookup_rules("python", "python_test_repair"):
+                from canonical.swe_kernel.verified_skill_crystallizer_v1 import apply_crystallized_code_rule
+
+                c_out = apply_crystallized_code_rule(src, rule)
+                if c_out is not None and c_out != src:
+                    candidates.insert(0, c_out)
+        except Exception:
+            pass
+
+        try:
+            from canonical.swe_kernel.incremental_semantic_graph_v1 import query_impacted_tests
+
+            imp_doc = query_impacted_tests(proj, ".", [p])
+            prio_tests: list[pathlib.Path] | None = [
+                proj / rel_t for rel_t in (imp_doc.get("impacted_tests") or [])
+            ] or None
+        except Exception:
+            prio_tests = None
+
         for cand in candidates[:64]:
             if cand == src or cand in seen_cands:
                 continue
@@ -1054,16 +1150,64 @@ def _try_test_guided_repair(proj: pathlib.Path, test_dir: pathlib.Path, focus: l
                 ast.parse(cand)
             except SyntaxError:
                 continue
+            deduped_cands.append(cand)
             p.write_text(cand, encoding="utf-8")
             _purge_pyc(p)
             # Fast Stage-1 in-memory sieve (~0.3ms), confirmed by clean child `-B` referee!
-            sieve_ok, sieve_ran = _inproc_sieve(proj, test_dir)
+            sieve_ok, sieve_ran = _inproc_sieve(proj, test_dir, prioritized_tests=prio_tests)
             if sieve_ok and sieve_ran > 0:
                 ok, ran, _ = _verify_project(proj, test_dir)
                 if ok and ran > 0:
+                    try:
+                        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+                        VerifiedSkillStore().crystallize_verified_fix(
+                            language="python",
+                            bug_class="python_test_repair",
+                            before_code=src,
+                            after_code=cand,
+                            verifier_oracle_kind="unittest_or_pytest",
+                        )
+                    except Exception:
+                        pass
                     return [p]
             p.write_bytes(snap[p])
             _purge_pyc(p)
+        per_file_cands[p] = deduped_cands[:12]
+
+    # Joint 2-file coupled fault repair (e.g. caller + callee or producer + consumer both faulty):
+    # bounded at <=8 focus files * <=12 candidates/file via ~0.3ms _inproc_sieve + child referee.
+    cand_files = [fp for fp in focus if per_file_cands.get(fp)]
+    if 2 <= len(cand_files) <= 8:
+        for idx_a in range(len(cand_files)):
+            pa = cand_files[idx_a]
+            src_a = snap[pa].decode("utf-8", errors="replace")
+            for idx_b in range(idx_a + 1, len(cand_files)):
+                pb = cand_files[idx_b]
+                src_b = snap[pb].decode("utf-8", errors="replace")
+                for cand_a in per_file_cands[pa]:
+                    pa.write_text(cand_a, encoding="utf-8")
+                    _purge_pyc(pa)
+                    for cand_b in per_file_cands[pb]:
+                        pb.write_text(cand_b, encoding="utf-8")
+                        _purge_pyc(pb)
+                        sieve_ok, sieve_ran = _inproc_sieve(proj, test_dir)
+                        if sieve_ok and sieve_ran > 0:
+                            ok, ran, _ = _verify_project(proj, test_dir)
+                            if ok and ran > 0:
+                                try:
+                                    from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+                                    store = VerifiedSkillStore()
+                                    store.crystallize_verified_fix("python", "python_test_repair", src_a, cand_a, "coupled_suite")
+                                    store.crystallize_verified_fix("python", "python_test_repair", src_b, cand_b, "coupled_suite")
+                                except Exception:
+                                    pass
+                                return [pa, pb]
+                    pb.write_bytes(snap[pb])
+                    _purge_pyc(pb)
+                pa.write_bytes(snap[pa])
+                _purge_pyc(pa)
     return None
 
 

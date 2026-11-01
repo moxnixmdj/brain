@@ -155,16 +155,34 @@ def run(args, root):
             syntax_errors.append({"file": rel, "line": exc.lineno, "msg": str(exc.msg)})
 
     # -- stage 2: ruff, filtered to the changed line ranges ---------------
+    import os
+    import shutil
     ruff_version = None
     blocking, advisory = [], []
-    probe = subprocess.run([python_exe, "-m", "ruff", "--version"],
-                           capture_output=True, text=True, timeout=min(timeout_s, 30))
-    if probe.returncode == 0 and probe.stdout.strip().startswith("ruff"):
-        ruff_version = probe.stdout.strip()
+    use_native_ruff = (not args.get("python_executable") or str(args.get("python_executable")) == sys.executable)
+    native_ruff = shutil.which("ruff", path=str(Path(sys.executable).parent) + os.pathsep + os.environ.get("PATH", "")) if use_native_ruff else None
+    ruff_cmd_prefix: list[str] | None = None
+    if native_ruff:
+        ver_cache = getattr(run, "_native_ruff_ver", None)
+        if ver_cache is None:
+            p_ver = subprocess.run([native_ruff, "--version"], capture_output=True, text=True, timeout=min(timeout_s, 15))
+            if p_ver.returncode == 0 and p_ver.stdout.strip().startswith("ruff"):
+                ver_cache = p_ver.stdout.strip()
+                setattr(run, "_native_ruff_ver", ver_cache)
+        if ver_cache:
+            ruff_version = ver_cache
+            ruff_cmd_prefix = [native_ruff]
+    else:
+        probe = subprocess.run([python_exe, "-m", "ruff", "--version"],
+                               capture_output=True, text=True, timeout=min(timeout_s, 30))
+        if probe.returncode == 0 and probe.stdout.strip().startswith("ruff"):
+            ruff_version = probe.stdout.strip()
+            ruff_cmd_prefix = [python_exe, "-m", "ruff"]
+    if ruff_version and ruff_cmd_prefix:
         touched = sorted(files_on_disk)
         if touched:
             proc = subprocess.run(
-                [python_exe, "-m", "ruff", "check", "--output-format", "json",
+                ruff_cmd_prefix + ["check", "--output-format", "json",
                  "--no-cache", "--isolated", "--select", "E,F,W"] + touched,
                 cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
             try:
@@ -201,7 +219,7 @@ def run(args, root):
         gate = "FAIL" if syntax_errors else "PASS_SYNTAX_ONLY"
     elif ruff_version and not syntax_errors and not blocking:
         gate = "PASS"
-    complete = True
+    complete = bool(ruff_version is not None)
     verified = gate == "PASS"
 
     artifact = {
