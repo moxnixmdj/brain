@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::`solve` had exactly one fallback -- a recalled compiled workflow -- and below it returned the refusal. The route that acts on real files (`computer_env_v1.perform`, ending in `discover`) was never called by the door, so the machine's verification apparatus and its delivery apparatus were disconnected.",
-  "canonical_base_commit": "8d515959b77b4fd5cfc565aa34bbe551b81f37dc",
+  "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -80,7 +80,7 @@
     "canonical/runtime/environment_learning_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "8d515959b77b4fd5cfc565aa34bbe551b81f37dc",
+    "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
@@ -236,7 +236,7 @@
           "route": "THE_DOOR_REACHES_WHAT_THE_MACHINE_CAN_DO_V1_20261101_V1"
         }
       ],
-      "checked_at_utc": "2026-11-01T12:50:31Z",
+      "checked_at_utc": "2026-11-01T12:55:05Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -276,7 +276,7 @@
       "selected_route": "THE_DOOR_REACHES_WHAT_THE_MACHINE_CAN_DO_V1_20261101_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-01T12:50:31Z",
+        "checked_at_utc": "2026-11-01T12:55:05Z",
         "execution_dependencies": [
           {
             "dependency": "python3 stdlib (gzip, lzma, csv, hashlib, json)",
@@ -373,7 +373,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-01T12:50:31Z",
+    "checked_at_utc": "2026-11-01T12:55:05Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,

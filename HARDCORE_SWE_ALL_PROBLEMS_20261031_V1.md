@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `cbba820` (branched from main `cbba820`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `8d515959b7` (branched from main `8d515959b7`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -8,7 +8,7 @@ the live verified registry, and a probe of the substrate. Nothing here is a wish
 
 ## §0 The answer in one paragraph
 
-The brain answers **41 of 49** advanced software-engineering sentences and **43–44 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **8** refusals fall into **7** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
+The brain answers **41 of 49** advanced software-engineering sentences and **44 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **8** refusals fall into **7** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
 
 They are three different kinds of problem, and confusing them is what made earlier editions of
 this document wrong:
@@ -28,10 +28,9 @@ this document wrong:
 | instrument | result |
 |---|---|
 | advanced census (49 hardcore sentences) | **41 served / 8 refused** |
-| capability matrix (54 cases, 3 runs) | **43–44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
-| cases real in **every** run | **43** — a floor, not an average |
-| cases that moved between runs | `perf_review` |
-| matrix latency | median 89 ms  p90 611 ms  max 1607 ms |
+| capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
+| cases real in **every** run | **44** — a floor, not an average |
+| matrix latency | median 86 ms  p90 577 ms  max 1578 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -228,10 +227,6 @@ These matter more than any single refusal, and none of them is measured by a 49-
 9. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports
    `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with
    a clean tree. Every lane-only number is suspect until the fixture is shared.
-10. **The matrix itself moves between runs, and now says so.** Over 3 runs 43 cases were real every time and
-   43–44 were real in any one run; the cases that moved are `perf_review`. A headline number that
-   changes with the box's load is not a capability number, so this document reports the floor
-   and the ceiling and names the movers, instead of quoting whichever sample looked best.
 10. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
    software engineering is unbounded, so this corpus can be satisfied without being a good engineer.
    It needs real repositories and adversarial sentences, not more fixtures.
@@ -486,6 +481,12 @@ worse *or* better than it is, which is why they are recorded:
    to `False` in `click` broke 644 of 1014 tests. That is not a bug report and no fair task
    can be built from it; mutations are now capped at 25 failing cases and 40% of a suite.
 
+The clones are pinned (`2247b35ea1c4`, `3fc9e561ea7e`), so the task bank is
+stable and re-running reproduces the same injected bug and the same stage. The first
+version of the instrument claimed pinning in a comment while cloning the default branch;
+that is corrected here for the same reason the other false numbers were: a claim in a
+comment is not a measurement.
+
 What this does **not** yet measure: whether a *correct* edit would be accepted, because no
 edit is produced. The next hour is not about repair quality — it is about the missing path
 from `a failing test in this repository` to `a proposed edit`.
@@ -494,7 +495,7 @@ from `a failing test in this repository` to `a proposed edit`.
 
 It is not a plan to make the machine *seem* more capable. Every item above is either a measured
 refusal, a measured absence in the substrate, or a measured selection error. Nothing is softened:
-the machine answers 41 of 49 hardcore sentences and 43–44 of 54
+the machine answers 41 of 49 hardcore sentences and 44 of 54
 capability cases, and the difference between those two numbers is itself a finding — the matrix
 exercises rows directly, the census asks whether a sentence reaches the right one, and selection
 is where the sentences are lost. The value of the inventory is that the next hour of work can be
