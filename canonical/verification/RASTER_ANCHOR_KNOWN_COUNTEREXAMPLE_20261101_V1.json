@@ -1,0 +1,18 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Register re-inspectors for chart.raster.curve_value_query.v1, chart.raster.curve_x_at_y_query.v1 and chart.raster.scene_graph.v1",
+ "falsifier_id": "PIXEL_ANCHOR_NECESSARY_NOT_SUFFICIENT",
+ "decisive_question": "Does checking that the reported anchor is ink of the declared colour also prove the reported value is the correct reading of that curve?",
+ "answer": "NO",
+ "counterexample": "An adapter can anchor honestly on real ink and still read the wrong value: report the correct pixel for a point on the curve, then return a value that does not follow from the axis calibration. The anchor check passes and the number is wrong. Likewise a curve of the right colour from the wrong series passes.",
+ "measured": {
+  "anchor_off_the_ink": "REFUSED (RASTER_ANCHOR_IS_NOT_INK_OF_THE_DECLARED_COLOUR)",
+  "anchor_outside_the_image": "REFUSED (RASTER_ANCHOR_OUTSIDE_THE_IMAGE)",
+  "image_size_misreported": "REFUSED (RASTER_SCENE_GRAPH_IMAGE_SIZE_MISMATCH)",
+  "honest_anchor_wrong_value": "PASSES",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "These inspectors anchor the claim to real pixels and refuse fabrication; they do not verify the calibration arithmetic. The adapters' own hard_nonclaims list already declines semantic authority, and this receipt records that the independent check is narrower than the claim.",
+ "what_would_close_it": "An inspector that recomputes the axis calibration from the tick marks independently of the adapter's calibration code, then re-derives the value. Not attempted here."
+}

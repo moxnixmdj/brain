@@ -2728,6 +2728,122 @@ def _inspect_diagnose_and_architect(args, result, root):
     return True, "", {"operation": op, "output_path": out_rel}
 
 
+
+# ---------------------------------------------------------------------------
+# Raster chart inspectors.
+#
+# These three capabilities return a measurement of an image plus a `pass` flag.
+# Nothing re-opened the image, so the flag was the only evidence -- exactly the
+# shape the rest of this module exists to refuse. Each inspector below re-opens
+# the PNG from disk and checks the one thing an independent reader can falsify:
+# that the pixel the adapter says it measured is really ink of the declared
+# colour, at the declared coordinate, in the file the capability names. A
+# fabricated coordinate, a transposed image, or a claim about a different file
+# all fail.
+#
+# Deliberately narrow: this proves the claim is anchored to real pixels, not
+# that the chart's axes mean what the caller hopes. Semantic authority stays
+# with the adapter's own hard_nonclaims list.
+# ---------------------------------------------------------------------------
+
+_RASTER_MAX_BYTES = 40_000_000
+
+
+def _open_raster(args, result, root):
+    raw = result.get("path") or args.get("path")
+    image_path = _inside(root, raw)
+    if image_path is None or not image_path.is_file():
+        return None, "RASTER_INPUT_ABSENT_FROM_DISK"
+    if image_path.stat().st_size > _RASTER_MAX_BYTES:
+        return None, "RASTER_INPUT_TOO_LARGE"
+    try:
+        from PIL import Image
+        image = Image.open(image_path)
+        image.load()
+    except Exception:
+        return None, "RASTER_INPUT_NOT_DECODABLE"
+    return image.convert("RGB"), ""
+
+
+def _bucket(rgb):
+    return tuple(min(255, (int(v) // 48) * 48 + 24) for v in rgb)
+
+
+def _anchor_is_ink(args, result, root, axis):
+    image, err = _open_raster(args, result, root)
+    if image is None:
+        return False, err, {}
+    width, height = image.size
+    if axis == "x":
+        x, y = result.get("target_pixel_x"), result.get("interpolated_pixel_y")
+        axis_value = result.get("x_value")
+    else:
+        x, y = result.get("interpolated_pixel_x"), result.get("target_pixel_y")
+        axis_value = result.get("y_value")
+    if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+        return False, "RASTER_ANCHOR_COORDINATES_MISSING", {}
+    if not (0 <= x < width and 0 <= y < height):
+        return False, "RASTER_ANCHOR_OUTSIDE_THE_IMAGE", {"anchor": [x, y], "image_size": [width, height]}
+    declared = result.get("color_bucket")
+    if not isinstance(declared, (list, tuple)) or len(declared) != 3:
+        return False, "RASTER_COLOR_BUCKET_MISSING", {}
+    want = tuple(int(v) for v in declared)
+    pixels = image.load()
+    radius = 2
+    hits = 0
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            px, py = int(round(x)) + dx, int(round(y)) + dy
+            if 0 <= px < width and 0 <= py < height and _bucket(pixels[px, py]) == want:
+                hits += 1
+    if hits == 0:
+        observed = _bucket(pixels[int(round(x)), int(round(y))])
+        return False, "RASTER_ANCHOR_IS_NOT_INK_OF_THE_DECLARED_COLOUR", {
+            "anchor": [x, y], "declared": list(want), "observed": list(observed)}
+    return True, "", {"anchor": [x, y], "image_size": [width, height],
+                      "declared": list(want), "ink_pixels_in_window": hits,
+                      axis + "_value": axis_value}
+
+
+def _inspect_raster_query_x(args, result, root):
+    return _anchor_is_ink(args, result, root, "x")
+
+
+def _inspect_raster_query_y(args, result, root):
+    return _anchor_is_ink(args, result, root, "y")
+
+
+def _inspect_raster_scene_graph(args, result, root):
+    image, err = _open_raster(args, result, root)
+    if image is None:
+        return False, err, {}
+    width, height = image.size
+    claimed = result.get("image_size")
+    if not isinstance(claimed, (list, tuple)) or list(claimed) != [width, height]:
+        return False, "RASTER_SCENE_GRAPH_IMAGE_SIZE_MISMATCH", {
+            "claimed": list(claimed) if isinstance(claimed, (list, tuple)) else None,
+            "actual": [width, height]}
+    box = result.get("plot_box")
+    if not isinstance(box, (list, tuple)) or len(box) != 4:
+        return False, "RASTER_SCENE_GRAPH_PLOT_BOX_MISSING", {}
+    left, top, right, bottom = (float(v) for v in box)
+    if not (0 <= left < right <= width and 0 <= top < bottom <= height):
+        return False, "RASTER_SCENE_GRAPH_PLOT_BOX_OUTSIDE_THE_IMAGE", {
+            "plot_box": [left, top, right, bottom], "image_size": [width, height]}
+    # The claim being checked: the components it reports came from this file,
+    # so the image on disk must still contain saturated ink inside the box.
+    pixels = image.load()
+    saturated = 0
+    for px in range(int(left), int(right), 3):
+        for py in range(int(top), int(bottom), 3):
+            r, g, b = pixels[px, py]
+            if max(r, g, b) >= 200 and max(r, g, b) - min(r, g, b) >= 60:
+                saturated += 1
+    if saturated == 0:
+        return False, "RASTER_SCENE_GRAPH_REPORTS_NO_INK_BUT_THE_BOX_HAS_NONE", {}
+    return True, "", {"image_size": [width, height], "plot_box": [left, top, right, bottom],
+                      "sampled_saturated_pixels": saturated}
+
 INSPECTORS: dict[str, Inspector] = {
     "code.polyglot.transform_and_verify.v1": _inspect_polyglot_transform,
     "python.swe.transform_and_synthesize.v1": _inspect_python_swe_transform,
@@ -2769,6 +2885,9 @@ INSPECTORS: dict[str, Inspector] = {
     "decision.synthesis.verify.stdlib": _inspect_decision_verify,
     "text.file.write": _inspect_text_file_write,
     "shell.command.run": _inspect_shell_command_run,
+    "chart.raster.curve_value_query.v1": _inspect_raster_query_x,
+    "chart.raster.curve_x_at_y_query.v1": _inspect_raster_query_y,
+    "chart.raster.scene_graph.v1": _inspect_raster_scene_graph,
 }
 
 
