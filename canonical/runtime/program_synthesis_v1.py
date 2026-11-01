@@ -345,6 +345,24 @@ def suffix_for_name(name: str) -> str:
 _HEAD_BYTES = 512
 
 
+def verifier_version() -> str:
+    """A name for the CHECKING RULES, computed from the rules themselves.
+
+    A learned refusal is only as good as the verifier that produced it.  On
+    2026-11-01 six goals were "solved" by a verifier with no check for their
+    format; the day that check was added, every one of those refusals became
+    wrong.  Anything cached on a refusal has to die with the rules, and the only
+    version number that cannot go stale is a hash of the table it describes.
+    """
+    blob = json.dumps({
+        "round_trip": sorted(_ROUND_TRIP.items()),
+        "containers": sorted((n, o, s.hex()) for n, o, s in _CONTAINER_SIGNS),
+        "owner": {k: sorted(v) for k, v in _CONTAINER_OWNER.items()},
+        "format_only": sorted(_FORMAT_ONLY),
+    }, sort_keys=True, default=str)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
+
+
 def verify_round_trip(out: pathlib.Path, suffix: str,
                       timeout: float = 15.0) -> tuple[bool, str]:
     """Open it with the library that owns the format. If it will not open,

@@ -1116,6 +1116,34 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
 
     _fingerprint: dict[str, Any] | None = None
 
+    def _seed_items() -> list[tuple[str, bytes]]:
+        if seed_file and pathlib.Path(seed_file).is_file():
+            path = pathlib.Path(seed_file)
+            return [(path.name, path.read_bytes())]
+        return [("input.txt", b"brain computer env sample\n")]
+
+    def fingerprint_key() -> str:
+        """What a fingerprint is a fact ABOUT: this machine, these programs, this seed.
+
+        The fingerprint is taken by running the programs, so it changes when a
+        program's bytes change and it does not change when a goal is asked twice.
+        Keying the cache on the program's mtime and size is what makes the entry
+        die on a machine change instead of being believed across one.
+        """
+        import hashlib
+        h = hashlib.sha256()
+        h.update(("target=" + target + "\n").encode())
+        for name, data in _seed_items():
+            h.update(name.encode() + b"\0" + data + b"\0")
+        for prog in progs:
+            real = shutil.which(prog) or prog
+            try:
+                st = os.stat(real)
+                h.update(("%s|%d|%d\n" % (prog, st.st_mtime_ns, st.st_size)).encode())
+            except OSError:
+                h.update((prog + "|missing\n").encode())
+        return h.hexdigest()[:24]
+
     def fingerprint_of() -> dict[str, Any]:
         """The shape of this problem, measured once.
 
@@ -1128,12 +1156,32 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
         nonlocal _fingerprint
         if _fingerprint is not None:
             return _fingerprint
+        # THE SECOND TIME MUST BE INSTANT, OR THE MEMORY IS ONLY A RECORD.
+        #
+        # Taking a fingerprint means acting: six probes of up to four actions,
+        # and each action runs a program in several shapes.  Measured
+        # 2026-11-01: 5-8 s.  It was taken twice per discovery and again on
+        # every repeat, so a one-action plan recalled in 4,757 ms against
+        # 4,766 ms cold -- the machine remembered the answer and still paid
+        # full price to recognise the question.
+        key = fingerprint_key()
+        try:
+            cached = tl.cached_fingerprint(key)
+        except Exception:  # noqa: BLE001 - a cache must never be required
+            cached = None
+        if cached:
+            _fingerprint = cached
+            return _fingerprint
         env = ComputerEnv()
         try:
             env.register(program_actions(env, programs=progs, target=target))
             _fingerprint = tl.fingerprint(env, env.action_names)
         finally:
             env.close()
+        try:
+            tl.cache_fingerprint(key, _fingerprint)
+        except Exception:  # noqa: BLE001
+            pass
         return _fingerprint
 
     def recall() -> tuple[list[str], str, dict | None] | None:
@@ -1157,9 +1205,38 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
         except Exception:  # noqa: BLE001 - remembering is not the goal
             pass
 
+    # 0. this exact shape, for this exact goal, was already tried here and did not
+    #    close.  Measured 2026-11-01 before this existed: the same goal that needs
+    #    64,637 ms to fail spent 63,874 ms failing again on the very next call.
+    #    The reason is remembered, so the repeat is answered with the same honest
+    #    refusal instead of a fresh search -- and it is keyed on the verifier's own
+    #    version, because a better verifier makes shapes solvable that were not.
+    try:
+        _verifier = _ps.verifier_version()
+        _fp = fingerprint_of()
+        _miss = tl.recall_miss(_fp, gap, _verifier)
+    except Exception:  # noqa: BLE001 - memory is an optimisation, not a dependency
+        _fp, _verifier, _miss = None, "", None
+    if _miss:
+        return {"closed": False, "status": str(_miss.get("reason")
+                                               or "OPEN__TRIED_HERE_AND_DID_NOT_CLOSE"),
+                "plan": [], "suffix": suffix, "target": target,
+                "actions_tried": 0, "from_memory": True, "verified_before": False,
+                "detail": "tried on this machine before (%s times) and it did not close"
+                          % _miss.get("trials", 1)}
+
+    def forget_misses() -> None:
+        if _fp is None:
+            return
+        try:
+            tl.forget_miss(_fp, gap, _verifier)
+        except Exception:  # noqa: BLE001
+            pass
+
     # 1. the instant path: was this shape of problem solved before?
     got = recall()
     if got is not None:
+        forget_misses()
         return {"closed": True, "status": "PASS__RECALLED_AND_REVERIFIED",
                 "plan": got[0], "suffix": suffix, "target": target,
                 "recipe": got[2], "actions_tried": 0,
@@ -1171,6 +1248,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     one = _single_step(progs, suffix, target, gap, seed_file)
     if one is not None:
         keep(one[0], "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED", one[1])
+        forget_misses()
         return {"closed": True, "status": "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED",
                 "plan": one[0], "suffix": suffix, "target": target,
                 "recipe": one[2], "actions_tried": len(progs),
@@ -1210,6 +1288,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
         ok, why = _verify_plan(plan, suffix, target, progs)
         if ok:
             keep(plan, "PASS__SEARCH_FOUND_AND_VERIFIED", why)
+            forget_misses()
             return {"closed": True, "status": outcome.get("status"),
                     "plan": plan, "suffix": suffix, "target": target,
                     "recipe": _recipe_of(plan, suffix, target, progs),
@@ -1229,6 +1308,11 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     _st = str(outcome.get("status") or "")
     if _st.startswith("PASS"):
         _st = "OPEN__EFFECT_NOT_VERIFIED"
+    if _fp is not None and not str(_st).startswith("CHANNEL_ERROR"):
+        try:
+            tl.remember_miss(_fp, gap, _st or "OPEN__EFFECT_NOT_VERIFIED", _verifier)
+        except Exception:  # noqa: BLE001
+            pass
     return {"closed": False, "status": _st or "OPEN__EFFECT_NOT_VERIFIED",
             "plan": [], "suffix": suffix,
             "rejected_plan": list(outcome.get("plan") or []),
