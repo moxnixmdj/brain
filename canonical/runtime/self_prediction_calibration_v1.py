@@ -44,6 +44,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import pathlib
 import time
 import uuid
@@ -117,7 +118,10 @@ class Ledger:
     """Append-only JSONL. A record is never edited in place after it is settled."""
 
     def __init__(self, path: pathlib.Path | str | None = None):
-        self.path = pathlib.Path(path) if path else DEFAULT_LEDGER
+        # The acceptance path settles predictions from inside a long run; an operator needs to be
+        # able to point that at a scratch file without editing code.
+        override = os.environ.get("BRAIN_SELF_PREDICTION_LEDGER")
+        self.path = pathlib.Path(path or override or DEFAULT_LEDGER)
 
     def _rows(self) -> list[dict[str, Any]]:
         if not self.path.is_file():
