@@ -1297,6 +1297,17 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=tool_executed)
+        # THE SECOND SPELLING OF THE SAME REFUSAL: ``RuntimeError("GUARD_KEY:detail")``.
+        # A guard key is the repository's own vocabulary for "I read the request and refused it";
+        # reporting it as LIVE_CONTROLLER_EXECUTION told the caller the machine had broken when it
+        # had answered.  Measured 2026-11-01: 7 of 13 census refusals were exactly this.
+        if type(exc) is RuntimeError and _ADAPTER_REFUSAL_KEY_RE.match(str(exc).strip()):
+            _why = str(exc).strip()[:200]
+            return _fail(task_id, "FAIL_CLOSED__CAPABILITY_REFUSED_" + _why.split(":")[0][:60],
+                         "CAPABILITY_REFUSED:" + _why, started, executed=True,
+                         compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         refusal_payload={"error": True, "capability": str(selected), "reason": _why},
+                         executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
         # "IT ALREADY PASSES" IS AN ANSWER, AND IT IS THE ONE THE REPAIR LOOP ALREADY COMPUTED.
         #
         # Every repair adapter refuses with ``BASELINE_ALREADY_PASSES`` when the named test passes
@@ -1695,7 +1706,7 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                 # its helper is reused rather than redrawn.
                 _exec_entry = dict(_entry)
                 _exec_entry["action_template"] = _typed_plan_module._execution_template(
-                    _entry, set((_report or {}).get("adapter_defaulted") or {}))
+                    _entry, set((_report or {}).get("adapter_defaulted") or {}), _inputs)
         except Exception:  # noqa: BLE001 - a derivation fault keeps the declared template
             _exec_entry = _entry
         _declared = _exec_entry.get("declared_action_template")
@@ -2727,6 +2738,11 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
             and not _declares_it_does_not_write(entry)
             and not (_READ_SURFACE_RE.search(provides) and not _declares_edits)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
+    # A plan-only row is not a general reader. Its no-write limitation must
+    # not authorize it to answer a different question (e.g. a summary request).
+    if (_read_only_request and _writes and _declares_it_does_not_write(entry)
+            and not _asks_only_for_a_plan(text)):
+        out.append("STATED_QUESTION_ANSWERED_BY_A_CHANGE_PLANNER:" + (cid or "UNNAMED"))
     language = _LANGUAGE_OF_GOAL_RE.search(text)
     if (language and _PYTHON_ONLY_RE.search(surface)
             and not _LANGUAGE_SURFACE_RE.search(surface)):
@@ -3704,14 +3720,10 @@ def _scope_claim_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
         if not isinstance(files, int):
             files = doc.get("parsed_file_count") or doc.get("file_count")
         # A single-file scope is the one case that is provably too small to answer "every X":
-        # a call site can live in any other module, and one file is not the codebase -- unless
-        # that single file IS the only Python module in its package and parent directory.
+        # a call site can live in any other module. Empty parents and siblings
+        # do not prove there are no callers elsewhere in the repository.
         if scope.strip().endswith((".py", ".pyw")) and files in (None, 1, 0):
-            scope_p = (ROOT / scope.strip()).resolve()
-            parent_py = list(scope_p.parent.glob("*.py")) if scope_p.parent.is_dir() else []
-            upper_py = list(scope_p.parent.parent.glob("*.py")) if scope_p.parent.parent.is_dir() else []
-            if len(parent_py) != 1 or len(upper_py) > 0:
-                return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
+            return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
     return []
 
 
@@ -4282,6 +4294,22 @@ _REFUSAL_CLASS_EXCLUDED = frozenset({"ACTION_EXPECTATION_FAILED"})
 
 _ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|NOTHING_TO_DO",
                                    re.IGNORECASE)
+
+# AN ADAPTER'S REFUSAL KEY IS A REFUSAL, NOT A CRASH.
+#
+# The adapters refuse in two spellings.  One is ``raise SystemExit(json.dumps({"error": True,
+# "reason": ...}))`` and the door parses it.  The other is ``raise RuntimeError("SOME_KEY:detail")``
+# -- the repository's own SCREAMING_SNAKE guard convention, used by the polyglot engine
+# (POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM), the symbol mover (TARGET_SYMBOL_COLLISION:add),
+# the diagnosis row (DIAGNOSE_ARCHITECT_REFUSED:...) and git (NOT_A_GIT_REPOSITORY:.).  Only the
+# first was classified, so a capability that had ANSWERED was reported as
+# ``FAIL__LIVE_CONTROLLER_EXECUTION`` -- the status of an adapter bug, byte-identical to a crash.
+# Measured 2026-11-01 on the 49-sentence advanced census (main 6aa5dab): 7 of the 13 refusals were
+# this shape, and every one of them named its cause in the exception the door then discarded.
+#
+# Only a RuntimeError whose WHOLE message is a key (optionally ``:detail``) qualifies, so a
+# traceback text or a free-form message keeps its crash classification.
+_ADAPTER_REFUSAL_KEY_RE = re.compile(r"^[A-Z][A-Z0-9_]{3,}(?::[^\n]{0,300})?$")
 
 _COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED",
                                           "STEP_RAISED_OUTCOME_UNKNOWN",

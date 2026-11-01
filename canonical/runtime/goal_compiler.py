@@ -787,7 +787,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             named=bool(re.search(
                 r"\b"+re.escape(str(stem).replace("_"," "))+r"\b",str(goal),re.IGNORECASE))
             dirs=[(raw,p) for raw,p in _scope_paths if p.is_dir()]
-            exact_file=_declared_exact_file_scope(entry,key,_scope_paths)
+            exact_file=_declared_exact_file_scope(entry,key,_scope_paths,goal)
             if exact_file is not None:
                 result[key]=exact_file
                 continue
@@ -945,7 +945,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     return result
 
 
-def _declared_exact_file_scope(entry, key, paths):
+def _declared_exact_file_scope(entry, key, paths, goal=None):
     """A file-or-directory declaration preserves the one stated file, before parent inference.
 
     Shared by the compiler and its world-binding fallback. Output destinations
@@ -958,8 +958,17 @@ def _declared_exact_file_scope(entry, key, paths):
                 or any(str(p).startswith("python.") for p in entry.get("provides",[])))
     files=[raw for raw,p in paths if p.is_file()
            and (not python_cap or p.suffix.lower() in {".py",".pyi"})]
-    if len(files)==1 and not any(p.is_dir() for _,p in paths):
-        return files[0]
+    if len(files)==1:
+        if not any(p.is_dir() for _,p in paths):
+            return files[0]
+        # A source-root directory can be context for a specifically named FILE.
+        # Preserve explicit file roles before generic directory inference. Do not
+        # infer file authority from a bare path or from multiple named files.
+        path = next(p for raw,p in paths if raw == files[0])
+        if any(re.search(r"\b(?:python\s+)?(?:source\s+)?file\s+[`\"']?" + re.escape(name)
+                         + r"(?=$|[\s`\"'.,;])", str(goal or ""), re.I)
+               for name in (files[0], str(path))):
+            return files[0]
     return None
 
 

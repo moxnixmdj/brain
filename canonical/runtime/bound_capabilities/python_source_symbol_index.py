@@ -17,8 +17,9 @@ import hashlib
 import json
 import os
 import pathlib
+import subprocess
+import sys
 
-from canonical.swe_kernel import parallel_fork_map
 
 _BUILTIN_NAMES = frozenset(dir(builtins))
 
@@ -503,9 +504,14 @@ def _module_names_prepass(tree):
 
 def _parse_single_module_worker(item):
     """Top-level worker for parallel cold AST indexing on large trees."""
-    rel, sha, path_str, json_only = item
+    rel, sha, path_str, *options = item
+    json_only = bool(options and options[0])
     try:
         raw = pathlib.Path(path_str).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != sha:
+            return ("err", {"path": rel, "sha256": sha,
+                            "error": "SOURCE_CHANGED_DURING_PARSE",
+                            "detail": "Worker bytes differ from parent snapshot"})
         tree = ast.parse(raw.decode("utf-8"), filename=path_str)
     except Exception as exc:
         return ("err", {
@@ -553,6 +559,17 @@ def _parse_single_module_worker(item):
     return ("ok", row)
 
 
+def _parse_batch_subprocess(batch):
+    """Reuse the mediated subprocess boundary; never fall back past a denial."""
+    proc = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve()), "--parse-batch"],
+                          input=json.dumps(batch), capture_output=True, text=True,
+                          timeout=120, check=True)
+    rows = json.loads(proc.stdout)
+    if not isinstance(rows, list) or len(rows) != len(batch):
+        raise RuntimeError("INDEX_WORKER_RESULT_INVALID")
+    return rows
+
+
 def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False, cached_loader=None):
     """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
@@ -583,7 +600,15 @@ def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False,
         ordered_rels.append(rel)
         to_parse.append((rel, sha, str(path), json_only))
 
-    results = parallel_fork_map(_parse_single_module_worker, to_parse, min_items=64)
+    if len(to_parse) >= 64 and (os.cpu_count() or 1) > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        workers = min(os.cpu_count() or 1, 4)
+        chunk = max(8, (len(to_parse) + workers * 4 - 1) // (workers * 4))
+        batches = [to_parse[i:i + chunk] for i in range(0, len(to_parse), chunk)]
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            results = [row for batch in executor.map(_parse_batch_subprocess, batches) for row in batch]
+    else:
+        results = [_parse_single_module_worker(item) for item in to_parse]
 
     for (_rel_item, _sha_item, _, _jo_item), (kind, payload) in zip(to_parse, results):
         if kind in ("ok", "ok_json"):
@@ -710,3 +735,12 @@ def run(args, root):
         "parsed_module_count": len(modules) - reused + len(unparseable),
         "reused_module_count": reused,
     }
+
+
+if __name__ == "__main__":
+    if sys.argv[1:] != ["--parse-batch"]:
+        raise SystemExit("Expected --parse-batch")
+    batch = json.load(sys.stdin)
+    if not isinstance(batch, list):
+        raise SystemExit("Invalid parse batch")
+    json.dump([_parse_single_module_worker(item) for item in batch], sys.stdout, separators=(",", ":"))

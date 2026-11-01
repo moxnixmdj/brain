@@ -185,12 +185,12 @@ class TestGenerateScaffold(unittest.TestCase):
             _run(root, extra={"index_path": "_out/bad.json"})
         self.assertIn("INDEX_CACHE_SOURCE_ROOT_MISMATCH", str(cm.exception))
 
-    def test_pytest_absent_degrades_to_unavailable_not_silent(self):
+    def test_unusable_interpreter_does_not_report_verified(self):
         root = _make_repo(self.tmp)
         _targets(root, [{"module": "calc/ops.py", "name": "scale"}])
         res = _run(root, extra={"python_executable": "/usr/bin/false"})
         art = json.loads((root / "_out" / "summary.json").read_text())
-        self.assertEqual(art["pytest"], "UNAVAILABLE")
+        self.assertEqual(art["pytest"], "NOT_USED")
         self.assertFalse(res["verified"])
 
     def test_generated_file_is_valid_python_with_classes(self):
