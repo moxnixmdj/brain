@@ -588,14 +588,49 @@ def review_api_design(target: Path) -> dict[str, Any]:
     }
 
 
+# THE TABLE RECORDS THE FIXED VERSION, AND THE AUDIT COMPARES AGAINST IT.
+#
+# Measured 2026-11-01 on main 6aa5dab: `requests==2.32.3`, `pyyaml==6.0.1` and
+# `cryptography==43.0.0` -- every one of them already past its fix -- were reported as
+# VULNERABLE, because the audit flagged a package by MEMBERSHIP in this dict and never compared
+# the pinned version to the fixed one.  The door stamped PASS with exact semantic acceptance over
+# it.  An engineer acting on that report pins backwards, into the vulnerable version.  A false
+# finding is worse than no finding: it spends trust.
+#
+# What the audit can honestly claim is now stated in the artifact: it compares the pinned version
+# against the fixed version for the packages in this table, and it lists every dependency the
+# table cannot judge under `unchecked_dependencies` instead of letting silence read as safety.
+# The table is a pinned subset, and the artifact says so (`advisory_table`).
 _KNOWN_ADVISORIES = {
-    "pyyaml": ("<5.4", "CVE-2020-14343: arbitrary code execution via yaml.load"),
-    "urllib3": ("<1.26.5", "CVE-2021-33503: catastrophic backtracking in URL authority parser"),
-    "requests": ("<2.31.0", "CVE-2023-32681: unintended Proxy-Authorization header leak"),
-    "flask": ("<2.2.5", "CVE-2023-30861: session cookie disclosure under caching proxy"),
-    "jinja2": ("<3.1.3", "CVE-2024-22195: XSS in xmlattr filter"),
-    "cryptography": ("<41.0.6", "CVE-2023-49083: NULL pointer dereference in PKCS12 parsing"),
+    "pyyaml": ("5.4", "CVE-2020-14343: arbitrary code execution via yaml.load"),
+    "urllib3": ("1.26.5", "CVE-2021-33503: catastrophic backtracking in URL authority parser"),
+    "requests": ("2.31.0", "CVE-2023-32681: unintended Proxy-Authorization header leak"),
+    "flask": ("2.2.5", "CVE-2023-30861: session cookie disclosure under caching proxy"),
+    "jinja2": ("3.1.3", "CVE-2024-22195: XSS in xmlattr filter"),
+    "cryptography": ("41.0.6", "CVE-2023-49083: NULL pointer dereference in PKCS12 parsing"),
 }
+
+
+_VERSION_RE = re.compile(r"^\s*v?(\d+(?:\.\d+)*)")
+
+
+def _version_tuple(text: str) -> tuple[int, ...] | None:
+    """The leading numeric release of a version string, or None when it has none.
+
+    Deliberately not `packaging`: this engine is stdlib-only by construction, and a PEP 440
+    parser is not needed to compare two releases.  A pre-release suffix sorts by its numeric
+    release, which is the conservative direction for a vulnerability check (2.31.0rc1 has the
+    same numeric release as 2.31.0, so it is not called vulnerable past the fix).
+    """
+    m = _VERSION_RE.match(str(text or ""))
+    if not m:
+        return None
+    return tuple(int(part) for part in m.group(1).split("."))
+
+
+def _pinned_version(spec: str) -> tuple[int, ...] | None:
+    m = re.search(r"==\s*([0-9][0-9A-Za-z.*+!-]*)", spec)
+    return _version_tuple(m.group(1)) if m else None
 
 
 def audit_dependency_vulnerabilities(target: Path) -> dict[str, Any]:
@@ -631,13 +666,25 @@ def audit_dependency_vulnerabilities(target: Path) -> dict[str, Any]:
 
     vulnerabilities: list[dict[str, Any]] = []
     unpinned: list[str] = []
+    unchecked: list[str] = []
     for spec in deps:
         pkg = re.split(r"[><=~!;\[\s]", spec.strip(), maxsplit=1)[0].lower()
         if "==" not in spec:
             unpinned.append(spec)
-        if pkg in _KNOWN_ADVISORIES:
-            fixed_range, cve_desc = _KNOWN_ADVISORIES[pkg]
-            vulnerabilities.append({"package": pkg, "spec": spec, "safe_constraint": fixed_range, "advisory": cve_desc})
+        if pkg not in _KNOWN_ADVISORIES:
+            # SILENCE IS NOT A CLEAN BILL OF HEALTH.
+            unchecked.append(pkg)
+            continue
+        fixed, cve_desc = _KNOWN_ADVISORIES[pkg]
+        fixed_v, pinned_v = _version_tuple(fixed), _pinned_version(spec)
+        if pinned_v is None:
+            # Unpinned or a range: the installed version is not in the sentence, so the honest
+            # answer is "cannot judge this one", not "vulnerable" and not "safe".
+            unchecked.append(pkg)
+            continue
+        if pinned_v < fixed_v:
+            vulnerabilities.append({"package": pkg, "spec": spec, "fixed_in": fixed,
+                                    "advisory": cve_desc})
 
     return {
         "verified": True,
@@ -649,6 +696,12 @@ def audit_dependency_vulnerabilities(target: Path) -> dict[str, Any]:
         "vulnerability_count": len(vulnerabilities),
         "vulnerabilities": vulnerabilities,
         "unpinned_dependencies": unpinned,
+        # What this audit CANNOT see.  A pinned advisory table of
+        # %d packages is not an advisory database; a dependency it does not
+        # carry is reported here rather than assumed clean.
+        "unchecked_dependencies": sorted(set(unchecked)),
+        "advisory_table_packages": len(_KNOWN_ADVISORIES),
+        "coverage_note": "ADVISORY_TABLE_IS_A_PINNED_SUBSET:%d" % len(_KNOWN_ADVISORIES),
     }
 
 

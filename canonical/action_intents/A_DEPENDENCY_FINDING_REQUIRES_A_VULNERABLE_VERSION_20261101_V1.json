@@ -1,0 +1,217 @@
+{
+  "action_id": "A_DEPENDENCY_FINDING_REQUIRES_A_VULNERABLE_VERSION_20261101_V1",
+  "action_intent_id": "A_DEPENDENCY_FINDING_REQUIRES_A_VULNERABLE_VERSION_20261101_V1",
+  "action_intent_path": null,
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "The dependency audit flagged a package by MEMBERSHIP in its advisory dict and never compared the pinned version to the fixed one, so on main 6aa5dab it reported requests==2.32.3, pyyaml==6.0.1 and cryptography==43.0.0 -- all three already past their fixes -- as vulnerable, and the door stamped PASS__...EXACT_SEMANTIC_ACCEPTANCE_VERIFIED over the report. Acting on it pins backwards, into the vulnerable version. The table now stores the fixed version, the audit compares against it, a package the table cannot judge is named in unchecked_dependencies instead of reading as safe, and the artifact states its own scope (ADVISORY_TABLE_IS_A_PINNED_SUBSET:6).",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
+      "canonical/tests/test_a_dependency_finding_requires_a_vulnerable_version_v1.py",
+      "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A finding was computed from the package NAME rather than from the VERSION the sentence named, and silence about packages outside a six-entry table was indistinguishable from a clean bill of health.",
+  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A finding was computed from the package NAME rather than from the VERSION the sentence named, and silence about packages outside a six-entry table was indistinguishable from a clean bill of health.",
+  "date": "2026-11-01",
+  "expected_parent_change": "Measured on the same commit, before and after: safe versions (requests 2.32.3, pyyaml 6.0.1, cryptography 43.0.0) 3 findings -> 0; vulnerable versions (requests 2.19.0, pyyaml 5.1) 2 findings with fixed_in 2.31.0 / 5.4; unknown or unpinned packages now listed under unchecked_dependencies. Boards unchanged: 49-sentence census 36 served / 13 refused, 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18 sentences 11/18, ladder 27 PASS.",
+  "expected_parent_frontier_change": "Measured on the same commit, before and after: safe versions (requests 2.32.3, pyyaml 6.0.1, cryptography 43.0.0) 3 findings -> 0; vulnerable versions (requests 2.19.0, pyyaml 5.1) 2 findings with fixed_in 2.31.0 / 5.4; unknown or unpinned packages now listed under unchecked_dependencies. Boards unchanged: 49-sentence census 36 served / 13 refused, 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18 sentences 11/18, ladder 27 PASS.",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+  "falsification_condition": "If a package past its fix is ever reported vulnerable again, if a package the table cannot judge is reported clean, or if the boards move, this action was wrong.",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intent": "A finding must be a fact about the version, and a table's edge must be visible.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "A_FINDING_IS_A_FACT_ABOUT_THE_VERSION_NOT_ABOUT_THE_NAME",
+    "measured_effect": "Measured on the same commit, before and after: safe versions (requests 2.32.3, pyyaml 6.0.1, cryptography 43.0.0) 3 findings -> 0; vulnerable versions (requests 2.19.0, pyyaml 5.1) 2 findings with fixed_in 2.31.0 / 5.4; unknown or unpinned packages now listed under unchecked_dependencies. Boards unchanged: 49-sentence census 36 served / 13 refused, 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18 sentences 11/18, ladder 27 PASS.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.5,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Measured on the same commit, before and after: safe versions (requests 2.32.3, pyyaml 6.0.1, cryptography 43.0.0) 3 findings -> 0; vulnerable versions (requests 2.19.0, pyyaml 5.1) 2 findings with fixed_in 2.31.0 / 5.4; unknown or unpinned packages now listed under unchecked_dependencies. Boards unchanged: 49-sentence census 36 served / 13 refused, 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18 sentences 11/18, ladder 27 PASS.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/declared_input_derivation_v1.py",
+    "canonical/runtime/capability_selection_retrieval_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+    "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+    "execution_guard/swe_advanced_probe_v1.py",
+    "execution_guard/swe_capability_matrix_v1.py",
+    "hardcore_swe_surface_probe_20261030.py"
+  ],
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
+    "canonical/tests/test_a_dependency_finding_requires_a_vulnerable_version_v1.py",
+    "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
+  ],
+  "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
+  "recursive_obs": {
+    "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
+      "A_REFUSAL_THAT_NAMED_ITS_FAMILY_INSTEAD_OF_ITS_SLOT",
+      "THE_SILENT_WIDENING_OF_AN_EDIT_SCOPE_TO_THE_ANCESTOR_TREE",
+      "CERTIFICATION_OF_A_RUN_THAT_MOVED_FILES_THE_SENTENCE_NEVER_NAMED"
+    ],
+    "expected_parent_level_state_change": "Measured on the same commit, before and after: safe versions (requests 2.32.3, pyyaml 6.0.1, cryptography 43.0.0) 3 findings -> 0; vulnerable versions (requests 2.19.0, pyyaml 5.1) 2 findings with fixed_in 2.31.0 / 5.4; unknown or unpinned packages now listed under unchecked_dependencies. Boards unchanged: 49-sentence census 36 served / 13 refused, 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED, 18 sentences 11/18, ladder 27 PASS.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "SHIPPING_A_LARGER_HARDCODED_TABLE__REJECTED_A_TABLE_THAT_DOES_NOT_COMPARE_IS_WRONG_AT_ANY_SIZE; SILENTLY_RETURNING_NO_FINDINGS_FOR_UNKNOWN_PACKAGES__REJECTED_THAT_IS_THE_SAME_LIE_ONE_LAYER_DOWN",
+      "intrinsic_or_path_specific": "Path-specific: one comparison in one operation.",
+      "surviving_causal_blocker": "The answer was a property of the package name, not of the tree."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_DEPENDENCY_NO_NEW_TABLE_SERVICE_NO_NETWORK_CALL",
+      "existing_inherited_routes_checked": "The operation, its manifest parsing and its report already existed; only the comparison was missing.",
+      "external_existing_routes_checked": "An OSV/PyPI advisory feed would be the real source, but it needs the network and a freshness policy; this action does not claim it.",
+      "surviving_gap": "The advisory table is still six packages; the audit now says so instead of implying otherwise."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_MATRIX_REAL_COUNT",
+        "TURNING_REFUSALS_INTO_PASSES"
+      ],
+      "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
+      "surviving_necessity": "The machine could only answer 'who calls X' for a single file; for a tree it computed the answer and discarded it."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_PROJECTION_THE_EXISTING_SHA256_ROW_CACHE_AND_THE_EXISTING_FLOOR_IDIOM"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "ONE_A_B_MATRIX_RUN_WITH_THE_CHANGE_STASHED_TO_SEPARATE_THIS_CHANGE_FROM_MAIN_MOVING",
+      "search_stop_decision": "EACH_GATE_WAS_MEASURED_BY_WHAT_MOVED_ON_DISK_RATHER_THAN_BY_WHAT_THE_CODE_CLAIMED__THE_FALSE_PASSES_WERE_FOUND_THAT_WAY_AND_NOT_BY_READING_THE_DECLARATIONS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": false,
+      "losing_routes_reason": "The word-mention law certifies nothing and fails an honest row; deleting the declarations cost a real surface case; and widening the contract of a 70 KB adapter in the same change as the gate that refuses its over-reach would have been two unmeasured moves at once.",
+      "routes_ranked": [
+        "READ_THE_ROW_AND_THE_MOVED_FILES_INSTEAD_OF_THE_SENTENCE_VOCABULARY_AND_THE_DECLARATION__SELECTED",
+        "ADD_A_LAW_THAT_AN_EFFECT_NAME_MUST_APPEAR_IN_ITS_ADAPTER__MEASURED_AND_REJECTED_0_OFFENDERS_OVER_122_ROWS",
+        "DELETE_THE_FOUR_CHOREOGRAPHY_DECLARATIONS__TRIED_AND_REVERTED_THE_ROW_IMPLEMENTS_ALL_FOUR",
+        "TEACH_THE_CHOREOGRAPHER_THE_STATED_EFFECT__REQUIRES_A_CONTRACT_CHANGE_RECORDED_AS_THE_SURVIVING_GAP"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__EACH_GATE_IS_VERIFIED_BY_WHAT_MOVED_ON_DISK_AND_THE_PROBE_RECORDS_THE_SAME_DIFF"
+    },
+    "real_outcome": "Find the callers of binding_view in canonical/runtime delivers ['_execute', '_prefer_the_writing_repair', 'admit', 'build_plan', 'compile_against_live_registry'] instead of refusing for size.",
+    "required_capability": "A_GATE_THAT_READS_THE_ANSWER_IT_ASKED_FOR_AND_A_CACHE_KEYED_BY_WHAT_IT_DESCRIBES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Every defect was measured in this repository on this tree."
+    },
+    "routes_considered": [
+      "RAISE_THE_CAP__PAYS_FOR_THE_WHOLE_PARSE",
+      "NEW_SUMMARY_FORMAT__TWO_THINGS_TO_KEEP_IN_SYNC",
+      "BOUNDED_SECTION_READ_AND_TREE_KEYED_CACHE__CHOSEN"
+    ],
+    "selected_route": "READ_THE_ROW_AND_THE_MOVED_FILES_INSTEAD_OF_THE_SENTENCE_VOCABULARY",
+    "selected_surviving_route": "READ_THE_ROW_AND_THE_MOVED_FILES_INSTEAD_OF_THE_SENTENCE_VOCABULARY",
+    "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
+    "why_selected_route_is_fastest_sufficient": "Three edits of a few lines each, six tests, and the census re-measures in six seconds. Each one removes a gate and reads a fact already on hand, so nothing new is computed and nothing new can be wrong."
+  },
+  "required_capability": "EVIDENCE_THAT_NAMES_THE_FACT_IT_WAS_DECIDED_ON",
+  "resolution": "The audit reports a vulnerability only for a pinned version below the fixed version, names what it could not judge, and states the size of its advisory table in the artifact.",
+  "route_id": "COMPARE_THE_VERSION_NOT_THE_NAME",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "COMPARE_THE_VERSION_NOT_THE_NAME",
+  "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "166fadde10ec12dbb1420b54ff4c67819ba306ae",
+          "path": "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py"
+        }
+      ],
+      "decisive_question": "IS_A_FINDING_A_FACT_ABOUT_THE_VERSION_OR_ABOUT_THE_NAME",
+      "falsifier_id": "MEMBERSHIP_IN_A_TABLE_OUTRANKS_THE_VERSION",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
+      "proposal_id": "A_DEPENDENCY_FINDING_REQUIRES_A_VULNERABLE_VERSION_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The effect gate gains a third reading (what moved), the choreographer loses a silent scope widening, the binder loses a curated word list that only ever refused work the row could do, and R3 keeps its meaning by naming the slot when the binder already knows it."
+}
