@@ -186,3 +186,53 @@ def run_stages(argvs: Sequence[Sequence[str]], cwd: str,
     except Exception:  # noqa: BLE001
         pass
     return code, bytes(buf[:max_bytes])
+
+
+def run_command(argv: Sequence[str], cwd: str, timeout: float = 5.0,
+                max_bytes: int = DEFAULT_MAX_BYTES) -> tuple[int | None, bytes, bytes]:
+    """One governed argv with separate, bounded diagnostic channels.
+
+    Both pipes are drained concurrently under one deadline. Compiler diagnostics
+    must not be discarded or mixed into machine-readable stdout. No shell.
+    """
+    import time
+    import os
+    import signal
+    stages = _normalise([argv])
+    if stages is None or timeout <= 0 or max_bytes <= 0:
+        return None, b'', b''
+    try:
+        proc = subprocess.Popen(stages[0], cwd=str(cwd), stdin=subprocess.DEVNULL,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                start_new_session=(os.name == 'posix'))
+    except OSError:
+        return None, b'', b''
+    buffers = [bytearray(), bytearray()]
+    def drain(stream, buffer):
+        try:
+            while len(buffer) < max_bytes:
+                chunk = stream.read(min(4096, max_bytes - len(buffer)))
+                if not chunk:
+                    break
+                buffer.extend(chunk)
+        except (OSError, ValueError):
+            pass
+    workers = [threading.Thread(target=drain, args=(stream, buffer), daemon=True)
+               for stream, buffer in zip((proc.stdout, proc.stderr), buffers)]
+    end = time.monotonic() + timeout
+    for worker in workers:
+        worker.start()
+    for worker in workers:
+        worker.join(max(0, end - time.monotonic()))
+    class Readers:
+        def is_alive(self):
+            return any(w.is_alive() for w in workers)
+    code = reap(proc, Readers())
+    if code == -9 and os.name == 'posix':
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    for stream in (proc.stdout, proc.stderr):
+        stream.close()
+    return code, bytes(buffers[0]), bytes(buffers[1])

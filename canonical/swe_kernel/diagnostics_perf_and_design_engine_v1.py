@@ -26,8 +26,8 @@ def _sha256_bytes(data: bytes) -> str:
 
 
 def _run_cmd(argv: list[str], cwd: Path, timeout: float = 20.0) -> tuple[int, str, str]:
-    rc, out_b = pipeline_exec_v1.run_stages([argv], cwd=str(cwd), timeout=timeout)
-    return int(rc), out_b.decode("utf-8", errors="replace"), ""
+    rc, out_b, err_b = pipeline_exec_v1.run_command(argv, cwd=str(cwd), timeout=timeout)
+    return (int(rc) if rc is not None else 124), out_b.decode("utf-8", errors="replace"), err_b.decode("utf-8", errors="replace")
 
 
 def _standalone_git_toplevel(target: Path, brain_root: Path) -> Path | None:

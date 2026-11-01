@@ -46749,34 +46749,13 @@
     },
     "observe_world": {
      "doc": "What the filesystem looked like, read here rather than taken on report.",
-     "passing_cases": 0,
+     "passing_cases": 1,
      "signature": {
       "params": [
        "goal"
       ],
       "required": [
        "goal"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
-    "observed_effect_errors": {
-     "doc": "Did the run leave any evidence at all, and did it leave the tree intact?",
-     "passing_cases": 2,
-     "signature": {
-      "params": [
-       "goal",
-       "before",
-       "after",
-       "result",
-       "artifacts"
-      ],
-      "required": [
-       "goal",
-       "before",
-       "after",
-       "result"
       ],
       "var_kw": false
      },
@@ -46798,7 +46777,7 @@
     },
     "promised_artifact_errors": {
      "doc": "R6: every output file the goal named must now exist.",
-     "passing_cases": 0,
+     "passing_cases": 1,
      "signature": {
       "params": [
        "goal",
@@ -46810,11 +46789,11 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "promised_source_change_errors": {
      "doc": "Every source file the goal asked to repair must actually be different now.",
-     "passing_cases": 0,
+     "passing_cases": 5,
      "signature": {
       "params": [
        "goal",
@@ -46829,25 +46808,7 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
-    },
-    "route_admission": {
-     "doc": "Judge one compiled route. Returns {\"admitted\": bool, ...evidence}.",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "goal",
-       "compiled",
-       "registry"
-      ],
-      "required": [
-       "goal",
-       "compiled",
-       "registry"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "run_adapter_locally": {
      "doc": "E1: execute one bound adapter the way the kernel would, for source types the kernel refuses.",
@@ -46878,20 +46839,6 @@
       "var_kw": false
      },
      "tier": "READ_ONLY_UNTESTED"
-    },
-    "solve": {
-     "doc": "Public entry: explicit structured obligations can never be ignored.",
-     "passing_cases": 30,
-     "signature": {
-      "params": [
-       "request"
-      ],
-      "required": [
-       "request"
-      ],
-      "var_kw": false
-     },
-     "tier": "TEST_EVIDENCED"
     },
     "solve_or_learn": {
      "doc": "Try it; if the machine cannot, let that be the signal to learn how.",
@@ -46974,7 +46921,7 @@
     },
     "tool_truth_errors": {
      "doc": "R5: the executed tool's own verdict wins over the controller's \"it returned\".",
-     "passing_cases": 2,
+     "passing_cases": 1,
      "signature": {
       "params": [
        "result"
@@ -46987,15 +46934,9 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "3985068c1e23964063c3fa19addf32c21c12cc8a72c03b2ed51f45ff596249dd",
+   "sha256": "c013a4bb763a3fd2879b4c3d70231fb2f45c2795557ce38f87307ce8b947df6a",
    "tests": {
-    "canonical/tests/test_a_revision_is_a_value_not_a_topic_v1.py": "18cab48f0060699348643d357e2c371f086cd4192dee412bb2fb66a96b66d162",
-    "canonical/tests/test_a_row_declares_only_what_it_implements_v1.py": "5e9f773cecbe39f0efc7145d95c878b1ff7164b5576416743ff5026b245eab31",
-    "canonical/tests/test_diagnosis_source_and_test_roles_v1.py": "3abeb789b32c84c76d81f8b78fc1960041b30cba7bbad692e5c31db9d961146c",
-    "canonical/tests/test_swe_cache_and_scope_reuse_v1.py": "80d541812deaef02e5d1d1705994b7f32135ca27c2233ccba3ae15d101831242",
-    "canonical/tests/test_swe_intent_scope_regressions_v1.py": "7c8b06d1ea8cc6712bc9c14a644c3d98b4cc37150d9511c1e19c295862d97b15",
-    "canonical/tests/test_swe_typed_plan_v1.py": "1cc0be72c1e9995d0016d192f53ec04ce0ef27ece1376b5393bfae612b886918",
-    "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py": "78aa784aaabbb28ada352e0bf9a79a2b3b28f3ea1e17d9c916725a5fd282fa3e"
+    "canonical/tests/test_live_brain_route_admission_v1.py": "932a84c1673e5451d6b6aaa6c5fe291db996036f37586ade3cea2bae7ae09c5c"
    }
   },
   "canonical/runtime/live_brain_runtime_v1.py": {
@@ -55108,7 +55049,7 @@
    },
    "sha256": "3e896ddc55cd719e3dc9a9fd871f2ffc0c72dbc3f016ab3573db243bcb67590e",
    "tests": {
-    "canonical/tests/test_universal_learning_meta_policy_v9.py": "489f093d12ca47647a5520287594384bd8e051bb460fb6416df26ff11a04dfe4"
+    "canonical/tests/test_universal_learning_meta_policy_v9.py": "beb5af8a23c6a186bc4d41cb9b33e3c61f5cfd4b98ae1f2009e437ed10860363"
    }
   },
   "canonical/runtime/meta_strategy_abstraction_v9.py": {
@@ -93401,7 +93342,7 @@
    },
    "sha256": "1d815fa64496c021acabb778e91c12e1b7219af3419d4d31b4fa70d032f8935d",
    "tests": {
-    "canonical/tests/test_universal_learning_meta_policy_v9.py": "489f093d12ca47647a5520287594384bd8e051bb460fb6416df26ff11a04dfe4"
+    "canonical/tests/test_universal_learning_meta_policy_v9.py": "beb5af8a23c6a186bc4d41cb9b33e3c61f5cfd4b98ae1f2009e437ed10860363"
    }
   },
   "canonical/runtime/universal_learning_open_world_router_v4.py": {
@@ -97472,6 +97413,11 @@
   "canonical/runtime/judgment_control_envelope_v1.py": {
    "evaluate_materiality_counterfactual": "FAILING_TEST_CASES:1"
   },
+  "canonical/runtime/live_brain_route_admission_v1.py": {
+   "observed_effect_errors": "FAILING_TEST_CASES:1",
+   "route_admission": "FAILING_TEST_CASES:3",
+   "solve": "FAILING_TEST_CASES:2"
+  },
   "canonical/runtime/live_integrated_brain_v1.py": {
    "load_verified_registry": "FAILING_TEST_CASES:1",
    "run_raw_goal": "FAILING_TEST_CASES:4"
@@ -97793,7 +97739,7 @@
  },
  "remeasurement": {
   "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
-  "junit_cases_observed": 333,
+  "junit_cases_observed": 452,
   "measured_platform": "linux",
   "measured_python": "3.11",
   "modules": [
@@ -97806,11 +97752,11 @@
  "schema": "PROJECT_BRAIN_MODULE_INVOCATION_EVIDENCE_V1",
  "summary": {
   "functions_by_tier": {
-   "READ_ONLY_UNTESTED": 2580,
-   "TEST_EVIDENCED": 2674
+   "READ_ONLY_UNTESTED": 2576,
+   "TEST_EVIDENCED": 2675
   },
   "inventory_modules": 2310,
-  "invocable_functions": 5254,
+  "invocable_functions": 5251,
   "invocable_modules": 2019,
   "modules_excluded": {
    "IMPORT_FAILED": 89,

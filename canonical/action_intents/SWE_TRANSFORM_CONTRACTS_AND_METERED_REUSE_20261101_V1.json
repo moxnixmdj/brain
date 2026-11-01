@@ -1,0 +1,364 @@
+{
+  "action_id": "SWE_TRANSFORM_CONTRACTS_AND_METERED_REUSE_20261101_V1",
+  "action_intent_id": "SWE_TRANSFORM_CONTRACTS_AND_METERED_REUSE_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Remove reproduced unsafe source-transition paths and unmetered reuse accounting from the existing SWE route; preserve working cases and independently observable source effects. No benchmark threshold, ownership, terminal completion or universal speed claim.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "admission_record_timing": "RETROSPECTIVE_SUBMISSION_REPAIR__NOT_A_PRE_EDIT_RECEIPT",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
+      "canonical/tests/test_swe_transform_contracts_v1.py",
+      "canonical/tests/test_swe_learning_reuse_contracts_v1.py"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::SWE rewrites could overwrite split destinations, erase exports or change unsupported numeric domains, while retained-plan trial counts omitted fingerprint actions.",
+  "canonical_base_commit": "33ac16be53904ca1c3027aaa85d6fb07ba16eb0c",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "SWE rewrites could overwrite split destinations, erase exports or change unsupported numeric domains, while retained-plan trial counts omitted fingerprint actions.",
+  "date": "2026-11-01",
+  "expected_parent_frontier_change": "Remove reproduced unsafe source-transition paths and unmetered reuse accounting from the existing SWE route; preserve working cases and independently observable source effects. No benchmark threshold, ownership, terminal completion or universal speed claim.",
+  "explicit_user_authorization": "User authorized the six-phase engineering plan with Execute perfectly, then explicitly instructed merge all of your work. This record documents admission after implementation and is not represented as having existed before the edits.",
+  "falsification_condition": "Any claimed guarded success changing the tested source semantics, collateral source damage, counter mismatch, or failed admission invalidates this batch; broader counterexamples reopen applicability.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Planning judgment for the authorized finite repair-and-merge batch; not a universal comparative theorem.",
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "canonical_base_commit": "33ac16be53904ca1c3027aaa85d6fb07ba16eb0c",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "estimate_semantics": "Conditional engineering planning inputs required by the admission scheduler, not measured benchmark improvement, statistical certification, or an independently validated global probability bound. No official obligation is discharged by this record.",
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000",
+    "interpretation": "Reliably non-destructive source rewriting is a shared prerequisite for the coding obligations. This is constructive-gap work, not benchmark-specific success or capability promotion. The small positive expected unlock is a planning judgment under that prerequisite assumption.",
+    "measured_effect": "See canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json; 445 passing selected tests, six failures reproduced on current-main archive; one inherited 21-row evidence drift check remains.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "stop_condition": "Stop this bounded batch after source/test/model revalidation, exact-head signed referee and admission checks pass, and the explicitly authorized PR is merged. Stop rather than bypass a failed guard or claim the six-phase curriculum is complete.",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 86400
+  },
+  "ownership_credit_delta": 0,
+  "probe_specific": false,
+  "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
+  "recursive_obs": {
+    "canonical_base_commit": "33ac16be53904ca1c3027aaa85d6fb07ba16eb0c",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Producer-only acceptance for guarded transitions",
+      "Silent diagnostic loss"
+    ],
+    "expected_parent_level_state_change": "Remove reproduced unsafe source-transition paths and unmetered reuse accounting from the existing SWE route; preserve working cases and independently observable source effects. No benchmark threshold, ownership, terminal completion or universal speed claim.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Delete reliance on producer flags",
+        "Refuse unsafe/out-of-domain transforms",
+        "Reuse existing parser, process reaper and learner"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_EXISTING_SWE_TRANSFORM_AND_TRANSFER_IMPLEMENTATIONS",
+      "surviving_causal_blocker": "SWE rewrites could overwrite split destinations, erase exports or change unsupported numeric domains, while retained-plan trial counts omitted fingerprint actions."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "Replacement universal-learning architecture",
+        "Replacement parser",
+        "Parallel evidence/model format"
+      ],
+      "existing_inherited_routes_checked": [
+        "shared AST/path/parser substrate",
+        "pipeline_exec_v1.reap",
+        "current-main incremental semantic graph and skill store",
+        "transfer_learning_v1",
+        "official evidence/model compilers"
+      ],
+      "external_existing_routes_checked": [
+        "diskcache metadata and tree-sitter release metadata; neither replaces behavioral source contracts"
+      ],
+      "surviving_gap": "Bind supported rewrite patterns to explicit preconditions/fallbacks and recheck actual source; expose hidden probe costs."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Universal mastery claims",
+        "Treating a producer PASS flag or low replay trial count as task correctness or total work"
+      ],
+      "real_outcome": "Remove reproduced unsafe source-transition paths and unmetered reuse accounting from the existing SWE route; preserve working cases and independently observable source effects. No benchmark threshold, ownership, terminal completion or universal speed claim.",
+      "surviving_necessity": "Prevent reproduced destructive/wrong transformations while keeping positive controls executable."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "Current-main graph, crystallizer, goal-DAG and action-availability checks preserved"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "Unsafe split destination overwrite",
+        "Unproved numeric-domain fast paths",
+        "Dropped compiler stderr",
+        "Underreported fingerprint work"
+      ],
+      "fresh_reuse_plan": "Reuse the maintained interfaces. Revalidate changed dependencies; do not let retained success replace live verification."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the existing current-tree test modules and official compiler instead of creating a new evidence architecture"
+      ],
+      "search_stop_decision": "For the finite reproduced defects, maintained substrate plus bounded contract glue is sufficient; stop search before pretending universal optimality. Reopen if new counterexamples or a qualified dominating route appears."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Trust fails known counterexamples; disabling all writes loses working positive cases; replacement learning does not fix source-transition invariants. No claim that every possible external route was exhaustively benchmarked.",
+      "routes_ranked": [
+        "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+        "DISABLE_ALL_REWRITES",
+        "TRUST_PRODUCER_FLAGS",
+        "REPLACE_LEARNING_ARCHITECTURE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use real small projects, compilers and separate-process counters to preserve known failures cheaply; these are not held-out universal capability qualification."
+    },
+    "real_outcome": "Remove reproduced unsafe source-transition paths and unmetered reuse accounting from the existing SWE route; preserve working cases and independently observable source effects. No benchmark threshold, ownership, terminal completion or universal speed claim.",
+    "required_capability": "Non-destructive source transformations and honestly measured retained-plan reuse in the existing engineering route.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Keep incoming semantic graph, crystallizer and goal-DAG; add no new registry capability or ownership promotion.",
+            "CORRECTNESS": "Producer flags alone failed the preserved counterexamples; recomputed structural checks plus behavioral oracles cover the bounded regression scope, not general equivalence.",
+            "INCREMENTAL_COST": "No external model call or paid service in the implemented runtime; local existing substrate.",
+            "RELIABILITY": "Collision checks, original-domain fallbacks and rollback tested on actual temporary projects and compilers; remaining baseline failures disclosed.",
+            "VERIFIABILITY": "Real source bytes, compilers, child counters and current-tree tests. Scope is finite regressions; no broad benchmark certificate.",
+            "WALL_CLOCK": "Reuse existing parser, subprocess reaper and learner instead of a replacement architecture. Final integrated selected suite measured 81.54 seconds; no universal fastest-route ranking."
+          },
+          "evidence": [
+            "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
+            "canonical/tests/test_swe_transform_contracts_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
+            "canonical/tests/test_swe_learning_reuse_contracts_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T11:22:56.841352Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "TRUST_PRODUCER_FLAG_AND_REPLAY_WITHOUT_TOTAL_INTERFACE_ACCOUNTING",
+      "max_age_hours": 24,
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "GitHub repository search: python disk cache transactions"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GitHub repository metadata: grantjenks/python-diskcache"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "GitHub issues search: repo:python/cpython lru_cache mutable"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub latest release: tree-sitter/py-tree-sitter"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T11:22:56.841352Z",
+        "execution_dependencies": [
+          {
+            "dependency": "CPython 3.11.2 and existing .venv pytest/tree-sitter substrate",
+            "evidence": [
+              "DIRECT_PROBE: Python reports 3.11.2; merged targeted run 84 passed and final selected integrated run 445 passed, 6 baseline failures, 1 skipped, 24 passing subtests."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/pipeline_exec_v1.py and canonical/runtime/transfer_learning_v1.py",
+            "evidence": [
+              "DIRECT_PROBE: separate stdout/stderr, child deadline/descendant tests and separate-interpreter actual action counts 23 cold versus 15 recalled."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/swe_kernel/transform_contracts_v1.py and canonical/swe_kernel/transition_verifier_v1.py",
+            "evidence": [
+              "DIRECT_PROBE: collision, effectful memoization, literal-data rename, bigint overflow and original-body fallback regressions in canonical/tests/test_swe_transform_contracts_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Read existing shared parser/path guard, pipeline reaper, current-main semantic graph, skill crystallizer and cross-machine learner; integrated rather than replacing them. canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "GitHub community repository search `python disk cache transactions` and CPython issue search `repo:python/cpython lru_cache mutable` returned zero results with the selected queries. This is a limited negative search, not evidence that no other solution exists."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/grantjenks/python-diskcache \u2014 GitHub metadata confirmed a disk-backed cache project, not a source transformation contract or behavioral oracle; no new dependency was adopted."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/tree-sitter/py-tree-sitter/releases/tag/v0.26.0 \u2014 official release API returned v0.26.0 published 2026-06-30; not installed because this batch preserves the tested parser ABI."
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+      "DISABLE_ALL_REWRITES",
+      "TRUST_PRODUCER_FLAGS",
+      "REPLACE_LEARNING_ARCHITECTURE"
+    ],
+    "selected_surviving_route": "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+    "stop_condition": "Stop this bounded batch after source/test/model revalidation, exact-head signed referee and admission checks pass, and the explicitly authorized PR is merged. Stop rather than bypass a failed guard or claim the six-phase curriculum is complete.",
+    "why_selected_route_is_fastest_sufficient": "Within the compared finite-scope routes, reuse the existing machinery and repair its shared preconditions rather than replace the stack. Comparative global optimality is unknown."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+  "selected_surviving_route": "INTEGRATE_MAINTAINED_SWE_CONTRACTS_AND_REUSE",
+  "status": "BOUNDED_IMPLEMENTATION_AND_ADMISSION__NO_PROMOTION",
+  "stop_condition": "Stop this bounded batch after source/test/model revalidation, exact-head signed referee and admission checks pass, and the explicitly authorized PR is merged. Stop rather than bypass a failed guard or claim the six-phase curriculum is complete.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T11:22:56.841352Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No terminal proof or qualification authority; finite source-transition regressions and retained-plan telemetry only.",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "2827056ad15ada794f976907d2e9e303caf95882",
+          "path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py"
+        },
+        {
+          "git_blob_sha": "a1a1b880b2ec18085303d445144aae501bb83bf6",
+          "path": "canonical/swe_kernel/polyglot_build_ci_engine_v1.py"
+        }
+      ],
+      "decisive_question": "Do the guarded supported transformations preserve the independent fixture outcomes and bytes, and do retained-plan counters equal actual environment calls?",
+      "falsifier_id": "SWE_TRANSFORM_CONTRACTS_AND_METERED_REUSE_20261101_V1_COUNTEREXAMPLES",
+      "known_counterexamples_checked": true,
+      "proposal_id": "SWE_TRANSFORM_CONTRACTS_AND_METERED_REUSE_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
