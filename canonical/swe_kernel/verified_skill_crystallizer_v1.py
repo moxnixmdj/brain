@@ -313,11 +313,28 @@ def anti_unify_code_rule(
     pattern_tokens: list[tuple[str, str]] = []
     skeleton_parts: list[str] = []
 
+    # A NAME THE FIX REMOVES IS NOT A SHAPE, IT IS A RENAME.
+    #
+    # Abstracting every identifier on the left turns "`helper` became `helper_v2`" into "any call
+    # became `helper_v2`", which is not what was verified. Measured 2026-11-01: a rule taught from
+    # `return helper(x) + 1` -> `return helper_v2(x) + 1` rewrote `return acos(r) + 1` into
+    # `return helper_v2(r) + 1` -- plausible-looking, completely wrong, and accepted by a
+    # compile-only verifier, so it would ship anywhere the tests do not reach the call site.
+    #
+    # The identifiers that appear in the before-snippet and not in the after-snippet are exactly
+    # the ones the fix deliberately replaced, so they stay concrete: the pattern now demands the
+    # same name. Such a repair is then name-specific by nature and cannot pass the mutated twin,
+    # which is the honest outcome -- "helper became helper_v2" is a fact about a symbol in one
+    # repository, not a generalizable structural lesson, and it belongs to a scope-aware rename
+    # tool rather than to a rule that claims to have learned a shape.
+    after_idents = {val for kind, val in toks_a if kind == "ident"}
+    pinned_idents = {val for kind, val in toks_b if kind == "ident" and val not in after_idents}
+
     for kind, val in toks_b:
         if kind == "ws":
             pattern_tokens.append(("ws", " "))
             continue
-        if kind in _HOLE_PREFIX:
+        if kind in _HOLE_PREFIX and not (kind == "ident" and val in pinned_idents):
             bucket = hole_maps[kind]
             hole = bucket.setdefault(val, f"{_HOLE_PREFIX[kind]}{len(bucket)}")
             pattern_tokens.append((_HOLE_TOKEN[kind], hole))

@@ -33,7 +33,7 @@ import compose_hardcore_swe_problem_inventory_v1 as compose  # noqa: E402
 
 DOC = ROOT / "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md"
 
-OWNERS = {"fixture", "selection", "capability"}
+OWNERS = {"fixture", "selection", "capability", "instrument"}
 
 
 def _remedy_keys() -> list[str]:
@@ -109,7 +109,7 @@ def test_the_published_sections_agree_on_who_is_wrong() -> None:
     owners = re.findall(r"^\| `(FAIL[A-Z_0-9]+)` \| (\d+) \| \*\*(\w+)\*\* \|", section3, re.M)
     assert owners, "§3 no longer carries an owner column"
 
-    priced = {"fixture": 0, "selection": 0, "capability": 0}
+    priced = {"fixture": 0, "selection": 0, "capability": 0, "instrument": 0}
     for key, count, owner in owners:
         assert owner in OWNERS, (key, owner)
         assert compose.defect_owner(key) == owner, (key, owner)
@@ -117,10 +117,12 @@ def test_the_published_sections_agree_on_who_is_wrong() -> None:
 
     section6 = text.split("## §6 ", 1)[1].split("## §7", 1)[0]
     stated = re.search(
-        r"\*\*(\d+) are fixture defects\*\*.*?\*\*(\d+) are selection\*\*.*?\*\*(\d+) are capability\*\*",
+        r"\*\*(\d+) are fixture defects\*\*.*?\*\*(\d+) are selection\*\*.*?"
+        r"\*\*(\d+) are capability\*\*.*?\*\*(\d+) are instrument defects\*\*",
         section6, re.S)
-    assert stated, "§6 no longer states the three counts"
-    got = dict(zip(("fixture", "selection", "capability"), (int(g) for g in stated.groups())))
+    assert stated, "§6 no longer states the four counts"
+    got = dict(zip(("fixture", "selection", "capability", "instrument"),
+                   (int(g) for g in stated.groups())))
     assert got == priced, f"§6 prices {got} but §3 documents {priced}"
 
     refused = re.search(r"Of the (\d+)\s*\nthat remain", text)
