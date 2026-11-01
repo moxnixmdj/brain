@@ -436,7 +436,7 @@ def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
                     break
         return 2 * exact + sub
 
-    scored = [(score(desc), flag) for flag, desc in flag_descriptions(prog)]
+    scored = [(score(flag + " " + desc), flag) for flag, desc in flag_descriptions(prog)]
     scored = [(n, f) for n, f in scored if n > 0]
     scored.sort(key=lambda x: (-x[0], x[1]))
     return [f for _, f in scored[:limit]]
@@ -767,7 +767,17 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
     # every manual on the machine has just been read once; never again
     _help_flush(force=True)
     hits.sort(key=lambda x: (-x[0], x[1]))
-    return [p for _, p in hits[:limit]]
+    out_progs: list[str] = []
+    seen_real: set[str] = set()
+    for _, p in hits:
+        real = _instrument(p)
+        if real in seen_real:
+            continue
+        seen_real.add(real)
+        out_progs.append(p)
+        if len(out_progs) >= limit:
+            break
+    return out_progs
 
 
 def _uses_goal_value(recipe: Mapping[str, Any], goal: str | None) -> bool:
@@ -1636,7 +1646,9 @@ def _known_counters(base: str, programs: Sequence[str], gap: str,
             return good[:enough]
     if not programs:
         return []
-    hits = [c for c in probe_survivors(base, list(programs), gap)
+    counter_gap = "count the " + base if base else gap
+    hits = [c for c in probe_survivors(base, list(programs), counter_gap,
+                                       timeout=min(timeout, 2.0), budget=3.0)
             if c.get("stages") != 2]
     if hits:
         # key -2: counters learned for composing, not an answer to a
@@ -1708,7 +1720,8 @@ def _run_capped(argv: Sequence[str], cwd: str | pathlib.Path,
     import threading
     proc = subprocess.Popen(list(argv), cwd=str(cwd), stdout=subprocess.PIPE,
                             stderr=subprocess.DEVNULL,
-                            stdin=subprocess.DEVNULL)
+                            stdin=subprocess.DEVNULL,
+                            start_new_session=True)
     buf = bytearray()
 
     def drain() -> None:
@@ -1894,9 +1907,12 @@ def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
                 # nothing, and nothing looks exactly like failure
                 (root / name).write_bytes(probe_bytes(kind, size, literal))
                 try:
-                    code, out = _run_capped(argv, root, timeout=timeout)
+                    code, out = _run_capped(argv, root,
+                                            timeout=min(timeout, 0.8))
                 except Exception:  # noqa: BLE001
                     break
+                if code is None or code == -9:
+                    return None
                 if code != 0:
                     break
                 got = _bare_value(out)
@@ -1951,7 +1967,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     workers: int = 24,
                     stages: int = 1,
                     literal: str | None = None,
-                    budget: float = _PROGRAM_BUDGET) -> list[dict[str, Any]]:
+                    budget: float = _PROGRAM_BUDGET,
+                    wide_seen: set[str] | None = None) -> list[dict[str, Any]]:
     """Commands that print n on a file built to hold exactly n of `kind`.
 
     Chosen by what they DID, not by what they say they do. The exact argv
@@ -1994,9 +2011,12 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     # measuring nothing and reporting it.
                     (root / name).write_bytes(data)
                     try:
-                        code, out = _run_capped(argv, root, timeout=timeout)
+                        code, out = _run_capped(argv, root,
+                                                timeout=min(timeout, 0.8))
                     except Exception:  # noqa: BLE001 - a program must not break it
                         break
+                    if code is None or code == -9:
+                        return None
                     if code != 0:
                         break
                     got = _bare_value(out)
@@ -2025,34 +2045,46 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         # programs are needed, admit that the hint about which flags to
         # try may simply have been wrong.
         if True:
+            wide_cands = [
+                p for p in list(programs)
+                if wide_seen is None or p not in wide_seen
+            ][:_WIDE_PROGRAMS]
+            if wide_seen is not None:
+                wide_seen.update(wide_cands)
             wide = []
-            with ThreadPoolExecutor(max_workers=workers) as pool:
-                for hit in pool.map(
-                        lambda p: _one_wide(
-                            p, kind, gap,
-                            (literal,) if literal else tuple(patterns),
-                            timeout, literal),
-                        list(programs)[:_WIDE_PROGRAMS]):
-                    if hit:
-                        wide.append(hit)
+            if wide_cands:
+                with ThreadPoolExecutor(max_workers=workers) as pool:
+                    for hit in pool.map(
+                            lambda p: _one_wide(
+                                p, kind, gap,
+                                (literal,) if literal else tuple(patterns),
+                                timeout, literal),
+                            wide_cands):
+                        if hit:
+                            wide.append(hit)
             if wide:
                 return wide
         return []
-    # A single program found further down the list is still fewer actions
-    # than two programs found at the top, so the whole list is searched for
-    # one before any pair is tried.
-    if len(programs) > _MAX_PIPE_PROGRAMS:
-        programs = list(programs)[:_MAX_PIPE_PROGRAMS]
+    # Discover line counters BEFORE slicing `programs` so Stage-2 counters
+    # (`wc`, `grep`) are found in <100ms via narrow manuals rather than wide scans.
+    counter_cands = (
+        list(dict.fromkeys(programs_for_goal("count the lines", limit=16) + list(programs)))
+        if len(programs) >= 6 else list(programs)
+    )
+    counters = _known_counters("lines", counter_cands, "count the lines", literal, timeout)
+    # Deduplicate symlinked binaries (e.g. gold / ld.gold / x86_64-linux-gnu-gold)
+    dedup_heads: list[str] = []
+    seen_inst: set[str] = set()
+    for p in programs:
+        inst = _instrument(p)
+        if inst not in seen_inst:
+            seen_inst.add(inst)
+            dedup_heads.append(p)
+    if len(dedup_heads) > _MAX_PIPE_PROGRAMS:
+        dedup_heads = dedup_heads[:_MAX_PIPE_PROGRAMS]
+    programs = dedup_heads
+    head_budget = min(budget, 2.5) if len(programs) > 4 else budget
 
-    # The LAST stage of a pipeline that answers "how many" has to count.
-    # The machine already knows which commands count: it proved that on the
-    # plainest probe there is. Searching every pair -- 100 x 100 -- spends
-    # minutes discovering that 'fmt | nl' is not a measuring instrument.
-    # Composing only with things already proven to count is both the
-    # cheaper search and the more sensible one: find out what counts, then
-    # find out what to feed it.
-    counters = _known_counters("lines", list(programs), gap, literal,
-                               timeout)
     tails = []
     for c in counters:
         # used at the end of a pipe, so it is given no filename of its own
@@ -2060,30 +2092,20 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         if argv and argv not in tails:
             tails.append(argv)
     if not tails:
-        # Nothing here was proven to count, so there is nothing to put at
-        # the end of a pipe. Two programs that both fail to count do not
-        # add up to one that does.
         return []
 
     def pair(job: tuple) -> dict[str, Any] | None:
         """Feed one program's output to something that counts, and see if
         the pair tracks the construction. 'uniq | wc --lines' answers "how
         many different lines" -- a question no single program answers."""
-        head, tail_argv = job
+        head, tail_argv, allow_wide = job
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-pipe-"))
-        deadline = time.monotonic() + budget
+        step_timeout = min(timeout, 0.6) if not allow_wide else min(timeout, 1.2)
+        deadline = time.monotonic() + (1.0 if not allow_wide else head_budget)
         try:
-            # The head is offered its OWN flags, not only the ones the
-            # goal's words suggested. This is the same lesson as '--count'
-            # being the 65th flag grep documents: 'sort' does nothing here
-            # until it is given '--unique', and '--unique' is not a flag
-            # the sentence "how many unique lines" knows how to suggest.
-            # The narrow shapes are a subset of the wide ones, so nothing
-            # is given up by asking for the whole manual.
-            for argv1 in _query_shapes(head, name, gap,
-                                      patterns=_PIPE_PATTERNS +
-                                      ((literal,) if literal else ()),
-                                      wide=True):
+            pat_tuple = _PIPE_PATTERNS + ((literal,) if literal else ())
+            shapes = list(_query_shapes(head, name, gap, patterns=pat_tuple, wide=allow_wide))
+            for argv1 in shapes:
                 if time.monotonic() > deadline:
                     break
                 for argv2 in [tail_argv]:
@@ -2093,9 +2115,11 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                             probe_bytes(kind, size, literal))
                         try:
                             code, out = _run_pipeline(argv1, argv2, root,
-                                                      timeout=timeout)
+                                                      timeout=step_timeout)
                         except Exception:  # noqa: BLE001
                             break
+                        if code is None or code == -9:
+                            return None
                         if code != 0:
                             break
                         got = _bare_value(out)
@@ -2112,9 +2136,15 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
             shutil.rmtree(str(root), ignore_errors=True)
         return None
 
-    jobs = [(head, t) for head in programs for t in tails]
+    narrow_jobs = [(head, t, False) for head in programs for t in tails]
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        return [hit for hit in pool.map(pair, jobs) if hit]
+        narrow_hits = [hit for hit in pool.map(pair, narrow_jobs) if hit]
+    if narrow_hits:
+        return narrow_hits
+
+    wide_jobs = [(head, t, True) for head in programs for t in tails]
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        return [hit for hit in pool.map(pair, wide_jobs) if hit]
 
 
 def answer_query(gap: str, input_file: str | pathlib.Path,
@@ -2223,7 +2253,9 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                             "detail": "remembered composition, re-proven: "
                                       "%s" % best}
 
-    for limit in (24, 96, 200):
+    wide_seen: set[str] = set()
+    tier_limits = (24,) if (programs is None and kind in ("uniquelines", "duplicatelines")) else (24, 96, 200)
+    for limit in tier_limits:
         cached = _query_cache_get(kind, limit)
         if cached is not None:
             # remembered as a shape, so a word it has never seen can reuse
@@ -2237,8 +2269,13 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                      else programs_for_goal(gap, limit=limit))
             if not cands:
                 continue
+            if programs is None and kind in ("uniquelines", "duplicatelines"):
+                # Do not burn 40x400 single-stage wide flag scans on a query
+                # whose invariant requires deduplication + counting.
+                wide_seen.update(cands)
             survivors = probe_survivors(kind, cands, gap,
-                                        literal=literal)
+                                        literal=literal,
+                                        wide_seen=wide_seen)
             # Only a discovery is remembered, never a failure. A success is
             # a fact about the machine; an empty result is often a fact
             # about the SEARCH -- the right program not yet looked at, a
@@ -2288,8 +2325,23 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                           for c in composed)
                          if _reverify(h, kind, literal, timeout)]
         if not survivors:
-            cands = (list(programs) if programs is not None
-                     else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS * 2))
+            if programs is not None:
+                cands = list(programs)
+            else:
+                mod_words = [
+                    w for w in re.findall(r"[a-z]+", gap.lower())
+                    if len(w) >= 3 and w not in {
+                        "how", "many", "count", "number", "the", "and",
+                        "for", "from", "with", "lines", "line", "file",
+                        "files", "txt", "csv", "log", "data", "there", "are",
+                    }
+                ]
+                mod_cands = (
+                    programs_for_goal(" ".join(mod_words), limit=12)
+                    if mod_words else []
+                )
+                base_cands = programs_for_goal(gap, limit=12)
+                cands = list(dict.fromkeys(mod_cands + base_cands))[:16]
             survivors = probe_survivors(kind, cands, gap, stages=2,
                                         literal=literal)
             if programs is None and survivors:

@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::`tl.fingerprint` is expensive BY CONSTRUCTION (it acts), `computer_env_v1.discover` called it twice per discovery and never cached it, and `transfer_learning_v1` stored only successes -- so repetition, which is the entire claim of 'learn it once', cost the same as the first time and failure cost full price every time.",
-  "canonical_base_commit": "c3a787d8a1990e4925c758ba1b295971e20b9e5a",
+  "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -80,7 +80,7 @@
     "canonical/runtime/environment_learning_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "c3a787d8a1990e4925c758ba1b295971e20b9e5a",
+    "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
@@ -236,7 +236,7 @@
           "route": "THE_SECOND_TIME_IS_INSTANT_V1_20261101_V1"
         }
       ],
-      "checked_at_utc": "2026-11-01T12:07:04Z",
+      "checked_at_utc": "2026-11-01T12:12:29Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -276,7 +276,7 @@
       "selected_route": "THE_SECOND_TIME_IS_INSTANT_V1_20261101_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-01T12:07:04Z",
+        "checked_at_utc": "2026-11-01T12:12:29Z",
         "execution_dependencies": [
           {
             "dependency": "python3 stdlib (json, os, hashlib, pathlib, time)",
@@ -373,7 +373,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-01T12:07:04Z",
+    "checked_at_utc": "2026-11-01T12:12:29Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
@@ -413,7 +413,7 @@
           "path": "canonical/runtime/transfer_learning_v1.py"
         },
         {
-          "git_blob_sha": "6492b5fbdce8160f3332c0c4113f007dee9bd64b",
+          "git_blob_sha": "8600e2137fe147fad87c65714cafca0157dce787",
           "path": "canonical/runtime/computer_env_v1.py"
         },
         {

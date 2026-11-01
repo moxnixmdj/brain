@@ -132,6 +132,65 @@ def _atomic_write(target:pathlib.Path,data:bytes)->None:
         raise
 
 
+def _try_live_trace_synth_patches(
+    repo:pathlib.Path,
+    source_root:pathlib.Path,
+    exec_root:pathlib.Path,
+    test_paths:list[pathlib.Path],
+    run_argv:list[str],
+    timeout:int,
+    env_paths:tuple,
+)->list[dict[str,Any]]:
+    """Fallback pass: harvest live runtime assertion/call-frame I/O and synthesize verified diff."""
+    import difflib
+    try:
+        from canonical.swe_kernel.whitebox_introspector_and_trace_synthesizer_v1 import (
+            synthesize_candidates_for_file,
+        )
+    except Exception:
+        return []
+    test_set={p.resolve() for p in test_paths}
+    py_files=[
+        p for p in sorted(source_root.rglob("*.py"))
+        if "__pycache__" not in p.parts
+        and p.resolve() not in test_set
+        and not p.name.startswith("test_")
+        and not p.name.endswith("_test.py")
+    ][:12]
+    for src_f in py_files:
+        orig_bytes=src_f.read_bytes()
+        orig_txt=orig_bytes.decode("utf-8",errors="replace")
+        try:
+            cands=synthesize_candidates_for_file(src_f,exec_root,test_paths)
+        except Exception:
+            cands=[]
+        for cand_txt in cands:
+            cand_bytes=cand_txt.encode("utf-8")
+            try:
+                _atomic_write(src_f,cand_bytes)
+                rc,_=_run_test(run_argv,exec_root,min(timeout,15),env_paths)
+            finally:
+                _atomic_write(src_f,orig_bytes)
+            if rc==0:
+                rel=_rel(repo,src_f)
+                diff="".join(
+                    difflib.unified_diff(
+                        orig_txt.splitlines(keepends=True),
+                        cand_txt.splitlines(keepends=True),
+                        fromfile="a/"+rel,
+                        tofile="b/"+rel,
+                    )
+                )
+                return [{
+                    "source_path":rel,
+                    "unified_diff":diff,
+                    "original_sha256":_sha(orig_bytes),
+                    "candidate_sha256":_sha(cand_bytes),
+                    "operator":"live_trace_observational_synthesis",
+                }]
+    return []
+
+
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
         raise RepairApplyError("ARGS_NOT_OBJECT")
@@ -252,6 +311,13 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     },repo)
     patches=repair.get("patches") or []
     out["repair_status"]=repair.get("status")
+    if not isinstance(patches,list) or not patches:
+        patches=_try_live_trace_synth_patches(
+            repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths
+        )
+        if patches:
+            out["repair_status"]="PASS__LIVE_TRACE_OBSERVATIONAL_SYNTHESIS"
+            out["repair_mode"]="live_trace_observational_synthesis"
     if not isinstance(patches,list) or not patches:
         out["status"]="OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
         out["detail"]="Bounded search exhausted; the source was not modified."
