@@ -204,7 +204,66 @@ Why it stayed small and fixable rather than fundamental:
 
 ---
 
-## 8. Non-claims
+## 8. The index — so this never happens again
+
+The reason I could not find any of this is that a 15,900-file tree with **722 action intents**
+cannot be searched by guessing filenames. Searching `instant_learning`, `cross_language` and
+`observation_abstraction` returns nothing, while the real mechanisms are called
+`THE_SECOND_TIME_IS_INSTANT` and `elevate_trace_to_fastest_layer`.
+
+New tool: **`canonical/tools/index_capability_evidence_v1.py`** — deterministic, stdlib-only.
+
+```
+python3 canonical/tools/index_capability_evidence_v1.py build
+python3 canonical/tools/index_capability_evidence_v1.py search transfer environment
+python3 canonical/tools/index_capability_evidence_v1.py stats
+```
+
+It indexes **722 intents + 2,586 modules** into
+`canonical/evidence/CAPABILITY_EVIDENCE_INDEX_V1.json` and ranks hits by *where* the word
+appears — `measured_effect` (weight 6) > summary (3) > docstring / id / capability id (2) >
+path (1). So a query returns the pointer, not a filename guess.
+
+First run, `stats`:
+
+```
+action intents : 722
+modules        : 2586
+intents carrying a measured_effect: 164
+  ...of those, zero model dependency and zero spend: 163
+```
+
+**163 of 164 measured intents were produced under zero model dependency and zero spend.** The
+one exception is worth a look on its own, and the whole corpus is now queryable instead of
+being a place where answers go to hide.
+
+---
+
+## 9. Stale numbers in my own earlier sections, re-measured
+
+Running the instruments rather than quoting an older document found two more of my figures to
+be **out of date, in the project's favour**:
+
+| claim I made | quoted from | measured now |
+|---|---|---|
+| advanced SWE probe: **36 served / 13 refused** | `HARDCORE_SWE_ALL_PROBLEMS_20261101_V4` on `f9134956` | **42 served / 7 refused** |
+| polyglot axis: **4 of 7** (C++ and SQL refused) | same | **7 of 7** |
+| build axis: 3 of 5 | same | **5 of 5** |
+| perf axis: 3 of 4 | same | **4 of 4** |
+| capability matrix | 44 REAL / 0 FALSE / 0 DAMAGED | **unchanged: 44 REAL / 0 FALSE / 0 DAMAGED** |
+
+So the "routing gap" I kept citing was partly a **stale reading of a superseded document**.
+The remaining refusals are 7 specific cases (`extract_function` region invalid,
+`git_branch` target not in standard library, `find_definition` unserved, and 4 others), each
+named by its own instrument — not a general routing failure.
+
+What is *not* re-measured here: the "443 rows, 11 reached" row-reach figure, which comes from
+the same superseded document and should be treated as unverified until a fresh census says
+otherwise.
+
+---
+
+## 10. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
 sentience credit. Zero spend. Every pass count above came from a command run in this checkout;
