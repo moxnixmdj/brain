@@ -14,7 +14,7 @@ argument including every place I was wrong; this section is what is true now.
 |---|---|---|
 | Instant learning works | **TRUE** | store, restart, bundle transport; 12 + 13 tests passing |
 | Instant learning works in **new arbitrary environments** | **TRUE** | 5/5 families, **10/10** new instances solved by recalled plan, several at **1 trial** (§0.7); cross-machine **7,147 → 699 ms**; variants mean **1,268 → 284 ms** |
-| "Does it once, learns it permanently" | **TRUE, verified end to end** | one-shot teaching **5/5 languages**. The bundle that ships holds **5 rules across python/go/typescript/rust**; a brand-new store in a fresh directory is seeded with all five and applies one to a **renamed** source it has never seen (`return p + p * t` -> `return p - p * t`). Permanence is real for the rules that exist. |
+| "Does it once, learns it permanently" | **TRUE, verified end to end** | one-shot teaching **5/5 languages**. The bundle that ships holds **5 rules across python/go/typescript/rust**; a brand-new store in a fresh directory is seeded with all five and applies one to a **renamed** source it has never seen (`return p + p * t` -> `return p - p * t`). Permanence is real for the rules that exist. Qualification of a *workflow* skill now requires a genuinely distinct held-out instance (§6.2) — before that fix it was optional and the receipt claimed it anyway. |
 | "Give it a try and after doing it **at least once** he learns **all of those**" | **FALSE — measured, three ways** | (1) 1 example -> **6/7**, 2 examples -> **6/7**, 3 examples -> **6/7**: more exposure bought nothing. (2) Taught the one case it missed *directly*, `derive_operator_swap` still returns `None` and it cannot solve the lesson it was just shown — the failure is **representational, not statistical**. (3) Measured on its own shipped corpus: **2/5** rules can reach past their instance, **3/5** replay and stop. Repetition moves the count of rules, never their reach. |
 | "Anything on a computer" | **STRUCTURED HALF EXECUTED; GUI HALF CLOSED MODULO THE OS** | code ops run for real (real filesystem, real `pytest`, real `git status`), state ops run **verbatim**, media ops run **real ffmpeg encodes** re-measured by an independent `ffprobe`. The GUI loop closes end to end against a virtual 1920x1080 desktop — "leftmost/rightmost red box" -> correct pixel -> world changes -> next screenshot differs. What remains is one sentence: *pyautogui drives a real OS.* `host_app_ops` still needs the VM's `libreoffice_calc`. |
 | "Perfectly and permanently" | **"Permanently" is now demonstrated; "perfectly" is FALSE, by design** | permanence is complete: `invalidate()` keeps the rule *and its counterexample*, and `rule_expiry_v1` (16 tests) ages a rule out when the interpreter, platform or a tool changes — FRESH / STALE / UNKNOWN, and only FRESH may be offered. "Perfectly" cannot be claimed: every recall re-runs a verifier, so the floor is the verifier, never zero. That is correct engineering, not a defect. |
@@ -678,6 +678,76 @@ An early probe appeared to show a *second, different* repair, which would have i
 non-determinism. It was Python's module cache: the probe imported `billing` in a process that had
 already imported it. Every number above probes in a subprocess. The apparent non-determinism was
 mine, not the solver's.
+
+---
+
+## 6.2 The skill compiler claimed an independence it never required — and deleted the database it proved the skill on
+
+`compile_and_qualify_skill` is the module behind *do it once, keep the skill*: it takes one
+acquisition trace, abstracts it, and stores a workflow skill only if the compiled steps work in a
+held-out world. Three defects were measured in it on 2026-11-01. All three point the same way —
+reporting success it had not earned.
+
+### The held-out instance was optional
+
+```python
+effective_heldout_goal = heldout_goal or goal          # the training goal, as "held-out"
+...
+if heldout_goal is not None and generalized["param_order"] and heldout_bindings == ...:
+    return FAIL_CLOSED__HELDOUT_IDENTICAL_TO_TRAINING_INSTANCE
+```
+
+Call it with no held-out goal and the "held-out execution" is the training instance replayed in a
+fresh temporary directory. Both clauses of that guard are false in the two cases that matter, so
+it never fires: no goal was supplied, and a parameter-free skill has no `param_order` to compare.
+The call returned `PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED`, and the ownership receipt
+written to the durable skill database still said:
+
+```json
+"heldout_not_used_for_training_selection_or_tuning": true
+```
+
+That line was a literal `True` in the source. The call had just made it false. This is the same
+shape as §6.1's hardcoded `sabotage_control_passed` — a receipt asserting a measurement nobody
+took — and it is the more consequential of the two, because it shipped to disk.
+
+Distinctness now means *the held-out goal bound to different parameter values*, checked
+unconditionally, and the receipt field is computed from the measurement.
+
+### The sabotage control deleted the caller's database
+
+The negative control for a `sqlite_row_exists` postcondition was: unlink `db_path`, then check
+that the oracle rejects the world. `db_path` is normally an absolute path the caller owns. So
+qualifying a skill **removed the held-out database the skill had just been proven on** — the
+proof destroyed in the act of producing it. It now unlinks only inside its own work directory,
+and otherwise rejects on an expectation that cannot hold.
+
+### An unusable held-out world raised into the caller
+
+A world whose schema did not accept the compiled steps propagated
+`sqlite3.OperationalError: no such table: flags` straight out of the function. A caller could not
+tell *this skill does not transfer* from *this function is broken*. It is now
+`FAIL_CLOSED__HELDOUT_EXECUTION_ERROR`, at both the causal-ablation check and the execution.
+
+### Before and after, each direction verified to fail without the change
+
+| | before | after |
+|---|---|---|
+| no held-out supplied | `PASS ... QUALIFIED_AND_OWNED` | `FAIL_CLOSED__NO_HELDOUT_INSTANCE_SUPPLIED` |
+| parameter-free skill, same goal | pass (guard skipped) | `FAIL_CLOSED__HELDOUT_IDENTICAL_TO_TRAINING_INSTANCE` |
+| caller's held-out database after the call | **deleted** | intact, rows still readable |
+| unusable held-out world | `OperationalError` escapes | `FAIL_CLOSED__HELDOUT_EXECUTION_ERROR` |
+| genuinely distinct held-out | pass | pass (unchanged) |
+
+4 tests, all four failing before the change and passing after.
+
+### The cost, stated rather than hidden
+
+The autonomous controller defaults `heldout_goal` to the training goal, so a request that cannot
+supply a distinct instance no longer produces a stored skill. That is a real loss of capability
+and a gain of truth: the skill it used to store had never been shown to transfer. What the
+refusal does **not** claim is that such a skill is bad — only that nothing established that it
+was good, and the old code said something had.
 
 ---
 
