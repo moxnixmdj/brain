@@ -56,7 +56,7 @@ from typing import Any, Mapping
 SCHEMA = "PROJECT_BRAIN_GIT_REPOSITORY_OPERATE_V1"
 CAPABILITY = "git.repository.operate.v1"
 
-OPS = ("log", "status", "diff", "show", "blame", "branch", "commit")
+OPS = ("log", "status", "diff", "show", "blame", "branch", "commit", "cherry_pick", "changelog")
 
 _ENV = {
     "GIT_CONFIG_NOSYSTEM": "1",
@@ -379,6 +379,36 @@ def _op_blame(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
 
 
 def _op_branch(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    branch_name = str(args.get("branch_name") or "").strip()
+    create_flag = args.get("create") is True or str(args.get("create") or "").lower() in ("true", "1", "yes")
+    if branch_name or create_flag:
+        if not branch_name:
+            branch_name = str(args.get("target") or "").strip()
+        if not branch_name or branch_name.startswith("-"):
+            _fail("BRANCH_CREATE_REQUIRES_VALID_NAME")
+        if bool(args.get("_is_host_repo")):
+            _fail("TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY")
+        chk = subprocess.run(
+            [*_BASE, "check-ref-format", "--branch", branch_name],
+            cwd=str(cwd), capture_output=True, text=True,
+            env={**os.environ, **_ENV}, timeout=10,
+        )
+        if chk.returncode != 0:
+            _fail("INVALID_BRANCH_NAME:" + branch_name)
+        start_point = str(args.get("start_point") or args.get("rev") or "").strip()
+        if start_point.startswith("-"):
+            _fail("START_POINT_MAY_NOT_BE_AN_OPTION:" + start_point)
+        checkout_flag = args.get("checkout", True)
+        do_checkout = checkout_flag is True or str(checkout_flag).lower() in ("true", "1", "yes")
+        cmd = (["checkout", "-b", branch_name] if do_checkout else ["branch", branch_name]) + (
+            [start_point] if start_point else []
+        )
+        _git(cwd, *cmd)
+        # independence: verify refs/heads/<branch_name> via show-ref
+        ref_line = _git(cwd, "show-ref", "--verify", f"refs/heads/{branch_name}").strip()
+        if not ref_line:
+            _fail("INDEPENDENT_CHECK_DISAGREES:branch_create:missing_ref")
+
     # for-each-ref does not interpret log's %x1f escape; %09 (a tab) is its own
     # hex escape and a refname cannot contain a tab, so the split is unambiguous.
     raw = _git(cwd, "for-each-ref", "--format=%(refname:short)%09%(objectname)",
@@ -396,6 +426,7 @@ def _op_branch(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
         if via_rev_parse and via_rev_parse != current["sha"]:
             _fail("INDEPENDENT_CHECK_DISAGREES:branch")
     return rows, {"op": "branch", "branch_count": len(rows),
+                  "created_branch": branch_name if (branch_name or create_flag) else "",
                   "current": current["name"] if current else "",
                   "head_sha": _head(cwd)}
 
@@ -456,9 +487,107 @@ def _op_commit(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
                                              check=False) or "0").strip() or 0)}
 
 
+def _op_cherry_pick(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    if bool(args.get("_is_host_repo")):
+        _fail("TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY")
+    rev = str(args.get("rev") or args.get("commit") or args.get("target") or "HEAD").strip() or "HEAD"
+    if rev.startswith("-"):
+        _fail("REV_MAY_NOT_BE_AN_OPTION:" + rev)
+    source_sha = _git(cwd, "rev-parse", "--verify", "--quiet", rev + "^{commit}", check=False).strip()
+    if not source_sha:
+        _fail("STATED_REVISION_NOT_FOUND:" + rev)
+
+    branch_name = str(args.get("branch_name") or args.get("onto_branch") or "").strip()
+    base_rev = str(args.get("base_rev") or args.get("start_point") or "").strip()
+    if branch_name:
+        if branch_name.startswith("-"):
+            _fail("INVALID_BRANCH_NAME:" + branch_name)
+        exists = _git(cwd, "show-ref", "--verify", "--quiet", f"refs/heads/{branch_name}", check=False)
+        existing_sha = _git(cwd, "rev-parse", "--verify", "--quiet", f"refs/heads/{branch_name}", check=False).strip()
+        if existing_sha:
+            _git(cwd, "checkout", branch_name)
+        else:
+            # Default base when cherry-picking HEAD onto a brand-new branch: parent HEAD~1 if it exists
+            if not base_rev and source_sha == _head(cwd):
+                p_sha = _git(cwd, "rev-parse", "--verify", "--quiet", "HEAD~1^{commit}", check=False).strip()
+                base_rev = p_sha or ""
+            _git(cwd, *(["checkout", "-b", branch_name] + ([base_rev] if base_rev else [])))
+        _ = exists
+
+    before = _head(cwd)
+    proc = subprocess.run(
+        [*_BASE, "cherry-pick", "--no-edit", source_sha],
+        cwd=str(cwd), capture_output=True, text=True,
+        env={**os.environ, **_ENV}, timeout=20,
+    )
+    if proc.returncode != 0:
+        subprocess.run(
+            [*_BASE, "cherry-pick", "--abort"],
+            cwd=str(cwd), capture_output=True, text=True,
+            env={**os.environ, **_ENV}, timeout=10,
+        )
+        _fail("CHERRY_PICK_CONFLICT:" + (proc.stderr or proc.stdout or "").strip()[:160])
+
+    after = _head(cwd)
+    if not after or after == before:
+        _fail("CHERRY_PICK_PRODUCED_NO_NEW_COMMIT")
+    # independence: cat-file must confirm commit object AND subject must match source commit
+    kind = _git(cwd, "cat-file", "-t", after).strip()
+    if kind != "commit":
+        _fail("INDEPENDENT_CHECK_DISAGREES:cherry_pick:object_type=" + kind)
+    src_subj = _git(cwd, "show", "-s", "--format=%s", source_sha).strip()
+    new_subj = _git(cwd, "show", "-s", "--format=%s", after).strip()
+    if src_subj != new_subj:
+        _fail("INDEPENDENT_CHECK_DISAGREES:cherry_pick:subject_mismatch")
+    cur_branch = _git(cwd, "symbolic-ref", "--quiet", "--short", "HEAD", check=False).strip()
+    rows = [{"source_sha": source_sha, "cherry_picked_sha": after, "parent_sha": before,
+             "branch": cur_branch, "subject": new_subj}]
+    return rows, {"op": "cherry_pick", "source_sha": source_sha,
+                  "commit_sha": after, "parent_sha": before,
+                  "branch": cur_branch, "subject": new_subj,
+                  "object_type": kind}
+
+
+def _op_changelog(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    n = _limit(args, 20)
+    rev_range = str(args.get("rev_range") or args.get("rev") or "").strip()
+    if rev_range.startswith("-"):
+        _fail("REV_MAY_NOT_BE_AN_OPTION:" + rev_range)
+    log_spec = ["log", f"-n{n}", "--format=" + _LOG_FMT] + ([rev_range] if rev_range else [])
+    raw = _git(cwd, *log_spec)
+    rows = []
+    md_lines = ["# Changelog", ""]
+    for line in raw.splitlines():
+        if not line.strip():
+            continue
+        sha, author, date, subject = (line.split("\x1f") + ["", "", "", ""])[:4]
+        changed_raw = _git(cwd, "diff-tree", "--no-commit-id", "--name-only", "-r", sha, check=False)
+        files_changed = [f.strip() for f in changed_raw.splitlines() if f.strip()]
+        rows.append({
+            "sha": sha,
+            "author": author,
+            "date": date,
+            "subject": subject,
+            "files_changed": files_changed,
+        })
+        md_lines.append(f"- `{sha[:12]}` ({date[:10]}) {subject} — {author}")
+    # independence: verify every reported commit exists in rev-list
+    rev_list_spec = ["rev-list", f"-n{n}"] + ([rev_range] if rev_range else ["HEAD"])
+    rev_shas = [s.strip() for s in _git(cwd, *rev_list_spec).splitlines() if s.strip()]
+    if [r["sha"] for r in rows] != rev_shas:
+        _fail("INDEPENDENT_CHECK_DISAGREES:changelog:rev_list_mismatch")
+    markdown = "\n".join(md_lines) + "\n"
+    return rows, {"op": "changelog", "entry_count": len(rows),
+                  "rev_range": rev_range or f"HEAD~{len(rows)}..HEAD",
+                  "changelog_markdown": markdown,
+                  "changelog_sha256": _sha(markdown.encode("utf-8")),
+                  "head_sha": _head(cwd)}
+
+
 _READERS = {
     "log": _op_log, "status": _op_status, "diff": _op_diff, "show": _op_show,
     "blame": _op_blame, "branch": _op_branch, "commit": _op_commit,
+    "cherry_pick": _op_cherry_pick, "changelog": _op_changelog,
 }
 
 
@@ -471,7 +600,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         _fail("OP_NOT_DECLARED:" + (op or "<empty>") + ":declared=" + ",".join(OPS))
     cwd = _safe_dir(repo, args.get("repo_root") if args.get("repo_root") else ".")
     if not _is_repo(cwd):
-        if op in ("log", "status", "diff", "show", "blame"):
+        if op in ("log", "status", "diff", "show", "blame", "changelog"):
             owner = cwd
             while owner != repo and not (owner / ".git").exists():
                 owner = owner.parent
@@ -500,7 +629,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if output == repo or repo not in output.parents:
         _fail("OUTPUT_PATH_OUTSIDE_REPOSITORY")
 
-    rows, effect = _READERS[op](cwd, args)
+    rows, effect = _READERS[op](cwd, {**args, "_is_host_repo": (cwd == repo)})
 
     body = {
         "schema": SCHEMA,

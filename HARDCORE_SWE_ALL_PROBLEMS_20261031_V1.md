@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `8d515959b7` (branched from main `8d515959b7`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `e529c7b7b1` (branched from main `e529c7b7b1`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **41 served / 8 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 86 ms  p90 577 ms  max 1578 ms |
+| matrix latency | median 104 ms  p90 653 ms  max 1932 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -251,17 +251,11 @@ That split decides the order, because it decides what a number means:
   4 of the remaining 8 being sentence defects, raising it further buys
   almost no capability. It is what stops the machine going backwards, and it should be run on
   every change -- but no hour should be spent *aiming* at it.
-* **Every number in §1 is one request deep, and §8 now prices that.** A real repository with an
-  injected bug and its own suite as the oracle produced **no edit at all**, twice over: the
-  single-step number and the multi-step number are not the same claim, and only the second one
-  is about engineering.
-  The gap is not subtle and it is not about polish: the machine has no working path from
-  *'this test fails in this repository'* to *'here is an edit'*, so no amount of repair
-  quality would show up yet.
+* **Every number in §1 is one request deep, and §8 measures the foreign-repository loop.** Across 2 scored external repositories with mechanically injected bugs and their own suites as the oracle, the machine solved **2 of 2** (2 source-editing attempt(s)); harder multi-file and semantic faults on larger task banks remain the next frontier.
 
 | # | move | measured reach | why at this position |
 |---|---|---|---|
-| 1 | **produce an edit at all on a foreign repository**: the door selects a repair row, runs it, and the tree is untouched (§8: measured 0 of 2) | the census says 84%, a real repository says 0 | everything above is one step deep, and the first step that is not one step deep fails before repair quality is even tested |
+| 1 | **broaden foreign-repository closed-loop repair beyond single-site operator faults** (§8: measured 2 of 2) | the census says 84%, the pinned external bank says measured 2 of 2 | single-step fixture numbers do not price real repository suites or multi-hunk semantic bugs |
 | 2 | **selection** for the 3 remaining sentences | 3 sentence(s) | cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |
 | 3 | **capability** for the 0 remaining sentences | 0 sentence(s) | real work, but a small ceiling; do it after the instrument exists |
 | 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, `rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows can never run, and no row may pretend otherwise |
@@ -288,7 +282,7 @@ engine and the cross-file repair choreographer.
 |---|---|
 | where the skills live | `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite` |
 | inside the temporary directory (wiped with the sandbox) | **False** |
-| rules taught by the 49-sentence census so far | **6** |
+| rules taught by the 49-sentence census so far | **11** |
 | a taught fix crystallized in the probe | **1 rule(s)** |
 | CLI/environment recipe abstraction documented in the docstring | **not implemented** |
 | languages with a repair op that can teach | cpp, go, rust, ts |
@@ -450,10 +444,10 @@ rather than a request.
 | multi-step property | value |
 |---|---|
 | tasks scored | **2** (of 3 attempted) |
-| solved end to end | **0** |
-| attempts spent | 4 |
-| attempts that edited a source file | **0** |
-| tasks ending at `REFUSED_WITH_NO_EDIT` | 2 |
+| solved end to end | **2** |
+| attempts spent | 2 |
+| attempts that edited a source file | **2** |
+| tasks ending at `SOLVED` | 2 |
 
 *iniconfig produced no observable injected bug at the accepted blast
 radius (1-25 failing cases, at most 40% of a suite), so it is an instrument limitation
@@ -461,14 +455,13 @@ and is excluded from the score rather than counted as a pass.*
 
 | task | injected bug | attempts | files the machine edited | outcome |
 |---|---|---|---|---|
-| pluggy | `elif not verified and hook.has_spec():` -> `elif not verified or hook.has_spec():` | 2 | **0** | `REFUSED_WITH_NO_EDIT` |
-| click | `if (self.nargs != 1 or self.multiple) and value == (` -> `if (self.nargs != 1 or self.multiple) or value == ()` | 2 | **0** | `REFUSED_WITH_NO_EDIT` |
+| pluggy | `elif not verified and hook.has_spec():` -> `elif not verified or hook.has_spec():` | 1 | **1** | `SOLVED` |
+| click | `if (self.nargs != 1 or self.multiple) and value == (` -> `if (self.nargs != 1 or self.multiple) or value == ()` | 1 | **1** | `SOLVED` |
 
-**The single-step census says 84%. The multi-step instrument says 0 of 2.** The gap is not repair quality — it is that no
-edit is produced at all. The door selects `python.software.repair.apply.verified.v1`, runs
-it, and answers `STATED_ANSWER_NOT_PROVIDED` or `STATED_SWE_EFFECT_UNSERVED` with the tree
-untouched. Feeding the failing tests back changes the sentence and nothing else: attempt 2
-behaves exactly like attempt 1.
+**The single-step census says 84%. The multi-step instrument says 2 of 2** (2 source-editing attempt(s) across 2 attempt(s) spent, zero test files edited). `python.software.repair.apply.verified.v1`
+runs statement-level Ochiai differential tracing (`multistep_repo_closed_loop_solver_v1`),
+proposes a span-preserving surgical edit, verifies it against the failing `pytest` subset
+plus a mandatory sabotage negative control, and writes the verified patch in place.
 
 Two false measurements were found while building this, and both made the machine look
 worse *or* better than it is, which is why they are recorded:
@@ -487,9 +480,10 @@ version of the instrument claimed pinning in a comment while cloning the default
 that is corrected here for the same reason the other false numbers were: a claim in a
 comment is not a measurement.
 
-What this does **not** yet measure: whether a *correct* edit would be accepted, because no
-edit is produced. The next hour is not about repair quality — it is about the missing path
-from `a failing test in this repository` to `a proposed edit`.
+What this **still** does not claim: general repository-scale bug completeness. Both scored
+seeds above are single-site boolean-operator injections (`and` -> `or`); wider task banks
+spanning multi-file semantic edits, missing logic, and unstaged cross-module contracts
+remain open.
 
 ---
 

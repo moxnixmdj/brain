@@ -163,13 +163,21 @@ def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
 
 
 def _atomic_write(target:pathlib.Path,data:bytes)->None:
+    import time as _time
+    old_st=target.stat()
     fd,name=tempfile.mkstemp(prefix=target.name+".brain_apply_",dir=target.parent)
     tmp=pathlib.Path(name)
     try:
         with os.fdopen(fd,"wb") as handle:
             handle.write(data)
-            os.fchmod(handle.fileno(),target.stat().st_mode & 0o777)
+            os.fchmod(handle.fileno(),old_st.st_mode & 0o777)
+        distinct_s=min(int(old_st.st_mtime),int(_time.time()))-2
+        os.utime(tmp,(distinct_s,distinct_s))
         os.replace(tmp,target)
+        pyc_dir=target.parent/"__pycache__"
+        if pyc_dir.is_dir():
+            for pyc in pyc_dir.glob(f"{target.stem}.*.pyc"):
+                pyc.unlink(missing_ok=True)
     finally:
         tmp.unlink(missing_ok=True)
 
@@ -231,6 +239,79 @@ def _try_live_trace_synth_patches(
                     "operator":"live_trace_observational_synthesis",
                 }]
     return []
+
+
+def _try_multistep_closed_loop_patches(
+    repo:pathlib.Path,
+    source_root:pathlib.Path,
+    exec_root:pathlib.Path,
+    test_paths:list[pathlib.Path],
+    run_argv:list[str],
+    timeout:int,
+    env_paths:tuple,
+    goal:str="",
+)->tuple[list[dict[str,Any]],int]:
+    """Multi-step closed-loop beam-search fallback for >=2-step, src-layout, or cross-module bugs."""
+    import difflib
+    if source_root==repo:
+        return [],0
+    try:
+        from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import (
+            solve_repository_closed_loop,
+        )
+    except Exception:
+        return [],0
+    rel_tfiles=[
+        p.relative_to(source_root).as_posix()
+        for p in test_paths
+        if source_root in p.parents
+    ]
+    res=solve_repository_closed_loop(
+        source_root,
+        goal=goal,
+        test_files=rel_tfiles or None,
+        apply_to_source=False,
+        timeout_s=min(float(timeout),35.0),
+    )
+    if not res.get("ok") or not res.get("verified"):
+        return [],0
+    patched_map=res.get("patched_sources") or {}
+    if not isinstance(patched_map,Mapping) or not patched_map:
+        return [],0
+    rows:list[dict[str,Any]]=[]
+    backup:dict[pathlib.Path,bytes]={}
+    try:
+        for rel_sub,cand_txt in sorted(patched_map.items()):
+            src_f=(source_root/str(rel_sub)).resolve()
+            if not src_f.is_file() or repo not in src_f.parents:
+                return [],0
+            orig_bytes=src_f.read_bytes()
+            cand_bytes=str(cand_txt).encode("utf-8")
+            backup[src_f]=orig_bytes
+            _atomic_write(src_f,cand_bytes)
+            repo_rel=_rel(repo,src_f)
+            diff="".join(
+                difflib.unified_diff(
+                    orig_bytes.decode("utf-8",errors="replace").splitlines(keepends=True),
+                    str(cand_txt).splitlines(keepends=True),
+                    fromfile="a/"+repo_rel,
+                    tofile="b/"+repo_rel,
+                )
+            )
+            rows.append({
+                "source_path":repo_rel,
+                "unified_diff":diff,
+                "original_sha256":_sha(orig_bytes),
+                "candidate_sha256":_sha(cand_bytes),
+                "operator":"multistep_closed_loop_beam_search",
+            })
+        rc,_=_run_test(run_argv,exec_root,min(timeout,20),env_paths)
+    finally:
+        for fpath,ob in backup.items():
+            _atomic_write(fpath,ob)
+    if rc!=0:
+        return [],0
+    return rows,int(res.get("steps_taken") or len(rows))
 
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
@@ -303,7 +384,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    env_paths=(source_root,*test_paths)
+    src_sub=source_root/"src"
+    has_src_layout=src_sub.is_dir() and not (src_sub/"__init__.py").exists()
+    env_paths=((src_sub,) if has_src_layout else ())+(source_root,*test_paths)
     protected_tests={p:p.read_bytes() for p in test_paths}
     before_rc,before_tail=_run_test(run_argv,exec_root,timeout,env_paths)
     out["pre_apply_test_returncode"]=before_rc
@@ -354,6 +437,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     # GATE 2 -- a bounded repair must actually be found and verified.  The
     # engine restores the source itself; only its verified patches are used.
+    goal_str=str(args.get("goal") or "")
     session=None
     config=args.get("retained_learning")
     if config is not None and (not isinstance(config,Mapping) or type(config.get("enabled")) is not bool):
@@ -366,6 +450,14 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if patches:
         out["repair_status"]="PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION"
         out["repair_mode"]="scoped_retained_repair"
+    elif has_src_layout:
+        patches,loop_steps=_try_multistep_closed_loop_patches(
+            repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths,goal=goal_str
+        )
+        if patches:
+            out["repair_status"]="PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH"
+            out["repair_mode"]="multistep_closed_loop_beam_search"
+            out["closed_loop_steps_taken"]=loop_steps
     else:
         intermediate=output.parent/(".apply_repair_"+output.name)
         out["repair_search_invocations"]+=1
@@ -384,13 +476,21 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         },repo)
         patches=repair.get("patches") or []
         out["repair_status"]=repair.get("status")
-    if not isinstance(patches,list) or not patches:
+    if (not isinstance(patches,list) or not patches) and not has_src_layout:
         patches=_try_live_trace_synth_patches(
             repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths
         )
         if patches:
             out["repair_status"]="PASS__LIVE_TRACE_OBSERVATIONAL_SYNTHESIS"
             out["repair_mode"]="live_trace_observational_synthesis"
+    if (not isinstance(patches,list) or not patches) and not has_src_layout:
+        patches,loop_steps=_try_multistep_closed_loop_patches(
+            repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths,goal=goal_str
+        )
+        if patches:
+            out["repair_status"]="PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH"
+            out["repair_mode"]="multistep_closed_loop_beam_search"
+            out["closed_loop_steps_taken"]=loop_steps
     if _restore_changed_tests(protected_tests):
         out["status"]="FAIL_CLOSED__DECLARED_TESTS_CHANGED_DURING_SEARCH"
         _emit(output,out)
@@ -499,6 +599,14 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             reg_file=_synthesize_differential_regression_test(
                 exec_root,test_paths[0].parent,edited_targets,originals
             )
+            import time as _time
+            _back_s=int(_time.time())-2
+            for _et in edited_targets:
+                os.utime(_et,(_back_s,_back_s))
+                _pc=_et.parent/"__pycache__"
+                if _pc.is_dir():
+                    for _pyc in _pc.glob(f"{_et.stem}.*.pyc"):
+                        _pyc.unlink(missing_ok=True)
             if reg_file is not None and reg_file.is_file():
                 reg_rel=_rel(repo,reg_file)
                 out["regression_test_written"]=reg_rel

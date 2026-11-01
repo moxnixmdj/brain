@@ -233,14 +233,43 @@ _ASKED_RE = re.compile(
     r"\?|(?:^|[.;]\s*)(?:which|what|where|who|whom|whose|how|why|is|are|does|do)\b"
     r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b", re.IGNORECASE)
 
+_PASTED_TEST_OUTPUT_LINE_RE = re.compile(
+    r"^(?:"
+    r"[>E]\s"
+    r"|FAILED\s+\S+"
+    r"|ERROR\s+\S+"
+    r"|={3,}.*={3,}"
+    r"|_{3,}.*_{3,}"
+    r"|(?:- )+-?"
+    r"|(?:_ )+_?"
+    r"|Traceback \(most recent call last\):"
+    r"|\s*File \"[^\"]+\", line \d+"
+    r"|\S+\.py:\d+:\s*\w*"
+    r"|\d+\s+failed,\s+\d+\s+passed"
+    r"|[A-Za-z_][A-Za-z0-9_]*\s*=\s*\S+"
+    r"|\s{2,}(?:@|\w|def\s|class\s|return\b|assert\b|raise\b|for\s|if\s|#|\^)"
+    r")"
+)
+
+
+def _strip_pasted_test_output(goal: str) -> str:
+    """Remove pasted pytest/unittest traceback lines so witness output cannot hijack intent family."""
+    raw = str(goal or "")
+    if "\n" not in raw:
+        return raw
+    kept = [ln for ln in raw.splitlines() if not _PASTED_TEST_OUTPUT_LINE_RE.match(ln)]
+    joined = "\n".join(ln for ln in kept if ln.strip()).strip()
+    return joined or raw
+
 
 def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
     """(the trigger phrases the sentence states, candidate terms, effect token)."""
     # Commit messages are payload, not authorization for source synthesis.
     # Reuse the existing repository grammar/scope validator before kernel dispatch.
-    if derivation.stated_git_operation_verb(goal) == "commit":
-        return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
-    raw_low = str(goal or "").lower()
+    intent_goal = _strip_pasted_test_output(goal)
+    if derivation.stated_git_operation_verb(intent_goal) == "commit":
+        return derivation.stated_git_operations(intent_goal), ("git", "repository"), GIT_FAMILY_TOKEN
+    raw_low = intent_goal.lower()
     if any(p in raw_low for p in (
         "ast patch search", "patch search", "repair loop", "coupled ", "strict progress", "provenance guided"
     )):
@@ -259,7 +288,7 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("contract_check",), ("contract.verdict", "crosshair"), "crosshair"
     if "changelog" in raw_low and "commits" in raw_low:
         return ("git_changelog",), ("diagnose", "blame_and_changelog"), "diagnose_and_architect"
-    if "benchmark" in raw_low and "head~1" in raw_low and ".py" in raw_low:
+    if "benchmark" in raw_low and "git head~1" in raw_low and ".py" in raw_low:
         return ("benchmark_git_ref",), ("diagnose", "hotspot"), "diagnose_and_architect"
     if "regression test" in raw_low and "reproduces" in raw_low and "fix" not in raw_low and ".py" in raw_low:
         return ("write_regression_test",), ("swe_transform",), "swe.transform_and_synthesize"
@@ -425,7 +454,7 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
     if re.search(r"--[a-z0-9_-]+", raw_low) and ("flag" in raw_low or "cli" in raw_low or "command-line" in raw_low):
         return ("cli flag",), ("swe_transform",), "swe.transform_and_synthesize"
     # Paths and quoted values are task data, not evidence of an effect family.
-    prose = front.prose_only(str(goal or ""))
+    prose = front.prose_only(intent_goal)
     head = _governing_clause(prose.lower())
     has_analysis_trigger = any(word in head for word in _ANALYSIS_ONLY_TRIGGERS)
     for triggers, terms, token in _FAMILIES:
@@ -827,6 +856,14 @@ def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict
     try:
         decision = selection.admit(goal, _APPLYING_REPAIR_CAPABILITY, entry, root,
                                    declared.get(_APPLYING_REPAIR_CAPABILITY))
+        if (not decision.get("admitted")
+                and str(decision.get("reason") or "").startswith("BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD")):
+            _prose = _strip_pasted_test_output(goal)
+            if _prose != goal:
+                _prose_dec = selection.admit(_prose, _APPLYING_REPAIR_CAPABILITY, entry, root,
+                                             declared.get(_APPLYING_REPAIR_CAPABILITY))
+                if not str(_prose_dec.get("reason") or "").startswith("BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD"):
+                    decision = _prose_dec
     except Exception:
         return cid, inputs
     if not (decision.get("admitted") and decision.get("specific")):
@@ -1001,6 +1038,8 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
         compiled["match_evidence"] = evidence
         compiled.pop("capability_dag", None)
         compiled.pop("controller_actions", None)
+        compiled.pop("code", None)
+        compiled.pop("detail", None)
         return (registry, admissible, compiled)
     except Exception:
         return None

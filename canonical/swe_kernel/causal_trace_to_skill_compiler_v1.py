@@ -28,10 +28,12 @@ from __future__ import annotations
 
 import hashlib
 import html.parser
+import http.cookiejar
 import json
 import os
 import pathlib
 import re
+import shutil
 import sqlite3
 import subprocess
 import tempfile
@@ -69,6 +71,16 @@ _STOP_WORDS = frozenset({
 })
 
 _WORKFLOW_MEM_CACHE: dict[str, list[dict[str, Any]]] = {}
+_WORKFLOW_INDEX_CACHE: dict[str, dict[str, list[dict[str, Any]]]] = {}
+_AUTO_SEEDED_DBS: set[str] = set()
+
+
+def _repo_root() -> pathlib.Path:
+    return pathlib.Path(__file__).resolve().parents[2]
+
+
+def default_workflow_bundle_path() -> pathlib.Path:
+    return _repo_root() / "canonical" / "astra_runtime" / "skills" / "COMPILED_WORKFLOWS_BUNDLE_V1.json"
 
 
 def _default_workflow_db() -> pathlib.Path:
@@ -77,12 +89,13 @@ def _default_workflow_db() -> pathlib.Path:
         p = pathlib.Path(override)
         p.parent.mkdir(parents=True, exist_ok=True)
         return p
-    base = pathlib.Path(tempfile.gettempdir()) / "brain_swe_semantic_graph_v1"
+    base = _repo_root() / "canonical" / "astra_runtime" / "tmp"
     base.mkdir(parents=True, exist_ok=True)
     return base / "compiled_workflows_v1.sqlite"
 
 
 def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqlite3.Connection]:
+    is_default = db_path is None and not os.environ.get("BRAIN_COMPILED_WORKFLOW_DB")
     target = db_path or _default_workflow_db()
     target.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(target), timeout=10.0)
@@ -109,6 +122,19 @@ def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqli
     conn.execute(
         "CREATE INDEX IF NOT EXISTS idx_workflow_layer ON compiled_workflow_skills(dominant_layer)"
     )
+    if is_default and str(target) not in _AUTO_SEEDED_DBS:
+        _AUTO_SEEDED_DBS.add(str(target))
+        bundle_p = default_workflow_bundle_path()
+        if bundle_p.is_file():
+            row = conn.execute("SELECT COUNT(*) FROM compiled_workflow_skills").fetchone()
+            if not row or int(row[0]) == 0:
+                conn.close()
+                try:
+                    import_workflow_bundle(bundle_p, db_path=target)
+                except Exception:
+                    pass
+                conn = sqlite3.connect(str(target), timeout=10.0)
+                conn.execute("PRAGMA journal_mode=WAL")
     return target, conn
 
 
@@ -209,14 +235,19 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
             })
 
     # Rule B: Direct HTTP request observed as the causal effect of UI/browser form interaction
+    # (including stateful session/CSRF token-acquiring GET steps right before a mutation!)
     http_exchanges = list(effects.get("http_exchanges") or [])
-    mutating_http = [
+    causal_http = [
         h for h in http_exchanges
         if isinstance(h, Mapping)
-        and str(h.get("method") or "GET").upper() in {"POST", "PUT", "PATCH", "DELETE"}
         and h.get("url")
+        and (
+            str(h.get("method") or "GET").upper() in {"POST", "PUT", "PATCH", "DELETE"}
+            or bool(h.get("extract_hidden_inputs"))
+            or bool(h.get("sets_session_cookie"))
+        )
     ]
-    for h in mutating_http:
+    for h in causal_http:
         step_http: dict[str, Any] = {
             "layer": "http_request",
             "method": str(h.get("method") or "POST").upper(),
@@ -224,9 +255,13 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
             "headers": {
                 str(k): str(v)
                 for k, v in (h.get("headers") or {}).items()
-                if str(k).lower() in {"content-type", "accept", "x-requested-with"}
+                if str(k).lower() in {"content-type", "accept", "x-requested-with", "x-csrf-token"}
             },
         }
+        if h.get("extract_hidden_inputs"):
+            step_http["extract_hidden_inputs"] = True
+        if h.get("sets_session_cookie"):
+            step_http["sets_session_cookie"] = True
         if "json_body" in h and h["json_body"] is not None:
             step_http["json_body"] = h["json_body"]
         elif "form_body" in h and isinstance(h["form_body"], Mapping):
@@ -398,6 +433,11 @@ def _substitute_in_obj(obj: Any, mapping: Mapping[str, str]) -> Any:
         for raw_val, hole in sorted(mapping.items(), key=lambda kv: -len(kv[0])):
             if raw_val and raw_val in out:
                 out = out.replace(raw_val, hole)
+            elif hole.startswith("?url") and raw_val.startswith(("http://", "https://")):
+                sp = urllib.parse.urlsplit(raw_val)
+                origin = f"{sp.scheme}://{sp.netloc}"
+                if origin and origin in out:
+                    out = out.replace(origin, f"{{{{origin:{hole}}}}}")
         return out
     if isinstance(obj, list):
         return [_substitute_in_obj(x, mapping) for x in obj]
@@ -419,6 +459,11 @@ def _instantiate_obj(obj: Any, bindings: Mapping[str, str]) -> Any:
             return int(raw) if raw.isdigit() else float(raw)
         out = obj
         for hole, val in sorted(bindings.items(), key=lambda kv: -len(kv[0])):
+            if hole.startswith("?url"):
+                sp = urllib.parse.urlsplit(str(val))
+                origin_tok = f"{{{{origin:{hole}}}}}"
+                if origin_tok in out and sp.scheme and sp.netloc:
+                    out = out.replace(origin_tok, f"{sp.scheme}://{sp.netloc}")
             if hole in out:
                 out = out.replace(hole, str(val))
         return out
@@ -455,8 +500,14 @@ def anti_unify_workflow(
     for kind, val in candidates:
         if not val or val in val_to_hole:
             continue
-        # Generalize any literal from the goal that causally participates in the steps or postcondition!
-        if val not in step_blob:
+        # Generalize any literal from the goal that causally participates in the steps or postcondition
+        # (including URLs whose scheme://netloc origin appears in sibling endpoint paths like `/submit`!).
+        origin_match = False
+        if kind == "url":
+            sp = urllib.parse.urlsplit(val)
+            origin = f"{sp.scheme}://{sp.netloc}" if sp.scheme and sp.netloc else ""
+            origin_match = bool(origin and origin in step_blob)
+        if val not in step_blob and not origin_match:
             continue
         idx = counts.get(kind, 0)
         counts[kind] = idx + 1
@@ -594,6 +645,22 @@ def _resolve_local_path(raw_path: str, cwd: pathlib.Path) -> pathlib.Path:
     return p if p.is_absolute() else (cwd / p)
 
 
+def _subst_dynamic_tokens(val: Any, dyn: Mapping[str, str]) -> Any:
+    """Substitute `{{hidden:csrf_token}}` or `{{json:token}}` from previous step responses."""
+    if isinstance(val, str):
+        out = val
+        for k, v in dyn.items():
+            tok = "{{" + k + "}}"
+            if tok in out:
+                out = out.replace(tok, v)
+        return out
+    if isinstance(val, Mapping):
+        return {k: _subst_dynamic_tokens(v, dyn) for k, v in val.items()}
+    if isinstance(val, list):
+        return [_subst_dynamic_tokens(x, dyn) for x in val]
+    return val
+
+
 def execute_compiled_steps(
     steps: Sequence[Mapping[str, Any]],
     *,
@@ -604,6 +671,9 @@ def execute_compiled_steps(
     step_receipts: list[dict[str, Any]] = []
     pending_dom_fills: dict[str, str] = {}
     current_dom_url: str | None = None
+    cookie_jar = http.cookiejar.CookieJar()
+    http_opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie_jar))
+    dynamic_vars: dict[str, str] = {}
 
     for idx, step in enumerate(steps):
         layer = str(step.get("layer") or "")
@@ -643,21 +713,55 @@ def execute_compiled_steps(
 
         elif layer == "http_request":
             method = str(step.get("method") or "GET").upper()
-            url = str(step["url"])
-            headers = dict(step.get("headers") or {})
+            url = str(_subst_dynamic_tokens(step["url"], dynamic_vars))
+            headers = {
+                str(k): str(_subst_dynamic_tokens(v, dynamic_vars))
+                for k, v in (step.get("headers") or {}).items()
+            }
             payload_bytes: bytes | None = None
             if "json_body" in step and step["json_body"] is not None:
-                payload_bytes = json.dumps(step["json_body"]).encode("utf-8")
+                jb = _subst_dynamic_tokens(step["json_body"], dynamic_vars)
+                payload_bytes = json.dumps(jb).encode("utf-8")
                 headers.setdefault("Content-Type", "application/json")
             elif "form_body" in step and isinstance(step["form_body"], Mapping):
-                payload_bytes = urllib.parse.urlencode(step["form_body"]).encode("utf-8")
+                fb = _subst_dynamic_tokens(step["form_body"], dynamic_vars)
+                payload_bytes = urllib.parse.urlencode(fb).encode("utf-8")
                 headers.setdefault("Content-Type", "application/x-www-form-urlencoded")
             elif "body" in step and step["body"] is not None:
-                payload_bytes = str(step["body"]).encode("utf-8")
+                payload_bytes = str(_subst_dynamic_tokens(step["body"], dynamic_vars)).encode("utf-8")
             req = urllib.request.Request(url, data=payload_bytes, headers=headers, method=method)
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                resp_bytes = resp.read()
-                status_code = int(resp.status)
+            try:
+                with http_opener.open(req, timeout=15) as resp:
+                    resp_bytes = resp.read()
+                    status_code = int(resp.status)
+            except urllib.error.HTTPError as herr:
+                return {
+                    "ok": False,
+                    "failed_step": idx,
+                    "reason": f"HTTP_ERROR_{herr.code}",
+                    "step_receipts": step_receipts,
+                }
+            resp_txt = resp_bytes.decode("utf-8", "replace")
+            # Harvest dynamic hidden inputs & JSON scalar tokens for stateful multi-step chaining!
+            if step.get("extract_hidden_inputs") or "<form" in resp_txt.lower():
+                hparser = _SemanticHTMLFormParser()
+                try:
+                    hparser.feed(resp_txt)
+                    for frm in hparser.forms:
+                        for inp in frm["inputs"]:
+                            if inp.get("type") == "hidden" and inp.get("name"):
+                                dynamic_vars[f"hidden:{inp['name']}"] = str(inp.get("value") or "")
+                except Exception:
+                    pass
+            if resp_txt.lstrip().startswith("{"):
+                try:
+                    jdoc = json.loads(resp_txt)
+                    if isinstance(jdoc, Mapping):
+                        for jk, jv in jdoc.items():
+                            if isinstance(jv, (str, int, float)):
+                                dynamic_vars[f"json:{jk}"] = str(jv)
+                except Exception:
+                    pass
             if step.get("save_response_to"):
                 out_p = _resolve_local_path(str(step["save_response_to"]), work_dir)
                 out_p.parent.mkdir(parents=True, exist_ok=True)
@@ -665,7 +769,8 @@ def execute_compiled_steps(
             step_receipts.append({
                 "step": idx, "layer": layer, "ok": 200 <= status_code < 400,
                 "status_code": status_code,
-                "response_preview": resp_bytes.decode("utf-8", "replace")[:400],
+                "cookies_held": len(cookie_jar),
+                "response_preview": resp_txt[:400],
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             })
 
@@ -776,7 +881,7 @@ def execute_compiled_steps(
         else:
             return {"ok": False, "failed_step": idx, "reason": f"UNSUPPORTED_COMPILED_LAYER:{layer}", "step_receipts": step_receipts}
 
-    return {"ok": True, "step_receipts": step_receipts}
+    return {"ok": True, "step_receipts": step_receipts, "_http_opener": http_opener}
 
 
 def verify_postcondition(
@@ -841,11 +946,18 @@ def verify_postcondition(
 
     if kind == "http_get_contains":
         url = str(postcondition["url"])
+        opener = (execution_result or {}).get("_http_opener")
         try:
-            with urllib.request.urlopen(url, timeout=10) as resp:
-                body = resp.read().decode("utf-8", "replace")
-                if int(resp.status) >= 400:
-                    return False, f"POSTCONDITION_HTTP_STATUS_{resp.status}"
+            if opener is not None:
+                with opener.open(url, timeout=10) as resp:
+                    body = resp.read().decode("utf-8", "replace")
+                    if int(resp.status) >= 400:
+                        return False, f"POSTCONDITION_HTTP_STATUS_{resp.status}"
+            else:
+                with urllib.request.urlopen(url, timeout=10) as resp:
+                    body = resp.read().decode("utf-8", "replace")
+                    if int(resp.status) >= 400:
+                        return False, f"POSTCONDITION_HTTP_STATUS_{resp.status}"
         except Exception as exc:
             return False, f"POSTCONDITION_HTTP_ERROR:{type(exc).__name__}"
         expected = str(postcondition.get("contains") or "")
@@ -1121,6 +1233,7 @@ def compile_and_qualify_skill(
     finally:
         conn.close()
     _WORKFLOW_MEM_CACHE.pop(str(target_db), None)
+    _WORKFLOW_INDEX_CACHE.pop(str(target_db), None)
 
     return {
         "schema": SCHEMA,
@@ -1173,7 +1286,57 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             "artifact_sha256": r[8],
         })
     _WORKFLOW_MEM_CACHE[key] = out
+    # Build O(1) rarest-anchor-token inverted index so lookup stays sub-millisecond at 10,000+ skills
+    doc_freq: dict[str, int] = {}
+    for sk in out:
+        for tok in set(sk.get("skeleton_tokens") or []):
+            doc_freq[tok] = doc_freq.get(tok, 0) + 1
+    inv: dict[str, list[dict[str, Any]]] = {"__ALL_EMPTY__": []}
+    for sk in out:
+        toks = list(set(sk.get("skeleton_tokens") or []))
+        if not toks:
+            inv["__ALL_EMPTY__"].append(sk)
+        else:
+            anchor = min(toks, key=lambda t: (doc_freq.get(t, 0), -len(t), t))
+            inv.setdefault(anchor, []).append(sk)
+    _WORKFLOW_INDEX_CACHE[key] = inv
     return out
+
+
+def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | None = None) -> list[dict[str, Any]]:
+    target_db = db_path or _default_workflow_db()
+    key = str(target_db)
+    if key not in _WORKFLOW_INDEX_CACHE:
+        _load_cached_skills(db_path)
+    inv = _WORKFLOW_INDEX_CACHE.get(key) or {}
+    candidates: list[dict[str, Any]] = list(inv.get("__ALL_EMPTY__") or [])
+    seen_ids = {s["skill_id"] for s in candidates}
+    for w in goal_words:
+        for sk in inv.get(w) or ():
+            if sk["skill_id"] not in seen_ids:
+                seen_ids.add(sk["skill_id"])
+                candidates.append(sk)
+    return candidates
+
+
+def check_step_preconditions(steps: Sequence[Mapping[str, Any]], *, cwd: str | pathlib.Path | None = None) -> tuple[bool, str]:
+    """Fast O(1) guard checking required CLI binaries & URL schemes before execution."""
+    _ = cwd
+    for st in steps:
+        layer = str(st.get("layer") or "")
+        if layer == "cli_exec":
+            argv = list(st.get("argv") or [])
+            if not argv or not shutil.which(str(argv[0])):
+                return False, f"PRECONDITION_MISSING_BINARY:{argv[0] if argv else ''}"
+        elif layer == "cli_pipeline":
+            for sg in st.get("stages") or []:
+                if not sg or not shutil.which(str(sg[0])):
+                    return False, f"PRECONDITION_MISSING_PIPE_BINARY:{sg[0] if sg else ''}"
+        elif layer == "http_request":
+            u = str(st.get("url") or "")
+            if not u.startswith(("http://", "https://")):
+                return False, "PRECONDITION_INVALID_HTTP_SCHEME"
+    return True, "PRECONDITIONS_OK"
 
 
 def recall_and_execute_workflow(
@@ -1182,11 +1345,11 @@ def recall_and_execute_workflow(
     cwd: str | pathlib.Path | None = None,
     db_path: pathlib.Path | None = None,
 ) -> dict[str, Any] | None:
-    """Sub-2ms L1/SQLite lookup + deterministic execution + mandatory postcondition verification."""
+    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
     t0 = time.perf_counter_ns()
     goal_words = {w for w in re.findall(r"[a-z]{2,}", goal.lower()) if w not in _STOP_WORDS}
 
-    for skill in _load_cached_skills(db_path):
+    for skill in _candidate_skills_for_words(goal_words, db_path):
         skel_tokens = set(skill.get("skeleton_tokens") or [])
         if skel_tokens and not (skel_tokens <= goal_words):
             continue
@@ -1194,6 +1357,9 @@ def recall_and_execute_workflow(
         if bindings is None:
             continue
         inst_steps = _instantiate_obj(skill["abstract_steps"], bindings)
+        pre_ok, _ = check_step_preconditions(inst_steps, cwd=cwd)
+        if not pre_ok:
+            continue
         inst_post = _instantiate_obj(skill["abstract_postcondition"], bindings)
         exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
         if not exec_res.get("ok"):
@@ -1226,3 +1392,135 @@ def recall_and_execute_workflow(
             "incremental_spend_usd": 0,
         }
     return None
+
+
+def export_workflow_bundle(
+    bundle_path: str | pathlib.Path | None = None,
+    *,
+    db_path: pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """Export compiled workflows into a deterministic content-addressed JSON bundle."""
+    out_path = pathlib.Path(bundle_path) if bundle_path else default_workflow_bundle_path()
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    _, conn = _connect_db(db_path)
+    try:
+        rows = conn.execute(
+            """
+            SELECT skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
+                   param_order_json, steps_json, postcondition_json,
+                   dominant_layer, artifact_sha256, ownership_receipt_json, hit_count
+            FROM compiled_workflow_skills
+            ORDER BY skill_id ASC
+            """
+        ).fetchall()
+    finally:
+        conn.close()
+
+    skills: list[dict[str, Any]] = []
+    for r in rows:
+        skills.append({
+            "skill_id": r[0],
+            "goal_skeleton": r[1],
+            "goal_regex": r[2],
+            "skeleton_tokens": json.loads(r[3]),
+            "param_order": json.loads(r[4]),
+            "abstract_steps": json.loads(r[5]),
+            "abstract_postcondition": json.loads(r[6]),
+            "dominant_layer": r[7],
+            "artifact_sha256": r[8],
+            "ownership_receipt": json.loads(r[9]),
+            "hit_count": int(r[10]),
+        })
+
+    doc = {
+        "schema": "PROJECT_BRAIN_COMPILED_WORKFLOWS_BUNDLE_V1",
+        "skill_count": len(skills),
+        "skills": skills,
+    }
+    payload = json.dumps(doc, indent=2, sort_keys=True) + "\n"
+    out_path.write_text(payload, encoding="utf-8")
+    return {
+        "ok": True,
+        "bundle_path": str(out_path),
+        "skill_count": len(skills),
+        "bundle_sha256": hashlib.sha256(payload.encode("utf-8")).hexdigest(),
+    }
+
+
+def import_workflow_bundle(
+    bundle_path: str | pathlib.Path | None = None,
+    *,
+    db_path: pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """Import content-addressed workflow skills after verifying SHA-256 & ownership receipt."""
+    in_path = pathlib.Path(bundle_path) if bundle_path else default_workflow_bundle_path()
+    if not in_path.is_file():
+        return {"ok": False, "accepted": 0, "refused": 0, "reason": "BUNDLE_FILE_NOT_FOUND"}
+
+    doc = json.loads(in_path.read_text(encoding="utf-8"))
+    raw_skills = list(doc.get("skills") or [])
+    accepted = 0
+    refusals: list[dict[str, Any]] = []
+
+    target_db, conn = _connect_db(db_path)
+    try:
+        for item in raw_skills:
+            if not isinstance(item, Mapping):
+                refusals.append({"skill_id": None, "reason": "NON_OBJECT_ENTRY"})
+                continue
+            sid = str(item.get("skill_id") or "")
+            claimed_sha = str(item.get("artifact_sha256") or "")
+            canonical_payload = json.dumps({
+                "goal_skeleton": item.get("goal_skeleton"),
+                "goal_regex": item.get("goal_regex"),
+                "param_order": item.get("param_order"),
+                "abstract_steps": item.get("abstract_steps"),
+                "abstract_postcondition": item.get("abstract_postcondition"),
+                "dominant_layer": item.get("dominant_layer"),
+            }, sort_keys=True)
+            actual_sha = hashlib.sha256(canonical_payload.encode("utf-8")).hexdigest()
+            expected_sid = "workflow." + actual_sha[:16]
+            if not claimed_sha or actual_sha != claimed_sha or sid != expected_sid:
+                refusals.append({"skill_id": sid, "reason": "TAMPERED_ARTIFACT_SHA256"})
+                continue
+            receipt = item.get("ownership_receipt")
+            if not isinstance(receipt, Mapping) or receipt.get("pass") is not True:
+                refusals.append({"skill_id": sid, "reason": "INVALID_OWNERSHIP_RECEIPT"})
+                continue
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO compiled_workflow_skills (
+                    skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
+                    param_order_json, steps_json, postcondition_json,
+                    dominant_layer, artifact_sha256, ownership_receipt_json,
+                    hit_count, created_ns
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    sid,
+                    str(item["goal_skeleton"]),
+                    str(item["goal_regex"]),
+                    json.dumps(list(item.get("skeleton_tokens") or [])),
+                    json.dumps(list(item.get("param_order") or [])),
+                    json.dumps(list(item.get("abstract_steps") or [])),
+                    json.dumps(dict(item.get("abstract_postcondition") or {})),
+                    str(item["dominant_layer"]),
+                    actual_sha,
+                    json.dumps(dict(receipt), sort_keys=True),
+                    int(item.get("hit_count") or 0),
+                    time.time_ns(),
+                ),
+            )
+            accepted += 1
+        conn.commit()
+    finally:
+        conn.close()
+
+    _WORKFLOW_MEM_CACHE.pop(str(target_db), None)
+    _WORKFLOW_INDEX_CACHE.pop(str(target_db), None)
+    return {
+        "ok": len(refusals) == 0,
+        "accepted": accepted,
+        "refused": len(refusals),
+        "refusals": refusals,
+    }
