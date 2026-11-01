@@ -30926,7 +30926,7 @@
   "engines": 26,
   "knowledge_documents": 235,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6595,
+  "research_index_records": 6596,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30935,7 +30935,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7a09a988a61f28bec5596fab154303ec44f7c8fe508963ef167ce6aa808da6db"
+  "value": "b1e50be1c73d49393b59dde14417061fa2b7bd9ca3be0a3629ad92bdcfff8e96"
  },
  "engines": [
   {
@@ -205551,6 +205551,51 @@
    }
   },
   {
+   "action_id": "A_PATH_OUTSIDE_THE_ROOT_IS_NOT_REWRITTEN_INTO_IT_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_PATH_OUTSIDE_THE_ROOT_IS_NOT_REWRITTEN_INTO_IT_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_PATH_OUTSIDE_THE_ROOT_IS_NOT_REWRITTEN_INTO_IT_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "aa3bfea83aca89d6e495eb9f253baff8d40fccd8299221de87e71d0ca5a80812",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_path_outside_the_root_is_not_rewritten_into_it_v1_20261101_v1": 2,
+    "above": 1,
+    "absolute": 3,
+    "absolute-inside": 1,
+    "against": 2,
+    "anything": 1,
+    "arm": 1,
+    "before": 1,
+    "cases": 1,
+    "compiled": 1,
+    "ever": 1,
+    "every": 1,
+    "exactly": 2,
+    "fell": 1,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal_compiler._repo_paths": 1,
+    "had": 1,
+    "handled": 1,
+    "inside": 1,
+    "join": 1,
+    "keeps": 1,
+    "layer": 1,
+    "name": 1,
+    "outside": 3,
+    "path": 4,
+    "relative": 2,
+    "root": 2,
+    "sentence": 2,
+    "tree": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_PATH_WRITTEN_ABSOLUTE_OR_WITH_A_LEADING_DOT_SLASH_NAMES_THE_FILE_IT_STATES_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -243938,7 +243983,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "b4d79ce72e5094d7b7db40ca50af410d0dfa596e833aab5b82cfbf2845724ccb",
+   "sha256": "889c0392cd0808c9e8b8124c627e05f26e6fe63776f99f190d877fc48a136271",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 134,
    "symbols": [
@@ -250352,9 +250397,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "95810d38893e439ca1ddb43e3d9472bdbf8d9eb7b5574efe86ee4e49a7eac93d",
+   "sha256": "5aa1d3507bbd8d2381a87b8b85bad04e93548ad1b3923a0e2298ce0fa66a950c",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 106,
+   "symbol_count": 107,
    "symbols": [
     "LocalExecutionFailure",
     "_already_satisfied_evidence",
