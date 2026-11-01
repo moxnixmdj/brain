@@ -4,7 +4,7 @@
 The crown closes loops only where tests already exist; uncovered code is
 where regressions breed.  This adapter writes deterministic SMOKE-scaffold
 unittests for module-scope functions from the verified symbol index, then
-EXECUTES them (pytest) and reports what actually happened.
+EXECUTES them (stdlib unittest under the existing read-only audit policy) and reports what actually happened.
 
 Honesty laws it refuses to break:
 
@@ -15,13 +15,12 @@ Honesty laws it refuses to break:
   are REFUSED with evidence per target — listed, never silently skipped.
 * NEVER-MUTATE-SOURCE — source tree read-only; generated tests land in the
   ``generated_tests_root`` (which must NOT overlap source_root).
-* EXECUTE-OR-REFUSE — nothing is "generated" unless pytest actually ran it
+* EXECUTE-OR-REFUSE — nothing is verified unless the unittest runner actually ran it
   in the same call and the harness recorded per-test pass/fail.
 * DETERMINISM — byte-identical generated text and artifact on rerun
   (pin-proven); targets processed in sorted order; repr truncation pinned.
 * FAIL CLOSED on bad inputs, path escapes, unknown modules/names (with
-  lexical candidates listed), pytest absence (reported UNAVAILABLE —
-  verdict then degrades to generated:false evidence, verified:false).
+  lexical candidates listed), runner failure produces verified:false; pytest is not required.
 
 Inputs (kwargs, all paths confined to the repo):
   targets_path     JSON: [{"module": "pkg/x.py", "name": "fn"}] — name
@@ -30,7 +29,7 @@ Inputs (kwargs, all paths confined to the repo):
   generated_tests_root  where test modules are written (RE-created)
   output_path      summary artifact (registry result_fields mirror)
   index_path       optional validated slice-1 cache (schema+totals+root)
-  python_executable  interpreter with pytest; defaults to this one
+  python_executable  Python interpreter; defaults to this one
   timeout_s        wall clock cap for the pytest run (default 120)
 
 result_fields: adapter, target_count, generated_count, refused_count,
@@ -49,6 +48,7 @@ import sys
 from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_TESTGEN_SCAFFOLD_V1"
+SMOKE_MARKER = "\x00BRAIN_READONLY_UNITTEST_RESULT\x00"
 NAME_RE = re.compile(r"^[A-Za-z_]\w*$")
 
 _FIXTURE_BY_ANNOTATION = {
@@ -86,10 +86,12 @@ _SKIP_DIRS = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cach
 
 
 def _tree_manifest(root: Path) -> str:
-    rows = [[str(p.relative_to(root)).replace("\\", "/"), _sha256(p.read_bytes())]
-            for p in sorted(root.rglob("*.py")) if p.is_file()
-            and not any(part in _SKIP_DIRS for part in p.parts)]
-    return _sha256(json.dumps(rows, separators=(",", ":")).encode("utf-8"))
+    # Reuse the canonical all-content manifest: source data matters too.
+    from canonical.runtime.canonical_tree_attestation_v1 import tree_manifest
+    manifest = tree_manifest(root)
+    if not manifest["pass"]:
+        _fail("SOURCE_SYMLINK_REJECTED")
+    return manifest["tree_sha256"]
 
 
 def _fixture_for(param: ast.arg) -> tuple[str | None, str]:
@@ -199,10 +201,9 @@ def _load_index(source_abs: Path, cached: Path | None, source_root: str) -> tupl
         if int((art.get("totals") or {}).get("files", 0)) <= 0:
             _fail("INDEX_CACHE_TOTALS_INVALID")
         return art, True
-    probe = source_abs / ".testgen_probe_index.json"
-    indexer.run({"source_root": ".", "output_path": probe.name}, source_abs)
-    art = json.loads(probe.read_text(encoding="utf-8"))
-    probe.unlink()
+    # The index already exposes an in-memory producer. No reserved probe file
+    # in a read-only source tree, and no chance to clobber project-owned data.
+    art = indexer.build_index(".", source_abs)
     return art, False
 
 
@@ -231,6 +232,7 @@ def run(args, root):
     for pth, key in ((gen_abs, "generated_tests_root"), (out_abs, "output_path")):
         if pth == source_abs or source_abs in pth.parents or pth in source_abs.parents:
             _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
+    manifest_before = _tree_manifest(source_abs)
     cached = _safe_path(repo, str(args["index_path"]), must_exist=True) if args.get("index_path") else None
     index, cache_used = _load_index(source_abs, cached, source_root)
     tgt_rel = str(args.get("targets_path") or "")
@@ -255,7 +257,6 @@ def run(args, root):
         if not isinstance(t, dict) or not t.get("module"):
             _fail("TARGET_SCHEMA_MISSING:module")
 
-    manifest_before = _tree_manifest(source_abs)
     mods = {}
     for row in index.get("modules") or []:
         mods[str(row["path"])] = row
@@ -312,51 +313,37 @@ def run(args, root):
 
     passed = failed = 0
     run_rc = None
-    pytest_version = None
     runner = "NONE"
+    runner_evidence = {}
     if gen_rows:
         import os
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        probe = subprocess.run([python_exe, "-c", "import pytest;print(pytest.__version__)"],
-                               capture_output=True, text=True, timeout=min(timeout_s, 30))
-        if probe.returncode == 0:
-            pytest_version = probe.stdout.strip()
-            runner = "pytest"
-            proc = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                                   str(test_file)],
-                                  cwd=repo, capture_output=True, text=True, timeout=timeout_s,
-                                  env=env)
-            run_rc = proc.returncode
-            m = re.search(r"(\d+) passed", proc.stdout + proc.stderr)
-            passed = int(m.group(1)) if m else 0
-            m = re.search(r"(\d+) failed", proc.stdout + proc.stderr)
-            failed = int(m.group(1)) if m else 0
-        else:
-            # The scaffold this capability writes is a unittest.TestCase module --
-            # _render_module emits `import unittest` and `class GeneratedSmokeN(
-            # unittest.TestCase)`. Running it with pytest therefore asked a
-            # third-party package to drive a file the stdlib already owns, and on
-            # a host without pytest the capability wrote correct tests and then
-            # reported verified=False for want of a runner. Measured here: the
-            # probe dies ModuleNotFoundError: No module named 'pytest' while
-            # `python -m unittest` on the very same file reports "Ran 3 tests ...
-            # OK". The dependency was never in the artifact; it was in the choice
-            # of runner.
-            runner = "unittest"
-            proc = subprocess.run([python_exe, "-m", "unittest", "-v", str(test_file)],
-                                  cwd=repo, capture_output=True, text=True, timeout=timeout_s,
-                                  env=env)
-            run_rc = proc.returncode
-            out = proc.stdout + proc.stderr
-            m = re.search(r"Ran (\d+) tests?", out)
-            ran = int(m.group(1)) if m else 0
-            bad = 0
-            for key in ("failures", "errors"):
-                mm = re.search(key + r"=(\d+)", out)
-                bad += int(mm.group(1)) if mm else 0
-            passed = max(0, ran - bad)
+        # The artifact is a unittest module. Reuse Brain's existing child-side
+        # read-only audit policy instead of starting pytest plus a probe process.
+        # This denies ordinary Python writes/deletes/process/socket effects BEFORE
+        # they happen, including absolute paths and import-time effects.
+        runner = "unittest"
+        readonly_runner = Path(__file__).resolve()
+        proc = subprocess.run([python_exe, "-B", str(readonly_runner),
+                               "--readonly-unittest", str(test_file)],
+                              cwd=repo, capture_output=True, text=True, timeout=timeout_s,
+                              env=env)
+        run_rc = proc.returncode
+        # Count the actual unittest result, not arbitrary text printed by code
+        # under test. Require a coherent bounded summary; absent evidence refuses.
+        try:
+            summary = json.loads(proc.stdout.rsplit(SMOKE_MARKER, 1)[1])
+            ran, bad, skipped = (summary[k] for k in ("ran", "failed", "skipped"))
+            if (any(type(v) is not int or v < 0 for v in (ran, bad, skipped))
+                    or ran != len(gen_rows) or bad + skipped > ran):
+                raise ValueError("INCOHERENT_TEST_COUNTS")
+            runner_evidence = summary
+            passed = ran - bad - skipped
             failed = bad
+        except (IndexError, KeyError, TypeError, ValueError):
+            passed = failed = 0
+            run_rc = 1
 
     manifest_after = _tree_manifest(source_abs)
     if manifest_after != manifest_before:
@@ -378,11 +365,12 @@ def run(args, root):
         "test_count": len(gen_rows),
         "test_passed": passed,
         "test_failed": failed,
-        "pytest": pytest_version or "UNAVAILABLE",
-        # Which runner actually executed the scaffold. "pytest: UNAVAILABLE"
-        # alone could not distinguish "ran on the stdlib and passed" from
-        # "never ran", and the difference is the whole claim.
+        "pytest": "NOT_USED",
+        "execution_policy": "BRAIN_MODULE_INVOKE_READ_ONLY_AUDIT_EVENTS",
+        # The named runner must actually execute and supply coherent counts.
+        # pytest is not probed or required; do not call an unused checker run.
         "runner": runner,
+        "runner_evidence": runner_evidence,
         "complete": complete,
         "smoke_law": "scaffolds assert evaluation with derived fixtures only; zero semantic claims",
         "cache_used": cache_used,
@@ -411,7 +399,44 @@ def run(args, root):
     }
 
 
+def _readonly_unittest_main(test_path):
+    """Run an ordinary generated unittest module under the existing audit policy.
+
+    This is CPython audit-event containment, NOT a hostile-native-code sandbox.
+    Source import and test discovery occur after arming; failures stay failures.
+    """
+    # Reuse the native invocation policy without changing its pinned runner.
+    sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+    from canonical.runtime.bound_capabilities import brain_module_invoke_runner_v1 as policy
+    import runpy
+    import types
+    import unittest
+    sys.dont_write_bytecode = True
+    policy._limits()
+    test_path = str(Path(test_path).resolve())
+    sys.addaudithook(policy._hook)
+    policy._ARMED[0] = True
+    try:
+        module = types.ModuleType("brain_readonly_smoke")
+        module.__dict__.update(runpy.run_path(test_path, run_name=module.__name__))
+        suite = unittest.defaultTestLoader.loadTestsFromModule(module)
+        result = unittest.TextTestRunner(verbosity=2).run(suite)
+        summary = {"ran": result.testsRun, "failed": len(result.failures) + len(result.errors),
+                   "skipped": len(result.skipped),
+                   "read_only_effect_refused": any("BRAIN_MODULE_INVOKE_READ_ONLY:" in detail
+                                                   for _, detail in result.errors)}
+        # Publish structured harness evidence after subject output. A skipped
+        # test is not a successful evaluation, even if unittest exits cleanly.
+        sys.__stdout__.write(SMOKE_MARKER + json.dumps(summary))
+        sys.__stdout__.flush()
+        return 0 if result.testsRun > 0 and result.wasSuccessful() else 1
+    finally:
+        policy._ARMED[0] = False
+
+
 if __name__ == "__main__":
+    if len(sys.argv) == 3 and sys.argv[1] == "--readonly-unittest":
+        raise SystemExit(_readonly_unittest_main(sys.argv[2]))
     import argparse
     p = argparse.ArgumentParser()
     for name in ("targets_path", "source_root", "generated_tests_root", "output_path"):

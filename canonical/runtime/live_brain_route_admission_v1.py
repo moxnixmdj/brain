@@ -930,6 +930,44 @@ def failure_kind(result: Mapping[str, Any]) -> str:
     return FAILURE_KIND_UNKNOWN
 
 
+def _refusal_status_and_payload(exc: BaseException, selected: Any) -> tuple[str, str, dict[str, Any]] | None:
+    """Name the reason a capability refused, from the convention the adapters already use.
+
+    Roughly forty adapter classes in ``bound_capabilities/`` and ``swe_kernel/`` refuse by raising
+    ``RuntimeError("<CLASS>:<detail>")``.  The door recognised only the
+    ``SystemExit(json.dumps({"error": True, ...}))`` spelling, so every ``RuntimeError`` spelling fell
+    through to ``FAIL__LIVE_CONTROLLER_EXECUTION``: measured on main at ``6aa5dab``, seven of the
+    thirteen unserved census sentences were deliberate refusals wearing a crash's label.
+
+    When the class is a wrapper (``POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM``) the inner token is
+    promoted, because ``CPP_NO_APPLICABLE_TRANSFORM``, ``PYPROJECT_ALREADY_PINNED_OR_EMPTY`` and
+    ``NO_FLAKY_TEST_DETECTED`` are three different missing capabilities with three different fixes.
+
+    Returns ``None`` -- meaning "not a capability refusal, classify it some other way" -- for a plain
+    message with no class token, and for ``_REFUSAL_CLASS_EXCLUDED``, whose members are control flow
+    signals the caller may still recover from rather than evidence of a missing capability.
+    """
+    _text = str(exc).strip()
+    # An already-satisfied answer is not a refusal.  ``BASELINE_ALREADY_PASSES:test_x`` matches the
+    # class convention exactly, and the door's own already-satisfied branch is what must win -- so
+    # this is checked here as well as by call order, which keeps the precedence a property of the
+    # classifier instead of a property of where it happens to be called from.
+    if _ALREADY_SATISFIED_RE.search(_text):
+        return None
+    _refusal = _REFUSAL_CLASS_RE.match(_text)
+    if _refusal is None or _refusal.group(1) in _REFUSAL_CLASS_EXCLUDED:
+        return None
+    _class = _refusal.group(1)[:60]
+    _detail = _refusal.group(2).strip()[:200]
+    _inner = _REFUSAL_CLASS_RE.match(_detail) or _REFUSAL_TOKEN_RE.match(_detail)
+    if _inner is not None:
+        _class = _inner.group(1)[:60]
+    return ("FAIL_CLOSED__CAPABILITY_REFUSED_" + _class,
+            "CAPABILITY_REFUSED:" + (_detail or _class),
+            {"capability": selected, "error": True, "class": _class,
+             "reason": _detail or _class})
+
+
 def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
     out = {"schema": LIVE_SCHEMA, "status": status, "pass": False, "task_id": task_id, "failure_class": failure_class,
            "executed": extra.pop("executed", False), "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
@@ -1298,6 +1336,13 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                 "tool_executed": tool_executed,
                 "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
             }
+        _refusal = _refusal_status_and_payload(exc, selected)
+        if _refusal is not None:
+            _status, _reason, _payload = _refusal
+            return _fail(task_id, _status, _reason, started, executed=True,
+                         compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         refusal_payload=_payload, executor=LOCAL_EXECUTION_PROOF,
+                         tool_executed=True)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
                      executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
@@ -1661,7 +1706,7 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                 # its helper is reused rather than redrawn.
                 _exec_entry = dict(_entry)
                 _exec_entry["action_template"] = _typed_plan_module._execution_template(
-                    _entry, set((_report or {}).get("adapter_defaulted") or {}))
+                    _entry, set((_report or {}).get("adapter_defaulted") or {}), _inputs)
         except Exception:  # noqa: BLE001 - a derivation fault keeps the declared template
             _exec_entry = _entry
         _declared = _exec_entry.get("declared_action_template")
@@ -2693,6 +2738,11 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
             and not _declares_it_does_not_write(entry)
             and not (_READ_SURFACE_RE.search(provides) and not _declares_edits)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
+    # A plan-only row is not a general reader. Its no-write limitation must
+    # not authorize it to answer a different question (e.g. a summary request).
+    if (_read_only_request and _writes and _declares_it_does_not_write(entry)
+            and not _asks_only_for_a_plan(text)):
+        out.append("STATED_QUESTION_ANSWERED_BY_A_CHANGE_PLANNER:" + (cid or "UNNAMED"))
     language = _LANGUAGE_OF_GOAL_RE.search(text)
     if (language and _PYTHON_ONLY_RE.search(surface)
             and not _LANGUAGE_SURFACE_RE.search(surface)):
@@ -3670,14 +3720,10 @@ def _scope_claim_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
         if not isinstance(files, int):
             files = doc.get("parsed_file_count") or doc.get("file_count")
         # A single-file scope is the one case that is provably too small to answer "every X":
-        # a call site can live in any other module, and one file is not the codebase -- unless
-        # that single file IS the only Python module in its package and parent directory.
+        # a call site can live in any other module. Empty parents and siblings
+        # do not prove there are no callers elsewhere in the repository.
         if scope.strip().endswith((".py", ".pyw")) and files in (None, 1, 0):
-            scope_p = (ROOT / scope.strip()).resolve()
-            parent_py = list(scope_p.parent.glob("*.py")) if scope_p.parent.is_dir() else []
-            upper_py = list(scope_p.parent.parent.glob("*.py")) if scope_p.parent.parent.is_dir() else []
-            if len(parent_py) != 1 or len(upper_py) > 0:
-                return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
+            return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
     return []
 
 
@@ -4221,6 +4267,30 @@ _JUDGED_FAILURE_CLASSES = frozenset({
 # allowed to answer, and the caller was told the outcome was unknown when a capability that
 # measures exactly this existed.  A raise is not a side effect; what matters is what landed.
 # The repair adapters' own statement that the requested end state already holds.
+# THE ADAPTER'S OWN REFUSAL CLASS IS A REFUSAL, NOT A CRASH.
+#
+# This repository's bound capabilities refuse by raising ``RuntimeError("<CLASS>:<detail>")`` --
+# ``PATH_MISSING:``, ``MODULE_NOT_FOUND:``, ``XLSX_HEADER_INVALID:``, ``TARGET_SYMBOL_COLLISION:``,
+# ``POLYGLOT_REFUSED:`` and ~40 more, by grep.  It is the same ``_systemic`` convention the
+# ``SystemExit(json.dumps({"error": true, "reason": ...}))`` path already parses; only the SPELLING
+# differs.  The JSON branch below recognised one spelling and the other fell through to
+# ``FAIL__LIVE_CONTROLLER_EXECUTION``, so a capability that ran and answered "no" was reported as a
+# controller that crashed.
+#
+# Measured 2026-10-31 on the advanced census: every one of the 7 sentences reported as
+# FAIL__LIVE_CONTROLLER_EXECUTION was in fact a named refusal from the capability itself --
+# ``POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM`` x2, ``SQL_UNSUPPORTED_DDL_EDIT``,
+# ``PYPROJECT_ALREADY_PINNED_OR_EMPTY`` (that pyproject declares no dependencies at all),
+# ``NO_DECLARED_DEPENDENCY_TO_VENDOR``, ``NO_FLAKY_TEST_DETECTED`` and ``TARGET_SYMBOL_COLLISION:add``
+# (both stated files define ``add``).  Seven honest answers were being reported as seven crashes.
+#
+# The rule is deliberately narrow: the message must BEGIN with an all-caps class token of at least
+# three characters and a colon.  ``ACTION_EXPECTATION_FAILED`` is excluded because the expectation
+# branch above already owns it, and a plain human message cannot match.
+_REFUSAL_CLASS_RE = re.compile(r"^([A-Z][A-Z0-9_]{2,}):(.*)$", re.DOTALL)
+_REFUSAL_TOKEN_RE = re.compile(r"^([A-Z][A-Z0-9_]{2,})$")
+_REFUSAL_CLASS_EXCLUDED = frozenset({"ACTION_EXPECTATION_FAILED"})
+
 _ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|NOTHING_TO_DO",
                                    re.IGNORECASE)
 
