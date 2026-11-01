@@ -77,15 +77,15 @@ MAX_NODES = 400
 _ALIASES: dict[str, tuple[str, ...]] = {
     "caller": ("callers_of", "callers", "call_sites", "call_edges", "callers"),
     "function": ("functions", "function_names", "defs", "definitions"),
-    "class": ("classes", "class_names"),
-    "import": ("imports", "distinct_imported_modules", "imported_modules", "modules"),
-    "definition": ("definitions", "symbols", "functions"),
+    "class": ("class_hierarchy", "classes", "class_names"),
+    "import": ("importing_modules", "importers", "import_cycles", "imports", "distinct_imported_modules", "imported_modules", "modules"),
+    "definition": ("definitions", "primary_definition", "symbols", "functions"),
     "symbol": ("symbols", "definitions"),
     "reference": ("references", "reference_sites", "references_of"),
-    "file": ("files", "paths"),
+    "file": ("importing_modules", "files", "paths"),
     "commit": ("rows", "commits"),
     "branch": ("rows", "branches"),
-    "test": ("tests", "results", "rows", "failures", "failed_tests"),
+    "test": ("impacted_tests", "selected_tests", "tests", "results", "rows", "failures", "failed_tests"),
     "duplicate": ("duplicates", "clones", "clone_pairs", "duplicate_groups"),
     "dead": ("dead_symbols", "dead_code"),
 }
@@ -96,8 +96,8 @@ _NOUNS: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
     (name, re.compile(pattern, re.I)) for name, pattern in (
         ("caller", r"\b(callers?|call\s?sites?|who\s+calls)\b"),
         ("function", r"\b(functions?|methods?)\b"),
-        ("class", r"\b(classes)\b"),
-        ("import", r"\b(imports?|imported\s+modules?)\b"),
+        ("class", r"\b(classes|class\s+hierarchy)\b"),
+        ("import", r"\b(import\s+cycles?|imports?|imported\s+modules?)\b"),
         ("definition", r"\b(definitions?)\b"),
         ("symbol", r"\b(symbols?)\b"),
         ("reference", r"\b(references?|usages?)\b"),
@@ -167,7 +167,7 @@ def asked(goal: str) -> dict[str, Any] | None:
         # a thing, and a count of definitions is not it.
         token = hit.group(1)
         plural = bool(re.search(r"(s|es)$", token, re.I)) or token.lower() in {
-            "call", "call site", "dead code", "copy-paste"}
+            "call", "call site", "dead code", "copy-paste", "class hierarchy", "import cycle"}
         # "WRITE ITS NAME TO <file>" IS NOT "NAME THEM".  The bare word `name` was read as an
         # imperative to enumerate, so "Which function in <d>/app is at fault? Write its name to
         # <d>/answer.json" was classified ENUMERATE (aliases functions/function_names/defs) while
@@ -178,7 +178,7 @@ def asked(goal: str) -> dict[str, Any] | None:
         # by a PLURAL object ("write the names"), by "name them/each/all", or by an explicit
         # list/every verb -- never by the singular noun phrase "its name".
         explicit = bool(re.search(
-            r"\b(?:list|enumerate|name\s+(?:them|each|all)|"
+            r"\b(?:list|enumerate|name\s+(?:them|each|all)|which\s+(?:modules?|files?)|"
             r"(?:find|show|collect|write)\s+(?:every|all))\b", text, re.I))
         if plural or explicit or noun in {"caller", "duplicate", "dead", "definition"}:
             return {"schema": SCHEMA, "kind": "ENUMERATE", "noun": noun, "token": token,
@@ -332,10 +332,16 @@ def _narrow(value: Any, goal: str) -> Any:
     if not isinstance(value, Mapping):
         return value
     text = str(goal or "")
+    ident_tokens = {tok for tok in re.findall(r"[A-Za-z0-9_]+", text) if len(tok) >= 3}
     for key in value:
         name = str(key)
-        if len(name) >= 3 and re.search(r"(?<![A-Za-z0-9_])" + re.escape(name) + r"(?![A-Za-z0-9_])", text):
+        if len(name) < 3:
+            continue
+        if name in ident_tokens:
             return {name: value[key]}
+        if not name.isidentifier() and name in text:
+            if re.search(r"(?<![A-Za-z0-9_])" + re.escape(name) + r"(?![A-Za-z0-9_])", text):
+                return {name: value[key]}
     return value
 
 
@@ -358,6 +364,10 @@ def _bounded(value: Any, limit: int = 50) -> Any:
 # and the fix is not a new taxonomy: every row already states what it observed, so a PASS that
 # answered nothing hands over that statement.
 _OBSERVATION_FIELDS: tuple[str, ...] = ("observed_effect", "observation", "state", "snapshot")
+_ARTIFACT_FALLBACK_FIELDS: tuple[str, ...] = (
+    "taint_flows", "flows", "import_cycles", "provenance_steps",
+    "flaky_tests", "class_hierarchy", "importing_modules", "definitions",
+)
 
 
 def _observation_hit(inner: Mapping[str, Any]) -> tuple[str, Mapping[str, Any]] | None:
@@ -366,6 +376,28 @@ def _observation_hit(inner: Mapping[str, Any]) -> tuple[str, Mapping[str, Any]] 
         if isinstance(value, Mapping) and value:
             return field, value
     return None
+
+
+def _extract_complexity_observation(goal: str, payload: Mapping[str, Any]) -> tuple[str, Any] | None:
+    if not re.search(r"\b(?:cyclomatic|complexity)\b", str(goal or ""), re.I):
+        return None
+    files_list = payload.get("files")
+    funcs: list[Mapping[str, Any]] = []
+    if isinstance(files_list, list):
+        for fitem in files_list:
+            if isinstance(fitem, Mapping) and isinstance(fitem.get("functions"), list):
+                for fn_row in fitem["functions"]:
+                    if isinstance(fn_row, Mapping):
+                        funcs.append(fn_row)
+    elif isinstance(payload.get("functions"), list):
+        funcs = [r for r in payload["functions"] if isinstance(r, Mapping)]
+    if not funcs:
+        return None
+    for row in funcs:
+        nm = str(row.get("name") or row.get("qualname") or "")
+        if len(nm) >= 3 and re.search(r"(?<![A-Za-z0-9_])" + re.escape(nm) + r"(?![A-Za-z0-9_])", str(goal or "")):
+            return "functions", [row]
+    return "functions", funcs
 
 
 def deliver_observation(result: "dict[str, Any]") -> list[str]:
@@ -403,6 +435,47 @@ def deliver_observation(result: "dict[str, Any]") -> list[str]:
         }
         return []
     return []
+
+
+def _deliver_artifact_fallback(goal: str, result: "dict[str, Any]", root: pathlib.Path | None = None) -> None:
+    rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
+    for row in rows:
+        inner = row.get("result") if isinstance(row.get("result"), Mapping) else None
+        if inner is None:
+            continue
+        path = _artifact_path(inner)
+        if path is None:
+            continue
+        payload, _ = _read_artifact(path, root)
+        if not isinstance(payload, Mapping):
+            continue
+        c_hit = _extract_complexity_observation(goal, payload)
+        if c_hit is not None:
+            field, value = c_hit
+            result["answer"] = {
+                "schema": SCHEMA,
+                "noun": "observation",
+                "field": field,
+                "source": str(path),
+                "count": len(value),
+                "value": _bounded(value),
+                "truncated": False,
+            }
+            return
+        if result.get("answer") is None:
+            for field in _ARTIFACT_FALLBACK_FIELDS:
+                val = payload.get(field)
+                if isinstance(val, list):
+                    result["answer"] = {
+                        "schema": SCHEMA,
+                        "noun": "observation",
+                        "field": field,
+                        "source": str(path),
+                        "count": len(val),
+                        "value": _bounded(val),
+                        "truncated": len(_bounded(val)) < len(val),
+                    }
+                    return
 
 
 # A PASS MUST HAND OVER WHAT THE ROW FOUND.  Measured 2026-11-01 on ``34124aa``: of the 34
@@ -562,6 +635,8 @@ def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = No
         delivered = deliver_observation(result)  # type: ignore[arg-type]
         if result.get("answer") is None:  # type: ignore[attr-defined]
             deliver_surface(goal, result)  # type: ignore[arg-type]
+        if root is not None and (result.get("answer") is None or re.search(r"\b(?:cyclomatic|complexity)\b", str(goal or ""), re.I)):  # type: ignore[attr-defined]
+            _deliver_artifact_fallback(goal, result, root)  # type: ignore[arg-type]
         return delivered
     rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
     if not rows:

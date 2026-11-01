@@ -42,6 +42,12 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
 
     if op in {"cpp_repair", "cpp_fix_off_by_one"}:
         res = engine.cpp_transform_and_verify(target, goal_spec)
+    elif op == "rust_repair":
+        res = engine.rust_repair_and_verify(target, goal_spec)
+    elif op == "go_repair":
+        res = engine.go_repair_and_verify(target, goal_spec)
+    elif op == "ts_repair":
+        res = engine.ts_repair_and_verify(target, goal_spec)
     elif op == "rust_add_function":
         res = engine.rust_transform_and_verify(target, goal_spec)
     elif op == "go_add_function":
@@ -110,12 +116,14 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         res = engine.generate_cyclonedx_sbom_and_verify(target, goal_spec)
     elif op == "write_pr_description":
         res = engine.write_pr_description_and_verify(target, goal_spec)
-    elif op in {"ts_generate_declarations", "port_python_to_js", "port_python_to_go", "port_python_to_rust"}:
+    elif op in {"ts_generate_declarations", "port_python_to_js", "port_python_to_ts", "port_python_to_go", "port_python_to_rust"}:
         proj_raw = str(args.get("project_root") or "").strip()
         dest_p = None
-        if op == "port_python_to_js" and proj_raw and proj_raw not in {".", "auto"} and proj_raw.endswith((".js", ".mjs")):
+        if proj_raw and proj_raw not in {".", "auto"} and proj_raw.endswith((".js", ".mjs", ".ts", ".go", ".rs")):
             dest_p = _safe_path(repo, proj_raw, must_exist=False)
         res = engine.polyglot_port_and_dts_verify(target, goal_spec, dest_path=dest_p)
+    elif op == "run_make_target":
+        res = engine.run_make_target_and_verify(target, goal_spec)
     else:
         raise RuntimeError("POLYGLOT_UNSUPPORTED_OPERATION:" + op)
 

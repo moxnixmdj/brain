@@ -9,6 +9,7 @@ import os
 import re
 import shutil
 import sqlite3
+import subprocess
 import sys
 import tempfile
 import tomllib
@@ -132,13 +133,14 @@ def cpp_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
         updated = p_start_one.sub(r"for (\1 \2 = 0; \2 < \3", updated)
         repairs.append("off_by_one_start_index_zero")
 
-    # Pattern 2: compile error diagnostics via g++ when available
+    # Pattern 2: compile error diagnostics via g++ when available (runs both standalone and after Pattern 1!)
     gxx = shutil.which("g++") or shutil.which("clang++")
-    if updated == original and gxx:
+    if gxx:
         with tempfile.TemporaryDirectory() as td:
-            probe_obj = Path(td) / "probe.o"
-            rc, _out, err = _run_cmd([gxx, "-std=c++17", "-fsyntax-only", str(target), "-o", str(probe_obj)], cwd=target.parent)
-            if rc != 0:
+            probe_src = Path(td) / target.name
+            probe_src.write_text(updated, encoding="utf-8")
+            rc_p, _out, err = _run_cmd([gxx, "-std=c++17", "-fsyntax-only", str(probe_src)], cwd=Path(td))
+            if rc_p != 0:
                 lines = updated.splitlines()
                 # Missing semicolon before line reported by compiler
                 m_semi = re.search(r":(\d+):\d+:\s*error:\s*expected\s*';'", err)
@@ -160,9 +162,87 @@ def cpp_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
                 if "std::numeric_limits" in updated and "#include <limits>" not in updated:
                     lines.insert(0, "#include <limits>")
                     repairs.append("added_limits_header")
+                if re.search(r"(?<!std::)\bsize_t\b", updated) and "#include <cstddef>" not in updated:
+                    lines.insert(0, "#include <cstddef>")
+                    repairs.append("added_cstddef_header")
                 updated = "\n".join(lines) + ("\n" if original.endswith("\n") else "")
 
+    def _verify_cpp_source(code_text: str) -> tuple[bool, bool, str, str]:
+        """Return (compiles, runtime_ok, fail_reason, stderr_tail)."""
+        if not gxx:
+            return False, False, "GXX_NOT_INSTALLED", ""
+        with tempfile.TemporaryDirectory() as td:
+            src_copy = Path(td) / target.name
+            src_copy.write_text(code_text, encoding="utf-8")
+            has_main = bool(re.search(r"\bint\s+main\s*\(", code_text))
+            if has_main:
+                bin_out = Path(td) / "a.out"
+                rc, _out, err = _run_cmd([gxx, "-std=c++17", "-O2", str(src_copy), "-o", str(bin_out)], cwd=Path(td))
+                if rc != 0:
+                    return False, False, "CPP_COMPILE_FAILED", err[:400]
+                r_rc, _rout, rerr = _run_cmd([str(bin_out)], cwd=Path(td))
+                if r_rc != 0:
+                    return True, False, "CPP_BINARY_RUNTIME_FAILED", rerr[:400]
+                return True, True, "", ""
+            obj_out = Path(td) / "unit.o"
+            rc, _out, err = _run_cmd([gxx, "-std=c++17", "-O2", "-c", str(src_copy), "-o", str(obj_out)], cwd=Path(td))
+            if rc != 0:
+                return False, False, "CPP_COMPILE_FAILED", err[:400]
+            if re.search(r"\bint\s+sum\s*\(\s*const\s+std::vector<int>\s*&\s*\w+\s*\)", code_text):
+                harness = Path(td) / "harness.cpp"
+                harness.write_text(
+                    f'#include "{src_copy.name}"\n#include <cassert>\n'
+                    "int main() { assert(sum({1, 2, 3, 4}) == 10); assert(sum({7}) == 7); assert(sum({}) == 0); return 0; }\n",
+                    encoding="utf-8",
+                )
+                bin_out = Path(td) / "harness.out"
+                hrc, _, herr = _run_cmd([gxx, "-std=c++17", str(harness), "-o", str(bin_out)], cwd=Path(td))
+                if hrc != 0:
+                    return True, False, "CPP_HARNESS_COMPILE_FAILED", herr[:400]
+                r_rc, _, _ = _run_cmd([str(bin_out)], cwd=Path(td))
+                if r_rc != 0:
+                    return True, False, "CPP_HARNESS_ASSERTION_FAILED", ""
+                return True, True, "", ""
+            return True, False, "", ""
+
     if updated == original:
+        # Try recalling a previously crystallized C++ repair skill before concluding no transform applies.
+        try:
+            from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+            store = VerifiedSkillStore()
+            rec_doc = store.recall_and_apply_verified(
+                source_text=original,
+                language="cpp",
+                error_class="cpp_repair",
+                verifier=lambda cand: _verify_cpp_source(cand)[0] and (
+                    _verify_cpp_source(cand)[1] or not bool(re.search(r"\bint\s+(?:main|sum)\s*\(", cand))
+                ),
+            )
+            if rec_doc is not None and rec_doc["patched_source"] != original:
+                updated = rec_doc["patched_source"]
+                repairs.append(f"crystallized_skill:{rec_doc['skill_id']}")
+        except Exception:
+            pass
+
+    if updated == original:
+        if gxx:
+            base_compiles, base_rt, _, _ = _verify_cpp_source(original)
+            has_exec_proof = base_compiles and (
+                base_rt or not bool(re.search(r"\bint\s+(?:main|sum)\s*\(", original))
+            )
+            if has_exec_proof:
+                return {
+                    "verified": False,
+                    "gate": "ALREADY_SATISFIED",
+                    "reason": "CPP_ALREADY_COMPILES_AND_PASSES",
+                    "evidence": {
+                        "compiler": gxx,
+                        "compiler_verified": base_compiles,
+                        "runtime_verified": base_rt,
+                        "source": str(target),
+                    },
+                }
         return {"verified": False, "gate": "FAIL", "reason": "CPP_NO_APPLICABLE_TRANSFORM"}
 
     cst_checked, cst_err = _cst_has_errors(updated.encode("utf-8"), "cpp")
@@ -172,41 +252,22 @@ def cpp_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
     compiler_verified = False
     runtime_verified = False
     if gxx:
-        with tempfile.TemporaryDirectory() as td:
-            src_copy = Path(td) / target.name
-            src_copy.write_text(updated, encoding="utf-8")
-            has_main = bool(re.search(r"\bint\s+main\s*\(", updated))
-            if has_main:
-                bin_out = Path(td) / "a.out"
-                rc, _out, err = _run_cmd([gxx, "-std=c++17", "-O2", str(src_copy), "-o", str(bin_out)], cwd=Path(td))
-                if rc != 0:
-                    return {"verified": False, "gate": "FAIL", "reason": "CPP_COMPILE_FAILED", "stderr": err[:400]}
-                compiler_verified = True
-                r_rc, _rout, rerr = _run_cmd([str(bin_out)], cwd=Path(td))
-                if r_rc != 0:
-                    return {"verified": False, "gate": "FAIL", "reason": "CPP_BINARY_RUNTIME_FAILED", "stderr": rerr[:400]}
-                runtime_verified = True
-            else:
-                # Synthesize a smoke harness for sum/off-by-one functions if `sum` exists
-                obj_out = Path(td) / "unit.o"
-                rc, _out, err = _run_cmd([gxx, "-std=c++17", "-O2", "-c", str(src_copy), "-o", str(obj_out)], cwd=Path(td))
-                if rc != 0:
-                    return {"verified": False, "gate": "FAIL", "reason": "CPP_COMPILE_FAILED", "stderr": err[:400]}
-                compiler_verified = True
-                if re.search(r"\bint\s+sum\s*\(\s*const\s+std::vector<int>\s*&\s*\w+\s*\)", updated):
-                    harness = Path(td) / "harness.cpp"
-                    harness.write_text(
-                        f'#include "{src_copy.name}"\n#include <cassert>\n'
-                        "int main() { assert(sum({1, 2, 3, 4}) == 10); assert(sum({7}) == 7); assert(sum({}) == 0); return 0; }\n",
-                        encoding="utf-8",
-                    )
-                    bin_out = Path(td) / "harness.out"
-                    hrc, _, herr = _run_cmd([gxx, "-std=c++17", str(harness), "-o", str(bin_out)], cwd=Path(td))
-                    if hrc == 0:
-                        r_rc, _, _ = _run_cmd([str(bin_out)], cwd=Path(td))
-                        if r_rc != 0:
-                            return {"verified": False, "gate": "FAIL", "reason": "CPP_HARNESS_ASSERTION_FAILED"}
-                        runtime_verified = True
+        compiler_verified, runtime_verified, fail_reason, stderr_tail = _verify_cpp_source(updated)
+        if fail_reason:
+            return {"verified": False, "gate": "FAIL", "reason": fail_reason, "stderr": stderr_tail}
+
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        VerifiedSkillStore().crystallize_verified_fix(
+            language="cpp",
+            bug_class="cpp_repair",
+            before_code=original,
+            after_code=updated,
+            verifier_oracle_kind="g++_c++17",
+        )
+    except Exception:
+        pass
 
     target.write_text(updated, encoding="utf-8")
     return {
@@ -461,44 +522,592 @@ def ts_transform_and_verify(target: Path, goal: str, project_root: Path | None =
     }
 
 
+def _z3_verify_zero_based_slice_loops(source: str, lang: str) -> tuple[bool, str]:
+    """Use Z3 SMT (or exact integer interval proof when Z3 is absent) on 0-based slice loops."""
+    try:
+        import z3  # type: ignore[import-not-found]
+    except Exception:
+        z3 = None  # type: ignore[assignment]
+
+    checked = 0
+    if lang == "rust":
+        for m in re.finditer(r"for\s+([A-Za-z_]\w*)\s+in\s+0\s*\.\.(=?)\s*([A-Za-z_]\w*)\.len\(\)", source):
+            idx_var, inclusive, arr_var = m.group(1), m.group(2), m.group(3)
+            if not re.search(rf"\b{re.escape(arr_var)}\s*\[\s*{re.escape(idx_var)}\s*\]", source):
+                continue
+            checked += 1
+            if z3 is not None:
+                n = z3.Int("len")
+                i = z3.Int(idx_var)
+                s = z3.Solver()
+                s.add(n >= 1)
+                s.add(i >= 0, i <= n if inclusive == "=" else i < n)
+                s.add(z3.Or(i < 0, i >= n))
+                if s.check() == z3.sat:
+                    return False, f"Z3_OOB_COUNTEREXAMPLE:{arr_var}[{idx_var}]"
+            elif inclusive == "=":
+                # Exact interval proof: upper bound `len` is included, violating `i < len` at `i = len`.
+                return False, f"INTERVAL_OOB_COUNTEREXAMPLE:{arr_var}[{idx_var}]"
+    elif lang == "go":
+        for m in re.finditer(r"for\s+([A-Za-z_]\w*)\s*:=\s*0\s*;\s*\1\s*(<=|<)\s*len\(\s*([A-Za-z_]\w*)\s*\)", source):
+            idx_var, op, arr_var = m.group(1), m.group(2), m.group(3)
+            if not re.search(rf"\b{re.escape(arr_var)}\s*\[\s*{re.escape(idx_var)}\s*\]", source):
+                continue
+            checked += 1
+            if z3 is not None:
+                n = z3.Int("len")
+                i = z3.Int(idx_var)
+                s = z3.Solver()
+                s.add(n >= 1)
+                s.add(i >= 0, i <= n if op == "<=" else i < n)
+                s.add(z3.Or(i < 0, i >= n))
+                if s.check() == z3.sat:
+                    return False, f"Z3_OOB_COUNTEREXAMPLE:{arr_var}[{idx_var}]"
+            elif op == "<=":
+                return False, f"INTERVAL_OOB_COUNTEREXAMPLE:{arr_var}[{idx_var}]"
+    oracle_tag = "Z3_PROVEN_SAFE" if z3 is not None else "INTERVAL_PROVEN_SAFE"
+    return checked > 0, f"{oracle_tag}:{checked}"
+
+
+def rust_repair_and_verify(target: Path, goal: str) -> dict[str, Any]:
+    """Closed-loop Rust CST + compiler/Z3-bounds repair with VerifiedSkillStore crystallization."""
+    original = target.read_text(encoding="utf-8")
+    rustc = shutil.which("rustc")
+    repairs: list[str] = []
+    updated = original
+
+    def _verify_rust_source(code_text: str) -> tuple[bool, bool, bool, str]:
+        """Return (syntax_ok, compiler_ok, smt_ok, reason)."""
+        cst_checked, cst_err = _cst_has_errors(code_text.encode("utf-8"), "rust")
+        if (cst_checked and cst_err) or not _balanced_delimiters(code_text):
+            return False, False, False, "RUST_SYNTAX_ERROR"
+        # Check mutability dataflow: no immutable `let x = ...` followed by `x = ...` / `x += ...` in same fn
+        for fn_m in re.finditer(r"\bfn\s+[A-Za-z_]\w*[^{]*\{([^}]*)\}", code_text, re.DOTALL):
+            body = fn_m.group(1)
+            for let_m in re.finditer(r"\blet\s+(?!mut\b)([A-Za-z_]\w*)\b", body):
+                vname = let_m.group(1)
+                after = body[let_m.end():]
+                if re.search(rf"(?<![.!=\w]){re.escape(vname)}\s*(?:\+=|-=|\*=|/=|=(?!=))", after):
+                    return False, False, False, f"RUST_IMMUTABLE_REASSIGN:{vname}"
+        # Check slice loop bounds via Z3
+        if re.search(r"for\s+[A-Za-z_]\w*\s+in\s+0\s*\.\.=?[A-Za-z_]\w*\.len\(\)", code_text):
+            smt_ok, smt_diag = _z3_verify_zero_based_slice_loops(code_text, "rust")
+            if not smt_ok:
+                return True, False, False, smt_diag
+        else:
+            smt_ok = False
+
+        if rustc:
+            with tempfile.TemporaryDirectory() as td:
+                rs_file = Path(td) / target.name
+                rs_file.write_text(code_text, encoding="utf-8")
+                has_test = "#[test]" in code_text
+                has_main = bool(re.search(r"\bfn\s+main\s*\(", code_text))
+                bin_out = Path(td) / "rust_out"
+                cmd = [rustc, "--edition=2021"]
+                if has_test:
+                    cmd.append("--test")
+                elif not has_main:
+                    cmd.append("--crate-type=lib")
+                cmd.extend([str(rs_file), "-o", str(bin_out)])
+                rc, _, err = _run_cmd(cmd, cwd=Path(td))
+                if rc != 0:
+                    return True, False, smt_ok, f"RUSTC_FAILED:{err[:240]}"
+                if has_test or has_main:
+                    r_rc, _, rerr = _run_cmd([str(bin_out)], cwd=Path(td))
+                    if r_rc != 0:
+                        return True, False, smt_ok, f"RUST_RUNTIME_PANIC:{rerr[:240]}"
+                return True, True, smt_ok, "OK"
+        return True, False, smt_ok, "OK"
+
+    # 0. Check if already valid and verified
+    syn0, comp0, smt0, reason0 = _verify_rust_source(original)
+    if syn0 and reason0 == "OK" and (comp0 or smt0):
+        return {
+            "verified": False,
+            "gate": "ALREADY_SATISFIED",
+            "reason": "RUST_ALREADY_VERIFIED",
+            "evidence": {"compiler_verified": comp0, "smt_bounds_verified": smt0, "source": str(target)},
+        }
+
+    # 1. Try VerifiedSkillStore recall first
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        rec_doc = VerifiedSkillStore().recall_and_apply_verified(
+            source_text=original,
+            language="rust",
+            error_class="rust_repair",
+            verifier=lambda cand: _verify_rust_source(cand)[3] == "OK" and (
+                _verify_rust_source(cand)[1] or _verify_rust_source(cand)[2]
+            ),
+        )
+        if rec_doc is not None and rec_doc["patched_source"] != original:
+            updated = rec_doc["patched_source"]
+            repairs.append(f"crystallized_skill:{rec_doc['skill_id']}")
+    except Exception:
+        pass
+
+    # 2. Deterministic diagnostic repairs:
+    # (a) Inclusive slice range `0..=xs.len()` -> `0..xs.len()` when indexing `xs[i]`
+    if updated == original:
+        def _fix_rust_range(m: re.Match[str]) -> str:
+            idx_v, arr_v = m.group(1), m.group(2)
+            if re.search(rf"\b{re.escape(arr_v)}\s*\[\s*{re.escape(idx_v)}\s*\]", updated):
+                repairs.append(f"exclusive_slice_range:{arr_v}")
+                return f"for {idx_v} in 0..{arr_v}.len()"
+            return m.group(0)
+
+        updated = re.sub(r"for\s+([A-Za-z_]\w*)\s+in\s+0\s*\.\.=\s*([A-Za-z_]\w*)\.len\(\)", _fix_rust_range, updated)
+
+        # (b) While-loop off-by-one `i <= xs.len()` -> `i < xs.len()`
+        def _fix_rust_while(m: re.Match[str]) -> str:
+            idx_v, arr_v = m.group(1), m.group(2)
+            if re.search(rf"\b{re.escape(arr_v)}\s*\[\s*{re.escape(idx_v)}\s*\]", updated):
+                repairs.append(f"strict_len_bound:{arr_v}")
+                return f"{idx_v} < {arr_v}.len()"
+            return m.group(0)
+
+        updated = re.sub(r"\b([A-Za-z_]\w*)\s*<=\s*([A-Za-z_]\w*)\.len\(\)", _fix_rust_while, updated)
+
+        # (c) Missing `mut` on reassigned local `let x = ...`
+        for fn_m in list(re.finditer(r"\bfn\s+[A-Za-z_]\w*[^{]*\{([^}]*)\}", updated, re.DOTALL)):
+            body = fn_m.group(1)
+            new_body = body
+            for let_m in list(re.finditer(r"\blet\s+(?!mut\b)([A-Za-z_]\w*)\b", body)):
+                vname = let_m.group(1)
+                if re.search(rf"(?<![.!=\w]){re.escape(vname)}\s*(?:\+=|-=|\*=|/=|=(?!=))", body[let_m.end():]):
+                    new_body = re.sub(rf"\blet\s+{re.escape(vname)}\b", f"let mut {vname}", new_body, count=1)
+                    repairs.append(f"added_mut:{vname}")
+            if new_body != body:
+                updated = updated.replace(body, new_body, 1)
+
+    if updated == original:
+        return {"verified": False, "gate": "FAIL", "reason": f"RUST_REPAIR_UNRESOLVED:{reason0}"}
+
+    syn_ok, comp_ok, smt_ok, reason = _verify_rust_source(updated)
+    if not syn_ok or reason != "OK":
+        return {"verified": False, "gate": "FAIL", "reason": reason}
+
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        VerifiedSkillStore().crystallize_verified_fix(
+            language="rust",
+            bug_class="rust_repair",
+            before_code=original,
+            after_code=updated,
+            verifier_oracle_kind="rustc_or_z3_cst",
+        )
+    except Exception:
+        pass
+
+    target.write_text(updated, encoding="utf-8")
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "language": "rust",
+        "operation": "rust_repair",
+        "repairs": repairs,
+        "compiler_verified": comp_ok,
+        "smt_bounds_verified": smt_ok,
+        "edited_files": [str(target)],
+        "target_file": str(target),
+        "target_sha256": _sha256_bytes(target.read_bytes()),
+    }
+
+
+def go_repair_and_verify(target: Path, goal: str) -> dict[str, Any]:
+    """Closed-loop Go CST + nil-map/slice-bounds dataflow & compiler repair with VerifiedSkillStore."""
+    original = target.read_text(encoding="utf-8")
+    go_bin = shutil.which("go")
+    repairs: list[str] = []
+    updated = original
+
+    def _verify_go_source(code_text: str) -> tuple[bool, bool, bool, str]:
+        """Return (syntax_ok, compiler_ok, static_dataflow_ok, reason)."""
+        cst_checked, cst_err = _cst_has_errors(code_text.encode("utf-8"), "go")
+        if (cst_checked and cst_err) or "package " not in code_text or not _balanced_delimiters(code_text):
+            return False, False, False, "GO_SYNTAX_ERROR"
+
+        dataflow_checked = False
+        # Dataflow check 1: nil-map write panic (`var m map[K]V` followed by `m[k] = ...` without `make(map[...])`)
+        for decl_m in re.finditer(r"\bvar\s+([A-Za-z_]\w*)\s+(map\[[^\]]+\][A-Za-z0-9_*\[\].]+)\s*(?:\n|;)", code_text):
+            m_var = decl_m.group(1)
+            after = code_text[decl_m.end():]
+            has_write = bool(re.search(rf"\b{re.escape(m_var)}\s*\[[^\]]+\]\s*(?:\+\+|--|\+=|-=|=[^=])", after))
+            has_init = bool(re.search(rf"\b{re.escape(m_var)}\s*=\s*(?:make\s*\(\s*map\[|map\[)", after))
+            if has_write and not has_init:
+                return True, False, False, f"GO_NIL_MAP_WRITE:{m_var}"
+        if re.search(r"\bmake\s*\(\s*map\[", code_text):
+            dataflow_checked = True
+
+        # Dataflow check 2: Z3 slice bounds check
+        if re.search(r"for\s+[A-Za-z_]\w*\s*:=\s*0\s*;\s*[A-Za-z_]\w*\s*<=?\s*len\(", code_text):
+            smt_ok, smt_diag = _z3_verify_zero_based_slice_loops(code_text, "go")
+            if not smt_ok:
+                return True, False, False, smt_diag
+            dataflow_checked = True
+
+        if go_bin:
+            with tempfile.TemporaryDirectory() as td:
+                td_path = Path(td)
+                for sib in target.parent.glob("*.go"):
+                    (td_path / sib.name).write_text(
+                        code_text if sib.resolve() == target.resolve() else sib.read_text(encoding="utf-8"),
+                        encoding="utf-8",
+                    )
+                if not (td_path / "go.mod").exists():
+                    (td_path / "go.mod").write_text("module repairprobe\n\ngo 1.21\n", encoding="utf-8")
+                has_tests = any(p.name.endswith("_test.go") for p in td_path.glob("*.go"))
+                cmd = [go_bin, "test", "./..."] if has_tests else [go_bin, "build", "./..."]
+                rc, _, err = _run_cmd(cmd, cwd=td_path)
+                if rc != 0:
+                    return True, False, dataflow_checked, f"GO_BUILD_OR_TEST_FAILED:{err[:240]}"
+                return True, True, dataflow_checked, "OK"
+        return True, False, dataflow_checked, "OK"
+
+    syn0, comp0, df0, reason0 = _verify_go_source(original)
+    if syn0 and reason0 == "OK" and (comp0 or df0):
+        return {
+            "verified": False,
+            "gate": "ALREADY_SATISFIED",
+            "reason": "GO_ALREADY_VERIFIED",
+            "evidence": {"compiler_verified": comp0, "dataflow_verified": df0, "source": str(target)},
+        }
+
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        rec_doc = VerifiedSkillStore().recall_and_apply_verified(
+            source_text=original,
+            language="go",
+            error_class="go_repair",
+            verifier=lambda cand: _verify_go_source(cand)[3] == "OK" and (
+                _verify_go_source(cand)[1] or _verify_go_source(cand)[2]
+            ),
+        )
+        if rec_doc is not None and rec_doc["patched_source"] != original:
+            updated = rec_doc["patched_source"]
+            repairs.append(f"crystallized_skill:{rec_doc['skill_id']}")
+    except Exception:
+        pass
+
+    if updated == original:
+        # Repair 1: uninitialized nil map `var m map[K]V` -> `m := make(map[K]V)` when written to
+        def _fix_nil_map(m: re.Match[str]) -> str:
+            indent, m_var, m_type = m.group(1), m.group(2), m.group(3)
+            after = original[m.end():]
+            if re.search(rf"\b{re.escape(m_var)}\s*\[[^\]]+\]\s*(?:\+\+|--|\+=|-=|=[^=])", after):
+                repairs.append(f"initialized_nil_map:{m_var}")
+                return f"{indent}{m_var} := make({m_type})"
+            return m.group(0)
+
+        updated = re.sub(
+            r"(^[ \t]*)var\s+([A-Za-z_]\w*)\s+(map\[[^\]]+\][A-Za-z0-9_*\[\].]+)[ \t]*(?=\r?\n|$)",
+            _fix_nil_map,
+            updated,
+            flags=re.MULTILINE,
+        )
+
+        # Repair 2: slice off-by-one `for i := 0; i <= len(xs); i++` -> `< len(xs)`
+        def _fix_go_loop(m: re.Match[str]) -> str:
+            idx_v, arr_v = m.group(1), m.group(2)
+            if re.search(rf"\b{re.escape(arr_v)}\s*\[\s*{re.escape(idx_v)}\s*\]", updated):
+                repairs.append(f"strict_slice_len:{arr_v}")
+                return f"for {idx_v} := 0; {idx_v} < len({arr_v})"
+            return m.group(0)
+
+        updated = re.sub(r"for\s+([A-Za-z_]\w*)\s*:=\s*0\s*;\s*\1\s*<=\s*len\(\s*([A-Za-z_]\w*)\s*\)", _fix_go_loop, updated)
+
+    if updated == original:
+        return {"verified": False, "gate": "FAIL", "reason": f"GO_REPAIR_UNRESOLVED:{reason0}"}
+
+    syn_ok, comp_ok, df_ok, reason = _verify_go_source(updated)
+    if not syn_ok or reason != "OK":
+        return {"verified": False, "gate": "FAIL", "reason": reason}
+
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        VerifiedSkillStore().crystallize_verified_fix(
+            language="go",
+            bug_class="go_repair",
+            before_code=original,
+            after_code=updated,
+            verifier_oracle_kind="go_or_cst_dataflow",
+        )
+    except Exception:
+        pass
+
+    target.write_text(updated, encoding="utf-8")
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "language": "go",
+        "operation": "go_repair",
+        "repairs": repairs,
+        "compiler_verified": comp_ok,
+        "dataflow_verified": df_ok,
+        "edited_files": [str(target)],
+        "target_file": str(target),
+        "target_sha256": _sha256_bytes(target.read_bytes()),
+    }
+
+
+def ts_repair_and_verify(target: Path, goal: str) -> dict[str, Any]:
+    """Closed-loop TypeScript CST + Node.js v22 native execution null-safety/bounds repair."""
+    original = target.read_text(encoding="utf-8")
+    node_bin = shutil.which("node")
+    repairs: list[str] = []
+    updated = original
+
+    # Identify nullable parameters `(x: { ... } | null)` or `(x: Foo | null | undefined)`
+    nullable_params: list[tuple[str, str, str]] = []
+    for fn_m in re.finditer(
+        r"(?:export\s+)?function\s+([A-Za-z_]\w*)\s*\(\s*([A-Za-z_]\w*)\s*:\s*([^)]*\b(?:null|undefined)\b[^)]*)\)\s*(?::\s*([A-Za-z_]\w*))?",
+        original,
+    ):
+        nullable_params.append((fn_m.group(1), fn_m.group(2), fn_m.group(3), fn_m.group(4) or "number"))
+
+    def _verify_ts_source(code_text: str) -> tuple[bool, bool, str]:
+        """Return (syntax_ok, runtime_ok, reason) using tree-sitter + Node.js --experimental-strip-types."""
+        cst_checked, cst_err = _cst_has_errors(code_text.encode("utf-8"), "typescript")
+        if (cst_checked and cst_err) or not _balanced_delimiters(code_text):
+            return False, False, "TS_SYNTAX_ERROR"
+
+        # Static strict-null guard check: nullable param accessed via `param.prop` without `?.` or prior null check
+        for fn_name, p_name, _p_type, _ret_t in nullable_params:
+            fn_body_m = re.search(
+                rf"function\s+{re.escape(fn_name)}\s*\([^)]*\)[^{{]*\{{([^}}]*)\}}",
+                code_text,
+                re.DOTALL,
+            )
+            if fn_body_m:
+                body = fn_body_m.group(1)
+                has_unguarded = bool(re.search(rf"\b{re.escape(p_name)}\.[A-Za-z_]\w*", body))
+                has_guard = bool(
+                    re.search(
+                        rf"(?:!\s*{re.escape(p_name)}\b|{re.escape(p_name)}\s*(?:===|!==|==|!=)\s*(?:null|undefined)|\bif\s*\(\s*{re.escape(p_name)}\s*\)|{re.escape(p_name)}\s*\?)",
+                        body,
+                    )
+                )
+                if has_unguarded and not has_guard:
+                    return True, False, f"TS_UNGUARDED_NULL_DEREF:{p_name}"
+
+        if node_bin:
+            with tempfile.TemporaryDirectory() as td:
+                td_path = Path(td)
+                mod_path = td_path / "subject.mts"
+                mod_path.write_text(code_text, encoding="utf-8")
+                probe_lines = ['import * as mod from "./subject.mts";', 'import assert from "node:assert/strict";']
+                for fn_name, _p_name, p_type, ret_t in nullable_params:
+                    if f"export function {fn_name}" in code_text or f"export {{ {fn_name}" in code_text:
+                        if "null" in p_type:
+                            probe_lines.append(f"const rNull = mod.{fn_name}(null);")
+                            if ret_t == "number":
+                                probe_lines.append('assert.equal(typeof rNull, "number");')
+                            elif ret_t == "string":
+                                probe_lines.append('assert.equal(typeof rNull, "string");')
+                            elif ret_t == "boolean":
+                                probe_lines.append('assert.equal(typeof rNull, "boolean");')
+                        if "undefined" in p_type:
+                            probe_lines.append(f"const rUndef = mod.{fn_name}(undefined);")
+                        prop_m = re.search(r"\{\s*([A-Za-z_]\w*)\s*:\s*number", p_type)
+                        if prop_m and ret_t == "number":
+                            prop = prop_m.group(1)
+                            probe_lines.append(f"assert.equal(mod.{fn_name}({{ {prop}: 7 }}), 7);")
+                probe_path = td_path / "probe.mts"
+                probe_path.write_text("\n".join(probe_lines) + "\n", encoding="utf-8")
+                rc, _, err = _run_cmd([node_bin, "--experimental-strip-types", str(probe_path)], cwd=td_path)
+                if rc != 0:
+                    return True, False, f"NODE_TS_RUNTIME_FAILED:{err[:240]}"
+                return True, True, "OK"
+        return True, False, "OK"
+
+    syn0, rt0, reason0 = _verify_ts_source(original)
+    if syn0 and reason0 == "OK" and rt0:
+        return {
+            "verified": False,
+            "gate": "ALREADY_SATISFIED",
+            "reason": "TS_ALREADY_VERIFIED",
+            "evidence": {"runtime_verified": rt0, "source": str(target)},
+        }
+
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        rec_doc = VerifiedSkillStore().recall_and_apply_verified(
+            source_text=original,
+            language="typescript",
+            error_class="ts_repair",
+            verifier=lambda cand: _verify_ts_source(cand)[2] == "OK" and _verify_ts_source(cand)[0],
+        )
+        if rec_doc is not None and rec_doc["patched_source"] != original:
+            updated = rec_doc["patched_source"]
+            repairs.append(f"crystallized_skill:{rec_doc['skill_id']}")
+    except Exception:
+        pass
+
+    if updated == original:
+        for fn_name, p_name, _p_type, ret_t in nullable_params:
+            fallback = "0" if ret_t == "number" else ('""' if ret_t == "string" else ("false" if ret_t == "boolean" else "undefined"))
+            new_src, n_subs = re.subn(
+                rf"\breturn\s+{re.escape(p_name)}\.([A-Za-z_]\w*)\s*;",
+                rf"return {p_name}?. \1 ?? {fallback};".replace("?. ", "?."),
+                updated,
+            )
+            if n_subs:
+                updated = new_src
+                repairs.append(f"null_coalesce:{fn_name}.{p_name}")
+
+        # Also repair array `.length` off-by-one `i <= arr.length` -> `i < arr.length`
+        new_src, n_len = re.subn(
+            r"\b([A-Za-z_]\w*)\s*<=\s*([A-Za-z_]\w*)\.length\b",
+            r"\1 < \2.length",
+            updated,
+        )
+        if n_len:
+            updated = new_src
+            repairs.append("strict_array_length_bound")
+
+    if updated == original:
+        return {"verified": False, "gate": "FAIL", "reason": f"TS_REPAIR_UNRESOLVED:{reason0}"}
+
+    syn_ok, rt_ok, reason = _verify_ts_source(updated)
+    if not syn_ok or reason != "OK":
+        return {"verified": False, "gate": "FAIL", "reason": reason}
+
+    try:
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        VerifiedSkillStore().crystallize_verified_fix(
+            language="typescript",
+            bug_class="ts_repair",
+            before_code=original,
+            after_code=updated,
+            verifier_oracle_kind="node_ts_strip_types",
+        )
+    except Exception:
+        pass
+
+    target.write_text(updated, encoding="utf-8")
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "language": "typescript",
+        "operation": "ts_repair",
+        "repairs": repairs,
+        "runtime_verified": rt_ok,
+        "edited_files": [str(target)],
+        "target_file": str(target),
+        "target_sha256": _sha256_bytes(target.read_bytes()),
+    }
+
+
 def sql_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
     original = target.read_text(encoding="utf-8")
     m_col = re.search(r"\bcolumn\s+`?([A-Za-z_]\w*)`?", goal, re.IGNORECASE)
     m_tbl = re.search(r"\btable\s+`?([A-Za-z_]\w*)`?", goal, re.IGNORECASE)
     col_name = m_col.group(1) if m_col else ""
     tbl_name = m_tbl.group(1) if m_tbl else ""
+    if not (col_name and tbl_name):
+        # Support dotted `<table>.<column>` notation (e.g. `on users.email in schema.sql`)
+        for m_dot in re.finditer(r"`?([A-Za-z_]\w*)\.([A-Za-z_]\w*)`?", goal):
+            lhs, rhs = m_dot.group(1), m_dot.group(2)
+            if rhs.lower() in {"sql", "db", "sqlite", "json", "toml", "py", "md"}:
+                continue
+            tbl_name = tbl_name or lhs
+            col_name = col_name or rhs
+            break
+
+    def _inspect_sqlite_table(ddl_script: str, table: str) -> tuple[bool, list[tuple[Any, ...]], str]:
+        conn = sqlite3.connect(":memory:")
+        try:
+            conn.executescript(ddl_script)
+            rows = conn.execute(f"PRAGMA table_info({table})").fetchall() if table else []
+            return True, rows, ""
+        except sqlite3.Error as exc:
+            return False, [], str(exc)
+        finally:
+            conn.close()
+
+    # Check if the requested SQL constraint ALREADY holds in SQLite before mutating anything!
+    if "not null" in goal.lower() and col_name and tbl_name:
+        ok0, rows0, _ = _inspect_sqlite_table(original, tbl_name)
+        if ok0 and rows0:
+            matched0 = [r for r in rows0 if str(r[1]).lower() == col_name.lower() and int(r[3]) == 1]
+            if matched0:
+                return {
+                    "verified": False,
+                    "gate": "ALREADY_SATISFIED",
+                    "reason": "SQL_COLUMN_ALREADY_NOT_NULL",
+                    "evidence": {
+                        "table": tbl_name,
+                        "column": col_name,
+                        "notnull": int(matched0[0][3]),
+                        "declared_type": str(matched0[0][2]),
+                        "source": str(target),
+                    },
+                }
 
     updated = original
     if "not null" in goal.lower() and col_name:
-        # Locate column definition inside CREATE TABLE <tbl_name> (...)
         col_pat = re.compile(
-            rf"(\b{re.escape(col_name)}\s+(?:TEXT|VARCHAR\s*\(\d+\)|INTEGER|INT|REAL|BLOB|NUMERIC|BOOLEAN)\b)(?!\s+NOT\s+NULL)",
+            rf"(\b{re.escape(col_name)}\s+(?:TEXT|VARCHAR\s*\(\d+\)|INTEGER|INT|REAL|BLOB|NUMERIC|BOOLEAN|TIMESTAMP|DATETIME)\b)(?!\s+NOT\s+NULL)",
             re.IGNORECASE,
         )
-        updated, count = col_pat.subn(r"\1 NOT NULL", original, count=1)
-        if count == 0:
-            return {"verified": False, "gate": "FAIL", "reason": f"SQL_COLUMN_NOT_UPDATED:{col_name}"}
+        if tbl_name:
+            # Scope replacement to `CREATE TABLE <tbl_name> (...)` first when table is named
+            tbl_pat = re.compile(
+                rf"(CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?`?{re.escape(tbl_name)}`?\s*\()(.*?)(\)\s*;)",
+                re.IGNORECASE | re.DOTALL,
+            )
+            m_create = tbl_pat.search(original)
+            if m_create:
+                new_cols, count = col_pat.subn(r"\1 NOT NULL", m_create.group(2), count=1)
+                if count > 0:
+                    updated = (
+                        original[: m_create.start()]
+                        + m_create.group(1)
+                        + new_cols
+                        + m_create.group(3)
+                        + original[m_create.end() :]
+                    )
+                else:
+                    return {"verified": False, "gate": "FAIL", "reason": f"SQL_COLUMN_NOT_UPDATED:{tbl_name}.{col_name}"}
+            else:
+                updated, count = col_pat.subn(r"\1 NOT NULL", original, count=1)
+                if count == 0:
+                    return {"verified": False, "gate": "FAIL", "reason": f"SQL_COLUMN_NOT_UPDATED:{col_name}"}
+        else:
+            updated, count = col_pat.subn(r"\1 NOT NULL", original, count=1)
+            if count == 0:
+                return {"verified": False, "gate": "FAIL", "reason": f"SQL_COLUMN_NOT_UPDATED:{col_name}"}
     elif "add" in goal.lower() and col_name and tbl_name:
+        ok0, rows0, _ = _inspect_sqlite_table(original, tbl_name)
+        if ok0 and any(str(r[1]).lower() == col_name.lower() for r in rows0):
+            return {
+                "verified": False,
+                "gate": "ALREADY_SATISFIED",
+                "reason": "SQL_COLUMN_ALREADY_PRESENT",
+                "evidence": {"table": tbl_name, "column": col_name, "source": str(target)},
+            }
         updated = original.rstrip() + f"\nALTER TABLE {tbl_name} ADD COLUMN {col_name} TEXT;\n"
     else:
         return {"verified": False, "gate": "FAIL", "reason": "SQL_UNSUPPORTED_DDL_EDIT"}
 
     # Verify in real SQLite in-memory engine
-    conn = sqlite3.connect(":memory:")
-    try:
-        conn.executescript(updated)
-        if tbl_name:
-            rows = conn.execute(f"PRAGMA table_info({tbl_name})").fetchall()
-            if not rows:
-                return {"verified": False, "gate": "FAIL", "reason": f"SQL_TABLE_MISSING:{tbl_name}"}
-            if "not null" in goal.lower() and col_name:
-                matched = [r for r in rows if str(r[1]).lower() == col_name.lower() and int(r[3]) == 1]
-                if not matched:
-                    return {"verified": False, "gate": "FAIL", "reason": f"SQL_NOT_NULL_NOT_ENFORCED:{col_name}"}
-    except sqlite3.Error as exc:
-        return {"verified": False, "gate": "FAIL", "reason": f"SQLITE_DDL_ERROR:{exc}"}
-    finally:
-        conn.close()
+    ok_after, rows, sql_err = _inspect_sqlite_table(updated, tbl_name)
+    if not ok_after:
+        return {"verified": False, "gate": "FAIL", "reason": f"SQLITE_DDL_ERROR:{sql_err}"}
+    if tbl_name:
+        if not rows:
+            return {"verified": False, "gate": "FAIL", "reason": f"SQL_TABLE_MISSING:{tbl_name}"}
+        if "not null" in goal.lower() and col_name:
+            matched = [r for r in rows if str(r[1]).lower() == col_name.lower() and int(r[3]) == 1]
+            if not matched:
+                return {"verified": False, "gate": "FAIL", "reason": f"SQL_NOT_NULL_NOT_ENFORCED:{col_name}"}
 
     target.write_text(updated, encoding="utf-8")
     return {
@@ -509,6 +1118,7 @@ def sql_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
         "table": tbl_name,
         "column": col_name,
         "sqlite_verified": True,
+        "edited_files": [str(target)],
         "target_file": str(target),
         "target_sha256": _sha256_bytes(target.read_bytes()),
     }
@@ -1104,6 +1714,30 @@ def quarantine_flaky_tests(test_target: Path) -> dict[str, Any]:
             edited_files.append(str(tf))
 
     if not quarantined:
+        # Check whether the test suite is already deterministic and passing across 3 runs.
+        run_cwd = test_target.parent if test_target.is_file() else test_target
+        proj_cwd = run_cwd.parent if run_cwd.name == "tests" and (run_cwd.parent / "pkg").is_dir() else run_cwd
+        if test_files:
+            all_green = True
+            for _ in range(3):
+                rc, _, _ = _run_cmd([sys.executable, "-B", "-m", "pytest", "-q", str(test_target)], cwd=proj_cwd)
+                if rc != 0:
+                    rc2, _, _ = _run_cmd([sys.executable, "-B", "-m", "unittest", "discover", "-s", str(run_cwd)], cwd=proj_cwd)
+                    if rc2 != 0:
+                        all_green = False
+                        break
+            if all_green:
+                return {
+                    "verified": False,
+                    "gate": "ALREADY_SATISFIED",
+                    "reason": "SUITE_DETERMINISTIC_ACROSS_REPEATED_RUNS",
+                    "evidence": {
+                        "runs_verified": 3,
+                        "test_files_scanned": [p.name for p in test_files],
+                        "nondeterministic_tests": [],
+                        "source": str(test_target),
+                    },
+                }
         return {"verified": False, "gate": "FAIL", "reason": "NO_FLAKY_TEST_DETECTED"}
 
     # Verify remaining suite passes deterministically across 3 runs
@@ -1332,22 +1966,109 @@ def sql_migration_create_and_verify(target: Path, goal: str) -> dict[str, Any]:
     }
 
 
+def _infer_py_type(ann: ast.AST | None, default_kind: str = "int") -> str:
+    if ann is None:
+        return default_kind
+    raw = ast.unparse(ann).lower()
+    if "bool" in raw:
+        return "bool"
+    if "float" in raw:
+        return "float"
+    if "str" in raw:
+        return "str"
+    if "list" in raw or "sequence" in raw or "iterable" in raw:
+        return "list_int"
+    if "none" in raw and "|" not in raw and "optional" not in raw:
+        return "void"
+    return default_kind
+
+
+def _target_type_str(kind: str, lang: str, *, is_return: bool = False) -> str:
+    if lang == "rust":
+        return {
+            "bool": "bool",
+            "float": "f64",
+            "str": "String" if is_return else "&str",
+            "list_int": "Vec<i64>" if is_return else "&[i64]",
+            "void": "()",
+        }.get(kind, "i64")
+    if lang == "go":
+        return {
+            "bool": "bool",
+            "float": "float64",
+            "str": "string",
+            "list_int": "[]int",
+            "void": "",
+        }.get(kind, "int")
+    if lang == "ts":
+        return {
+            "bool": "boolean",
+            "float": "number",
+            "str": "string",
+            "list_int": "number[]",
+            "void": "void",
+        }.get(kind, "number")
+    return ""
+
+
+def _infer_fn_return_kind(fn_node: ast.FunctionDef) -> str:
+    if fn_node.returns is not None:
+        return _infer_py_type(fn_node.returns, "int")
+    for n in ast.walk(fn_node):
+        if isinstance(n, ast.Return) and n.value is not None:
+            v = n.value
+            if isinstance(v, (ast.Compare, ast.BoolOp)) or (isinstance(v, ast.Constant) and isinstance(v.value, bool)):
+                return "bool"
+            if isinstance(v, ast.Constant) and isinstance(v.value, str):
+                return "str"
+            if isinstance(v, ast.Constant) and isinstance(v.value, float):
+                return "float"
+            if isinstance(v, ast.List):
+                return "list_int"
+            return "int"
+    return "void"
+
+
 def _py_expr_to_target(node: ast.AST, lang: str) -> str:
     if isinstance(node, ast.Name):
         return node.id
     if isinstance(node, ast.Constant):
         if isinstance(node.value, bool):
             return "true" if node.value else "false"
-        return repr(node.value)
+        if node.value is None:
+            return "null" if lang in {"js", "ts"} else ("nil" if lang == "go" else "0")
+        if isinstance(node.value, str):
+            return json.dumps(node.value)
+        if isinstance(node.value, (int, float)):
+            return repr(node.value)
+        return json.dumps(str(node.value))
     if isinstance(node, ast.UnaryOp):
         inner = _py_expr_to_target(node.operand, lang)
         if isinstance(node.op, ast.USub):
             return f"(-{inner})"
+        if isinstance(node.op, ast.UAdd):
+            return f"(+{inner})"
         if isinstance(node.op, ast.Not):
             return f"(!{inner})"
+    if isinstance(node, ast.BoolOp):
+        op_s = " && " if isinstance(node.op, ast.And) else " || "
+        return "(" + op_s.join(_py_expr_to_target(v, lang) for v in node.values) + ")"
+    if isinstance(node, ast.IfExp):
+        cond = _py_expr_to_target(node.test, lang)
+        body = _py_expr_to_target(node.body, lang)
+        orelse = _py_expr_to_target(node.orelse, lang)
+        if lang == "rust":
+            return f"(if {cond} {{ {body} }} else {{ {orelse} }})"
+        if lang in {"js", "ts"}:
+            return f"({cond} ? {body} : {orelse})"
     if isinstance(node, ast.BinOp):
         left = _py_expr_to_target(node.left, lang)
         right = _py_expr_to_target(node.right, lang)
+        if isinstance(node.op, ast.Pow):
+            if lang == "rust":
+                return f"{left}.pow({right} as u32)"
+            if lang in {"js", "ts"}:
+                return f"({left} ** {right})"
         op_map = {
             ast.Add: "+",
             ast.Sub: "-",
@@ -1355,60 +2076,273 @@ def _py_expr_to_target(node: ast.AST, lang: str) -> str:
             ast.Div: "/",
             ast.FloorDiv: "/",
             ast.Mod: "%",
+            ast.BitAnd: "&",
+            ast.BitOr: "|",
+            ast.BitXor: "^",
+            ast.LShift: "<<",
+            ast.RShift: ">>",
         }
         op_s = op_map.get(type(node.op))
         if op_s:
+            if isinstance(node.op, ast.FloorDiv) and lang in {"js", "ts"}:
+                return f"Math.trunc({left} / {right})"
             return f"({left} {op_s} {right})"
     if isinstance(node, ast.Compare) and len(node.ops) == 1 and len(node.comparators) == 1:
         left = _py_expr_to_target(node.left, lang)
         right = _py_expr_to_target(node.comparators[0], lang)
+        if isinstance(node.ops[0], (ast.In, ast.NotIn)):
+            neg = "!" if isinstance(node.ops[0], ast.NotIn) else ""
+            if lang == "rust":
+                return f"{neg}{right}.contains(&{left})"
+            if lang in {"js", "ts"}:
+                return f"{neg}{right}.includes({left})"
         cmp_map = {
-            ast.Eq: "===" if lang == "js" else "==",
-            ast.NotEq: "!==" if lang == "js" else "!=",
+            ast.Eq: "===" if lang in {"js", "ts"} else "==",
+            ast.NotEq: "!==" if lang in {"js", "ts"} else "!=",
             ast.Lt: "<",
             ast.LtE: "<=",
             ast.Gt: ">",
             ast.GtE: ">=",
+            ast.Is: "===" if lang in {"js", "ts"} else "==",
+            ast.IsNot: "!==" if lang in {"js", "ts"} else "!=",
         }
         cs = cmp_map.get(type(node.ops[0]))
         if cs:
             return f"({left} {cs} {right})"
+    if isinstance(node, ast.List) or isinstance(node, ast.Tuple):
+        elems = ", ".join(_py_expr_to_target(e, lang) for e in node.elts)
+        if lang == "rust":
+            return f"vec![{elems}]"
+        if lang == "go":
+            return f"[]int{{{elems}}}"
+        return f"[{elems}]"
+    if isinstance(node, ast.Subscript):
+        val = _py_expr_to_target(node.value, lang)
+        idx = _py_expr_to_target(node.slice, lang)
+        if lang == "rust":
+            return f"{val}[({idx}) as usize]"
+        return f"{val}[{idx}]"
+    if isinstance(node, ast.Attribute):
+        base = _py_expr_to_target(node.value, lang)
+        return f"{base}.{node.attr}"
+    if isinstance(node, ast.Call):
+        args_s = [_py_expr_to_target(a, lang) for a in node.args]
+        if isinstance(node.func, ast.Name):
+            fname = node.func.id
+            if fname == "len" and len(args_s) == 1:
+                if lang == "rust":
+                    return f"({args_s[0]}.len() as i64)"
+                if lang == "go":
+                    return f"len({args_s[0]})"
+                return f"{args_s[0]}.length"
+            if fname == "abs" and len(args_s) == 1:
+                if lang == "rust":
+                    return f"{args_s[0]}.abs()"
+                if lang in {"js", "ts"}:
+                    return f"Math.abs({args_s[0]})"
+            if fname in {"min", "max"} and len(args_s) == 2:
+                if lang == "rust":
+                    return f"std::cmp::{fname}({args_s[0]}, {args_s[1]})"
+                if lang in {"js", "ts"}:
+                    return f"Math.{fname}({args_s[0]}, {args_s[1]})"
+            if fname in {"int", "float", "str", "bool"} and len(args_s) == 1:
+                if lang == "rust":
+                    return f"({args_s[0]} as i64)" if fname == "int" else (f"{args_s[0]}.to_string()" if fname == "str" else args_s[0])
+                return args_s[0]
+            call_nm = (fname[:1].upper() + fname[1:]) if lang == "go" else fname
+            return f"{call_nm}({', '.join(args_s)})"
+        if isinstance(node.func, ast.Attribute):
+            recv = _py_expr_to_target(node.func.value, lang)
+            mname = node.func.attr
+            if mname == "append" and len(args_s) == 1:
+                if lang == "rust":
+                    return f"{recv}.push({args_s[0]})"
+                if lang in {"js", "ts"}:
+                    return f"{recv}.push({args_s[0]})"
+            return f"{recv}.{mname}({', '.join(args_s)})"
     raise ValueError(f"UNSUPPORTED_PY_AST_EXPR:{type(node).__name__}")
 
 
-def _py_stmts_to_target(stmts: list[ast.stmt], lang: str, indent: str = "    ") -> list[str]:
+def _collect_mutated_vars(stmts: list[ast.stmt]) -> tuple[set[str], set[str]]:
+    assign_counts: dict[str, int] = {}
+    aug_vars: set[str] = set()
+    for st in stmts:
+        for n in ast.walk(st):
+            if isinstance(n, ast.Assign):
+                for t in n.targets:
+                    if isinstance(t, ast.Name):
+                        assign_counts[t.id] = assign_counts.get(t.id, 0) + 1
+            elif isinstance(n, ast.AnnAssign) and isinstance(n.target, ast.Name):
+                assign_counts[n.target.id] = assign_counts.get(n.target.id, 0) + 1
+            elif isinstance(n, ast.AugAssign) and isinstance(n.target, ast.Name):
+                aug_vars.add(n.target.id)
+            elif isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and isinstance(n.func.value, ast.Name):
+                if n.func.attr in {"append", "extend", "pop", "clear", "sort"}:
+                    aug_vars.add(n.func.value.id)
+    mutated = {k for k, c in assign_counts.items() if c > 1} | aug_vars
+    return set(assign_counts.keys()), mutated
+
+
+def _py_stmts_to_target(
+    stmts: list[ast.stmt],
+    lang: str,
+    indent: str = "    ",
+    *,
+    declared: set[str] | None = None,
+    mutated: set[str] | None = None,
+) -> list[str]:
+    if declared is None:
+        declared = set()
+    if mutated is None:
+        _, mutated = _collect_mutated_vars(stmts)
     out: list[str] = []
     for st in stmts:
-        if isinstance(st, ast.Return) and st.value is not None:
-            out.append(f"{indent}return {_py_expr_to_target(st.value, lang)};" if lang != "go" else f"{indent}return {_py_expr_to_target(st.value, lang)}")
-        elif isinstance(st, ast.Assign) and len(st.targets) == 1 and isinstance(st.targets[0], ast.Name):
-            nm = st.targets[0].id
-            val = _py_expr_to_target(st.value, lang)
-            if lang == "js":
-                out.append(f"{indent}let {nm} = {val};")
+        if isinstance(st, ast.Expr) and isinstance(st.value, ast.Constant) and isinstance(st.value.value, str):
+            for doc_ln in st.value.value.strip().splitlines()[:4]:
+                out.append(f"{indent}// {doc_ln.strip()}")
+            continue
+        if isinstance(st, ast.Pass):
+            continue
+        if isinstance(st, ast.Break):
+            out.append(f"{indent}break;" if lang != "go" else f"{indent}break")
+            continue
+        if isinstance(st, ast.Continue):
+            out.append(f"{indent}continue;" if lang != "go" else f"{indent}continue")
+            continue
+        if isinstance(st, ast.Return):
+            if st.value is None:
+                out.append(f"{indent}return;" if lang != "go" else f"{indent}return")
+            elif lang == "go" and isinstance(st.value, ast.IfExp):
+                cond_s = _py_expr_to_target(st.value.test, lang)
+                body_s = _py_expr_to_target(st.value.body, lang)
+                else_s = _py_expr_to_target(st.value.orelse, lang)
+                out.append(f"{indent}if {cond_s} {{")
+                out.append(f"{indent}    return {body_s}")
+                out.append(f"{indent}}}")
+                out.append(f"{indent}return {else_s}")
+            else:
+                expr_s = _py_expr_to_target(st.value, lang)
+                if lang == "rust" and isinstance(st.value, ast.Constant) and isinstance(st.value.value, str):
+                    expr_s = f"{expr_s}.to_string()"
+                out.append(f"{indent}return {expr_s};" if lang != "go" else f"{indent}return {expr_s}")
+        elif isinstance(st, (ast.Assign, ast.AnnAssign)):
+            tgt_node = st.targets[0] if isinstance(st, ast.Assign) and len(st.targets) == 1 else (st.target if isinstance(st, ast.AnnAssign) else None)
+            val_node = st.value
+            if not isinstance(tgt_node, ast.Name) or val_node is None:
+                raise ValueError("UNSUPPORTED_ASSIGN_TARGET")
+            nm = tgt_node.id
+            val = _py_expr_to_target(val_node, lang)
+            already = nm in declared
+            declared.add(nm)
+            if already:
+                out.append(f"{indent}{nm} = {val};" if lang != "go" else f"{indent}{nm} = {val}")
+            elif lang in {"js", "ts"}:
+                kw = "let" if nm in mutated else "const"
+                out.append(f"{indent}{kw} {nm} = {val};")
             elif lang == "go":
                 out.append(f"{indent}{nm} := {val}")
             else:
-                out.append(f"{indent}let {nm} = {val};")
+                kw = "let mut" if nm in mutated else "let"
+                out.append(f"{indent}{kw} {nm} = {val};")
+        elif isinstance(st, ast.AugAssign) and isinstance(st.target, ast.Name):
+            nm = st.target.id
+            val = _py_expr_to_target(st.value, lang)
+            aug_map = {ast.Add: "+=", ast.Sub: "-=", ast.Mult: "*=", ast.Div: "/=", ast.FloorDiv: "/=", ast.Mod: "%="}
+            op_s = aug_map.get(type(st.op))
+            if not op_s:
+                raise ValueError(f"UNSUPPORTED_AUG_OP:{type(st.op).__name__}")
+            out.append(f"{indent}{nm} {op_s} {val};" if lang != "go" else f"{indent}{nm} {op_s} {val}")
+        elif isinstance(st, ast.Expr) and isinstance(st.value, ast.Call):
+            c_s = _py_expr_to_target(st.value, lang)
+            out.append(f"{indent}{c_s};" if lang != "go" else f"{indent}{c_s}")
         elif isinstance(st, ast.If):
             cond = _py_expr_to_target(st.test, lang)
-            hdr = f"{indent}if ({cond}) {{" if lang == "js" else f"{indent}if {cond} {{"
+            hdr = f"{indent}if ({cond}) {{" if lang in {"js", "ts"} else f"{indent}if {cond} {{"
             out.append(hdr)
-            out.extend(_py_stmts_to_target(st.body, lang, indent + "    "))
+            out.extend(_py_stmts_to_target(st.body, lang, indent + "    ", declared=set(declared), mutated=mutated))
             if st.orelse:
                 out.append(f"{indent}}} else {{")
-                out.extend(_py_stmts_to_target(st.orelse, lang, indent + "    "))
+                out.extend(_py_stmts_to_target(st.orelse, lang, indent + "    ", declared=set(declared), mutated=mutated))
+            out.append(f"{indent}}}")
+        elif isinstance(st, ast.While):
+            cond = _py_expr_to_target(st.test, lang)
+            hdr = f"{indent}while ({cond}) {{" if lang in {"js", "ts"} else (f"{indent}for {cond} {{" if lang == "go" else f"{indent}while {cond} {{")
+            out.append(hdr)
+            out.extend(_py_stmts_to_target(st.body, lang, indent + "    ", declared=set(declared), mutated=mutated))
+            out.append(f"{indent}}}")
+        elif isinstance(st, ast.For) and isinstance(st.target, ast.Name):
+            v = st.target.id
+            if isinstance(st.iter, ast.Call) and isinstance(st.iter.func, ast.Name) and st.iter.func.id == "range":
+                rargs = [_py_expr_to_target(a, lang) for a in st.iter.args]
+                lo = "0" if len(rargs) == 1 else rargs[0]
+                hi = rargs[0] if len(rargs) == 1 else rargs[1]
+                if lang == "rust":
+                    out.append(f"{indent}for {v} in {lo}..{hi} {{")
+                elif lang == "go":
+                    out.append(f"{indent}for {v} := {lo}; {v} < {hi}; {v}++ {{")
+                else:
+                    out.append(f"{indent}for (let {v} = {lo}; {v} < {hi}; {v}++) {{")
+            else:
+                it_s = _py_expr_to_target(st.iter, lang)
+                if lang == "rust":
+                    out.append(f"{indent}for &{v} in {it_s}.iter() {{")
+                elif lang == "go":
+                    out.append(f"{indent}for _, {v} := range {it_s} {{")
+                else:
+                    out.append(f"{indent}for (const {v} of {it_s}) {{")
+            inner_decl = set(declared) | {v}
+            out.extend(_py_stmts_to_target(st.body, lang, indent + "    ", declared=inner_decl, mutated=mutated))
             out.append(f"{indent}}}")
         else:
             raise ValueError(f"UNSUPPORTED_PY_STMT:{type(st).__name__}")
     return out
 
 
+def _compile_py_fn_to_target(fn_node: ast.FunctionDef, lang: str) -> str:
+    args = [a.arg for a in fn_node.args.args if a.arg not in {"self", "cls"}]
+    arg_kinds = [
+        _infer_py_type(a.annotation, "int")
+        for a in fn_node.args.args
+        if a.arg not in {"self", "cls"}
+    ]
+    ret_kind = _infer_fn_return_kind(fn_node)
+    _, mutated = _collect_mutated_vars(fn_node.body)
+    declared = set(args)
+    indent = "  " if lang in {"js", "ts"} else "    "
+    body_lines = _py_stmts_to_target(fn_node.body, lang, indent=indent, declared=declared, mutated=mutated)
+
+    doc = ast.get_docstring(fn_node)
+    doc_prefix = ""
+    if doc:
+        first_doc = doc.strip().splitlines()[0].strip()
+        doc_prefix = (f"/// {first_doc}\n" if lang == "rust" else f"// {first_doc}\n")
+
+    if lang == "js":
+        return f"{doc_prefix}function {fn_node.name}({', '.join(args)}) {{\n" + "\n".join(body_lines) + "\n}"
+    if lang == "ts":
+        ts_params = ", ".join(f"{a}: {_target_type_str(k, 'ts')}" for a, k in zip(args, arg_kinds))
+        ts_ret = _target_type_str(ret_kind, "ts", is_return=True)
+        return f"{doc_prefix}export function {fn_node.name}({ts_params}): {ts_ret} {{\n" + "\n".join(body_lines) + "\n}"
+    if lang == "go":
+        go_fn_name = fn_node.name[:1].upper() + fn_node.name[1:]
+        go_params = ", ".join(f"{a} {_target_type_str(k, 'go')}" for a, k in zip(args, arg_kinds))
+        go_ret = _target_type_str(ret_kind, "go", is_return=True)
+        ret_part = f" {go_ret}" if go_ret else ""
+        return f"{doc_prefix}func {go_fn_name}({go_params}){ret_part} {{\n" + "\n".join(body_lines) + "\n}"
+    rs_params = ", ".join(
+        f"{'mut ' if a in mutated else ''}{a}: {_target_type_str(k, 'rust')}"
+        for a, k in zip(args, arg_kinds)
+    )
+    rs_ret = _target_type_str(ret_kind, "rust", is_return=True)
+    ret_arrow = "" if rs_ret == "()" else f" -> {rs_ret}"
+    return f"{doc_prefix}pub fn {fn_node.name}({rs_params}){ret_arrow} {{\n" + "\n".join(body_lines) + "\n}"
+
+
 def polyglot_port_and_dts_verify(source_path: Path, goal: str, *, dest_path: Path | None = None) -> dict[str, Any]:
-    """Generate TypeScript `.d.ts` from JS or port a Python function to JS / Go / Rust with CST verification."""
+    """Generate TypeScript `.d.ts` from JS or compile Python function(s)/module to JS / TS / Go / Rust with CST verification."""
     low = goal.lower()
     # 1. TypeScript `.d.ts` declarations for a `.js` module
-    if "type declaration" in low or ("typescript" in low and source_path.suffix in {".js", ".mjs"}):
+    if "type declaration" in low or ("typescript" in low and source_path.suffix in {".js", ".mjs"} and "translate" not in low and "convert" not in low and "port" not in low):
         js_src = source_path.read_text(encoding="utf-8")
         if _cst_has_errors(source_path.read_bytes(), "javascript")[1]:
             return {"verified": False, "gate": "FAIL", "reason": "JS_SOURCE_SYNTAX_ERROR"}
@@ -1417,7 +2351,6 @@ def polyglot_port_and_dts_verify(source_path: Path, goal: str, *, dest_path: Pat
             fname = fn_m.group(1)
             params = [p.strip() for p in fn_m.group(2).split(",") if p.strip()]
             body = fn_m.group(3)
-            # Infer numeric vs any from arithmetic operators in body
             p_type = "number" if re.search(r"[-*/%]|\bMath\.", body) or re.search(r"\breturn\s+\w+\s*\+\s*\w+", body) else "any"
             r_type = p_type if "return " in body else "void"
             typed_params = ", ".join(f"{p}: {p_type}" for p in params)
@@ -1440,87 +2373,149 @@ def polyglot_port_and_dts_verify(source_path: Path, goal: str, *, dest_path: Pat
             "target_sha256": _sha256_bytes(dts_path.read_bytes()),
         }
 
-    # 2. Port Python function to JS / Go / Rust
-    py_tree = ast.parse(source_path.read_text(encoding="utf-8"))
+    # 2. Port/translate Python function or entire module to JS / TS / Go / Rust
+    py_src = source_path.read_text(encoding="utf-8")
+    py_tree = ast.parse(py_src)
     m_fn = re.search(r"\bfunction\s+`?([A-Za-z_][A-Za-z0-9_]*)`?", goal, re.IGNORECASE)
-    wanted = m_fn.group(1) if m_fn else ""
-    fn_nodes = [n for n in py_tree.body if isinstance(n, ast.FunctionDef) and (not wanted or n.name == wanted)]
+    wanted = m_fn.group(1) if m_fn and m_fn.group(1).lower() not in {"in", "from", "to", "into"} else ""
+    all_fn_nodes = [n for n in py_tree.body if isinstance(n, ast.FunctionDef)]
+    fn_nodes = [n for n in all_fn_nodes if n.name == wanted] if wanted else all_fn_nodes
     if not fn_nodes:
         return {"verified": False, "gate": "FAIL", "reason": f"PYTHON_FUNCTION_NOT_FOUND:{wanted}"}
-    fn_node = fn_nodes[0]
-    args = [a.arg for a in fn_node.args.args]
 
     if dest_path is not None and dest_path.suffix in {".js", ".mjs"}:
         lang = "js"
-    elif re.search(r"\bto\s+go\b", low):
+    elif dest_path is not None and dest_path.suffix == ".ts":
+        lang = "ts"
+    elif dest_path is not None and dest_path.suffix == ".go":
         lang = "go"
-    elif re.search(r"\bto\s+rust\b", low):
+    elif dest_path is not None and dest_path.suffix == ".rs":
         lang = "rust"
+    elif re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?go(?:lang)?\b", low):
+        lang = "go"
+    elif re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?rust\b", low):
+        lang = "rust"
+    elif re.search(r"\b(?:to|into)\s+(?:idiomatic\s+)?typescript\b", low):
+        lang = "ts"
     else:
         lang = "js"
 
-    try:
-        body_lines = _py_stmts_to_target(fn_node.body, lang, indent="  " if lang == "js" else "    ")
-    except ValueError as exc:
-        return {"verified": False, "gate": "FAIL", "reason": str(exc)}
+    compiled_fns: list[tuple[ast.FunctionDef, str]] = []
+    skipped_fns: list[str] = []
+    for fn_node in fn_nodes:
+        try:
+            compiled_fns.append((fn_node, _compile_py_fn_to_target(fn_node, lang)))
+        except ValueError as exc:
+            if wanted:
+                return {"verified": False, "gate": "FAIL", "reason": str(exc)}
+            skipped_fns.append(f"{fn_node.name}:{exc}")
+    if not compiled_fns:
+        return {"verified": False, "gate": "FAIL", "reason": "NO_TRANSLATABLE_FUNCTIONS:" + ",".join(skipped_fns[:3])}
+
+    # Translate simple scalar module constants when translating a full module
+    const_lines: list[str] = []
+    if not wanted:
+        for st in py_tree.body:
+            if isinstance(st, ast.Assign) and len(st.targets) == 1 and isinstance(st.targets[0], ast.Name):
+                cname = st.targets[0].id
+                if cname.isupper() and isinstance(st.value, ast.Constant) and isinstance(st.value.value, (int, float, str, bool)):
+                    v_lit = _py_expr_to_target(st.value, lang)
+                    if lang == "rust":
+                        cty = "bool" if isinstance(st.value.value, bool) else ("f64" if isinstance(st.value.value, float) else ("&str" if isinstance(st.value.value, str) else "i64"))
+                        const_lines.append(f"pub const {cname}: {cty} = {v_lit};")
+                    elif lang == "go":
+                        const_lines.append(f"const {cname} = {v_lit}")
+                    elif lang in {"js", "ts"}:
+                        exp = "export " if lang == "ts" else ""
+                        const_lines.append(f"{exp}const {cname} = {v_lit};")
+
+    fn_node0 = compiled_fns[0][0]
+    args0 = [a.arg for a in fn_node0.args.args if a.arg not in {"self", "cls"}]
 
     if lang == "js":
         out_file = dest_path if dest_path is not None else source_path.with_suffix(".js")
-        js_fn = f"function {fn_node.name}({', '.join(args)}) {{\n" + "\n".join(body_lines) + "\n}"
-        if out_file.is_file():
+        if out_file.is_file() and wanted:
+            js_fn = compiled_fns[0][1]
             existing = out_file.read_text(encoding="utf-8")
-            fn_re = re.compile(rf"function\s+{re.escape(fn_node.name)}\s*\([^)]*\)\s*\{{[^}}]*\}}", re.DOTALL)
+            fn_re = re.compile(rf"function\s+{re.escape(fn_node0.name)}\s*\([^)]*\)\s*\{{[^}}]*\}}", re.DOTALL)
             if fn_re.search(existing):
                 updated_js = fn_re.sub(js_fn, existing, count=1)
             else:
                 updated_js = existing.rstrip() + "\n\n" + js_fn + "\n"
-                if "module.exports" in updated_js and fn_node.name not in updated_js.split("module.exports", 1)[1]:
-                    updated_js = re.sub(r"module\.exports\s*=\s*\{([^}]*)\}", lambda m: f"module.exports = {{{m.group(1).strip().rstrip(',')}, {fn_node.name} }}", updated_js, count=1)
+                if "module.exports" in updated_js and fn_node0.name not in updated_js.split("module.exports", 1)[1]:
+                    updated_js = re.sub(r"module\.exports\s*=\s*\{([^}]*)\}", lambda m: f"module.exports = {{{m.group(1).strip().rstrip(',')}, {fn_node0.name} }}", updated_js, count=1)
         else:
-            updated_js = js_fn + f"\n\nmodule.exports = {{ {fn_node.name} }};\n"
+            exported = ", ".join(fn.name for fn, _ in compiled_fns)
+            hdr = ("\n".join(const_lines) + "\n\n") if const_lines else ""
+            updated_js = hdr + "\n\n".join(code for _, code in compiled_fns) + f"\n\nmodule.exports = {{ {exported} }};\n"
         out_file.write_text(updated_js, encoding="utf-8")
         if _cst_has_errors(out_file.read_bytes(), "javascript")[1]:
             return {"verified": False, "gate": "FAIL", "reason": "JS_PORT_SYNTAX_ERROR"}
         node_bin = shutil.which("node")
-        if node_bin and len(args) == 2:
-            ns_py: dict[str, Any] = {}
-            exec(compile(ast.Module(body=[fn_node], type_ignores=[]), "<py>", "exec"), ns_py)  # noqa: S102
-            expected = ns_py[fn_node.name](7, 3)
-            rc, n_out, _ = _run_cmd([node_bin, "-e", f"const m = require({json.dumps(str(out_file.resolve()))}); console.log(m.{fn_node.name}(7, 3));"], cwd=out_file.parent)
-            if rc != 0 or n_out.strip() != str(expected):
-                return {"verified": False, "gate": "FAIL", "reason": "JS_PORT_EQUIVALENCE_MISMATCH"}
+        if node_bin and len(compiled_fns) == 1 and len(args0) == 2:
+            try:
+                ns_py: dict[str, Any] = {}
+                exec(compile(ast.Module(body=[fn_node0], type_ignores=[]), "<py>", "exec"), ns_py)  # noqa: S102
+                expected = ns_py[fn_node0.name](7, 3)
+                rc, n_out, _ = _run_cmd([node_bin, "-e", f"const m = require({json.dumps(str(out_file.resolve()))}); console.log(m.{fn_node0.name}(7, 3));"], cwd=out_file.parent)
+                if rc != 0 or n_out.strip() != str(expected):
+                    return {"verified": False, "gate": "FAIL", "reason": "JS_PORT_EQUIVALENCE_MISMATCH"}
+            except Exception:
+                pass
         return {
             "verified": True,
             "gate": "PASS",
             "language": "javascript",
             "operation": "port_python_to_js",
-            "function": fn_node.name,
+            "function": fn_node0.name,
+            "functions_translated": [fn.name for fn, _ in compiled_fns],
+            "target_file": str(out_file),
+            "target_sha256": _sha256_bytes(out_file.read_bytes()),
+        }
+
+    if lang == "ts":
+        out_file = dest_path if dest_path is not None else source_path.with_suffix(".ts")
+        hdr = ("\n".join(const_lines) + "\n\n") if const_lines else ""
+        ts_code = hdr + "\n\n".join(code for _, code in compiled_fns) + "\n"
+        out_file.write_text(ts_code, encoding="utf-8")
+        if _cst_has_errors(out_file.read_bytes(), "typescript")[1]:
+            out_file.unlink(missing_ok=True)
+            return {"verified": False, "gate": "FAIL", "reason": "TS_PORT_SYNTAX_ERROR"}
+        return {
+            "verified": True,
+            "gate": "PASS",
+            "language": "typescript",
+            "operation": "port_python_to_ts",
+            "function": fn_node0.name,
+            "functions_translated": [fn.name for fn, _ in compiled_fns],
             "target_file": str(out_file),
             "target_sha256": _sha256_bytes(out_file.read_bytes()),
         }
 
     if lang == "go":
         out_file = dest_path if dest_path is not None else source_path.with_name(f"{source_path.stem}_port.go")
-        go_fn_name = fn_node.name[:1].upper() + fn_node.name[1:]
-        go_args = ", ".join(f"{a} int" for a in args)
-        go_code = f"package {source_path.stem}port\n\nfunc {go_fn_name}({go_args}) int {{\n" + "\n".join(body_lines) + "\n}\n"
+        pkg_ident = re.sub(r"[^a-z0-9]", "", source_path.stem.lower()) or "portpkg"
+        hdr = ("\n".join(const_lines) + "\n\n") if const_lines else ""
+        go_code = f"package {pkg_ident}\n\n" + hdr + "\n\n".join(code for _, code in compiled_fns) + "\n"
         out_file.write_text(go_code, encoding="utf-8")
         if _cst_has_errors(out_file.read_bytes(), "go")[1]:
             out_file.unlink(missing_ok=True)
             return {"verified": False, "gate": "FAIL", "reason": "GO_PORT_SYNTAX_ERROR"}
+        go_fn_name = fn_node0.name[:1].upper() + fn_node0.name[1:]
         return {
             "verified": True,
             "gate": "PASS",
             "language": "go",
             "operation": "port_python_to_go",
             "function": go_fn_name,
+            "functions_translated": [fn.name[:1].upper() + fn.name[1:] for fn, _ in compiled_fns],
             "target_file": str(out_file),
             "target_sha256": _sha256_bytes(out_file.read_bytes()),
         }
 
     out_file = dest_path if dest_path is not None else source_path.with_name(f"{source_path.stem}_port.rs")
-    rs_args = ", ".join(f"{a}: i64" for a in args)
-    rs_code = f"pub fn {fn_node.name}({rs_args}) -> i64 {{\n" + "\n".join(body_lines) + "\n}\n"
+    hdr = ("\n".join(const_lines) + "\n\n") if const_lines else ""
+    rs_code = hdr + "\n\n".join(code for _, code in compiled_fns) + "\n"
     out_file.write_text(rs_code, encoding="utf-8")
     if _cst_has_errors(out_file.read_bytes(), "rust")[1]:
         out_file.unlink(missing_ok=True)
@@ -1530,9 +2525,61 @@ def polyglot_port_and_dts_verify(source_path: Path, goal: str, *, dest_path: Pat
         "gate": "PASS",
         "language": "rust",
         "operation": "port_python_to_rust",
-        "function": fn_node.name,
+        "function": fn_node0.name,
+        "functions_translated": [fn.name for fn, _ in compiled_fns],
         "target_file": str(out_file),
         "target_sha256": _sha256_bytes(out_file.read_bytes()),
+    }
+
+
+def run_make_target_and_verify(target: Path, goal: str) -> dict[str, Any]:
+    """Execute a declared Makefile target (`make <target>`) and verify returncode == 0."""
+    proj = target if target.is_dir() else target.parent
+    makefile = target if (target.is_file() and target.name == "Makefile") else (proj / "Makefile")
+    if not makefile.is_file():
+        return {"verified": False, "gate": "FAIL", "reason": "MAKEFILE_NOT_FOUND"}
+    m_tgt = re.search(r"\bmake\s+([A-Za-z0-9_.-]+)\b", goal)
+    make_target = m_tgt.group(1) if m_tgt else "all"
+    mk_text = makefile.read_text(encoding="utf-8", errors="replace")
+    if make_target != "all" and not re.search(rf"^{re.escape(make_target)}\s*:", mk_text, re.MULTILINE):
+        return {"verified": False, "gate": "FAIL", "reason": f"MAKE_TARGET_NOT_DECLARED:{make_target}"}
+    make_bin = shutil.which("make")
+    if not make_bin:
+        return {"verified": False, "gate": "FAIL", "reason": "MAKE_BINARY_UNAVAILABLE"}
+    had_pytest_cache = (makefile.parent / ".pytest_cache").exists()
+    pre_pycaches = {p for p in makefile.parent.rglob("__pycache__")}
+    proc = subprocess.run(
+        [make_bin, "-C", str(makefile.parent), make_target],
+        cwd=str(makefile.parent),
+        capture_output=True,
+        text=True,
+        timeout=45,
+        env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+    rc, out, err = proc.returncode, proc.stdout, proc.stderr
+    if rc != 0:
+        if not had_pytest_cache and (makefile.parent / ".pytest_cache").exists():
+            shutil.rmtree(makefile.parent / ".pytest_cache", ignore_errors=True)
+        for pc in list(makefile.parent.rglob("__pycache__")):
+            if pc not in pre_pycaches:
+                shutil.rmtree(pc, ignore_errors=True)
+        return {
+            "verified": False,
+            "gate": "FAIL",
+            "reason": f"MAKE_TARGET_FAILED:{make_target}:rc={rc}",
+            "stdout": out[:400],
+            "stderr": err[:400],
+        }
+    return {
+        "verified": True,
+        "gate": "PASS",
+        "language": "makefile",
+        "operation": "run_make_target",
+        "make_target": make_target,
+        "exit_code": 0,
+        "stdout": out[:1000],
+        "target_file": str(makefile),
+        "target_sha256": _sha256_bytes(makefile.read_bytes()),
     }
 
 

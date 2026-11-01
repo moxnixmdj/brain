@@ -155,7 +155,7 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     return bool(claims.get("repository"))
 
 
-_REGISTRY_CACHE: dict[tuple[int, int, int], dict[str, Mapping[str, Any]]] = {}
+_REGISTRY_CACHE: dict[tuple[Any, ...], dict[str, Mapping[str, Any]]] = {}
 
 
 def _active_registry_path(path: Path | None = None) -> Path:
@@ -173,15 +173,19 @@ def _active_registry_path(path: Path | None = None) -> Path:
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
     reg_file = _active_registry_path(REGISTRY)
     snap_file = REGISTRY.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+    ext_file = ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
     evidence_dir = ROOT / "canonical/astra_runtime/evidence"
-    token = (reg_file.stat().st_mtime_ns if reg_file.is_file() else 0,
-             snap_file.stat().st_mtime_ns if snap_file.is_file() else 0,
-             (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").stat().st_mtime_ns
-             if (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").is_file() else 0,
-             PROJECTION.stat().st_mtime_ns if PROJECTION.is_file() else 0,
-             evidence_dir.stat().st_mtime_ns if evidence_dir.is_dir() else 0)
-    if include_extended and token in _REGISTRY_CACHE:
-        return dict(_REGISTRY_CACHE[token])
+    token = (
+        bool(include_extended),
+        reg_file.stat().st_mtime_ns if reg_file.is_file() else 0,
+        snap_file.stat().st_mtime_ns if snap_file.is_file() else 0,
+        ext_file.stat().st_mtime_ns if (include_extended and ext_file.is_file()) else 0,
+        PROJECTION.stat().st_mtime_ns if (include_extended and PROJECTION.is_file()) else 0,
+        evidence_dir.stat().st_mtime_ns if (include_extended and evidence_dir.is_dir()) else 0,
+    )
+    cached = _REGISTRY_CACHE.get(token)
+    if cached is not None:
+        return dict(cached)
 
     doc = json.loads(reg_file.read_text(encoding="utf-8"))
     if doc.get("schema") not in ("PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1", "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1"):
@@ -266,8 +270,7 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
                                 "capability_source": "receipt_projection"}
     if not out:
         raise LiveBrainError("NO_VERIFIED_ZERO_SPEND_CAPABILITIES")
-    if include_extended:
-        _REGISTRY_CACHE[token] = dict(out)
+    _REGISTRY_CACHE[token] = dict(out)
     return out
 
 

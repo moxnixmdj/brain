@@ -141,6 +141,18 @@ _FAMILIES = (
  (('type-check', 'type check', 'typecheck', 'type checks', 'mypy'),
   ('type_gate', 'typecheck', 'type check', 'type-check', 'mypy'),
   'type'),
+ (('lint ', 'ruff check', 'static triage'),
+  ('diff_static_triage',),
+  'diff_static_triage'),
+ (('merge conflict', 'conflict markers'),
+  ('merge_conflict',),
+  'merge_conflict'),
+ (('untrusted input', 'taint flow', 'sql injection', 'command injection'),
+  ('taint_flow',),
+  'taint_flow'),
+ (('crosshair', 'postcondition', 'precondition'),
+  ('crosshair',),
+  'crosshair'),
  (('bug:',
    'bug report',
    'bug in',
@@ -235,6 +247,22 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return None
     if "find the root cause" in raw_low and "answer.json" not in raw_low:
         return ("find the root cause",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if (
+        re.search(r"\bgit\s+bisect\b|\bbisect\s+the\s+regression\b|\b(?:which|find\s+the)\s+commit\b[^\n]{0,200}?\bbroke\b", raw_low)
+        or ("performance regression" in raw_low and "commit" in raw_low)
+    ):
+        return ("bisect",), ("bisect_regression", "perf_attribution"), "bisect_regression"
+    if (
+        any(w in raw_low for w in ("postcondition", "symbolic execution", "crosshair"))
+        or ("counterexample" in raw_low and ".py" in raw_low)
+    ):
+        return ("contract_check",), ("contract.verdict", "crosshair"), "crosshair"
+    if "changelog" in raw_low and "commits" in raw_low:
+        return ("git_changelog",), ("diagnose", "blame_and_changelog"), "diagnose_and_architect"
+    if "benchmark" in raw_low and "head~1" in raw_low and ".py" in raw_low:
+        return ("benchmark_git_ref",), ("diagnose", "hotspot"), "diagnose_and_architect"
+    if "regression test" in raw_low and "reproduces" in raw_low and "fix" not in raw_low and ".py" in raw_low:
+        return ("write_regression_test",), ("swe_transform",), "swe.transform_and_synthesize"
     if "find the race condition" in raw_low:
         _root_p = pathlib.Path(__file__).resolve().parents[2]
         _rfiles = [p for p in re.findall(r"[A-Za-z0-9_./-]+\.py\b", str(goal or "")) if (_root_p / p).is_file()]
@@ -268,6 +296,35 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("lint javascript",), ("diagnose", "static_triage"), "diagnose_and_architect"
     if "run" in raw_low and "javascript" in raw_low and "test" in raw_low:
         return ("run javascript test",), ("diagnose", "runner_verdict"), "diagnose_and_architect"
+    if (
+        re.search(r"\b(?:show|print|display|find|get)\s+(?:me\s+)?(?:the\s+)?(?:definition|signature|implementation)\s+of\b", raw_low)
+        or re.search(r"\bwhere\s+is\s+\S+(?:\s+\S+){0,2}\s+defined\b", raw_low)
+    ):
+        return ("show_definition",), ("diagnose", "definition"), "diagnose_and_architect"
+    if re.search(r"\b(?:which|what)\s+(?:modules?|files?)\s+import\b|\bwho\s+imports\b|\bimporters\s+of\b", raw_low):
+        return ("which_modules_import",), ("diagnose", "importers"), "diagnose_and_architect"
+    if ("import cycle" in raw_low or "circular import" in raw_low or "cyclic import" in raw_low) and not any(
+        w in raw_low for w in ("fix ", "break ", "remove ", "resolve ")
+    ):
+        return ("import_cycles",), ("diagnose", "import_cycles"), "diagnose_and_architect"
+    if "class hierarchy" in raw_low or "subclasses of" in raw_low or "inheritance hierarchy" in raw_low or "mro of" in raw_low:
+        return ("class_hierarchy",), ("diagnose", "class_hierarchy"), "diagnose_and_architect"
+    if (
+        re.search(r"^\s*(?:please\s+)?run\s+(?:the\s+)?(?:unit\s+)?tests?\s+(?:in|for|from)\s+\S*test\S*\.py\b", raw_low)
+        and "write the" not in raw_low
+        and "save " not in raw_low
+        and "tell me" not in raw_low
+    ):
+        return ("run_single_test",), ("diagnose", "runner_verdict"), "diagnose_and_architect"
+    if "trace the value of" in raw_low and ".py" in raw_low:
+        return ("trace_value_provenance",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if (
+        "flaky" in raw_low
+        and any(w in raw_low for w in ("find", "detect", "tell me if", "whether", "rerun"))
+        and "quarantine" not in raw_low
+        and "answer.json" not in raw_low
+    ):
+        return ("find_flaky_tests",), ("diagnose", "flaky"), "diagnose_and_architect"
     if "design the api" in raw_low and "adr" in raw_low:
         return ("design the api",), ("diagnose", "adr_and_migration"), "diagnose_and_architect"
     if "design document" in raw_low and "splitting" in raw_low:
@@ -289,7 +346,9 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("raise_coverage",), ("swe_transform",), "swe.transform_and_synthesize"
     if re.search(r"\bproperty[- ]based\s+tests?\b|\bhypothesis\b", raw_low) and ".py" in raw_low:
         return ("write_property_test",), ("swe_transform",), "swe.transform_and_synthesize"
-    if re.search(r"^\s*write\s+(?:a\s+)?unit\s+tests?\b", raw_low) and ".py" in raw_low:
+    if "docstring" in raw_low and "test" in raw_low and ".py" in raw_low:
+        return ("tests_from_docstrings",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(r"^\s*(?:please\s+)?(?:write|add|create|generate|synthesize|author)\s+(?:a\s+|missing\s+)?unit\s+tests?\b", raw_low) and ".py" in raw_low:
         return ("write_unit_test",), ("swe_transform",), "swe.transform_and_synthesize"
     if "add a test for the case" in raw_low:
         return ("add a test for the case",), ("swe_transform",), "swe.transform_and_synthesize"
@@ -316,6 +375,12 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("swe_refactor",), ("swe_transform",), "swe.transform_and_synthesize"
     if re.search(r"\b(?:remove|delete|drop)\s+(?:the\s+|all\s+)?dead\s+code\b", raw_low):
         return ("remove_dead_code",), ("swe_transform", "dead_code"), "swe.transform_and_synthesize"
+    if "unused import" in raw_low and any(w in raw_low for w in ("remove", "delete", "drop", "strip", "clean")) and ".py" in raw_low and "unused function" not in raw_low:
+        return ("remove_unused_imports",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(r"^\s*(?:please\s+)?inline\s+(?:the\s+)?(?:helper|function)\b", raw_low) and "only caller" not in raw_low and ".py" in raw_low:
+        return ("inline_function",), ("swe_transform",), "swe.transform_and_synthesize"
+    if "memory leak" in raw_low and any(w in raw_low for w in ("fix", "repair")) and ".py" in raw_low:
+        return ("fix_memory_leak",), ("swe_transform",), "swe.transform_and_synthesize"
     if re.search(r"\b(?:extract|move)\s+(?:the\s+)?(?:function\s+|class\s+|symbol\s+)?\w+\s+from\s+\S+\.py\s+(?:into|to)(?:\s+(?:a\s+)?new\s+module)?\s+\S+\.py", raw_low):
         return ("move_symbol",), ("move_symbol", "relocate symbol"), "move_symbol"
     if (
@@ -337,13 +402,23 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         or ("database migration" in raw_low)
         or ("type declarations" in raw_low)
         or (re.search(r"\bport\s+(?:the\s+)?function\b", raw_low) is not None)
+        or (
+            re.search(
+                r"\b(?:port|translate|transpile|convert)\b[^\n]{0,160}?\b(?:to|into)\s+(?:idiomatic\s+)?(?:rust|go|golang|typescript|javascript)\b",
+                raw_low,
+            ) is not None
+        )
+        or (re.search(r"^\s*(?:please\s+)?run\s+`?make\s+[a-z0-9_.-]+`?", raw_low) is not None)
     ):
         return ("polyglot_build_release",), ("polyglot",), "polyglot.transform_and_verify"
     # Direct path-suffix dispatch for polyglot / Makefile / pyproject / workflow writes
     if any(ext in raw_low for ext in (".cpp", ".cc", ".rs", ".go", ".java", ".ts", ".sql", "pyproject.toml", "makefile", ".github/workflows/")):
         if any(w in raw_low for w in ("audit ", "vulnerabilit", "review ")):
             return ("audit",), ("vulnerability_audit", "diagnose"), "diagnose_and_architect"
-        if any(w in raw_low for w in ("fix", "repair", "add", "create", "rename", "pin", "bump", "make the ci")):
+        if any(w in raw_low for w in (
+            "fix", "repair", "add", "create", "rename", "pin", "bump", "make the ci",
+            "not null", "constraint", "alter", "panic", "null", "undefined", "borrow", "crash",
+        )):
             return ("polyglot_path",), ("polyglot", "pyproject", "makefile", "workflow"), "polyglot.transform_and_verify"
     if re.match(r"^\s*(?:please\s+)?(?:re)?format\s+\S+\.py\b", raw_low):
         return ("format",), ("format.ast_verified", "swe_transform"), "swe.transform_and_synthesize"
@@ -387,8 +462,10 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
     # Unqualified repository reads use the existing operation grammar, not
     # broad nouns such as "status" inside deployment questions or task data.
-    if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"
-                    r"(?:me\s+)?(?:the\s+)?(?:uncommitted\s+)?(?:diff|status|history|current\s+branch)"
+    if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is|what\s+are)\s+"
+                    r"(?:me\s+)?(?:the\s+)?(?:(?:diff|patch|contents?)\s+of\s+the\s+(?:last|latest)\s+commit|"
+                    r"(?:last|latest)\s+commit|staged\s+changes?|"
+                    r"(?:uncommitted\s+)?(?:diff|status|history|current\s+branch))"
                     r"(?:\s+of\s+the\s+working\s+tree)?"
                     r"(?:\s+(?:of|for|in|under|at)\s*)?[.?!]*", head.strip()):
         if len(derivation.stated_git_operations(goal)) == 1:
@@ -428,8 +505,12 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str],
             args.pop(key, None)
     if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
         args["synthesize_regression_test"] = "${input.synthesize_regression_test}"
+    if extra_inputs and extra_inputs.get("staged_only") is True and "staged_only" not in args:
+        args["staged_only"] = "${input.staged_only}"
     if extra_inputs and extra_inputs.get("remove_functions"):
         args["remove_functions"] = "${input.remove_functions}"
+    if extra_inputs and extra_inputs.get("run_tests") and "run_tests" in args:
+        args["run_tests"] = "${input.run_tests}"
     template["args"] = args
     return template
 
@@ -939,3 +1020,45 @@ def plan_report(goal: str, root: Any) -> dict[str, Any]:
                    for k, v in (compiled.get("inputs") or {}).items()},
         "model_dependency_count": 0, "incremental_spend_usd": 0,
     }
+
+
+_COMPOUND_SUBORDINATE_GUARD = re.compile(
+    r"\b(?:update\s+(?:every|all|its|the)\s+(?:callers?|imports?)|"
+    r"make\s+(?:mypy|the\s+(?:whole\s+)?suite|all\s+tests|it|sure)\b|"
+    r"(?:save|write)\s+(?:it|them|the\s+\w+)\s+to\b|"
+    r"write\s+(?:the\s+)?release\s+notes|"
+    r"produce\s+a\s+lock\s+file|record\s+the\s+baseline|"
+    r"keep(?:ing)?\s+(?:every\s+test|the\s+suite)\s+green|"
+    r"use\s+it\s+in\b|update\s+\S+\s+to\s+use\b|"
+    r"add\s+a\s+regression\s+test|commit\s+\S+\s+there\b|"
+    r"fix\s+what\s+(?:breaks|it\s+reports)|tell\s+me\b|prove\s+it\b)",
+    re.IGNORECASE,
+)
+
+_COMPOUND_CLAUSE_SPLITTER = re.compile(
+    r"(?:\s*;\s+|\s+and\s+then\s+|\s*,\s*then\s+"
+    r"|\s+and\s+(?=(?:rename|add\s+type\s+hints|remove\s+(?:unused|dead)|format|reformat|"
+    r"inline|extract|move|split|port|translate|convert|transpile|write\s+(?:a\s+)?unit\s+tests?|"
+    r"generate\s+unit\s+tests?|commit\s+the\s+changes|run\s+(?:the\s+)?tests?)\b))",
+    re.IGNORECASE,
+)
+
+
+def split_compound_swe_goal(goal: str, root: Any) -> list[str] | None:
+    """Split a multi-step SWE sentence into >=2 independently decisive clauses, or None."""
+    text = str(goal or "").strip()
+    if not text or not _COMPOUND_CLAUSE_SPLITTER.search(text):
+        return None
+    if _COMPOUND_SUBORDINATE_GUARD.search(text):
+        return None
+    parts = [p.strip().rstrip(".") + "." for p in _COMPOUND_CLAUSE_SPLITTER.split(text) if p and p.strip()]
+    if len(parts) < 2 or len(parts) > 6:
+        return None
+    root_p = pathlib.Path(root)
+    for part in parts:
+        if not derivation.stated_existing_files(part, root_p) and not derivation._stated_directories(part, root_p):
+            return None
+        if build_plan(part, root_p) is None:
+            return None
+    return parts
+
