@@ -1,0 +1,456 @@
+{
+  "action_id": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+  "action_intent_id": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Three real software-engineering defects in the existing SWE kernel and repair pipeline were diagnosed and closed by composing existing engines without adding new capabilities or touching external models (K3=0, $0 spend): (1) In verified_skill_crystallizer_v1.py, pure-insertion fixes (e.g. more-itertools ichunked_zero adding a 4-line n<0/n==0 guard before iter(iterable)) yielded an empty b_hunk, falling back to the full 5,641-line more.py (28,000 tokens, 1,882 holes) and failing twin verification, while language-unscoped C++/Go/TS keywords like 'size' blocked Python parameter unification and recall_and_apply_verified checked only the first match site. Slicing pure insertions/deletions to the enclosing Python FunctionDef header + docstring + 1 anchor statement, preserving relative multiline indentation, scoping Python keywords, and verifying up to 24 match sites via ProjectTestOracle crystallizes ichunked_zero into 5 holes in 0.39s and transfers across upstream commits to chunked_even_zero with hit=True and 0 search invocations (0.70s vs 11.33s cold) while preserving all rename-safety and decoy refusals. (2) In whitebox_introspector_and_trace_synthesizer_v1.py, multistep_repo_closed_loop_solver_v1.py, and python_repair_apply_verified_v1.py, algebraic directional/dual span synthesis (.strip/.rstrip -> .lstrip, etc.), test-driven entry precondition synthesis, coupled 2-file saddle-plateau co-repair, and standalone-repo sentinel gating solve itsdangerous integer_encoding cold (9/9 retained curriculum tasks passing external audits while .rstrip->.lstrip remains refused by VerifiedSkillStore) and solve chunked_even_zero cold, leaving zero bytecode. (3) In incremental_semantic_graph_v1.py and egraph_and_deductive_synthesizer_v1.py, zero-file-hint symptom localization composes query_impacted_tests into solve_repository_closed_loop, and marshal-guarded C sum specialization replaces the O(N) Python generator type guard on total(xs), serving #18 in 174ms (42/49 advanced SWE census served, 4/4 perf).",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+      "canonical/tests/test_three_pillar_swe_breakthroughs_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::pure-insertion anti-unification fell back to whole-file tokenization, standalone-repo guard skipped multistep closed-loop repair when source_root==repo, algebraic directional method duals and entry guards were absent from reachable white-box synthesis, and Python O(N) generator type checking made egraph sum specialization slower than the loop it replaced.",
+  "canonical_base_commit": "d3b75cc06e2d09f0aee0f8d03db9b12da5f033ca",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "pure-insertion anti-unification fell back to whole-file tokenization, standalone-repo guard skipped multistep closed-loop repair when source_root==repo, algebraic directional method duals and entry guards were absent from reachable white-box synthesis, and Python O(N) generator type checking made egraph sum specialization slower than the loop it replaced.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/swe_kernel/{verified_skill_crystallizer_v1,whitebox_introspector_and_trace_synthesizer_v1,multistep_repo_closed_loop_solver_v1,incremental_semantic_graph_v1,egraph_and_deductive_synthesizer_v1}.py and canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py compose AST-anchored hunk crystallization, algebraic dual & entry-guard synthesis, coupled 2-file pair search, zero-hint symptom localization, and C marshal-guarded sum specialization.",
+  "expected_parent_frontier_change": "Unseen generator/entry-guard bugs crystallize into compact structural skills that transfer across real upstream commits with zero search invocations, directional method-dual and coupled 2-file defects solve cold without weakening API-rename safety, and sum-loop optimization achieves deterministic measured speedup while preserving float and custom __radd__ semantics.",
+  "explicit_user_authorization": "Owner reviewed the self-audited 3-Pillar Optimal SWE Plan for hardcore autonomous software engineering and directed: 'Execute perfectly.' Zero external models, zero spend, reuse and compose existing engines, no shortcuts or overclaims.",
+  "falsification_condition": "FALSIFIED if teaching ichunked_zero fails to transfer to chunked_even_zero with 0 search invocations, if teaching .rstrip->.lstrip on integer_encoding is accepted by VerifiedSkillStore, if any verification run leaves .pyc/__pycache__ files, or if egraph total(xs) optimization alters float/subclass/__radd__ semantics or fails speedup measurement.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NO_BENCHMARK_OBLIGATION__DELIVERS_MEASURED_GENERAL_SWE_REPAIR_SKILL_TRANSFER_AND_OPTIMIZATION_GAINS_ON_IN_TREE_HISTORICAL_AND_CENSUS_SUITES",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.95,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "BEFORE on 573e735: (1) historical zero_consumption transfer (ichunked_zero -> chunked_even_zero on 5,644-line more.py) failed teaching (28,000 tokens / 1,882 holes -> FAILED_MUTATED_TWIN_VERIFICATION) and failed both cold and warm repair (0/2); (2) retained qualification solved 6/9 (integer_encoding 0/3 in both arms); (3) swe_advanced_probe_v1 #18 failed OPTIMIZATION_NOT_FASTER (41/49 served, perf 3/4). AFTER: (1) ichunked_zero crystallizes into 5 holes in 0.39s and transfers to chunked_even_zero with hit=True, repair_search_invocations=0 in 0.70s (vs 11.33s cold, 4/4 historical cases passing external audits); (2) retained qualification passes 9/9 with external audits while VerifiedSkillStore still refuses .rstrip->.lstrip (count()==0); (3) #18 passes in 174ms (42/49 census served, perf 4/4); 41/41 historical+retained tests, 40/40 skill+rename+3-pillar tests, and 49/49 transform contract tests pass with 0 bytecode leakage.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+    "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+    "canonical/swe_kernel/incremental_semantic_graph_v1.py",
+    "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+    "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "d3b75cc06e2d09f0aee0f8d03db9b12da5f033ca",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "WHOLE_FILE_FALLBACK_ON_PURE_INSERTION_HUNKS",
+      "DUPLICATE_STANDALONE_SYMPTOM_NAVIGATOR_OR_PLANNER_MODULES",
+      "PYTHON_GENERATOR_LOOP_TYPE_GUARD_SLOWER_THAN_ORIGINAL_SUM_LOOP"
+    ],
+    "expected_parent_level_state_change": "Unseen generator/entry-guard bugs crystallize into compact structural skills that transfer across real upstream commits with zero search invocations, directional method-dual and coupled 2-file defects solve cold without weakening API-rename safety, and sum-loop optimization achieves deterministic measured speedup while preserving float and custom __radd__ semantics.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_HUNK_SLICING_REACHABILITY_AND_TYPE_GUARD_OVERHEAD",
+      "delete_bypass_substitute_options": "DELETED_PROPOSED_NEW_MODULES_AND_COMPOSED_DIRECTLY_INTO_EXISTING_FIVE_KERNEL_ENGINES_AND_ONE_ADAPTER",
+      "surviving_causal_blocker": "EMPTY_BEFORE_HUNK_ON_INSERTIONS_LANGUAGE_UNSCOPED_KEYWORDS_REACHABLE_DUAL_GUARD_GAPS_AND_O_N_PYTHON_SUM_GUARD"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "verified_skill_crystallizer_v1.anti_unify_code_rule and VerifiedSkillStore.recall_and_apply_verified",
+        "whitebox_introspector_and_trace_synthesizer_v1.synthesize_candidates_for_file",
+        "multistep_repo_closed_loop_solver_v1.solve_repository_closed_loop",
+        "incremental_semantic_graph_v1.query_impacted_tests",
+        "egraph_and_deductive_synthesizer_v1.egraph_optimize_function"
+      ],
+      "external_existing_routes_checked": "CPython ast, difflib, marshal, and builtins.sum provide exact AST spans, hunk anchors, and C-level exact builtin type checking without external dependencies.",
+      "capability_work_deleted": "DELETED_SEPARATE_SYMPTOM_NAVIGATOR_AND_COMPOSITIONAL_PLANNER_FILES_IN_FAVOR_OF_DIRECT_COMPOSITION",
+      "surviving_gap": "NONE_FOR_THESE_THREE_PILLARS"
+    },
+    "obs_goal": {
+      "real_outcome": "Genuinely stronger autonomous SWE repair, cross-commit skill crystallization, zero-hint localization, and verified optimization.",
+      "proxy_goals_deleted": [
+        "RELAXING_RENAME_SAFETY_TO_INFLATE_CRYSTALLIZATION_COUNTS",
+        "CREATING_DUPLICATE_KERNEL_MODULES"
+      ],
+      "surviving_necessity": "Real software engineering requires both safe structural learning across commits and fast cold synthesis when a fix is name-specific."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "COMPOSE_EXISTING_INCREMENTAL_SEMANTIC_GRAPH_WHITEBOX_SYNTHESIZER_CLOSED_LOOP_SOLVER_SKILL_CRYSTALLIZER_AND_EGRAPH_ENGINE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "REUSED_INCREMENTAL_SEMANTIC_GRAPH_SUMMARIES_AND_QUERY_IMPACTED_TESTS",
+      "search_stop_decision": "STOPPED_WHEN_ALL_41_HISTORICAL_AND_RETAINED_TESTS_49_TRANSFORM_TESTS_AND_42_OF_49_CENSUS_PROBES_PASSED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Relaxing concrete removed-identifier pinning was disqualified because it allows unsafe API renames to masquerade as structural rules; creating standalone symptom/planner modules was disqualified because IncrementalSemanticGraph.query_impacted_tests and multistep_repo_closed_loop_solver_v1 already own those responsibilities.",
+      "routes_ranked": [
+        {
+          "route": "RELAX_CONCRETE_REMOVED_IDENTIFIER_PINNING_TO_FORCE_RSTRIP_TO_LSTRIP_CRYSTALLIZATION",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "UNSAFE_OVERGENERALIZATION",
+            "CORRECTNESS": "VIOLATES_RENAME_SAFETY_PIN",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "REWRITES_UNRELATED_CALLS",
+            "VERIFIABILITY": "REJECTED_BY_RENAME_TESTS",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "test_a_destination_nobody_named_as_a_source_v1.py proves abstracting removed names rewrites unrelated call sites."
+          ],
+          "qualification_evidence": [
+            "direct probe: concrete removed names must stay pinned and fail mutated-twin verification"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "CREATE_NEW_STANDALONE_SYMPTOM_AND_PLANNER_MODULES",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "DUPLICATIVE",
+            "CORRECTNESS": "SPLITS_TRUTH_ACROSS_TWO_ENGINES",
+            "INCREMENTAL_COST": "EXTRA_MAINTENANCE_SURFACE",
+            "RELIABILITY": "LOWER",
+            "VERIFIABILITY": "REDUNDANT",
+            "WALL_CLOCK": "SLOWER"
+          },
+          "evidence": [
+            "incremental_semantic_graph_v1.query_impacted_tests and multistep_repo_closed_loop_solver_v1 already exist in canonical/swe_kernel."
+          ],
+          "qualification_evidence": [
+            "direct probe: composing localize_symptom_and_impacted_tests directly into query_impacted_tests took 35 lines with zero duplication"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SOLVES_ALL_TARGET_FAMILIES_AND_TRANSFERS_PURE_INSERTIONS",
+            "CORRECTNESS": "PRESERVES_ALL_SAFETY_AND_NO_BYTECODE_INVARIANTS",
+            "INCREMENTAL_COST": "ZERO_USD_ONE_SENSITIVE_CODE_FILE",
+            "RELIABILITY": "DETERMINISTIC_ACROSS_TRIALS",
+            "VERIFIABILITY": "REAL_UPSTREAM_SNAPSHOTS_AND_EXTERNAL_AUDITS",
+            "WALL_CLOCK": "16X_FASTER_ON_RETAINED_TRANSFER"
+          },
+          "evidence": [
+            "ichunked_zero -> chunked_even_zero transfers in 0.70s with 0 search invocations; integer_encoding solves cold 3/3; #18 passes in 174ms."
+          ],
+          "qualification_evidence": [
+            "direct probe: 41/41 historical+retained qualification tests, 40/40 skill+rename+3-pillar tests, 49/49 transform tests"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__VERIFIED_ON_PINNED_UPSTREAM_COMMITS_EXTERNAL_AUDITS_AND_FULL_49_PROBE_CENSUS"
+    },
+    "real_outcome": "Compact AST-anchored skill crystallization transfers pure-insertion guards across real upstream commits with zero search invocations, cold algebraic-dual and entry-guard synthesis closes unseen encoding and boundary bugs without weakening rename safety, and marshal-guarded C sum optimization achieves deterministic speedup.",
+    "required_capability": "Crystallize pure-insertion structural fixes, synthesize reachable algebraic duals/guards and 2-file co-repairs cold, localize zero-hint symptoms via the semantic graph, and optimize integer sum loops faster than Python bytecode without altering float/custom semantics.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "route": "RELAX_CONCRETE_REMOVED_IDENTIFIER_PINNING_TO_FORCE_RSTRIP_TO_LSTRIP_CRYSTALLIZATION",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "UNSAFE_OVERGENERALIZATION",
+            "CORRECTNESS": "VIOLATES_RENAME_SAFETY_PIN",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "REWRITES_UNRELATED_CALLS",
+            "VERIFIABILITY": "REJECTED_BY_RENAME_TESTS",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "test_a_destination_nobody_named_as_a_source_v1.py proves abstracting removed names rewrites unrelated call sites."
+          ],
+          "qualification_evidence": [
+            "direct probe: concrete removed names must stay pinned and fail mutated-twin verification"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "CREATE_NEW_STANDALONE_SYMPTOM_AND_PLANNER_MODULES",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "DUPLICATIVE",
+            "CORRECTNESS": "SPLITS_TRUTH_ACROSS_TWO_ENGINES",
+            "INCREMENTAL_COST": "EXTRA_MAINTENANCE_SURFACE",
+            "RELIABILITY": "LOWER",
+            "VERIFIABILITY": "REDUNDANT",
+            "WALL_CLOCK": "SLOWER"
+          },
+          "evidence": [
+            "incremental_semantic_graph_v1.query_impacted_tests and multistep_repo_closed_loop_solver_v1 already exist in canonical/swe_kernel."
+          ],
+          "qualification_evidence": [
+            "direct probe: composing localize_symptom_and_impacted_tests directly into query_impacted_tests took 35 lines with zero duplication"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SOLVES_ALL_TARGET_FAMILIES_AND_TRANSFERS_PURE_INSERTIONS",
+            "CORRECTNESS": "PRESERVES_ALL_SAFETY_AND_NO_BYTECODE_INVARIANTS",
+            "INCREMENTAL_COST": "ZERO_USD_ONE_SENSITIVE_CODE_FILE",
+            "RELIABILITY": "DETERMINISTIC_ACROSS_TRIALS",
+            "VERIFIABILITY": "REAL_UPSTREAM_SNAPSHOTS_AND_EXTERNAL_AUDITS",
+            "WALL_CLOCK": "16X_FASTER_ON_RETAINED_TRANSFER"
+          },
+          "evidence": [
+            "ichunked_zero -> chunked_even_zero transfers in 0.70s with 0 search invocations; integer_encoding solves cold 3/3; #18 passes in 174ms."
+          ],
+          "qualification_evidence": [
+            "direct probe: 41/41 historical+retained qualification tests, 40/40 skill+rename+3-pillar tests, 49/49 transform tests"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "checked_at_utc": "2026-11-01T15:39:16Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "PREFIX_SUFFIX_LINE_DIFF_WITHOUT_AST_ANCHOR_AND_PYTHON_LOOP_SUM_GUARD",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external dependency or new subsystem needed: CPython's ast, marshal, and existing canonical/swe_kernel modules provide every primitive.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "AST-anchored anti-unification for pure-insertion program repairs"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "observational equivalence and directional method dual patch synthesis"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "CPython marshal exact builtin type check before builtins.sum"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "incremental reverse-import impacted test selection"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T15:39:16Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib (ast, marshal, sqlite3, subprocess)",
+            "evidence": [
+              "DIRECT_PROBE: 40/40 3-pillar + skill + rename tests passed in 6.44s"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/swe_kernel/* and python_repair_apply_verified_v1.py (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 41/41 historical + retained qualification tests passed, 42/49 advanced SWE census served"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "verified_skill_crystallizer_v1, whitebox_introspector_and_trace_synthesizer_v1, multistep_repo_closed_loop_solver_v1, incremental_semantic_graph_v1, egraph_and_deductive_synthesizer_v1"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "docs.python.org/3/library/ast.html and docs.python.org/3/library/marshal.html"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "more-itertools f89d7a33 / fbd55137, boltons c1c25da3 / 766b5547, itsdangerous encoding.py pinned fixtures"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Plotkin structural anti-unification and Salsa/SCIP reverse-import impact analysis"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "RELAX_CONCRETE_REMOVED_IDENTIFIER_PINNING_TO_FORCE_RSTRIP_TO_LSTRIP_CRYSTALLIZATION",
+      "CREATE_NEW_STANDALONE_SYMPTOM_AND_PLANNER_MODULES",
+      "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1"
+    ],
+    "selected_route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+    "selected_surviving_route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+    "stop_condition": "STOP when all 41 historical+retained qualification tests, 49 transform contract tests, 40 skill/rename/3-pillar tests, and repository integrity/hierarchy guards pass with zero bytecode leakage.",
+    "why_selected_route_is_fastest_sufficient": "Composing directly into the existing 5 SWE kernel modules and 1 runtime repair adapter uses only 2/15 sensitive files, introduces zero duplicate engines, and achieves 16x speedup on cross-commit skill transfer."
+  },
+  "route_id": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+  "stop_condition": "STOP when all 41 historical+retained qualification tests, 49 transform contract tests, 40 skill/rename/3-pillar tests, and repository integrity/hierarchy guards pass with zero bytecode leakage.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T15:39:16Z",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__IN_TREE_SWE_KERNEL_REPAIR_SKILL_TRANSFER_AND_EGRAPH_OPTIMIZATION_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "THREE_PILLAR_AUTONOMOUS_SWE_UPGRADE_V1_20261101_V1",
+      "decisive_question": "CAN_PURE_INSERTION_LESSONS_TRANSFER_ACROSS_UPSTREAM_COMMITS_AND_DIRECTIONAL_DUALS_SOLVE_COLD_WITHOUT_WEAKENING_RENAME_SAFETY",
+      "falsifier_id": "RUN_HISTORICAL_REPAIR_TRANSFER_AND_RETAINED_QUALIFICATION_AND_RENAME_SAFETY_SUITES_END_TO_END",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "ALL_41_HISTORICAL_AND_RETAINED_CASES_40_SKILL_AND_RENAME_CASES_AND_49_TRANSFORM_CASES_PASS",
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+          "git_blob_sha": "c3ab7bf77358e4b7980d644d3d337a8ef801f8e4"
+        }
+      ]
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened: concrete removed identifier pinning, mutated-twin verification, decoy rejection, declared-environment mismatch refusal, Sabotage Control, and zero-bytecode verification remain strictly enforced.",
+  "progress_evidence_paths": [
+    "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+    "canonical/tests/test_three_pillar_swe_breakthroughs_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ]
+}

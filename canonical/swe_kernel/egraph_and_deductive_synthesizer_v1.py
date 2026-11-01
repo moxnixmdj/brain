@@ -49,8 +49,9 @@ for value in cases:
     if observe(functions[0], value) != observe(functions[1], value):
         print(json.dumps({'equivalent': False, 'counterexample': repr(value)})); sys.exit(0)
 value = 25000 if p['integer_range'] else list(range(10000))
+functions[0](value); functions[1](value)
 runs = [[], []]
-for k in range(5):
+for k in range(7):
     for i in ([0,1] if k % 2 == 0 else [1,0]):
         t = time.perf_counter_ns(); functions[i](value); runs[i].append(time.perf_counter_ns()-t)
 print(json.dumps({'equivalent': True, 'cases': len(cases), 'median_before_ns': statistics.median(runs[0]), 'median_after_ns': statistics.median(runs[1]), 'runs_before_ns': runs[0], 'runs_after_ns': runs[1]}))
@@ -532,7 +533,23 @@ def egraph_optimize_function(target: Path, fn_name: str | None = None) -> dict[s
     new_fn_code = f"def {fn.name}({ast.unparse(fn.args)}):\n"
     if doc is not None:
         new_fn_code += f"    {doc!r}\n"
-    new_fn_code += f"    import builtins as {bi}\n    if {guard}:\n" + textwrap.indent(candidate_body, "        ") + "\n" + textwrap.indent(fallback, "    ") + "\n"
+    if rule_applied == "egraph_for_accum_to_c_builtin_sum":
+        ma = contracts.fresh_name(tree, "_brain_marshal")
+        sr = contracts.fresh_name(tree, "_brain_sum_res")
+        new_fn_code += (
+            f"    import builtins as {bi}, marshal as {ma}\n"
+            f"    if sum is {bi}.sum and {bi}.type({param}) in ({bi}.list, {bi}.tuple):\n"
+            f"        try:\n"
+            f"            {ma}.dumps({param}, 4)\n"
+            f"            {sr} = sum({param})\n"
+            f"            if {bi}.type({sr}) is {bi}.int:\n"
+            f"                return {sr}\n"
+            f"        except ({bi}.ValueError, {bi}.TypeError):\n"
+            f"            pass\n"
+            + textwrap.indent(fallback, "    ") + "\n"
+        )
+    else:
+        new_fn_code += f"    import builtins as {bi}\n    if {guard}:\n" + textwrap.indent(candidate_body, "        ") + "\n" + textwrap.indent(fallback, "    ") + "\n"
 
     lines = original.splitlines()
     start_idx = fn.lineno - 1

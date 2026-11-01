@@ -253,7 +253,7 @@ def _try_multistep_closed_loop_patches(
 )->tuple[list[dict[str,Any]],int]:
     """Multi-step closed-loop beam-search fallback for >=2-step, src-layout, or cross-module bugs."""
     import difflib
-    if source_root==repo:
+    if source_root==repo and (repo/"canonical"/"governance"/"REPO_INTEGRITY_POLICY_V1.json").is_file():
         return [],0
     try:
         from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import (
@@ -451,6 +451,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["repair_status"]="PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION"
         out["repair_mode"]="scoped_retained_repair"
     elif has_src_layout:
+        out["repair_search_invocations"]+=1
         patches,loop_steps=_try_multistep_closed_loop_patches(
             repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths,goal=goal_str
         )

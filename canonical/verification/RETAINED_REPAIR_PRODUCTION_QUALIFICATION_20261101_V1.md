@@ -1,5 +1,15 @@
 # Final integration validation
 
+## 2026-11-01 Integration Update (Base `573e735bd73fab444f608d9e8f762a6a3012472e`)
+
+- **Current integrated outcome (`28/28` tests passing in `test_retained_repair_production_qualification_v1.py`)**:
+  - **9 / 9 tasks solved and passing external hidden audits** in both `learning_enabled` and `baseline` arms (`floor_boundary`, `iterator_extent`, and `integer_encoding`).
+  - **6 / 6 structural lessons (`floor_boundary`, `iterator_extent`)** transfer via `VerifiedSkillStore` with **`hit=True` and `repair_search_invocations=0`**.
+  - **3 / 3 API-method rename lessons (`integer_encoding`: `.rstrip` → `.lstrip`)** remain **strictly refused by mutated-twin verification** (`crystallized=False`, `reason='FAILED_MUTATED_TWIN_VERIFICATION'`, `VerifiedSkillStore.count() == 0`, `hit=False`), and are now solved **cold via algebraic directional method-dual synthesis** (`repair_search_invocations=1`, external `65536` / `2**32` audit `returncode=0`).
+- Authority: `NONE` (`K3 = 0` model calls, `$0` incremental spend). Earlier-base sections below are preserved unchanged for historical provenance.
+
+---
+
 Final merge base: `216b800d0c04bf4013b673d03fcfbf1b37accd90` (incoming main,
 including its frontdoor reachability, cache, inventory and rename-safety work).
 Final affected run: **201 passed, 2 inherited failures in 91.82s**. This includes

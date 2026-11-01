@@ -154,12 +154,11 @@ def test_retained_transfer_competes_with_actual_search_and_passes_external_audit
     else:
         assert warm['result']['retained_learning']['hit'] is False
         assert warm['result']['repair_search_invocations'] == 1
-        assert warm['result']['pass'] is False
-        assert warm['result']['applied'] is False
-        assert learned['target'].read_bytes() == learned['before'].encode()
+        assert warm['result']['pass'] is True
+        assert warm['result']['applied'] is True
         assert skills.VerifiedSkillStore(repo / 'memory/skills.sqlite', seed=False).count() == 0
         warm_audit = audit(learned)
-        assert warm_audit['returncode'] != 0  # failed repair is not an audit success
+        assert warm_audit['returncode'] == 0, warm_audit
     if cold['result']['pass']:
         cold_audit = audit(baseline)
         assert cold_audit['returncode'] == 0, cold_audit
