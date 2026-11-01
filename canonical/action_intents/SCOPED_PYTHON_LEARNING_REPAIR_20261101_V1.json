@@ -1,0 +1,356 @@
+{
+  "action_id": "SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1",
+  "action_intent_id": "SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Repair measured Python insertion/multi-hunk learning using existing lexer, rule/store and behavioral verification. Freeze historical pairs and negative cases before runtime edits; meter qualification end-to-end. No universal or independent capability credit.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "admission_record_timing": "RECORDED_BEFORE_SOURCE_EDITS",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "model_dependency_count_scope": "The deterministic runtime producer/solver route, not the model-assisted development session; development provenance is explicitly declared separately.",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/swe_kernel/python_scoped_edit_rule_v1.py",
+      "canonical/tests/test_python_scoped_edit_learning_v1.py",
+      "canonical/verification/SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1.md"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Python insertion-only and mixed-hunk lessons fail self-reproduction and twin verification; scoped recall must verify multiple structural locations rather than trust the first match.",
+  "canonical_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Python insertion-only and mixed-hunk lessons fail self-reproduction and twin verification; scoped recall must verify multiple structural locations rather than trust the first match.",
+  "date": "2026-11-01",
+  "expected_parent_frontier_change": "Repair measured Python insertion/multi-hunk learning using existing lexer, rule/store and behavioral verification. Freeze historical pairs and negative cases before runtime edits; meter qualification end-to-end. No universal or independent capability credit.",
+  "explicit_user_authorization": "Execute perfectly. And then merge all your work.",
+  "falsification_condition": "A zero-work command or changed test corpus authorizing success, an unverified applied patch, retained reuse across incompatible scope, or uncounted search/verification cost invalidates the relevant claim.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "canonical_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "estimate_semantics": "Conditional engineering planning inputs required by the admission scheduler, not measured benchmark improvement, statistical certification, or an independently validated global probability bound. No official obligation is discharged by this record.",
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000",
+    "interpretation": "Reliable production source effects and verified reusable repairs are prerequisites for coding capability. No obligation discharge, official benchmark gain or independent certification.",
+    "measured_effect": "Current-tree direct probes: Bits reproduces and passes twin; unit_boundary, ichunked_zero and chunked_even_zero all fail. Insertion rules grow to about 28k tokens and 1882 holes. Discovery inspected existing tokenizer, hunk extraction, scoped store/oracle and AST tooling before extending them.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 86400
+  },
+  "merge_refresh": {
+    "current_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
+    "original_admission_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
+    "reason": "Incoming main integrated; unchanged counterexample obligations rebound to exact current source/test blobs. No guard weakened."
+  },
+  "ownership_credit_delta": 0,
+  "probe_specific": false,
+  "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
+  "qualification_result": {
+    "baseline_distinct_issues_solved": 1,
+    "distinct_issues_attempted": 2,
+    "independent_certification": false,
+    "learning_enabled_distinct_issues_solved": 2,
+    "recorded_after_implementation": true,
+    "repetitions_per_issue": 2,
+    "report": "canonical/verification/SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1.json",
+    "retained_transfer_issue": "chunked_even_zero",
+    "scope_complete": false
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Stated-command exit code alone as proof that named tests passed",
+      "Parallel replacement search or skill storage"
+    ],
+    "expected_parent_level_state_change": "Repair measured Python insertion/multi-hunk learning using existing lexer, rule/store and behavioral verification. Freeze historical pairs and negative cases before runtime edits; meter qualification end-to-end. No universal or independent capability credit.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Delete implicit assurance inference",
+        "Refuse unsupported contract constraints and out-of-scope recall",
+        "Reuse SQLite, existing copied-tree measurement and suite runner"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_EXISTING_SWE_TRANSFORM_AND_TRANSFER_IMPLEMENTATIONS",
+      "surviving_causal_blocker": "Python insertion-only and mixed-hunk lessons fail self-reproduction and twin verification; scoped recall must verify multiple structural locations rather than trust the first match."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "Replacement universal-learning architecture",
+        "Replacement parser",
+        "Parallel evidence/model format"
+      ],
+      "existing_inherited_routes_checked": [
+        "VerifiedSkillStore and its current removed-name pinning/typed contracts/invalidation",
+        "RetainedRepairSession and ProjectTestOracle in the production apply path",
+        "Existing token-based first-match substitution and minimal changed-hunk extraction",
+        "Existing AST mutation/search and source-aware copied-project measurement",
+        "Existing causal trace-to-workflow compiler and scope-aware crossfile choreographer; no replacement architecture"
+      ],
+      "external_existing_routes_checked": [
+        "Pinned licensed upstream boltons, more-itertools and itsdangerous sources; attribution and exact source SHAs in fixture provenance manifest.",
+        "Existing prior cache/parser metadata remains historical discovery context only, not qualification of the current solution."
+      ],
+      "surviving_gap": "Measure actual historical cross-issue transfer rather than assume pattern reuse; preserve failed/refused tasks. Source-only inserts currently fall back to full-module patterns; candidate application returns only its first syntactic match."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Universal mastery claims",
+        "Treating a producer PASS flag or low replay trial count as task correctness or total work"
+      ],
+      "real_outcome": "Qualify two pinned historical bug families with separate teaching, unseen-issue transfer, real copied-project verification, capable disabled baseline and required-refusal cases. Repair only reproduced shared blockers, preserving rename safety. Correct stale apply tests in the open. No universal, independent or terminal promotion claim.",
+      "surviving_necessity": "Correctly bound and freshly tested reuse rather than syntax-only lesson acceptance."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "Existing anti-unification and parameter holes",
+        "Existing SQLite schema with versioned pattern_json metadata",
+        "Existing repository measurement and test-suite execution machinery"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "Obsolete no-repair expectation where inherited synthesis solves the stated test",
+        "Mocked subprocess rollback test instead of real execution-boundary rollback",
+        "Assuming first syntactic match is the verified repair location"
+      ],
+      "fresh_reuse_plan": "Reuse the maintained interfaces. Revalidate changed dependencies; do not let retained success replace live verification."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the existing current-tree test modules and official compiler instead of creating a new evidence architecture"
+      ],
+      "search_stop_decision": "For the finite reproduced defects, maintained substrate plus bounded contract glue is sufficient; stop search before pretending universal optimality. Reopen if new counterexamples or a qualified dominating route appears."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Trust fails known counterexamples; disabling all writes loses working positive cases; replacement learning does not fix source-transition invariants. No claim that every possible external route was exhaustively benchmarked.",
+      "routes_ranked": [
+        "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+        "KEEP_BOOLEAN_ONLY_VERIFICATION",
+        "REPLACE_LEARNER"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Pinned historical before/after source and upstream regression cases from boltons and more-itertools. Separate public consumer modules and authored audit/counterexamples where needed are explicitly labeled; these are repository-derived historical-bug projects, not full repository or benchmark certification."
+    },
+    "real_outcome": "Repair measured Python insertion/multi-hunk learning using existing lexer, rule/store and behavioral verification. Freeze historical pairs and negative cases before runtime edits; meter qualification end-to-end. No universal or independent capability credit.",
+    "required_capability": "Retain bounded Python edits and revalidate them on distinct issues with real project tests.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Keep the existing search solver as the fallback/baseline; scoped memory proposes, never bypasses verification.",
+            "CORRECTNESS": "Require actual declared corpus success and final source/test integrity; one reproduced no-work-command counterexample.",
+            "INCREMENTAL_COST": "Existing runtime mechanisms; no paid service or external-model runtime call.",
+            "RELIABILITY": "Historical qualification pending. Baseline two stale-test failures reproduced. Preserve incoming rename refusal and strict live verification.",
+            "VERIFIABILITY": "Actual child executions and original test/source byte comparisons, not independent certification.",
+            "WALL_CLOCK": "Measure complete search, proposal and verification costs; no unmeasured fastest claim."
+          },
+          "evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+            "canonical/tests/test_python_repair_apply_verified_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+            "canonical/tests/test_python_repair_apply_verified_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T14:22:23.397118+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_evidence_provenance": "Current local inspection plus GitHub primary commit/PR metadata and limited community commit search on 2026-11-01; no exhaustive or globally optimal route claim.",
+      "discovery_required": true,
+      "incumbent_route": "LEGACY_BOOLEAN_PREDICATE_AND_UNSCOPED_CACHE_RECALL",
+      "max_age_hours": 24,
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "GitHub repository search: python disk cache transactions"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GitHub repository metadata: grantjenks/python-diskcache"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "GitHub issues search: repo:python/cpython lru_cache mutable"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub latest release: tree-sitter/py-tree-sitter"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T13:17:43.056304+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "CPython, pytest/pytest-subtests and maintained repair/measurement/store modules",
+            "evidence": [
+              "DIRECT_PROBE: baseline module 11 passed, 2 failed; reproduced false already-satisfied result without source edits; local pytest installed in isolated .venv."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Current store, contract, oracle, production apply, AST candidates and causal workflow/compiler inspected; maintained composition preferred."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Limited GitHub commit search: more-itertools off-by-one returned no items; zero-size search located ichunked PR1305/issue1304 and chunked_even fix; boltons boundary search located bytes2human and Bits fixes. Not exhaustive."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "GitHub immutable source/patch metadata; standard-library tokenizer, AST and SQLite already present. No external learner/runtime model adopted."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/mahmoud/boltons/commit/c1c25da365cf14878cf5317147e7a09b5d124df5",
+          "https://github.com/mahmoud/boltons/commit/766b5547392fe8d54c1e000098499dc556bb5cb7",
+          "https://github.com/more-itertools/more-itertools/pull/1305",
+          "https://github.com/more-itertools/more-itertools/commit/fbd55137fe47b44f55190c3714c75f1b21bf834d"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+      "KEEP_BOOLEAN_ONLY_VERIFICATION",
+      "REPLACE_LEARNER"
+    ],
+    "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+    "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+    "why_selected_route_is_fastest_sufficient": "Within the compared finite-scope routes, reuse the existing machinery and repair its shared preconditions rather than replace the stack. Comparative global optimality is unknown."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+  "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+  "status": "IMPLEMENTED_BOUNDED_TRANSFER__NO_PROMOTION",
+  "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T14:41:25.428967+00:00",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "Finite scoped retained-repair verification only. No terminal proof, complete request semantics, benchmark acceptance or permanent mastery claim.",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "c3ab7bf77358e4b7980d644d3d337a8ef801f8e4",
+          "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+        },
+        {
+          "git_blob_sha": "23e44290902e9517e13ff67570183b009d418e33",
+          "path": "canonical/tests/test_python_repair_apply_verified_v1.py"
+        }
+      ],
+      "decisive_question": "Does one historical teaching transfer to a genuinely different historical issue under live tests, with all refusal and discovery/verification costs reported?",
+      "falsifier_id": "SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1_WRONG_RULE_AND_ABLATION",
+      "known_counterexamples_checked": true,
+      "proposal_id": "SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
