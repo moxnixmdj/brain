@@ -360,7 +360,7 @@
   ],
   "selected_route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
   "selected_surviving_route": "LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1",
-  "stop_condition": "STOP when a plan learned on one machine is recalled on a machine with a different program inventory and is re-verified there, and no plan is believed without execution.",
+  "stop_condition": "STOP when a real repository with an injected bug is repaired by an edit the machine produced and the project's own suite goes green without the operator touching the code.",
   "why_selected_route_is_fastest_sufficient": "The slot, the grammar and the adapter already existed for every other git argument; the revision was the one argument with no slot."
  },
  "route_id": "A_REAL_REPOSITORY_SAYS_ZERO_V1_20261101_V1",
@@ -409,7 +409,7 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "3f97f300912d1199f1a21ced23f1b0750c26bdca",
+     "git_blob_sha": "0dc75fc4582b0c6fb91051d841db2ea6f2d770d2",
      "path": "canonical/runtime/live_brain_route_admission_v1.py"
     },
     {
@@ -421,7 +421,7 @@
      "path": "execution_guard/swe_capability_matrix_v1.py"
     },
     {
-     "git_blob_sha": "392b81f77d9c51d78c13b0fcd3a2c02e0be72688",
+     "git_blob_sha": "be43e297bed9037059ef9cf432e3c213b8010ae4",
      "path": "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py"
     }
    ],
