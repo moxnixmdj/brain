@@ -25905,6 +25905,7 @@
      "subprocess",
      "sys",
      "tempfile",
+     "time",
      "typing"
     ],
     "declared_dependency_executables": [],
@@ -25934,7 +25935,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "56bf19854066fdd162015828f45697f31e8cf3a355407de53eec28fc62abc4f7",
+    "source_sha256": "58d0aa89796728e50421be9adb1aa4908261b0cd418018471b4e1b5e60decfe4",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30934,7 +30935,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e8a0d6fe35961d3fa5e66fb1e26a24d98590dcb2510e270d0e87d9f680baf896"
+  "value": "3a4843a2db36ab275789fbdd79e349d6b9d25dee27c20129b021e9c05dfed744"
  },
  "engines": [
   {
@@ -60949,7 +60950,7 @@
   "included_source_count": 1027,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8b052179c076224e1bb13707ae32f8e8e962a54687a419b96d222a36c2bfe0c2"
+  "source_tree_digest": "81771bd6560388da597def12178a4f0e8d9932a1b3b031812722ef8312d5362c"
  },
  "research_index": [
   {

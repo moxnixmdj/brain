@@ -163,13 +163,21 @@ def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
 
 
 def _atomic_write(target:pathlib.Path,data:bytes)->None:
+    import time as _time
+    old_st=target.stat()
     fd,name=tempfile.mkstemp(prefix=target.name+".brain_apply_",dir=target.parent)
     tmp=pathlib.Path(name)
     try:
         with os.fdopen(fd,"wb") as handle:
             handle.write(data)
-            os.fchmod(handle.fileno(),target.stat().st_mode & 0o777)
+            os.fchmod(handle.fileno(),old_st.st_mode & 0o777)
+        distinct_s=min(int(old_st.st_mtime),int(_time.time()))-2
+        os.utime(tmp,(distinct_s,distinct_s))
         os.replace(tmp,target)
+        pyc_dir=target.parent/"__pycache__"
+        if pyc_dir.is_dir():
+            for pyc in pyc_dir.glob(f"{target.stem}.*.pyc"):
+                pyc.unlink(missing_ok=True)
     finally:
         tmp.unlink(missing_ok=True)
 
@@ -591,6 +599,14 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             reg_file=_synthesize_differential_regression_test(
                 exec_root,test_paths[0].parent,edited_targets,originals
             )
+            import time as _time
+            _back_s=int(_time.time())-2
+            for _et in edited_targets:
+                os.utime(_et,(_back_s,_back_s))
+                _pc=_et.parent/"__pycache__"
+                if _pc.is_dir():
+                    for _pyc in _pc.glob(f"{_et.stem}.*.pyc"):
+                        _pyc.unlink(missing_ok=True)
             if reg_file is not None and reg_file.is_file():
                 reg_rel=_rel(repo,reg_file)
                 out["regression_test_written"]=reg_rel
