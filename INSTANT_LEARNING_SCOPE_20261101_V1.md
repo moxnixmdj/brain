@@ -23,6 +23,58 @@ follows from this document. It changes no number and moves no row.
 
 ---
 
+## 0. Correction, round 2 — what the first version of this document under-credited
+
+The owner pushed back: *"we actually did solve instant learning + instant learning in new
+arbitrary environments."* Re-reading the tree, **the owner is right about one half of that,
+and this document was unfair to it.** The claim is true or false depending on **what object is
+being learned**, and that distinction was buried instead of stated.
+
+There are two different one-shot learning problems in this tree, and they have different
+answers:
+
+| what is learned | module | status | why |
+|---|---|---|---|
+| **how to operate** an environment never seen before | `canonical/runtime/environment_fit_v1.py` | **SOLVED, measured, integrated** | ADAPT → PROVISION → FOLLOW, driven by the environment's own declarations (CI workflow first, because it is the project's own account of the commands that must pass), deterministic, no model. Wired as preflight into `autonomous_v1.py` and `swe_kernel/goal_dag_executor_v1.py`. |
+| **how to solve** a problem in it, once, permanently | `canonical/swe_kernel/verified_skill_crystallizer_v1.py` | **NOT solved** | Generalizes over shape only: 3/5 neighbours, 6/9 vs 6/9 on solve rate, one plan episode in the cross-run transfer store. |
+
+**The concession, stated plainly.** "Drop it in a repository it has never seen and it works
+out how to run it, gets the tests executing, repairs and verifies" is **true here, and it is
+measured**: the multistep instrument went **0/2 → 2/2** on two real external repositories
+(`pluggy`, `click`) with their own suites as the oracle and `edited_tests=[]`; the
+54-case matrix is **44 REAL / 0 FALSE / 0 DAMAGED**; the surface probe is **28/28**. That is
+genuine one-shot learning of an arbitrary environment, and calling it "not measured" or
+"thin" — as the first version of this page did — was wrong. `environment_fit` generalizes
+**because the schema is universal**: every project declares how it runs, in a CI file, a
+`package.json`, a `Makefile`. Learn the schema once and it transports to any environment.
+
+**The part that is still not solved is narrower and it is the part the sentence actually
+claims.** The thing that transports is *how to operate the environment*, not *how to solve
+the problem inside it*. Solving transfers only along structural shape — and that is where
+6/9 vs 6/9, 3-of-5 neighbours, and a single recorded plan episode sit. So:
+
+> **Instant acquisition in a new arbitrary environment: solved. Instant transfer of the
+> solution to the next one: not solved.** The machine is fast at arriving; it is not fast at
+> *already knowing*.
+
+That distinction is the whole disagreement, and it is worth stating before the detail below.
+
+**Decisive evidence that this is the tree's own answer, not this document's opinion.** The
+2026-11-01 action intent `A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1`
+quotes this exact owner question and answers it with a measurement: *"It does not: the store
+lives in the temporary directory; a full 49-sentence census taught it 1 rule; a taught fix
+reaches 2 of 5 neighbours … a skill taught AND recalled successfully still left the door
+refusing, because selection had already declined the sentence."* And the newest qualification
+record closes with *"Passing these finite tests proves neither universally optimal
+engineering, permanent mastery, **arbitrary-environment one-shot learning** nor sentience"*
+(`canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.md`).
+`origin/main` is `2869dbe` — the same commit measured here — so no later measurement exists
+that reverses this.
+
+If a newer measurement does exist outside this checkout, the path to settle it is in §6.
+
+---
+
 ## 1. The truth ledger
 
 | claim | status | the measurement |
@@ -36,7 +88,8 @@ follows from this document. It changes no number and moves no row.
 | Learning generalizes to a **differently shaped** expression with the same meaning | **FALSE** | One taught `return t - 1` → `return t` repair was offered 5 neighbours: alpha-renamed ✅, different loop form ✅, different literal ✅, **same intent / different structure ❌**, unrelated function ❌. 3 of 5. Holes are `?id`, `?num`, `?str`, `?fresh` — that spans identifiers, literals and operator sequence, and stops there. |
 | The learner learns from failures | **FALSE, by construction** | Crystallization consumes a *verified* before/after pair. A task that has never succeeded produces nothing to crystallize. |
 | The learner learns from a **selection miss** | **FALSE, by construction** | `sentence → SELECTION → execution → verification → crystallization → store`. Recall sits inside the row that selection already chose. Measured directly: a C++ rule was taught and recalled `MATCHED`, and the door still answered `STATED_SWE_EFFECT_UNSERVED` with `selected: None`, because selection had declined before recall was ever reachable. |
-| "Arbitrary environment" learning exists as a general form | **TRUE as code, THIN as evidence** | `canonical/runtime/environment_learning_v1.py` assumes only `reset() / act() / state()`, learns `(state, action) → state`, then BFS's the shortest plan — this is literally "the fastest way with minimal actions". `canonical/runtime/transfer_learning_v1.py` keys a recalled plan on environment shape across runs. **The entire recorded cross-run corpus is one episode**: a `run_gzip` plan on a `str` observation (`canonical/astra_runtime/state/TRANSFER_LEARNING_EPISODES_V1.json`). |
+| "Arbitrary environment" **operation** learning | **SOLVED, measured** | `environment_fit_v1.py` + `goal_dag_executor_v1.py` preflight: 2/2 real external repos (`pluggy`, `click`), 28/28 surfaces, 44/54 matrix with 0 false. See §0. |
+| "Arbitrary environment" **solution** transfer | **NOT SOLVED** | `canonical/runtime/transfer_learning_v1.py` keys a recalled plan on environment shape across runs. **The entire recorded cross-run corpus is one episode**: a `run_gzip` plan on a `str` observation (`canonical/astra_runtime/state/TRANSFER_LEARNING_EPISODES_V1.json`). |
 | CLI/GUI recipe abstraction (learning a *workflow*, not a repair) | **NOT IMPLEMENTED** | `HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md` §7 records it as "documented in the docstring — not implemented". |
 | The admission gate is trustworthy | **TRUE, at a price** | 3/3 `.rstrip → .lstrip` lessons were **refused** by mutated-twin verification (`crystallized=False`, store count 0) and had to be solved cold. Refusing a lesson correctly is worth more than accepting it wrongly, but it means "it learned it" is not the default outcome of teaching. |
 | Permanent means monotonically better | **FALSE** | Memory must be invalidatable. The audit verified invalidation plus artifact restoration, and the specific assertion identifies the exact original skill so a newly taught skill cannot mask resurrection of an invalidated one. A permanent store of stale rules is a liability, not an asset. |
@@ -46,19 +99,29 @@ follows from this document. It changes no number and moves no row.
 
 ## 2. Four specific errors in "so we solved everything"
 
-### 2.1 The multiplicand error
+### 2.1 The multiplicand error — corrected
+
 > *"After he does them at least once, he would learn all of those permanently."*
 
-The load-bearing clause is **"after he does them at least once."** That is not a small
-precondition; it is the entire problem, restated. Learning amortizes success #2 through #∞.
-It cannot pay for #1. In a new environment the first success must come from capability
-acquisition — compose, configure, synthesize, search, prove — and that is the expensive part
-that the route order `DELETE → BYPASS → REUSE → ADAPT → SUBSTITUTE → COMPOSE → CONFIGURE →
-INTEGRATE → SYNTHESIZE_NEW_PRIMITIVE` prices.
+**First correction: the first success is no longer the blocker, and this document was wrong
+to imply it was.** The machine reaches a first success in a repository it has never seen
+(2/2 external, own suites as oracle, no edited tests). So the multiplicand is **not zero**;
+`environment_fit` + the repair loop genuinely produces attempt #1. That part of the owner's
+argument is sound.
 
-Stated as arithmetic: **learning × 0 first successes = 0.** A multiplier cannot rescue a
-zero multiplicand, and every "we solved it" argument that starts from "it will do it once"
-has quietly assumed the thing it claims to derive.
+**The real defect is smaller and still fatal to the conclusion: the learner captures less
+than the success taught.** A 6/9 solve that took a real search produces a rule that fires on
+the *structural shape* of that fix — and 6/9 vs 6/9 says the captured rules did not raise the
+next solve rate at all. So the multiplier is not ~1 per success. It is **~1 on structural
+repeats and ~0 on anything with a different shape**, which is most of what the next arbitrary
+environment contains.
+
+Stated as arithmetic, correctly: *learning × (first success that generalizes) = small.* The
+earlier phrasing "× 0 = 0" was too strong and is withdrawn. The conclusion survives anyway —
+because a success that is *reached* but not *abstracted* costs the same next time. That is
+also why 6/9 vs 6/9 is the number to read twice: nine first successes, zero of which bought a
+cheaper tenth.
+
 
 ### 2.2 The routing error
 > *"Give our model a try in all those new coding environments."*
@@ -105,22 +168,26 @@ the operational reading — by owner decision, not by agent reinterpretation.
 
 ## 3. What is genuinely strong here
 
-Not everything in the plan is wrong. Five things are real and worth defending:
+Not everything in the plan is wrong. Six things are real and worth defending:
 
-1. **The learner is not a lookup table.** Anti-unification into holes with a mutated-twin
+1. **One-shot environment acquisition is genuinely solved.** `environment_fit` learns how a
+   project runs from the project's own declarations and adapts or provisions accordingly,
+   deterministically. It is the strongest result in the learning family and it deserves to be
+   named as such rather than filed under "thin evidence".
+2. **The learner is not a lookup table.** Anti-unification into holes with a mutated-twin
    admission gate and verifier-re-run-on-recall is the correct architecture. It is why
    memory cannot silently produce a false pass.
-2. **The refusal to widen a claim.** 6/9 vs 6/9 was reported as a **negative** result and
+3. **The refusal to widen a claim.** 6/9 vs 6/9 was reported as a **negative** result and
    the previous 9/9 headline was not restored by loosening the rename guard. That is the
    behaviour that makes every other number on this page worth reading.
-3. **The refusal to let a model be the producer.** 15 of 19 quoted routes were found to
+4. **The refusal to let a model be the producer.** 15 of 19 quoted routes were found to
    contain an external model and were given zero credit. If "give the model a try" had been
    allowed into producer cognition, every number here would be unmeasurable.
-4. **Minimal-action search is implemented, not promised.** BFS over a self-learned model is
+5. **Minimal-action search is implemented, not promised.** BFS over a self-learned model is
    literally the owner's "fastest way with minimal actions", and it is honest about its three
    limits (no evidence → no model; trial count bounds what is knowable; a plan is a
    hypothesis until executed).
-5. **Cost is separated.** `B_exec / B_verify / B_proof / B_JIT` are reported apart, so a
+6. **Cost is separated.** `B_exec / B_verify / B_proof / B_JIT` are reported apart, so a
    memory win cannot hide as a reasoning win.
 
 ---
