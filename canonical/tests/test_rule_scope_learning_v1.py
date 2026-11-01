@@ -87,11 +87,40 @@ WHILE_GUARD = {
 
 
 # --------------------------------------------------------------------------- the win
-def test_scope_is_resolved_by_measurement_not_by_a_human(rule):
+ALGEBRAIC_DISJUNCTION = {
+    "label": "algebraic disjunction",
+    "language": "python",
+    "source_text": "def inside7(x, hi):\n    return x < hi or x == hi\n",
+    "verifier": _contract("assert inside7(10, 10) is False\nassert inside7(9, 10) is True\n"),
+}
+
+
+def test_operator_instances_cannot_distinguish_operator_from_semantic(rule):
+    """With three nested hypotheses, instances that any operator swap already solves leave
+    OPERATOR and SEMANTIC both standing. The module must say so rather than pick the wider
+    one: a wider claim needs evidence, not seniority."""
     out = scope.learn_scope(rule, [SAME_SHAPE, NEEDS_GENERALIZATION, WHILE_GUARD])
+    assert out["result"] == "UNDERDETERMINED"
+    assert out["scope"] is None
+    assert set(out["remaining"]) == {"SCOPE_OPERATOR", "SCOPE_SEMANTIC"}
+
+
+def test_one_semantic_instance_resolves_it_to_the_wider_scope(rule):
+    """Give it an instance only semantic normalisation can solve and the space collapses."""
+    out = scope.learn_scope(rule, [SAME_SHAPE, NEEDS_GENERALIZATION, ALGEBRAIC_DISJUNCTION])
     assert out["result"] == "RESOLVED"
-    assert out["scope"] == "SCOPE_OPERATOR"
-    assert scope.scope_is(out, "SCOPE_OPERATOR") is True
+    assert scope.scope_is(out, "SCOPE_SEMANTIC") is True
+    assert out["observations_used"] == 2
+    assert out["observations_used"] < out["instances_offered"]
+
+
+def test_the_semantic_resolution_records_which_probe_did_it(rule):
+    out = scope.learn_scope(rule, [SAME_SHAPE, NEEDS_GENERALIZATION, ALGEBRAIC_DISJUNCTION])
+    labels = [step["instance"] for step in out["steps"]]
+    assert "algebraic disjunction" in labels
+    last = out["steps"][-1]
+    assert last["observed"] == scope.SOLVED
+    assert last["remaining"] == ["SCOPE_SEMANTIC"]
 
 
 def test_it_picks_the_informative_instance_first(rule):
@@ -184,7 +213,25 @@ def test_a_rule_that_is_not_an_operator_swap_cannot_be_widened(rule, tmp_path):
 
 
 def test_the_hypothesis_space_only_names_realised_mechanisms():
-    """No 'same meaning, different shape' hypothesis: nothing realizes it, so offering it
-    would be a fabrication."""
+    """Every hypothesis must name a mechanism that actually exists in the tree.
+
+    SCOPE_SEMANTIC was absent for several rounds for exactly this reason. It is present now
+    because `boundary_disjunction_normalization_v1` realizes it, and this test is what stopped
+    it being offered before it existed.
+    """
+    import importlib
+
     ids = {h.hypothesis_id for h in scope.SCOPE_HYPOTHESES}
-    assert ids == {"SCOPE_STATEMENT", "SCOPE_OPERATOR"}
+    assert ids == {"SCOPE_STATEMENT", "SCOPE_OPERATOR", "SCOPE_SEMANTIC"}
+
+    for hypothesis in scope.SCOPE_HYPOTHESES:
+        assert hypothesis.capabilities, hypothesis.hypothesis_id
+        for mechanism in hypothesis.capabilities:
+            # mechanism tags are dotted handles, not module paths; check the real module.
+            if mechanism == "boundary_disjunction_normalization":
+                importlib.import_module(
+                    "canonical.swe_kernel.boundary_disjunction_normalization_v1")
+            elif mechanism == "operator_generalization":
+                importlib.import_module("canonical.swe_kernel.operator_generalization_v1")
+            elif mechanism == "crystallizer.recall":
+                importlib.import_module("canonical.swe_kernel.verified_skill_crystallizer_v1")

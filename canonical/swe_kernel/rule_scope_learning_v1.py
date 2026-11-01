@@ -53,11 +53,25 @@ OUTCOMES = (SILENT, PROPOSES_UNVERIFIED, SOLVED)
 
 # The finite scope space. Each is a real, separately implemented capability -- nothing here is
 # hypothetical machinery, and a hypothesis is only included if some module can actually realize
-# it. `SCOPE_SEMANTIC` is deliberately absent: no module realizes "same meaning, different
-# shape", so offering it as a hypothesis would be a fabrication.
+# it.
+#
+# `SCOPE_SEMANTIC` was absent for several rounds on exactly that rule: no module realized "same
+# meaning, different shape", so offering it would have been a fabrication. It is present now
+# because `boundary_disjunction_normalization_v1` realizes it for the boundary family -- and
+# because it was measured to matter: the boundary lesson reaches 6 of 7 re-spellings without it
+# and 7 of 7 with it. The space is nested, STATEMENT inside OPERATOR inside SEMANTIC, so a
+# surviving SEMANTIC is a strictly wider claim than a surviving OPERATOR.
 SCOPE_HYPOTHESES: tuple[Hypothesis, ...] = (
     Hypothesis("SCOPE_STATEMENT", frozenset({"crystallizer.recall"})),
     Hypothesis("SCOPE_OPERATOR", frozenset({"crystallizer.recall", "operator_generalization"})),
+    Hypothesis(
+        "SCOPE_SEMANTIC",
+        frozenset({
+            "crystallizer.recall",
+            "operator_generalization",
+            "boundary_disjunction_normalization",
+        }),
+    ),
 )
 
 MAX_ROUNDS = 64
@@ -125,6 +139,16 @@ def predicted_outcome(hypothesis_id: str, rule: Mapping[str, Any], instance: Map
             gen.propose_operator_swaps(source_text, rule, language=language),
             source_text, verifier)
 
+    if hypothesis_id == "SCOPE_SEMANTIC":
+        # Same meaning, different shape: normalise the instance into the taught form first, then
+        # apply the swap. Wider than SCOPE_OPERATOR, and it costs a real normalisation module.
+        from canonical.swe_kernel import boundary_disjunction_normalization_v1 as normalise
+
+        return _first_verified(
+            normalise.propose_semantic_swaps(
+                source_text, rule, operator_swaps=gen.propose_operator_swaps),
+            source_text, verifier)
+
     raise ScopeLearningError(f"UNKNOWN_SCOPE_HYPOTHESIS:{hypothesis_id}")
 
 
@@ -134,8 +158,10 @@ def observed_outcome(rule: Mapping[str, Any], instance: Mapping[str, Any],
 
     This must be independent of the hypothesis under test, or the version space would be
     reasoning about its own predictions. So it runs the whole available repertoire -- statement
-    recall first, then operator generalization -- and reports the best outcome reached.
+    recall first, then operator generalization, then semantic normalisation -- and reports the
+    best outcome reached.
     """
+    from canonical.swe_kernel import boundary_disjunction_normalization_v1 as normalise
     from canonical.swe_kernel import operator_generalization_v1 as gen
     from canonical.swe_kernel import verified_skill_crystallizer_v1 as cry
 
@@ -153,7 +179,13 @@ def observed_outcome(rule: Mapping[str, Any], instance: Mapping[str, Any],
         gen.propose_operator_swaps(source_text, rule, language=language), source_text, v)
     if operator == SOLVED:
         return SOLVED
-    if PROPOSES_UNVERIFIED in (statement, operator):
+    semantic = _first_verified(
+        normalise.propose_semantic_swaps(
+            source_text, rule, operator_swaps=gen.propose_operator_swaps),
+        source_text, v)
+    if semantic == SOLVED:
+        return SOLVED
+    if PROPOSES_UNVERIFIED in (statement, operator, semantic):
         return PROPOSES_UNVERIFIED
     return SILENT
 
@@ -201,7 +233,12 @@ def learn_scope(
         if not probes:
             break
 
-        chosen = select_probe(hyp, probes)
+        # The version space is what SURVIVED, not the space we started with. Passing the full
+        # hypothesis set with probes that omit already-eliminated hypotheses makes
+        # `select_probe` escalate -- which is how a third scope hypothesis exposed this: the
+        # loop stopped after one observation because the probe no longer covered `hyp`.
+        space = [h for h in hyp if h.hypothesis_id in remaining]
+        chosen = select_probe(space, probes)
         if chosen.get("status") != "SELECT":
             break
         pid = str(chosen["probe_id"])
@@ -213,7 +250,7 @@ def learn_scope(
         observed = observed_outcome(rule, instance, verifier)
 
         chosen_probe = next(p for p in probes if p.probe_id == pid)
-        step = update_version_space(hyp, chosen_probe, observed)
+        step = update_version_space(space, chosen_probe, observed)
         tried.append({
             "instance": instance.get("label") or pid,
             "language": instance.get("language") or rule.get("language"),

@@ -810,6 +810,67 @@ hypothesis, and nothing in the tree realizes it today.
 
 ---
 
+## 10.10 The third hypothesis, built: 6/7 becomes 7/7
+
+Section 10.9 ended with the failure being **representational, not statistical**, and named the
+missing third hypothesis: `SCOPE_SEMANTIC`, same meaning different shape. Nothing realised it.
+It is now realised for the boundary family, and measured:
+
+| proposal source | boundary lesson reaches |
+|---|---|
+| operator swaps alone | **6 / 7** |
+| + boundary disjunction normalisation | **7 / 7** |
+
+`canonical/swe_kernel/boundary_disjunction_normalization_v1.py` recognises that
+`a < b or a == b` is the same predicate as `a <= b`, splices the exact original operand text
+through the AST, and then lets the existing operator swap fire. The patch is still judged by
+running it against the contract -- never by string comparison.
+
+### Why the refusals are most of the file
+
+A proposal source that widens applicability can rewrite something that only *looks* like the
+pattern. Pinned refusals: different operands (`x < hi or x == lo` is **not** `x <= hi`), any
+operator pair beyond `<`/`>` with `==`, a disjunction inside a **string literal** (the AST never
+sees it), a disjunction inside a **comment**, an unrelated disjunction, unparseable source. Six
+refusals against one capability.
+
+`a < b or a == b` -> `a <= b` holds for any total order, but Python floats with `NaN` are not a
+total order, and the module's agreement check is **a sample, not a proof** -- it reports
+`4225/4225` over integers in [-32, 32] and says so in its own output. That is tolerable only
+because the module **cannot accept anything**: it has no apply/accept/commit/store function (a
+test pins that), every candidate must still be executed against the caller's verifier, and
+`terminal_authority` is false. An unsound proposal costs a wasted verification, never a wrong
+accepted edit.
+
+### And it broke the scope learner, which is the interesting part
+
+Adding a third hypothesis did not simply add power. Two things happened, both correct:
+
+1. **The old resolution disappeared.** With instances that any operator swap already solves,
+   OPERATOR and SEMANTIC both survive, so the learner now returns `UNDERDETERMINED` between them
+   instead of claiming `SCOPE_OPERATOR`. A wider claim needs evidence, not seniority.
+2. **A latent bug in my own wiring surfaced.** `select_probe` was being handed the *original*
+   hypothesis set while probes carried outcomes only for the *surviving* one, so it escalated and
+   the loop stopped after a single observation. It never showed with two hypotheses because the
+   loop ended first. Fixed: the probe selector and the update now operate on the surviving space.
+
+With the fix, the measured behaviour is:
+
+```
+3 operator instances   -> UNDERDETERMINED, remaining [SCOPE_OPERATOR, SCOPE_SEMANTIC], 1 obs
++ one disjunctive      -> RESOLVED: SCOPE_SEMANTIC, 2 observations
+     step 1  inside an if         -> SOLVED  remaining [OPERATOR, SEMANTIC]
+     step 2  algebraic disjunction-> SOLVED  remaining [SEMANTIC]
+```
+
+The learner picks the probe that can still settle something, and the wider scope is earned by a
+single discriminating instance rather than asserted.
+
+`test_boundary_disjunction_normalization_v1.py` -- **16 passed**.
+`test_rule_scope_learning_v1.py` -- **14 passed** (two rewritten for the three-element space).
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
