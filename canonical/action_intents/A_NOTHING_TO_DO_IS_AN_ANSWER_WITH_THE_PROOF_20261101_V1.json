@@ -1,9 +1,9 @@
 {
-  "action_id": "A_CENSUS_ON_AN_EMPTY_SUBSTRATE_IS_NOT_A_CENSUS_20261101_V1",
-  "action_intent_id": "A_CENSUS_ON_AN_EMPTY_SUBSTRATE_IS_NOT_A_CENSUS_20261101_V1",
+  "action_id": "A_NOTHING_TO_DO_IS_AN_ANSWER_WITH_THE_PROOF_20261101_V1",
+  "action_intent_id": "A_NOTHING_TO_DO_IS_AN_ANSWER_WITH_THE_PROOF_20261101_V1",
   "action_intent_path": null,
   "action_kind": "GOVERNANCE_GUARD",
-  "action_summary": "The image ships gcc, g++, node, make and git and none of pytest, ruff, mypy, hypothesis, tree_sitter, coverage, bandit, crosshair or z3. scripts/restore_substrate_v1.py fixes that in 12 s and verifies itself, and no instrument read its verdict: measured 2026-11-01, same commit, a bare venv against the restored image, the advanced census printed 35 of 49 served on BOTH and exited 0 with a board, while the matrix printed 41 REAL on the bare venv and 43 on the restored one. The two marks that differ are lint and type_check, which answer PASS_SYNTAX_ONLY / PASS_BASELINE_ONLY when ruff and mypy are absent -- verdicts about the interpreter, printed in the column reserved for verdicts about the tree, with nothing to distinguish them. The census and the matrix now ask the restore script's own verify() (one owner, one measurement) before they measure: if the substrate is absent they restore it once and, if it is still absent, print CENSUS_NOT_MEASURED / MATRIX_NOT_MEASURED with what is missing, exit 2, and write no board. --allow-incomplete-substrate still measures that comparison on purpose, with the caveat printed before the first number.",
+  "action_summary": "Two of the advanced census's fourteen refusals are requests whose end state already holds: \"Pin the dependency versions in <proj>/pyproject.toml\" and \"Vendor the single dependency of the project in <proj>/pkg\", over manifests that declare no dependencies at all. Both came back FAIL_CLOSED__CAPABILITY_REFUSED_POLYGLOT_REFUSED, and the cause was one line of reasoning: the pin routine rewrote the dependency array, saw its output identical to its input, and called that a failure. Its own rewrite is not evidence; the declaration is. The engine now reads the declared dependencies (project.dependencies, optional-dependency groups, dev arrays), and when none of them is unpinned it answers ALREADY_SATISFIED with the list it read and the reason (PYPROJECT_DECLARES_NO_DEPENDENCIES / PYPROJECT_DEPENDENCIES_ALREADY_PINNED); the vendor routine answers the same way when nothing is declared. The adapter stops flattening that verdict into a refusal, and the door's already-satisfied branch now runs BEFORE its refusal-spelling branch, because ALREADY_SATISFIED has the shape of a guard key and was being classified as one. Negative controls hold: an unpinned manifest is still edited, and a manifest that declares a dependency is never reported as already vendored.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -28,34 +28,33 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
-      "execution_guard/substrate_precondition_v1.py",
-      "execution_guard/swe_advanced_probe_v1.py",
-      "execution_guard/swe_capability_matrix_v1.py",
-      "scripts/restore_substrate_v1.py",
-      "canonical/tests/test_a_census_on_an_empty_substrate_is_not_a_census_v1.py",
+      "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
+      "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_nothing_to_do_is_an_answer_with_the_proof_v1.py",
       ".github/workflows/swe-advanced-census.yml",
       "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
     ],
     "route_class": "REUSE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::An instrument reported a number it could not source. Whether a green gate was a fact about the code or about the interpreter was decided by a lookup in the environment and printed in a column that could not show the difference, and the one command that resolves it was never called by anything.",
-  "canonical_base_commit": "85e2b81cee3b78029167e3ba3744e3dd2c8eaf46",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::'Nothing to do' was inferred from the absence of an edit the machine itself would have made, instead of from the artifact the sentence is about -- and the answer it produced was a refusal, whose meaning is the opposite of the truth it had measured.",
+  "canonical_base_commit": "68c3e9a5814d622a15b342aff408deba3f6a14b4",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "An instrument reported a number it could not source. Whether a green gate was a fact about the code or about the interpreter was decided by a lookup in the environment and printed in a column that could not show the difference, and the one command that resolves it was never called by anything.",
+  "causal_blocker": "'Nothing to do' was inferred from the absence of an edit the machine itself would have made, instead of from the artifact the sentence is about -- and the answer it produced was a refusal, whose meaning is the opposite of the truth it had measured.",
   "date": "2026-11-01",
-  "expected_parent_change": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
-  "expected_parent_frontier_change": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
+  "expected_parent_change": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
+  "expected_parent_frontier_change": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
   "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
-  "falsification_condition": "If a board is ever printed again on an image where the restore script's verify() says the substrate is absent, if a restored image loses a mark against origin/main, or if --allow-incomplete-substrate ever prints its numbers without the caveat first, this action was wrong.",
+  "falsification_condition": "If a manifest that declares an unpinned dependency is ever answered already-satisfied, if a request whose state does not hold is ever answered that way, or if the matrix loses a REAL mark, this action was wrong.",
   "governance_change": true,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
-  "intent": "A number must be about the tree it names, and an image that cannot measure must say so instead.",
+  "intent": "Answer the request that is already satisfied with the artifact that proves it.",
   "load_bearing_primary": {
-    "canonical_base_commit": "85e2b81cee3b78029167e3ba3744e3dd2c8eaf46",
+    "canonical_base_commit": "68c3e9a5814d622a15b342aff408deba3f6a14b4",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -63,14 +62,14 @@
     ],
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/13",
-    "interpretation": "A_BOARD_IS_A_CLAIM_ABOUT_THE_TREE_OR_IT_IS_NOT_PRINTED",
-    "measured_effect": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
+    "interpretation": "AN_ALREADY_HELD_STATE_IS_AN_ANSWER_ONLY_WITH_ITS_PROOF",
+    "measured_effect": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": 0.5,
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
+  "measured_effect": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/runtime/declared_input_derivation_v1.py",
@@ -83,17 +82,16 @@
     "hardcore_swe_surface_probe_20261030.py"
   ],
   "progress_evidence_paths": [
-    "execution_guard/substrate_precondition_v1.py",
-    "execution_guard/swe_advanced_probe_v1.py",
-    "execution_guard/swe_capability_matrix_v1.py",
-    "scripts/restore_substrate_v1.py",
-    "canonical/tests/test_a_census_on_an_empty_substrate_is_not_a_census_v1.py",
+    "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
+    "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/tests/test_nothing_to_do_is_an_answer_with_the_proof_v1.py",
     ".github/workflows/swe-advanced-census.yml",
     "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
-    "canonical_base_commit": "85e2b81cee3b78029167e3ba3744e3dd2c8eaf46",
+    "canonical_base_commit": "68c3e9a5814d622a15b342aff408deba3f6a14b4",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
@@ -101,18 +99,18 @@
       "THE_SILENT_WIDENING_OF_AN_EDIT_SCOPE_TO_THE_ANCESTOR_TREE",
       "CERTIFICATION_OF_A_RUN_THAT_MOVED_FILES_THE_SENTENCE_NEVER_NAMED"
     ],
-    "expected_parent_level_state_change": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
+    "expected_parent_level_state_change": "Same commit, before and after. 49-sentence advanced census: 35 served / 14 refused -> 37 served / 12 refused, and the only two rows that move are 11 (pin) and 12 (vendor), both to PASS__REQUESTED_STATE_ALREADY_HOLDS with edited:false and the declared-dependency list in the answer artifact. 54-case matrix: 43 REAL / 0 FALSE / 0 DAMAGED both sides, no mark moved. A transformation that is still needed still happens: an unpinned manifest is rewritten to == pins, and a manifest that declares a dependency is not reported as already vendored. The census floor in CI was stale at 5 while the census served 35; it is raised to 35 so eleven refusals can no longer regress silently.",
     "iteration_limit": 4,
     "obs_blocker": {
-      "delete_bypass_substitute_options": "INSTALLING_THE_TOOLS_INSIDE_EACH_INSTRUMENT__REJECTED_THAT_IS_A_SECOND_OWNER; PRINTING_A_WARNING_AND_MEASURING_ANYWAY__REJECTED_A_WARNING_DOES_NOT_STOP_A_BOARD_BEING_QUOTED; DELETING_THE_INCOMPLETE_CASES__REJECTED_THAT_HIDES_THE_GAP_DO_NOT_WIDEN_OR_NARROW_THE_BOARD",
-      "intrinsic_or_path_specific": "Path-specific: one gate, reused by two instruments, plus one workflow step.",
-      "surviving_causal_blocker": "The instrument had no source for its own number."
+      "delete_bypass_substitute_options": "REPORTING_ALREADY_SATISFIED_WITHOUT_READING_ANYTHING__REJECTED_THAT_IS_THE_P2_LIE_ONE_LAYER_DOWN; MAKING_THE_REWRITE_IDEMPOTENT_AND_CALLING_THAT_SUCCESS__REJECTED_THE_REWRITE_IS_THE_MACHINES_OWN_OPINION; TREATING_NO_FLAKY_TEST_DETECTED_THE_SAME_WAY__REJECTED_MEASURED_ITS_CI_IS_RED_NOT_FLAKY",
+      "intrinsic_or_path_specific": "Path-specific: one declaration reader, one pass-through in the adapter, one branch order in the door.",
+      "surviving_causal_blocker": "Success was defined as 'my edit differed from my input'."
     },
     "obs_capability": {
-      "capability_work_deleted": "NO_NEW_MEASUREMENT_NO_NEW_CASE_NO_NEW_TOOL_TABLE",
-      "existing_inherited_routes_checked": "scripts/restore_substrate_v1.py already ran, verified 10/10 modules, checked the parser generation and printed a verdict; the matrix already had its own tool probe, which this replaces as the gate rather than duplicating.",
-      "external_existing_routes_checked": "Hermetic CI images (the standard practice of baking the toolchain into the runner) solve the same problem by moving it; that is a change to the environment, not to the instrument, and this action does not claim it.",
-      "surviving_gap": "The bare-image comparison still exists behind --allow-incomplete-substrate; rustc, go, javac and tsc are still absent and are capability absences (P6), not substrate ones."
+      "capability_work_deleted": "NO_NEW_ROUTE_NO_NEW_ADAPTER_METHOD_NO_NEW_VERDICT_INVENTED",
+      "existing_inherited_routes_checked": "PASS__REQUESTED_STATE_ALREADY_HOLDS and its BASELINE_ALREADY_PASSES producer already existed, and the polyglot adapter already carried an operation/reason/evidence report; this action reuses all three.",
+      "external_existing_routes_checked": "Terraform's 'no changes' plan and dbt's idempotent state report are the same idea in other ecosystems: a no-op is a result, reported with the diff that proves it. Not adopted as code, only as the criterion.",
+      "surviving_gap": "NO_FLAKY_TEST_DETECTED stays a refusal, because measurement showed the fixture's CI is red for a missing PYTHONPATH, not flaky; that is a workflow-repair gap, listed in the inventory."
     },
     "obs_goal": {
       "proxy_goals_deleted": [
@@ -174,10 +172,10 @@
     "why_selected_route_is_fastest_sufficient": "Three edits of a few lines each, six tests, and the census re-measures in six seconds. Each one removes a gate and reads a fact already on hand, so nothing new is computed and nothing new can be wrong."
   },
   "required_capability": "EVIDENCE_THAT_NAMES_THE_FACT_IT_WAS_DECIDED_ON",
-  "resolution": "Both instruments call the restore script's verify() before measuring, restore once if the substrate is absent, and refuse with an exit code and no artefact if it still is. The workflow runs the restore as a step.",
-  "route_id": "ASK_THE_OWNER_BEFORE_MEASURING",
+  "resolution": "The engine reads the dependency declaration and reports already-satisfied with that list; the adapter passes the verdict through; the door's already-satisfied branch precedes its refusal-spelling branch and carries the evidence into the answer.",
+  "route_id": "PROVE_THE_STATE_THEN_ANSWER",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "ASK_THE_OWNER_BEFORE_MEASURING",
+  "selected_route": "PROVE_THE_STATE_THEN_ANSWER",
   "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -210,15 +208,15 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "6050e0aa09a91954a2dbf2b604dfe7fa0f35e398",
-          "path": "scripts/restore_substrate_v1.py"
+          "git_blob_sha": "10cfc9032e324c1c9bed612e8b0fe7c12740445f",
+          "path": "canonical/swe_kernel/polyglot_build_ci_engine_v1.py"
         }
       ],
-      "decisive_question": "IS_THE_NUMBER_ABOUT_THE_TREE_OR_ABOUT_THE_INTERPRETER",
-      "falsifier_id": "AN_ENVIRONMENT_FACT_PRINTED_AS_A_CAPABILITY_FACT_IS_GOOD_ENOUGH",
+      "decisive_question": "IS_THE_END_STATE_PROVEN_FROM_THE_ARTIFACT_OR_FROM_THE_MACHINES_OWN_EDIT",
+      "falsifier_id": "AN_UNCHANGED_REWRITE_OUTRANKS_THE_DECLARATION",
       "known_counterexamples_checked": true,
       "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
-      "proposal_id": "A_CENSUS_ON_AN_EMPTY_SUBSTRATE_IS_NOT_A_CENSUS_20261101_V1"
+      "proposal_id": "A_NOTHING_TO_DO_IS_AN_ANSWER_WITH_THE_PROOF_20261101_V1"
     }
   },
   "weakens_existing_guard": "No guard is weakened. The effect gate gains a third reading (what moved), the choreographer loses a silent scope widening, the binder loses a curated word list that only ever refused work the row could do, and R3 keeps its meaning by naming the slot when the binder already knows it."

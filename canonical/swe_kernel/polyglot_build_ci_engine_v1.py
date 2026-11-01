@@ -619,7 +619,32 @@ def pyproject_transform_and_verify(target: Path, goal: str, project_dir: Path | 
         # Also pin dev/optional arrays if present
         updated = re.sub(r"(\bdev\s*=\s*\[)([^\]]*)(\])", _rewrite_dep_array, updated)
         if updated == raw:
-            return {"verified": False, "gate": "FAIL", "reason": "PYPROJECT_ALREADY_PINNED_OR_EMPTY"}
+            # NOTHING TO DO IS AN ANSWER, AND IT IS ONLY AN ANSWER WITH THE PROOF.
+            #
+            # Measured 2026-11-01 on the advanced census: "Pin the dependency versions in
+            # <proj>/pyproject.toml" came back POLYGLOT_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY,
+            # a refusal -- so a request whose end state already held was reported as a missing
+            # capability, one of six refusals that were really "the work is already done".
+            # The name said ALREADY_PINNED_OR_EMPTY and the code never checked WHICH: it only
+            # noticed that its own rewrite changed nothing.  A rewrite that changes nothing is
+            # not evidence; the dependency declaration is.  So read it, and say exactly what was
+            # read: no dependencies at all (vacuously pinned), or every one of them already
+            # spelled `==version`.
+            declared = _declared_dependencies(data)
+            unpinned = [d for d in declared if "==" not in d]
+            if not unpinned:
+                return {
+                    "verified": False,
+                    "gate": "ALREADY_SATISFIED",
+                    "reason": ("PYPROJECT_DEPENDENCIES_ALREADY_PINNED" if declared
+                               else "PYPROJECT_DECLARES_NO_DEPENDENCIES"),
+                    "evidence": {"declared_dependencies": declared, "unpinned": [],
+                                 "dependencies_key_present": bool(
+                                     (data.get("project") or {}).get("dependencies") is not None),
+                                 "source": str(target)},
+                }
+            return {"verified": False, "gate": "FAIL", "reason": "PYPROJECT_PIN_REWRITE_FAILED",
+                    "unpinned": unpinned}
         parsed = tomllib.loads(updated)
         target.write_text(updated, encoding="utf-8")
         return {
@@ -781,12 +806,45 @@ def makefile_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
     }
 
 
+def _declared_dependencies(data: Mapping[str, Any]) -> list[str]:
+    """Every dependency string a parsed pyproject actually declares.
+
+    Both spellings the pin path rewrites: ``[project].dependencies`` and a ``dev`` array
+    (``[project.optional-dependencies]``'s arrays or a ``[tool.*]`` table's).  Returned as
+    written, so the caller can see whether each one carries an exact ``==`` pin.
+    """
+    out: list[str] = []
+    project = data.get("project") or {}
+    out.extend(str(d) for d in (project.get("dependencies") or []))
+    optional = project.get("optional-dependencies") or {}
+    if isinstance(optional, Mapping):
+        for group in optional.values():
+            out.extend(str(d) for d in (group or []))
+    for table in (data.get("tool") or {}).values() if isinstance(data.get("tool"), Mapping) else []:
+        if isinstance(table, Mapping) and isinstance(table.get("dev"), list):
+            out.extend(str(d) for d in table["dev"])
+    return out
+
+
 def vendor_dependencies_and_verify(project_dir: Path, goal: str) -> dict[str, Any]:
     pyproj = project_dir / "pyproject.toml"
     deps: list[str] = []
     if pyproj.is_file():
         data = tomllib.loads(pyproj.read_text(encoding="utf-8"))
         deps = list(data.get("project", {}).get("dependencies", []) or [])
+
+    if not deps:
+        # "Vendor the single dependency of <project>" over a manifest that declares none is a
+        # request whose end state holds: there is nothing to vendor, and the proof is the
+        # declaration that was read.  Same rule as the pin path, same evidence shape.
+        return {
+            "verified": False,
+            "gate": "ALREADY_SATISFIED",
+            "reason": "NO_DECLARED_DEPENDENCY_TO_VENDOR",
+            "evidence": {"declared_dependencies": [],
+                         "manifest_present": pyproj.is_file(),
+                         "source": str(pyproj)},
+        }
 
     vendor_dir = project_dir / "_vendor"
     vendor_dir.mkdir(parents=True, exist_ok=True)
