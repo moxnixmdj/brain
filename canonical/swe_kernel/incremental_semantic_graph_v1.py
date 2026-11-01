@@ -1078,3 +1078,66 @@ def query_impacted_tests(
         "total_tests_in_scope": len(all_tests),
     }
 
+
+def localize_symptom_and_impacted_tests(
+    root: pathlib.Path,
+    symptom_text: str,
+    scope_path: str | pathlib.Path = ".",
+) -> dict[str, Any]:
+    """Localize zero-file-hint symptom/goal text to defining source files & impacted tests via `query_impacted_tests`."""
+    root_resolved = pathlib.Path(root).resolve()
+    scope_str = (
+        "."
+        if isinstance(scope_path, pathlib.Path) and scope_path.resolve() == root_resolved
+        else (scope_path.resolve().relative_to(root_resolved).as_posix() if isinstance(scope_path, pathlib.Path) else str(scope_path or "."))
+    )
+    tokens = {
+        tok for tok in re.findall(r"\b[A-Za-z_][A-Za-z0-9_]{2,}\b", str(symptom_text or ""))
+        if tok.lower() not in {"the", "and", "for", "fix", "bug", "test", "tests", "failing", "fail", "error", "with", "when", "from", "into", "return", "returns", "function", "method", "class", "module", "python"}
+    }
+    graph = IncrementalSemanticGraph(root_resolved)
+    summaries = graph.load_summaries(scope_str)
+
+    def _is_test_rel(rel_p: str) -> bool:
+        parts = pathlib.PurePosixPath(rel_p).parts
+        name = parts[-1] if parts else ""
+        return "tests" in parts or "test" in parts or name.startswith("test_") or name.endswith("_test.py")
+
+    scored_files: dict[str, int] = {}
+    matched_symbols: list[str] = []
+    for rel_p, info in summaries.items():
+        if _is_test_rel(rel_p):
+            continue
+        stem = pathlib.PurePosixPath(rel_p).stem
+        if stem in tokens and stem != "__init__":
+            scored_files[rel_p] = scored_files.get(rel_p, 0) + 2
+        for d in info.get("definitions") or []:
+            nm = str(d.get("name") or "")
+            qn = str(d.get("qualname") or "")
+            if nm in tokens or qn in tokens:
+                scored_files[rel_p] = scored_files.get(rel_p, 0) + 3
+                if nm not in matched_symbols:
+                    matched_symbols.append(nm)
+
+    ranked_sources = [k for k, _v in sorted(scored_files.items(), key=lambda kv: (-kv[1], kv[0]))][:8]
+    if not ranked_sources:
+        return {
+            "schema": SCHEMA,
+            "query": "symptom_localization",
+            "localized_files": [],
+            "matched_symbols": [],
+            "impacted_tests": [],
+            "exact_hit": False,
+        }
+    impact = query_impacted_tests(root_resolved, scope_str, ranked_sources)
+    return {
+        "schema": SCHEMA,
+        "query": "symptom_localization",
+        "localized_files": ranked_sources,
+        "matched_symbols": matched_symbols,
+        "impacted_tests": list(impact.get("impacted_tests") or []),
+        "exact_hit": bool(impact.get("exact_hit")),
+        "total_tests_in_scope": int(impact.get("total_tests_in_scope") or 0),
+    }
+
+

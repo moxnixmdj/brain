@@ -30,6 +30,7 @@ import ast
 import copy
 import difflib
 import hashlib
+import itertools
 import json
 import math
 import os
@@ -1212,32 +1213,44 @@ def _generate_candidates_for_state(
         bucket: list[tuple[str, str, int, str, str]] = []
 
         # Mechanism A: Crystallized code rules (only on small standalone modules)
-        if len(orig_src) <= 6_000:
+        # Mechanism A: Crystallized code rules (up to multi-candidate recall)
+        if len(orig_src) <= 240_000:
             for rule in stored_rules:
-                patched = crystallizer.apply_crystallized_code_rule(orig_src, rule)
-                if patched and patched != orig_src:
-                    try:
-                        ast.parse(patched)
-                        _add_to(bucket, rel_f, fn_nm, fl_no, f"crystallized_skill:{rule.get('skill_id', '')[:12]}", patched)
-                    except SyntaxError:
-                        pass
+                for patched in itertools.islice(crystallizer.iter_crystallized_code_rule_candidates(orig_src, rule), 6):
+                    if patched and patched != orig_src:
+                        try:
+                            ast.parse(patched)
+                            _add_to(bucket, rel_f, fn_nm, fl_no, f"crystallized_skill:{rule.get('skill_id', '')[:12]}", patched)
+                        except SyntaxError:
+                            pass
 
-        # Mechanism B: Live runtime assertion trace observational synthesis (for standalone non-pytest modules)
+        # Mechanism B1: Algebraic directional/dual method & builtin span swaps + test-driven entry guards
+        hot_lines = list(susp.get("hot_lines") or [])
+        line_scores = susp.get("line_scores") or {}
+        if fn_nm:
+            for tag, c_src in wb_synth.algebraic_dual_span_candidates(
+                orig_src, allowed_functions={fn_nm}, hot_lines=hot_lines, max_candidates=6
+            ):
+                _add_to(bucket, rel_f, fn_nm, fl_no, f"algebraic_dual:{tag}", c_src)
+            if test_files:
+                for tag, c_src in wb_synth.test_driven_precondition_guard_candidates(
+                    orig_src, test_files, allowed_functions={fn_nm}, max_candidates=4
+                ):
+                    _add_to(bucket, rel_f, fn_nm, fl_no, f"precondition_guard:{tag}", c_src)
+
+        # Mechanism B2: Live runtime assertion trace observational synthesis (for standalone non-pytest modules)
         if test_files and fn_nm and not is_pytest_suite and len(orig_src) <= 12_000:
             try:
                 synth_list = wb_synth.synthesize_candidates_for_file(
-                    fpath, test_files, target_fn=fn_nm, max_candidates=6
+                    fpath, worktree, test_files
                 )
-                for sc in synth_list:
-                    c_src = str(sc.get("patched_source") or "")
-                    if c_src and c_src != orig_src:
-                        _add_to(bucket, rel_f, fn_nm, fl_no, f"live_trace_synthesis:{sc.get('expr', '')[:32]}", c_src)
+                for c_src in synth_list[:6]:
+                    if isinstance(c_src, str) and c_src and c_src != orig_src:
+                        _add_to(bucket, rel_f, fn_nm, fl_no, "live_trace_synthesis", c_src)
             except Exception:
                 pass
 
         # Mechanism C1: Surgical 1-line UTF-8 span-preserving AST repairs ordered by statement Ochiai
-        hot_lines = list(susp.get("hot_lines") or [])
-        line_scores = susp.get("line_scores") or {}
         for tag, c_src in _surgical_span_mutations(
             orig_src, fn_nm, hot_lines, line_scores, firstlineno=fl_no
         ):
@@ -1445,18 +1458,51 @@ def solve_repository_closed_loop(
 
         # Extract any explicitly stated source file path from `goal` that exists under `wt`
         hinted_files: list[str] = []
+        # Extract any explicitly stated source file path or semantic-graph symbol from `goal`
+        hinted_files: list[str] = []
+        effective_test_files: Sequence[str] | None = test_files
+        narrowed_test_subset = False
         if goal:
             for tok in re.findall(r"[A-Za-z0-9_./-]+\.py\b", str(goal)):
                 rel_tok = tok.lstrip("./")
                 if (wt / rel_tok).is_file() and not _is_test_relpath(rel_tok):
                     hinted_files.append(rel_tok)
+            if not hinted_files or test_files is None:
+                try:
+                    sem_loc = sem_graph.localize_symptom_and_impacted_tests(wt, str(goal))
+                    for lf in sem_loc.get("localized_files") or []:
+                        if lf not in hinted_files:
+                            hinted_files.append(lf)
+                    imp_tests = list(sem_loc.get("impacted_tests") or [])
+                    tot_tests = int(sem_loc.get("total_tests_in_scope") or 0)
+                    if (
+                        test_files is None
+                        and sem_loc.get("exact_hit")
+                        and tot_tests >= 6
+                        and 0 < len(imp_tests) < tot_tests
+                    ):
+                        effective_test_files = imp_tests
+                        narrowed_test_subset = True
+                except Exception:
+                    pass
 
         initial_diag = localize_faults_by_differential_trace(
             wt,
-            test_files=test_files,
+            test_files=effective_test_files,
             hinted_files=hinted_files,
             timeout=min(20.0, timeout_s),
         )
+        if narrowed_test_subset and initial_diag.get("ok") and int(initial_diag.get("failed_count") or 0) == 0:
+            # Impacted subset was green; fall back to full repository test suite
+            effective_test_files = None
+            narrowed_test_subset = False
+            initial_diag = localize_faults_by_differential_trace(
+                wt,
+                test_files=None,
+                hinted_files=hinted_files,
+                timeout=min(20.0, timeout_s),
+            )
+        test_files = effective_test_files
         if not initial_diag.get("ok"):
             return {
                 "schema": SCHEMA,
@@ -1644,6 +1690,73 @@ def solve_repository_closed_loop(
                 if winning_state is not None:
                     break
 
+                # Coupled 2-file saddle-plateau fallback: if no single-file edit made progress on step 1,
+                # test top cross-file candidate pairs (file_A x file_B) where two coupled defects mask each other.
+                if winning_state is None and not next_beam and step_idx == 1 and len(cand_list) >= 2:
+                    by_file_cands: dict[str, list[tuple[str, int, str, str]]] = {}
+                    for rf, fnm, fln, mch, ccode in cand_list:
+                        b = by_file_cands.setdefault(rf, [])
+                        if len(b) < 3:
+                            b.append((fnm, fln, mch, ccode))
+                    distinct_files = list(by_file_cands.keys())[:3]
+                    if len(distinct_files) >= 2:
+                        for i_f in range(len(distinct_files)):
+                            for j_f in range(i_f + 1, len(distinct_files)):
+                                f1, f2 = distinct_files[i_f], distinct_files[j_f]
+                                for fn1, fl1, m1, c1 in by_file_cands[f1]:
+                                    for fn2, fl2, m2, c2 in by_file_cands[f2]:
+                                        if (time.perf_counter() - t0) >= timeout_s:
+                                            break
+                                        pair_files = dict(state_files)
+                                        pair_files[f1] = c1.encode("utf-8")
+                                        pair_files[f2] = c2.encode("utf-8")
+                                        (wt / f1).write_bytes(pair_files[f1])
+                                        (wt / f2).write_bytes(pair_files[f2])
+                                        candidates_evaluated += 1
+                                        pair_diag = localize_faults_by_differential_trace(
+                                            wt, test_files=test_files, hinted_files=hinted_files, timeout=15.0
+                                        )
+                                        (wt / f1).write_bytes(state_files[f1])
+                                        (wt / f2).write_bytes(state_files[f2])
+                                        if (
+                                            pair_diag.get("ok")
+                                            and int(pair_diag["total_tests"]) >= int(initial_diag["total_tests"])
+                                            and int(pair_diag["failed_count"]) == 0
+                                        ):
+                                            for rp, rb in pair_files.items():
+                                                (wt / rp).write_bytes(rb)
+                                            sab1 = _sabotage_control_kills_suite(
+                                                wt, f1, fn1, firstlineno=fl1, test_files=test_files
+                                            )
+                                            sab2 = _sabotage_control_kills_suite(
+                                                wt, f2, fn2, firstlineno=fl2, test_files=test_files
+                                            )
+                                            if sab1 and sab2:
+                                                h1 = {
+                                                    "step": 1, "file": f1, "function": fn1, "firstlineno": fl1,
+                                                    "mechanism": f"coupled_pair:{m1}",
+                                                    "failed_before": parent_failed_count, "failed_after": 0,
+                                                    "passed_after": int(pair_diag["passed_count"]),
+                                                    "before_snippet": _extract_function_source(state_files[f1].decode("utf-8", errors="replace"), fn1, firstlineno=fl1) or "",
+                                                    "after_snippet": _extract_function_source(c1, fn1, firstlineno=fl1) or "",
+                                                }
+                                                h2 = {
+                                                    "step": 2, "file": f2, "function": fn2, "firstlineno": fl2,
+                                                    "mechanism": f"coupled_pair:{m2}",
+                                                    "failed_before": parent_failed_count, "failed_after": 0,
+                                                    "passed_after": int(pair_diag["passed_count"]),
+                                                    "before_snippet": _extract_function_source(state_files[f2].decode("utf-8", errors="replace"), fn2, firstlineno=fl2) or "",
+                                                    "after_snippet": _extract_function_source(c2, fn2, firstlineno=fl2) or "",
+                                                }
+                                                winning_state = (pair_files, history + [h1, h2], pair_diag)
+                                                break
+                                    if winning_state is not None:
+                                        break
+                                if winning_state is not None:
+                                    break
+                            if winning_state is not None:
+                                break
+
             if winning_state is not None:
                 break
             if not next_beam:
@@ -1668,6 +1781,15 @@ def solve_repository_closed_loop(
                 "status": "FAIL_CLOSED__SOURCE_TREE_DRIFTED_DURING_SEARCH",
                 "reason": "SOURCE_TREE_DRIFTED_DURING_SEARCH",
             }
+
+        if winning_state is not None and narrowed_test_subset:
+            for rp, rb in winning_state[0].items():
+                (wt / rp).write_bytes(rb)
+            full_check = localize_faults_by_differential_trace(wt, test_files=None, timeout=20.0)
+            if not full_check.get("ok") or int(full_check.get("failed_count") or 0) > 0:
+                winning_state = None
+            else:
+                winning_state = (winning_state[0], winning_state[1], full_check)
 
         if winning_state is None:
             return {

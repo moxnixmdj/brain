@@ -87,27 +87,20 @@ def test_historical_cross_issue_transfer_against_the_same_capable_solver(tmp_pat
     warm_case = build_case(tmp_path, held_id, 'learning_enabled')
     cases = {'baseline': cold_case, 'learning_enabled': warm_case}
     protected = {p: p.read_bytes() for c in cases.values() for p in c['project'].glob('test_*.py')}
-    originals = {arm: c['target'].read_bytes() for arm, c in cases.items()}
     runs = {arm: execute('apply', tmp_path, c) for arm, c in cases.items()}
     audits = {arm: execute('audit', tmp_path, c) for arm, c in cases.items()}
     assert len({taught['pid'], *(r['pid'] for r in runs.values())}) == 3
     for arm, run in runs.items():
         retained_transfer = family == 'zero_consumption' and arm == 'learning_enabled'
-        expected_success = family == 'boundary' or retained_transfer
         result = run['result']
         assert result['repair_search_invocations'] == (0 if retained_transfer else 1)
-        assert result['pass'] is expected_success
-        assert result['applied'] is expected_success
-        if expected_success:
-            assert audits[arm]['result']['returncode'] == 0
-            target = cases[arm]['target']
-            path = cases[arm]['args']['retained_learning']['target_path']
-            assert result['applied_source_sha256'][path] == hashlib.sha256(target.read_bytes()).hexdigest()
-            assert result['files_written'] == [path]
-        else:
-            assert audits[arm]['result']['returncode'] != 0
-            assert cases[arm]['target'].read_bytes() == originals[arm]
-            assert result['files_written'] == []
+        assert result['pass'] is True
+        assert result['applied'] is True
+        assert audits[arm]['result']['returncode'] == 0
+        target = cases[arm]['target']
+        path = cases[arm]['args']['retained_learning']['target_path']
+        assert result['applied_source_sha256'][path] == hashlib.sha256(target.read_bytes()).hexdigest()
+        assert result['files_written'] == [path]
     assert runs['learning_enabled']['result']['retained_learning']['hit'] is (family == 'zero_consumption')
     if family == 'zero_consumption':
         assert runs['learning_enabled']['result']['retained_learning']['oracle_calls'] >= 2

@@ -276,10 +276,12 @@ def harvest_live_io_examples(
             pair = (tuple(args_tuple), expected_val)
             if pair not in by_fn[fn_name]:
                 by_fn[fn_name].append(pair)
-            if isinstance(expected_val, (int, float, str)) and not isinstance(expected_val, bool):
+            if isinstance(expected_val, (int, float, str, bytes)) and not isinstance(expected_val, bool):
                 if expected_val not in consts_by_fn[fn_name]:
                     consts_by_fn[fn_name].append(expected_val)
 
+    old_dwb = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
     try:
         for idx, tf in enumerate(test_files):
             try:
@@ -326,6 +328,7 @@ def harvest_live_io_examples(
                             except Exception:
                                 pass
     finally:
+        sys.dont_write_bytecode = old_dwb
         for s in added_paths:
             if s in sys.path:
                 sys.path.remove(s)
@@ -376,34 +379,354 @@ def _replace_function_body_in_source(src: str, fn_name: str, new_body_stmt: str)
     return rebuilt
 
 
+_METHOD_DUAL_SWAPS: dict[str, tuple[str, ...]] = {
+    "strip": ("lstrip", "rstrip"),
+    "rstrip": ("lstrip", "strip"),
+    "lstrip": ("rstrip", "strip"),
+    "find": ("rfind",),
+    "rfind": ("find",),
+    "index": ("rindex",),
+    "rindex": ("index",),
+    "split": ("rsplit",),
+    "rsplit": ("split",),
+    "partition": ("rpartition",),
+    "rpartition": ("partition",),
+    "ljust": ("rjust",),
+    "rjust": ("ljust",),
+    "startswith": ("endswith",),
+    "endswith": ("startswith",),
+    "lower": ("upper",),
+    "upper": ("lower",),
+}
+
+_BUILTIN_DUAL_SWAPS: dict[str, str] = {
+    "min": "max",
+    "max": "min",
+    "any": "all",
+    "all": "any",
+    "bisect_left": "bisect_right",
+    "bisect_right": "bisect_left",
+    "floor": "ceil",
+    "ceil": "floor",
+}
+
+
+def _splice_span_bytes(src_bytes: bytes, node: ast.AST, replacement_str: str) -> str | None:
+    lineno = getattr(node, "lineno", None)
+    col = getattr(node, "col_offset", None)
+    end_lineno = getattr(node, "end_lineno", None)
+    end_col = getattr(node, "end_col_offset", None)
+    if None in (lineno, col, end_lineno, end_col):
+        return None
+    lines = src_bytes.splitlines(keepends=True)
+    if not (1 <= lineno <= end_lineno <= len(lines)):
+        return None
+    prefix = b"".join(lines[: lineno - 1]) + lines[lineno - 1][:col]
+    suffix = lines[end_lineno - 1][end_col:] + b"".join(lines[end_lineno:])
+    try:
+        return (prefix + replacement_str.encode("utf-8") + suffix).decode("utf-8")
+    except UnicodeDecodeError:
+        return None
+
+
+def _reachable_symbol_names(proj: pathlib.Path, test_files: Sequence[pathlib.Path], src_file: pathlib.Path) -> set[str]:
+    """Collect symbol names referenced in `test_files` plus 1-hop project wrapper modules."""
+    names: set[str] = set()
+    for tf in test_files:
+        try:
+            ttree = ast.parse(tf.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, SyntaxError):
+            continue
+        for n in ast.walk(ttree):
+            if isinstance(n, ast.Name):
+                names.add(n.id)
+            elif isinstance(n, ast.Attribute):
+                names.add(n.attr)
+            elif isinstance(n, ast.alias):
+                names.add(n.name.rsplit(".", 1)[-1])
+    # Expand 1 hop through small sibling modules (e.g., service/consumer modules)
+    test_resolved = {p.resolve() for p in test_files}
+    src_resolved = src_file.resolve()
+    try:
+        sib_files = [
+            p for p in sorted(proj.rglob("*.py"))
+            if "__pycache__" not in p.parts
+            and p.resolve() not in test_resolved
+            and p.resolve() != src_resolved
+            and p.stat().st_size <= 32_000
+        ][:16]
+    except OSError:
+        sib_files = []
+    for sp in sib_files:
+        try:
+            stree = ast.parse(sp.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, SyntaxError):
+            continue
+        for node in stree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in names:
+                for sub in ast.walk(node):
+                    if isinstance(sub, ast.Name):
+                        names.add(sub.id)
+                    elif isinstance(sub, ast.Attribute):
+                        names.add(sub.attr)
+            elif isinstance(node, ast.ImportFrom):
+                for al in node.names:
+                    names.add(al.name)
+    return names
+
+
+def algebraic_dual_span_candidates(
+    src: str,
+    *,
+    allowed_functions: set[str] | None = None,
+    hot_lines: Sequence[int] | None = None,
+    max_candidates: int = 8,
+) -> list[tuple[str, str]]:
+    """Produce byte-span-preserving directional/dual method & builtin swaps on target functions."""
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    src_bytes = src.encode("utf-8")
+    hot_set = set(hot_lines or ())
+    out: list[tuple[str, str]] = []
+    seen: set[str] = set()
+
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        if allowed_functions is not None and node.name not in allowed_functions:
+            continue
+        for sub in ast.walk(node):
+            if not isinstance(sub, ast.Call):
+                continue
+            lineno = getattr(sub, "lineno", None)
+            if hot_set and lineno is not None and not any(abs(lineno - hl) <= 2 for hl in hot_set):
+                continue
+            if isinstance(sub.func, ast.Attribute) and sub.func.attr in _METHOD_DUAL_SWAPS:
+                val_seg = ast.get_source_segment(src, sub.func.value)
+                if val_seg:
+                    for dual_attr in _METHOD_DUAL_SWAPS[sub.func.attr]:
+                        cand = _splice_span_bytes(src_bytes, sub.func, f"{val_seg}.{dual_attr}")
+                        if cand and cand != src and cand not in seen:
+                            try:
+                                ast.parse(cand)
+                                seen.add(cand)
+                                out.append((f"method_dual_{sub.func.attr}_to_{dual_attr}", cand))
+                            except SyntaxError:
+                                pass
+            elif isinstance(sub.func, ast.Name) and sub.func.id in _BUILTIN_DUAL_SWAPS:
+                dual_fn = _BUILTIN_DUAL_SWAPS[sub.func.id]
+                cand = _splice_span_bytes(src_bytes, sub.func, dual_fn)
+                if cand and cand != src and cand not in seen:
+                    try:
+                        ast.parse(cand)
+                        seen.add(cand)
+                        out.append((f"builtin_dual_{sub.func.id}_to_{dual_fn}", cand))
+                    except SyntaxError:
+                        pass
+            if len(out) >= max_candidates:
+                return out
+    return out
+
+
+def _extract_test_guard_signals(test_files: Sequence[pathlib.Path]) -> tuple[list[tuple[str, str | None]], bool, bool]:
+    """Extract `(exc_name, msg_literal)` expectations plus `(has_zero_arg, has_neg_arg)` from tests."""
+    exc_specs: list[tuple[str, str | None]] = []
+    has_zero = False
+    has_neg = False
+    known_excs = {
+        "ValueError", "TypeError", "IndexError", "KeyError", "ZeroDivisionError", "RuntimeError",
+    }
+    for tf in test_files:
+        try:
+            ttree = ast.parse(tf.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, SyntaxError):
+            continue
+        pending_exc: str | None = None
+        for sub in ast.walk(ttree):
+            if isinstance(sub, ast.Constant) and type(sub.value) is int and sub.value == 0:
+                has_zero = True
+            elif isinstance(sub, ast.UnaryOp) and isinstance(sub.op, ast.USub) and isinstance(sub.operand, ast.Constant):
+                if isinstance(sub.operand.value, (int, float)) and sub.operand.value > 0:
+                    has_neg = True
+            elif isinstance(sub, ast.Call):
+                fname = (
+                    sub.func.id if isinstance(sub.func, ast.Name)
+                    else (sub.func.attr if isinstance(sub.func, ast.Attribute) else "")
+                )
+                if fname in ("assertRaises", "assertRaisesRegex", "raises") and sub.args:
+                    exc_arg = sub.args[0]
+                    ename = exc_arg.id if isinstance(exc_arg, ast.Name) else ""
+                    if ename in known_excs:
+                        msg_lit: str | None = None
+                        if len(sub.args) >= 2 and isinstance(sub.args[1], ast.Constant) and isinstance(sub.args[1].value, str):
+                            msg_lit = sub.args[1].value
+                        for kw in sub.keywords:
+                            if kw.arg == "match" and isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str):
+                                msg_lit = kw.value.value
+                        pair = (ename, msg_lit)
+                        if pair not in exc_specs:
+                            exc_specs.append(pair)
+                        pending_exc = ename
+                elif fname == "assertIn" and sub.args and isinstance(sub.args[0], ast.Constant) and isinstance(sub.args[0].value, str):
+                    if pending_exc:
+                        pair = (pending_exc, sub.args[0].value)
+                        if pair not in exc_specs:
+                            exc_specs.insert(0, pair)
+    return exc_specs, has_zero, has_neg
+
+
+def test_driven_precondition_guard_candidates(
+    src: str,
+    test_files: Sequence[pathlib.Path],
+    *,
+    allowed_functions: set[str] | None = None,
+    max_candidates: int = 6,
+) -> list[tuple[str, str]]:
+    """Synthesize entry `< 0` raise & `== 0` early-return guards before eager iteration/allocation."""
+    exc_specs, has_zero, has_neg = _extract_test_guard_signals(test_files)
+    if not exc_specs and not has_zero and not has_neg:
+        return []
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    lines = src.splitlines(keepends=True)
+    size_names = {"n", "size", "width", "count", "step", "length", "limit", "k", "num"}
+    out: list[tuple[str, str]] = []
+    seen: set[str] = set()
+
+    for node in tree.body:
+        if not isinstance(node, ast.FunctionDef) or not node.body or not node.args.args:
+            continue
+        if allowed_functions is not None and node.name not in allowed_functions:
+            continue
+        params = [a.arg for a in node.args.args if a.arg not in ("self", "cls")]
+        if not params:
+            continue
+        first_stmt = node.body[0]
+        if (
+            isinstance(first_stmt, ast.Expr)
+            and isinstance(first_stmt.value, ast.Constant)
+            and isinstance(first_stmt.value.value, str)
+        ):
+            if len(node.body) < 2:
+                continue
+            exec_stmt = node.body[1]
+        else:
+            exec_stmt = first_stmt
+        # Skip if function already starts with an `if` guard on the numeric parameter
+        if isinstance(exec_stmt, ast.If):
+            continue
+
+        # Identify size/bound parameter
+        bound_param = next((p for p in params if p in size_names), None)
+        if bound_param is None:
+            bound_param = params[1] if len(params) >= 2 else params[0]
+
+        indent = " " * exec_stmt.col_offset
+        is_gen = any(isinstance(sub, (ast.Yield, ast.YieldFrom)) for sub in ast.walk(node))
+        zero_ret = "return" if is_gen else "return []"
+        insert_idx = exec_stmt.lineno - 1
+
+        primary_exc, primary_msg = exc_specs[0] if exc_specs else ("ValueError", None)
+        raise_expr = (
+            f"raise {primary_exc}({primary_msg!r})"
+            if primary_msg is not None
+            else f"raise {primary_exc}()"
+        )
+
+        guard_blocks: list[tuple[str, list[str]]] = []
+        if has_neg and has_zero:
+            guard_blocks.append((
+                "guard_neg_raise_and_zero_return",
+                [
+                    f"{indent}if {bound_param} is not None and {bound_param} < 0:\n",
+                    f"{indent}    {raise_expr}\n",
+                    f"{indent}if {bound_param} == 0:\n",
+                    f"{indent}    {zero_ret}\n",
+                    "\n",
+                ],
+            ))
+        if has_neg or exc_specs:
+            guard_blocks.append((
+                "guard_neg_raise",
+                [
+                    f"{indent}if {bound_param} is not None and {bound_param} < 0:\n",
+                    f"{indent}    {raise_expr}\n",
+                ],
+            ))
+        if has_zero:
+            guard_blocks.append((
+                "guard_zero_early_return",
+                [
+                    f"{indent}if {bound_param} == 0:\n",
+                    f"{indent}    {zero_ret}\n",
+                ],
+            ))
+
+        for label, glines in guard_blocks:
+            cand = "".join(lines[:insert_idx]) + "".join(glines) + "".join(lines[insert_idx:])
+            if cand != src and cand not in seen:
+                try:
+                    ast.parse(cand)
+                    seen.add(cand)
+                    out.append((label, cand))
+                except SyntaxError:
+                    pass
+            if len(out) >= max_candidates:
+                return out
+    return out
+
+
 def synthesize_candidates_for_file(
     src_file: pathlib.Path,
     proj: pathlib.Path,
     test_files: Sequence[pathlib.Path],
 ) -> list[str]:
-    """Generate observational-equivalence + STUN synthesized file candidates from live failing tests."""
+    """Generate observational-equivalence, algebraic-dual & precondition-guard candidates from live failing tests."""
     try:
         src = src_file.read_text(encoding="utf-8", errors="replace")
         tree = ast.parse(src)
     except (OSError, SyntaxError):
         return []
 
+    reachable = _reachable_symbol_names(proj, test_files, src_file)
+    candidates: list[str] = []
+
+    # Step 1: Fast AST-exact algebraic duals & test-driven entry precondition guards on reachable functions
+    target_allow = reachable if reachable else None
+    for _lbl, c_src in algebraic_dual_span_candidates(src, allowed_functions=target_allow, max_candidates=6):
+        if c_src not in candidates:
+            candidates.append(c_src)
+    for _lbl, c_src in test_driven_precondition_guard_candidates(
+        src, test_files, allowed_functions=target_allow, max_candidates=4
+    ):
+        if c_src not in candidates:
+            candidates.append(c_src)
+
+    # Step 2: Bottom-up observational equivalence + STUN conditional synthesis (skip huge multi-thousand-line modules)
+    if len(src) > 40_000:
+        return candidates[:8]
+
     fn_nodes: dict[str, ast.FunctionDef] = {}
     file_consts: list[Any] = []
     for node in tree.body:
         if isinstance(node, ast.FunctionDef) and not node.name.startswith("_"):
+            if reachable and node.name not in reachable:
+                continue
             if node.args.args and not node.args.vararg and not node.args.kwarg:
                 fn_nodes[node.name] = node
     for sub in ast.walk(tree):
-        if isinstance(sub, ast.Constant) and isinstance(sub.value, (int, float, str)) and not isinstance(sub.value, bool):
+        if isinstance(sub, ast.Constant) and isinstance(sub.value, (int, float, str, bytes)) and not isinstance(sub.value, bool):
             if sub.value not in file_consts:
                 file_consts.append(sub.value)
 
     if not fn_nodes:
-        return []
+        return candidates[:8]
 
     harvested = harvest_live_io_examples(proj, test_files, set(fn_nodes))
-    candidates: list[str] = []
 
     for fn_name, (examples, test_consts) in harvested.items():
         if not examples:
@@ -427,7 +750,7 @@ def synthesize_candidates_for_file(
         if rewritten is not None and rewritten != src and rewritten not in candidates:
             candidates.append(rewritten)
 
-    return candidates
+    return candidates[:10]
 
 
 # --------------------------------------------------------------------------- #

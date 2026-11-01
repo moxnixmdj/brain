@@ -34,13 +34,15 @@ from canonical.swe_kernel.skill_verification_contract_v1 import (
 SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_CRYSTALLIZER_V1"
 BUNDLE_SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_BUNDLE_V1"
 
-_KEYWORDS_KEEP = frozenset({
-    # Python / Go / Rust / TS / C++ / SQL structural keywords & builtins that carry semantics
+_PYTHON_KEYWORDS_KEEP = frozenset({
     "def", "return", "if", "elif", "else", "for", "while", "in", "not", "and", "or", "is",
     "None", "True", "False", "class", "import", "from", "with", "as", "try", "except",
     "finally", "raise", "async", "await", "yield", "lambda", "pass", "break", "continue",
     "len", "range", "min", "max", "sum", "abs", "int", "float", "str", "list", "dict",
     "set", "tuple", "bool", "enumerate", "zip", "sorted", "reversed", "isinstance", "getattr",
+})
+
+_KEYWORDS_KEEP = _PYTHON_KEYWORDS_KEEP | frozenset({
     # Go
     "package", "func", "var", "const", "type", "struct", "interface", "map", "make", "append",
     "nil", "err", "error", "string", "int64", "float64", "byte", "rune", "go", "defer", "chan",
@@ -329,8 +331,8 @@ def _anti_unify_token_rule(
             after_clean = a_hunk
     sql_mode = language.lower() == "sql"
     if _python_lex:
-        toks_b = [(k, v) for k, v, _, _ in _PY_EDIT.tokens(before_clean, _KEYWORDS_KEEP)]
-        toks_a = [(k, v) for k, v, _, _ in _PY_EDIT.tokens(after_clean, _KEYWORDS_KEEP)]
+        toks_b = [(k, v) for k, v, _, _ in _PY_EDIT.tokens(before_clean, _PYTHON_KEYWORDS_KEEP)]
+        toks_a = [(k, v) for k, v, _, _ in _PY_EDIT.tokens(after_clean, _PYTHON_KEYWORDS_KEEP)]
     else:
         toks_b = _tokenize_code(before_clean, case_insensitive_kw=sql_mode)
         toks_a = _tokenize_code(after_clean, case_insensitive_kw=sql_mode)
@@ -453,7 +455,7 @@ def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
     # Tokenize source with byte/char offsets so exact surrounding formatting is preserved.
     src_tokens: list[tuple[str, str, int, int]] = []
     if _python_lex:
-        src_tokens = [(k, v, a, b) for k, v, a, b in _PY_EDIT.tokens(source_text, _KEYWORDS_KEEP) if k != 'ws']
+        src_tokens = [(k, v, a, b) for k, v, a, b in _PY_EDIT.tokens(source_text, _PYTHON_KEYWORDS_KEEP) if k != 'ws']
     else:
         pos = 0
         n = len(source_text)
@@ -576,7 +578,7 @@ def _alpha_mutate_snippet(snippet: str, *, language: str = "python", preserve_bu
         try:
             for token in tokenize.generate_tokens(io.StringIO(snippet).readline):
                 name=token.string
-                if (token.type==tokenize.NAME and name not in _KEYWORDS_KEEP
+                if (token.type==tokenize.NAME and name not in (_PYTHON_KEYWORDS_KEEP if preserve_builtins else _KEYWORDS_KEEP)
                         and not keyword.iskeyword(name) and not keyword.issoftkeyword(name)
                         and not (preserve_builtins and name in _PY_EDIT.BUILTINS)):
                     replacement=rename_map.setdefault(name,f"_twin_sym_{len(rename_map)}_{name[:4]}")
@@ -617,7 +619,7 @@ def verify_rule_on_mutated_twin(
     if not rename_map or mutated_before == before_snippet:
         return False
     if scoped and expected_after_snippet is not None:
-        expected = _PY_EDIT.renamed(expected_after_snippet, rename_map, _KEYWORDS_KEEP)
+        expected = _PY_EDIT.renamed(expected_after_snippet, rename_map, _PYTHON_KEYWORDS_KEEP)
         rewritten = next((c for c in itertools.islice(iter_crystallized_code_rule_candidates(mutated_before, rule), 64)
                           if c == expected), None)
     else:
