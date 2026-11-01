@@ -3824,6 +3824,7 @@ def _close_observations(result: dict[str, Any], goal: str,
     if result.get("pass") is True:
         try:
             from canonical.runtime import answer_shape_v1 as _answer_shape
+            _answer_shape.lift_named_answer(result)
             answer_errors = _answer_shape.deliver(goal, result, ROOT)
         except Exception:  # noqa: BLE001 - a projection fault must never change a verdict
             answer_errors = []
