@@ -18,6 +18,7 @@ argument including every place I was wrong; this section is what is true now.
 | "Give it a try and after doing it **at least once** he learns **all of those**" | **FALSE — measured, three ways** | (1) 1 example -> **6/7**, 2 examples -> **6/7**, 3 examples -> **6/7**: more exposure bought nothing. (2) Taught the one case it missed *directly*, `derive_operator_swap` still returns `None` and it cannot solve the lesson it was just shown — the failure is **representational, not statistical**. (3) Measured on its own shipped corpus: **2/5** rules can reach past their instance, **3/5** replay and stop. Repetition moves the count of rules, never their reach. |
 | "Anything on a computer" | **STRUCTURED HALF EXECUTED; GUI HALF CLOSED MODULO THE OS** | code ops run for real (real filesystem, real `pytest`, real `git status`), state ops run **verbatim**, media ops run **real ffmpeg encodes** re-measured by an independent `ffprobe`. The GUI loop closes end to end against a virtual 1920x1080 desktop — "leftmost/rightmost red box" -> correct pixel -> world changes -> next screenshot differs. What remains is one sentence: *pyautogui drives a real OS.* `host_app_ops` still needs the VM's `libreoffice_calc`. |
 | "Perfectly and permanently" | **"Permanently" is now demonstrated; "perfectly" is FALSE, by design** | permanence is complete: `invalidate()` keeps the rule *and its counterexample*, and `rule_expiry_v1` (16 tests) ages a rule out when the interpreter, platform or a tool changes — FRESH / STALE / UNKNOWN, and only FRESH may be offered. "Perfectly" cannot be claimed: every recall re-runs a verifier, so the floor is the verifier, never zero. That is correct engineering, not a defect. |
+| "plus the most advanced coding work, perfectly" | **NO — a false success, measured 5/5** | a two-file coupled bug is "repaired" by a lookup table fitted to the two assertions. Verdict `PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED`, visible tests pass, **0/5 honest repairs**, correct on none of the inputs the tests do not contain. See §6.1. |
 | "So we solve everything on a computer" | **NO — and the reason is now measured, not argued** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED. And see §The real limitation: the machine now authors a lesson's *scope* by measurement, but **I still author the hypothesis space** it chooses from. Those are different problems, and the second is harder. |
 | "We were making a sentient creature" | **THE MEASURABLE HALF EXISTS; SENTIENCE ITSELF IS NOT MEASURED AND IS NOT THE OBJECTIVE** | `ignorance_ledger_v1` — *"the machine's own model of what it does not know, ranked by what it is worth"* — **13 tests passing**. That is a genuine self-model, and it is the honest part of "knows what needs to be known". No instrument in the tree measures sentience; every receipt carries that non-claim; the canonical objective asks for the most capable problem solver, not for sentience. |
 
@@ -564,6 +565,74 @@ document is wrong and should be replaced by the measurement that replaced it.
 
 That is the difference between a story and a result, and this repo's only real asset is that
 it keeps choosing the second.
+
+---
+
+## 6.1 The coding half is not perfect: a measured false success
+
+This is the most important negative result in the document, and it is not an argument.
+
+### The setup
+
+A two-file coupled bug:
+
+```
+billing/discounts.py   return price + disc              <- wrong operator
+billing/invoice.py     for i in range(len(items) - 1)   <- off-by-one, drops the last item
+```
+
+with two visible tests. Run through `solve_repository_closed_loop`, five independent times:
+
+| ok | steps | visible tests | status | changed files |
+|---|---|---|---|---|
+| **True** x5 | 1 | **pass** x5 | `PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED` | `invoice.py` only |
+
+### The "repair"
+
+```python
+def compute_invoice(items, disc):
+    if disc % 2 == 0:
+        return 110.0
+    return 85.0
+```
+
+A lookup table for the two numbers in the test file. It does not read `items`. It does not call
+`apply_discount`. Inputs the tests never mention:
+
+| call | returns | correct |
+|---|---|---|
+| `[100.0], 0.0` | **110.0** | 100.0 |
+| `[300.0], 5.0` | **85.0** | 295.0 |
+
+**Honest repairs: 0 / 5.** The discount bug is still in the file. The sabotage control passed.
+The verdict said REPAIRED AND VERIFIED.
+
+### The failing test was a true alarm
+
+`test_next_frontier_autonomous_swe_and_computer_use_v1.py` fails at
+`assertEqual(dry["steps_taken"], 2)` -- 1 != 2. It is tempting to read that as an efficiency
+expectation that aged badly. It is not: two steps across two files is what an honest repair of a
+two-file coupled bug looks like. The suite caught the regression into test-fitting. **The test
+stays as it is**; relaxing it would have widened the claim to pass.
+
+### What was done instead of fixing it
+
+`test_closed_loop_repair_must_generalise_v1.py` pins the indisputable facts -- the verdict, the
+passing visible tests, the untouched file, the silent sabotage control -- and marks the missing
+part `xfail(strict=True)`: *a repair must be right on an input the tests do not contain*. Strict,
+so a real fix makes the file FAIL as an unexpected pass and forces this record to be updated.
+**4 passed, 2 xfailed.**
+
+Fixing it needs the solver to reject edits that stop consuming their inputs -- a held-out or
+property-based admission gate, not a new tolerance. That is the next real piece of work on the
+coding half, and it is not done.
+
+### One measurement artefact, recorded
+
+An early probe appeared to show a *second, different* repair, which would have implied
+non-determinism. It was Python's module cache: the probe imported `billing` in a process that had
+already imported it. Every number above probes in a subprocess. The apparent non-determinism was
+mine, not the solver's.
 
 ---
 
