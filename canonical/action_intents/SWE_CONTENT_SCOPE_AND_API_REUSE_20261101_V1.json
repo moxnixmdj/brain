@@ -6,7 +6,7 @@
  "action_summary": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
  "date": "2026-11-01",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
- "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+ "canonical_base_commit": "56f4361347d0af633bd7ea581bf5c5d929203e5e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -71,7 +71,7 @@
  ],
  "stop_condition": "Require real current-tree tests and signed referee success before merge; report any residuals without weakening or fabricated evidence.",
  "load_bearing_primary": {
-  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "canonical_base_commit": "56f4361347d0af633bd7ea581bf5c5d929203e5e",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
    "CODING_FRONTIERCODE_GE_54_4",
@@ -86,7 +86,7 @@
   "wall_clock_cost_ub": 1
  },
  "recursive_obs": {
-  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "canonical_base_commit": "56f4361347d0af633bd7ea581bf5c5d929203e5e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "iteration_limit": 4,
   "real_outcome": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
