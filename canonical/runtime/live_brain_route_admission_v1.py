@@ -955,7 +955,27 @@ def _refusal_status_and_payload(exc: BaseException, selected: Any) -> tuple[str,
     if _ALREADY_SATISFIED_RE.search(_text):
         return None
     _refusal = _REFUSAL_CLASS_RE.match(_text)
-    if _refusal is None or _refusal.group(1) in _REFUSAL_CLASS_EXCLUDED:
+    if _refusal is None:
+        # A REFUSAL KEY DOES NOT HAVE TO CARRY A DETAIL.
+        #
+        # ``RuntimeError("NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS")`` is one of the
+        # repository's own refusal keys -- it is a complete sentence of its own, with no colon and
+        # nothing to add -- and it was still reported as ``FAIL__LIVE_CONTROLLER_EXECUTION``.
+        # Measured on main at 29ada61: census request 32, the last unexplained row in the inventory.
+        #
+        # The distinction is structural, not lexical: a refusal key is a snake-case CONDITION name
+        # (a compound of words), while a crash label is a single word -- ``SEGFAULT``, ``Timeout``,
+        # ``KeyError``.  So a bare token counts only when it contains an underscore.  That keeps the
+        # rule falsifiable ("SEGFAULT is still a crash") instead of "any shouting word is a refusal".
+        _bare = _REFUSAL_TOKEN_RE.match(_text)
+        if (_bare is None or "_" not in _bare.group(1)
+                or _bare.group(1) in _REFUSAL_CLASS_EXCLUDED):
+            return None
+        _class = _bare.group(1)[:60]
+        return ("FAIL_CLOSED__CAPABILITY_REFUSED_" + _class,
+                "CAPABILITY_REFUSED:" + _class,
+                {"capability": selected, "error": True, "class": _class, "reason": _class})
+    if _refusal.group(1) in _REFUSAL_CLASS_EXCLUDED:
         return None
     _class = _refusal.group(1)[:60]
     _detail = _refusal.group(2).strip()[:_DETAIL_LIMIT]
