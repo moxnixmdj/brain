@@ -1,0 +1,111 @@
+[
+ {
+  "repo": "iniconfig",
+  "commit": null,
+  "seeded": false,
+  "injected": {
+   "file": null,
+   "line": null,
+   "before": null,
+   "after": null
+  },
+  "concessions": {
+   "test_cmd": "/usr/bin/python3 -m pytest -q",
+   "PYTHONPATH": null
+  },
+  "attempts_log": [],
+  "solved": false,
+  "attempts_used": 0,
+  "final_stage": "NO_OBSERVABLE_MUTATION_FOUND"
+ },
+ {
+  "repo": "pluggy",
+  "commit": null,
+  "seeded": true,
+  "injected": {
+   "file": "src/pluggy/_manager.py",
+   "line": 247,
+   "before": "elif not verified and hook.has_spec():",
+   "after": "elif not verified or hook.has_spec():"
+  },
+  "concessions": {
+   "test_cmd": "/usr/bin/python3 -m pytest -q",
+   "PYTHONPATH": "src"
+  },
+  "attempts_log": [
+   {
+    "attempt": 1,
+    "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+    "selected": "python.software.repair.apply.verified.v1",
+    "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+    "reason": "",
+    "ms": 915,
+    "files_changed": [],
+    "edited_tests": [],
+    "suite_green_after": false,
+    "observation_after": "               ^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError\nsrc/pluggy/_manager.py:437: AssertionError\n=========================== short test summary info ============================\nFAILED testing/test_details.py::test_warn_when_deprecated_specified - ValueEr...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_specified - Va...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified\nFAILED testing/test_details.py::test_wrapper_runtimeerror_passtrough - Assert...\nFAILED testing/test_pluginmanager.py::test_register - AssertionError\nFAILED testing/test_pluginmanager.py::test_unregister_plugin_and_name_must_agree\nFAILED testing/test_pluginmanager.py::test_unregister_falsy_plugin - Assertio...\n7 failed, 219 passed in 0.50s"
+   },
+   {
+    "attempt": 2,
+    "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+    "selected": "python.software.repair.apply.verified.v1",
+    "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+    "reason": "",
+    "ms": 372,
+    "files_changed": [],
+    "edited_tests": [],
+    "suite_green_after": false,
+    "observation_after": "               ^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError\nsrc/pluggy/_manager.py:437: AssertionError\n=========================== short test summary info ============================\nFAILED testing/test_details.py::test_warn_when_deprecated_specified - ValueEr...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_specified - Va...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified\nFAILED testing/test_details.py::test_wrapper_runtimeerror_passtrough - Assert...\nFAILED testing/test_pluginmanager.py::test_register - AssertionError\nFAILED testing/test_pluginmanager.py::test_unregister_plugin_and_name_must_agree\nFAILED testing/test_pluginmanager.py::test_unregister_falsy_plugin - Assertio...\n7 failed, 219 passed in 0.50s"
+   }
+  ],
+  "solved": false,
+  "attempts_used": 2,
+  "final_stage": "REFUSED_WITH_NO_EDIT",
+  "still_changed_after": []
+ },
+ {
+  "repo": "click",
+  "commit": null,
+  "seeded": true,
+  "injected": {
+   "file": "src/click/core.py",
+   "line": 2797,
+   "before": "if (self.nargs != 1 or self.multiple) and value == ():",
+   "after": "if (self.nargs != 1 or self.multiple) or value == ():"
+  },
+  "concessions": {
+   "test_cmd": "/usr/bin/python3 -m pytest -q tests/test_basic.py tests/test_arguments.py tests/test_options.py",
+   "PYTHONPATH": "src"
+  },
+  "attempts_log": [
+   {
+    "attempt": 1,
+    "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+    "selected": "",
+    "refusal": "STATED_SWE_EFFECT_UNSERVED",
+    "reason": "NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT",
+    "ms": 47,
+    "files_changed": [],
+    "edited_tests": [],
+    "suite_green_after": false,
+    "observation_after": "E       assert not SystemExit(2)\nE        +  where SystemExit(2) = <Result SystemExit(2)>.exception\ntests/test_options.py:239: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_arguments.py::test_nargs_tup - assert not SystemExit(2)\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts0] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts1] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts2] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts3] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_specified_plus_star_ordering - ass...\nFAILED tests/test_options.py::test_multiple_required - assert not SystemExit(2)\n7 failed, 1007 passed in 1.34s"
+   },
+   {
+    "attempt": 2,
+    "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+    "selected": "python.software.repair.apply.verified.v1",
+    "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+    "reason": "",
+    "ms": 331,
+    "files_changed": [],
+    "edited_tests": [],
+    "suite_green_after": false,
+    "observation_after": "E       assert not SystemExit(2)\nE        +  where SystemExit(2) = <Result SystemExit(2)>.exception\ntests/test_options.py:239: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_arguments.py::test_nargs_tup - assert not SystemExit(2)\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts0] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts1] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts2] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts3] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_specified_plus_star_ordering - ass...\nFAILED tests/test_options.py::test_multiple_required - assert not SystemExit(2)\n7 failed, 1007 passed in 1.42s"
+   }
+  ],
+  "solved": false,
+  "attempts_used": 2,
+  "final_stage": "REFUSED_WITH_NO_EDIT",
+  "still_changed_after": []
+ }
+]

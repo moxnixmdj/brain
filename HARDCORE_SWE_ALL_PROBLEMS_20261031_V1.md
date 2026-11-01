@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `d6ff2c9` (branched from main `d6ff2c9`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `cbba820` (branched from main `cbba820`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -8,7 +8,7 @@ the live verified registry, and a probe of the substrate. Nothing here is a wish
 
 ## §0 The answer in one paragraph
 
-The brain answers **41 of 49** advanced software-engineering sentences and **44 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **8** refusals fall into **7** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
+The brain answers **41 of 49** advanced software-engineering sentences and **43–44 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **8** refusals fall into **7** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
 
 They are three different kinds of problem, and confusing them is what made earlier editions of
 this document wrong:
@@ -28,9 +28,10 @@ this document wrong:
 | instrument | result |
 |---|---|
 | advanced census (49 hardcore sentences) | **41 served / 8 refused** |
-| capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
-| cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 94 ms  p90 577 ms  max 1484 ms |
+| capability matrix (54 cases, 3 runs) | **43–44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
+| cases real in **every** run | **43** — a floor, not an average |
+| cases that moved between runs | `perf_review` |
+| matrix latency | median 89 ms  p90 611 ms  max 1607 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -227,6 +228,10 @@ These matter more than any single refusal, and none of them is measured by a 49-
 9. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports
    `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with
    a clean tree. Every lane-only number is suspect until the fixture is shared.
+10. **The matrix itself moves between runs, and now says so.** Over 3 runs 43 cases were real every time and
+   43–44 were real in any one run; the cases that moved are `perf_review`. A headline number that
+   changes with the box's load is not a capability number, so this document reports the floor
+   and the ceiling and names the movers, instead of quoting whichever sample looked best.
 10. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
    software engineering is unbounded, so this corpus can be satisfied without being a good engineer.
    It needs real repositories and adversarial sentences, not more fixtures.
@@ -251,14 +256,17 @@ That split decides the order, because it decides what a number means:
   4 of the remaining 8 being sentence defects, raising it further buys
   almost no capability. It is what stops the machine going backwards, and it should be run on
   every change -- but no hour should be spent *aiming* at it.
-* **Every number in §1 is one request deep.** A system that answers 86% of single sentences
-  can still be incapable of a task that needs ten of them in sequence, and nothing here
-  measures that. Closing that gap is the actual objective, and it needs a harder instrument
-  before it needs more rows.
+* **Every number in §1 is one request deep, and §8 now prices that.** A real repository with an
+  injected bug and its own suite as the oracle produced **no edit at all**, twice over: the
+  single-step number and the multi-step number are not the same claim, and only the second one
+  is about engineering.
+  The gap is not subtle and it is not about polish: the machine has no working path from
+  *'this test fails in this repository'* to *'here is an edit'*, so no amount of repair
+  quality would show up yet.
 
 | # | move | measured reach | why at this position |
 |---|---|---|---|
-| 1 | **multi-step instrument**: a real repository, a vague issue, and a required plan -> edit -> run -> observe -> repair loop, scored end to end | everything above is one step deep | this is the only measure that can tell a strong engineer from a wide lookup table |
+| 1 | **produce an edit at all on a foreign repository**: the door selects a repair row, runs it, and the tree is untouched (§8: measured 0 of 2) | the census says 84%, a real repository says 0 | everything above is one step deep, and the first step that is not one step deep fails before repair quality is even tested |
 | 2 | **selection** for the 3 remaining sentences | 3 sentence(s) | cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |
 | 3 | **capability** for the 0 remaining sentences | 0 sentence(s) | real work, but a small ceiling; do it after the instrument exists |
 | 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, `rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows can never run, and no row may pretend otherwise |
@@ -433,9 +441,60 @@ To make it the answer to everything, two things must both hold:
 
 ## What this document is not
 
+---
+
+## §8 The multi-step instrument: what a real repository says
+
+`execution_guard/multistep_instrument_v1.py` measures the thing every number above cannot:
+a real repository, a failing test, and a budget of attempts. Three projects are cloned
+(`iniconfig`, `pluggy`, `click`), a bug is injected mechanically into their own source, the
+issue text is generated from *their* failing output, and the acceptance check is *their* own
+suite. A failed attempt is fed back verbatim, which is the only part of this that is a loop
+rather than a request.
+
+| multi-step property | value |
+|---|---|
+| tasks scored | **2** (of 3 attempted) |
+| solved end to end | **0** |
+| attempts spent | 4 |
+| attempts that edited a source file | **0** |
+| tasks ending at `REFUSED_WITH_NO_EDIT` | 2 |
+
+*iniconfig produced no observable injected bug at the accepted blast
+radius (1-25 failing cases, at most 40% of a suite), so it is an instrument limitation
+and is excluded from the score rather than counted as a pass.*
+
+| task | injected bug | attempts | files the machine edited | outcome |
+|---|---|---|---|---|
+| pluggy | `elif not verified and hook.has_spec():` -> `elif not verified or hook.has_spec():` | 2 | **0** | `REFUSED_WITH_NO_EDIT` |
+| click | `if (self.nargs != 1 or self.multiple) and value == (` -> `if (self.nargs != 1 or self.multiple) or value == ()` | 2 | **0** | `REFUSED_WITH_NO_EDIT` |
+
+**The single-step census says 84%. The multi-step instrument says 0 of 2.** The gap is not repair quality — it is that no
+edit is produced at all. The door selects `python.software.repair.apply.verified.v1`, runs
+it, and answers `STATED_ANSWER_NOT_PROVIDED` or `STATED_SWE_EFFECT_UNSERVED` with the tree
+untouched. Feeding the failing tests back changes the sentence and nothing else: attempt 2
+behaves exactly like attempt 1.
+
+Two false measurements were found while building this, and both made the machine look
+worse *or* better than it is, which is why they are recorded:
+
+1. **The first run credited the machine with its own bug.** `git status` reported the
+   injected mutation as a change, so a door that edited nothing was recorded as having
+   edited a file — twice. The injection is now committed before the first attempt, so the
+   only diff is the machine's.
+2. **The first injection was a demolition, not a bug.** Flipping `expose_value: bool = True`
+   to `False` in `click` broke 644 of 1014 tests. That is not a bug report and no fair task
+   can be built from it; mutations are now capped at 25 failing cases and 40% of a suite.
+
+What this does **not** yet measure: whether a *correct* edit would be accepted, because no
+edit is produced. The next hour is not about repair quality — it is about the missing path
+from `a failing test in this repository` to `a proposed edit`.
+
+---
+
 It is not a plan to make the machine *seem* more capable. Every item above is either a measured
 refusal, a measured absence in the substrate, or a measured selection error. Nothing is softened:
-the machine answers 41 of 49 hardcore sentences and 44 of 54
+the machine answers 41 of 49 hardcore sentences and 43–44 of 54
 capability cases, and the difference between those two numbers is itself a finding — the matrix
 exercises rows directly, the census asks whether a sentence reaches the right one, and selection
 is where the sentences are lost. The value of the inventory is that the next hour of work can be
