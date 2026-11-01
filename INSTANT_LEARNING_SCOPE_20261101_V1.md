@@ -18,7 +18,7 @@ argument including every place I was wrong; this section is what is true now.
 | "Give it a try and after doing it **at least once** he learns **all of those**" | **FALSE — measured, three ways** | (1) 1 example -> **6/7**, 2 examples -> **6/7**, 3 examples -> **6/7**: more exposure bought nothing. (2) Taught the one case it missed *directly*, `derive_operator_swap` still returns `None` and it cannot solve the lesson it was just shown — the failure is **representational, not statistical**. (3) Measured on its own shipped corpus: **2/5** rules can reach past their instance, **3/5** replay and stop. Repetition moves the count of rules, never their reach. |
 | "Anything on a computer" | **STRUCTURED HALF EXECUTED; GUI HALF CLOSED MODULO THE OS** | code ops run for real (real filesystem, real `pytest`, real `git status`), state ops run **verbatim**, media ops run **real ffmpeg encodes** re-measured by an independent `ffprobe`. The GUI loop closes end to end against a virtual 1920x1080 desktop — "leftmost/rightmost red box" -> correct pixel -> world changes -> next screenshot differs. What remains is one sentence: *pyautogui drives a real OS.* `host_app_ops` still needs the VM's `libreoffice_calc`. |
 | "Perfectly and permanently" | **"Permanently" is now demonstrated; "perfectly" is FALSE, by design** | permanence is complete: `invalidate()` keeps the rule *and its counterexample*, and `rule_expiry_v1` (16 tests) ages a rule out when the interpreter, platform or a tool changes — FRESH / STALE / UNKNOWN, and only FRESH may be offered. "Perfectly" cannot be claimed: every recall re-runs a verifier, so the floor is the verifier, never zero. That is correct engineering, not a defect. |
-| "plus the most advanced coding work, perfectly" | **NO — a false success, measured 5/5** | a two-file coupled bug is "repaired" by a lookup table fitted to the two assertions. Verdict `PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED`, visible tests pass, **0/5 honest repairs**, correct on none of the inputs the tests do not contain. See §6.1. |
+| "plus the most advanced coding work, perfectly" | **WAS A FALSE SUCCESS (measured 5/5) — NOW FIXED AND RE-MEASURED 5/5 HONEST** | a two-file coupled bug *was* "repaired" by a lookup table fitted to the two assertions: verdict `PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED`, visible tests green, **0/5 honest**, correct on none of the inputs the tests do not contain. A repair-admission rule — *a patch may not stop reading its inputs* — enforced per candidate, moved the same five runs to **5/5 honest**: 2 steps, both files, held out `[100.0], 0.0 -> 100.0` and `[300.0], 5.0 -> 295.0`. "Perfectly" is still not claimed: the gate is syntactic, covers one hole, and says so. See §6.1. |
 | "So we solve everything on a computer" | **NO — and the reason is now measured, not argued** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED. And see §The real limitation: the machine now authors a lesson's *scope* by measurement, but **I still author the hypothesis space** it chooses from. Those are different problems, and the second is harder. |
 | "We were making a sentient creature" | **THE MEASURABLE HALF EXISTS; SENTIENCE ITSELF IS NOT MEASURED AND IS NOT THE OBJECTIVE** | `ignorance_ledger_v1` — *"the machine's own model of what it does not know, ranked by what it is worth"* — **13 tests passing**. That is a genuine self-model, and it is the honest part of "knows what needs to be known". No instrument in the tree measures sentience; every receipt carries that non-claim; the canonical objective asks for the most capable problem solver, not for sentience. |
 
@@ -568,9 +568,11 @@ it keeps choosing the second.
 
 ---
 
-## 6.1 The coding half is not perfect: a measured false success
+## 6.1 The coding half is not perfect: a measured false success, and its repair
 
-This is the most important negative result in the document, and it is not an argument.
+This is the most important negative result in the document, and it is not an argument. It was
+recorded first as an alarm and then fixed; both halves are kept here, because a repair that
+erases the evidence of the defect cannot be audited.
 
 ### The setup
 
@@ -615,7 +617,7 @@ expectation that aged badly. It is not: two steps across two files is what an ho
 two-file coupled bug looks like. The suite caught the regression into test-fitting. **The test
 stays as it is**; relaxing it would have widened the claim to pass.
 
-### What was done instead of fixing it
+### What was done first, instead of fixing it
 
 `test_closed_loop_repair_must_generalise_v1.py` pins the indisputable facts -- the verdict, the
 passing visible tests, the untouched file, the silent sabotage control -- and marks the missing
@@ -623,9 +625,52 @@ part `xfail(strict=True)`: *a repair must be right on an input the tests do not 
 so a real fix makes the file FAIL as an unexpected pass and forces this record to be updated.
 **4 passed, 2 xfailed.**
 
-Fixing it needs the solver to reject edits that stop consuming their inputs -- a held-out or
-property-based admission gate, not a new tolerance. That is the next real piece of work on the
-coding half, and it is not done.
+Raising the alarm first, in a form that cannot quietly outlive the bug, is what made the fix
+verifiable rather than a matter of opinion. Two of those xfails later XPASSed, which is the
+mechanism working as designed.
+
+### The fix, and the re-measurement
+
+The missing question was narrow and answerable: *does the patched function still read what the
+original read?* `repair_input_dependency_gate_v1` answers it syntactically -- a patch may not
+reduce a function's input-dependency set -- and is enforced at **candidate admission**, not on the
+chosen winner, so the search can still find an honest repair instead of merely being refused the
+dishonest one.
+
+Same planted bug, same five independent runs, fresh repository each time, probes in subprocesses:
+
+| | before the gate | after the gate |
+|---|---|---|
+| honest repairs | **0 / 5** | **5 / 5** |
+| steps | 1 | 2 |
+| files changed | `invoice.py` only | `discounts.py` + `invoice.py` |
+| held-out `[100.0], 0.0` (want 100.0) | 110.0 | **100.0** |
+| held-out `[300.0], 5.0` (want 295.0) | 85.0 | **295.0** |
+| refused candidates | n/a | 1 per run |
+| verdict | `..._REPAIRED_AND_VERIFIED` | same string, now true |
+
+What the fix is worth: the failing `assertEqual(dry["steps_taken"], 2)` now passes **unmodified**.
+The alarm was resolved, not silenced.
+
+What it is not worth: the gate is syntactic and fail-closed, not a correctness proof. It closes
+exactly one hole -- a patch that stops consuming its inputs -- and says so in its own record. A
+patch that reads its inputs and still returns the wrong answer passes it.
+
+### A second defect found by the same alarm, and fixed
+
+Chasing one unexplained cross-file test failure turned up a real production bug, not test
+interference: `harvest_live_io_examples` execs the repaired project's own test files in the
+**calling** interpreter, so their imports are real imports. After one closed-loop solve,
+`sys.modules["pkg"]` stayed bound to `/tmp/brain_closed_loop_repo_*/worktree/pkg` -- a directory
+deleted before the solve returned. Any later task in that process importing a package of the same
+name read code from a removed directory; one such task reported
+`FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT` with `OBSERVED=False`. The fix sets the project's
+top-level names aside for the duration of the harvest and restores the caller's objects afterwards
+(`test_solver_leaves_no_import_shadow_v1`, 3 tests; two fail without the fix, one is a documented
+no-regression guard that passes either way).
+
+Ordered check recorded because it mattered: with the repair-admission change stashed, the failing
+pair reproduced identically -- so the import leak predated the gate and was not caused by it.
 
 ### One measurement artefact, recorded
 
