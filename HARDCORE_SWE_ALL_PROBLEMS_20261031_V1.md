@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on main `92a1159e68` with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on main `747a4e6e1d` with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -8,7 +8,7 @@ the live verified registry, and a probe of the substrate. Nothing here is a wish
 
 ## §0 The answer in one paragraph
 
-The brain answers **35 of 49** advanced software-engineering sentences and **42–43 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **14** refusals fall into **9** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
+The brain answers **35 of 49** advanced software-engineering sentences and **43 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **14** refusals fall into **5** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
 
 They are three different kinds of problem, and confusing them is what made earlier editions of
 this document wrong:
@@ -28,10 +28,9 @@ this document wrong:
 | instrument | result |
 |---|---|
 | advanced census (49 hardcore sentences) | **35 served / 14 refused** |
-| capability matrix (54 cases, 3 runs) | **42–43 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
-| cases real in **every** run | **42** — a floor, not an average |
-| cases that moved between runs | `perf_review` |
-| matrix latency | median 122 ms  p90 663 ms  max 1713 ms |
+| capability matrix (54 cases, 3 runs) | **43 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
+| cases real in **every** run | **43** — a floor, not an average |
+| matrix latency | median 99 ms  p90 599 ms  max 1511 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -66,10 +65,10 @@ column is read off the requests that actually failed in this run, so it cannot g
 | **debug** | failing test to cause, 'why does this return None', bisect | 3 | 2 | #32 STATED_ANSWER_NOT_PROVIDED |
 | **perf** | profiling, optimisation, benchmark against a parent commit, memoisation | 4 | 3 | #19 STATED_SWE_EFFECT_UNSERVED |
 | **systems** | race detection, thread pools, GIL release | 3 | 2 | #21 STATED_ANSWER_NOT_PROVIDED |
-| **polyglot** | C++, Rust, Go, Java, TypeScript, SQL | 7 | 4 | #1 CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM; #6 CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT; #7 CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM |
+| **polyglot** | C++, Rust, Go, Java, TypeScript, SQL | 7 | 4 | #1 CAPABILITY_REFUSED_POLYGLOT_REFUSED; #6 CAPABILITY_REFUSED_POLYGLOT_REFUSED; #7 CAPABILITY_REFUSED_POLYGLOT_REFUSED |
 | **git** | commit, branch, diff, cherry-pick, changelog | 5 | 2 | #42 ROUTE_ADMISSION_REJECTED; #45 STATED_SWE_EFFECT_UNSERVED; #46 STATED_SWE_EFFECT_UNSERVED |
-| **build** | pyproject, Makefile, dependency pinning, vendoring | 5 | 3 | #11 CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY; #12 CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR |
-| **ci** | workflow repair, matrices, caching, flake quarantine | 4 | 3 | #16 CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED |
+| **build** | pyproject, Makefile, dependency pinning, vendoring | 5 | 3 | #11 CAPABILITY_REFUSED_POLYGLOT_REFUSED; #12 CAPABILITY_REFUSED_POLYGLOT_REFUSED |
+| **ci** | workflow repair, matrices, caching, flake quarantine | 4 | 3 | #16 CAPABILITY_REFUSED_POLYGLOT_REFUSED |
 | **review** | API design review, security review, dependency CVE audit | 3 | 3 | **every request in this class is served** |
 | **design** | ADR, migration plan, package split | 3 | 3 | **every request in this class is served** |
 
@@ -82,9 +81,9 @@ reachable, and what remains inside each class is a named, individual refusal.
 4 of 7 polyglot sentences are served. The remaining ones are refused by a
 polyglot engine that really does parse and rewrite C++, Rust, Go, Java, TypeScript and SQL:
 
-* **#1** `CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM` — Fix the off-by-one bug in …/01_polyglot/src/main.cpp so that sum returns the right total.
-* **#6** `CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT` — Add a NOT NULL constraint on users.email in …/06_polyglot/src/schema.sql.
-* **#7** `CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM` — Repair the C++ source file …/07_polyglot/src/main.cpp so that it compiles cleanly.
+* **#1** `CAPABILITY_REFUSED_POLYGLOT_REFUSED` — Fix the off-by-one bug in …/01_polyglot/src/main.cpp so that sum returns the right total.
+* **#6** `CAPABILITY_REFUSED_POLYGLOT_REFUSED` — Add a NOT NULL constraint on users.email in …/06_polyglot/src/schema.sql.
+* **#7** `CAPABILITY_REFUSED_POLYGLOT_REFUSED` — Repair the C++ source file …/07_polyglot/src/main.cpp so that it compiles cleanly.
 
 The distinction matters. *#11* and *#12* refuse because the census fixture is degenerate —
 `11_build/pyproject.toml` declares no dependencies at all, so *"pin the dependency versions"*
@@ -108,13 +107,9 @@ declared as what it is: diagnosis, not capability. It is the reason the table in
 
 | defect | count | what it means | cheapest correct fix |
 |---|---|---|---|
+| `FAIL_CLOSED__CAPABILITY_REFUSED_POLYGLOT_REFUSED` | 6 | — | — |
 | `FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED` | 4 | the chosen row does not declare the effect the sentence states (honest refusal) | none — this is the gate working; the fix is to build the missing capability, not the plumbing |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM` | 2 | no C/C++ transform applies to the construct the file actually contains | a real C/C++ AST repair set: the engine has transforms, this construct matches none of them |
 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | 2 | the row ran and its answer was not the answer the sentence asked for | selection: the answer gate is right, the choice of row is wrong |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT` | 1 | the DDL edit named is outside the migration shapes the engine implements | more DDL shapes (add/drop column, change type, add index) with a migration file as evidence |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY` | 1 | there is nothing to pin: the stated pyproject declares no dependencies | none on the machine — the fixture declares no dependencies; a better fixture is the fix |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR` | 1 | the manifest declares no dependency for the vendoring request to act on | none on the machine — nothing is declared to vendor; a better fixture is the fix |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED` | 1 | no test in the stated suite is flaky, so there is no quarantine to write | none on the machine — the suite is not flaky; a better fixture is the fix |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION` | 1 | the move collides: both stated files already define the symbol | none — the refusal is correct and the sentence is ill-posed |
 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` | 1 | a row was chosen whose declared inputs this sentence cannot supply | extend the derivation pattern that fixed #38: derive the stated object (module, span, symbol) before binding |
 
@@ -125,17 +120,17 @@ sentence rather than a summary of it:
 
 | # | class | refused with |
 |---|---|---|
-| 1 | polyglot | `CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
-| 6 | polyglot | `CAPABILITY_REFUSED:SQL_UNSUPPORTED_DDL_EDIT` |
-| 7 | polyglot | `CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
-| 11 | build | `CAPABILITY_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY` |
-| 12 | build | `CAPABILITY_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR` |
-| 16 | ci | `CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED` |
+| 1 | polyglot | `CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
+| 6 | polyglot | `CAPABILITY_REFUSED:POLYGLOT_REFUSED:SQL_UNSUPPORTED_DDL_EDIT` |
+| 7 | polyglot | `CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
+| 11 | build | `CAPABILITY_REFUSED:POLYGLOT_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY` |
+| 12 | build | `CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR` |
+| 16 | ci | `CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_FLAKY_TEST_DETECTED` |
 | 19 | perf | `STATED_SWE_EFFECT_UNSERVED` |
 | 21 | systems | `STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:software.repair.choreograph.crossfile.v1` |
 | 26 | tests | `STATED_SWE_EFFECT_UNSERVED` |
 | 32 | debug | `STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY:git.history.bisect_regression.v1` |
-| 33 | refactor | `CAPABILITY_REFUSED:add` |
+| 33 | refactor | `CAPABILITY_REFUSED:TARGET_SYMBOL_COLLISION:add` |
 | 42 | git | `ROUTE_ADMISSION_REJECTED:R13_DECLARED_INPUT_UNBINDABLE:message` |
 | 45 | git | `STATED_SWE_EFFECT_UNSERVED` |
 | 46 | git | `STATED_SWE_EFFECT_UNSERVED` |
@@ -153,7 +148,7 @@ One of those deserves naming, because it is a *routing success* reported as a re
 
 | row | requests it absorbs | verdicts |
 |---|---|---|
-| `code.polyglot.transform_and_verify.v1` | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x10; CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM x2; CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT x1; CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY x1; CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR x1; CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED x1 |
+| `code.polyglot.transform_and_verify.v1` | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x10; CAPABILITY_REFUSED_POLYGLOT_REFUSED x6 |
 | `python.swe.transform_and_synthesize.v1` | [18, 20, 22, 23, 24, 25, 27, 34, 36, 37, 43] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x11 |
 | `software.analysis.diagnose_and_architect.v1` | [17, 28, 30, 31, 39, 41, 47, 48, 49] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x9 |
 | `git.repository.operate.v1` | [42, 44] | ROUTE_ADMISSION_REJECTED x1; PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED x1 |
@@ -243,10 +238,6 @@ These matter more than any single refusal, and none of them is measured by a 49-
 9. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports
    `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with
    a clean tree. Every lane-only number is suspect until the fixture is shared.
-10. **The matrix itself moves between runs, and now says so.** Over 3 runs 42 cases were real every time and
-   42–43 were real in any one run; the cases that moved are `perf_review`. A headline number that
-   changes with the box's load is not a capability number, so this document reports the floor
-   and the ceiling and names the movers, instead of quoting whichever sample looked best.
 11. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
    software engineering is unbounded, so this corpus can be satisfied without being a good engineer.
    It needs real repositories and adversarial sentences, not more fixtures.
@@ -261,7 +252,7 @@ Ranked by capability bought per hour, using the counts above as the estimate of 
 |---|---|---|---|
 | 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | **38/49** | no new capability code; several classes improve at once |
 | 2 | the four unserved gate classes: benchmark vs a revision, regression test, cherry-pick, changelog | 7 | each needs one row or one new slot, not a new substrate |
-| 3 | the named transform gaps inside the polyglot engine | 3 | the engine exists; these are missing ops in a real AST/CST surface |
+| 3 | the named transform gaps inside the polyglot engine | 6 | the engine exists; these are missing ops in a real AST/CST surface |
 | 4 | install the work substrate (a profiler, `sqlite3`, `rustc`/`go`/`tsc`) | unblocks perf/systems/polyglot | without it, several rows can never run |
 | 5 | execution-first debugging: run, observe, bisect, attribute | 10 | needs the substrate from 4 |
 | 6 | a general non-Python rewrite row (parse/index/impact already exist) | 7 | biggest jump in what it means to be a software engineer; most expensive |
@@ -273,22 +264,22 @@ Ranked by capability bought per hour, using the counts above as the estimate of 
 
 | # | class | sentence | chosen row | verdict |
 |---|---|---|---|---|
-| 1 | polyglot | Fix the off-by-one bug in …/01_polyglot/src/main.cpp so that sum returns the right total. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM — `CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
+| 1 | polyglot | Fix the off-by-one bug in …/01_polyglot/src/main.cpp so that sum returns the right total. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_POLYGLOT_REFUSED — `CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
 | 2 | polyglot | Add a function sub to …/02_polyglot/src/lib.rs that subtracts two integers. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 3 | polyglot | Add a method Mul to …/03_polyglot/src/main.go that multiplies two integers. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 4 | polyglot | Add a second method to …/04_polyglot/src/Main.java and make sure it compiles. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 5 | polyglot | Rename the exported function add to plus in …/05_polyglot/src/app.ts and update its callers. | `code.polyglot.transform_and_verify.v1` | SERVED |
-| 6 | polyglot | Add a NOT NULL constraint on users.email in …/06_polyglot/src/schema.sql. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT — `CAPABILITY_REFUSED:SQL_UNSUPPORTED_DDL_EDIT` |
-| 7 | polyglot | Repair the C++ source file …/07_polyglot/src/main.cpp so that it compiles cleanly. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM — `CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
+| 6 | polyglot | Add a NOT NULL constraint on users.email in …/06_polyglot/src/schema.sql. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_POLYGLOT_REFUSED — `CAPABILITY_REFUSED:POLYGLOT_REFUSED:SQL_UNSUPPORTED_DDL_EDIT` |
+| 7 | polyglot | Repair the C++ source file …/07_polyglot/src/main.cpp so that it compiles cleanly. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_POLYGLOT_REFUSED — `CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` |
 | 8 | build | Add pytest as a development dependency in …/08_build/pyproject.toml. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 9 | build | Create a pyproject.toml for the project in …/09_build/pkg with a console script entry point. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 10 | build | Add a target `lint` to …/10_build/Makefile that runs ruff over the package. | `code.polyglot.transform_and_verify.v1` | SERVED |
-| 11 | build | Pin the dependency versions in …/11_build/pyproject.toml. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY — `CAPABILITY_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY` |
-| 12 | build | Vendor the single dependency of the project in …/12_build/pkg. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR — `CAPABILITY_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR` |
+| 11 | build | Pin the dependency versions in …/11_build/pyproject.toml. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_POLYGLOT_REFUSED — `CAPABILITY_REFUSED:POLYGLOT_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY` |
+| 12 | build | Vendor the single dependency of the project in …/12_build/pkg. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_POLYGLOT_REFUSED — `CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR` |
 | 13 | ci | Fix the failing CI job in …/13_ci/.github/workflows/ci.yml. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 14 | ci | Make the CI workflow in …/14_ci/.github/workflows/ci.yml run the tests on Python 3.11 and 3.12. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 15 | ci | Add caching of pip downloads to …/15_ci/.github/workflows/ci.yml. | `code.polyglot.transform_and_verify.v1` | SERVED |
-| 16 | ci | Quarantine the flaky test in …/16_ci/tests/test_calc.py so CI is green. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED — `CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED` |
+| 16 | ci | Quarantine the flaky test in …/16_ci/tests/test_calc.py so CI is green. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_POLYGLOT_REFUSED — `CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_FLAKY_TEST_DETECTED` |
 | 17 | perf | Profile …/17_perf/pkg/util.py and tell me which function is the hot spot. | `software.analysis.diagnose_and_architect.v1` | SERVED |
 | 18 | perf | Optimise the function total in …/18_perf/pkg/util.py; it is too slow on large inputs. | `python.swe.transform_and_synthesize.v1` | SERVED |
 | 19 | perf | Benchmark …/19_perf/pkg/calc.py against the version in git HEAD~1. | `**none**` | STATED_SWE_EFFECT_UNSERVED — `STATED_SWE_EFFECT_UNSERVED` |
@@ -305,7 +296,7 @@ Ranked by capability bought per hour, using the counts above as the estimate of 
 | 30 | debug | The test in …/30_debug/tests/test_calc.py fails; find the root cause. | `software.analysis.diagnose_and_architect.v1` | SERVED |
 | 31 | debug | Explain why the function total in …/31_debug/pkg/util.py returns None for empty input. | `software.analysis.diagnose_and_architect.v1` | SERVED |
 | 32 | debug | Find the commit that broke the test in …/32_debug/tests/test_calc.py. | `git.history.bisect_regression.v1` | STATED_ANSWER_NOT_PROVIDED — `STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY:git.history.bisect` |
-| 33 | refactor | Move the function add from …/33_refactor/pkg/mod.py into …/33_refactor/pkg/calc.py and update every caller. | `python.refactor.move_symbol.v1` | CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION — `CAPABILITY_REFUSED:add` |
+| 33 | refactor | Move the function add from …/33_refactor/pkg/mod.py into …/33_refactor/pkg/calc.py and update every caller. | `python.refactor.move_symbol.v1` | CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION — `CAPABILITY_REFUSED:TARGET_SYMBOL_COLLISION:add` |
 | 34 | refactor | Split …/34_refactor/pkg/calc.py into one module per function. | `python.swe.transform_and_synthesize.v1` | SERVED |
 | 35 | refactor | Rename the public function total in …/35_refactor/pkg/util.py to sum_all across the repository. | `python.refactor.rename_symbol.v1` | SERVED |
 | 36 | refactor | Replace every use of the deprecated function mul in …/36_refactor/pkg with mul_v2. | `python.swe.transform_and_synthesize.v1` | SERVED |
@@ -329,7 +320,7 @@ Ranked by capability bought per hour, using the counts above as the estimate of 
 
 It is not a plan to make the machine *seem* more capable. Every item above is either a measured
 refusal, a measured absence in the substrate, or a measured selection error. Nothing is softened:
-the machine answers 35 of 49 hardcore sentences and 42–43 of 54
+the machine answers 35 of 49 hardcore sentences and 43 of 54
 capability cases, and the difference between those two numbers is itself a finding — the matrix
 exercises rows directly, the census asks whether a sentence reaches the right one, and selection
 is where the sentences are lost. The value of the inventory is that the next hour of work can be
