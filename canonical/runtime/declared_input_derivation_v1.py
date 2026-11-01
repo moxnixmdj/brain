@@ -577,6 +577,8 @@ _STATED_REVISION = re.compile(
 
 _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
     (name, re.compile(pattern, re.I)) for name, pattern in (
+        ("cherry_pick", r"\bcherry[ -]?pick\b"),
+        ("changelog", r"\bchangelog\b"),
         # history: an explicit git log, the word history, or "the last N commits"
         ("log", r"\bgit\s+log\b|\bhistory\b|\b(?:last|recent|latest|first)"
                 r"(?:\s+\w+){0,3}\s+commits?\b"),
@@ -589,7 +591,8 @@ _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
         # into three modules" bound op=branch and returned PASS for a `git branch`
         # listing.  A metaphor is not a repository operation, and an enumerated
         # operation set is only as good as the grammar that admits to it.
-        ("branch", r"\b(?:list|show|print|git)\s+(?:me\s+)?(?:the\s+|all\s+)?branches?\b"
+        ("branch", r"\bcreate\s+(?:a\s+|the\s+)?branch(?:\s+named\s+[A-Za-z0-9_./-]+)?\b"
+                   r"|\b(?:list|show|print|git)\s+(?:me\s+)?(?:the\s+|all\s+)?branches?\b"
                    r"|\bbranches\b|\bcurrent\s+branch\b|\bwhich\s+branch\b"),
         # one commit's contents: "show the commit", "git show"
         ("show", r"\bshow\s+(?:the\s+|a\s+|that\s+)?commit\b|\bgit\s+show\b"),
@@ -720,8 +723,6 @@ def stated_git_operations(goal: str) -> tuple[str, ...]:
     """Reuse the operation grammar on intent, never on paths or literal payloads."""
     from canonical.runtime import goal_front_compiler_v1 as front
     prose = front.prose_only(goal)
-    if re.search(r"\bchangelog\b", prose, re.IGNORECASE):
-        return ()
     if re.search(
         r"\b(?:diff|patch|contents?|changes?)\s+of\s+the\s+(?:last|latest|most\s+recent)\s+commit\b"
         r"|\bshow\s+(?:me\s+)?the\s+(?:last|latest|most\s+recent)\s+commit\b",
@@ -730,6 +731,15 @@ def stated_git_operations(goal: str) -> tuple[str, ...]:
     ):
         return ("show",)
     stated = tuple(name for name, pattern in _GIT_OPERATION_GRAMMAR if pattern.search(prose))
+    # changelog/cherry_pick are precise verbs; generic "last N commits" log pattern must not create ambiguity
+    if "changelog" in stated:
+        stated = tuple(x for x in stated if x not in {"log"})
+        if stated == ("changelog",):
+            return stated
+    if "cherry_pick" in stated:
+        stated = tuple(x for x in stated if x not in {"log", "changelog"})
+        if stated == ("cherry_pick",):
+            return stated
     if set(stated) == {"status", "diff"} and not re.search(r"\bstatus\b", prose, re.IGNORECASE):
         stated = ("diff",)
     if stated == ("commit",) and not _REPOSITORY_CONTEXT.search(prose):
