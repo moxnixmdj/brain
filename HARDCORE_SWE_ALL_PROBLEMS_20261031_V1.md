@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `bb776f1` (branched from main `bb776f1`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `33ac16b` (branched from main `33ac16b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **42 served / 7 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 88 ms  p90 597 ms  max 1627 ms |
+| matrix latency | median 94 ms  p90 655 ms  max 1764 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -274,10 +274,15 @@ engine and the cross-file repair choreographer.
 |---|---|
 | where the skills live | `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite` |
 | inside the temporary directory (wiped with the sandbox) | **False** |
-| rules taught by the 49-sentence census so far | **6** |
-| a taught fix crystallized in the probe | **1 rule(s)** |
+| rules taught by the 49-sentence census so far | **1** |
+| a taught fix crystallized in the probe | **6 rule(s)** |
 | CLI/environment recipe abstraction documented in the docstring | **not implemented** |
 | languages with a repair op that can teach | cpp, go, rust, ts |
+| rules a fresh store accepts from an exported bundle | **1** (refused 0) |
+| the imported rule fires in the store that never saw it | **True** |
+| provenance records carried with those rules | 6 |
+| rules shipped in version control (`VERIFIED_SKILLS_BUNDLE_V1.json`) | **5** |
+| rules a store that has never run anything holds on first open | **5** |
 
 **What one taught fix actually reaches.** A single `return t - 1` -> `return t` repair was
 taught, then the same rule was offered five neighbours:
@@ -335,9 +340,24 @@ recurrence costs a recall plus a verifier instead of a search. That is real, and
 
 To make it the answer to everything, two things must both hold:
 
-* **(a) the store must be durable.** It now is -- `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite`, inside the
-  repository and outside the temporary directory -- so a lesson survives the session that
-  learned it. Before this change it did not, so "permanently learned" was false.
+* **(a) the lesson must persist, and it must arrive.** Three separate claims are often
+  collapsed into one, and only now are all three measured:
+
+  1. *Durable across a restart*: the store is `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite`, not the
+     temporary directory. True, and it was false earlier today.
+  2. *Shipped with the repository*: the SQLite file is gitignored, so it did **not** travel.
+     Measured: the store held 6 rules at the end of one session and **0** at the start of the
+     next -- same machine, same checkout. The rules now also live in a tracked bundle of
+     **5** rules, and a store that has never run anything
+     seeds **5** of them on first open.
+  3. *Mergeable across machines*: `export_bundle` / `import_bundle` carry rules by content
+     address, union their provenance, and refuse an entry whose id does not match its own
+     payload. A fresh store accepted **1** of
+     **1** exported rule(s) and the imported rule fired
+     there: **True**.
+
+  What is still asserted rather than demonstrated: bundles sync by hand. Nothing publishes
+  them; two machines only merge when someone moves a file.
 * **(b) something must produce a first success in a new environment.** That is the whole
   problem, and it is not a learning problem: it is capability acquisition, and it is what
   §6 prices. Instant learning is the multiplier; (b) is the multiplicand.

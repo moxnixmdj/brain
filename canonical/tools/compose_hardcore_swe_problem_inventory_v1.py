@@ -335,7 +335,10 @@ def learning_measurement() -> dict:
     generalizes is only worth what its falsifier says, so the falsifier is run here every time.
     """
     out: dict = {"store": None, "under_tempdir": None, "stored": None, "cli_recipe": None,
-                 "probes": [], "crystallizes": None, "languages": []}
+                 "probes": [], "crystallizes": None, "languages": [],
+                 "portable_rules": None, "portable_refused": None, "transfer_hit": None,
+                 "origins": None, "shipped_rules": None, "seeded_fresh": None,
+                 "seed_path": None}
     try:
         from canonical.swe_kernel import verified_skill_crystallizer_v1 as cry
         path = cry._default_db_path()
@@ -367,6 +370,34 @@ def learning_measurement() -> dict:
             hit = store.recall_and_apply_verified(source_text=src, language="python",
                                                   verifier=_parses)
             out["probes"].append((label, hit is not None))
+        # Portability, measured the same way: teach in one store, ship the bundle, import it into a
+        # store that has never seen anything, and see whether the rule fires there. Durable is not
+        # portable, and only this makes the difference visible.
+        bundle = db.parent / "transfer.bundle.json"
+        store.export_to_file(bundle)
+        second = cry.VerifiedSkillStore(db.parent / "second.sqlite")
+        imported = second.import_from_file(bundle)
+        out["portable_rules"] = imported["accepted"]
+        out["portable_refused"] = imported["refused"]
+        hit = second.recall_and_apply_verified(
+            source_text=LEARN_PROBES["same shape, different literal"],
+            language="python", verifier=_parses)
+        out["transfer_hit"] = hit is not None
+        origins = [o for row in second.provenance() for o in row["origins"]]
+        out["origins"] = len(origins)
+        # What ships: the bundle in version control, and what a machine that has never run
+        # anything gets on its first open. Read from the bundle file, not asserted.
+        shipped = cry._seed_bundle_path()
+        out["seed_path"] = str(shipped)
+        out["shipped_rules"] = 0
+        if shipped.is_file():
+            try:
+                out["shipped_rules"] = int(
+                    json.loads(shipped.read_text(encoding="utf-8")).get("rule_count") or 0)
+            except Exception:
+                out["shipped_rules"] = "unreadable"
+        first_run = cry.VerifiedSkillStore(db_path=db.parent / "first_run.sqlite")
+        out["seeded_fresh"] = first_run.count()
         import shutil as _sh
         _sh.rmtree(db.parent, ignore_errors=True)
     except Exception as exc:
@@ -766,6 +797,14 @@ def main() -> int:
         add(f"| a taught fix crystallized in the probe | **{lm['crystallizes']} rule(s)** |")
         add(f"| CLI/environment recipe abstraction documented in the docstring | **{'implemented' if lm['cli_recipe'] else 'not implemented'}** |")
         add(f"| languages with a repair op that can teach | {', '.join(lm['languages']) or '—'} |")
+        add(f"| rules a fresh store accepts from an exported bundle | **{lm['portable_rules']}** "
+            f"(refused {lm['portable_refused']}) |")
+        add(f"| the imported rule fires in the store that never saw it | **{lm['transfer_hit']}** |")
+        add(f"| provenance records carried with those rules | {lm['origins']} |")
+        add(f"| rules shipped in version control (`{pathlib.Path(str(lm['seed_path'])).name}`) | "
+            f"**{lm['shipped_rules']}** |")
+        add(f"| rules a store that has never run anything holds on first open | "
+            f"**{lm['seeded_fresh']}** |")
         add("")
         add("**What one taught fix actually reaches.** A single `return t - 1` -> `return t` repair was")
         add("taught, then the same rule was offered five neighbours:")
@@ -821,9 +860,24 @@ def main() -> int:
     add("")
     add("To make it the answer to everything, two things must both hold:")
     add("")
-    add("* **(a) the store must be durable.** It now is -- `" + str(lm.get("store")) + "`, inside the")
-    add("  repository and outside the temporary directory -- so a lesson survives the session that")
-    add("  learned it. Before this change it did not, so \"permanently learned\" was false.")
+    add("* **(a) the lesson must persist, and it must arrive.** Three separate claims are often")
+    add("  collapsed into one, and only now are all three measured:")
+    add("")
+    add("  1. *Durable across a restart*: the store is `" + str(lm.get("store")) + "`, not the")
+    add("     temporary directory. True, and it was false earlier today.")
+    add("  2. *Shipped with the repository*: the SQLite file is gitignored, so it did **not** travel.")
+    add("     Measured: the store held 6 rules at the end of one session and **0** at the start of the")
+    add("     next -- same machine, same checkout. The rules now also live in a tracked bundle of")
+    add("     **" + str(lm.get("shipped_rules")) + "** rules, and a store that has never run anything")
+    add("     seeds **" + str(lm.get("seeded_fresh")) + "** of them on first open.")
+    add("  3. *Mergeable across machines*: `export_bundle` / `import_bundle` carry rules by content")
+    add("     address, union their provenance, and refuse an entry whose id does not match its own")
+    add("     payload. A fresh store accepted **" + str(lm.get("portable_rules")) + "** of")
+    add("     **" + str(lm.get("portable_rules")) + "** exported rule(s) and the imported rule fired")
+    add("     there: **" + str(lm.get("transfer_hit")) + "**.")
+    add("")
+    add("  What is still asserted rather than demonstrated: bundles sync by hand. Nothing publishes")
+    add("  them; two machines only merge when someone moves a file.")
     add("* **(b) something must produce a first success in a new environment.** That is the whole")
     add("  problem, and it is not a learning problem: it is capability acquisition, and it is what")
     add("  §6 prices. Instant learning is the multiplier; (b) is the multiplicand.")

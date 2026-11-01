@@ -30931,7 +30931,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6275d994915c85a4ba2ec825c21b96bd35115ba4be9560d5e1adf04a033f4723"
+  "value": "f01cc9ffb7b98a42a9f67da978bf50b3c706c66f4a0773371a2d65af83d768a6"
  },
  "engines": [
   {
@@ -43212,7 +43212,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 32726,
+   "bytes": 33941,
    "headings": [
     "Every hardcore software-engineering problem, measured",
     "§0 The answer in one paragraph",
@@ -43234,8 +43234,8 @@
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
-   "sha256": "2d56dcf632be41d3b0e9f94394076d4dc8d2d7ea3d75a8791b47c2a24373ad57",
-   "summary": "Measured 2026-11-01 on the tree of `bb776f1` (branched from main `bb776f1`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
+   "sha256": "90d8062161f830f1267246a189dd173d21c7bc273d8daabc13b6dd5ccdc3a918",
+   "summary": "Measured 2026-11-01 on the tree of `33ac16b` (branched from main `33ac16b`) with the substrate restored (`scripts/restore_substrate_v1.py`). Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`, the live verified registry, and a probe of the substrate. Nothing here is a wish.",
    "terms": {
     "49": 9,
     "add": 20,
@@ -43256,16 +43256,14 @@
     "function": 21,
     "git": 11,
     "learning": 10,
-    "machine": 11,
-    "measured": 13,
-    "move": 9,
+    "machine": 12,
+    "measured": 15,
     "no": 31,
     "none": 12,
-    "not": 28,
-    "nothing": 9,
-    "now": 9,
-    "number": 9,
-    "one": 19,
+    "not": 30,
+    "nothing": 10,
+    "now": 10,
+    "one": 21,
     "package": 10,
     "pkg": 29,
     "polyglot": 16,
@@ -43276,12 +43274,14 @@
     "review": 10,
     "row": 22,
     "rows": 17,
-    "run": 12,
+    "rules": 10,
+    "run": 14,
+    "same": 11,
     "selection": 14,
     "sentence": 23,
     "sentences": 20,
     "served": 56,
-    "so": 20,
+    "so": 19,
     "software.analysis.diagnose_and_architect.v1": 12,
     "test": 11,
     "tests": 16
@@ -60719,7 +60719,7 @@
   "included_source_count": 1024,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b99ceab4a6bd5ee322444594f7bd3d90c388db4ddb7843b6f95600a1f28e220b"
+  "source_tree_digest": "8487196201f8c0059d2b1df982a486eb929cb68a7582090edad15120c0cd3138"
  },
  "research_index": [
   {
