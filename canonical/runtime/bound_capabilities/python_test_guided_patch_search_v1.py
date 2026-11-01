@@ -62,7 +62,12 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
         raise PatchSearchError("TEST_EXECUTABLE_NOT_PYTHON")
     started=time.monotonic()
     try:
-        env=None if not extra_env else {**os.environ,**{k:str(v) for k,v in extra_env.items()}}
+        # The runner is the chokepoint every suite run in this family passes through, so the
+        # no-bytecode rule is enforced HERE and not left to the caller's extra_env: a call with
+        # extra_env=None used to inherit the ambient environment and wrote a pyc of the tree it
+        # had just verified (measured receipt in `_source_env`).
+        env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1",
+             **{k:str(v) for k,v in (extra_env or {}).items()}}
         proc=subprocess.run(argv,cwd=str(cwd) if cwd else root,text=True,capture_output=True,timeout=timeout_s,env=env)
         return {
             "returncode":proc.returncode,
@@ -781,7 +786,22 @@ def _source_env(*paths: Any) -> dict[str, str]:
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)
-    return {"PYTHONPATH": os.pathsep.join(dirs)}
+    # THE BYTECODE CACHE IS A SECOND COPY OF THE SOURCE, AND IT IS NOT THE ONE UNDER TEST.
+    #
+    # Measured 2026-11-01 on the surface census: `fix_then_regression_test` was
+    # nondeterministic -- door 4/4 PASS, independent oracle 1/4 -- and the cause was not the
+    # repair.  The suite runs that verified the fix imported `app.calc` through this env, which
+    # declared PYTHONPATH and nothing else, so CPython wrote `app/__pycache__/calc.cpython-*.pyc`
+    # from the FIXED source.  The oracle then reverted `app/calc.py` to the buggy commit and ran
+    # the suite again: `return a - b` and `return a + b` are the SAME SIZE, the revert landed in
+    # the SAME WALL-CLOCK SECOND, so the pyc header still matched source mtime+size and the
+    # interpreter executed the fixed bytecode against the buggy source.  Reproduced in isolation
+    # with a plain `git checkout`: stale pyc present -> "OK", pyc removed -> "FAILED (failures=1)".
+    #
+    # Nothing short of not writing the cache is safe: a redirected cache directory keeps its own
+    # stale entry, and any consumer that reverts a source file to an equal-size sibling within
+    # the timestamp tick reads it.  The tree under verification stays the only copy of the tree.
+    return {"PYTHONPATH": os.pathsep.join(dirs), "PYTHONDONTWRITEBYTECODE": "1"}
 
 
 def _import_root_dirs(dirs: list[str], paths: list[str]) -> list[str]:
