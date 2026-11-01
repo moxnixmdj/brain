@@ -53,6 +53,8 @@ _HONEST_REFUSAL_CLASSES: frozenset[str] = frozenset(
     {
         "STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER",
         "BISECT_WITHOUT_A_KNOWN_GOOD_COMMIT",
+        "TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY",
+        "PROMISED_SOURCE_CHANGE_NOT_APPLIED",
         "TARGET_SYMBOL_ALREADY_EXISTS",
         "NO_MAGIC_CONSTANT_FOUND",
         "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED",
@@ -94,15 +96,22 @@ def _qualify_http_form_skill(
     form_body: Mapping[str, Any],
     method: str,
     db_path: pathlib.Path | None,
+    hidden_fields: list[str] | None = None,
+    stateful_csrf_or_cookie: bool = False,
 ) -> dict[str, Any]:
     """Spin up an ephemeral local twin server on a fresh port to qualify HTTP transfer."""
     fields = dict(form_body or {})
+    hidden_set = set(hidden_fields or [])
+    twin_csrf_val = "twin_csrf_token_8a7b6c"
 
-    # Perturb the first parameter in the goal & expected twin server
+    # Perturb the first NON-HIDDEN parameter in the goal & expected twin server
     perturbed_goal = goal
     perturbed_expected: dict[str, str] = {}
     perturbed_once = False
     for k, v in fields.items():
+        if k in hidden_set:
+            perturbed_expected[k] = twin_csrf_val
+            continue
         sv = str(v)
         if not perturbed_once and sv and sv in perturbed_goal:
             alt = sv + "_twin" if not sv.isdigit() else str(int(sv) + 5)
@@ -119,6 +128,19 @@ def _qualify_http_form_skill(
         def do_GET(self) -> None:  # noqa: N802
             from urllib.parse import urlsplit
             qs = {k: vals[0] for k, vals in parse_qs(urlsplit(self.path).query).items() if vals}
+            if stateful_csrf_or_cookie and not qs:
+                hidden_html = "".join(
+                    f'<input type="hidden" name="{hf}" value="{twin_csrf_val}">'
+                    for hf in hidden_set
+                )
+                body_html = f"<html><body><form method='{method}'>{hidden_html}</form></body></html>".encode("utf-8")
+                self.send_response(200)
+                self.send_header("Set-Cookie", "twin_session=verified_cookie_1; Path=/")
+                self.send_header("Content-Type", "text/html")
+                self.send_header("Content-Length", str(len(body_html)))
+                self.end_headers()
+                self.wfile.write(body_html)
+                return
             ok = all(qs.get(k) == val for k, val in perturbed_expected.items())
             code = 200 if ok else 422
             payload = json.dumps({"ok": ok, "received": qs}).encode("utf-8")
@@ -139,7 +161,11 @@ def _qualify_http_form_skill(
                     parsed = {}
             else:
                 parsed = {k: vals[0] for k, vals in parse_qs(raw).items() if vals}
-            ok = all(str(parsed.get(k, "")) == val for k, val in perturbed_expected.items())
+            cookie_ok = True
+            if stateful_csrf_or_cookie:
+                cookie_hdr = str(self.headers.get("Cookie") or "")
+                cookie_ok = "twin_session=verified_cookie_1" in cookie_hdr
+            ok = cookie_ok and all(str(parsed.get(k, "")) == val for k, val in perturbed_expected.items())
             code = 200 if ok else 422
             payload = json.dumps({"ok": ok, "received": parsed}).encode("utf-8")
             self.send_response(code)
@@ -410,6 +436,8 @@ def solve_or_learn(
                     form_body=web_res.get("form_body") or {},
                     method=str(web_res.get("method") or "POST"),
                     db_path=skill_db,
+                    hidden_fields=list(web_res.get("hidden_fields") or []),
+                    stateful_csrf_or_cookie=bool(web_res.get("stateful_csrf_or_cookie")),
                 )
                 return {
                     "schema": SCHEMA,
@@ -455,6 +483,56 @@ def solve_or_learn(
                         "answer": measured.get("answer"),
                         "value": measured.get("value"),
                         "survivors": measured.get("survivors"),
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+
+        # 2B-Chain: Multi-layer CLI archive chain execution (`computer_env_v1.perform`)
+        if any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")):
+            chain_done = cenv.perform(goal, cwd=work_cwd)
+            if chain_done.get("pass") is True:
+                return {
+                    "schema": SCHEMA,
+                    "task_id": task_id,
+                    "pass": True,
+                    "status": "PASS__TIER2_STATEFUL_CLI_CHAIN_VERIFIED",
+                    "tier_used": "tier2_stateful_cli_chain",
+                    "from_memory": bool(chain_done.get("from_memory")),
+                    "plan": chain_done.get("plan"),
+                    "output": chain_done.get("output"),
+                    "verification": chain_done.get("verification"),
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                }
+
+        # 2B-Repo: Zero-Hint Multi-Step Closed-Loop Repository Repair (`solve_repository_closed_loop`)
+        low_goal = goal.lower()
+        if any(w in low_goal for w in ("fix", "repair", "solve", "make all tests pass", "failing tests")):
+            repo_target: pathlib.Path | None = None
+            for tok in re.findall(r"[A-Za-z0-9_./~-]+", goal):
+                tok_clean = tok.strip(".,:;()[]'\"")
+                if not tok_clean or tok_clean in {".", "/"}:
+                    continue
+                cand_dir = (work_cwd / tok_clean).resolve() if not pathlib.Path(tok_clean).is_absolute() else pathlib.Path(tok_clean).resolve()
+                if cand_dir.is_dir() and any(cand_dir.rglob("test_*.py")):
+                    repo_target = cand_dir
+                    break
+            if repo_target is None and work_cwd != pathlib.Path(__file__).resolve().parents[2] and any(work_cwd.rglob("test_*.py")):
+                repo_target = work_cwd
+            if repo_target is not None:
+                from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import solve_repository_closed_loop
+
+                loop_res = solve_repository_closed_loop(repo_target, goal, apply_to_source=True)
+                if loop_res.get("ok") and loop_res.get("verified"):
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "pass": True,
+                        "status": "PASS__TIER2_MULTISTEP_CLOSED_LOOP_REPO_REPAIR",
+                        "tier_used": "tier2_multistep_closed_loop_repo_solver",
+                        "from_memory": False,
+                        "steps_taken": loop_res.get("steps_taken"),
+                        "changed_files": loop_res.get("changed_files"),
+                        "crystallized_skill_ids": loop_res.get("crystallized_skill_ids"),
+                        "diff": loop_res.get("diff"),
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
 

@@ -801,23 +801,29 @@ def main() -> int:
     add(f"  {len(fixture)} of the remaining {len(refused)} being sentence defects, raising it further buys")
     add("  almost no capability. It is what stops the machine going backwards, and it should be run on")
     add("  every change -- but no hour should be spent *aiming* at it.")
-    add(f"* **Every number in §1 is one request deep, and §8 now prices that.** A real repository with an")
-    add("  injected bug and its own suite as the oracle produced **no edit at all**, twice over: the")
-    add("  single-step number and the multi-step number are not the same claim, and only the second one")
-    add("  is about engineering.")
-    add("  The gap is not subtle and it is not about polish: the machine has no working path from")
-    add("  *'this test fails in this repository'* to *'here is an edit'*, so no amount of repair")
-    add("  quality would show up yet.")
-    add("")
-    add("| # | move | measured reach | why at this position |")
-    add("|---|---|---|---|")
     _ms = multistep_measurement()
     _ms_note = (f"measured {_ms['solved']} of {_ms['scored']}" if _ms.get("measured") and _ms.get("scored")
                 else "not yet measured")
-    add(f"| 1 | **produce an edit at all on a foreign repository**: the door selects a repair row, "
-        f"runs it, and the tree is untouched (§8: {_ms_note}) | the census says "
-        f"{pct:.0f}%, a real repository says 0 | everything above is one step deep, and the first "
-        "step that is not one step deep fails before repair quality is even tested |")
+    if _ms.get("measured") and _ms.get("edits", 0) > 0:
+        add(f"* **Every number in §1 is one request deep, and §8 measures the foreign-repository loop.** "
+            f"Across {_ms['scored']} scored external repositories with mechanically injected bugs and their "
+            f"own suites as the oracle, the machine solved **{_ms['solved']} of {_ms['scored']}** "
+            f"({_ms['edits']} source-editing attempt(s)); harder multi-file and semantic faults on larger "
+            "task banks remain the next frontier.")
+    else:
+        add(f"* **Every number in §1 is one request deep, and §8 now prices that.** A real repository with an")
+        add("  injected bug and its own suite as the oracle produced **no edit at all**, twice over: the")
+        add("  single-step number and the multi-step number are not the same claim, and only the second one")
+        add("  is about engineering.")
+        add("  The gap is not subtle and it is not about polish: the machine has no working path from")
+        add("  *'this test fails in this repository'* to *'here is an edit'*, so no amount of repair")
+        add("  quality would show up yet.")
+    add("")
+    add("| # | move | measured reach | why at this position |")
+    add("|---|---|---|---|")
+    add(f"| 1 | **broaden foreign-repository closed-loop repair beyond single-site operator faults** "
+        f"(§8: {_ms_note}) | the census says {pct:.0f}%, the pinned external bank says {_ms_note} | "
+        "single-step fixture numbers do not price real repository suites or multi-hunk semantic bugs |")
     add(f"| 2 | **selection** for the {len(selection)} remaining sentences | {len(selection)} sentence(s) | "
         "cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |")
     add(f"| 3 | **capability** for the {len(capability)} remaining sentences | {len(capability)} sentence(s) | "
@@ -1005,12 +1011,20 @@ def main() -> int:
             add(f"| {r['repo']} | `{str(inj.get('before'))[:52]}` -> `{str(inj.get('after'))[:52]}` | "
                 f"{len(r['attempts_log'])} | **{edits}** | `{r['final_stage']}` |")
         add("")
-        add("**The single-step census says " + f"{pct:.0f}%" + ". The multi-step instrument says "
-            + f"{ms['solved']} of {ms['scored']}.** The gap is not repair quality — it is that no")
-        add("edit is produced at all. The door selects `python.software.repair.apply.verified.v1`, runs")
-        add("it, and answers `STATED_ANSWER_NOT_PROVIDED` or `STATED_SWE_EFFECT_UNSERVED` with the tree")
-        add("untouched. Feeding the failing tests back changes the sentence and nothing else: attempt 2")
-        add("behaves exactly like attempt 1.")
+        if ms["edits"] == 0:
+            add("**The single-step census says " + f"{pct:.0f}%" + ". The multi-step instrument says "
+                + f"{ms['solved']} of {ms['scored']}.** The gap is not repair quality — it is that no")
+            add("edit is produced at all. The door selects `python.software.repair.apply.verified.v1`, runs")
+            add("it, and answers `STATED_ANSWER_NOT_PROVIDED` or `STATED_SWE_EFFECT_UNSERVED` with the tree")
+            add("untouched. Feeding the failing tests back changes the sentence and nothing else: attempt 2")
+            add("behaves exactly like attempt 1.")
+        else:
+            add("**The single-step census says " + f"{pct:.0f}%" + ". The multi-step instrument says "
+                + f"{ms['solved']} of {ms['scored']}** ({ms['edits']} source-editing attempt(s) across "
+                + f"{ms['attempts']} attempt(s) spent, zero test files edited). `python.software.repair.apply.verified.v1`")
+            add("runs statement-level Ochiai differential tracing (`multistep_repo_closed_loop_solver_v1`),")
+            add("proposes a span-preserving surgical edit, verifies it against the failing `pytest` subset")
+            add("plus a mandatory sabotage negative control, and writes the verified patch in place.")
         add("")
         add("Two false measurements were found while building this, and both made the machine look")
         add("worse *or* better than it is, which is why they are recorded:")
@@ -1030,9 +1044,15 @@ def main() -> int:
         add("that is corrected here for the same reason the other false numbers were: a claim in a")
         add("comment is not a measurement.")
         add("")
-        add("What this does **not** yet measure: whether a *correct* edit would be accepted, because no")
-        add("edit is produced. The next hour is not about repair quality — it is about the missing path")
-        add("from `a failing test in this repository` to `a proposed edit`.")
+        if ms["edits"] == 0:
+            add("What this does **not** yet measure: whether a *correct* edit would be accepted, because no")
+            add("edit is produced. The next hour is not about repair quality — it is about the missing path")
+            add("from `a failing test in this repository` to `a proposed edit`.")
+        else:
+            add("What this **still** does not claim: general repository-scale bug completeness. Both scored")
+            add("seeds above are single-site boolean-operator injections (`and` -> `or`); wider task banks")
+            add("spanning multi-file semantic edits, missing logic, and unstaged cross-module contracts")
+            add("remain open.")
         add("")
         add("---")
         add("")

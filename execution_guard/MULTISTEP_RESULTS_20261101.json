@@ -35,33 +35,25 @@
   "attempts_log": [
    {
     "attempt": 1,
-    "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+    "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
     "selected": "python.software.repair.apply.verified.v1",
-    "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+    "refusal": "",
     "reason": "",
-    "ms": 1008,
-    "files_changed": [],
+    "ms": 7114,
+    "files_changed": [
+     "src/pluggy/_manager.py"
+    ],
     "edited_tests": [],
-    "suite_green_after": false,
-    "observation_after": "               ^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError\nsrc/pluggy/_manager.py:437: AssertionError\n=========================== short test summary info ============================\nFAILED testing/test_details.py::test_warn_when_deprecated_specified - ValueEr...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_specified - Va...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified\nFAILED testing/test_details.py::test_wrapper_runtimeerror_passtrough - Assert...\nFAILED testing/test_pluginmanager.py::test_register - AssertionError\nFAILED testing/test_pluginmanager.py::test_unregister_plugin_and_name_must_agree\nFAILED testing/test_pluginmanager.py::test_unregister_falsy_plugin - Assertio...\n7 failed, 219 passed in 0.49s"
-   },
-   {
-    "attempt": 2,
-    "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
-    "selected": "python.software.repair.apply.verified.v1",
-    "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
-    "reason": "",
-    "ms": 341,
-    "files_changed": [],
-    "edited_tests": [],
-    "suite_green_after": false,
-    "observation_after": "               ^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError\nsrc/pluggy/_manager.py:437: AssertionError\n=========================== short test summary info ============================\nFAILED testing/test_details.py::test_warn_when_deprecated_specified - ValueEr...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_specified - Va...\nFAILED testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified\nFAILED testing/test_details.py::test_wrapper_runtimeerror_passtrough - Assert...\nFAILED testing/test_pluginmanager.py::test_register - AssertionError\nFAILED testing/test_pluginmanager.py::test_unregister_plugin_and_name_must_agree\nFAILED testing/test_pluginmanager.py::test_unregister_falsy_plugin - Assertio...\n7 failed, 219 passed in 0.48s"
+    "suite_green_after": true,
+    "observation_after": "........................................................................ [ 31%]\n........................................................................ [ 63%]\n........................................................................ [ 95%]\n..........                                                               [100%]\n226 passed in 0.42s"
    }
   ],
-  "solved": false,
-  "attempts_used": 2,
-  "final_stage": "REFUSED_WITH_NO_EDIT",
-  "still_changed_after": []
+  "solved": true,
+  "attempts_used": 1,
+  "final_stage": "SOLVED",
+  "still_changed_after": [
+   "src/pluggy/_manager.py"
+  ]
  },
  {
   "repo": "click",
@@ -80,32 +72,24 @@
   "attempts_log": [
    {
     "attempt": 1,
-    "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
-    "selected": "",
-    "refusal": "STATED_SWE_EFFECT_UNSERVED",
-    "reason": "NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT",
-    "ms": 56,
-    "files_changed": [],
-    "edited_tests": [],
-    "suite_green_after": false,
-    "observation_after": "E       assert not SystemExit(2)\nE        +  where SystemExit(2) = <Result SystemExit(2)>.exception\ntests/test_options.py:239: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_arguments.py::test_nargs_tup - assert not SystemExit(2)\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts0] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts1] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts2] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts3] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_specified_plus_star_ordering - ass...\nFAILED tests/test_options.py::test_multiple_required - assert not SystemExit(2)\n7 failed, 1007 passed in 1.40s"
-   },
-   {
-    "attempt": 2,
-    "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+    "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
     "selected": "python.software.repair.apply.verified.v1",
-    "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+    "refusal": "",
     "reason": "",
-    "ms": 358,
-    "files_changed": [],
+    "ms": 20489,
+    "files_changed": [
+     "src/click/core.py"
+    ],
     "edited_tests": [],
-    "suite_green_after": false,
-    "observation_after": "E       assert not SystemExit(2)\nE        +  where SystemExit(2) = <Result SystemExit(2)>.exception\ntests/test_options.py:239: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_arguments.py::test_nargs_tup - assert not SystemExit(2)\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts0] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts1] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts2] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_tup_composite[opts3] - assert Syst...\nFAILED tests/test_arguments.py::test_nargs_specified_plus_star_ordering - ass...\nFAILED tests/test_options.py::test_multiple_required - assert not SystemExit(2)\n7 failed, 1007 passed in 1.43s"
+    "suite_green_after": true,
+    "observation_after": "........................................................................ [ 35%]\n........................................................................ [ 42%]\n........................................................................ [ 49%]\n........................................................................ [ 56%]\n........................................................................ [ 63%]\n........................................................................ [ 71%]\n........................................................................ [ 78%]\n........................................................................ [ 85%]\n........................................................................ [ 92%]\n........................................................................ [ 99%]\n......                                                                   [100%]\n1014 passed in 1.29s"
    }
   ],
-  "solved": false,
-  "attempts_used": 2,
-  "final_stage": "REFUSED_WITH_NO_EDIT",
-  "still_changed_after": []
+  "solved": true,
+  "attempts_used": 1,
+  "final_stage": "SOLVED",
+  "still_changed_after": [
+   "src/click/core.py"
+  ]
  }
 ]

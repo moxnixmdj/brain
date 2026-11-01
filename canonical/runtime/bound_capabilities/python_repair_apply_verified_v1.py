@@ -191,6 +191,79 @@ def _try_live_trace_synth_patches(
     return []
 
 
+def _try_multistep_closed_loop_patches(
+    repo:pathlib.Path,
+    source_root:pathlib.Path,
+    exec_root:pathlib.Path,
+    test_paths:list[pathlib.Path],
+    run_argv:list[str],
+    timeout:int,
+    env_paths:tuple,
+    goal:str="",
+)->tuple[list[dict[str,Any]],int]:
+    """Multi-step closed-loop beam-search fallback for >=2-step, src-layout, or cross-module bugs."""
+    import difflib
+    if source_root==repo:
+        return [],0
+    try:
+        from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import (
+            solve_repository_closed_loop,
+        )
+    except Exception:
+        return [],0
+    rel_tfiles=[
+        p.relative_to(source_root).as_posix()
+        for p in test_paths
+        if source_root in p.parents
+    ]
+    res=solve_repository_closed_loop(
+        source_root,
+        goal=goal,
+        test_files=rel_tfiles or None,
+        apply_to_source=False,
+        timeout_s=min(float(timeout),35.0),
+    )
+    if not res.get("ok") or not res.get("verified"):
+        return [],0
+    patched_map=res.get("patched_sources") or {}
+    if not isinstance(patched_map,Mapping) or not patched_map:
+        return [],0
+    rows:list[dict[str,Any]]=[]
+    backup:dict[pathlib.Path,bytes]={}
+    try:
+        for rel_sub,cand_txt in sorted(patched_map.items()):
+            src_f=(source_root/str(rel_sub)).resolve()
+            if not src_f.is_file() or repo not in src_f.parents:
+                return [],0
+            orig_bytes=src_f.read_bytes()
+            cand_bytes=str(cand_txt).encode("utf-8")
+            backup[src_f]=orig_bytes
+            _atomic_write(src_f,cand_bytes)
+            repo_rel=_rel(repo,src_f)
+            diff="".join(
+                difflib.unified_diff(
+                    orig_bytes.decode("utf-8",errors="replace").splitlines(keepends=True),
+                    str(cand_txt).splitlines(keepends=True),
+                    fromfile="a/"+repo_rel,
+                    tofile="b/"+repo_rel,
+                )
+            )
+            rows.append({
+                "source_path":repo_rel,
+                "unified_diff":diff,
+                "original_sha256":_sha(orig_bytes),
+                "candidate_sha256":_sha(cand_bytes),
+                "operator":"multistep_closed_loop_beam_search",
+            })
+        rc,_=_run_test(run_argv,exec_root,min(timeout,20),env_paths)
+    finally:
+        for fpath,ob in backup.items():
+            _atomic_write(fpath,ob)
+    if rc!=0:
+        return [],0
+    return rows,int(res.get("steps_taken") or len(rows))
+
+
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
         raise RepairApplyError("ARGS_NOT_OBJECT")
@@ -261,7 +334,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    env_paths=(source_root,*test_paths)
+    src_sub=source_root/"src"
+    has_src_layout=src_sub.is_dir() and not (src_sub/"__init__.py").exists()
+    env_paths=((src_sub,) if has_src_layout else ())+(source_root,*test_paths)
     before_rc,before_tail=_run_test(run_argv,exec_root,timeout,env_paths)
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
@@ -295,29 +370,48 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     # GATE 2 -- a bounded repair must actually be found and verified.  The
     # engine restores the source itself; only its verified patches are used.
-    intermediate=output.parent/(".apply_repair_"+output.name)
-    repair=_REPAIR.run({
-        "source_root":_rel(repo,exec_root) if exec_root!=repo else ".",
-        "test_paths":[_rel(repo,p) for p in test_paths],
-        "test_argv":argv,
-        "output_path":_rel(repo,intermediate),
-        "timeout_s":timeout,
-        "max_guided_files":args.get("max_guided_files",4),
-        "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
-        "mutations_per_file":args.get("mutations_per_file",24),
-        "max_pair_candidates":args.get("max_pair_candidates",1000),
-        "max_control_files":args.get("max_control_files",12),
-        "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
-    },repo)
-    patches=repair.get("patches") or []
-    out["repair_status"]=repair.get("status")
-    if not isinstance(patches,list) or not patches:
+    patches=[]
+    goal_str=str(args.get("goal") or "")
+    if has_src_layout:
+        patches,loop_steps=_try_multistep_closed_loop_patches(
+            repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths,goal=goal_str
+        )
+        if patches:
+            out["repair_status"]="PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH"
+            out["repair_mode"]="multistep_closed_loop_beam_search"
+            out["closed_loop_steps_taken"]=loop_steps
+    if not patches and not has_src_layout:
+        intermediate=output.parent/(".apply_repair_"+output.name)
+        repair=_REPAIR.run({
+            "source_root":_rel(repo,exec_root) if exec_root!=repo else ".",
+            "test_paths":[_rel(repo,p) for p in test_paths],
+            "test_argv":argv,
+            "output_path":_rel(repo,intermediate),
+            "timeout_s":timeout,
+            "max_guided_files":args.get("max_guided_files",4),
+            "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
+            "mutations_per_file":args.get("mutations_per_file",24),
+            "max_pair_candidates":args.get("max_pair_candidates",120),
+            "max_control_files":args.get("max_control_files",12),
+            "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
+        },repo)
+        patches=repair.get("patches") or []
+        out["repair_status"]=repair.get("status")
+    if (not isinstance(patches,list) or not patches) and not has_src_layout:
         patches=_try_live_trace_synth_patches(
             repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths
         )
         if patches:
             out["repair_status"]="PASS__LIVE_TRACE_OBSERVATIONAL_SYNTHESIS"
             out["repair_mode"]="live_trace_observational_synthesis"
+    if (not isinstance(patches,list) or not patches) and not has_src_layout:
+        patches,loop_steps=_try_multistep_closed_loop_patches(
+            repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths,goal=goal_str
+        )
+        if patches:
+            out["repair_status"]="PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH"
+            out["repair_mode"]="multistep_closed_loop_beam_search"
+            out["closed_loop_steps_taken"]=loop_steps
     if not isinstance(patches,list) or not patches:
         out["status"]="OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
         out["detail"]="Bounded search exhausted; the source was not modified."

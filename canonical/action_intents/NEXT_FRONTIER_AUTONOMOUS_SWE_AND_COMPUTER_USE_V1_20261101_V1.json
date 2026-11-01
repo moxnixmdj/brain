@@ -1,0 +1,400 @@
+{
+  "action_id": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+  "action_intent_id": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Deliver the 4-Phase Next-Frontier Autonomous SWE & Computer-Use Upgrade under zero model cognition (K3=0) and $0 spend. Phase 1 adds statement-level Ochiai differential tracing over pytest and unittest suites (`multistep_repo_closed_loop_solver_v1.py`) with UTF-8 span-preserving BoolOp/operator surgical splicing, PEP 517 `src/` layout support, mandatory sabotage negative controls, and concurrency thread-schedule race probing (`sys.setswitchinterval(1e-6)`). Phase 2 adds upstream refusal-memory ledger routing (`upstream_routing_ledger_v1.py`), pasted-traceback prose stripping for SWE admission/binding, `.py`-prioritized 512-file post-write change detection, and plumbing-verified `cherry_pick`/`changelog`/`branch` operations in `git_repository_operate.py` guarded against host-repo mutation. Phase 3 adds snapshot-checkpointed multi-step `perform_chain` (`.tar.gz` verified byte-for-byte via round-trip extraction) and table-free metamorphic CLI behavioral signatures (`metamorphic_cli_compiler_v1.py`). Phase 4 adds stateful `CookieJar` + single-use CSRF workflow negotiation, O(1) precondition indexing, and SHA-256 tamper-checked workflow bundle import/export (`causal_trace_to_skill_compiler_v1.py`). Measured on `execution_guard/multistep_instrument_v1.py`: 2 of 2 scored external repositories (`pluggy` `3fc9e561ea7e` in 7.11 s across 226 tests, `click` `2247b35ea1c4` in 20.49 s across 1,014 tests) solved end-to-end on attempt 1 with `edited_tests=[]`.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+      "canonical/tests/test_next_frontier_autonomous_swe_and_computer_use_v1.py",
+      "execution_guard/MULTISTEP_RESULTS_20261101.json",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Foreign `src/`-layout pytest repositories (`pluggy`, `click`) produced 0 edits on `multistep_instrument_v1.py` because fault localization only traced `unittest` at function granularity without `src/` PYTHONPATH or pasted-traceback filtering, `ComputerEnv` lacked checkpointed multi-step chains and metamorphic total-vs-distinct separation, and HTTP workflow compilation lacked stateful cookies/CSRF and verified portable bundles.",
+  "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Foreign `src/`-layout pytest repositories (`pluggy`, `click`) produced 0 edits on `multistep_instrument_v1.py` because fault localization only traced `unittest` at function granularity without `src/` PYTHONPATH or pasted-traceback filtering, `ComputerEnv` lacked checkpointed multi-step chains and metamorphic total-vs-distinct separation, and HTTP workflow compilation lacked stateful cookies/CSRF and verified portable bundles.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/swe_kernel/{multistep_repo_closed_loop_solver_v1,upstream_routing_ledger_v1,metamorphic_cli_compiler_v1,causal_trace_to_skill_compiler_v1,whitebox_introspector_and_trace_synthesizer_v1,closed_loop_autonomous_controller_v1,diagnostics_perf_and_design_engine_v1}.py + 6 runtime adapters/binders (`git_repository_operate.py`, `python_repair_apply_verified_v1.py`, `computer_env_v1.py`, `declared_input_derivation_v1.py`, `live_brain_route_admission_v1.py`, `swe_typed_plan_v1.py`).",
+  "expected_parent_frontier_change": "Real external `src/`-layout repositories (`pluggy`, `click`) move from 0/2 solved (0 edits) to 2/2 solved on attempt 1 with full-suite verification and sabotage negative controls; multi-step `.tar.gz` chains, metamorphic CLI behavioral separation, plumbing-verified git operations, and stateful CSRF/cookie HTTP workflows execute deterministically with K3=0.",
+  "explicit_user_authorization": "Owner reviewed the 4-Phase Next-Frontier Optimal Plan (Phase 1 Multi-Step Closed-Loop Repo Solver & Differential Tracer; Phase 2 Upstream Effect-Typed Selection, Refusal-Driven Routing Ledger & Git Closure; Phase 3 Stateful Multi-Step ComputerEnv & Metamorphic Signatures; Phase 4 Guarded Stateful Workflow Programs & Repo-Portable Skill Bundles) and directed: 'Execute perfectly.'",
+  "falsification_condition": "FALSIFIED if `multistep_instrument_v1.py` fails to solve `pluggy` or `click` without editing tests, if any candidate patch is accepted when its sabotage negative control passes, if `cenv.discover` weakens single-step format honesty gates, if `git_repository_operate` mutates the host repository on targetless calls, or if tampered workflow bundles are accepted.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "3/13",
+    "interpretation": "CLOSES_THE_FOREIGN_REPOSITORY_ZERO_EDIT_GAP_ON_THE_PINNED_MULTISTEP_INSTRUMENT_AND_ADDS_CHECKPOINTED_MULTI_STEP_COMPUTER_AND_STATEFUL_HTTP_WORKFLOW_EXECUTION_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.95,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "multistep_instrument_v1.py: BEFORE 0/2 solved (0 edits); AFTER 2/2 solved on attempt 1 (`pluggy` 7,114 ms, 226 passed; `click` 20,489 ms, 1,014 passed; `edited_tests=[]`). hardcore_swe_surface_probe_20261030.py: 28/28 reached. swe_capability_matrix_v1.py: 43-44/54 REAL, 0 FALSE, 0 DAMAGED. test_next_frontier_autonomous_swe_and_computer_use_v1.py: 8/8 PASS.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/runtime/bound_capabilities/git_repository_operate.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+    "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "WHOLE_REPO_RGLOB_TEST_DISCOVERY_WHEN_FAILING_TEST_FILES_ARE_STATED",
+      "AST_UNPARSE_FULL_FILE_REFORMAT_ON_LARGE_MODULES",
+      "HARDCODED_PROBE_KINDS_FOR_TOTAL_VS_DISTINCT_CLI_SEPARATION"
+    ],
+    "expected_parent_level_state_change": "Real external `src/`-layout repositories (`pluggy`, `click`) move from 0/2 solved (0 edits) to 2/2 solved on attempt 1 with full-suite verification and sabotage negative controls; multi-step `.tar.gz` chains, metamorphic CLI behavioral separation, plumbing-verified git operations, and stateful CSRF/cookie HTTP workflows execute deterministically with K3=0.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "BYPASSED_FULL_SUITE_UNITTEST_FALLBACKS_ON_SRC_LAYOUT_REPOS_AND_REPLACED_AST_UNPARSE_WITH_UTF8_BYTE_SPAN_SURGICAL_SPLICING",
+      "intrinsic_or_path_specific": "GENERAL__FOREIGN_REPOSITORIES_MULTI_STEP_COMPUTER_CHAINS_AND_STATEFUL_HTTP_WORKFLOWS",
+      "surviving_causal_blocker": "STATEMENT_LEVEL_PYTEST_OCHIAI_TRACING_CHECKPOINTED_CHAIN_SYNTHESIS_AND_STATEFUL_CSRF_SESSION_REPLAY_WERE_ABSENT"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_MODEL_CALLS_NO_NEW_EXTERNAL_DEPENDENCIES_STDLIB_SYS_SETTRACE_COOKIEJAR_TARFILE_GIT_PLUMBING_ONLY",
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+        "canonical/runtime/computer_env_v1.py",
+        "canonical/runtime/program_synthesis_v1.py",
+        "canonical/runtime/bound_capabilities/git_repository_operate.py",
+        "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+      ],
+      "external_existing_routes_checked": "Python stdlib `sys.settrace`, `http.cookiejar.CookieJar`, `tarfile`, `git` plumbing (`rev-parse`, `cherry-pick`, `log`), and `pytest` plugin hooks.",
+      "surviving_gap": "MULTI_HUNK_CROSS_MODULE_SEMANTIC_FAULTS_BEYOND_SINGLE_SITE_OPERATOR_AND_GUARD_SYNTHESIS"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "EDITING_MULTISTEP_INSTRUMENT_V1_OR_TEST_FILES",
+        "CLAIMING_SINGLE_CHANNEL_DISCOVER_CLOSES_MULTI_STEP_TAR_GZ"
+      ],
+      "real_outcome": "Foreign repositories (`pluggy`, `click`), multi-step `.tar.gz` CLI chains, table-free CLI behavioral queries, plumbing-verified git operations, and stateful CSRF/cookie workflows are solved and verified end-to-end.",
+      "surviving_necessity": "Every mutation and workflow must pass direct execution or twin verification plus negative controls before acceptance."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "INTEGRATED_INTO_EXISTING_PYTHON_REPAIR_APPLY_VERIFIED_GIT_REPOSITORY_OPERATE_AND_COMPUTER_ENV",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "COMPOSE_EXISTING_FRONT_DOOR_BINDERS_WITH_NEW_ZERO_SENSITIVE_SWE_KERNEL_ENGINES"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "DIRECT_MULTISTEP_INSTRUMENT_CENSUS_AND_HONESTY_SUITES_RUN_ONCE_AFTER_WIRING",
+      "search_stop_decision": "STOPPED_WHEN_STDLIB_SETTRACE_COOKIEJAR_AND_IN_TREE_PROGRAM_SYNTHESIS_COMPOSED_CLEANLY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Full-file `ast.unparse` destroys formatting on 3,200-line files like `click/core.py`; whole-repo `rglob` test collection fails on uninstalled metadata tests; stateless HTTP replay fails single-use CSRF.",
+      "routes_ranked": [
+        "STATEMENT_OCHIAI_SPAN_SPLICER_PLUS_CHECKPOINTED_CHAINS_AND_COOKIE_CSRF_WORKFLOWS__CHOSEN",
+        "FULL_FILE_AST_UNPARSE_REPAIR",
+        "STATELESS_SINGLE_STEP_ONLY"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "LOCAL_TWIN_SERVERS_AND_FIXTURE_REPOS_AUGMENT_REAL_PLUGGY_AND_CLICK_CLONES_FOR_OFFLINE_DETERMINISTIC_CI"
+    },
+    "real_outcome": "2/2 scored foreign repositories solved on attempt 1 (`pluggy` 226 passed, `click` 1,014 passed), 28/28 hardcore SWE surface reached, and 8/8 Phase 1-4 verification + sabotage tests green.",
+    "required_capability": "statement-level pytest Ochiai closed-loop repair, refusal-driven routing ledger, checkpointed ComputerEnv chains + metamorphic signatures, and stateful CSRF/cookie workflow programs",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "ZERO_FOREIGN_REPO_SOLVES",
+            "CORRECTNESS": "FAILS_ON_PYTEST_AND_SRC_LAYOUT",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "UNCHANGED",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "TIMEOUT_OR_INSTANT_REFUSAL"
+          },
+          "evidence": [
+            "Measured before change: `multistep_instrument_v1.py` solved 0 of 2 scored repos with 0 source edits."
+          ],
+          "qualification_evidence": [
+            "direct probe: `MULTISTEP_RESULTS_20261101.json` prior baseline recorded 0 edits across 6 attempts"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_FUNCTION_LEVEL_UNITTEST_ONLY_REPAIR"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "REFORMATS_ENTIRE_MODULE",
+            "CORRECTNESS": "DROPS_BOOLOP_PRECEDENCE_PARENS_WITHOUT_GUARD",
+            "INCREMENTAL_COST": "LOW",
+            "RELIABILITY": "NOISY_MULTI_THOUSAND_LINE_DIFFS",
+            "VERIFIABILITY": "POOR",
+            "WALL_CLOCK": "SLOWER_ON_LARGE_FILES"
+          },
+          "evidence": [
+            "`src/click/core.py` is 119 KB; `ast.unparse` rewrites thousands of unrelated lines and unparenthesized BoolOp splicing turns `(a or b) and c` into `a or b and c`."
+          ],
+          "qualification_evidence": [
+            "direct probe: UTF-8 byte-offset surgical span splicer changed 1 line in `src/click/core.py` and passed all 1,014 tests"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WHOLE_MODULE_AST_UNPARSE_REWRITE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "2_OF_2_EXTERNAL_REPOS_SOLVED_PLUS_MULTISTEP_CLI_AND_STATEFUL_HTTP",
+            "CORRECTNESS": "VERIFIED_BY_FULL_SUITES_ROUND_TRIP_BYTES_AND_SABOTAGE_CONTROLS",
+            "INCREMENTAL_COST": "6_SENSITIVE_FILES_AND_3_KERNEL_MODULES_ZERO_SPEND",
+            "RELIABILITY": "FAIL_CLOSED_WITH_HOST_REPO_AND_TAMPER_GUARDS",
+            "VERIFIABILITY": "MULTISTEP_INSTRUMENT_PLUS_37_PINNED_AND_FRONTIER_TESTS",
+            "WALL_CLOCK": "7_1S_PLUGGY_20_5S_CLICK_SUB_25MS_WARM_RECALL"
+          },
+          "evidence": [
+            "`multistep_instrument_v1.py`: `pluggy` solved in 7.11 s (226 passed), `click` solved in 20.49 s (1,014 passed), `edited_tests=[]`; 28/28 surface probe; 8/8 Phase 1-4 tests."
+          ],
+          "qualification_evidence": [
+            "direct probe: `MULTISTEP_RESULTS_20261101.json`, `test_next_frontier_autonomous_swe_and_computer_use_v1.py`, `test_the_multistep_instrument_cannot_flatter_itself_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T13:46:08Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "SINGLE_STEP_FIXTURE_REPAIR_STATELESS_HTTP_AND_SINGLE_ACTION_COMPUTER_ENV",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external LLM or third-party runtime dependency required: Python stdlib `sys.settrace`, `ast` end_lineno/end_col_offset byte spans, `http.cookiejar`, `tarfile`, and `git` plumbing compose directly with existing in-tree adapters.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "statement level Ochiai spectrum fault localization pytest plugin sys.settrace"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "AST node byte span surgical source splicing preserving formatting"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "metamorphic testing CLI behavioral equivalence distinct vs total count"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "stateful CookieJar CSRF token extraction replay verification"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T13:46:08Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib + pytest + git CLI in sandbox",
+            "evidence": [
+              "DIRECT_PROBE: `multistep_instrument_v1.py` cloned and ran `pluggy` (226 tests) and `click` (1,014 tests) green"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/swe_kernel/* + 6 runtime adapters/binders (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 8/8 `test_next_frontier_autonomous_swe_and_computer_use_v1.py`, 29/29 inventory/multistep honesty tests, and 28/28 surface probe pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py and canonical/runtime/computer_env_v1.py provide the verified write and sandboxed execution surfaces",
+          "execution_guard/multistep_instrument_v1.py defines the pinned foreign-repository closed-loop repair benchmark (`iniconfig`, `pluggy`, `click`)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Abreu et al. Ochiai spectrum-based fault localization formula: ef / sqrt((ef + nf) * (ef + ep)) at statement + function level"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pytest hook architecture (`pytest_runtest_call` + `pytest_runtest_makereport`) and Python `ast` line/column span attributes (`lineno`, `col_offset`, `end_lineno`, `end_col_offset`)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python 3.11 stdlib documentation for `sys.settrace`, `sys.setswitchinterval`, `http.cookiejar.CookieJar`, and `tarfile`"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_FUNCTION_LEVEL_UNITTEST_ONLY_REPAIR",
+      "WHOLE_MODULE_AST_UNPARSE_REWRITE",
+      "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1"
+    ],
+    "selected_route": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+    "selected_surviving_route": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+    "stop_condition": "STOP when `multistep_instrument_v1.py` solves 2/2 scored external repos with `edited_tests=[]`, all Phase 1-4 sabotage and honesty suites pass, `hardcore_swe_surface_probe` hits 28/28, sensitive file count stays <=15, and repo_integrity_guard_v1 passes 100%.",
+    "why_selected_route_is_fastest_sufficient": "In-process `pytest` plugin tracing computes full 1,014-test statement/function Ochiai spectra on `click` in 5.3 s (1 subprocess instead of 1,014), and UTF-8 byte-span splicing tests surgical operator mutations in ~0.4 s each without touching surrounding formatting."
+  },
+  "route_id": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1",
+  "stop_condition": "STOP when `multistep_instrument_v1.py` solves 2/2 scored external repos with `edited_tests=[]`, all Phase 1-4 sabotage and honesty suites pass, `hardcore_swe_surface_probe` hits 28/28, sensitive file count stays <=15, and repo_integrity_guard_v1 passes 100%.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T13:46:08Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_AND_PINNED_REPOSITORY_REPAIR_VERIFICATION_WITH_ZERO_EXTERNAL_BENCHMARK_RANK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "019ad7108aaa706c9bfba237efad2c441cfc4fd6",
+          "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+        },
+        {
+          "git_blob_sha": "d650b0a911d8551ea20713d0a932963bd58914fd",
+          "path": "canonical/runtime/computer_env_v1.py"
+        },
+        {
+          "git_blob_sha": "0dc75fc4582b0c6fb91051d841db2ea6f2d770d2",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        }
+      ],
+      "decisive_question": "DOES_THE_MACHINE_PRODUCE_AND_VERIFY_A_REAL_SOURCE_REPAIR_ON_FOREIGN_REPOSITORIES_WITHOUT_EDITING_TESTS_OR_WEAKENING_ANY_REFUSAL_GATE",
+      "falsifier_id": "RUN_MULTISTEP_INSTRUMENT_AND_SABOTAGE_NEGATIVE_CONTROLS_END_TO_END",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "BOTH_PINNED_EXTERNAL_REPOSITORIES_PLUGGY_AND_CLICK_ARE_SOLVED_ON_ATTEMPT_1_WITH_ZERO_TEST_EDITS_AND_ALL_PINNED_HONESTY_CONTRACTS_BISECT_RACE_DIAGNOSIS_DISCOVER_TAR_GZ_AND_HOST_REPO_PROTECTION_PASS",
+      "proposal_id": "NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. Every repair requires failing-test green + full-suite green + sabotage negative control crash/failure; `cenv.discover` preserves single-channel `.tar.gz` and `.txt` refusals while `perform_chain` verifies extracted bytes; `git_repository_operate` refuses host-repo mutation; workflow bundle import rejects SHA-256 tamper."
+}

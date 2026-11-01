@@ -384,7 +384,16 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # sentence at all, so binding it proves nothing about what was asked for.
     try:
         from canonical.runtime import capability_selection_retrieval_v1 as _selection
+        from canonical.runtime import swe_typed_plan_v1 as _tp_admit
         typed = _selection.admit(goal, selected, entry, ROOT)
+        if (isinstance(typed, Mapping)
+                and str(typed.get("reason") or "").startswith("BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD")):
+            _prose_goal = _tp_admit._strip_pasted_test_output(goal)
+            if _prose_goal != goal:
+                _prose_typed = _selection.admit(_prose_goal, selected, entry, ROOT)
+                if (isinstance(_prose_typed, Mapping)
+                        and not str(_prose_typed.get("reason") or "").startswith("BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD")):
+                    typed = _prose_typed
     except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
         typed = None
     if isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True:
@@ -2838,7 +2847,24 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
                  or "`" in text or re.search(r"\bmake\s+\w+", text, re.IGNORECASE))):
         out.append("STATED_EXECUTION_ANSWERED_BY_A_MEASUREMENT:" + (cid or "UNNAMED"))
     if _DIAGNOSE_REQUEST_RE.search(text) and not _DIAGNOSE_SURFACE_RE.search(declaration):
-        out.append("STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
+        from canonical.runtime import swe_typed_plan_v1 as _typed_plan_mod
+        _intent_only = _typed_plan_mod._strip_pasted_test_output(text)
+        _explicit_diag_question = bool(
+            re.search(
+                r"\b(?:find|locali[sz]e|identify|explain|report|what\s+is)\s+(?:the\s+)?(?:fault|root[ _-]?cause)\b"
+                r"|\broot[ _-]?cause\b|\bwhy\s+(?:does|did|is|are|do)\b"
+                r"|\blocali[sz]e\b|\bdiagnos\w*\b|\bblames?\b",
+                _intent_only,
+                re.IGNORECASE,
+            )
+        )
+        if not (
+            _declares_edits
+            and _sentence_promises_a_change(_intent_only)
+            and not _explicit_diag_question
+            and _DIAGNOSE_REQUEST_RE.search(_intent_only)
+        ) and _DIAGNOSE_REQUEST_RE.search(_intent_only):
+            out.append("STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
     return out
 
 
@@ -3187,21 +3213,27 @@ _ROOT_SOURCE_SUFFIXES = (
 )
 
 
-def _py_files_under(root: str, limit: int = 80) -> list[str]:
+def _py_files_under(root: str, limit: int = 512) -> list[str]:
     base = ROOT / root
-    out: list[str] = []
+    py_first: list[str] = []
+    other: list[str] = []
     try:
         for path in sorted(base.rglob("*")):
             if not path.is_file() or "__pycache__" in path.parts or ".git" in path.parts:
                 continue
-            if path.suffix.lower() not in _ROOT_SOURCE_SUFFIXES and path.name != "Makefile":
+            suf = path.suffix.lower()
+            if suf not in _ROOT_SOURCE_SUFFIXES and path.name != "Makefile":
                 continue
-            out.append(str(path.relative_to(ROOT)))
-            if len(out) >= limit:
+            rel = str(path.relative_to(ROOT))
+            if suf == ".py":
+                py_first.append(rel)
+            else:
+                other.append(rel)
+            if len(py_first) >= limit:
                 break
     except OSError:
-        return out
-    return out
+        return py_first[:limit]
+    return (py_first + other)[:limit]
 
 
 def promised_source_change_errors(goal: str, before: Mapping[str, str],
@@ -3970,8 +4002,9 @@ def _close_observations(result: dict[str, Any], goal: str,
     if result.get("pass") is True:
         try:
             from canonical.runtime import answer_shape_v1 as _answer_shape
+            from canonical.runtime import swe_typed_plan_v1 as _tp_shape
             _answer_shape.lift_named_answer(result)
-            answer_errors = _answer_shape.deliver(goal, result, ROOT)
+            answer_errors = _answer_shape.deliver(_tp_shape._strip_pasted_test_output(goal), result, ROOT)
         except Exception:  # noqa: BLE001 - a projection fault must never change a verdict
             answer_errors = []
     if answer_errors:
