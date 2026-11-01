@@ -23,8 +23,8 @@ def _sha256_bytes(data: bytes) -> str:
 
 
 def _run_cmd(argv: list[str], cwd: Path, timeout: float = 15.0) -> tuple[int, str, str]:
-    rc, out_b = pipeline_exec_v1.run_stages([argv], cwd=str(cwd), timeout=timeout)
-    return int(rc), out_b.decode("utf-8", errors="replace"), ""
+    rc, out_b, err_b = pipeline_exec_v1.run_command(argv, cwd=str(cwd), timeout=timeout)
+    return (int(rc) if rc is not None else 124), out_b.decode("utf-8", errors="replace"), err_b.decode("utf-8", errors="replace")
 
 
 def _cst_has_errors(source: bytes, lang: str) -> tuple[bool, bool]:
@@ -141,7 +141,7 @@ def cpp_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
             if rc != 0:
                 lines = updated.splitlines()
                 # Missing semicolon before line reported by compiler
-                m_semi = re.search(r":(\d+):\d+:\s*error:\s*expected\s*';'", err)
+                m_semi = re.search(r":(\d+):\d+:\s*error:\s*expected\s*['‘’]?;", err)
                 if m_semi:
                     ln = int(m_semi.group(1))
                     for cand_idx in (ln - 1, ln - 2):
@@ -398,25 +398,68 @@ def ts_transform_and_verify(target: Path, goal: str, project_root: Path | None =
     edited_files: list[str] = []
     if m_ren:
         old_sym, new_sym = m_ren.group(1), m_ren.group(2)
-        pat = re.compile(rf"\b{re.escape(old_sym)}\b")
-        if not pat.search(original):
-            return {"verified": False, "gate": "FAIL", "reason": f"TS_SYMBOL_NOT_FOUND:{old_sym}"}
+        from canonical.runtime import tree_sitter_swe_kernel_v1 as syntax
+        from canonical.swe_kernel.transform_contracts_v1 import FileEdits
         scope = project_root if project_root and project_root.is_dir() else target.parent
-        candidates = sorted(
-            p for p in scope.rglob("*")
-            if p.is_file() and p.suffix in {".ts", ".tsx", ".js", ".mjs", ".cjs"}
-        )
+        candidates = sorted(p for p in scope.rglob("*") if p.is_file() and p.suffix in {".ts", ".tsx", ".js", ".mjs", ".cjs"}
+                            and not any(part in syntax.IGNORED_DIRS for part in p.relative_to(scope).parts))
         if target not in candidates:
             candidates.append(target)
         staged: dict[Path, str] = {}
+        declarations = 0
         for p in candidates:
-            txt = p.read_text(encoding="utf-8")
-            new_txt = pat.sub(new_sym, txt)
-            if new_txt != txt:
-                cst_checked, cst_err = _cst_has_errors(new_txt.encode("utf-8"), "typescript")
-                if cst_checked and cst_err or not _balanced_delimiters(new_txt):
-                    return {"verified": False, "gate": "FAIL", "reason": f"TS_CST_ERROR_IN:{p.name}"}
-                staged[p] = new_txt
+            if p.is_symlink():
+                return {"verified": False, "gate": "FAIL", "reason": "TS_SYMLINK_REFUSED"}
+            raw = p.read_bytes()
+            try:
+                tree = syntax.parse_bytes('tsx' if p.suffix == '.tsx' else ('typescript' if p.suffix == '.ts' else 'javascript'), raw)
+            except Exception as exc:
+                return {"verified": False, "gate": "FAIL", "reason": "TS_PARSER_UNAVAILABLE", "detail": str(exc)}
+            if tree.root_node.has_error:
+                return {"verified": False, "gate": "FAIL", "reason": "TS_SOURCE_PARSE_FAILED"}
+            stack = [tree.root_node]
+            edits = []
+            has_old = False
+            while stack:
+                n = stack.pop()
+                stack.extend(reversed(n.children))
+                if n.type not in {'identifier', 'shorthand_property_identifier', 'shorthand_property_identifier_pattern'}:
+                    continue
+                token = raw[n.start_byte:n.end_byte].decode('utf-8')
+                if n.type == 'identifier' and token == new_sym:
+                    return {"verified": False, "gate": "FAIL", "reason": "TS_DESTINATION_BINDING_COLLISION"}
+                if token != old_sym or n.type not in {'identifier', 'shorthand_property_identifier', 'shorthand_property_identifier_pattern'}:
+                    continue
+                has_old = True
+                parent = n.parent
+                name = parent.child_by_field_name('name') if parent else None
+                is_name = name is not None and name.start_byte == n.start_byte and name.end_byte == n.end_byte
+                if parent and parent.type == 'function_declaration' and is_name:
+                    if p != target or parent.parent.type not in {'program', 'export_statement'}:
+                        return {"verified": False, "gate": "FAIL", "reason": "TS_AMBIGUOUS_SHADOWED_BINDING"}
+                    declarations += 1
+                elif parent and ((is_name and parent.type in {'variable_declarator', 'class_declaration', 'required_parameter', 'optional_parameter'})
+                                 or parent.type in {'formal_parameters', 'required_parameter', 'optional_parameter', 'catch_clause', 'import_specifier', 'namespace_import', 'shorthand_property_identifier_pattern'}
+                                 or n.type == 'shorthand_property_identifier_pattern'
+                                 or (parent.type == 'arrow_function' and parent.child_by_field_name('parameter') == n)):
+                    return {"verified": False, "gate": "FAIL", "reason": "TS_BINDING_RESOLUTION_REQUIRED"}
+                # Object keys, member properties, comments and literals are not
+                # lexical references. Preserve shorthand object keys as well.
+                replacement = old_sym + ': ' + new_sym if n.type == 'shorthand_property_identifier' else new_sym
+                edits.append((n.start_byte, n.end_byte, replacement.encode('utf-8')))
+            # Cross-module alias/namespace resolution requires a compiler symbol
+            # service. Never guess that an unrelated file's identifier is ours.
+            if p != target and has_old:
+                return {"verified": False, "gate": "FAIL", "reason": "TS_CROSS_MODULE_BINDING_RESOLUTION_REQUIRED"}
+            if edits:
+                for start, end, value in sorted(edits, reverse=True):
+                    raw = raw[:start] + value + raw[end:]
+                parsed = syntax.parse_bytes('typescript' if p.suffix == '.ts' else ('tsx' if p.suffix == '.tsx' else 'javascript'), raw)
+                if parsed.root_node.has_error:
+                    return {"verified": False, "gate": "FAIL", "reason": "TS_RENAMED_SOURCE_PARSE_FAILED"}
+                staged[p] = raw.decode('utf-8')
+        if declarations != 1:
+            return {"verified": False, "gate": "FAIL", "reason": "TS_UNIQUE_FUNCTION_BINDING_REQUIRED"}
         node = shutil.which("node")
         node_verified = False
         if node and target in staged:
@@ -425,9 +468,9 @@ def ts_transform_and_verify(target: Path, goal: str, project_root: Path | None =
             if rc != 0:
                 return {"verified": False, "gate": "FAIL", "reason": "TS_NODE_SMOKE_FAILED"}
             node_verified = True
-        for p, new_txt in staged.items():
-            p.write_text(new_txt, encoding="utf-8")
-            edited_files.append(str(p))
+        with FileEdits({p: txt.encode("utf-8") for p, txt in staged.items()}) as transaction:
+            edited_files.extend(str(p) for p in staged)
+            transaction.commit()
         return {
             "verified": True,
             "gate": "PASS",

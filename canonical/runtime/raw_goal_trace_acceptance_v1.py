@@ -2573,6 +2573,16 @@ def _inspect_rename_parameter(args, result, root):
 def _inspect_polyglot_transform(args, result, root):
     if result.get("verified") is not True or result.get("gate") != "PASS":
         return False, "POLYGLOT_TRANSFORM_NOT_VERIFIED", {}
+    from canonical.swe_kernel import transition_verifier_v1 as transition
+    cid = "python.swe.transform_and_synthesize.v1" if args.get("operation") in transition.PYTHON_OPERATIONS else "code.polyglot.transform_and_verify.v1"
+    if transition.applicable(cid, args):
+        preimages = result.get("transition_preimages")
+        if not isinstance(preimages, dict) or not preimages:
+            return False, "SWE_TRANSITION_PREIMAGE_REQUIRED", {}
+        try:
+            transition.verify(root, args, preimages)
+        except (ValueError, SyntaxError, OSError, TypeError) as exc:
+            return False, "SWE_TRANSITION_CONTRACT_FAILED:" + str(exc), {}
     tgt_rel = str(result.get("target_relpath") or args.get("target_path") or "")
     tgt = _inside(root, tgt_rel)
     if not tgt_rel or tgt is None or not tgt.is_file():
@@ -2614,6 +2624,16 @@ def _inspect_python_swe_transform(args, result, root):
         if not repo_r or not Path(repo_r).is_dir():
             return False, "PYTHON_SWE_GIT_REPO_INVALID", {}
         return True, "", {"operation": op, "head": result.get("head") or result.get("new_head")}
+    from canonical.swe_kernel import transition_verifier_v1 as transition
+    cid = "python.swe.transform_and_synthesize.v1" if args.get("operation") in transition.PYTHON_OPERATIONS else "code.polyglot.transform_and_verify.v1"
+    if transition.applicable(cid, args):
+        preimages = result.get("transition_preimages")
+        if not isinstance(preimages, dict) or not preimages:
+            return False, "SWE_TRANSITION_PREIMAGE_REQUIRED", {}
+        try:
+            transition.verify(root, args, preimages)
+        except (ValueError, SyntaxError, OSError, TypeError) as exc:
+            return False, "SWE_TRANSITION_CONTRACT_FAILED:" + str(exc), {}
     tgt_rel = str(result.get("target_relpath") or args.get("target_path") or "")
     tgt = _inside(root, tgt_rel)
     if not tgt_rel or tgt is None or not tgt.is_file():

@@ -152,14 +152,15 @@ def _load() -> list[dict[str, Any]]:
         return []
 
 
-def _save(rows: list[dict[str, Any]]) -> None:
+def _save(rows: list[dict[str, Any]]) -> bool:
     try:
         Path(STATE_PATH).parent.mkdir(parents=True, exist_ok=True)
         tmp = Path(str(STATE_PATH) + ".tmp")
         tmp.write_text(json.dumps(rows, indent=2, default=str), encoding="utf-8")
         tmp.replace(STATE_PATH)
+        return True
     except OSError:
-        pass
+        return False
 
 
 def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
@@ -192,11 +193,11 @@ def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
             row["trials"] = int(row.get("trials", 0)) + 1
             row["successes"] = int(row.get("successes", 0)) + (1 if reached else 0)
             row["last_used_utc"] = entry["last_used_utc"]
-            _save(rows[-DEFAULT_MAX_EPISODES:])
-            return row
+            persisted = _save(rows[-DEFAULT_MAX_EPISODES:])
+            return dict(row, persisted=persisted)
     rows.append(entry)
-    _save(rows[-DEFAULT_MAX_EPISODES:])
-    return entry
+    persisted = _save(rows[-DEFAULT_MAX_EPISODES:])
+    return dict(entry, persisted=persisted)
 
 
 def recall(fingerprint: Mapping[str, Any], goal_key: str | None = None, *,
@@ -231,6 +232,26 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
           max_depth: int = 6, heuristic: Callable[[Any], float] | None = None,
           use_transfer: bool = True, min_similarity: float = 0.5) -> dict[str, Any]:
     """Recall first, learn second, and prove either way by executing."""
+    # Count every call through the environment interface, including structural
+    # fingerprint probes and heuristic look-ahead. A replay trial is not one
+    # atomic interaction and must not be advertised as such.
+    counters = {'act_calls': 0, 'reset_calls': 0}
+    class MeteredEnvironment:
+        def __getattr__(self, name):
+            return getattr(env_original, name)
+        def act(self, action):
+            counters['act_calls'] += 1
+            return env_original.act(action)
+        def reset(self):
+            counters['reset_calls'] += 1
+            return env_original.reset()
+    env_original = env
+    env = MeteredEnvironment()
+    def finish(result):
+        return dict(result, interactions=dict(counters),
+                    interaction_scope='ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES',
+                    retention_policy={'hot_episode_limit': DEFAULT_MAX_EPISODES,
+                                      'all_experiences_retained_forever': False})
     started = time.time()
     from canonical.runtime import environment_learning_v1 as el
 
@@ -240,7 +261,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     transferred = None
     candidates = recall(fp, gkey, min_similarity=min_similarity) if use_transfer else []
 
-    for cand in candidates:
+    for tried, cand in enumerate(candidates, 1):
         env.reset()
         plan = [str(a) for a in (cand.get("plan") or [])]
         for action in plan:
@@ -250,17 +271,17 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             reached = bool(is_goal(env.state()))
         except Exception:
             reached = False
-        remember(fp, gkey, plan, reached=reached)
+        retained = remember(fp, gkey, plan, reached=reached)
         if reached:
-            return {
+            return finish({
                 "schema": SCHEMA, "status": PASS_TRANSFERRED, "pass": True,
                 "plan": plan, "plan_length": len(plan), "reached": True,
-                "transferred": True, "similarity": cand.get("similarity"),
-                "candidates_tried": 1,
+                "transferred": True, "episode_persisted": retained["persisted"], "similarity": cand.get("similarity"),
+                "candidates_tried": tried,
                 "authority": "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED",
-                "trials_spent": 1,
+                "trials_spent": tried,
                 "duration_s": round(time.time() - started, 4),
-            }
+            })
         transferred = cand
 
     # carry the RULES across, not just the plan. The goal here is new, so a
@@ -287,7 +308,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
         partial = el.learn_model(env, actions, budget=take,
                                  seed=(seed or 0) + spent,
                                  max_depth=max_depth, heuristic=heuristic,
-                                 prior=prior or model_out or None)
+                                 prior=model_out or prior or None)
         spent += take
         model_out = partial.get("model") or {}
         # tried = whether this chunk earned anything new
@@ -314,11 +335,11 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             reached = False
         if reached:
             plan = [str(a) for a in candidate]
-            remember(fp, gkey, plan, reached=True, model=model_out)
-            return {
+            retained = remember(fp, gkey, plan, reached=True, model=model_out)
+            return finish({
                 "schema": SCHEMA, "status": PASS_TRANSFERRED if prior else PASS_LEARNED,
                 "pass": True, "plan": plan, "plan_length": len(plan),
-                "reached": True, "transferred": bool(prior),
+                "reached": True, "transferred": bool(prior), "episode_persisted": retained["persisted"],
                 "prior_transitions": sum(len(v) for v in (prior or {}).values()),
                 "trials_spent": spent, "budget": budget,
                 "saved_trials": max(0, budget - spent),
@@ -326,7 +347,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
                 "learned": partial,
                 "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
                 "duration_s": round(time.time() - started, 4),
-            }
+            })
 
     out = {
         "schema": SCHEMA,
@@ -345,7 +366,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     if transferred is not None:
         out["status"] = FAIL_TRANSFER_WRONG
     out["duration_s"] = round(time.time() - started, 4)
-    return out
+    return finish(out)
 
 
 def _goal_key(is_goal: Callable[[Any], bool]) -> str:

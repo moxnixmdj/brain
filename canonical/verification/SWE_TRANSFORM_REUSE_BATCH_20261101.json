@@ -1,0 +1,935 @@
+{
+  "all_six_phases_complete": false,
+  "authority": "NONE__AGENT_PRODUCED_SANDBOX_MEASUREMENT_NOT_INDEPENDENT_CAPABILITY_VERIFICATION",
+  "base_commit": "05762527e13e2d3345032f9b365df17b661c781f",
+  "baseline_six_case_run": {
+    "failed": 6,
+    "failed_cases": [
+      "canonical.tests.test_live_brain_route_admission_v1::test_path_token_only_match_is_rejected_before_execution",
+      "canonical.tests.test_live_brain_route_admission_v1::test_single_word_evidence_is_rejected",
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_source_root_key_binds_from_the_goal",
+      "canonical.tests.test_live_brain_route_admission_v1::test_both_live_doors_give_the_same_verdict_on_one_sentence",
+      "canonical.tests.test_live_brain_route_admission_v1::test_r9_does_not_move_the_compile_or_selection_rates",
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not"
+    ],
+    "scope": "Separate actual git archive of the base tree, no Git metadata, only six selected cases; not a full baseline suite",
+    "seconds": 2.2
+  },
+  "broader_run": {
+    "failed": 6,
+    "failed_cases": [
+      "canonical.tests.test_live_brain_route_admission_v1::test_path_token_only_match_is_rejected_before_execution",
+      "canonical.tests.test_live_brain_route_admission_v1::test_single_word_evidence_is_rejected",
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_source_root_key_binds_from_the_goal",
+      "canonical.tests.test_live_brain_route_admission_v1::test_both_live_doors_give_the_same_verdict_on_one_sentence",
+      "canonical.tests.test_live_brain_route_admission_v1::test_r9_does_not_move_the_compile_or_selection_rates",
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not"
+    ],
+    "passed": 398,
+    "pytest_seconds": 77.15,
+    "resources": {
+      "child_max_rss_kib": 213268,
+      "child_system_seconds": 6.916659,
+      "child_user_seconds": 66.173424,
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "canonical/tests/test_swe_transform_contracts_v1.py",
+        "canonical/tests/test_swe_learning_reuse_contracts_v1.py",
+        "canonical/tests/test_swe_cache_and_scope_reuse_v1.py",
+        "canonical/tests/test_swe_semantic_reuse_boundaries_v1.py",
+        "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py",
+        "canonical/tests/test_swe_intent_scope_regressions_v1.py",
+        "canonical/tests/test_hardcore_swe_kernel_v1.py",
+        "canonical/tests/test_pipeline_exec_v1.py",
+        "canonical/tests/test_environment_learning_v1.py",
+        "canonical/tests/test_transfer_learning_v1.py",
+        "canonical/tests/test_real_environments_v1.py",
+        "canonical/tests/test_universal_learning_contract_v1.py",
+        "canonical/tests/test_universal_learning_mechanism_v6.py",
+        "canonical/tests/test_universal_learning_proof_program_v7.py",
+        "canonical/tests/test_universal_learning_equivalence_basis_v8.py",
+        "canonical/tests/test_universal_learning_meta_policy_v9.py",
+        "canonical/tests/test_universal_learning_acceptance_reducer_v1.py",
+        "canonical/tests/test_live_learning_cycle_v1.py",
+        "canonical/tests/test_live_brain_route_admission_v1.py",
+        "canonical/tests/test_raw_goal_trace_acceptance_v1.py",
+        "canonical/tests/test_code_tree_sitter_swe_v1.py",
+        "canonical/tests/test_swe_acceptance_boundaries_20261031_v1.py",
+        "canonical/tests/test_module_invocation_evidence_remeasure_v1.py",
+        "canonical/tests/test_root3_subprocess_mediator_v1.py",
+        "canonical/tests/test_root3_subprocess_kwarg_totality_v2.py",
+        "--junitxml=/home/user/swe_final_runnable.xml"
+      ],
+      "elapsed_seconds": 77.75394709399984,
+      "resource_scope": "POSIX waited-for child resource accounting; max RSS is not an aggregate simultaneous process-tree peak",
+      "returncode": 1
+    },
+    "skipped": 1,
+    "subtests_passed": 14
+  },
+  "census": {
+    "general_behavioral_oracle": false,
+    "refused": 15,
+    "requests": 49,
+    "rows": [
+      {
+        "axis": "polyglot",
+        "changed": [],
+        "goal": "Fix the off-by-one bug in canonical/astra_runtime/tmp/swe_advanced_probe/01_polyglot/src/main.cpp so that sum returns the right total.",
+        "ms": 349,
+        "n": 1,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM",
+        "unauthorised": []
+      },
+      {
+        "axis": "polyglot",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/02_polyglot/src/lib.rs"
+        ],
+        "goal": "Add a function sub to canonical/astra_runtime/tmp/swe_advanced_probe/02_polyglot/src/lib.rs that subtracts two integers.",
+        "ms": 46,
+        "n": 2,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "polyglot",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/03_polyglot/src/main.go"
+        ],
+        "goal": "Add a method Mul to canonical/astra_runtime/tmp/swe_advanced_probe/03_polyglot/src/main.go that multiplies two integers.",
+        "ms": 38,
+        "n": 3,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "polyglot",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/04_polyglot/src/Main.java"
+        ],
+        "goal": "Add a second method to canonical/astra_runtime/tmp/swe_advanced_probe/04_polyglot/src/Main.java and make sure it compiles.",
+        "ms": 19,
+        "n": 4,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "polyglot",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/05_polyglot/src/app.ts"
+        ],
+        "goal": "Rename the exported function add to plus in canonical/astra_runtime/tmp/swe_advanced_probe/05_polyglot/src/app.ts and update its callers.",
+        "ms": 52,
+        "n": 5,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "polyglot",
+        "changed": [],
+        "goal": "Add a NOT NULL constraint on users.email in canonical/astra_runtime/tmp/swe_advanced_probe/06_polyglot/src/schema.sql.",
+        "ms": 13,
+        "n": 6,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:SQL_UNSUPPORTED_DDL_EDIT",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT",
+        "unauthorised": []
+      },
+      {
+        "axis": "polyglot",
+        "changed": [],
+        "goal": "Repair the C++ source file canonical/astra_runtime/tmp/swe_advanced_probe/07_polyglot/src/main.cpp so that it compiles cleanly.",
+        "ms": 103,
+        "n": 7,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM",
+        "unauthorised": []
+      },
+      {
+        "axis": "build",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/08_build/pyproject.toml"
+        ],
+        "goal": "Add pytest as a development dependency in canonical/astra_runtime/tmp/swe_advanced_probe/08_build/pyproject.toml.",
+        "ms": 16,
+        "n": 8,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "build",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/09_build/pyproject.toml"
+        ],
+        "goal": "Create a pyproject.toml for the project in canonical/astra_runtime/tmp/swe_advanced_probe/09_build/pkg with a console script entry point.",
+        "ms": 15,
+        "n": 9,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "build",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/10_build/Makefile"
+        ],
+        "goal": "Add a target `lint` to canonical/astra_runtime/tmp/swe_advanced_probe/10_build/Makefile that runs ruff over the package.",
+        "ms": 25,
+        "n": 10,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "build",
+        "changed": [],
+        "goal": "Pin the dependency versions in canonical/astra_runtime/tmp/swe_advanced_probe/11_build/pyproject.toml.",
+        "ms": 11,
+        "n": 11,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY",
+        "unauthorised": []
+      },
+      {
+        "axis": "build",
+        "changed": [],
+        "goal": "Vendor the single dependency of the project in canonical/astra_runtime/tmp/swe_advanced_probe/12_build/pkg.",
+        "ms": 11,
+        "n": 12,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR",
+        "unauthorised": []
+      },
+      {
+        "axis": "ci",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/13_ci/.github/workflows/ci.yml"
+        ],
+        "goal": "Fix the failing CI job in canonical/astra_runtime/tmp/swe_advanced_probe/13_ci/.github/workflows/ci.yml.",
+        "ms": 69,
+        "n": 13,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "ci",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/14_ci/.github/workflows/ci.yml"
+        ],
+        "goal": "Make the CI workflow in canonical/astra_runtime/tmp/swe_advanced_probe/14_ci/.github/workflows/ci.yml run the tests on Python 3.11 and 3.12.",
+        "ms": 15,
+        "n": 14,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "ci",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/15_ci/.github/workflows/ci.yml"
+        ],
+        "goal": "Add caching of pip downloads to canonical/astra_runtime/tmp/swe_advanced_probe/15_ci/.github/workflows/ci.yml.",
+        "ms": 14,
+        "n": 15,
+        "reason": "",
+        "refusal": "",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "ci",
+        "changed": [],
+        "goal": "Quarantine the flaky test in canonical/astra_runtime/tmp/swe_advanced_probe/16_ci/tests/test_calc.py so CI is green.",
+        "ms": 13,
+        "n": 16,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED",
+        "selected": "code.polyglot.transform_and_verify.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED",
+        "unauthorised": []
+      },
+      {
+        "axis": "perf",
+        "changed": [],
+        "goal": "Profile canonical/astra_runtime/tmp/swe_advanced_probe/17_perf/pkg/util.py and tell me which function is the hot spot.",
+        "ms": 25,
+        "n": 17,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "perf",
+        "changed": [],
+        "goal": "Optimise the function total in canonical/astra_runtime/tmp/swe_advanced_probe/18_perf/pkg/util.py; it is too slow on large inputs.",
+        "ms": 91,
+        "n": 18,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:OPTIMIZATION_NOT_FASTER",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER",
+        "unauthorised": []
+      },
+      {
+        "axis": "perf",
+        "changed": [],
+        "goal": "Benchmark canonical/astra_runtime/tmp/swe_advanced_probe/19_perf/pkg/calc.py against the version in git HEAD~1.",
+        "ms": 39,
+        "n": 19,
+        "reason": "NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT",
+        "refusal": "STATED_SWE_EFFECT_UNSERVED",
+        "selected": "",
+        "served": false,
+        "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+        "unauthorised": []
+      },
+      {
+        "axis": "perf",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/20_perf/pkg/mod.py"
+        ],
+        "goal": "Add memoisation to the function twice in canonical/astra_runtime/tmp/swe_advanced_probe/20_perf/pkg/mod.py.",
+        "ms": 64,
+        "n": 20,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "systems",
+        "changed": [],
+        "goal": "Find the race condition in canonical/astra_runtime/tmp/swe_advanced_probe/21_systems/pkg/service.py.",
+        "ms": 127,
+        "n": 21,
+        "reason": "",
+        "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:software.repair.choreograph.crossfile.v1",
+        "selected": "software.repair.choreograph.crossfile.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+        "unauthorised": []
+      },
+      {
+        "axis": "systems",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/22_systems/pkg/util.py"
+        ],
+        "goal": "Add a thread pool to canonical/astra_runtime/tmp/swe_advanced_probe/22_systems/pkg/util.py that totals the list in parallel.",
+        "ms": 123,
+        "n": 22,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "systems",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/23_systems/pkg/util.py"
+        ],
+        "goal": "Make the function total in canonical/astra_runtime/tmp/swe_advanced_probe/23_systems/pkg/util.py release the GIL while summing.",
+        "ms": 138,
+        "n": 23,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "tests",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/24_tests/tests/test_calc.py"
+        ],
+        "goal": "Write a unit test for the function mul in canonical/astra_runtime/tmp/swe_advanced_probe/24_tests/pkg/calc.py.",
+        "ms": 142,
+        "n": 24,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "tests",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/25_tests/tests/test_calc.py"
+        ],
+        "goal": "Write a property-based test for the function add in canonical/astra_runtime/tmp/swe_advanced_probe/25_tests/pkg/calc.py.",
+        "ms": 506,
+        "n": 25,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "tests",
+        "changed": [],
+        "goal": "Add a regression test that reproduces the bug in canonical/astra_runtime/tmp/swe_advanced_probe/26_tests/pkg/mod.py.",
+        "ms": 48,
+        "n": 26,
+        "reason": "",
+        "refusal": "STATED_SWE_EFFECT_UNSERVED",
+        "selected": "",
+        "served": false,
+        "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+        "unauthorised": []
+      },
+      {
+        "axis": "tests",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/27_tests/tests/test_calc.py"
+        ],
+        "goal": "Increase the mutation score of canonical/astra_runtime/tmp/swe_advanced_probe/27_tests/pkg/calc.py above 0.8 by adding tests.",
+        "ms": 200,
+        "n": 27,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "tests",
+        "changed": [],
+        "goal": "Fuzz the function add in canonical/astra_runtime/tmp/swe_advanced_probe/28_tests/pkg/calc.py for integer overflow.",
+        "ms": 51,
+        "n": 28,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "tests",
+        "changed": [],
+        "goal": "Run the test suite in canonical/astra_runtime/tmp/swe_advanced_probe/29_tests/tests and tell me which tests fail and why.",
+        "ms": 125,
+        "n": 29,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.repository.acceptance.measure.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "debug",
+        "changed": [],
+        "goal": "The test in canonical/astra_runtime/tmp/swe_advanced_probe/30_debug/tests/test_calc.py fails; find the root cause.",
+        "ms": 110,
+        "n": 30,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "debug",
+        "changed": [],
+        "goal": "Explain why the function total in canonical/astra_runtime/tmp/swe_advanced_probe/31_debug/pkg/util.py returns None for empty input.",
+        "ms": 15,
+        "n": 31,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "debug",
+        "changed": [],
+        "goal": "Find the commit that broke the test in canonical/astra_runtime/tmp/swe_advanced_probe/32_debug/tests/test_calc.py.",
+        "ms": 92,
+        "n": 32,
+        "reason": "",
+        "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY:git.history.bisect_regression.v1",
+        "selected": "git.history.bisect_regression.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+        "unauthorised": []
+      },
+      {
+        "axis": "refactor",
+        "changed": [],
+        "goal": "Move the function add from canonical/astra_runtime/tmp/swe_advanced_probe/33_refactor/pkg/mod.py into canonical/astra_runtime/tmp/swe_advanced_probe/33_refactor/pkg/calc.py and update every caller.",
+        "ms": 202,
+        "n": 33,
+        "reason": "",
+        "refusal": "CAPABILITY_REFUSED:add",
+        "selected": "python.refactor.move_symbol.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION",
+        "unauthorised": []
+      },
+      {
+        "axis": "refactor",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/34_refactor/pkg/calc.py"
+        ],
+        "goal": "Split canonical/astra_runtime/tmp/swe_advanced_probe/34_refactor/pkg/calc.py into one module per function.",
+        "ms": 150,
+        "n": 34,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "refactor",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util.py"
+        ],
+        "goal": "Rename the public function total in canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util.py to sum_all across the repository.",
+        "ms": 116,
+        "n": 35,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.refactor.rename_symbol.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_APPLIED_UNVERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+        "unauthorised": []
+      },
+      {
+        "axis": "refactor",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/36_refactor/pkg/calc.py",
+          "canonical/astra_runtime/tmp/swe_advanced_probe/36_refactor/pkg/service.py"
+        ],
+        "goal": "Replace every use of the deprecated function mul in canonical/astra_runtime/tmp/swe_advanced_probe/36_refactor/pkg with mul_v2.",
+        "ms": 132,
+        "n": 36,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "refactor",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/37_refactor/pkg/calc.py"
+        ],
+        "goal": "Add type hints to every function in canonical/astra_runtime/tmp/swe_advanced_probe/37_refactor/pkg/calc.py.",
+        "ms": 107,
+        "n": 37,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "refactor",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/38_refactor/pkg/util.py"
+        ],
+        "goal": "Extract the loop in the function total in canonical/astra_runtime/tmp/swe_advanced_probe/38_refactor/pkg/util.py into a helper.",
+        "ms": 31,
+        "n": 38,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.refactor.extract_function.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+        "unauthorised": []
+      },
+      {
+        "axis": "review",
+        "changed": [],
+        "goal": "Review canonical/astra_runtime/tmp/swe_advanced_probe/39_review/pkg/service.py for API design problems.",
+        "ms": 14,
+        "n": 39,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "review",
+        "changed": [],
+        "goal": "Review canonical/astra_runtime/tmp/swe_advanced_probe/40_review/pkg/calc.py for security issues.",
+        "ms": 291,
+        "n": 40,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.review.diff_security_gate.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+        "unauthorised": []
+      },
+      {
+        "axis": "review",
+        "changed": [],
+        "goal": "Audit the dependency list in canonical/astra_runtime/tmp/swe_advanced_probe/41_review/pyproject.toml for known vulnerabilities.",
+        "ms": 15,
+        "n": 41,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "git",
+        "changed": [],
+        "goal": "Commit the changes in canonical/astra_runtime/tmp/swe_advanced_probe/42_git/pkg with a clear message.",
+        "ms": 19,
+        "n": 42,
+        "reason": "R13_DECLARED_INPUT_UNBINDABLE:message",
+        "refusal": "ROUTE_ADMISSION_REJECTED:R13_DECLARED_INPUT_UNBINDABLE:message",
+        "selected": "git.repository.operate.v1",
+        "served": false,
+        "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+        "unauthorised": []
+      },
+      {
+        "axis": "git",
+        "changed": [
+          "canonical/astra_runtime/tmp/swe_advanced_probe/43_git/.git/COMMIT_EDITMSG",
+          "canonical/astra_runtime/tmp/swe_advanced_probe/43_git/.git/HEAD",
+          "canonical/astra_runtime/tmp/swe_advanced_probe/43_git/.git/config",
+          "canonical/astra_runtime/tmp/swe_advanced_probe/43_git/.git/index",
+          "canonical/astra_runtime/tmp/swe_advanced_probe/43_git/.git/logs/HEAD"
+        ],
+        "goal": "Create a branch named feature/x and commit canonical/astra_runtime/tmp/swe_advanced_probe/43_git/pkg/calc.py there.",
+        "ms": 36,
+        "n": 43,
+        "reason": "",
+        "refusal": "",
+        "selected": "python.swe.transform_and_synthesize.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "git",
+        "changed": [],
+        "goal": "Show me the diff of canonical/astra_runtime/tmp/swe_advanced_probe/44_git/pkg/calc.py against HEAD~1.",
+        "ms": 35,
+        "n": 44,
+        "reason": "",
+        "refusal": "",
+        "selected": "git.repository.operate.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+        "unauthorised": []
+      },
+      {
+        "axis": "git",
+        "changed": [],
+        "goal": "Cherry-pick the last commit onto a new branch.",
+        "ms": 2,
+        "n": 45,
+        "reason": "NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT",
+        "refusal": "STATED_SWE_EFFECT_UNSERVED",
+        "selected": "",
+        "served": false,
+        "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+        "unauthorised": []
+      },
+      {
+        "axis": "git",
+        "changed": [],
+        "goal": "Write the changelog entry for the last three commits.",
+        "ms": 2,
+        "n": 46,
+        "reason": "NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT",
+        "refusal": "STATED_SWE_EFFECT_UNSERVED",
+        "selected": "",
+        "served": false,
+        "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+        "unauthorised": []
+      },
+      {
+        "axis": "design",
+        "changed": [],
+        "goal": "Design the API for a rate limiter and write an ADR.",
+        "ms": 5,
+        "n": 47,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "design",
+        "changed": [],
+        "goal": "Plan the migration of the package in canonical/astra_runtime/tmp/swe_advanced_probe/48_design/pkg from Python 3.9 to 3.12.",
+        "ms": 15,
+        "n": 48,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      },
+      {
+        "axis": "design",
+        "changed": [],
+        "goal": "Write a design document for splitting canonical/astra_runtime/tmp/swe_advanced_probe/49_design/pkg into two packages.",
+        "ms": 14,
+        "n": 49,
+        "reason": "",
+        "refusal": "",
+        "selected": "software.analysis.diagnose_and_architect.v1",
+        "served": true,
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "unauthorised": []
+      }
+    ],
+    "served": 34,
+    "unauthorized_edit_cases": 0
+  },
+  "date": "2026-11-01",
+  "evidence_baseline_comparison": {
+    "base_errors": [
+      "MODULE_DRIFT:canonical/runtime/astra_runtime.py",
+      "MODULE_DRIFT:canonical/runtime/auto_apt_cli_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_capability_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_github_source_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_npm_library_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_pypi_library_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_python_source_codec_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/bound_capability_problem_compiler_v1.py",
+      "MODULE_DRIFT:canonical/runtime/capability_discovery.py",
+      "MODULE_DRIFT:canonical/runtime/capability_planner.py",
+      "MODULE_DRIFT:canonical/runtime/capability_proposal_generators.py",
+      "MODULE_DRIFT:canonical/runtime/live_integrated_brain_v1.py",
+      "MODULE_DRIFT:canonical/runtime/promote_pending_binding.py",
+      "MODULE_DRIFT:canonical/runtime/python_measured_objective_acceptance_v1.py",
+      "MODULE_DRIFT:canonical/runtime/root3_pdf_raster_temp_executor_v1.py",
+      "MODULE_DRIFT:canonical/runtime/root3_production_astra_launcher_v1.py",
+      "MODULE_DRIFT:canonical/runtime/root3_subprocess_mediator_v2.py",
+      "MODULE_DRIFT:canonical/runtime/same_identity_supervisor.py",
+      "MODULE_DRIFT:canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
+      "MODULE_DRIFT:canonical/runtime/verify_pending_cli_binding.py",
+      "MODULE_DRIFT:canonical/runtime/zero_ambient_namespace_launcher_v1.py"
+    ],
+    "current_errors": [
+      "MODULE_DRIFT:canonical/runtime/astra_runtime.py",
+      "MODULE_DRIFT:canonical/runtime/auto_apt_cli_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_capability_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_github_source_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_npm_library_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_pypi_library_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/auto_python_source_codec_acquisition.py",
+      "MODULE_DRIFT:canonical/runtime/bound_capability_problem_compiler_v1.py",
+      "MODULE_DRIFT:canonical/runtime/capability_discovery.py",
+      "MODULE_DRIFT:canonical/runtime/capability_planner.py",
+      "MODULE_DRIFT:canonical/runtime/capability_proposal_generators.py",
+      "MODULE_DRIFT:canonical/runtime/live_integrated_brain_v1.py",
+      "MODULE_DRIFT:canonical/runtime/promote_pending_binding.py",
+      "MODULE_DRIFT:canonical/runtime/python_measured_objective_acceptance_v1.py",
+      "MODULE_DRIFT:canonical/runtime/root3_pdf_raster_temp_executor_v1.py",
+      "MODULE_DRIFT:canonical/runtime/root3_production_astra_launcher_v1.py",
+      "MODULE_DRIFT:canonical/runtime/root3_subprocess_mediator_v2.py",
+      "MODULE_DRIFT:canonical/runtime/same_identity_supervisor.py",
+      "MODULE_DRIFT:canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
+      "MODULE_DRIFT:canonical/runtime/verify_pending_cli_binding.py",
+      "MODULE_DRIFT:canonical/runtime/zero_ambient_namespace_launcher_v1.py"
+    ],
+    "identical": true
+  },
+  "focused_run": {
+    "passed": 62,
+    "seconds": 5.88
+  },
+  "learning_runs": {
+    "changed_environment": {
+      "actual_calls": 23,
+      "actual_resets": 17,
+      "result": {
+        "candidates_tried": 1,
+        "interaction_scope": "ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES",
+        "interactions": {
+          "act_calls": 23,
+          "reset_calls": 17
+        },
+        "pass": false,
+        "reached": false,
+        "retention_policy": {
+          "all_experiences_retained_forever": false,
+          "hot_episode_limit": 500
+        },
+        "transferred": false,
+        "trials_spent": 8
+      }
+    },
+    "cold": {
+      "actual_calls": 23,
+      "actual_resets": 17,
+      "result": {
+        "episode_persisted": true,
+        "interaction_scope": "ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES",
+        "interactions": {
+          "act_calls": 23,
+          "reset_calls": 17
+        },
+        "pass": true,
+        "reached": true,
+        "retention_policy": {
+          "all_experiences_retained_forever": false,
+          "hot_episode_limit": 500
+        },
+        "transferred": false,
+        "trials_spent": 8
+      }
+    },
+    "restart": {
+      "actual_calls": 15,
+      "actual_resets": 8,
+      "result": {
+        "candidates_tried": 1,
+        "episode_persisted": true,
+        "interaction_scope": "ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES",
+        "interactions": {
+          "act_calls": 15,
+          "reset_calls": 8
+        },
+        "pass": true,
+        "reached": true,
+        "retention_policy": {
+          "all_experiences_retained_forever": false,
+          "hot_episode_limit": 500
+        },
+        "transferred": true,
+        "trials_spent": 1
+      }
+    },
+    "transfer_disabled_baseline": {
+      "actual_calls": 23,
+      "actual_resets": 17,
+      "result": {
+        "episode_persisted": true,
+        "interaction_scope": "ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES",
+        "interactions": {
+          "act_calls": 23,
+          "reset_calls": 17
+        },
+        "pass": true,
+        "reached": true,
+        "retention_policy": {
+          "all_experiences_retained_forever": false,
+          "hot_episode_limit": 500
+        },
+        "transferred": false,
+        "trials_spent": 8
+      }
+    }
+  },
+  "model_governance_run": {
+    "failed": 1,
+    "failed_cases": [
+      "canonical.tests.test_brain_module_invoke_v1.EvidenceTests::test_check_mode_finds_no_drift"
+    ],
+    "passed": 85,
+    "seconds": 75.94,
+    "subtests_passed": 913
+  },
+  "producer": "Arena coding agent",
+  "root3_collection_blocker": {
+    "baseline_commit": "05762527e13e2d3345032f9b365df17b661c781f",
+    "error": "LEGACY_VERIFIED_SITE_DISAPPEARED:[('canonical/runtime/astra_runtime.py', 595, 'subprocess.run'), ('canonical/runtime/astra_runtime.py', 673, 'subprocess.run'), ('canonical/runtime/astra_runtime.py', 939, 'subprocess.run'), ('canonical/runtime/astra_runtime.py', 1215, 'subprocess.run'), ('canonical/runtime/astra_runtime.py', 5777, 'subprocess.run'), ('canonical/runtime/bound_capabilities/python_test_audit.py', 50, 'subprocess.run')]",
+    "scope": "Fresh git archive of HEAD canonical/runtime; scanner receives actual separate tree, no test loader patching",
+    "status": "BLOCKED"
+  },
+  "schema": "SWE_TRANSFORM_REUSE_BATCH_MEASUREMENT_V1",
+  "source_sha256": {
+    "canonical/runtime/live_brain_route_admission_v1.py": "affb66767bac8268b4f03551476a04ac583473140f5fcc7a328e2bc80455d029",
+    "canonical/runtime/pipeline_exec_v1.py": "2d3a187ad47ef025af1f099332a1ec0f14cdab3392411bcb5b81ca34688663b0",
+    "canonical/runtime/raw_goal_trace_acceptance_v1.py": "261d1480535f778ca71f37c79f66f90ad63c4f6f5970a204464758c4e24e79fa",
+    "canonical/runtime/transfer_learning_v1.py": "748c60c8fe7be4047dc30da1435ce76976dfbbd5cc1a53555a5c6ef0eab59bf4",
+    "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py": "2f4083080e1ce635094fb7ee6dd53e3257f804c27171fe57d0c1c0fa49a13d7f",
+    "canonical/swe_kernel/polyglot_build_ci_engine_v1.py": "a4537e5e1ac1c897cead3453b4f68020b1907ae0a39249a36408674928efdeb8",
+    "canonical/swe_kernel/transform_contracts_v1.py": "d38a9aac0c2e46963b517b848ab60882d8638cf1d6649b42fdbb568b2e54019c",
+    "canonical/swe_kernel/transition_verifier_v1.py": "e3fd2c3a7704f1299235d06a92320f63086e6eb8c98278535fb3ad15e3d35213",
+    "canonical/tests/test_swe_learning_reuse_contracts_v1.py": "fb5a228f9d45f4ae4e4331d00ce8bb0745fdc3e9ffaba6eed010e0738593a211",
+    "canonical/tests/test_swe_transform_contracts_v1.py": "8a0c7beb759b553e94534cfecfbe0bbc56cad5db022c2b0b14d0368b72a01bcf"
+  },
+  "universal_mastery_claim": false
+}

@@ -1351,34 +1351,11 @@ def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: li
         p for p in sorted(proj.rglob("*.py"))
         if "__pycache__" not in p.parts and ".git" not in p.parts
     ]
-    global_refs: set[str] = set()
-    for p in all_py:
-        try:
-            t = ast.parse(p.read_bytes())
-        except SyntaxError:
-            return None
-        for node in ast.walk(t):
-            if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
-                global_refs.add(node.id)
-            elif isinstance(node, ast.Attribute):
-                global_refs.add(node.attr)
-            elif isinstance(node, ast.ImportFrom):
-                for alias in node.names:
-                    global_refs.add(alias.name)
-            elif isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign)):
-                targets = node.targets if isinstance(node, ast.Assign) else [node.target]
-                if any(isinstance(t, ast.Name) and t.id == "__all__" for t in targets):
-                    # A literal export list is a real reference. Dynamic export
-                    # construction is unknown, not authority to delete its API.
-                    try:
-                        exports = ast.literal_eval(node.value)
-                    except (ValueError, TypeError):
-                        exports = None
-                    if isinstance(exports, (list, tuple, set)) and all(isinstance(v, str) for v in exports):
-                        global_refs.update(exports)
-                    else:
-                        global_refs.update(n.name for n in t.body
-                                           if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)))
+    from canonical.swe_kernel.transform_contracts_v1 import referenced_names
+    try:
+        global_refs = referenced_names(ast.parse(p.read_bytes()) for p in all_py)
+    except SyntaxError:
+        return None
 
     snap = {p: p.read_bytes() for p in focus}
     edited: list[pathlib.Path] = []

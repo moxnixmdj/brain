@@ -75,8 +75,17 @@ class MetaAbstractionTests(unittest.TestCase):
             self.strategy("a",["decompose","verify","compile"]),
             self.strategy("b",["decompose","experiment","verify","compile"]),
         ])
-        self.assertEqual(out["common_steps"],["compile","decompose","verify"])
+        self.assertEqual(out["common_steps"],["decompose","verify","compile"])
         self.assertFalse(out["verified_abstraction"])
+        self.assertFalse(out["reuse_authorized"])
+
+    def test_ordered_abstraction_preserves_repeated_steps_not_a_sorted_set(self):
+        ordered = ["verify", "edit", "verify", "compile"]
+        out = ma.induce_candidate([
+            self.strategy("a", ordered),
+            self.strategy("b", ["inspect"] + ordered),
+        ])
+        self.assertEqual(out["common_steps"], ordered)
         self.assertFalse(out["reuse_authorized"])
 
     def test_unverified_strategy_rejected(self):

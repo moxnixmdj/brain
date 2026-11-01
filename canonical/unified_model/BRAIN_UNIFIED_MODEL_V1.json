@@ -20770,7 +20770,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
-    "source_sha256": "829fc1cafab57053df9ed8e2562b25fbc72ae7582c773212a8506d252bfae38f",
+    "source_sha256": "ff8a88ee57363168b03812973da64a56a2e7ce843660f38f2b06c313ec906bbe",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -27689,7 +27689,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_swe_transform_and_synthesize_v1.py",
-    "source_sha256": "a2138982e4f3ccc73d90b38f47e7cf6b963265bf5abe389eb6bbea416cc6b620",
+    "source_sha256": "e40e8e620fcd5e19661bce6be3716a2c2a374a86b62547a39221bf3254ccc72c",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -29197,7 +29197,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "16f94c827cb8d0de5aa9d92b620fcb379d4fab327cc5c864e0d37c33c4734d0f",
+    "source_sha256": "7ddd9b7ea598ef6a41db79ff58a6904b933aaf2ebacb034ff2d4a26348d38b34",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30866,9 +30866,9 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 227,
+  "knowledge_documents": 228,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6565,
+  "research_index_records": 6566,
   "routing_tokens": 2341,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30877,7 +30877,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "00aa28ac98e4340ce1c2c7f218d1d6357c9c0e81f2f2c3942695ddd44e3441c7"
+  "value": "3db61ebbabef731ea13e05f2568929b6bc22f8805f0230e59427a97b6c9882fa"
  },
  "engines": [
   {
@@ -60304,6 +60304,82 @@
     "stated-file",
     "swe"
    ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7793,
+   "headings": [
+    "SWE transformation and retained-plan reuse: bounded implementation batch",
+    "Implemented",
+    "Measurements",
+    "Evidence and governance",
+    "Boundaries and remaining plan",
+    "Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.md",
+   "sha256": "a02b6ee0c2456e2c8cceca5f48ccd4db514d9f0d3657afa4ed49d1adaa5b4a56",
+   "summary": "Date: 2026-11-01. Base: `05762527e13e2d3345032f9b365df17b661c781f`. Authority: NONE. These are agent-produced sandbox measurements, not independent capability receipts, terminal credit, or evidence of universal mastery.",
+   "terms": {
+    "17": 3,
+    "23": 3,
+    "actual": 5,
+    "advanced": 3,
+    "after": 3,
+    "against": 4,
+    "arbitrary": 4,
+    "archive": 5,
+    "base": 3,
+    "baseline": 3,
+    "before": 4,
+    "bounded": 5,
+    "broader": 3,
+    "canonical": 3,
+    "census": 4,
+    "changes": 4,
+    "checks": 4,
+    "child": 4,
+    "compiler": 4,
+    "edits": 3,
+    "environment": 3,
+    "evidence": 7,
+    "existing": 6,
+    "failed": 7,
+    "failures": 3,
+    "including": 3,
+    "learning": 7,
+    "model": 4,
+    "no": 9,
+    "not": 18,
+    "only": 3,
+    "passed": 5,
+    "proof": 3,
+    "public": 3,
+    "refused": 3,
+    "restart": 3,
+    "reuse": 3,
+    "rows": 3,
+    "run": 7,
+    "separate": 4,
+    "served": 3,
+    "six": 4,
+    "source": 4,
+    "split": 3,
+    "test": 4,
+    "tests": 10,
+    "transformation": 3,
+    "were": 4
+   },
+   "title": "SWE transformation and retained-plan reuse: bounded implementation batch",
+   "title_terms": [
+    "batch",
+    "bounded",
+    "implementation",
+    "retained-plan",
+    "reuse",
+    "swe",
+    "transformation"
+   ]
   }
  ],
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
@@ -60332,10 +60408,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1021,
+  "included_source_count": 1022,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "441f0a79f281ea2435ae7b94828daf829174987603d02305e1ccb8b6c350f4c7"
+  "source_tree_digest": "75fa82b36ddbb2e4d790f6ca949c96e08f40910e4572624e7f4da938b9bd9201"
  },
  "research_index": [
   {
@@ -176421,6 +176497,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
+   "schema": "SWE_TRANSFORM_REUSE_BATCH_MEASUREMENT_V1",
+   "sha256": "b47faf05b4cf31bf7bc6aaa6581268fbe98aaca536fff95510cc2ed90bad6126",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "batch": 1,
+    "reuse": 1,
+    "swe": 1,
+    "transform": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_PUBLIC_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -248343,7 +248437,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "3985068c1e23964063c3fa19addf32c21c12cc8a72c03b2ed51f45ff596249dd",
+   "sha256": "affb66767bac8268b4f03551476a04ac583473140f5fcc7a328e2bc80455d029",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 103,
    "symbols": [
@@ -259097,12 +259191,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/pipeline_exec_v1.py",
-   "sha256": "8866ab311025353678d2d27d4f525bf6cc73fad22414b9ef41ab216f9404d56e",
+   "sha256": "2d3a187ad47ef025af1f099332a1ec0f14cdab3392411bcb5b81ca34688663b0",
    "summary": "Run a pipe of argvs as one governed operation.",
-   "symbol_count": 3,
+   "symbol_count": 4,
    "symbols": [
     "_normalise",
     "reap",
+    "run_command",
     "run_stages"
    ],
    "terms": {
@@ -259116,6 +259211,7 @@
     "pipeline": 1,
     "reap": 1,
     "run": 1,
+    "run_command": 1,
     "run_stages": 1,
     "v1": 1
    }
@@ -269099,7 +269195,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "99c1cfce7c215b2380a70c34ce80040d25dcb3a0a136d20d2a84fccb3657a5ac",
+   "sha256": "261d1480535f778ca71f37c79f66f90ad63c4f6f5970a204464758c4e24e79fa",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
    "symbol_count": 68,
    "symbols": [
@@ -283111,7 +283207,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "8e2d7a43b7361acef1a55e533e8d1932b3e0cdeb8089cfbd15f253b7be2689e2",
+   "sha256": "748c60c8fe7be4047dc30da1435ce76976dfbbd5cc1a53555a5c6ef0eab59bf4",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
    "symbol_count": 11,
    "symbols": [

@@ -1184,9 +1184,22 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise
     except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
         raise LocalExecutionFailure(str(exc)) from exc
-    result = fn(call_args, ROOT)
-    if not isinstance(result, dict):
-        raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
+    # Capture source independently of the producer. Its PASS bit cannot
+    # establish preservation of exports, literals or the original input domain.
+    from canonical.swe_kernel import transition_verifier_v1 as transition
+    guarded = transition.applicable(cid, call_args)
+    preimages = transition.capture(ROOT, call_args) if guarded else None
+    try:
+        result = fn(call_args, ROOT)
+        if not isinstance(result, dict):
+            raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
+        if preimages is not None:
+            result["transition_preimages"] = preimages
+            result["transition_check"] = transition.verify(ROOT, call_args, preimages)
+    except BaseException:
+        if preimages is not None:
+            transition.restore(ROOT, preimages)
+        raise
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
     _check_expectation(action.get("expect"), result)

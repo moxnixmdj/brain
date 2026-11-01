@@ -17,14 +17,11 @@ from canonical.swe_kernel import egraph_and_deductive_synthesizer_v1 as engine
 
 
 def _safe_path(repo: pathlib.Path, raw: str, *, must_exist: bool = True) -> pathlib.Path:
-    if not raw or not isinstance(raw, str):
-        raise RuntimeError("MISSING_OR_INVALID_PATH_ARGUMENT")
-    p = (repo / raw).resolve()
-    if p != repo and repo not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY:" + raw)
-    if must_exist and not p.exists():
-        raise RuntimeError("PATH_MISSING:" + raw)
-    return p
+    from canonical.runtime.tree_sitter_swe_kernel_v1 import safe_path, TreeSitterSWEError
+    try:
+        return safe_path(repo, raw, must_exist=must_exist, allow_root=True)
+    except TreeSitterSWEError as exc:
+        raise RuntimeError(str(exc)) from exc
 
 
 def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
@@ -61,7 +58,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     elif op == "memoize_function":
         res = engine.memoize_function(target, fn_name=fn_name)
     elif op == "add_thread_pool":
-        res = engine.add_thread_pool_parallel(target, fn_name=fn_name)
+        res = engine.add_thread_pool_parallel(target, fn_name=fn_name, require_speedup=bool(__import__("re").search(r"faster|speed.?up|optimi[sz]", goal_spec, __import__("re").I)))
     elif op == "release_gil":
         res = engine.release_gil_sum_kernel(target, fn_name=fn_name)
     elif op in {
