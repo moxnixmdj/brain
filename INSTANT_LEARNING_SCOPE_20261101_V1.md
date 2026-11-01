@@ -17,9 +17,43 @@ argument including every place I was wrong; this section is what is true now.
 | "Does it once, learns it permanently" | **TRUE per environment and per language** | one-shot teaching **5/5 languages**; cross-language carry now **4/5** via `language_neutral_skill_bridge_v1` |
 | "Just give it a try in all those new environments" | **TRUE, but it is N tries, not one** | each language and each environment kind is learned separately; the bridge only carries *lexical* rewrites |
 | "Anything on a computer" | **LARGELY TRUE, LARGEST UNMEASURED SURFACE** | 90 `osworld_v21_*` modules, `computer_env_v1` (82 tests), positioned OCR, DOM/OCR consensus grounding, `elevate_trace_to_fastest_layer` (pixel/UI → sqlite <2 ms) — **not exercised end-to-end here** |
-| "Perfectly and permanently" | **FALSE as written, and the mechanism is mostly there** | every recall re-runs a verifier, so the floor is the verifier, never zero. Invalidation **does** exist — `VerifiedSkillStore.invalidate()` keeps the rule *and its counterexample*, sets `state=INVALIDATED`, and recall skips it. What is missing is only *automatic* expiry: nothing ages a rule out when the language or OS moves underneath it. |
-| "So we solve everything on a computer" | **NO — 7 named refusals remain** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED |
+| "Perfectly and permanently" | **"Permanently" now has a mechanism; "perfectly" is still FALSE, by design** | permanence is complete: `invalidate()` keeps the rule *and its counterexample*, and `rule_expiry_v1` (16 tests) ages a rule out when the interpreter, platform or a tool changes — FRESH / STALE / UNKNOWN, and only FRESH may be offered. "Perfectly" cannot be claimed: every recall re-runs a verifier, so the floor is the verifier, never zero. That is correct engineering, not a defect. |
+| "So we solve everything on a computer" | **NO — and the reason is now measured, not argued** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED. And see §The-real-limitation below: every generalization this session required **me** to author the scope of the lesson. |
 | "We were making a sentient creature" | **THE MEASURABLE HALF EXISTS; SENTIENCE ITSELF IS NOT MEASURED AND IS NOT THE OBJECTIVE** | `ignorance_ledger_v1` — *"the machine's own model of what it does not know, ranked by what it is worth"* — **13 tests passing**. That is a genuine self-model, and it is the honest part of "knows what needs to be known". No instrument in the tree measures sentience; every receipt carries that non-claim; the canonical objective asks for the most capable problem solver, not for sentience. |
+
+## The real limitation — and it took building, not searching, to see
+
+This session I closed three gaps: cross-language carry (0/5 → 4/5), lesson generalization past
+its statement shape (1/7 → 6/7), and automatic expiry. Each one worked. Each one also exposed
+the same thing, and it is the honest answer to *"does instant learning solve everything?"*
+
+**In every case, the system learned the instance and I had to author the scope of the lesson.**
+
+* The crystallizer stored `return ?id0 <= ?id1` — a correct, verified record of *one* repair.
+  It believed the lesson was "this statement shape". The lesson was actually "this operator
+  swap, in any statement." **Nothing in the system could tell the difference.** I had to
+  recognise it and write `derive_operator_swap`.
+* The store filed the rule under `language='python'`. Nothing in the system could know that a
+  `<=` → `<` swap is language-independent. I had to write `is_lexical_rule`.
+* The store kept a rule forever. Nothing in the system knew that a rule's truth depends on the
+  interpreter under it. I had to write `world_fingerprint`.
+
+So the missing ingredient is not memory, and not speed. It is **knowing what a lesson's scope
+is** — which parts of the example were incidental and which were essential. That is induction
+of the hypothesis space, and it is the one thing that did not arrive by itself.
+
+This matters for the plan specifically. *"Give it a try in all the new environments and it
+learns permanently"* is true, and each lesson it learns is **narrower than the lesson a person
+would have learned from the same experience.** The machine generalizes over what it was told to
+generalize over. Widening that automatically — deciding its own hypothesis space — is the real
+frontier, and it is not a learning-rate or a memory-capacity problem.
+
+**Concretely, that makes the next move obvious and cheap:** every time a rule fails to fire,
+that failure is a *scope* signal. A rule that fires on instance A and misses structurally
+similar instance B is evidence about where its scope should end. The refusal is already
+recorded (`A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL`); nothing yet consumes it as scope evidence.
+That single loop — failure → scope revision, not just failure → new rule — is worth more than
+any additional mechanism in this tree.
 
 ## What is smartest to do, ranked by measured value
 
