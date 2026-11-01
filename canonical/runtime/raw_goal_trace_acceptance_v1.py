@@ -2899,6 +2899,28 @@ _ADAPTER_INSPECTORS: dict[str, Inspector] = {
 }
 
 
+def _settle_declared_prediction(row: dict, *, ok: bool, inspector: str) -> None:
+    """Settle the caller's stated expectation with this independent verdict.
+
+    A step may declare `prediction_record_id` in its arguments, meaning: before running, the system
+    said how likely it thought this step was to be independently accepted. The verdict rendered here
+    is the outcome. This is the only place in the tree where a self-prediction can be scored, and it
+    is scored by an inspector's boolean, never by the producer's own flag.
+
+    Failures are recorded too -- a scorer that only ever sees successes measures nothing -- and an
+    unusable record is skipped rather than allowed to break acceptance, which must fail only on
+    evidence about the work.
+    """
+    record_id = str((row.get("args") or {}).get("prediction_record_id") or "").strip()
+    if not record_id:
+        return
+    try:
+        from canonical.runtime import self_prediction_calibration_v1 as calibration
+        calibration.Ledger().settle(record_id, outcome_pass=bool(ok), inspector=inspector)
+    except Exception:
+        return
+
+
 def _consumed_downstream(rows: list[dict], index: int, root: Path) -> bool:
     """True when a later step reads what this step wrote.
 
@@ -3108,8 +3130,13 @@ def verify(
                 adapter = str((row["result"] or {}).get("adapter") or "")
                 inspector = _ADAPTER_INSPECTORS.get(adapter)
             if inspector is None:
+                # No inspector means no independent verdict, so a declared prediction here is
+                # settled as a failure of acceptance rather than left dangling or scored by
+                # nobody.
+                _settle_declared_prediction(row, ok=False, inspector="NO_INDEPENDENT_REINSPECTION")
                 return _unresolved("NO_INDEPENDENT_REINSPECTION_FOR:" + cid)
             ok, reason, evidence = inspector(row["args"], row["result"], root)
+            _settle_declared_prediction(row, ok=ok, inspector=getattr(inspector, "__name__", "inspector"))
             if not ok:
                 return _unresolved(reason, capability_id=cid)
             ledger.append({"capability_id": cid, "reinspection": evidence})
