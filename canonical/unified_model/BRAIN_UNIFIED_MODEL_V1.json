@@ -30926,7 +30926,7 @@
   "engines": 26,
   "knowledge_documents": 235,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6596,
+  "research_index_records": 6597,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30935,7 +30935,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b1e50be1c73d49393b59dde14417061fa2b7bd9ca3be0a3629ad92bdcfff8e96"
+  "value": "9bc03911868a73a4f7e730ec6b8941cfc6ad208820ecf122599fb3875e471f12"
  },
  "engines": [
   {
@@ -204592,6 +204592,51 @@
    }
   },
   {
+   "action_id": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "eff3e5ae44f18a568364b50ae0ec2d7f958b6ba93d4c5c80d40d0724f0b15a12",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_definition_is_not_a_file_to_move_v1_20261101_v1": 2,
+    "bare": 1,
+    "being": 1,
+    "belongs": 1,
+    "command": 1,
+    "composer_route_v1._prose_argv": 1,
+    "decides": 1,
+    "definition": 4,
+    "edited": 1,
+    "file": 5,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "handed": 1,
+    "itself": 1,
+    "move": 2,
+    "moved": 2,
+    "name": 2,
+    "never": 2,
+    "not": 1,
+    "noun": 1,
+    "object": 2,
+    "only": 1,
+    "put": 1,
+    "read": 1,
+    "sentence": 3,
+    "silently": 1,
+    "slot": 2,
+    "so": 1,
+    "spelled": 1,
+    "tell": 1,
+    "thing": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_DEMAND_THE_ADAPTER_NEVER_MAKES_IS_NOT_A_DEMAND_V1_20261030_V1",
    "capability": false,
    "date": "2026-10-30",
@@ -232196,9 +232241,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "985afe097d5a1ae32927eeea2a3f4dc259d1124783f9db152c9b36cfd2a4133f",
+   "sha256": "ca8b1aab8ec563cffc30d097f0e9a6cb024da1dfc7e35d7073482d3e48642701",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 64,
+   "symbol_count": 65,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",

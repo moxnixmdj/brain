@@ -2124,6 +2124,37 @@ def git_argv(sentence: str) -> list[str] | None:
     return None
 
 
+# WHAT THE SENTENCE SAYS IT IS MOVING.  "move b from A into B" names `b` -- a definition
+# inside A -- and no file command can serve it: `mv A B` overwrites B with A's bytes and
+# deletes A.  The words below are the ones that make the object a FILE; anything else in
+# that slot is a name, and a name is edited, not moved.
+_FILE_OBJECT_NOUN = re.compile(
+    r"^(?:files?|dirs?|director(?:y|ies)|folders?|trees?|modules?|packages?|paths?|"
+    r"scripts?|sources?|snippets?|repos?|repositor(?:y|ies)|archives?|datasets?|"
+    r"databases?|dbs?|logs?|documents?|images?|binar(?:y|ies)|assets?|certs?|"
+    r"certificates?|keys?|configs?|settings?|fixtures?|artifacts?|librar(?:y|ies)|"
+    r"wheels?|tarballs?|backups?|cop(?:y|ies)|duplicates?)$")
+_MOVES_A_STATED_OBJECT = re.compile(
+    r"\b(?:move|moves|moving|moved|copy|copies|copying|copied|relocate|relocates|"
+    r"relocating|relocated)\b\s+(?:the\s+|a\s+|an\s+|its\s+)?"
+    r"([A-Za-z_][A-Za-z0-9_]*)\b\s+(?:[^\n]{0,20}?\b)?(?:from|out\s+of)\b")
+
+
+def _states_a_file_as_the_object(masked_text: str) -> bool:
+    """True when the object of a move/copy is a file rather than a name inside one.
+
+    ``masked_text`` is the sentence with every stated path already replaced by a space,
+    so the token this reads is never a path: it is the word the sentence put where the
+    object of "move"/"copy" belongs.  No match means the sentence did not use that shape
+    at all -- "move <path> to <path>", or a verb that takes no object -- and those keep
+    the file reading they had.
+    """
+    m = _MOVES_A_STATED_OBJECT.search(str(masked_text or ""))
+    if m is None:
+        return True
+    return bool(_FILE_OBJECT_NOUN.match(m.group(1).lower()))
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -3136,6 +3167,34 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if program in {"mv", "cp", "rm"} and re.search(
                 r"\b(?:function|method|class|symbol|parameter|argument|definition|fn)\b",
                 text) and not re.search(r"\bfiles?\b|\bdirector(?:y|ies)\b", text):
+            return None
+        # THE OBJECT OF THE VERB DECIDES WHETHER A FILE COMMAND CAN BE THE ANSWER, AND
+        # THE NOUN LIST ABOVE IS NOT THE ONLY WAY TO NAME AN OBJECT.
+        #
+        # Measured 2026-11-01 on main e304434
+        # (``canonical/astra_runtime/tmp/variant_probe1``, big.py holding a, b and c):
+        #
+        #   "Move b from <b>/big.py into <b>/out.py."
+        #       -> shell.command.run argv ['mv', '<b>/big.py', '<b>/out.py']
+        #       -> big.py DELETED, pass=True,
+        #          PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+        #
+        # The sentence names `b`, which lives INSIDE big.py; it does not name a file to
+        # move.  Without the word "function" in front of it, no rule above applies, and
+        # `mv` overwrote the destination with the source and removed the source -- the
+        # whole file, for a request about one definition in it.  The row that answers
+        # this sentence has existed all along: with the shell reading out of the way the
+        # typed plan compiles ``python.refactor.move_symbol.v1``, moves `b` out of
+        # big.py, leaves `a` and `c` where they were, and PASSes.
+        #
+        # So the discriminator is the sentence's own grammar, not another noun list: in
+        # "move|copy <OBJECT> from <SOURCE> ... <DESTINATION>", the object is what is
+        # being moved, and a file command moves its operands -- it can only be the
+        # answer when the object IS a file.  ``_states_a_file_as_the_object`` reads that
+        # one shape and refuses everything else, which is what "Move the file X from A
+        # to B" and "Move the module <pkg>/x.py to <pkg>/y.py" keep doing: a real file
+        # move, unchanged.
+        if program in {"mv", "cp", "rm"} and len(paths) == 2 and not _states_a_file_as_the_object(text):
             return None
         # A MODULE MOVE THAT LEAVES ITS IMPORTERS BEHIND IS NOT A MOVE, AND IT MUST NOT RUN.
         #
