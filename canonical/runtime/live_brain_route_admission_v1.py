@@ -1297,6 +1297,42 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=tool_executed)
+        # "THE REQUESTED STATE ALREADY HOLDS" IS AN ANSWER, AND IT ARRIVES IN THE SAME SPELLING
+        # AS A REFUSAL.
+        #
+        # An adapter that measured the end state and found it already true raises
+        # ``RuntimeError("ALREADY_SATISFIED:{...}")`` -- a guard key by shape, like every other
+        # refusal in this file -- so the branch below classified it as
+        # ``FAIL_CLOSED__CAPABILITY_REFUSED_ALREADY_SATISFIED``: the machine proved the work was
+        # already done and then reported a missing capability.  Measured 2026-11-01: "Pin the
+        # dependency versions in <proj>/pyproject.toml" and "Vendor the single dependency of the
+        # project in <proj>" are both refusals of that shape, and both are satisfiable today.
+        #
+        # The check is therefore BEFORE the refusal spelling, not after it, and it carries the
+        # adapter's evidence into the answer so the claim is inspectable.  This is the same
+        # already-satisfied status the repair loops reach through BASELINE_ALREADY_PASSES; it is
+        # one status, reached from a second door.
+        if _ALREADY_SATISFIED_RE.search(str(exc)):
+            return {
+                "schema": LIVE_SCHEMA,
+                "status": "PASS__REQUESTED_STATE_ALREADY_HOLDS",
+                "pass": True,
+                "task_id": task_id,
+                "executed": True,
+                "edited": False,
+                "already_satisfied": True,
+                "compiled_capability_id": selected,
+                "compiler_mode": compiled.get("compiler_mode"),
+                "reason": type(exc).__name__ + ":" + str(exc),
+                "answer_artifact": {
+                    "already_satisfied": True, "edited": False,
+                    "evidence": _already_satisfied_evidence(exc),
+                    "proof": (type(exc).__name__ + ":" + str(exc))[:300],
+                },
+                "execution_proof_type": LOCAL_EXECUTION_PROOF,
+                "tool_executed": tool_executed,
+                "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
+            }
         # THE SECOND SPELLING OF THE SAME REFUSAL: ``RuntimeError("GUARD_KEY:detail")``.
         # A guard key is the repository's own vocabulary for "I read the request and refused it";
         # reporting it as LIVE_CONTROLLER_EXECUTION told the caller the machine had broken when it
@@ -4294,6 +4330,29 @@ _REFUSAL_CLASS_EXCLUDED = frozenset({"ACTION_EXPECTATION_FAILED"})
 
 _ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|NOTHING_TO_DO",
                                    re.IGNORECASE)
+
+
+def _already_satisfied_evidence(exc: BaseException) -> dict[str, Any]:
+    """The adapter's own measurement, carried into the answer verbatim.
+
+    ``ALREADY_SATISFIED:{json}`` is the spelling an adapter uses when it has read the artifact
+    and found the requested state already true; anything else (``BASELINE_ALREADY_PASSES``) is a
+    test run whose reason is prose.  Parsed when it parses, quoted when it does not -- never
+    invented, because the point of the field is that the claim can be checked.
+    """
+    text = str(exc)
+    _, _, tail = text.partition(":")
+    try:
+        payload = json.loads(tail) if tail.strip().startswith("{") else None
+    except ValueError:
+        payload = None
+    if isinstance(payload, Mapping):
+        facts = dict(payload.get("evidence") or {})
+        for key in ("operation", "reason"):
+            if payload.get(key) is not None:
+                facts[key] = payload[key]
+        return facts
+    return {"statement": text[:300]}
 
 # AN ADAPTER'S REFUSAL KEY IS A REFUSAL, NOT A CRASH.
 #

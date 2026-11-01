@@ -38,8 +38,8 @@ rewriting `return a - b` to `return a + b`). The problems are, in order of what 
 4. **Routing cannot bind three slot shapes** — a directory-wide rename, a function whose body is
    never stated, and a dependency add. These are the `RAW_GOAL_COMPILATION_GAP` /
    `CONTRACT_NOT_STATED` class.
-5. **Three of the 13 refusals are "nothing to do"** — the requested state already held, and the door
-   has a status for exactly that (`PASS__REQUESTED_STATE_ALREADY_HOLDS`) it did not use.
+5. **Two of the 14 refusals were "nothing to do"** — the requested state already held, and the door
+   had a status for exactly that it did not use. Fixed on this branch (census 35 → 37 served).
 6. **Whole capability classes are absent**, and the census's *served* count hides it, because only
    **8 rows** answer all 36 served requests and **three of them answer 31**.
 
@@ -158,9 +158,16 @@ The first two are *shape* defects, not absence: the rows exist, and §3's ladder
 passing when the sentence happens to fit.
 
 ### P5 — "Nothing to do" is not an answer the door can give
-`POLYGLOT_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY`, `NO_DECLARED_DEPENDENCY_TO_VENDOR`,
-`NO_FLAKY_TEST_DETECTED` are refusals in which **the requested end state already holds** — the safest
-true answer. The door has `PASS__REQUESTED_STATE_ALREADY_HOLDS` (it uses it for
+**Landed 2026-11-01 for two of the three** (`PYPROJECT_ALREADY_PINNED_OR_EMPTY`,
+`NO_DECLARED_DEPENDENCY_TO_VENDOR`): the engine now reads the declared dependencies and reports
+`PASS__REQUESTED_STATE_ALREADY_HOLDS` with the list it read (`edited: false`, manifest
+byte-identical). Census **35 → 37 served / 14 → 12 refused**, the only two rows that move, and matrix
+**43 REAL / 0 FALSE** unchanged. `NO_FLAKY_TEST_DETECTED` is **not** in that class after measurement:
+the two CI fixtures do not have a flaky test, they have a failing import (`tests/test_calc.py` imports
+`calc`, which lives in `pkg/`), so "so that CI is green" is false and the honest answer there is a
+workflow repair, not an already-satisfied pass.
+
+Remaining text of the finding (the vocabulary and the proof requirement): The door has `PASS__REQUESTED_STATE_ALREADY_HOLDS` (it uses it for
 `BASELINE_ALREADY_PASSES`) but its vocabulary check is `BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|
 NOTHING_TO_DO`, which does not match any of these keys. **Fix:** extend the vocabulary **and verify
 the state before claiming it** (read the pins, enumerate the deps, look for the flaky test), because a
@@ -216,7 +223,7 @@ branch` — that is this worktree's state). The refusal saved it; nothing in the
 | 1 | run `scripts/restore_substrate_v1.py` at boot; make `SUBSTRATE_READY` a census precondition | **9/18 → 11/18**, matrix **41 → 43** on a bare image; a bare board is now a refusal | done 2026-11-01 |
 | 2 | land this branch: refusal taxonomy + version-correct audit | 7 misreported crashes → refusals; audit false positives → 0 | done, unmerged |
 | 3 | bind the three slot shapes (P4): directory-wide rename, unstated body, dependency add | up to +3 on the 18-sentence board, +2 matrix | one binding rule each |
-| 4 | "nothing to do" as verified already-satisfied (P5) | up to +3 census | vocabulary + 3 state checks |
+| 4 | "nothing to do" as verified already-satisfied (P5) | **+2 census (35 → 37)**, done 2026-11-01; `NO_FLAKY_TEST_DETECTED` is not in this class (the fixture's CI is red, not flaky) | 2 state checks |
 | 5 | C++ repair and SQL DDL edit (P6) — the only two real polyglot transform gaps | +2 census | transform per language |
 | 6 | benchmark-vs-revision, regression-test authoring, cherry-pick, changelog, race detection | +5 census | 5 rows |
 | 7 | give the census an oracle and a `--floor` in CI (P8) | no pass gained; **the ability to see a P2-class lie** | 1 assertion per case |

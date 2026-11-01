@@ -21,6 +21,13 @@ name: swe-advanced-census
 # The floor is the count that exists today, not a target. When a change raises it, raise the
 # floor in the same pull request -- that is the only way the guard keeps meaning what it says.
 #
+# 2026-11-01: 5 -> 35. The floor had been stale for two weeks: the census served 35 of 49 and the
+# gate asked for 5, so eleven refusals could have regressed without a red check. 35 is the number
+# measured on this image with the substrate restored (see the restore step below). The two "nothing
+# to do" sentences that same round fixed took it to 37 locally; the floor is left at the count that
+# is independent of those two rows being routed, and will be raised again the moment a measured
+# run on this runner agrees.
+#
 # There is deliberately NO paths filter: every capability row, its input derivation, the door
 # that admits it and the adapter that executes it are in scope, and a filter would miss
 # exactly the change that breaks one of them.
@@ -34,7 +41,7 @@ on:
       floor:
         description: "Minimum number of the 49 advanced requests that must reach a verified outcome"
         required: false
-        default: "5"
+        default: "35"
 
 permissions:
   contents: read
@@ -72,7 +79,7 @@ jobs:
         shell: bash
         run: |
           FLOOR="${{ github.event.inputs.floor }}"
-          FLOOR="${FLOOR:-5}"
+          FLOOR="${FLOOR:-35}"
           python execution_guard/swe_advanced_probe_v1.py \
             --json /tmp/advanced.json --floor "$FLOOR" \
             --summary "$GITHUB_STEP_SUMMARY" 2>&1 | tee /tmp/advanced.log
