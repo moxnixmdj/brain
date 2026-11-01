@@ -1244,39 +1244,39 @@ def _synthesize_differential_regression_test(
 # Pass F: Container & loop strength reduction O(n^2) -> O(n)
 # ---------------------------------------------------------------------------
 def _match_nested_dup_scan(fn: ast.FunctionDef) -> str | None:
-    """Detect `for i in range(len(S)): for j in range(i+1, len(S)): if S[i] == S[j]: return True; return False`."""
-    stmts = [
-        s for s in fn.body
-        if not (isinstance(s, ast.Expr) and isinstance(s.value, ast.Constant) and isinstance(s.value.value, str))
-    ]
+    """Recognize the exact all-pairs algorithm, not just two nested loops."""
+    stmts = list(fn.body)
+    if stmts and isinstance(stmts[0], ast.Expr) and isinstance(stmts[0].value, ast.Constant) and isinstance(stmts[0].value.value, str):
+        stmts = stmts[1:]
     if len(stmts) != 2:
         return None
-    outer, ret_false = stmts
-    if not (isinstance(ret_false, ast.Return) and isinstance(ret_false.value, ast.Constant) and ret_false.value.value is False):
-        return None
-    if not (isinstance(outer, ast.For) and isinstance(outer.target, ast.Name) and len(outer.body) == 1):
+    outer, last = stmts
+    if not (isinstance(last, ast.Return) and isinstance(last.value, ast.Constant) and last.value.value is False
+            and isinstance(outer, ast.For) and isinstance(outer.target, ast.Name)
+            and not outer.orelse and len(outer.body) == 1):
         return None
     inner = outer.body[0]
-    if not (isinstance(inner, ast.For) and isinstance(inner.target, ast.Name) and len(inner.body) == 1):
+    if not (isinstance(inner, ast.For) and isinstance(inner.target, ast.Name)
+            and not inner.orelse and len(inner.body) == 1):
         return None
     cond = inner.body[0]
-    if not (
-        isinstance(cond, ast.If)
-        and len(cond.body) == 1
-        and isinstance(cond.body[0], ast.Return)
-        and isinstance(cond.body[0].value, ast.Constant)
-        and cond.body[0].value.value is True
-        and isinstance(cond.test, ast.Compare)
-        and len(cond.test.ops) == 1
-        and isinstance(cond.test.ops[0], ast.Eq)
-        and isinstance(cond.test.left, ast.Subscript)
-        and isinstance(cond.test.comparators[0], ast.Subscript)
-        and isinstance(cond.test.left.value, ast.Name)
-        and isinstance(cond.test.comparators[0].value, ast.Name)
-        and cond.test.left.value.id == cond.test.comparators[0].value.id
-    ):
+    if not (isinstance(cond, ast.If) and not cond.orelse and len(cond.body) == 1
+            and isinstance(cond.body[0], ast.Return)
+            and isinstance(cond.body[0].value, ast.Constant) and cond.body[0].value.value is True
+            and isinstance(cond.test, ast.Compare) and isinstance(cond.test.left, ast.Subscript)
+            and isinstance(cond.test.left.value, ast.Name)):
         return None
-    return cond.test.left.value.id
+    seq = cond.test.left.value.id
+    i, j = outer.target.id, inner.target.id
+    if len({seq, i, j}) != 3 or seq not in {a.arg for a in fn.args.posonlyargs + fn.args.args}:
+        return None
+    def same(node, expression):
+        return ast.dump(node) == ast.dump(ast.parse(expression, mode="eval").body)
+    if not (same(outer.iter, f"range(len({seq}))")
+            and same(inner.iter, f"range({i} + 1, len({seq}))")
+            and same(cond.test, f"{seq}[{i}] == {seq}[{j}]")):
+        return None
+    return seq
 
 
 def _try_quadratic_to_linear(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path]) -> list[pathlib.Path] | None:
@@ -1303,14 +1303,31 @@ def _try_quadratic_to_linear(proj: pathlib.Path, test_dir: pathlib.Path, focus: 
                 b_start = first_stmt.lineno - 1
                 indent = " " * first_stmt.col_offset
             b_end = fn.end_lineno or fn.body[-1].lineno
+            # Specialize only exact builtin sequences of equality/hash-safe scalar
+            # values. Keep the ORIGINAL algorithm for unhashables, NaNs, custom
+            # equality/hash methods, subclasses and shadowed range/len. Fresh
+            # locals cannot capture a parameter or the original induction names.
+            occupied = {n.id for n in ast.walk(fn) if isinstance(n, ast.Name)}
+            occupied.update(n.arg for n in ast.walk(fn) if isinstance(n, ast.arg))
+            def fresh(stem):
+                while stem in occupied:
+                    stem += "_"
+                occupied.add(stem)
+                return stem
+            bi, seen, item = (fresh(n) for n in ("_brain_builtins", "_brain_seen", "_brain_item"))
+            original = lines[b_start:b_end]
             replacement = [
-                f"{indent}_seen = set()\n",
-                f"{indent}for _item in {seq_name}:\n",
-                f"{indent}    if _item in _seen:\n",
-                f"{indent}        return True\n",
-                f"{indent}    _seen.add(_item)\n",
-                f"{indent}return False\n",
-            ]
+                f"{indent}import builtins as {bi}\n",
+                f"{indent}if (range is {bi}.range and len is {bi}.len\n",
+                f"{indent}        and {bi}.type({seq_name}) in ({bi}.list, {bi}.tuple)\n",
+                f"{indent}        and {bi}.all({bi}.type({item}) in ({bi}.int, {bi}.bool, {bi}.str, {bi}.bytes, {bi}.type(None)) for {item} in {seq_name})):\n",
+                f"{indent}    {seen} = {bi}.set()\n",
+                f"{indent}    for {item} in {seq_name}:\n",
+                f"{indent}        if {item} in {seen}:\n",
+                f"{indent}            return True\n",
+                f"{indent}        {seen}.add({item})\n",
+                f"{indent}    return False\n",
+            ] + original
             lines[b_start:b_end] = replacement
             changed = True
         if changed:
@@ -1329,7 +1346,7 @@ def _try_quadratic_to_linear(proj: pathlib.Path, test_dir: pathlib.Path, focus: 
 # ---------------------------------------------------------------------------
 # Pass H: Whole-project AST unused-import & unreferenced-function pruning
 # ---------------------------------------------------------------------------
-def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path]) -> list[pathlib.Path] | None:
+def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path], remove_functions: set[str] | None = None) -> list[pathlib.Path] | None:
     all_py = [
         p for p in sorted(proj.rglob("*.py"))
         if "__pycache__" not in p.parts and ".git" not in p.parts
@@ -1348,6 +1365,20 @@ def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: li
             elif isinstance(node, ast.ImportFrom):
                 for alias in node.names:
                     global_refs.add(alias.name)
+            elif isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign)):
+                targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+                if any(isinstance(t, ast.Name) and t.id == "__all__" for t in targets):
+                    # A literal export list is a real reference. Dynamic export
+                    # construction is unknown, not authority to delete its API.
+                    try:
+                        exports = ast.literal_eval(node.value)
+                    except (ValueError, TypeError):
+                        exports = None
+                    if isinstance(exports, (list, tuple, set)) and all(isinstance(v, str) for v in exports):
+                        global_refs.update(exports)
+                    else:
+                        global_refs.update(n.name for n in t.body
+                                           if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)))
 
     snap = {p: p.read_bytes() for p in focus}
     edited: list[pathlib.Path] = []
@@ -1361,7 +1392,9 @@ def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: li
         kept_stmts: list[ast.stmt] = []
         for stmt in tree.body:
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)) and not stmt.name.startswith("__"):
-                if stmt.name not in global_refs:
+                requested = stmt.name in (remove_functions or set())
+                implicit_private = not remove_functions and stmt.name.startswith("_")
+                if (requested or implicit_private) and stmt.name not in global_refs and not stmt.decorator_list:
                     start = (stmt.decorator_list[0].lineno if stmt.decorator_list else stmt.lineno) - 1
                     end = stmt.end_lineno or stmt.lineno
                     drop_ranges.append((start, end))
@@ -1456,6 +1489,16 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if not focus:
         raise RuntimeError("NO_PYTHON_SOURCE_FILES")
 
+    removals = args.get("remove_functions", [])
+    if not isinstance(removals, list) or any(not isinstance(n, str) or not n.isidentifier() for n in removals):
+        raise RuntimeError("REMOVAL_TARGETS_INVALID")
+    remove_functions = set(removals)
+    if remove_functions:
+        definitions = [node.name for path in focus for node in ast.parse(path.read_bytes()).body
+                       if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))]
+        if any(definitions.count(name) != 1 for name in remove_functions):
+            raise RuntimeError("REMOVAL_TARGET_NOT_UNIQUE")
+
     pre_run_snap = {p: p.read_bytes() for p in focus}
     mode_applied = "already_acyclic_and_green"
     edited: list[pathlib.Path] | None = None
@@ -1468,6 +1511,8 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
         ("sql_parameterization", lambda: _try_sql_parameterization(proj, test_dir, focus)),
         ("concurrency_lock_synthesis", lambda: _try_concurrency_lock_synthesis(proj, test_dir, focus)),
     ):
+        if remove_functions:
+            break  # An explicit removal does not authorize unrelated repair passes.
         edited = fn()
         if edited is not None:
             mode_applied = pass_name
@@ -1476,6 +1521,8 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if edited is None:
         base_ok, _ran, _err = _verify_project(proj, test_dir)
         if not base_ok:
+            if remove_functions:
+                raise RuntimeError("REMOVAL_REQUIRES_GREEN_BASELINE:" + _err[:200])
             _has_tests = test_dir.is_dir() and any(
                 "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
                 for p in test_dir.rglob("*.py")
@@ -1488,8 +1535,10 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
         else:
             for pass_name, fn in (
                 ("quadratic_to_linear_set", lambda: _try_quadratic_to_linear(proj, test_dir, focus)),
-                ("dead_code_and_import_pruning", lambda: _try_dead_code_pruning(proj, test_dir, focus)),
+                ("dead_code_and_import_pruning", lambda: _try_dead_code_pruning(proj, test_dir, focus, remove_functions)),
             ):
+                if remove_functions and pass_name != "dead_code_and_import_pruning":
+                    continue
                 edited = fn()
                 if edited is not None:
                     mode_applied = pass_name

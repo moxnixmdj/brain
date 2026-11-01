@@ -224,6 +224,10 @@ _ASKED_RE = re.compile(
 
 def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
     """(the trigger phrases the sentence states, candidate terms, effect token)."""
+    # Commit messages are payload, not authorization for source synthesis.
+    # Reuse the existing repository grammar/scope validator before kernel dispatch.
+    if derivation.stated_git_operation_verb(goal) == "commit":
+        return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
     raw_low = str(goal or "").lower()
     if any(p in raw_low for p in (
         "ast patch search", "patch search", "repair loop", "coupled ", "strict progress", "provenance guided"
@@ -424,6 +428,8 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str],
             args.pop(key, None)
     if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
         args["synthesize_regression_test"] = "${input.synthesize_regression_test}"
+    if extra_inputs and extra_inputs.get("remove_functions"):
+        args["remove_functions"] = "${input.remove_functions}"
     template["args"] = args
     return template
 

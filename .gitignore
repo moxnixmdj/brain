@@ -36,13 +36,10 @@ canonical/astra_runtime/state/E2E_*
 # root when it runs.  It is run litter, not source: `git add -A` must never
 # commit it as if it were evidence.
 LONG_HORIZON_CONTINUITY_REPORT.json
-<<<<<<< HEAD
 
 # scratch worlds and spool artifacts from live measurements
 canonical/astra_runtime/tmp/spool_*
 canonical/astra_runtime/tmp/tmp_*
 **/__pycache__/
 .pytest_cache/
-=======
 canonical/tmp_*.json
->>>>>>> origin/main
