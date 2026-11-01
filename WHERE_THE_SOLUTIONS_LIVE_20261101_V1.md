@@ -273,23 +273,33 @@ tree and I had not found them:
 | "the instrument that could catch all of this has no floor" (item 10 of the 2026-11-01 inventory) | `A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1` — the census **is** an executable gate, CI runs it on every PR and on main, `--floor 25` exits 1 below the reached count, and failure rows are published as a PR comment plus a JSON artifact |
 | "the capability matrix has world oracles and no gate" | same gate family; the census runs 25/28 and the matrix runs 54 cases with 0 FALSE / 0 DAMAGED |
 
-**What the sweep genuinely returns nothing for** — searched, not assumed:
+**What the sweep returned "nothing" for was wrong too — three for three.** The keyword search
+ranked modules by literal term; searching by *effect* instead found all three:
 
-| term | result |
-|---|---|
-| `expiry` | **no hits** — no rule-expiry mechanism exists |
-| `semantic hole` | **no hits** — abstraction is still `?id / ?num / ?str / ?fresh`; no typed AST-subtree hole |
-| `self-model` | **no hits** — no module that models its own cognition |
-| `invalidate` | real, but about delegation receipts and replan facts, not about stale learned rules |
+| I said absent | what is actually there | verified |
+|---|---|---|
+| "no rule expiry / invalidation" | `VerifiedSkillStore.invalidate(skill_id, reason, counterexample_sha256)` — keeps the rule **and its counterexample**, sets `state=INVALIDATED`, and recall skips it (`rule.get('state') not in (None,'ACTIVE')`) | read at `verified_skill_crystallizer_v1.py:1061`; wired into recall |
+| "abstraction is still only `?id/?num/?str/?fresh`, no semantic hole" | `h100_zero_learned_semantic_paraphrase_v1` — a bounded semantic-role paraphrase normaliser with an explicit finite ontology; plus `meta_strategy_abstraction_v9`, `recursive_abstraction_v5`, `finite_abstraction_cover_lift_v1` | **4 passed** |
+| "no self-model — the one thing sentience would need" | `ignorance_ledger_v1` — *"the machine's own model of what it does not know, ranked by what it is worth"*, with exploration free by prior construction | **13 passed** |
 
-So the list of things that genuinely are **not** in the repo is short and specific:
+So the sentience-shaped piece is partly present after all, as a **self-model of ignorance**:
+a ledger of what it does not know, ranked by the expected value of closing each gap, which
+gets better at that judgement by being wrong. That is the honest, measurable half of "knows
+what needs to be known" — and it is wired, not described.
 
-1. **rule expiry / re-verification over time**
-2. **typed semantic-hole abstraction** (the "same meaning, different shape" crossing)
-3. **any instrument for sentience**
+**The list of things genuinely not in this repository is now one item:**
 
-Everything else I called open across this session was present, and three separate sweeps — a
-filename search, a 722-intent scan, and now a keyword index over 2,586 modules — agree on that.
+1. **Automatic expiry.** Invalidation exists and works, but it is *called* — nothing ages a
+   rule out when the language, library or OS moves underneath it. A stale rule stays ACTIVE
+   until something notices. That is the only mechanism-shaped absence left on my list.
+
+And one deliberate non-claim rather than a missing mechanism: **no instrument measures
+sentience.** The self-model of ignorance is measurable; "sentient" is not, in this tree or
+anywhere else, and nothing here should be read as claiming it.
+
+Four searches now — filenames, a 722-intent scan, a keyword index, and this effect-based
+sweep — have each moved more items from "absent" to "present". The pattern is consistent and
+it is mine, not the repository's: **I keep concluding from the names I would have chosen.**
 
 ---
 
