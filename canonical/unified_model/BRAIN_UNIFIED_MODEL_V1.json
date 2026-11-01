@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6606,
+  "research_index_records": 6608,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 429,
-  "source_index_modules": 1905
+  "source_index_entry_points": 430,
+  "source_index_modules": 1906
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "34523ef1c84bebb220ee7fc8875fea2aa57e2b35a99aa7eece2299d24b4f954c"
+  "value": "0227f6e38d581c84277bc842a3a58a08cfc54ab7c69261ab2e225e55a329cb4f"
  },
  "engines": [
   {
@@ -176531,6 +176531,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "13e8f143b87a977eb52406e548fc430387c6d300aebd4066ab7a2fb0eff9b5c8",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "known": 1,
+    "prediction": 1,
+    "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/SEMANTIC_PAIR_NONIDENTIFIABILITY_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -213593,6 +213612,51 @@
     "restart": 2,
     "scoped": 2,
     "verification": 3
+   }
+  },
+  {
+   "action_id": "SCORE_STATED_EXPECTATIONS_AGAINST_INDEPENDENT_VERDICTS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/SCORE_STATED_EXPECTATIONS_AGAINST_INDEPENDENT_VERDICTS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SCORE_STATED_EXPECTATIONS_AGAINST_INDEPENDENT_VERDICTS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3b511d34b3077434f114bab8241fbb902ef2e47c1aaa78c6dcd4b5d9ca817b17",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "accurately": 1,
+    "acquire": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "against": 1,
+    "asks": 2,
+    "attempt": 1,
+    "belief": 1,
+    "benchmark": 1,
+    "confidently": 1,
+    "every": 1,
+    "expectations": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "independent": 1,
+    "indistinguishable": 1,
+    "measurement": 1,
+    "moves": 1,
+    "no": 1,
+    "none": 1,
+    "one": 1,
+    "optimistic": 1,
+    "outside": 1,
+    "own": 1,
+    "performance": 1,
+    "real": 1,
+    "record": 1,
+    "row": 1,
+    "score": 1,
+    "score_stated_expectations_against_independent_verdicts_v1_20261102": 1,
+    "scored": 1,
+    "whether": 2
    }
   },
   {
@@ -271950,9 +272014,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "1d1324c900de469308ea47e07b7058f24f0db53192ca8e26363ce77406b9ad4e",
+   "sha256": "fe1f4836192525cba8755a0ec96d0b6c1008dd34419703a267e62e02ee911066",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 75,
+   "symbol_count": 76,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -278329,6 +278393,44 @@
     "semantic": 2,
     "truth": 2,
     "v1": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/self_prediction_calibration_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/self_prediction_calibration_v1.py",
+   "sha256": "f0af7068cb0b67ec3755a9f8f6254ed03137b62c08842f15442742c3b8cc7882",
+   "summary": "Does the system's model of itself predict anything?",
+   "symbol_count": 7,
+   "symbols": [
+    "CalibrationError",
+    "Ledger",
+    "Prediction",
+    "_probability",
+    "_verdict",
+    "main",
+    "score"
+   ],
+   "terms": {
+    "anything": 1,
+    "calibration": 1,
+    "calibrationerror": 1,
+    "itself": 1,
+    "ledger": 1,
+    "main": 1,
+    "model": 1,
+    "predict": 1,
+    "prediction": 2,
+    "probability": 1,
+    "score": 1,
+    "self": 1,
+    "system": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {
