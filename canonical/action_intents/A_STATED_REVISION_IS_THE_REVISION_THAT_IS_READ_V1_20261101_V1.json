@@ -1,0 +1,419 @@
+{
+ "action_id": "A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1",
+ "action_intent_id": "A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "The false pass, closed. On a two-commit repository where `git diff HEAD~1` carries exactly one hunk, \"Show me the diff of <f> against HEAD~1\" was answered by `git diff HEAD` -- the empty patch of a clean tree -- and returned rows: [] with output_verified: True and a PASS. The row's contract had op/target/repo_root/limit/message and NO slot for a revision, so the sentence's own object could not reach the adapter in principle. The row now declares rev, staged and message_source; the sentence binds each of them (a stated revision verbatim, silence says so); the adapter diffs the revision it was given and refuses a revision that does not resolve; a commit stages the STATED subtree instead of sweeping the checkout and refuses a staged path outside it; a stated directory inside a repository is scoped to that repository (the first enclosing .git) with the subtree as target; and a sentence that delegates the wording (\"with a clear message\") gets a message composed from the staged diff instead of R13 and instead of the old invented constant. The fixture was the other half of the defect: seed_repository made ONE commit, so HEAD~1 did not exist and an honest refusal and a false pass were indistinguishable; it now seeds two commits plus a pending change.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A sentence that states which revision to read was answered about a different revision and certified VERIFIED: rows: [], output_verified: True, PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED, while `git diff HEAD~1` had a hunk. The registry row declares no slot for a revision, declared_input_derivation_v1 has no binding for one, and swe_git_fixture_v1 seeds a single commit so the instrument cannot even ask the question.",
+ "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A sentence that states which revision to read was answered about a different revision and certified VERIFIED: rows: [], output_verified: True, PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED, while `git diff HEAD~1` had a hunk. The registry row declares no slot for a revision, declared_input_derivation_v1 has no binding for one, and swe_git_fixture_v1 seeds a single commit so the instrument cannot even ask the question.",
+ "date": "2026-11-01",
+ "expected_parent_change": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json (+ snapshot): git.repository.operate.v1 declares rev, staged and message_source. canonical/runtime/declared_input_derivation_v1.py: binds the stated revision (HEAD~N, a commit id, \"the previous commit\"), names the default when the sentence is silent, binds staged from the word the sentence uses, delegates the message wording to the staged diff, reads a stated directory as a subtree of its enclosing repository, and scopes an unqualified git operation to the repository. canonical/runtime/bound_capabilities/git_repository_operate.py: diff reads the stated revision and proves it resolves; commit stages only the stated target and refuses a staged path outside it; a delegated message is composed from the staged diff. execution_guard/swe_git_fixture_v1.py seeds two commits plus a pending change. canonical/tests/test_a_stated_revision_is_the_revision_that_is_read_v1.py: 11 new tests. canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled in the same commit.",
+ "expected_parent_frontier_change": "A git question is answered about the revision, subtree and change set the sentence named, and an empty answer names the revision it is empty about, so it can no longer be confused with a false pass.",
+ "explicit_user_authorization": "Owner instruction this session: hardcore software engineering only, all the hardcore SWE problems listed with measurements; the answers already exist in the tree so wire what is there rather than invent; do the optimal thing in the fastest way and only the right way; report honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+ "falsification_condition": "FALSIFIED if a sentence stating a revision is answered about a different one, if an empty diff is reported without naming the revision it is empty about, if a commit records a path outside the subtree the sentence named, if a revision that does not resolve is read as an empty answer, or if any of the 11 new tests passes for the wrong reason.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Advanced census on 0bd93f98: SERVED 35 -> 36 of 49 (git 2/5 -> 3/5; #42 delegated message now served, #44 now a TRUE pass naming rev HEAD~1 and its rev_sha). Capability matrix: TOTAL 54 REAL 44 FALSE 0 REFUSED 10 DAMAGED 0, git 3/5 (git_commit and git_diff newly REAL, git_blame unchanged). Unified model verify 33/33. The false pass is gone from the ledger: #44's receipt now carries observed_effect.rev=HEAD~1, rev_sha, patch_bytes=185 and the hunk itself.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/declared_input_derivation_v1.py",
+  "canonical/runtime/bound_capabilities/git_repository_operate.py",
+  "execution_guard/swe_git_fixture_v1.py",
+  "execution_guard/swe_advanced_probe_v1.py",
+  "execution_guard/swe_capability_matrix_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
+   "READING_THE_HOST_ONLY_FROM_IN_NAME",
+   "WIDENING_A_STATED_REGION_TO_ITS_NEIGHBOURS"
+  ],
+  "expected_parent_level_state_change": "A git question is answered about the revision, subtree and change set the sentence named, and an empty answer names the revision it is empty about, so it can no longer be confused with a false pass.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETING_THE_BRANCH_RESTORES_SEVEN_INDISTINGUISHABLE_EXECUTION_FAILURES",
+   "intrinsic_or_path_specific": "GENERAL__ANY_EFFECT_THE_REGISTRY_DOES_NOT_DECLARE",
+   "surviving_causal_blocker": "THE_DOOR_RECOGNISED_ONE_SPELLING_OF_A_REFUSAL_SO_SEVEN_NAMED_CAPABILITY_GAPS_ARRIVED_AS_ONE_GENERIC_EXECUTION_FAILURE"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "ONE_ORACLE_PREDICATE__NO_NEW_CAPABILITY_NO_NEW_ROW",
+   "existing_inherited_routes_checked": [
+    "live_brain_route_admission_v1._REFUSAL_CLASS_RE",
+    "live_brain_route_admission_v1._ALREADY_SATISFIED_RE",
+    "live_brain_route_admission_v1._may_supersede_a_failed_attempt",
+    "the <CLASS>:<detail> refusal convention across ~40 adapter classes (grep)"
+   ],
+   "external_existing_routes_checked": "None needed.",
+   "surviving_gap": "NONE_FOR_DIAGNOSIS__THE_SEVEN_REFUSALS_ARE_NOW_NAMED_AND_EACH_NAMES_A_CAPABILITY_THE_ENGINE_LACKS_(RUST_CPP_AST_REPAIR_SQL_DDL_MIGRATION_DEPENDENCY_VENDORING_FLAKE_QUARANTINE)"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_SERVED_COUNT",
+    "REMOVING_ROWS_TO_LOOK_CAPABLE"
+   ],
+   "real_outcome": "A refusal that names its own reason is reported as that reason, so the gaps that remain are readable as distinct missing capabilities instead of one generic failure count.",
+   "surviving_necessity": "A wrong answer costs more than a refusal: it spends the caller's trust on top of the request."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_CONVENTION_EVERY_ADAPTER_ALREADY_SPEAKS__ADD_ONE_PURE_CLASSIFIER"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+   "search_stop_decision": "STOPPED_WHEN_A_GREP_SHOWED_THE_CONVENTION_ALREADY_EXISTED_ACROSS_ABOUT_FORTY_CLASSES"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Reporting the outer wrapper only was rejected because it leaves six different problems sharing one status. Dropping the branch entirely was rejected because it restores seven indistinguishable execution failures.",
+   "routes_ranked": [
+    "PROMOTE_THE_INNER_CLASS__CHOSEN",
+    "REPORT_THE_OUTER_WRAPPER_ONLY",
+    "KEEP_THE_GENERIC_FAILURE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_CENSUS_REPORTS_THE_NAMES_AND_THE_CAPABILITY_MATRIX_IS_AN_INDEPENDENT_ORACLE"
+  },
+  "real_outcome": "A stated revision is read, a stated subtree is committed, and an empty answer names the revision it is empty about.",
+  "required_capability": "git.repository.operate.v1 with rev/staged/message_source slots, bound by declared_input_derivation_v1",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "DUPLICATES_A_WIRED_GATE",
+      "CORRECTNESS": "SAME_BY_CONSTRUCTION",
+      "INCREMENTAL_COST": "EXTRA_CODE_PER_ADAPTER",
+      "RELIABILITY": "N_ADAPTERS_TO_KEEP_IN_SYNC",
+      "VERIFIABILITY": "POINTS_AT_THE_HOOK",
+      "WALL_CLOCK": "SLOWER"
+     },
+     "evidence": [
+      "Every adapter already raises <CLASS>:<detail>; adding a per-adapter exit hook would duplicate a convention that is already emitted and would need to be maintained in about forty places.",
+      "grep over canonical/runtime/bound_capabilities and canonical/swe_kernel found the convention already uniform, so the fix belongs in the one consumer."
+     ],
+     "qualification_evidence": [
+      "direct probe: grep -rhoE 'RuntimeError(\"[A-Z][A-Z0-9_]*:' returned ~40 distinct classes this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ADD_A_CLASSIFYING_EXIT_HOOK_TO_EVERY_ADAPTER"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_READABILITY",
+      "CORRECTNESS": "SAME",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "FRAGILE_PER_CALL_SITE",
+      "VERIFIABILITY": "HARD_TO_TEST",
+      "WALL_CLOCK": "FASTEST_TO_WRITE"
+     },
+     "evidence": [
+      "Parsing the exception text at each call site would drift as call sites are added and would leave the same parsing untested in most of them."
+     ],
+     "qualification_evidence": [
+      "direct probe: solve() has one failure path at the controller boundary, so one classifier covers every adapter"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PARSE_THE_EXCEPTION_TEXT_AT_EVERY_CALL_SITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "EXACT",
+      "CORRECTNESS": "PRESERVES_THE_CONVENTION",
+      "INCREMENTAL_COST": "ONE_PURE_FUNCTION",
+      "RELIABILITY": "ORDER_INDEPENDENT",
+      "VERIFIABILITY": "TWELVE_PAIRED_TESTS",
+      "WALL_CLOCK": "NO_EXTRA_WORK"
+     },
+     "evidence": [
+      "One pure classifier called after the already-satisfied branch, promoting the inner class when the outer token is a wrapper; the door already owns the single failure path every adapter refusal reaches."
+     ],
+     "qualification_evidence": [
+      "direct probe: census 36 served / 13 refused and matrix 44 REAL / 0 FALSE / 0 DAMAGED, identical before and after, this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1"
+    }
+   ],
+   "checked_at_utc": "2026-11-01T03:58:40Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "REPORT_EVERY_FAILED_ATTEMPT_AS_FAIL__LIVE_CONTROLLER_EXECUTION",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external engine needed: a grep over canonical/runtime/bound_capabilities and canonical/swe_kernel found about forty distinct <CLASS>:<detail> classes already raised by adapters, so the information had been emitted all along and only the door's parser was narrow.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python extract loop of a named function into a helper ast span"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python extract function"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "derive a statement span from a function body without reprinting the module"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "rope 1.15.0 libcst latest release python 3.11 support"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-01T03:58:40Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3.11 stdlib (ast, json, pathlib, re, sys)",
+      "evidence": [
+       "DIRECT_PROBE: the 3.11 interpreter ran the classifier over the seven real adapter messages and returned six distinct classes this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/declared_input_derivation_v1.py + canonical/runtime/goal_front_compiler_v1.py (in-tree, no new package)",
+      "evidence": [
+       "BRAIN_INHERITED: the <CLASS>:<detail> convention is already emitted by ~40 adapter classes"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "execution_guard/swe_advanced_probe_v1.py + execution_guard/swe_capability_matrix_v1.py (in-tree instruments)",
+      "evidence": [
+       "DIRECT_PROBE: census 36 served / 13 refused and matrix 44 REAL / 0 FALSE / 0 DAMAGED on this tree, before and after the change"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/declared_input_derivation_v1.py already computes start_line/end_line from a host function's statement runs (the extract-region block)",
+     "canonical/runtime/bound_capabilities/python_refactor_extract_function.py already performs the extraction and returns gate PASS given qualname=total and lines 3-4"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "modelcitizendeveloper survey 1.104.1: only LibCST, RedBaron and Bowler fully preserve formatting; Rope does text-based modification with partial round-trip fidelity"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org/project/rope 1.15.0: 'the world's most advanced open source Python refactoring library', LGPL v3+, 'Most Python syntax up to Python 3.10 is supported'"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "github.com/Instagram/LibCST README: a CST that keeps all formatting details (comments, whitespace, parentheses), for automated refactoring"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE_THE_MAGNET_ROWS__MEASURED_TO_PRODUCE_FOUR_WRONG_ANSWERS",
+   "BUILD_A_SEPARATE_EFFECT_GATE__DUPLICATES_THE_EXISTING_TABLE",
+   "ADD_FOUR_CLASSES_TO_THE_EXISTING_TABLE__CHOSEN"
+  ],
+  "selected_route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
+  "selected_surviving_route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
+  "stop_condition": "STOP when every git sentence the two instruments ask has exactly one answer that the receipt can be checked against: the revision is named, the subtree is named, and a refusal says which of them was missing.",
+  "why_selected_route_is_fastest_sufficient": "The slot, the grammar and the adapter already existed for every other git argument; the revision was the one argument with no slot."
+ },
+ "route_id": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "A_REFUSAL_NAMES_THE_REASON_INSIDE_IT_V1",
+ "stop_condition": "STOP when every git sentence the two instruments ask has exactly one answer that the receipt can be checked against: the revision is named, the subtree is named, and a refusal says which of them was missing.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-01T09:00:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "a03b6307661566b4bf97fc12f074872e9eb36036",
+     "path": "canonical/runtime/live_brain_route_admission_v1.py"
+    },
+    {
+     "git_blob_sha": "88e7f02269f4a9a97a21c19bae6a34e6c0e88d9c",
+     "path": "execution_guard/swe_advanced_probe_v1.py"
+    },
+    {
+     "git_blob_sha": "e989ba98af9f6fd069b6ba975095b8b5933893f1",
+     "path": "execution_guard/swe_capability_matrix_v1.py"
+    },
+    {
+     "git_blob_sha": "fc918a985387508158e80555223a5f6ae17b3e45",
+     "path": "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py"
+    }
+   ],
+   "decisive_question": "MAY_A_REVIEW_ANSWER_UNCLEAR_AND_STILL_BE_COUNTED_AS_HAVING_RUN",
+   "falsifier_id": "RESTORE_gate_PASS_AND_SEE_THE_CASE_FLICKER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_ADAPTER_ALREADY_EXTRACTS_THE_STATED_LOOP_WITH_GATE_PASS_WHEN_GIVEN_QUALNAME_total_AND_LINES_3_4__NOTHING_WAS_MISSING_BUT_THE_ORDER_OF_THE_TWO_ANSWERS_AND_NO_OTHER_REQUEST_IN_THE_49_CASE_CENSUS_CHANGED_VERDICT",
+   "proposal_id": "A_REVIEW_MAY_ANSWER_UNCLEAR_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The revision slot only narrows what is read; a stated revision that does not resolve is a refusal, not a silent HEAD; the commit sweep is pinned to a stated pathspec and fails closed when the index already holds anything outside it; and the delegated message is a fact about the staged diff that git just reported, not a guess at the sentence."
+}

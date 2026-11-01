@@ -21928,8 +21928,11 @@
    "input_names": [
     "limit",
     "message",
+    "message_source",
     "op",
     "repo_root",
+    "rev",
+    "staged",
     "target"
    ],
    "kind": "BOUND_CAPABILITY",
@@ -21943,7 +21946,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-    "source_sha256": "d7aa010514b322a3bbf65ad7c84730a3043ab1a0117ad50a3158b4749dbcede9",
+    "source_sha256": "cc57dd2e2a31fad90994a699feed7c1ea84e3b15d4a9fa854ac69b5bd07ff7c9",
     "source_type": "brain_bound_system_tool"
    },
    "provides": [
@@ -30877,7 +30880,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6a7529a57cf24f617b40cf0d2bd3051353de0dd79161bb5d970602cba9cbc551"
+  "value": "6f2263b3611c5038c9c1b5519bbc125ad4d1e1a216a6e16f4028c9ad8c5be157"
  },
  "engines": [
   {
@@ -60427,7 +60430,7 @@
   "included_source_count": 1022,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d0a0949b2d2f897a2d3c8bbfeeaa66b434dcfd0d391bbeb335113e54c8547457"
+  "source_tree_digest": "135ed22e6abb79cd63d281b03cb55cd0db1181b8ca1d03bb2576bad54fdbee61"
  },
  "research_index": [
   {
@@ -234242,7 +234245,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "373f3e3da31eabf9723e2f0fe6cc8856ee0a7d25b9fcb9cc9d7ff0e221e8b927",
+   "sha256": "b339fb75442a62fca58978fe69471f8bec8d3cd54ac03cac0ef6b44da73042bb",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [
