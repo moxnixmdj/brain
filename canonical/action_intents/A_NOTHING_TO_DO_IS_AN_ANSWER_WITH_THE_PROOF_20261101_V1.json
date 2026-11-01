@@ -39,7 +39,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::'Nothing to do' was inferred from the absence of an edit the machine itself would have made, instead of from the artifact the sentence is about -- and the answer it produced was a refusal, whose meaning is the opposite of the truth it had measured.",
-  "canonical_base_commit": "f91349567af7d1ae4e3b1dbc45bdeb464718322e",
+  "canonical_base_commit": "4bb90430ebb4a018b9d640c7647fa853876a251a",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -54,7 +54,7 @@
   "incremental_spend_usd": 0,
   "intent": "Answer the request that is already satisfied with the artifact that proves it.",
   "load_bearing_primary": {
-    "canonical_base_commit": "f91349567af7d1ae4e3b1dbc45bdeb464718322e",
+    "canonical_base_commit": "4bb90430ebb4a018b9d640c7647fa853876a251a",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -91,7 +91,7 @@
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
-    "canonical_base_commit": "f91349567af7d1ae4e3b1dbc45bdeb464718322e",
+    "canonical_base_commit": "4bb90430ebb4a018b9d640c7647fa853876a251a",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
