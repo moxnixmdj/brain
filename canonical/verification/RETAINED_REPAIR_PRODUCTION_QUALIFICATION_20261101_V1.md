@@ -1,3 +1,23 @@
+# Final integration validation
+
+Final merge base: `216b800d0c04bf4013b673d03fcfbf1b37accd90` (incoming main,
+including its frontdoor reachability, cache, inventory and rename-safety work).
+Final affected run: **201 passed, 2 inherited failures in 91.82s**. This includes
+all 28 qualification cases, 5 incoming rename-safety cases, and the incoming
+frontdoor/cache/inventory/instrument suites. The same two inherited legacy apply
+failures remain; no new test failure is hidden or skipped.
+
+Current outcome remains **6/9 successful tasks with learning and 6/9 without**:
+six structural transfers reuse verified memory with zero fallback search; three
+encoding lessons are correctly refused under incoming rename safety and remain
+unsolved by either bounded arm. No current 9/9 task-success claim is made.
+
+The JSON `integration_after_incoming_rename_guard` section contains the latest
+nine actual observations. `prior_integration_observations` and the earlier sections
+below preserve earlier-base measurements and must not be relabeled as current.
+
+---
+
 # Integration update — current result on incoming main
 
 The original report below is **historical**, measured on `07099b7c`. It must not
