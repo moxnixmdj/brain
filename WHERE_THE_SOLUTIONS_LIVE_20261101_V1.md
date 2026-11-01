@@ -340,11 +340,42 @@ being rewritten. The test found it; the offsets are now converted properly.
 `canonical/tests/test_operator_generalization_v1.py` — **15 passed**.
 Combined with the earlier suites: **69 passed**, no regressions. Referee `17/0 -> PASS`.
 
-**The list of things genuinely not in this repository is one item:**
+### 10.2 The last item, built: automatic expiry
 
-1. **Automatic expiry.** Invalidation exists and works, but it is *called* — nothing ages a
-   rule out when the language, library or OS moves underneath it. A stale rule stays ACTIVE
-   until something notices. That is the only mechanism-shaped absence left on my list.
+`invalidate()` existed but had to be *called*. New module
+`canonical/swe_kernel/rule_expiry_v1.py` is the missing clock. A rule is stamped with the
+world it was learned in — interpreter major.minor, platform, machine, and the executable
+inventory — and audited against the current world in three states:
+
+| state | meaning | may be used? |
+|---|---|---|
+| **FRESH** | the world looks the same as when it was taught | yes — and this is still **not proof** |
+| **STALE** | interpreter, platform, or a tool disappeared/was replaced | no, until re-verified |
+| **UNKNOWN** | no stamp recorded (taught before this module, or an imported bundle) | **no** — unknown provenance fails closed, as everywhere else here |
+
+Only `reverify()` returns a rule to FRESH, and only by running a caller-supplied verifier.
+A rule that can no longer reproduce its own lesson is not silently trusted. `expire_stale()`
+then invalidates STALE rules through the store's **own** `invalidate()`, so recall refuses them.
+
+Two deliberate choices, both of which the tests pin:
+
+* **A new tool appearing is not a reason to distrust a rule.** Only disappearance and binary
+  replacement are material. A machine that installed something has not invalidated an old lesson.
+* **An UNKNOWN rule is reported but never destroyed.** A missing stamp is a gap in our own
+  bookkeeping, not evidence against the rule.
+
+Building it exposed the same class of bug as before, in the most dangerous place: the first
+version of `audit()` enumerated the **fingerprint table**, so a rule taught before this module
+existed — the exact rule most at risk — was invisible to the audit and came back `skipped: []`.
+The test `test_expire_stale_does_not_destroy_an_unstamped_rule` caught it; the audit now
+enumerates the store's own `crystallized_skills` table as ground truth.
+
+`canonical/tests/test_rule_expiry_v1.py` — **16 passed**.
+Learning suites combined: **87 passed**, no regressions. Referee `17/0 -> PASS`.
+
+**The list of mechanisms genuinely absent from this repository is now empty.** What remains is
+evidence, not code: the OSWorld stack has never been exercised end to end here, and the
+row-reach figure is unverified.
 
 And one deliberate non-claim rather than a missing mechanism: **no instrument measures
 sentience.** The self-model of ignorance is measurable; "sentient" is not, in this tree or
