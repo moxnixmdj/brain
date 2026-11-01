@@ -1638,6 +1638,28 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                         if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
                             method_quals.append((f"{top.name}.{sub.name}", sub))
             defined_fns = {q for q, _ in method_quals} | {n.name for _, n in method_quals}
+            # A RENAME STATES ITS OLD NAME BY POSITION, AND THE FILE PROVES IT.
+            #
+            # "Rename old_name to new_name in <file>." names one identifier before the
+            # "to" and one after it, and only the file can say which of them is the
+            # definition being renamed.  Everything above looks at names placed beside
+            # the noun "function"/"method", so the same sentence without the noun proved
+            # nothing and the row was refused with
+            # GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH ...:qualname:not_stated --
+            # measured 2026-11-01: identical edit, `PASS` with "the function" and a
+            # compilation gap without it.  The pair is already parsed for the parameter
+            # grammar below; the AST decides whether its OLD half is a definition HERE.
+            # A parameter name is not in defined_fns, so a parameter sentence is
+            # untouched by this and stays with the row that edits parameters.
+            if not wanted_fn and len(pairs) == 1 and pairs[0][0] in defined_fns:
+                wanted_fn = pairs[0][0]
+            # THE MIRROR: a definition is not a parameter.  The sentence-order rule above fills
+            # `old_param` from the pair for every rename row, which is right when the old name is
+            # a parameter and wrong when the stated file defines it -- the same wrong-object
+            # reading, pointed the other way.  It is dropped here on the evidence the file gives.
+            if (len(pairs) == 1 and pairs[0][0] in defined_fns
+                    and str((out.get("old_param") or {}).get("rule") or "") == "RENAME_OLD_NAME_STATED"):
+                out.pop("old_param", None)
             proven = [n for n in named_fns if n in defined_fns]
             if len(proven) == 1:
                 wanted_fn = proven[0]
@@ -1658,15 +1680,65 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if len(preps) == 1:
                     wanted_fn = next(iter(preps))
             matches: list[str] = []
+            # "The function THAT DECLARES this parameter" is a reading about a parameter, and
+            # only the rows that edit parameters may take it.  Measured 2026-11-01: a SYMBOL
+            # row bound `qualname=norm` from `text` being a parameter of `norm`, so
+            # "Rename text to value in <f>." reached `python.refactor.rename_symbol.v1` with
+            # a host function for a name it was never asked to rename.  A parameter is not a
+            # definition, and a row that does not declare a parameter slot may not borrow
+            # the reading that belongs to one.
+            _parameter_row = bool({"old_param", "new_param", "param", "param_name"} & keys)
             for qname, node in method_quals:
                 arg_names = [a.arg for a in (list(node.args.args) + list(node.args.kwonlyargs))]
                 if wanted_fn and (qname == wanted_fn or node.name == wanted_fn):
                     matches.append(qname)
-                elif not wanted_fn and wanted_param and wanted_param in arg_names:
+                elif (_parameter_row and not wanted_fn and wanted_param
+                      and wanted_param in arg_names):
                     matches.append(qname)
             if len(set(matches)) == 1:
                 out["qualname"] = {"value": matches[0], "rule": "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
                                    "evidence": f"{sources[0]}:{matches[0]}"}
+    # THE SAME PROOF FOR THE OTHER OBJECT A RENAME CAN NAME.
+    #
+    # "Rename text to value in <file>." states no noun, so the sentence-order rule that
+    # fills `old_param` is not evidence this layer may act on (`_PROVED_BY_THE_TREE`
+    # admits only values checked against the tree).  The tree can settle it: `text` is
+    # declared as a parameter of exactly one function in the stated file, and it is not a
+    # definition, so the object being renamed is that parameter.  Measured 2026-11-01 on
+    # main c64af36c: without this the sentence was answered by
+    # `python.refactor.rename_symbol.v1`, which renamed the FUNCTION (`def value(text,
+    # scale=1)`) and left the parameter alone -- the wrong-object edit the role rule
+    # exists to stop, reached through the one shape where no noun states the role.
+    if ("old_param" in keys and len(sources) == 1 and sources[0].endswith(".py")
+            and len(pairs) == 1):
+        _old_param_name = pairs[0][0]
+        _param_tree = _tree_of(root, sources[0])
+        _hosting: list[str] = []
+        if _param_tree is not None and _NAME_RE.match(_old_param_name):
+            for _top in _param_tree.body:
+                _nodes: list[tuple[str, ast.FunctionDef | ast.AsyncFunctionDef]] = []
+                if isinstance(_top, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    _nodes.append((_top.name, _top))
+                elif isinstance(_top, ast.ClassDef):
+                    for _sub in _top.body:
+                        if isinstance(_sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                            _nodes.append((f"{_top.name}.{_sub.name}", _sub))
+                for _q, _node in _nodes:
+                    _declared = [a.arg for a in (list(_node.args.posonlyargs)
+                                                 + list(_node.args.args)
+                                                 + list(_node.args.kwonlyargs))]
+                    if _old_param_name in _declared:
+                        _hosting.append(_q)
+        _definitions = {n.name for n in ast.walk(_param_tree)
+                        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+        if len(set(_hosting)) == 1 and _old_param_name not in _definitions:
+            out["old_param"] = {"value": _old_param_name,
+                                "rule": "PARAM_PROVED_FROM_STATED_SOURCE_AST",
+                                "evidence": f"{sources[0]}:{_hosting[0]}.{_old_param_name}"}
+            if "qualname" in keys and "qualname" not in out:
+                out["qualname"] = {"value": _hosting[0],
+                                   "rule": "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+                                   "evidence": f"{sources[0]}:{_hosting[0]}"}
     goal_str = str(goal or "")
     cid_str = str((args or {}).get("capability_id") or "")
     stated_dirs: list[str] = []

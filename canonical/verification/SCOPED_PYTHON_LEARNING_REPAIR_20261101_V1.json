@@ -5,6 +5,7 @@
   "discovery_scope": "Existing immutable local fixtures and maintained code; no new network acquisition. Historical acquisition cost is sunk and not reconstructed as zero.",
   "end_to_end_qualification_wall_s": 146.57724016099996,
   "end_to_end_self_and_waited_children_cpu_s": 145.02958299999997,
+  "final_affected_validation": "69 passed / 166.79s after bytecode-policy integration: historical pairs/negatives, scoped unit/restart/rename safety, and incoming no-bytecode tests.",
   "frozen_curriculum": {
     "baseline": "Same maintained solver; explicit scoped retained_learning disabled",
     "frozen_before_runtime_edits": true,
@@ -39,7 +40,8 @@
   "frozen_curriculum_sha256": "9ca25c0327fab8e3bf3695bbc2a1df0c184fad8a61f08d98fe9a5c647bb4af89",
   "full_upstream_repository_coverage": false,
   "independent_certification": false,
-  "latest_integrated_main_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+  "latest_integrated_main_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
+  "latest_routing_integration": "c34c150 only changes scope-aware rename input derivation/front compiler plus its tests/intent/model; learning and measured project-repair producer files unchanged. Affected routing/model checks revalidated separately.",
   "limits": {
     "candidate_budget": "16 behaviorally tested locations per recalled rule; 64 candidate locations for reproduction/twin qualification. Larger inventories can still require work proportional to the number of rules.",
     "cost": "Full run timer covers local provenance verification, fixture construction, teaching, both arms, verification/audits, negative controls and cleanup. Phase and child/worker costs are included. Final JSON serialization/write, initial interpreter imports, earlier exploratory probes, environment setup, integration/model/safety tests and model-assisted development/provider costs are separate. Original upstream acquisition is reused sunk cost, not zero acquisition effort.",

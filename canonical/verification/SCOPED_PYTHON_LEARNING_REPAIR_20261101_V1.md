@@ -187,3 +187,10 @@ tests ran concurrently with that campaign; timing observations are descriptive,
 not isolated-load statistical evidence. The exact-base guard correctly blocked
 the initial PR as main advanced. Metadata is refreshed, not the guard relaxed.
 Only generated projection conflicts were resolved, using the official compiler.
+
+After the bytecode-policy integration, **69 affected checks passed / 166.79s**,
+including the full historical matrix/negatives, scoped unit/restart/rename safety
+and incoming bytecode-policy regressions. Main then advanced to
+`c34c150f2e19692e321025a1d5cb3e8655c76cd7` with scope-aware rename input routing
+changes only; no measured learning/project-repair producer files changed. Those
+changes are preserved and their routing/model paths are revalidated separately.

@@ -38,7 +38,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Python insertion-only and mixed-hunk lessons fail self-reproduction and twin verification; scoped recall must verify multiple structural locations rather than trust the first match.",
-  "canonical_base_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+  "canonical_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +52,7 @@
   "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
-    "canonical_base_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+    "canonical_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -70,7 +70,7 @@
     "wall_clock_cost_ub": 86400
   },
   "merge_refresh": {
-    "current_base_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+    "current_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
     "original_admission_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
     "reason": "Incoming main integrated; unchanged counterexample obligations rebound to exact current source/test blobs. No guard weakened."
   },
@@ -89,7 +89,7 @@
     "scope_complete": false
   },
   "recursive_obs": {
-    "canonical_base_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+    "canonical_base_commit": "c34c150f2e19692e321025a1d5cb3e8655c76cd7",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Stated-command exit code alone as proof that named tests passed",
