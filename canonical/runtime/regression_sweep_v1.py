@@ -284,12 +284,19 @@ def verifier_falsification_checks() -> int:
     # ever being reflected in "N/N as expected".
     global _FALSIFICATION_CASES
     _FALSIFICATION_CASES = len(results)
-    for name, wrong, affirmed in results:
+    proven = 0
+    untested = 0
+    for name, wrong, status in results:
+        if status == V.SAID_NO:
+            proven += 1
+        elif status == V.UNTESTED:
+            untested += 1
         print("%-8s %-16s %-42s %s"
-              % ("FAIL" if affirmed else "PASS", "falsify", name[:42], wrong))
+              % ("PASS" if status == V.SAID_NO else status, "falsify", name[:42], wrong))
     print("%-8s %-16s %-42s %s"
           % ("PASS" if not bad else "FAIL", "falsify", "all verifiers",
-             "%d/%d proven able to fail" % (len(results) - bad, len(results))))
+             "%d/%d proven able to fail (%d untested)"
+             % (proven, len(results), untested)))
     return bad
 
 

@@ -1,0 +1,22 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "REFUSE_AT_ADMISSION: refuse a repair that reduces a function's input dependency set (canonical/swe_kernel/repair_input_dependency_gate_v1.py)",
+ "falsifier_id": "REPAIR_ADMISSION_NECESSARY_NOT_SUFFICIENT",
+ "decisive_question": "Does refusing a patch which stops reading its inputs also refuse a patch which reads its inputs and is still wrong?",
+ "answer": "NO",
+ "counterexample": {
+  "before": "def compute_invoice(items, disc):\n    total = 0.0\n    for item in items:\n        total += item\n    if disc:\n        total -= disc\n    return total\n",
+  "after": "def compute_invoice(items, disc):\n    total = 0.0\n    for item in items:\n        total += item\n    return total * 100.0 / disc\n",
+  "why_it_is_a_counterexample": "The patch reads both parameters, so no input dependency is lost, and it is wrong on every input the visible tests do not contain."
+ },
+ "measured": {
+  "command": "python3 -c 'from repair_input_dependency_gate_v1 import gate; gate(before, after)'",
+  "lookup_table_candidate_status": "REFUSED",
+  "wrong_operator_candidate_status": "PASS",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The gate is necessary and not sufficient. It removes one demonstrated false-success mode (solving the tests by discarding the data) and cannot certify a repair correct. terminal_authority stays false and a caller may override with a written reason.",
+ "what_would_close_it": "A semantic oracle for the operator itself, which this gate does not have and does not claim with a placeholder.",
+ "known_bad_precedent": "canonical/action_intents/BRANCH_CREATION_GRAMMAR_FIX_V1_20261101.json binds its counterexample receipt to git_blob_sha a1b2c3d4e5f6789012345678901234567890abcd, which is not a blob in this repository, so that receipt asserts evidence it does not bind. This receipt binds a real blob."
+}
