@@ -235,6 +235,24 @@ def _numstat_rows(raw: str) -> list[dict[str, Any]]:
 def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     target = _target(args, cwd)
     tracked = _tracked(cwd, target)
+    # THE REVISION THE SENTENCE NAMED IS THE REVISION THAT GETS DIFFED.
+    #
+    # Measured 2026-11-01: "Show me the diff of <pkg>/calc.py against HEAD~1" was answered
+    # with ``git diff HEAD`` -- the working tree against the current commit -- and in a clean
+    # tree that is the EMPTY patch.  The door returned ``rows: []`` with
+    # ``output_verified: True`` and a PASS: a false pass, and the worst class of it, because
+    # the sentence had stated the exact revision whose hunk was the answer.  The contract had
+    # ``op/target/repo_root/limit/message`` and no slot for a revision at all, so the stated
+    # revision could not reach the adapter even in principle.  It now can, and an empty patch
+    # is only ever reported for the revision the caller asked about.
+    rev = str(args.get("rev") or "").strip() or "HEAD"
+    if rev.startswith("-"):
+        _fail("REV_MAY_NOT_BE_AN_OPTION:" + rev)
+    # independence: a stated revision must RESOLVE, and must be a commit -- otherwise a typo
+    # would read as an empty diff and be certified as an answer about that revision.
+    rev_sha = _git(cwd, "rev-parse", "--verify", "--quiet", rev + "^{commit}", check=False).strip()
+    if not rev_sha:
+        _fail("STATED_REVISION_NOT_FOUND:" + rev)
     # AN UNTRACKED FILE HAS NO HISTORY, BUT IT DOES HAVE A DIFFERENCE.
     #
     # The difference between nothing and the file is a fact, and git already
@@ -249,9 +267,9 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
                                   check=False))
         patch_text = _git(cwd, "diff", "--no-index", "--", "/dev/null", target, check=False)
     else:
-        spec = ["diff", "--numstat", "HEAD", "--"] + ([target] if target else [])
+        spec = ["diff", "--numstat", rev, "--"] + ([target] if target else [])
         rows = _numstat_rows(_git(cwd, *spec, check=False))
-        patch_text = _git(cwd, *(("diff", "HEAD", "--", target) if target else ("diff", "HEAD")))
+        patch_text = _git(cwd, *(("diff", rev, "--", target) if target else ("diff", rev)))
     # independence: the patch itself must mention every file numstat named
     missing = [r["path"] for r in rows if r["path"] not in patch_text and r["path"].split("/")[-1] not in patch_text]
     if missing:
@@ -262,6 +280,9 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     if rows and "@@" not in patch_text:
         _fail("INDEPENDENT_CHECK_DISAGREES:diff:NO_PATCH_BODY")
     return rows, {"op": "diff", "target": target, "tracked": tracked, "file_count": len(rows),
+                  # The revision is part of the ANSWER, not an internal detail: the receipt
+                  # has to say which two trees were compared, in the commit id git resolved.
+                  "rev": rev, "rev_sha": rev_sha,
                   "patch": patch_text,
                   "patch_sha256": _sha(patch_text.encode("utf-8")),
                   "patch_bytes": len(patch_text.encode("utf-8")),
@@ -345,16 +366,43 @@ def _op_branch(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
 
 def _op_commit(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     message = str(args.get("message") or "").strip()
-    if not message:
-        _fail("COMMIT_REQUIRES_A_STATED_MESSAGE")
+    delegated = str(args.get("message_source") or "").strip().upper() == "DELEGATED_STAGED_DIFF"
     before = _head(cwd)
+    target = _target(args, cwd)
     # Default: commit what the caller STAGED.  Sweeping the working tree with
     # `git add -A` is a different, much larger promise than "commit the staged
     # changes", and it is the one form of this operation that can quietly absorb
     # work nobody asked to record.  A caller that means everything says
     # staged=false, which is the only way `git add` runs at all.
+    #
+    # ...and when it does, it stages EXACTLY WHAT THE SENTENCE NAMED.  Measured
+    # 2026-11-01: "Commit the current changes in <pkg> with the message 'fix calc'"
+    # derived the package as its target and then `git add -A` swept the whole
+    # repository -- a commit that records every unrelated edit in the checkout is not
+    # the commit the sentence asked for, and the caller would never know from the
+    # receipt, which named the package.  A pathspec pins the sweep to the stated
+    # subtree, and the staged list is checked against it before anything is recorded.
     if str(args.get("staged", True)).lower() in ("false", "0", "no"):
-        _git(cwd, "add", "-A")
+        _git(cwd, *((("add", "-A", "--", target) if target else ("add", "-A"))))
+    staged = [line.strip() for line in
+              _git(cwd, "diff", "--cached", "--name-only", check=False).splitlines() if line.strip()]
+    if target and staged:
+        outside = [f for f in staged
+                   if f != target and not f.startswith(target.rstrip("/") + "/")
+                   and not target.startswith(f.rstrip("/") + "/")]
+        if outside:
+            _fail("STAGED_OUTSIDE_STATED_TARGET:" + ",".join(outside[:3]))
+    if not staged:
+        _fail("NOTHING_STAGED_TO_COMMIT")
+    if not message and delegated:
+        # The sentence delegated the wording; the diff states the fact.  First path, plus a
+        # count of the rest -- nothing is described here that git did not just report.
+        first = staged[0]
+        rest = len(staged) - 1
+        message = "Update " + first + (" and %d more file%s" % (rest, "" if rest == 1 else "s")
+                                       if rest else "")
+    if not message:
+        _fail("COMMIT_REQUIRES_A_STATED_MESSAGE")
     _git(cwd, "commit", "-m", message, "--no-verify", "--quiet")
     after = _head(cwd)
     if not after or after == before:
@@ -366,7 +414,8 @@ def _op_commit(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     subject = _git(cwd, "log", "-1", "--format=%s", after).strip()
     rows = [{"sha": after, "parent": before, "subject": subject, "message": message}]
     return rows, {"op": "commit", "commit_sha": after, "parent_sha": before,
-                  "object_type": kind, "subject": subject,
+                  "object_type": kind, "subject": subject, "target": target,
+                  "files_committed": len(staged),
                   "history_depth": int((_git(cwd, "rev-list", "--count", "HEAD",
                                              check=False) or "0").strip() or 0)}
 

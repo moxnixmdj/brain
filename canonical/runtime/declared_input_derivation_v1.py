@@ -540,6 +540,18 @@ _STATED_COUNT = re.compile(
     r"(?:[\w-]+\s+){0,3}(?:commits?|entries|rows|lines?|branches?)\b", re.IGNORECASE)
 
 
+# The revisions a sentence can name.  Closed on purpose and closed to things that are not
+# revisions: a bare hex-looking word is only a revision when the sentence is about history,
+# which is exactly when this slot is being bound (``stated_git_operations`` decides that).
+# ``HEAD``, ``HEAD~3``, ``HEAD^``, ``main``, ``v1.2`` and a commit id all reduce to one token
+# git itself resolves; nothing here guesses what the sentence meant.
+_STATED_REVISION = re.compile(
+    r"\bHEAD(?:[~^]\d*)?\b"
+    r"|\b(?:the\s+)?(?:last|latest|current|previous|prior)\s+commit\b"
+    r"|\b[0-9a-f]{7,40}\b",
+    re.IGNORECASE)
+
+
 _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
     (name, re.compile(pattern, re.I)) for name, pattern in (
         # history: an explicit git log, the word history, or "the last N commits"
@@ -1285,8 +1297,28 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         destination = _scope_gc._path_named_after_output_verb(goal, root)
         subjects = [f for f in files if f != destination]
         scope = None
+        scope_target = ""      # what INSIDE the repository the sentence pointed at
         if len(directories) == 1:
-            scope = directories[0]
+            # A STATED DIRECTORY MAY SIT INSIDE THE REPOSITORY, NOT AT ITS ROOT.
+            #
+            # Measured 2026-11-01: "Commit the current changes in <pkg> with the message
+            # 'fix calc'" bound ``repo_root`` to ``<pkg>`` itself and the adapter refused
+            # NOT_A_GIT_REPOSITORY -- the package is a directory in a repository, not a
+            # repository.  The sentence named a subtree; the scope is the repository that
+            # contains it and the target is the subtree's path inside that repository.
+            # Walking UP never widens authority: the first enclosing ``.git`` is the one
+            # git would use from that directory, and anything above it is a different
+            # repository the caller never named.
+            stated = directories[0]
+            owner = (pathlib.Path(root) / stated).resolve()
+            top = pathlib.Path(root).resolve()
+            while owner != top and not (owner / ".git").exists():
+                owner = owner.parent
+            if (owner / ".git").exists() and owner != (pathlib.Path(root) / stated).resolve():
+                scope_target = owner and (pathlib.Path(root) / stated).resolve().relative_to(owner).as_posix()
+                scope = owner.relative_to(top).as_posix()
+            else:
+                scope = stated
         elif not directories:
             if subjects and stated_git_operations(goal) == ("commit",):
                 # File-scoped commits are not whole-parent commit authority.
@@ -1310,6 +1342,10 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                         target = subjects[0]  # the adapter independently rejects outside scope
                     out["target"] = {"value": target, "rule": "GIT_TARGET_IS_THE_STATED_FILE",
                                      "evidence": subjects[0]}
+                elif scope_target:
+                    out["target"] = {"value": scope_target,
+                                     "rule": "GIT_TARGET_IS_THE_STATED_SUBTREE",
+                                     "evidence": scope_target}
                 elif not subjects:
                     out["target"] = {"value": "", "rule": "UNQUALIFIED_REPOSITORY_OPERATION",
                                      "evidence": scope}
@@ -1327,6 +1363,63 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if len(stated) == 1:
             out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
                          "evidence": stated[0]}
+    if "rev" in keys:
+        # THE SENTENCE STATED WHICH REVISION, SO THE SLOT MUST CARRY IT.
+        #
+        # Measured 2026-11-01: "Show me the diff of <pkg>/calc.py against HEAD~1" was answered
+        # by ``git diff HEAD``.  The row had no ``rev`` slot, so the sentence's own object --
+        # the revision whose hunk IS the answer -- was dropped on the floor, and the empty
+        # diff of a clean tree was certified as a PASS.  What is bound here is only what the
+        # sentence states: a revision token, or the phrase the sentence uses for one.  A
+        # sentence that names no revision binds nothing, and the adapter's own default (the
+        # working tree against HEAD) then applies -- unchanged, byte for byte.
+        text = str(goal or "")
+        rev_value, rev_evidence = None, None
+        named = _STATED_REVISION.search(text)
+        if named:
+            token = named.group(0).strip()
+            low_token = token.lower()
+            if low_token in ("the last commit", "the latest commit", "the current commit"):
+                rev_value = "HEAD"
+            elif low_token == "the previous commit":
+                rev_value = "HEAD~1"
+            else:
+                rev_value = token
+            rev_evidence = token
+        if rev_value:
+            out["rev"] = {"value": rev_value, "rule": "REVISION_FROM_STATED_SENTENCE",
+                          "evidence": rev_evidence}
+        else:
+            # A git read whose sentence names no revision reads the current commit, and the
+            # receipt says so instead of leaving the slot to a default inside the adapter:
+            # an answer that does not name the trees it compared cannot be checked by the
+            # caller who asked the question.
+            out["rev"] = {"value": "HEAD", "rule": "REVISION_NOT_STATED_CURRENT_COMMIT",
+                          "evidence": ""}
+    if "staged" in keys:
+        # WHICH CHANGES THE SENTENCE MEANT, SAID OUT LOUD.
+        #
+        # "Commit the staged changes" names the index; "commit the current changes in
+        # <pkg>" names the working tree.  Both used to arrive as the adapter's default
+        # (commit the index), so the second one died with COMMIT_PRODUCED_NO_NEW_OBJECT
+        # over an unstaged edit it had been told about.  The word the sentence uses is
+        # the whole difference, and it is already in the row's own keywords.
+        text = str(goal or "").lower()
+        op_value = (out.get("op") or {}).get("value")
+        if op_value == "commit":
+            if re.search(r"\bstaged\b|\bindex\b", text):
+                out["staged"] = {"value": True, "rule": "COMMIT_TARGETS_THE_INDEX_AS_STATED",
+                                 "evidence": "staged"}
+            else:
+                out["staged"] = {"value": False, "rule": "COMMIT_TARGETS_THE_STATED_CHANGES",
+                                 "evidence": "changes"}
+        else:
+            # A slot the row declares is bound for every sentence the row can answer, so the
+            # receipt states why it does not apply instead of leaving the input unbound --
+            # an unbound declared input makes the whole typed plan undecisive, which is how
+            # adding this slot briefly refused every git READ (measured 2026-11-01).
+            out["staged"] = {"value": True, "rule": "STAGING_NOT_APPLICABLE_TO_THIS_OPERATION",
+                             "evidence": op_value or ""}
     if "limit" in keys:
         m = _STATED_COUNT.search(str(goal or ""))
         if m:
@@ -1354,6 +1447,28 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if value:
                 out["message"] = {"value": value, "rule": "MESSAGE_FROM_STATED_QUOTED_TEXT",
                                   "evidence": value[:48]}
+            elif op_value == "commit" and re.search(
+                    r"\b(?:a\s+)?(?:clear|sensible|good|descriptive|appropriate|meaningful)\s+message\b"
+                    r"|\bmessage\s+of\s+your\s+(?:choosing|own)\b", text, re.I):
+                # THE SENTENCE DELEGATED THE WORDING, SO THE CHANGE SUPPLIES IT.
+                #
+                # Measured 2026-11-01: "Commit the changes in <pkg> with a clear message" was
+                # refused R13_DECLARED_INPUT_UNBINDABLE:message -- the sentence states a message
+                # obligation and hands the wording to the committer, and the contract had no way
+                # to say "compose it from what actually changed".  What must NOT happen is the
+                # old failure this replaced: an invented constant ("Update pkg") that describes
+                # nothing.  The adapter composes the subject from the staged diff, so the message
+                # is a fact about the commit rather than a guess about the sentence.
+                out["message"] = {"value": "", "rule": "MESSAGE_DELEGATED_TO_THE_STAGED_DIFF",
+                                  "evidence": "clear message"}
+    if "message_source" in keys:
+        # Which of the two ways the message came about, stated in the receipt.
+        message_rule = (out.get("message") or {}).get("rule") or ""
+        out["message_source"] = {
+            "value": ("DELEGATED_STAGED_DIFF" if message_rule == "MESSAGE_DELEGATED_TO_THE_STAGED_DIFF"
+                      else "STATED"),
+            "rule": "MESSAGE_SOURCE_DECLARED",
+            "evidence": message_rule or "no_message_slot_used"}
     if ({"symbol", "new_symbol", "function_name", "new_function"} & keys
             and _CREATES_A_FUNCTION.search(str(goal or ""))):
         fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
@@ -1874,10 +1989,16 @@ def _derive_swe_kernel_inputs(
         elif "rebase" in low and "branch" in low and stated_dirs:
             op, tgt = "git_rebase", stated_dirs[0]
         elif "cherry-pick" in low and ("branch" in low or "onto " in low):
-            op, tgt = "git_cherry_pick", (files[0] if files else (stated_dirs[0] if stated_dirs else ""))
-        elif re.search(r"\bcreate\s+(?:a\s+|the\s+)?branch\b", low) and (files or stated_dirs):
-            op, tgt = "git_branch_and_commit", (files[0] if files else stated_dirs[0])
-        elif re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\b", low) and "staged" not in low and (files or stated_dirs):
+            # A REPOSITORY OPERATION THAT NAMES NO PATH IS SCOPED TO THE REPOSITORY.  This is the
+            # same rule ``git.repository.operate.v1`` has used since it was written
+            # (``UNQUALIFIED_REPOSITORY_OPERATION`` -> scope "."); the swe lane required a path
+            # and therefore refused "Cherry-pick the last commit onto a new branch" before the
+            # capability was ever consulted.  Measured 2026-11-01: the op and the adapter both
+            # exist (``git_cherry_pick``), and the sentence names the operation and its object.
+            op, tgt = "git_cherry_pick", (files[0] if files else (stated_dirs[0] if stated_dirs else "."))
+        elif re.search(r"\bcreate\s+(?:a\s+|the\s+)?branch\b", low):
+            op, tgt = "git_branch_and_commit", (files[0] if files else (stated_dirs[0] if stated_dirs else "."))
+        elif re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\b", low) and "staged" not in low:
             op, tgt = "git_commit", (stated_dirs[0] if stated_dirs else files[0])
 
         if not op or not tgt:
@@ -1947,8 +2068,10 @@ def _derive_swe_kernel_inputs(
             op, tgt = "migration_plan", stated_dirs[0]
         elif "design document" in low and "splitting" in low and stated_dirs:
             op, tgt = "package_split_design", stated_dirs[0]
-        elif "changelog" in low and "commits" in low and (stated_dirs or files):
-            op, tgt = "git_changelog", (stated_dirs[0] if stated_dirs else files[0])
+        elif "changelog" in low and "commits" in low:
+            # Same law, same reason: "Write the changelog entry for the last three commits" names
+            # the history, not a directory, and the repository is the scope that history lives in.
+            op, tgt = "git_changelog", (stated_dirs[0] if stated_dirs else (files[0] if files else "."))
 
         if not op or not tgt:
             return None

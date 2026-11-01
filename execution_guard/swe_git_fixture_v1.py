@@ -29,22 +29,55 @@ _ENV = {
 
 
 def seed_repository(base: pathlib.Path, dirty_rel: str = "pkg/calc.py",
-                    baseline: str = "baseline") -> bool:
-    """Commit a baseline in ``base``, then leave ``dirty_rel`` modified.
+                    baseline: str = "baseline", history: str = "repair") -> bool:
+    """Seed TWO commits in ``base`` and leave a third, uncommitted change behind.
 
-    Returns True when the repository exists and carries one uncommitted change. Every git
-    question the instruments ask then has an answer only a working implementation can give:
-    a diff with a hunk, a commit to make, a branch to create, two revisions to compare.
+    A repository with ONE commit cannot answer a question about a revision.  Measured
+    2026-11-01: the advanced census asked "Show me the diff of <f> against HEAD~1" of a tree
+    whose history was a single commit, so ``HEAD~1`` did not resolve -- and before the row had
+    a ``rev`` slot the same sentence was answered with the empty diff against ``HEAD`` and
+    certified VERIFIED.  A fixture that cannot express "the previous revision" makes both
+    readings unfalsifiable: an honest refusal and a false pass look the same.
+
+    Three states, so every sentence the instruments ask has exactly one true answer:
+
+    ==========================  =============================  =======================
+    question                    answer                         state
+    ==========================  =============================  =======================
+    diff against HEAD~1         the two commits' difference,   ``history`` change,
+                                plus the pending one           committed
+    diff against HEAD           the pending change only        ``dirty`` change
+    find the commit that broke  the second commit               two commits to bisect
+    commit / create a branch    ``.git`` in a known state      uncommitted change
+    ==========================  =============================  =======================
+
+    ``history`` names the change the second commit makes, so the committed difference is
+    visible, revertible and bisectable rather than an empty commit.
     """
     env = dict(_ENV, HOME=str(base))
+    dirty = base / dirty_rel
     try:
-        for argv in (("git", "init", "-q"), ("git", "add", "-A"),
-                     ("git", "-c", "commit.gpgsign=false", "commit", "-q", "-m", baseline)):
-            if subprocess.run(argv, cwd=str(base), capture_output=True, text=True,
-                              timeout=60, env=env).returncode != 0:
-                return False
-        dirty = base / dirty_rel
+        if subprocess.run(("git", "init", "-q"), cwd=str(base), capture_output=True,
+                          text=True, timeout=60, env=env).returncode != 0:
+            return False
+
+        def commit(message: str) -> bool:
+            steps = (("git", "add", "-A"),
+                     ("git", "-c", "commit.gpgsign=false", "commit", "-q", "-m", message))
+            return all(subprocess.run(argv, cwd=str(base), capture_output=True, text=True,
+                                      timeout=60, env=env).returncode == 0 for argv in steps)
+
+        if not commit(baseline):
+            return False
         if dirty.is_file():
+            # Commit a real difference, so HEAD~1 is a revision with something to show.
+            text = dirty.read_text(encoding="utf-8")
+            change = ("\n# fixture: committed %s\n" % history
+                      if history == "repair" else "\n# fixture: %s\n" % history)
+            dirty.write_text(text + change, encoding="utf-8")
+            if not commit("fixture: " + history):
+                return False
+            # ...and leave the pending change, so the working tree still has one.
             dirty.write_text(dirty.read_text(encoding="utf-8") + "\n# fixture: uncommitted\n",
                              encoding="utf-8")
         return True
