@@ -108,7 +108,7 @@ then on, new instances each call:
 
 ---
 
-## 5. The one gap that survived everything
+## 5. The one gap that survived everything — and was then closed
 
 **Cross-language carry.** Measured again, directly, after all of the above:
 
@@ -124,7 +124,47 @@ GO recall of a PYTHON lesson:        NO_PROPOSAL
 intact and is **never offered** to Go. Everything else transports — machine, checkout, variant,
 port, parameter, pixel layer — but not across a language boundary.
 
-Why this is small and fixable rather than fundamental:
+### 5.1 Closed the same day: `language_neutral_skill_bridge_v1`
+
+Rather than leave it, it was built and measured. New adapter
+`canonical/swe_kernel/language_neutral_skill_bridge_v1.py` + 15 tests. It is a **separate
+module on purpose** — the crystallizer is load-bearing and measured, and a cross-language
+experiment must not be able to move it.
+
+Three guards, in order, and a proposal that survives all three is still only a hypothesis:
+
+1. **lexical** — the rewrite may change operators and literals only, and may introduce no
+   identifier of its own. It may not mention a language-specific name.
+2. **syntactic** — the patched text must still parse in the target language.
+3. **semantic** — the *caller's own verifier* must pass it. Mandatory; the function refuses by
+   name (`CROSS_LANGUAGE_RECALL_REQUIRES_A_VERIFIER`) without one.
+
+Measured, same boundary lesson taught once in Python:
+
+| target | before | after |
+|---|---|---|
+| go | `NO_PROPOSAL` | **CROSSED** |
+| typescript | `NO_PROPOSAL` | **CROSSED** |
+| cpp | `NO_PROPOSAL` | **CROSSED** |
+| java | `NO_PROPOSAL` | **CROSSED** |
+| rust | `NO_PROPOSAL` | `NO_PROPOSAL` — pattern needs `return`, Rust has none |
+
+**0 of 5 → 4 of 5.** The Rust case is a genuine shape difference and is recorded as one rather
+than papered over. Negative controls all hold: a `sum(...)` rule is refused by name
+(`RULE_MENTIONS_LANGUAGE_SPECIFIC_NAME:sum`), a rule introducing a fresh identifier is refused,
+a verifier returning `False` yields `None`, and a verifier that *raises* is not a pass.
+
+`canonical/tests/test_language_neutral_skill_bridge_v1.py` — **15 passed**.
+Existing behaviour unchanged: `test_a_lesson_learned_here_reaches_there_v1` +
+`durable_and_general` + `rename_is_not_a_shape` + `environment_learning` — **46 passed**.
+Referee: `rules=17 violations=0 -> PASS`.
+
+Two of my own over-strict guards were caught by measurement while building it — the first
+version refused `return`, which is identical in all six languages, and would have reported the
+bridge as impossible. That is the same failure mode as the earlier faulty oracles, and it is
+worth naming: **a gate that refuses everything looks exactly like a system that cannot do it.**
+
+Why it stayed small and fixable rather than fundamental:
 - The multi-language substrate already exists: `code_multilanguage_tree_sitter_v1.py` parses
   **8 languages** (python, javascript, typescript, rust, go, java, cpp, yaml) through
   tree-sitter with a deterministic fallback, and already does CST-based polyglot rename.
