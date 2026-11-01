@@ -287,7 +287,60 @@ a ledger of what it does not know, ranked by the expected value of closing each 
 gets better at that judgement by being wrong. That is the honest, measurable half of "knows
 what needs to be known" — and it is wired, not described.
 
-**The list of things genuinely not in this repository is now one item:**
+### 10.1 The abstraction gap: measured, built, and mostly closed
+
+My ranked item 3 said "wire the existing abstraction modules into the bridge". Checking them
+first: `h100_zero_learned_semantic_paraphrase_v1` is a **task-prose** role normaliser,
+`meta_strategy_abstraction_v9` abstracts **action sequences**,
+`recursive_abstraction_v5` is proof-gated induction with causality bases, and
+`finite_abstraction_cover_lift_v1` is a finite Boolean policy cover. **None of them is a
+code-shape abstraction engine**, so that item was wrong as written — wiring them in would have
+been a category error.
+
+The real gap was narrower and concrete. One taught lesson (`<= hi` -> `< hi`) stored the
+pattern `return ?id0 <= ?id1`, so it could only ever fire inside a `return`. Measured reach:
+**1 of 7** novel instances.
+
+New module `canonical/swe_kernel/operator_generalization_v1.py` recovers the general form: if
+pattern and replacement differ by **exactly one operator token** and are otherwise identical
+modulo holes, the lesson *is* that swap, and it has three closed forms —
+
+```
+a <= b      -> a < b        direct
+b >= a      -> b > a        operands swapped
+not (x > h) -> not (x >= h) negated
+```
+
+Re-measured against the same seven instances, each judged by executing the patched source
+against **its own** assertions:
+
+| case | before | after |
+|---|---|---|
+| operator inside a larger expression | miss | **solved** |
+| operator inside an `if` statement | miss | **solved** |
+| operator in a `while` guard | miss | **solved** |
+| operands swapped (`hi >= x`) | miss | **solved** |
+| negated form `not (x > hi)` | miss | **solved** |
+| class method with `self` | hit (normal recall) | hit |
+| algebraic form `x < hi or x == hi` | miss | **miss — recorded** |
+
+**1 of 7 -> 6 of 7.** The seventh is algebraic simplification, not an operator swap, and is
+pinned by a test that asserts it stays a miss rather than being folded into a claim.
+
+Safety, because this widens applicability: it refuses anything that is not exactly one
+operator difference; it never rewrites inside a **string literal or a comment** (in Python via
+absolute tokenize offsets, elsewhere via a quote-aware mask); every candidate changes exactly
+one occurrence and is capped; and the module has **no accept/commit entry point** — the
+caller's verifier decides, and a test asserts that no such function exists.
+
+That safety claim caught a real bug in my own first version: `tokenize` reports (line, column),
+and I used the column as an absolute offset, so strings on every line after the first were
+being rewritten. The test found it; the offsets are now converted properly.
+
+`canonical/tests/test_operator_generalization_v1.py` — **15 passed**.
+Combined with the earlier suites: **69 passed**, no regressions. Referee `17/0 -> PASS`.
+
+**The list of things genuinely not in this repository is one item:**
 
 1. **Automatic expiry.** Invalidation exists and works, but it is *called* — nothing ages a
    rule out when the language, library or OS moves underneath it. A stale rule stays ACTIVE
