@@ -1,0 +1,432 @@
+{
+  "action_id": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+  "action_intent_id": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "The formatter was unreachable and unjudged, both halves of which were already in the tree. `ruff` had no entry in `_MUTATING_POSTCONDITIONS` (and none in the read-only table), so `_prose_argv` refused to translate the plainest sentence in the family: `extract_argv('Format <path>.py')` -> None, `door.solve('Format <file>.')` -> FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED in 56-181 ms with STATED_LINT_OR_FORMAT_NOT_PERFORMED_BY_CAPABILITY:UNNAMED, and 2 of the 4 formatter tests red on main. Under that, the write-authority rule refused the in-place rewrite itself (OUTPUT_OVERWRITES_A_STATED_SOURCE), because a destination that is also a source was refused without asking whether anything could CHECK the result. Now: a postcondition re-derives the promise from disk (`ruff format --check`, and the file must still parse), a rewrite the acceptance layer can judge is allowed through, and the typed-plan refusal asks the composer before it gives up. Door: PASS on a badly formatted file (rewritten and verified), FAIL_CLOSED__NO_OBSERVED_EFFECT on an already-formatted one.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A program could not be routed unless it was in one of two tables, and its rewrite could not be executed unless a rule that protects reports from overwriting sources had a way to say 'this rewrite is checked'. Neither half was wired, so the sentence the composer had a row for could never run.",
+  "canonical_base_commit": "216b800d0c04bf4013b673d03fcfbf1b37accd90",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A program could not be routed unless it was in one of two tables, and its rewrite could not be executed unless a rule that protects reports from overwriting sources had a way to say 'this rewrite is checked'. Neither half was wired, so the sentence the composer had a row for could never run.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/runtime/raw_goal_trace_acceptance_v1.py: `_post_ruff_format` -- `ruff format A` is judged by `ruff format --check A` and by re-parsing A -- registered as the `ruff` entry, which also makes the program routable. canonical/runtime/write_authority_v1.py: `_rewrite_is_judged_from_disk` -- a command whose program has a postcondition may rewrite the file it names; the exemption is exactly as wide as that table. canonical/runtime/live_brain_route_admission_v1.py: the typed-plan refusal asks the composer before refusing, and a verified composed run that left the world identical is reported as FAIL_CLOSED__NO_OBSERVED_EFFECT rather than a pass.",
+  "expected_parent_frontier_change": "A sentence that states a code change this tree can verify is executed and checked at the door, instead of being refused by a table that could not name the effect.",
+  "explicit_user_authorization": "Owner instruction this session: hardcore software engineering only, all the hardcore SWE problems listed with measurements; the answers already exist in the tree so wire what is there rather than invent; do the optimal thing in the fastest way and only the right way; report honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+  "falsification_condition": "FALSIFIED if a formatting goal is reported PASS without the file being in the formatter's canonical form, or if a program with no postcondition gains the in-place exemption, or if an already-formatted file is reported as a change.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "BEFORE (main, dd8668a170): extract_argv('Format <repo>/calc.py.') -> None; door.solve('Format <repo>/calc.py.') -> FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED, 56 ms, file unchanged; _try_composed -> FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN with OUTPUT_OVERWRITES_A_STATED_SOURCE; test_a_formatter_is_verified_by_its_own_check_v1 2 failed / 2 passed. AFTER: extract_argv -> ['ruff','format','<path>']; door.solve -> PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED, file rewritten 'def add(a,b):' -> 'def add(a, b):' and re-checked by the tool; an already-formatted file -> FAIL_CLOSED__NO_OBSERVED_EFFECT. Formatter tests 4/4; write-authority and write-rule tests 21/21; the new judged-rewrite tests 4/4; the ordinary-sentence suite stays at 333 passed with the same 12 pre-existing failures as main.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/transfer_learning_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/runtime/environment_learning_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "216b800d0c04bf4013b673d03fcfbf1b37accd90",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
+      "READING_THE_HOST_ONLY_FROM_IN_NAME",
+      "WIDENING_A_STATED_REGION_TO_ITS_NEIGHBOURS"
+    ],
+    "expected_parent_level_state_change": "A sentence that states a code change this tree can verify is executed and checked at the door, instead of being refused by a table that could not name the effect.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_BRANCH_RESTORES_SEVEN_INDISTINGUISHABLE_EXECUTION_FAILURES",
+      "intrinsic_or_path_specific": "GENERAL__ANY_EFFECT_THE_REGISTRY_DOES_NOT_DECLARE",
+      "surviving_causal_blocker": "A_PROGRAM_THAT_CANNOT_BE_NAMED_BY_THE_TABLES_CANNOT_BE_ROUTED_OR_EXECUTED"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ONE_ORACLE_PREDICATE__NO_NEW_CAPABILITY_NO_NEW_ROW",
+      "existing_inherited_routes_checked": [
+        "live_brain_route_admission_v1._REFUSAL_CLASS_RE",
+        "live_brain_route_admission_v1._ALREADY_SATISFIED_RE",
+        "live_brain_route_admission_v1._may_supersede_a_failed_attempt",
+        "the <CLASS>:<detail> refusal convention across ~40 adapter classes (grep)"
+      ],
+      "external_existing_routes_checked": "None needed.",
+      "surviving_gap": "NONE_FOR_DIAGNOSIS__THE_SEVEN_REFUSALS_ARE_NOW_NAMED_AND_EACH_NAMES_A_CAPABILITY_THE_ENGINE_LACKS_(RUST_CPP_AST_REPAIR_SQL_DDL_MIGRATION_DEPENDENCY_VENDORING_FLAKE_QUARANTINE)"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_SERVED_COUNT",
+        "REMOVING_ROWS_TO_LOOK_CAPABLE"
+      ],
+      "real_outcome": "A refusal that names its own reason is reported as that reason, so the gaps that remain are readable as distinct missing capabilities instead of one generic failure count.",
+      "surviving_necessity": "A wrong answer costs more than a refusal: it spends the caller's trust on top of the request."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_CONVENTION_EVERY_ADAPTER_ALREADY_SPEAKS__ADD_ONE_PURE_CLASSIFIER"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+      "search_stop_decision": "STOPPED_WHEN_A_GREP_SHOWED_THE_CONVENTION_ALREADY_EXISTED_ACROSS_ABOUT_FORTY_CLASSES"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Reporting the outer wrapper only was rejected because it leaves six different problems sharing one status. Dropping the branch entirely was rejected because it restores seven indistinguishable execution failures.",
+      "routes_ranked": [
+        "PROMOTE_THE_INNER_CLASS__CHOSEN",
+        "REPORT_THE_OUTER_WRAPPER_ONLY",
+        "KEEP_THE_GENERIC_FAILURE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_CENSUS_SNAPSHOTS_THE_REAL_DIRECTORY_AND_THE_TESTS_OPEN_THE_REAL_FILE"
+    },
+    "real_outcome": "A badly formatted file is formatted by the door and the result is re-derived from disk; an already-formatted one is not called a change.",
+    "required_capability": "a postcondition for the formatter, a write rule that exempts a judged rewrite, and a refusal path that asks the composer first",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "ZERO",
+            "CORRECTNESS": "HONEST_BUT_USELESS",
+            "INCREMENTAL_COST": "ZERO_CODE",
+            "RELIABILITY": "NOTHING_ROTS",
+            "VERIFIABILITY": "TRIVIAL",
+            "WALL_CLOCK": "56_MS"
+          },
+          "evidence": [
+            "Measured 2026-11-01: 'Format <file>.' refused in 56 ms with STATED_LINT_OR_FORMAT_NOT_PERFORMED_BY_CAPABILITY:UNNAMED while ruff was installed and the composer had a row for it."
+          ],
+          "qualification_evidence": [
+            "direct probe: door.solve on a badly formatted file, main dd8668a170"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REFUSE_THE_STATED_EFFECT_THAT_NO_TABLE_CAN_NAME"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "CLAIMS_EVERY_LANGUAGE",
+            "INCREMENTAL_COST": "ONE_KEYWORD",
+            "RELIABILITY": "OVERSTATES_THE_ROW",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "The command runner executes anything; letting it declare 'format' would make it the answer to a JavaScript lint request it cannot check."
+          ],
+          "qualification_evidence": [
+            "direct probe: the stated-effect test reads the row's own surface, so a keyword alone satisfies it"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "ADD_FORMAT_KEYWORDS_TO_THE_COMMAND_RUNNER"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "DESTROYS_SOURCES",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "UNCHECKED_WRITES",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "21 write-authority tests exist because a capability wrote a report over the source it read; the exemption must be no wider than the check."
+          ],
+          "qualification_evidence": [
+            "direct probe: 21 tests pass with the exemption as wide as _MUTATING_POSTCONDITIONS and not wider"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "ALLOW_ANY_IN_PLACE_REWRITE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "FORMATTING_REACHES_THE_DOOR_AGAIN",
+            "CORRECTNESS": "JUDGED_BY_THE_TOOL_AND_THE_PARSER",
+            "INCREMENTAL_COST": "ONE_POSTCONDITION_ONE_EXEMPTION_ONE_CALL",
+            "RELIABILITY": "EXEMPTION_WIDTH_EQUALS_TABLE_WIDTH",
+            "VERIFIABILITY": "FOUR_FORMATTER_TESTS_TWO_OF_THEM_PREVIOUSLY_RED",
+            "WALL_CLOCK": "UNDER_ONE_SECOND"
+          },
+          "evidence": [
+            "Door after: PASS with the file rewritten and re-checked; an already-formatted file still FAIL_CLOSED__NO_OBSERVED_EFFECT."
+          ],
+          "qualification_evidence": [
+            "direct probe: 29 write/formatter tests in 1.41 s; 22 door tests in 10.52 s"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T13:10:22Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "REFUSE_THE_STATED_EFFECT_THAT_NO_TABLE_CAN_NAME",
+      "max_age_hours": 24,
+      "negative_search_summary": "Both halves were already in the tree -- composer_route_v1's `^format` row and the acceptance layer's postcondition mechanism. A search outside the repository would have found nothing this tree did not already have.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "route a command whose effect is re-derived from disk"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "in-place formatter postcondition ruff format --check"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "write authority rule that permits an in-place edit"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "ruff format canonical form check exit code"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T13:10:22Z",
+        "execution_dependencies": [
+          {
+            "dependency": "ruff 0.17.3 on PATH (substrate-requirements.txt)",
+            "evidence": [
+              "DIRECT_PROBE: `ruff format --check` returned 0 on the rewritten file and 1 on the badly formatted one"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/raw_goal_trace_acceptance_v1.py + write_authority_v1.py + live_brain_route_admission_v1.py (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 29 write/formatter tests in 1.41 s; 22 door tests in 10.52 s; 333 ordinary-sentence tests with the same 12 pre-existing main failures"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "python3 ast module to re-parse the rewritten file",
+            "evidence": [
+              "DIRECT_PROBE: the postcondition parses the formatted file and refuses a file that no longer parses"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/declared_input_derivation_v1.py already computes start_line/end_line from a host function's statement runs (the extract-region block)",
+          "canonical/runtime/bound_capabilities/python_refactor_extract_function.py already performs the extraction and returns gate PASS given qualname=total and lines 3-4"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "modelcitizendeveloper survey 1.104.1: only LibCST, RedBaron and Bowler fully preserve formatting; Rope does text-based modification with partial round-trip fidelity"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/project/rope 1.15.0: 'the world's most advanced open source Python refactoring library', LGPL v3+, 'Most Python syntax up to Python 3.10 is supported'"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "github.com/Instagram/LibCST README: a CST that keeps all formatting details (comments, whitespace, parentheses), for automated refactoring"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "DELETE_THE_MAGNET_ROWS__MEASURED_TO_PRODUCE_FOUR_WRONG_ANSWERS",
+      "BUILD_A_SEPARATE_EFFECT_GATE__DUPLICATES_THE_EXISTING_TABLE",
+      "ADD_FOUR_CLASSES_TO_THE_EXISTING_TABLE__CHOSEN"
+    ],
+    "selected_route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+    "selected_surviving_route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+    "stop_condition": "STOP when every code-editing sentence with a postcondition reaches it through the door, and every sentence without one is refused by name.",
+    "why_selected_route_is_fastest_sufficient": "The composer row, the program and the acceptance mechanism all existed; the missing pieces were one table entry, one exemption with the same width as that table, and one call. No new dependency and no new primitive."
+  },
+  "route_id": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
+  "stop_condition": "STOP when every code-editing sentence with a postcondition reaches it through the door, and every sentence without one is refused by name.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T13:10:22Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "c8226a602ba1be0a52250fe2b1a576e7e9ab10fe",
+          "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py"
+        },
+        {
+          "git_blob_sha": "385dd777ea821df94b5596f9b37bf91f76da4d4b",
+          "path": "canonical/runtime/write_authority_v1.py"
+        },
+        {
+          "git_blob_sha": "3de0326db3400d087e6f2dc1b3e75dcfedc33394",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_A_PROGRAM_THE_ACCEPTANCE_LAYER_CAN_JUDGE_BE_BLOCKED_BY_THE_RULE_THAT_PROTECTS_SOURCES",
+      "falsifier_id": "FORMAT_A_FILE_AND_FIND_THE_DOOR_STILL_REFUSING",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_ADAPTER_ALREADY_EXTRACTS_THE_STATED_LOOP_WITH_GATE_PASS_WHEN_GIVEN_QUALNAME_total_AND_LINES_3_4__NOTHING_WAS_MISSING_BUT_THE_ORDER_OF_THE_TWO_ANSWERS_AND_NO_OTHER_REQUEST_IN_THE_49_CASE_CENSUS_CHANGED_VERDICT",
+      "proposal_id": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "One guard is narrowed by exactly the width of the postcondition table: a command may rewrite a file it names only when a postcondition re-derives that command's effect from disk. The 21 tests that pin the overwrite rule still pass, including the one where a report is written over its own source."
+}

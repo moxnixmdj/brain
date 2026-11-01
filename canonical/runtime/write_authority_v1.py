@@ -163,6 +163,32 @@ def cannot_perform_the_stated_change(goal: str, entry: Mapping[str, Any] | None,
                   or (entry or {}).get("id") or "UNNAMED"))
 
 
+def _rewrite_is_judged_from_disk(args: Mapping[str, Any]) -> bool:
+    """Will the acceptance layer RE-DERIVE this command's effect from the file on disk?
+
+    A formatter, an in-place substitution, a compressor: these rewrite the file they
+    name, and that is the whole job.  The rule below exists because a capability that
+    writes a REPORT over the source it read destroys the source; it was never a rule
+    that a tool may not edit the file it was asked to edit.  What separates the two is
+    not the slot name -- it is whether anything can check the result afterwards.
+
+    Measured 2026-11-01: ``Format <file>`` bound ``output_path=<file>`` and
+    ``read_as=argv`` and was refused here, so the one sentence this repository has a
+    postcondition for (`_post_ruff_format`, which re-runs ``ruff format --check``) could
+    not be executed at all.  The exemption is exactly as wide as the postcondition
+    table: a program with no entry there gets no exemption.
+    """
+    argv = args.get("argv") or []
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return False
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+    except Exception:  # noqa: BLE001 - no table, no exemption
+        return False
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    return program in _accept._MUTATING_POSTCONDITIONS
+
+
 def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -> str | None:
     """Return a refusal reason when this action would overwrite a file it reads.
 
@@ -181,6 +207,8 @@ def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -
     """
     root = pathlib.Path(root).resolve()
     if is_source_transformer(capability_id):
+        return None
+    if _rewrite_is_judged_from_disk(args):
         return None
     destinations: list[tuple[str, pathlib.Path]] = []
     for slot in OUTPUT_SLOTS:
