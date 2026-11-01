@@ -281,6 +281,52 @@ def _verdict(n: int, skill: float, discrimination: float, overconfidence: float,
     return "CALIBRATED", "BEATS_BASE_RATE_AND_SEPARATES_OUTCOMES"
 
 
+# ---------------------------------------------------------------------------
+# The gate: a measured overconfidence must cost something.
+#
+# A score that is recorded and never obeyed is a dashboard, not a self-model. So the acceptance
+# path asks this module before it accepts anything, and a measured SYSTEMATICALLY_OVERCONFIDENT
+# ledger refuses.
+#
+# Two properties keep that honest:
+#   * the refusal is a function of evidence, so it lifts when the evidence changes -- there is no
+#     flag to set and no threshold to widen;
+#   * the gate always reports its own state, including when it does not refuse. A silent pass is
+#     indistinguishable from a gate that never ran, which is the defect this tree has been repairing
+#     all along.
+# ---------------------------------------------------------------------------
+
+GATE_STATES = (
+    "UNAVAILABLE",            # the ledger could not be read; acceptance proceeds, and says so
+    "INSUFFICIENT_EVIDENCE",  # not enough settled predictions to have an opinion
+    "NO_MEASURED_OVERCONFIDENCE",
+    "MEASURED_OVERCONFIDENCE",
+)
+
+
+def gate(path: pathlib.Path | str | None = None) -> dict[str, Any]:
+    """Decide whether a measured overconfidence should refuse acceptance right now."""
+    try:
+        report = score(Ledger(path).settled_rows())
+    except Exception as exc:  # a broken ledger must not brick acceptance, but must say so
+        return {"schema": SCHEMA, "state": "UNAVAILABLE", "refuse": False,
+                "reason": f"LEDGER_UNREADABLE:{type(exc).__name__}"}
+    state = "MEASURED_OVERCONFIDENCE" if report["verdict"] == "SYSTEMATICALLY_OVERCONFIDENT" \
+        else "NO_MEASURED_OVERCONFIDENCE"
+    if report["verdict"] == "INSUFFICIENT_EVIDENCE":
+        state = "INSUFFICIENT_EVIDENCE"
+    return {
+        "schema": SCHEMA,
+        "state": state,
+        "refuse": state == "MEASURED_OVERCONFIDENCE",
+        "reason": report["reason"],
+        "verdict": report["verdict"],
+        "n": report.get("n"),
+        "overconfidence": report.get("overconfidence"),
+        "hard_fraction": report.get("hard_fraction"),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--ledger", default=str(DEFAULT_LEDGER))
