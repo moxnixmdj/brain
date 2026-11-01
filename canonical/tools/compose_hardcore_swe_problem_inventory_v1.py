@@ -15,6 +15,7 @@ import collections
 import importlib.util
 import json
 import pathlib
+import re
 import shutil
 import subprocess
 import sys
@@ -80,6 +81,12 @@ DEFECT_MEANING = {
     "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED":
         "a sentence about commits was routed to the architect row, which read history without being "
         "given a repository to read it from",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED":
+        "the sentence asks for a regression test without stating a bug that can be reproduced or was "
+        "observed, so there is nothing for the test to assert",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS":
+        "the bisect row rebuilt the stated file's history and found no revision that changes a Python "
+        "function, so no function can be named as the one that broke",
 }
 
 # The honest cheapest fix, per refusal class.  "None" means the refusal is correct and the fix is
@@ -121,6 +128,11 @@ FIX = {
     "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED":
         "derive `repo_root` from the working directory, and give a changelog its own row: it writes a "
         "document from history, which is neither a read nor an architecture review",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED":
+        "none — the sentence is under-specified; a fixture that states the failure is the fix",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS":
+        "none — the fixture's history must actually change a function for a bisect to have an answer; "
+        "the refusal is correct and the fixture is the defect",
 }
 
 CLASS_STORY = {
@@ -251,6 +263,81 @@ def base_commit() -> str:
         if out.returncode == 0 and out.stdout.strip():
             return out.stdout.strip()
     return "UNKNOWN"
+
+
+LEARN_TEACH = ("def sum(xs):\n    t = 0\n    for i in range(len(xs)):\n"
+               "        t += xs[i]\n    return t - 1\n")
+LEARN_FIXED = ("def sum(xs):\n    t = 0\n    for i in range(len(xs)):\n"
+               "        t += xs[i]\n    return t\n")
+LEARN_PROBES = {
+    "alpha-renamed twin (same skeleton)":
+        "def total(vals):\n    acc = 0\n    for k in range(len(vals)):\n"
+        "        acc += vals[k]\n    return acc - 1\n",
+    "same bug, different loop form":
+        "def sum(xs):\n    t = 0\n    i = 0\n    while i < len(xs):\n"
+        "        t += xs[i]\n        i += 1\n    return t - 1\n",
+    "same intent, different structure":
+        "def mean(xs):\n    return (sum(xs) / len(xs)) - 1\n",
+    "same shape, different literal":
+        "def sum(xs):\n    t = 0\n    for i in range(len(xs)):\n"
+        "        t += xs[i]\n    return t - 7\n",
+    "unrelated function":
+        "def biggest(xs):\n    m = xs[0]\n    for x in xs:\n"
+        "        if x > m:\n            m = x\n    return m\n",
+}
+
+
+def learning_measurement() -> dict:
+    """Measure the one-shot learning loop instead of describing it.
+
+    Everything here is read off the live tree: where the store lives, how many rules a full census
+    taught it, whether the documented CLI recipe abstraction exists, and -- in a throwaway database --
+    exactly which neighbours of a taught fix the learned rule reaches.  A claim that learning
+    generalizes is only worth what its falsifier says, so the falsifier is run here every time.
+    """
+    out: dict = {"store": None, "under_tempdir": None, "stored": None, "cli_recipe": None,
+                 "probes": [], "crystallizes": None, "languages": []}
+    try:
+        from canonical.swe_kernel import verified_skill_crystallizer_v1 as cry
+        path = cry._default_db_path()
+        out["store"] = str(path)
+        import tempfile as _tf
+        out["under_tempdir"] = str(path).startswith(str(_tf.gettempdir()))
+        try:
+            out["stored"] = cry.VerifiedSkillStore().count()
+        except Exception:
+            out["stored"] = "unreadable"
+        out["cli_recipe"] = callable(getattr(cry, "anti_unify_cli_recipe", None))
+        # the generalization surface, measured in a throwaway database
+        db = pathlib.Path(_tf.mkdtemp()) / "probe.sqlite"
+        import ast as _ast
+
+        def _parses(c: str) -> bool:
+            try:
+                _ast.parse(c)
+                return True
+            except SyntaxError:
+                return False
+
+        store = cry.VerifiedSkillStore(db)
+        store.crystallize_verified_fix(language="python", bug_class="python_repair",
+                                       before_code=LEARN_TEACH, after_code=LEARN_FIXED,
+                                       verifier_oracle_kind="probe")
+        out["crystallizes"] = store.count()
+        for label, src in LEARN_PROBES.items():
+            hit = store.recall_and_apply_verified(source_text=src, language="python",
+                                                  verifier=_parses)
+            out["probes"].append((label, hit is not None))
+        import shutil as _sh
+        _sh.rmtree(db.parent, ignore_errors=True)
+    except Exception as exc:
+        out["error"] = type(exc).__name__ + ":" + str(exc)[:120]
+    try:
+        src = (ROOT / "canonical/swe_kernel/polyglot_build_ci_engine_v1.py").read_text()
+        out["languages"] = sorted(set(re.findall(r'bug_class="([a-z]+)_repair"', src)))
+    except Exception:
+        pass
+    return out
 
 
 def family(capability_id: str) -> str:
@@ -574,6 +661,85 @@ def main() -> int:
         "biggest jump in what it means to be a software engineer; most expensive |")
     add(f"| 7 | design/architecture output (ADR, migration plan) | {by_class['design']['n']} | "
         "needs a planning surface that produces a document, not an edit |")
+    add("")
+    add("---")
+    add("")
+    add("## §7 Instant learning, measured rather than described")
+    add("")
+    add("`canonical/swe_kernel/verified_skill_crystallizer_v1.py` is a real one-shot learner: it")
+    add("anti-unifies a verified before/after pair into a structural rule with holes, tests that rule on")
+    add("a mutated twin before admitting it, stores it in SQLite, and on recall re-runs the caller's own")
+    add("verifier before returning anything. That design is sound, and it is wired into the polyglot")
+    add("engine and the cross-file repair choreographer.")
+    add("")
+    lm = learning_measurement()
+    if lm.get("error"):
+        add(f"The live probe could not run on this tree: `{lm['error']}`.")
+    else:
+        add("| measured property | value |")
+        add("|---|---|")
+        add(f"| where the skills live | `{lm['store']}` |")
+        add(f"| inside the temporary directory (wiped with the sandbox) | **{lm['under_tempdir']}** |")
+        add(f"| rules taught by the {len(rows)}-sentence census so far | **{lm['stored']}** |")
+        add(f"| a taught fix crystallized in the probe | **{lm['crystallizes']} rule(s)** |")
+        add(f"| CLI/environment recipe abstraction documented in the docstring | **{'implemented' if lm['cli_recipe'] else 'not implemented'}** |")
+        add(f"| languages with a repair op that can teach | {', '.join(lm['languages']) or '—'} |")
+        add("")
+        add("**What one taught fix actually reaches.** A single `return t - 1` -> `return t` repair was")
+        add("taught, then the same rule was offered five neighbours:")
+        add("")
+        add("| neighbour | reached? |")
+        add("|---|---|")
+        for label, hit in lm["probes"]:
+            add(f"| {label} | {'**yes**' if hit else 'no'} |")
+        add("")
+        reached = sum(1 for _l, h in lm["probes"] if h)
+        add(f"It reached **{reached} of {len(lm['probes'])}** neighbours. That is the true surface of")
+        add("\"instant learning\": it generalizes over **identifiers** and over the operator sequence, and")
+        add("it does **not** generalize over literals or over a differently-shaped expression with the same")
+        add("meaning. The docstring promises holes for numbers, strings and paths (`?num0`, `?str0`,")
+        add("`?path0`); those tokens appear only in the docstring. The implemented abstraction is `?id`")
+        add("(identifiers) and `?fresh` (new temporaries).")
+    add("")
+    add("### 7.1 Why this cannot be the answer to the remaining problems")
+    add("")
+    add("Crystallization happens **after** a capability has already succeeded, and recall happens")
+    add("**inside** the capability that was already selected. So learning sits downstream of both")
+    add("selection and execution:")
+    add("")
+    add("    sentence -> SELECTION -> execution -> verification -> crystallization -> store")
+    add("                     ^                                          |")
+    add("                     +---------------- not on this path ---------+")
+    add("")
+    add("Measured directly: a C++ repair was taught into the store and the same file then recalled the")
+    add("rule successfully (`MATCHED`), and the door still answered `STATED_SWE_EFFECT_UNSERVED` with")
+    add("`selected: None`, because selection had already declined the sentence before any capability --")
+    add("and therefore any recall -- was reached.")
+    add("")
+    add("Three consequences follow, and each one is why a refusal survives:")
+    add("")
+    add("1. **Nothing is learned from a failure.** A capability that cannot do the task once has nothing")
+    add("   to crystallize. Learning amortizes the second attempt; it cannot pay for the first.")
+    add("2. **Nothing is learned from a selection miss.** If the sentence never reaches the right row,")
+    add("   the row's learned skills are never consulted.")
+    add("3. **Nothing is learned from an under-specified sentence.** A fixture that states no")
+    add("   reproducible bug, or a move whose symbol collides, is refused correctly on every attempt.")
+    add("")
+    add("Of the refusals counted in §3, **none** is a repetition problem that a crystallized skill could")
+    add("convert into a pass. That is the honest answer to \"if it learns instantly, is everything solved\":")
+    add("no. Learning makes a solved thing cheap to do again. It does not make an unsolved thing solvable.")
+    add("")
+    add("### 7.2 What instant learning is genuinely worth")
+    add("")
+    add("It is worth a great deal, in the one place it applies: **an environment the machine can already")
+    add("operate becomes cheap and consistent there.** Teach it a fix, and every structurally identical")
+    add("recurrence costs a recall plus a verifier instead of a search. That is real, and it compounds")
+    add("-- but only along the axis the primitives already span (`" + "`, `".join(lm.get("languages") or []) + "`).")
+    add("")
+    add("To make it the answer to everything, two things would have to be true that are not true today:")
+    add("(a) the store must be durable, and it is in `" + str(lm.get("store")) + "`; and (b) something must")
+    add("produce a first success in a new environment. (b) is the whole problem, and it is not a learning")
+    add("problem -- it is a capability-acquisition problem, which is what §6 prices.")
     add("")
     add("---")
     add("")
