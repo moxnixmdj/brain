@@ -30926,7 +30926,7 @@
   "engines": 26,
   "knowledge_documents": 234,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6592,
+  "research_index_records": 6593,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30935,7 +30935,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4b86582a7047d23762bbd3959fa5dc885f8e82e5da5fa949cd78fe085e672a58"
+  "value": "f0d6eb29a81707e0e88069d981022937349a117ab6e8b7dcbf8fd491027f01f1"
  },
  "engines": [
   {
@@ -206400,6 +206400,51 @@
    }
   },
   {
+   "action_id": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "25f37f5984c78177d579dd0d52db5d70e2814d96e89b5ca2b99fa7e1d346037e",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_rename_is_proved_by_the_file_it_names_v1_20261101_v1": 2,
+    "about": 1,
+    "all": 1,
+    "already": 1,
+    "ast": 1,
+    "before": 2,
+    "beside": 1,
+    "bind": 1,
+    "binder": 1,
+    "both": 1,
+    "but": 1,
+    "compiles": 1,
+    "contain": 2,
+    "decided": 1,
+    "edit": 2,
+    "file": 4,
+    "function": 3,
+    "identifier": 2,
+    "name": 3,
+    "names": 3,
+    "not": 3,
+    "noun": 2,
+    "only": 2,
+    "parameter": 4,
+    "reading": 2,
+    "rename": 5,
+    "same": 2,
+    "sentence": 3,
+    "symbol": 2,
+    "v1": 2,
+    "whether": 2
+   }
+  },
+  {
    "action_id": "A_REPAIR_IS_AN_EDIT_AND_A_REFEREE_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -235971,7 +236016,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "ec4e3aa5ca4e471e3867b7c19564281ccb58120fbbadbed5e7648a3e5095b7ac",
+   "sha256": "4d1c15b4055881ac1538e72ff902cdb1de38c69de402d7152e6e2e681ea27a56",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [
@@ -243856,7 +243901,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "f21a913c0ad0711a6cd838cb4ff21aec51e8ef30f451e8d7fa422064a32b3bb7",
+   "sha256": "4b8cd371c3116b469b6c375ee0ecc6c7b891abbd796c7bad50e33ea71c63487c",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 81,
    "symbols": [

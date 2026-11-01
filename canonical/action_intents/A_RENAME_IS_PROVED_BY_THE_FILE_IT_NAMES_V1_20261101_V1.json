@@ -1,0 +1,472 @@
+{
+  "action_id": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+  "action_intent_id": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Two rename rows declare the same verb and tie on the sentence's lexical evidence, so only the file can say which object is being renamed. Measured on main 573e735b, in the repository: \"Rename old_name to new_name in <file>.\" -- where old_name is a def in that file -- was answered FAIL__RAW_GOAL_COMPILATION_GAP with the selected row python.refactor.rename_parameter.v1 and old_param:not_stated, while the identical edit with the words \"the function\" PASSED. The noun was doing work no noun should do. The mirror shape was worse: \"Rename text to value in <file>.\", where text is a PARAMETER of norm, PASSED with python.refactor.rename_symbol.v1 and left \"def value(text, scale=1)\" -- the function's public name changed and the parameter kept its own. declared_input_derivation_v1 now proves both readings against the stated file's AST (QUALNAME_PROVED_FROM_STATED_SOURCE_AST for a def, PARAM_PROVED_FROM_STATED_SOURCE_AST for a parameter) and proves neither when the file does not contain the name. Measured after: all four rename shapes PASS with the right object and \"Rename nothing_here to something in <file>.\" still refuses.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The front binder could only tell a symbol rename from a parameter rename by the noun the sentence puts before the name (\"the function\" / \"the parameter\"). A rename states its old name by POSITION -- the identifier before \"to\" -- and the stated file's AST already says whether that identifier is a def or a parameter, but `declared_input_derivation_v1` only took the symbol reading from names beside the word \"function\", and it let the parameter row's host-function reading (`qualname`) bind for rows that do not edit parameters at all.",
+  "canonical_base_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The front binder could only tell a symbol rename from a parameter rename by the noun the sentence puts before the name (\"the function\" / \"the parameter\"). A rename states its old name by POSITION -- the identifier before \"to\" -- and the stated file's AST already says whether that identifier is a def or a parameter, but `declared_input_derivation_v1` only took the symbol reading from names beside the word \"function\", and it let the parameter row's host-function reading (`qualname`) bind for rows that do not edit parameters at all.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/runtime/declared_input_derivation_v1.py: the rename pair's OLD name is proved against the stated file's AST for the symbol reading (`qualname`) and, symmetrically, for the parameter reading (`old_param`), and the parameter-host reading of `qualname` is confined to rows that declare a parameter slot. canonical/runtime/goal_front_compiler_v1.py: PARAM_PROVED_FROM_STATED_SOURCE_AST joins the rules a front binding may rest on, because its value is checked against the tree.",
+  "expected_parent_frontier_change": "The object a rename sentence is about is decided by the file it names, not by whether the sentence happens to contain the noun \"function\": the same edit compiles the same way in both phrasings, and a name the file does not contain proves nothing.",
+  "explicit_user_authorization": "Owner instruction this session: hardcore software engineering only, all the hardcore SWE problems listed with measurements; the answers already exist in the tree so wire what is there rather than invent; do the optimal thing in the fastest way and only the right way; report honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+  "falsification_condition": "FALSIFIED if either rename shape is answered by the wrong object, if a defineable symbol is again reported as FAIL__RAW_GOAL_COMPILATION_GAP for want of the word \"function\", or if an undefined name is bound.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_RENAME_NOW_CHANGES_THE_OBJECT_THE_FILE_PROVES_INSTEAD_OF_WHICHEVER_OBJECT_THE_SENTENCE_HAPPENED_TO_NAME",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "BEFORE (pristine main 573e735b, same fixture): param-no-noun PASS via rename_symbol -> 'def value(text, scale=1)' (wrong object, reported as success); param-noun PASS correct; symbol-no-noun FAIL__RAW_GOAL_COMPILATION_GAP (rename_parameter:old_param:not_stated); symbol-noun PASS correct; undefined FAIL (correct). AFTER: param-no-noun PASS via rename_parameter -> 'def norm(value, scale=1)'; param-noun unchanged; symbol-no-noun PASS via rename_symbol -> 'def new_name(x)'; symbol-noun unchanged; undefined still FAIL__RAW_GOAL_COMPILATION_GAP. Regressions: 21 rename/derivation tests pass, the 6 pre-existing door failures and 2 pre-existing rename-plan failures are identical on both trees, and the 28-sentence surface census reads 28/28 twice.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/declared_input_derivation_v1.py (QUALNAME_PROVED_FROM_STATED_SOURCE_AST)",
+    "canonical/runtime/live_brain_route_admission_v1.py (the object-role rule and its slot vocabulary)",
+    "canonical/runtime/capability_selection_retrieval_v1.py (PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT)"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "573e735bd73fab444f608d9e8f762a6a3012472e",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_NOUN_AS_THE_ONLY_PROOF_OF_WHAT_IS_BEING_RENAMED",
+      "A_PARAMETER_READING_AVAILABLE_TO_ROWS_THAT_DO_NOT_EDIT_PARAMETERS",
+      "A_FAILED_COMPILE_WHERE_THE_FILE_ALREADY_ANSWERS"
+    ],
+    "expected_parent_level_state_change": "The object a rename sentence is about is decided by the file it names, not by whether the sentence happens to contain the noun \"function\": the same edit compiles the same way in both phrasings, and a name the file does not contain proves nothing.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "GENERAL__ANY_SENTENCE_WHOSE_OBJECT_IS_NAMED_BY_POSITION_AND_WHOSE_FILE_ALREADY_SAYS_WHAT_IT_IS",
+      "delete_bypass_substitute_options": "DELETING_THE_NOUNLESS_PATH_RESTORES_THE_REFUSAL_THAT_THE_FILE_ALREADY_ANSWERS",
+      "surviving_causal_blocker": "THE_PROOF_WAS_GRAMMAR_SHAPED_INSTEAD_OF_FILE_PROVED"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "declared_input_derivation_v1.QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+        "live_brain_route_admission_v1.stated_object_roles / declared_object_roles",
+        "capability_selection_retrieval_v1 PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT",
+        "the existing parameter-host reading (wanted_param) in the qualname block"
+      ],
+      "external_existing_routes_checked": "None needed: the file's own AST is the authority, and it is already parsed by the derivation layer.",
+      "capability_work_deleted": "NO_NEW_MODULE__TWO_PROOFS_AND_ONE_SCOPE_FENCE_IN_THE_DERIVATION_LAYER",
+      "surviving_gap": "NONE_FOR_THIS_SHAPE__both nounless phrasings now reach the right row and an undefined name still refuses"
+    },
+    "obs_goal": {
+      "real_outcome": "An ordinary rename sentence is completed correctly whether or not it names the object's kind.",
+      "proxy_goals_deleted": [
+        "PASSING_BY_CHANGING_SOMETHING_IN_THE_NAMED_FILE",
+        "REQUIRING_A_MAGIC_WORD"
+      ],
+      "surviving_necessity": "A rename that changes the wrong public name is worse than a refusal: the caller's next step depends on the name they asked for."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_DERIVATION_LAYER_THAT_ALREADY_PARSES_THE_STATED_FILE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "FIVE_CASE_MATRIX_AND_THE_TEST_FAMILIES_RUN_ONCE_BEFORE_AND_AFTER",
+      "search_stop_decision": "STOPPED_WHEN_THE_DERIVATION_PRINT_SHOWED_QUALNAME_WAS_PROVED_WITH_THE_NOUN_AND_NOT_WITHOUT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Requiring the noun keeps a correct sentence refused; asking a model spends a dependency on a fact the AST already holds. Both were rejected by measurement.",
+      "routes_ranked": [
+        {
+          "route": "REQUIRE_THE_NOUN_AND_REFUSE_THE_NOUNLESS_SENTENCE__THE_NOUN_IS_NOT_A_FACT_ABOUT_THE_FILE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NEGATIVE",
+            "CORRECTNESS": "REFUSES_A_SENTENCE_THE_FILE_ANSWERS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "SAME",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "Measured: the identical edit passes with the noun and is a compilation gap without it."
+          ],
+          "qualification_evidence": [
+            "direct probe: symbol-no-noun FAIL__RAW_GOAL_COMPILATION_GAP on 573e735b"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "ASK_A_MODEL_WHICH_OBJECT_IS_MEANT__MODEL_DEPENDENCY_FOR_A_FACT_THE_AST_ALREADY_HOLDS",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "PROBABILISTIC",
+            "INCREMENTAL_COST": "A_MODEL_CALL",
+            "RELIABILITY": "NON_DETERMINISTIC",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "SLOWER"
+          },
+          "evidence": [
+            "The repository's standing rule is model dependency 0 for facts the tree already proves."
+          ],
+          "qualification_evidence": [
+            "direct probe: the AST decides all five cases deterministically"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "CLOSES_BOTH_DIRECTIONS",
+            "CORRECTNESS": "FILE_PROVED",
+            "INCREMENTAL_COST": "TWO_PROOFS_ONE_FENCE",
+            "RELIABILITY": "DETERMINISTIC",
+            "VERIFIABILITY": "SEVEN_TESTS_AND_THE_CENSUS",
+            "WALL_CLOCK": "NO_MEASURABLE_CHANGE"
+          },
+          "evidence": [
+            "After: both nounless shapes PASS with the right object; an undefined name still refuses."
+          ],
+          "qualification_evidence": [
+            "direct probe: 7 new tests in 0.8 s (6 red before), 21 rename/derivation tests, census 28/28 twice"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_TESTS_READ_THE_REAL_FILE_AFTER_THE_REAL_ADAPTER_RAN"
+    },
+    "real_outcome": "A rename sentence is completed on the object the file proves it is about, in either phrasing, and the machine stops reporting a wrong-object edit as a success.",
+    "required_capability": "Decide which object a rename is about from the stated file, not from the sentence's noun.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "route": "REQUIRE_THE_NOUN_AND_REFUSE_THE_NOUNLESS_SENTENCE__THE_NOUN_IS_NOT_A_FACT_ABOUT_THE_FILE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NEGATIVE",
+            "CORRECTNESS": "REFUSES_A_SENTENCE_THE_FILE_ANSWERS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "SAME",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "Measured: the identical edit passes with the noun and is a compilation gap without it."
+          ],
+          "qualification_evidence": [
+            "direct probe: symbol-no-noun FAIL__RAW_GOAL_COMPILATION_GAP on 573e735b"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "ASK_A_MODEL_WHICH_OBJECT_IS_MEANT__MODEL_DEPENDENCY_FOR_A_FACT_THE_AST_ALREADY_HOLDS",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "PROBABILISTIC",
+            "INCREMENTAL_COST": "A_MODEL_CALL",
+            "RELIABILITY": "NON_DETERMINISTIC",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "SLOWER"
+          },
+          "evidence": [
+            "The repository's standing rule is model dependency 0 for facts the tree already proves."
+          ],
+          "qualification_evidence": [
+            "direct probe: the AST decides all five cases deterministically"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "CLOSES_BOTH_DIRECTIONS",
+            "CORRECTNESS": "FILE_PROVED",
+            "INCREMENTAL_COST": "TWO_PROOFS_ONE_FENCE",
+            "RELIABILITY": "DETERMINISTIC",
+            "VERIFIABILITY": "SEVEN_TESTS_AND_THE_CENSUS",
+            "WALL_CLOCK": "NO_MEASURABLE_CHANGE"
+          },
+          "evidence": [
+            "After: both nounless shapes PASS with the right object; an undefined name still refuses."
+          ],
+          "qualification_evidence": [
+            "direct probe: 7 new tests in 0.8 s (6 red before), 21 rename/derivation tests, census 28/28 twice"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "checked_at_utc": "2026-11-01T14:42:27Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "REQUIRE_A_NOUN_IN_THE_SENTENCE_TO_KNOW_WHICH_OBJECT_IS_RENAMED",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external engine and no new primitive: the proof reads the same AST the derivation layer already parses.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "refuse a write that destroys source"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "post-condition on bytes written by an adapter"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "python ast distinguish module from expression"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "restore preimage on destruction"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T14:42:27Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib (ast, pathlib)",
+            "evidence": [
+              "DIRECT_PROBE: the module-vs-expression test was run on the real report bytes and on a real module"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/write_authority_v1.py + live_brain_route_admission_v1.py (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 25 write tests, 18 door/formatter tests, census 28/28"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the adapters themselves, unchanged",
+            "evidence": [
+              "DIRECT_PROBE: the census exercises the editing rows end to end"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "declared_input_derivation_v1: QUALNAME_PROVED_FROM_STATED_SOURCE_AST (a def in the stated file)",
+          "declared_input_derivation_v1: the parameter-host reading (wanted_param) already computed for the qualname key"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "docs.python.org/3/library/ast.html: FunctionDef.args is the declared parameter list of a def"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "CPython's own symbol table (symtable) distinguishes a module-scope definition from a function parameter the same way"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Jedi and rope resolve a rename target by walking the parsed scope tree, not by the sentence around it"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REQUIRE_THE_NOUN_AND_REFUSE_THE_NOUNLESS_SENTENCE__THE_NOUN_IS_NOT_A_FACT_ABOUT_THE_FILE",
+      "ASK_A_MODEL_WHICH_OBJECT_IS_MEANT__MODEL_DEPENDENCY_FOR_A_FACT_THE_AST_ALREADY_HOLDS",
+      "PROVE_THE_OBJECT_FROM_THE_STATED_FILE__CHOSEN"
+    ],
+    "selected_route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+    "selected_surviving_route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+    "stop_condition": "STOP when both rename shapes reach the row that edits the object the file proves, with or without the noun, a name the file does not define still refuses, and no test changes verdict.",
+    "why_selected_route_is_fastest_sufficient": "The proof already existed for one direction -- QUALNAME_PROVED_FROM_STATED_SOURCE_AST reads the stated file's definitions -- and the parameter row's host-function reading was already computed; the change adds the mirror proof for a parameter and confines each reading to the rows that can act on it. No new module, no model, no per-sentence list."
+  },
+  "route_id": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+  "stop_condition": "STOP when both rename shapes reach the row that edits the object the file proves, with or without the noun, a name the file does not define still refuses, and no test changes verdict.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T14:42:27Z",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "A_RENAME_IS_PROVED_BY_THE_FILE_IT_NAMES_V1_20261101_V1",
+      "decisive_question": "MAY_A_RENAME_BE_ANSWERED_ON_THE_WRONG_OBJECT_BECAUSE_THE_SENTENCE_OMITS_A_NOUN",
+      "falsifier_id": "RUN_FIVE_RENAME_SHAPES_ON_A_STATED_FILE_AND_READ_WHICH_OBJECT_CHANGED",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FOUR_OF_FOUR_RENAME_SHAPES_REACHED_THE_RIGHT_ROW_AND_AN_UNDEFINED_NAME_STILL_REFUSED",
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/declared_input_derivation_v1.py",
+          "git_blob_sha": "0c6771e2e75af7c1522682622a8e2ea31e08bfcb"
+        },
+        {
+          "path": "canonical/runtime/goal_front_compiler_v1.py",
+          "git_blob_sha": "6d082712a2b496926c0f7d21095f1492d3271ae0"
+        }
+      ]
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The object-role rule keeps refusing a stated noun against a row that edits a different kind of object; this adds the reading the rule could not express when no noun is stated, and confines a parameter-only reading to parameter rows.",
+  "progress_evidence_paths": [
+    "canonical/runtime/declared_input_derivation_v1.py",
+    "canonical/tests/test_a_rename_is_proved_by_the_file_it_names_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ]
+}
