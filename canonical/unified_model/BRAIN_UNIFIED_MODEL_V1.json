@@ -24160,7 +24160,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "71a31b6484e85b944e8653443aec6de7630fa7f7765c91cab002898cc71abd28",
+    "source_sha256": "9e5c69564e1f52a63ffbc5132d3b1b7f9807cbf31d4a3b0cb57a5317165b1273",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -30926,7 +30926,7 @@
   "engines": 26,
   "knowledge_documents": 234,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6591,
+  "research_index_records": 6592,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30935,7 +30935,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2712061b6892e5e1c8a8772db1232834b5806e4e78ccfd2c097adce8e8bbf4c7"
+  "value": "4b86582a7047d23762bbd3959fa5dc885f8e82e5da5fa949cd78fe085e672a58"
  },
  "engines": [
   {
@@ -61032,7 +61032,7 @@
   "included_source_count": 1028,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "05fd60f48d72a9b441baa9b2af8b745c9c200b4969765605c2bf92b9d12b3e10"
+  "source_tree_digest": "300fda9ec763d924097e4843b79bc8c264739c321ccbf96f3df9f5af7a50ff3e"
  },
  "research_index": [
   {
@@ -207864,6 +207864,51 @@
     "so": 2,
     "v1": 2,
     "variant": 2
+   }
+  },
+  {
+   "action_id": "A_VERIFICATION_RUN_LEAVES_NO_BYTECODE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_VERIFICATION_RUN_LEAVES_NO_BYTECODE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_VERIFICATION_RUN_LEAVES_NO_BYTECODE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9fddb2a841738d2eec3c7be153b4d0fb6faea34bbee9bc64a84649d48a9abcec",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_verification_run_leaves_no_bytecode_v1_20261101_v1": 2,
+    "about": 1,
+    "adapter": 1,
+    "adapters": 1,
+    "ambient": 1,
+    "answered": 1,
+    "both": 1,
+    "bytecode": 2,
+    "bytes": 1,
+    "caller": 1,
+    "child": 1,
+    "copy": 1,
+    "declared": 1,
+    "definition": 1,
+    "else": 1,
+    "env": 1,
+    "environment": 3,
+    "equal-size": 2,
+    "exactly": 1,
+    "extra_env": 1,
+    "facts": 1,
+    "file": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inherited": 1,
+    "inside": 1,
+    "no": 4,
+    "passed": 2,
+    "source": 2,
+    "tree": 2,
+    "v1": 2,
+    "whichever": 2
    }
   },
   {
