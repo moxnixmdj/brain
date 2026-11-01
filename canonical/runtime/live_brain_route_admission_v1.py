@@ -1297,6 +1297,17 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=tool_executed)
+        # THE SECOND SPELLING OF THE SAME REFUSAL: ``RuntimeError("GUARD_KEY:detail")``.
+        # A guard key is the repository's own vocabulary for "I read the request and refused it";
+        # reporting it as LIVE_CONTROLLER_EXECUTION told the caller the machine had broken when it
+        # had answered.  Measured 2026-11-01: 7 of 13 census refusals were exactly this.
+        if type(exc) is RuntimeError and _ADAPTER_REFUSAL_KEY_RE.match(str(exc).strip()):
+            _why = str(exc).strip()[:200]
+            return _fail(task_id, "FAIL_CLOSED__CAPABILITY_REFUSED_" + _why.split(":")[0][:60],
+                         "CAPABILITY_REFUSED:" + _why, started, executed=True,
+                         compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         refusal_payload={"error": True, "capability": str(selected), "reason": _why},
+                         executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
         # "IT ALREADY PASSES" IS AN ANSWER, AND IT IS THE ONE THE REPAIR LOOP ALREADY COMPUTED.
         #
         # Every repair adapter refuses with ``BASELINE_ALREADY_PASSES`` when the named test passes
@@ -4282,6 +4293,22 @@ _REFUSAL_CLASS_EXCLUDED = frozenset({"ACTION_EXPECTATION_FAILED"})
 
 _ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|NOTHING_TO_DO",
                                    re.IGNORECASE)
+
+# AN ADAPTER'S REFUSAL KEY IS A REFUSAL, NOT A CRASH.
+#
+# The adapters refuse in two spellings.  One is ``raise SystemExit(json.dumps({"error": True,
+# "reason": ...}))`` and the door parses it.  The other is ``raise RuntimeError("SOME_KEY:detail")``
+# -- the repository's own SCREAMING_SNAKE guard convention, used by the polyglot engine
+# (POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM), the symbol mover (TARGET_SYMBOL_COLLISION:add),
+# the diagnosis row (DIAGNOSE_ARCHITECT_REFUSED:...) and git (NOT_A_GIT_REPOSITORY:.).  Only the
+# first was classified, so a capability that had ANSWERED was reported as
+# ``FAIL__LIVE_CONTROLLER_EXECUTION`` -- the status of an adapter bug, byte-identical to a crash.
+# Measured 2026-11-01 on the 49-sentence advanced census (main 6aa5dab): 7 of the 13 refusals were
+# this shape, and every one of them named its cause in the exception the door then discarded.
+#
+# Only a RuntimeError whose WHOLE message is a key (optionally ``:detail``) qualifies, so a
+# traceback text or a free-form message keeps its crash classification.
+_ADAPTER_REFUSAL_KEY_RE = re.compile(r"^[A-Z][A-Z0-9_]{3,}(?::[^\n]{0,300})?$")
 
 _COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED",
                                           "STEP_RAISED_OUTCOME_UNKNOWN",
