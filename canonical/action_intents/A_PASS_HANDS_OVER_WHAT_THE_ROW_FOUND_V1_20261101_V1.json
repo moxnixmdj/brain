@@ -7,7 +7,7 @@
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+ "canonical_base_commit": "56f4361347d0af633bd7ea581bf5c5d929203e5e",
  "date": "2026-10-31",
  "intent": "Hand over what the row found when the sentence names no collection: the result surface ranked by the sentence's own words, and a named answer lifted verbatim. No verdict changes.",
  "causal_blocker": "A PASS hands the caller nothing. Measured 2026-11-01 on 34124aa by re-running the repository's own 49-sentence advanced census and its 54-case capability matrix and recording the one field neither instrument records (answer): the census serves 34 of 49 and ONE of the 34 delivered an answer; the matrix is 42 of 54 REAL and FIVE of the 42 delivered one. Seventy of the 77 passing executions wrote a report to output_path holding the answer -- hot_spot_function, root_causes, findings, vulnerabilities, migration_steps, adr_markdown, test_evidence -- and the door read none of them, because answer_shape_v1.asked() recognises thirteen nouns and every other sentence fell through 'shape is None' to 'return []'. The work was done, the row named its findings, and the caller was told nothing.",
@@ -31,7 +31,7 @@
  "user_authorized_governance_change": false,
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "load_bearing_primary": {
-  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "canonical_base_commit": "56f4361347d0af633bd7ea581bf5c5d929203e5e",
   "open_obligation_ids": [],
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
@@ -81,7 +81,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "canonical_base_commit": "56f4361347d0af633bd7ea581bf5c5d929203e5e",
   "real_outcome": "Every PASS now hands over what its row found, without inventing anything. Census: 34 of 34 served sentences deliver an answer (was 1 of 34) -- 'Profile X and tell me which function is the hot spot' -> hot_spot_function, 'find the root cause' -> root_causes, 'audit the dependency list for known vulnerabilities' -> vulnerabilities, 'write an ADR' -> adr_markdown, 'plan the migration' -> migration_steps, 'which tests fail and why' -> test_evidence. Matrix: 42 of 42 REAL cases deliver one (was 5 of 42), including the two rows that answer with a field literally named 'answer' (python.source.complexity.v1, python.source.definition_count.v1), which are lifted verbatim rather than re-shaped. No verdict moved: the same 34 of 49 and 42 of 54 pass, the 16 pre-existing failures in the 40 test modules that touch the door are byte-identical before and after (measured by stashing the change and re-running), and the pinned laws hold -- test_the_answer_must_be_the_answer_v1 (17 tests), test_a_single_named_answer_is_not_an_enumeration_v1 (3), test_a_large_artifact_is_read_by_section_v1, test_stated_input_coverage_v1's projection cases, and test_a_certificate_requires_the_work_v1 (9).",
   "required_capability": "A projection at the door's single exit that reads the result it was handed instead of the sentence's grammar alone. Internal invariant over data already produced.",
   "proxy_goals_deleted": [
@@ -181,7 +181,7 @@
   "route_frontier": {
    "discovery_required": true,
    "incumbent_route": "PROJECT_THE_ROW_RESULT_AT_THE_DOORS_SINGLE_EXIT",
-   "checked_at_utc": "2026-11-01T04:14:37Z",
+   "checked_at_utc": "2026-11-01T04:15:21Z",
    "max_age_hours": 24,
    "source_classes_checked": [
     "BRAIN_INHERITED",
@@ -314,7 +314,7 @@
    "unresolved_plausible_dominators": [],
    "selected_route": "DELIVER_THE_RESULT_SURFACE_AT_THE_DOORS_SINGLE_EXIT",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-01T04:14:37Z",
+    "checked_at_utc": "2026-11-01T04:15:21Z",
     "max_age_hours": 2,
     "selected_route": "DELIVER_THE_RESULT_SURFACE_AT_THE_DOORS_SINGLE_EXIT",
     "status": "READY",
@@ -328,7 +328,7 @@
       "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
-      "observed_at_utc": "2026-11-01T04:14:37Z",
+      "observed_at_utc": "2026-11-01T04:15:21Z",
       "evidence": [
        "DIRECT_PROBE: python3 ast.parse + re.compile on the four edited files"
       ],
@@ -344,7 +344,7 @@
       "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
-      "observed_at_utc": "2026-11-01T04:14:37Z",
+      "observed_at_utc": "2026-11-01T04:15:21Z",
       "evidence": [
        "DIRECT_PROBE: DELIVER_THE_RESULT_SURFACE_AT_THE_DOORS_SINGLE_EXIT imported and called; 34/34 census and 42/42 matrix PASSes now carry an answer"
       ],
@@ -360,7 +360,7 @@
       "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
-      "observed_at_utc": "2026-11-01T04:14:37Z",
+      "observed_at_utc": "2026-11-01T04:15:21Z",
       "evidence": [
        "DIRECT_PROBE: canonical.tests.test_a_pass_hands_over_what_the_row_found_v1 ran 15 tests OK in 0.002 s"
       ],
