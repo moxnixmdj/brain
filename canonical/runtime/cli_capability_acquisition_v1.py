@@ -270,9 +270,16 @@ def _requested_suffix(goal: str) -> str:
     text = str(goal or "")
     target = re.search(
         r"\b(?:into|to|as|named|called|output|produce|producing)\s+"
-        r"[\"']?([^\s\"']+\.([A-Za-z0-9]{1,6}))\b", text, re.I)
+        r"[\"']?([^\s\"']+\.[A-Za-z0-9]{1,6})\b", text, re.I)
     if target:
-        return "." + target.group(2)
+        # pkg.tar.gz asks for a TARBALL, not for a gzip stream that happens to
+        # be called that. pathlib calls this .gz; the verifier table knows the
+        # compound suffix and is the authority on which one was asked for.
+        try:
+            from canonical.runtime import program_synthesis_v1 as _ps
+            return _ps.suffix_for_name(target.group(1))
+        except Exception:  # noqa: BLE001 - the name is still better than nothing
+            return pathlib.Path(target.group(1)).suffix
     # the other way round: "create notes.txt.tar containing notes.txt" makes
     # the output the thing being built and the input the thing named after
     source = re.search(r"\b(?:containing|from|using|with)\s+", text, re.I)
