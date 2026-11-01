@@ -124,20 +124,67 @@ def _fp_key(fp: Mapping[str, Any]) -> str:
 
 
 def similarity(a: Mapping[str, Any], b: Mapping[str, Any]) -> float:
-    """How much two environments look alike. 0 means do not bother trying."""
+    """How much two environments look alike. 0 means do not bother trying.
+
+    THIS USED TO BE AN EQUALITY TEST, AND THAT MADE THE MEMORY LOCAL TO ONE MACHINE.
+    Measured 2026-11-01: the same computer, the same goal, and ONE extra binary on
+    ``PATH`` -- which changes which 14 programs the fingerprint acts out -- gave
+    ``similarity = 0.0`` and ``recall = []``.  Everything learned on one image was
+    invisible on the next, so "learn it once, permanently" was true only for a machine
+    that never changes, which is no machine.  A tool that is learned and then forgotten
+    the moment a colleague installs something is not memory.
+
+    What makes partial credit SAFE here is that a recalled plan is never believed: both
+    callers execute it and observe the goal (``drive`` checks ``is_goal``;
+    ``computer_env.discover`` re-verifies the produced format).  A wrong recall costs one
+    trial.  A zero recall costs every trial, forever.
+
+    So the gate now asks the question it always meant: is there enough SHARED structure
+    that replaying a plan is worth a try?  Disjoint actions still score 0.0 -- there is
+    nothing to replay when no action name is common.
+    """
     actions_a, actions_b = set(a.get("actions") or []), set(b.get("actions") or [])
     shapes_a, shapes_b = set(a.get("shapes") or []), set(b.get("shapes") or [])
-    if not actions_a or actions_a != actions_b:
-        return 0.0          # different action names: a plan cannot be replayed
+    if not actions_a or not actions_b or not (actions_a & actions_b):
+        return 0.0          # no action in common: a plan cannot even be started
     if shapes_a != shapes_b:
-        return 0.0          # different kind of state: a plan cannot apply
+        return 0.0          # a different KIND of state: the learned rules do not apply
+    # How much of the action vocabulary is shared gates everything else -- measured as
+    # OVERLAP, not Jaccard, because a fingerprint is a SAMPLE of the machine's vocabulary
+    # and not the whole of it.
+    #
+    # Measured 2026-11-01: this machine exposes 623 programs, and no goal can afford to
+    # act out 623 actions to take a fingerprint (each one is executed).  So each caller
+    # registers the shortlist its goal justifies -- 14 programs for ".gz", 38 for a wider
+    # goal -- and the two fingerprints describe THE SAME MACHINE with different samples.
+    # Jaccard calls that 16/40 = 0.4, below the recall floor: the memory would refuse to
+    # remember anything it learned under a different goal.  Overlap calls it 1.0, which is
+    # what it is: every action in the smaller sample is present in the larger one.
+    #
+    # What protects the wider reading is not this number -- it is that a recalled plan is
+    # only ever TRIED: `replayable` refuses one naming an action this machine lacks, and
+    # both callers execute the plan and observe the goal before believing it.
+    action_score = (len(actions_a & actions_b) / min(len(actions_a), len(actions_b)))
     growth_a = float(a.get("growth") or 0)
     growth_b = float(b.get("growth") or 0)
     growth_score = 1.0 / (1.0 + abs(growth_a - growth_b))
     rev_a = int(a.get("revisits") or 0)
     rev_b = int(b.get("revisits") or 0)
     rev_score = 1.0 / (1.0 + abs(rev_a - rev_b))
-    return round(0.7 * growth_score + 0.3 * rev_score, 6)
+    return round(action_score * (0.75 + 0.15 * growth_score + 0.10 * rev_score), 6)
+
+
+def replayable(plan: Sequence[Any], actions: Sequence[Any]) -> bool:
+    """Can this plan even be STARTED here?
+
+    A plan naming a program this machine does not have is not a plan that failed; it is
+    a plan from a different machine.  Replaying it would act() into nothing, observe no
+    goal, and -- worse -- be remembered as DISPROVEN, poisoning the one row that would
+    have worked once the program was installed.  Measured 2026-11-01: that is exactly
+    what a cross-machine recall would have recorded.
+    """
+    available = {str(a) for a in actions}
+    return bool(plan) and all(str(a) in available for a in plan)
 
 
 # --------------------------------------------------------------------------- #
@@ -240,9 +287,14 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     transferred = None
     candidates = recall(fp, gkey, min_similarity=min_similarity) if use_transfer else []
 
+    available = [str(a) for a in actions]
     for cand in candidates:
-        env.reset()
         plan = [str(a) for a in (cand.get("plan") or [])]
+        if not replayable(plan, available):
+            # A plan from a machine that had a program this one does not.  Not tried,
+            # and NOT recorded as disproven: the row is still true elsewhere.
+            continue
+        env.reset()
         for action in plan:
             env.act(action)
         reached = False
