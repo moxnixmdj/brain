@@ -210,6 +210,131 @@ def _save(rows: list[dict[str, Any]]) -> bool:
         return False
 
 
+# --------------------------------------------------------------------------- #
+# the fingerprint cache: what makes the SECOND time instant rather than merely second
+# --------------------------------------------------------------------------- #
+# A fingerprint is taken by ACTING: six probes of up to four actions each, and every
+# action runs a program (several argv shapes of it).  Measured 2026-11-01 on this
+# machine: taking one costs 5-8 s.  `computer_env.discover` computed it twice per call
+# (once to ask "have I seen this?", once to remember), and every repeat of the same
+# goal paid it again -- measured 4,766 ms recalled against 4,766 ms cold for a
+# one-action plan, i.e. the memory learned nothing about being fast.
+#
+# It is also a FACT ABOUT THE MACHINE, not about the goal: the same program set acting
+# on the same seed produces the same fingerprint.  So it is cacheable under a key that
+# names exactly those things -- program list, each program's real bytes on disk, and the
+# seed's contents -- and the cache dies the moment any of them changes.  Law (h): a
+# memory that resets when the machine changes is not memory; its converse is that a
+# cache of the machine's own shape MUST be keyed on the machine.
+FP_MAX = 256
+
+
+def _fp_path() -> str:
+    """Where the cache lives, read per call so a test (or a second machine) can move it."""
+    override = os.environ.get("BRAIN_TRANSFER_LEARNING_FINGERPRINTS")
+    return override or (str(STATE_PATH) + ".fingerprints.json")
+
+
+def _fp_load() -> dict[str, Any]:
+    try:
+        with open(_fp_path()) as fh:
+            data = json.load(fh)
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _fp_save(data: Mapping[str, Any]) -> bool:
+    try:
+        Path(_fp_path()).parent.mkdir(parents=True, exist_ok=True)
+        tmp = Path(_fp_path() + ".tmp")
+        tmp.write_text(json.dumps(data, indent=1, default=str), encoding="utf-8")
+        tmp.replace(_fp_path())
+        return True
+    except OSError:
+        return False
+
+
+def cached_fingerprint(key: str) -> dict[str, Any] | None:
+    """The fingerprint this machine produced for this key, if it is still this machine."""
+    row = (_fp_load().get("fingerprints") or {}).get(str(key))
+    return dict(row) if isinstance(row, Mapping) else None
+
+
+def cache_fingerprint(key: str, fp: Mapping[str, Any]) -> None:
+    data = _fp_load()
+    store = data.setdefault("fingerprints", {})
+    if not isinstance(store, dict):
+        store = data["fingerprints"] = {}
+    store[str(key)] = dict(fp)
+    # bounded: the oldest keys go, which is what a cache is for
+    if len(store) > FP_MAX:
+        for stale in list(store)[:len(store) - FP_MAX]:
+            store.pop(stale, None)
+    _fp_save(data)
+
+
+def remember_miss(fp: Mapping[str, Any], goal_key: str, reason: str,
+                  verifier: str = "") -> dict[str, Any]:
+    """Store that this shape of problem was TRIED here and did not close.
+
+    A memory that only records successes makes every failure cost full price
+    forever: measured 2026-11-01, `discover("dump data.db into data.csv")` spent
+    64,637 ms and then 63,874 ms on the identical goal, one after the other, because
+    nothing was remembered between them.
+
+    What is stored is the REASON, so a repeat is answered with the same honest
+    refusal instead of a fresh search.  It is keyed on the fingerprint AND the
+    verifier's version: a better verifier can make a shape solvable that was not,
+    which is exactly what happened when six false closures were removed.
+    """
+    data = _fp_load()
+    misses = data.setdefault("misses", [])
+    if not isinstance(misses, list):
+        misses = data["misses"] = []
+    entry = {"fp_key": _fp_key(fp), "goal_key": str(goal_key),
+             "reason": str(reason), "verifier": str(verifier),
+             "at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+             "trials": 1}
+    for row in misses:
+        if (row.get("fp_key") == entry["fp_key"]
+                and row.get("goal_key") == entry["goal_key"]
+                and row.get("verifier") == entry["verifier"]):
+            row["trials"] = int(row.get("trials", 1) or 1) + 1
+            row["at_utc"] = entry["at_utc"]
+            _fp_save(data)
+            return dict(row)
+    misses.append(entry)
+    data["misses"] = misses[-FP_MAX:]
+    _fp_save(data)
+    return dict(entry)
+
+
+def recall_miss(fp: Mapping[str, Any], goal_key: str,
+                verifier: str = "") -> dict[str, Any] | None:
+    """Was this exact shape, for this goal, already tried and refused here?"""
+    for row in (_fp_load().get("misses") or []):
+        if (row.get("fp_key") == _fp_key(fp)
+                and row.get("goal_key") == str(goal_key)
+                and row.get("verifier") == str(verifier)):
+            return dict(row)
+    return None
+
+
+def forget_miss(fp: Mapping[str, Any], goal_key: str, verifier: str = "") -> bool:
+    """A refusal that is no longer true must not shadow the answer that replaced it."""
+    data = _fp_load()
+    before = list(data.get("misses") or [])
+    after = [r for r in before
+             if not (r.get("fp_key") == _fp_key(fp)
+                     and r.get("goal_key") == str(goal_key)
+                     and r.get("verifier") == str(verifier))]
+    if len(after) == len(before):
+        return False
+    data["misses"] = after
+    return _fp_save(data)
+
+
 def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
              *, reached: bool,
              model: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
