@@ -89,9 +89,15 @@ CANDIDATES: dict[str, list[tuple[str, str]]] = {
                       "json.dump({'content': CONTENT}, open(OUT, 'w', encoding='utf-8'))\n"),
     ],
     ".csv": [
+        # A TABLE HAS FIELDS.  This wrote the whole sample into one cell, and a
+        # one-column file is exactly what the verifier must stop accepting --
+        # any text parses as one unquoted column.  The sample's words are the
+        # fields; one row per line keeps it a table that the check can tell
+        # apart from prose.
         ("csv_module", "import csv\n"
+                       "rows = [ln.split() for ln in CONTENT.splitlines() if ln.strip()]\n"
                        "with open(OUT, 'w', newline='', encoding='utf-8') as fh:\n"
-                       "    csv.writer(fh).writerow([CONTENT])\n"),
+                       "    csv.writer(fh).writerows(rows or [[CONTENT]])\n"),
     ],
     ".png": [
         ("png_minimal", "import struct, zlib\n"
@@ -172,9 +178,27 @@ _PNG_CHECK = (
     "assert w>0 and h>0, 'zero sized image'\n"
     "assert b'IEND' in d[-12:], 'no IEND chunk'\n")
 
+# A JPEG is verified by its own structure: SOI, then an SOF frame header, then EOI.
+# PIL is not required and is not installed everywhere; these four markers are the format.
+_IMAGE_CHECK = (
+    "import sys\n"
+    "P=sys.argv[1]\n"
+    "d=open(P,'rb').read()\n"
+    "assert d[:2]==b'\\xff\\xd8', 'not a jpeg start-of-image'\n"
+    "assert d[-2:]==b'\\xff\\xd9', 'no end-of-image marker'\n"
+    "assert any(m in d for m in (b'\\xff\\xc0', b'\\xff\\xc1', b'\\xff\\xc2')), "
+    "'no SOF frame header'\n")
+
 _ROUND_TRIP: dict[str, str] = {
     ".json": "import sys, json; json.load(open(sys.argv[1], encoding='utf-8'))",
-    ".csv": "import sys, csv; [r for r in csv.reader(open(sys.argv[1], newline='', encoding='utf-8'))]",
+    # csv.reader accepts EVERYTHING -- a tar, a digest line, a version banner --
+    # as one long unquoted row.  A TABLE has a separator in it; a file of prose
+    # does not.  Measured 2026-11-01: "dump data.db into data.csv" was answered
+    # by ['run_gcov-dump'] and closed, because the banner it printed parsed.
+    ".csv": ("import sys, csv; "
+             "rows=list(csv.reader(open(sys.argv[1], newline='', encoding='utf-8'))); "
+             "assert rows, 'empty'; "
+             "assert any(len(r) > 1 for r in rows), 'no separator: not a table'"),
     # sqlite3.connect() opens ANY file -- it does not read the header until
     # you touch a table, so 'select 1' passes on a text file. Check the
     # signature bytes, then actually read the schema.
@@ -189,7 +213,136 @@ _ROUND_TRIP: dict[str, str] = {
     ".png": _PNG_CHECK,
     ".txt": "import sys; open(sys.argv[1], encoding='utf-8').read()",
     ".md": "import sys; open(sys.argv[1], encoding='utf-8').read()",
+    # A COMPOUND FORMAT IS VERIFIED BY THE LIBRARY THAT OWNS THE OUTER LAYER.
+    #
+    # `.tar.gz` is not `.gz`: `gzip.open` reads the gzip wrapper of a tarball happily and
+    # says nothing about whether a tar stream is inside.  Measured 2026-11-01: "pack pkg
+    # into pkg.tar.gz" was answered with the plan `run_gzip`, whose output is a gzip of a
+    # FILE, and the machine reported it VERIFIED -- because this table had no `.tar.gz`
+    # entry at all and an entry-less format used to pass.  tarfile reads the tar and the
+    # compression in one call, so the check costs one import.
+    ".tar.gz": "import sys, tarfile; tarfile.open(sys.argv[1], 'r:gz').getnames()",
+    ".tgz": "import sys, tarfile; tarfile.open(sys.argv[1], 'r:gz').getnames()",
+    ".tar.bz2": "import sys, tarfile; tarfile.open(sys.argv[1], 'r:bz2').getnames()",
+    ".tar.xz": "import sys, tarfile; tarfile.open(sys.argv[1], 'r:xz').getnames()",
+    # A DIGEST IS A DIGEST SHAPE, and nothing else is.  `run_md5sum` "answered" a request
+    # for a sha256 file on 2026-11-01 because any bytes under the name were accepted.
+    ".sha256": "import sys, re; t=open(sys.argv[1], encoding='utf-8').read(); "
+               "assert re.search(r'\\b[0-9a-f]{64}\\b', t), 'no sha256 digest'",
+    ".sha1": "import sys, re; t=open(sys.argv[1], encoding='utf-8').read(); "
+             "assert re.search(r'\\b[0-9a-f]{40}\\b', t), 'no sha1 digest'",
+    ".md5": "import sys, re; t=open(sys.argv[1], encoding='utf-8').read(); "
+            "assert re.search(r'\\b[0-9a-f]{32}\\b', t), 'no md5 digest'",
+    ".jpeg": _IMAGE_CHECK,
+    ".jpg": _IMAGE_CHECK,
 }
+
+
+# --------------------------------------------------------------------------- #
+# WHAT KIND OF BYTES ARE THESE, and is that allowed to be this format
+# --------------------------------------------------------------------------- #
+# A verifier that only asks "does the library open it" answers the wrong half of
+# the question.  Measured 2026-11-01 on main, store empty, discover() called
+# directly: "dump data.db into data.csv" was answered by the plan ['run_tar'] and
+# reported PASS__SINGLE_ACTION_FOUND_AND_VERIFIED -- csv.reader accepts a tar as
+# one long unquoted row, so the library DID open it.  The file was a tar.
+#
+# Every format this repository verifies is either a CONTAINER (its own bytes say
+# what it is) or PLAIN TEXT (no bytes of a container may appear in it).  So the
+# negative test costs one read of 512 bytes and settles the whole class: if a
+# container signature is present and the suffix does not own that container, the
+# file is not the requested format, whatever a parser will tolerate.
+_CONTAINER_SIGNS: tuple[tuple[str, int, bytes], ...] = (
+    ("gzip", 0, b"\x1f\x8b"),
+    ("xz", 0, b"\xfd7zXZ\x00"),
+    ("bzip2", 0, b"BZh"),
+    ("zstd", 0, b"\x28\xb5\x2f\xfd"),
+    ("zip", 0, b"PK\x03\x04"),
+    ("png", 0, b"\x89PNG\r\n\x1a\n"),
+    ("jpeg", 0, b"\xff\xd8\xff"),
+    ("pdf", 0, b"%PDF"),
+    ("7z", 0, b"7z\xbc\xaf\x27\x1c"),
+    ("elf", 0, b"\x7fELF"),
+    ("sqlite", 0, b"SQLite format 3\x00"),
+    # a tar header starts with the member's name; its format marker sits at 257
+    ("tar", 257, b"ustar"),
+)
+
+_CONTAINER_OWNER: dict[str, set[str]] = {
+    ".gz": {"gzip"}, ".tgz": {"gzip"}, ".tar.gz": {"gzip"},
+    ".xz": {"xz"}, ".tar.xz": {"xz"},
+    ".bz2": {"bzip2"}, ".tar.bz2": {"bzip2"},
+    ".zip": {"zip"},
+    ".tar": {"tar"},
+    ".png": {"png"},
+    ".jpg": {"jpeg"}, ".jpeg": {"jpeg"},
+    ".pdf": {"pdf"},
+    ".db": {"sqlite"}, ".sqlite": {"sqlite"}, ".sqlite3": {"sqlite"},
+}
+
+# A TEXT FORMAT CANNOT CARRY A CLAIM ABOUT ITS CONTENT.
+#
+# `.txt` and `.md` are verified by opening them as UTF-8, which any byte stream
+# of text satisfies.  Measured 2026-11-01: "write the commit log of repo into
+# log.txt" was answered by ['run_md5sum.textutils'] and closed.  A digest of a
+# README is a text file and is not a commit log, and nothing in the bytes says
+# which one it is -- so no verifier exists here, and a format with no verifier
+# is not a closed goal (see verify_round_trip).  The learning channel asks
+# `carries_content_evidence` before it books a win.
+_FORMAT_ONLY: frozenset[str] = frozenset({".txt", ".md"})
+
+
+def carries_content_evidence(suffix: str) -> bool:
+    """Can a file of this format be checked for being the thing asked for?
+
+    False where the only possible check is "it opens as text" -- because then the
+    name of the format is all that was ever verified.
+    """
+    return str(suffix or "").lower() not in _FORMAT_ONLY
+
+
+def _container_of(data: bytes) -> str | None:
+    for name, offset, sign in _CONTAINER_SIGNS:
+        if data[offset:offset + len(sign)] == sign:
+            return name
+    return None
+
+
+def container_mismatch(head: bytes, suffix: str) -> str | None:
+    """The container these bytes are, when that container is not this suffix.
+
+    None means "nothing in the head contradicts the suffix".  This is the test
+    that separates a tar called out.csv from a csv.
+    """
+    found = _container_of(head)
+    if not found:
+        return None
+    key = str(suffix or "").lower()
+    if found in _CONTAINER_OWNER.get(key, ()):
+        return None
+    return found
+
+
+_KNOWN_SUFFIXES: tuple[str, ...] = tuple(sorted(
+    set(_ROUND_TRIP) | set(_CONTAINER_OWNER), key=len, reverse=True))
+
+
+def suffix_for_name(name: str) -> str:
+    """The LONGEST extension the table knows that ends this name.
+
+    pathlib answers `.gz` for pkg.tar.gz, and that answer is why a gzip of one
+    file was accepted as a tarball: the machine asked a verifier that owns the
+    OUTER wrapper only.  The table of verifiers already knows both suffixes, so
+    the longest match is the one whose verifier must be satisfied.
+    """
+    low = str(name or "").lower()
+    for suf in _KNOWN_SUFFIXES:
+        if low.endswith(suf):
+            return suf
+    return pathlib.Path(low).suffix
+
+
+_HEAD_BYTES = 512
 
 
 def verify_round_trip(out: pathlib.Path, suffix: str,
@@ -197,9 +350,41 @@ def verify_round_trip(out: pathlib.Path, suffix: str,
     """Open it with the library that owns the format. If it will not open,
     it is not that format, however many bytes it has."""
     import subprocess
-    snippet = _ROUND_TRIP.get(str(suffix or "").lower())
+    key = str(suffix or "").lower()
+    if out.is_file():
+        # the negative test first: a tar called out.csv is not a csv, however
+        # happily csv.reader reads it.  512 bytes, never the whole file.
+        with out.open("rb") as fh:
+            head = fh.read(_HEAD_BYTES)
+        wrong = container_mismatch(head, key)
+        if wrong:
+            return False, "CONTAINER_MISMATCH:" + wrong
+    snippet = _ROUND_TRIP.get(key)
     if not snippet:
-        return True, "NO_VERIFIER_FOR_FORMAT"
+        # AN UNCHECKED FORMAT IS NOT A VERIFIED ONE.
+        #
+        # This returned ``True, "NO_VERIFIER_FOR_FORMAT"``, and that single line is the worst
+        # defect class this repository names -- a verification claim that is silently
+        # skipped -- sitting inside the machine's own learning channel.  Measured
+        # 2026-11-01, store empty, eight goal families, discover() called directly:
+        #
+        #   "convert tiny.png into tiny.jpg"   -> PASS__SINGLE_ACTION_FOUND_AND_VERIFIED,
+        #                                         plan ['run_unexpand']   (a whitespace tool)
+        #   "pack pkg into pkg.tar.gz"         -> PASS..., plan ['run_gzip']
+        #   "hash blob.bin into blob.sha256"   -> PASS..., plan ['run_sha256sum']
+        #   "write the commit log of repo..."  -> PASS..., plan ['run_md5sum.textutils']
+        #
+        # Four of eight "closed" goals were closed over bytes nobody checked.  So: where a
+        # MAGIC SIGNATURE exists in the table this repository already keeps, that signature
+        # is the check; where even that is missing, the honest verdict is that nothing was
+        # verified -- reported as such, never as a pass.
+        magic = _magic_for(key)
+        if magic and out.is_file():
+            head = out.read_bytes()[:16].hex()
+            if head.startswith(magic):
+                return True, "MAGIC_OK"
+            return False, "MAGIC_MISMATCH:" + head
+        return False, "NO_VERIFIER_FOR_FORMAT"
     script = out.parent / "_verify.py"
     # the path is an ARGUMENT, never text substituted into the source.
     # Substituting it replaced the P in b'\\x89PNG...' and turned the

@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Live audit on 29ada613 exposed four concrete gaps: (1) no causal multi-step trace-to-skill compiler elevating slow pixel/UI/DOM traces to SQLite/HTTP behind capability_transfer_ownership_gate_v1; (2) static-only test AST I/O extraction missing dynamic runtime assertions; (3) 370s full-machine CLI pipeline discovery timeout in computer_env_v1 due to flag-name omission in flags_for_goal and pre-counter truncation; (4) disconnected learning, composition, and front-door organs.",
- "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+ "canonical_base_commit": "d6ff2c91e198e50e573c33af7818cb5515ef8bb7",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -94,7 +94,7 @@
   "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+  "canonical_base_commit": "d6ff2c91e198e50e573c33af7818cb5515ef8bb7",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "PIXEL_REPLAY_WHEN_HTTP_OR_SQLITE_EFFECT_EXISTS",

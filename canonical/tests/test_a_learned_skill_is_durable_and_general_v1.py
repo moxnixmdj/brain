@@ -37,7 +37,8 @@ def _parses(code: str) -> bool:
 
 
 def _store(tmp_path: pathlib.Path) -> "cry.VerifiedSkillStore":
-    store = cry.VerifiedSkillStore(tmp_path / "skills.sqlite")
+    # seed=False: these assertions count what THIS test taught, not what the repo ships.
+    store = cry.VerifiedSkillStore(tmp_path / "skills.sqlite", seed=False)
     store.crystallize_verified_fix(language="python", bug_class="python_repair",
                                    before_code=BEFORE, after_code=AFTER,
                                    verifier_oracle_kind="probe")

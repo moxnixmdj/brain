@@ -651,16 +651,24 @@ def programs_for(suffix: str, limit: int = 14) -> list[str]:
     a fact anyone wrote down, it is a guess, and the learner proves it by
     running the program.
     """
-    letters = [c for c in str(suffix or "").lower().lstrip(".") if c.isalnum()]
+    # A COMPOUND SUFFIX NAMES TWO PROGRAMS.  '.tar.gz' is a tar and then a
+    # gzip, and reading its letters as one word ('targz') matches neither:
+    # measured 2026-11-01, the shortlist for a tarball goal did not contain
+    # `tar` at all, so the only plan it could ever verify was `gzip`, which
+    # makes a gzip of a single file.  Each component is guessed at separately.
+    parts = [c for c in str(suffix or "").lower().split(".")
+             if any(ch.isalnum() for ch in c)]
+    letters_of = [[c for c in part if c.isalnum()] for part in parts]
     installed = installed_programs()  # all of them; narrowing happens next
-    if not letters:
+    if not any(letters_of):
         return installed[:limit]
 
-    def subsequence(prog: str) -> bool:
+    def subsequence(prog: str, letters: list[str]) -> bool:
         it = iter(prog)
         return all(c in it for c in letters)
 
-    hits = [p for p in installed if subsequence(p)]
+    hits = [p for p in installed
+            if any(subsequence(p, letters) for letters in letters_of if letters)]
     rest = [p for p in installed if p not in hits]
     return (hits + rest)[:limit]
 
@@ -687,6 +695,8 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
         if not out.is_file():
             return False, "PLAN_PRODUCED_NO_FILE"
         good, why = ps.verify_round_trip(out, suffix)
+        if good and not ps.carries_content_evidence(suffix):
+            return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
         if good and not _input_matters(
                 (env.recipes.get(plan[-1]) or {}).get("argv") or [],
                 next(iter(env.seed), "input.txt"), target, out.read_bytes()):
@@ -810,6 +820,8 @@ def _single_step(programs: Sequence[str], suffix: str, target: str,
             if not out.is_file():
                 continue
             good, why = ps.verify_round_trip(out, suffix)
+            if good and not ps.carries_content_evidence(suffix):
+                good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
             if good and not _uses_goal_value(
                     env.recipes.get("run_" + prog) or {}, goal):
                 good, why = False, "GOAL_VALUE_UNUSED"
@@ -911,7 +923,7 @@ def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
         return {"pass": False, "status": "OPEN__COMMAND_PRODUCED_NO_FILE",
                 "detail": " ".join(argv), "argv": argv}
 
-    suffix = pathlib.Path(name).suffix
+    suffix = ps.suffix_for_name(name)
     good, why = ps.verify_round_trip(out, suffix)
     return {"pass": bool(good), "status": "PASS__APPLIED_TO_REAL_FILE"
             if good else "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
@@ -1036,6 +1048,37 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
                           "checks that a file of the requested suffix "
                           "appeared, which is a fact about a format and not "
                           "an answer" % asked}
+
+    # A FORMAT THAT CARRIES NO EVIDENCE CANNOT CLOSE ANYTHING HERE -- SAY SO FIRST.
+    #
+    # `.txt` and `.md` are verified by opening them as text, which every text
+    # file passes.  Spending 97 s of program search to then refuse (measured
+    # 2026-11-01, "write the commit log of repo into log.txt") buys nothing:
+    # the verdict was decided by the format before the first program ran.
+    from canonical.runtime import program_synthesis_v1 as _ps
+    if not _ps.carries_content_evidence(suffix):
+        return {"closed": False, "suffix": suffix,
+                "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
+                "detail": ("%s is any text; nothing in the bytes says it is the "
+                           "thing the goal named, so no verifier here can close it"
+                           % suffix)}
+
+    # A COMPOUND FORMAT NEEDS TWO STEPS, AND THIS CHANNEL RESETS BETWEEN THEM.
+    #
+    # '.tar.gz' is a tar and then a gzip; no single program owns both layers.
+    # Every action here starts from the seed (ComputerEnv.reset), which is what
+    # makes a failed form retryable and what makes a second step impossible:
+    # step one's artifact is deleted before step two can read it.  Measured
+    # 2026-11-01: "pack pkg into pkg.tar.gz" burned **95 s** of search, then
+    # reported PASS__ENVIRONMENT_SOLVED_BY_LEARNING with an EMPTY plan -- a PASS
+    # status on a goal it had just failed to verify.  An unprovable shape is
+    # refused immediately and named, instead of being paid for.
+    if suffix.count(".") > 1:
+        return {"closed": False, "suffix": suffix,
+                "status": "OPEN__FORMAT_NEEDS_A_CHAIN_THIS_CHANNEL_CANNOT_KEEP",
+                "detail": ("%s is two layers (a container inside a wrapper); this route "
+                           "resets to its seed between actions, so the first layer is "
+                           "gone before the second can be verified" % suffix)}
 
     named = output_name(gap) or ""
     target = named if named.endswith(suffix) else ("input.txt" + suffix)
@@ -1181,7 +1224,12 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     # would take for an answer that its own "verification" has just called
     # unreadable. Reporting a plan only after it has been verified is what
     # keeps "closed" from meaning nothing.
-    return {"closed": False, "status": outcome.get("status"),
+    # a status that says PASS while verification just failed is the same lie in
+    # a different field -- the census reads both
+    _st = str(outcome.get("status") or "")
+    if _st.startswith("PASS"):
+        _st = "OPEN__EFFECT_NOT_VERIFIED"
+    return {"closed": False, "status": _st or "OPEN__EFFECT_NOT_VERIFIED",
             "plan": [], "suffix": suffix,
             "rejected_plan": list(outcome.get("plan") or []),
             "target": target, "actions_tried": tried, "verification": why,
