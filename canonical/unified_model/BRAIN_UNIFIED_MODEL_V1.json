@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8704e49c2c264a1c02035333c4087cc382778bf8696923da589a222dc0d433ab"
+  "value": "3af781b758ff162b630aba158fca634161957a54b583323624cf047ff41f54bd"
  },
  "engines": [
   {
@@ -143183,7 +143183,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EXPECT_DISCRIMINATION_BASELINE_20261101_V1.json",
    "schema": "",
-   "sha256": "457021d121c4f1f3838a20ef89fc09c50efb50e8affade528abee75e6c5b5fa4",
+   "sha256": "0ae416764bdf75ba15cdcee03d293b9d89fac44c862871a8e11d764e567f3ae0",
    "status": "",
    "terms": {
     "20261101": 1,
@@ -239911,12 +239911,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/expect_discrimination_v1.py",
-   "sha256": "e870368c44ab6c4d24ca004c22f19d47208df739d7b659425543216d08195883",
+   "sha256": "6c06728476189af4b251d7cb43d8507e217421d83f706062b5cb159b40c226bf",
    "summary": "Does each capability's declared verification actually observe anything?",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_declared_constants",
     "_has_output_claim",
+    "_has_registered_inspector",
     "_load_registry",
     "main",
     "measure"
@@ -239931,6 +239932,7 @@
     "each": 1,
     "expect": 1,
     "has_output_claim": 1,
+    "has_registered_inspector": 1,
     "load_registry": 1,
     "main": 1,
     "measure": 1,
@@ -271884,14 +271886,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "513e09548df5d1c57aefec79ac85b77ad0abadac95a80e0907198cb097fee592",
+   "sha256": "1d1324c900de469308ea47e07b7058f24f0db53192ca8e26363ce77406b9ad4e",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 69,
+   "symbol_count": 75,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
     "_alternative_ids",
+    "_anchor_is_ink",
     "_asked_to_print_named_lines",
+    "_bucket",
     "_canonical_json_sha256",
     "_consumed_downstream",
     "_digest",
@@ -271909,9 +271913,7 @@
     "_inspect_decision_verify",
     "_inspect_diagnose_and_architect",
     "_inspect_docx_verify",
-    "_inspect_fault_localize",
-    "_inspect_git_bisect_regression",
-    "_inspect_implement_function_spec"
+    "_inspect_fault_localize"
    ],
    "terms": {
     "acceptance": 2,

@@ -22,6 +22,9 @@ from canonical.runtime import enforce_goal_hierarchy as guard
 from execution_guard.v22_prewrite_admission import admission_errors
 
 RECEIPT = "canonical/verification/REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1.json"
+# Added by this same change, so it exists at HEAD and not at origin/main -- the case the old
+# base-only resolver could never bind.
+ADDED_RECEIPT = "canonical/verification/RASTER_ANCHOR_KNOWN_COUNTEREXAMPLE_20261101_V1.json"
 INVENTED = "a1b2c3d4e5f6789012345678901234567890abcd"
 
 
@@ -50,9 +53,14 @@ class ReceiptBindingTests(unittest.TestCase):
         self.assertEqual(blobs[RECEIPT], real)
         self.assertNotEqual(blobs[RECEIPT], INVENTED)
 
-    def test_a_base_only_search_leaves_the_map_empty_and_the_check_unsatisfiable(self):
-        # This is the old behaviour, kept as a control: it is why the check could never pass.
-        self.assertEqual(guard.resolve_receipt_blobs(_admission(RECEIPT, "0" * 40), ("origin/main",)), {})
+    def test_a_receipt_added_by_the_change_cannot_bind_at_the_base(self):
+        # The old resolver searched the base only, so a receipt added by a pull request could never
+        # bind and the check could only fail. This receipt is added by the same change, so it is
+        # absent from main: searching the base alone finds nothing, searching head finds it.
+        self.assertEqual(
+            guard.resolve_receipt_blobs(_admission(ADDED_RECEIPT, "0" * 40), ("origin/main",)), {})
+        self.assertIn(ADDED_RECEIPT, guard.resolve_receipt_blobs(
+            _admission(ADDED_RECEIPT, "0" * 40), ("origin/main", "HEAD")))
 
     def test_a_path_that_is_absent_everywhere_is_still_skipped(self):
         blobs = guard.resolve_receipt_blobs(
