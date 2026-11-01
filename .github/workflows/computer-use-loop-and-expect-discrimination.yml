@@ -1,0 +1,33 @@
+name: computer-use loop and expect discrimination
+# Two things this tree already measured but never scheduled:
+#   1. canonical/tests/test_computer_use_loop_end_to_end_v1.py -- 12 tests that drive the policy
+#      through virtual_desktop_v1 to a changed screenshot. No workflow ran them, and without
+#      Pillow they skip silently, which is indistinguishable from passing.
+#   2. canonical/runtime/expect_discrimination_v1.py -- 155 capabilities, 59 whose declared
+#      `expect` is a constant their own adapter assigns, 8 dead and uncovered, 94.8%
+#      discrimination. Ratcheted against canonical/verification/EXPECT_DISCRIMINATION_BASELINE_20261101_V1.json
+#      so the number can only improve.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  loop-and-discrimination:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the substrate the loop and the ratchet need
+        run: python -m pip install --quiet pytest pillow
+      - name: The computer-use loop must not skip
+        run: python -m pytest canonical/tests/test_computer_use_loop_end_to_end_v1.py -q -rs
+      - name: Declared verification must keep being able to fail
+        run: python3 scripts/expect_discrimination_ratchet_v1.py

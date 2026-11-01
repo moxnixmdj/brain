@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 238,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6601,
+  "research_index_records": 6603,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8ca8f1c199f54b06ab22611a19536dcb95a0f9b9fc57d966c26fdcec77d2e354"
+  "value": "ba72c157e88117bcb7c51e37209f5f3661a60b9bfec16516eb6b78f40c12a47a"
  },
  "engines": [
   {
@@ -143100,6 +143100,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/EXPECT_DISCRIMINATION_BASELINE_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EXPECT_DISCRIMINATION_BASELINE_20261101_V1.json",
+   "schema": "",
+   "sha256": "fad287321d546114e6134721685c19db144a4cc99b8abc32a6c2dbcc97c494a2",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "baseline": 1,
+    "discrimination": 1,
+    "expect": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/EXPLICIT_SEMANTIC_OPERATOR_DISPOSITION_REPAIR_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -213253,6 +213271,51 @@
     "tree": 3,
     "unittest": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "SCHEDULE_COMPUTER_USE_LOOP_AND_EXPECT_DISCRIMINATION_RATCHET_V1_20261101",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/SCHEDULE_COMPUTER_USE_LOOP_AND_EXPECT_DISCRIMINATION_RATCHET_V1_20261101.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SCHEDULE_COMPUTER_USE_LOOP_AND_EXPECT_DISCRIMINATION_RATCHET_V1_20261101.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "54f5c64882e75ef57f76902b34bb30199f217685d46687d6fb5d3b20294f6ad7",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "already": 1,
+    "become": 1,
+    "benchmark": 1,
+    "capability": 1,
+    "computer": 1,
+    "computer-use": 1,
+    "contained": 1,
+    "declared": 1,
+    "discrimination": 1,
+    "each": 1,
+    "enforced": 1,
+    "ever": 1,
+    "existing": 1,
+    "expect": 2,
+    "fail": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "indistinguishable": 1,
+    "left": 1,
+    "loop": 2,
+    "measured": 1,
+    "measurement": 2,
+    "measurements": 1,
+    "mechanisms": 1,
+    "moves": 1,
+    "no": 2,
+    "one": 1,
+    "passing": 1,
+    "pillow": 1,
+    "two": 2,
+    "unscheduled": 2
    }
   },
   {
