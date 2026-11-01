@@ -25896,6 +25896,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
+     "ast",
      "difflib",
      "importlib",
      "json",
@@ -25903,6 +25904,7 @@
      "pathlib",
      "subprocess",
      "sys",
+     "tempfile",
      "typing"
     ],
     "declared_dependency_executables": [],
@@ -25932,7 +25934,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "3f5f144b67fa323e7c9707ae8cc2e8e0879d1878564428d8abc682db12e858c1",
+    "source_sha256": "ca7a6738a17cdf5ed3e65bb174d3374d2bbcb56544515a694b53fb480e670020",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30921,9 +30923,9 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 232,
+  "knowledge_documents": 233,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6584,
+  "research_index_records": 6586,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30932,7 +30934,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d9080019cf8b3896e2df5b81e953553f914119bd0a69d81b000649116c8f67c0"
+  "value": "e77bb34a88c8b68944e90e586653765ab9dcecb890050ef12ba4655e826a3f95"
  },
  "engines": [
   {
@@ -59893,6 +59895,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 13128,
+   "headings": [
+    "Final integration validation",
+    "Integration update — current result on incoming main",
+    "Bounded production repair and retained-learning qualification",
+    "What changed",
+    "Curriculum and comparison",
+    "Refusal, restoration and real-boundary checks",
+    "Configuration and trust boundary",
+    "Validation and remaining work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.md",
+   "sha256": "2ae482a9e8467d5cdc604488d0a1323145ccb607b56ceb3efa5d63784339c6e8",
+   "summary": "Final merge base: `216b800d0c04bf4013b673d03fcfbf1b37accd90` (incoming main, including its frontdoor reachability, cache, inventory and rename-safety work). Final affected run: **201 passed, 2 inherited failures in 91.82s**. This includes all 28 qualification cases, 5 incoming rename-safety cases, and the incoming frontdoor/cache/inventory/instrument suites. The same two inherited legacy apply fai",
+   "terms": {
+    "actual": 8,
+    "all": 6,
+    "apply": 6,
+    "artifact": 6,
+    "audit": 17,
+    "below": 5,
+    "claim": 5,
+    "current": 6,
+    "disabled": 8,
+    "each": 5,
+    "encoding": 6,
+    "existing": 7,
+    "external": 8,
+    "failures": 7,
+    "fallback": 6,
+    "family": 6,
+    "incl": 6,
+    "incoming": 6,
+    "inherited": 5,
+    "json": 5,
+    "learned": 7,
+    "learning": 8,
+    "median": 6,
+    "memory": 5,
+    "must": 5,
+    "new": 5,
+    "no": 6,
+    "not": 35,
+    "original": 5,
+    "passed": 5,
+    "project": 5,
+    "python": 5,
+    "qualification": 6,
+    "remain": 7,
+    "repair": 11,
+    "restoration": 5,
+    "retained": 5,
+    "search": 8,
+    "separate": 6,
+    "source": 13,
+    "subprocesses": 6,
+    "successful": 7,
+    "suites": 6,
+    "teaching": 9,
+    "test": 8,
+    "tests": 12,
+    "three": 9,
+    "worker": 7
+   },
+   "title": "Final integration validation",
+   "title_terms": [
+    "final",
+    "integration",
+    "validation"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6116,
    "headings": [
     "Scoped retained-skill verification and restart qualification",
@@ -60870,10 +60946,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1026,
+  "included_source_count": 1027,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "bf1f9aa60793da8a58a66a50201e4a19f27f0d9e3e3f458512dbd28e016833bc"
+  "source_tree_digest": "9f248b1a392861ce16358cdb388397610710c4d5f29dd4913bccc4d490fdec53"
  },
  "research_index": [
   {
@@ -171120,6 +171196,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "schema": "BOUNDED_RETAINED_PRODUCTION_QUALIFICATION_OBSERVATIONS_V1",
+   "sha256": "b02e639b3d8ed134818de9a7eb806ce65c931b594c03ed94c488c6b7ec20d4ba",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "production": 1,
+    "qualification": 1,
+    "repair": 1,
+    "retained": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-04",
    "id": "research:canonical/verification/RETRIEVAL_V10_CROSS_ECOSYSTEM_REPO_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -211982,6 +212077,51 @@
    }
   },
   {
+   "action_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "78779040886c63ce5564246219436649c4e9f84092faaff171d6c4dfbcf494f3",
+   "status": "IMPLEMENTED_BOUNDED_QUALIFICATION__NO_PROMOTION",
+   "terms": {
+    "20261101": 1,
+    "accepts": 1,
+    "actual": 1,
+    "against": 1,
+    "already": 1,
+    "application": 1,
+    "applied": 1,
+    "caller": 1,
+    "capability": 1,
+    "capable": 1,
+    "claim": 1,
+    "command": 2,
+    "compose": 2,
+    "corpus": 1,
+    "declared": 1,
+    "disabled": 1,
+    "existing": 3,
+    "gate": 1,
+    "gates": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "global-optimality": 1,
+    "implemented_bounded_qualification__no_promotion": 1,
+    "integrate_existing_skill_store_and_measurement": 1,
+    "learning": 1,
+    "measure": 1,
+    "no": 1,
+    "not": 1,
+    "production": 2,
+    "repair": 4,
+    "retained": 2,
+    "scoped": 2,
+    "solver": 2
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-10-10",
@@ -213391,7 +213531,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0059073b11c56cde93eefca319b921eb254c0c2c7a125b3eb286be07c2076750",
+   "sha256": "bab308a452c719cc6e3d4cb6f4a482cf828384a5214126fc55ec303eff433ef3",
    "status": "",
    "terms": {
     "20261101": 1,

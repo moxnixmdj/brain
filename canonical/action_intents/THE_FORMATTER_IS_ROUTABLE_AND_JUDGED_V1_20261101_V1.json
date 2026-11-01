@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A program could not be routed unless it was in one of two tables, and its rewrite could not be executed unless a rule that protects reports from overwriting sources had a way to say 'this rewrite is checked'. Neither half was wired, so the sentence the composer had a row for could never run.",
-  "canonical_base_commit": "216b800d0c04bf4013b673d03fcfbf1b37accd90",
+  "canonical_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -80,7 +80,7 @@
     "canonical/runtime/environment_learning_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "216b800d0c04bf4013b673d03fcfbf1b37accd90",
+    "canonical_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
@@ -236,7 +236,7 @@
           "route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1"
         }
       ],
-      "checked_at_utc": "2026-11-01T13:10:22Z",
+      "checked_at_utc": "2026-11-01T13:15:00Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -276,7 +276,7 @@
       "selected_route": "THE_FORMATTER_IS_ROUTABLE_AND_JUDGED_V1_20261101_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-01T13:10:22Z",
+        "checked_at_utc": "2026-11-01T13:15:00Z",
         "execution_dependencies": [
           {
             "dependency": "ruff 0.17.3 on PATH (substrate-requirements.txt)",
@@ -373,7 +373,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-01T13:10:22Z",
+    "checked_at_utc": "2026-11-01T13:15:00Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
