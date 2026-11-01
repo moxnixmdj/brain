@@ -61,6 +61,27 @@ class ScorerTests(unittest.TestCase):
         report = C.score(_rows(pairs))
         self.assertEqual(report["verdict"], "SYSTEMATICALLY_OVERCONFIDENT", report)
 
+    def test_a_sample_with_no_expected_failures_cannot_certify_calibration(self):
+        # It separates outcomes and beats the base rate, but it never predicted a failure, so the
+        # errors it would have caught were never attempted. This is the curated diet.
+        pairs = [(0.9, True)] * 30 + [(0.6, False)] * 10
+        report = C.score(_rows(pairs))
+        self.assertEqual(report["verdict"], "CALIBRATED_ONLY_ON_EASY_TASKS", report)
+        self.assertLess(report["hard_fraction"], report["required_hard_fraction"])
+
+    def test_the_same_predictor_with_hard_attempts_included_is_calibrated(self):
+        pairs = [(0.9, True)] * 30 + [(0.3, False)] * 10
+        report = C.score(_rows(pairs))
+        self.assertEqual(report["verdict"], "CALIBRATED", report)
+        self.assertGreaterEqual(report["hard_fraction"], report["required_hard_fraction"])
+
+    def test_a_sample_with_one_outcome_class_gets_no_claim_either_way(self):
+        # All successes: no contrast exists, so neither calibration nor discrimination is knowable.
+        report = C.score(_rows([(0.95, True)] * 40))
+        self.assertEqual(report["verdict"], "UNREPRESENTATIVE_SAMPLE", report)
+        self.assertEqual(report["reason"], "ONLY_ONE_OUTCOME_CLASS_OBSERVED")
+        self.assertEqual(report["outcome_classes_observed"], 1)
+
     def test_an_empty_sample_does_not_get_a_verdict(self):
         self.assertEqual(C.score([])["verdict"], "INSUFFICIENT_EVIDENCE")
 
