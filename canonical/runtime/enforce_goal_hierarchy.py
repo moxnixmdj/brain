@@ -1161,7 +1161,7 @@ def active_target_mirror_errors(hierarchy,target):
     return errors
 
 
-def enforce_v22_prewrite_admission(intent,base):
+def enforce_v22_prewrite_admission(intent,base,head="HEAD"):
     try:
         pointer=load_at_ref(base,V22_ACTIVE_POINTER_PATH)
         pointer_blob=git("rev-parse",f"{base}:{V22_ACTIVE_POINTER_PATH}")
@@ -1182,16 +1182,24 @@ def enforce_v22_prewrite_admission(intent,base):
                     path=row.get("path")
                     if isinstance(path,str) and path.strip():
                         paths.append(path)
+    # A receipt is the pull request's own evidence, so it has to be resolvable in the
+    # commit being proposed. It used to be resolved only against the base, which meant a
+    # receipt could never be added by a change: every new path was skipped, receipt_blobs
+    # stayed empty, and the only way to satisfy the check was to invent a sha. That is how
+    # a1b2c3d4e5f6789012345678901234567890abcd came to sit in a merged action intent.
+    # Head first, base second, so a pre-existing receipt still binds.
     for path in sorted(set(paths)):
         pure=pathlib.PurePosixPath(path)
         if path.startswith("/") or ".." in pure.parts:
             continue
-        if not path_exists_at_ref(base,path):
-            continue
-        try:
-            receipt_blobs[path]=git("rev-parse",f"{base}:{path}")
-        except Exception:
-            continue
+        for ref in (head,base):
+            if not path_exists_at_ref(ref,path):
+                continue
+            try:
+                receipt_blobs[path]=git("rev-parse",f"{ref}:{path}")
+                break
+            except Exception:
+                continue
     errors=v22_admission_errors(
         admission,pointer,pointer_blob_sha=pointer_blob,
         action_kind=str(intent.get("action_kind") or ""),
@@ -1383,7 +1391,7 @@ def main():
     intent=load(intents[0]) if intents else {}
 
     if intent:
-        enforce_v22_prewrite_admission(intent,ns.base)
+        enforce_v22_prewrite_admission(intent,ns.base,ns.head)
         enforce_blocker_lease(intent)
         enforce_recursive_obs(intent,files,ns.base)
         enforce_target_continuity(intent,ns.base,hierarchy)
