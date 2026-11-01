@@ -38367,9 +38367,27 @@
   "canonical/runtime/goal_compiler.py": {
    "doc": "Deterministic plain-goal compiler for Project Brain.",
    "functions": {
+    "compile_goal": {
+     "doc": "",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "registry",
+       "root"
+      ],
+      "required": [
+       "goal",
+       "registry",
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
     "decompose_goal": {
      "doc": "Return ordered action clauses for an explicitly compound plain goal.",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "goal"
@@ -38379,13 +38397,11 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     }
    },
-   "sha256": "bff01503c8c9b249fe8925d8b08e6bcf75f3ba073dad853a771f9d535b28f933",
-   "tests": {
-    "canonical/tests/test_goal_compiler.py": "9dd64a77d3a429ee734db66b72850f2e00a22bd9538e99400449af0f565b7b70"
-   }
+   "sha256": "b4d79ce72e5094d7b7db40ca50af410d0dfa596e833aab5b82cfbf2845724ccb",
+   "tests": {}
   },
   "canonical/runtime/goal_dependency_delta_v4.py": {
    "doc": "Goal-conditioned novelty delta for Universal Learning V4.",
@@ -38441,7 +38457,7 @@
    "functions": {
     "bind_all_inputs": {
      "doc": "Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "goal",
@@ -38451,7 +38467,8 @@
        "future_clauses",
        "produced_paths",
        "cycle",
-       "spool"
+       "spool",
+       "allow_declared_rescue"
       ],
       "required": [
        "goal",
@@ -38460,7 +38477,7 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "bind_dag_clause": {
      "doc": "Bind ONE step of a multi-step request to a bound capability (F11).",
@@ -38490,7 +38507,8 @@
       "params": [
        "goal",
        "key",
-       "root"
+       "root",
+       "entry"
       ],
       "required": [
        "goal",
@@ -38503,7 +38521,7 @@
     },
     "blocked_zero_input_capabilities": {
      "doc": "",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "admissible"
@@ -38513,7 +38531,21 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "capability_edits_source": {
+     "doc": "Does this capability declare that it CHANGES a file, rather than reading one?",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "entry"
+      ],
+      "required": [
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     },
     "capability_id_shaped_tokens": {
      "doc": "Tokens in the goal that have the shape of a receipt-backed capability identity.",
@@ -38529,9 +38561,110 @@
      },
      "tier": "READ_ONLY_UNTESTED"
     },
+    "compile_goal": {
+     "doc": "Compile a goal, and never answer a named capability with a different one.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "admissible",
+       "root"
+      ],
+      "required": [
+       "goal",
+       "admissible",
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "declared_adapter_defaults": {
+     "doc": "Input keys whose default is written in the capability's OWN adapter source.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "entry"
+      ],
+      "required": [
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "declared_optional_inputs": {
+     "doc": "Input keys the row itself says its adapter can synthesize.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "entry"
+      ],
+      "required": [
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "declared_replacement_identifier": {
+     "doc": "The one identifier the sentence names as the replacement (\"... to item_total\").",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal"
+      ],
+      "required": [
+       "goal"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "defining_module_of_qualname": {
+     "doc": "The ONE module under source_root that defines this qualname, or None.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "qualname",
+       "source_root",
+       "root"
+      ],
+      "required": [
+       "qualname",
+       "source_root",
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "derive_declared_inputs": {
+     "doc": "Settle refused keys from declarations already in the repository.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "unbound",
+       "root",
+       "entry",
+       "inputs",
+       "allow_inferred_referent"
+      ],
+      "required": [
+       "goal",
+       "unbound",
+       "root",
+       "entry",
+       "inputs"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
     "explicitly_named_capabilities": {
      "doc": "Every capability whose id appears verbatim in ``goal``, on identifier boundaries.",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "goal",
@@ -38543,11 +38676,11 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "input_keys": {
      "doc": "",
-     "passing_cases": 3,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "entry"
@@ -38557,11 +38690,11 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "is_plain_goal_routable": {
      "doc": "Defect 4: a tool that takes no input cannot be what a sentence asked for.",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "entry"
@@ -38571,7 +38704,7 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "naming_is_the_whole_request": {
      "doc": "Defect 10: a goal that only names ``cid`` is the caller choosing it, not an input to guess.",
@@ -38623,7 +38756,7 @@
     },
     "prose_only": {
      "doc": "The sentence without URLs, repository paths and quoted literals (F8, F25).",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "goal"
@@ -38633,7 +38766,7 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "ranked_candidates": {
      "doc": "Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.",
@@ -38653,7 +38786,7 @@
     },
     "repair_output_collisions": {
      "doc": "F10: an output path is never one of the action's own input files.",
-     "passing_cases": 2,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "goal",
@@ -38671,11 +38804,43 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "request_names_capability_id": {
+     "doc": "Does the sentence name this capability, judging by its module name?",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "text",
+       "cid"
+      ],
+      "required": [
+       "text",
+       "cid"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "request_states_the_capability_name": {
+     "doc": "True only when the caller wrote the capability's WHOLE name, in order.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "text",
+       "cid"
+      ],
+      "required": [
+       "text",
+       "cid"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     },
     "routable_registry": {
      "doc": "",
-     "passing_cases": 4,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "admissible"
@@ -38685,7 +38850,7 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "score_capability": {
      "doc": "The score of ONE capability for this sentence, on the same basis the ranker uses.",
@@ -38718,12 +38883,25 @@
       "var_kw": false
      },
      "tier": "READ_ONLY_UNTESTED"
+    },
+    "without_stated_text_value": {
+     "doc": "The sentence with a stated text VALUE blanked, for SELECTION only.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "text"
+      ],
+      "required": [
+       "text"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     }
    },
-   "sha256": "bd68bbca87bfae771339a184911dcbf00718ee153f9646fe771f37b5f3ded88f",
+   "sha256": "f21a913c0ad0711a6cd838cb4ff21aec51e8ef30f451e8d7fa422064a32b3bb7",
    "tests": {
-    "canonical/tests/test_goal_front_compiler_v1.py": "87512bae4c40f1e3af0b5b95ba4856a67397a10680d4831dee522fe7315000d0",
-    "canonical/tests/test_output_destination_is_not_an_input_candidate_v1.py": "7487cd767648227c64db0c504fb11e5fa4c27b078b28ba858e4e9e80cf9bd12c"
+    "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py": "78aa784aaabbb28ada352e0bf9a79a2b3b28f3ea1e17d9c916725a5fd282fa3e"
    }
   },
   "canonical/runtime/goal_to_decision_binding_authority_v1.py": {
@@ -46395,7 +46573,7 @@
    "functions": {
     "dag_admission": {
      "doc": "R7/R8/R9: judge a planned multi-step capability DAG before anything executes.",
-     "passing_cases": 4,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "goal",
@@ -46411,11 +46589,11 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "dag_contract_errors": {
      "doc": "The planner's own dependency contract, re-derived from the plan before anything runs.",
-     "passing_cases": 1,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "dag"
@@ -46425,11 +46603,11 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
     },
     "dag_executor": {
      "doc": "Which executor runs this DAG: the pinned kernel, or this entry's local adapter runner.",
-     "passing_cases": 3,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "compiled",
@@ -46441,7 +46619,37 @@
       ],
       "var_kw": false
      },
-     "tier": "TEST_EVIDENCED"
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "declared_effect_ids": {
+     "doc": "The rows whose OWN DECLARATION can supply every effect the sentence states.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "registry"
+      ],
+      "required": [
+       "goal",
+       "registry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "declared_object_roles": {
+     "doc": "The object roles a registry row declares, from its own argument slots.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "entry"
+      ],
+      "required": [
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     },
     "execute_capability_plan_locally": {
      "doc": "The autonomous DAG executor: run the planned steps in order, forwarding artifacts locally.",
@@ -46467,9 +46675,51 @@
      },
      "tier": "READ_ONLY_UNTESTED"
     },
+    "failure_kind": {
+     "doc": "What KIND of failure this is, so a defect is never mistaken for a refusal.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "result"
+      ],
+      "required": [
+       "result"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "failure_reason": {
+     "doc": "The one answer to \"why did this fail\", whatever shape the result has.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "result"
+      ],
+      "required": [
+       "result"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "inventory_source_path": {
+     "doc": "The repository path an inventory row is keyed by, or ``None``.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "capability_id"
+      ],
+      "required": [
+       "capability_id"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
     "kernel_refuses": {
      "doc": "True when this entry carries a source type THIS ENTRY executes locally rather than delegating.",
-     "passing_cases": 3,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "entry"
@@ -46479,11 +46729,129 @@
       ],
       "var_kw": false
      },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "object_role_errors": {
+     "doc": "A PASS whose row edits a DIFFERENT KIND of object than the sentence names.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "entry"
+      ],
+      "required": [
+       "goal",
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "observe_world": {
+     "doc": "What the filesystem looked like, read here rather than taken on report.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal"
+      ],
+      "required": [
+       "goal"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "observed_effect_errors": {
+     "doc": "Did the run leave any evidence at all, and did it leave the tree intact?",
+     "passing_cases": 2,
+     "signature": {
+      "params": [
+       "goal",
+       "before",
+       "after",
+       "result",
+       "artifacts"
+      ],
+      "required": [
+       "goal",
+       "before",
+       "after",
+       "result"
+      ],
+      "var_kw": false
+     },
      "tier": "TEST_EVIDENCED"
+    },
+    "promised_artifact_class": {
+     "doc": "Name the error that actually fired, not a constant.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "errors"
+      ],
+      "required": [
+       "errors"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "promised_artifact_errors": {
+     "doc": "R6: every output file the goal named must now exist.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "future_artifacts"
+      ],
+      "required": [
+       "goal",
+       "future_artifacts"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "promised_source_change_errors": {
+     "doc": "Every source file the goal asked to repair must actually be different now.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "before",
+       "artifacts",
+       "roots_before",
+       "before_files"
+      ],
+      "required": [
+       "goal",
+       "before"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "route_admission": {
+     "doc": "Judge one compiled route. Returns {\"admitted\": bool, ...evidence}.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "compiled",
+       "registry"
+      ],
+      "required": [
+       "goal",
+       "compiled",
+       "registry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     },
     "run_adapter_locally": {
      "doc": "E1: execute one bound adapter the way the kernel would, for source types the kernel refuses.",
-     "passing_cases": 3,
+     "passing_cases": 0,
      "signature": {
       "params": [
        "entry",
@@ -46495,11 +46863,118 @@
       ],
       "var_kw": false
      },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "sentence_promises_a_change": {
+     "doc": "Does the sentence USE a change verb, rather than merely contain one?",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal"
+      ],
+      "required": [
+       "goal"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "solve": {
+     "doc": "Public entry: explicit structured obligations can never be ignored.",
+     "passing_cases": 29,
+     "signature": {
+      "params": [
+       "request"
+      ],
+      "required": [
+       "request"
+      ],
+      "var_kw": false
+     },
      "tier": "TEST_EVIDENCED"
+    },
+    "solve_or_learn": {
+     "doc": "Try it; if the machine cannot, let that be the signal to learn how.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "request",
+       "learn",
+       "registry_path"
+      ],
+      "required": [
+       "request"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "stated_answer_errors": {
+     "doc": "A sentence that asks for X must be answered by something that declares X.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "entry",
+       "cid"
+      ],
+      "required": [
+       "goal",
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "stated_answer_payload_errors": {
+     "doc": "The answer the sentence named, checked against the artifact the run wrote.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "result"
+      ],
+      "required": [
+       "goal",
+       "result"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "stated_application_errors": {
+     "doc": "The sentence asks for the change to be MADE; did the capability declare that it makes it?",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "entry"
+      ],
+      "required": [
+       "goal",
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "stated_object_roles": {
+     "doc": "The object roles the sentence names, from the nouns it puts before them.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal"
+      ],
+      "required": [
+       "goal"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     },
     "tool_truth_errors": {
      "doc": "R5: the executed tool's own verdict wins over the controller's \"it returned\".",
-     "passing_cases": 1,
+     "passing_cases": 2,
      "signature": {
       "params": [
        "result"
@@ -46512,12 +46987,14 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "fe947f7c81d58158d846a47249657da668c3dda46bac8f999f806f67abbbbc10",
+   "sha256": "fc03bf5ea79e4ed25575ec18caaba34a320febefd0a168b6e6a225348c023931",
    "tests": {
-    "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
-    "canonical/tests/test_live_brain_route_admission_v1.py": "7d94a04b2172d675f6f5e25e134447882f39b5a2ec1f2a358047e148e6c3134e",
-    "canonical/tests/test_live_solver_families_v3.py": "5bf31fe656407e675b74329360f5e687f92df10d432dbf43ef0419bfc8b8e3a4",
-    "canonical/tests/test_verified_bound_capability_execution_adapter_v1.py": "369cc2b500ec8ecc5024ab40d39c3c372daafaac686672f708c6c7ae08b2b24c"
+    "canonical/tests/test_a_revision_is_a_value_not_a_topic_v1.py": "18cab48f0060699348643d357e2c371f086cd4192dee412bb2fb66a96b66d162",
+    "canonical/tests/test_a_row_declares_only_what_it_implements_v1.py": "5e9f773cecbe39f0efc7145d95c878b1ff7164b5576416743ff5026b245eab31",
+    "canonical/tests/test_diagnosis_source_and_test_roles_v1.py": "3abeb789b32c84c76d81f8b78fc1960041b30cba7bbad692e5c31db9d961146c",
+    "canonical/tests/test_swe_intent_scope_regressions_v1.py": "7c8b06d1ea8cc6712bc9c14a644c3d98b4cc37150d9511c1e19c295862d97b15",
+    "canonical/tests/test_swe_typed_plan_v1.py": "1cc0be72c1e9995d0016d192f53ec04ce0ef27ece1376b5393bfae612b886918",
+    "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py": "78aa784aaabbb28ada352e0bf9a79a2b3b28f3ea1e17d9c916725a5fd282fa3e"
    }
   },
   "canonical/runtime/live_brain_runtime_v1.py": {
@@ -96967,12 +97444,6 @@
    "compile_criterion": "FAILING_TEST_CASES:5",
    "verify_compiled": "FAILING_TEST_CASES:5"
   },
-  "canonical/runtime/goal_compiler.py": {
-   "compile_goal": "FAILING_TEST_CASES:3"
-  },
-  "canonical/runtime/goal_front_compiler_v1.py": {
-   "compile_goal": "FAILING_TEST_CASES:3"
-  },
   "canonical/runtime/h100_iterative_depth_escape_v1.py": {
    "run": "FAILING_TEST_CASES:1"
   },
@@ -96999,12 +97470,6 @@
   },
   "canonical/runtime/judgment_control_envelope_v1.py": {
    "evaluate_materiality_counterfactual": "FAILING_TEST_CASES:1"
-  },
-  "canonical/runtime/live_brain_route_admission_v1.py": {
-   "promised_artifact_errors": "FAILING_TEST_CASES:1",
-   "route_admission": "FAILING_TEST_CASES:3",
-   "solve": "FAILING_TEST_CASES:7",
-   "solve_or_learn": "FAILING_TEST_CASES:7"
   },
   "canonical/runtime/live_integrated_brain_v1.py": {
    "load_verified_registry": "FAILING_TEST_CASES:1",
@@ -97327,36 +97792,13 @@
  },
  "remeasurement": {
   "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
-  "junit_cases_observed": 1585,
+  "junit_cases_observed": 318,
   "measured_platform": "linux",
   "measured_python": "3.11",
   "modules": [
-   "canonical/runtime/astra_runtime.py",
-   "canonical/runtime/auto_npm_library_acquisition.py",
-   "canonical/runtime/auto_pypi_library_acquisition.py",
-   "canonical/runtime/autonomous_verified_self_improvement_v1.py",
-   "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-   "canonical/runtime/capability_planner.py",
-   "canonical/runtime/capability_proposal_generators.py",
-   "canonical/runtime/cli_contract_inference.py",
-   "canonical/runtime/enforce_goal_hierarchy.py",
-   "canonical/runtime/executable_skill_program_v7.py",
-   "canonical/runtime/executable_skill_verification_authenticator_v1.py",
-   "canonical/runtime/explicit_requirement_index_v2.py",
    "canonical/runtime/goal_compiler.py",
    "canonical/runtime/goal_front_compiler_v1.py",
-   "canonical/runtime/h100_verified_capability_registry_v3.py",
-   "canonical/runtime/live_brain_route_admission_v1.py",
-   "canonical/runtime/live_integrated_brain_v1.py",
-   "canonical/runtime/lossless_raw_task_contract_v1.py",
-   "canonical/runtime/npm_package_utils.py",
-   "canonical/runtime/promote_pending_binding.py",
-   "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
-   "canonical/runtime/r3_raw_success_adapter_v1.py",
-   "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
-   "canonical/runtime/raw_goal_archive_acceptance_v1.py",
-   "canonical/runtime/source_aligned_acceptance_program_v1.py",
-   "canonical/runtime/verified_bound_capability_execution_adapter_v1.py"
+   "canonical/runtime/live_brain_route_admission_v1.py"
   ],
   "refused": [],
   "tool": "canonical/runtime/module_invocation_evidence_v1.py --remeasure",
@@ -97365,11 +97807,11 @@
  "schema": "PROJECT_BRAIN_MODULE_INVOCATION_EVIDENCE_V1",
  "summary": {
   "functions_by_tier": {
-   "READ_ONLY_UNTESTED": 2538,
-   "TEST_EVIDENCED": 2686
+   "READ_ONLY_UNTESTED": 2580,
+   "TEST_EVIDENCED": 2674
   },
   "inventory_modules": 2310,
-  "invocable_functions": 5224,
+  "invocable_functions": 5254,
   "invocable_modules": 2019,
   "modules_excluded": {
    "IMPORT_FAILED": 89,

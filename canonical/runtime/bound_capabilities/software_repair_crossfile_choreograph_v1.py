@@ -1346,7 +1346,7 @@ def _try_quadratic_to_linear(proj: pathlib.Path, test_dir: pathlib.Path, focus: 
 # ---------------------------------------------------------------------------
 # Pass H: Whole-project AST unused-import & unreferenced-function pruning
 # ---------------------------------------------------------------------------
-def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path]) -> list[pathlib.Path] | None:
+def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path], remove_functions: set[str] | None = None) -> list[pathlib.Path] | None:
     all_py = [
         p for p in sorted(proj.rglob("*.py"))
         if "__pycache__" not in p.parts and ".git" not in p.parts
@@ -1392,7 +1392,9 @@ def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: li
         kept_stmts: list[ast.stmt] = []
         for stmt in tree.body:
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)) and not stmt.name.startswith("__"):
-                if stmt.name.startswith("_") and stmt.name not in global_refs and not stmt.decorator_list:
+                requested = stmt.name in (remove_functions or set())
+                implicit_private = not remove_functions and stmt.name.startswith("_")
+                if (requested or implicit_private) and stmt.name not in global_refs and not stmt.decorator_list:
                     start = (stmt.decorator_list[0].lineno if stmt.decorator_list else stmt.lineno) - 1
                     end = stmt.end_lineno or stmt.lineno
                     drop_ranges.append((start, end))
@@ -1487,6 +1489,16 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if not focus:
         raise RuntimeError("NO_PYTHON_SOURCE_FILES")
 
+    removals = args.get("remove_functions") or []
+    if not isinstance(removals, list) or any(not isinstance(n, str) or not n.isidentifier() for n in removals):
+        raise RuntimeError("REMOVAL_TARGETS_INVALID")
+    remove_functions = set(removals)
+    if remove_functions:
+        definitions = [node.name for path in focus for node in ast.parse(path.read_bytes()).body
+                       if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))]
+        if any(definitions.count(name) != 1 for name in remove_functions):
+            raise RuntimeError("REMOVAL_TARGET_NOT_UNIQUE")
+
     pre_run_snap = {p: p.read_bytes() for p in focus}
     mode_applied = "already_acyclic_and_green"
     edited: list[pathlib.Path] | None = None
@@ -1499,6 +1511,8 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
         ("sql_parameterization", lambda: _try_sql_parameterization(proj, test_dir, focus)),
         ("concurrency_lock_synthesis", lambda: _try_concurrency_lock_synthesis(proj, test_dir, focus)),
     ):
+        if remove_functions:
+            break  # An explicit removal does not authorize unrelated repair passes.
         edited = fn()
         if edited is not None:
             mode_applied = pass_name
@@ -1507,6 +1521,8 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if edited is None:
         base_ok, _ran, _err = _verify_project(proj, test_dir)
         if not base_ok:
+            if remove_functions:
+                raise RuntimeError("REMOVAL_REQUIRES_GREEN_BASELINE:" + _err[:200])
             _has_tests = test_dir.is_dir() and any(
                 "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
                 for p in test_dir.rglob("*.py")
@@ -1519,8 +1535,10 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
         else:
             for pass_name, fn in (
                 ("quadratic_to_linear_set", lambda: _try_quadratic_to_linear(proj, test_dir, focus)),
-                ("dead_code_and_import_pruning", lambda: _try_dead_code_pruning(proj, test_dir, focus)),
+                ("dead_code_and_import_pruning", lambda: _try_dead_code_pruning(proj, test_dir, focus, remove_functions)),
             ):
+                if remove_functions and pass_name != "dead_code_and_import_pruning":
+                    continue
                 edited = fn()
                 if edited is not None:
                     mode_applied = pass_name

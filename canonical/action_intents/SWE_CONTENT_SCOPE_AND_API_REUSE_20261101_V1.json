@@ -1,0 +1,374 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "SWE_CONTENT_SCOPE_AND_API_REUSE_20261101_V1",
+ "action_intent_id": "SWE_CONTENT_SCOPE_AND_API_REUSE_20261101_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
+ "date": "2026-11-01",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Reproduced executable legacy cache deserialization, same-stat stale definition counts, implicit public API pruning, contextual-directory scope widening and commit payload dispatch into source synthesis.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Reproduced executable legacy cache deserialization, same-stat stale definition counts, implicit public API pruning, contextual-directory scope widening and commit payload dispatch into source synthesis.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tests/test_swe_cache_and_scope_reuse_v1.py",
+   "canonical/tests/test_swe_semantic_reuse_boundaries_v1.py",
+   "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py",
+   "canonical/verification/SWE_REUSE_VALIDATION_20261101.md"
+  ],
+  "route_class": "REUSE"
+ },
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "expected_parent_change": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
+ "expected_parent_frontier_change": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
+ "explicit_user_authorization": "User explicitly requested reuse-first repairs and merging all work; no authorization to bypass a failing referee.",
+ "falsification_condition": "Fresh adapter execution reuses stale bytes, loads the executable cache, deletes an implicit public function, widens an explicitly named file, interprets commit payload as source-write authority, or bypasses process mediation.",
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "incremental_spend_usd": 0,
+ "benchmark_or_family_rank_authority": false,
+ "progress_evidence_paths": [
+  "canonical/tests/test_swe_cache_and_scope_reuse_v1.py",
+  "canonical/tests/test_swe_semantic_reuse_boundaries_v1.py",
+  "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py",
+  "canonical/verification/SWE_REUSE_VALIDATION_20261101.md"
+ ],
+ "selected_route": "REUSE_CONTENT_IDENTITY_TYPED_SCOPE_AND_EXISTING_SWE_ENGINES",
+ "route_id": "SWE_CONTENT_SCOPE_AND_API_REUSE_20261101_V1",
+ "prior_work_reused": [
+  "canonical/swe_kernel/",
+  "canonical/runtime/goal_compiler.py",
+  "canonical/runtime/swe_typed_plan_v1.py",
+  "canonical/runtime/root3_subprocess_mediation_v1.py",
+  "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
+ ],
+ "stop_condition": "Require real current-tree tests and signed referee success before merge; report any residuals without weakening or fabricated evidence.",
+ "load_bearing_primary": {
+  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "Bounded reliability substrate for open coding obligations; discharges none. Probability and unlock fields are planning estimates, not capability evidence.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.5,
+  "wall_clock_cost_ub": 1
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "iteration_limit": 4,
+  "real_outcome": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
+  "required_capability": "Trustworthy content identity, exact declared read scope and non-destructive reuse.",
+  "expected_parent_level_state_change": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
+  "selected_route": "REUSE_CONTENT_IDENTITY_TYPED_SCOPE_AND_EXISTING_SWE_ENGINES",
+  "selected_surviving_route": "REUSE_CONTENT_IDENTITY_TYPED_SCOPE_AND_EXISTING_SWE_ENGINES",
+  "routes_considered": [
+   "DELETE_EXECUTABLE_CACHE_SELECTED",
+   "BYPASS_SAFETY_REJECTED",
+   "REUSE_EXISTING_DIGEST_AND_SCOPE_SELECTED"
+  ],
+  "deleted_or_bypassed_paths": [
+   "Executable pickle cache deserialization",
+   "Stat-only counter cache identity",
+   "Unrequested public API pruning",
+   "Direct runtime index fork-map dispatch"
+  ],
+  "obs_goal": {
+   "real_outcome": "Reuse existing AST, content digests, declared file-scope binding, repository operation grammar, read/plan gates and mediated subprocess batches; remove executable cache loading and preserve implicit APIs. No new capability, ownership claim or terminal progress.",
+   "surviving_necessity": "Reproduced executable legacy cache deserialization, same-stat stale definition counts, implicit public API pruning, contextual-directory scope widening and commit payload dispatch into source synthesis.",
+   "proxy_goals_deleted": [
+    "Universal best/fastest claims",
+    "Increasing a census through weaker assertions"
+   ]
+  },
+  "obs_blocker": {
+   "surviving_causal_blocker": "Reproduced executable legacy cache deserialization, same-stat stale definition counts, implicit public API pruning, contextual-directory scope widening and commit payload dispatch into source synthesis.",
+   "intrinsic_or_path_specific": "General content identity, contract binding and API compatibility defects.",
+   "delete_bypass_substitute_options": "Delete disk deserialization; retain safety gates; reuse exact-byte SHA256 and existing typed scopes."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/swe_typed_plan_v1.py",
+    "canonical/runtime/root3_subprocess_mediation_v1.py",
+    "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
+   ],
+   "external_existing_routes_checked": "CPython official pickle/hashlib sources, DiskCache repository metadata/README and CPython community issues; no external runtime dependency added.",
+   "capability_work_deleted": "No new kernel, adapter or registry row.",
+   "surviving_gap": "No universal advanced engineering claim; benchmark and ownership obligations remain open."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None promoted. Existing engines integrated from main.",
+   "downstream_work_to_delete_or_supersede": "Duplicate engine construction and unsafe cache path.",
+   "fresh_reuse_plan": "Keep optimized digest-row JSON output while scheduling workers through existing mediation."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Deletion suffices for executable cache but not exact scope or API preservation; bypass would hide defects. Existing primitives suffice; no new dependency or engine.",
+   "routes_ranked": [
+    "DELETE_EXECUTABLE_CACHE_SELECTED",
+    "REUSE_DIGESTS_SCOPE_GRAMMAR_MEDIATION_SELECTED",
+    "NEW_KERNEL_REJECTED"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Owned temporary fixtures exercise exact bytes, actual cache deserialization, public callable behavior and real execution; regressions are not independent capability receipts."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reuse current main and official model/evidence generators.",
+   "search_stop_decision": "Existing mechanisms directly address reproduced counterexamples."
+  },
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-01T04:07:25.581854+00:00",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+     "canonical/runtime/goal_compiler.py",
+     "canonical/swe_kernel/"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://github.com/python/cpython/blob/main/Doc/library/pickle.rst",
+     "https://github.com/python/cpython/blob/main/Lib/hashlib.py"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/grantjenks/python-diskcache",
+     "https://github.com/youknowone/ring"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/python/cpython/issues/91228",
+     "https://github.com/python/cpython/issues/153347"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "repo:python/cpython is:issue pickle security cache"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "python diskcache"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "repo:python/cpython is:issue hashlib cache content"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "repo:python/cpython is:issue pickle security updated:>=2026-10-01"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "REUSE_CONTENT_IDENTITY_TYPED_SCOPE_AND_EXISTING_SWE_ENGINES",
+   "incumbent_route": "Existing unsafe disk pickle/stat cache and existing AST/typed-scope primitives.",
+   "challenger_routes": [
+    {
+     "route": "Adopt an external disk-backed cache library",
+     "evidence": [
+      "https://github.com/grantjenks/python-diskcache"
+     ],
+     "qualification_evidence": [
+      "https://github.com/grantjenks/python-diskcache/blob/master/README.rst",
+      "canonical/tests/test_swe_cache_and_scope_reuse_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "The required fix is removal of untrusted executable deserialization, not a replacement cache backend.",
+      "CAPABILITY_STRENGTH": "No new count or source-binding capability is needed.",
+      "WALL_CLOCK": "No external dependency acquisition or backend integration needed for bounded integer tuples. No unmeasured speed ranking claimed.",
+      "INCREMENTAL_COST": "Reuse stdlib with no new paid service.",
+      "RELIABILITY": "Use content identity; omit unnecessary persistence attack surface.",
+      "VERIFIABILITY": "Owned current-tree stale-byte, cache and API counterexamples directly exercise the defect."
+     }
+    }
+   ],
+   "negative_search_summary": "Bounded repository and GitHub source/issue search; no universal optimality or exhaustive-search claim. Existing primitives suffice for reproduced failures.",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-01T04:07:25.581854+00:00",
+    "max_age_hours": 2,
+    "selected_route": "REUSE_CONTENT_IDENTITY_TYPED_SCOPE_AND_EXISTING_SWE_ENGINES",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython stdlib and existing native subprocess mediation",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/runtime/root3_subprocess_mediation_v1.py",
+       "canonical/tests/test_root3_subprocess_callsite_classifier_v1.py"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "AST adapters, typed contracts and existing engines",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/",
+       "canonical/runtime/goal_compiler.py",
+       "canonical/runtime/swe_typed_plan_v1.py"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "Owned local source fixtures and report storage",
+      "kind": "STORAGE",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/tests/test_swe_cache_and_scope_reuse_v1.py"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "stop_condition": "Require real current-tree tests and signed referee success before merge; report any residuals without weakening or fabricated evidence.",
+  "why_selected_route_is_fastest_sufficient": "Remove unsafe paths and repair shared binding helpers, not per-capability wrappers."
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "total_families": 19,
+   "total_atomic": 38,
+   "terminal": false,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "historical_atomic_registry_count": 38,
+   "deleted_nonnecessary_atomic_count": 2,
+   "current_load_bearing_atomic_count": 36
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "Real current-tree regressions and bounded semantic probes; no obligation discharged.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "REUSE_EXISTING_SWE_CONTENT_AND_SCOPE_BOUNDARIES",
+   "falsifier_id": "EXECUTABLE_CACHE_STALE_COUNT_OR_UNAUTHORIZED_API_EDIT",
+   "decisive_question": "Do fresh exact-byte, implicit API, scoped commit and named-file controls pass without bypassing mediation or deleting valid requested behavior?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/bound_capabilities/python_source_definition_count.py",
+     "git_blob_sha": "02bbc2e0ac04140206454452d5c63cc892993b3d"
+    },
+    {
+     "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+     "git_blob_sha": "039c4b444224e66fdb57563da4846fcc7a11eee5"
+    },
+    {
+     "path": "canonical/runtime/swe_typed_plan_v1.py",
+     "git_blob_sha": "a93cc3c7ea3fe4550a7e0f0eddd450dceb1ac685"
+    }
+   ]
+  }
+ }
+}

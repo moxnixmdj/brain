@@ -1,3 +1,5 @@
+> Historical pre-refresh audit: measurements below precede integration of main 6aa5dab4. Current bounded repair results: [SWE reuse validation](canonical/verification/SWE_REUSE_VALIDATION_20261101.md).
+
 # Current hardcore software-engineering problems — 2026-11-01
 
 ## Scope and delivery status

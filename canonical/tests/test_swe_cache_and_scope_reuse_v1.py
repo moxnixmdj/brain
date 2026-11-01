@@ -1,5 +1,4 @@
 """Content identity, untrusted cache and implicit API controls on real adapters."""
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -95,3 +94,59 @@ def test_two_named_source_files_do_not_acquire_unique_file_scope(tmp_path):
              'proposal_bindings': {'source_root':{'type':'path_file_or_dir'}}}
     assert compiler._declared_exact_file_scope(entry,'source_root',paths,
                'Count the functions in the file a.py and the file b.py.') is None
+
+
+def test_explicit_public_removal_preserves_other_implicit_api(tmp_path):
+    app = tmp_path / 'project/app'
+    app.mkdir(parents=True)
+    (app / '__init__.py').write_text('')
+    source = app / 'api.py'
+    source.write_text('def legacy(x):\n    return x\ndef public_api(x):\n    return x*2\n')
+    tests = tmp_path / 'project/tests'
+    tests.mkdir()
+    (tests / '__init__.py').write_text('')
+    (tests / 'test_api.py').write_text('import unittest\nfrom app.api import public_api\n'
+        'class T(unittest.TestCase):\n    def test_public(self):\n        self.assertEqual(public_api(4),8)\n')
+    repair.run({'source_root':'project/app', 'output_path':'report.json',
+                'remove_functions':['legacy']}, tmp_path)
+    namespace = runpy.run_path(str(source))
+    assert 'legacy' not in namespace
+    assert namespace['public_api'](4) == 8
+
+
+def test_ambiguous_explicit_removal_fails_before_any_edit(tmp_path):
+    app = tmp_path / 'project/app'
+    app.mkdir(parents=True)
+    for name in ['a.py','b.py']:
+        (app / name).write_text('def legacy(): return 1\n')
+    before = {p:p.read_bytes() for p in app.glob('*.py')}
+    import pytest
+    with pytest.raises(RuntimeError, match='REMOVAL_TARGET_NOT_UNIQUE'):
+        repair.run({'source_root':'project/app', 'output_path':'report.json',
+                    'remove_functions':['legacy']}, tmp_path)
+    assert {p:p.read_bytes() for p in app.glob('*.py')} == before
+
+
+def test_named_public_removal_survives_real_goal_binding():
+    import tempfile
+    from canonical.runtime import live_brain_route_admission_v1 as door
+    parent = ROOT / 'canonical/astra_runtime/tmp'
+    parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='explicit-removal-', dir=parent) as raw:
+        project = Path(raw)
+        app = project / 'app'
+        tests = project / 'tests'
+        app.mkdir()
+        tests.mkdir()
+        (app / '__init__.py').write_text('')
+        (tests / '__init__.py').write_text('')
+        source = app / 'api.py'
+        source.write_text('def legacy(x):\n    return x\ndef public_api(x):\n    return x*2\n')
+        (tests / 'test_api.py').write_text('import unittest\nfrom app.api import public_api\n'
+            'class T(unittest.TestCase):\n    def test_public(self):\n        self.assertEqual(public_api(4),8)\n')
+        result = door.solve({'task_id':'explicit-removal-control',
+            'goal':f'Remove the unused function legacy from {app.relative_to(ROOT)} and keep the suite green.'})
+        assert result['pass'] is True, result.get('status')
+        namespace = runpy.run_path(str(source))
+        assert 'legacy' not in namespace
+        assert namespace['public_api'](4) == 8

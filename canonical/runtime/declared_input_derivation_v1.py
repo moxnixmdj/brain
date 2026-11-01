@@ -1571,6 +1571,14 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if "choreograph" not in cid_str or re.search(r"\b(?:regression\s+test|race\s+condition|are\s+failing|circular\s+import|unused)\b", goal_str, re.I):
                 out["source_root"] = {"value": chosen_sr, "rule": "PATH_DIR_FROM_STATED_SOURCE_DIR",
                                       "evidence": src_dirs[0]}
+    if cid_str == "software.repair.choreograph.crossfile.v1":
+        removal = re.match(
+            r"^\s*(?:please\s+)?(?:remove|delete|drop)\s+(?:the\s+)?"
+            r"(?:(?:unused|dead)\s+)?function\s+[`\"']?([A-Za-z_]\w*)\b", goal_str, re.I)
+        if removal:
+            name = removal.group(1)
+            out["remove_functions"] = {"value": [name], "rule": "FUNCTION_REMOVAL_EXPLICITLY_STATED",
+                                       "evidence": removal.group(0)}
     if ("synthesize_regression_test" in keys or "choreograph" in cid_str) and re.search(r"\bregression\s+test\b", goal_str, re.I):
         out["synthesize_regression_test"] = {
             "value": True, "rule": "REGRESSION_TEST_REQUESTED", "evidence": "regression test",

@@ -1650,7 +1650,7 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                 # its helper is reused rather than redrawn.
                 _exec_entry = dict(_entry)
                 _exec_entry["action_template"] = _typed_plan_module._execution_template(
-                    _entry, set((_report or {}).get("adapter_defaulted") or {}))
+                    _entry, set((_report or {}).get("adapter_defaulted") or {}), _inputs)
         except Exception:  # noqa: BLE001 - a derivation fault keeps the declared template
             _exec_entry = _entry
         _declared = _exec_entry.get("declared_action_template")
@@ -2682,6 +2682,11 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
             and not _declares_it_does_not_write(entry)
             and not (_READ_SURFACE_RE.search(provides) and not _declares_edits)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
+    # A plan-only row is not a general reader. Its no-write limitation must
+    # not authorize it to answer a different question (e.g. a summary request).
+    if (_read_only_request and _writes and _declares_it_does_not_write(entry)
+            and not _asks_only_for_a_plan(text)):
+        out.append("STATED_QUESTION_ANSWERED_BY_A_CHANGE_PLANNER:" + (cid or "UNNAMED"))
     language = _LANGUAGE_OF_GOAL_RE.search(text)
     if (language and _PYTHON_ONLY_RE.search(surface)
             and not _LANGUAGE_SURFACE_RE.search(surface)):
@@ -3659,14 +3664,10 @@ def _scope_claim_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
         if not isinstance(files, int):
             files = doc.get("parsed_file_count") or doc.get("file_count")
         # A single-file scope is the one case that is provably too small to answer "every X":
-        # a call site can live in any other module, and one file is not the codebase -- unless
-        # that single file IS the only Python module in its package and parent directory.
+        # a call site can live in any other module. Empty parents and siblings
+        # do not prove there are no callers elsewhere in the repository.
         if scope.strip().endswith((".py", ".pyw")) and files in (None, 1, 0):
-            scope_p = (ROOT / scope.strip()).resolve()
-            parent_py = list(scope_p.parent.glob("*.py")) if scope_p.parent.is_dir() else []
-            upper_py = list(scope_p.parent.parent.glob("*.py")) if scope_p.parent.parent.is_dir() else []
-            if len(parent_py) != 1 or len(upper_py) > 0:
-                return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
+            return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
     return []
 
 
