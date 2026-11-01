@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6603,
+  "research_index_records": 6604,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "825b7065412a6a96ec90e2ca102c80444dce5bed8904b55423fe3e3719ba507c"
+  "value": "8704e49c2c264a1c02035333c4087cc382778bf8696923da589a222dc0d433ab"
  },
  "engines": [
   {
@@ -211612,6 +211612,51 @@
     "reachability_from_one_entry_63_to_66__zero_input_capabilities_3_to_0": 1,
     "reachable": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ac43241374e8832a9041419e1f2a9b527dba2c2ef58f9b4aad5207a9281a25ab",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "able": 1,
+    "adapter": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "all": 1,
+    "archive_path": 1,
+    "artifact": 1,
+    "become": 1,
+    "behind": 1,
+    "benchmark": 1,
+    "bytes": 1,
+    "check": 1,
+    "claim": 1,
+    "classified": 1,
+    "dead": 1,
+    "else": 1,
+    "externally": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "judged": 1,
+    "key": 1,
+    "make": 1,
+    "make_three_verifiers_re_readable_v1_20261102": 1,
+    "measurement": 1,
+    "moves": 1,
+    "no": 1,
+    "nobody": 1,
+    "only": 1,
+    "party": 1,
+    "produced": 1,
+    "three": 4,
+    "verdict": 2,
+    "verifiers": 3
    }
   },
   {
