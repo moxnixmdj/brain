@@ -532,6 +532,87 @@ written here substitutes for it.
 
 ---
 
+## 10.6 The bigger find: six tests that never ran the program they were testing
+
+Last section closed the pixel half. The stack has a **second half** nobody had executed: the
+`host_*_ops` modules that do structured work -- files, code, state -- with no display needed.
+
+`OSWorldHostCodeOps` never sends a shell to the policy. It builds a **fixed Python program per
+operation** and hands that text to `environment.controller.execute_python_command`, then parses a
+JSON receipt out of the output. Six operations: `READ_TEXT`, `WRITE_TEXT_VERIFIED`,
+`REPLACE_TEXT_VERIFIED`, `PYTHON_COMPILE`, `PYTEST`, `GIT_STATUS`.
+
+### The census
+
+Every implementation of `execute_python_command` in this repo, found by AST, not by name:
+
+| file | runs the program? |
+|---|---|
+| `test_osworld_v21_app_ops_successor_v1.py` | **no** -- canned |
+| `test_osworld_v21_code_workflow_v10.py` | **no** -- canned |
+| `test_osworld_v21_formula_workflow_v1.py` | **no** -- canned |
+| `test_osworld_v21_host_guest_ops_v1.py` | **no** -- canned |
+| `test_osworld_v21_structured_app_dataflow_v1.py` | **no** -- canned |
+| *(this session)* `test_host_code_ops_execute_for_real_v1.py` | **yes** |
+
+They all look like this:
+
+```python
+def execute_python_command(self, program):
+    self.programs.append(program)
+    return {"status": "success", "output": json.dumps(self.output)}
+```
+
+It records the program and returns a **canned** receipt. The program text was never executed, so
+those tests verify routing -- right operation, right arguments, right receipt parsing -- and
+cannot distinguish a working program from one that dies on line one.
+
+**Demonstrated, not asserted.** Monkeypatching `_program_header` so every generated program
+raises `NameError` immediately:
+
+| controller | verdict on a program that cannot run |
+|---|---|
+| the repo's double | `ok=True` -- **broken program passes** |
+| this session's real execution | `CodeOpsError: CODE_OP_CONTROLLER_FAILURE` -- **caught** |
+
+### Now executed for real
+
+`/home/oai` is the deployment root in `SAFE_ROOTS`; it did not exist here, so it was created.
+All six code operations were then run **verbatim, unmodified, against the real root**:
+
+| operation | what the disk actually shows |
+|---|---|
+| `WRITE_TEXT_VERIFIED` | `app.py` exists with exactly the requested text |
+| `READ_TEXT` | returns the 19 characters on disk |
+| `REPLACE_TEXT_VERIFIED` | `alpha = 1` became `gamma = 1` on disk |
+| `PYTHON_COMPILE` | compiles a real module |
+| `PYTEST` | **1 passed**, real `pytest` subprocess, returncode 0 |
+| `GIT_STATUS` | real `git status --short`, lists the untracked files |
+
+The guest state operations (`MKDIR`, `WRITE_TEXT`, `COPY`, `MOVE`, `DELETE`, `LIST_DIR`,
+`TEXT_REPLACE`, `READ_TEXT`, `JSON_SET`, `SHA256_FILE`, the asserts) accept any absolute path
+outside a small forbidden set, so they run **exactly as generated with no rewriting at all** --
+the most faithful execution available anywhere in this repo.
+
+### What execution found that no canned test could
+
+`JSON_SET` does `json.loads(_p.read_text())` before writing, so it **cannot create a missing
+file**. A payload meaning "record this key" fails on a fresh path with `FileNotFoundError`. Real
+constraint on sequencing, invisible to all six canned controllers. Pinned as a limitation.
+
+One suspicion was raised and **dropped**: the module sources `\\n` inside an f-string, which
+reads like it might emit a literal backslash-n into the JSON file. Executed and checked byte by
+byte -- it emits a real newline. The worry was wrong and is now a test that would catch a future
+regression.
+
+`test_host_code_ops_execute_for_real_v1.py` -- **15 passed**.
+`test_guest_state_ops_execute_for_real_v1.py` -- **20 passed**.
+
+`host_media_ops` (ffmpeg) and `host_app_ops` (`from libreoffice_calc import *`) remain
+unexecutable here for genuine substrate reasons, and are still tested only by canned controllers.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
