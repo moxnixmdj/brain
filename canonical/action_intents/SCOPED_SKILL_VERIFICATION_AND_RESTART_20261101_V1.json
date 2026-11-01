@@ -35,21 +35,26 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::An arbitrary boolean or parse-only callback can be confused with behavioral verification of retained code-repair rules.",
-  "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+  "canonical_base_commit": "70f362a0c586dc275be1ecfdf1674c9f492a70ac",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "An arbitrary boolean or parse-only callback can be confused with behavioral verification of retained code-repair rules.",
   "date": "2026-11-01",
   "expected_parent_frontier_change": "Separate stored repair hypotheses from current verification assurance; require scoped typed, candidate-bound test measurements for behavioral reuse; refuse dependency/precondition changes and persistent counterexamples. Qualify one finite cross-package repair after real interpreter restart with artifact ablations. No benchmark, ownership or terminal credit.",
-  "explicit_user_authorization": "User approved the verification/skill-contract/restart evaluation batch with Execute perfectly.",
+  "explicit_user_authorization": "Execute perfectly; subsequently Merge all your work.",
   "falsification_condition": "A bool/syntax-only callback receiving TEST_SUITE assurance, use across mismatched scope/dependencies/preconditions or persistent invalidation, stale-cache reuse after artifact deletion, or repaired copied-tree behavior failing its untouched suite invalidates the corresponding bounded claim.",
   "governance_change": false,
   "highest_leverage_now": true,
   "highest_leverage_scope": "Planning judgment for this authorized finite verification-and-restart implementation batch; not a universal comparative theorem.",
   "incremental_spend_usd": 0,
+  "integration_base_rebind": {
+    "current_merge_base": "70f362a0c586dc275be1ecfdf1674c9f492a70ac",
+    "original_planning_and_test_base": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+    "reason": "User authorized merge; preserve incoming portability/seeding and checked-format paths while integrating scoped verification. Original batch measurements remain historical, not rerun claims on the new base."
+  },
   "load_bearing_primary": {
-    "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+    "canonical_base_commit": "70f362a0c586dc275be1ecfdf1674c9f492a70ac",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -70,7 +75,7 @@
   "probe_specific": false,
   "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
   "recursive_obs": {
-    "canonical_base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+    "canonical_base_commit": "70f362a0c586dc275be1ecfdf1674c9f492a70ac",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Implicit behavioral assurance from bool/truthy callbacks",
@@ -185,7 +190,7 @@
           "route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT"
         }
       ],
-      "checked_at_utc": "2026-11-01T11:47:49.613553+00:00",
+      "checked_at_utc": "2026-11-01T12:05:19.334816+00:00",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -225,7 +230,7 @@
       "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-01T11:47:49.613553+00:00",
+        "checked_at_utc": "2026-11-01T12:05:19.334816+00:00",
         "execution_dependencies": [
           {
             "dependency": "CPython 3.11.2, pytest/pytest-subtests; pinned tree_sitter 0.20.4/tree_sitter_languages 1.10.2",
@@ -261,6 +266,21 @@
             "dependency": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
             "evidence": [
               "DIRECT_PROBE: real original/fixed/held-out suites execute through the maintained measurement runner; candidate/test hashes and nonzero counts recorded."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Incoming main portability/seeding and checked-format verification interfaces",
+            "evidence": [
+              "DIRECT_PROBE: current integrated suite 154 passed in 32.08 seconds, including export/import identity, persisted transported invalidation, seeding, checked-format refusal, acquisition/controller, and original scoped restart controls."
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -313,14 +333,14 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
   "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
-  "status": "BOUNDED_IMPLEMENTATION_TESTED__LOCAL_ADMISSION_REVALIDATION__NO_PROMOTION",
+  "status": "BOUNDED_IMPLEMENTATION_AND_MAIN_INTEGRATION_TESTED__NO_PROMOTION",
   "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-01T11:35:56.310760Z",
+    "checked_at_utc": "2026-11-01T12:05:19.334816+00:00",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
@@ -346,11 +366,11 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "25429157e627edf67a1f7432a9726a1725c32a98",
+          "git_blob_sha": "dd5f544bdbc1216aa88b60397889da9501c65daf",
           "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
         },
         {
-          "git_blob_sha": "9ff2e34de3e91d33c60d8a0eacee80c1e70120b8",
+          "git_blob_sha": "38af809c16f108c0e259411562569bf9af6b6558",
           "path": "canonical/tests/test_a_learned_skill_is_durable_and_general_v1.py"
         }
       ],

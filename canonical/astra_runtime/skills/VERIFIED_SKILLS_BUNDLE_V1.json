@@ -1,0 +1,608 @@
+{
+ "exported_ts": 1793532414.271,
+ "origin": "e2b.local:brain",
+ "rule_count": 5,
+ "rules": [
+  {
+   "created_ts": 1793532412.5042207,
+   "domain": "swe_code_repair",
+   "error_class": "python_test_repair",
+   "language": "python",
+   "provenance": [
+    {
+     "at": 1793532412.504,
+     "hits": 1,
+     "origin": "e2b.local:brain"
+    }
+   ],
+   "rule": {
+    "domain": "swe_code_repair",
+    "error_class": "python_test_repair",
+    "hole_count": 2,
+    "language": "python",
+    "pattern_tokens": [
+     [
+      "kw",
+      "return"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "+"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "*"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ]
+    ],
+    "replacement_tokens": [
+     [
+      "kw",
+      "return"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "-"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "*"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ]
+    ],
+    "skeleton_fp": "8570c0366584aae4",
+    "skill_id": "skill_5b30b7cd667d062d"
+   },
+   "skeleton_fp": "8570c0366584aae4",
+   "skill_id": "skill_5b30b7cd667d062d",
+   "verified_hits": 1
+  },
+  {
+   "created_ts": 1793532412.5009854,
+   "domain": "swe_code_repair",
+   "error_class": "python_test_repair",
+   "language": "python",
+   "provenance": [
+    {
+     "at": 1793532412.501,
+     "hits": 1,
+     "origin": "e2b.local:brain"
+    }
+   ],
+   "rule": {
+    "domain": "swe_code_repair",
+    "error_class": "python_test_repair",
+    "hole_count": 4,
+    "language": "python",
+    "pattern_tokens": [
+     [
+      "kw",
+      "return"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "op",
+      "("
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ],
+     [
+      "op",
+      ","
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id2"
+     ],
+     [
+      "op",
+      ")"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "-"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id3"
+     ]
+    ],
+    "replacement_tokens": [
+     [
+      "kw",
+      "return"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "op",
+      "("
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ],
+     [
+      "op",
+      ","
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id2"
+     ],
+     [
+      "op",
+      ")"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "+"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id3"
+     ]
+    ],
+    "skeleton_fp": "72628dc647fa05d1",
+    "skill_id": "skill_5e717ccbddc250f9"
+   },
+   "skeleton_fp": "72628dc647fa05d1",
+   "skill_id": "skill_5e717ccbddc250f9",
+   "verified_hits": 1
+  },
+  {
+   "created_ts": 1793532412.9092429,
+   "domain": "swe_code_repair",
+   "error_class": "go_repair",
+   "language": "go",
+   "provenance": [
+    {
+     "at": 1793532412.909,
+     "hits": 1,
+     "origin": "e2b.local:brain"
+    }
+   ],
+   "rule": {
+    "domain": "swe_code_repair",
+    "error_class": "go_repair",
+    "hole_count": 1,
+    "language": "go",
+    "pattern_tokens": [
+     [
+      "kw",
+      "var"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "kw",
+      "map"
+     ],
+     [
+      "op",
+      "["
+     ],
+     [
+      "kw",
+      "string"
+     ],
+     [
+      "op",
+      "]"
+     ],
+     [
+      "kw",
+      "int"
+     ]
+    ],
+    "replacement_tokens": [
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      ":="
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "kw",
+      "make"
+     ],
+     [
+      "op",
+      "("
+     ],
+     [
+      "kw",
+      "map"
+     ],
+     [
+      "op",
+      "["
+     ],
+     [
+      "kw",
+      "string"
+     ],
+     [
+      "op",
+      "]"
+     ],
+     [
+      "kw",
+      "int"
+     ],
+     [
+      "op",
+      ")"
+     ]
+    ],
+    "skeleton_fp": "2f74c81a81a4385c",
+    "skill_id": "skill_72276765c53ffea4"
+   },
+   "skeleton_fp": "2f74c81a81a4385c",
+   "skill_id": "skill_72276765c53ffea4",
+   "verified_hits": 1
+  },
+  {
+   "created_ts": 1793532413.0061042,
+   "domain": "swe_code_repair",
+   "error_class": "ts_repair",
+   "language": "typescript",
+   "provenance": [
+    {
+     "at": 1793532413.006,
+     "hits": 1,
+     "origin": "e2b.local:brain"
+    }
+   ],
+   "rule": {
+    "domain": "swe_code_repair",
+    "error_class": "ts_repair",
+    "hole_count": 2,
+    "language": "typescript",
+    "pattern_tokens": [
+     [
+      "kw",
+      "return"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "op",
+      "."
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ],
+     [
+      "op",
+      ";"
+     ]
+    ],
+    "replacement_tokens": [
+     [
+      "kw",
+      "return"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "op",
+      "?."
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "??"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "num",
+      "0"
+     ],
+     [
+      "op",
+      ";"
+     ]
+    ],
+    "skeleton_fp": "3e884f99c59e1a39",
+    "skill_id": "skill_9df30abeb867023c"
+   },
+   "skeleton_fp": "3e884f99c59e1a39",
+   "skill_id": "skill_9df30abeb867023c",
+   "verified_hits": 1
+  },
+  {
+   "created_ts": 1793532412.8893764,
+   "domain": "swe_code_repair",
+   "error_class": "rust_repair",
+   "language": "rust",
+   "provenance": [
+    {
+     "at": 1793532412.889,
+     "hits": 1,
+     "origin": "e2b.local:brain"
+    }
+   ],
+   "rule": {
+    "domain": "swe_code_repair",
+    "error_class": "rust_repair",
+    "hole_count": 3,
+    "language": "rust",
+    "pattern_tokens": [
+     [
+      "kw",
+      "for"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "kw",
+      "in"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_num",
+      "?num0"
+     ],
+     [
+      "op",
+      "..="
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ],
+     [
+      "op",
+      "."
+     ],
+     [
+      "kw",
+      "len"
+     ],
+     [
+      "op",
+      "("
+     ],
+     [
+      "op",
+      ")"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "{"
+     ]
+    ],
+    "replacement_tokens": [
+     [
+      "kw",
+      "for"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_id",
+      "?id0"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "kw",
+      "in"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "hole_num",
+      "?num0"
+     ],
+     [
+      "op",
+      ".."
+     ],
+     [
+      "hole_id",
+      "?id1"
+     ],
+     [
+      "op",
+      "."
+     ],
+     [
+      "kw",
+      "len"
+     ],
+     [
+      "op",
+      "("
+     ],
+     [
+      "op",
+      ")"
+     ],
+     [
+      "ws",
+      " "
+     ],
+     [
+      "op",
+      "{"
+     ]
+    ],
+    "skeleton_fp": "9abe90b10fd97b2c",
+    "skill_id": "skill_f8b41c7e705cda49"
+   },
+   "skeleton_fp": "9abe90b10fd97b2c",
+   "skill_id": "skill_f8b41c7e705cda49",
+   "verified_hits": 1
+  }
+ ],
+ "schema": "PROJECT_BRAIN_VERIFIED_SKILL_BUNDLE_V1"
+}

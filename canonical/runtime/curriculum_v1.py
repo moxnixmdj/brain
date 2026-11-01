@@ -129,9 +129,22 @@ def next_lesson(limit: int = 1) -> list[dict[str, Any]]:
 def _try_solve(gap: str) -> dict[str, Any]:
     from canonical.runtime import live_brain_route_admission_v1 as ra
     out = ra.solve({"task_id": "curriculum", "goal": gap})
-    ok = out.get("pass") is True
-    return {"closed": ok, "status": out.get("status"),
-            "detail": "the goal executed and passed" if ok else "the goal still fails"}
+    if out.get("pass") is True:
+        return {"closed": True, "status": out.get("status"),
+                "detail": "the goal executed and passed"}
+    try:
+        from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+            recall_and_execute_workflow,
+        )
+        recalled = recall_and_execute_workflow(gap)
+        if recalled is not None and recalled.get("pass") is True:
+            return {"closed": True, "status": "PASS__COMPILED_SKILL_RECALL",
+                    "from_memory": True, "skill_id": recalled.get("skill_id"),
+                    "detail": "executed qualified workflow skill from memory"}
+    except Exception:
+        pass
+    return {"closed": False, "status": out.get("status"),
+            "detail": "the goal still fails"}
 
 
 # filler that carries no search meaning. A gap is phrased as an instruction
@@ -306,20 +319,34 @@ def _try_documentation(gap: str) -> dict[str, Any]:
 
     The hand-written table only reaches what someone remembered to write
     down. Documentation reaches the whole standard library, which is already
-    installed and already paid for.
+    installed and already paid for, plus semantic HTML form specs when a
+    web endpoint URL is named.
     """
     try:
         from canonical.runtime import documentation_mining_v1 as dm
         out = dm.learn_or_recall(gap)
     except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
-        return {"closed": False, "status": "CHANNEL_ERROR",
-                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
-    ok = out.get("pass") is True
-    return {"closed": ok, "status": out.get("status"),
+        out = {"pass": False, "status": type(exc).__name__ + ":" + str(exc)[:200]}
+    if out.get("pass") is True:
+        return {"closed": True, "status": out.get("status"),
+                "module": out.get("module"), "suffix": out.get("suffix"),
+                "from_memory": bool(out.get("from_memory")),
+                "detail": "read %s's documentation and did it" % out.get("module")}
+    url_m = re.search(r"https?://[^\s'\"<>]+", str(gap or ""))
+    if url_m is not None:
+        try:
+            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
+            learned = solve_or_learn(gap, allow_tier1_composition=False, record_open_gap=False)
+            if learned.get("pass") is True:
+                return {"closed": True, "status": learned.get("status"),
+                        "from_memory": bool(learned.get("from_memory")),
+                        "detail": "inspected semantic web form and compiled HTTP skill"}
+        except Exception:
+            pass
+    return {"closed": False, "status": out.get("status"),
             "module": out.get("module"), "suffix": out.get("suffix"),
             "from_memory": bool(out.get("from_memory")),
-            "detail": ("read %s's documentation and did it" % out.get("module"))
-                      if ok else (out.get("status") or "the manual did not say")}
+            "detail": out.get("status") or "the manual did not say"}
 
 
 def _try_compose(gap: str) -> dict[str, Any]:

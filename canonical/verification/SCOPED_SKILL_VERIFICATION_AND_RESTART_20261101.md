@@ -87,3 +87,20 @@ copied-tree execution, **not an OS sandbox**. Passing tests does not prove every
 request requirement or arbitrary unseen behavior. Weak compatibility predicates
 can still accept wrong edits, but can no longer honestly be labeled behavioral
 assurance through this interface.
+
+## Merge integration (explicitly authorized)
+
+Integrated main `70f362a0c586dc275be1ecfdf1674c9f492a70ac` without dropping incoming skill-bundle portability,
+auto-seeding, origin provenance, or checked-format refusal behavior. Scoped
+contracts now contribute to portable bundle identity too. Export/import preserves
+zero verified-hit counts, and incoming invalidation/counterexamples disable a
+previously active copy; importing an older active bundle cannot clear that state.
+Cold-store fixtures explicitly opt out of seeding rather than count shipped rules
+as newly learned ones.
+
+Integrated affected suite: **154 passed**, 32.08 seconds, including two new scoped
+bundle/invalidation regressions and the incoming portability/seeding,
+checked-format and acquisition/controller tests. Earlier broader/baseline counts
+above remain measurements on their stated original base; they are not presented
+as reruns on this new main. Final official model regeneration and model checks
+follow report indexing.

@@ -117,6 +117,26 @@
     "seconds": 16.59
   },
   "independent_verification": false,
+  "merge_integration": {
+    "base_commit": "70f362a0c586dc275be1ecfdf1674c9f492a70ac",
+    "failed": 0,
+    "junit_sha256": "d9fdd86dac0020ac96a7866d79d7b77102fb463c89d62f4523261cb74f04a7c7",
+    "model_refresh": "Official compiler and final model checks run after this indexed report update; logs external to indexed report to avoid digest self-reference.",
+    "passed": 154,
+    "preserved": [
+      "Incoming auto-seeding, portable bundles and origin provenance",
+      "Scoped identity in bundle content addressing",
+      "Zero verified-hit counters on export/import round trip",
+      "Local and transported invalidations cannot be cleared by an older active bundle",
+      "Fixture cold-store controls explicitly seed=False"
+    ],
+    "seconds": 32.08,
+    "source_sha256": {
+      "canonical/swe_kernel/skill_verification_contract_v1.py": "a497b654176ee4ba4298602194f3e639af8b465cfc9f4b755fa884939f6119be",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py": "41617b13da07b7a3c4a1c74abbc89f49c28e976faf91281bf85db956f4aa02d7",
+      "canonical/tests/test_scoped_skill_verification_and_restart_v1.py": "c9b99d2ee231ce9418e00002008f210dc5ee7170db7cd301e81cbd517abcb7fd"
+    }
+  },
   "model_and_integrity_tests": {
     "failed": 0,
     "note": "Observed before report indexing; final official compiler and model-only revalidation are run after this report is written, with external logs to avoid report/model digest self-reference.",
@@ -320,6 +340,7 @@
     "canonical/swe_kernel/verified_skill_crystallizer_v1.py": "fe6d723544995f80cac78c3f0926f5f4cbe75d35e254db1cb7824e3dac243549",
     "canonical/tests/test_scoped_skill_verification_and_restart_v1.py": "a8b4acdb0595e994435d2fdb32aad350c5dacae6a655096bee79cf8b8fc9c3f7"
   },
+  "source_sha256_scope": "Original implementation at 3882f46, before integration; merge_integration carries the current production source bindings.",
   "status": "BOUNDED_SCOPE_AND_RESTART_CONTROLS_PASS__INHERITED_FAILURES_REMAIN",
   "terminal_credit_delta": 0,
   "universal_mastery_claim": false

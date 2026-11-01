@@ -80,7 +80,7 @@ def lesson(tmp_path):
     root = tmp_path / 'training'
     target, before, after = project(root)
     oracle = ProjectTestOracle(root, target, ['test_behavior.py'], SCOPE)
-    store = VerifiedSkillStore(tmp_path / 'skills.sqlite')
+    store = VerifiedSkillStore(tmp_path / 'skills.sqlite', seed=False)
     result = store.crystallize_code_fix(before_snippet=before, after_snippet=after, language='python',
                                         contract=CONTRACT, training_verifier=oracle)
     assert result['crystallized'], result
@@ -99,7 +99,7 @@ def test_parse_only_wrong_lesson_never_obtains_behavioral_assurance(tmp_path):
     root = tmp_path / 'training'
     target, before, after = project(root)
     wrong = after.replace(' + ', ' * ')
-    store = VerifiedSkillStore(tmp_path / 'skills.sqlite')
+    store = VerifiedSkillStore(tmp_path / 'skills.sqlite', seed=False)
     taught = store.crystallize_code_fix(before_snippet=before, after_snippet=wrong, language='python',
                                         twin_oracle=lambda s: bool(ast.parse(s)))
     assert taught['crystallized']
@@ -193,7 +193,7 @@ def test_invalidation_survives_restart_and_duplicate_teaching(lesson):
     store.lookup_rules('python')  # warm cache in this interpreter
     script = ('from pathlib import Path; import sys; '
               'from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore; '
-              'assert VerifiedSkillStore(Path(sys.argv[1])).invalidate(sys.argv[2], "counterexample", '
+              'assert VerifiedSkillStore(Path(sys.argv[1]), seed=False).invalidate(sys.argv[2], "counterexample", '
               'counterexample_sha256="a"*64)')
     proc = subprocess.run([sys.executable, '-c', script, str(store.db_path), result['skill_id']],
                           cwd=ROOT, text=True, capture_output=True, timeout=20)
@@ -204,13 +204,13 @@ def test_invalidation_survives_restart_and_duplicate_teaching(lesson):
                                            contract=CONTRACT, training_verifier=oracle)
     assert duplicate['state'] == 'INVALIDATED'
     assert store.count() == 1
-    assert recall(VerifiedSkillStore(store.db_path), before, oracle) is None
+    assert recall(VerifiedSkillStore(store.db_path, seed=False), before, oracle) is None
 
 
 def test_invalidation_during_verification_refuses_return(lesson):
     store, oracle, before, _, result = lesson
     def invalidate_then_check(candidate):
-        assert VerifiedSkillStore(store.db_path).invalidate(result['skill_id'], 'new counterexample')
+        assert VerifiedSkillStore(store.db_path, seed=False).invalidate(result['skill_id'], 'new counterexample')
         return oracle(candidate)
     assert recall(store, before, invalidate_then_check) is None
 
@@ -224,7 +224,7 @@ def test_external_sqlite_deletion_and_restore_refresh_warm_cache(lesson):
     assert store.lookup_rules('python') == []
     assert recall(store, before, oracle) is None
     with sqlite3.connect(store.db_path) as conn:
-        conn.execute('INSERT INTO crystallized_skills VALUES (?,?,?,?,?,?,?,?)', row)
+        conn.execute('INSERT INTO crystallized_skills VALUES (' + ','.join('?' for _ in row) + ')', row)
     assert recall(store, before, oracle) is not None
 
 
@@ -264,7 +264,7 @@ mode, db, root, target, scope, contract_json = sys.argv[1:]
 root = Path(root)
 contract = json.loads(contract_json)
 context = json.loads((root / 'skill_context.json').read_text())
-store = VerifiedSkillStore(Path(db))
+store = VerifiedSkillStore(Path(db), seed=False)
 oracle = ProjectTestOracle(root, target, ['test_behavior.py'], scope)
 before = (root / target).read_text()
 if mode == 'teach':
@@ -355,7 +355,7 @@ def test_test_path_aliases_cannot_bypass_rewrite_refusal(tmp_path, target):
 
 
 def test_failing_typed_twin_result_is_not_truthy_success(tmp_path):
-    store = VerifiedSkillStore(tmp_path / 'skills.sqlite')
+    store = VerifiedSkillStore(tmp_path / 'skills.sqlite', seed=False)
     def reject(source):
         return VerificationResult(False, 'SYNTAX', source_sha256(source))
     result = store.crystallize_code_fix(before_snippet='def f(a,b): return a-b',
@@ -367,8 +367,36 @@ def test_failing_typed_twin_result_is_not_truthy_success(tmp_path):
 def test_unknown_contract_constraints_are_not_silently_dropped(tmp_path):
     root = tmp_path / 'project'
     target, before, after = project(root)
-    store = VerifiedSkillStore(tmp_path / 'skills.sqlite')
+    store = VerifiedSkillStore(tmp_path / 'skills.sqlite', seed=False)
     with pytest.raises(ValueError, match='UNSUPPORTED_SKILL_CONTRACT_FIELD'):
         store.crystallize_code_fix(before_snippet=before, after_snippet=after, language='python',
                                    contract={**CONTRACT, 'unimplemented_security_condition': True},
                                    training_verifier=ProjectTestOracle(root, target, ['test_behavior.py'], SCOPE))
+
+
+def test_scoped_bundle_round_trip_preserves_identity_and_invalidation(lesson, tmp_path):
+    store, oracle, before, _, result = lesson
+    active_bundle = store.export_bundle()
+    consumer = VerifiedSkillStore(tmp_path / 'consumer.sqlite', seed=False)
+    assert consumer.import_bundle(active_bundle)['accepted'] == 1
+    assert recall(consumer, before, oracle)['skill_id'] == result['skill_id']
+    assert store.invalidate(result['skill_id'], 'transported counterexample')
+    assert consumer.import_bundle(store.export_bundle())['merged'] == 1
+    assert recall(consumer, before, oracle) is None
+    assert consumer.lookup_rules('python')[0]['counterexamples'][0]['reason'] == 'transported counterexample'
+    assert consumer.import_bundle(active_bundle)['merged'] == 1
+    assert recall(consumer, before, oracle) is None
+    fresh = VerifiedSkillStore(tmp_path / 'invalidated.sqlite', seed=False)
+    assert fresh.import_bundle(consumer.export_bundle())['accepted'] == 1
+    assert recall(fresh, before, oracle) is None
+
+
+def test_tampered_scoped_bundle_contract_is_refused(lesson, tmp_path):
+    store, _, _, _, _ = lesson
+    bundle = store.export_bundle()
+    bundle['rules'][0]['rule']['contract']['scope_id'] = 'tampered-scope'
+    consumer = VerifiedSkillStore(tmp_path / 'consumer.sqlite', seed=False)
+    result = consumer.import_bundle(bundle)
+    assert result['accepted'] == 0
+    assert result['refusals'][0]['reason'] == 'CONTENT_ADDRESS_MISMATCH'
+    assert consumer.count() == 0
