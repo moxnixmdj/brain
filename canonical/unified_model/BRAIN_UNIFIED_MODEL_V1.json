@@ -30877,7 +30877,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cf3d29f1a9c3e2e9abb2a110f81fc69ef098938775efa29aa4f67fba65e7f6a7"
+  "value": "00aa28ac98e4340ce1c2c7f218d1d6357c9c0e81f2f2c3942695ddd44e3441c7"
  },
  "engines": [
   {
@@ -60002,23 +60002,25 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 5098,
+   "bytes": 5519,
    "headings": [
     "SWE reuse validation — 2026-11-01",
     "Scope",
     "Counterexamples and tests",
     "Latest measurements and limits",
     "Reuse sources",
-    "Final integrated regression readback"
+    "Final integrated regression readback",
+    "Latest-main integration"
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_REUSE_VALIDATION_20261101.md",
-   "sha256": "aa4e709621882d2e4e3db205797509f06432c79a3be793dee2fc459008bf34ea",
+   "sha256": "21220f2b9619a411e8fb68159a7331cf4e232ba5f8516165e22c38c98cf06cdd",
    "summary": "Authority: NONE. Model-assisted development; regression results are not independent capability, benchmark, ownership or terminal credit.",
    "terms": {
     "10": 2,
     "28": 3,
     "advanced": 2,
+    "affected": 2,
     "ambiguous": 3,
     "api": 3,
     "authority": 2,
@@ -60026,44 +60028,43 @@
     "benchmark": 2,
     "blob": 2,
     "bounded": 2,
-    "broader": 2,
-    "bytes": 2,
     "cache": 4,
-    "caller": 2,
-    "cannot": 2,
-    "capability": 2,
+    "compiler": 3,
     "controls": 5,
     "cpython": 5,
-    "existing": 4,
+    "current-tree": 3,
+    "existing": 5,
     "explicitly": 3,
     "failures": 3,
     "final": 5,
     "github.com": 6,
     "https": 6,
-    "including": 3,
-    "integrated": 4,
-    "main": 3,
+    "including": 4,
+    "integrated": 5,
+    "main": 4,
     "named": 3,
-    "no": 5,
+    "no": 6,
     "not": 11,
     "official": 3,
     "only": 4,
     "pass": 3,
-    "passes": 9,
+    "passes": 10,
     "pickle": 4,
     "public": 3,
     "python": 4,
-    "real": 3,
+    "real": 4,
     "regression": 3,
     "removal": 5,
     "results": 3,
     "reuse": 4,
+    "rows": 3,
     "scope": 6,
-    "seconds": 3,
-    "subtests": 4,
+    "seconds": 4,
+    "subtests": 5,
     "surface": 3,
     "swe": 3,
-    "tests": 3
+    "tests": 3,
+    "unrelated": 3
    },
    "title": "SWE reuse validation — 2026-11-01",
    "title_terms": [
@@ -60334,7 +60335,7 @@
   "included_source_count": 1021,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "75ba8fe11e5a81e317a0c69db1ef4d62dd33dd1520fc646243cc5851cdd618a5"
+  "source_tree_digest": "441f0a79f281ea2435ae7b94828daf829174987603d02305e1ccb8b6c350f4c7"
  },
  "research_index": [
   {

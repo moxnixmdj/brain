@@ -46987,7 +46987,7 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "7176e6da3da8cacc0f59bf1ac17c7d2f14dd44736124509f30315691d8de65a2",
+   "sha256": "3985068c1e23964063c3fa19addf32c21c12cc8a72c03b2ed51f45ff596249dd",
    "tests": {
     "canonical/tests/test_a_revision_is_a_value_not_a_topic_v1.py": "18cab48f0060699348643d357e2c371f086cd4192dee412bb2fb66a96b66d162",
     "canonical/tests/test_a_row_declares_only_what_it_implements_v1.py": "5e9f773cecbe39f0efc7145d95c878b1ff7164b5576416743ff5026b245eab31",
@@ -97793,7 +97793,7 @@
  },
  "remeasurement": {
   "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
-  "junit_cases_observed": 321,
+  "junit_cases_observed": 333,
   "measured_platform": "linux",
   "measured_python": "3.11",
   "modules": [

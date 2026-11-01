@@ -34,3 +34,7 @@ CPython's [pickle warning](https://github.com/python/cpython/blob/main/Doc/libra
 ## Final integrated regression readback
 
 The final integrated pass (including named-removal controls) reports **321 passes, 5 subtests** in 28.57 seconds. The unchanged surface census reaches **28/28** with `--floor 28`. Load-bearing admission and the current-base drift guard both pass. Native evidence is refreshed only through the official remeasurement tool. The final generated-model and signed-referee results are reported in the pull request.
+
+## Latest-main integration
+
+Integrated main `56f4361347d0af633bd7ea581bf5c5d929203e5e` (including refusal diagnostics) rather than overwriting it. The combined 22-module current-tree suite now reports **333 passes, 5 subtests** in 20.48 seconds. Existing unrelated native-evidence drift remains at **21 rows**; the affected compiler/route rows are remeasured with real JUnit. No global evidence-clean assertion is made.
