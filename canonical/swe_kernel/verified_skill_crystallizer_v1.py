@@ -12,6 +12,9 @@ import ast
 import copy
 import hashlib
 import json
+import io
+import keyword
+import tokenize
 import os
 import pathlib
 import re
@@ -509,6 +512,34 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
 
 def _alpha_mutate_snippet(snippet: str, *, language: str = "python") -> tuple[str, dict[str, str]]:
     """Alpha-rename every non-keyword identifier to a distinct synthetic name."""
+    if language.lower() == 'python':
+        # The polyglot regex does not understand Python bytes/raw prefixes,
+        # exponent literals, comments, or every Python keyword. Renaming those
+        # produced invalid twins for real modules despite valid repair rules.
+        # Use the standard lexer; leave literal/comment bytes untouched.
+        lines=snippet.splitlines(keepends=True)
+        offsets=[0]
+        for line in lines:
+            offsets.append(offsets[-1]+len(line))
+        rename_map={}
+        edits=[]
+        try:
+            for token in tokenize.generate_tokens(io.StringIO(snippet).readline):
+                name=token.string
+                if (token.type==tokenize.NAME and name not in _KEYWORDS_KEEP
+                        and not keyword.iskeyword(name) and not keyword.issoftkeyword(name)):
+                    replacement=rename_map.setdefault(name,f"_twin_sym_{len(rename_map)}_{name[:4]}")
+                    edits.append((offsets[token.start[0]-1]+token.start[1],
+                                  offsets[token.end[0]-1]+token.end[1],replacement))
+        except (tokenize.TokenError,IndentationError):
+            return snippet,{}
+        pieces=[]
+        position=0
+        for start,end,replacement in edits:
+            pieces.extend((snippet[position:start],replacement))
+            position=end
+        pieces.append(snippet[position:])
+        return ''.join(pieces),rename_map
     sql_mode = language.lower() == "sql"
     toks = _tokenize_code(snippet, case_insensitive_kw=sql_mode)
     rename_map: dict[str, str] = {}
@@ -536,10 +567,15 @@ def verify_rule_on_mutated_twin(
     if not rewritten or rewritten == mutated_before:
         return False
     # Anti-memorization invariant: no original identifier may leak into the mutated twin's output.
-    rewritten_idents = {
-        val for kind, val in _tokenize_code(rewritten, case_insensitive_kw=(lang == "sql"))
-        if kind == "ident"
-    }
+    if lang == 'python':
+        try:
+            rewritten_idents={token.string for token in tokenize.generate_tokens(io.StringIO(rewritten).readline)
+                              if token.type==tokenize.NAME}
+        except (tokenize.TokenError,IndentationError):
+            return False
+    else:
+        rewritten_idents = {val for kind,val in _tokenize_code(rewritten,case_insensitive_kw=(lang=='sql'))
+                            if kind=='ident'}
     for orig_name in rename_map:
         if orig_name in rewritten_idents and orig_name not in rename_map.values():
             return False

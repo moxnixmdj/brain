@@ -11,32 +11,39 @@ verified was always thrown away and the source on disk never changed.
 This capability is that last step, and it writes only behind four gates, each of
 which fails closed:
 
-1. the stated test must FAIL on the current source.  If it already passes there
-   is nothing to repair, and "fixing" it would be a change nobody asked for;
-2. a bounded repair must actually be found and verified by the existing
-   provenance-guided engine -- no repair, no write;
-3. the realized bytes must match the patch's own `candidate_sha256` before they
-   are written, and each file is replaced atomically via a temporary sibling;
-4. the stated test must pass IN PLACE, against the real source tree, after the
-   write.  This is stronger evidence than the isolated candidate measurement the
-   acceptance controller takes, because it is the user's own file and the user's
-   own test command.
+1. both the stated command and the maintained runner for the declared test
+   corpus must agree that the original project fails (or already passes);
+2. a scoped retained proposal or the existing bounded search/fallback must
+   produce a candidate; retained memory never bypasses application gates;
+3. the realized bytes must match the patch's hashes and may not rewrite tests;
+4. both the stated command and the declared corpus must pass IN PLACE after
+   application, with the planned source bytes and declared tests unchanged;
+5. optional generated regression tests are checked before any project commit.
 
-Any failure at any gate restores every original byte and reports failure.  A
-pass therefore means: the file on disk changed, and the stated test went from
-failing to passing on that file.
+Observed post-apply verification failures restore planned source and protected
+selected-test bytes. This is not a crash-atomic filesystem transaction or an OS
+sandbox. Trusted project tests and explicit applicability context are required.
+A passing declared suite is not proof of complete request semantics.
+
+With explicit retained_learning configuration, single-target successful repairs
+may be taught to the existing scoped store using actual copied-project evidence.
+Unavailable/corrupt memory falls back to the same solver without erasing state.
 
 Zero external-model producer cognition.  Zero incremental spend.
 """
 from __future__ import annotations
 
+import ast
 import importlib.util
 import json
 import os
 import pathlib
 import subprocess
 import sys
+import tempfile
 from typing import Any, Mapping
+
+from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import is_test_file_name
 
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1"
 CAPABILITY_ID="python.software.repair.apply.verified.v1"
@@ -86,16 +93,47 @@ def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int,env_paths:tuple=())->t
     shared with every other member of the repair family.
     """
     try:
-        proc=subprocess.run(
-            argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
-            env={**os.environ,**_REPAIR._PATCH._source_env(*(env_paths or (cwd,)))},
-        )
+        # A same-size edit within one filesystem timestamp tick must not read
+        # the old source's bytecode cache during the final acceptance run.
+        with tempfile.TemporaryDirectory(prefix="brain-apply-pycache-") as cache:
+            proc=subprocess.run(
+                argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
+                env={**os.environ,**_REPAIR._PATCH._source_env(*(env_paths or (cwd,))),
+                     "PYTHONPYCACHEPREFIX":cache},
+            )
     except subprocess.TimeoutExpired:
         return None,b"TIMEOUT"
     except OSError as exc:
         return None,str(exc).encode("utf-8")[:4096]
     tail=(proc.stdout or b"")[-2048:]+(proc.stderr or b"")[-2048:]
     return proc.returncode,tail
+
+
+def _corpus_test(test_paths, cwd, timeout, env_paths, completed=None):
+    """Run the named corpus, not just a command that mentions its filenames.
+
+    The maintained runner rejects empty/all-skipped suites and supports explicit
+    assertion scripts. Counts can be unknown for that legacy script form; never
+    invent a positive count or promote it to a typed TEST_SUITE receipt.
+    """
+    from canonical.runtime.bound_capabilities.python_repository_acceptance_measurement_v1 import _test_count
+    argv=_REPAIR._PATCH.suite_argv(sys.executable,*test_paths)
+    if completed is not None and completed[0]==argv:
+        # The exact maintained runner/target argv has already executed. Reuse
+        # that observation, never merely an arbitrary command's zero exit code.
+        _,rc,tail=completed
+    else:
+        rc,tail=_run_test(argv,cwd,timeout,env_paths)
+    return rc,tail,_test_count(tail.decode("utf-8","replace")) or None
+
+
+def _restore_changed_tests(originals):
+    changed=False
+    for path,raw in originals.items():
+        if not path.is_file() or path.read_bytes()!=raw:
+            path.write_bytes(raw)
+            changed=True
+    return changed
 
 
 def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
@@ -107,6 +145,8 @@ def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
         "source_restored":True,
         "files_written":[],
         "unified_diffs":[],
+        "repair_search_invocations":0,
+        "retained_learning":{"enabled":False},
         "pre_apply_test_returncode":None,
         "post_apply_test_returncode":None,
         "output_verified":False,
@@ -123,13 +163,15 @@ def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
 
 
 def _atomic_write(target:pathlib.Path,data:bytes)->None:
-    tmp=target.with_name(target.name+".brain_apply_tmp")
-    tmp.write_bytes(data)
+    fd,name=tempfile.mkstemp(prefix=target.name+".brain_apply_",dir=target.parent)
+    tmp=pathlib.Path(name)
     try:
+        with os.fdopen(fd,"wb") as handle:
+            handle.write(data)
+            os.fchmod(handle.fileno(),target.stat().st_mode & 0o777)
         os.replace(tmp,target)
-    except BaseException:
+    finally:
         tmp.unlink(missing_ok=True)
-        raise
 
 
 def _try_live_trace_synth_patches(
@@ -337,8 +379,25 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     src_sub=source_root/"src"
     has_src_layout=src_sub.is_dir() and not (src_sub/"__init__.py").exists()
     env_paths=((src_sub,) if has_src_layout else ())+(source_root,*test_paths)
+    protected_tests={p:p.read_bytes() for p in test_paths}
     before_rc,before_tail=_run_test(run_argv,exec_root,timeout,env_paths)
     out["pre_apply_test_returncode"]=before_rc
+    corpus_rc,corpus_tail,corpus_count=_corpus_test(rel_tests,exec_root,timeout,env_paths,
+                                                  (run_argv,before_rc,before_tail))
+    out["pre_apply_corpus"]={"returncode":corpus_rc,"observed_test_count":corpus_count,
+                              "shared_runner_enforces_nonempty":True}
+    if _restore_changed_tests(protected_tests):
+        out["status"]="FAIL_CLOSED__DECLARED_TESTS_CHANGED_DURING_BASELINE"
+        _emit(output,out)
+        return out
+    if before_rc is None or corpus_rc is None:
+        out["status"]="FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE"
+        _emit(output,out)
+        return out
+    if (before_rc==0)!=(corpus_rc==0):
+        out["status"]="FAIL_CLOSED__STATED_COMMAND_AND_DECLARED_CORPUS_DISAGREE"
+        _emit(output,out)
+        return out
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
         # that was measured rather than assumed, so the outcome the sentence
@@ -370,9 +429,20 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     # GATE 2 -- a bounded repair must actually be found and verified.  The
     # engine restores the source itself; only its verified patches are used.
-    patches=[]
     goal_str=str(args.get("goal") or "")
-    if has_src_layout:
+    session=None
+    config=args.get("retained_learning")
+    if config is not None and (not isinstance(config,Mapping) or type(config.get("enabled")) is not bool):
+        raise RepairApplyError("INVALID_RETAINED_LEARNING_CONFIG")
+    if config is not None and config["enabled"]:
+        from canonical.swe_kernel.retained_repair_session_v1 import RetainedRepairSession
+        session=RetainedRepairSession(config,repo,source_root,exec_root,test_paths,timeout)
+        out["retained_learning"]=session.metadata
+    patches=session.propose() if session else []
+    if patches:
+        out["repair_status"]="PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION"
+        out["repair_mode"]="scoped_retained_repair"
+    elif has_src_layout:
         patches,loop_steps=_try_multistep_closed_loop_patches(
             repo,source_root,exec_root,test_paths,run_argv,timeout,env_paths,goal=goal_str
         )
@@ -380,8 +450,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             out["repair_status"]="PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH"
             out["repair_mode"]="multistep_closed_loop_beam_search"
             out["closed_loop_steps_taken"]=loop_steps
-    if not patches and not has_src_layout:
+    else:
         intermediate=output.parent/(".apply_repair_"+output.name)
+        out["repair_search_invocations"]+=1
         repair=_REPAIR.run({
             "source_root":_rel(repo,exec_root) if exec_root!=repo else ".",
             "test_paths":[_rel(repo,p) for p in test_paths],
@@ -391,7 +462,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             "max_guided_files":args.get("max_guided_files",4),
             "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
             "mutations_per_file":args.get("mutations_per_file",24),
-            "max_pair_candidates":args.get("max_pair_candidates",120),
+            "max_pair_candidates":args.get("max_pair_candidates",1000),
             "max_control_files":args.get("max_control_files",12),
             "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
         },repo)
@@ -412,6 +483,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             out["repair_status"]="PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH"
             out["repair_mode"]="multistep_closed_loop_beam_search"
             out["closed_loop_steps_taken"]=loop_steps
+    if _restore_changed_tests(protected_tests):
+        out["status"]="FAIL_CLOSED__DECLARED_TESTS_CHANGED_DURING_SEARCH"
+        _emit(output,out)
+        return out
     if not isinstance(patches,list) or not patches:
         out["status"]="OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
         out["detail"]="Bounded search exhausted; the source was not modified."
@@ -438,6 +513,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             target.relative_to(source_root)
         except ValueError as exc:
             raise RepairApplyError("PATCH_SOURCE_OUTSIDE_SOURCE_ROOT:"+rel) from exc
+        if target in protected_tests or target.name=="conftest.py" or is_test_file_name(target.name):
+            raise RepairApplyError("PATCH_MUST_NOT_REWRITE_TESTS:"+rel)
+        if target in originals:
+            raise RepairApplyError("DUPLICATE_PATCH_TARGET:"+rel)
         if not target.is_file():
             raise RepairApplyError("PATCH_TARGET_MISSING:"+rel)
         before_bytes=target.read_bytes()
@@ -446,8 +525,21 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         after=_apply_unified_diff(before_bytes.decode("utf-8"),diff_text).encode("utf-8")
         if _sha(after)!=candidate_sha:
             raise RepairApplyError("PATCH_CANDIDATE_SHA_MISMATCH:"+rel)
+        if after==before_bytes:
+            raise RepairApplyError("PATCH_HAS_NO_SOURCE_EFFECT:"+rel)
         originals[target]=before_bytes
         planned.append((target,after,rel,diff_text))
+
+    if bool(args.get("synthesize_regression_test")):
+        # The shared generator uses a deterministic destination. Refuse an
+        # existing file before any source write instead of overwriting a test.
+        for target,after,_,_ in planned:
+            old={n.name:ast.unparse(n) for n in ast.parse(originals[target]).body if isinstance(n,ast.FunctionDef)}
+            for fn in ast.parse(after).body:
+                if isinstance(fn,ast.FunctionDef) and old.get(fn.name)!=ast.unparse(fn):
+                    destination=test_paths[0].parent/f"test_regression_{target.stem}_{fn.name}.py"
+                    if destination.exists() or destination.is_symlink():
+                        raise RepairApplyError("REGRESSION_TEST_DESTINATION_ALREADY_EXISTS")
 
     # Write.  Every original byte is held so any later gate can put it back.
     written=[]
@@ -462,16 +554,25 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         after_rc,after_tail=_run_test(run_argv,exec_root,timeout,env_paths)
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
-        if after_rc!=0:
+        final_corpus_rc,_,final_count=_corpus_test(rel_tests,exec_root,timeout,env_paths,
+                                                (run_argv,after_rc,after_tail))
+        out["post_apply_corpus"]={"returncode":final_corpus_rc,"observed_test_count":final_count,
+                                   "shared_runner_enforces_nonempty":True}
+        tests_changed=_restore_changed_tests(protected_tests)
+        source_changed=any(target.read_bytes()!=after for target,after,_,_ in planned)
+        if after_rc!=0 or final_corpus_rc!=0 or tests_changed or source_changed:
             for target,original in originals.items():
                 target.write_bytes(original)
             out["files_written"]=[]
             out["status"]="FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY"
+            if tests_changed or source_changed:
+                out["status"]="FAIL_CLOSED__SOURCE_OR_TESTS_CHANGED_DURING_VERIFICATION"
             out["source_restored"]=True
             out["detail"]="The applied patch did not make the stated test pass in place; every original byte was restored."
             _emit(output,out)
             return out
     except BaseException:
+        _restore_changed_tests(protected_tests)
         for target,original in originals.items():
             target.write_bytes(original)
         out["files_written"]=[]
@@ -480,28 +581,50 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     out["applied"]=True
     out["source_restored"]=False
-    if bool(args.get("synthesize_regression_test")) and planned and test_paths:
-        from canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1 import (
-            _synthesize_differential_regression_test,
-        )
-        edited_targets=[t for t,_,_,_ in planned]
-        for _ef in edited_targets:
-            if _ef in originals and _ef.is_file() and _ef.stat().st_size==len(originals[_ef]):
-                _ef.write_bytes(_ef.read_bytes()+b"\n")
-        reg_file=_synthesize_differential_regression_test(
-            exec_root,test_paths[0].parent,edited_targets,originals
-        )
-        if reg_file is not None and reg_file.is_file():
-            reg_rel=_rel(repo,reg_file)
-            out["regression_test_written"]=reg_rel
-            out["files_written"]=list(out.get("files_written") or [])+[reg_rel]
-            if (exec_root/".git").is_dir() and exec_root!=repo:
-                rel_to_proj=[p.relative_to(exec_root).as_posix() for p in [*edited_targets,reg_file]]
-                subprocess.run(["git","add","--",*rel_to_proj],cwd=str(exec_root),capture_output=True,timeout=10)
-                subprocess.run(
-                    ["git","-c","user.name=brain","-c","user.email=brain@local","commit","-q","-m","fix and regression test"],
-                    cwd=str(exec_root),capture_output=True,timeout=10,
-                )
+    reg_file=None
+    try:
+        if bool(args.get("synthesize_regression_test")) and planned and test_paths:
+            from canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1 import (
+                _synthesize_differential_regression_test,
+            )
+            edited_targets=[t for t,_,_,_ in planned]
+            reg_file=_synthesize_differential_regression_test(
+                exec_root,test_paths[0].parent,edited_targets,originals
+            )
+            if reg_file is not None and reg_file.is_file():
+                reg_rel=_rel(repo,reg_file)
+                out["regression_test_written"]=reg_rel
+                out["files_written"]=list(out.get("files_written") or [])+[reg_rel]
+                extra_rel=reg_file.relative_to(exec_root).as_posix()
+                rc,_,count=_corpus_test([*rel_tests,extra_rel],exec_root,timeout,env_paths)
+                changed=_restore_changed_tests(protected_tests)
+                if rc!=0 or changed or any(t.read_bytes()!=raw for t,raw,_,_ in planned):
+                    for t,raw in originals.items():
+                        t.write_bytes(raw)
+                    reg_file.unlink(missing_ok=True)
+                    out.update({"pass":False,"applied":False,"source_restored":True,"files_written":[],
+                                "status":"FAIL_CLOSED__GENERATED_REGRESSION_VERIFICATION_FAILED"})
+                    _emit(output,out)
+                    return out
+                out["generated_regression_verification"]={"returncode":rc,"observed_test_count":count}
+                if (exec_root/".git").is_dir() and exec_root!=repo:
+                    rel_to_proj=[p.relative_to(exec_root).as_posix() for p in [*edited_targets,reg_file]]
+                    subprocess.run(["git","add","--",*rel_to_proj],cwd=str(exec_root),capture_output=True,timeout=10)
+                    subprocess.run(
+                        ["git","-c","user.name=brain","-c","user.email=brain@local","commit","-q","-m","fix and regression test"],
+                        cwd=str(exec_root),capture_output=True,timeout=10,
+                    )
+    except BaseException:
+        _restore_changed_tests(protected_tests)
+        for target,original in originals.items():
+            _atomic_write(target,original)
+        if reg_file is not None:
+            reg_file.unlink(missing_ok=True)
+        raise
+    if session is not None:
+        session.learn(originals)
+    out["applied_source_sha256"]={rel:_sha(t.read_bytes()) for t,_,rel,_ in planned}
+    out["declared_test_sha256"]={_rel(repo,p):_sha(raw) for p,raw in protected_tests.items()}
     out["pass"]=True
     out["output_verified"]=True
     out["status"]="PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE"

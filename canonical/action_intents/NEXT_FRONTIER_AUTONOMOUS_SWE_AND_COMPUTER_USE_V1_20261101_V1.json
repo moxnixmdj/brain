@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Foreign `src/`-layout pytest repositories (`pluggy`, `click`) produced 0 edits on `multistep_instrument_v1.py` because fault localization only traced `unittest` at function granularity without `src/` PYTHONPATH or pasted-traceback filtering, `ComputerEnv` lacked checkpointed multi-step chains and metamorphic total-vs-distinct separation, and HTTP workflow compilation lacked stateful cookies/CSRF and verified portable bundles.",
-  "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
+  "canonical_base_commit": "f4e6cdb8ed13a39c3a842842518b6b37df5fa435",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -83,7 +83,7 @@
     "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
+    "canonical_base_commit": "f4e6cdb8ed13a39c3a842842518b6b37df5fa435",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "WHOLE_REPO_RGLOB_TEST_DISCOVERY_WHEN_FAILING_TEST_FILES_ARE_STATED",
@@ -377,15 +377,15 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "019ad7108aaa706c9bfba237efad2c441cfc4fd6",
+          "git_blob_sha": "fb0e70362cdf745286bda6056a4278ab0675e424",
           "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
         },
         {
-          "git_blob_sha": "d650b0a911d8551ea20713d0a932963bd58914fd",
+          "git_blob_sha": "1f4cf5750dfbecca689700b0af2a7eacb340233d",
           "path": "canonical/runtime/computer_env_v1.py"
         },
         {
-          "git_blob_sha": "0dc75fc4582b0c6fb91051d841db2ea6f2d770d2",
+          "git_blob_sha": "e56bdee10712834e0621327087b1f403dd154e73",
           "path": "canonical/runtime/live_brain_route_admission_v1.py"
         }
       ],

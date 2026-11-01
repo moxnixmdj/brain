@@ -1,0 +1,428 @@
+{
+  "action_id": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+  "action_intent_id": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Learning transferred to variants and still charged a fingerprint for every new NAME. Ten goals of one family ('compress X.txt into X.txt.gz', ten different X, different sizes), empty store, discover() called directly: all ten closed, nine were RECALLED -- but at ~1,268 ms each against the ~265 ms a repeat of the same name costs, because `fingerprint_key` included the target. Every new name was therefore a cache miss, and every miss paid 1 s for a fingerprint that came out BYTE-IDENTICAL: measured directly, target 'a.txt.gz' and target 'zzzz.dat.gz' produce shapes ['str'], growth 0.625, revisits 6, 16 actions, EQUAL. The target shapes which argv forms are tried; it does not change what the programs are. Removing it from the key: 7,914 ms for the first, 238-328 ms for the nine the machine had never seen (mean 284 ms), 28x.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::`fingerprint_key` hashed the goal's output NAME, so a memory keyed on the machine behaved as a memory keyed on the sentence -- the one thing that changes for every variant. The estimator itself was already sound and unchanged.",
+  "canonical_base_commit": "89786efd34e0a4eddf2ea2485dc740b2a566d218",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "`fingerprint_key` hashed the goal's output NAME, so a memory keyed on the machine behaved as a memory keyed on the sentence -- the one thing that changes for every variant. The estimator itself was already sound and unchanged.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/runtime/computer_env_v1.py: `fingerprint_key()` no longer hashes the target -- a fingerprint is a fact about this machine and this seed, not about the name in the sentence. Everything else is unchanged: the cache still dies when a program's bytes change, and a recalled plan is still executed and re-verified against the real target.",
+  "expected_parent_frontier_change": "A family learned once answers its variants at ~280 ms instead of ~1.3 s, so 'learn it once' now covers the family and not the spelling.",
+  "explicit_user_authorization": "Owner instruction this session: hardcore software engineering only, all the hardcore SWE problems listed with measurements; the answers already exist in the tree so wire what is there rather than invent; do the optimal thing in the fastest way and only the right way; report honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+  "falsification_condition": "FALSIFIED if a variant of a learned family is served without its plan being executed and verified against that variant's own target, or if a fingerprint is served for a different program set or a different seed.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Variant census, empty store, ten names, discover() directly. BEFORE: first 8,994 ms, then 1,287 / 1,283 / 1,243 / 1,121 / 1,336 / 1,259 / 1,233 / 1,343 / 1,309 ms (mean 1,268 ms), 9/9 recalled. AFTER: first 7,914 ms, then 328 / 323 / 316 / 293 / 266 / 239 / 238 / 261 / 297 ms (mean 284 ms), 9/9 recalled, 10/10 closed, plan ['run_gzip'] every time, every closure re-verified against the name that was actually asked for. Fingerprint equality proven directly: two targets, one fingerprint.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/transfer_learning_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/runtime/environment_learning_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "89786efd34e0a4eddf2ea2485dc740b2a566d218",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
+      "READING_THE_HOST_ONLY_FROM_IN_NAME",
+      "WIDENING_A_STATED_REGION_TO_ITS_NEIGHBOURS"
+    ],
+    "expected_parent_level_state_change": "A family learned once answers its variants at ~280 ms instead of ~1.3 s, so 'learn it once' now covers the family and not the spelling.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_BRANCH_RESTORES_SEVEN_INDISTINGUISHABLE_EXECUTION_FAILURES",
+      "intrinsic_or_path_specific": "GENERAL__ANY_EFFECT_THE_REGISTRY_DOES_NOT_DECLARE",
+      "surviving_causal_blocker": "THE_CACHE_WAS_KEYED_ON_THE_SENTENCE_INSTEAD_OF_THE_MACHINE"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ONE_ORACLE_PREDICATE__NO_NEW_CAPABILITY_NO_NEW_ROW",
+      "existing_inherited_routes_checked": [
+        "live_brain_route_admission_v1._REFUSAL_CLASS_RE",
+        "live_brain_route_admission_v1._ALREADY_SATISFIED_RE",
+        "live_brain_route_admission_v1._may_supersede_a_failed_attempt",
+        "the <CLASS>:<detail> refusal convention across ~40 adapter classes (grep)"
+      ],
+      "external_existing_routes_checked": "None needed.",
+      "surviving_gap": "NONE_FOR_DIAGNOSIS__THE_SEVEN_REFUSALS_ARE_NOW_NAMED_AND_EACH_NAMES_A_CAPABILITY_THE_ENGINE_LACKS_(RUST_CPP_AST_REPAIR_SQL_DDL_MIGRATION_DEPENDENCY_VENDORING_FLAKE_QUARANTINE)"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_SERVED_COUNT",
+        "REMOVING_ROWS_TO_LOOK_CAPABLE"
+      ],
+      "real_outcome": "A refusal that names its own reason is reported as that reason, so the gaps that remain are readable as distinct missing capabilities instead of one generic failure count.",
+      "surviving_necessity": "A wrong answer costs more than a refusal: it spends the caller's trust on top of the request."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_CONVENTION_EVERY_ADAPTER_ALREADY_SPEAKS__ADD_ONE_PURE_CLASSIFIER"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+      "search_stop_decision": "STOPPED_WHEN_A_GREP_SHOWED_THE_CONVENTION_ALREADY_EXISTED_ACROSS_ABOUT_FORTY_CLASSES"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Reporting the outer wrapper only was rejected because it leaves six different problems sharing one status. Dropping the branch entirely was rejected because it restores seven indistinguishable execution failures.",
+      "routes_ranked": [
+        "PROMOTE_THE_INNER_CLASS__CHOSEN",
+        "REPORT_THE_OUTER_WRAPPER_ONLY",
+        "KEEP_THE_GENERIC_FAILURE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_CENSUS_SNAPSHOTS_THE_REAL_DIRECTORY_AND_THE_TESTS_OPEN_THE_REAL_FILE"
+    },
+    "real_outcome": "A name the machine has never seen is answered from what it learned on a different name in the same family, and the answer is executed and opened before it is reported.",
+    "required_capability": "a fingerprint cache keyed on what a fingerprint is a fact about -- the machine and the seed -- not on the goal text",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "SAME",
+            "INCREMENTAL_COST": "ZERO_CODE",
+            "RELIABILITY": "NO_STATE_TO_ROT",
+            "VERIFIABILITY": "TRIVIAL",
+            "WALL_CLOCK": "1_268_MS_PER_VARIANT"
+          },
+          "evidence": [
+            "Measured 2026-11-01: nine variants recalled at a mean of 1,268 ms while their fingerprints were byte-identical to the one already cached."
+          ],
+          "qualification_evidence": [
+            "direct probe: variant census before the change, 10/10 closed, 9/9 recalled, mean 1,268 ms"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEY_THE_FINGERPRINT_ON_THE_GOAL_NAME"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "WRONG_MACHINE",
+            "INCREMENTAL_COST": "ONE_DICT",
+            "RELIABILITY": "SERVES_A_MACHINE_IT_DID_NOT_SEE",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "FASTEST"
+          },
+          "evidence": [
+            "A goal does not determine what the programs do; the same sentence on a machine with different programs has a different answer."
+          ],
+          "qualification_evidence": [
+            "direct probe: the fingerprint key still hashes every program's mtime and size and the seed bytes"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "CACHE_THE_WHOLE_DISCOVERY_ANSWER_ON_THE_GOAL_TEXT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "SAME",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "NOTHING_ROTS",
+            "VERIFIABILITY": "TRIVIAL",
+            "WALL_CLOCK": "8_S_PER_VARIANT"
+          },
+          "evidence": [
+            "That is what the key was doing: 8,994 ms for each new name had the cache been keyed per goal, and 1,268 ms with the name-only miss."
+          ],
+          "qualification_evidence": [
+            "direct probe: first variant 7,914-8,994 ms"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "RELEARN_THE_FAMILY_FOR_EVERY_NEW_NAME"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "FAMILY_NOT_SPELLING",
+            "CORRECTNESS": "UNCHANGED_BECAUSE_REVERIFIED",
+            "INCREMENTAL_COST": "ONE_KEY_FIELD_REMOVED",
+            "RELIABILITY": "DIES_WITH_THE_PROGRAM_BYTES_AND_THE_SEED",
+            "VERIFIABILITY": "TWO_FINGERPRINTS_COMPARED_AND_A_TEN_GOAL_CENSUS",
+            "WALL_CLOCK": "284_MS_PER_UNSEEN_VARIANT"
+          },
+          "evidence": [
+            "After: nine unseen names at 238-328 ms, all closed, all re-verified against their own target."
+          ],
+          "qualification_evidence": [
+            "direct probe: 3 variant tests in 4.97 s; 20 discovery tests in 102.89 s; 60 transfer/cache tests in 6.57 s"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T13:37:24Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "KEY_THE_FINGERPRINT_ON_THE_GOAL_NAME",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external engine. The estimator and the cache both existed; the defect was one hashed field, and the measurement that pins it is two fingerprints compared byte for byte.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "transfer learning across variants of one task family"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "cache key over facts a computation depends on"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "structural fingerprint of an environment action space"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "negative transfer verification before reuse"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T13:37:24Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib (hashlib, os, json, pathlib)",
+            "evidence": [
+              "DIRECT_PROBE: the key was recomputed per call; both targets hashed to the same value once the name was removed"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/computer_env_v1.py + transfer_learning_v1.py (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 60 transfer/cache tests in 6.57 s; 20 discovery tests in 102.89 s; 3 new variant tests in 4.97 s"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "gzip on PATH, which every one of the ten closures used",
+            "evidence": [
+              "DIRECT_PROBE: 10/10 variants closed on plan ['run_gzip'], each output opened by the gzip verifier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/declared_input_derivation_v1.py already computes start_line/end_line from a host function's statement runs (the extract-region block)",
+          "canonical/runtime/bound_capabilities/python_refactor_extract_function.py already performs the extraction and returns gate PASS given qualname=total and lines 3-4"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "modelcitizendeveloper survey 1.104.1: only LibCST, RedBaron and Bowler fully preserve formatting; Rope does text-based modification with partial round-trip fidelity"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/project/rope 1.15.0: 'the world's most advanced open source Python refactoring library', LGPL v3+, 'Most Python syntax up to Python 3.10 is supported'"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "github.com/Instagram/LibCST README: a CST that keeps all formatting details (comments, whitespace, parentheses), for automated refactoring"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "DELETE_THE_MAGNET_ROWS__MEASURED_TO_PRODUCE_FOUR_WRONG_ANSWERS",
+      "BUILD_A_SEPARATE_EFFECT_GATE__DUPLICATES_THE_EXISTING_TABLE",
+      "ADD_FOUR_CLASSES_TO_THE_EXISTING_TABLE__CHOSEN"
+    ],
+    "selected_route": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+    "selected_surviving_route": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+    "stop_condition": "STOP when the cost of a new task in a known family is bounded by re-verification alone, and every closure names the check that granted it.",
+    "why_selected_route_is_fastest_sufficient": "The estimator, the store and the re-verification were all correct; the key was wrong by one field. Removing it costs nothing and makes reuse cover variants, which is the whole of what 'learn it once' claims."
+  },
+  "route_id": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+  "stop_condition": "STOP when the cost of a new task in a known family is bounded by re-verification alone, and every closure names the check that granted it.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T13:37:24Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "d650b0a911d8551ea20713d0a932963bd58914fd",
+          "path": "canonical/runtime/computer_env_v1.py"
+        },
+        {
+          "git_blob_sha": "7e2053609bc3a199b3002410a73b436b2a9e2e33",
+          "path": "canonical/runtime/transfer_learning_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_A_MEMORY_OF_ONE_TASK_BE_KEYED_ON_ITS_NAME_AND_STILL_BE_CALLED_A_MEMORY",
+      "falsifier_id": "COMPARE_TWO_FINGERPRINTS_FOR_TWO_NAMES",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_ADAPTER_ALREADY_EXTRACTS_THE_STATED_LOOP_WITH_GATE_PASS_WHEN_GIVEN_QUALNAME_total_AND_LINES_3_4__NOTHING_WAS_MISSING_BUT_THE_ORDER_OF_THE_TWO_ANSWERS_AND_NO_OTHER_REQUEST_IN_THE_49_CASE_CENSUS_CHANGED_VERDICT",
+      "proposal_id": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The cache still dies when a program's bytes or the seed change, and a recalled plan is still executed and re-verified against the real target before anything is reported."
+}

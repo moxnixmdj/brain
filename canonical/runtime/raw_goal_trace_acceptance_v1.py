@@ -32,6 +32,7 @@ import ast
 import json
 import math
 import re
+import shutil
 import subprocess
 import tarfile
 import zipfile
@@ -1166,6 +1167,64 @@ def _post_sort(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
                       "destination_matches_sorted_source": True}
 
 
+def _post_ruff_format(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`ruff format A` promises A is in the formatter's own canonical form, still parses,
+    and still says the same thing.
+
+    THE FORMATTER WAS REACHABLE AND IS NOT, TODAY.  The table this entry belongs in
+    had no `ruff` key at all on 2026-11-01 and neither did `_READ_ONLY_COMMANDS`,
+    so `_prose_argv` -- which only proposes a program that is in one of the two --
+    refused to translate the plainest sentence in this family.  Measured:
+
+        route.extract_argv("Format <repo>/calc.py.")        -> None
+        door.solve({"goal": "Format calc.py."})             -> FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED, 181 ms
+        test_a_formatter_is_verified_by_its_own_check_v1    -> 2 failed (argv None)
+
+    while `ruff` is installed and the composer still carries the row that routes
+    `^\s*format` to it (`_ruff_format_flags` -> ["format"], arity 1).  The row and
+    the program were both here; the entry that makes a program JUDGEABLE was gone.
+
+    Nothing is taken on the adapter's report.  The promise is re-derived by asking
+    the tool itself (`ruff format --check A`), and the result must still be Python:
+    a formatter that emitted a file which does not parse is a destroyed file with a
+    canonical layout.  AST equality with the pre-run file cannot be asserted here
+    because this runs after the command; parseability and the tool's own check are
+    what remain checkable from disk, and they are checked.
+    """
+    import subprocess
+    import ast as _ast
+    if len(tokens) != 3 or tokens[1] != "format":
+        return False, "COMMAND_RUFF_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+            "argv_tokens": len(tokens)}
+    target = _inside(root, tokens[2])
+    if target is None:
+        return False, "COMMAND_RUFF_PATH_OUTSIDE_REPOSITORY", {}
+    if not target.is_file():
+        return False, "COMMAND_RUFF_TARGET_ABSENT_FROM_DISK", {}
+    if target.suffix != ".py":
+        return False, "COMMAND_RUFF_IS_NOT_A_PYTHON_FILE", {"suffix": target.suffix}
+    body = target.read_bytes()
+    try:
+        _ast.parse(body)
+    except SyntaxError as exc:
+        return False, "COMMAND_RUFF_LEFT_A_FILE_THAT_DOES_NOT_PARSE", {
+            "line": getattr(exc, "lineno", None)}
+    ruff = shutil.which("ruff")
+    if not ruff:
+        return False, "COMMAND_RUFF_CHECK_UNAVAILABLE", {}
+    try:
+        proc = subprocess.run([ruff, "format", "--check", str(target)],
+                              capture_output=True, text=True, timeout=60)
+    except Exception as exc:  # noqa: BLE001 - a check that cannot run grants nothing
+        return False, "COMMAND_RUFF_CHECK_FAILED", {"error": type(exc).__name__}
+    if proc.returncode != 0:
+        return False, "COMMAND_RUFF_TARGET_IS_NOT_IN_CANONICAL_FORM", {
+            "returncode": proc.returncode,
+            "stdout": (proc.stdout or "")[-200:]}
+    return True, "", {"postcondition_checked": "ruff format --check",
+                      "bytes": len(body), "consumed_paths": [tokens[2]]}
+
+
 # Keyed by program name.  Anything absent is refused by the caller rather than
 # passed, so widening this table is a deliberate act with a test attached.
 def _post_gzip(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
@@ -1498,6 +1557,9 @@ _MUTATING_POSTCONDITIONS = {
     "gzip": _post_gzip,
     "tee": _post_tee,
     "sort": _post_sort,
+    # a formatter whose output is judged by the formatter's own check, and by the
+    # parser: the file must still be Python after the rewrite
+    "ruff": _post_ruff_format,
 }
 
 

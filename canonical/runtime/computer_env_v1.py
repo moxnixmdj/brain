@@ -1259,9 +1259,25 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
         Keying the cache on the program's mtime and size is what makes the entry
         die on a machine change instead of being believed across one.
         """
+        # THE TARGET IS NOT PART OF WHAT A FINGERPRINT IS A FACT ABOUT.
+        #
+        # Measured 2026-11-01, ten variants of one learned family ("compress X.txt
+        # into X.txt.gz", a different name and size each time): the first closed in
+        # 8,994 ms and every one after it was RECALLED -- 9 of 9, plan ['run_gzip'] --
+        # but at ~1,268 ms each, not the ~265 ms a repeat of the same name costs.
+        # The difference was this line: the target was in the key, so every new name
+        # was a cache miss and every new name paid for a fingerprint that came out
+        # byte-identical.  Measured directly: the same machine, targets "a.txt.gz"
+        # and "zzzz.dat.gz", produced EQUAL fingerprints (shapes ['str'], growth
+        # 0.625, revisits 6, 16 actions).
+        #
+        # The target shapes which argv forms are TRIED; it does not change what the
+        # programs are.  What makes that safe is unchanged: a recalled plan is only
+        # ever a hypothesis, and `_verify_plan` re-executes it against the target that
+        # was actually asked for, so a fingerprint that is one target stale costs at
+        # most one trial.
         import hashlib
         h = hashlib.sha256()
-        h.update(("target=" + target + "\n").encode())
         for name, data in _seed_items():
             h.update(name.encode() + b"\0" + data + b"\0")
         for prog in progs:
