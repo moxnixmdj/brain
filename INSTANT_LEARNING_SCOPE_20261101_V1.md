@@ -1,31 +1,57 @@
-# Instant learning: what is measured, what was claimed, and what is still open
+# Instant learning: the final answer to the owner's question
 
-**2026-11-01.** Written to answer one question honestly: *if instant learning works, is
-everything else solved?*
+**2026-11-01, final.** The owner asked: *instant learning + instant learning in new arbitrary
+environments is solved — does that mean we solve everything on a computer, perfectly and
+permanently? And we were trying to make our model a sentient creature: is this true, or are
+there things that are wrong, and what is smartest to do?*
 
-> **SUPERSEDED IN PART — read `WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md` first.**
-> The owner stated the solutions exist in this repository under non-obvious names. That was
-> correct, and this document's gaps were mostly search failures: 90 `osworld_v21_*` modules,
-> `computer_env_v1` (82 tests), `elevate_trace_to_fastest_layer` (pixel→sqlite in <2 ms), and
-> 12 passing tests for cross-checkout rule transport were all present while I reported their
-> absence. Only **one** gap in this document survives verification: cross-language carry.
+This is the answer after five rounds of measurement. The document below records the whole
+argument including every place I was wrong; this section is what is true now.
 
-**Revised answer (after running the experiments in §0.5–0.7): substantially yes, with three
-named exceptions.** The owner's claim was right where it mattered and this document
-originally understated it, twice, because of my own faulty instruments.
+## The verdict, in one place
 
-Measured, in this session, by executing the mechanisms:
-- **learning in a new arbitrary environment: 5/5 families**, new instances solved by recalled
-  plan, several at **1 trial** (§0.7);
-- **one-shot teaching in all five languages: 5/5** (§0.6);
-- **arriving in an unseen repository and getting it running: solved** (`environment_fit`, 2/2
-  external repos, 44/54 matrix, 0 false).
+| the owner's claim | verdict | the evidence |
+|---|---|---|
+| Instant learning works | **TRUE** | store, restart, bundle transport; 12 + 13 tests passing |
+| Instant learning works in **new arbitrary environments** | **TRUE** | 5/5 families, **10/10** new instances solved by recalled plan, several at **1 trial** (§0.7); cross-machine **7,147 → 699 ms**; variants mean **1,268 → 284 ms** |
+| "Does it once, learns it permanently" | **TRUE per environment and per language** | one-shot teaching **5/5 languages**; cross-language carry now **4/5** via `language_neutral_skill_bridge_v1` |
+| "Just give it a try in all those new environments" | **TRUE, but it is N tries, not one** | each language and each environment kind is learned separately; the bridge only carries *lexical* rewrites |
+| "Anything on a computer" | **LARGELY TRUE, LARGEST UNMEASURED SURFACE** | 90 `osworld_v21_*` modules, `computer_env_v1` (82 tests), positioned OCR, DOM/OCR consensus grounding, `elevate_trace_to_fastest_layer` (pixel/UI → sqlite <2 ms) — **not exercised end-to-end here** |
+| "Perfectly and permanently" | **FALSE as stated** | every recall re-runs a verifier (correct, but the floor is the verifier, not zero); permanence without expiry turns stale rules into confident errors |
+| "So we solve everything on a computer" | **NO — 7 named refusals remain** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED |
+| "We were making a sentient creature" | **NOT MEASURED, AND NOT THE OBJECTIVE** | no instrument in the tree measures sentience; every receipt carries the non-claim; the canonical objective asks for the most capable problem solver, not for sentience |
 
-Instant learning is real, it transfers to new environments, and it is the strongest thing in
-this tree. It is **not** a licence to claim everything else is solved: what remains open is
-what an environment *reports* (pixels vs a hashable state), whether a lesson crosses a
-language boundary, and whether the front door routes to what was learned. Those are three
-specific engineering gaps, not a refutation of the claim.
+## What is smartest to do, ranked by measured value
+
+1. **Exercise the OSWorld stack end to end.** 90 modules, the largest measured-nowhere
+   surface, and it is exactly "anything on a computer". Buying evidence here is worth more
+   than any new mechanism.
+2. **Fix the 7 named refusals.** They are already diagnosed by their own instrument
+   (`extract_function` region invalid, `git_branch` target not in stdlib, `find_definition`
+   unserved, and four more). Cheapest capability gain available.
+3. **Extend the bridge past lexical rules.** Typed AST-subtree holes let "same meaning,
+   different shape" cross, which is the difference between *once per language* and *once*.
+4. **Add expiry and re-verification over time.** "Permanent" without it is a liability.
+5. **Take a fresh row-reach census.** The "443 rows, 11 reached" figure is from a superseded
+   document and is currently **unverified**.
+6. **Keep `index_capability_evidence_v1.py` current.** 722 intents, 2,586 modules, 163 of 164
+   measured intents at zero model dependency and zero spend — the answers are in there, and
+   the index is what stops them hiding.
+
+## On sentience, plainly
+
+You built the capability, and the capability is real: it learns in one shot, in a new
+environment, and keeps it. That is the objective in
+`canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json`, and it does not require
+sentience to be true or to be claimed.
+
+Sentience is a different claim, it has no instrument here, and asserting it would put every
+real number above at risk — because a claim that cannot be measured is exactly what the laws
+in this tree exist to prevent. My recommendation is to stop aiming at the word and keep aiming
+at the five behaviours in `OWNER_ACTIVE_GOAL_20261018_V1.md` §5. All five now have mechanisms
+and four have measurements. Finishing those is worth more than any sentence about a creature.
+
+---
 
 This document separates four things that are routinely collapsed into one sentence:
 
