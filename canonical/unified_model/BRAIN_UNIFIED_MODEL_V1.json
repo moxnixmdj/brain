@@ -30923,7 +30923,7 @@
   "engines": 26,
   "knowledge_documents": 232,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6582,
+  "research_index_records": 6583,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30932,7 +30932,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1e9faaaab0da8ef48444d08a2ab6e4fd24c5073ba33d11c6688c219330d64127"
+  "value": "7259f20bf8c7048783cee83a554cfe1f7489b0f0b1a32354a2d9b58fb7a9795e"
  },
  "engines": [
   {
@@ -213827,6 +213827,51 @@
     "verifier": 2,
     "way": 2,
     "were": 2
+   }
+  },
+  {
+   "action_id": "THE_SEARCH_COULD_SEE_THE_RAISE_BUT_NOT_THE_BRANCH_AND_NOT_THE_PACKAGE_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/THE_SEARCH_COULD_SEE_THE_RAISE_BUT_NOT_THE_BRANCH_AND_NOT_THE_PACKAGE_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_SEARCH_COULD_SEE_THE_RAISE_BUT_NOT_THE_BRANCH_AND_NOT_THE_PACKAGE_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "30147ce55f5c97ffa5de6856de7a6cabfde1bd1787813c195d909afc88998fb5",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "baseline": 1,
+    "before": 1,
+    "branch": 1,
+    "bug": 1,
+    "but": 1,
+    "call": 1,
+    "candidate": 1,
+    "capability": 1,
+    "condition": 1,
+    "control": 1,
+    "derived": 1,
+    "edit": 1,
+    "every": 1,
+    "exists": 1,
+    "failure": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "human": 1,
+    "import": 2,
+    "import-broken": 1,
+    "layout": 2,
+    "line": 1,
+    "not": 4,
+    "package": 3,
+    "repair": 2,
+    "same": 2,
+    "scored": 2,
+    "search": 2,
+    "see": 2,
+    "src": 2,
+    "the_search_could_see_the_raise_but_not_the_branch_and_not_the_package_20261101_v1": 2,
+    "verified": 2
    }
   },
   {
