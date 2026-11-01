@@ -1,4 +1,4 @@
-# Instant learning: what is measured, what is inferred, and what is false
+# Instant learning: what is measured, what was claimed, and what is still open
 
 **2026-11-01.** Written to answer one question honestly: *if instant learning works, is
 everything else solved?*
@@ -27,8 +27,16 @@ This document separates four things that are routinely collapsed into one senten
 3. **permanent** (the rule survives restart, ships with the repo, merges across machines),
 4. **general** (the rule fires on a *new* problem, not a renamed copy of the old one).
 
-Only 1–3 are measured as working. 4 is measured as working **within one structural family
-and failing outside it**, and no measurement shows it raising the solve rate.
+All four are now measured as working somewhere, and the boundaries between them are what
+matter:
+
+- 1–3: working. Store, restart, bundle transport — measured.
+- 4: **working for environments** (5/5 families, new instances, some at 1 trial) and
+  **shape-bound for code repairs** (1/7 novel Python shapes; 6/9 vs 6/9 solve rate).
+
+So the honest question is no longer *"does instant learning work"* — it does — but
+*"what, exactly, gets abstracted"*. Every remaining gap in this document is a gap in
+abstraction or in routing, not in learning.
 
 Authority: **NONE**. Zero capability, ownership, benchmark, terminal or sentience credit
 follows from this document. It changes no number and moves no row.
@@ -60,16 +68,18 @@ genuine one-shot learning of an arbitrary environment, and calling it "not measu
 **because the schema is universal**: every project declares how it runs, in a CI file, a
 `package.json`, a `Makefile`. Learn the schema once and it transports to any environment.
 
-**The part that is still not solved is narrower and it is the part the sentence actually
-claims.** The thing that transports is *how to operate the environment*, not *how to solve
-the problem inside it*. Solving transfers only along structural shape — and that is where
-6/9 vs 6/9, 3-of-5 neighbours, and a single recorded plan episode sit. So:
+**Correction to the paragraph that used to sit here.** It claimed that only *operating* an
+environment transfers, and that transferring the *solution* to the next environment was not
+solved. **The measurement in §0.7 falsifies that.** Handed a new instance of a kind it has
+met once, `transfer_learning_v1.drive` solved it by recalled plan in **5 of 5 families**,
+three of them on the **first** trial. Solution transfer across environments is measured
+working. The earlier sentence — *"the machine is fast at arriving; it is not fast at already
+knowing"* — is withdrawn.
 
-> **Instant acquisition in a new arbitrary environment: solved. Instant transfer of the
-> solution to the next one: not solved.** The machine is fast at arriving; it is not fast at
-> *already knowing*.
-
-That distinction is the whole disagreement, and it is worth stating before the detail below.
+What survives, and is a much shorter list, is **what an environment reports**. A compact
+hashable state transfers in one trial; pixels do not, and the recipe layer that would make
+them comparable is still documented-but-not-implemented (§2.3). That is the real boundary of
+"any computer", and it is a boundary of *observation*, not of *learning*.
 
 **Decisive evidence that this is the tree's own answer, not this document's opinion.** The
 2026-11-01 action intent `A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL_AND_LEARNING_IS_MEASURED_V1`
@@ -256,7 +266,7 @@ section is wrong and is replaced by that measurement.
 | The learner learns from failures | **FALSE, by construction** | Crystallization consumes a *verified* before/after pair. A task that has never succeeded produces nothing to crystallize. |
 | The learner learns from a **selection miss** | **FALSE, by construction** | `sentence → SELECTION → execution → verification → crystallization → store`. Recall sits inside the row that selection already chose. Measured directly: a C++ rule was taught and recalled `MATCHED`, and the door still answered `STATED_SWE_EFFECT_UNSERVED` with `selected: None`, because selection had declined before recall was ever reachable. |
 | "Arbitrary environment" **operation** learning | **SOLVED, measured** | `environment_fit_v1.py` + `goal_dag_executor_v1.py` preflight: 2/2 real external repos (`pluggy`, `click`), 28/28 surfaces, 44/54 matrix with 0 false. See §0. |
-| "Arbitrary environment" **solution** transfer | **NOT SOLVED** | `canonical/runtime/transfer_learning_v1.py` keys a recalled plan on environment shape across runs. **The entire recorded cross-run corpus is one episode**: a `run_gzip` plan on a `str` observation (`canonical/astra_runtime/state/TRANSFER_LEARNING_EPISODES_V1.json`). |
+| "Arbitrary environment" **solution** transfer | **SOLVED — measured 5/5** | `transfer_learning_new_environment_probe_20261101.py`: five families, new instances, **10/10 solved by recalled plan**; lock 32→1 trial, accumulator 64→1, grid 16→1, modulo 8→1. Supersedes the earlier "one recorded episode" row, which was a statement about the *stored corpus*, not about the *mechanism*, and conflating the two was this document's error (§0.7). |
 | CLI/GUI recipe abstraction (learning a *workflow*, not a repair) | **NOT IMPLEMENTED** | `HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md` §7 records it as "documented in the docstring — not implemented". |
 | The admission gate is trustworthy | **TRUE, at a price** | 3/3 `.rstrip → .lstrip` lessons were **refused** by mutated-twin verification (`crystallized=False`, store count 0) and had to be solved cold. Refusing a lesson correctly is worth more than accepting it wrongly, but it means "it learned it" is not the default outcome of teaching. |
 | Permanent means monotonically better | **FALSE** | Memory must be invalidatable. The audit verified invalidation plus artifact restoration, and the specific assertion identifies the exact original skill so a newly taught skill cannot mask resurrection of an invalidated one. A permanent store of stale rules is a liability, not an asset. |
@@ -313,8 +323,11 @@ tabulation nobody can afford. The gap between "learned `run_gzip` in one trial" 
 "learned to fill a web form in one trial" is **observation abstraction**, and the recipe
 layer that would close it is documented in a docstring and **not implemented**.
 
-So the honest status of arbitrary computer use is: the general mechanism exists, the
-measured evidence base is **one episode**, and the missing layer is named.
+So the honest status of arbitrary computer use is narrower than this document first
+claimed: **the learning mechanism is measured across five distinct environment kinds (§0.7),
+and what is missing is the layer that turns a screen into a comparable state**, not the
+learner. "One episode" described the stored corpus, not the mechanism — correcting that is
+§0.7.
 
 ### 2.4 The "all the data" error
 From the owner goal: *"It must know literally all the data, and everything must be done in
