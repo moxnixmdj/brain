@@ -1,0 +1,26 @@
+name: derived inspector flywheel
+# The gate is not a coverage number. It is the negative control:
+#   a derived inspector that ACCEPTS its decoy must be refused and must not be registered.
+# If that ever passes, coverage numbers built on derived inspectors are fiction, so it is asserted
+# in the suite rather than reported as a statistic.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flywheel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: A derived inspector that cannot fail must be refused
+        run: python -m pytest canonical/tests/test_the_derived_inspector_flywheel_v1.py -q
