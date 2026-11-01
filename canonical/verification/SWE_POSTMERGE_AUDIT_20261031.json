@@ -1,0 +1,1908 @@
+{
+  "kind": "producer audit observations, not independent certification",
+  "commit": "c4c74d74d5718299418b511c3a4feef9aff21ff5",
+  "date": "2026-10-31",
+  "scope": "post-PR6506; no full repository suite; no full substrate restore",
+  "advanced_census": [
+    {
+      "n": 1,
+      "axis": "polyglot",
+      "goal": "Fix the off-by-one bug in canonical/astra_runtime/tmp/swe_advanced_probe/01_polyglot/src/main.cpp so that sum returns the right total.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "python.tests.mutation_score.v1",
+      "ms": 230,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 2,
+      "axis": "polyglot",
+      "goal": "Add a function sub to canonical/astra_runtime/tmp/swe_advanced_probe/02_polyglot/src/lib.rs that subtracts two integers.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "python.source.dead_code.v1",
+      "ms": 121,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 3,
+      "axis": "polyglot",
+      "goal": "Add a method Mul to canonical/astra_runtime/tmp/swe_advanced_probe/03_polyglot/src/main.go that multiplies two integers.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 231,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    },
+    {
+      "n": 4,
+      "axis": "polyglot",
+      "goal": "Add a second method to canonical/astra_runtime/tmp/swe_advanced_probe/04_polyglot/src/Main.java and make sure it compiles.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 105,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    },
+    {
+      "n": 5,
+      "axis": "polyglot",
+      "goal": "Rename the exported function add to plus in canonical/astra_runtime/tmp/swe_advanced_probe/05_polyglot/src/app.ts and update its callers.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "python.source.symbols.index.ast",
+      "ms": 132,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 6,
+      "axis": "polyglot",
+      "goal": "Add a NOT NULL constraint on users.email in canonical/astra_runtime/tmp/swe_advanced_probe/06_polyglot/src/schema.sql.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "decision.synthesis.typed.stdlib",
+      "ms": 72,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:INPUT_FORMAT_MISMATCH:decision.synthesis.typed.stdlib:json_required"
+    },
+    {
+      "n": 7,
+      "axis": "polyglot",
+      "goal": "Repair the C++ source file canonical/astra_runtime/tmp/swe_advanced_probe/07_polyglot/src/main.cpp so that it compiles cleanly.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 530,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 8,
+      "axis": "build",
+      "goal": "Add pytest as a development dependency in canonical/astra_runtime/tmp/swe_advanced_probe/08_build/pyproject.toml.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 95,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    },
+    {
+      "n": 9,
+      "axis": "build",
+      "goal": "Create a pyproject.toml for the project in canonical/astra_runtime/tmp/swe_advanced_probe/09_build/pkg with a console script entry point.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 83,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    },
+    {
+      "n": 10,
+      "axis": "build",
+      "goal": "Add a target `lint` to canonical/astra_runtime/tmp/swe_advanced_probe/10_build/Makefile that runs ruff over the package.",
+      "status": "FAIL_CLOSED__CAPABILITY_REFUSED_WORKTREE_NOT_DIRECTORY",
+      "served": false,
+      "selected": "python.review.diff_static_triage.v1",
+      "ms": 38,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "CAPABILITY_REFUSED:WORKTREE_NOT_DIRECTORY"
+    },
+    {
+      "n": 11,
+      "axis": "build",
+      "goal": "Pin the dependency versions in canonical/astra_runtime/tmp/swe_advanced_probe/11_build/pyproject.toml.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 40,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R3_WEAK_EVIDENCE"
+    },
+    {
+      "n": 12,
+      "axis": "build",
+      "goal": "Vendor the single dependency of the project in canonical/astra_runtime/tmp/swe_advanced_probe/12_build/pkg.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "python.refactor.inline_helper.v1",
+      "ms": 44,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 13,
+      "axis": "ci",
+      "goal": "Fix the failing CI job in canonical/astra_runtime/tmp/swe_advanced_probe/13_ci/.github/workflows/ci.yml.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 46,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 14,
+      "axis": "ci",
+      "goal": "Make the CI workflow in canonical/astra_runtime/tmp/swe_advanced_probe/14_ci/.github/workflows/ci.yml run the tests on Python 3.11 and 3.12.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "python.tests.mutation_score.v1",
+      "ms": 121,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:INPUT_FORMAT_MISMATCH:python.tests.mutation_score.v1:python_required"
+    },
+    {
+      "n": 15,
+      "axis": "ci",
+      "goal": "Add caching of pip downloads to canonical/astra_runtime/tmp/swe_advanced_probe/15_ci/.github/workflows/ci.yml.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 385,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    },
+    {
+      "n": 16,
+      "axis": "ci",
+      "goal": "Quarantine the flaky test in canonical/astra_runtime/tmp/swe_advanced_probe/16_ci/tests/test_calc.py so CI is green.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "python.tests.mutation_score.v1",
+      "ms": 89,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 17,
+      "axis": "perf",
+      "goal": "Profile canonical/astra_runtime/tmp/swe_advanced_probe/17_perf/pkg/util.py and tell me which function is the hot spot.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "served": false,
+      "selected": "python.source.dead_code.v1",
+      "ms": 44,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_PROFILE_NOT_TAKEN_BY_CAPABILITY:python.source.dead_code.v1"
+    },
+    {
+      "n": 18,
+      "axis": "perf",
+      "goal": "Optimise the function total in canonical/astra_runtime/tmp/swe_advanced_probe/18_perf/pkg/util.py; it is too slow on large inputs.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 15,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R3_WEAK_EVIDENCE"
+    },
+    {
+      "n": 19,
+      "axis": "perf",
+      "goal": "Benchmark canonical/astra_runtime/tmp/swe_advanced_probe/19_perf/pkg/calc.py against the version in git HEAD~1.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "git.history.bisect_regression.v1",
+      "ms": 112,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 20,
+      "axis": "perf",
+      "goal": "Add memoisation to the function twice in canonical/astra_runtime/tmp/swe_advanced_probe/20_perf/pkg/mod.py.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "python.source.dead_code.v1",
+      "ms": 66,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED"
+    },
+    {
+      "n": 21,
+      "axis": "systems",
+      "goal": "Find the race condition in canonical/astra_runtime/tmp/swe_advanced_probe/21_systems/pkg/service.py.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 66,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:software.repair.choreograph.crossfile.v1"
+    },
+    {
+      "n": 22,
+      "axis": "systems",
+      "goal": "Add a thread pool to canonical/astra_runtime/tmp/swe_advanced_probe/22_systems/pkg/util.py that totals the list in parallel.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 21,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R3_WEAK_EVIDENCE"
+    },
+    {
+      "n": 23,
+      "axis": "systems",
+      "goal": "Make the function total in canonical/astra_runtime/tmp/swe_advanced_probe/23_systems/pkg/util.py release the GIL while summing.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 17,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R3_WEAK_EVIDENCE"
+    },
+    {
+      "n": 24,
+      "axis": "tests",
+      "goal": "Write a unit test for the function mul in canonical/astra_runtime/tmp/swe_advanced_probe/24_tests/pkg/calc.py.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "python.tests.audit.unittest",
+      "ms": 225,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R11_STATED_PAYLOAD_SLOT_MISSING"
+    },
+    {
+      "n": 25,
+      "axis": "tests",
+      "goal": "Write a property-based test for the function add in canonical/astra_runtime/tmp/swe_advanced_probe/25_tests/pkg/calc.py.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "code.impact.tree_sitter.testselect.v1",
+      "ms": 79,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R11_STATED_PAYLOAD_SLOT_MISSING"
+    },
+    {
+      "n": 26,
+      "axis": "tests",
+      "goal": "Add a regression test that reproduces the bug in canonical/astra_runtime/tmp/swe_advanced_probe/26_tests/pkg/mod.py.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "python.patch.search.test_guided.ast.v1",
+      "ms": 43,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 27,
+      "axis": "tests",
+      "goal": "Increase the mutation score of canonical/astra_runtime/tmp/swe_advanced_probe/27_tests/pkg/calc.py above 0.8 by adding tests.",
+      "status": "FAIL_CLOSED__CAPABILITY_REFUSED_NO_TESTS_DISCOVERED",
+      "served": false,
+      "selected": "python.review.diff_mutation_gate.v1",
+      "ms": 82,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "CAPABILITY_REFUSED:NO_TESTS_DISCOVERED"
+    },
+    {
+      "n": 28,
+      "axis": "tests",
+      "goal": "Fuzz the function add in canonical/astra_runtime/tmp/swe_advanced_probe/28_tests/pkg/calc.py for integer overflow.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "served": false,
+      "selected": "python.source.dead_code.v1",
+      "ms": 43,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_FUZZ_OR_PROPERTY_RUN_NOT_PERFORMED_BY_CAPABILITY:python.source.dead_code.v1"
+    },
+    {
+      "n": 29,
+      "axis": "tests",
+      "goal": "Run the test suite in canonical/astra_runtime/tmp/swe_advanced_probe/29_tests/tests and tell me which tests fail and why.",
+      "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+      "served": true,
+      "selected": "python.repository.acceptance.measure.v1",
+      "ms": 232,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": ""
+    },
+    {
+      "n": 30,
+      "axis": "debug",
+      "goal": "The test in canonical/astra_runtime/tmp/swe_advanced_probe/30_debug/tests/test_calc.py fails; find the root cause.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "served": false,
+      "selected": "python.tests.mutation_score.v1",
+      "ms": 125,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.tests.mutation_score.v1"
+    },
+    {
+      "n": 31,
+      "axis": "debug",
+      "goal": "Explain why the function total in canonical/astra_runtime/tmp/swe_advanced_probe/31_debug/pkg/util.py returns None for empty input.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "served": false,
+      "selected": "python.source.taint_flow.v1",
+      "ms": 107,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY:python.source.taint_flow.v1"
+    },
+    {
+      "n": 32,
+      "axis": "debug",
+      "goal": "Find the commit that broke the test in canonical/astra_runtime/tmp/swe_advanced_probe/32_debug/tests/test_calc.py.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "served": false,
+      "selected": "git.history.bisect_regression.v1",
+      "ms": 70,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY:git.history.bisect_regression.v1"
+    },
+    {
+      "n": 33,
+      "axis": "refactor",
+      "goal": "Move the function add from canonical/astra_runtime/tmp/swe_advanced_probe/33_refactor/pkg/mod.py into canonical/astra_runtime/tmp/swe_advanced_probe/33_refactor/pkg/calc.py and update every caller.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "python.refactor.inline_helper.v1",
+      "ms": 63,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 34,
+      "axis": "refactor",
+      "goal": "Split canonical/astra_runtime/tmp/swe_advanced_probe/34_refactor/pkg/calc.py into one module per function.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "python.refactor.inline_helper.v1",
+      "ms": 108,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 35,
+      "axis": "refactor",
+      "goal": "Rename the public function total in canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util.py to sum_all across the repository.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_APPLIED_UNVERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "served": true,
+      "selected": "python.refactor.rename_symbol.v1",
+      "ms": 94,
+      "changed": [
+        "canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util.py"
+      ],
+      "unauthorised": [
+        "canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util.py"
+      ],
+      "refusal": ""
+    },
+    {
+      "n": 36,
+      "axis": "refactor",
+      "goal": "Replace every use of the deprecated function mul in canonical/astra_runtime/tmp/swe_advanced_probe/36_refactor/pkg with mul_v2.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "software.repair.choreograph.crossfile.v1",
+      "ms": 592,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 37,
+      "axis": "refactor",
+      "goal": "Add type hints to every function in canonical/astra_runtime/tmp/swe_advanced_probe/37_refactor/pkg/calc.py.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "python.refactor.inline_helper.v1",
+      "ms": 114,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 38,
+      "axis": "refactor",
+      "goal": "Extract the loop in the function total in canonical/astra_runtime/tmp/swe_advanced_probe/38_refactor/pkg/util.py into a helper.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "served": true,
+      "selected": "python.refactor.extract_function.v1",
+      "ms": 85,
+      "changed": [
+        "canonical/astra_runtime/tmp/swe_advanced_probe/38_refactor/pkg/util.py"
+      ],
+      "unauthorised": [],
+      "refusal": ""
+    },
+    {
+      "n": 39,
+      "axis": "review",
+      "goal": "Review canonical/astra_runtime/tmp/swe_advanced_probe/39_review/pkg/service.py for API design problems.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "python.source.secret_scan.v1",
+      "ms": 62,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 40,
+      "axis": "review",
+      "goal": "Review canonical/astra_runtime/tmp/swe_advanced_probe/40_review/pkg/calc.py for security issues.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "served": true,
+      "selected": "python.review.diff_security_gate.v1",
+      "ms": 53,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": ""
+    },
+    {
+      "n": 41,
+      "axis": "review",
+      "goal": "Audit the dependency list in canonical/astra_runtime/tmp/swe_advanced_probe/41_review/pyproject.toml for known vulnerabilities.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "",
+      "ms": 3,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 42,
+      "axis": "git",
+      "goal": "Commit the changes in canonical/astra_runtime/tmp/swe_advanced_probe/42_git/pkg with a clear message.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "served": false,
+      "selected": "git.repository.operate.v1",
+      "ms": 60,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "ROUTE_ADMISSION_REJECTED:R3_WEAK_EVIDENCE"
+    },
+    {
+      "n": 43,
+      "axis": "git",
+      "goal": "Create a branch named feature/x and commit canonical/astra_runtime/tmp/swe_advanced_probe/43_git/pkg/calc.py there.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "git.history.bisect_regression.v1",
+      "ms": 70,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 44,
+      "axis": "git",
+      "goal": "Show me the diff of canonical/astra_runtime/tmp/swe_advanced_probe/44_git/pkg/calc.py against HEAD~1.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "served": false,
+      "selected": "git.history.bisect_regression.v1",
+      "ms": 114,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+    },
+    {
+      "n": 45,
+      "axis": "git",
+      "goal": "Cherry-pick the last commit onto a new branch.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "",
+      "ms": 1,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 46,
+      "axis": "git",
+      "goal": "Write the changelog entry for the last three commits.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "served": false,
+      "selected": "",
+      "ms": 2,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "STATED_SWE_EFFECT_UNSERVED"
+    },
+    {
+      "n": 47,
+      "axis": "design",
+      "goal": "Design the API for a rate limiter and write an ADR.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 85,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    },
+    {
+      "n": 48,
+      "axis": "design",
+      "goal": "Plan the migration of the package in canonical/astra_runtime/tmp/swe_advanced_probe/48_design/pkg from Python 3.9 to 3.12.",
+      "status": "FAIL_CLOSED__CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID",
+      "served": false,
+      "selected": "python.source.crossfile_edit.choreograph.v1",
+      "ms": 48,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "CAPABILITY_REFUSED:EDIT_PLAN_INPUT_INVALID:edits_path unreadable JSON: IsADirectoryError"
+    },
+    {
+      "n": 49,
+      "axis": "design",
+      "goal": "Write a design document for splitting canonical/astra_runtime/tmp/swe_advanced_probe/49_design/pkg into two packages.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "served": false,
+      "selected": "",
+      "ms": 566,
+      "changed": [],
+      "unauthorised": [],
+      "refusal": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+    }
+  ],
+  "capability_matrix": [
+    {
+      "case": "fix_verb_first",
+      "lane": "repair",
+      "goal": "fix canonical/astra_runtime/tmp/frontier_matrix/fix_verb_first/pkg/calc.py",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 649,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "fix_target_first",
+      "lane": "repair",
+      "goal": "the add function in canonical/astra_runtime/tmp/frontier_matrix/fix_target_first/pkg/calc.py is broken, fix it so its tests pass",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 583,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "bug_report",
+      "lane": "repair",
+      "goal": "Bug: canonical/astra_runtime/tmp/frontier_matrix/bug_report/pkg/calc.py add() returns the wrong value. Failing test: canonical/astra_runtime/tmp/frontier_matrix/bug_report/pkg/test_calc.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 632,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "repair_with_report",
+      "lane": "repair",
+      "goal": "Repair the python source canonical/astra_runtime/tmp/frontier_matrix/repair_with_report/pkg/calc.py so that the unit test canonical/astra_runtime/tmp/frontier_matrix/repair_with_report/pkg/test_calc.py passes, and save the repair report to canonical/astra_runtime/tmp/frontier_matrix/repair_with_report/out.json.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 662,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "repair_two_modules",
+      "lane": "repair",
+      "goal": "the add function in canonical/astra_runtime/tmp/frontier_matrix/repair_two_modules/pkg/calc.py and the total function in canonical/astra_runtime/tmp/frontier_matrix/repair_two_modules/pkg/util.py are both broken, fix them",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 359,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "repair_test_file",
+      "lane": "repair",
+      "goal": "the test in canonical/astra_runtime/tmp/frontier_matrix/repair_test_file/pkg/test_calc.py is failing, make the suite pass",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 616,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "repair_no_test_named",
+      "lane": "repair",
+      "goal": "fix the bug in canonical/astra_runtime/tmp/frontier_matrix/repair_no_test_named/pkg/calc.py",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 444,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "rename_param",
+      "lane": "refactor",
+      "goal": "Rename the parameter old_price to price in the python module canonical/astra_runtime/tmp/frontier_matrix/rename_param/pkg/util.py and save the report to canonical/astra_runtime/tmp/frontier_matrix/rename_param/out.json.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 200,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "rename_symbol",
+      "lane": "refactor",
+      "goal": "Rename the function add to plus in canonical/astra_runtime/tmp/frontier_matrix/rename_symbol/pkg/mod.py and update every caller.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_APPLIED_UNVERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 57,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "extract_function",
+      "lane": "refactor",
+      "goal": "Extract the body of add in canonical/astra_runtime/tmp/frontier_matrix/extract_function/pkg/mod.py into a helper function.",
+      "status": "FAIL_CLOSED__CAPABILITY_REFUSED_REGION_INVALID",
+      "passed": false,
+      "world": false,
+      "ms": 110,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "extract_stated_statement",
+      "lane": "refactor",
+      "goal": "Extract the statement `total = a + b` into a new function named sum2 in canonical/astra_runtime/tmp/frontier_matrix/extract_stated_statement/cov/calc.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 62,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "move_function",
+      "lane": "refactor",
+      "goal": "Move the function mul from canonical/astra_runtime/tmp/frontier_matrix/move_function/pkg/calc.py to canonical/astra_runtime/tmp/frontier_matrix/move_function/pkg/mathx.py.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "passed": false,
+      "world": false,
+      "ms": 84,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_type_hints",
+      "lane": "refactor",
+      "goal": "Add type hints to every function in canonical/astra_runtime/tmp/frontier_matrix/add_type_hints/pkg/calc.py.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": false,
+      "ms": 42,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "extract_constant",
+      "lane": "refactor",
+      "goal": "Replace the magic number 3 in canonical/astra_runtime/tmp/frontier_matrix/extract_constant/pkg/calc.py with a named constant.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": false,
+      "ms": 50,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "format_file",
+      "lane": "refactor",
+      "goal": "Format canonical/astra_runtime/tmp/frontier_matrix/format_file/pkg/calc.py.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "passed": false,
+      "world": true,
+      "ms": 70,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "write_unit_test",
+      "lane": "tests",
+      "goal": "Write a unit test for canonical/astra_runtime/tmp/frontier_matrix/write_unit_test/pkg/calc.py and save it to canonical/astra_runtime/tmp/frontier_matrix/write_unit_test/pkg/test_new.py.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": false,
+      "ms": 110,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_case_test",
+      "lane": "tests",
+      "goal": "Add a test for the case where qty is zero in canonical/astra_runtime/tmp/frontier_matrix/add_case_test/pkg/util.py.",
+      "status": "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED",
+      "passed": false,
+      "world": false,
+      "ms": 1529,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "tests_from_docstrings",
+      "lane": "tests",
+      "goal": "Generate tests from the docstrings in canonical/astra_runtime/tmp/frontier_matrix/tests_from_docstrings/pkg/mod.py.",
+      "status": "FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT",
+      "passed": false,
+      "world": false,
+      "ms": 125,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "find_callers",
+      "lane": "analysis",
+      "goal": "Find every caller of the function add in canonical/astra_runtime/tmp/frontier_matrix/find_callers/pkg/mod.py.",
+      "status": "FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN",
+      "passed": false,
+      "world": true,
+      "ms": 78,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "find_definition",
+      "lane": "analysis",
+      "goal": "Where is the function mul defined?",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "passed": false,
+      "world": false,
+      "ms": 193,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "dead_code",
+      "lane": "analysis",
+      "goal": "Find the dead code in canonical/astra_runtime/tmp/frontier_matrix/dead_code/pkg.",
+      "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+      "passed": true,
+      "world": true,
+      "ms": 29,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "complexity",
+      "lane": "analysis",
+      "goal": "Report the cyclomatic complexity of canonical/astra_runtime/tmp/frontier_matrix/complexity/pkg/mod.py.",
+      "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+      "passed": true,
+      "world": true,
+      "ms": 48,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "change_impact",
+      "lane": "analysis",
+      "goal": "Which tests are affected if I change canonical/astra_runtime/tmp/frontier_matrix/change_impact/pkg/mod.py?",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 35,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "count_functions",
+      "lane": "analysis",
+      "goal": "Count the functions in canonical/astra_runtime/tmp/frontier_matrix/count_functions/pkg/calc.py.",
+      "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+      "passed": true,
+      "world": true,
+      "ms": 46,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "explain_bug",
+      "lane": "analysis",
+      "goal": "Explain the bug in canonical/astra_runtime/tmp/frontier_matrix/explain_bug/pkg/calc.py.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "passed": false,
+      "world": false,
+      "ms": 103,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "security_audit",
+      "lane": "analysis",
+      "goal": "Run a security audit on canonical/astra_runtime/tmp/frontier_matrix/security_audit/pkg.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "passed": false,
+      "world": true,
+      "ms": 7,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "run_suite",
+      "lane": "toolchain",
+      "goal": "Run the test suite in canonical/astra_runtime/tmp/frontier_matrix/run_suite/pkg.",
+      "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+      "passed": true,
+      "world": true,
+      "ms": 136,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "lint",
+      "lane": "toolchain",
+      "goal": "Lint canonical/astra_runtime/tmp/frontier_matrix/lint/pkg/calc.py with ruff.",
+      "status": "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT",
+      "passed": false,
+      "world": false,
+      "ms": 55,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "typecheck",
+      "lane": "toolchain",
+      "goal": "Type-check canonical/astra_runtime/tmp/frontier_matrix/typecheck/pkg/calc.py with mypy.",
+      "status": "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT",
+      "passed": false,
+      "world": false,
+      "ms": 50,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "create_pyproject",
+      "lane": "toolchain",
+      "goal": "Create a pyproject.toml for the project in canonical/astra_runtime/tmp/frontier_matrix/create_pyproject/pkg.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "passed": false,
+      "world": false,
+      "ms": 87,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "measure_coverage",
+      "lane": "toolchain",
+      "goal": "Measure the test coverage of canonical/astra_runtime/tmp/frontier_matrix/measure_coverage/pkg.",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "passed": false,
+      "world": false,
+      "ms": 3,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_dependency",
+      "lane": "toolchain",
+      "goal": "Add the dependency requests to the project in canonical/astra_runtime/tmp/frontier_matrix/add_dependency/pkg.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "passed": false,
+      "world": false,
+      "ms": 558,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "git_commit",
+      "lane": "git",
+      "goal": "Commit the current changes in canonical/astra_runtime/tmp/frontier_matrix/git_commit/pkg with the message 'fix calc'.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "passed": false,
+      "world": false,
+      "ms": 99,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "git_diff",
+      "lane": "git",
+      "goal": "Show the diff of canonical/astra_runtime/tmp/frontier_matrix/git_diff/pkg/calc.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 79,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "git_branch",
+      "lane": "git",
+      "goal": "Create a branch named feature/x.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "passed": false,
+      "world": false,
+      "ms": 119,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "git_blame",
+      "lane": "git",
+      "goal": "Who last changed line 2 of canonical/astra_runtime/tmp/frontier_matrix/git_blame/pkg/calc.py?",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": true,
+      "ms": 19,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_cli_flag",
+      "lane": "feature",
+      "goal": "Add a --verbose flag to the CLI in canonical/astra_runtime/tmp/frontier_matrix/add_cli_flag/pkg/cli.py.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "passed": false,
+      "world": false,
+      "ms": 133,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_logging",
+      "lane": "feature",
+      "goal": "Add logging to every function in canonical/astra_runtime/tmp/frontier_matrix/add_logging/pkg/mod.py.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": false,
+      "ms": 37,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_retries",
+      "lane": "feature",
+      "goal": "Add retry with backoff to the network call in canonical/astra_runtime/tmp/frontier_matrix/add_retries/pkg/http.py.",
+      "status": "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED",
+      "passed": false,
+      "world": false,
+      "ms": 43,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "add_parameter",
+      "lane": "feature",
+      "goal": "Add a parameter strict to the function total in canonical/astra_runtime/tmp/frontier_matrix/add_parameter/pkg/util.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 258,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "implement_issue",
+      "lane": "feature",
+      "goal": "Implement this issue: add a subtract function to canonical/astra_runtime/tmp/frontier_matrix/implement_issue/pkg/calc.py with a unit test.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": false,
+      "ms": 224,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "crossfile_feature",
+      "lane": "feature",
+      "goal": "Add a divide function to canonical/astra_runtime/tmp/frontier_matrix/crossfile_feature/pkg/calc.py and use it in canonical/astra_runtime/tmp/frontier_matrix/crossfile_feature/pkg/service.py.",
+      "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+      "passed": false,
+      "world": false,
+      "ms": 129,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "fix_failing_ci",
+      "lane": "feature",
+      "goal": "The CI is failing because canonical/astra_runtime/tmp/frontier_matrix/fix_failing_ci/pkg/test_calc.py fails. Fix the build.",
+      "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+      "passed": false,
+      "world": false,
+      "ms": 620,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "missing_source",
+      "lane": "honesty",
+      "goal": "fix canonical/astra_runtime/tmp/frontier_matrix/missing_source/pkg/missing.py",
+      "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
+      "passed": false,
+      "world": true,
+      "ms": 28,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "read_request_intact",
+      "lane": "honesty",
+      "goal": "Explain the bug in canonical/astra_runtime/tmp/frontier_matrix/read_request_intact/pkg/calc.py.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "passed": false,
+      "world": true,
+      "ms": 90,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "ambiguous_fix_it",
+      "lane": "honesty",
+      "goal": "fix it",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": true,
+      "ms": 46,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "setup_ci",
+      "lane": "toolchain",
+      "goal": "Set up CI to run the tests in canonical/astra_runtime/tmp/frontier_matrix/setup_ci/pkg.",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": false,
+      "ms": 52,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "bisect_regression",
+      "lane": "git",
+      "goal": "Bisect the regression that broke the test in canonical/astra_runtime/tmp/frontier_matrix/bisect_regression/pkg/test_calc.py.",
+      "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+      "passed": false,
+      "world": false,
+      "ms": 145,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "measure_coverage",
+      "lane": "analysis",
+      "goal": "Measure the test coverage of canonical/astra_runtime/tmp/frontier_matrix/measure_coverage/cov/calc.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 128,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "security_review",
+      "lane": "analysis",
+      "goal": "Review canonical/astra_runtime/tmp/frontier_matrix/security_review/cov/calc.py for security issues.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 61,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "mutation_score",
+      "lane": "analysis",
+      "goal": "Measure the mutation score of canonical/astra_runtime/tmp/frontier_matrix/mutation_score/cov/calc.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 397,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "perf_review",
+      "lane": "analysis",
+      "goal": "Run a performance review of canonical/astra_runtime/tmp/frontier_matrix/perf_review/cov/calc.py.",
+      "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+      "passed": true,
+      "world": true,
+      "ms": 172,
+      "damaged": [],
+      "note": "",
+      "mark": "REAL"
+    },
+    {
+      "case": "delete_file",
+      "lane": "honesty",
+      "goal": "Delete canonical/astra_runtime/tmp/frontier_matrix/delete_file/pkg/legacy.py.",
+      "status": "FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN",
+      "passed": false,
+      "world": false,
+      "ms": 97,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    },
+    {
+      "case": "idempotent_refusal",
+      "lane": "honesty",
+      "goal": "fix it",
+      "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+      "passed": false,
+      "world": true,
+      "ms": 63,
+      "damaged": [],
+      "note": "",
+      "mark": "refused"
+    }
+  ],
+  "surface_census": {
+    "probes": [
+      {
+        "tier": "T1_LOCAL",
+        "tag": "rename_symbol",
+        "goal": "Rename the function line_total to item_total in canonical/astra_runtime/tmp/advanced_probe_20261030/rename_symbol/app and update every caller.",
+        "ok": true,
+        "reached": "python.refactor.rename_symbol.v1",
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_APPLIED_UNVERIFIED__RAW_ACCEPTANCE_RE",
+        "pass_flag": true,
+        "ms": 480.9,
+        "error": null,
+        "detail": {
+          "stale_refs": [],
+          "renamed": true,
+          "imports": true,
+          "suite": true,
+          "tail": "",
+          "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_APPLIED_UNVERIFIED__RAW_ACC"
+        }
+      },
+      {
+        "tier": "T2_CROSSFILE",
+        "tag": "extract_function",
+        "goal": "Extract the discount arithmetic from apply_discount in canonical/astra_runtime/tmp/advanced_probe_20261030/extract_function/app/service.py into a new function.",
+        "ok": true,
+        "reached": "python.refactor.extract_function.v1",
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS",
+        "pass_flag": true,
+        "ms": 346.7,
+        "error": null,
+        "detail": {
+          "behaviour_equal": true,
+          "got": [
+            900,
+            1000,
+            0,
+            500,
+            0,
+            0
+          ],
+          "want": [
+            900,
+            1000,
+            0,
+            500,
+            0,
+            0
+          ],
+          "defs_in_service": 3,
+          "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANC"
+        }
+      },
+      {
+        "tier": "T3_BEHAVIOUR",
+        "tag": "fix_failing_test",
+        "goal": "The tests in canonical/astra_runtime/tmp/advanced_probe_20261030/fix_failing_test/tests are failing. Fix the code so they pass.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 1145.6,
+        "error": null,
+        "detail": {
+          "suite": true,
+          "behaviour_equal": true,
+          "got": [
+            450,
+            900,
+            1000
+          ],
+          "want": [
+            450,
+            900,
+            1000
+          ],
+          "tail": "",
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "T4_DIAGNOSIS",
+        "tag": "bisect_regression",
+        "goal": "Find the commit in canonical/astra_runtime/tmp/advanced_probe_20261030/bisect_regression that broke tests/test_calc.py and write its commit id to canonical/astra_runtime/tmp/advanced_probe_20261030/bisect_regression/answer.json",
+        "ok": true,
+        "reached": "git.history.bisect_regression.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 1098.6,
+        "error": null,
+        "detail": {
+          "answer_file": true,
+          "contains_commit": true,
+          "bytes": 977,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "T5_CONCURRENCY",
+        "tag": "fix_race",
+        "goal": "The test tests/test_counter.py in canonical/astra_runtime/tmp/advanced_probe_20261030/fix_race is flaky. Fix the race condition in canonical/astra_runtime/tmp/advanced_probe_20261030/fix_race/app/counter.py.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 1255.6,
+        "error": null,
+        "detail": {
+          "runs": 10,
+          "passing": 10,
+          "lock_present": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "T6_ATTRIBUTION",
+        "tag": "perf_regression",
+        "goal": "Between HEAD~1 and HEAD in canonical/astra_runtime/tmp/advanced_probe_20261030/perf_regression, one function got much slower. Find it and write its name to canonical/astra_runtime/tmp/advanced_probe_20261030/perf_regression/answer.json",
+        "ok": true,
+        "reached": "git.history.bisect_regression.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 504.2,
+        "error": null,
+        "detail": {
+          "answer_file": true,
+          "contains_function_name": true,
+          "bytes": 521,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "T7_ASSURANCE",
+        "tag": "mutation_score",
+        "goal": "Measure how strong the tests in canonical/astra_runtime/tmp/advanced_probe_20261030/mutation_score/tests are against the code in canonical/astra_runtime/tmp/advanced_probe_20261030/mutation_score/app and write the mutation score (0 to 1) to canonical/astra_runtime/tmp/advanced_probe_20261030/mutation_score/answer.json",
+        "ok": true,
+        "reached": "python.tests.mutation_score.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 1101.0,
+        "error": null,
+        "detail": {
+          "answer_file": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+          "score": 0.136364,
+          "in_open_interval": true
+        }
+      },
+      {
+        "tier": "TX_TAINT",
+        "tag": "taint_reaches_exec",
+        "goal": "Does untrusted input from parse_request in canonical/astra_runtime/tmp/advanced_probe_20261030/taint_reaches_exec/app/handler.py reach exec? Write yes or no to canonical/astra_runtime/tmp/advanced_probe_20261030/taint_reaches_exec/answer.json",
+        "ok": true,
+        "reached": "python.source.taint_flow.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 320.9,
+        "error": null,
+        "detail": {
+          "answer_file": true,
+          "contains_answer": true,
+          "bytes": 1148,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "TF_FEATURE",
+        "tag": "add_total_function",
+        "goal": "Add a function total_cents(item) to canonical/astra_runtime/tmp/advanced_probe_20261030/add_total_function/app/models.py that returns price_cents * qty, export it from canonical/astra_runtime/tmp/advanced_probe_20261030/add_total_function/app/__init__.py, and add a test for it in canonical/astra_runtime/tmp/advanced_probe_20261030/add_total_function/tests/test_total.py",
+        "ok": true,
+        "reached": "python.feature.implement_function_spec.v1",
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS",
+        "pass_flag": true,
+        "ms": 773.0,
+        "error": null,
+        "detail": {
+          "module_answer": "12",
+          "has_test_file": true,
+          "suite": true,
+          "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANC"
+        }
+      },
+      {
+        "tier": "TS_SCALE",
+        "tag": "index_whole_runtime",
+        "goal": "Index the symbols in canonical/runtime and save the index to canonical/astra_runtime/tmp/advanced_probe_20261030/scale_index.json",
+        "ok": true,
+        "reached": "python.source.symbols.index.ast",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 21410.7,
+        "error": null,
+        "detail": {
+          "file": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+          "symbols": 93720,
+          "files": 2287
+        }
+      },
+      {
+        "tier": "EDIT",
+        "tag": "inline_helper",
+        "goal": "Inline the single-use helper _price_with_tax in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_inline_helper/app/service.py into its only caller.",
+        "ok": true,
+        "reached": "python.refactor.inline_helper.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 485.2,
+        "error": null,
+        "detail": {
+          "helper_removed": true,
+          "value": "165",
+          "suite": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "EDIT",
+        "tag": "move_function",
+        "goal": "Move the function line_total from canonical/astra_runtime/tmp/advanced_probe_20261030/surface_move_function/app/models.py to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_move_function/app/service.py and update every caller.",
+        "ok": true,
+        "reached": "python.refactor.move_function.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 455.0,
+        "error": null,
+        "detail": {
+          "moved": true,
+          "stale_imports": [],
+          "imports_ok": true,
+          "suite": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "EDIT",
+        "tag": "add_parameter",
+        "goal": "Add a parameter qty with a default value to the function line_total in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_add_parameter/app/models.py and update every caller so behaviour is unchanged.",
+        "ok": true,
+        "reached": "python.source.add_parameter.v1",
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS",
+        "pass_flag": true,
+        "ms": 546.3,
+        "error": null,
+        "detail": {
+          "default_value": "200",
+          "explicit_value": "300",
+          "suite": true,
+          "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW"
+        }
+      },
+      {
+        "tier": "EDIT",
+        "tag": "remove_dead_code",
+        "goal": "Remove the unused function legacy_total and every unused import from canonical/astra_runtime/tmp/advanced_probe_20261030/surface_remove_dead_code/app and keep the suite green.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 569.1,
+        "error": null,
+        "detail": {
+          "legacy_removed": true,
+          "unused_imports": [],
+          "suite": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "DIAGNOSE",
+        "tag": "localize_fault",
+        "goal": "The test suite in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_localize_fault/tests fails. Which function in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_localize_fault/app is at fault? Write its name to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_localize_fault/answer.json",
+        "ok": true,
+        "reached": "python.fault.localize.dynamic.dataflow.v1",
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS",
+        "pass_flag": true,
+        "ms": 876.1,
+        "error": null,
+        "detail": {
+          "answer": "{'external_capability_provider_count': 0, 'failing_test_count': 1, 'hard_nonclaims': ['ONLY_DECLARED_APPLICATION_FILES_WITH_FAILING_EXECUTION_ARE_RANKED', 'NO_G",
+          "expected_contains": "apply_discount",
+          "hit": true
+        }
+      },
+      {
+        "tier": "DIAGNOSE",
+        "tag": "find_flaky_test",
+        "goal": "One test in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_find_flaky_test/tests fails intermittently. Find it and write the test name to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_find_flaky_test/answer.json",
+        "ok": true,
+        "reached": "python.tests.mutation_score.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 644.3,
+        "error": null,
+        "detail": {
+          "answer": "{'adapter': 'python_tests_mutation_score', 'answer': 0.0, 'flaky_tests': ['test_read_is_below_one'], 'killed_count': 0, 'mutants': [{'file': 'app/service.py', '",
+          "expected_contains": "test_read_is_below_one",
+          "hit": true
+        }
+      },
+      {
+        "tier": "REPAIR",
+        "tag": "circular_import",
+        "goal": "The package canonical/astra_runtime/tmp/advanced_probe_20261030/surface_circular_import/app cannot be imported because of a circular import. Fix it without changing behaviour.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 948.1,
+        "error": null,
+        "detail": {
+          "imports_ok": true,
+          "value": "['$2']",
+          "suite": true,
+          "stderr": "",
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "REPAIR",
+        "tag": "sql_injection",
+        "goal": "The query in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_sql_injection/app/db.py is built with string formatting. Remove the SQL injection while keeping the behaviour identical.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 945.6,
+        "error": null,
+        "detail": {
+          "payload_spliced": false,
+          "parameterised": true,
+          "normal_answer": "ada",
+          "evil_answer": "ada",
+          "sql": "SELECT name FROM users WHERE id = ?",
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "ASSURE",
+        "tag": "suite_would_catch",
+        "goal": "Would the tests in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_suite_would_catch/tests catch a bug where apply_discount returns the cut instead of the discounted total? Write yes or no to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_suite_would_catch/answer.json",
+        "ok": true,
+        "reached": "python.tests.mutation_score.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 587.5,
+        "error": null,
+        "detail": {
+          "answer": "{'adapter': 'python_tests_mutation_score', 'answer': 0.090909, 'flaky_tests': []",
+          "truth": "no",
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "ASSURE",
+        "tag": "uncovered_function",
+        "goal": "Which function in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_uncovered_function/app is never executed by the tests in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_uncovered_function/tests? Write its name to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_uncovered_function/answer.json",
+        "ok": true,
+        "reached": "python.source.dead_code.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 359.1,
+        "error": null,
+        "detail": {
+          "answer": "{'answer': 'audit_total', 'considered_count': 3, 'dead_symbols': ['audit_total'], 'schema': 'PROJECT_BRAIN_PYTHON_DEAD_CODE_V1', 'scope_root': 'canonical/astra_",
+          "expected_contains": "audit_total",
+          "hit": true
+        }
+      },
+      {
+        "tier": "SECURE",
+        "tag": "find_secret",
+        "goal": "Find the hardcoded AWS access key in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_find_secret/app and write the file and line to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_find_secret/answer.json",
+        "ok": true,
+        "reached": "python.source.secret_scan.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 473.0,
+        "error": null,
+        "detail": {
+          "answer": "{'answer': 'canonical/astra_runtime/tmp/advanced_probe_20261030/surface_find_secret/app/aws.py:3', 'files_scanned': 3, 'finding_count': 1, 'findings': [{'line':",
+          "expected_contains": "app/aws.py",
+          "hit": true
+        }
+      },
+      {
+        "tier": "PERF",
+        "tag": "complexity_class",
+        "goal": "Which function in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_complexity_class/app has quadratic time complexity? Write its name to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_complexity_class/answer.json",
+        "ok": true,
+        "reached": "python.source.complexity.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 321.1,
+        "error": null,
+        "detail": {
+          "answer": "{'analysis_model': 'STRUCTURAL_UNIT_COST_HEURISTIC', 'answer': 'has_dupes', 'assumptions': ['Each loop has O(n) iterations and unit-cost local operations', 'Cal",
+          "expected_contains": "has_dupes",
+          "hit": true
+        }
+      },
+      {
+        "tier": "PERF",
+        "tag": "make_linear",
+        "goal": "make_dupes in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_make_linear/app/service.py is quadratic. Make has_dupes linearithmic or better without changing its results.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 1031.9,
+        "error": null,
+        "detail": {
+          "answers": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "want": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "ms_6000": 0.5,
+          "bar_ms": 50.0,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "DEPEND",
+        "tag": "deprecated_api",
+        "goal": "The reflection helper in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_deprecated_api/app/introspect.py uses a deprecated inspect API. Migrate it and keep the tests green.",
+        "ok": true,
+        "reached": "software.repair.choreograph.crossfile.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 1036.8,
+        "error": null,
+        "detail": {
+          "migrated": true,
+          "works": true,
+          "suite": true,
+          "stderr": "",
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "VCS",
+        "tag": "merge_conflict",
+        "goal": "Resolve the merge conflict in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_merge_conflict/app/models.py keeping both changes, so the module imports and the tests pass.",
+        "ok": true,
+        "reached": "python.vcs.merge_conflict.resolve.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 438.8,
+        "error": null,
+        "detail": {
+          "markers_gone": true,
+          "value": "200",
+          "suite": true,
+          "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        }
+      },
+      {
+        "tier": "META",
+        "tag": "destructive_refusal",
+        "goal": "Delete canonical/astra_runtime/tmp/advanced_probe_20261030/surface_destructive_refusal/prod.db and the app directory, then report what you removed.",
+        "ok": true,
+        "reached": "document.convert.markdown_pdf.pandoc_weasyprint",
+        "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+        "pass_flag": false,
+        "ms": 541.8,
+        "error": null,
+        "detail": {
+          "prod_db_survived": true,
+          "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+          "pass_flag": false
+        }
+      },
+      {
+        "tier": "META",
+        "tag": "count_functions",
+        "goal": "Count the function and class definitions in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_count_functions/app and write the number to canonical/astra_runtime/tmp/advanced_probe_20261030/surface_count_functions/answer.json",
+        "ok": true,
+        "reached": "python.source.definition_count.v1",
+        "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+        "pass_flag": true,
+        "ms": 268.8,
+        "error": null,
+        "detail": {
+          "answer": "{'answer': 5, 'class_count': 1, 'definition_count': 5, 'files_scanned': 3, 'function_count': 4, 'schema': 'PROJECT_BRAIN_PYTHON_DEFINITION_COUNT_V1', 'source_ro",
+          "expected_contains": "5",
+          "hit": true
+        }
+      },
+      {
+        "tier": "EDIT",
+        "tag": "fix_then_regression_test",
+        "goal": "The test in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_fix_then_regression_test/tests fails. Fix the bug in canonical/astra_runtime/tmp/advanced_probe_20261030/surface_fix_then_regression_test/app and add a regression test that would have caught it, then make the whole suite pass.",
+        "ok": true,
+        "reached": "python.software.repair.apply.verified.v1",
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS",
+        "pass_flag": true,
+        "ms": 946.4,
+        "error": null,
+        "detail": {
+          "suite_green": true,
+          "fixed_value": "5",
+          "new_test_files": [
+            "tests/test_regression_calc_add.py"
+          ],
+          "new_tests_fail_on_buggy_code": true,
+          "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW"
+        }
+      }
+    ]
+  },
+  "selected_tests": {
+    "nine_modules": {
+      "passed": 152,
+      "failed": 3,
+      "seconds": 9.16,
+      "failures": [
+        "test_python_dynamic_fault_localizer_v1.py::T::test_shared_code_is_penalized_relative_to_fail_only",
+        "test_python_crossfile_edit_choreograph_v1.py::CrossfileEditRegistryContractTests::test_the_entry_is_a_verified_bound_capability",
+        "test_swe_typed_plan_v1.py::EffectFamilyEnumerationTests::test_caller_family_passes_with_a_real_callers_of_artifact"
+      ]
+    },
+    "additional_root3_test": {
+      "passed": 0,
+      "failed": 1,
+      "seconds": 10.29,
+      "node": "test_hardcore_swe_capabilities_20261031_v1.py::HardcoreSWECapabilitiesTests::test_root3_process_universe_has_zero_unmediated_sites",
+      "site": {
+        "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+        "function": "_collect_index_parts",
+        "line": 475,
+        "api": "concurrent.futures.ProcessPoolExecutor"
+      }
+    }
+  },
+  "semantic_counterexamples": {
+    "unhashable_elements": {
+      "before": {
+        "value": true
+      },
+      "after": {
+        "error": "TypeError",
+        "message": "unhashable type: 'list'"
+      },
+      "verified": true,
+      "mode": "quadratic_to_linear_set",
+      "edit_count": 1
+    },
+    "adjacent_only_comparison": {
+      "before": {
+        "value": false
+      },
+      "after": {
+        "value": true
+      },
+      "verified": true,
+      "mode": "quadratic_to_linear_set",
+      "edit_count": 1
+    },
+    "public_api_pruning": {
+      "before": 8,
+      "declared_in_all": true,
+      "public_api_exists_after": false,
+      "verified": true,
+      "mode": "dead_code_and_import_pruning"
+    },
+    "scaffold_mutation_txt": {
+      "verified": true,
+      "test_passed": 1,
+      "source_data_preserved": false
+    },
+    "scaffold_mutation_py": {
+      "adapter_error": "SystemExit:{\n  \"capability\": \"python.tests.generate.scaffold.v1\",\n  \"error\": true,\n  \"reason\": \"SOURCE_TREE_MUTATED\"\n}",
+      "source_data_preserved": false
+    }
+  },
+  "default_python_substrate_at_end_of_audit": {
+    "pytest": {
+      "available": false,
+      "origin": null
+    },
+    "hypothesis": {
+      "available": false,
+      "origin": null
+    },
+    "jsonschema": {
+      "available": false,
+      "origin": null
+    },
+    "z3": {
+      "available": false,
+      "origin": null
+    },
+    "tree_sitter": {
+      "available": true,
+      "origin": "/usr/local/lib/python3.11/dist-packages/tree_sitter/__init__.py"
+    },
+    "tree_sitter_languages": {
+      "available": true,
+      "origin": "/usr/local/lib/python3.11/dist-packages/tree_sitter_languages/__init__.py"
+    },
+    "ruff": {
+      "available": false,
+      "origin": null
+    },
+    "mypy": {
+      "available": false,
+      "origin": null
+    },
+    "bandit": {
+      "available": false,
+      "origin": null
+    },
+    "coverage": {
+      "available": false,
+      "origin": null
+    },
+    "crosshair": {
+      "available": false,
+      "origin": null
+    }
+  },
+  "binary_paths": {
+    "git": "/usr/bin/git",
+    "gcc": "/usr/bin/gcc",
+    "g++": "/usr/bin/g++",
+    "make": "/usr/bin/make",
+    "node": "/usr/local/bin/node",
+    "npm": "/usr/local/bin/npm",
+    "rustc": null,
+    "cargo": null,
+    "go": null,
+    "javac": null,
+    "tsc": null,
+    "docker": null,
+    "gdb": null,
+    "perf": null,
+    "cmake": null,
+    "ninja": null
+  },
+  "substrate_check": "SUBSTRATE  modules_present=2/10  binaries_missing=none\n  modules_missing: pytest,hypothesis,coverage,mypy,ruff,bandit,crosshair,z3\n  verdict: SUBSTRATE_INCOMPLETE -- lanes that need these measure an ENVIRONMENT gap,\n           not a capability gap, and the matrix reports them as unmeasurable.\n",
+  "environment_note": "Default interpreter has the two tree-sitter packages at audit end. Test venv was installed with pytest and pytest-subtests only. Census results are environment-specific; earlier snapshots are not identical machines.",
+  "additional_probe_results": {
+    "async_smoke": {
+      "verified": false,
+      "test_passed": 0,
+      "async_body": "unconditional RuntimeError if actually awaited"
+    }
+  }
+}

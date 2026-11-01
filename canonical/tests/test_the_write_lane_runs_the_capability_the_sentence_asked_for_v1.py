@@ -48,6 +48,7 @@ answer to a question about a file.
 
 from __future__ import annotations
 
+import ast
 import json
 import pathlib
 import sys
@@ -232,12 +233,16 @@ class RefactorEndToEndTests(unittest.TestCase):
                 f"in the python source root {self.dir} writing the report to "
                 f"{self.dir}/audit.json")
         result = self._solve(goal)
-        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        # The specialized counter now owns this read question. Assert its
+        # actual count as well as its identity; do not pin the obsolete auditor.
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.definition_count.v1")
         self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
         payload = json.loads((self.dir / "audit.json").read_text())
-        self.assertTrue(any(str(f["path"]).endswith("calc.py") for f in payload["files"]))
-        # the audit is a census: it must not have performed the refactor
-        self.assertNotIn("total_of", payload["totals"])
+        expected = sum(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       for n in ast.walk(ast.parse(MODULE)))
+        self.assertEqual(payload["function_count"], expected)
+        self.assertEqual((self.dir / "calc.py").read_text(), MODULE)
+        self.assertNotIn("total_of", (self.dir / "calc.py").read_text())
 
     def test_a_capability_that_exits_the_process_fails_closed_instead(self):
         # Every handler on the execution path catches Exception; SystemExit
@@ -335,8 +340,15 @@ class WhichTestsDoesMyChangeBreakTests(unittest.TestCase):
         goal = (f"Count the functions in the python file {self.dir}/calc.py in the "
                 f"python source root {self.dir} writing the report to {self.dir}/census.json")
         result = admission.solve({"task_id": "CENSUS_STILL_WINS", "goal": goal})
-        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        # The specialized counter now owns this read question. Assert its
+        # actual count as well as its identity; do not pin the obsolete auditor.
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.definition_count.v1")
         self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
+        payload = json.loads((self.dir / "census.json").read_text())
+        expected = sum(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       for n in ast.walk(ast.parse((self.dir / "calc.py").read_text())))
+        self.assertEqual(payload["function_count"], expected)
+
 
 
 # ---------------------------------------------------------------------------
@@ -462,8 +474,15 @@ class GenerateTheTestsForThisTreeTests(unittest.TestCase):
         goal = (f"Count the functions in the python file {self.src}/calc.py in the "
                 f"python source root {self.src} writing the report to {self.out}/c.json")
         result = admission.solve({"task_id": "CENSUS_NOT_SCAFFOLD", "goal": goal})
-        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        # The specialized counter now owns this read question. Assert its
+        # actual count as well as its identity; do not pin the obsolete auditor.
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.definition_count.v1")
         self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
+        payload = json.loads((self.out / "c.json").read_text())
+        expected = sum(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       for n in ast.walk(ast.parse((self.src / "calc.py").read_text())))
+        self.assertEqual(payload["function_count"], expected)
+
 
 
 # ---------------------------------------------------------------------------
@@ -561,5 +580,11 @@ class RunTheTestsMeansRunTheTestsTests(unittest.TestCase):
         goal = (f"Count the functions in the python file {self.src}/calc.py in the "
                 f"python source root {self.src} writing the report to {self.out}/c.json")
         result = admission.solve({"task_id": "CENSUS_NOT_RUNNER", "goal": goal})
-        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        # The specialized counter now owns this read question. Assert its
+        # actual count as well as its identity; do not pin the obsolete auditor.
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.definition_count.v1")
         self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
+        payload = json.loads((self.out / "c.json").read_text())
+        expected = sum(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       for n in ast.walk(ast.parse((self.src / "calc.py").read_text())))
+        self.assertEqual(payload["function_count"], expected)

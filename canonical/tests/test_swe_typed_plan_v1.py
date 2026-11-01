@@ -275,7 +275,9 @@ class EffectFamilyEnumerationTests(unittest.TestCase):
         self._cleanup()
 
     def _goal(self, base):
-        return "Find every caller of the function add in %s." % _rel(base / "pkg/mod.py")
+        # Completeness requires a stated search tree, not merely the defining
+        # file. Preserve the single-file refusal guard rather than bypass it.
+        return "Find every caller of the function add in %s." % _rel(base / "pkg")
 
     def test_caller_family_plan_is_decisive_and_effect_consistent(self):
         base = self._tree("plan", True)
@@ -314,6 +316,13 @@ class EffectFamilyEnumerationTests(unittest.TestCase):
         self.assertEqual(callers, {"caller", "other"}, callers)
         # source untouched (no corruption: the false-PASS class)
         self.assertTrue((base / "pkg/mod.py").read_text().startswith("def add"))
+
+    def test_single_file_does_not_claim_global_caller_completeness(self):
+        base = self._tree("single_file_scope", True)
+        goal = "Find every caller of the function add in %s." % _rel(base / "pkg/mod.py")
+        result = door.solve({"task_id": "FAM_single_file", "goal": goal})
+        self.assertIs(result.get("pass"), False)
+        self.assertEqual(result.get("failure_class"), "ANSWER_SCOPE_UNPROVEN")
 
     def test_no_callers_still_passes_with_empty_index_but_no_false_credit(self):
         """A tree with zero callers yields an empty callers_of (honest, not invented)."""

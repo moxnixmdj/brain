@@ -712,7 +712,7 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             if compiler is not None and hasattr(compiler, "_declared_exact_file_scope"):
                 destination = compiler._path_named_after_output_verb(goal, root)
                 scope_paths = [(raw, root / raw) for raw in goal_paths if raw != destination]
-                value = compiler._declared_exact_file_scope(entry, key, scope_paths)
+                value = compiler._declared_exact_file_scope(entry, key, scope_paths, goal)
             if value is None:
                 value = _pick_path(key, cid, goal_paths, root)
             # SLOTS OF ONE CAPABILITY DESCRIBE ONE JOB AND ARE BOUND JOINTLY.

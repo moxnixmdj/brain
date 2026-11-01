@@ -1104,6 +1104,9 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
             return files[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(files)) + "_existing_files_named")
     if key in _PATH_DIR_KEYS:
+        exact_file = gc._declared_exact_file_scope(entry, key, paths, goal)
+        if exact_file is not None:
+            return exact_file
         dirs = [raw for raw, p in paths if p.is_dir()]
         if len(dirs) == 1:
             return dirs[0]
