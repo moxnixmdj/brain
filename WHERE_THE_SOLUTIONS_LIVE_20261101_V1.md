@@ -387,6 +387,48 @@ it is mine, not the repository's: **I keep concluding from the names I would hav
 
 ---
 
+## 10.3 The orphan gets a caller: scope learned, not authored
+
+`finite_capability_diagnosis.select_probe` had **no caller anywhere in the tree**. It is exact
+version-space narrowing — *run the probe that eliminates the most hypotheses* — and nothing used
+it. That was the last genuine absent edge.
+
+New module `canonical/swe_kernel/rule_scope_learning_v1.py` supplies it, on the one question the
+learner could never answer for itself: **how general is this lesson?**
+
+* The hypothesis space is **finite and explicit**: `SCOPE_STATEMENT` (only the skeleton it was
+  taught from) and `SCOPE_OPERATOR` (a single operator swap, anywhere). A `SCOPE_SEMANTIC`
+  hypothesis is deliberately **not** offered, because no module realizes "same meaning, different
+  shape" — listing it would be a fabrication, and a test pins the space to exactly those two.
+* An **instance is a probe**; a failure is an observation. `select_probe` picks the instance that
+  separates the most surviving hypotheses first.
+* The observation is computed by **running the mechanisms directly**, never derived from the
+  prediction under test — otherwise the version space would be reasoning about itself. A test
+  asserts the two genuinely disagree (`SCOPE_STATEMENT` predicts `SILENT` where the world says
+  `SOLVED`).
+
+Measured on the boundary lesson taught once, offered three instances:
+
+| instance | SCOPE_STATEMENT predicts | SCOPE_OPERATOR predicts | observed |
+|---|---|---|---|
+| same shape, renamed | SOLVED | SOLVED | SOLVED — discriminates nothing |
+| inside an `if` | **SILENT** | SOLVED | **SOLVED** |
+| `while` guard | **SILENT** | SOLVED | SOLVED |
+
+Result: **`RESOLVED` → `SCOPE_OPERATOR`, in 1 observation instead of 3.** The machine chose the
+`if`-statement first because it was the only one that could tell the two scopes apart, and the
+answer eliminated the narrow scope without a human saying so.
+
+Refusals the tests pin: nothing to learn from identical instances → `UNDERDETERMINED`; a rule
+that is not an operator swap (a literal change) → `UNDERDETERMINED`, not a guessed widening; a
+verifier that raises is not a solve; and `terminal_authority` is false throughout.
+
+`canonical/tests/test_rule_scope_learning_v1.py` — **12 passed**.
+Combined with the diagnosis, expiry, generalization, bridge and learning suites: **98 passed**.
+Referee `17/0 -> PASS`.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
