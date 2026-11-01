@@ -1161,15 +1161,16 @@ def active_target_mirror_errors(hierarchy,target):
     return errors
 
 
-def enforce_v22_prewrite_admission(intent,base):
-    try:
-        pointer=load_at_ref(base,V22_ACTIVE_POINTER_PATH)
-        pointer_blob=git("rev-parse",f"{base}:{V22_ACTIVE_POINTER_PATH}")
-    except Exception as exc:
-        fail("V22_ACTIVE_POINTER_BASE_READ_FAILED:"+type(exc).__name__)
-        return
-    admission=intent.get("v22_prewrite_admission")
-    receipt_blobs={}
+def resolve_receipt_blobs(admission,refs):
+    """Bind each receipt path to its real git blob sha, trying every ref given.
+
+    A receipt is the change's own evidence, so it has to be resolvable in the commit being
+    proposed. This used to resolve against the base only, which meant no change could ever add
+    a receipt: every new path was skipped, the blob map stayed empty, and the check could only
+    fail -- or be satisfied by inventing a sha. That is how a1b2c3d4e5f6789012345678901234567890abcd
+    came to sit in a merged action intent.
+    """
+    blobs={}
     paths=[]
     if isinstance(admission,dict):
         wake=admission.get("wake_receipt_path")
@@ -1186,12 +1187,26 @@ def enforce_v22_prewrite_admission(intent,base):
         pure=pathlib.PurePosixPath(path)
         if path.startswith("/") or ".." in pure.parts:
             continue
-        if not path_exists_at_ref(base,path):
-            continue
-        try:
-            receipt_blobs[path]=git("rev-parse",f"{base}:{path}")
-        except Exception:
-            continue
+        for ref in refs:
+            if not ref or not path_exists_at_ref(ref,path):
+                continue
+            try:
+                blobs[path]=git("rev-parse",f"{ref}:{path}")
+                break
+            except Exception:
+                continue
+    return blobs
+
+
+def enforce_v22_prewrite_admission(intent,base,head="HEAD"):
+    try:
+        pointer=load_at_ref(base,V22_ACTIVE_POINTER_PATH)
+        pointer_blob=git("rev-parse",f"{base}:{V22_ACTIVE_POINTER_PATH}")
+    except Exception as exc:
+        fail("V22_ACTIVE_POINTER_BASE_READ_FAILED:"+type(exc).__name__)
+        return
+    admission=intent.get("v22_prewrite_admission")
+    receipt_blobs=resolve_receipt_blobs(admission,("HEAD" if head in ("",None) else head,base))
     errors=v22_admission_errors(
         admission,pointer,pointer_blob_sha=pointer_blob,
         action_kind=str(intent.get("action_kind") or ""),
@@ -1383,7 +1398,7 @@ def main():
     intent=load(intents[0]) if intents else {}
 
     if intent:
-        enforce_v22_prewrite_admission(intent,ns.base)
+        enforce_v22_prewrite_admission(intent,ns.base,ns.head)
         enforce_blocker_lease(intent)
         enforce_recursive_obs(intent,files,ns.base)
         enforce_target_continuity(intent,ns.base,hierarchy)

@@ -1,0 +1,22 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Judge the system's self-claim against an external baseline predictor it cannot author (canonical/runtime/self_prediction_baseline_v1.py)",
+ "falsifier_id": "EXTERNAL_BASELINE_IS_ONLY_AS_GOOD_AS_THE_HISTORY_IT_READS",
+ "decisive_question": "Does beating a lookup table of its own history mean the system has a usable model of itself?",
+ "answer": "NO",
+ "counterexamples": [
+  "The baseline is causal and reads only prior settled outcomes, so it has no information the system's history does not already contain. A claim that says 'the same as last time' can beat it on a stationary series while understanding nothing.",
+  "On a short or blocky series the baseline loses to a constant 0.5 -- measured: 10-wide blocks gave a margin of -0.020 for the baseline. A WORSE_THAN_EXTERNAL_BASELINE verdict is therefore only evidence about a claim when the history has structure to learn from, and nothing here checks that it does.",
+  "Both numbers are computed from the same verdicts. If the inspectors are wrong, the claim and the baseline agree on a fiction, and the comparison is silent about it.",
+  "It measures prediction accuracy, not self-knowledge: a system could carry a hand-tuned lookup of its own past performance and score well without modelling anything about itself."
+ ],
+ "measured": {
+  "constant_0.5_claim_against_learnable_streaks": "NO_BETTER_THAN_EXTERNAL_BASELINE, margin +0.0055",
+  "informative_claim_0.95_and_0.05": "CLAIM_BEATS_EXTERNAL_BASELINE, margin +0.2595",
+  "alternating_history_no_structure": "NO_BETTER_THAN_EXTERNAL_BASELINE, margin +0.0151",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The self-claim is now compared against the strongest naive predictor built from the same verdicts, so a claim cannot look informative merely by being scored. The verdict is evidence about the claim, not proof of self-knowledge, and the three cases above are the whole basis for saying so.",
+ "what_would_close_it": "A predictor that uses information the history does not contain -- for instance features of the task itself -- so beating it demonstrates something beyond replaying the past."
+}

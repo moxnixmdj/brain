@@ -264,6 +264,7 @@ def harvest_live_io_examples(
 
     # Step B: Live instrumented execution to capture computed fixtures, loops, and object args
     proj_str = str(proj.resolve())
+    project_names, stashed_modules = _stash_project_modules(proj.resolve())
     added_paths: list[str] = []
     for cand_p in (proj.resolve(), proj.resolve() / "src", proj.resolve() / "pkg"):
         s = str(cand_p)
@@ -328,6 +329,7 @@ def harvest_live_io_examples(
                             except Exception:
                                 pass
     finally:
+        _restore_project_modules(project_names, stashed_modules)
         sys.dont_write_bytecode = old_dwb
         for s in added_paths:
             if s in sys.path:
@@ -335,6 +337,69 @@ def harvest_live_io_examples(
         assert proj_str or True
 
     return {fn: (by_fn[fn], consts_by_fn[fn][:12]) for fn in target_functions if by_fn[fn]}
+
+
+def _project_importable_names(proj: pathlib.Path) -> set[str]:
+    """Top-level importable names that the project under repair defines.
+
+    Harvesting runs the project's own tests in *this* interpreter, so those names decide which
+    cached modules must be set aside while it runs.
+    """
+    names: set[str] = set()
+    try:
+        entries = sorted(proj.iterdir())
+    except OSError:
+        return names
+    for p in entries:
+        if p.is_dir():
+            if (p / "__init__.py").is_file():
+                names.add(p.name)
+            if p.name in {"src", "pkg", "lib"}:
+                names.add(p.name)
+                try:
+                    for q in p.iterdir():
+                        if q.is_file() and q.suffix == ".py":
+                            names.add(q.stem)
+                        elif q.is_dir() and (q / "__init__.py").is_file():
+                            names.add(q.name)
+                except OSError:
+                    continue
+        elif p.suffix == ".py":
+            names.add(p.stem)
+    names.discard("")
+    return names
+
+
+def _stash_project_modules(proj: pathlib.Path) -> tuple[set[str], dict[str, Any]]:
+    """Set aside any module the caller already holds under a name this project defines.
+
+    Two hazards, one mechanism. (1) *Outbound* -- measured, see below: `exec` of the project's
+    tests performs real imports, which would install this project's modules into the caller's
+    `sys.modules` and keep them there after the scratch copy is deleted, so a later import of the
+    same top-level name silently returns a dead module from a removed directory. (2) *Inbound* --
+    **precaution, not a measured failure**: a stale module of the same name from an earlier solve
+    would be reused instead of this project's, harvesting examples from code that is not under
+    repair. Stashing for the duration and restoring afterwards addresses both; only (1) has been
+    shown to change an outcome.
+
+    Measured 2026-11-01: without this, one closed-loop solve left `pkg` bound to
+    `/tmp/brain_closed_loop_repo_*/worktree/pkg`, and the next unrelated task that imported its own
+    `pkg` failed verification (`OBSERVED=False`) -- a green suite upstream of a dead import.
+    """
+    names = _project_importable_names(proj)
+    stashed: dict[str, Any] = {}
+    for name in list(sys.modules):
+        if name.split(".", 1)[0] in names:
+            stashed[name] = sys.modules.pop(name)
+    return names, stashed
+
+
+def _restore_project_modules(names: set[str], stashed: Mapping[str, Any]) -> None:
+    """Drop anything harvested in, then restore exactly what the caller had."""
+    for name in list(sys.modules):
+        if name.split(".", 1)[0] in names:
+            del sys.modules[name]
+    sys.modules.update(stashed)
 
 
 def _replace_function_body_in_source(src: str, fn_name: str, new_body_stmt: str) -> str | None:

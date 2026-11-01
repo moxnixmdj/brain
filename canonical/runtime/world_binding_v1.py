@@ -517,6 +517,43 @@ def render_args(entry, bound):
     return out
 
 
+def stated_paths_absent_in_workspace(goal, root, stated=None) -> list:
+    """Paths the sentence names that are not on this machine, when nothing it names is.
+
+    The sibling of `_pick_path`'s rule. That rule refuses to *bind* an absent stated path,
+    which is correct but silent: the slot never enters `bound`, so every fallback below it
+    -- a recorded demonstration, then a world search -- reads the refusal as an absence of
+    opinion and substitutes something that does exist. Measured 2026-11-01:
+    `audit the python source canonical/runtime/NO_SUCH_DIRECTORY_HERE` audited 2,078 files
+    nobody asked for and reported VERIFIED_ACTION.
+
+    So the fact is answered where the fallbacks cannot reach: before anything is bound.
+    Only extensionless names are considered -- a name with a suffix is a destination, and
+    `_future_artifacts` already owns that case. And only when the sentence names nothing
+    that does exist, so a goal that also points at real work keeps its reading.
+    """
+    try:
+        names = list(stated) if stated is not None else [
+            str(raw) for raw, _p in __import__("canonical.runtime.goal_compiler",
+                                               fromlist=["_repo_paths"])._repo_paths(goal, Path(root))
+        ]
+    except Exception:  # noqa: BLE001 - an unreadable sentence names nothing here
+        return []
+    absent = []
+    for raw in names:
+        raw = str(raw)
+        if not raw or Path(raw).suffix:
+            continue
+        try:
+            if (Path(root) / raw).exists():
+                return []
+        except OSError:
+            return []
+        if raw not in absent:
+            absent.append(raw)
+    return absent
+
+
 def _demonstrated_invocation_inputs(entry, root, keys=()):
     """The values this capability was actually called with, from its own receipt.
 

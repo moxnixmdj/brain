@@ -44,6 +44,7 @@ import time
 from typing import Any, Mapping, Sequence
 
 from canonical.swe_kernel import incremental_semantic_graph_v1 as sem_graph
+from canonical.swe_kernel import repair_input_dependency_gate_v1 as _input_gate
 from canonical.swe_kernel import verified_skill_crystallizer_v1 as crystallizer
 from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wb_synth
 
@@ -1360,6 +1361,20 @@ def _quick_pytest_failing_subset(
     return False, len(failing_nodeids)
 
 
+def _input_dependencies_preserved(before_text: str, after_text: str) -> bool:
+    """A patch may not stop reading an input the original function read.
+
+    Without this, the search can satisfy the visible tests by discarding the data: measured
+    2026-11-01 on a two-file coupled billing bug, `compute_invoice` was replaced by a lookup
+    table returning 110.0/85.0 and the run still reported REPAIRED AND VERIFIED. The sabotage
+    control cannot catch that, because a lookup table is load-bearing for the tests.
+
+    Fail-closed: if the gate cannot decide (unparseable source), the candidate is not accepted.
+    """
+    verdict = _input_gate.gate(before_text, after_text)
+    return verdict.get("status") == _input_gate.PASS
+
+
 def _sabotage_control_kills_suite(
     worktree: pathlib.Path,
     patched_rel_file: str,
@@ -1439,6 +1454,7 @@ def solve_repository_closed_loop(
 ) -> dict[str, Any]:
     """Iteratively localize, patch, verify, and backtrack across a repository until 100% tests pass."""
     t0 = time.perf_counter()
+    refused_by_input_gate = 0
     src_root = pathlib.Path(repo_root).resolve()
     if not src_root.is_dir():
         return {
@@ -1669,6 +1685,14 @@ def solve_repository_closed_loop(
                     new_history = history + [step_rec]
 
                     if cand_failed_count == 0:
+                        # Green tests are not the whole admission condition: the patch must
+                        # still consume the inputs the original consumed.
+                        if not _input_dependencies_preserved(
+                            state_files[rel_f].decode("utf-8", errors="replace"),
+                            next_files[rel_f].decode("utf-8", errors="replace"),
+                        ):
+                            refused_by_input_gate += 1
+                            continue
                         # Materialize candidate and run mandatory Sabotage Control
                         for rp, rb in next_files.items():
                             (wt / rp).write_bytes(rb)
@@ -1796,6 +1820,7 @@ def solve_repository_closed_loop(
                 "schema": SCHEMA,
                 "ok": False,
                 "verified": False,
+                "refused_by_input_dependency_gate": refused_by_input_gate,
                 "status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
                 "reason": "CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
                 "initial_failed_count": initial_diag["failed_count"],
@@ -1854,6 +1879,7 @@ def solve_repository_closed_loop(
             "ok": True,
             "verified": True,
             "sabotage_control_passed": True,
+            "refused_by_input_dependency_gate": refused_by_input_gate,
             "applied_to_source": apply_to_source,
             "status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED",
             "steps_taken": len(final_history),

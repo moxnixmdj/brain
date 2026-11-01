@@ -505,6 +505,29 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     # on those terms pdf.extract.text.pypdf is a perfect match -- so the
     # machine read a PDF and called it a verified xlsx. Neither claim was
     # ever checked against the other, and both were satisfied.
+    # THE SAME QUESTION ABOUT EXISTENCE, BEFORE ANYTHING IS BOUND.
+    #
+    # `world_binding_v1._pick_path` already refuses to bind a path the goal names that is
+    # not there -- "a path the goal names that is not there is a fact, not a gap" -- but a
+    # refusal is silent, and the fallbacks below it (a recorded demonstration, then a world
+    # search) treat an unbound slot as an absence of opinion. Measured 2026-11-01:
+    # `audit the python source canonical/runtime/NO_SUCH_DIRECTORY_HERE` was bound to
+    # `canonical/runtime`, audited 2,078 files nobody asked for, and reported
+    # VERIFIED_ACTION. The fact has to be answered above the fallbacks, not inside one.
+    if not extra_paths:
+        absent = WB.stated_paths_absent_in_workspace(goal, root, own_paths)
+        if absent:
+            return {
+                "schema": SCHEMA, "ok": False,
+                "status": "REFUSED__STATED_PATH_ABSENT_IN_THE_WORKSPACE",
+                "goal": goal, "capability_id": None,
+                "inputs": None, "selected_because": None,
+                "absent_paths": absent[:3],
+                "provides": [], "expect": None, "result": None,
+                "error": None, "executed": False, "verified": False,
+                "survivors": [], "rejected": [],
+                "reason": "THE_GOAL_NAMES_A_PATH_THIS_MACHINE_DOES_NOT_HAVE",
+            }
     if not extra_paths:
         clash = WP.goal_kind_contradiction(goal, own_paths)
         if clash:

@@ -1,0 +1,9 @@
+{
+ "measured_on": "2026-11-01",
+ "source": "canonical/runtime/expect_discrimination_v1.py",
+ "capabilities": 155,
+ "constant_expects": 59,
+ "dead_and_uncovered": 2,
+ "discrimination_pct": 98.7,
+ "note": "Ratchet baseline. Lowering is progress; raising a tolerance to pass is forbidden. 8/94.8% -> 5/96.8% after three verifiers named their artifact under output_path + output_sha256; -> 2/98.7% after re-inspectors were registered for the three chart.raster capabilities, which re-open the PNG and refuse an anchor that is not ink of the declared colour. Remaining: evidence.claim_spec.bind.explicit_comparison.stdlib and terminal.kstar.root.assess.stdlib."
+}

@@ -1,0 +1,21 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Cap the self-prediction verdict by the sample: a diet with fewer than 25% predictions below 0.5 cannot be CALIBRATED",
+ "falsifier_id": "HARD_FRACTION_CAP_IS_A_FLOOR_NOT_A_GUARANTEE",
+ "decisive_question": "Does requiring 25% expected-failure predictions force the sample to include the tasks the system is actually bad at?",
+ "answer": "NO",
+ "counterexamples": [
+  "The fraction is a count, not a selection. A system can declare 25% predictions at 0.49 on tasks it is confident about and still never attempt the work it avoids; the cap is satisfied without touching the failure mode it was meant to expose.",
+  "Nothing chooses which tasks get predicted. Until an external scheduler forces the hard slice, the sample is still self-selected, and self-selection is the defect.",
+  "The cap only demotes the best verdict. A system already classified NO_DISCRIMINATION or WORSE_THAN_BASE_RATE is unchanged by it, which is correct for scoring but means the cap cannot improve a bad model."
+ ],
+ "measured": {
+  "easy_diet": "CALIBRATED_ONLY_ON_EASY_TASKS, hard_fraction 0.0, reason HARD_PREDICTION_FRACTION_0.00_BELOW_0.25 (brier 0.0975, skill 0.48, discrimination 0.3 -- every other number looked good)",
+  "same_predictor_with_hard_attempts": "CALIBRATED",
+  "one_outcome_class": "UNREPRESENTATIVE_SAMPLE / ONLY_ONE_OUTCOME_CLASS_OBSERVED",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The cap removes one way of looking calibrated without being tested -- predicting only what you expect to pass. It does not force the hard slice to be representative, and it does not change what the system attempts. The first counterexample from SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1 (an easy subset produces a clean score) is now named by the scorer; the other two still stand.",
+ "what_would_close_it": "A scheduler that selects predictions by an external difficulty signal rather than the system's own choice, and a consequence that makes an overconfident claim refused rather than merely scored."
+}
