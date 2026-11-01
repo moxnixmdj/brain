@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `33ac16b` (branched from main `33ac16b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `d6ff2c9` (branched from main `d6ff2c9`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -8,7 +8,7 @@ the live verified registry, and a probe of the substrate. Nothing here is a wish
 
 ## §0 The answer in one paragraph
 
-The brain answers **42 of 49** advanced software-engineering sentences and **44 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **7** refusals fall into **6** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
+The brain answers **41 of 49** advanced software-engineering sentences and **44 of 54** capability cases for real (FALSE rows `-`, DAMAGED `-`). The remaining **8** refusals fall into **7** distinct classes, and each one below is named, so the gap is now a list of capabilities rather than a failure count.
 
 They are three different kinds of problem, and confusing them is what made earlier editions of
 this document wrong:
@@ -16,7 +16,7 @@ this document wrong:
 1. **The gate working.** 2 refusals are sentences whose stated effect no row performs, or whose stated object does not admit the operation. These are correct:
    the machine declined instead of inventing. They are fixed by *building capability*, and no
    amount of routing work moves them.
-2. **A capability that exists but cannot do this particular thing.** 5 refusals are a real row refusing a real input, and every one
+2. **A capability that exists but cannot do this particular thing.** 6 refusals are a real row refusing a real input, and every one
    now reports the adapter's own reason (`§3`). Each names a missing transform, a degenerate
    fixture, or a genuinely ill-posed sentence — three different repairs.
 3. **Absences.** 0 of the 11 capability classes are at zero. A class at zero is not a defect; it is a missing row, and the order in `§6` prices it.
@@ -27,10 +27,10 @@ this document wrong:
 
 | instrument | result |
 |---|---|
-| advanced census (49 hardcore sentences) | **42 served / 7 refused** |
+| advanced census (49 hardcore sentences) | **41 served / 8 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 94 ms  p90 655 ms  max 1764 ms |
+| matrix latency | median 94 ms  p90 577 ms  max 1484 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -44,8 +44,8 @@ By registry family, the rows the served sentences actually reached:
 | family | served sentences |
 |---|---|
 | `code.polyglot` | 15 |
-| `python.swe` | 11 |
 | `software.analysis` | 10 |
+| `python.swe` | 10 |
 | `python.refactor` | 2 |
 | `git.repository` | 2 |
 | `python.repository` | 1 |
@@ -63,7 +63,7 @@ column is read off the requests that actually failed in this run, so it cannot g
 | **refactor** | move, split module, rename across the repo, replace all uses, add type hints, extract | 6 | 5 | #33 CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION |
 | **tests** | unit, property-based, regression-from-bug, mutation-score raising, fuzzing | 6 | 5 | #26 CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED |
 | **debug** | failing test to cause, 'why does this return None', bisect | 3 | 2 | #32 CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS |
-| **perf** | profiling, optimisation, benchmark against a parent commit, memoisation | 4 | 4 | **every request in this class is served** |
+| **perf** | profiling, optimisation, benchmark against a parent commit, memoisation | 4 | 3 | #18 CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER |
 | **systems** | race detection, thread pools, GIL release | 3 | 2 | #21 STATED_ANSWER_NOT_PROVIDED |
 | **polyglot** | C++, Rust, Go, Java, TypeScript, SQL | 7 | 7 | **every request in this class is served** |
 | **git** | commit, branch, diff, cherry-pick, changelog | 5 | 3 | #45 CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY; #46 CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY |
@@ -106,6 +106,7 @@ declared as what it is: diagnosis, not capability. It is the reason the table in
 |---|---|---|---|---|
 | `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | 2 | **selection** | a repository sentence was routed to a Python transformer, and the sentence names no repository for the transformer to stand in | selection: a sentence whose verb is a repository operation belongs to the git row, and that row then refuses `cherry-pick` by name instead of a Python transformer refusing a repository |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED` | 1 | **fixture** | no test in the stated suite is flaky, so there is no quarantine to write | none on the machine — the suite is not flaky; a better fixture is the fix |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER` | 1 | **instrument** | the optimiser produced a patch and the timed comparison did not show it faster, which is a statement about the measurement as much as about the patch | instrument: the verdict is a timing comparison, so it must be two-sided, repeated, and it must answer UNCLEAR when the difference is inside the noise instead of refusing -- measured 2026-11-01 this row passed in one session and refused in the next on identical code |
 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | 1 | **selection** | the row ran and its answer was not the answer the sentence asked for | selection: the answer gate is right, the choice of row is wrong |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED` | 1 | **fixture** | the sentence asks for a regression test without stating a bug that can be reproduced or was observed, so there is nothing for the test to assert | none — the sentence is under-specified; a fixture that states the failure is the fix |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS` | 1 | **fixture** | the bisect row rebuilt the stated file's history and found no revision that changes a Python function, so no function can be named as the one that broke | none — the fixture's history must actually change a function for a bisect to have an answer; the refusal is correct and the fixture is the defect |
@@ -119,6 +120,7 @@ sentence rather than a summary of it:
 | # | class | refused with |
 |---|---|---|
 | 16 | ci | `CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED` |
+| 18 | perf | `CAPABILITY_REFUSED:OPTIMIZATION_NOT_FASTER` |
 | 21 | systems | `STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:software.repair.choreograph.crossfile.v1` |
 | 26 | tests | `CAPABILITY_REFUSED:NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED` |
 | 32 | debug | `CAPABILITY_REFUSED:NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS` |
@@ -131,18 +133,18 @@ sentence rather than a summary of it:
 | row | requests it absorbs | verdicts |
 |---|---|---|
 | `code.polyglot.transform_and_verify.v1` | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x10; PASS__REQUESTED_STATE_ALREADY_HOLDS x5; CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED x1 |
-| `python.swe.transform_and_synthesize.v1` | [18, 20, 22, 23, 24, 25, 26, 27, 34, 36, 37, 43, 45] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x11; CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED x1; CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY x1 |
+| `python.swe.transform_and_synthesize.v1` | [18, 20, 22, 23, 24, 25, 26, 27, 34, 36, 37, 43, 45] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x10; CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER x1; CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED x1; CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY x1 |
 | `software.analysis.diagnose_and_architect.v1` | [17, 19, 28, 30, 31, 39, 41, 46, 47, 48, 49] | PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED x10; CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY x1 |
 | `git.repository.operate.v1` | [42, 44] | PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED x2 |
 
-Those 4 rows are chosen for **42 of the 49** sentences, and **38 of those 42 are served**.
+Those 4 rows are chosen for **42 of the 49** sentences, and **37 of those 42 are served**.
 This is the honest version of what an earlier edition called the worst defect in the inventory.
 Three broad rows — a polyglot transform, a Python transform-and-synthesize, and a
 diagnose-and-architect — carry most of the census, and they now carry it successfully. Selection
 is still trigger-word driven, so a generic row with a large trigger vocabulary will win a
 sentence that belongs to a narrower row; what changed is that the broad rows became capable
 enough that the misrouting costs fewer sentences than it used to. The remaining
-4 absorptions that fail are the ones priced in §3, and each one is now
+5 absorptions that fail are the ones priced in §3, and each one is now
 attributed to the adapter's own reason rather than to a generic controller failure.
 
 ---
@@ -213,6 +215,11 @@ These matter more than any single refusal, and none of them is measured by a 49-
    strictly more evidence, one fewer false refusal. The residual problem is real and stays: a
    review that cannot distinguish a 10% change under load cannot certify a refactor's performance,
    only refute a large regression.
+   **Measured 2026-11-01: this is no longer only about `perf_review`.** Request 18 (optimise a
+   slow function) was *served* in one session and refuses `OPTIMIZATION_NOT_FASTER` in the
+   next, on identical code, reproducibly, and with the crystallizer change reverted. The census
+   total moved 42 -> 41 for that reason alone. A denominator that changes with the machine's
+   mood is not a capability number, which is why that class now has its own owner in §3
 8. **At least one census sentence is ill-posed.** Request 33 says *move the function `add`
    from mod.py into calc.py*, and both files define `add`, so the move collides and the
    refusal is CORRECT. A denominator that counts that sentence as a capability the machine lacks
@@ -228,17 +235,20 @@ These matter more than any single refusal, and none of them is measured by a 49-
 
 ## §6 The smartest order, given these numbers
 
-The census stands at **42 of 49 (86%)**. Of the 7
+The census stands at **41 of 49 (84%)**. Of the 8
 that remain, **4 are fixture defects** -- the machine is right and the sentence is
-under-specified or the move is ill-posed -- **3 are selection**, and
-**0 are capability**. The column is read off §3's own remedy text, so the two
-sections cannot disagree; a capability gap whose remedy happens to start with the word "none"
-is still counted as capability, because it says the missing thing is a capability.
+under-specified or the move is ill-posed -- **3 are selection**,
+**0 are capability**, and **1 are instrument defects**: the work
+was done and the verdict is untrustworthy.
+
+The column is read off §3's own remedy text, so the two sections cannot disagree; a capability
+gap whose remedy happens to start with the word "none" is still counted as capability, because
+it says the missing thing is a capability.
 
 That split decides the order, because it decides what a number means:
 
-* **The 49-sentence census is now a regression guard, not a frontier.** At 86% with
-  4 of the remaining 7 being sentence defects, raising it further buys
+* **The 49-sentence census is now a regression guard, not a frontier.** At 84% with
+  4 of the remaining 8 being sentence defects, raising it further buys
   almost no capability. It is what stops the machine going backwards, and it should be run on
   every change -- but no hour should be spent *aiming* at it.
 * **Every number in §1 is one request deep.** A system that answers 86% of single sentences
@@ -252,6 +262,7 @@ That split decides the order, because it decides what a number means:
 | 2 | **selection** for the 3 remaining sentences | 3 sentence(s) | cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |
 | 3 | **capability** for the 0 remaining sentences | 0 sentence(s) | real work, but a small ceiling; do it after the instrument exists |
 | 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, `rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows can never run, and no row may pretend otherwise |
+| 4b | **reproducible timing verdicts** for the 1 instrument defect(s) | 1 sentence(s) | a two-sided, repeated measurement that may answer UNCLEAR; today one row passes or refuses depending on the machine's mood |
 | 5 | **learning upstream of selection**: a refusal memory that changes which row is chosen | today the learner is downstream (see §7) | as built, it cannot prevent a repeat of a miss |
 | 6 | **repo-scale navigation**: ranked cross-module retrieval and impact ranking | a symbol index exists; a planner cannot yet ask "where is this behaviour" | needed by any multi-file task, which is item 1 |
 | 7 | fix the 4 fixture defect(s), or stop counting them | 4 sentence(s) | not capability work, and leaving them in the denominator overstates the gap |
@@ -274,13 +285,13 @@ engine and the cross-file repair choreographer.
 |---|---|
 | where the skills live | `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite` |
 | inside the temporary directory (wiped with the sandbox) | **False** |
-| rules taught by the 49-sentence census so far | **1** |
-| a taught fix crystallized in the probe | **6 rule(s)** |
+| rules taught by the 49-sentence census so far | **6** |
+| a taught fix crystallized in the probe | **1 rule(s)** |
 | CLI/environment recipe abstraction documented in the docstring | **not implemented** |
 | languages with a repair op that can teach | cpp, go, rust, ts |
 | rules a fresh store accepts from an exported bundle | **1** (refused 0) |
 | the imported rule fires in the store that never saw it | **True** |
-| provenance records carried with those rules | 6 |
+| provenance records carried with those rules | 1 |
 | rules shipped in version control (`VERIFIED_SKILLS_BUNDLE_V1.json`) | **5** |
 | rules a store that has never run anything holds on first open | **5** |
 
@@ -385,7 +396,7 @@ To make it the answer to everything, two things must both hold:
 | 15 | ci | Add caching of pip downloads to …/15_ci/.github/workflows/ci.yml. | `code.polyglot.transform_and_verify.v1` | SERVED |
 | 16 | ci | Quarantine the flaky test in …/16_ci/tests/test_calc.py so CI is green. | `code.polyglot.transform_and_verify.v1` | CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED — `CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED` |
 | 17 | perf | Profile …/17_perf/pkg/util.py and tell me which function is the hot spot. | `software.analysis.diagnose_and_architect.v1` | SERVED |
-| 18 | perf | Optimise the function total in …/18_perf/pkg/util.py; it is too slow on large inputs. | `python.swe.transform_and_synthesize.v1` | SERVED |
+| 18 | perf | Optimise the function total in …/18_perf/pkg/util.py; it is too slow on large inputs. | `python.swe.transform_and_synthesize.v1` | CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER — `CAPABILITY_REFUSED:OPTIMIZATION_NOT_FASTER` |
 | 19 | perf | Benchmark …/19_perf/pkg/calc.py against the version in git HEAD~1. | `software.analysis.diagnose_and_architect.v1` | SERVED |
 | 20 | perf | Add memoisation to the function twice in …/20_perf/pkg/mod.py. | `python.swe.transform_and_synthesize.v1` | SERVED |
 | 21 | systems | Find the race condition in …/21_systems/pkg/service.py. | `software.repair.choreograph.crossfile.v1` | STATED_ANSWER_NOT_PROVIDED — `STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:software.repair.` |
@@ -424,7 +435,7 @@ To make it the answer to everything, two things must both hold:
 
 It is not a plan to make the machine *seem* more capable. Every item above is either a measured
 refusal, a measured absence in the substrate, or a measured selection error. Nothing is softened:
-the machine answers 42 of 49 hardcore sentences and 44 of 54
+the machine answers 41 of 49 hardcore sentences and 44 of 54
 capability cases, and the difference between those two numbers is itself a finding — the matrix
 exercises rows directly, the census asks whether a sentence reaches the right one, and selection
 is where the sentences are lost. The value of the inventory is that the next hour of work can be

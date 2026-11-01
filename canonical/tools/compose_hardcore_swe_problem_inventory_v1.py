@@ -82,6 +82,9 @@ DEFECT_MEANING = {
     "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED":
         "a sentence about commits was routed to the architect row, which read history without being "
         "given a repository to read it from",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER":
+        "the optimiser produced a patch and the timed comparison did not show it faster, which is a "
+        "statement about the measurement as much as about the patch",
     "FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED":
         "the sentence asks for a regression test without stating a bug that can be reproduced or was "
         "observed, so there is nothing for the test to assert",
@@ -119,6 +122,10 @@ FIX = {
         "none on the machine — the fixture declares no dependencies; a better fixture is the fix",
     "FAIL_CLOSED__CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR":
         "none on the machine — nothing is declared to vendor; a better fixture is the fix",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER":
+        "instrument: the verdict is a timing comparison, so it must be two-sided, repeated, and it "
+        "must answer UNCLEAR when the difference is inside the noise instead of refusing -- measured "
+        "2026-11-01 this row passed in one session and refused in the next on identical code",
     "FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED":
         "none on the machine — the suite is not flaky; a better fixture is the fix",
     "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION":
@@ -142,6 +149,7 @@ FIX = {
 # is not evidence that the machine cannot do the work, and pricing it as capability work would
 # spend the next hour on a fixture.
 _OWNER_OF_REMEDY = (
+    ("instrument:", "instrument"),
     ("selection:", "selection"),
     ("none on the machine", "fixture"),
     ("better fixture is the fix", "fixture"),
@@ -361,7 +369,10 @@ def learning_measurement() -> dict:
             except SyntaxError:
                 return False
 
-        store = cry.VerifiedSkillStore(db)
+        # seed=False: this measures what ONE taught fix does, so the shipped bundle must not be in
+        # the way. With seeding on, `crystallizes` read 6 (five shipped + one taught) and the probe
+        # loop was answering with rules the repository already knew.
+        store = cry.VerifiedSkillStore(db, seed=False)
         store.crystallize_verified_fix(language="python", bug_class="python_repair",
                                        before_code=LEARN_TEACH, after_code=LEARN_FIXED,
                                        verifier_oracle_kind="probe")
@@ -375,7 +386,7 @@ def learning_measurement() -> dict:
         # portable, and only this makes the difference visible.
         bundle = db.parent / "transfer.bundle.json"
         store.export_to_file(bundle)
-        second = cry.VerifiedSkillStore(db.parent / "second.sqlite")
+        second = cry.VerifiedSkillStore(db.parent / "second.sqlite", seed=False)
         imported = second.import_from_file(bundle)
         out["portable_rules"] = imported["accepted"]
         out["portable_refused"] = imported["refused"]
@@ -707,6 +718,11 @@ def main() -> int:
     add("   strictly more evidence, one fewer false refusal. The residual problem is real and stays: a")
     add("   review that cannot distinguish a 10% change under load cannot certify a refactor's performance,")
     add("   only refute a large regression.")
+    add("   **Measured 2026-11-01: this is no longer only about `perf_review`.** Request 18 (optimise a")
+    add("   slow function) was *served* in one session and refuses `OPTIMIZATION_NOT_FASTER` in the")
+    add("   next, on identical code, reproducibly, and with the crystallizer change reverted. The census")
+    add("   total moved 42 -> 41 for that reason alone. A denominator that changes with the machine's")
+    add("   mood is not a capability number, which is why that class now has its own owner in §3")
     add("8. **At least one census sentence is ill-posed.** Request 33 says *move the function `add`")
     add("   from mod.py into calc.py*, and both files define `add`, so the move collides and the")
     add("   refusal is CORRECT. A denominator that counts that sentence as a capability the machine lacks")
@@ -732,13 +748,20 @@ def main() -> int:
     pct = 100.0 * len(served) / len(rows)
     fixture = [r for r in refused if defect_owner(refusal_class(r)) == "fixture"]
     selection = [r for r in refused if defect_owner(refusal_class(r)) == "selection"]
-    capability = [r for r in refused if r not in fixture and r not in selection]
+    # Explicitly owned, never "whatever is left": an unclassified row used to fall through into
+    # capability, which is how the instrument defect was silently priced as missing capability.
+    capability = [r for r in refused if defect_owner(refusal_class(r)) == "capability"]
     add(f"The census stands at **{len(served)} of {len(rows)} ({pct:.0f}%)**. Of the {len(refused)}")
+    instrument = [r for r in refused
+                  if defect_owner(refusal_class(r)) == "instrument"]
     add(f"that remain, **{len(fixture)} are fixture defects** -- the machine is right and the sentence is")
-    add(f"under-specified or the move is ill-posed -- **{len(selection)} are selection**, and")
-    add(f"**{len(capability)} are capability**. The column is read off §3's own remedy text, so the two")
-    add("sections cannot disagree; a capability gap whose remedy happens to start with the word \"none\"")
-    add("is still counted as capability, because it says the missing thing is a capability.")
+    add(f"under-specified or the move is ill-posed -- **{len(selection)} are selection**,")
+    add(f"**{len(capability)} are capability**, and **{len(instrument)} are instrument defects**: the work")
+    add("was done and the verdict is untrustworthy.")
+    add("")
+    add("The column is read off §3's own remedy text, so the two sections cannot disagree; a capability")
+    add("gap whose remedy happens to start with the word \"none\" is still counted as capability, because")
+    add("it says the missing thing is a capability.")
     add("")
     add("That split decides the order, because it decides what a number means:")
     add("")
@@ -763,6 +786,9 @@ def main() -> int:
     add("| 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, "
         "`rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows "
         "can never run, and no row may pretend otherwise |")
+    add(f"| 4b | **reproducible timing verdicts** for the {len(instrument)} instrument defect(s) | "
+        f"{len(instrument)} sentence(s) | a two-sided, repeated measurement that may answer UNCLEAR; "
+        "today one row passes or refuses depending on the machine's mood |")
     add("| 5 | **learning upstream of selection**: a refusal memory that changes which row is chosen | "
         "today the learner is downstream (see §7) | as built, it cannot prevent a repeat of a miss |")
     add("| 6 | **repo-scale navigation**: ranked cross-module retrieval and impact ranking | a symbol "
