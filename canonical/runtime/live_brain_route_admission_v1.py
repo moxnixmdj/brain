@@ -4574,10 +4574,50 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             result["semantic_acceptance_complete"] = False
             result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
             result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+    elif result.get("pass") is not True:
+        try:
+            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                _is_honest_contract_refusal,
+            )
+            from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+                recall_and_execute_workflow,
+            )
+
+            if not _is_honest_contract_refusal(result):
+                recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
+                if recalled is not None and recalled.get("pass") is True:
+                    receipts = list(recalled.get("step_receipts") or [])
+                    last_step = receipts[-1] if receipts else {}
+                    ans = str(last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows") or "").strip()
+                    result = {
+                        "schema": SCHEMA,
+                        "task_id": str(request.get("task_id") or ""),
+                        "goal": str(request.get("goal") or ""),
+                        "pass": True,
+                        "status": "PASS__COMPILED_WORKFLOW_SKILL",
+                        "compiled_capability_id": str(recalled.get("skill_id") or ""),
+                        "from_memory": True,
+                        "fastest_layer": recalled.get("dominant_layer"),
+                        "answer": ans,
+                        "step_receipts": receipts,
+                        "elapsed_ns": perf_counter_ns() - started,
+                    }
+                    return result
+        except Exception:
+            pass
     # Include preflight compilation, selection and report inspection. Moving
     # work before _solve_body must not make the reported latency look smaller.
     result["elapsed_ns"] = perf_counter_ns() - started
     return result
+
+
+def solve_or_learn(request: Mapping[str, Any] | str, **kwargs: Any) -> dict[str, Any]:
+    """Closed-loop entry: Tier 0 recall/registry -> Tier 1 DAG/composer -> Tier 2 sandbox learn & qualify."""
+    from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+        solve_or_learn as _controller_solve_or_learn,
+    )
+
+    return _controller_solve_or_learn(request, **kwargs)
 
 
 def _capability_id_of(result: Mapping[str, Any]) -> str:

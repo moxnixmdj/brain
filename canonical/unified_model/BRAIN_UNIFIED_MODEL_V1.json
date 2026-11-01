@@ -25896,6 +25896,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
+     "difflib",
      "importlib",
      "json",
      "os",
@@ -25931,7 +25932,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "d33cead3fb9b5cf7ed10e35c47fe3b25a74069b2f52ed1b5d5ef76d12b686624",
+    "source_sha256": "3f5f144b67fa323e7c9707ae8cc2e8e0879d1878564428d8abc682db12e858c1",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -29251,7 +29252,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "83d02df7d910c7dfaba721131b20a609395f6f9d39affcc2435ef114c00e9976",
+    "source_sha256": "1a2a2712bdb2df82cd0c2ca5b5c578e67a927c31629474a6646f17ace15f8545",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30922,7 +30923,7 @@
   "engines": 26,
   "knowledge_documents": 231,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6576,
+  "research_index_records": 6577,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30931,7 +30932,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "49d375448db0586ca735e5cca005806763615f8fb0f9dad1f20c0fb9327d3530"
+  "value": "e703958d8894e363b0c57afc1446fcd8254a3011d27c5fd1c9c292be0231a05c"
  },
  "engines": [
   {
@@ -60796,7 +60797,7 @@
   "included_source_count": 1025,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "306a78af01316d338571da95e61f5858c966ee81f63da2590eac8901da272e21"
+  "source_tree_digest": "85a9ad8f3ddb1c80fe79c4bdb5973948670b01f925e2dafd939be0b56866f4c6"
  },
  "research_index": [
   {
@@ -200223,6 +200224,51 @@
    }
   },
   {
+   "action_id": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "84c2bf1b80882174bb3dd56bbfe005e7b24a7f3ec7ce4143aec10f1aa79e5612",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "29ada613": 1,
+    "3.8-6.6": 1,
+    "370s": 1,
+    "ablation": 1,
+    "acquisition": 1,
+    "acquisition_to_execution_closed_loop_engine_v1_20261101_v1": 2,
+    "any": 1,
+    "assertions": 1,
+    "ast": 1,
+    "audit": 1,
+    "behind": 1,
+    "capability_transfer_ownership_gate_v1": 2,
+    "causal": 3,
+    "cli": 2,
+    "closed": 1,
+    "compiler": 1,
+    "composition": 1,
+    "computer_env_v1": 1,
+    "concrete": 1,
+    "control": 1,
+    "demonstration": 1,
+    "deterministic": 1,
+    "disconnected": 1,
+    "discovery": 2,
+    "dom": 1,
+    "due": 1,
+    "dynamic": 1,
+    "execution": 2,
+    "http": 2,
+    "sqlite": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "",
@@ -231786,7 +231832,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "1b36849040dc597e93bd628d21119905f3b70ebbca3d15bf632cfcb6147d274d",
+   "sha256": "ecf4078f6a761fd73b18c96a26eda8008f766cb6725b25cf5c1afb1244f52c27",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 49,
    "symbols": [
@@ -234567,7 +234613,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/curriculum_v1.py",
-   "sha256": "dc25bce63d042e011ab5494199881aae593482b7ebfb80b615d3dbc82d5e2403",
+   "sha256": "e30c6f0f3b93a3afd125896ef47a347a2f485ddbda95103df8d74086ec4c87f6",
    "summary": "The machine decides what to learn next, then learns it. Nobody tells it to.",
    "symbol_count": 18,
    "symbols": [
@@ -249286,9 +249332,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "c013a4bb763a3fd2879b4c3d70231fb2f45c2795557ce38f87307ce8b947df6a",
+   "sha256": "f98e048f73d1b01c3ed4a0abb29cffb7a1889bcf1e460958ee8bd5714cbb2d9b",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 104,
+   "symbol_count": 105,
    "symbols": [
     "LocalExecutionFailure",
     "_already_satisfied_evidence",
