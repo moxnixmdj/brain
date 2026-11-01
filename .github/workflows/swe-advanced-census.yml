@@ -41,7 +41,7 @@ on:
       floor:
         description: "Minimum number of the 49 advanced requests that must reach a verified outcome"
         required: false
-        default: "35"
+        default: "42"
 
 permissions:
   contents: read
@@ -79,7 +79,7 @@ jobs:
         shell: bash
         run: |
           FLOOR="${{ github.event.inputs.floor }}"
-          FLOOR="${FLOOR:-35}"
+          FLOOR="${FLOOR:-42}"
           python execution_guard/swe_advanced_probe_v1.py \
             --json /tmp/advanced.json --floor "$FLOOR" \
             --summary "$GITHUB_STEP_SUMMARY" 2>&1 | tee /tmp/advanced.log
