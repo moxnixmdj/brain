@@ -25896,6 +25896,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
+     "ast",
      "difflib",
      "importlib",
      "json",
@@ -25903,6 +25904,7 @@
      "pathlib",
      "subprocess",
      "sys",
+     "tempfile",
      "typing"
     ],
     "declared_dependency_executables": [],
@@ -25932,7 +25934,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "3f5f144b67fa323e7c9707ae8cc2e8e0879d1878564428d8abc682db12e858c1",
+    "source_sha256": "ca7a6738a17cdf5ed3e65bb174d3374d2bbcb56544515a694b53fb480e670020",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30921,9 +30923,9 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 232,
+  "knowledge_documents": 233,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6579,
+  "research_index_records": 6581,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30932,7 +30934,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ca6d8aae5a1f0ef7e0d7ea1036a7cbc6068267a088cae1777cee155dc0f4c6a6"
+  "value": "d9eadc97bdc3d4834bab57bf74fcadab374621e27b344798dc51a9b3e1563dda"
  },
  "engines": [
   {
@@ -59892,6 +59894,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9684,
+   "headings": [
+    "Bounded production repair and retained-learning qualification",
+    "What changed",
+    "Curriculum and comparison",
+    "Refusal, restoration and real-boundary checks",
+    "Configuration and trust boundary",
+    "Validation and remaining work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.md",
+   "sha256": "ee601953c1f77049bc59a8953368fdaf0265aac895fbb8edb7c9dc50cfc68479",
+   "summary": "2026-11-01. Base: `07099b7c5986a8864e1fc8bb2a7d14050727a77f`. Model-assisted development and same-producer tests; **not independent certification**. This is the first finite batch of phases 1–2 of the six-phase plan, plus a measured Python twin-generation fix. It is not completion of the whole plan.",
+   "terms": {
+    "acceptance": 3,
+    "actual": 6,
+    "after": 4,
+    "application": 3,
+    "apply": 4,
+    "artifact": 5,
+    "audit": 12,
+    "authored": 3,
+    "before": 3,
+    "both": 3,
+    "bounded": 3,
+    "caller": 3,
+    "changed": 3,
+    "claim": 4,
+    "command": 4,
+    "comparison": 3,
+    "context": 3,
+    "disabled": 5,
+    "each": 5,
+    "existing": 7,
+    "explicit": 4,
+    "external": 6,
+    "failed": 4,
+    "fallback": 4,
+    "family": 4,
+    "incl": 4,
+    "learned": 6,
+    "learning": 5,
+    "median": 4,
+    "not": 26,
+    "project": 5,
+    "python": 5,
+    "qualification": 4,
+    "repair": 10,
+    "restoration": 4,
+    "retained": 4,
+    "scoped": 4,
+    "search": 6,
+    "separate": 5,
+    "source": 13,
+    "subprocesses": 6,
+    "successful": 4,
+    "suites": 5,
+    "teaching": 8,
+    "test": 7,
+    "tests": 10,
+    "three": 6,
+    "worker": 6
+   },
+   "title": "Bounded production repair and retained-learning qualification",
+   "title_terms": [
+    "bounded",
+    "production",
+    "qualification",
+    "repair",
+    "retained-learning"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6116,
    "headings": [
     "Scoped retained-skill verification and restart qualification",
@@ -60869,10 +60945,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1026,
+  "included_source_count": 1027,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b24354bae2530c5e625fb0d5e01a1ad7b7cacd5bd3a49abf267f8090ec48af37"
+  "source_tree_digest": "929f1e1bf6f4e31d5f84cda70c8a99dee44c3bd67f4e0102afee39b4711d7fd8"
  },
  "research_index": [
   {
@@ -171119,6 +171195,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "schema": "BOUNDED_RETAINED_PRODUCTION_QUALIFICATION_OBSERVATIONS_V1",
+   "sha256": "39ef4196a87d29209daef6d47427d9f10864df145c43fa090a6a3efc6e5f21e3",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "production": 1,
+    "qualification": 1,
+    "repair": 1,
+    "retained": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-04",
    "id": "research:canonical/verification/RETRIEVAL_V10_CROSS_ECOSYSTEM_REPO_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -211888,6 +211983,51 @@
     "requirement_names_an_effect_not_a_row_v1_20261031_v1": 1,
     "row": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5f461799b586ec9faf73583a80d78a9a74834d6c4f627b6bc97a1a5e113e3e8d",
+   "status": "IMPLEMENTED_BOUNDED_QUALIFICATION__NO_PROMOTION",
+   "terms": {
+    "20261101": 1,
+    "accepts": 1,
+    "actual": 1,
+    "against": 1,
+    "already": 1,
+    "application": 1,
+    "applied": 1,
+    "caller": 1,
+    "capability": 1,
+    "capable": 1,
+    "claim": 1,
+    "command": 2,
+    "compose": 2,
+    "corpus": 1,
+    "declared": 1,
+    "disabled": 1,
+    "existing": 3,
+    "gate": 1,
+    "gates": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "global-optimality": 1,
+    "implemented_bounded_qualification__no_promotion": 1,
+    "integrate_existing_skill_store_and_measurement": 1,
+    "learning": 1,
+    "measure": 1,
+    "no": 1,
+    "not": 1,
+    "production": 2,
+    "repair": 4,
+    "retained": 2,
+    "scoped": 2,
+    "solver": 2
    }
   },
   {

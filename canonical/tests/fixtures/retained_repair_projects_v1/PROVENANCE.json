@@ -1,0 +1,67 @@
+{
+  "schema": "REPOSITORY_DERIVED_SEEDED_REPAIR_FIXTURES_V1",
+  "network_required_for_tests": false,
+  "source_snapshots_unmodified": true,
+  "not_an_upstream_bug_benchmark": true,
+  "fixtures": [
+    {
+      "repository": "https://github.com/mahmoud/boltons",
+      "commit": "d31d821d56c8f7756af9c30a864077f2e5855321",
+      "path": "boltons/mathutils.py",
+      "source_url": "https://github.com/mahmoud/boltons/blob/d31d821d56c8f7756af9c30a864077f2e5855321/boltons/mathutils.py",
+      "local_file": "boltons_mathutils.py",
+      "sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+      "license_file": "LICENSE.boltons"
+    },
+    {
+      "repository": "https://github.com/more-itertools/more-itertools",
+      "commit": "08dca284ba5446a026afdc34067b658f9da989eb",
+      "path": "more_itertools/recipes.py",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/08dca284ba5446a026afdc34067b658f9da989eb/more_itertools/recipes.py",
+      "local_file": "more_itertools_recipes.py",
+      "sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+      "license_file": "LICENSE.more-itertools"
+    },
+    {
+      "repository": "https://github.com/pallets/itsdangerous",
+      "commit": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "path": "src/itsdangerous/encoding.py",
+      "source_url": "https://github.com/pallets/itsdangerous/blob/672971d66a2ef9f85151e53283113f33d642dabd/src/itsdangerous/encoding.py",
+      "local_file": "itsdangerous_encoding.py",
+      "sha256": "c304f3e6aff7ccb71a01dba793afef4a84adc06a9859edf4ed997f53ceda4453",
+      "license_file": "LICENSE.itsdangerous"
+    },
+    {
+      "repository": "https://github.com/pallets/itsdangerous",
+      "commit": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "path": "src/itsdangerous/exc.py",
+      "source_url": "https://github.com/pallets/itsdangerous/blob/672971d66a2ef9f85151e53283113f33d642dabd/src/itsdangerous/exc.py",
+      "local_file": "itsdangerous_exc.py",
+      "sha256": "46bddec68d0c44511c3d996dc1e7322b5e955756c4d8af7f175f9dfa58dc527e",
+      "license_file": "LICENSE.itsdangerous"
+    }
+  ],
+  "licenses": [
+    {
+      "source_url": "https://github.com/mahmoud/boltons/blob/d31d821d56c8f7756af9c30a864077f2e5855321/LICENSE",
+      "local_file": "LICENSE.boltons",
+      "upstream_sha256": "c301912653a8d8c99eab6212aa3aea8d164ea249d8ad53c941e0558a0a5ac1e3",
+      "local_sha256": "617273daf4b7b4fbc0e3068bca7df3e3dbc29b4c5641e185917c775cf1795111",
+      "crlf_to_lf_only": true
+    },
+    {
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/08dca284ba5446a026afdc34067b658f9da989eb/LICENSE",
+      "local_file": "LICENSE.more-itertools",
+      "upstream_sha256": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46",
+      "local_sha256": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46",
+      "crlf_to_lf_only": false
+    },
+    {
+      "source_url": "https://github.com/pallets/itsdangerous/blob/672971d66a2ef9f85151e53283113f33d642dabd/LICENSE.txt",
+      "local_file": "LICENSE.itsdangerous",
+      "upstream_sha256": "63af09891b6be8ad1a4252ed43af0f4efba7fc948e228367bed7f3c5ae0b09d7",
+      "local_sha256": "63af09891b6be8ad1a4252ed43af0f4efba7fc948e228367bed7f3c5ae0b09d7",
+      "crlf_to_lf_only": false
+    }
+  ]
+}

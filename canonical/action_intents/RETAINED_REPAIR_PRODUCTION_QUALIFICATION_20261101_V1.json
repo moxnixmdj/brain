@@ -1,0 +1,369 @@
+{
+  "action_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1",
+  "action_intent_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Gate actual applied source against the declared test corpus as well as the caller command; compose the existing scoped skill store with the existing repair solver; measure transfer versus the same capable solver with learning disabled. No global-optimality or capability promotion claim.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "admission_record_timing": "RECORDED_BEFORE_SOURCE_EDITS",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "model_dependency_count_scope": "The deterministic runtime producer/solver route, not the model-assisted development session; development provenance is explicitly declared separately.",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.md",
+      "canonical/tests/test_retained_repair_production_qualification_v1.py",
+      "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Production repair accepts a zero-work stated command as already satisfied and does not compose scoped retained repair with its existing verified search/application gates.",
+  "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Production repair accepts a zero-work stated command as already satisfied and does not compose scoped retained repair with its existing verified search/application gates.",
+  "date": "2026-11-01",
+  "expected_parent_frontier_change": "Gate actual applied source against the declared test corpus as well as the caller command; compose the existing scoped skill store with the existing repair solver; measure transfer versus the same capable solver with learning disabled. No global-optimality or capability promotion claim.",
+  "explicit_user_authorization": "User approved the next bounded production-verification and retained-learning qualification batch with Execute perfectly.",
+  "falsification_condition": "A zero-work command or changed test corpus authorizing success, an unverified applied patch, retained reuse across incompatible scope, or uncounted search/verification cost invalidates the relevant claim.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "estimate_semantics": "Conditional engineering planning inputs required by the admission scheduler, not measured benchmark improvement, statistical certification, or an independently validated global probability bound. No official obligation is discharged by this record.",
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000",
+    "interpretation": "Reliable production source effects and verified reusable repairs are prerequisites for coding capability. No obligation discharge, official benchmark gain or independent certification.",
+    "measured_effect": "28 new qualification cases pass. Three separately taught families, three repetitions each: learned 9/9 actual production repairs and external audits, disabled capable solver 6/9. Affected suites 155 passed, 2 inherited failures. Detailed CPU/wall/subprocess costs and limitations in adjacent qualification report/JSON. No benchmark/ownership/terminal promotion.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 86400
+  },
+  "ownership_credit_delta": 0,
+  "post_edit_evidence_addendum": {
+    "additional_measured_blockers": [
+      "Python regex alpha-twins invalid for all three pinned upstream modules; fixed with stdlib tokenize/keyword, no new parser.",
+      "Corrupt SQLite and unavailable directory raised before capable fallback; observed DatabaseError/FileExistsError, now fall back without erasing artifacts.",
+      "Initial database-outside-execution restriction excluded root projects; removed after real oracle/root-project qualification."
+    ],
+    "changed_source_paths": [
+      "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+      "canonical/swe_kernel/retained_repair_session_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/tests/retained_repair_curriculum_v1.py",
+      "canonical/tests/test_retained_repair_production_qualification_v1.py"
+    ],
+    "chronology": "Initial intent was written before source edits. This addendum records later measured blockers/results; it is not a claim that an official admission check ran before edits.",
+    "independent_certification": false,
+    "measured_results": {
+      "elapsed_s": 68.73,
+      "failed": 2,
+      "inherited_failure_names": [
+        "RepairApplyVerifiedTests::test_a_patch_that_fails_in_place_is_rolled_back_byte_for_byte",
+        "RepairApplyVerifiedTests::test_no_bounded_repair_means_no_write"
+      ],
+      "new_qualification_cases_passed": 28,
+      "passed": 155
+    },
+    "recorded_at_utc": "2026-11-01T12:46:55.040176+00:00"
+  },
+  "probe_specific": false,
+  "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
+  "recursive_obs": {
+    "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Stated-command exit code alone as proof that named tests passed",
+      "Parallel replacement search or skill storage"
+    ],
+    "expected_parent_level_state_change": "Gate actual applied source against the declared test corpus as well as the caller command; compose the existing scoped skill store with the existing repair solver; measure transfer versus the same capable solver with learning disabled. No global-optimality or capability promotion claim.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Delete implicit assurance inference",
+        "Refuse unsupported contract constraints and out-of-scope recall",
+        "Reuse SQLite, existing copied-tree measurement and suite runner"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_EXISTING_SWE_TRANSFORM_AND_TRANSFER_IMPLEMENTATIONS",
+      "surviving_causal_blocker": "Production repair accepts a zero-work stated command as already satisfied and does not compose scoped retained repair with its existing verified search/application gates."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "Replacement universal-learning architecture",
+        "Replacement parser",
+        "Parallel evidence/model format"
+      ],
+      "existing_inherited_routes_checked": [
+        "VerifiedSkillStore scoped records and invalidation",
+        "ProjectTestOracle and repository measurement runner",
+        "python_repair_apply_verified_v1 transactional application and provenance-guided search",
+        "Existing shared suite_argv / script and unittest/pytest collection",
+        "Existing workflow/trace learners inspected; not a replacement for source-patch gates",
+        "Python stdlib tokenize and keyword for correct lexical twin generation",
+        "Python stdlib tokenize and keyword for correct lexical twin generation"
+      ],
+      "external_existing_routes_checked": [
+        "Pinned licensed upstream boltons, more-itertools and itsdangerous sources; attribution and exact source SHAs in fixture provenance manifest.",
+        "Existing prior cache/parser metadata remains historical discovery context only, not qualification of the current solution."
+      ],
+      "surviving_gap": "Compose these maintained mechanisms at the actual source application boundary and compare against real bounded search, not a no-fallback ablation."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Universal mastery claims",
+        "Treating a producer PASS flag or low replay trial count as task correctness or total work"
+      ],
+      "real_outcome": "Gate actual applied source against the declared test corpus as well as the caller command; compose the existing scoped skill store with the existing repair solver; measure transfer versus the same capable solver with learning disabled. No global-optimality or capability promotion claim.",
+      "surviving_necessity": "Correctly bound and freshly tested reuse rather than syntax-only lesson acceptance."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "Existing anti-unification and parameter holes",
+        "Existing SQLite schema with versioned pattern_json metadata",
+        "Existing repository measurement and test-suite execution machinery"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "Caller-command exit code alone as actual-corpus proof",
+        "Duplicate execution when completed observation is from the exact maintained runner argv",
+        "Python regex identifier renaming that alters literal prefixes/keywords"
+      ],
+      "fresh_reuse_plan": "Reuse the maintained interfaces. Revalidate changed dependencies; do not let retained success replace live verification."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the existing current-tree test modules and official compiler instead of creating a new evidence architecture"
+      ],
+      "search_stop_decision": "For the finite reproduced defects, maintained substrate plus bounded contract glue is sufficient; stop search before pretending universal optimality. Reopen if new counterexamples or a qualified dominating route appears."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Trust fails known counterexamples; disabling all writes loses working positive cases; replacement learning does not fix source-transition invariants. No claim that every possible external route was exhaustively benchmarked.",
+      "routes_ranked": [
+        "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+        "KEEP_BOOLEAN_ONLY_VERIFICATION",
+        "REPLACE_LEARNER"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Three pinned real upstream module families in authored cross-file projects with seeded teaching/held-out defects, actual production dispatch/application, separate actual audits, three repetitions per family, and removal/restoration controls. Not full upstream repositories, historical bugs or independent certification."
+    },
+    "real_outcome": "Gate actual applied source against the declared test corpus as well as the caller command; compose the existing scoped skill store with the existing repair solver; measure transfer versus the same capable solver with learning disabled. No global-optimality or capability promotion claim.",
+    "required_capability": "Scoped skill hypotheses revalidated with actual behavioral measurements rather than truthy callbacks.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Keep the existing search solver as the fallback/baseline; scoped memory proposes, never bypasses verification.",
+            "CORRECTNESS": "Require actual declared corpus success and final source/test integrity; one reproduced no-work-command counterexample.",
+            "INCREMENTAL_COST": "Existing runtime mechanisms; no paid service or external-model runtime call.",
+            "RELIABILITY": "28 real-execution qualification cases pass, including same-size stale-cache, rollback, restart/removal, scope/invalidation and actual bound dispatcher; full affected suite retains two inherited failures.",
+            "VERIFIABILITY": "Actual child executions and original test/source byte comparisons, not independent certification.",
+            "WALL_CLOCK": "Measure complete search, proposal and verification costs; no unmeasured fastest claim."
+          },
+          "evidence": [
+            "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+            "canonical/tests/test_python_repair_apply_verified_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.md",
+            "canonical/verification/RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1.json",
+            "canonical/tests/test_retained_repair_production_qualification_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T12:20:13.858118+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_evidence_provenance": "Current local repair/store/measurement/stdlib inspection plus pinned GitHub source selection. Earlier metadata queries are inherited discovery context only. A fresh narrow GitHub community repository query returned no candidates; no exhaustive search or universal fastest claim.",
+      "discovery_required": true,
+      "incumbent_route": "LEGACY_BOOLEAN_PREDICATE_AND_UNSCOPED_CACHE_RECALL",
+      "max_age_hours": 24,
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "GitHub repository search: python disk cache transactions"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GitHub repository metadata: grantjenks/python-diskcache"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "GitHub issues search: repo:python/cpython lru_cache mutable"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub latest release: tree-sitter/py-tree-sitter"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T12:20:13.858118+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "CPython, pytest/pytest-subtests and maintained repair/measurement/store modules",
+            "evidence": [
+              "DIRECT_PROBE: baseline module 11 passed, 2 failed; reproduced false already-satisfied result without source edits; local pytest installed in isolated .venv."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Current verified skill store, ProjectTestOracle, actual apply adapter, shared suite runner and provenance-guided repair inspected and reused; real false-success, invalid-twin and corrupted-memory counterexamples measured."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026-11-01 GitHub repository search `python program repair test guided`, per_page=3, returned no items. Limited negative metadata query, not evidence that no better external solution exists."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/mahmoud/boltons/blob/d31d821d56c8f7756af9c30a864077f2e5855321/boltons/mathutils.py",
+          "https://github.com/more-itertools/more-itertools/blob/08dca284ba5446a026afdc34067b658f9da989eb/more_itertools/recipes.py",
+          "https://github.com/pallets/itsdangerous/blob/672971d66a2ef9f85151e53283113f33d642dabd/src/itsdangerous/encoding.py",
+          "https://github.com/pallets/itsdangerous/blob/672971d66a2ef9f85151e53283113f33d642dabd/src/itsdangerous/exc.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Official upstream module snapshots and licenses from three public projects, exact commit URLs recorded in canonical/tests/fixtures/retained_repair_projects_v1/PROVENANCE.json; Python standard library tokenizer reused."
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+      "KEEP_BOOLEAN_ONLY_VERIFICATION",
+      "REPLACE_LEARNER"
+    ],
+    "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+    "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+    "why_selected_route_is_fastest_sufficient": "Within the compared finite-scope routes, reuse the existing machinery and repair its shared preconditions rather than replace the stack. Comparative global optimality is unknown."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+  "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+  "status": "IMPLEMENTED_BOUNDED_QUALIFICATION__NO_PROMOTION",
+  "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T12:20:13.858118+00:00",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "Finite scoped retained-repair verification only. No terminal proof, complete request semantics, benchmark acceptance or permanent mastery claim.",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "019ad7108aaa706c9bfba237efad2c441cfc4fd6",
+          "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+        },
+        {
+          "git_blob_sha": "0be9bd268566ffefa0b84390e0e9a607c1aacb0c",
+          "path": "canonical/tests/test_python_repair_apply_verified_v1.py"
+        }
+      ],
+      "decisive_question": "Does actual applied source satisfy untouched declared tests, and does retained learning improve verified transfer over the same capable search solver after restart?",
+      "falsifier_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1_WRONG_RULE_AND_ABLATION",
+      "known_counterexamples_checked": true,
+      "proposal_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
