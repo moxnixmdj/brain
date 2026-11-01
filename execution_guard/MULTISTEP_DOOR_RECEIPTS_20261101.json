@@ -4,37 +4,68 @@
  "commit": "3fc9e561ea7e72a95549673d79ebdaf4a9fae829",
  "injected": {"file": "src/pluggy/_manager.py", "line": 247,
               "before": "elif not verified and hook.has_spec():",
-              "after": "elif not verified or hook.has_spec():"},
- "note": "Four phrasings of the same task, each measured through the front door on 2026-11-01. The capability-level path (stated source file + stated test file, called directly) succeeds; these are the DOOR receipts, and every one of them returns no edit.",
- "attempts": [
-  {"sentence": "Fix the failing tests in <repo>. The suite reports: <failing output>. The fault is in src/pluggy/_manager.py. Restore the behaviour the tests expect.",
-   "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
-   "row": "python.software.repair.apply.verified.v1",
-   "why": "STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
-   "reading": "Naming the fault location makes the request a DIAGNOSIS, and a repair row may not answer one. The capability never ran."},
-  {"sentence": "Fix the failing tests in <repo>. The suite reports: <failing output>. Restore the behaviour the tests expect.",
-   "status": "FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT",
-   "row": "python.software.repair.apply.verified.v1",
-   "why": "CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET / ACTION_EXPECTATION_FAILED:output_verified:OBSERVED=False",
-   "reading": "The capability executed against the discovered corpus and produced no verified edit, so the door refused. This is the only receipt that measures the repair itself, and it is a capability result, not a routing one."},
-  {"sentence": "Fix the failing tests in testing/test_pluginmanager.py so the suite passes. ...",
-   "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
-   "row": null,
-   "why": "RuntimeError:REFUSING_BROAD_REPO_MUTATION",
-   "reading": "A test file named at repository scope reads as a broad mutation; the door refuses before selecting a row."},
-  {"sentence": "Repair the python source file src/pluggy/_manager.py so that the unit tests in testing/test_pluginmanager.py pass.",
-   "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
-   "row": null,
-   "why": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
-   "reading": "The idiom that names both a source file and its test file compiles to nothing for this shape, even though it is the sentence the repair adapters themselves document."}
- ],
- "capability_level_success": {
-  "call": "python_repair_apply_verified_v1.run({source_root, test_paths: [testing/test_pluginmanager.py], output_path, timeout_s: 120})",
+              "after": "elif not verified or hook.has_spec():",
+              "failing_tests": 7,
+              "failing_files": {"testing/test_details.py": 4, "testing/test_pluginmanager.py": 3}},
+ "note": "Every number here was measured on a clone reset to the pin, with the seed reapplied, on 2026-11-01. The same task is measured at three scopes because the answer differs at each one.",
+
+ "scope_1_stated_test_file": {
+  "call": "python_repair_apply_verified_v1.run({source_root: '.', test_paths: ['testing/test_pluginmanager.py'], timeout_s: 120})",
   "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
   "applied": true,
   "files_written": ["src/pluggy/_manager.py"],
   "post_apply_test_returncode": 0,
-  "elapsed_s_approx": 18,
-  "requires": "an operator-supplied source root and the exact failing test file"
+  "elapsed_s": 13.5,
+  "patch": "elif not verified or hook.has_spec():  ->  elif verified or hook.has_spec():",
+  "caveat": "The stated file goes green and its 3 failing tests pass. The OTHER 3 failures of the same injected fault are in testing/test_details.py and remain, so the tree is not repaired.",
+  "reproducible": true
+ },
+
+ "scope_2_whole_corpus": {
+  "call": "python_repair_apply_verified_v1.run({source_root: '.', test_paths: [], timeout_s: 120})  -- discovered corpus, 9 files, 226 tests; this is the door's own binding",
+  "before_portfolio": {"status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH", "elapsed_s": 542.7,
+                       "single_candidates_tested": 162, "pair_candidates_tested": 1000,
+                       "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS"},
+  "after_portfolio_narrowed_evidence_only": {
+   "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH", "elapsed_s": 123.3,
+   "attempts": [{"test_path": "testing/test_pluginmanager.py", "failing_tests": 3, "wall_s": 58.6, "patch": false},
+                {"test_path": "testing/test_details.py", "failing_tests": 4, "wall_s": 58.7, "patch": false}]},
+  "after_portfolio_narrowed_evidence_and_acceptance": {
+   "status": "FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY", "elapsed_s": 17.8,
+   "why": "the 12.5 s patch made the file it was shown green and left test_details.py red; gate 4 refused it. Narrowing the evidence is right; narrowing the acceptance is not."}
+ },
+
+ "scope_3_true_repair": {
+  "patch": "elif not verified or hook.has_spec():  ->  elif not verified and hook.has_spec():",
+  "applies": "restoring the conjunction the injection broke, one line",
+  "whole_corpus": "226 passed, rc 0, 1.7 s",
+  "found_by_the_engine_within_budget": false,
+  "why_not": "the engine's own candidate space contains an OR->AND swap, but with whole-corpus acceptance it tested 162 single and 312 coupled-pair candidates in 300 s without reaching it; each candidate costs a full corpus run."
+ },
+
+ "door_attempts": [
+  {"sentence": "Fix the failing tests in <repo>. The suite reports: <failing output>. The fault is in src/pluggy/_manager.py. Restore the behaviour the tests expect.",
+   "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+   "why": "STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1",
+   "reading": "Naming the fault location makes the request a DIAGNOSIS, and a repair row may not answer one. The capability never ran."},
+  {"sentence": "Fix the failing tests in <repo>. The suite reports: <failing output>. Restore the behaviour the tests expect.",
+   "status": "FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT",
+   "why": "CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET / ACTION_EXPECTATION_FAILED:output_verified:OBSERVED=False",
+   "reading": "The capability executed on the discovered corpus and produced no verified whole-corpus edit, so the door refused. This is the one door receipt that measures repair rather than routing."},
+  {"sentence": "Fix the failing tests in testing/test_pluginmanager.py so the suite passes. ...",
+   "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+   "why": "RuntimeError:REFUSING_BROAD_REPO_MUTATION",
+   "reading": "A test file named at repository scope reads as a broad mutation; the door refuses before selecting a row."},
+  {"sentence": "Repair the python source file src/pluggy/_manager.py so that the unit tests in testing/test_pluginmanager.py pass.",
+   "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+   "why": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+   "reading": "The sentence that names both a source file and its test file compiles to nothing for this shape, even though it is the sentence the repair adapters themselves document."}
+ ],
+
+ "withdrawn_claim": {
+  "claim": "'PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE with the repair of the whole fault' -- as reported earlier this session",
+  "status": "RETRACTED_AND_REPLACED",
+  "reason": "the PASS reproduces, but the patch it verified repairs only the test file the caller named. Measured at whole-corpus scope the same patch leaves 3 tests failing, so the earlier sentence said more than the measurement did.",
+  "corrected_claim": "The capability makes a stated failing test file pass, in place, with no human edit, in ~13 s, and its in-place gate refuses any patch that breaks the corpus it was given. It does not yet produce the whole-corpus repair for a fault that spans two test files."
  }
 }

@@ -100,38 +100,40 @@ def test_the_document_cannot_publish_a_multi_step_pass_that_did_not_happen() -> 
 
 
 def test_the_door_receipts_are_real_and_published() -> None:
-    """§8.2's table must be the recorded refusals, one row each, not a retyped summary."""
-    receipts = ROOT / "execution_guard" / "MULTISTEP_DOOR_RECEIPTS_20261101.json"
-    assert receipts.is_file(), "the door receipts are missing"
-    data = json.loads(receipts.read_text(encoding="utf-8"))
-    attempts = data["attempts"]
+    """8.2's table must be the recorded refusals, one row each, not a retyped summary."""
+    data = json.loads((ROOT / "execution_guard" / "MULTISTEP_DOOR_RECEIPTS_20261101.json")
+                      .read_text(encoding="utf-8"))
+    attempts = data["door_attempts"]
     assert len(attempts) >= 3
     doc = (ROOT / "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md").read_text(encoding="utf-8")
     section = doc.split("### 8.2", 1)[1].split("What this does", 1)[0]
     for a in attempts:
         assert str(a["why"])[:96] in section, a["why"][:60]
-    # and the capability-level row must state the status the receipt recorded
-    cap = data["capability_level_success"]
-    assert str(cap["status"]) in doc
-    assert cap["applied"] is True and cap["files_written"]
 
 
-def test_the_capability_level_claim_needs_the_operator_help_it_used() -> None:
-    """The success is conditional, and the condition has to stay attached to the claim.
+def test_all_three_scopes_are_published_and_the_middle_one_is_not_a_pass() -> None:
+    """The document must not collapse three different measurements into one number.
 
-    The capability only succeeds when it is handed a source root and the exact failing test file.
-    Publishing that as "the machine repairs foreign repositories" would be the exact overclaim this
-    document exists to prevent, so the qualifier is asserted here.
+    The failure this pins is the one this session actually made: a pass measured at the
+    scope of ONE stated test file was reported as if the whole fault had been repaired.
+    The receipts record all three scopes and a withdrawal, and section 8.1 must show them.
     """
     data = json.loads((ROOT / "execution_guard" / "MULTISTEP_DOOR_RECEIPTS_20261101.json")
                       .read_text(encoding="utf-8"))
-    cap = data["capability_level_success"]
-    assert cap["requires"], "a conditional success must record its condition"
+    stated, whole, truth = (data["scope_1_stated_test_file"], data["scope_2_whole_corpus"],
+                            data["scope_3_true_repair"])
+    assert stated["applied"] is True and stated["post_apply_test_returncode"] == 0
+    assert "OPEN__NO_VERIFIED_REPAIR" in (whole["after_portfolio_narrowed_evidence_only"]["status"])
+    assert truth["found_by_the_engine_within_budget"] is False
+    assert data["withdrawn_claim"]["status"] == "RETRACTED_AND_REPLACED"
+
     doc = (ROOT / "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md").read_text(encoding="utf-8")
     section = doc.split("### 8.1", 1)[1].split("### 8.2", 1)[0]
-    assert "the source root and the exact failing test file" in section
-    # the door row must still say the caller supplies nothing and gets no edit
-    assert "| the front door, given a sentence | nothing | **no edit**" in section
+    assert "A claim was withdrawn" in section, "the withdrawal must stay published"
+    assert str(stated["status"]) in section and str(truth["whole_corpus"]) in section
+    # the door row still says the caller supplies nothing and gets no edit
+    assert "| the whole corpus (the door's binding) | a source root only" in section
+    assert "**no edit**" in section
 
 
 def test_a_missing_results_file_is_reported_as_unmeasured(tmp_path, monkeypatch) -> None:

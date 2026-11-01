@@ -1050,21 +1050,35 @@ def main() -> int:
         add("")
         receipts = door_receipts()
         if receipts.get("measured"):
-            cap = receipts.get("capability_level_success") or {}
-            add("### 8.1 Two levels, measured separately")
+            stated = receipts.get("scope_1_stated_test_file") or {}
+            whole = receipts.get("scope_2_whole_corpus") or {}
+            truth = receipts.get("scope_3_true_repair") or {}
+            withdrawn = receipts.get("withdrawn_claim") or {}
+            after = whole.get("after_portfolio_narrowed_evidence_only") or {}
+            add("### 8.1 Three scopes of one task, and the claim that did not survive them")
             add("")
-            add("The number above is the sentence-level number, and it is still zero. Underneath it,")
-            add("the capability can now do the job when it is called with what it needs:")
+            add("The same injected fault was measured at three scopes on a clone reset to the pin. The")
+            add("answer differs at each one, which is exactly why publishing a single number was wrong:")
             add("")
-            add("| level | caller must supply | measured status |")
+            add("| scope | what the caller names | measured |")
             add("|---|---|---|")
-            add(f"| capability, called directly | the source root and the exact failing test file | "
-                f"**`{cap.get('status')}`**, applied `{str(cap.get('applied')).lower()}`, "
-                f"post-apply suite rc `{cap.get('post_apply_test_returncode')}`, one file written |")
-            add("| the front door, given a sentence | nothing | **no edit**, four different refusals |")
+            add(f"| the stated test file | a source root and `testing/test_pluginmanager.py` | "
+                f"**`{stated.get('status')}`**, applied, post-apply rc `{stated.get('post_apply_test_returncode')}`, "
+                f"{stated.get('elapsed_s')} s -- patch `{str(stated.get('patch')).split('  ->  ')[-1]}` |")
+            add(f"| the whole corpus (the door's binding) | a source root only; 9 files, 226 tests | "
+                f"**no edit**, `{after.get('status')}`, {after.get('elapsed_s')} s |")
+            add(f"| the true one-line repair | restoring `and` | **`{truth.get('whole_corpus')}`** -- in the "
+                f"engine's own candidate space, `found_by_the_engine_within_budget` = "
+                f"`{str(truth.get('found_by_the_engine_within_budget')).lower()}` |")
             add("")
-            add("The capability path fixed itself twice on the way here, and both defects were found by")
-            add("running a third party's code rather than reading ours:")
+            add("**A claim was withdrawn.** Earlier this session the middle number was reported as a")
+            add("verified in-place repair of the fault. The pass reproduces, but the patch it verified")
+            add("repairs the file the caller named and leaves the other three failures of the same fault")
+            add("standing, so the sentence said more than the measurement did. That is the correction:")
+            add(f"*{withdrawn.get('corrected_claim')}*")
+            add("")
+            add("The two capability defects fixed on the way are real and each was measured before and")
+            add("after, by running a third party's code rather than by reading ours:")
             add("")
             add("* **the search could not see the fault.** The stack names the line that RAISED, not the")
             add("  condition that sent control there. On pluggy the raise is at `_manager.py:251` and the")
@@ -1073,17 +1087,17 @@ def main() -> int:
             add("  Graded proximity was not enough either -- the true site scored 9600 and eight")
             add("  constants three lines from another frame scored 9700. The rule that works is the one")
             add("  the language already states: a frame inside a branch body implicates that branch's own")
-            add("  condition. With it the same guided search returns the correct repair in 12 seconds.")
+            add("  condition.")
             add("* **the suite could not import the package.** The import roots were derived by walking")
             add("  PARENTS only, so a `src/` layout was invisible; the baseline then failed for its")
             add("  import, every candidate scored the same as the baseline, and the search reported no")
-            add("  repair existed. Rooted where the package actually lives, the same search succeeds.")
+            add("  repair existed. Measured: `src` -> 79 passed, rc 0; repo root -> 2 failed, 77 passed.")
             add("")
             add("### 8.2 The four sentences, and why each one fails")
             add("")
             add("| sentence names | refusal | which layer refused |")
             add("|---|---|---|")
-            for a in receipts.get("attempts") or []:
+            for a in receipts.get("attempts") or receipts.get("door_attempts") or []:
                 sentence = str(a.get("sentence") or "")
                 short = ("the repo, the failing output **and the fault file**"
                          if "The fault is in" in sentence else
@@ -1092,13 +1106,13 @@ def main() -> int:
                          else "the source file and its test file")
                 add(f"| {short} | `{str(a.get('why'))[:96]}` | {str(a.get('reading'))[:150]} |")
             add("")
-            add("Three of those four refusals are admissions, and one is a result: only the second sentence")
-            add("let the capability run, and it ran and produced no verified edit against the discovered")
-            add("corpus. Naming the fault makes the request a diagnosis a repair row may not answer;")
-            add("naming a test file at repository scope reads as a broad mutation; naming both a source")
-            add("file and its test file compiles to nothing. So the gap is not one gate but three,")
-            add("each of which can be closed independently, and none of which is a claim about repair")
-            add("quality.")
+            add("Three of those four refusals are admissions, and one is a result: only the second")
+            add("sentence let the capability run, and it ran and produced no verified whole-corpus edit.")
+            add("Naming the fault makes a request a diagnosis a repair row may not answer; naming a test")
+            add("file at repository scope reads as a broad mutation; naming both a source file and its")
+            add("test file compiles to nothing. The remaining engineering gap is one sentence long: the")
+            add("engine ranks a patch that halves the failures above the patch that removes them, and")
+            add("each candidate costs a full corpus run, so it does not reach the right one in budget.")
             add("")
         add("What this does **not** yet measure: whether a *correct* edit would be accepted, because no")
         add("edit is produced. The next hour is not about repair quality — it is about the missing path")

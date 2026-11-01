@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `e529c7b` (branched from main `e529c7b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `13442e9` (branched from main `e529c7b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **41 served / 8 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 94 ms  p90 643 ms  max 1875 ms |
+| matrix latency | median 120 ms  p90 726 ms  max 2338 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -161,7 +161,7 @@ then verifies 10/10 modules, the required binaries, and the parser generation ag
 rather than letting a lane measure an environment gap and call it a capability gap.
 
 **12 registry rows are sourced from a PyPI package or a package-shaped adapter, and
-4 of them cannot run in this image**:
+3 of them cannot run in this image**:
 
 | package-sourced row | needs | here |
 |---|---|---|
@@ -172,7 +172,7 @@ rather than letting a lane measure an environment gap and call it a capability g
 | `code.multilanguage.parse.tree_sitter.v1` | `tree_sitter` | **runnable** |
 | `code.patch.tree_sitter.verify.v1` | `tree_sitter` | **runnable** |
 | `math.numeric_expression.sympy` | `sympy` | package absent |
-| `pdf.extract.text.pypdf` | `pypdf` | package absent |
+| `pdf.extract.text.pypdf` | `pypdf` | **runnable** |
 | `python.contract.check.crosshair.v1` | `crosshair` | **runnable** |
 | `python.review.diff_static_triage.v1` | `ruff` | **runnable** |
 | `python.review.diff_type_gate.v1` | `mypy` | **runnable** |
@@ -484,18 +484,25 @@ version of the instrument claimed pinning in a comment while cloning the default
 that is corrected here for the same reason the other false numbers were: a claim in a
 comment is not a measurement.
 
-### 8.1 Two levels, measured separately
+### 8.1 Three scopes of one task, and the claim that did not survive them
 
-The number above is the sentence-level number, and it is still zero. Underneath it,
-the capability can now do the job when it is called with what it needs:
+The same injected fault was measured at three scopes on a clone reset to the pin. The
+answer differs at each one, which is exactly why publishing a single number was wrong:
 
-| level | caller must supply | measured status |
+| scope | what the caller names | measured |
 |---|---|---|
-| capability, called directly | the source root and the exact failing test file | **`PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE`**, applied `true`, post-apply suite rc `0`, one file written |
-| the front door, given a sentence | nothing | **no edit**, four different refusals |
+| the stated test file | a source root and `testing/test_pluginmanager.py` | **`PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE`**, applied, post-apply rc `0`, 13.5 s -- patch `elif verified or hook.has_spec():` |
+| the whole corpus (the door's binding) | a source root only; 9 files, 226 tests | **no edit**, `OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH`, 123.3 s |
+| the true one-line repair | restoring `and` | **`226 passed, rc 0, 1.7 s`** -- in the engine's own candidate space, `found_by_the_engine_within_budget` = `false` |
 
-The capability path fixed itself twice on the way here, and both defects were found by
-running a third party's code rather than reading ours:
+**A claim was withdrawn.** Earlier this session the middle number was reported as a
+verified in-place repair of the fault. The pass reproduces, but the patch it verified
+repairs the file the caller named and leaves the other three failures of the same fault
+standing, so the sentence said more than the measurement did. That is the correction:
+*The capability makes a stated failing test file pass, in place, with no human edit, in ~13 s, and its in-place gate refuses any patch that breaks the corpus it was given. It does not yet produce the whole-corpus repair for a fault that spans two test files.*
+
+The two capability defects fixed on the way are real and each was measured before and
+after, by running a third party's code rather than by reading ours:
 
 * **the search could not see the fault.** The stack names the line that RAISED, not the
   condition that sent control there. On pluggy the raise is at `_manager.py:251` and the
@@ -504,28 +511,28 @@ running a third party's code rather than reading ours:
   Graded proximity was not enough either -- the true site scored 9600 and eight
   constants three lines from another frame scored 9700. The rule that works is the one
   the language already states: a frame inside a branch body implicates that branch's own
-  condition. With it the same guided search returns the correct repair in 12 seconds.
+  condition.
 * **the suite could not import the package.** The import roots were derived by walking
   PARENTS only, so a `src/` layout was invisible; the baseline then failed for its
   import, every candidate scored the same as the baseline, and the search reported no
-  repair existed. Rooted where the package actually lives, the same search succeeds.
+  repair existed. Measured: `src` -> 79 passed, rc 0; repo root -> 2 failed, 77 passed.
 
 ### 8.2 The four sentences, and why each one fails
 
 | sentence names | refusal | which layer refused |
 |---|---|---|
 | the repo, the failing output **and the fault file** | `STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:python.software.repair.apply.verified.v1` | Naming the fault location makes the request a DIAGNOSIS, and a repair row may not answer one. The capability never ran. |
-| the repo and the failing output | `CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET / ACTION_EXPECTATION_FAILED:outp` | The capability executed against the discovered corpus and produced no verified edit, so the door refused. This is the only receipt that measures the r |
+| the repo and the failing output | `CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET / ACTION_EXPECTATION_FAILED:outp` | The capability executed on the discovered corpus and produced no verified whole-corpus edit, so the door refused. This is the one door receipt that me |
 | a test file at repository scope | `RuntimeError:REFUSING_BROAD_REPO_MUTATION` | A test file named at repository scope reads as a broad mutation; the door refuses before selecting a row. |
-| the source file and its test file | `RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP` | The idiom that names both a source file and its test file compiles to nothing for this shape, even though it is the sentence the repair adapters thems |
+| the source file and its test file | `RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP` | The sentence that names both a source file and its test file compiles to nothing for this shape, even though it is the sentence the repair adapters th |
 
-Three of those four refusals are admissions, and one is a result: only the second sentence
-let the capability run, and it ran and produced no verified edit against the discovered
-corpus. Naming the fault makes the request a diagnosis a repair row may not answer;
-naming a test file at repository scope reads as a broad mutation; naming both a source
-file and its test file compiles to nothing. So the gap is not one gate but three,
-each of which can be closed independently, and none of which is a claim about repair
-quality.
+Three of those four refusals are admissions, and one is a result: only the second
+sentence let the capability run, and it ran and produced no verified whole-corpus edit.
+Naming the fault makes a request a diagnosis a repair row may not answer; naming a test
+file at repository scope reads as a broad mutation; naming both a source file and its
+test file compiles to nothing. The remaining engineering gap is one sentence long: the
+engine ranks a patch that halves the failures above the patch that removes them, and
+each candidate costs a full corpus run, so it does not reach the right one in budget.
 
 What this does **not** yet measure: whether a *correct* edit would be accepted, because no
 edit is produced. The next hour is not about repair quality — it is about the missing path

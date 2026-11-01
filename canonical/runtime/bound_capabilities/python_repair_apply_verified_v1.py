@@ -34,8 +34,10 @@ import importlib.util
 import json
 import os
 import pathlib
+import re
 import subprocess
 import sys
+import time
 from typing import Any, Mapping
 
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1"
@@ -190,6 +192,60 @@ def _try_live_trace_synth_patches(
                 }]
     return []
 
+# --------------------------------------------------------------------------- failing-file portfolio
+#
+# ONE AGGREGATE FAILING RUN IS NOT ONE EVIDENCE SET.
+#
+# The guided engine derives its focus from the frames of a single failing run. When
+# the corpus contains several failing files, the loudest file's frames fill that
+# focus and the other files' frames are displaced -- so the file that is cheap to
+# fix is invisible behind the file that is expensive to fix.
+#
+# Measured 2026-11-01, pluggy 3fc9e561, one injected fault at src/pluggy/_manager.py:247
+# producing 7 failing tests across two files:
+#
+#   aggregate corpus (both files, the door's own binding)   OPEN, 542-723 s, 1,162 candidates
+#   testing/test_details.py alone                          OPEN,  231 s, 1,170 candidates
+#   testing/test_pluginmanager.py alone                    PASS, 12.6 s, the FIRST single candidate
+#
+# The repair exists and is found almost immediately when the evidence is not diluted;
+# the aggregate run spends ten minutes proving nothing. So each failing file gets its
+# own sub-run and its own slice of the caller's wall budget, cheapest-to-decide first.
+# The winner is still verified against the WHOLE corpus at gate 3, so "fixed" never
+# means "fixed one file and broke another".
+_MAX_PORTFOLIO_FILES=24  # a sweep costs one suite run per file; bound it rather than assume
+_MIN_SLICE_S=15.0        # measured: the winning sub-run locates its candidate in 12.6 s
+_FAILED_COUNT_RE=re.compile(r"(?:^|[^0-9])(\d+)\s+failed",re.MULTILINE)
+
+
+def _failure_count(text:str)->int:
+    """How many tests this run reported as failing, from the run's own summary line.
+
+    The summary is written last, so the last match is the count for the whole run; the
+    per-test progress lines can otherwise be read as a count.  A run that reports no
+    count at all returns 0, which sorts it first -- a plausible file with unknown cost
+    is cheaper to try than one whose failure count is known to be large.
+    """
+    nums=[int(n) for n in _FAILED_COUNT_RE.findall(text or "")]
+    return nums[-1] if nums else 0
+
+
+def _portfolio_slice(remaining_s:float,files_left:int)->float:
+    """This sub-run's share of the caller's budget: its fair share, never below the floor.
+
+    Measured floor: the winning sub-run needs 12.6 s including its localization and
+    provenance phases, so a share below that is a slice that cannot succeed.  The
+    remaining budget caps the share only when nothing is left to lose.
+    """
+    left=max(1,int(files_left))
+    return max(_MIN_SLICE_S,float(remaining_s)/left)
+
+
+def _ordered_failing_files(counts:Mapping[pathlib.Path,int])->list[pathlib.Path]:
+    """Least ambiguous first: fewest failing tests, then a stable name order."""
+    return sorted(counts,key=lambda p:(counts[p],str(p)))
+
+
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
@@ -304,19 +360,88 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     # baseline, and every candidate was scored against a suite that was red for an unrelated reason.
     # The result was OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS while a search rooted at `src/` found
     # the repair in 12 seconds.  The caller's stated source root is the module root; keep using it.
-    repair=_REPAIR.run({
-        "source_root":_rel(repo,source_root) if source_root!=repo else ".",
-        "test_paths":[_rel(repo,p) for p in test_paths],
-        "test_argv":argv,
-        "output_path":_rel(repo,intermediate),
-        "timeout_s":timeout,
-        "max_guided_files":args.get("max_guided_files",4),
-        "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
-        "mutations_per_file":args.get("mutations_per_file",24),
-        "max_pair_candidates":args.get("max_pair_candidates",1000),
-        "max_control_files":args.get("max_control_files",12),
-        "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
-    },repo)
+    def _guided_repair(group:list[pathlib.Path],wall_budget_s:float|None,
+                       group_argv:list[str]|None=None)->dict[str,Any]:
+        call={
+            "source_root":_rel(repo,source_root) if source_root!=repo else ".",
+            "test_paths":[_rel(repo,p) for p in group],
+            "test_argv":group_argv if group_argv is not None else argv,
+            "output_path":_rel(repo,intermediate),
+            "timeout_s":timeout,
+            "max_guided_files":args.get("max_guided_files",4),
+            "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
+            "mutations_per_file":args.get("mutations_per_file",24),
+            "max_pair_candidates":args.get("max_pair_candidates",1000),
+            "max_control_files":args.get("max_control_files",12),
+            "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
+        }
+        if wall_budget_s is not None:
+            call["wall_budget_s"]=max(1.0,float(wall_budget_s))
+        return _REPAIR.run(call,repo)
+
+    # WHICH FAILING FILE'S EVIDENCE, ONE AT A TIME (see the portfolio note above).
+    # A single stated test keeps the old single call: there is nothing to dilute.
+    repair=None;repair_scope=None;portfolio=[]
+    started_monotonic=time.monotonic()
+    deadline=started_monotonic+float(timeout)
+    def _left()->float:
+        return deadline-time.monotonic()
+    if len(test_paths)==1:
+        repair=_guided_repair(test_paths,None)
+        repair_scope=[_rel(repo,test_paths[0])]
+    else:
+        counts={}
+        if len(test_paths)<=_MAX_PORTFOLIO_FILES:
+            for p in test_paths:
+                one_argv=[str(x) for x in _REPAIR._PATCH.suite_argv(sys.executable,p)] if test_paths_source=="discovered_under_source_root" else \
+                         _REPAIR._PATCH.argv_or_derived([],sys.executable,p)
+                one_rc,_one_tail=_run_test(one_argv,exec_root,min(timeout,60),(source_root,p))
+                if one_rc==0:
+                    continue  # passes on its own: the aggregate failure came from interaction, not from it
+                counts[p]=_failure_count(_one_tail.decode("utf-8","replace"))
+        if not counts:
+            # No single file fails on its own (an interaction-only failure), or the corpus is
+            # too large to sweep one file at a time. Either way the aggregate evidence is the
+            # only evidence there is, so run exactly as before rather than invent a split.
+            repair=_guided_repair(test_paths,None)
+            repair_scope=[_rel(repo,p) for p in test_paths]
+        else:
+            ordered=_ordered_failing_files(counts)
+            # THE EVIDENCE IS NARROWED; THE ACCEPTANCE IS NOT.
+            # Each sub-run reads its focus from ONE failing file but must still make the
+            # WHOLE corpus pass (`test_argv` stays the aggregate command). Measured the
+            # cost of getting this wrong, same fixture: narrowed evidence with a narrowed
+            # acceptance found a 3-test patch in 12.5 s, applied it, and the in-place gate
+            # caught `test_warn_when_deprecated_specified` still failing -- a patch that
+            # fixed the file it was shown and not the bug. Narrow both and the run is
+            # fast and wrong; narrow evidence only and the run is fast and right.
+            for index,p in enumerate(ordered):
+                if index and _left()<=0:
+                    portfolio.append({"test_path":_rel(repo,p),"failing_tests":counts[p],
+                                      "wall_s":0.0,"status":"SKIPPED_WALL_BUDGET","patch":False})
+                    continue
+                slice_s=_portfolio_slice(max(_MIN_SLICE_S,_left()),len(ordered)-index)
+                began=time.monotonic()
+                try:
+                    attempt=_guided_repair([p],slice_s,argv)
+                except Exception as exc:  # a sub-run that refuses is one file's answer, not the run's
+                    portfolio.append({"test_path":_rel(repo,p),"failing_tests":counts[p],
+                                      "wall_s":round(time.monotonic()-began,3),
+                                      "status":type(exc).__name__+":"+str(exc)[:160],"patch":False})
+                    continue
+                found=bool(attempt.get("patches"))
+                portfolio.append({"test_path":_rel(repo,p),"failing_tests":counts[p],
+                                  "wall_s":round(time.monotonic()-began,3),
+                                  "status":attempt.get("status"),"patch":found})
+                if repair is None:
+                    repair=attempt
+                    repair_scope=[_rel(repo,p)]
+                if found:
+                    repair=attempt
+                    repair_scope=[_rel(repo,p)]
+                    break
+    out["repair_test_scope"]=repair_scope
+    out["repair_portfolio"]=portfolio
     patches=repair.get("patches") or []
     out["repair_status"]=repair.get("status")
     if not isinstance(patches,list) or not patches:
