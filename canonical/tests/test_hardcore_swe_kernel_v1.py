@@ -169,7 +169,7 @@ class TestHardcoreSWEKernelV1(unittest.TestCase):
         base = _fresh("diff_feat")
         pkg = base / "pkg"
         pkg.mkdir()
-        (pkg / "calc.py").write_text("def add(a, b):\n    return a - b\n\n\ndef mul(a, b):\n    return a * b\n\n\ndef dead_fn(x):\n    return x\n", encoding="utf-8")
+        (pkg / "calc.py").write_text("def add(a, b):\n    return a - b\n\n\ndef mul(a, b):\n    return a * b\n\n\ndef _dead_fn(x):\n    return x\n", encoding="utf-8")
         (pkg / "service.py").write_text("from calc import add\n\n\ndef run():\n    return add(1, 2)\n", encoding="utf-8")
         (pkg / "cli.py").write_text("import argparse\n\n\ndef main():\n    p = argparse.ArgumentParser()\n    p.add_argument('name')\n    return p.parse_args().name\n\n\nprint(main())\n", encoding="utf-8")
         (pkg / "http.py").write_text("import urllib.request\n\n\ndef fetch(url):\n    return urllib.request.urlopen(url).read()\n", encoding="utf-8")
@@ -200,7 +200,7 @@ class TestHardcoreSWEKernelV1(unittest.TestCase):
         # 4. Dead-code removal
         r_dc = door.solve({"task_id": "K_DC", "goal": f"Remove the dead code from {(pkg / 'calc.py').relative_to(ROOT)}."})
         self.assertTrue(r_dc.get("pass"), r_dc)
-        self.assertNotIn("def dead_fn", (pkg / "calc.py").read_text(encoding="utf-8"))
+        self.assertNotIn("def _dead_fn", (pkg / "calc.py").read_text(encoding="utf-8"))
 
         # 5. Issue implementation + cross-file feature
         r_iss = door.solve({"task_id": "K_ISS", "goal": f"Implement this issue: add a subtract function to {(pkg / 'calc.py').relative_to(ROOT)} with a unit test."})

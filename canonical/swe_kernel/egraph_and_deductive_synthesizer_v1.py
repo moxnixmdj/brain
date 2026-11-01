@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from canonical.runtime import pipeline_exec_v1
+from canonical.swe_kernel import transform_contracts_v1 as contracts
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -24,8 +25,46 @@ def _sha256_bytes(data: bytes) -> str:
 
 
 def _run_cmd(argv: list[str], cwd: Path, timeout: float = 20.0) -> tuple[int, str, str]:
-    rc, out_b = pipeline_exec_v1.run_stages([argv], cwd=str(cwd), timeout=timeout)
-    return int(rc), out_b.decode("utf-8", errors="replace"), ""
+    rc, out_b, err_b = pipeline_exec_v1.run_command(argv, cwd=str(cwd), timeout=timeout)
+    return (int(rc) if rc is not None else 124), out_b.decode("utf-8", errors="replace"), err_b.decode("utf-8", errors="replace")
+
+
+def _compare_in_child(before: str, after: str, target: Path, symbol: str, integer_range: bool, *, timeout: float = 30) -> dict[str, Any]:
+    payload = {'before': before, 'after': after, 'target': str(target), 'symbol': symbol, 'integer_range': integer_range}
+    worker = r"""
+import copy, json, sys, time, statistics
+from pathlib import Path
+p = json.loads(Path(sys.argv[1]).read_text())
+sys.path.insert(0, str(Path(p['target']).parent))
+functions = []
+for source in (p['before'], p['after']):
+    ns = {'__name__': '__swe_check__', '__file__': p['target']}
+    exec(compile(source, p['target'], 'exec'), ns)
+    functions.append(ns[p['symbol']])
+cases = [-3, 0, 1, 2, 10, 500, True, 2.5] if p['integer_range'] else [[], [0], [1,2,3,4], [-10,5,25,-20,7], [2**63], [2**63-1,1], [-2**63,-1], [2**62,2**62,-2**62], [1.5,-2.5], [[1],[1],[2]], ['a','b','a']]
+def observe(fn, value):
+    try: return ('value', fn(copy.deepcopy(value)))
+    except Exception as exc: return ('error', type(exc).__name__, str(exc))
+for value in cases:
+    if observe(functions[0], value) != observe(functions[1], value):
+        print(json.dumps({'equivalent': False, 'counterexample': repr(value)})); sys.exit(0)
+value = 25000 if p['integer_range'] else list(range(10000))
+runs = [[], []]
+for k in range(5):
+    for i in ([0,1] if k % 2 == 0 else [1,0]):
+        t = time.perf_counter_ns(); functions[i](value); runs[i].append(time.perf_counter_ns()-t)
+print(json.dumps({'equivalent': True, 'cases': len(cases), 'median_before_ns': statistics.median(runs[0]), 'median_after_ns': statistics.median(runs[1]), 'runs_before_ns': runs[0], 'runs_after_ns': runs[1]}))
+"""
+    with tempfile.TemporaryDirectory(prefix='brain-swe-check-') as td:
+        path = Path(td) / 'input.json'
+        path.write_text(json.dumps(payload), encoding='utf-8')
+        rc, out, _ = _run_cmd([sys.executable, '-B', '-P', '-c', worker, str(path)], cwd=Path(td), timeout=timeout)
+    if rc != 0:
+        return {'equivalent': False, 'reason': 'CHILD_FAILED_OR_TIMED_OUT'}
+    try:
+        return json.loads(out.strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return {'equivalent': False, 'reason': 'CHILD_RESULT_INVALID'}
 
 
 def _find_project_root(target: Path) -> Path:
@@ -61,11 +100,11 @@ def _collect_project_bad_tests(project_root: Path, pkg_dir: Path | None = None) 
     )
     rc, out, _ = _run_cmd([sys.executable, "-B", "-P", "-c", probe], cwd=project_root)
     if rc != 0 or not out.strip():
-        return set()
+        raise RuntimeError("PROJECT_TEST_BASELINE_UNMEASURABLE")
     try:
         return set(json.loads(out.strip().splitlines()[-1]))
-    except Exception:
-        return set()
+    except (ValueError, TypeError) as exc:
+        raise RuntimeError("PROJECT_TEST_BASELINE_INVALID") from exc
 
 
 def _verify_no_new_test_failures(
@@ -333,14 +372,23 @@ def _match_for_sum_pattern(fn: ast.FunctionDef) -> tuple[str, str | None] | None
 
 def _match_quadratic_membership(fn: ast.FunctionDef) -> tuple[str, str] | None:
     """Detect `seen = []; for x in xs: if x not in seen: seen.append(x); return seen` or nested duplicate scan."""
-    src = ast.unparse(fn)
-    m = re.search(
-        r"(\w+)\s*=\s*\[\]\s*\n\s*for\s+(\w+)\s+in\s+([^\n:]+):\s*\n\s*if\s+\2\s+not\s+in\s+\1:\s*\n\s*\1\.append\(\2\)\s*\n\s*return\s+\1",
-        src,
-    )
-    if m:
-        return m.group(3).strip(), "order_preserving_dedup"
-    return None
+    body = contracts.body_without_docstring(fn)
+    if len(body) != 3:
+        return None
+    initial, loop, returned = body
+    if not (isinstance(initial, ast.Assign) and len(initial.targets) == 1 and isinstance(initial.targets[0], ast.Name)
+            and isinstance(initial.value, ast.List) and not initial.value.elts
+            and isinstance(loop, ast.For) and isinstance(loop.target, ast.Name) and isinstance(loop.iter, ast.Name)
+            and not loop.orelse and len(loop.body) == 1 and isinstance(returned, ast.Return)):
+        return None
+    seen, item, seq = initial.targets[0].id, loop.target.id, loop.iter.id
+    if len({seen, item, seq}) != 3:
+        return None
+    condition = loop.body[0]
+    expected = ast.parse(f"if {item} not in {seen}:\n    {seen}.append({item})").body[0]
+    if ast.dump(condition) != ast.dump(expected) or ast.dump(returned.value) != ast.dump(ast.Name(id=seen, ctx=ast.Load())):
+        return None
+    return seq, 'order_preserving_dedup'
 
 
 def egraph_optimize_function(target: Path, fn_name: str | None = None) -> dict[str, Any]:
@@ -430,56 +478,75 @@ def egraph_optimize_function(target: Path, fn_name: str | None = None) -> dict[s
     if new_fn_code is None:
         return {"verified": False, "gate": "FAIL", "reason": "NO_PROVABLY_EQUIVALENT_OPTIMIZATION_FOUND"}
 
+    if fn.decorator_list:
+        return {"verified": False, "gate": "FAIL", "reason": "OPTIMIZER_DECORATOR_EFFECTS_UNPROVED"}
+    bi = contracts.fresh_name(tree, "_brain_builtins")
+    params = fn.args.posonlyargs + fn.args.args
+    if len(params) != 1 or fn.args.vararg or fn.args.kwarg or fn.args.kwonlyargs:
+        return {"verified": False, "gate": "FAIL", "reason": "OPTIMIZER_SIGNATURE_UNSUPPORTED"}
+    param = params[0].arg
+    if not is_int_range and iter_src != param:
+        return {"verified": False, "gate": "FAIL", "reason": "OPTIMIZER_ITERABLE_BINDING_UNPROVED"}
+    if rule_applied == 'egraph_for_accum_to_generator_sum':
+        loop = next(n for n in contracts.body_without_docstring(fn) if isinstance(n, ast.For))
+        def integer_expression(node):
+            if isinstance(node, ast.Name):
+                return node.id == loop.target.id
+            if isinstance(node, ast.Constant):
+                return type(node.value) is int
+            if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Add, ast.Sub, ast.Mult)):
+                return integer_expression(node.left) and integer_expression(node.right)
+            if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub, ast.Invert)):
+                return integer_expression(node.operand)
+            return False
+        if not integer_expression(loop.body[0].value):
+            return {"verified": False, "gate": "FAIL", "reason": "OPTIMIZER_INTEGER_RESULT_DOMAIN_UNPROVED"}
+    candidate_fn = ast.parse(new_fn_code).body[0]
+    if is_int_range:
+        guard = f"range is {bi}.range and {bi}.type({param}) is {bi}.int"
+    else:
+        # Specialize builtin scalar sequences only, as in the existing
+        # cross-file optimizer. Iterators, floats, unhashables, subclasses,
+        # custom equality and shadowed builtins execute the original body.
+        guard = (f"{bi}.type({param}) in ({bi}.list, {bi}.tuple) and "
+                 f"{bi}.all({bi}.type(_v) in ({bi}.int, {bi}.bool, {bi}.str, {bi}.bytes, {bi}.type(None)) for _v in {param})")
+        if rule_applied != "egraph_quadratic_list_membership_to_dict_fromkeys_linear":
+            guard = (f"sum is {bi}.sum and {bi}.type({param}) in ({bi}.list, {bi}.tuple) and "
+                     f"{bi}.all({bi}.type(_v) is {bi}.int for _v in {param})")
+        else:
+            guard += f" and list is {bi}.list and dict is {bi}.dict"
+        if rule_applied == "egraph_sum_linear_callee_algebraic_fusion":
+            callee = contracts.body_without_docstring(fn)[0].value.args[0].elt.func.id
+            expected = compile(f"def _expected(a, b): return a {lin_op} b", '<linear-contract>', 'exec').co_consts[0]
+            guard += (f" and list is {bi}.list and len is {bi}.len"
+                      f" and {bi}.type({callee}) is {bi}.type(lambda: None)"
+                      f" and {callee}.__code__.co_code == {expected.co_code!r}"
+                      f" and {callee}.__code__.co_consts == {expected.co_consts!r}"
+                      f" and {callee}.__code__.co_names == ()"
+                      f" and {callee}.__code__.co_freevars == ()"
+                      f" and {callee}.__code__.co_argcount == 2"
+                      f" and not ({callee}.__code__.co_flags & 12)")
+    candidate_body = "\n".join(ast.unparse(n) for n in candidate_fn.body)
+    fallback = "\n".join(ast.unparse(n) for n in contracts.body_without_docstring(fn))
+    doc = ast.get_docstring(fn)
+    new_fn_code = f"def {fn.name}({ast.unparse(fn.args)}):\n"
+    if doc is not None:
+        new_fn_code += f"    {doc!r}\n"
+    new_fn_code += f"    import builtins as {bi}\n    if {guard}:\n" + textwrap.indent(candidate_body, "        ") + "\n" + textwrap.indent(fallback, "    ") + "\n"
+
     lines = original.splitlines()
     start_idx = fn.lineno - 1
     end_idx = fn.end_lineno or fn.lineno
     updated = "\n".join(lines[:start_idx] + new_fn_code.rstrip("\n").splitlines() + lines[end_idx:]) + "\n"
     ast.parse(updated)
 
-    # Verify observational equivalence + empirical speedup in isolated namespace
+    # Dynamic comparisons run on a deadline in a child, never in the caller.
     proj = _find_project_root(target)
     before_bad = _collect_project_bad_tests(proj, target.parent)
-    ns_before: dict[str, Any] = {}
-    ns_after: dict[str, Any] = {}
-    added_dir = str(target.parent)
-    before_mods = set(sys.modules)
-    sys.path.insert(0, added_dir)
-    try:
-        exec(compile(original, str(target), "exec"), ns_before)  # noqa: S102
-        exec(compile(updated, str(target), "exec"), ns_after)  # noqa: S102
-        f_before = ns_before[fn.name]
-        f_after = ns_after[fn.name]
-
-        if is_int_range:
-            for nv in (-3, 0, 1, 2, 10, 500):
-                if f_before(nv) != f_after(nv):
-                    return {"verified": False, "gate": "FAIL", "reason": "EGRAPH_EQUIVALENCE_COUNTEREXAMPLE"}
-            big: Any = 25_000
-        else:
-            test_vectors = [[], [0], [1, 2, 3, 4], [-10, 5, 25, -20, 7], list(range(500))]
-            for vec in test_vectors:
-                if f_before(list(vec)) != f_after(list(vec)):
-                    return {"verified": False, "gate": "FAIL", "reason": "EGRAPH_EQUIVALENCE_COUNTEREXAMPLE"}
-            if f_before(iter([4, 5, 6])) != f_after(iter([4, 5, 6])):
-                return {"verified": False, "gate": "FAIL", "reason": "EGRAPH_GENERATOR_EQUIVALENCE_COUNTEREXAMPLE"}
-            big = list(range(10_000))
-        t_before: list[int] = []
-        t_after: list[int] = []
-        for _ in range(5):
-            t0 = time.perf_counter_ns()
-            f_before(big)
-            t_before.append(time.perf_counter_ns() - t0)
-            t1 = time.perf_counter_ns()
-            f_after(big)
-            t_after.append(time.perf_counter_ns() - t1)
-    finally:
-        if sys.path and sys.path[0] == added_dir:
-            sys.path.pop(0)
-        for mk in set(sys.modules) - before_mods:
-            if mk in {"calc", "util", "mod", "service", "models"}:
-                sys.modules.pop(mk, None)
-    med_before = sorted(t_before)[2]
-    med_after = sorted(t_after)[2]
+    measurement = _compare_in_child(original, updated, target, fn.name, is_int_range)
+    if not measurement.get('equivalent'):
+        return {"verified": False, "gate": "FAIL", "reason": "EGRAPH_EQUIVALENCE_OR_MEASUREMENT_FAILED", "detail": measurement}
+    med_before, med_after = measurement['median_before_ns'], measurement['median_after_ns']
     if med_after > med_before:
         return {"verified": False, "gate": "FAIL", "reason": "OPTIMIZATION_NOT_FASTER"}
 
@@ -512,22 +579,70 @@ def memoize_function(target: Path, fn_name: str | None = None) -> dict[str, Any]
     if not funcs:
         return {"verified": False, "gate": "FAIL", "reason": "MEMOIZE_TARGET_NOT_FOUND"}
     fn = funcs[0]
+    if not contracts.memoization_safe(tree, fn):
+        return {"verified": False, "gate": "FAIL", "reason": "MEMOIZE_EFFECTS_OR_RESULT_DOMAIN_UNPROVED"}
     for dec in fn.decorator_list:
         if "lru_cache" in ast.unparse(dec) or "cache" in ast.unparse(dec):
             return {"verified": False, "gate": "FAIL", "reason": "ALREADY_MEMOIZED"}
 
-    lines = original.splitlines()
-    indent = " " * fn.col_offset
-    lines.insert(fn.lineno - 1, f"{indent}@functools.lru_cache(maxsize=None)")
-    if not re.search(r"^\s*import\s+functools\b", original, re.MULTILINE):
-        lines.insert(0, "import functools")
-    updated = "\n".join(lines) + ("\n" if original.endswith("\n") else "")
+    # Cache only exact integer calls: no mutable keys, custom hashing, or
+    # float signed-zero/equality aliasing. Keep bounded memory and metadata.
+    helper = contracts.fresh_name(tree, "_brain_memoize")
+    dependency_specs = {}
+    import types
+    for name, dependency in contracts.memoization_dependencies(tree, fn).items():
+        module = ast.Module(body=[dependency], type_ignores=[])
+        code = next(c for c in compile(module, '<memo-contract>', 'exec').co_consts if isinstance(c, types.CodeType))
+        defaults = tuple(ast.literal_eval(d) for d in dependency.args.defaults) or None
+        kwdefaults = {a.arg: ast.literal_eval(d) for a, d in zip(dependency.args.kwonlyargs, dependency.args.kw_defaults) if d is not None} or None
+        dependency_specs[name] = (code.co_code, code.co_consts, code.co_names, code.co_varnames,
+                                  code.co_argcount, code.co_posonlyargcount, code.co_kwonlyargcount, defaults, kwdefaults)
+    helper_code = f"""
+def {helper}(fn):
+    import functools
+    import builtins as _bi
+    import types
+    specs = {dependency_specs!r}
+    def dependencies_match():
+        for name, expected in specs.items():
+            dependency = fn.__globals__.get(name)
+            if _bi.type(dependency) is not types.FunctionType:
+                return False
+            code = dependency.__code__
+            scalar_types = (_bi.int, _bi.float, _bi.bool, _bi.str, _bi.bytes, _bi.type(None))
+            if not _bi.all(_bi.type(v) in scalar_types for v in code.co_consts):
+                return False
+            if dependency.__defaults__ is not None and not _bi.all(_bi.type(v) in scalar_types for v in dependency.__defaults__):
+                return False
+            if dependency.__kwdefaults__ is not None and not _bi.all(_bi.type(k) is _bi.str and _bi.type(v) in scalar_types for k, v in dependency.__kwdefaults__.items()):
+                return False
+            actual = (code.co_code, code.co_consts, code.co_names, code.co_varnames,
+                      code.co_argcount, code.co_posonlyargcount, code.co_kwonlyargcount,
+                      dependency.__defaults__, dependency.__kwdefaults__)
+            if actual[:7] != expected[:7] or repr(actual[7:]) != repr(expected[7:]) or code.co_freevars or code.co_flags & 12:
+                return False
+        return True
+    cached = functools.lru_cache(maxsize=1024, typed=True)(fn)
+    @functools.wraps(fn)
+    def wrapped(*args, **kwargs):
+        if dependencies_match() and _bi.all(_bi.type(v) is _bi.int for v in args) and _bi.all(_bi.type(v) is _bi.int for v in kwargs.values()):
+            return cached(*args, **kwargs)
+        return fn(*args, **kwargs)
+    wrapped.cache_info = cached.cache_info
+    wrapped.cache_clear = cached.cache_clear
+    return wrapped
+"""
+    lines = original.splitlines(keepends=True)
+    lines.insert(fn.lineno - 1, f"@{helper}\n")
+    insert_at = 0
+    for node in tree.body:
+        if (isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str)) or (isinstance(node, ast.ImportFrom) and node.module == '__future__'):
+            insert_at = node.end_lineno
+        else:
+            break
+    lines.insert(insert_at, helper_code + "\n")
+    updated = "".join(lines)
     ast.parse(updated)
-
-    ns: dict[str, Any] = {}
-    exec(compile(updated, str(target), "exec"), ns)  # noqa: S102
-    if not hasattr(ns[fn.name], "cache_info"):
-        return {"verified": False, "gate": "FAIL", "reason": "CACHE_DECORATOR_INACTIVE"}
 
     target.write_text(updated, encoding="utf-8")
     proj = _find_project_root(target)
@@ -550,68 +665,63 @@ def memoize_function(target: Path, fn_name: str | None = None) -> dict[str, Any]
 # 2. Systems Concurrency Transforms (`ThreadPoolExecutor` & GIL-Free Native Kernel)
 # ---------------------------------------------------------------------------
 
-def add_thread_pool_parallel(target: Path, fn_name: str | None = None) -> dict[str, Any]:
+def add_thread_pool_parallel(target: Path, fn_name: str | None = None, *, require_speedup: bool = False) -> dict[str, Any]:
     original = target.read_text(encoding="utf-8")
     tree = ast.parse(original)
-    funcs = [n for n in tree.body if isinstance(n, ast.FunctionDef)]
-    if fn_name:
-        funcs = [f for f in funcs if f.name == fn_name]
+    funcs = [n for n in tree.body if isinstance(n, ast.FunctionDef) and (not fn_name or n.name == fn_name)]
     if not funcs:
         return {"verified": False, "gate": "FAIL", "reason": "THREAD_POOL_TARGET_NOT_FOUND"}
     fn = funcs[0]
-    param = fn.args.args[0].arg if fn.args.args else "xs"
-
-    new_fn = textwrap.dedent(
-        f"""\
-        def {fn.name}({param}, max_workers: int = 4):
-            items = list({param})
-            if not items:
-                return 0
-            chunk_size = max(1, (len(items) + max_workers - 1) // max_workers)
-            chunks = [items[i:i + chunk_size] for i in range(0, len(items), chunk_size)]
-            with ThreadPoolExecutor(max_workers=max_workers) as pool:
-                return sum(pool.map(sum, chunks))
-        """
-    )
-    lines = original.splitlines()
-    start_idx = fn.lineno - 1
-    end_idx = fn.end_lineno or fn.lineno
-    body_lines = lines[:start_idx] + new_fn.rstrip("\n").splitlines() + lines[end_idx:]
-    if "ThreadPoolExecutor" not in original:
-        body_lines.insert(0, "from concurrent.futures import ThreadPoolExecutor")
-    updated = "\n".join(body_lines) + "\n"
+    reduction = contracts.sum_reduction(fn)
+    if reduction is None:
+        return {"verified": False, "gate": "FAIL", "reason": "THREAD_POOL_ADDITIVE_CONTRACT_UNPROVED"}
+    if any(a.arg == 'max_workers' for a in fn.args.posonlyargs + fn.args.args):
+        return {"verified": False, "gate": "FAIL", "reason": "THREAD_POOL_PARAMETER_COLLISION"}
+    param = (fn.args.posonlyargs + fn.args.args)[0].arg
+    bi = contracts.fresh_name(tree, '_brain_builtins')
+    chunk_fn = contracts.fresh_name(tree, '_brain_reduce_chunk')
+    fallback = '\n'.join(ast.unparse(n) for n in contracts.body_without_docstring(fn))
+    signature = ast.unparse(fn.args)
+    signature += ', max_workers=4'
+    guard = f"sum is {bi}.sum and {bi}.type({param}) in ({bi}.list, {bi}.tuple) and {bi}.all({bi}.type(v) is {bi}.int for v in {param})"
+    if reduction == 'abs_sum':
+        guard += f" and abs is {bi}.abs"
+    size, chunks, pool = (chunk_fn + suffix for suffix in ('_size', '_chunks', '_pool'))
+    new_fn = f"def {fn.name}({signature}):\n"
+    if ast.get_docstring(fn) is not None:
+        new_fn += f"    {ast.get_docstring(fn)!r}\n"
+    new_fn += f"    import builtins as {bi}\n    if {guard}:\n"
+    new_fn += "        from concurrent.futures import ThreadPoolExecutor\n"
+    new_fn += f"        def {chunk_fn}({param}):\n" + textwrap.indent(fallback, '            ') + '\n'
+    new_fn += f"        {size} = {bi}.max(1, ({bi}.len({param}) + max_workers - 1) // max_workers)\n"
+    new_fn += f"        {chunks} = [{param}[i:i+{size}] for i in {bi}.range(0, {bi}.len({param}), {size})]\n"
+    new_fn += f"        with ThreadPoolExecutor(max_workers=max_workers) as {pool}:\n            return {bi}.sum({pool}.map({chunk_fn}, {chunks}))\n"
+    new_fn += textwrap.indent(fallback, '    ') + '\n'
+    lines = original.splitlines(keepends=True)
+    lines[fn.lineno-1:fn.end_lineno] = [new_fn]
+    updated = ''.join(lines)
     ast.parse(updated)
-
-    ns_before: dict[str, Any] = {}
-    ns_after: dict[str, Any] = {}
-    exec(compile(original, str(target), "exec"), ns_before)  # noqa: S102
-    exec(compile(updated, str(target), "exec"), ns_after)  # noqa: S102
-    for sample in ([], [5], [1, 2, 3, 4, 5, 6, 7, 8], list(range(250))):
-        if ns_before[fn.name](sample) != ns_after[fn.name](sample):
-            return {"verified": False, "gate": "FAIL", "reason": "THREAD_POOL_EQUIVALENCE_MISMATCH"}
-
-    target.write_text(updated, encoding="utf-8")
-    proj = _find_project_root(target)
-    ok_suite, tail = _run_project_tests(proj, target.parent)
-    if not ok_suite:
-        target.write_text(original, encoding="utf-8")
-        return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_THREAD_POOL", "detail": tail[:300]}
-
-    return {
-        "verified": True,
-        "gate": "PASS",
-        "operation": "add_thread_pool",
-        "function_name": fn.name,
-        "target_file": str(target),
-        "target_sha256": _sha256_bytes(target.read_bytes()),
-    }
+    measurement = _compare_in_child(original, updated, target, fn.name, False)
+    if not measurement.get('equivalent'):
+        return {"verified": False, "gate": "FAIL", "reason": "THREAD_POOL_EQUIVALENCE_MISMATCH", "detail": measurement}
+    faster = measurement['median_after_ns'] < measurement['median_before_ns']
+    if require_speedup and not faster:
+        return {"verified": False, "gate": "FAIL", "reason": "THREAD_POOL_NOT_FASTER", "measurement": measurement}
+    with contracts.FileEdits({target: updated.encode('utf-8')}) as transaction:
+        ok, tail = _run_project_tests(_find_project_root(target), target.parent)
+        if not ok:
+            return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_THREAD_POOL", "detail": tail[:300]}
+        transaction.commit()
+    return {"verified": True, "gate": "PASS", "operation": "add_thread_pool", "function_name": fn.name,
+            "performance": measurement, "speedup_verified": faster, "target_file": str(target), "target_sha256": _sha256_bytes(target.read_bytes())}
 
 
 def release_gil_sum_kernel(target: Path, fn_name: str | None = None) -> dict[str, Any]:
     """Rewrite `total(xs)` to compile & call a C shared library via `ctypes.CDLL` (which releases the GIL!).
 
-    Note: builds the `.so` lazily into `tempfile.gettempdir()` on first call so ZERO extra
-    unrequested files are created inside the user's package directory!
+    Compiles into a private temporary directory and embeds its binary digest.
+    Missing artifacts and out-of-domain inputs use the original Python body.
+    No native artifact is written inside the user's package directory.
     """
     original = target.read_text(encoding="utf-8")
     tree = ast.parse(original)
@@ -621,66 +731,77 @@ def release_gil_sum_kernel(target: Path, fn_name: str | None = None) -> dict[str
     if not funcs:
         return {"verified": False, "gate": "FAIL", "reason": "RELEASE_GIL_TARGET_NOT_FOUND"}
     fn = funcs[0]
-    param = fn.args.args[0].arg if fn.args.args else "xs"
+    if contracts.sum_reduction(fn) != 'sum':
+        return {"verified": False, "gate": "FAIL", "reason": "GIL_SUM_CONTRACT_UNPROVED"}
+    param = (fn.args.posonlyargs + fn.args.args)[0].arg
 
     c_src = (
-        "#include <stddef.h>\n"
-        "#include <stdint.h>\n"
-        "int64_t c_sum_i64(const int64_t* data, size_t n) {\n"
+        "#include <stddef.h>\n#include <stdint.h>\n"
+        "int c_sum_i64(const int64_t* data, size_t n, int64_t* out) {\n"
         "    int64_t acc = 0;\n"
-        "    for (size_t i = 0; i < n; ++i) acc += data[i];\n"
-        "    return acc;\n"
-        "}\n"
+        "    for (size_t i = 0; i < n; ++i) {\n"
+        "        if (__builtin_add_overflow(acc, data[i], &acc)) return 0;\n"
+        "    }\n    *out = acc; return 1;\n}\n"
     )
-    digest = hashlib.sha256(c_src.encode("utf-8")).hexdigest()[:16]
-    so_path = Path(tempfile.gettempdir()) / f"_gil_free_sum_{digest}.so"
-    cc = shutil.which("gcc") or shutil.which("g++") or shutil.which("cc")
-    if cc and not so_path.is_file():
-        c_file = Path(tempfile.gettempdir()) / f"_gil_free_sum_{digest}.c"
-        c_file.write_text(c_src, encoding="utf-8")
-        _run_cmd([cc, "-O3", "-shared", "-fPIC", str(c_file), "-o", str(so_path)], cwd=Path(tempfile.gettempdir()))
+    cc = shutil.which("gcc") or shutil.which("clang")
+    if not cc:
+        return {"verified": False, "gate": "FAIL", "reason": "GIL_COMPILER_UNAVAILABLE"}
+    # Never load a shared predictable /tmp artifact merely because it exists.
+    artifact_dir = Path(tempfile.mkdtemp(prefix='brain-gil-sum-'))
+    c_file, so_path = artifact_dir / 'sum.c', artifact_dir / 'sum.so'
+    c_file.write_text(c_src, encoding='utf-8')
+    rc, _, _ = _run_cmd([cc, '-O3', '-shared', '-fPIC', str(c_file), '-o', str(so_path)], cwd=artifact_dir)
+    if rc != 0 or not so_path.is_file():
+        shutil.rmtree(artifact_dir)
+        return {"verified": False, "gate": "FAIL", "reason": "GIL_NATIVE_COMPILE_FAILED"}
+    binary_sha = _sha256_bytes(so_path.read_bytes())
+    prefix = contracts.fresh_name(tree, '_brain_native_' + fn.name)
+    fallback = '\n'.join(ast.unparse(n) for n in contracts.body_without_docstring(fn))
+    bi, ct, array, out = (prefix + suffix for suffix in ('_builtins', '_ctypes', '_array', '_out'))
+    helper_block = textwrap.dedent(f"""\
+        def {prefix}_load():
+            import ctypes, hashlib
+            from pathlib import Path
+            path = Path({str(so_path)!r})
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != {binary_sha!r}:
+                return None
+            library = ctypes.CDLL(str(path))
+            result = library.c_sum_i64
+            result.argtypes = (ctypes.POINTER(ctypes.c_int64), ctypes.c_size_t, ctypes.POINTER(ctypes.c_int64))
+            result.restype = ctypes.c_int
+            return result
 
-    helper_block = textwrap.dedent(
-        f"""\
-        import ctypes
-        from pathlib import Path
+        {prefix} = {prefix}_load()
 
-        _SO_PATH = Path({str(so_path)!r})
-        _NATIVE_SUM_FN = None
-        if _SO_PATH.is_file():
-            # ctypes.CDLL releases the Python GIL around native C execution
-            _LIB = ctypes.CDLL(str(_SO_PATH))
-            _LIB.c_sum_i64.argtypes = (ctypes.POINTER(ctypes.c_int64), ctypes.c_size_t)
-            _LIB.c_sum_i64.restype = ctypes.c_int64
-            _NATIVE_SUM_FN = _LIB.c_sum_i64
-
-        def {fn.name}({param}):
-            items = list({param})
-            if not items:
-                return 0
-            if _NATIVE_SUM_FN is not None and all(isinstance(v, int) and not isinstance(v, bool) for v in items):
-                arr_t = ctypes.c_int64 * len(items)
-                return int(_NATIVE_SUM_FN(arr_t(*items), len(items)))
-            return sum(items)
-        """
-    )
-
+        def {fn.name}({ast.unparse(fn.args)}):
+            {ast.get_docstring(fn)!r}
+            import builtins as {bi}
+            import ctypes as {ct}
+            if (sum is {bi}.sum and {bi}.type({param}) in ({bi}.list, {bi}.tuple)
+                    and {bi}.all({bi}.type(v) is {bi}.int and -(1 << 63) <= v < (1 << 63) for v in {param})
+                    and {prefix} is not None):
+                {array} = ({ct}.c_int64 * {bi}.len({param}))(*{param})
+                {out} = {ct}.c_int64()
+                if {prefix}({array}, {bi}.len({param}), {ct}.byref({out})):
+                    return {bi}.int({out}.value)
+        """) + textwrap.indent(fallback, '    ') + '\n'
     lines = original.splitlines()
     start_idx = fn.lineno - 1
     end_idx = fn.end_lineno or fn.lineno
     updated = "\n".join(lines[:start_idx] + helper_block.rstrip("\n").splitlines() + lines[end_idx:]) + "\n"
     ast.parse(updated)
 
-    ns_after: dict[str, Any] = {}
-    exec(compile(updated, str(target), "exec"), ns_after)  # noqa: S102
-    if ns_after[fn.name]([1, 2, 3, 4, 5]) != 15 or ns_after[fn.name]([]) != 0:
-        return {"verified": False, "gate": "FAIL", "reason": "GIL_KERNEL_VERIFICATION_FAILED"}
+    measurement = _compare_in_child(original, updated, target, fn.name, False)
+    if not measurement.get('equivalent'):
+        shutil.rmtree(artifact_dir)
+        return {"verified": False, "gate": "FAIL", "reason": "GIL_KERNEL_VERIFICATION_FAILED", "detail": measurement}
 
     target.write_text(updated, encoding="utf-8")
     proj = _find_project_root(target)
     ok_suite, tail = _run_project_tests(proj, target.parent)
     if not ok_suite:
         target.write_text(original, encoding="utf-8")
+        shutil.rmtree(artifact_dir)
         return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_GIL_RELEASE", "detail": tail[:300]}
 
     return {
@@ -1818,53 +1939,38 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
     if "one module per" in low or ("split" in low and target.is_file() and "smaller functions" not in low):
         original = target.read_text(encoding="utf-8")
         tree = ast.parse(original)
-        units = [n for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))]
-        if len(units) < 2:
+        funcs = [n for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))]
+        if len(funcs) < 2:
             return {"verified": False, "gate": "FAIL", "reason": "SPLIT_MODULE_NEEDS_MULTIPLE_FUNCTIONS"}
+        destinations = [target.parent / f"{fn.name}.py" for fn in funcs]
+        if len(set(destinations)) != len(destinations) or any(p.exists() or p.is_symlink() for p in destinations):
+            return {"verified": False, "gate": "FAIL", "reason": "SPLIT_MODULE_DESTINATION_COLLISION"}
+        if not contracts.split_is_self_contained(tree, funcs):
+            return {"verified": False, "gate": "FAIL", "reason": "SPLIT_MODULE_GLOBAL_DEPENDENCIES_UNPROVED"}
         imports = [ast.get_source_segment(original, n) or ast.unparse(n) for n in tree.body if isinstance(n, (ast.Import, ast.ImportFrom))]
-        const_stmts = [
-            ast.get_source_segment(original, n) or ast.unparse(n)
-            for n in tree.body
-            if isinstance(n, (ast.Assign, ast.AnnAssign))
-        ]
-        unit_names = {u.name for u in units}
-        created: list[str] = []
-        reexports: list[str] = []
+        created = [str(p) for p in destinations]
         is_pkg = (target.parent / "__init__.py").is_file()
-        for u_node in units:
-            mod_file = target.parent / f"{u_node.name}.py"
-            fn_src = ast.get_source_segment(original, u_node) or ast.unparse(u_node)
-            # Detect intra-module sibling dependencies (`u_node` calling another split symbol `other`)
-            referenced = {
-                sub.id for sub in ast.walk(u_node)
-                if isinstance(sub, ast.Name) and isinstance(sub.ctx, ast.Load) and sub.id in unit_names and sub.id != u_node.name
-            }
-            sib_imports: list[str] = []
-            for ref_nm in sorted(referenced):
-                if is_pkg:
-                    sib_imports.append(f"try:\n    from .{ref_nm} import {ref_nm}\nexcept ImportError:\n    from {ref_nm} import {ref_nm}")
-                else:
-                    sib_imports.append(f"from {ref_nm} import {ref_nm}")
-            hdr_parts = [*imports, *const_stmts, *sib_imports]
-            header = ("\n".join(hdr_parts) + "\n\n") if hdr_parts else ""
+        edits = {}
+        shim_lines = original.splitlines(keepends=True)
+        for fn, mod_file in reversed(list(zip(funcs, destinations))):
+            fn_src = ast.get_source_segment(original, fn) or ast.unparse(fn)
+            header = ("\n".join(imports) + "\n\n") if imports else ""
             content = header + fn_src.rstrip() + "\n"
             ast.parse(content)
-            mod_file.write_text(content, encoding="utf-8")
-            created.append(str(mod_file))
-            if is_pkg:
-                reexports.append(f"try:\n    from .{u_node.name} import {u_node.name}\nexcept ImportError:\n    from {u_node.name} import {u_node.name}")
-            else:
-                reexports.append(f"from {u_node.name} import {u_node.name}")
-        const_shim = ("\n".join(const_stmts) + "\n\n") if const_stmts else ""
-        shim = const_shim + "\n".join(reexports) + f"\n\n__all__ = {[u.name for u in units]!r}\n"
+            edits[mod_file] = content.encode('utf-8')
+            # Retain all non-function statements, including constants/classes,
+            # module docstrings, future imports and the original export list.
+            prefix = '.' if is_pkg else ''
+            shim_lines[fn.lineno - 1:fn.end_lineno] = [f"from {prefix}{fn.name} import {fn.name}\n"]
+        shim = ''.join(shim_lines)
+
         ast.parse(shim)
-        target.write_text(shim, encoding="utf-8")
-        ok, tail = _verify_no_new_test_failures(proj, target.parent, before_bad, [target, *(Path(c) for c in created)])
-        if not ok:
-            target.write_text(original, encoding="utf-8")
-            for c in created:
-                Path(c).unlink(missing_ok=True)
-            return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_SPLIT_MODULE", "detail": tail[:300]}
+        edits[target] = shim.encode('utf-8')
+        with contracts.FileEdits(edits) as transaction:
+            ok, tail = _verify_no_new_test_failures(proj, target.parent, before_bad, list(edits))
+            if not ok:
+                return {"verified": False, "gate": "FAIL", "reason": "SUITE_FAILED_AFTER_SPLIT_MODULE", "detail": tail[:300]}
+            transaction.commit()
         return {
             "verified": True,
             "gate": "PASS",
@@ -2074,20 +2180,10 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
             if "__pycache__" not in p.parts and ".git" not in p.parts and not p.name.startswith("test_") and not p.name.endswith("_test.py") and p.name != "__init__.py"
         ]
         all_py_in_proj = [p for p in sorted(proj.rglob("*.py")) if "__pycache__" not in p.parts and ".git" not in p.parts]
-        ref_names: set[str] = set()
-        for p in all_py_in_proj:
-            try:
-                pt = ast.parse(p.read_text(encoding="utf-8"))
-            except Exception:
-                continue
-            for nd in ast.walk(pt):
-                if isinstance(nd, ast.Name) and isinstance(nd.ctx, ast.Load):
-                    ref_names.add(nd.id)
-                elif isinstance(nd, ast.Attribute):
-                    ref_names.add(nd.attr)
-                elif isinstance(nd, ast.ImportFrom):
-                    for a in nd.names:
-                        ref_names.add(a.name)
+        try:
+            ref_names = contracts.referenced_names(ast.parse(p.read_text(encoding="utf-8")) for p in all_py_in_proj)
+        except (SyntaxError, OSError):
+            return {"verified": False, "gate": "FAIL", "reason": "DEAD_CODE_REFERENCE_ANALYSIS_INCOMPLETE"}
         backups_dc = {p: p.read_text(encoding="utf-8") for p in cand_files}
         removed_syms: list[str] = []
         edited_dc: list[Path] = []
@@ -2097,7 +2193,7 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
             lines_dc = src_dc.splitlines(keepends=True)
             spans_dc: list[tuple[int, int]] = []
             for st in t_dc.body:
-                if isinstance(st, ast.FunctionDef) and st.name not in ref_names and st.name != "main" and not st.name.startswith("test_"):
+                if contracts.implicitly_removable(st, ref_names):
                     s_l = (st.decorator_list[0].lineno if st.decorator_list else st.lineno) - 1
                     e_l = st.end_lineno or st.lineno
                     spans_dc.append((s_l, e_l))
