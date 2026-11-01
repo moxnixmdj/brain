@@ -1287,10 +1287,13 @@ def integrate_solver_output(
             capsule = _make_retry_capsule(retry_context)
             retry_sha = capsule["sha256"]
             prior_capsule = retry_capsules.get(retry_sha)
-            autonomous_replay_authorized = not _effect_may_have_occurred(out)
+            manual_only = retry_context.get("autonomous_replay_forbidden") is True
+            autonomous_replay_authorized = not manual_only and not _effect_may_have_occurred(out)
             autonomous_replay_reason = (
                 "NO_EFFECT_OUTCOME_RECORDED"
                 if autonomous_replay_authorized
+                else "RETRY_CONTEXT_MANUAL_ONLY"
+                if manual_only
                 else "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED"
             )
             if isinstance(prior_capsule, Mapping):
@@ -1828,8 +1831,13 @@ def get_failure_retry_context(
         "context": deepcopy(dict(context)),
         "autonomous_replay_authorized": (
             capsule.get("autonomous_replay_authorized") is True
+            and context.get("autonomous_replay_forbidden") is not True
         ),
-        "autonomous_replay_reason": capsule.get("autonomous_replay_reason"),
+        "autonomous_replay_reason": (
+            "RETRY_CONTEXT_MANUAL_ONLY"
+            if context.get("autonomous_replay_forbidden") is True
+            else capsule.get("autonomous_replay_reason")
+        ),
         "resolved": capsule.get("resolved") is True,
         "resolved_by": capsule.get("resolved_by"),
     }

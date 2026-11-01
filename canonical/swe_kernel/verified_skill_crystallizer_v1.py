@@ -805,14 +805,20 @@ class VerifiedSkillStore:
         required_verification_kind: str = 'CALLER_PREDICATE',
         scope_id: str = '',
         context: Mapping[str, Any] | None = None,
+        allow_operator_generalization: bool = False,
     ) -> dict[str, Any] | None:
         """Propose only within recorded applicability and actual current assurance.
 
         Callbacks are trusted verifiers, not authenticated third-party attestations.
         Boolean callbacks never establish TEST_SUITE or whole-task correctness.
+        Operator generalization is opt-in and requires scoped TEST_SUITE evidence.
         """
         if required_verification_kind not in KINDS:
             raise ValueError('UNKNOWN_VERIFICATION_KIND')
+        if type(allow_operator_generalization) is not bool:
+            raise ValueError('INVALID_OPERATOR_GENERALIZATION_SETTING')
+        if allow_operator_generalization and (required_verification_kind != 'TEST_SUITE' or not scope_id or language.lower() != 'python'):
+            raise ValueError('OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE')
         lang = language.lower()
         rules = _load_rules(self.db_path, lang)
 
@@ -831,9 +837,25 @@ class VerifiedSkillStore:
                 continue
             if recorded is not None and recorded['verification_kind'] != required_verification_kind:
                 continue
-            for candidate in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
-                if candidate is None or candidate == source_text:
+            def candidates():
+                for value in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
+                    yield value, 'statement'
+                if allow_operator_generalization:
+                    from canonical.swe_kernel import boundary_disjunction_normalization_v1 as semantic
+                    from canonical.swe_kernel import operator_generalization_v1 as operator
+                    try:
+                        proposals = semantic.propose_semantic_swaps(
+                            source_text, rule, operator_swaps=operator.propose_operator_swaps)
+                        for value in itertools.islice(proposals, 16):
+                            yield value, 'operator_generalization'
+                    except (semantic.NormalizationError, SyntaxError, ValueError):
+                        return  # A malformed source or unsupported shape is not a skill hit.
+
+            seen_candidates = set()
+            for candidate, strategy in candidates():
+                if candidate is None or candidate == source_text or candidate in seen_candidates:
                     continue
+                seen_candidates.add(candidate)
                 verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
                 if verification is not None:
                     conn = _connect(self.db_path)
@@ -856,6 +878,7 @@ class VerifiedSkillStore:
                         "skeleton_fp": rule["skeleton_fp"],
                         "patched_source": candidate,
                         "from_crystallized_memory": True,
+                        "recall_strategy": strategy,
                         "verification": verification,
                         "whole_task_correctness_proved": False,
                     }
