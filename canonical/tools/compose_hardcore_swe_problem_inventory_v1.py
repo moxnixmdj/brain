@@ -19,6 +19,7 @@ import re
 import shutil
 import subprocess
 import sys
+from typing import Any, Mapping
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -134,6 +135,44 @@ FIX = {
         "none — the fixture's history must actually change a function for a bisect to have an answer; "
         "the refusal is correct and the fixture is the defect",
 }
+
+# Who is wrong when a row refuses. This is DERIVED from the remedy text in FIX above rather than
+# listed a second time, because two hand-maintained lists drift and the reader then cannot tell
+# which one the ranking was built from. A refusal that is correct about an under-specified sentence
+# is not evidence that the machine cannot do the work, and pricing it as capability work would
+# spend the next hour on a fixture.
+_OWNER_OF_REMEDY = (
+    ("selection:", "selection"),
+    ("none on the machine", "fixture"),
+    ("better fixture is the fix", "fixture"),
+    ("the fixture's history", "fixture"),
+    ("the sentence is under-specified", "fixture"),
+    ("the sentence is ill-posed", "fixture"),
+)
+
+
+def _remedy_for(status_key: str) -> str:
+    """The remedy text for a status key, a bare refusal class, or nothing."""
+    if status_key in FIX:
+        return str(FIX[status_key])
+    suffix = "_" + status_key  # the door joins class to prefix with a single underscore
+    matches = [v for k, v in FIX.items() if k.endswith(suffix)]
+    # Exactly one match or nothing: an ambiguous suffix must not silently pick a remedy.
+    return str(matches[0]) if len(matches) == 1 else ""
+
+
+def defect_owner(status_key: str) -> str:
+    """``selection``, ``fixture`` or ``capability`` -- read off the remedy already written.
+
+    Accepts either form a caller has to hand: ``FAIL_CLOSED__CAPABILITY_REFUSED_X`` or the bare
+    ``X`` that ``refusal_class`` returns. Getting this wrong is silent -- an unresolved key falls
+    through to ``capability``, which once made this section claim 0 of 7 were sentence defects.
+    """
+    remedy = _remedy_for(status_key).lower()
+    for needle, owner in _OWNER_OF_REMEDY:
+        if needle in remedy:
+            return owner
+    return "capability"
 
 CLASS_STORY = {
     "polyglot": ("C++, Rust, Go, Java, TypeScript, SQL", None),
@@ -340,6 +379,23 @@ def learning_measurement() -> dict:
     return out
 
 
+def refusal_class(row: Mapping[str, Any]) -> str:
+    """The refusal class of a census row, without the door's own wrapper.
+
+    ``status`` reads ``FAIL_CLOSED__CAPABILITY_REFUSED_<CLASS>`` or ``FAIL_CLOSED__<CLASS>``, and
+    ``refusal`` reads ``CAPABILITY_REFUSED:<CLASS>``.  Splitting ``refusal`` on ':' yields the word
+    ``CAPABILITY_REFUSED`` for every row, which is how an earlier version of this section managed to
+    report zero fixture defects out of four.
+    """
+    status = str(row.get("status") or "")
+    for prefix in ("FAIL_CLOSED__CAPABILITY_REFUSED_", "FAIL__CAPABILITY_REFUSED_",
+                   "FAIL_CLOSED__", "FAIL__"):
+        if status.startswith(prefix):
+            return status[len(prefix):]
+    raw = str(row.get("refusal") or "")
+    return raw.split(":", 1)[1] if raw.startswith("CAPABILITY_REFUSED:") else raw.split(":")[0]
+
+
 def family(capability_id: str) -> str:
     """The registry family a row belongs to: ``code.polyglot`` out of ``code.polyglot.x.v1``."""
     parts = str(capability_id).split(".")
@@ -507,10 +563,10 @@ def main() -> int:
     add("")
     add("## §3 The plumbing defects, with counts")
     add("")
-    add("| defect | count | what it means | cheapest correct fix |")
-    add("|---|---|---|---|")
+    add("| defect | count | who is wrong | what it means | cheapest correct fix |")
+    add("|---|---|---|---|---|")
     for k, v in by_defect.most_common():
-        add(f"| `{k}` | {v} | {DEFECT_MEANING.get(k, '—')} | {FIX.get(k, '—')} |")
+        add(f"| `{k}` | {v} | **{defect_owner(k)}** | {DEFECT_MEANING.get(k, '—')} | {FIX.get(k, '—')} |")
     add("")
     stated = [r for r in refused if str(r.get("refusal") or "").strip()]
     if stated:
@@ -634,33 +690,59 @@ def main() -> int:
             "`" + "`, `".join(mx["moving"]) + "`. A headline number that")
         add("   changes with the box's load is not a capability number, so this document reports the floor")
         add("   and the ceiling and names the movers, instead of quoting whichever sample looked best.")
-    add("11. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real")
+    add("10. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real")
     add("   software engineering is unbounded, so this corpus can be satisfied without being a good engineer.")
     add("   It needs real repositories and adversarial sentences, not more fixtures.")
     add("")
     add("---")
     add("")
-    add("## §6 The order to fix it in")
+    add("## §6 The smartest order, given these numbers")
     add("")
-    add("Ranked by capability bought per hour, using the counts above as the estimate of reach.")
+    pct = 100.0 * len(served) / len(rows)
+    fixture = [r for r in refused if defect_owner(refusal_class(r)) == "fixture"]
+    selection = [r for r in refused if defect_owner(refusal_class(r)) == "selection"]
+    capability = [r for r in refused if r not in fixture and r not in selection]
+    add(f"The census stands at **{len(served)} of {len(rows)} ({pct:.0f}%)**. Of the {len(refused)}")
+    add(f"that remain, **{len(fixture)} are fixture defects** -- the machine is right and the sentence is")
+    add(f"under-specified or the move is ill-posed -- **{len(selection)} are selection**, and")
+    add(f"**{len(capability)} are capability**. The column is read off §3's own remedy text, so the two")
+    add("sections cannot disagree; a capability gap whose remedy happens to start with the word \"none\"")
+    add("is still counted as capability, because it says the missing thing is a capability.")
     add("")
-    add("| # | move | reaches | why first |")
+    add("That split decides the order, because it decides what a number means:")
+    add("")
+    add(f"* **The 49-sentence census is now a regression guard, not a frontier.** At {pct:.0f}% with")
+    add(f"  {len(fixture)} of the remaining {len(refused)} being sentence defects, raising it further buys")
+    add("  almost no capability. It is what stops the machine going backwards, and it should be run on")
+    add("  every change -- but no hour should be spent *aiming* at it.")
+    add("* **Every number in §1 is one request deep.** A system that answers 86% of single sentences")
+    add("  can still be incapable of a task that needs ten of them in sequence, and nothing here")
+    add("  measures that. Closing that gap is the actual objective, and it needs a harder instrument")
+    add("  before it needs more rows.")
+    add("")
+    add("| # | move | measured reach | why at this position |")
     add("|---|---|---|---|")
-    add(f"| 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | "
-        f"**{absorbed}/{len(rows)}** | no new capability code; several classes improve at once |")
-    add(f"| 2 | the four unserved gate classes: benchmark vs a revision, regression test, cherry-pick, "
-        f"changelog | {sum(by_defect[k] for k in gate_only)} | each needs one row or one new slot, not a new substrate |")
-    add(f"| 3 | the named transform gaps inside the polyglot engine | "
-        f"{sum(by_defect[k] for k in capability if 'POLYGLOT' in k or 'CPP' in k or 'SQL' in k)} | "
-        "the engine exists; these are missing ops in a real AST/CST surface |")
-    add(f"| 4 | install the work substrate (a profiler, `sqlite3`, `rustc`/`go`/`tsc`) | unblocks perf/systems/polyglot | "
-        "without it, several rows can never run |")
-    add(f"| 5 | execution-first debugging: run, observe, bisect, attribute | "
-        f"{sum(by_class[c]['n'] for c in ('debug', 'perf', 'systems'))} | needs the substrate from 4 |")
-    add(f"| 6 | a general non-Python rewrite row (parse/index/impact already exist) | {by_class['polyglot']['n']} | "
-        "biggest jump in what it means to be a software engineer; most expensive |")
-    add(f"| 7 | design/architecture output (ADR, migration plan) | {by_class['design']['n']} | "
-        "needs a planning surface that produces a document, not an edit |")
+    add("| 1 | **multi-step instrument**: a real repository, a vague issue, and a required "
+        "plan -> edit -> run -> observe -> repair loop, scored end to end | everything above is one "
+        "step deep | this is the only measure that can tell a strong engineer from a wide lookup table |")
+    add(f"| 2 | **selection** for the {len(selection)} remaining sentences | {len(selection)} sentence(s) | "
+        "cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |")
+    add(f"| 3 | **capability** for the {len(capability)} remaining sentences | {len(capability)} sentence(s) | "
+        "real work, but a small ceiling; do it after the instrument exists |")
+    add("| 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, "
+        "`rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows "
+        "can never run, and no row may pretend otherwise |")
+    add("| 5 | **learning upstream of selection**: a refusal memory that changes which row is chosen | "
+        "today the learner is downstream (see §7) | as built, it cannot prevent a repeat of a miss |")
+    add("| 6 | **repo-scale navigation**: ranked cross-module retrieval and impact ranking | a symbol "
+        "index exists; a planner cannot yet ask \"where is this behaviour\" | needed by any multi-file "
+        "task, which is item 1 |")
+    add(f"| 7 | fix the {len(fixture)} fixture defect(s), or stop counting them | {len(fixture)} sentence(s) | "
+        "not capability work, and leaving them in the denominator overstates the gap |")
+    add("")
+    add("The order is not a wish list. Items 1-3 are scored by this document; item 4 is scored by")
+    add("the substrate table in §4; item 5 by §7. Item 7 is bookkeeping and belongs last on purpose:")
+    add("it changes what the number means, and a number that means something else is not progress.")
     add("")
     add("---")
     add("")
@@ -695,11 +777,12 @@ def main() -> int:
         add("")
         reached = sum(1 for _l, h in lm["probes"] if h)
         add(f"It reached **{reached} of {len(lm['probes'])}** neighbours. That is the true surface of")
-        add("\"instant learning\": it generalizes over **identifiers** and over the operator sequence, and")
-        add("it does **not** generalize over literals or over a differently-shaped expression with the same")
-        add("meaning. The docstring promises holes for numbers, strings and paths (`?num0`, `?str0`,")
-        add("`?path0`); those tokens appear only in the docstring. The implemented abstraction is `?id`")
-        add("(identifiers) and `?fresh` (new temporaries).")
+        add("\"instant learning\": it generalizes over **identifiers**, over **literals**, and over the")
+        add("operator sequence. It does **not** generalize over a differently-shaped expression with the")
+        add("same meaning -- that would need synthesis, not abstraction. Holes are `?id` (identifiers),")
+        add("`?num` (numbers), `?str` (string literals, which is where a path lands) and `?fresh` (a")
+        add("temporary the fix introduces). Identifier holes kept their historical token name, so rules")
+        add("stored before literal holes existed still match.")
     add("")
     add("### 7.1 Why this cannot be the answer to the remaining problems")
     add("")
@@ -736,10 +819,14 @@ def main() -> int:
     add("recurrence costs a recall plus a verifier instead of a search. That is real, and it compounds")
     add("-- but only along the axis the primitives already span (`" + "`, `".join(lm.get("languages") or []) + "`).")
     add("")
-    add("To make it the answer to everything, two things would have to be true that are not true today:")
-    add("(a) the store must be durable, and it is in `" + str(lm.get("store")) + "`; and (b) something must")
-    add("produce a first success in a new environment. (b) is the whole problem, and it is not a learning")
-    add("problem -- it is a capability-acquisition problem, which is what §6 prices.")
+    add("To make it the answer to everything, two things must both hold:")
+    add("")
+    add("* **(a) the store must be durable.** It now is -- `" + str(lm.get("store")) + "`, inside the")
+    add("  repository and outside the temporary directory -- so a lesson survives the session that")
+    add("  learned it. Before this change it did not, so \"permanently learned\" was false.")
+    add("* **(b) something must produce a first success in a new environment.** That is the whole")
+    add("  problem, and it is not a learning problem: it is capability acquisition, and it is what")
+    add("  §6 prices. Instant learning is the multiplier; (b) is the multiplicand.")
     add("")
     add("---")
     add("")
