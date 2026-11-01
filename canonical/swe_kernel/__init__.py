@@ -9,6 +9,12 @@ __all__ = [
     "polyglot_build_ci_engine_v1",
     "egraph_and_deductive_synthesizer_v1",
     "diagnostics_perf_and_design_engine_v1",
+    "incremental_semantic_graph_v1",
+    "verified_skill_crystallizer_v1",
+    "goal_dag_executor_v1",
+    "causal_trace_to_skill_compiler_v1",
+    "whitebox_introspector_and_trace_synthesizer_v1",
+    "closed_loop_autonomous_controller_v1",
     "parallel_fork_map",
 ]
 
