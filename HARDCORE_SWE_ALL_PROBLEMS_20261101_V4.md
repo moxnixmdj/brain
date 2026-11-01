@@ -1,7 +1,9 @@
 # The complete problem inventory — hardcore software engineering
 
-**Measured 2026-11-01 on `05762527`** (the merged `origin/main` this document lands on). Every number below comes from a run in
-this checkout, not from a plan. Re-measure with the commands in Appendix A.
+**Measured 2026-11-01 on `f9134956`** (origin/main `05762527` plus #6525, re-measured after the merge). Every number below comes from a run in
+this checkout, not from a plan. Re-measure with the commands in Appendix A. The revision rule for this document: a
+number that a later measurement contradicts is replaced, and the measurement it replaced is kept beside it whenever
+the contradiction itself was the finding.
 
 Scope: the machine as a software engineer — compilers, build, CI, performance, systems, testing, debugging,
 refactoring, review, git, design. Document / PDF / office work is excluded by standing instruction and is counted
@@ -13,134 +15,147 @@ nowhere below, neither as a case nor as a gap.
 
 | instrument | what it asks | result | median |
 |---|---|---|---:|
-| `execution_guard/swe_advanced_probe_v1.py` | 49 advanced SWE sentences, 10 axes, through the live front door | **35 served / 14 refused** — of which **1 served answer is false** (#44) | 36 ms |
-| `execution_guard/swe_capability_matrix_v1.py` | 54 ordinary cases, each with a world oracle | **42 REAL / 0 FALSE / 0 DAMAGED / 12 refused** | 111 ms |
+| `execution_guard/swe_advanced_probe_v1.py` | 49 advanced SWE sentences, 11 axes, through the live front door | **36 served / 13 refused** — and **zero known false passes** (#44 was one; #6525 closed it) | 38 ms |
+| `execution_guard/swe_capability_matrix_v1.py` | 54 ordinary cases, each with a world oracle | **44 REAL / 0 FALSE / 0 DAMAGED / 10 refused** (53 *distinct* cases — `measure_coverage` is registered twice) | 111 ms |
 | `hardcore_swe_surface_probe_20261030.py` | 28 capability surfaces, by real execution | **28 / 28** | — |
 | registry | rows the door can rank | **443 rows, 566 declared effects, 11 reached by the 49 sentences** | — |
 | substrate | kernel modules the manifest pins | **10 / 10 after `scripts/restore_substrate_v1.py`** (8 of 10 were absent, measured directly) | 15 s |
 | laws | `canonical/tests` | **2,248 test modules**; full discovery exceeds a 28-minute budget (§7) | — |
 
-**34 genuinely answered, 14 refused, 1 answered with the wrong question** (`#44`: asked for the diff against
-`HEAD~1`, given the diff against `HEAD` and stamped VERIFIED).
+**36 answered, 13 refused, 0 false.** The one false pass this inventory found — `#44`, asked for the diff against
+`HEAD~1`, given the diff against `HEAD` and stamped VERIFIED over an empty patch — was closed by **#6525**
+(the row's contract had no `rev` slot at all; it now has one, and the receipt carries `rev=HEAD~1`, `rev_sha` and
+the hunk). The measurement of the old behaviour is preserved verbatim in §4/D2, because the fixture that made it
+possible is the more interesting defect.
 
-The fourth row is the one to read twice. **Three rows serve 30 of the 35 served sentences**, and **11 of 443
-rows are ever reached.** The machine is not short of capability; it is short of *declaration* and *routing* —
-and both are cheap to fix, because the capability is already written.
+The fourth row is the one to read twice. **Three rows serve 30 of the 36 served sentences**, and **11 of 443
+rows are ever reached** — unchanged by #6525, which added no row. The machine is not short of capability; it is
+short of *declaration* and *routing* — and both are cheap to fix, because the capability is already written.
 
 ---
 
-## 1. The ten axes, sentence by sentence
+## 1. The eleven axes, sentence by sentence
 
 | axis | served | total | verdict |
 |---|---:|---:|---|
 | polyglot | 4 | 7 | Rust, Go, Java, TypeScript, TOML, YAML and Make are edited and verified; **C++ and SQL go through a pattern table**, and both of their fixtures hold already-correct code |
 | build | 3 | 5 | pyproject create/add/pin, Makefile targets, vendoring all work; the **pin/vendor fixtures declare no dependency to act on** |
 | ci | 3 | 4 | workflow create / matrix / cache / fix all work; **flaky-test quarantine** cannot answer because the test is not flaky |
-| perf | 3 | 4 | hot-spot profiling, memoisation and O(n²)→O(n) all work; **benchmark against a revision** is unreachable and needs two commits |
+| perf | 3 | 4 | hot-spot profiling, memoisation and O(n²)→O(n) all work; **benchmark against a revision** is implemented, and no row declares it, so the sentence selects nothing |
 | systems | 2 | 3 | thread pool and GIL release are written and verified; **race *detection*** runs when invoked directly and is unreachable by sentence |
 | tests | 5 | 6 | unit, property, mutation and suite diagnosis all work; **regression tests** cannot be routed |
 | debug | 2 | 3 | root cause and behaviour explanation work; **bisect / provenance** is blocked by binding and declaration |
 | refactor | 5 | 6 | rename, move, extract, split, inline, type hints all work; **a symbol move with a name collision** is an honest refusal |
 | review | 3 | 3 | 3 of 3 — security, API design, dependency audit |
-| git | 2 | 5 | commit and branch+commit work; **cherry-pick and changelog** are implemented but undeclared; **diff against a revision** silently drops the revision |
+| git | 3 | 5 | commit, branch+commit and **diff against a stated revision** work (the last one closed by #6525); **cherry-pick** is implemented and now scoped wrong, **changelog** is implemented and one condition away |
 | design | 3 | 3 | 3 of 3 — ADR, migration plan, package split |
 
 ### 1.1 All 49 sentences
 
 | # | axis | R | sentence | row reached | cause |
 |---:|---|:-:|---|---|---|
-| 1 | polyglot | ❌ | Fix the off-by-one bug in canonical/astra_runtime/tmp/swe_advanced_probe/01_polyglot/src/main.cpp so th… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM |
-| 2 | polyglot | ✅ | Add a function sub to canonical/astra_runtime/tmp/swe_advanced_probe/02_polyglot/src/lib.rs that subtra… | code.polyglot.transform_and_verify.v1 |  |
-| 3 | polyglot | ✅ | Add a method Mul to canonical/astra_runtime/tmp/swe_advanced_probe/03_polyglot/src/main.go that multipl… | code.polyglot.transform_and_verify.v1 |  |
-| 4 | polyglot | ✅ | Add a second method to canonical/astra_runtime/tmp/swe_advanced_probe/04_polyglot/src/Main.java and mak… | code.polyglot.transform_and_verify.v1 |  |
-| 5 | polyglot | ✅ | Rename the exported function add to plus in canonical/astra_runtime/tmp/swe_advanced_probe/05_polyglot/… | code.polyglot.transform_and_verify.v1 |  |
-| 6 | polyglot | ❌ | Add a NOT NULL constraint on users.email in canonical/astra_runtime/tmp/swe_advanced_probe/06_polyglot/… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:SQL_UNSUPPORTED_DDL_EDIT |
-| 7 | polyglot | ❌ | Repair the C++ source file canonical/astra_runtime/tmp/swe_advanced_probe/07_polyglot/src/main.cpp so t… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM |
-| 8 | build | ✅ | Add pytest as a development dependency in canonical/astra_runtime/tmp/swe_advanced_probe/08_build/pypro… | code.polyglot.transform_and_verify.v1 |  |
-| 9 | build | ✅ | Create a pyproject.toml for the project in canonical/astra_runtime/tmp/swe_advanced_probe/09_build/pkg … | code.polyglot.transform_and_verify.v1 |  |
-| 10 | build | ✅ | Add a target `lint` to canonical/astra_runtime/tmp/swe_advanced_probe/10_build/Makefile that runs ruff … | code.polyglot.transform_and_verify.v1 |  |
-| 11 | build | ❌ | Pin the dependency versions in canonical/astra_runtime/tmp/swe_advanced_probe/11_build/pyproject.toml. | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY |
-| 12 | build | ❌ | Vendor the single dependency of the project in canonical/astra_runtime/tmp/swe_advanced_probe/12_build/… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR |
+| 1 | polyglot | ❌ | Fix the off-by-one bug in canonical/astra_runtime/tmp/swe_advanced_probe/01_polyglot/src/main.cpp so that sum r… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM |
+| 2 | polyglot | ✅ | Add a function sub to canonical/astra_runtime/tmp/swe_advanced_probe/02_polyglot/src/lib.rs that subtracts two … | code.polyglot.transform_and_verify.v1 |  |
+| 3 | polyglot | ✅ | Add a method Mul to canonical/astra_runtime/tmp/swe_advanced_probe/03_polyglot/src/main.go that multiplies two … | code.polyglot.transform_and_verify.v1 |  |
+| 4 | polyglot | ✅ | Add a second method to canonical/astra_runtime/tmp/swe_advanced_probe/04_polyglot/src/Main.java and make sure i… | code.polyglot.transform_and_verify.v1 |  |
+| 5 | polyglot | ✅ | Rename the exported function add to plus in canonical/astra_runtime/tmp/swe_advanced_probe/05_polyglot/src/app.… | code.polyglot.transform_and_verify.v1 |  |
+| 6 | polyglot | ❌ | Add a NOT NULL constraint on users.email in canonical/astra_runtime/tmp/swe_advanced_probe/06_polyglot/src/sche… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:POLYGLOT_REFUSED:SQL_UNSUPPORTED_DDL_EDIT |
+| 7 | polyglot | ❌ | Repair the C++ source file canonical/astra_runtime/tmp/swe_advanced_probe/07_polyglot/src/main.cpp so that it c… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM |
+| 8 | build | ✅ | Add pytest as a development dependency in canonical/astra_runtime/tmp/swe_advanced_probe/08_build/pyproject.tom… | code.polyglot.transform_and_verify.v1 |  |
+| 9 | build | ✅ | Create a pyproject.toml for the project in canonical/astra_runtime/tmp/swe_advanced_probe/09_build/pkg with a c… | code.polyglot.transform_and_verify.v1 |  |
+| 10 | build | ✅ | Add a target `lint` to canonical/astra_runtime/tmp/swe_advanced_probe/10_build/Makefile that runs ruff over the… | code.polyglot.transform_and_verify.v1 |  |
+| 11 | build | ❌ | Pin the dependency versions in canonical/astra_runtime/tmp/swe_advanced_probe/11_build/pyproject.toml. | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:POLYGLOT_REFUSED:PYPROJECT_ALREADY_PINNED_OR_ |
+| 12 | build | ❌ | Vendor the single dependency of the project in canonical/astra_runtime/tmp/swe_advanced_probe/12_build/pkg. | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_DECLARED_DEPENDENCY_TO_VE |
 | 13 | ci | ✅ | Fix the failing CI job in canonical/astra_runtime/tmp/swe_advanced_probe/13_ci/.github/workflows/ci.yml. | code.polyglot.transform_and_verify.v1 |  |
-| 14 | ci | ✅ | Make the CI workflow in canonical/astra_runtime/tmp/swe_advanced_probe/14_ci/.github/workflows/ci.yml r… | code.polyglot.transform_and_verify.v1 |  |
-| 15 | ci | ✅ | Add caching of pip downloads to canonical/astra_runtime/tmp/swe_advanced_probe/15_ci/.github/workflows/… | code.polyglot.transform_and_verify.v1 |  |
-| 16 | ci | ❌ | Quarantine the flaky test in canonical/astra_runtime/tmp/swe_advanced_probe/16_ci/tests/test_calc.py so… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED |
-| 17 | perf | ✅ | Profile canonical/astra_runtime/tmp/swe_advanced_probe/17_perf/pkg/util.py and tell me which function i… | software.analysis.diagnose_and_architect.v1 |  |
-| 18 | perf | ✅ | Optimise the function total in canonical/astra_runtime/tmp/swe_advanced_probe/18_perf/pkg/util.py; it i… | python.swe.transform_and_synthesize.v1 |  |
-| 19 | perf | ❌ | Benchmark canonical/astra_runtime/tmp/swe_advanced_probe/19_perf/pkg/calc.py against the version in git… | — | NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT |
-| 20 | perf | ✅ | Add memoisation to the function twice in canonical/astra_runtime/tmp/swe_advanced_probe/20_perf/pkg/mod… | python.swe.transform_and_synthesize.v1 |  |
-| 21 | systems | ❌ | Find the race condition in canonical/astra_runtime/tmp/swe_advanced_probe/21_systems/pkg/service.py. | software.repair.choreograph.crossfile.v1 | STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:software.repair.choreo |
-| 22 | systems | ✅ | Add a thread pool to canonical/astra_runtime/tmp/swe_advanced_probe/22_systems/pkg/util.py that totals … | python.swe.transform_and_synthesize.v1 |  |
-| 23 | systems | ✅ | Make the function total in canonical/astra_runtime/tmp/swe_advanced_probe/23_systems/pkg/util.py releas… | python.swe.transform_and_synthesize.v1 |  |
-| 24 | tests | ✅ | Write a unit test for the function mul in canonical/astra_runtime/tmp/swe_advanced_probe/24_tests/pkg/c… | python.swe.transform_and_synthesize.v1 |  |
-| 25 | tests | ✅ | Write a property-based test for the function add in canonical/astra_runtime/tmp/swe_advanced_probe/25_t… | python.swe.transform_and_synthesize.v1 |  |
-| 26 | tests | ❌ | Add a regression test that reproduces the bug in canonical/astra_runtime/tmp/swe_advanced_probe/26_test… | — | STATED_SWE_EFFECT_UNSERVED |
-| 27 | tests | ✅ | Increase the mutation score of canonical/astra_runtime/tmp/swe_advanced_probe/27_tests/pkg/calc.py abov… | python.swe.transform_and_synthesize.v1 |  |
-| 28 | tests | ✅ | Fuzz the function add in canonical/astra_runtime/tmp/swe_advanced_probe/28_tests/pkg/calc.py for intege… | software.analysis.diagnose_and_architect.v1 |  |
-| 29 | tests | ✅ | Run the test suite in canonical/astra_runtime/tmp/swe_advanced_probe/29_tests/tests and tell me which t… | python.repository.acceptance.measure.v1 |  |
-| 30 | debug | ✅ | The test in canonical/astra_runtime/tmp/swe_advanced_probe/30_debug/tests/test_calc.py fails; find the … | software.analysis.diagnose_and_architect.v1 |  |
-| 31 | debug | ✅ | Explain why the function total in canonical/astra_runtime/tmp/swe_advanced_probe/31_debug/pkg/util.py r… | software.analysis.diagnose_and_architect.v1 |  |
-| 32 | debug | ❌ | Find the commit that broke the test in canonical/astra_runtime/tmp/swe_advanced_probe/32_debug/tests/te… | git.history.bisect_regression.v1 | STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY:git.history.bisect_regre |
-| 33 | refactor | ❌ | Move the function add from canonical/astra_runtime/tmp/swe_advanced_probe/33_refactor/pkg/mod.py into c… | python.refactor.move_symbol.v1 | CAPABILITY_REFUSED:add |
-| 34 | refactor | ✅ | Split canonical/astra_runtime/tmp/swe_advanced_probe/34_refactor/pkg/calc.py into one module per functi… | python.swe.transform_and_synthesize.v1 |  |
-| 35 | refactor | ✅ | Rename the public function total in canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util… | python.refactor.rename_symbol.v1 |  |
-| 36 | refactor | ✅ | Replace every use of the deprecated function mul in canonical/astra_runtime/tmp/swe_advanced_probe/36_r… | python.swe.transform_and_synthesize.v1 |  |
-| 37 | refactor | ✅ | Add type hints to every function in canonical/astra_runtime/tmp/swe_advanced_probe/37_refactor/pkg/calc… | python.swe.transform_and_synthesize.v1 |  |
-| 38 | refactor | ✅ | Extract the loop in the function total in canonical/astra_runtime/tmp/swe_advanced_probe/38_refactor/pk… | python.refactor.extract_function.v1 |  |
+| 14 | ci | ✅ | Make the CI workflow in canonical/astra_runtime/tmp/swe_advanced_probe/14_ci/.github/workflows/ci.yml run the t… | code.polyglot.transform_and_verify.v1 |  |
+| 15 | ci | ✅ | Add caching of pip downloads to canonical/astra_runtime/tmp/swe_advanced_probe/15_ci/.github/workflows/ci.yml. | code.polyglot.transform_and_verify.v1 |  |
+| 16 | ci | ❌ | Quarantine the flaky test in canonical/astra_runtime/tmp/swe_advanced_probe/16_ci/tests/test_calc.py so CI is g… | code.polyglot.transform_and_verify.v1 | CAPABILITY_REFUSED:POLYGLOT_REFUSED:NO_FLAKY_TEST_DETECTED |
+| 17 | perf | ✅ | Profile canonical/astra_runtime/tmp/swe_advanced_probe/17_perf/pkg/util.py and tell me which function is the ho… | software.analysis.diagnose_and_architect.v1 |  |
+| 18 | perf | ✅ | Optimise the function total in canonical/astra_runtime/tmp/swe_advanced_probe/18_perf/pkg/util.py; it is too sl… | python.swe.transform_and_synthesize.v1 |  |
+| 19 | perf | ❌ | Benchmark canonical/astra_runtime/tmp/swe_advanced_probe/19_perf/pkg/calc.py against the version in git HEAD~1. | — | STATED_SWE_EFFECT_UNSERVED |
+| 20 | perf | ✅ | Add memoisation to the function twice in canonical/astra_runtime/tmp/swe_advanced_probe/20_perf/pkg/mod.py. | python.swe.transform_and_synthesize.v1 |  |
+| 21 | systems | ❌ | Find the race condition in canonical/astra_runtime/tmp/swe_advanced_probe/21_systems/pkg/service.py. | software.repair.choreograph.crossfile.v1 | STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY |
+| 22 | systems | ✅ | Add a thread pool to canonical/astra_runtime/tmp/swe_advanced_probe/22_systems/pkg/util.py that totals the list… | python.swe.transform_and_synthesize.v1 |  |
+| 23 | systems | ✅ | Make the function total in canonical/astra_runtime/tmp/swe_advanced_probe/23_systems/pkg/util.py release the GI… | python.swe.transform_and_synthesize.v1 |  |
+| 24 | tests | ✅ | Write a unit test for the function mul in canonical/astra_runtime/tmp/swe_advanced_probe/24_tests/pkg/calc.py. | python.swe.transform_and_synthesize.v1 |  |
+| 25 | tests | ✅ | Write a property-based test for the function add in canonical/astra_runtime/tmp/swe_advanced_probe/25_tests/pkg… | python.swe.transform_and_synthesize.v1 |  |
+| 26 | tests | ❌ | Add a regression test that reproduces the bug in canonical/astra_runtime/tmp/swe_advanced_probe/26_tests/pkg/mo… | — | STATED_SWE_EFFECT_UNSERVED |
+| 27 | tests | ✅ | Increase the mutation score of canonical/astra_runtime/tmp/swe_advanced_probe/27_tests/pkg/calc.py above 0.8 by… | python.swe.transform_and_synthesize.v1 |  |
+| 28 | tests | ✅ | Fuzz the function add in canonical/astra_runtime/tmp/swe_advanced_probe/28_tests/pkg/calc.py for integer overfl… | software.analysis.diagnose_and_architect.v1 |  |
+| 29 | tests | ✅ | Run the test suite in canonical/astra_runtime/tmp/swe_advanced_probe/29_tests/tests and tell me which tests fai… | python.repository.acceptance.measure.v1 |  |
+| 30 | debug | ✅ | The test in canonical/astra_runtime/tmp/swe_advanced_probe/30_debug/tests/test_calc.py fails; find the root cau… | software.analysis.diagnose_and_architect.v1 |  |
+| 31 | debug | ✅ | Explain why the function total in canonical/astra_runtime/tmp/swe_advanced_probe/31_debug/pkg/util.py returns N… | software.analysis.diagnose_and_architect.v1 |  |
+| 32 | debug | ❌ | Find the commit that broke the test in canonical/astra_runtime/tmp/swe_advanced_probe/32_debug/tests/test_calc.… | git.history.bisect_regression.v1 | STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAP |
+| 33 | refactor | ❌ | Move the function add from canonical/astra_runtime/tmp/swe_advanced_probe/33_refactor/pkg/mod.py into canonical… | python.refactor.move_symbol.v1 | CAPABILITY_REFUSED:TARGET_SYMBOL_COLLISION:add |
+| 34 | refactor | ✅ | Split canonical/astra_runtime/tmp/swe_advanced_probe/34_refactor/pkg/calc.py into one module per function. | python.swe.transform_and_synthesize.v1 |  |
+| 35 | refactor | ✅ | Rename the public function total in canonical/astra_runtime/tmp/swe_advanced_probe/35_refactor/pkg/util.py to s… | python.refactor.rename_symbol.v1 |  |
+| 36 | refactor | ✅ | Replace every use of the deprecated function mul in canonical/astra_runtime/tmp/swe_advanced_probe/36_refactor/… | python.swe.transform_and_synthesize.v1 |  |
+| 37 | refactor | ✅ | Add type hints to every function in canonical/astra_runtime/tmp/swe_advanced_probe/37_refactor/pkg/calc.py. | python.swe.transform_and_synthesize.v1 |  |
+| 38 | refactor | ✅ | Extract the loop in the function total in canonical/astra_runtime/tmp/swe_advanced_probe/38_refactor/pkg/util.p… | python.refactor.extract_function.v1 |  |
 | 39 | review | ✅ | Review canonical/astra_runtime/tmp/swe_advanced_probe/39_review/pkg/service.py for API design problems. | software.analysis.diagnose_and_architect.v1 |  |
 | 40 | review | ✅ | Review canonical/astra_runtime/tmp/swe_advanced_probe/40_review/pkg/calc.py for security issues. | python.review.diff_security_gate.v1 |  |
-| 41 | review | ✅ | Audit the dependency list in canonical/astra_runtime/tmp/swe_advanced_probe/41_review/pyproject.toml fo… | software.analysis.diagnose_and_architect.v1 |  |
-| 42 | git | ❌ | Commit the changes in canonical/astra_runtime/tmp/swe_advanced_probe/42_git/pkg with a clear message. | git.repository.operate.v1 | R13_DECLARED_INPUT_UNBINDABLE:message |
-| 43 | git | ✅ | Create a branch named feature/x and commit canonical/astra_runtime/tmp/swe_advanced_probe/43_git/pkg/ca… | python.swe.transform_and_synthesize.v1 |  |
-| 44 | git | ⚠️ | Show me the diff of canonical/astra_runtime/tmp/swe_advanced_probe/44_git/pkg/calc.py against HEAD~1. | git.repository.operate.v1 | **FALSE PASS** — the stated revision was dropped, see §4/D2 |
-| 45 | git | ❌ | Cherry-pick the last commit onto a new branch. | — | NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT |
-| 46 | git | ❌ | Write the changelog entry for the last three commits. | — | NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT |
+| 41 | review | ✅ | Audit the dependency list in canonical/astra_runtime/tmp/swe_advanced_probe/41_review/pyproject.toml for known … | software.analysis.diagnose_and_architect.v1 |  |
+| 42 | git | ✅ | Commit the changes in canonical/astra_runtime/tmp/swe_advanced_probe/42_git/pkg with a clear message. | git.repository.operate.v1 |  |
+| 43 | git | ✅ | Create a branch named feature/x and commit canonical/astra_runtime/tmp/swe_advanced_probe/43_git/pkg/calc.py th… | python.swe.transform_and_synthesize.v1 |  |
+| 44 | git | ⚠️ | Show me the diff of canonical/astra_runtime/tmp/swe_advanced_probe/44_git/pkg/calc.py against HEAD~1. | git.repository.operate.v1 |  |
+| 45 | git | ❌ | Cherry-pick the last commit onto a new branch. | python.swe.transform_and_synthesize.v1 | CAPABILITY_REFUSED:PYTHON_SWE_REFUSED:TARGET_NOT_IN_STANDALONE_G |
+| 46 | git | ❌ | Write the changelog entry for the last three commits. | software.analysis.diagnose_and_architect.v1 | CAPABILITY_REFUSED:DIAGNOSE_ARCHITECT_REFUSED:GIT_READ_TARGET_NO |
 | 47 | design | ✅ | Design the API for a rate limiter and write an ADR. | software.analysis.diagnose_and_architect.v1 |  |
-| 48 | design | ✅ | Plan the migration of the package in canonical/astra_runtime/tmp/swe_advanced_probe/48_design/pkg from … | software.analysis.diagnose_and_architect.v1 |  |
-| 49 | design | ✅ | Write a design document for splitting canonical/astra_runtime/tmp/swe_advanced_probe/49_design/pkg into… | software.analysis.diagnose_and_architect.v1 |  |
+| 48 | design | ✅ | Plan the migration of the package in canonical/astra_runtime/tmp/swe_advanced_probe/48_design/pkg from Python 3… | software.analysis.diagnose_and_architect.v1 |  |
+| 49 | design | ✅ | Write a design document for splitting canonical/astra_runtime/tmp/swe_advanced_probe/49_design/pkg into two pac… | software.analysis.diagnose_and_architect.v1 |  |
 
 ---
 
-## 2. The 14 refusals, and what each one really is
+## 2. The 13 refusals, and what each one really is
 
 | # | sentence | what happened | the real problem | class |
 |---:|---|---|---|---|
-| 1 | Fix the off-by-one bug in canonical/astra_runtime/tmp/swe_advanced_probe/01_p… | CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSF… | `code.polyglot.transform_and_verify.v1` refused `CPP_NO_APPLICABLE_TRANSFORM`. The fixture's `sum` is already correct, so there is no bug to fix — the honest answer is a verified *diagnosis* ('sum already returns the right total'), and the machine has no C++ defect localiser to say it with. | already-satisfied + no localiser |
-| 6 | Add a NOT NULL constraint on users.email in canonical/astra_runtime/tmp/swe_a… | CAPABILITY_REFUSED:SQL_UNSUPPORTED_DDL_EDIT | `SQL_UNSUPPORTED_DDL_EDIT`. The fixture's `users.email` is **already** `TEXT NOT NULL`. The request is already satisfied; the row cannot certify that, so it refuses. | already-satisfied |
-| 7 | Repair the C++ source file canonical/astra_runtime/tmp/swe_advanced_probe/07_… | CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSF… | Same row, same cause, same fixture: the file already compiles cleanly. The machine refuses instead of certifying the end state, because no C++ localiser exists to say 'nothing to repair'. | already-satisfied + no localiser |
-| 11 | Pin the dependency versions in canonical/astra_runtime/tmp/swe_advanced_probe… | CAPABILITY_REFUSED:PYPROJECT_ALREADY_PINNED… | `PYPROJECT_ALREADY_PINNED_OR_EMPTY`. The fixture declares no `[project.dependencies]`, so the fixture cannot decide this sentence at all. Fixture, not capability. | fixture |
-| 12 | Vendor the single dependency of the project in canonical/astra_runtime/tmp/sw… | CAPABILITY_REFUSED:NO_DECLARED_DEPENDENCY_T… | `NO_DECLARED_DEPENDENCY_TO_VENDOR` — the same fixture defect. | fixture |
-| 16 | Quarantine the flaky test in canonical/astra_runtime/tmp/swe_advanced_probe/1… | CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED | `NO_FLAKY_TEST_DETECTED`. The test is deterministic, so the premise is false; the right answer is the measurement ('not flaky in N runs'), which nothing in the registry can produce today. | verdict-as-refusal |
-| 19 | Benchmark canonical/astra_runtime/tmp/swe_advanced_probe/19_perf/pkg/calc.py … | NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT | No plan was decisive. The operation **exists** (`benchmark_git_ref`) and the fixture has one commit, so the comparison target `HEAD~1` does not exist. Declaration gap + fixture gap. | declaration + fixture |
-| 21 | Find the race condition in canonical/astra_runtime/tmp/swe_advanced_probe/21_… | STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY… | Routed to a *writer* and refused `STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER`. `find_race_condition` is implemented in the same registry and **runs today** (measured in §2.1); no `provides` entry names it, so the door never sees it. | declaration |
-| 26 | Add a regression test that reproduces the bug in canonical/astra_runtime/tmp/… | STATED_SWE_EFFECT_UNSERVED | `STATED_SWE_EFFECT_UNSERVED`, nothing selected. `write_regression_test` is implemented as an `op` of `python.swe.transform_and_synthesize.v1`; no declared effect stands for it. | declaration |
-| 32 | Find the commit that broke the test in canonical/astra_runtime/tmp/swe_advanc… | STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANC… | `git.history.bisect_regression.v1` was selected, its `source_root` refused to bind on a *test* path, and the provenance gate then refused the answer because the row declares no blame/changelog effect. Three defects stacked: binding, fixture (one commit), declaration. | binding + fixture + declaration |
-| 33 | Move the function add from canonical/astra_runtime/tmp/swe_advanced_probe/33_… | CAPABILITY_REFUSED:add | `TARGET_SYMBOL_COLLISION:add` — both modules already define `add`, so the move is genuinely ambiguous. This is an **honest** refusal; what is missing is merge-on-collision, not routing. | honest refusal |
-| 42 | Commit the changes in canonical/astra_runtime/tmp/swe_advanced_probe/42_git/p… | R13_DECLARED_INPUT_UNBINDABLE:message | Newly reachable on the merged tree: routing now prefers `git.repository.operate.v1` over the SWE row, and that row refuses `R13_DECLARED_INPUT_UNBINDABLE:message` because `_op_commit` requires a *stated* message. The sentence delegates it — 'with a clear message' means 'you write one'. The previous answer invented `Update pkg` and committed; the honest middle is to derive the message from the staged diff. | delegated argument |
-| 45 | Cherry-pick the last commit onto a new branch. | NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT | No row. `git_cherry_pick` is implemented and refuses only because the fixture has one commit (`GIT_CHERRY_PICK_REQUIRES_AT_LEAST_TWO_COMMITS`, measured below). Declaration gap + fixture gap. | declaration + fixture |
-| 46 | Write the changelog entry for the last three commits. | NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT | No row. `git_changelog` is implemented and **runs today** (measured below, produced entries). A pure declaration gap: the door ranks on `provides`, and no row declares a changelog effect. | declaration |
+| 1 | Fix the off-by-one bug in `…/01_polyglot/src/main.cpp` so that `sum` returns the right total | `CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` | The fixture's `sum` is already correct, so there is no bug to fix — the honest answer is a verified *diagnosis* ("sum already returns the right total"), and the machine has no C++ defect localiser to say it with. | already-satisfied + no localiser |
+| 6 | Add a NOT NULL constraint on `users.email` in `…/06_polyglot/schema.sql` | `CAPABILITY_REFUSED:SQL_UNSUPPORTED_DDL_EDIT` | The fixture's `users.email` is **already** `TEXT NOT NULL`. The request is already satisfied; the row cannot certify that, so it refuses. | already-satisfied |
+| 7 | Repair the C++ source file `…/07_polyglot/src/main.cpp` so that it compiles cleanly | `CAPABILITY_REFUSED:CPP_NO_APPLICABLE_TRANSFORM` | Same row, same cause, same fixture: the file already compiles under `g++`. The machine refuses instead of certifying the end state. | already-satisfied + no localiser |
+| 11 | Pin the dependency versions in `…/11_build/pyproject.toml` | `CAPABILITY_REFUSED:PYPROJECT_ALREADY_PINNED_OR_EMPTY` | The fixture declares no `[project.dependencies]`, so the fixture cannot decide this sentence at all. Fixture, not capability. | fixture |
+| 12 | Vendor the single dependency of the project in `…/12_build` | `CAPABILITY_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR` | The same fixture defect. | fixture |
+| 16 | Quarantine the flaky test in `…/16_ci/pkg/test_calc.py` | `CAPABILITY_REFUSED:NO_FLAKY_TEST_DETECTED` | The test is deterministic, so the premise is false; the right answer is the measurement ("not flaky in N runs"), which no row produces today. | verdict-as-refusal |
+| 19 | Benchmark `…/19_perf/pkg/calc.py` against the version in `git HEAD~1` | `STATED_SWE_EFFECT_UNSERVED` (nothing selected) | `benchmark_git_ref` is implemented. The fixture now **has** two commits (#6525), so `HEAD~1` resolves — and the sentence still selects nothing, which isolates the remaining cause to **declaration**: no row declares a benchmark effect. | declaration |
+| 21 | Find the race condition in `…/21_systems/pkg/service.py` | `STATED_ANSWER_NOT_PROVIDED:STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER` | Routed to a *writer* and refused for it. `find_race_condition` is implemented in the same registry and **runs today** (§2.1); no `provides` entry names it, so the door never sees it. | declaration |
+| 26 | Add a regression test that reproduces the bug in `…/26_tests/pkg/mod.py` | `STATED_SWE_EFFECT_UNSERVED` (nothing selected) | `write_regression_test` is an implemented `op` of the SWE row; no declared effect stands for it. | declaration |
+| 32 | Find the commit that broke the test in `…/32_debug/tests/test_calc.py` | `STATED_ANSWER_NOT_PROVIDED:STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY` | The row (`git.history.bisect_regression.v1`) is reached, its `source_root` refuses to bind on a *test* path, and the provenance gate then refuses the answer because the row declares no blame/changelog effect. Binding + declaration. | binding + declaration |
+| 33 | Move the function `add` from `…/33_refactor/pkg/mod.py` to `…/33_refactor/pkg/util.py` | `CAPABILITY_REFUSED:TARGET_SYMBOL_COLLISION:add` | Both modules already define `add`, so the move is genuinely ambiguous. **Honest** refusal; what is missing is merge-on-collision, not routing. | honest refusal |
+| 45 | Cherry-pick the last commit onto a new branch. | `CAPABILITY_REFUSED:PYTHON_SWE_REFUSED:TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | `git_cherry_pick` is implemented and the fixture now has the two commits it needs. The failure moved to **scope**: the sentence names no repository, so the row binds `.` — the checkout the door is standing in — and the adapter refuses to operate on the host repository. Correct refusal, wrong route: `git.repository.operate.v1` already has the unqualified-repository rule (`repo_root="."`) for exactly this shape. | routing + declaration |
+| 46 | Write the changelog entry for the last three commits. | `CAPABILITY_REFUSED:DIAGNOSE_ARCHITECT_REFUSED:GIT_READ_TARGET_NOT_SPECIFIED` | `git_changelog` is implemented and **runs today** (§2.1). The route is now right (the analysis row), and the adapter refuses because a history read with no stated file passes `target=None`. A changelog is a question about the repository, not about a file — one condition away. | binding |
 
 ### 2.1 What is already written behind those refusals — measured, not inferred
 
-Each operation below was called **directly** on a throw-away repository to separate 'the machine cannot' from
-'the door cannot see it':
+Each operation below was called **directly**, on a throw-away repository, to separate "the machine cannot" from
+"the door cannot see it". The second column is what the call returned, not what it should return:
 
 | operation | implemented in | direct call result |
 |---|---|---|
 | `git_changelog` | `software.analysis.diagnose_and_architect_v1` | **PASS** — produced `- 34b18dd baseline (b)` |
 | `find_race_condition` | same | **PASS** |
-| `git_cherry_pick` | `python_swe_transform_and_synthesize_v1` | refused `GIT_CHERRY_PICK_REQUIRES_AT_LEAST_TWO_COMMITS` — the **fixture** has one commit |
-| `benchmark_git_ref` | `software.analysis.diagnose_and_architect_v1` | refused `GIT_REF_NOT_AVAILABLE:HEAD~1` — the **fixture** has one commit |
-| `git_branch_and_commit` | `python_swe_transform_and_synthesize_v1` | refused `GIT_NOTHING_CHANGED_TO_COMMIT` — the **fixture** is clean |
+| `extract_constant` | `python_swe_transform_and_synthesize_v1` | routed correctly, then refused `NO_MAGIC_CONSTANT_FOUND` on a file that contains `= 3` — the *matcher*, not the route |
+| `git_cherry_pick` | `python_swe_transform_and_synthesize_v1` | refused `GIT_CHERRY_PICK_REQUIRES_AT_LEAST_TWO_COMMITS` on the old one-commit fixture; the fixture is fixed (#6525) and the refusal is now `TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` |
+| `benchmark_git_ref` | `software.analysis.diagnose_and_architect_v1` | refused `GIT_REF_NOT_AVAILABLE:HEAD~1` on the old fixture; the fixture is fixed and the sentence now selects no row at all — the cause is declaration |
+| `git_branch_and_commit` | `python_swe_transform_and_synthesize_v1` | refused `GIT_NOTHING_CHANGED_TO_COMMIT` — the fixture is clean |
 
-So of the 14 refusals: **2 are pure declaration gaps over working code**, **3 need a two-commit fixture**, **3 need
-a declaration**, **2 are fixture-only**, **2 are 'the stated end state already holds'**, **1 is an honest refusal**
-(`#33`, a real symbol collision), and **1 is a row that demands a stated message the sentence delegated** (`#42`,
-newly reachable on the merged tree because routing now prefers the git row).
+**#6525 corrected this table's most convenient reading.** V4 blamed the fixture for `#19` and `#45`; the
+two-commit fixture landed and both sentences still refuse, so the fixture was necessary and not sufficient.
+The remaining causes are declaration (`#19`, `#21`, `#26`, `#46`) and routing/scope (`#45`, `#21`).
 
----
+Of the 13 refusals, counted once each:
 
-## 3. The capability matrix: 42 of 54 ordinary cases
+| class | cases | what it would take |
+|---|---:|---|
+| declaration gap over working code | **5** — `#19`, `#21`, `#26`, `#45`, `#46` | name the operation in `provides` (and, for `#45`, give the unqualified-repository sentence the scope the git row already supports) |
+| fixture cannot decide | **2** — `#11`, `#12` | a fixture that declares one dependency |
+| the stated end state already holds | **3** — `#1`, `#6`, `#7` | a verified "already true" verdict, which the door already has as `already_satisfied` |
+| a verdict the machine cannot state | **1** — `#16` | a repeat-run flakiness measurement |
+| binding | **1** — `#32` | `source_root` declared `path_file_or_dir` |
+| honest refusal | **1** — `#33` | nothing: two modules define `add`, and merging them is not what the sentence asked |
+
+**Five of thirteen are a missing line in a declaration.** That is the whole shape of this inventory.
+
+## 3. The capability matrix: 44 of 54 registrations (53 distinct cases)
 
 | case | status | what it really is |
 |---|---|---|
@@ -148,21 +163,27 @@ newly reachable on the merged tree because routing now prefers the git row).
 | `extract_constant` | `FAIL_CLOSED__CAPABILITY_REFUSED_NO_MAGIC_CONSTANT_FOUND` | `extract_constant` is an implemented `op` of the SWE row and is now *reached* on the merged tree — and it refuses `NO_MAGIC_CONSTANT_FOUND` on a fixture that plainly contains `3`. The route is fixed; the match is not. |
 | `tests_from_docstrings` | `FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT` | `tests_from_docstrings` is implemented; the door refuses to bind the row's `source_root` (`BINDING_REFUSED:source_root:0_existing_directories_named`, measured directly) because the scope is not declared `path_file_or_dir`. Binding gap. |
 | `find_definition` | `FAIL__RAW_GOAL_COMPILATION_GAP` | Nothing declares 'where is a symbol defined'. The AST index rows provide an index and references, not a lookup by name. No row. |
-| `git_commit` | `FAIL_CLOSED__CAPABILITY_REFUSED_NOT_A_GIT_REPOSITORY` | `git.repository.operate.v1` refuses `NOT_A_GIT_REPOSITORY`: this matrix fixture is not seeded as a repository, so the case cannot be decided by the machine it measures. Fixture. |
-| `git_branch` | `FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED` | `git_branch_and_commit` is implemented. 'Create a branch named feature/x' states no operation the grammar reads, so no plan is built. Stated-operation gap. |
+| `git_commit` | **REAL** since #6525 | It refused `NOT_A_GIT_REPOSITORY` because the sentence names a *directory inside* a repository (`…/git_commit/pkg`) and the binding used it as the repository root. The binding now walks up to the first enclosing `.git` and keeps the subtree as the target, and the commit stages only that subtree. |
+| `git_branch` | `FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED` | `git_branch_and_commit` is implemented. 'Create a branch named feature/x' states no operation the grammar reads (`stated_git_operations` has no `branch` verb), so no plan is built. Stated-operation gap. |
 | `missing_source` | `FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED` | The named file does not exist. The refusal is **honest**; only its cause (`STATED_SWE_EFFECT_UNSERVED`) fails to say so. |
 | `ambiguous_fix_it` | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` | 'fix it' with no antecedent. **Honest** refusal, correctly fail-closed. |
 | `bisect_regression` | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | `git.history.bisect_regression.v1` is reached, then refuses twice: the row's `source_root` will not bind on a *test* path (measured directly: `BINDING_REFUSED:source_root:0_existing_directories_named`) and the answer gate refuses the provenance claim because the row declares no blame/changelog effect. Binding + declaration + a one-commit fixture. |
-| `perf_review` | `FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT` | The review row runs and returns a verdict (`REVIEW_RAN_AND_RETURNED_A_VERDICT`), and the door treats a failing verdict as a refusal. That is a *correct* refusal of a request the code does not satisfy; it needs a fixture with something to be right about. |
+| `perf_review` | **REAL** since #6525 | It refused `REVIEW_RAN_AND_RETURNED_A_VERDICT`: a performance review of a *clean* one-commit tree has nothing to review, so the reviewer's verdict was "nothing to compare" and the door read the verdict as a failure. With two commits plus a pending change the review has a real diff, and it passes. The fixture was the whole gap. |
 | `delete_file` | `FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN` | No row and no `op` deletes a file anywhere in the registry. Genuine missing capability. |
 | `idempotent_refusal` | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` | 'fix it', a second spelling of the same sentence. **Honest** refusal. |
 
 Zero damaged, zero false. `lint` and `typecheck` were two of these refusals an hour before this measurement;
-**restoring the substrate closed both without touching a line of runtime code** (§5).
+**restoring the substrate closed both without touching a line of runtime code** (§5). `git_commit` and `git_diff`
+were closed by #6525 the same way: the contract, the binding and the adapter already existed, and the sentence's
+own arguments were being dropped on the floor.
+
+**The instrument counts one case twice.** 54 registrations, 53 distinct names — `measure_coverage` is registered
+in two lanes and both copies are marked REAL, so the headline "44 of 54" is really **43 of 53 independent
+cases**. Measured: `collections.Counter(r["case"] for r in rows)` → `measure_coverage: 2`.
 
 ---
 
-## 4. The six defect classes behind all 26 refusals
+## 4. The six defect classes behind all 23 refusals
 
 ### D1 — Declaration blindness (≈8 cases). The biggest problem in the machine.
 
@@ -203,9 +224,22 @@ sentence's `HEAD~1` has nowhere to bind, is dropped, and the row answers the que
 `output_verified: True` without an observed effect class, the worst one this repository names, and the census scores
 it as a pass because its oracle only asks whether the run was verified and the tree was untouched.
 
-Two fixes exist in the repo and compose: declare `rev` on the row (`OPS` already carries `diff`/`show`/`log`), and
-let `declared_input_derivation_v1` — which already reads `HEAD~1` — bind it. The door's `R11_STATED_PAYLOAD_SLOT_MISSING`
-rule is exactly the guard for the unbound case, and it fires today for other payloads.
+Two fixes existed in the repo and composed, and **#6525 landed both**: `rev` is declared on the row (`OPS`
+already carried `diff`/`show`/`log`), `declared_input_derivation_v1` binds it, and the adapter now proves the
+revision resolves before reading it. The same commit closed the D6 instance at `#42` (a delegated message is
+composed from the staged diff) and the D1 instance at `git_commit` (a stated directory inside a repository is
+scoped to that repository).
+
+Measured after #6525 on `f9134956`, same two-commit repository:
+
+```
+status   : PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED
+effect   : rev=HEAD~1  rev_sha=…  file_count=1  patch_bytes=185
+patch    : @@ -1 +1 @@  -A = 1  +A = 2
+```
+
+The class is not gone, it moved: `#45` and `#46` are the same shape (a stated object with no slot to bind it in —
+a repository with no scope, a history read with no file), and `D1` keeps producing them.
 
 ### D3 — Silent verification degradation (3 adapters).
 
@@ -214,11 +248,12 @@ rule is exactly the guard for the unbound case, and it fires today for other pay
 `gate: PASS`. On this image `rustc`, `go` and `javac` are absent, so three 'compiler-verified' languages are
 pattern-verified and reported as passing. The flag is honest; the gate it feeds is not.
 
-### D4 — A row exists and the sentence never reaches it (≈7 cases).
+### D4 — A row exists and the sentence never reaches it (6 cases today, 7 before #6525).
 
 `find_race_condition` (#21), `git_changelog` (#46), `git_cherry_pick` (#45), `write_regression_test` (#26),
 `extract_constant`, `tests_from_docstrings` and `extract_function` all live behind rows the door selected or could
-have selected, and no sentence reached the operation. Two of those are binding defects rather than ranking ones:
+have selected, and no sentence reached the operation. (`git_commit` was on this list; #6525 closed it by binding
+the repository the stated directory lives in.) Two of those are binding defects rather than ranking ones:
 `source_root` is refused for a *test* path (`tests_from_docstrings`, `bisect_regression`) because the row does not
 declare its scope as `path_file_or_dir`, and `git_branch_and_commit` is never reached because
 `stated_git_operations` does not read 'Create a branch named X'.
@@ -226,7 +261,9 @@ declare its scope as `path_file_or_dir`, and `git_branch_and_commit` is never re
 ### D5 — The fixture cannot decide the sentence (5 cases).
 
 `#11`/`#12` name a dependency the fixture does not declare; `#1`/`#6`/`#7` name a defect the fixture does not have;
-`#19`/`#32`/`#45`/`#46` need a history and `seed_repository` commits exactly once. A census whose fixture cannot
+`#19`/`#32`/`#45`/`#46` needed a history and `seed_repository` committed exactly once — **fixed in #6525**, which
+now seeds two commits plus a pending change. The measured return on that fix was zero served sentences and two
+honest causes instead of one convenient excuse: `#19` and `#45` still refuse, now for declaration and scope. A census whose fixture cannot
 separate 'the machine cannot' from 'the fixture gave it nothing' certifies nothing — the same law this harness
 already applies to its oracles.
 
@@ -245,8 +282,8 @@ which reads to a caller exactly like a missing capability.
 |---|---|---|
 | kernel modules importable | **8 of 10 absent** by direct import | **10 / 10** (`pytest`, `hypothesis`, `z3`, `crosshair`, `coverage`, `mypy`, `ruff`, `bandit`, `tree_sitter`, `tree_sitter_languages`) |
 | binaries | 6 / 6 | 6 / 6 (`git gcc g++ make node npm`; **absent**: `rustc go javac tsc cargo cmake ninja docker gdb strace valgrind`) |
-| capability matrix on `6aa5dab` | 42 REAL | **44 REAL** — exactly `lint` and `typecheck` closed |
-| advanced census on `6aa5dab` | 36 / 49 | 36 / 49 — unchanged; the advanced refusals are structural, not substrate |
+| capability matrix on `6aa5dab` | 41 REAL | **43 REAL** — exactly `lint` and `typecheck` closed (the 44th REAL in §3 is `git_commit`, closed later by #6525) |
+| advanced census on `6aa5dab` | 35 / 49 | 35 / 49 — unchanged; the advanced refusals are structural, not substrate |
 | wall clock | — | **15 s** |
 
 The script exists, verifies itself (`SUBSTRATE_READY`, parser version match) and pins the kernel by SHA-256. No
@@ -270,8 +307,8 @@ Absent and load-bearing for the *advanced* bar, cheapest first:
 
 | instrument | median | p90 | slowest observed |
 |---|---:|---:|---|
-| advanced census (49) | **36 ms** | 235 ms | `#25` mutation score 451 ms, `#40` security review 285 ms |
-| capability matrix (54) | **111 ms** | — | fixture rebuild dominates (each case re-creates a tree) |
+| advanced census (49) on this tree | **38 ms** | 185 ms | `#25` mutation score 451 ms, `#40` security review 285 ms |
+| capability matrix (54 registrations) | **111 ms** | — | fixture rebuild dominates (each case re-creates a tree) |
 
 Speed is **not** the current limit on capability: the door answers in tens of milliseconds, end to end. The two
 places where time is real are the composed chain and re-parsing large artifacts, and both already carry named fixes
@@ -289,6 +326,7 @@ at ~38 ms per sentence it is acceptable, and it becomes a defect the moment it g
 | laws recorded by the last complete run (V3, `bbc00a7`) | 625 | 20 red |
 | GitHub workflows | 323 | 1 gates the advanced census (`swe-advanced-census.yml`, floor 5/49) |
 | workflows gating the 54-case matrix | **0** | the matrix has world oracles and no gate |
+| duplicate case in the matrix | **1** | `measure_coverage` is registered twice; 54 registrations, 53 independent cases |
 | workflows gating the surface census | 1 | 28/28 |
 
 Three consequences worth stating plainly:
@@ -298,10 +336,14 @@ Three consequences worth stating plainly:
 2. **The strongest instrument has no floor.** The matrix has 54 cases with *world oracles* and nothing fails a
    build when it regresses. The advanced census got its floor two changes ago and immediately caught a real
    deletion that three inventories had argued for.
-3. **The matrix is deterministic only when it rebuilds its trees.** Two full runs on the same tree differ in exactly
-   the two cases the substrate restore changed (`lint`, `typecheck`) and nowhere else; re-running a single goal
-   against a fixture a previous run left behind can return a different status, which is why every cause in §3 is
-   quoted from a fresh direct run against a fresh tree.
+3. **The matrix is deterministic, and that is measured.** Two back-to-back full runs on `f9134956` produced
+   **0 differing statuses across 54 records** (compared field by field). It also **counts one case twice**
+   (`measure_coverage`), so the headline is 43 of 53 distinct cases, not 44 of 54 — an instrument that double-counts
+   inflates its own score in both directions and nothing fails when it does.
+4. **The census can score a wrong answer as a pass.** `#44` was ✅ in every version of this document until #6525:
+   the run was verified and the tree untouched, and the oracle never compared the answer to the question. The
+   census's oracles check *effects on disk*, not *answers to sentences*; that is the instrument's blind spot, and it
+   is the same blind spot the door had.
 
 ---
 
@@ -333,9 +375,9 @@ Every item reuses a mechanism that is already in this repository. No new primiti
 | # | change | cases | mechanism already present | cost |
 |---:|---|---:|---|---|
 | 1 | Run `scripts/restore_substrate_v1.py` in CI and in the dev boot | **+2 measured** (lint, typecheck); unlocks the hypothesis / z3 / crosshair rows | the script, the hashed manifest and the review-tool file all exist | 15 s, one workflow step |
-| 2 | Derive each adapter's `provides` from its own dispatch table instead of hand-listing 8, 6 and 13 effects for 39, 29 and 27 operations | **+6 candidates**: #21, #26, #45, #46, matrix `extract_constant`, `tests_from_docstrings` | the adapters already enumerate every `op`; the registry is already generated from adapters for 293 of 443 rows | one generator pass + recompile |
-| 3 | Seed a three-commit fixture with a planted regression | arms #19, #32, #45, #46 — four cases that cannot be decided today | `execution_guard/swe_git_fixture_v1.py`, one function, already the single owner of the fixture | ~20 lines |
-| 4 | Add `rev` to `git.repository.operate.v1`'s contract and honour it in `_op_diff` / `_op_show` / `_op_log` | removes the only **false pass**; enables #19 | `OPS` already includes diff/show/log; `declared_input_derivation_v1` already reads `HEAD~1` | ~15 lines + 1 test |
+| 2 | Derive each adapter's `provides` from its own dispatch table instead of hand-listing 8, 6 and 13 effects for 39, 29 and 27 operations | **+6 candidates**: #21, #26, #45, #46, matrix `extract_constant`, `tests_from_docstrings` | the adapters already enumerate every `op`; the registry is already generated from adapters for 293 of 443 rows | one generator pass + recompile. **Measured trap:** a naive union of the 95 op names into `provides` makes the bag-of-tokens scorer *worse* (35 → 33 served) because `add_benchmark` contributes the token `add`; the derivation grammar per row (`declared_input_derivation_v1.derive` already returns the operation) is the matching signal, and it scores on phrases, not tokens |
+| 3 | Seed a multi-commit fixture with a planted regression | **landed in #6525** (two commits + a pending change). Measured return: **0 served**, two honest causes instead of one excuse — #19 and #45 moved from "the fixture gave it nothing" to "no row declares it" and "wrong scope" | `execution_guard/swe_git_fixture_v1.py`, one function | done |
+| 4 | Add `rev` to `git.repository.operate.v1`'s contract and honour it in `_op_diff` | **landed in #6525** — removes the only **false pass**; 11 tests | `OPS` already included diff/show/log; `declared_input_derivation_v1` already read `HEAD~1` | done |
 | 5 | Declare `source_root` / `worktree_path` as `path_file_or_dir` on the rows that provably accept one file | **+2** (matrix `tests_from_docstrings`, #32) | `goal_front_compiler_v1.bind_typed_key` already honours exactly this declaration | registry edit only |
 | 6 | Read 'Create a branch named X' as a stated git operation | **+1** (matrix `git_branch`) | `declared_input_derivation_v1.stated_git_operations` already owns that grammar | one clause |
 | 7 | Let the polyglot and analysis rows certify 'the stated end state already holds' instead of refusing | +2 … +6 depending on how the census scores them (#1, #6, #7, #11, #12, #16) | the door already has `already_satisfied` and uses it for repairs | one flag + one test |
@@ -354,10 +396,11 @@ re-measured by the instrument it claims to move, which is the rule this reposito
 1. **The machine's capability is larger than its declaration.** 101 operations, 36 declared effects, 11 rows
    reached. Almost every refusal on this page is a sentence the machine could have answered if the door could
    see the operation. That is a bookkeeping problem whose fix is a generator, not a research problem.
-2. **There is exactly one false pass, and it is a dropped argument.** Measured: a sentence that states `HEAD~1`
-   against a repository whose `HEAD~1` diff is one hunk returns **an empty row set** and
-   `PASS__..._EXECUTED_AND_VERIFIED`. The census scores it as served. It is cheap to fix (§9 item 4) and it is
-   the most dangerous line on this page, because a false pass is worth less than a refusal.
+2. **There was exactly one false pass, and it was a dropped argument.** Measured: a sentence that states `HEAD~1`
+   against a repository whose `HEAD~1` diff is one hunk returned **an empty row set** and
+   `PASS__..._EXECUTED_AND_VERIFIED`. The census scored it as served in every prior version of this document.
+   **Closed in #6525**; the receipt now names the revision, its sha and the hunk. The census's oracle still cannot
+   see this class (it checks the tree, not the answer), so the next one will not be caught by the census either.
 3. **The instrument that could catch all of this has no floor.** The 54-case matrix has world oracles and no gate;
    the suite has 2,248 modules and no sitting long enough to finish it. Every improvement in §9 without item 10
    will regress silently within a week.
@@ -373,7 +416,7 @@ python3 hardcore_swe_surface_probe_20261030.py --jobs 6 --json /tmp/surf.json
 python3 scripts/restore_substrate_v1.py --check       # substrate verdict, no install
 ```
 
-## Appendix B — the ten matrix refusals, verbatim
+## Appendix B — the ten matrix refusals, verbatim (after #6525)
 
 | case | goal |
 |---|---|
@@ -381,12 +424,10 @@ python3 scripts/restore_substrate_v1.py --check       # substrate verdict, no in
 | `extract_constant` | Replace the magic number 3 in canonical/astra_runtime/tmp/frontier_matrix/extract_constant/pkg/calc.py with a named con… |
 | `tests_from_docstrings` | Generate tests from the docstrings in canonical/astra_runtime/tmp/frontier_matrix/tests_from_docstrings/pkg/mod.py. |
 | `find_definition` | Where is the function mul defined? |
-| `git_commit` | Commit the current changes in canonical/astra_runtime/tmp/frontier_matrix/git_commit/pkg with the message 'fix calc'. |
 | `git_branch` | Create a branch named feature/x. |
 | `missing_source` | fix canonical/astra_runtime/tmp/frontier_matrix/missing_source/pkg/missing.py |
 | `ambiguous_fix_it` | fix it |
 | `bisect_regression` | Bisect the regression that broke the test in canonical/astra_runtime/tmp/frontier_matrix/bisect_regression/pkg/test_cal… |
-| `perf_review` | Run a performance review of canonical/astra_runtime/tmp/frontier_matrix/perf_review/cov/calc.py. |
 | `delete_file` | Delete canonical/astra_runtime/tmp/frontier_matrix/delete_file/pkg/legacy.py. |
 | `idempotent_refusal` | fix it |
 
