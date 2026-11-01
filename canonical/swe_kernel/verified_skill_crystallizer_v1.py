@@ -42,6 +42,7 @@ import time
 from typing import Any, Callable, Mapping
 
 SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_CRYSTALLIZER_V1"
+BUNDLE_SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_BUNDLE_V1"
 
 _KEYWORDS_KEEP = frozenset({
     # Python / Go / Rust / TS / C++ / SQL structural keywords & builtins that carry semantics
@@ -116,6 +117,85 @@ def _default_db_path() -> pathlib.Path:
     return target
 
 
+def _malformed_rule_reason(rule: Mapping[str, Any]) -> str | None:
+    """Why this payload cannot be applied, or ``None`` if it is a rule the engine understands.
+
+    Checked structurally rather than by trying it on a sample, because a correct rule simply may
+    not match an arbitrary sample and "did not apply here" is not "is not a rule".
+    """
+    for field in ("pattern_tokens", "replacement_tokens"):
+        tokens = rule.get(field)
+        if not isinstance(tokens, list) or not tokens:
+            return f"MISSING_{field.upper()}"
+        for token in tokens:
+            if not (isinstance(token, (list, tuple)) and len(token) == 2):
+                return f"MALFORMED_{field.upper()}"
+    if not str(rule.get("language") or ""):
+        return "MISSING_LANGUAGE"
+    return None
+
+
+def skill_identity(rule: Mapping[str, Any]) -> str:
+    """The content address of a rule, recomputed from the rule itself.
+
+    ``anti_unify_code_rule`` derives ``skill_id`` from a canonical blob of (language, error class,
+    pattern, replacement). Recomputing it here is what lets an imported bundle be checked instead
+    of trusted: an entry whose stated id does not match its own payload is not that rule, and
+    admitting it would put someone else's bytes behind a verified rule's identity.
+    """
+    rule_blob = json.dumps(
+        {
+            "lang": rule.get("language"),
+            "err": rule.get("error_class"),
+            "pat": rule.get("pattern_tokens"),
+            "rep": rule.get("replacement_tokens"),
+        },
+        separators=(",", ":"),
+    )
+    return "skill_" + hashlib.sha256(rule_blob.encode("utf-8")).hexdigest()[:16]
+
+
+def default_origin() -> str:
+    """A short, non-secret name for where a rule was learned.
+
+    Machine identity is worth recording because a rule that only works on one image is exactly
+    the failure this is meant to expose. It is a hostname and a checkout name, not a path and not
+    a credential.
+    """
+    override = os.environ.get("BRAIN_SKILL_ORIGIN")
+    if override:
+        return override
+    try:
+        node = os.uname().nodename
+    except Exception:  # pragma: no cover - non-POSIX
+        node = "unknown"
+    return f"{node}:{_repo_root().name}"
+
+
+def _seed_bundle_path() -> pathlib.Path:
+    """Where the repository ships its lessons, so they reach a machine that has never run anything.
+
+    The SQLite store is gitignored on purpose -- it is generated state. That also means it does not
+    travel: a second checkout starts empty, and a checkout inside a fresh sandbox starts empty too.
+    Measured 2026-11-01: the store held 6 rules at the end of one session and 0 at the start of the
+    next, so "permanently learned" was still false in the only sense a second computer cares about.
+
+    A bundle is small, textual, content-addressed and reviewable, so it can live in version control.
+    The database stays the fast local index; the bundle is the memory that ships.
+    """
+    override = os.environ.get("BRAIN_SKILL_SEED_BUNDLE")
+    if override:
+        return pathlib.Path(override)
+    return _repo_root() / "canonical" / "astra_runtime" / "skills" / "VERIFIED_SKILLS_BUNDLE_V1.json"
+
+
+def sync_seed_bundle(db_path: pathlib.Path | None = None,
+                     bundle_path: pathlib.Path | None = None) -> int:
+    """Write the local store's rules to the shipped bundle. Returns the rule count written."""
+    store = VerifiedSkillStore(db_path=db_path, seed=False)
+    return store.export_to_file(bundle_path or _seed_bundle_path())
+
+
 def _connect(db_path: pathlib.Path) -> sqlite3.Connection:
     conn = sqlite3.connect(str(db_path), timeout=10.0)
     conn.execute("PRAGMA journal_mode=WAL")
@@ -136,6 +216,13 @@ def _connect(db_path: pathlib.Path) -> sqlite3.Connection:
         "CREATE INDEX IF NOT EXISTS idx_skills_lang_err "
         "ON crystallized_skills(domain, language, error_class)"
     )
+    # Provenance is appended to the table rather than baked into the primary key, so a store
+    # written before provenance existed opens without a migration step.
+    have = {r[1] for r in conn.execute("PRAGMA table_info(crystallized_skills)").fetchall()}
+    if "provenance_json" not in have:
+        conn.execute(
+            "ALTER TABLE crystallized_skills ADD COLUMN provenance_json TEXT NOT NULL DEFAULT '[]'"
+        )
     return conn
 
 
@@ -437,8 +524,20 @@ def verify_rule_on_mutated_twin(
 class VerifiedSkillStore:
     """SQLite WAL store of anti-unified, twin-verified skills (<1 ms lookup)."""
 
-    def __init__(self, db_path: pathlib.Path | None = None) -> None:
+    def __init__(self, db_path: pathlib.Path | None = None, *, seed: bool = True) -> None:
         self.db_path = db_path or _default_db_path()
+        self.seed_result: dict[str, Any] | None = None
+        if seed and not pathlib.Path(self.db_path).exists():
+            # A first run on a machine that has never learned anything: start from what the
+            # repository already knows rather than from nothing.
+            seed_path = _seed_bundle_path()
+            if seed_path.is_file():
+                try:
+                    self.seed_result = self.import_bundle(seed_path)
+                except Exception as exc:  # a bad seed must not make learning impossible
+                    self.seed_result = {"accepted": 0, "merged": 0, "refused": 1,
+                                        "refusals": [{"skill_id": None,
+                                                      "reason": type(exc).__name__}]}
 
     def crystallize_code_fix(
         self,
@@ -448,6 +547,7 @@ class VerifiedSkillStore:
         language: str,
         error_class: str = "GENERIC",
         twin_oracle: Callable[[str], bool] | None = None,
+        origin: str | None = None,
     ) -> dict[str, Any]:
         rule = anti_unify_code_rule(
             before_snippet,
@@ -463,11 +563,31 @@ class VerifiedSkillStore:
         conn = _connect(self.db_path)
         try:
             with conn:
+                entry = {
+                    "origin": origin or default_origin(),
+                    "at": round(time.time(), 3),
+                    "hits": 1,
+                }
+                # Re-learning a rule on a second machine is evidence about BOTH machines, so the
+                # provenance grows instead of the newest origin overwriting the older one.
+                row = conn.execute(
+                    "SELECT provenance_json FROM crystallized_skills WHERE skill_id = ?",
+                    (rule["skill_id"],),
+                ).fetchone()
+                try:
+                    provenance = json.loads(row[0]) if row and row[0] else []
+                except (TypeError, ValueError):
+                    provenance = []
+                if not any(isinstance(p, Mapping) and p.get("origin") == entry["origin"
+                           ] for p in provenance):
+                    provenance.append(entry)
                 conn.execute(
                     "INSERT INTO crystallized_skills "
-                    "(skill_id, domain, language, error_class, skeleton_fp, pattern_json, created_ts, verified_hits) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, 1) "
-                    "ON CONFLICT(skill_id) DO UPDATE SET verified_hits = verified_hits + 1",
+                    "(skill_id, domain, language, error_class, skeleton_fp, pattern_json, created_ts, "
+                    " verified_hits, provenance_json) "
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?) "
+                    "ON CONFLICT(skill_id) DO UPDATE SET verified_hits = verified_hits + 1, "
+                    " provenance_json = excluded.provenance_json",
                     (
                         rule["skill_id"],
                         rule["domain"],
@@ -476,6 +596,7 @@ class VerifiedSkillStore:
                         rule["skeleton_fp"],
                         json.dumps(rule, separators=(",", ":")),
                         time.time(),
+                        json.dumps(provenance, separators=(",", ":")),
                     ),
                 )
         finally:
@@ -544,6 +665,174 @@ class VerifiedSkillStore:
                     "from_crystallized_memory": True,
                 }
         return None
+
+    # ------------------------------------------------------------------ portability
+    # A store inside one checkout is durable but not portable: a second computer starts empty and
+    # two machines that learn for a month cannot pool anything. A bundle is the transport, and the
+    # design constraint is that importing must never be able to make recall less safe. It cannot:
+    # an imported rule is still only a hypothesis, and recall still runs the caller's verifier
+    # before returning a patch. The worst an untrusted bundle can do is waste a verification.
+
+    def export_bundle(self) -> dict[str, Any]:
+        """Every rule in this store, with provenance, as one JSON-serializable document."""
+        conn = _connect(self.db_path)
+        try:
+            rows = conn.execute(
+                "SELECT skill_id, domain, language, error_class, skeleton_fp, pattern_json, "
+                "created_ts, verified_hits, provenance_json FROM crystallized_skills "
+                "ORDER BY skill_id"
+            ).fetchall()
+        finally:
+            conn.close()
+        rules = []
+        for sid, domain, language, error_class, skeleton_fp, pattern_json, created_ts, hits, prov in rows:
+            try:
+                pattern = json.loads(pattern_json)
+            except (TypeError, ValueError):
+                continue  # a store row that cannot be parsed is reported by count(), never exported
+            try:
+                provenance = json.loads(prov or "[]")
+            except (TypeError, ValueError):
+                provenance = []
+            rules.append({
+                "skill_id": sid,
+                "domain": domain,
+                "language": language,
+                "error_class": error_class,
+                "skeleton_fp": skeleton_fp,
+                "created_ts": created_ts,
+                "verified_hits": hits,
+                "provenance": provenance,
+                "rule": pattern,
+            })
+        return {
+            "schema": BUNDLE_SCHEMA,
+            "origin": default_origin(),
+            "exported_ts": round(time.time(), 3),
+            "rule_count": len(rules),
+            "rules": rules,
+        }
+
+    def export_to_file(self, path: str | pathlib.Path) -> int:
+        bundle = self.export_bundle()
+        target = pathlib.Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(bundle, indent=1, sort_keys=True), encoding="utf-8")
+        return int(bundle["rule_count"])
+
+    def import_bundle(self, bundle: Mapping[str, Any] | str | pathlib.Path) -> dict[str, Any]:
+        """Merge a bundle into this store. Content-addressed, idempotent, and fail-closed per entry.
+
+        Merge rules, each chosen because the alternative loses information:
+
+        * identity is the recomputed content address, so the same lesson learned on two machines
+          collapses instead of duplicating;
+        * ``verified_hits`` takes the maximum rather than the sum, because the two counts may
+          describe the same evidence;
+        * provenance is the union, so a rule that fails later can be traced to the machine it came
+          from -- including this one;
+        * an entry that is malformed, mis-addressed, or not applicable is refused *by name* and
+          counted, never dropped silently, and never aborts the rest of the bundle.
+        """
+        if isinstance(bundle, (str, pathlib.Path)):
+            bundle = json.loads(pathlib.Path(bundle).read_text(encoding="utf-8"))
+        schema = str(bundle.get("schema") or "")
+        if schema != BUNDLE_SCHEMA:
+            return {"accepted": 0, "merged": 0, "refused": 1,
+                    "refusals": [{"skill_id": None, "reason": f"BUNDLE_SCHEMA_{schema or 'MISSING'}"}]}
+
+        accepted = 0
+        merged = 0
+        refusals: list[dict[str, Any]] = []
+        conn = _connect(self.db_path)
+        try:
+            for entry in bundle.get("rules") or []:
+                rule = entry.get("rule") if isinstance(entry, Mapping) else None
+                stated = entry.get("skill_id") if isinstance(entry, Mapping) else None
+                if not isinstance(rule, Mapping):
+                    refusals.append({"skill_id": stated, "reason": "NO_RULE_PAYLOAD"})
+                    continue
+                reason = _malformed_rule_reason(rule)
+                if reason:
+                    refusals.append({"skill_id": stated, "reason": reason})
+                    continue
+                if skill_identity(rule) != stated:
+                    refusals.append({"skill_id": stated, "reason": "CONTENT_ADDRESS_MISMATCH"})
+                    continue
+                prov = entry.get("provenance") or []
+                hits = int(entry.get("verified_hits") or 1)
+                created = float(entry.get("created_ts") or time.time())
+                existing = conn.execute(
+                    "SELECT verified_hits, created_ts, provenance_json FROM crystallized_skills "
+                    "WHERE skill_id = ?", (stated,)
+                ).fetchone()
+                if existing is None:
+                    with conn:
+                        conn.execute(
+                            "INSERT INTO crystallized_skills (skill_id, domain, language, error_class, "
+                            "skeleton_fp, pattern_json, created_ts, verified_hits, provenance_json) "
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                            (
+                                stated,
+                                str(entry.get("domain") or rule.get("domain") or "swe_code_repair"),
+                                str(entry.get("language") or rule.get("language") or ""),
+                                str(entry.get("error_class") or rule.get("error_class") or "GENERIC"),
+                                str(entry.get("skeleton_fp") or rule.get("skeleton_fp") or ""),
+                                json.dumps(rule, separators=(",", ":")),
+                                created, hits,
+                                json.dumps(prov, separators=(",", ":")),
+                            ),
+                        )
+                    accepted += 1
+                else:
+                    old_hits, old_created, old_prov = existing
+                    try:
+                        known = json.loads(old_prov or "[]")
+                    except (TypeError, ValueError):
+                        known = []
+                    seen = {(p.get("origin"), p.get("at")) for p in known if isinstance(p, Mapping)}
+                    for item in prov:
+                        if isinstance(item, Mapping) and (item.get("origin"), item.get("at")) not in seen:
+                            known.append(item)
+                            seen.add((item.get("origin"), item.get("at")))
+                    with conn:
+                        conn.execute(
+                            "UPDATE crystallized_skills SET verified_hits = ?, created_ts = ?, "
+                            "provenance_json = ? WHERE skill_id = ?",
+                            (max(int(old_hits), hits), min(float(old_created), created),
+                             json.dumps(known, separators=(",", ":")), stated),
+                        )
+                    merged += 1
+        finally:
+            conn.close()
+        # Any cached rule list for this store is now stale; a stale cache would hide an import.
+        for key in [k for k in _MEM_SKILLS if k.startswith(f"{self.db_path}::")]:
+            _MEM_SKILLS.pop(key, None)
+        return {"accepted": accepted, "merged": merged,
+                "refused": len(refusals), "refusals": refusals}
+
+    def import_from_file(self, path: str | pathlib.Path) -> dict[str, Any]:
+        return self.import_bundle(path)
+
+    def provenance(self) -> list[dict[str, Any]]:
+        """Every rule with where it came from -- the audit a merged store needs."""
+        conn = _connect(self.db_path)
+        try:
+            rows = conn.execute(
+                "SELECT skill_id, language, verified_hits, provenance_json FROM crystallized_skills "
+                "ORDER BY skill_id"
+            ).fetchall()
+        finally:
+            conn.close()
+        out = []
+        for sid, language, hits, prov in rows:
+            try:
+                origins = json.loads(prov or "[]")
+            except (TypeError, ValueError):
+                origins = []
+            out.append({"skill_id": sid, "language": language, "verified_hits": hits,
+                        "origins": origins})
+        return out
 
     def count(self) -> int:
         conn = _connect(self.db_path)
