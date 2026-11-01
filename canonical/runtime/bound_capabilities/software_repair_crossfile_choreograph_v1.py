@@ -1489,7 +1489,7 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if not focus:
         raise RuntimeError("NO_PYTHON_SOURCE_FILES")
 
-    removals = args.get("remove_functions") or []
+    removals = args.get("remove_functions", [])
     if not isinstance(removals, list) or any(not isinstance(n, str) or not n.isidentifier() for n in removals):
         raise RuntimeError("REMOVAL_TARGETS_INVALID")
     remove_functions = set(removals)

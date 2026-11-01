@@ -370,5 +370,6 @@
     }
    ]
   }
- }
+ },
+ "highest_leverage_now": true
 }
