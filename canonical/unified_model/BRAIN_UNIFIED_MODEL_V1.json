@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6614,
+  "research_index_records": 6616,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 430,
-  "source_index_modules": 1907
+  "source_index_entry_points": 431,
+  "source_index_modules": 1909
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fe97648074630723386e7757c0fdc7552125ba3f2d8d7996fa3f97a97ac81b97"
+  "value": "f1247d6bbbf9d2d302aa06ef983c6171f410be99a86e376feec863bcde819140"
  },
  "engines": [
   {
@@ -143239,6 +143239,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/EXTERNAL_BASELINE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EXTERNAL_BASELINE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "2b94afae81fc2236a125b2c2bde0ac038b4d3cd66ac3cae100567ced27a7240b",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "baseline": 1,
+    "counterexample": 1,
+    "external": 1,
+    "known": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-03",
    "id": "research:canonical/verification/EXTERNAL_BENCHMARK_DOMINANCE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -211607,6 +211626,51 @@
    }
   },
   {
+   "action_id": "JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "485e444c444580fe2c199247b12cdcb8054984fe79a198738b91b7012732e24a",
+   "status": "",
+   "terms": {
+    "109": 1,
+    "152": 1,
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "against": 2,
+    "any": 1,
+    "author": 1,
+    "authors": 1,
+    "baseline": 1,
+    "benchmark": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "ceiling": 1,
+    "claim": 1,
+    "dominated": 1,
+    "every": 1,
+    "external": 1,
+    "failures": 1,
+    "far": 1,
+    "feeding": 1,
+    "gain": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inspector": 1,
+    "interpret": 1,
+    "judge": 1,
+    "judge_self_claim_against_external_baseline_and_onboard_v1_20261102": 1,
+    "measured": 1,
+    "measurements": 1,
+    "no": 2,
+    "number": 2,
+    "so": 3
+   }
+  },
+  {
    "action_id": "LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1",
    "capability": false,
    "date": "2026-11-01",
@@ -230544,6 +230608,36 @@
     "v1": 1,
     "values_for": 1,
     "was_refused": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/capability_onboarding_factory_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/capability_onboarding_factory_v1.py",
+   "sha256": "3db8f041dc349c1b91b00ac41d4fecc7162e74e1c4dab456e8260dacba9753d1",
+   "summary": "Onboard a capability: demonstrate once, prove it generalises, inspect it, register it.",
+   "symbol_count": 2,
+   "symbols": [
+    "Attempt",
+    "Factory"
+   ],
+   "terms": {
+    "attempt": 1,
+    "capability": 2,
+    "demonstrate": 1,
+    "factory": 2,
+    "generalises": 1,
+    "inspect": 1,
+    "onboard": 1,
+    "onboarding": 1,
+    "once": 1,
+    "prove": 1,
+    "register": 1,
+    "v1": 1
    }
   },
   {
@@ -278625,6 +278719,42 @@
     "semantic": 2,
     "truth": 2,
     "v1": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/self_prediction_baseline_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/self_prediction_baseline_v1.py",
+   "sha256": "5e4e31a9e9e29cedc847cac8b84de251f0b1b152c92b8afca19dcaf42554f136",
+   "summary": "A predictor the system cannot author, to judge the one it does.",
+   "symbol_count": 5,
+   "symbols": [
+    "_chronological",
+    "_verdict",
+    "baseline_probability",
+    "compare",
+    "main"
+   ],
+   "terms": {
+    "author": 1,
+    "baseline": 1,
+    "baseline_probability": 1,
+    "cannot": 1,
+    "chronological": 1,
+    "compare": 1,
+    "judge": 1,
+    "main": 1,
+    "one": 1,
+    "prediction": 1,
+    "predictor": 1,
+    "self": 1,
+    "system": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {
