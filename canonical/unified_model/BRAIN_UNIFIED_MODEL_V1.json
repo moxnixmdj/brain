@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bd39af0ad347784c3f697be3170d72f2178386d4ccf9d5281d544357a8099b73"
+  "value": "8ca8f1c199f54b06ab22611a19536dcb95a0f9b9fc57d966c26fdcec77d2e354"
  },
  "engines": [
   {
@@ -211526,7 +211526,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURED_REPAIR_ADMISSION_AND_FALSE_SUCCESS_FALSIFICATION_V1_20261101.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d27ff975cff68da1f3fcbca50b980c4920d675b00034f7672f61e0e1cb5991f8",
+   "sha256": "40cd75735cc8ecbaf97294c487c2913ad99b891fae05bf6f38a686701648c865",
    "status": "",
    "terms": {
     "20261101": 1,
