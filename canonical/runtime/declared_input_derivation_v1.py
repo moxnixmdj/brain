@@ -492,7 +492,7 @@ def _holds_tests(directory: pathlib.Path) -> bool:
         for child in directory.iterdir():
             if child.is_file() and _TEST_NAME_RE.search(child.name):
                 return True
-            if child.is_dir() and child.name in {"tests", "test"}:
+            if child.is_dir() and child.name in {"tests", "test", "testing"}:
                 for inner in child.iterdir():
                     if inner.is_file() and _TEST_NAME_RE.search(inner.name):
                         return True
@@ -816,6 +816,20 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     tests = [f for f in files if _TEST_NAME_RE.search(f)]
     out: dict[str, dict[str, Any]] = {}
     discovered_tests = False
+    if not tests:
+        _stated_dirs_early = _stated_directories(goal, root)
+        if len(_stated_dirs_early) == 1:
+            _sub_root = (pathlib.Path(root) / _stated_dirs_early[0]).resolve()
+            _repo_resolved = pathlib.Path(root).resolve()
+            if _sub_root.is_dir() and (_sub_root == _repo_resolved or _repo_resolved in _sub_root.parents):
+                _sub_stated = [
+                    (_sub_root / _sf).resolve().relative_to(_repo_resolved).as_posix()
+                    for _sf in stated_existing_files(goal, _sub_root)
+                    if _TEST_NAME_RE.search(_sf)
+                ]
+                if _sub_stated:
+                    tests = _sub_stated
+                    discovered_tests = True
     if not tests:
         try:
             from canonical.runtime import goal_compiler as _gc

@@ -932,6 +932,130 @@ def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
             "returncode": proc.returncode}
 
 
+def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
+                  *, src_override: pathlib.Path | None = None,
+                  wanted_override: str | None = None,
+                  timeout: float = 30.0) -> dict[str, Any]:
+    """Execute a snapshot-checkpointed multi-step CLI chain (e.g. directory/file -> .tar -> .tar.gz).
+
+    `discover()` remains strictly single-step (`OPEN__FORMAT_NEEDS_A_CHAIN_THIS_CHANNEL_CANNOT_KEEP`);
+    `perform_chain()` owns stateful multi-stage execution where every intermediate artifact and the
+    final multi-layer output must pass `ps.verify_round_trip` independently, rolling back cleanly
+    to the pre-execution workspace snapshot on any stage failure.
+    """
+    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    from canonical.runtime import program_synthesis_v1 as ps
+    suffix = acq._requested_suffix(gap)
+    if not suffix or suffix.count(".") < 2:
+        return {"pass": False, "status": "OPEN__NOT_A_CHAIN_FORMAT", "detail": str(suffix)}
+    if not ps.carries_content_evidence(suffix):
+        return {"pass": False, "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE", "detail": suffix}
+
+    base = pathlib.Path(cwd).resolve() if cwd else pathlib.Path.cwd().resolve()
+    wanted = wanted_override or output_name(gap)
+    if not wanted:
+        return {"pass": False, "status": "OPEN__NO_OUTPUT_NAME_IN_GOAL"}
+
+    src = src_override
+    if src is None:
+        # Match either file or directory token named in the goal (e.g. `pack pkg into pkg.tar.gz`)
+        tokens = list(_FILENAME.findall(str(gap or ""))) + [
+            t.strip("\"'.,;:") for t in str(gap or "").split()
+        ]
+        for tok in tokens:
+            if not tok or tok == wanted or "/" in tok and tok.startswith("/"):
+                continue
+            cand = (base / tok)
+            if cand.exists() and cand.resolve() != (base / wanted).resolve():
+                src = cand
+                break
+    if src is None or not src.exists():
+        return {"pass": False, "status": "OPEN__NO_EXISTING_INPUT_IN_GOAL",
+                "detail": "no input file or directory named in %s" % base}
+
+    # Decompose `.tar.gz` / `.tar.bz2` / `.tar.xz` into inner container (`.tar`) + outer compressor (`.gz`/etc.)
+    parts = suffix.split(".")  # ['', 'tar', 'gz']
+    if len(parts) != 3 or "." + parts[1] != ".tar":
+        return {"pass": False, "status": "OPEN__UNSUPPORTED_MULTI_LAYER_CHAIN", "detail": suffix}
+    inner_suffix = "." + parts[1]   # '.tar'
+    outer_suffix = "." + parts[2]   # '.gz'
+
+    if not ps.carries_content_evidence(inner_suffix) or not ps.carries_content_evidence(outer_suffix):
+        return {"pass": False, "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE", "detail": suffix}
+
+    # Snapshot pre-existing top-level entries for clean rollback on any intermediate failure
+    existing_before = {p.name for p in base.iterdir()} if base.is_dir() else set()
+    src_was_dir = src.is_dir()
+    src_bytes_before = src.read_bytes() if src.is_file() else None
+    out_path = base / wanted
+
+    with tempfile.TemporaryDirectory(prefix="brain_chain_stage_") as stage_dir_raw:
+        stage_dir = pathlib.Path(stage_dir_raw)
+        stage1_tar = stage_dir / "_stage1.tar"
+
+        # Stage 1: build `.tar` container from `src` (file or directory) and verify `.tar` round-trip
+        tar_bin = shutil.which("tar")
+        if not tar_bin:
+            return {"pass": False, "status": "OPEN__MISSING_TAR_BINARY"}
+        p1 = subprocess.run(
+            [tar_bin, "-cf", str(stage1_tar), "-C", str(src.parent), src.name],
+            stdin=subprocess.DEVNULL,
+            capture_output=True,
+            timeout=timeout,
+        )
+        if p1.returncode != 0 or not stage1_tar.is_file():
+            return {"pass": False, "status": "OPEN__CHAIN_STAGE1_FAILED",
+                    "detail": (p1.stderr or b"").decode("utf-8", "replace")[:200]}
+        ok1, why1 = ps.verify_round_trip(stage1_tar, inner_suffix)
+        if not ok1:
+            return {"pass": False, "status": "OPEN__CHAIN_STAGE1_UNVERIFIED", "detail": why1}
+
+        # Stage 2: discover/recall outer compression (`_stage1_blob` -> `_stage1_blob.gz`) via `discover()`
+        stage2_src = stage_dir / "_stage1_blob"
+        shutil.copy2(stage1_tar, stage2_src)
+        stage2_goal = f"compress {stage2_src.name} into {stage2_src.name}{outer_suffix}"
+        found2 = discover(stage2_goal, budget=24, seed_file=stage2_src)
+        if not found2.get("closed") or not found2.get("recipe"):
+            return {"pass": False, "status": "OPEN__CHAIN_STAGE2_DISCOVERY_FAILED",
+                    "detail": found2.get("status")}
+        done2 = apply(found2["recipe"], stage2_src, out_dir=base, output_name=wanted, timeout=timeout)
+        if not out_path.is_file():
+            # Rollback any stray files
+            for p in list(base.iterdir()):
+                if p.name not in existing_before and p.is_file():
+                    p.unlink(missing_ok=True)
+            return {"pass": False, "status": "OPEN__CHAIN_STAGE2_PRODUCED_NO_FILE",
+                    "detail": done2.get("detail")}
+
+        # Independent end-to-end verification on the full multi-layer format (`.tar.gz`!)
+        ok_final, why_final = ps.verify_round_trip(out_path, suffix)
+        if not ok_final:
+            out_path.unlink(missing_ok=True)
+            return {"pass": False, "status": "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
+                    "verification": why_final}
+
+    # Verify input integrity (never destroy or clobber `src`)
+    if src_was_dir and not src.is_dir():
+        out_path.unlink(missing_ok=True)
+        return {"pass": False, "status": "OPEN__INPUT_DESTROYED_BY_CHAIN"}
+    if src_bytes_before is not None and (not src.is_file() or src.read_bytes() != src_bytes_before):
+        out_path.unlink(missing_ok=True)
+        return {"pass": False, "status": "OPEN__INPUT_MUTATED_BY_CHAIN"}
+
+    return {
+        "pass": True,
+        "status": "PASS__CHAIN_APPLIED_AND_VERIFIED",
+        "goal": gap,
+        "stages": 2,
+        "plan": ["run_tar", *(found2.get("plan") or [])],
+        "stage1_verification": why1,
+        "verification": why_final,
+        "output": str(out_path),
+        "output_bytes": out_path.stat().st_size,
+        "from_memory": bool(found2.get("from_memory")),
+    }
+
+
 def perform(gap: str, cwd: str | pathlib.Path | None = None,
             timeout: float = 30.0) -> dict[str, Any]:
     """Learn it if it has to, then actually do it to the real file.
@@ -942,12 +1066,17 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
     is not the machine doing anything, it is the machine knowing something.
     """
     from canonical.runtime import cli_capability_acquisition_v1 as acq
-    if not acq._requested_suffix(gap):
+    req_suffix = acq._requested_suffix(gap)
+    if not req_suffix:
         return {"pass": False, "status": "OPEN__NO_OUTPUT_FORMAT_IN_GAP",
                 "detail": "nothing in the goal says what to produce"}
 
     wanted = output_name(gap)
     base = pathlib.Path(cwd) if cwd else pathlib.Path.cwd()
+
+    # Multi-layer chain formats (e.g. `.tar.gz`) can take either a directory or a file as input
+    if req_suffix.count(".") >= 2:
+        return perform_chain(gap, cwd=base, wanted_override=wanted, timeout=timeout)
 
     # the input is a file the goal names that is actually there; a goal about
     # a file that does not exist is a gap, not a task
@@ -2188,6 +2317,16 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
         return {"pass": False, "status": "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL",
                 "detail": "no such file: %s" % src}
 
+    # Table-free metamorphic behavioral signature channel (`NEXT_STEP_THE_CONSTRUCTOR_TABLE`):
+    # When no synthetic `probe_bytes` constructor exists for `kind` (or when `probe_bytes` is
+    # ablated), discover and prove the measurement pipeline purely from algebraic perturbations
+    # (`F || F`, within-line doubling, and non-adjacent fresh twins) of `src` itself!
+    if literal is None and probe_bytes(kind, _PROBE_SIZES[0], literal) is None:
+        from canonical.swe_kernel.metamorphic_cli_compiler_v1 import answer_query_by_metamorphic_signature
+        return answer_query_by_metamorphic_signature(
+            kind, src, candidate_programs=programs, min_agreement=min_agreement, timeout=min(timeout, 3.0)
+        )
+
     # How far down the list of candidates to look. The manual is read ONLY
     # to narrow the field -- it names programs whose flags mean something
     # like what the goal said. It decides nothing: the probe throws away
@@ -2272,7 +2411,7 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     wide_seen: set[str] = set()
     tier_limits = (24,) if (programs is None and kind in ("uniquelines", "duplicatelines")) else (24, 96, 200)
     for limit in tier_limits:
-        cached = _query_cache_get(kind, limit)
+        cached = _query_cache_get(kind, limit) if programs is None else None
         if cached is not None:
             # remembered as a shape, so a word it has never seen can reuse
             # it -- but only after proving it again for that word

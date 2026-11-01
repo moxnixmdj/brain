@@ -303,7 +303,9 @@ def harvest_live_io_examples(
                     try:
                         if not [p for p in inspect.signature(obj).parameters.values() if p.default is inspect.Parameter.empty]:
                             obj()
-                    except Exception:
+                    except KeyboardInterrupt:
+                        raise
+                    except BaseException:
                         pass
                 elif isinstance(obj, type):
                     # unittest.TestCase subclass
@@ -483,10 +485,17 @@ def discover_and_execute_semantic_web_form(
     goal: str,
     url: str,
 ) -> dict[str, Any]:
-    """Inspect a web page's semantic `<form>` schema and submit directly via HTTP (<15 ms)."""
+    """Inspect a web page's semantic `<form>` schema and submit directly via HTTP (<15 ms),
+    preserving `CookieJar` sessions and dynamic hidden CSRF/nonce tokens across GET -> POST.
+    """
+    import http.cookiejar
+
+    cookie_jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie_jar))
     try:
-        with urllib.request.urlopen(url, timeout=10) as resp:
+        with opener.open(url, timeout=10) as resp:
             html_text = resp.read().decode("utf-8", "replace")
+            had_set_cookie = len(cookie_jar) > 0 or bool(resp.headers.get("Set-Cookie"))
     except Exception as exc:
         return {"ok": False, "reason": f"WEB_FETCH_FAILED:{type(exc).__name__}"}
 
@@ -506,6 +515,8 @@ def discover_and_execute_semantic_web_form(
 
     form = parser.forms[0]
     form_body: dict[str, str] = {}
+    template_form_body: dict[str, str] = {}
+    hidden_fields: list[str] = []
     matched_fields = 0
 
     for fld in form["fields"]:
@@ -514,7 +525,10 @@ def discover_and_execute_semantic_web_form(
             continue
         ftype = fld.get("type") or "text"
         if ftype == "hidden":
-            form_body[nm] = fld.get("value") or ""
+            hval = fld.get("value") or ""
+            form_body[nm] = hval
+            template_form_body[nm] = f"{{{{hidden:{nm}}}}}"
+            hidden_fields.append(nm)
             continue
         if ftype in {"submit", "button", "reset"}:
             continue
@@ -528,9 +542,11 @@ def discover_and_execute_semantic_web_form(
                 break
         if assigned is not None:
             form_body[nm] = assigned
+            template_form_body[nm] = assigned
             matched_fields += 1
         elif fld.get("value"):
             form_body[nm] = fld["value"]
+            template_form_body[nm] = fld["value"]
 
     if matched_fields == 0:
         return {"ok": False, "reason": "NO_SEMANTIC_FORM_FIELDS_BOUND_FROM_GOAL"}
@@ -551,7 +567,7 @@ def discover_and_execute_semantic_web_form(
         )
 
     try:
-        with urllib.request.urlopen(req, timeout=15) as sresp:
+        with opener.open(req, timeout=15) as sresp:
             resp_body = sresp.read().decode("utf-8", "replace")
             status_code = int(sresp.status)
     except Exception as exc:
@@ -560,24 +576,36 @@ def discover_and_execute_semantic_web_form(
     if not (200 <= status_code < 400):
         return {"ok": False, "reason": f"WEB_SUBMIT_HTTP_{status_code}"}
 
+    needs_stateful_get = bool(hidden_fields or had_set_cookie)
+    http_exchanges: list[dict[str, Any]] = []
+    if needs_stateful_get:
+        http_exchanges.append({
+            "method": "GET",
+            "url": url,
+            "extract_hidden_inputs": True,
+            "sets_session_cookie": bool(had_set_cookie),
+            "headers": {"Accept": "text/html"},
+        })
+    http_exchanges.append({
+        "method": method,
+        "url": submit_url,
+        "form_body": template_form_body if needs_stateful_get else form_body,
+        "headers": {"Content-Type": "application/x-www-form-urlencoded"},
+    })
+
     return {
         "ok": True,
         "submit_url": submit_url,
         "method": method,
         "form_body": form_body,
+        "stateful_csrf_or_cookie": needs_stateful_get,
+        "hidden_fields": hidden_fields,
         "status_code": status_code,
         "response_body": resp_body[:1000],
         "causal_trace": {
             "steps": [],
             "observed_effects": {
-                "http_exchanges": [
-                    {
-                        "method": method,
-                        "url": submit_url,
-                        "form_body": form_body,
-                        "headers": {"Content-Type": "application/x-www-form-urlencoded"},
-                    }
-                ]
+                "http_exchanges": http_exchanges,
             },
         },
     }

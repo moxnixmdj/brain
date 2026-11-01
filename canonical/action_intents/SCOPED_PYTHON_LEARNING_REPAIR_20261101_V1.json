@@ -38,7 +38,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Python insertion-only and mixed-hunk lessons fail self-reproduction and twin verification; scoped recall must verify multiple structural locations rather than trust the first match.",
-  "canonical_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
+  "canonical_base_commit": "6f7401105c699585086ac04fee2384596b33493c",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +52,7 @@
   "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
-    "canonical_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
+    "canonical_base_commit": "6f7401105c699585086ac04fee2384596b33493c",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -69,6 +69,11 @@
     "success_probability_lcb": "1/2",
     "wall_clock_cost_ub": 86400
   },
+  "merge_refresh": {
+    "current_base_commit": "6f7401105c699585086ac04fee2384596b33493c",
+    "original_admission_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
+    "reason": "Incoming main integrated; unchanged counterexample obligations rebound to exact current source/test blobs. No guard weakened."
+  },
   "ownership_credit_delta": 0,
   "probe_specific": false,
   "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
@@ -84,7 +89,7 @@
     "scope_complete": false
   },
   "recursive_obs": {
-    "canonical_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
+    "canonical_base_commit": "6f7401105c699585086ac04fee2384596b33493c",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Stated-command exit code alone as proof that named tests passed",
@@ -307,7 +312,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-01T13:17:43.056304+00:00",
+    "checked_at_utc": "2026-11-01T14:41:25.428967+00:00",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
@@ -333,18 +338,18 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "fb0e70362cdf745286bda6056a4278ab0675e424",
+          "git_blob_sha": "c3ab7bf77358e4b7980d644d3d337a8ef801f8e4",
           "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
         },
         {
-          "git_blob_sha": "0be9bd268566ffefa0b84390e0e9a607c1aacb0c",
+          "git_blob_sha": "23e44290902e9517e13ff67570183b009d418e33",
           "path": "canonical/tests/test_python_repair_apply_verified_v1.py"
         }
       ],
       "decisive_question": "Does one historical teaching transfer to a genuinely different historical issue under live tests, with all refusal and discovery/verification costs reported?",
-      "falsifier_id": "HISTORICAL_REPAIR_TRANSFER_20261101_V1_WRONG_RULE_AND_ABLATION",
+      "falsifier_id": "SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1_WRONG_RULE_AND_ABLATION",
       "known_counterexamples_checked": true,
-      "proposal_id": "HISTORICAL_REPAIR_TRANSFER_20261101_V1"
+      "proposal_id": "SCOPED_PYTHON_LEARNING_REPAIR_20261101_V1"
     }
   },
   "weakens_existing_guard": false

@@ -195,29 +195,41 @@ def benchmark_against_git_ref(target: Path, brain_root: Path, git_ref: str = "HE
 # ---------------------------------------------------------------------------
 
 def detect_race_conditions(target: Path) -> dict[str, Any]:
+    from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import probe_concurrency_races_live
+
     py_files = [target] if target.is_file() else sorted(target.rglob("*.py"))
     findings: list[dict[str, Any]] = []
+    candidate_for_live_probe = False
 
     for pf in py_files:
         src = pf.read_text(encoding="utf-8")
         tree = ast.parse(src)
         module_mutables: set[str] = set()
-        uses_locks = bool(re.search(r"\b(?:Lock|RLock|Semaphore|Condition)\s*\(", src))
-        uses_threads_or_async = bool(re.search(r"\b(?:threading|ThreadPoolExecutor|asyncio)\b", src))
+        uses_threads_or_async = bool(re.search(r"\b(?:threading|Thread|ThreadPoolExecutor|asyncio)\b", src))
 
         for stmt in tree.body:
             if isinstance(stmt, ast.Assign):
+                is_mutable_init = isinstance(stmt.value, (ast.Dict, ast.List, ast.Set, ast.Call))
                 for tgt in stmt.targets:
-                    if isinstance(tgt, ast.Name) and not tgt.id.isupper():
+                    if isinstance(tgt, ast.Name) and (not tgt.id.isupper() or is_mutable_init):
                         module_mutables.add(tgt.id)
 
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 global_names = {nm for n in ast.walk(node) if isinstance(n, ast.Global) for nm in n.names}
                 has_with_lock = any(isinstance(n, ast.With) for n in ast.walk(node))
+                has_explicit_lock_acq = any(
+                    isinstance(n, ast.Call)
+                    and isinstance(n.func, ast.Attribute)
+                    and n.func.attr == "acquire"
+                    for n in ast.walk(node)
+                )
+                if has_with_lock or has_explicit_lock_acq:
+                    continue
                 for sub in ast.walk(node):
                     if isinstance(sub, ast.AugAssign) and isinstance(sub.target, ast.Name):
-                        if (sub.target.id in global_names or sub.target.id in module_mutables) and not has_with_lock:
+                        if sub.target.id in global_names or sub.target.id in module_mutables:
+                            candidate_for_live_probe = True
                             findings.append(
                                 {
                                     "file": str(pf),
@@ -227,16 +239,72 @@ def detect_race_conditions(target: Path) -> dict[str, Any]:
                                     "symbol": sub.target.id,
                                 }
                             )
-                    if isinstance(sub, ast.AugAssign) and isinstance(sub.target, ast.Attribute) and not has_with_lock and uses_threads_or_async:
-                        findings.append(
-                            {
-                                "file": str(pf),
-                                "function": node.name,
-                                "lineno": sub.lineno,
-                                "kind": "UNLOCKED_ATTRIBUTE_READ_MODIFY_WRITE",
-                                "symbol": ast.unparse(sub.target),
-                            }
-                        )
+                    elif isinstance(sub, ast.Assign):
+                        for tgt in sub.targets:
+                            if isinstance(tgt, ast.Name) and tgt.id in global_names:
+                                candidate_for_live_probe = True
+                                findings.append(
+                                    {
+                                        "file": str(pf),
+                                        "function": node.name,
+                                        "lineno": sub.lineno,
+                                        "kind": "UNLOCKED_GLOBAL_REASSIGNMENT",
+                                        "symbol": tgt.id,
+                                    }
+                                )
+                            elif isinstance(tgt, ast.Subscript) and isinstance(tgt.value, ast.Name) and tgt.value.id in module_mutables:
+                                candidate_for_live_probe = True
+                                findings.append(
+                                    {
+                                        "file": str(pf),
+                                        "function": node.name,
+                                        "lineno": sub.lineno,
+                                        "kind": "UNLOCKED_SHARED_CONTAINER_MUTATION",
+                                        "symbol": tgt.value.id,
+                                    }
+                                )
+                            elif isinstance(tgt, ast.Attribute) and uses_threads_or_async:
+                                candidate_for_live_probe = True
+                                findings.append(
+                                    {
+                                        "file": str(pf),
+                                        "function": node.name,
+                                        "lineno": sub.lineno,
+                                        "kind": "UNLOCKED_ATTRIBUTE_REASSIGNMENT",
+                                        "symbol": ast.unparse(tgt),
+                                    }
+                                )
+                    elif isinstance(sub, ast.AugAssign) and isinstance(sub.target, ast.Attribute):
+                        candidate_for_live_probe = True
+                        if uses_threads_or_async:
+                            findings.append(
+                                {
+                                    "file": str(pf),
+                                    "function": node.name,
+                                    "lineno": sub.lineno,
+                                    "kind": "UNLOCKED_ATTRIBUTE_READ_MODIFY_WRITE",
+                                    "symbol": ast.unparse(sub.target),
+                                }
+                            )
+
+    execution_witnesses: list[dict[str, Any]] = []
+    if candidate_for_live_probe or findings:
+        live = probe_concurrency_races_live(target)
+        execution_witnesses = list(live.get("witnesses") or [])
+        existing_fns = {f.get("function") for f in findings}
+        for w in execution_witnesses:
+            tname = str(w.get("target") or "")
+            fn_short = tname.split(".")[-1]
+            if fn_short not in existing_fns:
+                findings.append(
+                    {
+                        "file": str(w.get("file") or target),
+                        "function": tname,
+                        "lineno": 1,
+                        "kind": str(w.get("kind") or "EXECUTION_PROVED_DATA_RACE"),
+                        "symbol": tname,
+                    }
+                )
 
     return {
         "verified": True,
@@ -244,6 +312,8 @@ def detect_race_conditions(target: Path) -> dict[str, Any]:
         "operation": "find_race_condition",
         "target": str(target),
         "race_condition_count": len(findings),
+        "execution_reproduced": bool(execution_witnesses),
+        "execution_witnesses": execution_witnesses,
         "verdict": "RACE_CONDITION_FOUND" if findings else "NO_SHARED_STATE_RACE_DETECTED",
         "findings": findings,
     }
