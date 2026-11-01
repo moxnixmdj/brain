@@ -82,6 +82,9 @@ DEFECT_MEANING = {
     "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED":
         "a sentence about commits was routed to the architect row, which read history without being "
         "given a repository to read it from",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER":
+        "the optimiser produced a patch and the timed comparison did not show it faster, which is a "
+        "statement about the measurement as much as about the patch",
     "FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED":
         "the sentence asks for a regression test without stating a bug that can be reproduced or was "
         "observed, so there is nothing for the test to assert",
@@ -119,6 +122,10 @@ FIX = {
         "none on the machine — the fixture declares no dependencies; a better fixture is the fix",
     "FAIL_CLOSED__CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR":
         "none on the machine — nothing is declared to vendor; a better fixture is the fix",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_OPTIMIZATION_NOT_FASTER":
+        "instrument: the verdict is a timing comparison, so it must be two-sided, repeated, and it "
+        "must answer UNCLEAR when the difference is inside the noise instead of refusing -- measured "
+        "2026-11-01 this row passed in one session and refused in the next on identical code",
     "FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED":
         "none on the machine — the suite is not flaky; a better fixture is the fix",
     "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION":
@@ -142,6 +149,7 @@ FIX = {
 # is not evidence that the machine cannot do the work, and pricing it as capability work would
 # spend the next hour on a fixture.
 _OWNER_OF_REMEDY = (
+    ("instrument:", "instrument"),
     ("selection:", "selection"),
     ("none on the machine", "fixture"),
     ("better fixture is the fix", "fixture"),
@@ -361,7 +369,10 @@ def learning_measurement() -> dict:
             except SyntaxError:
                 return False
 
-        store = cry.VerifiedSkillStore(db)
+        # seed=False: this measures what ONE taught fix does, so the shipped bundle must not be in
+        # the way. With seeding on, `crystallizes` read 6 (five shipped + one taught) and the probe
+        # loop was answering with rules the repository already knew.
+        store = cry.VerifiedSkillStore(db, seed=False)
         store.crystallize_verified_fix(language="python", bug_class="python_repair",
                                        before_code=LEARN_TEACH, after_code=LEARN_FIXED,
                                        verifier_oracle_kind="probe")
@@ -375,7 +386,7 @@ def learning_measurement() -> dict:
         # portable, and only this makes the difference visible.
         bundle = db.parent / "transfer.bundle.json"
         store.export_to_file(bundle)
-        second = cry.VerifiedSkillStore(db.parent / "second.sqlite")
+        second = cry.VerifiedSkillStore(db.parent / "second.sqlite", seed=False)
         imported = second.import_from_file(bundle)
         out["portable_rules"] = imported["accepted"]
         out["portable_refused"] = imported["refused"]
@@ -408,6 +419,38 @@ def learning_measurement() -> dict:
     except Exception:
         pass
     return out
+
+
+MULTISTEP_RESULTS = ROOT / "execution_guard" / "MULTISTEP_RESULTS_20261101.json"
+
+
+def multistep_measurement() -> dict:
+    """Read the multi-step instrument's last recorded run, if one exists.
+
+    Deliberately a file read and not a live run: the instrument clones real repositories and runs
+    their suites, so composing this document must not depend on the network. A missing file is
+    reported as "not measured", never as a pass.
+    """
+    if not MULTISTEP_RESULTS.is_file():
+        return {"measured": False}
+    try:
+        rows = json.loads(MULTISTEP_RESULTS.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return {"measured": False, "error": type(exc).__name__}
+    tasks = [r for r in rows]
+    instrument_limited = [r for r in tasks if not r.get("attempts_log")]
+    scored = [r for r in tasks if r.get("attempts_log")]
+    return {
+        "measured": True,
+        "tasks": len(tasks),
+        "scored": len(scored),
+        "solved": sum(1 for r in scored if r.get("solved")),
+        "stages": collections.Counter(str(r.get("final_stage")) for r in scored),
+        "edits": sum(1 for r in scored for a in r["attempts_log"] if a.get("files_changed")),
+        "attempts": sum(len(r["attempts_log"]) for r in scored),
+        "limited": [r["repo"] for r in instrument_limited],
+        "rows": scored,
+    }
 
 
 def refusal_class(row: Mapping[str, Any]) -> str:
@@ -707,6 +750,11 @@ def main() -> int:
     add("   strictly more evidence, one fewer false refusal. The residual problem is real and stays: a")
     add("   review that cannot distinguish a 10% change under load cannot certify a refactor's performance,")
     add("   only refute a large regression.")
+    add("   **Measured 2026-11-01: this is no longer only about `perf_review`.** Request 18 (optimise a")
+    add("   slow function) was *served* in one session and refuses `OPTIMIZATION_NOT_FASTER` in the")
+    add("   next, on identical code, reproducibly, and with the crystallizer change reverted. The census")
+    add("   total moved 42 -> 41 for that reason alone. A denominator that changes with the machine's")
+    add("   mood is not a capability number, which is why that class now has its own owner in §3")
     add("8. **At least one census sentence is ill-posed.** Request 33 says *move the function `add`")
     add("   from mod.py into calc.py*, and both files define `add`, so the move collides and the")
     add("   refusal is CORRECT. A denominator that counts that sentence as a capability the machine lacks")
@@ -732,13 +780,20 @@ def main() -> int:
     pct = 100.0 * len(served) / len(rows)
     fixture = [r for r in refused if defect_owner(refusal_class(r)) == "fixture"]
     selection = [r for r in refused if defect_owner(refusal_class(r)) == "selection"]
-    capability = [r for r in refused if r not in fixture and r not in selection]
+    # Explicitly owned, never "whatever is left": an unclassified row used to fall through into
+    # capability, which is how the instrument defect was silently priced as missing capability.
+    capability = [r for r in refused if defect_owner(refusal_class(r)) == "capability"]
     add(f"The census stands at **{len(served)} of {len(rows)} ({pct:.0f}%)**. Of the {len(refused)}")
+    instrument = [r for r in refused
+                  if defect_owner(refusal_class(r)) == "instrument"]
     add(f"that remain, **{len(fixture)} are fixture defects** -- the machine is right and the sentence is")
-    add(f"under-specified or the move is ill-posed -- **{len(selection)} are selection**, and")
-    add(f"**{len(capability)} are capability**. The column is read off §3's own remedy text, so the two")
-    add("sections cannot disagree; a capability gap whose remedy happens to start with the word \"none\"")
-    add("is still counted as capability, because it says the missing thing is a capability.")
+    add(f"under-specified or the move is ill-posed -- **{len(selection)} are selection**,")
+    add(f"**{len(capability)} are capability**, and **{len(instrument)} are instrument defects**: the work")
+    add("was done and the verdict is untrustworthy.")
+    add("")
+    add("The column is read off §3's own remedy text, so the two sections cannot disagree; a capability")
+    add("gap whose remedy happens to start with the word \"none\" is still counted as capability, because")
+    add("it says the missing thing is a capability.")
     add("")
     add("That split decides the order, because it decides what a number means:")
     add("")
@@ -746,16 +801,23 @@ def main() -> int:
     add(f"  {len(fixture)} of the remaining {len(refused)} being sentence defects, raising it further buys")
     add("  almost no capability. It is what stops the machine going backwards, and it should be run on")
     add("  every change -- but no hour should be spent *aiming* at it.")
-    add("* **Every number in §1 is one request deep.** A system that answers 86% of single sentences")
-    add("  can still be incapable of a task that needs ten of them in sequence, and nothing here")
-    add("  measures that. Closing that gap is the actual objective, and it needs a harder instrument")
-    add("  before it needs more rows.")
+    add(f"* **Every number in §1 is one request deep, and §8 now prices that.** A real repository with an")
+    add("  injected bug and its own suite as the oracle produced **no edit at all**, twice over: the")
+    add("  single-step number and the multi-step number are not the same claim, and only the second one")
+    add("  is about engineering.")
+    add("  The gap is not subtle and it is not about polish: the machine has no working path from")
+    add("  *'this test fails in this repository'* to *'here is an edit'*, so no amount of repair")
+    add("  quality would show up yet.")
     add("")
     add("| # | move | measured reach | why at this position |")
     add("|---|---|---|---|")
-    add("| 1 | **multi-step instrument**: a real repository, a vague issue, and a required "
-        "plan -> edit -> run -> observe -> repair loop, scored end to end | everything above is one "
-        "step deep | this is the only measure that can tell a strong engineer from a wide lookup table |")
+    _ms = multistep_measurement()
+    _ms_note = (f"measured {_ms['solved']} of {_ms['scored']}" if _ms.get("measured") and _ms.get("scored")
+                else "not yet measured")
+    add(f"| 1 | **produce an edit at all on a foreign repository**: the door selects a repair row, "
+        f"runs it, and the tree is untouched (§8: {_ms_note}) | the census says "
+        f"{pct:.0f}%, a real repository says 0 | everything above is one step deep, and the first "
+        "step that is not one step deep fails before repair quality is even tested |")
     add(f"| 2 | **selection** for the {len(selection)} remaining sentences | {len(selection)} sentence(s) | "
         "cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |")
     add(f"| 3 | **capability** for the {len(capability)} remaining sentences | {len(capability)} sentence(s) | "
@@ -763,6 +825,9 @@ def main() -> int:
     add("| 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, "
         "`rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows "
         "can never run, and no row may pretend otherwise |")
+    add(f"| 4b | **reproducible timing verdicts** for the {len(instrument)} instrument defect(s) | "
+        f"{len(instrument)} sentence(s) | a two-sided, repeated measurement that may answer UNCLEAR; "
+        "today one row passes or refuses depending on the machine's mood |")
     add("| 5 | **learning upstream of selection**: a refusal memory that changes which row is chosen | "
         "today the learner is downstream (see §7) | as built, it cannot prevent a repeat of a miss |")
     add("| 6 | **repo-scale navigation**: ranked cross-module retrieval and impact ranking | a symbol "
@@ -901,6 +966,76 @@ def main() -> int:
     add("")
     add("## What this document is not")
     add("")
+    add("---")
+    add("")
+    add("## §8 The multi-step instrument: what a real repository says")
+    add("")
+    add("`execution_guard/multistep_instrument_v1.py` measures the thing every number above cannot:")
+    add("a real repository, a failing test, and a budget of attempts. Three projects are cloned")
+    add("(`iniconfig`, `pluggy`, `click`), a bug is injected mechanically into their own source, the")
+    add("issue text is generated from *their* failing output, and the acceptance check is *their* own")
+    add("suite. A failed attempt is fed back verbatim, which is the only part of this that is a loop")
+    add("rather than a request.")
+    add("")
+    ms = multistep_measurement()
+    if not ms.get("measured"):
+        add("**Not measured in this composition** — the results file is absent. That is reported as")
+        add("absent on purpose: an instrument that silently reports zero is the failure mode this whole")
+        add("document keeps finding.")
+    else:
+        add("| multi-step property | value |")
+        add("|---|---|")
+        add(f"| tasks scored | **{ms['scored']}** (of {ms['tasks']} attempted) |")
+        add(f"| solved end to end | **{ms['solved']}** |")
+        add(f"| attempts spent | {ms['attempts']} |")
+        add(f"| attempts that edited a source file | **{ms['edits']}** |")
+        for stage, count in ms["stages"].most_common():
+            add(f"| tasks ending at `{stage}` | {count} |")
+        if ms["limited"]:
+            add("")
+            add(f"*{', '.join(ms['limited'])} produced no observable injected bug at the accepted blast")
+            add("radius (1-25 failing cases, at most 40% of a suite), so it is an instrument limitation")
+            add("and is excluded from the score rather than counted as a pass.*")
+        add("")
+        add("| task | injected bug | attempts | files the machine edited | outcome |")
+        add("|---|---|---|---|---|")
+        for r in ms["rows"]:
+            inj = r.get("injected") or {}
+            edits = sum(len(a.get("files_changed") or []) for a in r["attempts_log"])
+            add(f"| {r['repo']} | `{str(inj.get('before'))[:52]}` -> `{str(inj.get('after'))[:52]}` | "
+                f"{len(r['attempts_log'])} | **{edits}** | `{r['final_stage']}` |")
+        add("")
+        add("**The single-step census says " + f"{pct:.0f}%" + ". The multi-step instrument says "
+            + f"{ms['solved']} of {ms['scored']}.** The gap is not repair quality — it is that no")
+        add("edit is produced at all. The door selects `python.software.repair.apply.verified.v1`, runs")
+        add("it, and answers `STATED_ANSWER_NOT_PROVIDED` or `STATED_SWE_EFFECT_UNSERVED` with the tree")
+        add("untouched. Feeding the failing tests back changes the sentence and nothing else: attempt 2")
+        add("behaves exactly like attempt 1.")
+        add("")
+        add("Two false measurements were found while building this, and both made the machine look")
+        add("worse *or* better than it is, which is why they are recorded:")
+        add("")
+        add("1. **The first run credited the machine with its own bug.** `git status` reported the")
+        add("   injected mutation as a change, so a door that edited nothing was recorded as having")
+        add("   edited a file — twice. The injection is now committed before the first attempt, so the")
+        add("   only diff is the machine's.")
+        add("2. **The first injection was a demolition, not a bug.** Flipping `expose_value: bool = True`")
+        add("   to `False` in `click` broke 644 of 1014 tests. That is not a bug report and no fair task")
+        add("   can be built from it; mutations are now capped at 25 failing cases and 40% of a suite.")
+        add("")
+        pinned = sorted({str(r.get("commit"))[:12] for r in ms["rows"] if r.get("commit")})
+        add(f"The clones are pinned ({', '.join('`' + c + '`' for c in pinned)}), so the task bank is")
+        add("stable and re-running reproduces the same injected bug and the same stage. The first")
+        add("version of the instrument claimed pinning in a comment while cloning the default branch;")
+        add("that is corrected here for the same reason the other false numbers were: a claim in a")
+        add("comment is not a measurement.")
+        add("")
+        add("What this does **not** yet measure: whether a *correct* edit would be accepted, because no")
+        add("edit is produced. The next hour is not about repair quality — it is about the missing path")
+        add("from `a failing test in this repository` to `a proposed edit`.")
+        add("")
+        add("---")
+        add("")
     add("It is not a plan to make the machine *seem* more capable. Every item above is either a measured")
     add("refusal, a measured absence in the substrate, or a measured selection error. Nothing is softened:")
     add(f"the machine answers {len(served)} of {len(rows)} hardcore sentences and {span} of 54")

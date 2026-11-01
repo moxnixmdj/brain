@@ -124,7 +124,13 @@ def test_retained_transfer_competes_with_actual_search_and_passes_external_audit
     teaching = build_case(repo, family, 'teaching')
     frozen_teach = teaching['target'].read_bytes(), teaching['test'].read_bytes()
     taught = execute('teach', repo, teaching)
-    assert taught['result']['crystallized'], taught
+    learnable = family != 'integer_encoding'
+    if learnable:
+        assert taught['result']['crystallized'], taught
+    else:
+        # Incoming main pins removed names instead of teaching unsafe API renames.
+        assert taught['result']['crystallized'] is False
+        assert taught['result']['reason'] == 'FAILED_MUTATED_TWIN_VERIFICATION'
     assert (teaching['target'].read_bytes(), teaching['test'].read_bytes()) == frozen_teach
     baseline = build_case(repo, family, 'baseline')
     baseline['args']['retained_learning']['enabled'] = False
@@ -137,13 +143,23 @@ def test_retained_transfer_competes_with_actual_search_and_passes_external_audit
     assert cold['result']['repair_search_invocations'] == 1  # not a no-fallback baseline
     assert cold['result']['retained_learning']['enabled'] is False
     assert warm['pid'] != taught['pid'] and warm['pid'] != cold['pid']
-    assert warm['result']['pass'] is True and warm['result']['applied'] is True
-    assert warm['result']['repair_search_invocations'] == 0
-    assert warm['result']['retained_learning']['hit'] is True
-    assert warm['result']['post_apply_corpus']['observed_test_count'] == 3
-    assert warm['result']['applied_source_sha256'][learned['args']['retained_learning']['target_path']] == hashlib.sha256(learned['target'].read_bytes()).hexdigest()
-    warm_audit = audit(learned)
-    assert warm_audit['returncode'] == 0, warm_audit
+    if learnable:
+        assert warm['result']['pass'] is True and warm['result']['applied'] is True
+        assert warm['result']['repair_search_invocations'] == 0
+        assert warm['result']['retained_learning']['hit'] is True
+        assert warm['result']['post_apply_corpus']['observed_test_count'] == 3
+        assert warm['result']['applied_source_sha256'][learned['args']['retained_learning']['target_path']] == hashlib.sha256(learned['target'].read_bytes()).hexdigest()
+        warm_audit = audit(learned)
+        assert warm_audit['returncode'] == 0, warm_audit
+    else:
+        assert warm['result']['retained_learning']['hit'] is False
+        assert warm['result']['repair_search_invocations'] == 1
+        assert warm['result']['pass'] is False
+        assert warm['result']['applied'] is False
+        assert learned['target'].read_bytes() == learned['before'].encode()
+        assert skills.VerifiedSkillStore(repo / 'memory/skills.sqlite', seed=False).count() == 0
+        warm_audit = audit(learned)
+        assert warm_audit['returncode'] != 0  # failed repair is not an audit success
     if cold['result']['pass']:
         cold_audit = audit(baseline)
         assert cold_audit['returncode'] == 0, cold_audit
@@ -153,7 +169,7 @@ def test_retained_transfer_competes_with_actual_search_and_passes_external_audit
     assert (baseline['test'].read_bytes(), baseline['audit'].read_bytes()) == frozen_baseline
     assert (learned['test'].read_bytes(), learned['audit'].read_bytes()) == frozen_learned
     record_property('retained_production_run', json.dumps({
-        'family': family, 'trial': trial, 'teaching': taught, 'baseline': cold, 'learned': warm,
+        'family': family, 'trial': trial, 'learning_expected': learnable, 'teaching': taught, 'baseline': cold, 'learned': warm,
         'baseline_external_audit': cold_audit, 'learned_external_audit': warm_audit,
         'tests_unchanged': True, 'expert_teaching_cost_included_separately': True,
         'baseline_has_same_search_and_trace_fallback': True,
@@ -178,21 +194,22 @@ def test_production_search_can_teach_a_skill_that_next_project_reuses(tmp_path):
 
 
 def test_artifact_removal_and_restoration_keep_actual_search_available(tmp_path):
-    teaching = build_case(tmp_path, 'integer_encoding', 'teaching')
+    teaching = build_case(tmp_path, 'floor_boundary', 'teaching')
     assert execute('teach', tmp_path, teaching)['result']['crystallized']
     db = tmp_path / 'memory/skills.sqlite'
     saved = db.with_suffix('.saved')
     db.rename(saved)
-    missing = build_case(tmp_path, 'integer_encoding', 'missing')
+    missing = build_case(tmp_path, 'floor_boundary', 'missing')
     before = missing['target'].read_bytes()
     result = execute('apply', tmp_path, missing)
     assert result['result']['repair_search_invocations'] == 1
     assert result['result']['retained_learning']['hit'] is False
-    assert result['result']['pass'] is False
-    assert missing['target'].read_bytes() == before
+    assert result['result']['pass'] is True
+    assert missing['target'].read_bytes() != before
+    assert audit(missing)['returncode'] == 0
     db.unlink()
     saved.rename(db)
-    restored = build_case(tmp_path, 'integer_encoding', 'restored')
+    restored = build_case(tmp_path, 'floor_boundary', 'restored')
     result = execute('apply', tmp_path, restored)
     assert result['result']['retained_learning']['hit'] is True
     assert result['result']['pass'] is True
@@ -214,16 +231,19 @@ def test_inapplicable_scope_does_not_disable_fresh_search(tmp_path):
 
 
 def test_invalidated_skill_is_not_applied_by_production_path(tmp_path):
-    teaching = build_case(tmp_path, 'integer_encoding', 'teaching')
+    teaching = build_case(tmp_path, 'floor_boundary', 'teaching')
     taught = execute('teach', tmp_path, teaching)['result']
     store = skills.VerifiedSkillStore(tmp_path / 'memory/skills.sqlite', seed=False)
     assert store.invalidate(taught['skill_id'], 'qualification counterexample')
-    case = build_case(tmp_path, 'integer_encoding', 'invalidated')
+    case = build_case(tmp_path, 'floor_boundary', 'invalidated')
     result = execute('apply', tmp_path, case)['result']
     assert result['retained_learning']['hit'] is False
     assert result['repair_search_invocations'] == 1
-    assert result['pass'] is False
-    assert store.lookup_rules('python')[0]['state'] == 'INVALIDATED'
+    assert result['pass'] is True
+    assert audit(case)['returncode'] == 0
+    invalidated = [rule for rule in store.lookup_rules('python') if rule['skill_id'] == taught['skill_id']]
+    assert len(invalidated) == 1
+    assert invalidated[0]['state'] == 'INVALIDATED'
 
 
 def test_passing_stated_command_cannot_authorize_a_patch_that_fails_the_corpus(tmp_path):

@@ -37,7 +37,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Production repair accepts a zero-work stated command as already satisfied and does not compose scoped retained repair with its existing verified search/application gates.",
-  "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+  "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,8 +50,13 @@
   "highest_leverage_now": true,
   "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
   "incremental_spend_usd": 0,
+  "integration_base_rebind": {
+    "current_merge_base": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
+    "original_planning_and_test_base": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+    "reason": "User authorized merge. Preserve incoming removed-name pinning and its refusal of generic rename lessons. Earlier 9/9 remains historical; rerun integrated curriculum with encoding as an explicit must-refuse teaching case, not a successful retained transfer. Artifact/invalidation controls use structural floor repair and assert actual fallback success/audit, not dependence on memory for solvability."
+  },
   "load_bearing_primary": {
-    "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+    "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -61,7 +66,7 @@
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/1000",
     "interpretation": "Reliable production source effects and verified reusable repairs are prerequisites for coding capability. No obligation discharge, official benchmark gain or independent certification.",
-    "measured_effect": "28 new qualification cases pass. Three separately taught families, three repetitions each: learned 9/9 actual production repairs and external audits, disabled capable solver 6/9. Affected suites 155 passed, 2 inherited failures. Detailed CPU/wall/subprocess costs and limitations in adjacent qualification report/JSON. No benchmark/ownership/terminal promotion.",
+    "measured_effect": "Integrated on e529c7b7: 160 passed, 2 inherited failures in 79.88s. All 28 qualification and 5 incoming rename-safety cases pass. Structural learned transfers 6/6; encoding API-rename teaching must refuse 3/3, with both arms unresolved on those three tasks. Overall learned and capable baseline task success both 6/9. Historical original-base 9/9 is not claimed current. Preserve incoming safety without new authority or promotion.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
@@ -99,7 +104,7 @@
   "probe_specific": false,
   "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
   "recursive_obs": {
-    "canonical_base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
+    "canonical_base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Stated-command exit code alone as proof that named tests passed",

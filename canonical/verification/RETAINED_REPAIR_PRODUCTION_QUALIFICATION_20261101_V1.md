@@ -1,3 +1,44 @@
+# Integration update — current result on incoming main
+
+The original report below is **historical**, measured on `07099b7c`. It must not
+be read as the current integrated-tree result. PR #6549 integrates main at
+`e529c7b7b1f589617af9df9ea1cea7a825f2e1ce` and preserves its new rule that removed
+identifier names remain concrete. Generic rename lessons must fail the mutated
+twin; this intentionally refuses the earlier encoding `rstrip` → `lstrip` lesson.
+We did not relax that safety rule to retain the old 9/9 headline.
+
+Current measurements: **6/9 successful learned repairs and audits versus 6/9 for
+the capable disabled baseline**. All six structural transfers hit memory with
+search zero. **All three encoding teachings are correctly refused**; those three
+tasks remain unresolved in both arms, not counted as successful repairs.
+
+| Family | Disabled solved + audit | Disabled median incl. audit | Learning enabled solved + audit | Enabled median incl. audit |
+|---|---:|---:|---:|---:|
+| floor_boundary | 3/3 | 1.473s | 3/3 | 0.806s |
+| iterator_extent | 3/3 | 1.441s | 3/3 | 0.798s |
+| integer_encoding | 0/3 | 4.413s | 0/3 | 4.346s |
+
+These timings include worker startup/repair and external audit, but not the
+separate teaching cost (full observations are in the JSON integration section).
+Failed-task timings are not speed comparisons between correct solutions.
+
+Integrated affected run: **160 passed, 2 inherited failures in 79.88s**, including
+all **28 qualification tests** and the **5 incoming rename-safety tests**. The two
+inherited legacy apply failures remain unchanged and are explained below.
+The initial integrated run exposed five obsolete encoding expectations; they were
+corrected openly to require refusal, not skipped or made to accept a bad rename.
+Artifact restoration and invalidation controls now use the structural floor
+family, require actual fallback success and passing external audits, and prove
+which path ran—not that memory is necessary to solve the task. The invalidation
+assertion identifies the exact original skill, so a newly taught different skill
+does not hide resurrection of an invalidated one.
+
+No 9/9 current-tree advantage, independent certification, whole-repository-green
+status, universal learning or permanent mastery is claimed. Original observations
+are retained below and in the JSON for chronology rather than rewritten.
+
+---
+
 # Bounded production repair and retained-learning qualification
 
 2026-11-01. Base: `07099b7c5986a8864e1fc8bb2a7d14050727a77f`.

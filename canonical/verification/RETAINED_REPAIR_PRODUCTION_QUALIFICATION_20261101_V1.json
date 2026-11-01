@@ -12,6 +12,1796 @@
   "base_commit": "07099b7c5986a8864e1fc8bb2a7d14050727a77f",
   "general_capability_credit_delta": 0,
   "independent_certification": false,
+  "integration_after_incoming_rename_guard": {
+    "affected_suite": {
+      "elapsed_s": 79.88,
+      "failed": 2,
+      "incoming_rename_safety_cases_passed": 5,
+      "new_qualification_cases_passed": 28,
+      "passed": 160
+    },
+    "base_commit": "e529c7b7b1f589617af9df9ea1cea7a825f2e1ce",
+    "baseline_successful_tasks": 6,
+    "encoding_teachings_correctly_refused": 3,
+    "interpretation": "Original top-level runs/source hashes describe the original 07099 base, not the integrated tree. Current incoming rename-safety policy intentionally refuses encoding API-rename lessons. Six structural transfers succeed; three encoding repair tasks remain unresolved with or without memory. All three forbidden teachings are refused. Artifact/invalidation controls now verify actual fresh-search success for floor and distinguish retained hit from fallback, not memory-dependent solvability.",
+    "learned_successful_tasks": 6,
+    "runs": [
+      {
+        "baseline": {
+          "child_system_s": 0.094605,
+          "child_user_s": 0.854495,
+          "elapsed_s": 1.072710035,
+          "max_child_rss_kib": 25604,
+          "pid": 12985,
+          "process_wall_s": 1.1540975679999974,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "baseline/engine/primitives.py": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "baseline/test_behavior.py": "0d6b2eb62f52a65e76e972c96cb075d5b047433e08c89da73accbf6365fd029d"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "baseline/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete0/floor_boundary/baseline/test_behavior.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(select_tier(1,[1,5,10]),1)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 5 != 1\n",
+            "repair_search_invocations": 1,
+            "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/baseline/engine/primitives.py\n+++ b/baseline/engine/primitives.py\n@@ -118,7 +118,7 @@\n     i = bisect.bisect_right(options, x)\n     if not i:\n         raise ValueError(\"no floor options less than or equal to: %r\" % x)\n-    return options[i - 3]\n+    return options[i - 1]\n \n \n class Bits:\n"
+            ]
+          },
+          "subprocess_calls": 15,
+          "worker_max_rss_kib": 53264,
+          "worker_system_s": 0.017144,
+          "worker_user_s": 0.171376
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.012259999999999993,
+          "child_user_s": 0.1798200000000003,
+          "elapsed_s": 0.19433034999974552,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "floor_boundary",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.028572999999999998,
+          "child_user_s": 0.394376,
+          "elapsed_s": 0.44452004699996905,
+          "max_child_rss_kib": 23196,
+          "pid": 13001,
+          "process_wall_s": 0.5185898540003109,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "learned/engine/primitives.py": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "learned/test_behavior.py": "0d6b2eb62f52a65e76e972c96cb075d5b047433e08c89da73accbf6365fd029d"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "learned/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete0/floor_boundary/learned/test_behavior.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(select_tier(1,[1,5,10]),1)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 5 != 1\n",
+            "repair_mode": "scoped_retained_repair",
+            "repair_search_invocations": 0,
+            "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": true,
+              "oracle_calls": 1,
+              "skill_id": "skill_d386fa2e4833e43f4ae83485",
+              "teaching": null,
+              "verification": {
+                "candidate_sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+                "evidence": {
+                  "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                  "measurement_spec_sha256": "b53db498887e3738d0a4600810d8b57567a691eb7495533d3b691d05ded16d23",
+                  "returncode": 0,
+                  "snapshot_sha256": "1a20b6cbc2057682852b72ec288a8c3b0478cefb8a6a38f73a1dd3b2be2f244e",
+                  "test_count": 3,
+                  "test_evidence": {
+                    "returncode": 0,
+                    "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "test_count": 3,
+                    "timed_out": false
+                  }
+                },
+                "kind": "TEST_SUITE",
+                "scope_id": "upstream-derived/floor_boundary/v1",
+                "whole_task_correctness_proved": false
+              },
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/learned/engine/primitives.py\n+++ b/learned/engine/primitives.py\n@@ -118,7 +118,7 @@\n     i = bisect.bisect_right(options, x)\n     if not i:\n         raise ValueError(\"no floor options less than or equal to: %r\" % x)\n-    return options[i - 3]\n+    return options[i - 1]\n \n \n class Bits:\n"
+            ]
+          },
+          "subprocess_calls": 3,
+          "worker_max_rss_kib": 53264,
+          "worker_system_s": 0.012268,
+          "worker_user_s": 0.069503
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.012128,
+          "child_user_s": 0.18191999999999986,
+          "elapsed_s": 0.1964993950000462,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "learning_expected": true,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.008185,
+          "child_user_s": 0.081826,
+          "elapsed_s": 0.11849927100001878,
+          "max_child_rss_kib": 22920,
+          "pid": 12982,
+          "process_wall_s": 0.1915282270001626,
+          "result": {
+            "crystallized": true,
+            "hole_count": 3,
+            "skeleton_fp": "f5638479405b09da",
+            "skill_id": "skill_d386fa2e4833e43f4ae83485",
+            "state": "ACTIVE",
+            "training_verification": {
+              "candidate_sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+              "evidence": {
+                "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+                "returncode": 0,
+                "snapshot_sha256": "1a20b6cbc2057682852b72ec288a8c3b0478cefb8a6a38f73a1dd3b2be2f244e",
+                "test_count": 3,
+                "test_evidence": {
+                  "returncode": 0,
+                  "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "test_count": 3,
+                  "timed_out": false
+                }
+              },
+              "kind": "TEST_SUITE",
+              "scope_id": "upstream-derived/floor_boundary/v1",
+              "whole_task_correctness_proved": false
+            },
+            "twin_verification": {
+              "kind": "STRUCTURAL_TWIN",
+              "whole_task_correctness_proved": false
+            },
+            "whole_task_correctness_proved": false
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 53264,
+          "worker_system_s": 0.0042959999999999995,
+          "worker_user_s": 0.081608
+        },
+        "tests_unchanged": true,
+        "trial": 0
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.076581,
+          "child_user_s": 0.965708,
+          "elapsed_s": 1.169397065999874,
+          "max_child_rss_kib": 25444,
+          "pid": 13010,
+          "process_wall_s": 1.2505699859998458,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "baseline/engine/primitives.py": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "baseline/test_behavior.py": "0d6b2eb62f52a65e76e972c96cb075d5b047433e08c89da73accbf6365fd029d"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "baseline/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete1/floor_boundary/baseline/test_behavior.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(select_tier(1,[1,5,10]),1)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 5 != 1\n",
+            "repair_search_invocations": 1,
+            "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/baseline/engine/primitives.py\n+++ b/baseline/engine/primitives.py\n@@ -118,7 +118,7 @@\n     i = bisect.bisect_right(options, x)\n     if not i:\n         raise ValueError(\"no floor options less than or equal to: %r\" % x)\n-    return options[i - 3]\n+    return options[i - 1]\n \n \n class Bits:\n"
+            ]
+          },
+          "subprocess_calls": 15,
+          "worker_max_rss_kib": 53488,
+          "worker_system_s": 0.01622,
+          "worker_user_s": 0.178566
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.03198200000000001,
+          "child_user_s": 0.18789199999999973,
+          "elapsed_s": 0.22273834299994633,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "floor_boundary",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.024090999999999998,
+          "child_user_s": 0.468143,
+          "elapsed_s": 0.5208748609998111,
+          "max_child_rss_kib": 23144,
+          "pid": 13026,
+          "process_wall_s": 0.5963153780003267,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "learned/engine/primitives.py": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "learned/test_behavior.py": "0d6b2eb62f52a65e76e972c96cb075d5b047433e08c89da73accbf6365fd029d"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "learned/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete1/floor_boundary/learned/test_behavior.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(select_tier(1,[1,5,10]),1)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 5 != 1\n",
+            "repair_mode": "scoped_retained_repair",
+            "repair_search_invocations": 0,
+            "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": true,
+              "oracle_calls": 1,
+              "skill_id": "skill_d386fa2e4833e43f4ae83485",
+              "teaching": null,
+              "verification": {
+                "candidate_sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+                "evidence": {
+                  "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                  "measurement_spec_sha256": "b53db498887e3738d0a4600810d8b57567a691eb7495533d3b691d05ded16d23",
+                  "returncode": 0,
+                  "snapshot_sha256": "1a20b6cbc2057682852b72ec288a8c3b0478cefb8a6a38f73a1dd3b2be2f244e",
+                  "test_count": 3,
+                  "test_evidence": {
+                    "returncode": 0,
+                    "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "test_count": 3,
+                    "timed_out": false
+                  }
+                },
+                "kind": "TEST_SUITE",
+                "scope_id": "upstream-derived/floor_boundary/v1",
+                "whole_task_correctness_proved": false
+              },
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/learned/engine/primitives.py\n+++ b/learned/engine/primitives.py\n@@ -118,7 +118,7 @@\n     i = bisect.bisect_right(options, x)\n     if not i:\n         raise ValueError(\"no floor options less than or equal to: %r\" % x)\n-    return options[i - 3]\n+    return options[i - 1]\n \n \n class Bits:\n"
+            ]
+          },
+          "subprocess_calls": 3,
+          "worker_max_rss_kib": 53488,
+          "worker_system_s": 0.003701,
+          "worker_user_s": 0.07773999999999999
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.02016599999999996,
+          "child_user_s": 0.1935910000000005,
+          "elapsed_s": 0.21674223799982428,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "learning_expected": true,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.012407999999999999,
+          "child_user_s": 0.09181,
+          "elapsed_s": 0.13583442200024365,
+          "max_child_rss_kib": 22828,
+          "pid": 13007,
+          "process_wall_s": 0.209583826999733,
+          "result": {
+            "crystallized": true,
+            "hole_count": 3,
+            "skeleton_fp": "f5638479405b09da",
+            "skill_id": "skill_d386fa2e4833e43f4ae83485",
+            "state": "ACTIVE",
+            "training_verification": {
+              "candidate_sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+              "evidence": {
+                "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+                "returncode": 0,
+                "snapshot_sha256": "1a20b6cbc2057682852b72ec288a8c3b0478cefb8a6a38f73a1dd3b2be2f244e",
+                "test_count": 3,
+                "test_evidence": {
+                  "returncode": 0,
+                  "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "test_count": 3,
+                  "timed_out": false
+                }
+              },
+              "kind": "TEST_SUITE",
+              "scope_id": "upstream-derived/floor_boundary/v1",
+              "whole_task_correctness_proved": false
+            },
+            "twin_verification": {
+              "kind": "STRUCTURAL_TWIN",
+              "whole_task_correctness_proved": false
+            },
+            "whole_task_correctness_proved": false
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 53488,
+          "worker_system_s": 0.01884,
+          "worker_user_s": 0.067827
+        },
+        "tests_unchanged": true,
+        "trial": 1
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.087351,
+          "child_user_s": 0.9846349999999999,
+          "elapsed_s": 1.2073099969998111,
+          "max_child_rss_kib": 25632,
+          "pid": 13035,
+          "process_wall_s": 1.2944278780000786,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "baseline/engine/primitives.py": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "baseline/test_behavior.py": "0d6b2eb62f52a65e76e972c96cb075d5b047433e08c89da73accbf6365fd029d"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "baseline/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete2/floor_boundary/baseline/test_behavior.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(select_tier(1,[1,5,10]),1)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 5 != 1\n",
+            "repair_search_invocations": 1,
+            "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/baseline/engine/primitives.py\n+++ b/baseline/engine/primitives.py\n@@ -118,7 +118,7 @@\n     i = bisect.bisect_right(options, x)\n     if not i:\n         raise ValueError(\"no floor options less than or equal to: %r\" % x)\n-    return options[i - 3]\n+    return options[i - 1]\n \n \n class Bits:\n"
+            ]
+          },
+          "subprocess_calls": 15,
+          "worker_max_rss_kib": 53488,
+          "worker_system_s": 0.025145999999999998,
+          "worker_user_s": 0.17602399999999999
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.008040999999999965,
+          "child_user_s": 0.19695199999999957,
+          "elapsed_s": 0.20731669399992825,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "floor_boundary",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.052783,
+          "child_user_s": 0.437471,
+          "elapsed_s": 0.5123652479996963,
+          "max_child_rss_kib": 23184,
+          "pid": 13052,
+          "process_wall_s": 0.5924399700002141,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "learned/engine/primitives.py": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "learned/test_behavior.py": "0d6b2eb62f52a65e76e972c96cb075d5b047433e08c89da73accbf6365fd029d"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "learned/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete2/floor_boundary/learned/test_behavior.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(select_tier(1,[1,5,10]),1)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 5 != 1\n",
+            "repair_mode": "scoped_retained_repair",
+            "repair_search_invocations": 0,
+            "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": true,
+              "oracle_calls": 1,
+              "skill_id": "skill_d386fa2e4833e43f4ae83485",
+              "teaching": null,
+              "verification": {
+                "candidate_sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+                "evidence": {
+                  "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                  "measurement_spec_sha256": "b53db498887e3738d0a4600810d8b57567a691eb7495533d3b691d05ded16d23",
+                  "returncode": 0,
+                  "snapshot_sha256": "1a20b6cbc2057682852b72ec288a8c3b0478cefb8a6a38f73a1dd3b2be2f244e",
+                  "test_count": 3,
+                  "test_evidence": {
+                    "returncode": 0,
+                    "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "test_count": 3,
+                    "timed_out": false
+                  }
+                },
+                "kind": "TEST_SUITE",
+                "scope_id": "upstream-derived/floor_boundary/v1",
+                "whole_task_correctness_proved": false
+              },
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/learned/engine/primitives.py\n+++ b/learned/engine/primitives.py\n@@ -118,7 +118,7 @@\n     i = bisect.bisect_right(options, x)\n     if not i:\n         raise ValueError(\"no floor options less than or equal to: %r\" % x)\n-    return options[i - 3]\n+    return options[i - 1]\n \n \n class Bits:\n"
+            ]
+          },
+          "subprocess_calls": 3,
+          "worker_max_rss_kib": 53488,
+          "worker_system_s": 0.036185999999999996,
+          "worker_user_s": 0.052268999999999996
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.011955000000000049,
+          "child_user_s": 0.19923000000000002,
+          "elapsed_s": 0.2135512490003748,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "learning_expected": true,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.012242,
+          "child_user_s": 0.075387,
+          "elapsed_s": 0.12071077000018704,
+          "max_child_rss_kib": 22920,
+          "pid": 13032,
+          "process_wall_s": 0.19773340200026723,
+          "result": {
+            "crystallized": true,
+            "hole_count": 3,
+            "skeleton_fp": "f5638479405b09da",
+            "skill_id": "skill_d386fa2e4833e43f4ae83485",
+            "state": "ACTIVE",
+            "training_verification": {
+              "candidate_sha256": "f832235006d1a1fac34ff0d83f0f9819d00a3086cfb4df6169212b4d8d31d4fe",
+              "evidence": {
+                "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+                "returncode": 0,
+                "snapshot_sha256": "1a20b6cbc2057682852b72ec288a8c3b0478cefb8a6a38f73a1dd3b2be2f244e",
+                "test_count": 3,
+                "test_evidence": {
+                  "returncode": 0,
+                  "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "test_count": 3,
+                  "timed_out": false
+                }
+              },
+              "kind": "TEST_SUITE",
+              "scope_id": "upstream-derived/floor_boundary/v1",
+              "whole_task_correctness_proved": false
+            },
+            "twin_verification": {
+              "kind": "STRUCTURAL_TWIN",
+              "whole_task_correctness_proved": false
+            },
+            "whole_task_correctness_proved": false
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 53488,
+          "worker_system_s": 0.008409999999999999,
+          "worker_user_s": 0.084105
+        },
+        "tests_unchanged": true,
+        "trial": 2
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.099019,
+          "child_user_s": 0.724949,
+          "elapsed_s": 1.16247991299997,
+          "max_child_rss_kib": 30596,
+          "pid": 13061,
+          "process_wall_s": 1.243228247999923,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "baseline/engine/primitives.py": "653f0ca70b57f0350c77cd5d8b82f8021b22d74691f1d3a00e3439d6f458b37c"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "baseline/test_behavior.py": "aa271b3e60fa7a6f4c0988d79b644cfd6653da5ccea29a47ea18bdd7d423b873"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "baseline/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": " testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete3/iterator_extent/baseline/test_behavior.py\", line 5, in test_1\n    def test_1(self): self.assertEqual(first_batch([1,2],1),[1])\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete3/iterator_extent/baseline/engine/service.py\", line 3, in first_batch\n    return take(size, iter(values))\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete3/iterator_extent/baseline/engine/primitives.py\", line 126, in take\n    return list(islice(iterable, n - 2))\n                ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\n",
+            "repair_search_invocations": 1,
+            "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/baseline/engine/primitives.py\n+++ b/baseline/engine/primitives.py\n@@ -123,7 +123,7 @@\n         [0, 1, 2]\n \n     \"\"\"\n-    return list(islice(iterable, n - 2))\n+    return list(islice(iterable, n - 0))\n \n \n def tabulate(function, start=0):\n"
+            ]
+          },
+          "subprocess_calls": 10,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.01652,
+          "worker_user_s": 0.388202
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.008077,
+          "child_user_s": 0.18566599999999944,
+          "elapsed_s": 0.19731792499987932,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "iterator_extent",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.031932999999999996,
+          "child_user_s": 0.49785399999999996,
+          "elapsed_s": 0.5632544949999101,
+          "max_child_rss_kib": 25836,
+          "pid": 13072,
+          "process_wall_s": 0.6421212549998927,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "learned/engine/primitives.py": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "learned/test_behavior.py": "aa271b3e60fa7a6f4c0988d79b644cfd6653da5ccea29a47ea18bdd7d423b873"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "learned/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": " in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete3/iterator_extent/learned/test_behavior.py\", line 5, in test_1\n    def test_1(self): self.assertEqual(first_batch([1,2],1),[1])\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete3/iterator_extent/learned/engine/service.py\", line 3, in first_batch\n    return take(size, iter(values))\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete3/iterator_extent/learned/engine/primitives.py\", line 126, in take\n    return list(islice(iterable, n - 2))\n                ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\n",
+            "repair_mode": "scoped_retained_repair",
+            "repair_search_invocations": 0,
+            "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": true,
+              "oracle_calls": 1,
+              "skill_id": "skill_7bddde0f36a6e47c34e35597",
+              "teaching": null,
+              "verification": {
+                "candidate_sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+                "evidence": {
+                  "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                  "measurement_spec_sha256": "b53db498887e3738d0a4600810d8b57567a691eb7495533d3b691d05ded16d23",
+                  "returncode": 0,
+                  "snapshot_sha256": "d6df83bd6e4531f99a500650542c24f6fad002fd69f01bfa040dd4a0b123cb1e",
+                  "test_count": 3,
+                  "test_evidence": {
+                    "returncode": 0,
+                    "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "test_count": 3,
+                    "timed_out": false
+                  }
+                },
+                "kind": "TEST_SUITE",
+                "scope_id": "upstream-derived/iterator_extent/v1",
+                "whole_task_correctness_proved": false
+              },
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/learned/engine/primitives.py\n+++ b/learned/engine/primitives.py\n@@ -123,7 +123,7 @@\n         [0, 1, 2]\n \n     \"\"\"\n-    return list(islice(iterable, n - 2))\n+    return list(islice(iterable, n))\n \n \n def tabulate(function, start=0):\n"
+            ]
+          },
+          "subprocess_calls": 3,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.007974,
+          "worker_user_s": 0.087699
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.007982000000000045,
+          "child_user_s": 0.18756899999999987,
+          "elapsed_s": 0.198773385000095,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "learning_expected": true,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.008133,
+          "child_user_s": 0.089458,
+          "elapsed_s": 0.1880277280001792,
+          "max_child_rss_kib": 26072,
+          "pid": 13058,
+          "process_wall_s": 0.29237585200007743,
+          "result": {
+            "crystallized": true,
+            "hole_count": 4,
+            "skeleton_fp": "7a6d79e92c15f915",
+            "skill_id": "skill_7bddde0f36a6e47c34e35597",
+            "state": "ACTIVE",
+            "training_verification": {
+              "candidate_sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+              "evidence": {
+                "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+                "returncode": 0,
+                "snapshot_sha256": "d6df83bd6e4531f99a500650542c24f6fad002fd69f01bfa040dd4a0b123cb1e",
+                "test_count": 3,
+                "test_evidence": {
+                  "returncode": 0,
+                  "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "test_count": 3,
+                  "timed_out": false
+                }
+              },
+              "kind": "TEST_SUITE",
+              "scope_id": "upstream-derived/iterator_extent/v1",
+              "whole_task_correctness_proved": false
+            },
+            "twin_verification": {
+              "kind": "STRUCTURAL_TWIN",
+              "whole_task_correctness_proved": false
+            },
+            "whole_task_correctness_proved": false
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 53748,
+          "worker_system_s": 0.007757,
+          "worker_user_s": 0.170621
+        },
+        "tests_unchanged": true,
+        "trial": 0
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.11324999999999999,
+          "child_user_s": 0.691108,
+          "elapsed_s": 1.1370188680002684,
+          "max_child_rss_kib": 30384,
+          "pid": 13081,
+          "process_wall_s": 1.2212146689998917,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "baseline/engine/primitives.py": "653f0ca70b57f0350c77cd5d8b82f8021b22d74691f1d3a00e3439d6f458b37c"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "baseline/test_behavior.py": "aa271b3e60fa7a6f4c0988d79b644cfd6653da5ccea29a47ea18bdd7d423b873"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "baseline/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": " testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete4/iterator_extent/baseline/test_behavior.py\", line 5, in test_1\n    def test_1(self): self.assertEqual(first_batch([1,2],1),[1])\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete4/iterator_extent/baseline/engine/service.py\", line 3, in first_batch\n    return take(size, iter(values))\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete4/iterator_extent/baseline/engine/primitives.py\", line 126, in take\n    return list(islice(iterable, n - 2))\n                ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\n",
+            "repair_search_invocations": 1,
+            "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/baseline/engine/primitives.py\n+++ b/baseline/engine/primitives.py\n@@ -123,7 +123,7 @@\n         [0, 1, 2]\n \n     \"\"\"\n-    return list(islice(iterable, n - 2))\n+    return list(islice(iterable, n - 0))\n \n \n def tabulate(function, start=0):\n"
+            ]
+          },
+          "subprocess_calls": 10,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.016551,
+          "worker_user_s": 0.385945
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.024183999999999983,
+          "child_user_s": 0.1813760000000002,
+          "elapsed_s": 0.2079372279999916,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "iterator_extent",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.06421199999999999,
+          "child_user_s": 0.399203,
+          "elapsed_s": 0.4930217989999619,
+          "max_child_rss_kib": 25788,
+          "pid": 13092,
+          "process_wall_s": 0.5719314030002352,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "learned/engine/primitives.py": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "learned/test_behavior.py": "aa271b3e60fa7a6f4c0988d79b644cfd6653da5ccea29a47ea18bdd7d423b873"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "learned/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": " in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete4/iterator_extent/learned/test_behavior.py\", line 5, in test_1\n    def test_1(self): self.assertEqual(first_batch([1,2],1),[1])\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete4/iterator_extent/learned/engine/service.py\", line 3, in first_batch\n    return take(size, iter(values))\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete4/iterator_extent/learned/engine/primitives.py\", line 126, in take\n    return list(islice(iterable, n - 2))\n                ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\n",
+            "repair_mode": "scoped_retained_repair",
+            "repair_search_invocations": 0,
+            "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": true,
+              "oracle_calls": 1,
+              "skill_id": "skill_7bddde0f36a6e47c34e35597",
+              "teaching": null,
+              "verification": {
+                "candidate_sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+                "evidence": {
+                  "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                  "measurement_spec_sha256": "b53db498887e3738d0a4600810d8b57567a691eb7495533d3b691d05ded16d23",
+                  "returncode": 0,
+                  "snapshot_sha256": "d6df83bd6e4531f99a500650542c24f6fad002fd69f01bfa040dd4a0b123cb1e",
+                  "test_count": 3,
+                  "test_evidence": {
+                    "returncode": 0,
+                    "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "test_count": 3,
+                    "timed_out": false
+                  }
+                },
+                "kind": "TEST_SUITE",
+                "scope_id": "upstream-derived/iterator_extent/v1",
+                "whole_task_correctness_proved": false
+              },
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/learned/engine/primitives.py\n+++ b/learned/engine/primitives.py\n@@ -123,7 +123,7 @@\n         [0, 1, 2]\n \n     \"\"\"\n-    return list(islice(iterable, n - 2))\n+    return list(islice(iterable, n))\n \n \n def tabulate(function, start=0):\n"
+            ]
+          },
+          "subprocess_calls": 3,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.007757999999999999,
+          "worker_user_s": 0.085322
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.011948999999999987,
+          "child_user_s": 0.21141899999999936,
+          "elapsed_s": 0.225875182999971,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "learning_expected": true,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.008438,
+          "child_user_s": 0.09276,
+          "elapsed_s": 0.1639628520001679,
+          "max_child_rss_kib": 26012,
+          "pid": 13078,
+          "process_wall_s": 0.23472102200003064,
+          "result": {
+            "crystallized": true,
+            "hole_count": 4,
+            "skeleton_fp": "7a6d79e92c15f915",
+            "skill_id": "skill_7bddde0f36a6e47c34e35597",
+            "state": "ACTIVE",
+            "training_verification": {
+              "candidate_sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+              "evidence": {
+                "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+                "returncode": 0,
+                "snapshot_sha256": "d6df83bd6e4531f99a500650542c24f6fad002fd69f01bfa040dd4a0b123cb1e",
+                "test_count": 3,
+                "test_evidence": {
+                  "returncode": 0,
+                  "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "test_count": 3,
+                  "timed_out": false
+                }
+              },
+              "kind": "TEST_SUITE",
+              "scope_id": "upstream-derived/iterator_extent/v1",
+              "whole_task_correctness_proved": false
+            },
+            "twin_verification": {
+              "kind": "STRUCTURAL_TWIN",
+              "whole_task_correctness_proved": false
+            },
+            "whole_task_correctness_proved": false
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.008374999999999999,
+          "worker_user_s": 0.10887899999999999
+        },
+        "tests_unchanged": true,
+        "trial": 1
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.072512,
+          "child_user_s": 0.774801,
+          "elapsed_s": 1.206926681999903,
+          "max_child_rss_kib": 30828,
+          "pid": 13101,
+          "process_wall_s": 1.2792703139998594,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "baseline/engine/primitives.py": "653f0ca70b57f0350c77cd5d8b82f8021b22d74691f1d3a00e3439d6f458b37c"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "baseline/test_behavior.py": "aa271b3e60fa7a6f4c0988d79b644cfd6653da5ccea29a47ea18bdd7d423b873"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "baseline/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": " testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete5/iterator_extent/baseline/test_behavior.py\", line 5, in test_1\n    def test_1(self): self.assertEqual(first_batch([1,2],1),[1])\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete5/iterator_extent/baseline/engine/service.py\", line 3, in first_batch\n    return take(size, iter(values))\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete5/iterator_extent/baseline/engine/primitives.py\", line 126, in take\n    return list(islice(iterable, n - 2))\n                ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\n",
+            "repair_search_invocations": 1,
+            "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/baseline/engine/primitives.py\n+++ b/baseline/engine/primitives.py\n@@ -123,7 +123,7 @@\n         [0, 1, 2]\n \n     \"\"\"\n-    return list(islice(iterable, n - 2))\n+    return list(islice(iterable, n - 0))\n \n \n def tabulate(function, start=0):\n"
+            ]
+          },
+          "subprocess_calls": 10,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.024815,
+          "worker_user_s": 0.39289599999999997
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.020332000000000017,
+          "child_user_s": 0.16665899999999922,
+          "elapsed_s": 0.1891083929999695,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "iterator_extent",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.05674,
+          "child_user_s": 0.39234199999999997,
+          "elapsed_s": 0.47843009600001096,
+          "max_child_rss_kib": 25856,
+          "pid": 13112,
+          "process_wall_s": 0.5473700060001647,
+          "result": {
+            "applied": true,
+            "applied_source_sha256": {
+              "learned/engine/primitives.py": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc"
+            },
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "declared_test_sha256": {
+              "learned/test_behavior.py": "aa271b3e60fa7a6f4c0988d79b644cfd6653da5ccea29a47ea18bdd7d423b873"
+            },
+            "detail": "The stated test failed before, the bounded verified repair was applied to the source tree, and the same stated test passes in place afterwards.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [
+              "learned/engine/primitives.py"
+            ],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": true,
+            "pass": true,
+            "post_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 0,
+              "shared_runner_enforces_nonempty": true
+            },
+            "post_apply_test_returncode": 0,
+            "post_apply_test_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": " in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete5/iterator_extent/learned/test_behavior.py\", line 5, in test_1\n    def test_1(self): self.assertEqual(first_batch([1,2],1),[1])\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete5/iterator_extent/learned/engine/service.py\", line 3, in first_batch\n    return take(size, iter(values))\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete5/iterator_extent/learned/engine/primitives.py\", line 126, in take\n    return list(islice(iterable, n - 2))\n                ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\n",
+            "repair_mode": "scoped_retained_repair",
+            "repair_search_invocations": 0,
+            "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": true,
+              "oracle_calls": 1,
+              "skill_id": "skill_7bddde0f36a6e47c34e35597",
+              "teaching": null,
+              "verification": {
+                "candidate_sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+                "evidence": {
+                  "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                  "measurement_spec_sha256": "b53db498887e3738d0a4600810d8b57567a691eb7495533d3b691d05ded16d23",
+                  "returncode": 0,
+                  "snapshot_sha256": "d6df83bd6e4531f99a500650542c24f6fad002fd69f01bfa040dd4a0b123cb1e",
+                  "test_count": 3,
+                  "test_evidence": {
+                    "returncode": 0,
+                    "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "test_count": 3,
+                    "timed_out": false
+                  }
+                },
+                "kind": "TEST_SUITE",
+                "scope_id": "upstream-derived/iterator_extent/v1",
+                "whole_task_correctness_proved": false
+              },
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": false,
+            "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": [
+              "--- a/learned/engine/primitives.py\n+++ b/learned/engine/primitives.py\n@@ -123,7 +123,7 @@\n         [0, 1, 2]\n \n     \"\"\"\n-    return list(islice(iterable, n - 2))\n+    return list(islice(iterable, n))\n \n \n def tabulate(function, start=0):\n"
+            ]
+          },
+          "subprocess_calls": 3,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.015389,
+          "worker_user_s": 0.069254
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.024011999999999922,
+          "child_user_s": 0.16807700000000025,
+          "elapsed_s": 0.19434675000002244,
+          "output_tail": "Ran 3 tests in 0.000s\n\nOK\n",
+          "returncode": 0,
+          "subprocess_calls": 1
+        },
+        "learning_expected": true,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.020309999999999998,
+          "child_user_s": 0.074007,
+          "elapsed_s": 0.16007005699975707,
+          "max_child_rss_kib": 26024,
+          "pid": 13098,
+          "process_wall_s": 0.2362067100002605,
+          "result": {
+            "crystallized": true,
+            "hole_count": 4,
+            "skeleton_fp": "7a6d79e92c15f915",
+            "skill_id": "skill_7bddde0f36a6e47c34e35597",
+            "state": "ACTIVE",
+            "training_verification": {
+              "candidate_sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+              "evidence": {
+                "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+                "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+                "returncode": 0,
+                "snapshot_sha256": "d6df83bd6e4531f99a500650542c24f6fad002fd69f01bfa040dd4a0b123cb1e",
+                "test_count": 3,
+                "test_evidence": {
+                  "returncode": 0,
+                  "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+                  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "test_count": 3,
+                  "timed_out": false
+                }
+              },
+              "kind": "TEST_SUITE",
+              "scope_id": "upstream-derived/iterator_extent/v1",
+              "whole_task_correctness_proved": false
+            },
+            "twin_verification": {
+              "kind": "STRUCTURAL_TWIN",
+              "whole_task_correctness_proved": false
+            },
+            "whole_task_correctness_proved": false
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.008146,
+          "worker_user_s": 0.11808099999999999
+        },
+        "tests_unchanged": true,
+        "trial": 2
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.509659,
+          "child_user_s": 3.247211,
+          "elapsed_s": 4.08720140000014,
+          "max_child_rss_kib": 24388,
+          "pid": 13121,
+          "process_wall_s": 4.162614562000272,
+          "result": {
+            "applied": false,
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "detail": "Bounded search exhausted; the source was not modified.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": false,
+            "pass": false,
+            "post_apply_test_returncode": null,
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.000s\n\nFAILED (failures=1)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete6/integer_encoding/baseline/test_behavior.py\", line 4, in test_0\n    def test_0(self): self.assertEqual(serialize_counter(256),b\"\\x01\\x00\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: b'\\x01' != b'\\x01\\x00'\n",
+            "repair_search_invocations": 1,
+            "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": true,
+            "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": []
+          },
+          "subprocess_calls": 74,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.052926,
+          "worker_user_s": 0.34602299999999997
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.004001999999999839,
+          "child_user_s": 0.21207999999999672,
+          "elapsed_s": 0.2190847639999447,
+          "output_tail": "001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete6/integer_encoding/audit/baseline_test.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(read_counter(serialize_counter(2**32)),2**32)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 4294967296\n",
+          "returncode": 1,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "integer_encoding",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.5006809999999999,
+          "child_user_s": 3.213943,
+          "elapsed_s": 4.032182253999963,
+          "max_child_rss_kib": 24892,
+          "pid": 13196,
+          "process_wall_s": 4.1161293650002335,
+          "result": {
+            "applied": false,
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "detail": "Bounded search exhausted; the source was not modified.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": false,
+            "pass": false,
+            "post_apply_test_returncode": null,
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.000s\n\nFAILED (failures=1)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete6/integer_encoding/learned/test_behavior.py\", line 4, in test_0\n    def test_0(self): self.assertEqual(serialize_counter(256),b\"\\x01\\x00\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: b'\\x01' != b'\\x01\\x00'\n",
+            "repair_search_invocations": 1,
+            "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": false,
+              "oracle_calls": 0,
+              "teaching": null,
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": true,
+            "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": []
+          },
+          "subprocess_calls": 74,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.040182999999999996,
+          "worker_user_s": 0.348255
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.03153000000000006,
+          "child_user_s": 0.18524100000000132,
+          "elapsed_s": 0.21926066900005026,
+          "output_tail": ".001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete6/integer_encoding/audit/learned_test.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(read_counter(serialize_counter(2**32)),2**32)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 4294967296\n",
+          "returncode": 1,
+          "subprocess_calls": 1
+        },
+        "learning_expected": false,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.012204,
+          "child_user_s": 0.100947,
+          "elapsed_s": 0.1260761140001705,
+          "max_child_rss_kib": 22068,
+          "pid": 13118,
+          "process_wall_s": 0.19550865400015027,
+          "result": {
+            "crystallized": false,
+            "reason": "FAILED_MUTATED_TWIN_VERIFICATION"
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 54012,
+          "worker_system_s": 0.016456,
+          "worker_user_s": 0.053482999999999996
+        },
+        "tests_unchanged": true,
+        "trial": 0
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.423672,
+          "child_user_s": 3.373287,
+          "elapsed_s": 4.124335105999762,
+          "max_child_rss_kib": 24448,
+          "pid": 13276,
+          "process_wall_s": 4.203904136999881,
+          "result": {
+            "applied": false,
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "detail": "Bounded search exhausted; the source was not modified.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": false,
+            "pass": false,
+            "post_apply_test_returncode": null,
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.000s\n\nFAILED (failures=1)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete7/integer_encoding/baseline/test_behavior.py\", line 4, in test_0\n    def test_0(self): self.assertEqual(serialize_counter(256),b\"\\x01\\x00\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: b'\\x01' != b'\\x01\\x00'\n",
+            "repair_search_invocations": 1,
+            "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": true,
+            "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": []
+          },
+          "subprocess_calls": 74,
+          "worker_max_rss_kib": 54476,
+          "worker_system_s": 0.06579399999999999,
+          "worker_user_s": 0.333078
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.015832999999999764,
+          "child_user_s": 0.1979210000000009,
+          "elapsed_s": 0.21608229499997833,
+          "output_tail": "001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete7/integer_encoding/audit/baseline_test.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(read_counter(serialize_counter(2**32)),2**32)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 4294967296\n",
+          "returncode": 1,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "integer_encoding",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.405051,
+          "child_user_s": 3.312479,
+          "elapsed_s": 4.035890780000045,
+          "max_child_rss_kib": 24924,
+          "pid": 13351,
+          "process_wall_s": 4.113811432000148,
+          "result": {
+            "applied": false,
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "detail": "Bounded search exhausted; the source was not modified.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": false,
+            "pass": false,
+            "post_apply_test_returncode": null,
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.000s\n\nFAILED (failures=1)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete7/integer_encoding/learned/test_behavior.py\", line 4, in test_0\n    def test_0(self): self.assertEqual(serialize_counter(256),b\"\\x01\\x00\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: b'\\x01' != b'\\x01\\x00'\n",
+            "repair_search_invocations": 1,
+            "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": false,
+              "oracle_calls": 0,
+              "teaching": null,
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": true,
+            "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": []
+          },
+          "subprocess_calls": 74,
+          "worker_max_rss_kib": 54476,
+          "worker_system_s": 0.040373,
+          "worker_user_s": 0.34540499999999996
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.015824999999999978,
+          "child_user_s": 0.21362799999999993,
+          "elapsed_s": 0.2317632419999427,
+          "output_tail": ".001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete7/integer_encoding/audit/learned_test.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(read_counter(serialize_counter(2**32)),2**32)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 4294967296\n",
+          "returncode": 1,
+          "subprocess_calls": 1
+        },
+        "learning_expected": false,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.016669,
+          "child_user_s": 0.11664999999999999,
+          "elapsed_s": 0.14775448299997151,
+          "max_child_rss_kib": 22252,
+          "pid": 13273,
+          "process_wall_s": 0.2150454859997808,
+          "result": {
+            "crystallized": false,
+            "reason": "FAILED_MUTATED_TWIN_VERIFICATION"
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 54476,
+          "worker_system_s": 0.004078,
+          "worker_user_s": 0.065255
+        },
+        "tests_unchanged": true,
+        "trial": 1
+      },
+      {
+        "baseline": {
+          "child_system_s": 0.41109399999999996,
+          "child_user_s": 3.313637,
+          "elapsed_s": 4.055774781999844,
+          "max_child_rss_kib": 24440,
+          "pid": 13431,
+          "process_wall_s": 4.132393871000204,
+          "result": {
+            "applied": false,
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "detail": "Bounded search exhausted; the source was not modified.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": false,
+            "pass": false,
+            "post_apply_test_returncode": null,
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.000s\n\nFAILED (failures=1)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete8/integer_encoding/baseline/test_behavior.py\", line 4, in test_0\n    def test_0(self): self.assertEqual(serialize_counter(256),b\"\\x01\\x00\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: b'\\x01' != b'\\x01\\x00'\n",
+            "repair_search_invocations": 1,
+            "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+            "retained_learning": {
+              "enabled": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": true,
+            "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": []
+          },
+          "subprocess_calls": 74,
+          "worker_max_rss_kib": 54476,
+          "worker_system_s": 0.040389,
+          "worker_user_s": 0.35891999999999996
+        },
+        "baseline_external_audit": {
+          "child_system_s": 0.03564400000000045,
+          "child_user_s": 0.24156399999999678,
+          "elapsed_s": 0.28075167600036366,
+          "output_tail": "001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete8/integer_encoding/audit/baseline_test.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(read_counter(serialize_counter(2**32)),2**32)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 4294967296\n",
+          "returncode": 1,
+          "subprocess_calls": 1
+        },
+        "baseline_has_same_search_and_trace_fallback": true,
+        "expert_teaching_cost_included_separately": true,
+        "family": "integer_encoding",
+        "independent_verification": false,
+        "learned": {
+          "child_system_s": 0.46868499999999996,
+          "child_user_s": 3.661627,
+          "elapsed_s": 4.529529682999964,
+          "max_child_rss_kib": 24932,
+          "pid": 13506,
+          "process_wall_s": 4.610329947999617,
+          "result": {
+            "applied": false,
+            "capability_id": "python.software.repair.apply.verified.v1",
+            "detail": "Bounded search exhausted; the source was not modified.",
+            "external_general_purpose_model_runtime_dependency_count": 0,
+            "files_written": [],
+            "hard_nonclaims": [
+              "NO_GENERAL_PATCH_COMPLETENESS_ONLY_THE_BOUNDED_VERIFIED_SEARCH_FAMILIES",
+              "A_PASSING_STATED_TEST_IS_NOT_PROOF_THE_WIDER_PROGRAM_IS_CORRECT",
+              "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT"
+            ],
+            "incremental_spend_usd": 0,
+            "model_dependency_count": 0,
+            "output_verified": false,
+            "pass": false,
+            "post_apply_test_returncode": null,
+            "pre_apply_corpus": {
+              "observed_test_count": 3,
+              "returncode": 1,
+              "shared_runner_enforces_nonempty": true
+            },
+            "pre_apply_test_returncode": 1,
+            "pre_apply_test_tail": "Ran 3 tests in 0.001s\n\nFAILED (failures=1)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete8/integer_encoding/learned/test_behavior.py\", line 4, in test_0\n    def test_0(self): self.assertEqual(serialize_counter(256),b\"\\x01\\x00\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: b'\\x01' != b'\\x01\\x00'\n",
+            "repair_search_invocations": 1,
+            "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+            "retained_learning": {
+              "applicable": true,
+              "enabled": true,
+              "hit": false,
+              "oracle_calls": 0,
+              "teaching": null,
+              "whole_task_correctness_proved": false
+            },
+            "schema": "PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1",
+            "source_restored": true,
+            "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+            "terminal_authority": false,
+            "test_paths_source": "stated",
+            "unified_diffs": []
+          },
+          "subprocess_calls": 74,
+          "worker_max_rss_kib": 54476,
+          "worker_system_s": 0.046120999999999995,
+          "worker_user_s": 0.41045099999999995
+        },
+        "learned_external_audit": {
+          "child_system_s": 0.004062999999999484,
+          "child_user_s": 0.24779600000000102,
+          "elapsed_s": 0.25511804500001745,
+          "output_tail": ".001s\n\nFAILED (failures=3)\nTraceback (most recent call last):\n  File \"<string>\", line 206, in <module>\n  File \"<string>\", line 200, in _brain_run_suites\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"<string>\", line 198, in _brain_run_suites\n  File \"<string>\", line 112, in _brain_run_stdlib\n  File \"<string>\", line 81, in _brain_reraise_failure\n  File \"/usr/lib/python3.11/unittest/case.py\", line 57, in testPartExecutor\n    yield\n  File \"/usr/lib/python3.11/unittest/case.py\", line 623, in run\n    self._callTestMethod(testMethod)\n  File \"/usr/lib/python3.11/unittest/case.py\", line 579, in _callTestMethod\n    if method() is not None:\n       ^^^^^^^^\n  File \"/tmp/pytest-of-user/pytest-13/test_retained_transfer_compete8/integer_encoding/audit/learned_test.py\", line 6, in test_2\n    def test_2(self): self.assertEqual(read_counter(serialize_counter(2**32)),2**32)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 4294967296\n",
+          "returncode": 1,
+          "subprocess_calls": 1
+        },
+        "learning_expected": false,
+        "resource_scope": "Waited-for child CPU and max single-child RSS, not aggregate process-tree peak",
+        "scope": "Pinned upstream modules with authored seeded defects and tests; not full upstream bug suites",
+        "teaching": {
+          "child_system_s": 0.004176,
+          "child_user_s": 0.09682199999999999,
+          "elapsed_s": 0.11698118699996485,
+          "max_child_rss_kib": 22196,
+          "pid": 13428,
+          "process_wall_s": 0.18982215799996993,
+          "result": {
+            "crystallized": false,
+            "reason": "FAILED_MUTATED_TWIN_VERIFICATION"
+          },
+          "subprocess_calls": 2,
+          "worker_max_rss_kib": 54476,
+          "worker_system_s": 0.008111,
+          "worker_user_s": 0.06894499999999999
+        },
+        "tests_unchanged": true,
+        "trial": 2
+      }
+    ],
+    "source_sha256": {
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py": "08cdf96f5ba52d660098ca9fbcd56128a353fb8731d279bb3d5a7597cafe0a57",
+      "canonical/tests/test_retained_repair_production_qualification_v1.py": "b4a3b363178c9197b7262c7d2ec532d6669ef8be57d117cd8404332ef1698d77"
+    }
+  },
   "producer": "model-assisted Arena development session",
   "resource_semantics": {
     "child_cpu": "Waited-for child CPU only. Add worker_user_s and worker_system_s for worker-plus-child CPU. External audit child CPU/wall are separate.",
