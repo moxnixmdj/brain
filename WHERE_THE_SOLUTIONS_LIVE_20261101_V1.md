@@ -429,6 +429,49 @@ Referee `17/0 -> PASS`.
 
 ---
 
+## 10.4 The computer-use layer, finally executed
+
+Every earlier section of this document said the OSWorld stack was present but **never
+exercised**, and I attributed that to it needing a display. Checked instead of assumed:
+
+```
+playwright absent   selenium absent   PIL absent   pytesseract absent
+chromedriver absent chromium absent   Xvfb absent  tesseract absent
+```
+
+So the full desktop stack genuinely cannot run here. **But the visual grounding layer only ever
+needed Pillow.** Installed Pillow, supplied a synthetic screenshot, and ran it:
+
+| instruction | screen | result |
+|---|---|---|
+| "click the **leftmost** red box" | two red boxes, one at x=30–90, one at 300–360 | **`CLICK (60, 150)`** |
+| "click the **rightmost** red box" | same screen | **`CLICK (330, 150)`** |
+
+Two words, two different correct pixels, derived from raw PNG bytes. That is the pixel →
+target step of the computer-use path working end to end.
+
+**The negative controls are the reason to believe it**, and they all fail closed:
+
+| case | result |
+|---|---|
+| no red box on screen | `VISUAL_RELATION_UNRESOLVED` → **`WAIT`**, no click |
+| two boxes tied on x | `VISUAL_RELATION_UNRESOLVED`, reason `TIED_EXTREME` → **`WAIT`** |
+| no relational word in the instruction | `None` — no route claimed |
+| malformed image bytes | raises, does not pretend |
+
+A layer that guesses when two candidates tie would be worse than one that waits, and this one
+waits.
+
+`canonical/tests/test_visual_grounding_end_to_end_v1.py` — **10 passed** (skips cleanly if
+Pillow is absent, so the suite does not break on a machine without it).
+
+**This closes the biggest thing I had been calling unmeasured** — the pixel half of "any
+computer". The desktop half (screen capture, keyboard/mouse actuation, OCR) still needs
+chromedriver, Xvfb and tesseract, which are absent here; that is a substrate gap to measure on a
+different machine, not a code gap.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
