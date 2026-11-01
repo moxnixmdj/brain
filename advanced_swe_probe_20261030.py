@@ -55,7 +55,13 @@ def rel(p: pathlib.Path) -> str:
 
 
 def sh(argv, cwd, timeout=60):
-    env = dict(os.environ, PYTHONPATH=str(cwd))
+    # AN ORACLE MUST NOT BE FOOLED BY A FILE IT DID NOT ASK FOR.  Several oracles here
+    # measure a claim by reverting a source file and re-running the suite; a bytecode cache
+    # left by any earlier run of the same tree can answer for the reverted source, because a
+    # same-size edit inside one timestamp tick still matches the pyc header (measured
+    # 2026-11-01: `fix_then_regression_test` read 1/4 instead of 4/4 for exactly this
+    # reason).  The tree the oracle reasons about is the source tree, never a compiled copy.
+    env = dict(os.environ, PYTHONPATH=str(cwd), PYTHONDONTWRITEBYTECODE="1")
     return subprocess.run(argv, cwd=str(cwd), capture_output=True, text=True,
                           timeout=timeout, env=env)
 

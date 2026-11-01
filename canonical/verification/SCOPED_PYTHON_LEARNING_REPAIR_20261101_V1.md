@@ -69,8 +69,8 @@ teaching for the teaching issue, never in held-out apply payloads.
 
 | Held-out issue | Baseline | Learning enabled | Median apply wall, baseline / enabled | Enabled search |
 |---|---|---|---:|---:|
-| `bytes2human` | 2/2 | 2/2 | 12.990s / 13.237s | 1 each |
-| `chunked_even` | 0/2 | 2/2 | 8.041s / 0.761s | 0 each |
+| `bytes2human` | 2/2 | 2/2 | 13.375s / 13.602s | 1 each |
+| `chunked_even` | 0/2 | 2/2 | 23.441s / 0.747s | 0 each |
 
 Every successful application passes the actual declared corpus and separate audit.
 Failed baseline zero-consumption attempts restore source bytes and fail the audit.
@@ -78,10 +78,10 @@ Teacher code and selected tests are checked unchanged. The zero-consumption
 transfer executes two memory-oracle checks: an earlier wrong location is rejected,
 then the correct location passes. Only the verified patch is applied.
 
-Median teaching is **0.427s** for Bits and **0.666s** for `ichunked`. The latter
-transfer therefore takes roughly **1.427s including its teaching worker**, before
+Median teaching is **0.423s** for Bits and **0.625s** for `ichunked`. The latter
+transfer therefore takes roughly **1.372s including its teaching worker**, before
 separately measured preparation/audit costs. Enabled transfer uses four observed
-child launches; disabled zero-consumption attempts use 64. Do not call this a
+child launches; disabled zero-consumption attempts use 156–160. Do not call this a
 speedup over a successful baseline: that baseline fails its bounded search.
 No speed advantage is demonstrated for the boundary family.
 
@@ -111,8 +111,8 @@ memory. Permanent availability or validity of lessons is not established here.
 
 The adjacent JSON contains full receipts, source hashes at run start, frozen
 curriculum identity, phase costs, worker/child CPU, source/test integrity evidence,
-audits and refusals. The final campaign took **98.358s wall / 98.487s own plus
-waited-descendant CPU**, across **25 fresh workers** and **543 worker-observed
+audits and refusals. The final campaign took **146.577s wall / 145.030s own plus
+waited-descendant CPU**, across **25 fresh workers** and **822 worker-observed
 subprocess launches** (worker launches are additional).
 
 The run timer covers local discovery/provenance verification, fixture construction,
@@ -167,3 +167,23 @@ passed / 33.29s**. Admission/orientation/integrity tests: **50 passed / 27.47s**
 Existing invalid-escape deprecation warnings remain. Intent check: `ok: true`.
 The official projection is regenerated after this documentation update; actual
 GitHub CI and signed referee checks must pass before the authorized merge.
+
+## Incoming-main integration and final acceptance
+
+Main through `6f7401105c699585086ac04fee2384596b33493c` added a stronger multi-step
+repair fallback and bytecode cleanup. Those changes were preserved. The full
+matched campaign was rerun against that stronger solver, producing the table and
+146.577s qualification measurements above. The baseline still fails the
+zero-consumption task despite 156–160 observed child launches. No fallback was
+disabled to manufacture the retained-transfer result. Combined-tree integration
+including the incoming solver tests passed **232 tests / 291.93s**. Prior
+pre-integration measurements remain in the JSON and Git history.
+
+Main subsequently advanced to `573e735bd73fab444f608d9e8f762a6a3012472e`, changing
+child bytecode-write policy rather than the learner. It is integrated and affected
+tests are rerun before merge. The timing table is from the fully metered run at
+6f740110, not a claim of identical timings on all later environments. Integration
+tests ran concurrently with that campaign; timing observations are descriptive,
+not isolated-load statistical evidence. The exact-base guard correctly blocked
+the initial PR as main advanced. Metadata is refreshed, not the guard relaxed.
+Only generated projection conflicts were resolved, using the official compiler.
