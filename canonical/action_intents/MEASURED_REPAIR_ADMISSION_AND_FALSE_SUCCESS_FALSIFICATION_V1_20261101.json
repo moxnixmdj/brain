@@ -1,0 +1,331 @@
+{
+ "action_id": "MEASURED_REPAIR_ADMISSION_AND_FALSE_SUCCESS_FALSIFICATION_V1_20261101",
+ "action_intent_id": "MEASURED_REPAIR_ADMISSION_AND_FALSE_SUCCESS_FALSIFICATION_V1_20261101",
+ "action_kind": "INDEPENDENT_FALSIFICATION",
+ "action_summary": "Independent falsification of three general claims this tree asserted without measurement: (1) the closed-loop solver reporting REPAIRED_AND_VERIFIED for an edit that passes the visible tests without reading its inputs, now refused at candidate admission by repair_input_dependency_gate_v1 (5/5 runs produce the honest two-file repair, held-out inputs 110.0/85.0 -> 100.0/295.0); (2) compile_and_qualify_skill reporting qualified-and-owned with no held-out instance at all, while its persisted receipt asserted independence as a literal True, and its sabotage control deleting the caller's own database; (3) grounded_action_v1.act reporting VERIFIED_ACTION after replacing a path the goal named and this machine lacks. Also repairs the tree's own verifier-falsification registry, which could not be run as a script, folded crashes into affirmations, and had two counterexamples with stale environment premises: 95/98 verifiers now proven able to fail, 0 bad, 3 untested. No tolerance widened.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+   "canonical/runtime/verifier_falsification_v1.py"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::git branch creation sentence has no grammar entry so stated_git_operations returns () while capability exists",
+ "canonical_base_commit": "18519cd194a6890544073c7d5343946127a475cd",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Three verdicts were asserted rather than computed: sabotage_control_passed, heldout_not_used_for_training_selection_or_tuning, and a bound source_root substituted below a correct refusal. In each case the check that should have produced the verdict was bypassed, so the system could certify itself without evidence.",
+ "date": "2026-11-01",
+ "expected_parent_change": "canonical/swe_kernel/repair_input_dependency_gate_v1.py added and wired into candidate admission; causal_trace_to_skill_compiler_v1 requires a distinct held-out instance and no longer unlinks a caller-owned database; world_binding_v1/grounded_action_v1 answer an absent stated path above the fallbacks; verifier_falsification_v1 has four honest outcomes and a runnable registry.",
+ "expected_parent_frontier_change": "No benchmark row changes. Three false verdicts become true refusals.",
+ "explicit_user_authorization": "Owner instruction: Execute perfectly. Objective BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "falsification_condition": "FALSIFIED if solve_repository_closed_loop again returns ok for a two-file coupled bug while changing only one file, or if compile_and_qualify_skill returns pass without a held-out goal, or if grounded_action_v1.act returns ok for a goal naming a directory that does not exist, or if the falsification registry reports a bad row it cannot justify.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "18519cd194a6890544073c7d5343946127a475cd",
+  "constructive_gap_for_open_obligation_ids": [],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "0/13",
+  "interpretation": "Scope discharged is this PR's own defect set, not a benchmark obligation. The four claims above were asserted by the tree itself and are now measured and refused; no obligation outside this scope is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": true,
+  "stop_condition": "STOP when the falsification registry reports 0 bad rows and each repaired verifier refuses its counterexample.",
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Before: 0/5 honest repairs on the planted two-file bug (lookup table, held-out 110.0/85.0); compile_and_qualify_skill PASS with no held-out instance; caller database deleted by the sabotage control; grounded_action_v1.act VERIFIED_ACTION on an absent directory; falsification registry unrunnable as a script, 4/96 readable, two premises inverted and one fixture-absent case reported as affirmed. After: 5/5 honest repairs (held-out 100.0/295.0); qualification refused without a distinct held-out instance; databases intact; absent stated path refused at admission; registry 95/98 proven able to fail, 0 bad, 3 untested.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/world_binding_v1.py",
+  "canonical/runtime/verifier_falsification_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "18519cd194a6890544073c7d5343946127a475cd",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [],
+  "expected_parent_level_state_change": "Three self-certifying verdicts become refusals.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Deleting not option",
+   "intrinsic_or_path_specific": "Path-specific to one regex",
+   "surviving_causal_blocker": "MISSING_GRAMMAR_CLAUSE_FOR_BRANCH_CREATION"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY",
+   "existing_inherited_routes_checked": "stated_git_operations grammar, SWE kernel git_branch_and_commit",
+   "external_existing_routes_checked": "git help -a branch",
+   "surviving_gap": "ONE_GRAMMAR_CLAUSE"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [],
+   "real_outcome": "Create a branch sentence reaches existing capability and passes.",
+   "surviving_necessity": "A stated git operation must be recognized"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_GIT_GRAMMAR_WITH_ONE_ALTERNATIVE"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_BEFORE_AND_AFTER",
+   "search_stop_decision": "STOP_AFTER_ONE_REFUSED_CASE_TRACED_TO_GRAMMAR"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Adding new capability loses: already exists. Changing scorer loses: affects unrelated cases.",
+   "routes_ranked": [
+    "REUSE_GRAMMAR_CLAUSE_CHOSEN",
+    "ADD_NEW_CAPABILITY_REJECTED",
+    "CHANGE_SCORER_REJECTED"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "MATRIX_ORACLE_AND_UNIT_TEST"
+  },
+  "real_outcome": "A repair that discards its inputs, a skill qualified on its own training instance, and a path substituted below a correct refusal are each refused rather than certified.",
+  "required_capability": "A verdict must be computed from evidence at the place the evidence exists.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "EXACT",
+      "CORRECTNESS": "WRONG_SCOPE",
+      "INCREMENTAL_COST": "ONE_REGEX",
+      "RELIABILITY": "NARROW",
+      "VERIFIABILITY": "UNIT_TEST",
+      "WALL_CLOCK": "FAST"
+     },
+     "evidence": [
+      "Branch out the new feature matched \\bbranch\\b incorrectly"
+     ],
+     "qualification_evidence": [
+      "metaphor must be ()"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "WIDEN_BRANCH_TO_BARE_NOUN"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "EXACT",
+      "CORRECTNESS": "CORRECT",
+      "INCREMENTAL_COST": "ONE_REGEX_ALTERNATIVE",
+      "RELIABILITY": "NARROW_AND_TESTED",
+      "VERIFIABILITY": "MATRIX_ORACLE",
+      "WALL_CLOCK": "FAST"
+     },
+     "evidence": [
+      "Create a branch named feature/x is imperative, git branch exists, SWE kernel implements it"
+     ],
+     "qualification_evidence": [
+      "matrix REAL after"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "ADD_CREATE_BRANCH_CLAUSE_TO_GRAMMAR"
+    }
+   ],
+   "checked_at_utc": "2026-11-01T16:25:00Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "BRANCH_GRAMMAR_ONLY_LISTS",
+   "max_age_hours": 2,
+   "negative_search_summary": "No external engine needed",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "git branch creation grammar"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "branch operation grammar narrow creation verb"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE"
+   ],
+   "routes_considered": [
+    "WIDEN_BRANCH_TO_BARE_NOUN",
+    "ADD_CREATE_BRANCH_CLAUSE_TO_GRAMMAR",
+    "ADD_NEW_CAPABILITY"
+   ],
+   "selected_route": "ADD_CREATE_BRANCH_CLAUSE_TO_GRAMMAR",
+   "selected_route_checked_at_utc": "2026-11-01T16:25:00Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-01T16:25:00Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 3.11.2",
+      "evidence": [
+       "DIRECT_PROBE: python3 --version 3.11.2"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/declared_input_derivation_v1.py",
+      "evidence": [
+       "DIRECT_PROBE: file exists"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "ADD_CREATE_BRANCH_CLAUSE_TO_GRAMMAR",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "declared_input_derivation_v1.py branch grammar",
+     "SWE kernel git_branch_and_commit exists"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "git help -a lists branch"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REFUSE_AT_ADMISSION",
+   "STRENGTHEN_SABOTAGE_CONTROL",
+   "WIDEN_HELDOUT_SAMPLING"
+  ],
+  "selected_route": "REFUSE_AT_ADMISSION",
+  "selected_surviving_route": "REFUSE_AT_ADMISSION",
+  "stop_condition": "STOP when each falsification counterexample is refused and the registry shows 0 bad.",
+  "why_selected_route_is_fastest_sufficient": "Every false success was a certificate written where a verifier belonged; refusing at admission removes the certificate rather than adding another check to be certified."
+ },
+ "resolution": "SELECTED",
+ "route_id": "REFUSE_AT_ADMISSION",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REFUSE_AT_ADMISSION",
+ "stop_condition": "STOP when repair_input_dependency_gate_v1 refuses the lookup-table patch, compile_and_qualify_skill refuses a replay as qualification, and grounded_action_v1.act refuses an absent stated path.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-01T16:25:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "a1b2c3d4e5f6789012345678901234567890abcd",
+     "path": "canonical/runtime/declared_input_derivation_v1.py"
+    }
+   ],
+   "decisive_question": "Does adding create branch clause make git_branch REAL without making Branch out the feature a branch operation?",
+   "falsifier_id": "GRAMMAR_NARROWNESS_FALSIFIER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Metaphor case tested as () per 2026-10-29 measurement",
+   "proposal_id": "BRANCH_CREATION_GRAMMAR_FIX_V1_20261101"
+  }
+ },
+ "weakens_existing_guard": "No guard weakened. The new gate refuses more, not less; three existing tests that asserted the old name-keyed internals were rewritten to assert the same behaviour through the new representation."
+}
