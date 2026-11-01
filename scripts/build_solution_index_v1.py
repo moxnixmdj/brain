@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""Generate an exhaustive, effect-first index of every mechanism module in the tree.
+
+WHY THIS EXISTS
+---------------
+"The solutions are in the repo, the names are hard to find."  That is a findability claim, and the
+answer to it is an index, not another search.  The tree is ~2.7k mechanism modules; the names that
+matter (`lossless_raw_task_contract_v1`, `effect_broker_receipt_resolver_v2`,
+`expect_discrimination_v1`) do not advertise what they do, so a filename grep is useless.
+
+This walks every non-test Python file once, records what it declares it does (first docstring line)
+and which effect families it touches, and ranks by how many other modules import it -- i.e. by how
+load-bearing it actually is, not by how promising its name looks.
+
+    python3 scripts/build_solution_index_v1.py            # writes SOLUTION_INDEX.md
+
+Runs in seconds.  Authority: NONE -- an index grants no credit and proves no capability.
+"""
+from __future__ import annotations
+
+import ast
+import pathlib
+import re
+from collections import Counter, defaultdict
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+SKIP = {".git", "node_modules", "__pycache__", ".guard_trusted", ".guard_base", ".venv", "dist",
+        "build", ".mypy_cache", ".pytest_cache", "state", "fixtures"}
+VENDORED = ("internalized", "vendored")
+FAMILIES = {
+    "VERIFY / FALSIFY": ("falsif", "counterexample", "sabotage", "mutation", "verdict", "refuse",
+                          "expect_discrimination", "attestation"),
+    "ORACLE / POSTCONDITION": ("postcondition", "precondition", "oracle", "independent", "evidence"),
+    "LEARN / SKILL": ("skill", "crystall", "instant", "learn", "recurrence", "induction"),
+    "TRANSFER / SCOPE": ("transfer", "generaliz", "scope", "heldout", "held_out", "polyglot"),
+    "ROUTE / GOAL": ("route", "routing", "admission", "goal", "intent", "sentence", "compile"),
+    "COMPUTER USE": ("desktop", "screenshot", "pyautogui", "surface", "app_ops", "vm_screen",
+                      "osworld", "ocr"),
+    "DURABILITY / RECALL": ("durable", "persist", "store", "sqlite", "recall", "restart", "resume"),
+    "SPEED": ("latency", "budget_ms", "millisecond", "fast_path", "cache", "tier"),
+    "SELF / AGENCY": ("self", "identity", "continuity", "agency", "supervisor", "introspect"),
+    "GOVERNANCE": ("governance", "guard", "law", "authority", "receipt", "lease"),
+}
+
+
+def first_line(node: ast.AST) -> str:
+    doc = ast.get_docstring(node) if isinstance(node, (ast.Module, ast.FunctionDef,
+                                                       ast.AsyncFunctionDef, ast.ClassDef)) else None
+    if not doc:
+        return ""
+    for line in doc.strip().splitlines():
+        line = line.strip()
+        if line and not set(line) <= set("=-_"):
+            return re.sub(r"\s+", " ", line)[:120]
+    return ""
+
+
+def build() -> tuple[list[dict], int]:
+    files = [p for p in ROOT.rglob("*.py")
+             if not (set(p.parts) & SKIP) and "tests" not in p.parts
+             and not p.stem.startswith("test_")]
+    info, tokens = [], {}
+    for path in files:
+        try:
+            text = path.read_text(errors="ignore")
+            tree = ast.parse(text)
+        except (OSError, SyntaxError):
+            continue
+        tokens[path.stem] = set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", text))
+        low = text.lower()
+        scored = {name: sum(low.count(t) for t in terms) for name, terms in FAMILIES.items()}
+        info.append({
+            "path": path.relative_to(ROOT),
+            "stem": path.stem,
+            "doc": first_line(tree),
+            "families": [k for k, v in sorted(scored.items(), key=lambda kv: -kv[1]) if v >= 3][:3],
+            "vendored": any(v in path.parts for v in VENDORED),
+        })
+    indeg: Counter[str] = Counter()
+    for path in files:
+        try:
+            tree = ast.parse(path.read_text(errors="ignore"))
+        except (OSError, SyntaxError):
+            continue
+        names = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for a in node.names:
+                    names |= {a.name.split(".")[0], a.name.split(".")[-1]}
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                names |= {node.module.split(".")[0], node.module.split(".")[-1]}
+                names |= {a.name for a in node.names}
+        for name in names:
+            if name in tokens and name != path.stem:
+                indeg[name] += 1
+    for row in info:
+        row["refs"] = indeg.get(row["stem"], 0)
+    return info, len(files)
+
+
+def main() -> int:
+    rows, total = build()
+    rows = [r for r in rows if not r["vendored"]]
+    rows.sort(key=lambda r: (-r["refs"], -len(r["families"]), r["stem"]))
+    by_family: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        if row["families"]:
+            by_family[row["families"][0]].append(row)
+    out = ["# Solution index", "",
+           f"Generated by `scripts/build_solution_index_v1.py` from {total} non-test Python files "
+           f"({len(rows)} mechanism modules outside vendored trees). Rows are ranked by how many "
+           "other modules import them.", "",
+           "**Authority: NONE.** This is a map of what declares what, not a claim that anything "
+           "works.", "", "## Load-bearing spine (most imported first)", "",
+           "| refs | module | declares |", "|---:|---|---|"]
+    for row in rows[:60]:
+        out.append(f"| {row['refs']} | `{row['path']}` | {row['doc'] or '-'} |")
+    out += ["", "## By effect", ""]
+    for family in sorted(by_family, key=lambda f: -len(by_family[f])):
+        out += [f"### {family}", "", "| refs | module | declares |", "|---:|---|---|"]
+        for row in by_family[family][:40]:
+            out.append(f"| {row['refs']} | `{row['path']}` | {row['doc'] or '-'} |")
+        out.append("")
+    (ROOT / "SOLUTION_INDEX.md").write_text("\n".join(out) + "\n", encoding="utf-8")
+    print(f"wrote SOLUTION_INDEX.md  modules={len(rows)}  families={len(by_family)}  "
+          f"total_py={total}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
