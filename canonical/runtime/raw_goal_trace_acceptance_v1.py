@@ -2943,6 +2943,22 @@ def _consumed_downstream(rows: list[dict], index: int, root: Path) -> bool:
     return False
 
 
+def _self_prediction_gate() -> dict:
+    """Ask the calibration ledger whether the system is currently overconfident.
+
+    Returns a state dict either way. Acceptance is refused only on a *measured* overconfidence --
+    a verdict computed from settled predictions that were scored by inspectors. An unreadable or
+    thin ledger does not refuse, but its state is carried into the acceptance payload so a reader
+    can see the gate ran and what it saw.
+    """
+    try:
+        from canonical.runtime import self_prediction_calibration_v1 as calibration
+        return calibration.gate()
+    except Exception as exc:
+        return {"state": "UNAVAILABLE", "refuse": False,
+                "reason": f"CALIBRATION_MODULE_UNAVAILABLE:{type(exc).__name__}"}
+
+
 def verify(
     *,
     goal: str,
@@ -2951,8 +2967,17 @@ def verify(
     raw_contract: Mapping[str, Any],
     root: Path,
 ) -> dict[str, Any]:
-    """Accept only after the contract, the plan, the trace and the bytes agree."""
+    """Accept only after the contract, the plan, the trace and the bytes agree.
+
+    A measured overconfidence refuses before anything else is examined: the policy is about the
+    system, not about the input, so it does not depend on what is being asked. The gate is a
+    function of settled evidence, so it lifts when that evidence changes -- there is no flag.
+    """
     try:
+        gate = _self_prediction_gate()
+        if gate.get("refuse"):
+            return _unresolved("REFUSED__MEASURED_OVERCONFIDENCE",
+                               self_prediction_gate=gate)
         if not isinstance(goal, str) or not goal.strip():
             return _unresolved("RAW_GOAL_INVALID")
         if not isinstance(raw_contract, Mapping) or raw_contract.get("pass") is not True:
@@ -3161,6 +3186,9 @@ def verify(
             "reinspection_ledger": ledger,
             "reinspected_step_count": len(ledger),
             "independent_reinspection": True,
+            # The gate ran and did not refuse; say so, and say what it saw, so an accepted
+            # result cannot be mistaken for one produced under a strong self-model.
+            "self_prediction_gate": gate,
             "model_dependency_count": 0,
             "incremental_spend_usd": 0,
         }
