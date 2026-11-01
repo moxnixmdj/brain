@@ -30925,7 +30925,7 @@
   "engines": 26,
   "knowledge_documents": 233,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6588,
+  "research_index_records": 6589,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30934,7 +30934,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0e24165be1bee553da4d4a027651412f99819dea8d73203450fa5c414bd5c8e1"
+  "value": "e8a0d6fe35961d3fa5e66fb1e26a24d98590dcb2510e270d0e87d9f680baf896"
  },
  "engines": [
   {
@@ -204527,6 +204527,51 @@
    }
   },
   {
+   "action_id": "A_DESTINATION_NOBODY_NAMED_AS_A_SOURCE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_DESTINATION_NOBODY_NAMED_AS_A_SOURCE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DESTINATION_NOBODY_NAMED_AS_A_SOURCE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "82e2158753c8b176b34d0e8dd268ce7bee583948b0052ad2ef517646dca7e1cb",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_destination_nobody_named_as_a_source_v1_20261101_v1": 2,
+    "accepts": 1,
+    "adapter": 1,
+    "against": 1,
+    "binder": 1,
+    "bound": 2,
+    "compares": 1,
+    "compile": 1,
+    "destination": 2,
+    "directory": 1,
+    "empty": 1,
+    "fill": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "happened": 1,
+    "invisible": 1,
+    "module": 1,
+    "named": 1,
+    "no": 2,
+    "nobody": 1,
+    "only": 1,
+    "onto": 1,
+    "path": 1,
+    "python": 2,
+    "replace": 1,
+    "report": 3,
+    "rule": 1,
+    "sentence": 1,
+    "slot": 1,
+    "slots": 2,
+    "source": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
    "capability": false,
    "date": "2026-10-29",
@@ -211012,7 +211057,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/NEXT_FRONTIER_AUTONOMOUS_SWE_AND_COMPUTER_USE_V1_20261101_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7eca2b2ce6eb31edec59cfc190bb18aa3a52ac778b90347f003ba111986e31e6",
+   "sha256": "e9ddbe0ed1f4731313fc285b8ac65db66b78fb8e7083b87331608fa7ea132e92",
    "status": "",
    "terms": {
     "20261101": 1,
@@ -249927,7 +249972,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "a624fd298f2697e039bf5db2d6853f5f7a4dd4ae134e2ea5332493e301302468",
+   "sha256": "95810d38893e439ca1ddb43e3d9472bdbf8d9eb7b5574efe86ee4e49a7eac93d",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 106,
    "symbols": [
@@ -288479,21 +288524,24 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/write_authority_v1.py",
-   "sha256": "f47a46e43f998c044507ed03369959d6e6d11fd235d95c5065c06c122c8743b0",
+   "sha256": "19e0b2a721e8bf4075732ed27eec2297b8fcc68c3381e4e51c6e286e25bd4f1d",
    "summary": "A capability may not write its report over the file it was asked to read.",
-   "symbol_count": 11,
+   "symbol_count": 14,
    "symbols": [
     "WriteAuthorityViolation",
     "_as_path",
     "_input_values",
     "_inside",
+    "_parses_as_a_module",
     "_rewrite_is_judged_from_disk",
     "cannot_perform_the_stated_change",
     "check",
     "check_report",
     "declares_no_source_write_authority",
     "is_source_transformer",
-    "violation"
+    "restore_if_a_source_was_replaced",
+    "violation",
+    "watch_destinations"
    ],
    "terms": {
     "as_path": 1,
@@ -288511,11 +288559,14 @@
     "may": 1,
     "not": 1,
     "over": 1,
+    "parses_as_a_module": 1,
     "read": 1,
     "report": 1,
+    "restore_if_a_source_was_replaced": 1,
     "rewrite_is_judged_from_disk": 1,
     "v1": 1,
     "violation": 1,
+    "watch_destinations": 1,
     "write": 2,
     "writeauthorityviolation": 1
    }
