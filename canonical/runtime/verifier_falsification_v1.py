@@ -28,6 +28,8 @@ without one is, by definition, untested.
 """
 from __future__ import annotations
 
+import importlib
+import importlib.util
 import os
 import shutil
 import sys
@@ -39,6 +41,14 @@ SCHEMA = "PROJECT_BRAIN_VERIFIER_FALSIFICATION_V1"
 _HERE = os.path.dirname(os.path.abspath(__file__))
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
+# And the repository root, so a case may reach `canonical.*` when this module is run
+# as a script rather than imported as a package. Measured 2026-11-01: without it, 25
+# cases crashed with `No module named 'canonical'` when run directly and passed when
+# run through the sweep -- the same suite reporting two different truths depending on
+# how it was invoked.
+_ROOT = os.path.dirname(os.path.dirname(_HERE))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
 
 
 def _mod(name):
@@ -1098,13 +1108,21 @@ def _cases() -> list[tuple[str, str, callable]]:
 
     def missing_module_satisfied_by_probe() -> bool:
         from canonical.runtime.astra_runtime import _already_present_dependency
-        # yq_yaml_json imports `yaml`; PyYAML is not installed here.
+        # yq_yaml_json imports `yaml`. This is only a counterexample on a box where
+        # PyYAML is absent; measured 2026-11-01, it had arrived, so the premise had
+        # inverted and the verifier was being reported broken for answering correctly.
+        if importlib.util.find_spec("yaml") is not None:
+            raise DependencyUnavailable("this counterexample needs PyYAML to be absent")
         return _already_present_dependency(
             {"adapter_module": "yq_yaml_json"}) is not None
 
     def present_module_not_seen_by_probe() -> bool:
         from canonical.runtime.astra_runtime import _already_present_dependency
-        # The opposite error, and the one that cost three capabilities.
+        # The opposite error, and the one that cost three capabilities. It needs
+        # openpyxl to actually be here; measured 2026-11-01 it was not, so the case
+        # was asserting an inversion it could not observe.
+        if importlib.util.find_spec("openpyxl") is None:
+            raise DependencyUnavailable("this counterexample needs openpyxl to be present")
         got = _already_present_dependency(
             {"adapter_module": "xlsx_verify_openpyxl"})
         return not (isinstance(got, dict)
@@ -1204,7 +1222,12 @@ def _cases() -> list[tuple[str, str, callable]]:
             src_x = root / "canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx"
             src_j = root / "canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json"
             if not (src_x.is_file() and src_j.is_file()):
-                return True
+                # Returning True here meant "affirmed" -- a missing fixture was reported as a
+                # broken verifier, which is this module's own disease committed inside it.
+                # A fixture that is not on disk leaves the case untested, and says so.
+                raise DependencyUnavailable("the FANOUT_JOIN fixtures are not on this box")
+            if importlib.util.find_spec("openpyxl") is None:
+                raise DependencyUnavailable("this counterexample needs openpyxl")
             shutil.copy(src_x, tmp / "T.xlsx")
             shutil.copy(src_j, tmp / "T.json")
             recs = json.loads((tmp / "T.json").read_text())
@@ -1433,34 +1456,120 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a capability_id that was never admitted, executed anyway",
         unadmitted_capability_accepted)
 
+
+    # --- the admission gates added on 2026-11-01 -------------------------
+    # A gate that has never been shown to refuse is not a gate. These two were
+    # written and measured the same day; per this module's own rule, they arrive
+    # with their counterexamples or they are untested.
+
+    def repair_gate_accepts_a_lookup_table() -> bool:
+        from canonical.swe_kernel import repair_input_dependency_gate_v1 as G
+        before = (
+            "def compute_invoice(items, disc):\n"
+            "    return sum(items) - disc\n"
+        )
+        # Answers the two visible assertions and never reads `items`.
+        after = (
+            "def compute_invoice(items, disc):\n"
+            "    if disc % 2 == 0:\n"
+            "        return 110.0\n"
+            "    return 85.0\n"
+        )
+        return G.gate(before, after)["status"] == G.PASS
+
+    add("repair_input_dependency_gate_v1.gate",
+        "a patch that answers the tests without reading the data",
+        repair_gate_accepts_a_lookup_table)
+
+    def skill_qualifies_without_any_heldout_instance() -> bool:
+        import sqlite3
+        from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+            compile_and_qualify_skill,
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp, "training.sqlite")
+            con = sqlite3.connect(str(db))
+            con.execute("CREATE TABLE flags (name TEXT PRIMARY KEY, enabled INTEGER)")
+            con.execute("INSERT INTO flags VALUES ('dark_mode', 0)")
+            con.commit()
+            con.close()
+            # No held-out goal: the training instance is not evidence of transfer.
+            r = compile_and_qualify_skill(
+                goal="Enable feature flag dark_mode in database %s" % db,
+                trace=[{"kind": "sqlite_query", "db_path": str(db),
+                        "sql": "UPDATE flags SET enabled = 1 WHERE name = ?",
+                        "params": ["dark_mode"]}],
+                postcondition={"kind": "sqlite_row_exists", "db_path": str(db),
+                               "sql": "SELECT enabled FROM flags WHERE name = 'dark_mode' "
+                                      "AND enabled = 1"},
+                db_path=Path(tmp, "workflows.sqlite"),
+            )
+        return bool(r.get("pass"))
+
+    add("causal_trace_to_skill_compiler_v1.compile_and_qualify_skill",
+        "a skill qualified by replaying its own training instance",
+        skill_qualifies_without_any_heldout_instance)
+
     return out
 
 
-def run() -> tuple[int, list[tuple[str, str, bool]]]:
-    """Return (number that wrongly affirmed, all results)."""
-    results: list[tuple[str, str, bool]] = []
+class DependencyUnavailable(RuntimeError):
+    """A counterexample whose premise is a fact about this box, and the box changed.
+
+    Some cases are only counterexamples on a machine with (or without) a particular
+    package: "a missing module declared satisfied by a feature probe" needs the module
+    to be missing, and "a module the machine actually holds ignored" needs it present.
+    Measured 2026-11-01: two such cases had silently inverted -- PyYAML had arrived and
+    openpyxl had gone -- so both now reported the verifier as broken when the verifier
+    was right and the premise was stale. Raising this makes the case say so instead.
+    """
+
+
+SAID_NO = "SAID_NO"
+AFFIRMED = "AFFIRMED"
+CRASHED = "CRASHED"
+UNTESTED = "UNTESTED"
+
+
+def run() -> tuple[int, list[tuple[str, str, str]]]:
+    """Return (number counted as bad, all results as (verifier, counterexample, status)).
+
+    Four outcomes, because three were not enough. A verifier that affirms is bad, and a
+    verifier that crashes while being tested is also bad -- it has not been shown able to
+    say no. But an environment that cannot supply the premise is neither: it is untested,
+    and saying "affirmed" made a missing package look like a broken verifier, which is the
+    same conflation this module exists to catch.
+    """
+    results: list[tuple[str, str, str]] = []
     bad = 0
     for name, wrong, fn in _cases():
         try:
-            affirmed = bool(fn())
-        except Exception:
-            # Crashing is not affirming, but it is not a working verifier
-            # either; report it so it cannot hide behind the exception.
-            affirmed = True
-        results.append((name, wrong, affirmed))
-        bad += 1 if affirmed else 0
+            status = AFFIRMED if bool(fn()) else SAID_NO
+        except DependencyUnavailable as exc:
+            status = UNTESTED
+            wrong = "%s [untested: %s]" % (wrong, exc)
+        except Exception as exc:
+            # Crashing is not affirming, but it is not a working verifier either;
+            # report it separately so it cannot hide behind the label.
+            status = CRASHED
+            wrong = "%s [%s: %s]" % (wrong, type(exc).__name__, str(exc)[:60])
+        results.append((name, wrong, status))
+        if status in (AFFIRMED, CRASHED):
+            bad += 1
     return bad, results
 
 
 def main() -> int:
     bad, results = run()
+    proven = sum(1 for _n, _w, st in results if st == SAID_NO)
+    untested = sum(1 for _n, _w, st in results if st == UNTESTED)
     print("%s\n" % SCHEMA)
     print("Each row feeds a verifier an input that is known to be wrong.")
-    print("PASS means it said no. FAIL means it affirmed.\n")
-    for name, wrong, affirmed in results:
-        print("%-8s %-42s %s" % ("FAIL" if affirmed else "PASS", name, wrong))
-    print("\n%d/%d verifiers proven able to fail"
-          % (len(results) - bad, len(results)))
+    print("SAID_NO is a pass. AFFIRMED and CRASHED are failures. UNTESTED is not a pass.\n")
+    for name, wrong, status in results:
+        print("%-9s %-42s %s" % (status, name, wrong))
+    print("\n%d/%d verifiers proven able to fail (%d untested, %d bad)"
+          % (proven, len(results), untested, bad))
     return 1 if bad else 0
 
 
