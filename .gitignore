@@ -43,3 +43,7 @@ canonical/astra_runtime/tmp/tmp_*
 **/__pycache__/
 .pytest_cache/
 canonical/tmp_*.json
+
+# a cache of what this machine's programs do: keyed on their bytes, so it is
+# machine-local by construction and must never be committed
+*.fingerprints.json
