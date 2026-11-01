@@ -613,6 +613,63 @@ unexecutable here for genuine substrate reasons, and are still tested only by ca
 
 ---
 
+## 10.7 The last canned family, and the binaries that were never missing
+
+Of the three canned families, `host_media_ops` looked the most blocked: it needs `ffmpeg`
+**and** `ffprobe` on PATH. Both were absent, `apt` has no `ffmpeg` candidate here, and
+`static-ffmpeg` fetches from `media.githubusercontent.com`, which this environment cannot reach.
+
+That was a conclusion drawn from one failed attempt. The npm registry **is** reachable and ships
+the same static builds. Installed from `@ffprobe-installer/linux-x64` and
+`@ffmpeg-installer/linux-x64`, and the module runs.
+
+### Every operation, real encode, re-measured independently
+
+Each result below was verified by a **separate** `ffprobe` call in the test -- not read back
+from the operation's own receipt. The receipt is what was wrong in the code-op family, so it is
+not evidence here either.
+
+| operation | requested | measured on the produced file |
+|---|---|---|
+| `PROBE` | -- | source is **320x240** |
+| `RESIZE` | 160x120 | **160x120** |
+| `ROTATE` | 90 deg | **240x320** -- dimensions swapped, as they must be |
+| `CROP` | 200x150 at (10,10) | **200x150** |
+| `TRIM` | 0.5 s -> 1.5 s | **duration 1.000 s**, shorter than the 2 s source |
+| `EXTRACT_AUDIO` | .wav | **178 254 bytes**, real audio stream present |
+| `SET_VOLUME` | 0.25 | new file, still **320x240**, playable |
+
+### The check that matters
+
+`_transform` re-reads the guest copy, hashes it and compares against the local hash, refusing on
+mismatch. Tested by giving it a **guest that corrupts the upload**, which is the exact failure a
+real transport can produce:
+
+| guest behaviour | verdict |
+|---|---|
+| copies the bytes faithfully | operation succeeds |
+| damages the bytes in transit | **`MEDIA_UPLOAD_READBACK_MISMATCH`** -- refused |
+
+The module does not trust its own transport. That is the property worth having.
+
+`test_media_ops_execute_for_real_v1.py` -- **13 passed**, no skips.
+
+The binaries are **not vendored**: ~100 MB of third-party executables is the wrong thing to put
+in a git repository. They were installed to `/usr/local/bin` from the npm registry for this
+measurement, and the tests skip with an explicit `SUBSTRATE:` reason on a machine without them.
+A skip is not a pass.
+
+### Where the three families now stand
+
+| family | before this session | now |
+|---|---|---|
+| code ops (`host_code_ops`) | canned, never executed | **executed, real filesystem + real pytest + real git** |
+| state ops (`host_guest_ops`) | canned, never executed | **executed, verbatim, no rewriting** |
+| media ops (`host_media_ops`) | canned, never executed | **executed, real ffmpeg encodes** |
+| app ops (`host_app_ops`) | canned | still canned -- needs `from libreoffice_calc import *`, a VM-only module |
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
