@@ -231,6 +231,16 @@ def head_commit() -> str:
                           capture_output=True, text=True).stdout.strip() or "UNKNOWN"
 
 
+def base_commit() -> str:
+    """The commit on main this tree branched from, read rather than typed."""
+    for ref in ("origin/main", "main"):
+        out = subprocess.run(["git", "rev-parse", "--short", ref], cwd=ROOT,
+                             capture_output=True, text=True)
+        if out.returncode == 0 and out.stdout.strip():
+            return out.stdout.strip()
+    return "UNKNOWN"
+
+
 def family(capability_id: str) -> str:
     """The registry family a row belongs to: ``code.polyglot`` out of ``code.polyglot.x.v1``."""
     parts = str(capability_id).split(".")
@@ -281,8 +291,8 @@ def main() -> int:
 
     add("# Every hardcore software-engineering problem, measured")
     add("")
-    add(f"Measured 2026-11-01 on main `{head_commit()}` with the substrate restored "
-        "(`scripts/restore_substrate_v1.py`).")
+    add(f"Measured 2026-11-01 on the tree of `{head_commit()}` (branched from main `{base_commit()}`) with the "
+        "substrate restored (`scripts/restore_substrate_v1.py`).")
     add("Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, "
         "`execution_guard/swe_capability_matrix_v1.py`,")
     add("the live verified registry, and a probe of the substrate. Nothing here is a wish.")

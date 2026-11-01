@@ -37,7 +37,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A measurement instrument was double-counting and self-corrupting, and the deliverable built on it quoted a hand-typed commit. On 56f43613 the matrix printed REAL 44 while listing 43 distinct names, and the same command returned 42, 43 and 44 on unchanged trees. Root cause: two registrations named measure_coverage shared fixture directory WORK/measure_coverage, and build() rmtree's that directory.",
- "canonical_base_commit": "f91349567af7d1ae4e3b1dbc45bdeb464718322e",
+ "canonical_base_commit": "82876db593e3295aba60c74f85c8e498a0246e1e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,7 +81,7 @@
   "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "f91349567af7d1ae4e3b1dbc45bdeb464718322e",
+  "canonical_base_commit": "82876db593e3295aba60c74f85c8e498a0246e1e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
@@ -394,7 +394,7 @@
      "path": "execution_guard/swe_capability_matrix_v1.py"
     },
     {
-     "git_blob_sha": "ae9cb364054c94489ad4ff611d5e78846c42bfff",
+     "git_blob_sha": "182923b1886d4a9fff8dc72d022880dcda72f871",
      "path": "canonical/runtime/live_brain_route_admission_v1.py"
     }
    ],

@@ -153,7 +153,6 @@ class TheCapabilityIsReal(unittest.TestCase):
         self.assertEqual(entry["incremental_spend_usd"], 0)
         # `message` is declared because ONE operation (commit) needs it; it binds
         # by proof, not by request -- see ACommitMessageIsCopiedAndNeverInvented.
-<<<<<<< HEAD
         # `repo_root`/`target` say WHERE, and `rev` says WHICH REVISION: the row was
         # certified for "the diff against HEAD~1" while its contract had no slot for a
         # revision, so the answer was the diff against HEAD.  A slot the sentence can
@@ -161,16 +160,6 @@ class TheCapabilityIsReal(unittest.TestCase):
         self.assertEqual(sorted(entry["action_template"]["args"]),
                          ["capability_id", "limit", "message", "message_source", "op",
                           "repo_root", "rev", "staged", "target"])
-=======
-        #
-        # `repo_root` and `target` joined the contract afterwards, and both bind by proof as
-        # well: a repository operation has to know WHICH repository and, for the object-directed
-        # operations, which object inside it.  This assertion had been left at the original four
-        # keys and went red on main the moment the row grew, which is exactly the failure mode a
-        # contract test is supposed to have -- the row changed, so the contract was re-read.
-        self.assertEqual(sorted(entry["action_template"]["args"]),
-                         ["capability_id", "limit", "message", "op", "repo_root", "target"])
->>>>>>> 41c1ba1414 (Report what every refusal actually said, and re-read the git contract)
         self.assertIn("git.history.read", entry["provides"])
         self.assertTrue(entry["source"]["adapter_path"].endswith("git_repository_operate.py"))
 

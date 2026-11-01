@@ -1310,7 +1310,6 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=tool_executed)
-<<<<<<< HEAD
         # "THE REQUESTED STATE ALREADY HOLDS" IS AN ANSWER, AND IT ARRIVES IN THE SAME SPELLING
         # AS A REFUSAL.
         #
@@ -1347,12 +1346,6 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                 "tool_executed": tool_executed,
                 "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
             }
-        # THE SECOND SPELLING OF THE SAME REFUSAL: ``RuntimeError("GUARD_KEY:detail")``.
-=======
-        # THE SECOND SPELLING OF THE SAME REFUSAL -- ``RuntimeError("GUARD_KEY:detail")`` -- IS READ
-        # BELOW, AFTER "IT ALREADY PASSES".
-        #
->>>>>>> 396f672def (One classifier for a refusal, and it walks the chain)
         # A guard key is the repository's own vocabulary for "I read the request and refused it";
         # reporting it as LIVE_CONTROLLER_EXECUTION told the caller the machine had broken when it had
         # answered.  Measured 2026-11-01: 7 of 13 census refusals were exactly this.
@@ -1364,34 +1357,6 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
         # ``POLYGLOT_REFUSED`` and six distinct refusals collapsed onto one class again.  There is one
         # classifier: it runs after the already-satisfied branch, it excludes the control-flow keys,
         # and it walks the chain to its last token.  See ``_refusal_status_and_payload``.
-        # "IT ALREADY PASSES" IS AN ANSWER, AND IT IS THE ONE THE REPAIR LOOP ALREADY COMPUTED.
-        #
-        # Every repair adapter refuses with ``BASELINE_ALREADY_PASSES`` when the named test passes
-        # BEFORE any edit (python_software_repair_loop_v1, the iterative and coupled loops, the patch
-        # search, the provenance-guided repair).  The door turned that into
-        # ``FAIL__LIVE_CONTROLLER_EXECUTION`` with the reason buried in the exception: the caller was
-        # told the controller failed, when the machine had just proven the requested end state holds.
-        # Measured 2026-10-30 on the flagship repair route.  The requested post-state is true, so the
-        # request is satisfied -- with the baseline evidence, and with ``edited: false`` so nothing
-        # can read it as a repair that happened.
-        if _ALREADY_SATISFIED_RE.search(str(exc)):
-            return {
-                "schema": LIVE_SCHEMA,
-                "status": "PASS__REQUESTED_STATE_ALREADY_HOLDS",
-                "pass": True,
-                "task_id": task_id,
-                "executed": True,
-                "edited": False,
-                "already_satisfied": True,
-                "compiled_capability_id": selected,
-                "compiler_mode": compiled.get("compiler_mode"),
-                "reason": type(exc).__name__ + ":" + str(exc),
-                "answer_artifact": {"already_satisfied": True, "edited": False,
-                                    "evidence": (type(exc).__name__ + ":" + str(exc))[:300]},
-                "execution_proof_type": LOCAL_EXECUTION_PROOF,
-                "tool_executed": tool_executed,
-                "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
-            }
         _refusal = _refusal_status_and_payload(exc, selected)
         if _refusal is not None:
             _status, _reason, _payload = _refusal
