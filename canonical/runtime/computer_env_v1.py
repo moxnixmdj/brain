@@ -2372,6 +2372,15 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             if code != 0:
                 continue
             value = _bare_value(out)
+            if value is None and hit.get("stages") != 2:
+                # Tools such as wc echo the filename after the value. An
+                # absolute filename can exceed the value-length bound even
+                # when the value itself is short. Strip only the exact file
+                # we supplied, then retain the existing single-value checks.
+                text = out.decode("utf-8", "replace").strip()
+                suffix = " " + str(src)
+                if text.endswith(suffix):
+                    value = _bare_value(text[:-len(suffix)].encode("utf-8"))
             if value is None:
                 continue
             tally.setdefault(value, []).append(_instrument(hit["program"]))

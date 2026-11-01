@@ -128,6 +128,38 @@ class CognitiveFabricError(ValueError):
     pass
 
 
+def _manual_learning_retry_context(payload: Mapping[str, Any], options: Mapping[str, Any], *,
+                                   proposal_provider=None, capability_expander=None,
+                                   episode_verification_provider=None, skill_verification_provider=None):
+    """Build a narrow, manual-only retry for a cold, self-contained episode.
+
+    The generic replay uses the same problem and basic solver options, with
+    learning disabled. It is not a byte-identical execution trace: state and
+    environment can change. No implicit replay is authorized by this record.
+    """
+    allowed = {'state_path', 'episode_id', 'scope_id', 'max_capability_expansions',
+               'retain_retry_context'}
+    if set(options) - allowed:
+        raise CognitiveFabricError('LEARNING_RETRY_OPTIONS_NOT_REPLAYABLE')
+    if any(x is not None for x in (proposal_provider, capability_expander,
+                                    episode_verification_provider, skill_verification_provider)):
+        raise CognitiveFabricError('LEARNING_RETRY_PROVIDER_NOT_SERIALIZABLE')
+    path = options.get('state_path', self_improvement.DEFAULT_STATE_PATH)
+    state = self_improvement.load_state(path)
+    if any(isinstance(row, Mapping) and row.get('active') is True
+           for row in state.get('skills', {}).values()):
+        raise CognitiveFabricError('LEARNING_RETRY_ACTIVE_SKILL_NOT_REPLAYABLE')
+    context = {'mode': 'generic', 'problem': deepcopy(dict(payload)),
+               'episode_id': str(options.get('episode_id') or 'episode'),
+               'scope_id': str(options.get('scope_id') or 'scope'),
+               'solver_kwargs': {'max_capability_expansions': int(options.get('max_capability_expansions', 4))},
+               'learn': False, 'autonomous_replay_forbidden': True}
+    # Validate shape, size and sensitive-looking keys before execution. The
+    # validator does not detect secrets embedded in otherwise ordinary values.
+    self_improvement._make_retry_capsule(context)
+    return context
+
+
 def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str, Any]:
     if not isinstance(wrapper, Mapping):
         raise CognitiveFabricError("SUBORDINATE_RUNTIME_RESULT_NOT_OBJECT")
@@ -841,6 +873,7 @@ def run(
                         "components": list(options.get("repair_components") or []),
                         "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
                         "learn": True,
+                        "autonomous": True,
                     },
                     repo_root=ROOT,
                     state_path=options.get("state_path"),
@@ -871,8 +904,19 @@ def run(
                 max_actions=int(options.get("max_improvement_actions", 4)),
             )
         elif mode == "LEARNING_EPISODE":
+            retain_retry = options.get('retain_retry_context', False)
+            if type(retain_retry) is not bool:
+                raise CognitiveFabricError('LEARNING_RETRY_SETTING_NOT_BOOLEAN')
+            retry_context = None
+            if retain_retry:
+                retry_context = _manual_learning_retry_context(
+                    payload, options, proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                    episode_verification_provider=episode_verification_provider,
+                    skill_verification_provider=skill_verification_provider)
             out = self_improvement.run_learning_episode(
                 payload,
+                retry_context=retry_context,
                 repo_root=ROOT,
                 state_path=options.get("state_path", self_improvement.DEFAULT_STATE_PATH),
                 proposal_packets=options.get("proposal_packets"),

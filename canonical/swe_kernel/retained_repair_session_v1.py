@@ -20,8 +20,11 @@ from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillSto
 class RetainedRepairSession:
     def __init__(self, config: Mapping, repo: Path, source_root: Path, exec_root: Path,
                  test_paths: list[Path], timeout: int):
-        if set(config) - {'enabled', 'db_path', 'target_path', 'contract', 'context'}:
+        if set(config) - {'enabled', 'db_path', 'target_path', 'contract', 'context', 'allow_operator_generalization'}:
             raise ValueError('UNKNOWN_RETAINED_REPAIR_SETTING')
+        self.allow_operator_generalization = config.get('allow_operator_generalization', False)
+        if type(self.allow_operator_generalization) is not bool:
+            raise ValueError('INVALID_OPERATOR_GENERALIZATION_SETTING')
         self.contract = normalize_contract(config.get('contract'))
         if self.contract is None or self.contract['verification_kind'] != 'TEST_SUITE':
             raise ValueError('RETAINED_REPAIR_REQUIRES_TEST_SUITE_CONTRACT')
@@ -61,6 +64,7 @@ class RetainedRepairSession:
                 source_text=before, language='python', verifier=self.oracle,
                 required_verification_kind='TEST_SUITE', scope_id=self.contract['scope_id'],
                 context=self.context,
+                allow_operator_generalization=self.allow_operator_generalization,
             )
         except (sqlite3.Error, OSError, ValueError) as exc:
             self.metadata['retention_error']=type(exc).__name__
@@ -72,7 +76,8 @@ class RetainedRepairSession:
             return []
         after = hit['patched_source']
         rel = self.target.relative_to(self.repo).as_posix()
-        self.metadata.update(hit=True, skill_id=hit['skill_id'], verification=hit['verification'])
+        self.metadata.update(hit=True, skill_id=hit['skill_id'], verification=hit['verification'],
+                             recall_strategy=hit['recall_strategy'])
         return [{'source_path': rel,
                  'unified_diff': ''.join(difflib.unified_diff(before.splitlines(keepends=True),
                     after.splitlines(keepends=True), fromfile='a/' + rel, tofile='b/' + rel)),
