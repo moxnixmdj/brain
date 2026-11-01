@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `29ada61` (branched from main `29ada61`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `bb776f1` (branched from main `bb776f1`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **42 served / 7 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 82 ms  p90 557 ms  max 1627 ms |
+| matrix latency | median 88 ms  p90 597 ms  max 1627 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -102,14 +102,14 @@ declared as what it is: diagnosis, not capability. It is the reason the table in
 
 ## §3 The plumbing defects, with counts
 
-| defect | count | what it means | cheapest correct fix |
-|---|---|---|---|
-| `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | 2 | a repository sentence was routed to a Python transformer, and the sentence names no repository for the transformer to stand in | selection: a sentence whose verb is a repository operation belongs to the git row, and that row then refuses `cherry-pick` by name instead of a Python transformer refusing a repository |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED` | 1 | no test in the stated suite is flaky, so there is no quarantine to write | none on the machine — the suite is not flaky; a better fixture is the fix |
-| `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | 1 | the row ran and its answer was not the answer the sentence asked for | selection: the answer gate is right, the choice of row is wrong |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED` | 1 | the sentence asks for a regression test without stating a bug that can be reproduced or was observed, so there is nothing for the test to assert | none — the sentence is under-specified; a fixture that states the failure is the fix |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS` | 1 | the bisect row rebuilt the stated file's history and found no revision that changes a Python function, so no function can be named as the one that broke | none — the fixture's history must actually change a function for a bisect to have an answer; the refusal is correct and the fixture is the defect |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION` | 1 | the move collides: both stated files already define the symbol | none — the refusal is correct and the sentence is ill-posed |
+| defect | count | who is wrong | what it means | cheapest correct fix |
+|---|---|---|---|---|
+| `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | 2 | **selection** | a repository sentence was routed to a Python transformer, and the sentence names no repository for the transformer to stand in | selection: a sentence whose verb is a repository operation belongs to the git row, and that row then refuses `cherry-pick` by name instead of a Python transformer refusing a repository |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED` | 1 | **fixture** | no test in the stated suite is flaky, so there is no quarantine to write | none on the machine — the suite is not flaky; a better fixture is the fix |
+| `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | 1 | **selection** | the row ran and its answer was not the answer the sentence asked for | selection: the answer gate is right, the choice of row is wrong |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED` | 1 | **fixture** | the sentence asks for a regression test without stating a bug that can be reproduced or was observed, so there is nothing for the test to assert | none — the sentence is under-specified; a fixture that states the failure is the fix |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS` | 1 | **fixture** | the bisect row rebuilt the stated file's history and found no revision that changes a Python function, so no function can be named as the one that broke | none — the fixture's history must actually change a function for a bisect to have an answer; the refusal is correct and the fixture is the defect |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION` | 1 | **fixture** | the move collides: both stated files already define the symbol | none — the refusal is correct and the sentence is ill-posed |
 
 ### 3.0 What each refusal actually said
 
@@ -220,25 +220,45 @@ These matter more than any single refusal, and none of them is measured by a 49-
 9. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports
    `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with
    a clean tree. Every lane-only number is suspect until the fixture is shared.
-11. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
+10. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
    software engineering is unbounded, so this corpus can be satisfied without being a good engineer.
    It needs real repositories and adversarial sentences, not more fixtures.
 
 ---
 
-## §6 The order to fix it in
+## §6 The smartest order, given these numbers
 
-Ranked by capability bought per hour, using the counts above as the estimate of reach.
+The census stands at **42 of 49 (86%)**. Of the 7
+that remain, **4 are fixture defects** -- the machine is right and the sentence is
+under-specified or the move is ill-posed -- **3 are selection**, and
+**0 are capability**. The column is read off §3's own remedy text, so the two
+sections cannot disagree; a capability gap whose remedy happens to start with the word "none"
+is still counted as capability, because it says the missing thing is a capability.
 
-| # | move | reaches | why first |
+That split decides the order, because it decides what a number means:
+
+* **The 49-sentence census is now a regression guard, not a frontier.** At 86% with
+  4 of the remaining 7 being sentence defects, raising it further buys
+  almost no capability. It is what stops the machine going backwards, and it should be run on
+  every change -- but no hour should be spent *aiming* at it.
+* **Every number in §1 is one request deep.** A system that answers 86% of single sentences
+  can still be incapable of a task that needs ten of them in sequence, and nothing here
+  measures that. Closing that gap is the actual objective, and it needs a harder instrument
+  before it needs more rows.
+
+| # | move | measured reach | why at this position |
 |---|---|---|---|
-| 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | **42/49** | no new capability code; several classes improve at once |
-| 2 | the four unserved gate classes: benchmark vs a revision, regression test, cherry-pick, changelog | 2 | each needs one row or one new slot, not a new substrate |
-| 3 | the named transform gaps inside the polyglot engine | 0 | the engine exists; these are missing ops in a real AST/CST surface |
-| 4 | install the work substrate (a profiler, `sqlite3`, `rustc`/`go`/`tsc`) | unblocks perf/systems/polyglot | without it, several rows can never run |
-| 5 | execution-first debugging: run, observe, bisect, attribute | 10 | needs the substrate from 4 |
-| 6 | a general non-Python rewrite row (parse/index/impact already exist) | 7 | biggest jump in what it means to be a software engineer; most expensive |
-| 7 | design/architecture output (ADR, migration plan) | 3 | needs a planning surface that produces a document, not an edit |
+| 1 | **multi-step instrument**: a real repository, a vague issue, and a required plan -> edit -> run -> observe -> repair loop, scored end to end | everything above is one step deep | this is the only measure that can tell a strong engineer from a wide lookup table |
+| 2 | **selection** for the 3 remaining sentences | 3 sentence(s) | cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |
+| 3 | **capability** for the 0 remaining sentences | 0 sentence(s) | real work, but a small ceiling; do it after the instrument exists |
+| 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, `rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows can never run, and no row may pretend otherwise |
+| 5 | **learning upstream of selection**: a refusal memory that changes which row is chosen | today the learner is downstream (see §7) | as built, it cannot prevent a repeat of a miss |
+| 6 | **repo-scale navigation**: ranked cross-module retrieval and impact ranking | a symbol index exists; a planner cannot yet ask "where is this behaviour" | needed by any multi-file task, which is item 1 |
+| 7 | fix the 4 fixture defect(s), or stop counting them | 4 sentence(s) | not capability work, and leaving them in the denominator overstates the gap |
+
+The order is not a wish list. Items 1-3 are scored by this document; item 4 is scored by
+the substrate table in §4; item 5 by §7. Item 7 is bookkeeping and belongs last on purpose:
+it changes what the number means, and a number that means something else is not progress.
 
 ---
 
@@ -252,9 +272,9 @@ engine and the cross-file repair choreographer.
 
 | measured property | value |
 |---|---|
-| where the skills live | `/tmp/brain_swe_semantic_graph_v1/verified_skills_v1.sqlite` |
-| inside the temporary directory (wiped with the sandbox) | **True** |
-| rules taught by the 49-sentence census so far | **1** |
+| where the skills live | `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite` |
+| inside the temporary directory (wiped with the sandbox) | **False** |
+| rules taught by the 49-sentence census so far | **6** |
 | a taught fix crystallized in the probe | **1 rule(s)** |
 | CLI/environment recipe abstraction documented in the docstring | **not implemented** |
 | languages with a repair op that can teach | cpp, go, rust, ts |
@@ -267,15 +287,16 @@ taught, then the same rule was offered five neighbours:
 | alpha-renamed twin (same skeleton) | **yes** |
 | same bug, different loop form | **yes** |
 | same intent, different structure | no |
-| same shape, different literal | no |
+| same shape, different literal | **yes** |
 | unrelated function | no |
 
-It reached **2 of 5** neighbours. That is the true surface of
-"instant learning": it generalizes over **identifiers** and over the operator sequence, and
-it does **not** generalize over literals or over a differently-shaped expression with the same
-meaning. The docstring promises holes for numbers, strings and paths (`?num0`, `?str0`,
-`?path0`); those tokens appear only in the docstring. The implemented abstraction is `?id`
-(identifiers) and `?fresh` (new temporaries).
+It reached **3 of 5** neighbours. That is the true surface of
+"instant learning": it generalizes over **identifiers**, over **literals**, and over the
+operator sequence. It does **not** generalize over a differently-shaped expression with the
+same meaning -- that would need synthesis, not abstraction. Holes are `?id` (identifiers),
+`?num` (numbers), `?str` (string literals, which is where a path lands) and `?fresh` (a
+temporary the fix introduces). Identifier holes kept their historical token name, so rules
+stored before literal holes existed still match.
 
 ### 7.1 Why this cannot be the answer to the remaining problems
 
@@ -312,10 +333,14 @@ operate becomes cheap and consistent there.** Teach it a fix, and every structur
 recurrence costs a recall plus a verifier instead of a search. That is real, and it compounds
 -- but only along the axis the primitives already span (`cpp`, `go`, `rust`, `ts`).
 
-To make it the answer to everything, two things would have to be true that are not true today:
-(a) the store must be durable, and it is in `/tmp/brain_swe_semantic_graph_v1/verified_skills_v1.sqlite`; and (b) something must
-produce a first success in a new environment. (b) is the whole problem, and it is not a learning
-problem -- it is a capability-acquisition problem, which is what §6 prices.
+To make it the answer to everything, two things must both hold:
+
+* **(a) the store must be durable.** It now is -- `/home/user/brain/canonical/astra_runtime/tmp/verified_skills_v1.sqlite`, inside the
+  repository and outside the temporary directory -- so a lesson survives the session that
+  learned it. Before this change it did not, so "permanently learned" was false.
+* **(b) something must produce a first success in a new environment.** That is the whole
+  problem, and it is not a learning problem: it is capability acquisition, and it is what
+  §6 prices. Instant learning is the multiplier; (b) is the multiplicand.
 
 ---
 
