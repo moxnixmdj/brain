@@ -106,6 +106,44 @@ Teaching result: **crystallized: true**, `skill_id skill_971b4c5e6052b817`, stor
 **Executable cases solved: 2 of 9. Controls 1/2. Novel same-lesson shapes 1/7.
 Cross-language reachable 0/4.**
 
+### 0.6 CORRECTION — teaching works in all five languages. I was wrong, twice, because of my own oracle.
+
+Before drawing any conclusion from the cross-language row above, I ran the decisive
+experiment: **can the machine learn a lesson in Go, Rust, TypeScript and C++ at all?**
+
+My first two attempts returned `FAILED_MUTATED_TWIN_VERIFICATION` for all four languages and
+I nearly reported that as a finding. **Both failures were bugs in my oracle, not in the
+store.** The mutated twin is alpha-renamed (`Within → _twin_sym_0_With`, `hi → _twin_sym_2_hi`),
+so an oracle that searches for the literal string `'< hi'` can never match. With a
+name-agnostic oracle (`'<=' not in src and '<' in src`):
+
+| language | one-shot teach | novel same-language instance (new names) |
+|---|---|---|
+| python | **true** | PROPOSED |
+| go | **true** | PROPOSED |
+| rust | **true** | PROPOSED |
+| typescript | **true** | PROPOSED |
+| cpp | **true** | PROPOSED |
+
+**Five for five.** The machine learns the same lesson one-shot in every one of those
+languages, stores it, and recalls it on novel code in that language with new identifiers.
+
+**What this changes.** My §0.5 phrasing implied the non-Python languages were closed. That
+was wrong, and it was wrong for an embarrassing reason: **two consecutive faulty instruments
+made the system look worse than it is** — the exact failure mode this repository's laws exist
+to prevent, committed by me rather than by the tree. Corrected statement:
+
+> **Per-language one-shot learning: works, in all five languages.**
+> An environment that speaks Go is learnable after one success in Go.
+> **Cross-language carry-over: does not work** — `WHERE language=?` means a Python lesson is
+> never offered to Go. So the machine must be taught once **per language**, not once per
+> machine.
+
+That is a much stronger position than §0.5 credited, and it is closer to the owner's claim
+than anything I wrote before. The residual gap is narrower than I said: not "it cannot learn
+in new environments" but **"it must learn again in each environment, and one lesson does not
+generalize across the boundary between them."**
+
 ### The part that is not a sample, and is decided by construction
 
 `X1–X4` is not a weak sample — it is a **structural zero**. `_load_rules` selects
@@ -115,11 +153,12 @@ Go, Rust, TypeScript or C++ — not refused after consideration, **not consulted
 Verified directly: python rules visible 1, go rules visible 0, cpp rules visible 0, and a
 novel Go instance after a taught lesson returns `NO_PROPOSAL`.
 
-So the sentence *"he does them once and learns all of them permanently"* is **false across
-the language boundary by design**, even when the lesson is literally the identical token
-swap. A new environment in a different language starts from zero regardless of how much was
-learned before. That is the sharpest single fact against the claim, and no amount of
-"trying it in more environments" changes it — the rule has to be re-taught per language.
+So a lesson learned in one language is **not carried** into another — it must be re-taught
+in each. But see §0.6 immediately below: re-teaching **works**, one shot, in every language
+tested. The barrier is that the lesson does not *travel*; it is not that the machine cannot
+*learn* there. That distinction is the whole of what remains, and it is much narrower than
+"a new environment starts from zero" — a new environment starts from zero **in that
+language**, and reaches full capability there after one success.
 
 ### The part that is a sample, and is labelled as one
 
