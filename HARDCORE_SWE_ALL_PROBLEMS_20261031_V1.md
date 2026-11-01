@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `d2319b53c4` (branched from main `82876db593`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `730c5e3` (branched from main `730c5e3`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **38 served / 11 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 102 ms  p90 618 ms  max 1613 ms |
+| matrix latency | median 92 ms  p90 569 ms  max 3637 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -113,8 +113,8 @@ declared as what it is: diagnosis, not capability. It is the reason the table in
 | `FAIL_CLOSED__CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT` | 1 | the DDL edit named is outside the migration shapes the engine implements | more DDL shapes (add/drop column, change type, add index) with a migration file as evidence |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED` | 1 | no test in the stated suite is flaky, so there is no quarantine to write | none on the machine — the suite is not flaky; a better fixture is the fix |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION` | 1 | the move collides: both stated files already define the symbol | none — the refusal is correct and the sentence is ill-posed |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | 1 | — | — |
-| `FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED` | 1 | — | — |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | 1 | a repository sentence was routed to a Python transformer, and the sentence names no repository for the transformer to stand in | selection: a sentence whose verb is a repository operation belongs to the git row, and that row then refuses `cherry-pick` by name instead of a Python transformer refusing a repository |
+| `FAIL_CLOSED__CAPABILITY_REFUSED_GIT_READ_TARGET_NOT_SPECIFIED` | 1 | a sentence about commits was routed to the architect row, which read history without being given a repository to read it from | derive `repo_root` from the working directory, and give a changelog its own row: it writes a document from history, which is neither a read nor an architecture review |
 
 ### 3.0 What each refusal actually said
 
