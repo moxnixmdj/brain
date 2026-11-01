@@ -30925,7 +30925,7 @@
   "engines": 26,
   "knowledge_documents": 233,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6586,
+  "research_index_records": 6587,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30934,7 +30934,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e77bb34a88c8b68944e90e586653765ab9dcecb890050ef12ba4655e826a3f95"
+  "value": "ef2187f74c7cf8ad5d74172812ad6909864f9edc974d59210cae6e1beb18c5ac"
  },
  "engines": [
   {
@@ -207675,6 +207675,51 @@
    }
   },
   {
+   "action_id": "A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_VARIANT_IS_NOT_A_NEW_PROBLEM_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "bc16fc2f0c4d9198cf92209b813ff11b8ded801fcd956478e284c1c61091d4a0",
+   "status": "",
+   "terms": {
+    "1.3": 1,
+    "20261101": 1,
+    "280": 1,
+    "a_variant_is_not_a_new_problem_v1_20261101_v1": 2,
+    "already": 1,
+    "answers": 1,
+    "behaved": 1,
+    "changes": 1,
+    "covers": 1,
+    "estimator": 1,
+    "every": 1,
+    "family": 2,
+    "fingerprint_key": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "hashed": 1,
+    "instead": 1,
+    "itself": 1,
+    "keyed": 2,
+    "learn": 1,
+    "learned": 1,
+    "machine": 1,
+    "memory": 2,
+    "ms": 1,
+    "name": 1,
+    "new": 1,
+    "not": 2,
+    "now": 1,
+    "once": 2,
+    "so": 2,
+    "v1": 2,
+    "variant": 2
+   }
+  },
+  {
    "action_id": "A_VERIFIED_REPAIR_MUST_BE_ABLE_TO_LAND_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T01:30:00Z",
@@ -232337,7 +232382,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "108f0959ef6a2bb9d8ed1a40e59b9a794e929c7f19af6f3631e1b2c16324021f",
+   "sha256": "9dd7c7269fc5f80895e017bff04e029fdd19a850b7e888bc70c9d591c0879b3f",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 49,
    "symbols": [
