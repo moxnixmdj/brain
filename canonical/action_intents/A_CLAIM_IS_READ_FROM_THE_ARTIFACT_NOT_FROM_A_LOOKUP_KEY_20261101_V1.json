@@ -1,9 +1,9 @@
 {
-  "action_id": "A_REFUSAL_ALREADY_NAMED_IS_NOT_A_CRASH_20261101_V1",
-  "action_intent_id": "A_REFUSAL_ALREADY_NAMED_IS_NOT_A_CRASH_20261101_V1",
+  "action_id": "A_CLAIM_IS_READ_FROM_THE_ARTIFACT_NOT_FROM_A_LOOKUP_KEY_20261101_V1",
+  "action_intent_id": "A_CLAIM_IS_READ_FROM_THE_ARTIFACT_NOT_FROM_A_LOOKUP_KEY_20261101_V1",
   "action_intent_path": null,
   "action_kind": "GOVERNANCE_GUARD",
-  "action_summary": "The door classified only one of the two spellings an adapter refuses in. SystemExit(json.dumps({\"error\":true,...})) was parsed; RuntimeError(\"GUARD_KEY:detail\") -- the repository's own SCREAMING_SNAKE convention -- fell through to FAIL__LIVE_CONTROLLER_EXECUTION, the status of an adapter bug, and the cause the exception named was discarded. Measured on main 6aa5dab with the 49-sentence advanced census: 7 of 13 refusals were that shape (POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM x2, SQL_UNSUPPORTED_DDL_EDIT, PYPROJECT_ALREADY_PINNED_OR_EMPTY, NO_DECLARED_DEPENDENCY_TO_VENDOR, NO_FLAKY_TEST_DETECTED, TARGET_SYMBOL_COLLISION:add), and the same shape appears in the 18 ordinary sentences (DIAGNOSE_ARCHITECT_REFUSED:..., NOT_A_GIT_REPOSITORY:.). One predicate over the message now classifies the second spelling identically: a key is recognised, a traceback is not.",
+  "action_summary": "Two claims were computed from a lookup key instead of from the artifact, one layer apart, and both were certified. (1) The door classified an adapter refusal by the EXCEPTION CLASS it arrived in -- SystemExit(json) parsed, RuntimeError(\"GUARD_KEY:detail\") not -- so 7 of the 13 refusals in the 49-sentence advanced census came back FAIL__LIVE_CONTROLLER_EXECUTION, the status of an adapter bug, with the cause the exception already named discarded (POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM x2, SQL_UNSUPPORTED_DDL_EDIT, PYPROJECT_ALREADY_PINNED_OR_EMPTY, NO_DECLARED_DEPENDENCY_TO_VENDOR, NO_FLAKY_TEST_DETECTED, TARGET_SYMBOL_COLLISION:add). (2) The dependency audit classified a package by its NAME: membership in a six-entry advisory dict was the whole test, so requests==2.32.3, pyyaml==6.0.1 and cryptography==43.0.0 -- all past their fixes -- were reported vulnerable and the door stamped exact semantic acceptance over the report. Both now read the artifact: the refusal keeps its own key, and the audit compares the pinned version to the fixed version and names what it could not judge.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -29,26 +29,29 @@
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
       "canonical/runtime/live_brain_route_admission_v1.py",
-      "canonical/tests/test_a_refusal_already_named_is_not_a_crash_v1.py"
+      "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
+      "canonical/tests/test_a_refusal_already_named_is_not_a_crash_v1.py",
+      "canonical/tests/test_a_dependency_finding_requires_a_vulnerable_version_v1.py",
+      "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
     ],
     "route_class": "REUSE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The failure taxonomy was read from the exception's MECHANISM (SystemExit vs RuntimeError) instead of from what the adapter said, so an answer and a crash shared one status.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Both answers were derived from a lookup -- an exception's class, a package's name -- instead of from the datum the answer is about: the key the adapter raised and the version the sentence pinned. Each was still certified, because the layer that certifies reads the verdict, not the evidence.",
   "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "The failure taxonomy was read from the exception's MECHANISM (SystemExit vs RuntimeError) instead of from what the adapter said, so an answer and a crash shared one status.",
+  "causal_blocker": "Both answers were derived from a lookup -- an exception's class, a package's name -- instead of from the datum the answer is about: the key the adapter raised and the version the sentence pinned. Each was still certified, because the layer that certifies reads the verdict, not the evidence.",
   "date": "2026-11-01",
-  "expected_parent_change": "Census served count unchanged at 36/49 (no pass is minted by a better failure name); the 7 crashes become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's own reason. 18 ordinary sentences 9/18 before and after, mean 163 ms. 28-task ladder 28/28 reached, 27 PASS, only destructive_refusal refused by design. 54-case capability matrix 42 REAL / 0 FALSE / 0 DAMAGED before and after.",
-  "expected_parent_frontier_change": "Census served count unchanged at 36/49 (no pass is minted by a better failure name); the 7 crashes become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's own reason. 18 ordinary sentences 9/18 before and after, mean 163 ms. 28-task ladder 28/28 reached, 27 PASS, only destructive_refusal refused by design. 54-case capability matrix 42 REAL / 0 FALSE / 0 DAMAGED before and after.",
+  "expected_parent_change": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
+  "expected_parent_frontier_change": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
   "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
-  "falsification_condition": "If a guard-key refusal is again reported as FAIL__LIVE_CONTROLLER_EXECUTION, or a genuine crash is reported as a refusal, or the census served count moves, this action was wrong.",
+  "falsification_condition": "If a guard-key refusal is reported as a controller crash again, if a package past its fix is reported vulnerable again, if a package the table cannot judge reads as clean, or if any board loses a pass, this action was wrong.",
   "governance_change": true,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
-  "intent": "Read what the adapter said, not how it said it.",
+  "intent": "Classify by the artifact: the key the adapter named, the version the sentence pinned.",
   "load_bearing_primary": {
     "canonical_base_commit": "6aa5dab48be524ef6e45f062efbbb26f28f0f400",
     "constructive_gap_for_open_obligation_ids": [
@@ -58,14 +61,14 @@
     ],
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/13",
-    "interpretation": "EVIDENCE_IS_THE_ADAPTERS_OWN_WORD_NOT_THE_EXCEPTION_CLASS",
-    "measured_effect": "Census served count unchanged at 36/49 (no pass is minted by a better failure name); the 7 crashes become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's own reason. 18 ordinary sentences 9/18 before and after, mean 163 ms. 28-task ladder 28/28 reached, 27 PASS, only destructive_refusal refused by design. 54-case capability matrix 42 REAL / 0 FALSE / 0 DAMAGED before and after.",
+    "interpretation": "EVIDENCE_IS_THE_DATUM_NOT_A_LOOKUP_KEY",
+    "measured_effect": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": 0.5,
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "Census served count unchanged at 36/49 (no pass is minted by a better failure name); the 7 crashes become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's own reason. 18 ordinary sentences 9/18 before and after, mean 163 ms. 28-task ladder 28/28 reached, 27 PASS, only destructive_refusal refused by design. 54-case capability matrix 42 REAL / 0 FALSE / 0 DAMAGED before and after.",
+  "measured_effect": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/runtime/declared_input_derivation_v1.py",
@@ -79,7 +82,10 @@
   ],
   "progress_evidence_paths": [
     "canonical/runtime/live_brain_route_admission_v1.py",
-    "canonical/tests/test_a_refusal_already_named_is_not_a_crash_v1.py"
+    "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
+    "canonical/tests/test_a_refusal_already_named_is_not_a_crash_v1.py",
+    "canonical/tests/test_a_dependency_finding_requires_a_vulnerable_version_v1.py",
+    "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
@@ -91,18 +97,18 @@
       "THE_SILENT_WIDENING_OF_AN_EDIT_SCOPE_TO_THE_ANCESTOR_TREE",
       "CERTIFICATION_OF_A_RUN_THAT_MOVED_FILES_THE_SENTENCE_NEVER_NAMED"
     ],
-    "expected_parent_level_state_change": "Census served count unchanged at 36/49 (no pass is minted by a better failure name); the 7 crashes become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's own reason. 18 ordinary sentences 9/18 before and after, mean 163 ms. 28-task ladder 28/28 reached, 27 PASS, only destructive_refusal refused by design. 54-case capability matrix 42 REAL / 0 FALSE / 0 DAMAGED before and after.",
+    "expected_parent_level_state_change": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
     "iteration_limit": 4,
     "obs_blocker": {
-      "delete_bypass_substitute_options": "TREATING_EVERY_RUNTIMEERROR_AS_A_REFUSAL__REJECTED_THE_MESSAGE_MUST_BE_A_GUARD_KEY; REWRITING_EACH_ADAPTER_TO_RAISE_SystemExit__REJECTED_ONE_RULE_BEATS_N_ADAPTER_EDITS",
-      "intrinsic_or_path_specific": "Path-specific: one predicate and one branch in the single-capability runner.",
-      "surviving_causal_blocker": "The caller was told the mechanism instead of the answer."
+      "delete_bypass_substitute_options": "TREATING_EVERY_RUNTIMEERROR_AS_A_REFUSAL__REJECTED_THE_MESSAGE_MUST_BE_A_GUARD_KEY; SHIPPING_A_LARGER_HARDCODED_ADVISORY_TABLE__REJECTED_A_TABLE_THAT_DOES_NOT_COMPARE_IS_WRONG_AT_ANY_SIZE; REWRITING_EACH_ADAPTER_TO_RAISE_SystemExit__REJECTED_ONE_RULE_BEATS_N_ADAPTER_EDITS",
+      "intrinsic_or_path_specific": "Path-specific: one predicate and one branch in the door; one comparison in one operation.",
+      "surviving_causal_blocker": "A lookup key stood in for the datum the answer was about."
     },
     "obs_capability": {
-      "capability_work_deleted": "NO_NEW_EXCEPTION_TYPE_NO_NEW_STATUS_PREFIX_NO_ADAPTER_EDITS",
-      "existing_inherited_routes_checked": "The door already parsed the SystemExit(jSON) spelling and already had a typed refusal status prefix to reuse.",
-      "external_existing_routes_checked": "None needed: the taxonomy is internal.",
-      "surviving_gap": "The 6 remaining census refusals are capability absences (no row for benchmark-vs-revision, cherry-pick, changelog) and routing gaps; this action does not claim them."
+      "capability_work_deleted": "NO_NEW_EXCEPTION_TYPE_NO_NEW_ADVISORY_SERVICE_NO_ADAPTER_EDITS",
+      "existing_inherited_routes_checked": "The door already parsed one refusal spelling and already had the typed refusal status prefix; the audit operation and its report already existed.",
+      "external_existing_routes_checked": "An OSV/PyPI advisory feed is the real source for P2 but needs the network and a freshness policy; not claimed here.",
+      "surviving_gap": "The advisory table is still six packages (now stated); the 6 remaining census refusals are capability absences and routing gaps, listed in HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md."
     },
     "obs_goal": {
       "proxy_goals_deleted": [
@@ -164,10 +170,10 @@
     "why_selected_route_is_fastest_sufficient": "Three edits of a few lines each, six tests, and the census re-measures in six seconds. Each one removes a gate and reads a fact already on hand, so nothing new is computed and nothing new can be wrong."
   },
   "required_capability": "EVIDENCE_THAT_NAMES_THE_FACT_IT_WAS_DECIDED_ON",
-  "resolution": "An adapter refusal keeps its own key all the way to the caller, whichever of the two spellings the adapter used, and a real crash keeps its crash classification.",
-  "route_id": "CLASSIFY_THE_REFUSAL_BY_ITS_KEY",
+  "resolution": "An adapter refusal keeps its own key all the way to the caller whichever spelling it used, and a dependency finding exists only when the pinned version is below the fixed one, with the audit's blind spots named in its own artifact.",
+  "route_id": "CLASSIFY_FROM_THE_ARTIFACT",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "CLASSIFY_THE_REFUSAL_BY_ITS_KEY",
+  "selected_route": "CLASSIFY_FROM_THE_ARTIFACT",
   "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -202,13 +208,17 @@
         {
           "git_blob_sha": "a583965a87ba838cac9f9e2a33e3c918d94270bb",
           "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        },
+        {
+          "git_blob_sha": "166fadde10ec12dbb1420b54ff4c67819ba306ae",
+          "path": "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py"
         }
       ],
-      "decisive_question": "IS_THE_REFUSAL_CLASSIFIED_BY_WHAT_THE_ADAPTER_SAID",
-      "falsifier_id": "THE_EXCEPTION_CLASS_OUTRANKS_THE_ADAPTERS_OWN_KEY",
+      "decisive_question": "IS_THE_CLAIM_READ_FROM_THE_ARTIFACT_OR_FROM_A_LOOKUP_KEY",
+      "falsifier_id": "A_CLASS_OR_A_NAME_OUTRANKS_THE_DATUM",
       "known_counterexamples_checked": true,
       "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
-      "proposal_id": "A_REFUSAL_ALREADY_NAMED_IS_NOT_A_CRASH_20261101_V1"
+      "proposal_id": "A_CLAIM_IS_READ_FROM_THE_ARTIFACT_NOT_FROM_A_LOOKUP_KEY_20261101_V1"
     }
   },
   "weakens_existing_guard": "No guard is weakened. The effect gate gains a third reading (what moved), the choreographer loses a silent scope widening, the binder loses a curated word list that only ever refused work the row could do, and R3 keeps its meaning by naming the slot when the binder already knows it."
