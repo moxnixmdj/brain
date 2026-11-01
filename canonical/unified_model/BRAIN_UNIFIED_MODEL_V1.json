@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6610,
+  "research_index_records": 6612,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 430,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bc0f4e1a131b709b7f5e7d17666602551eee223c020bded4ffa2470920f14cf8"
+  "value": "6ef62cc1a39e12fb0665ef42c29faf471026ad3b5bfebc7285169fbc82b7e0e8"
  },
  "engines": [
   {
@@ -156898,6 +156898,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/OVERCONFIDENCE_GATE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OVERCONFIDENCE_GATE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "f725c33f42dcbc8edf08c934e68cb88d4ebdd9170e47be06b0d12de462eb2220",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "gate": 1,
+    "known": 1,
+    "overconfidence": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-03",
    "id": "research:canonical/verification/OWNERSHIP_PROMOTION_CONNECTOR_PROOF_20261003_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -213078,6 +213097,51 @@
     "structure": 1,
     "v1": 2,
     "xlsx_table_xlswriter_columns_demanded_the_sentence_state_the_columns_and_raised_xlsx_columns_unresolved_even_though_a_record_collections_keys_are_its_columns__and_world_binding_v1_world_path_for_returned_the_first_alphabetically_sorted_match_which_for_json_path_was_migration_status_2026_09_10_json_a_flat_status_document_holding_no_records_at_all__each_defect_alone_was_invisible_because_derived_columns_had_no_records_to_read_and_a_file_full_of_records_had_no_columns_to_use_so_both_were_previously_measured_in_isolation_and_reverted_as_no_ops": 1
+   }
+  },
+  {
+   "action_id": "REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "63cdc73264ea5544408f0417a13cd8e3e7b0f7ca988adab8058dbd5a7ae53714",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "acceptance": 2,
+    "accepted": 1,
+    "acts": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "before": 1,
+    "benchmark": 1,
+    "cannot": 1,
+    "costs": 1,
+    "exactly": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measurably": 1,
+    "measured": 1,
+    "measuring": 1,
+    "model": 1,
+    "moves": 1,
+    "never": 1,
+    "no": 1,
+    "nothing": 1,
+    "now": 1,
+    "number": 1,
+    "obeyed": 1,
+    "oneself": 2,
+    "only": 1,
+    "overconfidence": 1,
+    "overconfident": 1,
+    "recorded": 1,
+    "refuse": 1,
+    "refuse_acceptance_while_measurably_overconfident_v1_20261102": 1,
+    "report": 1,
+    "row": 1
    }
   },
   {
@@ -272079,9 +272143,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "fe1f4836192525cba8755a0ec96d0b6c1008dd34419703a267e62e02ee911066",
+   "sha256": "0d5e415897daee428068bf7bcfe1fe9af447b2741e237457cfe00d088eea1047",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 76,
+   "symbol_count": 77,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -278468,15 +278532,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/self_prediction_calibration_v1.py",
-   "sha256": "9875d17b7c1fef101c74a337b28abf28fe007b9025c1258fcdf2e97564955737",
+   "sha256": "abeedcbd580267e16fba65e5bc4e52a47ba3861ccd3c75363c66ab922b0bec3e",
    "summary": "Does the system's model of itself predict anything?",
-   "symbol_count": 7,
+   "symbol_count": 8,
    "symbols": [
     "CalibrationError",
     "Ledger",
     "Prediction",
     "_probability",
     "_verdict",
+    "gate",
     "main",
     "score"
    ],
@@ -278484,6 +278549,7 @@
     "anything": 1,
     "calibration": 1,
     "calibrationerror": 1,
+    "gate": 1,
     "itself": 1,
     "ledger": 1,
     "main": 1,
