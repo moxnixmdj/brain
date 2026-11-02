@@ -1,22 +1,27 @@
 #!/usr/bin/env python3
-"""8-Language Tree-Sitter CST Skill Skeleton Unifier (`tree_sitter_cst_skill_skeleton_v1`).
+"""7-Language Tree-Sitter CST Skill Skeleton Anti-Unifier (`tree_sitter_cst_skill_skeleton_v1`).
 
-Removes the `return`-keyword and language-specific spelling barriers identified in
-`WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md` §5.1 & §7 (`K3 = 0`, `$0` spend, `< 1 ms`):
-  - Uses `canonical/runtime/tree_sitter_swe_kernel_v1.parse_bytes` across `python`,
-    `rust`, `go`, `typescript`, `javascript`, `java`, and `cpp`.
-  - Canonicalizes concrete CST nodes onto a language-neutral structural AST/CST
-    skeleton (`BINOP`, `UNOP`, `LEN`, `HOLE_ID`, `HOLE_NUM`, `LIT_NUM`, `EXPR`) so:
-      * Python `return E` unifies seamlessly with Rust block tail-expressions `E`
-        (no `return` token), JS/TS concise arrow bodies `=> E`, and `return E;`
-        in Go/TS/JS/Java/C++.
-      * Python/Go `len(x)` unifies seamlessly with Rust `x.len()`, TS/JS `x.length`,
-        and Java/C++ `x.size()`, emitting native target-language syntax on rewrite.
-      * Python `and` / `or` / `not` unifies seamlessly with `&&` / `||` / `!`.
-  - Every proposed candidate is fail-closed gated by:
-      (1) exact CST structural hole unification (no fresh unbound identifiers),
-      (2) `tree_sitter_swe_kernel_v1.parse_bytes` `has_error == False`, and
-      (3) the caller's mandatory semantic/test `verifier(candidate) == True`.
+Grammar-agnostic CST structural rule compiler, subtree anti-unifier, and cross-language
+candidate generator across `python`, `rust`, `go`, `typescript`, `javascript`, `java`, and `cpp`
+(`K3 = 0`, `$0` spend, `< 1 ms`):
+
+  - Canonicalizes concrete Tree-Sitter CST expression trees onto a complete cross-language
+    structural expression algebra:
+      * `BINOP(op, left, right)`
+      * `UNOP(op, operand)`
+      * `LEN(arg)` (`len(x)` <-> `x.len()` <-> `x.length` <-> `x.size()`)
+      * `CALL(callee, (arg0, ..., argN))` (arbitrary N-ary calls)
+      * `MCALL(recv, method, (arg0, ..., argN))` (arbitrary N-ary member/method calls)
+      * `ATTR(recv, field)` (`a.x` across Python/JS/TS/Go/Rust/Java/C++)
+      * `SUBSCRIPT(val, idx)` (`a[i]` across Python/JS/TS/Go/Rust/Java/C++)
+      * `TERNARY(cond, then_expr, else_expr)` (`a if c else b` <-> `c ? a : b` <-> `if c { a } else { b }`)
+  - Supports multi-line function/method/statement rules (`python_scoped_edit_v1` windows,
+    blocks, `if`/`elif`/`return` statements) via direct Tree-Sitter CST lockstep LCA descent,
+    without fragile string-prefix stripping or fixed 5-shape whitelists.
+  - Anti-unifies unchanged outer contexts (`CALL`, `MCALL`, `SUBSCRIPT`, `ATTR`, `TERNARY`,
+    `LEN`, `UNOP`, `BINOP`) and abstracts unchanged composite child subtrees into `?exprK`
+    structural holes so rules learned inside compound expressions transfer cleanly to new
+    contexts and languages, fail-closed gated by Tree-Sitter parse validity + caller `verifier`.
 """
 from __future__ import annotations
 
@@ -46,6 +51,7 @@ _CANON_OP = {
     "-": "-",
     "*": "*",
     "/": "/",
+    "//": "/",
     "%": "%",
 }
 
@@ -66,6 +72,33 @@ _UNARY_NODE_TYPES = frozenset({
     "unary_expression",
     "unary_operator",
     "not_operator",
+})
+
+_ATTR_NODE_TYPES = frozenset({
+    "attribute",
+    "member_expression",
+    "selector_expression",
+    "field_expression",
+    "field_access",
+})
+
+_SUBSCRIPT_NODE_TYPES = frozenset({
+    "subscript",
+    "subscript_expression",
+    "index_expression",
+    "array_access",
+})
+
+_CALL_NODE_TYPES = frozenset({
+    "call",
+    "call_expression",
+    "method_invocation",
+})
+
+_TERNARY_NODE_TYPES = frozenset({
+    "conditional_expression",
+    "ternary_expression",
+    "if_expression",
 })
 
 _NUM_NODE_TYPES = frozenset({
@@ -105,30 +138,25 @@ def _unwrap_expr(node: Any) -> Any:
 def _extract_len_arg(node: Any, raw: bytes) -> Any | None:
     """If `node` is `len(x)` / `x.len()` / `x.length` / `x.size()`, return CST node for `x`."""
     t = node.type
-    # Python `call` or Go `call_expression`: `len(x)`
     if t in ("call", "call_expression"):
         children = [c for c in node.children if c.is_named]
         if len(children) >= 2:
             callee, args_node = children[0], children[1]
-            # Python / Go: `len(x)`
             if callee.type == "identifier" and _node_text(callee, raw) == "len":
                 arg_named = [c for c in args_node.children if c.is_named]
                 if len(arg_named) == 1:
                     return arg_named[0]
-            # Rust / C++: `x.len()` or `x.size()`
-            if callee.type in ("field_expression", "member_expression"):
+            if callee.type in _ATTR_NODE_TYPES:
                 f_named = [c for c in callee.children if c.is_named]
                 arg_named = [c for c in args_node.children if c.is_named]
                 if len(f_named) == 2 and len(arg_named) == 0:
                     method_nm = _node_text(f_named[1], raw)
                     if method_nm in ("len", "size"):
                         return f_named[0]
-    # TS / JS: `x.length`
-    if t in ("member_expression", "field_expression"):
+    if t in _ATTR_NODE_TYPES:
         f_named = [c for c in node.children if c.is_named]
         if len(f_named) == 2 and _node_text(f_named[1], raw) == "length":
             return f_named[0]
-    # Java: `x.size()`
     if t == "method_invocation":
         named = [c for c in node.children if c.is_named]
         if len(named) >= 2 and _node_text(named[1], raw) == "size":
@@ -136,6 +164,109 @@ def _extract_len_arg(node: Any, raw: bytes) -> Any | None:
             if args_node is None or len([c for c in args_node.children if c.is_named]) == 0:
                 return named[0]
     return None
+
+
+def _extract_attr_parts(node: Any) -> tuple[Any, Any] | None:
+    if node.type not in _ATTR_NODE_TYPES:
+        return None
+    named = [c for c in node.children if c.is_named]
+    if len(named) == 2:
+        return named[0], named[1]
+    return None
+
+
+def _extract_subscript_parts(node: Any) -> tuple[Any, Any] | None:
+    if node.type not in _SUBSCRIPT_NODE_TYPES:
+        return None
+    named = [c for c in node.children if c.is_named]
+    if len(named) != 2:
+        return None
+    base_nd, idx_nd = named[0], named[1]
+    if idx_nd.type == "subscript_argument_list":
+        sub_named = [c for c in idx_nd.children if c.is_named]
+        if len(sub_named) != 1:
+            return None
+        idx_nd = sub_named[0]
+    elif idx_nd.type == "slice":
+        return None
+    return base_nd, idx_nd
+
+
+def _extract_call_or_mcall(node: Any) -> tuple[str, Any, Any | None, list[Any]] | None:
+    """Return `('CALL', callee_nd, None, arg_nodes)` or `('MCALL', recv_nd, method_nd, arg_nodes)`."""
+    t = node.type
+    if t in ("call", "call_expression"):
+        children = [c for c in node.children if c.is_named]
+        if len(children) < 2:
+            return None
+        callee, args_node = children[0], children[1]
+        if "argument" not in args_node.type:
+            return None
+        arg_nodes = [c for c in args_node.children if c.is_named]
+        # Reject keyword/spread arguments so positional cross-language rendering stays sound
+        if any(c.type in ("keyword_argument", "dictionary_splat", "list_splat", "spread_element") for c in arg_nodes):
+            return None
+        attr_parts = _extract_attr_parts(callee)
+        if attr_parts is not None:
+            return ("MCALL", attr_parts[0], attr_parts[1], arg_nodes)
+        return ("CALL", callee, None, arg_nodes)
+    if t == "method_invocation":
+        named = [c for c in node.children if c.is_named]
+        if len(named) == 2 and "argument" in named[1].type:
+            arg_nodes = [c for c in named[1].children if c.is_named]
+            return ("CALL", named[0], None, arg_nodes)
+        if len(named) >= 3 and "argument" in named[-1].type:
+            arg_nodes = [c for c in named[-1].children if c.is_named]
+            return ("MCALL", named[0], named[1], arg_nodes)
+    return None
+
+
+def _extract_ternary_parts(node: Any, raw: bytes) -> tuple[Any, Any, Any] | None:
+    """Return `(cond_node, then_node, else_node)` across Python, JS/TS/Java/C++, and Rust."""
+    t = node.type
+    if t in ("conditional_expression", "ternary_expression"):
+        named = [c for c in node.children if c.is_named]
+        if len(named) != 3:
+            return None
+        between_0_1 = raw[named[0].end_byte:named[1].start_byte].decode("utf-8", errors="replace")
+        if re.search(r"\bif\b", between_0_1):
+            # Python: `then_expr if cond_expr else else_expr`
+            return named[1], named[0], named[2]
+        if "?" in between_0_1:
+            # C++ / JS / TS / Java: `cond_expr ? then_expr : else_expr`
+            return named[0], named[1], named[2]
+        return None
+    if t == "if_expression":
+        named = [c for c in node.children if c.is_named]
+        if len(named) != 3:
+            return None
+        cond_nd, then_blk, else_clause = named[0], named[1], named[2]
+        then_children = [c for c in then_blk.children if c.is_named]
+        else_blocks = [c for c in else_clause.children if c.is_named]
+        if len(then_children) == 1 and len(else_blocks) == 1 and else_blocks[0].type == "block":
+            else_children = [c for c in else_blocks[0].children if c.is_named]
+            if len(else_children) == 1:
+                return cond_nd, then_children[0], else_children[0]
+    return None
+
+
+def _is_candidate_expr_node(node: Any, raw: bytes) -> bool:
+    t = node.type
+    return (
+        t in _BINARY_NODE_TYPES
+        or t in _UNARY_NODE_TYPES
+        or t in _CALL_NODE_TYPES
+        or t in _SUBSCRIPT_NODE_TYPES
+        or t in _ATTR_NODE_TYPES
+        or t in _TERNARY_NODE_TYPES
+        or _extract_len_arg(node, raw) is not None
+    )
+
+
+def _ident_or_hole(txt: str, hole_by_ident: Mapping[str, str] | None) -> tuple[str, str]:
+    if hole_by_ident and txt in hole_by_ident:
+        return ("HOLE", hole_by_ident[txt])
+    return ("ATOM", txt)
 
 
 def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str] | None = None) -> tuple[Any, ...]:
@@ -147,7 +278,6 @@ def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str
 
     t = node.type
     if t in _BINARY_NODE_TYPES:
-        # Children: left, op_token(s), right
         named = [c for c in node.children if c.is_named]
         if len(named) == 2:
             left, right = named[0], named[1]
@@ -170,6 +300,53 @@ def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str
             if canon_op:
                 return ("UNOP", canon_op, cst_to_canonical_expr(operand, raw, hole_by_ident))
 
+    tern = _extract_ternary_parts(node, raw)
+    if tern is not None:
+        c_nd, t_nd, e_nd = tern
+        return (
+            "TERNARY",
+            cst_to_canonical_expr(c_nd, raw, hole_by_ident),
+            cst_to_canonical_expr(t_nd, raw, hole_by_ident),
+            cst_to_canonical_expr(e_nd, raw, hole_by_ident),
+        )
+
+    call_parts = _extract_call_or_mcall(node)
+    if call_parts is not None:
+        ckind, first_nd, method_nd, arg_nodes = call_parts
+        arg_skels = tuple(cst_to_canonical_expr(a, raw, hole_by_ident) for a in arg_nodes)
+        if ckind == "MCALL" and method_nd is not None:
+            m_txt = _node_text(method_nd, raw).strip()
+            return (
+                "MCALL",
+                cst_to_canonical_expr(first_nd, raw, hole_by_ident),
+                _ident_or_hole(m_txt, hole_by_ident),
+                arg_skels,
+            )
+        c_txt = _node_text(first_nd, raw).strip()
+        callee_sk = (
+            _ident_or_hole(c_txt, hole_by_ident)
+            if re.fullmatch(r"[A-Za-z_$][\w$]*", c_txt)
+            else cst_to_canonical_expr(first_nd, raw, hole_by_ident)
+        )
+        return ("CALL", callee_sk, arg_skels)
+
+    sub_parts = _extract_subscript_parts(node)
+    if sub_parts is not None:
+        return (
+            "SUBSCRIPT",
+            cst_to_canonical_expr(sub_parts[0], raw, hole_by_ident),
+            cst_to_canonical_expr(sub_parts[1], raw, hole_by_ident),
+        )
+
+    attr_parts = _extract_attr_parts(node)
+    if attr_parts is not None:
+        f_txt = _node_text(attr_parts[1], raw).strip()
+        return (
+            "ATTR",
+            cst_to_canonical_expr(attr_parts[0], raw, hole_by_ident),
+            _ident_or_hole(f_txt, hole_by_ident),
+        )
+
     txt = _node_text(node, raw).strip()
     if t in _NUM_NODE_TYPES or re.fullmatch(r"\d+(?:\.\d+)?", txt):
         if hole_by_ident and txt in hole_by_ident:
@@ -177,39 +354,21 @@ def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str
         return ("NUM", txt)
 
     if t in _IDENT_NODE_TYPES or re.fullmatch(r"[A-Za-z_$][\w$]*", txt):
-        if hole_by_ident and txt in hole_by_ident:
-            return ("HOLE", hole_by_ident[txt])
-        return ("ATOM", txt)
+        return _ident_or_hole(txt, hole_by_ident)
 
-    # Single-arg call `fn(arg)` (e.g. `int(x <= hi)`, `bool(a < b)`, `abs(x - y)`)
-    if t in ("call", "call_expression"):
-        children = [c for c in node.children if c.is_named]
-        if len(children) >= 2:
-            callee, args_node = children[0], children[1]
-            callee_txt = _node_text(callee, raw).strip()
-            arg_named = [c for c in args_node.children if c.is_named]
-            if len(arg_named) == 1 and re.fullmatch(r"[A-Za-z_$][\w$]*", callee_txt):
-                fn_sk = (
-                    ("HOLE", hole_by_ident[callee_txt])
-                    if (hole_by_ident and callee_txt in hole_by_ident)
-                    else ("ATOM", callee_txt)
-                )
-                return ("CALL1", fn_sk, cst_to_canonical_expr(arg_named[0], raw, hole_by_ident))
-
-    # Zero-arg member method call `recv.method()` (e.g. `hook.has_spec()`, `spec.hasSpec()`)
-    m_call0 = re.fullmatch(r"([A-Za-z_$][\w$]*)\s*\.\s*([A-Za-z_$][\w$]*)\s*\(\s*\)", txt)
-    if m_call0:
-        r_tok, m_tok = m_call0.group(1), m_call0.group(2)
-        r_sk = ("HOLE", hole_by_ident[r_tok]) if (hole_by_ident and r_tok in hole_by_ident) else ("ATOM", r_tok)
-        m_sk = ("HOLE", hole_by_ident[m_tok]) if (hole_by_ident and m_tok in hole_by_ident) else ("ATOM", m_tok)
-        return ("MCALL0", r_sk, m_sk)
-
-    # Opaque sub-expression (e.g., `a[i]`, `obj.field`, `foo(bar, baz)`): binds against a `?id`/`?expr` hole!
     if hole_by_ident:
         found_holes = [h for syn, h in hole_by_ident.items() if syn in txt]
         if found_holes:
             return ("OPAQUE_WITH_HOLES", txt, tuple(sorted(set(found_holes))))
     return ("OPAQUE", txt)
+
+
+def _wrap_compound_receiver(rendered: str, sub: tuple[Any, ...]) -> str:
+    if sub[0] in ("BINOP", "UNOP", "TERNARY") and not (rendered.startswith("(") and rendered.endswith(")")):
+        return f"({rendered})"
+    if " " in rendered and not (rendered.startswith("(") and rendered.endswith(")")):
+        return f"({rendered})"
+    return rendered
 
 
 def render_canonical_expr(expr: tuple[Any, ...], target_language: str, bindings: Mapping[str, str]) -> str | None:
@@ -227,18 +386,65 @@ def render_canonical_expr(expr: tuple[Any, ...], target_language: str, bindings:
         if fn_s is None or arg_s is None:
             return None
         return f"{fn_s}({arg_s})"
+    if kind == "CALL":
+        fn_s = render_canonical_expr(expr[1], lang, bindings)
+        if fn_s is None:
+            return None
+        rendered_args: list[str] = []
+        for a_sk in expr[2]:
+            a_s = render_canonical_expr(a_sk, lang, bindings)
+            if a_s is None:
+                return None
+            rendered_args.append(a_s)
+        return f"{fn_s}({', '.join(rendered_args)})"
     if kind == "MCALL0":
         r_s = render_canonical_expr(expr[1], lang, bindings)
         m_s = render_canonical_expr(expr[2], lang, bindings)
         if r_s is None or m_s is None:
             return None
-        return f"{r_s}.{m_s}()"
+        return f"{_wrap_compound_receiver(r_s, expr[1])}.{m_s}()"
+    if kind == "MCALL":
+        r_s = render_canonical_expr(expr[1], lang, bindings)
+        m_s = render_canonical_expr(expr[2], lang, bindings)
+        if r_s is None or m_s is None:
+            return None
+        rendered_args = []
+        for a_sk in expr[3]:
+            a_s = render_canonical_expr(a_sk, lang, bindings)
+            if a_s is None:
+                return None
+            rendered_args.append(a_s)
+        return f"{_wrap_compound_receiver(r_s, expr[1])}.{m_s}({', '.join(rendered_args)})"
+    if kind == "ATTR":
+        r_s = render_canonical_expr(expr[1], lang, bindings)
+        f_s = render_canonical_expr(expr[2], lang, bindings)
+        if r_s is None or f_s is None:
+            return None
+        return f"{_wrap_compound_receiver(r_s, expr[1])}.{f_s}"
+    if kind == "SUBSCRIPT":
+        b_s = render_canonical_expr(expr[1], lang, bindings)
+        i_s = render_canonical_expr(expr[2], lang, bindings)
+        if b_s is None or i_s is None:
+            return None
+        return f"{_wrap_compound_receiver(b_s, expr[1])}[{i_s}]"
+    if kind == "TERNARY":
+        c_s = render_canonical_expr(expr[1], lang, bindings)
+        t_s = render_canonical_expr(expr[2], lang, bindings)
+        e_s = render_canonical_expr(expr[3], lang, bindings)
+        if c_s is None or t_s is None or e_s is None:
+            return None
+        if lang == "python":
+            return f"({t_s} if {c_s} else {e_s})"
+        if lang == "rust":
+            return f"if {c_s} {{ {t_s} }} else {{ {e_s} }}"
+        if lang in ("typescript", "javascript", "java", "cpp"):
+            return f"({c_s} ? {t_s} : {e_s})"
+        return None
     if kind == "LEN":
         inner = render_canonical_expr(expr[1], lang, bindings)
         if inner is None:
             return None
-        need_parens = " " in inner and not (inner.startswith("(") and inner.endswith(")"))
-        recv = f"({inner})" if need_parens else inner
+        recv = _wrap_compound_receiver(inner, expr[1])
         if lang in ("python", "go"):
             return f"len({inner})"
         if lang == "rust":
@@ -253,7 +459,7 @@ def render_canonical_expr(expr: tuple[Any, ...], target_language: str, bindings:
         rendered = render_canonical_expr(sub, lang, bindings)
         if rendered is None:
             return None
-        if sub[0] == "BINOP":
+        if sub[0] in ("BINOP", "TERNARY"):
             rendered = f"({rendered})"
         if op == "!":
             return f"not {rendered}" if lang == "python" else f"!{rendered}"
@@ -270,9 +476,9 @@ def render_canonical_expr(expr: tuple[Any, ...], target_language: str, bindings:
             op_s = "or" if lang == "python" else "||"
         else:
             op_s = op
-        if left_t[0] == "BINOP" and left_t[1] != op:
+        if left_t[0] in ("BINOP", "TERNARY") and (left_t[0] != "BINOP" or left_t[1] != op):
             left_s = f"({left_s})"
-        if right_t[0] == "BINOP" and right_t[1] != op:
+        if right_t[0] in ("BINOP", "TERNARY") and (right_t[0] != "BINOP" or right_t[1] != op):
             right_s = f"({right_s})"
         return f"{left_s} {op_s} {right_s}"
     return None
@@ -299,13 +505,28 @@ def _unify_skeleton(pattern: tuple[Any, ...], concrete: tuple[Any, ...], binding
         return _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text)
     if p_kind == "UNOP":
         return pattern[1] == concrete[1] and _unify_skeleton(pattern[2], concrete[2], bindings, raw_expr_text)
-    if p_kind == "CALL1":
+    if p_kind in ("CALL1", "MCALL0", "ATTR", "SUBSCRIPT"):
         return _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text) and _unify_skeleton(
             pattern[2], concrete[2], bindings, raw_expr_text
         )
-    if p_kind == "MCALL0":
-        return _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text) and _unify_skeleton(
-            pattern[2], concrete[2], bindings, raw_expr_text
+    if p_kind == "CALL":
+        return (
+            len(pattern[2]) == len(concrete[2])
+            and _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text)
+            and all(_unify_skeleton(pa, ca, bindings, raw_expr_text) for pa, ca in zip(pattern[2], concrete[2]))
+        )
+    if p_kind == "MCALL":
+        return (
+            len(pattern[3]) == len(concrete[3])
+            and _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text)
+            and _unify_skeleton(pattern[2], concrete[2], bindings, raw_expr_text)
+            and all(_unify_skeleton(pa, ca, bindings, raw_expr_text) for pa, ca in zip(pattern[3], concrete[3]))
+        )
+    if p_kind == "TERNARY":
+        return (
+            _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text)
+            and _unify_skeleton(pattern[2], concrete[2], bindings, raw_expr_text)
+            and _unify_skeleton(pattern[3], concrete[3], bindings, raw_expr_text)
         )
     if p_kind == "BINOP":
         return (
@@ -314,6 +535,99 @@ def _unify_skeleton(pattern: tuple[Any, ...], concrete: tuple[Any, ...], binding
             and _unify_skeleton(pattern[3], concrete[3], bindings, raw_expr_text)
         )
     return False
+
+
+def _iter_child_skeletons(sk: tuple[Any, ...]) -> Iterator[tuple[Any, ...]]:
+    kind = sk[0]
+    if kind in ("LEN",):
+        yield sk[1]
+    elif kind == "UNOP":
+        yield sk[2]
+    elif kind == "BINOP":
+        yield sk[2]
+        yield sk[3]
+    elif kind in ("CALL1", "MCALL0", "ATTR", "SUBSCRIPT"):
+        yield sk[1]
+        yield sk[2]
+    elif kind == "CALL":
+        yield sk[1]
+        yield from sk[2]
+    elif kind == "MCALL":
+        yield sk[1]
+        yield sk[2]
+        yield from sk[3]
+    elif kind == "TERNARY":
+        yield sk[1]
+        yield sk[2]
+        yield sk[3]
+
+
+def _collect_atoms_and_holes(sk: tuple[Any, ...], atoms: set[str], holes: set[str]) -> None:
+    kind = sk[0]
+    if kind == "HOLE":
+        holes.add(str(sk[1]))
+    elif kind == "ATOM":
+        atoms.add(str(sk[1]))
+    elif kind == "OPAQUE_WITH_HOLES":
+        holes.update(str(h) for h in sk[2])
+    else:
+        for child in _iter_child_skeletons(sk):
+            _collect_atoms_and_holes(child, atoms, holes)
+
+
+def _has_non_hole_structure(sk: tuple[Any, ...]) -> bool:
+    """True when `sk` constrains at least one operator/construct/literal rather than matching any expression."""
+    return sk[0] not in ("HOLE", "OPAQUE", "OPAQUE_WITH_HOLES")
+
+
+def _contains_opaque(sk: tuple[Any, ...]) -> bool:
+    if sk[0] in ("OPAQUE", "OPAQUE_WITH_HOLES"):
+        return True
+    return any(_contains_opaque(ch) for ch in _iter_child_skeletons(sk))
+
+
+def _direct_cst_changed_expr_pair(
+    pat_raw: bytes,
+    rep_raw: bytes,
+    src_lang: str,
+    synth_to_hole: Mapping[str, str],
+) -> tuple[tuple[Any, ...], tuple[Any, ...], bool] | None:
+    """Parse multi-line / statement / function `pat_raw` & `rep_raw` directly and extract the changed CST expression pair."""
+    try:
+        pt = tsk.parse_bytes(src_lang, pat_raw)
+        rt = tsk.parse_bytes(src_lang, rep_raw)
+    except Exception:
+        return None
+    if getattr(pt.root_node, "has_error", False) or getattr(rt.root_node, "has_error", False):
+        return None
+
+    pn = pt.root_node
+    rn = rt.root_node
+    # Descend through identical statement/declaration containers down to the top changed expression pair
+    while True:
+        pn_u = _unwrap_expr(pn)
+        rn_u = _unwrap_expr(rn)
+        if _is_candidate_expr_node(pn_u, pat_raw) or _is_candidate_expr_node(rn_u, rep_raw):
+            p_sk = cst_to_canonical_expr(pn_u, pat_raw, synth_to_hole)
+            r_sk = cst_to_canonical_expr(rn_u, rep_raw, synth_to_hole)
+            if p_sk != r_sk and not _contains_opaque(p_sk) and not _contains_opaque(r_sk):
+                is_ret = _is_in_return_or_tail_position(pn_u, src_lang)
+                return p_sk, r_sk, is_ret
+        if pn.type != rn.type:
+            return None
+        p_named = [c for c in pn.children if c.is_named]
+        r_named = [c for c in rn.children if c.is_named]
+        if len(p_named) != len(r_named) or not p_named:
+            return None
+        diffs = [
+            idx
+            for idx, (pc, rc) in enumerate(zip(p_named, r_named))
+            if _node_text(pc, pat_raw) != _node_text(rc, rep_raw)
+        ]
+        if len(diffs) != 1:
+            return None
+        pn = p_named[diffs[0]]
+        rn = r_named[diffs[0]]
 
 
 def compile_rule_to_cst_skeleton(rule: Mapping[str, Any]) -> dict[str, Any] | None:
@@ -349,186 +663,209 @@ def compile_rule_to_cst_skeleton(rule: Mapping[str, Any]) -> dict[str, Any] | No
                 parts.append(syn)
             else:
                 parts.append(val)
-        return "".join(parts).strip()
+        return "".join(parts)
 
-    pat_src = _render_tokens(pat_toks)
-    rep_src = _render_tokens(rep_toks)
-    if not pat_src or not rep_src:
+    pat_raw_text = _render_tokens(pat_toks)
+    rep_raw_text = _render_tokens(rep_toks)
+    if not pat_raw_text.strip() or not rep_raw_text.strip():
         return None
 
-    # Strip leading `return ` / `if ` / `elif ` and trailing `;` or `:` so expression skeleton is pure
+    pat_skel: tuple[Any, ...] | None = None
+    rep_skel: tuple[Any, ...] | None = None
     is_return_anchored = False
-    if re.match(r"^return\b", pat_src) and re.match(r"^return\b", rep_src):
-        is_return_anchored = True
-        pat_src = re.sub(r"^return\s+", "", pat_src).rstrip(";").strip()
-        rep_src = re.sub(r"^return\s+", "", rep_src).rstrip(";").strip()
-    elif re.match(r"^(?:elif|if)\b", pat_src) and re.match(r"^(?:elif|if)\b", rep_src) and pat_src.endswith(":") and rep_src.endswith(":"):
-        pat_src = re.sub(r"^(?:elif|if)\s+", "", pat_src[:-1]).strip()
-        rep_src = re.sub(r"^(?:elif|if)\s+", "", rep_src[:-1]).strip()
-    else:
-        pat_src = pat_src.rstrip(";").strip()
-        rep_src = rep_src.rstrip(";").strip()
 
-    def _parse_expr_in_lang(expr_str: str) -> tuple[Any, ...] | None:
-        if src_lang == "python":
-            wrapped = f"def __f():\n    return {expr_str}\n".encode("utf-8")
-        elif src_lang == "rust":
-            wrapped = f"fn __f() -> bool {{ {expr_str} }}\n".encode("utf-8")
-        elif src_lang == "go":
-            wrapped = f"package p\nfunc __f() bool {{ return {expr_str} }}\n".encode("utf-8")
-        elif src_lang in ("typescript", "javascript"):
-            wrapped = f"function __f() {{ return {expr_str}; }}\n".encode("utf-8")
-        elif src_lang == "java":
-            wrapped = f"class __C {{ static Object __f() {{ return {expr_str}; }} }}\n".encode("utf-8")
-        elif src_lang == "cpp":
-            wrapped = f"auto __f() {{ return {expr_str}; }}\n".encode("utf-8")
+    # 1. Try direct CST parse + lockstep LCA descent (handles multi-line `def`/`fn`/`func` & statement blocks)
+    direct = _direct_cst_changed_expr_pair(
+        (pat_raw_text.rstrip() + "\n").encode("utf-8"),
+        (rep_raw_text.rstrip() + "\n").encode("utf-8"),
+        src_lang,
+        synth_to_hole,
+    )
+    if direct is not None:
+        pat_skel, rep_skel, is_return_anchored = direct
+
+    # 2. Fallback for standalone expression / `return E` / `if E:` fragments
+    if pat_skel is None or rep_skel is None:
+        pat_src = pat_raw_text.strip()
+        rep_src = rep_raw_text.strip()
+        if re.match(r"^return\b", pat_src) and re.match(r"^return\b", rep_src):
+            is_return_anchored = True
+            pat_src = re.sub(r"^return\s+", "", pat_src).rstrip(";").strip()
+            rep_src = re.sub(r"^return\s+", "", rep_src).rstrip(";").strip()
+        elif re.match(r"^(?:elif|if)\b", pat_src) and re.match(r"^(?:elif|if)\b", rep_src) and pat_src.endswith(":") and rep_src.endswith(":"):
+            pat_src = re.sub(r"^(?:elif|if)\s+", "", pat_src[:-1]).strip()
+            rep_src = re.sub(r"^(?:elif|if)\s+", "", rep_src[:-1]).strip()
         else:
-            return None
-        try:
-            tree = tsk.parse_bytes(src_lang, wrapped)
-        except Exception:
-            return None
-        if getattr(tree.root_node, "has_error", False):
-            return None
-        # Find the return expression or block tail expression
-        target_node = None
-        stack = [tree.root_node]
-        while stack:
-            nd = stack.pop()
-            if nd.type == "return_statement":
-                named = [c for c in nd.children if c.is_named and c.type != "return"]
-                if named:
-                    target_node = named[-1]
-                    break
-            elif src_lang == "rust" and nd.type == "block":
-                named = [c for c in nd.children if c.is_named]
-                if named:
-                    target_node = named[-1]
-                    break
-            stack.extend(reversed(nd.children))
-        if target_node is None:
-            return None
-        skel = cst_to_canonical_expr(target_node, wrapped, synth_to_hole)
-        if skel[0] == "OPAQUE":
-            return None
-        return skel
+            pat_src = pat_src.rstrip(";").strip()
+            rep_src = rep_src.rstrip(";").strip()
 
-    pat_skel = _parse_expr_in_lang(pat_src)
-    rep_skel = _parse_expr_in_lang(rep_src)
-    if pat_skel is None or rep_skel is None or pat_skel == rep_skel:
+        def _parse_expr_in_lang(expr_str: str) -> tuple[Any, ...] | None:
+            if "\n" in expr_str:
+                return None
+            if src_lang == "python":
+                wrapped = f"def __f():\n    return {expr_str}\n".encode("utf-8")
+            elif src_lang == "rust":
+                wrapped = f"fn __f() -> bool {{ {expr_str} }}\n".encode("utf-8")
+            elif src_lang == "go":
+                wrapped = f"package p\nfunc __f() bool {{ return {expr_str} }}\n".encode("utf-8")
+            elif src_lang in ("typescript", "javascript"):
+                wrapped = f"function __f() {{ return {expr_str}; }}\n".encode("utf-8")
+            elif src_lang == "java":
+                wrapped = f"class __C {{ static Object __f() {{ return {expr_str}; }} }}\n".encode("utf-8")
+            elif src_lang == "cpp":
+                wrapped = f"auto __f() {{ return {expr_str}; }}\n".encode("utf-8")
+            else:
+                return None
+            try:
+                tree = tsk.parse_bytes(src_lang, wrapped)
+            except Exception:
+                return None
+            if getattr(tree.root_node, "has_error", False):
+                return None
+            target_node = None
+            stack = [tree.root_node]
+            while stack:
+                nd = stack.pop()
+                if nd.type == "return_statement":
+                    named = [c for c in nd.children if c.is_named and c.type != "return"]
+                    if named:
+                        target_node = named[-1]
+                        break
+                elif src_lang == "rust" and nd.type == "block":
+                    named = [c for c in nd.children if c.is_named]
+                    if named:
+                        target_node = named[-1]
+                        break
+                stack.extend(reversed(nd.children))
+            if target_node is None:
+                return None
+            skel = cst_to_canonical_expr(target_node, wrapped, synth_to_hole)
+            if _contains_opaque(skel):
+                return None
+            return skel
+
+        pat_skel = _parse_expr_in_lang(pat_src)
+        rep_skel = _parse_expr_in_lang(rep_src)
+
+    if pat_skel is None or rep_skel is None or pat_skel == rep_skel or not _has_non_hole_structure(pat_skel):
         return None
 
-    # Refuse if replacement introduces an unbound identifier atom not present in pattern
-    def _collect_atoms_and_holes(sk: tuple[Any, ...], atoms: set[str], holes: set[str]) -> None:
-        if sk[0] == "HOLE":
-            holes.add(str(sk[1]))
-        elif sk[0] == "ATOM":
-            atoms.add(str(sk[1]))
-        elif sk[0] == "OPAQUE_WITH_HOLES":
-            holes.update(str(h) for h in sk[2])
-        elif sk[0] in ("LEN", "UNOP"):
-            _collect_atoms_and_holes(sk[-1], atoms, holes)
-        elif sk[0] in ("BINOP", "MCALL0", "CALL1"):
-            _collect_atoms_and_holes(sk[-2], atoms, holes)
-            _collect_atoms_and_holes(sk[-1], atoms, holes)
-
-    pat_atoms, pat_holes = set(), set()
-    rep_atoms, rep_holes = set(), set()
+    pat_atoms: set[str] = set()
+    pat_holes: set[str] = set()
+    rep_atoms: set[str] = set()
+    rep_holes: set[str] = set()
     _collect_atoms_and_holes(pat_skel, pat_atoms, pat_holes)
     _collect_atoms_and_holes(rep_skel, rep_atoms, rep_holes)
-    if (rep_atoms - pat_atoms) or (rep_holes - pat_holes):
+    if not rep_holes.issubset(pat_holes) or not rep_atoms.issubset(pat_atoms):
         return None
 
     return {
-        "schema": SCHEMA,
+        "source_language": src_lang,
         "pattern_skeleton": pat_skel,
         "replacement_skeleton": rep_skel,
         "is_return_anchored": is_return_anchored,
     }
 
 
-def _skel_has_hole(sk: tuple[Any, ...]) -> bool:
-    kind = sk[0]
-    if kind in ("HOLE", "OPAQUE_WITH_HOLES"):
-        return True
-    if kind in ("LEN", "UNOP"):
-        return _skel_has_hole(sk[-1])
-    if kind in ("BINOP", "MCALL0", "CALL1"):
-        return _skel_has_hole(sk[-2]) or _skel_has_hole(sk[-1])
-    return False
+def _peel_single_diff_child(p: tuple[Any, ...], r: tuple[Any, ...]) -> tuple[tuple[Any, ...], tuple[Any, ...]] | None:
+    """If `p` and `r` share an identical outer node and differ in exactly one child, return that child pair."""
+    if p[0] != r[0]:
+        return None
+    kind = p[0]
+    if kind == "LEN":
+        return (p[1], r[1])
+    if kind == "UNOP" and p[1] == r[1]:
+        return (p[2], r[2])
+    if kind == "BINOP" and p[1] == r[1]:
+        if p[2] == r[2] and p[3] != r[3]:
+            return (p[3], r[3])
+        if p[3] == r[3] and p[2] != r[2]:
+            return (p[2], r[2])
+        return None
+    if kind in ("CALL1", "ATTR", "SUBSCRIPT"):
+        if p[1] == r[1] and p[2] != r[2]:
+            return (p[2], r[2])
+        if p[2] == r[2] and p[1] != r[1]:
+            return (p[1], r[1])
+        return None
+    if kind == "CALL" and p[1] == r[1] and len(p[2]) == len(r[2]):
+        diffs = [(pa, ra) for pa, ra in zip(p[2], r[2]) if pa != ra]
+        return diffs[0] if len(diffs) == 1 else None
+    if kind == "MCALL" and p[1] == r[1] and p[2] == r[2] and len(p[3]) == len(r[3]):
+        diffs = [(pa, ra) for pa, ra in zip(p[3], r[3]) if pa != ra]
+        return diffs[0] if len(diffs) == 1 else None
+    if kind == "TERNARY":
+        diffs = [(pa, ra) for pa, ra in zip(p[1:4], r[1:4]) if pa != ra]
+        return diffs[0] if len(diffs) == 1 else None
+    return None
 
 
 def minimize_cst_skeleton_pair(
     pat_skel: tuple[Any, ...],
     rep_skel: tuple[Any, ...],
 ) -> tuple[tuple[Any, ...], tuple[Any, ...]] | None:
-    """Extract the lowest common changed CST expression subtree and abstract compound operands into `?expr` holes."""
+    """Peel unchanged outer CST wrappers and generalize unchanged composite child subtrees into `?exprK` holes."""
     p, r = pat_skel, rep_skel
-    # 1. Peel unchanged outer expression wrappers (`int(x <= hi) + 1` -> `x <= hi`)
-    while p != r and p[0] == r[0]:
-        k = p[0]
-        if k == "LEN":
-            p, r = p[1], r[1]
-            continue
-        if k == "UNOP" and p[1] == r[1]:
-            p, r = p[2], r[2]
-            continue
-        if k == "CALL1" and p[1] == r[1]:
-            p, r = p[2], r[2]
-            continue
-        if k == "BINOP" and p[1] == r[1]:
-            if p[2] == r[2] and p[3] != r[3]:
-                p, r = p[3], r[3]
-                continue
-            if p[3] == r[3] and p[2] != r[2]:
-                p, r = p[2], r[2]
-                continue
-        break
+    while p != r:
+        nxt = _peel_single_diff_child(p, r)
+        if nxt is None or not _has_non_hole_structure(nxt[0]):
+            break
+        p, r = nxt
 
-    # 2. Abstract unchanged compound operand subtrees (e.g. `(x + 1)`, `a[i]`) into `?exprK` holes
-    subtree_to_hole: dict[tuple[Any, ...], str] = {}
-
-    def _abstract_child(cp: tuple[Any, ...], cr: tuple[Any, ...]) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
-        if cp == cr and cp[0] != "HOLE" and _skel_has_hole(cp):
-            h = subtree_to_hole.get(cp)
-            if h is None:
-                h = f"?expr{len(subtree_to_hole)}"
-                subtree_to_hole[cp] = h
-            hole_node = ("HOLE", h)
-            return hole_node, hole_node
-        return cp, cr
-
-    if p[0] == "BINOP" and r[0] == "BINOP":
-        lp, lr = _abstract_child(p[2], r[2])
-        rp, rr = _abstract_child(p[3], r[3])
-        p = ("BINOP", p[1], lp, rp)
-        r = ("BINOP", r[1], lr, rr)
-    elif p[0] == "UNOP" and r[0] == "UNOP":
-        op_p, op_r = _abstract_child(p[2], r[2])
-        p = ("UNOP", p[1], op_p)
-        r = ("UNOP", r[1], op_r)
-    elif p[0] == "LEN" and r[0] == "BINOP":
-        lp, lr = _abstract_child(p[1], r[2])
-        p = ("LEN", lp)
-        r = ("BINOP", r[1], lr, r[3])
-
-    if p == r or p[0] in ("OPAQUE", "OPAQUE_WITH_HOLES") or r[0] in ("OPAQUE", "OPAQUE_WITH_HOLES"):
+    if p == r or not _has_non_hole_structure(p):
         return None
 
-    def _holes_of(sk: tuple[Any, ...], out: set[str]) -> None:
-        if sk[0] == "HOLE":
-            out.add(str(sk[1]))
-        elif sk[0] in ("LEN", "UNOP"):
-            _holes_of(sk[-1], out)
-        elif sk[0] in ("BINOP", "MCALL0", "CALL1"):
-            _holes_of(sk[-2], out)
-            _holes_of(sk[-1], out)
+    expr_map: dict[tuple[Any, ...], tuple[str, str]] = {}
 
+    def _has_any_hole(sk: tuple[Any, ...]) -> bool:
+        if sk[0] == "HOLE":
+            return True
+        return any(_has_any_hole(ch) for ch in _iter_child_skeletons(sk))
+
+    def _abstract_child(cp: tuple[Any, ...], cr: tuple[Any, ...]) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
+        if cp == cr and cp[0] not in ("HOLE", "NUM", "ATOM") and _has_any_hole(cp):
+            h = expr_map.get(cp)
+            if h is None:
+                h = ("HOLE", f"?expr{len(expr_map) + 1}")
+                expr_map[cp] = h
+            return h, h
+        return cp, cr
+
+    if p[0] == r[0]:
+        kind = p[0]
+        if kind == "BINOP":
+            lp, lr = _abstract_child(p[2], r[2])
+            rp, rr = _abstract_child(p[3], r[3])
+            p = ("BINOP", p[1], lp, rp)
+            r = ("BINOP", r[1], lr, rr)
+        elif kind == "TERNARY":
+            c1, c2 = _abstract_child(p[1], r[1])
+            t1, t2 = _abstract_child(p[2], r[2])
+            e1, e2 = _abstract_child(p[3], r[3])
+            p = ("TERNARY", c1, t1, e1)
+            r = ("TERNARY", c2, t2, e2)
+        elif kind == "SUBSCRIPT":
+            b1, b2 = _abstract_child(p[1], r[1])
+            i1, i2 = _abstract_child(p[2], r[2])
+            p = ("SUBSCRIPT", b1, i1)
+            r = ("SUBSCRIPT", b2, i2)
+        elif kind == "CALL" and len(p[2]) == len(r[2]):
+            c_pairs = [_abstract_child(pa, ra) for pa, ra in zip(p[2], r[2])]
+            p = ("CALL", p[1], tuple(x[0] for x in c_pairs))
+            r = ("CALL", r[1], tuple(x[1] for x in c_pairs))
+        elif kind == "MCALL" and len(p[3]) == len(r[3]):
+            r_recv1, r_recv2 = _abstract_child(p[1], r[1])
+            c_pairs = [_abstract_child(pa, ra) for pa, ra in zip(p[3], r[3])]
+            p = ("MCALL", r_recv1, p[2], tuple(x[0] for x in c_pairs))
+            r = ("MCALL", r_recv2, r[2], tuple(x[1] for x in c_pairs))
+
+    pa: set[str] = set()
     ph: set[str] = set()
+    ra: set[str] = set()
     rh: set[str] = set()
-    _holes_of(p, ph)
-    _holes_of(r, rh)
-    if not ph or not rh.issubset(ph):
+    _collect_atoms_and_holes(p, pa, ph)
+    _collect_atoms_and_holes(r, ra, rh)
+    if not ph or not rh.issubset(ph) or not ra.issubset(pa):
         return None
     return p, r
 
@@ -542,13 +879,10 @@ def _is_in_return_or_tail_position(node: Any, target_language: str) -> bool:
         return False
     if p.type == "return_statement":
         return True
-    # Rust block tail expression (`fn f(...) -> T { expr }` or `if c { expr } else { expr }`)
     if lang == "rust" and p.type == "block":
-        # A Rust tail expression has no trailing `;` child after it in the block
         after_bytes = [c.type for c in p.children if c.start_byte >= node.end_byte]
         if ";" not in after_bytes:
             return True
-    # JS / TS concise arrow body (`(x, hi) => x <= hi`)
     if lang in ("typescript", "javascript") and p.type == "arrow_function":
         return True
     return False
@@ -591,17 +925,11 @@ def iter_cst_skeleton_candidates(
     if getattr(tree.root_node, "has_error", False):
         return
 
-    # Collect candidate expression nodes in source order
     expr_nodes: list[Any] = []
     stack = [tree.root_node]
     while stack:
         nd = stack.pop()
-        if (
-            nd.type in _BINARY_NODE_TYPES
-            or nd.type in _UNARY_NODE_TYPES
-            or nd.type in ("call", "call_expression")
-            or _extract_len_arg(nd, raw) is not None
-        ):
+        if _is_candidate_expr_node(nd, raw):
             expr_nodes.append(nd)
         stack.extend(reversed(nd.children))
 
@@ -667,8 +995,16 @@ def _unify_cst_node_directly(
             node.type in _NUM_NODE_TYPES or re.fullmatch(r"\d+(?:\.\d+)?", unwrapped_txt)
         ):
             return False
-        # Preserve original parentheses when binding compound sub-expressions so precedence never shifts
-        bound_txt = raw_txt if orig_node.type == "parenthesized_expression" else unwrapped_txt
+        need_wrap = (
+            orig_node.type == "parenthesized_expression"
+            or node.type in _BINARY_NODE_TYPES
+            or node.type in _TERNARY_NODE_TYPES
+        )
+        bound_txt = (
+            raw_txt
+            if orig_node.type == "parenthesized_expression"
+            else (f"({unwrapped_txt})" if need_wrap and not (unwrapped_txt.startswith("(") and unwrapped_txt.endswith(")")) else unwrapped_txt)
+        )
         prev = bindings.get(h_name)
         if prev is not None and prev.strip("() ") != unwrapped_txt.strip("() "):
             return False
@@ -683,18 +1019,67 @@ def _unify_cst_node_directly(
         return _unify_cst_node_directly(pat_skel[1], arg_nd, raw, bindings)
 
     if kind == "CALL1":
-        if node.type not in ("call", "call_expression"):
+        call_parts = _extract_call_or_mcall(node)
+        if call_parts is None or call_parts[0] != "CALL" or len(call_parts[3]) != 1:
             return False
-        children = [c for c in node.children if c.is_named]
-        if len(children) < 2:
-            return False
-        callee, args_node = children[0], children[1]
-        arg_named = [c for c in args_node.children if c.is_named]
-        if len(arg_named) != 1:
-            return False
-        callee_txt = _node_text(callee, raw).strip()
+        callee_txt = _node_text(call_parts[1], raw).strip()
         return _unify_skeleton(pat_skel[1], ("ATOM", callee_txt), bindings, callee_txt) and _unify_cst_node_directly(
-            pat_skel[2], arg_named[0], raw, bindings
+            pat_skel[2], call_parts[3][0], raw, bindings
+        )
+
+    if kind == "CALL":
+        call_parts = _extract_call_or_mcall(node)
+        if call_parts is None or call_parts[0] != "CALL" or len(call_parts[3]) != len(pat_skel[2]):
+            return False
+        if not _unify_cst_node_directly(pat_skel[1], call_parts[1], raw, bindings):
+            return False
+        return all(_unify_cst_node_directly(pa, ca, raw, bindings) for pa, ca in zip(pat_skel[2], call_parts[3]))
+
+    if kind == "MCALL0":
+        call_parts = _extract_call_or_mcall(node)
+        if call_parts is None or call_parts[0] != "MCALL" or call_parts[2] is None or len(call_parts[3]) != 0:
+            return False
+        m_txt = _node_text(call_parts[2], raw).strip()
+        return _unify_cst_node_directly(pat_skel[1], call_parts[1], raw, bindings) and _unify_skeleton(
+            pat_skel[2], ("ATOM", m_txt), bindings, m_txt
+        )
+
+    if kind == "MCALL":
+        call_parts = _extract_call_or_mcall(node)
+        if call_parts is None or call_parts[0] != "MCALL" or call_parts[2] is None or len(call_parts[3]) != len(pat_skel[3]):
+            return False
+        m_txt = _node_text(call_parts[2], raw).strip()
+        if not _unify_cst_node_directly(pat_skel[1], call_parts[1], raw, bindings):
+            return False
+        if not _unify_skeleton(pat_skel[2], ("ATOM", m_txt), bindings, m_txt):
+            return False
+        return all(_unify_cst_node_directly(pa, ca, raw, bindings) for pa, ca in zip(pat_skel[3], call_parts[3]))
+
+    if kind == "ATTR":
+        attr_parts = _extract_attr_parts(node)
+        if attr_parts is None or _extract_len_arg(node, raw) is not None:
+            return False
+        f_txt = _node_text(attr_parts[1], raw).strip()
+        return _unify_cst_node_directly(pat_skel[1], attr_parts[0], raw, bindings) and _unify_skeleton(
+            pat_skel[2], ("ATOM", f_txt), bindings, f_txt
+        )
+
+    if kind == "SUBSCRIPT":
+        sub_parts = _extract_subscript_parts(node)
+        if sub_parts is None:
+            return False
+        return _unify_cst_node_directly(pat_skel[1], sub_parts[0], raw, bindings) and _unify_cst_node_directly(
+            pat_skel[2], sub_parts[1], raw, bindings
+        )
+
+    if kind == "TERNARY":
+        tern = _extract_ternary_parts(node, raw)
+        if tern is None:
+            return False
+        return (
+            _unify_cst_node_directly(pat_skel[1], tern[0], raw, bindings)
+            and _unify_cst_node_directly(pat_skel[2], tern[1], raw, bindings)
+            and _unify_cst_node_directly(pat_skel[3], tern[2], raw, bindings)
         )
 
     if kind == "NUM":
@@ -702,15 +1087,6 @@ def _unify_cst_node_directly(
 
     if kind == "ATOM":
         return _node_text(node, raw).strip() == str(pat_skel[1])
-
-    if kind == "MCALL0":
-        txt = _node_text(node, raw).strip()
-        m = re.fullmatch(r"([A-Za-z_$][\w$]*)\s*\.\s*([A-Za-z_$][\w$]*)\s*\(\s*\)", txt)
-        if not m:
-            return False
-        return _unify_skeleton(pat_skel[1], ("ATOM", m.group(1)), bindings, m.group(1)) and _unify_skeleton(
-            pat_skel[2], ("ATOM", m.group(2)), bindings, m.group(2)
-        )
 
     if kind == "UNOP":
         if node.type not in _UNARY_NODE_TYPES:

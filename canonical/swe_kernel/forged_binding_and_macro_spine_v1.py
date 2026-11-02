@@ -102,6 +102,7 @@ def forge_dormant_adapter(
 ) -> dict[str, Any]:
     """Run the 5-gate `capability_forge_v1.forge` kill-test on `module_name` and optionally register."""
     from canonical.runtime import capability_forge_v1 as forge_mod
+    from canonical.runtime.memory_policy_v1 import can_write_memory
 
     t0 = time.perf_counter_ns()
     work_root = pathlib.Path(root or REPO_ROOT).resolve()
@@ -113,7 +114,7 @@ def forge_dormant_adapter(
             forge_mod.STATE = pathlib.Path(state_path).resolve()
         report = forge_mod.forge(module_name, cases, root=work_root, require_kill=True)
         registered_cid: str | None = None
-        if report.get("admitted") is True and register_on_admit:
+        if report.get("admitted") is True and register_on_admit and can_write_memory():
             reg_out = forge_mod.register(module_name, report.get("contract") or {}, cases)
             registered_cid = reg_out.get("capability_id") if isinstance(reg_out, Mapping) else f"forged.{module_name}"
         return {
@@ -141,6 +142,10 @@ def invoke_forged_capability(
     """Invoke an already-forged capability through `forged_invoker` / `capability_forge_v1` allowlist (refuses unforged IDs!)."""
     from canonical.runtime import capability_forge_v1 as forge_mod
     from canonical.runtime.bound_capabilities import forged_invoker
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        raise RuntimeError(f"MEMORY_POLICY_OFF:{capability_id}")
 
     work_root = pathlib.Path(root or REPO_ROOT).resolve()
     orig_state = forge_mod.STATE
@@ -189,6 +194,10 @@ def lookup_verified_chain_macro(
 ) -> dict[str, Any] | None:
     """Lookup a previously verified multi-clause capability macro in `< 0.2 ms` (mtime-cached)."""
     from canonical.runtime import macro_v1
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return None
 
     clause_list = [str(c).strip() for c in clauses if str(c).strip()]
     if len(clause_list) < 2:

@@ -20,11 +20,17 @@ from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillSto
 class RetainedRepairSession:
     def __init__(self, config: Mapping, repo: Path, source_root: Path, exec_root: Path,
                  test_paths: list[Path], timeout: int):
-        if set(config) - {'enabled', 'db_path', 'target_path', 'contract', 'context', 'allow_operator_generalization'}:
+        if set(config) - {
+            'enabled', 'db_path', 'target_path', 'contract', 'context',
+            'allow_operator_generalization', 'allow_cross_scope_transfer',
+        }:
             raise ValueError('UNKNOWN_RETAINED_REPAIR_SETTING')
         self.allow_operator_generalization = config.get('allow_operator_generalization', False)
         if type(self.allow_operator_generalization) is not bool:
             raise ValueError('INVALID_OPERATOR_GENERALIZATION_SETTING')
+        self.allow_cross_scope_transfer = config.get('allow_cross_scope_transfer', False)
+        if type(self.allow_cross_scope_transfer) is not bool:
+            raise ValueError('INVALID_CROSS_SCOPE_TRANSFER_SETTING')
         self.contract = normalize_contract(config.get('contract'))
         if self.contract is None or self.contract['verification_kind'] != 'TEST_SUITE':
             raise ValueError('RETAINED_REPAIR_REQUIRES_TEST_SUITE_CONTRACT')
@@ -65,6 +71,7 @@ class RetainedRepairSession:
                 required_verification_kind='TEST_SUITE', scope_id=self.contract['scope_id'],
                 context=self.context,
                 allow_operator_generalization=self.allow_operator_generalization,
+                allow_cross_scope_transfer=self.allow_cross_scope_transfer,
             )
         except (sqlite3.Error, OSError, ValueError) as exc:
             self.metadata['retention_error']=type(exc).__name__
@@ -102,6 +109,14 @@ class RetainedRepairSession:
                     from canonical.swe_kernel import rule_expiry_v1 as _expiry
 
                     _expiry.record_taught(self.db_path, str(taught['skill_id']))
+                except Exception:
+                    pass
+                try:
+                    from canonical.swe_kernel.rule_scope_learning_v1 import calibrate_rule_scope
+
+                    matched_rules = [r for r in self.store.lookup_rules('python') if r.get('skill_id') == taught['skill_id']]
+                    if matched_rules:
+                        calibrate_rule_scope(matched_rules[0], store=self.store)
                 except Exception:
                     pass
             self.metadata['teaching'] = taught
