@@ -170,6 +170,16 @@ def build_ast_phrase_index(artifact_path: str | pathlib.Path | None = None) -> d
     return built
 
 
+def _prose_content_words(goal: str) -> list[str]:
+    """Extract content words strictly from prose, stripping paths/URLs/quoted literals (Law F8/F25)."""
+    try:
+        from canonical.runtime.goal_front_compiler_v1 import prose_only
+
+        return _content_words(prose_only(str(goal or "")))
+    except Exception:
+        return _content_words(goal)
+
+
 def match_ast_dispatch_op_for_capability(
     goal: str,
     capability_id: str,
@@ -181,7 +191,7 @@ def match_ast_dispatch_op_for_capability(
     entries = idx["by_cid"].get(capability_id) or ()
     if not entries:
         return None
-    g_words = _content_words(goal)
+    g_words = _prose_content_words(goal)
     if len(g_words) < 2:
         return None
     hits = [e for e in entries if _contains_ordered_phrase(g_words, e["words"])]
@@ -203,7 +213,7 @@ def find_phrase_matched_capabilities(
 ) -> list[dict[str, Any]]:
     """Return verified registry capabilities whose AST-proved multi-word dispatch phrase is stated in `goal`."""
     idx = build_ast_phrase_index(artifact_path)
-    g_words = _content_words(goal)
+    g_words = _prose_content_words(goal)
     if len(g_words) < 2:
         return []
     matched: list[dict[str, Any]] = []
