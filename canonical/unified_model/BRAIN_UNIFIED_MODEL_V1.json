@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6632,
+  "research_index_records": 6633,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "54212fcddd6adba3ba03dc3b9c4adbdbe50e50207911411d7e9384ef85c5c257"
+  "value": "b80aea210a1219e8d4969003f9818f520215c38472037b8650d2bc72ae899d2a"
  },
  "engines": [
   {
@@ -205718,6 +205718,51 @@
    }
   },
   {
+   "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
+   "capability": false,
+   "date": "2026-10-29",
+   "id": "research:canonical/action_intents/A_FACT_ABOUT_A_FILE_IS_NOT_ANSWERED_BY_PRINTING_THE_FILE_V1_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FACT_ABOUT_A_FILE_IS_NOT_ANSWERED_BY_PRINTING_THE_FILE_V1_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e7678b1b0802d1bd40b3c777e03702257d0bdf03087d4dba0af1dcaa3f7b68e2",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "acceptance": 1,
+    "all": 1,
+    "answered": 1,
+    "behind": 1,
+    "both": 1,
+    "captured": 1,
+    "claim": 2,
+    "compared": 1,
+    "controllers": 1,
+    "copied": 1,
+    "coupled": 1,
+    "digests": 1,
+    "embeds": 1,
+    "entry": 1,
+    "every": 1,
+    "exit": 1,
+    "fact": 1,
+    "fault": 1,
+    "file": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inside": 1,
+    "inspector": 2,
+    "interprocedural": 1,
+    "iterative": 1,
+    "loop": 2,
+    "repair": 3,
+    "stderr": 2,
+    "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
+    "v1": 2,
+    "workspace": 2
+   }
+  },
+  {
    "action_id": "A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -233841,7 +233886,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "ca8b1aab8ec563cffc30d097f0e9a6cb024da1dfc7e35d7073482d3e48642701",
+   "sha256": "11de1759c519962ff1e8b639037370a8e971013ffe337ca118eec2d514b6c168",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 65,
    "symbols": [
