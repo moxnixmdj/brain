@@ -16,39 +16,55 @@ name: goal-gap-statement
 #      no field that could hold one;
 #   3. a refusal carrying detail=None blames the REPORT, not the goal, because
 #      saying "the goal is missing X" there would be inventing an X;
-#   4. a goal that COMPILES is never endorsed;
-#   5. a selection the goal did not FORCE is reported loudly as
-#      LOW_CONFIDENCE_SELECTION instead of passing as a success.
+#   4. a goal that COMPILES is never endorsed -- selection_endorsed is False on every
+#      path;
+#   5. NO verdict is drawn from lexical overlap, and a strong match is not accused of
+#      being a guess.
 #
-# Item 5 is the dangerous failure and the reason this exists. Measured 2026-11-02
-# on 12 under-specified goals: 5 failed closed with a precise report, 4 compiled
-# onto the intended row, and 3 compiled onto the WRONG row and reported success --
-# a JSON query routed to software.repair.choreograph.crossfile.v1, a rename routed
-# to inline_helper (which deletes), a request for a repository log routed to
-# python.repository.acceptance.measure.v1. A refusal is honest; a confident wrong
-# selection is not.
+# Item 5 is a retraction, and the reason it is pinned by a test rather than just
+# deleted. A rule merged on 2026-11-02 reported LOW_CONFIDENCE_SELECTION whenever the
+# selected row declared `requires` that the goal matched none of. On 7 under-specified
+# goals it separated perfectly -- all 3 wrong selections had matched_requires empty,
+# all 4 intended ones non-empty -- so it looked structural rather than tuned.
 #
-# The rule is structural, not a fitted threshold: the selected row DECLARES
-# requirements and the goal matched NONE of them, so nothing in the goal asked for
-# that capability. Score separated the same 7 cases (11-13 wrong vs 24-36 right)
-# and coverage separated them too (0.17-0.25 vs 0.50-1.00), but both are reported
-# as auditable evidence rather than used as cutoffs -- a numeric threshold fitted
-# to 7 points would be overfitting, and n=7 with the intended row being my
-# judgment rather than ground truth the tree declares is stated in the module.
-# Rows declaring no requirements are exempt: matching none of nothing says nothing.
+# It was measuring vocabulary coincidence. Across all 149 bound rows, 182 of 182
+# `requires` tokens (100%) are dotted WORLD-PRECONDITION identifiers --
+# python.source.file.available, image.file.available, structured.json.available -- not
+# input slots (those are `input_names`: output_path, source_root, json_path) and not
+# words a sentence contains. matched_requires is therefore non-empty only when a goal
+# happens to share a sub-token with a precondition name: "Create the archive from the
+# manifest" matched manifest.json.available on the word "manifest" alone. That accident
+# is what the n=7 separation was.
 #
-# Negative control verified on every commit that touches this: inventing a slot
-# value fails 1 test, swallowing detail=None fails 2, endorsing a compiled
-# selection fails 1, dropping the unforced check fails 2, INVERTING it fails 3,
-# and suppressing the evidence fails 3. Restored byte-identically after each
-# (diff against the pre-mutation backup clean); 12 pass.
+# The counterexample that decided it is pinned here as a regression test: "Create a
+# DOCX document report." selects docx.document.create_from_json_record at score 37,
+# above every correct case in the n=7 sample, matching create/document/docx -- 3 of 4
+# goal tokens -- on what the row PROVIDES. Its matched_requires is empty only because
+# that row's precondition is structured.json.available. The rule called an obviously
+# correct, strongly matched selection a guess and told the reader not to act on it.
 #
-# live_integrated_brain_v1.py is in the path filter deliberately: this module
-# parses that compiler's failure detail, so a change to the report format must
-# re-run these tests rather than silently invalidating the consumer.
+# Widened from n=7 to the repository's own corpus -- 323 goals drawn from the
+# LIVE_SOLVER_END_TO_END_MEASUREMENT receipts and the compiler's test files -- the rule
+# would newly refuse 26 of the 149 goals that compile today, that one among them.
+# Cross-referenced against the receipts' own independent oracle, no goal was attested
+# REACHED_AND_BOUND onto a capability the rule would refuse, so the harm is false
+# accusation rather than lost work. A report that calls correct selections guesses is
+# worse than no report: it trains whoever reads it to discount the cases that are real.
 #
-# Authority NONE. No capability is executed, registered, promoted or credited here,
-# and no count moves.
+# No replacement rule is offered, and that is the finding. Telling "Query the data file
+# and write the result out" bound to a cross-file repair WRITER apart from "Create a
+# DOCX document report" bound to a DOCX creator is a semantic question. The two overlap
+# on every lexical field the compiler emits, so no deterministic function of score,
+# matched_provides or matched_requires separates them -- and answering it anyway would
+# mean putting model cognition in the producer path, which
+# GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4 forbids outright. The
+# evidence is reported; the judgment is withheld.
+#
+# Negative control verified on the commit that retracted it: reintroducing the rule
+# fails 4 tests, endorsing a selection fails 3, suppressing the evidence fails 2.
+# Restored byte-identically after each (diff against the pre-mutation backup clean);
+# 12 pass. Earlier controls on the commit that added the module: inventing a slot value
+# fails 1, swallowing detail=None fails 2.
 
 on:
   pull_request:

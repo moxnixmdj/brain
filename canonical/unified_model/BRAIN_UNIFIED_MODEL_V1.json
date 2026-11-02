@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6636,
+  "research_index_records": 6637,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b7c85f836c9f542a41c7dd6b5ffdc179b31864b01c01fec5a7719bb2a5fec8ac"
+  "value": "e58e06f51d4ad9786f0773005ea240f5871254f6fb83860ae405f981e4928998"
  },
  "engines": [
   {
@@ -204048,6 +204048,33 @@
    }
   },
   {
+   "action_id": "RETRACT_UNSOUND_SELECTION_CONFIDENCE_RULE_20261102_V1",
+   "capability": false,
+   "date": "2026-11-02",
+   "id": "research:canonical/action_intents/2026-11-02_RETRACT_UNSOUND_SELECTION_CONFIDENCE_RULE_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/2026-11-02_RETRACT_UNSOUND_SELECTION_CONFIDENCE_RULE_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e3ec99c147bcedc3538823d6ace57f3bbd55be6d51a76aa774803349c93e6f45",
+   "status": "",
+   "terms": {
+    "02": 1,
+    "11": 1,
+    "2026": 1,
+    "a_selection_confidence_rule_derived_from_lexical_overlap_with_a_capabilitys_declared_requires_was_merged_and_it_accuses_correct_selections_of_being_guesses__because_every_requires_token_in_the_live_registry_is_a_dotted_world_precondition_identifier_and_not_a_word_a_natural_language_goal_contains__a_non_empty_match_is_vocabulary_coincidence": 1,
+    "confidence": 1,
+    "delete_the_unsound_verdict_from_the_consumer_and_keep_the_lexical_evidence_it_consumed_reported_but_uninterpreted": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "retract": 1,
+    "retract_unsound_selection_confidence_rule_20261102_v1": 1,
+    "rule": 1,
+    "selection": 1,
+    "the_repository_no_longer_carries_a_rule_that_accuses_correct_selections_of_being_guesses__and_the_measurement_showing_why_lexical_overlap_with_declared_requires_is_not_a_confidence_signal_is_recorded_in_the_code_and_pinned_by_a_regression_test_so_it_is_not_reintroduced__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "unsound": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -248995,7 +249022,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_gap_statement_v1.py",
-   "sha256": "cc514931f4a40d01e45eb48ff54307501f920c86f7437d92d0ad9b9c6627cbac",
+   "sha256": "483fca37141e11d5594a4cc3b204b26c5d2cf8819f445092de2026149b67175f",
    "summary": "State, out loud and in one place, what an under-specified goal is missing.",
    "symbol_count": 4,
    "symbols": [
