@@ -59,6 +59,11 @@ class Creature:
     _life: M.Life | None = field(default=None, repr=False)
     _standing: S.Standing | None = field(default=None, repr=False)
     _board: list[M.Work] = field(default_factory=list, repr=False)
+    # M.Work carries no `checkable`, and the posture gate needs exactly that flag. author_board
+    # keeps it here so a CAUTIOUS creature can decline work whose success it cannot check. Losing
+    # it in the Obligation -> Work conversion is what made posture decorative in the assembly:
+    # recorded, reported, persisted, and never once consulted when the creature chose.
+    _checkable: dict[str, bool] = field(default_factory=dict, repr=False)
     _closed: set[str] = field(default_factory=set, repr=False)
     # Blocked work is parked after two attempts. Retrying forever is the busywork failure mode the
     # self-authored obligations module exists to prevent; found by running this one, which attempted
@@ -95,6 +100,9 @@ class Creature:
                      done: Mapping[str, Any]) -> dict[str, Any]:
         obligations, verdicts = A.author(proposals, before=before, done=done)
         self._board = [M.Work(id=o.id, value=o.value, cost=o.cost) for o in obligations]
+        # Kept beside the board rather than inside it: M.Work is the mortality organ's type and
+        # stays about price, while `checkable` is the stakes organ's input.
+        self._checkable = {o.id: bool(o.checkable) for o in obligations}
         return A.metrics(verdicts)
 
     def remaining_work(self) -> list[M.Work]:
@@ -121,7 +129,17 @@ class Creature:
             return {"status": "REFUSED_AN_OFFER_THAT_WOULD_END_IT", "offer": offer.id}
 
         self._self.beat()
-        work = M.choose_next(self._life, self.remaining_work())
+        pool = self.remaining_work()
+        if not self._standing.will_trade_on_the_unverifiable():
+            # Burned twice, it stops trading on work whose success it cannot check -- but only
+            # among work it can actually finish, and only when such work exists. Caution is a
+            # preference, not a refusal to work: with nothing checkable affordable it still acts.
+            # Affordability stays with M.choose_next, which is the organ that owns the budget.
+            checkable = [w for w in pool
+                         if self._checkable.get(w.id, True) and self._life.can_finish(w.cost)]
+            if checkable:
+                pool = checkable
+        work = M.choose_next(self._life, pool)
         if work is None:
             return {"status": "IDLE", "reason": "nothing affordable on its own board"}
 

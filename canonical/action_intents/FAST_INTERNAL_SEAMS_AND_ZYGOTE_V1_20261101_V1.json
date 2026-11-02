@@ -61,7 +61,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Three internal seams left refusal learning, cross-session flywheel/skill crystallization, and unified-model cold startup slower or unwired than the existing kernel organs: `UpstreamRoutingLedger` was not consulted on live route admission, `flywheel_v1` defaulted to ephemeral `/tmp` while `solve_v1` did not crystallize paired confined trajectories into `causal_trace_to_skill_compiler_v1`, and `brain_unified_model_v1.open_model()` reparsed and rehashed the full 9.84 MB JSON (215.9 ms) on every cold process.",
-  "canonical_base_commit": "c39bce587002990cce0a04c09694200d6c47d251",
+  "canonical_base_commit": "4c0b18de677619064643f593b6a07cd829384cc2",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -109,7 +109,7 @@
     "canonical/runtime/brain_unified_model_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "c39bce587002990cce0a04c09694200d6c47d251",
+    "canonical_base_commit": "4c0b18de677619064643f593b6a07cd829384cc2",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "REPEATED_LEXICAL_FRONT_COMPILATION_ON_KNOWN_CONTRADICTED_SWE_SHAPES",

@@ -15,14 +15,14 @@ nowhere below, neither as a case nor as a gap.
 
 | instrument | what it asks | result | median |
 |---|---|---|---:|
-| `execution_guard/swe_advanced_probe_v1.py` | 49 advanced SWE sentences, 11 axes, through the live front door | **36 served / 13 refused** — and **zero known false passes** (#44 was one; #6525 closed it) | 38 ms |
+| `execution_guard/swe_advanced_probe_v1.py` | 49 advanced SWE sentences, 11 axes, through the live front door | **42 served / 7 refused** (re-measured 2026-11-02 on `6376dc6`; was **36 served / 13 refused** on `f9134956`) — and **zero known false passes** (#44 was one; #6525 closed it) | 38 ms |
 | `execution_guard/swe_capability_matrix_v1.py` | 54 ordinary cases, each with a world oracle | **44 REAL / 0 FALSE / 0 DAMAGED / 10 refused** (53 *distinct* cases — `measure_coverage` is registered twice) | 111 ms |
 | `hardcore_swe_surface_probe_20261030.py` | 28 capability surfaces, by real execution | **28 / 28** | — |
 | registry | rows the door can rank | **443 rows, 566 declared effects, 11 reached by the 49 sentences** | — |
 | substrate | kernel modules the manifest pins | **10 / 10 after `scripts/restore_substrate_v1.py`** (8 of 10 were absent, measured directly) | 15 s |
 | laws | `canonical/tests` | **2,248 test modules**; full discovery exceeds a 28-minute budget (§7) | — |
 
-**36 answered, 13 refused, 0 false.** The one false pass this inventory found — `#44`, asked for the diff against
+**42 answered, 7 refused, 0 false** on the 2026-11-02 re-measurement of `6376dc6`; **36 answered, 13 refused, 0 false** on `f9134956`. The one false pass this inventory found — `#44`, asked for the diff against
 `HEAD~1`, given the diff against `HEAD` and stamped VERIFIED over an empty patch — was closed by **#6525**
 (the row's contract had no `rev` slot at all; it now has one, and the receipt carries `rev=HEAD~1`, `rev_sha` and
 the hunk). The measurement of the old behaviour is preserved verbatim in §4/D2, because the fixture that made it
@@ -107,6 +107,52 @@ short of *declaration* and *routing* — and both are cheap to fix, because the 
 ---
 
 ## 2. The 13 refusals, and what each one really is
+
+**Re-measured 2026-11-02 on `6376dc6`, and the contradiction is the finding.** The
+table below is preserved verbatim as the record of the 13 refusals measured on
+`f9134956`. Six of them are now served: `polyglot` 7/7, `build` 5/5. **Seven
+remain**, and they are `#16, #21, #26, #32, #33, #45, #46`.
+
+The remaining seven are not seven equal gaps, and the tree already says so.
+`compose_hardcore_swe_problem_inventory_v1.defect_owner` -- the classifier this
+document's section 3 is composed from, pinned by
+`test_the_inventory_prices_each_refusal_honestly_v1` -- prices them:
+
+| live refusal | class | owner |
+|---:|---|---|
+| 16 ci | `NO_FLAKY_TEST_DETECTED` | **fixture** |
+| 26 tests | `NO_REPRODUCIBLE_BUG_SPECIFIED_OR_OBSERVED` | **fixture** |
+| 32 debug | `NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS` | **fixture** |
+| 33 refactor | `TARGET_SYMBOL_COLLISION:add` | **fixture** |
+| 21 systems | `STATED_ANSWER_NOT_PROVIDED` | **selection** |
+| 45 git | `TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | **selection** |
+| 46 git | `TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` | **selection** |
+
+**4 fixture, 3 selection, 0 capability.** So "fix the refusals" is not a
+capability gain: four of the seven are rows whose fixtures contain nothing to
+find, and those rows measure nothing either way. The three real ones are all in
+the **selection** layer, which is section 2.2's diagnosis -- the machine is short
+of declaration and routing, not of capability.
+
+Root cause traced for #45 and #46, and it is *not* a fixture defect as an earlier
+reading of this table suggested. `swe_advanced_probe_v1.census` seeds a standalone
+repository for any history sentence (`_asks_about_history` -> `seed_repository`);
+measured directly, fixture `45_git` has `.git`, 2 commits, and
+`git rev-parse --show-toplevel` returning the fixture itself. But
+"cherry-pick the last commit onto a new branch" names **no path**, so nothing
+populates `repo_root`; `git_repository_operate.run:601` defaults it to `"."`,
+`cwd == repo` at `:632`, and the `_is_host_repo` guard fires. **That guard is
+correct and is law-pinned** -- `TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY` is in
+`closed_loop_autonomous_controller_v1._HONEST_REFUSAL_CLASSES`, which "MUST NEVER
+be overridden or bypassed". The gap is that no layer binds a path-less history
+sentence to an ambient repository, and the safety guard sits exactly where such a
+binding would go.
+
+Recorded so nobody repeats it: making that refusal reason more specific is **not**
+the fix. `_is_honest_contract_refusal` matches by substring, so renaming the class
+would drop it out of the law-pinned set and could turn an honest refusal into a
+non-refusal. And it is unnecessary -- `defect_owner` already separates these three
+from the four fixture rows.
 
 | # | sentence | what happened | the real problem | class |
 |---:|---|---|---|---|

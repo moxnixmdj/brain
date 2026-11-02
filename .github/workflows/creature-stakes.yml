@@ -24,3 +24,11 @@ jobs:
       - run: python -m pip install --quiet pytest
       - name: Erasing its history must change what it does
         run: python -m pytest canonical/tests/test_stakes_are_real_not_decoration_v1.py -q
+      # The same negative control, one level up. Found by measuring the assembly rather than
+      # reading it: the creature recorded, reported and persisted posture but never consulted
+      # it, because step() chose through mortality_and_triage_v1.choose_next(life, work), which
+      # takes no standing, and author_board dropped `checkable` converting Obligation -> Work.
+      # So the gate above passed while a burned creature chose exactly what a newborn chose.
+      # Decoration arriving through the back door of the assembly, the same way busywork did.
+      - name: And it must change what the assembled creature does, not only what it reports
+        run: python -m pytest canonical/tests/test_creature_posture_changes_its_choice_v1.py -q
