@@ -24,7 +24,7 @@ from execution_guard.v22_prewrite_admission import admission_errors
 RECEIPT = "canonical/verification/REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1.json"
 # Added by this same change, so it exists at HEAD and not at origin/main -- the case the old
 # base-only resolver could never bind.
-ADDED_RECEIPT = "canonical/verification/CONTINUOUS_SELF_KNOWN_COUNTEREXAMPLE_20261102_V1.json"
+ADDED_RECEIPT = "canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json"
 INVENTED = "a1b2c3d4e5f6789012345678901234567890abcd"
 
 
