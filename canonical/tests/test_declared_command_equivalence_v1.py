@@ -292,8 +292,9 @@ def test_the_registry_rows_that_declare_a_command_are_the_file_rows() -> None:
                        if isinstance(entry, dict) and declared.FIELD in entry)
     assert declaring == ["file.archive.tar_gz.v1", "file.compressed.gzip.v1",
                          "file.contents.v1", "file.copy.v1", "file.diff.v1",
-                         "file.line.appended.v1", "file.line_count.v1", "file.rename.v1",
-                         "file.reversed.v1", "file.sorted.v1", "file.stat.v1",
+                         "file.directory_listing.v1", "file.line.appended.v1",
+                         "file.line_count.v1", "file.rename.v1", "file.reversed.v1",
+                         "file.sorted.v1", "file.stat.v1",
                          "file.uppercased.v1"], declaring
     # The declaration says what a row COMPUTES, not that it only reads. Exactly
     # four rows write, and they are named here so a fifth cannot appear quietly
@@ -318,6 +319,12 @@ def test_the_registry_rows_that_declare_a_command_are_the_file_rows() -> None:
     # they were refused with NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND for sentences
     # the composer maps to sed -- "Convert <f> to uppercase" and "Append '<x>' to
     # <f>" -- which is the exemption this file exists to scope.
+    #
+    # `file.directory_listing.v1` joined it on 2026-11-02, and it is READ-ONLY, so
+    # the writer census above is unchanged at six.  It declares `ls -A <dir>`
+    # because that is what its own listing prints, byte for byte, on a directory
+    # holding a dot-file, two files and a subdirectory -- plain `ls` omits the
+    # dot-file, so the flag is part of the claim rather than decoration.
 
 
 def test_a_declaration_outranks_a_mutation_verb_the_command_does_not_have() -> None:

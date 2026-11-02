@@ -38,7 +38,7 @@ if str(ROOT) not in sys.path:
 from canonical.runtime import live_brain_route_admission_v1 as door  # noqa: E402
 
 WORLD = ROOT / "canonical/astra_runtime/tmp/paraphrase_ratchet"
-FLOOR = 18
+FLOOR = 20
 
 
 def _rel(name: str) -> str:
@@ -55,6 +55,16 @@ def _world() -> None:
     WORLD.mkdir(parents=True)
     (WORLD / "a.txt").write_text("alpha\nbeta\ngamma\n", encoding="utf-8")
     (WORLD / "b.txt").write_text("alpha\nBETA\n", encoding="utf-8")
+
+
+def _names(result: dict) -> list[str]:
+    """The entries an answer names, whether it is a list, a projection or text."""
+    answer = result.get("answer")
+    if isinstance(answer, dict):
+        answer = answer.get("value")
+    if isinstance(answer, (list, tuple)):
+        return sorted(str(x) for x in answer)
+    return sorted(str(answer or "").split("\n")) if answer else []
 
 
 def _ask(goal: str) -> dict:
@@ -91,18 +101,14 @@ def _served_sentences() -> list[tuple[str, callable]]:
         ("Append 'omega' to %s" % a,
          lambda: (WORLD / "a.txt").read_text(encoding="utf-8").endswith("omega\n")),
         ("Which files under %s mention beta?" % d, None),
+        ("What is in %s?" % a, None),
+        ("What files are in %s?" % d, None),
     ]
 
 
 def _unserved() -> dict[str, tuple[str, str]]:
     """Phrasings this world does not serve, pinned to the gate that stops them."""
     return {
-        "What is in ": (
-            "FAIL__RAW_GOAL_COMPILATION_GAP",
-            "no row reads 'what is in <f>' as a request for the file's text"),
-        "What files are in ": (
-            "FAIL__RAW_GOAL_COMPILATION_GAP",
-            "the listing row wants 'list the directory', not this phrasing"),
         "Make a copy of ": (
             "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
             "one semantic token, so admission refuses and the sentence falls to "
@@ -124,8 +130,6 @@ def run_all() -> list[dict]:
     for prefix in _unserved():
         _world()
         goal = {
-            "What is in ": "What is in %s?" % _rel("a.txt"),
-            "What files are in ": "What files are in %s?" % _dir(),
             "Make a copy of ": "Make a copy of %s named %s" % (_rel("a.txt"), _rel("c.txt")),
         }[prefix]
         before = (WORLD / "a.txt").read_bytes()
@@ -153,7 +157,7 @@ def test_the_phrasings_served_do_not_fall_below_the_floor() -> None:
 
 def test_each_unserved_phrasing_is_refused_by_the_gate_that_stops_it() -> None:
     pinned = _unserved()
-    assert len(pinned) == 3, len(pinned)
+    assert len(pinned) == 1, len(pinned)
     for item in run_all():
         for prefix, (expected, why) in pinned.items():
             if not item["goal"].startswith(prefix):
@@ -165,6 +169,32 @@ def test_each_unserved_phrasing_is_refused_by_the_gate_that_stops_it() -> None:
             if "before" in item:
                 assert (WORLD / "a.txt").read_bytes() == item["before"], (
                     "a refused phrasing changed the file", item["goal"])
+
+
+def test_the_question_forms_answer_the_same_thing_as_the_imperatives() -> None:
+    """A phrasing is only served if it answers what the sentence asked.
+
+    "What is in <f>" must return that file's text, and "What files are in <d>"
+    must name that directory's entries -- the same answers "Show the contents of
+    <f>" and "List the directory <d>" give.  Counting them as served while they
+    answered something else would make this ratchet reward vocabulary.
+    """
+    a, d = _rel("a.txt"), _dir()
+    _world()
+    read = _ask("What is in %s?" % a)
+    assert read.get("pass") is True, read.get("status")
+    assert str(read.get("answer")) == "alpha\nbeta\ngamma\n", read.get("answer")
+
+    _world()
+    listing = _ask("What files are in %s?" % d)
+    assert listing.get("pass") is True, listing.get("status")
+    assert _names(listing) == ["a.txt", "b.txt"], listing.get("answer")
+
+    # The same two answers, from the imperative phrasings, for comparison.
+    _world()
+    assert str(_ask("Show the contents of %s" % a).get("answer")) == "alpha\nbeta\ngamma\n"
+    _world()
+    assert _names(_ask("List the directory %s" % d)) == ["a.txt", "b.txt"]
 
 
 def test_the_two_verbs_name_the_same_files() -> None:

@@ -3188,6 +3188,40 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     except GoalCompilationFailure as exc:
         compiled, pinned_failure = None, exc
 
+    # F32b: THE ROW THE SENTENCE STATES A COMMAND FOR, WHEN THE SCORER'S PICK
+    # COULD NOT BIND ITS OWN INPUTS.
+    #
+    # F32 above runs only when the lexical ranking produced NOTHING.  Measured
+    # 2026-11-02, "What files are in <D>?": the ranking produced something --
+    # `file.diff.v1`, a row that wants TWO files -- and the pinned compiler then
+    # failed with GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:file.diff.v1:
+    # other_path:0_type_compatible_existing_files_named, so the fallback never
+    # ran and a directory listing that `file.directory_listing.v1` declares it
+    # computes (and prints byte-identically to `ls -A`) reached no capability.
+    #
+    # The rule is the same one `_first_fillable` applies at execution time, moved
+    # one layer earlier: a pick that cannot fill its own contract is not a pick.
+    # It is deliberately narrow -- it fires ONLY on a compile failure, it uses
+    # the same single-row-declares-it test as F32 (a tie is not evidence), and
+    # the row it substitutes is compiled by the SAME pinned compiler against a
+    # registry holding nothing else, so no new binder and no new scoring is
+    # introduced.  If that compile also fails, the original failure stands.
+    if compiled is None:
+        _declared_rows = _ranked_by_the_command_the_sentence_states(selection_text, registry)
+        if _declared_rows:
+            _cid = _declared_rows[0][2]
+            try:
+                _narrowed = dict(gc.compile_goal(selection_text, {_cid: registry[_cid]}, root))
+            except GoalCompilationFailure:
+                _narrowed = None
+            except Exception:  # noqa: BLE001 - a fallback that raises is no fallback
+                _narrowed = None
+            if _narrowed and _narrowed.get("selected_capability") == _cid:
+                compiled = _narrowed
+                pinned_failure = None
+                best_cid = _cid
+                rules.append("F32B_ROW_THAT_COMPUTES_THE_STATED_COMMAND_BEATS_A_PICK_THAT_COULD_NOT_BIND")
+
     # Reject bogus compound splits where an observation sentence named a real path
     # and an anaphoric imperative sentence ("Fix it...", "Migrate it...") had zero
     # paths so world-binding invented host `source_root` = "." or "canonical/tests".

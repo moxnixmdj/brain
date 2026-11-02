@@ -12487,6 +12487,17 @@
         }
       },
       "adapter_module": "file_survey",
+      "computes_command": {
+        "argvs": [
+          [
+            "ls",
+            "-A",
+            "${path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "computed in process by file_survey; no shell, no subprocess. The listing includes dot-files and is sorted by name, which is what `ls -A` prints -- measured byte-identical on a directory holding a dot-file, two files and a subdirectory -- and NOT what plain `ls` prints, which omits them."
+      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,

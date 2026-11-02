@@ -560,6 +560,39 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     if futures and not output_keys:
         return {**base, "admitted": False, "rule": "R2_OUTPUT_ARTIFACT_UNSERVED"}
+    # A SENTENCE THAT STATES A COMMAND, AND THE ONE ROW THAT DECLARES IT COMPUTES
+    # THAT COMMAND, IS EVIDENCE ABOUT THE ASK.
+    #
+    # The declaration is already trusted in the opposite direction: this gate
+    # REFUSES a row with no command slot for a sentence that states a command
+    # (NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND), and it lets a declaration outrank
+    # a mutation verb.  Trusting it only to refuse made the rule one-sided.
+    # Measured 2026-11-02: "What files are in <D>?" settles `ls -A <D>`,
+    # `file.directory_listing.v1` declares exactly that argv, and the route was
+    # refused R13_DECLARED_INPUT_UNBINDABLE:path -- not because the row was wrong
+    # (it produces those bytes) but because the sentence shares no vocabulary
+    # with the row's keywords.  A sentence's own command is the strongest
+    # statement it can make about what it wants, and it is re-derived by the same
+    # acceptance layer that re-derives every other argv.
+    #
+    # Three limits, all already project rules: the match is positional, so the
+    # declaration cannot authorize a different command; exactly ONE row in the
+    # live registry may declare it, because a tie between rows is not evidence
+    # (the same rule F32 uses); and every refusal above this line still stands --
+    # this can only supply the lexical evidence a thin sentence lacks, never
+    # displace a refusal about the operation, the mutation, or the payload.
+    _stated_argv = composer_route.extract_argv(goal)
+    if _stated_argv is not None and len(semantic) <= 1:
+        from canonical.runtime import declared_command_equivalence_v1 as _declared_evidence
+        _declaring = [cid for cid, other in sorted(registry.items())
+                      if isinstance(other, Mapping)
+                      and _declared_evidence.matched_template(other, _stated_argv) is not None]
+        if _declaring == [str(selected)]:
+            return {**base, "admitted": True, "rule": None,
+                    "admission_basis": "THE_SENTENCE_STATES_A_COMMAND_THIS_ROW_DECLARES_IT_COMPUTES",
+                    "stated_argv": list(_stated_argv),
+                    "declared_template": (_declared_evidence.matched_template(entry, _stated_argv) or {}).get("template")}
+
     if len(semantic) <= 1:
         # ...unless the binder already knows WHY: then the string is the slot, not a verdict on
         # the sentence.  Same refusal, same place in the chain, a cause the caller can act on.

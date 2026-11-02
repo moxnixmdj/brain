@@ -1244,7 +1244,30 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"(?![^\n]*\b(?:contain|contains|containing|contained|hold|holds|holding"
      r"|include|includes|including)\b)"
      r"(?:\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
+     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b"
+     # "WHAT FILES ARE IN <D>" ASKS THE SAME QUESTION AS "LIST THE DIRECTORY <D>"
+     # and names neither of this row's words.  Measured 2026-11-02: it matched
+     # no program, settled no argv and reached no capability at all
+     # (FAIL__RAW_GOAL_COMPILATION_GAP), while the sentence with "list the
+     # directory" in it was served.  The noun it asks about is FILES and the
+     # operand is the directory, which is what `ls` answers.  It is here, after
+     # the containment guard, so a question about which files CONTAIN text is
+     # still the search row's.
      r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b)", "ls", _no_flags, 1),
+    # "WHAT FILES ARE IN <D>" IS THE LISTING WRITTEN AS A QUESTION, and it names
+    # neither of the words the row above keys on.  Measured 2026-11-02: the
+    # sentence settled no argv and reached no capability (the "?": nothing
+    # matched), while "List the directory <D>" was served.
+    #
+    # It binds `ls -A`, not `ls`, because the row that answers it reads the
+    # directory it is given and includes dot-files: measured against the real
+    # program, `_directory_list` and `ls -A` print the same bytes on a directory
+    # holding `.hidden`, `B.txt`, `a.txt` and a subdirectory, while plain `ls`
+    # omits `.hidden`.  The flag states which listing is meant instead of
+    # letting the declaration claim one it does not produce.
+    (r"\b(?:what|which)\s+files?\s+(?:are|exist)\s+(?:in|inside|under)\b"
+     r"|\b(?:what|which)\s+files?\s+(?:are|exist)\s+in\s+the\s+director(?:y|ies)\b",
+     "ls", lambda _n: ["-A"], 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
     # The pattern is deliberately narrow.  The PROGRAM is called `file`, and the
@@ -1367,7 +1390,16 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
      # -- it would have printed the file it was about to write.  A sentence that
      # asks for a write is not a read, whatever verb it opens with.
      r"|^(?!.*\b(?:write|save|output|append|create|put|store)\b)"
-     r"\s*(?:read|print|display|cat)\b", "cat", _no_flags, 1),
+     r"\s*(?:read|print|display|cat)\b"
+     # "WHAT IS IN <F>" IS THE READER WRITTEN AS A QUESTION.  Measured 2026-11-02:
+     # the sentence settled no argv and reached no row
+     # (FAIL__RAW_GOAL_COMPILATION_GAP) while "Show the contents of <F>" was
+     # served -- the difference is the verb, not the operand.  The ask is for the
+     # file's text, which is what `cat` prints.  It names a singular thing and
+     # keeps the same write exclusion as the arm above, so "What is in <F>,
+     # then write it to <G>" is not turned into a read of G.
+     r"|^(?!.*\b(?:write|save|output|append|create|put|store)\b)"
+     r"\s*what(?:'s|\s+is)\s+(?:in|inside)\b", "cat", _no_flags, 1),
 )
 
 # A command whose first operand is NOT a path but a value the sentence states.
