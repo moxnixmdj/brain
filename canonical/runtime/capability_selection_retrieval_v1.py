@@ -1070,10 +1070,16 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
         from canonical.runtime import capability_type_surface_v1 as _ts
         slots = {str(k or "").lower() for k in _ts.signature(entry)}
         if slots and "argv" not in slots:
-            return {"capability_id": cid, "admitted": False,
-                    "reason": "BINDING_REFUSED:NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND:"
-                              + ",".join(sorted(slots))[:120],
-                    "required_inputs": required}
+            # The same declaration the route-admission gate honours.  A row that
+            # computes this argv's answer in process does not ignore the command,
+            # so it is not refused for the spelling of its slots.  The row that
+            # declares nothing keeps this refusal word for word.
+            from canonical.runtime import declared_command_equivalence_v1 as _declared
+            if _declared.states_the_command_this_row_computes(goal, entry) is None:
+                return {"capability_id": cid, "admitted": False,
+                        "reason": "BINDING_REFUSED:NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND:"
+                                  + ",".join(sorted(slots))[:120],
+                        "required_inputs": required}
     return {"capability_id": cid, "admitted": True, "inputs": inputs,
             "required_inputs": required, "specific": is_specific(required),
             "derivation": _derivation_report}

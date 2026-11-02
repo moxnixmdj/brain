@@ -1,0 +1,77 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_stat.py",
+ "adapter_sha256": "f30be304f6733980cefca49609e12d94f8f479e8cc4fb823d576bd7fa0f9b398",
+ "capability_id": "file.stat.v1",
+ "checks": [
+  {
+   "adapter_returned": 24,
+   "computed_here": 24,
+   "name": "reports the size of five_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": "0640",
+   "computed_here": "0640",
+   "name": "reports the permission bits of five_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": [
+    11,
+    29
+   ],
+   "computed_here": [
+    11,
+    29
+   ],
+   "name": "size follows the bytes on disk across two reads",
+   "ok": true
+  },
+  {
+   "adapter_returned": 24,
+   "command_output": "24",
+   "name": "computes `stat -c %s` on five_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 16,
+   "command_output": "16",
+   "name": "computes `stat -c %s` on three_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 0,
+   "command_output": "0",
+   "name": "computes `stat -c %s` on empty.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": "0640",
+   "command_output": "640",
+   "name": "computes `stat -c %a` on five_lines.txt",
+   "ok": true
+  },
+  {
+   "name": "refuses a missing path",
+   "ok": true,
+   "refused_with": "RuntimeError:PATH_NOT_FOUND"
+  },
+  {
+   "name": "refuses a path outside the repository",
+   "ok": true,
+   "refused_with": "RuntimeError:PATH_OUTSIDE_REPOSITORY"
+  }
+ ],
+ "claim": "reports size and permission bits from metadata, tracking the bytes on disk",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-STAT-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.stat.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-02T14:29:47Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

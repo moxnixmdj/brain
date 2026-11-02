@@ -11935,6 +11935,206 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "file.line_count.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_line_count",
+      "computes_command": {
+        "argvs": [
+          [
+            "wc",
+            "-l",
+            "${path}"
+          ]
+        ],
+        "answer_field": "newline_count",
+        "note": "newline_count is the number of newline bytes, which is what wc -l prints; line_count is the human line count and equals it only when the last line is terminated (ends_with_newline reports which). No process is spawned."
+      },
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "count the lines",
+        "count lines",
+        "number of lines",
+        "how many lines",
+        "line count",
+        "lines in",
+        "wc -l"
+      ],
+      "limitations": [
+        "Counts str.splitlines() of a UTF-8 file; a trailing newline does not add a line, and ends_with_newline is reported so the wc -l difference is visible.",
+        "Refuses a non-UTF-8 file, a directory, a missing file and any path outside the repository.",
+        "Answers the wc -l question in process and reports both numbers; it does not run wc."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "file.line_count.answer"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "byte_count",
+        "ends_with_newline",
+        "line_count",
+        "newline_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "path",
+        "schema",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_line_count.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-LINE-COUNT-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers are computed from a constructed world with the standard library; the rows are reached through the real dispatcher; agreement with wc -l is checked where wc exists. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_line_count",
+          "world_answers": {
+            "five_lines.txt": 5,
+            "three_lines.txt": 3,
+            "empty.txt": 0
+          }
+        }
+      },
+      "entrypoint": "run"
+    },
+    "file.stat.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_stat",
+      "computes_command": {
+        "argvs": [
+          [
+            "stat",
+            "-c",
+            "%s",
+            "${path}"
+          ],
+          [
+            "stat",
+            "-c",
+            "%A",
+            "${path}"
+          ],
+          [
+            "stat",
+            "-c",
+            "%a",
+            "${path}"
+          ]
+        ],
+        "answer_field": "size_bytes (stat -c %s); permissions_octal (stat -c %a or %A)",
+        "note": "size_bytes is exactly stat -c %s and permissions_octal is the %a bits. No process is spawned."
+      },
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "file size",
+        "size of the file",
+        "how big",
+        "permissions",
+        "file permissions",
+        "mode bits",
+        "stat the file",
+        "metadata of"
+      ],
+      "limitations": [
+        "Reads metadata only; it never reads the contents.",
+        "Refuses a missing path and any path resolving outside the repository.",
+        "Answers the stat question in process; it does not run stat."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "file.stat.answer"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "is_dir",
+        "is_file",
+        "is_symlink",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "path",
+        "permissions_octal",
+        "schema",
+        "size_bytes"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_stat.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-STAT-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers are computed from a constructed world with the standard library; the rows are reached through the real dispatcher; agreement with stat is checked where stat exists. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_stat",
+          "world_answers": {
+            "size_bytes": 24,
+            "permissions_octal": "0640"
+          }
+        }
+      },
+      "entrypoint": "run"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

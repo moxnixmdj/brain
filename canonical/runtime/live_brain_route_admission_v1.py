@@ -305,6 +305,30 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if effect_error:
         return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
                 "compiler_mode": mode, "selected_capability": selected}
+    # A READ-ONLY ROW MUST NOT BE THE ANSWER TO A SENTENCE THAT ASKS TO CHANGE THE FILE.
+    #
+    # Lexical overlap cannot see intent: "Delete the last line of <f>" contains
+    # "line", which is the token a line-count row legitimately provides.  Measured
+    # 2026-11-02 on the ordinary-phrasing probe: that sentence selected
+    # `file.line_count.v1`, ran it, and was reported as
+    # FAIL_CLOSED__NO_OBSERVED_EFFECT -- an execution answering a request to edit
+    # with a reading of the file.  Nothing was destroyed (the row never writes its
+    # input), which is exactly why the refusal belongs here rather than in the
+    # adapter: the route was wrong, not the effect.
+    #
+    # Scoped twice, so no other row moves.  Only a row that DECLARES
+    # ``read_only: true`` is judged, and only a sentence whose own leading verb is
+    # a mutation word is refused.  An unidentified verb keeps today's behaviour,
+    # which is what keeps this from becoming a vocabulary the registry has to
+    # satisfy before it can route at all.
+    if entry.get("read_only") is True:
+        _mutation = _leading_mutation_word(goal)
+        if _mutation is not None:
+            return {"schema": SCHEMA, "admitted": False,
+                    "rule": "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE",
+                    "compiler_mode": mode, "selected_capability": selected,
+                    "goal_verb": _mutation,
+                    "reason": "the sentence asks to %s; this row only reports what it reads" % _mutation}
     # An inventory row is keyed by the path of a file in THIS repository, so it can
     # only be chosen by a sentence that names that file.  Lexical overlap with a
     # filename is not evidence about the goal: it is evidence that the filename
@@ -362,7 +386,27 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         _command_slots = {s for s in _slots
                           if s == "argv" or s.endswith("_argv")
                           or s in ("command", "command_line", "cmd")}
-        if _slots and not _command_slots:
+        # A ROW THAT COMPUTES THE COMMAND'S ANSWER DOES NOT IGNORE THE COMMAND.
+        #
+        # The rule above refuses a capability with no command slot because such a
+        # capability answers nothing the sentence asked for.  That is true of a
+        # row whose contribution is lexical.  It is not true of a row that
+        # declares -- in the registry, one token at a time -- that it computes
+        # exactly this argv's answer in process.  Measured 2026-11-02: "Count the
+        # lines in <file>" extracts `wc -l <file>`, so the row that returns that
+        # number was refused by this gate, and the refusal surfaced as
+        # FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT -- the
+        # sentence was told a sandbox was missing when the machine had the answer
+        # and was not allowed to give it.
+        #
+        # The declaration is matched against the sentence's own argv position by
+        # position, so it cannot authorize a different command.  `$`-prefixed
+        # template tokens are the operands the row takes as inputs; every other
+        # token must equal the stated token, including the program name.  A row
+        # that declares nothing keeps the refusal exactly as before.
+        from canonical.runtime import declared_command_equivalence_v1 as _declared_commands
+        if _slots and not _command_slots and _declared_commands.matched_template(
+                entry, composer_route.extract_argv(goal)) is None:
             return {"schema": SCHEMA, "admitted": False,
                     "rule": "NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
                     "compiler_mode": mode, "selected_capability": selected}
@@ -4221,6 +4265,44 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     # and the next reader cannot tell a refused goal from an executed one.
     _undo_chain_side_effects(composed, "promised_artifact_missing")
     return composed
+
+
+# Words that may precede the real verb in an ordinary request.  Only the
+# sentence's own leading action is read here; the list is politeness and
+# interrogative scaffolding, not a vocabulary of tasks.
+_LEADING_FILLER = frozenset({
+    "please", "can", "could", "would", "will", "you", "u", "i", "we", "let", "lets",
+    "let's", "help", "me", "us", "now", "then", "just", "kindly", "go", "ahead",
+    "and", "also", "hello", "hi", "hey", "try", "to", "quickly", "simply",
+})
+
+# Verbs that ask for the named file to be CHANGED.  A read-only row cannot serve
+# one.  Deliberately small and literal: an unrecognized verb is not refused, so a
+# missing word cannot break a route -- it only leaves the old behaviour in place.
+_MUTATING_VERBS = frozenset({
+    "delete", "remove", "rm", "erase", "drop", "add", "append", "insert", "put",
+    "write", "save", "rename", "mv", "move", "copy", "cp", "compress", "zip",
+    "tar", "sort", "reverse", "uppercase", "lowercase", "capitalise", "capitalize",
+    "edit", "replace", "substitute", "truncate", "modify", "change", "update",
+    "create", "make", "mkdir", "touch", "clear", "empty", "wipe", "strip",
+    "reformat", "format", "split", "merge", "combine", "concatenate", "backup",
+    "restore", "chmod", "chown", "convert", "rewrite", "fix", "repair", "patch",
+})
+
+
+def _leading_mutation_word(goal: str) -> str | None:
+    """The mutation verb the sentence opens with, or None.
+
+    Only the leading action is read.  A verb that appears later usually governs a
+    different object ("Count the lines in <f> and write the total to <o>"), and
+    refusing on any occurrence would forbid reading a file for a report.
+    """
+    for raw in str(goal or "").lower().replace("?", " ").split():
+        word = raw.strip(".,:;!\"'`()[]")
+        if not word or word in _LEADING_FILLER:
+            continue
+        return word if word in _MUTATING_VERBS else None
+    return None
 
 
 def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = None) -> bool:
