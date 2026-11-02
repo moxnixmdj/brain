@@ -1,0 +1,26 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Stakes that change what it attempts next, and initiative that chooses its own work when nobody assigns anything (canonical/runtime/creature_stakes_and_initiative_v1.py)",
+ "falsifier_id": "A_BRANCH_IS_NOT_A_FEELING",
+ "decisive_question": "If what happened to it changes what it does next, is anything at stake for it?",
+ "answer": "NOT ESTABLISHED -- the causality is real, the experience is not measured by it",
+ "counterexamples": [
+  "Posture is a threshold on three counters. A thermostat is also changed by its history and nobody asks whether the thermostat minds. The mechanism is honest; the word 'stakes' is doing more work than the code.",
+  "Caution is one branch in choose(): filter the unchecked out of the pool. Nothing is felt, nothing is avoided out of fear, and no state exists that could be described as an aversion.",
+  "The stakes bite ONLY where checkable and uncheckable work compete. On a ledger where everything is checkable, a creature that has been wrong twice chooses exactly what a newborn chooses -- asserted in the suite, so nobody can quote the mechanism as general.",
+  "Initiative is SELECTION, not GENERATION. Every obligation on the board was written by a person. A creature that picks from a menu someone else wrote is a prioritisation function, and calling it initiative overstates it.",
+  "It cannot invent work, cannot notice an obligation nobody listed, and does not know what it has not been told. That is the largest gap between this and the thing the owner is asking about."
+ ],
+ "measured": {
+  "erasing_history_changes_the_choice": "newborn chooses obl-4 (100 value, cost 1, unverifiable); after two verified failures it chooses obl-0 -- the same chooser, a different answer",
+  "all_checkable_board": "burned and newborn choose identically; the organ is conditional and that is now asserted",
+  "its_own_criterion_vs_random": "981.0 vs 491.0 realised value over 40 scarce steps = 2.0x; highest-value-ignoring-cost scores 826.0",
+  "saturated_budget": "400 steps on a 20-obligation ledger ties every chooser at 1.0 -- found while building, asserted as a limitation so the tie is not quoted as either",
+  "caution_has_a_price": "the burned creature realises LESS than the newborn on this ledger; being affected is not free, and the cost is measurable",
+  "survives_sigkill": "CAUTIOUS preserved across a kill, caution_episodes 1",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "Two organs that were absent are now present and falsifiable: its history changes its choices, and it works when nobody asks. Both are machinery. Neither is evidence of experience, and the strongest honest sentence is that a diary records what happened while this is changed by it -- changed the way a governor is changed, not the way a creature is.",
+ "what_would_close_it": "Work it was not given. Every obligation here is authored by a person; an initiative that finds items nobody listed would be a different order of thing, and nothing in this tree does that."
+}
