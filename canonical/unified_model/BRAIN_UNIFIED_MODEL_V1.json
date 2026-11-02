@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6637,
+  "research_index_records": 6638,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e58e06f51d4ad9786f0773005ea240f5871254f6fb83860ae405f981e4928998"
+  "value": "43c6232cc0dc56dffea5c2a1a03780ea26e2d7a4993956096af979a76785fb70"
  },
  "engines": [
   {
@@ -215886,6 +215886,51 @@
    }
   },
   {
+   "action_id": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+   "capability": false,
+   "date": "2026-11-02",
+   "id": "research:canonical/action_intents/OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4ca255f61aceb37cf8f2512396a9f3628f5295eac424de4bc17b95e89144378b",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "6593": 1,
+    "across": 2,
+    "alongside": 1,
+    "awake": 1,
+    "awakeagencydaemon": 1,
+    "broadened": 1,
+    "byte-identical": 1,
+    "caller_predicate": 1,
+    "cleanly": 1,
+    "concurrent": 1,
+    "confined": 1,
+    "context-anchored": 1,
+    "contextvar": 1,
+    "creature": 1,
+    "creature_runtime_v1.creature": 2,
+    "cross-shape": 1,
+    "defects": 1,
+    "ec94c97c": 1,
+    "escalation": 1,
+    "execution": 1,
+    "false": 2,
+    "flywheel_v1": 2,
+    "learn": 2,
+    "optimal_unified_creature_and_prc2_20261102_v1": 2,
+    "rules": 2,
+    "stored": 2,
+    "stores": 2,
+    "test_suite": 2,
+    "threads": 2,
+    "transfer_learning_v1": 2,
+    "while": 2
+   }
+  },
+  {
    "action_id": "ORDINARY_PROSE_REQUESTS_RUN_THE_COMMAND_THEY_STATE_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -236766,10 +236811,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "5069001a7339ca93f74daf37e454e4eaf8c494c0c6fbf34afaa629aaf3e71a45",
+   "sha256": "2756017224fbf7594c6e9bdb8a2444256435663871b4bccd39aa140ef8e2037d",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 65,
+   "symbol_count": 66,
    "symbols": [
+    "_ContextRepoRoot",
     "_bare_alternatives",
     "_bare_stated_value",
     "_character_flags",
@@ -236792,8 +236838,7 @@
     "_mv_inside",
     "_no_flags",
     "_noun_matched_path",
-    "_parent_if_directory",
-    "_pathish"
+    "_parent_if_directory"
    ],
    "terms": {
     "candidate_tokens": 1,
@@ -237467,7 +237512,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "36ecaced93af00b124bf0f95ea2b37c12c085da6535fe68b38bfc71955d47c4c",
+   "sha256": "0cea0983df9226b92bae18f804529e9b99aaf8534faab8ff62616188b575fa79",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 56,
    "symbols": [
@@ -238788,21 +238833,24 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "f1590f1983ae32dd899c4a580913fab09cf2b78cfb5e350a1958489deea1d445",
+   "sha256": "d8a758249ba12455a5f753f25044fdfc228da8379c9c3cca2b3501f91d1c2510",
    "summary": "Seven organs, finally in one body.",
-   "symbol_count": 7,
+   "symbol_count": 9,
    "symbols": [
     "Creature",
     "_registry_and_inspectors",
     "boot",
+    "confined_verified_perform",
     "does_nothing",
     "main",
+    "run_awake_creature_pulse",
     "run_its_own_board",
     "run_unattended_inspector_investigation"
    ],
    "terms": {
     "body": 1,
     "boot": 1,
+    "confined_verified_perform": 1,
     "creature": 2,
     "does_nothing": 1,
     "finally": 1,
@@ -238810,6 +238858,7 @@
     "one": 1,
     "organs": 1,
     "registry_and_inspectors": 1,
+    "run_awake_creature_pulse": 1,
     "run_its_own_board": 1,
     "run_unattended_inspector_investigation": 1,
     "runtime": 1,
@@ -255292,11 +255341,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "dc9ad02d6dea497f4771d0718fcc2777d9a31645cc6dcd26fe7f5635761aa381",
+   "sha256": "0e8ca6ff9311ae622403154514cea8d199d84d98c87576485d5a500ad2fadffb",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 113,
+   "symbol_count": 114,
    "symbols": [
     "LocalExecutionFailure",
+    "_ContextWorkspaceRoot",
     "_already_satisfied_evidence",
     "_asks_only_for_a_plan",
     "_bind_requested_contract_checks",
@@ -255318,13 +255368,12 @@
     "_declared_operation",
     "_declared_surface",
     "_declares_effect_by_argument",
-    "_declares_it_does_not_write",
-    "_declares_no_source_write_authority"
+    "_declares_it_does_not_write"
    ],
    "terms": {
     "admission": 2,
     "brain": 2,
-    "controller_passed": 1,
+    "contextworkspaceroot": 1,
     "dag_admission": 1,
     "dag_contract_errors": 1,
     "declared_object_roles": 1,
@@ -283402,7 +283451,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "4084f1a615cbbf646a5858191c868e22d28eee657bb01682b90a64374b5f1041",
+   "sha256": "7642913fc0ed81ad0fbb6342237f7bf6f1e24431fe34653b399a5f2eafa8b4d3",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 8,
    "symbols": [

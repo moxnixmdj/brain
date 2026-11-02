@@ -1,0 +1,410 @@
+{
+  "action_id": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+  "action_intent_id": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Execute the optimal post-#6593 architecture under zero external model cognition (K3=0) and $0 spend without weakening any #6592 confinement or verification guard: (1) Implement `OPTIMAL_PLAN_20261102_V6.md` PR-C2 in `verified_skill_crystallizer_v1.py` — keep stored lessons context-anchored, gate apply-time sub-expression pattern narrowing (`narrow_rule_at_apply_time`) strictly on `required_verification_kind == 'TEST_SUITE'`, unify scope escalation onto a single `TEST_SUITE` + `scope_id` pipeline, and reject weak `CALLER_PREDICATE` escalation (`2/5 -> 5/5` cross-shape recall, `0/4` negative-control misapplications, `0` broadened proposals to weak verifiers); (2) Replace thread-unsafe global `ROOT` / `composer_route._REPO_ROOT` mutation in `_with_workspace_root` with `contextvars.ContextVar` workspace scoping verified across 8 concurrent threads; (3) Enforce strict zero-memory `learn=False` across `solve_v1.solve`, `computer_env_v1.perform`, `closed_loop_autonomous_controller_v1.solve_or_learn`, and `live_brain_route_admission_v1.solve(route_memory_mode='exclude')`; (4) Consolidate awake agency onto the single `creature_runtime_v1.Creature` organism (`note_goal_gap` -> `goal_gap_statement_v1` -> `ignorance_ledger_v1`, fail-closed/confined `confined_verified_perform`, and durable `run_awake_creature_pulse`).",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/composer_route_v1.py",
+      "canonical/runtime/solve_v1.py",
+      "canonical/runtime/computer_env_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/tools/pr_c2_apply_time_broadening_benchmark_v1.py",
+      "canonical/tests/test_optimal_unified_creature_and_prc2_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Four post-#6593 structural and safety defects remained open on `ec94c97c`: stored statement rules could not transfer to sub-expression shapes (`if`, `while`, `and`) at `TEST_SUITE` without an unsafe `CALLER_PREDICATE` escalation hole, `_with_workspace_root` mutated module-global `ROOT` across threads, `learn=False` still read/wrote `flywheel_v1`/`transfer_learning_v1`/`UpstreamRoutingLedger` stores, and `AwakeAgencyDaemon` ran a separate lifecycle loop alongside `creature_runtime_v1.Creature`.",
+  "canonical_base_commit": "a0105170c0e6488c0df5c3cb499a6042d2168321",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Four post-#6593 structural and safety defects remained open on `ec94c97c`: stored statement rules could not transfer to sub-expression shapes (`if`, `while`, `and`) at `TEST_SUITE` without an unsafe `CALLER_PREDICATE` escalation hole, `_with_workspace_root` mutated module-global `ROOT` across threads, `learn=False` still read/wrote `flywheel_v1`/`transfer_learning_v1`/`UpstreamRoutingLedger` stores, and `AwakeAgencyDaemon` ran a separate lifecycle loop alongside `creature_runtime_v1.Creature`.",
+  "date": "2026-11-02",
+  "expected_parent_change": "canonical/swe_kernel/{verified_skill_crystallizer_v1,autonomous_awake_loop_v1,closed_loop_autonomous_controller_v1}.py + canonical/runtime/{live_brain_route_admission_v1,composer_route_v1,solve_v1,computer_env_v1,creature_runtime_v1}.py + canonical/tools/pr_c2_apply_time_broadening_benchmark_v1.py + canonical/tests/test_optimal_unified_creature_and_prc2_v1.py + canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json.",
+  "expected_parent_frontier_change": "Cross-shape `TEST_SUITE` skill recall lifts from `2/5` to `5/5` (`0/4` negative-control misapplications, `0` weak-verifier broadened proposals) while keeping stored rules context-anchored; concurrent `workspace_root` solves isolate cleanly via `ContextVar` across 8 worker threads without global mutation; `learn=False` leaves `flywheel_v1`, `transfer_learning_v1`, staging, macro, and routing-ledger stores byte-identical; and `creature_runtime_v1.Creature` unifies missing-slot gap intake, fail-closed/confined execution, and restart-continuous awake pulses (`K3=0`).",
+  "explicit_user_authorization": "Owner reviewed the post-merge #6593 architectural critique and 4-part optimal plan and explicitly directed: 'Execute the optimal.'",
+  "falsification_condition": "FALSIFIED if any `CALLER_PREDICATE` / `SYNTAX` / `COMPILATION` verifier receives a broadened candidate, if stored `pattern_tokens` lose context anchoring, if any of the 4 negative controls (`at_most`, `inclusive_loop`, `lower_bound`, `unrelated`) is misapplied, if concurrent `workspace_root` calls leak across threads or mutate `_BRAIN_CODE_ROOT`, if `learn=False` mutates or recalls from memory stores, or if any #6592 confinement/verification guard fails.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "3/13",
+    "interpretation": "CLOSES_PR_C2_APPLY_TIME_BROADENING_CONCURRENT_WORKSPACE_ISOLATION_STRICT_LEARN_FALSE_AND_SINGLE_CREATURE_COHESION_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.98,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "PR-C2 (`pr_c2_apply_time_broadening_benchmark_v1.py`): stored rule remains context-anchored (`['kw', 'return']`), `ProjectTestOracle` (`TEST_SUITE`) recall lifts from `2/5` to `5/5` (`return`, `if`, `while`, `and`, `method` all pass independent exhaustive `[-20,20]^2` audits), `0/4` negative-control misapplications, `0` broadened proposals to `CALLER_PREDICATE`. Thread-safe `ContextVar` scoping: `8/8` concurrent `workspace_root` threads isolated with zero `_BRAIN_CODE_ROOT` drift. Strict `learn=False`: byte-identical `flywheel_v1`, `transfer_learning_v1`, staging, and routing-ledger stores. All 28 PR #6592 safety/confinement test suites pass (`278/278`).",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/skill_verification_contract_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/runtime/goal_gap_statement_v1.py",
+    "canonical/runtime/ignorance_ledger_v1.py",
+    "canonical/runtime/computer_execution_boundary_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "a0105170c0e6488c0df5c3cb499a6042d2168321",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "DUPLICATE_SCOPE_ESCALATION_BLOCK_AND_UNSAFE_CALLER_PREDICATE_BROADENING",
+      "THREAD_UNSAFE_MODULE_GLOBAL_ROOT_MUTATION_IN_WITH_WORKSPACE_ROOT",
+      "MEMORY_READS_AND_WRITES_UNDER_EXPLICIT_LEARN_FALSE_CONTROL",
+      "DISCONNECTED_PARALLEL_AWAKE_LOOP_OUTSIDE_CREATURE_RUNTIME_V1"
+    ],
+    "expected_parent_level_state_change": "Cross-shape `TEST_SUITE` skill recall lifts from `2/5` to `5/5` (`0/4` negative-control misapplications, `0` weak-verifier broadened proposals) while keeping stored rules context-anchored; concurrent `workspace_root` solves isolate cleanly via `ContextVar` across 8 worker threads without global mutation; `learn=False` leaves `flywheel_v1`, `transfer_learning_v1`, staging, macro, and routing-ledger stores byte-identical; and `creature_runtime_v1.Creature` unifies missing-slot gap intake, fail-closed/confined execution, and restart-continuous awake pulses (`K3=0`).",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETED_DUPLICATE_ESCALATION_BLOCK_AND_GLOBAL_ROOT_MUTATION_COMPOSED_CONTEXTVAR_PROXY_TEST_SUITE_BROADENING_AND_SINGLE_CREATURE_ORGANISM",
+      "intrinsic_or_path_specific": "GENERAL__SAFE_SKILL_TRANSFER_THREAD_ISOLATION_HONEST_ABLATION_AND_ORGANISM_COHESION",
+      "surviving_causal_blocker": "UNIFIED_FRONT_DOOR_RETAINED_REPAIR_REQUIRES_SEPARATE_HUMAN_INDEPENDENT_VERIFICATION_AND_ADMITTED_OS_CONFINEMENT_CARRIER"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_MODEL_CALLS_ZERO_THIRD_PARTY_PACKAGES_STDLIB_CONTEXTVARS_AND_EXISTING_PROJECT_TEST_ORACLE_AND_CREATURE_ORGANS_ONLY",
+      "existing_inherited_routes_checked": [
+        "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+        "canonical/swe_kernel/skill_verification_contract_v1.py",
+        "canonical/runtime/creature_runtime_v1.py",
+        "canonical/runtime/goal_gap_statement_v1.py",
+        "canonical/runtime/ignorance_ledger_v1.py",
+        "canonical/runtime/computer_execution_boundary_v1.py"
+      ],
+      "external_existing_routes_checked": "Python 3.11 stdlib `contextvars.ContextVar`, `os.PathLike`, `sqlite3`, and `subprocess` fresh-interpreter audits.",
+      "surviving_gap": "INDEPENDENT_PERSONNEL_VERIFICATION_AND_ADMITTED_HOST_CONFINEMENT_FOR_FRONT_DOOR_REPAIR_ADAPTER"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "STORING_NARROWED_UNANCHORED_PATTERNS_AT_TEACH_TIME",
+        "ALLOWING_BROADENED_RECALL_UNDER_WEAK_BOOLEAN_CALLER_PREDICATES",
+        "WEAKENING_COMPUTER_EXECUTION_BOUNDARY_V1_TO_INFLATE_PROBE_SCORES"
+      ],
+      "real_outcome": "`TEST_SUITE`-gated apply-time narrowing reaches 5/5 cross-shape repairs with 0 misapplications and 0 weak-verifier leaks; 8-thread concurrent `workspace_root` execution is isolated via `ContextVar`; `learn=False` performs zero memory reads or writes; and `Creature` serves as the single continuous organism.",
+      "surviving_necessity": "Every path must preserve all 28 PR #6592 confinement, broker, and route-memory guards (`weakens_existing_guard: false`)."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_PROJECT_TEST_ORACLE_GOAL_GAP_STATEMENT_IGNORANCE_LEDGER_CONFINE_V1_AND_CREATURE_RUNTIME_V1",
+      "downstream_work_to_delete_or_supersede": "PARALLEL_STANDALONE_AWAKE_LIFECYCLE_OUTSIDE_CREATURE_RUNTIME_V1",
+      "fresh_reuse_plan": "MOUNT_AWAKE_SENSING_AND_GAP_INTAKE_DIRECTLY_ON_CREATURE_RUNTIME_V1_AND_GATE_BROADENING_ON_EXISTING_PROJECT_TEST_ORACLE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "CONTEXTVAR_PATHLIKE_PROXY_AVOIDS_200_CALLSITE_CHURN_AND_SINGLE_TEST_SUITE_ESCALATION_PIPELINE",
+      "search_stop_decision": "STOPPED_WHEN_PRC2_5_OF_5_BENCHMARK_8_THREAD_ISOLATION_LEARN_FALSE_CONTROLS_AND_ALL_28_PR6592_SUITES_PASSED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Teach-time narrowing corrupts 3/4 functions when recalled under weak predicates (`OPTIMAL_PLAN_20261102_V6.md` C0c); module-global `ROOT` assignment races under `ThreadPoolExecutor`; empty-store cold runs are not `learn=False` controls; parallel daemons fragment `Standing` and `Life`.",
+      "routes_ranked": [
+        "TEST_SUITE_GATED_APPLY_TIME_NARROWING_PLUS_CONTEXTVAR_SCOPING_STRICT_LEARN_FALSE_AND_UNIFIED_CREATURE__CHOSEN",
+        "TEACH_TIME_UNANCHORED_PATTERN_STORAGE",
+        "MODULE_GLOBAL_ROOT_MUTATION_AND_PARALLEL_DAEMON_LOOPS"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "FRESH_SUBPROCESS_EXHAUSTIVE_GRID_AUDITS_8_THREAD_CONCURRENT_WORKSPACE_PROBES_BYTE_EXACT_STORE_IMMUTABILITY_CHECKS_AND_ALL_28_PR6592_SUITES"
+    },
+    "real_outcome": "5/5 cross-shape `TEST_SUITE` recall (up from 2/5) with 0/4 misapplications and 0 weak-verifier leaks, 8/8 thread-safe `workspace_root` runs, byte-exact `learn=False` store isolation, and unified `Creature` continuity.",
+    "required_capability": "TEST_SUITE-gated apply-time sub-expression pattern narrowing, ContextVar workspace scoping, strict learn=False memory isolation, and unified Creature gap/pulse runtime",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "2_OF_5_CROSS_SHAPE_RECALL_ONLY",
+            "CORRECTNESS": "CALLER_PREDICATE_ESCALATION_HOLE_AND_THREAD_RACE",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "GLOBAL_ROOT_RACES_UNDER_CONCURRENCY",
+            "VERIFIABILITY": "LEARN_FALSE_STILL_TOUCHES_STORES",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "Measured on `ec94c97c`: context-anchored `return x <= hi` misses `if`, `while`, `and` (`2/5`); `_with_workspace_root` mutates global `ROOT`; `solve_v1` and `computer_env_v1.perform` lack `learn=False` memory exclusion."
+          ],
+          "qualification_evidence": [
+            "direct probe: `OPTIMAL_PLAN_20261102_V6.md` and `UNIFIED_LEARNING_MEMORY_POLICY_AUDIT_20261102.md`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_POST_6593_STATUS_QUO"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "5_OF_5_POSITIVE_SHAPES",
+            "CORRECTNESS": "CORRUPTS_3_OF_4_FUNCTIONS_UNDER_CALLER_PREDICATE",
+            "INCREMENTAL_COST": "LOW",
+            "RELIABILITY": "SILENT_MISAPPLICATION_ON_WEAK_VERIFIERS",
+            "VERIFIABILITY": "FAILS_NEGATIVE_CONTROL_C0C",
+            "WALL_CLOCK": "FAST_BUT_UNSOUND"
+          },
+          "evidence": [
+            "`OPTIMAL_PLAN_20261102_V6.md` C0c proved unguarded narrowed patterns corrupt `at_most`, `inclusive_loop`, and `lower_bound` (`3/4`) under syntax/compile/weak predicates."
+          ],
+          "qualification_evidence": [
+            "direct probe: `pr_c2_apply_time_broadening_benchmark_v1.py` weak-verifier control"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "BROADEN_PATTERNS_AT_TEACH_TIME_OR_UNDER_CALLER_PREDICATE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "5_OF_5_CROSS_SHAPE_RECALL_PLUS_UNIFIED_CREATURE",
+            "CORRECTNESS": "0_OF_4_MISAPPLICATIONS_0_WEAK_LEAKS_0_GUARD_WEAKENING",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_MODELS_STDLIB_ONLY",
+            "RELIABILITY": "8_THREAD_ISOLATED_AND_BYTE_EXACT_LEARN_FALSE",
+            "VERIFIABILITY": "278_PR6592_TESTS_PLUS_PRC2_BENCHMARK_AND_UNIFIED_MODEL_CHECKS_PASS",
+            "WALL_CLOCK": "SUB_MS_CANDIDATE_GEN_663MS_FULL_10_PROJECT_BENCHMARK"
+          },
+          "evidence": [
+            "Measured: `5/5` positive shapes pass independent `[-20,20]^2` audits, `0/4` negative misapplications, `0` weak-verifier broadened candidates, `8/8` concurrent threads isolated, `0` bytes mutated under `learn=False`."
+          ],
+          "qualification_evidence": [
+            "direct probe: `pr_c2_apply_time_broadening_benchmark_v1.py` and `test_optimal_unified_creature_and_prc2_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-02T16:29:47Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "CONTEXT_ANCHORED_ONLY_RECALL_GLOBAL_ROOT_MUTATION_PARTIAL_LEARN_FALSE_AND_PARALLEL_AWAKE_DAEMON",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external LLM or third-party dependency required: Python 3.11 `contextvars.ContextVar` + `os.PathLike` and in-tree `ProjectTestOracle`, `goal_gap_statement_v1`, `ignorance_ledger_v1`, `confine_v1`, and `creature_runtime_v1.Creature` solve every defect natively.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "apply-time sub-expression anti-unification pattern narrowing gated by behavioral test suite oracle"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python contextvars ContextVar os.PathLike transparent workspace root proxy thread isolation"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "strict ablation control zero memory read write isolation across multi-tier solver"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "single persistent autonomous agent runtime self-authored obligations ignorance ledger triage"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-02T16:29:47Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3.11 stdlib (`contextvars`, `os.PathLike`, `sqlite3`, `subprocess`, `ast`)",
+            "evidence": [
+              "DIRECT_PROBE: `test_optimal_unified_creature_and_prc2_v1.py` (4/4) and `pr_c2_apply_time_broadening_benchmark_v1.py` (5/5 recall, 0/4 misapplications) pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/* and canonical/swe_kernel/* organs (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: all 28 PR #6592 safety/confinement suites, 5 existing Creature suites (47/47), and 3 existing transfer benchmark suites (6/6) pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "OPTIMAL_PLAN_20261102_V6.md (PR-C2 empirical proof), UNIFIED_LEARNING_MEMORY_POLICY_AUDIT_20261102.md, COMPUTER_CREATURE_LOOP_PROBE_20261102.md, and canonical/runtime/creature_runtime_v1.py",
+          "canonical/swe_kernel/skill_verification_contract_v1.py (`ProjectTestOracle`) and canonical/runtime/computer_execution_boundary_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Getafix / Bader et al. OOPSLA 2019 hierarchical context-vs-core anti-unification paired with behavioral test-suite filtering"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "CPython `contextvars` PEP 567 per-context execution state isolation across threads and coroutines"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python 3.11 standard library documentation for `contextvars`, `os.PathLike`, and `sqlite3`"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_POST_6593_STATUS_QUO",
+      "BROADEN_PATTERNS_AT_TEACH_TIME_OR_UNDER_CALLER_PREDICATE",
+      "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1"
+    ],
+    "selected_route": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+    "selected_surviving_route": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+    "stop_condition": "STOP when PR-C2 hits 5/5 positive recall with 0/4 negative misapplications and 0 weak-verifier leaks, 8-thread concurrent `workspace_root` scoping passes, `learn=False` leaves all memory stores byte-identical, `Creature` continuity passes, `BRAIN_UNIFIED_MODEL_V1.json` passes 33/33 + 60/60, and all referee/orientation/load-bearing/drift gates pass.",
+    "why_selected_route_is_fastest_sufficient": "Delivers 5/5 cross-shape verified skill transfer, lock-free O(1) `ContextVar` workspace scoping, strict `learn=False` ablation, and single-organism `Creature` cohesion in 7 sensitive files with zero guard weakening."
+  },
+  "route_id": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
+  "stop_condition": "STOP when PR-C2 hits 5/5 positive recall with 0/4 negative misapplications and 0 weak-verifier leaks, 8-thread concurrent `workspace_root` scoping passes, `learn=False` leaves all memory stores byte-identical, `Creature` continuity passes, `BRAIN_UNIFIED_MODEL_V1.json` passes 33/33 + 60/60, and all referee/orientation/load-bearing/drift gates pass.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-02T16:29:47Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_RUNTIME_GENERALIZATION_CONCURRENCY_AND_MEMORY_ISOLATION_VERIFICATION_WITH_ZERO_EXTERNAL_BENCHMARK_RANK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "6249ede75a158908c3a73cc8ef0d0e1b8bea3e83",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        },
+        {
+          "git_blob_sha": "0aaf5577f15165f38e714e54cb1c20415eae232a",
+          "path": "canonical/runtime/solve_v1.py"
+        },
+        {
+          "git_blob_sha": "52e5a9f52a010f5270a9e6e41df5ad47134830b7",
+          "path": "canonical/runtime/creature_runtime_v1.py"
+        }
+      ],
+      "decisive_question": "DOES_TEST_SUITE_GATED_APPLY_TIME_BROADENING_LIFT_RECALL_TO_5_OF_5_WITH_ZERO_WEAK_VERIFIER_EXPOSURE_WHILE_CONTEXTVAR_ISOLATION_LEARN_FALSE_AND_SINGLE_CREATURE_PRESERVE_ALL_PR6592_GUARDS",
+      "falsifier_id": "RUN_PRC2_BENCHMARK_OPTIMAL_UNIFIED_CREATURE_SUITE_PR6592_SUITES_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "CALLER_PREDICATE_BROADENING_IS_REJECTED_STORED_PATTERNS_REMAIN_CONTEXT_ANCHORED_CONFINEMENT_BOUNDARY_IS_UNCHANGED_AND_ALL_4_NEGATIVE_CONTROLS_PASS",
+      "proposal_id": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. `computer_execution_boundary_v1` confinement/repair/static-diagnose guards remain 100% intact; `VerifiedSkillStore` actually tightens safety by rejecting `allow_scope_escalation=True` under `CALLER_PREDICATE` and gating apply-time pattern narrowing strictly on `ProjectTestOracle` (`TEST_SUITE`); `Creature.confined_verified_perform` fails closed with `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT` whenever OS confinement is unavailable."
+}

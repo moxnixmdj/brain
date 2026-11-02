@@ -515,6 +515,161 @@ class Creature:
             "ended": bool(self._life and self._life.is_over),
         }
 
+    # ------------------------------------------------------------ gap intake
+
+    def note_goal_gap(
+        self,
+        goal: str,
+        workspace_root: str | pathlib.Path | None = None,
+        *,
+        cost: float = 1.0,
+        ledger_path: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Translate missing typed goal slots (`goal_gap_statement_v1`) into ranked `ignorance_ledger_v1` gaps."""
+        if self._self is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        from canonical.runtime import goal_gap_statement_v1 as GG
+        from canonical.runtime import ignorance_ledger_v1 as IL
+
+        target_ledger = str(
+            pathlib.Path(ledger_path) if ledger_path is not None else (self.root / "ignorance_ledger.json")
+        )
+        report = GG.state_the_gap(goal, workspace_root)
+        outcome = str(report.get("outcome") or "")
+        cid = str(report.get("capability") or "unbound")
+        slot = str(report.get("slot") or "")
+        statement_text = str(report.get("statement") or "")
+        gap_ids: list[str] = []
+        if outcome == "SLOT_UNSTATED" and slot:
+            gid = IL.note(
+                f"missing required slot `{slot}` for {cid}",
+                why=statement_text[:240],
+                cost=float(cost),
+                path=target_ledger,
+            )
+            gap_ids.append(gid)
+        elif outcome in ("NO_CANDIDATE_REPORTED", "UNPARSEABLE_REPORT", "COMPILER_RAISED"):
+            gid = IL.note(
+                f"goal gap ({outcome})",
+                why=statement_text[:240],
+                cost=float(cost),
+                path=target_ledger,
+            )
+            gap_ids.append(gid)
+        ranked = IL.rank(limit=1, path=target_ledger)
+        top = ranked[0] if ranked else None
+        return {
+            "schema": "BRAIN_CREATURE_GOAL_GAP_INTAKE_V1",
+            "identity": self.identity,
+            "outcome": outcome,
+            "statement": report,
+            "gap_ids": gap_ids,
+            "ledger_path": target_ledger,
+            "next_to_close": top,
+        }
+
+
+def confined_verified_perform(
+    workspace_root: pathlib.Path | str,
+    *,
+    programs: Mapping[str, str] | None = None,
+    checks: Mapping[str, Callable[[pathlib.Path], bool]] | None = None,
+    timeout: int = 30,
+) -> Perform:
+    """Build a confined, independently checked `Perform` adapter for `Creature`.
+
+    Never weakens `computer_execution_boundary_v1`: if OS confinement (`confine_v1`)
+    is unavailable or no program/check is bound for `work.id`, returns an honest
+    fail-closed blocked outcome without executing host commands.
+    """
+    ws = pathlib.Path(workspace_root).resolve()
+    prog_map = dict(programs or {})
+    chk_map = dict(checks or {})
+
+    def _perform(work: M.Work, _creature: Creature) -> dict[str, Any]:
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        from canonical.runtime import confine_v1 as C
+        from canonical.runtime import solve_v1 as SV
+
+        program = prog_map.get(work.id)
+        checker = chk_map.get(work.id)
+        if program is None or checker is None:
+            return {
+                "ok": False,
+                "verified": None,
+                "correct": None,
+                "blocked": "UNBOUND_WORK_PROGRAM_OR_CHECK",
+            }
+        if not C.available():
+            return {
+                "ok": False,
+                "verified": True,
+                "correct": None,
+                "confined": False,
+                "blocked": boundary.STATUS,
+            }
+        exec_res = SV.act(str(ws), program, timeout=timeout, network=False)
+        if not exec_res.get("confined"):
+            return {
+                "ok": False,
+                "verified": True,
+                "correct": None,
+                "confined": False,
+                "blocked": boundary.STATUS,
+            }
+        passed_exec = exec_res.get("exit") == 0 and not exec_res.get("timed_out")
+        checked_ok = bool(passed_exec and checker(ws))
+        return {
+            "ok": checked_ok,
+            "verified": True,
+            "correct": checked_ok,
+            "confined": True,
+            "carrier_qualified": bool(exec_res.get("carrier_qualified")),
+            "blocked": None if checked_ok else "CHECK_FAILED",
+        }
+
+    return _perform
+
+
+def run_awake_creature_pulse(
+    workspace_root: pathlib.Path | str,
+    *,
+    state_root: pathlib.Path | str | None = None,
+    identity: str = "creature",
+    life: float = 40.0,
+    ledger_path: str | pathlib.Path | None = None,
+    skill_store_path: str | pathlib.Path | None = None,
+    workflow_db_path: str | pathlib.Path | None = None,
+    apply_verified_repairs: bool = False,
+    max_curriculum_lessons: int = 2,
+    channels: Sequence[str] | None = None,
+) -> dict[str, Any]:
+    """Run one unified zero-LLM (`K3 = 0`) awake pulse through the single `Creature` organism."""
+    from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+
+    ws = pathlib.Path(workspace_root).resolve()
+    ws_hash = hashlib.sha256(str(ws).encode("utf-8")).hexdigest()[:12]
+    c_root = (
+        pathlib.Path(state_root).resolve()
+        if state_root is not None
+        else (
+            pathlib.Path(ledger_path).resolve().parent / f"creature_{ws_hash}"
+            if ledger_path is not None
+            else pathlib.Path(tempfile.gettempdir()) / f"brain_creature_{ws_hash}"
+        )
+    )
+    daemon = AwakeAgencyDaemon(
+        ws,
+        ledger_path=ledger_path,
+        skill_store_path=skill_store_path,
+        workflow_db_path=workflow_db_path,
+        apply_verified_repairs=apply_verified_repairs,
+        creature_root=c_root,
+        creature_identity=identity,
+        creature_life=life,
+    )
+    return daemon.pulse(max_curriculum_lessons=max_curriculum_lessons, channels=channels)
+
 
 def boot(root: pathlib.Path | str, *, identity: str = "creature", life: float = 40.0
          ) -> Creature:

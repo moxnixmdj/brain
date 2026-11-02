@@ -444,9 +444,7 @@ def iter_crystallized_code_rule_candidates(source_text, rule):
     if rule.get('pattern_format') == _PY_EDIT.FORMAT:
         yield from _PY_EDIT.candidates(source_text, rule, _apply_token_rule)
     elif rule.get('pattern_format') is None:
-        candidate = _apply_token_rule(source_text, rule)
-        if candidate is not None:
-            yield candidate
+        yield from _iter_token_rule_candidates(source_text, rule)
 
 
 def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> str | None:
@@ -454,15 +452,92 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
     return next(iter_crystallized_code_rule_candidates(source_text, rule), None)
 
 
-def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
-                      _python_lex=False, _initial_bindings=None, _anchored=False) -> str | None:
-    """Match ``rule['pattern_tokens']`` against ``source_text`` via unification and rewrite."""
+def narrow_rule_at_apply_time(rule: Mapping[str, Any]) -> dict[str, Any] | None:
+    """PR-C2 apply-time sub-expression narrowing (stored rule stays context-anchored).
+
+    Strips unchanged leading/trailing syntactic frame tokens (such as ``return``)
+    down to the minimal changed core plus at most one adjacent operand hole on
+    each side, provided every replacement hole remains bound and at least one
+    hole and one concrete non-whitespace token remain in the pattern.
+    """
+    pat = [tuple(tok) for tok in (rule.get("pattern_tokens") or [])]
+    rep = [tuple(tok) for tok in (rule.get("replacement_tokens") or [])]
+    if not pat or not rep:
+        return None
+
+    pat_nw = [(idx, tok) for idx, tok in enumerate(pat) if tok[0] != "ws"]
+    rep_nw = [(idx, tok) for idx, tok in enumerate(rep) if tok[0] != "ws"]
+    if not pat_nw or not rep_nw:
+        return None
+
+    p_common = 0
+    while p_common < len(pat_nw) and p_common < len(rep_nw) and pat_nw[p_common][1] == rep_nw[p_common][1]:
+        p_common += 1
+
+    s_common = 0
+    while (
+        s_common < (len(pat_nw) - p_common)
+        and s_common < (len(rep_nw) - p_common)
+        and pat_nw[len(pat_nw) - 1 - s_common][1] == rep_nw[len(rep_nw) - 1 - s_common][1]
+    ):
+        s_common += 1
+
+    if p_common == 0 and s_common == 0:
+        return None
+
+    # Keep one adjacent operand hole around the changed core when available so
+    # e.g. `return ?id0 <= ?id1` -> `return ?id0 < ?id1` narrows to
+    # `?id0 <= ?id1` -> `?id0 < ?id1` rather than an unanchored `<=` -> `<`.
+    p_strip = p_common
+    if p_strip > 0 and pat_nw[p_strip - 1][1][0] in _HOLE_KIND:
+        p_strip -= 1
+
+    s_strip = s_common
+    if s_strip > 0 and pat_nw[len(pat_nw) - s_strip][1][0] in _HOLE_KIND:
+        s_strip -= 1
+
+    if p_strip == 0 and s_strip == 0:
+        return None
+    if p_strip + s_strip >= len(pat_nw) or p_strip + s_strip >= len(rep_nw):
+        return None
+
+    pat_start = pat_nw[p_strip][0]
+    pat_end = pat_nw[len(pat_nw) - 1 - s_strip][0] + 1
+    rep_start = rep_nw[p_strip][0]
+    rep_end = rep_nw[len(rep_nw) - 1 - s_strip][0] + 1
+
+    new_pat = pat[pat_start:pat_end]
+    new_rep = rep[rep_start:rep_end]
+    if new_pat == pat and new_rep == rep:
+        return None
+
+    bound_holes = {v for k, v in new_pat if k in _HOLE_KIND}
+    needed_holes = {v for k, v in new_rep if k in _HOLE_KIND}
+    has_concrete = any(k not in _HOLE_KIND and k != "ws" for k, _ in new_pat)
+    if not bound_holes or not has_concrete or not needed_holes.issubset(bound_holes):
+        return None
+
+    narrowed = dict(rule)
+    narrowed.pop("pattern_format", None)
+    narrowed["pattern_tokens"] = new_pat
+    narrowed["replacement_tokens"] = new_rep
+    return narrowed
+
+
+def _iter_token_rule_candidates(
+    source_text: str,
+    rule: Mapping[str, Any],
+    *,
+    _python_lex: bool = False,
+    _initial_bindings: Mapping[str, str] | None = None,
+    _anchored: bool = False,
+):
+    """Yield single-site rewrite candidates matching ``rule['pattern_tokens']``."""
     sql_mode = str(rule.get("language") or "") == "sql"
     pat_non_ws = [(k, v) for k, v in (rule.get("pattern_tokens") or []) if k != "ws"]
     if not pat_non_ws:
-        return None
+        return
 
-    # Tokenize source with byte/char offsets so exact surrounding formatting is preserved.
     src_tokens: list[tuple[str, str, int, int]] = []
     if _python_lex:
         src_tokens = [(k, v, a, b) for k, v, a, b in _PY_EDIT.tokens(source_text, _PYTHON_KEYWORDS_KEEP) if k != 'ws']
@@ -486,9 +561,10 @@ def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
             pos = m.end()
     plen = len(pat_non_ws)
     if len(src_tokens) < plen:
-        return None
+        return
 
     existing_idents = {val for kind, val, _, _ in src_tokens if kind == "ident"}
+    yielded: set[str] = set()
 
     for start_idx in range(1 if _anchored else len(src_tokens) - plen + 1):
         bindings: dict[str, str] = dict(_initial_bindings or {})
@@ -517,7 +593,6 @@ def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
 
         span_start = src_tokens[start_idx][2]
         span_end = src_tokens[start_idx + plen - 1][3]
-        # Preserve line indentation if multiline replacement occurs.
         line_start = source_text.rfind("\n", 0, span_start) + 1
         indent = ""
         for ch in source_text[line_start:span_start]:
@@ -530,11 +605,6 @@ def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
         out_parts: list[str] = []
         for rk, rv in rule.get("replacement_tokens") or []:
             if rk in _HOLE_KIND:
-                # Every hole kind binds the same way: the value this rule captured from the source
-                # is written back.  Listing only ``hole_id`` here meant a ``hole_num``/``hole_str``
-                # replacement emitted the hole's own name (``?num0``) as literal text, which no
-                # parser accepts -- the rule then failed its own mutated-twin gate and was silently
-                # never stored.
                 bound = bindings.get(rv)
                 if bound is None:
                     matched = False
@@ -563,9 +633,24 @@ def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
             replacement = ''.join(line if i == 0 or not line.strip() else indent + line
                                   for i, line in enumerate(lines))
         candidate = source_text[:span_start] + replacement + source_text[span_end:]
-        if candidate != source_text:
-            return candidate
-    return None
+        if candidate != source_text and candidate not in yielded:
+            yielded.add(candidate)
+            yield candidate
+
+
+def _apply_token_rule(source_text: str, rule: Mapping[str, Any], *,
+                      _python_lex=False, _initial_bindings=None, _anchored=False) -> str | None:
+    """Match ``rule['pattern_tokens']`` against ``source_text`` via unification and rewrite."""
+    return next(
+        _iter_token_rule_candidates(
+            source_text,
+            rule,
+            _python_lex=_python_lex,
+            _initial_bindings=_initial_bindings,
+            _anchored=_anchored,
+        ),
+        None,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -830,8 +915,12 @@ class VerifiedSkillStore:
             raise ValueError('UNKNOWN_VERIFICATION_KIND')
         if type(allow_operator_generalization) is not bool:
             raise ValueError('INVALID_OPERATOR_GENERALIZATION_SETTING')
+        if type(allow_scope_escalation) is not bool:
+            raise ValueError('INVALID_SCOPE_ESCALATION_SETTING')
         if allow_operator_generalization and (required_verification_kind != 'TEST_SUITE' or not scope_id or language.lower() != 'python'):
             raise ValueError('OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE')
+        if allow_scope_escalation and (required_verification_kind != 'TEST_SUITE' or not scope_id):
+            raise ValueError('SCOPE_ESCALATION_REQUIRES_SCOPED_TEST_SUITE')
         lang = language.lower()
         rules = _load_rules(self.db_path, lang)
 
@@ -910,7 +999,7 @@ class VerifiedSkillStore:
             seen_candidates: set[str] = {source_text}
             invalidated_mid_run = False
 
-            # Stage 1 (`SCOPE_STATEMENT`): fast direct skeleton unification (< 100 us)
+            # Stage 1 (`SCOPE_STATEMENT`): fast direct context-anchored unification (< 100 us)
             for candidate in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
                 if candidate is None or candidate in seen_candidates:
                     continue
@@ -923,34 +1012,35 @@ class VerifiedSkillStore:
                     invalidated_mid_run = True
                     break
 
-            # Opt-in scoped TEST_SUITE operator generalization (`allow_operator_generalization=True`)
-            if not invalidated_mid_run and allow_operator_generalization:
-                from canonical.swe_kernel import boundary_disjunction_normalization_v1 as semantic
-                from canonical.swe_kernel import operator_generalization_v1 as operator
-                try:
-                    proposals = semantic.propose_semantic_swaps(
-                        source_text, rule, operator_swaps=operator.propose_operator_swaps
-                    )
-                    for candidate in itertools.islice(proposals, 16):
+            # Stage 1B (`SCOPE_EXPRESSION` / PR-C2): apply-time context-stripped sub-expression
+            # narrowing. Stored rule remains context-anchored; weak verifiers (`CALLER_PREDICATE`,
+            # `SYNTAX`, `COMPILATION`) NEVER receive broadened patterns.
+            if (
+                not invalidated_mid_run
+                and required_verification_kind == "TEST_SUITE"
+                and learned_scope != "SCOPE_STATEMENT"
+            ):
+                narrowed = narrow_rule_at_apply_time(rule)
+                if narrowed is not None:
+                    for candidate in itertools.islice(_iter_token_rule_candidates(source_text, narrowed), 16):
                         if candidate is None or candidate in seen_candidates:
                             continue
                         seen_candidates.add(candidate)
                         verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
                         if verification is not None:
                             hit = _commit_verified_hit(
-                                rule, candidate, verification, "SCOPE_SEMANTIC", "operator_generalization"
+                                rule, candidate, verification, "SCOPE_EXPRESSION", "narrowed_pattern"
                             )
                             if hit is not None:
                                 return hit
                             invalidated_mid_run = True
                             break
-                except (semantic.NormalizationError, SyntaxError, ValueError):
-                    pass
 
-            # Stage 2 (`SCOPE_OPERATOR`), Stage 3 (`SCOPE_SEMANTIC`), & Stage 3B (`SCOPE_ALGEBRAIC` E-Graph)
+            # Stage 2 (`SCOPE_OPERATOR` / `SCOPE_SEMANTIC` / `SCOPE_ALGEBRAIC`): unified scoped
+            # TEST_SUITE generalization (single path; impossible under CALLER_PREDICATE).
             if (
                 not invalidated_mid_run
-                and allow_scope_escalation
+                and (allow_operator_generalization or allow_scope_escalation)
                 and learned_scope in ("SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
             ):
                 from canonical.swe_kernel import operator_generalization_v1 as _op_gen
@@ -984,6 +1074,7 @@ class VerifiedSkillStore:
                             ),
                             16,
                         )
+                        sem_strategy = "operator_generalization" if allow_operator_generalization else "semantic"
                         for candidate in sem_stream:
                             if candidate is None or candidate in seen_candidates:
                                 continue
@@ -991,18 +1082,19 @@ class VerifiedSkillStore:
                             verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
                             if verification is not None:
                                 hit = _commit_verified_hit(
-                                    rule, candidate, verification, "SCOPE_SEMANTIC", "semantic"
+                                    rule, candidate, verification, "SCOPE_SEMANTIC", sem_strategy
                                 )
                                 if hit is not None:
                                     return hit
                                 invalidated_mid_run = True
                                 break
-                    except Exception:
+                    except (_bd_norm.NormalizationError, SyntaxError, ValueError):
                         pass
                 if (
                     not invalidated_mid_run
+                    and allow_scope_escalation
                     and lang == "python"
-                    and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
+                    and learned_scope == "SCOPE_ALGEBRAIC"
                 ):
                     try:
                         from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (

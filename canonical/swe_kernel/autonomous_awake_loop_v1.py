@@ -297,10 +297,15 @@ class AwakeAgencyDaemon:
         r3_state_path: str | pathlib.Path | None = None,
         logical_attempt_id: str | None = None,
         apply_verified_repairs: bool = False,
+        creature_root: str | pathlib.Path | None = None,
+        creature_identity: str = "creature",
+        creature_life: float = 40.0,
     ) -> None:
         import hashlib
+        from canonical.runtime import creature_runtime_v1 as cr
 
         self.workspace_root = pathlib.Path(workspace_root).resolve()
+        ws_hash = hashlib.sha256(str(self.workspace_root).encode("utf-8")).hexdigest()[:12]
         self.ledger_path = str(ledger_path) if ledger_path else ledger.DEFAULT_STATE
         self.skill_store = VerifiedSkillStore(
             pathlib.Path(skill_store_path) if skill_store_path else None,
@@ -316,7 +321,16 @@ class AwakeAgencyDaemon:
         elif ledger_path is not None:
             self.r3_state_path = (pathlib.Path(ledger_path).resolve().parent / "r3_improvement_state.json")
         else:
-            self.r3_state_path = pathlib.Path(tempfile.gettempdir()) / f"brain_awake_r3_{hashlib.sha256(str(self.workspace_root).encode('utf-8')).hexdigest()[:12]}.json"
+            self.r3_state_path = pathlib.Path(tempfile.gettempdir()) / f"brain_awake_r3_{ws_hash}.json"
+        if creature_root is not None:
+            c_dir = pathlib.Path(creature_root).resolve()
+        elif journal_dir is not None:
+            c_dir = pathlib.Path(journal_dir).resolve() / "creature"
+        elif ledger_path is not None:
+            c_dir = pathlib.Path(ledger_path).resolve().parent / f"creature_{ws_hash}"
+        else:
+            c_dir = pathlib.Path(tempfile.gettempdir()) / f"brain_creature_{ws_hash}"
+        self.creature = cr.boot(c_dir, identity=creature_identity, life=creature_life)
         self.apply_verified_repairs = bool(apply_verified_repairs)
         self.cycle_count = 0
         self.history: list[dict[str, Any]] = []
@@ -552,22 +566,51 @@ class AwakeAgencyDaemon:
 
                 cow_mod = cand_targets[0]
                 rel_mod = cow_mod.relative_to(cow_root)
+                rel_tf_str = str(cow_tf.relative_to(cow_root))
                 before_src = cow_mod.read_text(encoding="utf-8")
                 test_src = cow_tf.read_text(encoding="utf-8")
                 oracle = _build_twin_callable_oracle(test_src, target_stem, before_src)
+                from canonical.swe_kernel.skill_verification_contract_v1 import ProjectTestOracle
+
+                _awake_scope = "awake/python-test-suite/v1"
+                _awake_contract = {
+                    "schema_version": 1,
+                    "scope_id": _awake_scope,
+                    "verification_kind": "TEST_SUITE",
+                    "dependencies": {},
+                    "preconditions": {},
+                }
+                project_oracle = ProjectTestOracle(
+                    cow_root,
+                    str(rel_mod),
+                    [rel_tf_str],
+                    _awake_scope,
+                )
 
                 def _verify_in_cow(cand_src: str) -> bool:
                     cow_write_text(cow_mod, cand_src)
                     passed, _ = _run_py_test_file(cow_tf, cow_root)
                     return passed
 
-                # Tier A: Instant recall from VerifiedSkillStore (including SCOPE_ALGEBRAIC E-Graph, mid_insertion & CST!)
+                # Tier A: Scoped TEST_SUITE recall (PR-C2 narrowed_pattern + operator/semantic/E-Graph),
+                # falling back strictly to context-anchored CALLER_PREDICATE (no broadening) for legacy rules.
                 recalled = self.skill_store.recall_and_apply_verified(
                     source_text=before_src,
                     language="python",
-                    verifier=_verify_in_cow,
+                    verifier=project_oracle,
+                    required_verification_kind="TEST_SUITE",
+                    scope_id=_awake_scope,
+                    context={"dependencies": {}, "preconditions": {}},
                     allow_scope_escalation=True,
                 )
+                if recalled is None:
+                    cow_write_text(cow_mod, before_src)
+                    recalled = self.skill_store.recall_and_apply_verified(
+                        source_text=before_src,
+                        language="python",
+                        verifier=_verify_in_cow,
+                        allow_scope_escalation=False,
+                    )
                 if recalled is not None:
                     patched = str(recalled["patched_source"])
                     cow_write_text(cow_mod, patched)
@@ -617,13 +660,24 @@ class AwakeAgencyDaemon:
                     )
                     continue
 
+                cow_write_text(cow_mod, before_src)
                 cryst = self.skill_store.crystallize_code_fix(
                     before_snippet=before_src,
                     after_snippet=solved_src,
                     language="python",
                     error_class="AWAKE_DISCOVERED_REPAIR",
-                    twin_oracle=oracle,
+                    contract=_awake_contract,
+                    training_verifier=project_oracle,
                 )
+                if not cryst.get("crystallized"):
+                    cryst = self.skill_store.crystallize_code_fix(
+                        before_snippet=before_src,
+                        after_snippet=solved_src,
+                        language="python",
+                        error_class="AWAKE_DISCOVERED_REPAIR",
+                        twin_oracle=oracle,
+                    )
+                cow_write_text(cow_mod, solved_src)
                 if cryst.get("crystallized") and cryst.get("skill_id"):
                     rule_exp.record_taught(
                         self.skill_store.db_path,
@@ -1147,10 +1201,41 @@ class AwakeAgencyDaemon:
             max_actions_per_round=4,
         )
 
+        closed_count = sum(1 for x in lessons if x.get("pass"))
+        repaired_count = len((exp_out or {}).get("repairs") or [])
+        any_verified_work = (closed_count + repaired_count) > 0
+        try:
+            pulse_cost = 0.25
+            if self.creature._self is not None:
+                self.creature._self.begin(
+                    f"awake:cycle:{self.cycle_count}",
+                    value=float(closed_count + repaired_count),
+                    cost=pulse_cost,
+                )
+            if self.creature._life is not None and self.creature._life.remaining >= pulse_cost:
+                self.creature._life.spend(pulse_cost)
+            if self.creature._standing is not None:
+                self.creature._standing.record(
+                    verified=True,
+                    correct=(True if any_verified_work else None),
+                )
+            if self.creature._self is not None:
+                self.creature._self.finish(
+                    {
+                        "ok": True,
+                        "gaps_closed": closed_count,
+                        "repairs": repaired_count,
+                    }
+                )
+            self.creature._save()
+        except Exception:
+            pass
+
         snap = {
             "schema": SCHEMA,
             "cycle": self.cycle_count,
             "k3_external_llm_calls": 0,
+            "creature": self.creature.report(),
             "context_features": ctx_feats,
             "meta_policy_recommendation": meta_recommendation,
             "meta_strategy_abstraction_candidate": meta_abstraction_candidate,
@@ -1161,7 +1246,7 @@ class AwakeAgencyDaemon:
             "cow_experimentation": exp_out,
             "scope_narrowing_audits": scope_audits,
             "gaps_studied": len(lessons),
-            "gaps_closed": sum(1 for x in lessons if x.get("pass")),
+            "gaps_closed": closed_count,
             "promoted_workflows": promoted_workflows,
             "open_gaps_remaining": ledger.open_gaps(path=self.ledger_path),
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
