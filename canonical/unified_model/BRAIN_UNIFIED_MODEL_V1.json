@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6622,
+  "research_index_records": 6624,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 432,
-  "source_index_modules": 1912
+  "source_index_entry_points": 433,
+  "source_index_modules": 1913
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f49b6da9585ed3c3310cb0a3e2cf75c03d0126e964b9104007af4bb252c17fb5"
+  "value": "75c9f764d107b5ca6c38bd0f8c7f4b5174f4746c80e3fe06d881f7f5b4781e67"
  },
  "engines": [
   {
@@ -176646,6 +176646,26 @@
    "action_id": "",
    "capability": false,
    "date": "2026-11-01",
+   "id": "research:canonical/verification/SELF_AUTHORED_OBLIGATIONS_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SELF_AUTHORED_OBLIGATIONS_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "92256a52b4a0864d5c70a193dbdedff8714dc5c6c827a98e97179e8c844d1f2f",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "authored": 1,
+    "counterexample": 1,
+    "known": 1,
+    "obligations": 1,
+    "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
    "id": "research:canonical/verification/SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
@@ -204245,6 +204265,51 @@
     "step": 1,
     "the_bound_success_checkpoint_verifier_demanded_a_rehashable_durable_artifact_from_every_step_so_a_terminal_verification_step_which_produces_only_a_verdict_could_never_enter_a_verified_episode_however_real_its_work_was": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f722b1b5d6105ce85a8c21d0875351fc009e79157dcffa45a027f0f68a44970d",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "agent": 1,
+    "assigned": 1,
+    "author": 1,
+    "author_own_obligations_and_defend_them_v1_20261102": 1,
+    "because": 1,
+    "benchmark": 1,
+    "board": 2,
+    "but": 1,
+    "change": 1,
+    "creature": 1,
+    "defend": 1,
+    "else": 1,
+    "eternity": 1,
+    "every": 1,
+    "existed": 1,
+    "failure": 1,
+    "find": 1,
+    "gaps": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "initiative": 1,
+    "invent": 1,
+    "invents": 1,
+    "longer": 1,
+    "menu": 1,
+    "mode": 1,
+    "no": 2,
+    "own": 2,
+    "person": 2,
+    "work": 2,
+    "written": 2
    }
   },
   {
@@ -279026,6 +279091,49 @@
     "semantic": 2,
     "truth": 2,
     "v1": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/self_authored_obligations_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/self_authored_obligations_v1.py",
+   "sha256": "d4edcd533818c29037f5c18ef8db6996813b561c0fd8d11d2c9744ebdf90075e",
+   "summary": "Work it was not given.",
+   "symbol_count": 10,
+   "symbols": [
+    "Proposal",
+    "Verdict",
+    "admit",
+    "author",
+    "capability_gap_proposals",
+    "cheat_worlds",
+    "main",
+    "metrics",
+    "naive_lexical_proposals",
+    "scan_repository"
+   ],
+   "terms": {
+    "admit": 1,
+    "author": 1,
+    "authored": 1,
+    "capability_gap_proposals": 1,
+    "cheat_worlds": 1,
+    "given": 1,
+    "main": 1,
+    "metrics": 1,
+    "naive_lexical_proposals": 1,
+    "not": 1,
+    "obligations": 1,
+    "proposal": 1,
+    "scan_repository": 1,
+    "self": 1,
+    "v1": 1,
+    "verdict": 1,
+    "work": 1
    }
   },
   {
