@@ -118,7 +118,47 @@ def _rename(args, root: pathlib.Path) -> dict:
             "answer": destination.relative_to(root).as_posix()}
 
 
-_HANDLERS = {"copy": _copy, "rename": _rename}
+def _backup(args, root: pathlib.Path) -> dict:
+    """`cp <file> <file>.bak` -- a destination the SENTENCE never has to state.
+
+    "Make a backup of a.txt" is an ordinary request with exactly one operand.  A
+    copy row cannot take it: a copy's destination is stated or refused, and
+    inventing one would write somewhere the caller never named.  A backup's
+    destination is not invented, it is DEFINED -- the source's own name plus
+    `.bak` -- so there is only one place it can go, and it is the same place
+    every time.
+
+    Two consequences, both refusals rather than conveniences:
+
+    * the source is RETAINED.  A backup that moves the original is a rename, and
+      a sentence that wanted a rename would have said so;
+    * an existing `.bak` is refused, always.  "Overwrite" is a word about a copy
+      of a file, not about the previous backup of it.
+    """
+    source = _safe(root, args.get("path") or args.get("input_path"), role="path")
+    if not source.is_file():
+        raise RuntimeError("PATH_NOT_A_REGULAR_FILE")
+    stated = str(args.get("goal") or "")
+    if source.name not in stated and source.relative_to(root).as_posix() not in stated:
+        raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:path:" + source.name)
+    destination = source.with_name(source.name + ".bak")
+    if destination.exists():
+        raise RuntimeError("A_BACKUP_OF_THIS_FILE_ALREADY_EXISTS:" + destination.name)
+    before = _digest(source)
+    destination.write_bytes(source.read_bytes())
+    after, retained = _digest(destination), _digest(source)
+    if after != before or retained != before:
+        destination.unlink(missing_ok=True)
+        raise RuntimeError("BACKUP_DID_NOT_ROUNDTRIP")
+    return {"path": source.relative_to(root).as_posix(),
+            "destination_path": destination.relative_to(root).as_posix(),
+            "source_sha256": before, "destination_sha256": after,
+            "byte_count": destination.stat().st_size,
+            "source_retained": True,
+            "answer": destination.relative_to(root).as_posix()}
+
+
+_HANDLERS = {"copy": _copy, "rename": _rename, "backup": _backup}
 
 
 def run(args, root):

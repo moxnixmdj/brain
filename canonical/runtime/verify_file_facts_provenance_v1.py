@@ -648,6 +648,70 @@ ROWS["file.rename.v1"] = {
 }
 
 
+def _check_backup() -> tuple[bool, list[dict]]:
+    """`file.backup.v1`: the copy lands beside the file, and the file survives.
+
+    The destination is defined rather than stated (`<name>.bak`), so there is no
+    destination slot to check here -- what is checked is the thing that makes a
+    backup a backup: the ORIGINAL is still there, byte for byte, and the copy is
+    the same bytes.  Both digests are recomputed in this file.
+    """
+    checks: list[dict] = []
+    for leftover in WORLD.glob("backup_me_*.txt*"):
+        leftover.unlink()
+    source = WORLD / "backup_me_file.txt"
+    _write(source, "keep this\nalso this\n")
+    digest = _sha256(source)
+    source_rel = _rel(source)
+
+    out = _adapter_run("file.backup.v1",
+                       {"command": "backup", "goal": "Make a backup of " + source_rel,
+                        "path": source_rel}, WORLD)
+    landed = source.with_name(source.name + ".bak")
+    checks.append({"name": "the backup lands beside the file, under its own name",
+                   "ok": landed.is_file(), "destination": _rel(landed)})
+    checks.append({"name": "the backup's bytes are the source's bytes",
+                   "ok": landed.is_file() and _sha256(landed) == digest,
+                   "digest_recomputed_here": digest,
+                   "adapter_reported_destination": out.get("destination_sha256")})
+    checks.append({"name": "the original is retained, byte for byte",
+                   "ok": source.is_file() and _sha256(source) == digest,
+                   "source_still_exists": source.exists(),
+                   "adapter_reported_source_retained": out.get("source_retained")})
+    checks.append({"name": "the adapter reports the run verified",
+                   "ok": out.get("output_verified") is True, "adapter_returned": out.get("output_verified")})
+
+    def refusal(label, args, expect, untouched=None):
+        try:
+            _adapter_run("file.backup.v1", dict(args, command="backup"), WORLD)
+        except Exception as exc:  # noqa: BLE001 - the code is what is checked
+            message = str(exc)
+            ok = expect in message and (untouched() if untouched else True)
+            return {"name": label, "ok": bool(ok), "expects": expect,
+                    "refused_with": message[:140]}
+        return {"name": label, "ok": False, "expects": expect, "refused_with": None}
+
+    checks.append(refusal("refuses a second backup over the first one",
+                          {"goal": "Make a backup of " + source_rel, "path": source_rel},
+                          "A_BACKUP_OF_THIS_FILE_ALREADY_EXISTS"))
+    outside = "/etc/hosts"
+    checks.append(refusal("refuses a file outside the repository",
+                          {"goal": "Make a backup of " + outside, "path": outside},
+                          "PATH_OUTSIDE_REPOSITORY"))
+    checks.append(refusal("refuses a sentence that names no file",
+                          {"goal": "Make a backup of something_else.txt", "path": source_rel},
+                          "PATH_NOT_STATED_IN_THE_SENTENCE"))
+    return all(c["ok"] for c in checks), checks
+
+
+ROWS["file.backup.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-BACKUP-001",
+    "claim": ("copies the stated file to <name>.bak beside it, keeps the original byte for "
+              "byte, reads both ends back, and refuses over an existing backup"),
+    "check": _check_backup,
+}
+
+
 def verify(cid: str) -> dict:
     row = ROWS[cid]
     world = _world()

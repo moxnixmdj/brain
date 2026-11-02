@@ -127,6 +127,25 @@ def test_rename_moves_the_bytes_and_leaves_nothing_behind() -> None:
     assert out["source_sha256"] == out["destination_sha256"], out
 
 
+def test_a_backup_lands_beside_the_file_and_keeps_the_original() -> None:
+    base = pathlib.Path(tempfile.mkdtemp(dir=str(ROOT / "canonical/astra_runtime/tmp")))
+    source = base / "note.txt"
+    source.write_text("payload\n", encoding="utf-8")
+    out = file_ops.run({"command": "backup", "path": _rel(source),
+                        "goal": "Make a backup of %s" % _rel(source)}, ROOT)
+    landed = base / "note.txt.bak"
+    assert landed.is_file(), "no backup was made"
+    assert landed.read_bytes() == source.read_bytes()
+    assert source.read_text(encoding="utf-8") == "payload\n", "the original was changed"
+    assert out["source_retained"] is True, out
+    assert out["source_sha256"] == out["destination_sha256"] == hashlib.sha256(b"payload\n").hexdigest()
+    # A second backup never eats the first one.
+    _refuses(lambda: file_ops.run({"command": "backup", "path": _rel(source),
+                                   "goal": "Make a backup of %s" % _rel(source)}, ROOT),
+             "A_BACKUP_OF_THIS_FILE_ALREADY_EXISTS")
+    assert landed.read_text(encoding="utf-8") == "payload\n"
+
+
 def test_the_command_table_is_closed() -> None:
     base = pathlib.Path(tempfile.mkdtemp(dir=str(ROOT / "canonical/astra_runtime/tmp")))
     source = base / "s.txt"

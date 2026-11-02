@@ -12904,6 +12904,83 @@
           "command": "rename"
         }
       }
+    },
+    "file.backup.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "backup",
+          "goal": "${input.goal}",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_ops",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "make a backup",
+        "back up the file",
+        "save a backup",
+        "a backup of the file"
+      ],
+      "limitations": [
+        "Writes <file>.bak beside the file and keeps the original; never moves or removes it.",
+        "Refuses when a <file>.bak already exists, when the file is outside the repository, and when the sentence names no file; reads the copy back and digests both ends."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "backup.file"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "byte_count",
+        "command",
+        "destination_path",
+        "destination_sha256",
+        "output_verified",
+        "path",
+        "schema",
+        "source_retained",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-BACKUP-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: a world is built with known bytes, the copy is read back and digested, and the source is re-digested after the write. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_ops",
+          "command": "backup"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
