@@ -157,8 +157,15 @@ oracle — the wall is breached. The strict oracle, never the loose one, gets to
 ### PR-B′ (small, concrete, executable today) — wire posture into the creature's choice
 **Serves: "sentient" (completes a definitional pillar).** Measured gap (§3.3): the creature records
 posture but never consults it. The fix is small and the organ already exists and is tested:
-carry `checkable` through `author_board` into `Work`, and have `step()` select via the posture-aware
-chooser (`S.choose(standing, …)`) instead of the posture-blind `M.choose_next(life, …)`.
+carry `checkable` through `author_board` into `Work`, and have `step()` select through a chooser that
+composes **both** gates — the life-budget gate `M.choose_next` already applies (`life.can_finish(cost)`)
+**and** the posture gate `S.choose` applies (decline uncheckable work when CAUTIOUS). I verified a naive
+swap is wrong: `S.choose(standing, obligations)` takes **no `Life` argument**, so replacing
+`M.choose_next` with it would start the unaffordable item in `test_it_never_starts_what_it_cannot_finish`
+(`("huge", value=100, cost=50)` at life 3.0 must stay `IDLE`). The smallest correct change keeps
+`M.choose_next`'s affordability filter and adds a posture filter over the same pool — both invariants
+hold. (`creature_runtime_v1.py` is not in `PROTECTED_PATHS`, so this is agent-editable; its test file is
+under `/tests/`, so new assertions go in a new test, not by editing the protected-style suite.)
 - This does **not** move 0/112 (posture changes *preference*, not the ability to author) — say so
   plainly; it is not a row-chase. It makes "history causally changes its behaviour" true **of the
   creature**, not just of the organ.
