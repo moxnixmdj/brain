@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6620,
+  "research_index_records": 6622,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 431,
-  "source_index_modules": 1911
+  "source_index_entry_points": 432,
+  "source_index_modules": 1912
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "77a11060e0c29f56e52cb7109cb2d07117be503b8d9e16db2a32f7fdac876dc6"
+  "value": "f49b6da9585ed3c3310cb0a3e2cf75c03d0126e964b9104007af4bb252c17fb5"
  },
  "engines": [
   {
@@ -137582,6 +137582,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "634fe58414ffc218747df1e7d990d61172a8a5b61b7ebcd36468674bcb48bba7",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "creature": 1,
+    "known": 1,
+    "stakes": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -214475,6 +214494,51 @@
    }
   },
   {
+   "action_id": "STAKES_AND_INITIATIVE_CHANGE_CHOICES_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/STAKES_AND_INITIATIVE_CHANGE_CHOICES_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/STAKES_AND_INITIATIVE_CHANGE_CHOICES_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7bae1aa5fb51881fa735641896fc888357ac3f57de982569fcfaa0bbb14900f7",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "absent": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "affected": 1,
+    "altering": 1,
+    "assigning": 1,
+    "attempts": 2,
+    "been": 1,
+    "benchmark": 1,
+    "but": 1,
+    "change": 2,
+    "choices": 1,
+    "continuous_self_v1": 1,
+    "creature": 1,
+    "diary": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "happened": 1,
+    "happening": 1,
+    "having": 1,
+    "initiative": 1,
+    "made": 1,
+    "moves": 1,
+    "needed": 1,
+    "no": 1,
+    "nobody": 1,
+    "not": 1,
+    "nothing": 1,
+    "now": 1,
+    "one": 1,
+    "organs": 1,
+    "thread": 2,
+    "wrong": 2
+   }
+  },
+  {
    "action_id": "STALE_GOVERNANCE_SNAPSHOT_COUNTS_TURN_THE_GUARDS_THAT_PROTECT_THEM_RED_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -235379,6 +235443,49 @@
     "v1": 1,
     "validate_semantic_root_slot": 1,
     "verification": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/creature_stakes_and_initiative_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/creature_stakes_and_initiative_v1.py",
+   "sha256": "601586a9e5c0602b1fc6cf854b83b5a86ff0898fc37a36428cfdc30a10a29725",
+   "summary": "The two organs the continuous self was missing: stakes, and initiative.",
+   "symbol_count": 9,
+   "symbols": [
+    "Obligation",
+    "Standing",
+    "StandingStore",
+    "choose",
+    "choose_random",
+    "compare_selection",
+    "demonstration_ledger",
+    "main",
+    "work"
+   ],
+   "terms": {
+    "choose": 1,
+    "choose_random": 1,
+    "compare_selection": 1,
+    "continuous": 1,
+    "creature": 1,
+    "demonstration_ledger": 1,
+    "initiative": 2,
+    "main": 1,
+    "missing": 1,
+    "obligation": 1,
+    "organs": 1,
+    "self": 1,
+    "stakes": 2,
+    "standing": 1,
+    "standingstore": 1,
+    "two": 1,
+    "v1": 1,
+    "work": 1
    }
   },
   {
