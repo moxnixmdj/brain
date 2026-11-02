@@ -612,3 +612,120 @@ def run_global_minimal_action_chase(
         "consumed_upstream_groups": list(world.state.get("consumed_upstream_groups") or []),
         "k3_external_llm_calls": 0,
     }
+
+
+def discover_mechanism_actively(
+    oracle: Callable[[Mapping[str, float]], float] | None = None,
+    *,
+    bounds: Mapping[str, tuple[float, float]] | None = None,
+    rows: Sequence[Mapping[str, Any]] | None = None,
+    target: str = "y",
+    inputs: Sequence[str] | None = None,
+    max_discriminator_rounds: int = 6,
+    holdout_points: Sequence[Mapping[str, float]] | None = None,
+) -> dict[str, Any]:
+    """Actively probe an unknown black-box law via `h100_zero_learned_mechanism_synthesizer_v1` until unique, then extrapolate (`K3 = 0`)."""
+    from canonical.runtime import h100_zero_learned_mechanism_synthesizer_v1 as h100
+
+    observed_rows: list[dict[str, Any]] = [dict(r) for r in (rows or []) if isinstance(r, Mapping)]
+    initial_probe_meta: dict[str, Any] | None = None
+    discriminator_trace: list[dict[str, Any]] = []
+
+    if oracle is not None and bounds is not None and len(observed_rows) < 5:
+        initial_probe_meta = h100.design_initial_probes(dict(bounds))
+        for pt in initial_probe_meta.get("points") or []:
+            pt_d = {str(k): float(v) for k, v in pt.items()}
+            observed_rows.append({**pt_d, str(target): float(oracle(pt_d))})
+
+    def _exact_laws(cands: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+        exact = [dict(c) for c in cands if float(c.get("nrmse", 1.0)) <= 1e-5]
+        return exact
+
+    disc_res = h100.discover(observed_rows, target=str(target), inputs=list(inputs) if inputs else None)
+    all_candidates = list(disc_res.get("candidates") or [])
+    viable = _exact_laws(all_candidates) or [dict(c) for c in all_candidates[:2]]
+
+    rounds_run = 0
+    while (
+        oracle is not None
+        and len(viable) > 1
+        and rounds_run < max(0, int(max_discriminator_rounds))
+    ):
+        prop = h100.propose_discriminator(viable, observed_rows)
+        if prop.get("status") != "DISCRIMINATOR_FOUND" or not isinstance(prop.get("point"), Mapping):
+            break
+        probe_pt = {str(k): float(v) for k, v in prop["point"].items()}
+        y_val = float(oracle(probe_pt))
+        observed_rows.append({**probe_pt, str(target): y_val})
+        rounds_run += 1
+        disc_res = h100.discover(observed_rows, target=str(target), inputs=list(inputs) if inputs else None)
+        all_candidates = list(disc_res.get("candidates") or [])
+        viable = _exact_laws(all_candidates)
+        discriminator_trace.append(
+            {
+                "round": rounds_run,
+                "probe_point": probe_pt,
+                "observed_target": y_val,
+                "disagreement_before": prop.get("disagreement"),
+                "remaining_exact_candidates": len(viable),
+            }
+        )
+
+    exact_final = _exact_laws(all_candidates)
+    best_cand = exact_final[0] if exact_final else (all_candidates[0] if all_candidates else None)
+    predictions: list[dict[str, Any]] = []
+    if best_cand is not None and holdout_points:
+        for h_pt in holdout_points:
+            pt_clean = {str(k): float(v) for k, v in h_pt.items()}
+            predictions.append(
+                {
+                    "point": pt_clean,
+                    "predicted": float(h100.predict(best_cand, pt_clean)),
+                }
+            )
+
+    return {
+        "schema": SCHEMA + "/active_mechanism_discovery",
+        "pass": len(exact_final) >= 1,
+        "unique": len(exact_final) == 1,
+        "status": "UNIQUE_MECHANISM_IDENTIFIED" if len(exact_final) == 1 else ("CANDIDATES_IDENTIFIED" if exact_final else "NO_MECHANISM_FOUND"),
+        "best_candidate": best_cand,
+        "exact_candidate_count": len(exact_final),
+        "candidate_count": len(all_candidates),
+        "candidates": exact_final or all_candidates,
+        "observations_used": len(observed_rows),
+        "discriminator_rounds": rounds_run,
+        "discriminator_trace": discriminator_trace,
+        "predictions": predictions,
+        "k3_external_llm_calls": 0,
+    }
+
+
+def induce_and_predict_grid_delta_rule(
+    training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]],
+    *,
+    test_grids: Sequence[Sequence[Sequence[int]]] | None = None,
+) -> dict[str, Any]:
+    """Induce exact 2D spatial/grid state-transition laws via `grid_delta_rule_inducer_v2` and predict novel grids (`K3 = 0`)."""
+    from canonical.runtime import grid_delta_rule_inducer_v2 as gdr
+
+    induced = gdr.induce(list(training_pairs))
+    ok = bool(
+        induced.get("status") == "VERIFIED_FACTORIZED_RULE_OPTIONS"
+        and induced.get("training_full_replay_verified") is True
+    )
+    preds: list[dict[str, Any]] = []
+    if ok and test_grids:
+        for g in test_grids:
+            p_out = gdr.predict(induced, g)
+            preds.append(dict(p_out))
+            if p_out.get("status") != "PREDICTED":
+                ok = False
+    return {
+        "schema": SCHEMA + "/grid_delta_induction",
+        "pass": ok,
+        "status": induced.get("status"),
+        "induced": induced,
+        "predictions": preds,
+        "k3_external_llm_calls": 0,
+    }

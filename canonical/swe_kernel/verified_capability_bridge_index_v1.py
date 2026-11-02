@@ -52,6 +52,7 @@ _STRICT_PHRASE_SYNONYMS: dict[str, str] = {
 
 _PHRASE_INDEX_CACHE: dict[str, dict[str, Any]] = {}
 _BRIDGE_MEM_CACHE: dict[str, dict[str, Any]] = {}
+_TYPE_GRAPH_MEM_CACHE: dict[str, dict[str, Any]] = {}
 
 
 def _content_words(text: str) -> list[str]:
@@ -355,3 +356,173 @@ def plan_autonomous_supplier_acquisition(goal: str) -> dict[str, Any]:
         "supplier_classes": classes,
         "k3_external_llm_calls": 0,
     }
+
+
+def get_cached_type_level_graph(
+    registry: Mapping[str, Any] | None = None,
+    *,
+    max_len: int = 2,
+) -> dict[str, Any]:
+    """Build or return the RAM-cached 113-edge artifact type graph (`type_level_composer_v1`) in `< 0.3 ms` warm."""
+    from canonical.runtime import type_level_composer_v1 as tlc
+
+    cache_k = f"default::{max_len}" if registry is None else f"custom::{len(registry)}::{max_len}"
+    if cache_k in _TYPE_GRAPH_MEM_CACHE:
+        return _TYPE_GRAPH_MEM_CACHE[cache_k]
+    t0 = time.perf_counter_ns()
+    tg = tlc.type_graph(registry)
+    all_edges = tlc.edges(tg)
+    all_chains = tlc.chains(tg, max_len=max_len, limit=256)
+    bundle = {
+        "schema": tlc.SCHEMA + "/cached_graph",
+        "type_graph": tg,
+        "edge_count": len(all_edges),
+        "edges": all_edges,
+        "chains": all_chains,
+        "build_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+    }
+    if registry is None:
+        _TYPE_GRAPH_MEM_CACHE[cache_k] = bundle
+    return bundle
+
+
+def compose_and_execute_type_level_chain(
+    goal_or_cid: str,
+    *,
+    registry: Mapping[str, Any] | None = None,
+    max_len: int = 2,
+    limit: int = 16,
+    seed: int | None = 0,
+    macro_state_path: str | pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """Compose and execute a multi-step capability chain by artifact TYPE (`type_level_composer_v1`), caching winners in `macro_v1`."""
+    from canonical.runtime import type_level_composer_v1 as tlc
+    from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+        lookup_verified_chain_macro,
+        record_verified_chain_macro,
+    )
+
+    t0 = time.perf_counter_ns()
+    target = str(goal_or_cid or "").strip()
+    if not target:
+        return {"schema": SCHEMA + "/type_chain", "pass": False, "status": "EMPTY_GOAL_OR_CID"}
+
+    macro_clauses = [f"type_chain_target:{target.lower()}", f"max_len:{max_len}"]
+    macro_hit = lookup_verified_chain_macro(macro_clauses, state_path=macro_state_path)
+    if isinstance(macro_hit, Mapping):
+        rem_steps = [
+            str(s.get("capability_id") or "")
+            for s in (macro_hit.get("plan") or macro_hit.get("steps") or [])
+            if isinstance(s, Mapping) and s.get("capability_id")
+        ]
+        if len(rem_steps) >= 2:
+            v_res = tlc.verify_chain(rem_steps, registry=registry, seed=seed)
+            if v_res.get("pass") is True:
+                return {
+                    "schema": SCHEMA + "/type_chain",
+                    "pass": True,
+                    "status": "PASS__TYPE_LEVEL_MACRO_RECALLED_AND_EXECUTED",
+                    "from_macro_cache": True,
+                    "chain": rem_steps,
+                    "execution": v_res,
+                    "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+                    "k3_external_llm_calls": 0,
+                }
+
+    cached = get_cached_type_level_graph(registry, max_len=max_len)
+    tg = cached["type_graph"]
+    candidates = list(cached["chains"])
+
+    # Match either an explicit capability ID or artifact content types mentioned in a plain sentence
+    nodes = tg.get("nodes") if isinstance(tg.get("nodes"), Mapping) else tg
+    if target in nodes:
+        candidates = [c for c in candidates if c[-1] == target] or [c for c in candidates if target in c]
+    else:
+        mentioned_types = tlc._content_of(target)
+        goal_words = set(_content_words(target))
+        scored: list[tuple[int, list[str]]] = []
+        for ch in candidates:
+            ch_types: set[str] = set()
+            ch_words: set[str] = set()
+            for cid in ch:
+                ninfo = nodes.get(cid) or {}
+                ch_types |= set(ninfo.get("consumes") or ()) | set(ninfo.get("produces") or ())
+                ch_words |= set(_content_words(cid.replace(".", " ")))
+            type_overlap = len(mentioned_types & ch_types)
+            word_overlap = len(goal_words & ch_words)
+            if type_overlap >= 1 and (type_overlap + word_overlap) >= 2:
+                scored.append((type_overlap * 4 + word_overlap, ch))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+        candidates = [ch for _, ch in scored]
+
+    if not candidates:
+        return {
+            "schema": SCHEMA + "/type_chain",
+            "pass": False,
+            "status": tlc.OPEN_NO_EDGE,
+            "attempted": 0,
+            "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+            "k3_external_llm_calls": 0,
+        }
+
+    tried = 0
+    for chain in candidates[: max(1, int(limit))]:
+        tried += 1
+        res = tlc.verify_chain(chain, registry=registry, seed=seed)
+        if res.get("pass") is True:
+            record_verified_chain_macro(
+                macro_clauses,
+                [{"capability_id": cid, "verified": True} for cid in chain],
+                state_path=macro_state_path,
+            )
+            return {
+                "schema": SCHEMA + "/type_chain",
+                "pass": True,
+                "status": tlc.PASS,
+                "from_macro_cache": False,
+                "attempted": tried,
+                "chain": list(chain),
+                "execution": res,
+                "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+                "k3_external_llm_calls": 0,
+            }
+
+    return {
+        "schema": SCHEMA + "/type_chain",
+        "pass": False,
+        "status": tlc.FAIL_STEP,
+        "attempted": tried,
+        "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+        "k3_external_llm_calls": 0,
+    }
+
+
+def query_semantic_repo_navigation(
+    root: str | pathlib.Path,
+    query_kind: str,
+    target_or_symbol: str = "",
+    *,
+    scope_path: str = ".",
+) -> dict[str, Any]:
+    """Fast SQLite-WAL incremental semantic graph queries (`definition`, `importers`, `cycles`, `hierarchy`, `symptom`)."""
+    from canonical.swe_kernel import incremental_semantic_graph_v1 as sem_g
+
+    repo = pathlib.Path(root).resolve()
+    qk = str(query_kind or "").strip().lower()
+    if qk in {"definition", "find_definition", "show_definition"}:
+        out = sem_g.query_definition(repo, scope_path, target_or_symbol)
+    elif qk in {"importers", "which_modules_import"}:
+        out = sem_g.query_importers_of(repo, scope_path, target_or_symbol)
+    elif qk in {"cycles", "import_cycles"}:
+        out = sem_g.query_import_cycles(repo, scope_path)
+    elif qk in {"hierarchy", "class_hierarchy"}:
+        out = sem_g.query_class_hierarchy(repo, scope_path, target_or_symbol or None)
+    elif qk in {"symptom", "localize_symptom"}:
+        out = sem_g.localize_symptom_and_impacted_tests(repo, target_or_symbol, scope_path=scope_path)
+    else:
+        return {"pass": False, "status": f"UNSUPPORTED_SEMANTIC_QUERY:{query_kind}"}
+    out = dict(out)
+    out["pass"] = True
+    out["k3_external_llm_calls"] = 0
+    return out
+

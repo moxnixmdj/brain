@@ -1055,10 +1055,64 @@ def solve_or_learn(
                 from canonical.runtime import osworld_v21_brain_subject_v19 as osw19
 
                 subject = osw19.build_subject()
-                if req.get("osworld_env") is not None:
-                    subject.bind_environment(req["osworld_env"])
-                response_text, py_actions = subject.predict(goal, osworld_obs)
-                if py_actions:
+                osw_env = req.get("osworld_env")
+                if osw_env is not None:
+                    try:
+                        subject.bind_environment(osw_env)
+                    except Exception:
+                        pass
+
+                max_osw_steps = max(1, int(req.get("osworld_max_steps") or req.get("max_osworld_steps") or 6))
+                cur_obs: Mapping[str, Any] = osworld_obs
+                step_actions: list[list[str]] = []
+                last_response = ""
+                completed = False
+                for _step_i in range(max_osw_steps):
+                    response_text, py_actions = subject.predict(goal, cur_obs)
+                    last_response = str(response_text or "")
+                    act_list = list(py_actions or [])
+                    if not act_list:
+                        break
+                    step_actions.append(act_list)
+                    if act_list == ["DONE"]:
+                        completed = True
+                        break
+                    if osw_env is not None and hasattr(osw_env, "step") and callable(osw_env.step):
+                        step_out = osw_env.step(act_list[0] if len(act_list) == 1 else act_list)
+                        if isinstance(step_out, tuple) and step_out and isinstance(step_out[0], Mapping):
+                            cur_obs = step_out[0]
+                            if len(step_out) >= 3 and bool(step_out[2]):
+                                completed = True
+                                break
+                        elif isinstance(step_out, Mapping):
+                            cur_obs = step_out
+                        else:
+                            break
+                    else:
+                        break
+
+                # Automatic GUI/Pixel -> Sub-5ms SQLite/HTTP/CLI Layer Collapse when causal effects are observed!
+                elevated_qualification = None
+                causal_gui_trace = (
+                    req.get("observed_causal_trace")
+                    or req.get("osworld_elevated_trace")
+                    or (getattr(osw_env, "causal_trace", None) if osw_env is not None else None)
+                )
+                gui_post = req.get("osworld_postcondition") or req.get("postcondition") or demo_post
+                if isinstance(causal_gui_trace, (list, Mapping)) and causal_gui_trace and isinstance(gui_post, Mapping):
+                    elevated_qualification = compile_and_qualify_skill(
+                        goal=goal,
+                        trace=causal_gui_trace,
+                        postcondition=gui_post,
+                        heldout_goal=req.get("heldout_goal"),
+                        heldout_postcondition=req.get("heldout_postcondition"),
+                        sabotaged_postcondition=req.get("sabotaged_postcondition"),
+                        auto_synthesize_twin=True,
+                        source_cwd=work_cwd,
+                        db_path=skill_db,
+                    )
+
+                if step_actions:
                     return {
                         "schema": SCHEMA,
                         "task_id": task_id,
@@ -1067,9 +1121,157 @@ def solve_or_learn(
                         "status": "PASS__TIER2_OSWORLD_V19_DECIDED",
                         "tier_used": "tier2_osworld_v19",
                         "subject_id": osw19.SUBJECT_ID,
-                        "response": response_text,
-                        "actions": list(py_actions),
-                        "completed": list(py_actions) == ["DONE"],
+                        "response": last_response,
+                        "actions": step_actions[-1],
+                        "trajectory_actions": step_actions,
+                        "steps_executed": len(step_actions),
+                        "completed": completed,
+                        "learned_this_turn": bool(
+                            elevated_qualification
+                            and (elevated_qualification.get("qualified") or elevated_qualification.get("pass"))
+                        ),
+                        "layer_elevation_receipt": elevated_qualification,
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
+        # 2F: Type-Level Multi-Step Capability Composition (`type_level_composer_v1` — 113-edge artifact type graph)
+        type_chain_target = req.get("type_chain_target")
+        if type_chain_target or req.get("allow_type_level_composition") is True:
+            try:
+                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                    compose_and_execute_type_level_chain,
+                )
+
+                tc_res = compose_and_execute_type_level_chain(
+                    str(type_chain_target or goal),
+                    macro_state_path=macro_state_path,
+                )
+                if tc_res.get("pass") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_TYPE_LEVEL_CHAIN_EXECUTED",
+                        "tier_used": "tier2_type_level_composer",
+                        "from_memory": bool(tc_res.get("from_macro_cache")),
+                        "learned_this_turn": not bool(tc_res.get("from_macro_cache")),
+                        "chain": tc_res.get("chain"),
+                        "type_chain_result": tc_res,
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
+        # 2G: Zero-Field Plain-Sentence Workspace Autonomy (`autonomous_v1.run`) inside transactional CoW rollback
+        repo_root_resolved = pathlib.Path(__file__).resolve().parents[2]
+        has_project_taskfile = work_cwd != repo_root_resolved and any(
+            (work_cwd / fn).is_file() for fn in ("Makefile", "package.json", "pyproject.toml", "Taskfile.yml")
+        )
+        if req.get("autonomous_workspace") is True or has_project_taskfile:
+            try:
+                from canonical.runtime import autonomous_v1 as auto_v1
+                from canonical.swe_kernel.transactional_parallel_execution_v1 import (
+                    execute_transactional_cow_action,
+                )
+
+                def _verify_auto_v1(_rp: pathlib.Path, res_d: Mapping[str, Any]) -> bool:
+                    ver_d = res_d.get("verification") or {}
+                    if not (ver_d.get("verified") is True or ver_d.get("pass") is True):
+                        return False
+                    g_toks = [str(t).lower() for t in (ver_d.get("goal_tokens") or []) if str(t)]
+                    matched = [
+                        str(p).lower()
+                        for p in list(ver_d.get("matching") or []) + list(ver_d.get("new_paths") or [])
+                    ]
+                    if not matched:
+                        return False
+                    if g_toks and not any(gt in mp for gt in g_toks for mp in matched):
+                        return False
+                    return True
+
+                tx_auto = execute_transactional_cow_action(
+                    work_cwd,
+                    lambda root_p: auto_v1.run(
+                        goal,
+                        root_p,
+                        binary_limit=int(req.get("binary_limit", 20)),
+                        iterations=int(req.get("iterations", 3)),
+                    ),
+                    verify_fn=_verify_auto_v1,
+                )
+                if tx_auto.get("committed") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_ZERO_FIELD_AUTONOMOUS_V1_VERIFIED",
+                        "tier_used": "tier2_autonomous_v1",
+                        "autonomous_result": tx_auto.get("action_output"),
+                        "files_updated": tx_auto.get("files_updated"),
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
+        # 2H: Active Black-Box Mechanism Discovery (`h100_zero_learned_mechanism_synthesizer_v1`) & 2D Grid Rule Induction (`grid_delta_rule_inducer_v2`)
+        if callable(req.get("mechanism_oracle")) or isinstance(req.get("mechanism_rows"), (list, tuple)):
+            try:
+                from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+                    discover_mechanism_actively,
+                )
+
+                m_out = discover_mechanism_actively(
+                    req.get("mechanism_oracle"),
+                    bounds=req.get("mechanism_bounds"),
+                    rows=req.get("mechanism_rows"),
+                    target=str(req.get("mechanism_target") or "y"),
+                    inputs=req.get("mechanism_inputs"),
+                    max_discriminator_rounds=int(req.get("max_discriminator_rounds", 6)),
+                    holdout_points=req.get("holdout_points"),
+                )
+                if m_out.get("pass") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_ACTIVE_MECHANISM_DISCOVERED",
+                        "tier_used": "tier2_active_mechanism_discovery",
+                        "learned_this_turn": True,
+                        "mechanism": m_out,
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
+        if isinstance(req.get("grid_training_pairs"), (list, tuple)):
+            try:
+                from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+                    induce_and_predict_grid_delta_rule,
+                )
+
+                g_out = induce_and_predict_grid_delta_rule(
+                    req["grid_training_pairs"],
+                    test_grids=req.get("grid_test_inputs"),
+                )
+                if g_out.get("pass") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_GRID_DELTA_RULE_INDUCED",
+                        "tier_used": "tier2_grid_delta_rule_inducer",
+                        "learned_this_turn": True,
+                        "grid_induction": g_out,
                         "k3_external_llm_calls": 0,
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }

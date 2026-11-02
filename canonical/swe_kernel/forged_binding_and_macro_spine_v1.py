@@ -404,3 +404,89 @@ def execute_or_learn_clause_macro(
         "steps": cold_steps,
         "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
     }
+
+
+def discover_and_verify_external_or_local_capability(
+    effect: str,
+    *,
+    limit_per_source: int = 5,
+    fixture_path: str | pathlib.Path | None = None,
+    producer_capability_id: str | None = None,
+    binary_name: str | None = None,
+) -> dict[str, Any]:
+    """Autonomously discover unbound local adapters, PATH tools, and federated ecosystem candidates (`capability_discovery` + `verify_pending_cli_binding`)."""
+    import shutil
+    import sys
+
+    from canonical.runtime import capability_discovery as cdisc
+
+    eff = str(effect or "").strip()
+    eff_toks = {t.lower() for t in eff.replace("_", " ").replace("-", " ").split() if len(t) >= 3}
+
+    # 1. Local dormant capabilities in `canonical/capabilities/**/*.py` & `canonical/runtime/bound_capabilities/*.py`
+    local_dormant: list[str] = []
+    if eff_toks:
+        for base_d in (REPO_ROOT / "canonical" / "capabilities", REPO_ROOT / "canonical" / "runtime" / "bound_capabilities"):
+            if not base_d.is_dir():
+                continue
+            for p in sorted(base_d.rglob("*.py")):
+                if p.stem.startswith("_") or p.stem in local_dormant:
+                    continue
+                stem_toks = {t.lower() for t in p.stem.split("_") if len(t) >= 2}
+                if eff_toks & stem_toks:
+                    local_dormant.append(p.stem)
+
+    # 2. Local PATH CLI binaries matching requested binary or effect tokens
+    local_binaries: dict[str, str] = {}
+    cand_bins = [binary_name] if binary_name else sorted(eff_toks)
+    for b_tok in cand_bins:
+        if not b_tok:
+            continue
+        found_bin = shutil.which(str(b_tok))
+        if found_bin:
+            local_binaries[str(b_tok)] = str(found_bin)
+
+    # 3. Federated capability discovery (`APT_METADATA_SNAPSHOT`, `PYPI`, `OFFICIAL_MCP_REGISTRY`)
+    fed = cdisc.search_all(eff, limit_per_source=max(1, int(limit_per_source)))
+
+    # 4. Optional staged independent CLI verification (`verify_pending_cli_binding.staged_independent_verify_for_producer`)
+    cli_verification: dict[str, Any] | None = None
+    if fixture_path is not None and producer_capability_id and local_binaries:
+        rt_dir = str((REPO_ROOT / "canonical" / "runtime").resolve())
+        added_sys = False
+        if rt_dir not in sys.path:
+            sys.path.insert(0, rt_dir)
+            added_sys = True
+        try:
+            from canonical.runtime import verify_pending_cli_binding as vpcb
+
+            first_bin = next(iter(local_binaries.values()))
+            cli_verification = dict(
+                vpcb.staged_independent_verify_for_producer(
+                    str(producer_capability_id),
+                    pathlib.Path(fixture_path).resolve(),
+                    pathlib.Path(first_bin),
+                    "cli",
+                )
+            )
+        except Exception as exc:
+            cli_verification = {"ok": False, "error": f"{type(exc).__name__}:{exc}"}
+        finally:
+            if added_sys and rt_dir in sys.path:
+                sys.path.remove(rt_dir)
+
+    candidates = list(fed.get("candidates") or [])
+    return {
+        "schema": SCHEMA + "/capability_discovery",
+        "effect": eff,
+        "pass": bool(local_dormant or local_binaries or candidates),
+        "local_dormant_adapters": local_dormant,
+        "local_path_binaries": local_binaries,
+        "federated_discovery": {
+            "sources": len(fed.get("results") or []),
+            "candidate_count": len(candidates),
+            "top_candidates": candidates[: max(1, int(limit_per_source))],
+        },
+        "staged_cli_verification": cli_verification,
+        "k3_external_llm_calls": 0,
+    }

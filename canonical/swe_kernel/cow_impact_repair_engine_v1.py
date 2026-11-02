@@ -156,16 +156,22 @@ def _extract_changed_method_pair(old_src: str, new_src: str) -> tuple[str, str] 
 
 
 def _iter_file_or_method_rule_candidates(src_txt: str, lang_rule: Mapping[str, Any], *, limit: int = 6) -> list[str]:
-    """Yield candidate file patches from `lang_rule` applied at file scope AND individual `ClassDef` method scope."""
+    """Yield candidate file patches from `lang_rule` applied at file scope AND individual `ClassDef` method scope, honoring `learned_scope`."""
     import textwrap
+    from canonical.swe_kernel import operator_generalization_v1 as op_gen
     from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
         iter_crystallized_code_rule_candidates,
     )
 
+    learned_scope = str(lang_rule.get("learned_scope") or "")
     out: list[str] = []
     for cand in itertools.islice(iter_crystallized_code_rule_candidates(src_txt, lang_rule), limit):
         if cand and cand != src_txt and cand not in out:
             out.append(cand)
+    if learned_scope != "SCOPE_STATEMENT" and len(out) < limit:
+        for op_cand in itertools.islice(op_gen.propose_operator_swaps(src_txt, lang_rule, language="python"), limit - len(out)):
+            if op_cand and op_cand != src_txt and op_cand not in out:
+                out.append(op_cand)
     if len(out) >= limit:
         return out[:limit]
     try:
@@ -207,43 +213,63 @@ def select_impacted_tests_fast(
     changed_rel_paths: Sequence[str],
     all_test_files: Sequence[pathlib.Path],
 ) -> dict[str, Any]:
-    """Compute the minimal impacted test slice via `code_tree_sitter_incremental_index_v1` + `code_tree_sitter_impact_v1`."""
+    """Compute the minimal impacted test slice via SQLite-WAL `IncrementalSemanticGraph` first (`< 5 ms` warm), falling back to `code_tree_sitter_impact_v1`."""
     t0 = time.perf_counter_ns()
     repo = pathlib.Path(repo_root).resolve()
-    idx_rel = ".brain_cow_ts_index.json"
-    imp_rel = ".brain_cow_ts_impact.json"
     selected_paths: list[pathlib.Path] = []
+    used_semantic_graph = False
     used_tree_sitter = False
+
+    # Fast Path 1: Content-addressed SQLite-WAL IncrementalSemanticGraph (no temp JSON files on disk!)
     try:
-        ts_index.run(
-            {
-                "source_root": ".",
-                "index_path": idx_rel,
-                "output_path": idx_rel,
-            },
-            repo,
-        )
-        imp_res = ts_impact.run(
-            {
-                "source_root": ".",
-                "index_path": idx_rel,
-                "changed_files": list(changed_rel_paths),
-                "output_path": imp_rel,
-            },
-            repo,
-        )
-        for p_rel in imp_res.get("selected_tests") or []:
-            cand_p = (repo / str(p_rel)).resolve()
-            if cand_p.is_file():
-                selected_paths.append(cand_p)
-        used_tree_sitter = True
+        from canonical.swe_kernel import incremental_semantic_graph_v1 as sem_graph
+
+        sem_res = sem_graph.query_impacted_tests(repo, ".", list(changed_rel_paths))
+        if sem_res.get("exact_hit") and sem_res.get("impacted_tests"):
+            for p_rel in sem_res.get("impacted_tests") or []:
+                cand_p = (repo / str(p_rel)).resolve()
+                if cand_p.is_file():
+                    selected_paths.append(cand_p)
+            if selected_paths:
+                used_semantic_graph = True
+                used_tree_sitter = True
     except Exception:
         selected_paths = []
-    finally:
-        for tmp_name in (idx_rel, imp_rel):
-            tp = repo / tmp_name
-            if tp.exists():
-                tp.unlink()
+
+    # Fast Path 2: Tree-sitter incremental index + impact fallback
+    if not selected_paths:
+        idx_rel = ".brain_cow_ts_index.json"
+        imp_rel = ".brain_cow_ts_impact.json"
+        try:
+            ts_index.run(
+                {
+                    "source_root": ".",
+                    "index_path": idx_rel,
+                    "output_path": idx_rel,
+                },
+                repo,
+            )
+            imp_res = ts_impact.run(
+                {
+                    "source_root": ".",
+                    "index_path": idx_rel,
+                    "changed_files": list(changed_rel_paths),
+                    "output_path": imp_rel,
+                },
+                repo,
+            )
+            for p_rel in imp_res.get("selected_tests") or []:
+                cand_p = (repo / str(p_rel)).resolve()
+                if cand_p.is_file():
+                    selected_paths.append(cand_p)
+            used_tree_sitter = True
+        except Exception:
+            selected_paths = []
+        finally:
+            for tmp_name in (idx_rel, imp_rel):
+                tp = repo / tmp_name
+                if tp.exists():
+                    tp.unlink()
 
     if not selected_paths:
         # Conservative fallback: run tests mentioning the changed module stems, else all tests
@@ -258,9 +284,38 @@ def select_impacted_tests_fast(
         "selected_tests": selected_paths,
         "selected_count": len(selected_paths),
         "total_tests": len(all_test_files),
+        "used_semantic_graph": used_semantic_graph,
         "used_tree_sitter": used_tree_sitter,
         "slice_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
     }
+
+
+def probe_concurrency_races_in_cow(
+    workspace_root: pathlib.Path | str,
+    *,
+    threads: int = 8,
+    iterations: int = 200,
+    timeout: float = 12.0,
+) -> dict[str, Any]:
+    """Run live multi-threaded concurrency race probing inside a zero-copy CoW clone via `multistep_repo_closed_loop_solver_v1`."""
+    from canonical.swe_kernel import multistep_repo_closed_loop_solver_v1 as mrs
+
+    ws = pathlib.Path(workspace_root).resolve()
+    with tempfile.TemporaryDirectory(prefix="brain_cow_race_") as tmp:
+        cow_root = pathlib.Path(tmp) / "repo"
+        clone_stats = create_hardlink_cow_clone(ws, cow_root)
+        probe_res = mrs.probe_concurrency_races_live(
+            cow_root,
+            threads=int(threads),
+            iterations=int(iterations),
+            timeout=float(timeout),
+        )
+        return {
+            "schema": SCHEMA,
+            "clone": clone_stats,
+            "race_probe": probe_res,
+            "races_found": bool(probe_res.get("races") or probe_res.get("race_detected") or probe_res.get("failures")),
+        }
 
 
 def _extract_focus_lines(fail_trace: str, rel_path: str) -> list[int]:
@@ -1089,18 +1144,28 @@ def repair_repository_in_cow_zygote(
             # Tier-0 Fast Path: Test `SKILL_RECALL` proposals FIRST before generating 60 STUN/AST/coupled candidates!
             recall_candidates: list[dict[str, str]] = []
             recall_modes: list[str] = []
+            misfired_recall_meta: list[tuple[str, str, str]] = []
             for row in localized[:2]:
                 rel_p = str(row["rel"])
                 orig_src = (cow_root / rel_p).read_text(encoding="utf-8")
                 for lang_rule in store.lookup_rules("python"):
-                    for r_cand in _iter_file_or_method_rule_candidates(orig_src, lang_rule, limit=6):
+                    if lang_rule.get("state") == "INVALIDATED":
+                        continue
+                    sid_tag = str(lang_rule.get("skill_id") or "")
+                    rule_cands = _iter_file_or_method_rule_candidates(orig_src, lang_rule, limit=6)
+                    added_for_rule = False
+                    for r_cand in rule_cands:
                         if r_cand and r_cand != orig_src:
                             recall_candidates.append({rel_p: r_cand})
-                            recall_modes.append(f"SKILL_RECALL:{lang_rule.get('skill_id')}")
+                            recall_modes.append(f"SKILL_RECALL:{sid_tag}")
+                            added_for_rule = True
+                    if added_for_rule and sid_tag:
+                        misfired_recall_meta.append((sid_tag, rel_p, orig_src))
 
             eval_res: dict[str, Any] = {"found": False}
             patch_candidates: list[dict[str, str]] = []
             candidate_modes: list[str] = []
+            scope_refinements: list[dict[str, Any]] = []
             if recall_candidates:
                 eval_res = evaluate_patch_batch_in_cow_zygote(
                     cow_root,
@@ -1113,32 +1178,104 @@ def repair_repository_in_cow_zygote(
                 if eval_res.get("found"):
                     patch_candidates = recall_candidates[:max_candidates]
                     candidate_modes = recall_modes[:max_candidates]
+                elif misfired_recall_meta:
+                    # Counterexample-driven rule scope refinement (`rule_scope_learning_v1` / `finite_capability_diagnosis`):
+                    # Recalled rule(s) matched structurally on `orig_src` yet EVERY produced candidate failed the target test slice!
+                    seen_misfired: set[tuple[str, str]] = set()
+                    for sid_tag, misfire_rel, misfire_orig in misfired_recall_meta:
+                        if (sid_tag, misfire_rel) in seen_misfired:
+                            continue
+                        seen_misfired.add((sid_tag, misfire_rel))
+                        try:
+                            def _verify_rule_cand(cand_txt: str, _rel: str = misfire_rel) -> bool:
+                                r_chk = evaluate_patch_batch_in_cow_zygote(
+                                    cow_root,
+                                    [{_rel: cand_txt}],
+                                    round_target_tests,
+                                    zygote=pool,
+                                )
+                                return bool(r_chk.get("found"))
+
+                            ref_rep = store.refine_scope_from_counterexample(
+                                sid_tag,
+                                {
+                                    "label": f"counterexample:{misfire_rel}",
+                                    "language": "python",
+                                    "source_text": misfire_orig,
+                                },
+                                verifier=_verify_rule_cand,
+                            )
+                            scope_refinements.append({"skill_id": sid_tag, "file": misfire_rel, **ref_rep})
+                        except Exception:
+                            pass
 
             if not eval_res.get("found"):
-                # Cold path: run full localization if skipped earlier + STUN + AST + Coupled synthesis
+                # Cold path: run full localization if skipped earlier + STUN + Whitebox Live-Trace/Dual-Span/Guard + AST + Coupled synthesis
                 if len(localized) < 2 and len(all_non_test_py) > 1:
                     full_loc = list(
                         coupled_loop._localize(cow_root, cow_root, test_files, fail_trace, max_files=8, max_symbols=6)
                     )
                     seen_rels = {str(r["rel"]) for r in localized}
                     localized = localized + [r for r in full_loc if str(r["rel"]) not in seen_rels]
+                    if len(localized) < 2:
+                        try:
+                            from canonical.swe_kernel import multistep_repo_closed_loop_solver_v1 as mrs
+
+                            diff_loc = mrs.localize_faults_by_differential_trace(
+                                cow_root,
+                                test_files=[str(tf.relative_to(cow_root)) for tf in round_target_tests],
+                                timeout=4.0,
+                            )
+                            for d_item in diff_loc.get("ranked_files") or diff_loc.get("suspect_files") or []:
+                                d_rel = str(d_item.get("file") if isinstance(d_item, Mapping) else d_item)
+                                if d_rel and d_rel not in seen_rels and (cow_root / d_rel).is_file():
+                                    localized.append({"rel": d_rel, "score": 1.0})
+                                    seen_rels.add(d_rel)
+                        except Exception:
+                            pass
+
+                try:
+                    from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wb_synth
+                except Exception:
+                    wb_synth = None  # type: ignore[assignment]
 
                 per_file_pools: list[tuple[str, list[str]]] = []
                 for row in localized[:2]:
                     rel_p = str(row["rel"])
                     orig_src = (cow_root / rel_p).read_text(encoding="utf-8")
+                    seen_file_cands: set[str] = {orig_src}
                     stun_cands = propose_stun_and_guard_repairs(orig_src, test_sources, max_candidates=12)
                     for sc in stun_cands:
-                        patch_candidates.append({rel_p: sc})
-                        candidate_modes.append("STUN_OR_GUARD_SYNTHESIS")
+                        if sc not in seen_file_cands:
+                            seen_file_cands.add(sc)
+                            patch_candidates.append({rel_p: sc})
+                            candidate_modes.append("STUN_OR_GUARD_SYNTHESIS")
+
+                    wb_cands: list[str] = []
+                    if wb_synth is not None:
+                        try:
+                            for wc in wb_synth.synthesize_candidates_for_file(
+                                cow_root / rel_p,
+                                cow_root,
+                                round_target_tests,
+                            )[:12]:
+                                if wc and wc not in seen_file_cands:
+                                    seen_file_cands.add(wc)
+                                    wb_cands.append(wc)
+                                    patch_candidates.append({rel_p: wc})
+                                    candidate_modes.append("WHITEBOX_TRACE_AND_DUAL_SYNTHESIS")
+                        except Exception:
+                            pass
 
                     focus_lns = _extract_focus_lines(fail_trace, rel_p) or dyn_focus_map.get(rel_p, [])
                     ast_cands = _single_file_ast_mutations(orig_src, max_candidates=20, focus_lines=focus_lns)
                     for ac in ast_cands:
-                        patch_candidates.append({rel_p: ac})
-                        candidate_modes.append("SINGLE_FILE_AST")
+                        if ac not in seen_file_cands:
+                            seen_file_cands.add(ac)
+                            patch_candidates.append({rel_p: ac})
+                            candidate_modes.append("SINGLE_FILE_AST")
 
-                    file_pool = (stun_cands + ast_cands)[:8]
+                    file_pool = (stun_cands + wb_cands + ast_cands)[:8]
                     if file_pool:
                         per_file_pools.append((rel_p, file_pool))
 
@@ -1250,6 +1387,7 @@ def repair_repository_in_cow_zygote(
                     "round_modes": round_modes,
                     "files_repaired": sorted(cumulative_patch.keys()),
                     "crystallized_skill_ids": crystallized_ids,
+                    "scope_refinements": scope_refinements,
                     "cst_skeletons_compiled": cst_skeletons_compiled,
                     "abstraction_signature_digests": abstraction_digests,
                     "candidates_evaluated": total_evaluated,

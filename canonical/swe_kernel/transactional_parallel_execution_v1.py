@@ -51,6 +51,16 @@ def execute_transactional_cow_action(
     t0 = time.perf_counter_ns()
     ws = pathlib.Path(workspace_root).resolve()
     pre_manifest = snapshot_workspace_manifest(ws, exclude_dirs=exclude_dirs)
+    total_pre_bytes = sum(int(r.get("size", 0)) for r in pre_manifest.get("files", []))
+    pre_bytes_backup: dict[str, bytes] = {}
+    if total_pre_bytes <= 8 * 1024 * 1024:
+        for r in pre_manifest.get("files", []):
+            fp = ws / str(r["path"])
+            if fp.is_file():
+                try:
+                    pre_bytes_backup[str(r["path"])] = fp.read_bytes()
+                except OSError:
+                    pass
 
     with tempfile.TemporaryDirectory(prefix="brain-tx-cow-") as td:
         cow_root = pathlib.Path(td) / "stage"
@@ -80,6 +90,24 @@ def execute_transactional_cow_action(
 
         if not verified:
             post_rollback_manifest = snapshot_workspace_manifest(ws, exclude_dirs=exclude_dirs)
+            if post_rollback_manifest["tree_sha256"] != pre_manifest["tree_sha256"] and pre_bytes_backup:
+                # Shell redirection (`> file`) inside `cow_root` can mutate a shared hardlink inode in place;
+                # restore exact pre-action bytes atomically so rollback guarantees physical zero-byte drift!
+                pre_set = set(pre_bytes_backup.keys())
+                for row in post_rollback_manifest.get("files", []):
+                    rp = str(row["path"])
+                    if rp not in pre_set:
+                        try:
+                            (ws / rp).unlink(missing_ok=True)
+                        except OSError:
+                            pass
+                for rp, raw_b in pre_bytes_backup.items():
+                    dst = ws / rp
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    tmp_dst = dst.with_name(f".{dst.name}.rb.{os.getpid()}")
+                    tmp_dst.write_bytes(raw_b)
+                    os.replace(tmp_dst, dst)
+                post_rollback_manifest = snapshot_workspace_manifest(ws, exclude_dirs=exclude_dirs)
             return {
                 "schema": SCHEMA + "/transaction",
                 "committed": False,

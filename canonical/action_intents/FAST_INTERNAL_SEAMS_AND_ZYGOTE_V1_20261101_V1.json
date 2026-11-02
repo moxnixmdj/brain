@@ -52,7 +52,8 @@
       "canonical/swe_kernel/transactional_parallel_execution_v1.py",
       "canonical/tests/test_four_wave_optimal_plan_v1.py",
       "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
-      "canonical/tests/test_optimal_four_stage_unified_organism_v1.py"
+      "canonical/tests/test_optimal_four_stage_unified_organism_v1.py",
+      "canonical/tests/test_self_expanding_awake_organism_v1.py"
     ],
     "route_class": "COMPOSE"
   },
@@ -366,7 +367,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-02T10:49:01Z",
+    "checked_at_utc": "2026-11-02T11:42:49Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,

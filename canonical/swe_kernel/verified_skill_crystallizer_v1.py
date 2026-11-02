@@ -1110,11 +1110,86 @@ class VerifiedSkillStore:
                             "UPDATE crystallized_skills SET pattern_json = ? WHERE skill_id = ?",
                             (json.dumps(cur_rule, separators=(",", ":")), skill_id),
                         )
+                        conn.execute("UPDATE skill_store_meta SET generation = generation + 1 WHERE id=1")
             finally:
                 conn.close()
             for key in [k for k in _MEM_SKILLS if k.startswith(f"{self.db_path.resolve()}::")]:
                 _MEM_SKILLS.pop(key, None)
         return {**report, "ok": True, "persisted_scope": resolved_scope}
+
+    def refine_scope_from_counterexample(
+        self,
+        skill_id: str,
+        instance: Mapping[str, Any],
+        verifier: Callable[[str], bool],
+    ) -> dict[str, Any]:
+        """Specialize over-broad rules to narrower sound scopes on counterexamples (`rule_scope_learning_v1`), invalidating only if `SCOPE_STATEMENT` itself misfires."""
+        from canonical.swe_kernel import rule_scope_learning_v1 as _rsl
+
+        conn = _connect(self.db_path)
+        try:
+            row = conn.execute(
+                "SELECT pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                (skill_id,),
+            ).fetchone()
+        finally:
+            conn.close()
+        if row is None:
+            return {"ok": False, "reason": "SKILL_NOT_FOUND", "skill_id": skill_id}
+        rule = json.loads(row[0])
+
+        stmt_out = _rsl.predicted_outcome("SCOPE_STATEMENT", rule, instance, verifier=verifier)
+        op_out = _rsl.predicted_outcome("SCOPE_OPERATOR", rule, instance, verifier=verifier)
+        sem_out = _rsl.predicted_outcome("SCOPE_SEMANTIC", rule, instance, verifier=verifier)
+
+        if stmt_out == _rsl.PROPOSES_UNVERIFIED:
+            self.invalidate(skill_id, f"COUNTEREXAMPLE_AT_SCOPE_STATEMENT:{instance.get('label', 'instance')}")
+            return {
+                "ok": True,
+                "skill_id": skill_id,
+                "action": "INVALIDATED",
+                "persisted_state": "INVALIDATED",
+                "outcomes": {"SCOPE_STATEMENT": stmt_out, "SCOPE_OPERATOR": op_out, "SCOPE_SEMANTIC": sem_out},
+            }
+
+        target_scope: str | None = None
+        if op_out == _rsl.PROPOSES_UNVERIFIED and stmt_out == _rsl.SILENT:
+            target_scope = "SCOPE_STATEMENT"
+        elif sem_out == _rsl.PROPOSES_UNVERIFIED and op_out == _rsl.SILENT:
+            target_scope = "SCOPE_OPERATOR"
+
+        if target_scope is not None:
+            conn = _connect(self.db_path)
+            try:
+                with conn:
+                    cur_row = conn.execute(
+                        "SELECT pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                        (skill_id,),
+                    ).fetchone()
+                    if cur_row is not None:
+                        cur_rule = json.loads(cur_row[0])
+                        cur_rule["learned_scope"] = target_scope
+                        cur_rule.setdefault("counterexamples", []).append(
+                            {"label": str(instance.get("label") or ""), "narrowed_to": target_scope}
+                        )
+                        conn.execute(
+                            "UPDATE crystallized_skills SET pattern_json = ? WHERE skill_id = ?",
+                            (json.dumps(cur_rule, separators=(",", ":")), skill_id),
+                        )
+                        conn.execute("UPDATE skill_store_meta SET generation = generation + 1 WHERE id=1")
+            finally:
+                conn.close()
+            for key in [k for k in _MEM_SKILLS if k.startswith(f"{self.db_path.resolve()}::")]:
+                _MEM_SKILLS.pop(key, None)
+            return {
+                "ok": True,
+                "skill_id": skill_id,
+                "action": "SPECIALIZED_SCOPE",
+                "persisted_scope": target_scope,
+                "outcomes": {"SCOPE_STATEMENT": stmt_out, "SCOPE_OPERATOR": op_out, "SCOPE_SEMANTIC": sem_out},
+            }
+
+        return self.narrow_rule_scope(skill_id, [instance], verifier=verifier)
 
     # ------------------------------------------------------------------ portability
     # A store inside one checkout is durable but not portable: a second computer starts empty and
@@ -1327,6 +1402,7 @@ class VerifiedSkillStore:
                 rule['state'] = 'INVALIDATED'
                 rule.setdefault('counterexamples', []).append({'reason': reason[:2000], 'candidate_sha256': counterexample_sha256})
                 conn.execute('UPDATE crystallized_skills SET pattern_json=? WHERE skill_id=?', (json.dumps(rule), skill_id))
+                conn.execute('UPDATE skill_store_meta SET generation = generation + 1 WHERE id=1')
                 return True
         finally:
             conn.close()
