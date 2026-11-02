@@ -2009,10 +2009,6 @@
     {
      "git_blob_sha": "1300dcc27568f70a67149cd467690a9f00238597",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
-    },
-    {
-     "git_blob_sha": "db3e11dbf57758efbe269ab66e77065712bd9a60",
-     "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],
    "decisive_question": "Does the capability that answers \"run the tests\" still have its correct report rolled back for want of a re-inspector, and can a measurement report claim a passing suite that its own exit status and tree contradict?",
