@@ -5674,7 +5674,15 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         except Exception:
             _clauses = None
         if _clauses and len(_clauses) >= 2:
+            from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+                lookup_verified_chain_macro,
+                record_verified_chain_macro,
+            )
             from canonical.swe_kernel.goal_dag_executor_v1 import execute_transactional_goal_dag
+
+            _macro_state = request.get("_macro_state_path") if isinstance(request, Mapping) else None
+            _macro_hit = lookup_verified_chain_macro(_clauses, state_path=_macro_state)
+            _macro_plan = list((_macro_hit or {}).get("plan") or [])
 
             _snap_rels: list[str] = []
             for _raw_p, _abs_p in goal_compiler._repo_paths(goal, ROOT):
@@ -5685,11 +5693,13 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                         _snap_rels.append(_rel_d)
 
             def _solve_dag_stage(_subgoal: str, _idx: int) -> dict[str, Any]:
-                _sub_req = {
+                _sub_req: dict[str, Any] = {
                     "task_id": f"{request.get('task_id')}_step{_idx + 1}",
                     "goal": _subgoal,
                     "_compound_substep": True,
                 }
+                if _ledger_db := (request.get("_routing_ledger_db") if isinstance(request, Mapping) else None):
+                    _sub_req["_routing_ledger_db"] = _ledger_db
                 _sres = _solve_request(_sub_req)
                 if not _sres.get("compiled_capability_id"):
                     _sres["compiled_capability_id"] = _capability_id_of(_sres)
@@ -5703,6 +5713,19 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             )
             _receipts = list(_dag.get("stage_receipts") or [])
             if _dag.get("ok") is not True:
+                if _macro_hit is not None and _macro_hit.get("key"):
+                    try:
+                        from canonical.runtime import macro_v1 as _m_mod
+
+                        _orig_m = _m_mod.STATE
+                        try:
+                            if _macro_state is not None:
+                                _m_mod.STATE = pathlib.Path(_macro_state).resolve()
+                            _m_mod.note_failure(str(_macro_hit["key"]))
+                        finally:
+                            _m_mod.STATE = _orig_m
+                    except Exception:
+                        pass
                 _f_idx = _dag.get("failed_stage_index")
                 _f_res = _dag.get("failed_result") or {}
                 return _fail(
@@ -5721,6 +5744,11 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     ],
                 )
             _cids = [str(r["capability_id"]) for r in _receipts if r.get("capability_id")]
+            _macro_saved = record_verified_chain_macro(
+                _clauses,
+                [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in _receipts],
+                state_path=_macro_state,
+            )
             _merged_exec = [item for r in _receipts for item in (r.get("execution") or [])]
             _answers = [r["answer"] for r in _receipts if r.get("answer") is not None]
             return {
@@ -5733,6 +5761,9 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 "semantic_acceptance_complete": True,
                 "compiled_capability_id": _cids[-1] if _cids else None,
                 "selected_plan": _cids,
+                "from_macro": bool(_macro_hit is not None),
+                "macro_recorded": bool(_macro_saved),
+                "macro_key": (_macro_hit or {}).get("key"),
                 "execution": _merged_exec,
                 "compound_steps": [
                     {"clause": r.get("clause"), "status": r.get("status"), "capability_id": r.get("capability_id")}

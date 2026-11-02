@@ -942,11 +942,21 @@ class UnifiedModel:
         capability_id: str | None = None,
         instance_id: str | None = None,
         context_paths: Iterable[str] | None = None,
+        cwd: str | Path | None = None,
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
         if requested == "RECALL":
             return self.recall(goal)
+        if requested == "SOLVE_OR_LEARN":
+            return self.act_or_learn(
+                goal,
+                inputs=inputs,
+                capability_id=capability_id,
+                instance_id=instance_id,
+                context_paths=context_paths,
+                cwd=cwd,
+            )
 
         routing: dict[str, Any] | None = None
         if capability_id:
@@ -968,6 +978,87 @@ class UnifiedModel:
             return self._dispatch_engine(goal, chosen, inputs, routing)
         return self._execute_capability(
             goal, chosen, inputs, routing, instance_id, context_paths
+        )
+
+    def act_or_learn(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        capability_id: str | None = None,
+        instance_id: str | None = None,
+        context_paths: Iterable[str] | None = None,
+        cwd: str | Path | None = None,
+        db_path: str | Path | None = None,
+        forged_state_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Single unified front door (`K3 = 0`): compiled model -> forged skills -> 4-tier `solve_or_learn`."""
+        from canonical.runtime.one_shot_reality_closure_v2 import REQUIRED_ATTEMPT_ORDER
+        from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
+        from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+            match_and_invoke_forged_for_goal,
+        )
+
+        # 1. REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & bindable
+        is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
+        if not is_forged_cid:
+            primary = self.solve(
+                goal,
+                inputs=inputs,
+                mode="AUTO",
+                capability_id=capability_id,
+                instance_id=instance_id,
+                context_paths=context_paths,
+            )
+            if primary.get("pass") is True or capability_id is not None:
+                primary["attempt_order_contract"] = list(REQUIRED_ATTEMPT_ORDER)
+                return primary
+        else:
+            primary = {"pass": False, "reason": "FORGED_CAPABILITY_TARGETED"}
+
+        # 2. Check self-forged capabilities (`forged.*`) with independent byte re-read
+        try:
+            forged_out = match_and_invoke_forged_for_goal(
+                goal,
+                root=cwd or ROOT,
+                state_path=forged_state_path,
+                explicit_args=inputs,
+            )
+            if forged_out is not None and forged_out.get("pass") is True:
+                return self._envelope(
+                    operation="SOLVE_OR_LEARN",
+                    goal=goal,
+                    status="PASS__FORGED_CAPABILITY_EXECUTED_AND_BYTE_VERIFIED",
+                    **{"pass": True},
+                    reason=None,
+                    capability_id=forged_out["capability_id"],
+                    forged_execution=forged_out,
+                    attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+                )
+        except Exception:
+            pass
+
+        # 3. Escalate into 4-tier zero-LLM `solve_or_learn` (preserves honest fail-closed refusals!)
+        req_payload: dict[str, Any] = {"goal": goal}
+        if inputs:
+            req_payload.update(dict(inputs))
+        if forged_state_path is not None:
+            req_payload["forged_state_path"] = str(forged_state_path)
+        ctrl_out = solve_or_learn(
+            req_payload,
+            cwd=cwd or ROOT,
+            db_path=str(db_path) if db_path is not None else None,
+        )
+        passed = ctrl_out.get("pass") is True
+        return self._envelope(
+            operation="SOLVE_OR_LEARN",
+            goal=goal,
+            status=str(ctrl_out.get("status") or ("PASS__AUTONOMOUS_SOLVED" if passed else "FAIL_CLOSED")),
+            **{"pass": bool(passed)},
+            reason=None if passed else str(ctrl_out.get("failure_class") or ctrl_out.get("status") or primary.get("reason")),
+            tier_used=ctrl_out.get("tier_used"),
+            autonomous_result=ctrl_out,
+            attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
         )
 
     # --------------------------------------------------------------- internals
@@ -1423,7 +1514,7 @@ def main(argv: list[str] | None = None) -> int:
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
-    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL"])
+    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL", "SOLVE_OR_LEARN"])
     solve_p.add_argument("--capability-id", default=None)
     solve_p.add_argument("--instance-id", default=None)
     ns = parser.parse_args(argv)

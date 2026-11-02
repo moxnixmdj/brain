@@ -35,12 +35,51 @@ SCHEMA = "PROJECT_BRAIN_VERIFIED_CAPABILITY_BRIDGE_INDEX_V1"
 _ARTICLES = frozenset({"a", "an", "the", "all", "any", "current", "existing"})
 _WORD_RE = re.compile(r"[a-z0-9]+")
 
+# Strict zero-weight verb/qualifier canonicalization used ONLY inside multi-word (`>= 2` words)
+# ordered phrase matching (`_contains_ordered_phrase`). Object-role nouns (`parameter`, `symbol`,
+# `variable`, `function`, `method`, `class`) are intentionally NEVER merged.
+_STRICT_PHRASE_SYNONYMS: dict[str, str] = {
+    "locate": "find",
+    "identify": "find",
+    "spot": "detect",
+    "unreferenced": "unused",
+    "calculate": "compute",
+    "validate": "verify",
+    "produce": "generate",
+    "eliminate": "remove",
+    "erase": "delete",
+}
+
 _PHRASE_INDEX_CACHE: dict[str, dict[str, Any]] = {}
 _BRIDGE_MEM_CACHE: dict[str, dict[str, Any]] = {}
 
 
 def _content_words(text: str) -> list[str]:
     return [w for w in _WORD_RE.findall(str(text or "").lower()) if w and w not in _ARTICLES]
+
+
+def _words_equivalent(gw: str, pw: str) -> bool:
+    if gw == pw:
+        return True
+    if len(pw) >= 4 and (
+        gw == pw + "s"
+        or pw == gw + "s"
+        or (pw.endswith("y") and gw == pw[:-1] + "ies")
+        or (gw.endswith("y") and pw == gw[:-1] + "ies")
+    ):
+        return True
+    cg = _STRICT_PHRASE_SYNONYMS.get(gw, gw)
+    cp = _STRICT_PHRASE_SYNONYMS.get(pw, pw)
+    return cg == cp
+
+
+def induce_zero_weight_semantic_roles(text: str) -> dict[str, Any]:
+    """Delegate finite-ontology input/target role normalization to `h100_zero_learned_semantic_paraphrase_v1`."""
+    from canonical.runtime.h100_zero_learned_semantic_paraphrase_v1 import (
+        induce_semantic_roles,
+    )
+
+    return dict(induce_semantic_roles(text))
 
 
 def _contains_ordered_phrase(goal_words: Sequence[str], phrase_words: Sequence[str], *, max_gap: int = 2) -> bool:
@@ -51,7 +90,7 @@ def _contains_ordered_phrase(goal_words: Sequence[str], phrase_words: Sequence[s
         return False
     first = phrase_words[0]
     for i in range(n - m + 1):
-        if goal_words[i] != first:
+        if not _words_equivalent(goal_words[i], first):
             continue
         pos = i
         matched = True
@@ -59,9 +98,7 @@ def _contains_ordered_phrase(goal_words: Sequence[str], phrase_words: Sequence[s
             found_next = -1
             upper = min(n, pos + 1 + max_gap + 1)
             for j in range(pos + 1, upper):
-                # Allow singular/plural match (`test` vs `tests`, `dependency` vs `dependencies`)
-                gw = goal_words[j]
-                if gw == pw or (len(pw) >= 4 and (gw == pw + "s" or pw == gw + "s" or (pw.endswith("y") and gw == pw[:-1] + "ies") or (gw.endswith("y") and pw == gw[:-1] + "ies"))):
+                if _words_equivalent(goal_words[j], pw):
                     found_next = j
                     break
             if found_next < 0:

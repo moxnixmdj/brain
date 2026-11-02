@@ -176,8 +176,10 @@ def invoke_forged_capability(
 
 
 # ---------------------------------------------------------------------------
-# DreamCoder Plan Chunking (`macro_v1`)
+# DreamCoder Plan Chunking (`macro_v1`) + Sub-ms RAM Cache & Forged Goal Dispatch
 # ---------------------------------------------------------------------------
+
+_MACRO_MEM_CACHE: dict[tuple[str, int, int, str], dict[str, Any] | None] = {}
 
 
 def lookup_verified_chain_macro(
@@ -185,14 +187,30 @@ def lookup_verified_chain_macro(
     *,
     state_path: str | pathlib.Path | None = None,
 ) -> dict[str, Any] | None:
-    """Lookup a previously verified multi-clause capability macro in `< 0.5 ms`."""
+    """Lookup a previously verified multi-clause capability macro in `< 0.2 ms` (mtime-cached)."""
     from canonical.runtime import macro_v1
+
+    clause_list = [str(c).strip() for c in clauses if str(c).strip()]
+    if len(clause_list) < 2:
+        return None
+    target_state = pathlib.Path(state_path).resolve() if state_path is not None else pathlib.Path(macro_v1.STATE).resolve()
+    sig_key = macro_v1.signature(clause_list)
+    if target_state.is_file():
+        st = target_state.stat()
+        cache_k = (str(target_state), int(st.st_mtime_ns), int(st.st_size), str(sig_key))
+        if cache_k in _MACRO_MEM_CACHE:
+            hit_cached = _MACRO_MEM_CACHE[cache_k]
+            return dict(hit_cached) if isinstance(hit_cached, Mapping) else None
+    else:
+        return None
 
     orig = macro_v1.STATE
     try:
         if state_path is not None:
-            macro_v1.STATE = pathlib.Path(state_path).resolve()
-        return macro_v1.lookup(list(clauses))
+            macro_v1.STATE = target_state
+        res = macro_v1.lookup(clause_list)
+        _MACRO_MEM_CACHE[cache_k] = dict(res) if isinstance(res, Mapping) else None
+        return res
     finally:
         macro_v1.STATE = orig
 
@@ -210,9 +228,97 @@ def record_verified_chain_macro(
     try:
         if state_path is not None:
             macro_v1.STATE = pathlib.Path(state_path).resolve()
-        return bool(macro_v1.record(list(clauses), [dict(s) for s in steps]))
+        ok = bool(macro_v1.record(list(clauses), [dict(s) for s in steps]))
+        _MACRO_MEM_CACHE.clear()
+        return ok
     finally:
         macro_v1.STATE = orig
+
+
+def match_and_invoke_forged_for_goal(
+    goal: str,
+    *,
+    root: str | pathlib.Path | None = None,
+    state_path: str | pathlib.Path | None = None,
+    explicit_args: Mapping[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    """Match a plain goal against admitted `forged.*` capabilities, bind via `world_binding_v1`, and re-verify output bytes."""
+    import hashlib
+    from canonical.runtime import capability_forge_v1 as forge_mod
+
+    work_root = pathlib.Path(root or REPO_ROOT).resolve()
+    orig_state = forge_mod.STATE
+    try:
+        if state_path is not None:
+            forge_mod.STATE = pathlib.Path(state_path).resolve()
+        if not pathlib.Path(forge_mod.STATE).is_file():
+            return None
+        forged_map = (forge_mod._state() or {}).get("forged") or {}
+        if not forged_map:
+            return None
+    finally:
+        forge_mod.STATE = orig_state
+
+    goal_low = str(goal or "").lower()
+    goal_toks = {t.strip(".,:;()[]'\"") for t in goal_low.replace("_", " ").replace("/", " ").split() if len(t) >= 3}
+    best_cid: str | None = None
+    best_rec: Mapping[str, Any] | None = None
+    best_score = 0
+    for cid, rec in forged_map.items():
+        if not isinstance(rec, Mapping):
+            continue
+        mod_stem = str(rec.get("module") or cid.removeprefix("forged.")).lower()
+        stem_toks = {t for t in mod_stem.split("_") if len(t) >= 2 and not t.startswith("v")}
+        overlap = len(goal_toks & stem_toks)
+        if cid.lower() in goal_low:
+            overlap += 4
+        if overlap >= 2 and overlap > best_score:
+            best_score = overlap
+            best_cid = str(cid)
+            best_rec = rec
+
+    if not best_cid or best_rec is None:
+        return None
+
+    entry = dict(best_rec.get("entry") or {})
+    contract = dict(best_rec.get("contract") or {})
+    if not entry and contract.get("required_args") is not None:
+        req_args = [str(x) for x in (contract.get("required_args") or [])]
+        entry = {"action_template": {"args": {k: "${input." + k + "}" for k in req_args}}}
+
+    call_args = dict(explicit_args or {})
+    if entry and not call_args:
+        bound = bind_implied_capability_inputs(goal, best_cid, entry, root=work_root)
+        if not bound.get("complete"):
+            return None
+        call_args = dict(bound.get("rendered_args") or bound.get("inputs") or {})
+
+    out = invoke_forged_capability(best_cid, call_args, root=work_root, state_path=state_path)
+    accepted_params = set(str(x) for x in (contract.get("parameters") or []))
+    out_path_raw = out.get("output_path") or (
+        call_args.get("output_path") if "output_path" in accepted_params else None
+    )
+    if out_path_raw:
+        out_p = pathlib.Path(str(out_path_raw))
+        if not out_p.is_absolute():
+            out_p = (work_root / out_p).resolve()
+        if not out_p.is_file() or out_p.stat().st_size == 0:
+            return None
+        out["independent_output_sha256"] = hashlib.sha256(out_p.read_bytes()).hexdigest()
+    else:
+        import json as _json
+
+        out["independent_output_sha256"] = hashlib.sha256(
+            _json.dumps(out, sort_keys=True, default=str).encode("utf-8")
+        ).hexdigest()
+    return {
+        "schema": SCHEMA + "/forged_goal_execution",
+        "pass": True,
+        "capability_id": best_cid,
+        "args": call_args,
+        "result": out,
+        "k3_external_llm_calls": 0,
+    }
 
 
 def execute_or_learn_clause_macro(

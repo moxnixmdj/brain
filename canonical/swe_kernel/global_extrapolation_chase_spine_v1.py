@@ -30,6 +30,10 @@ from typing import Any, Callable, Mapping, Sequence
 from canonical.runtime import experience_v1 as exp
 from canonical.runtime import flywheel_v1 as fly
 from canonical.runtime import global_retrieval_controller_v1 as grc
+from canonical.runtime import ignorance_ledger_v1 as ign_ledger
+from canonical.runtime import interval_information_frontier_v1 as iif
+from canonical.runtime import jit_knowledge_v1 as jit_know
+from canonical.runtime import one_shot_reality_closure_v2 as reality_closure
 from canonical.runtime import open_world_hypothesis_guard_v4 as owhg
 from execution_guard import goal_chase_v1 as gchase
 from execution_guard import target_chase_driver_v1 as tdriver
@@ -160,6 +164,8 @@ class GlobalDiscoveryWorld:
         coverage_receipt: Mapping[str, Any] | None = None,
         residual_action_receipt: Mapping[str, Any] | None = None,
         min_independent_channels: int = 2,
+        min_evidence_kinds: int = 1,
+        ledger_path: str | None = None,
     ) -> None:
         self.goal = str(goal)
         self.goal_id = "goal:" + hashlib.sha256(self.goal.encode("utf-8")).hexdigest()[:16]
@@ -169,9 +175,47 @@ class GlobalDiscoveryWorld:
         self.coverage_receipt = coverage_receipt
         self.residual_action_receipt = residual_action_receipt
         self.min_independent_channels = max(1, int(min_independent_channels))
+        self.min_evidence_kinds = max(1, int(min_evidence_kinds))
+        self.ledger_path = ledger_path
         self.state = grc.new_state()
         self.source_stats: dict[str, dict[str, Any]] = {}
         self._probed_source_ids: set[str] = set()
+        self._recorded_gap_ids: list[str] = []
+        self.last_minimum_information_contract: dict[str, Any] | None = None
+
+    def observed_evidence_kinds(self, opts: Sequence[Mapping[str, Any]] = ()) -> list[str]:
+        """Compute distinct evidence kinds answered across probed sources and options."""
+        kinds: set[str] = set()
+        jit_kinds = jit_know.kinds_answered(sorted(self._probed_source_ids))
+        for jk in jit_kinds:
+            if jk and jk != "unknown":
+                kinds.add(jk)
+        ch_by_id = {str(c.get("source_id") or ""): c for c in self.channels}
+        for sid in self._probed_source_ids:
+            ch = ch_by_id.get(sid) or {}
+            ek = str(ch.get("evidence_kind") or ch.get("kind") or "").strip()
+            if ek:
+                kinds.add(ek)
+        for o in opts:
+            ek = str(o.get("evidence_kind") or "").strip()
+            if ek:
+                kinds.add(ek)
+        return sorted(kinds)
+
+    def policy_changing_unprobed_channels(self, best_verified_gain: float) -> list[dict[str, Any]]:
+        """Return unprobed channels whose declared `yield_upper_bound` can beat `best_verified_gain`."""
+        out: list[dict[str, Any]] = []
+        for ch in self.channels:
+            sid = str(ch.get("source_id") or "").strip()
+            if not sid or sid in self._probed_source_ids:
+                continue
+            ub = ch.get("yield_upper_bound", ch.get("max_potential_gain"))
+            if isinstance(ub, (int, float)) and not isinstance(ub, bool) and float(ub) > best_verified_gain:
+                out.append(dict(ch))
+        out.sort(
+            key=lambda c: -float(c.get("yield_upper_bound", c.get("max_potential_gain", 0.0)) or 0.0)
+        )
+        return out
 
     def unprobed_independent_groups(self) -> set[str]:
         consumed = set(self.state.get("consumed_upstream_groups") or [])
@@ -293,9 +337,18 @@ class GlobalDiscoveryWorld:
             source_stats=self.source_stats,
             state=self.state,
         )
-        ranked = plan.get("actions") or []
+        ranked = list(plan.get("actions") or [])
         if not ranked:
             return []
+
+        # Prioritize policy-changing upper-bound channels first so high-upside hidden opportunities are never starved!
+        ub_by_sid = {
+            str(c.get("source_id") or ""): float(c.get("yield_upper_bound", c.get("max_potential_gain", 0.0)) or 0.0)
+            for c in self.channels
+        }
+        ranked.sort(
+            key=lambda a: -ub_by_sid.get(str(a.get("source_id") or ""), 0.0)
+        )
 
         # Probe up to 2 highest-marginal-novelty orthogonal upstream groups in one data-acquisition round
         newly_discovered: list[dict[str, Any]] = []
@@ -370,9 +423,67 @@ class GlobalDiscoveryWorld:
             min_channels=self.min_independent_channels,
         )
         res = dict(base_gate({**ctx, "known_options": annotated}))
+        best_gain = max(
+            (
+                float(o.get("expected_gain", o.get("verified_yield", 0.0)) or 0.0)
+                for o in opts
+                if o.get("independently_verified_by") or o.get("candidate_authority") == "VERIFIED"
+            ),
+            default=0.0,
+        )
+        dominating_unprobed = self.policy_changing_unprobed_channels(best_gain)
+        kinds_seen = self.observed_evidence_kinds(opts)
+        kinds_shortfall = len(kinds_seen) < self.min_evidence_kinds and rem > 0
+
+        blockers: list[str] = []
+        for dch in dominating_unprobed:
+            blockers.append(f"POLICY_CHANGING_UPPER_BOUND_UNPROBED:{dch.get('source_id')}")
+        if kinds_shortfall:
+            blockers.append(f"EVIDENCE_KIND_DIVERSITY_SHORTFALL:{len(kinds_seen)}<{self.min_evidence_kinds}")
+
+        if blockers and not guard_closed:
+            res["complete"] = False
+            res.setdefault("missing", [])
+            for b in blockers:
+                if b not in res["missing"]:
+                    res["missing"].append(b)
+            min_info = reality_closure.compile_minimum_information_contract(
+                {"basis": {"evidence_blockers": blockers}},
+                {"goal_id": self.goal_id, "best_verified_gain": best_gain},
+            )
+            self.last_minimum_information_contract = min_info
+            res["minimum_information_contract"] = min_info
+            try:
+                led_kw = {"path": self.ledger_path} if self.ledger_path else {}
+                gid = ign_ledger.note(
+                    f"PENDING_ACQUISITION_OR_EXPERIMENT:{self.goal[:80]}",
+                    why=";".join(blockers[:3]),
+                    cost=1.0,
+                    **led_kw,
+                )
+                if gid and gid not in self._recorded_gap_ids:
+                    self._recorded_gap_ids.append(str(gid))
+            except Exception:
+                pass
+        elif self._recorded_gap_ids:
+            try:
+                led_kw = {"path": self.ledger_path} if self.ledger_path else {}
+                for gid in list(self._recorded_gap_ids):
+                    ign_ledger.resolve(gid, helped=True, close=True, **led_kw)
+                self._recorded_gap_ids.clear()
+            except Exception:
+                pass
+
         res["unexplored_independent_channels"] = rem
+        res["observed_evidence_kinds"] = kinds_seen
+        res["policy_changing_unprobed_count"] = len(dominating_unprobed)
         res["open_world_guard_closed"] = guard_closed
         return res
+
+
+def solve_minimax_interval_probe_policy(problem: Mapping[str, Any]) -> dict[str, Any]:
+    """Compute exact minimax probe policy over interval-bounded hypotheses via `interval_information_frontier_v1`."""
+    return dict(iif.solve(problem))
 
 
 def run_global_minimal_action_chase(
@@ -387,6 +498,8 @@ def run_global_minimal_action_chase(
     channels: Sequence[Mapping[str, Any]] = (),
     channel_fetcher: Callable[[Mapping[str, Any]], Sequence[Mapping[str, Any]]] | None = None,
     min_independent_channels: int = 2,
+    min_evidence_kinds: int = 1,
+    ledger_path: str | None = None,
     max_rounds: int = 12,
     patience: int = 4,
     experience_state_path: str | None = None,
@@ -402,6 +515,8 @@ def run_global_minimal_action_chase(
         coverage_receipt=coverage_receipt,
         residual_action_receipt=residual_action_receipt,
         min_independent_channels=min_independent_channels,
+        min_evidence_kinds=min_evidence_kinds,
+        ledger_path=ledger_path,
     )
 
     seeded_options: list[dict[str, Any]] = []
@@ -492,6 +607,8 @@ def run_global_minimal_action_chase(
         "routes_executed": routes_executed,
         "suppressed_routes_skipped_before_act": suppressed_skipped,
         "probed_sources": sorted(world._probed_source_ids),
+        "observed_evidence_kinds": world.observed_evidence_kinds(),
+        "minimum_information_contract": world.last_minimum_information_contract,
         "consumed_upstream_groups": list(world.state.get("consumed_upstream_groups") or []),
         "k3_external_llm_calls": 0,
     }

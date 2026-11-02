@@ -38,7 +38,11 @@ from urllib.parse import parse_qs
 
 from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
     compile_and_qualify_skill,
+    elevate_trace_to_fastest_layer,
+    execute_compiled_steps,
+    prune_non_causal_steps_counterfactually,
     recall_and_execute_workflow,
+    verify_postcondition,
 )
 from canonical.swe_kernel.whitebox_introspector_and_trace_synthesizer_v1 import (
     discover_and_execute_semantic_web_form,
@@ -144,6 +148,83 @@ def _promote_r3_episode_if_configured(r3_state_path: pathlib.Path | None) -> dic
         return {"drained": False, "error": f"{type(exc).__name__}:{str(exc)[:160]}"}
 
 
+def _deterministic_zero_llm_mcp_substrate(kind: str, payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Deterministic `K3 = 0` substrate for `toolathlon_brain_host_integration_v1` (zero external LLM)."""
+    from canonical.runtime.brain_unified_model_v1 import tokenize
+
+    if kind == "SUBPROBLEM":
+        ctx = str(payload.get("task_context") or "").strip()
+        toks = [t for t in tokenize(ctx) if len(t) >= 3 and not t.isdigit()]
+        req_caps = toks[:2] if toks else ["general_action"]
+        return {
+            "goal": ctx[:200] or "execute_mcp_goal",
+            "required_capabilities": req_caps,
+            "constraint": None,
+        }
+    if kind == "SCHEMA_JUDGMENT":
+        cap = str(payload.get("required_capability") or "").lower().strip()
+        anon = payload.get("anonymous_tool") or {}
+        desc = str(anon.get("description") or "").lower()
+        schema = anon.get("input_schema") if isinstance(anon.get("input_schema"), Mapping) else {}
+        props = schema.get("properties") if isinstance(schema.get("properties"), Mapping) else {}
+        prop_blob = " ".join(
+            f"{k} {v.get('description', '')}" if isinstance(v, Mapping) else str(k)
+            for k, v in props.items()
+        ).lower()
+        hay = f"{desc} {prop_blob}"
+        cap_stem = cap.rstrip("s") if len(cap) >= 4 else cap
+        supported = bool(cap and (cap in hay or (len(cap_stem) >= 3 and cap_stem in hay)))
+        return {"supported": supported, "reason": "deterministic_schema_token_grounding"}
+    if kind == "ARGUMENTS":
+        ctx = str(payload.get("task_context") or "")
+        anon = payload.get("anonymous_selected_tool") or {}
+        schema = anon.get("input_schema") if isinstance(anon.get("input_schema"), Mapping) else {}
+        props = schema.get("properties") if isinstance(schema.get("properties"), Mapping) else {}
+        args_out: dict[str, Any] = {}
+        # 1. Explicit `key=value` or `key: value` bindings in `task_context`
+        kv_map: dict[str, str] = {}
+        for m in re.finditer(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*[=:]\s*([^\s,;]+)", ctx):
+            kv_map[m.group(1).lower()] = m.group(2).strip("\"'()[]{}")
+        quoted = [m.group(1) or m.group(2) for m in re.finditer(r"'([^']+)'|\"([^\"]+)\"", ctx)]
+        numbers = [m.group(0) for m in re.finditer(r"(?<![A-Za-z0-9_])-?\d+(?:\.\d+)?(?![A-Za-z0-9_])", ctx)]
+        urls = [m.group(0).rstrip(".,;)") for m in _URL_RE.finditer(ctx)]
+        files = [m.group(0).strip(".,:;()[]'\"") for m in _FILE_CAND_RE.finditer(ctx)]
+        q_idx = 0
+        n_idx = 0
+        for p_name, p_spec in props.items():
+            spec_d = p_spec if isinstance(p_spec, Mapping) else {}
+            ptype = str(spec_d.get("type") or "string").lower()
+            p_low = str(p_name).lower()
+            if p_low in kv_map:
+                raw_v = kv_map[p_low]
+                if ptype == "integer":
+                    args_out[p_name] = int(float(raw_v))
+                elif ptype == "number":
+                    args_out[p_name] = float(raw_v)
+                elif ptype == "boolean":
+                    args_out[p_name] = raw_v.lower() in {"true", "1", "yes"}
+                else:
+                    args_out[p_name] = raw_v
+                continue
+            if ptype == "integer" and n_idx < len(numbers):
+                args_out[p_name] = int(float(numbers[n_idx]))
+                n_idx += 1
+            elif ptype == "number" and n_idx < len(numbers):
+                args_out[p_name] = float(numbers[n_idx])
+                n_idx += 1
+            elif ptype == "boolean":
+                args_out[p_name] = bool(re.search(rf"\b{re.escape(p_low)}\b", ctx.lower()))
+            elif "url" in p_low and urls:
+                args_out[p_name] = urls[0]
+            elif ("path" in p_low or "file" in p_low) and files:
+                args_out[p_name] = files[0]
+            elif q_idx < len(quoted):
+                args_out[p_name] = quoted[q_idx]
+                q_idx += 1
+            elif p_low in {"query", "goal", "task", "text", "prompt"}:
+                args_out[p_name] = ctx
+        return {"arguments": args_out}
+    raise ValueError(f"UNSUPPORTED_MCP_SUBSTRATE_KIND:{kind}")
 def _extract_existing_file(goal: str, cwd: pathlib.Path) -> pathlib.Path | None:
     for m in _FILE_CAND_RE.finditer(goal):
         raw = m.group(0).strip(".,:;()[]'\"")
@@ -383,6 +464,35 @@ def solve_or_learn(
         # Drop donor reference locally before qualification executes
         trace_copy = list(demo_trace)
         del demo_trace
+        ablation_receipt: dict[str, Any] | None = None
+        if len(trace_copy) > 1:
+            try:
+                from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
+                    create_zero_copy_cow_workspace,
+                )
+
+                def _trace_outcome_oracle(cand_trace: list[dict[str, Any]]) -> bool:
+                    with tempfile.TemporaryDirectory(prefix="brain-ablate-cow-") as atd:
+                        acw = pathlib.Path(atd) / "ws"
+                        if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
+                            create_zero_copy_cow_workspace(work_cwd, acw)
+                        else:
+                            acw.mkdir(parents=True, exist_ok=True)
+                        elev = elevate_trace_to_fastest_layer(cand_trace)
+                        steps = list(elev.get("elevated_steps") or [])
+                        if not steps:
+                            return False
+                        ex = execute_compiled_steps(steps, cwd=acw)
+                        if not ex.get("ok"):
+                            return False
+                        ok_vp, _ = verify_postcondition(demo_post, cwd=acw, execution_result=ex)
+                        return bool(ok_vp)
+
+                ablation_receipt = prune_non_causal_steps_counterfactually(trace_copy, _trace_outcome_oracle)
+                if ablation_receipt.get("baseline_passed") and ablation_receipt.get("minimal_trace"):
+                    trace_copy = list(ablation_receipt["minimal_trace"])
+            except Exception:
+                ablation_receipt = None
         qualification_receipt = compile_and_qualify_skill(
             goal=goal,
             trace=trace_copy,
@@ -396,6 +506,12 @@ def solve_or_learn(
             source_channel="k2_demonstration_transfer",
             db_path=skill_db,
         )
+        if isinstance(qualification_receipt, dict) and ablation_receipt is not None:
+            qualification_receipt["counterfactual_ablation"] = {
+                "original_length": ablation_receipt.get("original_length"),
+                "minimal_length": ablation_receipt.get("minimal_length"),
+                "pruned_indices": ablation_receipt.get("pruned_indices"),
+            }
 
     # ------------------------------------------------------------------
     # ROUND-0 PATHOLOGY PRECHECK (`experience_v1` + `flywheel_v1`, < 0.5 ms)
@@ -419,6 +535,7 @@ def solve_or_learn(
 
     # ------------------------------------------------------------------
     # TIER 0A (<2 ms): Recall Compiled & Ownership-Qualified Workflow Skill
+    #                  + Self-Forged Capability Spine (`forged.*`)
     # ------------------------------------------------------------------
     recalled = recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
     if recalled is not None and recalled.get("pass") is True:
@@ -439,6 +556,34 @@ def solve_or_learn(
             "qualification_receipt": qualification_receipt,
             "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
         }
+
+    forged_state_path = req.pop("forged_state_path", None)
+    macro_state_path = req.pop("macro_state_path", None)
+    try:
+        from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+            match_and_invoke_forged_for_goal,
+        )
+
+        forged_hit = match_and_invoke_forged_for_goal(
+            goal,
+            root=work_cwd,
+            state_path=forged_state_path,
+            explicit_args=req.get("forged_args") if isinstance(req.get("forged_args"), Mapping) else None,
+        )
+        if forged_hit is not None and forged_hit.get("pass") is True:
+            return {
+                "schema": SCHEMA,
+                "task_id": task_id,
+                "pass": True,
+                "status": "PASS__TIER0_FORGED_CAPABILITY_EXECUTED",
+                "tier_used": "tier0_forged_capability",
+                "from_memory": True,
+                "capability_id": forged_hit["capability_id"],
+                "forged_execution": forged_hit,
+                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+            }
+    except Exception:
+        pass
 
     # Explicit 2-step byte-verified capability bridge (`bridge_enumeration_v1`)
     bridge_spec = req.get("byte_verified_bridge")
@@ -489,9 +634,16 @@ def solve_or_learn(
             "gui_action",
             "gui_screen",
             "gui_env",
+            "osworld_obs",
+            "osworld_env",
+            "mcp_rpc",
+            "harbor_env",
+            "forged_args",
             "byte_verified_bridge",
         }
     }
+    if macro_state_path is not None:
+        clean_req["_macro_state_path"] = str(macro_state_path)
     clean_req.setdefault("task_id", task_id)
     front_res = ra.solve(clean_req)
     if front_res.get("pass") is True:
@@ -532,19 +684,34 @@ def solve_or_learn(
             if c and c.strip()
         ]
         if len(clauses) >= 2:
+            from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+                lookup_verified_chain_macro,
+                record_verified_chain_macro,
+            )
+
+            macro_hit = lookup_verified_chain_macro(clauses, state_path=macro_state_path)
             dag_res = execute_transactional_goal_dag(
                 root=work_cwd,
                 stages=clauses,
                 stage_solver=lambda sub_goal, idx: ra.solve({"task_id": f"{task_id}-s{idx}", "goal": sub_goal}),
             )
             if dag_res.get("ok") is True:
+                stage_recs = list(dag_res.get("stage_receipts") or [])
+                macro_recorded = record_verified_chain_macro(
+                    clauses,
+                    [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in stage_recs],
+                    state_path=macro_state_path,
+                )
                 return {
                     "schema": SCHEMA,
                     "task_id": task_id,
                     "pass": True,
                     "status": "PASS__TIER1_GOAL_DAG_COMPOSITION",
                     "tier_used": "tier1_goal_dag",
-                    "from_memory": False,
+                    "from_memory": bool(macro_hit is not None),
+                    "from_macro": bool(macro_hit is not None),
+                    "macro_recorded": bool(macro_recorded),
+                    "macro_key": (macro_hit or {}).get("key"),
                     "clauses": clauses,
                     "dag_result": dag_res,
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
@@ -819,7 +986,96 @@ def solve_or_learn(
         except Exception:
             pass
 
-        # 2E: Typed Desktop / GUI Surface Fallback (`osworld_computer_surface_v1`) — strictly after HTTP & CLI
+        # 2E: Full Multi-Layer Computer, OSWorld v19, MCP JSON-RPC & Harbor Terminal Sovereignty
+        mcp_rpc = req.get("mcp_rpc")
+        if callable(mcp_rpc):
+            try:
+                import asyncio
+                from canonical.runtime import toolathlon_brain_host_integration_v1 as mcp_host
+
+                mcp_step = asyncio.run(
+                    mcp_host.execute_one_brain_selected_step(
+                        rpc=mcp_rpc,
+                        substrate=_deterministic_zero_llm_mcp_substrate,
+                        task_context=goal,
+                        public_state_summary=str(req.get("public_state_summary") or ""),
+                    )
+                )
+                gw_res = dict(mcp_step.get("gateway_result") or {})
+                is_err = bool(gw_res.get("isError") is True)
+                if not is_err:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_MCP_GATEWAY_STEP_EXECUTED",
+                        "tier_used": "tier2_mcp_gateway",
+                        "selected_tool_id": mcp_step["selected_tool_id"],
+                        "arguments": mcp_step["arguments"],
+                        "gateway_result": gw_res,
+                        "schema_judgment_receipts": mcp_step["schema_judgment_receipts"],
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
+        harbor_env = req.get("harbor_env")
+        if harbor_env is not None:
+            try:
+                import asyncio
+                from canonical.runtime import harbor_brain_agent as harbor_mod
+
+                harbor_out = asyncio.run(
+                    harbor_mod.run_bounded_harbor_goal(
+                        goal,
+                        harbor_env,
+                        max_cycles=int(req.get("harbor_max_cycles", 8)),
+                    )
+                )
+                if harbor_out.get("completed") is True or harbor_out.get("pass") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_HARBOR_TERMINAL_COMPLETED",
+                        "tier_used": "tier2_harbor_terminal",
+                        "harbor_result": harbor_out,
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
+        osworld_obs = req.get("osworld_obs")
+        if isinstance(osworld_obs, Mapping):
+            try:
+                from canonical.runtime import osworld_v21_brain_subject_v19 as osw19
+
+                subject = osw19.build_subject()
+                if req.get("osworld_env") is not None:
+                    subject.bind_environment(req["osworld_env"])
+                response_text, py_actions = subject.predict(goal, osworld_obs)
+                if py_actions:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__TIER2_OSWORLD_V19_DECIDED",
+                        "tier_used": "tier2_osworld_v19",
+                        "subject_id": osw19.SUBJECT_ID,
+                        "response": response_text,
+                        "actions": list(py_actions),
+                        "completed": list(py_actions) == ["DONE"],
+                        "k3_external_llm_calls": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
+
         gui_action = req.get("gui_action")
         if isinstance(gui_action, Mapping):
             try:

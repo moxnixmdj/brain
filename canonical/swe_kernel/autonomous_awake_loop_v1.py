@@ -691,12 +691,53 @@ class AwakeAgencyDaemon:
             cnf_predicates=cnf_predicates,
         )
 
+    def self_falsify_and_narrow_rule_scopes(self, *, max_rules: int = 3) -> list[dict[str, Any]]:
+        """Actively probe crystallized rules with `finite_capability_diagnosis.select_probe` via `rule_scope_learning_v1`."""
+        from canonical.swe_kernel import operator_generalization_v1 as op_gen
+        from canonical.swe_kernel import rule_scope_learning_v1 as rscope
+
+        calibrated: list[dict[str, Any]] = []
+        calibrated_set: set[str] = getattr(self, "_calibrated_rule_ids", set())
+        self._calibrated_rule_ids = calibrated_set
+
+        for rule in self.skill_store.lookup_rules("python"):
+            sid = str(rule.get("skill_id") or "")
+            if not sid or sid in calibrated_set:
+                continue
+            swap = op_gen.derive_operator_swap(rule)
+            if swap is None:
+                continue
+            old_op, new_op = str(swap.get("from") or ""), str(swap.get("to") or "")
+            if (old_op, new_op) == ("<=", "<"):
+                probes = [
+                    {"label": "statement_twin", "language": "python", "source_text": "def f(a, b):\n    return a <= b\n"},
+                    {"label": "guard_branch", "language": "python", "source_text": "def f(a, b):\n    if a <= b:\n        return True\n    return False\n"},
+                    {"label": "disjunctive_boundary", "language": "python", "source_text": "def f(a, b):\n    return a < b or a == b\n"},
+                ]
+
+                def _probe_verifier(cand_code: str) -> bool:
+                    ns: dict[str, Any] = {}
+                    try:
+                        exec(compile(cand_code, "<scope_probe>", "exec"), ns)
+                        fn = ns.get("f")
+                        return bool(callable(fn) and fn(3, 5) is True and fn(5, 5) is False and fn(6, 5) is False)
+                    except Exception:
+                        return False
+
+                learned = rscope.learn_scope(rule, probes, _probe_verifier)
+                calibrated_set.add(sid)
+                calibrated.append(learned)
+                if len(calibrated) >= max_rules:
+                    break
+        return calibrated
+
     def pulse(self, *, max_curriculum_lessons: int = 2, channels: Sequence[str] | None = None) -> dict[str, Any]:
-        """Run one complete zero-LLM awake cycle: sense -> CoW experiment -> study ranked gaps -> commit."""
+        """Run one complete zero-LLM awake cycle: sense -> CoW experiment -> active scope probing -> study gaps."""
         t0 = time.perf_counter()
         self.cycle_count += 1
         sensed = self.sense_reality()
         exp_out = self.experiment_in_cow_sandbox()
+        scope_audits = self.self_falsify_and_narrow_rule_scopes()
 
         # Study top-ranked open gaps in this daemon's ledger
         ranked = ledger.rank(limit=max(1, max_curriculum_lessons), path=self.ledger_path)
@@ -725,6 +766,7 @@ class AwakeAgencyDaemon:
             "k3_external_llm_calls": 0,
             "sensed": sensed,
             "cow_experimentation": exp_out,
+            "scope_narrowing_audits": scope_audits,
             "gaps_studied": len(lessons),
             "gaps_closed": sum(1 for x in lessons if x.get("pass")),
             "promoted_workflows": promoted_workflows,

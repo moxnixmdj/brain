@@ -106,12 +106,100 @@ def create_zero_copy_cow_workspace(src_root: pathlib.Path, dst_root: pathlib.Pat
 
 
 def cow_write_text(path: pathlib.Path, content: str) -> None:
-    """Break any hardlink (`unlink`) before writing so `src_root` inodes are never mutated."""
+    """Break any hardlink (`unlink`) before writing and purge stale `.pyc` bytecode caches."""
     p = pathlib.Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     if p.exists():
         p.unlink()
     p.write_text(content, encoding="utf-8")
+    if p.suffix == ".py":
+        pycache = p.parent / "__pycache__"
+        if pycache.is_dir():
+            for pyc in pycache.glob(f"{p.stem}.*.pyc"):
+                try:
+                    pyc.unlink()
+                except OSError:
+                    pass
+
+
+def _extract_changed_method_pair(old_src: str, new_src: str) -> tuple[str, str] | None:
+    """When exactly one `ClassDef` method changed between `old_src` and `new_src`, return canonical `(before_fn, after_fn)`."""
+    try:
+        old_tree = ast.parse(old_src)
+        new_tree = ast.parse(new_src)
+    except SyntaxError:
+        return None
+    old_methods: dict[tuple[str, str], ast.FunctionDef] = {}
+    new_methods: dict[tuple[str, str], ast.FunctionDef] = {}
+    for node in old_tree.body:
+        if isinstance(node, ast.ClassDef):
+            for sub in node.body:
+                if isinstance(sub, ast.FunctionDef):
+                    old_methods[(node.name, sub.name)] = sub
+    for node in new_tree.body:
+        if isinstance(node, ast.ClassDef):
+            for sub in node.body:
+                if isinstance(sub, ast.FunctionDef):
+                    new_methods[(node.name, sub.name)] = sub
+    changed: list[tuple[str, str]] = []
+    for key, old_fn in old_methods.items():
+        new_fn = new_methods.get(key)
+        if new_fn is None:
+            continue
+        u_old = ast.unparse(old_fn) + "\n"
+        u_new = ast.unparse(new_fn) + "\n"
+        if u_old != u_new:
+            changed.append((u_old, u_new))
+    if len(changed) == 1:
+        return changed[0]
+    return None
+
+
+def _iter_file_or_method_rule_candidates(src_txt: str, lang_rule: Mapping[str, Any], *, limit: int = 6) -> list[str]:
+    """Yield candidate file patches from `lang_rule` applied at file scope AND individual `ClassDef` method scope."""
+    import textwrap
+    from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
+        iter_crystallized_code_rule_candidates,
+    )
+
+    out: list[str] = []
+    for cand in itertools.islice(iter_crystallized_code_rule_candidates(src_txt, lang_rule), limit):
+        if cand and cand != src_txt and cand not in out:
+            out.append(cand)
+    if len(out) >= limit:
+        return out[:limit]
+    try:
+        tree = ast.parse(src_txt)
+    except SyntaxError:
+        return out
+    lines = src_txt.splitlines(keepends=True)
+    for node in tree.body:
+        if not isinstance(node, ast.ClassDef):
+            continue
+        for sub in node.body:
+            if not isinstance(sub, ast.FunctionDef) or not getattr(sub, "end_lineno", None):
+                continue
+            start_idx = sub.lineno - 1
+            end_idx = int(sub.end_lineno)
+            raw_block = "".join(lines[start_idx:end_idx])
+            indent_prefix = raw_block[: len(raw_block) - len(raw_block.lstrip(" "))]
+            dedented = textwrap.dedent(raw_block)
+            if not dedented.endswith("\n"):
+                dedented += "\n"
+            for m_cand in itertools.islice(iter_crystallized_code_rule_candidates(dedented, lang_rule), 4):
+                if not m_cand or m_cand == dedented:
+                    continue
+                reindented = textwrap.indent(m_cand if m_cand.endswith("\n") else m_cand + "\n", indent_prefix)
+                full_cand = "".join(lines[:start_idx]) + reindented + "".join(lines[end_idx:])
+                try:
+                    ast.parse(full_cand)
+                except SyntaxError:
+                    continue
+                if full_cand != src_txt and full_cand not in out:
+                    out.append(full_cand)
+                    if len(out) >= limit:
+                        return out
+    return out
 
 
 def select_impacted_tests_fast(
@@ -283,13 +371,39 @@ def _fn_used_params(fn_node: ast.FunctionDef) -> set[str]:
     }
 
 
+def _passes_concrete_contract_oracle(source_text: str) -> bool:
+    """Reject any candidate whose unary docstring `post:` contract fails on concrete execution witness."""
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        return False
+    from canonical.runtime.bound_capabilities import concrete_execution_oracle as concrete_oracle
+
+    for nd in tree.body:
+        if isinstance(nd, ast.FunctionDef) and len(nd.args.args) == 1:
+            doc = ast.get_docstring(nd) or ""
+            if "post:" in doc.lower() or "postcondition:" in doc.lower():
+                try:
+                    probe_src = source_text + f"\nf = {nd.name}\n"
+                    res = concrete_oracle.check_source(probe_src)
+                    if res.get("status") == "CONTRACT_VIOLATION_FOUND":
+                        return False
+                except Exception:
+                    continue
+    return True
+
+
 def propose_stun_and_guard_repairs(
     source_text: str,
     test_sources: Sequence[str],
     *,
     max_candidates: int = 16,
 ) -> list[str]:
-    """Synthesize minimal entry/mid-function guards first, then input-preserving STUN bodies."""
+    """Synthesize minimal entry/mid-function guards first, then input-preserving STUN bodies (functions & class methods)."""
+    from canonical.runtime.bound_capabilities.software_patch_cegis_z3_v1 import (
+        _extract_method_io_examples_from_test_source,
+    )
+
     try:
         tree = ast.parse(source_text)
     except SyntaxError:
@@ -303,16 +417,25 @@ def propose_stun_and_guard_repairs(
     out: list[str] = []
     seen: set[str] = {source_text}
 
-    # Build safe evaluation namespace for domain helpers/constants in `source_text`
-    ctx_ns: dict[str, Any] = {}
+    # Build safe evaluation namespace for domain helpers/classes/constants in `source_text`
+    ctx_ns: dict[str, Any] = {"__builtins__": obs_synth._SAFE_EVAL_BUILTINS}
     try:
         exec(compile(source_text, "<stun_ctx>", "exec"), ctx_ns)
     except Exception:
-        ctx_ns = {}
+        pass
 
-    for fn in [n for n in tree.body if isinstance(n, ast.FunctionDef)]:
+    targets: list[tuple[str | None, ast.FunctionDef]] = []
+    for top in tree.body:
+        if isinstance(top, ast.FunctionDef):
+            targets.append((None, top))
+        elif isinstance(top, ast.ClassDef):
+            for sub in top.body:
+                if isinstance(sub, ast.FunctionDef) and not sub.name.startswith("__"):
+                    targets.append((top.name, sub))
+
+    for cls_name, fn in targets:
         params = [a.arg for a in fn.args.args]
-        orig_used_params = _fn_used_params(fn)
+        orig_used_params = _fn_used_params(fn) - {"self"}
         fn_start = offsets[fn.lineno - 1]
         fn_end = offsets[fn.end_lineno - 1] + len(
             lines[fn.end_lineno - 1].encode("utf-8")[:fn.end_col_offset].decode("utf-8", errors="replace")
@@ -326,15 +449,14 @@ def propose_stun_and_guard_repairs(
         for st in stmts:
             st_line_start = offsets[st.lineno - 1]
             st_col_indent = lines[st.lineno - 1][:st.col_offset]
-            # Division / modulo denominator guard (`if denom == 0: return 0.0 / 0 / None`)
             for sub in ast.walk(st):
                 if isinstance(sub, ast.BinOp) and isinstance(sub.op, (ast.Div, ast.FloorDiv, ast.Mod)):
-                    if isinstance(sub.right, ast.Name) and sub.right.id in params:
+                    if isinstance(sub.right, ast.Name) and sub.right.id in params and sub.right.id != "self":
                         p_nm = sub.right.id
                         for ret_lit in ("0.0", "0", "None", "[]"):
                             guard = f"{st_col_indent}if {p_nm} == 0:\n{st_col_indent}    return {ret_lit}\n"
                             cand = source_text[:st_line_start] + guard + source_text[st_line_start:]
-                            if cand not in seen:
+                            if cand not in seen and _passes_concrete_contract_oracle(cand):
                                 try:
                                     ast.parse(cand)
                                     seen.add(cand)
@@ -343,7 +465,7 @@ def propose_stun_and_guard_repairs(
                                     pass
             if len(out) >= max_candidates:
                 return out
-        # Generator / loop zero-width guard (`if n == 0: return`), only when function yields or loops
+
         is_gen = any(isinstance(sub, (ast.Yield, ast.YieldFrom)) for sub in ast.walk(fn))
         has_loop = any(isinstance(sub, (ast.For, ast.While, ast.ListComp)) for sub in ast.walk(fn))
         if (is_gen or has_loop) and stmts and params:
@@ -351,10 +473,12 @@ def propose_stun_and_guard_repairs(
             st0_start = offsets[st0.lineno - 1]
             ind0 = lines[st0.lineno - 1][:st0.col_offset]
             for p_nm in params:
+                if p_nm == "self":
+                    continue
                 ret_tail = "return" if is_gen else "return []"
                 guard = f"{ind0}if {p_nm} == 0:\n{ind0}    {ret_tail}\n"
                 cand = source_text[:st0_start] + guard + source_text[st0_start:]
-                if cand not in seen:
+                if cand not in seen and _passes_concrete_contract_oracle(cand):
                     try:
                         ast.parse(cand)
                         seen.add(cand)
@@ -364,23 +488,43 @@ def propose_stun_and_guard_repairs(
                 if len(out) >= max_candidates:
                     return out
 
-        # 2. STUN + Bottom-Up Observational-Equivalence synthesis (gated by Input Dependency Preservation!)
+        # 2. STUN + Bottom-Up Observational-Equivalence synthesis (functions & stateful class methods!)
         if params and combined_tests and len(out) < max_candidates:
             try:
-                exs, consts = obs_synth.extract_io_examples_from_test_source(combined_tests, fn.name, ctx_ns)
+                if cls_name is None:
+                    exs, consts = obs_synth.extract_io_examples_from_test_source(combined_tests, fn.name, ctx_ns)
+                else:
+                    exs, consts = _extract_method_io_examples_from_test_source(
+                        combined_tests, cls_name, fn.name, ctx_ns
+                    )
                 if exs:
                     synth_body = obs_synth.synthesize_python_function_body(params, exs, consts)
                     if synth_body:
-                        indented = "\n".join("    " + ln for ln in synth_body.splitlines())
+                        body_indent = " " * (int(fn.col_offset) + 4)
+                        indented = "\n".join(body_indent + ln for ln in synth_body.splitlines())
                         sig_end = offsets[fn.body[0].lineno - 1]
                         header = source_text[fn_start:sig_end].rstrip()
                         cand = source_text[:fn_start] + header + "\n" + indented + "\n" + source_text[fn_end:]
                         parsed_cand = ast.parse(cand)
-                        cand_fns = [
-                            n for n in parsed_cand.body
-                            if isinstance(n, ast.FunctionDef) and n.name == fn.name
-                        ]
-                        if cand_fns and orig_used_params.issubset(_fn_used_params(cand_fns[0])) and cand not in seen:
+                        if cls_name is None:
+                            cand_fns = [
+                                n for n in parsed_cand.body
+                                if isinstance(n, ast.FunctionDef) and n.name == fn.name
+                            ]
+                        else:
+                            cand_fns = [
+                                sub
+                                for top_n in parsed_cand.body
+                                if isinstance(top_n, ast.ClassDef) and top_n.name == cls_name
+                                for sub in top_n.body
+                                if isinstance(sub, ast.FunctionDef) and sub.name == fn.name
+                            ]
+                        if (
+                            cand_fns
+                            and orig_used_params.issubset(_fn_used_params(cand_fns[0]) - {"self"})
+                            and cand not in seen
+                            and _passes_concrete_contract_oracle(cand)
+                        ):
                             seen.add(cand)
                             out.append(cand)
             except Exception:
@@ -428,9 +572,21 @@ def evaluate_patch_batch_in_cow_zygote(
         import io as _io
 
         t_start = time.perf_counter_ns()
-        for p_entry in (str(repo), str(repo / "src")):
+        repo_str = str(repo)
+        repo_prefix = repo_str + os.sep
+        src_str = str(repo / "src")
+        sys.path[:] = [
+            p for p in sys.path
+            if p and not (p.startswith("/tmp/") and p != repo_str and p != src_str)
+        ]
+        for p_entry in (repo_str, src_str):
             if pathlib.Path(p_entry).is_dir() and p_entry not in sys.path:
                 sys.path.insert(0, p_entry)
+        sys.path_importer_cache.clear()
+        shadow_pkgs = _repo_top_level_pkg_names(repo)
+        for mod_k in list(sys.modules):
+            if mod_k.split(".", 1)[0] in shadow_pkgs:
+                sys.modules.pop(mod_k, None)
 
         # Pre-compile all test ASTs once inside the CoW worker when pure zero-arg runner applies!
         compiled_tests = (
@@ -450,12 +606,6 @@ def evaluate_patch_batch_in_cow_zygote(
                 for rp in pm:
                     if rp not in orig_disk_texts and (repo / rp).is_file():
                         orig_disk_texts[rp] = (repo / rp).read_text(encoding="utf-8")
-        else:
-            # Evict any pre-imported site-packages module shadowed by `repo` (e.g. `pluggy`, `iniconfig`)
-            shadow_pkgs = _repo_top_level_pkg_names(repo)
-            for mod_k in list(sys.modules):
-                if mod_k.split(".", 1)[0] in shadow_pkgs:
-                    sys.modules.pop(mod_k, None)
 
         checked = 0
         for idx, patch_map in enumerate(patch_candidates):
@@ -494,13 +644,8 @@ def evaluate_patch_batch_in_cow_zygote(
                                 sys.modules.pop(m_name, None)
                                 continue
                             m_file = getattr(m_val, "__file__", None)
-                            if isinstance(m_file, str):
-                                try:
-                                    mp = pathlib.Path(m_file).resolve()
-                                    if repo in mp.parents:
-                                        sys.modules.pop(m_name, None)
-                                except OSError:
-                                    pass
+                            if isinstance(m_file, str) and m_file.startswith(repo_prefix):
+                                sys.modules.pop(m_name, None)
                         sink = _io.StringIO()
                         with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
                             rc = pytest_mod.main(
@@ -565,14 +710,9 @@ def evaluate_patch_batch_in_cow_zygote(
                     if m_name in injected_names or m_name in parent_pkgs:
                         continue
                     m_file = getattr(m_val, "__file__", None)
-                    if isinstance(m_file, str):
-                        try:
-                            mp = pathlib.Path(m_file).resolve()
-                            if repo in mp.parents and m_name not in saved_mods:
-                                saved_mods[m_name] = m_val
-                                sys.modules.pop(m_name, None)
-                        except OSError:
-                            pass
+                    if isinstance(m_file, str) and m_file.startswith(repo_prefix) and m_name not in saved_mods:
+                        saved_mods[m_name] = m_val
+                        sys.modules.pop(m_name, None)
 
                 for _, code_obj, mod_obj in mod_objs:
                     exec(code_obj, mod_obj.__dict__)
@@ -953,9 +1093,7 @@ def repair_repository_in_cow_zygote(
                 rel_p = str(row["rel"])
                 orig_src = (cow_root / rel_p).read_text(encoding="utf-8")
                 for lang_rule in store.lookup_rules("python"):
-                    from canonical.swe_kernel.verified_skill_crystallizer_v1 import iter_crystallized_code_rule_candidates
-
-                    for r_cand in itertools.islice(iter_crystallized_code_rule_candidates(orig_src, lang_rule), 6):
+                    for r_cand in _iter_file_or_method_rule_candidates(orig_src, lang_rule, limit=6):
                         if r_cand and r_cand != orig_src:
                             recall_candidates.append({rel_p: r_cand})
                             recall_modes.append(f"SKILL_RECALL:{lang_rule.get('skill_id')}")
@@ -1048,7 +1186,18 @@ def repair_repository_in_cow_zygote(
 
             full_ok, full_out = _run_disk_suite_check(cow_root, test_files, zygote=pool)
             if full_ok:
-                # Full repository test suite is 100% GREEN! Crystallize every repaired file's lesson!
+                # Full repository test suite is 100% GREEN! Crystallize every repaired file's lesson,
+                # record `rule_expiry_v1` freshness fingerprint, compile 7-language CST skeleton,
+                # and emit `recursive_abstraction_v5` canonical signature digest!
+                from canonical.runtime import recursive_abstraction_v5 as rec_abs
+                from canonical.swe_kernel import rule_expiry_v1 as rule_exp
+                from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+                    compile_rule_to_cst_skeleton,
+                )
+
+                cst_skeletons_compiled = 0
+                abstraction_digests: list[str] = []
+                rules_by_id = {str(r.get("skill_id")): r for r in store.lookup_rules("python")}
                 for rel_p, new_src in cumulative_patch.items():
                     old_src = initial_origins[rel_p]
                     cryst = store.crystallize_code_fix(
@@ -1057,8 +1206,36 @@ def repair_repository_in_cow_zygote(
                         language="python",
                         error_class=round_modes[-1],
                     )
+                    if not cryst.get("crystallized"):
+                        mpair = _extract_changed_method_pair(old_src, new_src)
+                        if mpair is not None:
+                            cryst = store.crystallize_code_fix(
+                                before_snippet=mpair[0],
+                                after_snippet=mpair[1],
+                                language="python",
+                                error_class=round_modes[-1],
+                            )
                     if cryst.get("crystallized") and cryst.get("skill_id"):
-                        crystallized_ids.append(str(cryst["skill_id"]))
+                        sid = str(cryst["skill_id"])
+                        crystallized_ids.append(sid)
+                        try:
+                            rule_exp.record_taught(store.db_path, sid)
+                        except Exception:
+                            pass
+                        rule_row = rules_by_id.get(sid) or next(
+                            (r for r in store.lookup_rules("python") if str(r.get("skill_id")) == sid),
+                            None,
+                        )
+                        if rule_row is not None:
+                            sk = compile_rule_to_cst_skeleton(rule_row)
+                            if sk is not None:
+                                cst_skeletons_compiled += 1
+                        try:
+                            abstraction_digests.append(
+                                rec_abs.signature_digest([round_modes[-1], sid])
+                            )
+                        except Exception:
+                            pass
 
                 if apply_to_workspace:
                     for rel_p, new_src in cumulative_patch.items():
@@ -1073,6 +1250,8 @@ def repair_repository_in_cow_zygote(
                     "round_modes": round_modes,
                     "files_repaired": sorted(cumulative_patch.keys()),
                     "crystallized_skill_ids": crystallized_ids,
+                    "cst_skeletons_compiled": cst_skeletons_compiled,
+                    "abstraction_signature_digests": abstraction_digests,
                     "candidates_evaluated": total_evaluated,
                     "zygote_eval_ms": round(total_zygote_ms, 3),
                     "clone_ms": clone_stats["clone_ms"],
