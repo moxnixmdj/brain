@@ -296,6 +296,23 @@ _GOAL_ARGUMENT_PATTERNS=[
 ]
 
 
+def _names_an_existing_file(text: str) -> bool:
+    """Does the sentence name a file that is already on disk?
+
+    Deliberately syntactic-plus-stat: it answers only "is there an operand here",
+    which is the one question that decides whether a quoted string can be the
+    whole request.  It never chooses which file -- that is the binder's job.
+    """
+    root = pathlib.Path(__file__).resolve().parents[2]
+    for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+", str(text or "")):
+        try:
+            if (root / raw).is_file():
+                return True
+        except OSError:  # pragma: no cover - an unreadable path is not an operand
+            continue
+    return False
+
+
 def _extract_goal_argument(goal):
     """The goal the sentence STATES, or the whole sentence when it states none.
 
@@ -315,9 +332,21 @@ def _extract_goal_argument(goal):
     an explicit "with/for the goal" clause; anything else keeps the whole request,
     which is what every plain request has always received.
     """
+    # A QUOTED STRING IS NOT THE GOAL WHEN THE SENTENCE NAMES AN OPERAND.
+    #
+    # The rule above is about an INVOCATION that hands its goal over as an
+    # argument ("Run X with goal 'Write a report'"), and those sentences name no
+    # repository path.  Measured 2026-11-02: "Append 'omega' to <existing file>"
+    # names one, and the single quoted string is the LINE TO APPEND -- so the row
+    # was handed goal="omega", could not find a line in it, and refused with
+    # THE_LINE_TO_ADD_IS_NOT_STATED while holding the value it was told to add.
+    # The whole request stands in that case, which is what every plain request
+    # has always received.  Only an EXISTING file suppresses the quoted reading:
+    # a destination that does not exist yet is not an operand, so
+    # "Create a docx with goal 'X' and save it to out.docx" keeps its goal.
     text=str(goal or "")
     quoted=re.findall(r'["\']([^"\']+)["\']',text)
-    if len(quoted)==1 and quoted[0].strip():
+    if len(quoted)==1 and quoted[0].strip() and not _names_an_existing_file(text):
         return quoted[0].strip()
     for pattern in _GOAL_ARGUMENT_PATTERNS:
         m=re.search(pattern,text,flags=re.IGNORECASE)

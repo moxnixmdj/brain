@@ -22344,7 +22344,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_edit.py",
-    "source_sha256": "a59beba97f1aece53b2145c2459274999ebdeb6d27c9f9773e3d99b7edeffcf2",
+    "source_sha256": "42b292db76fb9c1b0e6aa93894183df9e342fa3fb4932e351086136465c3e772",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22762,7 +22762,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_edit.py",
-    "source_sha256": "a59beba97f1aece53b2145c2459274999ebdeb6d27c9f9773e3d99b7edeffcf2",
+    "source_sha256": "42b292db76fb9c1b0e6aa93894183df9e342fa3fb4932e351086136465c3e772",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -32076,7 +32076,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "803eddc609c573871a6c041438ee7a2f1d342e4b1ce98a6cbfcdfb9354b1f5c9"
+  "value": "56ef9862ba7f6ab305bc31628d14606c103e9acc5d808612149b9144253afa5e"
  },
  "engines": [
   {
@@ -32781,7 +32781,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "a59beba97f1aece53b2145c2459274999ebdeb6d27c9f9773e3d99b7edeffcf2"
+    "sha256": "42b292db76fb9c1b0e6aa93894183df9e342fa3fb4932e351086136465c3e772"
    },
    "canonical/runtime/bound_capabilities/file_line_count.py": {
     "defaulted_keys": {},
@@ -65778,7 +65778,7 @@
   "included_source_count": 1080,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1a5f11f882fb1b053e5f05cb793a9a1bee093bbd6ec00aa2c5b83b95aeb09993"
+  "source_tree_digest": "f4dc4ecffbeda162dc92c062c433ad77ef91c56f7eda39a484f9f4a4e26c16f8"
  },
  "research_index": [
   {
@@ -250363,9 +250363,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "838b3d61af973a32a56f1d75b1bb1f445bfb34b3f53e59f04153692d1bdac24e",
+   "sha256": "f1655a41508f5f1e05ca18dde603ce8ae8be8f9cb18cae09a46b61f08c7f44be",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 140,
+   "symbol_count": 141,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -250394,7 +250394,6 @@
    ],
    "terms": {
     "adapter_default_argv": 1,
-    "bare_stated_destination": 1,
     "bind_inputs": 1,
     "brain": 1,
     "claimed_paths": 1,
@@ -250409,6 +250408,7 @@
     "goal": 1,
     "goalcompilationfailure": 1,
     "load_sibling_runtime_module": 1,
+    "names_an_existing_file": 1,
     "path_named_after_output_verb": 1,
     "path_named_by_role": 1,
     "path_role_words": 1,
@@ -256814,9 +256814,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "bf39fffb07f3ec197eaacb5cacb0d7771decc5892c18b6326348c23ab539e5b6",
+   "sha256": "5c438206e7849eaa63c50ae36e3eea75b0a9e44e64781a334618e9490c09669a",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 114,
+   "symbol_count": 115,
    "symbols": [
     "LocalExecutionFailure",
     "_already_satisfied_evidence",

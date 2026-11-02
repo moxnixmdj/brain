@@ -389,7 +389,9 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     _handles = {str(verb).lower() for verb in (entry.get("handles_verbs") or [])}
     if _handles:
         _opening = _leading_mutation_word(goal)
-        if _opening is not None and _opening not in _handles:
+        if (_opening is not None and _opening not in _handles
+                and not (_opening in _GENERIC_TRANSFORMATION_VERBS
+                         and _names_the_rows_own_verb(goal, _handles))):
             return {"schema": SCHEMA, "admitted": False,
                     "rule": "THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM",
                     "compiler_mode": mode, "selected_capability": selected,
@@ -4313,6 +4315,34 @@ _MUTATING_VERBS = frozenset({
     "reformat", "format", "split", "merge", "combine", "concatenate", "backup",
     "restore", "chmod", "chown", "convert", "rewrite", "fix", "repair", "patch",
 })
+
+
+# Verbs that name a CHANGE without naming WHAT the change is.  "Convert <f> to
+# uppercase" and "Reformat <f> as JSON" state their operation in the phrase after
+# "to"/"into"/"as", not in the opening word, so the opening word cannot be the
+# whole claim.  Measured 2026-11-02: `file.uppercased.v1` declares
+# `handles_verbs: ["uppercase"]`, the sentence "Convert <f> to uppercase" opened
+# with "convert", and the row was refused with
+# THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM -- a correct rule
+# applied to a word that states no operation of its own.  The sentence then fell
+# through to the composer, which reached the general shell row and refused for
+# missing confinement: a request the machine can serve, lost to grammar.
+_GENERIC_TRANSFORMATION_VERBS = frozenset({
+    "convert", "change", "transform", "turn", "rewrite", "reformat",
+})
+
+
+def _names_the_rows_own_verb(goal: str, handles: set[str]) -> bool:
+    """Does the sentence state, elsewhere, the operation this row declares?
+
+    The declared verb has to appear as a word of the sentence.  "Convert <f> to
+    uppercase" names `uppercase`, so the row that performs uppercase is the row
+    the sentence asked for; "Convert <f> to JSON" names no declared verb here, so
+    nothing is admitted by this path.
+    """
+    words = {raw.strip(".,:;!\"'`()[]").lower()
+             for raw in str(goal or "").lower().replace("?", " ").split()}
+    return bool(words & handles)
 
 
 def _leading_mutation_word(goal: str) -> str | None:

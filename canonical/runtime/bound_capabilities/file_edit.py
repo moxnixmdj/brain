@@ -48,10 +48,22 @@ _SOURCE_SUFFIXES = (".py", ".pyi", ".js", ".jsx", ".ts", ".tsx", ".rs", ".go",
                     ".php", ".swift", ".mjs", ".cjs")
 
 #: Words that introduce the value a sentence wants appended.
+#
+# The last alternative is the plainest English of the three -- "Add the line
+# epsilon to <f>" -- and it was the one shape this table could not read, so the
+# row refused with THE_LINE_TO_ADD_IS_NOT_STATED a request it exists to serve
+# (measured 2026-11-02: two of twenty-four paraphrases of already-served
+# sentences failed on this alone).  It comes last and refuses the other
+# introducers, because "a line containing delta" also contains the word "line":
+# without the negative lookahead this branch would claim "containing" as the
+# text to add.
 _STATED_TEXT = re.compile(
     r"""["'`](?P<quoted>[^"'`\n]+)["'`]"""
     r"""|\b(?:containing|that\s+says|reading|saying|with\s+the\s+text)\s+"""
-    r"""(?P<bare>[^,.;\n]+?)(?=\s+(?:to|into|onto|at\s+the\s+end)\b|[,.;]|$)""",
+    r"""(?P<bare>[^,.;\n]+?)(?=\s+(?:to|into|onto|at\s+the\s+end)\b|[,.;]|$)"""
+    r"""|\bline\s+(?P<named>(?!(?:containing|that\s+says|reading|saying)\b)"""
+    r"""(?!(?:to|into|onto|at)\b)"""
+    r"""[^,.;"'`\n]+?)(?=\s+(?:to|into|onto|at\s+the\s+end)\b|[,.;]|$)""",
     re.I,
 )
 
@@ -88,7 +100,8 @@ def _stated_line(stated: str) -> str:
     match = _STATED_TEXT.search(stated)
     if match is None:
         raise RuntimeError("THE_LINE_TO_ADD_IS_NOT_STATED")
-    line = (match.group("quoted") or match.group("bare") or "").strip()
+    line = (match.group("quoted") or match.group("bare")
+            or match.groupdict().get("named") or "").strip()
     if not line:
         raise RuntimeError("THE_LINE_TO_ADD_IS_NOT_STATED")
     return line
