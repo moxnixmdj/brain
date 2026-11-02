@@ -102,7 +102,10 @@ class AStepThatCouldNotAnswerIsNotAPass(unittest.TestCase):
         self.assertIn(str(result.get("failure_class") or ""),
                       ("COMPOSED_STEP_UNRESOLVED", "STEP_RAISED_OUTCOME_UNKNOWN",
                        "STATED_ANSWER_NOT_PROVIDED", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
-                       "COMPOSED_CHAIN_NOT_VERIFIED", "NAMED_INPUT_REMOVED", ""))
+                       "COMPOSED_CHAIN_NOT_VERIFIED", "NAMED_INPUT_REMOVED",
+                       # The typed diagnosis route now reaches an adapter that
+                       # runs target tests; it must refuse until confined.
+                       "COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT", ""))
 
 
 if __name__ == "__main__":

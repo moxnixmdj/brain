@@ -999,19 +999,56 @@ def _recipe_of(plan: Sequence[str], suffix: str, target: str,
             env.close()
 
 
+def _file_sha256(path: pathlib.Path) -> str:
+    import hashlib
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        while chunk := stream.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _compressed_content_matches(source: pathlib.Path, output: pathlib.Path,
+                                suffix: str) -> bool | None:
+    """Compare the complete decoded stream with the input, including EOF/CRC.
+
+    None means this is not a recognized single-stream compression format, not
+    that a format-only check establishes its semantics.
+    """
+    import bz2
+    import gzip
+    import lzma
+    import zlib
+    reader = {".gz": gzip.open, ".tar.gz": gzip.open, ".tgz": gzip.open,
+              ".bz2": bz2.open, ".tar.bz2": bz2.open,
+              ".xz": lzma.open, ".tar.xz": lzma.open}.get(suffix)
+    if reader is None:
+        return None
+    try:
+        with source.open("rb") as original, reader(output, "rb") as decoded:
+            while True:
+                expected = original.read(1024 * 1024)
+                actual = decoded.read(len(expected) if expected else 1)
+                if actual != expected:
+                    return False
+                if not expected:
+                    return True
+    except (OSError, EOFError, ValueError, lzma.LZMAError, zlib.error):
+        return False
+
+
 def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
           out_dir: str | pathlib.Path | None = None,
           output_name: str | None = None,
           timeout: float = 30.0) -> dict[str, Any]:
-    """Run a command the machine taught itself, on a real file.
+    """Run a learned command on a copy, verify, then publish without overwrite.
 
-    A plan that only works on the synthetic file it was learned on is not a
-    capability, it is a fact about one directory. The recipe carries the argv
-    that actually worked, so the same command can be pointed at a file the
-    machine has never seen.
-
-    Nothing is trusted: the output is opened with the library that owns the
-    format before this reports success.
+    Staging prevents ordinary commands using the supplied input/output names
+    from modifying the original. It is NOT an OS sandbox: a hostile command can
+    access absolute paths, network, subprocesses and other resources. Callers
+    must use trusted recipes and appropriate OS isolation. For gzip, bzip2 and
+    xz outputs the full decoded bytes must equal the original; for other formats
+    the existing verifier remains a format check, not a complete semantic oracle.
     """
     from canonical.runtime import program_synthesis_v1 as ps
     source = pathlib.Path(src)
@@ -1026,48 +1063,78 @@ def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
     target = recipe.get("target")
     name = (output_name or recipe.get("stdout_to")
             or (source.name + pathlib.Path(str(target or ".out")).suffix))
+    if (not isinstance(name, str) or not name or name in (".", "..")
+            or pathlib.Path(name).name != name or "\\" in name
+            or name == source.name):
+        return {"pass": False, "status": "OPEN__UNSAFE_OUTPUT_NAME"}
     out_dir = pathlib.Path(out_dir) if out_dir else source.parent
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / name
-
-    # Run in the file's own directory and hand over its name, not an absolute
-    # path: zip and tar store whatever they were given, so an absolute path
-    # bakes /home/user/... into every archive forever.
     try:
-        handed_over = str(source.relative_to(out_dir))
-    except ValueError:
-        handed_over = str(source)
-
-    argv = []
-    for token in argv_in:
-        if token == "{input}":
-            argv.append(handed_over)
-        elif target and token == target:
-            argv.append(name)          # the output follows the real input
-        else:
-            argv.append(str(token))
-
-    try:
-        proc = subprocess.run(argv, cwd=str(out_dir), capture_output=True,
-                              timeout=timeout)
-    except Exception as exc:  # noqa: BLE001
-        return {"pass": False, "status": "OPEN__COMMAND_FAILED",
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_dir = out_dir.resolve()
+        source = source.resolve(strict=True)
+        out = out_dir / name
+        if os.path.lexists(out):
+            return {"pass": False, "status": "OPEN__OUTPUT_ALREADY_EXISTS", "output": str(out)}
+        original_hash = _file_sha256(source)
+        with tempfile.TemporaryDirectory(prefix=".brain-apply-", dir=out_dir) as temporary:
+            stage = pathlib.Path(temporary)
+            staged_source = stage / source.name
+            staged_output = stage / name
+            shutil.copyfile(source, staged_source)
+            if _file_sha256(staged_source) != original_hash:
+                return {"pass": False, "status": "OPEN__INPUT_CHANGED_DURING_STAGING"}
+            argv = [source.name if token == "{input}" else name if target and token == target
+                    else str(token) for token in argv_in]
+            # Capture potentially large stdout on disk. Exclusive creation avoids
+            # following an output symlink produced by the recipe.
+            with tempfile.TemporaryFile(dir=stage) as captured:
+                try:
+                    proc = subprocess.run(argv, cwd=str(stage), stdin=subprocess.DEVNULL,
+                                          stdout=captured, stderr=subprocess.DEVNULL, timeout=timeout)
+                except Exception as exc:  # noqa: BLE001
+                    return {"pass": False, "status": "OPEN__COMMAND_FAILED",
+                            "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+                if proc.returncode != 0:
+                    return {"pass": False, "status": "OPEN__COMMAND_NONZERO_EXIT",
+                            "returncode": proc.returncode, "argv": argv}
+                captured.seek(0, os.SEEK_END)
+                if recipe.get("stdout_to") and captured.tell():
+                    captured.seek(0)
+                    try:
+                        with staged_output.open("xb") as output_stream:
+                            shutil.copyfileobj(captured, output_stream, 1024 * 1024)
+                    except FileExistsError:
+                        return {"pass": False, "status": "OPEN__AMBIGUOUS_OUTPUT"}
+            if staged_output.is_symlink() or not staged_output.is_file():
+                return {"pass": False, "status": "OPEN__COMMAND_PRODUCED_NO_FILE",
+                        "detail": " ".join(argv), "argv": argv}
+            if (staged_source.is_symlink() or not staged_source.is_file()
+                    or _file_sha256(staged_source) != original_hash
+                    or _file_sha256(source) != original_hash):
+                return {"pass": False, "status": "OPEN__INPUT_CHANGED_DURING_APPLICATION"}
+            suffix = ps.suffix_for_name(name)
+            good, why = ps.verify_round_trip(staged_output, suffix)
+            if not good:
+                return {"pass": False, "status": "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
+                        "verification": why, "argv": argv}
+            content_match = _compressed_content_matches(staged_source, staged_output, suffix)
+            if content_match is False:
+                return {"pass": False, "status": "OPEN__OUTPUT_CONTENT_MISMATCH",
+                        "verification": "COMPLETE_DECOMPRESSION_DOES_NOT_MATCH_INPUT", "argv": argv}
+            output_bytes = staged_output.stat().st_size
+            try:
+                # A hard link is atomic and never replaces an existing path,
+                # including dangling symlinks or a concurrent creator.
+                os.link(staged_output, out, follow_symlinks=False)
+            except FileExistsError:
+                return {"pass": False, "status": "OPEN__OUTPUT_ALREADY_EXISTS", "output": str(out)}
+            return {"pass": True, "status": "PASS__APPLIED_TO_REAL_FILE",
+                    "argv": argv, "output": str(out), "output_bytes": output_bytes,
+                    "verification": why, "source_content_verified": content_match is True,
+                    "returncode": proc.returncode}
+    except (OSError, ValueError) as exc:
+        return {"pass": False, "status": "OPEN__APPLICATION_FILE_ERROR",
                 "detail": type(exc).__name__ + ":" + str(exc)[:200]}
-
-    if recipe.get("stdout_to") and proc.stdout:
-        out.write_bytes(proc.stdout)
-
-    if not out.is_file():
-        return {"pass": False, "status": "OPEN__COMMAND_PRODUCED_NO_FILE",
-                "detail": " ".join(argv), "argv": argv}
-
-    suffix = ps.suffix_for_name(name)
-    good, why = ps.verify_round_trip(out, suffix)
-    return {"pass": bool(good), "status": "PASS__APPLIED_TO_REAL_FILE"
-            if good else "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
-            "argv": argv, "output": str(out),
-            "output_bytes": out.stat().st_size, "verification": why,
-            "returncode": proc.returncode}
 
 
 def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
@@ -1076,10 +1143,9 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
                   timeout: float = 30.0) -> dict[str, Any]:
     """Execute a snapshot-checkpointed multi-step CLI chain (e.g. directory/file -> .tar -> .tar.gz).
 
-    `discover()` remains strictly single-step (`OPEN__FORMAT_NEEDS_A_CHAIN_THIS_CHANNEL_CANNOT_KEEP`);
-    `perform_chain()` owns stateful multi-stage execution where every intermediate artifact and the
-    final multi-layer output must pass `ps.verify_round_trip` independently, rolling back cleanly
-    to the pre-execution workspace snapshot on any stage failure.
+    `discover()` remains strictly single-step. Intermediate and final artifacts
+    are checked before a no-overwrite publication. This is not an OS sandbox;
+    subprocesses can have effects outside the staging directory.
     """
     from canonical.runtime import cli_capability_acquisition_v1 as acq
     from canonical.runtime import program_synthesis_v1 as ps
@@ -1121,11 +1187,16 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
     if not ps.carries_content_evidence(inner_suffix) or not ps.carries_content_evidence(outer_suffix):
         return {"pass": False, "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE", "detail": suffix}
 
-    # Snapshot pre-existing top-level entries for clean rollback on any intermediate failure
-    existing_before = {p.name for p in base.iterdir()} if base.is_dir() else set()
+    # Never let a pre-existing destination (including a dangling symlink) be
+    # mistaken for the result of this chain or removed during rollback.
+    if (not isinstance(wanted, str) or pathlib.Path(wanted).name != wanted
+            or wanted in ("", ".", "..") or "\\" in wanted):
+        return {"pass": False, "status": "OPEN__UNSAFE_OUTPUT_NAME"}
+    out_path = base / wanted
+    if os.path.lexists(out_path):
+        return {"pass": False, "status": "OPEN__OUTPUT_ALREADY_EXISTS", "output": str(out_path)}
     src_was_dir = src.is_dir()
     src_bytes_before = src.read_bytes() if src.is_file() else None
-    out_path = base / wanted
 
     with tempfile.TemporaryDirectory(prefix="brain_chain_stage_") as stage_dir_raw:
         stage_dir = pathlib.Path(stage_dir_raw)
@@ -1156,42 +1227,50 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
         if not found2.get("closed") or not found2.get("recipe"):
             return {"pass": False, "status": "OPEN__CHAIN_STAGE2_DISCOVERY_FAILED",
                     "detail": found2.get("status")}
-        done2 = apply(found2["recipe"], stage2_src, out_dir=base, output_name=wanted, timeout=timeout)
-        if not out_path.is_file():
-            # Rollback any stray files
-            for p in list(base.iterdir()):
-                if p.name not in existing_before and p.is_file():
-                    p.unlink(missing_ok=True)
-            return {"pass": False, "status": "OPEN__CHAIN_STAGE2_PRODUCED_NO_FILE",
-                    "detail": done2.get("detail")}
+        done2 = apply(found2["recipe"], stage2_src, out_dir=stage_dir, output_name=wanted, timeout=timeout)
+        if not done2.get("pass"):
+            return {"pass": False, "status": "OPEN__CHAIN_STAGE2_FAILED",
+                    "detail": done2.get("status")}
 
-        # Independent end-to-end verification on the full multi-layer format (`.tar.gz`!)
-        ok_final, why_final = ps.verify_round_trip(out_path, suffix)
+        # Check the finished artifact before publishing anything to the caller.
+        staged_final = stage_dir / wanted
+        ok_final, why_final = ps.verify_round_trip(staged_final, suffix)
         if not ok_final:
-            out_path.unlink(missing_ok=True)
             return {"pass": False, "status": "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
                     "verification": why_final}
+        if src_was_dir and not src.is_dir():
+            return {"pass": False, "status": "OPEN__INPUT_DESTROYED_BY_CHAIN"}
+        if src_bytes_before is not None and (not src.is_file() or src.read_bytes() != src_bytes_before):
+            return {"pass": False, "status": "OPEN__INPUT_MUTATED_BY_CHAIN"}
+        try:
+            # Copy to the destination filesystem first, then atomically link
+            # without replacing a pre-existing or concurrently created target.
+            with tempfile.NamedTemporaryFile(prefix=".brain-chain-", dir=base) as candidate:
+                with staged_final.open("rb") as source_stream:
+                    shutil.copyfileobj(source_stream, candidate, 1024 * 1024)
+                candidate.flush()
+                if _file_sha256(pathlib.Path(candidate.name)) != _file_sha256(staged_final):
+                    return {"pass": False, "status": "OPEN__CHAIN_COPY_MISMATCH"}
+                output_bytes = os.fstat(candidate.fileno()).st_size
+                os.link(candidate.name, out_path, follow_symlinks=False)
+        except FileExistsError:
+            return {"pass": False, "status": "OPEN__OUTPUT_ALREADY_EXISTS", "output": str(out_path)}
+        except OSError as exc:
+            return {"pass": False, "status": "OPEN__APPLICATION_FILE_ERROR",
+                    "detail": type(exc).__name__ + ":" + str(exc)[:200]}
 
-    # Verify input integrity (never destroy or clobber `src`)
-    if src_was_dir and not src.is_dir():
-        out_path.unlink(missing_ok=True)
-        return {"pass": False, "status": "OPEN__INPUT_DESTROYED_BY_CHAIN"}
-    if src_bytes_before is not None and (not src.is_file() or src.read_bytes() != src_bytes_before):
-        out_path.unlink(missing_ok=True)
-        return {"pass": False, "status": "OPEN__INPUT_MUTATED_BY_CHAIN"}
-
-    return {
-        "pass": True,
-        "status": "PASS__CHAIN_APPLIED_AND_VERIFIED",
-        "goal": gap,
-        "stages": 2,
-        "plan": ["run_tar", *(found2.get("plan") or [])],
-        "stage1_verification": why1,
-        "verification": why_final,
-        "output": str(out_path),
-        "output_bytes": out_path.stat().st_size,
-        "from_memory": bool(found2.get("from_memory")),
-    }
+        return {
+            "pass": True,
+            "status": "PASS__CHAIN_APPLIED_AND_VERIFIED",
+            "goal": gap,
+            "stages": 2,
+            "plan": ["run_tar", *(found2.get("plan") or [])],
+            "stage1_verification": why1,
+            "verification": why_final,
+            "output": str(out_path),
+            "output_bytes": output_bytes,
+            "from_memory": bool(found2.get("from_memory")),
+        }
 
 
 def perform(gap: str, cwd: str | pathlib.Path | None = None,
@@ -1229,6 +1308,13 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
     if src is None:
         return {"pass": False, "status": "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL",
                 "detail": "no file named in the goal exists in %s" % base}
+    if wanted:
+        if (pathlib.Path(wanted).name != wanted or wanted in (".", "..")
+                or "\\" in wanted or wanted == src.name):
+            return {"pass": False, "status": "OPEN__UNSAFE_OUTPUT_NAME"}
+        if os.path.lexists(src.parent / wanted):
+            return {"pass": False, "status": "OPEN__OUTPUT_ALREADY_EXISTS",
+                    "output": str(src.parent / wanted)}
 
     found = discover(gap, seed_file=src)
     if not found.get("closed"):

@@ -36,6 +36,8 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 from urllib.parse import parse_qs
 
+from canonical.runtime import computer_execution_boundary_v1 as computer_boundary
+
 from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
     compile_and_qualify_skill,
     elevate_trace_to_fastest_layer,
@@ -65,6 +67,9 @@ _HONEST_REFUSAL_CLASSES: frozenset[str] = frozenset(
         "REMOVAL_REQUIRES_GREEN_BASELINE",
         "REMOVAL_TARGET_NOT_UNIQUE",
         "REQUEST_INVALID",
+        "COMPOSITION_EXECUTION_OUTCOME_UNKNOWN",
+        "COMPOSED_GOAL_NOT_VERIFIED",
+        computer_boundary.FAILURE_CLASS,
     }
 )
 
@@ -429,6 +434,13 @@ def solve_or_learn(
 
     goal = str(req.get("goal") or "").strip()
     task_id = str(req.get("task_id") or "autonomous-solve")
+    # Tier 0 performs its own recall before the door. A door-only policy must
+    # not be silently accepted here as though it governed that earlier tier.
+    if "route_memory_mode" in req:
+        return {"schema": SCHEMA, "task_id": task_id, "pass": False, "executed": False,
+                "status": "FAIL_CLOSED__ROUTE_MEMORY_MODE_UNSUPPORTED_BY_CONTROLLER",
+                "failure_class": "ROUTE_MEMORY_MODE_UNSUPPORTED_BY_CONTROLLER",
+                "semantic_acceptance_complete": False}
     work_cwd = pathlib.Path(cwd or req.get("cwd") or pathlib.Path.cwd()).resolve()
     skill_db = pathlib.Path(db_path) if db_path is not None else None
     r3_path = pathlib.Path(r3_state_path) if r3_state_path is not None else None
@@ -482,451 +494,37 @@ def solve_or_learn(
     demo_post = req.pop("postcondition", None)
     qualification_receipt: dict[str, Any] | None = None
     if isinstance(demo_trace, list) and demo_trace and isinstance(demo_post, Mapping):
-        raw_held_goal = req.pop("heldout_goal", None)
-        held_goal = str(raw_held_goal).strip() if raw_held_goal else None
-        held_cwd = req.pop("heldout_cwd", None)
-        held_post = req.pop("heldout_postcondition", None)
-        sab_post = req.pop("sabotaged_postcondition", None)
-        # Drop donor reference locally before qualification executes
-        trace_copy = list(demo_trace)
-        del demo_trace
-        ablation_receipt: dict[str, Any] | None = None
-        if len(trace_copy) > 1:
-            try:
-                from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
-                    create_zero_copy_cow_workspace,
-                )
-
-                def _trace_outcome_oracle(cand_trace: list[dict[str, Any]]) -> bool:
-                    with tempfile.TemporaryDirectory(prefix="brain-ablate-cow-") as atd:
-                        acw = pathlib.Path(atd) / "ws"
-                        if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
-                            create_zero_copy_cow_workspace(work_cwd, acw)
-                        else:
-                            acw.mkdir(parents=True, exist_ok=True)
-                        elev = elevate_trace_to_fastest_layer(cand_trace)
-                        steps = list(elev.get("elevated_steps") or [])
-                        if not steps:
-                            return False
-                        ex = execute_compiled_steps(steps, cwd=acw)
-                        if not ex.get("ok"):
-                            return False
-                        ok_vp, _ = verify_postcondition(demo_post, cwd=acw, execution_result=ex)
-                        return bool(ok_vp)
-
-                ablation_receipt = prune_non_causal_steps_counterfactually(trace_copy, _trace_outcome_oracle)
-                if ablation_receipt.get("baseline_passed") and ablation_receipt.get("minimal_trace"):
-                    trace_copy = list(ablation_receipt["minimal_trace"])
-            except Exception:
-                ablation_receipt = None
-        qualification_receipt = compile_and_qualify_skill(
-            goal=goal,
-            trace=trace_copy,
-            postcondition=demo_post,
-            heldout_goal=held_goal,
-            heldout_cwd=held_cwd or (work_cwd if held_goal is not None else None),
-            heldout_postcondition=held_post,
-            sabotaged_postcondition=sab_post,
-            auto_synthesize_twin=(held_goal is None),
-            source_cwd=work_cwd,
-            source_channel="k2_demonstration_transfer",
-            db_path=skill_db,
-        )
-        if isinstance(qualification_receipt, dict) and ablation_receipt is not None:
-            qualification_receipt["counterfactual_ablation"] = {
-                "original_length": ablation_receipt.get("original_length"),
-                "minimal_length": ablation_receipt.get("minimal_length"),
-                "pruned_indices": ablation_receipt.get("pruned_indices"),
-            }
-
-    # ------------------------------------------------------------------
-    # ROUND-0 PATHOLOGY PRECHECK (`experience_v1` + `flywheel_v1`, < 0.5 ms)
-    #         + Earned-Importance Associative Memory (`associative_memory_v1`)
-    # ------------------------------------------------------------------
-    exp_state_path = req.pop("experience_state_path", None)
-    fly_state_path = req.pop("flywheel_state_path", None)
-    assoc_mem_path = req.pop("associative_memory_path", None)
-    assoc_recalled: list[dict[str, Any]] = []
-    if assoc_mem_path is not None:
-        try:
-            from canonical.runtime import associative_memory_v1 as amem
-
-            assoc_recalled = list(amem.recall(goal, k=5, path=str(assoc_mem_path)) or [])
-        except Exception:
-            assoc_recalled = []
-
-    def _credit_assoc_memory(helped: bool, learned_note: Any = None) -> dict[str, Any] | None:
-        if assoc_mem_path is None:
-            return None
-        try:
-            from canonical.runtime import associative_memory_v1 as amem
-
-            mp = str(assoc_mem_path)
-            credited = 0
-            for r_row in assoc_recalled:
-                rid = str(r_row.get("id") or "")
-                if rid and amem.credit(rid, helped=bool(helped), path=mp):
-                    credited += 1
-            remembered_id = None
-            if helped and learned_note is not None:
-                remembered_id = amem.remember(learned_note, kind="verified_resolution", tags=("solve_or_learn",), path=mp)
-                amem.forget(capacity=5000, path=mp)
-            return {
-                "recalled_count": len(assoc_recalled),
-                "credited_count": credited,
-                "remembered_id": remembered_id,
-            }
-        except Exception:
-            return None
-
-    round0_meta: dict[str, Any] = {}
-    try:
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            round0_pathology_precheck,
-        )
-
-        round0_meta = round0_pathology_precheck(
-            goal,
-            [],
-            experience_state_path=str(exp_state_path) if exp_state_path else None,
-            flywheel_state_path=str(fly_state_path) if fly_state_path else None,
-        )
-    except Exception:
-        round0_meta = {}
-
-    # ------------------------------------------------------------------
-    # TIER 0-SEMANTIC (<2 ms): Lossless Ambiguity/Sense/Relation Control,
-    # Exact Rational Polytopes, Cross-Doc Semantic Lattice, Unfamiliar Tool
-    # Schema Planning, Browser/DOM Grounding & Perf/Command Diagnostics
-    # ------------------------------------------------------------------
-    amb_prob = (
-        req.pop("ambiguity_problem", None)
-        or req.pop("sense_problem", None)
-        or req.pop("semantic_relation_problem", None)
-        or req.pop("domain_mapping_problem", None)
-    )
-    if isinstance(amb_prob, Mapping):
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            evaluate_semantic_ambiguity_and_sense,
-        )
-
-        amb_out = evaluate_semantic_ambiguity_and_sense(amb_prob)
-        passed_amb = bool(amb_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_amb, {"goal": goal, "organ": amb_out.get("control_organ")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_amb,
-            "status": str(amb_out.get("status") or ("PASS__SEMANTIC_AMBIGUITY_RESOLVED" if passed_amb else "FAIL_CLOSED__AMBIGUITY_REQUIRES_SEPARATOR")),
-            "tier_used": "tier0_semantic_ambiguity_sense_control",
-            "semantic_control": amb_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    poly_prob = req.pop("polytope_problem", None)
-    if isinstance(poly_prob, Mapping):
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            solve_exact_rational_polytope,
-        )
-
-        poly_out = solve_exact_rational_polytope(poly_prob)
-        passed_poly = bool(poly_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_poly, {"goal": goal, "organ": "exact_linear_parameter_polytope_v1"})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_poly,
-            "status": str(poly_out.get("status") or ("PASS__EXACT_RATIONAL_POLYTOPE" if passed_poly else "FAIL_CLOSED__POLYTOPE_INFEASIBLE")),
-            "tier_used": "tier0_exact_linear_parameter_polytope",
-            "polytope": poly_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    xdoc_prob = req.pop("cross_document_problem", None)
-    xdoc_ver = req.pop("cross_document_relation_verifier", None)
-    if isinstance(xdoc_prob, Mapping):
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            evaluate_cross_document_semantic_lattice,
-        )
-
-        xdoc_out = evaluate_cross_document_semantic_lattice(
-            xdoc_prob,
-            relation_verifier=xdoc_ver if callable(xdoc_ver) else None,
-        )
-        passed_xdoc = bool(xdoc_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_xdoc, {"goal": goal, "organ": "cross_document_effect_semantic_lattice_v8"})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_xdoc,
-            "status": str(xdoc_out.get("status") or ("PASS__CROSS_DOCUMENT_LATTICE_CLOSED" if passed_xdoc else "FAIL_CLOSED__CROSS_DOCUMENT_LATTICE")),
-            "tier_used": "tier0_cross_document_semantic_lattice_v8",
-            "cross_document_lattice": xdoc_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    tool_schemas = req.pop("tool_schemas", None) or req.pop("api_endpoints", None)
-    tool_executor = req.pop("tool_executor", None)
-    tool_obs = req.pop("tool_observations", ())
-    if isinstance(tool_schemas, (list, tuple)) and tool_schemas:
-        from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
-            plan_and_execute_unfamiliar_tool_schemas,
-        )
-
-        ts_out = plan_and_execute_unfamiliar_tool_schemas(
-            goal,
-            tool_schemas,
-            executor=tool_executor if callable(tool_executor) else None,
-            initial_observations=tool_obs if isinstance(tool_obs, (list, tuple)) else (),
-        )
-        passed_ts = bool(ts_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_ts, {"goal": goal, "organ": "generic_goal_tool_effect_planner_v2"})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_ts,
-            "status": str(ts_out.get("status")),
-            "tier_used": "tier1_unfamiliar_tool_effect_planner_v2",
-            "tool_plan_result": ts_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    dom_action = req.pop("dom_action", None)
-    dom_elements = req.pop("dom_elements", None)
-    if isinstance(dom_action, Mapping) or isinstance(dom_elements, (list, tuple)):
-        from canonical.runtime.computer_env_v1 import ground_dom_or_browser_surface
-
-        dom_out = ground_dom_or_browser_surface(
-            goal,
-            action_spec=dom_action if isinstance(dom_action, Mapping) else None,
-            dom_elements=dom_elements if isinstance(dom_elements, (list, tuple)) else None,
-        )
-        passed_dom = bool(dom_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_dom, {"goal": goal, "organ": dom_out.get("grounding_stage")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_dom,
-            "status": "PASS__DOM_GROUNDING_SELECTED" if passed_dom else f"FAIL_CLOSED__DOM_{dom_out.get('status')}",
-            "tier_used": "tier1_dom_browser_grounding",
-            "dom_grounding": dom_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    perf_target = req.pop("perf_target", None)
-    perf_git_ref = req.pop("perf_git_ref", None)
-    if perf_target is not None:
-        from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
-            diagnose_and_verify_performance_or_architecture,
-        )
-
-        p_out = diagnose_and_verify_performance_or_architecture(
-            perf_target,
-            goal,
-            git_ref=str(perf_git_ref) if perf_git_ref else None,
-        )
-        passed_p = bool(p_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_p, {"goal": goal, "organ": p_out.get("diagnostic_organ")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_p,
-            "status": "PASS__PERF_OR_DESIGN_DIAGNOSTIC_VERIFIED" if passed_p else "FAIL_CLOSED__PERF_DIAGNOSTIC",
-            "tier_used": "tier1_perf_and_design_diagnostics",
-            "diagnostics": p_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    repair_cmd = req.pop("repair_command", None)
-    repair_stderr = req.pop("repair_stderr", "")
-    repair_exit = req.pop("repair_exit_code", 1)
-    if repair_cmd is not None:
-        from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
-            diagnose_command_failure_and_transfer_strategy,
-        )
-
-        rc_out = diagnose_command_failure_and_transfer_strategy(
-            str(repair_cmd),
-            str(repair_stderr or ""),
-            int(repair_exit),
-            root=work_cwd,
-        )
-        passed_rc = bool(rc_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_rc, {"goal": goal, "diagnosis": rc_out["diagnosis"].get("class")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_rc,
-            "status": "PASS__COMMAND_FAILURE_DIAGNOSED_AND_STRATEGY_COMPILED" if passed_rc else "FAIL_CLOSED__UNDIAGNOSED_COMMAND_FAILURE",
-            "tier_used": "tier2_command_repair_and_transfer_strategy",
-            "command_repair": rc_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    r2_req = req.pop("r2_adequacy_request", None)
-    if isinstance(r2_req, Mapping):
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            evaluate_r2_direct_or_fixed_point_adequacy,
-        )
-
-        r2_spec = dict(r2_req)
-        inner_req = r2_spec.pop("request", None) or {"task_id": task_id, "goal": goal, **r2_spec}
-        r2_out = evaluate_r2_direct_or_fixed_point_adequacy(
-            inner_req,
-            repo_root=str(r2_spec.pop("repo_root", work_cwd)),
-            information_provider=r2_spec.pop("information_provider", None),
-            proposal_provider=r2_spec.pop("proposal_provider", None),
-            capability_expander=r2_spec.pop("capability_expander", None),
-            execution_provider=r2_spec.pop("execution_provider", None),
-            max_fixed_point_steps=int(r2_spec.pop("max_fixed_point_steps", 8)),
-            preflight_only=bool(r2_spec.pop("preflight_only", False)),
-        )
-        passed_r2 = bool(r2_out.get("pass") is True or r2_out.get("matched") is True)
-        mem_rec = _credit_assoc_memory(passed_r2, {"goal": goal, "organ": r2_out.get("control_organ")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_r2,
-            "status": str(r2_out.get("status") or ("PASS__R2_ADEQUACY_VERIFIED" if passed_r2 else "FAIL_CLOSED__R2_ADEQUACY")),
-            "tier_used": "tier0_r2_direct_or_fixed_point_adequacy",
-            "r2_adequacy": r2_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    pol_prob = (
-        req.pop("policy_adequacy_problem", None)
-        or req.pop("policy_cover_payload", None)
-        or req.pop("escape_repair_state", None)
-    )
-    if isinstance(pol_prob, Mapping):
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            solve_policy_adequacy_or_escape_repair,
-        )
-
-        pol_out = solve_policy_adequacy_or_escape_repair(
-            pol_prob,
-            repo_root=str(req.pop("policy_repo_root", work_cwd)),
-            provider=req.pop("escape_repair_provider", None),
-            verifier=req.pop("escape_repair_verifier", None),
-            max_rounds=int(req.pop("escape_repair_max_rounds", 4)),
-        )
-        passed_pol = bool(pol_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_pol, {"goal": goal, "organ": pol_out.get("control_organ")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_pol,
-            "status": str(pol_out.get("status") or ("PASS__POLICY_ADEQUACY_VERIFIED" if passed_pol else "FAIL_CLOSED__POLICY_ADEQUACY")),
-            "tier_used": "tier1_policy_adequacy_or_escape_repair",
-            "policy_adequacy": pol_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    sci_prob = req.pop("scientific_discovery_problem", None)
-    if isinstance(sci_prob, Mapping):
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            discover_symbolic_or_scientific_law,
-        )
-
-        sci_out = discover_symbolic_or_scientific_law(sci_prob)
-        passed_sci = bool(sci_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_sci, {"goal": goal, "organ": sci_out.get("discovery_organ")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_sci,
-            "status": str(sci_out.get("status")),
-            "tier_used": "tier2_symbolic_or_scientific_law_discovery",
-            "scientific_discovery": sci_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    ooxml_target = req.pop("ooxml_preflight_target", None)
-    if ooxml_target is not None:
-        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-            preflight_professional_ooxml_artifact,
-        )
-
-        ooxml_out = preflight_professional_ooxml_artifact(ooxml_target)
-        passed_ooxml = bool(ooxml_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_ooxml, {"goal": goal, "organ": "professional_artifact_hard_defect_preflight_v1"})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_ooxml,
-            "status": str(ooxml_out.get("status") or ("PASS__OOXML_HARD_DEFECT_PREFLIGHT" if passed_ooxml else "FAIL_CLOSED__OOXML_DEFECT")),
-            "tier_used": "tier0_ooxml_hard_defect_preflight",
-            "ooxml_preflight": ooxml_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
-
-    cap_prob = req.pop("trace_capsule_problem", None)
-    if isinstance(cap_prob, Mapping):
-        from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
-            compile_and_verify_execution_capsule,
-        )
-
-        cap_out = compile_and_verify_execution_capsule(
-            problem=cap_prob.get("problem"),
-            planned=cap_prob.get("planned"),
-            execution=cap_prob.get("execution"),
-            macrosteps=cap_prob.get("macrosteps"),
-            rollback_target_hash=cap_prob.get("rollback_target_hash"),
-            project_requires=cap_prob.get("project_requires"),
-        )
-        passed_cap = bool(cap_out.get("pass") is True)
-        mem_rec = _credit_assoc_memory(passed_cap, {"goal": goal, "organ": cap_out.get("capsule_organ")})
-        return {
-            "schema": SCHEMA,
-            "task_id": task_id,
-            "goal": goal,
-            "pass": passed_cap,
-            "status": str(cap_out.get("status")),
-            "tier_used": "tier1_provenance_execution_capsule",
-            "execution_capsule": cap_out,
-            "associative_memory": mem_rec,
-            "k3_external_llm_calls": 0,
-            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-        }
+        # Qualification executes the supplied trace. It must not precede a
+        # reviewed boundary and effect admission merely because it is called a demo.
+        return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                "status": computer_boundary.STATUS,
+                "failure_class": computer_boundary.FAILURE_CLASS,
+                "executed": False, "semantic_acceptance_complete": False,
+                "tier_used": "unconfined_demonstration_refused",
+                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
     # ------------------------------------------------------------------
     # TIER 0A (<2 ms): Recall Compiled & Ownership-Qualified Workflow Skill
     #                  + Self-Forged Capability Spine (`forged.*`)
     # ------------------------------------------------------------------
-    recalled = recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    # Do not let the fast recall tier jump ahead of the confinement refusal
+    # for the computer-task shapes identified below. Other tiers are not
+    # thereby certified as confined.
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    from canonical.runtime import computer_env_v1 as cenv
+    try:
+        computer_shape = (ra._serve_by_acting({"goal": goal}) is not None
+                          or cenv.query_kind(goal) is not None
+                          or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")))
+    except Exception:
+        computer_shape = True  # a failed classification cannot authorize recall
+    recalled = None if computer_shape else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    if recalled is not None and recalled.get("status") == computer_boundary.STATUS:
+        out = dict(recalled)
+        out.update(controller_schema=SCHEMA, task_id=task_id,
+                   tier_used="tier0_unconfined_workflow_refused",
+                   elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+        return out
     if recalled is not None and recalled.get("pass") is True:
         receipts = list(recalled.get("step_receipts") or [])
         last_step = receipts[-1] if receipts else {}
@@ -1056,10 +654,13 @@ def solve_or_learn(
         and any(w in goal.lower() for w in ("fix", "repair", "failing tests", "make all tests pass"))
         and any(work_cwd.rglob("test_*.py"))
     )
-    if _is_honest_contract_refusal(front_res) and not is_repo_scoped_repair:
+    if ((_is_honest_contract_refusal(front_res) and not is_repo_scoped_repair)
+            or front_res.get("side_effects_may_exist") is True):
         out = dict(front_res)
         out["controller_schema"] = SCHEMA
-        out["tier_used"] = "tier0_honest_contract_refusal"
+        out["tier_used"] = ("tier0_uncertain_side_effects_refusal"
+                            if front_res.get("side_effects_may_exist") is True
+                            else "tier0_honest_contract_refusal")
         out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
         return out
 
@@ -1108,6 +709,7 @@ def solve_or_learn(
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                 }
 
+        composer_dispatch_started = False
         bridge_spec = req.get("byte_verified_bridge")
         if isinstance(bridge_spec, Mapping):
             try:
@@ -1146,22 +748,64 @@ def solve_or_learn(
             )
 
             routed = croute.route(goal, g=_cached_composer_graph())
+            routed = croute.route(goal)
+            if routed.get("status") == computer_boundary.STATUS:
+                return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                        "status": computer_boundary.STATUS,
+                        "failure_class": computer_boundary.FAILURE_CLASS,
+                        "executed": True if front_res.get("executed") is True else None,
+                        "side_effects_may_exist": True,
+                        "composer_fallback_executed": False,
+                        "tier_used": "tier1_unconfined_exploration_refused",
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
             if routed.get("pass") is True and routed.get("chain"):
+                composer_dispatch_started = True
                 chained = croute.execute_chain(routed["chain"], goal)
+                if chained.get("status") == computer_boundary.STATUS:
+                    return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                            "status": computer_boundary.STATUS,
+                            "failure_class": computer_boundary.FAILURE_CLASS,
+                            "executed": True if front_res.get("executed") is True else None,
+                            "side_effects_may_exist": True,
+                            "composer_fallback_executed": False,
+                            "tier_used": "tier1_unconfined_command_refused",
+                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
                 if chained.get("pass") is True:
+                    acceptance = ra._composed_acceptance(goal, routed["chain"], chained)
+                    complete = acceptance.get("semantic_acceptance_complete") is True
                     return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "pass": True,
-                        "status": "PASS__TIER1_CAPABILITY_CHAIN",
-                        "tier_used": "tier1_composer_chain",
-                        "from_memory": False,
-                        "chain": list(routed["chain"]),
-                        "chain_result": chained,
+                        "schema": SCHEMA, "task_id": task_id, "pass": complete,
+                        "status": ("PASS__TIER1_CAPABILITY_CHAIN" if complete
+                                   else "FAIL_CLOSED__COMPOSED_GOAL_NOT_VERIFIED"),
+                        "failure_class": None if complete else "COMPOSED_GOAL_NOT_VERIFIED",
+                        "tier_used": "tier1_composer_chain", "from_memory": False,
+                        "chain": list(routed["chain"]), "chain_result": chained,
+                        "semantic_acceptance_complete": complete,
+                        "raw_goal_acceptance": acceptance.get("raw_goal_acceptance"),
+                        "accepted_raw_obligation_ids": acceptance.get("accepted_raw_obligation_ids") or [],
+                        "executed": True, "side_effects_may_exist": not complete,
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
-        except Exception:
-            pass
+                if (chained.get("steps") or chained.get("executed") is True
+                        or chained.get("side_effects_may_exist") is True):
+                    return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                            "status": str(chained.get("status") or "FAIL__COMPOSER_CHAIN"),
+                            "failure_class": str(chained.get("failure_class") or "COMPOSER_STEP_OUTCOME_UNCERTAIN"),
+                            "tier_used": "tier1_composer_chain", "chain_result": chained,
+                            "executed": True, "side_effects_may_exist": True,
+                            "semantic_acceptance_complete": False,
+                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
+        except Exception as exc:  # noqa: BLE001 - a retry cannot erase possible effects
+            return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                    "status": ("FAIL_CLOSED__COMPOSITION_EXECUTION_OUTCOME_UNKNOWN"
+                               if composer_dispatch_started else "FAIL_CLOSED__COMPOSITION_PLANNING_ERROR"),
+                    "failure_class": ("COMPOSITION_EXECUTION_OUTCOME_UNKNOWN"
+                                      if composer_dispatch_started else "COMPOSITION_PLANNING_ERROR"),
+                    "reason": type(exc).__name__,
+                    "executed": True if composer_dispatch_started or front_res.get("executed") is True else None,
+                    "side_effects_may_exist": True,
+                    "semantic_acceptance_complete": False,
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
     # ------------------------------------------------------------------
     # TIER 2 (<2 s): Targeted Discovery -> Speed Elevation -> Gate Qualification
@@ -1201,60 +845,22 @@ def solve_or_learn(
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                 }
 
-        # 2B: CLI / Pipeline Measurement Discovery (`computer_env_v1`)
+        # CLI probes and archive discovery used to run host programs before an
+        # isolation or effect-admission decision. A filename verifier is not a
+        # sandbox; preserve the refusal instead of trying those paths directly.
         from canonical.runtime import computer_env_v1 as cenv
-
         qkind = cenv.query_kind(goal)
-        if qkind is not None:
-            in_file = _extract_existing_file(goal, work_cwd)
-            if in_file is not None:
-                measured = cenv.answer_query(goal, in_file)
-                if measured.get("pass") is True:
-                    qual = _qualify_cli_measurement_skill(
-                        goal=goal,
-                        input_file=in_file,
-                        measured_res=measured,
-                        cwd=work_cwd,
-                        db_path=skill_db,
-                    )
-                    closed_gaps = _close_matching_ignorance_gaps(goal, str(qual.get("skill_id") or "cli_instrument")) if qual.get("pass") else []
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "pass": True,
-                        "status": "PASS__TIER2_LEARNED_CLI_INSTRUMENT",
-                        "tier_used": "tier2_cli_instrument_discovery",
-                        "from_memory": bool(measured.get("from_memory")),
-                        "learned_this_turn": bool(qual.get("pass")),
-                        "closed_gap_ids": closed_gaps,
-                        "skill_crystallized": bool(qual.get("pass")),
-                        "skill_id": qual.get("skill_id"),
-                        "qualification_receipt": qual,
-                        "answer": measured.get("answer"),
-                        "value": measured.get("value"),
-                        "survivors": measured.get("survivors"),
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-
-        # 2B-Chain: Multi-layer CLI archive chain execution (`computer_env_v1.perform`)
-        if any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")):
-            chain_done = cenv.perform(goal, cwd=work_cwd)
-            if chain_done.get("pass") is True:
-                closed_gaps = _close_matching_ignorance_gaps(goal, "cli_archive_chain")
-                return {
-                    "schema": SCHEMA,
-                    "task_id": task_id,
-                    "pass": True,
-                    "status": "PASS__TIER2_STATEFUL_CLI_CHAIN_VERIFIED",
-                    "tier_used": "tier2_stateful_cli_chain",
-                    "from_memory": bool(chain_done.get("from_memory")),
-                    "learned_this_turn": not bool(chain_done.get("from_memory")),
-                    "closed_gap_ids": closed_gaps,
-                    "plan": chain_done.get("plan"),
-                    "output": chain_done.get("output"),
-                    "verification": chain_done.get("verification"),
-                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                }
+        if ((qkind is not None and _extract_existing_file(goal, work_cwd) is not None)
+                or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz"))):
+            return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                    "status": computer_boundary.STATUS,
+                    "failure_class": computer_boundary.FAILURE_CLASS,
+                    "executed": True if front_res.get("executed") is True else None,
+                    "side_effects_may_exist": True,
+                    "served_after": front_res.get("status"), "computer_fallback_executed": False,
+                    "semantic_acceptance_complete": False,
+                    "tier_used": "tier2_unconfined_computer_execution_refused",
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
         # 2B-Repo: Zero-Hint Multi-Step Closed-Loop Repository Repair (`solve_repository_closed_loop`)
         low_goal = goal.lower()
@@ -1271,6 +877,11 @@ def solve_or_learn(
             if repo_target is None and work_cwd != pathlib.Path(__file__).resolve().parents[2] and any(work_cwd.rglob("test_*.py")):
                 repo_target = work_cwd
             if repo_target is not None:
+                return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                        "status": computer_boundary.STATUS, "failure_class": computer_boundary.FAILURE_CLASS,
+                        "executed": True if front_res.get("executed") is True else None,
+                        "side_effects_may_exist": True, "semantic_acceptance_complete": False,
+                        "tier_used": "repository_repair_execution_not_admitted"}
                 # Phase 3C fast path: `< 180 ms` Zero-Copy CoW + Impact-Sliced + STUN/Guard + Coupled 2-File Zygote Engine
                 try:
                     from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
@@ -1322,28 +933,17 @@ def solve_or_learn(
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
 
-        # 2C: White-Box Stdlib / Local Python Documentation & Surface Mining
-        try:
-            from canonical.runtime import documentation_mining_v1 as dm
-
-            mined = dm.learn_or_recall(goal)
-            if mined.get("pass") is True:
-                closed_gaps = _close_matching_ignorance_gaps(goal, f"doc_mined.{mined.get('module') or 'stdlib'}")
-                return {
-                    "schema": SCHEMA,
-                    "task_id": task_id,
-                    "pass": True,
-                    "status": "PASS__TIER2_LEARNED_PYTHON_DOCUMENTATION",
-                    "tier_used": "tier2_documentation_mining",
-                    "from_memory": bool(mined.get("from_memory")),
-                    "learned_this_turn": not bool(mined.get("from_memory")),
-                    "closed_gap_ids": closed_gaps,
-                    "module": mined.get("module"),
-                    "result": mined,
-                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                }
-        except Exception:
-            pass
+        # Documentation-mined snippets run as host Python programs. Do not
+        # execute this fallback without the same admitted boundary.
+        return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                "status": computer_boundary.STATUS,
+                "failure_class": computer_boundary.FAILURE_CLASS,
+                "executed": True if front_res.get("executed") is True else None,
+                "side_effects_may_exist": True,
+                "served_after": front_res.get("status"), "documentation_fallback_executed": False,
+                "semantic_acceptance_complete": False,
+                "tier_used": "tier2_unconfined_documentation_execution_refused",
+                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
         # 2D: General Computer Environment Execution (`computer_env_v1.perform`) on stated workspace paths
         try:

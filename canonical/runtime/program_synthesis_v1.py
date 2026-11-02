@@ -414,23 +414,17 @@ def verify_round_trip(out: pathlib.Path, suffix: str,
                 return True, "MAGIC_OK"
             return False, "MAGIC_MISMATCH:" + head
         return False, "NO_VERIFIER_FOR_FORMAT"
-    script = out.parent / "_verify.py"
-    # the path is an ARGUMENT, never text substituted into the source.
-    # Substituting it replaced the P in b'\\x89PNG...' and turned the
-    # signature check into garbage -- a verifier that corrupts itself fails
-    # everything and the machine reports a real file as not real.
-    script.write_text(snippet, encoding="utf-8")
+    # Pass both the fixed verifier source and the output path as separate
+    # arguments. Writing a fixed `_verify.py` next to a caller's output used
+    # to overwrite and delete an existing file (and follow existing symlinks).
+    # `-c` keeps the verifier out of the caller's directory while preserving
+    # the snippets' sys.argv[1] interface and their subprocess isolation.
     try:
-        proc = subprocess.run([sys.executable, str(script), str(out)],
+        proc = subprocess.run([sys.executable, "-c", snippet, str(out)],
                               cwd=str(out.parent), capture_output=True,
                               timeout=timeout)
     except Exception:  # noqa: BLE001 - a verifier must never break the search
         return False, "VERIFIER_ERROR"
-    finally:
-        try:
-            script.unlink()
-        except OSError:
-            pass
     if proc.returncode == 0:
         return True, "ROUND_TRIP_OK"
     return False, "NOT_READABLE_AS_" + (suffix or "?")

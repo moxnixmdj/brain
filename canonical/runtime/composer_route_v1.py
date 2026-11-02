@@ -14,8 +14,9 @@ hand-written mapping from sentences to capabilities, because a hand-written
 mapping is the strict program the owner refused.
 
 The second half is the part that matters: a plan that is only produced and
-never run is not a capability. ``route`` returns the chain AND executes it,
-and reports the observed result of every step.
+never run is not a completed task. ``route`` may return a type-level chain;
+``execute_chain`` is the separate operation that attempts it and reports steps.
+A reachable chain is not evidence that the requested result was produced.
 """
 
 from __future__ import annotations
@@ -305,7 +306,8 @@ def route(goal: str, seed: Sequence[str] | None = None,
                     return {"schema": SCHEMA, "pass": True, "goal": goal,
                             "token": token, "chain": list(chain), "tried": tried,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
-                            "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
+                            "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE",
+                            "executed": False, "semantic_acceptance_complete": False}
 
     for token in candidate_tokens(goal, g)[:max_candidates]:
         chain = composer.plan(have, token, g)
@@ -315,68 +317,19 @@ def route(goal: str, seed: Sequence[str] | None = None,
             return {"schema": SCHEMA, "pass": True, "goal": goal,
                     "token": token, "chain": list(chain), "tried": tried,
                     "status": "PASS__COMPOSER_ROUTE_FOUND",
-                    "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
-    # No chain of registered capabilities reaches it. Before reporting that,
-    # try to WRITE a program that does it -- python3 is here and the stdlib is
-    # free, so "nothing is registered" is not the same as "it cannot be done".
-    try:
-        from canonical.runtime import program_synthesis_v1 as synth
-        from canonical.runtime import documentation_mining_v1 as dm
-        made = synth.synthesize_or_recall(goal)
-        if not (isinstance(made, Mapping) and made.get("pass")):
-            made = dm.learn_or_recall(goal)
-    except Exception:  # noqa: BLE001 - synthesis must never break routing
-        made = None
-    if isinstance(made, Mapping) and made.get("pass"):
-        return {"schema": SCHEMA, "pass": True, "goal": goal, "token": None,
-                "chain": [], "tried": tried, "synthesised": True,
-                "status": "PASS__SYNTHESISED_PROGRAM",
-                "suffix": made.get("suffix"),
-                "authority": "SYNTHESISED_EXECUTED_AND_EFFECT_VERIFIED"}
-    # Nothing is registered, nothing could be written, and no documentation
-    # showed the way. The last resort is the one that is given nothing: act in
-    # a real directory, watch what changes, and keep the shortest sequence
-    # that reached the goal. It is last because it is the slowest, and last
-    # because it is the only one still standing when every other had nothing.
-    if not (isinstance(made, Mapping) and made.get("pass")):
-        try:
-            from canonical.runtime import computer_env_v1 as cenv
-            found = cenv.discover(goal)
-        except Exception:  # noqa: BLE001 - discovery must never break routing
-            found = None
-        if isinstance(found, Mapping) and found.get("closed"):
-            # Knowing which program could do it is not doing it. If the goal
-            # names a file that is actually there, do the job and leave the
-            # file behind -- otherwise this is a fact about a sandbox.
-            done = None
-            try:
-                from canonical.runtime import computer_env_v1 as cenv
-                done = cenv.perform(goal, cwd=cwd)
-            except Exception:  # noqa: BLE001 - doing must never break routing
-                done = None
-            if isinstance(done, Mapping) and done.get("pass"):
-                return {"schema": SCHEMA, "pass": True, "goal": goal,
-                        "token": None, "chain": [], "tried": tried,
-                        "explored": True, "done": True,
-                        "plan": list(done.get("plan") or []),
-                        "output": done.get("output"),
-                        "output_bytes": done.get("output_bytes"),
-                        "argv": done.get("argv"),
-                        "verification": done.get("verification"),
-                        "suffix": found.get("suffix"),
-                        "status": "PASS__PERFORMED_ON_REAL_FILE",
-                        "authority": "PERFORMED_ON_REAL_FILE_AND_VERIFIED"}
-            return {"schema": SCHEMA, "pass": True, "goal": goal,
-                    "token": None, "chain": [], "tried": tried,
-                    "explored": True, "plan": list(found.get("plan") or []),
-                    "suffix": found.get("suffix"),
-                    "actions_tried": found.get("actions_tried"),
-                    "status": "PASS__DISCOVERED_BY_ACTING",
-                    "authority": "DISCOVERED_BY_ACTING_AND_EFFECT_VERIFIED"}
+                    "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE",
+                    "executed": False, "semantic_acceptance_complete": False}
+    # The old fallback ran generated/documentation code and discovered host
+    # executables in the caller's authority. No admitted confinement exists yet;
+    # a format verifier is not an execution boundary. Preserve the typed-plan
+    # branches above and explicitly refuse this automatic exploration path.
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
     return {"schema": SCHEMA, "pass": False, "goal": goal, "token": None,
-            "chain": [], "tried": tried,
-            "status": "OPEN__COMPOSER_NO_REACHABLE_TOKEN",
-            "authority": "TYPE_LEVEL_COMPOSITION_UNREACHABLE"}
+            "chain": [], "tried": tried, "status": boundary.STATUS,
+            "failure_class": boundary.FAILURE_CLASS,
+            "authority": "NO_UNCONFINED_AUTOMATIC_EXPLORATION",
+            "executed": False, "semantic_acceptance_complete": False}
+
 
 
 # --------------------------------------------------------------------------- #
@@ -4080,6 +4033,17 @@ def execute_chain(chain: Sequence[str], goal: str,
     from canonical.runtime import live_brain_route_admission_v1 as ra
 
     reg = registry if registry is not None else composer.load_registry()
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    # Reject a known unconfined command anywhere in the chain before an earlier
+    # step can have effects. This does not certify any other adapter as safe.
+    for index, cid in enumerate(chain):
+        entry = reg.get(cid)
+        if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(entry)
+                or boundary.is_unconfined_repair_entry(cid, entry)):
+            return {"schema": SCHEMA, "pass": False, "goal": goal,
+                    "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
+                    "executed": False, "failed_step": {"index": index, "capability_id": cid},
+                    "steps": []}
     from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
     effect_error = implementation_effect_error(goal, chain, reg)
     if effect_error:

@@ -16,6 +16,21 @@ from typing import Any, Mapping
 from canonical.swe_kernel import diagnostics_perf_and_design_engine_v1 as engine
 
 
+def _static_operation_or_refuse(op: str) -> None:
+    """Refuse here too, so a direct call cannot skip the dispatcher's decision.
+
+    Some operations in the engine below run target code (`exec`), a child
+    process, or `git`. The dispatcher refuses those before importing this module;
+    a caller that imported it directly would skip that. Only the audited static
+    operations are served, and an unknown operation is refused.
+    """
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    if boundary.diagnose_operation_is_static(boundary.DIAGNOSE_CAPABILITY_ID, None, op):
+        return
+    raise RuntimeError(boundary.STATUS)
+
+
 def _safe_path(repo: pathlib.Path, raw: str, *, must_exist: bool = True) -> pathlib.Path:
     if not raw or not isinstance(raw, str):
         raise RuntimeError("MISSING_OR_INVALID_PATH_ARGUMENT")
@@ -38,6 +53,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
 
     if not op or not out_raw:
         raise RuntimeError("DIAGNOSE_ARCHITECT_MISSING_REQUIRED_ARGUMENTS")
+    _static_operation_or_refuse(op)
 
     out_path = _safe_path(repo, out_raw, must_exist=False)
     target: pathlib.Path | None = None
