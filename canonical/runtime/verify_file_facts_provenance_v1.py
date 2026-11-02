@@ -873,6 +873,121 @@ def _check_compress() -> tuple[bool, list[dict]]:
     return all(c["ok"] for c in checks), checks
 
 
+def _check_archive_tar() -> tuple[bool, list[dict]]:
+    """`file.archive.tar_gz.v1`: the named archive, holding the file, source kept.
+
+    The archive is opened HERE, with the standard library, and its member
+    compared with the bytes this file wrote -- not with anything the adapter
+    reports.  The property that separates this row from the gzip row is checked
+    as a fact too: the source SURVIVES, unchanged, on success and after every
+    refusal.
+    """
+    import tarfile as _tarfile
+
+    checks: list[dict] = []
+    for leftover in WORLD.glob("archive_me*"):
+        leftover.unlink() if leftover.is_file() else None
+    source = WORLD / "archive_me.txt"
+    payload = b"alpha\nbeta\n" + bytes(range(64))
+    source.write_bytes(payload)
+    digest = _sha256(source)
+    rel = _rel(source)
+    archive = WORLD / "archive_me.tar.gz"
+    archive_rel = _rel(archive)
+
+    out = _adapter_run("file.archive.tar_gz.v1",
+                       {"command": "compress",
+                        "goal": "Compress %s into %s" % (rel, archive_rel),
+                        "path": rel, "output_path": archive_rel}, WORLD)
+
+    def member_bytes(path):
+        try:
+            with _tarfile.open(path, "r:gz") as handle:
+                return handle.extractfile(handle.getmember(source.name)).read()
+        except Exception:  # noqa: BLE001 - an unreadable archive is a failed check
+            return None
+
+    checks.append({"name": "the archive lands at the path the sentence named",
+                   "ok": archive.is_file(), "archive": archive_rel})
+    checks.append({"name": "the archive's member is exactly the bytes that were read",
+                   "ok": member_bytes(archive) == payload,
+                   "expected_sha256": digest,
+                   "adapter_reported_source": out.get("source_sha256")})
+    checks.append({"name": "the source survives, unchanged: tar copies",
+                   "ok": source.is_file() and source.read_bytes() == payload
+                         and out.get("source_removed") is False,
+                   "source_exists": source.exists(),
+                   "adapter_reported": out.get("source_removed")})
+    checks.append({"name": "gzip's own archive was never written",
+                   "ok": not (WORLD / "archive_me.txt.gz").exists()})
+    checks.append({"name": "the adapter reports the run verified",
+                   "ok": out.get("output_verified") is True})
+
+    def refusal(label, args, expect, untouched):
+        archive.unlink(missing_ok=True)
+        try:
+            _adapter_run("file.archive.tar_gz.v1", dict(args, command="compress"), WORLD)
+        except Exception as exc:  # noqa: BLE001 - the code is what is checked
+            message = str(exc)
+            return {"name": label, "ok": expect in message and untouched()
+                    and not archive.exists(),
+                    "expects": expect, "refused_with": message[:140]}
+        return {"name": label, "ok": False, "expects": expect, "refused_with": None}
+
+    archive.write_bytes(b"AN OLDER ARCHIVE THAT MUST SURVIVE")
+    checks.append({"name": "refuses an archive that already exists",
+                   "ok": _refuses_keeping(archive) and source.is_file()
+                         and source.read_bytes() == payload,
+                   "expects": "THE_ARCHIVE_ALREADY_EXISTS"})
+    archive.unlink(missing_ok=True)
+    # The sentence must name the same .zip it hands over, so the SUFFIX rule is
+    # what refuses here and not the "sentence never named it" rule.
+    _zip_rel = archive_rel.replace(".tar.gz", ".zip")
+    checks.append(refusal("refuses a destination that is not a tar archive",
+                          {"goal": "Compress %s into %s" % (rel, _zip_rel),
+                           "path": rel, "output_path": _zip_rel},
+                          "DESTINATION_IS_NOT_A_TAR_ARCHIVE",
+                          lambda: source.is_file() and not (WORLD / _zip_rel.split("/")[-1]).exists()))
+    checks.append(refusal("refuses an archive the sentence never named",
+                          {"goal": "Compress " + rel, "path": rel,
+                           "output_path": archive_rel},
+                          "DESTINATION_NOT_STATED_IN_THE_SENTENCE",
+                          lambda: source.is_file()))
+    checks.append(refusal("refuses a source the sentence never named",
+                          {"goal": "Compress another_file into " + archive_rel,
+                           "path": rel, "output_path": archive_rel},
+                          "PATH_NOT_STATED_IN_THE_SENTENCE",
+                          lambda: source.is_file()))
+    checks.append(refusal("refuses a destination outside the repository",
+                          {"goal": "Compress %s into /tmp/elsewhere.tar.gz" % rel,
+                           "path": rel, "output_path": "/tmp/elsewhere.tar.gz"},
+                          "DESTINATION_OUTSIDE_REPOSITORY",
+                          lambda: source.is_file()))
+    return all(c["ok"] for c in checks), checks
+
+
+def _refuses_keeping(archive: pathlib.Path) -> bool:
+    """Run the row with an archive in the way and confirm it is refused untouched."""
+    source = WORLD / "archive_me.txt"
+    try:
+        _adapter_run("file.archive.tar_gz.v1",
+                     {"command": "compress",
+                      "goal": "Compress %s into %s" % (_rel(source), _rel(archive)),
+                      "path": _rel(source), "output_path": _rel(archive)}, WORLD)
+    except Exception as exc:  # noqa: BLE001 - the code is what is checked
+        return ("THE_ARCHIVE_ALREADY_EXISTS" in str(exc)
+                and archive.read_bytes() == b"AN OLDER ARCHIVE THAT MUST SURVIVE")
+    return False
+
+
+ROWS["file.archive.tar_gz.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-TAR-001",
+    "claim": ("writes the tar archive the sentence names, proves the archive's member is the "
+              "source bytes, keeps the source in place, and refuses any other destination"),
+    "check": _check_archive_tar,
+}
+
+
 ROWS["file.compressed.gzip.v1"] = {
     "mission": "ASTRA-VERIFY-FILE-COMPRESS-001",
     "claim": ("compresses the stated file to <name>.gz, proves the archive decompresses to the "

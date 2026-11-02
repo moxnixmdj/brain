@@ -47,7 +47,7 @@ D = "d.txt"
 OUT = "out.txt"
 
 #: The floor. The measured served count at the commit that added this file.
-FLOOR = 20
+FLOOR = 21
 
 
 def _rel(name: str) -> str:
@@ -129,6 +129,19 @@ def run_all() -> list[dict]:
                    "result": _served(f"Rename {_rel(B)} to {_rel(D)}")})
     assert not (WORLD / B).exists() and (WORLD / D).is_file()
 
+    # The archive goes exactly where the sentence said, and the source is still
+    # there: this row copies (`tar czf`), it never removes. Both facts are checked
+    # against the disk rather than against the row's own report.
+    _archive_goal = f"Compress {_rel(A)} into {_rel('a.tar.gz')}"
+    served.append({"goal": _archive_goal, "result": _served(_archive_goal)})
+    import tarfile as _tarfile
+    with _tarfile.open(WORLD / "a.tar.gz", "r:gz") as _archive:
+        _member = _archive.getmember(A)
+        assert _archive.extractfile(_member).read() == (WORLD / A).read_bytes(), (
+            "the archive does not hold the file the sentence named")
+    assert (WORLD / A).is_file(), "compressing removed the source"
+    assert not (WORLD / (A + ".gz")).exists(), "an archive nobody named was written"
+
     # ---- and the ones that must not be served ------------------------------
     before = (WORLD / A).read_bytes()
     refused.append({"goal": f"Delete the last line of {_rel(A)}",
@@ -137,15 +150,6 @@ def run_all() -> list[dict]:
     # afterwards, which is the repository's own standard, not a preference.
     assert (WORLD / A).read_bytes() == before, "a refused deletion changed the file"
 
-    refused.append({"goal": f"Compress {_rel(A)} into {WORLD.relative_to(ROOT).as_posix()}/a.tar.gz",
-                    "result": _refused(
-                        f"Compress {_rel(A)} into {WORLD.relative_to(ROOT).as_posix()}/a.tar.gz")})
-    # `extract_argv` reads that sentence as `gzip <a>`, and gzip deletes the
-    # source: serving it would write a.gz and destroy a while the named archive
-    # was never created. It is refused, and nothing moved.
-    assert (WORLD / A).read_bytes() == before, "a refused compress changed the file"
-    assert not (WORLD / "a.tar.gz").exists(), "an archive nobody asked for was written"
-    assert not (WORLD / (A + ".gz")).exists(), "an invented archive was written"
 
     for goal in (f"Tell me what changed in {WORLD.relative_to(ROOT).as_posix()} today",
                  f"Summarise {_rel(A)}",
@@ -182,6 +186,8 @@ def test_every_sentence_that_should_be_served_is_served_by_the_row_that_owns_it(
         "Uppercase every line in": "file.uppercased.v1",
         "Make a backup of": "file.backup.v1",
         "Rename ": "file.rename.v1",
+        # The row that writes the archive the sentence names, and keeps the source.
+        "Compress ": "file.archive.tar_gz.v1",
         # Served by the runtime's writer through composition, which names no
         # compiled capability; the bytes are checked in `run_all`.
         "Write the text hello to": None,
@@ -201,7 +207,7 @@ def test_every_sentence_that_should_be_served_is_served_by_the_row_that_owns_it(
     assert checked == expected_served, (checked, expected_served)
 
 
-# The five sentences this world does not serve yet, each with the gate that
+# The four sentences this world does not serve yet, each with the gate that
 # stops it, measured 2026-11-02 at 6dc8ffa.  The gate is pinned rather than
 # merely counted, because "refused" is not one behaviour: a sentence refused
 # because a write was unsafe and a sentence refused because no row exists look
@@ -212,11 +218,6 @@ _UNSERVED_BECAUSE = {
         "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
         "removing by POSITION is refused on purpose: the sentence cannot say which "
         "bytes it means, and the project requires the file to survive unchanged"),
-    "Compress ": (
-        "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
-        "gzip cannot write the archive the sentence names (a .tar.gz), so no row "
-        "is admitted; the row that could gzip would delete the source and write "
-        "its own name"),
     "Tell me what changed": (
         "FAIL_CLOSED__CAPABILITY_REFUSED_NAMED_TEST_NOT_IN_GIT_HISTORY",
         "mis-routed to the bisect row, which wants a named test; the honest answer "
@@ -296,7 +297,7 @@ def test_each_unserved_sentence_is_refused_by_the_gate_that_stops_it() -> None:
     exists" to "answered" without the bytes to show for it, and cannot move one
     from "the write was unsafe" to a different refusal and still look green.
     """
-    assert len(_UNSERVED_BECAUSE) == 5, len(_UNSERVED_BECAUSE)
+    assert len(_UNSERVED_BECAUSE) == 4, len(_UNSERVED_BECAUSE)
     outcomes = run_all()
     for item in outcomes:
         for prefix, (expected_status, why) in _UNSERVED_BECAUSE.items():

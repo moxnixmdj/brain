@@ -1167,6 +1167,59 @@ def _post_sort(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
                       "destination_matches_sorted_source": True}
 
 
+def _post_tar(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`tar czf B A` promises B is a tar archive holding A's bytes, and that A survives.
+
+    This is an ADDITIVE command, so it is the one mutating entry in this table
+    whose promise can be checked against an oracle that outlives it: A is still
+    on disk afterwards.  The check therefore does not trust the archive's size,
+    its name, or anything the producer reported -- it opens B, finds the member
+    A is stored under, and compares the bytes with A itself.  A truncated
+    archive, an archive of a different file, and an archive that merely happens
+    to be named .tar.gz all fail here.
+
+    Scoped to exactly one shape -- `tar czf B A`, four tokens -- because that is
+    the only form whose promise can be stated without guessing.  `tar xzf`, a
+    directory operand, several members, and any other flag change what survives
+    or what is stored, so they are refused as unstateable rather than
+    approximated.
+    """
+    if len(tokens) != 4 or str(tokens[1]).lower() != "czf":
+        return False, "COMMAND_TAR_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    dst = _inside(root, tokens[2])
+    src = _inside(root, tokens[3])
+    if src is None or dst is None:
+        return False, "COMMAND_TAR_PATH_OUTSIDE_REPOSITORY", {}
+    if not dst.is_file():
+        return False, "COMMAND_TAR_ARCHIVE_ABSENT_FROM_DISK", {"expected": str(dst)}
+    if not src.is_file():
+        # tar copies; the source it was told to read is still there.  Its absence
+        # means either the wrong file was archived or something removed it.
+        return False, "COMMAND_TAR_SOURCE_ABSENT_FROM_DISK", {"expected": str(src)}
+    try:
+        import io
+        import tarfile
+
+        with tarfile.open(dst, "r:gz") as archive:
+            members = [m for m in archive.getmembers() if m.isfile()]
+            member = next((m for m in members if m.name.split("/")[-1] == src.name), None)
+            if member is None:
+                return False, "COMMAND_TAR_SOURCE_IS_NOT_A_MEMBER", {
+                    "members": [m.name for m in members][:8]}
+            handle = archive.extractfile(member)
+            recovered = handle.read() if handle is not None else b""
+    except Exception as exc:  # noqa: BLE001 - an unreadable archive is data, not a crash
+        return False, "COMMAND_TAR_ARCHIVE_NOT_READABLE", {"error": str(exc)[:160]}
+    original = src.read_bytes()
+    if recovered != original:
+        return False, "COMMAND_TAR_MEMBER_IS_NOT_THE_SOURCE", {
+            "source_sha256": __import__("hashlib").sha256(original).hexdigest(),
+            "member_sha256": __import__("hashlib").sha256(recovered).hexdigest()}
+    return True, "", {"postcondition_checked": "tar", "member_name": member.name,
+                      "member_matches_source": True, "source_survived": True,
+                      "recoverable_bytes": len(recovered)}
+
+
 def _post_ruff_format(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     """`ruff format A` promises A is in the formatter's own canonical form, still parses,
     and still says the same thing.
@@ -1555,6 +1608,7 @@ _MUTATING_POSTCONDITIONS = {
     "touch": _post_touch,
     "rm": _post_rm,
     "gzip": _post_gzip,
+    "tar": _post_tar,
     "tee": _post_tee,
     "sort": _post_sort,
     # a formatter whose output is judged by the formatter's own check, and by the

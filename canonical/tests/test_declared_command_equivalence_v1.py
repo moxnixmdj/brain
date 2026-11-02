@@ -270,14 +270,25 @@ def test_the_registry_rows_that_declare_a_command_are_the_file_rows() -> None:
     registry = graph.load_registry()
     declaring = sorted(cid for cid, entry in registry.items()
                        if isinstance(entry, dict) and declared.FIELD in entry)
-    assert declaring == ["file.contents.v1", "file.copy.v1", "file.diff.v1",
+    assert declaring == ["file.archive.tar_gz.v1", "file.compressed.gzip.v1",
+                         "file.contents.v1", "file.copy.v1", "file.diff.v1",
                          "file.line_count.v1", "file.rename.v1", "file.reversed.v1",
                          "file.sorted.v1", "file.stat.v1"], declaring
     # The declaration says what a row COMPUTES, not that it only reads. Exactly
-    # two rows write, and they are named here so a third cannot appear quietly
-    # with the read-only guard switched off.
+    # four rows write, and they are named here so a fifth cannot appear quietly
+    # with the read-only guard switched off. Each new one arrived with its own
+    # evidence rather than as an exception:
+    #   * `file.copy.v1` / `file.rename.v1` write the destination the sentence
+    #     names, in process, and refuse to overwrite or to move onto themselves;
+    #   * `file.compressed.gzip.v1` performs gzip, which REMOVES the source, so
+    #     it decompresses the archive and compares it before the removal, and
+    #     refuses any destination the sentence named that gzip would not write;
+    #   * `file.archive.tar_gz.v1` performs `tar czf`, which COPIES: it writes
+    #     the named archive, re-opens it and compares the member with the source,
+    #     and never removes anything.
     writers = sorted(cid for cid in declaring if registry[cid].get("read_only") is not True)
-    assert writers == ["file.copy.v1", "file.rename.v1"], writers
+    assert writers == ["file.archive.tar_gz.v1", "file.compressed.gzip.v1",
+                       "file.copy.v1", "file.rename.v1"], writers
 
 
 def test_a_declaration_outranks_a_mutation_verb_the_command_does_not_have() -> None:

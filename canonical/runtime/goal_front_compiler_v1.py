@@ -2300,6 +2300,38 @@ def _replaces_the_whole_content(goal: str) -> bool:
     return False
 
 
+def _declares_a_destination_slot(entry: Mapping[str, Any]) -> bool:
+    """Does the row have anywhere to put a path the sentence names as output?"""
+    keys: set[str] = set()
+    for block in ((entry.get("proposal_bindings") or {}),
+                  ((entry.get("action_template") or {}).get("args") or {})):
+        if isinstance(block, Mapping):
+            keys |= {str(k) for k in block}
+    for argv in (((entry.get("computes_command") or {}).get("argvs")) or []):
+        for token in (argv or []):
+            keys.update(re.findall(r"\$\{([A-Za-z0-9_]+)", str(token)))
+    return any(_is_output_key(key, entry) for key in keys)
+
+
+def _takes_more_paths_than_the_row_can_write(goal: str, entry: Mapping[str, Any]) -> bool:
+    """A mutating one-file row is not the row for a two-path sentence.
+
+    Only mutating rows are filtered: a read-only row produces a value, and a
+    sentence may name a place for that value without making the row wrong.
+    Only rows without a destination slot are filtered: a row that declares one
+    is exactly the row the second path belongs to.
+    """
+    if not entry.get("handles_verbs"):
+        return False
+    if _declares_a_destination_slot(entry):
+        return False
+    try:
+        paths = gc._repo_paths(goal, _FALLBACK_ROOT) or []
+    except Exception:  # noqa: BLE001 - an unparseable sentence names no extra path
+        return False
+    return len({str(p) for p in paths}) >= 2
+
+
 def _takes_exactly_one_stated_file(entry: Mapping[str, Any]) -> bool:
     """A row whose whole contract is: one file in, nothing else out.
 
@@ -2335,8 +2367,19 @@ def _writes_the_one_stated_file(entry: Mapping[str, Any]) -> bool:
     return types == ["auto_path", "goal_text", "path_file_or_dir"]
 
 
-def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
-    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
+def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]],
+                      constraint_text: str | None = None) -> list[tuple[int, int, str, dict[str, Any]]]:
+    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.
+
+    `goal` may be a selection text with stated values blanked (F31).  A
+    STRUCTURAL constraint still has to see the sentence, because the thing it
+    tests is the paths -- measured 2026-11-02: "Compress <d>/a.txt into
+    <d>/a.tar.gz" lost its destination when passed as selection text, so the
+    one-file rule below could not count two paths and the gzip row stayed a
+    candidate for a sentence it cannot honour.  `constraint_text` carries the
+    real sentence for those tests only.
+    """
+    sentence = str(constraint_text if constraint_text is not None else goal)
     out = []
     for cid, entry in sorted(registry.items()):
         if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
@@ -2371,6 +2414,27 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
         # that scope: the append row was filtered out of the one sentence it
         # exists for.
         if _takes_exactly_one_stated_file(entry) and _replaces_the_whole_content(goal):
+            continue
+        # A ROW THAT WRITES ONE FILE IS NOT THE ROW FOR A SENTENCE THAT NAMES
+        # TWO AND HAS NOWHERE TO PUT THE SECOND.
+        #
+        # Measured 2026-11-02: "Compress <d>/a.txt into <d>/a.tar.gz" named a
+        # source and a destination.  The gzip row declares a single file and no
+        # destination slot -- it computes `gzip <file>`, which writes
+        # `<file>.gz` and removes the source -- so the second path had nowhere
+        # to go.  Its declared argv was honoured by DELETING the source and
+        # writing a differently-named archive (the adapter now refuses that, but
+        # a refusal is the wrong answer from the wrong route).  With the tar row
+        # that can write the named archive present, both rows scored the same
+        # and the choice went ambiguous, so the sentence was served by neither.
+        #
+        # The test is structural and does not bind anything: a MUTATING row is
+        # excluded when it declares no destination slot and the sentence names
+        # more paths than it can take.  A read-only row is untouched (a value
+        # with a place to go is a different sentence), and so is a one-path
+        # sentence -- "Add a line containing delta to <f>" names one file and
+        # keeps the append row.
+        if _takes_more_paths_than_the_row_can_write(sentence, entry):
             continue
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
@@ -3107,7 +3171,7 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     selection_text = without_stated_text_value(text)
     if selection_text != text:
         rules.append("F31_STATED_TEXT_VALUE_NOT_TASK_PROSE")
-    ranked = ranked_candidates(selection_text, registry)
+    ranked = ranked_candidates(selection_text, registry, constraint_text=text)
     if not ranked:
         # F32: the sentence STATES a command and exactly one row declares that it
         # computes it.  Measured 2026-11-02: "Read <path>" states `cat <path>`,

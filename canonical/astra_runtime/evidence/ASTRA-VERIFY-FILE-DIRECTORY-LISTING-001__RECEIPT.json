@@ -49,6 +49,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.directory_listing.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T15:54:58Z",
+ "verified_at": "2026-11-02T16:26:18Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }
