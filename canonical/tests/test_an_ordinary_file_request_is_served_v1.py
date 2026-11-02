@@ -201,9 +201,38 @@ def test_every_sentence_that_should_be_served_is_served_by_the_row_that_owns_it(
     assert checked == expected_served, (checked, expected_served)
 
 
+# The five sentences this world does not serve yet, each with the gate that
+# stops it, measured 2026-11-02 at 6dc8ffa.  The gate is pinned rather than
+# merely counted, because "refused" is not one behaviour: a sentence refused
+# because a write was unsafe and a sentence refused because no row exists look
+# identical in a pass/fail column, and merging them is how a real refusal gets
+# replaced by a wrong answer without anybody noticing.
+_UNSERVED_BECAUSE = {
+    "Delete the last line": (
+        "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+        "removing by POSITION is refused on purpose: the sentence cannot say which "
+        "bytes it means, and the project requires the file to survive unchanged"),
+    "Compress ": (
+        "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+        "gzip cannot write the archive the sentence names (a .tar.gz), so no row "
+        "is admitted; the row that could gzip would delete the source and write "
+        "its own name"),
+    "Tell me what changed": (
+        "FAIL_CLOSED__CAPABILITY_REFUSED_NAMED_TEST_NOT_IN_GIT_HISTORY",
+        "mis-routed to the bisect row, which wants a named test; the honest answer "
+        "needs a git-history row that does not exist yet"),
+    "Summarise ": (
+        "FAIL__RAW_GOAL_COMPILATION_GAP",
+        "no summariser exists and inventing one would be a fabricated answer"),
+    "Convert ": (
+        "FAIL_CLOSED__CAPABILITY_REFUSED_YAML_INPUT_REQUIRED",
+        "mis-routed to a YAML-to-JSON converter; the sentence does not say what "
+        "the JSON should be, so any output would be an invented transformation"),
+}
+
+
 def _is_expected_served(goal: str) -> bool:
-    return not goal.startswith(("Delete the last line", "Compress ", "Tell me what changed",
-                                "Summarise ", "Convert "))
+    return not any(goal.startswith(prefix) for prefix in _UNSERVED_BECAUSE)
 
 
 _GOALS = [
@@ -254,6 +283,28 @@ def test_the_ordinary_requests_served_do_not_fall_below_the_floor() -> None:
             # composition whose exact semantic acceptance was verified.
             assert (item["result"].get("compiled_capability_id")
                     or "EXECUTED" in status), ("served without saying what ran", item["goal"])
+
+
+def test_each_unserved_sentence_is_refused_by_the_gate_that_stops_it() -> None:
+    """A refusal is only honest if it is the same refusal next time.
+
+    Five sentences are not served. Each one is refused by a *named* gate, and
+    the gates are different: one guards a destructive write, two are mis-routes
+    (the sentence reaches a row that wants something it never stated), one has
+    no row at all, and one would have to invent its own transformation. Pinning
+    the status means a future change cannot quietly move a sentence from "no row
+    exists" to "answered" without the bytes to show for it, and cannot move one
+    from "the write was unsafe" to a different refusal and still look green.
+    """
+    assert len(_UNSERVED_BECAUSE) == 5, len(_UNSERVED_BECAUSE)
+    outcomes = run_all()
+    for item in outcomes:
+        for prefix, (expected_status, why) in _UNSERVED_BECAUSE.items():
+            if not item["goal"].startswith(prefix):
+                continue
+            status = str(item["result"].get("status") or "")
+            assert item["result"].get("pass") is not True, (item["goal"], "served now", status)
+            assert status == expected_status, (item["goal"], status, expected_status, why)
 
 
 def test_the_world_is_rebuilt_so_the_number_cannot_drift() -> None:
