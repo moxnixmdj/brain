@@ -61,6 +61,7 @@ Zero credit, zero spend, zero models.
 from __future__ import annotations
 
 import ast
+import contextlib
 import hashlib
 import json
 import os
@@ -89,6 +90,35 @@ from canonical.runtime.bound_capabilities import python_repair_measured_acceptan
 from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
     is_test_file_name as _is_test_file_name,
 )
+
+# Pinned repository code root (where Brain's trusted bound capability adapters live),
+# never overridden when `solve()` scopes `ROOT` to an external `workspace_root`.
+_BRAIN_CODE_ROOT = pathlib.Path(ROOT).resolve()
+_ADAPTER_MODULE_CACHE: dict[tuple[str, int, int], Any] = {}
+
+
+@contextlib.contextmanager
+def _with_workspace_root(workspace_root: Any):
+    """Temporarily bind target workspace `ROOT` while keeping trusted code on `_BRAIN_CODE_ROOT`."""
+    global ROOT
+    if not workspace_root:
+        yield ROOT
+        return
+    resolved_ws = pathlib.Path(workspace_root).resolve()
+    if resolved_ws == pathlib.Path(ROOT).resolve():
+        yield ROOT
+        return
+    prev_root = ROOT
+    prev_cr_root = getattr(composer_route, "_REPO_ROOT", None)
+    ROOT = resolved_ws
+    if prev_cr_root is not None:
+        composer_route._REPO_ROOT = resolved_ws
+    try:
+        yield resolved_ws
+    finally:
+        ROOT = prev_root
+        if prev_cr_root is not None:
+            composer_route._REPO_ROOT = prev_cr_root
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -1198,15 +1228,23 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_INVALID")
     declared = str(source.get("adapter_path") or "")
-    path = (ROOT / declared).resolve() if declared else (ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
-    if ROOT.resolve() not in path.parents or not path.is_file() or path.suffix != ".py":
+    code_root = _BRAIN_CODE_ROOT
+    path = (code_root / declared).resolve() if declared else (code_root / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
+    if code_root not in path.parents or not path.is_file() or path.suffix != ".py":
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_MISSING:" + declared)
-    spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
-    if spec is None or spec.loader is None:
-        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    st_mod = path.stat()
+    mod_cache_key = (str(path), st_mod.st_mtime_ns, st_mod.st_size)
+    module = _ADAPTER_MODULE_CACHE.get(mod_cache_key)
+    if module is None:
+        spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
+        if spec is None or spec.loader is None:
+            raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        if len(_ADAPTER_MODULE_CACHE) >= 256:
+            _ADAPTER_MODULE_CACHE.clear()
+        _ADAPTER_MODULE_CACHE[mod_cache_key] = module
     fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
     if not callable(fn):
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
@@ -4244,6 +4282,33 @@ def _stated_paths_outside_the_root(goal: str, root: pathlib.Path) -> list[str]:
     return outside
 
 
+_COMPOSER_GRAPH_MEM_CACHE: dict[tuple[int, int, int, int], dict[str, Any]] = {}
+
+
+def _cached_composer_graph() -> dict[str, Any]:
+    """`(mtime_ns, st_size)`-invalidated RAM cache for `capability_composer_v1.graph()`."""
+    from canonical.runtime import capability_composer_v1 as composer
+
+    reg_p = composer.REGISTRY
+    snap_p = reg_p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    s1 = reg_p.stat() if reg_p.is_file() else None
+    s2 = snap_p.stat() if snap_p.is_file() else None
+    key = (
+        s1.st_mtime_ns if s1 else 0,
+        s1.st_size if s1 else 0,
+        s2.st_mtime_ns if s2 else 0,
+        s2.st_size if s2 else 0,
+    )
+    hit = _COMPOSER_GRAPH_MEM_CACHE.get(key)
+    if hit is not None:
+        return hit
+    built = composer.graph()
+    if len(_COMPOSER_GRAPH_MEM_CACHE) >= 8:
+        _COMPOSER_GRAPH_MEM_CACHE.clear()
+    _COMPOSER_GRAPH_MEM_CACHE[key] = built
+    return built
+
+
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
@@ -4254,7 +4319,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     try:
         from canonical.runtime import composer_route_v1 as croute
         from canonical.runtime import computer_execution_boundary_v1 as boundary
-        routed = croute.route(goal)
+        routed = croute.route(goal, g=_cached_composer_graph(), cwd=ROOT)
         if routed.get("status") == boundary.STATUS:
             return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
                          executed=False, semantic_acceptance_complete=False)
@@ -4754,95 +4819,127 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(request, Mapping) or not request.get("task_id") or not request.get("goal"):
         return _fail(str(request.get("task_id") or "") if isinstance(request, Mapping) else "",
                      "FAIL_CLOSED", "REQUEST_INVALID", started, executed=False)
-    result = _solve_request(request)
-    if "contract_checks" in request:
-        result.setdefault("structured_contract_acceptance_complete", False)
-        if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
-            result["pass"] = False
-            result["semantic_acceptance_complete"] = False
-            result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
-            result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
-    elif result.get("pass") is not True:
-        try:
-            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
-                _is_honest_contract_refusal,
-            )
-            if not _is_honest_contract_refusal(result):
-                acted = _serve_by_acting(request)
-                if acted is not None:
-                    acted["elapsed_ns"] = perf_counter_ns() - started
-                    acted["served_after"] = str(result.get("status") or "")
-                    # The fallback did not run, but the earlier route may have.
-                    # Never turn unknown or prior effects into an executed=False claim.
-                    acted["fallback_executed"] = False
-                    acted["executed"] = result.get("executed")
-                    if "side_effects_may_exist" in result:
-                        acted["side_effects_may_exist"] = result["side_effects_may_exist"]
-                    return acted
-        except Exception:
-            # An unavailable safety check cannot authorize an alternate execution.
-            result["elapsed_ns"] = perf_counter_ns() - started
-            return result
-        # `_serve_by_acting` above only classifies and refuses; workflow recall
-        # can execute. Do not compound a failure whose effects are uncertain.
-        if result.get("side_effects_may_exist") is True or request.get("route_memory_mode") == "exclude":
-            result["elapsed_ns"] = perf_counter_ns() - started
-            return result
-        try:
-            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
-                _is_honest_contract_refusal,
-            )
-            from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
-                recall_and_execute_workflow,
-            )
+    with _with_workspace_root(request.get("workspace_root")):
+        result = _solve_request(request)
+        if "contract_checks" in request:
+            result.setdefault("structured_contract_acceptance_complete", False)
+            if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
+                result["pass"] = False
+                result["semantic_acceptance_complete"] = False
+                result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+                result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+        elif result.get("pass") is not True:
+            try:
+                from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                    _is_honest_contract_refusal,
+                )
+                if not _is_honest_contract_refusal(result):
+                    acted = _serve_by_acting(request)
+                    if acted is not None:
+                        acted["elapsed_ns"] = perf_counter_ns() - started
+                        acted["served_after"] = str(result.get("status") or "")
+                        # The fallback did not run, but the earlier route may have.
+                        # Never turn unknown or prior effects into an executed=False claim.
+                        acted["fallback_executed"] = False
+                        acted["executed"] = result.get("executed")
+                        if "side_effects_may_exist" in result:
+                            acted["side_effects_may_exist"] = result["side_effects_may_exist"]
+                        return acted
+            except Exception:
+                # An unavailable safety check cannot authorize an alternate execution.
+                result["elapsed_ns"] = perf_counter_ns() - started
+                return result
+            # `_serve_by_acting` above only classifies and refuses; workflow recall
+            # can execute. Do not compound a failure whose effects are uncertain.
+            if result.get("side_effects_may_exist") is True or request.get("route_memory_mode") == "exclude":
+                result["elapsed_ns"] = perf_counter_ns() - started
+                return result
+            try:
+                from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                    _is_honest_contract_refusal,
+                )
+                from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+                    recall_and_execute_workflow,
+                )
 
-            if not _is_honest_contract_refusal(result):
-                recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
-                from canonical.runtime import computer_execution_boundary_v1 as boundary
-                if recalled is not None and recalled.get("status") == boundary.STATUS:
-                    # The primary route preceded this fallback and may have had
-                    # effects; the refused workflow itself has not been certified.
-                    return {"schema": SCHEMA, "task_id": str(request.get("task_id") or ""),
-                            "goal": str(request.get("goal") or ""), "pass": False,
-                            "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
-                            "executed": True if result.get("executed") is True else None,
-                            "side_effects_may_exist": True,
-                            "served_after": str(result.get("status") or ""),
-                            "semantic_acceptance_complete": False,
-                            "elapsed_ns": perf_counter_ns() - started}
-                if recalled is not None and recalled.get("pass") is True:
-                    receipts = list(recalled.get("step_receipts") or [])
-                    last_step = receipts[-1] if receipts else {}
-                    ans = str(last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows") or "").strip()
-                    result = {
-                        "schema": SCHEMA,
-                        "task_id": str(request.get("task_id") or ""),
-                        "goal": str(request.get("goal") or ""),
-                        "pass": True,
-                        "status": "PASS__COMPILED_WORKFLOW_SKILL",
-                        "compiled_capability_id": str(recalled.get("skill_id") or ""),
-                        "from_memory": True,
-                        "fastest_layer": recalled.get("dominant_layer"),
-                        "answer": ans,
-                        "step_receipts": receipts,
-                        "elapsed_ns": perf_counter_ns() - started,
-                    }
-                    return result
-        except Exception:
-            pass
-    # Include preflight compilation, selection and report inspection. Moving
-    # work before _solve_body must not make the reported latency look smaller.
-    result["elapsed_ns"] = perf_counter_ns() - started
-    return result
+                if not _is_honest_contract_refusal(result):
+                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
+                    from canonical.runtime import computer_execution_boundary_v1 as boundary
+                    if recalled is not None and recalled.get("status") == boundary.STATUS:
+                        # The primary route preceded this fallback and may have had
+                        # effects; the refused workflow itself has not been certified.
+                        return {"schema": SCHEMA, "task_id": str(request.get("task_id") or ""),
+                                "goal": str(request.get("goal") or ""), "pass": False,
+                                "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
+                                "executed": True if result.get("executed") is True else None,
+                                "side_effects_may_exist": True,
+                                "served_after": str(result.get("status") or ""),
+                                "semantic_acceptance_complete": False,
+                                "elapsed_ns": perf_counter_ns() - started}
+                    if recalled is not None and recalled.get("pass") is True:
+                        receipts = list(recalled.get("step_receipts") or [])
+                        last_step = receipts[-1] if receipts else {}
+                        ans = str(last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows") or "").strip()
+                        result = {
+                            "schema": SCHEMA,
+                            "task_id": str(request.get("task_id") or ""),
+                            "goal": str(request.get("goal") or ""),
+                            "pass": True,
+                            "status": "PASS__COMPILED_WORKFLOW_SKILL",
+                            "compiled_capability_id": str(recalled.get("skill_id") or ""),
+                            "from_memory": True,
+                            "fastest_layer": recalled.get("dominant_layer"),
+                            "answer": ans,
+                            "step_receipts": receipts,
+                            "elapsed_ns": perf_counter_ns() - started,
+                        }
+                        return result
+            except Exception:
+                pass
+        # Include preflight compilation, selection and report inspection. Moving
+        # work before _solve_body must not make the reported latency look smaller.
+        result["elapsed_ns"] = perf_counter_ns() - started
+        return result
 
 
-def solve_or_learn(request: Mapping[str, Any] | str, **kwargs: Any) -> dict[str, Any]:
-    """Closed-loop entry: Tier 0 recall/registry -> Tier 1 DAG/composer -> Tier 2 sandbox learn & qualify."""
+def solve_or_learn(
+    request: Mapping[str, Any] | str,
+    *,
+    learn: bool = True,
+    registry_path: str | None = None,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Unified closed-loop entry: Tier 0 recall/registry -> Tier 1 DAG/composer -> Tier 2 learn/JIT/CLI -> Tier 3 ledger."""
     from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
         solve_or_learn as _controller_solve_or_learn,
     )
 
-    return _controller_solve_or_learn(request, **kwargs)
+    result = _controller_solve_or_learn(
+        request,
+        learn=learn,
+        registry_path=registry_path,
+        **kwargs,
+    )
+    # Preserve the older refusal's diagnostic surface without retrying work or
+    # claiming an earlier fallback ran. This is a post-refusal policy summary.
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if (learn and isinstance(request, Mapping) and isinstance(result, dict)
+            and result.get("status") == boundary.STATUS):
+        info = result.setdefault("learning", {})
+        if isinstance(info, dict):
+            info.setdefault("attempted", False)
+            info.setdefault("post_refusal_policy_summary", True)
+            info.setdefault("computer_env_status", boundary.STATUS)
+            if _named_executable(str(request.get("goal") or "")):
+                info.setdefault("executable_status", boundary.STATUS)
+    return result
+
+
+def chase_until_met(goal: str, *, measure: Any, **kwargs: Any) -> dict[str, Any]:
+    """Target-bound persistent chase loop (`goal_chase_v1.chase_until_met`) wired to the unified front door."""
+    from execution_guard.goal_chase_v1 import chase_until_met as _chase_until_met
+
+    return _chase_until_met(goal, measure=measure, **kwargs)
 
 
 def _capability_id_of(result: Mapping[str, Any]) -> str:
@@ -5533,7 +5630,7 @@ def _named_executable(goal: str) -> str:
     return ""
 
 
-def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
+def _premerge_legacy_solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
                    registry_path: str | None = None) -> dict[str, Any]:
     """Try it; if the machine cannot, let that be the signal to learn how.
 
@@ -5870,7 +5967,15 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         except Exception:
             _clauses = None
         if _clauses and len(_clauses) >= 2:
+            from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+                lookup_verified_chain_macro,
+                record_verified_chain_macro,
+            )
             from canonical.swe_kernel.goal_dag_executor_v1 import execute_transactional_goal_dag
+
+            _macro_state = request.get("_macro_state_path") if isinstance(request, Mapping) else None
+            _macro_hit = lookup_verified_chain_macro(_clauses, state_path=_macro_state)
+            _macro_plan = list((_macro_hit or {}).get("plan") or [])
 
             _snap_rels: list[str] = []
             for _raw_p, _abs_p in goal_compiler._repo_paths(goal, ROOT):
@@ -5881,7 +5986,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                         _snap_rels.append(_rel_d)
 
             def _solve_dag_stage(_subgoal: str, _idx: int) -> dict[str, Any]:
-                _sub_req = {
+                _sub_req: dict[str, Any] = {
                     "task_id": f"{request.get('task_id')}_step{_idx + 1}",
                     "goal": _subgoal,
                     "_compound_substep": True,
@@ -5901,6 +6006,19 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             )
             _receipts = list(_dag.get("stage_receipts") or [])
             if _dag.get("ok") is not True:
+                if _macro_hit is not None and _macro_hit.get("key"):
+                    try:
+                        from canonical.runtime import macro_v1 as _m_mod
+
+                        _orig_m = _m_mod.STATE
+                        try:
+                            if _macro_state is not None:
+                                _m_mod.STATE = pathlib.Path(_macro_state).resolve()
+                            _m_mod.note_failure(str(_macro_hit["key"]))
+                        finally:
+                            _m_mod.STATE = _orig_m
+                    except Exception:
+                        pass
                 _f_idx = _dag.get("failed_stage_index")
                 _f_res = _dag.get("failed_result") or {}
                 return _fail(
@@ -5919,6 +6037,11 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     ],
                 )
             _cids = [str(r["capability_id"]) for r in _receipts if r.get("capability_id")]
+            _macro_saved = record_verified_chain_macro(
+                _clauses,
+                [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in _receipts],
+                state_path=_macro_state,
+            )
             _merged_exec = [item for r in _receipts for item in (r.get("execution") or [])]
             _answers = [r["answer"] for r in _receipts if r.get("answer") is not None]
             return {
@@ -5931,6 +6054,9 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 "semantic_acceptance_complete": True,
                 "compiled_capability_id": _cids[-1] if _cids else None,
                 "selected_plan": _cids,
+                "from_macro": bool(_macro_hit is not None),
+                "macro_recorded": bool(_macro_saved),
+                "macro_key": (_macro_hit or {}).get("key"),
                 "execution": _merged_exec,
                 "compound_steps": [
                     {"clause": r.get("clause"), "status": r.get("status"), "capability_id": r.get("capability_id")}
@@ -6012,10 +6138,51 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     # Reuse the compiler result within this request only. Never cache mutable
     # task evidence across calls. Correct a contradicted SWE effect BEFORE a
     # measurement-only/wrong-domain tool is allowed to execute.
+    _ledger_db = (request or {}).get("_routing_ledger_db") if isinstance(request, Mapping) else None
     if not (request or {}).get("_typed_swe_plan") and goal:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
         prose = front.prose_only(goal)
         if _typed_plan.is_swe_request(prose):
+            _ledger_disq: list[str] = []
+            _ledger_pref: str | None = None
+            try:
+                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                _linfo = _default_ledger(_ledger_db).lookup_shape(goal)
+                _ledger_disq = list(_linfo.get("disqualified") or [])
+                _ledger_pref = _linfo.get("preferred_capability")
+            except Exception:
+                pass
+            if _ledger_disq and _ledger_pref and "contract_checks" not in request:
+                try:
+                    _fast_plan = _typed_plan.build_plan(goal, ROOT)
+                except Exception:
+                    _fast_plan = None
+                if _fast_plan is not None:
+                    _fast_req = dict(request)
+                    _fast_req["_typed_swe_plan"] = _fast_plan
+                    _fast_out = _solve_body(_fast_req)
+                    if _fast_out.get("pass") is True or _fast_out.get("executed") is True:
+                        _fast_sel = _fast_plan[2].get("selected_capability")
+                        _fast_out.setdefault(
+                            "typed_swe_selection",
+                            {
+                                "primary_capability": _ledger_disq[0],
+                                "selected_capability": _fast_sel,
+                                "basis": "DECISIVE_TYPED_SELECTION_BEFORE_EXECUTION",
+                                "upstream_ledger_cached": True,
+                                "model_dependency_count": 0,
+                            },
+                        )
+                        _fast_out["upstream_ledger_fast_route"] = {
+                            "schema": "PROJECT_BRAIN_UPSTREAM_ROUTING_LEDGER_FAST_ROUTE_V1",
+                            "preferred_capability": _ledger_pref,
+                            "selected_capability": _fast_sel,
+                            "skipped_disqualified": sorted(_ledger_disq),
+                            "primary_compile_bypassed": True,
+                            "model_dependency_count": 0,
+                            "incremental_spend_usd": 0,
+                        }
+                        return _fast_out
             try:
                 context = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
             except Exception:
@@ -6032,7 +6199,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 # rules. Use it before ANY lexical dispatch, even when the raw
                 # id looks compatible: its output may still bind onto source.
                 contradicted = bool(selected and (
-                    _typed_plan._family_terms(prose) is not None
+                    selected in _ledger_disq
+                    or _typed_plan._family_terms(prose) is not None
                     or not _typed_plan._effect_consistent(
                         prose, selected, (context[0] or {}).get(selected))))
                 compound = not selected and (
@@ -6091,6 +6259,16 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         result["typed_swe_selection"] = primary_selection
     if early_selection is not None:
         result["typed_swe_selection"] = early_selection
+        _prim_c = str(early_selection.get("primary_capability") or "")
+        _sel_c = str(early_selection.get("selected_capability") or "")
+        if result.get("pass") is True and _prim_c and _sel_c and _prim_c != _sel_c:
+            try:
+                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                _default_ledger(_ledger_db).record_refusal(
+                    goal, _prim_c, "LEXICAL_EFFECT_CONTRADICTED", preferred_capability=_sel_c
+                )
+            except Exception:
+                pass
         # The actual selected adapter's verdict is final, including failures.
         return result
     if result.get("pass") is True or (original_request or {}).get("_typed_swe_plan") is not None:
@@ -6112,6 +6290,19 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         retry_request["_typed_swe_plan"] = plan
         retry = _solve_body(retry_request)
         if retry.get("pass") is True or retry.get("executed") is True or retry.get("refusal_payload") or retry.get("reviewed") or (_capability_id_of(retry) and _capability_id_of(retry) != _capability_id_of(result)):
+            _prim_c = _capability_id_of(result)
+            _win_c = str(plan[2].get("selected_capability") or _capability_id_of(retry) or "")
+            if retry.get("pass") is True and not result.get("executed") and _prim_c and _win_c and _prim_c != _win_c:
+                try:
+                    from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                    _default_ledger(_ledger_db).record_refusal(
+                        goal,
+                        _prim_c,
+                        str(result.get("failure_class") or "LEXICAL_EFFECT_CONTRADICTED"),
+                        preferred_capability=_win_c,
+                    )
+                except Exception:
+                    pass
             retry["typed_swe_retry"] = {
                 "schema": "SWE_TYPED_RETRY_V1",
                 "primary_status": result.get("status"),
@@ -6144,3 +6335,27 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         pass
     return result
+
+
+def awake_pulse(
+    workspace_root: str | Path | None = None,
+    *,
+    ledger_path: str | Path | None = None,
+    skill_store_path: str | Path | None = None,
+    workflow_db_path: str | Path | None = None,
+    apply_verified_repairs: bool = False,
+    max_curriculum_lessons: int = 2,
+    channels: Sequence[str] | None = None,
+) -> dict[str, Any]:
+    """Execute one zero-LLM (`K3 = 0`) continuous awake agency pulse on `workspace_root`."""
+    from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+
+    daemon = AwakeAgencyDaemon(
+        workspace_root or ROOT,
+        ledger_path=ledger_path,
+        skill_store_path=skill_store_path,
+        workflow_db_path=workflow_db_path,
+        apply_verified_repairs=apply_verified_repairs,
+    )
+    return daemon.pulse(max_curriculum_lessons=max_curriculum_lessons, channels=channels)
+

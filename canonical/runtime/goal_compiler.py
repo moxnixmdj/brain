@@ -26,14 +26,29 @@ class GoalCompilationFailure(RuntimeError):
         super().__init__(code if detail is None else f"{code}:{detail}")
 
 
+_SIBLING_RUNTIME_MOD_CACHE: dict[tuple[str, str, int], object] = {}
+
+
 def _load_sibling_runtime_module(filename,module_name):
     path=pathlib.Path(__file__).resolve().with_name(filename)
+    try:
+        mtime_ns=path.stat().st_mtime_ns
+    except OSError as exc:
+        raise GoalCompilationFailure("RUNTIME_HELPER_LOAD_FAILED",filename) from exc
+    cache_key=(str(path),str(module_name),mtime_ns)
+    hit=_SIBLING_RUNTIME_MOD_CACHE.get(cache_key)
+    if hit is not None:
+        sys.modules[module_name]=hit
+        return hit
     spec=importlib.util.spec_from_file_location(module_name,path)
     if spec is None or spec.loader is None:
         raise GoalCompilationFailure("RUNTIME_HELPER_LOAD_FAILED",filename)
     module=importlib.util.module_from_spec(spec)
     sys.modules[module_name]=module
     spec.loader.exec_module(module)
+    if len(_SIBLING_RUNTIME_MOD_CACHE)>=64:
+        _SIBLING_RUNTIME_MOD_CACHE.clear()
+    _SIBLING_RUNTIME_MOD_CACHE[cache_key]=module
     return module
 
 
@@ -176,8 +191,17 @@ def _flatten(value):
 
 
 def _placeholders(value):
-    text=_flatten(value)
-    return sorted(set(_PLACEHOLDER_TOKEN_RE.findall(text)))
+    found=set()
+    stack=[value]
+    while stack:
+        cur=stack.pop()
+        if isinstance(cur,dict):
+            stack.extend(cur.values())
+        elif isinstance(cur,list):
+            stack.extend(cur)
+        elif cur:
+            found.update(_PLACEHOLDER_TOKEN_RE.findall(str(cur)))
+    return sorted(found)
 
 
 # `_repo_paths` is a pure function of the sentence and the root: it scans the
@@ -1026,22 +1050,44 @@ def _complete_inputs_via_world_binding(goal, root, cid, entry):
     return inputs, completed
 
 
-def _execution_surface_constraint_match(goal,entry):
-    lower=str(goal or "").lower()
-    source=(entry or {}).get("source") or {}
-    source_type=str(source.get("type") or "").lower()
-    adapter=str((entry or {}).get("adapter_module") or "").lower()
+_RE_NPM_SURFACE = re.compile(r"\bnpm\b|\bnode(?:\.js|js)?\b")
+_RE_APT_SURFACE = re.compile(r"\bapt\b")
+_RE_REL_PATH_SCAN = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+")
+_NONFORMAT_SUFFIXES = frozenset({"json","txt","md","markdown","csv","tsv"})
+_GOAL_SURFACE_FLAGS_CACHE: dict[str, tuple[bool, bool, bool]] = {}
+_GOAL_BINARY_FORMATS_CACHE: dict[str, frozenset[str]] = {}
+
+
+def _goal_surface_flags(goal):
+    key=str(goal or "")
+    hit=_GOAL_SURFACE_FLAGS_CACHE.get(key)
+    if hit is not None:
+        return hit
+    lower=key.lower()
     requires_npm=bool(
-        re.search(r"\bnpm\b",lower)
-        or re.search(r"\bnode(?:\.js|js)?\b",lower)
+        (("npm" in lower or "node" in lower) and _RE_NPM_SURFACE.search(lower))
         or "javascript library" in lower
     )
     requires_pypi=bool("pypi" in lower or "python library" in lower)
     requires_apt=bool(
-        re.search(r"\bapt\b",lower)
+        ("apt" in lower and _RE_APT_SURFACE.search(lower))
         or "ubuntu package" in lower
         or "debian package" in lower
     )
+    res=(requires_npm,requires_pypi,requires_apt)
+    if len(_GOAL_SURFACE_FLAGS_CACHE)>=1024:
+        _GOAL_SURFACE_FLAGS_CACHE.clear()
+    _GOAL_SURFACE_FLAGS_CACHE[key]=res
+    return res
+
+
+def _execution_surface_constraint_match(goal,entry):
+    requires_npm,requires_pypi,requires_apt=_goal_surface_flags(goal)
+    if not (requires_npm or requires_pypi or requires_apt):
+        return True,None
+    source=(entry or {}).get("source") or {}
+    source_type=str(source.get("type") or "").lower()
+    adapter=str((entry or {}).get("adapter_module") or "").lower()
     if requires_npm:
         ok=source_type=="npm" or adapter.startswith("node_") or adapter.startswith("javascript_")
         return ok,{"required_surface":"npm_node","observed_source_type":source_type,"adapter_module":adapter}
@@ -1054,23 +1100,38 @@ def _execution_surface_constraint_match(goal,entry):
     return True,None
 
 
-def _structured_binary_format_match(goal,entry):
-    provides=[str(x).lower() for x in (entry.get("provides") or [])]
-    formats={
-        p[len("structured.binary.encode."):]
-        for p in provides
-        if p.startswith("structured.binary.encode.") and p!="structured.binary.encode"
-    }
-    if not formats:
-        return True,None
-    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(goal or ""))
+def _goal_requested_binary_formats(goal):
+    key=str(goal or "")
+    hit=_GOAL_BINARY_FORMATS_CACHE.get(key)
+    if hit is not None:
+        return hit
+    paths=_RE_REL_PATH_SCAN.findall(key)
     output_formats={
         pathlib.Path(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
         for raw in paths
     }
     output_formats.discard("")
-    nonformat={"json","txt","md","markdown","csv","tsv"}
-    requested=output_formats-nonformat
+    requested=frozenset(output_formats-_NONFORMAT_SUFFIXES)
+    if len(_GOAL_BINARY_FORMATS_CACHE)>=1024:
+        _GOAL_BINARY_FORMATS_CACHE.clear()
+    _GOAL_BINARY_FORMATS_CACHE[key]=requested
+    return requested
+
+
+def _structured_binary_format_match(goal,entry):
+    raw_provides=entry.get("provides")
+    if not raw_provides:
+        return True,None
+    formats=None
+    for item in raw_provides:
+        p=str(item).lower()
+        if p.startswith("structured.binary.encode.") and p!="structured.binary.encode":
+            if formats is None:
+                formats=set()
+            formats.add(p[len("structured.binary.encode."):])
+    if not formats:
+        return True,None
+    requested=_goal_requested_binary_formats(goal)
     if not requested:
         return True,None
     matched=requested & formats
@@ -1161,16 +1222,22 @@ def _names_a_patch_route(goal):
     return any(noun in text for noun in _PATCH_ROUTE_NOUNS)
 
 
+_RE_ARTIFACT_WRITE_HEAD = re.compile(
+    r"\b(?:" + "|".join(_ARTIFACT_WRITE_VERBS) + r")\b((?:\s+[A-Za-z0-9_.-]+){1,4})",
+    re.IGNORECASE,
+)
+_RE_EVIDENCE_NOUNS = re.compile(r"\b(?:" + "|".join(_EVIDENCE_OBJECTS) + r")\b")
+_GOAL_SCORE_FEATURES_CACHE: dict[str, tuple[frozenset[str], frozenset[str], frozenset[str], list[str]]] = {}
+_REGISTRY_INVERTED_INDEX_CACHE: dict[tuple, tuple[dict[str, set[str]], dict[str, dict], list[dict]]] = {}
+
+
 def _artifact_write_tokens(goal):
     """Words in ``goal`` that only say WHERE evidence goes, not what to change."""
     text = str(goal or "")
-    verbs = "(?:" + "|".join(_ARTIFACT_WRITE_VERBS) + ")"
-    nouns = "(?:" + "|".join(_EVIDENCE_OBJECTS) + ")"
     out = set()
-    for m in re.finditer(r"\b" + verbs + r"\b((?:\s+[A-Za-z0-9_.-]+){1,4})", text,
-                         re.IGNORECASE):
+    for m in _RE_ARTIFACT_WRITE_HEAD.finditer(text):
         tail = m.group(1).lower()
-        if re.search(r"\b" + nouns + r"\b", tail):
+        if _RE_EVIDENCE_NOUNS.search(tail):
             out.add(m.group(0).split()[0].lower())
     return out
 
@@ -1183,6 +1250,40 @@ def _prose_only(goal: str) -> str:
     """
     from canonical.runtime import goal_front_compiler_v1 as _front
     return _front.prose_only(goal)
+
+
+def _goal_score_features(goal):
+    key = str(goal or "")
+    hit = _GOAL_SCORE_FEATURES_CACHE.get(key)
+    if hit is not None:
+        return hit
+    gt = frozenset(_tokens(_prose_only(key)))
+    gt_effect = frozenset(gt - (_artifact_write_tokens(key) if _names_a_patch_route(key) else set()))
+    distinctive_goal = frozenset(gt_effect - GENERIC_MATCH_TOKENS)
+    res = (gt, gt_effect, distinctive_goal, sorted(gt))
+    if len(_GOAL_SCORE_FEATURES_CACHE) >= 1024:
+        _GOAL_SCORE_FEATURES_CACHE.clear()
+    _GOAL_SCORE_FEATURES_CACHE[key] = res
+    return res
+
+
+def _entry_cached_tokens(cid, entry):
+    p_raw = tuple(str(x) for x in (entry.get("provides") or ()))
+    r_raw = tuple(str(x) for x in (entry.get("requires") or ()))
+    k_raw = tuple(str(x) for x in (entry.get("keywords") or ()))
+    cache_key = (str(cid), p_raw, r_raw, k_raw)
+    cached_toks = _ENTRY_TOKEN_CACHE.get(cache_key)
+    if cached_toks is None:
+        cached_toks = (
+            frozenset(_tokens(list(p_raw))),
+            frozenset(_tokens(list(r_raw))),
+            frozenset(_tokens(cid)),
+            frozenset(_tokens(list(k_raw))),
+        )
+        if len(_ENTRY_TOKEN_CACHE) > 4096:
+            _ENTRY_TOKEN_CACHE.clear()
+        _ENTRY_TOKEN_CACHE[cache_key] = cached_toks
+    return cached_toks
 
 
 def _score(goal, cid, entry):
@@ -1206,69 +1307,24 @@ def _score(goal, cid, entry):
           "matched_keywords":[],
           "format_rejection":format_evidence,
         }
-    # A PATH IS A VALUE, NOT PROSE (F8/F25), AND THE COMPILER MUST SCORE ON PROSE.
-    #
-    # Measured 2026-10-31 on 9f808230: the compound audit goal's third clause --
-    # "Then create .../CAPABILITY_AUDIT.pdf from that report ..." -- selected
-    # python.source.audit.ast, because the OUTPUT FILE'S NAME contains the word
-    # AUDIT and that word is a keyword of the audit row.  The clause asks for a PDF
-    # to be created; the capability was chosen by a filename.  The same clause with
-    # a neutral filename is AMBIGUOUS instead -- measured -- so the name was the
-    # only thing deciding it.  prose_only() already exists for exactly this (F8
-    # removes URLs and paths, F25 removes quoted literals) and the composer already
-    # scores through it; the compiler did not.  Slot binding is untouched: it still
-    # reads the whole sentence, because a path is what a slot needs.
-    gt=_tokens(_prose_only(goal))
-    # Evidence-only verbs are removed from the EFFECT side of the match.  They
-    # still count as requirements below, because "write a report to R" does state
-    # a needed surface; they just may not create or weight a source-change match.
-    # When the sentence names the ROUTE ("... with the test guided repair loop"),
-    # the route decides and the report verb is bookkeeping.  When it names no
-    # route, the repair verb governs the file itself: leaving "write" credited is
-    # what keeps "Repair the python source file X ... and write the report to R"
-    # on python.software.repair.apply.verified.v1, the one capability that both
-    # finds the patch and lands it, so the file really is repaired.
-    gt_effect=gt-(_artifact_write_tokens(goal) if _names_a_patch_route(goal) else set())
-    p_raw = tuple(str(x) for x in (entry.get("provides") or ()))
-    r_raw = tuple(str(x) for x in (entry.get("requires") or ()))
-    k_raw = tuple(str(x) for x in (entry.get("keywords") or ()))
-    cache_key = (str(cid), p_raw, r_raw, k_raw)
-    cached_toks = _ENTRY_TOKEN_CACHE.get(cache_key)
-    if cached_toks is None:
-        cached_toks = (
-            frozenset(_tokens(list(p_raw))),
-            frozenset(_tokens(list(r_raw))),
-            frozenset(_tokens(cid)),
-            frozenset(_tokens(list(k_raw))),
-        )
-        if len(_ENTRY_TOKEN_CACHE) > 4096:
-            _ENTRY_TOKEN_CACHE.clear()
-        _ENTRY_TOKEN_CACHE[cache_key] = cached_toks
-    provides, requires, identity, keywords = cached_toks
-    # Requirements are highly informative for environment qualifiers such as
-    # image-only/scanned/local/etc. Provides represent the requested effect.
+    gt, gt_effect, _distinctive_goal, sorted_gt = _goal_score_features(goal)
+    provides, requires, identity, keywords = _entry_cached_tokens(cid, entry)
     effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords)
     distinctive={x for x in effect_matches if x not in GENERIC_MATCH_TOKENS}
-    # Preconditions and generic verbs/nouns may refine a match but may never
-    # create one. A barcode-image goal must not become a QR-image action merely
-    # because both say "generate" and "image".
     if not effect_matches or not distinctive:
         return 0,0,{
-            "goal_tokens":sorted(gt),
+            "goal_tokens":list(sorted_gt),
             "matched_provides":[],
             "matched_requires":sorted(gt & requires),
             "matched_identity":[],
             "matched_keywords":sorted(gt & keywords),
         }
-    # A precondition most of the registry shares is not evidence about this
-    # sentence. See _nondiscriminating_requires_tokens for the measurement.
     nondiscriminating=_nondiscriminating_requires_tokens()
     informative_requires=(gt & requires) - nondiscriminating
     score=5*len(gt_effect & provides)+4*len(gt_effect & keywords)+3*len(informative_requires)+2*len(gt_effect & identity)
-    # Prefer more-specific matched preconditions when base scores tie.
     specificity=len(informative_requires)
     return score,specificity,{
-        "goal_tokens":sorted(gt),
+        "goal_tokens":list(sorted_gt),
         "matched_provides":sorted(gt_effect & provides),
         "matched_requires":sorted(gt & requires),
         "informative_requires":sorted(informative_requires),
@@ -1686,6 +1742,51 @@ def _plan_has_unjustified_world_slots(plan):
     return False
 
 
+def _get_registry_rank_index(registry):
+    sig = tuple(
+        (
+            cid,
+            id(e),
+            e.get("status"),
+            id(e.get("provides")),
+            id(e.get("keywords")),
+            len(e.get("provides") or ()),
+            len(e.get("keywords") or ()),
+        )
+        for cid, e in registry.items()
+        if isinstance(e, dict)
+    )
+    hit = _REGISTRY_INVERTED_INDEX_CACHE.get(sig)
+    if hit is not None:
+        return hit
+    postings: dict[str, set[str]] = {}
+    admissible_map: dict[str, dict] = {}
+    keepalive: list[dict] = []
+    for cid, entry in sorted(registry.items()):
+        if not isinstance(entry, dict):
+            continue
+        keepalive.append(entry)
+        if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+            continue
+        if not isinstance(entry.get("action_template"), dict):
+            continue
+        if entry.get("requires") and not _placeholders(entry["action_template"]):
+            continue
+        provides, _req, identity, keywords = _entry_cached_tokens(cid, entry)
+        admissible_map[cid] = entry
+        for tok in (provides | identity | keywords) - GENERIC_MATCH_TOKENS:
+            bucket = postings.get(tok)
+            if bucket is None:
+                bucket = set()
+                postings[tok] = bucket
+            bucket.add(cid)
+    built = (postings, admissible_map, keepalive)
+    if len(_REGISTRY_INVERTED_INDEX_CACHE) >= 16:
+        _REGISTRY_INVERTED_INDEX_CACHE.clear()
+    _REGISTRY_INVERTED_INDEX_CACHE[sig] = built
+    return built
+
+
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, allow_world_binding=False,
@@ -1709,21 +1810,34 @@ def _rank_bindable_candidates(
     best word-match is unbindable, the honest answer is a refusal -- never a
     substitution with a weaker-scoring tool that happens to be callable.
     """
+    if not registry:
+        return []
+    _gt, _gt_eff, distinctive_goal, _sgt = _goal_score_features(goal)
+    if not distinctive_goal:
+        return []
+    if len(registry) >= 24:
+        postings, admissible_map, _keepalive = _get_registry_rank_index(registry)
+        cand_cids: set[str] = set()
+        for tok in distinctive_goal:
+            bucket = postings.get(tok)
+            if bucket is not None:
+                cand_cids.update(bucket)
+        if not cand_cids:
+            return []
+        candidate_items = [(cid, admissible_map[cid]) for cid in sorted(cand_cids)]
+    else:
+        candidate_items = []
+        for cid, entry in sorted(registry.items()):
+            if not isinstance(entry, dict) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                continue
+            if not isinstance(entry.get("action_template"), dict):
+                continue
+            if entry.get("requires") and not _placeholders(entry["action_template"]):
+                continue
+            candidate_items.append((cid, entry))
+
     ranked=[]
-    for cid,entry in sorted((registry or {}).items()):
-        if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
-            continue
-        if not isinstance(entry.get("action_template"),dict):
-            continue
-        # A zero-input capability with declared prerequisite effects is an
-        # internal composition node: this plain-goal ranker binds none of those
-        # prerequisites, so admitting the node as "grounded" is false. Its
-        # broad keywords can otherwise tie ahead of the input-bearing owner.
-        # Keep legacy standalone zero-input entries visible (the chained-plan
-        # negative control depends on terminal.kstar.root.assess.stdlib), and
-        # keep explicit capability_id invocation outside this ranker.
-        if entry.get("requires") and not _placeholders(entry["action_template"]):
-            continue
+    for cid,entry in candidate_items:
         score,specificity,evidence=_score(goal,cid,entry)
         if score<=0:
             continue

@@ -43,8 +43,14 @@ from execution_guard import target_chase_driver_v1 as chase  # noqa: E402
 SCHEMA = "PROJECT_BRAIN_GOAL_CHASE_V1"
 
 
-def live_act(goal: str, *, tag: str | None = None) -> Callable[[Mapping[str, Any]], Mapping[str, Any]]:
-    """Return an `act` that drives the machine's one live entry.
+def live_act(
+    goal: str,
+    *,
+    tag: str | None = None,
+    skill_db: str | Path | None = None,
+    cwd: str | Path | None = None,
+) -> Callable[[Mapping[str, Any]], Mapping[str, Any]]:
+    """Return an `act` that drives the machine's one live entry (including compiled workflow recall & Tier 1 DAGs).
 
     task ids must be unique: the live controller checkpoints per task id and
     refuses to re-run a finished one.
@@ -54,26 +60,65 @@ def live_act(goal: str, *, tag: str | None = None) -> Callable[[Mapping[str, Any
     def act(ctx: Mapping[str, Any]) -> Mapping[str, Any]:
         from canonical.runtime import live_brain_route_admission_v1 as entry
 
+        exp_path = ctx.get("experience_state_path")
+        try:
+            from canonical.runtime import experience_v1 as exp
+        except Exception:
+            exp = None
+
         task_id = f"{tag}_{int(ctx.get('round', 0))}"
         try:
             out = entry.solve({"task_id": task_id, "goal": goal})
+            if not (isinstance(out, Mapping) and out.get("pass") is True):
+                # Consult Tier 0A (<2 ms compiled workflow recall) & Tier 1 composition without slow learning
+                fast_recall = entry.solve_or_learn(
+                    {"task_id": task_id + "_wf", "goal": goal},
+                    cwd=cwd,
+                    db_path=skill_db,
+                    allow_tier2_learning=False,
+                    allow_jit_network=False,
+                    record_open_gap=False,
+                )
+                if isinstance(fast_recall, Mapping) and fast_recall.get("pass") is True:
+                    out = fast_recall
         except Exception as exc:
+            err_msg = type(exc).__name__ + ":" + str(exc)[:200]
+            if exp is not None and exp_path:
+                try:
+                    exp.record("live_act", type(exc).__name__, False, path=str(exp_path))
+                except Exception:
+                    pass
             return {
                 "status": "LIVE_ENTRY_EXCEPTION",
-                "error": type(exc).__name__ + ":" + str(exc)[:200],
+                "error": err_msg,
             }
         if not isinstance(out, Mapping):
             return {"status": "LIVE_ENTRY_NON_OBJECT", "error": "not a mapping"}
         status = out.get("status")
         ok = out.get("pass") is True
+        cap_id = str(
+            out.get("compiled_capability_id")
+            or out.get("skill_id")
+            or out.get("compiler_mode")
+            or out.get("tier_used")
+            or ""
+        )
+        err_str = "" if ok else str(out.get("failure_class") or out.get("reason") or status or "")
+        if exp is not None and exp_path:
+            try:
+                structural = any(
+                    tok in err_str.upper()
+                    for tok in ("BINARY_ABSENT", "SOURCE_UNSUPPORTED", "NO_SUCH_ADAPTER", "MISSING_EXECUTABLE")
+                )
+                exp.record(cap_id or "live_act", err_str or "OK", ok, structural=structural, path=str(exp_path))
+                if ok and cap_id:
+                    exp.teach_resolution(goal, cap_id, path=str(exp_path))
+            except Exception:
+                pass
         row: dict[str, Any] = {
             "status": status,
-            "error": "" if ok else str(
-                out.get("failure_class") or out.get("reason") or status or ""
-            ),
-            "capability_id": str(
-                out.get("compiled_capability_id") or out.get("compiler_mode") or ""
-            ),
+            "error": err_str,
+            "capability_id": cap_id,
         }
         # Only a passing run teaches anything worth reusing.
         if ok:
@@ -94,15 +139,15 @@ def completeness_gate_for(goal: str, *, min_channels: int = MIN_INDEPENDENT_CHAN
     ranking YouTube first is the exact failure to prevent, so the gate asks
     what a complete set would have to look like and refuses otherwise:
 
-      1. INDEPENDENT CHANNELS. Distinct source_id values, not rows. Ten sources
-         repeating one claim are one source, and counting them ten times is how
-         a narrow set looks wide.
+      1. INDEPENDENT CHANNELS (DISCOUNTING CORRELATED UPSTREAM GROUPS).
+         Ten sources repeating one upstream group/syndicate are ONE channel,
+         and counting them ten times is how a narrow set looks wide.
       2. VERIFIED EVIDENCE, NOT CANDIDATES. Every row the global controller
          returns is CANDIDATE_ONLY by construction. Candidates are leads about
          where to look; they are not data. A set made only of candidates is
          never complete, however many there are -- so this fails closed.
-      3. NO NONEXISTENCE FROM A MISS. A row claiming nonexistence is a claim
-         about the whole world drawn from a partial search. It is refused.
+      3. NO NONEXISTENCE FROM A MISS & NO UNEXPLORED ORTHOGONAL CHANNELS
+         WITHOUT AN OPEN-WORLD COVERAGE / RESIDUAL-INVARIANCE RECEIPT.
 
     It fails closed on any error. The machine must be able to say "I don't have
     the data" -- it cannot say that if the gate defaults to permitting.
@@ -113,7 +158,14 @@ def completeness_gate_for(goal: str, *, min_channels: int = MIN_INDEPENDENT_CHAN
             if not opts:
                 return {"complete": False, "reason": "NO_OPTIONS"}
 
-            channels = {str(o.get("source_id")) for o in opts if o.get("source_id") is not None}
+            channels: set[str] = set()
+            for o in opts:
+                grp = str(o.get("upstream_group") or "").strip()
+                sid = o.get("source_id")
+                if grp:
+                    channels.add(f"group:{grp.casefold()}")
+                elif sid is not None and str(sid).strip():
+                    channels.add(f"src:{str(sid).strip().casefold()}")
             if len(channels) < min_channels:
                 return {"complete": False, "reason":
                         f"ONLY_{len(channels)}_INDEPENDENT_CHANNEL(S)_NEED_{min_channels}"}
@@ -121,6 +173,8 @@ def completeness_gate_for(goal: str, *, min_channels: int = MIN_INDEPENDENT_CHAN
             for o in opts:
                 if o.get("nonexistence_claim_authorized"):
                     return {"complete": False, "reason": "NONEXISTENCE_CLAIM_FROM_PARTIAL_SEARCH"}
+                if int(o.get("unexplored_independent_channels") or 0) > 0 and not o.get("open_world_guard_closed"):
+                    return {"complete": False, "reason": "OPEN_WORLD_INDEPENDENT_CHANNELS_UNEXPLORED"}
 
             verified = [o for o in opts
                         if o.get("independently_verified_by")
@@ -292,13 +346,22 @@ def run(
     if unit is not None:
         bound = {**bound, "unit": unit}
 
+    ctx_map = dict(context or {})
     result = chase.run(
         goal=goal,
         target=bound["target"],
         direction=bound["direction"],
         unit=bound.get("unit", ""),
         measure=measure,
-        act=act if act is not None else live_act(goal),
+        act=(
+            act
+            if act is not None
+            else live_act(
+                goal,
+                skill_db=ctx_map.get("skill_db"),
+                cwd=ctx_map.get("cwd"),
+            )
+        ),
         max_rounds=max_rounds,
         patience=patience,
         flywheel_state_path=flywheel_state_path,
@@ -329,9 +392,16 @@ _RESUMABLE_STALLS = frozenset({chase.STUCK, chase.BOUND, chase.INCOMPLETE_DATA})
 
 def _record_stall(goal: str, result: Mapping[str, Any], attempt: int) -> dict[str, Any]:
     """A stall is data about what the machine lacks. Record it where it is ranked."""
-    best = (result.get("chase") or result).get("best_measurement")
-    detail = "%s at %s (learning attempt %d)" % (
-        result.get("status"), "unmeasured" if best is None else best, attempt)
+    chase_body = result.get("chase") or result
+    best = chase_body.get("best_measurement")
+    comp = chase_body.get("completeness")
+    comp_reason = (
+        f" [{comp.get('reason')}]"
+        if isinstance(comp, Mapping) and comp.get("reason")
+        else ""
+    )
+    detail = "%s%s at %s (learning attempt %d)" % (
+        result.get("status"), comp_reason, "unmeasured" if best is None else best, attempt)
     try:
         from canonical.runtime import ignorance_ledger_v1 as led
         gap_id = led.note(goal, why=detail, cost=1.0 + attempt)
@@ -341,8 +411,12 @@ def _record_stall(goal: str, result: Mapping[str, Any], attempt: int) -> dict[st
                 "error": type(exc).__name__ + ":" + str(exc)[:160]}
 
 
-def _learn_something_new(goal: str, result: Mapping[str, Any],
-                        registry_path: str | None = None) -> dict[str, Any]:
+def _learn_something_new(
+    goal: str,
+    result: Mapping[str, Any],
+    registry_path: str | None = None,
+    context: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     """Do the only thing that can turn a stall into progress: get a new action.
 
     The same act produced the same number. Repeating it will produce it again,
@@ -356,13 +430,29 @@ def _learn_something_new(goal: str, result: Mapping[str, Any],
     except Exception as exc:
         learned["error"] = type(exc).__name__ + ":" + str(exc)[:160]
         return learned
+    ctx_map = dict(context or {})
+    learn_goal = str(ctx_map.get("learn_goal") or goal)
+    req_payload: dict[str, Any] = {"task_id": f"chase_{hashlib.sha256(os.urandom(8)).hexdigest()[:8]}", "goal": learn_goal}
+    for extra_key in ("demonstration_trace", "postcondition", "heldout_goal", "heldout_cwd", "heldout_postcondition", "sabotaged_postcondition"):
+        if extra_key in ctx_map:
+            req_payload[extra_key] = ctx_map[extra_key]
     try:
-        out = entry.solve_or_learn({"task_id": "chase", "goal": goal},
-                                 registry_path=registry_path)
+        out = entry.solve_or_learn(
+            req_payload,
+            registry_path=registry_path,
+            cwd=ctx_map.get("cwd"),
+            db_path=ctx_map.get("skill_db"),
+            r3_state_path=ctx_map.get("r3_state_path"),
+            allow_jit_network=bool(ctx_map.get("allow_jit_network", True)),
+        )
+        learned.update(out.get("learning") or {})
         learned["attempted"] = True
         learned["status"] = out.get("status")
-        learned["learned_this_turn"] = bool(out.get("learned_this_turn"))
-        learned.update(out.get("learning") or {})
+        learned["tier_used"] = out.get("tier_used")
+        learned["skill_id"] = out.get("skill_id")
+        learned["learned_this_turn"] = bool(
+            out.get("learned_this_turn") or out.get("skill_crystallized")
+        )
     except Exception as exc:
         learned["attempted"] = True
         learned["error"] = type(exc).__name__ + ":" + str(exc)[:160]
@@ -418,7 +508,7 @@ def chase_until_met(
         }
         entry_log["gap"] = _record_stall(goal, result, attempts)
         entry_log["learning"] = _learn_something_new(
-            goal, result, registry_path=registry_path)
+            goal, result, registry_path=registry_path, context=context)
         stalls.append(entry_log)
 
         # resuming re-measures, so it continues from wherever the number is now

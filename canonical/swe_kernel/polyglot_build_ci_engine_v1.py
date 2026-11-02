@@ -257,15 +257,19 @@ def cpp_transform_and_verify(target: Path, goal: str) -> dict[str, Any]:
             return {"verified": False, "gate": "FAIL", "reason": fail_reason, "stderr": stderr_tail}
 
     try:
+        from canonical.swe_kernel import rule_expiry_v1 as _expiry
         from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
 
-        VerifiedSkillStore().crystallize_verified_fix(
+        _st = VerifiedSkillStore()
+        _taught = _st.crystallize_verified_fix(
             language="cpp",
             bug_class="cpp_repair",
             before_code=original,
             after_code=updated,
             verifier_oracle_kind="g++_c++17",
         )
+        if _taught and _taught.get("skill_id"):
+            _expiry.record_taught(_st.db_path, str(_taught["skill_id"]))
     except Exception:
         pass
 

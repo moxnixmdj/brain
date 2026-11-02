@@ -33,7 +33,9 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import marshal
 import math
+import os
 import re
 import shutil
 import sys
@@ -168,6 +170,14 @@ def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
 # --------------------------------------------------------------------------- loading
 
 
+_VERIFIED_BLOB_DIGESTS: dict[str, str] = {}
+_OPEN_MODEL_MEM_CACHE: dict[tuple[str, int, int], "UnifiedModel"] = {}
+
+
+def _core_cache_dir() -> Path:
+    return ROOT / "canonical" / "astra_runtime" / "tmp"
+
+
 def load_model(
     path: str | Path | None = None,
     *,
@@ -180,18 +190,97 @@ def load_model(
         target = base / target
     if not target.is_file():
         raise UnifiedModelError("MODEL_ARTIFACT_MISSING:" + str(target))
+    raw_bytes = target.read_bytes()
+    raw_sha = hashlib.sha256(raw_bytes).hexdigest()
     try:
-        model = json.loads(target.read_text(encoding="utf-8"))
+        model = json.loads(raw_bytes.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise UnifiedModelError("MODEL_ARTIFACT_NOT_JSON") from exc
     if not isinstance(model, dict) or model.get("schema") != SCHEMA:
         raise UnifiedModelError("MODEL_SCHEMA_MISMATCH")
     if verify:
         declared = (model.get("digest") or {}).get("value")
-        recomputed = artifact_digest(model)
+        cached_dig = _VERIFIED_BLOB_DIGESTS.get(raw_sha)
+        if cached_dig is not None:
+            recomputed = cached_dig
+        else:
+            recomputed = artifact_digest(model)
+            if declared and declared == recomputed:
+                _VERIFIED_BLOB_DIGESTS[raw_sha] = recomputed
         if not declared or declared != recomputed:
             raise UnifiedModelError("MODEL_DIGEST_MISMATCH")
     return model
+
+
+def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
+    id_tokens = set(tokenize(cid))
+    return {
+        str(t)
+        for t in (row.get("triggers") or [])
+        if str(t) not in id_tokens and len(str(t)) > 3
+    }
+
+
+def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
+    src_rows = [row for row in (model.get("source_index") or []) if isinstance(row, Mapping)]
+    res_rows = [row for row in (model.get("research_index") or []) if isinstance(row, Mapping)]
+    knw_rows = [row for row in (model.get("knowledge") or []) if isinstance(row, Mapping)]
+    caps_map = {
+        str(row["id"]): dict(row)
+        for row in (model.get("capabilities") or [])
+        if isinstance(row, Mapping) and row.get("id")
+    }
+    engines_map = {
+        str(row["id"]): dict(row)
+        for row in (model.get("engines") or [])
+        if isinstance(row, Mapping) and row.get("id")
+    }
+    cap_id_terms = {
+        cid: tuple(sorted(set(tokenize(cid.replace("/", " ").replace(".", " ")))))
+        for cid in caps_map
+    }
+    receipt_ids = {
+        cid for cid, row in caps_map.items() if row.get("kind") == "RECEIPT_BACKED_CAPABILITY"
+    }
+    trig_cache: dict[str, set[str]] = {}
+    filtered_index: dict[str, dict[str, float]] = {}
+    for tok, postings in ((model.get("grammar") or {}).get("index") or {}).items():
+        s_tok = str(tok)
+        kept: dict[str, float] = {}
+        for raw_cid, weight in postings.items():
+            cid = str(raw_cid)
+            if cid in receipt_ids:
+                trigs = trig_cache.get(cid)
+                if trigs is None:
+                    trigs = _declared_triggers_for_row(cid, caps_map.get(cid) or {})
+                    trig_cache[cid] = trigs
+                if s_tok not in trigs:
+                    continue
+            kept[cid] = float(weight)
+        if kept:
+            filtered_index[s_tok] = kept
+    return {
+        "core_format_v": 3,
+        "raw_sha256": raw_sha,
+        "schema": str(model.get("schema") or ""),
+        "model_id": model.get("model_id"),
+        "model_version": model.get("model_version"),
+        "digest_value": str((model.get("digest") or {}).get("value") or ""),
+        "counts": dict(model.get("counts") or {}),
+        "objective_verbatim": (model.get("objective") or {}).get("verbatim"),
+        "capabilities_map": caps_map,
+        "engines_map": engines_map,
+        "capability_id_terms": cap_id_terms,
+        "receipt_backed_ids": tuple(sorted(receipt_ids)),
+        "filtered_index": filtered_index,
+        "adapter_ast_index": dict(((model.get("grammar") or {}).get("adapter_ast_index") or {})),
+        "skills": [dict(row) for row in (model.get("skills") or []) if isinstance(row, Mapping)],
+        "confidence": dict(((model.get("grammar") or {}).get("confidence") or {})),
+        "source_index_len": len(src_rows),
+        "source_entry_points": sum(1 for r in src_rows if r.get("classification") == "ENTRY_POINT"),
+        "research_index_len": len(res_rows),
+        "knowledge_len": len(knw_rows),
+    }
 
 
 # --------------------------------------------------------------------------- model
@@ -200,120 +289,181 @@ def load_model(
 class UnifiedModel:
     """A loaded, digest-verified unified model."""
 
-    def __init__(self, model: Mapping[str, Any]):
-        self.model = dict(model)
-        self.digest = str((model.get("digest") or {}).get("value") or "")
-        self.capabilities = {
-            str(row["id"]): dict(row)
-            for row in model.get("capabilities") or []
-            if isinstance(row, Mapping) and row.get("id")
-        }
-        self.engines = {
-            str(row["id"]): dict(row)
-            for row in model.get("engines") or []
-            if isinstance(row, Mapping) and row.get("id")
-        }
-        # Triggers merge identity and effect vocabulary. Keep the identity half
-        # separately so route() can tell an operation named by the capability
-        # from a word that merely occurs in one of its provided effects.
-        self._capability_id_terms = {
-            cid: frozenset(tokenize(cid.replace("/", " ").replace(".", " ")))
-            for cid in self.capabilities
-        }
-        self.skills = [dict(row) for row in (model.get("skills") or []) if isinstance(row, Mapping)]
-        self.knowledge = [
-            dict(row) for row in (model.get("knowledge") or []) if isinstance(row, Mapping)
-        ]
-        # Runtime modules the model can address but not execute. Deliberately
-        # kept apart from `capabilities`: `solve()` never routes here, and every
-        # row carries capability=False. See the compiler's _source_index_rows.
-        self.source_index: dict[str, dict[str, Any]] = {
-            str(row["path"]): dict(row)
-            for row in model.get("source_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        # Document frequency over the source index, so `find_source` can weight
-        # a rare term above a ubiquitous one. Measured, "v1" occurs in 1132 of
-        # 1859 rows; without IDF that token alone decided the ranking.
-        self._source_df: dict[str, int] = {}
-        for row in self.source_index.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                self._source_df[str(term)] = self._source_df.get(str(term), 0) + 1
-        # Lazily resolved, because presence is a property of the machine that is
-        # answering and probing 74 capabilities on every construction would be
-        # paid for even by a caller that only wants `status()`.
+    def __init__(self, model: Mapping[str, Any], *, _raw_bytes: bytes | None = None, _core_only: bool = False):
+        self._raw_bytes_backing: bytes | None = _raw_bytes
+        self._declared_triggers_cache: dict[str, set[str]] = {}
+        if _core_only and model.get("core_format_v") == 3:
+            self._model_loaded: dict[str, Any] | None = None
+            self._core_meta: dict[str, Any] = dict(model)
+            self.digest = str(model.get("digest_value") or "")
+            self.capabilities = dict(self._core_meta["capabilities_map"])
+            self.engines = dict(self._core_meta["engines_map"])
+            self._capability_id_terms = {
+                cid: frozenset(terms)
+                for cid, terms in (self._core_meta.get("capability_id_terms") or {}).items()
+            }
+            self.skills = list(self._core_meta.get("skills") or [])
+            self.receipt_backed_ids: frozenset[str] = frozenset(self._core_meta.get("receipt_backed_ids") or ())
+            self.index: dict[str, dict[str, float]] = dict(self._core_meta.get("filtered_index") or {})
+            confidence = self._core_meta.get("confidence") or {}
+        else:
+            self._model_loaded = dict(model)
+            self._core_meta = _extract_routing_core(self._model_loaded, "")
+            self.digest = str((model.get("digest") or {}).get("value") or "")
+            self.capabilities = dict(self._core_meta["capabilities_map"])
+            self.engines = dict(self._core_meta["engines_map"])
+            self._capability_id_terms = {
+                cid: frozenset(terms)
+                for cid, terms in self._core_meta["capability_id_terms"].items()
+            }
+            self.skills = list(self._core_meta["skills"])
+            self.receipt_backed_ids = frozenset(self._core_meta["receipt_backed_ids"])
+            self.index = dict(self._core_meta["filtered_index"])
+            confidence = self._core_meta["confidence"]
+
         self._unrunnable: dict[str, list[str]] | None = None
-        # The research record: governance decisions, verification receipts,
-        # action intents. Evidence *about* capabilities, never a capability, so
-        # `solve()` never routes here either. See the compiler's _research_rows.
-        self.research_index: dict[str, dict[str, Any]] = {
-            str(row["path"]): dict(row)
-            for row in model.get("research_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        self._research_df: dict[str, int] = {}
-        for row in self.research_index.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                self._research_df[str(term)] = self._research_df.get(str(term), 0) + 1
-        raw_index: dict[str, dict[str, float]] = {
-            str(token): {str(cid): float(weight) for cid, weight in postings.items()}
-            for token, postings in ((model.get("grammar") or {}).get("index") or {}).items()
-        }
-        # A receipt-backed capability is indexed under every word of its own
-        # path, so `run_long_horizon_continuity_v1.py` is reachable by the
-        # ordinary verb "run". Keep only the tokens the verifier itself treats
-        # as that capability's triggers -- the declared triggers that are not
-        # path segments and are longer than three characters -- so a common
-        # short word cannot select a script and execute it. Bound capabilities
-        # declare their own keywords and are left exactly as compiled.
-        self.receipt_backed_ids: frozenset[str] = frozenset(
-            cid
-            for cid, row in self.capabilities.items()
-            if row.get("kind") == "RECEIPT_BACKED_CAPABILITY"
-        )
-        self.index: dict[str, dict[str, float]] = {}
-        for token, postings in raw_index.items():
-            kept = {}
-            for cid, weight in postings.items():
-                if cid in self.receipt_backed_ids:
-                    if token not in self._declared_triggers(cid):
-                        continue
-                kept[cid] = weight
-            if kept:
-                self.index[token] = kept
-        confidence = (model.get("grammar") or {}).get("confidence") or {}
+        self._source_index_cache: dict[str, dict[str, Any]] | None = None
+        self._source_df_cache: dict[str, int] | None = None
+        self._research_index_cache: dict[str, dict[str, Any]] | None = None
+        self._research_df_cache: dict[str, int] | None = None
+        self._knowledge_cache: list[dict[str, Any]] | None = None
+        self._knowledge_df_cache: dict[str, int] | None = None
+        self._knowledge_lengths_cache: list[int] | None = None
+        self._avg_length_cache: float | None = None
+
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
-        self._knowledge_df: dict[str, int] = {}
-        self._knowledge_lengths: list[int] = []
-        for row in self.knowledge:
+        if not _core_only:
+            self._hydrate_secondary_indexes()
+
+    def _ensure_full_model(self) -> dict[str, Any]:
+        if self._model_loaded is None:
+            if self._raw_bytes_backing is None:
+                raise UnifiedModelError("MODEL_BACKING_BYTES_MISSING")
+            self._model_loaded = json.loads(self._raw_bytes_backing.decode("utf-8"))
+        return self._model_loaded
+
+    def _hydrate_secondary_indexes(self) -> None:
+        if self._source_index_cache is not None:
+            return
+        full = self._ensure_full_model()
+        self._source_index_cache = {
+            str(row["path"]): dict(row)
+            for row in full.get("source_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        src_df: dict[str, int] = {}
+        for row in self._source_index_cache.values():
             terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            self._knowledge_lengths.append(sum(int(v) for v in terms.values()))
             for term in terms:
-                self._knowledge_df[str(term)] = self._knowledge_df.get(str(term), 0) + 1
-        self._avg_length = (
-            sum(self._knowledge_lengths) / len(self._knowledge_lengths)
-            if self._knowledge_lengths
-            else 1.0
-        ) or 1.0
+                src_df[str(term)] = src_df.get(str(term), 0) + 1
+        self._source_df_cache = src_df
+
+        self._research_index_cache = {
+            str(row["path"]): dict(row)
+            for row in full.get("research_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        res_df: dict[str, int] = {}
+        for row in self._research_index_cache.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                res_df[str(term)] = res_df.get(str(term), 0) + 1
+        self._research_df_cache = res_df
+
+        self._knowledge_cache = [
+            dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)
+        ]
+        knw_df: dict[str, int] = {}
+        knw_len: list[int] = []
+        for row in self._knowledge_cache:
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            knw_len.append(sum(int(v) for v in terms.values()))
+            for term in terms:
+                knw_df[str(term)] = knw_df.get(str(term), 0) + 1
+        self._knowledge_df_cache = knw_df
+        self._knowledge_lengths_cache = knw_len
+        self._avg_length_cache = (sum(knw_len) / len(knw_len) if knw_len else 1.0) or 1.0
+
+    @property
+    def model(self) -> dict[str, Any]:
+        return self._ensure_full_model()
+
+    @property
+    def source_index(self) -> dict[str, dict[str, Any]]:
+        self._hydrate_secondary_indexes()
+        return self._source_index_cache  # type: ignore[return-value]
+
+    @property
+    def _source_df(self) -> dict[str, int]:
+        self._hydrate_secondary_indexes()
+        return self._source_df_cache  # type: ignore[return-value]
+
+    @property
+    def research_index(self) -> dict[str, dict[str, Any]]:
+        self._hydrate_secondary_indexes()
+        return self._research_index_cache  # type: ignore[return-value]
+
+    @property
+    def _research_df(self) -> dict[str, int]:
+        self._hydrate_secondary_indexes()
+        return self._research_df_cache  # type: ignore[return-value]
+
+    @property
+    def knowledge(self) -> list[dict[str, Any]]:
+        self._hydrate_secondary_indexes()
+        return self._knowledge_cache  # type: ignore[return-value]
+
+    @property
+    def _knowledge_df(self) -> dict[str, int]:
+        self._hydrate_secondary_indexes()
+        return self._knowledge_df_cache  # type: ignore[return-value]
+
+    @property
+    def _knowledge_lengths(self) -> list[int]:
+        self._hydrate_secondary_indexes()
+        return self._knowledge_lengths_cache  # type: ignore[return-value]
+
+    @property
+    def _avg_length(self) -> float:
+        self._hydrate_secondary_indexes()
+        return self._avg_length_cache  # type: ignore[return-value]
 
     # ------------------------------------------------------------------ status
 
     def status(self) -> dict[str, Any]:
-        declared = self.model.get("counts") or {}
+        declared = self._core_meta.get("counts") or {}
         missing_ids = sorted(
             cid
             for cid, row in self.capabilities.items()
             if _missing_declared_dependencies(row)
         )
         present = len(self.capabilities) - len(missing_ids)
+        src_len = (
+            len(self._source_index_cache)
+            if self._source_index_cache is not None
+            else int(self._core_meta.get("source_index_len") or 0)
+        )
+        src_ep = (
+            sum(1 for row in self._source_index_cache.values() if row.get("classification") == "ENTRY_POINT")
+            if self._source_index_cache is not None
+            else int(self._core_meta.get("source_entry_points") or 0)
+        )
+        res_len = (
+            len(self._research_index_cache)
+            if self._research_index_cache is not None
+            else int(self._core_meta.get("research_index_len") or 0)
+        )
+        knw_len = (
+            len(self._knowledge_cache)
+            if self._knowledge_cache is not None
+            else int(self._core_meta.get("knowledge_len") or 0)
+        )
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "STATUS",
-            "model_id": self.model.get("model_id"),
-            "model_version": self.model.get("model_version"),
+            "model_id": self._core_meta.get("model_id"),
+            "model_version": self._core_meta.get("model_version"),
             "model_digest": self.digest,
             "counts": {
                 "capabilities": len(self.capabilities),
@@ -321,35 +471,16 @@ class UnifiedModel:
                 "receipt_backed_capabilities": declared.get("receipt_backed_capabilities"),
                 "engines": len(self.engines),
                 "skills": len(self.skills),
-                "knowledge_documents": len(self.knowledge),
-                # Counted live rather than read from the declared block, so this
-                # cannot drift from what the model actually holds. Omitting the
-                # source index here would make the model's own self-description
-                # leave out 1859 of the modules it indexes.
-                "source_index_modules": len(self.source_index),
-                "source_index_entry_points": sum(
-                    1
-                    for row in self.source_index.values()
-                    if row.get("classification") == "ENTRY_POINT"
-                ),
-                # Derived live, for the same reason as the source counts above:
-                # a hardcoded list silently omits whatever is added later.
-                "research_index_records": len(self.research_index),
+                "knowledge_documents": knw_len,
+                "source_index_modules": src_len,
+                "source_index_entry_points": src_ep,
+                "research_index_records": res_len,
                 "routing_tokens": len(self.index),
             },
-            # Stated next to the counts so a larger number cannot be misread as
-            # more capability. These modules are addressable, not executable.
-            #
-            # A combined "runtime modules reachable" figure is deliberately not
-            # reported here. It would be len(capabilities) + len(source_index),
-            # which overcounts by 33: 69 of the 363 capabilities are named or
-            # bound entries that are not runtime files at all. Deriving the true
-            # figure needs a filesystem walk, and putting that inside status()
-            # would reintroduce exactly the host coupling this model removed.
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
             "declared_dependencies_missing": len(self.capabilities) - present,
-            "objective": (self.model.get("objective") or {}).get("verbatim"),
+            "objective": self._core_meta.get("objective_verbatim"),
             "non_claims": list(NON_CLAIMS),
             "credit": {
                 "capability_credit_delta": 0,
@@ -370,13 +501,12 @@ class UnifiedModel:
         `py`, `v1`) that would otherwise make an ordinary word in a goal select
         this capability.
         """
-        row = self.capabilities.get(cid) or {}
-        id_tokens = set(tokenize(cid))
-        return {
-            str(t)
-            for t in (row.get("triggers") or [])
-            if str(t) not in id_tokens and len(str(t)) > 3
-        }
+        cached = self._declared_triggers_cache.get(cid)
+        if cached is not None:
+            return cached
+        res = _declared_triggers_for_row(cid, self.capabilities.get(cid) or {})
+        self._declared_triggers_cache[cid] = res
+        return res
 
     def _ids_mentioned(self, goal: str) -> set[str]:
         folded = str(goal or "").casefold()
@@ -812,11 +942,21 @@ class UnifiedModel:
         capability_id: str | None = None,
         instance_id: str | None = None,
         context_paths: Iterable[str] | None = None,
+        cwd: str | Path | None = None,
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
         if requested == "RECALL":
             return self.recall(goal)
+        if requested == "SOLVE_OR_LEARN":
+            return self.act_or_learn(
+                goal,
+                inputs=inputs,
+                capability_id=capability_id,
+                instance_id=instance_id,
+                context_paths=context_paths,
+                cwd=cwd,
+            )
 
         routing: dict[str, Any] | None = None
         if capability_id:
@@ -838,6 +978,161 @@ class UnifiedModel:
             return self._dispatch_engine(goal, chosen, inputs, routing)
         return self._execute_capability(
             goal, chosen, inputs, routing, instance_id, context_paths
+        )
+
+    def act_or_learn(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        capability_id: str | None = None,
+        instance_id: str | None = None,
+        context_paths: Iterable[str] | None = None,
+        cwd: str | Path | None = None,
+        db_path: str | Path | None = None,
+        forged_state_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Single unified front door (`K3 = 0`): compiled model -> forged skills -> 4-tier `solve_or_learn`."""
+        from canonical.runtime.one_shot_reality_closure_v2 import REQUIRED_ATTEMPT_ORDER
+        from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
+        from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+            match_and_invoke_forged_for_goal,
+        )
+
+        # 0A. Verified Skill Macro Compression (`verified_skill_macro_planner_v1.plan_with_skills`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("skill_macro_problem"), Mapping):
+            from canonical.runtime import verified_skill_macro_planner_v1 as macro_pl
+
+            sm_spec = inputs["skill_macro_problem"]
+            macro_out = macro_pl.plan_with_skills(
+                sm_spec["problem"],
+                list(sm_spec.get("verified_skills") or ()),
+                active_invalidators=tuple(sm_spec.get("active_invalidators") or ()),
+            )
+            passed_m = bool(macro_out.get("status") == "SOLVED" or macro_out.get("pass") is True)
+            return self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status="PASS__VERIFIED_SKILL_MACRO_PLANNED" if passed_m else "FAIL_CLOSED__SKILL_MACRO_UNSOLVED",
+                **{"pass": passed_m},
+                reason=None if passed_m else str(macro_out.get("status") or "UNSOLVED"),
+                skill_macro_plan=macro_out,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            )
+
+        # 0B. R1+R2+R3 Adaptive Capability Expansion (`universal_verified_adaptive_solver_v12.run`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("adaptive_solver_v12_problem"), Mapping):
+            from canonical.runtime import universal_verified_adaptive_solver_v12 as uvas12
+
+            v12_spec = dict(inputs["adaptive_solver_v12_problem"])
+            prob_doc = v12_spec.pop("problem")
+            v12_repo = v12_spec.pop("repo_root", cwd or ROOT)
+            v12_out = uvas12.run(prob_doc, repo_root=v12_repo, **v12_spec)
+            passed_v12 = bool(v12_out.get("pass") is True)
+            return self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status=str(v12_out.get("status") or ("PASS__ADAPTIVE_SOLVER_V12" if passed_v12 else "FAIL_CLOSED")),
+                **{"pass": passed_v12},
+                reason=None if passed_v12 else str(v12_out.get("reason") or v12_out.get("status")),
+                adaptive_solver_v12=v12_out,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            )
+
+        # 0C. Direct specialist routes (`r2_adequacy_request`, `scientific_discovery_problem`, `trace_capsule_problem`, `policy_adequacy_problem`, `ooxml_preflight_target`)
+        if isinstance(inputs, Mapping) and any(
+            k in inputs
+            for k in (
+                "r2_adequacy_request",
+                "scientific_discovery_problem",
+                "trace_capsule_problem",
+                "policy_adequacy_problem",
+                "policy_cover_payload",
+                "escape_repair_state",
+                "ooxml_preflight_target",
+                "domain_mapping_problem",
+            )
+        ):
+            spec_payload: dict[str, Any] = {"goal": goal, **dict(inputs)}
+            if forged_state_path is not None:
+                spec_payload["forged_state_path"] = str(forged_state_path)
+            ctrl_spec = solve_or_learn(
+                spec_payload,
+                cwd=cwd or ROOT,
+                db_path=str(db_path) if db_path is not None else None,
+            )
+            passed_spec = bool(ctrl_spec.get("pass") is True)
+            return self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status=str(ctrl_spec.get("status") or ("PASS__SPECIALIST_SOLVED" if passed_spec else "FAIL_CLOSED")),
+                **{"pass": passed_spec},
+                reason=None if passed_spec else str(ctrl_spec.get("failure_class") or ctrl_spec.get("status")),
+                tier_used=ctrl_spec.get("tier_used"),
+                autonomous_result=ctrl_spec,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            )
+
+        # 1. REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & bindable
+        is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
+        if not is_forged_cid:
+            primary = self.solve(
+                goal,
+                inputs=inputs,
+                mode="AUTO",
+                capability_id=capability_id,
+                instance_id=instance_id,
+                context_paths=context_paths,
+            )
+            if primary.get("pass") is True or capability_id is not None:
+                primary["attempt_order_contract"] = list(REQUIRED_ATTEMPT_ORDER)
+                return primary
+        else:
+            primary = {"pass": False, "reason": "FORGED_CAPABILITY_TARGETED"}
+
+        # 2. Check self-forged capabilities (`forged.*`) with independent byte re-read
+        try:
+            forged_out = match_and_invoke_forged_for_goal(
+                goal,
+                root=cwd or ROOT,
+                state_path=forged_state_path,
+                explicit_args=inputs,
+            )
+            if forged_out is not None and forged_out.get("pass") is True:
+                return self._envelope(
+                    operation="SOLVE_OR_LEARN",
+                    goal=goal,
+                    status="PASS__FORGED_CAPABILITY_EXECUTED_AND_BYTE_VERIFIED",
+                    **{"pass": True},
+                    reason=None,
+                    capability_id=forged_out["capability_id"],
+                    forged_execution=forged_out,
+                    attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+                )
+        except Exception:
+            pass
+
+        # 3. Escalate into 4-tier zero-LLM `solve_or_learn` (preserves honest fail-closed refusals!)
+        req_payload: dict[str, Any] = {"goal": goal}
+        if inputs:
+            req_payload.update(dict(inputs))
+        if forged_state_path is not None:
+            req_payload["forged_state_path"] = str(forged_state_path)
+        ctrl_out = solve_or_learn(
+            req_payload,
+            cwd=cwd or ROOT,
+            db_path=str(db_path) if db_path is not None else None,
+        )
+        passed = ctrl_out.get("pass") is True
+        return self._envelope(
+            operation="SOLVE_OR_LEARN",
+            goal=goal,
+            status=str(ctrl_out.get("status") or ("PASS__AUTONOMOUS_SOLVED" if passed else "FAIL_CLOSED")),
+            **{"pass": bool(passed)},
+            reason=None if passed else str(ctrl_out.get("failure_class") or ctrl_out.get("status") or primary.get("reason")),
+            tier_used=ctrl_out.get("tier_used"),
+            autonomous_result=ctrl_out,
+            attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
         )
 
     # --------------------------------------------------------------- internals
@@ -1207,7 +1502,66 @@ def _excerpt(path: Path, terms: Iterable[str], limit: int = 420) -> str:
 def open_model(
     path: str | Path | None = None, *, root: str | Path | None = None
 ) -> UnifiedModel:
-    return UnifiedModel(load_model(path, root=root, verify=True))
+    base = Path(root or ROOT).resolve()
+    target = Path(path) if path else base / DEFAULT_ARTIFACT
+    if not target.is_absolute():
+        target = base / target
+    if not target.is_file():
+        raise UnifiedModelError("MODEL_ARTIFACT_MISSING:" + str(target))
+    st = target.stat()
+    mem_key = (str(target.resolve()), st.st_size, st.st_mtime_ns)
+    mem_hit = _OPEN_MODEL_MEM_CACHE.get(mem_key)
+    if mem_hit is not None:
+        return mem_hit
+
+    raw_bytes = target.read_bytes()
+    raw_sha = hashlib.sha256(raw_bytes).hexdigest()
+    cache_dir = _core_cache_dir()
+    cache_file = cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal"
+    if cache_file.is_file():
+        try:
+            core = marshal.loads(cache_file.read_bytes())
+            if (
+                isinstance(core, dict)
+                and core.get("core_format_v") == 3
+                and core.get("raw_sha256") == raw_sha
+                and core.get("schema") == SCHEMA
+            ):
+                _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core.get("digest_value") or "")
+                inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True)
+                _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+                return inst
+        except Exception:
+            pass
+
+    full = load_model(target, root=base, verify=True)
+    core = _extract_routing_core(full, raw_sha)
+    try:
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        tmp_f = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
+        tmp_f.write_bytes(marshal.dumps(core))
+        tmp_f.replace(cache_file)
+    except OSError:
+        pass
+    inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True)
+    inst._model_loaded = full
+    _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+    return inst
+
+
+def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict[str, Any] | None:
+    """Fast RAM lookup of compile-time verified adapter AST metadata (`defaulted_keys` + `dispatch_ops`)."""
+    try:
+        inst = open_model()
+        idx = inst._core_meta.get("adapter_ast_index") or {}
+        row = idx.get(rel_path)
+        if not isinstance(row, Mapping):
+            return None
+        if expected_sha256 is not None and str(row.get("sha256") or "") != expected_sha256:
+            return None
+        return dict(row)
+    except Exception:
+        return None
 
 
 # --------------------------------------------------------------------------- cli
@@ -1234,7 +1588,7 @@ def main(argv: list[str] | None = None) -> int:
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
-    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL"])
+    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL", "SOLVE_OR_LEARN"])
     solve_p.add_argument("--capability-id", default=None)
     solve_p.add_argument("--instance-id", default=None)
     ns = parser.parse_args(argv)

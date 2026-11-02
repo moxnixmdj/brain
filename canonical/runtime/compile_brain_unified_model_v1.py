@@ -1090,6 +1090,83 @@ def _objective_block(root: Path) -> dict[str, Any]:
     }
 
 
+_AST_CONFIG_SLOTS = frozenset((
+    "python_executable", "search_seed", "top_k", "budget", "generate_unit_tests",
+    "time_budget_s", "max_candidates", "seed", "synthesize_regression_test",
+    "export_in_init", "limit", "max_edits", "max_symbols_per_file", "verbose",
+    "run_tests", "max_rounds", "strict", "min_coverage_ratio", "timeout_s",
+    "min_kill_ratio", "max_total_candidates", "default_expr", "pattern",
+    "max_pair_candidates", "tolerance", "max_files", "max_candidates_per_file",
+    "mutations_per_file", "repeats", "algorithm", "max_mutants",
+))
+
+
+def _extract_adapter_ast_index(base: Path, capabilities: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Pre-compute content-addressed AST metadata (`defaulted_keys` + `dispatch_ops`) per adapter."""
+    index: dict[str, dict[str, Any]] = {}
+    seen_paths: set[str] = set()
+    for row in capabilities:
+        rel = row.get("provenance", {}).get("source_path")
+        if not isinstance(rel, str) or not rel.endswith(".py") or rel in seen_paths:
+            continue
+        seen_paths.add(rel)
+        full_p = (base / rel).resolve()
+        if not full_p.is_file():
+            continue
+        try:
+            raw = full_p.read_bytes()
+            sha = digest_bytes(raw)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", SyntaxWarning)
+                tree = ast.parse(raw.decode("utf-8"))
+        except (OSError, UnicodeDecodeError, SyntaxError, ValueError):
+            continue
+
+        guarded_nodes: set[int] = set()
+        dispatch_ops: set[str] = set()
+        for parent in ast.walk(tree):
+            if isinstance(parent, ast.BoolOp) and isinstance(parent.op, ast.Or):
+                for v in parent.values:
+                    guarded_nodes.add(id(v))
+            elif isinstance(parent, (ast.If, ast.IfExp)):
+                for sub in ast.walk(parent.test):
+                    guarded_nodes.add(id(sub))
+            if isinstance(parent, ast.Compare) and isinstance(parent.left, ast.Name) and parent.left.id in ("op", "operation", "mode", "action"):
+                for comp in parent.comparators:
+                    if isinstance(comp, ast.Constant) and isinstance(comp.value, str):
+                        val = comp.value.strip()
+                        if 2 <= len(val) <= 64 and re.fullmatch(r"[A-Za-z0-9_.-]+", val):
+                            dispatch_ops.add(val)
+                    elif isinstance(comp, (ast.Tuple, ast.List, ast.Set)):
+                        for elt in comp.elts:
+                            if isinstance(elt, ast.Constant) and isinstance(elt.value, str):
+                                val = elt.value.strip()
+                                if 2 <= len(val) <= 64 and re.fullmatch(r"[A-Za-z0-9_.-]+", val):
+                                    dispatch_ops.add(val)
+
+        found_defaults: dict[str, str] = {}
+        for node in ast.walk(tree):
+            if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == "get" and node.args):
+                continue
+            owner = node.func.value
+            if not (isinstance(owner, ast.Name) and owner.id == "args"):
+                continue
+            key = node.args[0]
+            if not (isinstance(key, ast.Constant) and isinstance(key.value, str)):
+                continue
+            guarded = len(node.args) >= 2 or (id(node) in guarded_nodes)
+            low = key.value.lower()
+            if guarded and key.value in _AST_CONFIG_SLOTS and not any(w in low for w in ("output", "result", "report")):
+                found_defaults.setdefault(key.value, f"{rel}:{node.lineno}")
+
+        phrases = sorted({op.replace("_", " ").replace("-", " ").lower() for op in dispatch_ops if "_" in op or "-" in op})
+        index[rel] = {
+            "sha256": sha,
+            "defaulted_keys": dict(sorted(found_defaults.items())),
+            "dispatch_ops": sorted(dispatch_ops),
+            "dispatch_phrases": phrases,
+        }
+    return dict(sorted(index.items()))
 def _theory_block() -> dict[str, Any]:
     return {
         "effective_intelligence": (
@@ -1143,6 +1220,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
     grammar = _build_grammar(capabilities, engines)
+    grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
 
     included_sources: list[tuple[str, str]] = []
     for row in capabilities:

@@ -98,7 +98,18 @@ find things; this one is a genuine absent connection, and it is a small one.
    than any new mechanism.
 2. **Fix the 7 named refusals.** They are already diagnosed by their own instrument
    (`extract_function` region invalid, `git_branch` target not in stdlib, `find_definition`
-   unserved, and four more). Cheapest capability gain available.
+   unserved, and four more). **Ranked here as the cheapest capability gain available; that ranking is wrong,
+   and live measurement on 2026-11-02 corrected it.** Re-run on `6376dc6`, the census
+   is 42 served / 7 refused (`#16, #21, #26, #32, #33, #45, #46`), and the tree's own
+   `defect_owner` -- the classifier pinned by
+   `test_the_inventory_prices_each_refusal_honestly_v1` -- prices them **4 fixture,
+   3 selection, 0 capability**. Four are rows whose fixtures contain nothing to find,
+   so they measure nothing either way; "fixing" them would move a count, not a
+   capability. The three that are real all sit in the **selection** layer, which is
+   section 2.2's diagnosis, and section 2.2 is right. The full trace -- including why
+   #45/#46 are *not* fixture defects, and why the law-pinned refusal reason must not
+   be renamed to look more specific -- is in
+   `HARDCORE_SWE_ALL_PROBLEMS_20261101_V4.md` section 2.
 3. **Wire the existing abstraction modules into the bridge.** The semantic machinery is
    already here — `h100_zero_learned_semantic_paraphrase_v1` (4 tests), `meta_strategy_abstraction_v9`,
    `recursive_abstraction_v5`, `finite_abstraction_cover_lift_v1`. The bridge currently carries
@@ -421,6 +432,117 @@ Measured on the current tree: **443 registry rows, 566 declared effects, 11 rows
 reached** by the 49 advanced SWE sentences; **3 rows serve 30 of the 36 served sentences**;
 36 served, 13 refused, 0 false. The machine is **not short of capability — it is short of
 declaration and routing.** 101 operations exist and 36 effects are declared.
+
+**Correction, 2026-11-02, measured on `a462d67`: the "443 rows" denominator is wrong by
+about 3x, and this section's conclusion does not follow from it.** Of the 443 registry
+rows, **294 are `RECEIPT_BACKED_PENDING_PROMOTION`** -- `.auto.v1` rows generated from a
+file path, whose `provides` is the row's own id and whose `triggers` are that filename
+tokenized. **Only 149 are `VERIFIED_BOUND_CAPABILITY`.** 312 rows declare no inputs at
+all and 176 emit nothing but a `returncode`.
+
+Re-measured against the correct denominator: the 49-sentence census serves 42 sentences
+through **8 distinct rows, all 8 of them verified bound capabilities -- 8 of 149, 5.4%**
+-- and **0 of the 294 receipt-backed rows are ever selected by anything**, which confirms
+they are evidence records rather than routable capability. Concentration is severe and
+this section was right about it: `code.polyglot.transform_and_verify.v1` (15),
+`python.swe.transform_and_synthesize.v1` (11) and
+`software.analysis.diagnose_and_architect.v1` (10) serve **36 of the 42**.
+
+**But "short of declaration and routing" is not established by that number, and should not
+be acted on as though it were.** Most of the 149 bound capabilities are not software
+engineering at all -- `archive.tar_gz.create_from_manifest`,
+`chart.raster.axis_title_unit_binding.v1`, `auto.pypi.msgpack`,
+`evidence.claim_relation.generic_units.stdlib`. An SWE census reaching 8 SWE-shaped rows is
+what you would expect whether routing generalizes or not. The ratio cannot distinguish
+"the census is narrow" from "the door cannot route", and those two predict opposite work.
+
+The instrument that would distinguish them does not exist yet, and the reason is concrete:
+**the rows carry no natural-language description.** A held-out sentence must be built from
+something other than the row's own `triggers`, or it measures keyword matching rather than
+routing -- the same self-contamination that produced a false 9/9 earlier in this work. An
+attempt to generate paraphrases mechanically from `provides` returned **0 usable of 40
+sampled rows**, because banning a row's trigger tokens bans its id, and its id is all
+`provides` contains. So held-out sentences over the 149 must be authored, with the
+contamination control stated up front. That is the prerequisite; until it exists, the
+routing claim is a hypothesis, not a finding.
+
+**Correction, 2026-11-02, measured on `491a626`: the routing claim is not merely
+unproven, it is the wrong shape, and the instrument above cannot be built as
+described.** Two attempts were made and both **voided themselves on their own
+pre-declared validity gates** -- positive-control hit rates of 36% and then 58%
+against a 70% gate -- so neither produced a generalization number. Both were
+reported as harness defects, not findings.
+
+The cause of both is that **the door is not a text-similarity router.**
+`compile_against_live_registry` compiles a goal against a row's declared
+`input_names`. An underspecified goal raises `GoalCompilationFailure` carrying
+`code=GOAL_INPUT_BINDING_REQUIRED` and
+`detail='<capability>:contract_not_stated:<slot>'`. Demonstrated on the same
+intent, varied only in specification:
+
+| goal | result |
+|---|---|
+| "Extract these lines of the function into a new function." | `GOAL_INPUT_BINDING_REQUIRED` |
+| same, with a real path, line range, symbol and new name | **`python.refactor.extract_function.v1` -- exact hit** |
+| "Query this JSON file with a jq filter…" | `GOAL_INPUT_BINDING_REQUIRED` |
+| same, with the real path and the filter text supplied | **`json.query.jq` -- exact hit** |
+| "Fetch the JSON from the URL stored in this state file." | `GOAL_INPUT_BINDING_REQUIRED` |
+| same, with `source_json_path` and `url_key` supplied | **`http.json.fetch_from_state` -- exact hit** |
+
+So **selection is contract-filling, not paraphrase matching**, and "8 of 149 rows
+reached" measures how many rows the 49 census sentences happen to fully specify.
+It is neither a routing defect nor a narrow census -- it is a third thing, and the
+held-out-paraphrase instrument cannot measure it, because a paraphrase that omits
+required slots fails closed no matter how well it describes the intent.
+
+**And the conclusion that matters most is the opposite of the one this section was
+arguing.** The tree *already states its own data gaps precisely*: the failure names
+the capability, the reason, and the exact missing input slot. That is
+`OWNER_ACTIVE_GOAL_20261018_V1.md` §5 capability 4 -- "it says 'I don't have the
+data' out loud, then gets it, by itself." **The "says it out loud" half exists,
+works, and is unexploited**: nothing consumes `detail` to acquire or request the
+named slot.
+
+**Correction, measured 2026-11-02 on `6fd9bae`: "already emitted on every refusal"
+is false, and what happens instead is worse.** Twelve vague goals with no paths and
+no slot values were compiled. **None** raised `GOAL_INPUT_BINDING_REQUIRED` -- 5
+raised `GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH`, and **7 compiled
+successfully, 3 of them onto the wrong row, silently.** The structured missing-slot
+report appears only once a row HAS been selected and a slot is unstated; it is not
+what an under-specified goal produces.
+
+The silent cases are the finding. "Query the data file and write the result out"
+selected `software.repair.choreograph.crossfile.v1` -- a cross-file repair WRITER,
+and the same row whose selection causes census refusal #21
+(`STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER`). "Show the recent log of the
+repository" selected `python.repository.acceptance.measure.v1`. "Rename that helper
+to something clearer" selected `python.refactor.inline_helper.v1`, which deletes
+rather than renames. Tally over the 12: **4 correct, 3 silently wrong, 5 no-match.**
+
+So under-specification does not fail closed. It fails *quietly*, about a quarter of
+the time in this sample, and the guard that catches #21 sits downstream of the
+mis-selection rather than substituting for it. That connects census refusal #21 to a
+general mechanism instead of leaving it a one-off, and it is a worse failure mode
+than a refusal: a refusal is honest, a confident wrong selection is not.
+
+Two limits on that number, stated because they bound it: n=12, and the "intended
+row" is my authoring judgment, not a ground truth the tree declares. The three wrong
+selections are wrong on any reading -- inlining is not renaming, and a cross-file
+repair choreographer is not a JSON query.
+
+What is missing is therefore not only goal elaboration. It is **a loud failure when
+selection is not confident**, so a vague goal reports what it could not determine
+instead of proceeding on a guess. The raw material for both exists and is
+unconsumed: `GOAL_INPUT_BINDING_REQUIRED.detail` names an unstated slot, and
+`GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH` names the capability it tried.
+Neither is raised at all in the silent-wrong case, which is precisely where a
+mechanism is needed.
+
+Harness defect recorded, because it is the fourth of its species this session: the
+probe caught the exception and kept only `type(exc).__name__`, discarding `code`
+and `detail`. It therefore measured "the door does not say what is missing" while
+the door was saying exactly that. An instrument that throws away the field it was
+built to read will report the absence of the thing it deleted.
 
 This matters for the learning argument specifically: a taught lesson lives **inside a row**.
 If the door does not route a sentence to that row, the lesson is never consulted, no matter

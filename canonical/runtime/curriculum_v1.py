@@ -386,6 +386,17 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             break          # cheap before expensive, and stop when it worked
 
     closed = closed_by is not None
+    promoted_skill_id = None
+    if closed:
+        try:
+            from canonical.swe_kernel.autonomous_awake_loop_v1 import (
+                promote_closed_lesson_to_workflow_db,
+            )
+            prom = promote_closed_lesson_to_workflow_db(what, closed_by, attempts)
+            if prom.get("promoted"):
+                promoted_skill_id = prom.get("skill_id")
+        except Exception:
+            pass
     if gap_id and closed:
         try:
             from canonical.runtime import ignorance_ledger_v1 as led
@@ -408,6 +419,7 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
         "gap_id": gap_id,
         "gap": what,
         "closed_by": closed_by,
+        "promoted_skill_id": promoted_skill_id,
         "attempts": attempts,
         "channels_tried": [a["channel"] for a in attempts],
         "authority": ("GAP_CLOSED_BY_EVIDENCE" if closed else
