@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 242,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6633,
+  "research_index_records": 6634,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "55efc640a98831f3e561861f3ad1bd62f51e2882b6752be09c8335342da27f15"
+  "value": "3410e7fbd9f978c32636b3c082c303e1ed7425f654af00492226d7684d87b26b"
  },
  "engines": [
   {
@@ -201537,6 +201537,32 @@
     "live_brain_dependency_truth_20261017_v1": 1,
     "the_denominator_every_liveness_claim_is_divided_by_is_now_derived_not_declared__zero_credit": 1,
     "the_heartbeat_derives_capability_liveness_from_hand_written_registry_package_declarations_which_drift_from_the_adapter_import_graph_so_the_runnable_capability_count_is_wrong_in_both_directions_and_every_plan_computed_from_it_is_computed_on_a_corrupted_denominator": 1,
+    "truth": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "GOAL_GAP_STATEMENT_TRUTH_20261102_V1",
+   "capability": false,
+   "date": "2026-11-02",
+   "id": "research:canonical/action_intents/2026-11-02_GOAL_GAP_STATEMENT_TRUTH_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/2026-11-02_GOAL_GAP_STATEMENT_TRUTH_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "eab5df986a7ec59e1aa5523cb04444431ad7c376e0ec2ce5efcf048da54f1910",
+   "status": "",
+   "terms": {
+    "02": 1,
+    "11": 1,
+    "2026": 1,
+    "an_under_specified_goal_does_not_fail_closed__the_goal_compiler_silently_binds_it_to_a_capability_the_goal_never_asked_for_and_reports_success__and_nothing_consumed_the_structured_gap_report_the_compiler_already_emitted_in_its_failure_detail": 1,
+    "compose_the_compilers_own_already_emitted_failure_detail_and_score_and_match_evidence_into_one_consumable_statement_in_a_new_consumer_module_sited_outside_the_door": 1,
+    "every_under_specified_goal_now_yields_a_named_machine_readable_gap_or_unforced_selection_statement_instead_of_a_silent_wrong_binding__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "gap": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "goal_gap_statement_truth_20261102_v1": 1,
+    "statement": 1,
     "truth": 1,
     "v1": 1
    }
