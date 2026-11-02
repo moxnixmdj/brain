@@ -395,6 +395,68 @@ def _check_directory_listing() -> tuple[bool, list[dict]]:
     return all(c["ok"] for c in checks), checks
 
 
+def _check_directory_search() -> tuple[bool, list[dict]]:
+    checks: list[dict] = []
+    search = WORLD / "search"
+    (search / "deep").mkdir(parents=True, exist_ok=True)
+    # Known by construction: `needle` appears in two of the four files, once in a
+    # subdirectory; `NEEDLE` (uppercase) is a different string on a case-sensitive
+    # match, and `binary.bin` is not text at all.
+    (search / "hit_one.txt").write_text("alpha\nneedle\ngamma\n", encoding="utf-8")
+    (search / "deep" / "hit_two.txt").write_text("needle needle\n", encoding="utf-8")
+    (search / "miss.txt").write_text("alpha\nbeta\n", encoding="utf-8")
+    (search / "shout.txt").write_text("NEEDLE\n", encoding="utf-8")
+    (search / "binary.bin").write_bytes(b"\xff\xfeneedle")
+
+    goal = "Which files in %s contain needle?" % _rel(search)
+    out = _run_survey("directory_search", {"path": _rel(search), "goal": goal})
+    got = sorted(out.get("files_with_matches") or [])
+    expected = sorted([_rel(search / "hit_one.txt"), _rel(search / "deep" / "hit_two.txt")])
+    checks.append({"name": "names exactly the files this check seeded the string into",
+                   "ok": got == expected, "built_here": expected, "adapter_returned": got})
+    # One matching line in hit_one, one in hit_two ("needle needle" is one line),
+    # and none in the case-different file or the binary.  The first version of
+    # this check expected 3 and the CHECK was wrong, not the adapter.
+    checks.append({"name": "counts matching LINES, and the line count is the seeded one",
+                   "ok": out.get("match_count") == 2, "built_here": 2,
+                   "adapter_returned": out.get("match_count")})
+    checks.append({"name": "the answer-shape gate can project the result onto `files`",
+                   "ok": (out.get("files") or []) == (out.get("files_with_matches") or [])
+                         and bool(out.get("files")), "adapter_returned": out.get("files")})
+    checks.append({"name": "a case-different string is not the string asked for",
+                   "ok": _rel(search / "shout.txt") not in got, "adapter_returned": got})
+    checks.append({"name": "a binary file is skipped rather than failing the search",
+                   "ok": _rel(search / "binary.bin") not in got, "adapter_returned": got})
+
+    # The one place this adapter reads a value out of prose must refuse, not guess.
+    for label, sentence in (
+        ("refuses a sentence that states no string to look for",
+         "Search %s" % _rel(search)),
+        ("refuses two grammars that do not agree",
+         "Search %s for the word needle and also for gamma-containing files" % _rel(search)),
+    ):
+        try:
+            _run_survey("directory_search", {"path": _rel(search), "goal": sentence})
+        except Exception as exc:  # noqa: BLE001 - any refusal is a refusal
+            checks.append({"name": label, "ok": True, "refused_with": str(exc)[:120]})
+        else:
+            checks.append({"name": label, "ok": False, "refused_with": None})
+    try:
+        _run_survey("directory_search", {"path": _rel(search / "hit_one.txt"), "goal": goal})
+    except Exception as exc:  # noqa: BLE001
+        checks.append({"name": "refuses a file where a directory is required", "ok": True,
+                       "refused_with": str(exc)[:100]})
+    else:
+        checks.append({"name": "refuses a file where a directory is required", "ok": False})
+    return all(c["ok"] for c in checks), checks
+
+
+ROWS["file.directory_search.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-DIRECTORY-SEARCH-001",
+    "claim": "names the files whose text contains the stated string, and refuses when the sentence states none or two",
+    "check": _check_directory_search,
+}
+
 ROWS["file.word_frequency.v1"] = {
     "mission": "ASTRA-VERIFY-FILE-WORD-FREQUENCY-001",
     "claim": "reports the most common word, the counts behind it, and any tie",

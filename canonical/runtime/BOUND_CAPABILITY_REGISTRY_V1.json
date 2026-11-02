@@ -12547,6 +12547,88 @@
           "command": "directory_list"
         }
       }
+    },
+    "file.directory_search.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "directory_search",
+          "goal": "${input.goal}",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_survey",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "files contain",
+        "files containing",
+        "search the directory for",
+        "search for the word",
+        "find files with"
+      ],
+      "limitations": [
+        "Reads only. The string to look for is parsed from the sentence by a closed grammar; when the sentence does not state exactly one string, the row refuses rather than guessing.",
+        "Skips binary and unreadable files, and any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "survey.directory_search"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "command",
+        "files",
+        "files_scanned",
+        "files_with_matches",
+        "match_count",
+        "matches",
+        "output_path",
+        "output_verified",
+        "path",
+        "pattern",
+        "schema"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIRECTORY-SEARCH-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: the world and its expected matches are built by the check, and the adapter is reached through the real dispatcher. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_survey",
+          "command": "directory_search"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

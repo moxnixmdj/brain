@@ -72,6 +72,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.stat.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T14:45:06Z",
+ "verified_at": "2026-11-02T14:48:36Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }

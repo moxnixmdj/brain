@@ -14,6 +14,7 @@ two of those questions with the smallest correct implementation:
 
     word_frequency <f>   the most common word, and the counts behind it
     directory_list <d>   the entries, with type and size
+    directory_search <d> the files under <d> whose text contains a stated string
 
 Neither writes anything, spawns anything, or leaves the repository root.
 """
@@ -106,7 +107,76 @@ def _directory_list(args, root: pathlib.Path) -> dict:
     }
 
 
-_HANDLERS = {"word_frequency": _word_frequency, "directory_list": _directory_list}
+#: The grammars a sentence uses to state the string to look for. Each capture is
+#: a plain word run; the value is never inferred from a path or a filename.
+_SEARCH_GRAMMARS = (
+    re.compile(r"\b(?:contain(?:s|ing)?)\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
+    re.compile(r"\bfor\s+the\s+word\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
+    re.compile(r"\b(?:search|look)\w*\b[^.]{0,80}?\bfor\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
+)
+
+
+def _stated_search_text(goal: str) -> str:
+    """The one string the sentence says to look for, or a refusal.
+
+    This is the only place the module reads a value out of prose, so it is the
+    only place that could guess.  It refuses instead: no match, or two grammars
+    that do not agree, is a refusal -- never a default.
+    """
+    found = set()
+    for grammar in _SEARCH_GRAMMARS:
+        for match in grammar.finditer(str(goal or "")):
+            found.add(match.group(1))
+    # "Search <d> for THE WORD beta" is caught by the looser grammar as "the".
+    # A stop word can never be the value when another grammar found a real one,
+    # so the stop words are dropped -- but only when something survives them, so
+    # a sentence that genuinely asks for "the" still has its one answer.
+    substantive = {value for value in found if value.lower() not in _STOP_WORDS}
+    if substantive:
+        found = substantive
+    if len(found) == 1:
+        return found.pop()
+    raise RuntimeError("SEARCH_TEXT_NOT_STATED" if not found else "SEARCH_TEXT_AMBIGUOUS")
+
+
+def _directory_search(args, root: pathlib.Path) -> dict:
+    base = _safe(root, args.get("path") or "")
+    if not base.is_dir():
+        raise RuntimeError("PATH_NOT_A_DIRECTORY")
+    needle = str(args.get("pattern") or "").strip() or _stated_search_text(args.get("goal") or "")
+    matches: list[dict] = []
+    scanned = 0
+    for child in sorted(base.rglob("*")):
+        if not child.is_file() or child.is_symlink():
+            continue
+        resolved = child.resolve()
+        if resolved != root and root not in resolved.parents:
+            continue
+        try:
+            text = resolved.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            # A binary or unreadable file is not a file that fails the search;
+            # it is a file this question was not asked about.
+            continue
+        scanned += 1
+        hits = [line for line in text.splitlines() if needle in line]
+        if hits:
+            matches.append({"path": resolved.relative_to(root).as_posix(),
+                            "match_count": len(hits), "lines": hits[:20]})
+    return {
+        "path": base.relative_to(root).as_posix(),
+        "pattern": needle,
+        "files_scanned": scanned,
+        "files_with_matches": [m["path"] for m in matches],
+        "files": [m["path"] for m in matches],
+        "match_count": sum(m["match_count"] for m in matches),
+        "matches": matches,
+        "answer": "\n".join(m["path"] for m in matches),
+    }
+
+
+_HANDLERS = {"word_frequency": _word_frequency, "directory_list": _directory_list,
+             "directory_search": _directory_search}
 
 
 def run(args, root):

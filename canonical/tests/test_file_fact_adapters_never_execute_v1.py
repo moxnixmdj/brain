@@ -258,6 +258,10 @@ def test_the_survey_answers_with_no_process() -> None:
             assert counted["most_common_word"] == "banana", counted
             listed = file_survey.run({"command": "directory_list", "path": rel}, ROOT)
             assert sorted(listed["names"]) == ["sub", "words.txt"], listed["names"]
+            searched = file_survey.run(
+                {"command": "directory_search", "path": rel,
+                 "goal": "Which files in %s contain banana?" % rel}, ROOT)
+            assert [p.rsplit("/", 1)[-1] for p in searched["files_with_matches"]] == ["words.txt"], searched
             for bad in ({"command": "rm", "path": rel},
                         {"command": "directory_list", "path": rel + "/words.txt"}):
                 try:
@@ -310,7 +314,8 @@ def test_the_registry_rows_are_dispatchable_and_declare_what_they_return() -> No
                             ("file.sorted.v1", file_command_view),
                             ("file.reversed.v1", file_command_view),
                             ("file.word_frequency.v1", file_survey),
-                            ("file.directory_listing.v1", file_survey)):
+                            ("file.directory_listing.v1", file_survey),
+                            ("file.directory_search.v1", file_survey)):
             entry = registry[cid]
             assert entry.get("entrypoint") == "run", (cid, entry.get("entrypoint"))
             assert callable(getattr(module, entry["entrypoint"])), cid
@@ -319,11 +324,14 @@ def test_the_registry_rows_are_dispatchable_and_declare_what_they_return() -> No
             assert entry.get("incremental_spend_usd") == 0, cid
             assert entry.get("read_only") is True, cid
             declared = set(entry.get("result_fields") or ())
-            call = {"path": rel if cid != "file.directory_listing.v1" else str(world.relative_to(ROOT.resolve()).as_posix())}
+            call = {"path": str(world.relative_to(ROOT.resolve()).as_posix()) if cid in (
+                "file.directory_listing.v1", "file.directory_search.v1") else rel}
             if module is file_command_view:
                 call["command"] = entry["computes_command"]["argvs"][0][0]
             elif module is file_survey:
                 call["command"] = entry["action_template"]["args"]["command"]
+                if cid == "file.directory_search.v1":
+                    call["goal"] = "Which files in %s contain alpha?" % call["path"]
             returned = set(module.run(call, ROOT))
             assert returned <= declared, (cid, sorted(returned - declared))
     finally:

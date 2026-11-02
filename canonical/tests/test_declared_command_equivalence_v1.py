@@ -185,6 +185,41 @@ def test_a_read_only_row_is_never_the_chain_that_answers_a_write() -> None:
     assert (ROOT / out).read_text(encoding="utf-8") == "PROJECT BRAIN", "the write did not land"
 
 
+def test_a_directory_search_names_the_files_it_seeded_and_refuses_a_guessed_needle() -> None:
+    """The one row that reads a value out of prose is pinned on both halves.
+
+    "Which files in <d> contain beta?" used to execute python.source.audit.ast --
+    a capability with nothing to do with the question. It is now answered by the
+    row that scans the directory. The sentinel `BETA` is uppercase on purpose: a
+    case-insensitive match would also list the second file, so the answer is
+    checked against the files it must NOT include as well as the one it must.
+    """
+    work = ROOT / "canonical/astra_runtime/tmp/test_declared_command_equivalence"
+    (work / "deep").mkdir(parents=True, exist_ok=True)
+    (work / "has_beta.txt").write_text("alpha\nbeta\n", encoding="utf-8")
+    (work / "deep" / "also_beta.txt").write_text("beta beta\n", encoding="utf-8")
+    (work / "shouts.txt").write_text("BETA\n", encoding="utf-8")
+    (work / "nothing.txt").write_text("gamma\n", encoding="utf-8")
+    rel = work.relative_to(ROOT).as_posix()
+
+    result = door.solve({"task_id": "declared_eq_search",
+                         "goal": "Which files in %s contain beta?" % rel})
+    assert result.get("pass") is True, (result.get("status"), result.get("compiler_detail"))
+    assert result.get("compiled_capability_id") == "file.directory_search.v1", (
+        result.get("compiled_capability_id"))
+
+    # And the refusal half, called directly: a sentence that states no string
+    # must not be served by choosing one for it.
+    from canonical.runtime.bound_capabilities import file_survey
+    try:
+        file_survey.run({"command": "directory_search", "path": rel,
+                         "goal": "Search " + rel}, ROOT)
+    except RuntimeError as exc:
+        assert "SEARCH_TEXT_NOT_STATED" in str(exc), exc
+    else:
+        raise AssertionError("the search invented a string the sentence did not state")
+
+
 def test_the_registry_rows_that_declare_a_command_are_the_file_fact_rows() -> None:
     registry = graph.load_registry()
     declaring = sorted(cid for cid, entry in registry.items()

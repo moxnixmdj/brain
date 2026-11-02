@@ -1,6 +1,6 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
- "adapter_sha256": "b777db2900b4dbcb19a32e6bd6f22344d24b3e6b934511bbde97d42add3a627e",
+ "adapter_sha256": "c8403bb7fbbe8e3529e47d676143ce8806de42ce870b1abb1089bc3f12c325dc",
  "capability_id": "file.word_frequency.v1",
  "checks": [
   {
@@ -51,6 +51,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.word_frequency.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T14:45:06Z",
+ "verified_at": "2026-11-02T14:48:36Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }
