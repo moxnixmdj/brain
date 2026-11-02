@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6626,
+  "research_index_records": 6628,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 434,
-  "source_index_modules": 1914
+  "source_index_entry_points": 435,
+  "source_index_modules": 1915
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "329617233afae47bfc2bfe99e677ec2ad578bf1cd65f2948e6e6a12dad90f578"
+  "value": "adb81a10bc8d27d74f27f968bbc9ced637cdfee7feacc9b82c67c4a90f464518"
  },
  "engines": [
   {
@@ -152940,6 +152940,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/MORTALITY_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/MORTALITY_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "cb8a4510a9f0ea0b21c506129b95a7e9ce781316f30a6d468efd7188be88a370",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "known": 1,
+    "mortality": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/MREL_NECESSARY_PROPERTY_AUTHORITY_REBASE_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -212367,6 +212385,51 @@
    }
   },
   {
+   "action_id": "MORTALITY_THAT_CHANGES_WHAT_IT_STARTS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MORTALITY_THAT_CHANGES_WHAT_IT_STARTS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MORTALITY_THAT_CHANGES_WHAT_IT_STARTS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "44254355f9a92a2305a8e83efac2e38458bfff2881a31d80a73d13725ee2db59",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "always": 1,
+    "assumed": 1,
+    "away": 1,
+    "because": 2,
+    "benchmark": 1,
+    "board": 1,
+    "changes": 2,
+    "choices": 1,
+    "continues": 1,
+    "continuity": 1,
+    "continuous": 1,
+    "counters": 1,
+    "end": 1,
+    "every": 1,
+    "first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "here": 1,
+    "initiative": 1,
+    "lost": 2,
+    "matters": 1,
+    "module": 1,
+    "mortality": 1,
+    "mortality_that_changes_what_it_starts_v1_20261102": 1,
+    "moves": 1,
+    "no": 1,
+    "nothing": 2,
+    "only": 1,
+    "picks": 1,
+    "resumes": 2,
+    "tree": 2
+   }
+  },
+  {
    "action_id": "MULTI_STEP_CLAUSE_CONTEXT_FORWARDING_V1",
    "capability": false,
    "date": "",
@@ -256313,6 +256376,45 @@
     "solve": 1,
     "v1": 1,
     "world_id": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/mortality_and_triage_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/mortality_and_triage_v1.py",
+   "sha256": "abb275257890cc7a7ec6d95e572554e568a93072fce5b15dfb3fdc55b66ce4f0",
+   "summary": "The first thing in this tree that can be lost.",
+   "symbol_count": 8,
+   "symbols": [
+    "Life",
+    "LifeStore",
+    "Work",
+    "choose_next",
+    "demonstration_board",
+    "live",
+    "main",
+    "measure"
+   ],
+   "terms": {
+    "choose_next": 1,
+    "demonstration_board": 1,
+    "first": 1,
+    "life": 1,
+    "lifestore": 1,
+    "live": 1,
+    "lost": 1,
+    "main": 1,
+    "measure": 1,
+    "mortality": 1,
+    "thing": 1,
+    "tree": 1,
+    "triage": 1,
+    "v1": 1,
+    "work": 1
    }
   },
   {
