@@ -294,8 +294,9 @@ class OptimalUnifiedCreatureAndPrC2Tests(unittest.TestCase):
             self.assertEqual(p1["creature"]["identity"], "unified-creature")
             epoch_1 = p1["creature"]["epoch"]
             life_after_1 = p1["creature"]["life_remaining"]
+            self.assertLess(life_after_1, 40.0)
 
-            # Second boot on same state_root increments epoch and preserves spent life
+            # Second boot on same state_root increments epoch, preserves spent life, and wastes 0.0 Life on green proj
             p2 = creature_mod.run_awake_creature_pulse(
                 proj,
                 state_root=pulse_state,
@@ -306,7 +307,7 @@ class OptimalUnifiedCreatureAndPrC2Tests(unittest.TestCase):
                 max_curriculum_lessons=0,
             )
             self.assertGreater(p2["creature"]["epoch"], epoch_1)
-            self.assertLess(p2["creature"]["life_remaining"], life_after_1)
+            self.assertEqual(p2["creature"]["life_remaining"], life_after_1)
 
     def test_memory_policy_chokepoints_block_hidden_writes_and_enforce_monotonic_scopes(self) -> None:
         from canonical.runtime import associative_memory_v1 as amem
@@ -618,9 +619,14 @@ class OptimalUnifiedCreatureAndPrC2Tests(unittest.TestCase):
                 self.assertEqual(pulse_out["cow_experimentation"]["repaired"], expect_repaired, pulse_out)
 
             # 3. Standing posture counterfactual: MEASURED takes high-density speculative item first;
-            #    CAUTIOUS (burned twice) refuses speculative gamble in favor of checkable repair!
+            #    CAUTIOUS (burned twice) refuses speculative gamble in favor of real checkable repair!
             clean_ws = base / "posture_ws"
             clean_ws.mkdir()
+            (clean_ws / "bug.py").write_text("def add1(x):\n    return x - 1\n", encoding="utf-8")
+            (clean_ws / "test_bug.py").write_text(
+                "from bug import add1\ndef test_add1():\n    assert add1(2) == 3\n",
+                encoding="utf-8",
+            )
             open_state = base / "standing_open"
             p_open = creature_mod.run_awake_creature_pulse(
                 clean_ws,
@@ -654,6 +660,300 @@ class OptimalUnifiedCreatureAndPrC2Tests(unittest.TestCase):
                 max_steps=1,
             )
             self.assertTrue(str(p_cautious["creature_steps"][0]["work"]).startswith("awake:cow_repair:"))
+
+    def test_optimal_pillar1_general_cst_algebra_and_auto_discovered_polyglot_cross_scope_transfer(self) -> None:
+        from canonical.swe_kernel.skill_verification_contract_v1 import (
+            ConfinedLanguageTestOracle,
+            ProjectTestOracle,
+        )
+        from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+            compile_rule_to_cst_skeleton,
+            minimize_cst_skeleton_pair,
+        )
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
+            VerifiedSkillStore,
+            anti_unify_code_rule,
+        )
+
+        for bs, as_ in (
+            ("def f(a, b):\n    return max(a, b - 1)\n", "def f(a, b):\n    return max(a, b)\n"),
+            ("def g(items, i):\n    return items[i - 1]\n", "def g(items, i):\n    return items[i]\n"),
+            ("def h(self):\n    return self.x <= self.hi\n", "def h(self):\n    return self.x < self.hi\n"),
+            ("def t(x, a, b):\n    return a if x >= 0 else b\n", "def t(x, a, b):\n    return a if x > 0 else b\n"),
+        ):
+            sk = compile_rule_to_cst_skeleton(anti_unify_code_rule(bs, as_))
+            self.assertIsNotNone(sk)
+            assert sk is not None
+            mp, mr = minimize_cst_skeleton_pair(sk["pattern_skeleton"], sk["replacement_skeleton"])
+            self.assertNotEqual(mp, mr)
+
+        with tempfile.TemporaryDirectory() as td:
+            base = pathlib.Path(td)
+            py_donor = base / "py_donor"
+            py_donor.mkdir()
+            b_py = "def in_half_open(i, n):\n    return 0 <= i and i <= n\n"
+            a_py = "def in_half_open(i, n):\n    return 0 <= i and i < n\n"
+            (py_donor / "bounds.py").write_text(b_py, encoding="utf-8")
+            (py_donor / "test_bounds.py").write_text(
+                "from bounds import in_half_open\n"
+                "def test_bounds():\n"
+                "    assert in_half_open(0, 3) is True\n"
+                "    assert in_half_open(2, 3) is True\n"
+                "    assert in_half_open(3, 3) is False\n",
+                encoding="utf-8",
+            )
+            store = VerifiedSkillStore(base / "skills.sqlite")
+            py_oracle = ProjectTestOracle(py_donor, "bounds.py", ["test_bounds.py"], "repo:py_donor")
+            crys = store.crystallize_code_fix(
+                before_snippet=b_py,
+                after_snippet=a_py,
+                language="python",
+                error_class="AssertionError",
+                contract={"schema_version": 1, "scope_id": "repo:py_donor", "verification_kind": "TEST_SUITE"},
+                training_verifier=py_oracle,
+            )
+            self.assertTrue(crys["crystallized"])
+
+            js_target = base / "js_target"
+            js_target.mkdir()
+            js_bug = "export function checkIdx(idx, length) {\n  return 0 <= idx && idx <= length;\n}\n"
+            (js_target / "bounds.mjs").write_text(js_bug, encoding="utf-8")
+            (js_target / "bounds.test.mjs").write_text(
+                "import assert from 'node:assert/strict';\n"
+                "import { checkIdx } from './bounds.mjs';\n"
+                "assert.equal(checkIdx(0, 4), true);\n"
+                "assert.equal(checkIdx(3, 4), true);\n"
+                "assert.equal(checkIdx(4, 4), false);\n",
+                encoding="utf-8",
+            )
+            js_oracle = ConfinedLanguageTestOracle(js_target, "bounds.mjs", ["bounds.test.mjs"], "repo:js_target")
+            ctx = {"dependencies": {}, "preconditions": {}}
+            self.assertIsNone(
+                store.recall_and_apply_verified(
+                    source_text=js_bug,
+                    language="javascript",
+                    verifier=js_oracle,
+                    required_verification_kind="TEST_SUITE",
+                    scope_id="repo:js_target",
+                    context=ctx,
+                    allow_cross_scope_transfer=False,
+                )
+            )
+            rec_js = store.recall_and_apply_verified(
+                source_text=js_bug,
+                language="javascript",
+                verifier=js_oracle,
+                required_verification_kind="TEST_SUITE",
+                scope_id="repo:js_target",
+                context=ctx,
+                allow_cross_scope_transfer=True,
+            )
+            self.assertIsNotNone(rec_js)
+            assert rec_js is not None
+            self.assertIn("< length", rec_js["patched_source"])
+
+    def test_optimal_pillar2_zero_copy_broker_and_zygote_cow_equal_length_screening(self) -> None:
+        from canonical.runtime.brokered_workspace_execution_v1 import run_staged_confined_command
+        from canonical.swe_kernel.zygote_worker_pool_v1 import screen_python_candidates_cow
+
+        with tempfile.TemporaryDirectory() as td:
+            base = pathlib.Path(td)
+            ws = base / "ws"
+            ws.mkdir()
+            (ws / "orig.py").write_text("VAL = 10\n", encoding="utf-8")
+            res = run_staged_confined_command(
+                ws,
+                [sys.executable, "-c", "import orig; assert orig.VAL == 42"],
+                publish=False,
+                candidate_overrides={"orig.py": "VAL = 42\n"},
+            )
+            self.assertTrue(res["ok"], res)
+            self.assertEqual((ws / "orig.py").read_text(encoding="utf-8"), "VAL = 10\n")
+
+            z_proj = base / "z_proj"
+            z_proj.mkdir()
+            (z_proj / "calc.py").write_text("def sub1(x):\n    return x - 2\n", encoding="utf-8")
+            (z_proj / "test_calc.py").write_text(
+                "from calc import sub1\ndef test_sub1():\n    assert sub1(5) == 4\n    assert sub1(1) == 0\n",
+                encoding="utf-8",
+            )
+            # Equal-byte-length candidates exercise `.pyc` same-second (mtime, size) invalidation
+            cands = [f"def sub1(x):\n    return x - {k}\n" for k in range(9, 1, -1)] + ["def sub1(x):\n    return x - 1\n"]
+            z_res = screen_python_candidates_cow(z_proj, "calc.py", ["test_calc.py"], cands)
+            self.assertTrue(z_res["ok"], z_res)
+            self.assertEqual(z_res["passing_indices"], [len(cands) - 1])
+
+    def test_optimal_pillar3_content_addressed_board_continuity_parking_and_zero_green_waste(self) -> None:
+        from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+
+        with tempfile.TemporaryDirectory() as td:
+            base = pathlib.Path(td)
+            unfix_ws = base / "unfix_ws"
+            unfix_ws.mkdir()
+            (unfix_ws / "hard.py").write_text("def impossible(x):\n    return x\n", encoding="utf-8")
+            (unfix_ws / "test_hard.py").write_text(
+                "from hard import impossible\ndef test_m():\n    assert impossible(1) == 2 and impossible(1) == 3\n",
+                encoding="utf-8",
+            )
+            c_state = base / "c_state"
+            d1 = AwakeAgencyDaemon(
+                workspace_root=unfix_ws,
+                ledger_path=str(base / "ign.json"),
+                workflow_db_path=base / "wf.sqlite",
+                skill_store_path=base / "sk.sqlite",
+                r3_state_path=base / "r3.json",
+                creature_root=c_state,
+                creature_identity="unfix-c",
+                creature_life=20.0,
+            )
+            p1 = d1.pulse(max_curriculum_lessons=0, channels=[])
+            p2 = d1.pulse(max_curriculum_lessons=0, channels=[])
+            p3 = d1.pulse(max_curriculum_lessons=0, channels=[])
+            self.assertEqual(p1["creature"]["life_spent"], 0.5)
+            self.assertEqual(p2["creature"]["life_spent"], 1.0)
+            self.assertEqual(p3["creature"]["life_spent"], 1.0)
+            self.assertEqual(len(d1.creature.parked()), 1)
+
+            d2 = AwakeAgencyDaemon(
+                workspace_root=unfix_ws,
+                ledger_path=str(base / "ign.json"),
+                workflow_db_path=base / "wf.sqlite",
+                skill_store_path=base / "sk.sqlite",
+                r3_state_path=base / "r3.json",
+                creature_root=c_state,
+                creature_identity="unfix-c",
+                creature_life=20.0,
+            )
+            p4 = d2.pulse(max_curriculum_lessons=0, channels=[])
+            self.assertEqual(p4["creature"]["life_spent"], 1.0)
+            self.assertEqual(list(d2.creature.parked()), list(d1.creature.parked()))
+
+    def test_optimal_pillar4_complete_memory_policy_chokepoints_including_macro_ram_cache(self) -> None:
+        from canonical.runtime import macro_v1
+        from canonical.runtime.live_integrated_brain_v1 import run_raw_goal
+        from canonical.runtime.memory_policy_v1 import OFF, READ_ONLY, memory_policy_scope
+        from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+            lookup_verified_chain_macro,
+            record_verified_chain_macro,
+        )
+        from canonical.swe_kernel.rule_expiry_v1 import audit as expiry_audit, expire_stale, record_taught
+        from canonical.swe_kernel.upstream_routing_ledger_v1 import UpstreamRoutingLedger
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        with tempfile.TemporaryDirectory() as td:
+            base = pathlib.Path(td)
+            mp_dir = base / "mp"
+            mp_dir.mkdir()
+            url_db = mp_dir / "routing.sqlite"
+            macro_f = mp_dir / "macros.json"
+            chain_macro_f = mp_dir / "chain_macros.json"
+            expiry_db = mp_dir / "expiry.sqlite"
+            store = VerifiedSkillStore(base / "sk.sqlite")
+            old_state = macro_v1.STATE
+            macro_v1.STATE = macro_f
+            try:
+                with memory_policy_scope(OFF):
+                    ul_off = UpstreamRoutingLedger(url_db)
+                    ul_off.record_refusal("compress foo.txt", "bad.cap", "CAPABILITY_DOMAIN_MISMATCH")
+                    ul_off.record_verified_route("compress a.txt", "good.cap")
+                    self.assertFalse(
+                        macro_v1.record(
+                            ["extract text from a.txt", "compress a.txt"],
+                            [{"capability_id": "c1", "verified": True}, {"capability_id": "c2", "verified": True}],
+                        )
+                    )
+                    self.assertFalse(
+                        record_verified_chain_macro(
+                            ["extract text from a.txt", "compress a.txt"],
+                            [{"capability_id": "c1", "verified": True}, {"capability_id": "c2", "verified": True}],
+                            state_path=chain_macro_f,
+                        )
+                    )
+                    self.assertFalse(record_taught(expiry_db, "rule_1")["recorded"])
+                self.assertEqual(list(mp_dir.iterdir()), [])
+
+                ul_rw = UpstreamRoutingLedger(url_db)
+                ul_rw.record_refusal("compress alpha.txt", "bad.cap", "CAPABILITY_DOMAIN_MISMATCH")
+                self.assertTrue(
+                    record_verified_chain_macro(
+                        ["extract text from a.txt", "compress a.txt"],
+                        [{"capability_id": "c1", "verified": True}, {"capability_id": "c2", "verified": True}],
+                        state_path=chain_macro_f,
+                    )
+                )
+                record_taught(expiry_db, "rule_1", fingerprint={"python_major_minor": "3.11", "platform": "Linux", "machine": "x86_64"})
+                with memory_policy_scope(READ_ONLY):
+                    self.assertIn("bad.cap", ul_rw.lookup_shape("compress beta.txt")["disqualified"])
+                    self.assertIsNotNone(
+                        lookup_verified_chain_macro(["extract text from b.txt", "compress b.txt"], state_path=chain_macro_f)
+                    )
+                    self.assertEqual(
+                        expire_stale(store, expiry_db, now={"python_major_minor": "3.12", "platform": "Linux", "machine": "x86_64"})["expired"],
+                        [],
+                    )
+                with memory_policy_scope(OFF):
+                    self.assertEqual(ul_rw.lookup_shape("compress beta.txt")["disqualified"], {})
+                    self.assertIsNone(
+                        lookup_verified_chain_macro(["extract text from b.txt", "compress b.txt"], state_path=chain_macro_f)
+                    )
+                    self.assertEqual(expiry_audit(expiry_db)["rules"], [])
+            finally:
+                macro_v1.STATE = old_state
+
+            bad_mp = run_raw_goal({"task_id": "mp-invalid", "goal": "hello", "memory_policy": "INVALID_POLICY"})
+            self.assertFalse(bad_mp["pass"])
+            self.assertEqual(bad_mp["status"], "FAIL_CLOSED__MEMORY_POLICY_INVALID")
+
+    def test_optimal_pillar5_general_rule_scope_persistence_and_n2_verified_route_promotion(self) -> None:
+        from canonical.swe_kernel.rule_scope_learning_v1 import calibrate_rule_scope
+        from canonical.swe_kernel.skill_verification_contract_v1 import ProjectTestOracle
+        from canonical.swe_kernel.upstream_routing_ledger_v1 import UpstreamRoutingLedger
+        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+        with tempfile.TemporaryDirectory() as td:
+            base = pathlib.Path(td)
+            proj = base / "ge_proj"
+            proj.mkdir()
+            b_ge = "def is_strict_pos(x):\n    return x >= 0\n"
+            a_ge = "def is_strict_pos(x):\n    return x > 0\n"
+            (proj / "pos.py").write_text(b_ge, encoding="utf-8")
+            (proj / "test_pos.py").write_text(
+                "from pos import is_strict_pos\n"
+                "def test_pos():\n"
+                "    assert is_strict_pos(1) is True\n"
+                "    assert is_strict_pos(0) is False\n",
+                encoding="utf-8",
+            )
+            store = VerifiedSkillStore(base / "sk.sqlite")
+            oracle = ProjectTestOracle(proj, "pos.py", ["test_pos.py"], "repo:ge_proj")
+            crys = store.crystallize_code_fix(
+                before_snippet=b_ge,
+                after_snippet=a_ge,
+                language="python",
+                error_class="AssertionError",
+                contract={"schema_version": 1, "scope_id": "repo:ge_proj", "verification_kind": "TEST_SUITE"},
+                training_verifier=oracle,
+            )
+            self.assertTrue(crys["crystallized"])
+            rule = [r for r in store.lookup_rules("python") if r["skill_id"] == crys["skill_id"]][0]
+            calibrate_rule_scope(rule, store=store)
+            persisted = [r for r in store.lookup_rules("python") if r["skill_id"] == crys["skill_id"]][0]
+            self.assertEqual(persisted["learned_scope"], "SCOPE_SEMANTIC")
+
+            ledger = UpstreamRoutingLedger(base / "promo.sqlite")
+            r1 = ledger.record_verified_route("Create table sales in db1.sqlite from rows1.json", "sqlite.table.create_from_json_records")
+            self.assertFalse(r1["promoted"])
+            r_dup = ledger.record_verified_route("Create table sales in db1.sqlite from rows1.json", "sqlite.table.create_from_json_records")
+            self.assertFalse(r_dup["promoted"])
+            r2 = ledger.record_verified_route("Create table orders in db2.sqlite from rows2.json", "sqlite.table.create_from_json_records")
+            self.assertTrue(r2["promoted"])
+            self.assertEqual(
+                ledger.lookup_shape("Create table users in db3.sqlite from rows3.json")["preferred_capability"],
+                "sqlite.table.create_from_json_records",
+            )
+            inv = ledger.invalidate_preferred_capability("Create table users in db3.sqlite from rows3.json", "sqlite.table.create_from_json_records")
+            self.assertTrue(inv["invalidated"])
+            self.assertIsNone(ledger.lookup_shape("Create table users in db3.sqlite from rows3.json")["preferred_capability"])
 
 
 if __name__ == "__main__":

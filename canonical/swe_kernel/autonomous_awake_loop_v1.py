@@ -365,6 +365,12 @@ class AwakeAgencyDaemon:
         else:
             c_dir = pathlib.Path(tempfile.gettempdir()) / f"brain_creature_{ws_hash}"
         self.creature = cr.boot(c_dir, identity=creature_identity, life=creature_life)
+        self._r3_explicit = r3_state_path is not None
+        self._converged_r3_digests: set[str] = set()
+        self._test_health_cache_path = c_dir / "awake_test_health.json"
+        self._file_sha_memo: dict[str, tuple[int, int, str]] = {}
+        self._test_health_cache: dict[str, dict[str, Any]] = self._load_test_health_cache()
+        self._cached_env_sense: tuple[tuple[str, int], dict[str, Any], dict[str, Any]] | None = None
         self.apply_verified_repairs = bool(apply_verified_repairs)
         self.cycle_count = 0
         self.history: list[dict[str, Any]] = []
@@ -481,10 +487,132 @@ class AwakeAgencyDaemon:
             "transaction": tx,
         }
 
+    def _load_test_health_cache(self) -> dict[str, dict[str, Any]]:
+        import json
+        from canonical.runtime.memory_policy_v1 import can_read_memory
+
+        if not can_read_memory() or not self._test_health_cache_path.is_file():
+            return {}
+        try:
+            raw = json.loads(self._test_health_cache_path.read_text(encoding="utf-8"))
+            if isinstance(raw, dict):
+                return {str(k): dict(v) for k, v in raw.items() if isinstance(v, Mapping)}
+        except Exception:
+            pass
+        return {}
+
+    def _save_test_health_cache(self) -> None:
+        import json
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return
+        try:
+            self._test_health_cache_path.parent.mkdir(parents=True, exist_ok=True)
+            tmp = self._test_health_cache_path.with_suffix(".tmp")
+            tmp.write_text(json.dumps(self._test_health_cache, sort_keys=True), encoding="utf-8")
+            os.replace(tmp, self._test_health_cache_path)
+        except Exception:
+            pass
+
+    def _fast_file_sha256(self, fp: pathlib.Path) -> str:
+        import hashlib
+
+        st = fp.stat()
+        key = str(fp)
+        hit = self._file_sha_memo.get(key)
+        if hit is not None and hit[0] == st.st_mtime_ns and hit[1] == st.st_size:
+            return hit[2]
+        digest = hashlib.sha256(fp.read_bytes()).hexdigest()
+        self._file_sha_memo[key] = (int(st.st_mtime_ns), int(st.st_size), digest)
+        return digest
+
+    def _sense_failing_workspace_tests(self) -> list[tuple[str, str]]:
+        """Incrementally sense failing `test_*.py` pairs via `(mtime_ns, size) -> sha256` memoization (`< 1 ms` warm)."""
+        import hashlib
+
+        if not self.workspace_root.is_dir():
+            return []
+        test_files: list[pathlib.Path] = []
+        py_files: list[pathlib.Path] = []
+        root_str = str(self.workspace_root)
+        for dirpath, dirnames, filenames in os.walk(root_str):
+            dirnames[:] = [
+                d for d in dirnames
+                if d not in {".git", "__pycache__", "node_modules", ".pytest_cache", ".mypy_cache", ".venv"}
+            ]
+            for fn in sorted(filenames):
+                if not fn.endswith(".py"):
+                    continue
+                fp = pathlib.Path(dirpath) / fn
+                if len(py_files) < 32:
+                    py_files.append(fp)
+                if fn.startswith("test_") and len(test_files) < 12:
+                    test_files.append(fp)
+        test_files.sort()
+        py_files.sort()
+        if not test_files:
+            return []
+
+        tree_h = hashlib.sha256()
+        for pf in py_files:
+            rel_pf = pf.relative_to(self.workspace_root).as_posix()
+            tree_h.update(f"{rel_pf}:{self._fast_file_sha256(pf)}\n".encode("utf-8"))
+        tree_sig = tree_h.hexdigest()
+
+        failing: list[tuple[str, str]] = []
+        dirty = False
+        for tf in test_files:
+            rel_tf = tf.relative_to(self.workspace_root).as_posix()
+            sig = hashlib.sha256(f"{rel_tf}:{tree_sig}".encode("utf-8")).hexdigest()
+            cached = self._test_health_cache.get(rel_tf)
+            if isinstance(cached, Mapping) and cached.get("sig") == sig and isinstance(cached.get("passing"), bool):
+                ok = bool(cached["passing"])
+            else:
+                ok = False
+                ran_fast = False
+                target_stem = tf.stem[len("test_"):]
+                cand_targets = [p for p in py_files if p.name == f"{target_stem}.py"]
+                if cand_targets:
+                    try:
+                        from canonical.swe_kernel.zygote_worker_pool_v1 import screen_python_candidates_cow
+
+                        rel_mod = cand_targets[0].relative_to(self.workspace_root).as_posix()
+                        src_cur = cand_targets[0].read_text(encoding="utf-8")
+                        scr = screen_python_candidates_cow(
+                            self.workspace_root,
+                            rel_mod,
+                            [rel_tf],
+                            [src_cur],
+                            stop_on_first_pass=True,
+                        )
+                        if scr.get("ok") and scr.get("screen_authoritative"):
+                            ran_fast = True
+                            ok = 0 in (scr.get("passing_indices") or [])
+                    except Exception:
+                        ran_fast = False
+                if not ran_fast:
+                    ok, _ = _run_py_test_file(tf, self.workspace_root)
+                self._test_health_cache[rel_tf] = {"sig": sig, "passing": bool(ok)}
+                dirty = True
+            if not ok:
+                failing.append((rel_tf, sig[:12]))
+        if dirty:
+            self._save_test_health_cache()
+        return failing
+
     def sense_reality(self) -> dict[str, Any]:
         """Observe binaries, entrypoints, fit declarations, and stale rules; post noticed gaps."""
-        disc_rep = disc.report(str(self.workspace_root))
-        fit_rep = env_fit.fit(str(self.workspace_root), provision_allowed=False)
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        ws_mtime = int(self.workspace_root.stat().st_mtime_ns) if self.workspace_root.exists() else 0
+        env_key = (os.environ.get("PATH", ""), ws_mtime)
+        if self._cached_env_sense is not None and self._cached_env_sense[0] == env_key:
+            disc_rep, fit_rep = self._cached_env_sense[1], self._cached_env_sense[2]
+        else:
+            disc_rep = disc.report(str(self.workspace_root))
+            fit_rep = env_fit.fit(str(self.workspace_root), provision_allowed=False)
+            self._cached_env_sense = (env_key, disc_rep, fit_rep)
         noted_gaps: list[str] = []
 
         blocked_items = list(fit_rep.get("blocked") or []) + list(fit_rep.get("missing") or [])
@@ -493,13 +621,14 @@ class AwakeAgencyDaemon:
             cmd = str(item.get("command") or "").strip()
             why = str(item.get("why") or "blocked declared tool")
             if cmd:
-                gid = ledger.note(
-                    f"satisfy or adapt project command: {cmd}",
-                    why=why,
-                    cost=1.5,
-                    path=self.ledger_path,
-                )
-                noted_gaps.append(gid)
+                if can_write_memory():
+                    gid = ledger.note(
+                        f"satisfy or adapt project command: {cmd}",
+                        why=why,
+                        cost=1.5,
+                        path=self.ledger_path,
+                    )
+                    noted_gaps.append(gid)
                 try:
                     from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
                         plan_autonomous_supplier_acquisition,
@@ -518,13 +647,14 @@ class AwakeAgencyDaemon:
             if r.get("state") == rule_exp.STALE:
                 sid = str(r.get("skill_id") or "rule")
                 stale_rules.append(sid)
-                gid = ledger.note(
-                    f"re-verify stale rule {sid}",
-                    why="; ".join(r.get("differences") or ["environment drifted"]),
-                    cost=0.5,
-                    path=self.ledger_path,
-                )
-                noted_gaps.append(gid)
+                if can_write_memory():
+                    gid = ledger.note(
+                        f"re-verify stale rule {sid}",
+                        why="; ".join(r.get("differences") or ["environment drifted"]),
+                        cost=0.5,
+                        path=self.ledger_path,
+                    )
+                    noted_gaps.append(gid)
 
         return {
             "binary_count": disc_rep.get("binary_count", 0),
@@ -641,6 +771,7 @@ class AwakeAgencyDaemon:
                     scope_id=_awake_scope,
                     context={"dependencies": {}, "preconditions": {}, "suspect_lines": suspect_lines},
                     allow_scope_escalation=True,
+                    allow_cross_scope_transfer=True,
                     suspect_lines=suspect_lines,
                 )
                 if recalled is None:
@@ -802,42 +933,44 @@ class AwakeAgencyDaemon:
             cnf_predicates=cnf_predicates,
         )
 
+    def _uncalibrated_python_rules(self) -> list[dict[str, Any]]:
+        calibrated_set: set[str] = getattr(self, "_calibrated_rule_ids", set())
+        self._calibrated_rule_ids = calibrated_set
+        out: list[dict[str, Any]] = []
+        for rule in self.skill_store.lookup_rules("python"):
+            sid = str(rule.get("skill_id") or "")
+            if not sid or sid in calibrated_set or rule.get("learned_scope"):
+                continue
+            out.append(rule)
+        return out
+
+    def _current_r3_digest(self) -> str:
+        import hashlib
+
+        if not self.r3_state_path.is_file():
+            return ""
+        try:
+            raw = self.r3_state_path.read_bytes()
+            if not raw.strip():
+                return ""
+            return hashlib.sha256(raw).hexdigest()[:16]
+        except OSError:
+            return ""
+
     def self_falsify_and_narrow_rule_scopes(self, *, max_rules: int = 3) -> list[dict[str, Any]]:
-        """Actively probe crystallized rules with `finite_capability_diagnosis.select_probe` via `rule_scope_learning_v1`."""
-        from canonical.swe_kernel import operator_generalization_v1 as op_gen
+        """Actively probe crystallized rules across all operators/shapes via `rule_scope_learning_v1.calibrate_rule_scope`."""
         from canonical.swe_kernel import rule_scope_learning_v1 as rscope
 
         calibrated: list[dict[str, Any]] = []
         calibrated_set: set[str] = getattr(self, "_calibrated_rule_ids", set())
         self._calibrated_rule_ids = calibrated_set
 
-        for rule in self.skill_store.lookup_rules("python"):
+        for rule in self._uncalibrated_python_rules():
             sid = str(rule.get("skill_id") or "")
-            if not sid or sid in calibrated_set:
-                continue
-            swap = op_gen.derive_operator_swap(rule)
-            if swap is None:
-                continue
-            old_op, new_op = str(swap.get("from") or ""), str(swap.get("to") or "")
-            if (old_op, new_op) == ("<=", "<"):
-                probes = [
-                    {"label": "statement_twin", "language": "python", "source_text": "def f(a, b):\n    return a <= b\n"},
-                    {"label": "guard_branch", "language": "python", "source_text": "def f(a, b):\n    if a <= b:\n        return True\n    return False\n"},
-                    {"label": "disjunctive_boundary", "language": "python", "source_text": "def f(a, b):\n    return a < b or a == b\n"},
-                ]
-
-                def _probe_verifier(cand_code: str) -> bool:
-                    ns: dict[str, Any] = {}
-                    try:
-                        exec(compile(cand_code, "<scope_probe>", "exec"), ns)
-                        fn = ns.get("f")
-                        return bool(callable(fn) and fn(3, 5) is True and fn(5, 5) is False and fn(6, 5) is False)
-                    except Exception:
-                        return False
-
-                learned = rscope.learn_scope(rule, probes, _probe_verifier)
-                calibrated_set.add(sid)
-                calibrated.append(learned)
+            report = rscope.calibrate_rule_scope(rule, store=self.skill_store)
+            calibrated_set.add(sid)
+            if report.get("result") != "NO_PROBES_APPLICABLE":
+                calibrated.append(report)
                 if len(calibrated) >= max_rules:
                     break
         return calibrated
@@ -979,6 +1112,15 @@ class AwakeAgencyDaemon:
         failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Advance pending items in `r3_improvement_queue_driver_v1` with real Brain-owned zero-LLM R3 providers."""
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return {
+                "pass": True,
+                "status": "MEMORY_POLICY_WRITE_DISABLED",
+                "drained": 0,
+                "k3_external_llm_calls": 0,
+            }
         from canonical.runtime import (
             live_brain_runtime_v1 as lbr,
             r3_bound_success_adapter_v1 as bsa,
@@ -1031,6 +1173,15 @@ class AwakeAgencyDaemon:
         failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Drive `r3_verified_fixed_point_driver_v1.run` to a durable SHA-256 fixed point using Brain-owned `K3 = 0` providers."""
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return {
+                "pass": True,
+                "fixed_point": True,
+                "status": "MEMORY_POLICY_WRITE_DISABLED",
+                "k3_external_llm_calls": 0,
+            }
         from canonical.runtime import (
             live_brain_runtime_v1 as lbr,
             r3_bound_success_adapter_v1 as bsa,
@@ -1157,12 +1308,14 @@ class AwakeAgencyDaemon:
         t0 = time.perf_counter()
         self.cycle_count += 1
         sensed = self.sense_reality()
+        failing_pairs = self._sense_failing_workspace_tests()
+        has_tests = bool(failing_pairs) or bool(self._test_health_cache)
         ctx_feats: list[str] = ["awake-workspace"]
         if sensed.get("blocked_commands"):
             ctx_feats.append("has-blocked-tools")
         if sensed.get("stale_rules"):
             ctx_feats.append("has-stale-rules")
-        if any(self.workspace_root.rglob("test_*.py")):
+        if has_tests:
             ctx_feats.append("source-code-rich")
 
         meta_recommendation = mlp.recommend(
@@ -1202,96 +1355,140 @@ class AwakeAgencyDaemon:
             except Exception:
                 pareto_schedule = None
 
-        # Author genuine world obligations onto self.creature (`self_authored_obligations_v1.author`)
-        # so `Creature.step()` governs selection via `Standing.will_trade_on_the_unverifiable()`
-        # and `mortality_and_triage_v1.choose_next(self.creature._life, pool)`.
-        ep_num = (
-            int(self.creature._self.state.epoch)
-            if (self.creature._self is not None and self.creature._self.state is not None)
-            else 1
-        )
-        cow_wid = f"awake:cow_repair:e{ep_num}:c{self.cycle_count}"
-        gov_wid = f"awake:r3_scope:e{ep_num}:c{self.cycle_count}"
-        spec_wid = f"awake:speculative:e{ep_num}:c{self.cycle_count}"
+        # Synchronize genuine world-grounded content-addressed obligations onto `self.creature`
+        # via `Creature.sync_board`:
+        #   * Green workspaces with 0 failing tests NEVER author phantom `cow_repair` obligations (`0.0` Life wasted).
+        #   * Unfixable tests keep a stable content-addressed ID (`awake:cow_repair:<rel>:<sha12>`) across pulses
+        #     and restarts so `max_attempts = 2` parks them automatically until file bytes change.
+        import hashlib
+
+        cow_wid: str | None = None
+        if failing_pairs:
+            pair_blob = "|".join(f"{r}:{s}" for r, s in failing_pairs)
+            pair_dig = hashlib.sha256(pair_blob.encode("utf-8")).hexdigest()[:12]
+            cow_wid = f"awake:cow_repair:{failing_pairs[0][0]}:{pair_dig}"
+
         gap_map: dict[str, tuple[int, dict[str, Any]]] = {}
-
-        def _slot_check(slot_key: str) -> Callable[[Mapping[str, Any]], bool]:
-            return lambda w: isinstance(w.get("obligations"), Mapping) and w["obligations"].get(slot_key) == "verified_closed"
-
-        proposals: list[A.Proposal] = [
-            A.Proposal(
-                id=cow_wid,
-                claim="Workspace failing Python tests localized, repaired, and verified in staged confinement",
-                source="workspace_test_observation",
-                check=_slot_check(cow_wid),
-                value=8.0,
-                cost=0.5,
-                checkable=True,
-            ),
-        ]
-        for idx_g, gap in enumerate(ranked):
-            g_wid = f"awake:gap:e{ep_num}:c{self.cycle_count}:{idx_g}"
-            gap_map[g_wid] = (idx_g, gap)
-            proposals.append(
-                A.Proposal(
-                    id=g_wid,
-                    claim=f"Curriculum gap {gap.get('id')} studied and verified",
-                    source="ignorance_ledger",
-                    check=_slot_check(g_wid),
-                    value=max(1.5, float(gap.get("priority", 2.0)) * 2.0),
-                    cost=min(1.5, max(0.25, round(float(gap.get("cost", 1.0)) * 0.25, 3))),
-                    checkable=True,
-                )
-            )
-        proposals.append(
-            A.Proposal(
-                id=gov_wid,
-                claim="Rule scopes falsified and R3 improvement queue advanced",
-                source="r3_governance_queue",
-                check=_slot_check(gov_wid),
-                value=2.0,
-                cost=0.25,
-                checkable=True,
-            )
+        spec_wid: str | None = (
+            f"awake:speculative:{hashlib.sha256(str(self.workspace_root).encode('utf-8')).hexdigest()[:12]}:c{self.cycle_count}"
+            if speculative_work is not None
+            else None
         )
-        if speculative_work is not None:
-            proposals.append(
-                A.Proposal(
-                    id=spec_wid,
-                    claim="Unverified speculative exploration opportunity",
-                    source="speculative_channel",
-                    check=_slot_check(spec_wid),
-                    value=12.0,
-                    cost=0.25,
-                    checkable=False,
-                )
-            )
 
-        world_before = {"obligations": {p.id: "open" for p in proposals}}
-        world_done = {"obligations": {p.id: "verified_closed" for p in proposals}}
-        authored_metrics = self.creature.author_board(proposals, before=world_before, done=world_done)
+        def _build_and_sync_board() -> tuple[dict[str, Any], str | None]:
+            uncal_ids = sorted(str(r.get("skill_id") or "") for r in self._uncalibrated_python_rules())
+            r3_dig = self._current_r3_digest()
+            needs_gov = bool(uncal_ids) or (self._r3_explicit and bool(r3_dig) and r3_dig not in self._converged_r3_digests)
+            cur_gov_wid: str | None = None
+            if needs_gov:
+                gov_sig = hashlib.sha256(f"{r3_dig}|{'/'.join(uncal_ids)}".encode("utf-8")).hexdigest()[:12]
+                cur_gov_wid = f"awake:r3_scope:{gov_sig}"
+
+            props: list[A.Proposal] = []
+            w_before: dict[str, dict[str, Any]] = {
+                "failing_tests": {},
+                "open_gaps": {},
+                "pending_governance": {},
+                "speculative": {},
+            }
+            w_done: dict[str, dict[str, Any]] = {
+                "failing_tests": {},
+                "open_gaps": {},
+                "pending_governance": {},
+                "speculative": {},
+            }
+
+            if cow_wid is not None:
+                w_before["failing_tests"][cow_wid] = len(failing_pairs)
+                w_done["failing_tests"][cow_wid] = 0
+                props.append(
+                    A.Proposal(
+                        id=cow_wid,
+                        claim=f"Repair {len(failing_pairs)} failing workspace test(s) ({failing_pairs[0][0]})",
+                        source="workspace_test_observation",
+                        check=lambda w, k=cow_wid: (w.get("failing_tests") or {}).get(k) == 0,
+                        value=8.0,
+                        cost=0.5,
+                        checkable=True,
+                    )
+                )
+
+            gap_map.clear()
+            for idx_g, gap in enumerate(ranked):
+                raw_gid = str(gap.get("id") or f"idx{idx_g}")
+                g_wid = f"awake:gap:{raw_gid}"
+                gap_map[g_wid] = (idx_g, gap)
+                w_before["open_gaps"][g_wid] = True
+                w_done["open_gaps"][g_wid] = False
+                props.append(
+                    A.Proposal(
+                        id=g_wid,
+                        claim=f"Curriculum gap {raw_gid} studied and verified",
+                        source="ignorance_ledger",
+                        check=lambda w, k=g_wid: (w.get("open_gaps") or {}).get(k) is False,
+                        value=max(1.5, float(gap.get("priority", 2.0)) * 2.0),
+                        cost=min(1.5, max(0.25, round(float(gap.get("cost", 1.0)) * 0.25, 3))),
+                        checkable=True,
+                    )
+                )
+
+            if cur_gov_wid is not None:
+                w_before["pending_governance"][cur_gov_wid] = True
+                w_done["pending_governance"][cur_gov_wid] = False
+                props.append(
+                    A.Proposal(
+                        id=cur_gov_wid,
+                        claim="Calibrate uncalibrated rule scopes and converge R3 improvement queue",
+                        source="r3_governance_queue",
+                        check=lambda w, k=cur_gov_wid: (w.get("pending_governance") or {}).get(k) is False,
+                        value=2.0,
+                        cost=0.25,
+                        checkable=True,
+                    )
+                )
+
+            if spec_wid is not None:
+                w_before["speculative"][spec_wid] = "untested"
+                w_done["speculative"][spec_wid] = "explored"
+                props.append(
+                    A.Proposal(
+                        id=spec_wid,
+                        claim="Unverified speculative exploration opportunity",
+                        source="speculative_channel",
+                        check=lambda w, k=spec_wid: (w.get("speculative") or {}).get(k) == "explored",
+                        value=12.0,
+                        cost=0.25,
+                        checkable=False,
+                    )
+                )
+
+            return self.creature.sync_board(props, before=w_before, done=w_done), cur_gov_wid
+
+        authored_metrics, gov_wid = _build_and_sync_board()
 
         exp_out: dict[str, Any] = {
-            "tested": 0,
-            "failures_found": 0,
+            "tested": len(self._test_health_cache),
+            "failures_found": len(failing_pairs),
             "repaired": 0,
             "repairs": [],
-            "shed_by_mortality": True,
+            "shed_by_mortality": bool(failing_pairs),
         }
         scope_audits: list[dict[str, Any]] = []
         lessons: list[dict[str, Any]] = []
         promoted_workflows: list[str] = []
-        r3_drain: dict[str, Any] = {"drained": 0, "shed_by_mortality": True}
-        r3_fixed_point: dict[str, Any] = {"converged": False, "shed_by_mortality": True}
+        r3_drain: dict[str, Any] = {"drained": 0, "pass": True, "shed_by_mortality": False}
+        r3_fixed_point: dict[str, Any] = {"converged": True, "fixed_point": True, "status": "IDLE_ALREADY_CONVERGED"}
         speculative_outcome: Mapping[str, Any] | None = None
 
         def _awake_perform(work: M.Work, _c: Any) -> dict[str, Any]:
-            nonlocal exp_out, scope_audits, r3_drain, r3_fixed_point, speculative_outcome
-            if work.id == cow_wid:
+            nonlocal exp_out, scope_audits, r3_drain, r3_fixed_point, speculative_outcome, gov_wid, cow_wid
+            if cow_wid is not None and work.id == cow_wid:
                 t_exp = time.perf_counter()
                 exp_out = self.experiment_in_cow_sandbox()
                 rep_n = int(exp_out.get("repaired") or 0)
-                fail_n = int(exp_out.get("failures_found") or 0)
+                if rep_n > 0 and self.apply_verified_repairs:
+                    self._test_health_cache.clear()
+                    self._save_test_health_cache()
                 if rep_n > 0 or exp_out.get("pass"):
                     self.record_verified_meta_episode_and_strategy(
                         f"awake-cow-{self.cycle_count}",
@@ -1302,12 +1499,13 @@ class AwakeAgencyDaemon:
                         burden_after=open_before,
                         wall_clock_s=time.perf_counter() - t_exp,
                     )
-                clean_or_repaired = (rep_n > 0) or (fail_n == 0)
+                repaired_ok = rep_n > 0
                 return {
-                    "ok": clean_or_repaired,
+                    "ok": repaired_ok,
                     "verified": True,
-                    "correct": True if rep_n > 0 else (None if fail_n == 0 else False),
-                    "value": work.value if rep_n > 0 else 0.0,
+                    "correct": repaired_ok,
+                    "value": work.value if repaired_ok else 0.0,
+                    "blocked": None if repaired_ok else "UNREPAIRED_FAILING_TESTS",
                 }
             if work.id in gap_map:
                 idx_g, gap = gap_map[work.id]
@@ -1342,21 +1540,24 @@ class AwakeAgencyDaemon:
                     "verified": True,
                     "correct": passed,
                     "value": work.value if passed else 0.0,
+                    "blocked": None if passed else "CURRICULUM_GAP_NOT_CLOSED",
                 }
-            if work.id == gov_wid:
+            if gov_wid is not None and work.id == gov_wid:
                 scope_audits = self.self_falsify_and_narrow_rule_scopes()
                 r3_drain = self.drain_r3_self_improvement_queue(max_actions=2)
                 r3_fixed_point = self.drive_r3_to_verified_fixed_point(
                     max_rounds=4,
                     max_actions_per_round=4,
                 )
+                if r3_fixed_point.get("fixed_point") is True:
+                    self._converged_r3_digests.add(self._current_r3_digest())
                 return {
                     "ok": True,
                     "verified": True,
                     "correct": True if scope_audits or r3_drain.get("drained") else None,
                     "value": work.value,
                 }
-            if work.id == spec_wid and speculative_work is not None:
+            if spec_wid is not None and work.id == spec_wid and speculative_work is not None:
                 speculative_outcome = dict(speculative_work() or {})
                 ok_s = bool(speculative_outcome.get("ok", True))
                 return {
@@ -1368,12 +1569,33 @@ class AwakeAgencyDaemon:
             return {"ok": False, "verified": None, "correct": None, "blocked": "UNKNOWN_AWAKE_WORK"}
 
         creature_steps: list[dict[str, Any]] = []
-        step_budget = (len(proposals) * 2) if max_steps is None else max(1, int(max_steps))
+        attempted_this_pulse: set[str] = set()
+        step_budget = max(2, (len(self.creature._board) + 1) * 2) if max_steps is None else max(1, int(max_steps))
         for _ in range(step_budget):
+            rem = self.creature.remaining_work()
+            if not rem:
+                # Re-sync once if a repair step just crystallized new uncalibrated rules
+                if max_steps is None and self._uncalibrated_python_rules() and gov_wid is None:
+                    _, gov_wid = _build_and_sync_board()
+                    rem = self.creature.remaining_work()
+                if not rem:
+                    break
+            if max_steps is None and all(w.id in attempted_this_pulse for w in rem):
+                break
             step_row = self.creature.step(_awake_perform)
             creature_steps.append(step_row)
             if step_row.get("status") != "WORKED":
                 break
+            attempted_this_pulse.add(str(step_row.get("work") or ""))
+            if (
+                max_steps is None
+                and cow_wid is not None
+                and step_row.get("work") == cow_wid
+                and step_row.get("ok") is True
+                and self._uncalibrated_python_rules()
+                and gov_wid is None
+            ):
+                _, gov_wid = _build_and_sync_board()
 
         meta_abstraction_candidate: dict[str, Any] | None = None
         if len(self.verified_strategies) >= 2:

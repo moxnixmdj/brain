@@ -199,17 +199,24 @@ class UpstreamRoutingLedger:
     """SQLite WAL ledger mapping structural intent shapes to disqualified/preferred capabilities."""
 
     def __init__(self, db_path: pathlib.Path | None = None) -> None:
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
         self.db_path = (pathlib.Path(db_path) if db_path else default_ledger_db_path()).resolve()
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self._init_schema()
+        self._schema_ready = False
+        if self.db_path.exists() or can_write_memory():
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            self._init_schema()
 
     def _connect(self) -> sqlite3.Connection:
+        self.db_path.parent.mkdir(parents=True, exist_ok=True)
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("PRAGMA synchronous=NORMAL")
         return conn
 
     def _init_schema(self) -> None:
+        if self._schema_ready and self.db_path.exists():
+            return
         conn = self._connect()
         try:
             with conn:
@@ -229,6 +236,24 @@ class UpstreamRoutingLedger:
                     )
                     """
                 )
+                conn.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS verified_route_promotions (
+                        shape_hash TEXT NOT NULL,
+                        structural_skeleton TEXT NOT NULL,
+                        object_domain TEXT NOT NULL,
+                        effect_polarity TEXT NOT NULL,
+                        preferred_capability TEXT NOT NULL,
+                        distinct_instances_json TEXT NOT NULL,
+                        verified_count INTEGER NOT NULL DEFAULT 1,
+                        invalidated INTEGER NOT NULL DEFAULT 0,
+                        invalidation_reason TEXT,
+                        updated_ts REAL NOT NULL,
+                        PRIMARY KEY (shape_hash, preferred_capability)
+                    )
+                    """
+                )
+            self._schema_ready = True
         finally:
             conn.close()
 
@@ -241,12 +266,21 @@ class UpstreamRoutingLedger:
         preferred_capability: str | None = None,
     ) -> dict[str, Any]:
         """Record a structural capability mismatch if and only if `refusal_code` is a selection error."""
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return {
+                "recorded": False,
+                "reason": "MEMORY_POLICY_WRITE_DISABLED",
+                "refusal_code": refusal_code,
+            }
         if not is_learnable_selection_mismatch(refusal_code):
             return {
                 "recorded": False,
                 "reason": "HONEST_WORLD_OR_INPUT_REFUSAL_NOT_DISQUALIFIED",
                 "refusal_code": refusal_code,
             }
+        self._init_schema()
         sig = classify_goal_intent_signature(goal)
         conn = self._connect()
         try:
@@ -284,18 +318,156 @@ class UpstreamRoutingLedger:
             "preferred_capability": preferred_capability,
         }
 
-    def _load_table_cached(self) -> dict[str, list[tuple[str, str | None, str, int]]]:
+    def record_verified_route(
+        self,
+        goal: str,
+        capability_id: str,
+        *,
+        promotion_threshold: int = 2,
+    ) -> dict[str, Any]:
+        """Record a verified positive `(shape_hash -> capability_id)` execution; promotes after `N >= 2` distinct instances."""
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory() or not goal or not capability_id:
+            return {
+                "recorded": False,
+                "promoted": False,
+                "reason": "MEMORY_POLICY_WRITE_DISABLED" if not can_write_memory() else "INVALID_ROUTE_ARGS",
+            }
+        self._init_schema()
+        sig = classify_goal_intent_signature(goal)
+        inst_fp = hashlib.sha256(str(goal).strip().encode("utf-8")).hexdigest()[:16]
+        threshold = max(2, int(promotion_threshold))
+        conn = self._connect()
+        try:
+            with conn:
+                conn.execute("BEGIN IMMEDIATE")
+                row = conn.execute(
+                    """
+                    SELECT distinct_instances_json, verified_count, invalidated
+                    FROM verified_route_promotions
+                    WHERE shape_hash = ? AND preferred_capability = ?
+                    """,
+                    (sig["shape_hash"], capability_id),
+                ).fetchone()
+                if row is not None and not int(row[2] or 0):
+                    try:
+                        instances = list(json.loads(row[0]))
+                    except Exception:
+                        instances = []
+                    vcount = int(row[1] or 0) + 1
+                else:
+                    instances = []
+                    vcount = 1
+                if inst_fp not in instances:
+                    instances.append(inst_fp)
+                instances = instances[-32:]
+                conn.execute(
+                    """
+                    INSERT INTO verified_route_promotions (
+                        shape_hash, structural_skeleton, object_domain, effect_polarity,
+                        preferred_capability, distinct_instances_json, verified_count,
+                        invalidated, invalidation_reason, updated_ts
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, 0, NULL, ?)
+                    ON CONFLICT(shape_hash, preferred_capability) DO UPDATE SET
+                        distinct_instances_json = excluded.distinct_instances_json,
+                        verified_count = excluded.verified_count,
+                        invalidated = 0,
+                        invalidation_reason = NULL,
+                        updated_ts = excluded.updated_ts
+                    """,
+                    (
+                        sig["shape_hash"],
+                        sig["structural_skeleton"],
+                        sig["object_domain"],
+                        sig["effect_polarity"],
+                        capability_id,
+                        json.dumps(instances),
+                        vcount,
+                        time.time(),
+                    ),
+                )
+        finally:
+            conn.close()
+        _LEDGER_RAM_CACHE.pop(str(self.db_path), None)
+        promoted = len(instances) >= threshold
+        return {
+            "recorded": True,
+            "promoted": promoted,
+            "distinct_instances": len(instances),
+            "promotion_threshold": threshold,
+            "shape_hash": sig["shape_hash"],
+            "preferred_capability": capability_id,
+        }
+
+    def invalidate_preferred_capability(
+        self,
+        goal: str,
+        capability_id: str,
+        *,
+        reason: str = "VERIFICATION_MISS",
+    ) -> dict[str, Any]:
+        """Demote a previously promoted `preferred_capability` immediately on a verification or execution miss."""
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory() or not self.db_path.exists():
+            return {"invalidated": False, "reason": "MEMORY_POLICY_WRITE_DISABLED"}
+        self._init_schema()
+        sig = classify_goal_intent_signature(goal)
+        conn = self._connect()
+        changed = 0
+        try:
+            with conn:
+                c1 = conn.execute(
+                    """
+                    UPDATE verified_route_promotions
+                    SET invalidated = 1, invalidation_reason = ?, updated_ts = ?
+                    WHERE shape_hash = ? AND preferred_capability = ? AND invalidated = 0
+                    """,
+                    (str(reason)[:240], time.time(), sig["shape_hash"], capability_id),
+                )
+                c2 = conn.execute(
+                    """
+                    UPDATE routing_disqualifications
+                    SET preferred_capability = NULL, updated_ts = ?
+                    WHERE shape_hash = ? AND preferred_capability = ?
+                    """,
+                    (time.time(), sig["shape_hash"], capability_id),
+                )
+                changed = int(c1.rowcount or 0) + int(c2.rowcount or 0)
+        finally:
+            conn.close()
+        _LEDGER_RAM_CACHE.pop(str(self.db_path), None)
+        return {
+            "invalidated": changed > 0,
+            "shape_hash": sig["shape_hash"],
+            "capability_id": capability_id,
+            "reason": reason,
+        }
+
+    def _load_table_cached(self) -> tuple[dict[str, list[tuple[str, str | None, str, int]]], dict[str, tuple[str, int]]]:
+        if not self.db_path.exists():
+            return {}, {}
         key = str(self.db_path)
         stamp = _db_wal_stamp(self.db_path)
         hit = _LEDGER_RAM_CACHE.get(key)
         if hit is not None and hit[0] == stamp:
-            return hit[1]
+            return hit[1]  # type: ignore[return-value]
+        self._init_schema()
         conn = self._connect()
         try:
             all_rows = conn.execute(
                 """
                 SELECT shape_hash, disqualified_capability, preferred_capability, refusal_code, hit_count
                 FROM routing_disqualifications
+                """
+            ).fetchall()
+            promo_rows = conn.execute(
+                """
+                SELECT shape_hash, preferred_capability, distinct_instances_json, verified_count
+                FROM verified_route_promotions
+                WHERE invalidated = 0
+                ORDER BY verified_count DESC, updated_ts DESC
                 """
             ).fetchall()
         finally:
@@ -305,18 +477,51 @@ class UpstreamRoutingLedger:
             by_shape.setdefault(str(sh), []).append(
                 (str(disq_c), str(pref_c) if pref_c else None, str(rcode), int(hits))
             )
-        _LEDGER_RAM_CACHE[key] = (_db_wal_stamp(self.db_path), by_shape)
-        return by_shape
+        promoted_by_shape: dict[str, tuple[str, int]] = {}
+        for sh, pref_c, inst_json, vcount in promo_rows:
+            sh_s = str(sh)
+            if sh_s in promoted_by_shape:
+                continue
+            try:
+                n_inst = len(json.loads(inst_json))
+            except Exception:
+                n_inst = 0
+            if n_inst >= 2 and pref_c:
+                promoted_by_shape[sh_s] = (str(pref_c), int(vcount or n_inst))
+        cached_val = (by_shape, promoted_by_shape)
+        _LEDGER_RAM_CACHE[key] = (_db_wal_stamp(self.db_path), cached_val)  # type: ignore[assignment]
+        return cached_val
 
-    def lookup_shape(self, goal: str) -> dict[str, Any]:
+    def lookup_shape(self, goal: str, *, promotion_threshold: int = 2) -> dict[str, Any]:
+        from canonical.runtime.memory_policy_v1 import can_read_memory
+
         sig = classify_goal_intent_signature(goal)
-        rows = self._load_table_cached().get(sig["shape_hash"]) or []
+        if not can_read_memory():
+            return {
+                "signature": sig,
+                "disqualified": {},
+                "preferred_capability": None,
+                "promoted_route": False,
+                "verified_hits": 0,
+            }
+        disq_by_shape, promo_by_shape = self._load_table_cached()
+        rows = disq_by_shape.get(sig["shape_hash"]) or []
         disqualified = {r[0]: {"refusal_code": r[2], "hits": r[3]} for r in rows}
-        preferred = next((r[1] for r in rows if r[1]), None)
+        promo = promo_by_shape.get(sig["shape_hash"])
+        if promo is not None and promo[0] not in disqualified and promo[1] >= max(2, int(promotion_threshold)):
+            preferred = promo[0]
+            promoted_route = True
+            verified_hits = promo[1]
+        else:
+            preferred = next((r[1] for r in rows if r[1] and r[1] not in disqualified), None)
+            promoted_route = False
+            verified_hits = 0
         return {
             "signature": sig,
             "disqualified": disqualified,
             "preferred_capability": preferred,
+            "promoted_route": promoted_route,
+            "verified_hits": verified_hits,
         }
 
     def filter_and_rank_candidates(
@@ -362,7 +567,9 @@ class UpstreamRoutingLedger:
         *,
         capability_effects: Mapping[str, Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
-        """Execute ranked candidates; on pre-execution selection mismatch, learn & reroute immediately."""
+        """Execute ranked candidates; promote positive routes (`N >= 2`), invalidate stale promotions on miss, and reroute selection errors."""
+        info = self.lookup_shape(goal)
+        prior_pref = info.get("preferred_capability")
         ordered = self.filter_and_rank_candidates(goal, candidates, capability_effects)
         attempts: list[dict[str, Any]] = []
         disqualified_now: list[tuple[str, str]] = []
@@ -377,10 +584,20 @@ class UpstreamRoutingLedger:
             if ok:
                 for bad_cap, bad_code in disqualified_now:
                     self.record_refusal(goal, bad_cap, bad_code, preferred_capability=cap_id)
+                promo_res = self.record_verified_route(goal, cap_id)
                 res["selected_capability_id"] = cap_id
                 res["routing_attempts"] = attempts
                 res["rerouted_in_run"] = len(attempts) > 1
+                res["route_promoted"] = bool(promo_res.get("promoted"))
                 return res
+
+            if prior_pref and cap_id == prior_pref:
+                self.invalidate_preferred_capability(goal, cap_id, reason=refusal or "PROMOTED_ROUTE_MISS")
+                if not executed_mutation and len(ordered) > 1:
+                    if is_learnable_selection_mismatch(refusal):
+                        disqualified_now.append((cap_id, refusal))
+                        self.record_refusal(goal, cap_id, refusal)
+                    continue
 
             # Only reroute if workspace was NOT mutated and refusal is a selection/domain mismatch
             if not executed_mutation and is_learnable_selection_mismatch(refusal):

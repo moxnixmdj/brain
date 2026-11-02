@@ -945,6 +945,52 @@ class VerifiedSkillStore:
             "whole_task_correctness_proved": False,
         }
 
+    def update_learned_scope(
+        self,
+        skill_id: str,
+        learned_scope: str,
+        *,
+        audit: Mapping[str, Any] | None = None,
+    ) -> bool:
+        """Persist `rule_scope_learning_v1` calibrated scope (`SCOPE_STATEMENT`..`SCOPE_ALGEBRAIC`) on `skill_id`."""
+        valid_scopes = {"SCOPE_STATEMENT", "SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC"}
+        if learned_scope not in valid_scopes or not skill_id:
+            return False
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return False
+        conn = _connect(self.db_path)
+        updated = False
+        lang_key: str | None = None
+        try:
+            with conn:
+                conn.execute("BEGIN IMMEDIATE")
+                row = conn.execute(
+                    "SELECT language, pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                    (skill_id,),
+                ).fetchone()
+                if row is not None:
+                    lang_key = str(row[0] or "")
+                    rule_obj = json.loads(row[1])
+                    rule_obj["learned_scope"] = learned_scope
+                    if isinstance(audit, Mapping):
+                        rule_obj["scope_calibration"] = {
+                            "result": audit.get("result"),
+                            "scope": learned_scope,
+                            "observations_used": audit.get("observations_used"),
+                        }
+                    conn.execute(
+                        "UPDATE crystallized_skills SET pattern_json = ? WHERE skill_id = ?",
+                        (json.dumps(rule_obj, sort_keys=True), skill_id),
+                    )
+                    updated = True
+        finally:
+            conn.close()
+        if updated and lang_key is not None:
+            _MEM_SKILLS.pop(f"{self.db_path.resolve()}::{lang_key}", None)
+        return updated
+
     def recall_and_apply_verified(
         self,
         *,
@@ -958,6 +1004,7 @@ class VerifiedSkillStore:
         allow_operator_generalization: bool = False,
         allow_scope_escalation: bool = False,
         allow_cross_language: bool = True,
+        allow_cross_scope_transfer: bool = False,
         now_world_fingerprint: Mapping[str, Any] | None = None,
         suspect_lines: Sequence[int] | None = None,
     ) -> dict[str, Any] | None:
@@ -973,10 +1020,14 @@ class VerifiedSkillStore:
             raise ValueError('INVALID_OPERATOR_GENERALIZATION_SETTING')
         if type(allow_scope_escalation) is not bool:
             raise ValueError('INVALID_SCOPE_ESCALATION_SETTING')
+        if type(allow_cross_scope_transfer) is not bool:
+            raise ValueError('INVALID_CROSS_SCOPE_TRANSFER_SETTING')
         if allow_operator_generalization and (required_verification_kind != 'TEST_SUITE' or not scope_id or language.lower() != 'python'):
             raise ValueError('OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE')
         if allow_scope_escalation and (required_verification_kind != 'TEST_SUITE' or not scope_id):
             raise ValueError('SCOPE_ESCALATION_REQUIRES_SCOPED_TEST_SUITE')
+        if allow_cross_scope_transfer and (required_verification_kind != 'TEST_SUITE' or not scope_id):
+            raise ValueError('CROSS_SCOPE_TRANSFER_REQUIRES_SCOPED_TEST_SUITE')
 
         from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
 
@@ -1059,10 +1110,64 @@ class VerifiedSkillStore:
                 "whole_task_correctness_proved": False,
             }
 
+        is_py_project_oracle = (
+            required_verification_kind == "TEST_SUITE"
+            and lang == "python"
+            and hasattr(verifier, "root")
+            and hasattr(verifier, "target_path")
+            and hasattr(verifier, "test_paths")
+        )
+
+        def _try_candidate_batch(
+            rule: dict[str, Any],
+            stream: Any,
+            seen_candidates: set[str],
+            scope_tier: str,
+            recall_strategy: str,
+            *,
+            limit: int = 16,
+        ) -> tuple[dict[str, Any] | None, bool]:
+            batch: list[str] = []
+            for cand in itertools.islice(stream, limit):
+                if cand is None or cand in seen_candidates:
+                    continue
+                seen_candidates.add(cand)
+                batch.append(cand)
+            if not batch:
+                return None, False
+
+            eval_list = batch
+            if is_py_project_oracle and len(batch) >= 2 and not eff_suspect_lines:
+                try:
+                    from canonical.swe_kernel.zygote_worker_pool_v1 import screen_python_candidates_cow
+
+                    screen = screen_python_candidates_cow(
+                        verifier.root,  # type: ignore[attr-defined]
+                        verifier.target_path,  # type: ignore[attr-defined]
+                        verifier.test_paths,  # type: ignore[attr-defined]
+                        batch,
+                        stop_on_first_pass=True,
+                    )
+                    if screen.get("ok") and screen.get("screen_authoritative"):
+                        eval_list = [batch[i] for i in (screen.get("passing_indices") or []) if 0 <= i < len(batch)]
+                except Exception:
+                    eval_list = batch
+
+            for cand in eval_list:
+                verification = evaluate(verifier, cand, required_verification_kind, scope_id)
+                if verification is not None:
+                    hit = _commit_verified_hit(rule, cand, verification, scope_tier, recall_strategy)
+                    if hit is not None:
+                        return hit, False
+                    return None, True
+            return None, False
+
         for rule in ordered:
             if str(rule.get("skill_id") or "") in stale_ids:
                 continue
-            if rule.get('state') not in (None, 'ACTIVE') or not applicable(rule.get('contract'), scope_id, context):
+            if rule.get('state') not in (None, 'ACTIVE') or not applicable(
+                rule.get('contract'), scope_id, context, allow_cross_scope=allow_cross_scope_transfer
+            ):
                 continue
             recorded = rule.get('contract')
             if required_verification_kind != 'CALLER_PREDICATE' and (recorded is None or rule.get('record_version') != 1):
@@ -1075,17 +1180,15 @@ class VerifiedSkillStore:
             invalidated_mid_run = False
 
             # Stage 1 (`SCOPE_STATEMENT`): fast direct context-anchored unification (< 100 us)
-            for candidate in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
-                if candidate is None or candidate in seen_candidates:
-                    continue
-                seen_candidates.add(candidate)
-                verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                if verification is not None:
-                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_STATEMENT", "statement")
-                    if hit is not None:
-                        return hit
-                    invalidated_mid_run = True
-                    break
+            hit, invalidated_mid_run = _try_candidate_batch(
+                rule,
+                iter_crystallized_code_rule_candidates(source_text, rule),
+                seen_candidates,
+                "SCOPE_STATEMENT",
+                "statement",
+            )
+            if hit is not None:
+                return hit
 
             # Stage 1B (`SCOPE_EXPRESSION` / PR-C2 + CST Minimal-Subtree): apply-time
             # sub-expression narrowing & compound-operand CST hole generalization.
@@ -1098,45 +1201,37 @@ class VerifiedSkillStore:
             ):
                 narrowed = narrow_rule_at_apply_time(rule)
                 if narrowed is not None:
-                    for candidate in itertools.islice(_iter_token_rule_candidates(source_text, narrowed), 16):
-                        if candidate is None or candidate in seen_candidates:
-                            continue
-                        seen_candidates.add(candidate)
-                        verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                        if verification is not None:
-                            hit = _commit_verified_hit(
-                                rule, candidate, verification, "SCOPE_EXPRESSION", "narrowed_pattern"
-                            )
-                            if hit is not None:
-                                return hit
-                            invalidated_mid_run = True
-                            break
+                    hit, invalidated_mid_run = _try_candidate_batch(
+                        rule,
+                        _iter_token_rule_candidates(source_text, narrowed),
+                        seen_candidates,
+                        "SCOPE_EXPRESSION",
+                        "narrowed_pattern",
+                    )
+                    if hit is not None:
+                        return hit
                 if not invalidated_mid_run:
                     try:
                         from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
                             iter_cst_skeleton_candidates,
                         )
 
-                        for candidate in iter_cst_skeleton_candidates(
-                            source_text,
+                        hit, invalidated_mid_run = _try_candidate_batch(
                             rule,
-                            target_language=lang,
-                            max_candidates=16,
-                            minimize=True,
-                            suspect_lines=eff_suspect_lines,
-                        ):
-                            if candidate is None or candidate in seen_candidates:
-                                continue
-                            seen_candidates.add(candidate)
-                            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                            if verification is not None:
-                                hit = _commit_verified_hit(
-                                    rule, candidate, verification, "SCOPE_EXPRESSION", "cst_minimal_subtree"
-                                )
-                                if hit is not None:
-                                    return hit
-                                invalidated_mid_run = True
-                                break
+                            iter_cst_skeleton_candidates(
+                                source_text,
+                                rule,
+                                target_language=lang,
+                                max_candidates=16,
+                                minimize=True,
+                                suspect_lines=eff_suspect_lines,
+                            ),
+                            seen_candidates,
+                            "SCOPE_EXPRESSION",
+                            "cst_minimal_subtree",
+                        )
+                        if hit is not None:
+                            return hit
                     except Exception:
                         pass
 
@@ -1149,19 +1244,15 @@ class VerifiedSkillStore:
             ):
                 from canonical.swe_kernel import operator_generalization_v1 as _op_gen
 
-                for candidate in itertools.islice(_op_gen.propose_operator_swaps(source_text, rule, language=lang), 16):
-                    if candidate is None or candidate in seen_candidates:
-                        continue
-                    seen_candidates.add(candidate)
-                    verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                    if verification is not None:
-                        hit = _commit_verified_hit(
-                            rule, candidate, verification, "SCOPE_OPERATOR", "operator_generalization"
-                        )
-                        if hit is not None:
-                            return hit
-                        invalidated_mid_run = True
-                        break
+                hit, invalidated_mid_run = _try_candidate_batch(
+                    rule,
+                    _op_gen.propose_operator_swaps(source_text, rule, language=lang),
+                    seen_candidates,
+                    "SCOPE_OPERATOR",
+                    "operator_generalization",
+                )
+                if hit is not None:
+                    return hit
                 if (
                     not invalidated_mid_run
                     and lang == "python"
@@ -1170,28 +1261,21 @@ class VerifiedSkillStore:
                     from canonical.swe_kernel import boundary_disjunction_normalization_v1 as _bd_norm
 
                     try:
-                        sem_stream = itertools.islice(
-                            _bd_norm.propose_semantic_swaps(
-                                source_text,
-                                rule,
-                                operator_swaps=_op_gen.propose_operator_swaps,
-                            ),
-                            16,
+                        sem_stream = _bd_norm.propose_semantic_swaps(
+                            source_text,
+                            rule,
+                            operator_swaps=_op_gen.propose_operator_swaps,
                         )
                         sem_strategy = "operator_generalization" if allow_operator_generalization else "semantic"
-                        for candidate in sem_stream:
-                            if candidate is None or candidate in seen_candidates:
-                                continue
-                            seen_candidates.add(candidate)
-                            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                            if verification is not None:
-                                hit = _commit_verified_hit(
-                                    rule, candidate, verification, "SCOPE_SEMANTIC", sem_strategy
-                                )
-                                if hit is not None:
-                                    return hit
-                                invalidated_mid_run = True
-                                break
+                        hit, invalidated_mid_run = _try_candidate_batch(
+                            rule,
+                            sem_stream,
+                            seen_candidates,
+                            "SCOPE_SEMANTIC",
+                            sem_strategy,
+                        )
+                        if hit is not None:
+                            return hit
                     except (_bd_norm.NormalizationError, SyntaxError, ValueError):
                         pass
                 if (
@@ -1205,25 +1289,23 @@ class VerifiedSkillStore:
                             propose_egraph_algebraic_rewrites,
                         )
 
-                        for candidate in propose_egraph_algebraic_rewrites(source_text, rule):
-                            if candidate is None or candidate in seen_candidates:
-                                continue
-                            seen_candidates.add(candidate)
-                            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                            if verification is not None:
-                                hit = _commit_verified_hit(
-                                    rule, candidate, verification, "SCOPE_ALGEBRAIC", "algebraic"
-                                )
-                                if hit is not None:
-                                    return hit
-                                break
+                        hit, _ = _try_candidate_batch(
+                            rule,
+                            propose_egraph_algebraic_rewrites(source_text, rule),
+                            seen_candidates,
+                            "SCOPE_ALGEBRAIC",
+                            "algebraic",
+                            limit=32,
+                        )
+                        if hit is not None:
+                            return hit
                     except Exception:
                         pass
 
         # Stage 4: Cross-language portable carry (`language_neutral_skill_bridge_v1` +
         # 7-language Tree-Sitter CST skeleton `tree_sitter_cst_skill_skeleton_v1`).
         # Supported under legacy unscoped `CALLER_PREDICATE` and under contract-checked
-        # `TEST_SUITE` (`ProjectTestOracle`), where stored contract & `scope_id` must match.
+        # `TEST_SUITE` (`ProjectTestOracle` / `ConfinedLanguageTestOracle`).
         if allow_cross_language and required_verification_kind == 'TEST_SUITE' and scope_id:
             try:
                 from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
@@ -1240,7 +1322,7 @@ class VerifiedSkillStore:
                         return False
                     if rec.get("verification_kind") != "TEST_SUITE":
                         return False
-                    return applicable(rec, scope_id, context)
+                    return applicable(rec, scope_id, context, allow_cross_scope=allow_cross_scope_transfer)
 
                 last_verified_by_cand: dict[str, dict[str, Any]] = {}
 

@@ -310,3 +310,216 @@ def default_zygote_pool() -> ZygotePrewarmedPool:
         _DEFAULT_POOL = ZygotePrewarmedPool()
         _DEFAULT_POOL.prewarm()
     return _DEFAULT_POOL
+
+
+def screen_python_candidates_cow(
+    project_root: str | pathlib.Path,
+    target_path: str,
+    test_paths: list[str] | tuple[str, ...],
+    candidates: list[str] | tuple[str, ...],
+    *,
+    stop_on_first_pass: bool = True,
+    timeout_s: float = 8.0,
+) -> dict[str, Any]:
+    """Screen `candidates` inside ONE `os.fork()` CoW child + hardlink CoW sandbox (~2-5 ms total).
+
+    Never grants acceptance authority: callers MUST still verify shortlisted candidates via
+    `ProjectTestOracle` / `evaluate(..., 'TEST_SUITE', scope_id)`.
+    """
+    import contextlib
+    import importlib
+    import importlib.util
+    import inspect
+    import io
+    import select
+    import signal
+    import sys
+    import tempfile
+    import unittest
+    from canonical.swe_kernel.cow_impact_repair_engine_v1 import create_zero_copy_cow_workspace
+
+    t0 = time.perf_counter_ns()
+    cand_list = list(candidates)
+    if not cand_list or not hasattr(os, "fork"):
+        return {
+            "schema": SCHEMA,
+            "ok": False,
+            "screen_authoritative": False,
+            "passing_indices": list(range(len(cand_list))),
+            "elapsed_ms": 0.0,
+        }
+
+    root_p = pathlib.Path(project_root).resolve()
+    tpaths = [str(tp) for tp in test_paths]
+
+    r_fd, w_fd = os.pipe()
+    pid = os.fork()
+    if pid == 0:
+        os.close(r_fd)
+        try:
+            passing: list[int] = []
+            authoritative = True
+            with tempfile.TemporaryDirectory(prefix="brain_zygote_screen_") as td:
+                cow_dir = pathlib.Path(td) / "ws"
+                create_zero_copy_cow_workspace(root_p, cow_dir)
+                cow_str = str(cow_dir.resolve())
+                sys.dont_write_bytecode = True
+                for pc in list(cow_dir.rglob("__pycache__")):
+                    import shutil as _shutil
+
+                    _shutil.rmtree(pc, ignore_errors=True)
+                ws_roots = {p.stem for p in cow_dir.rglob("*.py")} | {
+                    p.parent.name for p in cow_dir.rglob("__init__.py")
+                }
+                for mname in list(sys.modules):
+                    top = mname.split(".", 1)[0]
+                    if top in ws_roots:
+                        sys.modules.pop(mname, None)
+                sys.path.insert(0, cow_str)
+                if (cow_dir / "src").is_dir():
+                    sys.path.insert(0, str((cow_dir / "src").resolve()))
+                os.chdir(cow_str)
+                target_fp = cow_dir / target_path
+
+                for idx, cand_src in enumerate(cand_list):
+                    # Unlink hardlink BEFORE writing candidate bytes so `root_p` is never mutated!
+                    target_fp.unlink(missing_ok=True)
+                    target_fp.write_text(cand_src, encoding="utf-8")
+
+                    for mname, mod in list(sys.modules.items()):
+                        mfile = getattr(mod, "__file__", None) or ""
+                        if mfile.startswith(cow_str) or mname.split(".", 1)[0] in ws_roots:
+                            sys.modules.pop(mname, None)
+                    importlib.invalidate_caches()
+
+                    cand_ok = True
+                    ran_count = 0
+                    sink = io.StringIO()
+                    try:
+                        with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
+                            for tp_idx, rel_tp in enumerate(tpaths):
+                                tfp = cow_dir / rel_tp
+                                mod_name = f"_brain_zyg_test_{idx}_{tp_idx}"
+                                spec = importlib.util.spec_from_file_location(mod_name, tfp)
+                                if spec is None or spec.loader is None:
+                                    authoritative = False
+                                    cand_ok = False
+                                    break
+                                mod = importlib.util.module_from_spec(spec)
+                                sys.modules[mod_name] = mod
+                                spec.loader.exec_module(mod)
+
+                                suite = unittest.defaultTestLoader.loadTestsFromModule(mod)
+                                n_ut = suite.countTestCases()
+                                if n_ut > 0:
+                                    res_ut = unittest.TextTestRunner(stream=sink, verbosity=0).run(suite)
+                                    ran_count += int(res_ut.testsRun)
+                                    if not res_ut.wasSuccessful():
+                                        cand_ok = False
+                                        break
+                                else:
+                                    # Plain function / top-level assert style tests
+                                    fn_tests = [
+                                        obj
+                                        for nm, obj in vars(mod).items()
+                                        if nm.startswith("test_") and inspect.isfunction(obj)
+                                    ]
+                                    if fn_tests:
+                                        for fn_t in fn_tests:
+                                            sig = inspect.signature(fn_t)
+                                            req_params = [
+                                                p
+                                                for p in sig.parameters.values()
+                                                if p.default is inspect.Parameter.empty
+                                                and p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)
+                                            ]
+                                            if req_params:
+                                                # Pytest fixture needed -> fall back to full ProjectTestOracle
+                                                authoritative = False
+                                                cand_ok = False
+                                                break
+                                            fn_t()
+                                            ran_count += 1
+                                        if not cand_ok or not authoritative:
+                                            break
+                                    else:
+                                        # Top-level assertions executed cleanly during `exec_module`
+                                        src_tp = tfp.read_text(encoding="utf-8", errors="replace")
+                                        if "assert " in src_tp:
+                                            ran_count += 1
+                                        else:
+                                            authoritative = False
+                                            cand_ok = False
+                                            break
+                    except BaseException:  # noqa: BLE001
+                        cand_ok = False
+
+                    if not authoritative:
+                        break
+                    if cand_ok and ran_count > 0:
+                        passing.append(idx)
+                        if stop_on_first_pass:
+                            break
+
+            _write_frame(
+                w_fd,
+                {
+                    "ok": True,
+                    "screen_authoritative": authoritative,
+                    "passing_indices": passing,
+                },
+            )
+        except BaseException as exc:  # noqa: BLE001
+            try:
+                _write_frame(
+                    w_fd,
+                    {"ok": False, "screen_authoritative": False, "error": f"{type(exc).__name__}:{exc}"},
+                )
+            except Exception:
+                pass
+        finally:
+            try:
+                os.close(w_fd)
+            except OSError:
+                pass
+            os._exit(0)
+
+    os.close(w_fd)
+    frame: dict[str, Any] = {"ok": False, "screen_authoritative": False}
+    try:
+        ready, _, _ = select.select([r_fd], [], [], max(0.2, float(timeout_s)))
+        if ready:
+            frame = _read_frame(r_fd)
+        else:
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except OSError:
+                pass
+    except Exception:
+        frame = {"ok": False, "screen_authoritative": False}
+    finally:
+        try:
+            os.close(r_fd)
+        except OSError:
+            pass
+        try:
+            os.waitpid(pid, 0)
+        except ChildProcessError:
+            pass
+
+    elapsed_ms = round((time.perf_counter_ns() - t0) / 1e6, 3)
+    if not frame.get("ok") or not frame.get("screen_authoritative"):
+        return {
+            "schema": SCHEMA,
+            "ok": False,
+            "screen_authoritative": False,
+            "passing_indices": list(range(len(cand_list))),
+            "elapsed_ms": elapsed_ms,
+        }
+    return {
+        "schema": SCHEMA,
+        "ok": True,
+        "screen_authoritative": True,
+        "passing_indices": [int(i) for i in (frame.get("passing_indices") or [])],
+        "elapsed_ms": elapsed_ms,
+    }

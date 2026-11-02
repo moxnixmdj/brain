@@ -289,3 +289,172 @@ def learn_scope(
 def scope_is(learned: Mapping[str, Any], hypothesis_id: str) -> bool:
     """Did learning resolve to this scope?"""
     return learned.get("scope") == hypothesis_id
+
+
+_BINARY_OP_EVAL: dict[str, Callable[[Any, Any], Any]] = {
+    "<=": lambda a, b: a <= b,
+    "<": lambda a, b: a < b,
+    ">=": lambda a, b: a >= b,
+    ">": lambda a, b: a > b,
+    "==": lambda a, b: a == b,
+    "!=": lambda a, b: a != b,
+    "+": lambda a, b: a + b,
+    "-": lambda a, b: a - b,
+    "*": lambda a, b: a * b,
+    "//": lambda a, b: a // b,
+    "%": lambda a, b: a % b,
+    "and": lambda a, b: bool(a) and bool(b),
+    "or": lambda a, b: bool(a) or bool(b),
+}
+
+
+def _render_rule_tokens_concrete(tokens: Sequence[Any], hole_bindings: Mapping[str, str]) -> str:
+    parts: list[str] = []
+    for item in tokens:
+        if not isinstance(item, (list, tuple)) or len(item) < 2:
+            continue
+        k, v = str(item[0]), str(item[1])
+        if k in ("hole_id", "hole_num", "hole_str"):
+            parts.append(hole_bindings.get(v, "1" if k == "hole_num" else "x"))
+        else:
+            parts.append(v)
+    return "".join(parts)
+
+
+def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Synthesize real executable diagnostic probes for `rule` across relational, arithmetic, boolean & statement scopes."""
+    lang = str(rule.get("language") or "python").lower()
+    if lang != "python":
+        return []
+
+    from canonical.swe_kernel.operator_generalization_v1 import derive_operator_swap
+
+    delta = derive_operator_swap(rule)
+    if delta is not None:
+        old_op, new_op = delta["from"], delta["to"]
+        fn_old = _BINARY_OP_EVAL.get(old_op)
+        fn_new = _BINARY_OP_EVAL.get(new_op)
+        if fn_old is not None and fn_new is not None:
+            sample_points = (
+                [(0, 0), (0, 1), (1, 0), (1, 1)]
+                if old_op in ("and", "or") or new_op in ("and", "or")
+                else [(2, 5), (5, 5), (7, 5), (6, 2), (1, 3)]
+            )
+            if any(fn_old(a, b) != fn_new(a, b) for a, b in sample_points):
+                expected = [(a, b, fn_new(a, b)) for a, b in sample_points]
+
+                def _make_verifier(fn_name: str) -> Callable[[str], bool]:
+                    def _verify(cand_src: str) -> bool:
+                        ns: dict[str, Any] = {}
+                        exec(cand_src, ns)  # noqa: S102
+                        fn = ns.get(fn_name)
+                        if not callable(fn):
+                            return False
+                        return all(fn(a, b) == exp for a, b, exp in expected)
+
+                    return _verify
+
+                lhs_expr = "bool(a)" if old_op in ("and", "or") else "a"
+                rhs_expr = "bool(b)" if old_op in ("and", "or") else "b"
+                probes: list[dict[str, Any]] = [
+                    {
+                        "label": f"direct_return_{old_op}_to_{new_op}",
+                        "language": "python",
+                        "source_text": f"def _probe_direct(a, b):\n    return {lhs_expr} {old_op} {rhs_expr}\n",
+                        "verifier": _make_verifier("_probe_direct"),
+                    },
+                    {
+                        "label": f"novel_context_{old_op}_to_{new_op}",
+                        "language": "python",
+                        "source_text": (
+                            f"def _probe_ctx(a, b):\n"
+                            f"    out = ({lhs_expr} {old_op} {rhs_expr})\n"
+                            f"    if True:\n"
+                            f"        return out\n"
+                        ),
+                        "verifier": _make_verifier("_probe_ctx"),
+                    },
+                ]
+                if old_op == "<=":
+                    probes.append(
+                        {
+                            "label": "disjunctive_lte_boundary",
+                            "language": "python",
+                            "source_text": "def _probe_sem(a, b):\n    return a < b or a == b\n",
+                            "verifier": _make_verifier("_probe_sem"),
+                        }
+                    )
+                elif old_op == ">=":
+                    probes.append(
+                        {
+                            "label": "disjunctive_gte_boundary",
+                            "language": "python",
+                            "source_text": "def _probe_sem(a, b):\n    return a > b or a == b\n",
+                            "verifier": _make_verifier("_probe_sem"),
+                        }
+                    )
+                return probes
+
+    # Non-operator rule (e.g., constant/guard/call edit): synthesize a concrete statement probe from the rule's own tokens
+    pat_toks = rule.get("pattern_tokens") or []
+    rep_toks = rule.get("replacement_tokens") or []
+    if not pat_toks or not rep_toks:
+        return []
+    holes: list[tuple[str, str]] = []
+    seen_h: set[str] = set()
+    for item in pat_toks:
+        if isinstance(item, (list, tuple)) and len(item) >= 2 and str(item[0]) in ("hole_id", "hole_num"):
+            hv = str(item[1])
+            if hv not in seen_h:
+                seen_h.add(hv)
+                holes.append((str(item[0]), hv))
+    bind: dict[str, str] = {}
+    id_names = ["_fn_probe", "a", "b", "c", "d"]
+    id_idx = 0
+    for hk, hv in holes:
+        if hk == "hole_num":
+            bind[hv] = "2"
+        else:
+            bind[hv] = id_names[min(id_idx, len(id_names) - 1)]
+            id_idx += 1
+    pat_concrete = _render_rule_tokens_concrete(pat_toks, bind).strip()
+    rep_concrete = _render_rule_tokens_concrete(rep_toks, bind).strip()
+    if not pat_concrete.startswith("def ") or pat_concrete == rep_concrete:
+        return []
+
+    def _stmt_verifier(cand_src: str) -> bool:
+        return cand_src.strip() == rep_concrete
+
+    return [
+        {
+            "label": "statement_anchored_probe",
+            "language": "python",
+            "source_text": pat_concrete + "\n",
+            "verifier": _stmt_verifier,
+        }
+    ]
+
+
+def calibrate_rule_scope(rule: Mapping[str, Any], *, store: Any = None) -> dict[str, Any]:
+    """Synthesize diagnostic probes, narrow `rule`'s version space via `select_probe`, and persist `learned_scope`."""
+    probes = synthesize_diagnostic_probes(rule)
+    if not probes:
+        return {
+            "schema": SCHEMA,
+            "rule_id": rule.get("skill_id"),
+            "result": "NO_PROBES_APPLICABLE",
+            "scope": None,
+            "persisted": False,
+            "terminal_authority": False,
+        }
+    report = dict(learn_scope(rule, probes))
+    # Conservative effective scope: narrowest surviving hypothesis in the nested lattice
+    remaining = list(report.get("remaining") or [])
+    effective_scope = str(report.get("scope") or (remaining[0] if remaining else "")) or None
+    report["effective_scope"] = effective_scope
+    persisted = False
+    sid = str(rule.get("skill_id") or "")
+    if store is not None and sid and effective_scope and hasattr(store, "update_learned_scope"):
+        persisted = bool(store.update_learned_scope(sid, effective_scope, audit=report))
+    report["persisted"] = persisted
+    return report

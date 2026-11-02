@@ -132,6 +132,54 @@ class Creature:
         self._checkable = {o.id: bool(o.checkable) for o in obligations}
         return A.metrics(verdicts)
 
+    def sync_board(
+        self,
+        proposals: Iterable[A.Proposal],
+        *,
+        before: Mapping[str, Any],
+        done: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        """Synchronize world-grounded content-addressed obligations without wiping `_closed`, `_blocked`, or `parked()`."""
+        if self._inspector_investigation is not None:
+            raise ValueError('BOARD_WOULD_REPLACE_INSPECTOR_INVESTIGATION')
+        if self._catalog_questions and any(work.id not in self._closed for work in self._board):
+            raise ValueError('BOARD_WOULD_REPLACE_UNFINISHED_CATALOG_QUESTION')
+        prop_list = list(proposals)
+        existing_by_id = {w.id: w for w in self._board}
+        known_ids = set(existing_by_id) | set(self._closed) | set(self._blocked)
+
+        new_props = [p for p in prop_list if p.id not in known_ids]
+        admitted_new: dict[str, A.Obligation] = {}
+        verdicts: list[Any] = []
+        if new_props:
+            obligations, verdicts = A.author(new_props, before=before, done=done)
+            admitted_new = {o.id: o for o in obligations}
+
+        (self.root / 'catalog_question.json').unlink(missing_ok=True)
+        self._catalog_questions = {}
+
+        next_board: list[M.Work] = []
+        next_checkable: dict[str, bool] = {}
+        preserved = 0
+        for p in prop_list:
+            if p.id in known_ids:
+                w = existing_by_id.get(p.id) or M.Work(id=p.id, value=p.value, cost=p.cost)
+                next_board.append(w)
+                next_checkable[p.id] = self._checkable.get(p.id, bool(p.checkable))
+                preserved += 1
+            elif p.id in admitted_new:
+                ob = admitted_new[p.id]
+                next_board.append(M.Work(id=ob.id, value=ob.value, cost=ob.cost))
+                next_checkable[ob.id] = bool(ob.checkable)
+
+        self._board = next_board
+        self._checkable = next_checkable
+        metrics = dict(A.metrics(verdicts))
+        metrics["preserved"] = preserved
+        metrics["active_board"] = len(self._board)
+        metrics["parked"] = list(self.parked())
+        return metrics
+
     @staticmethod
     def _catalog_spec(identity: str, capability_id: str) -> dict[str, Any]:
         if (not isinstance(capability_id, str)
