@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6628,
+  "research_index_records": 6630,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 435,
-  "source_index_modules": 1915
+  "source_index_entry_points": 436,
+  "source_index_modules": 1916
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "adb81a10bc8d27d74f27f968bbc9ced637cdfee7feacc9b82c67c4a90f464518"
+  "value": "2dd8522b61bad76d1a66117c404f434e52f58393d1529c620610e4f1d11744e5"
  },
  "engines": [
   {
@@ -136873,6 +136873,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CONTINUATION_PREFERENCE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CONTINUATION_PREFERENCE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "7b0a14d7dc86343b6eda31ac95d0bbf599fd05d71f1e5d9add26dcaaa63b6391",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "continuation": 1,
+    "counterexample": 1,
+    "known": 1,
+    "preference": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/CONTINUITY_ROOT3_FIXED_ENTRY_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -209753,6 +209772,51 @@
    }
   },
   {
+   "action_id": "CONTINUATION_OUTRANKS_VALUE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/CONTINUATION_OUTRANKS_VALUE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTINUATION_OUTRANKS_VALUE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e56273c103f7bd9b8010a190b762b6a64ae9a32afd2dbbb8827e68df7c56b289",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "accounts": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "all": 1,
+    "amount": 1,
+    "benchmark": 1,
+    "between": 1,
+    "budget": 1,
+    "but": 1,
+    "continuation": 1,
+    "continuation_outranks_value_v1_20261102": 1,
+    "cost": 2,
+    "difference": 1,
+    "enough": 2,
+    "every": 1,
+    "existence": 1,
+    "existing": 1,
+    "gave": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "held": 1,
+    "high": 1,
+    "large": 1,
+    "lose": 1,
+    "measured": 1,
+    "mortality_and_triage_v1": 1,
+    "moves": 1,
+    "no": 2,
+    "nothing": 1,
+    "offer": 1,
+    "only": 1,
+    "outranks": 2,
+    "value": 2
+   }
+  },
+  {
    "action_id": "CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -234679,6 +234743,49 @@
     "propose_contextual_references": 1,
     "reference": 1,
     "sentences": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/continuation_preference_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/continuation_preference_v1.py",
+   "sha256": "954c4c9d9ddd6759aa836a5792822842a0f20e1177b9202ab83d0c38689d1a63",
+   "summary": "It prices its life. This makes it prefer it.",
+   "symbol_count": 10,
+   "symbols": [
+    "Offer",
+    "Work",
+    "accepts",
+    "buy",
+    "decisive_board",
+    "main",
+    "measure",
+    "play",
+    "sells",
+    "sweep"
+   ],
+   "terms": {
+    "accepts": 1,
+    "buy": 1,
+    "continuation": 1,
+    "decisive_board": 1,
+    "life": 1,
+    "main": 1,
+    "makes": 1,
+    "measure": 1,
+    "offer": 1,
+    "play": 1,
+    "prefer": 1,
+    "preference": 1,
+    "prices": 1,
+    "sells": 1,
+    "sweep": 1,
+    "v1": 1,
+    "work": 1
    }
   },
   {
