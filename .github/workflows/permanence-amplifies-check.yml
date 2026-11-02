@@ -1,0 +1,26 @@
+name: what one demonstration buys
+# The gate is the epistemic claim, not the feature:
+#   a single demonstration must leave MORE THAN ONE consistent rule, and the simpler one must be
+#   the wrong one. If one example ever determines the rule, instant learning is truth-preserving
+#   and this whole line of argument collapses -- which is worth knowing either way.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  underdetermination:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: One example must not determine the rule
+        run: python -m pytest canonical/tests/test_permanence_amplifies_check_v1.py -q

@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6624,
+  "research_index_records": 6626,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 433,
-  "source_index_modules": 1913
+  "source_index_entry_points": 434,
+  "source_index_modules": 1914
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "75c9f764d107b5ca6c38bd0f8c7f4b5174f4746c80e3fe06d881f7f5b4781e67"
+  "value": "329617233afae47bfc2bfe99e677ec2ad578bf1cd65f2948e6e6a12dad90f578"
  },
  "engines": [
   {
@@ -158753,6 +158753,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/PERMANENCE_AMPLIFIES_THE_CHECK_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PERMANENCE_AMPLIFIES_THE_CHECK_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "916946efb19dfd33dc120abaa64e3226f8218c81666c011728a550d5d8cbc08a",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "amplifies": 1,
+    "check": 1,
+    "counterexample": 1,
+    "known": 1,
+    "permanence": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/PERSISTENT_CAPABILITY_INFORMATION_NECESSITY_WOLFRAM_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -212257,6 +212277,51 @@
    }
   },
   {
+   "action_id": "MEASURE_WHAT_ONE_DEMONSTRATION_BUYS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MEASURE_WHAT_ONE_DEMONSTRATION_BUYS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASURE_WHAT_ONE_DEMONSTRATION_BUYS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9ecb826365503d2dbe6368b05b411eae983396b4bab904c2231b7cbd4f3fb102",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "after": 1,
+    "against": 1,
+    "all": 1,
+    "answered": 1,
+    "architectural": 1,
+    "argued": 1,
+    "asserted": 1,
+    "been": 1,
+    "benchmark": 1,
+    "buys": 1,
+    "central": 2,
+    "claim": 2,
+    "computer": 1,
+    "consistent": 1,
+    "demonstration": 3,
+    "epistemic": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learned": 1,
+    "learning": 1,
+    "many": 1,
+    "measure": 1,
+    "measure_what_one_demonstration_buys_v1_20261102": 1,
+    "measured": 2,
+    "moves": 1,
+    "never": 1,
+    "no": 1,
+    "one": 3,
+    "rather": 2,
+    "than": 2
+   }
+  },
+  {
    "action_id": "MODULE_EVIDENCE_REMEASURED_FROM_A_REAL_TEST_RUN_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -262618,6 +262683,53 @@
     "text_matches": 1,
     "transaction": 1,
     "transactions": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/permanence_amplifies_check_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/permanence_amplifies_check_v1.py",
+   "sha256": "a3fb3821f0eeac58db99f0426b4e8728ef9214b3494d86744d3e4873ade25c62",
+   "summary": "One demonstration buys a hypothesis. Not the rule.",
+   "symbol_count": 11,
+   "symbols": [
+    "Record",
+    "Skill",
+    "evaluate",
+    "learn",
+    "live_hypotheses",
+    "main",
+    "measure",
+    "permanence",
+    "records",
+    "strong_check",
+    "weak_check"
+   ],
+   "terms": {
+    "amplifies": 1,
+    "buys": 1,
+    "check": 1,
+    "demonstration": 1,
+    "evaluate": 1,
+    "hypothesis": 1,
+    "learn": 1,
+    "live_hypotheses": 1,
+    "main": 1,
+    "measure": 1,
+    "not": 1,
+    "one": 1,
+    "permanence": 2,
+    "record": 1,
+    "records": 1,
+    "rule": 1,
+    "skill": 1,
+    "strong_check": 1,
+    "v1": 1,
+    "weak_check": 1
    }
   },
   {
