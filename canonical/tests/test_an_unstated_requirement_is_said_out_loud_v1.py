@@ -8,8 +8,13 @@ that honest rather than decorative:
   1. a missing slot is NAMED, with the capability and the compiler's own reason;
   2. a value is never invented for it -- there is no field that could hold one;
   3. a refusal that reports no detail says the REPORT is the gap, not the goal;
-  4. a goal that compiles is not thereby endorsed, because under-specified goals
-     were measured to compile onto the wrong row 3 times in 12.
+  4. a goal that compiles is not thereby endorsed. This module does not vouch for a
+     selection -- and it does not claim to know which selections are wrong either.
+     The "3 times in 12" figure that originally justified this bullet was measured at
+     the compiler alone; at the full door, which runs route_admission after compiling,
+     2 of those 3 are refused and the third asks to "write the result out", so a
+     writer is not clearly wrong. Non-endorsement does not depend on that figure and
+     survives its withdrawal.
 
 Cases are real goals compiled against the live registry. None needs a fixture and
 none executes a capability.

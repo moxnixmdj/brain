@@ -30,14 +30,32 @@ WHAT THIS MODULE DOES NOT DO, stated so it is not over-read:
   the data -- is not implemented here and is not claimed.
 * It does not add a capability, register a row, flip a family, or move any count.
 * It does not infer a slot value. If the door could not fill a slot, this module
-  reports that it could not; it never guesses, because a guessed slot is exactly
-  the silent mis-selection this exists to replace.
+  reports that it could not; it never guesses. A guessed slot would be indistinguishable
+  from a stated one to everything downstream.
 * It does not make selection fail loudly, and it no longer tries to say which
   selections are unforced. A rule that did was merged on 2026-11-02 and retracted
   the same day; see the block above `outcome='COMPILED'` for the measurement that
-  retracted it. Under-specified goals that COMPILE onto the wrong row (measured: 3
-  of 12) still compile, and this module reports `outcome='COMPILED'` for them with
-  the raw lexical evidence attached and no verdict drawn from it.
+  retracted it.
+* CORRECTION to a claim this docstring carried on the day it was merged. It said
+  under-specified goals "COMPILE onto the wrong row (measured: 3 of 12)". That was
+  true of the COMPILER ALONE and not of the door. `compile_against_live_registry` is
+  the first of two stages; the door then runs
+  `live_brain_route_admission_v1.route_admission`. Re-measured over the same goals at
+  the full pipeline, 2 of those 3 are REFUSED by admission, and the third -- "Query
+  the data file and write the result out", bound to a cross-file repair writer -- is a
+  goal that asks to write something out, so a writer is not clearly the wrong answer.
+  Admission also refuses 3 of the 4 goals this module called correct, because it
+  checks grounding in real paths rather than semantic fit, so it is not a correctness
+  oracle either. The "3 of 12" figure was an artifact of stopping at stage one, and
+  its labels were author judgment in any case.
+  What survives is narrower and better evidenced: the tree ALREADY owns a sound,
+  declaration-based contradiction check --
+  `STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER`, which reads
+  `capability_edits_source` off the registry row instead of guessing from keywords --
+  and admission fail-closes an under-specified goal on
+  `R9_REQUIRED_FILE_INPUT_UNBOUND`. This module consumes the compiler's missing-slot
+  report. It does not police selection, and the case for it doing so is weaker than
+  this file originally claimed.
 * It does not vouch for any selection. `selection_endorsed` is False on every path,
   including a clean compile. That part is sound and does not depend on any rule
   about lexical overlap, so it survived the retraction.
