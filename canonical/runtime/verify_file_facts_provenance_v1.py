@@ -802,6 +802,85 @@ ROWS["file.line.appended.v1"] = {
 }
 
 
+def _check_compress() -> tuple[bool, list[dict]]:
+    """`file.compressed.gzip.v1`: gzip's own operation, proved before the source goes.
+
+    The archive is decompressed HERE, with the standard library, and compared with
+    the bytes this file wrote -- not with anything the adapter reports.  The two
+    destructive properties are checked as facts: the source is gone after a
+    successful run, and it is STILL THERE after every refusal, including the one
+    that matters most (`Compress X into Y`, which names an archive this row does
+    not write).
+    """
+    import gzip as _gzip
+
+    checks: list[dict] = []
+    for leftover in WORLD.glob("compress_me_*"):
+        leftover.unlink()
+    source = WORLD / "compress_me.txt"
+    payload = b"alpha\nbeta\n" + bytes(range(64))
+    source.write_bytes(payload)
+    digest = _sha256(source)
+    rel = _rel(source)
+
+    out = _adapter_run("file.compressed.gzip.v1",
+                       {"command": "compress", "goal": "Compress " + rel, "path": rel}, WORLD)
+    archive = WORLD / "compress_me.txt.gz"
+    checks.append({"name": "the archive lands under the file's own name",
+                   "ok": archive.is_file(), "archive": _rel(archive)})
+    checks.append({"name": "the archive decompresses to exactly the bytes that were read",
+                   "ok": archive.is_file() and _gzip.decompress(archive.read_bytes()) == payload,
+                   "expected_sha256": digest,
+                   "adapter_reported_source": out.get("source_sha256")})
+    checks.append({"name": "the source is removed, as the command says",
+                   "ok": not source.exists() and out.get("source_removed") is True,
+                   "source_exists": source.exists(),
+                   "adapter_reported": out.get("source_removed")})
+    checks.append({"name": "the adapter reports the run verified",
+                   "ok": out.get("output_verified") is True})
+
+    def refusal(label, args, expect, untouched):
+        source.write_bytes(payload)
+        try:
+            _adapter_run("file.compressed.gzip.v1", dict(args, command="compress"), WORLD)
+        except Exception as exc:  # noqa: BLE001 - the code is what is checked
+            message = str(exc)
+            return {"name": label, "ok": expect in message and untouched(),
+                    "expects": expect, "refused_with": message[:140]}
+        return {"name": label, "ok": False, "expects": expect, "refused_with": None}
+
+    checks.append(refusal("refuses an archive that already exists",
+                          {"goal": "Compress " + rel, "path": rel},
+                          "THE_ARCHIVE_ALREADY_EXISTS",
+                          lambda: archive.is_file()))
+    # The remaining refusals are about the SOURCE, so the archive that is
+    # supposed to be in the way is cleared first; otherwise every one of them
+    # would pass by tripping the same already-exists rule.
+    if archive.exists():
+        archive.unlink()
+    checks.append(refusal("refuses a sentence that names a destination it does not write",
+                          {"goal": "Compress %s into %s/a.tar.gz" % (rel, WORLD.name), "path": rel},
+                          "THE_SENTENCE_NAMES_A_DESTINATION_THIS_ROW_DOES_NOT_WRITE",
+                          lambda: source.is_file()))
+    checks.append(refusal("refuses a file outside the repository",
+                          {"goal": "Compress /etc/hosts", "path": "/etc/hosts"},
+                          "PATH_OUTSIDE_REPOSITORY",
+                          lambda: pathlib.Path("/etc/hosts").is_file()))
+    checks.append(refusal("refuses a file the sentence does not name",
+                          {"goal": "Compress some_other_file.txt", "path": rel},
+                          "PATH_NOT_STATED_IN_THE_SENTENCE",
+                          lambda: source.is_file()))
+    return all(c["ok"] for c in checks), checks
+
+
+ROWS["file.compressed.gzip.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-COMPRESS-001",
+    "claim": ("compresses the stated file to <name>.gz, proves the archive decompresses to the "
+              "source bytes before removing the source, and refuses any other destination"),
+    "check": _check_compress,
+}
+
+
 def verify(cid: str) -> dict:
     row = ROWS[cid]
     world = _world()

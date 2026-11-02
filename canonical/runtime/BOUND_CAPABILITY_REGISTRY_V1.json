@@ -13145,6 +13145,96 @@
           "command": "append_line"
         }
       }
+    },
+    "file.compressed.gzip.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "compress",
+          "goal": "${input.goal}",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_compress",
+      "computes_command": {
+        "argvs": [
+          [
+            "gzip",
+            "${path}"
+          ]
+        ],
+        "answer_field": "destination_path",
+        "note": "performed in process with the stdlib gzip module; no shell and no subprocess. The original is removed only after the archive on disk is decompressed and compared byte for byte."
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "handles_verbs": [
+        "compress"
+      ],
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "compress the file",
+        "gzip the file",
+        "compress the file into"
+      ],
+      "limitations": [
+        "Performs gzip's own operation: writes <file>.gz and then REMOVES the original, after decompressing the archive on disk and comparing it with the source byte for byte. source_removed is reported in the answer.",
+        "Refuses an existing archive, a path outside the repository, a non-regular file, and any file the sentence does not name."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "compress.file.gzip"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "byte_count",
+        "command",
+        "destination_path",
+        "destination_sha256",
+        "original_byte_count",
+        "output_verified",
+        "path",
+        "schema",
+        "source_removed",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_compress.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COMPRESS-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: the archive is decompressed and compared with the bytes read before the write, and the source is checked for removal. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_compress",
+          "command": "compress"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
