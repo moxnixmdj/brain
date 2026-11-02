@@ -73,6 +73,10 @@ DEFAULT_ALPHA = 0.05
 
 
 def _load(path: str = DEFAULT_STATE) -> dict:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return {"schema": SCHEMA, "cells": {}}
     try:
         return json.loads(Path(path).read_text())
     except Exception:
@@ -80,6 +84,10 @@ def _load(path: str = DEFAULT_STATE) -> dict:
 
 
 def _save(state: dict, path: str = DEFAULT_STATE) -> None:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     try:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         Path(path).write_text(json.dumps(state, indent=1, sort_keys=True))

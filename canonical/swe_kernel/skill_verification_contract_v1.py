@@ -178,3 +178,106 @@ class ProjectTestOracle:
         except Exception as exc:
             return VerificationResult(False, 'TEST_SUITE', source_sha256(candidate), self.scope_id,
                                       {'error': type(exc).__name__})
+
+
+class ConfinedLanguageTestOracle:
+    """Verify non-Python candidates (`javascript`/`typescript`/`rust`/`go`) inside `brokered_workspace_execution_v1`.
+
+    Copies the project into a private temporary directory, overwrites only `target_path`
+    (never any test file), runs the language test suite inside `zero_ambient_namespace_launcher_v1`,
+    parses real non-zero test count, and verifies the caller's original `project_root` digest
+    remained byte-for-byte unchanged.
+    """
+
+    _EXTS = ('.js', '.mjs', '.cjs', '.ts', '.rs', '.go')
+
+    def __init__(
+        self,
+        project_root: Path,
+        target_path: str,
+        test_paths: list[str],
+        scope_id: str,
+        *,
+        runner_argv: list[str] | None = None,
+        timeout_s: int = 20,
+    ) -> None:
+        from canonical.runtime import repair_candidate_broker_v1 as rcb
+
+        self.root = Path(project_root).resolve()
+        rel = PurePosixPath(target_path)
+        if rel.is_absolute() or '..' in rel.parts or not any(target_path.endswith(ext) for ext in self._EXTS):
+            raise ValueError('INVALID_SKILL_TARGET')
+        if not test_paths:
+            raise ValueError('TEST_PATHS_REQUIRED')
+        clean_tests: list[str] = []
+        for tp in test_paths:
+            trel = PurePosixPath(tp)
+            if trel.is_absolute() or '..' in trel.parts or str(trel) == str(rel):
+                raise ValueError('SKILL_MUST_NOT_REWRITE_ITS_TESTS')
+            if not (self.root / trel).is_file():
+                raise ValueError('MISSING_TEST_FILE')
+            clean_tests.append(str(trel))
+        if not (self.root / rel).is_file():
+            raise ValueError('INVALID_SKILL_TARGET')
+        if not scope_id:
+            raise ValueError('VERIFICATION_SCOPE_REQUIRED')
+        rcb.snapshot_project(self.root)
+        self.target_path = str(rel)
+        self.test_paths = clean_tests
+        self.scope_id = scope_id
+        self.timeout_s = timeout_s
+        if runner_argv is not None:
+            self.runner_argv = [str(x) for x in runner_argv]
+        elif target_path.endswith(('.js', '.mjs', '.cjs')):
+            self.runner_argv = ['/usr/local/bin/node', '--test', *self.test_paths]
+        else:
+            raise ValueError('RUNNER_ARGV_REQUIRED_FOR_LANGUAGE')
+        self.calls = 0
+
+    def __call__(self, candidate: str) -> VerificationResult:
+        import json as _json
+        import re as _re
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+        from canonical.runtime import repair_candidate_broker_v1 as rcb
+
+        self.calls += 1
+        try:
+            orig_snap = rcb.snapshot_project(self.root)
+            with tempfile.TemporaryDirectory(prefix='brain-lang-oracle-') as td:
+                copied = rcb.stage_project(orig_snap, staging_parent=Path(td))
+                (copied / self.target_path).write_text(candidate, encoding='utf-8')
+                cand_snap = rcb.snapshot_project(copied)
+                res = broker.run_staged_confined_command(
+                    copied,
+                    self.runner_argv,
+                    publish=False,
+                    pythonpath_work=False,
+                    timeout=self.timeout_s,
+                    task_id=f'lang-oracle:{self.scope_id}',
+                )
+            final_snap = rcb.snapshot_project(self.root)
+            if final_snap.digest != orig_snap.digest:
+                raise RuntimeError('ORIGINAL_PROJECT_CHANGED_DURING_VERIFICATION')
+            if not res.get('confined'):
+                return VerificationResult(False, 'TEST_SUITE', source_sha256(candidate), self.scope_id,
+                                          {'error': str(res.get('blocked') or 'UNCONFINED')})
+            combined = str(res.get('stdout') or '') + '\n' + str(res.get('stderr') or '')
+            m_pass = _re.search(r'(?:#\s*pass\s+(\d+)|(\d+)\s+passed|ok\s+\S+)', combined)
+            m_tests = _re.search(r'#\s*tests\s+(\d+)', combined)
+            test_count = int(m_tests.group(1)) if m_tests else (int(m_pass.group(1) or m_pass.group(2) or 1) if m_pass else 0)
+            rc = int(res.get('exit', -1))
+            passed = bool(res.get('ok') and rc == 0 and test_count > 0 and not res.get('changed_files'))
+            prog_sha = hashlib.sha256(_json.dumps(self.runner_argv, separators=(',', ':')).encode('utf-8')).hexdigest()
+            spec_sha = hashlib.sha256(_json.dumps({'target': self.target_path, 'tests': self.test_paths, 'scope': self.scope_id}, sort_keys=True).encode('utf-8')).hexdigest()
+            evidence = {
+                'test_count': test_count,
+                'returncode': rc,
+                'measurement_program_sha256': prog_sha,
+                'measurement_spec_sha256': spec_sha,
+                'snapshot_sha256': cand_snap.digest,
+            }
+            return VerificationResult(passed, 'TEST_SUITE', source_sha256(candidate), self.scope_id, evidence)
+        except Exception as exc:
+            return VerificationResult(False, 'TEST_SUITE', source_sha256(candidate), self.scope_id,
+                                      {'error': type(exc).__name__})
+

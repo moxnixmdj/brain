@@ -4858,21 +4858,51 @@ def _serve_by_acting(request: Mapping[str, Any]) -> dict[str, Any] | None:
 
 
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """Public entry with an optional, narrowly scoped route-memory control.
+    """Public entry with optional narrowly scoped `route_memory_mode` and full `memory_policy` control.
 
-    Exclusion affects only this door's associative recall/credit and compiled
-    workflow fallback. It does not disable calibration, adapters or other stores.
+    `route_memory_mode` ('use'|'exclude') affects only this door's associative recall/credit
+    and compiled workflow fallback.
+    `memory_policy` ('READ_WRITE'|'READ_ONLY'|'OFF') enforces request-scoped storage
+    isolation across all downstream memory/cache chokepoints via `memory_policy_v1`.
     """
-    if isinstance(request, Mapping) and "route_memory_mode" in request:
-        mode = request["route_memory_mode"]
-        if mode not in ("use", "exclude"):
-            return _fail(str(request.get("task_id") or ""), "FAIL_CLOSED__ROUTE_MEMORY_MODE_INVALID",
-                         "ROUTE_MEMORY_MODE_INVALID", perf_counter_ns(), executed=False)
+    from canonical.runtime.memory_policy_v1 import (
+        MemoryPolicyError,
+        effective_memory_mode,
+        memory_policy_scope,
+        validate_memory_mode,
+    )
+
+    mp_raw = request.get("memory_policy") if isinstance(request, Mapping) else None
+    if mp_raw is not None:
+        try:
+            mp_mode = validate_memory_mode(mp_raw)
+        except MemoryPolicyError:
+            return _fail(
+                str(request.get("task_id") or ""),
+                "FAIL_CLOSED__MEMORY_POLICY_INVALID",
+                "MEMORY_POLICY_INVALID",
+                perf_counter_ns(),
+                executed=False,
+            )
+    else:
+        mp_mode = None
+
+    with (memory_policy_scope(mp_mode) if mp_mode is not None else contextlib.nullcontext()):
+        if isinstance(request, Mapping) and "route_memory_mode" in request:
+            mode = request["route_memory_mode"]
+            if mode not in ("use", "exclude"):
+                return _fail(str(request.get("task_id") or ""), "FAIL_CLOSED__ROUTE_MEMORY_MODE_INVALID",
+                             "ROUTE_MEMORY_MODE_INVALID", perf_counter_ns(), executed=False)
+            result = _solve_public(request)
+            result["route_memory_policy"] = ("EXCLUDED_ROUTE_RECALL_ONLY" if mode == "exclude"
+                                             else "DEFAULT_ROUTE_RECALL")
+            if mp_mode is not None:
+                result["effective_memory_policy"] = effective_memory_mode()
+            return result
         result = _solve_public(request)
-        result["route_memory_policy"] = ("EXCLUDED_ROUTE_RECALL_ONLY" if mode == "exclude"
-                                         else "DEFAULT_ROUTE_RECALL")
+        if mp_mode is not None:
+            result["effective_memory_policy"] = effective_memory_mode()
         return result
-    return _solve_public(request)
 
 
 def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
@@ -6035,9 +6065,15 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             )
             from canonical.swe_kernel.goal_dag_executor_v1 import execute_transactional_goal_dag
 
+            from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
+
             _exclude_mem = request.get("route_memory_mode") == "exclude"
             _macro_state = request.get("_macro_state_path") if isinstance(request, Mapping) else None
-            _macro_hit = None if _exclude_mem else lookup_verified_chain_macro(_clauses, state_path=_macro_state)
+            _macro_hit = (
+                None
+                if (_exclude_mem or not can_read_memory())
+                else lookup_verified_chain_macro(_clauses, state_path=_macro_state)
+            )
             _macro_plan = list((_macro_hit or {}).get("plan") or [])
 
             _snap_rels: list[str] = []
@@ -6102,7 +6138,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             _cids = [str(r["capability_id"]) for r in _receipts if r.get("capability_id")]
             _macro_saved = (
                 False
-                if _exclude_mem
+                if (_exclude_mem or not can_write_memory())
                 else record_verified_chain_macro(
                     _clauses,
                     [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in _receipts],

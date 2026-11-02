@@ -120,6 +120,10 @@ def _load(path: str = DEFAULT_STATE) -> dict:
 
 
 def _save(state: dict, path: str = DEFAULT_STATE) -> None:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(state, indent=1, sort_keys=True), encoding="utf-8")
@@ -128,6 +132,10 @@ def _save(state: dict, path: str = DEFAULT_STATE) -> None:
 def remember(content: Any, *, kind: str = "", tags: Iterable[str] = (),
              path: str | None = None) -> str:
     """Store something. Returns its id. Nothing is asserted about its worth."""
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return ""
     path = path or DEFAULT_STATE
     state = _load(path)
     eid = "m" + str(state["next_id"])
@@ -203,6 +211,10 @@ def recall(cue: Any, *, k: int = 5, tags: Iterable[str] = (),
     is the whole point: relevance alone is a search engine, importance alone is
     a leaderboard.
     """
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return []
     path = path or DEFAULT_STATE
     state = _load(path)
     cue_terms = _terms(cue)

@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6639,
+  "research_index_records": 6640,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
-  "source_index_modules": 1920
+  "source_index_modules": 1922
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6e87c7f91e4dfb240ae9ec30954dfcec015d1a3bee109e70e3e09c1d9d1732f3"
+  "value": "92da1e5ff3f46b7a7e3278015b34e817f08c9d0c2780bb71593290e349bf8ebd"
  },
  "engines": [
   {
@@ -215914,6 +215914,51 @@
    }
   },
   {
+   "action_id": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+   "capability": false,
+   "date": "2026-11-02",
+   "id": "research:canonical/action_intents/OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7723e2ba8b9bc140fd6826014772c310180cc87f0f275a6d91cc7f9364a0be59",
+   "status": "",
+   "terms": {
+    "100": 1,
+    "1st-try": 1,
+    "20261102": 1,
+    "23573bd8": 1,
+    "6597": 1,
+    "accounting": 1,
+    "after": 1,
+    "architectural": 1,
+    "architecture": 1,
+    "broker": 2,
+    "compound": 2,
+    "creature": 2,
+    "creature.step": 2,
+    "cross-language": 2,
+    "cst": 3,
+    "execution": 2,
+    "failed": 2,
+    "false": 2,
+    "hi": 4,
+    "hidden": 2,
+    "instead": 3,
+    "int": 2,
+    "live": 2,
+    "optimal_architecture_memory_cst_broker_creature_20261102_v1": 2,
+    "priority": 2,
+    "read-only": 2,
+    "subexpressions": 2,
+    "suspect_lines": 2,
+    "test_suite": 2,
+    "under": 3,
+    "via": 2,
+    "writes": 3
+   }
+  },
+  {
    "action_id": "OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1",
    "capability": false,
    "date": "2026-11-02",
@@ -224778,7 +224823,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/associative_memory_v1.py",
-   "sha256": "5187ecf3e91d352487b332d2c9579f5f31932713085b1c038ded9f597d9f1389",
+   "sha256": "d248643cd4ceb6293a851a12cb2267dd1b29ff361a9c345ac6a5c83e00ad1c35",
    "summary": "Memory that decides for itself what is worth keeping.",
    "symbol_count": 12,
    "symbols": [
@@ -230782,6 +230827,41 @@
     "v1": 1,
     "verified": 1,
     "write_default_fixtures": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/brokered_workspace_execution_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/brokered_workspace_execution_v1.py",
+   "sha256": "fe630ebb566e4bddeb176ca2e85968a388fcf3b97037dd7cf207f337587a97c2",
+   "summary": "Staged read-only namespace + broker execution (`brokered_workspace_execution_v1`).",
+   "symbol_count": 5,
+   "symbols": [
+    "_atomic_publish_files",
+    "_python_in_chroot",
+    "_snapshot_allowing_cow_hardlinks",
+    "namespace_broker_available",
+    "run_staged_confined_command"
+   ],
+   "terms": {
+    "atomic_publish_files": 1,
+    "broker": 1,
+    "brokered": 1,
+    "brokered_workspace_execution_v1": 1,
+    "execution": 2,
+    "namespace": 1,
+    "namespace_broker_available": 1,
+    "python_in_chroot": 1,
+    "read-only": 1,
+    "run_staged_confined_command": 1,
+    "snapshot_allowing_cow_hardlinks": 1,
+    "staged": 1,
+    "v1": 1,
+    "workspace": 1
    }
   },
   {
@@ -237540,16 +237620,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "0cea0983df9226b92bae18f804529e9b99aaf8534faab8ff62616188b575fa79",
+   "sha256": "3350220d33092de3c82675c9a9a42423eed66cc4c064266ed27a0a1666ba0ca4",
    "summary": "The computer itself, as an environment the learner can act in.",
-   "symbol_count": 56,
+   "symbol_count": 60,
    "symbols": [
     "ComputerEnv",
     "_abstract",
+    "_answer_query_impl",
     "_bare_value",
     "_compressed_content_matches",
     "_concretise",
     "_digest",
+    "_discover_impl",
     "_file_sha256",
     "_flags_for_goal_preparsed",
     "_goal_token_info",
@@ -237561,13 +237643,11 @@
     "_instrument",
     "_known_counters",
     "_one_wide",
+    "_perform_chain_impl",
+    "_perform_impl",
     "_precomputed_flag_stems",
     "_query_cache_get",
-    "_query_cache_load",
-    "_query_cache_path",
-    "_query_cache_put",
-    "_query_shapes",
-    "_real_binary"
+    "_query_cache_load"
    ],
    "terms": {
     "act": 1,
@@ -238861,7 +238941,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "d8a758249ba12455a5f753f25044fdfc228da8379c9c3cca2b3501f91d1c2510",
+   "sha256": "0b27e3f9d249f81b32311db61b993066b1676a0bee38529588625ac9041cc423",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 9,
    "symbols": [
@@ -246973,7 +247053,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/flywheel_v1.py",
-   "sha256": "684438538b7251fe523a47419b0ad7fe6e7ff843ab6edc7384395acdc606607b",
+   "sha256": "533586da56d4878052005c685cc506aa08ff39bfacf706534dc96e41aa24af3d",
    "summary": "The part that was missing: the machine gets better for having worked.",
    "symbol_count": 16,
    "symbols": [
@@ -254546,7 +254626,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/ignorance_ledger_v1.py",
-   "sha256": "c2531ddb88b7f091ca83e5357048b8f469f12c1dd1d712a540c78f2f2e295d70",
+   "sha256": "09cc1f05046f0748d6ce1d882b4809c0770ae6f73f1475d2f23538c36816a1ec",
    "summary": "The machine's own model of what it does not know, ranked by what it is worth.",
    "symbol_count": 11,
    "symbols": [
@@ -255369,7 +255449,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "0e8ca6ff9311ae622403154514cea8d199d84d98c87576485d5a500ad2fadffb",
+   "sha256": "4733fb36799caa88ebe7211e414cd74e219b1fccad7532c95405c10214c551fc",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 114,
    "symbols": [
@@ -259085,6 +259165,40 @@
     "update": 1,
     "v6": 2,
     "verify_invariant_candidate": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/memory_policy_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/memory_policy_v1.py",
+   "sha256": "5805444ca177717c8d1434aa2d40bc5dbb75214b9eba71fdb545446ac4cd2f65",
+   "summary": "Request-scoped storage-chokepoint memory policy (`memory_policy_v1`).",
+   "symbol_count": 6,
+   "symbols": [
+    "MemoryPolicyError",
+    "can_read_memory",
+    "can_write_memory",
+    "effective_memory_mode",
+    "memory_policy_scope",
+    "validate_memory_mode"
+   ],
+   "terms": {
+    "can_read_memory": 1,
+    "can_write_memory": 1,
+    "effective_memory_mode": 1,
+    "memory": 2,
+    "memory_policy_scope": 1,
+    "memory_policy_v1": 1,
+    "memorypolicyerror": 1,
+    "policy": 2,
+    "request-scoped": 1,
+    "storage-chokepoint": 1,
+    "v1": 1,
+    "validate_memory_mode": 1
    }
   },
   {
@@ -283479,12 +283593,13 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "7642913fc0ed81ad0fbb6342237f7bf6f1e24431fe34653b399a5f2eafa8b4d3",
+   "sha256": "605460098ba70713eb8de1e6606640491c8b90c46a19b052f6f2b76a47f53345",
    "summary": "The whole system, reduced to what cannot be removed.",
-   "symbol_count": 8,
+   "symbol_count": 9,
    "symbols": [
     "_default_staging_path",
     "_snapshot_small_tree",
+    "_solve_impl",
     "_stage_or_crystallize_paired_skill",
     "act",
     "observe",
@@ -283503,6 +283618,7 @@
     "render": 1,
     "snapshot_small_tree": 1,
     "solve": 2,
+    "solve_impl": 1,
     "stage_or_crystallize_paired_skill": 1,
     "system": 1,
     "v1": 1,
@@ -290417,7 +290533,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "3bc8f4afa15823ae45d0404f5fa9b7f3e516089dee73753379ca1cf4f831e6df",
+   "sha256": "6e98f35279f9917d8f1733624269003c28d4efa1728d8b480487614670cf213e",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
    "symbol_count": 20,
    "symbols": [

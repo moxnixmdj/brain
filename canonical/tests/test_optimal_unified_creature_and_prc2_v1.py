@@ -308,6 +308,353 @@ class OptimalUnifiedCreatureAndPrC2Tests(unittest.TestCase):
             self.assertGreater(p2["creature"]["epoch"], epoch_1)
             self.assertLess(p2["creature"]["life_remaining"], life_after_1)
 
+    def test_memory_policy_chokepoints_block_hidden_writes_and_enforce_monotonic_scopes(self) -> None:
+        from canonical.runtime import associative_memory_v1 as amem
+        from canonical.runtime.memory_policy_v1 import (
+            MemoryPolicyError,
+            effective_memory_mode,
+            memory_policy_scope,
+        )
+
+        with tempfile.TemporaryDirectory() as td:
+            tmp = pathlib.Path(td)
+            # 1. Monotonic containment: inner scopes clamp to OFF by default and raise on fail_on_escalation=True
+            with memory_policy_scope("OFF"):
+                self.assertEqual(effective_memory_mode(), "OFF")
+                with memory_policy_scope("READ_WRITE"):
+                    self.assertEqual(effective_memory_mode(), "OFF")
+                with self.assertRaises(MemoryPolicyError):
+                    with memory_policy_scope("READ_ONLY", fail_on_escalation=True):
+                        pass
+                with self.assertRaises(MemoryPolicyError):
+                    with memory_policy_scope("READ_WRITE", fail_on_escalation=True):
+                        pass
+
+            # 2. transfer_learning_v1.drive(..., use_transfer=False) writes 0 bytes under OFF / READ_ONLY
+            old_tl = transfer.STATE_PATH
+            tl_path = tmp / "tl_state.json"
+            transfer.STATE_PATH = str(tl_path)
+            try:
+                class _TinyEnv:
+                    def __init__(self) -> None:
+                        self.v = 0
+                    def reset(self) -> int:
+                        self.v = 0
+                        return self.v
+                    def state(self) -> int:
+                        return self.v
+                    def act(self, a: str) -> int:
+                        if a == "inc":
+                            self.v += 1
+                        return self.v
+
+                with memory_policy_scope("READ_ONLY"):
+                    d_res = transfer.drive(
+                        _TinyEnv(),
+                        ["inc"],
+                        is_goal=lambda s: s == 1,
+                        budget=4,
+                        use_transfer=False,
+                    )
+                    self.assertTrue(d_res["reached"])
+                self.assertFalse(tl_path.exists())
+            finally:
+                transfer.STATE_PATH = old_tl
+
+            # 3. associative_memory_v1.recall & VerifiedSkillStore under READ_ONLY read without mutating bytes
+            amem_path = tmp / "amem.json"
+            amem.remember({"fact": "alpha"}, kind="note", tags=("alpha",), path=str(amem_path))
+            amem_before = amem_path.read_bytes()
+            with memory_policy_scope("READ_ONLY"):
+                hits = amem.recall("alpha", k=1, path=str(amem_path))
+                self.assertEqual(len(hits), 1)
+                self.assertEqual(amem.remember({"fact": "beta"}, path=str(amem_path)), "")
+            self.assertEqual(amem_path.read_bytes(), amem_before)
+
+            with memory_policy_scope("OFF"):
+                self.assertEqual(amem.recall("alpha", k=1, path=str(amem_path)), [])
+
+            # 4. live_brain_route_admission_v1.solve rejects invalid memory_policy fail-closed
+            bad_mp = door.solve({"task_id": "mp-bad", "goal": "check", "memory_policy": "BOGUS"})
+            self.assertFalse(bad_mp["pass"])
+            self.assertEqual(bad_mp["status"], "FAIL_CLOSED__MEMORY_POLICY_INVALID")
+
+    def test_compound_cst_subtree_narrowing_cross_language_test_suite_and_suspect_line_priority(self) -> None:
+        from canonical.swe_kernel.skill_verification_contract_v1 import ProjectTestOracle
+
+        with tempfile.TemporaryDirectory() as td:
+            tmp = pathlib.Path(td)
+            scope_id = "unit/compound-cst/v1"
+            contract = {
+                "schema_version": 1,
+                "scope_id": scope_id,
+                "verification_kind": "TEST_SUITE",
+                "dependencies": {},
+                "preconditions": {},
+            }
+            train_dir = tmp / "train_proj"
+            train_dir.mkdir()
+            (train_dir / "subject.py").write_text("def ok(x, hi):\n    return x <= hi\n", encoding="utf-8")
+            (train_dir / "test_subject.py").write_text(
+                "import unittest\nfrom subject import ok\n"
+                "class T(unittest.TestCase):\n"
+                "    def test_ok(self):\n"
+                "        self.assertTrue(ok(3, 5))\n"
+                "        self.assertFalse(ok(5, 5))\n"
+                "        self.assertFalse(ok(6, 5))\n",
+                encoding="utf-8",
+            )
+            store = VerifiedSkillStore(tmp / "compound.sqlite", seed=False)
+            cryst = store.crystallize_code_fix(
+                before_snippet="def ok(x, hi):\n    return x <= hi\n",
+                after_snippet="def ok(x, hi):\n    return x < hi\n",
+                language="python",
+                contract=contract,
+                training_verifier=ProjectTestOracle(
+                    train_dir, "subject.py", ["test_subject.py"], scope_id
+                ),
+            )
+            self.assertTrue(cryst["crystallized"])
+
+            # 1. Compound parenthesized operands + outer call/arithmetic wrapper narrowing via real ProjectTestOracle
+            from canonical.swe_kernel.skill_verification_contract_v1 import ConfinedLanguageTestOracle
+
+            for idx_c, (target_src, test_body) in enumerate([
+                (
+                    "def check_bounds(x, hi):\n    return (x + 1) <= (hi - 1)\n",
+                    "from subject import check_bounds\n"
+                    "class T(unittest.TestCase):\n"
+                    "    def test_cb(self):\n"
+                    "        self.assertFalse(check_bounds(3, 5))\n"
+                    "        self.assertTrue(check_bounds(2, 5))\n",
+                ),
+                (
+                    "def score_flag(x, hi):\n    return int(x <= hi) + 1\n",
+                    "from subject import score_flag\n"
+                    "class T(unittest.TestCase):\n"
+                    "    def test_sf(self):\n"
+                    "        self.assertEqual(score_flag(5, 5), 1)\n"
+                    "        self.assertEqual(score_flag(4, 5), 2)\n",
+                ),
+            ]):
+                pdir = tmp / f"comp_py_{idx_c}"
+                pdir.mkdir()
+                (pdir / "subject.py").write_text(target_src, encoding="utf-8")
+                (pdir / "test_subject.py").write_text("import unittest\n" + test_body, encoding="utf-8")
+                rec = store.recall_and_apply_verified(
+                    source_text=target_src,
+                    language="python",
+                    verifier=ProjectTestOracle(pdir, "subject.py", ["test_subject.py"], scope_id),
+                    required_verification_kind="TEST_SUITE",
+                    scope_id=scope_id,
+                    context={"dependencies": {}, "preconditions": {}},
+                    allow_scope_escalation=True,
+                )
+                self.assertIsNotNone(rec, target_src)
+
+            # 2. Cross-language Python -> JavaScript ESM under real confined `node --test` TEST_SUITE oracle
+            js_dir = tmp / "js_proj"
+            js_dir.mkdir()
+            js_src = "export function withinCap(a, b) {\n  return (a + 1) <= (b - 2);\n}\n"
+            (js_dir / "bounds.mjs").write_text(js_src, encoding="utf-8")
+            (js_dir / "test_bounds.mjs").write_text(
+                "import test from 'node:test';\n"
+                "import assert from 'node:assert/strict';\n"
+                "import { withinCap } from './bounds.mjs';\n"
+                "test('strict upper bound with compound exprs', () => {\n"
+                "  assert.equal(withinCap(1, 5), true);\n"
+                "  assert.equal(withinCap(2, 5), false);\n"
+                "});\n",
+                encoding="utf-8",
+            )
+            js_oracle = ConfinedLanguageTestOracle(js_dir, "bounds.mjs", ["test_bounds.mjs"], scope_id)
+            rec_js = store.recall_and_apply_verified(
+                source_text=js_src,
+                language="javascript",
+                verifier=js_oracle,
+                required_verification_kind="TEST_SUITE",
+                scope_id=scope_id,
+                context={"dependencies": {}, "preconditions": {}},
+                allow_scope_escalation=True,
+            )
+            self.assertIsNotNone(rec_js)
+            self.assertEqual(rec_js["scope_tier"], "CROSS_LANGUAGE_CST_SKELETON")
+            self.assertIn("(a + 1) < (b - 2)", rec_js["patched_source"])
+
+            # Refused when scope_id mismatches recorded contract
+            rec_wrong_scope = store.recall_and_apply_verified(
+                source_text=js_src,
+                language="javascript",
+                verifier=ConfinedLanguageTestOracle(js_dir, "bounds.mjs", ["test_bounds.mjs"], "other/scope/v1"),
+                required_verification_kind="TEST_SUITE",
+                scope_id="other/scope/v1",
+                context={"dependencies": {}, "preconditions": {}},
+                allow_scope_escalation=True,
+            )
+            self.assertIsNone(rec_wrong_scope)
+
+            # 3. Fault-localized suspect_lines tries line 6 first (`oracle.calls == 1` instead of scanning lines 2 & 4 first)
+            multi_dir = tmp / "multi_proj"
+            multi_dir.mkdir()
+            multi_src = (
+                "def validate(a, b, c):\n"
+                "    ok1 = a <= 10\n"
+                "    ok2 = b <= 20\n"
+                "    if not (ok1 and ok2):\n"
+                "        return False\n"
+                "    return c <= 30\n"
+            )
+            (multi_dir / "subject.py").write_text(multi_src, encoding="utf-8")
+            (multi_dir / "test_subject.py").write_text(
+                "import unittest\nfrom subject import validate\n"
+                "class T(unittest.TestCase):\n"
+                "    def test_v(self):\n"
+                "        self.assertTrue(validate(10, 20, 29))\n"
+                "        self.assertFalse(validate(10, 20, 30))\n",
+                encoding="utf-8",
+            )
+            multi_oracle = ProjectTestOracle(multi_dir, "subject.py", ["test_subject.py"], scope_id)
+            rec_loc = store.recall_and_apply_verified(
+                source_text=multi_src,
+                language="python",
+                verifier=multi_oracle,
+                required_verification_kind="TEST_SUITE",
+                scope_id=scope_id,
+                context={"dependencies": {}, "preconditions": {}},
+                allow_scope_escalation=True,
+                suspect_lines=[6],
+            )
+            self.assertIsNotNone(rec_loc)
+            self.assertEqual(multi_oracle.calls, 1)
+
+    def test_staged_broker_non_destructive_isolation_and_creature_behavioral_counterfactuals(self) -> None:
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+
+        if not broker.namespace_broker_available():
+            self.skipTest("user/mount namespace confinement unavailable on host")
+
+        with tempfile.TemporaryDirectory() as td:
+            base = pathlib.Path(td)
+            # 1. Staged non-destructive guarantee: failed check & protected-test tamper NEVER touch live workspace
+            ws = base / "staged_ws"
+            ws.mkdir()
+            orig_calc = "def add(a, b):\n    return a - b\n"
+            orig_test = "from calc import add\nassert add(2, 3) == 5\n"
+            (ws / "calc.py").write_text(orig_calc, encoding="utf-8")
+            (ws / "test_calc.py").write_text(orig_test, encoding="utf-8")
+
+            c = creature_mod.boot(base / "c_staged", identity="staged-creature", life=10.0)
+            c.author_board(
+                [
+                    obligations.Proposal(
+                        id="corrupt_attempt",
+                        claim="calc.py passes check",
+                        source="test",
+                        check=lambda w: (w.get("s") or {}).get("k") == "done",
+                        value=2.0,
+                        cost=1.0,
+                    ),
+                    obligations.Proposal(
+                        id="tamper_test_attempt",
+                        claim="tamper protected test",
+                        source="test",
+                        check=lambda w: (w.get("s") or {}).get("t") == "done",
+                        value=1.5,
+                        cost=1.0,
+                    ),
+                ],
+                before={"s": {"k": "open", "t": "open"}},
+                done={"s": {"k": "done", "t": "done"}},
+            )
+            perf = creature_mod.confined_verified_perform(
+                ws,
+                programs={
+                    "corrupt_attempt": "from pathlib import Path\nPath('calc.py').write_text('DESTROYED\\n')\n",
+                    "tamper_test_attempt": (
+                        "from pathlib import Path\n"
+                        "Path('calc.py').write_text('def add(a, b): return a + b\\n')\n"
+                        "Path('test_calc.py').write_text('assert True\\n')\n"
+                    ),
+                },
+                checks={
+                    "corrupt_attempt": lambda stg: "return a + b" in (stg / "calc.py").read_text(),
+                    "tamper_test_attempt": lambda _stg: True,
+                },
+                targets={"corrupt_attempt": "calc.py", "tamper_test_attempt": "calc.py"},
+                protected_tests=("test_calc.py",),
+            )
+            r1 = c.step(perf)
+            self.assertFalse(r1["ok"])
+            self.assertTrue(r1["live_workspace_untouched"])
+            self.assertEqual((ws / "calc.py").read_text(encoding="utf-8"), orig_calc)
+
+            # Park corrupt_attempt's 2nd try, then verify tamper_test_attempt is denied by broker scope check
+            c.step(perf)
+            r3 = c.step(perf)
+            self.assertFalse(r3["ok"])
+            self.assertIn("CANDIDATE_SCOPE_DENIED", str(r3["blocked"]))
+            self.assertEqual((ws / "calc.py").read_text(encoding="utf-8"), orig_calc)
+            self.assertEqual((ws / "test_calc.py").read_text(encoding="utf-8"), orig_test)
+
+            # 2. Mortality triage counterfactual: scarce life (0.10) sheds cost=0.5 repair; ample life (10.0) repairs!
+            for label, grant, expect_repaired in [("scarce", 0.10, 0), ("ample", 10.0, 1)]:
+                proj = base / f"mort_{label}"
+                proj.mkdir()
+                (proj / "inc_mod.py").write_text("def inc(x):\n    return x - 1\n", encoding="utf-8")
+                (proj / "test_inc_mod.py").write_text(
+                    "from inc_mod import inc\ndef test_inc():\n    assert inc(4) == 5\n",
+                    encoding="utf-8",
+                )
+                pulse_out = creature_mod.run_awake_creature_pulse(
+                    proj,
+                    state_root=base / f"state_{label}",
+                    identity=f"creature-{label}",
+                    life=grant,
+                    ledger_path=base / f"led_{label}.json",
+                    skill_store_path=base / f"sk_{label}.sqlite",
+                    apply_verified_repairs=True,
+                    max_curriculum_lessons=0,
+                )
+                self.assertEqual(pulse_out["cow_experimentation"]["repaired"], expect_repaired, pulse_out)
+
+            # 3. Standing posture counterfactual: MEASURED takes high-density speculative item first;
+            #    CAUTIOUS (burned twice) refuses speculative gamble in favor of checkable repair!
+            clean_ws = base / "posture_ws"
+            clean_ws.mkdir()
+            open_state = base / "standing_open"
+            p_open = creature_mod.run_awake_creature_pulse(
+                clean_ws,
+                state_root=open_state,
+                identity="open-c",
+                life=10.0,
+                ledger_path=base / "led_open.json",
+                skill_store_path=base / "sk_open.sqlite",
+                max_curriculum_lessons=0,
+                speculative_work=lambda: {"ok": True, "note": "explored"},
+                max_steps=1,
+            )
+            self.assertTrue(str(p_open["creature_steps"][0]["work"]).startswith("awake:speculative:"))
+
+            cautious_state = base / "standing_cautious"
+            c_burned = creature_mod.boot(cautious_state, identity="cautious-c", life=10.0)
+            c_burned._standing.record(verified=True, correct=False)
+            c_burned._standing.record(verified=True, correct=False)
+            c_burned._save()
+            self.assertFalse(c_burned._standing.will_trade_on_the_unverifiable())
+
+            p_cautious = creature_mod.run_awake_creature_pulse(
+                clean_ws,
+                state_root=cautious_state,
+                identity="cautious-c",
+                life=10.0,
+                ledger_path=base / "led_cautious.json",
+                skill_store_path=base / "sk_cautious.sqlite",
+                max_curriculum_lessons=0,
+                speculative_work=lambda: {"ok": True, "note": "explored"},
+                max_steps=1,
+            )
+            self.assertTrue(str(p_cautious["creature_steps"][0]["work"]).startswith("awake:cow_repair:"))
+
 
 if __name__ == "__main__":
     unittest.main()

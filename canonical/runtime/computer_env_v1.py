@@ -256,6 +256,10 @@ def _help_signature(prog: str) -> str:
 
 
 def _help_load() -> None:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return
     global _HELP_LOADED
     if _HELP_LOADED:
         return
@@ -282,6 +286,10 @@ def _help_flush(force: bool = False) -> None:
     seconds before it says "23". It is a fact about the machine, so it is
     kept where the next process can find it.
     """
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     global _HELP_DIRTY, _HELP_SINCE_FLUSH
     if not _HELP_DIRTY:
         return
@@ -1142,6 +1150,26 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
                   wanted_override: str | None = None,
                   timeout: float = 30.0,
                   learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _perform_chain_impl(
+            gap,
+            cwd=cwd,
+            src_override=src_override,
+            wanted_override=wanted_override,
+            timeout=timeout,
+            learn=bool(learn and can_read_memory()),
+        )
+
+
+def _perform_chain_impl(gap: str, cwd: str | pathlib.Path | None = None,
+                        *, src_override: pathlib.Path | None = None,
+                        wanted_override: str | None = None,
+                        timeout: float = 30.0,
+                        learn: bool = True) -> dict[str, Any]:
     """Execute a snapshot-checkpointed multi-step CLI chain (e.g. directory/file -> .tar -> .tar.gz).
 
     `discover()` remains strictly single-step. Intermediate and final artifacts
@@ -1278,6 +1306,16 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
 
 def perform(gap: str, cwd: str | pathlib.Path | None = None,
             timeout: float = 30.0, *, learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _perform_impl(gap, cwd=cwd, timeout=timeout, learn=bool(learn and can_read_memory()))
+
+
+def _perform_impl(gap: str, cwd: str | pathlib.Path | None = None,
+                  timeout: float = 30.0, *, learn: bool = True) -> dict[str, Any]:
     """Learn it if it has to, then actually do it to the real file.
 
     discover() answers "which program could do this" -- knowledge. perform()
@@ -1343,6 +1381,18 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
 def discover(gap: str, budget: int = 120, seed: int = 11,
              seed_file: str | pathlib.Path | None = None,
              *, learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _discover_impl(gap, budget=budget, seed=seed, seed_file=seed_file,
+                              learn=bool(learn and can_read_memory()))
+
+
+def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
+                   seed_file: str | pathlib.Path | None = None,
+                   *, learn: bool = True) -> dict[str, Any]:
     """Find out which program reaches this goal by acting, not by being told.
 
     Nothing here is given a table of what any program does. The programs are
@@ -1657,8 +1707,15 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
                 break
             # once a move has been shown to produce the wrong bytes, a
             # recalled plan is not allowed to put it back
-            outcome = tl.drive(env, usable, is_goal=is_goal, budget=budget,
-                               seed=seed, use_transfer=(learn and not banned))
+            outcome = tl.drive(
+                env,
+                usable,
+                is_goal=is_goal,
+                budget=budget,
+                seed=seed,
+                use_transfer=(learn and not banned),
+                experience_mode=("learn_and_recall" if learn else "off"),
+            )
         except Exception as exc:  # noqa: BLE001
             return {"closed": False, "status": "CHANNEL_ERROR",
                     "detail": type(exc).__name__ + ":" + str(exc)[:200]}
@@ -1992,12 +2049,20 @@ def _query_cache_load() -> None:
 
 
 def _query_cache_get(kind: str, limit: int) -> list[dict[str, Any]] | None:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return None
     _query_cache_load()
     return _QUERY_CACHE.get((kind, limit))
 
 
 def _query_cache_put(kind: str, limit: int,
                      survivors: Sequence[dict[str, Any]]) -> None:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     _query_cache_load()
     _QUERY_CACHE[(kind, limit)] = list(survivors)
     try:
@@ -2549,7 +2614,27 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
 def answer_query(gap: str, input_file: str | pathlib.Path,
                  programs: Sequence[str] | None = None,
                  timeout: float = 15.0,
-                 min_agreement: int = 1) -> dict[str, Any]:
+                 min_agreement: int = 1,
+                 *,
+                 learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _answer_query_impl(
+            gap,
+            input_file,
+            programs=programs,
+            timeout=timeout,
+            min_agreement=min_agreement,
+        )
+
+
+def _answer_query_impl(gap: str, input_file: str | pathlib.Path,
+                       programs: Sequence[str] | None = None,
+                       timeout: float = 15.0,
+                       min_agreement: int = 1) -> dict[str, Any]:
     """Answer a goal that asks for a value by measuring the file.
 
     Refuses unless genuinely different programs, run on the real file, print

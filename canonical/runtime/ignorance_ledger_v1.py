@@ -72,6 +72,10 @@ def _key(what: str, why: str) -> str:
 
 
 def _load(path: str = DEFAULT_STATE) -> dict:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return {"schema": SCHEMA, "gaps": {}}
     p = Path(path)
     if not p.exists():
         return {"schema": SCHEMA, "gaps": {}}
@@ -86,6 +90,10 @@ def _load(path: str = DEFAULT_STATE) -> dict:
 
 
 def _save(state: dict, path: str = DEFAULT_STATE) -> None:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(state, indent=1, sort_keys=True), encoding="utf-8")

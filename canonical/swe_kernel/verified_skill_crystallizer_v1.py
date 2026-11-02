@@ -23,7 +23,7 @@ import shutil
 import sqlite3
 import tempfile
 import time
-from typing import Any, Callable, Mapping
+from typing import Any, Callable, Mapping, Sequence
 
 from canonical.swe_kernel import python_scoped_edit_rule_v1 as _PY_EDIT
 
@@ -488,13 +488,58 @@ def narrow_rule_at_apply_time(rule: Mapping[str, Any]) -> dict[str, Any] | None:
     # Keep one adjacent operand hole around the changed core when available so
     # e.g. `return ?id0 <= ?id1` -> `return ?id0 < ?id1` narrows to
     # `?id0 <= ?id1` -> `?id0 < ?id1` rather than an unanchored `<=` -> `<`.
+    # When the adjacent operand is a balanced parenthesized/bracketed compound
+    # sub-expression (e.g. `return (?id0 + ?num0) <= (?id1 - ?num0)`), abstract
+    # that unchanged compound group into a synthetic operand hole (`?id_lhs` /
+    # `?id_rhs`) so compound expressions narrow cleanly instead of losing holes.
     p_strip = p_common
+    lhs_synth: tuple[str, str] | None = None
     if p_strip > 0 and pat_nw[p_strip - 1][1][0] in _HOLE_KIND:
         p_strip -= 1
+    elif p_strip > 1 and pat_nw[p_strip - 1][1] in (("op", ")"), ("op", "]")):
+        close_tok = pat_nw[p_strip - 1][1][1]
+        open_tok = "(" if close_tok == ")" else "["
+        depth = 0
+        open_idx: int | None = None
+        for idx in range(p_strip - 1, -1, -1):
+            tk = pat_nw[idx][1]
+            if tk == ("op", close_tok):
+                depth += 1
+            elif tk == ("op", open_tok):
+                depth -= 1
+                if depth == 0:
+                    open_idx = idx
+                    break
+        if open_idx is not None:
+            grp_toks = [pat_nw[i][1] for i in range(open_idx, p_strip)]
+            if any(k in _HOLE_KIND for k, _ in grp_toks):
+                # Distinguish `return (a + 1) <= ...` (operand group) from `int(x <= hi)` (outer call wrapper)
+                if not (open_idx > 0 and pat_nw[open_idx - 1][1][0] == "ident"):
+                    lhs_synth = ("hole_id", "?id_lhs")
 
     s_strip = s_common
-    if s_strip > 0 and pat_nw[len(pat_nw) - s_strip][1][0] in _HOLE_KIND:
+    rhs_synth: tuple[str, str] | None = None
+    rhs_head_idx = len(pat_nw) - s_strip
+    if s_strip > 0 and pat_nw[rhs_head_idx][1][0] in _HOLE_KIND:
         s_strip -= 1
+    elif s_strip > 1 and pat_nw[rhs_head_idx][1] in (("op", "("), ("op", "[")):
+        open_tok = pat_nw[rhs_head_idx][1][1]
+        close_tok = ")" if open_tok == "(" else "]"
+        depth = 0
+        close_idx: int | None = None
+        for idx in range(rhs_head_idx, len(pat_nw)):
+            tk = pat_nw[idx][1]
+            if tk == ("op", open_tok):
+                depth += 1
+            elif tk == ("op", close_tok):
+                depth -= 1
+                if depth == 0:
+                    close_idx = idx
+                    break
+        if close_idx is not None:
+            grp_toks = [pat_nw[i][1] for i in range(rhs_head_idx, close_idx + 1)]
+            if any(k in _HOLE_KIND for k, _ in grp_toks):
+                rhs_synth = ("hole_id", "?id_rhs")
 
     if p_strip == 0 and s_strip == 0:
         return None
@@ -506,8 +551,14 @@ def narrow_rule_at_apply_time(rule: Mapping[str, Any]) -> dict[str, Any] | None:
     rep_start = rep_nw[p_strip][0]
     rep_end = rep_nw[len(rep_nw) - 1 - s_strip][0] + 1
 
-    new_pat = pat[pat_start:pat_end]
-    new_rep = rep[rep_start:rep_end]
+    new_pat = list(pat[pat_start:pat_end])
+    new_rep = list(rep[rep_start:rep_end])
+    if lhs_synth is not None:
+        new_pat = [lhs_synth, ("ws", " ")] + new_pat
+        new_rep = [lhs_synth, ("ws", " ")] + new_rep
+    if rhs_synth is not None:
+        new_pat = new_pat + [("ws", " "), rhs_synth]
+        new_rep = new_rep + [("ws", " "), rhs_synth]
     if new_pat == pat and new_rep == rep:
         return None
 
@@ -778,6 +829,10 @@ class VerifiedSkillStore:
         training_verifier: Callable | None = None,
         origin: str | None = None,
     ) -> dict[str, Any]:
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return {"crystallized": False, "reason": "MEMORY_POLICY_WRITE_DISABLED"}
         contract = normalize_contract(contract)
         training = None
         if contract is not None:
@@ -904,6 +959,7 @@ class VerifiedSkillStore:
         allow_scope_escalation: bool = False,
         allow_cross_language: bool = True,
         now_world_fingerprint: Mapping[str, Any] | None = None,
+        suspect_lines: Sequence[int] | None = None,
     ) -> dict[str, Any] | None:
         """Propose only within recorded applicability and actual current assurance.
 
@@ -921,6 +977,20 @@ class VerifiedSkillStore:
             raise ValueError('OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE')
         if allow_scope_escalation and (required_verification_kind != 'TEST_SUITE' or not scope_id):
             raise ValueError('SCOPE_ESCALATION_REQUIRES_SCOPED_TEST_SUITE')
+
+        from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
+
+        if not can_read_memory():
+            return None
+
+        eff_suspect_lines: list[int] = [
+            int(ln) for ln in (suspect_lines or ()) if isinstance(ln, int) and ln > 0
+        ]
+        if not eff_suspect_lines and isinstance(context, Mapping):
+            raw_sl = context.get("suspect_lines")
+            if isinstance(raw_sl, Sequence) and not isinstance(raw_sl, (str, bytes)):
+                eff_suspect_lines = [int(ln) for ln in raw_sl if isinstance(ln, int) and ln > 0]
+
         lang = language.lower()
         rules = _load_rules(self.db_path, lang)
 
@@ -960,17 +1030,22 @@ class VerifiedSkillStore:
         ) -> dict[str, Any] | None:
             conn = _connect(self.db_path)
             try:
-                with conn:
-                    # Verification can take seconds. Do not return an artifact
-                    # invalidated/deleted by another writer while it was running.
-                    conn.execute('BEGIN IMMEDIATE')
+                if can_write_memory():
+                    with conn:
+                        # Verification can take seconds. Do not return an artifact
+                        # invalidated/deleted by another writer while it was running.
+                        conn.execute('BEGIN IMMEDIATE')
+                        live = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (rule['skill_id'],)).fetchone()
+                        if live is None or json.loads(live[0]) != rule:
+                            return None
+                        conn.execute(
+                            "UPDATE crystallized_skills SET verified_hits = verified_hits + 1 WHERE skill_id = ?",
+                            (rule["skill_id"],),
+                        )
+                else:
                     live = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (rule['skill_id'],)).fetchone()
                     if live is None or json.loads(live[0]) != rule:
                         return None
-                    conn.execute(
-                        "UPDATE crystallized_skills SET verified_hits = verified_hits + 1 WHERE skill_id = ?",
-                        (rule["skill_id"],),
-                    )
             finally:
                 conn.close()
             return {
@@ -1012,8 +1087,9 @@ class VerifiedSkillStore:
                     invalidated_mid_run = True
                     break
 
-            # Stage 1B (`SCOPE_EXPRESSION` / PR-C2): apply-time context-stripped sub-expression
-            # narrowing. Stored rule remains context-anchored; weak verifiers (`CALLER_PREDICATE`,
+            # Stage 1B (`SCOPE_EXPRESSION` / PR-C2 + CST Minimal-Subtree): apply-time
+            # sub-expression narrowing & compound-operand CST hole generalization.
+            # Stored rule remains context-anchored; weak verifiers (`CALLER_PREDICATE`,
             # `SYNTAX`, `COMPILATION`) NEVER receive broadened patterns.
             if (
                 not invalidated_mid_run
@@ -1035,6 +1111,34 @@ class VerifiedSkillStore:
                                 return hit
                             invalidated_mid_run = True
                             break
+                if not invalidated_mid_run:
+                    try:
+                        from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+                            iter_cst_skeleton_candidates,
+                        )
+
+                        for candidate in iter_cst_skeleton_candidates(
+                            source_text,
+                            rule,
+                            target_language=lang,
+                            max_candidates=16,
+                            minimize=True,
+                            suspect_lines=eff_suspect_lines,
+                        ):
+                            if candidate is None or candidate in seen_candidates:
+                                continue
+                            seen_candidates.add(candidate)
+                            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                            if verification is not None:
+                                hit = _commit_verified_hit(
+                                    rule, candidate, verification, "SCOPE_EXPRESSION", "cst_minimal_subtree"
+                                )
+                                if hit is not None:
+                                    return hit
+                                invalidated_mid_run = True
+                                break
+                    except Exception:
+                        pass
 
             # Stage 2 (`SCOPE_OPERATOR` / `SCOPE_SEMANTIC` / `SCOPE_ALGEBRAIC`): unified scoped
             # TEST_SUITE generalization (single path; impossible under CALLER_PREDICATE).
@@ -1116,7 +1220,83 @@ class VerifiedSkillStore:
                     except Exception:
                         pass
 
-        # Stage 4: Cross-language portable lexical carry (`language_neutral_skill_bridge_v1`)
+        # Stage 4: Cross-language portable carry (`language_neutral_skill_bridge_v1` +
+        # 7-language Tree-Sitter CST skeleton `tree_sitter_cst_skill_skeleton_v1`).
+        # Supported under legacy unscoped `CALLER_PREDICATE` and under contract-checked
+        # `TEST_SUITE` (`ProjectTestOracle`), where stored contract & `scope_id` must match.
+        if allow_cross_language and required_verification_kind == 'TEST_SUITE' and scope_id:
+            try:
+                from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+                    recall_across_languages_cst,
+                )
+
+                def _valid_scoped_cross_rule(r: Mapping[str, Any]) -> bool:
+                    if r.get("state") not in (None, "ACTIVE"):
+                        return False
+                    if str(r.get("learned_scope") or "SCOPE_ALGEBRAIC") == "SCOPE_STATEMENT":
+                        return False
+                    rec = r.get("contract")
+                    if rec is None or r.get("record_version") != 1:
+                        return False
+                    if rec.get("verification_kind") != "TEST_SUITE":
+                        return False
+                    return applicable(rec, scope_id, context)
+
+                last_verified_by_cand: dict[str, dict[str, Any]] = {}
+
+                def _scoped_cst_verifier(cand: str) -> bool:
+                    v = evaluate(verifier, cand, "TEST_SUITE", scope_id)
+                    if v is not None:
+                        last_verified_by_cand[cand] = v
+                        return True
+                    return False
+
+                cst_hit = recall_across_languages_cst(
+                    self,
+                    source_text=source_text,
+                    target_language=lang,
+                    verifier=_scoped_cst_verifier,
+                    error_class=error_class,
+                    minimize=True,
+                    suspect_lines=eff_suspect_lines,
+                    rule_filter=_valid_scoped_cross_rule,
+                )
+                if cst_hit is None and error_class is not None:
+                    cst_hit = recall_across_languages_cst(
+                        self,
+                        source_text=source_text,
+                        target_language=lang,
+                        verifier=_scoped_cst_verifier,
+                        error_class=None,
+                        minimize=True,
+                        suspect_lines=eff_suspect_lines,
+                        rule_filter=_valid_scoped_cross_rule,
+                    )
+                if cst_hit is not None:
+                    cand = str(cst_hit["patched_source"])
+                    verification = last_verified_by_cand.get(cand) or evaluate(
+                        verifier, cand, "TEST_SUITE", scope_id
+                    )
+                    if verification is not None:
+                        src_lang = str(cst_hit.get("from_language") or "")
+                        sid = str(cst_hit.get("skill_id") or "")
+                        src_rules = [r for r in _load_rules(self.db_path, src_lang) if r.get("skill_id") == sid]
+                        if src_rules:
+                            committed = _commit_verified_hit(
+                                src_rules[0],
+                                cand,
+                                verification,
+                                "CROSS_LANGUAGE_CST_SKELETON",
+                                "cross_language_cst_minimal_subtree",
+                            )
+                            if committed is not None:
+                                committed["from_cross_language_memory"] = True
+                                committed["from_language"] = src_lang
+                                committed["to_language"] = cst_hit.get("to_language")
+                                return committed
+            except Exception:
+                pass
+
         if allow_cross_language and required_verification_kind == 'CALLER_PREDICATE' and not scope_id:
             try:
                 from canonical.swe_kernel import language_neutral_skill_bridge_v1 as _bridge
