@@ -1285,6 +1285,26 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # The noun phrase on its own.  "the contents of the file X" states the thing
     # wanted and the thing it is in, with no verb at all, and measured as routing
     # to a JSON file WRITER -- a write capability picked for a read request.
+    # A FACT ABOUT a file is not the file's contents.
+    #
+    # "Show the permissions of the file X" measured binding `cat`: the first
+    # alternation of the row below matches ANY "show ... file" sentence at all, so
+    # the answer was the whole file, certified pass=True, for a question not one
+    # byte of that output answers.  "Show the size of the file X" measured the
+    # same way.  This is the dominant defect shape -- a capability reporting a
+    # pass on a sentence it does not own -- and the row below already learned the
+    # lesson once, for "the lines containing ...", and scoped its guard to that
+    # one phrasing.
+    #
+    # `stat` is already on the read-only allowlist and `_known_programs` already
+    # returns it, so the answer was available all along; only the route was
+    # missing.  These rows sit BEFORE `cat` by this table's own stated rule: the
+    # narrower claim about a path comes before the general one.  Each is scoped to
+    # a noun that names a fact, never to a verb, so "show the file" is untouched.
+    (r"\bpermission(?:s)?\b|\bfile mode\b|\baccess mode\b",
+     "stat", lambda _n: ["-c", "%A"], 1),
+    (r"\bsize\b|\bhow (?:big|large)\b", "stat", lambda _n: ["-c", "%s"], 1),
+    (r"\bowner\b|\bwho owns\b", "stat", lambda _n: ["-c", "%U"], 1),
     # Not when the sentence asks WHICH lines.  "Show the lines containing text
     # in the file X" states a filter whose value cannot be recovered -- "text" is
     # an ordinary noun as often as it is a value -- and this row caught the
