@@ -166,11 +166,20 @@ def test_a_request_to_remove_a_line_is_still_refused_and_changes_nothing() -> No
     assert (world / "a.txt").read_bytes() == before
 
 
-def test_a_question_the_registry_cannot_answer_still_reaches_no_row() -> None:
+def test_a_question_no_row_reads_still_reaches_no_capability() -> None:
+    """The rule above supplies evidence; it does not manufacture a route.
+
+    A sentence that settles no command and shares its vocabulary with no row is
+    still a compilation gap -- the declaration path cannot reach it, because there
+    is nothing for it to declare.  (The copy that used to stand here is served
+    now, and is pinned in test_a_copy_names_its_destination_v1.)
+    """
     world = _world()
-    result = _ask("Make a copy of %s named %s" % (_rel(world / "a.txt"), _rel(world / "c.txt")))
+    result = _ask("Rot13 the file %s" % _rel(world / "a.txt"))
     assert result.get("pass") is not True, result
-    assert not (world / "c.txt").exists(), "a refused copy created the destination"
+    assert str(result.get("status")) == "FAIL__RAW_GOAL_COMPILATION_GAP", result.get("status")
+    assert result.get("compiled_capability_id") in (None, ""), result.get("compiled_capability_id")
+    assert (world / "a.txt").read_bytes() == b"alpha\nbeta\ngamma\n"
 
 
 def main() -> int:

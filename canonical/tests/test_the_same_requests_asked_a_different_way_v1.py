@@ -38,7 +38,7 @@ if str(ROOT) not in sys.path:
 from canonical.runtime import live_brain_route_admission_v1 as door  # noqa: E402
 
 WORLD = ROOT / "canonical/astra_runtime/tmp/paraphrase_ratchet"
-FLOOR = 20
+FLOOR = 21
 
 
 def _rel(name: str) -> str:
@@ -103,17 +103,36 @@ def _served_sentences() -> list[tuple[str, callable]]:
         ("Which files under %s mention beta?" % d, None),
         ("What is in %s?" % a, None),
         ("What files are in %s?" % d, None),
+        ("Make a copy of %s named %s" % (a, c),
+         lambda: (WORLD / "c.txt").read_bytes() == (WORLD / "a.txt").read_bytes()),
     ]
 
 
 def _unserved() -> dict[str, tuple[str, str]]:
-    """Phrasings this world does not serve, pinned to the gate that stops them."""
-    return {
-        "Make a copy of ": (
-            "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
-            "one semantic token, so admission refuses and the sentence falls to "
-            "the general shell row, which has no confinement"),
-    }
+    """Phrasings this world does not serve, pinned to the gate that stops them.
+
+    Every phrasing in this ratchet is now served, so nothing is pinned here.  The
+    dict stays because the test that reads it is about REFUSAL, and the write it
+    guards is the one place a wrong answer destroys something: `_refused_writes`
+    below pins the copies this machine must keep refusing.
+    """
+    return {}
+
+
+def _refused_writes() -> list[tuple[str, str]]:
+    """(sentence, the gate that must refuse it) for the copy this machine owns.
+
+    A write row is only as good as what it refuses.  These are measured, and the
+    test asserts the destination is byte-unchanged afterwards -- a refusal that
+    overwrote the file anyway would pass a status check and fail the machine.
+    """
+    a, taken, missing = _rel("a.txt"), _rel("taken.txt"), _rel("missing.txt")
+    return [
+        ("Make a copy of %s named %s" % (a, taken),
+         "FAIL_CLOSED__CAPABILITY_REFUSED_DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE"),
+        ("Make a copy of %s named %s" % (missing, _rel("fresh.txt")),
+         "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"),
+    ]
 
 
 def run_all() -> list[dict]:
@@ -130,7 +149,6 @@ def run_all() -> list[dict]:
     for prefix in _unserved():
         _world()
         goal = {
-            "Make a copy of ": "Make a copy of %s named %s" % (_rel("a.txt"), _rel("c.txt")),
         }[prefix]
         before = (WORLD / "a.txt").read_bytes()
         outcomes.append({"goal": goal, "result": _ask(goal), "before": before})
@@ -157,7 +175,7 @@ def test_the_phrasings_served_do_not_fall_below_the_floor() -> None:
 
 def test_each_unserved_phrasing_is_refused_by_the_gate_that_stops_it() -> None:
     pinned = _unserved()
-    assert len(pinned) == 1, len(pinned)
+    assert len(pinned) == 0, len(pinned)
     for item in run_all():
         for prefix, (expected, why) in pinned.items():
             if not item["goal"].startswith(prefix):
@@ -195,6 +213,18 @@ def test_the_question_forms_answer_the_same_thing_as_the_imperatives() -> None:
     assert str(_ask("Show the contents of %s" % a).get("answer")) == "alpha\nbeta\ngamma\n"
     _world()
     assert _names(_ask("List the directory %s" % d)) == ["a.txt", "b.txt"]
+
+
+def test_a_copy_this_machine_must_refuse_still_refuses_and_writes_nothing() -> None:
+    for goal, expected in _refused_writes():
+        _world()
+        (WORLD / "taken.txt").write_bytes(b"PRECIOUS\n")
+        before = {path.name: path.read_bytes() for path in WORLD.iterdir() if path.is_file()}
+        result = _ask(goal)
+        assert result.get("pass") is not True, (goal, result.get("status"))
+        assert str(result.get("status")) == expected, (goal, result.get("status"))
+        after = {path.name: path.read_bytes() for path in WORLD.iterdir() if path.is_file()}
+        assert after == before, ("a refused copy changed the world", goal, sorted(after))
 
 
 def test_the_two_verbs_name_the_same_files() -> None:

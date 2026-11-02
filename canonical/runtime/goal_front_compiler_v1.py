@@ -2273,7 +2273,16 @@ def _states_a_file_destination(goal: str) -> bool:
     and not a file rename.
     """
     text = str(goal or "")
-    stated = list(re.finditer(r"\b(?:to|into|onto)\s+([A-Za-z0-9_./-]+)", text, re.I))
+    # "NAMED <PATH>" / "CALLED <PATH>" states a destination without a
+    # preposition, and it is how an ordinary person asks for a copy.  Measured
+    # 2026-11-02: "Make a copy of <a> named <b>" was refused with a missing
+    # sandbox, and the reason was here -- `file.copy.v1` is a one-file-out
+    # writer, this predicate said the sentence states no destination, and the
+    # row was therefore not even a CANDIDATE.  The trailing `\s+` is what keeps
+    # the phrase from reading a FILENAME: "named.txt" is `named` followed by a
+    # dot, never by whitespace, so a destination called named.txt keeps binding
+    # exactly as it did.
+    stated = list(re.finditer(r"\b(?:to|into|onto|named|called)\s+([A-Za-z0-9_./-]+)", text, re.I))
     if len(stated) != 1:
         return False
     tail = text[stated[0].end():]

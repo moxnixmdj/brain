@@ -1084,7 +1084,15 @@ def _bare_stated_destination(goal, paths):
     * the destination is not the source and not a directory.
     """
     text = str(goal or "")
-    stated = list(re.finditer(r"\b(?:to|into|onto)\s+([A-Za-z0-9_./-]+)", text, re.I))
+    # "NAMED <PATH>", "CALLED <PATH>": A DESTINATION STATED WITHOUT A PREPOSITION.
+    # Measured 2026-11-02: "Make a copy of <a> named <b>" settled `cp <a> <b>` and
+    # `file.copy.v1` declares exactly that argv, but the sentence's destination
+    # was never bound -- the only grammar here was `to|into|onto` -- so the copy
+    # row was dropped as "not told both files", the ranking fell to a polyglot row
+    # that could not bind either, and an ordinary copy was refused with a missing
+    # sandbox.  The trailing `\s+` is what keeps the phrase from matching a
+    # FILENAME: "named.txt" is `named` followed by a dot, never by whitespace.
+    stated = list(re.finditer(r"\b(?:to|into|onto|named|called)\s+([A-Za-z0-9_./-]+)", text, re.I))
     if len(stated) != 1:
         return None
     match = stated[0]
