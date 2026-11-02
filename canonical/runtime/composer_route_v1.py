@@ -1304,7 +1304,26 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"(?![^\n]{0,120}?\blines?\b[^\n]{0,80}?\b(?:contain|includ|match|hold)\w*\b)"
      r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
      r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b"
-     r"|\bcontents?\b[^\n]{0,20}?\bof\b", "cat", _no_flags, 1),
+     r"|\bcontents?\b[^\n]{0,20}?\bof\b"
+     # "Read <path>", with no noun.  The word `file` above is the reason this
+     # sentence had no route at all: measured 2026-11-02, "Read
+     # <dir>/a.txt" settled NO argv and reached no capability, while "Show me
+     # the contents of <dir>/a.txt" was served -- the only difference was the
+     # noun.  A path is a stronger statement of the operand than the word
+     # "file" is, so a read verb followed directly by a repository path is a
+     # read of that path.  The path must contain a separator: a bare word after
+     # "read" is prose ("read carefully, then ..."), not an operand.
+     # The MASKED form matters: every path is blanked out before these patterns
+     # run, so a rule that spells the operand out never fires.  What survives is
+     # the sentence's opening verb, and `extract_paths` above has already proved
+     # there is at least one path.  Anchored to the START so that "read the report
+     # and write X" (two paths) is refused on arity rather than read as a cat.
+     # ...and only when the sentence asks for nothing else.  Measured without
+     # this: "Read the report and write it to out/r.json" bound `cat out/r.json`
+     # -- it would have printed the file it was about to write.  A sentence that
+     # asks for a write is not a read, whatever verb it opens with.
+     r"|^(?!.*\b(?:write|save|output|append|create|put|store)\b)"
+     r"\s*(?:read|print|display|cat)\b", "cat", _no_flags, 1),
 )
 
 # A command whose first operand is NOT a path but a value the sentence states.

@@ -21813,7 +21813,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-CONTENTS-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "3943a1c846da6c4bc1f7ca9e78c45124f53bd09d14ec6504eac7fa277eac039d",
+    "evidence_sha256": "832f44ea93a91d2d015168e4039f075344a4d4f023fcfc165428d79ddb467a70",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -21950,7 +21950,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIFF-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "a8483992c11a33b7632c052ca8b8176f8c440930a58f1b7433a869b2a2929254",
+    "evidence_sha256": "99657d2bb4575c40058145d14648115c94671c8d8447d8ad70a429ade0034f16",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22021,7 +22021,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "2fa298c7e7d48e5062d382d1047a129f88d1c398c389dee3eafd514eaa71d500",
+    "evidence_sha256": "4a44fb6c05c6a9576457122fb027917b91f79a50d4794d04870e04fd78884a53",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22093,7 +22093,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIRECTORY-SEARCH-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "d6a15c2354816c5706590c01c3b5f931f3f52a8207a1cb68efdd2a8187ce9aa4",
+    "evidence_sha256": "f10523a2df2497fac19f3326ce622fad5fd5be2ed7b7bdc5c12857e8b9a0ef91",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22165,7 +22165,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-LINE-COUNT-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "5e9c55dc3e52c3ce95cabee19b25317ccec3442d919bb2f079aaeaf4840b3e24",
+    "evidence_sha256": "9a176880c0cda3982e49c5e57066783acb5bc2cf7f5d7a6fdaa5c1c115c9eda4",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22301,7 +22301,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-REVERSED-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "b1a0f3b4a53fa92466db1793015e4475ed525d786b38c4eb6eaad46f58e31071",
+    "evidence_sha256": "c11e66bd9f3b09cbaba7e30f98338e3bec64dab549ef82c90411d4bd6db365ee",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22369,7 +22369,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-SORTED-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "ec9cb72f8aab3a153033a438fe16e64836923b18eda8afdc068b3d7838d4a9b1",
+    "evidence_sha256": "8703271d00a6410bcefa7f548412388907e29c45b06d8102276e08f864f12d02",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22441,7 +22441,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-STAT-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "d41a557b0b3cb9e21dd8103f4dd7dac6683eb2f9f821c01e00f561fd91487abb",
+    "evidence_sha256": "fec7e937cf1424bc012c4c33b3dcbfce74bfef29dc86a64f060bcf5cb76eda3e",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22511,7 +22511,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-WORD-FREQUENCY-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "e3eba52a6682900611c38d126bf2590488e06bb037a1621bc80a6b826e231558",
+    "evidence_sha256": "f08f3e9bf258151b13dbcfa961b3ed0e986092fa744fbaff610041e71e481999",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -31727,7 +31727,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "be31f6e2c62e26628180c527e801bab587328205ca452049a54e64e34d918012"
+  "value": "c9f2ce9b5c349fd132639d12b7be510d847d0c8ccf9f0218e81ba85332fb78a8"
  },
  "engines": [
   {
@@ -65330,7 +65330,7 @@
   "included_source_count": 1070,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "94ddfd4ea4ce902448706ec8509cad3428a57eb2d8dd7f5c65e254978407381a"
+  "source_tree_digest": "5a7df0b78bec775d56f9e90091d487f19444f0889fd67ac4b0863abeb6fafddc"
  },
  "research_index": [
   {
@@ -237810,7 +237810,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "8b0c3583a02cab00690f42f5b7e08b8eb1c94c252af4af8ed7ef16763b341227",
+   "sha256": "ea7682d3607bddbc2608b74d2cfb67126dfd9e243554fe0fd37f5b2a630fe80f",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 67,
    "symbols": [
@@ -250021,9 +250021,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "e6e24185c4b1ee2d295ba3e242996d636eb7b15f2396b7b919e96245b96e5a61",
+   "sha256": "518b76055a1d97bc0b0f4721e3dfc88e5b3b5cc633b1f68b7a76b548c891e928",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 83,
+   "symbol_count": 84,
    "symbols": [
     "_actions_of",
     "_after_key",

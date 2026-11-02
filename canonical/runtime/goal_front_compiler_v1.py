@@ -2923,6 +2923,53 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
+def _ranked_by_the_command_the_sentence_states(
+        goal: str, registry: Mapping[str, Mapping[str, Any]]
+) -> list[tuple[int, int, str, dict[str, Any]]]:
+    """The row that DECLARES the command this sentence states, if exactly one does.
+
+    Lexical ranking cannot select a row whose vocabulary the sentence does not
+    share, and "Read <path>" is the measurement: `composer_route.extract_argv`
+    settles `cat <path>` for it, `file.contents.v1` declares in the registry that
+    it computes exactly that argv in process, and the row was never offered
+    because it does not contain the word "read".  The sentence therefore reached
+    no capability and was refused for a sandbox it did not need.
+
+    This is a fallback, never a replacement: it runs only when the lexical
+    ranking produced NOTHING, and it declines when two rows declare the same
+    command -- a tie between rows is not evidence about which one was meant.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _composer_route
+        from canonical.runtime import declared_command_equivalence_v1 as _declared
+
+        argv = _composer_route.extract_argv(str(goal or ""))
+        if not argv:
+            return []
+        matches = []
+        for cid, entry in sorted(registry.items()):
+            if not isinstance(entry, Mapping):
+                continue
+            if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                continue
+            matched = _declared.matched_template(entry, argv)
+            if matched is None:
+                continue
+            matches.append((cid, entry, matched))
+        if len(matches) != 1:
+            return []
+        cid, entry, matched = matches[0]
+        return [(1, 0, cid, {
+            "matched_tokens": [],
+            "matched_provides": [],
+            "matched_keywords": [],
+            "declared_command": {"argv": list(argv), "template": matched.get("template")},
+            "selection_rule": "THE_SENTENCE_STATES_A_COMMAND_THIS_ROW_COMPUTES",
+        })]
+    except Exception:  # noqa: BLE001 - a failed match is simply no fallback
+        return []
+
+
 def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
@@ -3012,6 +3059,14 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     if selection_text != text:
         rules.append("F31_STATED_TEXT_VALUE_NOT_TASK_PROSE")
     ranked = ranked_candidates(selection_text, registry)
+    if not ranked:
+        # F32: the sentence STATES a command and exactly one row declares that it
+        # computes it.  Measured 2026-11-02: "Read <path>" states `cat <path>`,
+        # `file.contents.v1` declares it, and the word "read" is in neither the
+        # row's keywords nor its effects -- so the request reached no capability.
+        ranked = _ranked_by_the_command_the_sentence_states(selection_text, registry)
+        if ranked:
+            rules.append("F32_STATED_COMMAND_SELECTS_THE_ROW_THAT_COMPUTES_IT")
     best_cid = ranked[0][2] if ranked else None
     spool: set[str] = set()
     try:
