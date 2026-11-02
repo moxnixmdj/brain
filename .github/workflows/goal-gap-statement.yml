@@ -1,0 +1,57 @@
+name: goal-gap-statement
+# An unstated requirement must be said out loud, named, and never guessed.
+#
+# The goal compiler already fails closed with a structured report:
+# GoalCompilationFailure.detail is `<capability>:<slot>:<reason>`, for example
+#   http.json.fetch_from_state:source_json_path:0_type_compatible_existing_files_named
+# which states that the compiler looked for an existing file compatible with that
+# slot and found zero. That is OWNER_ACTIVE_GOAL_20261018_V1.md section 5
+# capability 4 -- "it says 'I don't have the data' out loud, then gets it, by
+# itself". Measured 2026-11-02, the first half already worked and NOTHING consumed
+# it; goal_gap_statement_v1 is the consumer.
+#
+# These tests pin the four things that make consuming it honest rather than
+# decorative:
+#   1. the missing slot is named, with the compiler's own reason carried through;
+#   2. no value is ever invented for a slot the compiler could not fill -- there is
+#      no field that could hold one;
+#   3. a refusal carrying detail=None blames the REPORT, not the goal, because
+#      saying "the goal is missing X" there would be inventing an X;
+#   4. a goal that COMPILES is not thereby endorsed -- measured, 3 of 12
+#      under-specified goals compiled onto the wrong row silently, including a JSON
+#      query routed to a cross-file repair writer.
+#
+# Negative control verified on the commit that adds this: inventing a slot value
+# fails 1 test, swallowing detail=None fails 2, endorsing a compiled selection
+# fails 1. Restored byte-identically afterwards; 9 pass.
+#
+# live_integrated_brain_v1.py is in the path filter deliberately: this module
+# parses that compiler's failure detail, so a change to the report format must
+# re-run these tests rather than silently invalidating the consumer.
+#
+# Authority NONE. No capability is executed, registered, promoted or credited here,
+# and no count moves.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/goal_gap_statement_v1.py
+      - canonical/tests/test_an_unstated_requirement_is_said_out_loud_v1.py
+      - canonical/runtime/live_integrated_brain_v1.py
+      - .github/workflows/goal-gap-statement.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: An unstated requirement is said out loud, named, and never guessed
+        run: python -m unittest canonical.tests.test_an_unstated_requirement_is_said_out_loud_v1 -v

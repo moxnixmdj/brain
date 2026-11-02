@@ -30956,12 +30956,12 @@
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
-  "source_index_modules": 1917
+  "source_index_modules": 1918
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c7b6e3c3242dd1385ee53a4e45c2172ee6d857e4c74510e17b609d6b4d63f5c1"
+  "value": "b7a6b399bd3b828f9d506631290a5658b9e2f0f482e3731cc8c7e1687c49fa84"
  },
  "engines": [
   {
@@ -246330,6 +246330,41 @@
     "v1": 1,
     "without_stated_text_value": 1,
     "word_plural_re": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/goal_gap_statement_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/goal_gap_statement_v1.py",
+   "sha256": "08ced68e1f7592144d49028239c358eb44ed5aae77f9e0ad6bcce4a8a90d3bab",
+   "summary": "State, out loud and in one place, what an under-specified goal is missing.",
+   "symbol_count": 4,
+   "symbols": [
+    "_contracts",
+    "_plain",
+    "state_the_gap",
+    "state_the_gaps"
+   ],
+   "terms": {
+    "contracts": 1,
+    "gap": 1,
+    "goal": 2,
+    "loud": 1,
+    "missing": 1,
+    "one": 1,
+    "out": 1,
+    "place": 1,
+    "plain": 1,
+    "state": 1,
+    "state_the_gap": 1,
+    "state_the_gaps": 1,
+    "statement": 1,
+    "under-specified": 1,
+    "v1": 1
    }
   },
   {
