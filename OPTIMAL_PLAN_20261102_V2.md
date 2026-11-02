@@ -1,5 +1,14 @@
 # The optimal plan — V2, 2026-11-02
 
+> **SUPERSEDED BY `OPTIMAL_PLAN_20261102_V3.md`.** V2 was ordered on the premise *"start the
+> creature"* (its PR0). While V2 was in flight, `main` advanced 15 commits and started the
+> creature independently — `canonical/runtime/creature_runtime_v1.py` (commit `8db962c`), a
+> seven-organ assembly I verified first-hand on `origin/main`: **11 tests pass** incl. OS-kill
+> survival; end-to-end it authors **112** obligations and closes **0**. PR0 is therefore DONE
+> on `main`, PR #6588 was closed as superseded, and the frontier has moved from *"start the
+> creature"* to *"the creature wants 112 things and can do 0."* V3 re-ranks the plan on that
+> corrected ground. Read V3.
+
 **Supersedes `OPTIMAL_PLAN_20261102_V1.md`, which was ordered on a false premise** (that
 sentience has no instrument here). See `CREATURE_NEVER_STARTED_20261102_V1.md` for the
 correction and the measurements.

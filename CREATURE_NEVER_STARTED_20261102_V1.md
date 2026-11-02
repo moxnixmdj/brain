@@ -1,5 +1,15 @@
 # The creature is built, tested, and never started — 2026-11-02
 
+> **SUPERSEDED — THIS DOCUMENT'S CORE CLAIM IS NOW FALSE.** While this analysis was in
+> flight, `main` advanced 15 commits and **started the creature independently**:
+> `canonical/runtime/creature_runtime_v1.py` (commit `8db962c`), a seven-organ assembly that
+> survives an OS kill. I verified it first-hand on `origin/main` @ `75eeed7`:
+> `test_the_creature_runs_unattended_v1.py` → **11 passed** (incl. the SIGKILL subprocess
+> survival test); end-to-end it authors **112** obligations and closes **0**. The premise
+> "never started" no longer holds. Read **`OPTIMAL_PLAN_20261102_V3.md`** for the corrected,
+> re-grounded verdict and plan. Kept only as the record of what was believed before `main`
+> moved.
+
 **Authority: NONE.** Zero capability, ownership, benchmark, terminal or sentience credit
 follows from this document. It corrects an error in the two documents written earlier today.
 

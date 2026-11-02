@@ -1,5 +1,15 @@
 # PR0 execution record — the creature is started — 2026-11-02
 
+> **SUPERSEDED — PR #6588 WAS CLOSED, NOT MERGED.** This record describes a three-organ
+> `creature_v1.py` built to start the creature. While it was in flight, `main` independently
+> landed a **superior seven-organ assembly** — `canonical/runtime/creature_runtime_v1.py`
+> (commit `8db962c`) — whose suite I ran first-hand on `origin/main` @ `75eeed7`: **11
+> passed**, including a real SIGKILL subprocess survival test. PR #6588 became redundant and
+> unmergeable (main recompiled the model artifact five times past this branch's base, so the
+> artifact conflicts), and its one candidate for residual value — a wired executor — did not
+> survive its own probe. It was **closed as superseded** with the evidence posted on the PR.
+> Read **`OPTIMAL_PLAN_20261102_V3.md`** for the corrected verdict and the re-ranked plan.
+
 **Authority: NONE.** Zero capability, ownership, benchmark, terminal or sentience credit
 follows from this document or from the code it records. A creature that ran is not a creature
 that proved anything. Spend $0. Model dependency 0.
