@@ -21,10 +21,13 @@ finished work intact, and it does work that no person assigned.
 It cannot prove the work is good. `perform` is injected for generic boards, and the default
 reports no executor. A narrowly typed catalog question has a built-in read-only fabric route and
 local consistency check; its target is supplied by the caller and the check is not independent
-verification or execution authority. Other board checks are still not preserved across restart.
+verification or execution authority. A single inspector gap can be selected and its structural
+check reconstructed across restart, but the parent cannot be completed without an admitted
+inspector verifier. Other generic board checks are still not preserved across restart.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import os
@@ -64,6 +67,7 @@ class Creature:
     _standing: S.Standing | None = field(default=None, repr=False)
     _board: list[M.Work] = field(default_factory=list, repr=False)
     _catalog_questions: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
+    _inspector_investigation: dict[str, Any] | None = field(default=None, repr=False)
     _closed: set[str] = field(default_factory=set, repr=False)
     # Blocked work is parked after two attempts. Retrying forever is the busywork failure mode the
     # self-authored obligations module exists to prevent; found by running this one, which attempted
@@ -98,6 +102,7 @@ class Creature:
                 wid = task[len('work:'):]
                 self._blocked[wid] = self._blocked.get(wid, 0) + 1
         self._load_catalog_question()
+        self._load_inspector_investigation()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
@@ -108,6 +113,8 @@ class Creature:
 
     def author_board(self, proposals: Iterable[A.Proposal], *, before: Mapping[str, Any],
                      done: Mapping[str, Any]) -> dict[str, Any]:
+        if self._inspector_investigation is not None:
+            raise ValueError('BOARD_WOULD_REPLACE_INSPECTOR_INVESTIGATION')
         if self._catalog_questions and any(work.id not in self._closed for work in self._board):
             raise ValueError('BOARD_WOULD_REPLACE_UNFINISHED_CATALOG_QUESTION')
         obligations, verdicts = A.author(proposals, before=before, done=done)
@@ -145,6 +152,19 @@ class Creature:
         self._board = [M.Work(id=row['id'], value=1.0, cost=1.0)]
         self._restore_catalog_history(row)
 
+    @staticmethod
+    def _catalog_completion_matches(question: Mapping[str, Any], row: Mapping[str, Any]) -> bool:
+        info = row.get('information')
+        return (row.get('task') == 'work:' + question['id']
+                and row.get('check_id') == question['check_id']
+                and row.get('ok') is True and isinstance(info, dict)
+                and info.get('capability_id') == question['capability_id']
+                and type(info.get('listed')) is bool
+                and info.get('scope') == 'CATALOG_LISTING_ONLY'
+                and info.get('parent_id') == question.get('parent_id')
+                and info.get('execution_authority') is False
+                and info.get('independent_verification') is False)
+
     def _restore_catalog_history(self, question: Mapping[str, Any]) -> None:
         """Do not confuse an older generic work id with a typed completion."""
         qid = question['id']
@@ -153,13 +173,7 @@ class Creature:
         for row in self._self.state.completed or []:
             if row.get('task') != 'work:' + qid or row.get('check_id') != question['check_id']:
                 continue
-            info = row.get('information')
-            if (row.get('ok') is True and isinstance(info, dict)
-                    and info.get('capability_id') == question['capability_id']
-                    and type(info.get('listed')) is bool
-                    and info.get('scope') == 'CATALOG_LISTING_ONLY'
-                    and info.get('execution_authority') is False
-                    and info.get('independent_verification') is False):
+            if self._catalog_completion_matches(question, row):
                 self._closed.add(qid)
             elif row.get('ok') is not True:
                 self._blocked[qid] = self._blocked.get(qid, 0) + 1
@@ -172,6 +186,8 @@ class Creature:
         """
         if self._self is None:
             raise RuntimeError('BOOT_NOT_CALLED')
+        if self._inspector_investigation is not None:
+            raise ValueError('CATALOG_QUESTION_WOULD_REPLACE_INSPECTOR_INVESTIGATION')
         row = self._catalog_spec(self.identity, capability_id)
         qid = row['id']
         if any(work.id != qid and work.id not in self._closed for work in self._board):
@@ -206,12 +222,148 @@ class Creature:
         return dict(row) if row is not None else None
 
     def abandon_catalog_question(self, question_id: str) -> dict[str, Any]:
+        if self._inspector_investigation is not None:
+            raise ValueError('INSPECTOR_INVESTIGATION_OWNS_CHILD')
         if question_id not in self._catalog_questions:
             raise ValueError('CATALOG_QUESTION_UNKNOWN')
         (self.root / 'catalog_question.json').unlink(missing_ok=True)
         self._catalog_questions = {}
         self._board = []
         return {'status': 'ABANDONED_NOT_COMPLETED', 'id': question_id}
+
+    @classmethod
+    def _inspector_spec(cls, identity: str, capability_id: str, cost: float) -> dict[str, Any]:
+        catalog = cls._catalog_spec(identity, capability_id)  # validates the ID
+        if isinstance(cost, bool) or cost not in (0.5, 1.0):
+            raise ValueError('INSPECTOR_COST_INVALID')
+        parent_id = 'inspector:' + capability_id
+        parent = {'id': parent_id, 'capability_id': capability_id,
+                  'claim': capability_id + ' has a registered inspector that refuses a decoy',
+                  'source': 'capability registry vs registered inspectors',
+                  'check_id': 'INSPECTED_VERIFIED_SLOT_V1', 'value': 1.0, 'cost': float(cost),
+                  'independent_verification': False, 'execution_authority': False}
+        child = dict(catalog)
+        child['id'] = 'inspector-catalog:' + hashlib.sha256(parent_id.encode('ascii')).hexdigest()
+        child['parent_id'] = parent_id
+        return {'schema': 'BRAIN_CREATURE_INSPECTOR_INVESTIGATION_V1', 'identity': identity,
+                'parent': parent, 'child': child}
+
+    def _install_inspector_investigation(self, investigation: dict[str, Any]) -> None:
+        parent = investigation['parent']
+        child = investigation['child']
+        self._inspector_investigation = investigation
+        self._catalog_questions = {child['id']: child}
+        # A previous generic performer cannot satisfy the typed parent. There is
+        # currently no admitted parent executor/acceptance path.
+        self._closed.discard(parent['id'])
+        self._blocked.pop(parent['id'], None)
+        self._restore_catalog_history(child)
+        self._board = [M.Work(id=parent['id'], value=parent['value'], cost=parent['cost']),
+                       M.Work(id=child['id'], value=1.0, cost=0.25)]
+
+    def _load_inspector_investigation(self) -> None:
+        self._inspector_investigation = None
+        path = self.root / 'inspector_investigation.json'
+        if not path.exists() and not path.is_symlink():
+            return
+        try:
+            if path.is_symlink() or path.stat().st_size > 8192 or self._catalog_questions:
+                raise ValueError('invalid')
+            row = json.loads(path.read_text(encoding='utf-8'))
+            parent = row.get('parent') if isinstance(row, dict) else None
+            if not isinstance(parent, dict) or row != self._inspector_spec(
+                    self.identity, parent.get('capability_id'), parent.get('cost')):
+                raise ValueError('invalid')
+        except (OSError, ValueError, TypeError) as exc:
+            raise ValueError('INSPECTOR_INVESTIGATION_INVALID') from exc
+        self._install_inspector_investigation(row)
+
+    def author_inspector_investigation(self) -> dict[str, Any]:
+        """Choose a real admitted inspector gap and derive one information goal.
+
+        The parent condition is preserved as a typed structural check; it does
+        not itself prove an inspector exists or rejects a decoy. No callable or
+        executable code is loaded from the persisted state.
+        """
+        if self._self is None or self._life is None:
+            raise RuntimeError('BOOT_NOT_CALLED')
+        if self._inspector_investigation is not None or any(
+                work.id not in self._closed for work in self._board):
+            raise ValueError('INSPECTOR_INVESTIGATION_WOULD_REPLACE_UNFINISHED_WORK')
+        ids, inspected = _registry_and_inspectors()
+        proposals, before, done = A.capability_gap_proposals(ids, inspected)
+        admitted, _ = A.author(proposals, before=before, done=done)
+        work = M.choose_next(self._life, [M.Work(id=o.id, value=o.value, cost=o.cost)
+                                         for o in admitted])
+        if work is None:
+            raise ValueError('NO_AFFORDABLE_INSPECTOR_GAP')
+        proposal = next(p for p in proposals if p.id == work.id)
+        if not work.id.startswith('inspector:'):
+            raise ValueError('INSPECTOR_GAP_ID_INVALID')
+        cid = work.id[len('inspector:'):]
+        investigation = self._inspector_spec(self.identity, cid, work.cost)
+        parent = investigation['parent']
+        if (proposal.claim != parent['claim'] or proposal.source != parent['source']
+                or proposal.value != parent['value'] or proposal.cost != parent['cost']):
+            raise ValueError('INSPECTOR_GOAL_CONTRACT_DRIFT')
+        child = investigation['child']
+        child_proposal = A.Proposal(id=child['id'], claim=child['claim'], source=child['source'],
+            check=lambda world: (world.get('answers') or {}).get(child['id']) == 'answered')
+        accepted, _ = A.author([child_proposal], before={'answers': {child['id']: 'pending'}},
+                               done={'answers': {child['id']: 'answered'}})
+        if len(accepted) != 1:
+            raise ValueError('INSPECTOR_INFORMATION_GOAL_NOT_ADMITTED')
+        # Never leave two competing typed boards; remove an already-completed
+        # standalone catalog question before writing this single typed record.
+        (self.root / 'catalog_question.json').unlink(missing_ok=True)
+        name = None
+        try:
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=self.root,
+                                             prefix='.inspector-investigation-', delete=False) as handle:
+                name = handle.name
+                json.dump(investigation, handle, sort_keys=True)
+                handle.flush()
+                os.fsync(handle.fileno())
+            os.replace(name, self.root / 'inspector_investigation.json')
+        finally:
+            if name is not None:
+                pathlib.Path(name).unlink(missing_ok=True)
+        self._install_inspector_investigation(investigation)
+        return copy.deepcopy(investigation)
+
+    def inspector_investigation(self) -> dict[str, Any] | None:
+        return copy.deepcopy(self._inspector_investigation)
+
+    def inspector_information(self) -> dict[str, Any] | None:
+        """Retrieve the last locally checked child observation, not a fresh fact."""
+        if self._inspector_investigation is None or self._self is None:
+            return None
+        child = self._inspector_investigation['child']
+        for row in reversed(self._self.state.completed or []):
+            if self._catalog_completion_matches(child, row):
+                return {'question_id': child['id'], 'parent_id': child['parent_id'],
+                        'observation': copy.deepcopy(row['information']),
+                        'recorded_at': row.get('ended_at'),
+                        'freshness': 'HISTORICAL_NOT_REVALIDATED'}
+        return None
+
+    def inspector_slot_check(self, world: Mapping[str, Any]) -> bool:
+        """Original structural slot predicate, not proof of a real inspector."""
+        if self._inspector_investigation is None:
+            raise ValueError('INSPECTOR_INVESTIGATION_UNKNOWN')
+        slot = world.get('inspected') if isinstance(world, Mapping) else None
+        return isinstance(slot, Mapping) and slot.get(
+            self._inspector_investigation['parent']['capability_id']) == 'verified'
+
+    def abandon_inspector_investigation(self, parent_id: str) -> dict[str, Any]:
+        if (self._inspector_investigation is None
+                or self._inspector_investigation['parent']['id'] != parent_id):
+            raise ValueError('INSPECTOR_INVESTIGATION_UNKNOWN')
+        (self.root / 'inspector_investigation.json').unlink(missing_ok=True)
+        self._inspector_investigation = None
+        self._catalog_questions = {}
+        self._board = []
+        return {'status': 'ABANDONED_NOT_COMPLETED', 'id': parent_id}
 
     def _answer_catalog_question(self, work: M.Work) -> dict[str, Any]:
         from canonical.runtime import live_integrated_brain_v1 as live
@@ -232,6 +384,8 @@ class Creature:
             return {'ok': False, 'verified': None, 'correct': None, 'blocked': 'CATALOG_MEMBERSHIP_MISMATCH'}
         info = {'capability_id': cid, 'listed': listed, 'scope': 'CATALOG_LISTING_ONLY',
                 'execution_authority': False, 'independent_verification': False}
+        if 'parent_id' in question:
+            info['parent_id'] = question['parent_id']
         return {'ok': True, 'verified': None, 'correct': None, 'information': info, 'value': work.value}
 
     def remaining_work(self) -> list[M.Work]:
@@ -261,6 +415,12 @@ class Creature:
         work = M.choose_next(self._life, self.remaining_work())
         if work is None:
             return {"status": "IDLE", "reason": "nothing affordable on its own board"}
+        if (self._inspector_investigation is not None
+                and work.id == self._inspector_investigation['parent']['id']):
+            # The original slot predicate cannot verify a real inspector or its
+            # decoy test. An injected performer's success flag is not evidence.
+            return {'status': 'WAITING_FOR_INSPECTOR_VERIFIER', 'work': work.id,
+                    'reason': 'NO_ADMITTED_INSPECTOR_ACCEPTANCE_PATH'}
 
         task = f"work:{work.id}"
         self._self.begin(task, value=work.value, cost=work.cost)
@@ -305,7 +465,8 @@ class Creature:
         for i in range(cycles):
             offer = offers[i % len(offers)] if offers else None
             rows.append(self.step(perform, offer=offer))
-            if rows[-1]["status"] in ("ENDED", "REFUSED_AN_OFFER_THAT_WOULD_END_IT"):
+            if rows[-1]["status"] in ("ENDED", "REFUSED_AN_OFFER_THAT_WOULD_END_IT",
+                                      "WAITING_FOR_INSPECTOR_VERIFIER"):
                 break
         return {**self.report(), "steps": rows}
 
