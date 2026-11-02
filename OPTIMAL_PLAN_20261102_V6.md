@@ -101,11 +101,58 @@ Measured baseline to beat: recall 2/5 -> 5/5; misapplications 0 (sound) / 3 (wea
 governs generalizing *beyond recorded scope*; this governs pattern breadth *within*
 one recorded lesson.
 
-**Open gap, disclosed:** C0b/C0c measured `apply_crystallized_code_rule` directly.
-The end-to-end store path (`crystallize_code_fix` -> `recall_and_apply_verified`)
-is still unmeasured — C0's L2 teaching step failed on a harness bug (section 3).
-That must be measured green before a PR opens, or the numbers above describe a
-layer the real path may never reach.
+**Gap CLOSED by end-to-end measurement (probes D and E).** C0b/C0c had measured
+`apply_crystallized_code_rule` directly with a hand-built rule; the real path is
+`crystallize_code_fix` -> store -> `recall_and_apply_verified`. Measured through
+the real API with a name-agnostic oracle (C0's teaching failure was that harness
+bug, section 3, not a system limit -- teaching now returns `crystallized=True`):
+
+| path | bug cases recalled | misapplications |
+|---|---|---|
+| as taught, context-anchored | 2/5 | 0 |
+| narrowed, sound verifier | **5/5** | **0** |
+| narrowed, weak verifier | 5/5 | **3** |
+
+The mechanism survives end-to-end, and the stored pattern really is
+context-anchored: `[['kw','return'],['ws',' '],['hole_id','?id0'], ...]`.
+
+**This changes where the change goes.** Probe D simulated narrowing at TEACH time
+-- storing the narrow pattern. That variant is UNSAFE, and is the 3-misapplication
+row above: a broad rule in the store is inherited by every caller, weak ones
+included. PR-C2 must broaden at APPLY time and keep the stored pattern
+context-anchored.
+
+**The gate is enforced by `evaluate()`, not by convention** (probe E):
+
+| caller | required_kind | result |
+|---|---|---|
+| weak (bool; accepts anything that compiles) | `CALLER_PREDICATE` | 4/9 recalled, **2 wrong** |
+| the same weak callback | `TEST_SUITE` | **0/9 recalled** |
+| sound (each case's own semantics) | `CALLER_PREDICATE` | 2/9 recalled, 0 wrong |
+
+A bool return is auto-demoted to `CALLER_PREDICATE` and then rejected for kind
+mismatch, so a weak caller cannot escalate into the gate that would admit broad
+patterns. Measured 0/9, not assumed.
+
+**Corroborating code fact:** `_load_rules` is
+`SELECT pattern_json ... WHERE domain='swe_code_repair' AND language=? ORDER BY
+verified_hits DESC LIMIT 128` -- it has **no `skeleton_fp` filter**. That is
+code-level proof PR-C' was dead, independent of the behavioural measurement: the
+key was never the retrieval gate.
+
+**Pre-existing exposure on `main`, found by the same probe and NOT caused by
+PR-C2:** with today's context-anchored rule and a weak caller verifier, recall
+already misapplies 2/9. `def at_most(x, hi): return x <= hi` and
+`def above(x, lo): return lo <= x` both match the pattern taught from
+`return x <= hi`, and both are silently rewritten to `<`. That is the L1/L4
+collision V5 reported, now measured as a real misapplication through the real
+path. A sound verifier rejects both (0 wrong). Recorded because PR-C2 widens the
+match surface, which is precisely why the gate must sit at apply time.
+
+**Still unmeasured, and required before a PR opens:** that a genuinely
+`TEST_SUITE`-backed verifier -- the repo's own `ProjectTestOracle` -- clears the
+gate and lifts recall to 5/5. Forging `test_count`, `returncode` or the
+measurement hashes to force the gate open would prove nothing, so it was not done.
 
 ### The authoring fork — the owner's decision, unchanged
 
