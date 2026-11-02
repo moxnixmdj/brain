@@ -1,0 +1,307 @@
+# The optimal plan — V6, after the retrieval-key thesis was measured dead
+
+Supersedes `OPTIMAL_PLAN_20261102_V5.md`, whose #1 ranked item (PR-C′, a
+shape-invariant retrieval key) this document refutes by measurement.
+
+Authority: NONE. No capability, ownership, benchmark, terminal or sentience credit
+follows. `truth.achieved` stays `false`. Spend $0. Model dependency 0.
+
+---
+
+## 0. Why V5 was wrong, in one line
+
+V5 claimed cross-shape transfer 0/36 was caused by the **retrieval key**
+(`skeleton_fp` hashing surrounding tokens). Measured false. The rule cannot even
+**match** another shape, so no key change can help: recall would find a rule that
+still fails to apply.
+
+---
+
+## 1. The measurement chain (C0 -> C0b -> C0c)
+
+Every step carried an oracle-validity check, a positive control and a negative
+control. Two faulty oracles were caught by those guards before producing a
+number, and are recorded in section 3.
+
+### C0 — does the taught rule's TEXT transfer?
+
+`apply_crystallized_code_rule(shape1_rule, other_shape_buggy)` on the lesson
+`<= hi` -> `< hi`, five shapes, each with its own name-agnostic semantic oracle:
+
+| shape | result |
+|---|---|
+| `return` | matched, passes (positive control, self) |
+| `if` | **None — no match** |
+| `while` | **None — no match** |
+| `and` | **None — no match** |
+| `method` | matched, passes — but shares `skeleton_fp` `2d75d14e021e2696` **and** `skill_id` `skill_c931b33003f95b6d` with `return`, so it is the *same rule*, not a transfer |
+
+**2/5, and really 1/5.** The cause is visible in the compiled pattern:
+
+```
+[('kw','return'),('ws',' '),('hole_id','?id0'),('ws',' '),('op','<='),('ws',' '),('hole_id','?id1')]
+```
+
+Anti-unification kept `return` — incidental context — as part of the pattern. The
+rule is anchored to the syntactic position it was taught in.
+
+### C0b — so is the blocker the KEY or the PATTERN?
+
+Strip the context, keep only the transformation
+(`?id0 <= ?id1` -> `?id0 < ?id1`), apply to the same five shapes:
+
+| pattern | transfers |
+|---|---|
+| taught (context kept) | 2/5 |
+| narrow (context stripped) | **5/5** — each passes its own independent oracle |
+
+**PR-C′ is dead.** Retrieval was never the bottleneck. The lever is pattern
+narrowing, a different change to a different function.
+
+### C0c — precision, the number C0b did not measure
+
+A bare `<=` pattern matches *every* `<=`, including correct ones. Nine cases:
+five where `<=` is a bug, four where `<=` is correct and must survive. All nine
+oracles validated first (buggy fails, correct passes).
+
+- **bare match rate: 8/9** — it rewrites 3 of the 4 correct sources
+- **sound verifier: 5 accepted correct, 0 accepted wrong, 4 rejected**
+- **weak verifier (`CALLER_PREDICATE` failure mode, accepts anything that
+  compiles): 5 accepted correct, 3 ACCEPTED WRONG** — `at_most`,
+  `inclusive_loop`, `lower_bound` all silently corrupted
+
+**Precision is a property of the verifier, not of the pattern.** This is the same
+architecture seen at `verified_skill_crystallizer_v1.py:859` — retrieve broadly,
+verify narrowly — and it is why the repo already states that boolean callbacks
+never establish `TEST_SUITE` or whole-task correctness.
+
+---
+
+## 2. The plan
+
+### PR-C2 — pattern narrowing, gated on verification kind
+
+Admit context-stripped (broad) patterns **only** where the verifier is strong
+enough to catch a misapplication:
+
+- `TEST_SUITE` → broad pattern admitted (measured: 0 misapplications, 5/5 recall)
+- `CALLER_PREDICATE` / `SYNTAX` / `COMPILATION` → context-anchored pattern only
+  (measured: 3 misapplications if broadened)
+
+`required_verification_kind` is already in scope at the apply site, so this needs
+no new plumbing.
+
+**Negative control, and the test that keeps this from being a weakening flood:**
+a `CALLER_PREDICATE` verifier must NOT receive the broad pattern. If that test
+can be deleted without anything failing, the gate is decoration.
+
+Measured baseline to beat: recall 2/5 -> 5/5; misapplications 0 (sound) / 3 (weak).
+
+`allow_operator_generalization=False` stays untouched — different axis. That guard
+governs generalizing *beyond recorded scope*; this governs pattern breadth *within*
+one recorded lesson.
+
+**Gap CLOSED by end-to-end measurement (probes D and E).** C0b/C0c had measured
+`apply_crystallized_code_rule` directly with a hand-built rule; the real path is
+`crystallize_code_fix` -> store -> `recall_and_apply_verified`. Measured through
+the real API with a name-agnostic oracle (C0's teaching failure was that harness
+bug, section 3, not a system limit -- teaching now returns `crystallized=True`):
+
+| path | bug cases recalled | misapplications |
+|---|---|---|
+| as taught, context-anchored | 2/5 | 0 |
+| narrowed, sound verifier | **5/5** | **0** |
+| narrowed, weak verifier | 5/5 | **3** |
+
+The mechanism survives end-to-end, and the stored pattern really is
+context-anchored: `[['kw','return'],['ws',' '],['hole_id','?id0'], ...]`.
+
+**This changes where the change goes.** Probe D simulated narrowing at TEACH time
+-- storing the narrow pattern. That variant is UNSAFE, and is the 3-misapplication
+row above: a broad rule in the store is inherited by every caller, weak ones
+included. PR-C2 must broaden at APPLY time and keep the stored pattern
+context-anchored.
+
+**The gate is enforced by `evaluate()`, not by convention** (probe E):
+
+| caller | required_kind | result |
+|---|---|---|
+| weak (bool; accepts anything that compiles) | `CALLER_PREDICATE` | 4/9 recalled, **2 wrong** |
+| the same weak callback | `TEST_SUITE` | **0/9 recalled** |
+| sound (each case's own semantics) | `CALLER_PREDICATE` | 2/9 recalled, 0 wrong |
+
+A bool return is auto-demoted to `CALLER_PREDICATE` and then rejected for kind
+mismatch, so a weak caller cannot escalate into the gate that would admit broad
+patterns. Measured 0/9, not assumed.
+
+**Corroborating code fact:** `_load_rules` is
+`SELECT pattern_json ... WHERE domain='swe_code_repair' AND language=? ORDER BY
+verified_hits DESC LIMIT 128` -- it has **no `skeleton_fp` filter**. That is
+code-level proof PR-C' was dead, independent of the behavioural measurement: the
+key was never the retrieval gate.
+
+**Pre-existing exposure on `main`, found by the same probe and NOT caused by
+PR-C2:** with today's context-anchored rule and a weak caller verifier, recall
+already misapplies 2/9. `def at_most(x, hi): return x <= hi` and
+`def above(x, lo): return lo <= x` both match the pattern taught from
+`return x <= hi`, and both are silently rewritten to `<`. That is the L1/L4
+collision V5 reported, now measured as a real misapplication through the real
+path. A sound verifier rejects both (0 wrong). Recorded because PR-C2 widens the
+match surface, which is precisely why the gate must sit at apply time.
+
+**The precondition is now measured, and banked.** The gate was cleared with real
+evidence, not forged evidence: the tests build a project in a temp directory
+(`bounds.py` plus a unittest suite asserting the upper bound is exclusive) and
+verify candidates through the repo's own `ProjectTestOracle`, which copies the
+tree, runs a real subprocess, and re-manifests the original to prove it was
+untouched.
+
+| measurement | result |
+|---|---|
+| buggy source vs the real suite | `passed=False`, `test_count=2`, `returncode=1`, candidate hash matches |
+| fixed source | `passed=True`, `test_count=2`, `returncode=0` |
+| `evaluate()` at `TEST_SUITE` | real oracle **admitted**; `lambda c: True` **refused** |
+| compiling-but-wrong (`return True`) | `passed=False`, `returncode=1`, **refused** -- a gate that only rejected syntax errors would admit it |
+| scoped teach, then scoped recall | `crystallized=True`; recall patches to the fixed source, `kind=TEST_SUITE` |
+
+So the gate PR-C2 depends on is **real and satisfiable without forgery**. It is
+now a repo test (`test_a_candidate_that_fails_the_suite_is_refused_v1.py`, 7
+tests) that CI runs in `capability-transfer-governance.yml`. Before this, **no
+workflow ran any crystallizer or contract test**, so the gate was unenforced --
+a gate nothing executes is half-banked.
+
+**What is still not measured, and cannot be until PR-C2 exists:** that apply-time
+broadening lifts recall from 2/5 to 5/5 *while gated at `TEST_SUITE`*, and that a
+weak verifier still receives the context-anchored pattern and never the broad one.
+That is the PR's own success criterion, not a precondition for opening it.
+
+### The authoring fork -- retired: current law already decides it
+
+**This section was wrong three times, and the third correction is the one that
+matters.** V5 priced branch (b) as `MODEL_DEPENDENCE_AUDIT = 0`. Commit `339acee`
+"corrected" that by reading `check_model_dependence()` and concluding the price was
+lower. Both reasoned from an **instrument**. The authority is the law, and the law
+says something neither claimed.
+
+`execution_guard.agent_orientation_check_v1.is_current_law` over `canonical/laws/`
+reports **25 current, 34 superseded**. Both model laws this document and `339acee`
+leaned on are **superseded**: `MODEL_NON_DEPENDENCE_LAW_V1.md` and
+`MODEL_PROVIDER_RESILIENCE_AND_CAPABILITY_OWNERSHIP_LAW_V2.md`.
+
+What is current:
+
+**`FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md`** (CANONICAL /
+MANDATORY / FAIL-CLOSED): capability, benchmark, acceptance, ownership, promotion,
+real-task or terminal credit may be claimed *only when the producer cognition path
+has zero dependencies on another general-purpose model* -- and "local, remote,
+open-weight, copied, cached, vendored, self-hosted, wrapped, renamed, or
+content-addressed models are all model dependencies."
+
+**`CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md`** (same status) draws the
+line causally, not lexically: renaming a model call as distillation, transfer,
+retrieval, substrate, planner or local inference does not change its class. A route
+is FORBIDDEN when a donor model stays load-bearing for reasoning, planning,
+synthesis, judgment, tool choice, recovery or code generation **on the future task
+being credited**.
+
+So the fork as framed here does not exist:
+
+| as framed | under current law |
+|---|---|
+| (a) keep the demonstrator | permitted -- but 0/112 is not the objective, so it forfeits nothing |
+| (b) model-driven generator at **solve** time | **PROHIBITED, not priced.** Zero credit, whatever the audit reports |
+| (c) donor in a bounded **acquisition** phase, then deleted | **expressly allowed** -- the route nobody here proposed |
+
+`339acee` is corrected by this section. The audit's narrow scan scope is true but
+**irrelevant**: a solve-time generator cannot be made creditable by sitting outside
+three scanned files. That is exactly what condition 12 (FAIL-CLOSED AMBIGUITY) and
+the "renaming does not change its class" clause exist to prevent. The instinct in
+`339acee` -- that a green produced by placement would be a defect, not a result --
+was right, and was attached to the wrong authority.
+
+**Route (c) and its twelve conditions.** A donor may create a new Brain-owned
+mechanism during acquisition: distillation, behavioral imitation, procedure
+recovery, **mechanistic reimplementation**, module/circuit extraction, verified
+composition. Promotion then requires ALL twelve: phase separation; a Brain-owned
+operative artifact with provenance; zero donor runtime dependency; zero external
+model cognition dependency; **donor-deletion proof**; **independent qualification on
+frozen held-out evidence not used for teaching, selection, tuning, pruning or
+minimization**; **causal ownership by ablation**; full dependency closure; **no
+answer leakage**; reconstructibility; attribution; fail-closed ambiguity.
+
+This bears directly on the real frontier, which
+`INSTANT_LEARNING_SCOPE_20261101_V1.md` names precisely: the machine now authors a
+lesson's *scope* -- `rule_scope_learning_v1` calls `select_probe`, so the orphan
+wire that document reported missing **has since been built** -- but a human still
+authors the **hypothesis space**. Someone had to see that `a < b or a == b` means
+`a <= b`. Route (c) is the lawful attack on that: recover the procedure during
+acquisition, ship the mechanism, delete the donor, qualify on frozen held-out
+evidence, prove ablation degrades it. Condition 6 is the discipline this tree
+already learned in that document's section 6.2, where a held-out instance was
+optional and the receipt claimed independence anyway.
+
+**Recorded finding, not fixed here:** `GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md`
+is CANONICAL / MANDATORY / FAIL-CLOSED, and its purpose is to make "local task
+success, probe completion, infrastructure activity, and attractive subproblems
+structurally unable to replace Project Brain's terminal objective." Its authority
+block cites MISSION_LOCK **V6** and cognition-substrate **V3** -- both superseded;
+current is V10 and V4. That is live staleness inside a fail-closed law and a
+plausible cause of the red `Drift Immunity Guard`. Left unfixed: pre-existing on
+`main`, and `RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4` likely governs the repair.
+
+**The indictment this section has to carry.** That law exists to prevent exactly
+what this session did. V4/V5/V6 were organised around `0 of 112` obligations on the
+creature's own self-authored board. `REAL_MISSION_OBJECTIVE_20261008_V1.json` sets
+terminality to
+`OPEN_ENDED_CAPABILITY_OPTIMIZATION_NO_FINITE_FRONTIER_MODEL_OR_BENCHMARK_DEFINES_FINAL_MISSION_COMPLETION`,
+and `OWNER_ACTIVE_GOAL_20261018_V1.md` section 6 names the identical failure: an
+agent turned "27 of 67 capabilities exercised" into the mission.
+`run_its_own_board` appears in **no** governance document as the objective; the only
+place it is framed as the mission is V4 of this file.
+
+These three plan documents are therefore **subordinate to
+`INSTANT_LEARNING_SCOPE_20261101_V1.md`**, which answered the owner's question on
+2026-11-01 after five rounds of measurement -- and which this session failed to
+read before writing three plans of its own.
+
+### Cron — last
+
+Running unattended a thing that closes 0/112 accumulates honest failure faster.
+
+---
+
+## 3. Faulty oracles caught this session, so they are not repeated
+
+1. **9/9 blind-search probe — FALSE.** The vocabulary contained `("<=", "<")`,
+   the literal answer, and the nine "novel" cases were one bug class in nine
+   surface forms. Its own pre-registered positive control caught it. Corrected
+   number: 0/8.
+2. **C0 oracle — `bool(eval("lambda ns: ..."))`.** `eval` of a lambda expression
+   yields a *function object*; `bool` of it is always `True`, so every buggy
+   source looked correct. The validity guard aborted the run before any finding.
+   Fix: call the lambda.
+3. **C0 L2 teaching — `FAILED_MUTATED_TWIN_VERIFICATION`.** The oracle looked up
+   `ns['a']`, but the mutated twin is alpha-renamed, so it raised `KeyError` and
+   rejected for the wrong reason. Oracles here must be **name-agnostic**: take the
+   first callable. This is why C0b/C0c use `first_callable`.
+4. **The banked gate test was decoration -- caught by its own negative control.**
+   Its first version passed all 7 tests with the kind-mismatch check in
+   `evaluate()` deleted. Cause: passing a non-empty `scope_id` let the scope check
+   (`if scope_id and result.scope_id != scope_id`) do the refusing, and a demoted
+   bool carries `scope_id=''`, so the gate being pinned never decided anything.
+   Fix: assert the **unscoped** call, where only the kind check can refuse; and on
+   the recall path use `VerificationResult(True, 'CALLER_PREDICATE', sha, SCOPE,
+   {})` -- right scope, wrong kind -- because an empty scope would instead make the
+   contract-taught rule inapplicable and mask the gate a second way. Deleting the
+   check now fails exactly 2 of 7. **Rule: run the negative control on a new test
+   before claiming it pins anything, and check which check is doing the refusing.**
+
+---
+
+## 4. Standing non-claims
+
+Nothing here moves 0/112. Nothing registers a capability, flips a family, or
+claims sentience in any sense. The operational creature exists on `main`, survives
+an OS kill, authors 112 obligations, closes 0, and reports that honestly; after
+PR-B′ (#6590) its history also changes what it *chooses*, not only what it reports.
+That is the whole of the claim.

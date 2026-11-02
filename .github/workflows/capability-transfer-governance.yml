@@ -34,4 +34,25 @@ jobs:
           python canonical/runtime/runtime_cognition_credit_guard_v1.py
           python -m pytest -q canonical/tests/test_capability_transfer_ownership_gate_v1.py canonical/tests/test_acceptance_capability_source_gate_v2.py canonical/tests/test_runtime_cognition_credit_guard_v1.py
 
+      # A learned rule may only act on evidence strong enough to catch it being wrong.
+      # evaluate() auto-demotes a bool to CALLER_PREDICATE and then refuses a kind
+      # mismatch, so required_verification_kind='TEST_SUITE' cannot be satisfied by a
+      # callback. Measured, not assumed: a weak caller asking for TEST_SUITE gets 0/9.
+      #
+      # This pins that gate against the repository's own ProjectTestOracle, which runs
+      # a real suite in a copied tree and re-manifests the original to prove it was not
+      # touched. Nothing is stubbed and no evidence field is fabricated -- test_count,
+      # returncode and the three measurement hashes come from a real subprocess run.
+      #
+      # It is the gate test that must exist BEFORE any generator of candidate source is
+      # admitted, model-driven or not. Written afterwards, it would mean trusting the
+      # gate the generator depends on.
+      #
+      # Negative control verified: deleting the kind-mismatch check in evaluate() fails
+      # 2 of the 7 tests. An earlier version of this suite passed all 7 with that check
+      # deleted, because a non-empty scope_id let the scope check do the refusing and
+      # masked the gate being pinned. The unscoped assertions are what make it real.
+      - name: And a candidate that fails the suite is refused, not merely one that fails to compile
+        run: python -m pytest -q canonical/tests/test_a_candidate_that_fails_the_suite_is_refused_v1.py
+
 # LOCAL_RUNNER_FORBIDDEN_FOR_COGNITION_GOVERNANCE
