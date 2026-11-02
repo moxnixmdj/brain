@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6630,
+  "research_index_records": 6632,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 436,
-  "source_index_modules": 1916
+  "source_index_entry_points": 437,
+  "source_index_modules": 1917
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2dd8522b61bad76d1a66117c404f434e52f58393d1529c620610e4f1d11744e5"
+  "value": "54212fcddd6adba3ba03dc3b9c4adbdbe50e50207911411d7e9384ef85c5c257"
  },
  "engines": [
   {
@@ -137602,6 +137602,25 @@
    "action_id": "",
    "capability": false,
    "date": "2026-11-01",
+   "id": "research:canonical/verification/CREATURE_RUNTIME_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CREATURE_RUNTIME_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "1a6ce5fa61c7f7afc5facb753e4c273908d5e780083b0d4b31ebdc900e18c9ae",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "creature": 1,
+    "known": 1,
+    "runtime": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
    "id": "research:canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
@@ -204325,6 +204344,51 @@
    }
   },
   {
+   "action_id": "ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "294af2b8524304ac46084eb21ba6b2dc3a678cd759ee6d7c7d601845f553b542",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 2,
+    "add_create_branch_clause_to_grammar": 1,
+    "alone": 1,
+    "assemble": 1,
+    "assemble_and_run_the_creature_v1_20261102": 1,
+    "authored": 1,
+    "been": 1,
+    "benchmark": 1,
+    "board": 1,
+    "boots": 1,
+    "built": 1,
+    "claim": 2,
+    "component": 1,
+    "components": 1,
+    "contained": 1,
+    "creature": 2,
+    "each": 1,
+    "every": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 1,
+    "identity": 1,
+    "instead": 1,
+    "itself": 1,
+    "life": 1,
+    "lose": 1,
+    "moves": 1,
+    "no": 2,
+    "organs": 2,
+    "process": 2,
+    "seven": 2,
+    "tested": 2
+   }
+  },
+  {
    "action_id": "AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -235743,6 +235807,41 @@
     "v1": 1,
     "validate_semantic_root_slot": 1,
     "verification": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/creature_runtime_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/creature_runtime_v1.py",
+   "sha256": "d1a0e3911cfffbc57ae9098445de70c84f8cc249d858700e04d778018885c741",
+   "summary": "Seven organs, finally in one body.",
+   "symbol_count": 6,
+   "symbols": [
+    "Creature",
+    "_registry_and_inspectors",
+    "boot",
+    "does_nothing",
+    "main",
+    "run_its_own_board"
+   ],
+   "terms": {
+    "body": 1,
+    "boot": 1,
+    "creature": 2,
+    "does_nothing": 1,
+    "finally": 1,
+    "main": 1,
+    "one": 1,
+    "organs": 1,
+    "registry_and_inspectors": 1,
+    "run_its_own_board": 1,
+    "runtime": 1,
+    "seven": 1,
+    "v1": 1
    }
   },
   {

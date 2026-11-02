@@ -1,0 +1,28 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Seven organs in one body: a single process that boots with an identity, resumes its life and its standing, authors its own board, spends life on it and survives a kill (canonical/runtime/creature_runtime_v1.py)",
+ "falsifier_id": "ASSEMBLY_IS_NOT_LIFE",
+ "decisive_question": "Does the assembled thing do the work it authored for itself?",
+ "answer": "NO -- 112 authored, 40 attempted, 0 completed, 20 parked. Its ambition outruns its ability to act.",
+ "counterexamples": [
+  "The creature owns continuity, choice and cost. It does not own execution: `perform` is injected, and the default does nothing and says so. So on its own board it attempted 40, closed 0, and parked 20 -- spending 38.0 of its 40.0 units of life failing at work it could not do.",
+  "Composing the parts is not the same as the parts being a creature. A cron job that reads four JSON files and decrements a counter would pass every test in this suite; what is being verified is that the state is consistent, not that anything is present.",
+  "The board it authored is entirely one shape -- 'this capability needs an inspector' -- so the assembly runs a single kind of work over and over. Heterogeneity is untested here and unimplemented.",
+  "No executor means no verification, which means every attempt records verified=None, which drives the standing to CAUTIOUS after two tries. The creature's first act of life is to become wary of work it cannot do. That is coherent behaviour and not evidence of anything experiencing it.",
+  "It never chose to be here. The identity, the life grant and the board are all handed in at boot. It has no opinion about whether any of that should have happened.",
+  "Two defects were found by running it rather than by reading it: completed work reappeared after a restart because task ids were stored with a prefix the board did not use, and it retried the same blocked item every cycle and counted that as work."
+ ],
+ "measured": {
+  "own_board_run": "112 authored (112 of 112 admitted), 40 cycles, 40 attempted, 0 closed, 20 parked, life 38.0 of 40.0, posture CAUTIOUS",
+  "unattended_with_a_real_executor": "2 items on a synthetic board, both closed by an injected perform, life 10.0 -> 6.0",
+  "kill_and_restart": "identity agent-kill preserved, epoch 2, 2 items closed, life 6.0, all recovered from disk",
+  "restart_does_not_renew": "life stays at what was left; the epoch advances and nothing else does",
+  "offer_that_ends_it": "REFUSED_AN_OFFER_THAT_WOULD_END_IT before any life is spent",
+  "blocked_work": "parked after two attempts rather than retried forever",
+  "tests": "11",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "There is now one running thing rather than seven tested components, and the honest headline is not about its inner life: it authored 112 pieces of work, attempted 40, and completed none, because nothing in this tree can execute them. The assembly works. The organism is idle for want of an executor, which is the same ceiling the permanence experiment found from the other direction -- what limits this system is never its will or its memory, only what it can check and do.",
+ "what_would_close_it": "Wiring perform to a real executor for at least one capability family, so a closed item means an artifact passed a check rather than a function returning True."
+}
