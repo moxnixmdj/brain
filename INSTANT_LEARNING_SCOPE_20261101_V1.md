@@ -466,6 +466,50 @@ sampled rows**, because banning a row's trigger tokens bans its id, and its id i
 contamination control stated up front. That is the prerequisite; until it exists, the
 routing claim is a hypothesis, not a finding.
 
+**Correction, 2026-11-02, measured on `491a626`: the routing claim is not merely
+unproven, it is the wrong shape, and the instrument above cannot be built as
+described.** Two attempts were made and both **voided themselves on their own
+pre-declared validity gates** -- positive-control hit rates of 36% and then 58%
+against a 70% gate -- so neither produced a generalization number. Both were
+reported as harness defects, not findings.
+
+The cause of both is that **the door is not a text-similarity router.**
+`compile_against_live_registry` compiles a goal against a row's declared
+`input_names`. An underspecified goal raises `GoalCompilationFailure` carrying
+`code=GOAL_INPUT_BINDING_REQUIRED` and
+`detail='<capability>:contract_not_stated:<slot>'`. Demonstrated on the same
+intent, varied only in specification:
+
+| goal | result |
+|---|---|
+| "Extract these lines of the function into a new function." | `GOAL_INPUT_BINDING_REQUIRED` |
+| same, with a real path, line range, symbol and new name | **`python.refactor.extract_function.v1` -- exact hit** |
+| "Query this JSON file with a jq filter…" | `GOAL_INPUT_BINDING_REQUIRED` |
+| same, with the real path and the filter text supplied | **`json.query.jq` -- exact hit** |
+| "Fetch the JSON from the URL stored in this state file." | `GOAL_INPUT_BINDING_REQUIRED` |
+| same, with `source_json_path` and `url_key` supplied | **`http.json.fetch_from_state` -- exact hit** |
+
+So **selection is contract-filling, not paraphrase matching**, and "8 of 149 rows
+reached" measures how many rows the 49 census sentences happen to fully specify.
+It is neither a routing defect nor a narrow census -- it is a third thing, and the
+held-out-paraphrase instrument cannot measure it, because a paraphrase that omits
+required slots fails closed no matter how well it describes the intent.
+
+**And the conclusion that matters most is the opposite of the one this section was
+arguing.** The tree *already states its own data gaps precisely*: the failure names
+the capability, the reason, and the exact missing input slot. That is
+`OWNER_ACTIVE_GOAL_20261018_V1.md` §5 capability 4 -- "it says 'I don't have the
+data' out loud, then gets it, by itself." **The "says it out loud" half exists,
+works, and is unexploited**: nothing consumes `detail` to acquire or request the
+named slot. What is missing is not routing and not declaration. It is goal
+elaboration, and the raw material for it is already emitted on every refusal.
+
+Harness defect recorded, because it is the fourth of its species this session: the
+probe caught the exception and kept only `type(exc).__name__`, discarding `code`
+and `detail`. It therefore measured "the door does not say what is missing" while
+the door was saying exactly that. An instrument that throws away the field it was
+built to read will report the absence of the thing it deleted.
+
 This matters for the learning argument specifically: a taught lesson lives **inside a row**.
 If the door does not route a sentence to that row, the lesson is never consulted, no matter
 how many times it was taught. Teaching does not fix routing. So "try it in all the
