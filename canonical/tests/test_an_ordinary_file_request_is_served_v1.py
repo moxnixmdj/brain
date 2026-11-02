@@ -219,9 +219,11 @@ _UNSERVED_BECAUSE = {
         "removing by POSITION is refused on purpose: the sentence cannot say which "
         "bytes it means, and the project requires the file to survive unchanged"),
     "Tell me what changed": (
-        "FAIL_CLOSED__CAPABILITY_REFUSED_NAMED_TEST_NOT_IN_GIT_HISTORY",
-        "mis-routed to the bisect row, which wants a named test; the honest answer "
-        "needs a git-history row that does not exist yet"),
+        "FAIL__RAW_GOAL_COMPILATION_GAP",
+        "no row answers this phrasing. It used to be refused by the BISECT row, but "
+        "that row was matched on the token `runtime` inside the directory the "
+        "sentence named, not on anything the sentence said -- fixing that made the "
+        "honest answer visible: nothing here reads a directory's history yet"),
     "Summarise ": (
         "FAIL__RAW_GOAL_COMPILATION_GAP",
         "no summariser exists and inventing one would be a fabricated answer"),

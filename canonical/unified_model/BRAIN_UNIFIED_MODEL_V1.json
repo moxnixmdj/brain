@@ -32076,7 +32076,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "96ac753fd77d94b9432c1c1329dcf6243b7e3b5d2f6ce526b2e5b9a4dbcf8a5f"
+  "value": "803eddc609c573871a6c041438ee7a2f1d342e4b1ce98a6cbfcdfb9354b1f5c9"
  },
  "engines": [
   {
@@ -236092,9 +236092,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
-   "sha256": "6063f27e6cf2335e3265d0f0bdeffb654e2c1e4cb95f6d1045b14012972dd21b",
+   "sha256": "0ec7cc89fb4be13f44a131c1d4872f6482784040d76901f63bd3223a6b919ec3",
    "summary": "One sentence selects one capability: retrieval PROPOSES, typed admission DISPOSES.",
-   "symbol_count": 32,
+   "symbol_count": 33,
    "symbols": [
     "_arg_names",
     "_corpus_index",
@@ -236112,14 +236112,14 @@
     "_stem_of",
     "_undeclared_expression_names",
     "_version_sequence",
+    "_without_stated_paths",
     "admit",
     "contract_of",
     "declarations",
     "document",
     "is_ast_code_edit_request",
     "is_computed_answer_delivery",
-    "is_specific",
-    "margin_verdict"
+    "is_specific"
    ],
    "terms": {
     "admission": 1,
@@ -236133,7 +236133,6 @@
     "expectation_compatible": 1,
     "fast_decision_role_focus": 1,
     "fast_focus": 1,
-    "is_ast_code_edit_request": 1,
     "is_executable": 1,
     "is_specific": 1,
     "load_bm25_helper": 1,
@@ -236156,7 +236155,8 @@
     "stem_of": 1,
     "typed": 1,
     "v1": 1,
-    "version_sequence": 1
+    "version_sequence": 1,
+    "without_stated_paths": 1
    }
   },
   {
