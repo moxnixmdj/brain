@@ -30950,7 +30950,7 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 249,
+  "knowledge_documents": 250,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6634,
   "routing_tokens": 2360,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "16f1b6f412163f7ed61fee91d74470aa465d74635eaca6a19bc0938badcede26"
+  "value": "a8919bf13fa59628f4797d76df69c7fdb67685479a4f177e0ca7a6e1fb2378d9"
  },
  "engines": [
   {
@@ -43110,6 +43110,77 @@
     "launcher",
     "learner",
     "namespace"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5170,
+   "headings": [
+    "Creature information continuity — draft",
+    "What changed",
+    "Check and scope",
+    "Still needed"
+   ],
+   "kind": "DOCUMENT",
+   "path": "CREATURE_INFORMATION_CONTINUITY_DRAFT_20261102.md",
+   "sha256": "f574566e07908f79a273ea5caf788eeb898b358209f82e8b30950703bd874c2e",
+   "summary": "This is producer-run engineering work, not independent verification, an admission, or evidence that the whole creature is complete.",
+   "terms": {
+    "33": 4,
+    "across": 3,
+    "actual": 2,
+    "admission": 4,
+    "admitted": 3,
+    "after": 2,
+    "another": 2,
+    "answer": 2,
+    "attempt": 3,
+    "attempts": 2,
+    "authority": 4,
+    "catalog": 7,
+    "check": 4,
+    "checks": 3,
+    "claim": 3,
+    "confinement": 4,
+    "creature": 5,
+    "draft": 3,
+    "existing": 4,
+    "fabric": 5,
+    "failed": 4,
+    "generic": 3,
+    "id": 3,
+    "independent": 6,
+    "injected": 3,
+    "invalid": 3,
+    "kill": 3,
+    "life": 4,
+    "local": 3,
+    "not": 20,
+    "one": 3,
+    "only": 3,
+    "passed": 3,
+    "performer": 3,
+    "question": 10,
+    "reboot": 3,
+    "repair": 3,
+    "reports": 3,
+    "route": 3,
+    "saved": 3,
+    "still": 3,
+    "target": 3,
+    "test": 3,
+    "tests": 3,
+    "trusted": 3,
+    "typed": 5,
+    "verification": 5,
+    "work": 3
+   },
+   "title": "Creature information continuity — draft",
+   "title_terms": [
+    "continuity",
+    "creature",
+    "draft",
+    "information"
    ]
   },
   {
@@ -62266,10 +62337,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1043,
+  "included_source_count": 1044,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8c1acfbece9ba05b21e399cf768ec373031af5cb04cef0db50b3c09650d9ead9"
+  "source_tree_digest": "6511860c64c2c513bfa6debd70ef7155774956e166c286f7b23ee4d44d472296"
  },
  "research_index": [
   {
@@ -236686,7 +236757,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "d1a0e3911cfffbc57ae9098445de70c84f8cc249d858700e04d778018885c741",
+   "sha256": "3c4ecf330ed3068bfcf601007a444857caaeeb3232d3824987f762bc684c3b38",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 6,
    "symbols": [
