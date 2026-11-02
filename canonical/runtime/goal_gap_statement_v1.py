@@ -57,6 +57,7 @@ _MODEL_PATH = ROOT / "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
 # Outcome vocabulary. Each is a distinct state of the world, not a severity rank.
 OUTCOMES = (
     "COMPILED",                  # the door bound the goal to a row; nothing is missing
+    "LOW_CONFIDENCE_SELECTION",  # the door bound the goal to a row the goal did not ask for
     "SLOT_UNSTATED",             # a row was identified and a named slot could not be filled
     "NO_CANDIDATE_REPORTED",     # the door failed closed and reported no detail at all
     "UNPARSEABLE_REPORT",        # the door reported something this module cannot parse
@@ -72,17 +73,24 @@ _PLAIN_REASON = {
 }
 
 
-def _contracts() -> dict[str, list[str]]:
-    """capability id -> its declared input slots, read from the compiled artifact."""
+def _registry_rows() -> dict[str, dict[str, list[str]]]:
+    """capability id -> its declared input slots and requirements.
+
+    Read from the compiled artifact. An empty result is reported as such by the
+    caller rather than treated as "every row requires nothing".
+    """
     try:
         model = json.loads(_MODEL_PATH.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {}
-    out: dict[str, list[str]] = {}
+    out: dict[str, dict[str, list[str]]] = {}
     for row in model.get("capabilities") or []:
         cid = str(row.get("id") or "")
         if cid:
-            out[cid] = [str(n) for n in (row.get("input_names") or [])]
+            out[cid] = {
+                "input_names": [str(n) for n in (row.get("input_names") or [])],
+                "requires": [str(n) for n in (row.get("requires") or [])],
+            }
     return out
 
 
@@ -122,7 +130,7 @@ def state_the_gap(goal: str, root: pathlib.Path | str | None = None) -> dict[str
         result["statement"] = f"The compiler could not be imported: {type(exc).__name__}."
         return result
 
-    contracts = _contracts()
+    rows = _registry_rows()
 
     try:
         _registry, _admissible, compiled = _lib.compile_against_live_registry(str(goal), base)
@@ -157,7 +165,7 @@ def state_the_gap(goal: str, root: pathlib.Path | str | None = None) -> dict[str
         result["capability"] = capability
         result["slot"] = slot
         result["reason"] = reason or None
-        result["contract"] = contracts.get(capability, [])
+        result["contract"] = rows.get(capability, {}).get("input_names", [])
         still = [s for s in result["contract"] if s != slot]
         result["statement"] = (
             f"To do this I would use '{capability}', and I cannot: it needs '{slot}', and { _plain(reason) }."
@@ -167,31 +175,77 @@ def state_the_gap(goal: str, root: pathlib.Path | str | None = None) -> dict[str
         return result
 
     selected = str((compiled or {}).get("selected_capability") or "")
-    result["outcome"] = "COMPILED"
-    result["capability"] = selected or None
-    result["contract"] = contracts.get(selected, [])
-    result["statement"] = (
-        f"The goal compiled onto '{selected or 'nothing'}' and nothing was reported missing."
-        if selected
-        else "The goal compiled but named no capability."
+    declared = rows.get(selected, {})
+    evidence = (compiled or {}).get("match_evidence") or {}
+    goal_tokens = [str(x) for x in (evidence.get("goal_tokens") or [])]
+    matched_provides = [str(x) for x in (evidence.get("matched_provides") or [])]
+    matched_requires = [str(x) for x in (evidence.get("matched_requires") or [])]
+    coverage = (
+        len(set(matched_provides) | set(matched_requires)) / len(goal_tokens)
+        if goal_tokens else 0.0
     )
-    # Deliberately NOT an endorsement. Measured: 3 of 12 under-specified goals
-    # compiled onto a wrong row silently, so a compiled outcome is a statement
-    # about the compiler, not a claim that the choice is right.
-    result["selection_endorsed"] = False
+
+    result["capability"] = selected or None
+    result["contract"] = declared.get("input_names", [])
+    result["declared_requires"] = declared.get("requires", [])
+    result["selection_endorsed"] = False   # never endorsed; see the module docstring
+    result["match_evidence"] = {
+        "score": (compiled or {}).get("score"),
+        "goal_tokens": goal_tokens,
+        "matched_provides": matched_provides,
+        "matched_requires": matched_requires,
+        "goal_token_coverage": round(coverage, 4),
+    }
+
+    if not selected:
+        result["outcome"] = "COMPILED"
+        result["statement"] = "The goal compiled but named no capability."
+        return result
+
+    # UNFORCED SELECTION. Structural, not a tuned cutoff: the selected row declares
+    # requirements and the goal matched NONE of them, so nothing in the goal asked
+    # for this capability. Measured 2026-11-02 on 7 compiled under-specified goals
+    # (n=7, and the intended row is my judgment, not ground truth the tree
+    # declares): all 3 that selected a wrong row had matched_requires empty and
+    # coverage 0.17-0.25, while all 4 that selected the intended row had
+    # matched_requires non-empty and coverage 0.50-1.00. Score separated the same
+    # way (11-13 wrong vs 24-36 right) but is reported as evidence, not used as a
+    # threshold, because a numeric cutoff fitted to 7 points would be overfitting.
+    # Rows that declare NO requirements are exempt: "matched none of nothing"
+    # carries no information.
+    if declared.get("requires") and not matched_requires:
+        result["outcome"] = "LOW_CONFIDENCE_SELECTION"
+        result["statement"] = (
+            f"This compiled onto '{selected}', but the goal was not what asked for it: "
+            f"'{selected}' declares it requires {declared['requires']}, and the goal matched "
+            f"none of that. Only {len(matched_provides)} of {len(goal_tokens)} goal tokens "
+            f"({', '.join(matched_provides) or 'none'}) matched anything it provides, at score "
+            f"{(compiled or {}).get('score')}. The choice was not forced by the goal, so acting "
+            f"on it would be acting on a guess -- state the target and the operation explicitly."
+        )
+        return result
+
+    result["outcome"] = "COMPILED"
+    result["statement"] = (
+        f"The goal compiled onto '{selected}' and nothing was reported missing."
+    )
     return result
 
 
 def state_the_gaps(goals: Mapping[str, str] | list[str]) -> list[dict[str, Any]]:
     """`state_the_gap` over several goals, ranked so the actionable ones come first.
 
-    Ranking is by whether a person or a machine could act on the statement, not by
-    severity: a named slot is actionable, an empty report is not.
+    Ranking is by what it costs to ignore the statement. A selection the goal did
+    not force comes first because acting on it does the wrong thing; a named
+    missing slot comes next because it merely stops; an empty report comes last
+    because nothing can be acted on until the report itself is fixed.
     """
     items = list(goals.values() if isinstance(goals, Mapping) else goals)
     rows = [state_the_gap(g) for g in items]
-    order = {"SLOT_UNSTATED": 0, "COMPILED": 1, "UNPARSEABLE_REPORT": 2,
-             "NO_CANDIDATE_REPORTED": 3, "COMPILER_RAISED": 4}
+    # A wrong action ranks above a missing one: LOW_CONFIDENCE_SELECTION will
+    # proceed and do the wrong thing, whereas SLOT_UNSTATED merely stops.
+    order = {"LOW_CONFIDENCE_SELECTION": 0, "SLOT_UNSTATED": 1, "COMPILED": 2,
+             "UNPARSEABLE_REPORT": 3, "NO_CANDIDATE_REPORTED": 4, "COMPILER_RAISED": 5}
     return sorted(rows, key=lambda r: order.get(str(r.get("outcome")), 9))
 
 

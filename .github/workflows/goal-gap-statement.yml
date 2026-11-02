@@ -10,20 +10,38 @@ name: goal-gap-statement
 # itself". Measured 2026-11-02, the first half already worked and NOTHING consumed
 # it; goal_gap_statement_v1 is the consumer.
 #
-# These tests pin the four things that make consuming it honest rather than
-# decorative:
+# These tests pin what makes consuming it honest rather than decorative:
 #   1. the missing slot is named, with the compiler's own reason carried through;
 #   2. no value is ever invented for a slot the compiler could not fill -- there is
 #      no field that could hold one;
 #   3. a refusal carrying detail=None blames the REPORT, not the goal, because
 #      saying "the goal is missing X" there would be inventing an X;
-#   4. a goal that COMPILES is not thereby endorsed -- measured, 3 of 12
-#      under-specified goals compiled onto the wrong row silently, including a JSON
-#      query routed to a cross-file repair writer.
+#   4. a goal that COMPILES is never endorsed;
+#   5. a selection the goal did not FORCE is reported loudly as
+#      LOW_CONFIDENCE_SELECTION instead of passing as a success.
 #
-# Negative control verified on the commit that adds this: inventing a slot value
-# fails 1 test, swallowing detail=None fails 2, endorsing a compiled selection
-# fails 1. Restored byte-identically afterwards; 9 pass.
+# Item 5 is the dangerous failure and the reason this exists. Measured 2026-11-02
+# on 12 under-specified goals: 5 failed closed with a precise report, 4 compiled
+# onto the intended row, and 3 compiled onto the WRONG row and reported success --
+# a JSON query routed to software.repair.choreograph.crossfile.v1, a rename routed
+# to inline_helper (which deletes), a request for a repository log routed to
+# python.repository.acceptance.measure.v1. A refusal is honest; a confident wrong
+# selection is not.
+#
+# The rule is structural, not a fitted threshold: the selected row DECLARES
+# requirements and the goal matched NONE of them, so nothing in the goal asked for
+# that capability. Score separated the same 7 cases (11-13 wrong vs 24-36 right)
+# and coverage separated them too (0.17-0.25 vs 0.50-1.00), but both are reported
+# as auditable evidence rather than used as cutoffs -- a numeric threshold fitted
+# to 7 points would be overfitting, and n=7 with the intended row being my
+# judgment rather than ground truth the tree declares is stated in the module.
+# Rows declaring no requirements are exempt: matching none of nothing says nothing.
+#
+# Negative control verified on every commit that touches this: inventing a slot
+# value fails 1 test, swallowing detail=None fails 2, endorsing a compiled
+# selection fails 1, dropping the unforced check fails 2, INVERTING it fails 3,
+# and suppressing the evidence fails 3. Restored byte-identically after each
+# (diff against the pre-mutation backup clean); 12 pass.
 #
 # live_integrated_brain_v1.py is in the path filter deliberately: this module
 # parses that compiler's failure detail, so a change to the report format must

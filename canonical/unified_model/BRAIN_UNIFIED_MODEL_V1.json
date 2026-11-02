@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b7a6b399bd3b828f9d506631290a5658b9e2f0f482e3731cc8c7e1687c49fa84"
+  "value": "55efc640a98831f3e561861f3ad1bd62f51e2882b6752be09c8335342da27f15"
  },
  "engines": [
   {
@@ -246340,17 +246340,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_gap_statement_v1.py",
-   "sha256": "08ced68e1f7592144d49028239c358eb44ed5aae77f9e0ad6bcce4a8a90d3bab",
+   "sha256": "cc514931f4a40d01e45eb48ff54307501f920c86f7437d92d0ad9b9c6627cbac",
    "summary": "State, out loud and in one place, what an under-specified goal is missing.",
    "symbol_count": 4,
    "symbols": [
-    "_contracts",
     "_plain",
+    "_registry_rows",
     "state_the_gap",
     "state_the_gaps"
    ],
    "terms": {
-    "contracts": 1,
     "gap": 1,
     "goal": 2,
     "loud": 1,
@@ -246359,6 +246358,7 @@
     "out": 1,
     "place": 1,
     "plain": 1,
+    "registry_rows": 1,
     "state": 1,
     "state_the_gap": 1,
     "state_the_gaps": 1,
