@@ -501,8 +501,42 @@ the capability, the reason, and the exact missing input slot. That is
 `OWNER_ACTIVE_GOAL_20261018_V1.md` §5 capability 4 -- "it says 'I don't have the
 data' out loud, then gets it, by itself." **The "says it out loud" half exists,
 works, and is unexploited**: nothing consumes `detail` to acquire or request the
-named slot. What is missing is not routing and not declaration. It is goal
-elaboration, and the raw material for it is already emitted on every refusal.
+named slot.
+
+**Correction, measured 2026-11-02 on `6fd9bae`: "already emitted on every refusal"
+is false, and what happens instead is worse.** Twelve vague goals with no paths and
+no slot values were compiled. **None** raised `GOAL_INPUT_BINDING_REQUIRED` -- 5
+raised `GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH`, and **7 compiled
+successfully, 3 of them onto the wrong row, silently.** The structured missing-slot
+report appears only once a row HAS been selected and a slot is unstated; it is not
+what an under-specified goal produces.
+
+The silent cases are the finding. "Query the data file and write the result out"
+selected `software.repair.choreograph.crossfile.v1` -- a cross-file repair WRITER,
+and the same row whose selection causes census refusal #21
+(`STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER`). "Show the recent log of the
+repository" selected `python.repository.acceptance.measure.v1`. "Rename that helper
+to something clearer" selected `python.refactor.inline_helper.v1`, which deletes
+rather than renames. Tally over the 12: **4 correct, 3 silently wrong, 5 no-match.**
+
+So under-specification does not fail closed. It fails *quietly*, about a quarter of
+the time in this sample, and the guard that catches #21 sits downstream of the
+mis-selection rather than substituting for it. That connects census refusal #21 to a
+general mechanism instead of leaving it a one-off, and it is a worse failure mode
+than a refusal: a refusal is honest, a confident wrong selection is not.
+
+Two limits on that number, stated because they bound it: n=12, and the "intended
+row" is my authoring judgment, not a ground truth the tree declares. The three wrong
+selections are wrong on any reading -- inlining is not renaming, and a cross-file
+repair choreographer is not a JSON query.
+
+What is missing is therefore not only goal elaboration. It is **a loud failure when
+selection is not confident**, so a vague goal reports what it could not determine
+instead of proceeding on a guess. The raw material for both exists and is
+unconsumed: `GOAL_INPUT_BINDING_REQUIRED.detail` names an unstated slot, and
+`GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH` names the capability it tried.
+Neither is raised at all in the silent-wrong case, which is precisely where a
+mechanism is needed.
 
 Harness defect recorded, because it is the fourth of its species this session: the
 probe caught the exception and kept only `type(exc).__name__`, discarding `code`
