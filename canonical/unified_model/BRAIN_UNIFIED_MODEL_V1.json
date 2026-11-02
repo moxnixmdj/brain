@@ -32076,7 +32076,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "19b94ab0bb9c0e1ed308d52c94fd2d35c17043b9db1d23c6e87c5161f1112da9"
+  "value": "96ac753fd77d94b9432c1c1329dcf6243b7e3b5d2f6ce526b2e5b9a4dbcf8a5f"
  },
  "engines": [
   {
@@ -232023,7 +232023,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "a7e5564c43b0d783f491532563a9089c0875ee170a2c4236947f424fcea6bb0e",
+   "sha256": "3f77fefa9a80812078366f7e22fea1828b3a615d15643b340f7094bc36512cd8",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 19,
    "symbols": [
