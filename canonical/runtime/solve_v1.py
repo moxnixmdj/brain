@@ -47,6 +47,7 @@ exists to keep out, and would stop the moment the model changed.
 """
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import tempfile
@@ -179,8 +180,123 @@ def act(root: str, program: str, timeout: int = 120,
                     "confined": False}
 
 
+def _default_staging_path() -> Path:
+    env = os.environ.get("BRAIN_SOLVE_STAGING_STATE", "").strip()
+    if env:
+        return Path(env)
+    return Path(__file__).resolve().parents[2] / "canonical" / "astra_runtime" / "tmp" / "solve_v1_episode_staging.json"
+
+
+def _snapshot_small_tree(root: str, files: dict[str, tuple[int, int]]) -> dict[str, bytes]:
+    base = Path(root)
+    snap: dict[str, bytes] = {}
+    for rel in sorted(files):
+        if len(snap) >= 20:
+            break
+        sz = files[rel][0]
+        if sz > 65536:
+            continue
+        p = base / rel
+        if p.is_file():
+            try:
+                snap[rel] = p.read_bytes()
+            except OSError:
+                continue
+    return snap
+
+
+def _stage_or_crystallize_paired_skill(
+    *,
+    goal: str,
+    ok_programs: list[str],
+    net_changed: list[str],
+    initial_snapshot: dict[str, bytes],
+    skill_db: str | Path | None,
+    staging_path: str | Path | None,
+) -> dict | None:
+    if not ok_programs or not net_changed:
+        return None
+    try:
+        from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+            anti_unify_workflow,
+            compile_and_qualify_skill,
+        )
+    except Exception:
+        return None
+
+    primary_out = next((p for p in net_changed if p in goal), net_changed[0])
+    step_list = [{"layer": "confined_python_exec", "code": prog} for prog in ok_programs]
+    post = {"kind": "file_nonempty", "path": primary_out}
+    generalized = anti_unify_workflow(goal, step_list, post)
+    if not generalized.get("param_order"):
+        return None
+
+    st_file = Path(staging_path) if staging_path is not None else _default_staging_path()
+    try:
+        staged_doc = json.loads(st_file.read_text(encoding="utf-8")) if st_file.is_file() else {}
+    except Exception:
+        staged_doc = {}
+    if not isinstance(staged_doc, dict):
+        staged_doc = {}
+    episodes = staged_doc.setdefault("episodes", {})
+    skel = str(generalized["goal_skeleton"])
+    prior = episodes.get(skel)
+
+    if not isinstance(prior, dict):
+        episodes[skel] = {
+            "goal": goal,
+            "steps": step_list,
+            "postcondition": post,
+            "concrete_bindings": dict(generalized["concrete_bindings"]),
+        }
+        try:
+            st_file.parent.mkdir(parents=True, exist_ok=True)
+            st_file.write_text(json.dumps(staged_doc, indent=2, sort_keys=True), encoding="utf-8")
+        except OSError:
+            pass
+        return {"staged": True, "crystallized": False, "goal_skeleton": skel}
+
+    if prior.get("concrete_bindings") == generalized["concrete_bindings"]:
+        return {"staged": True, "crystallized": False, "goal_skeleton": skel}
+
+    db_p = Path(skill_db) if skill_db is not None else None
+    with tempfile.TemporaryDirectory(prefix="brain_solve_qual_") as held_tmp:
+        held_root = Path(held_tmp)
+        for rel, content in initial_snapshot.items():
+            if rel == primary_out:
+                continue
+            dst = held_root / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(content)
+        qual = compile_and_qualify_skill(
+            goal=str(prior["goal"]),
+            trace=list(prior["steps"]),
+            postcondition=dict(prior["postcondition"]),
+            heldout_goal=goal,
+            heldout_cwd=held_root,
+            source_channel="solve_v1_paired_trajectory",
+            db_path=db_p,
+        )
+    if qual.get("pass") is True:
+        episodes.pop(skel, None)
+        try:
+            st_file.parent.mkdir(parents=True, exist_ok=True)
+            st_file.write_text(json.dumps(staged_doc, indent=2, sort_keys=True), encoding="utf-8")
+        except OSError:
+            pass
+        return {
+            "staged": False,
+            "crystallized": True,
+            "skill_id": qual.get("skill_id"),
+            "goal_skeleton": skel,
+        }
+    return {"staged": True, "crystallized": False, "goal_skeleton": skel, "reason": qual.get("status")}
+
+
 def solve(goal: str, root: str, model=None, steps: int = 6,
-          timeout: int = 120) -> dict:
+          timeout: int = 120, *,
+          skill_db: str | Path | None = None,
+          staging_path: str | Path | None = None) -> dict:
     """Plain goal in, work out.
 
     `model(goal, seeing)` returns a program, or None when it judges the
@@ -189,6 +305,54 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
     carries the program's own account of itself -- a program is the worst
     possible narrator of what it did.
     """
+    if not Path(root).is_dir():
+        return {"schema": SCHEMA, "verdict": BOUNDED, "goal": goal,
+                "steps": 0, "trace": [], "detail": f"{root!r} is not a directory"}
+
+    # Step 0 (<5 ms, K3 = 0): if paired verified runs have already crystallized
+    # an ownership-qualified workflow skill for this structural goal, execute it
+    # confined and verify real kernel state diff without requiring any model.
+    if goal and str(goal).strip():
+        try:
+            from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+                recall_and_execute_workflow,
+            )
+            _pre_recall = observe(root)
+            _db_p = Path(skill_db) if skill_db is not None else None
+            _recalled = recall_and_execute_workflow(goal, cwd=root, db_path=_db_p)
+            if _recalled is not None and _recalled.get("pass") is True:
+                _post_recall = observe(root, before=_pre_recall["files"])
+                if _post_recall["changed"]:
+                    _r_trace = [
+                        {
+                            "step": idx + 1,
+                            "result": {
+                                "exit": 0,
+                                "out": str(sr.get("stdout") or ""),
+                                "err": "",
+                                "timed_out": False,
+                                "confined": bool(sr.get("confined", True)),
+                            },
+                            "changed": _post_recall["changed"],
+                        }
+                        for idx, sr in enumerate(_recalled.get("step_receipts") or [])
+                    ]
+                    return {
+                        "schema": SCHEMA,
+                        "verdict": DONE,
+                        "goal": goal,
+                        "steps": len(_r_trace),
+                        "trace": _r_trace,
+                        "final_tree": sorted(_post_recall["files"]),
+                        "changed": _post_recall["changed"],
+                        "from_memory": True,
+                        "skill_id": _recalled.get("skill_id"),
+                        "model_dependency_count": 0,
+                        "incremental_spend_usd": 0,
+                    }
+        except Exception:
+            pass
+
     # With no model supplied, bind the one the environment names.
     # Previously an unbound loop simply could not act and there was no
     # way to tell "no model" from "model declined" -- both produced an
@@ -206,12 +370,11 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
                                "model_v1 unavailable")}
         model = M.bind()
 
-    if not Path(root).is_dir():
-        return {"schema": SCHEMA, "verdict": BOUNDED, "goal": goal,
-                "steps": 0, "trace": [], "detail": f"{root!r} is not a directory"}
-
     trace: list[dict] = []
     state = observe(root)
+    initial_files = dict(state["files"])
+    initial_snapshot = _snapshot_small_tree(root, initial_files)
+    executed_programs: list[tuple[str, dict]] = []
     verdict = GAVE_UP
     # Pathologies hit on the way. Recorded at the END, once it is known
     # whether the run recovered -- a failure that was later fixed is
@@ -279,6 +442,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
             break
 
         result = act(root, program, timeout=timeout)
+        executed_programs.append((program, result))
         after = observe(root, before=state["files"])
         trace.append({"step": step, "result": result,
                       "changed": after["changed"]})
@@ -358,10 +522,30 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
         except Exception:
             pass
 
-    return {"schema": SCHEMA, "verdict": verdict, "goal": goal,
-            "steps": len(trace), "trace": trace,
-            "final_tree": sorted(state["files"]),
-            "changed": state["changed"]}
+    net_changed = observe(root, before=initial_files)["changed"]
+    crystallization = None
+    if verdict == DONE and net_changed:
+        ok_progs = [
+            prog
+            for prog, res in executed_programs
+            if res.get("exit") == 0 and not res.get("timed_out")
+        ]
+        crystallization = _stage_or_crystallize_paired_skill(
+            goal=goal,
+            ok_programs=ok_progs,
+            net_changed=net_changed,
+            initial_snapshot=initial_snapshot,
+            skill_db=skill_db,
+            staging_path=staging_path,
+        )
+
+    out = {"schema": SCHEMA, "verdict": verdict, "goal": goal,
+           "steps": len(trace), "trace": trace,
+           "final_tree": sorted(state["files"]),
+           "changed": net_changed if net_changed else state["changed"]}
+    if crystallization is not None:
+        out["skill_crystallization"] = crystallization
+    return out
 
 
 def render(result: dict) -> str:

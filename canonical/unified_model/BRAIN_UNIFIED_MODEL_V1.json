@@ -29192,7 +29192,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
-    "source_sha256": "8cb2cdfbb0bd3a3efa52c3e628d337af85b322b35081e8c3ec0d9ec38d0e328d",
+    "source_sha256": "ca3878c0d6441c25fdf1a709a6d9c26b386a58fb461d5058791b99e657985730",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 242,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6634,
+  "research_index_records": 6635,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 437,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3410e7fbd9f978c32636b3c082c303e1ed7425f654af00492226d7684d87b26b"
+  "value": "6c041d21ef73fdda2b02762f20d38e5372d09bad6c17efb3133814bf36aa31e9"
  },
  "engines": [
   {
@@ -31437,6 +31437,1670 @@
   }
  ],
  "grammar": {
+  "adapter_ast_index": {
+   "canonical/runtime/bound_capabilities/archive_tarfile.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d86fc673b2d250b965b33b1db98b551d2c1400311ea28f9911b2d891cce5577f"
+   },
+   "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "fe52e145e56eb7b492e6020b19049b0be1c9c7e66b81ba8ba2f19f2f76ec516d"
+   },
+   "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "366bd7e909fa2eecb611fd1ad0119c3e6ec9f01d0103fdde997d78068e63da1d"
+   },
+   "canonical/runtime/bound_capabilities/chart_axis_title_unit_binding_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8d80d6f7c6ad374b18d666ba29d7b89fc57eb008ea8e7f485633e532a3b48826"
+   },
+   "canonical/runtime/bound_capabilities/chart_curve_value_query_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "189216cb4043d4c400b55a0f97331a0e7aef4160473e3264b7a0306941fe48e8"
+   },
+   "canonical/runtime/bound_capabilities/chart_curve_x_at_y_query_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e1d561a7446f5bc67728f22c0621184cc542a4a63567fe731e2bd93c8c34e1b1"
+   },
+   "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7505b1edf9b216aa82d382b75e25710b0ba1ccb06ce03be8e30462eb69125d28"
+   },
+   "canonical/runtime/bound_capabilities/chart_legend_style_binding_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "6f4b0b8dcea117b114896a3edd55bbcba67f9529e586050ea5b061555b29816e"
+   },
+   "canonical/runtime/bound_capabilities/chart_raster_scene_graph_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9bf335cb49804902b9034a6a7b662c04c8207e0b9eaccfd06fceb8652e7fe5bd"
+   },
+   "canonical/runtime/bound_capabilities/chartography_deterministic_professional_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "6d1ec1be9f632c925188b2ccacef0853943c8c1738d4a43c5cd24c173a090eb1"
+   },
+   "canonical/runtime/bound_capabilities/cli_command.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/cli_command.py:28"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39"
+   },
+   "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [
+     "build_wheel",
+     "ci_add_cache",
+     "ci_add_matrix",
+     "ci_fix_workflow",
+     "cpp_fix_off_by_one",
+     "cpp_repair",
+     "create_ci_workflow",
+     "create_pyproject",
+     "create_sql_migration",
+     "generate_sbom",
+     "go_add_function",
+     "go_repair",
+     "java_add_method",
+     "lock_requirements",
+     "makefile_add_target",
+     "port_python_to_go",
+     "port_python_to_js",
+     "port_python_to_rust",
+     "port_python_to_ts",
+     "pyproject_add_dependency",
+     "pyproject_bump_version",
+     "pyproject_pin_dependencies",
+     "quarantine_flaky_tests",
+     "requirements_add_dependency",
+     "run_make_target",
+     "rust_add_function",
+     "rust_repair",
+     "sql_ddl_transform",
+     "ts_add_function",
+     "ts_generate_declarations",
+     "ts_rename_symbol",
+     "ts_repair",
+     "vendor_dependencies",
+     "write_pr_description"
+    ],
+    "dispatch_phrases": [
+     "build wheel",
+     "ci add cache",
+     "ci add matrix",
+     "ci fix workflow",
+     "cpp fix off by one",
+     "cpp repair",
+     "create ci workflow",
+     "create pyproject",
+     "create sql migration",
+     "generate sbom",
+     "go add function",
+     "go repair",
+     "java add method",
+     "lock requirements",
+     "makefile add target",
+     "port python to go",
+     "port python to js",
+     "port python to rust",
+     "port python to ts",
+     "pyproject add dependency",
+     "pyproject bump version",
+     "pyproject pin dependencies",
+     "quarantine flaky tests",
+     "requirements add dependency",
+     "run make target",
+     "rust add function",
+     "rust repair",
+     "sql ddl transform",
+     "ts add function",
+     "ts generate declarations",
+     "ts rename symbol",
+     "ts repair",
+     "vendor dependencies",
+     "write pr description"
+    ],
+    "sha256": "b722f086fbca27412495d07d7c7c165135b63a258f89bd5a51c591ab9c590fe9"
+   },
+   "canonical/runtime/bound_capabilities/code_tree_sitter_impact_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "b02bc9c890f810846930587f9f4302dc3edc5ffca5e8a39a8550cff412b5be43"
+   },
+   "canonical/runtime/bound_capabilities/code_tree_sitter_incremental_index_v1.py": {
+    "defaulted_keys": {
+     "max_files": "canonical/runtime/bound_capabilities/code_tree_sitter_incremental_index_v1.py:27"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e07b0461a99a8e0c9f1541f774bded35ee3eab7778968eceba93d268004d3e17"
+   },
+   "canonical/runtime/bound_capabilities/code_tree_sitter_patch_verify_v1.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/code_tree_sitter_patch_verify_v1.py:132"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "42af405544c6220d41eb27b372091811c03e4a536b92f9534abc5a2c6a6bfe6d"
+   },
+   "canonical/runtime/bound_capabilities/decision_evidence_locate.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "5a8e69ca4c6bebeb3dc76a3f4df03979f050425693c06610423cf41b1e7e23cb"
+   },
+   "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4e640a6efb2c8113ad2c62a82b242f223f9aa8f96693b3e3ff2a6ac00c06040f"
+   },
+   "canonical/runtime/bound_capabilities/evidence_decision_verify.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "aff1219f74880e7da64be48a224c287c2049b5851421423fad45a1ee10692bd3"
+   },
+   "canonical/runtime/bound_capabilities/evidence_oracle_concrete_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ea5d25eb59151241e7fea5f44b842886f75b8f9a1703933c9d267b1f0625bf4d"
+   },
+   "canonical/runtime/bound_capabilities/evidence_oracle_hypothesis_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "63f5e463ebcddafe71ec18a98bf063f6ef94cb1a89135f1bcead77583c351dc7"
+   },
+   "canonical/runtime/bound_capabilities/execution_pipeline_8stage_v1.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/execution_pipeline_8stage_v1.py:50"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "06a880854152c29e1f3ca7a841df1362b1b58b143252e5978e921a6cf2750524"
+   },
+   "canonical/runtime/bound_capabilities/file_write_json.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "3b396ce2a8bc96ecbcced275fa1fb89443414c3bdf281adc70375db8e38dfecf"
+   },
+   "canonical/runtime/bound_capabilities/file_write_text.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "81fd5255c3f9d392b4a89406a55304179cc9b17ddaa320f771cd78405fdd838b"
+   },
+   "canonical/runtime/bound_capabilities/finance_saccr_addon.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "be437f6b4c744a6cf0d8b3b491e4a5512a2379f27f70d0e5ec46f7b310765466"
+   },
+   "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [
+     "EQ",
+     "GT",
+     "GTE",
+     "LT",
+     "LTE",
+     "NE",
+     "NUMERIC_RELATION",
+     "VERBATIM_SUPPORT"
+    ],
+    "dispatch_phrases": [
+     "numeric relation",
+     "verbatim support"
+    ],
+    "sha256": "1e8335c57471ff4505a517e005bf67d61057872e89b335e5c9d358b59ea3bc5b"
+   },
+   "canonical/runtime/bound_capabilities/git_bisect_regression.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "6a7f3a9f430e85074240b37f888aeea3faca07ca34220c606defa0c5d50b12b5"
+   },
+   "canonical/runtime/bound_capabilities/git_repository_operate.py": {
+    "defaulted_keys": {
+     "limit": "canonical/runtime/bound_capabilities/git_repository_operate.py:126"
+    },
+    "dispatch_ops": [
+     "blame",
+     "changelog",
+     "diff",
+     "log",
+     "show",
+     "status"
+    ],
+    "dispatch_phrases": [],
+    "sha256": "d284618ff5a1160a9274bd24f15a06cfc189edeaa8ecd9a9a1e986a77c766adf"
+   },
+   "canonical/runtime/bound_capabilities/http_json_fetch.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/http_json_fetch.py:50"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "90c7084bc695cbd7f5ef418cd747a760304bb945f530cca01d130a5bcbf4255e"
+   },
+   "canonical/runtime/bound_capabilities/image_ocr_tesseract.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "965fb1725472df013cec377f39b44e97156c065daac9446d476964788dbc394e"
+   },
+   "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "925fe0e0260ba1b7355075d76d83ad5a6883406cfebb18769b9106539b18f46d"
+   },
+   "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a90605ed9a6c116455e3040416968aec85311faea640a5af015651f4d17b0005"
+   },
+   "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "809b3a8a8645933b6401017a993389346b310567b0afa9ab65ffccc81803135a"
+   },
+   "canonical/runtime/bound_capabilities/orchestration_bridge_enumeration_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "00940c7a8028db6557e112a41e87ee5475e0422c86c9e336bd8e43026cd36b67"
+   },
+   "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9dbd8855499fa94c03f680a26ceba3939773efaa4b2c79890ee20ede72269ced"
+   },
+   "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "98f6acc71975ed819dc2cad244dbf9184144daaa25b0cc64d9f95e958648dd67"
+   },
+   "canonical/runtime/bound_capabilities/professional_artifact_visual_observer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "111df4bc48bff43314ec0e3e83fedcce8c9e28a8f362bd04bac79471e600adc4"
+   },
+   "canonical/runtime/bound_capabilities/pypi_provenance_audit.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/pypi_provenance_audit.py:58"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2c3202af5cea64547c1e26b865978dcca184151961bf6708498508658df3f069"
+   },
+   "canonical/runtime/bound_capabilities/python_contract_issue_orchestration_fusion_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7bbb2ce1f26df66405ffc98e007e807e66991183fdee2885105b582c2fadb4fc"
+   },
+   "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py": {
+    "defaulted_keys": {
+     "max_files": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py:224",
+     "max_pair_candidates": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py:224",
+     "max_symbols_per_file": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py:224",
+     "mutations_per_file": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py:224",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py:224"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8d0b998f52513aad66f458fa1357acd3d3b3a4ea109a4f3e911e6524a545dd93"
+   },
+   "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py:136"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "25069083bc04d28a8435af48044d022d936e3e895ed5f5c68bdf8342ced82ba7"
+   },
+   "canonical/runtime/bound_capabilities/python_evidence_contract_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "47e7ba958e3b73af58e0a19f1eaedb8e1383d1f7f90081ecba76d0079e7f5656"
+   },
+   "canonical/runtime/bound_capabilities/python_fault_patch_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f47d03b38440d86c9c93059a3f5c081ba29d87b66b9b2b1c71e764bd1b27c6b5"
+   },
+   "canonical/runtime/bound_capabilities/python_fault_provenance_fusion_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "c758de58c52e7645ae4ce68b30ebb6fd88e329599f11979565d03df2c4fc5397"
+   },
+   "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py": {
+    "defaulted_keys": {
+     "export_in_init": "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py:253",
+     "generate_unit_tests": "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py:254"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "03185a7b5bca041f742d282ca8355f48c3134416eb74b7944328513a3f4088bf"
+   },
+   "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py:143"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "89ac7f978488624c6e55577b43899d08c98dfdc22cb858699f7ef382894b36a6"
+   },
+   "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py": {
+    "defaulted_keys": {
+     "max_candidates_per_file": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py:103",
+     "max_files": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py:103",
+     "max_rounds": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py:103",
+     "max_total_candidates": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py:103",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py:103"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4ccd5208eb3930f7a32391c24a4fb1600f02edc34a83c23c2fb31153047af23a"
+   },
+   "canonical/runtime/bound_capabilities/python_orchestration_symbol_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "0f883dbe24326400bcefcb027cc4f8b865e219df3cfb9f8b9b9d43667a3f310e"
+   },
+   "canonical/runtime/bound_capabilities/python_patch_review_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ee4dbb9551dce165a9863f902a5b060658f0876f9ee5158ba01dd2c14447aacd"
+   },
+   "canonical/runtime/bound_capabilities/python_pipeline_allowlist_gate_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "261ec4f594dd8c5b095585e1fc4376307f206be840fe64cc079d41d1572deb62"
+   },
+   "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e1bde661609d731ef255c8e4797e0e20a79fe554e56733731dc482bf28dac33f"
+   },
+   "canonical/runtime/bound_capabilities/python_provenance_coupling_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7d825cc04270d52be7bc6b5b3bd048e9e0d52b4e75351ba9ce2e059dae2e536c"
+   },
+   "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py": {
+    "defaulted_keys": {
+     "max_pair_candidates": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py:89",
+     "mutations_per_file": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py:88",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py:80"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d837e6b0a01510a17fc639c06631b160a32cc808988693d9bb3f9afb59dc2bf1"
+   },
+   "canonical/runtime/bound_capabilities/python_refactor_test_scaffold_fusion_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "fb48d4093dc6c03f86955991b56d00332cdf686dd16e6877c84c120181e25322"
+   },
+   "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py": {
+    "defaulted_keys": {
+     "max_pair_candidates": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py:474",
+     "mutations_per_file": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py:473",
+     "synthesize_regression_test": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py:542",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py:375"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "fd96af03475835c7d87eac7281568c373e58a881cb3eac20389d8a57d29a0638"
+   },
+   "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py": {
+    "defaulted_keys": {
+     "max_pair_candidates": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py:397",
+     "mutations_per_file": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py:396",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py:386"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "fde9fdd17932b6185d157ac595bcbbe30b9d31aab9179253eff55eaa22e5fd7e"
+   },
+   "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py": {
+    "defaulted_keys": {
+     "max_pair_candidates": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py:65",
+     "mutations_per_file": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py:64",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py:52"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "b4a235fc66e459b83ae8c07b28251ff42e497075a348d507885958e7b84a2cf7"
+   },
+   "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py": {
+    "defaulted_keys": {
+     "max_files": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py:300",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py:299"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97"
+   },
+   "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py": {
+    "defaulted_keys": {
+     "max_candidates": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py:83",
+     "max_edits": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py:82",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py:81"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a0a9c2009a2fb8a97e8987e7f1d1197be5be262881fcbf7ed10431222a8f55e4"
+   },
+   "canonical/runtime/bound_capabilities/python_software_repair_router_v1.py": {
+    "defaulted_keys": {
+     "budget": "canonical/runtime/bound_capabilities/python_software_repair_router_v1.py:118",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_software_repair_router_v1.py:111"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8b1db5e65e74cf1c564f39679380cf2909c8006644e59286c60aad34f91aca67"
+   },
+   "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4054efa46e5e749f3aaa742e5d4d787bc16e539755d7ea2aa38d447a8fa3d9dc"
+   },
+   "canonical/runtime/bound_capabilities/python_source_add_parameter.py": {
+    "defaulted_keys": {
+     "default_expr": "canonical/runtime/bound_capabilities/python_source_add_parameter.py:168"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "5f73aaa5acb00ca0bedee1a967f7fbdb9325076aaf30faf1ed3595569bd7190d"
+   },
+   "canonical/runtime/bound_capabilities/python_source_complexity.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "23be221738f7113402991cc1caeb757746f1e9e9647d2dbd11426c84b284583b"
+   },
+   "canonical/runtime/bound_capabilities/python_source_dead_code.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "181dd7c72ae6a7c1d11b077b8bf0e6ea6f40de6401c2d6b58e46346a14e645a8"
+   },
+   "canonical/runtime/bound_capabilities/python_source_definition_count.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "669930a4108c92da8768d014fe92f052b6feb9f73847a7cd41c89c56dcabf42b"
+   },
+   "canonical/runtime/bound_capabilities/python_source_inline_helper.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/python_source_inline_helper.py:135"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "dc86634f97730d1c5bb5dddac71c28d571d7b462e465c97da9fa387e8bfd3d03"
+   },
+   "canonical/runtime/bound_capabilities/python_source_merge_resolve.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py:130"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "5b598aa0b9dc1e0bf9ef4a42ed272e94b8009373cefc3978f7e0e9e2aced000a"
+   },
+   "canonical/runtime/bound_capabilities/python_source_move_function.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/python_source_move_function.py:128"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "92cb5eb9a6da6df0a46e7b44965542230763cce5224e1421cb5cd837a76d9588"
+   },
+   "canonical/runtime/bound_capabilities/python_source_move_symbol.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "74e401e1045ec56a5f0cdf85ff2b658eec45e538872f57f6651102eb6e912af2"
+   },
+   "canonical/runtime/bound_capabilities/python_source_secret_scan.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7830d7eb02be5b0019efc9ca2aeace66f33d1d57106061e773907a9dc01919c5"
+   },
+   "canonical/runtime/bound_capabilities/python_source_taint_flow.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "04ca5e977f3c6aaae506645fa5ac89e20ec2b3f9663878941cccd6cd075ea21c"
+   },
+   "canonical/runtime/bound_capabilities/python_source_test_adequacy.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/python_source_test_adequacy.py:121"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "bb50ac452294b6d50c20a241e77eafb4203deb5eb942ea755375beda84f696b9"
+   },
+   "canonical/runtime/bound_capabilities/python_swe_transform_and_synthesize_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [
+     "add_benchmark",
+     "add_cli_flag",
+     "add_counter_metric",
+     "add_error_handling",
+     "add_fastapi_endpoint",
+     "add_http_client",
+     "add_logging",
+     "add_retries",
+     "add_thread_pool",
+     "add_type_hints",
+     "advance_mutation_kill",
+     "crossfile_feature",
+     "extract_constant",
+     "fix_memory_leak",
+     "format_python",
+     "git_branch_and_commit",
+     "git_cherry_pick",
+     "git_commit",
+     "git_rebase",
+     "git_revert",
+     "git_worktree",
+     "harden_path_traversal",
+     "implement_issue",
+     "inline_function",
+     "lint_and_fix",
+     "make_async",
+     "memoize_function",
+     "move_module",
+     "optimize_function",
+     "parallel_test_suite",
+     "raise_coverage",
+     "release_gil",
+     "remove_dead_code",
+     "remove_unused_imports",
+     "replace_deprecated",
+     "safe_helper_refactor",
+     "split_module",
+     "sqlalchemy_model",
+     "tests_from_docstrings",
+     "write_property_test",
+     "write_regression_test",
+     "write_unit_test"
+    ],
+    "dispatch_phrases": [
+     "add benchmark",
+     "add cli flag",
+     "add counter metric",
+     "add error handling",
+     "add fastapi endpoint",
+     "add http client",
+     "add logging",
+     "add retries",
+     "add thread pool",
+     "add type hints",
+     "advance mutation kill",
+     "crossfile feature",
+     "extract constant",
+     "fix memory leak",
+     "format python",
+     "git branch and commit",
+     "git cherry pick",
+     "git commit",
+     "git rebase",
+     "git revert",
+     "git worktree",
+     "harden path traversal",
+     "implement issue",
+     "inline function",
+     "lint and fix",
+     "make async",
+     "memoize function",
+     "move module",
+     "optimize function",
+     "parallel test suite",
+     "raise coverage",
+     "release gil",
+     "remove dead code",
+     "remove unused imports",
+     "replace deprecated",
+     "safe helper refactor",
+     "split module",
+     "sqlalchemy model",
+     "tests from docstrings",
+     "write property test",
+     "write regression test",
+     "write unit test"
+    ],
+    "sha256": "8586cb836dc59b45cca6432c9d8d964a8c5fb1f4d2f8837e76d3145023001af8"
+   },
+   "canonical/runtime/bound_capabilities/python_symbol_resolve_standalone_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "787ec0a0f52f3139c542bd11e6d18595147a2523b70cce6b79db8f902b5e076f"
+   },
+   "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py": {
+    "defaulted_keys": {
+     "max_candidates": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py:945",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py:944"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9e5c69564e1f52a63ffbc5132d3b1b7f9807cbf31d4a3b0cb57a5317165b1273"
+   },
+   "canonical/runtime/bound_capabilities/python_test_pipeline_verifier_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a07e4ca2f41c1d84f30ef8e5559d87776f0e2ef5b4e2393987d5fd27fb631157"
+   },
+   "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py": {
+    "defaulted_keys": {
+     "max_mutants": "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py:75",
+     "time_budget_s": "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py:73",
+     "timeout_s": "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py:74"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d79f8ea81d756c017f8f1a9f7b14db425c2f20cf9845fdd30770821cd037d5fc"
+   },
+   "canonical/runtime/bound_capabilities/python_tests_mutation_score.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "df8a77014ebcb0c58084ffc8564db24c32ec31297dcbde553c059c631a259770"
+   },
+   "canonical/runtime/bound_capabilities/python_tests_synthesize_pynguin_v1.py": {
+    "defaulted_keys": {
+     "algorithm": "canonical/runtime/bound_capabilities/python_tests_synthesize_pynguin_v1.py:65",
+     "search_seed": "canonical/runtime/bound_capabilities/python_tests_synthesize_pynguin_v1.py:66",
+     "time_budget_s": "canonical/runtime/bound_capabilities/python_tests_synthesize_pynguin_v1.py:51"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ab3c0dce4c4211e74b98656509979a7caa6fa5f9d6087016b2ccc7276f68c20a"
+   },
+   "canonical/runtime/bound_capabilities/raw_task_objective_acceptance_executor_v1_run.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ec6c1fa1bf90c7c12b1b64efdbc7d432aa443ae7ce3c02ad5d477cc9b26004e7"
+   },
+   "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [
+     "analyze_log_exception",
+     "audit_dependencies",
+     "benchmark_git_ref",
+     "class_hierarchy",
+     "design_adr",
+     "diagnose_test_suite",
+     "explain_behavior",
+     "explain_bug",
+     "find_dead_code",
+     "find_flaky_tests",
+     "find_race_condition",
+     "find_root_cause",
+     "fuzz_overflow",
+     "git_blame_line",
+     "git_changelog",
+     "git_diff_ref",
+     "import_cycles",
+     "lint_javascript",
+     "measure_coverage",
+     "measure_mutation_score",
+     "migration_plan",
+     "package_split_design",
+     "plan_rename",
+     "profile_hotspot",
+     "review_api_design",
+     "review_pull_request",
+     "run_js_tests",
+     "run_single_test",
+     "security_audit",
+     "show_definition",
+     "trace_data_flow",
+     "trace_value_provenance",
+     "validate_json_schema",
+     "which_modules_import"
+    ],
+    "dispatch_phrases": [
+     "analyze log exception",
+     "audit dependencies",
+     "benchmark git ref",
+     "class hierarchy",
+     "design adr",
+     "diagnose test suite",
+     "explain behavior",
+     "explain bug",
+     "find dead code",
+     "find flaky tests",
+     "find race condition",
+     "find root cause",
+     "fuzz overflow",
+     "git blame line",
+     "git changelog",
+     "git diff ref",
+     "import cycles",
+     "lint javascript",
+     "measure coverage",
+     "measure mutation score",
+     "migration plan",
+     "package split design",
+     "plan rename",
+     "profile hotspot",
+     "review api design",
+     "review pull request",
+     "run js tests",
+     "run single test",
+     "security audit",
+     "show definition",
+     "trace data flow",
+     "trace value provenance",
+     "validate json schema",
+     "which modules import"
+    ],
+    "sha256": "4ffdc0cfd9900fbe4559b49b4ffb240ac7b4036eeeea9ce001bde58f766df904"
+   },
+   "canonical/runtime/bound_capabilities/software_evidence_synthesis_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "990cfa6065d60b309efe20e59c9969967cd44f4d45139ecb7e2f045ccbbcfb43"
+   },
+   "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a22c870deff24ee519cd3e8848eba0044dda3eaf77838570e260c138c063324f"
+   },
+   "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "02510a390bf9cd970bce815173bbd2636e598410729dfae8a549707e0b9d0f27"
+   },
+   "canonical/runtime/bound_capabilities/software_hardcore_swe_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "391bb6c9fefac404e0b8adf720c654d829cb2d243ebcbb0daa048e15928cccaf"
+   },
+   "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py:174"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ca3878c0d6441c25fdf1a709a6d9c26b386a58fb461d5058791b99e657985730"
+   },
+   "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py": {
+    "defaulted_keys": {
+     "synthesize_regression_test": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py:1737",
+     "timeout_s": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py:132"
+    },
+    "dispatch_ops": [
+     "move_symbol",
+     "rename_symbol"
+    ],
+    "dispatch_phrases": [
+     "move symbol",
+     "rename symbol"
+    ],
+    "sha256": "1a2a2712bdb2df82cd0c2ca5b5c578e67a927c31629474a6646f17ace15f8545"
+   },
+   "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py": {
+    "defaulted_keys": {
+     "budget": "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py:38",
+     "timeout_s": "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py:139"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f60de830077b53b6cdd68a586795830bd5d99bf28a4bf610b03b051e64d560aa"
+   },
+   "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py": {
+    "defaulted_keys": {
+     "timeout_s": "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py:77"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "101e8ce1cc30f8fbdca988e9a7ef256bb849d4a98e5b888ee6af84283db15e30"
+   },
+   "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a4543fb949515cb9bdc79f7bc60684869e78a704263b5c1c8a7878ad723a79bb"
+   },
+   "canonical/runtime/bound_capabilities/software_test_contract_supercomposer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e0ee8b951fd1c67fff0181665fe71635cd23e77c65a1317f3536ee76f5e2755a"
+   },
+   "canonical/runtime/bound_capabilities/source_authority_binding_ror.py": {
+    "defaulted_keys": {
+     "max_candidates": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py:224",
+     "timeout_s": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py:223"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8053587e7eb9e61f9f486f99391ba013bff8f38d10fca954f9f06978161dcd48"
+   },
+   "canonical/runtime/bound_capabilities/source_candidates_enumerate.py": {
+    "defaulted_keys": {
+     "max_candidates": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py:55"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "1bb83d60e8d0fdee7436cb7105d10f4518cf60eba87e28c5ece2b3ba592e8887"
+   },
+   "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "290f786fb4e36ec680cc9f1eca157732009a69c4a40dab56819e1d2346b8fcd0"
+   },
+   "canonical/runtime/bound_capabilities/sqlite_verify_cli.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7be12b3448fae1e889f58f62e6289423aed10ed42baa9e151d256eefecc8e902"
+   },
+   "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "889378f5933b07c3b9ec989ed8b4fa03d0e16a7350697940cca28b61963a8475"
+   },
+   "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "09cc598fbc29d136d7f20ad855015352e7f394b8ca6a2d9f5661cfcd7e3ff143"
+   },
+   "canonical/runtime/bounded_explicit_categorical_support_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f53594712ae0a416b3f12c15ffdc4e271cd8da78e1c930775e8659494232bb25"
+   },
+   "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "5b0d8e793276888e4c91de37042a28d66e279b29098b90866e312d98b64ec405"
+   },
+   "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2402e93229941abbc0c5cc5151ebe05831bbadf9ce7baf68720cc8e45942e31c"
+   },
+   "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7ac0906e80326d4d9844ff4d91e96c5c4611191aafd4bed2c6daa6ee6fe79d8b"
+   },
+   "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "c9f154393c3204404fb480ed75cefc10c9a8a23f5d8f7ff913db9f98ed424160"
+   },
+   "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7ae7029b3999d7d1d7883e8b343a30eef64715b7981c147c7f85e5b4a36678f1"
+   },
+   "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f18516db47409cf4e639461e08fa63f2ef64305f1b845e8c85c7ce4f89560abb"
+   },
+   "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "67418350dd1f9ba85d27ee43da892a4d24262d336a9cdbff9587ed4a4cdada7e"
+   },
+   "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a6bc738731e2be3f13f16b6f20c46e8a0b8f42e1538c6e8df59dda1311125143"
+   },
+   "canonical/runtime/livebench_frozen_schema19_envelope_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "c84181190b18c49fafdfaacdef0cc2093dc21cf53a9bcec56d5908740cdf4f2d"
+   },
+   "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "edbab5d3225f7e019f9ac711d72f326991003735e85b7ae8ae52782919480518"
+   },
+   "canonical/runtime/livebench_if_public_description_inverter_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d2093827e4ec432b062bff7b1b21fe5d664d6d773a42ec6ca137a0cb2c6629f0"
+   },
+   "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py": {
+    "defaulted_keys": {
+     "tolerance": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py:335"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ac7b9ef521de9dd3da741516517b7ca054b800d5279f7e8369985d26a79fb1a2"
+   },
+   "canonical/runtime/livebench_if_single_checker_solver_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9c9d199f10961f4ffbe9075846a626dee9f723b8297761a4fd290dfafcc8556d"
+   },
+   "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "b4f46c39e13cee80c56acb16713950fbb8821b1884640059ce76107a3bfaefbc"
+   },
+   "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d85c47fc3f0660d8611d7d308217ca6b8ccfca0483aa2341dd321e5cc5dddfeb"
+   },
+   "canonical/runtime/livebench_legacy15_contract_composer_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2d332f615e8fc34564efacae3b7fd06db6462b60901995e72ef6e8f8b6bb0212"
+   },
+   "canonical/runtime/livebench_legacy15_contract_composer_v3.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "41b464fc4412f489453171eb11b9d8e021701b71bf1b55215d74bf7651d16adc"
+   },
+   "canonical/runtime/livebench_legacy15_general_composer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [
+     "NTH_PARAGRAPH",
+     "PLAIN",
+     "SENTENCE",
+     "STAR_PARAGRAPH"
+    ],
+    "dispatch_phrases": [
+     "nth paragraph",
+     "star paragraph"
+    ],
+    "sha256": "43fb2baceffcd6b0ebd744b4007b99b84e160e88c23e8f779ef989463073a9c0"
+   },
+   "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "b1214c63fe67666a695684c6658ea84b2a3ba7b63e544a265bf8a8d297f8c376"
+   },
+   "canonical/runtime/livebench_legacy15_joint_witness_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "52651aa202f483fe2bcf4304efab40aa248c95f0b1deff35f2a3913df0a17969"
+   },
+   "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d548a89c33c59565bdb104265b1c07feb918090075e4058cd80b361d1acf86d6"
+   },
+   "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "0bce42193ad97d716f84357aacd2d28c4d78f646ac87657cdd9e9262cbcd4e0f"
+   },
+   "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7d24af0cfcbb7272816868872c516b90b974c324b77662cca9f8c29b721f3f7e"
+   },
+   "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f766837d921c9df733fe3e25609e885cf5bb8857ac0c01864c2bf592b81e600c"
+   },
+   "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8c41914e081415cee082a848ffe22dd1bf06b1195510c08f0be0ffbda67d6bb5"
+   },
+   "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "3eda8fb12b2bd7e7be4cac1d0905001018dea87674f204521d291aa4de6ea7e9"
+   },
+   "canonical/runtime/livebench_legacy15_special_composer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "919fe7851f71099eff490bd38774713f6f3c0c7d38498504c7205b153c9806b8"
+   },
+   "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9327d695140864a1ac80b1001ba6799dae6872e9252056ed43289ab35a2614ef"
+   },
+   "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "683593ac518865a519288940f0e07b9a4a40c69d74439d9cf66802b90a1744f4"
+   },
+   "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9fbb9f36703279cdc7428834182831b857e75c75093ce17cfa929bce80089cbc"
+   },
+   "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f29d2845a5e36426835d790025480e2867518ff1c27ce73f777b9352e8c1267b"
+   },
+   "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a94d0ba049f46cb5830c0b35813855a5559905e0abc162ff4ddfd65382b7539b"
+   },
+   "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7069d52f744a50bc6a7e93e74da820f3dfeebcf5f5e06a43d685560f276c925c"
+   },
+   "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8316c9713b98b92d0c1307bc85dba55ede0175ce7845c3d001f107cd7ebaba58"
+   },
+   "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e662873de4775857e9b96d838a2543bbcf78de41c073eaa41088edd70b8b1315"
+   },
+   "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "b00f4dd3d4e60884d7b440bd28ad6d9434c0402d62c57d730a54dc06f9941451"
+   },
+   "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "11e72aab0a8d143bebff0e5d2021c5802ce7d459c70136908fd8b92f2fbdac47"
+   },
+   "canonical/runtime/livebench_ngram_reference_free_v1.py": {
+    "defaulted_keys": {
+     "tolerance": "canonical/runtime/livebench_ngram_reference_free_v1.py:252"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "73e9a8d29fcbda72a112f2aba6b41f45ecf4fccd86b06fbe21b8d7bccc4483c8"
+   },
+   "canonical/runtime/livebench_pointwise_minimum_cut_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "87f407dfd2c049a72346562fc65d16f252edcf014e30f1877e8fc8a9d3549c86"
+   },
+   "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "823f104dea3499914cb2effcbaecf8324292488296ea2f0d5b23929060c255e3"
+   },
+   "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "057dd32bbbe1ecebff78107717eb0c3e8748fe1488c9e3b7f37d3a574cd4fbd8"
+   },
+   "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "332024ff19105f2af6c49f861ff4f5fc6cc938ce728a2fbbb58da62ab715c911"
+   },
+   "canonical/runtime/livebench_punkt_parameter_independence_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "13ba82c16c4415e18c89d5a748ead565702b2d835a9d7c1964ab1f13163e9889"
+   },
+   "canonical/runtime/livebench_release_schema_scope_bridge_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "b68ece5456ea40041fbe29ad1cefd2838b1b8f7a9148bec0f4177237d2b8888b"
+   },
+   "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "c5ec6e6cd0527b5660ac955f1cc7ac988066edc84edf5a2288c184ebe0f0ca3f"
+   },
+   "canonical/runtime/livebench_root1_reused_core_selector_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "00ec9581266404b4f102b6cfc956ec3b655e91289a66d04977a79f76aed4a129"
+   },
+   "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e1a79d3339f9ffefe8371528aaef5d13c10bdc9baae1226959787b033a41cb20"
+   },
+   "canonical/runtime/livebench_union25_archetypes_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "54cd24925bedf6937bc5c6893a034a95fad3cb2154e3c99160dbf3749c930afb"
+   },
+   "canonical/runtime/livebench_union25_channel_factorization_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d06da359c947ac42854b3294ac8be5d780fa0ff1d41e80768d0cca90392417c1"
+   },
+   "canonical/runtime/livebench_union25_extension_kernel_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "90e1f8245bb64cf47e0e44f42cd903e5bd72f56471f20a56d0fd5636b0ed62cb"
+   },
+   "canonical/runtime/livebench_union25_language_exception_carrier_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "352ece5bb336160435ceebc4f87ae1eb40d45317ad0e62ae578f91e41a104a13"
+   },
+   "canonical/runtime/livebench_union25_language_exception_carrier_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2b6bdd5f8688ca715ff9e73e820d978cdad66a6da9b2cce8c142daa764e0cb38"
+   },
+   "canonical/runtime/livebench_union25_mandatory_footprint_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "160715ea1aeadedb4a925e7a78b59c9a5993d2dd1e2e66ac7d157a40755ac561"
+   },
+   "canonical/runtime/livebench_union25_mandatory_footprint_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "74115d1baa3e48b9690df2c8075dcaf0c2e4a4f1a0a8f5d18d35a7c04a80aa56"
+   },
+   "canonical/runtime/livebench_union25_mandatory_loss_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8b8373655c355ed7fbda5022682a97906c08e47c272e3d1c7206a97f3f247fcd"
+   },
+   "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "6d05bbf01eddfae4826a8d774c66bd2156f26794e68bec8832ce9afc6ac55d2f"
+   },
+   "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "16b23a88f4985ea3556a5bf95930ac00200db47f0513a3cdf9f2b024eab190bc"
+   },
+   "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e66967dd58543e736e7c97c3b19e2de02cb679467b2128666cf36b319b1263bb"
+   },
+   "canonical/runtime/observable_policy_cover_executor_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f557836d6a60edc14f464ceb1717927492d7fa2b4d65a8105e5cb0272b33e59a"
+   },
+   "canonical/runtime/p3_binary_decision_grounded_expression_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "a0f93275d0cd484c3421ebc01c9179772cbfaf1aa6515a5cbd23294f6701bf29"
+   },
+   "canonical/runtime/p3_binary_explicit_source_membership_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "6451fa1d8a2d245de27895c55d6235b765cf140859f6c366a555729ee416e910"
+   },
+   "canonical/runtime/p3_binary_objective_decision_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4d92564181b96a2f9850e6d0c63fa7cf80a3440f0a22a87840de3d1e0bf7f9b2"
+   },
+   "canonical/runtime/p3_bound_binary_real_context_membership_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "37b0428b0fdcee159c4facd611def7b7eeddeb78918719791f57bbd1ee9db464"
+   },
+   "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [
+     "AND",
+     "ATOM",
+     "FALSE",
+     "IMPLIES",
+     "NOT",
+     "OR",
+     "TRUE",
+     "XOR"
+    ],
+    "dispatch_phrases": [],
+    "sha256": "8df8b005c4d1c38b1867da554d80315de9c68b5d2c8fb9fa8e17eacb9099644a"
+   },
+   "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "c4955579055034753ac658e9ed961ee3ef685e50ed42b36f46f1485bd1677552"
+   },
+   "canonical/runtime/p3_bounded_objective_role_relevance_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "021069cbdb1694f5193a7f6a49885d077b3889de8fc0153b9f0622a29b4b4568"
+   },
+   "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "280d5f40603fe9275c9c173532f926ed69624b0396a49720384b8ef63197dcd9"
+   },
+   "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4489adbbf2de22b80bd9ab1783c42226e3b6f16c42884c6cdad6bc91cb7cdfc3"
+   },
+   "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9bfebdff7756a4588748b40aeb30074ae1c0939e241286538ba09e429d942ffb"
+   },
+   "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4240de3c1f04540681c0db4d28d95e15afddcf82bd71fc02a562d68b534b5707"
+   },
+   "canonical/runtime/p3_policy_influence_relevance_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "800cd6ac6ddaa5b87d259c02fbfa9e72604ebb1c40f6a234588d5cadd2061434"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "6af8a0c5132c490d308161e2d930b4c0a97e84e8ee0f70af80a793c2c883bd4c"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v10.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f2389e0bd1769853b33df871e981bcd9bd642ee4465721dd807261509b1432dd"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v11.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ca385c17a63abea38ffd413983ce479df7b3a7b80e4577f2c10afef6f50d12ce"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v12.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ff5b453fc58403dd663ec17be1df0c156db463f2fe0df131ec439a0411fee668"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "35838305362ff2c51942552de227e947189d715d6e102d61730c1e11c5bf61c5"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v3.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f7a70e3a3edc6f5f9d8cc84050b30b064412bad5d10b7ee4e40e56cab9b77129"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v4.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "86d54456dd9fb932882044c7e488f0658fb6912413bd5f066533ec11b17496c1"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v5.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "66b20e3228b57e05b51a076e86404f8c537c875b816ab29204e4310e5b3a0d81"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v6.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "15830ce0394cb8ea0ab02a740d95a3971900612046739446220b77c50169790d"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v7.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9cf01d7af80d2fac9a6f54a941ac23700b9d2fb42946b6c2cc652e7ee8c6c179"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v8.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "512741693872ffe534c22cb64bffffd9829a46177cf6b944a284b513eb3af310"
+   },
+   "canonical/runtime/p3_real_context_v3_admission_v9.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "32624c6f05620bdd260434a6c72d4fc9220c164bd5e1b6690630fde3bb4ca4e6"
+   },
+   "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "90c8bf0950d99a8c575e2d66058d6f0c1b87cc1d5c692210122cf945c1547d0c"
+   },
+   "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "ecd1dada8f622af47b53eb8e67fb44d68387aa9fb30cb5d25a50d5f675fb3d5d"
+   },
+   "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "37f0b4bd613c92fe996ee758f3d737209cce0893a44ae65dd1a3d92004a15847"
+   },
+   "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9b8d8cc1b40d267d85235c76f204afcc02580ca5776bdda56970640980a55edd"
+   },
+   "canonical/runtime/p3_source_positive_selection_cell_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "4f80b760e112790948fe6e6aa81568d1373b2985fda32aabd1b9c71d3335c1cd"
+   },
+   "canonical/runtime/professional_quality_p1_router_v5.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "3aed3ba72124199b4793c6cf9f08e2aea80698b72011fda2d6156ab8ad174518"
+   },
+   "canonical/runtime/professional_quality_p1_router_v6.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "15499aa7d71d6cd5ae34a256d79ce96f21d854f36e6ae907dc847fa336cd1e41"
+   },
+   "canonical/runtime/professional_quality_p1_router_v7.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "59ca4b34a456bf5e0dc212a118542c923fd4394da94b760f8d6111b8b810db52"
+   },
+   "canonical/runtime/professional_quality_p1_router_v8.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "f81cbb77672d3b778bab5322f3155437db0df900a821339824bc0caa0dcadd06"
+   },
+   "canonical/runtime/professional_quality_p1_router_v9.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "c623afc13d7bfd97ad5746d16fe7c2fbd4adb25847a7bf06273e3b54a111e73c"
+   },
+   "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d9234ffb757cf12d68435dd0242d868d1903c9281aece9adce14e0622ac034a2"
+   },
+   "canonical/runtime/professional_r12_safe_meta_composition_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "3ac4a8115e0860a382cab80af7ff033bdc569cdee0eeaa2590182d6ef987ec1d"
+   },
+   "canonical/runtime/python_measured_objective_acceptance_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "660f2cbf7929648cdcad30bdaacc76447d2ad1a714b8e948afaf70d5f36856f1"
+   },
+   "canonical/runtime/python_request_acceptance_union_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8e6b2d8eca35962dde2f8cf3ecb3d9d9132b85a264e12ff8af2e4a90225812d9"
+   },
+   "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "fce823e581dd57c85f2cc538cc17fbcfc129dc30e6b550133747f2aceb927b6b"
+   },
+   "canonical/runtime/root1_contrastive_semantic_gate_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "bacb449927faf0680224df8e6ded13f72187345f13be856c336272cacdf0b538"
+   },
+   "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "3d5341a8c11235b385fd365c33eb5a525f34edd7c33214f71b8035d968f3b9f1"
+   },
+   "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "9bc17f22902eb25899210d93cdd7a946a71f8f6477c9ed0e25daa4c2e42a3a6d"
+   },
+   "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "25ec0f39761ebfc892974d7e357c256354e457234c4b3033cfc3b61b19121bd1"
+   },
+   "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8d9732195a3c57722be2779ff1ef695716981318f48381001157bded63213c32"
+   },
+   "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "1fad79cd7924ab848de33bb30cc3499b392c0f9789466bdc93e62d817ad5dbdd"
+   },
+   "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "7be5dd56ca699f17336513d8bd2c1feeeb48f82ed976f47185b35625dfcc95f2"
+   },
+   "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2ae5e184f6359e1b4725df5571b05fdd8a4aef65e98ad1569e8c669aca0f5894"
+   },
+   "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py": {
+    "defaulted_keys": {
+     "seed": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py:122"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "e858d1645008f8282086eb9469c48cf6437029b7932246ee2e01ae2690488d54"
+   },
+   "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py": {
+    "defaulted_keys": {
+     "seed": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py:248"
+    },
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "bb1324b9c4ff03ebf3e8fcbeab494112f05bc57b4a4141750dc47f8349b6ae63"
+   },
+   "canonical/runtime/selected_bounded_support_truth_certificate_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "92764c510770a0c1cf1cb7cc7d65af6eb1080377e353ea1d8688bfd29efe838a"
+   },
+   "canonical/runtime/selected_support_truth_certificate_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "80cbf2713e3da52667345e183c03a04cf2c6800e1ffe81fdabeee5c649b94a98"
+   },
+   "canonical/runtime/selected_support_truth_certificate_v3.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "eda412a243c141e0541fa4b574586c5731c721163a8df971538127331ae7aa55"
+   },
+   "canonical/runtime/selected_support_truth_certificate_v4.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "df6cac50b1d0f076a4551a4d9a53858cb28f5030295be6b327f277d6a2f1e130"
+   },
+   "canonical/runtime/selected_support_truth_certificate_v5.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "da6e88d10f8108c592cb5bc8961f680753ba24f97564838f5e1b758af205bfbb"
+   },
+   "canonical/runtime/synthesis_certified_visible_support_policy_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "cf54cd4a59c03f0a8321e7b05b8351773dcb21ed0b03b77a51fab1411460dc33"
+   },
+   "canonical/runtime/synthesis_certified_visible_support_policy_v2.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "380cb65634e9c95eafc38c0f0610335843f6beb28ac362d51d847787b39c4fa6"
+   },
+   "canonical/runtime/synthesis_certified_visible_support_policy_v3.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "2f42150d51735d80119fbbcfc67dff920f16742c959a61f28c40d074f05f204b"
+   },
+   "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "8d20c163638da7b70e25500debccc23cb490ffcde95536034eaa6945a24e83dd"
+   },
+   "canonical/runtime/terminal_authority_epoch_guard_v1.py": {
+    "defaulted_keys": {},
+    "dispatch_ops": [],
+    "dispatch_phrases": [],
+    "sha256": "d54e89f71ab64d9287d6e91d9f173ea104b9b839018df751a10894027959e9a7"
+   }
+  },
   "confidence": {
    "coverage_definition": "matched_query_tokens / query_tokens",
    "minimum_best_score": 1.0,
@@ -47799,7 +49463,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 57601,
+   "bytes": 64378,
    "headings": [
     "Solution index",
     "Load-bearing spine (most imported first)",
@@ -47813,60 +49477,61 @@
     "COMPUTER USE",
     "SPEED",
     "LEARN / SKILL",
-    "DURABILITY / RECALL"
+    "DURABILITY / RECALL",
+    "ZERO-LLM AWAKE AGENCY & GENERALIZATION (`K3 = 0`)"
    ],
    "kind": "DOCUMENT",
    "path": "SOLUTION_INDEX.md",
-   "sha256": "5234f55cd3a2f7586d36e1bcb8d49ecda4c93a6e6abf6da37ed6f70627fa9fa4",
-   "summary": "Generated by `scripts/build_solution_index_v1.py` from 2694 non-test Python files (2568 mechanism modules outside vendored trees). Rows are ranked by how many other modules import them.",
+   "sha256": "1dbdd404c4a2aad9a24b5567284af37f65ba95bf15ad4aa6520b93af61c31756",
+   "summary": "Generated by `scripts/build_solution_index_v1.py` from 2695 non-test Python files (2569 mechanism modules outside vendored trees). Rows are ranked by how many other modules import them.",
    "terms": {
     "10": 10,
     "13": 12,
     "adapter": 15,
     "adaptive": 12,
-    "authority": 11,
+    "authority": 10,
     "bound": 10,
-    "bound_capabilities": 42,
+    "bound_capabilities": 43,
     "bounded": 28,
-    "brain": 33,
-    "brain-owned": 13,
+    "brain": 35,
+    "brain-owned": 12,
     "bridge": 10,
     "candidate": 15,
-    "canonical": 445,
-    "capability": 28,
-    "compiler": 21,
+    "canonical": 460,
+    "capability": 29,
+    "compiler": 22,
     "cross-document": 10,
-    "declares": 12,
+    "declares": 13,
     "deterministic": 40,
     "discovery": 10,
     "effect": 11,
-    "exact": 20,
+    "exact": 21,
     "execution_guard": 11,
     "fail-closed": 23,
     "frontier": 12,
-    "frozen": 19,
+    "frozen": 18,
     "generic": 11,
-    "h100": 19,
-    "live": 17,
+    "h100": 17,
+    "live": 18,
     "livebench": 11,
-    "module": 13,
-    "not": 15,
-    "one": 16,
-    "osworld": 20,
+    "module": 14,
+    "not": 14,
+    "one": 18,
+    "osworld": 21,
     "policy": 13,
     "project": 21,
     "proof": 16,
-    "python": 11,
+    "python": 12,
     "refs": 11,
-    "registry": 10,
-    "runtime": 427,
+    "runtime": 426,
     "semantic": 25,
     "solver": 16,
-    "typed": 14,
-    "universal": 21,
+    "swe_kernel": 26,
+    "typed": 15,
+    "universal": 20,
     "v1": 53,
     "v2": 24,
-    "verified": 36,
+    "verified": 37,
     "verifier": 20
    },
    "title": "Solution index",
@@ -61772,14 +63437,14 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "9aff61c1087b61205d63b9795b72433d4288271fe8e9e627836baa72cacb6bb5",
+  "compiler_sha256": "b73aef2fde81f38b38c26e1bfb89a1b3ed94451b6e8b46ab3d9738ef42b1ef28",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
   "included_source_count": 1036,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0385a9e6369747a5e57fc00ea5c7b917625d46d2fadc82c9d8a60a9d380e6090"
+  "source_tree_digest": "d1b3bb3dd950638b602a74c77cb177d224f139789f9bc19ef8ec52edac9ab40c"
  },
  "research_index": [
   {
@@ -211139,6 +212804,51 @@
    }
   },
   {
+   "action_id": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-02",
+   "id": "research:canonical/action_intents/FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5d72c7ade10a7df4e34f5f18b4f101892780a2bc8776f48706b9ad5212527222",
+   "status": "",
+   "terms": {
+    "0.0384": 1,
+    "10.63x": 1,
+    "15.312": 1,
+    "2-episode": 1,
+    "2.625": 1,
+    "20.75": 1,
+    "20261101": 1,
+    "215.884": 1,
+    "215.9": 1,
+    "25.2": 1,
+    "28.38": 1,
+    "301.82": 1,
+    "9.84": 1,
+    "admission": 2,
+    "brain_unified_model_v1.open_model": 2,
+    "bundle": 1,
+    "causal_trace_to_skill_compiler_v1": 1,
+    "cold": 3,
+    "confined": 3,
+    "fast_internal_seams_and_zygote_v1_20261101_v1": 2,
+    "flywheel_v1": 2,
+    "internal": 2,
+    "live": 2,
+    "ms": 8,
+    "not": 2,
+    "paired": 2,
+    "refusals": 2,
+    "route": 2,
+    "seams": 2,
+    "solve_v1": 2,
+    "v1": 2,
+    "while": 2
+   }
+  },
+  {
    "action_id": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -227937,16 +229647,20 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "c19835f378a394108248f1fc78c3507ee437c1ebcab280ae590a6729aa3acfa8",
+   "sha256": "a7e5564c43b0d783f491532563a9089c0875ee170a2c4236947f424fcea6bb0e",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
-   "symbol_count": 15,
+   "symbol_count": 19,
    "symbols": [
     "UnifiedModel",
     "UnifiedModelError",
+    "_core_cache_dir",
+    "_declared_triggers_for_row",
     "_excerpt",
+    "_extract_routing_core",
     "_missing_declared_dependencies",
     "_normalise_capability_id",
     "_print",
+    "adapter_ast_entry",
     "artifact_digest",
     "ask_tokens",
     "canonical_json",
@@ -227958,14 +229672,18 @@
     "tokenize"
    ],
    "terms": {
+    "adapter_ast_entry": 1,
     "artifact_digest": 1,
     "ask_tokens": 1,
     "brain": 3,
     "canonical_json": 1,
     "compiled": 1,
+    "core_cache_dir": 1,
+    "declared_triggers_for_row": 1,
     "digest_value": 1,
     "door": 1,
     "excerpt": 1,
+    "extract_routing_core": 1,
     "front": 1,
     "load_model": 1,
     "main": 1,
@@ -231998,14 +233716,19 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
-   "sha256": "a3d30bb408422358ae019ce12e88bdce9d75cf54f3f9d5c356b09031529c0399",
+   "sha256": "212ec1108d8489de711310d61cb3e80ce7a0aa2b95c99ebc78bb080edb2c996f",
    "summary": "One sentence selects one capability: retrieval PROPOSES, typed admission DISPOSES.",
-   "symbol_count": 27,
+   "symbol_count": 32,
    "symbols": [
     "_arg_names",
+    "_corpus_index",
     "_effect_winner",
     "_expectation_compatible",
+    "_fast_decision_role_focus",
+    "_fast_focus",
     "_is_executable",
+    "_load_bm25_helper",
+    "_margin_from_proposals",
     "_name_words",
     "_request_words",
     "_states_a_command_the_sentence_maps_to",
@@ -232020,27 +233743,25 @@
     "is_ast_code_edit_request",
     "is_computed_answer_delivery",
     "is_specific",
-    "margin_verdict",
-    "request_excluded_proposals",
-    "request_may_select",
-    "request_names_capability",
-    "required_input_names",
-    "run"
+    "margin_verdict"
    ],
    "terms": {
     "admission": 1,
-    "admit": 1,
     "arg_names": 1,
     "capability": 2,
     "contract_of": 1,
+    "corpus_index": 1,
     "declarations": 1,
     "disposes": 1,
     "document": 1,
     "expectation_compatible": 1,
+    "fast_decision_role_focus": 1,
+    "fast_focus": 1,
     "is_ast_code_edit_request": 1,
-    "is_computed_answer_delivery": 1,
     "is_executable": 1,
     "is_specific": 1,
+    "load_bm25_helper": 1,
+    "margin_from_proposals": 1,
     "margin_verdict": 1,
     "name_words": 1,
     "one": 2,
@@ -232056,11 +233777,8 @@
     "selects": 1,
     "sentence": 1,
     "shortlist": 1,
-    "states_a_command_the_sentence_maps_to": 1,
-    "states_a_payload_and_its_destination": 1,
     "stem_of": 1,
     "typed": 1,
-    "undeclared_expression_names": 1,
     "v1": 1,
     "version_sequence": 1
    }
@@ -233957,9 +235675,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "9aff61c1087b61205d63b9795b72433d4288271fe8e9e627836baa72cacb6bb5",
+   "sha256": "b73aef2fde81f38b38c26e1bfb89a1b3ed94451b6e8b46ab3d9738ef42b1ef28",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
-   "symbol_count": 34,
+   "symbol_count": 35,
    "symbols": [
     "UnifiedModelCompileError",
     "_adapter_executed_programs",
@@ -233971,6 +235689,7 @@
     "_capability_row",
     "_dependency_declaration",
     "_engine_rows",
+    "_extract_adapter_ast_index",
     "_fabric_surfaces",
     "_first_paragraph",
     "_headings",
@@ -233983,8 +235702,7 @@
     "_skill_rows",
     "_source_index_rows",
     "_term_counts",
-    "_theory_block",
-    "_unique"
+    "_theory_block"
    ],
    "terms": {
     "adapter_executed_programs": 1,
@@ -234865,15 +236583,17 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "607cfce7ba0166380c010b748cc0b2a8dd0fadb3067696a0f24badfe90849f0a",
+   "sha256": "fc73f0ef51d0d8164cfa648283835955ca916fd58061e66ef02206aeabb492ca",
    "summary": "The computer itself, as an environment the learner can act in.",
-   "symbol_count": 50,
+   "symbol_count": 54,
    "symbols": [
     "ComputerEnv",
     "_abstract",
     "_bare_value",
     "_concretise",
     "_digest",
+    "_flags_for_goal_preparsed",
+    "_goal_token_info",
     "_help_flush",
     "_help_load",
     "_help_signature",
@@ -234882,6 +236602,7 @@
     "_instrument",
     "_known_counters",
     "_one_wide",
+    "_precomputed_flag_stems",
     "_query_cache_get",
     "_query_cache_load",
     "_query_cache_path",
@@ -234889,10 +236610,7 @@
     "_query_shapes",
     "_real_binary",
     "_recipe_of",
-    "_reverify",
-    "_run_capped",
-    "_run_pipeline",
-    "_single_step"
+    "_reverify"
    ],
    "terms": {
     "act": 1,
@@ -234904,6 +236622,8 @@
     "file_actions": 1,
     "flag_descriptions": 1,
     "flags_for_goal": 1,
+    "flags_for_goal_preparsed": 1,
+    "goal_token_info": 1,
     "goal_values": 1,
     "help_flush": 1,
     "help_load": 1,
@@ -234917,13 +236637,11 @@
     "learner": 1,
     "output_flags": 1,
     "output_name": 1,
+    "precomputed_flag_stems": 1,
     "program_actions": 1,
     "programs_for": 1,
-    "programs_for_goal": 1,
-    "single_step": 1,
     "stem": 1,
     "target_bases": 1,
-    "uses_goal_value": 1,
     "v1": 1,
     "verify_plan": 1
    }
@@ -237800,7 +239518,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/curriculum_v1.py",
-   "sha256": "e30c6f0f3b93a3afd125896ef47a347a2f485ddbda95103df8d74086ec4c87f6",
+   "sha256": "c1aa19928fefcfd70ebf62e903d4a6aa6cd3ebb2942819765d55899b6632104c",
    "summary": "The machine decides what to learn next, then learns it. Nobody tells it to.",
    "symbol_count": 18,
    "symbols": [
@@ -238326,7 +240044,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "7e752547e6d67b1f995a796a4d0bc842494b77e36a5734dac9efc3dbbf362bdc",
+   "sha256": "bcfea212d4de4bb60eb38daacd926d36c3a6c592da29f3e8e39549149f9d5af1",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [
@@ -240612,7 +242330,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/environment_learning_v1.py",
-   "sha256": "f0c4da2dbada1d3914f43011af0d71bb0fd7a3faf472cda1776abe8effc6f6a7",
+   "sha256": "f2183aef493038271d9d036803b4914c0adfc4634a54b75b39ccead6dae69122",
    "summary": "Learn any environment by acting in it, then plan the shortest way through it.",
    "symbol_count": 7,
    "symbols": [
@@ -244246,10 +245964,11 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/flywheel_v1.py",
-   "sha256": "b6637c0bd809ac4b1d4b3bddc4077c2a0e10a5673d972a06bf405086fed04981",
+   "sha256": "684438538b7251fe523a47419b0ad7fe6e7ff843ab6edc7384395acdc606607b",
    "summary": "The part that was missing: the machine gets better for having worked.",
-   "symbol_count": 13,
+   "symbol_count": 16,
    "symbols": [
+    "_default_state_path",
     "_load",
     "_operation",
     "_save",
@@ -244257,6 +245976,8 @@
     "cell_of",
     "cells",
     "classify",
+    "export_flywheel_bundle",
+    "import_flywheel_bundle",
     "primers",
     "recall",
     "record",
@@ -244269,9 +245990,12 @@
     "cell_of": 1,
     "cells": 1,
     "classify": 1,
+    "default_state_path": 1,
+    "export_flywheel_bundle": 1,
     "flywheel": 1,
     "gets": 1,
     "having": 1,
+    "import_flywheel_bundle": 1,
     "load": 1,
     "machine": 1,
     "missing": 1,
@@ -246185,9 +247909,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "889c0392cd0808c9e8b8124c627e05f26e6fe63776f99f190d877fc48a136271",
+   "sha256": "8170fc8cb740c8cb6e0335158d0dc9020be39956003259163a13279bee8e1ea6",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 134,
+   "symbol_count": 139,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -252634,15 +254358,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "5aa1d3507bbd8d2381a87b8b85bad04e93548ad1b3923a0e2298ce0fa66a950c",
+   "sha256": "ded68054e46e0acf82d61aeb8806bfebb517ca2b2a56c84804f5edbe6006f307",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 107,
+   "symbol_count": 110,
    "symbols": [
     "LocalExecutionFailure",
     "_already_satisfied_evidence",
     "_asks_only_for_a_plan",
     "_bind_requested_contract_checks",
     "_blind_change_evidence",
+    "_cached_composer_graph",
     "_capability_id_of",
     "_check_expectation",
     "_close_observations",
@@ -252660,8 +254385,7 @@
     "_declares_effect_by_argument",
     "_declares_it_does_not_write",
     "_declares_no_source_write_authority",
-    "_destructive_targets",
-    "_effect_landed_outside_the_named_subject"
+    "_destructive_targets"
    ],
    "terms": {
     "admission": 2,
@@ -252679,7 +254403,6 @@
     "goal_names_a_file": 1,
     "input_format_mismatch": 1,
     "inventory_source_path": 1,
-    "kernel_refuses": 1,
     "last_json_object": 1,
     "live": 2,
     "object_role_errors": 1,
@@ -252694,7 +254417,8 @@
     "tool_truth_errors": 1,
     "v1": 1,
     "verdict_errors": 1,
-    "with_tool_own_reason": 1
+    "with_tool_own_reason": 1,
+    "with_workspace_root": 1
    }
   },
   {
@@ -280693,10 +282417,13 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "8b38714db6e06d6e802716c587272cc07da2fc23e20dedcf46a7acbac0c06ef1",
+   "sha256": "01072f93aec0260008380edca329aa12f9a10e8aaad6c8643a1ad56fd91b026a",
    "summary": "The whole system, reduced to what cannot be removed.",
-   "symbol_count": 5,
+   "symbol_count": 8,
    "symbols": [
+    "_default_staging_path",
+    "_snapshot_small_tree",
+    "_stage_or_crystallize_paired_skill",
     "act",
     "observe",
     "read",
@@ -280706,12 +282433,15 @@
    "terms": {
     "act": 1,
     "cannot": 1,
+    "default_staging_path": 1,
     "observe": 1,
     "read": 1,
     "reduced": 1,
     "removed": 1,
     "render": 1,
+    "snapshot_small_tree": 1,
     "solve": 2,
+    "stage_or_crystallize_paired_skill": 1,
     "system": 1,
     "v1": 1,
     "whole": 1
@@ -287625,7 +289355,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "53b9bd2ccf34291ebe3837f59208cb5162317a8a7d6d37352f30e9c649147dad",
+   "sha256": "e34f789329814486ce07dfac07aff65680d1f5bfc12f107d9d1cd231f5c63102",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
    "symbol_count": 20,
    "symbols": [

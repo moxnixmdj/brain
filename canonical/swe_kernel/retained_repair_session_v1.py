@@ -91,12 +91,20 @@ class RetainedRepairSession:
             self.metadata['teaching'] = {'crystallized': False, 'reason': 'SINGLE_TARGET_TEACHING_ONLY'}
             return
         try:
-            self.metadata['teaching'] = self.store.crystallize_code_fix(
+            taught = self.store.crystallize_code_fix(
                 before_snippet=originals[self.target].decode('utf-8'),
                 after_snippet=self.target.read_text(encoding='utf-8'), language='python',
                 error_class='production_project_repair', contract=self.contract,
                 training_verifier=self.oracle,
             )
+            if taught.get('crystallized') and taught.get('skill_id'):
+                try:
+                    from canonical.swe_kernel import rule_expiry_v1 as _expiry
+
+                    _expiry.record_taught(self.db_path, str(taught['skill_id']))
+                except Exception:
+                    pass
+            self.metadata['teaching'] = taught
         except Exception as exc:
             # A completed source repair is not undone because retention failed.
             self.metadata['teaching'] = {'crystallized': False, 'reason': type(exc).__name__}

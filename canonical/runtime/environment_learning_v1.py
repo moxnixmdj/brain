@@ -48,7 +48,13 @@ FAIL_NO_GOAL = "FAIL_CLOSED__GOAL_NEVER_OBSERVED"
 # observation
 # --------------------------------------------------------------------------- #
 def state_key(observation: Any) -> str:
-    """A stable identity for a state. Anything hashable becomes a key."""
+    """A stable identity for a state. Anything hashable becomes a key; volatile computer noise is projected out."""
+    try:
+        from canonical.swe_kernel.predicate_world_abstraction_v1 import project_computer_observation
+
+        observation = project_computer_observation(observation)
+    except Exception:
+        pass
     try:
         if isinstance(observation, Hashable) and not isinstance(observation,
                                                                  (dict, list, set)):

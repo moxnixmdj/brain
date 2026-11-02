@@ -26,7 +26,12 @@ LEARNABLE_MISMATCH_CODES = frozenset({
     "READ_ONLY_GOAL_DISPATCHED_TO_WRITER",
     "MUTATING_GOAL_DISPATCHED_TO_READER",
     "WRONG_OBJECT_DOMAIN",
+    "WRONG_OBJECT_ROLE",
     "UNDECLARED_GIT_OPERATION",
+    "R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED",
+    "R2_OUTPUT_ARTIFACT_UNSERVED",
+    "LEXICAL_EFFECT_CONTRADICTED",
+    "STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER_CANDIDATE",
 })
 
 # Honest world/fixture/input refusals: the RIGHT capability row ran and reported truth.
@@ -36,10 +41,16 @@ HONEST_WORLD_REFUSAL_CODES = frozenset({
     "TARGET_NOT_IN_STANDALONE_GIT_REPOSITORY",
     "MISSING_REQUIRED_DECLARED_INPUTS",
     "SYMBOL_ALREADY_EXISTS",
+    "TARGET_SYMBOL_ALREADY_EXISTS",
+    "TARGET_SYMBOL_COLLISION",
     "NO_SHARED_STATE_RACE_DETECTED",
     "TARGET_FILE_NOT_FOUND",
     "MERGE_CONFLICT_DETECTED",
     "CHERRY_PICK_CONFLICT",
+    "STATED_PATH_OUTSIDE_THE_WORKSPACE",
+    "COMPUTABILITY_IMPOSSIBLE_SPECIFICATION",
+    "PROMISED_SOURCE_CHANGE_NOT_APPLIED",
+    "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED",
 })
 
 _READ_OPENERS = frozenset({
@@ -63,6 +74,27 @@ _STOP_WORDS = frozenset({
     "me", "please", "named", "called",
 })
 
+_ROLE_INTRODUCERS = frozenset({
+    "symbol", "function", "method", "class", "parameter", "argument", "arg",
+    "variable", "constant", "caller", "callers", "definition", "definitions",
+})
+_INTENT_VOCAB = (
+    _READ_OPENERS
+    | _WRITE_OPENERS
+    | _GIT_TOKENS
+    | _ROLE_INTRODUCERS
+    | frozenset({
+        "http", "url", "form", "endpoint", "csrf", "cookie", "login",
+        "tar", "gzip", "compress", "archive", "csv", "sha256",
+        "python", "rust", "go", "javascript", "typescript", "sql",
+        "test", "tests", "failing", "deadlock", "race", "regression",
+        "bug", "error", "issue", "file", "files", "module", "directory",
+        "repo", "repository", "every", "new", "unused", "uncovered",
+        "duplicate", "different", "lines", "line", "code", "source",
+        "security", "coverage", "type", "lint", "format", "conflict",
+    })
+)
+
 _PATH_LIKE_RE = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+|\b[A-Za-z0-9_-]+\.[A-Za-z0-9]{1,8}\b")
 _HEX_SHA_RE = re.compile(r"\b[0-9a-f]{7,40}\b")
 _QUOTED_RE = re.compile(r"'[^']*'|\"[^\"]*\"")
@@ -81,8 +113,9 @@ def default_ledger_db_path() -> pathlib.Path:
 def classify_goal_intent_signature(goal: str) -> dict[str, str]:
     """Extract a content-free `(object_domain, effect_polarity, shape_hash)` signature.
 
-    Strips file paths, commit hashes, numbers, and quoted literals so the signature
-    transfers across unseen repositories, filenames, and branch names.
+    Strips file paths, commit hashes, numbers, quoted literals, and arbitrary user
+    symbol/identifier names so the signature transfers across unseen repositories,
+    filenames, symbol names, and branch names.
     """
     cleaned = _QUOTED_RE.sub(" <STR> ", str(goal or ""))
     cleaned = _PATH_LIKE_RE.sub(" <PATH> ", cleaned)
@@ -109,7 +142,10 @@ def classify_goal_intent_signature(goal: str) -> dict[str, str]:
     else:
         domain = "software_code"
 
-    structural_skeleton = f"{domain}|{polarity}|{' '.join(words[:5])}"
+    intent_words = [w for w in words if w in _INTENT_VOCAB]
+    if not intent_words and words:
+        intent_words = [words[0]]
+    structural_skeleton = f"{domain}|{polarity}|{' '.join(intent_words[:5])}"
     shape_hash = hashlib.sha256(structural_skeleton.encode("utf-8")).hexdigest()[:20]
     return {
         "object_domain": domain,
@@ -130,11 +166,40 @@ def is_learnable_selection_mismatch(refusal_code: str) -> bool:
     return any(tok in code for tok in ("MISMATCH", "NOT_DECLARED", "UNSUPPORTED_OP", "DISPATCHED_TO_WRITER", "DISPATCHED_TO_READER"))
 
 
+_LEDGER_RAM_CACHE: dict[str, tuple[tuple[int, int, int], dict[str, list[tuple[str, str | None, str, int]]]]] = {}
+_LEDGER_SINGLETONS: dict[str, "UpstreamRoutingLedger"] = {}
+
+
+def _db_wal_stamp(db_path: pathlib.Path) -> tuple[int, int, int]:
+    try:
+        st = db_path.stat()
+        db_m = st.st_mtime_ns
+    except OSError:
+        db_m = 0
+    wal = pathlib.Path(str(db_path) + "-wal")
+    try:
+        wst = wal.stat()
+        wal_m, wal_sz = wst.st_mtime_ns, wst.st_size
+    except OSError:
+        wal_m, wal_sz = 0, 0
+    return (db_m, wal_m, wal_sz)
+
+
+def default_ledger(db_path: pathlib.Path | str | None = None) -> "UpstreamRoutingLedger":
+    target = pathlib.Path(db_path).resolve() if db_path else default_ledger_db_path().resolve()
+    key = str(target)
+    inst = _LEDGER_SINGLETONS.get(key)
+    if inst is None:
+        inst = UpstreamRoutingLedger(target)
+        _LEDGER_SINGLETONS[key] = inst
+    return inst
+
+
 class UpstreamRoutingLedger:
     """SQLite WAL ledger mapping structural intent shapes to disqualified/preferred capabilities."""
 
     def __init__(self, db_path: pathlib.Path | None = None) -> None:
-        self.db_path = pathlib.Path(db_path) if db_path else default_ledger_db_path()
+        self.db_path = (pathlib.Path(db_path) if db_path else default_ledger_db_path()).resolve()
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._init_schema()
 
@@ -210,6 +275,7 @@ class UpstreamRoutingLedger:
                 )
         finally:
             conn.close()
+        _LEDGER_RAM_CACHE.pop(str(self.db_path), None)
         return {
             "recorded": True,
             "shape_hash": sig["shape_hash"],
@@ -218,22 +284,35 @@ class UpstreamRoutingLedger:
             "preferred_capability": preferred_capability,
         }
 
-    def lookup_shape(self, goal: str) -> dict[str, Any]:
-        sig = classify_goal_intent_signature(goal)
+    def _load_table_cached(self) -> dict[str, list[tuple[str, str | None, str, int]]]:
+        key = str(self.db_path)
+        stamp = _db_wal_stamp(self.db_path)
+        hit = _LEDGER_RAM_CACHE.get(key)
+        if hit is not None and hit[0] == stamp:
+            return hit[1]
         conn = self._connect()
         try:
-            rows = conn.execute(
+            all_rows = conn.execute(
                 """
-                SELECT disqualified_capability, preferred_capability, refusal_code, hit_count
+                SELECT shape_hash, disqualified_capability, preferred_capability, refusal_code, hit_count
                 FROM routing_disqualifications
-                WHERE shape_hash = ?
-                """,
-                (sig["shape_hash"],),
+                """
             ).fetchall()
         finally:
             conn.close()
-        disqualified = {str(r[0]): {"refusal_code": str(r[2]), "hits": int(r[3])} for r in rows}
-        preferred = next((str(r[1]) for r in rows if r[1]), None)
+        by_shape: dict[str, list[tuple[str, str | None, str, int]]] = {}
+        for sh, disq_c, pref_c, rcode, hits in all_rows:
+            by_shape.setdefault(str(sh), []).append(
+                (str(disq_c), str(pref_c) if pref_c else None, str(rcode), int(hits))
+            )
+        _LEDGER_RAM_CACHE[key] = (_db_wal_stamp(self.db_path), by_shape)
+        return by_shape
+
+    def lookup_shape(self, goal: str) -> dict[str, Any]:
+        sig = classify_goal_intent_signature(goal)
+        rows = self._load_table_cached().get(sig["shape_hash"]) or []
+        disqualified = {r[0]: {"refusal_code": r[2], "hits": r[3]} for r in rows}
+        preferred = next((r[1] for r in rows if r[1]), None)
         return {
             "signature": sig,
             "disqualified": disqualified,

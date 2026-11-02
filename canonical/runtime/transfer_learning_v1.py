@@ -84,9 +84,17 @@ def fingerprint(env: Any, actions: Sequence[Any], *, probes: int = DEFAULT_PROBE
     returns_to_start = 0
     lengths: list[int] = []
 
+    def _proj(obs: Any) -> Any:
+        try:
+            from canonical.swe_kernel.predicate_world_abstraction_v1 import project_computer_observation
+
+            return project_computer_observation(obs)
+        except Exception:
+            return obs
+
     for _ in range(max(1, probes)):
         env.reset()
-        start = env.state()
+        start = _proj(env.state())
         shapes.add(shape_of(start))
         start_key = json.dumps(start, sort_keys=True, default=str)
         seen = {start_key}
@@ -94,7 +102,7 @@ def fingerprint(env: Any, actions: Sequence[Any], *, probes: int = DEFAULT_PROBE
         lengths.append(walk)
         for _ in range(walk):
             env.act(rng.choice(order))
-            now = env.state()
+            now = _proj(env.state())
             shapes.add(shape_of(now))
             seen.add(json.dumps(now, sort_keys=True, default=str))
         branching.append(len(seen))
