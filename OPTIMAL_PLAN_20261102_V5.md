@@ -6,7 +6,9 @@
 > syntactic shape at all, because anti-unification keeps incidental context (the
 > `return` keyword) inside the pattern. Transfer measured 2/5 with the taught
 > pattern and 5/5 with a context-stripped one, so the blocker is pattern breadth,
-> not retrieval. Do not implement PR-C'. Everything else here stands.
+> not retrieval. Do not implement PR-C'. Everything else here stands **except the
+> price of branch (b), which V6 corrects**: `MODEL_DEPENDENCE_AUDIT` does not cover
+> the whole repository, so that branch was mis-costed.
 
 Supersedes the ranking in `OPTIMAL_PLAN_20261102_V4.md`, which is still on this branch.
 V4 was written before three measurements that changed the order. This is the corrected plan.
@@ -190,8 +192,11 @@ it is shown, and refuses to fabricate capability it was not shown.* That claim i
 it is worth more than an inflated one.
 
 **(b) Admit a model-driven generator.** A model can introduce tokens the source lacks, which is
-exactly what §1.1 measured as missing. The cost is `MODEL_DEPENDENCE_AUDIT = 0`, currently
-audited clean, and it changes what "it learned this permanently" means — the capability would
+exactly what §1.1 measured as missing. **The cost was quoted here as `MODEL_DEPENDENCE_AUDIT = 0`; that is wrong and is
+corrected in V6 section 2** -- the audit scans only three runtime files, capability
+route text, and the compiler's provenance, and 8 files in this repo already import
+`litellm`/`openai` inertly, referenced by 0 capabilities. The real cost is that it
+changes what "it learned this permanently" means — the capability would
 live partly outside the tree. This is a spend, and it is yours to authorise, not mine to
 assume.
 

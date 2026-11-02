@@ -182,7 +182,36 @@ search closes 0/8 outside its vocabulary because it can **substitute but never
 introduce**; and the 112 obligations each demand an *inspector*, whose fitness
 function is an inspector (circular). Either keep the demonstrator — the honest
 claim today, and worth more than an inflated one — or admit a model-driven
-generator and deliberately spend `MODEL_DEPENDENCE_AUDIT = 0`.
+generator and spend the model-dependence invariant.
+
+**That price was quoted wrong, and is corrected here.** `MODEL_DEPENDENCE_AUDIT`
+is four cases and its scan scope is narrow:
+
+| case | what it actually covers |
+|---|---|
+| `no_model_client_import_in_runtime` | **3 files only**: `brain_unified_model_v1.py`, `compile_brain_unified_model_v1.py`, `verify_brain_unified_model_v1.py` |
+| `no_capability_route_names_a_model_provider` | the `route` text of capabilities and engines, against 10 vendor markers |
+| `compiler_declares_zero_model_and_network_calls` | the compiler's own provenance: 0 model calls, 0 network calls, $0 |
+| `model_vendor_name_occurrences_are_reported_not_hidden` | disclosure only; always passes |
+
+The 17-rule integrity guard says nothing about models. And **8 files in this
+repository already import `litellm`, `openai` or `httpx`** -- vendored agent
+capability trees -- referenced by **0 capabilities**, i.e. inert. The invariant is
+therefore *the artifact and its producer are model-free and cost $0*. It is not
+*the repository contains no model*.
+
+So admitting a generator does not automatically zero the audit. It spends it only
+if the generator is wired as a capability whose route names a provider -- which is
+precisely what case 2 exists to force into the open.
+
+**The trap this creates, stated so that it is not walked into:** a generator placed
+deliberately outside those three files, running at teach time, outside every
+capability route, would leave all four cases green. That green would be a defect,
+not a result -- the same category as an all-green suite produced by harness tricks.
+The honest sequence is therefore to **widen the audit to cover the generator's home
+before the generator exists**, so that admitting a model cannot be done quietly.
+Widening is strengthening, and it must land first; otherwise the number meant to
+price this decision cannot be trusted to price it.
 
 PR-C2 is independent of this fork: it multiplies the value of every demonstration
 under either answer.
