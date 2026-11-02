@@ -1414,3 +1414,125 @@ def repair_repository_in_cow_zygote(
             fail_trace = full_out
 
         return {"schema": SCHEMA, "pass": False, "status": "MAX_ROUNDS_EXHAUSTED"}
+
+
+def diagnose_and_verify_performance_or_architecture(
+    target: str | pathlib.Path,
+    goal: str = "",
+    *,
+    brain_root: str | pathlib.Path | None = None,
+    git_ref: str | None = None,
+) -> dict[str, Any]:
+    """Run deterministic hotspot profiling, git-differential benchmarking, import-cycle, or dead-code analysis (`K3 = 0`)."""
+    from canonical.swe_kernel import diagnostics_perf_and_design_engine_v1 as diag_eng
+
+    tp = pathlib.Path(target).resolve()
+    br = pathlib.Path(brain_root).resolve() if brain_root is not None else pathlib.Path(__file__).resolve().parents[2]
+    low = str(goal or "").lower()
+
+    if git_ref is not None or ("benchmark" in low and "head" in low):
+        out = dict(diag_eng.benchmark_against_git_ref(tp, br, git_ref=str(git_ref or "HEAD~1")))
+        out["diagnostic_organ"] = "benchmark_against_git_ref"
+    elif "cycle" in low:
+        repo_r = tp if tp.is_dir() else tp.parent
+        out = dict(diag_eng.detect_import_cycles(tp, repo_root=repo_r))
+        out["diagnostic_organ"] = "detect_import_cycles"
+    elif "dead" in low or "unused" in low:
+        out = dict(diag_eng.find_dead_code_symbols(tp))
+        out["diagnostic_organ"] = "find_dead_code_symbols"
+    elif "race" in low:
+        out = dict(diag_eng.detect_race_conditions(tp))
+        out["diagnostic_organ"] = "detect_race_conditions"
+    else:
+        out = dict(diag_eng.profile_module_hotspots(tp))
+        out["diagnostic_organ"] = "profile_module_hotspots"
+    out.setdefault("pass", bool(out.get("ok", True)))
+    out["k3_external_llm_calls"] = 0
+    return out
+
+
+def diagnose_command_failure_and_transfer_strategy(
+    command: str,
+    stderr_or_output: str,
+    exit_code: int,
+    *,
+    root: str | pathlib.Path = "",
+    domain: str = "cli_command_repair",
+) -> dict[str, Any]:
+    """Combine `repair_v1.diagnose` stderr signature adaptation with `universal_active_transfer_learner_v2` strategy ranking (`K3 = 0`)."""
+    from canonical.runtime import repair_v1
+    from canonical.runtime import universal_active_transfer_learner_v2 as uatl
+
+    diag = repair_v1.diagnose(str(command), str(stderr_or_output or ""), int(exit_code), root=str(root or ""))
+    failure_cls = str(diag.get("class") or "unknown")
+    proposed_repair = diag.get("repair") or diag.get("setup")
+
+    actions: list[dict[str, Any]] = []
+    if diag.get("setup"):
+        actions.append(
+            {
+                "id": "run_deterministic_setup",
+                "kind": "run_deterministic_setup",
+                "command": diag["setup"],
+                "decision_gain": 3.0,
+                "transfer_gain": 2.0,
+                "proof_gain": 2.0,
+                "time": 1.0,
+                "cost": 0.0,
+                "risk": 0.1,
+            }
+        )
+    if diag.get("repair"):
+        actions.append(
+            {
+                "id": "run_repaired_command",
+                "kind": "run_repaired_command",
+                "command": diag["repair"],
+                "decision_gain": 4.0,
+                "transfer_gain": 2.5,
+                "proof_gain": 3.0,
+                "time": 0.5,
+                "cost": 0.0,
+                "risk": 0.05,
+            }
+        )
+    if not actions:
+        actions.append(
+            {
+                "id": "probe_runner_help_or_tests",
+                "kind": "probe_runner_help_or_tests",
+                "command": str(command),
+                "decision_gain": 1.5,
+                "transfer_gain": 1.0,
+                "proof_gain": 1.0,
+                "time": 1.0,
+                "cost": 0.0,
+                "risk": 0.0,
+            }
+        )
+
+    episode = uatl.learning_episode(
+        goal=f"repair {failure_cls}: {command}",
+        required_facts=["command_exit_zero"],
+        verified_facts=["command_exit_zero"] if int(exit_code) == 0 else [],
+        hypotheses=[
+            {"id": failure_cls, "compatible": True, "action_signature": str(proposed_repair or command)}
+        ],
+        actions=actions,
+    )
+    compiled_strategy = uatl.compile_learning_strategy(
+        {
+            "verified": True,
+            "domain": str(domain or "cli_command_repair"),
+            "actions": actions,
+        }
+    )
+    return {
+        "schema": SCHEMA + "/command_failure_transfer",
+        "pass": bool(int(exit_code) == 0 or proposed_repair is not None),
+        "diagnosis": diag,
+        "learning_episode": episode,
+        "compiled_strategy": compiled_strategy,
+        "k3_external_llm_calls": 0,
+    }
+

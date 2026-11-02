@@ -53,7 +53,8 @@
       "canonical/tests/test_four_wave_optimal_plan_v1.py",
       "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
       "canonical/tests/test_optimal_four_stage_unified_organism_v1.py",
-      "canonical/tests/test_self_expanding_awake_organism_v1.py"
+      "canonical/tests/test_self_expanding_awake_organism_v1.py",
+      "canonical/tests/test_unified_awake_cognitive_fabric_v1.py"
     ],
     "route_class": "COMPOSE"
   },
@@ -245,7 +246,7 @@
           "route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1"
         }
       ],
-      "checked_at_utc": "2026-11-02T10:49:01Z",
+      "checked_at_utc": "2026-11-02T12:23:25Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -285,7 +286,7 @@
       "selected_route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-02T10:49:01Z",
+        "checked_at_utc": "2026-11-02T12:23:25Z",
         "execution_dependencies": [
           {
             "dependency": "python3.11 stdlib (`marshal`, `hashlib`, `sqlite3`, `os.fork`, `ast`) + restored SWE substrate (10/10 modules)",
@@ -367,7 +368,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-02T11:42:49Z",
+    "checked_at_utc": "2026-11-02T12:23:25Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
@@ -403,7 +404,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "1ba14f1457278c1e174863a4951add0198021247",
+          "git_blob_sha": "bf823582d88a457bb2708085e321d65a4c5927d9",
           "path": "canonical/runtime/live_brain_route_admission_v1.py"
         },
         {
@@ -411,7 +412,7 @@
           "path": "canonical/runtime/solve_v1.py"
         },
         {
-          "git_blob_sha": "e8c1a636bb0575fcb10ad0c04abd44c5f9c1faea",
+          "git_blob_sha": "ca002c09217a45dec12c999bb8d1504dfe5aad5a",
           "path": "canonical/runtime/brain_unified_model_v1.py"
         }
       ],

@@ -2554,3 +2554,115 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             "votes": {k: sorted(set(v)) for k, v in votes.items()},
             "detail": "%d program(s) say %s; refusing to answer on one "
                       "opinion" % (len(set(bins)), best)}
+
+
+def ground_dom_or_browser_surface(
+    goal_or_url: str,
+    *,
+    action_spec: Mapping[str, Any] | None = None,
+    dom_elements: Sequence[Mapping[str, Any]] | None = None,
+    fetch_live_url: bool = False,
+    timeout: int = 15,
+) -> dict[str, Any]:
+    """Deterministic `browser_v1` + `exact_dom_grounding` + `consensus_dom_grounding` pipeline (`K3 = 0`)."""
+    from canonical.runtime import browser_v1 as brw
+    from canonical.runtime import consensus_dom_grounding as cdom
+    from canonical.runtime import exact_dom_grounding as edom
+
+    urls = brw.urls_in(str(goal_or_url or ""))
+    live_state: dict[str, Any] | None = None
+    if fetch_live_url and urls:
+        avail, _reason = brw.available()
+        if avail:
+            try:
+                live_state = brw.state(urls[0], timeout=max(5, int(timeout)))
+            except Exception:
+                live_state = None
+
+    raw_elems = list(dom_elements or ())
+    if not raw_elems and isinstance(live_state, Mapping):
+        for el in live_state.get("elements") or ():
+            if isinstance(el, Mapping):
+                raw_elems.append(el)
+
+    if action_spec is None:
+        return {
+            "schema": SCHEMA + "/dom_browser_grounding",
+            "pass": bool(urls or raw_elems),
+            "status": "URLS_EXTRACTED" if urls else "NO_DOM_ACTION_REQUESTED",
+            "urls": urls,
+            "hosts": [brw.host_of(u) for u in urls],
+            "element_count": len(raw_elems),
+            "live_browser_state": live_state,
+            "k3_external_llm_calls": 0,
+        }
+
+    act_type = str(action_spec.get("action") or action_spec.get("type") or "click").strip()
+    role = action_spec.get("role")
+    name = action_spec.get("name")
+    text = action_spec.get("text")
+    ocr_text = action_spec.get("ocr_text")
+    attrs = dict(action_spec.get("attrs") or {}) if isinstance(action_spec.get("attrs"), Mapping) else None
+
+    exact_elems: list[edom.Element] = []
+    cons_elems: list[cdom.ObservedElement] = []
+    for idx, el in enumerate(raw_elems):
+        eid = str(el.get("element_id") or el.get("id") or f"e{idx + 1}")
+        e_role = str(el.get("role") or "")
+        e_name = str(el.get("name") or "")
+        e_text = str(el.get("text") or "")
+        e_ocr = str(el.get("ocr_text") or e_text or e_name)
+        e_attrs = dict(el.get("attrs") or {}) if isinstance(el.get("attrs"), Mapping) else {}
+        raw_acts = el.get("actions") or el.get("supported_actions") or ("click", "type", "select")
+        e_acts = frozenset(str(a) for a in raw_acts)
+        vis = bool(el.get("visible", True))
+        enb = bool(el.get("enabled", True))
+        exact_elems.append(edom.Element(eid, e_role, e_name, e_text, e_attrs, e_acts, visible=vis, enabled=enb))
+        cons_elems.append(
+            cdom.ObservedElement(eid, e_role, e_name, e_text, e_ocr, e_attrs, e_acts, visible=vis, enabled=enb)
+        )
+
+    exact_req = edom.GroundRequest(
+        act_type,
+        role=str(role) if role is not None else None,
+        name=str(name) if name is not None else None,
+        text=str(text) if text is not None else None,
+        attrs=attrs,
+    )
+    exact_out = edom.ground_exact_action(exact_req, exact_elems)
+    if exact_out.get("status") == "SELECT":
+        return {
+            "schema": SCHEMA + "/dom_browser_grounding",
+            "pass": True,
+            "status": "SELECT",
+            "grounding_stage": "exact_dom_grounding",
+            "element_id": exact_out["element_id"],
+            "grounding": exact_out,
+            "urls": urls,
+            "k3_external_llm_calls": 0,
+        }
+
+    # Do not override an explicit exact-match ambiguity unless additional independent cues (e.g. OCR/attrs) disambiguate
+    cons_req = cdom.ConsensusRequest(
+        act_type,
+        role=str(role) if role is not None else None,
+        name=str(name) if name is not None else None,
+        text=str(text) if text is not None else None,
+        ocr_text=str(ocr_text) if ocr_text is not None else None,
+        attrs=attrs,
+        min_independent_cues=int(action_spec.get("min_independent_cues", 2)),
+    )
+    cons_out = cdom.ground_consensus_action(cons_req, cons_elems)
+    passed = cons_out.get("status") == "SELECT"
+    return {
+        "schema": SCHEMA + "/dom_browser_grounding",
+        "pass": passed,
+        "status": str(cons_out.get("status") or "ESCALATE"),
+        "grounding_stage": "consensus_dom_grounding" if passed else "fail_closed_escalate",
+        "element_id": cons_out.get("element_id"),
+        "exact_attempt": exact_out,
+        "grounding": cons_out,
+        "urls": urls,
+        "k3_external_llm_calls": 0,
+    }
+

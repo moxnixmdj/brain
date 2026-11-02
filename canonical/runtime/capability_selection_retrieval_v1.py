@@ -849,6 +849,13 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # executable template, which for a derived entry carries the zero-input form and no argument names.
     contract = contract_of(entry, declared)
     required = _arg_names(contract)
+    # F29: the request must NAME the capability.  A proposal whose name the request shares
+    # only the verbs every request is made of was matched on a verb, not described.  The contract
+    # is resolved first, because the catch-all - a capability that takes the whole request - makes
+    # no claim to be named and is exempt.
+    if not request_may_select(goal, cid, required):
+        return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
+                "required_inputs": required}
     # Hidden wiring (2026-10-27): typed admission was shortlisting the right SWE
     # capability and then refusing it on a slot the ADAPTER defaults or the
     # SENTENCE already determines.  ``declared_input_derivation_v1`` proves both
@@ -857,18 +864,6 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # original contract still decides which capabilities the request may name.
     try:
         from canonical.runtime import declared_input_derivation_v1 as _derivation
-        # WHICH REQUEST MAY DERIVE ITS INPUTS IS DECIDED BY THE ROW, NOT BY THE SENTENCE.
-        # This used to be ``is_swe_request(goal) and cid.startswith(...)``: a 40-entry curated
-        # verb list (`fix`, `rename`, `refactor`, `bug`, ...) stood between a software-engineering
-        # capability and the tree proof of its own arguments.  Measured 2026-10-31 on 96a8d03:
-        # "Optimise the function total in <f>; it is too slow on large inputs", "Add a thread pool
-        # to <f> that totals the list in parallel" and "Make the function total in <f> release the
-        # GIL while summing" all name an existing source file and state a real effect, and all
-        # three were refused at admission because none of them contains a word from that list --
-        # the repair row they rank first declares that file's tree as its own source root.
-        # The row's identity is the structural fact (the id prefix is the row's own declaration,
-        # and derivation only ever returns values PROVED AGAINST A STATED FILE); the vocabulary
-        # was a second, weaker gate on the same decision.  Nothing wider than the row it names.
         _in_scope = (str(cid).startswith(_derivation.SWE_CID_PREFIXES)
                      or _derivation.is_swe_request(goal))
         if _in_scope:
@@ -878,13 +873,6 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
             _derived_values, _derivation_report, _bind_contract = {}, {"adapter_defaulted": {}}, contract
     except Exception:  # derivation is advisory; a fault here keeps the old gate
         _derived_values, _derivation_report, _bind_contract = {}, {"adapter_defaulted": {}}, contract
-    # F29: the request must NAME the capability.  A proposal whose name the request shares
-    # only the verbs every request is made of was matched on a verb, not described.  The contract
-    # is resolved first, because the catch-all - a capability that takes the whole request - makes
-    # no claim to be named and is exempt.
-    if not request_may_select(goal, cid, required):
-        return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
-                "required_inputs": required}
     # A symbol rename cannot substitute for a parameter rename: both can bind
     # a function qualname, but only one contract carries the old parameter.
     if (re.search(r"^\s*(?:please\s+)?rename\s+(?:the\s+)?(?:parameter|argument)\b",

@@ -873,21 +873,115 @@ class AwakeAgencyDaemon:
         self,
         *,
         max_actions: int = 2,
+        repo_root: str | pathlib.Path | None = None,
+        repair_components: Sequence[Mapping[str, Any]] | None = None,
         episode_verification_provider: Callable[..., Any] | None = None,
         skill_verification_provider: Callable[..., Any] | None = None,
         failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
-        """Advance pending items in `r3_improvement_queue_driver_v1` inside this daemon's isolated state."""
-        from canonical.runtime import r3_improvement_queue_driver_v1 as r3q
+        """Advance pending items in `r3_improvement_queue_driver_v1` with real Brain-owned zero-LLM R3 providers."""
+        from canonical.runtime import (
+            live_brain_runtime_v1 as lbr,
+            r3_bound_success_adapter_v1 as bsa,
+            r3_improvement_queue_driver_v1 as r3q,
+            r3_independent_learning_verifier_v1 as ilv,
+            r3_retained_distinguishing_evidence_provider_v1 as rde,
+            r3_structural_adapter_rule_acquisition_provider_v1 as sar,
+        )
+
+        rroot = pathlib.Path(repo_root).resolve() if repo_root is not None else pathlib.Path(__file__).resolve().parents[2]
+        ep_prov = episode_verification_provider or (lambda req: ilv.verify_episode_request(req, repo_root=rroot))
+        sk_prov = skill_verification_provider or (
+            lambda req: ilv.verify_skill_request(req, repo_root=rroot, state_path=self.r3_state_path)
+        )
+        succ_prov = lambda req: bsa.adapt(req, repo_root=rroot)
+        front_prov = sar.make_provider(repo_root=rroot, state_path=self.r3_state_path)
+        dist_prov = lambda req: rde.acquire(req, state_path=self.r3_state_path, repo_root=rroot)
+
+        def _default_repair_provider(req: Mapping[str, Any]) -> Mapping[str, Any]:
+            merged_req = dict(req)
+            if repair_components is not None and "components" not in merged_req:
+                merged_req["components"] = list(repair_components)
+            return lbr.synthesize_failure_repair(merged_req, state_path=self.r3_state_path)
+
+        rep_prov = failure_repair_provider or _default_repair_provider
 
         return r3q.drain(
             state_path=self.r3_state_path,
-            repo_root=pathlib.Path(__file__).resolve().parents[2],
-            episode_verification_provider=episode_verification_provider,
-            skill_verification_provider=skill_verification_provider,
-            failure_repair_provider=failure_repair_provider,
+            repo_root=rroot,
+            episode_verification_provider=ep_prov,
+            skill_verification_provider=sk_prov,
+            success_episode_adapter_provider=succ_prov,
+            failure_repair_provider=rep_prov,
+            verification_frontier_acquisition_provider=front_prov,
+            verification_frontier_acquisition_provider_id="BRAIN_OWNED_STRUCTURAL_ADAPTER_RULE_ACQUISITION_V1",
+            distinguishing_evidence_provider=dist_prov,
+            distinguishing_evidence_provider_id="BRAIN_OWNED_RETAINED_DISTINGUISHING_EVIDENCE_V1",
             max_actions=max(1, min(32, int(max_actions))),
         )
+
+    def drive_r3_to_verified_fixed_point(
+        self,
+        *,
+        repo_root: str | pathlib.Path | None = None,
+        max_rounds: int = 8,
+        max_actions_per_round: int = 16,
+        repair_components: Sequence[Mapping[str, Any]] | None = None,
+        episode_verification_provider: Callable[..., Any] | None = None,
+        skill_verification_provider: Callable[..., Any] | None = None,
+        failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Drive `r3_verified_fixed_point_driver_v1.run` to a durable SHA-256 fixed point using Brain-owned `K3 = 0` providers."""
+        from canonical.runtime import (
+            live_brain_runtime_v1 as lbr,
+            r3_bound_success_adapter_v1 as bsa,
+            r3_independent_learning_verifier_v1 as ilv,
+            r3_structural_adapter_rule_acquisition_provider_v1 as sar,
+            r3_verified_fixed_point_driver_v1 as r3fp,
+        )
+
+        rroot = pathlib.Path(repo_root).resolve() if repo_root is not None else pathlib.Path(__file__).resolve().parents[2]
+        ep_prov = episode_verification_provider or (lambda req: ilv.verify_episode_request(req, repo_root=rroot))
+        sk_prov = skill_verification_provider or (
+            lambda req: ilv.verify_skill_request(req, repo_root=rroot, state_path=self.r3_state_path)
+        )
+        succ_prov = lambda req: bsa.adapt(req, repo_root=rroot)
+        front_prov = sar.make_provider(repo_root=rroot, state_path=self.r3_state_path)
+
+        def _default_repair_provider(req: Mapping[str, Any]) -> Mapping[str, Any]:
+            merged_req = dict(req)
+            if repair_components is not None and "components" not in merged_req:
+                merged_req["components"] = list(repair_components)
+            return lbr.synthesize_failure_repair(merged_req, state_path=self.r3_state_path)
+
+        rep_prov = failure_repair_provider or _default_repair_provider
+
+        out = dict(
+            r3fp.run(
+                state_path=self.r3_state_path,
+                repo_root=rroot,
+                episode_verification_provider=ep_prov,
+                skill_verification_provider=sk_prov,
+                success_episode_adapter_provider=succ_prov,
+                failure_repair_provider=rep_prov,
+                verification_frontier_acquisition_provider=front_prov,
+                verification_frontier_acquisition_provider_id="BRAIN_OWNED_STRUCTURAL_ADAPTER_RULE_ACQUISITION_V1",
+                max_rounds=max(1, min(64, int(max_rounds))),
+                max_actions_per_round=max(1, min(32, int(max_actions_per_round))),
+            )
+        )
+        out["k3_external_llm_calls"] = 0
+        return out
+
+    def synthesize_causal_architecture(self, manifest: Mapping[str, Any]) -> dict[str, Any]:
+        """Synthesize minimum counterexample-guided causal repair architectures (`K3 = 0`)."""
+        from canonical.runtime import (
+            counterexample_guided_causal_architecture_synthesizer_v1 as cegas,
+        )
+
+        out = dict(cegas.synthesize(dict(manifest)))
+        out["k3_external_llm_calls"] = 0
+        return out
 
     def pulse(self, *, max_curriculum_lessons: int = 2, channels: Sequence[str] | None = None) -> dict[str, Any]:
         """Run one complete zero-LLM awake cycle: sense -> V9 meta-policy -> CoW experiment -> scope probing -> study gaps -> R3 queue drain."""
@@ -966,6 +1060,10 @@ class AwakeAgencyDaemon:
                 meta_abstraction_candidate = None
 
         r3_drain = self.drain_r3_self_improvement_queue(max_actions=2)
+        r3_fixed_point = self.drive_r3_to_verified_fixed_point(
+            max_rounds=4,
+            max_actions_per_round=4,
+        )
 
         snap = {
             "schema": SCHEMA,
@@ -975,6 +1073,7 @@ class AwakeAgencyDaemon:
             "meta_policy_recommendation": meta_recommendation,
             "meta_strategy_abstraction_candidate": meta_abstraction_candidate,
             "r3_queue_drain": r3_drain,
+            "r3_fixed_point": r3_fixed_point,
             "sensed": sensed,
             "cow_experimentation": exp_out,
             "scope_narrowing_audits": scope_audits,

@@ -729,3 +729,77 @@ def induce_and_predict_grid_delta_rule(
         "predictions": preds,
         "k3_external_llm_calls": 0,
     }
+
+
+def evaluate_semantic_ambiguity_and_sense(
+    problem: Mapping[str, Any],
+    *,
+    concept_identity_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    terminal_signature_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    relation_edge_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    authority_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    evidence_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    """Lossless semantic ambiguity, OEWN release-relative sense control, and scoped relation resolution (`K3 = 0`)."""
+    if "sense_universe" in problem and "decision_manifest" in problem:
+        from canonical.runtime import oewn_decision_sense_control_v1 as oewn_ctrl
+
+        out = dict(
+            oewn_ctrl.resolve(
+                sense_universe=problem["sense_universe"],
+                decision_manifest=problem["decision_manifest"],
+                authority_receipt=problem.get("authority_receipt"),
+                authority_verifier=authority_verifier,
+                evidence_receipts=problem.get("evidence_receipts"),
+                evidence_verifier=evidence_verifier,
+                ambiguity_owner=str(problem.get("ambiguity_owner") or "SYSTEM_MODEL"),
+            )
+        )
+        out["control_organ"] = "oewn_decision_sense_control_v1"
+        out["k3_external_llm_calls"] = 0
+        return out
+
+    if "left_id" in problem and "right_id" in problem:
+        from canonical.runtime import semantic_relation_control_v2 as rel_ctrl
+
+        out = dict(
+            rel_ctrl.resolve(
+                problem,
+                concept_identity_verifier=concept_identity_verifier,
+                terminal_signature_verifier=terminal_signature_verifier,
+                relation_edge_verifier=relation_edge_verifier,
+            )
+        )
+        out["control_organ"] = "semantic_relation_control_v2"
+        out["k3_external_llm_calls"] = 0
+        return out
+
+    from canonical.runtime import semantic_ambiguity_control_v1 as amb_ctrl
+
+    out = dict(amb_ctrl.decide(problem))
+    out["control_organ"] = "semantic_ambiguity_control_v1"
+    out["k3_external_llm_calls"] = 0
+    return out
+
+
+def solve_exact_rational_polytope(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Exact `Fraction`-bounded linear parameter polytope & query interval extrapolation (`K3 = 0`)."""
+    from canonical.runtime import exact_linear_parameter_polytope_v1 as poly
+
+    out = dict(poly.solve(payload))
+    out["k3_external_llm_calls"] = 0
+    return out
+
+
+def evaluate_cross_document_semantic_lattice(
+    problem: Mapping[str, Any],
+    *,
+    relation_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    """Multi-document temporal/supersession effect lattice closure (`cross_document_effect_semantic_lattice_v8`, `K3 = 0`)."""
+    from canonical.runtime import cross_document_effect_semantic_lattice_v8 as lattice_v8
+
+    out = dict(lattice_v8.evaluate(problem, relation_verifier=relation_verifier))
+    out["k3_external_llm_calls"] = 0
+    return out
+

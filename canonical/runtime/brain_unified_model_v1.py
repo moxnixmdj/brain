@@ -999,6 +999,46 @@ class UnifiedModel:
             match_and_invoke_forged_for_goal,
         )
 
+        # 0A. Verified Skill Macro Compression (`verified_skill_macro_planner_v1.plan_with_skills`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("skill_macro_problem"), Mapping):
+            from canonical.runtime import verified_skill_macro_planner_v1 as macro_pl
+
+            sm_spec = inputs["skill_macro_problem"]
+            macro_out = macro_pl.plan_with_skills(
+                sm_spec["problem"],
+                list(sm_spec.get("verified_skills") or ()),
+                active_invalidators=tuple(sm_spec.get("active_invalidators") or ()),
+            )
+            passed_m = bool(macro_out.get("status") == "SOLVED" or macro_out.get("pass") is True)
+            return self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status="PASS__VERIFIED_SKILL_MACRO_PLANNED" if passed_m else "FAIL_CLOSED__SKILL_MACRO_UNSOLVED",
+                **{"pass": passed_m},
+                reason=None if passed_m else str(macro_out.get("status") or "UNSOLVED"),
+                skill_macro_plan=macro_out,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            )
+
+        # 0B. R1+R2+R3 Adaptive Capability Expansion (`universal_verified_adaptive_solver_v12.run`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("adaptive_solver_v12_problem"), Mapping):
+            from canonical.runtime import universal_verified_adaptive_solver_v12 as uvas12
+
+            v12_spec = dict(inputs["adaptive_solver_v12_problem"])
+            prob_doc = v12_spec.pop("problem")
+            v12_repo = v12_spec.pop("repo_root", cwd or ROOT)
+            v12_out = uvas12.run(prob_doc, repo_root=v12_repo, **v12_spec)
+            passed_v12 = bool(v12_out.get("pass") is True)
+            return self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status=str(v12_out.get("status") or ("PASS__ADAPTIVE_SOLVER_V12" if passed_v12 else "FAIL_CLOSED")),
+                **{"pass": passed_v12},
+                reason=None if passed_v12 else str(v12_out.get("reason") or v12_out.get("status")),
+                adaptive_solver_v12=v12_out,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            )
+
         # 1. REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & bindable
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
         if not is_forged_cid:

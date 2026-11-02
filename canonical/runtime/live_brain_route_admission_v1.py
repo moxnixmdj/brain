@@ -4205,6 +4205,33 @@ def _stated_paths_outside_the_root(goal: str, root: pathlib.Path) -> list[str]:
     return outside
 
 
+_COMPOSER_GRAPH_MEM_CACHE: dict[tuple[int, int, int, int], dict[str, Any]] = {}
+
+
+def _cached_composer_graph() -> dict[str, Any]:
+    """`(mtime_ns, st_size)`-invalidated RAM cache for `capability_composer_v1.graph()`."""
+    from canonical.runtime import capability_composer_v1 as composer
+
+    reg_p = composer.REGISTRY
+    snap_p = reg_p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    s1 = reg_p.stat() if reg_p.is_file() else None
+    s2 = snap_p.stat() if snap_p.is_file() else None
+    key = (
+        s1.st_mtime_ns if s1 else 0,
+        s1.st_size if s1 else 0,
+        s2.st_mtime_ns if s2 else 0,
+        s2.st_size if s2 else 0,
+    )
+    hit = _COMPOSER_GRAPH_MEM_CACHE.get(key)
+    if hit is not None:
+        return hit
+    built = composer.graph()
+    if len(_COMPOSER_GRAPH_MEM_CACHE) >= 8:
+        _COMPOSER_GRAPH_MEM_CACHE.clear()
+    _COMPOSER_GRAPH_MEM_CACHE[key] = built
+    return built
+
+
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
@@ -4214,7 +4241,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     """
     try:
         from canonical.runtime import composer_route_v1 as croute
-        routed = croute.route(goal)
+        routed = croute.route(goal, g=_cached_composer_graph())
         if not routed.get("pass"):
             return None
         executed = croute.execute_chain(routed["chain"], goal)

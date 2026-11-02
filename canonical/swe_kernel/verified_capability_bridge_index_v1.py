@@ -526,3 +526,94 @@ def query_semantic_repo_navigation(
     out["k3_external_llm_calls"] = 0
     return out
 
+
+def plan_and_execute_unfamiliar_tool_schemas(
+    goal: str,
+    endpoints: Sequence[Mapping[str, Any]],
+    *,
+    executor: Any = None,
+    initial_observations: Sequence[Any] = (),
+) -> dict[str, Any]:
+    """Plan observe-before-mutate tool chains via `generic_goal_tool_effect_planner_v2` and ground arguments via `generic_tool_argument_binder_v1` (`K3 = 0`)."""
+    from canonical.runtime import generic_goal_tool_effect_planner_v2 as planner_v2
+    from canonical.runtime import generic_tool_argument_binder_v1 as binder_v1
+
+    t0 = time.perf_counter_ns()
+    planned = planner_v2.plan_goal_over_tool_schemas(goal, endpoints)
+    if not planned.get("pass"):
+        return {
+            "schema": SCHEMA + "/unfamiliar_tool_schema_plan",
+            "pass": False,
+            "status": str(planned.get("status") or "FAIL_CLOSED__TOOL_EFFECT_PLAN_UNSOLVED"),
+            "plan": planned,
+            "executed_steps": [],
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    ep_by_id: dict[str, Mapping[str, Any]] = {
+        str(ep.get("id") or ep.get("name") or ""): ep
+        for ep in endpoints
+        if isinstance(ep, Mapping) and (ep.get("id") or ep.get("name"))
+    }
+    observations: list[Any] = list(initial_observations or ())
+    executed_steps: list[dict[str, Any]] = []
+
+    for step in planned.get("steps") or []:
+        eid = str(step.get("endpoint_id") or "")
+        ep = ep_by_id.get(eid)
+        if ep is None:
+            return {
+                "schema": SCHEMA + "/unfamiliar_tool_schema_plan",
+                "pass": False,
+                "status": f"FAIL_CLOSED__PLANNED_ENDPOINT_MISSING:{eid}",
+                "plan": planned,
+                "executed_steps": executed_steps,
+                "k3_external_llm_calls": 0,
+                "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+            }
+        bound = binder_v1.bind_endpoint_call(
+            goal=goal,
+            endpoint=ep,
+            observations=observations,
+        )
+        if not bound.get("pass"):
+            return {
+                "schema": SCHEMA + "/unfamiliar_tool_schema_plan",
+                "pass": False,
+                "status": "FAIL_CLOSED__" + str(bound.get("reason") or bound.get("status") or "UNGROUNDED_TOOL_CALL"),
+                "failed_endpoint_id": eid,
+                "binding": bound,
+                "plan": planned,
+                "executed_steps": executed_steps,
+                "k3_external_llm_calls": 0,
+                "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+            }
+        step_rec: dict[str, Any] = {
+            "endpoint_id": eid,
+            "role": step.get("role"),
+            "arguments": bound["arguments"],
+            "bindings": bound["bindings"],
+            "executed": False,
+        }
+        if callable(executor):
+            resp = executor(ep, bound["arguments"])
+            step_rec["executed"] = True
+            step_rec["response"] = resp
+            observations.append(resp)
+        executed_steps.append(step_rec)
+
+    return {
+        "schema": SCHEMA + "/unfamiliar_tool_schema_plan",
+        "pass": True,
+        "status": "PASS__UNFAMILIAR_TOOL_SCHEMA_PLANNED_AND_EXECUTED"
+        if callable(executor)
+        else "PASS__UNFAMILIAR_TOOL_SCHEMA_PLANNED_AND_BOUND",
+        "plan": planned,
+        "executed_steps": executed_steps,
+        "observations_collected": len(observations),
+        "k3_external_llm_calls": 0,
+        "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+    }
+
+
