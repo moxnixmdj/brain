@@ -667,7 +667,20 @@ def execute_compiled_steps(
     *,
     cwd: str | pathlib.Path | None = None,
 ) -> dict[str, Any]:
-    """Execute concrete instantiated steps deterministically with zero model calls."""
+    """Execute concrete instantiated steps deterministically with zero model calls.
+
+    CLI stages need an admitted execution boundary. Preflight the entire trace
+    before *any* stage runs: rejecting a later CLI after a write is too late.
+    Other layers remain governed by their existing callers; this check does not
+    certify their effects or confine them.
+    """
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    for index, step in enumerate(steps):
+        if isinstance(step, Mapping) and str(step.get("layer") or "") in {"cli_exec", "cli_pipeline"}:
+            return {"ok": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS,
+                    "reason": boundary.FAILURE_CLASS, "failed_step": index,
+                    "step_receipts": []}
     work_dir = pathlib.Path(cwd).resolve() if cwd else pathlib.Path.cwd()
     step_receipts: list[dict[str, Any]] = []
     pending_dom_fills: dict[str, str] = {}
@@ -1752,6 +1765,8 @@ def recall_and_execute_workflow(
     """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
     t0 = time.perf_counter_ns()
     goal_words = {w for w in re.findall(r"[a-z]{2,}", goal.lower()) if w not in _STOP_WORDS}
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    previous_attempt = False
 
     for skill in _candidate_skills_for_words(goal_words, db_path):
         skel_tokens = set(skill.get("skeleton_tokens") or [])
@@ -1772,6 +1787,16 @@ def recall_and_execute_workflow(
             continue
         inst_post = _instantiate_obj(skill["abstract_postcondition"], bindings)
         exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
+        if exec_res.get("status") == boundary.STATUS:
+            # Earlier candidate workflows may already have had effects even if
+            # they failed their postconditions; do not claim otherwise.
+            return {"schema": SCHEMA, "pass": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS,
+                    "executed": None if previous_attempt else False,
+                    "side_effects_may_exist": previous_attempt,
+                    "skill_id": skill.get("skill_id"),
+                    "step_receipts": exec_res.get("step_receipts") or []}
+        previous_attempt = True
         if not exec_res.get("ok"):
             continue
         ok, reason = verify_postcondition(inst_post, cwd=cwd, execution_result=exec_res)

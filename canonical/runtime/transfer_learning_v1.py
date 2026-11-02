@@ -410,8 +410,21 @@ def recall(fingerprint: Mapping[str, Any], goal_key: str | None = None, *,
 def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
           goal_key: str | None = None, budget: int = 60, seed: int | None = None,
           max_depth: int = 6, heuristic: Callable[[Any], float] | None = None,
-          use_transfer: bool = True, min_similarity: float = 0.5) -> dict[str, Any]:
-    """Recall first, learn second, and prove either way by executing."""
+          use_transfer: bool = True, min_similarity: float = 0.5,
+          experience_mode: str = "learn_and_recall",
+          fixed_plan: Sequence[Any] | None = None) -> dict[str, Any]:
+    """Recall first, learn second, and prove either way by executing.
+
+    ``use_transfer=False`` alone only disables recall: it still learns and
+    persists. ``experience_mode='off'`` instead disables this driver's recall,
+    fingerprint probing, model learning and experience writes. An optional
+    caller-supplied fixed plan can be executed and checked in either mode; its
+    provenance is the caller's responsibility. Without one, off mode refuses
+    rather than learning a new plan. This control does not cover the supplied
+    environment, goal predicate, caller or other system memory channels.
+    """
+    if experience_mode not in ("learn_and_recall", "off"):
+        raise ValueError("EXPERIENCE_MODE_INVALID")
     # Count every call through the environment interface, including structural
     # fingerprint probes and heuristic look-ahead. A replay trial is not one
     # atomic interaction and must not be advertised as such.
@@ -427,12 +440,65 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             return env_original.reset()
     env_original = env
     env = MeteredEnvironment()
+    fixed_plan_attempted = False
+    fixed_plan_failed_before_learning = False
     def finish(result):
-        return dict(result, interactions=dict(counters),
+        result = dict(result)
+        if fixed_plan_failed_before_learning and isinstance(result.get('trials_spent'), int):
+            result['learning_trials_spent'] = result['trials_spent']
+            result['trials_spent'] += 1
+            if isinstance(result.get('saved_trials'), int):
+                result['saved_trials'] = max(0, result['saved_trials'] - 1)
+        return dict(result, fixed_plan_trials=int(fixed_plan_attempted),
+                    interactions=dict(counters),
                     interaction_scope='ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES',
+                    experience_policy={'scope': 'TRANSFER_DRIVE_ONLY',
+                                       'mode': experience_mode,
+                                       'may_read_retained_experience': experience_mode != 'off' and bool(use_transfer),
+                                       'may_learn_model': experience_mode != 'off',
+                                       'may_persist_experience': experience_mode != 'off',
+                                       'fixed_plan_supplied': fixed_plan is not None},
                     retention_policy={'hot_episode_limit': DEFAULT_MAX_EPISODES,
                                       'all_experiences_retained_forever': False})
     started = time.time()
+
+    # A fixed caller-provided baseline is available to both arms. It is not
+    # learned or retained here, and its origin cannot be verified by drive.
+    if fixed_plan is not None:
+        if isinstance(fixed_plan, (str, bytes)) or not isinstance(fixed_plan, Sequence) or not replayable(fixed_plan, actions):
+            return finish({'schema': SCHEMA, 'status': 'FAIL_CLOSED__FIXED_PLAN_NOT_REPLAYABLE',
+                           'pass': False, 'reached': False, 'transferred': False,
+                           'episode_persisted': False})
+        plan = [str(a) for a in fixed_plan]
+        fixed_plan_attempted = True
+        try:
+            env.reset()
+            for action in plan:
+                env.act(action)
+            reached = bool(is_goal(env.state()))
+        except Exception as exc:  # noqa: BLE001 - do not retry an uncertain effect
+            return finish({'schema': SCHEMA, 'status': 'FAIL__FIXED_PLAN_EXECUTION_OR_CHECK',
+                           'pass': False, 'reached': False, 'transferred': False,
+                           'episode_persisted': False, 'plan': plan,
+                           'side_effects_may_exist': bool(counters['act_calls']),
+                           'reason': type(exc).__name__})
+        if reached:
+            return finish({'schema': SCHEMA, 'status': 'PASS__FIXED_PLAN_GOAL_OBSERVED',
+                           'pass': True, 'reached': True, 'transferred': False,
+                           'episode_persisted': False, 'plan': plan,
+                           'plan_length': len(plan), 'trials_spent': 1,
+                           'authority': 'FIXED_PLAN_EXECUTED_GOAL_OBSERVED'})
+        if experience_mode == 'off':
+            return finish({'schema': SCHEMA, 'status': 'OPEN__FIXED_PLAN_GOAL_NOT_REACHED',
+                           'pass': False, 'reached': False, 'transferred': False,
+                           'episode_persisted': False, 'plan': plan, 'trials_spent': 1})
+        fixed_plan_failed_before_learning = True
+
+    if experience_mode == 'off':
+        return finish({'schema': SCHEMA, 'status': 'OPEN__EXPERIENCE_DISABLED_NO_FIXED_PLAN',
+                       'pass': False, 'reached': False, 'transferred': False,
+                       'episode_persisted': False, 'plan': None, 'trials_spent': 0})
+
     from canonical.runtime import environment_learning_v1 as el
 
     fp = fingerprint(env, actions, seed=seed or 0)

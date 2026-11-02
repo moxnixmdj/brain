@@ -1,0 +1,33 @@
+# Automatic computer execution: local fail-closed draft — 2026-11-02
+
+## What changed and why
+
+This is an **unadmitted working-tree draft**, not a production sandbox or independently verified capability gain. An output format check and a temporary directory do not confine a program. Before the draft, local safety tests demonstrated that identified automatic fallbacks could call the computer learner, generated code, documentation snippets, or a named program with the caller's authority. A harmless temporary executable actually ran in one controlled negative test. The original six safety tests failed before these changes.
+
+The draft returns `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT` without a request flag or environment bypass for the following identified paths:
+
+- `live_brain_route_admission_v1._serve_by_acting` and its named-executable/computer learner learning fallback. The main `solve` fallback checks this refusal before trying recalled workflow execution for the applicable goal shape; it preserves any earlier execution/side-effect uncertainty.
+- `composer_route_v1.route`, after its existing typed-plan branches, no longer executes synthesis, documentation or computer discovery as a last resort.
+- Curriculum's direct program probing, acquisition, synthesis, documentation and exploration channels. A boundary refusal is not followed by another channel, and is not debited as a failed attempt or used to change the gap's learning history.
+- The closed-loop controller's CLI measurement/archive and documentation execution fallbacks, plus user-supplied demonstration-trace qualification. For identified computer goal shapes, its retained-workflow tier does not bypass the front-door boundary refusal.
+
+These are **behavioral restrictions**, not replacement implementations. Some existing capability is unavailable until a genuinely confined and admitted path is built. Other typed routes are retained. A shared status constant grants no authorization and cannot itself establish confinement.
+
+## What remains unsafe or unproven
+
+This is not a whole-system security boundary. Direct `computer_env_v1` APIs remain callable and unsandboxed, including from trusted tests and tools. A later scoped audit added preflight refusal for known retained-workflow CLI stages and the known generic command adapter in local dispatch/composition; see `COMPUTER_EXECUTION_ROUTE_AUDIT_20261102.md`. The front door's primary `_solve_request`, other typed/composed capabilities, non-CLI workflow effects, the controller's other tiers, direct command adapter and direct synthesis/documentation/acquisition APIs have not been comprehensively secured. A classifier can miss goal shapes; an earlier step may already have had effects. Do not use the remaining paths for untrusted programs or valuable files based on these changes. `PASS__COMPOSER_ROUTE_FOUND` describes type-level reachability, not completion of the requested file.
+
+The existing namespace launcher remains a research membrane: it exposes host `/usr`, has no seccomp policy, and uses per-process rlimits rather than aggregate cgroup controls. A further review found its helper ignored failures of several bind/remount operations and that failed/timed-out runs could report `confined=True`. The draft now stops on those required mount or limit failures, reports setup/timeout confinement as unknown, and makes `solve_v1.act` propagate that status. Simulated failures and a benign write were exercised; neither qualifies the carrier. The separate `solve_v1.act` path still deliberately falls back to unconfined host execution when the launcher is unavailable or raises, and the H100 program route uses this unqualified launcher; neither should be used for untrusted code. On this host `unshare` works, but the cgroup hierarchy is not delegated/writable to the current user, no Docker, Podman, nsjail or bwrap executable was found, and `systemd-run --user` failed because there is no user bus. No isolated pinned-runtime image or aggregate-resource-enforced carrier was qualified. Do not treat the successful controlled gzip experiment as hostile-code certification. Any future broker must validate its inputs and bounded outputs and protect publication against races; no such production broker is added here.
+
+The existing draft action intent still fails orientation with `ORIENTATION_PROGRESS_CLASS_INVALID`; the full action-admission gate has not been satisfied. No separate verifier has run the change. No gate, registry, independent-verification status or capability credit was bypassed or promoted. The unified RAW_GOAL learning path remains unconnected, and a genuine learning-disabled control is still absent.
+
+## Measurements
+
+- `canonical.tests.test_computer_unconfined_route_guard_v1`: 14 passed, including a real temporary PATH executable which was not invoked by the tested fallback routes, refusal-propagation and contract-preservation checks, and preserved learning-history checks. Tests use controlled inputs; the tests that isolate their execution use a network namespace, not a full hostile-code filesystem sandbox.
+- Combined new safety/namespace/output-integrity/routing/probe suite: 44 passed in a local run; 14 additional gap, repair-routing and coding-probe tests passed. This is producer-run testing, not independent verification.
+- Existing `test_composer_route_v1.DiscoveryFallbackTests` and `PerformedTests`: 10 ran, 3 passed, 5 failed and 2 errored. Several returned a type-level `PASS__COMPOSER_ROUTE_FOUND` instead of the expected execution result; two then found no requested artifact. `RoutingTests`: 6 ran, 5 passed and 1 failed on its unreachable-goal expectation. These failures have not been classified against a pristine baseline this turn. The removal of automatic fallbacks is itself an intentional availability regression; do not report this draft as no-regression or as an integrated capability gain.
+- The model projection and local verifier result must be read from the current compilation/verification run; neither is independent admission evidence.
+
+## Next decisions
+
+A production carrier must provide a pinned minimal tool/runtime image, reviewed isolation and process cleanup, aggregate CPU/memory/PID limits, a bounded broker with independent artifact/effect validation and no unsafe publication, and a threat model covering direct and alternate routes. Qualify it on a host with the required delegated resources and obtain a separate verifier. Then replace these refusals only through the existing admission and independent-verification gates, introduce a real learning-off control, and evaluate fresh goals and restart/reuse end to end. Until then this draft should not be represented as completing the plan.

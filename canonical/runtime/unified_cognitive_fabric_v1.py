@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from pathlib import Path
+import re
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import live_integrated_brain_v1 as live_brain
@@ -176,12 +177,48 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
         "learning": deepcopy(wrapper.get("learning")),
         "reuse_first": wrapper.get("reuse_first") is True,
         "reused_skill_id": wrapper.get("reused_skill_id"),
+        "r3_context_policy": wrapper.get("r3_context_policy"),
         "auto_repair_attempted": wrapper.get("auto_repair_attempted") is True,
         "auto_repair": deepcopy(wrapper.get("auto_repair")),
         "canonical_public_entrypoint": CANONICAL_PUBLIC_ENTRYPOINT,
         "subruntime_entrypoint": SUBORDINATE_RUNTIME_ENTRYPOINT,
     }
     return out
+
+
+def _notice_missing_bound_verification(out: Mapping[str, Any], options: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Record a real bound-verification refusal as an open knowledge gap.
+
+    This records no original goal or arguments, grants no authority, and does
+    not replay the action or claim that a verifier exists. The explicit R3
+    state path scopes a sibling ledger; otherwise the normal shared ledger is
+    used. An explicit ignorance_state_path can select a different ledger.
+    """
+    if options.get("learn", True) is False or out.get("pass") is not False:
+        return None
+    cid = str(out.get("compiled_capability_id") or out.get("capability_id") or "")
+    reason = str(out.get("reason") or "")
+    token = "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT"
+    if (not re.fullmatch(r"[A-Za-z0-9_.-]+", cid)
+            or not re.search(re.escape(token + ":" + cid) + r"(?![A-Za-z0-9_.-])", reason)):
+        return None
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as ledger
+        path = options.get("ignorance_state_path")
+        if path is None and options.get("state_path") is not None:
+            state_path = options["state_path"]
+            if not isinstance(state_path, (str, Path)) or not str(state_path).strip():
+                raise ValueError("INVALID_IGNORANCE_STATE_PATH")
+            path = str(state_path) + ".ignorance.json"
+        if path is not None and (not isinstance(path, (str, Path)) or not str(path).strip()):
+            raise ValueError("INVALID_IGNORANCE_STATE_PATH")
+        gap_id = ledger.note("independent verification for bound capability " + cid,
+                             why=token, path=str(path) if path is not None else None)
+        return {"status": "RECORDED", "gap_id": gap_id, "capability_id": cid,
+                "reason": token, "resolved": False, "execution_authority": False}
+    except Exception as exc:  # learning cannot turn a refusal into success
+        return {"status": "RECORD_FAILED", "capability_id": cid,
+                "error": type(exc).__name__, "execution_authority": False}
 
 
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
@@ -447,6 +484,10 @@ def run(
                 "OPAQUE_COGNITION_PROVIDER_FORBIDDEN_IN_LIVE_FABRIC:"
                 + ",".join(present_forbidden)
             )
+        if requested_mode in {"CATALOG", "ONE_SHOT_REALITY_CLOSURE"}:
+            special_options = request.get("options") or {}
+            if isinstance(special_options, Mapping) and "r3_context_mode" in special_options:
+                raise CognitiveFabricError("R3_CONTEXT_MODE_UNSUPPORTED_FOR_FABRIC_MODE:" + requested_mode)
         if requested_mode == "CATALOG":
             return catalog()
         if requested_mode == "ONE_SHOT_REALITY_CLOSURE":
@@ -499,6 +540,8 @@ def run(
         options = request.get("options") or {}
         if not isinstance(options, Mapping):
             raise CognitiveFabricError("OPTIONS_NOT_OBJECT")
+        if "route_memory_mode" in options or "route_memory_mode" in payload:
+            raise CognitiveFabricError("ROUTE_MEMORY_MODE_UNSUPPORTED_BY_FABRIC")
 
         auto_routed = requested_mode in {"", "AUTO"}
         mode = _auto_mode(payload, options) if auto_routed else requested_mode
@@ -513,8 +556,16 @@ def run(
             mode = "LEARNING_EPISODE"
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
+        if "r3_context_mode" in options and mode != "ADAPTIVE_SOLVER":
+            raise CognitiveFabricError("R3_CONTEXT_MODE_UNSUPPORTED_FOR_FABRIC_MODE:" + mode)
+        if options.get("learn", True) is False and mode in {"LEARNING_EPISODE", "IMPROVEMENT_CYCLE"}:
+            raise CognitiveFabricError("LEARNING_DISABLED_FOR_EXPLICIT_LEARNING_MODE:" + mode)
 
         if mode == "RAW_GOAL":
+            # This entry accepts prose, not the retained-repair adapter's scoped
+            # inputs. Do not silently discard a caller's learning policy.
+            if "retained_learning" in options or "retained_learning" in payload:
+                raise CognitiveFabricError("RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED")
             wrapped = live_runtime.run(
                 {"mode": "raw_bound", "request": deepcopy(dict(payload)), **dict(options)},
                 repo_root=ROOT,
@@ -525,6 +576,9 @@ def run(
                 skill_verification_provider=skill_verification_provider,
             )
             out = _unwrap_live_runtime(wrapped, "raw_result")
+            gap = _notice_missing_bound_verification(out, options)
+            if gap is not None:
+                out["knowledge_gap"] = gap
         elif mode == "COMPILED_TASK":
             wrapped = live_runtime.run(
                 {"mode": "compiled_bound", "request": deepcopy(dict(payload)), **dict(options)},
@@ -825,6 +879,10 @@ def run(
                 raise CognitiveFabricError("LIVE_CAPABILITY_ID_REQUIRED")
             if not isinstance(capability_payload, Mapping):
                 raise CognitiveFabricError("LIVE_CAPABILITY_PAYLOAD_NOT_OBJECT")
+            from canonical.runtime import computer_execution_boundary_v1 as boundary
+            if (capability_id == "bound:" + boundary.REPAIR_CAPABILITY_ID
+                    and ("retained_learning" in options or "retained_learning" in payload)):
+                raise CognitiveFabricError("RETAINED_LEARNING_MUST_BE_BOUND_CAPABILITY_INPUT")
             depth = int(options.get("__live_capability_depth", 0))
             if depth >= 8:
                 raise CognitiveFabricError("LIVE_CAPABILITY_RECURSION_LIMIT")
@@ -861,6 +919,11 @@ def run(
                 engine_runner=_engine_runner,
                 options=invoker_options,
             )
+            from canonical.runtime import computer_execution_boundary_v1 as boundary
+            if boundary.is_repair_verification_gap(out):
+                gap = _notice_missing_bound_verification(out["result"], options)
+                if gap is not None:
+                    out["knowledge_gap"] = gap
         elif mode == "IMPROVEMENT_CYCLE":
             def _repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
                 payload_row = work.get("payload")
@@ -944,7 +1007,19 @@ def run(
                 raise CognitiveFabricError("CAPABILITY_ID_REQUIRED")
             if not isinstance(inputs, Mapping):
                 raise CognitiveFabricError("BOUND_CAPABILITY_INPUTS_NOT_OBJECT")
+            from canonical.runtime import computer_execution_boundary_v1 as boundary
+            if capability_id == boundary.REPAIR_CAPABILITY_ID:
+                if "retained_learning" in options or "retained_learning" in payload:
+                    raise CognitiveFabricError("RETAINED_LEARNING_MUST_BE_BOUND_CAPABILITY_INPUT")
+                if "retained_learning" in inputs:
+                    error = boundary.retained_repair_policy_error(inputs["retained_learning"], options.get("learn", True))
+                    if error:
+                        raise CognitiveFabricError(error)
             out = execute_bound(capability_id, inputs=dict(inputs))
+            if boundary.is_repair_verification_gap(out):
+                gap = _notice_missing_bound_verification(out, options)
+                if gap is not None:
+                    out["knowledge_gap"] = gap
 
         auto_one_shot = None
         if (
@@ -1006,12 +1081,14 @@ def run(
                 out = deepcopy(dict(out))
                 out["_auto_one_shot_closure"] = deepcopy(auto_one_shot)
 
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
         direct_learning = None
         direct_learning_error = None
         if (
             mode in R3_DIRECT_EXPERIENCE_MODES
             and isinstance(out, Mapping)
             and options.get("learn", True) is not False
+            and not boundary.is_repair_verification_gap(out)
         ):
             try:
                 direct_learning = live_runtime.observe_runtime_outcome(
@@ -1059,7 +1136,10 @@ def run(
             autonomous_failure_repair_provider = _autonomous_repair_pending
 
         compounding_tick = None
-        if mode != "IMPROVEMENT_CYCLE":
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        if (mode != "IMPROVEMENT_CYCLE" and options.get("learn", True) is not False
+                and not (isinstance(out, Mapping) and (out.get("status") == boundary.STATUS
+                                                       or boundary.is_repair_verification_gap(out)))):
             compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",

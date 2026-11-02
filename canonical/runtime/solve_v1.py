@@ -133,7 +133,9 @@ def act(root: str, program: str, timeout: int = 120,
         network: bool = False) -> dict:
     """Run code. The only action there is, because it is all of them.
 
-    Confined by default.
+    Attempts the namespace launcher by default; it is not a qualified
+    hostile-code carrier. If unavailable this function falls back to host
+    execution, so do not give it untrusted programs.
 
     This is the system's primary action path, which is exactly why
     confinement belongs here rather than beside it: a guarantee that
@@ -154,7 +156,8 @@ def act(root: str, program: str, timeout: int = 120,
                     "err": "" if r.get("verdict") == "OK"
                            else (r.get("output") or ""),
                     "timed_out": r.get("verdict") == "INDETERMINATE",
-                    "confined": True,
+                    "confined": r.get("confined") is True,
+                    "carrier_qualified": r.get("carrier_qualified") is True,
                     # Propagated, or the receipt cannot answer "which
                     # runs could talk to the outside".
                     "network": bool(r.get("network", network))}
@@ -170,14 +173,14 @@ def act(root: str, program: str, timeout: int = 120,
                                timeout=timeout, capture_output=True, text=True)
             return {"exit": r.returncode, "out": (r.stdout or "")[-2000:],
                     "err": (r.stderr or "")[-2000:], "timed_out": False,
-                    "confined": False}
+                    "confined": False, "carrier_qualified": False}
         except subprocess.TimeoutExpired:
             return {"exit": None, "out": "", "err": "timed out",
-                    "timed_out": True, "confined": False}
+                    "timed_out": True, "confined": False, "carrier_qualified": False}
         except Exception as exc:
             return {"exit": None, "out": "",
                     "err": f"{type(exc).__name__}: {exc}", "timed_out": False,
-                    "confined": False}
+                    "confined": False, "carrier_qualified": False}
 
 
 def _default_staging_path() -> Path:

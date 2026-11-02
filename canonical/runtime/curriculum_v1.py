@@ -132,11 +132,18 @@ def _try_solve(gap: str) -> dict[str, Any]:
     if out.get("pass") is True:
         return {"closed": True, "status": out.get("status"),
                 "detail": "the goal executed and passed"}
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if out.get("status") == boundary.STATUS or out.get("failure_class") == boundary.FAILURE_CLASS:
+        return {"closed": False, "status": boundary.STATUS,
+                "detail": "Computer execution requires admitted confinement."}
     try:
         from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
             recall_and_execute_workflow,
         )
         recalled = recall_and_execute_workflow(gap)
+        if recalled is not None and recalled.get("status") == boundary.STATUS:
+            return {"closed": False, "status": boundary.STATUS,
+                    "detail": "The recalled workflow requires admitted confinement."}
         if recalled is not None and recalled.get("pass") is True:
             return {"closed": True, "status": "PASS__COMPILED_SKILL_RECALL",
                     "from_memory": True, "skill_id": recalled.get("skill_id"),
@@ -209,6 +216,10 @@ def _try_knowledge(gap: str, min_sources: int, min_kinds: int = 2,
             # programs the world named actually does the job here.
             for exe in candidates:
                 used = _try_with(gap, exe)
+                from canonical.runtime import computer_execution_boundary_v1 as boundary
+                if used.get("status") == boundary.STATUS:
+                    return {"closed": False, "status": boundary.STATUS,
+                            "detail": used.get("detail"), "query": query}
                 if used["closed"]:
                     return {"closed": True, "status": "PASS__GAP_CLOSED_BY_DOING",
                             "query": query, "executable": exe,
@@ -262,91 +273,31 @@ def _candidates_from(documents: Any) -> list[str]:
 
 
 def _try_with(gap: str, exe: str) -> dict[str, Any]:
-    """Do the thing with this program. Reading is not doing."""
-    from canonical.runtime import empirical_cli_probe_v1 as emp
-    from canonical.runtime import cli_capability_acquisition_v1 as acq
-    suffix = acq._requested_suffix(gap)
-    if not suffix:
-        return {"closed": False, "status": "NO_OUTPUT_FORMAT_IN_GAP",
-                "executable": exe, "detail": "nothing to verify an effect against"}
-    observed = emp.probe(exe, gap, suffix=suffix)
-    ok = str(observed.get("status") or "").startswith("PASS")
-    return {"closed": ok, "status": observed.get("status"), "executable": exe,
-            "detail": ("did it with %s" % exe) if ok
-                      else ("%s is here but did not do it" % exe)}
+    """Refuse unconfined automatic execution until a boundary is admitted."""
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    return {"closed": False, "status": boundary.STATUS,
+            "detail": "Program probing requires admitted confinement."}
 
 
 def _try_synthesize(gap: str) -> dict[str, Any]:
-    """Write a program that does it, and prove it by running it.
-
-    Composing reaches what is registered; this reaches what is merely
-    possible. The candidate is executed and its output checked, so a program
-    is only accepted once the artifact is really there.
-    """
-    try:
-        from canonical.runtime import program_synthesis_v1 as synth
-        out = synth.synthesize_or_recall(gap)
-    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
-        return {"closed": False, "status": "CHANNEL_ERROR",
-                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
-    ok = out.get("pass") is True
-    return {"closed": ok, "status": out.get("status"),
-            "suffix": out.get("suffix"),
-            "from_memory": bool(out.get("from_memory")),
-            "detail": ("wrote and verified a program producing %s" % out.get("suffix"))
-                      if ok else (out.get("status") or "no candidate worked")}
+    """Refuse unconfined automatic execution until a boundary is admitted."""
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    return {"closed": False, "status": boundary.STATUS,
+            "detail": "Candidate synthesis requires admitted confinement."}
 
 
 def _try_explore(gap: str) -> dict[str, Any]:
-    """Find out by acting, when nothing else knew the shape of the answer.
+    """Refuse unconfined computer exploration until a boundary is admitted."""
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    return {"closed": False, "status": boundary.STATUS,
+            "detail": "Computer exploration requires admitted confinement."}
 
-    Every other channel needs something given: a registered capability, a
-    format in a table, a module the goal named, a source that answered, a
-    program that exists. This one needs only a directory it may act in. It
-    tries things, watches the directory change, and keeps the shortest
-    sequence that reaches the goal -- and the model it built is remembered,
-    so the same shape of problem is instant next time.
-    """
-    from canonical.runtime import computer_env_v1 as cenv
-    try:
-        return cenv.discover(gap)
-    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
-        return {"closed": False, "status": "CHANNEL_ERROR",
-                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
 
 def _try_documentation(gap: str) -> dict[str, Any]:
-    """Read the manual for it, then really do it.
-
-    The hand-written table only reaches what someone remembered to write
-    down. Documentation reaches the whole standard library, which is already
-    installed and already paid for, plus semantic HTML form specs when a
-    web endpoint URL is named.
-    """
-    try:
-        from canonical.runtime import documentation_mining_v1 as dm
-        out = dm.learn_or_recall(gap)
-    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
-        out = {"pass": False, "status": type(exc).__name__ + ":" + str(exc)[:200]}
-    if out.get("pass") is True:
-        return {"closed": True, "status": out.get("status"),
-                "module": out.get("module"), "suffix": out.get("suffix"),
-                "from_memory": bool(out.get("from_memory")),
-                "detail": "read %s's documentation and did it" % out.get("module")}
-    url_m = re.search(r"https?://[^\s'\"<>]+", str(gap or ""))
-    if url_m is not None:
-        try:
-            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
-            learned = solve_or_learn(gap, allow_tier1_composition=False, record_open_gap=False)
-            if learned.get("pass") is True:
-                return {"closed": True, "status": learned.get("status"),
-                        "from_memory": bool(learned.get("from_memory")),
-                        "detail": "inspected semantic web form and compiled HTTP skill"}
-        except Exception:
-            pass
-    return {"closed": False, "status": out.get("status"),
-            "module": out.get("module"), "suffix": out.get("suffix"),
-            "from_memory": bool(out.get("from_memory")),
-            "detail": out.get("status") or "the manual did not say"}
+    """Refuse unconfined automatic execution until a boundary is admitted."""
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    return {"closed": False, "status": boundary.STATUS,
+            "detail": "Documentation snippet execution requires admitted confinement."}
 
 
 def _try_compose(gap: str) -> dict[str, Any]:
@@ -361,6 +312,10 @@ def _try_compose(gap: str) -> dict[str, Any]:
         from canonical.runtime import composer_route_v1 as croute
         routed = croute.route(gap)
         if not routed.get("pass"):
+            from canonical.runtime import computer_execution_boundary_v1 as boundary
+            if routed.get("status") == boundary.STATUS:
+                return {"closed": False, "status": boundary.STATUS,
+                        "detail": "Automatic exploration requires admitted confinement."}
             return {"closed": False, "status": "OPEN__COMPOSER_NO_REACHABLE_TOKEN",
                     "detail": "no chain of capabilities reaches this"}
         executed = croute.execute_chain(routed["chain"], gap)
@@ -376,24 +331,10 @@ def _try_compose(gap: str) -> dict[str, Any]:
 
 
 def _try_acquire(gap: str) -> dict[str, Any]:
-    """Learn a program the gap names, verified by running it."""
-    from canonical.runtime import live_brain_route_admission_v1 as ra
-    exe = ra._named_executable(gap)
-    if not exe:
-        return {"closed": False, "status": "NO_PROGRAM_NAMED",
-                "detail": "the gap names no program that exists here"}
-    from canonical.runtime import empirical_cli_probe_v1 as emp
-    from canonical.runtime import cli_capability_acquisition_v1 as acq
-
-    suffix = acq._requested_suffix(gap)
-    if not suffix:
-        return {"closed": False, "status": "NO_OUTPUT_FORMAT_IN_GAP",
-                "detail": "nothing to verify an effect against"}
-    observed = emp.probe(exe, gap, suffix=suffix)
-    ok = str(observed.get("status") or "").startswith("PASS")
-    return {"closed": ok, "status": observed.get("status"), "executable": exe,
-            "detail": ("learned and verified by running it" if ok
-                       else "no observed effect")}
+    """Refuse unconfined executable acquisition until a boundary is admitted."""
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    return {"closed": False, "status": boundary.STATUS,
+            "detail": "Program acquisition requires admitted confinement."}
 
 
 def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
@@ -410,6 +351,7 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
         return {"schema": SCHEMA, "status": FAIL_BAD_GAP, "pass": False,
                 "gap_id": gap_id, "gap": what}
 
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
     attempts: list[dict[str, Any]] = []
     closed_by = None
     for name in ordered_channels(channels):
@@ -434,6 +376,10 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             outcome = {"closed": False, "status": "CHANNEL_ERROR",
                        "detail": type(exc).__name__ + ":" + str(exc)[:200]}
         attempts.append({"channel": name, **outcome})
+        if outcome.get("status") == boundary.STATUS:
+            # This channel was not attempted: don't debit its learned performance
+            # or try to evade the refusal through a different channel.
+            break
         credit_channel(name, bool(outcome.get("closed")))
         if outcome.get("closed"):
             closed_by = name
@@ -457,7 +403,7 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             led.resolve(gap_id, helped=True, close=True)
         except Exception:
             pass
-    elif gap_id:
+    elif gap_id and not (attempts and attempts[-1].get("status") == boundary.STATUS):
         try:
             from canonical.runtime import ignorance_ledger_v1 as led
             led.resolve(gap_id, helped=False, close=False)
@@ -466,7 +412,9 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
 
     return {
         "schema": SCHEMA,
-        "status": CLOSED if closed else OPEN_UNCLOSED,
+        "status": (CLOSED if closed else
+                   (attempts[-1]["status"] if attempts and attempts[-1].get("status") == boundary.STATUS
+                    else OPEN_UNCLOSED)),
         "pass": closed,
         "gap_id": gap_id,
         "gap": what,

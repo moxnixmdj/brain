@@ -32,6 +32,7 @@ noticed you do not know, try this one next, and tell me whether it helped.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import time
@@ -55,11 +56,19 @@ def _beta_mean(successes: int, trials: int) -> float:
     return (successes + 0.5) / (trials + 1.0)
 
 
-def _key(what: str, why: str) -> str:
-    """Gaps that mean the same thing are the same gap, however phrased."""
+def _identity(what: str, why: str) -> str:
+    """The ledger's existing normalized-token definition of a gap."""
     text = f"{what} {why}".lower()
-    terms = sorted({w for w in _WORD.findall(text)})
-    return "g" + str(abs(hash("|".join(terms))) % (1 << 40))
+    return "|".join(sorted(set(_WORD.findall(text))))
+
+
+def _key(what: str, why: str) -> str:
+    """A stable ID for that identity, independent of Python's per-process hash seed.
+
+    Normalized token overlap is only this ledger's identity heuristic, not a
+    proof that two questions are semantically equivalent.
+    """
+    return "g" + hashlib.sha256(_identity(what, why).encode("utf-8")).hexdigest()
 
 
 def _load(path: str = DEFAULT_STATE) -> dict:
@@ -87,9 +96,23 @@ def note(what: str, *, why: str = "", cost: float = 1.0,
     """Notice something you do not know. Returns the gap id."""
     path = path or DEFAULT_STATE
     state = _load(path)
+    identity = _identity(what, why)
     gid = _key(what, why)
-    now = time.time()
     gap = state["gaps"].get(gid)
+    if gap is not None and (not isinstance(gap, Mapping)
+                            or _identity(gap.get("what", ""), gap.get("why", "")) != identity):
+        raise ValueError("IGNORANCE_GAP_IDENTITY_CONFLICT")
+    if gap is None:
+        # Older files contain numeric IDs made with Python's randomized hash.
+        # Reuse an existing matching row without changing its ID, counters or
+        # references. Already-duplicated legacy rows are not merged or deleted.
+        matches = sorted(k for k, row in state["gaps"].items()
+                         if isinstance(row, Mapping)
+                         and _identity(row.get("what", ""), row.get("why", "")) == identity)
+        if matches:
+            gid = matches[0]
+            gap = state["gaps"][gid]
+    now = time.time()
     if gap is None:
         gap = {"id": gid, "what": str(what), "why": str(why),
                "cost": float(cost), "trials": 0, "helped": 0,
@@ -100,6 +123,9 @@ def note(what: str, *, why: str = "", cost: float = 1.0,
         gap["last_seen"] = now
         gap["what"] = str(what)
         gap["why"] = str(why)
+        # Seeing the same gap again is new evidence that it is open now;
+        # preserve the past outcomes rather than treating them as a cure.
+        gap["resolved"] = False
         if cost:
             gap["cost"] = float(cost)
     _save(state, path)

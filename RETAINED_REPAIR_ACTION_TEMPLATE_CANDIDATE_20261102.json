@@ -1,0 +1,36 @@
+{
+  "basis": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+  "basis_action_template_canonical_sha256": "91cf18ae17e0df42ff897930275ac804f8e72e59a49f2f9c7b4336df0f94f423",
+  "candidate_action_template": {
+    "args": {
+      "capability_id": "python.software.repair.apply.verified.v1",
+      "output_path": "${input.output_path}",
+      "retained_learning": "${input.retained_learning}",
+      "source_root": "${input.source_root}",
+      "synthesize_regression_test": "${input.synthesize_regression_test}",
+      "test_argv": "${input.test_argv}",
+      "test_paths": "${input.test_paths}",
+      "timeout_s": 60
+    },
+    "expect": {
+      "field": "output_verified",
+      "type": "field_equals",
+      "value": true
+    },
+    "optional": [
+      "test_argv",
+      "synthesize_regression_test",
+      "retained_learning"
+    ],
+    "type": "invoke_capability"
+  },
+  "capability_id": "python.software.repair.apply.verified.v1",
+  "nonclaims": [
+    "NO_REGISTRY_UPDATE",
+    "NO_INDEPENDENT_VERIFICATION",
+    "NO_ISOLATION_CARRIER",
+    "NO_EXECUTION_AUTHORITY"
+  ],
+  "schema": "BRAIN_RETAINED_REPAIR_ACTION_TEMPLATE_CANDIDATE_V1",
+  "status": "DRAFT__NOT_ADMITTED__NO_EXECUTION_AUTHORITY"
+}

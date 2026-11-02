@@ -217,6 +217,25 @@ def prepare(
     cid = inspected["capability_id"]
     entry = inspected["entry"]
     template = entry["action_template"]
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if cid == boundary.REPAIR_CAPABILITY_ID:
+        if "retained_learning" in inputs:
+            error = boundary.retained_repair_policy_error(inputs["retained_learning"], True)
+            if error:
+                raise BoundExecutionError(error)
+        # The existing repair template declares optional args, but the shared
+        # renderer requires every placeholder. Prune only an absent, directly
+        # bound optional arg in a copy; never alter the frozen registry entry,
+        # required bindings, or placeholders embedded in other expressions.
+        template = deepcopy(template)
+        optional = template.get("optional", [])
+        args = template.get("args")
+        if not isinstance(optional, list) or any(not isinstance(name, str) for name in optional):
+            raise BoundExecutionError("REPAIR_TEMPLATE_OPTIONAL_INVALID")
+        if isinstance(args, dict):
+            for name in optional:
+                if name not in inputs and args.get(name) == "${input." + name + "}":
+                    del args[name]
     try:
         rendered = astra_runtime._render_bound_template(template, dict(inputs))
     except Exception as exc:
@@ -240,6 +259,11 @@ def prepare(
     # and `rendered_action_sha256` pins the exact rendered bytes for the caller to re-check.
     if rendered_type == "invoke_capability" and args.get("capability_id") != cid:
         raise BoundExecutionError("RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH")
+    if (cid == boundary.REPAIR_CAPABILITY_ID and "retained_learning" in inputs
+            and ("retained_learning" not in args or args["retained_learning"] != inputs["retained_learning"])):
+        # A frozen template is the complete executable contract. Never claim an
+        # opt-in memory policy survived when the rendered action dropped it.
+        raise BoundExecutionError("RETAINED_LEARNING_NOT_BOUND_BY_FROZEN_TEMPLATE")
 
     iid = str(instance_id or cid).strip()
     if not iid:
@@ -404,6 +428,17 @@ def execute(
 ) -> dict[str, Any]:
     try:
         capability_id = _registry_key(capability_id)
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        if capability_id == boundary.REPAIR_CAPABILITY_ID:
+            # Keep the actual independent-evidence gate first. Even if it is
+            # satisfied in the future, the current executor runs target tests
+            # with host authority and has no admitted confinement carrier.
+            inspect(capability_id)
+            return {"schema": SCHEMA, "pass": False, "status": boundary.STATUS,
+                    "failure_class": boundary.FAILURE_CLASS, "reason": boundary.STATUS,
+                    "capability_id": capability_id, "executed": False,
+                    "semantic_acceptance_complete": False, "terminal_authority": False,
+                    "capability_credit_delta": 0, "ownership_credit_delta": 0}
         # Receipt-backed capabilities first: they are admitted by the loader on execution
         # evidence, and the promoted-registry path below cannot see them. None means "not
         # one of those", so every promoted id keeps the strict path unchanged.
@@ -556,6 +591,7 @@ def execute(
             "schema": SCHEMA,
             "status": "FAIL_CLOSED",
             "pass": False,
+            "capability_id": str(capability_id or ""),
             "reason": detail,
             "errors": [detail],
             "terminal_authority": False,
