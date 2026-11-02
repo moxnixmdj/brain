@@ -38,6 +38,7 @@ in a clean detached worktree of `main` and the numbers are what it printed.
 | The executor, known-good form | `solve({"goal": "run <receipt_projection cid>"})` | **`pass=True`** — `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED`. Registry **443**, receipt-backed **294** |
 | The executor, authoring goals | `solve` / `solve_or_learn` on "write and register an inspector for CAP_FS_READ_V1 that refuses a decoy" | **refused** — `R13_DECLARED_INPUT_UNBINDABLE:registry` / `RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP` |
 | **The want→can gap, MEASURED** | wired a real `solve` executor into main's creature, ran its whole 112 board (throwaway, detached `main` worktree) | **STRICT oracle** (close counts only if the authoring goal passes *and* an inspector comes to exist): **closed 0** (attempted 42, blocked 42, parked 21). **LOOSE oracle** (also accepted `run <cid>`): reported **6 closed — all FALSE** (`run=True, author=False, has_inspector_now=False`): served an existing capability, authored nothing |
+| Generalization: representational vs statistical, **MEASURED** | teach-one/test-all matrix over the probe's 7 novel shapes (throwaway, detached `main` worktree) | **off-diagonal cross-shape transfer 0/36** — teaching shape T *never* fixes a different shape U, though **6/7 shapes crystallize fine** (not an admission-gate problem). Teaching all 6 verbatim → 6/7 (memorization ceiling, diagonal-inflated). Confirms *representational, not statistical*: each lesson is one skeleton; more examples add skeletons, never an abstract rule |
 | Crystallizer generalization gate | `verified_skill_crystallizer_v1.py:808` | `allow_operator_generalization=False`, guarded by `OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE` (:820) |
 | Production wiring of an executor | grep for a caller that passes a real `perform` | **none** — only the creature's own `main()`; default `perform` is `does_nothing` |
 | Unattended production trigger | `creature-runtime.yml` triggers | `pull_request` / `push` / `workflow_dispatch` — **no `schedule:`/`cron:`** |
@@ -155,13 +156,16 @@ still passes — an inspector really came to exist and really refuses a decoy, j
 oracle — the wall is breached. The strict oracle, never the loose one, is what gets to say so.
 
 **PR-C — generalization is the real "instant learning" gap.**
-1/7 novel shapes, 0/4 cross-language, and a missed control. The lesson is stored as a shape,
-not a transferable rule; `NO_RULES_FOR_LANGUAGE` is structural. The polyglot bridge already
-speaks cpp/rust/go/typescript — the *rules* do not cross. This is the hard, high-value
-research behind "learns all of those," and it is representational, so it will not yield to
-more examples. *Falsification:* if teaching one lesson and re-presenting it in a new shape or
-language still recalls 1/7 after a representational change, the storage format — not the
-count — is load-bearing.
+1/7 novel shapes, 0/4 cross-language, and a missed control. **Measured today** (teach-one/
+test-all matrix, §1): cross-shape transfer is **0/36** — teaching shape T never fixes a
+different shape U, though 6/7 shapes crystallize fine, so this is *not* an admission-gate
+problem. The lesson is stored as a shape, not a transferable rule; `NO_RULES_FOR_LANGUAGE`
+is structural. The polyglot bridge already speaks cpp/rust/go/typescript — the *rules* do
+not cross. This is the hard, high-value research behind "learns all of those," and it is
+representational, so it will not yield to more examples (teaching all 6 shapes verbatim
+reaches 6/7 by memorization, not transfer). *Falsification:* if a representational change to
+the storage format lifts off-diagonal transfer above 0/36 — teaching one shape fixes an
+untaught shape — then the format, not the example count, was load-bearing.
 
 **PR-D — "instant" is 4/5, not 5/5; know why before claiming it.**
 `toggles_4` recall did not collapse and cost more acts than cold. Understand which family
