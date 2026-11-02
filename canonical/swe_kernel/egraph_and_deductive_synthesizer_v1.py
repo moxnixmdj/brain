@@ -2853,3 +2853,370 @@ def git_write_surgeon(target: Path, goal: str, brain_root: Path) -> dict[str, An
         }
 
     return {"verified": False, "gate": "FAIL", "reason": "GIT_UNSUPPORTED_WRITE_OP"}
+
+
+# ---------------------------------------------------------------------------
+# Congruence-Closed E-Graph Algebraic Rule Generalization (`SCOPE_ALGEBRAIC`)
+# ---------------------------------------------------------------------------
+_HOLE_PREFIX = "__brain_hole_"
+
+
+def _tokens_to_hole_source(tokens: list[Any]) -> tuple[str, dict[str, str]]:
+    """Render crystallized `pattern_tokens` / `replacement_tokens` as parseable Python with hole identifiers."""
+    parts: list[str] = []
+    hole_map: dict[str, str] = {}
+    for item in tokens or []:
+        if not isinstance(item, (list, tuple)) or len(item) < 2:
+            continue
+        kind, val = str(item[0]), str(item[1])
+        if kind.startswith("hole_"):
+            clean = re.sub(r"[^A-Za-z0-9_]", "_", val.lstrip("?"))
+            ident = f"{_HOLE_PREFIX}{clean}__"
+            hole_map[ident] = val
+            parts.append(ident)
+        else:
+            parts.append(val)
+    return "".join(parts), hole_map
+
+
+def _extract_rule_expr_pair(rule: dict[str, Any] | Any) -> tuple[ast.expr, ast.expr, set[str]] | None:
+    """Extract `(before_expr_ast, after_expr_ast, hole_idents)` from a statement or expression rule."""
+    if not isinstance(rule, dict):
+        return None
+    pat_src, holes_a = _tokens_to_hole_source(list(rule.get("pattern_tokens") or []))
+    rep_src, holes_b = _tokens_to_hole_source(list(rule.get("replacement_tokens") or []))
+    if not pat_src.strip() or not rep_src.strip():
+        return None
+    holes = set(holes_a) | set(holes_b)
+
+    def _to_expr(snippet: str) -> ast.expr | None:
+        s = snippet.strip()
+        try:
+            return ast.parse(s, mode="eval").body
+        except SyntaxError:
+            pass
+        try:
+            mod = ast.parse(s, mode="exec")
+        except SyntaxError:
+            return None
+        if len(mod.body) != 1:
+            return None
+        st = mod.body[0]
+        if isinstance(st, ast.Return) and st.value is not None:
+            return st.value
+        if isinstance(st, ast.Expr):
+            return st.value
+        if isinstance(st, ast.Assign) and len(st.targets) == 1:
+            return st.value
+        return None
+
+    b_expr = _to_expr(pat_src)
+    a_expr = _to_expr(rep_src)
+    if b_expr is None or a_expr is None:
+        return None
+    # Require at least one binary/unary arithmetic operator so pure identifier/compare rules stay in earlier tiers
+    has_arith = any(
+        isinstance(nd, (ast.BinOp, ast.UnaryOp))
+        for nd in itertools.chain(ast.walk(b_expr), ast.walk(a_expr))
+    ) if "itertools" in globals() else any(
+        isinstance(nd, (ast.BinOp, ast.UnaryOp))
+        for nd in list(ast.walk(b_expr)) + list(ast.walk(a_expr))
+    )
+    if not has_arith:
+        return None
+    return b_expr, a_expr, holes
+
+
+def _ast_expr_to_egraph(eg: EGraph, expr: ast.expr, leaf_src: dict[int, tuple[int, str]]) -> int:
+    """Insert an AST expression into `eg` and record minimum-cost source rendering for leaf classes."""
+    if isinstance(expr, ast.BinOp):
+        op_map = {
+            ast.Add: "add",
+            ast.Sub: "sub",
+            ast.Mult: "mul",
+            ast.Div: "div",
+            ast.FloorDiv: "floordiv",
+            ast.Mod: "mod",
+        }
+        op_name = op_map.get(type(expr.op))
+        if op_name is not None:
+            lc = _ast_expr_to_egraph(eg, expr.left, leaf_src)
+            rc = _ast_expr_to_egraph(eg, expr.right, leaf_src)
+            cid = eg.add(ENode(op_name, (lc, rc)))
+            src = ast.unparse(expr)
+            prev = leaf_src.get(eg.find(cid))
+            cost = 5 + len(src)
+            if prev is None or cost < prev[0]:
+                leaf_src[eg.find(cid)] = (cost, src)
+            return cid
+    if isinstance(expr, ast.UnaryOp) and isinstance(expr.op, ast.USub):
+        oc = _ast_expr_to_egraph(eg, expr.operand, leaf_src)
+        cid = eg.add(ENode("neg", (oc,)))
+        src = ast.unparse(expr)
+        leaf_src.setdefault(eg.find(cid), (3 + len(src), src))
+        return cid
+    if isinstance(expr, ast.Constant) and isinstance(expr.value, (int, float)) and not isinstance(expr.value, bool):
+        # Normalize numeric 1 / 1.0 and 0 / 0.0 for algebraic identity saturation
+        if expr.value == 1:
+            cid = eg.add(ENode("num:1", ()))
+            leaf_src.setdefault(eg.find(cid), (1, repr(expr.value)))
+            return cid
+        if expr.value == 0:
+            cid = eg.add(ENode("num:0", ()))
+            leaf_src.setdefault(eg.find(cid), (1, repr(expr.value)))
+            return cid
+        tok = f"num:{expr.value!r}"
+        cid = eg.add(ENode(tok, ()))
+        leaf_src.setdefault(eg.find(cid), (1, repr(expr.value)))
+        return cid
+    # Treat any other atomic expression (`Name`, `Attribute`, `Subscript`, `Call`) as an opaque congruence term
+    rendered = ast.unparse(expr)
+    cid = eg.add(ENode(f"atom:{rendered}", ()))
+    leaf_src[eg.find(cid)] = (1 + len(rendered) // 8, rendered)
+    return cid
+
+
+def _saturate_algebraic_egraph(eg: EGraph, *, rounds: int = 3, max_classes: int = 160) -> None:
+    """Apply sound commutative/associative/distributive/identity rewrites with congruence rebuild."""
+    c_one = eg.add(ENode("num:1", ()))
+    c_zero = eg.add(ENode("num:0", ()))
+
+    for _ in range(rounds):
+        if len(eg.classes) > max_classes:
+            break
+        merges: list[tuple[int, int]] = []
+        snapshot = [(cid, list(ecls.nodes)) for cid, ecls in list(eg.classes.items())]
+        for cid, nodes in snapshot:
+            rcid = eg.find(cid)
+            for nd in nodes:
+                op = nd.op
+                ch = nd.children
+                if op in ("add", "mul") and len(ch) == 2:
+                    a, b = eg.find(ch[0]), eg.find(ch[1])
+                    # Commutativity: a + b == b + a ; a * b == b * a
+                    merges.append((rcid, eg.add(ENode(op, (b, a)))))
+                    # Associativity: (x op y) op b == x op (y op b)
+                    for sub in list(eg.classes.get(a, EClass(a)).nodes):
+                        if sub.op == op and len(sub.children) == 2:
+                            x, y = eg.find(sub.children[0]), eg.find(sub.children[1])
+                            yz = eg.add(ENode(op, (y, b)))
+                            merges.append((rcid, eg.add(ENode(op, (x, yz)))))
+                if op == "mul" and len(ch) == 2:
+                    a, b = eg.find(ch[0]), eg.find(ch[1])
+                    # Identity: 1 * b == b ; a * 1 == a
+                    if a == eg.find(c_one):
+                        merges.append((rcid, b))
+                    if b == eg.find(c_one):
+                        merges.append((rcid, a))
+                    # Distributivity: a * (x + y) == a*x + a*y  and  a * (x - y) == a*x - a*y
+                    for sub in list(eg.classes.get(b, EClass(b)).nodes):
+                        if sub.op in ("add", "sub") and len(sub.children) == 2:
+                            x, y = eg.find(sub.children[0]), eg.find(sub.children[1])
+                            ax = eg.add(ENode("mul", (a, x)))
+                            ay = eg.add(ENode("mul", (a, y)))
+                            merges.append((rcid, eg.add(ENode(sub.op, (ax, ay)))))
+                if op in ("add", "sub") and len(ch) == 2:
+                    a, b = eg.find(ch[0]), eg.find(ch[1])
+                    if b == eg.find(c_zero):
+                        merges.append((rcid, a))
+                    if op == "add" and a == eg.find(c_zero):
+                        merges.append((rcid, b))
+                    # Sign laws: a - (-y) == a + y ; a + (-y) == a - y
+                    for sub in list(eg.classes.get(b, EClass(b)).nodes):
+                        if sub.op == "neg" and len(sub.children) == 1:
+                            y = eg.find(sub.children[0])
+                            flipped = "add" if op == "sub" else "sub"
+                            merges.append((rcid, eg.add(ENode(flipped, (a, y)))))
+                    # Factoring: x*y + x*z == x*(y + z) and a + a*z == a*(1 + z)
+                    if a != eg.find(c_zero):
+                        ay_rhs = [
+                            eg.find(sub.children[1])
+                            for sub in eg.classes.get(b, EClass(b)).nodes
+                            if sub.op == "mul" and len(sub.children) == 2 and eg.find(sub.children[0]) == a
+                        ]
+                        for z in ay_rhs:
+                            one_pm_z = eg.add(ENode(op, (eg.find(c_one), z)))
+                            merges.append((rcid, eg.add(ENode("mul", (a, one_pm_z)))))
+        if not merges:
+            break
+        any_new = False
+        for u, v in merges:
+            if eg.find(u) != eg.find(v):
+                eg.union(u, v)
+                any_new = True
+        if not any_new:
+            break
+        eg.rebuild()
+
+
+def _match_pattern_in_eclass(
+    eg: EGraph,
+    pat: ast.expr,
+    cid: int,
+    holes: set[str],
+    env: dict[str, int],
+) -> list[dict[str, int]]:
+    """Unify `pat` against saturated e-class `cid`, returning consistent hole -> e-class bindings."""
+    rcid = eg.find(cid)
+    if isinstance(pat, ast.Name) and pat.id in holes:
+        bound = env.get(pat.id)
+        if bound is not None:
+            return [env] if eg.find(bound) == rcid else []
+        nxt = dict(env)
+        nxt[pat.id] = rcid
+        return [nxt]
+
+    ecls = eg.classes.get(rcid)
+    if ecls is None:
+        return []
+
+    if isinstance(pat, ast.Constant) and isinstance(pat.value, (int, float)) and not isinstance(pat.value, bool):
+        want = "num:1" if pat.value == 1 else ("num:0" if pat.value == 0 else f"num:{pat.value!r}")
+        return [env] if any(nd.op == want for nd in ecls.nodes) else []
+
+    if isinstance(pat, ast.UnaryOp) and isinstance(pat.op, ast.USub):
+        out: list[dict[str, int]] = []
+        for nd in ecls.nodes:
+            if nd.op == "neg" and len(nd.children) == 1:
+                out.extend(_match_pattern_in_eclass(eg, pat.operand, nd.children[0], holes, env))
+        return out
+
+    if isinstance(pat, ast.BinOp):
+        op_map = {ast.Add: "add", ast.Sub: "sub", ast.Mult: "mul", ast.Div: "div", ast.FloorDiv: "floordiv", ast.Mod: "mod"}
+        want_op = op_map.get(type(pat.op))
+        if want_op is None:
+            return []
+        results: list[dict[str, int]] = []
+        seen_envs: set[tuple[tuple[str, int], ...]] = set()
+        for nd in ecls.nodes:
+            if nd.op == want_op and len(nd.children) == 2:
+                for env_l in _match_pattern_in_eclass(eg, pat.left, nd.children[0], holes, env):
+                    for env_r in _match_pattern_in_eclass(eg, pat.right, nd.children[1], holes, env_l):
+                        sig = tuple(sorted((k, eg.find(v)) for k, v in env_r.items()))
+                        if sig not in seen_envs:
+                            seen_envs.add(sig)
+                            results.append(env_r)
+        return results
+
+    rendered = ast.unparse(pat)
+    return [env] if any(nd.op == f"atom:{rendered}" for nd in ecls.nodes) else []
+
+
+def _extract_eclass_source(eg: EGraph, cid: int, leaf_src: dict[int, tuple[int, str]]) -> str | None:
+    """Extract clean Python expression text for `cid`."""
+    rcid = eg.find(cid)
+    for k, (_cost, src) in list(leaf_src.items()):
+        if eg.find(k) == rcid:
+            return src
+    ecls = eg.classes.get(rcid)
+    if not ecls:
+        return None
+    for nd in ecls.nodes:
+        if nd.op.startswith("atom:"):
+            return nd.op[5:]
+        if nd.op.startswith("num:"):
+            return nd.op[4:]
+    return None
+
+
+def _instantiate_after_ast(expr: ast.expr, hole_texts: dict[str, str]) -> ast.expr:
+    """Substitute bound hole AST expressions into `after_expr_ast`."""
+    class _Sub(ast.NodeTransformer):
+        def visit_Name(self, node: ast.Name) -> ast.AST:
+            if node.id in hole_texts:
+                return ast.parse(hole_texts[node.id], mode="eval").body
+            return node
+
+    import copy
+    transformed = _Sub().visit(copy.deepcopy(expr))
+    ast.fix_missing_locations(transformed)
+    return transformed
+
+
+def propose_egraph_algebraic_rewrites(source_text: str, rule: dict[str, Any] | Any) -> list[str]:
+    """Propose congruence-closed algebraic expression rewrites across any statement context in `source_text`."""
+    pair = _extract_rule_expr_pair(rule)
+    if pair is None:
+        return []
+    before_expr, after_expr, holes = pair
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        return []
+
+    lines = source_text.splitlines(keepends=True)
+    line_offsets: list[int] = [0]
+    for ln in lines:
+        line_offsets.append(line_offsets[-1] + len(ln))
+
+    def _span(node: ast.AST) -> tuple[int, int] | None:
+        l0 = getattr(node, "lineno", None)
+        c0 = getattr(node, "col_offset", None)
+        l1 = getattr(node, "end_lineno", None)
+        c1 = getattr(node, "end_col_offset", None)
+        if None in (l0, c0, l1, c1):
+            return None
+        # Convert UTF-8 byte col_offset to Python str index on that line
+        s_line = lines[l0 - 1].encode("utf-8")
+        e_line = lines[l1 - 1].encode("utf-8")
+        start = line_offsets[l0 - 1] + len(s_line[:c0].decode("utf-8", errors="replace"))
+        end = line_offsets[l1 - 1] + len(e_line[:c1].decode("utf-8", errors="replace"))
+        return start, end
+
+    # Collect maximal arithmetic expressions (and their BinOp sub-expressions) with source spans
+    expr_nodes: list[ast.expr] = []
+    for nd in ast.walk(tree):
+        if isinstance(nd, (ast.BinOp, ast.UnaryOp)) and _span(nd) is not None:
+            expr_nodes.append(nd)
+
+    proposals: list[str] = []
+    seen: set[str] = {source_text}
+    for target_expr in expr_nodes:
+        sp = _span(target_expr)
+        if sp is None:
+            continue
+        eg = EGraph()
+        leaf_src: dict[int, tuple[int, str]] = {}
+        root_cid = _ast_expr_to_egraph(eg, target_expr, leaf_src)
+        _saturate_algebraic_egraph(eg, rounds=3)
+        matches = _match_pattern_in_eclass(eg, before_expr, root_cid, holes, {})
+        for env in matches[:4]:
+            hole_texts: dict[str, str] = {}
+            ok = True
+            for h in holes:
+                cid_h = env.get(h)
+                if cid_h is None:
+                    ok = False
+                    break
+                txt_h = _extract_eclass_source(eg, cid_h, leaf_src)
+                if not txt_h:
+                    ok = False
+                    break
+                hole_texts[h] = txt_h
+            if not ok:
+                continue
+            try:
+                repl_ast = _instantiate_after_ast(after_expr, hole_texts)
+                repl_txt = ast.unparse(repl_ast)
+            except Exception:
+                continue
+            s_idx, e_idx = sp
+            # Add parentheses if embedded inside a tighter parent expression
+            orig_slice = source_text[s_idx:e_idx]
+            if orig_slice.strip() == repl_txt.strip():
+                continue
+            for cand_expr in (repl_txt, f"({repl_txt})"):
+                patched = source_text[:s_idx] + cand_expr + source_text[e_idx:]
+                if patched in seen:
+                    continue
+                try:
+                    ast.parse(patched)
+                except SyntaxError:
+                    continue
+                seen.add(patched)
+                proposals.append(patched)
+                break
+            if len(proposals) >= 16:
+                return proposals
+    return proposals
+

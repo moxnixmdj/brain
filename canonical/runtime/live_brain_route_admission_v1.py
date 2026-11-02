@@ -4753,13 +4753,31 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     return result
 
 
-def solve_or_learn(request: Mapping[str, Any] | str, **kwargs: Any) -> dict[str, Any]:
-    """Closed-loop entry: Tier 0 recall/registry -> Tier 1 DAG/composer -> Tier 2 sandbox learn & qualify."""
+def solve_or_learn(
+    request: Mapping[str, Any] | str,
+    *,
+    learn: bool = True,
+    registry_path: str | None = None,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Unified closed-loop entry: Tier 0 recall/registry -> Tier 1 DAG/composer -> Tier 2 learn/JIT/CLI -> Tier 3 ledger."""
     from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
         solve_or_learn as _controller_solve_or_learn,
     )
 
-    return _controller_solve_or_learn(request, **kwargs)
+    return _controller_solve_or_learn(
+        request,
+        learn=learn,
+        registry_path=registry_path,
+        **kwargs,
+    )
+
+
+def chase_until_met(goal: str, *, measure: Any, **kwargs: Any) -> dict[str, Any]:
+    """Target-bound persistent chase loop (`goal_chase_v1.chase_until_met`) wired to the unified front door."""
+    from execution_guard.goal_chase_v1 import chase_until_met as _chase_until_met
+
+    return _chase_until_met(goal, measure=measure, **kwargs)
 
 
 def _capability_id_of(result: Mapping[str, Any]) -> str:
@@ -5443,177 +5461,6 @@ def _named_executable(goal: str) -> str:
     return ""
 
 
-def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
-                   registry_path: str | None = None) -> dict[str, Any]:
-    """Try it; if the machine cannot, let that be the signal to learn how.
-
-    solve() answers "can I do this". When the answer is no, the interesting
-    question is what happens next. A strict program reports the failure and
-    stops, and will report the same failure forever. A creature treats
-    "I cannot" as the most precise information it has about what it lacks:
-
-      1. it records the gap, so it now KNOWS it has a hole here -- and the
-         ledger ranks that hole against every other thing it does not know;
-      2. if the goal names a program that exists, it learns to drive that
-         program (by reading its help, or failing that by trying it);
-      3. if that produced something verified, it registers it and RETRIES.
-
-    solve() itself is untouched, so the measured path cannot move.
-    """
-    result = solve(request)
-    if not learn:
-        return result
-    if str(result.get("status") or "") not in _LEARNABLE_STATUSES:
-        return result
-
-    goal = str((request or {}).get("goal") or "").strip()
-    learned: dict[str, Any] = {"attempted": False, "gap_recorded": False}
-
-    try:
-        from canonical.runtime import ignorance_ledger_v1 as led
-        gap_id = led.note(goal or "unmatched goal",
-                          why="raw goal compilation gap", cost=1.0)
-        learned["gap_recorded"] = True
-        learned["gap_id"] = gap_id
-        learned["what_to_learn_next"] = [g["what"] for g in led.rank(limit=3)]
-    except Exception:
-        pass
-
-    # JIT KNOWLEDGE. The goal named nothing the machine can run, so before
-    # concluding anything it asks the outside world what exists for this job.
-    # A gap is not the end of the road -- it is the question.
-    try:
-        from canonical.runtime import jit_knowledge_v1 as jit
-        known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
-        # Asking the world a badly-phrased question and then concluding the
-        # world has nothing to say is the oldest way to be wrong. A goal like
-        # "write the text hello to out.txt" is an instruction, not a query:
-        # asked verbatim, github returns nothing at all. Rephrase and ask
-        # again before believing the silence.
-        if not known.get("complete"):
-            try:
-                from canonical.runtime.curriculum_v1 import query_for
-                rephrased = query_for(goal)
-                if rephrased and rephrased != goal:
-                    again = jit.resolve(rephrased, min_sources=1, limit=6,
-                                        timeout=8)
-                    if (again.get("complete")
-                            or again.get("document_count", 0)
-                            > known.get("document_count", 0)):
-                        known = again
-                        known["query_was_rephrased_to"] = rephrased
-            except Exception:
-                pass
-        learned["knowledge"] = {
-            "status": known.get("status"),
-            "documents": known.get("document_count", 0),
-            "sources_answered": known.get("sources_answered") or [],
-            # a summary that drops the KINDS cannot explain its own refusal:
-            # it says "incomplete" without being able to say that three
-            # registries agreed because they are all registries
-            "kinds_answered": known.get("kinds_answered") or [],
-            "min_kinds_required": known.get("min_kinds_required"),
-            "gap": known.get("gap"),
-            "query_was_rephrased_to": known.get("query_was_rephrased_to"),
-            "complete": known.get("complete", False),
-            "authority": known.get("authority"),
-        }
-        # knowledge that names a program is only useful if that program is
-        # actually HERE -- the machine does not install, and does not invent.
-        candidates: list[str] = []
-        for doc in (known.get("documents") or []):
-            for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
-                head = text.strip().split()[0] if text.strip() else ""
-                head = head.strip(".,()[]{}'\"")
-                if 2 <= len(head) <= 40 and _is_executable(head):
-                    candidates.append(head)
-        if candidates:
-            learned["knowledge"]["candidates_present"] = candidates[:6]
-            if not _named_executable(goal):
-                exe_guess = candidates[0]
-                learned.setdefault("from_knowledge", exe_guess)
-    except Exception as exc:
-        learned.setdefault("knowledge", {"error": type(exc).__name__ + ":" + str(exc)[:160]})
-
-    exe = _named_executable(goal)
-    if not exe:
-        # nothing the goal named -- but knowledge may have named something real
-        exe = str(learned.get("from_knowledge") or "")
-        if exe:
-            learned["attempted"] = True
-            learned["executable"] = exe
-            learned["executable_source"] = "jit_knowledge"
-    if exe:
-        learned["attempted"] = True
-        learned["executable"] = exe
-        try:
-            from canonical.runtime import cli_capability_acquisition_v1 as acq
-            import subprocess, tempfile, json as _json
-            with tempfile.TemporaryDirectory(prefix="brain-learn-") as td:
-                out = subprocess.run([exe, "--help"], capture_output=True,
-                                     timeout=30, cwd=td)
-                text = (out.stdout + out.stderr).decode("utf-8", "replace")
-            probe_doc = {"executables": [{"executable": exe,
-                                          "help_attempts": [{"text": text}]}]}
-            acquired = acq.acquire(probe_doc, goal)
-            learned["acquisition_status"] = acquired.get("status")
-            if acquired.get("verified"):
-                cid = "acquired." + exe.replace(".", "_")
-                reg = acq.register(acquired, cid,
-                                  registry_path=registry_path)
-                learned["registered"] = reg.get("registered") is True
-                learned["capability_id"] = cid
-                if learned["registered"]:
-                    # it can do something now that it could not before
-                    retry = solve(request)
-                    retry["learning"] = learned
-                    retry["learned_this_turn"] = True
-                    return retry
-        except Exception as exc:
-            learned["error"] = type(exc).__name__ + ":" + str(exc)[:200]
-
-    # Verified skill crystallizer & general computer-environment synthesis fallback
-    try:
-        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
-
-        learned["verified_skill_store_rules"] = VerifiedSkillStore().count()
-    except Exception:
-        pass
-
-    if not learned.get("registered"):
-        try:
-            from canonical.runtime import computer_env_v1 as cenv
-
-            stated_paths = [abs_p for _raw_p, abs_p in goal_compiler._repo_paths(goal, ROOT)]
-            work_dir = (stated_paths[0].parent if stated_paths and stated_paths[0].is_file()
-                        else (stated_paths[0] if stated_paths and stated_paths[0].is_dir() else None))
-            if work_dir is not None and work_dir.is_dir():
-                c_res = cenv.perform(goal, str(work_dir))
-                learned["computer_env_status"] = c_res.get("status")
-                if c_res.get("pass") is True and c_res.get("verified") is True:
-                    learned["attempted"] = True
-                    return {
-                        "schema": LIVE_SCHEMA,
-                        "status": "PASS__COMPUTER_ENV_LEARNED_AND_VERIFIED",
-                        "pass": True,
-                        "task_id": str((request or {}).get("task_id") or ""),
-                        "goal": goal,
-                        "executed": True,
-                        "semantic_acceptance_complete": True,
-                        "computer_env_result": c_res,
-                        "learning": learned,
-                        "learned_this_turn": True,
-                        "model_dependency_count": 0,
-                        "incremental_spend_usd": 0,
-                    }
-        except Exception:
-            pass
-
-    result["learning"] = learned
-    result["learned_this_turn"] = False
-    return result
-
-
 def _intent_verb_matches(pattern, text: str):
     """Keep operation words, not a symbol value occupying a declared name role.
 
@@ -5962,10 +5809,51 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     # Reuse the compiler result within this request only. Never cache mutable
     # task evidence across calls. Correct a contradicted SWE effect BEFORE a
     # measurement-only/wrong-domain tool is allowed to execute.
+    _ledger_db = (request or {}).get("_routing_ledger_db") if isinstance(request, Mapping) else None
     if not (request or {}).get("_typed_swe_plan") and goal:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
         prose = front.prose_only(goal)
         if _typed_plan.is_swe_request(prose):
+            _ledger_disq: list[str] = []
+            _ledger_pref: str | None = None
+            try:
+                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                _linfo = _default_ledger(_ledger_db).lookup_shape(goal)
+                _ledger_disq = list(_linfo.get("disqualified") or [])
+                _ledger_pref = _linfo.get("preferred_capability")
+            except Exception:
+                pass
+            if _ledger_disq and _ledger_pref and "contract_checks" not in request:
+                try:
+                    _fast_plan = _typed_plan.build_plan(goal, ROOT)
+                except Exception:
+                    _fast_plan = None
+                if _fast_plan is not None:
+                    _fast_req = dict(request)
+                    _fast_req["_typed_swe_plan"] = _fast_plan
+                    _fast_out = _solve_body(_fast_req)
+                    if _fast_out.get("pass") is True or _fast_out.get("executed") is True:
+                        _fast_sel = _fast_plan[2].get("selected_capability")
+                        _fast_out.setdefault(
+                            "typed_swe_selection",
+                            {
+                                "primary_capability": _ledger_disq[0],
+                                "selected_capability": _fast_sel,
+                                "basis": "DECISIVE_TYPED_SELECTION_BEFORE_EXECUTION",
+                                "upstream_ledger_cached": True,
+                                "model_dependency_count": 0,
+                            },
+                        )
+                        _fast_out["upstream_ledger_fast_route"] = {
+                            "schema": "PROJECT_BRAIN_UPSTREAM_ROUTING_LEDGER_FAST_ROUTE_V1",
+                            "preferred_capability": _ledger_pref,
+                            "selected_capability": _fast_sel,
+                            "skipped_disqualified": sorted(_ledger_disq),
+                            "primary_compile_bypassed": True,
+                            "model_dependency_count": 0,
+                            "incremental_spend_usd": 0,
+                        }
+                        return _fast_out
             try:
                 context = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
             except Exception:
@@ -5982,7 +5870,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 # rules. Use it before ANY lexical dispatch, even when the raw
                 # id looks compatible: its output may still bind onto source.
                 contradicted = bool(selected and (
-                    _typed_plan._family_terms(prose) is not None
+                    selected in _ledger_disq
+                    or _typed_plan._family_terms(prose) is not None
                     or not _typed_plan._effect_consistent(
                         prose, selected, (context[0] or {}).get(selected))))
                 compound = not selected and (
@@ -6036,6 +5925,16 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         result["typed_swe_selection"] = primary_selection
     if early_selection is not None:
         result["typed_swe_selection"] = early_selection
+        _prim_c = str(early_selection.get("primary_capability") or "")
+        _sel_c = str(early_selection.get("selected_capability") or "")
+        if result.get("pass") is True and _prim_c and _sel_c and _prim_c != _sel_c:
+            try:
+                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                _default_ledger(_ledger_db).record_refusal(
+                    goal, _prim_c, "LEXICAL_EFFECT_CONTRADICTED", preferred_capability=_sel_c
+                )
+            except Exception:
+                pass
         # The actual selected adapter's verdict is final, including failures.
         return result
     if result.get("pass") is True or (original_request or {}).get("_typed_swe_plan") is not None:
@@ -6057,6 +5956,19 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         retry_request["_typed_swe_plan"] = plan
         retry = _solve_body(retry_request)
         if retry.get("pass") is True or retry.get("executed") is True or retry.get("refusal_payload") or retry.get("reviewed") or (_capability_id_of(retry) and _capability_id_of(retry) != _capability_id_of(result)):
+            _prim_c = _capability_id_of(result)
+            _win_c = str(plan[2].get("selected_capability") or _capability_id_of(retry) or "")
+            if retry.get("pass") is True and not result.get("executed") and _prim_c and _win_c and _prim_c != _win_c:
+                try:
+                    from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                    _default_ledger(_ledger_db).record_refusal(
+                        goal,
+                        _prim_c,
+                        str(result.get("failure_class") or "LEXICAL_EFFECT_CONTRADICTED"),
+                        preferred_capability=_win_c,
+                    )
+                except Exception:
+                    pass
             retry["typed_swe_retry"] = {
                 "schema": "SWE_TYPED_RETRY_V1",
                 "primary_status": result.get("status"),
@@ -6089,3 +6001,27 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         pass
     return result
+
+
+def awake_pulse(
+    workspace_root: str | Path | None = None,
+    *,
+    ledger_path: str | Path | None = None,
+    skill_store_path: str | Path | None = None,
+    workflow_db_path: str | Path | None = None,
+    apply_verified_repairs: bool = False,
+    max_curriculum_lessons: int = 2,
+    channels: Sequence[str] | None = None,
+) -> dict[str, Any]:
+    """Execute one zero-LLM (`K3 = 0`) continuous awake agency pulse on `workspace_root`."""
+    from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+
+    daemon = AwakeAgencyDaemon(
+        workspace_root or ROOT,
+        ledger_path=ledger_path,
+        skill_store_path=skill_store_path,
+        workflow_db_path=workflow_db_path,
+        apply_verified_repairs=apply_verified_repairs,
+    )
+    return daemon.pulse(max_curriculum_lessons=max_curriculum_lessons, channels=channels)
+

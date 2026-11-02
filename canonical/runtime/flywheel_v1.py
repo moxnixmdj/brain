@@ -43,16 +43,29 @@ WHAT IT BUYS IS SPEED.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import tempfile
 from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_FLYWHEEL_V1"
+BUNDLE_SCHEMA = "PROJECT_BRAIN_FLYWHEEL_BUNDLE_V1"
 
-DEFAULT_STATE = os.environ.get(
-    "BRAIN_FLYWHEEL_STATE",
-    str(Path(tempfile.gettempdir()) / "brain_flywheel.json"))
+
+def _default_state_path() -> str:
+    env = os.environ.get("BRAIN_FLYWHEEL_STATE", "").strip()
+    if env:
+        return env
+    repo_tmp = Path(__file__).resolve().parents[2] / "canonical" / "astra_runtime" / "tmp"
+    try:
+        repo_tmp.mkdir(parents=True, exist_ok=True)
+        return str(repo_tmp / "brain_flywheel_v1.json")
+    except OSError:
+        return str(Path(tempfile.gettempdir()) / "brain_flywheel.json")
+
+
+DEFAULT_STATE = _default_state_path()
 
 # Ville's inequality: P(ever crossing 1/alpha) <= alpha, however often
 # the running value is inspected. 1/0.05 = 20.
@@ -231,13 +244,14 @@ def teach(cell: str, procedure: str, path: str = DEFAULT_STATE) -> None:
     # associatively, it can be REMINDED -- which is the difference between a
     # lookup table and something that knows what it knows. Memory is an
     # enhancement here, never a blocker: if it fails, the lesson still lands.
-    try:
-        from canonical.runtime import associative_memory_v1 as mem
-        entry["memory_id"] = mem.remember(
-            procedure, kind="procedure", tags=[cell])
-        _save(state, path)
-    except Exception:
-        pass
+    if str(path) == str(DEFAULT_STATE):
+        try:
+            from canonical.runtime import associative_memory_v1 as mem
+            entry["memory_id"] = mem.remember(
+                procedure, kind="procedure", tags=[cell])
+            _save(state, path)
+        except Exception:
+            pass
 
 
 def relevant(where: str, why: str, k: int = 5,
@@ -403,3 +417,96 @@ def primers(alpha: float = DEFAULT_ALPHA,
             out.append({"cell": st["cell"], "procedure": st["procedure"],
                         "n": st["n"]})
     return out
+
+
+def export_flywheel_bundle(bundle_path: str | Path,
+                           path: str = DEFAULT_STATE) -> dict:
+    """Export pathology observations and procedures into a SHA-256 authenticated bundle."""
+    state = _load(path)
+    raw_cells: dict[str, dict] = {}
+    for cell_key, entry in sorted((state.get("cells") or {}).items()):
+        obs = [1 if int(v) > 0 else -1 for v in (entry.get("observations") or [])]
+        raw_cells[str(cell_key)] = {
+            "where": str(entry.get("where") or cell_key),
+            "why": str(entry.get("why") or ""),
+            "observations": obs,
+            "procedure": entry.get("procedure"),
+        }
+    canonical_cells = json.dumps(raw_cells, sort_keys=True, separators=(",", ":"))
+    bundle_sha256 = hashlib.sha256(canonical_cells.encode("utf-8")).hexdigest()
+    payload = {
+        "schema": BUNDLE_SCHEMA,
+        "cells": raw_cells,
+        "bundle_sha256": bundle_sha256,
+    }
+    target = Path(bundle_path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    return {
+        "ok": True,
+        "schema": BUNDLE_SCHEMA,
+        "bundle_path": str(target),
+        "cell_count": len(raw_cells),
+        "bundle_sha256": bundle_sha256,
+    }
+
+
+def import_flywheel_bundle(bundle_path: str | Path,
+                           path: str = DEFAULT_STATE,
+                           alpha: float = DEFAULT_ALPHA) -> dict:
+    """Verify SHA-256 integrity and re-evaluate Ville e-process credit from raw observations."""
+    target = Path(bundle_path)
+    if not target.is_file():
+        return {"ok": False, "reason": "BUNDLE_NOT_FOUND"}
+    try:
+        doc = json.loads(target.read_text(encoding="utf-8"))
+    except Exception:
+        return {"ok": False, "reason": "BUNDLE_INVALID_JSON"}
+    if not isinstance(doc, dict) or doc.get("schema") != BUNDLE_SCHEMA:
+        return {"ok": False, "reason": "BUNDLE_SCHEMA_MISMATCH"}
+    raw_cells = doc.get("cells")
+    if not isinstance(raw_cells, dict):
+        return {"ok": False, "reason": "BUNDLE_CELLS_INVALID"}
+    canonical_cells = json.dumps(raw_cells, sort_keys=True, separators=(",", ":"))
+    expected_sha = hashlib.sha256(canonical_cells.encode("utf-8")).hexdigest()
+    if str(doc.get("bundle_sha256") or "") != expected_sha:
+        return {"ok": False, "reason": "BUNDLE_SHA256_TAMPERED"}
+
+    state = _load(path)
+    imported = 0
+    credited_count = 0
+    for cell_key, entry in sorted(raw_cells.items()):
+        if not isinstance(entry, dict):
+            continue
+        obs = [int(v) for v in (entry.get("observations") or []) if int(v) in (-1, 1)]
+        cur = state["cells"].setdefault(
+            str(cell_key),
+            {
+                "where": str(entry.get("where") or cell_key),
+                "why": str(entry.get("why") or ""),
+                "observations": [],
+                "procedure": None,
+                "credited": False,
+            },
+        )
+        if not cur["observations"]:
+            cur["observations"] = obs
+        else:
+            cur["observations"].extend(obs)
+        if entry.get("procedure") and not cur.get("procedure"):
+            cur["procedure"] = str(entry["procedure"])
+        # Never trust any external `credited` claim: recompute via Ville's inequality!
+        cur["credited"] = False
+        imported += 1
+    _save(state, path)
+    for cell_key in sorted(raw_cells):
+        st = status(str(cell_key), alpha=alpha, path=path)
+        if st.get("credited"):
+            credited_count += 1
+    return {
+        "ok": True,
+        "imported_cells": imported,
+        "credited_cells": credited_count,
+        "bundle_sha256": expected_sha,
+    }
+

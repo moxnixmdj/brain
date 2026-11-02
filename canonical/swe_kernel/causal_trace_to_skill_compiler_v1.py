@@ -50,6 +50,7 @@ SCHEMA = "PROJECT_BRAIN_CAUSAL_TRACE_TO_SKILL_COMPILER_V1"
 LAYER_RANK: dict[str, int] = {
     "python_file_op": 1,
     "sqlite_exec": 1,
+    "confined_python_exec": 2,
     "http_request": 2,
     "cli_exec": 3,
     "cli_pipeline": 3,
@@ -220,7 +221,7 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
         st for st in raw_steps
         if isinstance(st, Mapping)
         and str(st.get("layer") or st.get("kind") or "").lower()
-        in {"sqlite_exec", "sqlite_query", "http_request", "python_file_op"}
+        in {"sqlite_exec", "sqlite_query", "http_request", "python_file_op", "confined_python_exec"}
     ]
 
     # Rule A: Direct SQLite causal mutation observed from slow UI/CLI wrapper
@@ -349,7 +350,7 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
             elevated.append(d)
             continue
 
-        if layer in {"http_request", "python_file_op", "semantic_dom"}:
+        if layer in {"http_request", "python_file_op", "semantic_dom", "confined_python_exec"}:
             d = dict(st)
             d["layer"] = layer
             d.pop("kind", None)
@@ -370,7 +371,7 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
         "elevated_step_count": len(elevated),
         "pruned_step_count": pruned_ui_steps,
         "dominant_layer": dominant_layer,
-        "elevated_from_ui": pruned_ui_steps > 0 and dominant_layer in {"sqlite_exec", "http_request", "python_file_op", "cli_exec", "semantic_dom"},
+        "elevated_from_ui": pruned_ui_steps > 0 and dominant_layer in {"sqlite_exec", "http_request", "python_file_op", "confined_python_exec", "cli_exec", "semantic_dom"},
     }
 
 
@@ -878,6 +879,33 @@ def execute_compiled_steps(
             else:
                 return {"ok": False, "failed_step": idx, "reason": "UNBOUND_SEMANTIC_DOM_OP", "step_receipts": step_receipts}
 
+        elif layer == "confined_python_exec":
+            code = str(step.get("code") or "")
+            if not code.strip():
+                return {"ok": False, "failed_step": idx, "reason": "EMPTY_CONFINED_PYTHON_CODE", "step_receipts": step_receipts}
+            from canonical.runtime import solve_v1 as _solve_rt
+            act_res = _solve_rt.act(
+                str(work_dir),
+                code,
+                timeout=int(step.get("timeout") or 30),
+                network=bool(step.get("network", False)),
+            )
+            if act_res.get("exit") != 0 or act_res.get("timed_out"):
+                return {
+                    "ok": False,
+                    "failed_step": idx,
+                    "reason": f"CONFINED_PYTHON_EXIT_{act_res.get('exit')}:{str(act_res.get('err') or act_res.get('out') or '')[:200]}",
+                    "step_receipts": step_receipts,
+                }
+            step_receipts.append({
+                "step": idx,
+                "layer": layer,
+                "ok": True,
+                "confined": bool(act_res.get("confined")),
+                "stdout": str(act_res.get("out") or "")[:400],
+                "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
+            })
+
         else:
             return {"ok": False, "failed_step": idx, "reason": f"UNSUPPORTED_COMPILED_LAYER:{layer}", "step_receipts": step_receipts}
 
@@ -893,6 +921,14 @@ def verify_postcondition(
     """Independent real-world oracle checking disk, SQLite, JSON, or HTTP state."""
     work_dir = pathlib.Path(cwd).resolve() if cwd else pathlib.Path.cwd()
     kind = str(postcondition.get("kind") or "").lower()
+
+    if kind == "file_nonempty":
+        p = _resolve_local_path(str(postcondition["path"]), work_dir)
+        if not p.is_file():
+            return False, "POSTCONDITION_FILE_MISSING"
+        if p.stat().st_size <= 0:
+            return False, "POSTCONDITION_FILE_EMPTY"
+        return True, "FILE_NONEMPTY_VERIFIED"
 
     if kind == "file_contains":
         p = _resolve_local_path(str(postcondition["path"]), work_dir)
@@ -1033,9 +1069,13 @@ def verify_postcondition(
 def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool:
     """Deliberately corrupt the postcondition's target artifact to prove the oracle can say NO."""
     kind = str(postcondition.get("kind") or "").lower()
-    if kind in {"file_contains", "json_field_equals"}:
+    if kind in {"file_contains", "json_field_equals", "file_nonempty"}:
         p = _resolve_local_path(str(postcondition["path"]), cwd)
-        if p.is_file():
+        try:
+            inside = p.resolve().is_relative_to(cwd.resolve())
+        except (OSError, ValueError):
+            inside = False
+        if inside and p.is_file():
             p.unlink()
             return True
     if kind == "sqlite_query_equals":
@@ -1050,8 +1090,243 @@ def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool
 
 
 # --------------------------------------------------------------------------- #
-# 4. Full K2 -> K3=0 Qualification & Permanent SQLite Registration
+# 4. Automatic Perturbed Twin-World Self-Experimentation (`N=1 -> N=2`)
+#    & Full K2 -> K3=0 Qualification + Permanent SQLite Registration
 # --------------------------------------------------------------------------- #
+_SQL_UPDATE_RE = re.compile(
+    r"^\s*UPDATE\s+([A-Za-z_][A-Za-z0-9_]*)\s+SET\s+(.+?)(?:\s+WHERE\s+(.+))?\s*;?\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _invert_initial_sql_value(val: Any) -> Any:
+    if isinstance(val, bool):
+        return 0 if val else 1
+    if isinstance(val, int):
+        return 0 if val == 1 else (1 if val == 0 else val - 1)
+    if isinstance(val, float):
+        return 0.0 if val != 0.0 else 1.0
+    s = str(val).strip().strip("'\"")
+    if s == "1":
+        return 0
+    if s == "0":
+        return 1
+    if s.lower() == "true":
+        return "false"
+    if s.lower() == "false":
+        return "true"
+    if re.fullmatch(r"-?\d+", s):
+        iv = int(s)
+        return 0 if iv == 1 else (1 if iv == 0 else iv - 1)
+    return f"__initial_{s}"
+
+
+def _clone_sqlite_twin_world(
+    orig_db: pathlib.Path,
+    twin_db: pathlib.Path,
+    abstract_steps: Sequence[Mapping[str, Any]],
+    concrete_bindings: Mapping[str, str],
+    twin_bindings: Mapping[str, str],
+) -> None:
+    """Clone schema from `orig_db` into `twin_db` and seed pre-UPDATE rows with inverted state."""
+    twin_db.parent.mkdir(parents=True, exist_ok=True)
+    src_con = sqlite3.connect(str(orig_db), timeout=10.0)
+    dst_con = sqlite3.connect(str(twin_db), timeout=10.0)
+    try:
+        ddl_rows = src_con.execute(
+            "SELECT type, name, sql FROM sqlite_master "
+            "WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%' "
+            "ORDER BY CASE type WHEN 'table' THEN 0 WHEN 'index' THEN 1 ELSE 2 END"
+        ).fetchall()
+        for _typ, _name, ddl in ddl_rows:
+            dst_con.execute(ddl)
+
+        val_map = {
+            str(concrete_bindings[h]): str(twin_bindings[h])
+            for h in concrete_bindings
+            if h in twin_bindings
+        }
+        for step in abstract_steps:
+            if str(step.get("layer") or "") != "sqlite_exec":
+                continue
+            sql = str(step.get("sql") or "")
+            m = _SQL_UPDATE_RE.match(sql)
+            if not m:
+                continue
+            table, set_clause, _where_clause = m.group(1), m.group(2), m.group(3) or ""
+            cols_info = src_con.execute(f"PRAGMA table_info({table})").fetchall()
+            if not cols_info:
+                continue
+            col_names = [str(c[1]) for c in cols_info]
+            set_targets: dict[str, Any] = {}
+            for assign in set_clause.split(","):
+                if "=" in assign:
+                    lhs, rhs = assign.split("=", 1)
+                    cname = lhs.strip().strip('"`[]')
+                    rval_raw = rhs.strip()
+                    if rval_raw == "?" and step.get("params"):
+                        rval = _instantiate_obj(step["params"][0], twin_bindings)
+                    else:
+                        rval = str(_instantiate_obj(rval_raw, twin_bindings)).strip("'\"")
+                    set_targets[cname] = rval
+
+            where_targets: dict[str, Any] = {}
+            for wm in re.finditer(
+                r"([A-Za-z_][A-Za-z0-9_]*)\s*=\s*('[^']*'|\"[^\"]*\"|\?[A-Za-z0-9_]+|[^\s,;)]+)",
+                _where_clause,
+            ):
+                wc = wm.group(1).strip().strip('"`[]')
+                wv_raw = wm.group(2).strip()
+                if wv_raw != "?":
+                    where_targets[wc] = str(_instantiate_obj(wv_raw, twin_bindings)).strip("'\"")
+
+            sample = src_con.execute(f"SELECT * FROM {table} LIMIT 1").fetchone()
+            seed_vals: list[Any] = []
+            for idx_c, cname in enumerate(col_names):
+                base_v = sample[idx_c] if sample is not None else None
+                if cname in where_targets:
+                    seed_vals.append(where_targets[cname])
+                elif cname in set_targets:
+                    seed_vals.append(_invert_initial_sql_value(set_targets[cname]))
+                elif isinstance(base_v, str) and base_v in val_map:
+                    seed_vals.append(val_map[base_v])
+                elif sample is None and idx_c == 0:
+                    # Pick first non-path twin parameter as primary key if source table was empty
+                    non_path = [
+                        twin_bindings[h]
+                        for h in twin_bindings
+                        if not h.startswith("?path") and not h.startswith("?url")
+                    ]
+                    seed_vals.append(non_path[0] if non_path else "twin_key")
+                else:
+                    seed_vals.append(base_v)
+
+            # Ensure any WHERE-referenced twin parameter exists in a row!
+            inst_params = _instantiate_obj(list(step.get("params") or []), twin_bindings)
+            for pval in inst_params:
+                if isinstance(pval, str) and pval not in seed_vals:
+                    for idx_c, cname in enumerate(col_names):
+                        if cname not in set_targets and (
+                            sample is None or isinstance(sample[idx_c], str)
+                        ):
+                            seed_vals[idx_c] = pval
+                            break
+
+            placeholders = ", ".join("?" for _ in col_names)
+            col_list = ", ".join(col_names)
+            dst_con.execute(
+                f"INSERT OR IGNORE INTO {table} ({col_list}) VALUES ({placeholders})",
+                seed_vals,
+            )
+        dst_con.commit()
+    finally:
+        src_con.close()
+        dst_con.close()
+
+
+def synthesize_perturbed_twin_world(
+    *,
+    generalized: Mapping[str, Any],
+    postcondition: Mapping[str, Any],
+    source_cwd: pathlib.Path,
+    twin_dir: pathlib.Path,
+) -> dict[str, Any]:
+    """Construct a genuinely distinct twin goal + isolated twin filesystem/DB sandbox from `N=1`."""
+    param_order: list[str] = list(generalized.get("param_order") or [])
+    concrete: Mapping[str, str] = dict(generalized.get("concrete_bindings") or {})
+    if not param_order or not concrete:
+        return {
+            "ok": False,
+            "status": "FAIL_CLOSED__PARAMETER_FREE_SKILL_CANNOT_SYNTHESIZE_TWIN",
+            "reason": "NO_VARIATION_SPACE_IN_GOAL",
+        }
+
+    twin_dir.mkdir(parents=True, exist_ok=True)
+    twin_bindings: dict[str, str] = {}
+    post_kind = str(postcondition.get("kind") or "").lower()
+    post_target_raw = str(postcondition.get("path") or postcondition.get("db_path") or "")
+    post_target_abs = _resolve_local_path(post_target_raw, source_cwd) if post_target_raw else None
+
+    for idx, hole in enumerate(param_order):
+        orig_val = str(concrete[hole])
+        if hole.startswith("?url"):
+            # URL skills require a live twin endpoint unless port/query param can be perturbed on same server
+            sp = urllib.parse.urlsplit(orig_val)
+            q = urllib.parse.parse_qsl(sp.query, keep_blank_values=True)
+            q.append(("twin_probe", "1"))
+            new_q = urllib.parse.urlencode(q)
+            twin_bindings[hole] = urllib.parse.urlunsplit((sp.scheme, sp.netloc, sp.path, new_q, sp.fragment))
+        elif hole.startswith("?num"):
+            if orig_val.isdigit():
+                iv = int(orig_val)
+                twin_bindings[hole] = str(iv + 2 if iv >= 0 else 2)
+            else:
+                twin_bindings[hole] = f"{float(orig_val) + 2.0:g}"
+        elif hole.startswith("?path"):
+            orig_p = _resolve_local_path(orig_val, source_cwd)
+            twin_name = f"twin_{idx}_{orig_p.name}"
+            twin_p = twin_dir / twin_name
+            # Preserve relative vs absolute style so goal regex & local resolution stay consistent
+            twin_bindings[hole] = str(twin_p) if pathlib.Path(orig_val).is_absolute() else twin_name
+        else:
+            clean = re.sub(r"[^A-Za-z0-9_.-]", "_", orig_val).strip("_") or f"val{idx}"
+            twin_bindings[hole] = f"twin_{clean}"
+
+    # Materialize cloned input artifacts / SQLite schemas inside `twin_dir`
+    for hole in param_order:
+        if not hole.startswith("?path"):
+            continue
+        orig_p = _resolve_local_path(str(concrete[hole]), source_cwd)
+        twin_p = _resolve_local_path(str(twin_bindings[hole]), twin_dir)
+        if orig_p.suffix.lower() in {".sqlite", ".db", ".sqlite3"} and orig_p.is_file():
+            _clone_sqlite_twin_world(
+                orig_p,
+                twin_p,
+                generalized.get("abstract_steps") or [],
+                concrete,
+                twin_bindings,
+            )
+        elif orig_p.is_file():
+            # Only pre-copy if this path is an INPUT (not a freshly created output artifact!)
+            is_created_output = (
+                post_target_abs is not None
+                and orig_p.resolve() == post_target_abs.resolve()
+                and post_kind in {"file_contains", "file_nonempty", "json_field_equals"}
+            )
+            if not is_created_output:
+                import shutil
+                twin_p.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(orig_p, twin_p)
+
+    # Also clone any un-parameterized relative SQLite DB referenced by `postcondition['db_path']`
+    if post_kind == "sqlite_query_equals" and post_target_raw and not pathlib.Path(post_target_raw).is_absolute():
+        orig_db = _resolve_local_path(post_target_raw, source_cwd)
+        twin_db = _resolve_local_path(post_target_raw, twin_dir)
+        if orig_db.is_file() and not twin_db.exists():
+            _clone_sqlite_twin_world(
+                orig_db,
+                twin_db,
+                generalized.get("abstract_steps") or [],
+                concrete,
+                twin_bindings,
+            )
+
+    twin_goal = str(_instantiate_obj(generalized["goal_skeleton"], twin_bindings))
+    rebound = bind_goal_parameters(generalized, twin_goal)
+    if rebound is None or rebound == concrete:
+        return {
+            "ok": False,
+            "status": "FAIL_CLOSED__TWIN_GOAL_FAILED_DISTINCT_UNIFICATION",
+            "twin_goal": twin_goal,
+        }
+    return {
+        "ok": True,
+        "twin_goal": twin_goal,
+        "twin_cwd": twin_dir,
+        "twin_bindings": rebound,
+    }
+
+
 def compile_and_qualify_skill(
     *,
     goal: str,
@@ -1062,6 +1337,8 @@ def compile_and_qualify_skill(
     heldout_setup: Callable[[pathlib.Path], None] | None = None,
     heldout_postcondition: Mapping[str, Any] | None = None,
     sabotaged_postcondition: Mapping[str, Any] | None = None,
+    auto_synthesize_twin: bool = False,
+    source_cwd: str | pathlib.Path | None = None,
     source_channel: str = "k2_or_sandbox_acquisition",
     db_path: pathlib.Path | None = None,
 ) -> dict[str, Any]:
@@ -1080,6 +1357,35 @@ def compile_and_qualify_skill(
 
     # Donor deletion: from this line forward, `trace` is never consulted again.
     del trace
+
+    auto_twin_dir: pathlib.Path | None = None
+    auto_twin_meta: dict[str, Any] | None = None
+    if heldout_goal is None and auto_synthesize_twin:
+        base_src_cwd = pathlib.Path(source_cwd or os.getcwd()).resolve()
+        auto_twin_dir = pathlib.Path(tempfile.mkdtemp(prefix="brain-auto-twin-"))
+        auto_twin_meta = synthesize_perturbed_twin_world(
+            generalized=generalized,
+            postcondition=postcondition,
+            source_cwd=base_src_cwd,
+            twin_dir=auto_twin_dir,
+        )
+        if not auto_twin_meta.get("ok"):
+            import shutil
+            shutil.rmtree(auto_twin_dir, ignore_errors=True)
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": str(auto_twin_meta.get("status") or "FAIL_CLOSED__TWIN_SYNTHESIS_FAILED"),
+                "reason": str(auto_twin_meta.get("reason") or "TWIN_SYNTHESIS_FAILED"),
+                "heldout_supplied": False,
+                "auto_twin_attempted": True,
+                "heldout_distinct_from_training_instance": False,
+                "param_order": list(generalized["param_order"]),
+                "concrete_bindings": dict(generalized["concrete_bindings"]),
+                "parameter_free_skill": not generalized["param_order"],
+            }
+        heldout_goal = str(auto_twin_meta["twin_goal"])
+        heldout_cwd = auto_twin_dir
 
     effective_heldout_goal = heldout_goal or goal
     heldout_bindings = bind_goal_parameters(generalized, effective_heldout_goal)
@@ -1233,6 +1539,9 @@ def compile_and_qualify_skill(
         if own_tmp:
             import shutil
             shutil.rmtree(work_dir, ignore_errors=True)
+        if auto_twin_dir is not None:
+            import shutil
+            shutil.rmtree(auto_twin_dir, ignore_errors=True)
 
     artifact_payload = json.dumps({
         "goal_skeleton": generalized["goal_skeleton"],
@@ -1406,7 +1715,7 @@ def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | No
 
 
 def check_step_preconditions(steps: Sequence[Mapping[str, Any]], *, cwd: str | pathlib.Path | None = None) -> tuple[bool, str]:
-    """Fast O(1) guard checking required CLI binaries & URL schemes before execution."""
+    """Fast O(1) guard checking required CLI binaries, Python AST syntax, & URL schemes before execution."""
     _ = cwd
     for st in steps:
         layer = str(st.get("layer") or "")
@@ -1422,6 +1731,15 @@ def check_step_preconditions(steps: Sequence[Mapping[str, Any]], *, cwd: str | p
             u = str(st.get("url") or "")
             if not u.startswith(("http://", "https://")):
                 return False, "PRECONDITION_INVALID_HTTP_SCHEME"
+        elif layer == "confined_python_exec":
+            code = str(st.get("code") or "")
+            if not code.strip():
+                return False, "PRECONDITION_EMPTY_PYTHON_CODE"
+            try:
+                import ast as _ast
+                _ast.parse(code)
+            except SyntaxError:
+                return False, "PRECONDITION_INVALID_PYTHON_SYNTAX"
     return True, "PRECONDITIONS_OK"
 
 
@@ -1441,6 +1759,12 @@ def recall_and_execute_workflow(
             continue
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None:
+            continue
+        has_py = any(
+            isinstance(s, Mapping) and s.get("layer") == "confined_python_exec"
+            for s in (skill.get("abstract_steps") or [])
+        )
+        if has_py and any(any(ch in str(v) for ch in ("'", '"', "\n", "\r", "\\")) for v in bindings.values()):
             continue
         inst_steps = _instantiate_obj(skill["abstract_steps"], bindings)
         pre_ok, _ = check_step_preconditions(inst_steps, cwd=cwd)
@@ -1610,3 +1934,62 @@ def import_workflow_bundle(
         "refused": len(refusals),
         "refusals": refusals,
     }
+
+
+# ---------------------------------------------------------------------------
+# Wave 4: Counterfactual Leave-One-Out Trace Ablation (`agent_replay` aligned)
+# ---------------------------------------------------------------------------
+
+
+def prune_non_causal_steps_counterfactually(
+    trace: Sequence[Mapping[str, Any]],
+    outcome_oracle: Callable[[list[dict[str, Any]]], bool],
+) -> dict[str, Any]:
+    """Strip non-causal / no-op steps (`ls`, `echo`, redundant reads/writes) via backward counterfactual ablation."""
+    t0 = time.perf_counter_ns()
+    original = [dict(s) for s in trace]
+    if not original:
+        return {
+            "schema": SCHEMA + "/counterfactual_ablation",
+            "baseline_passed": False,
+            "minimal_trace": [],
+            "pruned_indices": [],
+            "elapsed_ms": 0.0,
+        }
+
+    baseline_ok = bool(outcome_oracle(list(original)))
+    if not baseline_ok:
+        return {
+            "schema": SCHEMA + "/counterfactual_ablation",
+            "baseline_passed": False,
+            "minimal_trace": original,
+            "pruned_indices": [],
+            "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    # Backward greedy counterfactual ablation: remove step `idx` iff remaining trajectory STILL achieves goal!
+    kept_indices = list(range(len(original)))
+    pruned_indices: list[int] = []
+    for pos in range(len(kept_indices) - 1, -1, -1):
+        if len(kept_indices) <= 1:
+            break
+        trial_indices = kept_indices[:pos] + kept_indices[pos + 1 :]
+        trial_trace = [original[i] for i in trial_indices]
+        if bool(outcome_oracle(trial_trace)):
+            pruned_indices.append(kept_indices[pos])
+            kept_indices = trial_indices
+
+    minimal = [original[i] for i in kept_indices]
+    pruned_indices.sort()
+    return {
+        "schema": SCHEMA + "/counterfactual_ablation",
+        "baseline_passed": True,
+        "original_length": len(original),
+        "minimal_length": len(minimal),
+        "kept_indices": kept_indices,
+        "pruned_indices": pruned_indices,
+        "minimal_trace": minimal,
+        "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+        "k3_external_llm_calls": 0,
+    }
+

@@ -1528,6 +1528,17 @@ def query_kind(gap: str) -> str | None:
     noise, which is the machine inventing the question.
     """
     text = str(gap or "").lower()
+    # Signature-only families (`nonemptylines`, `blanklines`, `maxlinelen`) refine `lines`
+    # without any hand-authored probe constructor (`NEXT_STEP_THE_CONSTRUCTOR_TABLE`).
+    try:
+        from canonical.swe_kernel.metamorphic_cli_compiler_v1 import metamorphic_signature_kind
+
+        beyond_kind = metamorphic_signature_kind(gap, only_beyond_table=True)
+        if beyond_kind is not None:
+            return beyond_kind
+    except Exception:
+        metamorphic_signature_kind = None  # type: ignore[assignment]
+
     # The most specific thing named wins. "how many unique lines" mentions
     # both 'lines' and 'unique lines', and answering it as though 'lines'
     # were the whole question gives 14 where the asker wants 7 -- so the
@@ -1541,6 +1552,8 @@ def query_kind(gap: str) -> str | None:
             phrase = max(matched, key=len)
             scored.append((len(phrase), phrase, kind))
     if not scored:
+        if metamorphic_signature_kind is not None:
+            return metamorphic_signature_kind(gap, only_beyond_table=False)
         return None
     scored.sort(reverse=True)
     top_len, top_phrase, top_kind = scored[0]
@@ -2321,7 +2334,11 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     # When no synthetic `probe_bytes` constructor exists for `kind` (or when `probe_bytes` is
     # ablated), discover and prove the measurement pipeline purely from algebraic perturbations
     # (`F || F`, within-line doubling, and non-adjacent fresh twins) of `src` itself!
-    if literal is None and probe_bytes(kind, _PROBE_SIZES[0], literal) is None:
+    if literal is None and (
+        kind in ("nonemptylines", "blanklines", "maxlinelen")
+        or not _PROBE_KINDS
+        or probe_bytes(kind, _PROBE_SIZES[0], literal) is None
+    ):
         from canonical.swe_kernel.metamorphic_cli_compiler_v1 import answer_query_by_metamorphic_signature
         return answer_query_by_metamorphic_signature(
             kind, src, candidate_programs=programs, min_agreement=min_agreement, timeout=min(timeout, 3.0)

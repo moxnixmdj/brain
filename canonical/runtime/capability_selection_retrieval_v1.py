@@ -34,7 +34,9 @@ dispatched entry is independently admitted - this module proposes and types, it 
 from __future__ import annotations
 
 import ast
+import importlib.util
 import json
+import math
 import pathlib
 import re
 from typing import Any, Mapping
@@ -143,24 +145,260 @@ def document(cid: str, entry: Mapping[str, Any], declaration: Mapping[str, Any] 
     }
 
 
+_BM25_CORPUS_CACHE: dict[Any, dict[str, Any]] = {}
+_BM25_HELPER_MOD_CACHE: dict[tuple[str, int], Any] = {}
+
+
+def _load_bm25_helper(filename: str, mod_name: str) -> Any:
+    path = pathlib.Path(bm25.__file__).resolve().with_name(filename)
+    try:
+        mtime_ns = path.stat().st_mtime_ns
+    except OSError:
+        return None
+    key = (str(path), mtime_ns)
+    hit = _BM25_HELPER_MOD_CACHE.get(key)
+    if hit is not None:
+        return hit
+    spec = importlib.util.spec_from_file_location(mod_name, path)
+    if spec is None or spec.loader is None:
+        return None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    _BM25_HELPER_MOD_CACHE[key] = mod
+    return mod
+
+
+def _fast_focus(objective: str) -> dict[str, Any] | None:
+    mod = _load_bm25_helper("research_query_focus.py", "project_brain_research_query_focus_relevance")
+    if mod is None:
+        return bm25._focus(objective)
+    res = mod.focus(objective)
+    return res if res.get("status") == "FOCUSED" else None
+
+
+def _fast_decision_role_focus(objective: str) -> dict[str, Any] | None:
+    mod = _load_bm25_helper("objective_claim_operand_binding.py", "project_brain_objective_claim_role_relevance")
+    if mod is None:
+        return bm25._decision_role_focus(objective)
+    parsed, reason = mod._parse_objective(objective)
+    if reason or not parsed or parsed.get("mode") != "NUMERIC_RELATION":
+        return None
+    left = bm25._tokens(parsed.get("left_entity"))
+    right = bm25._tokens(parsed.get("right_entity"))
+    if not left or not right:
+        return None
+    right_set = set(right)
+    shared = [x for x in left if x in right_set]
+    if not shared:
+        m = re.match(r"^(.+?)\s+of\s+(.+)$", bm25._canon(parsed.get("left_entity")), re.I)
+        if m:
+            shared = bm25._tokens(m.group(1))
+    property_tokens = list(dict.fromkeys(shared))
+    prop = set(property_tokens)
+    left_operand = [x for x in left if x not in prop] or left
+    right_operand = [x for x in right if x not in prop] or right
+    return {
+        "operator": parsed.get("operator"),
+        "property_tokens": property_tokens,
+        "left_operand_tokens": left_operand,
+        "right_operand_tokens": right_operand,
+        "claim_scope": "BOUNDED_EXPLICIT_COMPARISON_ROLE_ANCHORS_ONLY",
+    }
+
+
+_BM25_CORPUS_L1: dict[tuple[int, int, int], dict[str, Any]] = {}
+
+
+def _corpus_index(registry: Mapping[str, Mapping[str, Any]], declared: Mapping[str, Any]) -> dict[str, Any]:
+    l1_key = (id(registry), len(registry), id(declared))
+    l1_hit = _BM25_CORPUS_L1.get(l1_key)
+    if l1_hit is not None:
+        return l1_hit
+    reg_key = (
+        tuple((cid, id(entry)) for cid, entry in registry.items() if isinstance(entry, Mapping)),
+        id(declared),
+    )
+    hit = _BM25_CORPUS_CACHE.get(reg_key)
+    if hit is not None:
+        if len(_BM25_CORPUS_L1) >= 24:
+            _BM25_CORPUS_L1.clear()
+        _BM25_CORPUS_L1[l1_key] = hit
+        return hit
+
+    docs: list[dict[str, Any]] = []
+    doc_tokens: list[list[str]] = []
+    lengths: list[int] = []
+    dfs: dict[str, int] = {}
+    tf_postings: dict[str, list[tuple[int, int]]] = {}
+
+    for cid, entry in registry.items():
+        if not isinstance(entry, Mapping):
+            continue
+        idx = len(docs)
+        doc = document(cid, entry, declared.get(cid))
+        docs.append(doc)
+        toks = bm25._tokens(bm25._candidate_text(doc))
+        doc_tokens.append(toks)
+        lengths.append(len(toks))
+        tf_map: dict[str, int] = {}
+        for t in toks:
+            tf_map[t] = tf_map.get(t, 0) + 1
+        for t, freq in tf_map.items():
+            dfs[t] = dfs.get(t, 0) + 1
+            tf_postings.setdefault(t, []).append((idx, freq))
+
+    n = len(docs)
+    avgdl = (sum(lengths) / n) if n else 0.0
+    postings: dict[str, tuple[float, tuple[tuple[int, int], ...]]] = {}
+    if n > 0 and avgdl > 0:
+        for term, plist in tf_postings.items():
+            df = dfs[term]
+            idf = math.log(1.0 + (n - df + 0.5) / (df + 0.5))
+            postings[term] = (idf, tuple(plist))
+
+    compiled_idx = {
+        "docs": docs,
+        "doc_tokens": doc_tokens,
+        "lengths": lengths,
+        "n": n,
+        "avgdl": avgdl,
+        "postings": postings,
+    }
+    if len(_BM25_CORPUS_CACHE) >= 24:
+        _BM25_CORPUS_CACHE.clear()
+    _BM25_CORPUS_CACHE[reg_key] = compiled_idx
+    if len(_BM25_CORPUS_L1) >= 24:
+        _BM25_CORPUS_L1.clear()
+    _BM25_CORPUS_L1[l1_key] = compiled_idx
+    _load_bm25_helper("research_query_focus.py", "project_brain_research_query_focus_relevance")
+    _load_bm25_helper("objective_claim_operand_binding.py", "project_brain_objective_claim_role_relevance")
+    return compiled_idx
+
+
 def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k: int = DEFAULT_K) -> dict[str, Any]:
-    """Top-k lexical proposals with the ranker's own evidence, and nothing more."""
+    """Top-k lexical proposals via pre-indexed inverted BM25 postings (bit-identical to `bm25.rank`)."""
     declared = declarations(root)
-    docs = [document(cid, entry, declared.get(cid)) for cid, entry in registry.items()
-            if isinstance(entry, Mapping)]
-    ranked = bm25.rank(goal, docs, limit=max(1, int(k)))
-    rows = ranked.get("ranked_candidates") or []
-    proposals = [{"capability_id": row["candidate"]["capability_id"],
-                  "lexical_relevance_score": row["lexical_relevance_score"],
-                  "matched_terms": row.get("matched_terms") or []}
-                 for row in rows if float(row.get("lexical_relevance_score") or 0) > 0]
+    idx = _corpus_index(registry, declared)
+    n = idx["n"]
+    limit = max(1, int(k))
+    objective = bm25._canon(goal)
+    if not objective:
+        return {
+            "schema": SCHEMA,
+            "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "status": "RELEVANCE_UNRESOLVED",
+            "ranker_reason": "OBJECTIVE_REQUIRED",
+            "k": limit,
+            "candidate_count": n,
+            "proposals": [],
+        }
+    if n == 0:
+        return {
+            "schema": SCHEMA,
+            "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "status": "RELEVANCE_UNRESOLVED",
+            "ranker_reason": "CANDIDATES_REQUIRED",
+            "k": limit,
+            "candidate_count": 0,
+            "proposals": [],
+        }
+    focus = _fast_focus(objective)
+    if not focus:
+        return {
+            "schema": SCHEMA,
+            "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "status": "RELEVANCE_UNRESOLVED",
+            "ranker_reason": "RESEARCH_QUERY_FOCUS_UNRESOLVED",
+            "k": limit,
+            "candidate_count": n,
+            "proposals": [],
+        }
+    q = bm25._tokens(focus.get("query"))
+    if not q:
+        return {
+            "schema": SCHEMA,
+            "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "status": "RELEVANCE_UNRESOLVED",
+            "ranker_reason": "NO_DISCRIMINATIVE_OBJECTIVE_TOKENS",
+            "k": limit,
+            "candidate_count": n,
+            "proposals": [],
+        }
+
+    avgdl = idx["avgdl"]
+    postings = idx["postings"]
+    lengths = idx["lengths"]
+    docs = idx["docs"]
+    doc_tokens = idx["doc_tokens"]
+
+    scores: dict[int, float] = {}
+    matched: dict[int, list[str]] = {}
+    if avgdl > 0:
+        for term in dict.fromkeys(q):
+            entry_post = postings.get(term)
+            if entry_post is None:
+                continue
+            idf, plist = entry_post
+            for doc_i, freq in plist:
+                denom = freq + 1.5 * (0.25 + 0.75 * lengths[doc_i] / avgdl)
+                part = idf * (freq * 2.5 / denom)
+                scores[doc_i] = scores.get(doc_i, 0.0) + part
+                matched.setdefault(doc_i, []).append(term)
+
+    if not scores:
+        return {
+            "schema": SCHEMA,
+            "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "status": "RELEVANCE_UNRESOLVED",
+            "ranker_reason": "NO_LEXICAL_OBJECTIVE_EVIDENCE",
+            "k": limit,
+            "candidate_count": n,
+            "proposals": [],
+        }
+
+    positive_sorted = sorted(
+        ((round(float(sc), 12), doc_i) for doc_i, sc in scores.items() if round(float(sc), 12) > 0),
+        key=lambda item: (-item[0], item[1]),
+    )
+    if not positive_sorted:
+        return {
+            "schema": SCHEMA,
+            "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "status": "RELEVANCE_UNRESOLVED",
+            "ranker_reason": "NO_LEXICAL_OBJECTIVE_EVIDENCE",
+            "k": limit,
+            "candidate_count": n,
+            "proposals": [],
+        }
+
+    role_focus = _fast_decision_role_focus(objective)
+    status = "LEXICAL_RELEVANCE_RANKED"
+    reason = None
+    if role_focus:
+        any_role_ok = any(
+            bool((bm25._decision_role_coverage(role_focus, doc_tokens[doc_i]) or {}).get("verified"))
+            for _sc, doc_i in positive_sorted
+        )
+        if not any_role_ok:
+            status = "RELEVANCE_UNRESOLVED"
+            reason = "NO_DECISION_ROLE_COMPLETE_CANDIDATE"
+
+    selected_rows = positive_sorted[:limit] if status == "LEXICAL_RELEVANCE_RANKED" else positive_sorted
+    proposals = [
+        {
+            "capability_id": docs[doc_i]["capability_id"],
+            "lexical_relevance_score": sc,
+            "matched_terms": sorted(matched[doc_i]),
+        }
+        for sc, doc_i in selected_rows
+    ]
     return {
         "schema": SCHEMA,
         "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
-        "status": ranked.get("status"),
-        "ranker_reason": ranked.get("reason"),
-        "k": max(1, int(k)),
-        "candidate_count": len(docs),
+        "status": status,
+        "ranker_reason": reason,
+        "k": limit,
+        "candidate_count": n,
         "proposals": proposals,
     }
 
@@ -358,25 +596,11 @@ def runs_as_stated(registry: Mapping[str, Mapping[str, Any]], cid: str, root: An
     return not _arg_names(contract)
 
 
-def margin_verdict(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
-                   k: int = DEFAULT_K) -> dict[str, Any]:
-    """The ranker's own separation between its confident call and its guess.
-
-    DECISIVE means the first proposal explains the sentence strictly better than the second by
-    at least MARGIN_THRESHOLD relative margin, and the caller may act on it; THIN_MARGIN means
-    the second-best explanation is nearly as good, which is the situation the product must fail
-    closed in rather than pick the nearest wrong thing.
-
-    The margin is measured over the proposals the REQUEST left in play (F27, F28), not over the
-    raw lexical pool.  A competitor the request already excluded - a different version, or a
-    more specific variant it never named - is not a competing explanation, and letting it
-    shrink the margin is how a request that named exactly one capability ended up undecided.
-    Measured: with the raw pool, 20 of 296 zero-input capabilities were undecided; over the
-    survivors, 0 are, and all 296 pick the right one.
-    """
-    short = shortlist(goal, registry, root, max(2, int(k)))
-    raw_proposals = list(short.get("proposals") or [])
-    proposals, excluded = request_excluded_proposals(goal, raw_proposals)
+def _margin_from_proposals(
+    goal: str,
+    proposals: list[dict[str, Any]],
+    excluded: list[dict[str, Any]],
+) -> dict[str, Any]:
     base = {"schema": SCHEMA, "goal": goal, "threshold": MARGIN_THRESHOLD,
             "proposals": proposals, "excluded_proposals": excluded}
     if not proposals:
@@ -398,6 +622,15 @@ def margin_verdict(goal: str, registry: Mapping[str, Mapping[str, Any]], root: A
             "capability_id": proposals[0]["capability_id"] if decisive else None,
             "score": score, "runner_up_score": runner_up,
             "runner_up": proposals[1]["capability_id"], "lexical_margin": margin}
+
+
+def margin_verdict(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
+                   k: int = DEFAULT_K) -> dict[str, Any]:
+    """The ranker's own separation between its confident call and its guess."""
+    short = shortlist(goal, registry, root, max(2, int(k)))
+    raw_proposals = list(short.get("proposals") or [])
+    proposals, excluded = request_excluded_proposals(goal, raw_proposals)
+    return _margin_from_proposals(goal, proposals, excluded)
 
 
 def is_specific(names: list[str]) -> bool:
@@ -667,10 +900,21 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
         return {"capability_id": cid, "admitted": False,
                 "reason": "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
                 "required_inputs": required}
+    _interrogative = _goal_low.startswith(
+        ("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")
+    )
     if (
-        (is_computed_answer_delivery(goal)
-         or _goal_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
-        and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _goal_low)
+        (_interrogative or is_computed_answer_delivery(goal))
+        and (
+            _interrogative
+            or not re.search(
+                r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace"
+                r"|optimis|optimiz|memoiz|quarantine"
+                r"|(?:add|create|generate|build)\s+(?:a\s+|an\s+|the\s+)?[a-z0-9_]+"
+                r"|write\s+(?:a\s+|an\s+|the\s+)?(?:unit\s+|property\s+|regression\s+|mutation\s+)?tests?)\b",
+                _goal_low,
+            )
+        )
     ):
         from canonical.runtime import write_authority_v1 as _wa
         if _wa.is_source_transformer(cid):
@@ -872,8 +1116,9 @@ _NOUN_WORDS = ("parameter", "symbol", "function", "test", "loop", "crossfile",
 
 
 def _effect_winner(goal: str, admitted: list[dict[str, Any]],
-                   proposals: list[dict[str, Any]] | None = None) -> str | None:
-    """The one admitted capability whose name states the effect the goal stated.
+                   proposals: list[dict[str, Any]] | None = None,
+                   registry: Mapping[str, Mapping[str, Any]] | None = None) -> str | None:
+    """The one admitted capability whose name (or AST-proved dispatch phrase) states the effect the goal stated.
 
     Deterministic and fail-closed: the effect word must be in the request, the
     noun the request names breaks a tie where one exists, and a remaining tie is
@@ -885,18 +1130,39 @@ def _effect_winner(goal: str, admitted: list[dict[str, Any]],
     for verbs, effects in _EFFECT_WORDS:
         if any(verb in text for verb in verbs):
             preferred.extend(effects)
-    if not preferred:
-        return None
     nouns = {word for word in _NOUN_WORDS if word in text}
     order = {str(p.get("capability_id")): i for i, p in enumerate(proposals or [])}
     scored: list[tuple[int, int, str]] = []
     for row in admitted:
         cid = str(row.get("capability_id") or "")
         low = cid.lower()
-        effect = sum(2 for word in set(preferred) if word in low)
+        effect = sum(2 for word in set(preferred) if word in low) if preferred else 0
+        phrase_bonus = 0
+        if registry is not None:
+            try:
+                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                    match_ast_dispatch_op_for_capability,
+                )
+
+                if match_ast_dispatch_op_for_capability(goal, cid):
+                    phrase_bonus += 4
+            except Exception:
+                pass
+            if not phrase_bonus:
+                src_rel = ((registry.get(cid) or {}).get("source") or {}).get("adapter_path")
+                if isinstance(src_rel, str):
+                    try:
+                        from canonical.runtime.brain_unified_model_v1 import adapter_ast_entry
+
+                        ast_meta = adapter_ast_entry(src_rel)
+                        for phr in (ast_meta or {}).get("dispatch_phrases") or ():
+                            if " " in phr and phr in text:
+                                phrase_bonus += 2
+                    except Exception:
+                        pass
         noun = sum(1 for word in nouns if word in low)
-        total = effect + noun
-        if effect:
+        total = effect + phrase_bonus + noun
+        if effect or phrase_bonus:
             scored.append((total, -order.get(cid, 10**6), cid))
     if not scored:
         return None
@@ -913,7 +1179,7 @@ def _effect_winner(goal: str, admitted: list[dict[str, Any]],
 
 
 def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
-           k: int = DEFAULT_K) -> dict[str, Any]:
+           k: int = DEFAULT_K, *, ledger_db_path: Any = None) -> dict[str, Any]:
     """Propose k, admit them, and select only if exactly one survives.  Ambiguity selects nothing."""
     short = shortlist(goal, registry, root, k)
     declared = declarations(root)
@@ -922,6 +1188,30 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
     # variant it never named.  Those are not competing explanations, so they are not admitted
     # and they do not shrink the margin.  The exclusions are reported, never silent.
     proposals, excluded = request_excluded_proposals(goal, list(short.get("proposals") or []))
+    # Augment admission checks with verified capabilities whose AST-proved multi-word dispatch
+    # phrase is explicitly stated in `goal` (keeps `shortlist()` bit-for-bit untouched while
+    # reaching all 118 AST-indexed adapter operations without single-token pollution).
+    seen_prop_ids = {str(p.get("capability_id") or "") for p in proposals}
+    excluded_ids = {str(p.get("capability_id") or "") for p in excluded}
+    try:
+        from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+            find_phrase_matched_capabilities,
+        )
+
+        for pm in find_phrase_matched_capabilities(goal, registry):
+            pm_cid = str(pm["capability_id"])
+            if pm_cid not in seen_prop_ids and pm_cid not in excluded_ids:
+                proposals = list(proposals) + [
+                    {
+                        "capability_id": pm_cid,
+                        "lexical_relevance_score": 0.0,
+                        "matched_terms": str(pm["matched_phrase"]).split(),
+                        "ast_phrase_match": pm["matched_op"],
+                    }
+                ]
+                seen_prop_ids.add(pm_cid)
+    except Exception:
+        pass
     short = {**short, "proposals": proposals, "excluded_proposals": excluded}
     for proposal in proposals:
         cid = proposal["capability_id"]
@@ -961,13 +1251,47 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
     # ambiguous SWE branch, never a decisive single admission.
     if len(admitted) > 1:
         from canonical.runtime import declared_input_derivation_v1 as _swed
-        effect_winner = (_effect_winner(goal, admitted, short.get("proposals") or [])
+        effect_winner = (_effect_winner(goal, admitted, short.get("proposals") or [], registry)
                          if _swed.is_swe_request(goal) else None)
         if effect_winner is not None:
             chosen = next(row for row in admitted if row["capability_id"] == effect_winner)
             return {**short, "status": "SELECTED", "selected_capability": effect_winner,
                     "inputs": chosen.get("inputs") or {}, "admissions": admits,
                     "rule": "E30_STATED_EFFECT_DISAMBIGUATES_BINDABLE_CANDIDATES"}
+    if len(admitted) > 1:
+        try:
+            from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger
+            linfo = default_ledger(ledger_db_path).lookup_shape(goal)
+            disq = set(linfo.get("disqualified") or [])
+            pref = linfo.get("preferred_capability")
+            if disq:
+                non_disq = [row for row in admitted if row["capability_id"] not in disq]
+                if non_disq:
+                    admitted = non_disq
+                    if len(admitted) == 1:
+                        winner = admitted[0]
+                        return {
+                            **short,
+                            "status": "SELECTED",
+                            "selected_capability": winner["capability_id"],
+                            "inputs": winner.get("inputs") or {},
+                            "admissions": admits,
+                            "rule": "U1_UPSTREAM_REFUSAL_LEDGER_DISQUALIFICATION",
+                        }
+            if len(admitted) > 1 and pref:
+                pref_matches = [row for row in admitted if row["capability_id"] == pref]
+                if len(pref_matches) == 1:
+                    chosen = pref_matches[0]
+                    return {
+                        **short,
+                        "status": "SELECTED",
+                        "selected_capability": chosen["capability_id"],
+                        "inputs": chosen.get("inputs") or {},
+                        "admissions": admits,
+                        "rule": "U1_UPSTREAM_REFUSAL_LEDGER_PREFERRED",
+                    }
+        except Exception:
+            pass
     if len(admitted) != 1:
         # The margin may only decide between candidates the request could have meant.  A
         # candidate the request does not NAME (F29) is not one of them, and a candidate whose
@@ -979,7 +1303,11 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
                       if runs_as_stated(registry, row["capability_id"], root)
                       and request_may_select(goal, row["capability_id"],
                                              row.get("required_inputs"))}
-        verdict = margin_verdict(goal, registry, root, max(2, int(k)))
+        verdict = (
+            _margin_from_proposals(goal, proposals, excluded)
+            if int(k) >= 2
+            else margin_verdict(goal, registry, root, 2)
+        )
         if (verdict.get("status") == "DECISIVE"
                 and verdict.get("capability_id") in structural):
             cid = verdict["capability_id"]
@@ -1016,4 +1344,4 @@ def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
     if not isinstance(registry, Mapping) or not registry:
         registry = live_brain.load_verified_registry()
     limit = int((args or {}).get("k") or DEFAULT_K)
-    return select(goal, registry, root, limit)
+    return select(goal, registry, root, limit, ledger_db_path=(args or {}).get("ledger_db_path"))

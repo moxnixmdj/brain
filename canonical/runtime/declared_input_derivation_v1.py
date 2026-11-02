@@ -442,6 +442,21 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     if cached is not None and cached[0] == digest:
         return dict(cached[1])
     try:
+        rel = str(adapter.relative_to(root_resolved))
+    except ValueError:
+        rel = adapter.name
+    # Fast O(1) lookup against compile-time SHA-256 verified unified-model AST index
+    try:
+        from canonical.runtime.brain_unified_model_v1 import adapter_ast_entry
+
+        precompiled = adapter_ast_entry(rel, expected_sha256=digest)
+        if precompiled is not None and isinstance(precompiled.get("defaulted_keys"), Mapping):
+            pre_defaults = {str(k): str(v) for k, v in precompiled["defaulted_keys"].items()}
+            _remember_source(_ADAPTER_DEFAULTS_CACHE, cache_key, (digest, pre_defaults))
+            return dict(pre_defaults)
+    except Exception:
+        pass
+    try:
         tree = _parsed_source(adapter, source, digest)
     except (SyntaxError, ValueError):
         _remember_source(_ADAPTER_DEFAULTS_CACHE, cache_key, (digest, {}))
@@ -456,11 +471,6 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         elif isinstance(parent, (ast.If, ast.IfExp)):
             for sub in ast.walk(parent.test):
                 guarded_nodes.add(id(sub))
-
-    try:
-        rel = str(adapter.relative_to(root_resolved))
-    except ValueError:
-        rel = adapter.name
 
     found: dict[str, str] = {}
     for node in ast.walk(tree):
@@ -2105,6 +2115,19 @@ def _derive_swe_kernel_inputs(
             op = "quarantine_flaky_tests"
             tgt = py_test_files[0] if py_test_files else stated_dirs[0]
 
+        if not op and (files or stated_dirs):
+            try:
+                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                    match_ast_dispatch_op_for_capability,
+                )
+
+                ast_op = match_ast_dispatch_op_for_capability(goal, cid_str)
+                if ast_op:
+                    op = ast_op
+                    tgt = files[0] if files else stated_dirs[0]
+            except Exception:
+                pass
+
         if not op or not tgt:
             return None
         return {
@@ -2231,6 +2254,19 @@ def _derive_swe_kernel_inputs(
         elif re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\b", low) and "staged" not in low:
             op, tgt = "git_commit", (stated_dirs[0] if stated_dirs else files[0])
 
+        if not op and (py_sources or files or stated_dirs):
+            try:
+                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                    match_ast_dispatch_op_for_capability,
+                )
+
+                ast_op = match_ast_dispatch_op_for_capability(goal, cid_str)
+                if ast_op:
+                    op = ast_op
+                    tgt = py_sources[0] if py_sources else (files[0] if files else stated_dirs[0])
+            except Exception:
+                pass
+
         if not op or not tgt:
             return None
         return {
@@ -2319,6 +2355,19 @@ def _derive_swe_kernel_inputs(
             op, tgt = "trace_value_provenance", files[0]
         elif "flaky" in low and any(w in low for w in ("find", "detect", "tell me if", "whether", "rerun")) and "quarantine" not in low and "answer.json" not in low and (files or stated_dirs):
             op, tgt = "find_flaky_tests", (files[0] if files else stated_dirs[0])
+
+        if not op and (files or stated_dirs):
+            try:
+                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                    match_ast_dispatch_op_for_capability,
+                )
+
+                ast_op = match_ast_dispatch_op_for_capability(goal, cid_str)
+                if ast_op:
+                    op = ast_op
+                    tgt = files[0] if files else stated_dirs[0]
+            except Exception:
+                pass
 
         if not op or not tgt:
             return None
@@ -2479,14 +2528,20 @@ def _defining_module(source_root: str, symbol: str, root: pathlib.Path) -> str |
 def _stated_directories(goal: str, root: pathlib.Path) -> list[str]:
     out: list[str] = []
     seen: set[str] = set()
+    try:
+        base = pathlib.Path(root).resolve()
+    except (OSError, ValueError):
+        return out
     for match in _PATH_RE.finditer(str(goal or "")):
         raw = match.group(0).rstrip(".,;:)\"'")
         if raw in seen:
             continue
         seen.add(raw)
         try:
-            candidate = (pathlib.Path(root) / raw).resolve()
-            base = pathlib.Path(root).resolve()
+            unres = base / raw
+            if not unres.is_dir():
+                continue
+            candidate = unres.resolve()
         except (OSError, ValueError):
             continue
         if candidate.is_dir() and (candidate == base or base in candidate.parents):

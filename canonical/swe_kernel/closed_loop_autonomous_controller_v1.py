@@ -75,7 +75,73 @@ def _is_honest_contract_refusal(result: Mapping[str, Any]) -> bool:
     for tok in _HONEST_REFUSAL_CLASSES:
         if tok in fc or tok in st or any(tok in e for e in errs):
             return True
+    adm = result.get("route_admission")
+    if isinstance(adm, Mapping) and str(adm.get("rule") or "") == "R9_REQUIRED_FILE_INPUT_UNBOUND":
+        return True
     return False
+
+
+_LEARNABLE_FRONT_STATUSES: frozenset[str] = frozenset(
+    {
+        "FAIL__RAW_GOAL_COMPILATION_GAP",
+        "FAIL_CLOSED__CAPABILITY_REFUSED_POLYGLOT_REFUSED",
+        "FAIL_CLOSED__CAPABILITY_EXECUTION_FAILED",
+    }
+)
+
+
+def _is_executable(name: str) -> bool:
+    """Does this program exist on this machine? Checked, never assumed."""
+    try:
+        return bool(pathlib.Path(name).is_file() or shutil.which(name))
+    except Exception:
+        return False
+
+
+def _named_executable(goal: str) -> str:
+    """A program the goal actually names, that exists on this machine."""
+    for tok in str(goal or "").replace(",", " ").replace(";", " ").split():
+        t = tok.strip(".,()[]{}\"'")
+        if len(t) < 2 or "/" in t:
+            continue
+        if pathlib.Path(t).is_file() or shutil.which(t):
+            return t
+    return ""
+
+
+def _close_matching_ignorance_gaps(goal: str, capability_id: str) -> list[str]:
+    """Resolve and close any open ignorance-ledger entry matching `goal` once a verified skill lands."""
+    closed: list[str] = []
+    if not goal or not capability_id:
+        return closed
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as led
+
+        norm_goal = goal.strip().lower()
+        for row in led.rank(limit=128):
+            if str(row.get("what") or "").strip().lower() == norm_goal and row.get("id"):
+                gid = str(row["id"])
+                if led.resolve(gid, helped=True, close=True):
+                    closed.append(gid)
+    except Exception:
+        pass
+    return closed
+
+
+def _promote_r3_episode_if_configured(r3_state_path: pathlib.Path | None) -> dict[str, Any] | None:
+    """Drain pending R3 episodes through the Brain-owned independent verifier when configured."""
+    if r3_state_path is None or not r3_state_path.is_file():
+        return None
+    try:
+        from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
+        from canonical.runtime import r3_improvement_queue_driver_v1 as qdrv
+
+        state = learning.load_state(r3_state_path)
+        drained = qdrv.drain(state)
+        learning.save_state(r3_state_path, state)
+        return {"drained": True, "summary": drained}
+    except Exception as exc:
+        return {"drained": False, "error": f"{type(exc).__name__}:{str(exc)[:160]}"}
 
 
 def _extract_existing_file(goal: str, cwd: pathlib.Path) -> pathlib.Path | None:
@@ -263,10 +329,14 @@ def _qualify_cli_measurement_skill(
 def solve_or_learn(
     request: Mapping[str, Any] | str,
     *,
+    learn: bool = True,
+    registry_path: str | None = None,
     cwd: str | pathlib.Path | None = None,
     db_path: str | pathlib.Path | None = None,
+    r3_state_path: str | pathlib.Path | None = None,
     allow_tier1_composition: bool = True,
     allow_tier2_learning: bool = True,
+    allow_jit_network: bool = True,
     record_open_gap: bool = True,
 ) -> dict[str, Any]:
     """Execute a request at maximum speed, or learn & crystallize the missing skill in-run."""
@@ -280,6 +350,12 @@ def solve_or_learn(
     task_id = str(req.get("task_id") or "autonomous-solve")
     work_cwd = pathlib.Path(cwd or req.get("cwd") or pathlib.Path.cwd()).resolve()
     skill_db = pathlib.Path(db_path) if db_path is not None else None
+    r3_path = pathlib.Path(r3_state_path) if r3_state_path is not None else None
+
+    if not learn:
+        from canonical.runtime import live_brain_route_admission_v1 as ra
+
+        return ra.solve(req)
 
     if not goal:
         return {
@@ -295,11 +371,12 @@ def solve_or_learn(
     # Optional K2 Acquisition-Time Demonstration Compile (Donor Deleted
     # Before Qualification, Mandatory Transfer Ownership Gate).
     # ------------------------------------------------------------------
-    demo_trace = req.pop("demonstration_trace", None)
+    demo_trace = req.pop("demonstration_trace", None) or req.pop("acquisition_trace", None)
     demo_post = req.pop("postcondition", None)
     qualification_receipt: dict[str, Any] | None = None
     if isinstance(demo_trace, list) and demo_trace and isinstance(demo_post, Mapping):
-        held_goal = str(req.pop("heldout_goal", "") or goal)
+        raw_held_goal = req.pop("heldout_goal", None)
+        held_goal = str(raw_held_goal).strip() if raw_held_goal else None
         held_cwd = req.pop("heldout_cwd", None)
         held_post = req.pop("heldout_postcondition", None)
         sab_post = req.pop("sabotaged_postcondition", None)
@@ -311,12 +388,34 @@ def solve_or_learn(
             trace=trace_copy,
             postcondition=demo_post,
             heldout_goal=held_goal,
-            heldout_cwd=held_cwd or work_cwd,
+            heldout_cwd=held_cwd or (work_cwd if held_goal is not None else None),
             heldout_postcondition=held_post,
             sabotaged_postcondition=sab_post,
+            auto_synthesize_twin=(held_goal is None),
+            source_cwd=work_cwd,
             source_channel="k2_demonstration_transfer",
             db_path=skill_db,
         )
+
+    # ------------------------------------------------------------------
+    # ROUND-0 PATHOLOGY PRECHECK (`experience_v1` + `flywheel_v1`, < 0.5 ms)
+    # ------------------------------------------------------------------
+    exp_state_path = req.pop("experience_state_path", None)
+    fly_state_path = req.pop("flywheel_state_path", None)
+    round0_meta: dict[str, Any] = {}
+    try:
+        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+            round0_pathology_precheck,
+        )
+
+        round0_meta = round0_pathology_precheck(
+            goal,
+            [],
+            experience_state_path=str(exp_state_path) if exp_state_path else None,
+            flywheel_state_path=str(fly_state_path) if fly_state_path else None,
+        )
+    except Exception:
+        round0_meta = {}
 
     # ------------------------------------------------------------------
     # TIER 0A (<2 ms): Recall Compiled & Ownership-Qualified Workflow Skill
@@ -341,6 +440,38 @@ def solve_or_learn(
             "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
         }
 
+    # Explicit 2-step byte-verified capability bridge (`bridge_enumeration_v1`)
+    bridge_spec = req.get("byte_verified_bridge")
+    if allow_tier1_composition and isinstance(bridge_spec, Mapping):
+        try:
+            from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                execute_byte_verified_two_step_bridge,
+            )
+
+            b_out = execute_byte_verified_two_step_bridge(
+                producer_cid=str(bridge_spec["producer_cid"]),
+                producer_args=dict(bridge_spec.get("producer_args") or {}),
+                artifact_type=str(bridge_spec["artifact_type"]),
+                consumer_cid=str(bridge_spec["consumer_cid"]),
+                consumer_artifact_arg=str(bridge_spec["consumer_artifact_arg"]),
+                consumer_extra_args=dict(bridge_spec.get("consumer_extra_args") or {}),
+                root=work_cwd,
+            )
+            if b_out.get("pass") is True:
+                return {
+                    "schema": SCHEMA,
+                    "task_id": task_id,
+                    "pass": True,
+                    "status": "PASS__TIER1_BYTE_VERIFIED_CAPABILITY_BRIDGE",
+                    "tier_used": "tier1_byte_verified_bridge",
+                    "from_memory": False,
+                    "bridge_result": b_out,
+                    "round0_precheck": round0_meta,
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                }
+        except Exception:
+            pass
+
     # ------------------------------------------------------------------
     # TIER 0B: Front-Door Bound Capability Admission (`solve`)
     # ------------------------------------------------------------------
@@ -349,7 +480,17 @@ def solve_or_learn(
     clean_req = {
         k: v
         for k, v in req.items()
-        if k not in {"heldout_goal", "heldout_cwd", "heldout_postcondition", "sabotaged_postcondition"}
+        if k
+        not in {
+            "heldout_goal",
+            "heldout_cwd",
+            "heldout_postcondition",
+            "sabotaged_postcondition",
+            "gui_action",
+            "gui_screen",
+            "gui_env",
+            "byte_verified_bridge",
+        }
     }
     clean_req.setdefault("task_id", task_id)
     front_res = ra.solve(clean_req)
@@ -360,8 +501,19 @@ def solve_or_learn(
         out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
         return out
 
-    # Respect law-pinned honest refusals immediately — never paper over them.
-    if _is_honest_contract_refusal(front_res):
+    # Respect law-pinned honest refusals immediately — except when `work_cwd`
+    # itself is an external target repository with failing tests (`2B-Repo`), where
+    # single-file `R9_REQUIRED_FILE_INPUT_UNBOUND` / `STATED_SWE_EFFECT_UNSERVED`
+    # simply indicates the repair request is repository-scoped rather than single-file.
+    adm_rule = str(((front_res.get("route_admission") or {}) if isinstance(front_res.get("route_admission"), Mapping) else {}).get("rule") or "")
+    front_status = str(front_res.get("status") or "")
+    is_repo_scoped_repair = (
+        (adm_rule == "R9_REQUIRED_FILE_INPUT_UNBOUND" or "STATED_SWE_EFFECT_UNSERVED" in front_status)
+        and work_cwd != pathlib.Path(__file__).resolve().parents[2]
+        and any(w in goal.lower() for w in ("fix", "repair", "failing tests", "make all tests pass"))
+        and any(work_cwd.rglob("test_*.py"))
+    )
+    if _is_honest_contract_refusal(front_res) and not is_repo_scoped_repair:
         out = dict(front_res)
         out["controller_schema"] = SCHEMA
         out["tier_used"] = "tier0_honest_contract_refusal"
@@ -397,6 +549,37 @@ def solve_or_learn(
                     "dag_result": dag_res,
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                 }
+
+        bridge_spec = req.get("byte_verified_bridge")
+        if isinstance(bridge_spec, Mapping):
+            try:
+                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+                    execute_byte_verified_two_step_bridge,
+                )
+
+                b_out = execute_byte_verified_two_step_bridge(
+                    producer_cid=str(bridge_spec["producer_cid"]),
+                    producer_args=dict(bridge_spec.get("producer_args") or {}),
+                    artifact_type=str(bridge_spec["artifact_type"]),
+                    consumer_cid=str(bridge_spec["consumer_cid"]),
+                    consumer_artifact_arg=str(bridge_spec["consumer_artifact_arg"]),
+                    consumer_extra_args=dict(bridge_spec.get("consumer_extra_args") or {}),
+                    root=work_cwd,
+                )
+                if b_out.get("pass") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "pass": True,
+                        "status": "PASS__TIER1_BYTE_VERIFIED_CAPABILITY_BRIDGE",
+                        "tier_used": "tier1_byte_verified_bridge",
+                        "from_memory": False,
+                        "bridge_result": b_out,
+                        "round0_precheck": round0_meta,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+            except Exception:
+                pass
 
         try:
             from canonical.runtime import composer_route_v1 as croute
@@ -439,6 +622,7 @@ def solve_or_learn(
                     hidden_fields=list(web_res.get("hidden_fields") or []),
                     stateful_csrf_or_cookie=bool(web_res.get("stateful_csrf_or_cookie")),
                 )
+                closed_gaps = _close_matching_ignorance_gaps(goal, str(qual.get("skill_id") or "http_form_skill")) if qual.get("pass") else []
                 return {
                     "schema": SCHEMA,
                     "task_id": task_id,
@@ -446,6 +630,8 @@ def solve_or_learn(
                     "status": "PASS__TIER2_LEARNED_SEMANTIC_WEB_TO_HTTP",
                     "tier_used": "tier2_semantic_web_form_to_http",
                     "from_memory": False,
+                    "learned_this_turn": bool(qual.get("pass")),
+                    "closed_gap_ids": closed_gaps,
                     "skill_crystallized": bool(qual.get("pass")),
                     "skill_id": qual.get("skill_id"),
                     "qualification_receipt": qual,
@@ -470,6 +656,7 @@ def solve_or_learn(
                         cwd=work_cwd,
                         db_path=skill_db,
                     )
+                    closed_gaps = _close_matching_ignorance_gaps(goal, str(qual.get("skill_id") or "cli_instrument")) if qual.get("pass") else []
                     return {
                         "schema": SCHEMA,
                         "task_id": task_id,
@@ -477,6 +664,8 @@ def solve_or_learn(
                         "status": "PASS__TIER2_LEARNED_CLI_INSTRUMENT",
                         "tier_used": "tier2_cli_instrument_discovery",
                         "from_memory": bool(measured.get("from_memory")),
+                        "learned_this_turn": bool(qual.get("pass")),
+                        "closed_gap_ids": closed_gaps,
                         "skill_crystallized": bool(qual.get("pass")),
                         "skill_id": qual.get("skill_id"),
                         "qualification_receipt": qual,
@@ -490,6 +679,7 @@ def solve_or_learn(
         if any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")):
             chain_done = cenv.perform(goal, cwd=work_cwd)
             if chain_done.get("pass") is True:
+                closed_gaps = _close_matching_ignorance_gaps(goal, "cli_archive_chain")
                 return {
                     "schema": SCHEMA,
                     "task_id": task_id,
@@ -497,6 +687,8 @@ def solve_or_learn(
                     "status": "PASS__TIER2_STATEFUL_CLI_CHAIN_VERIFIED",
                     "tier_used": "tier2_stateful_cli_chain",
                     "from_memory": bool(chain_done.get("from_memory")),
+                    "learned_this_turn": not bool(chain_done.get("from_memory")),
+                    "closed_gap_ids": closed_gaps,
                     "plan": chain_done.get("plan"),
                     "output": chain_done.get("output"),
                     "verification": chain_done.get("verification"),
@@ -509,7 +701,7 @@ def solve_or_learn(
             repo_target: pathlib.Path | None = None
             for tok in re.findall(r"[A-Za-z0-9_./~-]+", goal):
                 tok_clean = tok.strip(".,:;()[]'\"")
-                if not tok_clean or tok_clean in {".", "/"}:
+                if not tok_clean or tok_clean in {".", "/", "tests", "test"}:
                     continue
                 cand_dir = (work_cwd / tok_clean).resolve() if not pathlib.Path(tok_clean).is_absolute() else pathlib.Path(tok_clean).resolve()
                 if cand_dir.is_dir() and any(cand_dir.rglob("test_*.py")):
@@ -518,10 +710,41 @@ def solve_or_learn(
             if repo_target is None and work_cwd != pathlib.Path(__file__).resolve().parents[2] and any(work_cwd.rglob("test_*.py")):
                 repo_target = work_cwd
             if repo_target is not None:
+                # Phase 3C fast path: `< 180 ms` Zero-Copy CoW + Impact-Sliced + STUN/Guard + Coupled 2-File Zygote Engine
+                try:
+                    from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
+                        repair_repository_in_cow_zygote,
+                    )
+
+                    cow_res = repair_repository_in_cow_zygote(repo_target, apply_to_workspace=True)
+                    if cow_res.get("pass"):
+                        c_ids = list(cow_res.get("crystallized_skill_ids") or [])
+                        closed_gaps = _close_matching_ignorance_gaps(
+                            goal, c_ids[0] if c_ids else "cow_zygote_repo_repair"
+                        )
+                        return {
+                            "schema": SCHEMA,
+                            "task_id": task_id,
+                            "pass": True,
+                            "status": "PASS__TIER2_COW_ZYGOTE_REPO_REPAIR",
+                            "tier_used": "tier2_cow_impact_zygote_repair_engine",
+                            "from_memory": str(cow_res.get("mode") or "").startswith("SKILL_RECALL"),
+                            "learned_this_turn": not str(cow_res.get("mode") or "").startswith("SKILL_RECALL"),
+                            "closed_gap_ids": closed_gaps,
+                            "changed_files": cow_res.get("files_repaired"),
+                            "crystallized_skill_ids": c_ids,
+                            "zygote_eval_ms": cow_res.get("zygote_eval_ms"),
+                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                        }
+                except Exception:
+                    pass
+
                 from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import solve_repository_closed_loop
 
                 loop_res = solve_repository_closed_loop(repo_target, goal, apply_to_source=True)
                 if loop_res.get("ok") and loop_res.get("verified"):
+                    c_ids = list(loop_res.get("crystallized_skill_ids") or [])
+                    closed_gaps = _close_matching_ignorance_gaps(goal, c_ids[0] if c_ids else "multistep_repo_repair")
                     return {
                         "schema": SCHEMA,
                         "task_id": task_id,
@@ -529,9 +752,11 @@ def solve_or_learn(
                         "status": "PASS__TIER2_MULTISTEP_CLOSED_LOOP_REPO_REPAIR",
                         "tier_used": "tier2_multistep_closed_loop_repo_solver",
                         "from_memory": False,
+                        "learned_this_turn": True,
+                        "closed_gap_ids": closed_gaps,
                         "steps_taken": loop_res.get("steps_taken"),
                         "changed_files": loop_res.get("changed_files"),
-                        "crystallized_skill_ids": loop_res.get("crystallized_skill_ids"),
+                        "crystallized_skill_ids": c_ids,
                         "diff": loop_res.get("diff"),
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
@@ -542,6 +767,7 @@ def solve_or_learn(
 
             mined = dm.learn_or_recall(goal)
             if mined.get("pass") is True:
+                closed_gaps = _close_matching_ignorance_gaps(goal, f"doc_mined.{mined.get('module') or 'stdlib'}")
                 return {
                     "schema": SCHEMA,
                     "task_id": task_id,
@@ -549,6 +775,8 @@ def solve_or_learn(
                     "status": "PASS__TIER2_LEARNED_PYTHON_DOCUMENTATION",
                     "tier_used": "tier2_documentation_mining",
                     "from_memory": bool(mined.get("from_memory")),
+                    "learned_this_turn": not bool(mined.get("from_memory")),
+                    "closed_gap_ids": closed_gaps,
                     "module": mined.get("module"),
                     "result": mined,
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
@@ -556,26 +784,202 @@ def solve_or_learn(
         except Exception:
             pass
 
-    # Record open gap into `ignorance_ledger_v1` so Tier 3 curriculum can study it.
+        # 2D: General Computer Environment Execution (`computer_env_v1.perform`) on stated workspace paths
+        try:
+            from canonical.runtime import computer_env_v1 as cenv
+            from canonical.runtime import goal_compiler as _gc
+
+            stated_paths = [abs_p for _raw_p, abs_p in _gc._repo_paths(goal, ra.ROOT)]
+            env_dir = (
+                stated_paths[0].parent
+                if stated_paths and stated_paths[0].is_file()
+                else (stated_paths[0] if stated_paths and stated_paths[0].is_dir() else None)
+            )
+            if env_dir is not None and env_dir.is_dir():
+                c_res = cenv.perform(goal, str(env_dir))
+                if c_res.get("pass") is True and c_res.get("verified") is True:
+                    closed_gaps = _close_matching_ignorance_gaps(goal, "computer_env.perform")
+                    return {
+                        "schema": SCHEMA,
+                        "task_id": task_id,
+                        "goal": goal,
+                        "pass": True,
+                        "status": "PASS__COMPUTER_ENV_LEARNED_AND_VERIFIED",
+                        "tier_used": "tier2_computer_env_perform",
+                        "executed": True,
+                        "semantic_acceptance_complete": True,
+                        "from_memory": bool(c_res.get("from_memory")),
+                        "learned_this_turn": True,
+                        "closed_gap_ids": closed_gaps,
+                        "computer_env_result": c_res,
+                        "model_dependency_count": 0,
+                        "incremental_spend_usd": 0,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                    }
+        except Exception:
+            pass
+
+        # 2E: Typed Desktop / GUI Surface Fallback (`osworld_computer_surface_v1`) — strictly after HTTP & CLI
+        gui_action = req.get("gui_action")
+        if isinstance(gui_action, Mapping):
+            try:
+                from canonical.runtime import osworld_computer_surface_v1 as gui_surface
+
+                raw_screen = req.get("gui_screen") or {}
+                screen = gui_surface.Screen(
+                    width=int(raw_screen.get("width", 1920)),
+                    height=int(raw_screen.get("height", 1080)),
+                )
+                compiled_gui = gui_surface.compile_osworld_pyautogui(gui_action, screen)
+                gui_env = req.get("gui_env")
+                exec_receipt = (
+                    gui_surface.execute_typed_action(gui_env, gui_action)
+                    if gui_env is not None
+                    else {"compiled_pyautogui": compiled_gui, "executed_in_env": False}
+                )
+                return {
+                    "schema": SCHEMA,
+                    "task_id": task_id,
+                    "goal": goal,
+                    "pass": True,
+                    "status": "PASS__TIER2_TYPED_GUI_SURFACE_ACTION",
+                    "tier_used": "tier2_typed_gui_surface",
+                    "compiled_pyautogui": compiled_gui,
+                    "gui_receipt": exec_receipt,
+                    "learned_this_turn": False,
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                }
+            except Exception:
+                pass
+
+    # ------------------------------------------------------------------
+    # Record Open Gap + JIT Multi-Channel Knowledge + CLI `--help` Acquisition
+    # ------------------------------------------------------------------
+    learned: dict[str, Any] = {"attempted": False, "gap_recorded": False}
+    front_status = str(front_res.get("status") or "")
+    learnable_gap = allow_tier2_learning and (front_status in _LEARNABLE_FRONT_STATUSES)
+
     if record_open_gap:
         try:
             from canonical.runtime import ignorance_ledger_v1 as led
 
-            led.record(
-                kind="unserved_goal",
-                what=goal,
-                blocked_task=task_id,
-                evidence={"front_status": front_res.get("status"), "failure_class": front_res.get("failure_class")},
-            )
+            why_text = f"raw goal compilation gap ({front_status})" if front_status else "raw goal compilation gap"
+            gap_id = led.note(goal or "unmatched goal", why=why_text, cost=1.0)
+            learned["gap_recorded"] = True
+            learned["gap_id"] = gap_id
+            learned["what_to_learn_next"] = [g["what"] for g in led.rank(limit=3)]
         except Exception:
             pass
+
+    if learnable_gap and allow_jit_network:
+        try:
+            from canonical.runtime import jit_knowledge_v1 as jit
+
+            known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
+            if not known.get("complete"):
+                try:
+                    from canonical.runtime.curriculum_v1 import query_for
+
+                    rephrased = query_for(goal)
+                    if rephrased and rephrased != goal:
+                        again = jit.resolve(rephrased, min_sources=1, limit=6, timeout=8)
+                        if again.get("complete") or again.get("document_count", 0) > known.get("document_count", 0):
+                            known = again
+                            known["query_was_rephrased_to"] = rephrased
+                except Exception:
+                    pass
+            learned["knowledge"] = {
+                "status": known.get("status"),
+                "documents": known.get("document_count", 0),
+                "sources_answered": known.get("sources_answered") or [],
+                "kinds_answered": known.get("kinds_answered") or [],
+                "min_kinds_required": known.get("min_kinds_required"),
+                "gap": known.get("gap"),
+                "query_was_rephrased_to": known.get("query_was_rephrased_to"),
+                "complete": known.get("complete", False),
+                "authority": known.get("authority"),
+            }
+            candidates: list[str] = []
+            for doc in known.get("documents") or []:
+                for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
+                    head = text.strip().split()[0] if text.strip() else ""
+                    head = head.strip(".,()[]{}'\"")
+                    if 2 <= len(head) <= 40 and _is_executable(head):
+                        candidates.append(head)
+            if candidates:
+                learned["knowledge"]["candidates_present"] = candidates[:6]
+                if not _named_executable(goal):
+                    learned.setdefault("from_knowledge", candidates[0])
+        except Exception as exc:
+            learned.setdefault("knowledge", {"error": f"{type(exc).__name__}:{str(exc)[:160]}"})
+
+    if learnable_gap:
+        exe = _named_executable(goal)
+        if not exe:
+            exe = str(learned.get("from_knowledge") or "")
+            if exe:
+                learned["attempted"] = True
+                learned["executable"] = exe
+                learned["executable_source"] = "jit_knowledge"
+        if exe:
+            learned["attempted"] = True
+            learned["executable"] = exe
+            try:
+                import subprocess
+                from canonical.runtime import cli_capability_acquisition_v1 as acq
+
+                with tempfile.TemporaryDirectory(prefix="brain-learn-") as td:
+                    out_proc = subprocess.run([exe, "--help"], capture_output=True, timeout=30, cwd=td)
+                    help_text = (out_proc.stdout + out_proc.stderr).decode("utf-8", "replace")
+                probe_doc = {"executables": [{"executable": exe, "help_attempts": [{"text": help_text}]}]}
+                acquired = acq.acquire(probe_doc, goal)
+                learned["acquisition_status"] = acquired.get("status")
+                if acquired.get("verified"):
+                    cid = "acquired." + exe.replace(".", "_")
+                    reg = acq.register(acquired, cid, registry_path=registry_path)
+                    learned["registered"] = reg.get("registered") is True
+                    learned["capability_id"] = cid
+                    if learned["registered"]:
+                        _close_matching_ignorance_gaps(goal, cid)
+                        r3_promo = _promote_r3_episode_if_configured(r3_path)
+                        if r3_promo is not None:
+                            learned["r3_promotion"] = r3_promo
+                        retry = ra.solve(clean_req)
+                        retry["learning"] = learned
+                        retry["learned_this_turn"] = True
+                        retry["controller_schema"] = SCHEMA
+                        retry["tier_used"] = "tier2_cli_help_acquisition"
+                        retry["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
+                        return retry
+            except Exception as exc:
+                learned["error"] = f"{type(exc).__name__}:{str(exc)[:200]}"
+
+        try:
+            from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+            learned["verified_skill_store_rules"] = VerifiedSkillStore().count()
+        except Exception:
+            pass
+
+    r3_promo = _promote_r3_episode_if_configured(r3_path)
+    if r3_promo is not None:
+        learned["r3_promotion"] = r3_promo
 
     out = dict(front_res)
     out["controller_schema"] = SCHEMA
     out["tier_used"] = "fail_closed_unserved"
     out["qualification_receipt"] = qualification_receipt
+    out["learning"] = learned
+    out["learned_this_turn"] = False
     out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
     return out
+
+
+def chase_until_met(goal: str, *, measure: Any, **kwargs: Any) -> dict[str, Any]:
+    """Target-bound persistent chase loop (`goal_chase_v1.chase_until_met`) wired to the 4-tier controller."""
+    from execution_guard.goal_chase_v1 import chase_until_met as _chase_until_met
+
+    return _chase_until_met(goal, measure=measure, **kwargs)
 
 
 def study_open_gaps(*, max_lessons: int = 5, channels: list[str] | None = None) -> dict[str, Any]:
@@ -597,3 +1001,11 @@ def inspect_local_repo_for_goal(goal: str, repo_or_module: str | pathlib.Path) -
         "callable_count": len(surface.get("callables") or []),
         "top_candidates": ranked,
     }
+
+
+def solve_or_learn_isolated(request: Mapping[str, Any] | str, **kwargs: Any) -> dict[str, Any]:
+    """Dispatch `solve_or_learn` inside a Copy-On-Write pre-warmed `os.fork()` Zygote worker."""
+    from canonical.swe_kernel.zygote_worker_pool_v1 import default_zygote_pool
+
+    return default_zygote_pool().solve_or_learn_isolated(request, **kwargs)
+

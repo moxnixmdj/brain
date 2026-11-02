@@ -26,14 +26,29 @@ class GoalCompilationFailure(RuntimeError):
         super().__init__(code if detail is None else f"{code}:{detail}")
 
 
+_SIBLING_RUNTIME_MOD_CACHE: dict[tuple[str, str, int], object] = {}
+
+
 def _load_sibling_runtime_module(filename,module_name):
     path=pathlib.Path(__file__).resolve().with_name(filename)
+    try:
+        mtime_ns=path.stat().st_mtime_ns
+    except OSError as exc:
+        raise GoalCompilationFailure("RUNTIME_HELPER_LOAD_FAILED",filename) from exc
+    cache_key=(str(path),str(module_name),mtime_ns)
+    hit=_SIBLING_RUNTIME_MOD_CACHE.get(cache_key)
+    if hit is not None:
+        sys.modules[module_name]=hit
+        return hit
     spec=importlib.util.spec_from_file_location(module_name,path)
     if spec is None or spec.loader is None:
         raise GoalCompilationFailure("RUNTIME_HELPER_LOAD_FAILED",filename)
     module=importlib.util.module_from_spec(spec)
     sys.modules[module_name]=module
     spec.loader.exec_module(module)
+    if len(_SIBLING_RUNTIME_MOD_CACHE)>=64:
+        _SIBLING_RUNTIME_MOD_CACHE.clear()
+    _SIBLING_RUNTIME_MOD_CACHE[cache_key]=module
     return module
 
 

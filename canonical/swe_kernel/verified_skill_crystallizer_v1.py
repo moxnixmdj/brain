@@ -74,6 +74,16 @@ _HOLE_KIND = {"hole_id": "ident", "hole_num": "num", "hole_str": "str"}
 _HOLE_TOKEN = {"ident": "hole_id", "num": "hole_num", "str": "hole_str"}
 
 _MEM_SKILLS: dict[str, tuple[tuple, list[dict[str, Any]]]] = {}
+_PROCESS_WORLD_FP: dict[str, Any] | None = None
+
+
+def _current_world_fp() -> dict[str, Any]:
+    global _PROCESS_WORLD_FP
+    if _PROCESS_WORLD_FP is None:
+        from canonical.swe_kernel import rule_expiry_v1 as _expiry
+
+        _PROCESS_WORLD_FP = _expiry.world_fingerprint()
+    return _PROCESS_WORLD_FP
 
 
 def _repo_root() -> pathlib.Path:
@@ -805,6 +815,9 @@ class VerifiedSkillStore:
         required_verification_kind: str = 'CALLER_PREDICATE',
         scope_id: str = '',
         context: Mapping[str, Any] | None = None,
+        allow_scope_escalation: bool = True,
+        allow_cross_language: bool = True,
+        now_world_fingerprint: Mapping[str, Any] | None = None,
     ) -> dict[str, Any] | None:
         """Propose only within recorded applicability and actual current assurance.
 
@@ -816,6 +829,26 @@ class VerifiedSkillStore:
         lang = language.lower()
         rules = _load_rules(self.db_path, lang)
 
+        # Consult `rule_expiry_v1` stamps: any explicitly stamped rule whose environment moved (`STALE`)
+        # is skipped until re-verified; unstamped (`UNKNOWN`) records keep historical compatibility.
+        stale_ids: set[str] = set()
+        if rules:
+            try:
+                from canonical.swe_kernel import rule_expiry_v1 as _expiry
+
+                audit_rep = _expiry.audit(
+                    self.db_path,
+                    skill_ids=[str(r.get("skill_id") or "") for r in rules if r.get("skill_id")],
+                    now=now_world_fingerprint or _current_world_fp(),
+                )
+                stale_ids = {
+                    str(row["skill_id"])
+                    for row in (audit_rep.get("rules") or [])
+                    if row.get("state") == _expiry.STALE
+                }
+            except Exception:
+                stale_ids = set()
+
         ordered = rules
         if error_class:
             ordered = (
@@ -823,7 +856,35 @@ class VerifiedSkillStore:
                 + [r for r in rules if r.get("error_class") != error_class]
             )
 
+        def _commit_verified_hit(rule: dict[str, Any], candidate: str, verification: dict[str, Any], scope_tier: str) -> dict[str, Any] | None:
+            conn = _connect(self.db_path)
+            try:
+                with conn:
+                    # Verification can take seconds. Do not return an artifact
+                    # invalidated/deleted by another writer while it was running.
+                    conn.execute('BEGIN IMMEDIATE')
+                    live = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (rule['skill_id'],)).fetchone()
+                    if live is None or json.loads(live[0]) != rule:
+                        return None
+                    conn.execute(
+                        "UPDATE crystallized_skills SET verified_hits = verified_hits + 1 WHERE skill_id = ?",
+                        (rule["skill_id"],),
+                    )
+            finally:
+                conn.close()
+            return {
+                "skill_id": rule["skill_id"],
+                "skeleton_fp": rule["skeleton_fp"],
+                "patched_source": candidate,
+                "from_crystallized_memory": True,
+                "scope_tier": scope_tier,
+                "verification": verification,
+                "whole_task_correctness_proved": False,
+            }
+
         for rule in ordered:
+            if str(rule.get("skill_id") or "") in stale_ids:
+                continue
             if rule.get('state') not in (None, 'ACTIVE') or not applicable(rule.get('contract'), scope_id, context):
                 continue
             recorded = rule.get('contract')
@@ -831,35 +892,229 @@ class VerifiedSkillStore:
                 continue
             if recorded is not None and recorded['verification_kind'] != required_verification_kind:
                 continue
+
+            learned_scope = str(rule.get("learned_scope") or "SCOPE_ALGEBRAIC")
+            seen_candidates: set[str] = {source_text}
+
+            # Stage 1 (`SCOPE_STATEMENT`): fast direct skeleton unification (< 100 us)
             for candidate in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
-                if candidate is None or candidate == source_text:
+                if candidate is None or candidate in seen_candidates:
                     continue
+                seen_candidates.add(candidate)
                 verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
                 if verification is not None:
-                    conn = _connect(self.db_path)
-                    try:
-                        with conn:
-                            # Verification can take seconds. Do not return an artifact
-                            # invalidated/deleted by another writer while it was running.
-                            conn.execute('BEGIN IMMEDIATE')
-                            live = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (rule['skill_id'],)).fetchone()
-                            if live is None or json.loads(live[0]) != rule:
-                                break  # stop this invalidated rule, not only this location
-                            conn.execute(
-                                "UPDATE crystallized_skills SET verified_hits = verified_hits + 1 WHERE skill_id = ?",
-                                (rule["skill_id"],),
+                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_STATEMENT")
+                    if hit is not None:
+                        return hit
+                    break
+            else:
+                # Stage 2 (`SCOPE_OPERATOR`), Stage 3 (`SCOPE_SEMANTIC`), & Stage 3B (`SCOPE_ALGEBRAIC` E-Graph)
+                if allow_scope_escalation and learned_scope in ("SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC"):
+                    from canonical.swe_kernel import operator_generalization_v1 as _op_gen
+
+                    invalidated_mid_run = False
+                    for candidate in itertools.islice(_op_gen.propose_operator_swaps(source_text, rule, language=lang), 16):
+                        if candidate is None or candidate in seen_candidates:
+                            continue
+                        seen_candidates.add(candidate)
+                        verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                        if verification is not None:
+                            hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_OPERATOR")
+                            if hit is not None:
+                                return hit
+                            invalidated_mid_run = True
+                            break
+                    if (
+                        not invalidated_mid_run
+                        and lang == "python"
+                        and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
+                    ):
+                        from canonical.swe_kernel import boundary_disjunction_normalization_v1 as _bd_norm
+
+                        try:
+                            sem_stream = itertools.islice(
+                                _bd_norm.propose_semantic_swaps(
+                                    source_text,
+                                    rule,
+                                    operator_swaps=_op_gen.propose_operator_swaps,
+                                ),
+                                16,
                             )
-                    finally:
-                        conn.close()
-                    return {
-                        "skill_id": rule["skill_id"],
-                        "skeleton_fp": rule["skeleton_fp"],
-                        "patched_source": candidate,
-                        "from_crystallized_memory": True,
-                        "verification": verification,
-                        "whole_task_correctness_proved": False,
-                    }
+                            for candidate in sem_stream:
+                                if candidate is None or candidate in seen_candidates:
+                                    continue
+                                seen_candidates.add(candidate)
+                                verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                                if verification is not None:
+                                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_SEMANTIC")
+                                    if hit is not None:
+                                        return hit
+                                    invalidated_mid_run = True
+                                    break
+                        except Exception:
+                            pass
+                    if (
+                        not invalidated_mid_run
+                        and lang == "python"
+                        and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
+                    ):
+                        try:
+                            from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
+                                propose_egraph_algebraic_rewrites,
+                            )
+
+                            for candidate in propose_egraph_algebraic_rewrites(source_text, rule):
+                                if candidate is None or candidate in seen_candidates:
+                                    continue
+                                seen_candidates.add(candidate)
+                                verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                                if verification is not None:
+                                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_ALGEBRAIC")
+                                    if hit is not None:
+                                        return hit
+                                    break
+                        except Exception:
+                            pass
+
+        # Stage 4: Cross-language portable lexical carry (`language_neutral_skill_bridge_v1`)
+        if allow_cross_language and required_verification_kind == 'CALLER_PREDICATE' and not scope_id:
+            try:
+                from canonical.swe_kernel import language_neutral_skill_bridge_v1 as _bridge
+
+                def _typed_bool_verifier(cand: str) -> bool:
+                    return evaluate(verifier, cand, required_verification_kind, scope_id) is not None
+
+                bridged = _bridge.recall_across_languages(
+                    self,
+                    source_text=source_text,
+                    target_language=lang,
+                    verifier=_typed_bool_verifier,
+                    error_class=error_class,
+                )
+                if bridged is None and error_class is not None:
+                    bridged = _bridge.recall_across_languages(
+                        self,
+                        source_text=source_text,
+                        target_language=lang,
+                        verifier=_typed_bool_verifier,
+                        error_class=None,
+                    )
+                if bridged is not None:
+                    cand = str(bridged["patched_source"])
+                    verification = evaluate(verifier, cand, required_verification_kind, scope_id)
+                    if verification is not None:
+                        return {
+                            "skill_id": bridged.get("skill_id"),
+                            "skeleton_fp": "",
+                            "patched_source": cand,
+                            "from_crystallized_memory": True,
+                            "from_cross_language_memory": True,
+                            "from_language": bridged.get("from_language"),
+                            "to_language": bridged.get("to_language"),
+                            "scope_tier": "CROSS_LANGUAGE_LEXICAL_BRIDGE",
+                            "verification": verification,
+                            "whole_task_correctness_proved": False,
+                        }
+            except Exception:
+                pass
+
+            # Stage 4B: Tree-Sitter 7-language CST node-type skeleton carry (`tree_sitter_cst_skill_skeleton_v1`)
+            # Bridges Rust block tail-expressions (no `return`) and structural idioms (`len(x)` <-> `x.len()` / `x.length` / `x.size()`).
+            try:
+                from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+                    recall_across_languages_cst,
+                )
+
+                def _cst_bool_verifier(cand: str) -> bool:
+                    return evaluate(verifier, cand, required_verification_kind, scope_id) is not None
+
+                cst_hit = recall_across_languages_cst(
+                    self,
+                    source_text=source_text,
+                    target_language=lang,
+                    verifier=_cst_bool_verifier,
+                    error_class=error_class,
+                )
+                if cst_hit is None and error_class is not None:
+                    cst_hit = recall_across_languages_cst(
+                        self,
+                        source_text=source_text,
+                        target_language=lang,
+                        verifier=_cst_bool_verifier,
+                        error_class=None,
+                    )
+                if cst_hit is not None:
+                    cand = str(cst_hit["patched_source"])
+                    verification = evaluate(verifier, cand, required_verification_kind, scope_id)
+                    if verification is not None:
+                        return {
+                            "skill_id": cst_hit.get("skill_id"),
+                            "skeleton_fp": "",
+                            "patched_source": cand,
+                            "from_crystallized_memory": True,
+                            "from_cross_language_memory": True,
+                            "from_language": cst_hit.get("from_language"),
+                            "to_language": cst_hit.get("to_language"),
+                            "scope_tier": "CROSS_LANGUAGE_CST_SKELETON",
+                            "verification": verification,
+                            "whole_task_correctness_proved": False,
+                        }
+            except Exception:
+                pass
         return None
+
+    def narrow_rule_scope(
+        self,
+        skill_id: str,
+        instances: list[Mapping[str, Any]],
+        verifier: Callable[[str], bool] | None = None,
+        *,
+        observation_limit: int | None = None,
+    ) -> dict[str, Any]:
+        """Active version-space narrowing via `rule_scope_learning_v1` (`finite_capability_diagnosis.select_probe`)."""
+        from canonical.swe_kernel import rule_scope_learning_v1 as _scope_learner
+
+        conn = _connect(self.db_path)
+        try:
+            row = conn.execute(
+                "SELECT pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                (skill_id,),
+            ).fetchone()
+        finally:
+            conn.close()
+        if row is None:
+            return {"ok": False, "reason": "SKILL_NOT_FOUND", "skill_id": skill_id}
+        rule = json.loads(row[0])
+        report = _scope_learner.learn_scope(
+            rule,
+            instances,
+            verifier=verifier,
+            observation_limit=observation_limit,
+        )
+        if report.get("result") == "MODEL_FALSIFIED":
+            self.invalidate(skill_id, "RULE_SCOPE_MODEL_FALSIFIED")
+            return {**report, "ok": True, "persisted_state": "INVALIDATED"}
+        resolved_scope = report.get("scope")
+        if resolved_scope:
+            conn = _connect(self.db_path)
+            try:
+                with conn:
+                    cur_row = conn.execute(
+                        "SELECT pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                        (skill_id,),
+                    ).fetchone()
+                    if cur_row is not None:
+                        cur_rule = json.loads(cur_row[0])
+                        cur_rule["learned_scope"] = resolved_scope
+                        conn.execute(
+                            "UPDATE crystallized_skills SET pattern_json = ? WHERE skill_id = ?",
+                            (json.dumps(cur_rule, separators=(",", ":")), skill_id),
+                        )
+            finally:
+                conn.close()
+            for key in [k for k in _MEM_SKILLS if k.startswith(f"{self.db_path.resolve()}::")]:
+                _MEM_SKILLS.pop(key, None)
+        return {**report, "ok": True, "persisted_scope": resolved_scope}
 
     # ------------------------------------------------------------------ portability
     # A store inside one checkout is durable but not portable: a second computer starts empty and

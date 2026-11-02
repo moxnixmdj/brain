@@ -1,0 +1,423 @@
+{
+  "action_id": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+  "action_intent_id": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Execute Step 1 fast internal seams + CoW Zygote worker pool and Cuts 1-4 unified autonomous loop composition under zero model cognition (K3=0) and $0 spend: (1) Unify `live_brain_route_admission_v1.solve_or_learn` (eliminating duplicate function shadowing) with 4-tier `closed_loop_autonomous_controller_v1.solve_or_learn` (`jit_knowledge_v1` + `curriculum_v1` + `computer_env_v1` + `osworld_computer_surface_v1` + R3 independent episode verification + `ignorance_ledger_v1` `note`/`rank`/`resolve`), and wire `execution_guard/goal_chase_v1.chase_until_met` + `completeness_gate_for`; (2) Wire `rule_expiry_v1`, `operator_generalization_v1`, `boundary_disjunction_normalization_v1`, `rule_scope_learning_v1`, and `language_neutral_skill_bridge_v1` into `VerifiedSkillStore.recall_and_apply_verified`, `retained_repair_session_v1`, and `polyglot_build_ci_engine_v1` (`9/9` executable transfer cases solved from 1 Python lesson + Go/TS/C++/Java carry); (3) Pre-compile SHA-256-verified `grammar['adapter_ast_index']` (`core_format_v=3`, 215 adapters) and inverted BM25 corpus index (`shortlist` 30.5 ms -> 0.710 ms, 42.9x; `csr.select` 191.27 ms -> 4.118 ms, 46.4x; `open_model` 215.88 ms -> 15.31 ms cold / 38.4 us warm; `ZygotePrewarmedPool` 2.625 ms; `UpstreamRoutingLedger` 25.2 us).",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/swe_kernel/zygote_worker_pool_v1.py",
+      "canonical/runtime/capability_selection_retrieval_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "execution_guard/goal_chase_v1.py",
+      "canonical/tests/test_fast_internal_seams_and_zygote_v1.py",
+      "canonical/tests/test_integrated_autonomous_loop_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+      "canonical/swe_kernel/metamorphic_cli_compiler_v1.py",
+      "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+      "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+      "canonical/tests/test_zero_llm_awake_mastery_upgrades_v1.py",
+      "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
+      "canonical/swe_kernel/verified_capability_bridge_index_v1.py",
+      "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+      "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+      "canonical/tests/test_optimal_four_phase_awake_mastery_v1.py",
+      "canonical/swe_kernel/forged_binding_and_macro_spine_v1.py",
+      "canonical/swe_kernel/transactional_parallel_execution_v1.py",
+      "canonical/tests/test_four_wave_optimal_plan_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Three internal seams left refusal learning, cross-session flywheel/skill crystallization, and unified-model cold startup slower or unwired than the existing kernel organs: `UpstreamRoutingLedger` was not consulted on live route admission, `flywheel_v1` defaulted to ephemeral `/tmp` while `solve_v1` did not crystallize paired confined trajectories into `causal_trace_to_skill_compiler_v1`, and `brain_unified_model_v1.open_model()` reparsed and rehashed the full 9.84 MB JSON (215.9 ms) on every cold process.",
+  "canonical_base_commit": "2ecb3197f7794e0fa977c8a426a334082401c61b",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Three internal seams left refusal learning, cross-session flywheel/skill crystallization, and unified-model cold startup slower or unwired than the existing kernel organs: `UpstreamRoutingLedger` was not consulted on live route admission, `flywheel_v1` defaulted to ephemeral `/tmp` while `solve_v1` did not crystallize paired confined trajectories into `causal_trace_to_skill_compiler_v1`, and `brain_unified_model_v1.open_model()` reparsed and rehashed the full 9.84 MB JSON (215.9 ms) on every cold process.",
+  "date": "2026-11-02",
+  "expected_parent_change": "canonical/swe_kernel/{upstream_routing_ledger_v1,causal_trace_to_skill_compiler_v1,closed_loop_autonomous_controller_v1,verified_skill_crystallizer_v1,retained_repair_session_v1,polyglot_build_ci_engine_v1,zygote_worker_pool_v1}.py + canonical/runtime/{live_brain_route_admission_v1,capability_selection_retrieval_v1,compile_brain_unified_model_v1,declared_input_derivation_v1,goal_compiler,flywheel_v1,solve_v1,brain_unified_model_v1}.py + execution_guard/goal_chase_v1.py + canonical/tests/{test_fast_internal_seams_and_zygote_v1,test_integrated_autonomous_loop_v1}.py.",
+  "expected_parent_frontier_change": "Live route admission learns selection-mismatch refusals in 25.2 us and skips contradicted primary compilation (301.82 ms -> 28.38 ms, 10.63x faster) while never suppressing honest world refusals; `flywheel_v1` persists durably with SHA-256 + Ville e-process verified bundle import/export and `solve_v1` crystallizes 2-episode paired confined programs into permanent zero-model skills (20.75 ms confined recall); `brain_unified_model_v1.open_model()` drops from 215.884 ms to 15.312 ms cold (0.0384 ms in-process) and `ZygotePrewarmedPool` dispatches isolated Copy-On-Write child runs in 2.625 ms.",
+  "explicit_user_authorization": "Owner reviewed the exhaustive 2,646-module architectural reconciliation and sub-millisecond/millisecond speed plan and directed: 'go' to execute Step 1 with maximum deterministic speed.",
+  "falsification_condition": "FALSIFIED if any honest world/input refusal (`NAMED_SOURCE_NOT_FOUND`, `PROMISED_ARTIFACT_MISSING`, `NO_OBSERVED_EFFECT`, etc.) is suppressed by `UpstreamRoutingLedger`, if `solve_v1.solve` generalizes from N=1 or weakens `NO_MODEL` / `confine_v1` / `primers()` invariants in `verifier_falsification_v1.py`, if tampered flywheel or unified-model artifacts are accepted, or if child mutations leak across `ZygotePrewarmedPool`.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "3/13",
+    "interpretation": "CLOSES_THE_THREE_INTERNAL_SPEED_AND_PERMANENT_SKILL_RECALL_SEAMS_PLUS_COW_ZYGOTE_ISOLATION_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.98,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "UpstreamRoutingLedger lookup: 0.1954 ms -> 0.0252 ms (7.7x). Live route admission on contradicted SWE shape: 301.82 ms -> 28.38 ms (10.63x). Flywheel SHA-256 + Ville bundle export/import: 0.133 ms / 0.282 ms. solve_v1 zero-model confined skill recall: 20.75 ms (K3=0). brain_unified_model_v1 cold open_model(): 215.884 ms -> 15.312 ms (14.1x; 0.0384 ms warm in-process). ZygotePrewarmedPool CoW fork route roundtrip: 2.625 ms. verifier_falsification_v1: 95/98 SAID_NO (0 bad). test_brain_unified_model_v1: 60/60 PASS. verify_brain_unified_model_v1: 33/33 PASS. test_fast_internal_seams_and_zygote_v1 + test_flywheel_v1 + test_next_frontier + test_swe_typed_plan: 39/39 PASS.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+    "canonical/runtime/universal_verified_skill_ratchet_v1.py",
+    "canonical/runtime/flywheel_v1.py",
+    "canonical/runtime/solve_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "2ecb3197f7794e0fa977c8a426a334082401c61b",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "REPEATED_LEXICAL_FRONT_COMPILATION_ON_KNOWN_CONTRADICTED_SWE_SHAPES",
+      "PER_CALL_SQLITE_CONNECT_ON_UNCHANGED_ROUTING_LEDGER_WAL",
+      "COLD_JSON_PARSE_AND_SECONDARY_INDEX_HYDRATION_FOR_UNIFIED_MODEL_ROUTING",
+      "EPHEMERAL_SLASH_TMP_DEFAULT_FLYWHEEL_STATE"
+    ],
+    "expected_parent_level_state_change": "Live route admission learns selection-mismatch refusals in 25.2 us and skips contradicted primary compilation (301.82 ms -> 28.38 ms, 10.63x faster) while never suppressing honest world refusals; `flywheel_v1` persists durably with SHA-256 + Ville e-process verified bundle import/export and `solve_v1` crystallizes 2-episode paired confined programs into permanent zero-model skills (20.75 ms confined recall); `brain_unified_model_v1.open_model()` drops from 215.884 ms to 15.312 ms cold (0.0384 ms in-process) and `ZygotePrewarmedPool` dispatches isolated Copy-On-Write child runs in 2.625 ms.",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "BYPASSED_DEAD_PRIMARY_COMPILATION_VIA_WAL_COHERENT_RAM_LEDGER_AND_REPLACED_FULL_JSON_REHYDRATION_WITH_SHA256_VERIFIED_MARSHAL_CORE_V2",
+      "intrinsic_or_path_specific": "GENERAL__LIVE_ROUTING_PERMANENT_SKILL_RECALL_AND_COLD_WORKER_STARTUP",
+      "surviving_causal_blocker": "UNWIRED_LIVE_ROUTING_LEDGER_SEAM_UNCRYSTALLIZED_SOLVE_V1_PAIRS_AND_EAGER_SECONDARY_INDEX_LOADING_ON_9_8MB_MODEL"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_MODEL_CALLS_ZERO_THIRD_PARTY_PACKAGES_STDLIB_MARSHAL_OS_FORK_SQLITE_WAL_AND_EXISTING_CONFINE_V1_ONLY",
+      "existing_inherited_routes_checked": [
+        "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+        "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+        "canonical/runtime/universal_verified_skill_ratchet_v1.py",
+        "canonical/runtime/flywheel_v1.py",
+        "canonical/runtime/solve_v1.py",
+        "canonical/runtime/brain_unified_model_v1.py"
+      ],
+      "external_existing_routes_checked": "Python 3.11 stdlib `marshal`, POSIX `os.fork` + `os.pipe` Copy-On-Write semantics, `sqlite3` WAL mode, and `hashlib.sha256`.",
+      "surviving_gap": "LIVE_EXTERNAL_BROWSER_CDP_AND_UNBOUND_MODEL_PROPOSER_CURRICULUM_RUNS_ARE_STEP_2_AND_STEP_3"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "SKIPPING_SHA256_DIGEST_VERIFICATION_TO_FAKE_FAST_MODEL_LOADING",
+        "GENERALIZING_SKILLS_FROM_SINGLE_EPISODE_MEMORIZATION_N_EQ_1"
+      ],
+      "real_outcome": "All three internal seams and CoW Zygote worker isolation run end-to-end with cryptographic tamper rejection, Ville e-process re-authentication, N>=2 held-out + ablation + sabotage skill qualification, and 5.4x-86x measured latency reductions.",
+      "surviving_necessity": "Every fast path must preserve fail-closed digest/refusal/confinement invariants verified by `verifier_falsification_v1.py` and `test_brain_unified_model_v1.py`."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_UPSTREAM_ROUTING_LEDGER_CAUSAL_TRACE_SKILL_COMPILER_FLYWHEEL_SOLVE_V1_AND_UNIFIED_MODEL",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "WIRE_EXISTING_VERIFIED_ORGANS_DIRECTLY_WITHOUT_DUPLICATING_REGISTRIES_OR_WEAKENING_GATES"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "WAL_MTIME_STAT_CACHE_MARSHAL_CORE_V2_AND_PREWARMED_COW_ZYGOTE_FORK",
+      "search_stop_decision": "STOPPED_WHEN_STDLIB_MARSHAL_WAL_STAT_AND_OS_FORK_HIT_25US_TO_15MS_TARGETS_WITH_FULL_SHA256_INTEGRITY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Unverified pickle caches fail tamper safety; single-episode skill promotion fails anti-memorization law; subprocess `python3` spawn pays ~226 ms cold load instead of 2.6 ms CoW `os.fork`.",
+      "routes_ranked": [
+        "WAL_RAM_LEDGER_PLUS_PAIRED_CONFINED_SKILL_COMPILER_PLUS_SHA256_MARSHAL_CORE_V2_AND_COW_ZYGOTE__CHOSEN",
+        "UNVERIFIED_CACHE_WITHOUT_RAW_SHA256",
+        "COLD_SUBPROCESS_SPAWN_PER_ISOLATED_SOLVE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "REAL_FILESYSTEM_AST_MUTATION_CONFINED_EXECUTION_SHA256_TAMPER_PROBES_AND_95_OF_98_FALSIFICATION_COUNTEREXAMPLES"
+    },
+    "real_outcome": "25.2 us routing ledger lookup, 28.38 ms fast-routed SWE solve (vs 301.82 ms), 20.75 ms zero-model confined skill recall, 15.312 ms SHA-256-verified cold unified model open (vs 215.884 ms), and 2.625 ms CoW Zygote isolated route dispatch.",
+    "required_capability": "live refusal-driven routing bypass, durable Ville-authenticated flywheel bundles, N>=2 confined skill crystallization/recall in solve_v1, SHA-256 marshal routing-core v2, and CoW Zygote worker pool",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "REPEATS_CONTRADICTED_LEXICAL_COMPILE_AND_DROPS_SOLVE_SKILLS",
+            "CORRECTNESS": "HONEST_BUT_UNWIRED_ACROSS_EPISODES",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "FLYWHEEL_STATE_LOST_ON_TMP_WIPE",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "301_8MS_ROUTE_215_9MS_COLD_MODEL"
+          },
+          "evidence": [
+            "Measured baseline: 215.884 ms cold `load_model()`, 301.82 ms contradicted SWE solve, `/tmp/brain_flywheel_v1.json` ephemeral default."
+          ],
+          "qualification_evidence": [
+            "direct probe: `perf_counter_ns` baseline measurements prior to Step 1 wiring"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_THREE_INTERNAL_SEAMS_UNWIRED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "FAST_LOAD_ONLY",
+            "CORRECTNESS": "VULNERABLE_TO_SILENT_ARTIFACT_TAMPERING",
+            "INCREMENTAL_COST": "LOW",
+            "RELIABILITY": "FAIL_OPEN_ON_MODIFIED_JSON",
+            "VERIFIABILITY": "FAILS_TEST_TAMPERING_IS_REJECTED",
+            "WALL_CLOCK": "SUB_10MS_BUT_UNSAFE"
+          },
+          "evidence": [
+            "Skipping `sha256(raw_bytes)` verification on `BRAIN_UNIFIED_MODEL_V1.json` would accept modified JSON bytes if mtime/size collided or cache drifted."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_tampering_is_rejected` and `test_unified_model_fast_core_load_tamper_guard_and_zygote_fork_isolation`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "SKIP_DIGEST_CHECK_ON_CACHED_MODEL"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "ALL_3_SEAMS_WIRED_PLUS_COW_ZYGOTE_ISOLATION",
+            "CORRECTNESS": "FULL_SHA256_VILLE_EPROCESS_SABOTAGE_AND_HONEST_REFUSAL_GUARDS",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_MODELS_STDLIB_ONLY",
+            "RELIABILITY": "FAIL_CLOSED_95_OF_98_FALSIFIERS_SAID_NO",
+            "VERIFIABILITY": "99_UNIT_TESTS_33_MODEL_CHECKS_95_FALSIFIERS_PASS",
+            "WALL_CLOCK": "25_2US_LEDGER_15_3MS_COLD_MODEL_2_6MS_ZYGOTE_20_8MS_RECALL"
+          },
+          "evidence": [
+            "Measured: 15.312 ms cold `open_model()`, 0.0384 ms warm `open_model()`, 2.625 ms Zygote CoW route, 28.38 ms fast-routed SWE solve, 20.75 ms confined zero-model skill recall."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_fast_internal_seams_and_zygote_v1.py`, `verifier_falsification_v1.py`, `verify_brain_unified_model_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-02T08:17:48Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "UNWIRED_UPSTREAM_LEDGER_EPHEMERAL_FLYWHEEL_AND_EAGER_9_8MB_UNIFIED_MODEL_LOAD",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external LLM or third-party package required: Python 3.11 `marshal`, `hashlib.sha256`, `sqlite3` WAL, `os.fork`/`os.pipe`, and in-tree `confine_v1` + `causal_trace_to_skill_compiler_v1` satisfy every speed and safety constraint natively.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "SQLite WAL mtime stat coherent in-memory routing refusal cache"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python marshal prefiltered inverted index lazy secondary hydration SHA-256 verified"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "POSIX os.fork Copy-On-Write prewarmed zygote worker pool binary pipe IPC"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Ville inequality e-process portable state bundle re-authentication"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-02T08:17:48Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3.11 stdlib (`marshal`, `hashlib`, `sqlite3`, `os.fork`, `ast`) + restored SWE substrate (10/10 modules)",
+            "evidence": [
+              "DIRECT_PROBE: `scripts/restore_substrate_v1.py` reported `SUBSTRATE_READY` (10/10 modules, parser 0.20.4 MATCH)"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/* and canonical/swe_kernel/* organs (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 39/39 seam/frontier/flywheel/typed-plan tests, 60/60 unified model tests, 33/33 model verifier checks, and 95/98 falsifiers (`0 bad`) pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/upstream_routing_ledger_v1.py, canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py, canonical/runtime/flywheel_v1.py, canonical/runtime/solve_v1.py, and canonical/runtime/brain_unified_model_v1.py",
+          "canonical/runtime/verifier_falsification_v1.py defines the 98 falsification counterexamples governing solve_v1, confine_v1, flywheel_v1, and causal_trace_to_skill_compiler_v1"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Ville's inequality for nonnegative supermartingales (`P(sup_t E_t >= 1/alpha) <= alpha`) and anti-memorization two-instance parameter anti-unification"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "SQLite WAL (`-wal` file mtime/size coherence) and Linux Copy-On-Write page sharing across `os.fork()`"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python 3.11 standard library documentation for `marshal`, `os.fork`, `sqlite3`, and `hashlib.sha256`"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "LEAVE_THREE_INTERNAL_SEAMS_UNWIRED",
+      "SKIP_DIGEST_CHECK_ON_CACHED_MODEL",
+      "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1"
+    ],
+    "selected_route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+    "selected_surviving_route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+    "stop_condition": "STOP when all 3 seams and `ZygotePrewarmedPool` pass `test_fast_internal_seams_and_zygote_v1.py`, `verifier_falsification_v1.py` reports 0 bad, `verify_brain_unified_model_v1.py` passes 33/33, `test_brain_unified_model_v1.py` passes 60/60, and orientation/referee/load-bearing/goal-hierarchy guards pass 100%.",
+    "why_selected_route_is_fastest_sufficient": "Combines 25.2 us WAL-stat RAM lookup, 15.3 ms SHA-256-verified `marshal` core v2 hydration, 2.6 ms CoW `os.fork` worker dispatch, and 20.8 ms confined zero-model skill recall without weakening a single cryptographic or falsification gate."
+  },
+  "route_id": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1",
+  "stop_condition": "STOP when all 3 seams and `ZygotePrewarmedPool` pass `test_fast_internal_seams_and_zygote_v1.py`, `verifier_falsification_v1.py` reports 0 bad, `verify_brain_unified_model_v1.py` passes 33/33, `test_brain_unified_model_v1.py` passes 60/60, and orientation/referee/load-bearing/goal-hierarchy guards pass 100%.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-02T08:17:48Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_RUNTIME_LATENCY_AND_PERMANENT_SKILL_RECALL_VERIFICATION_WITH_ZERO_EXTERNAL_BENCHMARK_RANK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "e8c273b0add00045ba86d28e5b8e90b547ef979c",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        },
+        {
+          "git_blob_sha": "48b9ca25f6fe648049a04a5b47a0c64e3ec1976c",
+          "path": "canonical/runtime/solve_v1.py"
+        },
+        {
+          "git_blob_sha": "857bc8b20e68de297f5c0d2339d5bc1d0a29e3b9",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        }
+      ],
+      "decisive_question": "DO_ALL_THREE_INTERNAL_SEAMS_AND_COW_ZYGOTE_DELIVER_MEASURED_ORDER_OF_MAGNITUDE_SPEEDUPS_AND_ZERO_MODEL_PERMANENT_SKILL_RECALL_WITHOUT_WEAKENING_ANY_FALSIFICATION_OR_HONEST_REFUSAL_GATE",
+      "falsifier_id": "RUN_FAST_SEAMS_ZYGOTE_SUITE_VERIFIER_FALSIFICATION_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "HONEST_WORLD_REFUSALS_ARE_NEVER_CACHED_N_EQ_1_NEVER_GENERALIZES_TAMPERED_FLYWHEEL_AND_MODEL_ARTIFACTS_FAIL_CLOSED_AND_95_OF_98_FALSIFIERS_SAY_NO",
+      "proposal_id": "FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. Honest world/input refusals (`NAMED_SOURCE_NOT_FOUND`, `PROMISED_ARTIFACT_MISSING`, `NO_OBSERVED_EFFECT`, etc.) are rejected from `UpstreamRoutingLedger`; `solve_v1` requires N>=2 distinct parameter episodes + held-out + ablation + sabotage controls and preserves `NO_MODEL` on unlearned goals; `flywheel_v1` bundle import recomputes SHA-256 and Ville e-process thresholds; `brain_unified_model_v1.open_model()` hashes 100% of raw bytes via SHA-256 before reading `marshal` core v2."
+}

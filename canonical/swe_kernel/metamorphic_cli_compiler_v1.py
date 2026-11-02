@@ -37,7 +37,7 @@ def _ensure_trailing_newline(raw: bytes) -> bytes:
 
 
 def build_metamorphic_tuple(real_bytes: bytes, *, k: int = 5) -> dict[str, Any] | None:
-    """Construct `(F_0, F_cat, F_wdup, F_sing, F_nonadj)` purely from `real_bytes`."""
+    """Construct `(F_0, F_cat, F_wdup, F_sing, F_nonadj, F_blank, F_long)` purely from `real_bytes`."""
     norm = _ensure_trailing_newline(real_bytes)
     lines = norm.splitlines()
     if len(lines) < 2:
@@ -49,19 +49,60 @@ def build_metamorphic_tuple(real_bytes: bytes, *, k: int = 5) -> dict[str, Any] 
 
     f0 = b"\n".join(lines) + b"\n"
     f_cat = f0 + f0
-    f_wdup = b"\n".join((ln + b" " + ln if ln else b"a a") for ln in lines) + b"\n"
+    f_wdup = b"\n".join((ln + b" " + ln if ln else b"") for ln in lines) + b"\n"
     f_sing = f0 + b"\n".join(fresh_lines) + b"\n"
     # Prepend fresh_lines at top AND append at bottom so every fresh twin is >= len(lines) apart!
     f_nonadj = b"\n".join(fresh_lines) + b"\n" + f0 + b"\n".join(fresh_lines) + b"\n"
+    # k blank lines appended: separates total lines (`+k`) from non-empty lines (`+0`) and blank lines (`+k`, sing `+0`)!
+    f_blank = f0 + (b"\n" * k)
+    # One line exactly `max_len + 37` ASCII chars long: uniquely identifies max-line-length (`+37`)!
+    max_len = max((len(ln) for ln in lines), default=0)
+    long_line = b"x" * (max_len + 37)
+    f_long = f0 + long_line + b"\n"
 
     return {
         "k": k,
+        "long_delta": 37,
         "f0": f0,
         "f_cat": f_cat,
         "f_wdup": f_wdup,
         "f_sing": f_sing,
         "f_nonadj": f_nonadj,
+        "f_blank": f_blank,
+        "f_long": f_long,
     }
+
+
+_METAMORPHIC_PHRASE_MAP: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("nonemptylines", ("non-empty lines", "nonempty lines", "non empty lines", "non-blank lines", "nonblank lines")),
+    ("blanklines", ("blank lines", "empty lines", "blank line", "empty line")),
+    ("maxlinelen", ("longest line length", "maximum line length", "max line length", "width of the longest line", "length of the longest line", "longest line")),
+    ("uniquelines", ("unique lines", "uniquelines", "distinct lines", "different lines")),
+    ("duplicatelines", ("duplicate lines", "duplicated lines", "repeated lines", "lines that repeat", "lines that appear more than once")),
+    ("words", ("words", "word")),
+    ("bytes", ("bytes", "byte", "size")),
+    ("lines", ("lines", "line", "newlines", "rows")),
+)
+
+_METAMORPHIC_PIPELINE_CACHE: dict[tuple[str, tuple[tuple[str, int], ...]], list[list[list[str]]]] = {}
+
+
+def metamorphic_signature_kind(gap: str, *, only_beyond_table: bool = False) -> str | None:
+    """Map a natural-language measurement goal to its behavioral perturbation signature family."""
+    text = " ".join(str(gap or "").lower().split())
+    if not text or "per line" in text or "per word" in text:
+        return None
+    beyond = {"nonemptylines", "blanklines", "maxlinelen"}
+    best: tuple[int, str] | None = None
+    for kind, phrases in _METAMORPHIC_PHRASE_MAP:
+        if only_beyond_table and kind not in beyond:
+            continue
+        for phr in phrases:
+            if phr in text:
+                cand = (len(phr), kind)
+                if best is None or cand[0] > best[0]:
+                    best = cand
+    return best[1] if best is not None else None
 
 
 def _parse_single_int(out: bytes) -> int | None:
@@ -160,23 +201,41 @@ def classify_metamorphic_signature(
     k: int,
     f0_bytes: bytes,
     fwdup_bytes: bytes,
+    long_delta: int = 37,
 ) -> str | None:
-    """Map observed `(v0, v_cat, v_wdup, v_sing, v_nonadj)` to its unique algebraic kind."""
+    """Map observed perturbation outputs to their unique algebraic scaling family."""
     v0 = vals["f0"]
     v_cat = vals["f_cat"]
     v_wdup = vals["f_wdup"]
     v_sing = vals["f_sing"]
     v_nonadj = vals["f_nonadj"]
+    v_blank = vals.get("f_blank")
+    v_long = vals.get("f_long")
 
     d_sing = v_sing - v0
     d_nonadj = v_nonadj - v0
+    d_blank = (v_blank - v0) if v_blank is not None else None
+    d_long = (v_long - v0) if v_long is not None else None
+
+    # 0a. Blank lines (`blanklines`): doubles on F||F, +k on blank lines, +0 on non-empty singletons/twins!
+    if v0 >= 0 and d_blank == k and d_sing == 0 and d_nonadj == 0 and v_cat == 2 * v0:
+        return "blanklines"
+
+    # 0b. Max line length (`maxlinelen`, e.g. `wc -L`): invariant on F||F & blank lines, +long_delta on f_long!
+    if v0 >= 0 and v_cat == v0 and (d_blank in (0, None)) and d_long == long_delta:
+        return "maxlinelen"
 
     # Constant / version printer rejection: must respond to injected lines/bytes!
     if d_sing == 0 and d_nonadj == 0:
         return None
 
-    # 1. Total lines: doubles on F||F, invariant to within-line doubling, +k on sing, +2k on nonadj
-    if v0 > 0 and v_cat == 2 * v0 and v_wdup == v0 and d_sing == k and d_nonadj == 2 * k:
+    # 1a. Non-empty lines (`nonemptylines`): doubles on F||F, invariant to within-line doubling (on non-empty lines),
+    #     +0 on blank lines, +k on sing, +2k on nonadj!
+    if v0 > 0 and d_blank == 0 and v_cat == 2 * v0 and d_sing == k and d_nonadj == 2 * k and v_wdup != 2 * v0:
+        return "nonemptylines"
+
+    # 1b. Total lines: doubles on F||F, invariant to within-line doubling, +k on blank, +k on sing, +2k on nonadj
+    if v0 > 0 and v_cat == 2 * v0 and v_wdup == v0 and (d_blank in (k, None)) and d_sing == k and d_nonadj == 2 * k:
         return "lines"
 
     # 2. Distinct lines (`uniquelines`): invariant on F||F, invariant on within-line doubling,
@@ -190,8 +249,8 @@ def classify_metamorphic_signature(
         return "duplicatelines"
 
     # 4. Total words (`words`): doubles on F||F, doubles on within-line token doubling (when non-empty lines),
-    #    +k single-token fresh lines on sing, +2k on nonadj
-    if v0 > 0 and v_cat == 2 * v0 and v_wdup == 2 * v0 and d_sing == k and d_nonadj == 2 * k:
+    #    +0 on blank lines, +k single-token fresh lines on sing, +2k on nonadj
+    if v0 > 0 and v_cat == 2 * v0 and v_wdup == 2 * v0 and (d_blank in (0, None)) and d_sing == k and d_nonadj == 2 * k:
         return "words"
 
     # 5. Exact byte count (`bytes`): tracks byte delta on every perturbation
@@ -212,9 +271,8 @@ def evaluate_pipeline_signature(
     *,
     timeout: float = 2.0,
 ) -> dict[str, Any] | None:
-    """Measure `stages` across the 5 metamorphic perturbations and classify its behavioral kind."""
+    """Measure `stages` across the metamorphic perturbations and classify its behavioral kind."""
     vals: dict[str, int] = {}
-    # Fast-reject on f0 and f_sing first before paying for all 5 invocations!
     v0 = _run_pipeline_bytes(stages, files_map["f0"], timeout=timeout)
     if v0 is None or v0 < 0:
         return None
@@ -222,7 +280,17 @@ def evaluate_pipeline_signature(
     if v_sing is None:
         return None
     v_nonadj = _run_pipeline_bytes(stages, files_map["f_nonadj"], timeout=timeout)
-    if v_nonadj is None or (v_sing == v0 and v_nonadj == v0):
+    if v_nonadj is None:
+        return None
+    v_blank = _run_pipeline_bytes(stages, files_map["f_blank"], timeout=timeout) if "f_blank" in files_map else None
+    v_long = _run_pipeline_bytes(stages, files_map["f_long"], timeout=timeout) if "f_long" in files_map else None
+    # Constant-printer fast reject only if ALL perturbations stay identical to v0
+    if (
+        v_sing == v0
+        and v_nonadj == v0
+        and (v_blank is None or v_blank == v0)
+        and (v_long is None or v_long == v0)
+    ):
         return None
     v_cat = _run_pipeline_bytes(stages, files_map["f_cat"], timeout=timeout)
     if v_cat is None:
@@ -238,11 +306,16 @@ def evaluate_pipeline_signature(
         "f_sing": v_sing,
         "f_nonadj": v_nonadj,
     }
+    if v_blank is not None:
+        vals["f_blank"] = v_blank
+    if v_long is not None:
+        vals["f_long"] = v_long
     kind = classify_metamorphic_signature(
         vals,
         k=int(meta["k"]),
         f0_bytes=meta["f0"],
         fwdup_bytes=meta["f_wdup"],
+        long_delta=int(meta.get("long_delta", 37)),
     )
     return {
         "stages": [list(s) for s in stages],
@@ -311,11 +384,59 @@ def answer_query_by_metamorphic_signature(
             single_candidates.append([[p, fl, "{in}"]])
             if fl in ("-c", "--count"):
                 single_candidates.append([[p, fl, "", "{in}"]])
+                single_candidates.append([[p, fl, ".", "{in}"]])
+                single_candidates.append([[p, fl, "^$", "{in}"]])
+
+    bin_sig = tuple(
+        sorted(
+            (
+                os.path.realpath(shutil.which(p) or p),
+                os.stat(shutil.which(p) or p).st_mtime_ns if os.path.exists(shutil.which(p) or p) else 0,
+            )
+            for p in progs
+        )
+    )
+    cache_key = (kind, bin_sig)
+    cached_pipelines = _METAMORPHIC_PIPELINE_CACHE.get(cache_key)
+    if cached_pipelines and len(cached_pipelines) >= min_agreement:
+        fast_survivors: list[dict[str, Any]] = []
+        for stages in cached_pipelines:
+            exact_val = _run_pipeline_bytes(stages, fpath, timeout=timeout)
+            if exact_val is not None:
+                real_bin = "|".join(os.path.realpath(shutil.which(s[0]) or s[0]) for s in stages)
+                fast_survivors.append({
+                    "stages": stages,
+                    "values": {"cached": 1},
+                    "exact_answer": str(exact_val),
+                    "real_binary": real_bin,
+                })
+        votes_fast: dict[str, set[str]] = {}
+        for sv in fast_survivors:
+            votes_fast.setdefault(sv["exact_answer"], set()).add(sv["real_binary"])
+        if votes_fast:
+            best_ans, bins = sorted(votes_fast.items(), key=lambda kv: (-len(kv[1]), kv[0]))[0]
+            if len(bins) >= min_agreement:
+                return {
+                    "pass": True,
+                    "status": (
+                        "PASS__MEASURED_BY_METAMORPHIC_AGREEMENT"
+                        if len(bins) > 1
+                        else "PASS__MEASURED_BY_METAMORPHIC_SIGNATURE"
+                    ),
+                    "kind": kind,
+                    "value": best_ans,
+                    "answer": best_ans,
+                    "agreement": len(bins),
+                    "from_memory": True,
+                    "table_free_metamorphic": True,
+                    "survivors": [{"argv": sv["stages"], "metamorphic_values": sv["values"]} for sv in fast_survivors],
+                    "votes": {k: sorted(v) for k, v in votes_fast.items()},
+                }
 
     with tempfile.TemporaryDirectory(prefix="brain_meta_sig_") as td:
         tdir = pathlib.Path(td)
         files_map: dict[str, pathlib.Path] = {}
-        for key in ("f0", "f_cat", "f_wdup", "f_sing", "f_nonadj"):
+        for key in ("f0", "f_cat", "f_wdup", "f_sing", "f_nonadj", "f_blank", "f_long"):
             fp = tdir / f"{key}.txt"
             fp.write_bytes(meta[key])
             os.chmod(fp, 0o444)
@@ -443,6 +564,8 @@ def answer_query_by_metamorphic_signature(
             "kind": kind,
         }
 
+    _METAMORPHIC_PIPELINE_CACHE[cache_key] = [sv["stages"] for sv in matched_survivors]
+
     return {
         "pass": True,
         "status": (
@@ -454,6 +577,7 @@ def answer_query_by_metamorphic_signature(
         "value": best_ans,
         "answer": best_ans,
         "agreement": len(bins),
+        "from_memory": False,
         "table_free_metamorphic": True,
         "survivors": [
             {"argv": sv["stages"], "metamorphic_values": sv["values"]}
