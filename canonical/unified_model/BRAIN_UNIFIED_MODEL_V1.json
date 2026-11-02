@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6618,
+  "research_index_records": 6620,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 431,
-  "source_index_modules": 1910
+  "source_index_modules": 1911
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "586b7dd3289410d8c64d97e8c5f874a321c74a44d4b034b25f4334da10b03570"
+  "value": "77a11060e0c29f56e52cb7109cb2d07117be503b8d9e16db2a32f7fdac876dc6"
  },
  "engines": [
   {
@@ -30975,7 +30975,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "adaptive",
@@ -30993,7 +30993,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "adequate",
@@ -31011,7 +31011,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "bound",
@@ -31029,7 +31029,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "capability",
@@ -31047,7 +31047,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "certified",
@@ -31065,7 +31065,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "compiled",
@@ -31083,7 +31083,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "h100",
@@ -31101,7 +31101,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "improvement",
@@ -31119,7 +31119,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "learning",
@@ -31137,7 +31137,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "live",
@@ -31155,7 +31155,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "live",
@@ -31173,7 +31173,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "mystery",
@@ -31191,7 +31191,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "oewn",
@@ -31210,7 +31210,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "ownership",
@@ -31228,7 +31228,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "p3"
@@ -31245,7 +31245,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "raw",
@@ -31263,7 +31263,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "reached",
@@ -31282,7 +31282,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "repair",
@@ -31300,7 +31300,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "repair",
@@ -31318,7 +31318,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "semantic",
@@ -31336,7 +31336,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "semantic",
@@ -31354,7 +31354,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "terminal",
@@ -31372,7 +31372,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "terminal",
@@ -31390,7 +31390,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "terminal",
@@ -31408,7 +31408,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "universal",
@@ -31426,7 +31426,7 @@
     "call": "one_shot_reality_closure_v2.run",
     "carrier": "one_shot_reality_closure_v2.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "one",
@@ -61527,7 +61527,7 @@
   "included_source_count": 1033,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e27cac5c08fff272ccc340ddee2119d7173061fe5e1744906db822b32dd3cc72"
+  "source_tree_digest": "cbee41532983f3bbd9f1cbacd3706f752fe822af9723544f88c9e2933e4d46d8"
  },
  "research_index": [
   {
@@ -136937,6 +136937,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CONTINUOUS_SELF_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CONTINUOUS_SELF_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "71fb5630bb962a01f1a98555b86452eb699aa6faf247f76490cf9a928a6ee8a6",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "continuous": 1,
+    "counterexample": 1,
+    "known": 1,
+    "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/CONTRACT_NATIVE_ACTUAL_POLICY_FRESH_REPLAY_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -209612,6 +209631,51 @@
    }
   },
   {
+   "action_id": "CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d7746a74f4b70d5f981f04970986e14a6b027b1b214907209786c04c59c1054b",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 2,
+    "accumulates": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "anything": 1,
+    "arrives": 1,
+    "ask": 1,
+    "benchmark": 1,
+    "built": 1,
+    "continuous": 3,
+    "continuous_self_survives_restart_v1_20261102": 1,
+    "did": 1,
+    "disk": 1,
+    "durable": 1,
+    "every": 1,
+    "exist": 1,
+    "exists": 1,
+    "exits": 1,
+    "first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "happens": 1,
+    "invoked": 1,
+    "lives": 1,
+    "module": 1,
+    "moves": 1,
+    "no": 1,
+    "not": 1,
+    "nothing": 1,
+    "one": 1,
+    "process": 2,
+    "question": 2,
+    "tree": 2
+   }
+  },
+  {
    "action_id": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -222742,7 +222806,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
-   "sha256": "b33eedb222fac9583aa179d907d4001c1538837bd022b09197b0607c0fb05a67",
+   "sha256": "47c43d15e2fa0df4e829a31c6d72ba569876779c424f2047362225f7777ef450",
    "summary": "Autonomous verified self-improvement loop V1.",
    "symbol_count": 45,
    "symbols": [
@@ -234093,7 +234157,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "d352f22093d0324b46baaf2364af5e3f2a8367c9736ef70a7bd6d4dcdead3a22",
+   "sha256": "607cfce7ba0166380c010b748cc0b2a8dd0fadb3067696a0f24badfe90849f0a",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 50,
    "symbols": [
@@ -234480,6 +234544,39 @@
     "utc": 1,
     "validate_context": 1,
     "work": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/continuous_self_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/continuous_self_v1.py",
+   "sha256": "de198f9e77bb21f505f8102bfc182c9e66a0665cbcf85ca22459f44cc5c31de9",
+   "summary": "One thread that does not stop when a task ends.",
+   "symbol_count": 4,
+   "symbols": [
+    "ContinuousSelf",
+    "SelfState",
+    "_now",
+    "install_signal_handlers"
+   ],
+   "terms": {
+    "continuous": 1,
+    "continuousself": 1,
+    "ends": 1,
+    "install_signal_handlers": 1,
+    "not": 1,
+    "now": 1,
+    "one": 1,
+    "self": 1,
+    "selfstate": 1,
+    "stop": 1,
+    "task": 1,
+    "thread": 1,
+    "v1": 1
    }
   },
   {
@@ -287067,15 +287164,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-   "sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c",
+   "sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a",
    "summary": "Unified Cognitive Fabric V1.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "CognitiveFabricError",
     "_auto_mode",
     "_auto_one_shot_summary",
     "_bounded_r3_direct_observation",
     "_decision_requires_user_information",
+    "_manual_learning_retry_context",
     "_run_adequate_decision_engine",
     "_unwrap_live_runtime",
     "catalog",
@@ -287090,6 +287188,7 @@
     "cognitivefabricerror": 1,
     "decision_requires_user_information": 1,
     "fabric": 2,
+    "manual_learning_retry_context": 1,
     "run": 1,
     "run_adequate_decision_engine": 1,
     "unified": 2,
