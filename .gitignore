@@ -37,6 +37,13 @@ canonical/astra_runtime/state/E2E_*
 # commit it as if it were evidence.
 LONG_HORIZON_CONTINUITY_REPORT.json
 
+# The continuous creature's durable self, journal and standing are continuity carried
+# as a workflow artifact, never committed -- exactly like the durable learning store
+# (`live_learning_cycle_v1`: "durable learning is carried as an artifact, never committed").
+# Committing them would let two runners disagree about who the same creature is, and a
+# `git add -A` must never mistake run litter for evidence.
+canonical/astra_runtime/state/creature_v1/
+
 # scratch worlds and spool artifacts from live measurements
 canonical/astra_runtime/tmp/spool_*
 canonical/astra_runtime/tmp/tmp_*

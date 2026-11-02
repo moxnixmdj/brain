@@ -1,0 +1,77 @@
+name: the creature actually runs
+# Three modules -- continuous_self_v1 (10 tests), creature_stakes_and_initiative_v1 (16),
+# ignorance_ledger_v1 (13) -- each pass, and until creature_v1 none was ever started:
+# continuous_self_v1 had no __main__, ContinuousSelf( appeared only inside its own test, and
+# choose()/work() had zero non-test callers. So continuous-self.yml and creature-stakes.yml
+# proved on every PR that a creature WOULD survive a kill and WOULD be changed by its history,
+# and no creature existed to kill.
+#
+# This is the switch. It proves the composed creature starts as a real process:
+#   1. the test suite, which includes a SIGKILL mid-task through the composition -- the loop runs
+#      in a subprocess, is killed from outside, and must come back as the same identity with the
+#      in-flight gap reported INTERRUPTED;
+#   2. a read-only --report against the REAL tracked ignorance ledger (82 open gaps), showing the
+#      creature's own criterion beats random selection on what the machine actually does not know.
+#
+# DELIBERATELY NOT ON A SCHEDULE. A scheduled run would give the machine a standing reason to act
+# on its own initiative between invocations, and what it is permitted to initiate is the owner's
+# decision (OPTIMAL_PLAN_20261102_V2.md §7.3), not an agent's. This workflow proves it runs; it
+# does not turn it loose. It never pushes, never merges, never writes to main, and --report is
+# read-only on the tracked ledger (asserted by test_a_run_against_a_temp_ledger_never_writes_the_
+# tracked_one and re-checked here by hash).
+#
+# Authority: NONE. Credit: 0. Spend: $0. Model dependency: 0.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "canonical/runtime/creature_v1.py"
+      - "canonical/tests/test_creature_v1.py"
+      - "canonical/runtime/continuous_self_v1.py"
+      - "canonical/runtime/creature_stakes_and_initiative_v1.py"
+      - "canonical/runtime/ignorance_ledger_v1.py"
+      - ".github/workflows/the-creature-actually-runs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  runs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+
+      - name: it survives a kill and is changed by its history (the composition, not the parts)
+        run: python -m pytest canonical/tests/test_creature_v1.py -q
+
+      - name: the tracked ledger must not move when it is only reported on
+        run: |
+          set -euo pipefail
+          led="canonical/astra_runtime/state/IGNORANCE_LEDGER_V1.json"
+          before="$(sha256sum "$led" | cut -d' ' -f1)"
+          python3 -m canonical.runtime.creature_v1 --report --json \
+            --state-dir /tmp/creature_ci --ledger "$led" > /tmp/creature_report.json
+          after="$(sha256sum "$led" | cut -d' ' -f1)"
+          if [ "$before" != "$after" ]; then
+            echo "the report MUTATED the tracked ledger ($before -> $after)"; exit 1
+          fi
+          echo "tracked ledger unchanged: $before"
+
+      - name: publish what it is and whether its criterion beats luck
+        if: always()
+        run: |
+          if [ -f /tmp/creature_report.json ]; then
+            {
+              echo "### the creature, reported on the real ledger"
+              echo '```json'
+              python3 -c "import json;d=json.load(open('/tmp/creature_report.json'));print(json.dumps({k:d[k] for k in ('identity','epoch','obligations_open','ledger','standing','selection') if k in d}, indent=1))"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "the creature produced no report" >> "$GITHUB_STEP_SUMMARY"
+          fi
