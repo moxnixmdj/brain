@@ -179,6 +179,7 @@ def test_move2b_egraph_congruence_closed_algebraic_rule_generalization() -> None
                 language="python",
                 error_class="ARITHMETIC",
                 verifier=lambda c, chk=check: _exec_check(c, chk),
+                allow_scope_escalation=True,
             )
             assert hit is not None and hit["scope_tier"] == "SCOPE_ALGEBRAIC"
 
@@ -188,6 +189,7 @@ def test_move2b_egraph_congruence_closed_algebraic_rule_generalization() -> None
             language="python",
             error_class="ARITHMETIC",
             verifier=lambda _c: False,
+            allow_scope_escalation=True,
         )
         assert rejected is None
 

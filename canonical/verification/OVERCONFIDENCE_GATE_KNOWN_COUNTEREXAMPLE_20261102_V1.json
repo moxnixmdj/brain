@@ -1,0 +1,22 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Refuse acceptance while the calibration ledger measures SYSTEMATICALLY_OVERCONFIDENT (canonical/runtime/raw_goal_trace_acceptance_v1.verify + self_prediction_calibration_v1.gate)",
+ "falsifier_id": "OVERCONFIDENCE_GATE_IS_A_CONSEQUENCE_NOT_A_CORRECTION",
+ "decisive_question": "Does refusing acceptance while overconfident make the system less overconfident?",
+ "answer": "NO",
+ "counterexamples": [
+  "The gate changes what is accepted, not what is predicted. A system can keep claiming 0.85 and be refused forever; the refusal removes the evidence it would need to become calibrated, so the gate can freeze the very state it objects to.",
+  "The measurement is only as independent as the inspectors. Predictions settled by a weak inspector produce a confident, wrong score, and the gate then refuses on the strength of a bad measurement.",
+  "The refusal covers acceptance, not action. Work still executes, artifacts are still written; only the acceptance verdict is withheld. Anything downstream that reads the artifact without consulting the acceptance path is unaffected.",
+  "Failed attempts settle as failures rather than staying unrecorded only where an inspector exists; a step with no inspector settles as a failure, which is right, but it also means coverage gaps push the ledger down rather than being held out."
+ ],
+ "measured": {
+  "overconfident_and_discriminative_ledger": "MEASURED_OVERCONFIDENCE, verify returns REFUSED__MEASURED_OVERCONFIDENCE",
+  "same_ledger_after_honest_attempts": "NO_MEASURED_OVERCONFIDENCE, refusal lifts",
+  "empty_ledger": "INSUFFICIENT_EVIDENCE, gate does not refuse and reports that it ran",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The score now has a consequence, which is the difference between a dashboard and a self-model. It is a consequence, not a correction: nothing here makes the system better at predicting itself, and a refusal can persist indefinitely. The first counterexample is the one to watch -- a gate that blocks the evidence needed to escape it is a trap, and only an external hard-task slice avoids it.",
+ "what_would_closes_it": "Not applicable as stated: closing it requires the scheduler step (B4) that forces the hard slice, so the system can accumulate honest hard-case evidence while refused."
+}

@@ -1,0 +1,21 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Score stated expectations about own performance against independent verdicts (canonical/runtime/self_prediction_calibration_v1.py)",
+ "falsifier_id": "SELF_PREDICTION_ACCURATE_NOT_A_SELF_MODEL",
+ "decisive_question": "Does an accurate calibration score mean the system has a self-model that changes what it does?",
+ "answer": "NO",
+ "counterexamples": [
+  "An accurate score can come from an easy subset: if predictions are declared only on tasks the system is already good at, the ledger is calibrated and says nothing about the tasks it fails. The score is only as informative as the sample, and nothing here forces the sample to be representative.",
+  "Accuracy is not self-relation: the score is computed after the fact by a scorer, not by the system noticing anything. A system can be perfectly calibrated and never once look inward.",
+  "Nothing consumes the number yet. No attempt is accepted or refused because of it, so an accurate self-prediction currently changes no behaviour."
+ ],
+ "measured": {
+  "constant_predictor_verdict": "NO_DISCRIMINATION (discrimination 0.0, skill -0.64 over 40 settled pairs)",
+  "calibrated_predictor_verdict": "CALIBRATED",
+  "confidently_wrong_predictor_verdict": "WORSE_THAN_BASE_RATE",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "This measures whether stated expectations are true. It does not measure sentience, experience or selfhood, and an accurate score is a precondition, not evidence of a creature. Said in the module docstring and in the report payload, which carries measures / does_not_measure fields so the scope travels with the number.",
+ "what_would_close_it": "Closing the feedback loop: the score must change what the system attempts next, and the sample must be forced to include the tasks it expects to fail."
+}

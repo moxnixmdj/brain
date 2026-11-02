@@ -815,7 +815,8 @@ class VerifiedSkillStore:
         required_verification_kind: str = 'CALLER_PREDICATE',
         scope_id: str = '',
         context: Mapping[str, Any] | None = None,
-        allow_scope_escalation: bool = True,
+        allow_operator_generalization: bool = False,
+        allow_scope_escalation: bool = False,
         allow_cross_language: bool = True,
         now_world_fingerprint: Mapping[str, Any] | None = None,
     ) -> dict[str, Any] | None:
@@ -823,9 +824,14 @@ class VerifiedSkillStore:
 
         Callbacks are trusted verifiers, not authenticated third-party attestations.
         Boolean callbacks never establish TEST_SUITE or whole-task correctness.
+        Operator generalization is opt-in and requires scoped TEST_SUITE evidence.
         """
         if required_verification_kind not in KINDS:
             raise ValueError('UNKNOWN_VERIFICATION_KIND')
+        if type(allow_operator_generalization) is not bool:
+            raise ValueError('INVALID_OPERATOR_GENERALIZATION_SETTING')
+        if allow_operator_generalization and (required_verification_kind != 'TEST_SUITE' or not scope_id or language.lower() != 'python'):
+            raise ValueError('OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE')
         lang = language.lower()
         rules = _load_rules(self.db_path, lang)
 
@@ -856,7 +862,13 @@ class VerifiedSkillStore:
                 + [r for r in rules if r.get("error_class") != error_class]
             )
 
-        def _commit_verified_hit(rule: dict[str, Any], candidate: str, verification: dict[str, Any], scope_tier: str) -> dict[str, Any] | None:
+        def _commit_verified_hit(
+            rule: dict[str, Any],
+            candidate: str,
+            verification: dict[str, Any],
+            scope_tier: str,
+            recall_strategy: str,
+        ) -> dict[str, Any] | None:
             conn = _connect(self.db_path)
             try:
                 with conn:
@@ -878,6 +890,7 @@ class VerifiedSkillStore:
                 "patched_source": candidate,
                 "from_crystallized_memory": True,
                 "scope_tier": scope_tier,
+                "recall_strategy": recall_strategy,
                 "verification": verification,
                 "whole_task_correctness_proved": False,
             }
@@ -895,6 +908,7 @@ class VerifiedSkillStore:
 
             learned_scope = str(rule.get("learned_scope") or "SCOPE_ALGEBRAIC")
             seen_candidates: set[str] = {source_text}
+            invalidated_mid_run = False
 
             # Stage 1 (`SCOPE_STATEMENT`): fast direct skeleton unification (< 100 us)
             for candidate in itertools.islice(iter_crystallized_code_rule_candidates(source_text, rule), 16):
@@ -903,78 +917,112 @@ class VerifiedSkillStore:
                 seen_candidates.add(candidate)
                 verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
                 if verification is not None:
-                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_STATEMENT")
+                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_STATEMENT", "statement")
                     if hit is not None:
                         return hit
+                    invalidated_mid_run = True
                     break
-            else:
-                # Stage 2 (`SCOPE_OPERATOR`), Stage 3 (`SCOPE_SEMANTIC`), & Stage 3B (`SCOPE_ALGEBRAIC` E-Graph)
-                if allow_scope_escalation and learned_scope in ("SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC"):
-                    from canonical.swe_kernel import operator_generalization_v1 as _op_gen
 
-                    invalidated_mid_run = False
-                    for candidate in itertools.islice(_op_gen.propose_operator_swaps(source_text, rule, language=lang), 16):
+            # Opt-in scoped TEST_SUITE operator generalization (`allow_operator_generalization=True`)
+            if not invalidated_mid_run and allow_operator_generalization:
+                from canonical.swe_kernel import boundary_disjunction_normalization_v1 as semantic
+                from canonical.swe_kernel import operator_generalization_v1 as operator
+                try:
+                    proposals = semantic.propose_semantic_swaps(
+                        source_text, rule, operator_swaps=operator.propose_operator_swaps
+                    )
+                    for candidate in itertools.islice(proposals, 16):
                         if candidate is None or candidate in seen_candidates:
                             continue
                         seen_candidates.add(candidate)
                         verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
                         if verification is not None:
-                            hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_OPERATOR")
+                            hit = _commit_verified_hit(
+                                rule, candidate, verification, "SCOPE_SEMANTIC", "operator_generalization"
+                            )
                             if hit is not None:
                                 return hit
                             invalidated_mid_run = True
                             break
-                    if (
-                        not invalidated_mid_run
-                        and lang == "python"
-                        and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
-                    ):
-                        from canonical.swe_kernel import boundary_disjunction_normalization_v1 as _bd_norm
+                except (semantic.NormalizationError, SyntaxError, ValueError):
+                    pass
 
-                        try:
-                            sem_stream = itertools.islice(
-                                _bd_norm.propose_semantic_swaps(
-                                    source_text,
-                                    rule,
-                                    operator_swaps=_op_gen.propose_operator_swaps,
-                                ),
-                                16,
-                            )
-                            for candidate in sem_stream:
-                                if candidate is None or candidate in seen_candidates:
-                                    continue
-                                seen_candidates.add(candidate)
-                                verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                                if verification is not None:
-                                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_SEMANTIC")
-                                    if hit is not None:
-                                        return hit
-                                    invalidated_mid_run = True
-                                    break
-                        except Exception:
-                            pass
-                    if (
-                        not invalidated_mid_run
-                        and lang == "python"
-                        and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
-                    ):
-                        try:
-                            from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
-                                propose_egraph_algebraic_rewrites,
-                            )
+            # Stage 2 (`SCOPE_OPERATOR`), Stage 3 (`SCOPE_SEMANTIC`), & Stage 3B (`SCOPE_ALGEBRAIC` E-Graph)
+            if (
+                not invalidated_mid_run
+                and allow_scope_escalation
+                and learned_scope in ("SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
+            ):
+                from canonical.swe_kernel import operator_generalization_v1 as _op_gen
 
-                            for candidate in propose_egraph_algebraic_rewrites(source_text, rule):
-                                if candidate is None or candidate in seen_candidates:
-                                    continue
-                                seen_candidates.add(candidate)
-                                verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
-                                if verification is not None:
-                                    hit = _commit_verified_hit(rule, candidate, verification, "SCOPE_ALGEBRAIC")
-                                    if hit is not None:
-                                        return hit
-                                    break
-                        except Exception:
-                            pass
+                for candidate in itertools.islice(_op_gen.propose_operator_swaps(source_text, rule, language=lang), 16):
+                    if candidate is None or candidate in seen_candidates:
+                        continue
+                    seen_candidates.add(candidate)
+                    verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                    if verification is not None:
+                        hit = _commit_verified_hit(
+                            rule, candidate, verification, "SCOPE_OPERATOR", "operator_generalization"
+                        )
+                        if hit is not None:
+                            return hit
+                        invalidated_mid_run = True
+                        break
+                if (
+                    not invalidated_mid_run
+                    and lang == "python"
+                    and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
+                ):
+                    from canonical.swe_kernel import boundary_disjunction_normalization_v1 as _bd_norm
+
+                    try:
+                        sem_stream = itertools.islice(
+                            _bd_norm.propose_semantic_swaps(
+                                source_text,
+                                rule,
+                                operator_swaps=_op_gen.propose_operator_swaps,
+                            ),
+                            16,
+                        )
+                        for candidate in sem_stream:
+                            if candidate is None or candidate in seen_candidates:
+                                continue
+                            seen_candidates.add(candidate)
+                            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                            if verification is not None:
+                                hit = _commit_verified_hit(
+                                    rule, candidate, verification, "SCOPE_SEMANTIC", "semantic"
+                                )
+                                if hit is not None:
+                                    return hit
+                                invalidated_mid_run = True
+                                break
+                    except Exception:
+                        pass
+                if (
+                    not invalidated_mid_run
+                    and lang == "python"
+                    and learned_scope in ("SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC")
+                ):
+                    try:
+                        from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
+                            propose_egraph_algebraic_rewrites,
+                        )
+
+                        for candidate in propose_egraph_algebraic_rewrites(source_text, rule):
+                            if candidate is None or candidate in seen_candidates:
+                                continue
+                            seen_candidates.add(candidate)
+                            verification = evaluate(verifier, candidate, required_verification_kind, scope_id)
+                            if verification is not None:
+                                hit = _commit_verified_hit(
+                                    rule, candidate, verification, "SCOPE_ALGEBRAIC", "algebraic"
+                                )
+                                if hit is not None:
+                                    return hit
+                                break
+                    except Exception:
+                        pass
 
         # Stage 4: Cross-language portable lexical carry (`language_neutral_skill_bridge_v1`)
         if allow_cross_language and required_verification_kind == 'CALLER_PREDICATE' and not scope_id:
@@ -1012,6 +1060,7 @@ class VerifiedSkillStore:
                             "from_language": bridged.get("from_language"),
                             "to_language": bridged.get("to_language"),
                             "scope_tier": "CROSS_LANGUAGE_LEXICAL_BRIDGE",
+                            "recall_strategy": "cross_language_lexical",
                             "verification": verification,
                             "whole_task_correctness_proved": False,
                         }
@@ -1056,6 +1105,7 @@ class VerifiedSkillStore:
                             "from_language": cst_hit.get("from_language"),
                             "to_language": cst_hit.get("to_language"),
                             "scope_tier": "CROSS_LANGUAGE_CST_SKELETON",
+                            "recall_strategy": "cross_language_cst",
                             "verification": verification,
                             "whole_task_correctness_proved": False,
                         }

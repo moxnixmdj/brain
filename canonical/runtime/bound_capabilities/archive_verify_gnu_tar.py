@@ -92,6 +92,14 @@ def run(args, root):
       # re-hash, so it could never become verified experience even though the
       # members had all been checked one by one above.
       "archive_sha256":hashlib.sha256(archive_path.read_bytes()).hexdigest(),
+      # The independent artifact check re-reads the bytes behind this claim. It keys on
+      # `output_path` + a sha256, and these three verifiers returned their artifact under
+      # a subject-specific name (`archive_path`, `sqlite_path`, `xlsx_path`), so the check
+      # could not see them and they were counted as dead-and-uncovered. Naming the same
+      # file under the convention makes the claim re-checkable by someone other than the
+      # adapter that made it.
+      "output_path":str(archive_path.relative_to(root)),
+      "output_sha256":hashlib.sha256(archive_path.read_bytes()).hexdigest(),
       "manifest_path":str(manifest_path.relative_to(root)),
       "manifest_sha256":hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
     }

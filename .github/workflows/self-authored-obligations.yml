@@ -1,0 +1,25 @@
+name: work it was not given
+# The gate is not "does it find work" -- finding work is trivial and an agent could do it forever.
+# The gate is: a proposition that only LOOKS done must be refused. Busywork, and a check that
+# accepts the word "verified" written into a note, are both refuted in the suite.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  authorship:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: Looking done must not count as being done
+        run: python -m pytest canonical/tests/test_self_authored_obligations_v1.py -q

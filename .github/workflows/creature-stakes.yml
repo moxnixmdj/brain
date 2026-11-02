@@ -1,0 +1,26 @@
+name: stakes are not decoration
+# The gate is the negative control, not the feature:
+#   a creature with two verified failures behind it must choose differently from a newborn.
+# If erasing its history does not change what it does, nothing is at stake and the mechanism is a
+# label attached to a scheduler. That is asserted, not reported.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stakes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: Erasing its history must change what it does
+        run: python -m pytest canonical/tests/test_stakes_are_real_not_decoration_v1.py -q

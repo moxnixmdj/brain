@@ -1,0 +1,30 @@
+name: self-prediction calibration
+# Whether the system's stated expectations about its own performance are true, scored against
+# independently settled verdicts. The gate is the test suite: it contains a constant predictor that
+# must be classified as decoration and a confidently-wrong predictor that must score worse than the
+# base rate, so a scorer that always reports a nice number fails here.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: A self-model must be able to be wrong
+        run: python -m pytest canonical/tests/test_self_prediction_calibration_v1.py -q
+      - name: The claim must beat a number the system cannot author
+        run: python -m pytest canonical/tests/test_external_baseline_and_the_onboarding_factory_v1.py -q
+      - name: Show the verdict on the recorded ledger, if there is one
+        run: python3 canonical/runtime/self_prediction_calibration_v1.py || true

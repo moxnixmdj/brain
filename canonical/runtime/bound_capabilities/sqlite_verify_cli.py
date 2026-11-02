@@ -238,6 +238,14 @@ def run(args,root):
       "adapter":"sqlite_verify_cli",
       "sqlite_path":str(db.relative_to(pathlib.Path(root).resolve())).replace("\\","/"),
       "sqlite_sha256":hashlib.sha256(raw).hexdigest(),
+      # The independent artifact check re-reads the bytes behind this claim. It keys on
+      # `output_path` + a sha256, and these three verifiers returned their artifact under
+      # a subject-specific name (`archive_path`, `sqlite_path`, `xlsx_path`), so the check
+      # could not see them and they were counted as dead-and-uncovered. Naming the same
+      # file under the convention makes the claim re-checkable by someone other than the
+      # adapter that made it.
+      "output_path":str(db.relative_to(pathlib.Path(root).resolve())).replace("\\","/"),
+      "output_sha256":hashlib.sha256(raw).hexdigest(),
       "verified_rows":len(expected),
       "columns":cols,
       "table_name":table,

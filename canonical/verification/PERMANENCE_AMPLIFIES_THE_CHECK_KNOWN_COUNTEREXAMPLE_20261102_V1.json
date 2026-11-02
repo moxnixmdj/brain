@@ -1,0 +1,26 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "One demonstration plus permanent retention is a solution to computer use (canonical/runtime/permanence_amplifies_check_v1.py measures what a single demonstration actually buys)",
+ "falsifier_id": "ONE_EXAMPLE_UNDERDETERMINES_THE_RULE",
+ "decisive_question": "After one demonstration, is there one rule consistent with it, or several?",
+ "answer": "SEVERAL -- two, in the smallest honest case, and the simpler one is wrong",
+ "counterexamples": [
+  "One demonstration (rows 6 and 7, total 42) is reproduced exactly by two different rules: copy the number 42, and multiply the rows. Both are 100% consistent. The demonstration does not contain the information that separates them.",
+  "The learner registers the simpler rule -- copy -- which is what Occam requires and what any learner must do. It is then wrong on 39 of 40 new records while a check that only asks 'is there a number in the total field' accepts all 40.",
+  "Permanence does not decay the error. 200 recalls x 5 records: 1000 accepted, drift 0, rule unchanged. Repeating the work a thousand more times produces the identical wrong number, so no amount of further experience repairs it.",
+  "A second demonstration that repeats the first adds nothing -- two live rules survive, the wrong one is registered again. Only a second DEMONSTRATION WITH A DIFFERENT ANSWER kills the copy rule. That is the same condition the onboarding factory already enforces as FAIL_CLOSED__HELDOUT_IDENTICAL_TO_THE_DEMONSTRATION.",
+  "The experiment is arithmetic and synthetic. It does not measure how often real environments have weak checks; the external evidence for that is separate (77% of SWE-bench Verified instances had at least one surviving variant), and this receipt does not rest on it."
+ ],
+ "measured": {
+  "one_demonstration": "2 live rules; registered copy_the_total_it_was_shown; weak check accepts 40/40 while 1/40 is correct",
+  "two_demonstrations_with_different_answers": "1 live rule; registered recompute_from_the_rows; correct 40/40",
+  "second_identical_demonstration": "2 live rules survive; the wrong rule is registered again",
+  "permanence": "1000 accepted over 200 recalls, drift 0, skill unchanged",
+  "empty_demonstration": "refused -- vacuous truth had 'confirmed' the correct rule from zero evidence before this was fixed",
+  "contradictory_demonstrations": "refused, nothing registered",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "Instant learning is real and permanence is real. Neither is the achievement: permanence is a multiplier on whatever the check can see. With a weak check the system becomes permanently, confidently, verifiably wrong, and nothing in the pipeline can notice, because noticing would require exactly the check that is missing. The ceiling on what one-shot learning can do on a computer is not learning speed -- it is how many outcomes can be independently recomputed.",
+ "what_would_close_it": "Nothing on the learning side. The only fix is the check: every registered skill needs a held-out instance with a different answer, and a checker that recomputes rather than confirms."
+}

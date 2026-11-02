@@ -566,6 +566,7 @@ class AwakeAgencyDaemon:
                     source_text=before_src,
                     language="python",
                     verifier=_verify_in_cow,
+                    allow_scope_escalation=True,
                 )
                 if recalled is not None:
                     patched = str(recalled["patched_source"])

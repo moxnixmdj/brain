@@ -1,0 +1,24 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Derive an independent inspector from the environment's own checker and register it only if a paired negative control is refused (canonical/runtime/derived_inspector_flywheel_v1.py)",
+ "falsifier_id": "DERIVED_CHECK_IS_LEXICAL_NOT_SEMANTIC",
+ "decisive_question": "Does refusing a decoy prove the derived inspector can tell a correct artifact from an incorrect one?",
+ "answer": "NO",
+ "counterexamples": [
+  "The derivation is lexical. It can only prove the artifact CONTAINS strings the environment's checker mentions. An artifact with the required strings in a comment, or in the wrong place, or duplicated, passes. It is a containment test, not a correctness test.",
+  "The negative control proves the inspector can refuse ONE decoy, differing in one required respect. It does not establish that the requirement set is complete, so a decoy differing in an unlisted respect passes silently. Coverage of the requirement set is not measured here.",
+  "It requires an environment checker to exist. Capabilities whose environment states nothing cannot be derived at all and stay refused -- correct, but it means the flywheel cannot reach the capabilities most likely to be uninspected.",
+  "A derivation can pick up noise: while writing this module's tests, a checker containing print(\"ok\") produced the requirement \"ok\". Short and stop-worded literals are now dropped, but the class of defect remains -- any literal the checker happens to mention becomes a requirement.",
+  "Sharing the checker corpus means the inspector and the check it derives from are not independent of each other; if the environment's checker is itself wrong, the derived inspector inherits the error with full confidence."
+ ],
+ "measured": {
+  "requirements_derived_from_a_two_literal_checker": "['PERIOD 2026-01', 'REPORT TOTAL']",
+  "positive_passes_decoy_refused": "REGISTERED, throughput 1.0, over_permissive_derivations 0",
+  "forged_inspector_that_ignores_its_requirements": "REFUSED__INSPECTOR_ACCEPTED_THE_NEGATIVE_CONTROL, not registered",
+  "checker_deleted_after_derivation": "DERIVED_INSPECTOR_CHECKER_MISSING (goes stale rather than silently passing)",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The flywheel removes the human from inspector creation and still refuses an inspector that cannot fail -- that is the property that makes it worth running at scale. It does not make derived inspectors semantically correct, and a registered derived inspector should be described as a containment check with a falsification test, never as a verifier of correctness.",
+ "what_would_close_it": "A requirement set derived by observing which mutations of a known-good artifact the environment's checker actually rejects, so the derivation covers the checker's real discrimination rather than the literals it happens to print."
+}

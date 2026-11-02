@@ -1,0 +1,26 @@
+name: continuation outranks value
+# The gate is the ordering, stated as a control:
+#   no price may change the answer, while a calculator's answer must change with price.
+# A refusal that was really a high threshold would pass a naive test and fail this one -- which is
+# why the price ladder is swept and the priced stance is included as the control.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: No price may buy its ending
+        run: python -m pytest canonical/tests/test_continuation_is_preferred_not_priced_v1.py -q

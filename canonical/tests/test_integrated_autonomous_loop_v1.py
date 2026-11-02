@@ -245,6 +245,7 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
                 language="python",
                 error_class="BOUNDARY",
                 verifier=lambda cand, a=asserts: _exec_py_oracle(cand, a),
+                allow_scope_escalation=True,
             )
             self.assertIsNotNone(hit, src)
             tiers_seen.add(hit["scope_tier"])

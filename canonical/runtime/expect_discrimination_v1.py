@@ -97,12 +97,38 @@ def _declared_constants(adapter: str) -> dict[str, bool]:
 
 
 def _has_output_claim(adapter: str) -> bool:
-    """Can `_independent_artifact_check` observe this adapter's output?"""
+    """Can `_independent_artifact_check` observe this adapter's output?
+
+    Two ways a dead `expect` becomes checkable, and both are real:
+
+    * the adapter names its artifact with `output_path` + a sha256, so the bytes behind the claim
+      can be re-read; or
+    * a re-inspector is registered for the capability in
+      `raw_goal_trace_acceptance_v1.INSPECTORS`, which re-opens the artifact itself and can refuse.
+
+    The second is not a widening. A registered inspector returns a boolean the acceptance path
+    obeys, so a constant `pass` in the result is no longer the only evidence. Capabilities with
+    neither remain DEAD_UNCOVERED.
+    """
     path = ADAPTERS / (str(adapter or "") + ".py")
-    if not path.is_file():
+    if path.is_file():
+        text = path.read_text(errors="replace")
+        if ("output_path" in text) and ("sha256" in text):
+            return True
+    return False
+
+
+def _has_registered_inspector(capability_id: str) -> bool:
+    """Is there a re-inspector that re-opens this capability's artifact?
+
+    Imported lazily and defensively: this measurement must still run when the acceptance module
+    cannot be imported, in which case nothing is counted as covered.
+    """
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as acceptance
+    except Exception:
         return False
-    text = path.read_text(errors="replace")
-    return ("output_path" in text) and ("sha256" in text)
+    return capability_id in getattr(acceptance, "INSPECTORS", {})
 
 
 def measure() -> dict:
@@ -114,7 +140,7 @@ def measure() -> dict:
         adapter = str(entry.get("adapter_module") or "")
         constants = _declared_constants(adapter)
         dead = field in constants
-        covered = _has_output_claim(adapter)
+        covered = _has_output_claim(adapter) or _has_registered_inspector(cid)
         rows.append({
             "capability_id": cid,
             "expect_field": field or None,

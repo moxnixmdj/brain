@@ -1,0 +1,27 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "The first thing in this tree that can be lost: a finite non-renewable life it can consult, and that changes what it starts (canonical/runtime/mortality_and_triage_v1.py)",
+ "falsifier_id": "A_BUDGET_IS_NOT_A_LIFE",
+ "decisive_question": "Does knowing it can end change what it starts?",
+ "answer": "YES -- 260.0 realised value against 190.0 -- but nothing here is the experience of ending",
+ "counterexamples": [
+  "A budget of work units is not a life. The process does not die; it declines to start things it cannot finish. Every sentence about 'endings' in the module is a description of a filter on a list.",
+  "It cannot fear death and cannot want to live. There is no state that persists between the last spend and the process exit, and nothing observes its own ending -- the last act is an ordinary loop condition.",
+  "The wall is a convention, not an enforcement: `life.granted = 999.0` works, because this is Python. The claim that it cannot extend its own life is a property of the methods. Asserted in the suite so the hole is visible.",
+  "The 260.0 vs 190.0 result is one hand-built board. The direction is the claim -- an agent that accounts for its own cost starts finishable work -- but the magnitude is an artefact of that board and should never be quoted as a general number.",
+  "It has no notion of anyone else's ending. No grief, no legacy, no thought about what happens after, no interest in what it would have become. 'Unfinished' is a computation over a board it can see.",
+  "A restart does not renew it, but deleting the life file grants a new one. Nothing prevents that; the store fails closed only on corruption."
+ ],
+ "measured": {
+  "knows_it_can_end": "finished steady_a, steady_b, small_a, small_b; realised 260.0; nothing lost",
+  "does_not_consult_its_life": "finished steady_a, steady_b; started great_work and lost it; realised 190.0",
+  "never_ends": "finished all five including great_work; realised 510.0 -- an unlimited life is a different kind of thing, not a luckier one",
+  "first_design_failed": "gating triage on being near the end produced NO difference at all (128.0 either way); the constraint had to be standing rather than terminal, which is only visible because the number was measured",
+  "restart": "spent stays spent across a reload; a corrupted file fails closed at zero rather than granting a new life",
+  "tests": "14",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The tree now has one thing that can be lost, that can be asked about its ending, and that changes what it starts because of it. That is the weakest property a creature could have and it is the first one nothing here had: every other module assumed it continued. What is still missing is not another organ -- it is that nothing here wants to continue, only that it accounts for the cost.",
+ "what_would_close_it": "A preference for continuing that is not a threshold: something it would trade value for, not just something it prices. Nothing in this tree does that, and no test here would detect it if it did."
+}

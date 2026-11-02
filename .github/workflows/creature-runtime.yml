@@ -1,0 +1,26 @@
+name: one body, unattended
+# The gate is the assembly, not the parts:
+#   a process killed by the OS must come back with the same identity, the same spent life and the
+#   same finished work, and must not retry blocked work forever and call that progress.
+# Both of those were real defects found by running it, not by reading it.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+      - name: It must live through a kill and not spin on blocked work
+        run: python -m pytest canonical/tests/test_the_creature_runs_unattended_v1.py -q

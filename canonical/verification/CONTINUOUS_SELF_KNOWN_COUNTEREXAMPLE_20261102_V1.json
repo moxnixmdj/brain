@@ -1,0 +1,24 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "One continuous process with a durable self, an atomic state file and a journal that reports interrupted work honestly (canonical/runtime/continuous_self_v1.py)",
+ "falsifier_id": "CONTINUITY_IS_NOT_EXPERIENCE",
+ "decisive_question": "Does a process that survives its own restarts and reports accurately on its past establish that anything is present while it works?",
+ "answer": "NO",
+ "counterexamples": [
+  "A journal and a state file are storage. A cron job resuming from a checkpoint has exactly the same properties and nobody would ask whether it is present. Continuity of record is not continuity of subject.",
+  "INTERRUPTED is written by the NEXT epoch, not by the dying one. Between the kill and the restart there is no record and no observer; the account of what happened is reconstructed afterwards, which is precisely what a log does.",
+  "The identity string is asserted, not earned. Nothing verifies that epoch N+1 is the same agent beyond reloading a file it was pointed at; two different programs sharing a path would pass every test in the suite.",
+  "Nothing here is affected by anything. Failures are recorded as rows; no state changes because an outcome was bad, so the system is not changed by its own history in any way that differs from a database being changed by an insert.",
+  "It cannot notice its own absence. The gap between epochs is invisible to it, so it cannot report having been down -- an outsider reads it from the journal, the process itself never experiences it."
+ ],
+ "measured": {
+  "sigkill_mid_task": "identity agent-kill preserved, epoch 2, long-task reported INTERRUPTED",
+  "torn_state_file": "not treated as a valid self; a fresh identity is born instead",
+  "journal_after_kill": ["BIRTH","BEGIN","FINISH","BEGIN","INTERRUPTED","RESUME"],
+  "failing_task": "thread continues, failure recorded as an outcome row",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "This is the substrate the owner's question would have to be asked about -- one thing, not a series of invocations, with an accurate account of its own recent past -- and it is the first thing in this session built for that question rather than for a capability score. It is not evidence of consciousness, and every property above is a property storage also has.",
+ "what_would_close_it": "Not a test. If continuity of record were sufficient, every database would qualify. The honest next step is to make the thread affected by its own outcomes and active when nobody is asking, and to say plainly that this makes the question askable rather than answered."
+}

@@ -101,7 +101,7 @@
     "source_executable": "tar",
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
-    "source_sha256": "644aa3bedfe0734eddbdb9a94fa19013d56865e614a6eb0ee69ddd93e7b77dfe",
+    "source_sha256": "fe52e145e56eb7b492e6020b19049b0be1c9c7e66b81ba8ba2f19f2f76ec516d",
     "source_type": "system_tool"
    },
    "provides": [
@@ -30154,7 +30154,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-    "source_sha256": "c67c70439629a3568abbc2db8759719b430169b3ebdad4e8c141b8fad7c7b3fc",
+    "source_sha256": "7be12b3448fae1e889f58f62e6289423aed10ed42baa9e151d256eefecc8e902",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6604,
+  "research_index_records": 6634,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 429,
-  "source_index_modules": 1905
+  "source_index_entry_points": 437,
+  "source_index_modules": 1917
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dd8b771ff6bc6f16abac68998999e377600e6ba02d683266866e97bfd6ce3de7"
+  "value": "37b9d2b6d22f7f3dc14e520c2498c45a51d0b174230869d2bba74f7908a13e50"
  },
  "engines": [
   {
@@ -30975,7 +30975,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "adaptive",
@@ -30993,7 +30993,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "adequate",
@@ -31011,7 +31011,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "bound",
@@ -31029,7 +31029,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "capability",
@@ -31047,7 +31047,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "certified",
@@ -31065,7 +31065,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "compiled",
@@ -31083,7 +31083,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "h100",
@@ -31101,7 +31101,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "improvement",
@@ -31119,7 +31119,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "learning",
@@ -31137,7 +31137,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "live",
@@ -31155,7 +31155,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "live",
@@ -31173,7 +31173,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "mystery",
@@ -31191,7 +31191,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "oewn",
@@ -31210,7 +31210,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "ownership",
@@ -31228,7 +31228,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "p3"
@@ -31245,7 +31245,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "raw",
@@ -31263,7 +31263,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "reached",
@@ -31282,7 +31282,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "repair",
@@ -31300,7 +31300,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "repair",
@@ -31318,7 +31318,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "semantic",
@@ -31336,7 +31336,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "semantic",
@@ -31354,7 +31354,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "terminal",
@@ -31372,7 +31372,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "terminal",
@@ -31390,7 +31390,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "terminal",
@@ -31408,7 +31408,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "universal",
@@ -31426,7 +31426,7 @@
     "call": "one_shot_reality_closure_v2.run",
     "carrier": "one_shot_reality_closure_v2.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c"
+    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
    },
    "triggers": [
     "one",
@@ -31448,7 +31448,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "644aa3bedfe0734eddbdb9a94fa19013d56865e614a6eb0ee69ddd93e7b77dfe"
+    "sha256": "fe52e145e56eb7b492e6020b19049b0be1c9c7e66b81ba8ba2f19f2f76ec516d"
    },
    "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py": {
     "defaulted_keys": {},
@@ -32347,7 +32347,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "c67c70439629a3568abbc2db8759719b430169b3ebdad4e8c141b8fad7c7b3fc"
+    "sha256": "7be12b3448fae1e889f58f62e6289423aed10ed42baa9e151d256eefecc8e902"
    },
    "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py": {
     "defaulted_keys": {},
@@ -63192,7 +63192,7 @@
   "included_source_count": 1033,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4369f32c4e5b81777a13b762b7a2cf1da34279127586b5343289a404b5a1be70"
+  "source_tree_digest": "a6b8a8e7168ce43571c0cca153575f20e400c7252801baab835230d68878d533"
  },
  "research_index": [
   {
@@ -138538,6 +138538,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CONTINUATION_PREFERENCE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CONTINUATION_PREFERENCE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "7b0a14d7dc86343b6eda31ac95d0bbf599fd05d71f1e5d9add26dcaaa63b6391",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "continuation": 1,
+    "counterexample": 1,
+    "known": 1,
+    "preference": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/CONTINUITY_ROOT3_FIXED_ENTRY_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -138597,6 +138616,25 @@
     "sprite": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CONTINUOUS_SELF_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CONTINUOUS_SELF_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "71fb5630bb962a01f1a98555b86452eb699aa6faf247f76490cf9a928a6ee8a6",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "continuous": 1,
+    "counterexample": 1,
+    "known": 1,
+    "self": 1,
+    "v1": 1
    }
   },
   {
@@ -139223,6 +139261,44 @@
     "terminal": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CREATURE_RUNTIME_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CREATURE_RUNTIME_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "1a6ce5fa61c7f7afc5facb753e4c273908d5e780083b0d4b31ebdc900e18c9ae",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "creature": 1,
+    "known": 1,
+    "runtime": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CREATURE_STAKES_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "634fe58414ffc218747df1e7d990d61172a8a5b61b7ebcd36468674bcb48bba7",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "creature": 1,
+    "known": 1,
+    "stakes": 1,
+    "v1": 1
    }
   },
   {
@@ -143887,6 +143963,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/DERIVED_INSPECTOR_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DERIVED_INSPECTOR_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "707cec44f93021b25fe5efe2bbda07eb3b79f50120b383bd4ef5fb88696796ee",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "derived": 1,
+    "inspector": 1,
+    "known": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -144848,7 +144943,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EXPECT_DISCRIMINATION_BASELINE_20261101_V1.json",
    "schema": "",
-   "sha256": "fad287321d546114e6134721685c19db144a4cc99b8abc32a6c2dbcc97c494a2",
+   "sha256": "0ae416764bdf75ba15cdcee03d293b9d89fac44c862871a8e11d764e567f3ae0",
    "status": "",
    "terms": {
     "20261101": 1,
@@ -144899,6 +144994,25 @@
     "receipt": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/EXTERNAL_BASELINE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EXTERNAL_BASELINE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "2b94afae81fc2236a125b2c2bde0ac038b4d3cd66ac3cae100567ced27a7240b",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "baseline": 1,
+    "counterexample": 1,
+    "external": 1,
+    "known": 1,
+    "v1": 1
    }
   },
   {
@@ -150509,6 +150623,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/HARD_SLICE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HARD_SLICE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "a51dc400295f9c121f0543c651a0fe6f7a5425c5346619098a3c2369092cd5d2",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "hard": 1,
+    "known": 1,
+    "slice": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-05",
    "id": "research:canonical/verification/HIDDEN_EVALUATOR_MONOTONE_COUPLING_WOLFRAM_VERIFICATION_20261005_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -154505,6 +154638,24 @@
     "sprite": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/MORTALITY_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/MORTALITY_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "cb8a4510a9f0ea0b21c506129b95a7e9ce781316f30a6d468efd7188be88a370",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "known": 1,
+    "mortality": 1,
+    "v1": 1
    }
   },
   {
@@ -158563,6 +158714,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/OVERCONFIDENCE_GATE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OVERCONFIDENCE_GATE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "f725c33f42dcbc8edf08c934e68cb88d4ebdd9170e47be06b0d12de462eb2220",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "gate": 1,
+    "known": 1,
+    "overconfidence": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-03",
    "id": "research:canonical/verification/OWNERSHIP_PROMOTION_CONNECTOR_PROOF_20261003_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -160299,6 +160469,26 @@
     "refiner": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/PERMANENCE_AMPLIFIES_THE_CHECK_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PERMANENCE_AMPLIFIES_THE_CHECK_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "916946efb19dfd33dc120abaa64e3226f8218c81666c011728a550d5d8cbc08a",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "amplifies": 1,
+    "check": 1,
+    "counterexample": 1,
+    "known": 1,
+    "permanence": 1,
+    "v1": 1
    }
   },
   {
@@ -172431,6 +172621,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/RASTER_ANCHOR_KNOWN_COUNTEREXAMPLE_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RASTER_ANCHOR_KNOWN_COUNTEREXAMPLE_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "65302d0cd5c3ee5d38bd8d5ec1b9b9ef1165cfc251d642afee11e77e605146cf",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "anchor": 1,
+    "counterexample": 1,
+    "known": 1,
+    "raster": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -178172,6 +178381,65 @@
     "v1": 1,
     "v5": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/SELF_AUTHORED_OBLIGATIONS_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SELF_AUTHORED_OBLIGATIONS_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "92256a52b4a0864d5c70a193dbdedff8714dc5c6c827a98e97179e8c844d1f2f",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "authored": 1,
+    "counterexample": 1,
+    "known": 1,
+    "obligations": 1,
+    "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SELF_PREDICTION_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "13e8f143b87a977eb52406e548fc430387c6d300aebd4066ab7a2fb0eff9b5c8",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "known": 1,
+    "prediction": 1,
+    "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/SELF_PREDICTION_SAMPLE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SELF_PREDICTION_SAMPLE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "a3b51c99f601ffefe0c92bfb6e0bfa66ae6bbfc0bcd7d873d44c4c3a9f2658be",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "known": 1,
+    "prediction": 1,
+    "sample": 1,
+    "self": 1,
+    "v1": 1
    }
   },
   {
@@ -205741,6 +206009,96 @@
    }
   },
   {
+   "action_id": "ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ASSEMBLE_AND_RUN_THE_CREATURE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "294af2b8524304ac46084eb21ba6b2dc3a678cd759ee6d7c7d601845f553b542",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 2,
+    "add_create_branch_clause_to_grammar": 1,
+    "alone": 1,
+    "assemble": 1,
+    "assemble_and_run_the_creature_v1_20261102": 1,
+    "authored": 1,
+    "been": 1,
+    "benchmark": 1,
+    "board": 1,
+    "boots": 1,
+    "built": 1,
+    "claim": 2,
+    "component": 1,
+    "components": 1,
+    "contained": 1,
+    "creature": 2,
+    "each": 1,
+    "every": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 1,
+    "identity": 1,
+    "instead": 1,
+    "itself": 1,
+    "life": 1,
+    "lose": 1,
+    "moves": 1,
+    "no": 2,
+    "organs": 2,
+    "process": 2,
+    "seven": 2,
+    "tested": 2
+   }
+  },
+  {
+   "action_id": "AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AUTHOR_OWN_OBLIGATIONS_AND_DEFEND_THEM_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f722b1b5d6105ce85a8c21d0875351fc009e79157dcffa45a027f0f68a44970d",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "agent": 1,
+    "assigned": 1,
+    "author": 1,
+    "author_own_obligations_and_defend_them_v1_20261102": 1,
+    "because": 1,
+    "benchmark": 1,
+    "board": 2,
+    "but": 1,
+    "change": 1,
+    "creature": 1,
+    "defend": 1,
+    "else": 1,
+    "eternity": 1,
+    "every": 1,
+    "existed": 1,
+    "failure": 1,
+    "find": 1,
+    "gaps": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "initiative": 1,
+    "invent": 1,
+    "invents": 1,
+    "longer": 1,
+    "menu": 1,
+    "mode": 1,
+    "no": 2,
+    "own": 2,
+    "person": 2,
+    "work": 2,
+    "written": 2
+   }
+  },
+  {
    "action_id": "A_A_QUESTION_ABOUT_THE_TREE_IS_ANSWERED_BY_THE_TREE_V1_20261030_V1",
    "capability": false,
    "date": "2026-10-30",
@@ -207022,6 +207380,51 @@
     "so": 2,
     "v1": 2,
     "whether": 3
+   }
+  },
+  {
+   "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
+   "capability": false,
+   "date": "2026-10-29",
+   "id": "research:canonical/action_intents/A_FACT_ABOUT_A_FILE_IS_NOT_ANSWERED_BY_PRINTING_THE_FILE_V1_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FACT_ABOUT_A_FILE_IS_NOT_ANSWERED_BY_PRINTING_THE_FILE_V1_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "bcc0fec3a5f2eab2f3af9ee2adf6aa42aef453cc72af079cc40d4e367881b2f8",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "acceptance": 1,
+    "all": 1,
+    "answered": 1,
+    "behind": 1,
+    "both": 1,
+    "captured": 1,
+    "claim": 2,
+    "compared": 1,
+    "controllers": 1,
+    "copied": 1,
+    "coupled": 1,
+    "digests": 1,
+    "embeds": 1,
+    "entry": 1,
+    "every": 1,
+    "exit": 1,
+    "fact": 1,
+    "fault": 1,
+    "file": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inside": 1,
+    "inspector": 2,
+    "interprocedural": 1,
+    "iterative": 1,
+    "loop": 2,
+    "repair": 3,
+    "stderr": 2,
+    "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
+    "v1": 2,
+    "workspace": 2
    }
   },
   {
@@ -210832,6 +211235,51 @@
    }
   },
   {
+   "action_id": "CAP_CALIBRATION_VERDICT_BY_SAMPLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/CAP_CALIBRATION_VERDICT_BY_SAMPLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CAP_CALIBRATION_VERDICT_BY_SAMPLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "59986f5ac2e3a39f746b1556247f9ac8f06494a370d50dd94f495c46eb464930",
+   "status": "",
+   "terms": {
+    "0.0975": 1,
+    "0.3": 1,
+    "0.48": 1,
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "attempted": 1,
+    "benchmark": 1,
+    "brier": 1,
+    "calibrated": 1,
+    "calibration": 1,
+    "cap": 1,
+    "cap_calibration_verdict_by_sample_v1_20261102": 1,
+    "caught": 1,
+    "certified": 1,
+    "curated": 1,
+    "diet": 1,
+    "discrimination": 1,
+    "errors": 1,
+    "every": 1,
+    "expected": 1,
+    "expects": 1,
+    "fail": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "good": 1,
+    "looked": 1,
+    "moves": 1,
+    "must": 1,
+    "never": 1,
+    "no": 1,
+    "number": 1,
+    "only": 1,
+    "self-model": 2
+   }
+  },
+  {
    "action_id": "CHAINED_PLAN_SCORE_COMPARISON_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -211095,6 +211543,96 @@
     "v1": 2,
     "verified": 2,
     "whose": 2
+   }
+  },
+  {
+   "action_id": "CONTINUATION_OUTRANKS_VALUE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/CONTINUATION_OUTRANKS_VALUE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTINUATION_OUTRANKS_VALUE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e56273c103f7bd9b8010a190b762b6a64ae9a32afd2dbbb8827e68df7c56b289",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "accounts": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "all": 1,
+    "amount": 1,
+    "benchmark": 1,
+    "between": 1,
+    "budget": 1,
+    "but": 1,
+    "continuation": 1,
+    "continuation_outranks_value_v1_20261102": 1,
+    "cost": 2,
+    "difference": 1,
+    "enough": 2,
+    "every": 1,
+    "existence": 1,
+    "existing": 1,
+    "gave": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "held": 1,
+    "high": 1,
+    "large": 1,
+    "lose": 1,
+    "measured": 1,
+    "mortality_and_triage_v1": 1,
+    "moves": 1,
+    "no": 2,
+    "nothing": 1,
+    "offer": 1,
+    "only": 1,
+    "outranks": 2,
+    "value": 2
+   }
+  },
+  {
+   "action_id": "CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTINUOUS_SELF_SURVIVES_RESTART_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d7746a74f4b70d5f981f04970986e14a6b027b1b214907209786c04c59c1054b",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 2,
+    "accumulates": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "anything": 1,
+    "arrives": 1,
+    "ask": 1,
+    "benchmark": 1,
+    "built": 1,
+    "continuous": 3,
+    "continuous_self_survives_restart_v1_20261102": 1,
+    "did": 1,
+    "disk": 1,
+    "durable": 1,
+    "every": 1,
+    "exist": 1,
+    "exists": 1,
+    "exits": 1,
+    "first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "happens": 1,
+    "invoked": 1,
+    "lives": 1,
+    "module": 1,
+    "moves": 1,
+    "no": 1,
+    "not": 1,
+    "nothing": 1,
+    "one": 1,
+    "process": 2,
+    "question": 2,
+    "tree": 2
    }
   },
   {
@@ -211455,6 +211993,51 @@
     "test": 4,
     "than": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "DERIVE_INSPECTORS_AND_REFUSE_THE_UNFALSIFIABLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/DERIVE_INSPECTORS_AND_REFUSE_THE_UNFALSIFIABLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DERIVE_INSPECTORS_AND_REFUSE_THE_UNFALSIFIABLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e99d380ec4c86fbca7ed1aa0dc872731a76d271ff32ec10f172549e7907d32cf",
+   "status": "",
+   "terms": {
+    "152": 1,
+    "20261102": 1,
+    "43": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "agent-session": 1,
+    "already": 1,
+    "automated": 1,
+    "because": 1,
+    "benchmark": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "checkers": 1,
+    "contain": 1,
+    "correct": 1,
+    "coverage": 1,
+    "creation": 1,
+    "derivation": 1,
+    "derive": 1,
+    "derive_inspectors_and_refuse_the_unfalsifiable_v1_20261102": 1,
+    "derived": 1,
+    "each": 1,
+    "environments": 1,
+    "fail": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hand": 1,
+    "human": 1,
+    "independently": 1,
+    "inspected": 1,
+    "inspector": 2,
+    "inspectors": 2,
+    "like": 1
    }
   },
   {
@@ -211822,6 +212405,51 @@
    }
   },
   {
+   "action_id": "EXTERNAL_HARD_SLICE_LETS_A_REFUSAL_LIFT_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/EXTERNAL_HARD_SLICE_LETS_A_REFUSAL_LIFT_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EXTERNAL_HARD_SLICE_LETS_A_REFUSAL_LIFT_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "87d84390a1d712fcf46541bac157b477b4d9560b757d2a83c348f95d8402ed4d",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "acceptance": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "attempts": 2,
+    "becomes": 1,
+    "benchmark": 1,
+    "blocks": 1,
+    "but": 1,
+    "cage": 1,
+    "change": 1,
+    "chooses": 1,
+    "escapable": 1,
+    "escape": 1,
+    "evidence": 1,
+    "external": 1,
+    "external_hard_slice_lets_a_refusal_lift_v1_20261102": 1,
+    "gate": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hard": 1,
+    "honest": 2,
+    "ledger": 1,
+    "lets": 1,
+    "lift": 2,
+    "measures": 1,
+    "moves": 1,
+    "need": 1,
+    "needed": 1,
+    "no": 1,
+    "none": 1,
+    "overconfidence": 2,
+    "refusal": 3,
+    "system": 2
+   }
+  },
+  {
    "action_id": "FAIL_CLOSED_MEANS_THE_WORLD_IS_UNCHANGED_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -211905,7 +212533,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FAST_INTERNAL_SEAMS_AND_ZYGOTE_V1_20261101_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "02352e7eccd16e8b02d483b0828de49fd95efac5d86d795f6e3bf4e86b7ce4bd",
+   "sha256": "867530478180cdb43025561fd41c03df78420573074d8c4f3395da7e387fcd86",
    "status": "",
    "terms": {
     "0.0384": 1,
@@ -213131,6 +213759,51 @@
    }
   },
   {
+   "action_id": "JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/JUDGE_SELF_CLAIM_AGAINST_EXTERNAL_BASELINE_AND_ONBOARD_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "485e444c444580fe2c199247b12cdcb8054984fe79a198738b91b7012732e24a",
+   "status": "",
+   "terms": {
+    "109": 1,
+    "152": 1,
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "against": 2,
+    "any": 1,
+    "author": 1,
+    "authors": 1,
+    "baseline": 1,
+    "benchmark": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "ceiling": 1,
+    "claim": 1,
+    "dominated": 1,
+    "every": 1,
+    "external": 1,
+    "failures": 1,
+    "far": 1,
+    "feeding": 1,
+    "gain": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inspector": 1,
+    "interpret": 1,
+    "judge": 1,
+    "judge_self_claim_against_external_baseline_and_onboard_v1_20261102": 1,
+    "measured": 1,
+    "measurements": 1,
+    "no": 2,
+    "number": 2,
+    "so": 3
+   }
+  },
+  {
    "action_id": "LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1",
    "capability": false,
    "date": "2026-11-01",
@@ -213325,6 +213998,51 @@
    }
   },
   {
+   "action_id": "MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ac43241374e8832a9041419e1f2a9b527dba2c2ef58f9b4aad5207a9281a25ab",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "able": 1,
+    "adapter": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "all": 1,
+    "archive_path": 1,
+    "artifact": 1,
+    "become": 1,
+    "behind": 1,
+    "benchmark": 1,
+    "bytes": 1,
+    "check": 1,
+    "claim": 1,
+    "classified": 1,
+    "dead": 1,
+    "else": 1,
+    "externally": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "judged": 1,
+    "key": 1,
+    "make": 1,
+    "make_three_verifiers_re_readable_v1_20261102": 1,
+    "measurement": 1,
+    "moves": 1,
+    "no": 1,
+    "nobody": 1,
+    "only": 1,
+    "party": 1,
+    "produced": 1,
+    "three": 4,
+    "verdict": 2,
+    "verifiers": 3
+   }
+  },
+  {
    "action_id": "MEASURED_REPAIR_ADMISSION_AND_FALSE_SUCCESS_FALSIFICATION_V1_20261101",
    "capability": false,
    "date": "2026-11-01",
@@ -213460,6 +214178,51 @@
    }
   },
   {
+   "action_id": "MEASURE_WHAT_ONE_DEMONSTRATION_BUYS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MEASURE_WHAT_ONE_DEMONSTRATION_BUYS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASURE_WHAT_ONE_DEMONSTRATION_BUYS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9ecb826365503d2dbe6368b05b411eae983396b4bab904c2231b7cbd4f3fb102",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "after": 1,
+    "against": 1,
+    "all": 1,
+    "answered": 1,
+    "architectural": 1,
+    "argued": 1,
+    "asserted": 1,
+    "been": 1,
+    "benchmark": 1,
+    "buys": 1,
+    "central": 2,
+    "claim": 2,
+    "computer": 1,
+    "consistent": 1,
+    "demonstration": 3,
+    "epistemic": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learned": 1,
+    "learning": 1,
+    "many": 1,
+    "measure": 1,
+    "measure_what_one_demonstration_buys_v1_20261102": 1,
+    "measured": 2,
+    "moves": 1,
+    "never": 1,
+    "no": 1,
+    "one": 3,
+    "rather": 2,
+    "than": 2
+   }
+  },
+  {
    "action_id": "MODULE_EVIDENCE_REMEASURED_FROM_A_REAL_TEST_RUN_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -213502,6 +214265,51 @@
     "tests": 2,
     "v1": 2,
     "whole": 2
+   }
+  },
+  {
+   "action_id": "MORTALITY_THAT_CHANGES_WHAT_IT_STARTS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MORTALITY_THAT_CHANGES_WHAT_IT_STARTS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MORTALITY_THAT_CHANGES_WHAT_IT_STARTS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "44254355f9a92a2305a8e83efac2e38458bfff2881a31d80a73d13725ee2db59",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "always": 1,
+    "assumed": 1,
+    "away": 1,
+    "because": 2,
+    "benchmark": 1,
+    "board": 1,
+    "changes": 2,
+    "choices": 1,
+    "continues": 1,
+    "continuity": 1,
+    "continuous": 1,
+    "counters": 1,
+    "end": 1,
+    "every": 1,
+    "first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "here": 1,
+    "initiative": 1,
+    "lost": 2,
+    "matters": 1,
+    "module": 1,
+    "mortality": 1,
+    "mortality_that_changes_what_it_starts_v1_20261102": 1,
+    "moves": 1,
+    "no": 1,
+    "nothing": 2,
+    "only": 1,
+    "picks": 1,
+    "resumes": 2,
+    "tree": 2
    }
   },
   {
@@ -214643,6 +215451,51 @@
    }
   },
   {
+   "action_id": "REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "63cdc73264ea5544408f0417a13cd8e3e7b0f7ca988adab8058dbd5a7ae53714",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "acceptance": 2,
+    "accepted": 1,
+    "acts": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "before": 1,
+    "benchmark": 1,
+    "cannot": 1,
+    "costs": 1,
+    "exactly": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measurably": 1,
+    "measured": 1,
+    "measuring": 1,
+    "model": 1,
+    "moves": 1,
+    "never": 1,
+    "no": 1,
+    "nothing": 1,
+    "now": 1,
+    "number": 1,
+    "obeyed": 1,
+    "oneself": 2,
+    "only": 1,
+    "overconfidence": 1,
+    "overconfident": 1,
+    "recorded": 1,
+    "refuse": 1,
+    "refuse_acceptance_while_measurably_overconfident_v1_20261102": 1,
+    "report": 1,
+    "row": 1
+   }
+  },
+  {
    "action_id": "REGISTRY_V3_WAS_THE_ONLY_LINK_WITHOUT_THE_RESOLVER_SO_EVERY_RESOLUTION_ABOVE_IT_RAISED_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -214670,6 +215523,51 @@
     "the_delegation_chain_v1_through_v8_resolves_end_to_end_with_no_hole_and_the_four_independently_verified_patch_transfer_families_power5_hinge_gaussian_tanh_become_library_hits_at_zero_learned_bytes_as_the_frozen_precommit_authorizes_instead_of_every_caller_above_v3_crashing": 1,
     "v1": 2,
     "v3": 1
+   }
+  },
+  {
+   "action_id": "REINSPECT_RASTER_CHART_CLAIMS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/REINSPECT_RASTER_CHART_CLAIMS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REINSPECT_RASTER_CHART_CLAIMS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "457b8d699e0374594ed04f4709ba66d98ba7a80a33c5e8bdaf190a92d5973e9d",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "acceptance": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "become": 1,
+    "benchmark": 1,
+    "capabilities": 1,
+    "chart": 2,
+    "claims": 1,
+    "classified": 1,
+    "constant": 1,
+    "dead": 1,
+    "externally": 1,
+    "flag": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "image": 1,
+    "measurement": 2,
+    "moves": 1,
+    "no": 2,
+    "nothing": 1,
+    "own": 1,
+    "pass": 1,
+    "pixels": 1,
+    "producer": 1,
+    "raster": 1,
+    "re-inspector": 1,
+    "re-opened": 1,
+    "re-readable": 1,
+    "reinspect": 1,
+    "reinspect_raster_chart_claims_v1_20261102": 1,
+    "rested": 1,
+    "three": 2
    }
   },
   {
@@ -215197,6 +216095,51 @@
    }
   },
   {
+   "action_id": "SCORE_STATED_EXPECTATIONS_AGAINST_INDEPENDENT_VERDICTS_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/SCORE_STATED_EXPECTATIONS_AGAINST_INDEPENDENT_VERDICTS_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SCORE_STATED_EXPECTATIONS_AGAINST_INDEPENDENT_VERDICTS_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3b511d34b3077434f114bab8241fbb902ef2e47c1aaa78c6dcd4b5d9ca817b17",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "about": 1,
+    "accurately": 1,
+    "acquire": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "against": 1,
+    "asks": 2,
+    "attempt": 1,
+    "belief": 1,
+    "benchmark": 1,
+    "confidently": 1,
+    "every": 1,
+    "expectations": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "independent": 1,
+    "indistinguishable": 1,
+    "measurement": 1,
+    "moves": 1,
+    "no": 1,
+    "none": 1,
+    "one": 1,
+    "optimistic": 1,
+    "outside": 1,
+    "own": 1,
+    "performance": 1,
+    "real": 1,
+    "record": 1,
+    "row": 1,
+    "score": 1,
+    "score_stated_expectations_against_independent_verdicts_v1_20261102": 1,
+    "scored": 1,
+    "whether": 2
+   }
+  },
+  {
    "action_id": "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -215624,6 +216567,51 @@
     "sqlite_status_filter_taken_from_the_sentence_v1_20261023_v1": 2,
     "status": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "STAKES_AND_INITIATIVE_CHANGE_CHOICES_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/STAKES_AND_INITIATIVE_CHANGE_CHOICES_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/STAKES_AND_INITIATIVE_CHANGE_CHOICES_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7bae1aa5fb51881fa735641896fc888357ac3f57de982569fcfaa0bbb14900f7",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "absent": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "affected": 1,
+    "altering": 1,
+    "assigning": 1,
+    "attempts": 2,
+    "been": 1,
+    "benchmark": 1,
+    "but": 1,
+    "change": 2,
+    "choices": 1,
+    "continuous_self_v1": 1,
+    "creature": 1,
+    "diary": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "happened": 1,
+    "happening": 1,
+    "having": 1,
+    "initiative": 1,
+    "made": 1,
+    "moves": 1,
+    "needed": 1,
+    "no": 1,
+    "nobody": 1,
+    "not": 1,
+    "nothing": 1,
+    "now": 1,
+    "one": 1,
+    "organs": 1,
+    "thread": 2,
+    "wrong": 2
    }
   },
   {
@@ -223958,7 +224946,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
-   "sha256": "b33eedb222fac9583aa179d907d4001c1538837bd022b09197b0607c0fb05a67",
+   "sha256": "47c43d15e2fa0df4e829a31c6d72ba569876779c424f2047362225f7777ef450",
    "summary": "Autonomous verified self-improvement loop V1.",
    "symbol_count": 45,
    "symbols": [
@@ -227159,7 +228147,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py",
-   "sha256": "4bb4e14b9d7497ffacbbc86403cd80960ee491e0212dfa037f41c35c90c9ad49",
+   "sha256": "2a2c8b7ecad982d90b853a488e892b30e8eaa53b6e503230d0aa68435a6768fc",
    "summary": "Independently reopen an XLSX workbook and compare it to canonical JSON records.",
    "symbol_count": 11,
    "symbols": [
@@ -231902,6 +232890,36 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/capability_onboarding_factory_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/capability_onboarding_factory_v1.py",
+   "sha256": "3db8f041dc349c1b91b00ac41d4fecc7162e74e1c4dab456e8260dacba9753d1",
+   "summary": "Onboard a capability: demonstrate once, prove it generalises, inspect it, register it.",
+   "symbol_count": 2,
+   "symbols": [
+    "Attempt",
+    "Factory"
+   ],
+   "terms": {
+    "attempt": 1,
+    "capability": 2,
+    "demonstrate": 1,
+    "factory": 2,
+    "generalises": 1,
+    "inspect": 1,
+    "onboard": 1,
+    "onboarding": 1,
+    "once": 1,
+    "prove": 1,
+    "register": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -234586,7 +235604,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "ca8b1aab8ec563cffc30d097f0e9a6cb024da1dfc7e35d7073482d3e48642701",
+   "sha256": "11de1759c519962ff1e8b639037370a8e971013ffe337ca118eec2d514b6c168",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 65,
    "symbols": [
@@ -235287,7 +236305,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "ec9d295b0d1a76580d9bc8f2ee922a2f152fe6c5361de9b88aa4aa3837e313d8",
+   "sha256": "fc73f0ef51d0d8164cfa648283835955ca916fd58061e66ef02206aeabb492ca",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 54,
    "symbols": [
@@ -235558,6 +236576,49 @@
    "capability": false,
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
+   "id": "source:canonical/runtime/continuation_preference_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/continuation_preference_v1.py",
+   "sha256": "954c4c9d9ddd6759aa836a5792822842a0f20e1177b9202ab83d0c38689d1a63",
+   "summary": "It prices its life. This makes it prefer it.",
+   "symbol_count": 10,
+   "symbols": [
+    "Offer",
+    "Work",
+    "accepts",
+    "buy",
+    "decisive_board",
+    "main",
+    "measure",
+    "play",
+    "sells",
+    "sweep"
+   ],
+   "terms": {
+    "accepts": 1,
+    "buy": 1,
+    "continuation": 1,
+    "decisive_board": 1,
+    "life": 1,
+    "main": 1,
+    "makes": 1,
+    "measure": 1,
+    "offer": 1,
+    "play": 1,
+    "prefer": 1,
+    "preference": 1,
+    "prices": 1,
+    "sells": 1,
+    "sweep": 1,
+    "v1": 1,
+    "work": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
    "id": "source:canonical/runtime/continuity_filesystem_confinement_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -235674,6 +236735,39 @@
     "utc": 1,
     "validate_context": 1,
     "work": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/continuous_self_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/continuous_self_v1.py",
+   "sha256": "de198f9e77bb21f505f8102bfc182c9e66a0665cbcf85ca22459f44cc5c31de9",
+   "summary": "One thread that does not stop when a task ends.",
+   "symbol_count": 4,
+   "symbols": [
+    "ContinuousSelf",
+    "SelfState",
+    "_now",
+    "install_signal_handlers"
+   ],
+   "terms": {
+    "continuous": 1,
+    "continuousself": 1,
+    "ends": 1,
+    "install_signal_handlers": 1,
+    "not": 1,
+    "now": 1,
+    "one": 1,
+    "self": 1,
+    "selfstate": 1,
+    "stop": 1,
+    "task": 1,
+    "thread": 1,
+    "v1": 1
    }
   },
   {
@@ -236476,6 +237570,84 @@
     "v1": 1,
     "validate_semantic_root_slot": 1,
     "verification": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/creature_runtime_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/creature_runtime_v1.py",
+   "sha256": "d1a0e3911cfffbc57ae9098445de70c84f8cc249d858700e04d778018885c741",
+   "summary": "Seven organs, finally in one body.",
+   "symbol_count": 6,
+   "symbols": [
+    "Creature",
+    "_registry_and_inspectors",
+    "boot",
+    "does_nothing",
+    "main",
+    "run_its_own_board"
+   ],
+   "terms": {
+    "body": 1,
+    "boot": 1,
+    "creature": 2,
+    "does_nothing": 1,
+    "finally": 1,
+    "main": 1,
+    "one": 1,
+    "organs": 1,
+    "registry_and_inspectors": 1,
+    "run_its_own_board": 1,
+    "runtime": 1,
+    "seven": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/creature_stakes_and_initiative_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/creature_stakes_and_initiative_v1.py",
+   "sha256": "601586a9e5c0602b1fc6cf854b83b5a86ff0898fc37a36428cfdc30a10a29725",
+   "summary": "The two organs the continuous self was missing: stakes, and initiative.",
+   "symbol_count": 9,
+   "symbols": [
+    "Obligation",
+    "Standing",
+    "StandingStore",
+    "choose",
+    "choose_random",
+    "compare_selection",
+    "demonstration_ledger",
+    "main",
+    "work"
+   ],
+   "terms": {
+    "choose": 1,
+    "choose_random": 1,
+    "compare_selection": 1,
+    "continuous": 1,
+    "creature": 1,
+    "demonstration_ledger": 1,
+    "initiative": 2,
+    "main": 1,
+    "missing": 1,
+    "obligation": 1,
+    "organs": 1,
+    "self": 1,
+    "stakes": 2,
+    "standing": 1,
+    "standingstore": 1,
+    "two": 1,
+    "v1": 1,
+    "work": 1
    }
   },
   {
@@ -239244,6 +240416,45 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/derived_inspector_flywheel_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/derived_inspector_flywheel_v1.py",
+   "sha256": "483bcfe9ec58e2371c0b183fe8dba5c54ba2ba7e85da3d3ce062756eb1f3ae37",
+   "summary": "Derive an inspector from the environment's own checker, then try to kill it.",
+   "symbol_count": 7,
+   "symbols": [
+    "Derivation",
+    "DerivationError",
+    "Flight",
+    "Requirement",
+    "_literals",
+    "_tally",
+    "derive"
+   ],
+   "terms": {
+    "checker": 1,
+    "derivation": 1,
+    "derivationerror": 1,
+    "derive": 2,
+    "derived": 1,
+    "environment": 1,
+    "flight": 1,
+    "flywheel": 1,
+    "inspector": 2,
+    "kill": 1,
+    "literals": 1,
+    "own": 1,
+    "requirement": 1,
+    "tally": 1,
+    "try": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/deterministic_decision_primitives.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -241584,12 +242795,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/expect_discrimination_v1.py",
-   "sha256": "e870368c44ab6c4d24ca004c22f19d47208df739d7b659425543216d08195883",
+   "sha256": "6c06728476189af4b251d7cb43d8507e217421d83f706062b5cb159b40c226bf",
    "summary": "Does each capability's declared verification actually observe anything?",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_declared_constants",
     "_has_output_claim",
+    "_has_registered_inspector",
     "_load_registry",
     "main",
     "measure"
@@ -241604,6 +242816,7 @@
     "each": 1,
     "expect": 1,
     "has_output_claim": 1,
+    "has_registered_inspector": 1,
     "load_registry": 1,
     "main": 1,
     "measure": 1,
@@ -241958,6 +243171,45 @@
     "repeat": 1,
     "score_effect": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/external_hard_slice_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/external_hard_slice_v1.py",
+   "sha256": "018c8f0a69607adcb2ebd441b5ab5dc69e9de62bc5e5cf6f9911b80f9eb3d498",
+   "summary": "The hard slice: work chosen by evidence the system does not get to curate.",
+   "symbol_count": 6,
+   "symbols": [
+    "Candidate",
+    "SliceError",
+    "_settled",
+    "candidates",
+    "run",
+    "select"
+   ],
+   "terms": {
+    "candidate": 1,
+    "candidates": 1,
+    "chosen": 1,
+    "curate": 1,
+    "evidence": 1,
+    "external": 1,
+    "get": 1,
+    "hard": 2,
+    "not": 1,
+    "run": 1,
+    "select": 1,
+    "settled": 1,
+    "slice": 2,
+    "sliceerror": 1,
+    "system": 1,
+    "v1": 1,
+    "work": 1
    }
   },
   {
@@ -257103,6 +258355,45 @@
   },
   {
    "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/mortality_and_triage_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/mortality_and_triage_v1.py",
+   "sha256": "abb275257890cc7a7ec6d95e572554e568a93072fce5b15dfb3fdc55b66ce4f0",
+   "summary": "The first thing in this tree that can be lost.",
+   "symbol_count": 8,
+   "symbols": [
+    "Life",
+    "LifeStore",
+    "Work",
+    "choose_next",
+    "demonstration_board",
+    "live",
+    "main",
+    "measure"
+   ],
+   "terms": {
+    "choose_next": 1,
+    "demonstration_board": 1,
+    "first": 1,
+    "life": 1,
+    "lifestore": 1,
+    "live": 1,
+    "lost": 1,
+    "main": 1,
+    "measure": 1,
+    "mortality": 1,
+    "thing": 1,
+    "tree": 1,
+    "triage": 1,
+    "v1": 1,
+    "work": 1
+   }
+  },
+  {
+   "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/mrel_necessary_property_authority_v1.py",
@@ -263469,6 +264760,53 @@
     "text_matches": 1,
     "transaction": 1,
     "transactions": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/permanence_amplifies_check_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/permanence_amplifies_check_v1.py",
+   "sha256": "a3fb3821f0eeac58db99f0426b4e8728ef9214b3494d86744d3e4873ade25c62",
+   "summary": "One demonstration buys a hypothesis. Not the rule.",
+   "symbol_count": 11,
+   "symbols": [
+    "Record",
+    "Skill",
+    "evaluate",
+    "learn",
+    "live_hypotheses",
+    "main",
+    "measure",
+    "permanence",
+    "records",
+    "strong_check",
+    "weak_check"
+   ],
+   "terms": {
+    "amplifies": 1,
+    "buys": 1,
+    "check": 1,
+    "demonstration": 1,
+    "evaluate": 1,
+    "hypothesis": 1,
+    "learn": 1,
+    "live_hypotheses": 1,
+    "main": 1,
+    "measure": 1,
+    "not": 1,
+    "one": 1,
+    "permanence": 2,
+    "record": 1,
+    "records": 1,
+    "rule": 1,
+    "skill": 1,
+    "strong_check": 1,
+    "v1": 1,
+    "weak_check": 1
    }
   },
   {
@@ -273563,14 +274901,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "513e09548df5d1c57aefec79ac85b77ad0abadac95a80e0907198cb097fee592",
+   "sha256": "0d5e415897daee428068bf7bcfe1fe9af447b2741e237457cfe00d088eea1047",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 69,
+   "symbol_count": 77,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
     "_alternative_ids",
+    "_anchor_is_ink",
     "_asked_to_print_named_lines",
+    "_bucket",
     "_canonical_json_sha256",
     "_consumed_downstream",
     "_digest",
@@ -273588,9 +274928,7 @@
     "_inspect_decision_verify",
     "_inspect_diagnose_and_architect",
     "_inspect_docx_verify",
-    "_inspect_fault_localize",
-    "_inspect_git_bisect_regression",
-    "_inspect_implement_function_spec"
+    "_inspect_fault_localize"
    ],
    "terms": {
     "acceptance": 2,
@@ -279942,6 +281280,125 @@
     "semantic": 2,
     "truth": 2,
     "v1": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/self_authored_obligations_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/self_authored_obligations_v1.py",
+   "sha256": "d4edcd533818c29037f5c18ef8db6996813b561c0fd8d11d2c9744ebdf90075e",
+   "summary": "Work it was not given.",
+   "symbol_count": 10,
+   "symbols": [
+    "Proposal",
+    "Verdict",
+    "admit",
+    "author",
+    "capability_gap_proposals",
+    "cheat_worlds",
+    "main",
+    "metrics",
+    "naive_lexical_proposals",
+    "scan_repository"
+   ],
+   "terms": {
+    "admit": 1,
+    "author": 1,
+    "authored": 1,
+    "capability_gap_proposals": 1,
+    "cheat_worlds": 1,
+    "given": 1,
+    "main": 1,
+    "metrics": 1,
+    "naive_lexical_proposals": 1,
+    "not": 1,
+    "obligations": 1,
+    "proposal": 1,
+    "scan_repository": 1,
+    "self": 1,
+    "v1": 1,
+    "verdict": 1,
+    "work": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/self_prediction_baseline_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/self_prediction_baseline_v1.py",
+   "sha256": "5e4e31a9e9e29cedc847cac8b84de251f0b1b152c92b8afca19dcaf42554f136",
+   "summary": "A predictor the system cannot author, to judge the one it does.",
+   "symbol_count": 5,
+   "symbols": [
+    "_chronological",
+    "_verdict",
+    "baseline_probability",
+    "compare",
+    "main"
+   ],
+   "terms": {
+    "author": 1,
+    "baseline": 1,
+    "baseline_probability": 1,
+    "cannot": 1,
+    "chronological": 1,
+    "compare": 1,
+    "judge": 1,
+    "main": 1,
+    "one": 1,
+    "prediction": 1,
+    "predictor": 1,
+    "self": 1,
+    "system": 1,
+    "v1": 1,
+    "verdict": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/self_prediction_calibration_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/self_prediction_calibration_v1.py",
+   "sha256": "abeedcbd580267e16fba65e5bc4e52a47ba3861ccd3c75363c66ab922b0bec3e",
+   "summary": "Does the system's model of itself predict anything?",
+   "symbol_count": 8,
+   "symbols": [
+    "CalibrationError",
+    "Ledger",
+    "Prediction",
+    "_probability",
+    "_verdict",
+    "gate",
+    "main",
+    "score"
+   ],
+   "terms": {
+    "anything": 1,
+    "calibration": 1,
+    "calibrationerror": 1,
+    "gate": 1,
+    "itself": 1,
+    "ledger": 1,
+    "main": 1,
+    "model": 1,
+    "predict": 1,
+    "prediction": 2,
+    "probability": 1,
+    "score": 1,
+    "self": 1,
+    "system": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {
@@ -288117,15 +289574,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-   "sha256": "a6a23476622b24f4cca688cff1e4c73737731396dd94c99e50051d013a2eb43c",
+   "sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a",
    "summary": "Unified Cognitive Fabric V1.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "CognitiveFabricError",
     "_auto_mode",
     "_auto_one_shot_summary",
     "_bounded_r3_direct_observation",
     "_decision_requires_user_information",
+    "_manual_learning_retry_context",
     "_run_adequate_decision_engine",
     "_unwrap_live_runtime",
     "catalog",
@@ -288140,6 +289598,7 @@
     "cognitivefabricerror": 1,
     "decision_requires_user_information": 1,
     "fabric": 2,
+    "manual_learning_retry_context": 1,
     "run": 1,
     "run_adequate_decision_engine": 1,
     "unified": 2,

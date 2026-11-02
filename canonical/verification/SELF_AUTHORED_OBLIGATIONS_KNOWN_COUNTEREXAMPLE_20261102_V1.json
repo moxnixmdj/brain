@@ -1,0 +1,28 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "It finds gaps nobody assigned, defends each against worlds that only look done, and puts only the survivors on its own board (canonical/runtime/self_authored_obligations_v1.py)",
+ "falsifier_id": "SELF_AUTHORSHIP_INVENTS_INFINITE_BUSYWORK",
+ "decisive_question": "Does an agent that authors its own obligations necessarily produce work that is real, or only work that is self-satisfying?",
+ "answer": "ONLY WITH DEFENCE -- and the defence found the real failure on its first run",
+ "counterexamples": [
+  "On the live registry: 112 capabilities have no registered inspector, and a lexical author -- one that decides it is done when the word 'verified' appears anywhere -- concluded all 112 were ALREADY DONE, because a single capability id (python.software.repair.apply.verified.v1) contains the word. One coincidental token and it believes there is nothing left to do.",
+  "The value and cost it assigns to its own proposals are guesses. Two of 112 are cheap by a prefix rule; nothing calibrates either number, so its board is ranked by an opinion.",
+  "It can only find gaps it has a reader for. The registry is parseable, so those gaps appear. A repository it cannot parse is invisible, and the receipt cannot say how much is invisible.",
+  "All 112 admitted obligations are the same shape -- 'this capability needs an inspector'. Self-authorship that produces one kind of work is a template with a scanner attached.",
+  "It can establish that work is real, reachable and checkable. It cannot establish that the work is WORTH doing. Defending a proposal is not choosing a life.",
+  "The cheat worlds are mutations I wrote. An adversary whose idea of 'looking done' is better than my four mutations defeats this gate, and nothing here estimates how far away that is."
+ ],
+ "measured": {
+  "live_registry": "155 capabilities, 43 inspected, 112 uninspected",
+  "defended_author": "112 proposed, 112 admitted, 0 refused, rate 1.0",
+  "naive_lexical_author_same_gaps": "112 proposed, 0 admitted, 112 REFUSED__UNFALSIFIABLE, rate 0.0",
+  "decisive_synthetic_control": "a check that scans for the word is refused because a world with 'verified' moved into a note satisfies it",
+  "busywork_controls": "'quality improves' and two other always-true propositions: REFUSED__UNFALSIFIABLE",
+  "honest_reading_of_rate_1_0": "the live source contains only real gaps, so the gate did not need to refuse anything; its discrimination is shown by the naive comparator and the synthetic controls, not by this number",
+  "board": "total cost 111.0, 2 of 112 cheap by the prefix rule",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The creature can now put work on its own board that a person did not assign, and every item on that board has survived a claim that it is real, reachable, and not satisfiable by pretending. That is a genuine structural change and it is still not a life: all of its work is one shape, ranked by guessed values, and it cannot see what it cannot parse.",
+ "what_would_close_it": "Heterogeneous proposals from more than one reader, a calibration of the values it assigns against outcomes, and an adversary stronger than the four mutations written here."
+}
