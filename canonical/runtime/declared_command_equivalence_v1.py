@@ -25,11 +25,21 @@ Matching is positional and token-exact:
 
 * the program name is never a placeholder, so a template cannot match a
   different program;
-* ``$``-prefixed tokens are the row's own inputs and may match any one operand,
-  in the declared position;
+* a token that is ONLY a placeholder (``${path}``) is one of the row's own
+  operands and may match any one token, in the declared position;
+* a token that is a LITERAL followed by a placeholder (``$a ${line}``) matches a
+  stated token that begins with that literal, so a row can declare that it
+  computes one subcommand of a program without claiming the whole program.  The
+  remainder must be non-empty: the literal alone is not an operand;
 * every other token must equal the stated token, so a different flag or a
   different operand order does not match;
-* the lengths must agree, so no prefix match is possible.
+* the lengths must agree, so no prefix match across operands is possible.
+
+The literal-prefix form exists because `file.line.appended.v1` appends a stated
+line with ``sed -i '$a <line>'``: the value is part of the command line, and a
+bare ``$``-placeholder at that position would have declared that the row computes
+ANY ``sed -i`` -- including a substitution it does not perform.  A declaration
+that is wider than the behaviour is a lie with a receipt.
 
 The declaration is a claim about behaviour, and a claim is only worth what its
 check is: `verify_file_facts_provenance_v1` compares the rows' answers against
@@ -41,6 +51,23 @@ from typing import Any, Mapping, Sequence
 
 #: Registry key holding the declaration.
 FIELD = "computes_command"
+
+
+def _token_matches(expected: str, actual: str) -> bool:
+    """One positional token of a declaration against the sentence's own.
+
+    See the module docstring: exact literal, whole placeholder, or literal-then-
+    placeholder.  Anything else is not this row's command.
+    """
+    if not expected:
+        return False
+    cut = expected.find("${")
+    if cut < 0:
+        return expected == actual
+    if cut == 0:
+        return True           # a whole placeholder takes any one operand
+    prefix = expected[:cut]
+    return actual.startswith(prefix) and len(actual) > len(prefix)
 
 
 def matched_template(entry: Mapping[str, Any], argv: Any) -> Mapping[str, Any] | None:
@@ -62,7 +89,7 @@ def matched_template(entry: Mapping[str, Any], argv: Any) -> Mapping[str, Any] |
             continue
         if not template[0] or template[0].startswith("$"):
             continue
-        if all(expected.startswith("$") or expected == actual
+        if all(_token_matches(expected, actual)
                for expected, actual in zip(template, stated)):
             return {**dict(declaration), "matched_argv": stated, "template": template}
     return None

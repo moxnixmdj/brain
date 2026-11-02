@@ -80,6 +80,26 @@ def test_a_placeholder_program_matches_nothing() -> None:
     assert declared.matched_template(wildcard, ["rm", "-l", "x"]) is None
 
 
+def test_a_literal_prefix_declares_one_subcommand_and_not_the_program() -> None:
+    """`$a ${line}` is the append subcommand; any other sed -i is a different command."""
+    append = {"computes_command": {"argvs": [["sed", "-i", "$a ${line}", "${path}"]]}}
+    assert declared.matched_template(append, ["sed", "-i", "$a omega", "f.txt"]) is not None
+    assert declared.matched_template(append, ["sed", "-i", "s/a/b/g", "f.txt"]) is None, (
+        "a substitution was declared by an append row")
+    assert declared.matched_template(append, ["sed", "-i", "$a ", "f.txt"]) is None, (
+        "the literal with an empty operand was accepted as an operand")
+    assert declared.matched_template(append, ["sed", "-i", "$aX omega", "f.txt"]) is None, (
+        "a token that only shares a character prefix was accepted")
+    assert declared.matched_template(append, ["sed", "-e", "$a omega", "f.txt"]) is None
+
+
+def test_a_whole_placeholder_still_takes_any_operand() -> None:
+    """The extension must not narrow the form every existing declaration uses."""
+    count = {"computes_command": {"argvs": [["wc", "-l", "${path}"]]}}
+    for operand in ("a.txt", "canonical/astra_runtime/tmp/x/a.txt", "spaced name.txt"):
+        assert declared.matched_template(count, ["wc", "-l", operand]) is not None, operand
+
+
 def test_a_row_that_declares_nothing_is_unchanged() -> None:
     assert declared.matched_template({}, ["wc", "-l", "x"]) is None
     assert declared.matched_template({"read_only": True}, ["wc", "-l", "x"]) is None
@@ -272,8 +292,9 @@ def test_the_registry_rows_that_declare_a_command_are_the_file_rows() -> None:
                        if isinstance(entry, dict) and declared.FIELD in entry)
     assert declaring == ["file.archive.tar_gz.v1", "file.compressed.gzip.v1",
                          "file.contents.v1", "file.copy.v1", "file.diff.v1",
-                         "file.line_count.v1", "file.rename.v1", "file.reversed.v1",
-                         "file.sorted.v1", "file.stat.v1"], declaring
+                         "file.line.appended.v1", "file.line_count.v1", "file.rename.v1",
+                         "file.reversed.v1", "file.sorted.v1", "file.stat.v1",
+                         "file.uppercased.v1"], declaring
     # The declaration says what a row COMPUTES, not that it only reads. Exactly
     # four rows write, and they are named here so a fifth cannot appear quietly
     # with the read-only guard switched off. Each new one arrived with its own
@@ -288,7 +309,15 @@ def test_the_registry_rows_that_declare_a_command_are_the_file_rows() -> None:
     #     and never removes anything.
     writers = sorted(cid for cid in declaring if registry[cid].get("read_only") is not True)
     assert writers == ["file.archive.tar_gz.v1", "file.compressed.gzip.v1",
-                       "file.copy.v1", "file.rename.v1"], writers
+                       "file.copy.v1", "file.line.appended.v1", "file.rename.v1",
+                       "file.uppercased.v1"], writers
+    # The two in-place editors joined this list on 2026-11-02 and the rule did not
+    # change: each declares the exact command line its output is byte-identical to
+    # (`sed -e 's/.*/\U&/'` and `sed -i '$a <stated line>'`), each was measured
+    # against the real program, and each is a file row.  Before the declaration
+    # they were refused with NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND for sentences
+    # the composer maps to sed -- "Convert <f> to uppercase" and "Append '<x>' to
+    # <f>" -- which is the exemption this file exists to scope.
 
 
 def test_a_declaration_outranks_a_mutation_verb_the_command_does_not_have() -> None:

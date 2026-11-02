@@ -110,7 +110,14 @@ def _directory_list(args, root: pathlib.Path) -> dict:
 #: The grammars a sentence uses to state the string to look for. Each capture is
 #: a plain word run; the value is never inferred from a path or a filename.
 _SEARCH_GRAMMARS = (
-    re.compile(r"\b(?:contain(?:s|ing)?)\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
+    # "Which files under D mention beta" asks the same question as "...contain
+    # beta" and was measured to reach this row and then be refused
+    # (CAPABILITY_REFUSED_SEARCH_TEXT_NOT_STATED) because only "contain" was
+    # read as the verb that states the needle.  "Mention" states it too: a file
+    # that mentions a string is one whose text carries that string, which is
+    # exactly what the search looks for.  The capture is the same narrow word
+    # run, so this widens the verb and not the value.
+    re.compile(r"\b(?:mention(?:s|ing)?|contain(?:s|ing)?)\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
     re.compile(r"\bfor\s+the\s+word\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
     re.compile(r"\b(?:search|look)\w*\b[^.]{0,80}?\bfor\s+[\"']?([A-Za-z0-9_.+-]{1,64})[\"']?", re.I),
 )

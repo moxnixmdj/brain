@@ -38,7 +38,7 @@ if str(ROOT) not in sys.path:
 from canonical.runtime import live_brain_route_admission_v1 as door  # noqa: E402
 
 WORLD = ROOT / "canonical/astra_runtime/tmp/paraphrase_ratchet"
-FLOOR = 15
+FLOOR = 18
 
 
 def _rel(name: str) -> str:
@@ -86,6 +86,11 @@ def _served_sentences() -> list[tuple[str, callable]]:
         ("Turn %s into upper case" % a, None),
         ("Add the line epsilon to %s" % a,
          lambda: (WORLD / "a.txt").read_text(encoding="utf-8").endswith("epsilon\n")),
+        ("Convert %s to uppercase" % a,
+         lambda: (WORLD / "a.txt").read_text(encoding="utf-8") == "ALPHA\nBETA\nGAMMA\n"),
+        ("Append 'omega' to %s" % a,
+         lambda: (WORLD / "a.txt").read_text(encoding="utf-8").endswith("omega\n")),
+        ("Which files under %s mention beta?" % d, None),
     ]
 
 
@@ -98,19 +103,10 @@ def _unserved() -> dict[str, tuple[str, str]]:
         "What files are in ": (
             "FAIL__RAW_GOAL_COMPILATION_GAP",
             "the listing row wants 'list the directory', not this phrasing"),
-        "Which files under ": (
-            "FAIL__RAW_GOAL_COMPILATION_GAP",
-            "the search row reads 'which files in', not 'which files under'"),
         "Make a copy of ": (
             "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
             "one semantic token, so admission refuses and the sentence falls to "
             "the general shell row, which has no confinement"),
-        "Convert ": (
-            "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
-            "same gate: the row's only matching word is 'uppercase'"),
-        "Append '": (
-            "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
-            "same gate: 'append' is the row's only matching word"),
     }
 
 
@@ -130,10 +126,7 @@ def run_all() -> list[dict]:
         goal = {
             "What is in ": "What is in %s?" % _rel("a.txt"),
             "What files are in ": "What files are in %s?" % _dir(),
-            "Which files under ": "Which files under %s mention beta?" % _dir(),
             "Make a copy of ": "Make a copy of %s named %s" % (_rel("a.txt"), _rel("c.txt")),
-            "Convert ": "Convert %s to uppercase" % _rel("a.txt"),
-            "Append '": "Append 'omega' to %s" % _rel("a.txt"),
         }[prefix]
         before = (WORLD / "a.txt").read_bytes()
         outcomes.append({"goal": goal, "result": _ask(goal), "before": before})
@@ -160,7 +153,7 @@ def test_the_phrasings_served_do_not_fall_below_the_floor() -> None:
 
 def test_each_unserved_phrasing_is_refused_by_the_gate_that_stops_it() -> None:
     pinned = _unserved()
-    assert len(pinned) == 6, len(pinned)
+    assert len(pinned) == 3, len(pinned)
     for item in run_all():
         for prefix, (expected, why) in pinned.items():
             if not item["goal"].startswith(prefix):
@@ -172,6 +165,24 @@ def test_each_unserved_phrasing_is_refused_by_the_gate_that_stops_it() -> None:
             if "before" in item:
                 assert (WORLD / "a.txt").read_bytes() == item["before"], (
                     "a refused phrasing changed the file", item["goal"])
+
+
+def test_the_two_verbs_name_the_same_files() -> None:
+    """'mention' was served by this turn's change; it must not answer differently.
+
+    The widened verb buys a phrasing, not an answer.  If the two sentences ever
+    disagree about which files match, the paraphrase is not the same question and
+    this ratchet would be counting a sentence it serves with a different answer.
+    """
+    d = _dir()
+    answers = []
+    for goal in ("Which files under %s mention beta?" % d,
+                 "Which files under %s contain beta?" % d):
+        _world()
+        result = _ask(goal)
+        assert result.get("pass") is True, (goal, result.get("status"))
+        answers.append(sorted(str(x) for x in ((result.get("answer") or {}).get("value") or [])))
+    assert answers[0] == answers[1] == [_rel("a.txt")], answers
 
 
 def test_the_world_is_rebuilt_so_the_number_cannot_drift() -> None:

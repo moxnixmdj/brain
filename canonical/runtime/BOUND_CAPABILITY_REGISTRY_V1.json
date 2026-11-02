@@ -12570,6 +12570,8 @@
       "keywords": [
         "files contain",
         "files containing",
+        "files that mention",
+        "files mention",
         "search the directory for",
         "search for the word",
         "find files with"
@@ -13084,6 +13086,18 @@
       }
     },
     "file.uppercased.v1": {
+      "computes_command": {
+        "argvs": [
+          [
+            "sed",
+            "-e",
+            "s/.*/\\U&/",
+            "${path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "performed in process by rewriting the file atomically and reading it back; no shell and no subprocess. The declared command line is the one this row's output is byte-identical to, and the equivalence is checked against real sed."
+      },
       "action_template": {
         "type": "invoke_capability",
         "args": {
@@ -13111,6 +13125,7 @@
         "uppercase"
       ],
       "limitations": [
+        "Declares the command line it is byte-identical to (sed -e 's/.*/\\U&/'); the equivalence is checked against the real program, not asserted.",
         "Rewrites the stated file in place, atomically, and reads it back; a result identical to the input is reported unchanged instead of written.",
         "Refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
       ],
@@ -13165,6 +13180,18 @@
       }
     },
     "file.line.appended.v1": {
+      "computes_command": {
+        "argvs": [
+          [
+            "sed",
+            "-i",
+            "$a ${line}",
+            "${path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "performed in process by rewriting the file atomically and reading it back; no shell and no subprocess. `$a ${line}` is a literal `$a ` followed by the stated line, so this declaration covers appending THAT line and nothing else -- a substitution at the same position does not match."
+      },
       "action_template": {
         "type": "invoke_capability",
         "args": {
@@ -13194,6 +13221,7 @@
         "insert"
       ],
       "limitations": [
+        "Declares the command line it is byte-identical to (sed -i '$a <stated line>'), checked against the real program. The declaration covers only that subcommand -- a substitution does not match -- and it stops at one case: sed's $a addresses the LAST LINE, so on an EMPTY file sed appends nothing while this row adds the line, which is the useful reading and is stated rather than hidden.",
         "Refuses when the line to add is not stated in the sentence, rather than inventing one.",
         "Rewrites the stated file in place, atomically, and reads it back; refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
       ],
