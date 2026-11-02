@@ -701,6 +701,19 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     paths=_repo_paths(goal,root)
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
+    # A WRITER'S DESTINATION IS NOT ONE OF ITS INPUTS.
+    #
+    # "Copy <dir>/a.txt to <dir>/c.txt" names two existing files once the copy
+    # has already been made, and every input rule below then saw two candidates
+    # for one slot and refused -- so a copy that had worked once could never run
+    # again.  For a writing row the destination is resolved first, from the
+    # sentence, and removed from the input paths: see `_bare_stated_destination`.
+    _writer_destination=None
+    if entry.get("read_only") is not True:
+        _writer_destination=_bare_stated_destination(goal, paths)
+        if _writer_destination is not None:
+            paths=[(raw,p) for raw,p in paths
+                   if raw!=_writer_destination and p.as_posix()!=_writer_destination]
     result={}
     # A ROW WITH TWO FILE SLOTS TAKES THE TWO FILES THE SENTENCE NAMED.
     #
@@ -878,6 +891,16 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
         if key.endswith("_path"):
             stem=key[:-5].lower()
             if key.startswith("output_") or stem in output_stems:
+                # BEFORE ANY FALLBACK: a writer's destination is the one the
+                # sentence states.  The generic rules below bind an output slot
+                # to "the only path in the sentence" -- which for "Copy a.txt to
+                # c.txt" is the SOURCE -- and the world fallback invented a spool
+                # artifact instead, so the stated destination was never written
+                # and the copy still reported success.  See
+                # `_bare_stated_destination` for what keeps this narrow.
+                if _writer_destination is not None:
+                    result[key]=_writer_destination
+                    continue
                 # Future outputs may not exist. Prefer type-compatible paths
                 # explicitly named by the goal so multiple outputs can bind
                 # without positional guessing.
@@ -994,6 +1017,13 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if stem in {"input","source"} and len(existing)==1:
                     result[key]=existing[0][0]
                     continue
+        if key.endswith("_path") and entry.get("read_only") is not True:
+            # A WRITER'S DESTINATION IS THE ONE THE SENTENCE STATES OR NONE.
+            # Never a synthesised artifact: see `_bare_stated_destination`.
+            destination = _bare_stated_destination(goal, paths)
+            if destination is not None:
+                result[key]=destination
+                continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     # Slot order cannot make a declared destination into an input scope.
     destinations=_claimed_paths({k:v for k,v in result.items()
@@ -1003,6 +1033,54 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
                                          "scope_is_output_destination:"+key)
     return result
+
+
+def _bare_stated_destination(goal, paths):
+    """The destination a WRITING sentence states, or None.
+
+    The repository-path scanner only sees `dir/name`, so a destination written as
+    a bare filename never became a candidate: `_bind_inputs` gave up and the
+    world fallback SYNTHESISED an artifact path, so the copy reported success
+    while the destination the sentence named was never written.  Measured
+    2026-11-02: "Copy <dir>/a.txt to c.txt" bound output_path to
+    canonical/astra_runtime/tmp/spool_0_output.json.
+
+    What keeps this narrow:
+
+    * the sentence states exactly one destination phrase, after `to`/`into`/`onto`;
+    * nothing file-like follows it, so "rename old_name to new_name in lib.py" --
+      an edit INSIDE that file -- is not read as a new file called `new_name`;
+    * exactly one existing file remains once that destination is set aside, so
+      "beside its source" has exactly one meaning;
+    * the destination is not the source and not a directory.
+    """
+    text = str(goal or "")
+    stated = list(re.finditer(r"\b(?:to|into|onto)\s+([A-Za-z0-9_./-]+)", text, re.I))
+    if len(stated) != 1:
+        return None
+    match = stated[0]
+    name = match.group(1).rstrip(".")
+    if not name:
+        return None
+    if re.search(r"[\w.-]+/[\w./-]+|\b[\w-]+\.[A-Za-z0-9]{1,12}\b", text[match.end():]):
+        return None
+    stated_path = pathlib.Path(name)
+    named = [(raw, path) for raw, path in paths
+             if path.is_file() and path.resolve() != stated_path.resolve()
+             and path.name != stated_path.name]
+    if not named:
+        return None
+    if "/" in name:
+        if len(named) != 1:
+            return None
+        return name
+    if len(named) != 1:
+        return None
+    source_raw, source_path = named[0]
+    destination = source_path.parent / name
+    if destination == source_path or (destination.exists() and destination.is_dir()):
+        return None
+    return (pathlib.Path(source_raw).parent / name).as_posix()
 
 
 def _declared_exact_file_scope(entry, key, paths, goal=None):
@@ -1060,6 +1138,21 @@ def _complete_inputs_via_world_binding(goal, root, cid, entry):
     _paired=[k for k,v in (entry.get("proposal_bindings") or {}).items()
              if isinstance(v,dict) and v.get("type")=="path_file_or_dir"]
     if len(_paired)>1:
+        return None
+    # A WRITER GETS NO WORLD-SYNTHESIZED INPUT AT ALL.
+    #
+    # The same fallback is harmless for a reader: the worst case is a row asked
+    # about a file the sentence did not name, which the run can see. For a row
+    # that WRITES it is not harmless. Measured 2026-11-02, immediately after
+    # `file.rename.v1` was registered: "Rename old_name to new_name in
+    # <repo>/canonical/.../lib.py." -- a Python SYMBOL rename -- selected the
+    # file rename, the pinned binder bound `output_path` to the stated lib.py,
+    # and this fallback filled `path` with an unrelated repository file
+    # (`.github/scripts/land_on_main.sh`). The row then moved that file and
+    # reported output_verified, so an ordinary sentence about one file renamed a
+    # different file and PASSED. A writer's inputs must be stated in the
+    # sentence; when they are not, the run refuses.
+    if entry.get("read_only") is not True:
         return None
     try:
         from canonical.runtime import world_binding_v1 as _wb

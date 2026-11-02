@@ -1100,6 +1100,19 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
     if key in _PATH_FILE_KEYS:
+        # A DESTINATION IS NOT A CANDIDATE SOURCE.
+        #
+        # "Copy <dir>/a.txt to <dir>/c.txt" names two existing files as soon as
+        # the copy has been made once, so this binder saw two candidates for the
+        # source slot and refused the sentence it had already served -- the
+        # second run of a working copy failed as an ambiguity.  For a writing row
+        # the destination is the one the sentence states, and it is removed
+        # before the source is chosen.
+        if (entry or {}).get("read_only") is not True:
+            destination = gc._bare_stated_destination(goal, paths)
+            if destination is not None:
+                paths = [(raw, p) for raw, p in paths
+                         if raw != destination and p.as_posix() != destination]
         files = [raw for raw, p in paths if p.is_file()]
         if len(files) == 1:
             return files[0]
@@ -2057,6 +2070,25 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     # crash in the compiler, not a refusal.  A compiler that crashes is not a compiler that
     # fails closed, so the type is settled here rather than at each call site.
     root = pathlib.Path(root)
+    # A WRITER'S STATED DESTINATION IS NOT A COLLISION TO BE REBOUND.
+    #
+    # F13 below moves a colliding output to a spool artifact, which is right for a
+    # report that must not sit on top of its input.  It is wrong for a row whose
+    # whole job is to write where the sentence said: measured 2026-11-02, "Copy
+    # <dir>/a.txt to <dir>/c.txt" -- with c.txt already present from the previous
+    # run -- had its destination moved to
+    # canonical/astra_runtime/tmp/spool_0_output.json, so the copy reported
+    # success and the stated destination was never touched.  A writer keeps the
+    # destination it was given; whether that destination may be written is the
+    # adapter's decision (it refuses an existing file the sentence did not ask to
+    # overwrite), never a reason to write somewhere else.
+    _stated_writer_destination = None
+    if isinstance(entry, Mapping) and entry.get("read_only") is not True:
+        try:
+            _stated_writer_destination = gc._bare_stated_destination(
+                goal, gc._repo_paths(goal, root))
+        except Exception:  # noqa: BLE001 - a failed parse simply keeps the old path
+            _stated_writer_destination = None
     input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
     if inputs.get("source_root") and inputs.get("module"):
         input_paths.add(str(pathlib.PurePosixPath(str(inputs["source_root"])) / str(inputs["module"])))
@@ -2123,6 +2155,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         # goes.  The discriminator is the one already used here: does the CAPABILITY edit source?  A
         # row that only reports on source may not be handed a source file as its output, whatever the
         # sentence wanted, and the remedy is F13's unchanged.
+        if _stated_writer_destination is not None and value == _stated_writer_destination:
+            continue
         if (not edits_source and value.endswith(_SOURCE_SUFFIXES)
                 and value in _stated_move_destinations(goal)
                 and spool is not None and cycle is not None):
@@ -2228,6 +2262,39 @@ def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int
 _FALLBACK_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
+def _states_a_file_destination(goal: str) -> bool:
+    """Does the sentence say WHERE a file is to be written?
+
+    Purely syntactic, so it can run in the ranker, which holds no repository
+    root.  Same shape as `goal_compiler._bare_stated_destination`: exactly one
+    `to`/`into`/`onto` phrase, and nothing file-like after it.  "Rename old_name
+    to new_name in lib.py" fails the second test, which is the whole point -- the
+    trailing file says the change is INSIDE that file, so it is a symbol rename
+    and not a file rename.
+    """
+    text = str(goal or "")
+    stated = list(re.finditer(r"\b(?:to|into|onto)\s+([A-Za-z0-9_./-]+)", text, re.I))
+    if len(stated) != 1:
+        return False
+    tail = text[stated[0].end():]
+    return not re.search(r"[\w.-]+/[\w./-]+|\b[\w-]+\.[A-Za-z0-9]{1,12}\b", tail)
+
+
+def _writes_the_one_stated_file(entry: Mapping[str, Any]) -> bool:
+    """A row whose contract is exactly: one file in, one file out, nothing else.
+
+    Structurally identified rather than by id, so the rule survives renaming and
+    covers the next row of this shape.  `file.copy.v1` and `file.rename.v1`
+    declare exactly {goal_text, path_file_or_dir, auto_path}."""
+
+    bindings = entry.get("proposal_bindings") or {}
+    if not isinstance(bindings, Mapping) or entry.get("read_only") is True:
+        return False
+    types = sorted(str((spec or {}).get("type")) for spec in bindings.values()
+                   if isinstance(spec, Mapping))
+    return types == ["auto_path", "goal_text", "path_file_or_dir"]
+
+
 def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
     """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
     out = []
@@ -2244,6 +2311,17 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
             if not (surface_word and surface_word in own):
                 continue
         if not gc._structured_binary_format_match(goal, entry)[0]:
+            continue
+        # A FILE-TO-FILE WRITER MUST BE TOLD BOTH FILES.
+        #
+        # Scoring is lexical, and "Rename old_name to new_name in lib.py" shares
+        # `rename` with a file rename. Measured 2026-11-02: that sentence -- a
+        # Python SYMBOL rename -- selected `file.rename.v1` over
+        # `python.refactor.rename_symbol.v1` on the word alone, and the writer
+        # then refused (or, before the refusals existed, moved a file nobody
+        # named). A sentence that states no destination file is not a request to
+        # write one, so such a row is not a candidate for it.
+        if _writes_the_one_stated_file(entry) and not _states_a_file_destination(goal):
             continue
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:

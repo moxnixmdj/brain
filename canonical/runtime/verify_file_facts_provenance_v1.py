@@ -540,6 +540,114 @@ ROWS["file_command_view.fgrep_unrouted.v1"] = {
 }
 
 
+def _check_file_op(command: str, expected_dest: str,
+                   removes_source: bool) -> tuple[bool, list[dict]]:
+    """`file.copy.v1` / `file.rename.v1`: the bytes really land, in process.
+
+    The claim is that the writer produces the destination the sentence names
+    with the source's exact bytes and then reads both ends back.  Every part of
+    that is checkable against a world this file builds, so none of it is taken
+    on faith: the digests are recomputed here with hashlib, and the source is
+    inspected before and after.  The refusals are checked too, because a writer
+    that cannot refuse is a writer that can destroy.
+    """
+    checks: list[dict] = []
+    source = WORLD / ("ops_source_%s.txt" % command)
+    dest = WORLD / (expected_dest)
+    # The world persists between verify runs; a leftover destination would turn
+    # the success case into the already-exists refusal.
+    for leftover in (source, dest):
+        if leftover.exists():
+            leftover.unlink()
+    _write(source, "first line\nsecond line\n")
+    source_digest = _sha256(source)
+    source_rel = _rel(source)
+    dest_rel = _rel(dest)
+
+    out = _adapter_run(("%s.%s.v1" % ("file", command)),
+                       {"command": command, "goal": "%s %s to %s" % (command, source_rel, dest_rel),
+                        "path": source_rel, "output_path": dest_rel}, WORLD)
+    checks.append({"name": "the destination exists after the operation",
+                   "ok": dest.is_file(), "destination": dest_rel})
+    landed = _sha256(dest) if dest.is_file() else None
+    checks.append({"name": "the destination's bytes are the source's bytes",
+                   "ok": landed is not None and landed == source_digest,
+                   "digest_recomputed_here": source_digest,
+                   "adapter_reported_source": out.get("source_sha256"),
+                   "adapter_reported_destination": out.get("destination_sha256")})
+    checks.append({"name": "the adapter's own digests match the bytes on disk",
+                   "ok": out.get("source_sha256") == source_digest and out.get("destination_sha256") == landed,
+                   "adapter_returned": {k: out.get(k) for k in
+                                        ("source_sha256", "destination_sha256", "byte_count")}})
+    checks.append({"name": "the operation reports itself verified",
+                   "ok": out.get("output_verified") is True, "adapter_returned": out.get("output_verified")})
+    if removes_source:
+        checks.append({"name": "rename leaves nothing at the source",
+                       "ok": not source.exists(), "source_still_exists": source.exists()})
+    else:
+        checks.append({"name": "copy leaves the source byte-identical",
+                       "ok": source.is_file() and _sha256(source) == source_digest,
+                       "source_still_exists": source.exists()})
+
+    # Refusals.  Each one must raise and must leave the world untouched.
+    def refusal(label, args, expect, untouched=None):
+        """A refusal only counts when it is the refusal that was asked for.
+
+        The first draft of this check accepted any exception, and a rename that
+        had already moved the source "passed" the self-destination test with
+        PATH_NOT_A_REGULAR_FILE -- a pass on the wrong error.  So the expected
+        code is pinned, and the source is put back before each case.
+        """
+        _write(source, "first line\nsecond line\n")
+        try:
+            _adapter_run(("%s.%s.v1" % ("file", command)), dict(args, command=command), WORLD)
+        except Exception as exc:  # noqa: BLE001 - the code is what is checked
+            message = str(exc)
+            ok = expect in message and (untouched() if untouched else True)
+            return {"name": label, "ok": bool(ok), "expects": expect,
+                    "refused_with": message[:140]}
+        return {"name": label, "ok": False, "expects": expect, "refused_with": None}
+
+    base = {"goal": "%s %s to %s" % (command, source_rel, dest_rel)}
+    checks.append(refusal("refuses an existing destination the sentence did not ask to overwrite",
+                          dict(base, path=source_rel, output_path=dest_rel),
+                          "DESTINATION_EXISTS",
+                          lambda: _sha256(dest) == source_digest))
+    outside = "/tmp/brain_provenance_should_not_exist_%s.txt" % command
+    checks.append(refusal("refuses a destination outside the repository",
+                          dict(base, path=source_rel, output_path=outside),
+                          "PATH_OUTSIDE_REPOSITORY",
+                          lambda: not pathlib.Path(outside).exists()))
+    checks.append(refusal("refuses the source as its own destination",
+                          dict(base, path=source_rel, output_path=source_rel),
+                          "SAME_FILE"))
+    checks.append(refusal("refuses when no destination is stated",
+                          {"goal": "%s this file" % command, "path": source_rel},
+                          "PATH_REQUIRED"))
+    # The last guard, and the one the 2026-11-02 false pass needed: a writer acts
+    # only on files the sentence names.
+    checks.append(refusal("refuses a source the sentence never names",
+                          {"goal": "%s %s to %s" % (command, "something_else.txt", dest_rel),
+                           "path": source_rel, "output_path": dest_rel},
+                          "PATH_NOT_STATED_IN_THE_SENTENCE"))
+    return all(c["ok"] for c in checks), checks
+
+
+ROWS["file.copy.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-COPY-001",
+    "claim": ("copies the stated file to the stated destination in process, reads both ends back, "
+              "and refuses to overwrite, to escape the repository, or to copy a file onto itself"),
+    "check": lambda: _check_file_op("copy", "ops_copy_destination.txt", removes_source=False),
+}
+
+ROWS["file.rename.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-RENAME-001",
+    "claim": ("moves the stated file to the stated destination in process, leaving nothing at the "
+              "source, and refuses to overwrite, to escape the repository, or to rename onto itself"),
+    "check": lambda: _check_file_op("rename", "ops_rename_destination.txt", removes_source=True),
+}
+
+
 def verify(cid: str) -> dict:
     row = ROWS[cid]
     world = _world()

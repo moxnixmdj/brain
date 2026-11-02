@@ -254,15 +254,18 @@ def test_a_row_with_two_file_slots_binds_the_two_files_the_sentence_named() -> N
         assert result.get("compiled_capability_id") == "file.diff.v1", goal
 
 
-def test_the_registry_rows_that_declare_a_command_are_the_file_fact_rows() -> None:
+def test_the_registry_rows_that_declare_a_command_are_the_file_rows() -> None:
     registry = graph.load_registry()
     declaring = sorted(cid for cid, entry in registry.items()
                        if isinstance(entry, dict) and declared.FIELD in entry)
-    assert declaring == ["file.contents.v1", "file.diff.v1", "file.line_count.v1",
-                         "file.reversed.v1", "file.sorted.v1",
-                         "file.stat.v1"], declaring
-    for cid in declaring:
-        assert registry[cid].get("read_only") is True, cid
+    assert declaring == ["file.contents.v1", "file.copy.v1", "file.diff.v1",
+                         "file.line_count.v1", "file.rename.v1", "file.reversed.v1",
+                         "file.sorted.v1", "file.stat.v1"], declaring
+    # The declaration says what a row COMPUTES, not that it only reads. Exactly
+    # two rows write, and they are named here so a third cannot appear quietly
+    # with the read-only guard switched off.
+    writers = sorted(cid for cid in declaring if registry[cid].get("read_only") is not True)
+    assert writers == ["file.copy.v1", "file.rename.v1"], writers
 
 
 def test_a_declaration_outranks_a_mutation_verb_the_command_does_not_have() -> None:

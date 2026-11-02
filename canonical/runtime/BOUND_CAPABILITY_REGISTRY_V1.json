@@ -12720,6 +12720,190 @@
           "command": "diff"
         }
       }
+    },
+    "file.copy.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "copy",
+          "goal": "${input.goal}",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_ops",
+      "computes_command": {
+        "argvs": [
+          [
+            "cp",
+            "${path}",
+            "${output_path}"
+          ]
+        ],
+        "answer_field": "destination_path",
+        "note": "performed in process with pathlib; no shell and no subprocess"
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "copy the file",
+        "copy to",
+        "make a copy",
+        "duplicate the file"
+      ],
+      "limitations": [
+        "Writes only the destination the sentence states, and only inside the repository.",
+        "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ""
+        }
+      },
+      "provides": [
+        "copy.file"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "byte_count",
+        "command",
+        "destination_path",
+        "destination_sha256",
+        "output_verified",
+        "path",
+        "schema",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COPY-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: a world is built with known bytes and the result is read back and digested. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_ops",
+          "command": "copy"
+        }
+      }
+    },
+    "file.rename.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "rename",
+          "goal": "${input.goal}",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_ops",
+      "computes_command": {
+        "argvs": [
+          [
+            "mv",
+            "${path}",
+            "${output_path}"
+          ]
+        ],
+        "answer_field": "destination_path",
+        "note": "performed in process with pathlib; no shell and no subprocess"
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "rename the file",
+        "rename to",
+        "move the file",
+        "change the name"
+      ],
+      "limitations": [
+        "Writes only the destination the sentence states, and only inside the repository.",
+        "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ""
+        }
+      },
+      "provides": [
+        "rename.file"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "byte_count",
+        "command",
+        "destination_path",
+        "destination_sha256",
+        "output_verified",
+        "path",
+        "schema",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-RENAME-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: a world is built with known bytes and the result is read back and digested. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_ops",
+          "command": "rename"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
