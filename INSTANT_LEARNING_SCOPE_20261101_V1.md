@@ -98,7 +98,18 @@ find things; this one is a genuine absent connection, and it is a small one.
    than any new mechanism.
 2. **Fix the 7 named refusals.** They are already diagnosed by their own instrument
    (`extract_function` region invalid, `git_branch` target not in stdlib, `find_definition`
-   unserved, and four more). Cheapest capability gain available.
+   unserved, and four more). **Ranked here as the cheapest capability gain available; that ranking is wrong,
+   and live measurement on 2026-11-02 corrected it.** Re-run on `6376dc6`, the census
+   is 42 served / 7 refused (`#16, #21, #26, #32, #33, #45, #46`), and the tree's own
+   `defect_owner` -- the classifier pinned by
+   `test_the_inventory_prices_each_refusal_honestly_v1` -- prices them **4 fixture,
+   3 selection, 0 capability**. Four are rows whose fixtures contain nothing to find,
+   so they measure nothing either way; "fixing" them would move a count, not a
+   capability. The three that are real all sit in the **selection** layer, which is
+   section 2.2's diagnosis, and section 2.2 is right. The full trace -- including why
+   #45/#46 are *not* fixture defects, and why the law-pinned refusal reason must not
+   be renamed to look more specific -- is in
+   `HARDCORE_SWE_ALL_PROBLEMS_20261101_V4.md` section 2.
 3. **Wire the existing abstraction modules into the bridge.** The semantic machinery is
    already here — `h100_zero_learned_semantic_paraphrase_v1` (4 tests), `meta_strategy_abstraction_v9`,
    `recursive_abstraction_v5`, `finite_abstraction_cover_lift_v1`. The bridge currently carries
