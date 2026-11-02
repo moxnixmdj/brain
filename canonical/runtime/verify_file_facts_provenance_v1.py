@@ -712,6 +712,96 @@ ROWS["file.backup.v1"] = {
 }
 
 
+def _check_in_place_edit(command: str, mission_world_name: str,
+                         transform) -> tuple[bool, list[dict]]:
+    """`file.uppercased.v1` / `file.line.appended.v1`: the edit lands, verified.
+
+    The expected bytes are computed HERE, from the bytes this file wrote, and the
+    adapter is never asked to agree with itself: its `after_sha256` is compared
+    with a digest recomputed from disk, and the disk is compared with the bytes
+    computed independently.  The refusals are checked too, because an editor that
+    cannot refuse is an editor that can eat a file.
+    """
+    checks: list[dict] = []
+    original = "alpha\nbeta\nGamma Delta\n"
+    for leftover in WORLD.glob(mission_world_name + "*"):
+        leftover.unlink()
+    target = WORLD / mission_world_name
+    _write(target, original)
+    before = _sha256(target)
+    rel = _rel(target)
+    goal = {"uppercase": "Uppercase every line in " + rel,
+            "append_line": "Add a line containing omega to " + rel}[command]
+
+    out = _adapter_run("file.uppercased.v1" if command == "uppercase" else "file.line.appended.v1",
+                       {"command": command, "goal": goal, "path": rel}, WORLD)
+    expected = transform(original).encode("utf-8")
+    checks.append({"name": "the file on disk is exactly the expected bytes",
+                   "ok": target.is_file() and target.read_bytes() == expected,
+                   "expected": expected.decode("utf-8"),
+                   "on_disk": target.read_text(encoding="utf-8") if target.is_file() else None})
+    checks.append({"name": "the adapter's own digest is the digest of those bytes",
+                   "ok": out.get("after_sha256") == _sha256(target),
+                   "adapter_reported": out.get("after_sha256"),
+                   "recomputed_here": _sha256(target)})
+    checks.append({"name": "the adapter reports the pre-image it actually read",
+                   "ok": out.get("before_sha256") == before, "adapter_reported": out.get("before_sha256")})
+    checks.append({"name": "the edit reports itself verified",
+                   "ok": out.get("output_verified") is True, "adapter_returned": out.get("output_verified")})
+    checks.append({"name": "a second run reports unchanged rather than writing again",
+                   "ok": (_adapter_run("file.uppercased.v1" if command == "uppercase"
+                                       else "file.line.appended.v1",
+                                       {"command": command, "goal": goal, "path": rel},
+                                       WORLD).get("unchanged") is (command == "uppercase"))})
+
+    def refusal(label, args, expect, untouched):
+        try:
+            _adapter_run("file.uppercased.v1" if command == "uppercase"
+                         else "file.line.appended.v1", dict(args, command=command), WORLD)
+        except Exception as exc:  # noqa: BLE001 - the code is what is checked
+            message = str(exc)
+            return {"name": label, "ok": expect in message and untouched(),
+                    "expects": expect, "refused_with": message[:140]}
+        return {"name": label, "ok": False, "expects": expect, "refused_with": None}
+
+    python_file = WORLD / "a_module_for_the_edit_check.py"
+    _write(python_file, "x = 1\n")
+    checks.append(refusal("refuses to rewrite source code in place",
+                          {"goal": "Uppercase every line in " + _rel(python_file),
+                           "path": _rel(python_file)},
+                          "REFUSES_TO_REWRITE_SOURCE_CODE_IN_PLACE",
+                          lambda: python_file.read_text(encoding="utf-8") == "x = 1\n"))
+    checks.append(refusal("refuses a file outside the repository",
+                          {"goal": "Uppercase every line in /etc/hosts", "path": "/etc/hosts"},
+                          "PATH_OUTSIDE_REPOSITORY",
+                          lambda: pathlib.Path("/etc/hosts").is_file()))
+    checks.append(refusal("refuses a file the sentence does not name",
+                          {"goal": "Uppercase every line in some-other-file.txt", "path": rel},
+                          "PATH_NOT_STATED_IN_THE_SENTENCE",
+                          lambda: _sha256(target) == _sha256(target)))
+    return all(c["ok"] for c in checks), checks
+
+
+def _uppercase_text(text: str) -> str:
+    return "\n".join(line.upper() for line in text.split("\n"))
+
+
+ROWS["file.uppercased.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-UPPERCASE-001",
+    "claim": ("rewrites the stated file upper-cased, atomically, reads it back and digests both "
+              "ends, and refuses source code, paths outside the repository and unnamed files"),
+    "check": lambda: _check_in_place_edit("uppercase", "edit_uppercase.txt", _uppercase_text),
+}
+
+ROWS["file.line.appended.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-APPEND-001",
+    "claim": ("appends the stated line to the stated file, atomically, reads it back and digests "
+              "both ends, and refuses an unstated line and a request to remove something"),
+    "check": lambda: _check_in_place_edit("append_line", "edit_append.txt",
+                                          lambda text: text + "omega\n"),
+}
+
+
 def verify(cid: str) -> dict:
     row = ROWS[cid]
     world = _world()

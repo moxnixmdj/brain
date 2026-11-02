@@ -378,6 +378,22 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {"schema": SCHEMA, "admitted": False,
                 "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
                 "compiler_mode": mode, "selected_capability": selected}
+    # A ROW THAT PERFORMS ONE OPERATION IS NOT THE ROW FOR A DIFFERENT ONE.
+    #
+    # `handles_verbs` is the row's own declaration of the mutations it performs.
+    # Measured 2026-11-02 without it: "Delete the last line of <f>" was admitted
+    # to `file.line.appended.v1` on the shared word "line", so a request to
+    # REMOVE was routed to a row that only ever adds. That row refused -- the
+    # right outcome from the wrong route, which is the shape that later becomes a
+    # false pass. A row that declares no verbs is unaffected.
+    _handles = {str(verb).lower() for verb in (entry.get("handles_verbs") or [])}
+    if _handles:
+        _opening = _leading_mutation_word(goal)
+        if _opening is not None and _opening not in _handles:
+            return {"schema": SCHEMA, "admitted": False,
+                    "rule": "THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM",
+                    "compiler_mode": mode, "selected_capability": selected,
+                    "handles": sorted(_handles), "asked_for": _opening}
     if (not capability_selection.is_computed_answer_delivery(goal)
             and not capability_selection.is_ast_code_edit_request(goal)
             and composer_route.extract_argv(goal) is not None):

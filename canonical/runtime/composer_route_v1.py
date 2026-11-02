@@ -344,8 +344,52 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE",
                             "executed": False, "semantic_acceptance_complete": False}
 
+    # A ONE-FILE ROW IS NOT THE PROVIDER FOR A PAYLOAD-PLUS-DESTINATION SENTENCE.
+    #
+    # The graph is typed, so any row that PROVIDES the token the goal's words
+    # point at is reachable -- and a row whose whole contract is one file has no
+    # place for the payload.  Measured 2026-11-02: "Write the line 'PROJECT
+    # BRAIN' to the file <out>" was composed from `file.uppercased.v1` (the word
+    # "line" is in both), the chain ran, the destination did not exist yet, and
+    # the request that had been served by the writer became an unknown-outcome
+    # failure.  A sentence that states a value and where it goes has two
+    # operands; a one-file contract cannot be its answer.
+    # ...and only for the verbs that REPLACE a file's content, because "Add a
+    # line containing delta to <f>" states a payload and a destination too, and
+    # appending is exactly the one-file row's job.
+    _write_sentence = False
+    if _states_a_payload_and_its_destination(goal):
+        for _raw in str(goal or "").lower().replace("?", " ").split():
+            _word = _raw.strip(".,:;!\"'`()[]")
+            if _word:
+                _write_sentence = _word in frozenset(
+                    {"write", "save", "output", "put", "store", "create"})
+                break
+    _registry: Mapping[str, Any] = {}
+    if _write_sentence:
+        try:
+            from canonical.runtime import capability_composer_v1 as _composer
+            _registry = _composer.load_registry()
+        except Exception:  # noqa: BLE001 - no registry, no filter
+            _registry = {}
+
+    def _is_a_one_file_row(cid: str) -> bool:
+        entry = _registry.get(cid)
+        if not isinstance(entry, Mapping):
+            return False
+        bindings = entry.get("proposal_bindings") or {}
+        if not isinstance(bindings, Mapping):
+            return False
+        types = sorted(str((spec or {}).get("type")) for spec in bindings.values()
+                       if isinstance(spec, Mapping))
+        return types == ["goal_text", "path_file_or_dir"]
+
     for token in candidate_tokens(goal, g)[:max_candidates]:
         chain = composer.plan(have, token, g)
+        if chain and _write_sentence and len(chain) == 1 and _is_a_one_file_row(chain[0]):
+            tried.append({"token": token, "reachable": False, "chain": None,
+                          "refused": "ONE_FILE_ROW_CANNOT_CARRY_A_PAYLOAD_AND_A_DESTINATION"})
+            continue
         tried.append({"token": token, "reachable": chain is not None,
                       "chain": chain})
         if chain:

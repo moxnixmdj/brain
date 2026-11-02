@@ -12981,6 +12981,170 @@
           "command": "backup"
         }
       }
+    },
+    "file.uppercased.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "uppercase",
+          "goal": "${input.goal}",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_edit",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "uppercase every line",
+        "uppercase the file",
+        "upper case every line",
+        "capitalise every line"
+      ],
+      "handles_verbs": [
+        "uppercase"
+      ],
+      "limitations": [
+        "Rewrites the stated file in place, atomically, and reads it back; a result identical to the input is reported unchanged instead of written.",
+        "Refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "edit.file.uppercase"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "after_line_count",
+        "after_sha256",
+        "answer",
+        "before_line_count",
+        "before_sha256",
+        "byte_count",
+        "command",
+        "output_verified",
+        "path",
+        "schema",
+        "unchanged"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_edit.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-UPPERCASE-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: the expected bytes are computed before the write, the temporary file is digested, and the source is re-read and re-digested after the atomic move. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_edit",
+          "command": "uppercase"
+        }
+      }
+    },
+    "file.line.appended.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "append_line",
+          "goal": "${input.goal}",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_edit",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "add a line containing",
+        "append a line",
+        "add a line to the file",
+        "append the line"
+      ],
+      "handles_verbs": [
+        "add",
+        "append",
+        "insert"
+      ],
+      "limitations": [
+        "Refuses when the line to add is not stated in the sentence, rather than inventing one.",
+        "Rewrites the stated file in place, atomically, and reads it back; refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "goal": {
+          "type": "goal_text"
+        },
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "edit.file.append_line"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "after_line_count",
+        "after_sha256",
+        "answer",
+        "before_line_count",
+        "before_sha256",
+        "byte_count",
+        "command",
+        "output_verified",
+        "path",
+        "schema",
+        "unchanged"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_edit.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-APPEND-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: the expected bytes are computed before the write, the temporary file is digested, and the source is re-read and re-digested after the atomic move. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_edit",
+          "command": "append_line"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

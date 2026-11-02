@@ -117,21 +117,32 @@ def test_the_door_does_not_serve_a_command_the_row_never_declared() -> None:
     ), admission.get("rule")
 
 
-def test_a_read_only_row_is_refused_for_a_sentence_that_opens_by_changing_the_file() -> None:
+def test_a_row_that_adds_is_not_the_row_for_a_sentence_that_deletes() -> None:
+    """Two sentences that share a word, and two different refusals.
+
+    "Delete the last line of <f>" and "Add a line containing delta to <f>" both
+    contain "line", and measured 2026-11-02 the DELETE sentence was admitted to
+    the row that only ever appends.  It refused, so nothing was destroyed -- but
+    the route was wrong, and a wrong route is how a false pass starts.  Each row
+    now declares the operations it performs (`handles_verbs`) and the door refuses
+    an operation the row does not perform.
+
+    The other two sentences are SERVED, by the rows that do perform them, which is
+    the point of the mechanism: a blanket refusal would be easier and wrong.
+    """
     target = _work()
     rel = target.relative_to(ROOT).as_posix()
-    # "Sort the lines of <f>" USED to be refused here and is now served by the
-    # row that declares `sort <f>` -- the opposite case is pinned below.
-    for goal, verb in (
-        ("Delete the last line of " + rel, "delete"),
-        ("Add a line containing delta to " + rel, "add"),
-        ("Uppercase every line in " + rel, "uppercase"),
-    ):
-        admission = _admission(goal)
-        assert admission.get("admitted") is False, (goal, admission)
-        assert admission.get("rule") == (
-            "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE"), admission
-        assert admission.get("goal_verb") == verb, admission.get("goal_verb")
+    admission = _admission("Delete the last line of " + rel)
+    assert admission.get("admitted") is False, admission
+    assert admission.get("rule") in (
+        "THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM",
+        "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE"), admission
+    for goal, expected in (("Add a line containing delta to " + rel, "file.line.appended.v1"),
+                           ("Uppercase every line in " + rel, "file.uppercased.v1")):
+        result = door.solve({"task_id": "declared_eq_edit", "goal": goal})
+        assert result.get("pass") is True, (goal, result.get("status"))
+        assert result.get("compiled_capability_id") == expected, (
+            goal, result.get("compiled_capability_id"))
 
 
 def test_a_refused_mutating_sentence_does_not_execute_the_read_only_row() -> None:
@@ -145,7 +156,8 @@ def test_a_refused_mutating_sentence_does_not_execute_the_read_only_row() -> Non
     assert result.get("pass") is not True, result.get("status")
     assert result.get("executed") is not True, result.get("executed")
     assert result.get("status") == "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED", result.get("status")
-    assert (result.get("route_admission") or {}).get("rule") == (
+    assert (result.get("route_admission") or {}).get("rule") in (
+        "THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM",
         "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE"), result.get("route_admission")
     assert target.read_bytes() == before, "the file changed"
 

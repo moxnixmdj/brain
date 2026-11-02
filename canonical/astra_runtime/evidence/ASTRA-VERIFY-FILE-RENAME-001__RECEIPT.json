@@ -1,6 +1,6 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
- "adapter_sha256": "31996db5046ca91f7d61b2e6383c0edc5844b62403867f1bf7201befdb498715",
+ "adapter_sha256": "f4e84ad5f68852f73524230bb076b736947bdc75b2e383f9be5afc908f0b325a",
  "capability_id": "file.rename.v1",
  "checks": [
   {
@@ -75,6 +75,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.rename.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T15:07:17Z",
+ "verified_at": "2026-11-02T15:48:15Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }

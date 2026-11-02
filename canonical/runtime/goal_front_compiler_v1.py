@@ -2280,6 +2280,46 @@ def _states_a_file_destination(goal: str) -> bool:
     return not re.search(r"[\w.-]+/[\w./-]+|\b[\w-]+\.[A-Za-z0-9]{1,12}\b", tail)
 
 
+#: Verbs a sentence uses when the payload REPLACES what is in the file.
+_REPLACEMENT_VERBS = frozenset({"write", "save", "output", "put", "store", "create"})
+
+
+def _replaces_the_whole_content(goal: str) -> bool:
+    """Does this sentence state a payload that replaces the file's content?"""
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _selection
+        if not _selection._states_a_payload_and_its_destination(goal):
+            return False
+    except Exception:  # noqa: BLE001 - an unreadable sentence states nothing
+        return False
+    for raw in str(goal or "").lower().replace("?", " ").split():
+        word = raw.strip(".,:;!\"'`()[]")
+        if not word:
+            continue
+        return word in _REPLACEMENT_VERBS
+    return False
+
+
+def _takes_exactly_one_stated_file(entry: Mapping[str, Any]) -> bool:
+    """A row whose whole contract is: one file in, nothing else out.
+
+    `file.backup.v1` (a `.bak` beside the file) and the in-place editors
+    (`file.uppercased.v1`, `file.line.appended.v1`) declare exactly
+    {goal_text, path_file_or_dir}.  A sentence that states a PAYLOAD and a
+    DESTINATION has two operands, so it cannot be a request about one file --
+    and measured 2026-11-02, "Write the line 'PROJECT BRAIN' to the file
+    <out>" was composed from the append row, which then raised because <out>
+    did not exist yet.  The row that owns that sentence is the writer.
+    """
+
+    bindings = entry.get("proposal_bindings") or {}
+    if not isinstance(bindings, Mapping):
+        return False
+    types = sorted(str((spec or {}).get("type")) for spec in bindings.values()
+                   if isinstance(spec, Mapping))
+    return types == ["goal_text", "path_file_or_dir"]
+
+
 def _writes_the_one_stated_file(entry: Mapping[str, Any]) -> bool:
     """A row whose contract is exactly: one file in, one file out, nothing else.
 
@@ -2322,6 +2362,15 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
         # named). A sentence that states no destination file is not a request to
         # write one, so such a row is not a candidate for it.
         if _writes_the_one_stated_file(entry) and not _states_a_file_destination(goal):
+            continue
+        # ...and a ONE-FILE row is not the row for a payload-plus-destination
+        # sentence, which has two operands.  See `_takes_exactly_one_stated_file`.
+        # "Add a line containing delta to <f>" is ALSO a payload plus a
+        # destination, and it IS a one-file request -- so the rule above is
+        # scoped to the verbs that REPLACE a file's content.  Measured without
+        # that scope: the append row was filtered out of the one sentence it
+        # exists for.
+        if _takes_exactly_one_stated_file(entry) and _replaces_the_whole_content(goal):
             continue
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
