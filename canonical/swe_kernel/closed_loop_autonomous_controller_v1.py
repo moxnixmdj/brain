@@ -471,10 +471,15 @@ def solve_or_learn(
     )
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         req.setdefault("workspace_root", str(work_cwd))
+    if not learn:
+        allow_tier2_learning = False
+        record_open_gap = False
     if not learn and not _has_structured_specialist:
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
-        return ra.solve(req)
+        door_req = dict(req)
+        door_req["route_memory_mode"] = "exclude"
+        return ra.solve(door_req)
 
     if not goal:
         return {
@@ -518,7 +523,7 @@ def solve_or_learn(
                           or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")))
     except Exception:
         computer_shape = True  # a failed classification cannot authorize recall
-    recalled = None if computer_shape else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    recalled = None if (not learn or computer_shape) else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
     if recalled is not None and recalled.get("status") == computer_boundary.STATUS:
         out = dict(recalled)
         out.update(controller_schema=SCHEMA, task_id=task_id,
@@ -546,31 +551,32 @@ def solve_or_learn(
 
     forged_state_path = req.pop("forged_state_path", None)
     macro_state_path = req.pop("macro_state_path", None)
-    try:
-        from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
-            match_and_invoke_forged_for_goal,
-        )
+    if learn:
+        try:
+            from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+                match_and_invoke_forged_for_goal,
+            )
 
-        forged_hit = match_and_invoke_forged_for_goal(
-            goal,
-            root=work_cwd,
-            state_path=forged_state_path,
-            explicit_args=req.get("forged_args") if isinstance(req.get("forged_args"), Mapping) else None,
-        )
-        if forged_hit is not None and forged_hit.get("pass") is True:
-            return {
-                "schema": SCHEMA,
-                "task_id": task_id,
-                "pass": True,
-                "status": "PASS__TIER0_FORGED_CAPABILITY_EXECUTED",
-                "tier_used": "tier0_forged_capability",
-                "from_memory": True,
-                "capability_id": forged_hit["capability_id"],
-                "forged_execution": forged_hit,
-                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-            }
-    except Exception:
-        pass
+            forged_hit = match_and_invoke_forged_for_goal(
+                goal,
+                root=work_cwd,
+                state_path=forged_state_path,
+                explicit_args=req.get("forged_args") if isinstance(req.get("forged_args"), Mapping) else None,
+            )
+            if forged_hit is not None and forged_hit.get("pass") is True:
+                return {
+                    "schema": SCHEMA,
+                    "task_id": task_id,
+                    "pass": True,
+                    "status": "PASS__TIER0_FORGED_CAPABILITY_EXECUTED",
+                    "tier_used": "tier0_forged_capability",
+                    "from_memory": True,
+                    "capability_id": forged_hit["capability_id"],
+                    "forged_execution": forged_hit,
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                }
+        except Exception:
+            pass
 
     # Explicit 2-step byte-verified capability bridge (`bridge_enumeration_v1`)
     bridge_spec = req.get("byte_verified_bridge")
@@ -631,6 +637,8 @@ def solve_or_learn(
     }
     if macro_state_path is not None:
         clean_req["_macro_state_path"] = str(macro_state_path)
+    if not learn:
+        clean_req["route_memory_mode"] = "exclude"
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         clean_req.setdefault("workspace_root", str(work_cwd))
     clean_req.setdefault("task_id", task_id)
