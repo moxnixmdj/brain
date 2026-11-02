@@ -433,6 +433,39 @@ reached** by the 49 advanced SWE sentences; **3 rows serve 30 of the 36 served s
 36 served, 13 refused, 0 false. The machine is **not short of capability — it is short of
 declaration and routing.** 101 operations exist and 36 effects are declared.
 
+**Correction, 2026-11-02, measured on `a462d67`: the "443 rows" denominator is wrong by
+about 3x, and this section's conclusion does not follow from it.** Of the 443 registry
+rows, **294 are `RECEIPT_BACKED_PENDING_PROMOTION`** -- `.auto.v1` rows generated from a
+file path, whose `provides` is the row's own id and whose `triggers` are that filename
+tokenized. **Only 149 are `VERIFIED_BOUND_CAPABILITY`.** 312 rows declare no inputs at
+all and 176 emit nothing but a `returncode`.
+
+Re-measured against the correct denominator: the 49-sentence census serves 42 sentences
+through **8 distinct rows, all 8 of them verified bound capabilities -- 8 of 149, 5.4%**
+-- and **0 of the 294 receipt-backed rows are ever selected by anything**, which confirms
+they are evidence records rather than routable capability. Concentration is severe and
+this section was right about it: `code.polyglot.transform_and_verify.v1` (15),
+`python.swe.transform_and_synthesize.v1` (11) and
+`software.analysis.diagnose_and_architect.v1` (10) serve **36 of the 42**.
+
+**But "short of declaration and routing" is not established by that number, and should not
+be acted on as though it were.** Most of the 149 bound capabilities are not software
+engineering at all -- `archive.tar_gz.create_from_manifest`,
+`chart.raster.axis_title_unit_binding.v1`, `auto.pypi.msgpack`,
+`evidence.claim_relation.generic_units.stdlib`. An SWE census reaching 8 SWE-shaped rows is
+what you would expect whether routing generalizes or not. The ratio cannot distinguish
+"the census is narrow" from "the door cannot route", and those two predict opposite work.
+
+The instrument that would distinguish them does not exist yet, and the reason is concrete:
+**the rows carry no natural-language description.** A held-out sentence must be built from
+something other than the row's own `triggers`, or it measures keyword matching rather than
+routing -- the same self-contamination that produced a false 9/9 earlier in this work. An
+attempt to generate paraphrases mechanically from `provides` returned **0 usable of 40
+sampled rows**, because banning a row's trigger tokens bans its id, and its id is all
+`provides` contains. So held-out sentences over the 149 must be authored, with the
+contamination control stated up front. That is the prerequisite; until it exists, the
+routing claim is a hypothesis, not a finding.
+
 This matters for the learning argument specifically: a taught lesson lives **inside a row**.
 If the door does not route a sentence to that row, the lesson is never consulted, no matter
 how many times it was taught. Teaching does not fix routing. So "try it in all the
