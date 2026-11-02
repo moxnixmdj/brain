@@ -149,10 +149,31 @@ collision V5 reported, now measured as a real misapplication through the real
 path. A sound verifier rejects both (0 wrong). Recorded because PR-C2 widens the
 match surface, which is precisely why the gate must sit at apply time.
 
-**Still unmeasured, and required before a PR opens:** that a genuinely
-`TEST_SUITE`-backed verifier -- the repo's own `ProjectTestOracle` -- clears the
-gate and lifts recall to 5/5. Forging `test_count`, `returncode` or the
-measurement hashes to force the gate open would prove nothing, so it was not done.
+**The precondition is now measured, and banked.** The gate was cleared with real
+evidence, not forged evidence: the tests build a project in a temp directory
+(`bounds.py` plus a unittest suite asserting the upper bound is exclusive) and
+verify candidates through the repo's own `ProjectTestOracle`, which copies the
+tree, runs a real subprocess, and re-manifests the original to prove it was
+untouched.
+
+| measurement | result |
+|---|---|
+| buggy source vs the real suite | `passed=False`, `test_count=2`, `returncode=1`, candidate hash matches |
+| fixed source | `passed=True`, `test_count=2`, `returncode=0` |
+| `evaluate()` at `TEST_SUITE` | real oracle **admitted**; `lambda c: True` **refused** |
+| compiling-but-wrong (`return True`) | `passed=False`, `returncode=1`, **refused** -- a gate that only rejected syntax errors would admit it |
+| scoped teach, then scoped recall | `crystallized=True`; recall patches to the fixed source, `kind=TEST_SUITE` |
+
+So the gate PR-C2 depends on is **real and satisfiable without forgery**. It is
+now a repo test (`test_a_candidate_that_fails_the_suite_is_refused_v1.py`, 7
+tests) that CI runs in `capability-transfer-governance.yml`. Before this, **no
+workflow ran any crystallizer or contract test**, so the gate was unenforced --
+a gate nothing executes is half-banked.
+
+**What is still not measured, and cannot be until PR-C2 exists:** that apply-time
+broadening lifts recall from 2/5 to 5/5 *while gated at `TEST_SUITE`*, and that a
+weak verifier still receives the context-anchored pattern and never the broad one.
+That is the PR's own success criterion, not a precondition for opening it.
 
 ### The authoring fork — the owner's decision, unchanged
 
@@ -186,6 +207,17 @@ Running unattended a thing that closes 0/112 accumulates honest failure faster.
    `ns['a']`, but the mutated twin is alpha-renamed, so it raised `KeyError` and
    rejected for the wrong reason. Oracles here must be **name-agnostic**: take the
    first callable. This is why C0b/C0c use `first_callable`.
+4. **The banked gate test was decoration -- caught by its own negative control.**
+   Its first version passed all 7 tests with the kind-mismatch check in
+   `evaluate()` deleted. Cause: passing a non-empty `scope_id` let the scope check
+   (`if scope_id and result.scope_id != scope_id`) do the refusing, and a demoted
+   bool carries `scope_id=''`, so the gate being pinned never decided anything.
+   Fix: assert the **unscoped** call, where only the kind check can refuse; and on
+   the recall path use `VerificationResult(True, 'CALLER_PREDICATE', sha, SCOPE,
+   {})` -- right scope, wrong kind -- because an empty scope would instead make the
+   contract-taught rule inapplicable and mask the gate a second way. Deleting the
+   check now fails exactly 2 of 7. **Rule: run the negative control on a new test
+   before claiming it pins anything, and check which check is doing the refusing.**
 
 ---
 
