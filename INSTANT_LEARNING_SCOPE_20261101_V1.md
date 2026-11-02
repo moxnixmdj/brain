@@ -525,6 +525,56 @@ mis-selection rather than substituting for it. That connects census refusal #21 
 general mechanism instead of leaving it a one-off, and it is a worse failure mode
 than a refusal: a refusal is honest, a confident wrong selection is not.
 
+**Correction #5, measured 2026-11-02 on `23573bd8`: every figure in this section is a
+COMPILER-ONLY measurement, and at the full door the conclusion does not hold.**
+
+All of it came from `compile_against_live_registry` alone. That is stage one of two:
+the door then runs `live_brain_route_admission_v1.route_admission(goal, compiled,
+admissible)`. Re-running the same goals through both stages:
+
+| goal | stage 1: compiler | stage 2: full door |
+|---|---|---|
+| "Show the recent log of the repository" | compiled -> `python.repository.acceptance.measure.v1` | **refused** |
+| "Rename that helper to something clearer" | compiled -> `python.refactor.inline_helper.v1` | **refused** |
+| "Query the data file and write the result out" | compiled -> `software.repair.choreograph.crossfile.v1` | admitted, `rule=None` |
+| "Create the archive from the manifest" *(labelled correct)* | compiled | **refused** `R9_REQUIRED_FILE_INPUT_UNBOUND` |
+| "Extract the text from the PDF" *(labelled correct)* | compiled | **refused** |
+| "Convert the markdown to PDF" *(labelled correct)* | compiled | **refused** |
+| "Localize the fault using the test suite" *(labelled correct)* | compiled | admitted |
+
+Two of the three "silent mis-selections" are refused by the stage this document never
+ran. The survivor is a goal that literally asks to "write the result out", so a writer
+is not obviously the wrong answer to it. And admission refuses three of the four goals
+this document labelled *correct*, because it checks grounding in real paths rather than
+semantic fit -- so admission is not a correctness oracle either, in either direction.
+
+**"So under-specification does not fail closed" is therefore NOT SUPPORTED.** At the
+full door these under-specified goals mostly fail closed, on
+`R9_REQUIRED_FILE_INPUT_UNBOUND`. The claim was an artifact of measuring half the
+pipeline. That is the fifth instrument defect this session, and the same family as the
+other four: a probe that discards or never reaches the field it was built to read.
+
+Two further corrections this forces:
+
+* The tree already owns a sound contradiction check, and it is **declaration-based, not
+  lexical**: `STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER` reads
+  `capability_edits_source` off the registry row, with a narrow exemption read from the
+  row's own `limitations` ("Plans, does not apply"). Its comments already record both
+  capabilities named above as measured failures it catches -- `inline_helper.v1` for
+  "Find every caller of the function add in <file>", and
+  `software.repair.choreograph.crossfile.v1` for a review sentence it acted on. The
+  retracted `LOW_CONFIDENCE_SELECTION` rule was a worse reinvention of a check that
+  already existed, which is what the route order's REUSE-before-COMPOSE step is for and
+  which was skipped.
+* The connection drawn above between census refusal #21 and "a general mechanism" does
+  not hold. #21's guard is not sitting downstream of an uncaught mis-selection, because
+  admission is the stage that catches it.
+
+What remains true from this section, unchanged: the structured missing-slot report
+appears only once a row HAS been selected and a slot is unstated, and 0 of 12 vague
+goals raised `GOAL_INPUT_BINDING_REQUIRED`. That is a fact about the compiler's report
+vocabulary and it does not depend on the mis-selection tally.
+
 Two limits on that number, stated because they bound it: n=12, and the "intended
 row" is my authoring judgment, not a ground truth the tree declares. The three wrong
 selections are wrong on any reading -- inlining is not renaming, and a cross-file
