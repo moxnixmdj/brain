@@ -1204,6 +1204,22 @@ def _materialize_upstream_swe_chain(cid: str, entry: Mapping[str, Any], call_arg
             call_args["selection_path"] = sel_out
 
 
+def _declared_operation(*candidates: Any) -> str | None:
+    """The operation a call declares, from whichever mapping carries it.
+
+    Only an explicit, non-empty string counts. `None` is what makes every
+    execution-site decision fail closed on an unstated operation.
+    """
+    for candidate in candidates:
+        if isinstance(candidate, str) and candidate.strip():
+            return candidate.strip()
+        if isinstance(candidate, Mapping):
+            value = candidate.get("operation")
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    return None
+
+
 def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> dict[str, Any]:
     """E1: execute one bound adapter the way the kernel would, for source types the kernel refuses.
 
@@ -1215,8 +1231,7 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     if float(entry.get("incremental_spend_usd", 0) or 0) != 0:
         raise LocalExecutionFailure("BOUND_CAPABILITY_NONZERO_COST_REJECTED:" + cid)
     from canonical.runtime import computer_execution_boundary_v1 as boundary
-    if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(entry)
-            or boundary.is_unconfined_repair_entry(cid, entry)):
+    if boundary.refuses_execution(cid, entry, _declared_operation(action.get("args"))):
         # Reject before importing an adapter or materializing upstream effects.
         raise LocalExecutionFailure(boundary.STATUS)
     source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
@@ -1712,8 +1727,8 @@ def execute_capability_plan_locally(task_id: str, goal: str, compiled: Mapping[s
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     for index, step in enumerate(steps):
         cid = str(step.get("capability_id") or "")
-        if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(admissible.get(cid))
-                or boundary.is_unconfined_repair_entry(cid, admissible.get(cid))):
+        operation = _declared_operation(step.get("args"), step.get("inputs"), step.get("compiled_inputs"), step)
+        if boundary.refuses_execution(cid, admissible.get(cid), operation):
             return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
                          executed=False, execution=[], semantic_acceptance_complete=False,
                          refused_step_index=index, compiled_capability_id=cid)
@@ -1792,7 +1807,9 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     controller_actions = compiled.get("controller_actions")
     selected = str(compiled.get("selected_capability") or "").strip()
     from canonical.runtime import computer_execution_boundary_v1 as boundary
-    command_candidates = [selected] if selected else []
+    command_candidates: list[tuple[str, str | None]] = [
+        (selected, _declared_operation(compiled.get("inputs"), compiled.get("compiled_inputs")))
+    ] if selected else []
     if isinstance(controller_actions, list):
         for candidate in controller_actions:
             if not isinstance(candidate, Mapping):
@@ -1801,10 +1818,9 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
             if isinstance(args, Mapping):
                 cid = str(args.get("capability_id") or "").strip()
                 if cid:
-                    command_candidates.append(cid)
-    for cid in command_candidates:
-        if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(admissible.get(cid))
-                or boundary.is_unconfined_repair_entry(cid, admissible.get(cid))):
+                    command_candidates.append((cid, _declared_operation(args)))
+    for cid, operation in command_candidates:
+        if boundary.refuses_execution(cid, admissible.get(cid), operation):
             return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
                          executed=False, compiled_capability_id=cid,
                          semantic_acceptance_complete=False)

@@ -901,13 +901,23 @@ class DeclaredContextBindingTests(unittest.TestCase):
         asserted separately below, and this test is about the envelope's honesty
         once the adapter has actually run.
         """
-        target = "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
+        # The probe needs a receipt-backed capability that ACTUALLY RUNS, so that
+        # there is an adapter verdict for the envelope to carry through. The
+        # earlier probe used
+        # `canonical/verification/run_long_horizon_continuity_v1.py.auto.v1`,
+        # whose carrier is the generic command adapter (`cli_command`): that
+        # adapter runs a host program with no admitted carrier and is refused by
+        # `computer_execution_boundary_v1`, so nothing ran through it and the
+        # invariant below could not be observed at all. This capability is served
+        # by an in-repository adapter through the same receipt-backed carrier, so
+        # the envelope claim is still measured against a real execution.
+        target = "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1"
         if target not in self.model.capabilities:
             self.skipTest("receipt-backed probe capability not in model")
         row = self.model.capabilities[target]
         self.assertEqual(row.get("kind"), "RECEIPT_BACKED_CAPABILITY")
 
-        out = self.model.solve("run the long horizon continuity replay", capability_id=target)
+        out = self.model.solve("search the proof instantiation space", capability_id=target)
         execution = out.get("execution") or {}
         self.assertEqual(
             execution.get("status"),

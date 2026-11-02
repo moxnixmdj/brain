@@ -1014,26 +1014,29 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
         # Preflight the entire visible plan before the controller dispatches any
         # action. These are known unsafe adapters, not a general allowlist.
         from canonical.runtime import computer_execution_boundary_v1 as boundary
+        from canonical.runtime.live_brain_route_admission_v1 import _declared_operation
         candidates = []
         if compiled.get("selected_capability"):
-            candidates.append(str(compiled["selected_capability"]))
+            candidates.append((str(compiled["selected_capability"]),
+                               _declared_operation(compiled.get("inputs"), compiled.get("compiled_inputs"))))
         for action in controller_actions or []:
             if isinstance(action, Mapping) and isinstance(action.get("args"), Mapping):
                 cid = action["args"].get("capability_id")
                 if cid:
-                    candidates.append(str(cid))
+                    candidates.append((str(cid), _declared_operation(action.get("args"))))
         dag = compiled.get("capability_dag")
         if isinstance(dag, Mapping):
             for step in dag.get("steps") or []:
                 if isinstance(step, Mapping) and step.get("capability_id"):
-                    candidates.append(str(step["capability_id"]))
+                    candidates.append((str(step["capability_id"]),
+                                       _declared_operation(step.get("args"), step.get("inputs"), step)))
         # The selected repair's verified-bound path first reports its existing
         # independent-evidence refusal. Its executor separately blocks host
         # execution even if that inspection later succeeds. A raw multi-action
         # plan or DAG is not entitled to bypass either boundary.
-        for cid in candidates:
+        for cid, operation in candidates:
             repair_unconfined = boundary.is_unconfined_repair_entry(cid, admissible.get(cid))
-            if ((boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(admissible.get(cid)))
+            if ((boundary.refuses_execution(cid, admissible.get(cid), operation))
                     or (repair_unconfined and (controller_actions is not None or isinstance(dag, Mapping)
                                               or cid not in _bound_capability_ids()))):
                 return {"schema": SCHEMA, "task_id": task_id, "pass": False,

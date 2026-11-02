@@ -88,6 +88,90 @@ def is_unconfined_cli_entry(entry):
         return True
 
 
+DIAGNOSE_CAPABILITY_ID = 'software.analysis.diagnose_and_architect.v1'
+DIAGNOSE_ADAPTER_MODULE = 'software_analysis_diagnose_and_architect_v1'
+DIAGNOSE_ADAPTER_PATH = 'canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py'
+
+# Operations whose implementation in
+# `canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py` is pure AST or
+# text analysis: no `exec`/`compile` of target code, no child process, no target
+# import, and every function reachable from them (within that module) is the
+# same. The value is the engine function the adapter dispatches to, so a change
+# to the dispatch table fails the guard instead of silently re-pointing an
+# admitted operation at an executing one.
+#
+# Measured 2026-11-02 by an AST call-graph walk of that engine: the operations
+# below reach no `exec`, no `compile`, no `_run_cmd`/`pipeline_exec_v1`, no
+# `shutil.which` and no other repository module. Every other diagnose operation
+# (`profile_hotspot`, `benchmark_git_ref`, `fuzz_overflow`, `explain_behavior`,
+# `explain_bug`, `diagnose_test_suite`, `find_root_cause`, `find_race_condition`,
+# `measure_coverage`, `measure_mutation_score`, `find_flaky_tests`,
+# `lint_javascript`, `run_js_tests`, `run_single_test`, `git_*`,
+# `review_pull_request`, `show_definition`, `which_modules_import`,
+# `import_cycles`, `class_hierarchy`) reaches `exec`, `pipeline_exec_v1.
+# run_command` or a repository symbol-graph module that may do either, and stays
+# refused. A missing or unrecognised operation is refused.
+STATIC_DIAGNOSE_OPERATIONS = {
+    'analyze_log_exception': 'analyze_log_exception',
+    'audit_dependencies': 'audit_dependency_vulnerabilities',
+    'design_adr': 'synthesize_architecture_artifact',
+    'find_dead_code': 'find_dead_code_symbols',
+    'migration_plan': 'synthesize_architecture_artifact',
+    'package_split_design': 'synthesize_architecture_artifact',
+    'plan_rename': 'plan_rename_files',
+    'review_api_design': 'review_api_design',
+    'security_audit': 'security_audit_package',
+    'trace_data_flow': 'trace_intermodule_data_flow',
+    'trace_value_provenance': 'trace_value_provenance_in_file',
+    'validate_json_schema': 'validate_json_config_schema',
+}
+
+
+def _resolves_to_diagnose_adapter(entry):
+    """True only when the entry names this adapter by module name or resolved path."""
+    if not hasattr(entry, 'get'):
+        return False
+    if entry.get('adapter_module') == DIAGNOSE_ADAPTER_MODULE:
+        return True
+    source = entry.get('source')
+    path = str(source.get('adapter_path') or '') if hasattr(source, 'get') else ''
+    if not path:
+        return False
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    try:
+        return (root / path).resolve() == (root / DIAGNOSE_ADAPTER_PATH).resolve()
+    except (OSError, RuntimeError, ValueError):
+        return False
+
+
+def diagnose_operation_is_static(capability_id, entry, operation):
+    """The one narrowing that is admitted: a static-analysis diagnose operation.
+
+    It decides only that *this* call does not need an execution carrier, because
+    the code it runs does not execute anything. It is not a confinement check and
+    grants nothing to any other capability, adapter or operation.
+    """
+    if str(capability_id or '') != DIAGNOSE_CAPABILITY_ID and not _resolves_to_diagnose_adapter(entry):
+        return False
+    return str(operation or '').strip() in STATIC_DIAGNOSE_OPERATIONS
+
+
+def refuses_execution(capability_id, entry, operation=None):
+    """The single decision every execution site must use.
+
+    Fails closed: an unknown capability, a missing operation or an operation not
+    in the audited static table is refused exactly as before.
+    """
+    if diagnose_operation_is_static(capability_id, entry, operation):
+        return False
+    return (
+        is_unconfined_capability_id(capability_id)
+        or is_unconfined_execution_entry(entry)
+        or is_unconfined_repair_entry(capability_id, entry)
+    )
+
+
 def is_unconfined_execution_entry(entry):
     """Recognize two known execution-capable adapters; not a safety allowlist.
 

@@ -28653,7 +28653,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py",
-    "source_sha256": "4ffdc0cfd9900fbe4559b49b4ffb240ac7b4036eeeea9ce001bde58f766df904",
+    "source_sha256": "e7a8c17ea528f653895fe969ef081fb1cb27cbe3b416057c5c25cfae4adec6e0",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8ef23a42ee1317e449b111e03bcab15487baf49708f959f0442fc286d3b62ddd"
+  "value": "11034a911507388c8ab856625899fb159e47a33118999c3887bba9c3212f7338"
  },
  "engines": [
   {
@@ -32242,7 +32242,7 @@
      "validate json schema",
      "which modules import"
     ],
-    "sha256": "4ffdc0cfd9900fbe4559b49b4ffb240ac7b4036eeeea9ce001bde58f766df904"
+    "sha256": "e7a8c17ea528f653895fe969ef081fb1cb27cbe3b416057c5c25cfae4adec6e0"
    },
    "canonical/runtime/bound_capabilities/software_evidence_synthesis_supercomposer_v1.py": {
     "defaulted_keys": {},
@@ -64259,7 +64259,7 @@
   "included_source_count": 1047,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9bb5d60d0ab34bc488413d9c7a0a8a59f8109598be74c7ed1e636759ab2582cf"
+  "source_tree_digest": "68fd57c08b4515b7c2b78609ebf6e0e1c91e32aa347991c3ec283f57f59317a1"
  },
  "research_index": [
   {
@@ -237511,21 +237511,25 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_execution_boundary_v1.py",
-   "sha256": "531addc5c68647f716df5c30167fd00bd30bf9ffffea86c10e1b98f147900fe2",
+   "sha256": "787108f29b3732e860ef18455679983c91f3945de571bdffef5a5a448978d036",
    "summary": "Shared fail-closed status for unadmitted automatic computer execution.",
-   "symbol_count": 6,
+   "symbol_count": 9,
    "symbols": [
+    "_resolves_to_diagnose_adapter",
+    "diagnose_operation_is_static",
     "is_repair_verification_gap",
     "is_unconfined_capability_id",
     "is_unconfined_cli_entry",
     "is_unconfined_execution_entry",
     "is_unconfined_repair_entry",
+    "refuses_execution",
     "retained_repair_policy_error"
    ],
    "terms": {
     "automatic": 1,
     "boundary": 1,
     "computer": 2,
+    "diagnose_operation_is_static": 1,
     "execution": 2,
     "fail-closed": 1,
     "is_repair_verification_gap": 1,
@@ -237533,6 +237537,8 @@
     "is_unconfined_cli_entry": 1,
     "is_unconfined_execution_entry": 1,
     "is_unconfined_repair_entry": 1,
+    "refuses_execution": 1,
+    "resolves_to_diagnose_adapter": 1,
     "retained_repair_policy_error": 1,
     "shared": 1,
     "status": 1,
@@ -255259,9 +255265,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "9bce56bbffb5e0455303d760bc46e3015e7ca324afec816568257fe7fbc8db1b",
+   "sha256": "dc9ad02d6dea497f4771d0718fcc2777d9a31645cc6dcd26fe7f5635761aa381",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 112,
+   "symbol_count": 113,
    "symbols": [
     "LocalExecutionFailure",
     "_already_satisfied_evidence",
@@ -255282,11 +255288,11 @@
     "_dag_result",
     "_dag_rows",
     "_decisive_typed_plan",
+    "_declared_operation",
     "_declared_surface",
     "_declares_effect_by_argument",
     "_declares_it_does_not_write",
-    "_declares_no_source_write_authority",
-    "_destructive_targets"
+    "_declares_no_source_write_authority"
    ],
    "terms": {
     "admission": 2,
@@ -255521,7 +255527,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "a8ac8dba264197c35519a05a5fa690635e2fe432621a3b2681c07cfbc16e0ee7",
+   "sha256": "694faa3daa8f19155e63409a37d2c11c2d9b97b9f5960fcb9760e4d2ef8fa225",
    "summary": "Live integrated Brain V1.",
    "symbol_count": 29,
    "symbols": [
