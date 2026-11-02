@@ -1039,6 +1039,40 @@ class UnifiedModel:
                 attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
             )
 
+        # 0C. Direct specialist routes (`r2_adequacy_request`, `scientific_discovery_problem`, `trace_capsule_problem`, `policy_adequacy_problem`, `ooxml_preflight_target`)
+        if isinstance(inputs, Mapping) and any(
+            k in inputs
+            for k in (
+                "r2_adequacy_request",
+                "scientific_discovery_problem",
+                "trace_capsule_problem",
+                "policy_adequacy_problem",
+                "policy_cover_payload",
+                "escape_repair_state",
+                "ooxml_preflight_target",
+                "domain_mapping_problem",
+            )
+        ):
+            spec_payload: dict[str, Any] = {"goal": goal, **dict(inputs)}
+            if forged_state_path is not None:
+                spec_payload["forged_state_path"] = str(forged_state_path)
+            ctrl_spec = solve_or_learn(
+                spec_payload,
+                cwd=cwd or ROOT,
+                db_path=str(db_path) if db_path is not None else None,
+            )
+            passed_spec = bool(ctrl_spec.get("pass") is True)
+            return self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status=str(ctrl_spec.get("status") or ("PASS__SPECIALIST_SOLVED" if passed_spec else "FAIL_CLOSED")),
+                **{"pass": passed_spec},
+                reason=None if passed_spec else str(ctrl_spec.get("failure_class") or ctrl_spec.get("status")),
+                tier_used=ctrl_spec.get("tier_used"),
+                autonomous_result=ctrl_spec,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            )
+
         # 1. REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & bindable
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
         if not is_forged_cid:

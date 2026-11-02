@@ -759,6 +759,14 @@ def evaluate_semantic_ambiguity_and_sense(
         out["k3_external_llm_calls"] = 0
         return out
 
+    if "raw_span" in problem and "target_concept_id" in problem:
+        from canonical.runtime import domain_mapping_truth_certificate_v1 as dmtc
+
+        out = dict(dmtc.evaluate(problem))
+        out["control_organ"] = "domain_mapping_truth_certificate_v1"
+        out["k3_external_llm_calls"] = 0
+        return out
+
     if "left_id" in problem and "right_id" in problem:
         from canonical.runtime import semantic_relation_control_v2 as rel_ctrl
 
@@ -802,4 +810,180 @@ def evaluate_cross_document_semantic_lattice(
     out = dict(lattice_v8.evaluate(problem, relation_verifier=relation_verifier))
     out["k3_external_llm_calls"] = 0
     return out
+
+
+def evaluate_r2_direct_or_fixed_point_adequacy(
+    request: Mapping[str, Any],
+    *,
+    repo_root: str | None = None,
+    information_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    execution_provider: Callable[..., Mapping[str, Any]] | None = None,
+    max_fixed_point_steps: int = 8,
+    preflight_only: bool = False,
+) -> dict[str, Any]:
+    """Zero-LLM R2 direct end-to-end semantic adequacy + adaptive fixed-point decision closure (`K3 = 0`)."""
+    from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as r2_direct
+    from canonical.runtime import general_adequate_decision_fixed_point_v2 as r2_fp
+
+    pf = dict(r2_direct.preflight(request))
+    if preflight_only:
+        pf["control_organ"] = "r2_direct_end_to_end_adequacy_v1.preflight"
+        pf["k3_external_llm_calls"] = 0
+        return pf
+    if pf.get("matched") is True and information_provider is None and proposal_provider is None and capability_expander is None:
+        direct_out = dict(r2_direct.run(request))
+        direct_out["preflight"] = pf
+        direct_out["control_organ"] = "r2_direct_end_to_end_adequacy_v1"
+        direct_out["k3_external_llm_calls"] = 0
+        return direct_out
+    fp_kwargs: dict[str, Any] = {
+        "repo_root": repo_root,
+        "information_provider": information_provider,
+        "proposal_provider": proposal_provider,
+        "capability_expander": capability_expander,
+        "max_fixed_point_steps": max_fixed_point_steps,
+    }
+    if execution_provider is not None:
+        fp_kwargs["execution_provider"] = execution_provider
+    fp_out = dict(r2_fp.run(request, **fp_kwargs))
+    fp_out["preflight"] = pf
+    fp_out["control_organ"] = "general_adequate_decision_fixed_point_v2"
+    fp_out["k3_external_llm_calls"] = 0
+    return fp_out
+
+
+def solve_policy_adequacy_or_escape_repair(
+    payload: Mapping[str, Any],
+    *,
+    repo_root: str | None = None,
+    provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    max_rounds: int = 4,
+) -> dict[str, Any]:
+    """Dispatch P3 robust policy-adequacy CEGAR, observable policy-cover execution, or reached escape-state repair (`K3 = 0`)."""
+    if "cover_binding" in payload:
+        from canonical.runtime import observable_policy_cover_executor_v1 as opce
+
+        out = dict(opce.evaluate(payload, repo_root=repo_root))
+        out["control_organ"] = "observable_policy_cover_executor_v1"
+        out["k3_external_llm_calls"] = 0
+        return out
+    if "regions" in payload and callable(provider) and callable(verifier):
+        from canonical.runtime import reached_escape_repair_cycle_v1 as rerc
+
+        out = dict(rerc.run(payload, provider=provider, verifier=verifier, max_rounds=max_rounds))
+        out["control_organ"] = "reached_escape_repair_cycle_v1"
+        out["k3_external_llm_calls"] = 0
+        return out
+    from canonical.runtime import p3_robust_policy_adequacy_cegar_v1 as p3_cegar
+
+    out = dict(p3_cegar.run(payload, root=repo_root))
+    out["control_organ"] = "p3_robust_policy_adequacy_cegar_v1"
+    out["k3_external_llm_calls"] = 0
+    return out
+
+
+def discover_symbolic_or_scientific_law(problem: Mapping[str, Any]) -> dict[str, Any]:
+    """Zero-LLM active experiment design, sparse symbolic law discovery, and shared-period harmonic fitting (`K3 = 0`)."""
+    if "series" in problem or problem.get("route") == "SHARED_PERIOD_HARMONIC_FITTING" or "slot_id" in problem:
+        from canonical.runtime import tb_science_zero_model_scientific_kernel_v1 as sci_k
+
+        cls = sci_k.classify(str(problem.get("instruction") or ""), str(problem.get("slot_id") or ""))
+        if isinstance(problem.get("series"), list) and problem["series"]:
+            norm_series: list[dict[str, Any]] = []
+            for idx_s, raw_s in enumerate(problem["series"]):
+                if isinstance(raw_s, Mapping) and "points" in raw_s:
+                    s_copy = dict(raw_s)
+                    s_copy.setdefault("source", str(raw_s.get("name") or f"series_{idx_s}"))
+                    s_copy.setdefault("time_key", "t")
+                    s_copy.setdefault("value_key", "y")
+                    norm_series.append(s_copy)
+                elif isinstance(raw_s, Mapping) and "t" in raw_s and "y" in raw_s:
+                    ts = [float(v) for v in raw_s["t"]]
+                    ys = [float(v) for v in raw_s["y"]]
+                    sigs = [float(v) for v in (raw_s.get("sigma") or [1.0] * len(ts))]
+                    norm_series.append(
+                        {
+                            "source": str(raw_s.get("source") or raw_s.get("name") or f"series_{idx_s}"),
+                            "time_key": str(raw_s.get("time_key") or "t"),
+                            "value_key": str(raw_s.get("value_key") or "y"),
+                            "points": list(zip(ts, ys, sigs)),
+                        }
+                    )
+            fit = sci_k.fit_shared_period(norm_series)
+            return {
+                "schema": SCHEMA + "/scientific_harmonic_fit",
+                "pass": True,
+                "status": "PASS__SHARED_PERIOD_HARMONIC_LAW_FITTED",
+                "classification": cls,
+                "fit": fit,
+                "discovery_organ": "tb_science_zero_model_scientific_kernel_v1",
+                "k3_external_llm_calls": 0,
+            }
+        if problem.get("roots"):
+            payload_res = sci_k.run_payload(dict(problem))
+            return {
+                "schema": SCHEMA + "/scientific_harmonic_fit",
+                "pass": True,
+                "status": "PASS__SCIENTIFIC_TABLE_PAYLOAD_FITTED",
+                "classification": cls,
+                "result": payload_res,
+                "discovery_organ": "tb_science_zero_model_scientific_kernel_v1",
+                "k3_external_llm_calls": 0,
+            }
+        return {
+            "schema": SCHEMA + "/scientific_harmonic_fit",
+            "pass": cls.get("route") is not None,
+            "status": "PASS__SCIENTIFIC_ROUTE_CLASSIFIED" if cls.get("route") else "FAIL_CLOSED__NO_QUALIFIED_SCIENTIFIC_ROUTE",
+            "classification": cls,
+            "discovery_organ": "tb_science_zero_model_scientific_kernel_v1",
+            "k3_external_llm_calls": 0,
+        }
+
+    from canonical.runtime import mysterymechanism_sparse_symbolic_adapter_v2 as mm2
+
+    bounds = problem.get("bounds")
+    plan = mm2.plan_experiments(bounds) if isinstance(bounds, Mapping) else None
+    rows = list(problem.get("rows") or problem.get("observations") or [])
+    target = str(problem.get("target") or "out")
+    max_depth = int(problem.get("max_depth", 1))
+    discovered = mm2.sparse_discover(rows, target=target, max_depth=max_depth) if rows else None
+    ok = bool(
+        (discovered is not None and discovered.get("status") == "SPARSE_CANDIDATES_FOUND")
+        or (plan is not None and not rows)
+    )
+    best_expr = None
+    if discovered and isinstance(discovered.get("best_candidate"), Mapping):
+        try:
+            best_expr = mm2._sparse_expr(discovered["best_candidate"])
+        except Exception:
+            best_expr = None
+    return {
+        "schema": SCHEMA + "/sparse_symbolic_discovery",
+        "pass": ok,
+        "status": str(discovered.get("status") if discovered else "PASS__ACTIVE_EXPERIMENTS_PLANNED"),
+        "experiment_plan": plan,
+        "discovered": discovered,
+        "best_symbolic_expression": best_expr,
+        "discovery_organ": "mysterymechanism_sparse_symbolic_adapter_v2",
+        "k3_external_llm_calls": 0,
+    }
+
+
+def preflight_professional_ooxml_artifact(target: Any, *, profile_id: str = "BRAIN_PROFESSIONAL_OOXML_SANITY_V1") -> dict[str, Any]:
+    """Byte-derived hard-defect preflight for professional `.docx` / `.xlsx` / `.pptx` artifacts (`K3 = 0`)."""
+    from canonical.runtime import professional_artifact_hard_defect_preflight_v1 as pahd
+
+    if isinstance(target, Mapping):
+        bundle = dict(target)
+        bundle.setdefault("profile_id", profile_id)
+        out = dict(pahd.verify(bundle))
+    else:
+        out = dict(pahd.verify({"artifact_paths": [str(target)], "profile_id": profile_id}))
+    out["preflight_organ"] = "professional_artifact_hard_defect_preflight_v1"
+    out["k3_external_llm_calls"] = 0
+    return out
+
 

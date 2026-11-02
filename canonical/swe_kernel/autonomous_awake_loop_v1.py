@@ -983,6 +983,64 @@ class AwakeAgencyDaemon:
         out["k3_external_llm_calls"] = 0
         return out
 
+    def schedule_pareto_capability_work(
+        self,
+        work_items: Sequence[Mapping[str, Any]],
+        *,
+        frontier: Sequence[Mapping[str, Any]] | None = None,
+        candidate: Mapping[str, Any] | None = None,
+        checkpoint_open_obligation_count: int = 0,
+    ) -> dict[str, Any]:
+        """Rank candidate self-improvement / capability work via `capability_first_scheduler_v1` and update Pareto frontier (`K3 = 0`)."""
+        from canonical.runtime import capability_first_scheduler_v1 as cfs
+
+        ranked = dict(
+            cfs.rank_work(
+                list(work_items),
+                checkpoint_open_obligation_count=int(checkpoint_open_obligation_count),
+            )
+        )
+        pareto_update = (
+            dict(cfs.update_pareto_frontier(list(frontier or ()), candidate))
+            if isinstance(candidate, Mapping)
+            else None
+        )
+        return {
+            "schema": SCHEMA + "/pareto_capability_schedule",
+            "ranked_work": ranked,
+            "pareto_frontier_update": pareto_update,
+            "scheduler_organ": "capability_first_scheduler_v1",
+            "k3_external_llm_calls": 0,
+        }
+
+    def classify_confined_shell_argv(self, argv: Sequence[str]) -> dict[str, Any]:
+        """Classify a tool `argv` against the Root3 zero-ambient confinement allowlist (`root3_confined_shell_executor_v1`)."""
+        from canonical.runtime import root3_confined_shell_executor_v1 as r3shell
+
+        try:
+            kind = r3shell.classify_tool_argv([str(x) for x in argv])
+            return {
+                "allowed": True,
+                "kind": kind,
+                "organ": "root3_confined_shell_executor_v1",
+                "k3_external_llm_calls": 0,
+            }
+        except r3shell.ConfinedShellDenied as exc:
+            return {
+                "allowed": False,
+                "reason": str(exc),
+                "organ": "root3_confined_shell_executor_v1",
+                "k3_external_llm_calls": 0,
+            }
+
+    def discover_governing_symbolic_law(self, problem: Mapping[str, Any]) -> dict[str, Any]:
+        """Actively plan experiments and discover exact sparse symbolic or harmonic scientific laws (`K3 = 0`)."""
+        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+            discover_symbolic_or_scientific_law,
+        )
+
+        return discover_symbolic_or_scientific_law(problem)
+
     def pulse(self, *, max_curriculum_lessons: int = 2, channels: Sequence[str] | None = None) -> dict[str, Any]:
         """Run one complete zero-LLM awake cycle: sense -> V9 meta-policy -> CoW experiment -> scope probing -> study gaps -> R3 queue drain."""
         from canonical.runtime import meta_learning_policy_v9 as mlp
@@ -1021,8 +1079,31 @@ class AwakeAgencyDaemon:
 
         scope_audits = self.self_falsify_and_narrow_rule_scopes()
 
-        # Study top-ranked open gaps in this daemon's ledger
+        # Study top-ranked open gaps in this daemon's ledger + compute capability-first Pareto priority
         ranked = ledger.rank(limit=max(1, max_curriculum_lessons), path=self.ledger_path)
+        pareto_schedule: dict[str, Any] | None = None
+        if ranked:
+            try:
+                work_rows = [
+                    {
+                        "work_id": f"GAP::{str(g.get('id') or idx)}",
+                        "work_type": "CAPABILITY_BUILD",
+                        "expected_capability_gain_lcb": max(1, int(round(float(g.get("priority", 1.0)) * 4))),
+                        "expected_efficiency_gain_lcb": 3,
+                        "expected_reliability_gain_lcb": 3,
+                        "reuse_breadth_lcb": 5,
+                        "generalization_lcb": 5,
+                        "success_probability_lcb": "3/4",
+                        "wall_clock_cost_ub": max(1, int(round(float(g.get("cost", 1.0))))),
+                        "compute_cost_ub": 1,
+                        "memory_cost_ub": 1,
+                        "complexity_cost_ub": 1,
+                    }
+                    for idx, g in enumerate(ranked)
+                ]
+                pareto_schedule = self.schedule_pareto_capability_work(work_rows)["ranked_work"]
+            except Exception:
+                pareto_schedule = None
         lessons: list[dict[str, Any]] = []
         promoted_workflows: list[str] = []
         for idx_g, gap in enumerate(ranked):
@@ -1074,6 +1155,7 @@ class AwakeAgencyDaemon:
             "meta_strategy_abstraction_candidate": meta_abstraction_candidate,
             "r3_queue_drain": r3_drain,
             "r3_fixed_point": r3_fixed_point,
+            "pareto_capability_schedule": pareto_schedule,
             "sensed": sensed,
             "cow_experimentation": exp_out,
             "scope_narrowing_audits": scope_audits,

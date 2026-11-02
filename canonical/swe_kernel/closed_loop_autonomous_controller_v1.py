@@ -439,8 +439,16 @@ def solve_or_learn(
             "ambiguity_problem",
             "sense_problem",
             "semantic_relation_problem",
+            "domain_mapping_problem",
             "polytope_problem",
             "cross_document_problem",
+            "r2_adequacy_request",
+            "policy_adequacy_problem",
+            "policy_cover_payload",
+            "escape_repair_state",
+            "scientific_discovery_problem",
+            "ooxml_preflight_target",
+            "trace_capsule_problem",
             "tool_schemas",
             "api_endpoints",
             "dom_action",
@@ -449,6 +457,8 @@ def solve_or_learn(
             "repair_command",
         )
     )
+    if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
+        req.setdefault("workspace_root", str(work_cwd))
     if not learn and not _has_structured_specialist:
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
@@ -589,7 +599,12 @@ def solve_or_learn(
     # Exact Rational Polytopes, Cross-Doc Semantic Lattice, Unfamiliar Tool
     # Schema Planning, Browser/DOM Grounding & Perf/Command Diagnostics
     # ------------------------------------------------------------------
-    amb_prob = req.pop("ambiguity_problem", None) or req.pop("sense_problem", None) or req.pop("semantic_relation_problem", None)
+    amb_prob = (
+        req.pop("ambiguity_problem", None)
+        or req.pop("sense_problem", None)
+        or req.pop("semantic_relation_problem", None)
+        or req.pop("domain_mapping_problem", None)
+    )
     if isinstance(amb_prob, Mapping):
         from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
             evaluate_semantic_ambiguity_and_sense,
@@ -769,6 +784,144 @@ def solve_or_learn(
             "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
         }
 
+    r2_req = req.pop("r2_adequacy_request", None)
+    if isinstance(r2_req, Mapping):
+        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+            evaluate_r2_direct_or_fixed_point_adequacy,
+        )
+
+        r2_spec = dict(r2_req)
+        inner_req = r2_spec.pop("request", None) or {"task_id": task_id, "goal": goal, **r2_spec}
+        r2_out = evaluate_r2_direct_or_fixed_point_adequacy(
+            inner_req,
+            repo_root=str(r2_spec.pop("repo_root", work_cwd)),
+            information_provider=r2_spec.pop("information_provider", None),
+            proposal_provider=r2_spec.pop("proposal_provider", None),
+            capability_expander=r2_spec.pop("capability_expander", None),
+            execution_provider=r2_spec.pop("execution_provider", None),
+            max_fixed_point_steps=int(r2_spec.pop("max_fixed_point_steps", 8)),
+            preflight_only=bool(r2_spec.pop("preflight_only", False)),
+        )
+        passed_r2 = bool(r2_out.get("pass") is True or r2_out.get("matched") is True)
+        mem_rec = _credit_assoc_memory(passed_r2, {"goal": goal, "organ": r2_out.get("control_organ")})
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_r2,
+            "status": str(r2_out.get("status") or ("PASS__R2_ADEQUACY_VERIFIED" if passed_r2 else "FAIL_CLOSED__R2_ADEQUACY")),
+            "tier_used": "tier0_r2_direct_or_fixed_point_adequacy",
+            "r2_adequacy": r2_out,
+            "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    pol_prob = (
+        req.pop("policy_adequacy_problem", None)
+        or req.pop("policy_cover_payload", None)
+        or req.pop("escape_repair_state", None)
+    )
+    if isinstance(pol_prob, Mapping):
+        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+            solve_policy_adequacy_or_escape_repair,
+        )
+
+        pol_out = solve_policy_adequacy_or_escape_repair(
+            pol_prob,
+            repo_root=str(req.pop("policy_repo_root", work_cwd)),
+            provider=req.pop("escape_repair_provider", None),
+            verifier=req.pop("escape_repair_verifier", None),
+            max_rounds=int(req.pop("escape_repair_max_rounds", 4)),
+        )
+        passed_pol = bool(pol_out.get("pass") is True)
+        mem_rec = _credit_assoc_memory(passed_pol, {"goal": goal, "organ": pol_out.get("control_organ")})
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_pol,
+            "status": str(pol_out.get("status") or ("PASS__POLICY_ADEQUACY_VERIFIED" if passed_pol else "FAIL_CLOSED__POLICY_ADEQUACY")),
+            "tier_used": "tier1_policy_adequacy_or_escape_repair",
+            "policy_adequacy": pol_out,
+            "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    sci_prob = req.pop("scientific_discovery_problem", None)
+    if isinstance(sci_prob, Mapping):
+        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+            discover_symbolic_or_scientific_law,
+        )
+
+        sci_out = discover_symbolic_or_scientific_law(sci_prob)
+        passed_sci = bool(sci_out.get("pass") is True)
+        mem_rec = _credit_assoc_memory(passed_sci, {"goal": goal, "organ": sci_out.get("discovery_organ")})
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_sci,
+            "status": str(sci_out.get("status")),
+            "tier_used": "tier2_symbolic_or_scientific_law_discovery",
+            "scientific_discovery": sci_out,
+            "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    ooxml_target = req.pop("ooxml_preflight_target", None)
+    if ooxml_target is not None:
+        from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
+            preflight_professional_ooxml_artifact,
+        )
+
+        ooxml_out = preflight_professional_ooxml_artifact(ooxml_target)
+        passed_ooxml = bool(ooxml_out.get("pass") is True)
+        mem_rec = _credit_assoc_memory(passed_ooxml, {"goal": goal, "organ": "professional_artifact_hard_defect_preflight_v1"})
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_ooxml,
+            "status": str(ooxml_out.get("status") or ("PASS__OOXML_HARD_DEFECT_PREFLIGHT" if passed_ooxml else "FAIL_CLOSED__OOXML_DEFECT")),
+            "tier_used": "tier0_ooxml_hard_defect_preflight",
+            "ooxml_preflight": ooxml_out,
+            "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    cap_prob = req.pop("trace_capsule_problem", None)
+    if isinstance(cap_prob, Mapping):
+        from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
+            compile_and_verify_execution_capsule,
+        )
+
+        cap_out = compile_and_verify_execution_capsule(
+            problem=cap_prob.get("problem"),
+            planned=cap_prob.get("planned"),
+            execution=cap_prob.get("execution"),
+            macrosteps=cap_prob.get("macrosteps"),
+            rollback_target_hash=cap_prob.get("rollback_target_hash"),
+            project_requires=cap_prob.get("project_requires"),
+        )
+        passed_cap = bool(cap_out.get("pass") is True)
+        mem_rec = _credit_assoc_memory(passed_cap, {"goal": goal, "organ": cap_out.get("capsule_organ")})
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_cap,
+            "status": str(cap_out.get("status")),
+            "tier_used": "tier1_provenance_execution_capsule",
+            "execution_capsule": cap_out,
+            "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
     # ------------------------------------------------------------------
     # TIER 0A (<2 ms): Recall Compiled & Ownership-Qualified Workflow Skill
     #                  + Self-Forged Capability Spine (`forged.*`)
@@ -880,6 +1033,8 @@ def solve_or_learn(
     }
     if macro_state_path is not None:
         clean_req["_macro_state_path"] = str(macro_state_path)
+    if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
+        clean_req.setdefault("workspace_root", str(work_cwd))
     clean_req.setdefault("task_id", task_id)
     front_res = ra.solve(clean_req)
     if front_res.get("pass") is True:

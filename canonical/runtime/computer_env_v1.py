@@ -41,6 +41,8 @@ kill killall pkill chmod chown chgrp sudo su chroot mount umount fdisk
 parted shred wipe systemctl service telinit""".split())
 
 _EXT = re.compile(r"^[a-z0-9][a-z0-9._-]{0,24}$")
+_INSTALLED_PROGRAMS_CACHE: dict[tuple[Any, ...], tuple[str, ...]] = {}
+_INSTRUMENT_MEM_CACHE: dict[str, str] = {}
 
 
 def installed_programs(limit: int | None = None) -> list[str]:
@@ -51,10 +53,22 @@ def installed_programs(limit: int | None = None) -> list[str]:
     the back half of the alphabet. A cap that quietly hides most of the
     computer is an assumption wearing the costume of a measurement.
     """
-    found: set[str] = set()
-    for directory in (os.environ.get("PATH") or "").split(os.pathsep):
-        if not directory or not os.path.isdir(directory):
+    path_env = os.environ.get("PATH") or ""
+    dirs = [d for d in path_env.split(os.pathsep) if d]
+    stat_sig: list[tuple[str, int]] = []
+    for d in dirs:
+        try:
+            st = os.stat(d)
+            stat_sig.append((d, st.st_mtime_ns))
+        except OSError:
             continue
+    cache_key = (path_env, tuple(stat_sig))
+    cached = _INSTALLED_PROGRAMS_CACHE.get(cache_key)
+    if cached is not None:
+        all_found = list(cached)
+        return all_found if limit is None else all_found[:limit]
+    found: set[str] = set()
+    for directory, _ in stat_sig:
         try:
             names = os.listdir(directory)
         except OSError:
@@ -66,6 +80,9 @@ def installed_programs(limit: int | None = None) -> list[str]:
             if os.path.isfile(path) and os.access(path, os.X_OK):
                 found.add(name)
     all_found = sorted(found)
+    if len(_INSTALLED_PROGRAMS_CACHE) >= 8:
+        _INSTALLED_PROGRAMS_CACHE.clear()
+    _INSTALLED_PROGRAMS_CACHE[cache_key] = tuple(all_found)
     return all_found if limit is None else all_found[:limit]
 
 
@@ -351,6 +368,12 @@ _STOP = {"the", "and", "for", "with", "from", "print", "each", "file", "files",
          "that", "this", "than", "them", "then", "into", "also", "same"}
 
 
+_FLAG_DESC_CACHE: dict[tuple[str, int, int], tuple[tuple[str, str], ...]] = {}
+_FLAG_STEM_INDEX_CACHE: dict[tuple[str, int, int], tuple[tuple[str, frozenset[str], tuple[str, ...]], ...]] = {}
+_GLOBAL_MANUAL_INV_CACHE: dict[tuple[int, int], tuple[dict[str, tuple[str, ...]], tuple[str, ...]]] = {}
+_WORD_RE = re.compile(r"[a-z0-9]+")
+
+
 def flag_descriptions(prog: str, limit: int = 400) -> list[tuple[str, str]]:
     """Every flag the program documents, next to what it says the flag does.
 
@@ -358,9 +381,14 @@ def flag_descriptions(prog: str, limit: int = 400) -> list[tuple[str, str]]:
     means was written down by us; wc says '-l, --lines  print the newline
     counts' and that is where the knowledge comes from.
     """
+    ht = help_text(prog)
+    key = (prog, id(ht), len(ht))
+    cached = _FLAG_DESC_CACHE.get(key)
+    if cached is not None:
+        return list(cached[:limit])
     out: list[tuple[str, str]] = []
     seen: set[str] = set()
-    for line in help_text(prog).splitlines():
+    for line in ht.splitlines():
         m = _FLAG_LINE.match(line)
         if not m:
             continue
@@ -375,7 +403,31 @@ def flag_descriptions(prog: str, limit: int = 400) -> list[tuple[str, str]]:
                 continue
             seen.add(raw)
             out.append((raw, desc))
+    if len(_FLAG_DESC_CACHE) >= 2048:
+        _FLAG_DESC_CACHE.clear()
+    _FLAG_DESC_CACHE[key] = tuple(out)
     return out[:limit]
+
+
+def _precomputed_flag_stems(prog: str, limit: int = 400) -> tuple[tuple[str, frozenset[str], tuple[str, ...]], ...]:
+    ht = help_text(prog)
+    key = (prog, id(ht), len(ht))
+    cached = _FLAG_STEM_INDEX_CACHE.get(key)
+    if cached is not None:
+        return cached[:limit]
+    rows: list[tuple[str, frozenset[str], tuple[str, ...]]] = []
+    for flag, desc in flag_descriptions(prog, limit=400):
+        d: set[str] = set()
+        for tok in _WORD_RE.findall((flag + " " + desc).lower()):
+            d |= _stem(tok)
+        fs = frozenset(d)
+        long_t = tuple(t for t in fs if len(t) >= 4)
+        rows.append((flag, fs, long_t))
+    tup = tuple(rows)
+    if len(_FLAG_STEM_INDEX_CACHE) >= 2048:
+        _FLAG_STEM_INDEX_CACHE.clear()
+    _FLAG_STEM_INDEX_CACHE[key] = tup
+    return tup[:limit]
 
 
 def _stem(word: str) -> set[str]:
@@ -394,6 +446,43 @@ def _stem(word: str) -> set[str]:
     return out
 
 
+def _goal_token_info(goal: str) -> tuple[list[str], set[str]]:
+    text = str(goal or "")
+    noise: set[str] = set()
+    for name in _FILENAME.findall(text):
+        for tok in _WORD_RE.findall(name.lower()):
+            noise |= _stem(tok)
+    raw_toks = [tok for tok in _WORD_RE.findall(text.lower()) if len(tok) > 2 and tok not in _STOP]
+    return raw_toks, noise
+
+
+def _flags_for_goal_preparsed(prog: str, raw_toks: list[str], base_noise: set[str], limit: int = 8) -> list[str]:
+    noise = base_noise | _stem(prog)
+    words: set[str] = set()
+    for tok in raw_toks:
+        if tok not in noise:
+            words |= _stem(tok)
+    if not words:
+        return []
+    long_words = [w for w in words if len(w) >= 4]
+    scored: list[tuple[int, str]] = []
+    for flag, d, long_t in _precomputed_flag_stems(prog):
+        exact = len(words & d)
+        sub = 0
+        for w in long_words:
+            for t in long_t:
+                if w in t or t in w:
+                    sub += 1
+                    break
+        sc = 2 * exact + sub
+        if sc > 0:
+            scored.append((sc, flag))
+    if not scored:
+        return []
+    scored.sort(key=lambda x: (-x[0], x[1]))
+    return [f for _, f in scored[:limit]]
+
+
 def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
     """Flags whose documented meaning the goal actually mentions.
 
@@ -401,45 +490,8 @@ def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
     'print the newline counts'. The machine is reading the manual and looking
     for the words it was given -- not reciting a table of what -l does.
     """
-    text = str(goal or "")
-    # the filenames in the goal are noise: 'count the lines in notes.txt'
-    # must not make every mention of 'notes' look like a match
-    noise: set[str] = set()
-    for name in _FILENAME.findall(text):
-        for tok in re.findall(r"[a-z0-9]+", name.lower()):
-            noise |= _stem(tok)
-    # the program's own name is not a clue about which flag to use:
-    # 'sort in reverse' must not make every flag whose text says 'sort' win
-    noise |= _stem(prog)
-    words: set[str] = set()
-    for tok in re.findall(r"[a-z0-9]+", text.lower()):
-        if len(tok) > 2 and tok not in _STOP and tok not in noise:
-            words |= _stem(tok)
-    if not words:
-        return []
-
-    def score(desc: str) -> int:
-        d: set[str] = set()
-        for tok in re.findall(r"[a-z0-9]+", desc.lower()):
-            d |= _stem(tok)
-        exact = len(words & d)
-        # 'line' lives inside 'newline'. Counting both is what separates
-        # --lines from --bytes: every wc flag says 'counts', so the exact
-        # match alone leaves all of them tied.
-        sub = 0
-        for w in words:
-            if len(w) < 4:
-                continue
-            for t in d:
-                if len(t) >= 4 and (w in t or t in w):
-                    sub += 1
-                    break
-        return 2 * exact + sub
-
-    scored = [(score(flag + " " + desc), flag) for flag, desc in flag_descriptions(prog)]
-    scored = [(n, f) for n, f in scored if n > 0]
-    scored.sort(key=lambda x: (-x[0], x[1]))
-    return [f for _, f in scored[:limit]]
+    raw_toks, base_noise = _goal_token_info(goal)
+    return _flags_for_goal_preparsed(prog, raw_toks, base_noise, limit=limit)
 
 
 _VALUE = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?%|\d+x\d+|\d+(?:\.\d+)?)(?![\w])")
@@ -754,23 +806,109 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
     tried. The manual is the better index: ask which programs document a
     flag meaning what the goal said.
     """
-    from concurrent.futures import ThreadPoolExecutor
+    _help_load()
+    progs = installed_programs()
+    missing = [p for p in progs if p not in _HELP_CACHE]
+    if missing:
+        from concurrent.futures import ThreadPoolExecutor
 
-    def ask(prog: str) -> tuple[str, int]:
+        def _warm_help(prog: str) -> None:
+            try:
+                help_text(prog)
+            except Exception:  # noqa: BLE001
+                pass
+
+        with ThreadPoolExecutor(max_workers=min(24, len(missing))) as pool:
+            list(pool.map(_warm_help, missing))
+        _help_flush(force=True)
+
+    raw_toks, base_noise = _goal_token_info(goal)
+    if not raw_toks:
+        return []
+    inv_key = (len(progs), len(_HELP_CACHE))
+    inv_entry = _GLOBAL_MANUAL_INV_CACHE.get(inv_key)
+    if inv_entry is None:
+        tok_to_progs: dict[str, set[str]] = {}
+        long_vocab: set[str] = set()
+        for p in progs:
+            for _fl, d_set, long_t in _precomputed_flag_stems(p):
+                for t in d_set:
+                    s = tok_to_progs.get(t)
+                    if s is None:
+                        tok_to_progs[t] = {p}
+                    else:
+                        s.add(p)
+                long_vocab.update(long_t)
+        inv_entry = (
+            {t: tuple(sorted(ps_set)) for t, ps_set in tok_to_progs.items()},
+            tuple(sorted(long_vocab)),
+        )
+        _GLOBAL_MANUAL_INV_CACHE.clear()
+        _GLOBAL_MANUAL_INV_CACHE[inv_key] = inv_entry
+
+    tok_to_progs_map, long_vocab_tup = inv_entry
+    superset_words: set[str] = set()
+    for tok in raw_toks:
+        if tok not in base_noise:
+            superset_words |= _stem(tok)
+    if not superset_words:
+        return []
+    superset_long = [w for w in superset_words if len(w) >= 4]
+    matched_tokens = set(superset_words)
+    sub_sets_by_w: dict[str, frozenset[str]] = {}
+    if superset_long:
+        for w in superset_long:
+            ws = frozenset(t for t in long_vocab_tup if w in t or t in w)
+            sub_sets_by_w[w] = ws
+            matched_tokens.update(ws)
+    candidate_progs: set[str] = set()
+    for t in matched_tokens:
+        ps_tup = tok_to_progs_map.get(t)
+        if ps_tup:
+            candidate_progs.update(ps_tup)
+
+    superset_any = set(superset_words)
+    for ws in sub_sets_by_w.values():
+        superset_any.update(ws)
+    superset_any_fs = frozenset(superset_any)
+    raw_tok_set = frozenset(raw_toks)
+
+    hits: list[tuple[int, str]] = []
+    for p in candidate_progs:
         try:
-            return prog, len(flags_for_goal(prog, goal))
+            p_stems = _stem(p)
+            if p_stems & raw_tok_set:
+                noise = base_noise | p_stems
+                words: set[str] = set()
+                for tok in raw_toks:
+                    if tok not in noise:
+                        words |= _stem(tok)
+                if not words:
+                    continue
+                p_any: set[str] | frozenset[str] = set(words)
+                for w in words:
+                    if len(w) >= 4:
+                        p_any.update(sub_sets_by_w[w])
+            else:
+                p_any = superset_any_fs
+            n = 0
+            for _fl, d_set, _lt in _precomputed_flag_stems(p):
+                if p_any & d_set:
+                    n += 1
+                    if n >= 8:
+                        break
+            if n:
+                hits.append((n, p))
         except Exception:  # noqa: BLE001
-            return prog, 0
-
-    with ThreadPoolExecutor(max_workers=24) as pool:
-        hits = [(n, p) for p, n in pool.map(ask, installed_programs()) if n]
-    # every manual on the machine has just been read once; never again
-    _help_flush(force=True)
+            continue
     hits.sort(key=lambda x: (-x[0], x[1]))
     out_progs: list[str] = []
     seen_real: set[str] = set()
     for _, p in hits:
-        real = _instrument(p)
+        real = _INSTRUMENT_MEM_CACHE.get(p)
+        if real is None:
+            real = _instrument(p)
+            _INSTRUMENT_MEM_CACHE[p] = real
         if real in seen_real:
             continue
         seen_real.add(real)

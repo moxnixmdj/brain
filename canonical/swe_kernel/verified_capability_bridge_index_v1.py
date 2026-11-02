@@ -617,3 +617,66 @@ def plan_and_execute_unfamiliar_tool_schemas(
     }
 
 
+def compile_and_verify_execution_capsule(
+    problem: Mapping[str, Any] | None = None,
+    planned: Mapping[str, Any] | None = None,
+    execution: Mapping[str, Any] | None = None,
+    *,
+    macrosteps: Sequence[Mapping[str, Any]] | None = None,
+    rollback_target_hash: str | None = None,
+    project_requires: Sequence[str] | None = None,
+) -> dict[str, Any]:
+    """Compile and cryptographically verify execution trace capsules (`capability_execution_trace_capsule_v1`) and cross-role provenance state capsules (`composition_state_capsule_v2`, `K3 = 0`)."""
+    from canonical.runtime import composition_state_capsule_v2 as csc2
+    from canonical.runtime import capability_execution_trace_capsule_v1 as cetc
+
+    t0 = time.perf_counter_ns()
+    if problem is not None and planned is not None and execution is not None:
+        compiled = dict(cetc.verify_and_compile(problem, planned, execution))
+        ok = bool(
+            compiled.get("status") == "PASS"
+            and compiled.get("all_target_effects_have_witnesses") is True
+        )
+        return {
+            "schema": SCHEMA + "/execution_trace_capsule",
+            "pass": ok,
+            "status": "PASS__EXECUTION_TRACE_CAPSULE_VERIFIED" if ok else str(compiled.get("reason") or compiled.get("status") or "FAIL_CLOSED__TRACE_CAPSULE_INVALID"),
+            "trace_capsule": compiled,
+            "capsule_organ": "capability_execution_trace_capsule_v1",
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    cap = csc2.empty_capsule()
+    for step in macrosteps or ():
+        cap = csc2.append_macrostep(
+            cap,
+            producer_ref=str(step["producer_ref"]),
+            producer_descriptor=dict(step.get("producer_descriptor") or {}),
+            action_ref=str(step["action_ref"]),
+            action_descriptor=dict(step.get("action_descriptor") or {}),
+            requires=list(step.get("requires") or []),
+            provides=list(step.get("provides") or []),
+            values=dict(step.get("values") or {}),
+            evidence_values=dict(step.get("evidence_values") or {}),
+            lineage=dict(step.get("lineage") or {}),
+        )
+    if rollback_target_hash is not None:
+        cap = csc2.rollback_to(cap, rollback_target_hash)
+    ver = csc2.verify_capsule(cap)
+    proj = csc2.project_context(cap, list(project_requires)) if project_requires is not None else None
+    ok = bool(ver.get("status") == "PASS" or ver.get("pass") is True)
+    return {
+        "schema": SCHEMA + "/provenance_state_capsule_v2",
+        "pass": ok,
+        "status": "PASS__PROVENANCE_STATE_CAPSULE_VERIFIED" if ok else "FAIL_CLOSED__CAPSULE_VERIFICATION_FAILED",
+        "capsule": cap,
+        "capsule_verification": ver,
+        "projected_context": proj,
+        "capsule_organ": "composition_state_capsule_v2",
+        "k3_external_llm_calls": 0,
+        "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
+    }
+
+
+

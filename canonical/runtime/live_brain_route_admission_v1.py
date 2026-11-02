@@ -61,6 +61,7 @@ Zero credit, zero spend, zero models.
 from __future__ import annotations
 
 import ast
+import contextlib
 import hashlib
 import json
 import os
@@ -89,6 +90,35 @@ from canonical.runtime.bound_capabilities import python_repair_measured_acceptan
 from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
     is_test_file_name as _is_test_file_name,
 )
+
+# Pinned repository code root (where Brain's trusted bound capability adapters live),
+# never overridden when `solve()` scopes `ROOT` to an external `workspace_root`.
+_BRAIN_CODE_ROOT = pathlib.Path(ROOT).resolve()
+_ADAPTER_MODULE_CACHE: dict[tuple[str, int, int], Any] = {}
+
+
+@contextlib.contextmanager
+def _with_workspace_root(workspace_root: Any):
+    """Temporarily bind target workspace `ROOT` while keeping trusted code on `_BRAIN_CODE_ROOT`."""
+    global ROOT
+    if not workspace_root:
+        yield ROOT
+        return
+    resolved_ws = pathlib.Path(workspace_root).resolve()
+    if resolved_ws == pathlib.Path(ROOT).resolve():
+        yield ROOT
+        return
+    prev_root = ROOT
+    prev_cr_root = getattr(composer_route, "_REPO_ROOT", None)
+    ROOT = resolved_ws
+    if prev_cr_root is not None:
+        composer_route._REPO_ROOT = resolved_ws
+    try:
+        yield resolved_ws
+    finally:
+        ROOT = prev_root
+        if prev_cr_root is not None:
+            composer_route._REPO_ROOT = prev_cr_root
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -1193,15 +1223,23 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_INVALID")
     declared = str(source.get("adapter_path") or "")
-    path = (ROOT / declared).resolve() if declared else (ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
-    if ROOT.resolve() not in path.parents or not path.is_file() or path.suffix != ".py":
+    code_root = _BRAIN_CODE_ROOT
+    path = (code_root / declared).resolve() if declared else (code_root / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
+    if code_root not in path.parents or not path.is_file() or path.suffix != ".py":
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_MISSING:" + declared)
-    spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
-    if spec is None or spec.loader is None:
-        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    st_mod = path.stat()
+    mod_cache_key = (str(path), st_mod.st_mtime_ns, st_mod.st_size)
+    module = _ADAPTER_MODULE_CACHE.get(mod_cache_key)
+    if module is None:
+        spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
+        if spec is None or spec.loader is None:
+            raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        if len(_ADAPTER_MODULE_CACHE) >= 256:
+            _ADAPTER_MODULE_CACHE.clear()
+        _ADAPTER_MODULE_CACHE[mod_cache_key] = module
     fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
     if not callable(fn):
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
@@ -4241,7 +4279,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     """
     try:
         from canonical.runtime import composer_route_v1 as croute
-        routed = croute.route(goal, g=_cached_composer_graph())
+        routed = croute.route(goal, g=_cached_composer_graph(), cwd=ROOT)
         if not routed.get("pass"):
             return None
         executed = croute.execute_chain(routed["chain"], goal)
@@ -4694,7 +4732,7 @@ def _serve_by_acting(request: Mapping[str, Any]) -> dict[str, Any] | None:
         if (not suffix or not ps.has_verifier(suffix)
                 or not ps.carries_content_evidence(suffix)):
             return None            # nothing here could tell the result from any other file
-        cwd = request.get("cwd") or request.get("workdir") or os.getcwd()
+        cwd = request.get("cwd") or request.get("workdir") or request.get("workspace_root") or str(ROOT)
         done = cenv.perform(goal, cwd=cwd)
         if not (isinstance(done, Mapping) and done.get("pass") is True):
             return None
@@ -4723,61 +4761,62 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(request, Mapping) or not request.get("task_id") or not request.get("goal"):
         return _fail(str(request.get("task_id") or "") if isinstance(request, Mapping) else "",
                      "FAIL_CLOSED", "REQUEST_INVALID", started, executed=False)
-    result = _solve_request(request)
-    if "contract_checks" in request:
-        result.setdefault("structured_contract_acceptance_complete", False)
-        if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
-            result["pass"] = False
-            result["semantic_acceptance_complete"] = False
-            result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
-            result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
-    elif result.get("pass") is not True:
-        try:
-            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
-                _is_honest_contract_refusal,
-            )
-            from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
-                recall_and_execute_workflow,
-            )
+    with _with_workspace_root(request.get("workspace_root")):
+        result = _solve_request(request)
+        if "contract_checks" in request:
+            result.setdefault("structured_contract_acceptance_complete", False)
+            if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
+                result["pass"] = False
+                result["semantic_acceptance_complete"] = False
+                result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+                result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+        elif result.get("pass") is not True:
+            try:
+                from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                    _is_honest_contract_refusal,
+                )
+                from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+                    recall_and_execute_workflow,
+                )
 
-            if not _is_honest_contract_refusal(result):
-                recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
-                if recalled is not None and recalled.get("pass") is True:
-                    receipts = list(recalled.get("step_receipts") or [])
-                    last_step = receipts[-1] if receipts else {}
-                    ans = str(last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows") or "").strip()
-                    result = {
-                        "schema": SCHEMA,
-                        "task_id": str(request.get("task_id") or ""),
-                        "goal": str(request.get("goal") or ""),
-                        "pass": True,
-                        "status": "PASS__COMPILED_WORKFLOW_SKILL",
-                        "compiled_capability_id": str(recalled.get("skill_id") or ""),
-                        "from_memory": True,
-                        "fastest_layer": recalled.get("dominant_layer"),
-                        "answer": ans,
-                        "step_receipts": receipts,
-                        "elapsed_ns": perf_counter_ns() - started,
-                    }
-                    return result
-        except Exception:
-            pass
-        try:
-            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
-                _is_honest_contract_refusal,
-            )
-            if not _is_honest_contract_refusal(result):
-                acted = _serve_by_acting(request)
-                if acted is not None:
-                    acted["elapsed_ns"] = perf_counter_ns() - started
-                    acted["served_after"] = str(result.get("status") or "")
-                    return acted
-        except Exception:
-            pass
-    # Include preflight compilation, selection and report inspection. Moving
-    # work before _solve_body must not make the reported latency look smaller.
-    result["elapsed_ns"] = perf_counter_ns() - started
-    return result
+                if not _is_honest_contract_refusal(result):
+                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""), cwd=ROOT)
+                    if recalled is not None and recalled.get("pass") is True:
+                        receipts = list(recalled.get("step_receipts") or [])
+                        last_step = receipts[-1] if receipts else {}
+                        ans = str(last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows") or "").strip()
+                        result = {
+                            "schema": SCHEMA,
+                            "task_id": str(request.get("task_id") or ""),
+                            "goal": str(request.get("goal") or ""),
+                            "pass": True,
+                            "status": "PASS__COMPILED_WORKFLOW_SKILL",
+                            "compiled_capability_id": str(recalled.get("skill_id") or ""),
+                            "from_memory": True,
+                            "fastest_layer": recalled.get("dominant_layer"),
+                            "answer": ans,
+                            "step_receipts": receipts,
+                            "elapsed_ns": perf_counter_ns() - started,
+                        }
+                        return result
+            except Exception:
+                pass
+            try:
+                from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                    _is_honest_contract_refusal,
+                )
+                if not _is_honest_contract_refusal(result):
+                    acted = _serve_by_acting(request)
+                    if acted is not None:
+                        acted["elapsed_ns"] = perf_counter_ns() - started
+                        acted["served_after"] = str(result.get("status") or "")
+                        return acted
+            except Exception:
+                pass
+        # Include preflight compilation, selection and report inspection. Moving
+        # work before _solve_body must not make the reported latency look smaller.
+        result["elapsed_ns"] = perf_counter_ns() - started
+        return result
 
 
 def solve_or_learn(
