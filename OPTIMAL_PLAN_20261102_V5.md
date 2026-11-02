@@ -1,5 +1,15 @@
 # The optimal plan — V5, re-ranked by what measurement actually survived
 
+> **SUBORDINATE to `INSTANT_LEARNING_SCOPE_20261101_V1.md` (2026-11-01).**
+> That document answers the owner's question after five rounds of measurement and
+> ranks the smartest next moves. This file was written without reading it, organises
+> itself around `0 of 112` self-board obligations -- a benchmark-shaped reading that
+> `REAL_MISSION_OBJECTIVE_20261008_V1.json` terminality and `OWNER_ACTIVE_GOAL_20261018_V1.md`
+> section 6 both exclude -- and mis-frames the authoring fork. The fork is decided by
+> current law, not by the owner: see V6's section "The authoring fork -- retired".
+> Read the durable document first. Do not implement from this one.
+
+
 > **SUPERSEDED IN PART by `OPTIMAL_PLAN_20261102_V6.md`.** Section 2's #1 item,
 > PR-C' (replace `skeleton_fp` with a shape-invariant retrieval key), was measured
 > **dead** after this file was committed: the taught rule cannot *match* another

@@ -175,46 +175,94 @@ broadening lifts recall from 2/5 to 5/5 *while gated at `TEST_SUITE`*, and that 
 weak verifier still receives the context-anchored pattern and never the broad one.
 That is the PR's own success criterion, not a precondition for opening it.
 
-### The authoring fork — the owner's decision, unchanged
+### The authoring fork -- retired: current law already decides it
 
-Measured and unrefuted: no organ computes an `after_snippet`; blind deterministic
-search closes 0/8 outside its vocabulary because it can **substitute but never
-introduce**; and the 112 obligations each demand an *inspector*, whose fitness
-function is an inspector (circular). Either keep the demonstrator — the honest
-claim today, and worth more than an inflated one — or admit a model-driven
-generator and spend the model-dependence invariant.
+**This section was wrong three times, and the third correction is the one that
+matters.** V5 priced branch (b) as `MODEL_DEPENDENCE_AUDIT = 0`. Commit `339acee`
+"corrected" that by reading `check_model_dependence()` and concluding the price was
+lower. Both reasoned from an **instrument**. The authority is the law, and the law
+says something neither claimed.
 
-**That price was quoted wrong, and is corrected here.** `MODEL_DEPENDENCE_AUDIT`
-is four cases and its scan scope is narrow:
+`execution_guard.agent_orientation_check_v1.is_current_law` over `canonical/laws/`
+reports **25 current, 34 superseded**. Both model laws this document and `339acee`
+leaned on are **superseded**: `MODEL_NON_DEPENDENCE_LAW_V1.md` and
+`MODEL_PROVIDER_RESILIENCE_AND_CAPABILITY_OWNERSHIP_LAW_V2.md`.
 
-| case | what it actually covers |
+What is current:
+
+**`FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md`** (CANONICAL /
+MANDATORY / FAIL-CLOSED): capability, benchmark, acceptance, ownership, promotion,
+real-task or terminal credit may be claimed *only when the producer cognition path
+has zero dependencies on another general-purpose model* -- and "local, remote,
+open-weight, copied, cached, vendored, self-hosted, wrapped, renamed, or
+content-addressed models are all model dependencies."
+
+**`CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md`** (same status) draws the
+line causally, not lexically: renaming a model call as distillation, transfer,
+retrieval, substrate, planner or local inference does not change its class. A route
+is FORBIDDEN when a donor model stays load-bearing for reasoning, planning,
+synthesis, judgment, tool choice, recovery or code generation **on the future task
+being credited**.
+
+So the fork as framed here does not exist:
+
+| as framed | under current law |
 |---|---|
-| `no_model_client_import_in_runtime` | **3 files only**: `brain_unified_model_v1.py`, `compile_brain_unified_model_v1.py`, `verify_brain_unified_model_v1.py` |
-| `no_capability_route_names_a_model_provider` | the `route` text of capabilities and engines, against 10 vendor markers |
-| `compiler_declares_zero_model_and_network_calls` | the compiler's own provenance: 0 model calls, 0 network calls, $0 |
-| `model_vendor_name_occurrences_are_reported_not_hidden` | disclosure only; always passes |
+| (a) keep the demonstrator | permitted -- but 0/112 is not the objective, so it forfeits nothing |
+| (b) model-driven generator at **solve** time | **PROHIBITED, not priced.** Zero credit, whatever the audit reports |
+| (c) donor in a bounded **acquisition** phase, then deleted | **expressly allowed** -- the route nobody here proposed |
 
-The 17-rule integrity guard says nothing about models. And **8 files in this
-repository already import `litellm`, `openai` or `httpx`** -- vendored agent
-capability trees -- referenced by **0 capabilities**, i.e. inert. The invariant is
-therefore *the artifact and its producer are model-free and cost $0*. It is not
-*the repository contains no model*.
+`339acee` is corrected by this section. The audit's narrow scan scope is true but
+**irrelevant**: a solve-time generator cannot be made creditable by sitting outside
+three scanned files. That is exactly what condition 12 (FAIL-CLOSED AMBIGUITY) and
+the "renaming does not change its class" clause exist to prevent. The instinct in
+`339acee` -- that a green produced by placement would be a defect, not a result --
+was right, and was attached to the wrong authority.
 
-So admitting a generator does not automatically zero the audit. It spends it only
-if the generator is wired as a capability whose route names a provider -- which is
-precisely what case 2 exists to force into the open.
+**Route (c) and its twelve conditions.** A donor may create a new Brain-owned
+mechanism during acquisition: distillation, behavioral imitation, procedure
+recovery, **mechanistic reimplementation**, module/circuit extraction, verified
+composition. Promotion then requires ALL twelve: phase separation; a Brain-owned
+operative artifact with provenance; zero donor runtime dependency; zero external
+model cognition dependency; **donor-deletion proof**; **independent qualification on
+frozen held-out evidence not used for teaching, selection, tuning, pruning or
+minimization**; **causal ownership by ablation**; full dependency closure; **no
+answer leakage**; reconstructibility; attribution; fail-closed ambiguity.
 
-**The trap this creates, stated so that it is not walked into:** a generator placed
-deliberately outside those three files, running at teach time, outside every
-capability route, would leave all four cases green. That green would be a defect,
-not a result -- the same category as an all-green suite produced by harness tricks.
-The honest sequence is therefore to **widen the audit to cover the generator's home
-before the generator exists**, so that admitting a model cannot be done quietly.
-Widening is strengthening, and it must land first; otherwise the number meant to
-price this decision cannot be trusted to price it.
+This bears directly on the real frontier, which
+`INSTANT_LEARNING_SCOPE_20261101_V1.md` names precisely: the machine now authors a
+lesson's *scope* -- `rule_scope_learning_v1` calls `select_probe`, so the orphan
+wire that document reported missing **has since been built** -- but a human still
+authors the **hypothesis space**. Someone had to see that `a < b or a == b` means
+`a <= b`. Route (c) is the lawful attack on that: recover the procedure during
+acquisition, ship the mechanism, delete the donor, qualify on frozen held-out
+evidence, prove ablation degrades it. Condition 6 is the discipline this tree
+already learned in that document's section 6.2, where a held-out instance was
+optional and the receipt claimed independence anyway.
 
-PR-C2 is independent of this fork: it multiplies the value of every demonstration
-under either answer.
+**Recorded finding, not fixed here:** `GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md`
+is CANONICAL / MANDATORY / FAIL-CLOSED, and its purpose is to make "local task
+success, probe completion, infrastructure activity, and attractive subproblems
+structurally unable to replace Project Brain's terminal objective." Its authority
+block cites MISSION_LOCK **V6** and cognition-substrate **V3** -- both superseded;
+current is V10 and V4. That is live staleness inside a fail-closed law and a
+plausible cause of the red `Drift Immunity Guard`. Left unfixed: pre-existing on
+`main`, and `RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4` likely governs the repair.
+
+**The indictment this section has to carry.** That law exists to prevent exactly
+what this session did. V4/V5/V6 were organised around `0 of 112` obligations on the
+creature's own self-authored board. `REAL_MISSION_OBJECTIVE_20261008_V1.json` sets
+terminality to
+`OPEN_ENDED_CAPABILITY_OPTIMIZATION_NO_FINITE_FRONTIER_MODEL_OR_BENCHMARK_DEFINES_FINAL_MISSION_COMPLETION`,
+and `OWNER_ACTIVE_GOAL_20261018_V1.md` section 6 names the identical failure: an
+agent turned "27 of 67 capabilities exercised" into the mission.
+`run_its_own_board` appears in **no** governance document as the objective; the only
+place it is framed as the mission is V4 of this file.
+
+These three plan documents are therefore **subordinate to
+`INSTANT_LEARNING_SCOPE_20261101_V1.md`**, which answered the owner's question on
+2026-11-01 after five rounds of measurement -- and which this session failed to
+read before writing three plans of its own.
 
 ### Cron — last
 

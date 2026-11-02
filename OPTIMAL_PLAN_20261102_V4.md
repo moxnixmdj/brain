@@ -1,5 +1,15 @@
 # The optimal plan — V4, re-grounded on today's `main` — 2026-11-02
 
+> **SUBORDINATE to `INSTANT_LEARNING_SCOPE_20261101_V1.md` (2026-11-01).**
+> That document answers the owner's question after five rounds of measurement and
+> ranks the smartest next moves. This file was written without reading it, organises
+> itself around `0 of 112` self-board obligations -- a benchmark-shaped reading that
+> `REAL_MISSION_OBJECTIVE_20261008_V1.json` terminality and `OWNER_ACTIVE_GOAL_20261018_V1.md`
+> section 6 both exclude -- and mis-frames the authoring fork. The fork is decided by
+> current law, not by the owner: see V6's section "The authoring fork -- retired".
+> Read the durable document first. Do not implement from this one.
+
+
 **Authority: NONE.** Zero capability, ownership, benchmark, terminal, or sentience credit
 follows from this document. It changes no number and moves no row. Every figure below was
 executed first-hand against `origin/main` @ `75eeed7` today; nothing is recalled from memory
