@@ -37,6 +37,7 @@ in a clean detached worktree of `main` and the numbers are what it printed.
 | Instant learning, generalization | `python ...instant_learning_transfer_probe` (probe 1) | **executable 2/9, controls 1/2, novel same-lesson shapes 1/7, cross-language 0/4** (`NO_RULES_FOR_LANGUAGE`, structural). Control C2 "same shape, new literal" → `NO_PROPOSAL` (a *control* missed) |
 | The executor, known-good form | `solve({"goal": "run <receipt_projection cid>"})` | **`pass=True`** — `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED`. Registry **443**, receipt-backed **294** |
 | The executor, authoring goals | `solve` / `solve_or_learn` on "write and register an inspector for CAP_FS_READ_V1 that refuses a decoy" | **refused** — `R13_DECLARED_INPUT_UNBINDABLE:registry` / `RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP` |
+| **The want→can gap, MEASURED** | wired a real `solve` executor into main's creature, ran its whole 112 board (throwaway, detached `main` worktree) | **STRICT oracle** (close counts only if the authoring goal passes *and* an inspector comes to exist): **closed 0** (attempted 42, blocked 42, parked 21). **LOOSE oracle** (also accepted `run <cid>`): reported **6 closed — all FALSE** (`run=True, author=False, has_inspector_now=False`): served an existing capability, authored nothing |
 | Crystallizer generalization gate | `verified_skill_crystallizer_v1.py:808` | `allow_operator_generalization=False`, guarded by `OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE` (:820) |
 | Production wiring of an executor | grep for a caller that passes a real `perform` | **none** — only the creature's own `main()`; default `perform` is `does_nothing` |
 | Unattended production trigger | `creature-runtime.yml` triggers | `pull_request` / `push` / `workflow_dispatch` — **no `schedule:`/`cron:`** |
@@ -80,18 +81,35 @@ serves and verifies. The reason is structural and has two independent halves:
    `{"ok": False, "blocked": "NO_EXECUTOR_WIRED"}`, so every obligation is blocked and, after
    two attempts, parked. This is the honest default — it *reports* rather than *assumes*.
 
-2. **Even wired, the serve path cannot author.** The creature's board is 112 *authoring*
-   obligations ("write and register an inspector that refuses a decoy"). `solve` is a
-   route-admission door over *existing* capabilities; on authoring goals it refuses
+2. **Even wired, the serve path cannot author — MEASURED, not inferred.** The creature's board
+   is 112 *authoring* obligations ("write and register an inspector that refuses a decoy").
+   `solve` is a route-admission door over *existing* capabilities; on authoring goals it refuses
    (`R13_DECLARED_INPUT_UNBINDABLE:registry`). The path that *could* author is
    `solve_or_learn` → the Tier-2 crystallizer, whose `allow_operator_generalization` is
    **False** and guarded by `OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE`.
    **The guard is the safety; it must never be weakened to make a row move.**
 
-So "wants 112, can do 0" is the honest measurement that **the machine cannot yet take an
-ambitious self-authored goal and drive it to a real, verified artifact.** That capability —
-not the number 0/112 — is the mission (`OWNER_ACTIVE_GOAL` §6: readings are read, never
-chased).
+   I tested half 2 by wiring a real `solve`-based executor into main's creature and running the
+   whole 112 board (throwaway measurement in a detached `main` worktree, not committed):
+   - A **STRICT** executor — a close counts only if the *authoring* goal passes **and** an
+     inspector actually comes to exist — closed **0** (attempted 42, blocked 42, parked 21,
+     posture CAUTIOUS, life 40/40 spent).
+   - A **LOOSE** executor that also accepted `run <cid>` reported **6 closed** — and every one
+     was a **FALSE close**: `run=True, author=False, has_inspector_now=False`. Serving an
+     *existing* capability is not authoring the *missing* inspector the obligation asks for. I
+     caught this only because I checked the closes against the obligation's own predicate; a
+     looser harness would have printed "the creature did 6 things" and I would have believed it.
+
+   This also corrects an earlier draft of this plan, which proposed hand-authoring one inspector
+   to close one obligation. Measured, that is not an autonomy result: the board would shrink by
+   one and the machine would have authored nothing. That is the §6 trap (moving 0/112 → 1/112 by
+   hand), so it is withdrawn.
+
+So "wants 112, can do 0" is the honest, **executed** measurement that **the machine cannot yet
+take an ambitious self-authored goal and drive it to a real, verified artifact.** Every organ in
+the tree serves, recalls, composes, generalizes, or acquires-from-an-existing-donor; none authors
+novel verified source from a cold goal. That capability — not the number 0/112 — is the mission
+(`OWNER_ACTIVE_GOAL` §6: readings are read, never chased).
 
 ---
 
@@ -111,15 +129,30 @@ code decision — the agent must not self-authorize a standing autonomous loop.
 *Falsification:* if a cron is added and the creature's posture on day N is not a function of
 its own verified history, continuity is decoration.
 
-**PR-B (top agent-executable step) — close the want→can gap for ONE real obligation, end to
-end, verifier as the floor.**
-Take one of the 112 ("capability X has no inspector that refuses a decoy"), satisfy the
-crystallizer's guard *honestly* (write the scoped Python test suite it demands — do not flip
-the flag), author the inspector, and let the creature close it with the verifier deciding.
-The goal is **not** to move 0/112 → 1/112 as a row; it is to prove the machine can drive one
-ambitious self-authored goal to a real verified artifact. *Falsification:* if the guard is
-satisfied and the obligation still cannot be closed without weakening the guard, the
-authoring path is the true wall and the plan must go to PR-C first.
+**PR-B (the real frontier — research-grade, NOT a wiring PR) — the tree has no authoring organ.**
+Measured today by wiring a real `solve` executor into main's creature over its own 112 board:
+under a **strict** oracle (a close counts only if the *authoring* goal passes **and** an
+inspector actually comes to exist) it closes **0**. A **loose** oracle that also accepted
+`run <cid>` reported **6 closed** — and every one was a **false close** (served an existing
+capability; authored nothing). The reason is structural: every organ in the tree *serves,
+recalls, composes, generalizes, or acquires-from-an-existing-donor*; **none writes novel
+verified source from a cold goal.** That is the wall between "wants 112" and "can do 0," and it
+is the same wall behind "most advanced coding, perfectly." Do not pretend it is a wiring fix.
+
+- **Do NOT** hand-author an inspector to move 0/112 → 1/112. Measured, that shrinks the board
+  by one and the machine authors nothing — the exact `OWNER_ACTIVE_GOAL` §6 trap, forbidden
+  twice (`OBJECTIVE_CANNOT_BE_REPLACED`, `RED_ROW_IS_NOT_AUTHORITY`). The earlier draft of this
+  plan proposed exactly that; it is withdrawn.
+- **The one immediately-executable, honest step** is a *negative-control test* that pins the
+  false close: assert that serving an existing capability (`run <cid>` → `pass=True`) does
+  **not** satisfy an authoring obligation whose predicate is "an inspector now exists and
+  refuses a decoy." That makes 0/112 trustworthy and stops the next harness (or agent) from
+  reporting my v1 "6 closed" as progress. It is a test, not a capability: it registers nothing,
+  moves no row, and cannot self-promote.
+
+*Falsification:* if a future organ ever closes an authoring obligation and this negative control
+still passes — an inspector really came to exist and really refuses a decoy, judged by the strict
+oracle — the wall is breached. The strict oracle, never the loose one, is what gets to say so.
 
 **PR-C — generalization is the real "instant learning" gap.**
 1/7 novel shapes, 0/4 cross-language, and a missed control. The lesson is stored as a shape,
