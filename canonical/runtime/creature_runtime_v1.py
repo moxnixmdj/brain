@@ -505,6 +505,26 @@ def boot(root: pathlib.Path | str, *, identity: str = "creature", life: float = 
     return creature
 
 
+def run_unattended_inspector_investigation(root: pathlib.Path | str, *, cycles: int = 6,
+                                           identity: str = 'creature', life: float = 40.0
+                                           ) -> dict[str, Any]:
+    """Select or resume one real inspector gap, without a caller naming the target.
+
+    This opt-in runner uses the same Creature and durable board. It cannot
+    establish the parent inspector/decoy condition and stops when that verifier
+    is unavailable. It does not replace the existing legacy board runner.
+    """
+    creature = boot(root, identity=identity, life=life)
+    investigation = creature.inspector_investigation()
+    authored_now = investigation is None
+    if authored_now:
+        investigation = creature.author_inspector_investigation()
+    result = creature.run(cycles=cycles)
+    return {'schema': SCHEMA, 'authored_now': authored_now,
+            'investigation': investigation, 'information': creature.inspector_information(),
+            'run': result}
+
+
 def run_its_own_board(root: pathlib.Path | str, *, cycles: int = 6,
                       perform: Perform = does_nothing) -> dict[str, Any]:
     """The real question: given the work it authored for itself, can it do any of it?"""
