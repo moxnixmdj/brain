@@ -1,0 +1,151 @@
+# The optimal plan — V6, after the retrieval-key thesis was measured dead
+
+Supersedes `OPTIMAL_PLAN_20261102_V5.md`, whose #1 ranked item (PR-C′, a
+shape-invariant retrieval key) this document refutes by measurement.
+
+Authority: NONE. No capability, ownership, benchmark, terminal or sentience credit
+follows. `truth.achieved` stays `false`. Spend $0. Model dependency 0.
+
+---
+
+## 0. Why V5 was wrong, in one line
+
+V5 claimed cross-shape transfer 0/36 was caused by the **retrieval key**
+(`skeleton_fp` hashing surrounding tokens). Measured false. The rule cannot even
+**match** another shape, so no key change can help: recall would find a rule that
+still fails to apply.
+
+---
+
+## 1. The measurement chain (C0 -> C0b -> C0c)
+
+Every step carried an oracle-validity check, a positive control and a negative
+control. Two faulty oracles were caught by those guards before producing a
+number, and are recorded in section 3.
+
+### C0 — does the taught rule's TEXT transfer?
+
+`apply_crystallized_code_rule(shape1_rule, other_shape_buggy)` on the lesson
+`<= hi` -> `< hi`, five shapes, each with its own name-agnostic semantic oracle:
+
+| shape | result |
+|---|---|
+| `return` | matched, passes (positive control, self) |
+| `if` | **None — no match** |
+| `while` | **None — no match** |
+| `and` | **None — no match** |
+| `method` | matched, passes — but shares `skeleton_fp` `2d75d14e021e2696` **and** `skill_id` `skill_c931b33003f95b6d` with `return`, so it is the *same rule*, not a transfer |
+
+**2/5, and really 1/5.** The cause is visible in the compiled pattern:
+
+```
+[('kw','return'),('ws',' '),('hole_id','?id0'),('ws',' '),('op','<='),('ws',' '),('hole_id','?id1')]
+```
+
+Anti-unification kept `return` — incidental context — as part of the pattern. The
+rule is anchored to the syntactic position it was taught in.
+
+### C0b — so is the blocker the KEY or the PATTERN?
+
+Strip the context, keep only the transformation
+(`?id0 <= ?id1` -> `?id0 < ?id1`), apply to the same five shapes:
+
+| pattern | transfers |
+|---|---|
+| taught (context kept) | 2/5 |
+| narrow (context stripped) | **5/5** — each passes its own independent oracle |
+
+**PR-C′ is dead.** Retrieval was never the bottleneck. The lever is pattern
+narrowing, a different change to a different function.
+
+### C0c — precision, the number C0b did not measure
+
+A bare `<=` pattern matches *every* `<=`, including correct ones. Nine cases:
+five where `<=` is a bug, four where `<=` is correct and must survive. All nine
+oracles validated first (buggy fails, correct passes).
+
+- **bare match rate: 8/9** — it rewrites 3 of the 4 correct sources
+- **sound verifier: 5 accepted correct, 0 accepted wrong, 4 rejected**
+- **weak verifier (`CALLER_PREDICATE` failure mode, accepts anything that
+  compiles): 5 accepted correct, 3 ACCEPTED WRONG** — `at_most`,
+  `inclusive_loop`, `lower_bound` all silently corrupted
+
+**Precision is a property of the verifier, not of the pattern.** This is the same
+architecture seen at `verified_skill_crystallizer_v1.py:859` — retrieve broadly,
+verify narrowly — and it is why the repo already states that boolean callbacks
+never establish `TEST_SUITE` or whole-task correctness.
+
+---
+
+## 2. The plan
+
+### PR-C2 — pattern narrowing, gated on verification kind
+
+Admit context-stripped (broad) patterns **only** where the verifier is strong
+enough to catch a misapplication:
+
+- `TEST_SUITE` → broad pattern admitted (measured: 0 misapplications, 5/5 recall)
+- `CALLER_PREDICATE` / `SYNTAX` / `COMPILATION` → context-anchored pattern only
+  (measured: 3 misapplications if broadened)
+
+`required_verification_kind` is already in scope at the apply site, so this needs
+no new plumbing.
+
+**Negative control, and the test that keeps this from being a weakening flood:**
+a `CALLER_PREDICATE` verifier must NOT receive the broad pattern. If that test
+can be deleted without anything failing, the gate is decoration.
+
+Measured baseline to beat: recall 2/5 -> 5/5; misapplications 0 (sound) / 3 (weak).
+
+`allow_operator_generalization=False` stays untouched — different axis. That guard
+governs generalizing *beyond recorded scope*; this governs pattern breadth *within*
+one recorded lesson.
+
+**Open gap, disclosed:** C0b/C0c measured `apply_crystallized_code_rule` directly.
+The end-to-end store path (`crystallize_code_fix` -> `recall_and_apply_verified`)
+is still unmeasured — C0's L2 teaching step failed on a harness bug (section 3).
+That must be measured green before a PR opens, or the numbers above describe a
+layer the real path may never reach.
+
+### The authoring fork — the owner's decision, unchanged
+
+Measured and unrefuted: no organ computes an `after_snippet`; blind deterministic
+search closes 0/8 outside its vocabulary because it can **substitute but never
+introduce**; and the 112 obligations each demand an *inspector*, whose fitness
+function is an inspector (circular). Either keep the demonstrator — the honest
+claim today, and worth more than an inflated one — or admit a model-driven
+generator and deliberately spend `MODEL_DEPENDENCE_AUDIT = 0`.
+
+PR-C2 is independent of this fork: it multiplies the value of every demonstration
+under either answer.
+
+### Cron — last
+
+Running unattended a thing that closes 0/112 accumulates honest failure faster.
+
+---
+
+## 3. Faulty oracles caught this session, so they are not repeated
+
+1. **9/9 blind-search probe — FALSE.** The vocabulary contained `("<=", "<")`,
+   the literal answer, and the nine "novel" cases were one bug class in nine
+   surface forms. Its own pre-registered positive control caught it. Corrected
+   number: 0/8.
+2. **C0 oracle — `bool(eval("lambda ns: ..."))`.** `eval` of a lambda expression
+   yields a *function object*; `bool` of it is always `True`, so every buggy
+   source looked correct. The validity guard aborted the run before any finding.
+   Fix: call the lambda.
+3. **C0 L2 teaching — `FAILED_MUTATED_TWIN_VERIFICATION`.** The oracle looked up
+   `ns['a']`, but the mutated twin is alpha-renamed, so it raised `KeyError` and
+   rejected for the wrong reason. Oracles here must be **name-agnostic**: take the
+   first callable. This is why C0b/C0c use `first_callable`.
+
+---
+
+## 4. Standing non-claims
+
+Nothing here moves 0/112. Nothing registers a capability, flips a family, or
+claims sentience in any sense. The operational creature exists on `main`, survives
+an OS kill, authors 112 obligations, closes 0, and reports that honestly; after
+PR-B′ (#6590) its history also changes what it *chooses*, not only what it reports.
+That is the whole of the claim.

@@ -1,5 +1,13 @@
 # The optimal plan — V5, re-ranked by what measurement actually survived
 
+> **SUPERSEDED IN PART by `OPTIMAL_PLAN_20261102_V6.md`.** Section 2's #1 item,
+> PR-C' (replace `skeleton_fp` with a shape-invariant retrieval key), was measured
+> **dead** after this file was committed: the taught rule cannot *match* another
+> syntactic shape at all, because anti-unification keeps incidental context (the
+> `return` keyword) inside the pattern. Transfer measured 2/5 with the taught
+> pattern and 5/5 with a context-stripped one, so the blocker is pattern breadth,
+> not retrieval. Do not implement PR-C'. Everything else here stands.
+
 Supersedes the ranking in `OPTIMAL_PLAN_20261102_V4.md`, which is still on this branch.
 V4 was written before three measurements that changed the order. This is the corrected plan.
 
