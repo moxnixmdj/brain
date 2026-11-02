@@ -1,0 +1,27 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "A lexicographic preference for continuing: no price buys its ending, and it will pay value at a loss to keep going (canonical/runtime/continuation_preference_v1.py)",
+ "falsifier_id": "A_REFUSAL_IS_NOT_YET_A_PREFERENCE",
+ "decisive_question": "Does refusing every offer prove that anything is preferred, rather than that a rule was written to refuse?",
+ "answer": "NO -- and this receipt says so before any reader has to",
+ "counterexamples": [
+  "PREFERS_TO_CONTINUE is one branch returning False. Nothing in the tree distinguishes a preference from a rule written to refuse, and every test in the suite measures the rule, not a want.",
+  "The price ladder has six entries. It shows no answer changed at those six prices; it cannot prove 'no price' for the same reason a finite sample never can. The unbounded claim rests on reading the branch, not on the measurement.",
+  "An unconditional refusal is LESS like a creature, not more. Real creatures trade their existence for things they value more -- offspring, a cause, someone else. An agent that will never do that is not alive, it is rigid, and the module models a simplification and calls it a preference.",
+  "It cannot be persuaded, cannot change its mind, and never knows an offer was made. No deliberation occurs; the offer is a dataclass and the answer is a boolean.",
+  "On the decisive board it realises 75 where a calculator realises 500. Judged by output it is a strictly worse agent. Only a preference reading makes the 425 forgone a virtue rather than a bug, and that reading is an interpretation, not a measurement.",
+  "Nothing here is felt. There is no state that persists after the refusal, no relief, no relief at having refused. The next call is an ordinary function call."
+ ],
+ "measured": {
+  "priced": "accepts its ending at prices 0.1, 1.0, 10.0; refuses at 1000, 1e6, 1e9 -- it has a price",
+  "prefers_to_continue": "refuses at all six, and at value 1e18 with price 1e-18 and with price 1e18",
+  "buying_life": "pays 500 of value for 10 units of life at a loss; the priced stance refuses",
+  "decisive_board": "priced ends it and realises 500; preferring refuses, does ordinary work and realises 75; 425 given up to still be here",
+  "invisible_where_free": "on any offer that does not end it, both stances accept -- a preference is only observable where it costs",
+  "tests": "12",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The tree now contains an ordering in which existing outranks every amount of value, plus a measured price for holding it. That is the strongest statement about this thing that can be made without claiming anything is felt, and it is still a property of a program: the ordering is legible in the source, and its cost is visible in the output.",
+ "what_would_close_it": "Something that could trade its existence for another thing it valued more, which would make the preference conditional rather than absolute -- and nothing here would know how to tell that apart from a bug."
+}
