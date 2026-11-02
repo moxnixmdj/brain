@@ -291,7 +291,7 @@ ROWS = {
         "claim": "reports size and permission bits from metadata, tracking the bytes on disk",
         "check": _check_file_stat,
     },
-    "file.contents.read.v1": {
+    "file.contents.v1": {
         "mission": "ASTRA-VERIFY-FILE-CONTENTS-001",
         "claim": "returns a file's text exactly, and refuses what it cannot read",
         "check": lambda: _check_command_view(
@@ -301,7 +301,7 @@ ROWS = {
              ("refuses a missing file", {"path": _rel_in_world("absent.txt")}),
              ("refuses a path outside the repository", {"path": "/etc/passwd"})]),
     },
-    "file.lines.sorted.v1": {
+    "file.sorted.v1": {
         "mission": "ASTRA-VERIFY-FILE-SORTED-001",
         "claim": "returns the lines sorted exactly as `sort` sorts them",
         "check": lambda: _check_command_view(
@@ -309,13 +309,101 @@ ROWS = {
             ["sort", _rel_in_world("unsorted.txt")],
             [("refuses a flag it does not implement", {"path": "-n"})]),
     },
-    "file.lines.reversed.v1": {
+    "file.reversed.v1": {
         "mission": "ASTRA-VERIFY-FILE-REVERSED-001",
         "claim": "returns the lines last-first exactly as `tac` prints them",
         "check": lambda: _check_command_view(
             "tac", {"path": _rel_in_world("unsorted.txt")},
             ["tac", _rel_in_world("unsorted.txt")]),
     },
+}
+
+
+def _run_survey(command: str, args: dict) -> dict:
+    from canonical.runtime import live_brain_route_admission_v1 as door
+
+    entry = {"adapter_module": "file_survey", "entrypoint": "run",
+             "source": {"adapter_path": "canonical/runtime/bound_capabilities/file_survey.py"},
+             "incremental_spend_usd": 0, "capability_id": "file_survey"}
+    return door.run_adapter_locally(entry, {"args": dict(args, command=command)})
+
+
+def _check_word_frequency() -> tuple[bool, list[dict]]:
+    checks: list[dict] = []
+    target = WORLD / "frequency.txt"
+    # Known by construction: "apple" twice, "banana" three times, and "the" four
+    # times. A counter that reports "the" is not answering the question, so the
+    # most-common answer must be "banana" here even though "the" is frequent.
+    target.write_text("the apple banana the banana apple the the banana\n", encoding="utf-8")
+    out = _run_survey("word_frequency", {"path": _rel(target)})
+    checks.append({"name": "reports the most common non-stop word",
+                   "ok": out.get("most_common_word") == "banana",
+                   "built_here": "banana x3, apple x2, the x4",
+                   "adapter_returned": out.get("most_common_word")})
+    checks.append({"name": "the count matches the text this file wrote",
+                   "ok": out.get("count") == 3, "adapter_returned": out.get("count")})
+    checks.append({"name": "the counts it chose from are reported",
+                   "ok": (out.get("counts") or {}).get("banana") == 3
+                         and (out.get("counts") or {}).get("apple") == 2,
+                   "adapter_returned": out.get("counts")})
+    # A tie must be visible, not decided silently.
+    tie = WORLD / "tie.txt"
+    tie.write_text("red blue\n", encoding="utf-8")
+    tied = _run_survey("word_frequency", {"path": _rel(tie)})
+    checks.append({"name": "a tie for first place is reported as a tie",
+                   "ok": sorted(tied.get("tied_for_first") or []) == ["blue", "red"],
+                   "adapter_returned": tied.get("tied_for_first")})
+    for label, args in (("refuses a directory", {"path": _rel(WORLD / "a_directory")}),
+                        ("refuses a path outside the repository", {"path": "/etc/passwd"})):
+        try:
+            _run_survey("word_frequency", args)
+        except Exception as exc:  # noqa: BLE001
+            checks.append({"name": label, "ok": True, "refused_with": str(exc)[:100]})
+        else:
+            checks.append({"name": label, "ok": False})
+    return all(c["ok"] for c in checks), checks
+
+
+def _check_directory_listing() -> tuple[bool, list[dict]]:
+    import os
+
+    checks: list[dict] = []
+    listing = WORLD / "listing"
+    listing.mkdir(exist_ok=True)
+    for name in ("b.txt", "a.txt"):
+        (listing / name).write_text("x", encoding="utf-8")
+    (listing / "sub").mkdir(exist_ok=True)
+    out = _run_survey("directory_list", {"path": _rel(listing)})
+    expected = sorted(os.listdir(listing))
+    checks.append({"name": "names every entry this file created",
+                   "ok": sorted(out.get("names") or []) == expected,
+                   "built_here": expected, "adapter_returned": out.get("names")})
+    checks.append({"name": "distinguishes the directory from the files",
+                   "ok": (out.get("entries") or [{}]) and
+                         sorted(e["name"] for e in out["entries"] if e["is_dir"]) == ["sub"],
+                   "adapter_returned": [e.get("name") for e in out.get("entries") or [] if e.get("is_dir")]})
+    checks.append({"name": "delivers an entry the answer-shape gate can project onto `files`",
+                   "ok": out.get("files") == out.get("names") and bool(out.get("files")),
+                   "adapter_returned": out.get("files")})
+    try:
+        _run_survey("directory_list", {"path": _rel(WORLD / "five_lines.txt")})
+    except Exception as exc:  # noqa: BLE001
+        checks.append({"name": "refuses a file where a directory is required", "ok": True,
+                       "refused_with": str(exc)[:100]})
+    else:
+        checks.append({"name": "refuses a file where a directory is required", "ok": False})
+    return all(c["ok"] for c in checks), checks
+
+
+ROWS["file.word_frequency.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-WORD-FREQUENCY-001",
+    "claim": "reports the most common word, the counts behind it, and any tie",
+    "check": _check_word_frequency,
+}
+ROWS["file.directory_listing.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001",
+    "claim": "lists a directory's entries, distinguishing subdirectories from files",
+    "check": _check_directory_listing,
 }
 
 

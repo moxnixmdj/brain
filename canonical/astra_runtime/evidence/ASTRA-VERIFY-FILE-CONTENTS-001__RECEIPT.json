@@ -1,7 +1,7 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
  "adapter_sha256": "827dd7fa5009514b77420957196abdabc6b926f0dd2d974f9cc75dba562e00eb",
- "capability_id": "file.contents.read.v1",
+ "capability_id": "file.contents.v1",
  "checks": [
   {
    "adapter_returned": "one\ntwo\nthree\nfour\nfive\n",
@@ -32,9 +32,9 @@
  "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
  "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
  "producer": "arena agent session, 2026-11-02",
- "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.contents.read.v1",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.contents.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T14:39:06Z",
+ "verified_at": "2026-11-02T14:45:06Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }

@@ -12394,6 +12394,159 @@
           "command": "tac"
         }
       }
+    },
+    "file.word_frequency.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "word_frequency",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_survey",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "most common word",
+        "word frequency",
+        "most frequent word",
+        "word appears most"
+      ],
+      "limitations": [
+        "Reads only; it never writes the path it reads.",
+        "Refuses a non-UTF-8 file, a missing path and any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "survey.word_frequency"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "command",
+        "count",
+        "counts",
+        "distinct_words",
+        "most_common_word",
+        "output_path",
+        "output_verified",
+        "path",
+        "schema",
+        "source_sha256",
+        "tied_for_first"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-WORD-FREQUENCY-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers computed from a constructed world with the standard library. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_survey",
+          "command": "word_frequency"
+        }
+      }
+    },
+    "file.directory_listing.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "directory_list",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_survey",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "list the files",
+        "list the directory",
+        "files in the directory",
+        "show the files",
+        "list the folder"
+      ],
+      "limitations": [
+        "Reads only; it never writes the path it reads.",
+        "Refuses a non-UTF-8 file, a missing path and any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "survey.directory_listing"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "command",
+        "entries",
+        "entry_count",
+        "files",
+        "names",
+        "output_path",
+        "output_verified",
+        "path",
+        "schema"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers computed from a constructed world with the standard library. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_survey",
+          "command": "directory_list"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

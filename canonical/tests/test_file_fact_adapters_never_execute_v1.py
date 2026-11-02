@@ -43,12 +43,14 @@ from canonical.runtime.bound_capabilities import (  # noqa: E402
     file_command_view,
     file_line_count,
     file_stat,
+    file_survey,
 )
 
 ADAPTERS = {
     "file_line_count": ROOT / "canonical/runtime/bound_capabilities/file_line_count.py",
     "file_stat": ROOT / "canonical/runtime/bound_capabilities/file_stat.py",
     "file_command_view": ROOT / "canonical/runtime/bound_capabilities/file_command_view.py",
+    "file_survey": ROOT / "canonical/runtime/bound_capabilities/file_survey.py",
 }
 
 #: Names that mean "a process, a shell, or dynamic code".
@@ -242,6 +244,33 @@ def test_the_command_view_answers_with_no_process() -> None:
     assert record == [], record
 
 
+def test_the_survey_answers_with_no_process() -> None:
+    record: list[str] = []
+    originals = _armed_spy(record)
+    try:
+        with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+            base = pathlib.Path(tmp)
+            (base / "words.txt").write_text("apple banana banana\n", encoding="utf-8")
+            (base / "sub").mkdir()
+            rel = base.relative_to(ROOT.resolve()).as_posix()
+            counted = file_survey.run(
+                {"command": "word_frequency", "path": rel + "/words.txt"}, ROOT)
+            assert counted["most_common_word"] == "banana", counted
+            listed = file_survey.run({"command": "directory_list", "path": rel}, ROOT)
+            assert sorted(listed["names"]) == ["sub", "words.txt"], listed["names"]
+            for bad in ({"command": "rm", "path": rel},
+                        {"command": "directory_list", "path": rel + "/words.txt"}):
+                try:
+                    file_survey.run(bad, ROOT)
+                except RuntimeError as exc:
+                    assert "NOT_IMPLEMENTED" in str(exc) or "NOT_A_DIRECTORY" in str(exc), exc
+                else:
+                    raise AssertionError("the survey attempted %r" % (bad,))
+    finally:
+        _disarm(originals)
+    assert record == [], record
+
+
 def test_refusals_happen_before_any_read_of_the_outside_world() -> None:
     for module in (file_line_count, file_stat):
         try:
@@ -279,7 +308,9 @@ def test_the_registry_rows_are_dispatchable_and_declare_what_they_return() -> No
                             ("file.stat.v1", file_stat),
                             ("file.contents.v1", file_command_view),
                             ("file.sorted.v1", file_command_view),
-                            ("file.reversed.v1", file_command_view)):
+                            ("file.reversed.v1", file_command_view),
+                            ("file.word_frequency.v1", file_survey),
+                            ("file.directory_listing.v1", file_survey)):
             entry = registry[cid]
             assert entry.get("entrypoint") == "run", (cid, entry.get("entrypoint"))
             assert callable(getattr(module, entry["entrypoint"])), cid
@@ -288,9 +319,11 @@ def test_the_registry_rows_are_dispatchable_and_declare_what_they_return() -> No
             assert entry.get("incremental_spend_usd") == 0, cid
             assert entry.get("read_only") is True, cid
             declared = set(entry.get("result_fields") or ())
-            call = {"path": rel}
+            call = {"path": rel if cid != "file.directory_listing.v1" else str(world.relative_to(ROOT.resolve()).as_posix())}
             if module is file_command_view:
                 call["command"] = entry["computes_command"]["argvs"][0][0]
+            elif module is file_survey:
+                call["command"] = entry["action_template"]["args"]["command"]
             returned = set(module.run(call, ROOT))
             assert returned <= declared, (cid, sorted(returned - declared))
     finally:

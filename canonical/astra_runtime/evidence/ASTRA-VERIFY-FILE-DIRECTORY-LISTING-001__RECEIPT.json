@@ -1,0 +1,54 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+ "adapter_sha256": "b777db2900b4dbcb19a32e6bd6f22344d24b3e6b934511bbde97d42add3a627e",
+ "capability_id": "file.directory_listing.v1",
+ "checks": [
+  {
+   "adapter_returned": [
+    "a.txt",
+    "b.txt",
+    "sub"
+   ],
+   "built_here": [
+    "a.txt",
+    "b.txt",
+    "sub"
+   ],
+   "name": "names every entry this file created",
+   "ok": true
+  },
+  {
+   "adapter_returned": [
+    "sub"
+   ],
+   "name": "distinguishes the directory from the files",
+   "ok": true
+  },
+  {
+   "adapter_returned": [
+    "a.txt",
+    "b.txt",
+    "sub"
+   ],
+   "name": "delivers an entry the answer-shape gate can project onto `files`",
+   "ok": true
+  },
+  {
+   "name": "refuses a file where a directory is required",
+   "ok": true,
+   "refused_with": "PATH_NOT_A_DIRECTORY"
+  }
+ ],
+ "claim": "lists a directory's entries, distinguishing subdirectories from files",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.directory_listing.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-02T14:45:06Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}
