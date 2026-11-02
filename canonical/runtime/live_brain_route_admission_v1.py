@@ -1184,6 +1184,11 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     cid = str(entry.get("capability_id") or (action.get("args") or {}).get("capability_id") or "")
     if float(entry.get("incremental_spend_usd", 0) or 0) != 0:
         raise LocalExecutionFailure("BOUND_CAPABILITY_NONZERO_COST_REJECTED:" + cid)
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(entry)
+            or boundary.is_unconfined_repair_entry(cid, entry)):
+        # Reject before importing an adapter or materializing upstream effects.
+        raise LocalExecutionFailure(boundary.STATUS)
     source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
     modules = source.get("modules") if isinstance(source.get("modules"), list) else []
     for name in modules:
@@ -1313,6 +1318,11 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
     # python_crossfile_edit_choreograph.py on an occupied output path killed the whole
     # 72-capability probe with ``SystemExit: 1`` instead of reporting anything.
     except (Exception, SystemExit) as exc:  # noqa: BLE001 - every adapter failure is a closed failure
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        if isinstance(exc, LocalExecutionFailure) and str(exc) == boundary.STATUS:
+            return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                         executed=False, tool_executed=False,
+                         compiled_capability_id=selected)
         tool_executed = not isinstance(exc, LocalExecutionFailure) or "ACTION_EXPECTATION_FAILED" in str(exc)
         # A REVIEW THAT RAN AND FOUND A PROBLEM IS NOT A BROKEN ADAPTER.
         #
@@ -1661,6 +1671,14 @@ def execute_capability_plan_locally(task_id: str, goal: str, compiled: Mapping[s
     """
     dag = compiled.get("capability_dag") or {}
     steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    for index, step in enumerate(steps):
+        cid = str(step.get("capability_id") or "")
+        if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(admissible.get(cid))
+                or boundary.is_unconfined_repair_entry(cid, admissible.get(cid))):
+            return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                         executed=False, execution=[], semantic_acceptance_complete=False,
+                         refused_step_index=index, compiled_capability_id=cid)
     rows: list[dict[str, Any]] = []
     results: list[Mapping[str, Any]] = []
     for index, step in enumerate(steps):
@@ -1702,7 +1720,8 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
     dag = compiled.get("capability_dag") or {}
     steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
     local_res = execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
-    if local_res.get("pass") is True:
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if local_res.get("pass") is True or local_res.get("status") == boundary.STATUS:
         return local_res
     executor = dag_executor(compiled, admissible)
     if executor == DAG_LOCAL_EXECUTOR:
@@ -1734,6 +1753,23 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     """Execute a compiled plan with the same controller calls ``run_raw_goal`` makes."""
     controller_actions = compiled.get("controller_actions")
     selected = str(compiled.get("selected_capability") or "").strip()
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    command_candidates = [selected] if selected else []
+    if isinstance(controller_actions, list):
+        for candidate in controller_actions:
+            if not isinstance(candidate, Mapping):
+                continue
+            args = candidate.get("args")
+            if isinstance(args, Mapping):
+                cid = str(args.get("capability_id") or "").strip()
+                if cid:
+                    command_candidates.append(cid)
+    for cid in command_candidates:
+        if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(admissible.get(cid))
+                or boundary.is_unconfined_repair_entry(cid, admissible.get(cid))):
+            return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                         executed=False, compiled_capability_id=cid,
+                         semantic_acceptance_complete=False)
     routing_targets = list(compiled.get("target_effects") or [])
     if not routing_targets:
         for part in compiled.get("compiled_parts") or []:
@@ -1835,7 +1871,7 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         if kernel_refuses(admissible[selected]):
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
-        if local_res.get("pass") is True:
+        if local_res.get("pass") is True or local_res.get("status") == boundary.STATUS:
             return local_res
         if str(local_res.get("status") or "").startswith("FAIL_CLOSED__CAPABILITY_REFUSED"):
             # THE CAPABILITY ANSWERED, AND THE ANSWER WAS A REFUSAL WITH ITS OWN REASON.
@@ -4113,6 +4149,9 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     this already existed and already ran; its result was simply discarded on the
     way out.
     """
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if composed.get("status") == boundary.STATUS or composed.get("side_effects_may_exist") is True:
+        return composed
     still = promised_artifact_errors(goal, future_artifacts)
     if not still:
         return composed
@@ -4214,12 +4253,28 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     """
     try:
         from canonical.runtime import composer_route_v1 as croute
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
         routed = croute.route(goal)
+        if routed.get("status") == boundary.STATUS:
+            return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                         executed=False, semantic_acceptance_complete=False)
         if not routed.get("pass"):
             return None
-        executed = croute.execute_chain(routed["chain"], goal)
-    except Exception:  # noqa: BLE001 - composition must never break routing
+    except Exception:  # noqa: BLE001 - no chain was dispatched
         return None
+    try:
+        executed = croute.execute_chain(routed["chain"], goal)
+    except Exception as exc:  # noqa: BLE001 - a dispatched chain may have had effects
+        return _fail(task_id, "FAIL_CLOSED__COMPOSITION_EXECUTION_OUTCOME_UNKNOWN",
+                     "COMPOSITION_EXECUTION_OUTCOME_UNKNOWN", started,
+                     executed=True, side_effects_may_exist=True,
+                     semantic_acceptance_complete=False,
+                     reason=type(exc).__name__)
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if executed.get("status") == boundary.STATUS:
+        return _fail(task_id, boundary.STATUS, boundary.FAILURE_CLASS, started,
+                     executed=False, composer_execution=executed,
+                     semantic_acceptance_complete=False)
     if not executed.get("pass"):
         # The chain ALREADY RAN.  execute_chain does not roll back, so returning
         # None here throws away the only record that work happened and lets the
@@ -4263,6 +4318,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
             "status": ("FAIL_CLOSED__" + _carried),
             "pass": False, "task_id": task_id, "goal": goal,
             "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
+            "side_effects_may_exist": True,
             "failure_class": _carried,
             "failed_step": executed.get("failed_step"),
             "steps_dispatched": len(dispatched),
@@ -4305,8 +4361,12 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     # only thing it needs that the sentence does not supply is the set of files
     # the request touches -- which the chain now reports, because each step's
     # own args are recorded.
-    out.update(_composed_acceptance(goal, routed.get("chain") or [], executed))
-    if out.get("semantic_acceptance_complete"):
+    try:
+        out.update(_composed_acceptance(goal, routed.get("chain") or [], executed))
+    except Exception as exc:  # noqa: BLE001 - unknown verification cannot authorize success
+        out["semantic_acceptance_complete"] = False
+        out["acceptance_error"] = type(exc).__name__
+    if out.get("semantic_acceptance_complete") is True:
         out["status"] = "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
         return out
     # The verifier spoke and said no.  A composed chain claimed pass=True on the
@@ -4331,6 +4391,14 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
         # 31 of 100 out-of-scope goals as fail-open on the public runner
         # (2026-10-27): correct verdict, artifact left behind.
         _undo_chain_side_effects(out, "composed_chain_not_verified")
+        out["side_effects_may_exist"] = True
+        return out
+    # Absence or failure of a verifier cannot certify the goal. Do not delete
+    # guessed outputs here; record that work may already have changed the world.
+    out["status"] = "FAIL_CLOSED__COMPOSED_GOAL_NOT_VERIFIED"
+    out["pass"] = False
+    out["failure_class"] = "COMPOSED_GOAL_NOT_VERIFIED"
+    out["side_effects_may_exist"] = True
     return out
 
 
@@ -4352,9 +4420,8 @@ def _composed_acceptance(goal: str, chain: Any, executed: Mapping[str, Any]) -> 
       * a plan whose chain matches what ran, or the verifier refuses with
         COMPILED_PLAN_HAS_NO_SELECTED_CAPABILITY before it inspects anything.
 
-    A verifier fault must never turn a pass into a crash, and must never turn a
-    pass into a failure either: the honest fallback is the provisional verdict
-    this path already gave, now carrying the reason.
+    A verifier fault is not proof of success. This helper reports incomplete
+    acceptance; callers must not promote a provisional chain into a goal pass.
     """
     base: dict[str, Any] = {"semantic_acceptance_complete": False,
                             "accepted_raw_obligation_ids": []}
@@ -4416,6 +4483,7 @@ _JUDGED_FAILURE_CLASSES = frozenset({
     # "could not reach it" failure even though it produced no verdict.
     "COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
     "STEP_RAISED_OUTCOME_UNKNOWN", "COMPOSER_STEP_RAISED",
+    "COMPOSITION_EXECUTION_OUTCOME_UNKNOWN", "COMPOSED_GOAL_NOT_VERIFIED",
 })
 # The composer GUESSED a chain, ran it, and then said it could not verify the result
 # (``NO_INDEPENDENT_REINSPECTION_FOR:<cid>``).  Measured 2026-10-29 on "Lint the python file X":
@@ -4556,7 +4624,7 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     EXECUTED is only re-tryable when it stopped on a stated precondition blocker -- the
     world it left behind is then the world it found.
     """
-    if result.get("pass") is True:
+    if result.get("pass") is True or result.get("side_effects_may_exist") is True:
         return False
     failure_class = str(result.get("failure_class") or "")
     # THE ANSWER GATE JUDGES ONE CAPABILITY, SO ITS REFUSAL IS NOT A VERDICT ABOUT THE WORLD.
@@ -4640,58 +4708,48 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
 
 
 def _serve_by_acting(request: Mapping[str, Any]) -> dict[str, Any] | None:
-    """THE LAST RESORT IS THE ONE THAT ACTS ON THE REAL FILE.
+    """Refuse the unconfined discovery fallback until an admitted boundary exists.
 
-    Measured 2026-11-01 on the door itself, eight goals the machine already owns
-    elsewhere in the tree: **zero** of them passed, every one refused in 2-336 ms,
-    and not one reached `computer_env_v1.discover`.  "compress notes.txt into
-    notes.txt.gz" -> FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN in 313 ms, while the
-    same sentence closes through discovery in 8,498 ms cold and 265 ms recalled and
-    leaves a real gzip on disk.  A capability the machine has and the door never
-    reaches is not a capability.
-
-    What this will NOT do is answer a governed refusal with a substitute: an honest
-    contract refusal is left exactly as it is, and only a goal that names an output
-    in a format this repository can VERIFY is attempted -- the artifact is produced
-    on the real file and opened by the verifier before anything is reported.
+    Other routes and the original contract refusal remain unchanged. A verified
+    format is not permission to execute programs with the caller's authority.
     """
     goal = str(request.get("goal") or "").strip()
     if not goal:
         return None
-    try:
-        from canonical.runtime import computer_env_v1 as cenv
-        from canonical.runtime import cli_capability_acquisition_v1 as acq
-        from canonical.runtime import program_synthesis_v1 as ps
+    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    from canonical.runtime import program_synthesis_v1 as ps
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
 
-        suffix = acq._requested_suffix(goal)
-        if (not suffix or not ps.has_verifier(suffix)
-                or not ps.carries_content_evidence(suffix)):
-            return None            # nothing here could tell the result from any other file
-        cwd = request.get("cwd") or request.get("workdir") or os.getcwd()
-        done = cenv.perform(goal, cwd=cwd)
-        if not (isinstance(done, Mapping) and done.get("pass") is True):
-            return None
-        return {
-            "schema": SCHEMA,
-            "task_id": str(request.get("task_id") or ""),
-            "goal": goal,
-            "pass": True,
-            "status": "PASS__PERFORMED_ON_REAL_FILE",
-            "authority": "PERFORMED_ON_REAL_FILE_AND_VERIFIED",
-            "fastest_layer": "DISCOVERY_BY_ACTING",
-            "output": done.get("output"),
-            "output_bytes": done.get("output_bytes"),
-            "argv": done.get("argv"),
-            "verification": done.get("verification"),
-            "plan": list(done.get("plan") or []),
-            "learned_here": not bool(done.get("from_memory")),
-        }
-    except Exception:  # noqa: BLE001 - a last resort must never become a new failure
+    suffix = acq._requested_suffix(goal)
+    if not suffix or not ps.has_verifier(suffix) or not ps.carries_content_evidence(suffix):
         return None
+    return {"schema": SCHEMA, "task_id": str(request.get("task_id") or ""),
+            "goal": goal, "pass": False, "executed": False,
+            "semantic_acceptance_complete": False, "status": boundary.STATUS,
+            "failure_class": boundary.FAILURE_CLASS,
+            "detail": "Automatic computer discovery is unavailable until an admitted confinement and verification path exists."}
 
 
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """Public entry: explicit structured obligations can never be ignored."""
+    """Public entry with an optional, narrowly scoped route-memory control.
+
+    Exclusion affects only this door's associative recall/credit and compiled
+    workflow fallback. It does not disable calibration, adapters or other stores.
+    """
+    if isinstance(request, Mapping) and "route_memory_mode" in request:
+        mode = request["route_memory_mode"]
+        if mode not in ("use", "exclude"):
+            return _fail(str(request.get("task_id") or ""), "FAIL_CLOSED__ROUTE_MEMORY_MODE_INVALID",
+                         "ROUTE_MEMORY_MODE_INVALID", perf_counter_ns(), executed=False)
+        result = _solve_public(request)
+        result["route_memory_policy"] = ("EXCLUDED_ROUTE_RECALL_ONLY" if mode == "exclude"
+                                         else "DEFAULT_ROUTE_RECALL")
+        return result
+    return _solve_public(request)
+
+
+def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
+    """Explicit structured obligations can never be ignored."""
     started = perf_counter_ns()
     if not isinstance(request, Mapping) or not request.get("task_id") or not request.get("goal"):
         return _fail(str(request.get("task_id") or "") if isinstance(request, Mapping) else "",
@@ -4709,12 +4767,49 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
                 _is_honest_contract_refusal,
             )
+            if not _is_honest_contract_refusal(result):
+                acted = _serve_by_acting(request)
+                if acted is not None:
+                    acted["elapsed_ns"] = perf_counter_ns() - started
+                    acted["served_after"] = str(result.get("status") or "")
+                    # The fallback did not run, but the earlier route may have.
+                    # Never turn unknown or prior effects into an executed=False claim.
+                    acted["fallback_executed"] = False
+                    acted["executed"] = result.get("executed")
+                    if "side_effects_may_exist" in result:
+                        acted["side_effects_may_exist"] = result["side_effects_may_exist"]
+                    return acted
+        except Exception:
+            # An unavailable safety check cannot authorize an alternate execution.
+            result["elapsed_ns"] = perf_counter_ns() - started
+            return result
+        # `_serve_by_acting` above only classifies and refuses; workflow recall
+        # can execute. Do not compound a failure whose effects are uncertain.
+        if result.get("side_effects_may_exist") is True or request.get("route_memory_mode") == "exclude":
+            result["elapsed_ns"] = perf_counter_ns() - started
+            return result
+        try:
+            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                _is_honest_contract_refusal,
+            )
             from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
                 recall_and_execute_workflow,
             )
 
             if not _is_honest_contract_refusal(result):
                 recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
+                from canonical.runtime import computer_execution_boundary_v1 as boundary
+                if recalled is not None and recalled.get("status") == boundary.STATUS:
+                    # The primary route preceded this fallback and may have had
+                    # effects; the refused workflow itself has not been certified.
+                    return {"schema": SCHEMA, "task_id": str(request.get("task_id") or ""),
+                            "goal": str(request.get("goal") or ""), "pass": False,
+                            "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
+                            "executed": True if result.get("executed") is True else None,
+                            "side_effects_may_exist": True,
+                            "served_after": str(result.get("status") or ""),
+                            "semantic_acceptance_complete": False,
+                            "elapsed_ns": perf_counter_ns() - started}
                 if recalled is not None and recalled.get("pass") is True:
                     receipts = list(recalled.get("step_receipts") or [])
                     last_step = receipts[-1] if receipts else {}
@@ -4733,18 +4828,6 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                         "elapsed_ns": perf_counter_ns() - started,
                     }
                     return result
-        except Exception:
-            pass
-        try:
-            from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
-                _is_honest_contract_refusal,
-            )
-            if not _is_honest_contract_refusal(result):
-                acted = _serve_by_acting(request)
-                if acted is not None:
-                    acted["elapsed_ns"] = perf_counter_ns() - started
-                    acted["served_after"] = str(result.get("status") or "")
-                    return acted
         except Exception:
             pass
     # Include preflight compilation, selection and report inspection. Moving
@@ -4965,7 +5048,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     normalized = front.normalize_goal(goal)
     future_artifacts = _future_artifacts(normalized)
     # ask memory what it knows about work like this, before deciding anything
-    recalled = _recall_for(normalized)
+    recalled = [] if request.get("route_memory_mode") == "exclude" else _recall_for(normalized)
     # Taken before ANY branch can execute, so the composed early-returns are held to
     # the same evidence as the single-capability path.
     world_before = observe_world(normalized)
@@ -5196,7 +5279,8 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         for r in recalled
     ]
     # close the loop: what memory offered is judged by what actually happened
-    _credit_recall(recalled, bool(result.get("pass")))
+    if request.get("route_memory_mode") != "exclude":
+        _credit_recall(recalled, bool(result.get("pass")))
     if result.get("pass") is True:
         _selected_id = str(compiled.get("selected_capability") or result.get("compiled_capability_id") or "")
         _selected_entry = registry.get(_selected_id) or {}
@@ -5236,6 +5320,12 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         composed = (_try_composed(task_id, goal, started)
                     if _states_an_executable_form(normalized, admission) else None)
         if composed is not None:
+            from canonical.runtime import computer_execution_boundary_v1 as boundary
+            if composed.get("status") == boundary.STATUS:
+                # The primary route already ran before this fallback was refused.
+                composed["executed"] = True if result.get("executed") is True else None
+                composed["side_effects_may_exist"] = True
+                composed["composer_fallback_executed"] = False
             composed["memory_recalled"] = [
                 {"id": r.get("id"), "content": r.get("content"),
                  "relevance": r.get("relevance"), "importance": r.get("importance")}
@@ -5544,33 +5634,11 @@ def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
             learned["executable"] = exe
             learned["executable_source"] = "jit_knowledge"
     if exe:
-        learned["attempted"] = True
+        # Executing even --help and acquiring a contract run the named program.
+        # No request/environment flag grants permission to do so unconfined.
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
         learned["executable"] = exe
-        try:
-            from canonical.runtime import cli_capability_acquisition_v1 as acq
-            import subprocess, tempfile, json as _json
-            with tempfile.TemporaryDirectory(prefix="brain-learn-") as td:
-                out = subprocess.run([exe, "--help"], capture_output=True,
-                                     timeout=30, cwd=td)
-                text = (out.stdout + out.stderr).decode("utf-8", "replace")
-            probe_doc = {"executables": [{"executable": exe,
-                                          "help_attempts": [{"text": text}]}]}
-            acquired = acq.acquire(probe_doc, goal)
-            learned["acquisition_status"] = acquired.get("status")
-            if acquired.get("verified"):
-                cid = "acquired." + exe.replace(".", "_")
-                reg = acq.register(acquired, cid,
-                                  registry_path=registry_path)
-                learned["registered"] = reg.get("registered") is True
-                learned["capability_id"] = cid
-                if learned["registered"]:
-                    # it can do something now that it could not before
-                    retry = solve(request)
-                    retry["learning"] = learned
-                    retry["learned_this_turn"] = True
-                    return retry
-        except Exception as exc:
-            learned["error"] = type(exc).__name__ + ":" + str(exc)[:200]
+        learned["executable_status"] = boundary.STATUS
 
     # Verified skill crystallizer & general computer-environment synthesis fallback
     try:
@@ -5581,33 +5649,8 @@ def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
         pass
 
     if not learned.get("registered"):
-        try:
-            from canonical.runtime import computer_env_v1 as cenv
-
-            stated_paths = [abs_p for _raw_p, abs_p in goal_compiler._repo_paths(goal, ROOT)]
-            work_dir = (stated_paths[0].parent if stated_paths and stated_paths[0].is_file()
-                        else (stated_paths[0] if stated_paths and stated_paths[0].is_dir() else None))
-            if work_dir is not None and work_dir.is_dir():
-                c_res = cenv.perform(goal, str(work_dir))
-                learned["computer_env_status"] = c_res.get("status")
-                if c_res.get("pass") is True and c_res.get("verified") is True:
-                    learned["attempted"] = True
-                    return {
-                        "schema": LIVE_SCHEMA,
-                        "status": "PASS__COMPUTER_ENV_LEARNED_AND_VERIFIED",
-                        "pass": True,
-                        "task_id": str((request or {}).get("task_id") or ""),
-                        "goal": goal,
-                        "executed": True,
-                        "semantic_acceptance_complete": True,
-                        "computer_env_result": c_res,
-                        "learning": learned,
-                        "learned_this_turn": True,
-                        "model_dependency_count": 0,
-                        "incremental_spend_usd": 0,
-                    }
-        except Exception:
-            pass
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        learned["computer_env_status"] = boundary.STATUS
 
     result["learning"] = learned
     result["learned_this_turn"] = False
@@ -5843,6 +5886,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     "goal": _subgoal,
                     "_compound_substep": True,
                 }
+                if "route_memory_mode" in request:
+                    _sub_req["route_memory_mode"] = request["route_memory_mode"]
                 _sres = _solve_request(_sub_req)
                 if not _sres.get("compiled_capability_id"):
                     _sres["compiled_capability_id"] = _capability_id_of(_sres)
@@ -5925,6 +5970,11 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             _before = observe_world(_goal_text)
             composed = _try_composed(str(request.get("task_id") or ""),
                                      _goal_text, perf_counter_ns())
+            from canonical.runtime import computer_execution_boundary_v1 as boundary
+            if isinstance(composed, Mapping) and (composed.get("status") == boundary.STATUS
+                    or (composed.get("pass") is not True and
+                        (composed.get("executed") is True or composed.get("side_effects_may_exist") is True))):
+                return composed
             if isinstance(composed, Mapping) and composed.get("pass") is True:
                 # NO OBSERVED EFFECT, NO PASS.  The repository's rule, stated in
                 # test_a_formatter_is_verified_by_its_own_check_v1: a sentence that
@@ -6010,6 +6060,11 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                         # reported by it rather than by this branch.
                         composed = _try_composed(str((request or {}).get("task_id") or ""),
                                                  goal, perf_counter_ns())
+                        from canonical.runtime import computer_execution_boundary_v1 as boundary
+                        if isinstance(composed, Mapping) and (composed.get("status") == boundary.STATUS
+                                or (composed.get("pass") is not True and
+                                    (composed.get("executed") is True or composed.get("side_effects_may_exist") is True))):
+                            return composed
                         if isinstance(composed, Mapping) and composed.get("pass") is True:
                             return composed
                         # Structured obligations are unbound regardless of which

@@ -1,0 +1,38 @@
+# Unified learning and memory policy audit — draft, 2026-11-02
+
+This is a partial source audit and producer-run test of the current unadmitted tree. It is not a complete call-graph review, independent verification, or a whole-system learning-off guarantee. The owner’s project goals are broader than this test.
+
+## Findings
+
+| Path | Existing behavior and present draft |
+|---|---|
+| `unified_cognitive_fabric_v1.run` RAW_GOAL | `options.learn=False` suppressed its explicit gap-note and runtime observation, but the raw integrated wrapper still called four memory/queue hooks. The draft now passes the flag to suppress **those four wrapper hooks**. Nested execution may still read or write other stores. |
+| Fabric compounding | The fabric previously drained its improvement queue after normal dispatch even when `learn=False`. The draft skips that automatic drain when false, and explicitly refuses `LEARNING_EPISODE` and `IMPROVEMENT_CYCLE` with that option. |
+| Automatic one-shot and explicit repair | A legacy AUTO decision can still invoke one-shot closure with `learn=False`; existing tests expect this. Explicit `ONE_SHOT_REALITY_CLOSURE` and `REPAIR_CYCLE` can also read or act on retained state. This behavior is **not** covered by the above changes. It must be reconciled explicitly in a future genuine all-channel control; do not call `learn=False` a full learning-off mode. |
+| Generic adaptive solver / R3 | Previously, `run_generic(learn=False)` still loaded R3 state, selected active skills for planning, and forwarded prior episodes. This remains the default for compatibility. The new, opt-in `r3_context_mode='exclude'` (only supported on generic/ADAPTIVE_SOLVER and only with `learn=False`) skips the automatic R3 context, passes an empty prior list, rejects an explicitly supplied prior list, and reports its limited scope. It does not constrain supplied problem data, other solver facilities, `resume_binding`, providers or process caches. Unsupported modes reject the option instead of silently ignoring it. |
+| `live_brain_route_admission_v1.solve` | Independently consults flywheel/associative recall, credits recalled rows, and can try compiled workflow recall; `solve_or_learn(..., learn=False)` does not switch those off. Other action and goal routes may use this door independently of the fabric raw wrapper. |
+| Compiled workflow and retained repair | Workflow recall and SQLite skill execution use their own stores; repair sessions have independent opt-in learning/retention policy. A control must reach those callers and preserve validation and effect admission. |
+| Computer discovery/query | `discover` consults transfer episodes, fingerprint cache and miss cache and may write all of them; query has separate process/file caches. `transfer_learning_v1.drive(experience_mode='off')` is scoped to that driver and is not passed through these callers. The direct APIs remain unsandboxed. |
+| Other modes/providers | Inventory, skill planning, direct capability/invoker/repair modes, arbitrary solver inputs and callback providers can load state or supply learned content. Process globals and any state written by nested adapters require separate inspection. This table is not exhaustive. |
+
+The `r3_context_mode` option is intentionally named for the **automatic R3 context**, not for all memory. Neither it nor `learn=False` establishes that the whole system has stopped learning or using retained knowledge. A reliable comparison also needs equivalent fixed capability inputs and explicit controls over provider, problem, resume and external state provenance.
+
+## Local evidence
+
+A regression test first reproduced the raw wrapper leak: a `learn=False` request still called `_record_raw_goal_experience`, `_record_raw_goal_pathology`, `_record_raw_goal_failure_diagnosis`, and `_advance_learning_queue` (mocked hooks, real wrapper). Tests now check both the disabled path and preservation of the normal enabled path. Separate mocked tests show a disabled fabric run no longer calls the compounding drain and that explicitly requesting the two learning modes conflicts with `learn=False`.
+
+A real generic-solver test uses a populated synthetic R3 JSON store and an unsolvable typed problem. With legacy context enabled the wrapper reports one prior episode supplied; with automatic R3 context excluded it reports zero, and both return failure without changing that store. The record is a fixture, not evidence of a verified skill, and this test proves neither global amnesia nor improvement on a goal. Additional focused tests verify prior-record injection and invalid settings fail before calling the solver and that the opt-in reaches the fabric's adaptive path. The existing one-shot tests still pass, including their expectation that AUTO one-shot can run with `learn=False`.
+
+A broader 60-test fabric/live-runtime run had 59 passes and one failure: the fabric catalog expects R1 structural closure but the working-tree fabric/subruntime hashes do not match the pinned authority. Fabric drift already existed in the earlier draft; the additional subruntime edits in this turn also change a pinned blob. This is not permission to repin governance files or claim R1 closure.
+
+## Selected public route follow-up
+
+`live_brain_route_admission_v1.solve` now accepts an optional `route_memory_mode` of `use` (existing behavior) or `exclude`. On that door alone, exclusion suppresses its flywheel/associative recall and credit and the compiled-workflow fallback, including in compound subrequests. Unknown values refuse. The controller, raw runtime and fabric reject this door-only option rather than silently suggesting it governs their separate paths. The default is unchanged. This is a partial component of a future unified policy, **not** an all-channel learning-off switch.
+
+The acceptance verifier's self-prediction calibration ledger remains a common safety gate, not a switchable experience source. A supplied prediction record may be settled by the verifier; other adapter inputs, process caches, providers and nested stores are not ruled out by this option. The option must not be used to claim an unbiased all-memory-off measurement.
+
+A producer-run restart test populated an associative store with a synthetic misleading entry, ran a real AST-audit goal in a new process with route recall enabled, and observed the entry's access count increase. A second process ran the identical goal with the option excluded: both produced a JSON report containing the requested source file, its matching hash, and functions; the populated associative store remained byte-for-byte unchanged in the excluded run. The audit also included other files in the source directory, so this is not a proof of exact single-file scope. A verified text-write goal also works under exclusion. This demonstrates a fixed baseline and controlled behavior for the examined store, not that retrieval improved the decision: the selected audit path did not demonstrate causal use of the remembered text. No learned improvement, generalization, or system-wide state control is claimed.
+
+## Next work
+
+Map the complete set of stores and reachable caller chains, including provider and process-cache provenance. Design a request-scoped policy enforced at every relevant entry rather than relying on a global toggle or empty initial state. Establish behavior for automatic one-shot and explicit repair without silently breaking the existing tasks that depend on them. Validate non-use with populated adversarial stores and post-restart probes, plus a useful identical fixed baseline in both arms. Real computer evaluation remains blocked on a qualified carrier, broker, action admission and independent verification.

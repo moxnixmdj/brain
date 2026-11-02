@@ -280,6 +280,11 @@ def invoke(
         }
 
     if kind == "BOUND_CAPABILITY":
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        if local_id == boundary.REPAIR_CAPABILITY_ID and "retained_learning" in payload:
+            error = boundary.retained_repair_policy_error(payload["retained_learning"], opts.get("learn", True))
+            if error:
+                raise LiveCapabilityInvocationError(error)
         out = execute_bound(local_id, inputs=dict(payload))
         return {
             "schema": SCHEMA,

@@ -30950,18 +30950,18 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 239,
+  "knowledge_documents": 249,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6630,
+  "research_index_records": 6631,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 436,
-  "source_index_modules": 1916
+  "source_index_modules": 1918
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2dd8522b61bad76d1a66117c404f434e52f58393d1529c620610e4f1d11744e5"
+  "value": "5e9cf88ebfeb63a8fdcc1bbce067d46dc4e4833c0841093c6e677a90588c7a66"
  },
  "engines": [
   {
@@ -30975,7 +30975,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "adaptive",
@@ -30993,7 +30993,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "adequate",
@@ -31011,7 +31011,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "bound",
@@ -31029,7 +31029,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "capability",
@@ -31047,7 +31047,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "certified",
@@ -31065,7 +31065,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "compiled",
@@ -31083,7 +31083,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "h100",
@@ -31101,7 +31101,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "improvement",
@@ -31119,7 +31119,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "learning",
@@ -31137,7 +31137,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "live",
@@ -31155,7 +31155,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "live",
@@ -31173,7 +31173,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "mystery",
@@ -31191,7 +31191,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "oewn",
@@ -31210,7 +31210,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "ownership",
@@ -31228,7 +31228,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "p3"
@@ -31245,7 +31245,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "raw",
@@ -31263,7 +31263,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "reached",
@@ -31282,7 +31282,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "repair",
@@ -31300,7 +31300,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "repair",
@@ -31318,7 +31318,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "semantic",
@@ -31336,7 +31336,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "semantic",
@@ -31354,7 +31354,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "terminal",
@@ -31372,7 +31372,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "terminal",
@@ -31390,7 +31390,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "terminal",
@@ -31408,7 +31408,7 @@
     "call": "run({**request, 'mode': mode})",
     "carrier": "unified_cognitive_fabric_v1.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "universal",
@@ -31426,7 +31426,7 @@
     "call": "one_shot_reality_closure_v2.run",
     "carrier": "one_shot_reality_closure_v2.run",
     "carrier_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "carrier_sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a"
+    "carrier_sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12"
    },
    "triggers": [
     "one",
@@ -42657,6 +42657,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 13686,
+   "headings": [
+    "Coding creature loop: routing follow-up and initial probe",
+    "Current outcome and handoff",
+    "Local checks, not independent certification",
+    "Follow-up: reuse the typed plan before execution",
+    "Question",
+    "Initial baseline, before the routing change",
+    "First blocker and safe next action",
+    "Other verification this session"
+   ],
+   "kind": "DOCUMENT",
+   "path": "CODING_CREATURE_LOOP_PROBE_20261102.md",
+   "sha256": "ef11dea3c6c88c182012f4ac7e786eb446ffec38c9f5df96591dc83470bf2859",
+   "summary": "Date: 2026-11-02. Research measurement, not an independent verification or a capability, ownership, terminal, sentience, or universal-learning claim.",
+   "terms": {
+    "admission": 8,
+    "after": 7,
+    "all": 5,
+    "audit": 13,
+    "auditor": 6,
+    "authority": 7,
+    "before": 11,
+    "but": 6,
+    "capability": 8,
+    "change": 7,
+    "checks": 5,
+    "cold": 9,
+    "controls": 6,
+    "copy": 6,
+    "current": 5,
+    "different": 6,
+    "direct": 12,
+    "disposable": 5,
+    "execution": 6,
+    "existing": 10,
+    "explicitly": 10,
+    "fabric": 6,
+    "failed": 7,
+    "first": 5,
+    "fresh-process": 5,
+    "gap": 6,
+    "goal": 8,
+    "independent": 13,
+    "learning": 10,
+    "no": 15,
+    "not": 37,
+    "passed": 16,
+    "path": 6,
+    "raw": 8,
+    "repair": 24,
+    "retained": 6,
+    "reuse": 12,
+    "route": 9,
+    "run": 13,
+    "runtime": 7,
+    "same": 7,
+    "separate": 8,
+    "source": 6,
+    "test": 6,
+    "tests": 9,
+    "unchanged": 8,
+    "verification": 9,
+    "warm": 9
+   },
+   "title": "Coding creature loop: routing follow-up and initial probe",
+   "title_terms": [
+    "coding",
+    "creature",
+    "follow-up",
+    "initial",
+    "loop",
+    "probe",
+    "routing"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 12262,
    "headings": [
     "THE FASTEST PATH: COMPOSE, DON'T HAND-WRITE — measured 2026-10-18",
@@ -42735,6 +42813,303 @@
     "hand-write",
     "measured",
     "path"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9925,
+   "headings": [
+    "Real-file learning probe and safety blockers",
+    "Follow-up: complete compression comparison and safer publication",
+    "What was tried",
+    "Observed outcomes",
+    "Safety defect fixed, and an additional unfixed blocker",
+    "Validation and remaining work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPUTER_CREATURE_LOOP_PROBE_20261102.md",
+   "sha256": "7a10feba456945671cb6c9608ce843eab9ed35648821e446693b6cfde836fe09",
+   "summary": "2026-11-02. Local research measurement, not independent personnel verification or a claim of general computer use, sentience, or permanent mastery.",
+   "terms": {
+    "all": 6,
+    "artifact": 4,
+    "before": 8,
+    "checkout": 4,
+    "checks": 6,
+    "cold": 10,
+    "compression": 4,
+    "computer": 4,
+    "copy": 5,
+    "data": 6,
+    "data.txt.gz": 4,
+    "different": 5,
+    "direct": 9,
+    "directory": 4,
+    "disposable": 7,
+    "door": 6,
+    "empty": 4,
+    "execution": 4,
+    "existing": 9,
+    "false": 6,
+    "file": 8,
+    "follow-up": 5,
+    "front": 6,
+    "full": 4,
+    "general": 5,
+    "guard": 5,
+    "gzip": 13,
+    "import": 4,
+    "independent": 5,
+    "input": 6,
+    "local": 5,
+    "no": 10,
+    "not": 25,
+    "only": 4,
+    "other": 5,
+    "output": 7,
+    "passed": 8,
+    "path": 9,
+    "probe": 6,
+    "recipe": 6,
+    "source": 5,
+    "still": 5,
+    "target": 6,
+    "teaching": 8,
+    "tests": 11,
+    "verification": 6,
+    "verifier": 5,
+    "warm": 7
+   },
+   "title": "Real-file learning probe and safety blockers",
+   "title_terms": [
+    "blockers",
+    "learning",
+    "probe",
+    "real-file",
+    "safety"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6741,
+   "headings": [
+    "Automatic computer execution: local fail-closed draft — 2026-11-02",
+    "What changed and why",
+    "What remains unsafe or unproven",
+    "Measurements",
+    "Next decisions"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPUTER_EXECUTION_BOUNDARY_DRAFT_20261102.md",
+   "sha256": "d91deaf89d79c06addec1200a1500ae55b3f678746c3842a57bd3aa27b9a21f8",
+   "summary": "This is an **unadmitted working-tree draft**, not a production sandbox or independently verified capability gain. An output format check and a temporary directory do not confine a program. Before the draft, local safety tests demonstrated that identified automatic fallbacks could call the computer learner, generated code, documentation snippets, or a named program with the caller's authority. A ha",
+   "terms": {
+    "automatic": 3,
+    "been": 3,
+    "before": 3,
+    "boundary": 3,
+    "broker": 3,
+    "capability": 4,
+    "carrier": 3,
+    "checks": 3,
+    "computer": 5,
+    "controlled": 3,
+    "direct": 5,
+    "documentation": 5,
+    "draft": 8,
+    "executable": 3,
+    "execution": 7,
+    "existing": 6,
+    "failed": 6,
+    "failures": 4,
+    "fallback": 3,
+    "fallbacks": 3,
+    "found": 3,
+    "goal": 3,
+    "host": 4,
+    "identified": 3,
+    "independent": 3,
+    "launcher": 3,
+    "learning": 3,
+    "local": 5,
+    "must": 3,
+    "namespace": 3,
+    "neither": 3,
+    "no": 11,
+    "not": 19,
+    "other": 3,
+    "passed": 5,
+    "path": 4,
+    "production": 3,
+    "program": 4,
+    "ran": 3,
+    "refusal": 4,
+    "remains": 3,
+    "routes": 3,
+    "run": 3,
+    "safety": 3,
+    "separate": 3,
+    "status": 3,
+    "still": 3,
+    "tests": 6
+   },
+   "title": "Automatic computer execution: local fail-closed draft — 2026-11-02",
+   "title_terms": [
+    "2026-11-02",
+    "automatic",
+    "computer",
+    "draft",
+    "execution",
+    "fail-closed",
+    "local"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 12428,
+   "headings": [
+    "Computer execution route audit — 2026-11-02",
+    "Reconciliation of the earlier composer results",
+    "Composition verdict and retry audit",
+    "Specific route findings and local mitigations",
+    "Carrier preparation: existing Docker launcher is a candidate, not a solution",
+    "Local checks and honest status"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPUTER_EXECUTION_ROUTE_AUDIT_20261102.md",
+   "sha256": "854f0a0b66832b7be14bb3c5016a8f7e6c3aaf85c189bc9cdd18e3676c840597",
+   "summary": "This is a scoped source audit and producer-run experiment on the current working tree, not independent verification, admission, or a complete security review. The local worktree remains unadmitted. Do not run other routes against untrusted programs or valuable files on the strength of this audit.",
+   "terms": {
+    "acceptance": 5,
+    "action": 4,
+    "adapter": 9,
+    "adapters": 5,
+    "also": 6,
+    "audit": 6,
+    "availability": 5,
+    "before": 10,
+    "but": 4,
+    "carrier": 7,
+    "checkout": 4,
+    "checks": 6,
+    "cli": 7,
+    "complete": 4,
+    "composer": 5,
+    "controller": 9,
+    "current": 6,
+    "disposable": 6,
+    "docker": 6,
+    "draft": 7,
+    "earlier": 11,
+    "effects": 6,
+    "execution": 9,
+    "existing": 12,
+    "failures": 7,
+    "independent": 5,
+    "kernel": 6,
+    "known": 5,
+    "later": 5,
+    "local": 13,
+    "namespace": 6,
+    "network": 6,
+    "no": 12,
+    "not": 38,
+    "other": 8,
+    "pass": 5,
+    "passed": 5,
+    "paths": 5,
+    "refusal": 11,
+    "result": 5,
+    "route": 7,
+    "run": 9,
+    "separate": 7,
+    "step": 5,
+    "still": 7,
+    "test": 18,
+    "tests": 15,
+    "verifier": 5
+   },
+   "title": "Computer execution route audit — 2026-11-02",
+   "title_terms": [
+    "2026-11-02",
+    "audit",
+    "computer",
+    "execution",
+    "route"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5908,
+   "headings": [
+    "Computer learner inside the existing namespace launcher — 2026-11-02",
+    "Result and scope",
+    "Controls and observed behavior",
+    "Why this does not yet justify production wiring"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPUTER_NAMESPACE_BOUNDARY_PROBE_20261102.md",
+   "sha256": "a33d5d3bd303fa4a654e216d519956502d1ce868906b77c9d1fdba0b2a44371e",
+   "summary": "This is a **local research measurement, not admission or independent verification**. `isolated_computer_learning_probe_20261102.py` runs the current worktree's Python runtime and SWE-kernel source snapshot in `zero_ambient_namespace_launcher_v1.run_confined`, with synthetic files and only real `/usr/bin/gzip` on the learner's PATH. No user file is passed in and no output is published to the user f",
+   "terms": {
+    "absence": 2,
+    "aggregate": 2,
+    "also": 3,
+    "been": 2,
+    "behavior": 2,
+    "bounded": 2,
+    "broker": 6,
+    "bytes": 2,
+    "called": 2,
+    "cgroup": 2,
+    "code": 2,
+    "cold": 4,
+    "computer": 2,
+    "denial": 3,
+    "execution": 3,
+    "existing": 6,
+    "fallback": 5,
+    "files": 3,
+    "gzip": 5,
+    "host": 8,
+    "independent": 3,
+    "input": 3,
+    "launcher": 7,
+    "learner": 4,
+    "learning": 3,
+    "limits": 3,
+    "listener": 3,
+    "memory": 5,
+    "must": 3,
+    "no": 7,
+    "not": 17,
+    "one": 5,
+    "only": 4,
+    "parent": 3,
+    "policy": 3,
+    "probe": 5,
+    "process": 4,
+    "production": 3,
+    "reported": 4,
+    "returned": 3,
+    "route": 3,
+    "source": 3,
+    "teaching": 3,
+    "trusted": 3,
+    "user": 5,
+    "usr": 5,
+    "warm": 3,
+    "worker": 10
+   },
+   "title": "Computer learner inside the existing namespace launcher — 2026-11-02",
+   "title_terms": [
+    "2026-11-02",
+    "computer",
+    "existing",
+    "inside",
+    "launcher",
+    "learner",
+    "namespace"
    ]
   },
   {
@@ -47300,6 +47675,226 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6335,
+   "headings": [
+    "Repair candidate broker — unadmitted draft",
+    "What exists",
+    "Controlled integration",
+    "Remaining security and integration work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "REPAIR_CANDIDATE_BROKER_DRAFT_20261102.md",
+   "sha256": "e89329755ceb5ade386a057f8cc7d105723f659d7579e76e89831a3c08e91f10",
+   "summary": "This is a bounded first step toward the repair execution broker, not an execution carrier or a publication authority. The existing fabric repair gate and unconfined-execution refusal remain in place. No registry, verifier evidence, or capability credit is changed.",
+   "terms": {
+    "after": 4,
+    "all": 3,
+    "audit": 4,
+    "authored": 3,
+    "authority": 3,
+    "before": 3,
+    "bytes": 6,
+    "caller": 3,
+    "candidate": 8,
+    "canonical": 3,
+    "capability": 3,
+    "carrier": 8,
+    "change": 3,
+    "changes": 3,
+    "checks": 3,
+    "code": 5,
+    "concurrent": 3,
+    "copy": 4,
+    "declared": 3,
+    "disabled": 4,
+    "evidence": 3,
+    "exact": 3,
+    "execution": 3,
+    "existing": 4,
+    "fabric": 3,
+    "file": 5,
+    "fixture": 3,
+    "grant": 3,
+    "host": 3,
+    "learning": 4,
+    "must": 5,
+    "no": 8,
+    "not": 21,
+    "original": 5,
+    "publication": 4,
+    "remain": 5,
+    "repair": 7,
+    "request": 4,
+    "require": 4,
+    "retained": 4,
+    "run": 5,
+    "snapshot": 4,
+    "staging": 6,
+    "test": 6,
+    "tests": 9,
+    "tree": 5,
+    "trusted": 5,
+    "worker": 7
+   },
+   "title": "Repair candidate broker — unadmitted draft",
+   "title_terms": [
+    "broker",
+    "candidate",
+    "draft",
+    "repair",
+    "unadmitted"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5093,
+   "headings": [
+    "Review request: retained repair candidate and launcher defects",
+    "What needs review",
+    "Independent review",
+    "Separate carrier qualification, still missing"
+   ],
+   "kind": "DOCUMENT",
+   "path": "REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md",
+   "sha256": "3d9ddd7e5985a57cc3cc1f150f36f96db6c130be44cea1b6be66a2c97958a48c",
+   "summary": "**Status: unadmitted draft; no execution authority or independent verification.** This request does not claim a verifier, a run reference, or an accepted security boundary. It is meant for a separate reviewer to use after the exact candidate bytes are fixed. Do not update the live registries or mark evidence independent based on this document.",
+   "terms": {
+    "action": 2,
+    "admission": 2,
+    "after": 2,
+    "aggregate": 2,
+    "assertion": 2,
+    "authority": 2,
+    "before": 3,
+    "bindings": 2,
+    "candidate": 4,
+    "canonical": 4,
+    "carrier": 5,
+    "checks": 2,
+    "cleanup": 2,
+    "code": 2,
+    "controlled": 3,
+    "direct": 3,
+    "distinct": 2,
+    "effect": 3,
+    "enabled": 2,
+    "evidence": 3,
+    "exact": 5,
+    "execution": 3,
+    "existing": 4,
+    "explicit": 2,
+    "failed": 2,
+    "failures": 3,
+    "gate": 3,
+    "independent": 5,
+    "launcher": 4,
+    "namespace": 3,
+    "no": 3,
+    "not": 16,
+    "only": 4,
+    "optional": 4,
+    "qualification": 3,
+    "repair": 4,
+    "request": 5,
+    "required": 3,
+    "review": 8,
+    "run": 5,
+    "runtime": 5,
+    "separate": 5,
+    "setup": 3,
+    "success": 3,
+    "tests": 6,
+    "verification": 3,
+    "verifier": 3,
+    "whether": 3
+   },
+   "title": "Review request: retained repair candidate and launcher defects",
+   "title_terms": [
+    "candidate",
+    "defects",
+    "launcher",
+    "repair",
+    "request",
+    "retained",
+    "review"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 11022,
+   "headings": [
+    "Retained repair through the fabric — unadmitted trace, 2026-11-02",
+    "Actual selected RAW_GOAL route",
+    "Reachable state and request controls",
+    "Local controls and remaining work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "RETAINED_REPAIR_FABRIC_PATH_AUDIT_20261102.md",
+   "sha256": "1ff2147f069f1a6b7a265296e9066a9c0386464f779987eb75494f0bef74804e",
+   "summary": "This is a source trace and producer-run sandbox measurement, not independent verification, admission, proof of global safety, or evidence that the fabric learned a repair. The owner’s larger goals are not reduced to this one slice.",
+   "terms": {
+    "action": 5,
+    "actual": 5,
+    "admission": 4,
+    "after": 5,
+    "also": 5,
+    "bound": 6,
+    "bound_capability": 6,
+    "but": 4,
+    "current": 5,
+    "direct": 10,
+    "draft": 4,
+    "drain": 5,
+    "enabled": 8,
+    "evidence": 5,
+    "exact": 5,
+    "fabric": 11,
+    "false": 6,
+    "gap": 7,
+    "gate": 7,
+    "independent": 5,
+    "inspection": 5,
+    "learn": 5,
+    "learning": 8,
+    "ledger": 4,
+    "live_capability": 4,
+    "may": 5,
+    "no": 7,
+    "not": 26,
+    "other": 6,
+    "passed": 4,
+    "paths": 5,
+    "producer-run": 4,
+    "providers": 4,
+    "queue": 4,
+    "r3": 5,
+    "rather": 4,
+    "raw": 5,
+    "raw_goal": 7,
+    "real": 5,
+    "refusal": 6,
+    "registry": 7,
+    "repair": 21,
+    "retained": 5,
+    "separate": 7,
+    "state": 5,
+    "tests": 13,
+    "verification": 10,
+    "verifier": 5
+   },
+   "title": "Retained repair through the fabric — unadmitted trace, 2026-11-02",
+   "title_terms": [
+    "2026-11-02",
+    "fabric",
+    "repair",
+    "retained",
+    "through",
+    "trace",
+    "unadmitted"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7893,
    "headings": [
     "REUSE AUDIT — 8 model-dependent families vs Brain-owned mechanisms (Phase A)",
@@ -48581,6 +49176,153 @@
     "plan",
     "terminal",
     "v2"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 3348,
+   "headings": [
+    "Transfer-driver experience-off control — draft, 2026-11-02",
+    "What changed",
+    "Small producer-run comparison",
+    "Remaining work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "TRANSFER_EXPERIENCE_OFF_CONTROL_DRAFT_20261102.md",
+   "sha256": "59244b1bdf487027604743a07e406ed80de73af66278e6ae75a24ff13b480b39",
+   "summary": "`transfer_learning_v1.drive` now has `experience_mode='off'`. Within that function, the off path does not fingerprint by acting, read retained episodes, learn a model, or write an experience. It can execute and observe an explicit caller-supplied fixed plan; the same option is available in enabled mode. Without a fixed plan, or if that plan fails, the off arm does not invent an answer. Unknown mod",
+   "terms": {
+    "act": 2,
+    "after": 2,
+    "against": 2,
+    "arm": 5,
+    "available": 2,
+    "baseline": 4,
+    "both": 2,
+    "caches": 2,
+    "calls": 2,
+    "carrier": 2,
+    "cold": 3,
+    "comparison": 2,
+    "control": 4,
+    "demonstrate": 2,
+    "did": 2,
+    "draft": 2,
+    "driver": 2,
+    "environment": 3,
+    "episode": 4,
+    "every": 3,
+    "explicit": 2,
+    "fingerprint": 2,
+    "fixed": 10,
+    "general": 2,
+    "goal": 2,
+    "including": 2,
+    "learned": 2,
+    "learning": 4,
+    "learning-off": 2,
+    "local": 2,
+    "mode": 3,
+    "model": 6,
+    "must": 2,
+    "new": 2,
+    "no": 4,
+    "not": 10,
+    "off": 8,
+    "old": 2,
+    "option": 3,
+    "parent": 2,
+    "plan": 6,
+    "prior": 3,
+    "same": 4,
+    "store": 3,
+    "target": 5,
+    "warm": 4,
+    "written": 3,
+    "yes": 3
+   },
+   "title": "Transfer-driver experience-off control — draft, 2026-11-02",
+   "title_terms": [
+    "2026-11-02",
+    "control",
+    "draft",
+    "experience-off",
+    "transfer-driver"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7724,
+   "headings": [
+    "Unified learning and memory policy audit — draft, 2026-11-02",
+    "Findings",
+    "Local evidence",
+    "Selected public route follow-up",
+    "Next work"
+   ],
+   "kind": "DOCUMENT",
+   "path": "UNIFIED_LEARNING_MEMORY_POLICY_AUDIT_20261102.md",
+   "sha256": "787338b4990a08b759193382677c8b2678272a15984888139166c0f8a797bb86",
+   "summary": "This is a partial source audit and producer-run test of the current unadmitted tree. It is not a complete call-graph review, independent verification, or a whole-system learning-off guarantee. The owner’s project goals are broader than this test.",
+   "terms": {
+    "also": 5,
+    "associative": 4,
+    "audit": 4,
+    "automatic": 6,
+    "behavior": 5,
+    "both": 4,
+    "caches": 3,
+    "closure": 3,
+    "context": 4,
+    "draft": 5,
+    "existing": 5,
+    "explicit": 5,
+    "explicitly": 4,
+    "fabric": 10,
+    "false": 12,
+    "goal": 5,
+    "learn": 10,
+    "learning": 4,
+    "may": 4,
+    "modes": 4,
+    "not": 18,
+    "one-shot": 5,
+    "option": 7,
+    "other": 6,
+    "path": 5,
+    "policy": 4,
+    "populated": 4,
+    "prior": 4,
+    "process": 6,
+    "providers": 4,
+    "r3": 6,
+    "raw": 4,
+    "real": 4,
+    "recall": 5,
+    "repair": 5,
+    "run": 4,
+    "separate": 4,
+    "solver": 4,
+    "source": 4,
+    "state": 7,
+    "still": 6,
+    "store": 5,
+    "stores": 5,
+    "supplied": 4,
+    "test": 6,
+    "tests": 5,
+    "use": 4,
+    "wrapper": 6
+   },
+   "title": "Unified learning and memory policy audit — draft, 2026-11-02",
+   "title_terms": [
+    "2026-11-02",
+    "audit",
+    "draft",
+    "learning",
+    "memory",
+    "policy",
+    "unified"
    ]
   },
   {
@@ -61524,10 +62266,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1033,
+  "included_source_count": 1043,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "cbee41532983f3bbd9f1cbacd3706f752fe822af9723544f88c9e2933e4d46d8"
+  "source_tree_digest": "8c1acfbece9ba05b21e399cf768ec373031af5cb04cef0db50b3c09650d9ead9"
  },
  "research_index": [
   {
@@ -213963,6 +214705,48 @@
    }
   },
   {
+   "action_id": "RESTART_STABLE_KNOWLEDGE_GAPS_20261102_V1",
+   "capability": false,
+   "date": "2026-11-02",
+   "id": "research:canonical/action_intents/RESTART_STABLE_KNOWLEDGE_GAPS_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RESTART_STABLE_KNOWLEDGE_GAPS_20261102_V1.json",
+   "schema": "",
+   "sha256": "eae0152dbcb3fd5c659743a7692e47dd129aa4e3acc9b37b33019a93ff6fb985",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "adapt_existing_ledger_identity_and_preserve_legacy_records": 1,
+    "bounded": 1,
+    "certified": 1,
+    "checks": 1,
+    "completed": 1,
+    "control": 1,
+    "draft": 1,
+    "experience-off": 1,
+    "front-door": 2,
+    "gain": 1,
+    "gap": 1,
+    "gaps": 1,
+    "knowledge": 1,
+    "learning": 1,
+    "loop": 1,
+    "no": 1,
+    "python_hash_randomization_splits_identical_persisted_knowledge_gaps_across_worker_restarts": 1,
+    "real-file": 1,
+    "records": 1,
+    "restart": 1,
+    "restart-stable": 1,
+    "restart_stable_knowledge_gaps_20261102_v1": 1,
+    "routing": 1,
+    "safety": 1,
+    "source-content": 1,
+    "stable": 1,
+    "transfer-driver-only": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "RETAINED_REPAIR_PRODUCTION_QUALIFICATION_20261101_V1",
    "capability": false,
    "date": "2026-11-01",
@@ -233777,7 +234561,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "ca8b1aab8ec563cffc30d097f0e9a6cb024da1dfc7e35d7073482d3e48642701",
+   "sha256": "973927292b72a6d8f2141771bfa9e6e6ca9f4e4467514d2d93c703f493c19f28",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 65,
    "symbols": [
@@ -234478,15 +235262,17 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "607cfce7ba0166380c010b748cc0b2a8dd0fadb3067696a0f24badfe90849f0a",
+   "sha256": "51a33b8ceebd2a4567a3a4d42f5e07a7b051fae459577b5439ed138540b4f835",
    "summary": "The computer itself, as an environment the learner can act in.",
-   "symbol_count": 50,
+   "symbol_count": 52,
    "symbols": [
     "ComputerEnv",
     "_abstract",
     "_bare_value",
+    "_compressed_content_matches",
     "_concretise",
     "_digest",
+    "_file_sha256",
     "_help_flush",
     "_help_load",
     "_help_signature",
@@ -234503,9 +235289,7 @@
     "_real_binary",
     "_recipe_of",
     "_reverify",
-    "_run_capped",
-    "_run_pipeline",
-    "_single_step"
+    "_run_capped"
    ],
    "terms": {
     "act": 1,
@@ -234539,6 +235323,43 @@
     "uses_goal_value": 1,
     "v1": 1,
     "verify_plan": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/computer_execution_boundary_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/computer_execution_boundary_v1.py",
+   "sha256": "531addc5c68647f716df5c30167fd00bd30bf9ffffea86c10e1b98f147900fe2",
+   "summary": "Shared fail-closed status for unadmitted automatic computer execution.",
+   "symbol_count": 6,
+   "symbols": [
+    "is_repair_verification_gap",
+    "is_unconfined_capability_id",
+    "is_unconfined_cli_entry",
+    "is_unconfined_execution_entry",
+    "is_unconfined_repair_entry",
+    "retained_repair_policy_error"
+   ],
+   "terms": {
+    "automatic": 1,
+    "boundary": 1,
+    "computer": 2,
+    "execution": 2,
+    "fail-closed": 1,
+    "is_repair_verification_gap": 1,
+    "is_unconfined_capability_id": 1,
+    "is_unconfined_cli_entry": 1,
+    "is_unconfined_execution_entry": 1,
+    "is_unconfined_repair_entry": 1,
+    "retained_repair_policy_error": 1,
+    "shared": 1,
+    "status": 1,
+    "unadmitted": 1,
+    "v1": 1
    }
   },
   {
@@ -234582,23 +235403,26 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "96258d5a47369bc0db672869802a67cbae68b6f7fe1519585ab74a752806f4d4",
-   "summary": "Real confinement: only the project is writable.",
+   "sha256": "e06ac5e5e8043e639922b7370da9f682f053ad72de2b235c604a9b151f188ccd",
+   "summary": "Candidate namespace/chroot launcher; not an admitted security boundary.",
    "symbol_count": 2,
    "symbols": [
     "available",
     "run"
    ],
    "terms": {
+    "admitted": 1,
     "available": 1,
+    "boundary": 1,
+    "candidate": 1,
+    "chroot": 1,
     "confine": 1,
-    "confinement": 1,
-    "only": 1,
-    "project": 1,
-    "real": 1,
+    "launcher": 1,
+    "namespace": 1,
+    "not": 1,
     "run": 1,
-    "v1": 1,
-    "writable": 1
+    "security": 1,
+    "v1": 1
    }
   },
   {
@@ -237378,7 +238202,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/curriculum_v1.py",
-   "sha256": "e30c6f0f3b93a3afd125896ef47a347a2f485ddbda95103df8d74086ec4c87f6",
+   "sha256": "80062dd5dd2336f5b9885dab9498ff7d2d111b51d9e642472f189b7a93b3223c",
    "summary": "The machine decides what to learn next, then learns it. Nobody tells it to.",
    "symbol_count": 18,
    "symbols": [
@@ -251356,11 +252180,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/ignorance_ledger_v1.py",
-   "sha256": "187933b36b2fddad1606a3cb81abbd0b1bac591117d53948182e383e9c2ab58b",
+   "sha256": "c2531ddb88b7f091ca83e5357048b8f469f12c1dd1d712a540c78f2f2e295d70",
    "summary": "The machine's own model of what it does not know, ranked by what it is worth.",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
     "_beta_mean",
+    "_identity",
     "_key",
     "_load",
     "_save",
@@ -251373,6 +252198,7 @@
    ],
    "terms": {
     "beta_mean": 1,
+    "identity": 1,
     "ignorance": 1,
     "key": 1,
     "know": 1,
@@ -252177,9 +253003,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "5aa1d3507bbd8d2381a87b8b85bad04e93548ad1b3923a0e2298ce0fa66a950c",
+   "sha256": "5b32edbfd72baa7ef10b6366ce7efd47dd5c8d69d07d3d06d4d13145ae8fc80c",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 107,
+   "symbol_count": 108,
    "symbols": [
     "LocalExecutionFailure",
     "_already_satisfied_evidence",
@@ -252248,7 +253074,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_runtime_v1.py",
-   "sha256": "1515fcb9a1dcfa762cfc62d20135ec9691c4a50ac6b20ca9bda5be96481b9e82",
+   "sha256": "a4506a3c7a03a35a405973802deb0384070a16bd38064a881bedd9fd17770a8d",
    "summary": "Unified live execution subruntime V1.",
    "symbol_count": 34,
    "symbols": [
@@ -252368,7 +253194,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_capability_invoker_v1.py",
-   "sha256": "f96bbabdd9257c06ebb24909f7bb87c010412ef7269c0c49b7cf94335fd86c28",
+   "sha256": "365b33e015317405b3b271cf0bd136b2d1c51541cf7b9d6735b7a2a98568490b",
    "summary": "Universal live capability invocation adapter V1.",
    "symbol_count": 8,
    "symbols": [
@@ -252439,9 +253265,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "c8e1818c6630f71b0d1f8a0fa12d3231b7d81e3dd2919fbcbe9f4ad745baad79",
+   "sha256": "a8ac8dba264197c35519a05a5fa690635e2fe432621a3b2681c07cfbc16e0ee7",
    "summary": "Live integrated Brain V1.",
-   "symbol_count": 28,
+   "symbol_count": 29,
    "symbols": [
     "LiveBrainError",
     "_active_registry_path",
@@ -252452,6 +253278,7 @@
     "_inputs_from_rendered_args",
     "_pathology_reason_code",
     "_plan_lineage",
+    "_raw_compression_output_mismatch",
     "_raw_goal_replay_context",
     "_receipt_admits",
     "_record_raw_goal_experience",
@@ -252465,8 +253292,7 @@
     "bound_capability_controller_action",
     "compile_against_live_registry",
     "compile_capability_graph",
-    "controller_actions_permitted",
-    "drive_controller"
+    "controller_actions_permitted"
    ],
    "terms": {
     "active_registry_path": 1,
@@ -252485,8 +253311,8 @@
     "live": 2,
     "livebrainerror": 1,
     "load_verified_registry": 1,
-    "pathology_reason_code": 1,
     "plan_lineage": 1,
+    "raw_compression_output_mismatch": 1,
     "raw_goal_replay_context": 1,
     "receipt_admits": 1,
     "record_raw_goal_experience": 1,
@@ -267110,7 +267936,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/program_synthesis_v1.py",
-   "sha256": "b4662f71166daac0b7c403cd15e576e7cb05b7b07c02f3b2252b23bdcf69d479",
+   "sha256": "cd9b8294017e063df997c20f25c629300abe0bbc400e49b28d7e6eff80f56378",
    "summary": "Produce a program that does the job, then prove it by running it.",
    "symbol_count": 18,
    "symbols": [
@@ -273033,7 +273859,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "0d5e415897daee428068bf7bcfe1fe9af447b2741e237457cfe00d088eea1047",
+   "sha256": "f7201cd5c667bdf4e4cab731377c8c1c773d64c915ebae94c99f057d427efa4b",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
    "symbol_count": 77,
    "symbols": [
@@ -274793,6 +275619,57 @@
     "reopened": 2,
     "route": 1,
     "unresolved": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/repair_candidate_broker_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/repair_candidate_broker_v1.py",
+   "sha256": "e70cd6a989c426375c46b7216140cf265de604526779a0fbb0ef49a8b5218583",
+   "summary": "Unadmitted, read-only staging and comparison for a single repair candidate.",
+   "symbol_count": 13,
+   "symbols": [
+    "CandidateDenied",
+    "ProjectSnapshot",
+    "_check_snapshot",
+    "_digest",
+    "_identity",
+    "_relative",
+    "_sha",
+    "acceptance_effect_request",
+    "acceptance_subject",
+    "compare_candidate",
+    "effect_request",
+    "snapshot_project",
+    "stage_project"
+   ],
+   "terms": {
+    "acceptance_effect_request": 1,
+    "acceptance_subject": 1,
+    "broker": 1,
+    "candidate": 2,
+    "candidatedenied": 1,
+    "check_snapshot": 1,
+    "compare_candidate": 1,
+    "comparison": 1,
+    "digest": 1,
+    "effect_request": 1,
+    "identity": 1,
+    "projectsnapshot": 1,
+    "read-only": 1,
+    "relative": 1,
+    "repair": 2,
+    "sha": 1,
+    "single": 1,
+    "snapshot_project": 1,
+    "stage_project": 1,
+    "staging": 1,
+    "unadmitted": 1,
     "v1": 1
    }
   },
@@ -280236,7 +281113,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "8b38714db6e06d6e802716c587272cc07da2fc23e20dedcf46a7acbac0c06ef1",
+   "sha256": "2f20e632970c71cc30ebcaecb90d1484a764dc846e6a308a6923aaaf792b7ccc",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 5,
    "symbols": [
@@ -287168,7 +288045,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "53b9bd2ccf34291ebe3837f59208cb5162317a8a7d6d37352f30e9c649147dad",
+   "sha256": "c257eb57947d8fd50d88553649f3806b79e24d08a8e056f2b50988f408e4e6ae",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
    "symbol_count": 20,
    "symbols": [
@@ -287700,9 +288577,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-   "sha256": "66bd1acdf128d1cf97646c7ce2ba58df790b421cf7108f574d865be40db68e0a",
+   "sha256": "00a50b0da3725b4b8d1eeb41607834ecf21cc7a5b2fb6422d9ec5689359d0c12",
    "summary": "Unified Cognitive Fabric V1.",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
     "CognitiveFabricError",
     "_auto_mode",
@@ -287710,6 +288587,7 @@
     "_bounded_r3_direct_observation",
     "_decision_requires_user_information",
     "_manual_learning_retry_context",
+    "_notice_missing_bound_verification",
     "_run_adequate_decision_engine",
     "_unwrap_live_runtime",
     "catalog",
@@ -287725,6 +288603,7 @@
     "decision_requires_user_information": 1,
     "fabric": 2,
     "manual_learning_retry_context": 1,
+    "notice_missing_bound_verification": 1,
     "run": 1,
     "run_adequate_decision_engine": 1,
     "unified": 2,
@@ -289905,7 +290784,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
-   "sha256": "7cada88c0e1c9ede521f5b20662226170b7e36e8df621c7cff6981ee5ec599a6",
+   "sha256": "ef5eac50015e800d1048576d3a961555020fe57395750f4b2be9592a99ccbf2e",
    "summary": "Execute one promoted verified Brain capability and reverify its trace.",
    "symbol_count": 11,
    "symbols": [

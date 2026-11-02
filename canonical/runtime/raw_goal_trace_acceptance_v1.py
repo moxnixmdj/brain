@@ -2725,7 +2725,16 @@ def _inspect_diagnose_and_architect(args, result, root):
     op = str(doc.get("operation") or "")
     if not op:
         return False, "DIAGNOSE_ARCHITECT_OPERATION_MISSING", {}
-    return True, "", {"operation": op, "output_path": out_rel}
+    # A parseable producer-written report does not show that its claimed root
+    # cause is correct. Until a separate verifier can inspect the diagnosis
+    # without running untrusted tests on the host, do not certify this claim.
+    # Check both the requested operation and reported operation: a conflicting
+    # report cannot make the obligation disappear.
+    if op in {"diagnose_test_suite", "find_root_cause"} or str(args.get("operation") or "") in {"diagnose_test_suite", "find_root_cause"}:
+        return False, "DIAGNOSIS_ROOT_CAUSE_NOT_INDEPENDENTLY_VERIFIED", {"operation": op, "output_path": out_rel}
+    # The other operations previously received exactly the same report-only
+    # check. No operation-specific reinspection has yet been established here.
+    return False, "DIAGNOSE_ARCHITECT_REPORT_NOT_INDEPENDENTLY_VERIFIED", {"operation": op, "output_path": out_rel}
 
 
 

@@ -96,9 +96,9 @@ def _bound_run(request: Mapping[str, Any]) -> dict[str, Any]:
     return bound.run(request)
 
 
-def _raw_bound_run(request: Mapping[str, Any]) -> dict[str, Any]:
+def _raw_bound_run(request: Mapping[str, Any], *, record_experience: bool = True) -> dict[str, Any]:
     from canonical.runtime import live_integrated_brain_v1 as bound
-    return bound.run_raw_goal(request)
+    return bound.run_raw_goal(request, record_experience=record_experience)
 
 
 def _p3(payload: Mapping[str, Any], repo_root: str | Path) -> dict[str, Any]:
@@ -946,7 +946,10 @@ def _auto_repair_live_failure(
     repair counts only after exact original-obligation replay passes.
     """
     out = deepcopy(dict(result))
-    if request.get("auto_repair", True) is False or out.get("pass") is True:
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    raw_result = out.get("raw_result")
+    if (request.get("auto_repair", True) is False or out.get("pass") is True
+            or (isinstance(raw_result, Mapping) and boundary.is_repair_verification_gap(raw_result))):
         return out
 
     learning = out.get("learning")
@@ -1402,6 +1405,7 @@ def run_generic(
     active_invalidators: Sequence[str] = (),
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
+    r3_context_mode: str = "use",
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
@@ -1410,12 +1414,18 @@ def run_generic(
 ) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
+    if r3_context_mode not in ("use", "exclude"):
+        return _fail("R3_CONTEXT_MODE_INVALID")
+    if r3_context_mode == "exclude" and learn:
+        return _fail("R3_CONTEXT_EXCLUSION_REQUIRES_LEARNING_DISABLED")
+    if r3_context_mode == "exclude" and "prior_verified_episode_records" in (solver_kwargs or {}):
+        return _fail("R3_CONTEXT_EXCLUSION_REJECTS_INJECTED_PRIOR_EPISODES")
     try:
-        ctx = _active_learning_context(
-            state_path,
-            scope_id=scope_id,
-            episode_id=episode_id,
-        )
+        # This excludes only the automatic R3 state/skill context. It cannot
+        # constrain the problem, providers or any memory used by the solver.
+        ctx = ({"prior_verified_episodes": [], "active_verified_skills": []}
+               if r3_context_mode == "exclude" else _active_learning_context(
+                   state_path, scope_id=scope_id, episode_id=episode_id))
         skill_plan = None
         if ctx["active_verified_skills"]:
             skill_plan = _skill_plan(
@@ -1505,6 +1515,8 @@ def run_generic(
             "fallback_used": False,
             "fallback_blocked_effect_may_have_occurred": False,
             "learning_persistence_enabled": False,
+            "r3_context_policy": ("EXCLUDED_AUTOMATIC_R3_HISTORY_ONLY"
+                                  if r3_context_mode == "exclude" else "USE_AUTOMATIC_R3_HISTORY"),
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1718,6 +1730,9 @@ def run(
     """Subordinate execution router; Unified Cognitive Fabric V1 is the canonical public entrypoint."""
     if not isinstance(request, Mapping):
         return _fail("REQUEST_NOT_OBJECT")
+    nested = request.get("request")
+    if "route_memory_mode" in request or (isinstance(nested, Mapping) and "route_memory_mode" in nested):
+        return _fail("ROUTE_MEMORY_MODE_UNSUPPORTED_BY_RUNTIME")
 
     mode = str(request.get("mode") or "").strip()
     if not mode:
@@ -1729,6 +1744,9 @@ def run(
             mode = "compiled_bound"
         else:
             mode = "inventory"
+
+    if "r3_context_mode" in request and mode != "generic":
+        return _fail("R3_CONTEXT_MODE_UNSUPPORTED_FOR_RUNTIME_MODE:" + mode)
 
     if mode == "inventory":
         return inventory(state_path=request.get("state_path"))
@@ -1778,6 +1796,7 @@ def run(
             active_invalidators=request.get("active_invalidators") or (),
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
+            r3_context_mode=request.get("r3_context_mode", "use"),
             solver_kwargs=request.get("solver_kwargs") or {},
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
@@ -1829,8 +1848,12 @@ def run(
     if mode == "raw_bound":
         nested = request.get("request")
         payload = nested if isinstance(nested, Mapping) else request
-        raw = _raw_bound_run(payload)
-        learning = _observe_runtime_outcome(
+        if "retained_learning" in request or "retained_learning" in payload:
+            return _fail("RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED")
+        raw = (_raw_bound_run(payload, record_experience=False)
+               if request.get("learn", True) is False else _raw_bound_run(payload))
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        learning = None if (raw.get("status") == boundary.STATUS or boundary.is_repair_verification_gap(raw)) else _observe_runtime_outcome(
             raw,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,

@@ -890,6 +890,26 @@ def drive_controller(task_id: str, goal: str, controller_actions: Any,
     return controller, None
 
 
+def _raw_compression_output_mismatch(goal: str, selected: str | None,
+                                     inputs: Mapping[str, Any] | None) -> bool:
+    """Refuse a known incompatible tar-manifest route before it writes anything.
+
+    This only covers an explicit gzip-file compression request; it is not a
+    general output-binding or semantic-acceptance verifier.
+    """
+    if selected != "archive.tar_gz.create_from_manifest":
+        return False
+    if not re.match(r"^\s*(?:please\s+)?(?:compress|gzip)\b", goal, re.I):
+        return False
+    if re.search(r"\b(?:tar\s+archive|tarball)\b", goal, re.I):
+        return False
+    from canonical.runtime.computer_env_v1 import output_name
+    target = output_name(goal)
+    if not target or not target.lower().endswith(".gz") or target.lower().endswith(".tar.gz"):
+        return False
+    return not isinstance(inputs, Mapping) or inputs.get("output_path") != target
+
+
 def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
     """Compile one raw plain-language goal into the live verified runtime.
 
@@ -903,6 +923,13 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
             raise LiveBrainError("REQUEST_NOT_OBJECT")
+        if "route_memory_mode" in request:
+            raise LiveBrainError("ROUTE_MEMORY_MODE_UNSUPPORTED_BY_RAW_INTEGRATED")
+        if "retained_learning" in request:
+            return {"schema": SCHEMA, "pass": False, "executed": False,
+                    "status": "FAIL_CLOSED__RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED",
+                    "failure_class": "RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED",
+                    "semantic_acceptance_complete": False}
         task_id = str(request.get("task_id") or "").strip()
         goal = str(request.get("goal") or "").strip()
         if not task_id:
@@ -925,9 +952,95 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
 
+        # A bindable report is not a repair. The lexical compiler can select
+        # the unittest auditor for "Fix the failing tests ..." and report
+        # execution success without touching the broken source. Reuse the
+        # decisive typed SWE planner before any action when an explicit repair
+        # imperative selected an effect-inconsistent, non-editing single row.
+        # Leave DAGs, controller plans and questions alone. Never silently
+        # substitute an explicitly named row. An ambiguous proposal refuses
+        # the known wrong route.
+        selected = compiled.get("selected_capability")
+        entry = admissible.get(selected) if selected else None
+        if _raw_compression_output_mismatch(goal, selected, compiled.get("inputs")):
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL_CLOSED__STATED_COMPRESSION_OUTPUT_MISMATCH",
+                "pass": False,
+                "task_id": task_id,
+                "reason": "TAR_MANIFEST_ROUTE_DOES_NOT_BIND_STATED_GZIP_OUTPUT",
+                "refused_capability": selected,
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+        prose = goal_front_compiler_v1.prose_only(goal).strip()
+        if (re.match(r"^(?:please\s+)?(?:fix|repair)\b", prose, re.I)
+                and entry and not compiled.get("controller_actions")
+                and not compiled.get("capability_dag") and not compiled.get("compiled_parts")
+                and not goal_front_compiler_v1.capability_edits_source(entry)):
+            from canonical.runtime import live_brain_route_admission_v1 as door
+            from canonical.runtime import swe_typed_plan_v1 as typed
+
+            named = goal_front_compiler_v1.explicitly_named_capabilities(goal, admissible)
+            if door.sentence_promises_a_change(goal) and (
+                    named or not typed._effect_consistent(goal, selected, entry)):
+                proposal = None
+                if not named:
+                    proposal = typed.build_plan(goal, ROOT, compiled_context=(registry, admissible, compiled))
+                if proposal is not None:
+                    _, proposed_admissible, proposed_compiled = proposal
+                    proposed_id = proposed_compiled.get("selected_capability")
+                    proposed_entry = proposed_admissible.get(proposed_id)
+                    if not (proposed_id in admissible and proposed_entry
+                            and goal_front_compiler_v1.capability_edits_source(proposed_entry)
+                            and door.route_admission(goal, proposed_compiled, proposed_admissible).get("admitted")):
+                        proposal = None
+                if proposal is None:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "FAIL_CLOSED__STATED_REPAIR_ROUTE_UNAVAILABLE",
+                        "pass": False,
+                        "task_id": task_id,
+                        "reason": "NO_DECISIVE_ADMITTED_SOURCE_REPAIR_ROUTE",
+                        "refused_capability": selected,
+                        "elapsed_ns": perf_counter_ns() - started,
+                        "incremental_spend_usd": 0,
+                    }
+                registry, admissible, compiled = proposal
+
         controller_actions = _upgrade_compound_actions(
             compiled.get("controller_actions"), admissible
         )
+        # Preflight the entire visible plan before the controller dispatches any
+        # action. These are known unsafe adapters, not a general allowlist.
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        candidates = []
+        if compiled.get("selected_capability"):
+            candidates.append(str(compiled["selected_capability"]))
+        for action in controller_actions or []:
+            if isinstance(action, Mapping) and isinstance(action.get("args"), Mapping):
+                cid = action["args"].get("capability_id")
+                if cid:
+                    candidates.append(str(cid))
+        dag = compiled.get("capability_dag")
+        if isinstance(dag, Mapping):
+            for step in dag.get("steps") or []:
+                if isinstance(step, Mapping) and step.get("capability_id"):
+                    candidates.append(str(step["capability_id"]))
+        # The selected repair's verified-bound path first reports its existing
+        # independent-evidence refusal. Its executor separately blocks host
+        # execution even if that inspection later succeeds. A raw multi-action
+        # plan or DAG is not entitled to bypass either boundary.
+        for cid in candidates:
+            repair_unconfined = boundary.is_unconfined_repair_entry(cid, admissible.get(cid))
+            if ((boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(admissible.get(cid)))
+                    or (repair_unconfined and (controller_actions is not None or isinstance(dag, Mapping)
+                                              or cid not in _bound_capability_ids()))):
+                return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                        "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
+                        "compiled_capability_id": cid, "executed": False,
+                        "semantic_acceptance_complete": False,
+                        "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
         routing_targets = list(compiled.get("target_effects") or [])
         if not routing_targets:
             for part in compiled.get("compiled_parts") or []:
@@ -1727,8 +1840,8 @@ def _record_raw_goal_failure_diagnosis(
         pass
 
 
-def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
-    """Compile and run one raw plain-language goal, then remember the outcome.
+def run_raw_goal(request: Mapping[str, Any], *, record_experience: bool = True) -> dict[str, Any]:
+    """Compile and run one raw plain-language goal, then optionally record its outcome.
 
     A thin wrapper: the compile/plan/execute/verify path is
     `_run_raw_goal_impl`, unchanged. Wrapping rather than editing its many
@@ -1737,11 +1850,16 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
 
     The three hooks are disjoint by outcome, not redundant: a success becomes
     an episode, either outcome becomes a pathology cell about this machine, and
-    a failure becomes a diagnosed, counted failure class.
+    a failure becomes a diagnosed, counted failure class. Disabling this
+    wrapper's hooks does not disable memory or effects in nested execution.
     """
     out = _run_raw_goal_impl(request)
-    _record_raw_goal_experience(out, request)
-    _record_raw_goal_pathology(out, request)
-    _record_raw_goal_failure_diagnosis(out, request)
-    _advance_learning_queue()
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+    if (record_experience and out.get("status") not in
+            {boundary.STATUS, "FAIL_CLOSED__RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED"}
+            and not boundary.is_repair_verification_gap(out)):
+        _record_raw_goal_experience(out, request)
+        _record_raw_goal_pathology(out, request)
+        _record_raw_goal_failure_diagnosis(out, request)
+        _advance_learning_queue()
     return out

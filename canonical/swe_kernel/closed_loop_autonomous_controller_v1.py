@@ -36,6 +36,8 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 from urllib.parse import parse_qs
 
+from canonical.runtime import computer_execution_boundary_v1 as computer_boundary
+
 from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
     compile_and_qualify_skill,
     recall_and_execute_workflow,
@@ -61,6 +63,9 @@ _HONEST_REFUSAL_CLASSES: frozenset[str] = frozenset(
         "REMOVAL_REQUIRES_GREEN_BASELINE",
         "REMOVAL_TARGET_NOT_UNIQUE",
         "REQUEST_INVALID",
+        "COMPOSITION_EXECUTION_OUTCOME_UNKNOWN",
+        "COMPOSED_GOAL_NOT_VERIFIED",
+        computer_boundary.FAILURE_CLASS,
     }
 )
 
@@ -278,6 +283,13 @@ def solve_or_learn(
 
     goal = str(req.get("goal") or "").strip()
     task_id = str(req.get("task_id") or "autonomous-solve")
+    # Tier 0 performs its own recall before the door. A door-only policy must
+    # not be silently accepted here as though it governed that earlier tier.
+    if "route_memory_mode" in req:
+        return {"schema": SCHEMA, "task_id": task_id, "pass": False, "executed": False,
+                "status": "FAIL_CLOSED__ROUTE_MEMORY_MODE_UNSUPPORTED_BY_CONTROLLER",
+                "failure_class": "ROUTE_MEMORY_MODE_UNSUPPORTED_BY_CONTROLLER",
+                "semantic_acceptance_complete": False}
     work_cwd = pathlib.Path(cwd or req.get("cwd") or pathlib.Path.cwd()).resolve()
     skill_db = pathlib.Path(db_path) if db_path is not None else None
 
@@ -299,29 +311,36 @@ def solve_or_learn(
     demo_post = req.pop("postcondition", None)
     qualification_receipt: dict[str, Any] | None = None
     if isinstance(demo_trace, list) and demo_trace and isinstance(demo_post, Mapping):
-        held_goal = str(req.pop("heldout_goal", "") or goal)
-        held_cwd = req.pop("heldout_cwd", None)
-        held_post = req.pop("heldout_postcondition", None)
-        sab_post = req.pop("sabotaged_postcondition", None)
-        # Drop donor reference locally before qualification executes
-        trace_copy = list(demo_trace)
-        del demo_trace
-        qualification_receipt = compile_and_qualify_skill(
-            goal=goal,
-            trace=trace_copy,
-            postcondition=demo_post,
-            heldout_goal=held_goal,
-            heldout_cwd=held_cwd or work_cwd,
-            heldout_postcondition=held_post,
-            sabotaged_postcondition=sab_post,
-            source_channel="k2_demonstration_transfer",
-            db_path=skill_db,
-        )
+        # Qualification executes the supplied trace. It must not precede a
+        # reviewed boundary and effect admission merely because it is called a demo.
+        return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                "status": computer_boundary.STATUS,
+                "failure_class": computer_boundary.FAILURE_CLASS,
+                "executed": False, "semantic_acceptance_complete": False,
+                "tier_used": "unconfined_demonstration_refused",
+                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
     # ------------------------------------------------------------------
     # TIER 0A (<2 ms): Recall Compiled & Ownership-Qualified Workflow Skill
     # ------------------------------------------------------------------
-    recalled = recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    # Do not let the fast recall tier jump ahead of the confinement refusal
+    # for the computer-task shapes identified below. Other tiers are not
+    # thereby certified as confined.
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    from canonical.runtime import computer_env_v1 as cenv
+    try:
+        computer_shape = (ra._serve_by_acting({"goal": goal}) is not None
+                          or cenv.query_kind(goal) is not None
+                          or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")))
+    except Exception:
+        computer_shape = True  # a failed classification cannot authorize recall
+    recalled = None if computer_shape else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    if recalled is not None and recalled.get("status") == computer_boundary.STATUS:
+        out = dict(recalled)
+        out.update(controller_schema=SCHEMA, task_id=task_id,
+                   tier_used="tier0_unconfined_workflow_refused",
+                   elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+        return out
     if recalled is not None and recalled.get("pass") is True:
         receipts = list(recalled.get("step_receipts") or [])
         last_step = receipts[-1] if receipts else {}
@@ -361,10 +380,12 @@ def solve_or_learn(
         return out
 
     # Respect law-pinned honest refusals immediately — never paper over them.
-    if _is_honest_contract_refusal(front_res):
+    if _is_honest_contract_refusal(front_res) or front_res.get("side_effects_may_exist") is True:
         out = dict(front_res)
         out["controller_schema"] = SCHEMA
-        out["tier_used"] = "tier0_honest_contract_refusal"
+        out["tier_used"] = ("tier0_uncertain_side_effects_refusal"
+                            if front_res.get("side_effects_may_exist") is True
+                            else "tier0_honest_contract_refusal")
         out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
         return out
 
@@ -398,26 +419,68 @@ def solve_or_learn(
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                 }
 
+        composer_dispatch_started = False
         try:
             from canonical.runtime import composer_route_v1 as croute
 
             routed = croute.route(goal)
+            if routed.get("status") == computer_boundary.STATUS:
+                return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                        "status": computer_boundary.STATUS,
+                        "failure_class": computer_boundary.FAILURE_CLASS,
+                        "executed": True if front_res.get("executed") is True else None,
+                        "side_effects_may_exist": True,
+                        "composer_fallback_executed": False,
+                        "tier_used": "tier1_unconfined_exploration_refused",
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
             if routed.get("pass") is True and routed.get("chain"):
+                composer_dispatch_started = True
                 chained = croute.execute_chain(routed["chain"], goal)
+                if chained.get("status") == computer_boundary.STATUS:
+                    return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                            "status": computer_boundary.STATUS,
+                            "failure_class": computer_boundary.FAILURE_CLASS,
+                            "executed": True if front_res.get("executed") is True else None,
+                            "side_effects_may_exist": True,
+                            "composer_fallback_executed": False,
+                            "tier_used": "tier1_unconfined_command_refused",
+                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
                 if chained.get("pass") is True:
+                    acceptance = ra._composed_acceptance(goal, routed["chain"], chained)
+                    complete = acceptance.get("semantic_acceptance_complete") is True
                     return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "pass": True,
-                        "status": "PASS__TIER1_CAPABILITY_CHAIN",
-                        "tier_used": "tier1_composer_chain",
-                        "from_memory": False,
-                        "chain": list(routed["chain"]),
-                        "chain_result": chained,
+                        "schema": SCHEMA, "task_id": task_id, "pass": complete,
+                        "status": ("PASS__TIER1_CAPABILITY_CHAIN" if complete
+                                   else "FAIL_CLOSED__COMPOSED_GOAL_NOT_VERIFIED"),
+                        "failure_class": None if complete else "COMPOSED_GOAL_NOT_VERIFIED",
+                        "tier_used": "tier1_composer_chain", "from_memory": False,
+                        "chain": list(routed["chain"]), "chain_result": chained,
+                        "semantic_acceptance_complete": complete,
+                        "raw_goal_acceptance": acceptance.get("raw_goal_acceptance"),
+                        "accepted_raw_obligation_ids": acceptance.get("accepted_raw_obligation_ids") or [],
+                        "executed": True, "side_effects_may_exist": not complete,
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
-        except Exception:
-            pass
+                if (chained.get("steps") or chained.get("executed") is True
+                        or chained.get("side_effects_may_exist") is True):
+                    return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                            "status": str(chained.get("status") or "FAIL__COMPOSER_CHAIN"),
+                            "failure_class": str(chained.get("failure_class") or "COMPOSER_STEP_OUTCOME_UNCERTAIN"),
+                            "tier_used": "tier1_composer_chain", "chain_result": chained,
+                            "executed": True, "side_effects_may_exist": True,
+                            "semantic_acceptance_complete": False,
+                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
+        except Exception as exc:  # noqa: BLE001 - a retry cannot erase possible effects
+            return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                    "status": ("FAIL_CLOSED__COMPOSITION_EXECUTION_OUTCOME_UNKNOWN"
+                               if composer_dispatch_started else "FAIL_CLOSED__COMPOSITION_PLANNING_ERROR"),
+                    "failure_class": ("COMPOSITION_EXECUTION_OUTCOME_UNKNOWN"
+                                      if composer_dispatch_started else "COMPOSITION_PLANNING_ERROR"),
+                    "reason": type(exc).__name__,
+                    "executed": True if composer_dispatch_started or front_res.get("executed") is True else None,
+                    "side_effects_may_exist": True,
+                    "semantic_acceptance_complete": False,
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
     # ------------------------------------------------------------------
     # TIER 2 (<2 s): Targeted Discovery -> Speed Elevation -> Gate Qualification
@@ -454,54 +517,22 @@ def solve_or_learn(
                     "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                 }
 
-        # 2B: CLI / Pipeline Measurement Discovery (`computer_env_v1`)
+        # CLI probes and archive discovery used to run host programs before an
+        # isolation or effect-admission decision. A filename verifier is not a
+        # sandbox; preserve the refusal instead of trying those paths directly.
         from canonical.runtime import computer_env_v1 as cenv
-
         qkind = cenv.query_kind(goal)
-        if qkind is not None:
-            in_file = _extract_existing_file(goal, work_cwd)
-            if in_file is not None:
-                measured = cenv.answer_query(goal, in_file)
-                if measured.get("pass") is True:
-                    qual = _qualify_cli_measurement_skill(
-                        goal=goal,
-                        input_file=in_file,
-                        measured_res=measured,
-                        cwd=work_cwd,
-                        db_path=skill_db,
-                    )
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "pass": True,
-                        "status": "PASS__TIER2_LEARNED_CLI_INSTRUMENT",
-                        "tier_used": "tier2_cli_instrument_discovery",
-                        "from_memory": bool(measured.get("from_memory")),
-                        "skill_crystallized": bool(qual.get("pass")),
-                        "skill_id": qual.get("skill_id"),
-                        "qualification_receipt": qual,
-                        "answer": measured.get("answer"),
-                        "value": measured.get("value"),
-                        "survivors": measured.get("survivors"),
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-
-        # 2B-Chain: Multi-layer CLI archive chain execution (`computer_env_v1.perform`)
-        if any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")):
-            chain_done = cenv.perform(goal, cwd=work_cwd)
-            if chain_done.get("pass") is True:
-                return {
-                    "schema": SCHEMA,
-                    "task_id": task_id,
-                    "pass": True,
-                    "status": "PASS__TIER2_STATEFUL_CLI_CHAIN_VERIFIED",
-                    "tier_used": "tier2_stateful_cli_chain",
-                    "from_memory": bool(chain_done.get("from_memory")),
-                    "plan": chain_done.get("plan"),
-                    "output": chain_done.get("output"),
-                    "verification": chain_done.get("verification"),
-                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                }
+        if ((qkind is not None and _extract_existing_file(goal, work_cwd) is not None)
+                or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz"))):
+            return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                    "status": computer_boundary.STATUS,
+                    "failure_class": computer_boundary.FAILURE_CLASS,
+                    "executed": True if front_res.get("executed") is True else None,
+                    "side_effects_may_exist": True,
+                    "served_after": front_res.get("status"), "computer_fallback_executed": False,
+                    "semantic_acceptance_complete": False,
+                    "tier_used": "tier2_unconfined_computer_execution_refused",
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
         # 2B-Repo: Zero-Hint Multi-Step Closed-Loop Repository Repair (`solve_repository_closed_loop`)
         low_goal = goal.lower()
@@ -536,25 +567,17 @@ def solve_or_learn(
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
 
-        # 2C: White-Box Stdlib / Local Python Documentation & Surface Mining
-        try:
-            from canonical.runtime import documentation_mining_v1 as dm
-
-            mined = dm.learn_or_recall(goal)
-            if mined.get("pass") is True:
-                return {
-                    "schema": SCHEMA,
-                    "task_id": task_id,
-                    "pass": True,
-                    "status": "PASS__TIER2_LEARNED_PYTHON_DOCUMENTATION",
-                    "tier_used": "tier2_documentation_mining",
-                    "from_memory": bool(mined.get("from_memory")),
-                    "module": mined.get("module"),
-                    "result": mined,
-                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                }
-        except Exception:
-            pass
+        # Documentation-mined snippets run as host Python programs. Do not
+        # execute this fallback without the same admitted boundary.
+        return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                "status": computer_boundary.STATUS,
+                "failure_class": computer_boundary.FAILURE_CLASS,
+                "executed": True if front_res.get("executed") is True else None,
+                "side_effects_may_exist": True,
+                "served_after": front_res.get("status"), "documentation_fallback_executed": False,
+                "semantic_acceptance_complete": False,
+                "tier_used": "tier2_unconfined_documentation_execution_refused",
+                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
 
     # Record open gap into `ignorance_ledger_v1` so Tier 3 curriculum can study it.
     if record_open_gap:
