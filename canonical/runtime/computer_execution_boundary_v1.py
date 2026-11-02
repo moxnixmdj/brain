@@ -157,18 +157,24 @@ def diagnose_operation_is_static(capability_id, entry, operation):
     return str(operation or '').strip() in STATIC_DIAGNOSE_OPERATIONS
 
 
-def refuses_execution(capability_id, entry, operation=None):
+def refuses_execution(capability_id, entry, operation=None, *, repair=True):
     """The single decision every execution site must use.
 
     Fails closed: an unknown capability, a missing operation or an operation not
     in the audited static table is refused exactly as before.
+
+    `repair=False` is for the one caller whose refusal of the repair row is
+    conditional (the raw-goal fabric refuses it only for a multi-action or DAG
+    plan, or outside the bound registry). Folding repair into the decision there
+    made the refusal earlier than the path that records the missing-information
+    gap, which is a regression in what the creature learns from a refusal.
     """
     if diagnose_operation_is_static(capability_id, entry, operation):
         return False
     return (
         is_unconfined_capability_id(capability_id)
         or is_unconfined_execution_entry(entry)
-        or is_unconfined_repair_entry(capability_id, entry)
+        or (repair and is_unconfined_repair_entry(capability_id, entry))
     )
 
 

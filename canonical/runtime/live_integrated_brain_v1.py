@@ -1036,7 +1036,7 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
         # plan or DAG is not entitled to bypass either boundary.
         for cid, operation in candidates:
             repair_unconfined = boundary.is_unconfined_repair_entry(cid, admissible.get(cid))
-            if ((boundary.refuses_execution(cid, admissible.get(cid), operation))
+            if ((boundary.refuses_execution(cid, admissible.get(cid), operation, repair=False))
                     or (repair_unconfined and (controller_actions is not None or isinstance(dag, Mapping)
                                               or cid not in _bound_capability_ids()))):
                 return {"schema": SCHEMA, "task_id": task_id, "pass": False,

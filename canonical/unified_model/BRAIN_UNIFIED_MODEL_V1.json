@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "11034a911507388c8ab856625899fb159e47a33118999c3887bba9c3212f7338"
+  "value": "b7c85f836c9f542a41c7dd6b5ffdc179b31864b01c01fec5a7719bb2a5fec8ac"
  },
  "engines": [
   {
@@ -216882,7 +216882,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/RESTART_STABLE_KNOWLEDGE_GAPS_20261102_V1.json",
    "schema": "",
-   "sha256": "eae0152dbcb3fd5c659743a7692e47dd129aa4e3acc9b37b33019a93ff6fb985",
+   "sha256": "a018093096f87c5fbf06ce2f33cec58bf888afef63958d2cf5d7b04233c564d8",
    "status": "",
    "terms": {
     "20261102": 1,
@@ -237511,7 +237511,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_execution_boundary_v1.py",
-   "sha256": "787108f29b3732e860ef18455679983c91f3945de571bdffef5a5a448978d036",
+   "sha256": "3a8976130f7b208f26ff6cc0e1712a2a4e89c0725cc669c75a4c1d037d3a7317",
    "summary": "Shared fail-closed status for unadmitted automatic computer execution.",
    "symbol_count": 9,
    "symbols": [
@@ -255527,7 +255527,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "694faa3daa8f19155e63409a37d2c11c2d9b97b9f5960fcb9760e4d2ef8fa225",
+   "sha256": "ce2c2d48e921b2f593cd7d495febb55f121ed6b0c16073f2d3cce0585a75e7c6",
    "summary": "Live integrated Brain V1.",
    "symbol_count": 29,
    "symbols": [
