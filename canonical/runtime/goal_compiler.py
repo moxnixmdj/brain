@@ -702,7 +702,28 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
     result={}
+    # A ROW WITH TWO FILE SLOTS TAKES THE TWO FILES THE SENTENCE NAMED.
+    #
+    # Every key below is bound on its own, so a two-path contract sees "2 existing
+    # files named" for each slot and refuses both: "Find the differences between
+    # a.txt and b.txt" bound nothing, and the sentence was reported as a
+    # compilation gap although it had named both files.
+    #
+    # Scoped by exact counting. It fires only when the entry declares SEVERAL
+    # ``path_file_or_dir`` bindings, ALL of them present in this template, and the
+    # sentence states exactly that many existing files. The files are paired with
+    # the slots in the order the SENTENCE states them -- the only order it
+    # supplies -- so nothing is inferred, and any other count falls through to the
+    # per-key binder exactly as before.
+    _declared_file_slots=[k for k,v in (entry.get("proposal_bindings") or {}).items()
+                          if isinstance(v,dict) and v.get("type")=="path_file_or_dir"]
+    if len(_declared_file_slots)>1 and all(k in keys for k in _declared_file_slots):
+        _stated_files=[raw for raw,p in paths if p.is_file()]
+        if len(_stated_files)==len(_declared_file_slots):
+            result.update(dict(zip(_declared_file_slots,_stated_files)))
     for key in keys:
+        if key in result:
+            continue
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
@@ -1026,6 +1047,20 @@ def _complete_inputs_via_world_binding(goal, root, cid, entry):
     nothing is left missing; a partially justified mapping is still refused,
     so this widens the bindable set without ever inventing an input.
     """
+    # A COMPANION SLOT MUST NOT BE FILLED WITH THE FILE THE SENTENCE ALREADY BOUND.
+    #
+    # world_binding fills placeholders the pinned binder left open, and its
+    # companion rule is right for a single stated file serving two roles. It is
+    # wrong for a row that declares SEVERAL distinct file inputs: measured
+    # 2026-11-02, "Find the differences between a.txt and b.txt" bound `path` to
+    # a.txt and the fallback filled `other_path` with a.txt too, so the row was
+    # asked to diff a file against itself and the sentence was reported as a
+    # compilation gap for the file it had named. A paired contract is bound by
+    # the pinned binder or not at all.
+    _paired=[k for k,v in (entry.get("proposal_bindings") or {}).items()
+             if isinstance(v,dict) and v.get("type")=="path_file_or_dir"]
+    if len(_paired)>1:
+        return None
     try:
         from canonical.runtime import world_binding_v1 as _wb
     except Exception:

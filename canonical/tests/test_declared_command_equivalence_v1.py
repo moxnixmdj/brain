@@ -220,11 +220,45 @@ def test_a_directory_search_names_the_files_it_seeded_and_refuses_a_guessed_need
         raise AssertionError("the search invented a string the sentence did not state")
 
 
+def test_a_row_with_two_file_slots_binds_the_two_files_the_sentence_named() -> None:
+    """Measured twice over, in both directions.
+
+    Before the paired-slot rule, "Compare a.txt and b.txt" bound NOTHING (each
+    slot saw "2 files named") and "Find the differences between a.txt and b.txt"
+    bound BOTH slots to a.txt -- the world-binding fallback filled the companion
+    with the file the pinned binder had already used, so the row was asked to
+    diff a file against itself. Both halves are pinned here: the two paths must
+    differ, and they must be the two the sentence named, in its order.
+    """
+    work = ROOT / "canonical/astra_runtime/tmp/test_declared_command_equivalence"
+    work.mkdir(parents=True, exist_ok=True)
+    left, right = work / "left.txt", work / "right.txt"
+    left.write_text("alpha\nbeta\n", encoding="utf-8")
+    right.write_text("alpha\nBETA\n", encoding="utf-8")
+    rel_l, rel_r = left.relative_to(ROOT).as_posix(), right.relative_to(ROOT).as_posix()
+
+    from canonical.runtime import capability_composer_v1 as _graph
+    from canonical.runtime import goal_front_compiler_v1 as front
+    entry = _graph.load_registry()["file.diff.v1"]
+    bound = front.bind_all_inputs("Compare %s and %s" % (rel_l, rel_r), entry, ROOT,
+                                 cycle=0, spool=set())
+    assert bound.get("path") == rel_l, bound
+    assert bound.get("other_path") == rel_r, ("paired slots collapsed", bound)
+    assert bound["path"] != bound["other_path"], bound
+
+    for goal in ("Compare %s and %s" % (rel_l, rel_r),
+                 "Find the differences between %s and %s" % (rel_l, rel_r)):
+        result = door.solve({"task_id": "declared_eq_diff", "goal": goal})
+        assert result.get("pass") is True, (goal, result.get("status"),
+                                            result.get("compiler_detail"))
+        assert result.get("compiled_capability_id") == "file.diff.v1", goal
+
+
 def test_the_registry_rows_that_declare_a_command_are_the_file_fact_rows() -> None:
     registry = graph.load_registry()
     declaring = sorted(cid for cid, entry in registry.items()
                        if isinstance(entry, dict) and declared.FIELD in entry)
-    assert declaring == ["file.contents.v1", "file.line_count.v1",
+    assert declaring == ["file.contents.v1", "file.diff.v1", "file.line_count.v1",
                          "file.reversed.v1", "file.sorted.v1",
                          "file.stat.v1"], declaring
     for cid in declaring:

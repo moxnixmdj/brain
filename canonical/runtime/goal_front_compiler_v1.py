@@ -1861,6 +1861,31 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     named_destinations = _named_output_destinations(goal, entry, keys, root)
     taken: set[str] = set(named_destinations)
     pending_input_paths: list[str] = []
+    # A ROW THAT DECLARES TWO FILE SLOTS BINDS THE TWO FILES THE SENTENCE NAMED.
+    #
+    # Each key below is bound through a SHADOW contract carrying only that key, so
+    # a two-path row presents one empty slot at a time and every binder refuses:
+    # "Compare a.txt and b.txt" failed at the FIRST key with
+    # `path:2_type_compatible_existing_files_named`, nothing was marked taken, and
+    # the failure was reported as though the sentence had named no usable file.
+    #
+    # Scoped by exact counting, so no other row moves: this fires only when the
+    # entry declares SEVERAL ``path_file_or_dir`` bindings AND the sentence names
+    # exactly that many existing files that are not destinations. The values are
+    # taken in the order the sentence states them, which is the only order the
+    # sentence supplies -- nothing is paired, no role is inferred, and any other
+    # count falls through to the per-key path unchanged.
+    multi_file_keys = [k for k, v in (entry.get("proposal_bindings") or {}).items()
+                       if isinstance(v, Mapping) and v.get("type") == "path_file_or_dir"]
+    if len(multi_file_keys) > 1:
+        stated_files = [raw for raw, p in gc._repo_paths(goal, root)
+                        if p.is_file() and raw not in named_destinations]
+        if len(stated_files) == len(multi_file_keys):
+            for _key, _value in zip(multi_file_keys, stated_files):
+                inputs[_key] = _value
+                taken.add(_value)
+            pinned_keys = [k for k in pinned_keys if k not in inputs]
+            typed_keys = [k for k in typed_keys if k not in inputs]
     for key in pinned_keys:
         shadow = dict(entry)
         shadow["action_template"] = {"args": {key: "${input." + key + "}"}}
@@ -2319,10 +2344,37 @@ def _is_catch_all(entry: Mapping[str, Any]) -> bool:
     names = input_keys(entry)
     if not names:
         return True
+    # A SLOT THE ROW ITSELF DECLARES AS THE WHOLE REQUEST IS A WHOLE-REQUEST SLOT,
+    # whatever it is called.  `spec` and `objective` are not in the name list
+    # above, but both are declared `goal_text` -- they receive the entire
+    # sentence -- so a row whose only real input is one of them binds anything.
+    # Measured 2026-11-02: "Compare a.txt and b.txt" tied at 4 with
+    # evidence.claim_relation.generic_units.stdlib on the single word "compare",
+    # the tie went to the row that takes `spec`, and the sentence was refused as
+    # having no capability although a row existed that binds the two files it
+    # named.
+    #
+    # The name list stays as it is: a `text`/`prompt`/`query` slot may carry a
+    # PAYLOAD, and a payload is a real binding. Only an explicit `goal_text`
+    # declaration is treated as the whole request, and a row that also binds a
+    # file still returns False below on that file's name.
+    declared_whole = {key for key, spec in (entry.get("proposal_bindings") or {}).items()
+                      if isinstance(spec, Mapping) and spec.get("type") == "goal_text"}
+    # Only for a row that declares such a slot, and only for the slot kinds that
+    # are artifacts rather than statements: an `effect_result` is a value an
+    # earlier step produces and an `auto_path` is a path the runtime synthesizes,
+    # so neither is evidence that the row understood the sentence. Every other
+    # row -- including every row that binds a file -- is judged exactly as before
+    # by the name list.
+    artifact_slots = {key for key, spec in (entry.get("proposal_bindings") or {}).items()
+                      if isinstance(spec, Mapping)
+                      and spec.get("type") in {"effect_result", "auto_path"}}
     for name in names:
-        if name in _WHOLE_REQUEST_INPUTS:
+        if name in _WHOLE_REQUEST_INPUTS or name in declared_whole:
             continue
         if _is_output_key(name, entry):
+            continue
+        if declared_whole and name in artifact_slots:
             continue
         return False
     return True

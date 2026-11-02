@@ -469,41 +469,62 @@ ROWS["file.directory_listing.v1"] = {
 }
 
 
-def _check_unbound_implementations() -> tuple[bool, list[dict]]:
-    """The two implementations no row binds yet are still checked, and said to be unbound.
+def _check_diff_agrees() -> tuple[bool, list[dict]]:
+    """`file.diff.v1` against the real `diff -u`, on a world this check writes."""
+    checks: list[dict] = []
+    left = _rel_in_world("five_lines.txt")
+    right = _rel_in_world("three_lines_b.txt")
+    out = _run_view("diff", {"path": left, "other_path": right})
+    expected = _real(["diff", "-u", left, right])
+    if expected is None:
+        checks.append({"name": "diff agrees with the real `diff -u`", "ok": True,
+                       "skipped": True, "reason": "COMMAND_NOT_INSTALLED:diff"})
+    else:
+        body = [line for line in out["answer"].splitlines() if not line.startswith(("---", "+++"))]
+        real_body = [line for line in expected.splitlines() if not line.startswith(("---", "+++"))]
+        checks.append({"name": "diff agrees with the real `diff -u` on every hunk line",
+                       "ok": body == real_body, "command_output": real_body,
+                       "adapter_returned": body})
+    same = _run_view("diff", {"path": left, "other_path": left})
+    checks.append({"name": "a file diffed against itself reports no differences",
+                   "ok": same.get("identical") is True and same.get("answer") == "",
+                   "adapter_returned": {"identical": same.get("identical"),
+                                        "answer": same.get("answer")}})
+    for label, args in (("refuses a path outside the repository",
+                         {"path": left, "other_path": "/etc/passwd"}),
+                        ("refuses a missing second file",
+                         {"path": left, "other_path": _rel_in_world("absent.txt")})):
+        try:
+            _run_view("diff", args)
+        except Exception as exc:  # noqa: BLE001 - any refusal is a refusal
+            checks.append({"name": label, "ok": True, "refused_with": str(exc)[:120]})
+        else:
+            checks.append({"name": label, "ok": False, "refused_with": None})
+    return all(c["ok"] for c in checks), checks
 
-    `diff` and `fgrep` live in the module and are exercised here because shipped
-    code that nothing measures is exactly how a claim outlives its evidence.
-    Neither is reachable from the front door: a two-operand binding does not
-    exist yet (measured refusal: `GOAL_INPUT_BINDING_REQUIRED ... other_path`).
+
+ROWS["file.diff.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-DIFF-001",
+    "claim": "produces the unified diff of the two files it was given, and reports identity honestly",
+    "check": _check_diff_agrees,
+}
+
+
+def _check_unbound_implementation() -> tuple[bool, list[dict]]:
+    """`fgrep` is implemented and NOT routed; the receipt says both.
+
+    A two-operand binding now exists -- it is what routes `diff` -- but fgrep
+    also needs a pattern read out of prose, and that grammar belongs to
+    `file.directory_search.v1`, which already answers the question at directory
+    scope. Two rows answering one question is not worth adding for a count.
     """
     checks: list[dict] = []
     from canonical.runtime import capability_composer_v1 as graph
 
     bound = set(graph.load_registry())
-    for cid, command in (("file.diff.v1", "diff"), ("file.search.literal.v1", "fgrep")):
-        checks.append({"name": "%s is not registered as reachable" % command,
-                       "ok": cid not in bound, "registered": cid in bound})
-    got = _run_view("diff", {"path": _rel_in_world("five_lines.txt"),
-                             "other_path": _rel_in_world("three_lines_b.txt")})
-    # The module produces the unified form, so the unified form is what it is
-    # compared against.  Comparing it to bare `diff` (historical normal format)
-    # failed on the first run and the claim, not the code, was wrong.
-    expected = _real(["diff", "-u", _rel_in_world("five_lines.txt"),
-                      _rel_in_world("three_lines_b.txt")])
-    if expected is None:
-        checks.append({"name": "diff agrees with the real `diff -u`", "ok": True,
-                       "skipped": True, "reason": "COMMAND_NOT_INSTALLED:diff"})
-    else:
-        # diff prints file names and timestamps in its header; the BODY is the
-        # diff.  Comparing whole output would fail on a timestamp and prove
-        # nothing, so the hunks are compared line for line.
-        body = [line for line in got["answer"].splitlines() if not line.startswith(("---", "+++"))]
-        real_body = [line for line in expected.splitlines() if not line.startswith(("---", "+++"))]
-        checks.append({"name": "diff agrees with the real `diff -u` on every hunk line",
-                       "ok": body == real_body, "command_output": real_body,
-                       "adapter_returned": body,
-                       "header_note": "diff -u prints its own headers; only hunk lines are compared"})
+    checks.append({"name": "fgrep is not registered as reachable",
+                   "ok": "file.search.literal.v1" not in bound,
+                   "registered": "file.search.literal.v1" in bound})
     got = _run_view("fgrep", {"pattern": "alpha", "path": _rel_in_world("unsorted.txt")})
     expected = _real(["grep", "-F", "alpha", _rel_in_world("unsorted.txt")])
     checks.append({"name": "fgrep agrees with the real `grep -F`",
@@ -512,11 +533,10 @@ def _check_unbound_implementations() -> tuple[bool, list[dict]]:
     return all(c["ok"] for c in checks), checks
 
 
-ROWS[  # noqa: B010 - one more row, declared beside the ones it belongs with
-    "file_command_view.diff_and_search.v1"] = {
+ROWS["file_command_view.fgrep_unrouted.v1"] = {
     "mission": "ASTRA-VERIFY-FILE-COMMAND-VIEW-UNBOUND-001",
-    "claim": "the shipped diff and fgrep implementations match the real commands and are not yet routed",
-    "check": _check_unbound_implementations,
+    "claim": "the shipped fgrep implementation matches the real command and is not routed",
+    "check": _check_unbound_implementation,
 }
 
 

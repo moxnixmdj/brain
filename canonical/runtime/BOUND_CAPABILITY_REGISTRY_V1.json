@@ -12629,6 +12629,97 @@
           "command": "directory_search"
         }
       }
+    },
+    "file.diff.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "diff",
+          "path": "${input.path}",
+          "other_path": "${input.other_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_command_view",
+      "computes_command": {
+        "argvs": [
+          [
+            "diff",
+            "${path}",
+            "${other_path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "unified diff computed in process (difflib); the receipt compares it with the real diff -u"
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "compare",
+        "differences between",
+        "diff the files",
+        "how do they differ"
+      ],
+      "limitations": [
+        "Produces the UNIFIED diff (`diff -u`), three lines of context -- not the historical default format.",
+        "Reads both files; never writes either, and refuses any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        },
+        "other_path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "compare.files"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "argv",
+        "argv_sha256",
+        "command",
+        "differences",
+        "identical",
+        "other_path",
+        "output_path",
+        "output_verified",
+        "path",
+        "schema"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIFF-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: the answer is compared with the real `diff -u` on a world this repository builds. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_command_view",
+          "command": "diff"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
