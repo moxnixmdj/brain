@@ -574,22 +574,31 @@ def confined_verified_perform(
     *,
     programs: Mapping[str, str] | None = None,
     checks: Mapping[str, Callable[[pathlib.Path], bool]] | None = None,
+    targets: Mapping[str, str] | None = None,
+    protected_tests: Sequence[str] = (),
     timeout: int = 30,
 ) -> Perform:
-    """Build a confined, independently checked `Perform` adapter for `Creature`.
+    """Build a staged, zero-ambient namespace + broker `Perform` adapter for `Creature`.
 
-    Never weakens `computer_execution_boundary_v1`: if OS confinement (`confine_v1`)
-    is unavailable or no program/check is bound for `work.id`, returns an honest
-    fail-closed blocked outcome without executing host commands.
+    Replaces live-workspace in-place execution with `brokered_workspace_execution_v1`:
+    - `workspace_root` is NEVER mounted inside the worker (`zero_ambient_namespace_launcher_v1`
+      mounts staged `/input` read-only and `/work` on private tmpfs).
+    - `checker(stage_dir)` verifies the candidate BEFORE a single byte in `workspace_root`
+      is touched; failed or scope-violating candidates leave `workspace_root` untouched.
+    - Fails closed (`computer_execution_boundary_v1.STATUS`) if namespace isolation is unavailable.
     """
+    import sys as _sys
+
     ws = pathlib.Path(workspace_root).resolve()
     prog_map = dict(programs or {})
     chk_map = dict(checks or {})
+    tgt_map = dict(targets or {})
+    prot_tuple = tuple(str(p) for p in protected_tests)
 
     def _perform(work: M.Work, _creature: Creature) -> dict[str, Any]:
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
         from canonical.runtime import computer_execution_boundary_v1 as boundary
         from canonical.runtime import confine_v1 as C
-        from canonical.runtime import solve_v1 as SV
 
         program = prog_map.get(work.id)
         checker = chk_map.get(work.id)
@@ -600,7 +609,7 @@ def confined_verified_perform(
                 "correct": None,
                 "blocked": "UNBOUND_WORK_PROGRAM_OR_CHECK",
             }
-        if not C.available():
+        if not C.available() or not broker.namespace_broker_available():
             return {
                 "ok": False,
                 "verified": True,
@@ -608,24 +617,36 @@ def confined_verified_perform(
                 "confined": False,
                 "blocked": boundary.STATUS,
             }
-        exec_res = SV.act(str(ws), program, timeout=timeout, network=False)
-        if not exec_res.get("confined"):
+        staged_res = broker.run_staged_confined_command(
+            ws,
+            [_sys.executable, "-I", "-c", program],
+            checker=checker,
+            publish=True,
+            target=tgt_map.get(work.id),
+            protected_tests=prot_tuple,
+            timeout=timeout,
+            task_id=f"creature:{work.id}",
+            goal=f"creature staged work {work.id}",
+        )
+        if not staged_res.get("confined"):
             return {
                 "ok": False,
                 "verified": True,
                 "correct": None,
                 "confined": False,
-                "blocked": boundary.STATUS,
+                "blocked": str(staged_res.get("blocked") or boundary.STATUS),
             }
-        passed_exec = exec_res.get("exit") == 0 and not exec_res.get("timed_out")
-        checked_ok = bool(passed_exec and checker(ws))
+        checked_ok = bool(staged_res.get("ok"))
         return {
             "ok": checked_ok,
             "verified": True,
             "correct": checked_ok,
             "confined": True,
-            "carrier_qualified": bool(exec_res.get("carrier_qualified")),
-            "blocked": None if checked_ok else "CHECK_FAILED",
+            "isolation_mode": staged_res.get("isolation_mode"),
+            "live_workspace_untouched": bool(staged_res.get("live_workspace_untouched")),
+            "published": bool(staged_res.get("published")),
+            "carrier_qualified": bool(staged_res.get("carrier_qualified")),
+            "blocked": staged_res.get("blocked"),
         }
 
     return _perform
@@ -643,6 +664,8 @@ def run_awake_creature_pulse(
     apply_verified_repairs: bool = False,
     max_curriculum_lessons: int = 2,
     channels: Sequence[str] | None = None,
+    speculative_work: Callable[[], Mapping[str, Any]] | None = None,
+    max_steps: int | None = None,
 ) -> dict[str, Any]:
     """Run one unified zero-LLM (`K3 = 0`) awake pulse through the single `Creature` organism."""
     from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
@@ -668,7 +691,12 @@ def run_awake_creature_pulse(
         creature_identity=identity,
         creature_life=life,
     )
-    return daemon.pulse(max_curriculum_lessons=max_curriculum_lessons, channels=channels)
+    return daemon.pulse(
+        max_curriculum_lessons=max_curriculum_lessons,
+        channels=channels,
+        speculative_work=speculative_work,
+        max_steps=max_steps,
+    )
 
 
 def boot(root: pathlib.Path | str, *, identity: str = "creature", life: float = 40.0

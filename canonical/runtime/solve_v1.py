@@ -301,6 +301,28 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
           learn: bool = True,
           skill_db: str | Path | None = None,
           staging_path: str | Path | None = None) -> dict:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _solve_impl(
+            goal,
+            root,
+            model=model,
+            steps=steps,
+            timeout=timeout,
+            learn=bool(learn and can_read_memory()),
+            skill_db=skill_db,
+            staging_path=staging_path,
+        )
+
+
+def _solve_impl(goal: str, root: str, model=None, steps: int = 6,
+                timeout: int = 120, *,
+                learn: bool = True,
+                skill_db: str | Path | None = None,
+                staging_path: str | Path | None = None) -> dict:
     """Plain goal in, work out.
 
     `model(goal, seeing)` returns a program, or None when it judges the

@@ -425,6 +425,38 @@ def solve_or_learn(
     allow_jit_network: bool = True,
     record_open_gap: bool = True,
 ) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _solve_or_learn_impl(
+            request,
+            learn=bool(learn and can_read_memory()),
+            registry_path=registry_path,
+            cwd=cwd,
+            db_path=db_path,
+            r3_state_path=r3_state_path,
+            allow_tier1_composition=allow_tier1_composition,
+            allow_tier2_learning=allow_tier2_learning,
+            allow_jit_network=allow_jit_network,
+            record_open_gap=bool(record_open_gap and learn and can_read_memory()),
+        )
+
+
+def _solve_or_learn_impl(
+    request: Mapping[str, Any] | str,
+    *,
+    learn: bool = True,
+    registry_path: str | None = None,
+    cwd: str | pathlib.Path | None = None,
+    db_path: str | pathlib.Path | None = None,
+    r3_state_path: str | pathlib.Path | None = None,
+    allow_tier1_composition: bool = True,
+    allow_tier2_learning: bool = True,
+    allow_jit_network: bool = True,
+    record_open_gap: bool = True,
+) -> dict[str, Any]:
     """Execute a request at maximum speed, or learn & crystallize the missing skill in-run."""
     t0 = perf_counter_ns()
     if isinstance(request, str):

@@ -181,6 +181,21 @@ def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str
             return ("HOLE", hole_by_ident[txt])
         return ("ATOM", txt)
 
+    # Single-arg call `fn(arg)` (e.g. `int(x <= hi)`, `bool(a < b)`, `abs(x - y)`)
+    if t in ("call", "call_expression"):
+        children = [c for c in node.children if c.is_named]
+        if len(children) >= 2:
+            callee, args_node = children[0], children[1]
+            callee_txt = _node_text(callee, raw).strip()
+            arg_named = [c for c in args_node.children if c.is_named]
+            if len(arg_named) == 1 and re.fullmatch(r"[A-Za-z_$][\w$]*", callee_txt):
+                fn_sk = (
+                    ("HOLE", hole_by_ident[callee_txt])
+                    if (hole_by_ident and callee_txt in hole_by_ident)
+                    else ("ATOM", callee_txt)
+                )
+                return ("CALL1", fn_sk, cst_to_canonical_expr(arg_named[0], raw, hole_by_ident))
+
     # Zero-arg member method call `recv.method()` (e.g. `hook.has_spec()`, `spec.hasSpec()`)
     m_call0 = re.fullmatch(r"([A-Za-z_$][\w$]*)\s*\.\s*([A-Za-z_$][\w$]*)\s*\(\s*\)", txt)
     if m_call0:
@@ -189,7 +204,11 @@ def cst_to_canonical_expr(node: Any, raw: bytes, hole_by_ident: Mapping[str, str
         m_sk = ("HOLE", hole_by_ident[m_tok]) if (hole_by_ident and m_tok in hole_by_ident) else ("ATOM", m_tok)
         return ("MCALL0", r_sk, m_sk)
 
-    # Opaque sub-expression (e.g., `a[i]`, `obj.field`, `foo(bar)`): binds against a `?id` hole!
+    # Opaque sub-expression (e.g., `a[i]`, `obj.field`, `foo(bar, baz)`): binds against a `?id`/`?expr` hole!
+    if hole_by_ident:
+        found_holes = [h for syn, h in hole_by_ident.items() if syn in txt]
+        if found_holes:
+            return ("OPAQUE_WITH_HOLES", txt, tuple(sorted(set(found_holes))))
     return ("OPAQUE", txt)
 
 
@@ -202,6 +221,12 @@ def render_canonical_expr(expr: tuple[Any, ...], target_language: str, bindings:
         return val if val is not None else None
     if kind in ("NUM", "ATOM", "OPAQUE"):
         return str(expr[1])
+    if kind == "CALL1":
+        fn_s = render_canonical_expr(expr[1], lang, bindings)
+        arg_s = render_canonical_expr(expr[2], lang, bindings)
+        if fn_s is None or arg_s is None:
+            return None
+        return f"{fn_s}({arg_s})"
     if kind == "MCALL0":
         r_s = render_canonical_expr(expr[1], lang, bindings)
         m_s = render_canonical_expr(expr[2], lang, bindings)
@@ -274,6 +299,10 @@ def _unify_skeleton(pattern: tuple[Any, ...], concrete: tuple[Any, ...], binding
         return _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text)
     if p_kind == "UNOP":
         return pattern[1] == concrete[1] and _unify_skeleton(pattern[2], concrete[2], bindings, raw_expr_text)
+    if p_kind == "CALL1":
+        return _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text) and _unify_skeleton(
+            pattern[2], concrete[2], bindings, raw_expr_text
+        )
     if p_kind == "MCALL0":
         return _unify_skeleton(pattern[1], concrete[1], bindings, raw_expr_text) and _unify_skeleton(
             pattern[2], concrete[2], bindings, raw_expr_text
@@ -395,9 +424,11 @@ def compile_rule_to_cst_skeleton(rule: Mapping[str, Any]) -> dict[str, Any] | No
             holes.add(str(sk[1]))
         elif sk[0] == "ATOM":
             atoms.add(str(sk[1]))
+        elif sk[0] == "OPAQUE_WITH_HOLES":
+            holes.update(str(h) for h in sk[2])
         elif sk[0] in ("LEN", "UNOP"):
             _collect_atoms_and_holes(sk[-1], atoms, holes)
-        elif sk[0] in ("BINOP", "MCALL0"):
+        elif sk[0] in ("BINOP", "MCALL0", "CALL1"):
             _collect_atoms_and_holes(sk[-2], atoms, holes)
             _collect_atoms_and_holes(sk[-1], atoms, holes)
 
@@ -414,6 +445,92 @@ def compile_rule_to_cst_skeleton(rule: Mapping[str, Any]) -> dict[str, Any] | No
         "replacement_skeleton": rep_skel,
         "is_return_anchored": is_return_anchored,
     }
+
+
+def _skel_has_hole(sk: tuple[Any, ...]) -> bool:
+    kind = sk[0]
+    if kind in ("HOLE", "OPAQUE_WITH_HOLES"):
+        return True
+    if kind in ("LEN", "UNOP"):
+        return _skel_has_hole(sk[-1])
+    if kind in ("BINOP", "MCALL0", "CALL1"):
+        return _skel_has_hole(sk[-2]) or _skel_has_hole(sk[-1])
+    return False
+
+
+def minimize_cst_skeleton_pair(
+    pat_skel: tuple[Any, ...],
+    rep_skel: tuple[Any, ...],
+) -> tuple[tuple[Any, ...], tuple[Any, ...]] | None:
+    """Extract the lowest common changed CST expression subtree and abstract compound operands into `?expr` holes."""
+    p, r = pat_skel, rep_skel
+    # 1. Peel unchanged outer expression wrappers (`int(x <= hi) + 1` -> `x <= hi`)
+    while p != r and p[0] == r[0]:
+        k = p[0]
+        if k == "LEN":
+            p, r = p[1], r[1]
+            continue
+        if k == "UNOP" and p[1] == r[1]:
+            p, r = p[2], r[2]
+            continue
+        if k == "CALL1" and p[1] == r[1]:
+            p, r = p[2], r[2]
+            continue
+        if k == "BINOP" and p[1] == r[1]:
+            if p[2] == r[2] and p[3] != r[3]:
+                p, r = p[3], r[3]
+                continue
+            if p[3] == r[3] and p[2] != r[2]:
+                p, r = p[2], r[2]
+                continue
+        break
+
+    # 2. Abstract unchanged compound operand subtrees (e.g. `(x + 1)`, `a[i]`) into `?exprK` holes
+    subtree_to_hole: dict[tuple[Any, ...], str] = {}
+
+    def _abstract_child(cp: tuple[Any, ...], cr: tuple[Any, ...]) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
+        if cp == cr and cp[0] != "HOLE" and _skel_has_hole(cp):
+            h = subtree_to_hole.get(cp)
+            if h is None:
+                h = f"?expr{len(subtree_to_hole)}"
+                subtree_to_hole[cp] = h
+            hole_node = ("HOLE", h)
+            return hole_node, hole_node
+        return cp, cr
+
+    if p[0] == "BINOP" and r[0] == "BINOP":
+        lp, lr = _abstract_child(p[2], r[2])
+        rp, rr = _abstract_child(p[3], r[3])
+        p = ("BINOP", p[1], lp, rp)
+        r = ("BINOP", r[1], lr, rr)
+    elif p[0] == "UNOP" and r[0] == "UNOP":
+        op_p, op_r = _abstract_child(p[2], r[2])
+        p = ("UNOP", p[1], op_p)
+        r = ("UNOP", r[1], op_r)
+    elif p[0] == "LEN" and r[0] == "BINOP":
+        lp, lr = _abstract_child(p[1], r[2])
+        p = ("LEN", lp)
+        r = ("BINOP", r[1], lr, r[3])
+
+    if p == r or p[0] in ("OPAQUE", "OPAQUE_WITH_HOLES") or r[0] in ("OPAQUE", "OPAQUE_WITH_HOLES"):
+        return None
+
+    def _holes_of(sk: tuple[Any, ...], out: set[str]) -> None:
+        if sk[0] == "HOLE":
+            out.add(str(sk[1]))
+        elif sk[0] in ("LEN", "UNOP"):
+            _holes_of(sk[-1], out)
+        elif sk[0] in ("BINOP", "MCALL0", "CALL1"):
+            _holes_of(sk[-2], out)
+            _holes_of(sk[-1], out)
+
+    ph: set[str] = set()
+    rh: set[str] = set()
+    _holes_of(p, ph)
+    _holes_of(r, rh)
+    if not ph or not rh.issubset(ph):
+        return None
+    return p, r
 
 
 def _is_in_return_or_tail_position(node: Any, target_language: str) -> bool:
@@ -443,6 +560,8 @@ def iter_cst_skeleton_candidates(
     *,
     target_language: str,
     max_candidates: int = 16,
+    minimize: bool = False,
+    suspect_lines: Sequence[int] | None = None,
 ) -> Iterator[str]:
     """Yield syntactically valid `target_language` rewrites via Tree-Sitter CST skeleton unification."""
     lang = target_language.lower()
@@ -452,8 +571,16 @@ def iter_cst_skeleton_candidates(
     if compiled is None:
         return
 
-    pat_skel = compiled["pattern_skeleton"]
-    rep_skel = compiled["replacement_skeleton"]
+    skeleton_pairs: list[tuple[tuple[Any, ...], tuple[Any, ...]]] = [
+        (compiled["pattern_skeleton"], compiled["replacement_skeleton"])
+    ]
+    if minimize:
+        minimized = minimize_cst_skeleton_pair(
+            compiled["pattern_skeleton"],
+            compiled["replacement_skeleton"],
+        )
+        if minimized is not None and minimized not in skeleton_pairs:
+            skeleton_pairs.append(minimized)
     ret_only = bool(compiled["is_return_anchored"])
 
     raw = source_text.encode("utf-8")
@@ -469,45 +596,57 @@ def iter_cst_skeleton_candidates(
     stack = [tree.root_node]
     while stack:
         nd = stack.pop()
-        if nd.type in _BINARY_NODE_TYPES or nd.type in _UNARY_NODE_TYPES or _extract_len_arg(nd, raw) is not None:
+        if (
+            nd.type in _BINARY_NODE_TYPES
+            or nd.type in _UNARY_NODE_TYPES
+            or nd.type in ("call", "call_expression")
+            or _extract_len_arg(nd, raw) is not None
+        ):
             expr_nodes.append(nd)
         stack.extend(reversed(nd.children))
 
     yielded = 0
     seen: set[str] = {source_text}
-    # Prefer return/tail-anchored matches first when the taught rule was a return expression,
-    # then offer general expression sites if needed (verifier always decides!).
-    ordered_nodes = (
-        [n for n in expr_nodes if _is_in_return_or_tail_position(n, lang)]
-        + [n for n in expr_nodes if not _is_in_return_or_tail_position(n, lang)]
-        if ret_only
-        else expr_nodes
-    )
+    suspect_set = [int(ln) for ln in (suspect_lines or ()) if isinstance(ln, int) and ln > 0]
+    if suspect_set:
+        ordered_nodes = sorted(
+            expr_nodes,
+            key=lambda n: (
+                min(abs((int(n.start_point[0]) + 1) - ln) for ln in suspect_set),
+                0 if (ret_only and _is_in_return_or_tail_position(n, lang)) else 1,
+                int(n.start_byte),
+            ),
+        )
+    elif ret_only:
+        ordered_nodes = (
+            [n for n in expr_nodes if _is_in_return_or_tail_position(n, lang)]
+            + [n for n in expr_nodes if not _is_in_return_or_tail_position(n, lang)]
+        )
+    else:
+        ordered_nodes = expr_nodes
 
-    for nd in ordered_nodes:
-        bindings: dict[str, str] = {}
-        conc = cst_to_canonical_expr(nd, raw, None)
-        # Re-walk concrete sub-nodes so `HOLE` binds exact concrete sub-expression source text
-        if not _unify_cst_node_directly(pat_skel, nd, raw, bindings):
-            continue
-        _ = conc
-        repl_str = render_canonical_expr(rep_skel, lang, bindings)
-        if not repl_str:
-            continue
-        cand_bytes = raw[:nd.start_byte] + repl_str.encode("utf-8") + raw[nd.end_byte:]
-        try:
-            cand_tree = tsk.parse_bytes(lang, cand_bytes)
-            if getattr(cand_tree.root_node, "has_error", False):
+    for pat_skel, rep_skel in skeleton_pairs:
+        for nd in ordered_nodes:
+            bindings: dict[str, str] = {}
+            if not _unify_cst_node_directly(pat_skel, nd, raw, bindings):
                 continue
-            cand_text = cand_bytes.decode("utf-8")
-        except Exception:
-            continue
-        if cand_text not in seen:
-            seen.add(cand_text)
-            yielded += 1
-            yield cand_text
-            if yielded >= max_candidates:
-                return
+            repl_str = render_canonical_expr(rep_skel, lang, bindings)
+            if not repl_str:
+                continue
+            cand_bytes = raw[:nd.start_byte] + repl_str.encode("utf-8") + raw[nd.end_byte:]
+            try:
+                cand_tree = tsk.parse_bytes(lang, cand_bytes)
+                if getattr(cand_tree.root_node, "has_error", False):
+                    continue
+                cand_text = cand_bytes.decode("utf-8")
+            except Exception:
+                continue
+            if cand_text not in seen:
+                seen.add(cand_text)
+                yielded += 1
+                yield cand_text
+                if yielded >= max_candidates:
+                    return
 
 
 def _unify_cst_node_directly(
@@ -517,17 +656,24 @@ def _unify_cst_node_directly(
     bindings: dict[str, str],
 ) -> bool:
     """Unify `pat_skel` directly against a concrete Tree-Sitter CST node, binding exact source slices."""
+    orig_node = node
     node = _unwrap_expr(node)
     kind = pat_skel[0]
     if kind == "HOLE":
         h_name = str(pat_skel[1])
-        txt = _node_text(node, raw).strip()
-        if h_name.startswith("?num") and not (node.type in _NUM_NODE_TYPES or re.fullmatch(r"\d+(?:\.\d+)?", txt)):
+        unwrapped_txt = _node_text(node, raw).strip()
+        raw_txt = _node_text(orig_node, raw).strip()
+        if h_name.startswith("?num") and not (
+            node.type in _NUM_NODE_TYPES or re.fullmatch(r"\d+(?:\.\d+)?", unwrapped_txt)
+        ):
             return False
+        # Preserve original parentheses when binding compound sub-expressions so precedence never shifts
+        bound_txt = raw_txt if orig_node.type == "parenthesized_expression" else unwrapped_txt
         prev = bindings.get(h_name)
-        if prev is not None and prev != txt:
+        if prev is not None and prev.strip("() ") != unwrapped_txt.strip("() "):
             return False
-        bindings[h_name] = txt
+        if prev is None:
+            bindings[h_name] = bound_txt
         return True
 
     if kind == "LEN":
@@ -535,6 +681,21 @@ def _unify_cst_node_directly(
         if arg_nd is None:
             return False
         return _unify_cst_node_directly(pat_skel[1], arg_nd, raw, bindings)
+
+    if kind == "CALL1":
+        if node.type not in ("call", "call_expression"):
+            return False
+        children = [c for c in node.children if c.is_named]
+        if len(children) < 2:
+            return False
+        callee, args_node = children[0], children[1]
+        arg_named = [c for c in args_node.children if c.is_named]
+        if len(arg_named) != 1:
+            return False
+        callee_txt = _node_text(callee, raw).strip()
+        return _unify_skeleton(pat_skel[1], ("ATOM", callee_txt), bindings, callee_txt) and _unify_cst_node_directly(
+            pat_skel[2], arg_named[0], raw, bindings
+        )
 
     if kind == "NUM":
         return _node_text(node, raw).strip() == str(pat_skel[1])
@@ -588,6 +749,9 @@ def recall_across_languages_cst(
     verifier: Any,
     error_class: str | None = None,
     source_languages: Sequence[str] | None = None,
+    minimize: bool = False,
+    suspect_lines: Sequence[int] | None = None,
+    rule_filter: Any = None,
 ) -> dict[str, Any] | None:
     """Propose cross-language rewrites over Tree-Sitter CST skeletons (`7` code languages), gated by `verifier`."""
     if not callable(verifier):
@@ -605,11 +769,19 @@ def recall_across_languages_cst(
         except TypeError:
             rules = store.lookup_rules(src_lang)
         for rule in rules:
+            if callable(rule_filter) and not rule_filter(rule):
+                continue
             sid = str(rule.get("skill_id") or "")
             if sid and sid in seen_skills:
                 continue
             seen_skills.add(sid)
-            for cand in iter_cst_skeleton_candidates(source_text, rule, target_language=tgt):
+            for cand in iter_cst_skeleton_candidates(
+                source_text,
+                rule,
+                target_language=tgt,
+                minimize=minimize,
+                suspect_lines=suspect_lines,
+            ):
                 try:
                     ok = bool(verifier(cand))
                 except Exception:

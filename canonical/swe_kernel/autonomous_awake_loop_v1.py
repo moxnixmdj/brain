@@ -174,24 +174,58 @@ def _propose_deterministic_ast_repairs(source_text: str, max_candidates: int = 2
     return out
 
 
-def _run_py_test_file(test_file: pathlib.Path, cwd: pathlib.Path, timeout: float = 8.0) -> tuple[bool, str]:
-    """Execute a Python test file (`unittest` / plain `assert` script / `pytest`) fast without stale `.pyc`."""
-    for pyc_dir in cwd.glob("**/__pycache__"):
-        shutil.rmtree(pyc_dir, ignore_errors=True)
-    env = dict(os.environ)
-    env["PYTHONDONTWRITEBYTECODE"] = "1"
-    env["PYTHONPATH"] = str(cwd) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
-    txt = test_file.read_text(encoding="utf-8", errors="replace")
-    if "def test_" in txt and "__main__" not in txt:
-        cmd = [sys.executable, "-B", "-m", "pytest", "-q", "--tb=short", str(test_file)]
-    else:
-        cmd = [sys.executable, "-B", str(test_file)]
+def _atomic_write_text(dest: pathlib.Path, content: str) -> None:
+    """Atomically write UTF-8 text via sibling temporary file + fsync + os.replace."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp_name: str | None = None
     try:
-        proc = subprocess.run(cmd, cwd=str(cwd), env=env, capture_output=True, text=True, timeout=timeout)
-    except subprocess.TimeoutExpired:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=dest.parent,
+            prefix=".brain-awake-",
+            delete=False,
+        ) as handle:
+            tmp_name = handle.name
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp_name, dest)
+        tmp_name = None
+    finally:
+        if tmp_name is not None:
+            pathlib.Path(tmp_name).unlink(missing_ok=True)
+
+
+def _run_py_test_file(test_file: pathlib.Path, cwd: pathlib.Path, timeout: float = 8.0) -> tuple[bool, str]:
+    """Execute a Python test file inside staged zero-ambient namespace confinement (`brokered_workspace_execution_v1`)."""
+    from canonical.runtime import brokered_workspace_execution_v1 as broker
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    cwd_res = cwd.resolve()
+    tf_res = test_file.resolve()
+    rel_tf = tf_res.relative_to(cwd_res).as_posix()
+    txt = tf_res.read_text(encoding="utf-8", errors="replace")
+    if "def test_" in txt and "__main__" not in txt:
+        cmd = [sys.executable, "-B", "-m", "pytest", "-q", "--tb=short", rel_tf]
+    else:
+        cmd = [sys.executable, "-B", rel_tf]
+    res = broker.run_staged_confined_command(
+        cwd_res,
+        cmd,
+        publish=False,
+        allow_cow_hardlinks=True,
+        pythonpath_work=True,
+        timeout=max(4, int(round(timeout))),
+        task_id=f"awake-test:{rel_tf}",
+        goal=f"run sandbox test {rel_tf}",
+    )
+    if not res.get("confined"):
+        return False, str(res.get("blocked") or boundary.STATUS)
+    if res.get("timed_out"):
         return False, "TIMEOUT"
-    combined = (proc.stdout or "") + "\n" + (proc.stderr or "")
-    return proc.returncode == 0, combined[-600:]
+    combined = (str(res.get("stdout") or "")) + "\n" + (str(res.get("stderr") or ""))
+    return bool(res.get("ok")), combined[-600:]
 
 
 def _build_twin_callable_oracle(
@@ -592,7 +626,12 @@ class AwakeAgencyDaemon:
                     passed, _ = _run_py_test_file(cow_tf, cow_root)
                     return passed
 
-                # Tier A: Scoped TEST_SUITE recall (PR-C2 narrowed_pattern + operator/semantic/E-Graph),
+                suspect_lines = [
+                    int(m)
+                    for m in re.findall(rf'{re.escape(cow_mod.name)}", line (\d+)', fail_out)
+                ]
+
+                # Tier A: Scoped TEST_SUITE recall (PR-C2 AST/CST narrowed_pattern + operator/semantic/E-Graph),
                 # falling back strictly to context-anchored CALLER_PREDICATE (no broadening) for legacy rules.
                 recalled = self.skill_store.recall_and_apply_verified(
                     source_text=before_src,
@@ -600,8 +639,9 @@ class AwakeAgencyDaemon:
                     verifier=project_oracle,
                     required_verification_kind="TEST_SUITE",
                     scope_id=_awake_scope,
-                    context={"dependencies": {}, "preconditions": {}},
+                    context={"dependencies": {}, "preconditions": {}, "suspect_lines": suspect_lines},
                     allow_scope_escalation=True,
+                    suspect_lines=suspect_lines,
                 )
                 if recalled is None:
                     cow_write_text(cow_mod, before_src)
@@ -610,12 +650,13 @@ class AwakeAgencyDaemon:
                         language="python",
                         verifier=_verify_in_cow,
                         allow_scope_escalation=False,
+                        suspect_lines=suspect_lines,
                     )
                 if recalled is not None:
                     patched = str(recalled["patched_source"])
                     cow_write_text(cow_mod, patched)
                     if self.apply_verified_repairs:
-                        (self.workspace_root / rel_mod).write_text(patched, encoding="utf-8")
+                        _atomic_write_text(self.workspace_root / rel_mod, patched)
                     repaired_records.append({
                         "module": str(rel_mod),
                         "mode": "VERIFIED_SKILL_RECALL",
@@ -624,10 +665,13 @@ class AwakeAgencyDaemon:
                     })
                     continue
 
-                # Tier B: Zero-LLM STUN guard synthesis + deterministic AST synthesis in CoW twin!
+                # Tier B: Zero-LLM STUN guard synthesis + deterministic AST synthesis!
+                # Fast in-memory twin screening (`< 0.1 ms`) prunes dead candidates before
+                # full staged namespace-isolated test verification (`_verify_in_cow`).
                 solved_src: str | None = None
                 all_cands = propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12) + _propose_deterministic_ast_repairs(before_src)
-                for cand in all_cands:
+                shortlisted = [c for c in all_cands if oracle(c)]
+                for cand in (shortlisted if shortlisted else all_cands[:4]):
                     if _verify_in_cow(cand):
                         solved_src = cand
                         break
@@ -642,9 +686,9 @@ class AwakeAgencyDaemon:
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                (self.workspace_root / rel_rep).write_text(
+                                _atomic_write_text(
+                                    self.workspace_root / rel_rep,
                                     (cow_root / rel_rep).read_text(encoding="utf-8"),
-                                    encoding="utf-8",
                                 )
                         repaired_records.append({
                             "module": ",".join(coupled_out.get("files_repaired") or []),
@@ -684,7 +728,7 @@ class AwakeAgencyDaemon:
                         str(cryst["skill_id"]),
                     )
                 if self.apply_verified_repairs:
-                    (self.workspace_root / rel_mod).write_text(solved_src, encoding="utf-8")
+                    _atomic_write_text(self.workspace_root / rel_mod, solved_src)
                 repaired_records.append({
                     "module": str(rel_mod),
                     "mode": "AUTONOMOUS_COW_SYNTHESIS_AND_CRYSTALLIZATION",
@@ -1096,10 +1140,19 @@ class AwakeAgencyDaemon:
 
         return discover_symbolic_or_scientific_law(problem)
 
-    def pulse(self, *, max_curriculum_lessons: int = 2, channels: Sequence[str] | None = None) -> dict[str, Any]:
-        """Run one complete zero-LLM awake cycle: sense -> V9 meta-policy -> CoW experiment -> scope probing -> study gaps -> R3 queue drain."""
+    def pulse(
+        self,
+        *,
+        max_curriculum_lessons: int = 2,
+        channels: Sequence[str] | None = None,
+        speculative_work: Callable[[], Mapping[str, Any]] | None = None,
+        max_steps: int | None = None,
+    ) -> dict[str, Any]:
+        """Run one complete zero-LLM awake cycle orchestrated through `Creature.author_board` + `Creature.step`."""
+        from canonical.runtime import mortality_and_triage_v1 as M
         from canonical.runtime import meta_learning_policy_v9 as mlp
         from canonical.runtime import meta_strategy_abstraction_v9 as msa
+        from canonical.runtime import self_authored_obligations_v1 as A
 
         t0 = time.perf_counter()
         self.cycle_count += 1
@@ -1119,23 +1172,12 @@ class AwakeAgencyDaemon:
 
         raw_open = ledger.open_gaps(path=self.ledger_path)
         open_before = int(raw_open) if isinstance(raw_open, int) else len(raw_open)
-        t_exp = time.perf_counter()
-        exp_out = self.experiment_in_cow_sandbox()
-        if exp_out.get("repaired") or exp_out.get("pass"):
-            self.record_verified_meta_episode_and_strategy(
-                f"awake-cow-{self.cycle_count}",
-                context_features=ctx_feats,
-                strategy_id=f"cow-zygote-repair-c{self.cycle_count}",
-                steps=["sense", "localize", "synthesize", "verify", "crystallize"],
-                burden_before=max(1, open_before + 1),
-                burden_after=open_before,
-                wall_clock_s=time.perf_counter() - t_exp,
-            )
 
-        scope_audits = self.self_falsify_and_narrow_rule_scopes()
-
-        # Study top-ranked open gaps in this daemon's ledger + compute capability-first Pareto priority
-        ranked = ledger.rank(limit=max(1, max_curriculum_lessons), path=self.ledger_path)
+        ranked = (
+            ledger.rank(limit=max_curriculum_lessons, path=self.ledger_path)
+            if max_curriculum_lessons > 0
+            else []
+        )
         pareto_schedule: dict[str, Any] | None = None
         if ranked:
             try:
@@ -1159,34 +1201,179 @@ class AwakeAgencyDaemon:
                 pareto_schedule = self.schedule_pareto_capability_work(work_rows)["ranked_work"]
             except Exception:
                 pareto_schedule = None
+
+        # Author genuine world obligations onto self.creature (`self_authored_obligations_v1.author`)
+        # so `Creature.step()` governs selection via `Standing.will_trade_on_the_unverifiable()`
+        # and `mortality_and_triage_v1.choose_next(self.creature._life, pool)`.
+        ep_num = (
+            int(self.creature._self.state.epoch)
+            if (self.creature._self is not None and self.creature._self.state is not None)
+            else 1
+        )
+        cow_wid = f"awake:cow_repair:e{ep_num}:c{self.cycle_count}"
+        gov_wid = f"awake:r3_scope:e{ep_num}:c{self.cycle_count}"
+        spec_wid = f"awake:speculative:e{ep_num}:c{self.cycle_count}"
+        gap_map: dict[str, tuple[int, dict[str, Any]]] = {}
+
+        def _slot_check(slot_key: str) -> Callable[[Mapping[str, Any]], bool]:
+            return lambda w: isinstance(w.get("obligations"), Mapping) and w["obligations"].get(slot_key) == "verified_closed"
+
+        proposals: list[A.Proposal] = [
+            A.Proposal(
+                id=cow_wid,
+                claim="Workspace failing Python tests localized, repaired, and verified in staged confinement",
+                source="workspace_test_observation",
+                check=_slot_check(cow_wid),
+                value=8.0,
+                cost=0.5,
+                checkable=True,
+            ),
+        ]
+        for idx_g, gap in enumerate(ranked):
+            g_wid = f"awake:gap:e{ep_num}:c{self.cycle_count}:{idx_g}"
+            gap_map[g_wid] = (idx_g, gap)
+            proposals.append(
+                A.Proposal(
+                    id=g_wid,
+                    claim=f"Curriculum gap {gap.get('id')} studied and verified",
+                    source="ignorance_ledger",
+                    check=_slot_check(g_wid),
+                    value=max(1.5, float(gap.get("priority", 2.0)) * 2.0),
+                    cost=min(1.5, max(0.25, round(float(gap.get("cost", 1.0)) * 0.25, 3))),
+                    checkable=True,
+                )
+            )
+        proposals.append(
+            A.Proposal(
+                id=gov_wid,
+                claim="Rule scopes falsified and R3 improvement queue advanced",
+                source="r3_governance_queue",
+                check=_slot_check(gov_wid),
+                value=2.0,
+                cost=0.25,
+                checkable=True,
+            )
+        )
+        if speculative_work is not None:
+            proposals.append(
+                A.Proposal(
+                    id=spec_wid,
+                    claim="Unverified speculative exploration opportunity",
+                    source="speculative_channel",
+                    check=_slot_check(spec_wid),
+                    value=12.0,
+                    cost=0.25,
+                    checkable=False,
+                )
+            )
+
+        world_before = {"obligations": {p.id: "open" for p in proposals}}
+        world_done = {"obligations": {p.id: "verified_closed" for p in proposals}}
+        authored_metrics = self.creature.author_board(proposals, before=world_before, done=world_done)
+
+        exp_out: dict[str, Any] = {
+            "tested": 0,
+            "failures_found": 0,
+            "repaired": 0,
+            "repairs": [],
+            "shed_by_mortality": True,
+        }
+        scope_audits: list[dict[str, Any]] = []
         lessons: list[dict[str, Any]] = []
         promoted_workflows: list[str] = []
-        for idx_g, gap in enumerate(ranked):
-            t_g = time.perf_counter()
-            st = cur.study(gap, channels=channels)
-            if st.get("pass"):
-                ledger.resolve(gap["id"], helped=True, close=True, path=self.ledger_path)
-                prom = promote_closed_lesson_to_workflow_db(
-                    gap["what"],
-                    st.get("closed_by"),
-                    st.get("attempts") or [],
-                    db_path=self.workflow_db_path,
-                    source_cwd=self.workspace_root,
+        r3_drain: dict[str, Any] = {"drained": 0, "shed_by_mortality": True}
+        r3_fixed_point: dict[str, Any] = {"converged": False, "shed_by_mortality": True}
+        speculative_outcome: Mapping[str, Any] | None = None
+
+        def _awake_perform(work: M.Work, _c: Any) -> dict[str, Any]:
+            nonlocal exp_out, scope_audits, r3_drain, r3_fixed_point, speculative_outcome
+            if work.id == cow_wid:
+                t_exp = time.perf_counter()
+                exp_out = self.experiment_in_cow_sandbox()
+                rep_n = int(exp_out.get("repaired") or 0)
+                fail_n = int(exp_out.get("failures_found") or 0)
+                if rep_n > 0 or exp_out.get("pass"):
+                    self.record_verified_meta_episode_and_strategy(
+                        f"awake-cow-{self.cycle_count}",
+                        context_features=ctx_feats,
+                        strategy_id=f"cow-zygote-repair-c{self.cycle_count}",
+                        steps=["sense", "localize", "synthesize", "verify", "crystallize"],
+                        burden_before=max(1, open_before + 1),
+                        burden_after=open_before,
+                        wall_clock_s=time.perf_counter() - t_exp,
+                    )
+                clean_or_repaired = (rep_n > 0) or (fail_n == 0)
+                return {
+                    "ok": clean_or_repaired,
+                    "verified": True,
+                    "correct": True if rep_n > 0 else (None if fail_n == 0 else False),
+                    "value": work.value if rep_n > 0 else 0.0,
+                }
+            if work.id in gap_map:
+                idx_g, gap = gap_map[work.id]
+                t_g = time.perf_counter()
+                st = cur.study(gap, channels=channels)
+                passed = bool(st.get("pass"))
+                if passed:
+                    ledger.resolve(gap["id"], helped=True, close=True, path=self.ledger_path)
+                    prom = promote_closed_lesson_to_workflow_db(
+                        gap["what"],
+                        st.get("closed_by"),
+                        st.get("attempts") or [],
+                        db_path=self.workflow_db_path,
+                        source_cwd=self.workspace_root,
+                    )
+                    if prom.get("promoted") and prom.get("skill_id"):
+                        promoted_workflows.append(str(prom["skill_id"]))
+                    self.record_verified_meta_episode_and_strategy(
+                        f"awake-gap-{self.cycle_count}-{idx_g}",
+                        context_features=ctx_feats,
+                        strategy_id=f"curriculum-gap-study-{st.get('closed_by') or idx_g}",
+                        steps=["sense", "probe", "verify", "crystallize"],
+                        burden_before=max(1, open_before),
+                        burden_after=max(0, open_before - 1),
+                        wall_clock_s=time.perf_counter() - t_g,
+                    )
+                else:
+                    ledger.resolve(gap["id"], helped=False, close=False, path=self.ledger_path)
+                lessons.append(st)
+                return {
+                    "ok": passed,
+                    "verified": True,
+                    "correct": passed,
+                    "value": work.value if passed else 0.0,
+                }
+            if work.id == gov_wid:
+                scope_audits = self.self_falsify_and_narrow_rule_scopes()
+                r3_drain = self.drain_r3_self_improvement_queue(max_actions=2)
+                r3_fixed_point = self.drive_r3_to_verified_fixed_point(
+                    max_rounds=4,
+                    max_actions_per_round=4,
                 )
-                if prom.get("promoted") and prom.get("skill_id"):
-                    promoted_workflows.append(str(prom["skill_id"]))
-                self.record_verified_meta_episode_and_strategy(
-                    f"awake-gap-{self.cycle_count}-{idx_g}",
-                    context_features=ctx_feats,
-                    strategy_id=f"curriculum-gap-study-{st.get('closed_by') or idx_g}",
-                    steps=["sense", "probe", "verify", "crystallize"],
-                    burden_before=max(1, open_before),
-                    burden_after=max(0, open_before - 1),
-                    wall_clock_s=time.perf_counter() - t_g,
-                )
-            else:
-                ledger.resolve(gap["id"], helped=False, close=False, path=self.ledger_path)
-            lessons.append(st)
+                return {
+                    "ok": True,
+                    "verified": True,
+                    "correct": True if scope_audits or r3_drain.get("drained") else None,
+                    "value": work.value,
+                }
+            if work.id == spec_wid and speculative_work is not None:
+                speculative_outcome = dict(speculative_work() or {})
+                ok_s = bool(speculative_outcome.get("ok", True))
+                return {
+                    "ok": ok_s,
+                    "verified": False,
+                    "correct": None,
+                    "value": work.value if ok_s else 0.0,
+                }
+            return {"ok": False, "verified": None, "correct": None, "blocked": "UNKNOWN_AWAKE_WORK"}
+
+        creature_steps: list[dict[str, Any]] = []
+        step_budget = (len(proposals) * 2) if max_steps is None else max(1, int(max_steps))
+        for _ in range(step_budget):
+            step_row = self.creature.step(_awake_perform)
+            creature_steps.append(step_row)
+            if step_row.get("status") != "WORKED":
+                break
 
         meta_abstraction_candidate: dict[str, Any] | None = None
         if len(self.verified_strategies) >= 2:
@@ -1195,47 +1382,15 @@ class AwakeAgencyDaemon:
             except Exception:
                 meta_abstraction_candidate = None
 
-        r3_drain = self.drain_r3_self_improvement_queue(max_actions=2)
-        r3_fixed_point = self.drive_r3_to_verified_fixed_point(
-            max_rounds=4,
-            max_actions_per_round=4,
-        )
-
         closed_count = sum(1 for x in lessons if x.get("pass"))
-        repaired_count = len((exp_out or {}).get("repairs") or [])
-        any_verified_work = (closed_count + repaired_count) > 0
-        try:
-            pulse_cost = 0.25
-            if self.creature._self is not None:
-                self.creature._self.begin(
-                    f"awake:cycle:{self.cycle_count}",
-                    value=float(closed_count + repaired_count),
-                    cost=pulse_cost,
-                )
-            if self.creature._life is not None and self.creature._life.remaining >= pulse_cost:
-                self.creature._life.spend(pulse_cost)
-            if self.creature._standing is not None:
-                self.creature._standing.record(
-                    verified=True,
-                    correct=(True if any_verified_work else None),
-                )
-            if self.creature._self is not None:
-                self.creature._self.finish(
-                    {
-                        "ok": True,
-                        "gaps_closed": closed_count,
-                        "repairs": repaired_count,
-                    }
-                )
-            self.creature._save()
-        except Exception:
-            pass
-
         snap = {
             "schema": SCHEMA,
             "cycle": self.cycle_count,
             "k3_external_llm_calls": 0,
             "creature": self.creature.report(),
+            "creature_authored": authored_metrics,
+            "creature_steps": creature_steps,
+            "speculative_outcome": speculative_outcome,
             "context_features": ctx_feats,
             "meta_policy_recommendation": meta_recommendation,
             "meta_strategy_abstraction_candidate": meta_abstraction_candidate,
