@@ -184,6 +184,26 @@ def _contradicts_the_stated_payload(goal: str, token: str) -> bool:
     return not re.search(r"\bjson\b", str(prose), re.I)
 
 
+def _states_a_payload_and_its_destination(goal: str) -> bool:
+    """The sentence states text to write AND the path it goes to.
+
+    Reused rather than re-derived: the retrieval layer already owns this
+    predicate, and it answers exactly the question asked here.
+    """
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as selection
+        return bool(selection._states_a_payload_and_its_destination(goal))
+    except Exception:  # noqa: BLE001 - an unreadable sentence states nothing
+        return False
+
+
+def _token_is_read_only(token: str, registry: Mapping[str, Any]) -> bool:
+    """Does every row providing this token declare that it only reads?"""
+    rows = [entry for entry in registry.values()
+            if isinstance(entry, Mapping) and token in (entry.get("provides") or [])]
+    return bool(rows) and all(entry.get("read_only") is True for entry in rows)
+
+
 def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]:
     """Tokens the goal might be asking for, best guess first.
 
@@ -247,6 +267,21 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     # same test PR #6135 established as DECLARED_CONTRACT_FULLY_BOUND.
     scored = [(score(gw, tok, extra), tok) for tok in provided]
     scored = [(s0, t) for s0, t in scored if s0 > 0]
+    # A READ-ONLY ROW IS NOT A WAY TO WRITE THE FILE THE SENTENCE NAMED.
+    #
+    # Measured 2026-11-02: "Write the line 'PROJECT BRAIN' to the file <out>"
+    # ranked `fileview.reversed` first -- the words "line" and "file" -- bound the
+    # row with `path` = the DESTINATION the sentence named, and composed a chain
+    # that read the file it was asked to write.  The chain then raised and the
+    # request was reported as STEP_RAISED_OUTCOME_UNKNOWN, while on the previous
+    # commit the sentence was served by the text writer.
+    #
+    # The row is refused here only for a sentence that states BOTH a payload and
+    # where it goes: that sentence is a write by its own words, and a row that
+    # cannot write is not a candidate for it.  Every other sentence is scored
+    # exactly as before.
+    if _states_a_payload_and_its_destination(goal):
+        scored = [(s0, t) for s0, t in scored if not _token_is_read_only(t, reg)]
     bound = _fully_bound_contract_tokens(goal, g, reg)
     # The last two terms are the tiebreak, and their ORDER is the fix.  A
     # capability that contradicts the payload the sentence states is demoted

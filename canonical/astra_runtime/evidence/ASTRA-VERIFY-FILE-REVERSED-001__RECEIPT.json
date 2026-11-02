@@ -1,0 +1,25 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+ "adapter_sha256": "827dd7fa5009514b77420957196abdabc6b926f0dd2d974f9cc75dba562e00eb",
+ "capability_id": "file.lines.reversed.v1",
+ "checks": [
+  {
+   "adapter_returned": "Beta\nalpha\ngamma\n",
+   "command_output": "Beta\nalpha\ngamma\n",
+   "name": "tac agrees with the real `tac canonical/astra_runtime/tmp/file_facts_provenance_v1/unsorted.txt`",
+   "ok": true
+  }
+ ],
+ "claim": "returns the lines last-first exactly as `tac` prints them",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-REVERSED-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.lines.reversed.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-02T14:39:06Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

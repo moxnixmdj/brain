@@ -321,8 +321,17 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # a mutation word is refused.  An unidentified verb keeps today's behaviour,
     # which is what keeps this from becoming a vocabulary the registry has to
     # satisfy before it can route at all.
+    #
+    # A DECLARATION OUTRANKS THE VERB.  "Sort the lines of <f>" opens with a word
+    # this table calls a mutation, but the command the sentence states is
+    # `sort <f>`, which only prints.  When the row declares exactly that argv, the
+    # sentence's own command is the better evidence about what it asks for, and
+    # the verb is not consulted.  A row that does not declare it keeps the refusal.
     if entry.get("read_only") is True:
-        _mutation = _leading_mutation_word(goal)
+        from canonical.runtime import declared_command_equivalence_v1 as _declared_read
+        _mutation = None
+        if _declared_read.matched_template(entry, composer_route.extract_argv(goal)) is None:
+            _mutation = _leading_mutation_word(goal)
         if _mutation is not None:
             return {"schema": SCHEMA, "admitted": False,
                     "rule": "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE",

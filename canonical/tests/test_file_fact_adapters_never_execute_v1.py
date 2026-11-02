@@ -39,11 +39,16 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from canonical.runtime import capability_composer_v1 as graph  # noqa: E402
-from canonical.runtime.bound_capabilities import file_line_count, file_stat  # noqa: E402
+from canonical.runtime.bound_capabilities import (  # noqa: E402
+    file_command_view,
+    file_line_count,
+    file_stat,
+)
 
 ADAPTERS = {
     "file_line_count": ROOT / "canonical/runtime/bound_capabilities/file_line_count.py",
     "file_stat": ROOT / "canonical/runtime/bound_capabilities/file_stat.py",
+    "file_command_view": ROOT / "canonical/runtime/bound_capabilities/file_command_view.py",
 }
 
 #: Names that mean "a process, a shell, or dynamic code".
@@ -200,6 +205,43 @@ def test_answers_with_no_process() -> None:
     assert record == [], record
 
 
+def test_the_command_view_answers_with_no_process() -> None:
+    """The command-shaped rows must not answer by running the command.
+
+    `sort`, `tac` and `cat` are programs. Answering with them would put the
+    original refusal back one layer down -- the door would dispatch an adapter
+    that spawns a process it has no confinement for -- so the armed spy is used
+    on the command view exactly as on the two counters.
+    """
+    record: list[str] = []
+    originals = _armed_spy(record)
+    try:
+        with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+            base = pathlib.Path(tmp)
+            target = base / "u.txt"
+            target.write_text("gamma\nalpha\nbeta\n", encoding="utf-8")
+            rel = target.relative_to(ROOT.resolve()).as_posix()
+            sorted_out = file_command_view.run({"command": "sort", "path": rel}, ROOT)
+            assert sorted_out["answer"] == "alpha\nbeta\ngamma\n", sorted_out["answer"]
+            reversed_out = file_command_view.run({"command": "tac", "path": rel}, ROOT)
+            assert reversed_out["answer"] == "beta\nalpha\ngamma\n", reversed_out["answer"]
+            cat_out = file_command_view.run({"command": "cat", "path": rel}, ROOT)
+            assert cat_out["answer"] == "gamma\nalpha\nbeta\n", cat_out["answer"]
+            # A closed vocabulary: a command it does not implement is refused, not
+            # approximated. Measured control for the table itself.
+            for bad in ({"command": "sed", "path": rel}, {"command": "rm", "path": rel},
+                        {"command": "sort", "path": "-n"}):
+                try:
+                    file_command_view.run(bad, ROOT)
+                except RuntimeError as exc:
+                    assert "NOT_IMPLEMENTED" in str(exc) or "OPERANDS_REQUIRED" in str(exc), exc
+                else:
+                    raise AssertionError("the command view attempted %r" % (bad,))
+    finally:
+        _disarm(originals)
+    assert record == [], record
+
+
 def test_refusals_happen_before_any_read_of_the_outside_world() -> None:
     for module in (file_line_count, file_stat):
         try:
@@ -234,7 +276,10 @@ def test_the_registry_rows_are_dispatchable_and_declare_what_they_return() -> No
         (world / "a.txt").write_text("alpha\nbeta\n", encoding="utf-8")
         rel = (world / "a.txt").relative_to(ROOT.resolve()).as_posix()
         for cid, module in (("file.line_count.v1", file_line_count),
-                            ("file.stat.v1", file_stat)):
+                            ("file.stat.v1", file_stat),
+                            ("file.contents.v1", file_command_view),
+                            ("file.sorted.v1", file_command_view),
+                            ("file.reversed.v1", file_command_view)):
             entry = registry[cid]
             assert entry.get("entrypoint") == "run", (cid, entry.get("entrypoint"))
             assert callable(getattr(module, entry["entrypoint"])), cid
@@ -243,7 +288,10 @@ def test_the_registry_rows_are_dispatchable_and_declare_what_they_return() -> No
             assert entry.get("incremental_spend_usd") == 0, cid
             assert entry.get("read_only") is True, cid
             declared = set(entry.get("result_fields") or ())
-            returned = set(module.run({"path": rel}, ROOT))
+            call = {"path": rel}
+            if module is file_command_view:
+                call["command"] = entry["computes_command"]["argvs"][0][0]
+            returned = set(module.run(call, ROOT))
             assert returned <= declared, (cid, sorted(returned - declared))
     finally:
         import shutil

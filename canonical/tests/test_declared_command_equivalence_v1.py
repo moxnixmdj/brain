@@ -120,10 +120,12 @@ def test_the_door_does_not_serve_a_command_the_row_never_declared() -> None:
 def test_a_read_only_row_is_refused_for_a_sentence_that_opens_by_changing_the_file() -> None:
     target = _work()
     rel = target.relative_to(ROOT).as_posix()
+    # "Sort the lines of <f>" USED to be refused here and is now served by the
+    # row that declares `sort <f>` -- the opposite case is pinned below.
     for goal, verb in (
         ("Delete the last line of " + rel, "delete"),
         ("Add a line containing delta to " + rel, "add"),
-        ("Sort the lines of " + rel, "sort"),
+        ("Uppercase every line in " + rel, "uppercase"),
     ):
         admission = _admission(goal)
         assert admission.get("admitted") is False, (goal, admission)
@@ -157,13 +159,83 @@ def test_a_read_only_sentence_that_merely_mentions_writing_a_report_is_not_refus
         "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE"), admission
 
 
-def test_the_registry_rows_that_declare_a_command_are_the_two_file_facts() -> None:
+def test_a_read_only_row_is_never_the_chain_that_answers_a_write() -> None:
+    """Measured regression, caught by an existing test before it shipped.
+
+    With the command rows registered, "Write the line 'PROJECT BRAIN' to the file
+    <out>" ranked `fileview.reversed` first -- the words "line" and "file" -- and
+    composed a chain that READ the destination the sentence named. The chain
+    raised and the request became STEP_RAISED_OUTCOME_UNKNOWN; on the previous
+    commit the text writer served it. The fix drops read-only tokens from the
+    candidate list for a sentence that states both a payload and its destination.
+    """
+    from canonical.runtime import composer_route_v1 as composer_route
+
+    target = _work()
+    rel = target.relative_to(ROOT).as_posix()
+    out = rel.rsplit("/", 1)[0] + "/written.txt"
+    tokens = composer_route.candidate_tokens(
+        "Write the line 'PROJECT BRAIN' to the file " + out, graph.graph())
+    read_only = {"fileview.contents", "fileview.sorted", "fileview.reversed",
+                 "file.line_count.answer", "file.stat.answer"}
+    assert not (set(tokens[:6]) & read_only), tokens[:6]
+    result = door.solve({"task_id": "declared_eq_write",
+                         "goal": "Write the line 'PROJECT BRAIN' to the file " + out})
+    assert result.get("pass") is True, (result.get("status"), result.get("compiler_detail"))
+    assert (ROOT / out).read_text(encoding="utf-8") == "PROJECT BRAIN", "the write did not land"
+
+
+def test_the_registry_rows_that_declare_a_command_are_the_file_fact_rows() -> None:
     registry = graph.load_registry()
     declaring = sorted(cid for cid, entry in registry.items()
                        if isinstance(entry, dict) and declared.FIELD in entry)
-    assert declaring == ["file.line_count.v1", "file.stat.v1"], declaring
+    assert declaring == ["file.contents.v1", "file.line_count.v1",
+                         "file.reversed.v1", "file.sorted.v1",
+                         "file.stat.v1"], declaring
     for cid in declaring:
         assert registry[cid].get("read_only") is True, cid
+
+
+def test_a_declaration_outranks_a_mutation_verb_the_command_does_not_have() -> None:
+    """`sort <f>` and `tac <f>` only print, so "Sort the lines of <f>" is servable.
+
+    The opposite case is pinned by
+    `test_a_read_only_row_is_refused_for_a_sentence_that_opens_by_changing_the_file`:
+    "Delete the last line of <f>" states no such command, so the verb decides.
+    """
+    target = _work()
+    rel = target.relative_to(ROOT).as_posix()
+    for goal, expected in (("Sort the lines of " + rel, "file.sorted.v1"),
+                           ("Reverse the lines of " + rel, "file.reversed.v1")):
+        admission = _admission(goal)
+        assert admission.get("admitted") is True, (goal, admission)
+        result = door.solve({"task_id": "declared_eq_sort", "goal": goal})
+        assert result.get("pass") is True, (result.get("status"), result.get("compiler_detail"))
+        assert result.get("compiled_capability_id") == expected, result.get("compiled_capability_id")
+    assert target.read_text(encoding="utf-8") == "alpha\nbeta\ngamma\n", "the file changed"
+
+
+def test_a_fact_about_the_file_is_not_answered_by_printing_the_file() -> None:
+    """Measured false pass, caught before shipping.
+
+    With `file.contents.read.v1` added, "What are the file permissions of <f>"
+    tied with `file.stat.v1` at 15 and the tie broke toward the contents row: the
+    door PASSED, having answered a question about permission bits by printing the
+    file. The tie existed because both rows carried the generic token `file` in
+    `provides`. The fix is in the rows, so this guards the rows.
+    """
+    target = _work()
+    rel = target.relative_to(ROOT).as_posix()
+    for goal, expected in (
+        ("What are the file permissions of " + rel, "file.stat.v1"),
+        ("What is the size of " + rel, "file.stat.v1"),
+        ("Show me the contents of " + rel, "file.contents.v1"),
+    ):
+        result = door.solve({"task_id": "declared_eq_fact", "goal": goal})
+        assert result.get("pass") is True, (goal, result.get("status"),
+                                            result.get("compiler_detail"))
+        assert result.get("compiled_capability_id") == expected, (
+            goal, result.get("compiled_capability_id"))
 
 
 def main() -> int:

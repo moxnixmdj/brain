@@ -12135,6 +12135,265 @@
         }
       },
       "entrypoint": "run"
+    },
+    "file.contents.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "cat",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "file.contents.v1"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_command_view",
+      "computes_command": {
+        "argvs": [
+          [
+            "cat",
+            "${path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "computed in process by file_command_view; no shell, no subprocess, closed command table, flags refused"
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "show the contents",
+        "contents of",
+        "cat the file",
+        "print the file"
+      ],
+      "limitations": [
+        "Answers the command question in process; it never runs the command and never writes the input file.",
+        "Refuses flags, unknown commands, non-UTF-8 input and any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "fileview.contents"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "argv",
+        "argv_sha256",
+        "command",
+        "output_path",
+        "output_verified",
+        "path",
+        "schema",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-CONTENTS-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers are computed from a constructed world with the standard library, and compared against the real command where it is installed. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_command_view",
+          "command": "cat"
+        }
+      }
+    },
+    "file.sorted.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "sort",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "file.sorted.v1"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_command_view",
+      "computes_command": {
+        "argvs": [
+          [
+            "sort",
+            "${path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "computed in process by file_command_view; no shell, no subprocess, closed command table, flags refused"
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sort the lines",
+        "sorted lines",
+        "sort the file",
+        "alphabetical order"
+      ],
+      "limitations": [
+        "Answers the command question in process; it never runs the command and never writes the input file.",
+        "Refuses flags, unknown commands, non-UTF-8 input and any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "fileview.sorted"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "argv",
+        "argv_sha256",
+        "command",
+        "line_count",
+        "output_path",
+        "output_verified",
+        "path",
+        "schema",
+        "sorted_lines",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-SORTED-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers are computed from a constructed world with the standard library, and compared against the real command where it is installed. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_command_view",
+          "command": "sort"
+        }
+      }
+    },
+    "file.reversed.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "command": "tac",
+          "path": "${input.path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "file.reversed.v1"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "file_command_view",
+      "computes_command": {
+        "argvs": [
+          [
+            "tac",
+            "${path}"
+          ]
+        ],
+        "answer_field": "answer",
+        "note": "computed in process by file_command_view; no shell, no subprocess, closed command table, flags refused"
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "reverse the lines",
+        "reversed lines",
+        "last line first",
+        "backwards order"
+      ],
+      "limitations": [
+        "Answers the command question in process; it never runs the command and never writes the input file.",
+        "Refuses flags, unknown commands, non-UTF-8 input and any path resolving outside the repository."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "proposal_bindings": {
+        "path": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "fileview.reversed"
+      ],
+      "read_only": true,
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "argv",
+        "argv_sha256",
+        "command",
+        "line_count",
+        "output_path",
+        "output_verified",
+        "path",
+        "reversed_lines",
+        "schema",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+        "modules": [],
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-REVERSED-001__RECEIPT.json",
+        "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+        "producer": "arena agent session, 2026-11-02",
+        "independence": "code-level only: expected answers are computed from a constructed world with the standard library, and compared against the real command where it is installed. NOT independent-personnel verification",
+        "independent_personnel_verification": false,
+        "observed_effect": {
+          "adapter": "file_command_view",
+          "command": "tac"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

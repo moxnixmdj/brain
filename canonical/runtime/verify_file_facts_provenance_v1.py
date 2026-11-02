@@ -82,6 +82,10 @@ def _world() -> pathlib.Path:
     (WORLD / "not_text.bin").write_bytes(NOT_TEXT)
     (WORLD / "a_directory").mkdir(exist_ok=True)
     (WORLD / "five_lines.txt").chmod(0o640)
+    # A second file for the two-operand checks, and a file whose lines sort and
+    # reverse differently from their written order.
+    _write(WORLD / "three_lines_b.txt", "alpha\nBETA\n")
+    _write(WORLD / "unsorted.txt", "gamma\nalpha\nBeta\n")
     return WORLD
 
 
@@ -226,6 +230,56 @@ def _check_file_stat() -> tuple[bool, list[dict]]:
     return all(c["ok"] for c in checks), checks
 
 
+def _run_view(command: str, args: dict) -> dict:
+    """Dispatch the command-view row through the real dispatcher, like the door does."""
+    from canonical.runtime import live_brain_route_admission_v1 as door
+
+    entry = {"adapter_module": "file_command_view", "entrypoint": "run",
+             "source": {"adapter_path":
+                        "canonical/runtime/bound_capabilities/file_command_view.py"},
+             "incremental_spend_usd": 0, "capability_id": "file_command_view"}
+    return door.run_adapter_locally(entry, {"args": dict(args, command=command)})
+
+
+def _real(command: list[str]) -> str | None:
+    """Run the real command, or None when it is not installed here."""
+    import shutil
+    import subprocess
+
+    if not shutil.which(command[0]):
+        return None
+    done = subprocess.run(command, cwd=str(ROOT), capture_output=True, text=True, check=False)
+    return done.stdout
+
+
+def _view_agrees(command: str, args: dict, real_command: list[str], field: str = "answer") -> dict:
+    out = _run_view(command, args)
+    got = out.get(field)
+    expected = _real(real_command)
+    if expected is None:
+        return {"name": "%s agrees with the real `%s`" % (command, " ".join(real_command)),
+                "ok": True, "skipped": True, "reason": "COMMAND_NOT_INSTALLED:" + real_command[0]}
+    return {"name": "%s agrees with the real `%s`" % (command, " ".join(real_command)),
+            "ok": got == expected, "command_output": expected, "adapter_returned": got}
+
+
+def _check_command_view(command: str, args: dict, real_command: list[str],
+                        refusals: list[tuple[str, dict]] | None = None) -> tuple[bool, list[dict]]:
+    checks = [_view_agrees(command, args, real_command)]
+    for label, bad_args in refusals or ():
+        try:
+            _run_view(command, bad_args)
+        except Exception as exc:  # noqa: BLE001 - any refusal is a refusal
+            checks.append({"name": label, "ok": True, "refused_with": str(exc)[:120]})
+        else:
+            checks.append({"name": label, "ok": False, "refused_with": None})
+    return all(c["ok"] for c in checks), checks
+
+
+def _rel_in_world(name: str) -> str:
+    return _rel(WORLD / name)
+
+
 ROWS = {
     "file.line_count.v1": {
         "mission": "ASTRA-VERIFY-FILE-LINE-COUNT-001",
@@ -237,6 +291,82 @@ ROWS = {
         "claim": "reports size and permission bits from metadata, tracking the bytes on disk",
         "check": _check_file_stat,
     },
+    "file.contents.read.v1": {
+        "mission": "ASTRA-VERIFY-FILE-CONTENTS-001",
+        "claim": "returns a file's text exactly, and refuses what it cannot read",
+        "check": lambda: _check_command_view(
+            "cat", {"path": _rel_in_world("five_lines.txt")},
+            ["cat", _rel_in_world("five_lines.txt")],
+            [("refuses a directory", {"path": _rel_in_world("a_directory")}),
+             ("refuses a missing file", {"path": _rel_in_world("absent.txt")}),
+             ("refuses a path outside the repository", {"path": "/etc/passwd"})]),
+    },
+    "file.lines.sorted.v1": {
+        "mission": "ASTRA-VERIFY-FILE-SORTED-001",
+        "claim": "returns the lines sorted exactly as `sort` sorts them",
+        "check": lambda: _check_command_view(
+            "sort", {"path": _rel_in_world("unsorted.txt")},
+            ["sort", _rel_in_world("unsorted.txt")],
+            [("refuses a flag it does not implement", {"path": "-n"})]),
+    },
+    "file.lines.reversed.v1": {
+        "mission": "ASTRA-VERIFY-FILE-REVERSED-001",
+        "claim": "returns the lines last-first exactly as `tac` prints them",
+        "check": lambda: _check_command_view(
+            "tac", {"path": _rel_in_world("unsorted.txt")},
+            ["tac", _rel_in_world("unsorted.txt")]),
+    },
+}
+
+
+def _check_unbound_implementations() -> tuple[bool, list[dict]]:
+    """The two implementations no row binds yet are still checked, and said to be unbound.
+
+    `diff` and `fgrep` live in the module and are exercised here because shipped
+    code that nothing measures is exactly how a claim outlives its evidence.
+    Neither is reachable from the front door: a two-operand binding does not
+    exist yet (measured refusal: `GOAL_INPUT_BINDING_REQUIRED ... other_path`).
+    """
+    checks: list[dict] = []
+    from canonical.runtime import capability_composer_v1 as graph
+
+    bound = set(graph.load_registry())
+    for cid, command in (("file.diff.v1", "diff"), ("file.search.literal.v1", "fgrep")):
+        checks.append({"name": "%s is not registered as reachable" % command,
+                       "ok": cid not in bound, "registered": cid in bound})
+    got = _run_view("diff", {"path": _rel_in_world("five_lines.txt"),
+                             "other_path": _rel_in_world("three_lines_b.txt")})
+    # The module produces the unified form, so the unified form is what it is
+    # compared against.  Comparing it to bare `diff` (historical normal format)
+    # failed on the first run and the claim, not the code, was wrong.
+    expected = _real(["diff", "-u", _rel_in_world("five_lines.txt"),
+                      _rel_in_world("three_lines_b.txt")])
+    if expected is None:
+        checks.append({"name": "diff agrees with the real `diff -u`", "ok": True,
+                       "skipped": True, "reason": "COMMAND_NOT_INSTALLED:diff"})
+    else:
+        # diff prints file names and timestamps in its header; the BODY is the
+        # diff.  Comparing whole output would fail on a timestamp and prove
+        # nothing, so the hunks are compared line for line.
+        body = [line for line in got["answer"].splitlines() if not line.startswith(("---", "+++"))]
+        real_body = [line for line in expected.splitlines() if not line.startswith(("---", "+++"))]
+        checks.append({"name": "diff agrees with the real `diff -u` on every hunk line",
+                       "ok": body == real_body, "command_output": real_body,
+                       "adapter_returned": body,
+                       "header_note": "diff -u prints its own headers; only hunk lines are compared"})
+    got = _run_view("fgrep", {"pattern": "alpha", "path": _rel_in_world("unsorted.txt")})
+    expected = _real(["grep", "-F", "alpha", _rel_in_world("unsorted.txt")])
+    checks.append({"name": "fgrep agrees with the real `grep -F`",
+                   "ok": expected is not None and got["answer"] == expected,
+                   "command_output": expected, "adapter_returned": got["answer"]})
+    return all(c["ok"] for c in checks), checks
+
+
+ROWS[  # noqa: B010 - one more row, declared beside the ones it belongs with
+    "file_command_view.diff_and_search.v1"] = {
+    "mission": "ASTRA-VERIFY-FILE-COMMAND-VIEW-UNBOUND-001",
+    "claim": "the shipped diff and fgrep implementations match the real commands and are not yet routed",
+    "check": _check_unbound_implementations,
 }
 
 
@@ -246,7 +376,11 @@ def verify(cid: str) -> dict:
     ok, checks = row["check"]()
     from canonical.runtime import capability_composer_v1 as graph
 
-    adapter_rel = str((graph.load_registry()[cid].get("source") or {}).get("adapter_path") or "")
+    registry_row = graph.load_registry().get(cid) or {}
+    adapter_rel = str((registry_row.get("source") or {}).get("adapter_path")
+                      or "canonical/runtime/bound_capabilities/file_command_view.py"
+                      if cid not in graph.load_registry()
+                      else (registry_row.get("source") or {}).get("adapter_path") or "")
     adapter = ROOT / adapter_rel
     receipt = {
         "schema": SCHEMA,
