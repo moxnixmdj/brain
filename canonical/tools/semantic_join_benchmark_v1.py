@@ -47,6 +47,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from canonical.runtime.generalization_check_v1 import classify  # noqa: E402
 from canonical.runtime.swe_observational_program_synthesizer_v1 import (  # noqa: E402
     synthesize_python_function_body,
 )
@@ -62,12 +63,32 @@ SCHEMA = "PROJECT_BRAIN_SEMANTIC_JOIN_BENCHMARK_V1"
 TRIPLES = [("val", "lo", "hi"), ("u", "a", "b"), ("x", "mn", "mx"), ("t", "low", "high"),
            ("q", "p0", "p1"), ("zz", "k0", "k1"), ("mm", "n0", "n1"), ("hh", "g0", "g1")]
 
-# HELD OUT: never passed to `sleep_abstract`. `normalised + 0.5` -- one operation beyond the
-# concept's own body, which is the headroom a concept is supposed to supply.
-HELD_OUT = [
-    (["v", "l", "h"], [((5, 2, 4), 1.5), ((7, 0, 10), 0.75), ((-3, 0, 10), 0.5)]),
-    (["s", "lo2", "hi2"], [((9, 8, 10), 1.0), ((5, 0, 4), 1.75), ((12, 10, 11), 2.0)]),
-]
+# `normalised + 0.5` -- one operation beyond the concept's own body, which is exactly the headroom
+# a concept is supposed to supply. TRAIN examples are never passed to `sleep_abstract`; the
+# WITHHELD points are never passed to the synthesizer at all and decide the verdict.
+#
+# Corrected 2026-11-04: two of these expected values were wrong in the first version (I had
+# transcribed 0.75 and 2.0 for inputs whose true values are 1.2 and 1.5). The synthesizer was
+# right and the benchmark was wrong -- found by printing what the body actually returned. Every
+# value below is now recomputed from the reference function, not typed by hand.
+TRAIN_INPUTS = [(5, 2, 4), (7, 0, 10), (-3, 0, 10)]
+WITHHELD_INPUTS = [(9, 8, 10), (1, 0, 4), (12, 10, 11), (6, 1, 9)]
+
+
+def _reference(v: float, l: float, h: float) -> float:
+    """The target idea: a clamped normalisation, plus a half."""
+    return (min(max(v, l), h) - l) / (h - l) + 0.5 if h > l else 0.5
+
+
+HELD_OUT = [{
+    "params": ["v", "l", "h"],
+    "train": [(pt, _reference(*pt)) for pt in TRAIN_INPUTS],
+    "withheld": [(pt, _reference(*pt)) for pt in WITHHELD_INPUTS],
+}]
+
+# Constants the search is allowed. Without these, `+ 0.5` is unreachable by construction and the
+# held-out column measures the constant bank rather than the concept.
+EXTRA_CONSTANTS = (0.5,)
 
 MAX_WEIGHT = 4
 # Corpus size changes the answer, and measuring one size flatters whichever conclusion the agent
@@ -96,12 +117,19 @@ def spelling_b(i: int, v: tuple[str, str, str]) -> str:
 
 
 def _solved(library_path: Path | None) -> int:
+    """Count GENERALISING solves: the body must agree on every withheld point.
+
+    Counting non-None bodies was the original bug -- a body like
+    `if not lo2: return (s + 2) / hi2` fits its examples and is not the target function.
+    """
     lib = CompoundingConceptLibrary(library_path) if library_path is not None else None
     hits = 0
-    for params, examples in HELD_OUT:
-        body = synthesize_python_function_body(params, examples, max_weight=MAX_WEIGHT,
-                                             concept_library=lib)
-        hits += 1 if body else 0
+    for prob in HELD_OUT:
+        body = synthesize_python_function_body(prob["params"], prob["train"],
+                                               extra_constants=EXTRA_CONSTANTS,
+                                               max_weight=MAX_WEIGHT, concept_library=lib)
+        verdict, _ = classify(body, prob["params"], prob["withheld"])
+        hits += 1 if verdict == "SOLVED" else 0
     return hits
 
 
@@ -155,6 +183,11 @@ def run() -> dict[str, Any]:
             "arms": arms,
             "verdict": {
                 "concept_is_learnable": bool(control["admitted"] > 0),
+                # The comparison that matters is against the EMPTY library, not against the
+                # other arms. The first version compared arms to each other, so a real
+                # 0 -> 1 gain was reported as "no improvement".
+                "concept_enables_generalising_reach": bool(
+                    control["held_out_solved"] > baseline),
                 # Graded, not all-or-nothing: the first version required `mixed == 0`, which
                 # hid the actual effect at thin corpora (mixed 1 -> joined 2) and reported "no".
                 "join_increases_admission": bool(joined["admitted"] > mixed["admitted"]),
@@ -171,14 +204,19 @@ def run() -> dict[str, Any]:
         "schema": SCHEMA,
         "measured": "2026-11-04",
         "baseline_empty_library_solved": baseline,
+        "held_out_note": "verdict is a GENERALISING solve: the body must agree on withheld points",
         "held_out_total": len(HELD_OUT),
         "max_weight": MAX_WEIGHT,
         "sweeps": sweeps,
         "limits": [
             "the join restores the CORPUS, not the search: a concept is callable in either "
             "spelling, so re-spelling was never what blocked synthesis",
-            "held-out reach did not improve at any corpus size; the concept's benefit here is "
-            "compactness and speed, not reach",
+            "the REACH gain comes from the concept existing, not from the join; the join only "
+            "recovers the admission that re-spelling cost",
+            "a SOLVED verdict is agreement on four withheld points, not proof of the function",
+            "the synthesizer returns the FIRST body that fits its examples, so with three "
+            "examples it can return an interpolation (measured: `c or 0.5` instead of "
+            "`max(c, 0.5)`); six examples remove that particular collision but not the class",
             "agreement is observed on a finite probe vector, not proved",
             "the two spellings are equivalent on all probed values by construction, which makes "
             "this a test of the join, not a test of whether two real programs are equivalent",

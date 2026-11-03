@@ -1,0 +1,190 @@
+{
+  "authority": "NONE",
+  "baseline_empty_library_solved": 0,
+  "held_out_note": "verdict is a GENERALISING solve: the body must agree on withheld points",
+  "held_out_total": 1,
+  "limits": [
+    "the join restores the CORPUS, not the search: a concept is callable in either spelling, so re-spelling was never what blocked synthesis",
+    "the REACH gain comes from the concept existing, not from the join; the join only recovers the admission that re-spelling cost",
+    "a SOLVED verdict is agreement on four withheld points, not proof of the function",
+    "the synthesizer returns the FIRST body that fits its examples, so with three examples it can return an interpolation (measured: `c or 0.5` instead of `max(c, 0.5)`); six examples remove that particular collision but not the class",
+    "agreement is observed on a finite probe vector, not proved",
+    "the two spellings are equivalent on all probed values by construction, which makes this a test of the join, not a test of whether two real programs are equivalent"
+  ],
+  "max_weight": 4,
+  "measured": "2026-11-04",
+  "schema": "PROJECT_BRAIN_SEMANTIC_JOIN_BENCHMARK_V1",
+  "sweeps": [
+    {
+      "arms": [
+        {
+          "admitted": 2,
+          "arm": "all_one_spelling",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0"
+          ],
+          "description": "control: one spelling, concept must amortise",
+          "held_out_median_ms": 50.0,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 2,
+          "teach_ms": 46.5
+        },
+        {
+          "admitted": 1,
+          "arm": "two_spellings",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0"
+          ],
+          "description": "the arm the join exists to repair",
+          "held_out_median_ms": 46.1,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 1,
+          "teach_ms": 70.5
+        },
+        {
+          "admitted": 2,
+          "arm": "bridged",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0"
+          ],
+          "description": "same corpus, second half rewritten through a correspondence",
+          "held_out_median_ms": 53.0,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 2,
+          "teach_ms": 42.2
+        }
+      ],
+      "programs_per_spelling": 4,
+      "verdict": {
+        "bridge_succeeded_on_all_pairs": true,
+        "concept_enables_generalising_reach": true,
+        "concept_is_learnable": true,
+        "join_fully_restores_control": true,
+        "join_improves_held_out_reach": false,
+        "join_increases_admission": true
+      }
+    },
+    {
+      "arms": [
+        {
+          "admitted": 3,
+          "arm": "all_one_spelling",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0",
+            "min(max(_v0, _v1), _v2) - _v1"
+          ],
+          "description": "control: one spelling, concept must amortise",
+          "held_out_median_ms": 58.8,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 3,
+          "teach_ms": 58.8
+        },
+        {
+          "admitted": 3,
+          "arm": "two_spellings",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0",
+            "min(1.0, max(0.0, (_v0 - _v1) / (_v2 - _v1))) if _v2 > _v1 else 0.0"
+          ],
+          "description": "the arm the join exists to repair",
+          "held_out_median_ms": 54.4,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 3,
+          "teach_ms": 110.4
+        },
+        {
+          "admitted": 3,
+          "arm": "bridged",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0",
+            "min(max(_v0, _v1), _v2) - _v1"
+          ],
+          "description": "same corpus, second half rewritten through a correspondence",
+          "held_out_median_ms": 61.8,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 3,
+          "teach_ms": 58.0
+        }
+      ],
+      "programs_per_spelling": 6,
+      "verdict": {
+        "bridge_succeeded_on_all_pairs": true,
+        "concept_enables_generalising_reach": true,
+        "concept_is_learnable": true,
+        "join_fully_restores_control": true,
+        "join_improves_held_out_reach": false,
+        "join_increases_admission": false
+      }
+    },
+    {
+      "arms": [
+        {
+          "admitted": 3,
+          "arm": "all_one_spelling",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0",
+            "min(max(_v0, _v1), _v2) - _v1"
+          ],
+          "description": "control: one spelling, concept must amortise",
+          "held_out_median_ms": 55.6,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 3,
+          "teach_ms": 78.9
+        },
+        {
+          "admitted": 3,
+          "arm": "two_spellings",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0",
+            "min(1.0, max(0.0, (_v0 - _v1) / (_v2 - _v1))) if _v2 > _v1 else 0.0"
+          ],
+          "description": "the arm the join exists to repair",
+          "held_out_median_ms": 56.4,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 3,
+          "teach_ms": 136.5
+        },
+        {
+          "admitted": 3,
+          "arm": "bridged",
+          "concept_bodies": [
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1)",
+            "(min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0",
+            "min(max(_v0, _v1), _v2) - _v1"
+          ],
+          "description": "same corpus, second half rewritten through a correspondence",
+          "held_out_median_ms": 58.4,
+          "held_out_solved": 1,
+          "held_out_total": 1,
+          "library_size": 3,
+          "teach_ms": 79.1
+        }
+      ],
+      "programs_per_spelling": 8,
+      "verdict": {
+        "bridge_succeeded_on_all_pairs": true,
+        "concept_enables_generalising_reach": true,
+        "concept_is_learnable": true,
+        "join_fully_restores_control": true,
+        "join_improves_held_out_reach": false,
+        "join_increases_admission": false
+      }
+    }
+  ],
+  "truth_achieved": false
+}

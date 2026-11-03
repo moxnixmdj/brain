@@ -1,5 +1,12 @@
 # Two Programs That Mean the Same Thing
 
+> **SUPERSEDED IN PART — 2026-11-04.** The join result (§3) stands. The claim in §4 that the
+> concept buys compactness and **not reach** is **retracted**: it was an artefact of a counter that
+> treated any non-`None` body as a solve. Corrected measurement and the three instrument bugs are in
+> `THE_INSTRUMENT_WAS_BLIND_20261104_V1.md`: **0/3 → 2/3 generalising solves**, and the synthesizer
+> returns the first body that fits its examples, which is the real limit. Read §4 with that
+> correction in hand.
+
 **2026-11-04 · branch `arena/e55485af-brain` · authority NONE · `truth.achieved` false · $0 spent**
 
 This is the fourth attempt at the user's question — *is this the smartest approach?* — and the
@@ -145,6 +152,9 @@ The user's actual target is a creature, not a benchmark. So, plainly:
 unrelated and recognises they are the same piece of knowledge. That is a real cognitive primitive —
 analogy — and it is measured, not asserted: 81/81 probe agreement on a pair with no shared syntax,
 with three traps that must stay silent and do.
+
+**Retraction (see the banner).** The sentence below — "the analogy did not make the creature able
+to *do* anything it could not already do" — was measured with a blind instrument and is withdrawn.
 
 **What did not.** Recognition is not understanding. The mechanism compares values on a finite
 probe vector I chose; it has no notion of *why* the two expressions agree, cannot construct an
