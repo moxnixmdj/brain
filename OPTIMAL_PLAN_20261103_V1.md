@@ -121,7 +121,29 @@ while measuring. Measure first, fix in separate PRs.
 
 ---
 
-### P3 — Give the front door a route to the learner, scoped to what is already verified
+### P3 — BLOCKED ON A REVIEW, and the review's checklist is stale (measured 2026-11-03)
+
+**Re-ordered.** 226 of the 233 failures behind the front door are one status:
+`FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`. Fixing that is **opening a
+boundary**, not repairing a bug — and `REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md` forbids
+running hostile code in the launcher. An agent must not route around this.
+
+**What is actually actionable:** the review's nine objections were checked one at a time by
+`canonical/tools/carrier_qualification_probe_v1.py`. **Seven no longer hold** (descendant cleanup,
+output bound, memory/PID/FD limits, host tree, host processes, ambient env, network). **Two hold
+exactly:** no syscall filter, and the worker runs the host's libc. See
+`canonical/verification/CARRIER_QUALIFICATION_PROBE_20261103_V1.json`.
+
+**So P3 is not "give the door a route" — it is "get the review its evidence".** Hand a reviewer
+the probe (18 s to re-run) instead of the request (nine claims, seven of them out of date).
+That is a person's time, not a commit, and no capability credit follows.
+
+Unblocked sub-items that ARE mine: the 8 `FAIL__RAW_GOAL_COMPILATION_GAP`, the 8
+`FAIL_CLOSED__ROUTE_ADMISSION_REJECTED`, and the `composer_route` admission cluster.
+
+---
+
+### P3 (original text, kept) — Give the front door a route to the learner, scoped to what is already verified
 
 **Why now.** This is the only item that changes what a *user* experiences, and two predecessor
 probes independently name it as the blocker (`COMPUTER_CREATURE_LOOP_PROBE_20261102.md`,

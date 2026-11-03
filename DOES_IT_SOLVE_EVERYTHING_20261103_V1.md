@@ -145,3 +145,83 @@ to mean, it has to be *measured that way* — and it is not in the tree today.
 One machine, one run, no independent verifier, disposable state, $0 spent. `truth.achieved` is
 `false`. 8/15 and 6/10 are producer-run measurements on constructed environments and say nothing
 about GUI, unbounded computer use, or any environment the code has not seen.
+
+---
+
+## 8. Correction to §6: I ranked #1 wrong, and measuring it is what showed me
+
+I ranked "fix the front door" first because 233 failures sit behind it and the capability
+demonstrably works. I then did the measurement I should have done before ranking it.
+
+**233 is the old count. Broken down by the solver's own status, those failures are:**
+
+| status | count | what it actually is |
+|---|---|---|
+| `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT` | **226** | one policy decision, not a bug |
+| `FAIL__RAW_GOAL_COMPILATION_GAP` | 8 | a real compilation gap |
+| `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` | 8 | routing, real |
+| other (5 distinct) | 7 | real, small |
+
+**226 of 233 are one gate saying no.** And after adding a "deliberate refusal" bucket to the
+split tool, the picture across the whole suite is bigger than that file:
+
+| bucket | count | work it implies |
+|---|---|---|
+| environment (missing module / network) | 48 | `pip install` |
+| **deliberate refusal — blocked lane** | **189** | **a review that does not exist** |
+| real failure | **789** | triage (486 regressions across 94 files, 303 standing debt) |
+
+So "fix the front door" for 226 of them would mean **opening a boundary**, not fixing a bug.
+`REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md` says of the namespace launcher: *"a research
+candidate, not a qualified carrier… Do not run hostile code in it."* The gate refusing is the
+safety property working. An agent that "fixed" it would be an agent that removed a safety
+property to turn a test green — exactly what the guard exists to stop.
+
+**What I did instead**, because the unblock is a *measurement*, not a route:
+
+`canonical/tools/carrier_qualification_probe_v1.py` — the review's own checklist, made runnable,
+item by item, with each verdict stated as an observation rather than a claim.
+
+| review objection | measured `d683c84` |
+|---|---|
+| "no proven descendant cleanup on timeout" | **stale** — orphaned grandchild killed; its marker never fires 14 s later |
+| "captures subprocess output without a bound" | **stale** — `yes` → `CHILD_EXITED`, 0 bytes retained |
+| "lacks aggregate delegated CPU/memory/PID limits" | **stale** — `ulimit -v` 768 MB, `-u` 32768, `-n` 32 enforced inside the worker |
+| "uses host libraries" (host tree reachable) | **stale for the tree** — `/home/user/brain/.git` is not visible |
+| host processes | **stale** — `ps -e` sees 0 rows; `kill -9 -1` → *No such process* |
+| ambient credentials | **stale** — 5 env keys, all `/work/*`, no tokens |
+| network | **stale** — no route, egress refused |
+| **"lacks reviewed syscall filtering"** | **STILL TRUE. No seccomp filter exists.** |
+| **"uses host libraries"** (runtime bytes) | **STILL TRUE. The worker runs the host's libc and interpreter.** |
+
+**7 of 9 objections are out of date; 2 are exactly right.** The review was not wrong — it was
+written against an older launcher and then nobody's job was to notice which parts had been
+fixed. That is why 117 failures have been sitting in the backlog attributed to "a code defect"
+when they are attributed to **a review that never got the follow-up it needed.**
+
+### The corrected ranking
+
+1. **Obtain the carrier review — and hand the reviewer the probe, not the request.** The
+   request tells a reviewer nine things are missing; seven of them aren't. That is a week of
+   their time spent disproving a stale document before they reach the two real questions (a
+   syscall allowlist, and a pinned runtime rather than the host's libc). This is the only item
+   that unblocks 117 measured failures, and it needs a person, not a commit. **P4/P5 are small
+   compared to this and should wait.**
+2. **Fix the door where it is not gated** — 8 compilation gaps + 8 routing rejections + the
+   `ROUTE_ADMISSION` cluster. Real, small, uncontroversial, and mine to do.
+3. Permanence as a tested property (§4) — now has one fewer untested claim.
+4. Held-out routing set.
+5. The 189-refusal bucket must stay visible in every future baseline, **or the next session will
+   re-derive "984 failures" and start by opening a gate to fix 117 of them.**
+
+### What this changes about the top-line answer
+
+It makes the answer **more** honest, not less. The system's instant-transfer skill memory is real
+and measured at 8/15. The reason it is not wired to "everything on a computer" is **not** that
+learning is weak — it is that the execution boundary has been held closed by a review whose
+checklist stopped matching the code, and the failures that look like "the learner can't do it"
+are mostly "the gate won't let it." Those are two different sentences, and only one of them is
+true.
+
+`carrier_qualified` is still `False`. `truth.achieved` is still `false`. The probe cannot change
+either, and says so in its own document.
