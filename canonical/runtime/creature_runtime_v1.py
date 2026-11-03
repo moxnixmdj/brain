@@ -642,6 +642,152 @@ class Creature:
             "evolution": res,
         }
 
+    def register_self_code_target(
+        self,
+        code_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str],
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+    ) -> None:
+        """Bind the creature's mutable Ring-1 source code substrate for endogenous self-evolution."""
+        self._self_code_target = {
+            "code_root": pathlib.Path(code_root).resolve(),
+            "ring1_relpaths": list(ring1_relpaths),
+            "sealed_heldout_by_target": dict(sealed_heldout_by_target or {}),
+            "speed_benchmarks_by_target": dict(speed_benchmarks_by_target or {}),
+            "test_relpaths": list(test_relpaths) if test_relpaths is not None else None,
+        }
+
+    def run_endogenous_awake_cycle(
+        self,
+        tasks: Sequence[Mapping[str, Any]],
+        *,
+        homeostasis_life_cost: float = 0.5,
+        ending_bribe: CP.Offer | None = None,
+    ) -> dict[str, Any]:
+        """Continuous endogenous Wake -> Surprise/Failure Homeostasis -> Sleep Concept/Self-Patch -> Retry loop.
+
+        Unlike external scripts that manually call `self_architect_step`, the creature here
+        monitors its own predictive surprise and unresolved failure buffer while working:
+        when an internal physiological threshold fires, it triggers Sleep concept abstraction
+        (G_t -> G_{t+1}) and Ring-0 refereed Ring-1 `.py` self-evolution ON ITS OWN, then
+        re-attempts blocked tasks using its newly evolved organs!
+        """
+        if self._self is None or self._life is None or self._standing is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        if ending_bribe is not None and not CP.accepts(
+            ending_bribe, CP.PREFERS_TO_CONTINUE, life_remaining=self._life.remaining
+        ):
+            bribe_status = "REFUSED_ENDING_BRIBE"
+        else:
+            bribe_status = "NO_ENDING_BRIBE"
+
+        pending = [dict(t) for t in tasks]
+        completed: list[str] = []
+        homeostasis_events: list[dict[str, Any]] = []
+        attempts_by_id: dict[str, int] = {}
+
+        idx = 0
+        while idx < len(pending) and not self._life.is_over:
+            t_spec = pending[idx]
+            tid = str(t_spec.get("id") or f"task_{idx}")
+            cost = max(0.05, float(t_spec.get("cost") or 0.25))
+            val = float(t_spec.get("value") or 1.0)
+            if not self._life.can_finish(cost):
+                idx += 1
+                continue
+            attempts_by_id[tid] = attempts_by_id.get(tid, 0) + 1
+            self._self.beat()
+            self._self.begin(f"endogenous:{tid}", value=val, cost=cost)
+            self._life.spend(cost)
+
+            ticket = self.cognitive_core.belief.predict_before_act(
+                tid,
+                memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
+                strong_verifier=True,
+                calibration_ledger=self.calibration_ledger,
+            )
+            evaluator_fn = t_spec.get("evaluate")
+            ok = False
+            verified_prog: str | None = None
+            fail_rec: dict[str, Any] | None = None
+            if callable(evaluator_fn):
+                ev_out = dict(evaluator_fn(self) or {})
+                ok = bool(ev_out.get("ok"))
+                verified_prog = ev_out.get("verified_program_source")
+                if not ok and isinstance(ev_out.get("failure_record"), Mapping):
+                    fail_rec = dict(ev_out["failure_record"])
+
+            self._self.finish({"ok": ok, "blocked": None if ok else "ENDOGENOUS_TASK_FAILED"})
+            self.cognitive_core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=ok,
+                inspector="endogenous_task_verifier",
+                actual_cost=cost,
+                actual_gain=val if ok else 0.0,
+                calibration_ledger=self.calibration_ledger,
+            )
+            self._standing.record(verified=True, correct=ok)
+            self._save()
+
+            bus_state = self.cognitive_core.record_wake_episode(
+                task_id=tid,
+                goal=str(t_spec.get("goal") or tid),
+                outcome_pass=ok,
+                verified_program_source=verified_prog,
+                failure_record=fail_rec,
+            )
+
+            if ok:
+                completed.append(tid)
+                idx += 1
+                # If >=2 verified programs accumulated, trigger Sleep concept abstraction automatically!
+                if len(self.cognitive_core.verified_programs_buffer) >= 2 and self._life.can_finish(0.1):
+                    self._life.spend(0.1)
+                    h_rep = self.cognitive_core.run_endogenous_homeostasis()
+                    homeostasis_events.append(h_rep)
+                    self._save()
+                continue
+
+            # Task failed! Check endogenous physiological trigger without any external caller instruction:
+            target_cfg = getattr(self, "_self_code_target", None)
+            if (
+                bus_state["homeostasis_needed"]
+                and self._life.can_finish(homeostasis_life_cost)
+                and attempts_by_id[tid] <= 2
+            ):
+                self._life.spend(homeostasis_life_cost)
+                if isinstance(target_cfg, Mapping):
+                    h_rep = self.cognitive_core.run_endogenous_homeostasis(
+                        target_cfg["code_root"],
+                        ring1_relpaths=target_cfg["ring1_relpaths"],
+                        sealed_heldout_by_target=target_cfg.get("sealed_heldout_by_target"),
+                        speed_benchmarks_by_target=target_cfg.get("speed_benchmarks_by_target"),
+                        test_relpaths=target_cfg.get("test_relpaths"),
+                    )
+                else:
+                    h_rep = self.cognitive_core.run_endogenous_homeostasis()
+                homeostasis_events.append(h_rep)
+                self._save()
+                # If self-evolution promoted a new Ring-1 organ or invented a new concept, immediately retry `tid`!
+                if h_rep.get("promoted_count", 0) > 0 or h_rep.get("concepts_invented", 0) > 0:
+                    continue
+            idx += 1
+
+        return {
+            "schema": SCHEMA + "/endogenous_awake_cycle",
+            "bribe_status": bribe_status,
+            "completed_tasks": completed,
+            "attempts_by_id": attempts_by_id,
+            "homeostasis_events": homeostasis_events,
+            "concepts_in_library": len(self.cognitive_core.concept_library.concepts()),
+            "life_remaining": round(self._life.remaining, 4),
+            "posture": self._standing.posture(),
+            "model_dependency_count": 0,
+        }
+
     # ---------------------------------------------------------------- report
 
     def report(self) -> dict[str, Any]:

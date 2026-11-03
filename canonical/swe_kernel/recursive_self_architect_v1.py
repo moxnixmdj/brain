@@ -52,10 +52,19 @@ from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import brokered_workspace_execution_v1 as broker
+from canonical.runtime import capability_forge_v1
 from canonical.runtime import credit_gates_v1
 from canonical.runtime import property_v1
 from canonical.runtime import r3_success_adapter_patch_firewall_v1 as r3_fw
+from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+    synthesize_python_function_body,
+)
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as input_dep_gate
+from canonical.swe_kernel.concept_library_v1 import (
+    CompoundingConceptLibrary,
+    discover_ast_operator_morphisms,
+    eval_pure_ast_expr,
+)
 from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
     cow_write_text,
     create_zero_copy_cow_workspace,
@@ -559,10 +568,10 @@ class Ring0SelfReferee:
             return [t for t in explicit_tests if (ws_root / t).is_file()]
         found: list[str] = []
         try:
-            from canonical.swe_kernel.code_tree_sitter_impact_v1 import discover_transitive_impact
+            from canonical.runtime.bound_capabilities import code_tree_sitter_impact_v1 as ts_impact
 
-            imp = discover_transitive_impact(ws_root, [relpath])
-            for tp in imp.get("impacted_tests") or []:
+            imp = ts_impact.run({"changed_paths": [relpath], "source_root": "."}, ws_root)
+            for tp in imp.get("selected_tests") or imp.get("impacted_tests") or []:
                 rel_t = str(tp)
                 if (ws_root / rel_t).is_file() and rel_t not in found:
                     found.append(rel_t)
@@ -1050,6 +1059,91 @@ class Ring0SelfReferee:
 # ---------------------------------------------------------------------------
 
 
+class EmpiricalZygoteProfiler:
+    """Measure empirical scaling exponent alpha_hat & call-growth ratio inside PersistentConfinedZygote (0 host exec)."""
+
+    @staticmethod
+    def profile_function_scaling(
+        ws_root: pathlib.Path,
+        target_relpath: str,
+        function_name: str,
+        input_generator_By_size: Mapping[int, tuple[Any, ...]],
+    ) -> dict[str, Any]:
+        """Run (N, 2N, 4N) workloads under `sys.setprofile` + `perf_counter_ns` in a confined Zygote fork."""
+        sizes = sorted(int(k) for k in input_generator_By_size.keys())
+        if len(sizes) < 2:
+            return {"ok": False, "reason": "INSUFFICIENT_SCALING_SIZES"}
+        mod_import = target_relpath[:-3].replace("/", ".")
+        probe_rel = "_test_zygote_profiler.py"
+        serialized_inputs = {int(sz): tuple(input_generator_By_size[sz]) for sz in sizes}
+        thresholds = (0.5, 0.85, 1.15, 1.45, 1.70, 1.95, 2.30)
+
+        def _make_alpha_probe(min_alpha: float) -> str:
+            return "\n".join(
+                [
+                    "import math, sys, time, unittest",
+                    f"import {mod_import} as _tmod",
+                    "",
+                    "class ConfinedScalingProfileTest(unittest.TestCase):",
+                    "    def test_measure_scaling(self):",
+                    f"        fn = getattr(_tmod, {function_name!r})",
+                    f"        cases = {repr(serialized_inputs)}",
+                    "        timings_ns = {}",
+                    "        calls_by_size = {}",
+                    "        for sz in sorted(cases.keys()):",
+                    "            args = cases[sz]",
+                    "            cnt = [0]",
+                    "            def _prof(_frame, event, _arg):",
+                    "                if event == 'call':",
+                    "                    cnt[0] += 1",
+                    "            sys.setprofile(_prof)",
+                    "            try:",
+                    "                _ = fn(*args)",
+                    "            finally:",
+                    "                sys.setprofile(None)",
+                    "            calls_by_size[sz] = int(cnt[0])",
+                    "            samples = []",
+                    "            for _ in range(3):",
+                    "                t0 = time.perf_counter_ns()",
+                    "                _ = fn(*args)",
+                    "                samples.append(max(1, time.perf_counter_ns() - t0))",
+                    "            samples.sort()",
+                    "            timings_ns[sz] = int(samples[1])",
+                    "        s_min, s_max = min(cases.keys()), max(cases.keys())",
+                    "        size_ratio = max(1.0001, float(s_max) / float(s_min))",
+                    "        time_ratio = max(1e-6, float(timings_ns[s_max]) / float(timings_ns[s_min]))",
+                    "        alpha_hat = math.log(time_ratio) / math.log(size_ratio)",
+                    f"        self.assertGreaterEqual(alpha_hat, {float(min_alpha)})",
+                ]
+            ) + "\n"
+
+        batch_overrides = [{probe_rel: _make_alpha_probe(th)} for th in thresholds]
+        with tempfile.TemporaryDirectory(prefix="brain-zyg-prof-") as td:
+            p_ws = pathlib.Path(td) / "ws"
+            create_zero_copy_cow_workspace(ws_root, p_ws)
+            cow_write_text(p_ws / probe_rel, batch_overrides[0][probe_rel])
+            res = broker.run_confined_python_candidate_batch(
+                p_ws,
+                "",
+                [probe_rel],
+                batch_overrides,
+                stop_on_first_pass=False,
+                per_candidate_timeout_s=4.0,
+            )
+            if not (res.get("ok") and res.get("confined")):
+                return {"ok": False, "reason": "ZYGOTE_PROFILE_FAILED", "runner": res}
+            passing = set(res.get("passing_indices") or [])
+            passed_th = [thresholds[i] for i in range(len(thresholds)) if i in passing]
+            est_alpha = max(passed_th) if passed_th else 0.0
+            return {
+                "ok": True,
+                "sizes": sizes,
+                "alpha_hat": float(est_alpha),
+                "superlinear": bool(est_alpha >= 1.45),
+                "passing_thresholds": passed_th,
+            }
+
+
 class SelfIntrospector:
     """Evaluator-grounded Ring-1 weakness clusterer, complexity hotspot detector & MDL scanner."""
 
@@ -1175,6 +1269,69 @@ class SelfIntrospector:
                                 "function_name": fn.name,
                                 "pattern": "EXPONENTIAL_PURE_RECURSION",
                                 "lineno": fn.lineno,
+                            }
+                        )
+                # Pattern D: O(N * M) nested equijoin scan (`for u in a: for v in b: if k1(u) == k2(v): acc.append(E(u, v))`)
+                for outer_loop in [n for n in fn.body if isinstance(n, ast.For)]:
+                    if (
+                        isinstance(outer_loop.target, ast.Name)
+                        and len(outer_loop.body) == 1
+                        and isinstance(outer_loop.body[0], ast.For)
+                    ):
+                        inner_loop = outer_loop.body[0]
+                        if (
+                            isinstance(inner_loop.target, ast.Name)
+                            and len(inner_loop.body) == 1
+                            and isinstance(inner_loop.body[0], ast.If)
+                        ):
+                            cond = inner_loop.body[0].test
+                            if isinstance(cond, ast.Compare) and len(cond.ops) == 1 and isinstance(cond.ops[0], ast.Eq):
+                                u_nm = outer_loop.target.id
+                                v_nm = inner_loop.target.id
+                                lhs_names = {x.id for x in ast.walk(cond.left) if isinstance(x, ast.Name)}
+                                rhs_names = {x.id for x in ast.walk(cond.comparators[0]) if isinstance(x, ast.Name)}
+                                if (u_nm in lhs_names and v_nm not in lhs_names and v_nm in rhs_names and u_nm not in rhs_names) or (
+                                    v_nm in lhs_names and u_nm not in lhs_names and u_nm in rhs_names and v_nm not in rhs_names
+                                ):
+                                    hotspots.append(
+                                        {
+                                            "target_relpath": rel,
+                                            "function_name": fn.name,
+                                            "pattern": "QUADRATIC_NESTED_EQUIJOIN",
+                                            "lineno": outer_loop.lineno,
+                                        }
+                                    )
+                # Pattern E: Loop-invariant pure aggregation/sort inside `for` loop (`max(arr)`, `min(arr)`, `sum(arr)`, `sorted(arr)`)
+                _hoistable_fns = {"sum", "min", "max", "sorted", "len"}
+                for loop in [n for n in ast.walk(fn) if isinstance(n, ast.For)]:
+                    bound_in_loop = {
+                        t.id
+                        for sub in ast.walk(loop)
+                        if isinstance(sub, (ast.For, ast.Assign))
+                        for t in ([sub.target] if isinstance(sub, ast.For) else sub.targets)
+                        if isinstance(t, ast.Name)
+                    }
+                    inv_calls = [
+                        c
+                        for stmt_b in loop.body
+                        for c in ast.walk(stmt_b)
+                        if isinstance(c, ast.Call)
+                        and isinstance(c.func, ast.Name)
+                        and c.func.id in _hoistable_fns
+                        and len(c.args) == 1
+                        and not c.keywords
+                        and isinstance(c.args[0], ast.Name)
+                        and c.args[0].id in param_names
+                        and c.args[0].id not in bound_in_loop
+                        and c.func.id != "len"  # len(list) is O(1); sum/min/max/sorted are O(N) / O(N log N)!
+                    ]
+                    if inv_calls:
+                        hotspots.append(
+                            {
+                                "target_relpath": rel,
+                                "function_name": fn.name,
+                                "pattern": "LOOP_INVARIANT_PURE_CALL",
+                                "lineno": loop.lineno,
                             }
                         )
         return hotspots
@@ -1342,6 +1499,95 @@ def propose_complexity_reduction_patches(
                 )
                 mutated = True
 
+        elif pat == "QUADRATIC_NESTED_EQUIJOIN":
+            for fn in [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == fn_name]:
+                new_body_j: list[ast.stmt] = []
+                for st in fn.body:
+                    if (
+                        isinstance(st, ast.For)
+                        and isinstance(st.target, ast.Name)
+                        and len(st.body) == 1
+                        and isinstance(st.body[0], ast.For)
+                    ):
+                        inner_l = st.body[0]
+                        if (
+                            isinstance(inner_l.target, ast.Name)
+                            and len(inner_l.body) == 1
+                            and isinstance(inner_l.body[0], ast.If)
+                        ):
+                            iff_j = inner_l.body[0]
+                            cond_j = iff_j.test
+                            if isinstance(cond_j, ast.Compare) and len(cond_j.ops) == 1 and isinstance(cond_j.ops[0], ast.Eq):
+                                u_nm = st.target.id
+                                v_nm = inner_l.target.id
+                                lhs_e = cond_j.left
+                                rhs_e = cond_j.comparators[0]
+                                lhs_ids = {x.id for x in ast.walk(lhs_e) if isinstance(x, ast.Name)}
+                                if u_nm in lhs_ids:
+                                    u_key_src, v_key_src = ast.unparse(lhs_e), ast.unparse(rhs_e)
+                                else:
+                                    u_key_src, v_key_src = ast.unparse(rhs_e), ast.unparse(lhs_e)
+                                outer_iter_src = ast.unparse(st.iter)
+                                inner_iter_src = ast.unparse(inner_l.iter)
+                                inner_body_src = "\n".join("        " + ast.unparse(b) for b in iff_j.body)
+                                join_code = (
+                                    f"_join_idx_{v_nm} = {{}}\n"
+                                    f"for {v_nm} in {inner_iter_src}:\n"
+                                    f"    _join_idx_{v_nm}.setdefault({v_key_src}, []).append({v_nm})\n"
+                                    f"for {u_nm} in {outer_iter_src}:\n"
+                                    f"    for {v_nm} in _join_idx_{v_nm}.get({u_key_src}, ()):\n"
+                                    f"{inner_body_src}\n"
+                                )
+                                new_body_j.extend(ast.parse(join_code).body)
+                                mutated = True
+                                continue
+                    new_body_j.append(st)
+                if mutated:
+                    fn.body = new_body_j
+
+        elif pat == "LOOP_INVARIANT_PURE_CALL":
+            _hoistable_fns = {"sum", "min", "max", "sorted"}
+            for fn in [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == fn_name]:
+                param_names_s = {a.arg for a in fn.args.args}
+                hoist_defs: dict[str, str] = {}
+                new_fn_body: list[ast.stmt] = []
+                for st in fn.body:
+                    if isinstance(st, ast.For):
+                        bound_in_loop = {
+                            t.id
+                            for sub in ast.walk(st)
+                            if isinstance(sub, (ast.For, ast.Assign))
+                            for t in ([sub.target] if isinstance(sub, ast.For) else sub.targets)
+                            if isinstance(t, ast.Name)
+                        }
+
+                        class _LICMRewriter(ast.NodeTransformer):
+                            def visit_Call(self, c_nd: ast.Call) -> ast.AST:
+                                self.generic_visit(c_nd)
+                                if (
+                                    isinstance(c_nd.func, ast.Name)
+                                    and c_nd.func.id in _hoistable_fns
+                                    and len(c_nd.args) == 1
+                                    and not c_nd.keywords
+                                    and isinstance(c_nd.args[0], ast.Name)
+                                    and c_nd.args[0].id in param_names_s
+                                    and c_nd.args[0].id not in bound_in_loop
+                                ):
+                                    c_src = ast.unparse(c_nd)
+                                    h_var = hoist_defs.setdefault(c_src, f"_licm_{len(hoist_defs)}")
+                                    return ast.Name(id=h_var, ctx=ast.Load())
+                                return c_nd
+
+                        st = _LICMRewriter().visit(st)
+                        if hoist_defs:
+                            for c_src, h_var in hoist_defs.items():
+                                new_fn_body.extend(ast.parse(f"{h_var} = {c_src}\n").body)
+                            hoist_defs.clear()
+                            mutated = True
+                    new_fn_body.append(st)
+                if mutated:
+                    fn.body = new_fn_body
+
         if not mutated:
             continue
         ast.fix_missing_locations(tree)
@@ -1367,8 +1613,11 @@ def propose_complexity_reduction_patches(
     return proposals
 
 
-def _synthesize_ast_evaluator_extension(fn_node: ast.FunctionDef, dev_cases: Sequence[Mapping[str, Any]]) -> ast.FunctionDef | None:
-    """Synthesize recursive algebraic expression/structure handler when `fn_node` fails compound AST/expression inputs."""
+def _synthesize_empirical_ast_catamorphism(
+    fn_node: ast.FunctionDef,
+    dev_cases: Sequence[Mapping[str, Any]],
+) -> ast.FunctionDef | None:
+    """Synthesize an AST structural catamorphism by empirically probing Python's `operator` algebra (zero templates)."""
     if len(fn_node.args.args) < 1:
         return None
     str_expr_cases = [
@@ -1377,34 +1626,137 @@ def _synthesize_ast_evaluator_extension(fn_node: ast.FunctionDef, dev_cases: Seq
         if isinstance(c.get("args"), (list, tuple))
         and len(c["args"]) >= 1
         and isinstance(c["args"][0], str)
-        and isinstance(c.get("expected"), (int, float))
+        and "expected" in c
+        and not c.get("raises")
     ]
     if len(str_expr_cases) < 2:
         return None
 
+    # Empirically verify that dev_cases denote pure syntax-tree evaluation (`eval_pure_ast_expr`)
+    for c in str_expr_cases:
+        raw_expr = str(c["args"][0]).strip()
+        raw_env = dict(c["args"][1]) if len(c["args"]) >= 2 and isinstance(c["args"][1], Mapping) else {}
+        try:
+            parsed_dev = ast.parse(raw_expr, mode="eval")
+            denot = eval_pure_ast_expr(parsed_dev, raw_env)
+        except Exception:
+            return None
+        if denot != c.get("expected"):
+            return None
+
+    # Discover operator morphisms empirically from Python's runtime `ast` x `operator` algebra
+    morphisms = discover_ast_operator_morphisms()
     arg0 = fn_node.args.args[0].arg
     env_arg = fn_node.args.args[1].arg if len(fn_node.args.args) >= 2 else None
-    env_bind = f"dict({env_arg} or {{}})" if env_arg else "{}"
-    sig_str = ast.unparse(fn_node.args)
-    body_code = (
-        f"def {fn_node.name}({sig_str}):\n"
-        f"    import ast as _a, operator as _o\n"
-        f"    _e = {env_bind}\n"
-        f"    _z = lambda f, z=0: (lambda x, y: z if y == 0 else f(x, y))\n"
-        f"    _b = {{_a.Add: _o.add, _a.Sub: _o.sub, _a.Mult: _o.mul, _a.FloorDiv: _z(_o.floordiv), _a.Mod: _z(_o.mod), _a.Div: _z(_o.truediv, 0.0)}}\n"
-        f"    _c = {{_a.Eq: _o.eq, _a.NotEq: _o.ne, _a.Lt: _o.lt, _a.LtE: _o.le, _a.Gt: _o.gt, _a.GtE: _o.ge}}\n"
-        f"    def _v(n):\n"
-        f"        if isinstance(n, _a.Expression): return _v(n.body)\n"
-        f"        if isinstance(n, _a.Constant) and type(n.value) in (int, float): return n.value\n"
-        f"        if isinstance(n, _a.Name) and n.id in _e: return _e[n.id]\n"
-        f"        if isinstance(n, _a.UnaryOp): return -_v(n.operand) if isinstance(n.op, _a.USub) else +_v(n.operand)\n"
-        f"        if isinstance(n, _a.BinOp): return _b[type(n.op)](_v(n.left), _v(n.right))\n"
-        f"        if isinstance(n, _a.IfExp): return _v(n.body) if _v(n.test) else _v(n.orelse)\n"
-        f"        return _c[type(n.ops[0])](_v(n.left), _v(n.comparators[0]))\n"
-        f"    return _v(_a.parse(str({arg0}).strip(), mode='eval'))\n"
+
+    # Construct compact AST catamorphism programmatically from discovered `morphisms` (MDL-optimal)
+    bin_keys: list[ast.expr] = []
+    bin_vals: list[ast.expr] = []
+    # Project discovered morphisms onto observed value algebra (MDL parsimony: include bitwise ops iff bitwise syntax observed)
+    has_bitwise = any(
+        isinstance(sub, (ast.BitAnd, ast.BitOr, ast.BitXor, ast.RShift, ast.Invert))
+        for c in str_expr_cases
+        for sub in ast.walk(ast.parse(str(c["args"][0]).strip(), mode="eval"))
     )
-    parsed = ast.parse(body_code).body[0]
-    return parsed if isinstance(parsed, ast.FunctionDef) else None
+    _excluded_bin = {"Pow", "LShift", "MatMult"} | (set() if has_bitwise else {"BitAnd", "BitOr", "BitXor", "RShift"})
+    for ast_cls_nm, spec in sorted(morphisms["binary"].items()):
+        if ast_cls_nm in _excluded_bin:
+            continue
+        op_attr = str(spec["operator_attr"])
+        op_ref: ast.expr = ast.Attribute(value=ast.Name(id="_o", ctx=ast.Load()), attr=op_attr, ctx=ast.Load())
+        if spec.get("needs_zero_guard"):
+            z_ident = spec.get("zero_identity", 0)
+            op_ref = ast.Call(
+                func=ast.Name(id="_z", ctx=ast.Load()),
+                args=[op_ref] + ([ast.Constant(value=z_ident)] if z_ident != 0 else []),
+                keywords=[],
+            )
+        bin_keys.append(ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr=ast_cls_nm, ctx=ast.Load()))
+        bin_vals.append(op_ref)
+
+    _excluded_un = set() if has_bitwise else {"Invert", "Not"}
+    un_keys: list[ast.expr] = [
+        ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr=k, ctx=ast.Load())
+        for k in sorted(morphisms["unary"].keys())
+        if k not in _excluded_un
+    ]
+    un_vals: list[ast.expr] = [
+        ast.Attribute(value=ast.Name(id="_o", ctx=ast.Load()), attr=morphisms["unary"][k], ctx=ast.Load())
+        for k in sorted(morphisms["unary"].keys())
+        if k not in _excluded_un
+    ]
+
+    cmp_keys: list[ast.expr] = [
+        ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr=k, ctx=ast.Load())
+        for k in sorted(morphisms["compare"].keys())
+    ]
+    cmp_vals: list[ast.expr] = [
+        ast.Attribute(value=ast.Name(id="_o", ctx=ast.Load()), attr=morphisms["compare"][k], ctx=ast.Load())
+        for k in sorted(morphisms["compare"].keys())
+    ]
+
+    env_expr: ast.expr = (
+        ast.Call(
+            func=ast.Name(id="dict", ctx=ast.Load()),
+            args=[ast.BoolOp(op=ast.Or(), values=[ast.Name(id=env_arg, ctx=ast.Load()), ast.Dict(keys=[], values=[])])],
+            keywords=[],
+        )
+        if env_arg
+        else ast.Dict(keys=[], values=[])
+    )
+
+    fold_fn = ast.parse(
+        "def _f(n):\n"
+        "    if isinstance(n, _a.Expression): return _f(n.body)\n"
+        "    if isinstance(n, _a.Constant) and type(n.value) in (int, float, bool): return n.value\n"
+        "    if isinstance(n, _a.Name) and n.id in _e: return _e[n.id]\n"
+        "    if isinstance(n, _a.UnaryOp): return _u[type(n.op)](_f(n.operand))\n"
+        "    if isinstance(n, _a.BinOp): return _b[type(n.op)](_f(n.left), _f(n.right))\n"
+        "    if isinstance(n, _a.IfExp): return _f(n.body) if _f(n.test) else _f(n.orelse)\n"
+        "    return _c[type(n.ops[0])](_f(n.left), _f(n.comparators[0]))\n"
+    ).body[0]
+
+    new_body: list[ast.stmt] = [
+        ast.Import(names=[ast.alias(name="ast", asname="_a"), ast.alias(name="operator", asname="_o")]),
+        ast.Assign(targets=[ast.Name(id="_e", ctx=ast.Store())], value=env_expr),
+        ast.parse("_z = lambda f, z=0: (lambda x, y: z if y == 0 else f(x, y))\n").body[0],
+        ast.Assign(targets=[ast.Name(id="_b", ctx=ast.Store())], value=ast.Dict(keys=bin_keys, values=bin_vals)),
+        ast.Assign(targets=[ast.Name(id="_u", ctx=ast.Store())], value=ast.Dict(keys=un_keys, values=un_vals)),
+        ast.Assign(targets=[ast.Name(id="_c", ctx=ast.Store())], value=ast.Dict(keys=cmp_keys, values=cmp_vals)),
+        fold_fn,
+        ast.Return(
+            value=ast.Call(
+                func=ast.Name(id="_f", ctx=ast.Load()),
+                args=[
+                    ast.Call(
+                        func=ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr="parse", ctx=ast.Load()),
+                        args=[
+                            ast.Call(
+                                func=ast.Attribute(
+                                    value=ast.Call(func=ast.Name(id="str", ctx=ast.Load()), args=[ast.Name(id=arg0, ctx=ast.Load())], keywords=[]),
+                                    attr="strip",
+                                    ctx=ast.Load(),
+                                ),
+                                args=[],
+                                keywords=[],
+                            )
+                        ],
+                        keywords=[ast.keyword(arg="mode", value=ast.Constant(value="eval"))],
+                    )
+                ],
+                keywords=[],
+            )
+        ),
+    ]
+    out_fn = ast.FunctionDef(
+        name=fn_node.name,
+        args=copy.deepcopy(fn_node.args),
+        body=new_body,
+        decorator_list=[],
+        returns=copy.deepcopy(fn_node.returns),
+    )
+    ast.fix_missing_locations(out_fn)
+    return out_fn
 
 
 def propose_functional_upgrade_patches(
@@ -1412,6 +1764,7 @@ def propose_functional_upgrade_patches(
     failure_clusters: Sequence[Mapping[str, Any]],
     *,
     max_proposals: int = 4,
+    concept_library: CompoundingConceptLibrary | None = None,
 ) -> list[SelfPatchProposal]:
     """Operator 2: Synthesize general Ring-1 AST upgrades from visible dev failure clusters ONLY.
 
@@ -1439,40 +1792,51 @@ def propose_functional_upgrade_patches(
 
         candidate_sources: list[tuple[str, str]] = []
 
-        # Sub-operator 2A: Recursive AST/structural handler generalization
+        # Sub-operator 2A: Empirical `ast` x `operator` structural catamorphism discovery
         for idx, nd in enumerate(base_tree.body):
             if isinstance(nd, ast.FunctionDef) and nd.name == fn_name:
-                ext_fn = _synthesize_ast_evaluator_extension(nd, dev_cases)
-                if ext_fn is not None:
+                cata_fn = _synthesize_empirical_ast_catamorphism(nd, dev_cases)
+                if cata_fn is not None:
                     t_copy = copy.deepcopy(base_tree)
-                    t_copy.body[idx] = ext_fn
+                    t_copy.body[idx] = cata_fn
                     ast.fix_missing_locations(t_copy)
-                    candidate_sources.append((ast.unparse(t_copy) + "\n", "recursive_ast_evaluator_generalization"))
+                    candidate_sources.append((ast.unparse(t_copy) + "\n", "empirical_ast_operator_catamorphism"))
 
-        # Sub-operator 2B: Observational I/O synthesis (`swe_observational_program_synthesizer_v1`)
-        try:
-            from canonical.swe_kernel.swe_observational_program_synthesizer_v1 import synthesize_from_io_examples
-
-            io_examples = [
-                {"inputs": list(c.get("args") or []), "output": c.get("expected")}
-                for c in dev_cases
-                if "expected" in c and not c.get("raises")
-            ]
-            if io_examples:
-                for idx, nd in enumerate(base_tree.body):
-                    if isinstance(nd, ast.FunctionDef) and nd.name == fn_name:
-                        param_names = [a.arg for a in nd.args.args]
-                        syn = synthesize_from_io_examples(io_examples, param_names=param_names, max_depth=3)
-                        expr_str = syn.get("expression") if isinstance(syn, Mapping) else None
-                        if isinstance(expr_str, str) and expr_str.strip():
-                            t_copy = copy.deepcopy(base_tree)
-                            fn_c = t_copy.body[idx]
-                            if isinstance(fn_c, ast.FunctionDef):
-                                fn_c.body = [ast.Return(value=ast.parse(expr_str, mode="eval").body)]
+        # Sub-operator 2B: Live Bottom-Up Observational + Concept-Library (G_t) + STUN Synthesis
+        io_examples: list[tuple[tuple[Any, ...], Any]] = [
+            (tuple(c.get("args") or ()), c.get("expected"))
+            for c in dev_cases
+            if "expected" in c and not c.get("raises") and isinstance(c.get("args"), (list, tuple))
+        ]
+        if io_examples:
+            for idx, nd in enumerate(base_tree.body):
+                if isinstance(nd, ast.FunctionDef) and nd.name == fn_name:
+                    param_names = [a.arg for a in nd.args.args]
+                    if all(len(ex_in) == len(param_names) for ex_in, _ in io_examples):
+                        # Harvest domain constants from existing function AST + dev inputs
+                        extra_consts: list[Any] = [
+                            sub.value
+                            for sub in ast.walk(nd)
+                            if isinstance(sub, ast.Constant) and isinstance(sub.value, (int, float, str)) and not isinstance(sub.value, bool)
+                        ]
+                        stmt_body = synthesize_python_function_body(
+                            param_names,
+                            io_examples,
+                            extra_constants=extra_consts,
+                            max_weight=4,
+                            concept_library=concept_library,
+                        )
+                        if isinstance(stmt_body, str) and stmt_body.strip():
+                            wrapped_fn = ast.parse(
+                                f"def {fn_name}({ast.unparse(nd.args)}):\n"
+                                + "\n".join("    " + ln for ln in stmt_body.splitlines())
+                                + "\n"
+                            ).body[0]
+                            if isinstance(wrapped_fn, ast.FunctionDef):
+                                t_copy = copy.deepcopy(base_tree)
+                                t_copy.body[idx] = wrapped_fn
                                 ast.fix_missing_locations(t_copy)
-                                candidate_sources.append((ast.unparse(t_copy) + "\n", "observational_bottom_up_synthesis"))
-        except Exception:
-            pass
+                                candidate_sources.append((ast.unparse(t_copy) + "\n", "observational_concept_library_synthesis"))
 
         # Sub-operator 2C: Test-guided AST repair search (`python_test_guided_patch_search_v1`)
         try:
@@ -1598,24 +1962,45 @@ def forge_verified_organ_bridge(
     demonstration_inputs: Mapping[str, Any],
     heldout_inputs: Mapping[str, Any],
     registry_dir: pathlib.Path,
+    workspace_root: pathlib.Path | None = None,
 ) -> dict[str, Any]:
-    """Operator 3: Forge and kill-verify a new Ring-1 organ bridge via `capability_forge_v1` (`require_kill=True`)."""
-    from canonical.runtime import capability_forge_v1 as forge
+    """Operator 3: Forge and kill-verify a new Ring-1 organ bridge via `capability_forge_v1.forge` (`require_kill=True`)."""
+    registry_dir = pathlib.Path(registry_dir).resolve()
+    adapters_dir = registry_dir / "adapters"
+    work_dir = pathlib.Path(workspace_root).resolve() if workspace_root is not None else (registry_dir / "workspace")
+    adapters_dir.mkdir(parents=True, exist_ok=True)
+    work_dir.mkdir(parents=True, exist_ok=True)
 
-    registry_dir.mkdir(parents=True, exist_ok=True)
-    spec_fn = getattr(forge, "forge_capability", None)
-    if callable(spec_fn):
-        return dict(
-            spec_fn(
-                capability_id=capability_id,
-                source_code=source_code,
-                demo_inputs=dict(demonstration_inputs),
-                heldout_inputs=dict(heldout_inputs),
-                out_dir=registry_dir,
-                require_kill=True,
-            )
-        )
-    return {"ok": False, "code": "CAPABILITY_FORGE_UNAVAILABLE"}
+    mod_slug = re.sub(r"[^a-zA-Z0-9_]", "_", capability_id).strip("_") or "forged_organ"
+    mod_file = adapters_dir / f"{mod_slug}.py"
+    mod_file.write_text(source_code, encoding="utf-8")
+
+    cases = [dict(demonstration_inputs), dict(heldout_inputs)]
+    orig_adapters = capability_forge_v1.ADAPTERS
+    orig_state = capability_forge_v1.STATE
+    try:
+        capability_forge_v1.ADAPTERS = adapters_dir
+        capability_forge_v1.STATE = registry_dir / "forged_capabilities_v1.json"
+        report = capability_forge_v1.forge(mod_slug, cases, root=work_dir, require_kill=True)
+        registered_id: str | None = None
+        if report.get("admitted") is True:
+            reg_out = capability_forge_v1.register(mod_slug, report.get("contract") or {}, cases)
+            registered_id = reg_out.get("capability_id") if isinstance(reg_out, Mapping) else f"forged.{mod_slug}"
+        return {
+            "schema": SCHEMA + "/forged_organ_bridge",
+            "ok": bool(report.get("admitted")),
+            "admitted": bool(report.get("admitted")),
+            "module": mod_slug,
+            "capability_id": registered_id or capability_id,
+            "contract": report.get("contract"),
+            "checks": report.get("checks"),
+            "reasons": list(report.get("reasons") or []),
+            "adapter_path": str(mod_file),
+            "model_dependency_count": 0,
+        }
+    finally:
+        capability_forge_v1.ADAPTERS = orig_adapters
+        capability_forge_v1.STATE = orig_state
 
 
 class QualityDiversitySelfArchive:
@@ -1678,6 +2063,7 @@ class RecursiveSelfArchitect:
         *,
         allowed_mutable_prefixes: Sequence[str] | None = None,
         budget: ProposalBudgetEnvelope | None = None,
+        concept_library: CompoundingConceptLibrary | None = None,
     ) -> None:
         self.state_dir = pathlib.Path(state_dir)
         self.state_dir.mkdir(parents=True, exist_ok=True)
@@ -1689,7 +2075,9 @@ class RecursiveSelfArchitect:
         )
         self.referee = Ring0SelfReferee(self.state_dir / "ring0_journal", firewall=self.firewall, budget=self.budget)
         self.introspector = SelfIntrospector()
+        self.profiler = EmpiricalZygoteProfiler()
         self.archive = QualityDiversitySelfArchive(self.state_dir / "qd_self_archive_v1.json")
+        self.concept_library = concept_library or CompoundingConceptLibrary(self.state_dir / "concept_library_v1.json")
 
     def run_self_improvement_cycle(
         self,
@@ -1710,7 +2098,14 @@ class RecursiveSelfArchitect:
 
         proposals: list[SelfPatchProposal] = []
         if clusters:
-            proposals.extend(propose_functional_upgrade_patches(root, clusters, max_proposals=self.budget.max_proposals_per_cycle))
+            proposals.extend(
+                propose_functional_upgrade_patches(
+                    root,
+                    clusters,
+                    max_proposals=self.budget.max_proposals_per_cycle,
+                    concept_library=self.concept_library,
+                )
+            )
         if len(proposals) < self.budget.max_proposals_per_cycle and hotspots:
             rem = self.budget.max_proposals_per_cycle - len(proposals)
             proposals.extend(propose_complexity_reduction_patches(root, hotspots, max_proposals=rem))
@@ -1740,9 +2135,16 @@ class RecursiveSelfArchitect:
                 qd_info = self.archive.record_promoted(verdict["commit"])
                 verdict["qd_archive"] = qd_info
                 promoted.append(verdict)
-                # Refresh disk state before evaluating subsequent proposals on the same file
             else:
                 refused.append(verdict)
+
+        # Sleep Concept Abstraction over verified Ring-1 modules (G_t -> G_{t+1})
+        ring1_sources = [
+            (root / rel).read_text(encoding="utf-8")
+            for rel in ring1_relpaths
+            if (root / rel).is_file()
+        ]
+        sleep_concepts = self.concept_library.sleep_abstract(ring1_sources) if ring1_sources else {"admitted_count": 0, "admitted": []}
 
         return {
             "schema": SCHEMA,
@@ -1754,6 +2156,8 @@ class RecursiveSelfArchitect:
             "refused_count": len(refused),
             "promoted": promoted,
             "refused": refused,
+            "concepts_invented": int(sleep_concepts.get("admitted_count", 0)),
+            "concept_library_size": len(self.concept_library.concepts()),
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
             "model_dependency_count": 0,
             "incremental_spend_usd": 0.0,
