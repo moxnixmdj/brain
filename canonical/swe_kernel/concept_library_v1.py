@@ -452,10 +452,16 @@ def _generate_probe_grids(arity: int) -> list[tuple[str, list[tuple[Any, ...]]]]
     """Deterministic independent-coordinate probe banks testing all variable orderings."""
     base_nums = (-4, -1, 0, 1, 3, 7, 12, 20)
     strides = (1, 3, 5, 7)
+    # Equal-argument points, added 2026-11-04. Every probe in the original grid had distinct
+    # coordinates, so a division by (a - b) was NEVER evaluated at a == b -- the one input where it
+    # dies. Measured: the library admitted `... / (_v2 - _v1)` with no guard and called it verified.
+    equal_tuples: list[tuple[Any, ...]] = [
+        tuple(base_nums[k % len(base_nums)] for _ in range(arity)) for k in range(4)
+    ]
     num_tuples: list[tuple[Any, ...]] = [
         tuple(base_nums[(i * strides[j % 4] + j * 2) % len(base_nums)] for j in range(arity))
         for i in range(16)
-    ] + [
+    ] + equal_tuples + [
         tuple(float(base_nums[(i * strides[(j + 1) % 4] + j * 3) % len(base_nums)]) * 0.5 for j in range(arity))
         for i in range(10)
     ]
@@ -639,11 +645,16 @@ class CompoundingConceptLibrary:
             pts: list[tuple[Any, ...]] = []
             sigs1: list[Any] = []
             sigs2: list[Any] = []
+            undefined: list[tuple[tuple[Any, ...], str]] = []
             for row in grid:
                 try:
                     v1 = eval_pure_ast_expr(parsed, dict(zip(params, row)), extra_callables=cmap)
                     v2 = eval_pure_ast_expr(parsed, dict(zip(params, row)), extra_callables=cmap)
-                except Exception:
+                except Exception as exc:  # noqa: BLE001
+                    # NOT a skip. A concept that raises on an input in its own domain is not a
+                    # total building block: any program built from it can die there. This `continue`
+                    # was the whole defect measured on 2026-11-04 (2/2 admitted concepts partial).
+                    undefined.append((tuple(row), type(exc).__name__))
                     continue
                 s1 = _freeze_output(v1)
                 s2 = _freeze_output(v2)
@@ -653,6 +664,10 @@ class CompoundingConceptLibrary:
                 sigs1.append(s1)
                 sigs2.append(s2)
             if len(pts) >= 4 and len(set(sigs1)) >= 2 and sigs1 == sigs2:
+                if undefined:
+                    # Would have qualified, but is partial. Report the domain it fails on rather
+                    # than silently certifying the subdomain where it happens to survive.
+                    return False, "PARTIAL_DOMAIN:%s:%s" % (dom_kind, undefined[0][1])
                 chosen_domain = dom_kind
                 valid_probes = pts
                 baseline_sigs = sigs1

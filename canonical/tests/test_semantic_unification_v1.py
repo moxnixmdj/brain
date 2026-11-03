@@ -102,38 +102,70 @@ def test_bridge_rewrites_the_second_program_into_the_first_spelling():
     assert "max(s, t) - min(s, t)" in bridged     # renamed into the SECOND program's variables
 
 
-def test_join_restores_admission_that_respelling_lost():
-    """End-to-end, at the one corpus size where it bites.
+def test_join_is_mechanically_sound_and_keeps_the_corpus_learnable():
+    """What the bridge is actually good for, after two gates moved underneath it.
 
-    Thin corpus, one concept unable to amortise across two spellings: as written it admits fewer
-    concepts than a single-spelling corpus; rewritten through a correspondence it recovers the
-    single-spelling count. This is the join doing work rather than being described.
+    HISTORY, because the claim has now been wrong twice:
+
+      1. First version asserted `two_spellings < all_one_spelling` at size 4, with the join
+         recovering the difference. That ordering INVERTED when the totality gate landed.
+      2. Second version asserted `bridged >= mixed` at every size. Measured 2026-11-04: that is
+         FALSE at size 5 (mixed 2, bridged 1), because bridging rewrites every program into one
+         spelling, which homogenises the corpus and reduces the diversity of learnable subtrees.
+
+    So the honest claim is the mechanical one plus a floor: every correspondence bridges, and the
+    bridged corpus is still a corpus the library can learn from. Whether bridging increases
+    admission depends on the gates and on the corpus, and asserting a direction would be fitting
+    the test to today's numbers -- which is how both previous versions went wrong.
     """
-    from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
-
     sys.path.insert(0, str(ROOT / "canonical" / "tools"))
     from semantic_join_benchmark_v1 import (  # type: ignore[import-not-found]
         TRIPLES,
+        _measure_arms,
         bridge_corpus,
         spelling_a,
         spelling_b,
-        _measure_arms,
     )
 
-    size = 4
-    first = [spelling_a(i, v) for i, v in enumerate(TRIPLES[:size])]
-    second = [spelling_b(i, v) for i, v in enumerate(TRIPLES[:size])]
-    bridged, log = bridge_corpus(first, second)
-    assert all(b["status"] == "BRIDGED" for b in log)
+    for size in (4, 6, 8):
+        first = [spelling_a(i, v) for i, v in enumerate(TRIPLES[:size])]
+        second = [spelling_b(i, v) for i, v in enumerate(TRIPLES[:size])]
+        bridged, log = bridge_corpus(first, second)
+        assert len(bridged) == len(second)
+        assert all(b["status"] == "BRIDGED" for b in log), "every pair must bridge"
+        assert bridged != second, "the bridge must actually change the text"
 
-    arms = {a["arm"]: a for a in _measure_arms(first, second, bridged)}
-    control, mixed, joined = (arms["all_one_spelling"], arms["two_spellings"], arms["bridged"])
-    assert control["admitted"] >= 1, "concept must be learnable, or the test measures nothing"
-    assert mixed["admitted"] < control["admitted"], "respelling must actually cost admission"
-    assert joined["admitted"] > mixed["admitted"], "the join must recover some of that cost"
-    assert joined["admitted"] == control["admitted"]
-    # The honest bound, measured in the same run: recovering the CORPUS does not improve reach.
-    assert joined["held_out_solved"] <= max(control["held_out_solved"], mixed["held_out_solved"])
+        arms = {a["arm"]: a for a in _measure_arms(first, second, bridged)}
+        assert arms["all_one_spelling"]["admitted"] >= 1, "concept must be learnable"
+        assert arms["bridged"]["admitted"] >= 1, "the bridged corpus must remain learnable"
+
+
+def test_join_admission_direction_is_not_claimed():
+    """Guard against re-adding a directional claim: the data does not support one.
+
+    Measured across the sweep, bridging sometimes raises and sometimes lowers the admitted count.
+    Any future assert of a direction must come with a reason, and this test records that the
+    direction is genuinely unpinned rather than merely untested.
+    """
+    sys.path.insert(0, str(ROOT / "canonical" / "tools"))
+    from semantic_join_benchmark_v1 import (  # type: ignore[import-not-found]
+        TRIPLES,
+        _measure_arms,
+        bridge_corpus,
+        spelling_a,
+        spelling_b,
+    )
+
+    deltas = []
+    for size in (4, 5, 6):
+        first = [spelling_a(i, v) for i, v in enumerate(TRIPLES[:size])]
+        second = [spelling_b(i, v) for i, v in enumerate(TRIPLES[:size])]
+        bridged, _ = bridge_corpus(first, second)
+        arms = {a["arm"]: a for a in _measure_arms(first, second, bridged)}
+        deltas.append(arms["bridged"]["admitted"] - arms["two_spellings"]["admitted"])
+    assert len(set(deltas)) > 1, (
+        "if bridging had a consistent direction, that direction could be claimed; it does not, so "
+        f"no directional claim is made. deltas={deltas}")
 
 
 def test_correspondences_carry_no_authority_and_no_proof_claim():
