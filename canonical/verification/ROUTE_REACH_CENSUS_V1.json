@@ -1,0 +1,4122 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_ROUTING_MEASUREMENT_ONLY",
+ "capabilities": 141,
+ "declared_effects": 259,
+ "duration_s": 39.94,
+ "effects_reached_by_their_own_owner": 69,
+ "effects_with_colliding_owners": 12,
+ "measured_at_unix": 1793738561,
+ "outcomes": {
+  "REACHED_BY_ANOTHER": 55,
+  "SELF_REACHED": 48,
+  "UNREACHED": 38
+ },
+ "outcomes_per_address": {
+  "DECLARED_VOCABULARY": {
+   "REACHED_BY_ANOTHER": 55,
+   "SELF_REACHED": 48,
+   "UNREACHED": 38
+  },
+  "NATURAL": {
+   "SELF_REACHED": 8,
+   "UNREACHED": 133
+  },
+  "NATURAL_WITH_INPUT": {
+   "SELF_REACHED": 8,
+   "UNREACHED": 133
+  }
+ },
+ "reach_denominator_claim": "TEMPLATED_ADDRESSES_ONLY__NOT_A_REACH_DENOMINATOR__UNREACHED_DOES_NOT_MEAN_UNREACHABLE",
+ "rows": [
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "archive.tar_gz.create_from_manifest",
+     "sentence": "archive tar gz bundle manifest package create from"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please archive tar gz create from manifest archive tar tar.gz"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please archive tar gz create from manifest archive tar tar.gz in canonical"
+    }
+   },
+   "capability_id": "archive.tar_gz.create_from_manifest",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "verify archive tar hash manifest bundle members gz"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please archive verify tar gz gnu verify archive tar"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please archive verify tar gz gnu verify archive tar in canonical"
+    }
+   },
+   "capability_id": "archive.verify.tar_gz.gnu",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.apt.zint",
+     "sentence": "128 barcode auto effect zint"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.apt.zint",
+     "sentence": "Please auto apt zint 128 barcode"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.apt.zint",
+     "sentence": "Please auto apt zint 128 barcode in canonical"
+    }
+   },
+   "capability_id": "auto.apt.zint",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.npm.dfinity-cbor",
+     "sentence": "encode npm node javascript @dfinity/cbor cbor structured binary"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto npm dfinity-cbor encode npm node"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto npm dfinity-cbor encode npm node in canonical"
+    }
+   },
+   "capability_id": "auto.npm.dfinity-cbor",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.npm.msgpack-msgpack",
+     "sentence": "encode npm node javascript @msgpack/msgpack msgpack structured binary"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto npm msgpack-msgpack encode npm node"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto npm msgpack-msgpack encode npm node in canonical"
+    }
+   },
+   "capability_id": "auto.npm.msgpack-msgpack",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.npm.shelacek-ubjson",
+     "sentence": "encode npm node javascript @shelacek/ubjson ubjson ubj structured binary"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto npm shelacek-ubjson encode npm node"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto npm shelacek-ubjson encode npm node in canonical"
+    }
+   },
+   "capability_id": "auto.npm.shelacek-ubjson",
+   "declares_effects": 3,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.pypi.bson-modern",
+     "sentence": "encode bson bson-modern structured binary"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto pypi bson-modern encode bson bson-modern"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto pypi bson-modern encode bson bson-modern in canonical"
+    }
+   },
+   "capability_id": "auto.pypi.bson-modern",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "auto.pypi.msgpack",
+     "sentence": "encode messagepack msgpack those exact records structured binary"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto pypi msgpack encode messagepack msgpack"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please auto pypi msgpack encode messagepack msgpack in canonical"
+    }
+   },
+   "capability_id": "auto.pypi.msgpack",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:evidence.claim_relation.generic_units.stdlib",
+     "selected": "evidence.claim_relation.generic_units.stdlib",
+     "sentence": "chart axis title unit rotated frequency survival time temperature raster semantic role explicit dimension"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster axis title unit binding v1 chart axis title"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster axis title unit binding v1 chart axis title in canonical"
+    }
+   },
+   "capability_id": "chart.raster.axis_title_unit_binding.v1",
+   "declares_effects": 3,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:evidence.claim_relation.generic_units.stdlib"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "selected": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "sentence": "chart curve series value interpolation axis legend raster at"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster curve value query v1 chart curve series"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster curve value query v1 chart curve series in canonical"
+    }
+   },
+   "capability_id": "chart.raster.curve_value_query.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "selected": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "sentence": "chart curve series threshold intersection axis legend raster at"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster curve at query v1 chart curve series"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster curve at query v1 chart curve series in canonical"
+    }
+   },
+   "capability_id": "chart.raster.curve_x_at_y_query.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "selected": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "sentence": "chart curve direct label series family rank nearest growth survival raster binding at"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster direct curve label family rank v1 chart curve direct label"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster direct curve label family rank v1 chart curve direct label in canonical"
+    }
+   },
+   "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+   "declares_effects": 3,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "chart legend label color style series raster to"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster legend style binding v1 chart legend label"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster legend style binding v1 chart legend label in canonical"
+    }
+   },
+   "capability_id": "chart.raster.legend_style_binding.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "chart raster scene geometry axis log polyline component plot box graph color components polylines linear or calibration"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster scene graph v1 chart raster scene"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart raster scene graph v1 chart raster scene in canonical"
+    }
+   },
+   "capability_id": "chart.raster.scene_graph.v1",
+   "declares_effects": 5,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "chart phase diagram solvus precipitation composition answer binary"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart read binary phase solvus v1 chart phase diagram"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart read binary phase solvus v1 chart phase diagram in canonical"
+    }
+   },
+   "capability_id": "chart.read.binary_phase_solvus.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "chart legend line series intersection axis answer linear"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart read legend linear intersection v1 chart legend line"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please chart read legend linear intersection v1 chart legend line in canonical"
+    }
+   },
+   "capability_id": "chart.read.legend_linear_intersection.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "code impact test selection tree-sitter dependencies change slice verified tree sitter"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code impact tree sitter testselect v1 code impact test"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code impact tree sitter testselect v1 code impact test in canonical"
+    }
+   },
+   "capability_id": "code.impact.tree_sitter.testselect.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "code index tree-sitter incremental symbols references multi-language tree sitter indexed verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code index tree sitter incremental v1 code index tree-sitter"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code index tree sitter incremental v1 code index tree-sitter in canonical"
+    }
+   },
+   "capability_id": "code.index.tree_sitter.incremental.v1",
+   "declares_effects": 3,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "code.multilanguage.parse.tree_sitter.v1",
+     "sentence": "tree-sitter parse multilanguage python javascript typescript rust go java cpp yaml incremental error-tolerant code ast tree sitter available symbols indexed source file test corpus"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code multilanguage parse tree sitter v1 tree-sitter parse multilanguage"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code multilanguage parse tree sitter v1 tree-sitter parse multilanguage in canonical"
+    }
+   },
+   "capability_id": "code.multilanguage.parse.tree_sitter.v1",
+   "declares_effects": 4,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "code patch tree-sitter verify test exact-span multi-language tree sitter verified multilanguage"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code patch tree sitter verify v1 code patch tree-sitter"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code patch tree sitter verify v1 code patch tree-sitter in canonical"
+    }
+   },
+   "capability_id": "code.patch.tree_sitter.verify.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:auto.npm.shelacek-ubjson",
+     "selected": "auto.npm.shelacek-ubjson",
+     "sentence": "polyglot c++ cpp clang rust cargo go golang java typescript javascript ts js node sql sqlite pyproject toml makefile github actions workflow ci continuous integration lint ruff flaky quarantine transform edit write repair refactor apply wheel lock sbom bill of materials release notes port declarations pull request translate transpile make code verified source build target configure execute"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code polyglot transform and verify v1 polyglot c++ cpp"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please code polyglot transform and verify v1 polyglot c++ cpp in canonical"
+    }
+   },
+   "capability_id": "code.polyglot.transform_and_verify.v1",
+   "declares_effects": 8,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:auto.npm.shelacek-ubjson"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "decision.synthesis.typed.stdlib",
+     "sentence": "decision evidence synthesis support contradiction constraint uncertainty conflict provenance trace terminal rank typed"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please decision synthesis typed stdlib decision evidence synthesis"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please decision synthesis typed stdlib decision evidence synthesis in canonical"
+    }
+   },
+   "capability_id": "decision.synthesis.typed.stdlib",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "decision.synthesis.verify.stdlib",
+     "sentence": "decision verify independent evidence synthesis audit trace verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please decision synthesis verify stdlib decision verify independent"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please decision synthesis verify stdlib decision verify independent in canonical"
+    }
+   },
+   "capability_id": "decision.synthesis.verify.stdlib",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "document.convert.markdown_pdf.pandoc_weasyprint",
+     "sentence": "markdown pdf convert document report"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please document convert markdown pdf pandoc weasyprint markdown pdf convert"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please document convert markdown pdf pandoc weasyprint markdown pdf convert in canonical"
+    }
+   },
+   "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "docx.document.create.python_docx",
+     "sentence": "docx document word title paragraph table create"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "docx.document.create.python_docx",
+     "sentence": "Please docx document create python docx document word"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "docx.document.create.python_docx",
+     "sentence": "Please docx document create python docx document word in canonical"
+    }
+   },
+   "capability_id": "docx.document.create.python_docx",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "docx.document.create_from_json_record",
+     "sentence": "docx document report json record normalized field value table create from"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please docx document create from json record docx document report"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please docx document create from json record docx document report in canonical"
+    }
+   },
+   "capability_id": "docx.document.create_from_json_record",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "docx.document.verify.intent_ooxml",
+     "sentence": "docx document word verify reopen independent content exact"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please docx document verify intent ooxml docx document word"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please docx document verify intent ooxml docx document word in canonical"
+    }
+   },
+   "capability_id": "docx.document.verify.intent_ooxml",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "docx document word ooxml verify reopen independent table"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please docx document verify ooxml docx document word"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please docx document verify ooxml docx document word in canonical"
+    }
+   },
+   "capability_id": "docx.document.verify.ooxml",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "evidence.claim_relation.generic_units.stdlib",
+     "sentence": "evidence claim support verbatim relation numeric compare predicate objective grounded unit exact text explicit"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence claim relation generic units stdlib evidence claim support"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence claim relation generic units stdlib evidence claim support in canonical"
+    }
+   },
+   "capability_id": "evidence.claim_relation.generic_units.stdlib",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "sentence": "objective claim relation operand binding compare higher lower greater less exceed evidence numeric at least most equal different differ threshold quoted exact text spec explicit bounded bound"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence claim spec bind explicit comparison stdlib objective claim relation"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence claim spec bind explicit comparison stdlib objective claim relation in canonical"
+    }
+   },
+   "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+   "declares_effects": 3,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1",
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "evidence oracle concrete contract violation independent z3 crosshair second"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence oracle concrete execution v1 evidence oracle concrete"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence oracle concrete execution v1 evidence oracle concrete in canonical"
+    }
+   },
+   "capability_id": "evidence.oracle.concrete_execution.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "evidence oracle hypothesis property testing generative shrinking 50x joss19 violation test verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence oracle hypothesis property v1 evidence oracle hypothesis"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please evidence oracle hypothesis property v1 evidence oracle hypothesis in canonical"
+    }
+   },
+   "capability_id": "evidence.oracle.hypothesis_property.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "execution pipeline 8stage argv allowlisted shell-free composition deterministic postcondition completed shell free"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please execution pipeline 8stage v1 execution pipeline 8stage"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please execution pipeline 8stage v1 execution pipeline 8stage in canonical"
+    }
+   },
+   "capability_id": "execution.pipeline.8stage.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "finance.saccr.credit.addon.v1",
+     "sentence": "saccr sa-ccr basel cre52 credit addon add-on trades portfolio counterparty derivative notional finance compute"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please finance saccr credit addon v1 saccr sa-ccr basel"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please finance saccr credit addon v1 saccr sa-ccr basel in canonical"
+    }
+   },
+   "capability_id": "finance.saccr.credit.addon.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "git commit log history diff status blame branch show repository revision staged operate read working tree inspect create"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please git repository operate v1 git commit log"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please git repository operate v1 git commit log in canonical"
+    }
+   },
+   "capability_id": "git.repository.operate.v1",
+   "declares_effects": 4,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "fetch http https json url metadata live authoritative from state"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please http json fetch from state fetch http https"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please http json fetch from state fetch http https in canonical"
+    }
+   },
+   "capability_id": "http.json.fetch_from_state",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "image.code.decode.zbarimg",
+     "sentence": "decode qr barcode code128 image zbar code"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please image code decode zbarimg decode qr barcode"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please image code decode zbarimg decode qr barcode in canonical"
+    }
+   },
+   "capability_id": "image.code.decode.zbarimg",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "image.extract.ocr.tesseract",
+     "sentence": "image ocr tesseract text raster english"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please image extract ocr tesseract image ocr tesseract"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please image extract ocr tesseract image ocr tesseract in canonical"
+    }
+   },
+   "capability_id": "image.extract.ocr.tesseract",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "image.qr.generate.qrencode",
+     "sentence": "image qr generate"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "image.qr.generate.qrencode",
+     "sentence": "Please image qr generate qrencode"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "image.qr.generate.qrencode",
+     "sentence": "Please image qr generate qrencode in canonical"
+    }
+   },
+   "capability_id": "image.qr.generate.qrencode",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:docx.document.create_from_json_record",
+     "selected": "docx.document.create_from_json_record",
+     "sentence": "json document record structured file available"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please json file write json document record"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please json file write json document record in canonical"
+    }
+   },
+   "capability_id": "json.file.write",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:docx.document.create_from_json_record"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:sqlite.table.verify_against_json_records",
+     "selected": "sqlite.table.verify_against_json_records",
+     "sentence": "json query transform table structured"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please json query jq json query transform"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please json query jq json query transform in canonical"
+    }
+   },
+   "capability_id": "json.query.jq",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:sqlite.table.verify_against_json_records"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "knowledge.consistency.assess",
+     "sentence": "knowledge consistency corroboration conflict freshness assessment available"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge consistency assess knowledge consistency corroboration"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge consistency assess knowledge consistency corroboration in canonical"
+    }
+   },
+   "capability_id": "knowledge.consistency.assess",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "knowledge json fetch external evidence observation available"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge json fetch external knowledge json fetch"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge json fetch external knowledge json fetch in canonical"
+    }
+   },
+   "capability_id": "knowledge.json.fetch.external",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "knowledge status verify assert epistemic verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge status assert knowledge status verify"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge status assert knowledge status verify in canonical"
+    }
+   },
+   "capability_id": "knowledge.status.assert",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:knowledge.consistency.assess",
+     "selected": "knowledge.consistency.assess",
+     "sentence": "knowledge supported materialize fact actionable materialized"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge support materialize knowledge supported materialize"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please knowledge support materialize knowledge supported materialize in canonical"
+    }
+   },
+   "capability_id": "knowledge.support.materialize",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:knowledge.consistency.assess"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "math.numeric_expression.sympy",
+     "sentence": "numeric scalar expression arithmetic multiply multiplication exponent exponentiation power calculate compute json file available evaluate"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please math numeric expression sympy numeric scalar expression"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please math numeric expression sympy numeric scalar expression in canonical"
+    }
+   },
+   "capability_id": "math.numeric_expression.sympy",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "orchestration bridge enumeration verified emits composition heal token execution fail-closed table"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please orchestration verify bridge enumeration v1 orchestration bridge enumeration"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please orchestration verify bridge enumeration v1 orchestration bridge enumeration in canonical"
+    }
+   },
+   "capability_id": "orchestration.verify.bridge_enumeration.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "pdf.extract.ocr.tesseract",
+     "sentence": "pdf extract ocr"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please pdf extract ocr tesseract"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please pdf extract ocr tesseract in canonical"
+    }
+   },
+   "capability_id": "pdf.extract.ocr.tesseract",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "pdf.extract.text.pypdf",
+     "sentence": "pdf extract text"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please pdf extract text pypdf"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please pdf extract text pypdf in canonical"
+    }
+   },
+   "capability_id": "pdf.extract.text.pypdf",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "plain_goal.bound_capability.grounding.stdlib",
+     "sentence": "plain goal grounding bound capability semantic existing registry reuse ambiguity"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please plain goal bound capability grounding stdlib plain goal grounding"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please plain goal bound capability grounding stdlib plain goal grounding in canonical"
+    }
+   },
+   "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "plain_goal.bound_capability.grounding.verify.stdlib",
+     "sentence": "plain goal grounding verify independent bound capability registry evidence verified"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "plain_goal.bound_capability.grounding.verify.stdlib",
+     "sentence": "Please plain goal bound capability grounding verify stdlib plain goal grounding"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "plain_goal.bound_capability.grounding.verify.stdlib",
+     "sentence": "Please plain goal bound capability grounding verify stdlib plain goal grounding in canonical"
+    }
+   },
+   "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "professional.artifact.visual_observer.v1",
+     "sentence": "professional artifact visual render readability crop overlap blank docx pptx xlsx pdf technical observation"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please professional artifact visual observer v1 professional artifact visual"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please professional artifact visual observer v1 professional artifact visual in canonical"
+    }
+   },
+   "capability_id": "professional.artifact.visual_observer.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.source.audit.ast",
+     "selected": "python.source.audit.ast",
+     "sentence": "verify pypi wheel artifact download sha256 hash metadata provenance live audit"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please pypi provenance audit live artifact verify pypi wheel"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please pypi provenance audit live artifact verify pypi wheel in canonical"
+    }
+   },
+   "capability_id": "pypi.provenance.audit_live_artifact",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.source.audit.ast"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1",
+     "selected": "python.task.acceptance.measured.objective.v1",
+     "sentence": "python contract symbolic smt oracle crosshair counterexample verification verdict"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python contract check crosshair v1 python contract symbolic"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python contract check crosshair v1 python contract symbolic in canonical"
+    }
+   },
+   "capability_id": "python.contract.check.crosshair.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "contract issue orchestration fusion python fused verified composition"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python contract issue orchestration fusion v1 contract issue orchestration"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python contract issue orchestration fusion v1 contract issue orchestration in canonical"
+    }
+   },
+   "capability_id": "python.contract.issue_orchestration.fusion.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "evidence contract supercomposer oracle python super verified family"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python evidence contract supercomposer v1 evidence contract supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python evidence contract supercomposer v1 evidence contract supercomposer in canonical"
+    }
+   },
+   "capability_id": "python.evidence.contract.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:source.objective_relevance.rank.bm25",
+     "selected": "source.objective_relevance.rank.bm25",
+     "sentence": "python fault localization dynamic trace coverage spectrum ochiai symbol dataflow def-use localize localizer localizing the failing test spectrum-based ranked backward def use"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault localize dynamic dataflow v1 python fault localization"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault localize dynamic dataflow v1 python fault localization in canonical"
+    }
+   },
+   "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+   "declares_effects": 3,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:source.objective_relevance.rank.bm25"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "fault patch supercomposer backward python super verified family"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault patch supercomposer v1 fault patch supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault patch supercomposer v1 fault patch supercomposer in canonical"
+    }
+   },
+   "capability_id": "python.fault.patch.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "fault provenance fusion localization python fused verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault provenance fusion v1 fault provenance fusion"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault provenance fusion v1 fault provenance fusion in canonical"
+    }
+   },
+   "capability_id": "python.fault.provenance.fusion.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python fault provenance interprocedural call return argument value dynamic dataflow callsite trace the tracing where does this come from edges hypotheses"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault provenance interprocedural value v1 python fault provenance"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python fault provenance interprocedural value v1 python fault provenance in canonical"
+    }
+   },
+   "capability_id": "python.fault.provenance.interprocedural.value.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "selected": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+     "sentence": "python issue natural language prose parse intent free text english edit ops binding rename move"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python issue natural language parse edit intent v1 python issue natural language"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python issue natural language parse edit intent v1 python issue natural language in canonical"
+    }
+   },
+   "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:evidence.claim_spec.bind.explicit_comparison.stdlib"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "orchestration symbol supercomposer navigation python super verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python orchestration symbol supercomposer v1 orchestration symbol supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python orchestration symbol supercomposer v1 orchestration symbol supercomposer in canonical"
+    }
+   },
+   "capability_id": "python.orchestration.symbol.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "patch review supercomposer mutation python super verified family"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python patch review supercomposer v1 patch review supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python patch review supercomposer v1 patch review supercomposer in canonical"
+    }
+   },
+   "capability_id": "python.patch.review.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python patch repair bug test ast mutation candidate repository verified search guided v1"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python patch search test guided ast v1 python patch repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python patch search test guided ast v1 python patch repair in canonical"
+    }
+   },
+   "capability_id": "python.patch.search.test_guided.ast.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "pipeline allowlist review gate python verified composition"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python pipeline allowlist gate v1 pipeline allowlist review"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python pipeline allowlist gate v1 pipeline allowlist review in canonical"
+    }
+   },
+   "capability_id": "python.pipeline.allowlist_gate.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "pr land testgate apply python verified composition"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python pr land composer v1 pr land testgate"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python pr land composer v1 pr land testgate in canonical"
+    }
+   },
+   "capability_id": "python.pr.land.composer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "provenance coupling supercomposer coupled python super verified intelligence"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python provenance coupling supercomposer v1 provenance coupling supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python provenance coupling supercomposer v1 provenance coupling supercomposer in canonical"
+    }
+   },
+   "capability_id": "python.provenance.coupling.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python refactor extract function method ast scope region statement alignment dedent inputs outputs inference semantic edit codemod"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor extract function v1 python refactor extract function"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor extract function v1 python refactor extract function in canonical"
+    }
+   },
+   "capability_id": "python.refactor.extract_function.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.refactor.inline_helper.v1",
+     "sentence": "inline the helper single-use single use only caller call site refactor expand function python inlined"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor inline helper v1 inline inline the helper single-use"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor inline helper v1 inline inline the helper single-use in canonical"
+    }
+   },
+   "capability_id": "python.refactor.inline_helper.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python refactor rename parameter ast scope shadowing call site kwargs signature semantic edit codemod"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor rename parameter v1 python refactor rename"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor rename parameter v1 python refactor rename in canonical"
+    }
+   },
+   "capability_id": "python.refactor.rename_parameter.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python refactor rename symbol identifier ast scope binding shadowing call site import propagation semantic edit codemod"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor rename symbol v1 python refactor rename"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor rename symbol v1 python refactor rename in canonical"
+    }
+   },
+   "capability_id": "python.refactor.rename_symbol.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "refactor scaffold transformation python fused verified edit primitive"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor test scaffold fusion v1 refactor scaffold transformation"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python refactor test scaffold fusion v1 refactor scaffold transformation in canonical"
+    }
+   },
+   "capability_id": "python.refactor.test_scaffold.fusion.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python repo diff apply full test suite gate integration pre-merge pytest anchor regression pull request pr testgate"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python repo diff apply full testgate v1 python repo diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python repo diff apply full testgate v1 python repo diff in canonical"
+    }
+   },
+   "capability_id": "python.repo.diff_apply_full_testgate.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python repo pull request pr realize forge push branch commit ship deploy git verify ls-remote"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python repo pr realize v1 python repo pull request"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python repo pr realize v1 python repo pull request in canonical"
+    }
+   },
+   "capability_id": "python.repo.pr_realize.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1",
+     "selected": "python.task.acceptance.measured.objective.v1",
+     "sentence": "python repository measurement acceptance test content-addressed objective receipt tests run the suite path source root content addressed"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python repository acceptance measure v1 python repository measurement"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python repository acceptance measure v1 python repository measurement in canonical"
+    }
+   },
+   "capability_id": "python.repository.acceptance.measure.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "python review diff coverage gate test changed lines pull request pr untested pre-merge regression"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff coverage gate v1 python review diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff coverage gate v1 python review diff in canonical"
+    }
+   },
+   "capability_id": "python.review.diff_coverage_gate.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python review diff mutation mutant test quality kill ratio survivor falsification gate coverage behavior"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff mutation gate v1 python review diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff mutation gate v1 python review diff in canonical"
+    }
+   },
+   "capability_id": "python.review.diff_mutation_gate.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.software.request.semantic_behavior.compile.v1",
+     "selected": "python.software.request.semantic_behavior.compile.v1",
+     "sentence": "python review diff performance regression benchmark bench gate slowdown profiling pull request pr hot path latency perf"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff perf gate v1 python review diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff perf gate v1 python review diff in canonical"
+    }
+   },
+   "capability_id": "python.review.diff_perf_gate.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python review diff security bandit gate shell=true eval secrets hardcoded password injection pull request pr changed lines"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff security gate v1 python review diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff security gate v1 python review diff in canonical"
+    }
+   },
+   "capability_id": "python.review.diff_security_gate.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python review diff static triage ruff lint gate pull request pr f821 syntax changed lines pre-existing noise"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff static triage v1 python review diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff static triage v1 python review diff in canonical"
+    }
+   },
+   "capability_id": "python.review.diff_static_triage.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python review diff type mypy typecheck gate pull request pr error operand changed lines soundness"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff type gate v1 python review diff"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python review diff type gate v1 python review diff in canonical"
+    }
+   },
+   "capability_id": "python.review.diff_type_gate.v1",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python issue pull request pr orchestrate end-to-end implement task edit apply diff closed loop autonomous rename move refactor dependency closure software to orchestration"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software issue to pr orchestrate v1 python issue pull request"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software issue to pr orchestrate v1 python issue pull request in canonical"
+    }
+   },
+   "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "apply the repair patch verified fix land write in place make test pass python software source applied"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair apply verified v1 apply the repair apply the patch apply the verified repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair apply verified v1 apply the repair apply the patch apply the verified repair in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.apply.verified.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python software repair guided provenance dynamic localization coupled patch search fault candidate verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair guided provenance coupled v1 python software repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair guided provenance coupled v1 python software repair in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python repair patch coupled nonmonotonic multi-edit fault localization symbol test candidate verified pair ranked"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair loop coupled ast v1 python repair patch"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair loop coupled ast v1 python repair patch in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
+   "declares_effects": 3,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python software repair strict-progress multi-round multi-file tests counterexample ast iterative loop the source iteratively patch candidate strict progress multi round test verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair loop strict progress ast v1 python software repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair loop strict progress ast v1 python software repair in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python software repair patch multi-edit multi-file tests counterexample ast candidate multi edit test verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair loop test guided ast v1 python software repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair loop test guided ast v1 python software repair in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python software repair measured acceptance content-addressed candidate verification atomic patch objective verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair measured acceptance v1 python software repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair measured acceptance v1 python software repair in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.measured_acceptance.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "repair route router bug class diagnose escalate realize python software routed verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair route v1 repair route router"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair route v1 repair route router in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.route.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python software repair semantic acceptance raw-task scope file content-addressed candidate verification controller of the patch verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair semantic acceptance v1 python software repair"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python software repair semantic acceptance v1 python software repair in canonical"
+    }
+   },
+   "capability_id": "python.software.repair.semantic_acceptance.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.software.request.semantic_behavior.compile.v1",
+     "sentence": "python software request semantic behavior acceptance call exception function class exact-text compiler program compiled"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.software.request.semantic_behavior.compile.v1",
+     "sentence": "Please python software request semantic behavior compile v1 python software request"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.software.request.semantic_behavior.compile.v1",
+     "sentence": "Please python software request semantic behavior compile v1 python software request in canonical"
+    }
+   },
+   "capability_id": "python.software.request.semantic_behavior.compile.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.audit.ast",
+     "sentence": "python source audit imports functions classes sha256"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source audit ast python source audit"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source audit ast python source audit in canonical"
+    }
+   },
+   "capability_id": "python.source.audit.ast",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1",
+     "selected": "python.task.acceptance.measured.objective.v1",
+     "sentence": "python change impact diff test selection blame callers affected minimal fast changed select tests impacted which source testselect v1"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source change impact testselect v1 python change impact"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source change impact testselect v1 python change impact in canonical"
+    }
+   },
+   "capability_id": "python.source.change_impact.testselect.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.complexity.v1",
+     "sentence": "quadratic complexity time big loop nest nested loops asymptotic cubic python source"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source complexity v1 quadratic complexity time complexity"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source complexity v1 quadratic complexity time complexity in canonical"
+    }
+   },
+   "capability_id": "python.source.complexity.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python edit rename move refactor cross-file choreograph plan collision impact source crossfile choreography v1"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source crossfile edit choreograph v1 python edit rename"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source crossfile edit choreograph v1 python edit rename in canonical"
+    }
+   },
+   "capability_id": "python.source.crossfile_edit.choreograph.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.dead_code.v1",
+     "sentence": "never executed dead code function unused unreachable uncalled not called which is python source"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source dead code v1 never executed dead code dead function"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source dead code v1 never executed dead code dead function in canonical"
+    }
+   },
+   "capability_id": "python.source.dead_code.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.definition_count.v1",
+     "sentence": "count definitions functions classes how many number of the function and class python source definition"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source definition count v1 count definitions functions"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source definition count v1 count definitions functions in canonical"
+    }
+   },
+   "capability_id": "python.source.definition_count.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.secret_scan.v1",
+     "sentence": "secret hardcoded credential api key access aws token leaked python source scan"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source secret scan v1 secret hardcoded credential"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source secret scan v1 secret hardcoded credential in canonical"
+    }
+   },
+   "capability_id": "python.source.secret_scan.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "python source symbols definitions references callers call graph navigation index ast who calls symbol"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source symbols index ast python source symbols"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source symbols index ast python source symbols in canonical"
+    }
+   },
+   "capability_id": "python.source.symbols.index.ast",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:software.repair.choreograph.crossfile.v1",
+     "selected": "software.repair.choreograph.crossfile.v1",
+     "sentence": "python resolve definition reference import alias cross module symbol lookup source symbols"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source symbols resolve v1 python resolve definition"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source symbols resolve v1 python resolve definition in canonical"
+    }
+   },
+   "capability_id": "python.source.symbols.resolve.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:software.repair.choreograph.crossfile.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.taint_flow.v1",
+     "sentence": "taint untrusted input reach reaches exec eval injection data flow source to sink does python"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source taint flow v1 taint untrusted input untrusted"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source taint flow v1 taint untrusted input untrusted in canonical"
+    }
+   },
+   "capability_id": "python.source.taint_flow.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.source.test_adequacy.v1",
+     "sentence": "would the tests catch bug adequacy adequate strong enough suite mutation python source test"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source test adequacy v1 would the tests catch catch a bug adequacy"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python source test adequacy v1 would the tests catch catch a bug adequacy in canonical"
+    }
+   },
+   "capability_id": "python.source.test_adequacy.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "python optimize optimise memoization memoisation lru cache thread pool release gil unit test property-based hypothesis mutation score cli flag logging retries split module deprecated type hints extract constant format reformat commit branch cherry-pick write edit refactor apply lint ruff mypy typecheck coverage benchmark parallel async asynchronous worktree revert rebase sqlalchemy fastapi endpoint client traversal metric unused imports inline memory leak generate tests source swe transform egraph concurrency author ast verified structural dead remove git operate function removed perf fixed regression software analysis race find ref cherry pick changelog docstring"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python swe transform and synthesize v1 python optimize optimise"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python swe transform and synthesize v1 python optimize optimise in canonical"
+    }
+   },
+   "capability_id": "python.swe.transform_and_synthesize.v1",
+   "declares_effects": 18,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "symbol resolve navigation ast python standalone verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python symbol resolve standalone v1 symbol resolve navigation"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python symbol resolve standalone v1 symbol resolve navigation in canonical"
+    }
+   },
+   "capability_id": "python.symbol.resolve.standalone.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.task.acceptance.measured.objective.v1",
+     "sentence": "python task acceptance measurement objective raw-task receipt verification bound"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python task acceptance measured objective v1 python task acceptance"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python task acceptance measured objective v1 python task acceptance in canonical"
+    }
+   },
+   "capability_id": "python.task.acceptance.measured.objective.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "test pipeline slice python verified intelligence"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python test pipeline verifier v1 test pipeline slice"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python test pipeline verifier v1 test pipeline slice in canonical"
+    }
+   },
+   "capability_id": "python.test.pipeline.verifier.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.source.test_adequacy.v1",
+     "selected": "python.source.test_adequacy.v1",
+     "sentence": "mutation amplification test survivor kill pynguin score python tests amplified scored"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests advance mutation kill v1 mutation amplification test"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests advance mutation kill v1 mutation amplification test in canonical"
+    }
+   },
+   "capability_id": "python.tests.advance.mutation_kill.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.source.test_adequacy.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.tests.audit.unittest",
+     "sentence": "audit count failed passed passes python skipped tests unit unittest corpus pass rate report test the auditing"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests audit unittest audit count failed"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests audit unittest audit count failed in canonical"
+    }
+   },
+   "capability_id": "python.tests.audit.unittest",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.tests.generate.scaffold.v1",
+     "sentence": "python test generate scaffold smoke unittest uncovered fixture annotation derive coverage gap regression born author tests"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests generate scaffold v1 python test generate"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests generate scaffold v1 python test generate in canonical"
+    }
+   },
+   "capability_id": "python.tests.generate.scaffold.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.tests.generate.scaffold.v1",
+     "selected": "python.tests.generate.scaffold.v1",
+     "sentence": "pynguin test synthesis generate search property suite python tests synthesized executing"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests synthesize pynguin v1 pynguin test synthesis"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python tests synthesize pynguin v1 pynguin test synthesis in canonical"
+    }
+   },
+   "capability_id": "python.tests.synthesize.pynguin.v1",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.tests.generate.scaffold.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "python.vcs.merge_conflict.resolve.v1",
+     "sentence": "merge conflict conflicted markers resolve the keep both changes sides unmerged python vcs resolved source free"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python vcs merge conflict resolve v1 merge conflict conflict conflicted"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please python vcs merge conflict resolve v1 merge conflict conflict conflicted in canonical"
+    }
+   },
+   "capability_id": "python.vcs.merge_conflict.resolve.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "shell command exec run terminal bash process environment probe cli cp mv rm mkdir touch cat sort sha256sum copy move rename remove delete checksum sha256 directory dir empty file result"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please shell command run shell command exec"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please shell command run shell command exec in canonical"
+    }
+   },
+   "capability_id": "shell.command.run",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "profile hot spot benchmark race condition fuzz overflow root cause explain why diagnose api design review audit vulnerabilities coverage adr rate limiter migration splitting document changelog blame diff suite run unittest security debugger frame traceback dead unused schema log pull request trace definition importers import cycles class hierarchy flaky stability provenance software analysis hotspot and inspect vulnerability measured architecture git runner verdict find lint static triage mutation score javascript tests execution python lookup reverse graph tarjan scc c3 mro value flow ref write"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software analysis diagnose and architect v1 profile hot spot benchmark"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software analysis diagnose and architect v1 profile hot spot benchmark in canonical"
+    }
+   },
+   "capability_id": "software.analysis.diagnose_and_architect.v1",
+   "declares_effects": 24,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "evidence synthesis supercomposer verbatim super verified family"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software evidence synthesis supercomposer v1 evidence synthesis supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software evidence synthesis supercomposer v1 evidence synthesis supercomposer in canonical"
+    }
+   },
+   "capability_id": "software.evidence.synthesis.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1",
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "hardcore closing supercomposer synthesis software verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software hardcore closing supercomposer v1 hardcore closing supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software hardcore closing supercomposer v1 hardcore closing supercomposer in canonical"
+    }
+   },
+   "capability_id": "software.hardcore.closing.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1",
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "hardcore final supercomposer synthesis software verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software hardcore final supercomposer v1 hardcore final supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software hardcore final supercomposer v1 hardcore final supercomposer in canonical"
+    }
+   },
+   "capability_id": "software.hardcore.final.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "hardcore software engineering deterministic kernel orchestrate cegis grid pipeline concrete symbol crossfile change-impact fastest smartest verified python fault localization ranked contract verdict evidence violation synthesis program exact"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "Please software hardcore kernel orchestrate v1 hardcore software engineering"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "Please software hardcore kernel orchestrate v1 hardcore software engineering in canonical"
+    }
+   },
+   "capability_id": "software.hardcore.kernel.orchestrate.v1",
+   "declares_effects": 5,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1",
+     "selected": "software.hardcore.kernel.orchestrate.v1",
+     "sentence": "hardcore swe supercomposer fullstack software composed verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software hardcore swe supercomposer v1 hardcore swe supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software hardcore swe supercomposer v1 hardcore swe supercomposer in canonical"
+    }
+   },
+   "capability_id": "software.hardcore.swe.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:software.hardcore.kernel.orchestrate.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "software patch cegis z3 synthesize counterexample dpll theory solver architecture proven architect verified"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software patch synthesize cegis z3 v1 software patch cegis"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software patch synthesize cegis z3 v1 software patch cegis in canonical"
+    }
+   },
+   "capability_id": "software.patch.synthesize.cegis.z3.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "software repair choreograph crossfile cross-file atomic multi-file import closure call-graph change-impact choreography verified patch source write applied"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software repair choreograph crossfile v1 software repair choreograph"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software repair choreograph crossfile v1 software repair choreograph in canonical"
+    }
+   },
+   "capability_id": "software.repair.choreograph.crossfile.v1",
+   "declares_effects": 4,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "software repair loop cegis hypothesis htn triad choreograph counterexample verified synthesis proven"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software repair loop cegis hypothesis v1 software repair loop"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software repair loop cegis hypothesis v1 software repair loop in canonical"
+    }
+   },
+   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "software review gate composer fan-in ruff mypy coverage perf bandit mutation all gates verified composition typed"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software review gate composer v1 software review gate"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software review gate composer v1 software review gate in canonical"
+    }
+   },
+   "capability_id": "software.review.gate.composer.v1",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "review synthesis supercomposer crossfile software super verified fullstack"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software review synthesis supercomposer v1 review synthesis supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software review synthesis supercomposer v1 review synthesis supercomposer in canonical"
+    }
+   },
+   "capability_id": "software.review.synthesis.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "software.synthesis.grid_induction.v1",
+     "sentence": "grid synthesis induction program bounded deterministic arc cegis no-beam-prune equality software exact"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "software.synthesis.grid_induction.v1",
+     "sentence": "Please software synthesis grid induction v1 grid synthesis induction"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "software.synthesis.grid_induction.v1",
+     "sentence": "Please software synthesis grid induction v1 grid synthesis induction in canonical"
+    }
+   },
+   "capability_id": "software.synthesis.grid_induction.v1",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "test contract supercomposer verification software verified super"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software test contract supercomposer v1 test contract supercomposer"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please software test contract supercomposer v1 test contract supercomposer in canonical"
+    }
+   },
+   "capability_id": "software.test.contract.supercomposer.v1",
+   "declares_effects": 2,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "source authority identity organization ror domain host research funding provenance"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source authority identity ror source authority identity"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source authority identity ror source authority identity in canonical"
+    }
+   },
+   "capability_id": "source.authority.identity.ror",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "source.candidates.enumerate.stdlib",
+     "sentence": "source candidates enumerate corpus evidence files discovery repository rank bm25 available"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source candidates enumerate stdlib source candidates enumerate"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source candidates enumerate stdlib source candidates enumerate in canonical"
+    }
+   },
+   "capability_id": "source.candidates.enumerate.stdlib",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "source.evidence.extract.objective_grounded.stdlib",
+     "sentence": "source evidence extract objective grounded verbatim provenance bm25 relevance hash offset research units bound"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source evidence extract objective grounded stdlib source evidence extract"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source evidence extract objective grounded stdlib source evidence extract in canonical"
+    }
+   },
+   "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "source objective relevance rank bm25 evidence candidate lexical research ranked"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source objective relevance rank bm25 source objective relevance"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please source objective relevance rank bm25 source objective relevance in canonical"
+    }
+   },
+   "capability_id": "source.objective_relevance.rank.bm25",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "sqlite database table rows columns create from json records"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please sqlite table create from json records sqlite database table"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please sqlite table create from json records sqlite database table in canonical"
+    }
+   },
+   "capability_id": "sqlite.table.create_from_json_records",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "sqlite database table rows columns verify query independently against json records"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please sqlite table verify against json records sqlite database table"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please sqlite table verify against json records sqlite database table in canonical"
+    }
+   },
+   "capability_id": "sqlite.table.verify_against_json_records",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "structured.decision_evidence.locate.stdlib",
+     "sentence": "decision evidence typed problem locate synthesis alternatives constraints structured available"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please structured decision evidence locate stdlib decision evidence typed"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please structured decision evidence locate stdlib decision evidence typed in canonical"
+    }
+   },
+   "capability_id": "structured.decision_evidence.locate.stdlib",
+   "declares_effects": 1,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1",
+     "selected": "python.task.acceptance.measured.objective.v1",
+     "sentence": "acceptance raw task specification objective verifier semantic residual software model verdict ids"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please task acceptance objective lossless v1 acceptance raw task specification"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please task acceptance objective lossless v1 acceptance raw task specification in canonical"
+    }
+   },
+   "capability_id": "task.acceptance.objective.lossless.v1",
+   "declares_effects": 3,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.task.acceptance.measured.objective.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "terminal kstar scope complete proof brain opus capability falsify tournament policy adequacy discriminator generator basis transform runtime ownership residual counterexample evidence reuse universal cover context semantic composition root assessment or minimum failure witness"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please terminal kstar root assess stdlib terminal kstar scope"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please terminal kstar root assess stdlib terminal kstar scope in canonical"
+    }
+   },
+   "capability_id": "terminal.kstar.root.assess.stdlib",
+   "declares_effects": 3,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "test.slice.never_miss.v1",
+     "sentence": "test slice never-miss change-impact 2070 2096 honest minimal 40x never miss verified selection"
+    },
+    "NATURAL": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "test.slice.never_miss.v1",
+     "sentence": "Please test slice never miss v1 test slice never-miss"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "test.slice.never_miss.v1",
+     "sentence": "Please test slice never miss v1 test slice never-miss in canonical"
+    }
+   },
+   "capability_id": "test.slice.never_miss.v1",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:python.repository.acceptance.measure.v1",
+     "selected": "python.repository.acceptance.measure.v1",
+     "sentence": "write text file create save content output available"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please text file write write text file"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please text file write write text file in canonical"
+    }
+   },
+   "capability_id": "text.file.write",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:python.repository.acceptance.measure.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "browser web rendered navigate open page screenshot url website interact form type enter select choose check click submit capture"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please web browser rendered capture chromedriver browser web rendered"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please web browser rendered capture chromedriver browser web rendered in canonical"
+    }
+   },
+   "capability_id": "web.browser.rendered.capture.chromedriver",
+   "declares_effects": 2,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "web release version latest stable verify independent official http current"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please web release verify independent http web release version"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+     "selected": null,
+     "sentence": "Please web release verify independent http web release version in canonical"
+    }
+   },
+   "capability_id": "web.release.verify.independent_http",
+   "declares_effects": 1,
+   "outcome": "UNREACHED",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:auto.pypi.msgpack",
+     "selected": "auto.pypi.msgpack",
+     "sentence": "xlsx spreadsheet workbook rows columns create table from json records"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please xlsx table create from json records xlsx spreadsheet workbook"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please xlsx table create from json records xlsx spreadsheet workbook in canonical"
+    }
+   },
+   "capability_id": "xlsx.table.create_from_json_records",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:auto.pypi.msgpack"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "REACHED_BY_ANOTHER",
+     "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1",
+     "selected": "orchestration.verify.bridge_enumeration.v1",
+     "sentence": "xlsx spreadsheet workbook rows columns verify reopen independently table against json records"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please xlsx table verify against json records xlsx spreadsheet workbook"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please xlsx table verify against json records xlsx spreadsheet workbook in canonical"
+    }
+   },
+   "capability_id": "xlsx.table.verify_against_json_records",
+   "declares_effects": 1,
+   "outcome": "REACHED_BY_ANOTHER",
+   "reason": "ROUTED_TO:orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "addresses": {
+    "DECLARED_VOCABULARY": {
+     "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+     "outcome": "SELF_REACHED",
+     "reason": null,
+     "selected": "yaml.to_json.yq",
+     "sentence": "yaml yml json parse convert workflow structured file available to"
+    },
+    "NATURAL": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please yaml to json yq yaml yml json"
+    },
+    "NATURAL_WITH_INPUT": {
+     "compiler_mode": null,
+     "outcome": "UNREACHED",
+     "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+     "selected": null,
+     "sentence": "Please yaml to json yq yaml yml json in canonical"
+    }
+   },
+   "capability_id": "yaml.to_json.yq",
+   "declares_effects": 2,
+   "outcome": "SELF_REACHED",
+   "reason": null
+  }
+ ],
+ "schema": "PROJECT_BRAIN_ROUTE_REACH_CENSUS_V1"
+}

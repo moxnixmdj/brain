@@ -341,3 +341,56 @@ unknown.
 **The learner is on, the shape ceiling is higher, and the two things left are a counting
 exercise (routing) and a permissions decision (cross-project carry) — plus one research gap
 that no amount of engineering around it will close.**
+
+---
+
+## Execution log — Step 3 (routing reach): measured, and the instrument's own limit was the finding
+
+I set out to produce the reach denominator that replaced the stale "443 rows, 11 reached".
+What I produced is a **diagnostic**, and the reason is the most useful thing in this section.
+
+### What the census measured
+
+`canonical/tools/route_reach_census_v1.py`, reproducible, 40 s, artifact at
+`canonical/verification/ROUTE_REACH_CENSUS_V1.json`:
+
+| | |
+|---|---|
+| capabilities | 141 |
+| distinct declared effects | 259 |
+| self-reached by declared vocabulary | **48** |
+| routed to a different capability | **55** |
+| unreached by every templated address | **38** |
+| — of which `GOAL_INPUT_BINDING_REQUIRED` | **35** |
+
+That last row is the actionable one. Those capabilities declare templates demanding
+role-shaped inputs (`op`, `repo_root`, `rev`, `staged`, …) that no prose sentence names —
+`git.repository.operate.v1` declares nine. This is the same defect class an earlier fix removed
+from the test-scaffold row ("unbindable for five inputs no sentence states"), and it is a
+declaration bug, not a phrasing artefact.
+
+### Why the number is NOT a reach figure, and why I am not quoting it as one
+
+Three successive addresses were needed to find this out, and each one falsified the previous:
+
+1. A keyword bag was assumed to be the most generous address. **Wrong in both directions:**
+   `python.source.symbols.index.ast` was unreached by it and is reached by one ordinary English
+   sentence; `python.refactor.rename_symbol` is the reverse.
+2. A natural template was added. It produced `GOAL_INPUT_BINDING_REQUIRED` for 133 of 141 —
+   which reads as catastrophic and is mostly an artefact of the template, not the tree.
+3. The template plus a real path produced **exactly the same counts**, proving the blocker is
+   role-shaped inputs rather than a missing path.
+
+The limit is now asserted *in the code and in the artifact*, not just in prose: every report
+carries `reach_denominator_claim: TEMPLATED_ADDRESSES_ONLY__NOT_A_REACH_DENOMINATOR__UNREACHED_DOES_NOT_MEAN_UNREACHABLE`,
+and a test pins that a capability recorded UNREACHED is reachable in ordinary English — so the
+counts cannot be quoted as a fraction of anything a user experiences.
+
+**What would actually settle reach:** a corpus of real user sentences, run through the same
+compiler. That is a corpus-construction job, and it is the honest next step rather than a
+figure this tool can manufacture.
+
+### Regression
+
+7 new tests, all passing. Nothing in the routing path was changed — this adds a measurement and
+a limit, and modifies no behaviour.
