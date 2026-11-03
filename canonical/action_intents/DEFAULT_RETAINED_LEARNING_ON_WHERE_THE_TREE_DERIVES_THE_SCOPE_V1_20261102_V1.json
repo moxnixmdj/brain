@@ -1,0 +1,419 @@
+{
+ "action_id": "DEFAULT_RETAINED_LEARNING_ON_WHERE_THE_TREE_DERIVES_THE_SCOPE_V1_20261102_V1",
+ "action_intent_id": "DEFAULT_RETAINED_LEARNING_ON_WHERE_THE_TREE_DERIVES_THE_SCOPE_V1_20261102_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "The repair capability's learning chain was switched off by default and no production caller ever switched it on, so the measured 6 -> 0 collapse in search invocations never reached the solver. A new derivation module builds the scope the session needs from facts the tree already states -- the test corpus the repair is verified against, hashed, plus the single non-test module when the tree has exactly one -- and enables retained learning with operator generalization only where that derivation succeeds. It declines with a named reason otherwise, never guesses, and a caller that states a configuration keeps it verbatim including {'enabled': False}. Ten tests, six of which fail on the base commit; a first repair on an unseen project searches and teaches, and the second is answered from memory with zero search invocations and the suite green both times. A second, smaller defect lands with it and is carried verbatim under `supersedes`: the environment-transfer status returned PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN from both the replay path and a warm-started search, so a run that saved nothing was reported as instant learning; it now returns a distinct status and every path carries both keys.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/retained_scope_derivation_v1.py",
+   "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+   "canonical/tests/test_the_second_repair_is_cheaper_v1.py"
+  ],
+  "route_class": "CONFIGURE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::python.software.repair.apply.verified.v1 shipped with retained_learning defaulting to {\"enabled\": False} and no production caller ever set it, so the chain was dormant and every repair searched cold. The default was justified by scope derivation looking like the unresolved hypothesis-space problem. That framing was wrong: the session's verifier is ProjectTestOracle, the project's real suite, which runs on every recall, so the scope is a cost filter rather than a safety filter. Measured on the live path 2026-11-02, three arms: cold 6 search invocations and 0 retained hits, statement rule 5 and 1, operator generalization 0 and 6, all at 7/7 solved.",
+ "canonical_base_commit": "2ececc45eb74e1067915161cbae298a998ac4aaa",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "python.software.repair.apply.verified.v1 shipped with retained_learning defaulting to {\"enabled\": False} and no production caller ever set it, so the chain was dormant and every repair searched cold. The default was justified by scope derivation looking like the unresolved hypothesis-space problem. That framing was wrong: the session's verifier is ProjectTestOracle, the project's real suite, which runs on every recall, so the scope is a cost filter rather than a safety filter. Measured on the live path 2026-11-02, three arms: cold 6 search invocations and 0 retained hits, statement rule 5 and 1, operator generalization 0 and 6, all at 7/7 solved.",
+ "date": "2026-11-02",
+ "expected_parent_change": "canonical/swe_kernel/retained_scope_derivation_v1.py: new. Derives a TEST_SUITE contract whose scope_id hashes the repository-relative test corpus, points the store at a contained .brain/retained_repair_skills.sqlite, targets the single non-test module, and enables operator generalization; returns a named decline instead of a guess when the tree does not state enough. canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py: calls the derivation when the caller states no configuration and reports it in every run; the docstring now describes the derived default rather than an explicit opt-in. canonical/tests/test_the_second_repair_is_cheaper_v1.py: ten tests covering the derivation, the cost invariant, the recalled patch being the correct patch, the negative control where the stored lesson is the wrong answer, and three named refusals. .gitignore: the derived memory is machine-local evidence, not source.",
+ "expected_parent_frontier_change": "The learning chain inside python.software.repair.apply.verified.v1 is on by default wherever a scope is derivable from the tree, so a repeated repair is answered from memory instead of search: measured 0 search invocations on the second encounter against 1+ on the first.",
+ "falsification_condition": "FALSIFIED if a second repair of the same breakage in the same project spends more than zero search invocations, or if the first spends none, or if a project whose correct answer differs from the stored lesson is repaired incorrectly, or if an explicitly stated {'enabled': False} is overridden, or if the six failing rows pass on the base commit.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "recursive_obs": {
+  "canonical_base_commit": "2ececc45eb74e1067915161cbae298a998ac4aaa",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "retained_learning defaulting to {\"enabled\": False} for every caller that states nothing."
+  ],
+  "expected_parent_level_state_change": "The learning chain inside python.software.repair.apply.verified.v1 is on by default wherever a scope is derivable from the tree, so a repeated repair is answered from memory instead of search: measured 0 search invocations on the second encounter against 1+ on the first.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE the default: rejected, callers rely on the key existing",
+    "BYPASS by requiring explicit config: that is the defect"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC: a default value, not a limit of the learner.",
+   "surviving_causal_blocker": "No production caller ever set enabled, and scope derivation was believed to need the hypothesis space."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "none: the chain already existed and was not rewritten"
+   ],
+   "existing_inherited_routes_checked": [
+    "RetainedRepairSession",
+    "VerifiedSkillStore",
+    "ProjectTestOracle",
+    "operator_generalization_v1"
+   ],
+   "external_existing_routes_checked": [],
+   "surviving_gap": "The chain was unreachable because nobody supplied its two inputs."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "raising the solve rate",
+    "increasing the number of rules stored"
+   ],
+   "real_outcome": "Second repair costs 0 search invocations; first costs 1.",
+   "surviving_necessity": "The saving is the claim; the solve rate is unchanged and is not claimed."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [],
+   "downstream_work_to_delete_or_supersede": [
+    "the docstring's claim of an explicit opt-in"
+   ],
+   "fresh_reuse_plan": "Reuse the existing session, store, oracle and generalization modules unchanged."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving by hand whether any caller enables the chain"
+   ],
+   "search_stop_decision": "Stopped at the first cause that explained the dormant default."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A global store needs a safety boundary loosened; picking the touched file is a guess when the tree has several.",
+   "routes_ranked": [
+    "DERIVE_THE_SCOPE_AND_DEFAULT_ON",
+    "DERIVE_A_GLOBAL_STORE",
+    "TARGET_WHAT_THE_SEARCH_TOUCHED"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The project's own suite is the oracle on every recall; the tests assert the cost invariant over it."
+  },
+  "real_outcome": "First repair on a project the store has never seen: 1 search invocation, applied, suite green. Second repair of the same breakage: 0 search invocations, recalled, suite green. Ten tests pass; six of them fail on the base commit.",
+  "required_capability": "A repair repeated in the same project is answered from memory instead of search.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "No supplier, product or implementation-form choice is introduced: the change derives two inputs from the tree under repair and changes one default. Recorded rather than fabricated -- filling the external-supplier challenger schema here would require inventing sources for a question with no external part.",
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "LEAVE_THE_DEFAULT_OFF",
+   "DERIVE_A_GLOBAL_STORE",
+   "TARGET_WHAT_THE_SEARCH_TOUCHED"
+  ],
+  "selected_surviving_route": "DERIVE_THE_SCOPE_FROM_THE_TEST_CORPUS_AND_DEFAULT_RETAINED_LEARNING_ON__SELECTED",
+  "stop_condition": "STOP when the second repair of the same breakage in a project the store has never seen spends zero search invocations while the first spends at least one, with the full suite green after both, and when every decline path names its cause and still repairs.",
+  "why_selected_route_is_fastest_sufficient": "The session already demanded a scope key and a target; the tree already holds both. The change supplies them rather than inventing anything."
+ },
+ "resolution": "SELECTED",
+ "route_id": "DEFAULT_RETAINED_LEARNING_ON_WHERE_THE_TREE_DERIVES_THE_SCOPE_V1_20261102_V1",
+ "routes_considered": [
+  "LEAVE_THE_DEFAULT_OFF_AND_REQUIRE_EXPLICIT_CONFIG__REJECTED_BECAUSE_THE_ONLY_CALLER_THAT_STATES_IT_IS_A_BENCHMARK_SO_PRODUCTION_NEVER_LEARNS",
+  "DERIVE_A_GLOBAL_CROSS_PROJECT_STORE__REJECTED_BECAUSE_THE_SESSION_REFUSES_ANY_DATABASE_PATH_OUTSIDE_THE_REPOSITORY_AND_LOOSENING_THAT_IS_A_SAFETY_BOUNDARY_CHANGE",
+  "TARGET_WHICHEVER_SOURCE_FILE_THE_SEARCH_TOUCHED__REJECTED_BECAUSE_WITH_MORE_THAN_ONE_MODULE_THAT_IS_WHICH_FILE_THE_SEARCH_HAPPENED_TO_PICK_NOT_A_FACT_THE_TREE_STATES",
+  "DERIVE_THE_SCOPE_FROM_THE_TEST_CORPUS_AND_DEFAULT_RETAINED_LEARNING_ON__SELECTED"
+ ],
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "secondary_blocker": "transfer_learning_v1.drive chose PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN from bool(prior) -- 'a carried-over model existed' -- instead of from 'a stored plan was replayed'. Measured 2026-11-02: the toggles family spent 8 trials cold, 8 on the first new instance and 8 on the second, a saving of zero, and every run was labelled recall. The probe printed the trials; the status overstated them, so the quoted headline '10/10 solved by a recalled plan' was 8/10.",
+ "secondary_stop_condition": "STOP when the same environment-transfer probe, re-run unchanged, reports every one-trial solve as a replay and every warm-started search as a warm start, and no status string in the tree can claim a saving the printed trial count contradicts.",
+ "selected_route": "DERIVE_THE_SCOPE_FROM_THE_TEST_CORPUS_AND_DEFAULT_RETAINED_LEARNING_ON__SELECTED",
+ "selected_surviving_route": "DERIVE_THE_SCOPE_FROM_THE_TEST_CORPUS_AND_DEFAULT_RETAINED_LEARNING_ON__SELECTED",
+ "stop_condition": "STOP when the second repair of the same breakage in a project the store has never seen spends zero search invocations while the first spends at least one, with the full suite green after both, and when every decline path names its cause and still repairs.",
+ "supersedes": {
+  "prior_intent": {
+   "action_id": "A_RECALLED_PLAN_IS_A_REPLAYED_PLAN_V1_20261102_V1",
+   "action_intent_id": "A_RECALLED_PLAN_IS_A_REPLAYED_PLAN_V1_20261102_V1",
+   "action_kind": "FRESH_REUSE",
+   "action_summary": "The environment-transfer status was chosen from the presence of a prior model rather than from the outcome that was actually observed. A third status, PASS__ENVIRONMENT_SOLVED_BY_WARM_STARTED_SEARCH, now carries the case where the search was warm-started and no trials were saved; only the replay path may return PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN, and every return path carries transferred and warm_started so no caller infers the answer from a missing key. Re-running the shipped probe reports 8/10 genuinely recalled and names the family that saved nothing. Four tests pin the two outcomes apart in both directions; all four fail on the 2026-11-01 code with 'claimed recall but spent 8 trials' and pass here. A second probe executes the cross-language carry rather than asserting it: one lesson taught from one Python example is compiled by g++ in C++ and passes 3/3 real assertions, and the Rust miss is attributed to the rule pattern requiring a 'return' token rather than to a safety guard.",
+   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+   "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+     "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+     "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+     "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+     "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+     "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+     "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+     "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+     "canonical/runtime/transfer_learning_v1.py",
+     "canonical/tests/test_transfer_learning_v1.py",
+     "transfer_learning_new_environment_probe_20261101.py",
+     "cross_language_learning_probe_20261102.py"
+    ],
+    "route_class": "REUSE"
+   },
+   "benchmark_or_family_rank_authority": false,
+   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::transfer_learning_v1.drive chose PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN from bool(prior) -- 'a carried-over model existed' -- instead of from 'a stored plan was replayed'. Measured 2026-11-02: the toggles family spent 8 trials cold, 8 on the first new instance and 8 on the second, a saving of zero, and every run was labelled recall. The probe printed the trials; the status overstated them, so the quoted headline '10/10 solved by a recalled plan' was 8/10.",
+   "canonical_base_commit": "2ececc45eb74e1067915161cbae298a998ac4aaa",
+   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+   "capability_credit_delta": 0,
+   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+   "causal_blocker": "transfer_learning_v1.drive chose PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN from bool(prior) -- 'a carried-over model existed' -- instead of from 'a stored plan was replayed'. Measured 2026-11-02: the toggles family spent 8 trials cold, 8 on the first new instance and 8 on the second, a saving of zero, and every run was labelled recall. The probe printed the trials; the status overstated them, so the quoted headline '10/10 solved by a recalled plan' was 8/10.",
+   "date": "2026-11-02",
+   "expected_parent_change": "canonical/runtime/transfer_learning_v1.py: adds PASS__ENVIRONMENT_SOLVED_BY_WARM_STARTED_SEARCH; the learned-plan return path reports it when a prior model existed and no plan was replayed, with transferred=False and warm_started=True, and the replay path and the exhausted path carry both keys. canonical/tests/test_transfer_learning_v1.py: four tests, all failing on the base commit. transfer_learning_new_environment_probe_20261101.py: counts only the replay status as recall and reports the warm-started remainder separately. cross_language_learning_probe_20261102.py: new, executes the bridge with a real compiler. INSTANT_LEARNING_SCOPE_20261101_V1.md: a dated correction lowering 10/10 to 8/10.",
+   "expected_parent_frontier_change": "A status that says 'recalled plan' is produced only by a replayed plan, so the headline figure for cross-environment instant learning is 8/10 rather than 10/10 -- lowered by measurement, and pinned by four tests that fail on the previous code.",
+   "falsification_condition": "FALSIFIED if any completed drive() run returns PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN with trials_spent greater than one, or returns transferred and warm_started both true, or omits either key; and if the four new tests pass on the base commit.",
+   "governance_change": false,
+   "highest_leverage_now": true,
+   "recursive_obs": {
+    "canonical_base_commit": "2ececc45eb74e1067915161cbae298a998ac4aaa",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+     "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN may no longer be returned from the learning loop."
+    ],
+    "expected_parent_level_state_change": "A status that says 'recalled plan' is produced only by a replayed plan, so the headline figure for cross-environment instant learning is 8/10 rather than 10/10 -- lowered by measurement, and pinned by four tests that fail on the previous code.",
+    "obs_blocker": {
+     "delete_bypass_substitute_options": [
+      "DELETE the status: rejected, it is consumed by tests and probes",
+      "BYPASS: none"
+     ],
+     "intrinsic_or_path_specific": "PATH_SPECIFIC: a status constant, not a limit of the learner.",
+     "surviving_causal_blocker": "The status was a function of prior presence instead of outcome."
+    },
+    "obs_capability": {
+     "capability_work_deleted": [
+      "none: the mechanism was already correct and was not touched"
+     ],
+     "existing_inherited_routes_checked": [
+      "transfer_learning_v1.drive",
+      "environment_learning_v1",
+      "language_neutral_skill_bridge_v1"
+     ],
+     "external_existing_routes_checked": [],
+     "surviving_gap": "Only the reported status was wrong."
+    },
+    "obs_goal": {
+     "proxy_goals_deleted": [
+      "raising the recall count",
+      "widening the similarity gate"
+     ],
+     "real_outcome": "8/10 genuine one-trial recalls, 2/10 warm starts, printed by the shipped probe.",
+     "surviving_necessity": "The claim quoted as the project headline must equal what the printed trials show."
+    },
+    "obs_inherited_system": {
+     "adjacent_capabilities_absorbed": [],
+     "downstream_work_to_delete_or_supersede": [
+      "the 10/10 headline in INSTANT_LEARNING_SCOPE_20261101_V1.md"
+     ],
+     "fresh_reuse_plan": "Re-run the existing probe and the existing transfer tests; no new harness."
+    },
+    "obs_obs": {
+     "affected_layers_only_on_revalidation": true,
+     "analysis_steps_deleted_or_cached": [
+      "re-derivation of per-family trial counts by hand"
+     ],
+     "search_stop_decision": "Stopped at the first cause that explained all five families."
+    },
+    "obs_solution": {
+     "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
+      "COMPOSE",
+      "CONFIGURE",
+      "INTEGRATE"
+     ],
+     "implementation_still_necessary": true,
+     "losing_routes_reason": "A trials-only rule cannot tell a replay from a one-trial search; deleting hides a measured working mechanism.",
+     "routes_ranked": [
+      "ADD_A_THIRD_STATUS_AND_CARRY_BOTH_KEYS",
+      "DERIVE_FROM_TRIALS_SPENT",
+      "DELETE_THE_FEATURE"
+     ]
+    },
+    "obs_verification": {
+     "direct_real_effect_verification_considered": true,
+     "existing_oracle_considered": true,
+     "synthetic_verification_necessity": "The probe's own printed trial counts are the oracle; the tests assert the invariant over them."
+    },
+    "real_outcome": "Re-running transfer_learning_new_environment_probe_20261101.py reports 4/5 first-instance and 4/5 second-instance one-trial recalls, 8/10 genuinely recalled, 2/10 warm-started with no saving, and names toggles_4. cross_language_learning_probe_20261102.py compiles and runs the carried C++ patch, 3/3 assertions.",
+    "required_capability": "One-trial recall of a solved environment on a new instance of the same kind.",
+    "route_frontier": {
+     "discovery_required": false,
+     "not_applicable_reason": "The selected route introduces no supplier, product or implementation-form choice, so there is nothing for a live challenger frontier over external software suppliers to discover. The question is entirely internal and already closed by measurement: which of the two code paths inside transfer_learning_v1.drive produced the returned plan, and whether a printed trial count contradicts the returned status. All four candidate routes are recorded in routes_considered, each with the measurement that eliminated it, and all four were evaluable on this host with zero external sources. Recorded here rather than fabricated: filling the challenger-route schema would require inventing external source evidence for a question that has no external part.",
+     "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+     "LEAVE_THE_STATUS_AND_QUALIFY_IT_IN_PROSE",
+     "DERIVE_THE_STATUS_FROM_TRIALS_SPENT_ALONE",
+     "DELETE_THE_TRANSFER_FEATURE",
+     "ADD_A_THIRD_STATUS_CHOSEN_BY_WHICH_PATH_PRODUCED_THE_PLAN_AND_CARRY_BOTH_KEYS_ON_EVERY_RETURN"
+    ],
+    "selected_surviving_route": "ADD_A_THIRD_STATUS_CHOSEN_BY_WHICH_PATH_PRODUCED_THE_PLAN_AND_CARRY_BOTH_KEYS_ON_EVERY_RETURN__SELECTED",
+    "stop_condition": "STOP when the same environment-transfer probe, re-run unchanged, reports every one-trial solve as a replay and every warm-started search as a warm start, and no status string in the tree can claim a saving the printed trial count contradicts.",
+    "why_selected_route_is_fastest_sufficient": "The distinction already existed in the control flow; only the reported constant collapsed it. No new mechanism, no new dependency, zero spend."
+   },
+   "resolution": "SELECTED",
+   "route_id": "A_RECALLED_PLAN_IS_A_REPLAYED_PLAN_V1_20261102_V1",
+   "routes_considered": [
+    "LEAVE_THE_STATUS_AND_QUALIFY_IT_IN_PROSE__REJECTED_BECAUSE_PROSE_IS_NOT_WHAT_GETS_QUOTED_AND_THE_STATUS_IS_THE_ARTIFACT_A_SUMMARY_MULTIPLIES_OVER",
+    "DERIVE_THE_STATUS_FROM_TRIALS_SPENT_ALONE__REJECTED_BECAUSE_A_REPLAY_AND_A_LUCKY_ONE_TRIAL_SEARCH_WOULD_BE_INDISTINGUISHABLE_AND_THE_PATH_IS_THE_CAUSAL_FACT",
+    "DELETE_THE_TRANSFER_FEATURE__REJECTED_BECAUSE_FOUR_OF_FIVE_FAMILIES_DO_RECALL_IN_ONE_TRIAL_MEASURED_AND_DELETING_A_WORKING_MECHANISM_TO_HIDE_A_LABEL_DEFECT_IS_NOT_A_REPAIR",
+    "ADD_A_THIRD_STATUS_CHOSEN_BY_WHICH_PATH_PRODUCED_THE_PLAN_AND_CARRY_BOTH_KEYS_ON_EVERY_RETURN__SELECTED"
+   ],
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "selected_route": "ADD_A_THIRD_STATUS_CHOSEN_BY_WHICH_PATH_PRODUCED_THE_PLAN_AND_CARRY_BOTH_KEYS_ON_EVERY_RETURN__SELECTED",
+   "selected_surviving_route": "ADD_A_THIRD_STATUS_CHOSEN_BY_WHICH_PATH_PRODUCED_THE_PLAN_AND_CARRY_BOTH_KEYS_ON_EVERY_RETURN__SELECTED",
+   "stop_condition": "STOP when the same environment-transfer probe, re-run unchanged, reports every one-trial solve as a replay and every warm-started search as a warm start, and no status string in the tree can claim a saving the printed trial count contradicts.",
+   "terminal_credit_delta": 0,
+   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+   "user_authorized_governance_change": false,
+   "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-02T00:00:00Z",
+    "currentness": {
+     "accepted_families": 5,
+     "meta_envelope_open_count": 8,
+     "open_families": 14,
+     "proved_atomic": 14,
+     "root1_positive_gap_count": 0,
+     "root2_touching_count": 17,
+     "root3_touching_count": 8,
+     "terminal": false,
+     "total_open_truth_obligations": 30,
+     "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__LABEL_CORRECTION_OVER_AN_EXISTING_MEASURED_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+     "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+     "counterexample_receipts": [
+      {
+       "git_blob_sha": "0a092263c2c7ce646f38008325b0e72c3e6e45b1",
+       "path": "canonical/runtime/transfer_learning_v1.py"
+      },
+      {
+       "git_blob_sha": "c05403a62cf73406f7001b0543c80d5191f9bdfc",
+       "path": "canonical/tests/test_transfer_learning_v1.py"
+      },
+      {
+       "git_blob_sha": "aaa5e44fb5898a120ceeb6fb5bb9f6ff8c0d29de",
+       "path": "transfer_learning_new_environment_probe_20261101.py"
+      },
+      {
+       "git_blob_sha": "56d75d3947a4be67004aefe8e907b5d909955c05",
+       "path": "cross_language_learning_probe_20261102.py"
+      }
+     ],
+     "decisive_question": "Does every completed drive() run whose returned status names a recalled plan also report trials_spent == 1, and does the shipped probe then print the honest count?",
+     "falsifier_id": "A_RECALLED_PLAN_IS_A_REPLAYED_PLAN_V1_20261102_V1_FALSIFIER",
+     "known_counterexamples_checked": true,
+     "no_known_counterexample_reason": "The counterexample is in the tree and was measured, not searched for: before this change the toggles family returned PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN with trials_spent 8, three times in a row. Both directions are pinned by the four new tests -- test_a_genuine_replay_is_reported_as_transferred_and_costs_one_trial requires a real replay to stay PASS_TRANSFERRED with one trial, and test_a_warm_started_search_is_never_reported_as_recalled requires a warm start to be reported as something else -- so neither outcome can drift into the other, and test_the_status_is_a_function_of_the_cost_not_only_of_the_prior honours the invariant over every run rather than over the runs constructed to show it.",
+     "proposal_id": "A_RECALLED_PLAN_IS_A_REPLAYED_PLAN_V1_20261102_V1",
+     "receipt_note": "The blobs are the files that constitute the evidence at this commit: the runtime that changed, the tests that fail on the base commit, the probe that now reports the honest count, and the new probe that executes the cross-language carry."
+    }
+   },
+   "weakens_existing_guard": [],
+   "why_selected_route_is_fastest_sufficient": "The drive function already computed everything needed to tell the two paths apart -- it returns from the replay loop or from the learning loop and never conflated them in code, only in the status constant. Fixing the constant and adding the two keys is a local edit with no new mechanism, and the tests that separate the outcomes are four assertions over the existing public interface."
+  },
+  "reason": "Both changes were committed on one branch and will land as one pull request, and the drift guard admits exactly one action intent per pull request. Rather than drop a record, the earlier intent is carried here verbatim under this key and its separate file is removed. Nothing it asserted is withdrawn: it remains the authority for the transfer-status correction, and this intent is the authority for the retained-learning default. The two are one action unit because both are configuration/reporting defects that hid a measured gain the mechanism had already earned."
+ },
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-02T00:00:00Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__DEFAULT_VALUE_AND_INPUT_DERIVATION_OVER_AN_EXISTING_MEASURED_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "cf14c09b3c2ac74c1899bcde4d2c165ff237fe09",
+     "path": "canonical/swe_kernel/retained_scope_derivation_v1.py"
+    },
+    {
+     "git_blob_sha": "0f8893aa01c30e7c13860b8f13d17fe47532da79",
+     "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+    },
+    {
+     "git_blob_sha": "72f7fc98db7fdf87668523ce2a47a018f1dee02b",
+     "path": "canonical/tests/test_the_second_repair_is_cheaper_v1.py"
+    },
+    {
+     "git_blob_sha": "9a1af6dcc8cf09b79add86789a6246d2cedc9a18",
+     "path": ".gitignore"
+    }
+   ],
+   "decisive_question": "Does the second repair of the same breakage in an unseen project spend zero search invocations while the first spends at least one, with the suite green after both?",
+   "falsifier_id": "THE_SECOND_REPAIR_MUST_NOT_SEARCH_V1_20261102_V1_FALSIFIER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The nearest world in which the default must not fire is a project where the stored lesson is the wrong answer; test_a_different_correct_answer_is_still_repaired_correctly builds it and requires a correct repair, not a recalled one. test_an_explicit_off_is_honoured_and_never_overridden pins that a stated decision is never overridden, and test_two_source_files_decline_with_a_named_reason pins that ambiguity declines rather than guesses.",
+   "proposal_id": "DEFAULT_RETAINED_LEARNING_ON_WHERE_THE_TREE_DERIVES_THE_SCOPE_V1_20261102_V1"
+  }
+ },
+ "weakens_existing_guard": [],
+ "why_selected_route_is_fastest_sufficient": "The session already required exactly two facts to run -- a scope key and a target -- and the tree already contains both: which tests judge the repair, and which module is under repair when there is only one. No new mechanism, no external source, no dependency, zero spend; the whole change is a derivation of inputs the capability was already waiting for."
+}

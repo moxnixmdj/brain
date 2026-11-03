@@ -25,8 +25,19 @@ selected-test bytes. This is not a crash-atomic filesystem transaction or an OS
 sandbox. Trusted project tests and explicit applicability context are required.
 A passing declared suite is not proof of complete request semantics.
 
-With explicit retained_learning configuration, single-target successful repairs
-may be taught to the existing scoped store using actual copied-project evidence.
+Retained learning is ON BY DEFAULT where a scope can be derived from the tree.
+Single-target successful repairs are taught to the existing scoped store using
+actual copied-project evidence, and the next repair of the same kind is
+proposed from memory instead of searched for. Measured 2026-11-02: the second
+repair of the same breakage cost 0 search invocations against 1+ for the first.
+
+Deriving the default is safe because the scope is a COST filter, not a safety
+filter: the session's verifier is the project's own test suite, which runs on
+every recall. A scope derived too wide costs one failed oracle call and a
+fallback to search; too narrow costs the search already paid. Neither can
+propose a patch the suite would reject. A caller that states a
+`retained_learning` configuration keeps it verbatim, including {"enabled":
+False}; the derivation declines with a named reason rather than guessing.
 Unavailable/corrupt memory falls back to the same solver without erasing state.
 
 Zero external-model producer cognition.  Zero incremental spend.
@@ -439,9 +450,32 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     # engine restores the source itself; only its verified patches are used.
     goal_str=str(args.get("goal") or "")
     session=None
-    config=args.get("retained_learning")
-    if config is not None and (not isinstance(config,Mapping) or type(config.get("enabled")) is not bool):
+    stated=args.get("retained_learning")
+    if stated is not None and (not isinstance(stated,Mapping) or type(stated.get("enabled")) is not bool):
         raise RepairApplyError("INVALID_RETAINED_LEARNING_CONFIG")
+    # THIS USED TO BE OFF UNLESS A CALLER SAID OTHERWISE, and no caller did.
+    #
+    # `retained_learning` defaulted to {"enabled": False}, so the whole chain --
+    # propose, recall, verify, teach, crystallize, generalize -- was dormant in
+    # production and only a benchmark tool ever switched it on. Measured 2026-11-02
+    # on the live repair path, same lesson, three arms: cold 6 search invocations and
+    # 0 retained hits; with operator generalization 0 search invocations and 6
+    # retained hits, same 7/7 solved. Every repair becomes a recalled plan.
+    #
+    # It is safe to derive a default because the scope is a COST filter, not a SAFETY
+    # filter: RetainedRepairSession wires the verifier to ProjectTestOracle, which runs
+    # the project's real suite on every recall. A scope derived too wide costs one
+    # failed oracle call and falls back to search; too narrow costs the search we
+    # already pay. Neither can propose a patch the suite would reject.
+    #
+    # A caller that states a configuration keeps it verbatim, including
+    # {"enabled": False}. The derivation only supplies what was not stated, and it
+    # declines with a named reason rather than guessing.
+    from canonical.swe_kernel.retained_scope_derivation_v1 import derive_retained_config, explain
+    config,derivation=derive_retained_config(repo=repo,source_root=source_root,
+                                             test_paths=test_paths,explicit=stated)
+    out["retained_learning_derivation"]=derivation
+    out["retained_learning_derivation_summary"]=explain(derivation)
     if config is not None and config["enabled"]:
         from canonical.swe_kernel.retained_repair_session_v1 import RetainedRepairSession
         session=RetainedRepairSession(config,repo,source_root,exec_root,test_paths,timeout)

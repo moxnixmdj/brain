@@ -47,3 +47,10 @@ canonical/tmp_*.json
 # a cache of what this machine's programs do: keyed on their bytes, so it is
 # machine-local by construction and must never be committed
 *.fingerprints.json
+
+# Retained repair memory written by python.software.repair.apply.verified.v1.
+# The scope derivation puts a project's learned repair rules inside the project
+# (the sessions refuse any path outside it), and that memory is machine-local
+# evidence of what this tree has been taught -- not source. It must never be
+# committed, and it is reported in every run's retained_learning_derivation.
+.brain/
