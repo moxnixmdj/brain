@@ -829,3 +829,68 @@ No capability, ownership, benchmark, acceptance, promotion, terminal, permanence
 or sentience credit is claimed or implied. Zero incremental spend. Zero model dependency in
 any producer path. Every number attributed here is quoted from a measurement already in this
 tree, with its source named; none was produced by this document.
+
+---
+
+## 8. CORRECTION 2026-11-02 — "10/10 solved by a recalled plan" was 8/10, and the label was the defect
+
+**Superseding rows: the two "SOLVED — measured 5/5" / "10/10" entries in §1 and the §0.7
+figure. The trials were always reported; the STATUS was not.**
+
+`transfer_learning_v1.drive` returned `PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN` from **two
+different code paths**:
+
+1. a stored plan was replayed and the goal observed — one trial, genuinely instant learning; and
+2. the plan search was **warm-started from a carried-over model**, where the status was chosen
+   from `bool(prior)` — *"some prior model existed"* — not from *"a plan was replayed."*
+
+Re-run of `transfer_learning_new_environment_probe_20261101.py` on 2026-11-02 with the status
+chosen by *outcome* rather than by *prior presence*:
+
+| family | COLD | FIRST | SECOND | genuinely recalled? |
+|---|---|---|---|---|
+| three-dial lock | 32 | **1** | **1** | yes |
+| accumulator word | 64 | **1** | **1** | yes |
+| grid reach | 16 | **1** | **1** | yes |
+| modulo counter | 8 | **1** | **1** | yes |
+| four toggles | 8 | 8 | 8 | **no — zero trials saved, previously labelled "recalled"** |
+
+**Honest figure: 8 of 10, not 10 of 10.** The `toggles_4` numbers (8 / 8 / 8) were already
+printed in §0.7 and in the probe's own table, so no data was hidden — the **status constant and
+the summary line over-stated what the numbers showed**, which is the exact failure `AGENTS.md`
+is written to prevent: a receipt going green while the quantity does not move.
+
+The code now returns a third status, `PASS__ENVIRONMENT_SOLVED_BY_WARM_STARTED_SEARCH`, with
+`transferred=False` and `warm_started=True`. Only the replay path may claim
+`PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN`. Four regression tests pin the two outcomes apart
+in both directions; **all four fail on the 2026-11-01 code** (`claimed recall but spent 8
+trials`) and pass on the corrected code.
+
+What survives unchanged: instant learning is real, one-trial recall is real for four of five
+families, and cross-environment transfer is real. What is withdrawn is only the **count**, and
+the count was the sentence being quoted as the project's headline.
+
+### 8.1 A second, smaller correction: "cross-language reachable 0/4" measured the store, not the capability
+
+The probe's cross-language rows call `store.lookup_rules(lang)`, which reports that the store
+keys rules by language. It never consults `language_neutral_skill_bridge_v1`, the module built
+to carry a lexical rule across that boundary — the module postdates the probe.
+
+New probe `cross_language_learning_probe_20261102.py`, one lesson taught from **one** Python
+example, then offered to five target languages:
+
+| language | carried | executed here |
+|---|---|---|
+| C++ | **yes** | **compiled by `g++` and run: 3/3 real assertions pass** |
+| TypeScript, Go, Java | yes | no runtime/compiler on this host — TEXT_ONLY, said so |
+| Rust | no | `RULE_PATTERN_ABSENT:rule_requires_'return'` |
+
+So the capability is real and, for C++, now **executed** rather than asserted. But the reason
+for the 4/5 is not what the earlier note implied: the crystallized rule's pattern is
+`return ?id0 <= ?id1`, and it crosses exactly into the languages that spell the fix with a
+`return` keyword. Rust writes the same function as a tail expression and is missed — not by a
+safety guard, but by the **shape assumption baked into the rule**. That is Wall 1 of §2.3
+appearing again, in the one place the bridge cannot help, and it is the cheapest next fix:
+admit a tail-expression form of the pattern.
+
+Authority: **NONE**, as everywhere in this document. Both corrections **lower** a claim.

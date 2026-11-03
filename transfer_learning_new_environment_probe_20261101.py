@@ -16,7 +16,10 @@ family:
   SECOND -- instance C, another new one, same store.
 
 A family counts as transferring only if FIRST/SECOND reach the goal and the
-status is PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN rather than by learning.
+status is PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN rather than by learning --
+meanwhile a run that merely reused a carried-over model to search faster is reported
+separately as PASS__ENVIRONMENT_SOLVED_BY_WARM_STARTED_SEARCH, which saves no trials by
+itself and is not counted here as recall.
 Every result is proven by executing the plan and observing the goal.
 
 The state file is redirected to a temp path so this measurement does not mutate
@@ -184,6 +187,7 @@ def run() -> dict:
                 "trials_spent": r.get("trials_spent"),
                 "act_calls": (r.get("interactions") or {}).get("act_calls"),
                 "transferred": r.get("transferred"),
+                "warm_started": r.get("warm_started"),
             })
         out["families"][name] = rows
     return out
@@ -203,14 +207,29 @@ def main() -> int:
     cold = sum(1 for f in res["families"].values() for r in f if r["phase"] == "COLD" and r["pass"])
     first = [r for f in res["families"].values() for r in f if r["phase"] == "FIRST"]
     second = [r for f in res["families"].values() for r in f if r["phase"] == "SECOND"]
-    tr_first = [r for r in first if r["status"] == "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN"]
-    tr_second = [r for r in second if r["status"] == "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN"]
+    # "recalled" now means exactly one thing: a stored plan was replayed and the goal was
+    # observed. It used to also cover a search that happened to be warm-started from a
+    # carried-over model, which is how this probe came to print "10/10 solved by a recalled
+    # plan" while the toggles family spent 8 trials cold, 8 on the first new instance and 8
+    # on the second -- a saving of zero, labelled as instant learning.
+    RECALLED = "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN"
+    WARM = "PASS__ENVIRONMENT_SOLVED_BY_WARM_STARTED_SEARCH"
+    tr_first = [r for r in first if r["status"] == RECALLED]
+    tr_second = [r for r in second if r["status"] == RECALLED]
+    ws = [r for r in first + second if r["status"] == WARM]
     print(f"families: {len(res['families'])}")
     print(f"COLD   solved (no prior experience): {cold}/{len(res['families'])}")
-    print(f"FIRST  solved by RECALLED plan:      {len(tr_first)}/{len(first)}")
-    print(f"SECOND solved by RECALLED plan:      {len(tr_second)}/{len(second)}")
+    print(f"FIRST  solved by RECALLED plan:      {len(tr_first)}/{len(first)}   (1 trial each)")
+    print(f"SECOND solved by RECALLED plan:      {len(tr_second)}/{len(second)}   (1 trial each)")
     print(f"FIRST+SECOND solved at all:          "
           f"{sum(1 for r in first+second if r['pass'])}/{len(first+second)}")
+    print(f"  of which genuinely recalled:       {len(tr_first) + len(tr_second)}"
+          f"/{len(first + second)}")
+    print(f"  warm-started search (no saving):   {len(ws)}/{len(first + second)}")
+    if ws:
+        names = sorted({n for n, f in res["families"].items() for r in f
+                        if r["status"] == WARM and r["phase"] != "COLD"})
+        print(f"  families learning nothing from the prior model: {', '.join(names)}")
     print(f"\nstate file (temp, not the tree): {os.environ['BRAIN_TRANSFER_LEARNING_STATE']}")
     return 0
 

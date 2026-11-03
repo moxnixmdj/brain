@@ -283,3 +283,88 @@ class MemorySurvivesADifferentMachine(unittest.TestCase):
         second = self._fp(["+0", "+1", "+2", "+3"])     # one more action available
         got = self.tl.recall(second, "dial")
         self.assertEqual([r["plan"] for r in got], [["+1", "+2"]])
+
+
+# --------------------------------------------------------------------------- #
+# "recalled" must mean replayed, not warm-started
+# --------------------------------------------------------------------------- #
+class RecalledMeansReplayedTests(_Store, unittest.TestCase):
+    """A status may not claim a saving it did not make.
+
+    Measured 2026-11-02 against `transfer_learning_new_environment_probe_20261101.py`: the
+    toggles family spent 8 trials cold, 8 on the first new instance and 8 on the second, and
+    every one of those runs was labelled `PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN`, because
+    the status was chosen from `bool(prior)` -- "a carried-over model existed" -- rather than
+    from "a stored plan was replayed". The trials were always printed, so the data was honest
+    and the *label* was not, and the label is the thing that gets quoted as "10/10 solved by a
+    recalled plan".
+
+    These tests pin the two outcomes apart in both directions, so neither can drift into the
+    other. The nearest world in which each must fail is the other one: a genuine replay must
+    not be reported as a warm start, and a warm start must not be reported as a replay.
+    """
+
+    def test_a_genuine_replay_is_reported_as_transferred_and_costs_one_trial(self):
+        first = tl.drive(Lock(), ["+0", "+1", "+2"],
+                         is_goal=lambda s: s == (3, 3, 3),
+                         budget=40, max_depth=24, heuristic=h((3, 3, 3)))
+        self.assertEqual(first["status"], tl.PASS_LEARNED)
+        replayed = tl.drive(Lock(), ["+0", "+1", "+2"],
+                            is_goal=lambda s: s == (3, 3, 3),
+                            budget=40, max_depth=24, heuristic=h((3, 3, 3)))
+        self.assertEqual(replayed["status"], tl.PASS_TRANSFERRED)
+        self.assertTrue(replayed["transferred"])
+        self.assertFalse(replayed["warm_started"])
+        self.assertEqual(replayed["trials_spent"], 1)
+
+    def test_a_warm_started_search_is_never_reported_as_recalled(self):
+        """A new goal cannot be replayed -- only warm-started. That is a different status."""
+        tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s: s == (7, 2, 9),
+                 budget=40, max_depth=24, heuristic=h((7, 2, 9)))
+        warm = tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s: s == (1, 1, 1),
+                        budget=40, max_depth=24, heuristic=h((1, 1, 1)))
+        self.assertTrue(warm["pass"])
+        self.assertGreater(warm["prior_transitions"], 0, "this run must actually have a prior")
+        self.assertNotEqual(warm["status"], tl.PASS_TRANSFERRED)
+        self.assertNotEqual(warm["status"], tl.PASS_LEARNED)
+        self.assertEqual(warm["status"], tl.PASS_WARM_STARTED)
+        # `transferred` is the key a summary multiplies over. A warm start did not transfer.
+        self.assertFalse(warm["transferred"])
+        self.assertTrue(warm["warm_started"])
+
+    def test_the_status_is_a_function_of_the_cost_not_only_of_the_prior(self):
+        """The defect was that status ignored trials_spent entirely.
+
+        Whatever a run is labelled, a label of "recalled" now implies one trial. Honoured on
+        every completed run in this test, not just the ones constructed to show it.
+        """
+        cases = [((7, 2, 9),), ((1, 1, 1),), ((3, 3, 3),), ((5, 0, 2),)]
+        for (target,) in cases:
+            r = tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s, t=target: s == t,
+                         budget=40, max_depth=24, heuristic=h(target))
+            self.assertTrue(r["pass"])
+            if r["status"] == tl.PASS_TRANSFERRED:
+                self.assertEqual(r["trials_spent"], 1,
+                                 f"claimed recall but spent {r['trials_spent']} trials")
+            else:
+                self.assertFalse(r["transferred"])
+
+    def test_every_outcome_carries_both_keys_so_a_summary_cannot_miscount(self):
+        """No consumer should have to infer "was it a replay?" from a missing key."""
+        tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s: s == (7, 2, 9),
+                 budget=40, max_depth=24, heuristic=h((7, 2, 9)))
+        runs = [
+            tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s: s == (7, 2, 9),
+                     budget=40, max_depth=24, heuristic=h((7, 2, 9))),      # replay
+            tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s: s == (1, 1, 1),
+                     budget=40, max_depth=24, heuristic=h((1, 1, 1))),      # warm start
+            tl.drive(Lock(), ["+0", "+1", "+2"], is_goal=lambda s: s == (0, 9, 0),
+                     budget=1, max_depth=2, heuristic=h((0, 9, 0))),        # likely unsolved
+        ]
+        for r in runs:
+            self.assertIn("transferred", r)
+            self.assertIn("warm_started", r)
+            self.assertIsInstance(r["transferred"], bool)
+            self.assertIsInstance(r["warm_started"], bool)
+            self.assertFalse(r["transferred"] and r["warm_started"],
+                             "a run cannot be both a replay and a warm start")

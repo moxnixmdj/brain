@@ -35,6 +35,21 @@ SCHEMA = "PROJECT_BRAIN_TRANSFER_LEARNING_V1"
 
 PASS_TRANSFERRED = "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN"
 PASS_LEARNED = "PASS__ENVIRONMENT_SOLVED_BY_LEARNING"
+# A third outcome, because there are three and the code used to report two.
+#
+# `prior` being present does NOT mean a stored plan was replayed. It means the search was
+# warm-started from a carried-over model. Those are different results and only the first one
+# is the claim "instant learning": a replayed plan costs one trial, and a warm-started search
+# costs whatever it costs.
+#
+# Measured 2026-11-02 on `transfer_learning_new_environment_probe_20261101.py`: the toggles
+# family spent **8 trials cold, 8 on the first new instance and 8 on the second** -- a
+# carried-over model that saved literally nothing -- and every one of those runs was reported
+# as `PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN`. A status whose name says "recalled" while
+# the number beside it says "no cheaper" is the exact defect AGENTS.md exists to stop: the
+# receipt goes green and the quantity does not move. The trials were always printed; the
+# *label* rounded them up, and the label is what gets quoted.
+PASS_WARM_STARTED = "PASS__ENVIRONMENT_SOLVED_BY_WARM_STARTED_SEARCH"
 OPEN_NO_TRANSFER = "OPEN__NO_USABLE_PRIOR_EXPERIENCE"
 FAIL_TRANSFER_WRONG = "FAIL__RECALLED_PLAN_DID_NOT_REACH_GOAL"
 
@@ -455,7 +470,8 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             return finish({
                 "schema": SCHEMA, "status": PASS_TRANSFERRED, "pass": True,
                 "plan": plan, "plan_length": len(plan), "reached": True,
-                "transferred": True, "episode_persisted": retained["persisted"], "similarity": cand.get("similarity"),
+                "transferred": True, "warm_started": False,
+                "episode_persisted": retained["persisted"], "similarity": cand.get("similarity"),
                 "candidates_tried": tried,
                 "authority": "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED",
                 "trials_spent": tried,
@@ -515,10 +531,14 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
         if reached:
             plan = [str(a) for a in candidate]
             retained = remember(fp, gkey, plan, reached=True, model=model_out)
+            # `prior` means the search was warm-started; it does NOT mean a stored plan was
+            # replayed. Only the replay path above may claim PASS_TRANSFERRED. A warm start
+            # that cost the whole budget is reported as what it was: a search that finished.
             return finish({
-                "schema": SCHEMA, "status": PASS_TRANSFERRED if prior else PASS_LEARNED,
+                "schema": SCHEMA, "status": PASS_WARM_STARTED if prior else PASS_LEARNED,
                 "pass": True, "plan": plan, "plan_length": len(plan),
-                "reached": True, "transferred": bool(prior), "episode_persisted": retained["persisted"],
+                "reached": True, "transferred": False, "warm_started": bool(prior),
+                "episode_persisted": retained["persisted"],
                 "prior_transitions": sum(len(v) for v in (prior or {}).values()),
                 "trials_spent": spent, "budget": budget,
                 "saved_trials": max(0, budget - spent),
@@ -539,6 +559,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
         "recall_candidates": len(candidates),
     }
     out["transferred"] = False
+    out["warm_started"] = transferred is None and bool(prior)
     out["candidates_tried"] = tried
     out["prior_experience_used"] = bool(candidates)
     out["reached"] = False
