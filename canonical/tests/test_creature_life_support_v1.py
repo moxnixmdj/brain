@@ -54,6 +54,34 @@ def seed_clean(ws: pathlib.Path) -> None:
     )
 
 
+def assert_repaired_on_disk(ws: pathlib.Path) -> None:
+    """Prove the seeded bug is REALLY fixed in the on-disk file, behaviorally.
+
+    Stronger than a source-substring match (which a comment could satisfy while
+    the bug remains): execute the repaired file in a fresh interpreter and
+    require the repaired semantics on several inputs. The seed ``v - 3`` fails
+    ``transform(5) == 8``, so a pass here is only possible if the creature
+    actually rewrote the file. Accepts any correct repair (``v + 3``, ``3 + v``,
+    ``v - -3``, ...), not one spelling.
+    """
+    probe = (
+        "import sys; sys.path.insert(0, sys.argv[1]); "
+        "from buggy import transform; "
+        "assert transform(5) == 8, transform(5); "
+        "assert transform(0) == 3, transform(0); "
+        "assert transform(-1) == 2, transform(-1); "
+        "print('REPAIRED_ON_DISK_OK')"
+    )
+    r = subprocess.run(
+        [sys.executable, "-c", probe, str(ws)],
+        capture_output=True, text=True, timeout=30)
+    if r.returncode != 0 or "REPAIRED_ON_DISK_OK" not in r.stdout:
+        raise AssertionError(
+            "buggy.py on disk was not behaviorally repaired: "
+            f"rc={r.returncode} stdout={r.stdout!r} stderr={r.stderr!r} "
+            f"source={(ws / 'buggy.py').read_text(encoding='utf-8')!r}")
+
+
 class LifeSupportTests(unittest.TestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory(prefix="creature_ls_")
@@ -129,8 +157,7 @@ class LifeSupportTests(unittest.TestCase):
         seed_bug(self.ws)
         out = LS.run_life_support(
             self.ws, self.st, pulses=2, interval_s=0.0, apply_verified_repairs=True)
-        fixed = (self.ws / "buggy.py").read_text(encoding="utf-8")
-        self.assertIn("v + 3", fixed)  # the real file on disk was repaired
+        assert_repaired_on_disk(self.ws)  # the real file on disk was repaired
         self.assertGreater(out["life_spent"], 0.0)  # real work costs real life
         self.assertGreaterEqual(out["closed"], 1)
 
@@ -187,7 +214,7 @@ class LifeSupportTests(unittest.TestCase):
         finally:
             os.killpg(os.getpgid(proc.pid), signal.SIGKILL)  # the OS kills it mid-life
             proc.wait(timeout=15)
-        self.assertIn("v + 3", (self.ws / "buggy.py").read_text(encoding="utf-8"))
+        assert_repaired_on_disk(self.ws)
 
         again = LS.run_life_support(
             self.ws, self.st, pulses=1, interval_s=0.0, apply_verified_repairs=True)

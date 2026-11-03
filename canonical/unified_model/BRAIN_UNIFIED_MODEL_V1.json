@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6644,
+  "research_index_records": 6645,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 438,
-  "source_index_modules": 1922
+  "source_index_entry_points": 439,
+  "source_index_modules": 1923
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "14915d2879dda1867e3b72fc328f46c52ba88250b5bd1a66ffe6f535bad35aa0"
+  "value": "1362b3a333e87fcb2febfc07d6e06bca74bb280693a8e81bf4d38153d909a3ea"
  },
  "engines": [
   {
@@ -212944,6 +212944,51 @@
    }
   },
   {
+   "action_id": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+   "capability": false,
+   "date": "2026-11-03",
+   "id": "research:canonical/action_intents/CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "886969c1f07b3e9cfda51c89dd21f013248f9c62bb6847ceda02800404631291",
+   "status": "",
+   "terms": {
+    "0.706": 1,
+    "0.75": 2,
+    "10": 2,
+    "11": 2,
+    "2-pulse": 1,
+    "20261103": 1,
+    "appends": 1,
+    "artifact": 1,
+    "atomic": 1,
+    "awakeagencydaemon": 1,
+    "beating": 1,
+    "because": 1,
+    "between": 1,
+    "body": 1,
+    "bug": 1,
+    "carries": 1,
+    "clock": 1,
+    "closed": 1,
+    "constructed": 1,
+    "continuous": 1,
+    "crash-resumable": 1,
+    "creature": 3,
+    "creature-life-support.yml": 1,
+    "creature_continuous_life_support_20261103_v1": 2,
+    "creature_life_state": 1,
+    "day": 2,
+    "life": 6,
+    "pulses": 2,
+    "resume": 2,
+    "sigterm": 2,
+    "spent": 3,
+    "tests": 2
+   }
+  },
+  {
    "action_id": "DAG_EXECUTOR_CONTRACT_ASSERTED_AS_IMPLEMENTED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -239127,6 +239172,39 @@
     "v1": 1,
     "validate_semantic_root_slot": 1,
     "verification": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/creature_life_support_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/creature_life_support_v1.py",
+   "sha256": "fe535893af9e9dff3031195960f1aee168081808dd19be149037e50378e28a17",
+   "summary": "Creature life support: the resident, crash-resumable loop that keeps the creature alive.",
+   "symbol_count": 4,
+   "symbols": [
+    "_append_jsonl_fsync",
+    "_atomic_write_json",
+    "main",
+    "run_life_support"
+   ],
+   "terms": {
+    "alive": 1,
+    "append_jsonl_fsync": 1,
+    "atomic_write_json": 1,
+    "crash-resumable": 1,
+    "creature": 3,
+    "keeps": 1,
+    "life": 2,
+    "loop": 1,
+    "main": 1,
+    "resident": 1,
+    "run_life_support": 1,
+    "support": 2,
+    "v1": 1
    }
   },
   {
