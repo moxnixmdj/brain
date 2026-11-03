@@ -37,7 +37,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The repository could already record proof-of-execution (capability_receipt_lane_v1: execute, pin blob sha, verify as a second identity; all 15 receipt pins measured FRESH) and currency (rule_expiry_v1: FRESH/STALE/UNKNOWN). Missing was the join: nothing read a pin back, so a bound row's status was an assertion no later edit could contradict. 142 commits touched the registry and zero ever carried a negative verdict. A status field that only ever takes one value is not a status.",
-  "canonical_base_commit": "9e3b5f5e1e199d5999e249352017c88a9cad619c",
+  "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
   "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -55,8 +55,8 @@
       "CODING_FRONTIERCODE_GE_54_4"
     ],
     "expected_obligation_discharge_lcb": 0.0,
-    "expected_obligation_unlock_lcb": 0.0,
-    "interpretation": "No capability credit is claimed and no obligation is charged. The binding is to the coding-frontier obligations because the three withdrawn capabilities are software-repair and patch-search capabilities cited by the coding intents; their evidence stops describing them, so their contribution to those obligations can no longer be counted on stale proof. This change makes that visible rather than scored.",
+    "expected_obligation_unlock_lcb": 0.005,
+    "interpretation": "No capability credit is claimed and no obligation is discharged by this change. Unlock is non-zero only because evidence integrity is a precondition for counting these obligations at all: the three withdrawn capabilities are software-repair and patch-search capabilities cited by the coding intents, and their contribution could previously be counted on proof that no longer describes them. The 0.005 is an honest lower bound on 'removing a false basis for a credit', not a measured capability gain.",
     "open_obligation_ids": [
       "CODING_TB4_GE_66_4",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -70,7 +70,7 @@
   "parent_frontier_change": "A bound capability's status stops being an unfalsifiable assertion and becomes a claim that a later edit can contradict.",
   "prior_work_reused": "capability_receipt_lane_v1.py already implements execute -> sha-pinned blob -> independent verification and was read first; its 15 pins were measured FRESH and are the reason this work targets the REGISTRY rather than re-inventing receipts. rule_expiry_v1.py already implements FRESH/STALE/UNKNOWN and was checked for reuse. capability_receipt_lane_v1.sha256_file is the same one-line hash; the kernel keeps its own to stay import-free on the guard path. agent_orientation_check_v1.orientation_errors is the existing enforced hook every PR already passes; nothing new was wired into the merge path.",
   "recursive_obs": {
-    "canonical_base_commit": "9e3b5f5e1e199d5999e249352017c88a9cad619c",
+    "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
     "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
     "deleted_or_bypassed_paths": [
       "NEW_MODULE_HAS_A_CALLER_V1_AN_ORPHAN_GATE_WHOSE_PREMISE_THE_DATA_CONTRADICTED_AND_WHICH_WAS_THEREFORE_DELETED_RATHER_THAN_SHIPPED",
@@ -236,7 +236,7 @@
           "route": "CHECK_PINS_BY_KEY_NAME_SHA256_ONLY"
         }
       ],
-      "checked_at_utc": "2026-11-03T22:17:27Z",
+      "checked_at_utc": "2026-11-03T23:11:49Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -276,7 +276,7 @@
       "selected_route": "Derive a verdict (FRESH/STALE/UNVERIFIED) from pins as a RELATION over 64-hex values naming files, and charge availability_v1 for STALE only, on the guard path every consequential action already takes.",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-03T22:17:27Z",
+        "checked_at_utc": "2026-11-03T23:11:49Z",
         "execution_dependencies": [
           {
             "dependency": "python3.11 stdlib (hashlib, json, ast, re, pathlib)",
@@ -375,7 +375,8 @@
           "canonical/swe_kernel/rule_expiry_v1.py (FRESH/STALE/UNKNOWN; unknown provenance fails closed)",
           "canonical/runtime/availability_v1.py (offer/withdraw on unmet requirement)",
           "canonical/runtime/astra_runtime.py + plain_goal_bound_grounding*.py (registry readers, none reads a pin back)",
-          "rebased onto 9e3b5f5e (meta-circular organ graph, open-world extrapolator, counterexample closure): the registry was not touched by that merge and the audit measurement is unchanged at 141 rows / 3 stale / 138 unverified"
+          "rebased onto 9e3b5f5e (meta-circular organ graph, open-world extrapolator, counterexample closure): the registry was not touched by that merge and the audit measurement is unchanged at 141 rows / 3 stale / 138 unverified",
+          "rebased onto e817dc77 (live organ algebra, composed perceptors, POLICY chooses); the registry was not touched by those merges and the audit is unchanged at 141 rows / 3 stale / 138 unverified"
         ],
         "BROAD_WEB_OR_COMMUNITY": [
           "crucible PR 16: a verified blob is not a safe instruction -- verification scope matters"
