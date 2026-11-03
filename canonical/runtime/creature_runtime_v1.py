@@ -852,17 +852,15 @@ class Creature:
             life_rem_now = max(1.0, float(self._life.remaining))
 
             def _efe_score(w_item: M.Work) -> float:
+                kw = _sovereign_feature_kwargs(w_item.id, self)
                 dist = self.cognitive_core.belief.predict_distribution(
                     w_item.id,
-                    host_ready=True,
-                    grounding_complete=True,
-                    causal_precond_met=True,
-                    memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
-                    strong_verifier=True,
+                    memory_reflex_hit=kw.pop("memory_reflex_hit"),
                     context_predicates={
                         "has_tests": bool(test_rels),
                         "has_hotspots": bool(hotspots_by_rel),
                     },
+                    **kw,
                 )
                 return (
                     float(dist["predicted_pass_probability"]) * w_item.value
@@ -879,18 +877,16 @@ class Creature:
             self._self.begin(f"work:{wid}", value=chosen_w.value, cost=chosen_w.cost)
             self._life.spend(chosen_w.cost)
 
+            _feat_now = _sovereign_feature_kwargs(wid, self)
             ticket = self.cognitive_core.belief.predict_before_act(
                 wid,
-                host_ready=True,
-                grounding_complete=True,
-                causal_precond_met=True,
-                memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
-                strong_verifier=True,
+                memory_reflex_hit=_feat_now.pop("memory_reflex_hit"),
                 calibration_ledger=self.calibration_ledger,
                 context_predicates={
                     "has_tests": bool(test_rels),
                     "has_hotspots": bool(hotspots_by_rel),
                 },
+                **_feat_now,
             )
 
             ok = False
@@ -1789,6 +1785,55 @@ def _extract_capability_feature_flags(cid: str) -> dict[str, Any]:
 
     _CAPABILITY_FEATURE_CACHE[cid] = base_flags
     return base_flags
+
+
+def _sovereign_feature_kwargs(work_id: str, creature: Creature) -> dict[str, Any]:
+    """The honest feature vector for ONE candidate, from what this host actually reports.
+
+    Measured 2026-11-03: `live_autonomous_cycle` predicted, spent life on, and settled every
+    prediction with `host_ready=True, grounding_complete=True, causal_precond_met=True,
+    missing_dep_or_env_block=False` hardcoded. On the 112-obligation board that produced exactly
+    ONE predicted probability (0.813) and ONE mutual-information value, while the same engine fed
+    the flags `_extract_capability_feature_flags` already computes produced four, with 0.062 for
+    the blocked majority. The creature therefore claimed 81.3% on candidates it had itself already
+    established were impossible (`unknown_slot_type_on_surface` x35,
+    `writes_fixed_repo_tmp_under_ro_input` x19, missing binaries/packages, ...), failed them, and
+    settled the predictions as failures against an optimistic prior. Its own scorer called that,
+    correctly, worse than a constant predictor -- and the cause was not the belief engine, it was
+    this diet.
+
+    `predict_task_probability` in this same module had always assembled the truthful vector; it was
+    used only to *value* the board. This function is the single source of those flags so the path
+    that predicts, acts and is scored cannot drift from the path that values.
+    """
+    if str(work_id).startswith("inspector:"):
+        cid = str(work_id)[len("inspector:"):]
+        flags = _extract_capability_feature_flags(cid)
+        return {
+            "host_ready": bool(flags["host_ready"]),
+            "grounding_complete": bool(flags["grounding_complete"]),
+            "causal_precond_met": bool(flags["causal_precond_met"]),
+            "memory_reflex_hit": cid in getattr(creature, "onboarded_capabilities", {}),
+            "strong_verifier": True,
+            "missing_dep_or_env_block": bool(flags["missing_dep_or_env_block"]),
+            "nested_cost_or_timeout_risk": bool(flags["nested_cost_or_timeout_risk"]),
+        }
+    if str(work_id).startswith(("gap:", "awake:gap:", "curiosity:")):
+        # A gap is by construction something whose causal precondition is not yet met.
+        return {
+            "host_ready": True,
+            "grounding_complete": True,
+            "causal_precond_met": False,
+            "memory_reflex_hit": False,
+            "strong_verifier": True,
+        }
+    return {
+        "host_ready": True,
+        "grounding_complete": True,
+        "causal_precond_met": True,
+        "memory_reflex_hit": False,
+        "strong_verifier": True,
+    }
 
 
 def predict_task_probability(work_id: str, creature: Creature) -> float:

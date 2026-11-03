@@ -161,3 +161,67 @@ read from the values in `self_authored_obligations_v1` (constants with a calibra
 from an end-to-end value-regression measurement — that measurement does not exist yet and is itself
 part of L4. Nothing here is independent verification, and the three landed changes remain
 unadmitted.
+
+---
+
+## 6. Follow-up, 2026-11-04: L2 was built, measured, and **rejected**
+
+The plan in §3 said "fit the self-model to its own settled ledger". I built it before deciding, and the
+measurement killed it. Recording that here rather than quietly shipping it, because the negative result
+is the load-bearing part.
+
+### What was actually wrong
+
+Not the belief engine. Before touching anything I asked *what the engine is fed*, and found:
+
+| as fed by `live_autonomous_cycle` (hardcoded) | as computed for the same 112 candidates |
+|---|---|
+| 1 distinct probability, **0.813** | 4 distinct: **0.062** blocked / 0.722 ready |
+| 1 distinct `epistemic_mi_nats` | 4 distinct |
+| mean 0.813 on the 101 blocked candidates | mean **0.065** on the same 101 |
+
+Every prediction, every life-spend decision and every settled record used
+`host_ready=True, grounding_complete=True, causal_precond_met=True, missing_dep_or_env_block=False`.
+Meanwhile `predict_task_probability` in the same module had always assembled the honest vector — and was
+used only to *value* the board. The act path passed literals. So the self-model was graded on features the
+creature had already disproved, announced 81.3% on candidates it knew were impossible
+(`unknown_slot_type_on_surface` ×35, `writes_fixed_repo_tmp_under_ro_input` ×19, …), failed them, and
+logged the failures against an optimistic prior.
+
+### The two candidate fixes, measured against each other
+
+Both protocols, deterministic (5 repeats per arm, byte-identical):
+
+| arm | 26-cycle skill | 6×12 skill | verdict |
+|---|---|---|---|
+| hardcoded all-true diet (everything so far) | +0.246 | −0.179 | CALIBRATED / WORSE |
+| **truthful diet** (shipped) | **+0.098** | **−0.084** | CALIBRATED / WORSE |
+| truthful diet **+ fitted recalibration α** | +0.098 | −0.084 | same |
+
+The fitted shrink — a least-squares slope toward the observed base rate, α = 0.334 — *reproduced my
+offline prediction of 0.330 exactly*, raised the 6×12 protocol from −0.179 to −0.084, and **lowered the
+26-cycle protocol from +0.246 to +0.098**. It moved 0.01 where it was blocked and cost 0.15 where it was
+already working. Net negative → **deleted**, not shipped. A per-family variant, shrunk toward the global
+slope, was also tested and did not beat it (`alpha = 0.33` at n=42 is the honest statement either way: about
+a third of the creature's confidence is evidence).
+
+So both numbers are *down* against the baseline arm, and the change is still right, because the baseline
+number was obtained by lying to the model. **A score computed from a diet the system has disproved is not a
+capability, it is a measurement of the lie** — the same lesson as the "curated easy diet" guard already in
+`self_prediction_calibration_v1`, one level down.
+
+### What this does to the plan
+
+§3's L2 was the right *target* and the wrong *implementation*. What L2 actually needed was not fitting;
+it was **input correctness**. The remaining headline defect — skill still below zero, `refuse` still
+`False` — is therefore **not a fitting problem** and no longer a diet problem. It is the sign error across
+families: a family that ONBOARDS fails, a family that REFUSES at a precondition passes, so one global
+direction is anti-correlated on a large subset. L3 (failure → scope) is now the next thing that can move
+the number, and it must be measured against both protocols from the start.
+
+### Non-claims
+
+The 4 remaining red tests in the focused suite are exactly the 4 that fail at the canonical base commit
+`a70480d` with this change stashed — CST / anti-unification host substrate, unrelated to this work, and
+untouched by it. One previously-red test (`component4`) now passes because its margin moved 0.0332 → 0.0648
+against a 0.05 threshold. Nothing here is independent verification; this remains unadmitted.
