@@ -589,6 +589,35 @@ class CompoundingConceptLibrary:
         )
         self.save()
 
+
+    def revive(self, concept_id: str) -> bool:
+        """Undo a retirement. Returns True if the concept was retired and is now live.
+
+        Retirement triggered by ONE refuted program is weaker evidence than a threshold's worth of
+        failures, so it must be reversible. An apparatus that can only escalate its own convictions
+        is the append-only-prior failure this library already fixed once; reintroducing it one level
+        up would be a poor joke.
+        """
+        if not self._can_write() or concept_id not in self._concepts:
+            return False
+        cur = self._concepts[concept_id]
+        if not cur.retired:
+            return False
+        self._concepts[concept_id] = ConceptEntry(
+            concept_id=cur.concept_id,
+            arity=cur.arity,
+            param_names=cur.param_names,
+            body_expr=cur.body_expr,
+            domain_kind=cur.domain_kind,
+            mdl_gain_bytes=cur.mdl_gain_bytes,
+            corpus_sites=cur.corpus_sites,
+            uses=cur.uses,
+            verified_hits=cur.verified_hits,
+            disconfirmations=0,
+        )
+        self.save()
+        return True
+
     def retired_concept_ids(self) -> frozenset[str]:
         """Concepts the record says to stop offering. Their callables still resolve."""
         return frozenset(cid for cid, e in self._concepts.items() if e.retired)
