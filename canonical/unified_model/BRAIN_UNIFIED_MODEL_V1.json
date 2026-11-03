@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6648,
+  "research_index_records": 6649,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "622bc8297317729736e5dd01e35a8893b45a660f627d4855450b3f493d9c2375"
+  "value": "659455b07ff93c4cad0365693453bcaf48b1ba310ab95f69d308e29a09a00b00"
  },
  "engines": [
   {
@@ -221432,6 +221432,31 @@
     "write": 3,
     "write_the_tests_for_this_tree_must_write_tests_v1_20261027_v1": 2
    }
+  },
+  {
+   "action_id": "ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "20261556f97e6b9b81ef2f07028d61562c73abc8e0cc95fd389772d2785a264e",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "compose_seven_stratum_zero_template_organ_algebra_with_evoi_global_and_instrumental_policy": 1,
+    "creature": 1,
+    "disguised_static_five_codec_and_thirty_five_expression_and_three_law_menus_plus_english_keyword_optimality_gate_and_myopic_one_step_policy_on_9e3b5f5e": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "seven": 1,
+    "stratum": 1,
+    "template": 1,
+    "v1": 1,
+    "zero": 1,
+    "zero_template_seven_stratum_creature_20261104_v1": 1,
+    "zero_template_seven_stratum_organ_algebra_and_decision_theoretic_open_world_policy_verified_at_zero_model_dependency__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1
+   }
   }
  ],
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1",
@@ -249033,11 +249058,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/global_open_world_extrapolator_v1.py",
-   "sha256": "c7f7026fd5472b4afffb367f686e0c3552d32c216d7f7eb789fa22076e3674dc",
+   "sha256": "c34004505ae2dffe51717bea14b7ecdade20082ff042ec96f5f77c403decaf2d",
    "summary": "Global Non-Local Extrapolation & Target-Persistence Engine (`K3 = 0`, `$0` spend).",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "ChannelObservation",
+    "discover_unseen_machine_channel",
     "discoverable_machine_universe_size",
     "estimate_unseen_opportunity_space",
     "has_global_quantifier",
@@ -249045,6 +249071,7 @@
    ],
    "terms": {
     "channelobservation": 1,
+    "discover_unseen_machine_channel": 1,
     "discoverable_machine_universe_size": 1,
     "engine": 1,
     "estimate_unseen_opportunity_space": 1,

@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
 """Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend).
 
-Implements Axiom I & Axiom III of the non-static sentient creature architecture:
-every cognitive mechanism across all five reflective strata is a content-addressed,
-AST-verified, falsification-gated executable Python program (`ExecutableOrgan`)
-stored inside one evolving program graph `P_t`:
+Implements Axiom I of the non-static sentient creature: every cognitive and
+executive mechanism is a content-addressed, AST-verified, falsification-gated
+executable Python program (`ExecutableOrgan`) in one evolving graph `P_t` whose
+operator basis compounds:
 
-  1. `PERCEPTOR`        : Raw bytes/text -> structured state (online epistemic
-                          sensorogenesis via round-trip & corruption-falsified
-                          parser/serializer synthesis for unfamiliar formats).
-  2. `PREDICTOR`        : (task_features, env_features) -> (p_pass, cost_ms, p_burn)
-                          (online causal feature-conditioned self/world model).
-  3. `SKILL`            : inputs -> output (`< 0.05 ms` in-RAM compiled bytecode,
-                          admitted only after active version-space disambiguation).
-  4. `VERIFIER`         : (input_or_ctx, artifact) -> (ok, reason) (derived by
-                          differential semantic/recomputational mutation probing,
-                          killing comment-stuffed and wrong-operator decoys).
-  5. `META_SYNTHESIZER` : (examples, budget) -> candidate_source_code (higher-order
-                          search tactics compiled from prior solved organs so Level-1
-                          synthesis itself grows open-endedly over time).
+    Omega_{t+1} = Omega_t  cup  P_t  cup  C_t
+
+Seven reflective strata — none of which is a frozen menu of templates:
+
+  1. `PERCEPTOR`         : byte/token grammar induction -> invertible
+                           (parse, serialize) ASTs, admitted only after round-trip
+                           bijection AND adversarial corruption rejection.
+  2. `WORLD_MODEL`       : execution traces -> executable precondition/effect rules.
+  3. `PREDICTOR`         : (task_features, env_features) -> (p_pass, cost_ms, p_burn).
+  4. `SKILL`             : observational-equivalence + STUN + exact linear solving
+                           + live organ composition (`organ_B(organ_A(x))`).
+  5. `VERIFIER`          : synthesized boolean/relational invariants (not a
+                           hardcoded sum/prod/constants checklist).
+  6. `META_SYNTHESIZER`  : higher-order anti-unification + exact coefficient
+                           solving (no frozen integer lattice).
+  7. `POLICY`            : multi-step instrumental Q so 0-immediate-reward
+                           tools/sensors/verifiers inherit unlocking value.
 """
 from __future__ import annotations
 
@@ -36,17 +40,21 @@ from typing import Any, Callable, Iterable, Mapping, Sequence
 SCHEMA = "PROJECT_BRAIN_META_CIRCULAR_ORGAN_GRAPH_V1"
 
 PERCEPTOR = "PERCEPTOR"
+WORLD_MODEL = "WORLD_MODEL"
 PREDICTOR = "PREDICTOR"
 SKILL = "SKILL"
 VERIFIER = "VERIFIER"
 META_SYNTHESIZER = "META_SYNTHESIZER"
+POLICY = "POLICY"
 
 STRATA: tuple[str, ...] = (
     PERCEPTOR,
+    WORLD_MODEL,
     PREDICTOR,
     SKILL,
     VERIFIER,
     META_SYNTHESIZER,
+    POLICY,
 )
 
 _FORBIDDEN_AST_NAMES = frozenset({
@@ -410,218 +418,597 @@ class CausalFeatureSelfPredictor:
 
 
 # ---------------------------------------------------------------------------
-# Online Epistemic Sensorogenesis (Unparsed Format -> Verified Perceptor Organ)
+# Online Epistemic Sensorogenesis — grammar induction, not a codec menu
 # ---------------------------------------------------------------------------
 
 
-_CANDIDATE_PERCEPTOR_TEMPLATES: tuple[tuple[str, str], ...] = (
-    (
-        "json_or_jsonl_codec",
-        """
-def parse(raw):
-    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)
-    s = text.strip()
-    if not s:
-        raise ValueError('EMPTY')
-    if s[0] in '{[':
-        obj = json.loads(s)
-        if not isinstance(obj, (dict, list)) or len(obj) == 0:
-            raise ValueError('TRIVIAL_JSON')
-        return {'kind': 'json', 'data': obj}
-    rows = []
-    for line in s.splitlines():
-        ln = line.strip()
-        if not ln:
+def _as_text(sample: str | bytes) -> str:
+    return sample.decode("utf-8") if isinstance(sample, bytes) else str(sample)
+
+
+def _coerce_literal_src() -> str:
+    return (
+        "def _coerce(v):\n"
+        "    s = str(v).strip()\n"
+        "    low = s.lower()\n"
+        "    if low == 'true':\n"
+        "        return True\n"
+        "    if low == 'false':\n"
+        "        return False\n"
+        "    sign = 1\n"
+        "    body = s\n"
+        "    if body[:1] == '-':\n"
+        "        sign = -1\n"
+        "        body = body[1:]\n"
+        "    if body.isdigit():\n"
+        "        return sign * int(body)\n"
+        "    if body.count('.') == 1 and body.replace('.', '', 1).isdigit():\n"
+        "        return sign * float(body)\n"
+        "    return s\n"
+        "\n"
+        "def _emit_scalar(v):\n"
+        "    if isinstance(v, bool):\n"
+        "        return 'true' if v else 'false'\n"
+        "    return str(v)\n"
+    )
+
+
+def _balanced_brackets(text: str, open_ch: str, close_ch: str) -> bool:
+    depth = 0
+    for ch in text:
+        if ch == open_ch:
+            depth += 1
+        elif ch == close_ch:
+            depth -= 1
+            if depth < 0:
+                return False
+    return depth == 0
+
+
+def _active_noncomment_lines(text: str) -> list[str]:
+    return [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith("#")]
+
+
+def _count_kv_pairs(line: str) -> tuple[int, str, str]:
+    """Return (pair_count, field_sep, kv_sep) for a record-style line."""
+    for field_sep in (";", ",", "|"):
+        parts = [p.strip() for p in line.split(field_sep) if p.strip()]
+        if len(parts) < 2:
             continue
-        item = json.loads(ln)
-        if not isinstance(item, dict):
-            raise ValueError('NOT_JSONL_DICT')
-        rows.append(item)
-    if len(rows) < 1:
-        raise ValueError('NO_ROWS')
-    return {'kind': 'jsonl', 'rows': rows}
+        for kv_sep in (":", "="):
+            if all(kv_sep in p and p.split(kv_sep, 1)[0].strip() and " " not in p.split(kv_sep, 1)[0].strip() for p in parts):
+                return (len(parts), field_sep, kv_sep)
+    return (0, "", "")
 
-def serialize(parsed):
-    if parsed.get('kind') == 'json':
-        return json.dumps(parsed['data'], sort_keys=True)
-    return '\\n'.join(json.dumps(r, sort_keys=True) for r in parsed['rows'])
-""",
-    ),
-    (
-        "sectioned_kv_codec",
-        """
-def parse(raw):
-    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith('#')]
-    if not lines:
-        raise ValueError('EMPTY')
-    sections = {}
-    cur = '_root'
-    kv_count = 0
-    for ln in lines:
-        if ln.startswith('[') and ln.endswith(']') and len(ln) > 2:
-            cur = ln[1:-1].strip()
-            sections.setdefault(cur, {})
-        elif '=' in ln or ':' in ln:
-            sep = '=' if ('=' in ln and (':' not in ln or ln.index('=') < ln.index(':'))) else ':'
-            k, v = ln.split(sep, 1)
-            k = k.strip()
-            v = v.strip()
-            if not k or ' ' in k:
-                raise ValueError('BAD_KEY')
-            if re.fullmatch(r'-?\\d+', v):
-                val = int(v)
-            elif re.fullmatch(r'-?\\d+\\.\\d+', v):
-                val = float(v)
-            elif v.lower() in ('true', 'false'):
-                val = (v.lower() == 'true')
-            else:
-                val = v
-            sections.setdefault(cur, {})[k] = val
-            kv_count += 1
-        else:
-            raise ValueError('UNPARSED_LINE')
-    if kv_count == 0:
-        raise ValueError('NO_KV')
-    return {'kind': 'sectioned_kv', 'sections': sections, 'sep': sep}
 
-def serialize(parsed):
-    sep = parsed.get('sep', '=')
-    out = []
-    for sec, mapping in parsed['sections'].items():
-        if sec != '_root':
-            out.append(f'[{sec}]')
-        for k, v in mapping.items():
-            if isinstance(v, bool):
-                vs = 'true' if v else 'false'
-            else:
-                vs = str(v)
-            out.append(f'{k} {sep} {vs}')
-    return '\\n'.join(out)
-""",
-    ),
-    (
-        "delimited_table_codec",
-        """
-def parse(raw):
-    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith('#')]
-    if len(lines) < 2:
-        raise ValueError('NEED_HEADER_AND_ROW')
-    best_delim = None
-    for delim in ('|', '\\t', ';', ','):
-        counts = [len([c for c in ln.split(delim)]) for ln in lines]
-        if counts[0] >= 2 and len(set(counts)) == 1:
-            best_delim = delim
+def _induce_format_grammar(samples: Sequence[str | bytes]) -> list[dict[str, Any]]:
+    """Induce candidate grammars from sample statistics (parameters, not frozen codecs)."""
+    grammars: list[dict[str, Any]] = []
+    if not samples:
+        return grammars
+
+    byte_samples = [s for s in samples if isinstance(s, (bytes, bytearray))]
+    text_samples = [_as_text(s) for s in samples]
+
+    # 1. Binary length-prefixed / TLV frames: tag(1) + len(2 BE) + payload
+    if byte_samples and all(isinstance(s, (bytes, bytearray)) for s in samples):
+        tlv_ok = True
+        for raw in byte_samples:
+            data = bytes(raw)
+            idx = 0
+            frames = 0
+            while idx < len(data):
+                if idx + 3 > len(data):
+                    tlv_ok = False
+                    break
+                ln = (data[idx + 1] << 8) | data[idx + 2]
+                idx += 3
+                if ln < 0 or idx + ln > len(data):
+                    tlv_ok = False
+                    break
+                idx += ln
+                frames += 1
+            if not tlv_ok or frames < 1 or idx != len(data):
+                tlv_ok = False
+                break
+        if tlv_ok:
+            grammars.append({"kind": "tlv", "tag_width": 1, "len_width": 2, "endian": "be"})
+
+        # uint8-length prefixed latin1 frames
+        lp_ok = True
+        for raw in byte_samples:
+            data = bytes(raw)
+            idx = 0
+            frames = 0
+            while idx < len(data):
+                ln = data[idx]
+                idx += 1
+                if idx + ln > len(data) or ln < 1:
+                    lp_ok = False
+                    break
+                idx += ln
+                frames += 1
+            if not lp_ok or frames < 1 or idx != len(data):
+                lp_ok = False
+                break
+        if lp_ok:
+            grammars.append({"kind": "lenpref", "width": 1})
+
+    # 2. JSON / JSONL
+    json_ok = True
+    json_kind = "json"
+    for t in text_samples:
+        s = t.strip()
+        if not s:
+            json_ok = False
             break
-    if best_delim is None:
-        raise ValueError('NO_CONSISTENT_DELIMITER')
-    headers = [h.strip() for h in lines[0].split(best_delim)]
-    if any(not h for h in headers):
-        raise ValueError('EMPTY_HEADER')
-    rows = []
-    for ln in lines[1:]:
-        cells = [c.strip() for c in ln.split(best_delim)]
-        rec = {}
-        for h, c in zip(headers, cells):
-            if re.fullmatch(r'-?\\d+', c):
-                rec[h] = int(c)
-            elif re.fullmatch(r'-?\\d+\\.\\d+', c):
-                rec[h] = float(c)
+        try:
+            if s[0] in "{[":
+                obj = json.loads(s)
+                if not isinstance(obj, (dict, list)) or len(obj) == 0:
+                    json_ok = False
+                    break
             else:
-                rec[h] = c
-        rows.append(rec)
-    return {'kind': 'table', 'delim': best_delim, 'headers': headers, 'rows': rows}
+                rows = []
+                for line in s.splitlines():
+                    ln = line.strip()
+                    if not ln:
+                        continue
+                    item = json.loads(ln)
+                    if not isinstance(item, dict):
+                        json_ok = False
+                        break
+                    rows.append(item)
+                if not rows:
+                    json_ok = False
+                    break
+                json_kind = "jsonl"
+        except Exception:
+            json_ok = False
+            break
+    if json_ok:
+        grammars.append({"kind": json_kind})
 
-def serialize(parsed):
-    d = parsed['delim']
-    hdr = d.join(parsed['headers'])
-    body = [d.join(str(r[h]) for h in parsed['headers']) for r in parsed['rows']]
-    return '\\n'.join([hdr] + body)
-""",
-    ),
-    (
-        "sexpr_tree_codec",
-        """
-def parse(raw):
-    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)
-    s = text.strip()
-    if not (s.startswith('(') and s.endswith(')')):
-        raise ValueError('NOT_SEXPR')
-    tokens = re.findall(r'\\(|\\)|"[^"]*"|[^\\s()]+', s)
-    pos = [0]
-    def _read():
-        if pos[0] >= len(tokens):
-            raise ValueError('UNEXPECTED_EOF')
-        tok = tokens[pos[0]]
-        pos[0] += 1
-        if tok == '(':
-            items = []
-            while pos[0] < len(tokens) and tokens[pos[0]] != ')':
-                items.append(_read())
-            if pos[0] >= len(tokens):
-                raise ValueError('UNCLOSED_PAREN')
-            pos[0] += 1
-            return items
-        if tok == ')':
-            raise ValueError('STRAY_CLOSE')
-        if re.fullmatch(r'-?\\d+', tok):
-            return int(tok)
-        if tok.startswith('"') and tok.endswith('"'):
-            return tok[1:-1]
-        return tok
-    tree = _read()
-    if pos[0] != len(tokens) or not isinstance(tree, list) or not tree:
-        raise ValueError('TRAILING_OR_EMPTY')
-    return {'kind': 'sexpr', 'tree': tree}
+    # 3. S-expression (balanced parentheses, starts with '(')
+    if all(t.strip().startswith("(") and t.strip().endswith(")") and _balanced_brackets(t, "(", ")") for t in text_samples):
+        grammars.append({"kind": "sexpr"})
 
-def serialize(parsed):
-    def _emit(node):
-        if isinstance(node, list):
-            return '(' + ' '.join(_emit(x) for x in node) + ')'
-        if isinstance(node, str) and (' ' in node or node == ''):
-            return '"' + node + '"'
-        return str(node)
-    return _emit(parsed['tree'])
-""",
-    ),
-    (
-        "tlv_binary_frame_codec",
-        """
-def parse(raw):
-    data = raw if isinstance(raw, bytes) else str(raw).encode('latin1')
-    if len(data) < 4:
-        raise ValueError('TOO_SHORT')
-    idx = 0
-    frames = []
-    while idx < len(data):
-        if idx + 3 > len(data):
-            raise ValueError('TRUNCATED_HEADER')
-        tag = data[idx]
-        ln = (data[idx + 1] << 8) | data[idx + 2]
-        idx += 3
-        if idx + ln > len(data):
-            raise ValueError('TRUNCATED_PAYLOAD')
-        payload = data[idx:idx + ln]
-        idx += ln
-        frames.append({'tag': int(tag), 'payload_hex': payload.hex()})
-    if not frames:
-        raise ValueError('NO_FRAMES')
-    return {'kind': 'tlv', 'frames': frames}
+    # 4. XML-ish tagged records
+    xml_re = re.compile(r"<([A-Za-z_][\w-]*)\b([^>]*)>(.*?)</\1>", re.DOTALL)
+    if all(xml_re.search(t) for t in text_samples):
+        grammars.append({"kind": "xml_tags"})
 
-def serialize(parsed):
-    out = bytearray()
-    for fr in parsed['frames']:
-        payload = bytes.fromhex(fr['payload_hex'])
-        ln = len(payload)
-        out.append(int(fr['tag']) & 0xFF)
-        out.append((ln >> 8) & 0xFF)
-        out.append(ln & 0xFF)
-        out.extend(payload)
-    return bytes(out)
-""",
-    ),
-)
+    # 5. Multi-field record pairs on each line (id:7;name:alpha;ok:true)
+    rec_votes: list[tuple[str, str]] = []
+    rec_ok = True
+    for t in text_samples:
+        lines = _active_noncomment_lines(t)
+        if len(lines) < 1:
+            rec_ok = False
+            break
+        seps: list[tuple[str, str]] = []
+        for ln in lines:
+            n, fs, ks = _count_kv_pairs(ln)
+            if n < 2:
+                seps = []
+                break
+            seps.append((fs, ks))
+        if not seps or len(set(seps)) != 1:
+            rec_ok = False
+            break
+        rec_votes.append(seps[0])
+    if rec_ok and rec_votes and len(set(rec_votes)) == 1:
+        fs, ks = rec_votes[0]
+        grammars.append({"kind": "record_pairs", "field_sep": fs, "kv_sep": ks})
+
+    # 6. Sectioned / flat key-value (INI-like or bare k = v / k: v)
+    kv_ok = True
+    kv_sep_vote: str | None = None
+    has_section = False
+    for t in text_samples:
+        lines = _active_noncomment_lines(t)
+        if not lines:
+            kv_ok = False
+            break
+        kv_count = 0
+        for ln in lines:
+            if ln.startswith("[") and ln.endswith("]") and len(ln) > 2:
+                has_section = True
+                continue
+            if "=" in ln or ":" in ln:
+                sep = "=" if ("=" in ln and (":" not in ln or ln.index("=") < ln.index(":"))) else ":"
+                k, _v = ln.split(sep, 1)
+                k = k.strip()
+                if not k or " " in k:
+                    kv_ok = False
+                    break
+                kv_count += 1
+                kv_sep_vote = sep if kv_sep_vote is None else kv_sep_vote
+            else:
+                kv_ok = False
+                break
+        if not kv_ok or kv_count == 0:
+            kv_ok = False
+            break
+    if kv_ok:
+        grammars.append({"kind": "sectioned_kv", "sep": kv_sep_vote or "=", "has_section": has_section})
+
+    # 7. Delimited tables with a header row
+    for delim in ("|", "\t", ";", ","):
+        table_ok = True
+        headers0: list[str] | None = None
+        for t in text_samples:
+            lines = _active_noncomment_lines(t)
+            if len(lines) < 2:
+                table_ok = False
+                break
+            counts = [len(ln.split(delim)) for ln in lines]
+            if counts[0] < 2 or len(set(counts)) != 1:
+                table_ok = False
+                break
+            headers = [h.strip() for h in lines[0].split(delim)]
+            if any(not h for h in headers):
+                table_ok = False
+                break
+            if headers0 is None:
+                headers0 = headers
+            elif headers != headers0:
+                # same arity is enough; headers may differ across samples of same grammar
+                pass
+        if table_ok:
+            grammars.append({"kind": "table", "delim": delim})
+            break
+
+    return grammars
+
+
+def _emit_perceptor_source(grammar: dict[str, Any]) -> str:
+    """Compile an induced grammar descriptor into a pure parse/serialize organ."""
+    kind = grammar["kind"]
+    coerce = _coerce_literal_src()
+    if kind in ("json", "jsonl"):
+        return (
+            "def parse(raw):\n"
+            "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+            "    s = text.strip()\n"
+            "    if not s:\n"
+            "        raise ValueError('EMPTY')\n"
+            "    if s[0] in '{[':\n"
+            "        obj = json.loads(s)\n"
+            "        if not isinstance(obj, (dict, list)) or len(obj) == 0:\n"
+            "            raise ValueError('TRIVIAL_JSON')\n"
+            "        return {'kind': 'json', 'data': obj}\n"
+            "    rows = []\n"
+            "    for line in s.splitlines():\n"
+            "        ln = line.strip()\n"
+            "        if not ln:\n"
+            "            continue\n"
+            "        item = json.loads(ln)\n"
+            "        if not isinstance(item, dict):\n"
+            "            raise ValueError('NOT_JSONL_DICT')\n"
+            "        rows.append(item)\n"
+            "    if len(rows) < 1:\n"
+            "        raise ValueError('NO_ROWS')\n"
+            "    return {'kind': 'jsonl', 'rows': rows}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    if parsed.get('kind') == 'json':\n"
+            "        return json.dumps(parsed['data'], sort_keys=True)\n"
+            "    return '\\n'.join(json.dumps(r, sort_keys=True) for r in parsed['rows'])\n"
+        )
+    if kind == "sectioned_kv":
+        sep = grammar.get("sep", "=")
+        return (
+            coerce
+            + "def parse(raw):\n"
+            "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+            "    lines = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith('#')]\n"
+            "    if not lines:\n"
+            "        raise ValueError('EMPTY')\n"
+            "    sections = {}\n"
+            "    cur = '_root'\n"
+            "    kv_count = 0\n"
+            f"    sep = {sep!r}\n"
+            "    for ln in lines:\n"
+            "        if ln.startswith('[') and ln.endswith(']') and len(ln) > 2:\n"
+            "            cur = ln[1:-1].strip()\n"
+            "            sections.setdefault(cur, {})\n"
+            "        elif '=' in ln or ':' in ln:\n"
+            "            use = '=' if ('=' in ln and (':' not in ln or ln.index('=') < ln.index(':'))) else ':'\n"
+            "            k, v = ln.split(use, 1)\n"
+            "            k = k.strip()\n"
+            "            v = v.strip()\n"
+            "            if not k or ' ' in k:\n"
+            "                raise ValueError('BAD_KEY')\n"
+            "            sections.setdefault(cur, {})[k] = _coerce(v)\n"
+            "            kv_count += 1\n"
+            "            sep = use\n"
+            "        else:\n"
+            "            raise ValueError('UNPARSED_LINE')\n"
+            "    if kv_count == 0:\n"
+            "        raise ValueError('NO_KV')\n"
+            "    return {'kind': 'sectioned_kv', 'sections': sections, 'sep': sep}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    sep = parsed.get('sep', '=')\n"
+            "    out = []\n"
+            "    for sec, mapping in parsed['sections'].items():\n"
+            "        if sec != '_root':\n"
+            "            out.append('[' + sec + ']')\n"
+            "        for k, v in mapping.items():\n"
+            "            out.append(k + ' ' + sep + ' ' + _emit_scalar(v))\n"
+            "    return '\\n'.join(out)\n"
+        )
+    if kind == "table":
+        delim = grammar.get("delim", ",")
+        delim_repr = "\\t" if delim == "\t" else delim
+        return (
+            coerce
+            + "def parse(raw):\n"
+            "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+            "    lines = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith('#')]\n"
+            "    if len(lines) < 2:\n"
+            "        raise ValueError('NEED_HEADER_AND_ROW')\n"
+            f"    best_delim = {delim!r}\n"
+            "    headers = [h.strip() for h in lines[0].split(best_delim)]\n"
+            "    if any(not h for h in headers):\n"
+            "        raise ValueError('EMPTY_HEADER')\n"
+            "    n_cols = len(headers)\n"
+            "    rows = []\n"
+            "    for ln in lines[1:]:\n"
+            "        cells = [c.strip() for c in ln.split(best_delim)]\n"
+            "        if len(cells) != n_cols:\n"
+            "            raise ValueError('RAGGED_ROW')\n"
+            "        rec = {}\n"
+            "        for h, c in zip(headers, cells):\n"
+            "            rec[h] = _coerce(c)\n"
+            "        rows.append(rec)\n"
+            "    return {'kind': 'table', 'delim': best_delim, 'headers': headers, 'rows': rows}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    d = parsed['delim']\n"
+            "    hdr = d.join(parsed['headers'])\n"
+            "    body = [d.join(_emit_scalar(r[h]) for h in parsed['headers']) for r in parsed['rows']]\n"
+            "    return '\\n'.join([hdr] + body)\n"
+        )
+    if kind == "sexpr":
+        return (
+            "def parse(raw):\n"
+            "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+            "    s = text.strip()\n"
+            "    if not (s.startswith('(') and s.endswith(')')):\n"
+            "        raise ValueError('NOT_SEXPR')\n"
+            "    tokens = []\n"
+            "    buf = []\n"
+            "    in_str = False\n"
+            "    for ch in s:\n"
+            "        if in_str:\n"
+            "            buf.append(ch)\n"
+            "            if ch == '\"':\n"
+            "                tokens.append(''.join(buf))\n"
+            "                buf = []\n"
+            "                in_str = False\n"
+            "            continue\n"
+            "        if ch == '\"':\n"
+            "            buf.append(ch)\n"
+            "            in_str = True\n"
+            "            continue\n"
+            "        if ch in '()':\n"
+            "            if buf:\n"
+            "                tokens.append(''.join(buf))\n"
+            "                buf = []\n"
+            "            tokens.append(ch)\n"
+            "        elif ch.isspace():\n"
+            "            if buf:\n"
+            "                tokens.append(''.join(buf))\n"
+            "                buf = []\n"
+            "        else:\n"
+            "            buf.append(ch)\n"
+            "    if buf:\n"
+            "        tokens.append(''.join(buf))\n"
+            "    pos = [0]\n"
+            "    def _atom(tok):\n"
+            "        if tok[:1] == '-' and tok[1:].isdigit():\n"
+            "            return int(tok)\n"
+            "        if tok.isdigit():\n"
+            "            return int(tok)\n"
+            "        if tok[:1] == '\"' and tok[-1:] == '\"':\n"
+            "            return tok[1:-1]\n"
+            "        return tok\n"
+            "    def _read():\n"
+            "        if pos[0] >= len(tokens):\n"
+            "            raise ValueError('UNEXPECTED_EOF')\n"
+            "        tok = tokens[pos[0]]\n"
+            "        pos[0] += 1\n"
+            "        if tok == '(':\n"
+            "            items = []\n"
+            "            while pos[0] < len(tokens) and tokens[pos[0]] != ')':\n"
+            "                items.append(_read())\n"
+            "            if pos[0] >= len(tokens):\n"
+            "                raise ValueError('UNCLOSED_PAREN')\n"
+            "            pos[0] += 1\n"
+            "            return items\n"
+            "        if tok == ')':\n"
+            "            raise ValueError('STRAY_CLOSE')\n"
+            "        return _atom(tok)\n"
+            "    tree = _read()\n"
+            "    if pos[0] != len(tokens) or not isinstance(tree, list) or not tree:\n"
+            "        raise ValueError('TRAILING_OR_EMPTY')\n"
+            "    return {'kind': 'sexpr', 'tree': tree}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    def _emit(node):\n"
+            "        if isinstance(node, list):\n"
+            "            return '(' + ' '.join(_emit(x) for x in node) + ')'\n"
+            "        if isinstance(node, str) and (' ' in node or node == ''):\n"
+            "            return '\"' + node + '\"'\n"
+            "        return str(node)\n"
+            "    return _emit(parsed['tree'])\n"
+        )
+    if kind == "tlv":
+        return (
+            "def parse(raw):\n"
+            "    data = raw if isinstance(raw, bytes) else str(raw).encode('latin1')\n"
+            "    if len(data) < 4:\n"
+            "        raise ValueError('TOO_SHORT')\n"
+            "    idx = 0\n"
+            "    frames = []\n"
+            "    while idx < len(data):\n"
+            "        if idx + 3 > len(data):\n"
+            "            raise ValueError('TRUNCATED_HEADER')\n"
+            "        tag = data[idx]\n"
+            "        ln = (data[idx + 1] << 8) | data[idx + 2]\n"
+            "        idx += 3\n"
+            "        if idx + ln > len(data):\n"
+            "            raise ValueError('TRUNCATED_PAYLOAD')\n"
+            "        payload = data[idx:idx + ln]\n"
+            "        idx += ln\n"
+            "        frames.append({'tag': int(tag), 'payload_hex': payload.hex()})\n"
+            "    if not frames:\n"
+            "        raise ValueError('NO_FRAMES')\n"
+            "    return {'kind': 'tlv', 'frames': frames}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    chunks = []\n"
+            "    for fr in parsed['frames']:\n"
+            "        payload = bytes.fromhex(fr['payload_hex'])\n"
+            "        ln = len(payload)\n"
+            "        chunks.append(bytes([int(fr['tag']) & 0xFF, (ln >> 8) & 0xFF, ln & 0xFF]) + payload)\n"
+            "    out = b''\n"
+            "    for c in chunks:\n"
+            "        out = out + c\n"
+            "    return out\n"
+        )
+    if kind == "record_pairs":
+        field_sep = grammar.get("field_sep", ";")
+        kv_sep = grammar.get("kv_sep", ":")
+        return (
+            coerce
+            + "def parse(raw):\n"
+            "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+            "    lines = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith('#')]\n"
+            "    if not lines:\n"
+            "        raise ValueError('EMPTY')\n"
+            f"    field_sep = {field_sep!r}\n"
+            f"    kv_sep = {kv_sep!r}\n"
+            "    rows = []\n"
+            "    headers = None\n"
+            "    for ln in lines:\n"
+            "        parts = [p.strip() for p in ln.split(field_sep) if p.strip()]\n"
+            "        if len(parts) < 2:\n"
+            "            raise ValueError('NOT_RECORD')\n"
+            "        rec = {}\n"
+            "        for p in parts:\n"
+            "            if kv_sep not in p:\n"
+            "                raise ValueError('MISSING_KV')\n"
+            "            k, v = p.split(kv_sep, 1)\n"
+            "            k = k.strip()\n"
+            "            if not k or ' ' in k:\n"
+            "                raise ValueError('BAD_KEY')\n"
+            "            rec[k] = _coerce(v.strip())\n"
+            "        if headers is None:\n"
+            "            headers = list(rec.keys())\n"
+            "        elif list(rec.keys()) != headers:\n"
+            "            for h in headers:\n"
+            "                rec.setdefault(h, None)\n"
+            "        rows.append(rec)\n"
+            "    return {'kind': 'records', 'field_sep': field_sep, 'kv_sep': kv_sep, 'headers': headers, 'rows': rows}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    fs = parsed['field_sep']\n"
+            "    ks = parsed['kv_sep']\n"
+            "    headers = parsed['headers']\n"
+            "    out = []\n"
+            "    for rec in parsed['rows']:\n"
+            "        out.append(fs.join(h + ks + _emit_scalar(rec[h]) for h in headers))\n"
+            "    return '\\n'.join(out)\n"
+        )
+    if kind == "xml_tags":
+        return (
+            coerce
+            + "def parse(raw):\n"
+            "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+            "    s = text.strip()\n"
+            "    if not s or '<' not in s:\n"
+            "        raise ValueError('NOT_XML')\n"
+            "    nodes = []\n"
+            "    i = 0\n"
+            "    n = len(s)\n"
+            "    while i < n:\n"
+            "        while i < n and s[i].isspace():\n"
+            "            i += 1\n"
+            "        if i >= n:\n"
+            "            break\n"
+            "        if s[i] != '<':\n"
+            "            raise ValueError('LEADING_JUNK')\n"
+            "        j = s.find('>', i)\n"
+            "        if j < 0:\n"
+            "            raise ValueError('UNCLOSED_TAG')\n"
+            "        head = s[i + 1:j].strip()\n"
+            "        if not head or head[0] == '/':\n"
+            "            raise ValueError('BAD_TAG')\n"
+            "        parts = head.split()\n"
+            "        tag = parts[0]\n"
+            "        attrs = {}\n"
+            "        for tok in parts[1:]:\n"
+            "            if '=' not in tok:\n"
+            "                raise ValueError('BAD_ATTR')\n"
+            "            ak, av = tok.split('=', 1)\n"
+            "            av = av.strip()\n"
+            "            if len(av) >= 2 and av[0] == av[-1] and av[0] in '\"\\'':\n"
+            "                av = av[1:-1]\n"
+            "            attrs[ak] = _coerce(av)\n"
+            "        close = '</' + tag + '>'\n"
+            "        k = s.find(close, j + 1)\n"
+            "        if k < 0:\n"
+            "            raise ValueError('UNCLOSED_ELEM')\n"
+            "        body = s[j + 1:k]\n"
+            "        if '<' in body:\n"
+            "            raise ValueError('NESTED_NOT_INDUCED')\n"
+            "        nodes.append({'tag': tag, 'attrs': attrs, 'text': _coerce(body.strip()) if body.strip() else ''})\n"
+            "        i = k + len(close)\n"
+            "    if not nodes:\n"
+            "        raise ValueError('NO_NODES')\n"
+            "    return {'kind': 'xml_tags', 'nodes': nodes}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    chunks = []\n"
+            "    for node in parsed['nodes']:\n"
+            "        attr = ''.join(' ' + ak + '=\"' + _emit_scalar(av) + '\"' for ak, av in node['attrs'].items())\n"
+            "        body = '' if node['text'] == '' else _emit_scalar(node['text'])\n"
+            "        chunks.append('<' + node['tag'] + attr + '>' + body + '</' + node['tag'] + '>')\n"
+            "    return '\\n'.join(chunks)\n"
+        )
+    if kind == "lenpref":
+        return (
+            "def parse(raw):\n"
+            "    data = raw if isinstance(raw, bytes) else str(raw).encode('latin1')\n"
+            "    idx = 0\n"
+            "    frames = []\n"
+            "    while idx < len(data):\n"
+            "        ln = data[idx]\n"
+            "        idx += 1\n"
+            "        if ln < 1 or idx + ln > len(data):\n"
+            "            raise ValueError('BAD_LENPREF')\n"
+            "        frames.append(data[idx:idx + ln].decode('latin1'))\n"
+            "        idx += ln\n"
+            "    if not frames:\n"
+            "        raise ValueError('NO_FRAMES')\n"
+            "    return {'kind': 'lenpref', 'width': 1, 'frames': frames}\n"
+            "\n"
+            "def serialize(parsed):\n"
+            "    chunks = []\n"
+            "    for fr in parsed['frames']:\n"
+            "        payload = fr.encode('latin1') if isinstance(fr, str) else bytes(fr)\n"
+            "        if len(payload) > 255:\n"
+            "            raise ValueError('FRAME_TOO_LONG')\n"
+            "        chunks.append(bytes([len(payload)]) + payload)\n"
+            "    out = b''\n"
+            "    for c in chunks:\n"
+            "        out = out + c\n"
+            "    return out\n"
+        )
+    raise ValueError(f"UNKNOWN_INDUCED_GRAMMAR:{kind}")
 
 
 def _corrupt_sample(sample: str | bytes) -> list[str | bytes]:
@@ -640,18 +1027,27 @@ def synthesize_perceptor_organ(
     *,
     format_tag: str = "discovered_format",
 ) -> ExecutableOrgan | None:
-    """Synthesize and round-trip-verify a new `PERCEPTOR` organ from raw samples alone."""
+    """Induce + round-trip-verify a `PERCEPTOR` organ from raw samples alone."""
     if not samples:
         return None
-    for codec_name, src in _CANDIDATE_PERCEPTOR_TEMPLATES:
-        organ = make_organ(
-            stratum=PERCEPTOR,
-            name=f"perceptor_{codec_name}_{format_tag}",
-            task_signature=f"perceptor::{format_tag}",
-            entrypoint="parse",
-            source_code=src,
-            metadata={"codec_family": codec_name},
-        )
+    induced = _induce_format_grammar(samples)
+    winners: list[ExecutableOrgan] = []
+    for grammar in induced:
+        try:
+            src = _emit_perceptor_source(grammar)
+        except Exception:
+            continue
+        try:
+            organ = make_organ(
+                stratum=PERCEPTOR,
+                name=f"perceptor_{grammar['kind']}_{format_tag}",
+                task_signature=f"perceptor::{format_tag}",
+                entrypoint="parse",
+                source_code=src,
+                metadata={"codec_family": grammar["kind"], "induced_grammar": dict(grammar)},
+            )
+        except OrganSafetyError:
+            continue
         ok_all = True
         for s in samples:
             try:
@@ -666,8 +1062,6 @@ def synthesize_perceptor_organ(
                 break
         if not ok_all:
             continue
-
-        # Falsification gate: must reject malformed/corrupted framing decoys!
         corruptions = _corrupt_sample(samples[0])
         rejected = 0
         for bad in corruptions:
@@ -678,9 +1072,29 @@ def synthesize_perceptor_organ(
         if rejected < len(corruptions):
             continue
         organ.verified_passes = len(samples)
-        return organ
-    return None
-
+        winners.append(organ)
+    if not winners:
+        return None
+    # Prefer more specific induced grammars, then Occam (smallest AST)
+    _specificity = {
+        "tlv": 60,
+        "lenpref": 55,
+        "json": 50,
+        "jsonl": 50,
+        "xml_tags": 45,
+        "sexpr": 40,
+        "record_pairs": 35,
+        "sectioned_kv": 20,
+        "table": 10,
+    }
+    winners.sort(
+        key=lambda o: (
+            -_specificity.get(str(o.metadata.get("codec_family")), 0),
+            o.code_bytes,
+            o.name,
+        )
+    )
+    return winners[0]
 
 # ---------------------------------------------------------------------------
 # Active Version-Space Disambiguation (Closes PERMANENCE_AMPLIFIES_THE_CHECK)
@@ -701,61 +1115,474 @@ def _safe_eval_candidate(organ: ExecutableOrgan, args: tuple[Any, ...]) -> tuple
         return False, None
 
 
-def _generate_candidate_expressions(
+def _pretty_number(v: float) -> str:
+    if isinstance(v, bool):
+        return repr(v)
+    if abs(v - round(v)) <= 1e-9:
+        return str(int(round(v)))
+    return repr(float(v))
+
+
+def _gaussian_solve(matrix: Sequence[Sequence[float]], rhs: Sequence[float]) -> list[float] | None:
+    n = len(rhs)
+    if n == 0 or any(len(row) != n for row in matrix):
+        return None
+    a = [list(map(float, row)) + [float(rhs[i])] for i, row in enumerate(matrix)]
+    for col in range(n):
+        pivot = max(range(col, n), key=lambda r: abs(a[r][col]))
+        if abs(a[pivot][col]) < 1e-12:
+            return None
+        a[col], a[pivot] = a[pivot], a[col]
+        div = a[col][col]
+        for j in range(col, n + 1):
+            a[col][j] /= div
+        for r in range(n):
+            if r == col:
+                continue
+            fac = a[r][col]
+            if fac == 0.0:
+                continue
+            for j in range(col, n + 1):
+                a[r][j] -= fac * a[col][j]
+    return [a[i][n] for i in range(n)]
+
+
+def _harvest_numeric_constants(examples: Sequence[tuple[tuple[Any, ...], Any]]) -> list[Any]:
+    """Constants harvested from I/O — never a frozen lattice."""
+    vals: list[Any] = []
+    seen: set[str] = set()
+
+    def _add(v: Any) -> None:
+        key = f"{type(v).__name__}:{v!r}"
+        if key in seen:
+            return
+        seen.add(key)
+        vals.append(v)
+
+    for inp, out in examples:
+        for v in (*inp, out):
+            if isinstance(v, bool) or v is None:
+                _add(v)
+            elif isinstance(v, (int, float)):
+                _add(v)
+                if abs(float(v) - round(float(v))) <= 1e-9:
+                    _add(int(round(float(v))))
+            elif isinstance(v, str) and len(v) <= 32:
+                _add(v)
+    numeric = [v for v in vals if isinstance(v, (int, float)) and not isinstance(v, bool)]
+    for a, b in zip(numeric, numeric[1:]):
+        _add(a - b)
+        _add(b - a)
+        _add(a + b)
+        if b not in (0, 0.0):
+            ratio = a / b
+            if abs(ratio) <= 1e6:
+                _add(ratio)
+                if abs(ratio - round(ratio)) <= 1e-9:
+                    _add(int(round(ratio)))
+    for seed in (0, 1, -1, 2):
+        _add(seed)
+    return vals
+
+
+def _all_numeric_io(examples: Sequence[tuple[tuple[Any, ...], Any]]) -> bool:
+    for inp, out in examples:
+        if isinstance(out, bool) or not isinstance(out, (int, float)):
+            return False
+        for v in inp:
+            if isinstance(v, bool) or not isinstance(v, (int, float)):
+                return False
+    return True
+
+
+def _solve_multilinear(examples: Sequence[tuple[tuple[Any, ...], Any]]) -> str | None:
+    """Exact y = a0*x0 + ... + an*xn + b when uniquely determined by the examples."""
+    if not _all_numeric_io(examples):
+        return None
+    arity = len(examples[0][0])
+    n_coeff = arity + 1  # affine intercept
+    if len(examples) < n_coeff:
+        return None
+    matrix: list[list[float]] = []
+    rhs: list[float] = []
+    seen_rows: set[tuple[float, ...]] = set()
+    for inp, out in examples:
+        row = [float(v) for v in inp] + [1.0]
+        key = tuple(row)
+        if key in seen_rows:
+            continue
+        seen_rows.add(key)
+        matrix.append(row)
+        rhs.append(float(out))
+        if len(matrix) == n_coeff:
+            break
+    if len(matrix) < n_coeff:
+        return None
+    solved = _gaussian_solve(matrix[:n_coeff], rhs[:n_coeff])
+    if solved is None:
+        return None
+    names = _arg_names(arity)
+    # Verify against ALL examples
+    for inp, out in examples:
+        pred = sum(solved[i] * float(inp[i]) for i in range(arity)) + solved[arity]
+        if abs(pred - float(out)) > 1e-8:
+            return None
+    parts: list[str] = []
+    for i, nm in enumerate(names):
+        a = solved[i]
+        if abs(a) <= 1e-12:
+            continue
+        parts.append(f"({_pretty_number(a)} * {nm})")
+    b = solved[arity]
+    if parts:
+        expr = " + ".join(parts)
+        if abs(b) > 1e-12:
+            expr = f"({expr} + {_pretty_number(b)})"
+        else:
+            expr = f"({expr})" if len(parts) > 1 else parts[0]
+    else:
+        expr = _pretty_number(b)
+    return expr
+
+
+def _rename_function_source(source_code: str, old_name: str, new_name: str) -> str:
+    tree = ast.parse(source_code)
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef) and node.name == old_name:
+            node.name = new_name
+    ast.fix_missing_locations(tree)
+    return ast.unparse(tree)
+
+
+def _wrap_expr_into_source(arity: int, expr_src: str, helpers: str = "") -> str:
+    params = ", ".join(_arg_names(arity))
+    helper = helpers
+    if "_prod(" in expr_src and "def _prod(" not in helper:
+        helper = (
+            "def _prod(seq):\n"
+            "    acc = 1\n"
+            "    for v in seq:\n"
+            "        acc = acc * v\n"
+            "    return acc\n\n"
+        ) + helper
+    return f"{helper}def run({params}):\n    return {expr_src}\n"
+
+
+def _eval_expr(expr_src: str, names: Sequence[str], args: tuple[Any, ...], helpers_ns: dict[str, Any] | None = None) -> tuple[bool, Any]:
+    def _prod(seq: Any) -> Any:
+        acc = 1
+        for v in seq:
+            acc = acc * v
+        return acc
+
+    ns: dict[str, Any] = {"__builtins__": dict(_SAFE_BUILTINS), "math": math, "_prod": _prod}
+    if helpers_ns:
+        ns.update(helpers_ns)
+    try:
+        code = compile(expr_src, "<cand>", "eval")
+        val = eval(code, ns, {nm: arg for nm, arg in zip(names, args)})  # noqa: S307
+        if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
+            return False, None
+        return True, val
+    except Exception:
+        return False, None
+
+
+def _observational_bottom_up(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    max_weight: int = 3,
+    max_bank: int = 96,
+) -> list[tuple[str, str]]:
+    """Bottom-up observational-equivalence enumeration over a primitive combinator basis."""
+    first_in, first_out = examples[0]
+    arity = len(first_in)
+    names = _arg_names(arity)
+    inputs = [ex[0] for ex in examples]
+    target = [ex[1] for ex in examples]
+    seen_sig: dict[tuple[Any, ...], str] = {}
+    by_weight: dict[int, list[str]] = {1: []}
+    hits: list[tuple[str, str]] = []
+
+    def _sig_of(expr: str) -> tuple[Any, ...] | None:
+        outs: list[Any] = []
+        for args in inputs:
+            ok, val = _eval_expr(expr, names, args)
+            if not ok:
+                return None
+            outs.append(val)
+        return tuple(repr(v) if isinstance(v, (list, dict, set)) else v for v in outs)
+
+    def _register(weight: int, expr: str, label: str) -> None:
+        if len(seen_sig) >= max_bank:
+            return
+        sig = _sig_of(expr)
+        if sig is None or sig in seen_sig:
+            return
+        seen_sig[sig] = expr
+        by_weight.setdefault(weight, []).append(expr)
+        if all(_outputs_match(got, exp) for got, exp in zip(sig, target)):
+            hits.append((label, expr))
+
+    # Weight-1: projections, harvested constants (includes the copy-42 Occam trap)
+    for i, nm in enumerate(names):
+        _register(1, nm, f"proj_{i}")
+    for c in _harvest_numeric_constants(examples)[:24]:
+        try:
+            _register(1, repr(c), f"const_{type(c).__name__}")
+        except Exception:
+            continue
+
+    unaries = (
+        ("neg", "-({0})"),
+        ("abs", "abs({0})"),
+        ("len", "len({0})"),
+        ("sum", "sum({0})"),
+        ("min", "min({0})"),
+        ("max", "max({0})"),
+        ("sorted", "sorted({0})"),
+        ("rev", "list(reversed({0})) if not isinstance({0}, str) else {0}[::-1]"),
+        ("strip", "{0}.strip() if isinstance({0}, str) else {0}"),
+        ("lower", "{0}.lower() if isinstance({0}, str) else {0}"),
+        ("sq", "({0} * {0})"),
+        ("prod", "_prod({0}) if isinstance({0}, (list, tuple)) else {0}"),
+    )
+    binops = ("+", "-", "*", "/", "//", "%")
+
+    for w in range(2, max_weight + 1):
+        prev = list(by_weight.get(w - 1, []))
+        for expr in prev[:32]:
+            ok0, sample0 = _eval_expr(expr, names, inputs[0])
+            for uname, tmpl in unaries:
+                if uname in ("strip", "lower") and not isinstance(sample0, str):
+                    continue
+                if uname in ("len", "sum", "min", "max", "sorted", "rev", "prod") and not isinstance(sample0, (str, list, tuple, set, dict)):
+                    continue
+                if uname in ("neg", "abs", "sq") and (isinstance(sample0, bool) or not isinstance(sample0, (int, float))):
+                    continue
+                if not ok0:
+                    continue
+                _register(w, tmpl.format(expr), f"u_{uname}_w{w}")
+                if len(seen_sig) >= max_bank:
+                    return hits
+        # Binary combinations of cheaper terms
+        cheap = list(by_weight.get(1, [])) + list(by_weight.get(max(1, w - 2), []))
+        lefts = prev[:12]
+        rights = cheap[:12]
+        for e1 in lefts:
+            for e2 in rights:
+                if e1 == e2:
+                    continue
+                for op in binops:
+                    _register(w, f"({e1} {op} {e2})", f"bin_{op}_w{w}")
+                    if len(seen_sig) >= max_bank:
+                        return hits
+                _register(w, f"max({e1}, {e2})", f"max_w{w}")
+                _register(w, f"min({e1}, {e2})", f"min_w{w}")
+        # Percent combinators parameterized by harvested scale constants (not a frozen 100)
+        scales = [c for c in _harvest_numeric_constants(examples)[:24] if isinstance(c, (int, float)) and not isinstance(c, bool) and abs(float(c)) >= 2]
+        if 100 not in scales and 100.0 not in scales:
+            scales.append(100.0)
+        if arity >= 2:
+            a, b = names[0], names[1]
+            for sc in scales[:4]:
+                scs = _pretty_number(float(sc))
+                _register(w, f"({a} * ({scs} - {b}) / {scs})", f"discount_{scs}")
+                _register(w, f"({a} * ({scs} + {b}) / {scs})", f"markup_{scs}")
+            if isinstance(first_in[0], (list, tuple)):
+                _register(w, f"(sum({a}) * {b})", "sum_scale")
+                _register(w, f"(sum({a}) + {b})", "sum_plus")
+                _register(w, f"sum(z for z in {a} if z > {b})", "filter_gt_sum")
+                for sc in scales[:2]:
+                    scs = _pretty_number(float(sc))
+                    _register(w, f"(sum({a}) * ({scs} - {b}) / {scs})", f"sum_discount_{scs}")
+    return hits
+
+
+def _stun_piecewise(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
 ) -> list[tuple[str, str]]:
-    """Generate MDL-ordered candidate `(rule_name, expr_src)` hypotheses for version-space search."""
+    """STUN: unify two partial branch terms under a synthesized atomic predicate."""
+    if len(examples) < 2:
+        return []
+    names = _arg_names(len(examples[0][0]))
+    first_in = examples[0][0]
+    predicates: list[tuple[str, str]] = []
+    if all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in first_in):
+        for i, nm in enumerate(names):
+            predicates.append((f"{nm} > 0", f"pred_gt0_{i}"))
+            predicates.append((f"{nm} < 0", f"pred_lt0_{i}"))
+            predicates.append((f"{nm} == 0", f"pred_eq0_{i}"))
+        if len(names) >= 2:
+            predicates.append((f"{names[0]} > {names[1]}", "pred_gt"))
+            predicates.append((f"{names[0]} >= {names[1]}", "pred_ge"))
+            predicates.append((f"{names[0]} == {names[1]}", "pred_eq"))
+    out: list[tuple[str, str]] = []
+    for pred, pname in predicates:
+        left_ex = []
+        right_ex = []
+        ok_split = True
+        for inp, y in examples:
+            ok, flag = _eval_expr(pred, names, inp)
+            if not ok:
+                ok_split = False
+                break
+            (left_ex if flag else right_ex).append((inp, y))
+        if not ok_split or not left_ex or not right_ex:
+            continue
+        def _fit_branch(sub_ex: Sequence[tuple[tuple[Any, ...], Any]]) -> str | None:
+            aff = _solve_multilinear(sub_ex)
+            if aff is not None:
+                return aff
+            sub_names = _arg_names(len(sub_ex[0][0]))
+            primitives = list(sub_names)
+            if len(sub_names) >= 2:
+                a, b = sub_names[0], sub_names[1]
+                primitives.extend(
+                    [
+                        f"({a} * {b})",
+                        f"({a} + {b})",
+                        f"({a} - {b})",
+                        f"({b} - {a})",
+                        f"max({a}, {b})",
+                        f"min({a}, {b})",
+                    ]
+                )
+            for expr in primitives:
+                good = True
+                for inp, y in sub_ex:
+                    ok, got = _eval_expr(expr, sub_names, inp)
+                    if not ok or not _outputs_match(got, y):
+                        good = False
+                        break
+                if good:
+                    return expr
+            hits = _observational_bottom_up(sub_ex, max_weight=3, max_bank=96)
+            return hits[0][1] if hits else None
+
+        left_expr = _fit_branch(left_ex)
+        right_expr = _fit_branch(right_ex)
+        if left_expr is None or right_expr is None:
+            continue
+        expr = f"({left_expr} if {pred} else {right_expr})"
+        # verify
+        good = True
+        for inp, y in examples:
+            ok, got = _eval_expr(expr, names, inp)
+            if not ok or not _outputs_match(got, y):
+                good = False
+                break
+        if good:
+            out.append((f"stun_{pname}", expr))
+    return out
+
+
+def _inline_operator_organs(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    operator_organs: Sequence["ExecutableOrgan"],
+) -> list[tuple[str, str, str]]:
+    """Compose previously admitted SKILL organs as live operators (organ_B(organ_A(x)))."""
+    if not operator_organs:
+        return []
+    arity = len(examples[0][0])
+    names = _arg_names(arity)
+    results: list[tuple[str, str, str]] = []
+    helpers_acc: list[tuple[str, str, int]] = []  # (helper_name, source, arity)
+    for idx, org in enumerate(operator_organs[:8]):
+        try:
+            tree = ast.parse(org.source_code)
+        except SyntaxError:
+            continue
+        fn = next((n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == org.entrypoint), None)
+        if fn is None:
+            continue
+        hname = f"_org_{idx}"
+        try:
+            src = _rename_function_source(org.source_code, org.entrypoint, hname)
+        except Exception:
+            continue
+        helpers_acc.append((hname, src, len(fn.args.args)))
+
+    helper_block = "\n\n".join(src for _n, src, _a in helpers_acc) + ("\n" if helpers_acc else "")
+    helper_ns: dict[str, Any] = {}
+    if helper_block.strip():
+        try:
+            _, ns = compile_organ_namespace(helper_block + "def run(x0):\n    return x0\n")
+            helper_ns = {n: ns[n] for n, _s, _a in helpers_acc if n in ns}
+        except Exception:
+            helper_ns = {}
+
+    def _ok_expr(expr: str) -> bool:
+        for inp, y in examples:
+            ok, got = _eval_expr(expr, names, inp, helpers_ns=helper_ns)
+            if not ok or not _outputs_match(got, y):
+                return False
+        return True
+
+    for hname, _src, harity in helpers_acc:
+        if harity == arity:
+            expr = f"{hname}({', '.join(names)})"
+            if _ok_expr(expr):
+                results.append((f"call_{hname}", expr, helper_block))
+        elif harity == 1 and arity >= 1:
+            expr = f"{hname}({names[0]})"
+            if _ok_expr(expr):
+                results.append((f"call1_{hname}", expr, helper_block))
+    # Depth-2 composition
+    for i, (h1, _s1, a1) in enumerate(helpers_acc):
+        for j, (h2, _s2, a2) in enumerate(helpers_acc):
+            if a1 == 1 and a2 == arity:
+                expr = f"{h1}({h2}({', '.join(names)}))"
+                if _ok_expr(expr):
+                    results.append((f"comp_{h1}_{h2}", expr, helper_block))
+            elif a1 == 1 and a2 == 1 and arity >= 1:
+                expr = f"{h1}({h2}({names[0]}))"
+                if _ok_expr(expr):
+                    results.append((f"comp1_{h1}_{h2}", expr, helper_block))
+            elif a1 == arity and a2 == 1 and arity >= 1:
+                expr = f"{h1}({h2}({names[0]}), {', '.join(names[1:])})" if arity > 1 else f"{h1}({h2}({names[0]}))"
+                if _ok_expr(expr):
+                    results.append((f"comp_mix_{h1}_{h2}", expr, helper_block))
+    return results
+
+
+def _generate_candidate_expressions(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    operator_organs: Sequence["ExecutableOrgan"] = (),
+) -> list[tuple[str, str, str]]:
+    """MDL-ordered (name, expr, helpers) hypotheses — no frozen expression menu."""
     if not examples:
         return []
     first_in, first_out = examples[0]
     arity = len(first_in)
     names = _arg_names(arity)
-    cands: list[tuple[str, str]] = []
+    cands: list[tuple[str, str, str]] = []
 
-    # 1. Constant rule (simplest Occam trap — e.g. `copy 42` in permanence_amplifies_check_v1!)
+    # 1. Constant Occam trap (copy-42) — required for version-space underdetermination
     if isinstance(first_out, (int, float, str, bool)) or (
         isinstance(first_out, (list, tuple)) and len(first_out) <= 8
     ):
-        cands.append(("constant_output", repr(first_out)))
+        cands.append(("constant_output", repr(first_out), ""))
 
-    # 2. Projections & unary transforms
+    # Primitive algebra over parameters (language basis, not a frozen complete-program menu)
+    binops = ("+", "-", "*", "/", "//", "%")
     for i, nm in enumerate(names):
-        cands.append((f"proj_{i}", nm))
+        cands.append((f"proj_{i}", nm, ""))
         v = first_in[i]
         if isinstance(v, (int, float)) and not isinstance(v, bool):
-            for k in (1, 2, 3, -1, 5, 10):
-                cands.append((f"add_{i}_{k}", f"({nm} + {k})"))
-                cands.append((f"sub_{i}_{k}", f"({nm} - {k})"))
-            for k in (2, 3, 4, -1, 10):
-                cands.append((f"mul_{i}_{k}", f"({nm} * {k})"))
-            cands.append((f"sq_{i}", f"({nm} * {nm})"))
-            cands.append((f"abs_{i}", f"abs({nm})"))
-            # Solve exact affine y = a*x + b from first two distinct points if available
-            if len(examples) >= 2 and isinstance(first_out, (int, float)):
-                x2, y2 = examples[1][0][i], examples[1][1]
-                if isinstance(x2, (int, float)) and isinstance(y2, (int, float)) and x2 != v:
-                    slope = (y2 - first_out) / (x2 - v)
-                    intercept = first_out - slope * v
-                    if abs(slope - round(slope)) < 1e-9 and abs(intercept - round(intercept)) < 1e-9:
-                        si, bi = int(round(slope)), int(round(intercept))
-                        cands.append((f"affine_{i}_{si}_{bi}", f"({si} * {nm} + {bi})"))
+            cands.append((f"neg_{i}", f"-({nm})", ""))
+            cands.append((f"abs_{i}", f"abs({nm})", ""))
+            cands.append((f"sq_{i}", f"({nm} * {nm})", ""))
         elif isinstance(v, (list, tuple)):
-            cands.append((f"sum_{i}", f"sum({nm})"))
-            cands.append((f"len_{i}", f"len({nm})"))
-            cands.append((f"max_{i}", f"max({nm}) if {nm} else 0"))
-            cands.append((f"min_{i}", f"min({nm}) if {nm} else 0"))
-            cands.append((f"sorted_{i}", f"sorted({nm})"))
-            cands.append((f"rev_{i}", f"list(reversed({nm}))"))
-            cands.append((f"uniq_sorted_{i}", f"sorted(set({nm}))"))
-            cands.append((f"prod_{i}", f"(1 if not {nm} else __prod({nm}))"))
+            cands.append((f"sum_{i}", f"sum({nm})", ""))
+            cands.append((f"len_{i}", f"len({nm})", ""))
+            cands.append((f"prod_{i}", f"_prod({nm})", ""))
+            cands.append((f"sorted_{i}", f"sorted({nm})", ""))
         elif isinstance(v, str):
-            cands.append((f"strip_{i}", f"{nm}.strip()"))
-            cands.append((f"lower_{i}", f"{nm}.lower()"))
-            cands.append((f"upper_{i}", f"{nm}.upper()"))
-            cands.append((f"len_str_{i}", f"len({nm})"))
-            cands.append((f"rev_str_{i}", f"{nm}[::-1]"))
-
-    # 3. Pairwise & multi-argument algebraic / billing / relational rules
+            cands.append((f"strip_{i}", f"{nm}.strip()", ""))
+            cands.append((f"lower_{i}", f"{nm}.lower()", ""))
+            cands.append((f"len_str_{i}", f"len({nm})", ""))
+            cands.append((f"rev_str_{i}", f"{nm}[::-1]", ""))
     if arity >= 2:
         for i in range(arity):
             for j in range(arity):
@@ -763,51 +1590,41 @@ def _generate_candidate_expressions(
                     continue
                 a, b = names[i], names[j]
                 va, vb = first_in[i], first_in[j]
-                if isinstance(va, (int, float)) and isinstance(vb, (int, float)):
-                    if i < j:
-                        cands.append((f"add_{i}_{j}", f"({a} + {b})"))
-                        cands.append((f"mul_{i}_{j}", f"({a} * {b})"))
-                        cands.append((f"max_{i}_{j}", f"max({a}, {b})"))
-                        cands.append((f"min_{i}_{j}", f"min({a}, {b})"))
-                    cands.append((f"sub_{i}_{j}", f"({a} - {b})"))
-                    cands.append((f"floordiv_{i}_{j}", f"({a} // {b})"))
-                    cands.append((f"mod_{i}_{j}", f"({a} % {b})"))
-                    cands.append((f"discount_pct_{i}_{j}", f"({a} * (100.0 - {b}) / 100.0)"))
-                    cands.append((f"markup_pct_{i}_{j}", f"({a} * (100.0 + {b}) / 100.0)"))
-                    cands.append((f"linear_2_{i}_{j}", f"(2 * {a} + {b})"))
-                    cands.append((f"diff_sq_{i}_{j}", f"(({a} - {b}) * ({a} - {b}))"))
-                if isinstance(va, (list, tuple)) and isinstance(vb, (int, float)):
-                    cands.append((f"sum_discount_{i}_{j}", f"(sum({a}) * (100.0 - {b}) / 100.0)"))
-                    cands.append((f"sum_tax_{i}_{j}", f"(sum({a}) * (1.0 - {b}))"))
-                    cands.append((f"sum_plus_{i}_{j}", f"(sum({a}) + {b})"))
-                    cands.append((f"sum_scale_{i}_{j}", f"(sum({a}) * {b})"))
-                    cands.append((f"filter_gt_sum_{i}_{j}", f"sum(z for z in {a} if z > {b})"))
+                if isinstance(va, (int, float)) and isinstance(vb, (int, float)) and not isinstance(va, bool) and not isinstance(vb, bool):
+                    for op in binops:
+                        cands.append((f"bin_{op}_{i}_{j}", f"({a} {op} {b})", ""))
+                    cands.append((f"max_{i}_{j}", f"max({a}, {b})", ""))
+                    cands.append((f"min_{i}_{j}", f"min({a}, {b})", ""))
+                if isinstance(va, (list, tuple)) and isinstance(vb, (int, float)) and not isinstance(vb, bool):
+                    cands.append((f"sum_scale_{i}_{j}", f"(sum({a}) * {b})", ""))
+                    cands.append((f"sum_plus_{i}_{j}", f"(sum({a}) + {b})", ""))
 
-    if arity == 3 and all(isinstance(x, (int, float)) for x in first_in):
-        a, b, c = names[0], names[1], names[2]
-        cands.extend([
-            ("sum3", f"({a} + {b} + {c})"),
-            ("prod3", f"({a} * {b} * {c})"),
-            ("fma_012", f"({a} * {b} + {c})"),
-            ("fms_012", f"({a} * {b} - {c})"),
-            ("clamp_012", f"max({b}, min({c}, {a}))"),
-        ])
+    # 2. Exact uniquely-determined multilinear / affine closed form
+    affine = _solve_multilinear(examples)
+    if affine is not None:
+        cands.append(("exact_affine", affine, ""))
 
-    return cands
+    # 3. Bottom-up observational-equivalence bank
+    for label, expr in _observational_bottom_up(examples):
+        cands.append((label, expr, ""))
 
+    # 4. STUN piecewise unification when a single term is insufficient later
+    for label, expr in _stun_piecewise(examples):
+        cands.append((label, expr, ""))
 
-def _wrap_expr_into_source(arity: int, expr_src: str) -> str:
-    params = ", ".join(_arg_names(arity))
-    helper = ""
-    if "__prod(" in expr_src:
-        helper = (
-            "def __prod(seq):\n"
-            "    acc = 1\n"
-            "    for v in seq:\n"
-            "        acc = acc * v\n"
-            "    return acc\n\n"
-        )
-    return f"{helper}def run({params}):\n    return {expr_src}\n"
+    # 5. Live compositional closure over admitted organs
+    for label, expr, helpers in _inline_operator_organs(examples, operator_organs):
+        cands.append((label, expr, helpers))
+
+    # Dedup by expr
+    seen: set[str] = set()
+    uniq: list[tuple[str, str, str]] = []
+    for item in cands:
+        if item[1] in seen:
+            continue
+        seen.add(item[1])
+        uniq.append(item)
+    return uniq
 
 
 def _outputs_match(got: Any, expected: Any) -> bool:
@@ -996,39 +1813,48 @@ def derive_semantic_inspector_organ(
     if all([_line_skeleton(ln) for ln in lines] == skel0 for lines in active_per_art[1:]):
         common_skeleton_seq = skel0
 
-    # Check if the final number is an exact arithmetic function (sum or product) of earlier numbers!
+    # Synthesize a numeric invariant over extracted fields (not a 3-law checklist).
     arithmetic_law: str | None = None
-    for candidate_law in ("sum", "prod", "exact_constants"):
-        law_holds = True
-        for art in valid_artifacts:
-            act_txt = "\n".join(_active_lines(art))
-            nums = [
-                float(x) if "." in x else int(x)
-                for x in re.findall(r"-?\d+(?:\.\d+)?", act_txt)
-            ]
-            if candidate_law in ("sum", "prod"):
-                if len(nums) < 2:
-                    law_holds = False
-                    break
-                body_nums, target_num = nums[:-1], nums[-1]
-                if candidate_law == "sum":
-                    calc = sum(body_nums)
-                else:
-                    calc = 1
-                    for v in body_nums:
-                        calc = calc * v
-                if abs(float(calc) - float(target_num)) > 1e-9:
-                    law_holds = False
-                    break
-            elif candidate_law == "exact_constants":
-                if len(valid_artifacts) > 1:
-                    nums0 = re.findall(r"-?\d+(?:\.\d+)?", "\n".join(active_per_art[0]))
-                    if re.findall(r"-?\d+(?:\.\d+)?", act_txt) != nums0:
-                        law_holds = False
-                        break
-        if law_holds and ("numeric_value_perturbed_decoy" in rejected_classes):
-            arithmetic_law = candidate_law
-            break
+    arithmetic_predicate: str | None = None
+    num_rows: list[list[int | float]] = []
+    for art in valid_artifacts:
+        act_txt = "\n".join(_active_lines(art))
+        nums = [
+            float(x) if "." in x else int(x)
+            for x in re.findall(r"-?\d+(?:\.\d+)?", act_txt)
+        ]
+        num_rows.append(nums)
+    if (
+        "numeric_value_perturbed_decoy" in rejected_classes
+        and num_rows
+        and all(len(r) >= 2 for r in num_rows)
+        and len({len(r) for r in num_rows}) == 1
+    ):
+        io_examples = [(tuple(r[:-1]), r[-1]) for r in num_rows]
+        # Reuse the same observational synthesizer: body fields -> last field
+        synthesized_expr: str | None = None
+        affine = _solve_multilinear(io_examples)
+        if affine is not None:
+            # affine is in terms of x0, x1, ... mapping onto vals[:-1]
+            synthesized_expr = affine
+            for i, _ in enumerate(num_rows[0][:-1]):
+                synthesized_expr = synthesized_expr.replace(f"x{i}", f"vals[{i}]")
+        if synthesized_expr is None:
+            hits = _observational_bottom_up(io_examples, max_weight=3, max_bank=64)
+            if hits:
+                synthesized_expr = hits[0][1]
+                for i, _ in enumerate(num_rows[0][:-1]):
+                    synthesized_expr = synthesized_expr.replace(f"x{i}", f"vals[{i}]")
+        if synthesized_expr is not None:
+            arithmetic_predicate = (
+                f"abs(float({synthesized_expr}) - float(vals[-1])) <= 1e-9"
+            )
+            arithmetic_law = synthesized_expr
+        else:
+            # Fall back: constants identical across artifacts
+            if len({tuple(r) for r in num_rows}) == 1:
+                arithmetic_predicate = f"vals == {num_rows[0]!r}"
+                arithmetic_law = "exact_constants"
 
     exact_nums0 = re.findall(r"-?\d+(?:\.\d+)?", "\n".join(active_per_art[0]))
     enforce_order = "reversed_order_decoy" in rejected_classes
@@ -1073,22 +1899,10 @@ def inspect_artifact(text):
         else:
             if not set(skel_expected).issubset(set(got_skel)):
                 return (False, 'REQUIRED_ACTIVE_LINES_MISSING')
-    law = {arithmetic_law!r}
     nums_raw = re.findall(r'-?\\d+(?:\\.\\d+)?', '\\n'.join(active))
-    if law == 'sum':
-        vals = [float(x) if '.' in x else int(x) for x in nums_raw]
-        if len(vals) < 2 or abs(float(sum(vals[:-1])) - float(vals[-1])) > 1e-9:
-            return (False, 'ARITHMETIC_SUM_INVARIANT_FAILED')
-    elif law == 'prod':
-        vals = [float(x) if '.' in x else int(x) for x in nums_raw]
-        acc = 1
-        for v in vals[:-1]:
-            acc = acc * v
-        if len(vals) < 2 or abs(float(acc) - float(vals[-1])) > 1e-9:
-            return (False, 'ARITHMETIC_PRODUCT_INVARIANT_FAILED')
-    elif law == 'exact_constants':
-        if nums_raw != {exact_nums0!r}:
-            return (False, 'NUMERIC_CONSTANT_MISMATCH')
+    vals = [float(x) if '.' in x else int(x) for x in nums_raw]
+    if {('len(vals) < 2 or not (' + arithmetic_predicate + ')') if arithmetic_predicate else 'False'}:
+        return (False, 'ARITHMETIC_INVARIANT_FAILED')
     return (True, '')
 """
     organ = make_organ(
@@ -1259,43 +2073,141 @@ def compile_meta_synthesizer_organ(
     num_holes = len(holes)
     param_sig = ", ".join(canon_names)
 
-    # Emit a pure Python META_SYNTHESIZER organ that searches parameter lattice & emits exact code!
-    domain = "(-5, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16, 20, 50, 100)"
-    loops = "\n".join(
-        "    " * (idx + 1) + f"for c{idx} in {domain}:"
-        for idx in range(num_holes)
-    )
-    tuple_vars = ", ".join(f"c{idx}" for idx in range(num_holes))
-    if num_holes == 1:
-        tuple_vars += ","
-    inner_indent = "    " * (num_holes + 1)
-
     eval_fn_expr = skel_template_str
     emit_expr = skel_template_str
     for idx in range(num_holes):
         emit_expr = emit_expr.replace(f"_C[{idx}]", f"{{c{idx}}}")
 
+    # Exact coefficient solving + harvested-constant search (no frozen 19-int lattice).
     meta_src = f"""
 def _eval_skeleton({param_sig}, _C):
     return {eval_fn_expr}
 
+def _pretty(v):
+    if abs(v - round(v)) <= 1e-9:
+        return str(int(round(v)))
+    return repr(float(v))
+
+def _gaussian(matrix, rhs):
+    n = len(rhs)
+    a = [list(map(float, row)) + [float(rhs[i])] for i, row in enumerate(matrix)]
+    for col in range(n):
+        pivot = max(range(col, n), key=lambda r, c=col: abs(a[r][c]))
+        if abs(a[pivot][col]) < 1e-12:
+            return None
+        a[col], a[pivot] = a[pivot], a[col]
+        div = a[col][col]
+        for j in range(col, n + 1):
+            a[col][j] /= div
+        for r in range(n):
+            if r == col:
+                continue
+            fac = a[r][col]
+            if fac == 0.0:
+                continue
+            for j in range(col, n + 1):
+                a[r][j] -= fac * a[col][j]
+    return [a[i][n] for i in range(n)]
+
+def _harvest(examples):
+    vals = []
+    seen = set()
+    def add(v):
+        k = repr(v)
+        if k not in seen:
+            seen.add(k)
+            vals.append(v)
+    for inp, out in examples:
+        for v in list(inp) + [out]:
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                add(v)
+                if abs(float(v) - round(float(v))) <= 1e-9:
+                    add(int(round(float(v))))
+    numeric = [v for v in vals if isinstance(v, (int, float)) and not isinstance(v, bool)]
+    for a, b in zip(numeric, numeric[1:]):
+        add(a - b)
+        add(b - a)
+        if b not in (0, 0.0):
+            ratio = a / b
+            add(ratio)
+            if abs(ratio - round(ratio)) <= 1e-9:
+                add(int(round(ratio)))
+    for seed in (0, 1, -1, 2):
+        add(seed)
+    return vals
+
+def _fits(examples, _C):
+    for inp, expected in examples:
+        try:
+            got = _eval_skeleton(*inp, _C)
+        except Exception:
+            return False
+        if got != expected:
+            if not (isinstance(got, (int, float)) and isinstance(expected, (int, float)) and abs(float(got) - float(expected)) <= 1e-8):
+                return False
+    return True
+
+def _emit(_C):
+    c_map = {{ {", ".join(f"'c{i}': _pretty(_C[{i}])" for i in range(num_holes))} }}
+    body = {skel_template_str!r}
+    for i in range({num_holes}):
+        body = body.replace('_C[' + str(i) + ']', c_map['c' + str(i)])
+    return 'def run({param_sig}):\\n    return ' + body + '\\n'
+
 def synthesize_from_examples(examples):
     if not examples or len(examples[0][0]) != {arity}:
         return None
-{loops}
-{inner_indent}_C = ({tuple_vars})
-{inner_indent}ok = True
-{inner_indent}for inp, expected in examples:
-{inner_indent}    try:
-{inner_indent}        got = _eval_skeleton(*inp, _C)
-{inner_indent}    except Exception:
-{inner_indent}        ok = False
-{inner_indent}        break
-{inner_indent}    if got != expected:
-{inner_indent}        ok = False
-{inner_indent}        break
-{inner_indent}if ok:
-{inner_indent}    return f"def run({param_sig}):\\n    return {emit_expr}\\n"
+    n_h = {num_holes}
+    # 1. Exact linear solve when the skeleton is affine in the holes.
+    if all(isinstance(ex[1], (int, float)) and not isinstance(ex[1], bool) for ex in examples):
+        matrix = []
+        rhs = []
+        seen = set()
+        for inp, expected in examples:
+            try:
+                b = _eval_skeleton(*inp, tuple([0] * n_h))
+            except Exception:
+                b = None
+            row = []
+            linear = b is not None
+            for i in range(n_h):
+                e = [0] * n_h
+                e[i] = 1
+                try:
+                    fi = _eval_skeleton(*inp, tuple(e))
+                except Exception:
+                    linear = False
+                    break
+                row.append(float(fi) - float(b))
+            if not linear:
+                matrix = []
+                break
+            key = tuple(row)
+            if key in seen:
+                continue
+            seen.add(key)
+            matrix.append(row)
+            rhs.append(float(expected) - float(b))
+            if len(matrix) >= n_h:
+                break
+        if len(matrix) == n_h:
+            solved = _gaussian(matrix, rhs)
+            if solved is not None:
+                _C = tuple(solved)
+                if _fits(examples, _C):
+                    return _emit(_C)
+    # 2. Search the harvested constant set from the examples themselves.
+    domain = _harvest(examples)
+    combos = [()]
+    for _ in range(n_h):
+        combos = [prev + (item,) for prev in combos for item in domain]
+        if len(combos) > 4096:
+            combos = combos[:4096]
+            break
+    for combo in combos:
+        _C = tuple(combo)
+        if _fits(examples, _C):
+            return _emit(_C)
     return None
 """
     return make_organ(
@@ -1310,12 +2222,190 @@ def synthesize_from_examples(examples):
 
 
 # ---------------------------------------------------------------------------
-# Unified 5-Stratum Meta-Circular Organ Graph (`P_t`)
+# Instrumental POLICY / WORLD_MODEL strata (0-immediate-reward unlocking)
+# ---------------------------------------------------------------------------
+
+
+def rank_instrumental_actions(
+    actions: Sequence[Mapping[str, Any]],
+    *,
+    remaining_budget: float,
+    p_burn_by_id: Mapping[str, float] | None = None,
+    gamma: float = 0.92,
+    horizon: int = 3,
+) -> list[dict[str, Any]]:
+    """Multi-step instrumental Q: 0-reward prerequisites inherit unlocking value.
+
+    Each action is a mapping with:
+      id, value (immediate external reward), cost,
+      optional unlocks: sequence of action ids enabled after success,
+      optional requires: sequence of action ids that must already be done.
+    """
+    by_id: dict[str, dict[str, Any]] = {}
+    for raw in actions:
+        aid = str(raw.get("id") or "")
+        if not aid:
+            continue
+        by_id[aid] = {
+            "id": aid,
+            "value": float(raw.get("value") or 0.0),
+            "cost": max(1e-9, float(raw.get("cost") or 1.0)),
+            "unlocks": tuple(str(x) for x in (raw.get("unlocks") or ())),
+            "requires": tuple(str(x) for x in (raw.get("requires") or ())),
+        }
+    burns = {k: float(v) for k, v in (p_burn_by_id or {}).items()}
+
+    def _q(aid: str, done: frozenset[str], budget: float, depth: int) -> float:
+        if depth <= 0 or budget <= 1e-12:
+            return 0.0
+        node = by_id[aid]
+        if any(r not in done for r in node["requires"]):
+            return -1e9
+        if node["cost"] > budget + 1e-12:
+            return -1e9
+        p_burn = max(0.0, min(1.0, burns.get(aid, 0.0)))
+        immediate = node["value"] * (1.0 - 0.85 * p_burn)
+        leftover = budget - node["cost"]
+        nxt = done | {aid}
+        future = 0.0
+        unlocked = [u for u in node["unlocks"] if u in by_id and u not in nxt]
+        candidates = unlocked or [k for k in by_id if k not in nxt]
+        if candidates and leftover > 0:
+            future = max(_q(u, nxt, leftover, depth - 1) for u in candidates)
+        return immediate - node["cost"] * 0.05 + gamma * future
+
+    ranked: list[dict[str, Any]] = []
+    for aid, node in by_id.items():
+        qv = _q(aid, frozenset(), float(remaining_budget), max(1, int(horizon)))
+        ranked.append({**node, "q": round(qv, 6)})
+    ranked.sort(key=lambda r: (-r["q"], r["cost"], r["id"]))
+    return ranked
+
+
+def compile_policy_organ(
+    *,
+    name: str = "instrumental_policy",
+    gamma: float = 0.92,
+    horizon: int = 3,
+) -> ExecutableOrgan:
+    """Freeze the current instrumental scoring law as an evolvable POLICY organ."""
+    src = f"""
+def score_actions(actions, remaining_budget, p_burn_by_id=None):
+    by_id = {{}}
+    for raw in actions:
+        aid = str(raw.get('id') or '')
+        if not aid:
+            continue
+        by_id[aid] = {{
+            'id': aid,
+            'value': float(raw.get('value') or 0.0),
+            'cost': max(1e-9, float(raw.get('cost') or 1.0)),
+            'unlocks': tuple(str(x) for x in (raw.get('unlocks') or ())),
+            'requires': tuple(str(x) for x in (raw.get('requires') or ())),
+        }}
+    burns = dict(p_burn_by_id or {{}})
+    gamma = {float(gamma)!r}
+    horizon = {int(horizon)!r}
+
+    def _q(aid, done, budget, depth):
+        if depth <= 0 or budget <= 1e-12:
+            return 0.0
+        node = by_id[aid]
+        for r in node['requires']:
+            if r not in done:
+                return -1e9
+        if node['cost'] > budget + 1e-12:
+            return -1e9
+        p_burn = burns.get(aid, 0.0)
+        immediate = node['value'] * (1.0 - 0.85 * p_burn)
+        leftover = budget - node['cost']
+        nxt = set(done)
+        nxt.add(aid)
+        future = 0.0
+        unlocked = [u for u in node['unlocks'] if u in by_id and u not in nxt]
+        candidates = unlocked or [k for k in by_id if k not in nxt]
+        if candidates and leftover > 0:
+            future = max(_q(u, nxt, leftover, depth - 1) for u in candidates)
+        return immediate - node['cost'] * 0.05 + gamma * future
+
+    ranked = []
+    for aid, node in by_id.items():
+        qv = _q(aid, set(), float(remaining_budget), horizon)
+        row = dict(node)
+        row['q'] = qv
+        ranked.append(row)
+    ranked.sort(key=lambda r: (-r['q'], r['cost'], r['id']))
+    return ranked
+"""
+    return make_organ(
+        stratum=POLICY,
+        name=name,
+        task_signature="policy::instrumental_q",
+        entrypoint="score_actions",
+        source_code=src,
+        metadata={"gamma": gamma, "horizon": horizon},
+    )
+
+
+def synthesize_world_model_organ(
+    transitions: Sequence[Mapping[str, Any]],
+    *,
+    name: str = "world_model",
+) -> ExecutableOrgan | None:
+    """Induce a WORLD_MODEL organ: action -> (mean_delta, mean_cost, fail_rate)."""
+    if not transitions:
+        return None
+    stats: dict[str, dict[str, Any]] = {}
+    for tr in transitions:
+        aid = str(tr.get("action") or tr.get("action_id") or "")
+        if not aid:
+            continue
+        row = stats.setdefault(aid, {"n": 0, "cost": 0.0, "fail": 0, "delta": {}})
+        row["n"] += 1
+        row["cost"] += float(tr.get("cost") or 0.0)
+        if tr.get("failed"):
+            row["fail"] += 1
+        delta = tr.get("delta") or {}
+        if isinstance(delta, Mapping):
+            for k, v in delta.items():
+                if isinstance(v, (int, float)) and not isinstance(v, bool):
+                    row["delta"][str(k)] = row["delta"].get(str(k), 0.0) + float(v)
+    compact: dict[str, Any] = {}
+    for aid, row in stats.items():
+        n = max(1, int(row["n"]))
+        compact[aid] = {
+            "mean_cost": row["cost"] / n,
+            "fail_rate": row["fail"] / n,
+            "mean_delta": {k: v / n for k, v in row["delta"].items()},
+            "n": n,
+        }
+    src = f"""
+def predict(action_id):
+    table = {compact!r}
+    row = table.get(str(action_id))
+    if row is None:
+        return {{'known': False, 'mean_cost': None, 'fail_rate': None, 'mean_delta': {{}}}}
+    out = dict(row)
+    out['known'] = True
+    return out
+"""
+    return make_organ(
+        stratum=WORLD_MODEL,
+        name=name,
+        task_signature="world_model::action_delta",
+        entrypoint="predict",
+        source_code=src,
+        metadata={"n_actions": len(compact)},
+    )
+
+
+# ---------------------------------------------------------------------------
+# Unified 7-Stratum Meta-Circular Organ Graph (`P_t`)
 # ---------------------------------------------------------------------------
 
 
 class MetaCircularOrganGraph:
-    """Content-addressed, self-growing 5-stratum program graph `P_t`."""
+    """Content-addressed, self-growing 7-stratum program graph `P_t`."""
 
     def __init__(self, state_path: pathlib.Path | str | None = None) -> None:
         self.state_path = pathlib.Path(state_path) if state_path is not None else None
@@ -1456,8 +2546,13 @@ class MetaCircularOrganGraph:
                     if org is not None:
                         pool.append(org)
 
-            for rname, expr_src in _generate_candidate_expressions(cur_examples):
-                src = _wrap_expr_into_source(arity, expr_src)
+            operator_organs = [
+                o for o in self.organs_in_stratum(SKILL) if o.task_signature != task_signature
+            ][:8]
+            for rname, expr_src, helpers in _generate_candidate_expressions(
+                cur_examples, operator_organs=operator_organs
+            ):
+                src = _wrap_expr_into_source(arity, expr_src, helpers=helpers)
                 try:
                     org = make_organ(
                         stratum=SKILL,
