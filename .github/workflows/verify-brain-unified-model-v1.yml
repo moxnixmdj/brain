@@ -55,6 +55,12 @@ jobs:
         shell: bash
         run: python canonical/runtime/verify_brain_unified_model_v1.py 2>&1 | tee /tmp/verify.log
 
+      - name: Check file-fact read-only safety and independent disk rechecks
+        shell: bash
+        run: |
+          PYTHONPATH=. python canonical/tests/test_read_only_file_questions_do_not_write_v1.py
+          PYTHONPATH=. python canonical/tests/test_a_file_write_is_rechecked_from_disk_v1.py
+
       - name: Run the unified model test suite
         shell: bash
         run: >-

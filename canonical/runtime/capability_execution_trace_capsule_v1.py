@@ -135,11 +135,14 @@ def _expectation_passes(action: Mapping[str, Any], result: Mapping[str, Any]) ->
         return str(expect.get("value", "")) in str(value or "")
     if typ == "field_equals":
         return value == expect.get("value")
-    if typ == "file_sha256_matches":
+    if typ in ("file_sha256_matches", "file_observation_matches"):
         from pathlib import Path
-        from canonical.runtime import file_artifact_expectation_v1 as artifact_expectation
+        if typ == "file_sha256_matches":
+            from canonical.runtime import file_artifact_expectation_v1 as independent
+        else:
+            from canonical.runtime import file_observation_expectation_v1 as independent
         root = Path(__file__).resolve().parents[2]
-        return artifact_expectation.verify(expect, result, action.get("args") or {}, root)[0]
+        return independent.verify(expect, result, action.get("args") or {}, root)[0]
     return False
 
 
@@ -261,7 +264,8 @@ def verify_and_compile(
             # that the runtime action is the correctly resolved plan.
             raw_expect = raw_action.get("expect")
             expectation_action = (resolved_action if
-                isinstance(raw_expect, Mapping) and raw_expect.get("type") == "file_sha256_matches"
+                isinstance(raw_expect, Mapping) and raw_expect.get("type") in
+                ("file_sha256_matches", "file_observation_matches")
                 else raw_action)
             if not _expectation_passes(expectation_action, result):
                 raise TraceCapsuleError("ACTION_EFFECT_EXPECTATION_NOT_WITNESSED:" + cid)

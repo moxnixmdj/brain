@@ -21,7 +21,6 @@ Neither writes anything, spawns anything, or leaves the repository root.
 from __future__ import annotations
 
 import hashlib
-import json
 import pathlib
 import re
 
@@ -187,6 +186,10 @@ _HANDLERS = {"word_frequency": _word_frequency, "directory_list": _directory_lis
 
 
 def run(args, root):
+    # This capability is registered read-only. A report path would make it a
+    # writer and may be synthesized by the binder, so refuse it before reads.
+    if args.get("output_path"):
+        raise RuntimeError("READ_ONLY_CAPABILITY_REFUSES_OUTPUT_PATH")
     root = pathlib.Path(root).resolve()
     command = str(args.get("command") or "").strip()
     if command not in _HANDLERS:
@@ -194,15 +197,5 @@ def run(args, root):
     payload = {"schema": "PROJECT_BRAIN_FILE_SURVEY_V1",
                "adapter": "file_survey", "command": command}
     payload.update(_HANDLERS[command](args, root))
-    output_path = args.get("output_path")
-    written = None
-    if output_path:
-        out = _safe(root, output_path)
-        out.parent.mkdir(parents=True, exist_ok=True)
-        body = (json.dumps(payload, indent=1, sort_keys=True) + "\n").encode("utf-8")
-        out.write_bytes(body)
-        if out.read_bytes() != body:
-            raise RuntimeError("WRITE_DID_NOT_ROUNDTRIP")
-        written = out.relative_to(root).as_posix()
-    payload.update({"output_path": written, "output_verified": True})
+    payload.update({"output_path": None, "output_verified": True})
     return payload

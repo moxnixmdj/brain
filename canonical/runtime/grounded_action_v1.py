@@ -176,9 +176,12 @@ def _check_expect(expect, result, args=None, root=ROOT):
         return ok, f"{kind}:{field}={expect.get('value')!r}"
     if kind == "field_truthy":
         return bool(value), f"{kind}:{field}"
-    if kind == "file_sha256_matches":
-        from canonical.runtime import file_artifact_expectation_v1 as artifact_expectation
-        return artifact_expectation.verify(expect, result, args or {}, root)
+    if kind in ("file_sha256_matches", "file_observation_matches"):
+        if kind == "file_sha256_matches":
+            from canonical.runtime import file_artifact_expectation_v1 as independent
+        else:
+            from canonical.runtime import file_observation_expectation_v1 as independent
+        return independent.verify(expect, result, args or {}, root)
     return False, "UNKNOWN_EXPECT_TYPE:" + kind
 
 

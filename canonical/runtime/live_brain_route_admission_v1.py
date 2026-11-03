@@ -1254,9 +1254,12 @@ def _check_expectation(expect: Any, result: Mapping[str, Any], args: Mapping[str
         ok = str(expect.get("value", "")) in str(value or "")
     elif typ == "field_equals":
         ok = value == expect.get("value")
-    elif typ == "file_sha256_matches":
-        from canonical.runtime import file_artifact_expectation_v1 as artifact_expectation
-        ok, detail = artifact_expectation.verify(expect, result, args or {}, ROOT)
+    elif typ in ("file_sha256_matches", "file_observation_matches"):
+        if typ == "file_sha256_matches":
+            from canonical.runtime import file_artifact_expectation_v1 as independent
+        else:
+            from canonical.runtime import file_observation_expectation_v1 as independent
+        ok, detail = independent.verify(expect, result, args or {}, ROOT)
         if not ok:
             raise LocalExecutionFailure("ACTION_EXPECTATION_FAILED:" + detail)
     else:
