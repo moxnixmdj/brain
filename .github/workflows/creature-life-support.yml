@@ -1,0 +1,174 @@
+name: creature-life-support
+# Public runner execution
+#
+# The creature's beating heart, on a schedule.
+#
+# Every organ the creature needs (identity, mortality, sovereign board, awake
+# pulse, CoW repair, skill crystallization) already exists and is tested, but
+# nothing in production ever called them on a clock -- the creature only lived
+# inside test functions. This workflow is the switch that keeps it alive
+# unattended: it boots ONE resident, crash-resumable life loop
+# (canonical/runtime/creature_life_support_v1.py), lets it sense / study /
+# experiment / learn on its own for a bounded wall-clock window, then carries
+# its durable body forward as an artifact so the next run resumes the SAME
+# identity, the SAME spent life, and the SAME finished work.
+#
+# Mortality is respected exactly: life is a budget of WORK granted once at
+# birth, never re-granted on restart (LifeStore.load ignores the grant on
+# resume). Idle pulses spend nothing. When the budget is gone the loop reports
+# LIFE_OVER and stops; a larger --life only takes effect at birth.
+#
+# Safety: apply_verified_repairs is OFF, so the creature experiments and learns
+# in copy-on-write sandboxes but never mutates the live checkout. This workflow
+# never pushes, never merges, never writes to main.
+#
+# Python 3.11 is the creature convention: every creature workflow and the
+# unattended-creature true-capability suite run on 3.11, so the life loop is
+# verified on the same interpreter the creature actually lives on.
+#
+# Every verify step tees to /tmp and a final step publishes the tail to the pull
+# request on failure. Run-log blobs are not retrievable out of band and check-run
+# annotations carry only "exit code 1", so a red run must be made diagnosable.
+#
+# Authority: NONE. Credit: 0. K3 external LLM calls: 0. Incremental spend: $0.
+# It measures pulses, work and life -- never sentience, experience or selfhood.
+
+on:
+  schedule:
+    # after the heartbeat (17 3) and the learning cycle (43 4), so the same day
+    # measures liveness, learns, and then lets the creature live.
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+    inputs:
+      seconds:
+        description: "soft wall-clock budget for this life window (seconds)"
+        required: false
+        default: "600"
+      life:
+        description: "life granted AT BIRTH ONLY; ignored on resume (mortality law)"
+        required: false
+        default: "10000"
+  pull_request:
+    paths:
+      - "canonical/runtime/creature_life_support_v1.py"
+      - "canonical/tests/test_creature_life_support_v1.py"
+      - ".github/workflows/creature-life-support.yml"
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+
+jobs:
+  # Re-prove the capability is real on every trigger (including PRs): real
+  # subprocess SIGKILL/SIGTERM, real on-disk repair, real mortality. No mocks.
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: install pytest
+        run: python3 -m pip install --quiet pytest
+      # `shell: bash` is explicit so pipefail is on and tee cannot mask a
+      # non-zero exit from pytest.
+      - name: run the life-support true-capability suite
+        shell: bash
+        run: |
+          python3 -m pytest -q \
+            canonical/tests/test_creature_life_support_v1.py \
+            canonical/tests/test_the_creature_runs_unattended_v1.py \
+            2>&1 | tee /tmp/life-support-tests.log
+      - name: Publish failure detail to the pull request
+        if: failure() && github.event_name == 'pull_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo '### creature-life-support verify FAILED'
+            echo
+            echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo '```'
+            echo '--- environment ---'
+            python3 -VV 2>&1
+            grep -E '^(PRETTY_NAME|VERSION)=' /etc/os-release 2>/dev/null
+            echo '--- pip freeze ---'
+            python3 -m pip freeze 2>&1 | head -40
+            echo '--- life-support-tests.log (tail) ---'
+            tail -c 40000 /tmp/life-support-tests.log 2>/dev/null || echo '(no life-support-tests.log)'
+            echo '```'
+          } > /tmp/report.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/report.md
+
+  # The resident life window. Only on schedule / manual dispatch -- never on a
+  # PR, so a pull request can never write into the production creature's body.
+  life:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: install the tool dependencies the bound capabilities declare
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet pytest pillow sympy python-docx openpyxl xlsxwriter pypdf pyyaml msgpack || true
+      - name: restore the creature's durable body from the previous run
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p creature_life_state
+          run_id="$(gh run list --workflow creature-life-support.yml --status success --limit 1 --json databaseId -q '.[0].databaseId' || true)"
+          if [ -n "$run_id" ] && [ "$run_id" != "null" ]; then
+            echo "resuming creature body from run $run_id"
+            gh run download "$run_id" -n creature-life-support-state -D creature_life_state || echo "no prior body artifact; birthing fresh"
+          else
+            echo "no prior successful run; birthing fresh"
+          fi
+          ls -la creature_life_state || true
+      - name: run one bounded life window
+        run: |
+          set -euo pipefail
+          python3 -m canonical.runtime.creature_life_support_v1 \
+            --workspace . \
+            --state creature_life_state \
+            --seconds "${{ github.event.inputs.seconds || '600' }}" \
+            --life "${{ github.event.inputs.life || '10000' }}" \
+            --interval-s 5 \
+            --max-curriculum-lessons 2 \
+            --json
+      - name: publish the life verdict
+        if: always()
+        run: |
+          {
+            echo '## Creature life window'
+            echo '```json'
+            if [ -f creature_life_state/life_support_report.json ]; then
+              cat creature_life_state/life_support_report.json
+            else
+              echo '{"error":"no life_support_report.json produced"}'
+            fi
+            echo '```'
+            echo 'Last heartbeat:'
+            echo '```json'
+            if [ -f creature_life_state/heartbeat.json ]; then
+              cat creature_life_state/heartbeat.json
+            else
+              echo '{}'
+            fi
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: creature-life-support-state
+          path: creature_life_state/
+          if-no-files-found: error

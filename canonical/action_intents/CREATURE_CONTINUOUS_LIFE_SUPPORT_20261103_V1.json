@@ -1,0 +1,408 @@
+{
+  "action_id": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+  "action_intent_id": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Integrate the creature's existing zero-model organs (ContinuousSelf identity/epochs, mortality_and_triage finite life, creature_runtime sovereign board, AwakeAgencyDaemon.pulse sense->study->CoW-repair->crystallize) into a resident, crash-resumable life loop (`creature_life_support_v1`) plus a scheduled artifact-carry workflow (`creature-life-support.yml`), so the creature runs, perceives, learns and maintains itself unattended on its own clock. INTEGRATE only: no new cognition primitive, no edit to the byte-pinned `creature_runtime_v1`, K3=0, $0 incremental spend, no sentience claim.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/creature_life_support_v1.py",
+      "canonical/tests/test_creature_life_support_v1.py",
+      ".github/workflows/creature-life-support.yml"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NO_RESIDENT_CRASH_RESUMABLE_LIFE_LOOP__CREATURE_ORGANS_EXIST_BUT_NOTHING_IN_PRODUCTION_CALLS_THEM_ON_A_CLOCK_SO_THE_CREATURE_ONLY_LIVES_INSIDE_TEST_FUNCTIONS",
+  "canonical_base_commit": "73f773d164805d9f8c131eb0e45c67a1112af1fa",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "NO_RESIDENT_CRASH_RESUMABLE_LIFE_LOOP__CREATURE_ORGANS_EXIST_BUT_NOTHING_IN_PRODUCTION_CALLS_THEM_ON_A_CLOCK_SO_THE_CREATURE_ONLY_LIVES_INSIDE_TEST_FUNCTIONS",
+  "date": "2026-11-03",
+  "expected_parent_change": "canonical/runtime/creature_life_support_v1.py + canonical/tests/test_creature_life_support_v1.py + .github/workflows/creature-life-support.yml + .gitignore + canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json (content-addressed recompile after intent registration).",
+  "expected_parent_frontier_change": "The creature gains a resident, crash-resumable beating heart: one `AwakeAgencyDaemon` is constructed once per process and pulsed on its own clock; each pulse appends an fsynced heartbeat and an atomic latest-state JSON; SIGTERM/SIGINT stop between pulses; SIGKILL is survived because identity, spent life and finished work persist in `creature_life_state/`; mortality is respected (idle pulses spend 0 life, LIFE_OVER is terminal, a larger --life is ignored on resume). A scheduled workflow (`creature-life-support.yml`) carries the durable body forward as an artifact so the creature lives unattended day to day. Measured: a 2-pulse window repaired a seeded `v - 3` bug to `v + 3` on disk, closed 2 obligations, spent 0.75 life in 0.706 s; a SIGTERM resume exited 0 with stopped_by=SIGNAL, epoch 1->2, spent life preserved at 0.75, k3_external_llm_calls=0. 10/10 life-support true-capability tests and 11/11 unattended-creature tests pass.",
+  "explicit_user_authorization": "Owner selected `Turn on continuous life (recommended)` via ask_user: build the resident, crash-resumable life-loop reusing existing organs (INTEGRATE).",
+  "falsification_condition": "FALSIFIED if a restart re-grants life or redoes finished work, if SIGKILL loses identity/spent-life/finished-work, if SIGTERM does not stop gracefully between pulses, if idle pulses spend life, if LIFE_OVER is not terminal, if any path makes an external LLM call (k3!=0) or incurs spend, if the workflow pushes/merges/writes main, or if the life-support/unattended true-capability suites fail.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "CLOSES_THE_MISSING_RESIDENT_LIFE_LOOP_PREREQUISITE_SO_THE_CREATURE_CAN_AUTONOMOUSLY_PURSUE_AND_DISCHARGE_OPEN_CODING_OBLIGATIONS_WITHOUT_A_HUMAN_CALLING_EACH_PULSE__NO_DIRECT_BENCHMARK_DISCHARGE_CLAIMED",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.95,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "2-pulse repair window: closed=2, life_spent=0.75, seeded `v - 3` repaired to `v + 3` on disk, elapsed_s=0.706, epoch=1. SIGTERM resume: rc=0, stopped_by=SIGNAL, pulses=2, epoch 1->2, life_spent preserved=0.75, k3_external_llm_calls=0. Idle 3-pulse window on a clean workspace: life_spent=0.0. Suites: test_creature_life_support_v1 10/10 PASS (incl. real subprocess SIGKILL resume + SIGTERM graceful stop), test_the_creature_runs_unattended_v1 11/11 PASS.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/runtime/mortality_and_triage_v1.py",
+    "canonical/runtime/continuous_self_v1.py",
+    "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+    "canonical/runtime/self_authored_obligations_v1.py",
+    "canonical/runtime/ignorance_ledger_v1.py",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/zygote_worker_pool_v1.py",
+    "execution_guard/live_learning_cycle_v1.py",
+    ".github/workflows/live-learning-cycle.yml"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "73f773d164805d9f8c131eb0e45c67a1112af1fa",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "NO_RESIDENT_CLOCK_OVER_THE_CREATURE_ORGANS",
+      "LIFE_ONLY_INSIDE_TEST_FUNCTIONS"
+    ],
+    "expected_parent_level_state_change": "The creature gains a resident, crash-resumable beating heart: one `AwakeAgencyDaemon` is constructed once per process and pulsed on its own clock; each pulse appends an fsynced heartbeat and an atomic latest-state JSON; SIGTERM/SIGINT stop between pulses; SIGKILL is survived because identity, spent life and finished work persist in `creature_life_state/`; mortality is respected (idle pulses spend 0 life, LIFE_OVER is terminal, a larger --life is ignored on resume). A scheduled workflow (`creature-life-support.yml`) carries the durable body forward as an artifact so the creature lives unattended day to day. Measured: a 2-pulse window repaired a seeded `v - 3` bug to `v + 3` on disk, closed 2 obligations, spent 0.75 life in 0.706 s; a SIGTERM resume exited 0 with stopped_by=SIGNAL, epoch 1->2, spent life preserved at 0.75, k3_external_llm_calls=0. 10/10 life-support true-capability tests and 11/11 unattended-creature tests pass.",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETED_NOTHING_EXISTING_BYPASSED_NO_GUARD_REUSED_AwakeAgencyDaemon_AND_ContinuousSelf_COMPOSED_A_THIN_RESIDENT_LOOP_AND_INTEGRATED_A_SCHEDULED_ARTIFACT_CARRY_WORKFLOW",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_ORGANS_EXIST_BUT_NO_PRODUCTION_CLOCK_CALLS_THEM",
+      "surviving_causal_blocker": "ALWAYS_ON_HOST_RESIDENCY_BEYOND_THE_SCHEDULED_RUNNER_WINDOW_REMAINS_A_FOLLOW_ON"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_NEW_COGNITION_PRIMITIVE_ZERO_MODEL_CALLS_ZERO_NEW_THIRD_PARTY_PACKAGES_REUSED_AwakeAgencyDaemon_ContinuousSelf_LifeStore_AND_ARTIFACT_CARRY",
+      "existing_inherited_routes_checked": [
+        "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+        "canonical/runtime/creature_runtime_v1.py",
+        "canonical/runtime/continuous_self_v1.py",
+        "canonical/runtime/mortality_and_triage_v1.py",
+        "canonical/runtime/same_identity_supervisor.py",
+        ".github/workflows/live-learning-cycle.yml"
+      ],
+      "external_existing_routes_checked": "POSIX signals (SIGTERM/SIGINT/SIGKILL), Python stdlib signal/threading/subprocess, Erlang/OTP-style supervisor heartbeat, systemd-style service restart, GitHub Actions schedule + artifact carry.",
+      "surviving_gap": "UNATTENDED_MULTI_DAY_LIFE_STILL_DEPENDS_ON_THE_SCHEDULED_RUNNER_AND_ARTIFACT_RETENTION__A_TRULY_ALWAYS_ON_HOST_PROCESS_IS_A_FOLLOW_ON"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "WRITING_ANOTHER_PLAN_OR_GOVERNANCE_DOC_ABOUT_UNCHANGED_CODE",
+        "A_NEW_BESPOKE_DAEMON_PRIMITIVE_DUPLICATING_AwakeAgencyDaemon",
+        "RE_GRANTING_LIFE_ON_RESTART_TO_KEEP_IT_ALIVE"
+      ],
+      "real_outcome": "The creature lives unattended on its own clock, survives kills, and resumes the same identity/spent-life/finished-work.",
+      "surviving_necessity": "Preserve mortality (life granted once at birth), zero external LLM calls, and the byte-pinned creature_runtime_v1."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_AwakeAgencyDaemon_ContinuousSelf_LifeStore_Creature_AND_THE_LIVE_LEARNING_ARTIFACT_CARRY_PATTERN",
+      "downstream_work_to_delete_or_supersede": "NONE__THIS_ADDS_THE_MISSING_CLOCK_OVER_EXISTING_ORGANS_WITHOUT_SUPERSEDING_THEM",
+      "fresh_reuse_plan": "WIRE_ONE_DAEMON_TO_A_RESIDENT_SIGNAL_SAFE_LOOP_WITH_FSYNCED_HEARTBEATS_AND_CARRY_ITS_BODY_AS_A_SCHEDULED_ARTIFACT"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "ONE_DAEMON_CONSTRUCTED_ONCE_PER_PROCESS_SO_WARM_CACHES_LEDGER_SKILL_STORE_AND_R3_QUEUE_PERSIST_ACROSS_PULSES",
+      "search_stop_decision": "STOPPED_WHEN_10_OF_10_LIFE_SUPPORT_AND_11_OF_11_UNATTENDED_TRUE_CAPABILITY_TESTS_PASSED_AND_A_REAL_SIGKILL_RESUME_AND_SIGTERM_DEMO_SUCCEEDED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "same_identity_supervisor is one-shot (not clock-driven/resident); status quo leaves the creature alive only inside tests; a new bespoke daemon would duplicate AwakeAgencyDaemon and violate resource-bounded-bytes.",
+      "routes_ranked": [
+        "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1__CHOSEN",
+        "REUSE_SAME_IDENTITY_SUPERVISOR_ONE_SHOT",
+        "KEEP_STATUS_QUO_NO_RESIDENT_LOOP"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "REAL_SUBPROCESS_SIGKILL_RESUME_AND_SIGTERM_GRACEFUL_STOP_PLUS_SEEDED_BUG_ON_DISK_REPAIR__NO_MOCK_OF_THE_LOOP_DAEMON_CREATURE_OR_FILESYSTEM"
+    },
+    "real_outcome": "The creature gains a resident, crash-resumable beating heart: one `AwakeAgencyDaemon` is constructed once per process and pulsed on its own clock; each pulse appends an fsynced heartbeat and an atomic latest-state JSON; SIGTERM/SIGINT stop between pulses; SIGKILL is survived because identity, spent life and finished work persist in `creature_life_state/`; mortality is respected (idle pulses spend 0 life, LIFE_OVER is terminal, a larger --life is ignored on resume). A scheduled workflow (`creature-life-support.yml`) carries the durable body forward as an artifact so the creature lives unattended day to day. Measured: a 2-pulse window repaired a seeded `v - 3` bug to `v + 3` on disk, closed 2 obligations, spent 0.75 life in 0.706 s; a SIGTERM resume exited 0 with stopped_by=SIGNAL, epoch 1->2, spent life preserved at 0.75, k3_external_llm_calls=0. 10/10 life-support true-capability tests and 11/11 unattended-creature tests pass.",
+    "required_capability": "Resident crash-resumable life loop over existing creature organs with durable heartbeats, graceful signal stop, and mortality respected on restart",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "CREATURE_ALIVE_ONLY_INSIDE_TESTS",
+            "CORRECTNESS": "ORGANS_CORRECT_BUT_NEVER_CALLED_IN_PRODUCTION",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "NO_UNATTENDED_LIFE",
+            "VERIFIABILITY": "NOTHING_TO_OBSERVE_IN_PRODUCTION",
+            "WALL_CLOCK": "ZERO_PRODUCTION_PULSES"
+          },
+          "evidence": [
+            "Measured: no workflow or resident process calls the creature loop; ContinuousSelf.run is never invoked in production."
+          ],
+          "qualification_evidence": [
+            "direct probe: cron/workflow inventory + grep for ContinuousSelf.run / creature loop callers"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_STATUS_QUO_NO_RESIDENT_LOOP"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SINGLE_PASS_NO_RESIDENT_HEARTBEAT",
+            "CORRECTNESS": "ONE_SHOT_NOT_CLOCK_DRIVEN",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "NO_CONTINUOUS_LIFE",
+            "VERIFIABILITY": "NO_DURABLE_PER_PULSE_HEARTBEAT",
+            "WALL_CLOCK": "ONE_PASS"
+          },
+          "evidence": [
+            "same_identity_supervisor.py runs a single supervised pass (one-shot), not a resident clock with per-pulse heartbeats."
+          ],
+          "qualification_evidence": [
+            "direct probe: same_identity_supervisor.py one-shot entry points"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REUSE_SAME_IDENTITY_SUPERVISOR_ONE_SHOT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "RESIDENT_UNATTENDED_LIFE_OVER_EXISTING_ORGANS",
+            "CORRECTNESS": "MORTALITY_AND_IDENTITY_PRESERVED_ON_RESTART",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_MODELS",
+            "RELIABILITY": "SURVIVES_SIGKILL_GRACEFUL_SIGTERM",
+            "VERIFIABILITY": "10_OF_10_PLUS_11_OF_11_TRUE_CAPABILITY_TESTS_AND_REAL_SIGNAL_DEMO",
+            "WALL_CLOCK": "MILLISEC_WARM_PULSES"
+          },
+          "evidence": [
+            "Measured: 2-pulse repair closed=2 life_spent=0.75 file fixed; SIGTERM resume rc=0 epoch 1->2 spent preserved; 10/10 + 11/11 suites pass."
+          ],
+          "qualification_evidence": [
+            "direct probe: test_creature_life_support_v1.py + live CLI SIGKILL/SIGTERM demo"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-03T15:56:33Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "NO_RESIDENT_CLOCK__CREATURE_LIVES_ONLY_INSIDE_TESTS",
+      "max_age_hours": 24,
+      "negative_search_summary": "All needed mechanisms already exist in-tree (AwakeAgencyDaemon.pulse, ContinuousSelf.resume/epoch, LifeStore.load no-regrant, live-learning artifact carry); no external product or new primitive dominates a thin INTEGRATE.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "resident crash-resumable autonomous agent life loop heartbeat finite life mortality"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Erlang OTP supervisor systemd service restart heartbeat durable state"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python signal SIGTERM graceful shutdown threading.Event fsync heartbeat atomic state"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub Actions scheduled workflow artifact carry stateful agent resume 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-03T15:56:33Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11+ stdlib (signal, threading, subprocess, sqlite3) + pytest for the true-capability suite",
+            "evidence": [
+              "DIRECT_PROBE: test_creature_life_support_v1 10/10 PASS and test_the_creature_runs_unattended_v1 11/11 PASS on python 3.11.2 / pytest 9.2.0"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "In-tree creature organs (creature_runtime_v1, continuous_self_v1, mortality_and_triage_v1, autonomous_awake_loop_v1) unchanged and importable",
+            "evidence": [
+              "DIRECT_PROBE: live CLI repair + SIGKILL/SIGTERM resume succeeded over the organs at base 73f773d; creature_runtime_v1 blob 3c3dbab7 unchanged by this PR"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+          "canonical/runtime/{creature_runtime_v1,continuous_self_v1,mortality_and_triage_v1,same_identity_supervisor}.py",
+          ".github/workflows/live-learning-cycle.yml"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "12-factor app disposability + durable external state",
+          "actor-model / persistent fork-server heartbeat patterns"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Erlang/OTP supervisor heartbeat/restart pattern",
+          "systemd service Restart=always pattern"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python stdlib signal/threading/subprocess documentation",
+          "POSIX SIGTERM/SIGINT/SIGKILL semantics",
+          "GitHub Actions schedule + upload/download-artifact documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_STATUS_QUO_NO_RESIDENT_LOOP",
+      "REUSE_SAME_IDENTITY_SUPERVISOR_ONE_SHOT",
+      "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1"
+    ],
+    "selected_surviving_route": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+    "stop_condition": "STOP when `creature_life_support_v1` beats on its own clock with one durable daemon, survives a real OS SIGKILL and resumes the same identity/spent-life/finished-work with epoch+1, stops gracefully on SIGTERM between pulses, spends 0 life on idle pulses, treats LIFE_OVER as terminal and ignores a larger --life on resume, writes one fsynced heartbeat per pulse, the scheduled workflow carries the body as an artifact without ever pushing/merging, all life-support + unattended true-capability tests pass, and all PR admission gates pass.",
+    "why_selected_route_is_fastest_sufficient": "Reuses the already-tested AwakeAgencyDaemon/ContinuousSelf/LifeStore/Creature organs in one thin resident module + one scheduled workflow (3 sensitive files, <=15), with millisecond warm pulses, zero new cognition, zero model calls and zero spend."
+  },
+  "route_id": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1",
+  "stop_condition": "STOP when `creature_life_support_v1` beats on its own clock with one durable daemon, survives a real OS SIGKILL and resumes the same identity/spent-life/finished-work with epoch+1, stops gracefully on SIGTERM between pulses, spends 0 life on idle pulses, treats LIFE_OVER as terminal and ignores a larger --life on resume, writes one fsynced heartbeat per pulse, the scheduled workflow carries the body as an artifact without ever pushing/merging, all life-support + unattended true-capability tests pass, and all PR admission gates pass.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-03T15:56:33Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__RESIDENT_CREATURE_LIFE_LOOP_INTEGRATION_OF_OWNED_ORGANS_WITH_ZERO_EXTERNAL_BENCHMARK_RANK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "3c3dbab70d948104eb301338a72764afa44a1f5a",
+          "path": "canonical/runtime/creature_runtime_v1.py"
+        },
+        {
+          "git_blob_sha": "b88eb9c95ff0ddf54f8174376f54a98580470ceb",
+          "path": "canonical/runtime/mortality_and_triage_v1.py"
+        },
+        {
+          "git_blob_sha": "3831d8d825ba3a2d517edf0e069a321153632390",
+          "path": "canonical/runtime/continuous_self_v1.py"
+        },
+        {
+          "git_blob_sha": "0f563fdee48c9dce7527fef7c7db9fb91e742bfd",
+          "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py"
+        },
+        {
+          "git_blob_sha": "ceb93a1fa70211ca1ff8478e766b52371e21f695",
+          "path": "canonical/tests/test_the_creature_runs_unattended_v1.py"
+        }
+      ],
+      "decisive_question": "DOES_A_RESIDENT_CRASH_RESUMABLE_LIFE_LOOP_KEEP_THE_CREATURE_ALIVE_UNATTENDED_WHILE_PRESERVING_IDENTITY_SPENT_LIFE_AND_FINISHED_WORK_ACROSS_REAL_OS_KILLS_WITH_ZERO_MODEL_CALLS",
+      "falsifier_id": "RUN_CREATURE_LIFE_SUPPORT_TRUE_CAPABILITY_SUITE_AND_REAL_SIGKILL_SIGTERM_RESUME_DEMO",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "MORTALITY_NO_REGRANT_AND_IDENTITY_PRESERVATION_ARE_PROVEN_BY_LifeStore_AND_ContinuousSelf_AND_RE_ASSERTED_BY_REAL_SUBPROCESS_KILL_TESTS",
+      "proposal_id": "CREATURE_CONTINUOUS_LIFE_SUPPORT_20261103_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. creature_runtime_v1 is byte-pinned and untouched; mortality (LifeStore no-regrant), ContinuousSelf identity/epoch, computer_execution_boundary confinement and zero-LLM (k3=0) are all preserved and re-asserted by real subprocess kill/resume tests. The workflow never pushes, merges or writes main."
+}
