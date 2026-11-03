@@ -311,7 +311,12 @@ def orientation_errors(
         # not always importable. Add the repo root for THIS import only, and leave
         # sys.path as found: a guard that mutates import state is a guard with a side effect.
         import sys as _sys
-        _repo = str(Path(__file__).resolve().parents[1])
+        # Prefer the WORKING TREE over this file's location: the admission gate copies
+        # this checker to /tmp so a pull request cannot weaken the guard judging it, and a
+        # path derived from __file__ then points at /tmp, where `canonical` is not
+        # importable. cwd is the repository checkout in both the CLI and the gate.
+        _cands = [str(Path.cwd().resolve()), str(Path(__file__).resolve().parents[1])]
+        _repo = next((c for c in _cands if (Path(c) / "canonical").is_dir()), _cands[0])
         _restore = list(_sys.path)
         if _repo not in _sys.path:
             _sys.path.insert(0, _repo)

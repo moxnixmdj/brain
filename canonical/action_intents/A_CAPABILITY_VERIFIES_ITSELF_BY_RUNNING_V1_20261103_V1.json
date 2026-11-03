@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::138 of 141 bound capabilities were UNVERIFIED and that status was permanent. The repository could record evidence (capability_receipt_lane_v1: 15/15 receipt pins FRESH) and currency (rule_expiry_v1: FRESH/STALE/UNKNOWN) and the awake loop already audited stored CODE RULES every pulse -- but nothing ever executed a bound CAPABILITY to find out whether it worked, so 'unverified' meant 'unlooked at', not 'broken'.",
-  "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
+  "canonical_base_commit": "0875df1c05ddcd8f427d8253d902e12a6350bad2",
   "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -68,7 +68,7 @@
   "parent_frontier_change": "A bound capability's UNVERIFIED status stops being permanent: a capability that has never been verified verifies itself by running, and the record it leaves goes stale when the code or the environment moves.",
   "prior_work_reused": "rule_expiry_v1 supplied the FRESH/STALE/UNKNOWN vocabulary and the reverify-is-the-only-way-back rule; binding_pin_is_current_v1 supplied the verdict map and the relation-not-vocabulary discipline; capability_receipt_lane_v1 supplied execute-and-record and was measured first (it requires exit 0 + non-empty JSON, which these adapters do not emit, so it could not be reused as the oracle -- that measurement is why this is a behavioural record and not a receipt); autonomous_awake_loop_v1.sense_reality supplied the cycle and already had a memoization pattern for rule_expiry_v1 that this copies.",
   "recursive_obs": {
-    "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
+    "canonical_base_commit": "0875df1c05ddcd8f427d8253d902e12a6350bad2",
     "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
     "deleted_or_bypassed_paths": [
       "PINNING_MODULE_BYTES_AT_RUN_TIME_WHICH_IS_CIRCULAR_AND_WOULD_HAVE_READ_FRESH_FOREVER",
@@ -128,11 +128,16 @@
       ],
       "implementation_still_necessary": true,
       "losing_routes_reason": "measured above",
-      "routes_ranked": []
+      "routes_ranked": [
+        "REUSE_capability_receipt_lane_v1_AS_THE_ORACLE__REJECTED_ON_MEASUREMENT__IT_REQUIRES_EXIT_ZERO_AND_NON_EMPTY_JSON_ON_STDOUT_AND_12_OF_12_SAMPLED_ADAPTERS_RETURNED_NO_RECEIPT_AT_845MS_EACH",
+        "PIN_sha256_OF_MODULE_BYTES_AT_RUN_TIME__REJECTED__CIRCULAR_THE_PIN_WOULD_BE_DERIVED_FROM_THE_BYTES_IT_CHECKS_AND_WOULD_READ_FRESH_FOREVER",
+        "WITHDRAW_THE_42_MISSING_DEPENDENCY_ROWS_AS_UNRUNNABLE__REJECTED__A_MISSING_OPTIONAL_DEPENDENCY_IS_A_FACT_ABOUT_THE_HOST_NOT_THE_CAPABILITY_AND_world_probe_v1_EXISTS_FOR_THAT_QUESTION",
+        "EXECUTION_OBSERVATION_BINDING_MODULE_ENVIRONMENT_AND_OUTCOME__SELECTED"
+      ]
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
-      "existing_oracle_considered": "repo_integrity_guard_v1, verify_brain_unified_model_v1, agent_orientation_check_v1 verify, 16-test suite with mutation checks",
+      "existing_oracle_considered": true,
       "synthetic_verification_necessity": "none claimed; measurements are sandbox measurements"
     },
     "real_outcome": "A capability offered to the creature is one that has been observed to run, or one whose observation has gone stale.",
@@ -204,7 +209,7 @@
           "route": "WITHDRAW_THE_42_MISSING_DEPENDENCY_ROWS"
         }
       ],
-      "checked_at_utc": "2026-11-03T23:38:18Z",
+      "checked_at_utc": "2026-11-03T23:44:42Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -244,7 +249,7 @@
       "selected_route": "Derive FRESH/STALE/UNVERIFIED from an execution observation that binds module sha, environment digest and outcome; probe a bounded number of never-verified capabilities per pulse inside the existing sense_reality step.",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-03T23:38:18Z",
+        "checked_at_utc": "2026-11-03T23:44:42Z",
         "execution_dependencies": [
           {
             "dependency": "python3.11 stdlib (subprocess, hashlib, json, tempfile)",
@@ -369,7 +374,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "HEAD:canonical/tests/test_capability_self_verification_v1.py",
+          "git_blob_sha": "c85d2cb9057ef192a1c113038e2dc2f8c0359955",
           "path": "canonical/tests/test_capability_self_verification_v1.py"
         }
       ],
