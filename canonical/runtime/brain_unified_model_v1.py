@@ -946,6 +946,10 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
+        # Callers may supply a one-shot iterable. Routing and execution both
+        # inspect the declaration, so neither may consume it for the other.
+        if context_paths is not None:
+            context_paths = list(context_paths)
         if requested == "RECALL":
             return self.recall(goal)
         if requested == "SOLVE_OR_LEARN":
@@ -1230,9 +1234,8 @@ class UnifiedModel:
         The rule is deliberately narrow:
 
         * it only runs when the router's own best pick is missing a declared input;
-        * a replacement must have NOTHING missing -- supplied by the caller, or
-          fillable from the caller-declared context -- so this can never invent a
-          value or choose an operand the request did not name;
+        * a replacement must have NOTHING missing from explicit caller inputs;
+          when declared context is supplied the original route is retained;
         * a capability the goal addresses by its own id is never displaced;
         * candidates come from the route's own ranking, so this never reaches a
           capability the model did not already consider for this sentence;
@@ -1247,6 +1250,13 @@ class UnifiedModel:
         if not required:
             return chosen
         declared = [str(p) for p in (context_paths or []) if str(p).strip()]
+        # Declared context is an admission boundary, not evidence that a
+        # different capability answers the request. A replacement selected
+        # only because it can consume that context can bypass a missing-input
+        # refusal or substitute a different operation. Keep the original route
+        # whenever context is supplied; this fallback is for explicit inputs.
+        if declared:
+            return chosen
 
         def fillable(cid: str) -> bool:
             row = self.capabilities.get(cid) or {}
@@ -1254,15 +1264,6 @@ class UnifiedModel:
             missing = [name for name in need if name not in inputs]
             if not missing:
                 return True
-            # A missing slot is not automatically unfillable: the declared-context
-            # binder may have it.  Offering it a declared context is the same
-            # question `_execute_capability` asks, so the check cannot pass a
-            # candidate that would then fail there.
-            if declared:
-                _inputs, _provenance, still = self._bind_from_declared_context(
-                    goal, cid, need, dict(inputs), missing, declared
-                )
-                return not still
             return False
 
         if fillable(chosen):

@@ -30,6 +30,7 @@ from __future__ import annotations
 import json
 import pathlib
 import sys
+import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -112,6 +113,22 @@ def test_a_capability_the_goal_names_by_id_is_never_displaced() -> None:
     _base, inputs = _manifest_world()
     result = model.solve(goal, inputs=inputs)
     assert (result.get("routing") or {}).get("rerouted_from") is None, result.get("routing")
+
+
+def test_declared_context_is_not_used_as_permission_to_reroute() -> None:
+    """A declared file is not a reason to replace the original operation."""
+    model = _model()
+    with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+        pdf = pathlib.Path(tmp) / "input.pdf"
+        pdf.write_bytes(b"%PDF-1.4\n%%EOF\n")
+        rel = pdf.relative_to(ROOT).as_posix()
+        # The one-shot iterable must survive both routing and input binding.
+        result = model.solve("Read a PDF and extract its text.", context_paths=iter([rel]))
+        provenance = result.get("binding_provenance") or {}
+        assert provenance.get("declared_context") == [rel], provenance
+        assert (provenance.get("values") or {}).get("pdf_path") == rel, provenance
+        assert (result.get("routing") or {}).get("rerouted_from") is None, result
+        assert pdf.read_bytes() == b"%PDF-1.4\n%%EOF\n"
 
 
 def main() -> int:
