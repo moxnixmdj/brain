@@ -12141,9 +12141,9 @@
           "capability_id": "file.contents.v1"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "contents"
         }
       },
       "adapter_module": "file_command_view",
@@ -12225,9 +12225,9 @@
           "capability_id": "file.sorted.v1"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "sorted"
         }
       },
       "adapter_module": "file_command_view",
@@ -12311,9 +12311,9 @@
           "capability_id": "file.reversed.v1"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "reversed"
         }
       },
       "adapter_module": "file_command_view",
@@ -12396,9 +12396,9 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "word_frequency"
         }
       },
       "adapter_module": "file_survey",
@@ -12472,9 +12472,9 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "directory_listing"
         }
       },
       "adapter_module": "file_survey",
@@ -12559,9 +12559,9 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "directory_search"
         }
       },
       "adapter_module": "file_survey",
@@ -12642,9 +12642,9 @@
           "other_path": "${input.other_path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_observation_matches",
+          "field": "answer",
+          "observation": "diff"
         }
       },
       "adapter_module": "file_command_view",

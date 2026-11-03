@@ -21986,7 +21986,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -22124,7 +22124,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -22190,7 +22190,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -22260,7 +22260,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -22540,7 +22540,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -22606,7 +22606,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -22810,7 +22810,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "answer"
    ],
    "platforms": [
     "darwin",
@@ -32066,7 +32066,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f77c2a2329c6be2fe20de914b86870b13a1fd9ce72b40dc4d398ed27b52e8117"
+  "value": "4807fc9cfb3f349f1adfc0568fdc7db21a2161060050b8b9da84d4c38918201c"
  },
  "engines": [
   {
@@ -65771,7 +65771,7 @@
   "included_source_count": 1080,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9bcafa89f4f37e554e17a9c913a0fca3bf6f4d64ad8efec55a36b6a5468e8626"
+  "source_tree_digest": "b624c61d66fd5c374a606645fec7adeda46eae990655af2cff7a4aa205ab65f0"
  },
  "research_index": [
   {
@@ -246708,22 +246708,28 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/file_observation_expectation_v1.py",
-   "sha256": "29a003be752173ef6eacf65768ff22506ec3d107d1d884ba63a1a3a9cc1ac004",
-   "summary": "Recheck read-only file metadata and line counts from the stated input.",
-   "symbol_count": 1,
+   "sha256": "c952eaf0c5316284fd80f5cde7069467501f50ae5d0ce7ae5e3b6cd64a7f86ba",
+   "summary": "Recheck read-only file observations from the stated input.",
+   "symbol_count": 5,
    "symbols": [
+    "_needle",
+    "_read_file",
+    "_records",
+    "_reobserve",
     "verify"
    ],
    "terms": {
-    "counts": 1,
     "expectation": 1,
     "file": 2,
     "input": 1,
-    "line": 1,
-    "metadata": 1,
+    "needle": 1,
     "observation": 1,
+    "observations": 1,
     "read-only": 1,
+    "read_file": 1,
     "recheck": 1,
+    "records": 1,
+    "reobserve": 1,
     "stated": 1,
     "v1": 1,
     "verify": 1

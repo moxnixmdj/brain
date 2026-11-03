@@ -207,6 +207,62 @@ def test_line_count_and_metadata_are_reobserved_and_mutations_refuse() -> None:
             assert _verdicts(expect, result, args) == (False,) * 5, cid
 
 
+def test_all_seven_remaining_file_answers_are_reobserved() -> None:
+    WORLD.mkdir(parents=True, exist_ok=True)
+    for cid in ("file.contents.v1", "file.sorted.v1", "file.reversed.v1", "file.diff.v1",
+                "file.word_frequency.v1", "file.directory_listing.v1", "file.directory_search.v1"):
+        with tempfile.TemporaryDirectory(dir=WORLD) as tmp:
+            base = pathlib.Path(tmp)
+            source, other, directory = _world(base)
+            _cid, _module, args = next(row for row in _cases(source, other, directory) if row[0] == cid)
+            entry = dict(graph.load_registry()[cid], capability_id=cid)
+            expect = entry["action_template"]["expect"]
+            result = door.run_adapter_locally(entry, {"args": args, "expect": expect})
+            assert _verdicts(expect, result, args) == (True,) * 5, cid
+            mutated = copy.deepcopy(result)
+            mutated["answer"] += "incorrect"
+            assert _verdicts(expect, mutated, args) == (False,) * 5, cid
+            extra_field = {"file.contents.v1": "argv_sha256", "file.sorted.v1": "sorted_lines",
+                           "file.reversed.v1": "reversed_lines", "file.diff.v1": "identical",
+                           "file.word_frequency.v1": "count", "file.directory_listing.v1": "names",
+                           "file.directory_search.v1": "pattern"}[cid]
+            mutated = copy.deepcopy(result)
+            mutated[extra_field] = None
+            assert _verdicts(expect, mutated, args) == (False,) * 5, cid
+            mutated = copy.deepcopy(result)
+            mutated["path"] = _rel(other)
+            assert _verdicts(expect, mutated, args) == (False,) * 5, cid
+            mutated = copy.deepcopy(result)
+            mutated["output_verified"] = False
+            assert _verdicts(expect, mutated, args) == (False,) * 5, cid
+            assert _verdicts(expect, result, dict(args, command="wrong")) == (False,) * 5, cid
+            if cid == "file.diff.v1":
+                other.write_bytes(b"changed second input\n")
+            elif cid == "file.directory_listing.v1":
+                (directory / "extra.txt").write_bytes(b"new\n")
+            elif cid == "file.directory_search.v1":
+                (directory / "one.txt").write_bytes(b"no matching content\n")
+            else:
+                source.write_bytes(b"changed input and length\n")
+            assert _verdicts(expect, result, args) == (False,) * 5, cid
+
+
+def test_directory_search_needle_is_checked_against_the_request() -> None:
+    WORLD.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=WORLD) as tmp:
+        source, other, directory = _world(pathlib.Path(tmp))
+        cid, _module, args = next(row for row in _cases(source, other, directory)
+                                  if row[0] == "file.directory_search.v1")
+        entry = dict(graph.load_registry()[cid], capability_id=cid)
+        expect = entry["action_template"]["expect"]
+        result = door.run_adapter_locally(entry, {"args": args, "expect": expect})
+        assert _verdicts(expect, result, args) == (True,) * 5
+        assert _verdicts(expect, result, dict(args, goal="Which files contain beta?")) == (False,) * 5
+        assert _verdicts(expect, result, dict(args, goal="Which files contain alpha and contain beta?")) == (False,) * 5
+        assert _verdicts(expect, result, dict(args, goal="List the files")) == (False,) * 5
+        assert _verdicts(expect, result, dict(args, pattern="beta")) == (False,) * 5
+
+
 def main() -> int:
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
     failures = 0
