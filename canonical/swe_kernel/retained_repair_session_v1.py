@@ -81,6 +81,12 @@ class RetainedRepairSession:
         self.metadata['oracle_calls'] = self.oracle.calls
         if hit is None:
             return []
+        if hit.get('recall') is None and hit.get('substrate_missing'):
+            # A broadening path could not run. Record the named reason and propose
+            # nothing: a missing parser is not a rule that failed to apply.
+            self.metadata['substrate_missing'] = dict(hit['substrate_missing'])
+            self.metadata['retention_reason'] = hit.get('reason')
+            return []
         after = hit['patched_source']
         rel = self.target.relative_to(self.repo).as_posix()
         self.metadata.update(hit=True, skill_id=hit['skill_id'], verification=hit['verification'],

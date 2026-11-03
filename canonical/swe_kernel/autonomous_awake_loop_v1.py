@@ -1035,6 +1035,12 @@ class AwakeAgencyDaemon:
                     allow_cross_scope_transfer=True,
                     suspect_lines=suspect_lines,
                 )
+                if isinstance(recalled, Mapping) and recalled.get("recall") is None:
+                    # A broadening path could not run because a parser is absent.
+                    # Keep the named reason and do not fall through as if the rule
+                    # had failed to apply.
+                    self._substrate_missing = dict(recalled.get("substrate_missing") or {})
+                    recalled = None
                 if recalled is None:
                     cow_write_text(cow_mod, before_src)
                     recalled = self.skill_store.recall_and_apply_verified(
@@ -1044,6 +1050,9 @@ class AwakeAgencyDaemon:
                         allow_scope_escalation=False,
                         suspect_lines=suspect_lines,
                     )
+                if isinstance(recalled, Mapping) and recalled.get("recall") is None:
+                    self._substrate_missing = dict(recalled.get("substrate_missing") or {})
+                    recalled = None
                 if recalled is not None:
                     patched = str(recalled["patched_source"])
                     cow_write_text(cow_mod, patched)
@@ -1222,6 +1231,9 @@ class AwakeAgencyDaemon:
                     verifier=poly_oracle,
                     allow_cross_language=True,
                 )
+                if isinstance(recalled_p, Mapping) and recalled_p.get("recall") is None:
+                    self._substrate_missing = dict(recalled_p.get("substrate_missing") or {})
+                    recalled_p = None
                 if recalled_p is None:
                     from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
                         recall_across_languages_cst,

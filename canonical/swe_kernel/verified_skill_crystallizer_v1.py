@@ -33,6 +33,95 @@ from canonical.swe_kernel.skill_verification_contract_v1 import (
 )
 
 SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_CRYSTALLIZER_V1"
+
+# Realised broadening paths and the substrate each needs. A path that could not
+# run because its parser is absent MUST NOT be reported as "the rule did not
+# apply": those two are different facts and only one of them is about the rule.
+BROADENING_PATHS: dict[str, dict[str, Any]] = {
+    "SCOPE_EXPRESSION_CST": {
+        "module": "tree_sitter_cst_skill_skeleton_v1",
+        "substrate": ("tree_sitter", "tree_sitter_languages"),
+        "language": "python",
+    },
+    "SCOPE_ALGEBRAIC_EGRAPH": {"module": "egraph_and_deductive_synthesizer_v1", "substrate": ()},
+    "CROSS_LANGUAGE_CST": {
+        "module": "tree_sitter_cst_skill_skeleton_v1",
+        "substrate": ("tree_sitter", "tree_sitter_languages"),
+        "language": None,
+    },
+    "CROSS_LANGUAGE_LEXICAL": {"module": "language_neutral_skill_bridge_v1", "substrate": ()},
+}
+
+
+def substrate_missing_reason(path: str | Mapping[str, Any], *, language: str | None = None) -> str | None:
+    """Return a named reason if a broadening path cannot actually run here.
+
+    `None` means the path is fully available. Two things are checked, and the
+    second is the one that is usually skipped:
+
+      1. the host module imports, and
+      2. the parser for the target language can be *obtained*.
+
+    (2) exists because `tree_sitter_cst_skill_skeleton_v1` imports fine without
+    tree-sitter installed and only fails when a parser is requested, so an
+    import check alone reports "available" for a capability that cannot run.
+    Measured 2026-11-03. The reason names the missing substrate and its manifest
+    pin, so a dropped capability is attributable rather than silent. No version
+    is asserted here; the manifest test owns that.
+    """
+    import importlib
+
+    spec = BROADENING_PATHS.get(path) if isinstance(path, str) else dict(path or {})
+    if not spec:
+        return f"SUBSTRATE_MISSING:unknown-path:{path}"
+    name = str(spec.get("module") or "")
+    try:
+        importlib.import_module(f"canonical.swe_kernel.{name}")
+    except Exception as exc:  # noqa: BLE001 - the failure IS the signal
+        return f"SUBSTRATE_MISSING:{name}:{type(exc).__name__}"
+
+    target = language if language is not None else spec.get("language")
+    substrates = tuple(spec.get("substrate") or ())
+    if substrates and target:
+        try:
+            from canonical.runtime import tree_sitter_swe_kernel_v1 as _tsk
+
+            _tsk.parser_for(str(target))
+        except Exception as exc:  # noqa: BLE001
+            missing = ",".join(
+                f"{s}=={_pinned_version(s) or 'unpinned'}" for s in substrates
+            )
+            return f"SUBSTRATE_MISSING:{missing}:{type(exc).__name__}"
+    return None
+
+
+def _substrate_pins() -> dict[str, str]:
+    """Pinned versions from the kernel manifest, read once, never fabricated."""
+    path = pathlib.Path(__file__).resolve().parents[2] / "requirements/software_engineering_kernel_v1.txt"
+    pins: dict[str, str] = {}
+    try:
+        for raw in path.read_text(encoding="utf-8").splitlines():
+            line = raw.split("#", 1)[0].strip().rstrip("\\").strip()
+            match = re.match(r"^([A-Za-z0-9_.\-]+)==([^\s;]+)", line)
+            if match:
+                name = match.group(1).lower()
+                # Keep the manifest spelling for lookup, and normalise too: the two
+                # differ for `tree_sitter` vs `tree-sitter` and that difference is
+                # exactly the kind of silence this helper exists to remove.
+                pins[name] = match.group(2)
+                pins[name.replace("_", "-")] = match.group(2)
+    except OSError:
+        return {}
+    return pins
+
+
+def _pinned_version(module_name: str) -> str:
+    """Best-effort manifest pin for a parser module; empty when it is not pinned."""
+    pins = _substrate_pins()
+    for candidate in (module_name, module_name.replace("_languages", "")):
+        if candidate in pins:
+            return pins[candidate]
+    return ""
 BUNDLE_SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_BUNDLE_V1"
 
 _PYTHON_KEYWORDS_KEEP = frozenset({
@@ -1104,6 +1193,11 @@ class VerifiedSkillStore:
         if not can_read_memory():
             return None
 
+        # Paths that could not run because their parser is absent. Reported, never
+        # silently absorbed: "the rule did not apply" and "the checker did not run"
+        # are different facts and only one of them is about the rule.
+        substrates: dict[str, str] = {}
+
         eff_suspect_lines: list[int] = [
             int(ln) for ln in (suspect_lines or ()) if isinstance(ln, int) and ln > 0
         ]
@@ -1281,6 +1375,9 @@ class VerifiedSkillStore:
                     if hit is not None:
                         return hit
                 if not invalidated_mid_run:
+                    _why = substrate_missing_reason("SCOPE_EXPRESSION_CST", language=lang)
+                    if _why is not None:
+                        substrates["SCOPE_EXPRESSION_CST"] = _why
                     try:
                         from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
                             iter_cst_skeleton_candidates,
@@ -1377,6 +1474,9 @@ class VerifiedSkillStore:
         # Supported under legacy unscoped `CALLER_PREDICATE` and under contract-checked
         # `TEST_SUITE` (`ProjectTestOracle` / `ConfinedLanguageTestOracle`).
         if allow_cross_language and broadening_permitted and scope_id:
+            _why = substrate_missing_reason("CROSS_LANGUAGE_CST", language=lang)
+            if _why is not None:
+                substrates["CROSS_LANGUAGE_CST"] = _why
             try:
                 from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
                     recall_across_languages_cst,
@@ -1450,6 +1550,9 @@ class VerifiedSkillStore:
                 pass
 
         if allow_cross_language and required_verification_kind == 'CALLER_PREDICATE' and not scope_id:
+            _why = substrate_missing_reason("CROSS_LANGUAGE_LEXICAL")
+            if _why is not None:
+                substrates["CROSS_LANGUAGE_LEXICAL"] = _why
             try:
                 from canonical.swe_kernel import language_neutral_skill_bridge_v1 as _bridge
 
@@ -1535,6 +1638,17 @@ class VerifiedSkillStore:
                         }
             except Exception:
                 pass
+
+        if substrates:
+            # Fail closed on the *report*, not on the rule: the caller receives the
+            # named reason its broadening path could not run, so a missing parser can
+            # never be mistaken for a rule that does not apply.
+            return {
+                "recall": None,
+                "substrate_missing": dict(substrates),
+                "reason": "BROADENING_SUBSTRATE_MISSING",
+                "whole_task_correctness_proved": False,
+            }
         return None
 
     def narrow_rule_scope(
