@@ -81,7 +81,7 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
         self.assertEqual(len(defs), 1)
         self.assertTrue(callable(getattr(ra, "chase_until_met", None)))
 
-        # 2. Genuine unserved gap records cleanly into ignorance_ledger_v1 (`note` + `rank`)
+        # 2. Unconfined learning fails closed per #6592; explicit gap intake records & ranks cleanly
         gap_goal = "quantum_teleport_a_toaster_across_mars_99182"
         unserved = ra.solve_or_learn(
             {"task_id": "gap-1", "goal": gap_goal},
@@ -89,32 +89,45 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
             allow_jit_network=False,
         )
         self.assertFalse(unserved["pass"])
-        self.assertTrue(unserved["learning"]["gap_recorded"])
+        self.assertEqual(unserved["status"], "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT")
+        self.assertEqual(
+            unserved["learning"]["computer_env_status"],
+            "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+        )
+        led.note(gap_goal, why=unserved["status"], cost=1.0)
         ranked = led.rank(limit=5)
         self.assertEqual(ranked[0]["what"], gap_goal)
 
-        # 3. Learnable CLI goal first recorded as a gap is closed automatically when Tier 2 learns it
+        # 3. Unconfined CLI discovery fails closed at front door; direct measurement + gap resolution closes gap
+        from canonical.runtime import computer_env_v1 as cenv
+
         cli_dir = self.tmp / "cli_data"
         cli_dir.mkdir()
         (cli_dir / "items.txt").write_text("alpha\nbeta\nalpha\ngamma\nbeta\n", encoding="utf-8")
         learn_goal = "how many unique lines in items.txt"
-        led.note(learn_goal, why="initial gap", cost=1.0)
+        gap_id = led.note(learn_goal, why="initial gap", cost=1.0)
         self.assertTrue(any(r["what"] == learn_goal for r in led.rank(limit=10)))
 
-        learned = ra.solve_or_learn(
+        unconf_cli = ra.solve_or_learn(
             {"task_id": "learn-cli-1", "goal": learn_goal},
             cwd=cli_dir,
             db_path=self.wf_db,
+            allow_tier1_composition=False,
             allow_jit_network=False,
         )
-        self.assertTrue(learned["pass"], learned)
-        self.assertEqual(str(learned["answer"]).strip(), "3")
-        self.assertTrue(learned.get("learned_this_turn"))
-        self.assertTrue(learned.get("closed_gap_ids"))
+        self.assertFalse(unconf_cli["pass"])
+        self.assertEqual(unconf_cli["status"], "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT")
+
+        measured = cenv.answer_query(learn_goal, cli_dir / "items.txt")
+        self.assertTrue(measured["pass"], measured)
+        self.assertEqual(str(measured["answer"]).strip(), "3")
+        self.assertTrue(led.resolve(gap_id, helped=True, close=True))
         # Gap is now closed and no longer appears in open rank()
         self.assertFalse(any(r["what"] == learn_goal for r in led.rank(limit=10)))
 
-        # 4. Typed GUI surface fallback (`osworld_computer_surface_v1`) compiles deterministically
+        # 4. Typed GUI surface (`osworld_computer_surface_v1`) compiles deterministically while unconfined front door fails closed
+        from canonical.runtime import osworld_computer_surface_v1 as gui_surface
+
         gui_res = ra.solve_or_learn(
             {
                 "task_id": "gui-1",
@@ -125,9 +138,13 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
             db_path=self.wf_db,
             allow_jit_network=False,
         )
-        self.assertTrue(gui_res["pass"], gui_res)
-        self.assertEqual(gui_res["tier_used"], "tier2_typed_gui_surface")
-        self.assertEqual(gui_res["compiled_pyautogui"], "pyautogui.click(x=420, y=310, button='left')")
+        self.assertFalse(gui_res["pass"])
+        self.assertEqual(gui_res["status"], "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT")
+        compiled_pyautogui = gui_surface.compile_osworld_pyautogui(
+            {"type": "click", "x": 420, "y": 310, "button": "left"},
+            gui_surface.Screen(width=1920, height=1080),
+        )
+        self.assertEqual(compiled_pyautogui, "pyautogui.click(x=420, y=310, button='left')")
 
         # 5. Honest missing-file refusal (`R9`) fails closed immediately
         refused = ra.solve_or_learn(
@@ -173,15 +190,15 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
         held_rel = self.tmp.relative_to(lib.ROOT) / "heldout_revenue.sqlite"
         chase_goal = f"Reach 3 units in database {db_rel}"
         held_goal = f"Reach 3 units in database {held_rel}"
-        chase_res = ra.chase_until_met(
+        unconf_chase = ra.chase_until_met(
             chase_goal,
             measure=measure_units,
             target=3.0,
             direction="maximize",
             unit="units",
-            max_rounds=5,
+            max_rounds=2,
             patience=1,
-            max_learn_attempts=2,
+            max_learn_attempts=1,
             widen_options=False,
             flywheel_state_path=str(self.tmp / "flywheel.json"),
             context={
@@ -201,25 +218,72 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
                     "db_path": str(db_rel),
                     "sql": "SELECT units FROM ledger WHERE units = 1",
                 },
-                "heldout_goal": held_goal,
-                "heldout_cwd": str(lib.ROOT),
-                "heldout_postcondition": {
-                    "kind": "sqlite_row_exists",
-                    "db_path": str(held_rel),
-                    "sql": "SELECT units FROM ledger WHERE units = 1",
-                },
-                "sabotaged_postcondition": {
-                    "kind": "sqlite_row_exists",
-                    "db_path": str(held_rel),
-                    "sql": "SELECT units FROM ledger WHERE units = 999",
-                },
             },
         )
+        self.assertFalse(unconf_chase["pass"])
+        self.assertTrue(unconf_chase["resumed"])
+        self.assertTrue(unconf_chase["stalls"][0]["gap"]["recorded"])
+        self.assertEqual(
+            unconf_chase["stalls"][0]["learning"]["status"],
+            "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+        )
+
+        from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+            compile_and_qualify_skill,
+            recall_and_execute_workflow,
+        )
+
+        qual = compile_and_qualify_skill(
+            goal=chase_goal,
+            trace=[
+                {
+                    "kind": "sqlite_query",
+                    "db_path": str(db_rel),
+                    "sql": "INSERT INTO ledger(units) VALUES (?)",
+                    "params": [1],
+                }
+            ],
+            postcondition={
+                "kind": "sqlite_row_exists",
+                "db_path": str(db_rel),
+                "sql": "SELECT units FROM ledger WHERE units = 1",
+            },
+            heldout_goal=held_goal,
+            heldout_cwd=lib.ROOT,
+            heldout_postcondition={
+                "kind": "sqlite_row_exists",
+                "db_path": str(held_rel),
+                "sql": "SELECT units FROM ledger WHERE units = 1",
+            },
+            sabotaged_postcondition={
+                "kind": "sqlite_row_exists",
+                "db_path": str(held_rel),
+                "sql": "SELECT units FROM ledger WHERE units = 999",
+            },
+            source_cwd=lib.ROOT,
+            db_path=self.wf_db,
+        )
+        self.assertTrue(qual["pass"], qual)
+
+        chase_res = ra.chase_until_met(
+            chase_goal,
+            measure=measure_units,
+            act=lambda _ctx: recall_and_execute_workflow(chase_goal, cwd=lib.ROOT, db_path=self.wf_db) or {"pass": False},
+            target=3.0,
+            direction="maximize",
+            unit="units",
+            max_rounds=5,
+            patience=1,
+            max_learn_attempts=1,
+            widen_options=False,
+            flywheel_state_path=str(self.tmp / "flywheel_met.json"),
+        )
         self.assertTrue(chase_res["pass"], chase_res)
-        self.assertTrue(chase_res["resumed"])
-        self.assertGreaterEqual(measure_units(), 3.0)
+        self.assertEqual(measure_units(), 3.0)
 
     def test_cut2_scope_escalation_polyglot_bridge_version_space_and_expiry(self) -> None:
+        from canonical.swe_kernel.skill_verification_contract_v1 import ProjectTestOracle
+
         store = VerifiedSkillStore(self.skill_db, seed=False)
         taught = store.crystallize_code_fix(
             before_snippet="def within(x, hi):\n    return x <= hi\n",
@@ -231,25 +295,78 @@ class IntegratedAutonomousLoopTests(unittest.TestCase):
         self.assertTrue(taught["crystallized"])
         sid = taught["skill_id"]
 
-        # 1. Statement + Operator + Semantic Disjunction escalation (all 3 tiers verified by execution)
+        # Weak CALLER_PREDICATE escalation must fail closed (PR-C2 safety invariant)
+        with self.assertRaisesRegex(ValueError, "SCOPE_ESCALATION_REQUIRES_SCOPED_TEST_SUITE"):
+            store.recall_and_apply_verified(
+                source_text="def inside(a, b):\n    return a <= b\n",
+                language="python",
+                error_class="BOUNDARY",
+                verifier=lambda cand: True,
+                allow_scope_escalation=True,
+            )
+
+        # 1. Scoped TEST_SUITE Statement + PR-C2 Expression + Operator + Semantic Disjunction escalation
+        scope_id = "test/boundary/v1"
+        contract = {
+            "schema_version": 1,
+            "scope_id": scope_id,
+            "verification_kind": "TEST_SUITE",
+            "dependencies": {},
+            "preconditions": {},
+        }
+        train_dir = self.tmp / "scoped_train"
+        train_dir.mkdir(parents=True, exist_ok=True)
+        (train_dir / "subject.py").write_text("def within(x, hi):\n    return x <= hi\n", encoding="utf-8")
+        (train_dir / "test_subject.py").write_text(
+            "import unittest\nfrom subject import within\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_b(self):\n"
+            "        self.assertFalse(within(5, 5))\n"
+            "        self.assertTrue(within(4, 5))\n",
+            encoding="utf-8",
+        )
+        scoped_store = VerifiedSkillStore(self.tmp / "scoped_skills.sqlite", seed=False)
+        scoped_taught = scoped_store.crystallize_code_fix(
+            before_snippet="def within(x, hi):\n    return x <= hi\n",
+            after_snippet="def within(x, hi):\n    return x < hi\n",
+            language="python",
+            error_class="BOUNDARY",
+            contract=contract,
+            training_verifier=ProjectTestOracle(train_dir, "subject.py", ["test_subject.py"], scope_id),
+        )
+        self.assertTrue(scoped_taught["crystallized"])
         variants = [
-            ("def inside(a, b):\n    return a <= b\n", "assert inside(5, 5) is False and inside(4, 5) is True"),
-            ("def guard(a, b):\n    if a <= b:\n        return True\n    return False\n", "assert guard(5, 5) is False and guard(4, 5) is True"),
-            ("def flipped(a, b):\n    return b >= a\n", "assert flipped(5, 5) is False and flipped(4, 5) is True"),
-            ("def disj(a, b):\n    return a < b or a == b\n", "assert disj(5, 5) is False and disj(4, 5) is True"),
+            ("v1", "def target(a, b):\n    return a <= b\n"),
+            ("v2", "def target(a, b):\n    if a <= b:\n        return True\n    return False\n"),
+            ("v3", "def target(a, b):\n    return b >= a\n"),
+            ("v4", "def target(a, b):\n    return a < b or a == b\n"),
         ]
         tiers_seen = set()
-        for src, asserts in variants:
-            hit = store.recall_and_apply_verified(
+        for label, src in variants:
+            vdir = self.tmp / f"scoped_{label}"
+            vdir.mkdir(parents=True, exist_ok=True)
+            (vdir / "subject.py").write_text(src, encoding="utf-8")
+            (vdir / "test_subject.py").write_text(
+                "import unittest\nfrom subject import target\n"
+                "class T(unittest.TestCase):\n"
+                "    def test_b(self):\n"
+                "        self.assertFalse(target(5, 5))\n"
+                "        self.assertTrue(target(4, 5))\n",
+                encoding="utf-8",
+            )
+            hit = scoped_store.recall_and_apply_verified(
                 source_text=src,
                 language="python",
                 error_class="BOUNDARY",
-                verifier=lambda cand, a=asserts: _exec_py_oracle(cand, a),
+                verifier=ProjectTestOracle(vdir, "subject.py", ["test_subject.py"], scope_id),
+                required_verification_kind="TEST_SUITE",
+                scope_id=scope_id,
+                context={"dependencies": {}, "preconditions": {}},
                 allow_scope_escalation=True,
             )
             self.assertIsNotNone(hit, src)
             tiers_seen.add(hit["scope_tier"])
-        self.assertEqual(tiers_seen, {"SCOPE_STATEMENT", "SCOPE_OPERATOR", "SCOPE_SEMANTIC"})
+        self.assertEqual(tiers_seen, {"SCOPE_STATEMENT", "SCOPE_EXPRESSION", "SCOPE_OPERATOR", "SCOPE_SEMANTIC"})
 
         # 2. Cross-language lexical carry across Go, TypeScript, C++, and Java
         cross_targets = {

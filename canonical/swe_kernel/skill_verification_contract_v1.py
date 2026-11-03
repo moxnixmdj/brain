@@ -10,7 +10,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import hashlib
+import os
 from pathlib import Path, PurePosixPath
+import shlex
+import shutil
 import tempfile
 from typing import Any, Mapping
 
@@ -99,15 +102,24 @@ def normalize_contract(contract: Mapping[str, Any] | None) -> dict[str, Any] | N
     return normalized
 
 
-def applicable(contract, scope_id: str, context: Mapping[str, Any] | None) -> bool:
+def applicable(
+    contract,
+    scope_id: str,
+    context: Mapping[str, Any] | None,
+    *,
+    allow_cross_scope: bool = False,
+) -> bool:
     try:
         expected = normalize_contract(contract)
     except (ValueError, TypeError):
         return False
     if expected is None:
         return not scope_id
-    if expected['scope_id'] != scope_id or not isinstance(context, Mapping):
+    if not isinstance(context, Mapping) or not isinstance(scope_id, str) or not scope_id.strip():
         return False
+    if expected['scope_id'] != scope_id:
+        if not (allow_cross_scope and expected['verification_kind'] == 'TEST_SUITE'):
+            return False
     for name in ('dependencies', 'preconditions'):
         observed = context.get(name)
         if not isinstance(observed, Mapping):
@@ -116,6 +128,16 @@ def applicable(contract, scope_id: str, context: Mapping[str, Any] | None) -> bo
             if key not in observed or type(observed[key]) is not type(value) or observed[key] != value:
                 return False
     return True
+
+
+def _resolve_chroot_binary(name: str, fallbacks: tuple[str, ...]) -> str | None:
+    found = shutil.which(name)
+    if found and (found.startswith('/usr/') or found.startswith('/bin/')) and os.path.isfile(found):
+        return found
+    for cand in fallbacks:
+        if os.path.isfile(cand):
+            return cand
+    return None
 
 
 class ProjectTestOracle:
@@ -175,6 +197,164 @@ class ProjectTestOracle:
                         'snapshot_sha256': report['subject']['snapshot_sha256'],
                         'test_evidence': report['test_evidence']}
             return VerificationResult(bool(passed), 'TEST_SUITE', source_sha256(candidate), self.scope_id, evidence)
+        except Exception as exc:
+            return VerificationResult(False, 'TEST_SUITE', source_sha256(candidate), self.scope_id,
+                                      {'error': type(exc).__name__})
+
+
+class ConfinedLanguageTestOracle:
+    """Verify non-Python candidates (`js`/`ts`/`cpp`/`c`/`rust`/`go`) inside `brokered_workspace_execution_v1`.
+
+    Auto-discovers installed polyglot runners (`node --test`, `node --experimental-strip-types --test`,
+    `g++ -std=c++17`, `gcc`, `go test -v`, `cargo test --offline` / `rustc --test`), injects the
+    candidate via zero-copy `candidate_overrides` (never touching `project_root` or any test file),
+    runs inside `zero_ambient_namespace_launcher_v1`, parses real non-zero test count, and verifies
+    `project_root` remained byte-for-byte unchanged.
+    """
+
+    _EXTS = ('.js', '.mjs', '.cjs', '.ts', '.tsx', '.rs', '.go', '.cpp', '.cc', '.cxx', '.c', '.hpp', '.h')
+
+    def __init__(
+        self,
+        project_root: Path,
+        target_path: str,
+        test_paths: list[str],
+        scope_id: str,
+        *,
+        runner_argv: list[str] | None = None,
+        timeout_s: int = 20,
+    ) -> None:
+        from canonical.runtime import repair_candidate_broker_v1 as rcb
+
+        self.root = Path(project_root).resolve()
+        rel = PurePosixPath(target_path)
+        if rel.is_absolute() or '..' in rel.parts or not any(target_path.endswith(ext) for ext in self._EXTS):
+            raise ValueError('INVALID_SKILL_TARGET')
+        if not test_paths:
+            raise ValueError('TEST_PATHS_REQUIRED')
+        clean_tests: list[str] = []
+        for tp in test_paths:
+            trel = PurePosixPath(tp)
+            if trel.is_absolute() or '..' in trel.parts or str(trel) == str(rel):
+                raise ValueError('SKILL_MUST_NOT_REWRITE_ITS_TESTS')
+            if not (self.root / trel).is_file():
+                raise ValueError('MISSING_TEST_FILE')
+            clean_tests.append(str(trel))
+        if not (self.root / rel).is_file():
+            raise ValueError('INVALID_SKILL_TARGET')
+        if not scope_id:
+            raise ValueError('VERIFICATION_SCOPE_REQUIRED')
+        self._initial_snap = rcb.snapshot_project(self.root)
+        self.target_path = str(rel)
+        self.test_paths = clean_tests
+        self.scope_id = scope_id
+        self.timeout_s = timeout_s
+        if runner_argv is not None:
+            self.runner_argv = [str(x) for x in runner_argv]
+        else:
+            self.runner_argv = self._discover_runner_argv()
+        self.calls = 0
+
+    def _discover_runner_argv(self) -> list[str]:
+        tp = self.target_path
+        if tp.endswith(('.js', '.mjs', '.cjs')):
+            node_bin = _resolve_chroot_binary('node', ('/usr/local/bin/node', '/usr/bin/node'))
+            if not node_bin:
+                raise ValueError('LANGUAGE_RUNNER_UNAVAILABLE:javascript')
+            return [node_bin, '--test', *self.test_paths]
+        if tp.endswith(('.ts', '.tsx')):
+            node_bin = _resolve_chroot_binary('node', ('/usr/local/bin/node', '/usr/bin/node'))
+            if not node_bin:
+                raise ValueError('LANGUAGE_RUNNER_UNAVAILABLE:typescript')
+            return [node_bin, '--experimental-strip-types', '--test', *self.test_paths]
+        if tp.endswith(('.cpp', '.cc', '.cxx', '.hpp', '.h', '.c')):
+            is_c = tp.endswith('.c') and all(t.endswith('.c') for t in self.test_paths)
+            compiler = _resolve_chroot_binary(
+                'gcc' if is_c else 'g++',
+                ('/usr/bin/gcc', '/usr/local/bin/gcc') if is_c else ('/usr/bin/g++', '/usr/local/bin/g++'),
+            )
+            if not compiler:
+                raise ValueError('LANGUAGE_RUNNER_UNAVAILABLE:cpp')
+            sources = list(self.test_paths)
+            if tp.endswith(('.cpp', '.cc', '.cxx', '.c')) and tp not in sources:
+                # Avoid duplicate symbol definition when test file `#include`s target translation unit directly
+                target_name = PurePosixPath(tp).name
+                included = any(
+                    target_name in (self.root / t).read_text(encoding='utf-8', errors='replace')
+                    for t in self.test_paths
+                )
+                if not included:
+                    sources.append(tp)
+            std_flag = '-std=c11' if is_c else '-std=c++17'
+            quoted_srcs = ' '.join(shlex.quote(s) for s in sources)
+            cmd = f'{shlex.quote(compiler)} {std_flag} -O0 -I. {quoted_srcs} -o /work/tmp/cpp_oracle_bin && /work/tmp/cpp_oracle_bin'
+            return ['/bin/sh', '-c', cmd]
+        if tp.endswith('.go'):
+            go_bin = _resolve_chroot_binary('go', ('/usr/local/go/bin/go', '/usr/bin/go'))
+            if not go_bin:
+                raise ValueError('LANGUAGE_RUNNER_UNAVAILABLE:go')
+            return [go_bin, 'test', '-v', './...']
+        if tp.endswith('.rs'):
+            cargo_bin = _resolve_chroot_binary('cargo', ('/usr/bin/cargo', '/usr/local/bin/cargo'))
+            if (self.root / 'Cargo.toml').is_file() and cargo_bin:
+                return [cargo_bin, 'test', '--offline']
+            rustc_bin = _resolve_chroot_binary('rustc', ('/usr/bin/rustc', '/usr/local/bin/rustc'))
+            if rustc_bin:
+                t0 = shlex.quote(self.test_paths[0])
+                return ['/bin/sh', '-c', f'{shlex.quote(rustc_bin)} --test {t0} -o /work/tmp/rs_oracle_bin && /work/tmp/rs_oracle_bin']
+            raise ValueError('LANGUAGE_RUNNER_UNAVAILABLE:rust')
+        raise ValueError('RUNNER_ARGV_REQUIRED_FOR_LANGUAGE')
+
+    def __call__(self, candidate: str) -> VerificationResult:
+        import json as _json
+        import re as _re
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+        from canonical.runtime import repair_candidate_broker_v1 as rcb
+
+        self.calls += 1
+        try:
+            orig_snap = rcb.snapshot_project(self.root)
+            res = broker.run_staged_confined_command(
+                self.root,
+                self.runner_argv,
+                publish=False,
+                pythonpath_work=False,
+                timeout=self.timeout_s,
+                candidate_overrides={self.target_path: candidate.encode('utf-8')},
+                task_id=f'lang-oracle:{self.scope_id}',
+            )
+            final_snap = rcb.snapshot_project(self.root)
+            if final_snap.digest != orig_snap.digest:
+                raise RuntimeError('ORIGINAL_PROJECT_CHANGED_DURING_VERIFICATION')
+            if not res.get('confined'):
+                return VerificationResult(False, 'TEST_SUITE', source_sha256(candidate), self.scope_id,
+                                          {'error': str(res.get('blocked') or 'UNCONFINED')})
+            combined = str(res.get('stdout') or '') + '\n' + str(res.get('stderr') or '')
+            m_tests = _re.search(r'(?:#\s*tests\s+(\d+)|(\d+)\s+tests?\s+passed)', combined, _re.IGNORECASE)
+            m_pass = _re.search(
+                r'(?:#\s*pass\s+(\d+)|(\d+)\s+passed|---\s*PASS:|\[PASS\]|\bPASS\b(?::\s*(\d+))?|ok\s+\S+)',
+                combined,
+            )
+            if m_tests:
+                test_count = int(m_tests.group(1) or m_tests.group(2))
+            elif m_pass:
+                num = m_pass.group(1) or m_pass.group(2) or m_pass.group(3)
+                test_count = int(num) if num else max(1, len(_re.findall(r'(?:---\s*PASS:|\[PASS\])', combined)))
+            else:
+                test_count = 0
+            rc = int(res.get('exit', -1))
+            passed = bool(res.get('ok') and rc == 0 and test_count > 0 and not res.get('changed_files'))
+            prog_sha = hashlib.sha256(_json.dumps(self.runner_argv, separators=(',', ':')).encode('utf-8')).hexdigest()
+            spec_sha = hashlib.sha256(_json.dumps({'target': self.target_path, 'tests': self.test_paths, 'scope': self.scope_id}, sort_keys=True).encode('utf-8')).hexdigest()
+            cand_snap_sha = hashlib.sha256(f'{orig_snap.digest}:{self.target_path}:{source_sha256(candidate)}'.encode('utf-8')).hexdigest()
+            evidence = {
+                'test_count': test_count,
+                'returncode': rc,
+                'measurement_program_sha256': prog_sha,
+                'measurement_spec_sha256': spec_sha,
+                'snapshot_sha256': cand_snap_sha,
+            }
+            return VerificationResult(passed, 'TEST_SUITE', source_sha256(candidate), self.scope_id, evidence)
         except Exception as exc:
             return VerificationResult(False, 'TEST_SUITE', source_sha256(candidate), self.scope_id,
                                       {'error': type(exc).__name__})

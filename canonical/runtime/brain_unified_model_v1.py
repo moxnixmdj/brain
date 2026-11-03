@@ -959,12 +959,50 @@ class UnifiedModel:
             )
 
         routing: dict[str, Any] | None = None
+        ledger_db = inputs.pop("ledger_db_path", None) if isinstance(inputs, dict) and "ledger_db_path" in inputs else None
+        ledger_pref: str | None = None
         if capability_id:
             cid = _normalise_capability_id(capability_id)
             if cid not in self.capabilities and cid not in self.engines:
                 raise UnifiedModelError("CAPABILITY_NOT_IN_MODEL:" + cid)
             chosen = cid
         else:
+            try:
+                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+
+                _linfo = _default_ledger(ledger_db).lookup_shape(goal)
+                _cand_pref = _linfo.get("preferred_capability")
+                if _cand_pref and _cand_pref in self.capabilities:
+                    ledger_pref = str(_cand_pref)
+            except Exception:
+                ledger_pref = None
+
+            if ledger_pref:
+                fast_routing = {
+                    "confident": True,
+                    "best": {"id": ledger_pref, "rule": "UPSTREAM_ROUTING_LEDGER_PREFERRED"},
+                    "promoted_route": True,
+                }
+                fast_out = self._execute_capability(
+                    goal, ledger_pref, inputs, fast_routing, instance_id, context_paths
+                )
+                if fast_out.get("pass") is True:
+                    try:
+                        from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+
+                        _default_ledger(ledger_db).record_verified_route(goal, ledger_pref)
+                    except Exception:
+                        pass
+                    return fast_out
+                try:
+                    from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+
+                    _default_ledger(ledger_db).invalidate_preferred_capability(
+                        goal, ledger_pref, reason=str(fast_out.get("reason") or "CAPABILITY_DID_NOT_PASS")
+                    )
+                except Exception:
+                    pass
+
             routing = self.route(goal)
             if not routing["confident"]:
                 return self._failure(
@@ -977,9 +1015,17 @@ class UnifiedModel:
 
         if chosen.startswith("engine:") or chosen.startswith("meta:"):
             return self._dispatch_engine(goal, chosen, inputs, routing)
-        return self._execute_capability(
+        out = self._execute_capability(
             goal, chosen, inputs, routing, instance_id, context_paths
         )
+        if not capability_id and out.get("pass") is True:
+            try:
+                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+
+                _default_ledger(ledger_db).record_verified_route(goal, chosen)
+            except Exception:
+                pass
+        return out
 
     def act_or_learn(
         self,

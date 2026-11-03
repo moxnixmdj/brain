@@ -1,0 +1,393 @@
+{
+  "action_id": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+  "action_intent_id": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Replace PR #6597's tactical shortcuts with the unified 4-pillar optimal zero-LLM (`K3=0`, $0 spend) architecture without weakening any #6592 guard: (1) Enforce request-scoped `ContextVar` `memory_policy_v1` (`READ_WRITE`, `READ_ONLY`, `OFF`) directly at storage/cache chokepoints across `transfer_learning_v1`, `associative_memory_v1`, `flywheel_v1`, `ignorance_ledger_v1`, `causal_trace_to_skill_compiler_v1`, `verified_skill_crystallizer_v1`, `computer_env_v1`, `solve_v1`, `closed_loop_autonomous_controller_v1`, and `live_brain_route_admission_v1`; (2) Upgrade `tree_sitter_cst_skill_skeleton_v1` (`CALL1`, `minimize_cst_skeleton_pair`, paren-preserving `?exprK` holes, `suspect_lines`) and `verified_skill_crystallizer_v1` + `ConfinedLanguageTestOracle` for compound subexpression narrowing, fault-line candidate priority, and cross-language `TEST_SUITE` CST transfer (`Python -> JS/TS/Go/Rust`); (3) Introduce `brokered_workspace_execution_v1` composing `repair_candidate_broker_v1` + `zero_ambient_namespace_launcher_v1` (read-only `/input`, private tmpfs `/work`, bounded `PROJECT_BRAIN_BROKER_FD`, staged verification before race-checked atomic publish, `carrier_qualified=False`) and wire `Creature.confined_verified_perform` and `AwakeAgencyDaemon._run_py_test_file` onto it; (4) Route `AwakeAgencyDaemon.pulse()` genuinely through `Creature.author_board` + `Creature.step` so `mortality_and_triage_v1.choose_next` and `Standing.will_trade_on_the_unverifiable` causally govern execution.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/memory_policy_v1.py",
+      "canonical/runtime/brokered_workspace_execution_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/runtime/transfer_learning_v1.py",
+      "canonical/runtime/associative_memory_v1.py",
+      "canonical/runtime/flywheel_v1.py",
+      "canonical/runtime/ignorance_ledger_v1.py",
+      "canonical/runtime/computer_env_v1.py",
+      "canonical/runtime/solve_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/swe_kernel/skill_verification_contract_v1.py",
+      "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "canonical/tests/test_optimal_unified_creature_and_prc2_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Four residual architectural shortcuts remained on `23573bd8` after PR #6597: (1) `learn=False` was plumbed caller-by-caller instead of enforced at storage chokepoints, leaving hidden persistent writes on `transfer_learning_v1.drive(..., use_transfer=False)`, `associative_memory_v1.recall`, `flywheel_v1.status`, and `VerifiedSkillStore` hit counters; (2) `narrow_rule_at_apply_time` relied on lexical prefix/suffix stripping that failed on compound subexpressions (`(x + 1) <= (hi - 1)`, `int(x <= hi) + 1`), lacked `suspect_lines` fault-line priority, and blocked cross-language CST skeleton transfer under `TEST_SUITE`; (3) `Creature.confined_verified_perform` used live RW `confine_v1` + `solve_v1.act` mounts and `AwakeAgencyDaemon._run_py_test_file` ran unconfined host `subprocess.run` instead of staged read-only namespace + broker isolation; (4) `AwakeAgencyDaemon.pulse()` logged decorative post-hoc `Creature` accounting instead of authoring obligations onto `Creature._board` and routing execution through `Creature.step()`.",
+  "canonical_base_commit": "9738ac7600c0a2c0befa75b182e9341d129bf66f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Four residual architectural shortcuts remained on `23573bd8` after PR #6597: (1) `learn=False` was plumbed caller-by-caller instead of enforced at storage chokepoints, leaving hidden persistent writes on `transfer_learning_v1.drive(..., use_transfer=False)`, `associative_memory_v1.recall`, `flywheel_v1.status`, and `VerifiedSkillStore` hit counters; (2) `narrow_rule_at_apply_time` relied on lexical prefix/suffix stripping that failed on compound subexpressions (`(x + 1) <= (hi - 1)`, `int(x <= hi) + 1`), lacked `suspect_lines` fault-line priority, and blocked cross-language CST skeleton transfer under `TEST_SUITE`; (3) `Creature.confined_verified_perform` used live RW `confine_v1` + `solve_v1.act` mounts and `AwakeAgencyDaemon._run_py_test_file` ran unconfined host `subprocess.run` instead of staged read-only namespace + broker isolation; (4) `AwakeAgencyDaemon.pulse()` logged decorative post-hoc `Creature` accounting instead of authoring obligations onto `Creature._board` and routing execution through `Creature.step()`.",
+  "date": "2026-11-02",
+  "expected_parent_change": "canonical/runtime/{memory_policy_v1,brokered_workspace_execution_v1,creature_runtime_v1,transfer_learning_v1,associative_memory_v1,flywheel_v1,ignorance_ledger_v1,computer_env_v1,solve_v1,live_brain_route_admission_v1}.py + canonical/swe_kernel/{tree_sitter_cst_skill_skeleton_v1,verified_skill_crystallizer_v1,skill_verification_contract_v1,causal_trace_to_skill_compiler_v1,closed_loop_autonomous_controller_v1,autonomous_awake_loop_v1}.py + canonical/tests/test_optimal_unified_creature_and_prc2_v1.py + canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json.",
+  "expected_parent_frontier_change": "Storage-chokepoint `memory_policy_v1` guarantees 0 hidden disk/SQLite writes under `READ_ONLY` and 0 reads/writes under `OFF`; AST/CST subtree narrowing generalizes verified skills to compound subexpressions (`(x + 1) <= (hi - 1)`, `int(x <= hi) + 1`) and cross-language `TEST_SUITE` targets (`Python -> JS` via `ConfinedLanguageTestOracle`) with 1st-try `suspect_lines` priority; `brokered_workspace_execution_v1` isolates execution in read-only `/input` + tmpfs `/work` namespaces so failed or test-tampering candidates leave live workspaces 100% untouched; and `Creature.author_board` + `Creature.step` causally governs awake pulses via `Life` triage and `Standing` posture.",
+  "explicit_user_authorization": "Owner reviewed the Turn 27 architectural critique of PR #6597 and explicitly directed: 'Execute the optimal.'",
+  "falsification_condition": "FALSIFIED if any memory store writes bytes under `READ_ONLY`/`OFF`, if compound/cross-language `TEST_SUITE` narrowing leaks to `CALLER_PREDICATE` or fails negative controls, if a failed or test-tampering candidate mutates live `workspace_root` in `confined_verified_perform`, if `Life` scarcity or `CAUTIOUS` `Standing` fails to alter `Creature` action selection, or if any #6592 boundary suite regresses.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "4/13",
+    "interpretation": "REPLACES_PR6597_SHORTCUTS_WITH_CHOKEPOINT_MEMORY_POLICY_MINIMIZED_CST_CROSS_LANGUAGE_NARROWING_STAGED_NAMESPACE_BROKER_AND_CAUSAL_CREATURE_STEP_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.99,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "`pr_c2_apply_time_broadening_benchmark_v1.py`: 5/5 positive recall, 0/4 negative misapplications, 0 weak-verifier broadened proposals in ~703 ms; `test_optimal_unified_creature_and_prc2_v1.py` (7/7 pass in 7.1 s): compound `(x + 1) <= (hi - 1)` & `int(x <= hi) + 1` narrowing, Python->JS `node --test` confined `TEST_SUITE` CST transfer, `suspect_lines` 1st-call localization, 0-byte `READ_ONLY`/`OFF` storage chokepoints, non-destructive staged broker isolation (`live_workspace_untouched=True`), and `Life`/`Standing` behavioral counterfactuals; `swe_advanced_probe_v1.py`: 37/49 served; `BRAIN_UNIFIED_MODEL_V1.json`: 33/33 PASS.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "canonical/runtime/repair_candidate_broker_v1.py",
+    "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/skill_verification_contract_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/runtime/self_authored_obligations_v1.py",
+    "canonical/runtime/mortality_and_triage_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "9738ac7600c0a2c0befa75b182e9341d129bf66f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "CALLER_BY_CALLER_LEARN_BOOL_PLUMBING_AND_HIDDEN_READ_SIDE_DISK_WRITES",
+      "LEXICAL_ONLY_TOKEN_STRIPPING_ON_COMPOUND_SUBEXPRESSIONS",
+      "IN_PLACE_RW_BIND_MOUNT_MUTATION_IN_CONFINED_VERIFIED_PERFORM_AND_UNCONFINED_SANDBOX_PYTEST",
+      "DECORATIVE_POST_HOC_CREATURE_ACCOUNTING_IN_AWAKE_AGENCY_DAEMON_PULSE"
+    ],
+    "expected_parent_level_state_change": "Storage-chokepoint `memory_policy_v1` guarantees 0 hidden disk/SQLite writes under `READ_ONLY` and 0 reads/writes under `OFF`; AST/CST subtree narrowing generalizes verified skills to compound subexpressions (`(x + 1) <= (hi - 1)`, `int(x <= hi) + 1`) and cross-language `TEST_SUITE` targets (`Python -> JS` via `ConfinedLanguageTestOracle`) with 1st-try `suspect_lines` priority; `brokered_workspace_execution_v1` isolates execution in read-only `/input` + tmpfs `/work` namespaces so failed or test-tampering candidates leave live workspaces 100% untouched; and `Creature.author_board` + `Creature.step` causally governs awake pulses via `Life` triage and `Standing` posture.",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "COMPOSED_ZERO_AMBIENT_NAMESPACE_LAUNCHER_REPAIR_CANDIDATE_BROKER_TREE_SITTER_CST_SKELETON_AND_CREATURE_STEP_ORGANS",
+      "intrinsic_or_path_specific": "GENERAL__CHOKEPOINT_MEMORY_ISOLATION_SYNTAX_TREE_NARROWING_STAGED_CONFINEMENT_AND_CAUSAL_ORGANISM_UNIFICATION",
+      "surviving_causal_blocker": "HOSTILE_CODE_CARRIER_QUALIFICATION_AND_HUMAN_INDEPENDENT_VERIFICATION_REMAIN_GOVERNED_BY_PR6592_BOUNDARY"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_EXTERNAL_MODELS_ZERO_NEW_PACKAGES_COMPOSED_EXISTING_NAMESPACE_LAUNCHER_REPAIR_BROKER_TREE_SITTER_AND_CREATURE_ORGANS",
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+        "canonical/runtime/repair_candidate_broker_v1.py",
+        "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+        "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+        "canonical/runtime/creature_runtime_v1.py"
+      ],
+      "external_existing_routes_checked": "Linux user/mount/net/PID/IPC/UTS namespaces (`unshare`), `tree_sitter_language_pack`, Node.js `node:test`, and Python 3.11 `contextvars`.",
+      "surviving_gap": "SEPARATE_HOSTILE_CODE_CARRIER_CERTIFICATION_FOR_FRONT_DOOR_COMPUTER_DISCOVERY"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "CLAIMING_HOSTILE_CODE_CARRIER_CERTIFICATION_WITHOUT_INDEPENDENT_QUALIFICATION",
+        "MUTATING_LIVE_WORKSPACES_BEFORE_CHECKER_VERIFICATION",
+        "POST_HOC_CREATURE_ACCOUNTING_THAT_NEVER_ALTERS_ACTION_SELECTION"
+      ],
+      "real_outcome": "Chokepoint `MemoryPolicy`, AST/CST compound & cross-language `TEST_SUITE` narrowing, staged RO-input/tmpfs-work namespace broker execution (`carrier_qualified=False`), and genuine `Creature.step()` triage/posture causality.",
+      "surviving_necessity": "Preserve every PR #6592 boundary, broker, and route-memory contract (`carrier_qualified=False`, `weakens_existing_guard: false`)."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1_REPAIR_CANDIDATE_BROKER_V1_TREE_SITTER_CST_SKILL_SKELETON_V1_AND_CREATURE_RUNTIME_V1",
+      "downstream_work_to_delete_or_supersede": "IN_PLACE_CONFINE_V1_ACT_ADAPTER_AND_POST_HOC_CREATURE_SPEND_IN_AWAKE_PULSE",
+      "fresh_reuse_plan": "STAGE_CANDIDATES_THROUGH_REPAIR_CANDIDATE_BROKER_AND_ZERO_AMBIENT_NAMESPACE_LAUNCHER_MINIMIZE_CST_SUBTREES_AND_DRIVE_AWAKE_PULSES_VIA_CREATURE_STEP"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "IN_PROCESS_UID_GID_NAMESPACE_AVAILABILITY_CACHE_SUSPECT_LINE_ORDERING_AND_IN_MEMORY_TWIN_ORACLE_SHORTLISTING",
+      "search_stop_decision": "STOPPED_WHEN_ALL_4_PILLARS_PASSED_COUNTERFACTUAL_UNIT_SUITES_PRC2_BENCHMARK_SWE_ADVANCED_CENSUS_AND_UNIFIED_MODEL_VERIFICATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Caller-by-caller `learn` booleans leak writes on internal helpers; lexical stripping fails on nested AST operands; live RW bind-mounts corrupt workspaces on failed candidates; post-hoc `Creature` accounting fails `Life`/`Standing` counterfactuals.",
+      "routes_ranked": [
+        "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1__CHOSEN",
+        "KEEP_PR6597_LEXICAL_NARROWING_AND_IN_PLACE_CONFINE_SHORTCUTS",
+        "BROADEN_RULES_WITHOUT_SCOPED_TEST_SUITE_VERIFICATION"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "REAL_NAMESPACE_CONFINED_WORKERS_NODE_TEST_AND_PYTHON_PROJECT_TEST_ORACLES_BYTE_EXACT_STORAGE_CHECKS_AND_LIFE_STANDING_COUNTERFACTUALS"
+    },
+    "real_outcome": "0-byte `READ_ONLY`/`OFF` storage chokepoints, compound & cross-language `TEST_SUITE` CST narrowing with 1st-try fault-line priority, staged non-destructive namespace+broker execution, and causal `Creature.step()` triage/posture agency.",
+    "required_capability": "Storage-chokepoint ContextVar MemoryPolicy, minimized CST subtree & cross-language TEST_SUITE narrowing, staged zero-ambient namespace+broker execution, and unified Creature.step awake agency",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SIMPLE_IDENTIFIER_SHAPES_ONLY",
+            "CORRECTNESS": "IN_PLACE_WORKSPACE_MUTATION_ON_FAILED_CANDIDATES",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "HIDDEN_DISK_WRITES_IN_DRIVE_AND_RECALL",
+            "VERIFIABILITY": "POST_HOC_DECORATIVE_CREATURE_ACCOUNTING",
+            "WALL_CLOCK": "REPEATED_SUBPROCESS_PROBES"
+          },
+          "evidence": [
+            "Measured on `23573bd8`: `tl.drive(..., use_transfer=False)` wrote 642 bytes; `narrow_rule_at_apply_time` returned `None` on `return (x + 1) <= (hi - 1)`; `confined_verified_perform` mutated live files before `checker`."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_optimal_unified_creature_and_prc2_v1.py` counterfactuals"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_PR6597_TACTICAL_SHORTCUTS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "COMPOUND_AND_CROSS_LANGUAGE_TEST_SUITE_TRANSFER",
+            "CORRECTNESS": "STAGED_NON_DESTRUCTIVE_BROKER_AND_0_GUARD_WEAKENING",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_EXTERNAL_MODELS",
+            "RELIABILITY": "CHOKEPOINT_MEMORY_POLICY_AND_CAUSAL_CREATURE_STEP",
+            "VERIFIABILITY": "REAL_PROJECT_TEST_ORACLE_CONFINE_NODE_TEST_AND_COUNTERFACTUALS",
+            "WALL_CLOCK": "703MS_PRC2_BENCHMARK_1ST_CALL_SUSPECT_LINE_HIT"
+          },
+          "evidence": [
+            "Measured: 7/7 counterfactual suites pass in 7.1 s, 5/5 PR-C2 recall with 0/4 misapplications, 37/49 `swe_advanced_probe_v1`, 33/33 `verify_brain_unified_model_v1`."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_optimal_unified_creature_and_prc2_v1.py` and `pr_c2_apply_time_broadening_benchmark_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-02T18:07:00Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "PR6597_CALLER_FLAG_MEMORY_LEXICAL_NARROWING_IN_PLACE_CONFINE_AND_POST_HOC_CREATURE_SPEND",
+      "max_age_hours": 24,
+      "negative_search_summary": "In-tree `zero_ambient_namespace_launcher_v1`, `repair_candidate_broker_v1`, `tree_sitter_cst_skill_skeleton_v1`, `ProjectTestOracle`, and `creature_runtime_v1` compose directly with zero external LLM calls.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "tree-sitter CST minimal diff subtree anti-unification with expression holes"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "read-only input bind mount tmpfs scratch bounded socketpair effect broker"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "ContextVar storage chokepoint READ_WRITE READ_ONLY OFF memory isolation"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "autonomous organism obligation board mortality triage standing posture selection"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-02T18:07:00Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux user/mount/net/PID namespaces + Python 3.11 + Node 22 + tree_sitter_language_pack",
+            "evidence": [
+              "DIRECT_PROBE: `test_zero_ambient_namespace_launcher_v1` (5/5) and `test_optimal_unified_creature_and_prc2_v1` (7/7) pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "zero_ambient_namespace_launcher_v1.py, repair_candidate_broker_v1.py, tree_sitter_cst_skill_skeleton_v1.py, and creature_runtime_v1.py",
+          "REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md and OPTIMAL_PLAN_20261102_V6.md"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Hierarchical AST/CST anti-unification (Getafix / OOPSLA 2019) and capability-safe staged effect brokers"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "tree-sitter-language-pack CST cursors and Node.js `node:test` test runner"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux `namespaces(7)` / `unshare(1)` and Python 3.11 `contextvars` documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_PR6597_TACTICAL_SHORTCUTS",
+      "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1"
+    ],
+    "selected_route": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+    "selected_surviving_route": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+    "stop_condition": "STOP when all 4 pillars pass counterfactual unit verification, PR-C2 hits 5/5 with 0/4 negative controls, SWE advanced census >= 37/49, unified model passes 33/33, and all governance/referee checks are green.",
+    "why_selected_route_is_fastest_sufficient": "Composes existing repository organs (`zero_ambient_namespace_launcher_v1`, `repair_candidate_broker_v1`, `tree_sitter_cst_skill_skeleton_v1`, `Creature`) for sub-second verification with zero guard weakening."
+  },
+  "route_id": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1",
+  "stop_condition": "STOP when all 4 pillars pass counterfactual unit verification, PR-C2 hits 5/5 with 0/4 negative controls, SWE advanced census >= 37/49, unified model passes 33/33, and all governance/referee checks are green.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-02T18:07:00Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_RUNTIME_ISOLATION_CST_GENERALIZATION_AND_ORGANISM_COHESION_WITH_ZERO_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "1dfeba04d000251deea9fde8c09e26311eb6f956",
+          "path": "canonical/runtime/memory_policy_v1.py"
+        },
+        {
+          "git_blob_sha": "7d354e59c827132876d751d9a9a40f388499d3d2",
+          "path": "canonical/runtime/brokered_workspace_execution_v1.py"
+        },
+        {
+          "git_blob_sha": "02471b39c0cd026ed705b30f073c2555b6278482",
+          "path": "canonical/runtime/creature_runtime_v1.py"
+        },
+        {
+          "git_blob_sha": "edfc9eb4a1285661e892b5f28c83a5f583db1458",
+          "path": "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py"
+        },
+        {
+          "git_blob_sha": "2cdc8bcb6635d75d13ddd9110fb372426f76910c",
+          "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+        },
+        {
+          "git_blob_sha": "3531d9c093b895e7c0dd1558c2bcb760627fa74c",
+          "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py"
+        }
+      ],
+      "decisive_question": "DO_STORAGE_CHOKEPOINT_MEMORY_POLICY_MINIMIZED_CST_NARROWING_STAGED_NAMESPACE_BROKER_AND_CAUSAL_CREATURE_STEP_ELIMINATE_ALL_FOUR_PR6597_DEFECTS_WITHOUT_WEAKENING_ANY_PR6592_GUARD",
+      "falsifier_id": "RUN_OPTIMAL_UNIFIED_CREATURE_COUNTERFACTUALS_PRC2_BENCHMARK_PR6592_BOUNDARY_SUITES_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "CARRIER_QUALIFIED_REMAINS_FALSE_CALLER_PREDICATE_BROADENING_IS_DENIED_STAGED_WORK_NEVER_TOUCHES_LIVE_SOURCE_ON_FAILURE_AND_ALL_BOUNDARY_SUITES_PASS",
+      "proposal_id": "OPTIMAL_ARCHITECTURE_MEMORY_CST_BROKER_CREATURE_20261102_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. `brokered_workspace_execution_v1` explicitly sets `carrier_qualified=False` and enforces read-only `/input`, tmpfs `/work`, and `repair_candidate_broker_v1` scope checks before atomic publish; `VerifiedSkillStore` requires `TEST_SUITE` (`ProjectTestOracle` / `ConfinedLanguageTestOracle`) + `applicable(contract, scope_id, context)` for all broadened/cross-language `TEST_SUITE` recall; and `memory_policy_v1` tightens cold/ablation isolation at storage chokepoints."
+}

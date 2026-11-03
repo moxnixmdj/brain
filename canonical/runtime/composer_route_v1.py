@@ -21,6 +21,7 @@ A reachable chain is not evidence that the requested result was produced.
 
 from __future__ import annotations
 
+import contextvars
 import fnmatch
 import os
 import pathlib
@@ -2153,7 +2154,54 @@ _PROVENANCE_RE = re.compile(
     r"|\bcommit\s+(?:that|which)\b|\bhistory\s+of\b", re.IGNORECASE)
 
 
-_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+_DEFAULT_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+_ACTIVE_REPO_ROOT: contextvars.ContextVar[pathlib.Path] = contextvars.ContextVar(
+    "composer_route_repo_root",
+    default=_DEFAULT_REPO_ROOT,
+)
+
+
+class _ContextRepoRoot(os.PathLike[str]):
+    """Thread-safe ContextVar-scoped workspace root proxy."""
+
+    @property
+    def __class__(self):  # type: ignore[override]
+        return type(_ACTIVE_REPO_ROOT.get())
+
+    def _p(self) -> pathlib.Path:
+        return _ACTIVE_REPO_ROOT.get()
+
+    def __fspath__(self) -> str:
+        return os.fspath(self._p())
+
+    def __str__(self) -> str:
+        return str(self._p())
+
+    def __repr__(self) -> str:
+        return repr(self._p())
+
+    def __truediv__(self, other: Any) -> pathlib.Path:
+        return self._p() / other
+
+    def __rtruediv__(self, other: Any) -> pathlib.Path:
+        return pathlib.Path(other) / self._p()
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, (os.PathLike, str)):
+            return self._p() == pathlib.Path(other)
+        return False
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
+
+    def __hash__(self) -> int:
+        return hash(self._p())
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._p(), name)
+
+
+_REPO_ROOT: Any = _ContextRepoRoot()
 _GIT_READ = re.compile(
     r"\bgit\b|\bcommit(?:s|ted|ting)?\b|\bcommits\b|\buncommitted\b|\bworking tree\b",
     re.I)

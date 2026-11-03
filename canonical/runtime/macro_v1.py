@@ -111,7 +111,9 @@ def signature(clauses) -> str:
 
 def lookup(clauses):
     """A remembered plan for this shape of job, or None."""
-    if not clauses or len(clauses) < 2:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory() or not clauses or len(clauses) < 2:
         return None
     key = signature(clauses)
     got = (_load().get("macros") or {}).get(key)
@@ -125,6 +127,10 @@ def lookup(clauses):
 
 def record(clauses, steps) -> bool:
     """Remember a plan that finished. Only finished plans are worth keeping."""
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return False
     if not clauses or len(clauses) < 2 or not steps:
         return False
     if len(steps) != len(clauses) or not all(s.get("verified") for s in steps):
@@ -172,6 +178,10 @@ def note_failure(key: str) -> bool:
     """
     if not key:
         return False
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return False
     data = _load()
     macros = data.get("macros") or {}
     entry = macros.get(key)
@@ -188,6 +198,10 @@ def note_failure(key: str) -> bool:
 
 def forget(key: str) -> bool:
     """Drop a plan unconditionally. For an operator, not for a run."""
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return False
     data = _load()
     if key in (data.get("macros") or {}):
         data["macros"].pop(key, None)
@@ -197,6 +211,10 @@ def forget(key: str) -> bool:
 
 
 def stats() -> dict:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return {"schema": SCHEMA, "macros": 0, "total_successes": 0}
     data = _load()
     macros = data.get("macros") or {}
     return {"schema": SCHEMA, "macros": len(macros),

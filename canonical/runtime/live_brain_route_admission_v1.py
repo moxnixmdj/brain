@@ -62,6 +62,7 @@ from __future__ import annotations
 
 import ast
 import contextlib
+import contextvars
 import hashlib
 import json
 import os
@@ -94,31 +95,76 @@ from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import
 # Pinned repository code root (where Brain's trusted bound capability adapters live),
 # never overridden when `solve()` scopes `ROOT` to an external `workspace_root`.
 _BRAIN_CODE_ROOT = pathlib.Path(ROOT).resolve()
+_ACTIVE_WORKSPACE_ROOT: contextvars.ContextVar[pathlib.Path] = contextvars.ContextVar(
+    "live_brain_route_workspace_root",
+    default=_BRAIN_CODE_ROOT,
+)
 _ADAPTER_MODULE_CACHE: dict[tuple[str, int, int], Any] = {}
+
+
+class _ContextWorkspaceRoot(os.PathLike[str]):
+    """Thread-safe ContextVar-scoped workspace root proxy (no module-global mutation)."""
+
+    @property
+    def __class__(self):  # type: ignore[override]
+        return type(_ACTIVE_WORKSPACE_ROOT.get())
+
+    def _p(self) -> pathlib.Path:
+        return _ACTIVE_WORKSPACE_ROOT.get()
+
+    def __fspath__(self) -> str:
+        return os.fspath(self._p())
+
+    def __str__(self) -> str:
+        return str(self._p())
+
+    def __repr__(self) -> str:
+        return repr(self._p())
+
+    def __truediv__(self, other: Any) -> pathlib.Path:
+        return self._p() / other
+
+    def __rtruediv__(self, other: Any) -> pathlib.Path:
+        return pathlib.Path(other) / self._p()
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, (os.PathLike, str)):
+            return self._p() == pathlib.Path(other)
+        return False
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
+
+    def __hash__(self) -> int:
+        return hash(self._p())
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._p(), name)
+
+
+ROOT: Any = _ContextWorkspaceRoot()
 
 
 @contextlib.contextmanager
 def _with_workspace_root(workspace_root: Any):
-    """Temporarily bind target workspace `ROOT` while keeping trusted code on `_BRAIN_CODE_ROOT`."""
-    global ROOT
+    """Temporarily bind target workspace `ROOT` via ContextVar while keeping `_BRAIN_CODE_ROOT` fixed."""
+    current = _ACTIVE_WORKSPACE_ROOT.get()
     if not workspace_root:
-        yield ROOT
+        yield current
         return
     resolved_ws = pathlib.Path(workspace_root).resolve()
-    if resolved_ws == pathlib.Path(ROOT).resolve():
-        yield ROOT
+    if resolved_ws == current:
+        yield current
         return
-    prev_root = ROOT
-    prev_cr_root = getattr(composer_route, "_REPO_ROOT", None)
-    ROOT = resolved_ws
-    if prev_cr_root is not None:
-        composer_route._REPO_ROOT = resolved_ws
+    ws_tok = _ACTIVE_WORKSPACE_ROOT.set(resolved_ws)
+    cr_var = getattr(composer_route, "_ACTIVE_REPO_ROOT", None)
+    cr_tok = cr_var.set(resolved_ws) if cr_var is not None else None
     try:
         yield resolved_ws
     finally:
-        ROOT = prev_root
-        if prev_cr_root is not None:
-            composer_route._REPO_ROOT = prev_cr_root
+        _ACTIVE_WORKSPACE_ROOT.reset(ws_tok)
+        if cr_var is not None and cr_tok is not None:
+            cr_var.reset(cr_tok)
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -4982,21 +5028,51 @@ def _serve_by_acting(request: Mapping[str, Any]) -> dict[str, Any] | None:
 
 
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """Public entry with an optional, narrowly scoped route-memory control.
+    """Public entry with optional narrowly scoped `route_memory_mode` and full `memory_policy` control.
 
-    Exclusion affects only this door's associative recall/credit and compiled
-    workflow fallback. It does not disable calibration, adapters or other stores.
+    `route_memory_mode` ('use'|'exclude') affects only this door's associative recall/credit
+    and compiled workflow fallback.
+    `memory_policy` ('READ_WRITE'|'READ_ONLY'|'OFF') enforces request-scoped storage
+    isolation across all downstream memory/cache chokepoints via `memory_policy_v1`.
     """
-    if isinstance(request, Mapping) and "route_memory_mode" in request:
-        mode = request["route_memory_mode"]
-        if mode not in ("use", "exclude"):
-            return _fail(str(request.get("task_id") or ""), "FAIL_CLOSED__ROUTE_MEMORY_MODE_INVALID",
-                         "ROUTE_MEMORY_MODE_INVALID", perf_counter_ns(), executed=False)
+    from canonical.runtime.memory_policy_v1 import (
+        MemoryPolicyError,
+        effective_memory_mode,
+        memory_policy_scope,
+        validate_memory_mode,
+    )
+
+    mp_raw = request.get("memory_policy") if isinstance(request, Mapping) else None
+    if mp_raw is not None:
+        try:
+            mp_mode = validate_memory_mode(mp_raw)
+        except MemoryPolicyError:
+            return _fail(
+                str(request.get("task_id") or ""),
+                "FAIL_CLOSED__MEMORY_POLICY_INVALID",
+                "MEMORY_POLICY_INVALID",
+                perf_counter_ns(),
+                executed=False,
+            )
+    else:
+        mp_mode = None
+
+    with (memory_policy_scope(mp_mode) if mp_mode is not None else contextlib.nullcontext()):
+        if isinstance(request, Mapping) and "route_memory_mode" in request:
+            mode = request["route_memory_mode"]
+            if mode not in ("use", "exclude"):
+                return _fail(str(request.get("task_id") or ""), "FAIL_CLOSED__ROUTE_MEMORY_MODE_INVALID",
+                             "ROUTE_MEMORY_MODE_INVALID", perf_counter_ns(), executed=False)
+            result = _solve_public(request)
+            result["route_memory_policy"] = ("EXCLUDED_ROUTE_RECALL_ONLY" if mode == "exclude"
+                                             else "DEFAULT_ROUTE_RECALL")
+            if mp_mode is not None:
+                result["effective_memory_policy"] = effective_memory_mode()
+            return result
         result = _solve_public(request)
-        result["route_memory_policy"] = ("EXCLUDED_ROUTE_RECALL_ONLY" if mode == "exclude"
-                                         else "DEFAULT_ROUTE_RECALL")
+        if mp_mode is not None:
+            result["effective_memory_policy"] = effective_memory_mode()
         return result
-    return _solve_public(request)
 
 
 def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
@@ -6159,8 +6235,15 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             )
             from canonical.swe_kernel.goal_dag_executor_v1 import execute_transactional_goal_dag
 
+            from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
+
+            _exclude_mem = request.get("route_memory_mode") == "exclude"
             _macro_state = request.get("_macro_state_path") if isinstance(request, Mapping) else None
-            _macro_hit = lookup_verified_chain_macro(_clauses, state_path=_macro_state)
+            _macro_hit = (
+                None
+                if (_exclude_mem or not can_read_memory())
+                else lookup_verified_chain_macro(_clauses, state_path=_macro_state)
+            )
             _macro_plan = list((_macro_hit or {}).get("plan") or [])
 
             _snap_rels: list[str] = []
@@ -6192,7 +6275,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             )
             _receipts = list(_dag.get("stage_receipts") or [])
             if _dag.get("ok") is not True:
-                if _macro_hit is not None and _macro_hit.get("key"):
+                if not _exclude_mem and _macro_hit is not None and _macro_hit.get("key"):
                     try:
                         from canonical.runtime import macro_v1 as _m_mod
 
@@ -6223,10 +6306,14 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     ],
                 )
             _cids = [str(r["capability_id"]) for r in _receipts if r.get("capability_id")]
-            _macro_saved = record_verified_chain_macro(
-                _clauses,
-                [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in _receipts],
-                state_path=_macro_state,
+            _macro_saved = (
+                False
+                if (_exclude_mem or not can_write_memory())
+                else record_verified_chain_macro(
+                    _clauses,
+                    [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in _receipts],
+                    state_path=_macro_state,
+                )
             )
             _merged_exec = [item for r in _receipts for item in (r.get("execution") or [])]
             _answers = [r["answer"] for r in _receipts if r.get("answer") is not None]
@@ -6325,19 +6412,21 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     # task evidence across calls. Correct a contradicted SWE effect BEFORE a
     # measurement-only/wrong-domain tool is allowed to execute.
     _ledger_db = (request or {}).get("_routing_ledger_db") if isinstance(request, Mapping) else None
+    _exclude_route_mem = isinstance(request, Mapping) and request.get("route_memory_mode") == "exclude"
     if not (request or {}).get("_typed_swe_plan") and goal:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
         prose = front.prose_only(goal)
         if _typed_plan.is_swe_request(prose):
             _ledger_disq: list[str] = []
             _ledger_pref: str | None = None
-            try:
-                from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
-                _linfo = _default_ledger(_ledger_db).lookup_shape(goal)
-                _ledger_disq = list(_linfo.get("disqualified") or [])
-                _ledger_pref = _linfo.get("preferred_capability")
-            except Exception:
-                pass
+            if not _exclude_route_mem:
+                try:
+                    from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
+                    _linfo = _default_ledger(_ledger_db).lookup_shape(goal)
+                    _ledger_disq = list(_linfo.get("disqualified") or [])
+                    _ledger_pref = _linfo.get("preferred_capability")
+                except Exception:
+                    pass
             if _ledger_disq and _ledger_pref and "contract_checks" not in request:
                 try:
                     _fast_plan = _typed_plan.build_plan(goal, ROOT)
@@ -6447,7 +6536,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         result["typed_swe_selection"] = early_selection
         _prim_c = str(early_selection.get("primary_capability") or "")
         _sel_c = str(early_selection.get("selected_capability") or "")
-        if result.get("pass") is True and _prim_c and _sel_c and _prim_c != _sel_c:
+        if not _exclude_route_mem and result.get("pass") is True and _prim_c and _sel_c and _prim_c != _sel_c:
             try:
                 from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
                 _default_ledger(_ledger_db).record_refusal(
@@ -6478,7 +6567,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         if retry.get("pass") is True or retry.get("executed") is True or retry.get("refusal_payload") or retry.get("reviewed") or (_capability_id_of(retry) and _capability_id_of(retry) != _capability_id_of(result)):
             _prim_c = _capability_id_of(result)
             _win_c = str(plan[2].get("selected_capability") or _capability_id_of(retry) or "")
-            if retry.get("pass") is True and not result.get("executed") and _prim_c and _win_c and _prim_c != _win_c:
+            if not _exclude_route_mem and retry.get("pass") is True and not result.get("executed") and _prim_c and _win_c and _prim_c != _win_c:
                 try:
                     from canonical.swe_kernel.upstream_routing_ledger_v1 import default_ledger as _default_ledger
                     _default_ledger(_ledger_db).record_refusal(
@@ -6533,15 +6622,16 @@ def awake_pulse(
     max_curriculum_lessons: int = 2,
     channels: Sequence[str] | None = None,
 ) -> dict[str, Any]:
-    """Execute one zero-LLM (`K3 = 0`) continuous awake agency pulse on `workspace_root`."""
-    from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+    """Execute one zero-LLM (`K3 = 0`) continuous awake pulse through the single `Creature` organism."""
+    from canonical.runtime.creature_runtime_v1 import run_awake_creature_pulse
 
-    daemon = AwakeAgencyDaemon(
+    return run_awake_creature_pulse(
         workspace_root or ROOT,
         ledger_path=ledger_path,
         skill_store_path=skill_store_path,
         workflow_db_path=workflow_db_path,
         apply_verified_repairs=apply_verified_repairs,
+        max_curriculum_lessons=max_curriculum_lessons,
+        channels=channels,
     )
-    return daemon.pulse(max_curriculum_lessons=max_curriculum_lessons, channels=channels)
 

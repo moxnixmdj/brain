@@ -298,8 +298,31 @@ def _stage_or_crystallize_paired_skill(
 
 def solve(goal: str, root: str, model=None, steps: int = 6,
           timeout: int = 120, *,
+          learn: bool = True,
           skill_db: str | Path | None = None,
           staging_path: str | Path | None = None) -> dict:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _solve_impl(
+            goal,
+            root,
+            model=model,
+            steps=steps,
+            timeout=timeout,
+            learn=bool(learn and can_read_memory()),
+            skill_db=skill_db,
+            staging_path=staging_path,
+        )
+
+
+def _solve_impl(goal: str, root: str, model=None, steps: int = 6,
+                timeout: int = 120, *,
+                learn: bool = True,
+                skill_db: str | Path | None = None,
+                staging_path: str | Path | None = None) -> dict:
     """Plain goal in, work out.
 
     `model(goal, seeing)` returns a program, or None when it judges the
@@ -308,6 +331,8 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
     carries the program's own account of itself -- a program is the worst
     possible narrator of what it did.
     """
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
     if not Path(root).is_dir():
         return {"schema": SCHEMA, "verdict": BOUNDED, "goal": goal,
                 "steps": 0, "trace": [], "detail": f"{root!r} is not a directory"}
@@ -315,7 +340,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
     # Step 0 (<5 ms, K3 = 0): if paired verified runs have already crystallized
     # an ownership-qualified workflow skill for this structural goal, execute it
     # confined and verify real kernel state diff without requiring any model.
-    if goal and str(goal).strip():
+    if learn and goal and str(goal).strip():
         try:
             from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
                 recall_and_execute_workflow,
@@ -392,14 +417,15 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
     # and the measured benefit is exactly zero.
     learned_for_next = None
     primed_cells: list[str] = []
-    try:
-        import flywheel_v1 as F
-        primed = F.primers()
-        if primed:
-            learned_for_next = {"primers": primed}
-            primed_cells = [p["cell"] for p in primed]
-    except Exception:
-        pass
+    if learn:
+        try:
+            import flywheel_v1 as F
+            primed = F.primers()
+            if primed:
+                learned_for_next = {"primers": primed}
+                primed_cells = [p["cell"] for p in primed]
+        except Exception:
+            pass
 
     for step in range(1, steps + 1):
         seeing = {
@@ -456,7 +482,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
         # what the task was.
         learned_for_next = None
         failed_now = (result["exit"] not in (0, None)) or result["timed_out"]
-        if failed_now:
+        if learn and failed_now:
             try:
                 import flywheel_v1 as F
                 where, why = F.classify(result["err"] or result["out"] or "")
@@ -466,7 +492,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
                 trace[-1]["pathology"] = cell
             except Exception:
                 pass
-        elif primed_cells:
+        elif learn and primed_cells:
             # EVIDENCE FOR THE PRIMER.
             #
             # Before this, the store only ever heard about failures. A
@@ -491,7 +517,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
             except Exception:
                 pass
             primed_cells = []
-        elif pending:
+        elif learn and pending:
             # THE FIX IS THE LESSON.
             #
             # Credit was being granted to cells whose procedure was
@@ -516,7 +542,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
 
     # The flywheel turns here: every pathology met on the way is scored
     # by whether the run recovered from it.
-    if hit:
+    if learn and hit:
         try:
             import flywheel_v1 as F
             recovered = (verdict == DONE)
@@ -527,7 +553,7 @@ def solve(goal: str, root: str, model=None, steps: int = 6,
 
     net_changed = observe(root, before=initial_files)["changed"]
     crystallization = None
-    if verdict == DONE and net_changed:
+    if learn and verdict == DONE and net_changed:
         ok_progs = [
             prog
             for prog, res in executed_programs

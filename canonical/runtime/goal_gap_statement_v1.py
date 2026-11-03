@@ -30,12 +30,35 @@ WHAT THIS MODULE DOES NOT DO, stated so it is not over-read:
   the data -- is not implemented here and is not claimed.
 * It does not add a capability, register a row, flip a family, or move any count.
 * It does not infer a slot value. If the door could not fill a slot, this module
-  reports that it could not; it never guesses, because a guessed slot is exactly
-  the silent mis-selection this exists to replace.
-* It does not make selection fail loudly. Under-specified goals that COMPILE onto
-  the wrong row (measured: 3 of 12) still compile, and this module reports
-  `outcome='COMPILED'` for them without endorsing the choice. Closing that is a
-  separate change in the door and is deliberately not attempted here.
+  reports that it could not; it never guesses. A guessed slot would be indistinguishable
+  from a stated one to everything downstream.
+* It does not make selection fail loudly, and it no longer tries to say which
+  selections are unforced. A rule that did was merged on 2026-11-02 and retracted
+  the same day; see the block above `outcome='COMPILED'` for the measurement that
+  retracted it.
+* CORRECTION to a claim this docstring carried on the day it was merged. It said
+  under-specified goals "COMPILE onto the wrong row (measured: 3 of 12)". That was
+  true of the COMPILER ALONE and not of the door. `compile_against_live_registry` is
+  the first of two stages; the door then runs
+  `live_brain_route_admission_v1.route_admission`. Re-measured over the same goals at
+  the full pipeline, 2 of those 3 are REFUSED by admission, and the third -- "Query
+  the data file and write the result out", bound to a cross-file repair writer -- is a
+  goal that asks to write something out, so a writer is not clearly the wrong answer.
+  Admission also refuses 3 of the 4 goals this module called correct, because it
+  checks grounding in real paths rather than semantic fit, so it is not a correctness
+  oracle either. The "3 of 12" figure was an artifact of stopping at stage one, and
+  its labels were author judgment in any case.
+  What survives is narrower and better evidenced: the tree ALREADY owns a sound,
+  declaration-based contradiction check --
+  `STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER`, which reads
+  `capability_edits_source` off the registry row instead of guessing from keywords --
+  and admission fail-closes an under-specified goal on
+  `R9_REQUIRED_FILE_INPUT_UNBOUND`. This module consumes the compiler's missing-slot
+  report. It does not police selection, and the case for it doing so is weaker than
+  this file originally claimed.
+* It does not vouch for any selection. `selection_endorsed` is False on every path,
+  including a clean compile. That part is sound and does not depend on any rule
+  about lexical overlap, so it survived the retraction.
 
 One defect is reported rather than papered over: a goal for which the compiler
 finds no candidate at all raises with `detail=None`. An empty detail leaves a
@@ -55,9 +78,11 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 _MODEL_PATH = ROOT / "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
 
 # Outcome vocabulary. Each is a distinct state of the world, not a severity rank.
+# "LOW_CONFIDENCE_SELECTION" was here for one day and is deliberately absent. It
+# was retracted as unsound, not renamed: the measurement is recorded below and a
+# regression test pins the counterexample that refuted it.
 OUTCOMES = (
     "COMPILED",                  # the door bound the goal to a row; nothing is missing
-    "LOW_CONFIDENCE_SELECTION",  # the door bound the goal to a row the goal did not ask for
     "SLOT_UNSTATED",             # a row was identified and a named slot could not be filled
     "NO_CANDIDATE_REPORTED",     # the door failed closed and reported no detail at all
     "UNPARSEABLE_REPORT",        # the door reported something this module cannot parse
@@ -202,32 +227,58 @@ def state_the_gap(goal: str, root: pathlib.Path | str | None = None) -> dict[str
         result["statement"] = "The goal compiled but named no capability."
         return result
 
-    # UNFORCED SELECTION. Structural, not a tuned cutoff: the selected row declares
-    # requirements and the goal matched NONE of them, so nothing in the goal asked
-    # for this capability. Measured 2026-11-02 on 7 compiled under-specified goals
-    # (n=7, and the intended row is my judgment, not ground truth the tree
-    # declares): all 3 that selected a wrong row had matched_requires empty and
-    # coverage 0.17-0.25, while all 4 that selected the intended row had
-    # matched_requires non-empty and coverage 0.50-1.00. Score separated the same
-    # way (11-13 wrong vs 24-36 right) but is reported as evidence, not used as a
-    # threshold, because a numeric cutoff fitted to 7 points would be overfitting.
-    # Rows that declare NO requirements are exempt: "matched none of nothing"
-    # carries no information.
-    if declared.get("requires") and not matched_requires:
-        result["outcome"] = "LOW_CONFIDENCE_SELECTION"
-        result["statement"] = (
-            f"This compiled onto '{selected}', but the goal was not what asked for it: "
-            f"'{selected}' declares it requires {declared['requires']}, and the goal matched "
-            f"none of that. Only {len(matched_provides)} of {len(goal_tokens)} goal tokens "
-            f"({', '.join(matched_provides) or 'none'}) matched anything it provides, at score "
-            f"{(compiled or {}).get('score')}. The choice was not forced by the goal, so acting "
-            f"on it would be acting on a guess -- state the target and the operation explicitly."
-        )
-        return result
-
+    # NO VERDICT IS DRAWN FROM LEXICAL OVERLAP. A rule that drew one was merged here
+    # on 2026-11-02 and retracted the same day. The measurement that retracted it is
+    # recorded in full so the rule is not reintroduced on the strength of the same
+    # seven points that produced it the first time.
+    #
+    # THE RULE WAS: the selected row declares `requires` and the goal matched none of
+    # them, so nothing in the goal asked for this capability. It looked structural
+    # rather than tuned, because on 7 compiled under-specified goals it separated
+    # perfectly -- all 3 wrong selections had matched_requires empty and coverage
+    # 0.17-0.25, all 4 intended ones had it non-empty and coverage 0.50-1.00.
+    #
+    # IT WAS MEASURING VOCABULARY COINCIDENCE. Across all 149 bound rows, 182 of 182
+    # `requires` tokens (100%) are dotted world-precondition identifiers --
+    # python.source.file.available, image.file.available, json.file.available,
+    # structured.json.available -- not input slots (those are `input_names`:
+    # output_path, source_root, json_path, timeout_s) and not words a sentence
+    # contains. So matched_requires is non-empty only when the goal happens to share
+    # a sub-token with a precondition name. "Create the archive from the manifest"
+    # matched `manifest.json.available` on the single word "manifest". The n=7
+    # separation was that accident of vocabulary, not evidence of forcedness.
+    #
+    # THE COUNTEREXAMPLE THAT DECIDED IT: "Create a DOCX document report." selects
+    # docx.document.create_from_json_record at score 37 -- above every one of the 4
+    # correct n=7 cases -- with matched_provides ['create', 'document', 'docx'], 3 of
+    # 4 goal tokens, and matched_requires empty only because that row's precondition
+    # is `structured.json.available`. The rule called an obviously correct, strongly
+    # matched selection a guess and told the reader not to act on it.
+    #
+    # Widened from n=7 to the repo's own corpus (323 goals drawn from the
+    # LIVE_SOLVER_END_TO_END_MEASUREMENT receipts and the compiler's test files), the
+    # rule would newly refuse 26 of the 149 goals that compile today, that one among
+    # them. Cross-referenced against the receipts' own independent oracle, no goal
+    # was attested REACHED_AND_BOUND onto the capability the rule would refuse, so the
+    # damage is false accusation rather than lost work -- but a report that calls
+    # correct selections guesses is worse than no report, because it trains whoever
+    # reads it to discount the cases that are real.
+    #
+    # WHY THERE IS NO REPLACEMENT RULE. Telling "Query the data file and write the
+    # result out" bound to a cross-file repair WRITER apart from "Create a DOCX
+    # document report" bound to a DOCX creator is a semantic question about what the
+    # sentence asks for and what the capability does. No deterministic function of
+    # score, matched_provides or matched_requires answers it -- the two cases overlap
+    # on every one of those fields. Answering it would mean putting model cognition in
+    # the producer path, which
+    # GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4 forbids outright.
+    # So the evidence is reported and the judgment is withheld.
     result["outcome"] = "COMPILED"
     result["statement"] = (
-        f"The goal compiled onto '{selected}' and nothing was reported missing."
+        f"The goal compiled onto '{selected}' and nothing was reported missing. This module "
+        f"does not vouch for that choice -- selection_endorsed is False, and the lexical "
+        f"evidence is reported alongside it uninterpreted, because no sound rule reads a "
+        f"verdict off those fields."
     )
     return result
 
@@ -235,17 +286,16 @@ def state_the_gap(goal: str, root: pathlib.Path | str | None = None) -> dict[str
 def state_the_gaps(goals: Mapping[str, str] | list[str]) -> list[dict[str, Any]]:
     """`state_the_gap` over several goals, ranked so the actionable ones come first.
 
-    Ranking is by what it costs to ignore the statement. A selection the goal did
-    not force comes first because acting on it does the wrong thing; a named
-    missing slot comes next because it merely stops; an empty report comes last
-    because nothing can be acted on until the report itself is fixed.
+    Ranking is by whether anything can be acted on. A named missing slot comes
+    first because it says exactly what to supply; a clean compile comes next; an
+    empty report comes last because nothing can be acted on until the report itself
+    is fixed. No ranking here expresses confidence in a selection -- see the
+    retracted rule above.
     """
     items = list(goals.values() if isinstance(goals, Mapping) else goals)
     rows = [state_the_gap(g) for g in items]
-    # A wrong action ranks above a missing one: LOW_CONFIDENCE_SELECTION will
-    # proceed and do the wrong thing, whereas SLOT_UNSTATED merely stops.
-    order = {"LOW_CONFIDENCE_SELECTION": 0, "SLOT_UNSTATED": 1, "COMPILED": 2,
-             "UNPARSEABLE_REPORT": 3, "NO_CANDIDATE_REPORTED": 4, "COMPILER_RAISED": 5}
+    order = {"SLOT_UNSTATED": 0, "COMPILED": 1, "UNPARSEABLE_REPORT": 2,
+             "NO_CANDIDATE_REPORTED": 3, "COMPILER_RAISED": 4}
     return sorted(rows, key=lambda r: order.get(str(r.get("outcome")), 9))
 
 

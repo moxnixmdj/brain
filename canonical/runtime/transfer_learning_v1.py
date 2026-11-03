@@ -199,6 +199,10 @@ def replayable(plan: Sequence[Any], actions: Sequence[Any]) -> bool:
 # the store
 # --------------------------------------------------------------------------- #
 def _load() -> list[dict[str, Any]]:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return []
     try:
         with open(STATE_PATH) as fh:
             data = json.load(fh)
@@ -208,6 +212,10 @@ def _load() -> list[dict[str, Any]]:
 
 
 def _save(rows: list[dict[str, Any]]) -> bool:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return False
     try:
         Path(STATE_PATH).parent.mkdir(parents=True, exist_ok=True)
         tmp = Path(str(STATE_PATH) + ".tmp")
@@ -244,6 +252,10 @@ def _fp_path() -> str:
 
 
 def _fp_load() -> dict[str, Any]:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return {}
     try:
         with open(_fp_path()) as fh:
             data = json.load(fh)
@@ -253,6 +265,10 @@ def _fp_load() -> dict[str, Any]:
 
 
 def _fp_save(data: Mapping[str, Any]) -> bool:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return False
     try:
         Path(_fp_path()).parent.mkdir(parents=True, exist_ok=True)
         tmp = Path(_fp_path() + ".tmp")
@@ -425,6 +441,12 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     """
     if experience_mode not in ("learn_and_recall", "off"):
         raise ValueError("EXPERIENCE_MODE_INVALID")
+    from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
+
+    if not can_read_memory() and not can_write_memory():
+        experience_mode = "off"
+    elif not can_read_memory():
+        use_transfer = False
     # Count every call through the environment interface, including structural
     # fingerprint probes and heuristic look-ahead. A replay trial is not one
     # atomic interaction and must not be advertised as such.

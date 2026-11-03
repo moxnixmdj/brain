@@ -71,7 +71,10 @@ class ZygotePrewarmedPool:
 
     def prewarm(self) -> dict[str, Any]:
         t0 = time.perf_counter_ns()
-        import pytest as _warm_pytest  # noqa: F401
+        try:
+            import pytest as _warm_pytest  # noqa: F401
+        except ImportError:
+            pass
         from canonical.runtime import brain_unified_model_v1 as bum
         from canonical.runtime import live_integrated_brain_v1 as lib
         from canonical.swe_kernel import causal_trace_to_skill_compiler_v1 as ctc
@@ -310,3 +313,52 @@ def default_zygote_pool() -> ZygotePrewarmedPool:
         _DEFAULT_POOL = ZygotePrewarmedPool()
         _DEFAULT_POOL.prewarm()
     return _DEFAULT_POOL
+
+
+def screen_python_candidates_cow(
+    project_root: str | pathlib.Path,
+    target_path: str,
+    test_paths: list[str] | tuple[str, ...],
+    candidates: list[str] | tuple[str, ...],
+    *,
+    stop_on_first_pass: bool = True,
+    timeout_s: float = 8.0,
+    per_candidate_timeout_s: float = 1.5,
+) -> dict[str, Any]:
+    """Screen `candidates` inside the persistent confined namespace Zygote (`~3-6 ms` warm).
+
+    Never grants acceptance authority: callers MUST still verify shortlisted candidates via
+    `ProjectTestOracle` / `evaluate(..., 'TEST_SUITE', scope_id)`.
+    """
+    from canonical.runtime.brokered_workspace_execution_v1 import run_confined_python_candidate_batch
+
+    cand_list = [str(c) for c in candidates]
+    if not cand_list:
+        return {
+            "schema": SCHEMA,
+            "ok": False,
+            "confined": True,
+            "screen_authoritative": False,
+            "passing_indices": [],
+            "elapsed_ms": 0.0,
+        }
+    res = run_confined_python_candidate_batch(
+        project_root,
+        str(target_path),
+        [str(tp) for tp in test_paths],
+        cand_list,
+        stop_on_first_pass=stop_on_first_pass,
+        per_candidate_timeout_s=min(float(per_candidate_timeout_s), max(0.15, float(timeout_s))),
+        total_timeout_s=max(2.0, float(timeout_s) + 2.0),
+    )
+    return {
+        "schema": SCHEMA,
+        "ok": bool(res.get("ok")),
+        "confined": bool(res.get("confined")),
+        "isolation_mode": res.get("isolation_mode"),
+        "screen_authoritative": bool(res.get("screen_authoritative")),
+        "passing_indices": [int(i) for i in (res.get("passing_indices") or [])],
+        "live_workspace_untouched": bool(res.get("live_workspace_untouched", True)),
+        "elapsed_ms": float(res.get("elapsed_ms") or 0.0),
+    }
+

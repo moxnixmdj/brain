@@ -256,6 +256,10 @@ def _help_signature(prog: str) -> str:
 
 
 def _help_load() -> None:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return
     global _HELP_LOADED
     if _HELP_LOADED:
         return
@@ -282,6 +286,10 @@ def _help_flush(force: bool = False) -> None:
     seconds before it says "23". It is a fact about the machine, so it is
     kept where the next process can find it.
     """
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     global _HELP_DIRTY, _HELP_SINCE_FLUSH
     if not _HELP_DIRTY:
         return
@@ -1140,13 +1148,36 @@ def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
 def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
                   *, src_override: pathlib.Path | None = None,
                   wanted_override: str | None = None,
-                  timeout: float = 30.0) -> dict[str, Any]:
+                  timeout: float = 30.0,
+                  learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _perform_chain_impl(
+            gap,
+            cwd=cwd,
+            src_override=src_override,
+            wanted_override=wanted_override,
+            timeout=timeout,
+            learn=bool(learn and can_read_memory()),
+        )
+
+
+def _perform_chain_impl(gap: str, cwd: str | pathlib.Path | None = None,
+                        *, src_override: pathlib.Path | None = None,
+                        wanted_override: str | None = None,
+                        timeout: float = 30.0,
+                        learn: bool = True) -> dict[str, Any]:
     """Execute a snapshot-checkpointed multi-step CLI chain (e.g. directory/file -> .tar -> .tar.gz).
 
     `discover()` remains strictly single-step. Intermediate and final artifacts
     are checked before a no-overwrite publication. This is not an OS sandbox;
     subprocesses can have effects outside the staging directory.
     """
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
     from canonical.runtime import cli_capability_acquisition_v1 as acq
     from canonical.runtime import program_synthesis_v1 as ps
     suffix = acq._requested_suffix(gap)
@@ -1223,7 +1254,7 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
         stage2_src = stage_dir / "_stage1_blob"
         shutil.copy2(stage1_tar, stage2_src)
         stage2_goal = f"compress {stage2_src.name} into {stage2_src.name}{outer_suffix}"
-        found2 = discover(stage2_goal, budget=24, seed_file=stage2_src)
+        found2 = discover(stage2_goal, budget=24, seed_file=stage2_src, learn=learn)
         if not found2.get("closed") or not found2.get("recipe"):
             return {"pass": False, "status": "OPEN__CHAIN_STAGE2_DISCOVERY_FAILED",
                     "detail": found2.get("status")}
@@ -1274,7 +1305,17 @@ def perform_chain(gap: str, cwd: str | pathlib.Path | None = None,
 
 
 def perform(gap: str, cwd: str | pathlib.Path | None = None,
-            timeout: float = 30.0) -> dict[str, Any]:
+            timeout: float = 30.0, *, learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _perform_impl(gap, cwd=cwd, timeout=timeout, learn=bool(learn and can_read_memory()))
+
+
+def _perform_impl(gap: str, cwd: str | pathlib.Path | None = None,
+                  timeout: float = 30.0, *, learn: bool = True) -> dict[str, Any]:
     """Learn it if it has to, then actually do it to the real file.
 
     discover() answers "which program could do this" -- knowledge. perform()
@@ -1282,6 +1323,8 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
     being talked about actually lives. Learning that never leaves the sandbox
     is not the machine doing anything, it is the machine knowing something.
     """
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
     from canonical.runtime import cli_capability_acquisition_v1 as acq
     req_suffix = acq._requested_suffix(gap)
     if not req_suffix:
@@ -1293,7 +1336,7 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
 
     # Multi-layer chain formats (e.g. `.tar.gz`) can take either a directory or a file as input
     if req_suffix.count(".") >= 2:
-        return perform_chain(gap, cwd=base, wanted_override=wanted, timeout=timeout)
+        return perform_chain(gap, cwd=base, wanted_override=wanted, timeout=timeout, learn=learn)
 
     # the input is a file the goal names that is actually there; a goal about
     # a file that does not exist is a gap, not a task
@@ -1316,7 +1359,7 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
             return {"pass": False, "status": "OPEN__OUTPUT_ALREADY_EXISTS",
                     "output": str(src.parent / wanted)}
 
-    found = discover(gap, seed_file=src)
+    found = discover(gap, seed_file=src, learn=learn)
     if not found.get("closed"):
         return {"pass": False, "status": found.get("status")
                 or "OPEN__COULD_NOT_LEARN_IT", "detail": found.get("detail"),
@@ -1336,7 +1379,20 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
 
 
 def discover(gap: str, budget: int = 120, seed: int = 11,
-             seed_file: str | pathlib.Path | None = None) -> dict[str, Any]:
+             seed_file: str | pathlib.Path | None = None,
+             *, learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _discover_impl(gap, budget=budget, seed=seed, seed_file=seed_file,
+                              learn=bool(learn and can_read_memory()))
+
+
+def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
+                   seed_file: str | pathlib.Path | None = None,
+                   *, learn: bool = True) -> dict[str, Any]:
     """Find out which program reaches this goal by acting, not by being told.
 
     Nothing here is given a table of what any program does. The programs are
@@ -1353,6 +1409,8 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     In every case the file is opened with the library that owns the format
     before anything is called a success.
     """
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
     from canonical.runtime import cli_capability_acquisition_v1 as acq
     try:
         from canonical.runtime import transfer_learning_v1 as tl
@@ -1534,26 +1592,30 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
         # 4,766 ms cold -- the machine remembered the answer and still paid
         # full price to recognise the question.
         key = fingerprint_key()
-        try:
-            cached = tl.cached_fingerprint(key)
-        except Exception:  # noqa: BLE001 - a cache must never be required
-            cached = None
-        if cached:
-            _fingerprint = cached
-            return _fingerprint
+        if learn:
+            try:
+                cached = tl.cached_fingerprint(key)
+            except Exception:  # noqa: BLE001 - a cache must never be required
+                cached = None
+            if cached:
+                _fingerprint = cached
+                return _fingerprint
         env = ComputerEnv()
         try:
             env.register(program_actions(env, programs=progs, target=target))
             _fingerprint = tl.fingerprint(env, env.action_names)
         finally:
             env.close()
-        try:
-            tl.cache_fingerprint(key, _fingerprint)
-        except Exception:  # noqa: BLE001
-            pass
+        if learn:
+            try:
+                tl.cache_fingerprint(key, _fingerprint)
+            except Exception:  # noqa: BLE001
+                pass
         return _fingerprint
 
     def recall() -> tuple[list[str], str, dict | None] | None:
+        if not learn:
+            return None
         try:
             rows = tl.recall(fingerprint_of(), gkey, k=3)
         except Exception:  # noqa: BLE001 - no memory is not a failure
@@ -1569,6 +1631,8 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
 
     def keep(plan: list[str], status: str, why: str) -> None:
         """A good answer is worth remembering, or it has to be found again."""
+        if not learn:
+            return
         try:
             tl.remember(fingerprint_of(), gkey, plan, reached=True)
         except Exception:  # noqa: BLE001 - remembering is not the goal
@@ -1580,11 +1644,14 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     #    The reason is remembered, so the repeat is answered with the same honest
     #    refusal instead of a fresh search -- and it is keyed on the verifier's own
     #    version, because a better verifier makes shapes solvable that were not.
-    try:
-        _verifier = _ps.verifier_version()
-        _fp = fingerprint_of()
-        _miss = tl.recall_miss(_fp, gap, _verifier)
-    except Exception:  # noqa: BLE001 - memory is an optimisation, not a dependency
+    if learn:
+        try:
+            _verifier = _ps.verifier_version()
+            _fp = fingerprint_of()
+            _miss = tl.recall_miss(_fp, gap, _verifier)
+        except Exception:  # noqa: BLE001 - memory is an optimisation, not a dependency
+            _fp, _verifier, _miss = None, "", None
+    else:
         _fp, _verifier, _miss = None, "", None
     if _miss:
         return {"closed": False, "status": str(_miss.get("reason")
@@ -1595,7 +1662,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
                           % _miss.get("trials", 1)}
 
     def forget_misses() -> None:
-        if _fp is None:
+        if not learn or _fp is None:
             return
         try:
             tl.forget_miss(_fp, gap, _verifier)
@@ -1640,8 +1707,15 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
                 break
             # once a move has been shown to produce the wrong bytes, a
             # recalled plan is not allowed to put it back
-            outcome = tl.drive(env, usable, is_goal=is_goal, budget=budget,
-                               seed=seed, use_transfer=not banned)
+            outcome = tl.drive(
+                env,
+                usable,
+                is_goal=is_goal,
+                budget=budget,
+                seed=seed,
+                use_transfer=(learn and not banned),
+                experience_mode=("learn_and_recall" if learn else "off"),
+            )
         except Exception as exc:  # noqa: BLE001
             return {"closed": False, "status": "CHANNEL_ERROR",
                     "detail": type(exc).__name__ + ":" + str(exc)[:200]}
@@ -1677,7 +1751,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     _st = str(outcome.get("status") or "")
     if _st.startswith("PASS"):
         _st = "OPEN__EFFECT_NOT_VERIFIED"
-    if _fp is not None and not str(_st).startswith("CHANNEL_ERROR"):
+    if learn and _fp is not None and not str(_st).startswith("CHANNEL_ERROR"):
         try:
             tl.remember_miss(_fp, gap, _st or "OPEN__EFFECT_NOT_VERIFIED", _verifier)
         except Exception:  # noqa: BLE001
@@ -1975,12 +2049,20 @@ def _query_cache_load() -> None:
 
 
 def _query_cache_get(kind: str, limit: int) -> list[dict[str, Any]] | None:
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return None
     _query_cache_load()
     return _QUERY_CACHE.get((kind, limit))
 
 
 def _query_cache_put(kind: str, limit: int,
                      survivors: Sequence[dict[str, Any]]) -> None:
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return
     _query_cache_load()
     _QUERY_CACHE[(kind, limit)] = list(survivors)
     try:
@@ -2532,7 +2614,27 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
 def answer_query(gap: str, input_file: str | pathlib.Path,
                  programs: Sequence[str] | None = None,
                  timeout: float = 15.0,
-                 min_agreement: int = 1) -> dict[str, Any]:
+                 min_agreement: int = 1,
+                 *,
+                 learn: bool = True) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _answer_query_impl(
+            gap,
+            input_file,
+            programs=programs,
+            timeout=timeout,
+            min_agreement=min_agreement,
+        )
+
+
+def _answer_query_impl(gap: str, input_file: str | pathlib.Path,
+                       programs: Sequence[str] | None = None,
+                       timeout: float = 15.0,
+                       min_agreement: int = 1) -> dict[str, Any]:
     """Answer a goal that asks for a value by measuring the file.
 
     Refuses unless genuinely different programs, run on the real file, print

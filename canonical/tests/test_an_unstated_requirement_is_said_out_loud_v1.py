@@ -8,8 +8,13 @@ that honest rather than decorative:
   1. a missing slot is NAMED, with the capability and the compiler's own reason;
   2. a value is never invented for it -- there is no field that could hold one;
   3. a refusal that reports no detail says the REPORT is the gap, not the goal;
-  4. a goal that compiles is not thereby endorsed, because under-specified goals
-     were measured to compile onto the wrong row 3 times in 12.
+  4. a goal that compiles is not thereby endorsed. This module does not vouch for a
+     selection -- and it does not claim to know which selections are wrong either.
+     The "3 times in 12" figure that originally justified this bullet was measured at
+     the compiler alone; at the full door, which runs route_admission after compiling,
+     2 of those 3 are refused and the third asks to "write the result out", so a
+     writer is not clearly wrong. Non-endorsement does not depend on that figure and
+     survives its withdrawal.
 
 Cases are real goals compiled against the live registry. None needs a fixture and
 none executes a capability.
@@ -32,6 +37,10 @@ UNSTATED_STAGES = "Run the pipeline stages."
 NO_DETAIL = "Read the text out of the picture."
 COMPILES_ONTO_A_WRITER = "Query the data file and write the result out."
 COMPILES_CLEANLY = "Create the archive from the manifest."
+# The counterexample that retracted the confidence rule: scores 37 and matches 3
+# of its 4 goal tokens on `provides`, yet its row's precondition is
+# `structured.json.available`, so matched_requires is empty.
+STRONG_MATCH = "Create a DOCX document report."
 
 
 class GapStatementTest(unittest.TestCase):
@@ -79,38 +88,62 @@ class GapStatementTest(unittest.TestCase):
         self.assertIsNotNone(got["capability"])
         self.assertIs(got["selection_endorsed"], False)
 
-    def test_a_selection_the_goal_did_not_force_is_said_out_loud(self) -> None:
-        """The dangerous case: the door binds a vague goal to a row it never asked
-        for and reports success. Measured, this is how a JSON query reached a
-        cross-file repair writer."""
-        got = state_the_gap(COMPILES_ONTO_A_WRITER)
-        self.assertEqual(got["outcome"], "LOW_CONFIDENCE_SELECTION")
-        self.assertEqual(got["capability"], "software.repair.choreograph.crossfile.v1")
+    def test_a_strong_match_is_not_accused_of_being_a_guess(self) -> None:
+        """REGRESSION TEST FOR A RETRACTED RULE.
+
+        A rule merged on 2026-11-02 called any selection whose row declares
+        `requires` that the goal did not match a LOW_CONFIDENCE_SELECTION, and told
+        the reader that acting on it would be acting on a guess. On this goal it
+        fired. docx.document.create_from_json_record scores 37 -- above every one of
+        the 4 correct cases in the n=7 sample that produced the rule -- and matches
+        create, document and docx, 3 of the 4 goal tokens, on what the row PROVIDES.
+        Its matched_requires is empty only because the row's precondition is
+        `structured.json.available`: a fact about the world, not a word a sentence
+        would contain.
+
+        The rule was measuring vocabulary coincidence. Across all 149 bound rows,
+        182 of 182 `requires` tokens are dotted world-precondition identifiers, so
+        matched_requires is non-empty only when a goal happens to share a sub-token
+        with one -- "Create the archive from the manifest" matched
+        `manifest.json.available` on the word "manifest" alone, which is why the n=7
+        separation looked clean.
+        """
+        got = state_the_gap(STRONG_MATCH)
+        self.assertEqual(got["outcome"], "COMPILED")
         self.assertIs(got["selection_endorsed"], False)
         ev = got["match_evidence"]
-        # The rule is structural: the row declares requirements, the goal met none.
-        self.assertTrue(got["declared_requires"])
+        self.assertGreaterEqual(len(ev["matched_provides"]), 2)
         self.assertEqual(ev["matched_requires"], [])
-        self.assertLess(ev["goal_token_coverage"], 0.5)
         low = got["statement"].lower()
-        self.assertIn("not forced by the goal", low)
-        self.assertIn("guess", low)
-        # It must name the capability, or nothing downstream can act on it.
-        self.assertIn("software.repair.choreograph.crossfile.v1", got["statement"])
+        for phrase in ("guess", "not forced", "did not force", "low confidence"):
+            self.assertNotIn(phrase, low)
 
-    def test_a_forced_selection_is_not_flagged_as_a_guess(self) -> None:
-        """The other half of the rule: a goal that does match what the row requires
-        must NOT be flagged, or the signal is just noise on every request."""
-        got = state_the_gap(COMPILES_CLEANLY)
-        self.assertEqual(got["outcome"], "COMPILED")
-        self.assertNotEqual(got["outcome"], "LOW_CONFIDENCE_SELECTION")
-        self.assertTrue(got["match_evidence"]["matched_requires"])
-        self.assertGreaterEqual(got["match_evidence"]["goal_token_coverage"], 0.5)
+    def test_no_verdict_separates_a_strong_match_from_a_weak_one(self) -> None:
+        """Both compile, both get the same outcome, and neither is judged.
 
-    def test_the_evidence_is_reported_not_just_the_verdict(self) -> None:
-        """Score is carried as auditable evidence but is not the rule: a numeric
-        cutoff fitted to 7 measured points would be overfitting."""
-        for goal in (COMPILES_CLEANLY, COMPILES_ONTO_A_WRITER):
+        Telling this strong match apart from a JSON query bound to a cross-file
+        repair writer is a semantic question about what the sentence asks for and
+        what the capability does. The two overlap on every lexical field the compiler
+        emits, so no deterministic function of score, matched_provides or
+        matched_requires separates them -- and answering it anyway would mean putting
+        model cognition in the producer path, which
+        GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4 forbids.
+        """
+        strong = state_the_gap(STRONG_MATCH)
+        weak = state_the_gap(COMPILES_ONTO_A_WRITER)
+        self.assertEqual(strong["outcome"], weak["outcome"])
+        self.assertEqual(strong["outcome"], "COMPILED")
+        self.assertIs(strong["selection_endorsed"], False)
+        self.assertIs(weak["selection_endorsed"], False)
+        self.assertNotIn("LOW_CONFIDENCE_SELECTION", OUTCOMES)
+
+    def test_the_evidence_is_reported_uninterpreted(self) -> None:
+        """Only the verdict was withdrawn; the evidence stays auditable.
+
+        A consumer can still read score and coverage. It is simply no longer told
+        what they mean, because what they meant turned out to be nothing.
+        """
+        for goal in (STRONG_MATCH, COMPILES_CLEANLY, COMPILES_ONTO_A_WRITER):
             ev = state_the_gap(goal)["match_evidence"]
             for field in ("score", "goal_tokens", "matched_provides",
                           "matched_requires", "goal_token_coverage"):
@@ -123,22 +156,23 @@ class GapStatementTest(unittest.TestCase):
 
     def test_every_outcome_it_can_return_is_declared(self) -> None:
         for goal in (UNSTATED_EXPRESSION, NO_DETAIL, COMPILES_ONTO_A_WRITER,
-                     COMPILES_CLEANLY, ""):
+                     COMPILES_CLEANLY, STRONG_MATCH, ""):
             self.assertIn(state_the_gap(goal)["outcome"], OUTCOMES)
 
     def test_ranking_puts_the_actionable_statement_first(self) -> None:
         rows = state_the_gaps([NO_DETAIL, UNSTATED_EXPRESSION, COMPILES_ONTO_A_WRITER,
                                COMPILES_CLEANLY])
         self.assertEqual(len(rows), 4)
-        # A selection the goal did not force comes first: ignoring it does the wrong
-        # thing. A named missing slot merely stops. An empty report is unactionable.
-        self.assertEqual(rows[0]["outcome"], "LOW_CONFIDENCE_SELECTION")
-        self.assertEqual(rows[1]["outcome"], "SLOT_UNSTATED")
+        # A named missing slot is the only actionable statement, so it comes first.
+        # No position in this ordering expresses confidence in a selection.
+        self.assertEqual(rows[0]["outcome"], "SLOT_UNSTATED")
+        self.assertEqual(rows[1]["outcome"], "COMPILED")
         self.assertEqual(rows[2]["outcome"], "COMPILED")
         self.assertEqual(rows[-1]["outcome"], "NO_CANDIDATE_REPORTED")
 
     def test_nothing_is_claimed_beyond_the_statement(self) -> None:
-        for goal in (UNSTATED_EXPRESSION, NO_DETAIL, COMPILES_ONTO_A_WRITER, COMPILES_CLEANLY):
+        for goal in (UNSTATED_EXPRESSION, NO_DETAIL, COMPILES_ONTO_A_WRITER,
+                     COMPILES_CLEANLY, STRONG_MATCH):
             got = state_the_gap(goal)
             self.assertEqual(got["authority"], "NONE")
 

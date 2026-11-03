@@ -1356,6 +1356,15 @@ def compile_and_qualify_skill(
     db_path: pathlib.Path | None = None,
 ) -> dict[str, Any]:
     """Compile one acquisition trace, qualify on untouched held-out + sabotage control, and persist."""
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return {
+            "schema": SCHEMA,
+            "qualified": False,
+            "persisted": False,
+            "status": "SKIPPED__MEMORY_POLICY_WRITE_DISABLED",
+        }
     t0 = time.perf_counter_ns()
     elevated = elevate_trace_to_fastest_layer(trace)
     steps = elevated["elevated_steps"]
@@ -1763,6 +1772,10 @@ def recall_and_execute_workflow(
     db_path: pathlib.Path | None = None,
 ) -> dict[str, Any] | None:
     """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return None
     t0 = time.perf_counter_ns()
     goal_words = {w for w in re.findall(r"[a-z]{2,}", goal.lower()) if w not in _STOP_WORDS}
     from canonical.runtime import computer_execution_boundary_v1 as boundary

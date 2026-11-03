@@ -424,6 +424,41 @@ def solve_or_learn(
     allow_tier2_learning: bool = True,
     allow_jit_network: bool = True,
     record_open_gap: bool = True,
+    confinement_admitted: bool = False,
+) -> dict[str, Any]:
+    if type(learn) is not bool:
+        raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
+
+    with memory_policy_scope(READ_WRITE if learn else OFF):
+        return _solve_or_learn_impl(
+            request,
+            learn=bool(learn and can_read_memory()),
+            registry_path=registry_path,
+            cwd=cwd,
+            db_path=db_path,
+            r3_state_path=r3_state_path,
+            allow_tier1_composition=allow_tier1_composition,
+            allow_tier2_learning=allow_tier2_learning,
+            allow_jit_network=allow_jit_network,
+            record_open_gap=bool(record_open_gap and learn and can_read_memory()),
+            confinement_admitted=confinement_admitted,
+        )
+
+
+def _solve_or_learn_impl(
+    request: Mapping[str, Any] | str,
+    *,
+    learn: bool = True,
+    registry_path: str | None = None,
+    cwd: str | pathlib.Path | None = None,
+    db_path: str | pathlib.Path | None = None,
+    r3_state_path: str | pathlib.Path | None = None,
+    allow_tier1_composition: bool = True,
+    allow_tier2_learning: bool = True,
+    allow_jit_network: bool = True,
+    record_open_gap: bool = True,
+    confinement_admitted: bool = False,
 ) -> dict[str, Any]:
     """Execute a request at maximum speed, or learn & crystallize the missing skill in-run."""
     t0 = perf_counter_ns()
@@ -431,6 +466,8 @@ def solve_or_learn(
         req: dict[str, Any] = {"task_id": "autonomous-solve", "goal": request}
     else:
         req = dict(request)
+    if confinement_admitted:
+        req["confinement_admitted"] = True
 
     goal = str(req.get("goal") or "").strip()
     task_id = str(req.get("task_id") or "autonomous-solve")
@@ -471,10 +508,15 @@ def solve_or_learn(
     )
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         req.setdefault("workspace_root", str(work_cwd))
+    if not learn:
+        allow_tier2_learning = False
+        record_open_gap = False
     if not learn and not _has_structured_specialist:
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
-        return ra.solve(req)
+        door_req = dict(req)
+        door_req["route_memory_mode"] = "exclude"
+        return ra.solve(door_req)
 
     if not goal:
         return {
@@ -518,7 +560,7 @@ def solve_or_learn(
                           or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")))
     except Exception:
         computer_shape = True  # a failed classification cannot authorize recall
-    recalled = None if computer_shape else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    recalled = None if (not learn or computer_shape) else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
     if recalled is not None and recalled.get("status") == computer_boundary.STATUS:
         out = dict(recalled)
         out.update(controller_schema=SCHEMA, task_id=task_id,
@@ -546,31 +588,32 @@ def solve_or_learn(
 
     forged_state_path = req.pop("forged_state_path", None)
     macro_state_path = req.pop("macro_state_path", None)
-    try:
-        from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
-            match_and_invoke_forged_for_goal,
-        )
+    if learn:
+        try:
+            from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+                match_and_invoke_forged_for_goal,
+            )
 
-        forged_hit = match_and_invoke_forged_for_goal(
-            goal,
-            root=work_cwd,
-            state_path=forged_state_path,
-            explicit_args=req.get("forged_args") if isinstance(req.get("forged_args"), Mapping) else None,
-        )
-        if forged_hit is not None and forged_hit.get("pass") is True:
-            return {
-                "schema": SCHEMA,
-                "task_id": task_id,
-                "pass": True,
-                "status": "PASS__TIER0_FORGED_CAPABILITY_EXECUTED",
-                "tier_used": "tier0_forged_capability",
-                "from_memory": True,
-                "capability_id": forged_hit["capability_id"],
-                "forged_execution": forged_hit,
-                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-            }
-    except Exception:
-        pass
+            forged_hit = match_and_invoke_forged_for_goal(
+                goal,
+                root=work_cwd,
+                state_path=forged_state_path,
+                explicit_args=req.get("forged_args") if isinstance(req.get("forged_args"), Mapping) else None,
+            )
+            if forged_hit is not None and forged_hit.get("pass") is True:
+                return {
+                    "schema": SCHEMA,
+                    "task_id": task_id,
+                    "pass": True,
+                    "status": "PASS__TIER0_FORGED_CAPABILITY_EXECUTED",
+                    "tier_used": "tier0_forged_capability",
+                    "from_memory": True,
+                    "capability_id": forged_hit["capability_id"],
+                    "forged_execution": forged_hit,
+                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                }
+        except Exception:
+            pass
 
     # Explicit 2-step byte-verified capability bridge (`bridge_enumeration_v1`)
     bridge_spec = req.get("byte_verified_bridge")
@@ -631,6 +674,8 @@ def solve_or_learn(
     }
     if macro_state_path is not None:
         clean_req["_macro_state_path"] = str(macro_state_path)
+    if not learn:
+        clean_req["route_memory_mode"] = "exclude"
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         clean_req.setdefault("workspace_root", str(work_cwd))
     clean_req.setdefault("task_id", task_id)
@@ -932,6 +977,96 @@ def solve_or_learn(
                         "diff": loop_res.get("diff"),
                         "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
                     }
+
+        if bool(req.get("confinement_admitted") is True) and work_cwd.is_dir():
+            try:
+                from canonical.runtime import autonomous_v1 as _auto
+                from canonical.runtime import brokered_workspace_execution_v1 as _bwe
+                from canonical.runtime import taskfile_read_v1 as _tf
+
+                declared_tasks = list(_tf.read_tasks(str(work_cwd)) or [])
+                if not declared_tasks and (work_cwd / "Makefile").is_file():
+                    m_mk = re.search(r"\bmake\s+([A-Za-z0-9_.-]+)", goal)
+                    if m_mk:
+                        declared_tasks = [{"name": m_mk.group(1), "command": f"make {m_mk.group(1)}", "source": "Makefile"}]
+                g_toks = _auto.goal_tokens(goal) or [
+                    w for w in re.findall(r"[a-zA-Z0-9_.-]+", goal.lower())
+                    if w not in {"run", "make", "execute", "please", "the", "a", "an", "target"}
+                ]
+                if declared_tasks and g_toks:
+                    before_snap = _auto._snapshot(str(work_cwd))
+                    validators_set = {id(v) for v in _auto.find_validators(declared_tasks)}
+                    ranked_tasks = sorted(
+                        [t for t in declared_tasks if id(t) not in validators_set and t.get("command")],
+                        key=lambda t: sum(
+                            2 if tok == str(t.get("name") or "").lower() else (1 if tok in f"{t.get('name', '')} {t.get('command', '')}".lower() else 0)
+                            for tok in g_toks
+                        ),
+                        reverse=True,
+                    )
+                    for cand_t in ranked_tasks[:3]:
+                        cmd_s = str(cand_t.get("command") or "").strip().lstrip("@")
+                        if not cmd_s:
+                            continue
+                        exec_argv = (
+                            ["make", str(cand_t["name"])]
+                            if str(cand_t.get("source") or "").endswith("Makefile") and cand_t.get("name")
+                            else ["/bin/sh", "-c", cmd_s]
+                        )
+                        b_res = _bwe.run_staged_confined_command(
+                            work_cwd,
+                            exec_argv,
+                            publish=True,
+                            timeout=30,
+                            goal=goal,
+                        )
+                        if not b_res.get("ok"):
+                            continue
+                        after_snap = _auto._snapshot(str(work_cwd))
+                        touched_now = sorted(set(after_snap) - set(before_snap)) + sorted(
+                            p for p in set(before_snap) & set(after_snap) if before_snap[p] != after_snap[p]
+                        )
+                        produces_map = {str(cand_t.get("name") or ""): touched_now} if cand_t.get("name") else None
+                        val_verdicts: dict[str, bool] = {}
+                        for vt in _auto.find_validators(declared_tasks):
+                            vcmd = str(vt.get("command") or "").strip().lstrip("@")
+                            if vcmd:
+                                vr = _bwe.run_staged_confined_command(
+                                    work_cwd,
+                                    ["/bin/sh", "-c", vcmd],
+                                    publish=False,
+                                    timeout=20,
+                                )
+                                val_verdicts[vcmd] = bool(vr.get("ok"))
+                        ver = _auto.verify(
+                            goal,
+                            str(work_cwd),
+                            before_snap,
+                            after_snap,
+                            produces=produces_map,
+                            validators=val_verdicts or None,
+                        )
+                        if ver.get("verified") is True or (
+                            ver.get("reason") == "NO_GOAL_TOKENS"
+                            and touched_now
+                            and all(val_verdicts.values())
+                        ):
+                            return {
+                                "schema": SCHEMA,
+                                "task_id": task_id,
+                                "goal": goal,
+                                "pass": True,
+                                "executed": True,
+                                "confined": True,
+                                "status": "PASS__CONFINED_AUTONOMOUS_TASK_VERIFIED",
+                                "tier_used": "tier2_confined_autonomous_v1",
+                                "verification": ver,
+                                "changed_files": b_res.get("changed_files") or [],
+                                "k3_external_llm_calls": 0,
+                                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                            }
+            except Exception:
+                pass
 
         # Documentation-mined snippets run as host Python programs. Do not
         # execute this fallback without the same admitted boundary.
@@ -1460,4 +1595,149 @@ def solve_or_learn_isolated(request: Mapping[str, Any] | str, **kwargs: Any) -> 
     from canonical.swe_kernel.zygote_worker_pool_v1 import default_zygote_pool
 
     return default_zygote_pool().solve_or_learn_isolated(request, **kwargs)
+
+
+def execute_and_elevate_confined_trajectory(
+    goal: str,
+    workspace_root: str | pathlib.Path | None = None,
+    trajectory_steps: Sequence[str | Sequence[str]] | None = None,
+    *,
+    cwd: str | pathlib.Path | None = None,
+    expected_artifacts: Sequence[str] = (),
+    macro_db_path: str | pathlib.Path | None = None,
+    workflow_db_path: str | pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """Execute multi-step workspace actions inside `brokered_workspace_execution_v1` and elevate 2-instance verified plans into `macro_v1`."""
+    from canonical.runtime import autonomous_v1, brokered_workspace_execution_v1 as bwe, macro_v1, taskfile_read_v1
+    from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
+    from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+        lookup_verified_chain_macro,
+        record_verified_chain_macro,
+    )
+
+    ws = pathlib.Path(workspace_root or cwd or pathlib.Path.cwd()).resolve()
+    macro_state_p = (
+        pathlib.Path(macro_db_path or workflow_db_path).resolve()
+        if (macro_db_path is not None or workflow_db_path is not None)
+        else (ws / ".brain_chain_macros_v1.json")
+    )
+    clauses = ["discover workspace taskfile", goal.strip()]
+
+    # 1. Fast `< 1 ms` recall from real `macro_v1` once promoted (`N >= 2` distinct instances)
+    recalled_hit = lookup_verified_chain_macro(clauses, state_path=macro_state_p) if (not trajectory_steps and can_read_memory()) else None
+    from_macro = False
+    steps_list: list[str | Sequence[str]] = list(trajectory_steps or ())
+    if not steps_list and recalled_hit is not None:
+        plan = list(recalled_hit.get("plan") or [])
+        recalled_cmds = [str(p.get("capability_id") or "").removeprefix("confined_cmd:") for p in plan[1:] if str(p.get("capability_id") or "").startswith("confined_cmd:")]
+        if recalled_cmds:
+            steps_list = recalled_cmds
+            from_macro = True
+
+    # 2. Cold discovery via `taskfile_read_v1` + `autonomous_v1.goal_tokens`
+    if not steps_list:
+        tasks_rep = list(taskfile_read_v1.read_tasks(str(ws)) or [])
+        goal_l = goal.lower()
+        g_tokens = set(autonomous_v1.goal_tokens(goal))
+        validator_names = {str(v.get("name") or "") for v in autonomous_v1.find_validators(tasks_rep)}
+        for t_row in tasks_rep:
+            t_name = str(t_row.get("name") or "")
+            src_origin = str(t_row.get("source") or t_row.get("origin") or "")
+            if t_name and (
+                re.search(rf"\b{re.escape(t_name.lower())}\b", goal_l)
+                or (t_name not in validator_names and t_name.lower() in g_tokens)
+            ):
+                if src_origin.endswith("Makefile"):
+                    steps_list.append(["make", t_name])
+                elif t_row.get("command"):
+                    steps_list.append(str(t_row["command"]).lstrip("@"))
+                break
+        if not steps_list:
+            m_mk = re.search(r"\bmake\s+([A-Za-z0-9_.-]+)", goal)
+            if m_mk:
+                steps_list.append(["make", m_mk.group(1)])
+    if not steps_list:
+        return {"schema": SCHEMA, "ok": False, "pass": False, "confined": False, "reason": "NO_TRAJECTORY_STEPS"}
+
+    executed_cmds: list[str] = []
+    changed_union: set[str] = set()
+    for step_cmd in steps_list:
+        cmd_arg: str | Sequence[str] = (
+            ["/bin/sh", "-c", step_cmd] if isinstance(step_cmd, str) else step_cmd
+        )
+        res = bwe.run_staged_confined_command(ws, cmd_arg, publish=True, timeout=30, goal=goal)
+        if not res.get("ok"):
+            if from_macro and recalled_hit is not None:
+                orig_st = macro_v1.STATE
+                try:
+                    macro_v1.STATE = macro_state_p
+                    macro_v1.note_failure(str(recalled_hit["key"]))
+                finally:
+                    macro_v1.STATE = orig_st
+            return {
+                "schema": SCHEMA,
+                "ok": False,
+                "pass": False,
+                "confined": bool(res.get("confined")),
+                "reason": str(res.get("blocked") or "STEP_FAILED"),
+            }
+        executed_cmds.append(step_cmd if isinstance(step_cmd, str) else " ".join(str(x) for x in step_cmd))
+        changed_union.update(str(p) for p in (res.get("changed_files") or ()))
+
+    for rel_art in expected_artifacts:
+        fp = ws / rel_art
+        if not fp.is_file() or fp.stat().st_size == 0:
+            return {
+                "schema": SCHEMA,
+                "ok": False,
+                "pass": False,
+                "confined": True,
+                "reason": f"EXPECTED_ARTIFACT_MISSING:{rel_art}",
+            }
+
+    macro_saved = False
+    macro_name: str | None = None
+    if can_write_memory() and executed_cmds:
+        sig_key = macro_v1.signature(clauses)
+        raw_doc: dict[str, Any] = {"schema": macro_v1.SCHEMA, "macros": {}, "pending_instances": {}}
+        if macro_state_p.is_file():
+            try:
+                loaded = json.loads(macro_state_p.read_text(encoding="utf-8"))
+                if isinstance(loaded, dict):
+                    raw_doc.update(loaded)
+            except Exception:
+                pass
+        pending = dict(raw_doc.get("pending_instances") or {})
+        inst_list = list(pending.get(sig_key) or [])
+        ws_id = str(ws)
+        if ws_id not in inst_list:
+            inst_list.append(ws_id)
+        pending[sig_key] = inst_list
+        raw_doc["pending_instances"] = pending
+        macro_state_p.parent.mkdir(parents=True, exist_ok=True)
+        macro_state_p.write_text(json.dumps(raw_doc, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+
+        if len(inst_list) >= 2:
+            macro_steps = [{"capability_id": "taskfile_read_v1", "verified": True}] + [
+                {"capability_id": f"confined_cmd:{c}", "verified": True} for c in executed_cmds
+            ]
+            # Preserve `pending_instances` across `macro_v1.record`
+            macro_saved = record_verified_chain_macro(clauses, macro_steps, state_path=macro_state_p)
+            after_doc = json.loads(macro_state_p.read_text(encoding="utf-8"))
+            after_doc["pending_instances"] = pending
+            macro_state_p.write_text(json.dumps(after_doc, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        macro_name = sig_key
+
+    return {
+        "schema": SCHEMA,
+        "ok": True,
+        "pass": True,
+        "confined": True,
+        "from_macro": from_macro,
+        "changed_files": sorted(changed_union),
+        "macro_promoted": macro_saved,
+        "macro_id": macro_name,
+        "k3_external_llm_calls": 0,
+    }
+
 

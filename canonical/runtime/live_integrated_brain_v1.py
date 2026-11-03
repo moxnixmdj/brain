@@ -1853,16 +1853,52 @@ def run_raw_goal(request: Mapping[str, Any], *, record_experience: bool = True) 
 
     The three hooks are disjoint by outcome, not redundant: a success becomes
     an episode, either outcome becomes a pathology cell about this machine, and
-    a failure becomes a diagnosed, counted failure class. Disabling this
-    wrapper's hooks does not disable memory or effects in nested execution.
+    a failure becomes a diagnosed, counted failure class. When `record_experience`
+    is False or `request` carries `memory_policy`, nested memory stores are
+    additionally governed by `memory_policy_v1`.
     """
-    out = _run_raw_goal_impl(request)
-    from canonical.runtime import computer_execution_boundary_v1 as boundary
-    if (record_experience and out.get("status") not in
-            {boundary.STATUS, "FAIL_CLOSED__RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED"}
-            and not boundary.is_repair_verification_gap(out)):
-        _record_raw_goal_experience(out, request)
-        _record_raw_goal_pathology(out, request)
-        _record_raw_goal_failure_diagnosis(out, request)
-        _advance_learning_queue()
-    return out
+    from contextlib import nullcontext
+    from canonical.runtime.memory_policy_v1 import (
+        MemoryPolicyError,
+        READ_ONLY,
+        READ_WRITE,
+        can_write_memory,
+        effective_memory_mode,
+        memory_policy_scope,
+        validate_memory_mode,
+    )
+
+    explicit_mp = request.get("memory_policy") if isinstance(request, Mapping) and "memory_policy" in request else None
+    if explicit_mp is not None:
+        try:
+            mp = validate_memory_mode(explicit_mp)
+        except MemoryPolicyError:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL_CLOSED__MEMORY_POLICY_INVALID",
+                "pass": False,
+                "task_id": str(request.get("task_id") or "") if isinstance(request, Mapping) else "",
+                "failure_class": "MEMORY_POLICY_INVALID",
+                "executed": False,
+                "incremental_spend_usd": 0,
+            }
+        ctx = memory_policy_scope(mp)
+    elif not record_experience and effective_memory_mode() == READ_WRITE:
+        ctx = memory_policy_scope(READ_ONLY)
+    else:
+        ctx = nullcontext()
+
+    with ctx:
+        out = _run_raw_goal_impl(request)
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+        if (
+            record_experience
+            and can_write_memory()
+            and out.get("status") not in {boundary.STATUS, "FAIL_CLOSED__RAW_GOAL_RETAINED_LEARNING_UNSUPPORTED"}
+            and not boundary.is_repair_verification_gap(out)
+        ):
+            _record_raw_goal_experience(out, request)
+            _record_raw_goal_pathology(out, request)
+            _record_raw_goal_failure_diagnosis(out, request)
+            _advance_learning_queue()
+        return out

@@ -133,6 +133,10 @@ def record_taught(db_path: str | Path, skill_id: str, *,
     if not skill_id:
         raise ExpiryError("SKILL_ID_REQUIRED")
     fp = dict(fingerprint or world_fingerprint())
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return {"skill_id": skill_id, "recorded": False, "reason": "MEMORY_POLICY_WRITE_DISABLED", "digest": _digest(fp)}
     import time
     with _connect(db_path) as conn:
         conn.execute(
@@ -184,6 +188,14 @@ def audit(db_path: str | Path, *, skill_ids: Iterable[str] | None = None,
           now: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Classify every rule FRESH / STALE / UNKNOWN against the current world."""
     current = dict(now or world_fingerprint())
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not can_read_memory():
+        return {"schema": SCHEMA, "counts": {FRESH: 0, STALE: 0, UNKNOWN: 0}, "rules": [], "world_digest": _digest(current)}
+    if not Path(db_path).exists():
+        ids = list(skill_ids) if skill_ids is not None else []
+        rows = [{"skill_id": sid, "state": UNKNOWN, "reason": "NO_WORLD_FINGERPRINT_RECORDED"} for sid in ids]
+        return {"schema": SCHEMA, "counts": {FRESH: 0, STALE: 0, UNKNOWN: len(rows)}, "rules": rows, "world_digest": _digest(current)}
     recorded = _recorded(db_path)
     if skill_ids is not None:
         ids = list(skill_ids)
@@ -246,6 +258,10 @@ def expire_stale(store: Any, db_path: str | Path, *, now: Mapping[str, Any] | No
     UNKNOWN rules are reported but not invalidated: a missing stamp is a bookkeeping gap, and
     destroying a rule for a gap in our own records would be the opposite of careful.
     """
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    if not can_write_memory():
+        return {"schema": SCHEMA, "expired": [], "skipped": [], "counts": {FRESH: 0, STALE: 0, UNKNOWN: 0}}
     report = audit(db_path, now=now)
     expired, skipped = [], []
     for row in report["rules"]:

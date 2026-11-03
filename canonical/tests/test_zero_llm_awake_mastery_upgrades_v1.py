@@ -15,7 +15,10 @@ from canonical.runtime import live_brain_route_admission_v1 as ra
 from canonical.swe_kernel import operator_generalization_v1 as op_gen
 from canonical.swe_kernel import rule_expiry_v1 as rule_exp
 from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
-from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import compile_and_qualify_skill
+from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+    compile_and_qualify_skill,
+    recall_and_execute_workflow,
+)
 from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
 from canonical.swe_kernel.predicate_world_abstraction_v1 import (
     explore_and_elevate_computer_env,
@@ -36,8 +39,8 @@ def test_move1_single_trace_auto_twin_qualification_and_sabotage_rejection() -> 
             c.execute("INSERT INTO services VALUES('payments', 'canary')")
             c.commit()
 
-        # Single trace (N=1, no heldout_goal!) -> auto-twin synthesizes perturbed DB & qualifies!
-        r1 = solve_or_learn(
+        # Unconfined automatic controller fails closed per #6592
+        r_unconf = solve_or_learn(
             {
                 "goal": 'promote service "payments" in ops.db',
                 "acquisition_trace": [
@@ -58,6 +61,30 @@ def test_move1_single_trace_auto_twin_qualification_and_sabotage_rejection() -> 
             },
             db_path=wf_db,
         )
+        assert r_unconf["pass"] is False
+        assert r_unconf["status"] == "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
+
+        # Single trace (N=1, no heldout_goal!) -> auto-twin synthesizes perturbed DB & qualifies!
+        r1 = compile_and_qualify_skill(
+            goal='promote service "payments" in ops.db',
+            trace=[
+                {"layer": "pixel_ui", "x": 40, "y": 50, "label": "click_row"},
+                {
+                    "layer": "sqlite_exec",
+                    "db_path": "ops.db",
+                    "sql": "UPDATE services SET tier='prod' WHERE name='payments'",
+                },
+            ],
+            postcondition={
+                "kind": "sqlite_query_equals",
+                "db_path": "ops.db",
+                "sql": "SELECT tier FROM services WHERE name='payments'",
+                "equals": "prod",
+            },
+            auto_synthesize_twin=True,
+            source_cwd=ep1,
+            db_path=wf_db,
+        )
         assert r1["pass"] is True, r1
 
         # Unseen target replays from compiled Tier-0 memory in milliseconds!
@@ -70,21 +97,13 @@ def test_move1_single_trace_auto_twin_qualification_and_sabotage_rejection() -> 
             c.commit()
 
         t0 = time.perf_counter()
-        r2 = solve_or_learn(
-            {
-                "goal": 'promote service "analytics" in ops.db',
-                "postcondition": {
-                    "kind": "sqlite_query_equals",
-                    "db_path": "ops.db",
-                    "sql": "SELECT tier FROM services WHERE name='analytics'",
-                    "equals": "prod",
-                },
-                "cwd": str(ep2),
-            },
+        r2 = recall_and_execute_workflow(
+            'promote service "analytics" in ops.db',
+            cwd=ep2,
             db_path=wf_db,
         )
         elapsed_ms = (time.perf_counter() - t0) * 1000.0
-        assert r2["pass"] is True and r2["status"] == "PASS__TIER0_COMPILED_SKILL_RECALL"
+        assert r2 is not None and r2["pass"] is True
         assert elapsed_ms < 50.0
 
         # Negative falsifier: parameter-free / ungeneralizable trace MUST fail closed on auto-twin!
@@ -151,44 +170,94 @@ def test_move2b_egraph_congruence_closed_algebraic_rule_generalization() -> None
             return False
 
     with tempfile.TemporaryDirectory() as td:
-        store = VerifiedSkillStore(pathlib.Path(td) / "skills.sqlite", seed=False)
+        from canonical.swe_kernel.skill_verification_contract_v1 import ProjectTestOracle
+
+        base = pathlib.Path(td)
+        scope_id = "test/arithmetic-egraph/v1"
+        contract = {
+            "schema_version": 1,
+            "scope_id": scope_id,
+            "verification_kind": "TEST_SUITE",
+            "dependencies": {},
+            "preconditions": {},
+        }
+        train_dir = base / "train"
+        train_dir.mkdir(parents=True, exist_ok=True)
+        (train_dir / "subject.py").write_text("def total(p, t):\n    return p + p * t\n", encoding="utf-8")
+        (train_dir / "test_subject.py").write_text(
+            "import unittest\nfrom subject import total\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_a(self):\n"
+            "        self.assertAlmostEqual(total(100, 0.2), 80.0)\n"
+            "        self.assertAlmostEqual(total(50, 0.1), 45.0)\n",
+            encoding="utf-8",
+        )
+        store = VerifiedSkillStore(base / "skills.sqlite", seed=False)
         # Multi-token structural lesson (`p + p * t` -> `p * (1 - t)`): beyond 1-token operator swap!
         cryst = store.crystallize_code_fix(
             before_snippet="def total(p, t):\n    return p + p * t\n",
             after_snippet="def total(p, t):\n    return p * (1 - t)\n",
             language="python",
             error_class="ARITHMETIC",
-            twin_oracle=_twin_oracle,
+            contract=contract,
+            training_verifier=ProjectTestOracle(train_dir, "subject.py", ["test_subject.py"], scope_id),
         )
         assert cryst["crystallized"] is True
         rule = store.lookup_rules("python", "ARITHMETIC")[0]
         assert op_gen.derive_operator_swap(rule) is None
 
         shapes = [
-            ("def net(price, disc):\n    return price * (1 + disc)\n", "assert abs(net(200, 0.25) - 150.0) < 1e-6"),
-            ("def calc(base, rate):\n    return (1.0 + rate) * base\n", "assert abs(calc(80, 0.1) - 72.0) < 1e-6"),
-            ("def inv(sub, fee):\n    out = fee * sub + sub\n    return round(out, 4)\n", "assert inv(100, 0.15) == 85.0"),
+            ("s1", "def target(price, disc):\n    return price * (1 + disc)\n", "self.assertAlmostEqual(target(200, 0.25), 150.0)"),
+            ("s2", "def target(base, rate):\n    return (1.0 + rate) * base\n", "self.assertAlmostEqual(target(80, 0.1), 72.0)"),
+            ("s3", "def target(sub, fee):\n    out = fee * sub + sub\n    return round(out, 4)\n", "self.assertEqual(target(100, 0.15), 85.0)"),
             (
-                "class Quote:\n    def __init__(self, v):\n        self.v = v\n    def due(self, r):\n        return self.v * (1 + r)\n",
-                "assert abs(Quote(50).due(0.2) - 40.0) < 1e-6",
+                "s4",
+                "class Quote:\n    def __init__(self, v):\n        self.v = v\n    def due(self, r):\n        return self.v * (1 + r)\n"
+                "def target(v, r):\n    return Quote(v).due(r)\n",
+                "self.assertAlmostEqual(target(50, 0.2), 40.0)",
             ),
         ]
-        for src, check in shapes:
+        for label, src, check_stmt in shapes:
+            sdir = base / f"case_{label}"
+            sdir.mkdir(parents=True, exist_ok=True)
+            (sdir / "subject.py").write_text(src, encoding="utf-8")
+            (sdir / "test_subject.py").write_text(
+                "import unittest\nfrom subject import target\n"
+                "class T(unittest.TestCase):\n"
+                f"    def test_a(self):\n        {check_stmt}\n",
+                encoding="utf-8",
+            )
             hit = store.recall_and_apply_verified(
                 source_text=src,
                 language="python",
                 error_class="ARITHMETIC",
-                verifier=lambda c, chk=check: _exec_check(c, chk),
+                verifier=ProjectTestOracle(sdir, "subject.py", ["test_subject.py"], scope_id),
+                required_verification_kind="TEST_SUITE",
+                scope_id=scope_id,
+                context={"dependencies": {}, "preconditions": {}},
                 allow_scope_escalation=True,
             )
             assert hit is not None and hit["scope_tier"] == "SCOPE_ALGEBRAIC"
 
-        # Negative falsifier: rejecting verifier never admits an algebraic rewrite
+        # Negative falsifier: opposite-spec ProjectTestOracle never admits an algebraic rewrite
+        neg_dir = base / "neg_case"
+        neg_dir.mkdir(parents=True, exist_ok=True)
+        (neg_dir / "subject.py").write_text("def target(price, disc):\n    return price * (1 + disc)\n", encoding="utf-8")
+        (neg_dir / "test_subject.py").write_text(
+            "import unittest\nfrom subject import target\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_a(self):\n"
+            "        self.assertAlmostEqual(target(200, 0.25), 250.0)\n",
+            encoding="utf-8",
+        )
         rejected = store.recall_and_apply_verified(
-            source_text="def net(price, disc):\n    return price * (1 + disc)\n",
+            source_text="def target(price, disc):\n    return price * (1 + disc)\n",
             language="python",
             error_class="ARITHMETIC",
-            verifier=lambda _c: False,
+            verifier=ProjectTestOracle(neg_dir, "subject.py", ["test_subject.py"], scope_id),
+            required_verification_kind="TEST_SUITE",
+            scope_id=scope_id,
+            context={"dependencies": {}, "preconditions": {}},
             allow_scope_escalation=True,
         )
         assert rejected is None
@@ -299,11 +368,11 @@ def test_move3_predicate_world_abstraction_and_ui_elevation() -> None:
             )
             assert r2["pass"] and r2.get("transferred") is True and r2["trials_spent"] == 1
 
-            # Direct <50 ms protocol replay on third surface
+            # Direct <50 ms protocol replay on third surface (+ #6592 unconfined controller check)
             s3_dir = td_p / "s3"
             s3_dir.mkdir()
             s3 = NoisySurface(s3_dir / "rel.db", "worker_bus")
-            r3 = solve_or_learn(
+            r3_unconf = solve_or_learn(
                 {
                     "goal": 'ship release "worker_bus" in rel.db',
                     "postcondition": {
@@ -316,7 +385,14 @@ def test_move3_predicate_world_abstraction_and_ui_elevation() -> None:
                 },
                 db_path=td_p / "wf.sqlite",
             )
-            assert r3["pass"] and s3.shipped()
+            assert r3_unconf["pass"] is False
+            assert r3_unconf["status"] == "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
+            r3 = recall_and_execute_workflow(
+                'ship release "worker_bus" in rel.db',
+                cwd=s3_dir,
+                db_path=td_p / "wf.sqlite",
+            )
+            assert r3 is not None and r3["pass"] and s3.shipped()
         finally:
             if old_exp is None:
                 os.environ.pop("BRAIN_EXPERIENCE_FILE", None)
