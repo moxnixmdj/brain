@@ -659,9 +659,8 @@ class Creature:
             return None
         actions: list[dict[str, Any]] = []
         burns: dict[str, float] = {}
-        features = self._work_features or {}
         for w in affordable:
-            feat = features.get(w.id) or {}
+            feat = self._work_features.get(w.id) or {}
             actions.append(
                 {
                     "id": w.id,
@@ -673,18 +672,6 @@ class Creature:
             )
             if self._standing.hazard_observations > 0:
                 burns[w.id] = self._standing.expected_burn_probability(feat)
-        if not burns and getattr(self, "organ_graph", None) is not None:
-            try:
-                from canonical.swe_kernel.meta_circular_organ_graph_v1 import WORLD_MODEL
-
-                wm = self.organ_graph.get_primary(WORLD_MODEL, "world_model::action_delta")
-                if wm is not None:
-                    for w in affordable:
-                        pred = wm.invoke(w.id)
-                        if isinstance(pred, dict) and pred.get("known"):
-                            burns[w.id] = float(pred.get("fail_rate") or 0.0)
-            except Exception:
-                pass
         ranked: list[dict[str, Any]] = []
         try:
             from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, rank_instrumental_actions
@@ -743,7 +730,28 @@ class Creature:
                          if self._checkable.get(w.id, True) and self._life.can_finish(w.cost)]
             if checkable:
                 pool = checkable
-        work = self._choose_instrumental(pool)
+        if self._work_features and any(
+            (self._work_features.get(w.id) or {}).get("unlocks")
+            or (self._work_features.get(w.id) or {}).get("requires")
+            for w in pool
+        ):
+            work = self._choose_instrumental(pool)
+        elif self._work_features and self._standing.hazard_observations > 0:
+            affordable_pool = [w for w in pool if self._life.can_finish(w.cost)]
+            work = max(
+                affordable_pool,
+                key=lambda w: (
+                    round(
+                        w.ratio * (1.0 - 0.85 * self._standing.expected_burn_probability(self._work_features.get(w.id))),
+                        9,
+                    ),
+                    -w.cost,
+                    w.id,
+                ),
+                default=None,
+            )
+        else:
+            work = M.choose_next(self._life, pool)
         if work is None:
             return {"status": "IDLE", "reason": "nothing affordable on its own board"}
         if (self._inspector_investigation is not None
