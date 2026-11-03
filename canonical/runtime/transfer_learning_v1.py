@@ -34,7 +34,25 @@ from typing import Any, Callable, Mapping, Sequence
 SCHEMA = "PROJECT_BRAIN_TRANSFER_LEARNING_V1"
 
 PASS_TRANSFERRED = "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN"
+PASS_PRIOR_PLAN = "PASS__ENVIRONMENT_SOLVED_BY_CARRIED_MODEL"
 PASS_LEARNED = "PASS__ENVIRONMENT_SOLVED_BY_LEARNING"
+
+# Three different things, and until 2026-11-03 all three printed the same status:
+#
+#   RECALLED_PLAN  -- the exact stored plan was replayed and reached the goal
+#   CARRIED_MODEL  -- the carried transition model was PLANNED THROUGH, executed, and reached it
+#   LEARNED        -- nothing carried over was enough; it was searched for
+#
+# Measured 2026-11-03 on genuinely new instances: the stored lesson could already plan a target
+# the machine had never solved in 7 of 15 cases, but `drive` only ever replayed exact plans and
+# then spent the full trial budget searching with the model as a hint. Speedup 1.00x, and the
+# warm arm cost MORE environment calls than the cold arm in 14 of 15 cases. The capability was
+# there; the call order was wrong. `transferred` stays True for both of the first two, because
+# both are "prior experience did the work", but `authority` now says which -- so a status string
+# can never again be read as a speedup it did not earn.
+AUTHORITY_RECALLED = "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED"
+AUTHORITY_CARRIED = "CARRIED_MODEL_PLAN_EXECUTED_GOAL_OBSERVED"
+AUTHORITY_LEARNED = "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED"
 OPEN_NO_TRANSFER = "OPEN__NO_USABLE_PRIOR_EXPERIENCE"
 FAIL_TRANSFER_WRONG = "FAIL__RECALLED_PLAN_DID_NOT_REACH_GOAL"
 
@@ -359,6 +377,137 @@ def forget_miss(fp: Mapping[str, Any], goal_key: str, verifier: str = "") -> boo
     return _fp_save(data)
 
 
+def walk_carried_model(env: Any, prior: Mapping[str, Mapping[str, str]],
+                       is_goal: Callable[[Any], bool], *,
+                       max_act_calls: int = 96) -> dict[str, Any]:
+    """Execute the carried transition model from the real start state, watching for the goal.
+
+    THE SUBTLE PART, and it cost a measurement to learn. `environment_learning_v1.
+    shortest_plan` takes a predicate over state KEYS, not over observations, and its callers
+    build the goal-key set by testing `is_goal` against snapshots the learner happened to
+    observe. A carried model has no snapshots -- only `key -> {action: key}` -- so planning
+    through it with `is_goal` directly asks the goal predicate about a string. Measured
+    2026-11-03: every family's predicate raised or answered False, and the whole mechanism
+    silently found nothing. A silent no-op is worse than a missing feature.
+
+    So the goal is checked against REAL observations. Breadth-first over the carried model
+    gives a shortest path to each reachable key, in nondecreasing length; each is executed in
+    the real environment and the goal is observed. Prefixes are reused (`goto`), so the walk
+    costs about one act call per explored edge rather than one replay per candidate.
+
+    It is a HYPOTHESIS like every other recall: whatever it returns is executed and checked,
+    and a walk that never reaches the goal writes nothing.
+
+    `max_act_calls` bounds the WALK, not the truth. Measured 2026-11-03: the three-dial lock
+    carries a correct but incomplete model (112-127 transitions, right about the instance it
+    was taught on, silent about the new target), so an unbounded walk explored all of it and
+    spent +112 to +300 act calls finding nothing -- 300 for a goal it never reached. The
+    successes in the same measurement needed 20-48 act calls, so 96 keeps every success and
+    cuts the pure-loss path by two thirds. The bound is reported as `truncated`, never silent.
+    """
+    counters = {"act_calls": 0, "resets": 0, "edges": 0, "truncated": False}
+    if not prior:
+        return {"reached": False, "plan": None, "counters": counters}
+    if not (hasattr(env, "reset") and hasattr(env, "act") and hasattr(env, "state")):
+        return {"reached": False, "plan": None, "counters": counters}
+
+    env.reset()
+    counters["resets"] += 1
+    counters["act_calls"] += 1
+    root = el_state_key(env.state())
+
+    # VALIDATE AS YOU GO. This is breadth-first over the carried model, but an edge is only
+    # followed if the real environment agrees that it leads where the model said. A state the
+    # model invented is never expanded from, because every action out of it is a prediction
+    # from the wrong row -- that is what makes a failed walk cheap instead of exhaustive.
+    #
+    # (The first version of this function built the whole BFS tree first and then tried to
+    # mark edges as refuted during the walk. That pruning ran after the tree was finished and
+    # removed nothing; it was dead code claiming a measured improvement. Caught by reading it
+    # back. A walk that cannot prune has to explore the entire carried model before giving up.)
+    parents: dict[str, tuple[str, str] | None] = {root: None}
+    seen: set[str] = {root}
+    frontier: list[str] = [root]
+    off_model = 0
+
+    standing: list[str] = []
+
+    def goto(path: Sequence[str]) -> None:
+        """Walk to `path` from wherever the environment is standing, reusing a shared prefix."""
+        shared = 0
+        while (shared < len(standing) and shared < len(path)
+               and standing[shared] == path[shared]):
+            shared += 1
+        if shared < len(standing):
+            env.reset()
+            counters["resets"] += 1
+            counters["act_calls"] += 1
+            standing.clear()
+            shared = 0
+        for action in path[shared:]:
+            env.act(action)
+            counters["act_calls"] += 1
+            standing.append(action)
+
+    while frontier and not counters["truncated"]:
+        nxt: list[str] = []
+        for key in frontier:
+            base = [] if key == root else _path(parents, key)
+            for action, after in sorted((prior.get(key) or {}).items()):
+                counters["edges"] += 1
+                if after in seen:
+                    continue
+                seen.add(after)
+                path = base + [str(action)]
+                if counters["act_calls"] + len(path) + 1 > max_act_calls:
+                    counters["truncated"] = True
+                    break
+                try:
+                    goto(path)
+                    observed = el_state_key(env.state())
+                    counters["act_calls"] += 1  # the observation
+                    reached = bool(is_goal(env.state()))
+                except Exception:  # noqa: BLE001 - an effect we cannot read proves nothing
+                    observed, reached = "?", False
+                if reached:
+                    return {"reached": True, "plan": path, "counters": counters}
+                if observed == after:
+                    parents[after] = (key, str(action))
+                    nxt.append(after)
+                else:
+                    # The model was wrong about this edge on THIS instance. Do not expand from
+                    # the state it promised, and do not record it as a failure of the stored
+                    # model, which may be right about a different instance of the same kind.
+                    off_model += 1
+            if counters["truncated"]:
+                break
+        frontier = nxt
+
+    counters["off_model_edges"] = off_model
+    return {"reached": False, "plan": None, "counters": counters}
+
+
+def _path(parents: Mapping[str, tuple[str, str] | None], key: str) -> list[str]:
+    """The actions that reach `key` from the root, root first."""
+    out: list[str] = []
+    cur = key
+    guard = 0
+    while parents.get(cur) is not None and guard < 100_000:
+        parent, action = parents[cur]  # type: ignore[misc]
+        out.append(action)
+        cur = parent
+        guard += 1
+    out.reverse()
+    return out
+
+
+def el_state_key(observation: Any) -> str:
+    """`environment_learning_v1.state_key`, imported lazily so this module stays importable."""
+    from canonical.runtime import environment_learning_v1 as _el
+
+    return _el.state_key(observation)
+
+
 def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
              *, reached: bool,
              model: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
@@ -553,7 +702,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
                 "plan": plan, "plan_length": len(plan), "reached": True,
                 "transferred": True, "episode_persisted": retained["persisted"], "similarity": cand.get("similarity"),
                 "candidates_tried": tried,
-                "authority": "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED",
+                "authority": AUTHORITY_RECALLED,
                 "trials_spent": tried,
                 "duration_s": round(time.time() - started, 4),
             })
@@ -569,17 +718,62 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             prior = model
             break
 
+    # 1b. PLAN THROUGH the carried model before paying for a search.
+    #
+    # Measured 2026-11-03: on genuinely new instances this succeeds in 7 of 15 cases, and the
+    # old order -- replay exact plans, then search with the model as a hint -- turned that into
+    # a 1.00x speedup that cost MORE environment calls than carrying nothing. Planning is the
+    # whole reason a model is worth storing: reachability over the carried transitions, then
+    # execute, then CHECK. A plan is a hypothesis like any other, so it is never believed --
+    # it is executed and the goal is observed, and if it does not reach, nothing about it is
+    # remembered as working. No learning happens here, so a failure costs exactly one reset.
+    prior_plan_failed = False
+    if prior:
+        walk = walk_carried_model(env, prior, is_goal)
+        if walk["reached"]:
+            carried = [str(a) for a in walk["plan"]]
+            retained = remember(fp, gkey, carried, reached=True, model=prior)
+            return finish({
+                "schema": SCHEMA, "status": PASS_PRIOR_PLAN, "pass": True,
+                "plan": carried, "plan_length": len(carried),
+                "reached": True, "transferred": True,
+                "episode_persisted": retained["persisted"],
+                "prior_transitions": sum(len(v) for v in prior.values()),
+                "trials_spent": 1, "budget": budget,
+                "saved_trials": max(0, budget - 1),
+                "recall_candidates": len(candidates),
+                "carried_model_planned": True,
+                "carried_walk": dict(walk["counters"]),
+                "authority": AUTHORITY_CARRIED,
+                "duration_s": round(time.time() - started, 4),
+            })
+        # The walk did not reach. Nothing is written: the stored model may be right about the
+        # transitions it contains and simply incomplete about this instance, so a miss here is
+        # not evidence against the environment.
+        prior_plan_failed = True
+
+    # The carried model's walk did not reach. It may still be right about the transitions it
+    # contains and simply incomplete about this instance, so the search starts from it.
+    #
+    # The walk is NOT charged as a trial. Measured 2026-11-03: charging it cost one extra
+    # trial in every case where it failed (`spent = 1` re-quantised the chunk loop from 8
+    # trials to 9), which made the warm arm lose on both counters in 5 of 15 cases. A walk is
+    # exploration, not a trial: it is paid for in act calls, and that cost is reported
+    # separately in `carried_walk` so it can never hide. The trial budget is untouched, which
+    # makes the guarantee exact -- failing to use the prior costs act calls and nothing else.
+    budget_decided = budget
+
     # Learn in CHUNKS and stop the moment it works. Spending the whole budget
     # when a carried-over model already solves the goal is not transfer, it is
     # relearning with extra steps -- the saving is in the trials NOT taken.
-    chunk = max(1, min(budget, 8))
+    chunk = max(1, min(budget_decided, 8))
     spent = 0
     learned: dict[str, Any] = {}
     plan: list[Any] = []
     model_out: dict[str, Any] = {}
 
-    while spent < budget:
-        take = min(chunk, budget - spent)
+    while spent < budget_decided:
+        take = min(chunk, budget_decided - spent)
         partial = el.learn_model(env, actions, budget=take,
                                  seed=(seed or 0) + spent,
                                  max_depth=max_depth, heuristic=heuristic,
@@ -617,10 +811,11 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
                 "reached": True, "transferred": bool(prior), "episode_persisted": retained["persisted"],
                 "prior_transitions": sum(len(v) for v in (prior or {}).values()),
                 "trials_spent": spent, "budget": budget,
+                "prior_plan_attempted": prior_plan_failed,
                 "saved_trials": max(0, budget - spent),
                 "recall_candidates": len(candidates),
                 "learned": partial,
-                "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+                "authority": AUTHORITY_LEARNED,
                 "duration_s": round(time.time() - started, 4),
             })
 

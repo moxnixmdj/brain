@@ -325,6 +325,16 @@ def run() -> dict:
             sum(c["trial_speedup"] for c in cases) / len(cases), 3),
         "mean_act_speedup": round(
             sum(c["act_speedup"] for c in cases) / len(cases), 3),
+        # The residual cost, measured rather than asserted: in the cases the carried model
+        # cannot reach, the walk is pure overhead, so its size decides whether memory is a net
+        # loss there. Trials may tie but the walk still spends act calls.
+        "warm_more_act_calls_than_cold": sum(
+            c["warm"]["act_calls"] > c["cold"]["act_calls"] for c in cases),
+        "worst_act_call_overhead_ratio": round(max(
+            (c["warm"]["act_calls"] or 0) / max(1, c["cold"]["act_calls"] or 1)
+            for c in cases), 3),
+        "warm_worse_on_trials": sum(
+            (c["warm"]["trials"] or 0) > (c["cold"]["trials"] or 0) for c in cases),
     }
     return {
         "schema": "PROBE_TRANSFER_NEW_INSTANCE_V1",
@@ -362,6 +372,10 @@ def main(argv: list[str] | None = None) -> int:
     print(f"WARM genuine saving (fewer trials AND no more act calls): "
           f"{s['warm_genuine_saving_trials_and_acts']}/{s['cases']}")
     print(f"WARM reached the goal in 1 trial: {s['warm_reached_goal_in_one_trial']}/{s['cases']}")
+    print(f"WARM worse on trials than COLD: {s['warm_worse_on_trials']}/{s['cases']}"
+          f"   (must be 0: carrying memory may cost act calls, never trials)")
+    print(f"WARM spent more act calls: {s['warm_more_act_calls_than_cold']}/{s['cases']}"
+          f"   worst act-call overhead: {s['worst_act_call_overhead_ratio']}x")
     print(f"mean trial speedup: {s['mean_trial_speedup']}x   "
           f"mean act-call speedup: {s['mean_act_speedup']}x")
     print()

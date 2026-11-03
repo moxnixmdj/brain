@@ -70,16 +70,51 @@ def test_the_summary_is_derived_from_the_cases_not_asserted(tmp_path):
         c["warm"]["trials"] == 1 and c["warm"]["pass"] for c in cases)
 
 
-def test_carrying_a_lesson_never_silently_costs_more_than_it_saves(tmp_path):
-    """The finding this probe records, pinned so a regression in `drive` shows up as a change
-    in this number rather than as a silently slower warm arm. If a future change makes prior
-    experience actually save work, this assertion is expected to move -- update it with the
-    new measurement, in the open, and say so."""
+def test_carrying_a_lesson_actually_saves_work(tmp_path):
+    """The number this probe exists to move, pinned as a floor in both directions.
+
+    History, in the open, because this assertion has now moved once and the move was the point:
+
+      2026-11-03, before P1: `warm_genuine_saving` = 1/15, mean act speedup 0.977x.
+        `drive` replayed exact plans, then spent the full trial budget searching with the
+        carried model as a hint. The stored lesson could already plan 7 of 15 targets, but
+        nothing asked it to.
+      2026-11-03, after P1: = 8/15, mean trial speedup 6.33x, mean act speedup 2.26x, and
+        `warm_worse_on_trials` = 0/15.
+
+    The floor is 8 so a regression shows up as a failure rather than as a quietly slower warm
+    arm. The `warm_worse_on_trials == 0` assertion is the one that must never be relaxed: a
+    carried model may cost act calls on a miss, and may never cost trials.
+    """
     report = _run(tmp_path)
     summary = report["summary"]
-    # Observed 2026-11-03: 1/15. Carrying the lesson was a net cost in 14/15 cases because
-    # the prior model is injected but the search budget is not reduced, and recall replays up
-    # to three stored plans through env.act() before the search starts.
-    assert summary["warm_genuine_saving_trials_and_acts"] <= 2
-    assert summary["mean_act_speedup"] is not None
-    assert summary["mean_act_speedup"] < 1.25
+    assert summary["cold_solved"] == summary["cases"], "the cold arm must not regress"
+    assert summary["warm_solved"] == summary["cases"]
+    assert summary["warm_genuine_saving_trials_and_acts"] >= 8
+    assert summary["warm_reached_goal_in_one_trial"] >= 8
+    assert summary["mean_trial_speedup"] > 3.0
+    assert summary["mean_act_speedup"] > 1.5
+    # Carrying memory may cost act calls on a miss. It may never cost trials.
+    assert summary["warm_worse_on_trials"] == 0
+
+
+def test_a_warm_run_records_which_authority_did_the_work(tmp_path):
+    """Two different wins, two different labels -- so neither can be read as the other.
+
+    `drive` used to print `PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN` for an exact plan replay
+    AND for a run that merely inherited the prior model and then searched. Both now carry
+    distinct authorities, and this asserts both actually occur, so the distinction is live
+    rather than decorative. (A third, `MODEL_LEARNED_…`, covers the runs that are no faster.)
+    """
+    report = _run(tmp_path)
+    authorities = {c["warm"]["authority"] for c in report["cases"]}
+    assert "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED" in authorities
+    assert "CARRIED_MODEL_PLAN_EXECUTED_GOAL_OBSERVED" in authorities
+    for case in report["cases"]:
+        warm = case["warm"]
+        if warm["authority"] == "CARRIED_MODEL_PLAN_EXECUTED_GOAL_OBSERVED":
+            assert warm["status"] == "PASS__ENVIRONMENT_SOLVED_BY_CARRIED_MODEL"
+            # A carried-model win is a one-trial win by construction: it is a plan, not a search.
+            assert warm["trials"] == 1
+        if warm["authority"] == "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED":
+            assert warm["status"] == "PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN"
