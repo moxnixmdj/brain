@@ -234,7 +234,7 @@
           "route": "OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1"
         }
       ],
-      "checked_at_utc": "2026-11-03T13:59:59Z",
+      "checked_at_utc": "2026-11-03T14:17:17Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -274,7 +274,7 @@
       "selected_route": "OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-03T13:59:59Z",
+        "checked_at_utc": "2026-11-03T14:17:17Z",
         "execution_dependencies": [
           {
             "dependency": "Linux unprivileged namespace binaries (`unshare`, `setpriv`, `mount`, `ip`) + `/usr/bin/python3` (`10/10` `SUBSTRATE_READY`)",
@@ -356,7 +356,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-03T13:59:59Z",
+    "checked_at_utc": "2026-11-03T14:17:17Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
@@ -392,7 +392,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "2d2aab92d0cfe69c5a6e531c99c3a43fdd350903",
+          "git_blob_sha": "fe493476755ba2ff200218aa689f29bee16c2273",
           "path": "canonical/runtime/brain_unified_model_v1.py"
         },
         {

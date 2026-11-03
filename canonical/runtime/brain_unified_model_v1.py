@@ -613,9 +613,9 @@ class UnifiedModel:
                 identity_weight = (
                     2.0 if token in self._capability_id_terms.get(cid, ()) else 1.0
                 )
-                scores[cid] = scores.get(cid, 0.0) + weight * identity_weight
+                scores[cid] = scores.get(cid, 0.0) + identity_weight * math.log1p(weight)
         for cid in mentioned:
-            scores[cid] = scores.get(cid, 0.0) + 24.0
+            scores[cid] = scores.get(cid, 0.0) + math.log1p(24.0)
             matched.add(cid.casefold())
         # A stated path is data the caller supplied and the binder will bind, not
         # a word of the ask. Charge only the ask to the coverage budget, so that

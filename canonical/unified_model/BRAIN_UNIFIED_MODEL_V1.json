@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b298b8e6daa9d2390cec368b2021ebae73cdd28a52897f836bc3e308c918e8c0"
+  "value": "14915d2879dda1867e3b72fc328f46c52ba88250b5bd1a66ffe6f535bad35aa0"
  },
  "engines": [
   {
@@ -215921,7 +215921,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a50f73f60610f19bec339740e956c31c85fa6c99cf6547d47c9610f08e269b85",
+   "sha256": "b18d2db3c1fe8a93a3acf44a025a5ade178e859a819c2774d64ccb9640830db9",
    "status": "",
    "terms": {
     "1-step": 1,
@@ -230829,7 +230829,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "087bcd11550478f62e0753ffb8145f98d5aaab0c5508c66a825cd30eb0100ad3",
+   "sha256": "260084d8c8b9518c3f4140dc986a96cab99ea6c57509a56a25b3d367e11ea999",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
