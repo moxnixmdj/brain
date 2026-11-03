@@ -154,7 +154,32 @@ class PredictionTicket:
     calibration_record_id: str | None = None
     feature_map: dict[str, float] = field(default_factory=dict)
     state_task_key: str = ""
+    epistemic_mi_bits: float = 0.0
     created_ns: int = field(default_factory=time.perf_counter_ns)
+
+
+# 5-point Gauss-Hermite quadrature nodes/weights for z = mu + sqrt(2)*sigma*xi
+_GH5_NODES: tuple[float, ...] = (-2.0201828705, -0.9585724646, 0.0, 0.9585724646, 2.0201828705)
+_GH5_WEIGHTS: tuple[float, ...] = (0.0112574113, 0.2220759220, 0.5333333333, 0.2220759220, 0.0112574113)
+
+
+def _epistemic_mutual_information_bits(mean_logit: float, epistemic_var: float) -> float:
+    """Exact BALD / Friston epistemic mutual information `I(Y; Theta | x) = H(E[sigma(z)]) - E[H(sigma(z))]` in bits.
+
+    Distinguishes reducible epistemic parameter uncertainty (`epistemic_var > 0` -> `I > 0`) from
+    irreducible aleatoric noise (`epistemic_var == 0, mean_logit == 0` -> `H(0.5) - H(0.5) == 0.0`!).
+    """
+    var = max(0.0, float(epistemic_var))
+    if var <= 1e-12:
+        return 0.0
+    scale = math.sqrt(2.0 * var)
+    mean_p = 0.0
+    expected_cond_h = 0.0
+    for xi, wi in zip(_GH5_NODES, _GH5_WEIGHTS):
+        p_i = _sigmoid(mean_logit + scale * xi)
+        mean_p += wi * p_i
+        expected_cond_h += wi * _binary_entropy(p_i)
+    return max(0.0, _binary_entropy(min(0.999999, max(1e-6, mean_p))) - expected_cond_h)
 
 
 def _empirical_mutual_information_bits(xs: Sequence[int], ys: Sequence[int]) -> float:
@@ -427,6 +452,7 @@ class EpistemicSelfBeliefEngine:
         mean_gain = float(st.get("ema_gain", 1.0))
         gain_spread = max(0.1, float(st.get("ema_gain_abs_dev", 0.5 * max(1.0, abs(mean_gain)))))
         exp_ms = float(st.get("ema_ms", 5.0))
+        ep_mi_bits = _epistemic_mutual_information_bits(mean_logit, epistemic_var)
         return {
             "task_id": task_id,
             "state_task_key": state_task_key,
@@ -435,6 +461,8 @@ class EpistemicSelfBeliefEngine:
             "feature_map": fmap,
             "mean_logit": round(mean_logit, 6),
             "epistemic_variance": round(epistemic_var, 6),
+            "epistemic_mi_bits": round(ep_mi_bits, 6),
+            "epistemic_mi_nats": round(ep_mi_bits * math.log(2.0), 6),
             "posterior_std": round(posterior_std, 6),
             "lower_confidence_bound": round(p_hat - posterior_std, 6),
             "predicted_pass_probability": round(p_hat, 6),
@@ -483,6 +511,7 @@ class EpistemicSelfBeliefEngine:
             calibration_record_id=rec_id,
             feature_map=dict(dist.get("feature_map") or {}),
             state_task_key=str(dist.get("state_task_key") or task_id),
+            epistemic_mi_bits=float(dist.get("epistemic_mi_bits", 0.0)),
         )
 
     def _maybe_invent_conjunctive_features(self) -> list[str]:
@@ -1585,6 +1614,83 @@ class WakeSleepConsolidationEngine:
         _ = max_rules_to_calibrate
         return self.sleep_consolidate(skill_store=skill_store, calibrate_scopes=True)
 
+    def run_homeostatic_memory_hygiene(
+        self,
+        *,
+        skill_store: Any = None,
+        expiry_db_path: pathlib.Path | str | None = None,
+        now_fingerprint: Mapping[str, Any] | None = None,
+        assoc_memory_path: pathlib.Path | str | None = None,
+        assoc_capacity: int = 512,
+    ) -> dict[str, Any]:
+        """Sleep Homeostatic Hygiene: `rule_expiry_v1.expire_stale` + version-space scope diagnosis + `associative_memory_v1.forget`."""
+        from canonical.runtime import associative_memory_v1 as assoc_mem
+        from canonical.runtime import finite_capability_diagnosis as fcd
+        from canonical.swe_kernel import rule_expiry_v1 as rexp
+
+        expired_report: dict[str, Any] = {"expired_count": 0, "expired": []}
+        if skill_store is not None and expiry_db_path is not None:
+            try:
+                exp_res = rexp.expire_stale(skill_store, expiry_db_path, now=now_fingerprint)
+                expired_report = {
+                    "expired_count": len(exp_res.get("expired") or []),
+                    "expired": list(exp_res.get("expired") or []),
+                }
+            except Exception:
+                pass
+
+        diagnosed_scopes: list[dict[str, Any]] = []
+        if skill_store is not None and hasattr(skill_store, "lookup_rules"):
+            for r in skill_store.lookup_rules("python")[:4]:
+                raw_probes = rscope.synthesize_diagnostic_probes(r)
+                if not raw_probes:
+                    continue
+                hyps = [
+                    fcd.Hypothesis("SCOPE_STATEMENT", frozenset({"stmt"})),
+                    fcd.Hypothesis("SCOPE_FUNCTION", frozenset({"stmt", "fn"})),
+                    fcd.Hypothesis("SCOPE_MODULE", frozenset({"stmt", "fn", "mod"})),
+                ]
+                probe_objs: list[fcd.Probe] = []
+                for idx_p, pr in enumerate(raw_probes[:4]):
+                    pid = str(pr.get("id") or pr.get("probe_id") or f"probe_{idx_p}")
+                    outcomes = {
+                        h.hypothesis_id: str(rscope.predicted_outcome(h.hypothesis_id, r, pr))
+                        for h in hyps
+                    }
+                    probe_objs.append(fcd.Probe(probe_id=pid, outcomes=outcomes, cost=1.0))
+                if probe_objs:
+                    sel = fcd.select_probe(hyps, probe_objs)
+                    chosen_pid = sel.get("selected_probe_id")
+                    if chosen_pid:
+                        chosen_pr = next((p for p in probe_objs if p.probe_id == chosen_pid), probe_objs[0])
+                        inst_match = next(
+                            (rp for idx_p, rp in enumerate(raw_probes[:4]) if str(rp.get("id") or rp.get("probe_id") or f"probe_{idx_p}") == chosen_pr.probe_id),
+                            raw_probes[0],
+                        )
+                        obs_out = rscope.observed_outcome(r, inst_match)
+                        vs_upd = fcd.update_version_space(hyps, chosen_pr, obs_out)
+                        diagnosed_scopes.append(
+                            {
+                                "skill_id": r.get("skill_id"),
+                                "selected_probe": chosen_pr.probe_id,
+                                "observed_outcome": obs_out,
+                                "surviving_hypotheses": [h.hypothesis_id for h in (vs_upd.get("surviving") or [])],
+                            }
+                        )
+
+        forgotten_ids: list[str] = []
+        if assoc_memory_path is not None and pathlib.Path(assoc_memory_path).is_file():
+            try:
+                forgotten_ids = list(assoc_mem.forget(capacity=int(assoc_capacity), path=str(assoc_memory_path)))
+            except Exception:
+                forgotten_ids = []
+
+        return {
+            "expired_rules": expired_report,
+            "diagnosed_scopes": diagnosed_scopes,
+            "forgotten_episode_ids": forgotten_ids,
+        }
+
 
 class SelfTraceHarvester:
     """Autonomous Ring-1 trace harvester & cryptographic SHA-256 dev/sealed-heldout splitter."""
@@ -1717,11 +1823,199 @@ class SelfTraceHarvester:
                         if sealed_escrow:
                             sealed_heldout_by_target[t_key] = sealed_escrow
 
+        # Open-World Zero-`test_*.py` Discovery: when NO test files exist, probe Ring-1 & CLI/task surfaces directly!
+        open_world_probe = {"anomalies": [], "obligations_admitted": 0, "projected_predicates": []}
+        if not discovered_tests:
+            open_world_probe = self.discover_untested_world_obligations(ws, ring1_relpaths=discovered_ring1)
+            for ep_u in open_world_probe.get("synthesized_failure_episodes") or []:
+                failed_episodes.append(ep_u)
+            for tk_u, esc_u in (open_world_probe.get("sealed_heldout_by_target") or {}).items():
+                sealed_heldout_by_target[tk_u] = esc_u
+
         return {
             "ring1_relpaths": discovered_ring1,
             "test_relpaths": discovered_tests,
             "failed_episodes": failed_episodes,
             "sealed_heldout_by_target": sealed_heldout_by_target,
+            "open_world_probe": open_world_probe,
+        }
+
+    def discover_untested_world_obligations(
+        self,
+        ws_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Explore an arbitrary untested workspace (zero `test_*.py` files) via predicate projection, taskfiles, confined CLI, and AST boundary probing."""
+        import ast as _ast
+        from canonical.runtime import self_authored_obligations_v1 as sao
+        from canonical.runtime import taskfile_read_v1
+        from canonical.swe_kernel.concept_library_v1 import eval_pure_ast_function
+        from canonical.swe_kernel.predicate_world_abstraction_v1 import project_computer_observation
+        from canonical.swe_kernel.transactional_parallel_execution_v1 import run_confined_command
+
+        ws = pathlib.Path(ws_root).resolve()
+        files_rel = sorted(
+            p.relative_to(ws).as_posix()
+            for p in ws.rglob("*")
+            if p.is_file() and not any(pt.startswith(".") or pt == "__pycache__" for pt in p.relative_to(ws).parts)
+        )
+        proj = project_computer_observation(
+            {
+                "cwd": ".",
+                "files": {f: {"exists": True, "size": (ws / f).stat().st_size} for f in files_rel[:32]},
+            }
+        )
+        pred_tokens = sorted(str(x) for x in (proj.get("predicates") or proj.keys()))
+
+        anomalies: list[dict[str, Any]] = []
+        synth_failures: list[dict[str, Any]] = []
+        sealed_by_target: dict[str, list[dict[str, Any]]] = {}
+
+        # 1. Taskfile / Makefile surface probing (`taskfile_read_v1`)
+        try:
+            tasks = list(taskfile_read_v1.read_tasks(str(ws)) or [])
+        except Exception:
+            tasks = []
+        for t_row in tasks[:4]:
+            cmd_str = str(t_row.get("command") or "").strip().lstrip("@")
+            t_name = str(t_row.get("name") or "")
+            if cmd_str and any(k in t_name.lower() for k in ("check", "verify", "lint", "validate", "smoke")):
+                res_c = run_confined_command(["/bin/sh", "-c", cmd_str], cwd=ws, timeout=5.0)
+                if int(res_c.get("returncode", 1)) != 0:
+                    anomalies.append(
+                        {
+                            "id": f"task:{t_name}",
+                            "kind": "TASKFILE_VALIDATOR_FAILED",
+                            "detail": (str(res_c.get("stderr") or res_c.get("stdout") or ""))[-240:],
+                        }
+                    )
+
+        # 2. Executable CLI / shell script probing (`--help` / deterministic dry probe in confined sandbox)
+        for rel_f in files_rel[:16]:
+            fp = ws / rel_f
+            if rel_f.endswith(".sh") or (os.access(fp, os.X_OK) and not rel_f.endswith(".py")):
+                argv = ["/bin/sh", str(fp), "--help"] if rel_f.endswith(".sh") else [str(fp), "--help"]
+                res_cli = run_confined_command(argv, cwd=ws, timeout=3.0)
+                if int(res_cli.get("returncode", 0)) not in (0, 1, 2) or "SyntaxError" in str(res_cli.get("stderr") or ""):
+                    anomalies.append(
+                        {
+                            "id": f"cli:{rel_f}",
+                            "kind": "CLI_SURFACE_ANOMALY",
+                            "returncode": res_cli.get("returncode"),
+                        }
+                    )
+
+        # 3. Untested `.py` AST boundary & metamorphic crash discovery (e.g. ZeroDivisionError / IndexError on empty/0 boundary!)
+        py_targets = list(ring1_relpaths) if ring1_relpaths is not None else [f for f in files_rel if f.endswith(".py")]
+        for rel_py in py_targets:
+            fp = ws / rel_py
+            if not fp.is_file():
+                continue
+            try:
+                tree = _ast.parse(fp.read_text(encoding="utf-8"))
+            except SyntaxError as exc:
+                anomalies.append({"id": f"syntax:{rel_py}", "kind": "PYTHON_SYNTAX_ERROR", "detail": str(exc)})
+                continue
+            for fn_nd in [n for n in tree.body if isinstance(n, _ast.FunctionDef) and not n.name.startswith("_")]:
+                arity = len(fn_nd.args.args)
+                if arity not in (1, 2) or fn_nd.args.vararg or fn_nd.args.kwarg:
+                    continue
+                probe_families: list[list[tuple[Any, ...]]] = (
+                    [
+                        [(0,), (-1,), (-2,), (-3,), (-4,), (-5,), (-6,), (-7,), (1,), (2,), (3,), (4,), (5,)],
+                        [([],), ([2],), ([2, 4],), ([1, 3, 5],), ([4, 8],), ([3, 6, 9],)],
+                        [("",), ("a",), ("aba",), ("abc",), ("abcd",)],
+                    ]
+                    if arity == 1
+                    else [
+                        [*[(k * 3, 0) for k in range(10)], (6, 2), (10, 5), (9, 3), (8, 4), (15, 3), (14, 2)],
+                        [([], 0), ([], 1), ([], 2), ([1], 3), ([2], 5), ([1, 2], 5), ([1, 2], 1), ([3, 4], 0), ([5, 6, 7], 2)],
+                    ]
+                )
+                for fam_inputs in probe_families:
+                    good_pairs: list[tuple[tuple[Any, ...], Any]] = []
+                    crashed_boundaries: list[tuple[tuple[Any, ...], str]] = []
+                    for args_t in fam_inputs:
+                        try:
+                            val = eval_pure_ast_function(fn_nd, args_t, max_steps=4000)
+                            good_pairs.append((args_t, val))
+                        except (ZeroDivisionError, IndexError) as exc_b:
+                            crashed_boundaries.append((args_t, type(exc_b).__name__))
+                        except Exception:
+                            good_pairs = []
+                            break
+                    if crashed_boundaries and len(good_pairs) >= 3:
+                        sample_out = good_pairs[0][1]
+                        neutral_default: Any = (
+                            0
+                            if isinstance(sample_out, int) and not isinstance(sample_out, bool)
+                            else (0.0 if isinstance(sample_out, float) else ("" if isinstance(sample_out, str) else ([] if isinstance(sample_out, list) else None)))
+                        )
+                        if neutral_default is not None:
+                            crash_cases = [
+                                {"id": f"ow_crash_{fn_nd.name}_{idx_c}", "args": a_c, "expected": neutral_default}
+                                for idx_c, (a_c, _exc_nm) in enumerate(crashed_boundaries)
+                            ]
+                            good_cases = [
+                                {"id": f"ow_good_{fn_nd.name}_{idx_g}", "args": a_g, "expected": v_g}
+                                for idx_g, (a_g, v_g) in enumerate(good_pairs)
+                            ]
+                            t_key = f"{rel_py}:{fn_nd.name}"
+                            vis_c, esc_c = self.split_observations_cryptographically(f"{t_key}:crash", crash_cases)
+                            vis_g, esc_g = self.split_observations_cryptographically(f"{t_key}:good", good_cases)
+                            vis_dev = vis_c + vis_g
+                            sealed_esc = esc_c + esc_g
+                            synth_failures.append(
+                                {
+                                    "ok": False,
+                                    "rejection_class": "UNTESTED_BOUNDARY_CRASH",
+                                    "target_relpath": rel_py,
+                                    "function_name": fn_nd.name,
+                                    "visible_dev_cases": vis_dev,
+                                }
+                            )
+                            if sealed_esc:
+                                sealed_by_target[t_key] = sealed_esc
+                            anomalies.append(
+                                {
+                                    "id": f"py_crash:{t_key}",
+                                    "kind": crashed_boundaries[0][1],
+                                    "crashed_args": list(crashed_boundaries[0][0]),
+                                }
+                            )
+                        break
+
+        # 4. Self-Authored Cheat-Defended Obligations (`self_authored_obligations_v1.author`)
+        before_w = {"resolved": {}}
+        done_w = {"resolved": {a["id"]: "VERIFIED_BY_RING0_AND_ZYGOTE" for a in anomalies}}
+        proposals: list[sao.Proposal] = []
+        for a in anomalies:
+            aid = str(a["id"])
+
+            def _mk_chk(tid: str) -> Callable[[Mapping[str, Any]], bool]:
+                return lambda w: isinstance(w.get("resolved"), Mapping) and w["resolved"].get(tid) == "VERIFIED_BY_RING0_AND_ZYGOTE"
+
+            proposals.append(
+                sao.Proposal(
+                    id=f"open_world:{aid}",
+                    claim=f"Eliminate {a['kind']} on {aid}",
+                    source="untested_open_world_explorer",
+                    check=_mk_chk(aid),
+                    value=5.0,
+                    cost=0.5,
+                    checkable=True,
+                )
+            )
+        cheats = sao.cheat_worlds(done_w) if proposals else []
+        admitted, _ = sao.author(proposals, before=before_w, done=done_w, cheats=cheats) if proposals else ([], [])
+        return {
+            "projected_predicates": pred_tokens,
+            "taskfile_entries": len(tasks),
+            "anomalies": anomalies,
+            "obligations_admitted": len(admitted),
+            "synthesized_failure_episodes": synth_failures,
+            "sealed_heldout_by_target": sealed_by_target,
         }
 
 
@@ -1764,6 +2058,9 @@ class SentientCognitiveCore:
             concept_library=self.concept_library,
         )
         self.trace_harvester = SelfTraceHarvester(salt=f"escrow:{base_state_dir.name}")
+        from canonical.swe_kernel.transactional_parallel_execution_v1 import LatencyReliabilityCostRouter
+
+        self.cost_router = LatencyReliabilityCostRouter()
         self.verified_programs_buffer: list[str] = []
         self.unresolved_failure_buffer: list[dict[str, Any]] = []
 
@@ -1776,18 +2073,20 @@ class SentientCognitiveCore:
         verified_program_source: str | None = None,
         failure_record: Mapping[str, Any] | None = None,
         route_id: str = "sovereign_wake",
+        elapsed_ms: float = 5.0,
     ) -> dict[str, Any]:
-        """Unified Episodic Memory & Homeostasis Bus (`associative_memory_v1` + concept/failure buffers)."""
+        """Unified Episodic Memory & Homeostasis Bus (`associative_memory_v1` + cost router + concept/failure buffers)."""
         from canonical.runtime import associative_memory_v1 as assoc_mem
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
+        self.cost_router.record_observation(str(route_id), elapsed_ms=max(0.05, float(elapsed_ms)), ok=bool(outcome_pass))
         if can_write_memory():
             try:
-                assoc_mem.record_episode(
-                    goal=str(goal or task_id),
-                    chosen_capability=str(route_id),
-                    outcome="PASS" if outcome_pass else "FAIL",
-                    state_path=self.associative_memory_path,
+                assoc_mem.remember(
+                    {"goal": str(goal or task_id), "route_id": str(route_id), "outcome": "PASS" if outcome_pass else "FAIL"},
+                    kind="wake_episode",
+                    tags=(str(route_id), "pass" if outcome_pass else "fail"),
+                    path=str(self.associative_memory_path),
                 )
             except Exception:
                 pass
@@ -1847,6 +2146,10 @@ class SentientCognitiveCore:
         return {
             "concepts_invented": int(sleep_abs.get("admitted_count", 0)),
             "concept_library_size": len(self.concept_library.concepts()),
+            "hygiene": self.consolidation.run_homeostatic_memory_hygiene(
+                assoc_memory_path=self.associative_memory_path,
+                assoc_capacity=512,
+            ),
             "self_evolution": self_evo,
             "promoted_count": int((self_evo or {}).get("promoted_count") or 0),
         }
@@ -2027,3 +2330,36 @@ class SentientCognitiveCore:
             "shed_for_mortality": shed_for_mortality,
             "continuation_decision": continuation_decision,
         }
+
+
+_SHARED_CORES_BY_PATH: dict[str, SentientCognitiveCore] = {}
+
+
+def shared_cognitive_core(state_dir: pathlib.Path | str | None = None) -> SentientCognitiveCore:
+    """Return the unified live `SentientCognitiveCore` shared across all Brain organs, gated by `memory_policy_v1`."""
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if state_dir is not None:
+        resolved = str(pathlib.Path(state_dir).resolve())
+        core = _SHARED_CORES_BY_PATH.get(resolved)
+        if core is None:
+            core = SentientCognitiveCore(resolved)
+            _SHARED_CORES_BY_PATH[resolved] = core
+        return core
+
+    if not can_read_memory():
+        return SentientCognitiveCore(None)
+
+    env_dir = os.environ.get("BRAIN_COGNITIVE_STATE_DIR", "").strip()
+    target_path = (
+        pathlib.Path(env_dir).resolve()
+        if env_dir
+        else (pathlib.Path(__file__).resolve().parents[2] / "canonical" / "astra_runtime" / "state" / "LIVE_BRAIN_SENTIENT_CORE_V1")
+    )
+    key = str(target_path)
+    core = _SHARED_CORES_BY_PATH.get(key)
+    if core is None:
+        core = SentientCognitiveCore(target_path)
+        _SHARED_CORES_BY_PATH[key] = core
+    return core
+

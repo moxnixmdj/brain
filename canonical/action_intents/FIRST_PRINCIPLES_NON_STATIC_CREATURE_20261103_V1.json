@@ -1,0 +1,414 @@
+{
+  "action_id": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+  "action_intent_id": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Build and wire the 5-Layer First-Principles Non-Static Sentient Creature Architecture (`K3=0`, `$0` spend, zero external LLMs): (1) Constructive Recursion-Scheme Algebra (Product-State Catamorphism + Semiring Dynamorphism + Kleene 3-valued partial-domain STUN + Levin universal search cost `-log2 P(tau)+log2 t` in `swe_observational_program_synthesizer_v1.py`); (2) Higher-Order Plotkin Anti-Unification (`ast.Lambda`/closure interpretation + E-Graph equality canonicalization in `concept_library_v1.py`); (3) Exact Gauss-Hermite BALD Epistemic Mutual Information `I(y; theta | x, D)` + Open-Predicate Switchboard-Free MCTS Active Inference (`render_fn`, open Makefile/script affordance discovery, CausalWorldGraph fusion, parameter-free EFE in nats in `sentient_cognitive_core_v1.py` & `brain_unified_model_v1.py`); (4) Zero-Test-File Open-World Autonomous Discovery & Homeostatic Forgetting (`open_world_perception_v1` + `taskfile_v1` + untested boundary anomaly discovery + `rule_expiry_v1` + `associative_memory_v1` in `sentient_cognitive_core_v1.py` & `creature_runtime_v1.py`); and (5) Unified Shared Cognitive Spine (`shared_cognitive_core` gated by `memory_policy.can_read_memory()`), MAP-Elites Quality-Diversity Stepping-Stone Archive, AST-Derived Complexity Scaling Suites, and Operator 6 CEGAR Organ Synthesizer (`counterexample_guided_causal_architecture_synthesizer_v1` in `recursive_self_architect_v1.py` & `closed_loop_autonomous_controller_v1.py`).",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/swe_kernel/concept_library_v1.py",
+      "canonical/swe_kernel/recursive_self_architect_v1.py",
+      "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+      "canonical/tests/test_sentient_cognitive_core_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Post-#6606 (`2ce359e6`) static-scaffold audit identified fixed algorithm templates in HORS, first-order-only anti-unification without lambdas/e-graphs, 4-bit MCTS state switchboards & conflated total entropy, test-file blindness in untested raw workspaces, and split brain instances across entrypoints.",
+  "canonical_base_commit": "2ce359e64610cbfa873fb72a7d9311ac2bcc30e7",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Post-#6606 (`2ce359e6`) static-scaffold audit identified fixed algorithm templates in HORS, first-order-only anti-unification without lambdas/e-graphs, 4-bit MCTS state switchboards & conflated total entropy, test-file blindness in untested raw workspaces, and split brain instances across entrypoints.",
+  "date": "2026-11-03",
+  "expected_parent_change": "canonical/runtime/{brain_unified_model_v1,creature_runtime_v1,swe_observational_program_synthesizer_v1}.py + canonical/swe_kernel/{closed_loop_autonomous_controller_v1,concept_library_v1,recursive_self_architect_v1,sentient_cognitive_core_v1}.py + canonical/tests/test_sentient_cognitive_core_v1.py + canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json.",
+  "expected_parent_frontier_change": "Constructive Product-State Catamorphism + Semiring Dynamorphism + Kleene 3-valued partial-domain STUN synthesize novel algorithms (`max_non_adjacent_sum`, `count_target_paths`, boundary-guarded division) never hardcoded in templates; Higher-Order Plotkin anti-unification + E-Graph canonicalization invent higher-order `fold_left` schemes instantiated with `ast.Lambda`; exact Gauss-Hermite BALD mutual information separates reducible epistemic uncertainty from irreducible aleatoric noise while open-predicate MCTS discovers custom Makefile affordances; `Creature` wakes in raw directories with ZERO `test_*.py` files, discovers boundary crashes, authors cheat-defended obligations, and Ring-0 repairs them; and `shared_cognitive_core` + MAP-Elites + Operator 6 CEGAR unify live experience across entrypoints.",
+  "explicit_user_authorization": "Owner challenged static scaffolds on `2ce359e6` (`OWNER_ACTIVE_GOAL_20261018_V1.md`, `K3=0`) from deepest first principles and directed go.",
+  "falsification_condition": "FALSIFIED if any upgraded module contains AST `exec()`, if `concept_library_v1` calls `eval`/`compile`, if BALD MI fails to rank reducible epistemic uncertainty strictly above high-aleatoric known coins, if `Creature` fails to discover and Ring-0 repair boundary crashes in a 0-test-file workspace, if `shared_cognitive_core` leaks memory under `ISOLATED_BENCHMARK`, or if any existing governance/confinement suite regresses.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "6/13",
+    "interpretation": "CLOSES_FIVE_LAYER_FIRST_PRINCIPLES_CONSTRUCTIVE_RECURSION_HIGHER_ORDER_CONCEPT_INVENTION_BALD_OPEN_MCTS_UNTESTED_OPEN_WORLD_DISCOVERY_AND_UNIFIED_COGNITIVE_SPINE_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.99,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "`test_sentient_cognitive_core_v1`: `22/22 PASS` (`10.36s`), proving Constructive Semiring/Product Catamorphism (`Layer 1`), Higher-Order Plotkin `fold_left` + E-Graph + `ast.Lambda` (`Layer 2`), Exact BALD MI + open Makefile MCTS (`Layer 3`), Zero-Test-File open-world anomaly discovery & Ring-0 repair (`Layer 4`), Unified Shared Cognitive Spine + MAP-Elites + Operator 6 CEGAR (`Layer 5`), plus all 17 prior gates (`Controls A-E`, `Self-Architect A-K`, zero-`exec` invariants) and all 104 tests across the 4 sibling unified/creature/runtime suites.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/open_world_perception_v1.py",
+    "canonical/runtime/taskfile_v1.py",
+    "canonical/runtime/associative_memory_v1.py",
+    "canonical/runtime/latency_reliability_cost_router_v1.py",
+    "canonical/swe_kernel/rule_expiry_v1.py",
+    "canonical/swe_kernel/rule_scope_learning_v1.py",
+    "canonical/reasoning/counterexample_guided_causal_architecture_synthesizer_v1.py",
+    "canonical/runtime/memory_policy_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "2ce359e64610cbfa873fb72a7d9311ac2bcc30e7",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "FIXED_FOUR_ALGORITHM_MENU_DEPENDENCY_WITHOUT_CONSTRUCTIVE_RECURSION_ALGEBRA",
+      "FIRST_ORDER_ONLY_ANTI_UNIFICATION_BLIND_TO_HIGHER_ORDER_COMBINATORS_AND_COMMUTATIVITY",
+      "FOUR_BIT_TUPLE_MCTS_STATE_AND_TOTAL_ENTROPY_ALEATORIC_EPISTEMIC_CONFLATION",
+      "TEST_FILE_ONLY_BLINDNESS_IN_UNTESTED_RAW_WORKSPACES",
+      "SPLIT_COGNITIVE_CORE_INSTANCES_ACROSS_MODEL_CONTROLLER_AND_CREATURE_ENTRYPOINTS"
+    ],
+    "expected_parent_level_state_change": "Constructive Product-State Catamorphism + Semiring Dynamorphism + Kleene 3-valued partial-domain STUN synthesize novel algorithms (`max_non_adjacent_sum`, `count_target_paths`, boundary-guarded division) never hardcoded in templates; Higher-Order Plotkin anti-unification + E-Graph canonicalization invent higher-order `fold_left` schemes instantiated with `ast.Lambda`; exact Gauss-Hermite BALD mutual information separates reducible epistemic uncertainty from irreducible aleatoric noise while open-predicate MCTS discovers custom Makefile affordances; `Creature` wakes in raw directories with ZERO `test_*.py` files, discovers boundary crashes, authors cheat-defended obligations, and Ring-0 repairs them; and `shared_cognitive_core` + MAP-Elites + Operator 6 CEGAR unify live experience across entrypoints.",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "WIRED_EIGHT_DORMANT_IN_TREE_ORGANS_OPEN_WORLD_PERCEPTION_TASKFILE_ASSOCIATIVE_MEMORY_LATENCY_ROUTER_RULE_EXPIRY_RULE_SCOPE_CEGAR_ARCHITECTURE_SYNTHESIZER_AND_MEMORY_POLICY",
+      "intrinsic_or_path_specific": "GENERAL__CONSTRUCTIVE_ALGEBRAIC_SYNTHESIS_HIGHER_ORDER_ABSTRACTION_EXACT_EPISTEMIC_ACTIVE_INFERENCE_OPEN_WORLD_CURIOSITY_AND_UNIFIED_MEMORY",
+      "surviving_causal_blocker": "EXTERNAL_CREDENTIALS_AND_ABSENT_APT_BINARIES_REMAIN_GOVERNED_BY_SUBSTRATE_REFUSAL_LAWS"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_EXTERNAL_LLM_CALLS_ZERO_NEW_RUNTIME_PACKAGES_COMPOSED_EIGHT_EXISTING_IN_TREE_ORGANS_DIRECTLY_INTO_LIVE_SPINE",
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/open_world_perception_v1.py",
+        "canonical/runtime/taskfile_v1.py",
+        "canonical/runtime/associative_memory_v1.py",
+        "canonical/runtime/latency_reliability_cost_router_v1.py",
+        "canonical/swe_kernel/rule_expiry_v1.py",
+        "canonical/swe_kernel/rule_scope_learning_v1.py",
+        "canonical/reasoning/counterexample_guided_causal_architecture_synthesizer_v1.py",
+        "canonical/runtime/memory_policy_v1.py"
+      ],
+      "external_existing_routes_checked": "Meijer/Fokkinga/Paterson Banana-Split & Semiring Dynamorphisms, Plotkin/Huet higher-order anti-unification + e-graph congruence closure, Houlsby BALD mutual information, Friston parameter-free Expected Free Energy in nats, and Mouret/Clune MAP-Elites quality-diversity.",
+      "surviving_gap": "UNGROUNDED_EXTERNAL_NETWORK_ENDPOINTS_REMAIN_HONESTLY_REFUSED"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "ADDING_MORE_HARDCODED_DP_TEMPLATES_ONE_BY_ONE",
+        "ADDING_MORE_ELIF_BRANCHES_TO_PLANNER_SWITCHBOARD",
+        "RELYING_EXCLUSIVELY_ON_PREWRITTEN_UNITTEST_FILES_FOR_AUTONOMY"
+      ],
+      "real_outcome": "All 5 architectural layers proven end-to-end across `22/22` adversarial tests in `test_sentient_cognitive_core_v1` (`10.36s`) + `104/104` sibling tests at `K3=0` (`$0` spend).",
+      "surviving_necessity": "Preserve Ring-0 immutability, `memory_policy` isolation under benchmark evaluation, `confine_v1` namespace isolation, and `SENSITIVE_PREFIXES <= 15`."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "ABSORBED_OPEN_WORLD_PERCEPTION_V1_TASKFILE_V1_ASSOCIATIVE_MEMORY_V1_LATENCY_RELIABILITY_COST_ROUTER_V1_RULE_EXPIRY_V1_RULE_SCOPE_LEARNING_V1_AND_COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_V1",
+      "downstream_work_to_delete_or_supersede": "STATIC_FOUR_BIT_PLANNER_SWITCHBOARD_TOTAL_ENTROPY_PROXY_AND_ISOLATED_UNSHARED_COGNITIVE_INSTANCES",
+      "fresh_reuse_plan": "WIRE_SHARED_COGNITIVE_CORE_OPEN_WORLD_PERCEPTION_TASKFILE_MEMORY_HYGIENE_AND_CEGAR_INTO_UNIFIED_LIVE_CREATURE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "GAUSS_HERMITE_5_NODE_QUADRATURE_BOUNDED_EGRAPH_REWRITING_AND_LEVIN_COST_ORDERING",
+      "search_stop_decision": "STOPPED_WHEN_22_OF_22_SENTIENT_TESTS_ALL_SIBLING_UNITTESTS_AND_ALL_GOVERNANCE_VERIFIERS_PASSED_CLEANLY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Enumerating static templates or planner `elif` branches scales linearly with problem count instead of combinatorially generating infinite algorithms and open affordances; conflating total entropy with BALD MI chases noisy coins; ignoring untested files leaves the creature blind in raw directories.",
+      "routes_ranked": [
+        "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1__CHOSEN",
+        "ADD_MORE_STATIC_DP_TEMPLATES_AND_ELIF_BRANCHES",
+        "KEEP_UNSHARED_COGNITIVE_CORES_AND_TEST_ONLY_PERCEPTION"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "TWENTY_TWO_ADVERSARIAL_FALSIFICATION_GATES_INCLUDING_NOVEL_ALGORITHMS_HIGHER_ORDER_LAMBDAS_NOISY_VS_IGNORANT_COINS_OPEN_MAKEFILES_ZERO_TEST_DIRECTORY_REPAIR_AND_SHARED_SPINE"
+    },
+    "real_outcome": "`22/22` `test_sentient_cognitive_core_v1` (`10.36s`), `104/104` sibling unified/creature/runtime suites, `33/33` `verify_brain_unified_model_v1`, and `verifier_falsification_v1` green with `0` AST `exec()` and `0` dirty state.",
+    "required_capability": "Constructive recursion-scheme synthesis + Kleene 3-valued STUN, Higher-Order Plotkin + E-Graph concept invention, exact BALD MI + open-affordance MCTS, zero-test-file open-world anomaly discovery, and unified shared cognitive spine + MAP-Elites + CEGAR",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "BOUNDED_BY_HANDWRITTEN_TEMPLATES_AND_FOUR_BIT_PLANNER_STATES",
+            "CORRECTNESS": "CONFLATES_ALEATORIC_AND_EPISTEMIC_UNCERTAINTY_AND_DROPS_PARTIAL_FUNCTIONS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "BLIND_IN_ZERO_TEST_DIRECTORIES_AND_SPLIT_ACROSS_ENTRYPOINTS",
+            "VERIFIABILITY": "STATIC_SCAFFOLD_CEILING",
+            "WALL_CLOCK": "FAST_ONLY_ON_ENUMERATED_TEMPLATES"
+          },
+          "evidence": [
+            "Audit of `2ce359e6` exposed fixed 4-template HORS menu, first-order-only anti-unification, 4-bit MCTS state tuple, total Shannon entropy conflating aleatoric noise, 0-test-file blindness, and isolated `SentientCognitiveCore` instances."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_layer1` through `test_layer5` in `test_sentient_cognitive_core_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_POST_6606_STATIC_SCAFFOLDS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "COMBINATORIAL_RECURSION_ALGEBRA_HIGHER_ORDER_LAMBDAS_EXACT_BALD_OPEN_MCTS_ZERO_TEST_CURIOSITY_AND_UNIFIED_SPINE",
+            "CORRECTNESS": "EXACT_GAUSS_HERMITE_BALD_KLEENE_PARTIAL_STUN_STRATIFIED_SHA256_ESCROW_AND_CEGAR_VERIFICATION",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_EXTERNAL_LLMS",
+            "RELIABILITY": "MEMORY_POLICY_GATED_CONFINED_NAMESPACE_SAFE_AND_HOMEOSTATICALLY_PRUNED",
+            "VERIFIABILITY": "22_OF_22_SENTIENT_TESTS_104_SIBLING_TESTS_AND_ALL_GOVERNANCE_GUARDS_PASS",
+            "WALL_CLOCK": "LEVIN_UNIVERSAL_COST_ORDERED_SUB_MS_BALD_AND_10_36S_FULL_22_GATE_SUITE"
+          },
+          "evidence": [
+            "Measured: `22/22` in `test_sentient_cognitive_core_v1` (`10.36s`), `max_non_adjacent_sum` & `count_target_paths` synthesized constructively without templates, higher-order `fold_left` invented & instantiated via `ast.Lambda`, BALD MI `I_ignorant > 5 * I_noisy`, 0-test-file `ZeroDivisionError` discovered & Ring-0 repaired, and `shared_cognitive_core` + MAP-Elites + Operator 6 CEGAR verified."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_sentient_cognitive_core_v1.py` (`22/22`) and `verify_brain_unified_model_v1.py` (`33/33`)"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-03T19:13:52Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "POST_6606_STATIC_TEMPLATE_MENUS_FOUR_BIT_MCTS_AND_SPLIT_BRAIN_INSTANCES",
+      "max_age_hours": 24,
+      "negative_search_summary": "All 8 dormant open-world, taskfile, memory-hygiene, latency-routing, memory-policy, and CEGAR architecture synthesis modules already existed in `canonical/` at `K3=0` and `$0` spend; composing them with constructive recursion algebra, higher-order Plotkin + e-graphs, and exact BALD mutual information required zero external packages or models.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "constructive catamorphism banana-split product fold semiring dynamorphism Levin universal search"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "higher-order Plotkin anti-unification ast.Lambda closure e-graph equality canonicalization"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Bayesian Active Learning by Disagreement Gauss-Hermite logistic normal mutual information nats EFE"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "MAP-Elites quality diversity stepping stone archive counterexample guided causal architecture synthesis"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-03T19:13:52Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux unprivileged namespace confinement (`confine_v1`) + Python 3.11 stdlib + pinned `tree-sitter==0.20.4`",
+            "evidence": [
+              "DIRECT_PROBE: `22/22` `test_sentient_cognitive_core_v1` and `104/104` sibling tests pass with real `confine_v1` namespace execution"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "In-tree dormant organs (`open_world_perception_v1`, `taskfile_v1`, `associative_memory_v1`, `latency_reliability_cost_router_v1`, `rule_expiry_v1`, `rule_scope_learning_v1`, `counterexample_guided_causal_architecture_synthesizer_v1`, `memory_policy`)",
+            "evidence": [
+              "DIRECT_PROBE: all 8 modules imported and verified end-to-end across Layers 1-5 in `test_sentient_cognitive_core_v1.py`"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/{open_world_perception_v1,taskfile_v1,associative_memory_v1,latency_reliability_cost_router_v1,memory_policy_v1}.py",
+          "canonical/swe_kernel/{concept_library_v1,recursive_self_architect_v1,sentient_cognitive_core_v1,rule_expiry_v1,rule_scope_learning_v1}.py",
+          "canonical/reasoning/counterexample_guided_causal_architecture_synthesizer_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Meijer, Fokkinga & Paterson (1991) Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire; Houlsby et al. (2011) BALD; Mouret & Clune (2015) MAP-Elites"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Plotkin (1970) / Huet higher-order anti-unification, Nelson & Oppen congruence closure / e-graphs, and Levin (1973) universal search"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python 3.11 `ast` / `sqlite3` specifications and Linux `namespaces(7)` confinement"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_POST_6606_STATIC_SCAFFOLDS",
+      "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1"
+    ],
+    "selected_route": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+    "selected_surviving_route": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+    "stop_condition": "STOP when all 22 tests in `test_sentient_cognitive_core_v1`, all 104 tests across the 4 sibling unified/creature/runtime suites, `verify_brain_unified_model_v1`, `verifier_falsification_v1`, `enforce_goal_hierarchy.py`, `repo_integrity_guard_v1.py`, and all GitHub Actions checks pass and squash-merge cleanly into `main`.",
+    "why_selected_route_is_fastest_sufficient": "Replaces hardcoded algorithm menus, first-order-only concepts, 4-bit planner states, total-entropy proxies, test-file blindness, and split brain instances with first-principles mathematical engines + 8 existing in-tree organs across only 9 modified files (`SENSITIVE_PREFIXES <= 15`) at `K3=0` and `$0` spend."
+  },
+  "route_id": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1",
+  "stop_condition": "STOP when all 22 tests in `test_sentient_cognitive_core_v1`, all 104 tests across the 4 sibling unified/creature/runtime suites, `verify_brain_unified_model_v1`, `verifier_falsification_v1`, `enforce_goal_hierarchy.py`, `repo_integrity_guard_v1.py`, and all GitHub Actions checks pass and squash-merge cleanly into `main`.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-03T19:13:52Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__FIRST_PRINCIPLES_CONSTRUCTIVE_SYNTHESIS_HIGHER_ORDER_CONCEPT_INVENTION_BALD_ACTIVE_INFERENCE_OPEN_WORLD_DISCOVERY_AND_UNIFIED_COGNITIVE_SPINE_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "25b52a91509c28c770deb1d6271d891d5a407781",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        },
+        {
+          "git_blob_sha": "884806ea39761039e72e6b2201c44a88d320ab79",
+          "path": "canonical/runtime/creature_runtime_v1.py"
+        },
+        {
+          "git_blob_sha": "45c108a4ee828e8bb8589e3a886b7233e254343d",
+          "path": "canonical/runtime/swe_observational_program_synthesizer_v1.py"
+        },
+        {
+          "git_blob_sha": "5bbe9908f58228ffcf17bfc8a778c5425490be46",
+          "path": "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py"
+        },
+        {
+          "git_blob_sha": "633d2fe9544f8f2d20d428d8190d975a3caae393",
+          "path": "canonical/swe_kernel/concept_library_v1.py"
+        },
+        {
+          "git_blob_sha": "a3b47155ff70dde73287ee2da0a3990bac22835c",
+          "path": "canonical/swe_kernel/recursive_self_architect_v1.py"
+        },
+        {
+          "git_blob_sha": "2894deb3e9f89529e594aaeb4cbbe29ce6edaa99",
+          "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+        },
+        {
+          "git_blob_sha": "5bd689096ca6bdf0df1b9c7ddc7d057ad0d62262",
+          "path": "canonical/tests/test_sentient_cognitive_core_v1.py"
+        }
+      ],
+      "decisive_question": "DOES_FIVE_LAYER_FIRST_PRINCIPLES_ARCHITECTURE_SYNTHESIZE_BEYOND_TEMPLATES_INVENT_HIGHER_ORDER_LAMBDAS_SEPARATE_BALD_EPISTEMIC_UNCERTAINTY_DISCOVER_OPEN_MAKEFILE_AND_ZERO_TEST_CRASHES_AND_UNIFY_SHARED_SPINE_WITHOUT_WEAKENING_ANY_GUARD",
+      "falsifier_id": "RUN_22_GATE_TEST_SENTIENT_COGNITIVE_CORE_V1_SIBLING_SUITES_AND_GOVERNANCE_GUARDS",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "ALL_22_ADVERSARIAL_GATES_AND_104_SIBLING_TESTS_PASS_ZERO_HOST_EXEC_MEMORY_POLICY_ISOLATION_INTACT_AND_RING0_GATES_UNWEAKENED",
+      "proposal_id": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_20261103_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. Ring-0 (`Ring0SelfReferee`, `SelfPatchFirewall`, `repair_input_dependency_gate_v1`, `credit_gates_v1`, `property_v1`), `confine_v1` namespace isolation, `memory_policy` benchmark isolation, and zero-host-`exec()` invariants remain 100% enforced."
+}

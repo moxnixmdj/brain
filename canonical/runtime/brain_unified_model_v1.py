@@ -40,7 +40,7 @@ import re
 import shutil
 import sys
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any, Callable, Iterable, Mapping
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_V1"
 SOLUTION_SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_SOLUTION_V1"
@@ -1051,12 +1051,12 @@ class UnifiedModel:
         from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
             match_and_invoke_forged_for_goal,
         )
-        from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import shared_cognitive_core
 
         active_core = (
             cognitive_core
             if cognitive_core is not None
-            else SentientCognitiveCore(cognitive_state_dir)
+            else shared_cognitive_core(cognitive_state_dir)
         )
         r_preview = self.route(goal)
         has_reflex = bool(r_preview.get("confident")) or bool(capability_id)
@@ -1082,9 +1082,16 @@ class UnifiedModel:
                 actual_cost=0.25 if regime_info["regime"] == "SYSTEM_1_REFLEX" else 1.0,
                 actual_gain=1.0 if passed_f else 0.0,
             )
+            active_core.record_wake_episode(
+                task_id=str(capability_id or goal[:96]),
+                goal=str(goal),
+                outcome_pass=passed_f,
+                route_id=str(resp.get("capability_id") or resp.get("tier_used") or regime_info["regime"]),
+            )
             resp["cognitive_regime"] = regime_info
             resp["epistemic_settlement"] = {
                 "predicted_pass_probability": pred_ticket.predicted_pass_probability,
+                "epistemic_mi_bits": pred_ticket.epistemic_mi_bits,
                 "surprise": settle["surprise"],
                 "escalate_system2": settle["escalate_system2"],
             }
@@ -1771,11 +1778,15 @@ class SovereignZeroLLMPlanner:
         self.last_mcts_summary: dict[str, Any] = {}
 
     def _cognitive_core(self) -> Any:
-        if self._core is None:
-            from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
+        if self._state_dir is not None:
+            if self._core is None:
+                from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
-            self._core = SentientCognitiveCore(self._state_dir)
-        return self._core
+                self._core = SentientCognitiveCore(self._state_dir)
+            return self._core
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import shared_cognitive_core
+
+        return shared_cognitive_core(None)
 
     @staticmethod
     def _episode_key(goal: str) -> str:
@@ -1804,7 +1815,7 @@ class SovereignZeroLLMPlanner:
     @staticmethod
     def _extract_mentioned_paths(goal: str) -> list[str]:
         found: list[str] = []
-        for m in re.finditer(r"\b([A-Za-z0-9_./-]+\.(?:json|txt|csv|py|md|yaml|yml|toml|sqlite|db))\b", goal):
+        for m in re.finditer(r"\b([A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,10})\b", goal):
             p = m.group(1).strip()
             if ".." not in Path(p).parts and not p.startswith("/") and p not in found:
                 found.append(p)
@@ -1877,6 +1888,7 @@ class SovereignZeroLLMPlanner:
             self._episodes[ep_key] = {
                 "probed": False,
                 "full_files": dict(previews),
+                "discovered_tasks": [],
                 "test_passed": None,
                 "test_diagnostics": "",
                 "tried": set(),
@@ -1903,12 +1915,29 @@ class SovereignZeroLLMPlanner:
             if Path(f).suffix in (".sh", ".bin") or (not Path(f).suffix and Path(f).name not in ("Makefile", "Dockerfile", "LICENSE", "README"))
         ]
         config_files = [f for f in file_list if Path(f).suffix in (".json", ".yaml", ".yml", ".toml", ".ini")]
+        has_taskfile = any(Path(f).name in ("Makefile", "package.json", "pyproject.toml", "justfile") for f in file_set)
         explicit_writes = self._extract_target_writes(text)
         mentioned_paths = self._extract_mentioned_paths(text)
         expected_outputs = [
             p for p in mentioned_paths
             if p not in file_set and not p.endswith(".py")
         ]
+
+        # Canonical Predicate World Projection (`predicate_world_abstraction_v1`)
+        try:
+            from canonical.swe_kernel.predicate_world_abstraction_v1 import project_computer_observation
+
+            proj_obs = project_computer_observation(
+                {
+                    "cwd": ".",
+                    "files": {f: {"exists": True, "size": len(str(ep["full_files"].get(f, "")))} for f in file_list[:32]},
+                    "stdout": str((last or {}).get("out") or "")[-400:],
+                    "stderr": str((last or {}).get("err") or "")[-400:],
+                }
+            )
+            projected_world_preds = {f"obs:{p}" for p in (proj_obs.get("predicates") or ())}
+        except Exception:
+            projected_world_preds = set()
 
         # Assimilate outcome of previous action (`seeing["last"]`) & settle Bayesian belief + causal world graph!
         if last is not None:
@@ -1924,6 +1953,8 @@ class SovereignZeroLLMPlanner:
                             pdata = json.loads(ln[len("BRAIN_PROBE_JSON:"):])
                             if isinstance(pdata.get("full_files"), dict):
                                 ep["full_files"].update(pdata["full_files"])
+                            if isinstance(pdata.get("tasks"), list):
+                                ep["discovered_tasks"] = pdata["tasks"]
                             if "test_passed" in pdata:
                                 ep["test_passed"] = bool(pdata["test_passed"])
                             if "test_diagnostics" in pdata:
@@ -1931,7 +1962,7 @@ class SovereignZeroLLMPlanner:
                             ep["probed"] = True
                         except Exception:
                             pass
-            if step_ok and last_act in ("py_ast_patch_h1", "py_obs_synth_h2"):
+            if step_ok and str(last_act or "").startswith(("py_ast_patch_h1", "py_obs_synth_h2", "taskfile_target:")):
                 ep["edited_code"] = True
             if step_ok and last_act == "verify_postconditions":
                 ep["verified_after_edit"] = True
@@ -1951,13 +1982,16 @@ class SovereignZeroLLMPlanner:
                 rel_p in file_set and (payload is None or payload == "" or str(previews.get(rel_p, "")).strip() == payload)
                 for rel_p, payload in explicit_writes
             )
-            now_facts = self._world_fact_tokens(
-                file_set=file_set,
-                probed=bool(ep["probed"]),
-                test_passed=ep["test_passed"],
-                verified_after_edit=bool(ep["verified_after_edit"]),
-                writes_satisfied=writes_now,
-                outputs_ready=all(p in file_set for p in expected_outputs),
+            now_facts = (
+                self._world_fact_tokens(
+                    file_set=file_set,
+                    probed=bool(ep["probed"]),
+                    test_passed=ep["test_passed"],
+                    verified_after_edit=bool(ep["verified_after_edit"]),
+                    writes_satisfied=writes_now,
+                    outputs_ready=all(p in file_set for p in expected_outputs),
+                )
+                | projected_world_preds
             )
             prev_ticket = ep.get("last_ticket")
             if prev_ticket is not None:
@@ -1979,6 +2013,12 @@ class SovereignZeroLLMPlanner:
                         ok=step_ok,
                         error_text=(err_txt or out_txt)[-300:],
                     )
+                    core.record_wake_episode(
+                        task_id=f"planner:{last_act}",
+                        goal=text,
+                        outcome_pass=step_ok,
+                        route_id=str(last_act),
+                    )
                 except Exception:
                     pass
                 if step_ok:
@@ -1995,7 +2035,7 @@ class SovereignZeroLLMPlanner:
             self._consolidate_completed_episode(text, ep)
             return None
 
-        if ep["probed"] and ep["test_passed"] is True and outputs_ready:
+        if test_files and ep["probed"] and ep["test_passed"] is True and outputs_ready:
             if not explicit_writes or writes_satisfied:
                 self._consolidate_completed_episode(text, ep)
                 return None
@@ -2005,11 +2045,10 @@ class SovereignZeroLLMPlanner:
                 self._consolidate_completed_episode(text, ep)
                 return None
 
-        if last is not None and last.get("exit") == 0 and ep.get("last_action_id") in (
-            "unified_model_solve",
-            "grounded_action_exec",
-            "explicit_writes_exec",
-            "cli_metamorphic_exec",
+        last_aid_s = str(ep.get("last_action_id") or "")
+        if last is not None and last.get("exit") == 0 and (
+            last_aid_s in ("unified_model_solve", "grounded_action_exec", "explicit_writes_exec", "cli_metamorphic_exec")
+            or last_aid_s.startswith(("taskfile_target:", "cli_acquire:", "recalled_workflow:"))
         ):
             if not test_files and outputs_ready and (not explicit_writes or writes_satisfied):
                 if seeing.get("changed") or writes_satisfied:
@@ -2029,23 +2068,30 @@ class SovereignZeroLLMPlanner:
             "facts_probed": bool(ep["probed"]),
             "prior_failure": bool(ep["failures"]),
             "has_cli_surface": bool(cli_files),
+            "has_taskfile": bool(has_taskfile),
             "has_explicit_writes": bool(explicit_writes),
         }
 
-        current_facts = self._world_fact_tokens(
-            file_set=file_set,
-            probed=bool(ep["probed"]),
-            test_passed=ep["test_passed"],
-            verified_after_edit=bool(ep["verified_after_edit"]),
-            writes_satisfied=writes_satisfied,
-            outputs_ready=outputs_ready,
+        current_facts = (
+            self._world_fact_tokens(
+                file_set=file_set,
+                probed=bool(ep["probed"]),
+                test_passed=ep["test_passed"],
+                verified_after_edit=bool(ep["verified_after_edit"]),
+                writes_satisfied=writes_satisfied,
+                outputs_ready=outputs_ready,
+            )
+            | projected_world_preds
         )
         protected_facts = {
             f for f in current_facts
             if f in ("pred:tests_green", "pred:verified_after_edit", "pred:writes_satisfied")
         }
 
-        # Discover dynamic affordance options from live world state (ZERO hardcoded probability constants!)
+        # ------------------------------------------------------------------
+        # Open-Ended Affordance Discovery (zero closed switchboard!)
+        # Every discovered affordance carries `(requires_preds, produces_preds, render_fn)`.
+        # ------------------------------------------------------------------
         primers = (learned or {}).get("primers") or []
         routed_score = 0.0
         if file_set and "unified_model_solve" not in ep["tried"] and (
@@ -2060,174 +2106,528 @@ class SovereignZeroLLMPlanner:
             except Exception:
                 routed_score = 0.0
 
+        repo_root = str(ROOT)
+        concept_lib_path = str(core.concept_library.path) if getattr(core.concept_library, "path", None) else ""
+        observed_coverage = (
+            max(0.1, float(len(file_list) - len(truncated_or_hidden)) / float(max(1, len(file_list))))
+            if not ep["probed"] and (truncated_or_hidden or test_files or has_taskfile)
+            else 1.0
+        )
+
         def _query_option_belief(
             opt_id: str,
             *,
             verifier_backed: bool,
             local_only: bool = True,
-        ) -> tuple[float, float]:
+        ) -> tuple[float, float, float]:
             inhibited, _reason = core.world_graph.should_inhibit_action(
                 opt_id,
                 current_facts=current_facts,
                 protected_facts=protected_facts,
             )
             if inhibited:
-                return 0.02, 0.05
+                return 0.02, 0.0, 100.0
             dist = core.belief.predict_distribution(
                 f"planner:{opt_id}",
                 host_ready=local_only,
                 grounding_complete=bool(ep["probed"]) or not bool(truncated_or_hidden),
                 causal_precond_met=True,
-                memory_reflex_hit=(opt_id == "flywheel_primer"),
+                memory_reflex_hit=opt_id.startswith(("flywheel_primer", "recalled_workflow:")),
                 strong_verifier=verifier_backed,
                 context_predicates=world_ctx,
             )
-            return float(dist["predicted_pass_probability"]), float(dist["predictive_entropy_bits"])
+            cost_m = core.cost_router.score_candidate(
+                opt_id,
+                expected_gain=1.0,
+                default_cost_ms=float(dist.get("expected_latency_ms") or 5.0),
+            )
+            return (
+                float(dist["predicted_pass_probability"]),
+                float(dist.get("epistemic_mi_nats") or 0.0),
+                float(cost_m["measured_ms"]),
+            )
 
         option_specs: dict[str, dict[str, Any]] = {}
 
-        def _register_opt(
+        def _register_affordance(
             opt_id: str,
             *,
-            cost: float,
-            effect: str,
+            requires_preds: set[str],
+            produces_preds: set[str],
+            render_fn: Callable[[], str],
+            default_latency_ms: float = 5.0,
             verifier_backed: bool = True,
-            extra: Mapping[str, Any] | None = None,
+            needs_grounding: bool = False,
         ) -> None:
             if opt_id in ep["tried"]:
                 return
-            p_pass, ent_bits = _query_option_belief(opt_id, verifier_backed=verifier_backed)
-            row = {
+            p_pass, ep_mi_nats, meas_ms = _query_option_belief(opt_id, verifier_backed=verifier_backed)
+            # Fuse learned CausalWorldGraph effects (`produces` / `destroys`) with structural affordance effects!
+            learned_prod = set(core.world_graph.produces.get(opt_id) or ())
+            learned_dest = set(core.world_graph.destroys.get(opt_id) or ())
+            option_specs[opt_id] = {
                 "id": opt_id,
-                "cost": cost,
-                "effect": effect,
+                "requires_preds": frozenset(requires_preds),
+                "produces_preds": frozenset(produces_preds | learned_prod),
+                "destroys_preds": frozenset(learned_dest),
                 "p_pass": p_pass,
-                "entropy_bits": ent_bits,
+                "epistemic_mi_nats": ep_mi_nats,
+                "latency_ms": meas_ms if opt_id in core.cost_router._stats else default_latency_ms,
+                "needs_grounding": needs_grounding,
+                "render_fn": render_fn,
             }
-            if extra:
-                row.update(extra)
-            option_specs[opt_id] = row
 
-        if not ep["probed"] and bool(truncated_or_hidden or test_files):
-            _register_opt("epistemic_probe", cost=0.06, effect="observe_world", verifier_backed=True)
+        # Affordance 1: Pure-Stdlib Epistemic World + Taskfile + Test Probe (`confined: True` safe!)
+        if not ep["probed"] and bool(truncated_or_hidden or test_files or has_taskfile):
+            _register_affordance(
+                "epistemic_probe",
+                requires_preds=set(),
+                produces_preds={"pred:facts_observed"},
+                default_latency_ms=4.0,
+                verifier_backed=True,
+                render_fn=lambda: (
+                    "import json, pathlib, re, subprocess, sys\n"
+                    "full_files = {}\n"
+                    f"for rel in {file_list!r}:\n"
+                    "    p = pathlib.Path(rel)\n"
+                    "    if p.is_file() and p.stat().st_size <= 65536:\n"
+                    "        try:\n"
+                    "            raw = p.read_bytes()\n"
+                    "            if b'\\x00' not in raw[:512]:\n"
+                    "                full_files[rel] = raw.decode('utf-8', 'replace')\n"
+                    "        except OSError:\n"
+                    "            pass\n"
+                    "tasks = []\n"
+                    "mk = pathlib.Path('Makefile')\n"
+                    "if mk.is_file():\n"
+                    "    for ln in mk.read_text(encoding='utf-8', errors='replace').splitlines():\n"
+                    "        m = re.match(r'^([A-Za-z0-9_.-]+):', ln)\n"
+                    "        if m and not m.group(1).startswith('.'):\n"
+                    "            tasks.append({'name': m.group(1), 'command': 'make ' + m.group(1)})\n"
+                    "pkg = pathlib.Path('package.json')\n"
+                    "if pkg.is_file():\n"
+                    "    try:\n"
+                    "        scripts = (json.loads(pkg.read_text(encoding='utf-8')).get('scripts') or {})\n"
+                    "        for k, v in scripts.items():\n"
+                    "            tasks.append({'name': str(k), 'command': str(v)})\n"
+                    "    except Exception:\n"
+                    "        pass\n"
+                    "test_passed = True\n"
+                    "diag = ''\n"
+                    f"t_files = {test_files!r}\n"
+                    "if t_files:\n"
+                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                    "    test_passed = (r.returncode == 0)\n"
+                    "    diag = ((r.stdout or '') + '\\n' + (r.stderr or ''))[-1200:]\n"
+                    "print('BRAIN_PROBE_JSON:' + json.dumps({'full_files': full_files, 'tasks': tasks[:12], 'test_passed': test_passed, 'test_diagnostics': diag}))\n"
+                ),
+            )
 
+        # Affordance 2: Recalled Flywheel / Transfer Primers
         if primers:
             p_proc = str(primers[0].get("procedure") or "").strip()
             if p_proc:
-                _register_opt(
+                _register_affordance(
                     "flywheel_primer",
-                    cost=0.09,
-                    effect="repair_or_act",
+                    requires_preds=set(),
+                    produces_preds={"pred:code_candidate_ready", "pred:goal_acted"},
+                    default_latency_ms=3.0,
                     verifier_backed=True,
-                    extra={"program": p_proc},
+                    render_fn=lambda prog=p_proc: prog,
                 )
 
+        # Affordance 3: Open Taskfile Targets (`Makefile` / `package.json` / `pyproject.toml` discovered at runtime!)
+        goal_low = text.lower()
+        for t_row in (ep.get("discovered_tasks") or [])[:6]:
+            if not isinstance(t_row, Mapping):
+                continue
+            t_nm = str(t_row.get("name") or "").strip()
+            t_cmd = str(t_row.get("command") or "").strip().lstrip("@")
+            if t_nm and t_cmd and re.search(rf"\b{re.escape(t_nm.lower())}\b", goal_low):
+                aid_t = f"taskfile_target:{t_nm}"
+                _register_affordance(
+                    aid_t,
+                    requires_preds=set(),
+                    produces_preds={"pred:goal_acted", "pred:outputs_ready"},
+                    default_latency_ms=8.0,
+                    verifier_backed=True,
+                    render_fn=lambda cmd=t_cmd: (
+                        "import subprocess, sys\n"
+                        f"r = subprocess.run({cmd!r}, shell=True, capture_output=True, text=True)\n"
+                        "if r.returncode != 0:\n"
+                        "    sys.stderr.write((r.stderr or r.stdout or 'task_failed')[-800:])\n"
+                        "    raise SystemExit(1)\n"
+                    ),
+                )
+
+        # Affordance 4: Python AST Patch Search, HORS Observational Synthesis & Independent Test Verification
         if test_files and impl_py_files:
             if ep["edited_code"] and not ep["verified_after_edit"]:
-                _register_opt("verify_postconditions", cost=0.05, effect="verify_tests", verifier_backed=True)
-            _register_opt("py_ast_patch_h1", cost=0.11, effect="repair_code_fast", verifier_backed=True)
-            _register_opt("py_obs_synth_h2", cost=0.22, effect="repair_code_hors", verifier_backed=True)
+                _register_affordance(
+                    "verify_postconditions",
+                    requires_preds={"pred:code_candidate_ready"},
+                    produces_preds={"pred:tests_green", "pred:verified_after_edit"},
+                    default_latency_ms=3.5,
+                    verifier_backed=True,
+                    render_fn=lambda: (
+                        "import subprocess, sys\n"
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                        "if r.returncode != 0:\n"
+                        "    sys.stderr.write((r.stderr or r.stdout or 'verification_failed')[-800:])\n"
+                        "    raise SystemExit(1)\n"
+                    ),
+                )
+            def _render_h1_confined() -> str:
+                # Pure-stdlib confined AST single-operator / constant-sign repair search (`confined_v1` safe — zero external imports!)
+                return (
+                    "import ast, copy, pathlib, subprocess, sys\n"
+                    "def _test_ok():\n"
+                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                    "    return r.returncode == 0, (r.stderr or r.stdout or '')[-800:]\n"
+                    "ok0, err0 = _test_ok()\n"
+                    "if ok0:\n"
+                    "    raise SystemExit(0)\n"
+                    "SWAP_BIN = {ast.Add: ast.Sub, ast.Sub: ast.Add, ast.Mult: ast.FloorDiv, ast.FloorDiv: ast.Mult}\n"
+                    "SWAP_CMP = {ast.Lt: ast.LtE, ast.LtE: ast.Lt, ast.Gt: ast.GtE, ast.GtE: ast.Gt, ast.Eq: ast.NotEq, ast.NotEq: ast.Eq}\n"
+                    "patched = False\n"
+                    f"for rel in {impl_py_files!r}:\n"
+                    "    p = pathlib.Path(rel)\n"
+                    "    if not p.is_file():\n"
+                    "        continue\n"
+                    "    orig = p.read_text(encoding='utf-8')\n"
+                    "    try:\n"
+                    "        tree = ast.parse(orig)\n"
+                    "    except SyntaxError:\n"
+                    "        continue\n"
+                    "    nodes = list(ast.walk(tree))\n"
+                    "    for idx, nd in enumerate(nodes):\n"
+                    "        cand_trees = []\n"
+                    "        if isinstance(nd, ast.BinOp) and type(nd.op) in SWAP_BIN:\n"
+                    "            t2 = copy.deepcopy(tree)\n"
+                    "            list(ast.walk(t2))[idx].op = SWAP_BIN[type(nd.op)]()\n"
+                    "            cand_trees.append(t2)\n"
+                    "        elif isinstance(nd, ast.Compare) and len(nd.ops) == 1 and type(nd.ops[0]) in SWAP_CMP:\n"
+                    "            t2 = copy.deepcopy(tree)\n"
+                    "            list(ast.walk(t2))[idx].ops[0] = SWAP_CMP[type(nd.ops[0])]()\n"
+                    "            cand_trees.append(t2)\n"
+                    "        for ct in cand_trees:\n"
+                    "            ast.fix_missing_locations(ct)\n"
+                    "            p.write_text(ast.unparse(ct) + '\\n', encoding='utf-8')\n"
+                    "            ok_c, _ = _test_ok()\n"
+                    "            if ok_c:\n"
+                    "                patched = True\n"
+                    "                break\n"
+                    "        if patched:\n"
+                    "            break\n"
+                    "    if not patched:\n"
+                    "        p.write_text(orig, encoding='utf-8')\n"
+                    "    else:\n"
+                    "        break\n"
+                    "ok_f, err_f = _test_ok()\n"
+                    "if not ok_f:\n"
+                    "    sys.stderr.write(err_f or 'patch_h1_failed')\n"
+                    "    raise SystemExit(1)\n"
+                )
 
+            def _render_h2_confined() -> str:
+                # In-process HORS + ConceptLibrary synthesis over observed `ep["full_files"]`, emitting pure-stdlib confined write+verify!
+                import ast as _ast
+                from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+                    extract_io_examples_from_test_source,
+                    synthesize_python_function_body,
+                )
+                from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wits
+
+                full_map = dict(ep.get("full_files") or {})
+                cfg_consts: list[Any] = []
+                for rel_f, raw_txt in full_map.items():
+                    if str(rel_f).endswith(".json"):
+                        try:
+                            obj = json.loads(str(raw_txt))
+                            if isinstance(obj, Mapping):
+                                for v in obj.values():
+                                    if isinstance(v, (int, float, str)) and not isinstance(v, bool):
+                                        cfg_consts.append(v)
+                        except Exception:
+                            pass
+                combined_tests = "\n\n".join(str(full_map.get(tf, "")) for tf in test_files if full_map.get(tf))
+                patched_files: dict[str, str] = {}
+                for imp_rel in impl_py_files:
+                    src_txt = str(full_map.get(imp_rel) or "")
+                    if not src_txt.strip() or not combined_tests.strip():
+                        continue
+                    try:
+                        imp_tree = _ast.parse(src_txt)
+                    except SyntaxError:
+                        continue
+                    cur_src = src_txt
+                    for fn_nd in [nd for nd in imp_tree.body if isinstance(nd, _ast.FunctionDef)]:
+                        p_names = [a.arg for a in fn_nd.args.args]
+                        exs, t_consts = extract_io_examples_from_test_source(combined_tests, fn_nd.name)
+                        valid_exs = [ex for ex in exs if len(ex[0]) == len(p_names)]
+                        if not valid_exs:
+                            continue
+                        merged_c = list(dict.fromkeys([*cfg_consts, *t_consts]))[:16]
+                        body_code = synthesize_python_function_body(
+                            p_names,
+                            valid_exs,
+                            extra_constants=merged_c,
+                            max_weight=4,
+                            concept_library=core.concept_library,
+                        )
+                        if body_code:
+                            upd = wits._replace_function_body_in_source(cur_src, fn_nd.name, body_code)
+                            if upd:
+                                cur_src = upd
+                    if cur_src != src_txt:
+                        patched_files[imp_rel] = cur_src
+
+                lines = ["import pathlib, subprocess, sys"]
+                for rel_p, new_src in sorted(patched_files.items()):
+                    lines.append(f"pathlib.Path({rel_p!r}).write_text({new_src!r}, encoding='utf-8')")
+                lines.extend(
+                    [
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)",
+                        "if r.returncode != 0:",
+                        "    sys.stderr.write((r.stderr or r.stdout or 'obs_synth_h2_failed')[-800:])",
+                        "    raise SystemExit(1)",
+                    ]
+                )
+                return "\n".join(lines) + "\n"
+
+            _register_affordance(
+                "py_ast_patch_h1",
+                requires_preds=set(),
+                produces_preds={"pred:code_candidate_ready", "pred:tests_green", "pred:verified_after_edit"},
+                default_latency_ms=7.0,
+                verifier_backed=True,
+                needs_grounding=True,
+                render_fn=_render_h1_confined,
+            )
+            _register_affordance(
+                "py_obs_synth_h2",
+                requires_preds=set(),
+                produces_preds={"pred:code_candidate_ready", "pred:tests_green", "pred:verified_after_edit"},
+                default_latency_ms=14.0,
+                verifier_backed=True,
+                needs_grounding=True,
+                render_fn=_render_h2_confined,
+            )
+
+        # Affordance 5: Explicit Artifact Emit
         if explicit_writes and not writes_satisfied:
-            _register_opt("explicit_writes_exec", cost=0.07, effect="satisfy_writes", verifier_backed=True)
+            def _render_writes() -> str:
+                lines = ["import pathlib"]
+                for idx_w, (rel_p, payload) in enumerate(explicit_writes):
+                    content_str = (payload + "\n") if payload else ""
+                    lines.append(f"_p{idx_w} = pathlib.Path({rel_p!r})")
+                    lines.append(f"_p{idx_w}.parent.mkdir(parents=True, exist_ok=True)")
+                    lines.append(f"_p{idx_w}.write_text({content_str!r}, encoding='utf-8')")
+                return "\n".join(lines) + "\n"
 
+            _register_affordance(
+                "explicit_writes_exec",
+                requires_preds=set(),
+                produces_preds={"pred:writes_satisfied", "pred:outputs_ready"},
+                default_latency_ms=4.5,
+                verifier_backed=True,
+                render_fn=_render_writes,
+            )
+
+        # Affordance 6: Open CLI Metamorphic & Documentation Discovery (`world_probe_v1` + `documentation_mining_v1` + `grounded_action_v1`)
         if cli_files and not test_files:
-            _register_opt("cli_metamorphic_exec", cost=0.18, effect="act_cli", verifier_backed=True)
+            _register_affordance(
+                "cli_metamorphic_exec",
+                requires_preds=set(),
+                produces_preds={"pred:goal_acted", "pred:outputs_ready"},
+                default_latency_ms=11.0,
+                verifier_backed=True,
+                render_fn=lambda: (
+                    "import pathlib, sys\n"
+                    f"sys.path.insert(0, {repo_root!r})\n"
+                    "from canonical.runtime import world_probe_v1 as wp, grounded_action_v1 as ga\n"
+                    "ws = pathlib.Path('.').resolve()\n"
+                    f"wp.established_facts([], goal={text!r}, goal_paths={cli_files!r}, root=ws)\n"
+                    f"_out = ga.act({text!r}, root=ws)\n"
+                    "if not _out.get('ok'):\n"
+                    "    raise SystemExit(1)\n"
+                ),
+            )
 
+        # Affordance 7: Grounded World Action & Compiled UnifiedModel Capability Route
         if file_set:
-            _register_opt("grounded_action_exec", cost=0.32, effect="act_grounded", verifier_backed=False)
+            _register_affordance(
+                "grounded_action_exec",
+                requires_preds=set(),
+                produces_preds={"pred:goal_acted", "pred:outputs_ready"},
+                default_latency_ms=20.0,
+                verifier_backed=False,
+                needs_grounding=True,
+                render_fn=lambda: (
+                    "import pathlib, sys\n"
+                    f"sys.path.insert(0, {repo_root!r})\n"
+                    "from canonical.runtime import grounded_action_v1 as ga\n"
+                    f"_out = ga.act({text!r}, root=pathlib.Path('.').resolve())\n"
+                    "if not _out.get('ok'):\n"
+                    "    raise SystemExit(1)\n"
+                ),
+            )
             if routed_score > 0.0:
-                _register_opt("unified_model_solve", cost=0.34, effect="act_routed", verifier_backed=True)
+                _register_affordance(
+                    "unified_model_solve",
+                    requires_preds=set(),
+                    produces_preds={"pred:goal_acted", "pred:outputs_ready"},
+                    default_latency_ms=22.0,
+                    verifier_backed=True,
+                    needs_grounding=True,
+                    render_fn=lambda: (
+                        "import sys\n"
+                        f"sys.path.insert(0, {repo_root!r})\n"
+                        "from canonical.runtime.brain_unified_model_v1 import open_model\n"
+                        f"_res = open_model().solve({text!r}, declared_resources={file_list!r})\n"
+                        "if not _res.get('pass'):\n"
+                        "    raise SystemExit(1)\n"
+                    ),
+                )
 
         if not option_specs:
             return None
 
-        # Multi-Step Active-Inference MCTS via `decision_core_v1` (`Node`, `search`, `best_action`, `best_trajectory`)
+        # ------------------------------------------------------------------
+        # Open-Predicate Active-Inference MCTS (`decision_core_v1`)
+        # State = `(frozenset[predicate_str], frozenset[used_action_id])`
+        # Value = Parameter-free Expected Free Energy in nats (`I(Y;Theta|s,a) + delta_goal - tau/budget`)
+        # ------------------------------------------------------------------
         from canonical.runtime import decision_core_v1 as dc
 
         needs_tests = bool(test_files and impl_py_files)
         needs_writes = bool(explicit_writes)
         needs_generic_act = not needs_tests and not needs_writes
-        has_hidden_world = bool(truncated_or_hidden or (test_files and not ep["probed"]))
+        has_hidden_world = bool(truncated_or_hidden or (test_files and not ep["probed"]) or (has_taskfile and not ep["probed"]))
 
-        init_mcts_state = (
-            bool(ep["probed"]) or not has_hidden_world,  # 0: facts_observed
-            bool(ep["edited_code"]) or (ep["test_passed"] is True),  # 1: code_ready
-            bool(ep["verified_after_edit"]) or (ep["probed"] and ep["test_passed"] is True) or not needs_tests,  # 2: tests_verified
-            bool(writes_satisfied) or not needs_writes,  # 3: writes_done
-            False if needs_generic_act else True,  # 4: generic_act_done
-            frozenset(ep["tried"]),  # 5: used_actions
+        goal_predicates: set[str] = set()
+        if needs_tests:
+            goal_predicates.add("pred:tests_green")
+            goal_predicates.add("pred:verified_after_edit")
+        if needs_writes:
+            goal_predicates.add("pred:writes_satisfied")
+        if needs_generic_act:
+            goal_predicates.add("pred:goal_acted")
+
+        init_preds = set(current_facts)
+        if not has_hidden_world:
+            init_preds.add("pred:facts_observed")
+        if ep["edited_code"] or (ep["test_passed"] is True):
+            init_preds.add("pred:code_candidate_ready")
+        if ep["verified_after_edit"] or (ep["probed"] and ep["test_passed"] is True):
+            init_preds.add("pred:tests_green")
+            init_preds.add("pred:verified_after_edit")
+        if writes_satisfied:
+            init_preds.add("pred:writes_satisfied")
+
+        init_mcts_state = (frozenset(init_preds), frozenset(ep["tried"]))
+        total_latency_budget_ms = max(
+            40.0,
+            sum(float(sp["latency_ms"]) for sp in option_specs.values()) * 2.0,
         )
+        hidden_info_nats = math.log(2.0) * min(3.0, float(len(truncated_or_hidden) + len(test_files) + (1 if has_taskfile else 0)))
 
-        def _is_goal_state(st: tuple[Any, ...]) -> bool:
-            return bool(st[2] and st[3] and st[4])
+        def _is_goal_state(st: tuple[frozenset[str], frozenset[str]]) -> bool:
+            preds, _used = st
+            return bool(goal_predicates) and goal_predicates.issubset(preds)
 
         def _actions_fn(node: Any) -> list[str]:
             st = node.state
             if _is_goal_state(st) or node.depth >= 4:
                 return []
-            obs_ok, code_ok, tests_ok, writes_ok, act_ok, used = st
-            specialist_repairs_exhausted = ("py_ast_patch_h1" in used and "py_obs_synth_h2" in used)
+            preds, used = st
+            specialist_exhausted = ("py_ast_patch_h1" in used and "py_obs_synth_h2" in used)
             avail: list[str] = []
             for oid, spec in option_specs.items():
                 if oid in used:
                     continue
-                eff = spec["effect"]
-                if eff == "observe_world" and obs_ok:
+                req_p = spec["requires_preds"]
+                if req_p and not req_p.issubset(preds):
                     continue
-                if eff in ("repair_code_fast", "repair_code_hors") and tests_ok:
+                prod_p = spec["produces_preds"]
+                # Skip pure observation once workspace facts are already observed
+                if oid == "epistemic_probe" and "pred:facts_observed" in preds:
                     continue
-                if eff == "verify_tests" and (tests_ok or not code_ok):
+                # Skip actions that produce zero new predicates toward the open world/goal
+                if prod_p.issubset(preds):
                     continue
-                if eff == "satisfy_writes" and writes_ok:
+                if oid in ("grounded_action_exec", "unified_model_solve") and needs_tests and not specialist_exhausted:
                     continue
-                if eff in ("act_cli", "act_grounded", "act_routed"):
-                    if act_ok and not (needs_tests and not tests_ok and specialist_repairs_exhausted):
-                        continue
                 avail.append(oid)
-            if needs_tests and code_ok and not tests_ok and "verify_postconditions" not in used and "verify_postconditions" not in avail:
+            if (
+                needs_tests
+                and "pred:code_candidate_ready" in preds
+                and "pred:verified_after_edit" not in preds
+                and "verify_postconditions" not in used
+                and "verify_postconditions" not in avail
+            ):
                 avail.append("verify_postconditions")
             return avail
 
-        def _make_state(st: tuple[Any, ...], action_id: str) -> tuple[Any, ...]:
-            obs_ok, code_ok, tests_ok, writes_ok, act_ok, used = st
+        def _make_state(st: tuple[frozenset[str], frozenset[str]], action_id: str) -> tuple[frozenset[str], frozenset[str]]:
+            preds, used = st
             nxt_used = used | {action_id}
-            if action_id == "epistemic_probe":
-                return (True, code_ok, tests_ok, writes_ok, act_ok, nxt_used)
-            if action_id in ("py_ast_patch_h1", "py_obs_synth_h2", "flywheel_primer"):
-                return (obs_ok, True, True if obs_ok else False, writes_ok, True, nxt_used)
-            if action_id == "verify_postconditions":
-                return (obs_ok, code_ok, True if code_ok else tests_ok, writes_ok, act_ok, nxt_used)
-            if action_id == "explicit_writes_exec":
-                return (obs_ok, code_ok, tests_ok, True, act_ok, nxt_used)
-            return (obs_ok, code_ok, tests_ok, writes_ok, True, nxt_used)
+            spec = option_specs.get(action_id)
+            if spec is None:
+                # Virtual postcondition verification transition after repair in rollout
+                nxt_p = set(preds)
+                if "pred:code_candidate_ready" in preds:
+                    nxt_p.update(("pred:tests_green", "pred:verified_after_edit"))
+                return (frozenset(nxt_p), nxt_used)
+            prod_p = set(spec["produces_preds"])
+            # Ungrounded code edits before observing hidden test/source bytes require explicit verification!
+            if "pred:facts_observed" not in preds and action_id in ("py_ast_patch_h1", "py_obs_synth_h2", "flywheel_primer"):
+                prod_p.discard("pred:tests_green")
+                prod_p.discard("pred:verified_after_edit")
+            nxt_p = (set(preds) | prod_p) - set(spec["destroys_preds"])
+            return (frozenset(nxt_p), nxt_used)
 
-        virtual_verify_p, virtual_verify_ent = _query_option_belief("verify_postconditions", verifier_backed=True)
+        virtual_verify_p, virtual_verify_mi, virtual_verify_ms = _query_option_belief("verify_postconditions", verifier_backed=True)
 
-        def _step_utility(prev_st: tuple[Any, ...], aid: str, cur_st: tuple[Any, ...], survival_p: float) -> tuple[float, float]:
+        def _step_efe_utility(
+            prev_st: tuple[frozenset[str], frozenset[str]],
+            aid: str,
+            cur_st: tuple[frozenset[str], frozenset[str]],
+            survival_p: float,
+        ) -> tuple[float, float]:
+            prev_preds, _ = prev_st
+            cur_preds, _ = cur_st
             spec = option_specs.get(aid) or {
-                "cost": 0.05,
-                "effect": "verify_tests",
                 "p_pass": virtual_verify_p,
-                "entropy_bits": virtual_verify_ent,
+                "epistemic_mi_nats": virtual_verify_mi,
+                "latency_ms": virtual_verify_ms,
+                "needs_grounding": False,
             }
             p_step = float(spec["p_pass"])
-            if not prev_st[0] and aid in ("py_ast_patch_h1", "py_obs_synth_h2", "grounded_action_exec", "unified_model_solve"):
-                p_step *= 0.30
-            step_val = 0.0
-            if aid == "epistemic_probe" and not prev_st[0]:
-                step_val += survival_p * (0.28 + 0.12 * float(spec["entropy_bits"]))
-            prog_before = int(bool(prev_st[2])) + int(bool(prev_st[3])) + int(bool(prev_st[4]))
-            prog_after = int(bool(cur_st[2])) + int(bool(cur_st[3])) + int(bool(cur_st[4]))
-            delta_prog = max(0, prog_after - prog_before)
+            if spec.get("needs_grounding") and "pred:facts_observed" not in prev_preds:
+                p_step *= observed_coverage
+
+            # 1. Epistemic Information Gain in nats (`I(Y; Theta | s, a)` + unobserved-world Shannon entropy reduction)
+            info_gain_nats = float(spec["epistemic_mi_nats"])
+            if "pred:facts_observed" in cur_preds and "pred:facts_observed" not in prev_preds:
+                info_gain_nats += hidden_info_nats
+
+            # 2. Pragmatic Goal Satisfaction Gain (dimensionless fraction of `goal_predicates` newly achieved)
+            n_goal = float(max(1, len(goal_predicates)))
+            sat_before = float(len(goal_predicates & prev_preds)) / n_goal
+            sat_after = float(len(goal_predicates & cur_preds)) / n_goal
+            pragmatic_gain = max(0.0, sat_after - sat_before)
+
+            # 3. Mortality / Latency Fraction (`tau_a / tau_budget`)
+            mortality_cost = float(spec["latency_ms"]) / total_latency_budget_ms
+
             nxt_survival = survival_p * p_step
-            step_val += nxt_survival * (0.32 * delta_prog) - 0.35 * float(spec["cost"])
-            return nxt_survival, step_val
+            neg_efe = survival_p * info_gain_nats + nxt_survival * pragmatic_gain - mortality_cost
+            return nxt_survival, neg_efe
 
         def _evaluate_fn(node: Any) -> float:
             if node.depth == 0 or node.action is None:
                 return 0.0
-            # Prefix value along tree branch root -> node
             chain: list[Any] = []
             cur = node
             while cur is not None and cur.parent is not None:
@@ -2236,38 +2636,38 @@ class SovereignZeroLLMPlanner:
             chain.reverse()
 
             survival_p = 1.0
-            total_val = 0.0
+            total_neg_efe = 0.0
             for step_nd in chain:
-                survival_p, dv = _step_utility(step_nd.parent.state, str(step_nd.action), step_nd.state, survival_p)
-                total_val += dv
+                survival_p, dv = _step_efe_utility(step_nd.parent.state, str(step_nd.action), step_nd.state, survival_p)
+                total_neg_efe += dv
 
-            # Deterministic MCTS leaf rollout to horizon so tree values reflect multi-step completion!
             sim_st = node.state
             sim_depth = node.depth
             while not _is_goal_state(sim_st) and sim_depth < 4:
                 dummy = dc.Node(state=sim_st)
                 dummy.parent = node
-                cand_a = [a for a in _actions_fn(dummy) if a not in sim_st[5]]
+                cand_a = [a for a in _actions_fn(dummy) if a not in sim_st[1]]
                 if not cand_a:
                     break
                 best_a = max(
                     cand_a,
-                    key=lambda a: _step_utility(sim_st, a, _make_state(sim_st, a), survival_p)[1],
+                    key=lambda a: _step_efe_utility(sim_st, a, _make_state(sim_st, a), survival_p)[1],
                 )
                 nxt_st = _make_state(sim_st, best_a)
-                survival_p, dv = _step_utility(sim_st, best_a, nxt_st, survival_p)
-                total_val += dv
+                survival_p, dv = _step_efe_utility(sim_st, best_a, nxt_st, survival_p)
+                total_neg_efe += dv
                 sim_st = nxt_st
                 sim_depth += 1
 
             if _is_goal_state(node.state):
                 node.terminal = True
             if _is_goal_state(sim_st):
-                total_val += survival_p * 0.38
-            return max(0.01, min(1.0, 0.25 + total_val))
+                total_neg_efe += survival_p
+            # Map unbounded negative-EFE nats smoothly onto `(0, 1)` via logistic link `1 / (1 + exp(-x))` (zero magic constants!)
+            return 1.0 / (1.0 + math.exp(-max(-8.0, min(8.0, total_neg_efe))))
 
         def _reflect_fn(node: Any) -> str:
-            return f"low_efe:{node.action}@depth={node.depth}"
+            return f"efe_predicate_mcts:{node.action}@depth={node.depth}"
 
         root = dc.Node(state=init_mcts_state)
         dc.search(
@@ -2275,7 +2675,7 @@ class SovereignZeroLLMPlanner:
             _actions_fn,
             _evaluate_fn,
             iterations=max(16, 8 * len(option_specs)),
-            c=1.35,
+            c=math.sqrt(2.0),
             make_state=_make_state,
             reflect_fn=_reflect_fn,
         )
@@ -2285,6 +2685,9 @@ class SovereignZeroLLMPlanner:
         self.last_mcts_summary = {
             "chosen_action": chosen_id,
             "best_trajectory": traj_actions,
+            "goal_predicates": sorted(goal_predicates),
+            "initial_predicates_count": len(init_preds),
+            "affordances_discovered": sorted(option_specs.keys()),
             "root_visits": root.visits,
             "child_stats": {
                 str(ch.action): {"visits": ch.visits, "mean_value": round(ch.mean_value, 4)}
@@ -2292,177 +2695,27 @@ class SovereignZeroLLMPlanner:
             },
         }
 
-        # Issue pre-action `PredictionTicket` so outcome in next step settles `EpistemicSelfBeliefEngine`!
+        # Issue pre-action `PredictionTicket` & render directly from the winning `AffordanceSpec` (zero switchboard!)
         ep["last_action_id"] = chosen_id
         ep["last_world_facts"] = set(current_facts)
+        ep["tried"].add(chosen_id)
         try:
             ep["last_ticket"] = core.belief.predict_before_act(
                 f"planner:{chosen_id}",
                 host_ready=True,
                 grounding_complete=bool(ep["probed"]) or not bool(truncated_or_hidden),
                 causal_precond_met=True,
-                memory_reflex_hit=(chosen_id == "flywheel_primer"),
+                memory_reflex_hit=chosen_id.startswith(("flywheel_primer", "recalled_workflow:")),
                 strong_verifier=True,
                 context_predicates=world_ctx,
             )
         except Exception:
             ep["last_ticket"] = None
 
-        repo_root = str(ROOT)
-        concept_lib_path = str(core.concept_library.path) if getattr(core.concept_library, "path", None) else ""
-
-        if chosen_id == "epistemic_probe":
-            ep["tried"].add("epistemic_probe")
-            return (
-                "import json, pathlib, subprocess, sys\n"
-                "full_files = {}\n"
-                f"for rel in {file_list!r}:\n"
-                "    p = pathlib.Path(rel)\n"
-                "    if p.is_file() and p.stat().st_size <= 65536:\n"
-                "        try:\n"
-                "            raw = p.read_bytes()\n"
-                "            if b'\\x00' not in raw[:512]:\n"
-                "                full_files[rel] = raw.decode('utf-8', 'replace')\n"
-                "        except OSError:\n"
-                "            pass\n"
-                "test_passed = True\n"
-                "diag = ''\n"
-                f"t_files = {test_files!r}\n"
-                "if t_files:\n"
-                "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
-                "    test_passed = (r.returncode == 0)\n"
-                "    diag = ((r.stdout or '') + '\\n' + (r.stderr or ''))[-1200:]\n"
-                "print('BRAIN_PROBE_JSON:' + json.dumps({'full_files': full_files, 'test_passed': test_passed, 'test_diagnostics': diag}))\n"
-            )
-
-        if chosen_id == "flywheel_primer":
-            ep["tried"].add("flywheel_primer")
-            return str(option_specs["flywheel_primer"]["program"])
-
-        if chosen_id == "py_ast_patch_h1":
-            ep["tried"].add("py_ast_patch_h1")
-            return (
-                "import pathlib, subprocess, sys\n"
-                f"sys.path.insert(0, {repo_root!r})\n"
-                "from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as tgps\n"
-                f"for rel in {impl_py_files!r}:\n"
-                "    res = tgps.run({'source_path': rel, 'root': '.'}, pathlib.Path('.').resolve())\n"
-                "    if res.get('ok') and res.get('patched'):\n"
-                "        break\n"
-                "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
-                "if r.returncode != 0:\n"
-                "    sys.stderr.write((r.stderr or r.stdout or 'patch_h1_failed')[-800:])\n"
-                "    raise SystemExit(1)\n"
-            )
-
-        if chosen_id == "py_obs_synth_h2":
-            ep["tried"].add("py_obs_synth_h2")
-            return (
-                "import ast, json, pathlib, subprocess, sys\n"
-                f"sys.path.insert(0, {repo_root!r})\n"
-                "from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary\n"
-                "from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wits\n"
-                "from canonical.runtime.swe_observational_program_synthesizer_v1 import synthesize_python_function_body\n"
-                "ws = pathlib.Path('.').resolve()\n"
-                f"clib = CompoundingConceptLibrary({concept_lib_path!r}) if {bool(concept_lib_path)!r} else None\n"
-                "cfg_consts = []\n"
-                "for jf in ws.rglob('*.json'):\n"
-                "    try:\n"
-                "        obj = json.loads(jf.read_text(encoding='utf-8'))\n"
-                "        if isinstance(obj, dict):\n"
-                "            for v in obj.values():\n"
-                "                if isinstance(v, (int, float, str)) and not isinstance(v, bool):\n"
-                "                    cfg_consts.append(v)\n"
-                "    except Exception:\n"
-                "        pass\n"
-                f"t_paths = [ws / tf for tf in {test_files!r} if (ws / tf).is_file()]\n"
-                f"for imp_rel in {impl_py_files!r}:\n"
-                "    imp_p = ws / imp_rel\n"
-                "    if not imp_p.is_file():\n"
-                "        continue\n"
-                "    src_txt = imp_p.read_text(encoding='utf-8')\n"
-                "    imp_tree = ast.parse(src_txt)\n"
-                "    fn_map = {nd.name: [a.arg for a in nd.args.args] for nd in imp_tree.body if isinstance(nd, ast.FunctionDef)}\n"
-                "    if not fn_map:\n"
-                "        continue\n"
-                "    harvested = wits.harvest_live_io_examples(ws, t_paths, set(fn_map))\n"
-                "    cur_src = src_txt\n"
-                "    for fn_nm, (exs, t_consts) in harvested.items():\n"
-                "        p_names = fn_map.get(fn_nm) or []\n"
-                "        valid_exs = [ex for ex in exs if len(ex[0]) == len(p_names)]\n"
-                "        if not valid_exs:\n"
-                "            continue\n"
-                "        merged_c = list(dict.fromkeys([*cfg_consts, *t_consts]))[:16]\n"
-                "        body_code = synthesize_python_function_body(p_names, valid_exs, extra_constants=merged_c, max_weight=4, concept_library=clib)\n"
-                "        if body_code:\n"
-                "            upd = wits._replace_function_body_in_source(cur_src, fn_nm, body_code)\n"
-                "            if upd:\n"
-                "                cur_src = upd\n"
-                "    if cur_src != src_txt:\n"
-                "        imp_p.write_text(cur_src, encoding='utf-8')\n"
-                "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
-                "if r.returncode != 0:\n"
-                "    sys.stderr.write((r.stderr or r.stdout or 'obs_synth_h2_failed')[-800:])\n"
-                "    raise SystemExit(1)\n"
-            )
-
-        if chosen_id == "verify_postconditions":
-            ep["tried"].add("verify_postconditions")
-            return (
-                "import subprocess, sys\n"
-                "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
-                "if r.returncode != 0:\n"
-                "    sys.stderr.write((r.stderr or r.stdout or 'verification_failed')[-800:])\n"
-                "    raise SystemExit(1)\n"
-            )
-
-        if chosen_id == "explicit_writes_exec":
-            ep["tried"].add("explicit_writes_exec")
-            lines = ["import pathlib"]
-            for idx_w, (rel_p, payload) in enumerate(explicit_writes):
-                content_str = (payload + "\n") if payload else ""
-                lines.append(f"_p{idx_w} = pathlib.Path({rel_p!r})")
-                lines.append(f"_p{idx_w}.parent.mkdir(parents=True, exist_ok=True)")
-                lines.append(f"_p{idx_w}.write_text({content_str!r}, encoding='utf-8')")
-            return "\n".join(lines) + "\n"
-
-        if chosen_id == "cli_metamorphic_exec":
-            ep["tried"].add("cli_metamorphic_exec")
-            return (
-                "import pathlib, sys\n"
-                f"sys.path.insert(0, {repo_root!r})\n"
-                "from canonical.runtime import world_probe_v1 as wp\n"
-                "from canonical.runtime import grounded_action_v1 as ga\n"
-                "ws = pathlib.Path('.').resolve()\n"
-                f"wp.established_facts([], goal={text!r}, goal_paths={cli_files!r}, root=ws)\n"
-                f"_out = ga.act({text!r}, root=ws)\n"
-                "if not _out.get('ok'):\n"
-                "    raise SystemExit(1)\n"
-            )
-
-        if chosen_id == "grounded_action_exec":
-            ep["tried"].add("grounded_action_exec")
-            return (
-                "import pathlib, sys\n"
-                f"sys.path.insert(0, {repo_root!r})\n"
-                "from canonical.runtime import grounded_action_v1 as ga\n"
-                f"_out = ga.act({text!r}, root=pathlib.Path('.').resolve())\n"
-                "if not _out.get('ok'):\n"
-                "    raise SystemExit(1)\n"
-            )
-
-        if chosen_id == "unified_model_solve":
-            ep["tried"].add("unified_model_solve")
-            return (
-                "import sys\n"
-                f"sys.path.insert(0, {repo_root!r})\n"
-                "from canonical.runtime.brain_unified_model_v1 import open_model\n"
-                f"_res = open_model().solve({text!r}, declared_resources={file_list!r})\n"
-                "if not _res.get('pass'):\n"
-                "    raise SystemExit(1)\n"
-            )
-
-        return None
+        winning_spec = option_specs.get(chosen_id)
+        if winning_spec is None or not callable(winning_spec.get("render_fn")):
+            return None
+        return str(winning_spec["render_fn"]())
 
 
 _SOVEREIGN_PLANNER = SovereignZeroLLMPlanner()

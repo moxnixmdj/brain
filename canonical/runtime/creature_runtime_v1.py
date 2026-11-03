@@ -809,13 +809,33 @@ class Creature:
             )
             work_dispatch[oid] = {"kind": "ignorance_gap", "gap": dict(g_row)}
 
+        open_world_probe = harvest.get("open_world_probe") or {}
+        for anom in (open_world_probe.get("anomalies") or []):
+            aid_raw = str(anom.get("id") or "")
+            if not aid_raw or aid_raw.startswith("py_crash:"):
+                continue
+            oid = f"auto:openworld:{aid_raw}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Resolve open-world anomaly {aid_raw} ({anom.get('kind')}) via grounded world planner",
+                    source="OpenWorldExplorer",
+                    value=1.1,
+                    cost=0.35,
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "open_world_anomaly", "anomaly": dict(anom)}
+
         board_metrics = (
             self.sync_board(proposals, before=before_world, done=done_world)
             if proposals
             else {"proposed": 0, "admitted": 0, "active_board": 0}
         )
 
-        # 3. Execute Autonomous Cycle Loop with Active-Inference EFE Triage & Belief Settlement
+        # 3. Execute Autonomous Cycle Loop with Parameter-Free Active-Inference EFE Triage & Belief Settlement
         completed_ids: list[str] = []
         homeostasis_events: list[dict[str, Any]] = []
         attempts_by_id: dict[str, int] = {}
@@ -828,7 +848,9 @@ class Creature:
             if not rem:
                 break
 
-            # Rank remaining affordable obligations by Expected Free Energy (pragmatic value + epistemic entropy)
+            # Rank remaining affordable obligations by Parameter-Free Expected Free Energy (`p_pass * value + I_nats - cost / life_rem`)
+            life_rem_now = max(1.0, float(self._life.remaining))
+
             def _efe_score(w_item: M.Work) -> float:
                 dist = self.cognitive_core.belief.predict_distribution(
                     w_item.id,
@@ -842,7 +864,11 @@ class Creature:
                         "has_hotspots": bool(hotspots_by_rel),
                     },
                 )
-                return float(dist["predicted_pass_probability"]) * w_item.value + 0.25 * float(dist["predictive_entropy_bits"]) - 0.2 * w_item.cost
+                return (
+                    float(dist["predicted_pass_probability"]) * w_item.value
+                    + float(dist.get("epistemic_mi_nats") or 0.0)
+                    - (w_item.cost / life_rem_now)
+                )
 
             chosen_w = max(rem, key=_efe_score)
             wid = chosen_w.id
@@ -915,6 +941,13 @@ class Creature:
                     if s_out.get("verdict") == "DONE":
                         IL.resolve(gid, helped=True, close=True, path=ledger_fp)
                         ok = True
+            elif kind == "open_world_anomaly":
+                anom_row = spec["anomaly"]
+                anom_detail = str(anom_row.get("detail") or anom_row.get("id") or "").strip()
+                if anom_detail and bound_planner is not None:
+                    s_out = solve_v1.solve(f"fix {anom_detail}", str(ws), model=bound_planner, steps=6, learn=False)
+                    if s_out.get("verdict") == "DONE":
+                        ok = True
 
             self._self.finish({"ok": ok, "blocked": None if ok else f"AUTONOMOUS_{kind.upper()}_UNMET"})
             if ok:
@@ -952,11 +985,18 @@ class Creature:
             self._save()
             self._save_sovereign_organs()
 
+        hygiene_report = self.cognitive_core.consolidation.run_homeostatic_memory_hygiene(
+            skill_store=getattr(self, "skill_store", None),
+            assoc_memory_path=self.cognitive_core.associative_memory_path,
+            assoc_capacity=512,
+        )
+
         return {
             "schema": SCHEMA + "/live_autonomous_cycle",
             "bribe_status": bribe_status,
             "workspace_root": str(ws),
             "perceived_world_facts": len(world_facts),
+            "open_world_probe": open_world_probe,
             "discovered_ring1_organs": ring1_rels,
             "discovered_functional_gaps": len(failed_eps),
             "discovered_hotspots": sum(len(v) for v in hotspots_by_rel.values()),
@@ -965,6 +1005,7 @@ class Creature:
             "completed_tasks": completed_ids,
             "attempts_by_id": attempts_by_id,
             "homeostasis_events": homeostasis_events,
+            "hygiene_report": hygiene_report,
             "concepts_in_library": len(self.cognitive_core.concept_library.concepts()),
             "life_remaining": round(self._life.remaining, 4),
             "posture": self._standing.posture(),
