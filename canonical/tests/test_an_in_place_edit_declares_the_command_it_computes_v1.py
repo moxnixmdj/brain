@@ -41,6 +41,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from canonical.tests import audit_test_worker_v1 as audit_worker  # noqa: E402
 from canonical.runtime import capability_composer_v1 as graph  # noqa: E402
 from canonical.runtime import composer_route_v1 as composer_route  # noqa: E402
 from canonical.runtime import declared_command_equivalence_v1 as declared  # noqa: E402
@@ -221,29 +222,19 @@ def test_a_request_to_remove_is_not_answered_by_the_append_row() -> None:
 
 
 def test_no_process_is_spawned_to_answer_either_sentence() -> None:
-    armed: list[str] = []
-    originals = {name: getattr(subprocess, name)
-                 for name in ("run", "Popen", "check_output", "check_call")}
+    audit_worker.run_isolated(__file__, "--control")
+    audit_worker.run_isolated(__file__, "_audit_no_process_for_either_sentence")
 
-    def boom(name):
-        def _raise(*_a, **_k):
-            armed.append(name)
-            raise AssertionError("PROCESS_API_CALLED:" + name)
-        return _raise
 
-    for name in originals:
-        setattr(subprocess, name, boom(name))
-    try:
-        upper = _world(b"alpha\n")
-        assert door.solve({"task_id": "x",
-                           "goal": "Convert %s to uppercase" % _rel(upper)}).get("pass") is True
-        appended = _world(b"alpha\n", "append.txt")
-        assert door.solve({"task_id": "x",
-                           "goal": "Append 'z' to %s" % _rel(appended)}).get("pass") is True
-    finally:
-        for name, fn in originals.items():
-            setattr(subprocess, name, fn)
-    assert armed == [], armed
+def _audit_no_process_for_either_sentence() -> None:
+    upper = _world(b"alpha\n")
+    assert door.solve({"task_id": "x",
+                       "goal": "Convert %s to uppercase" % _rel(upper)}).get("pass") is True
+    appended = _world(b"alpha\n", "append.txt")
+    assert door.solve({"task_id": "x",
+                       "goal": "Append 'z' to %s" % _rel(appended)}).get("pass") is True
+    assert upper.read_bytes() == b"ALPHA\n"
+    assert appended.read_bytes() == b"alpha\nz\n"
 
 
 def main() -> int:
@@ -265,4 +256,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    if not audit_worker.dispatch(globals(), sys.argv):
+        raise SystemExit(main())

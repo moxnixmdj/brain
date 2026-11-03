@@ -15,11 +15,10 @@ route legitimate. Two independent proofs, because either alone is weak:
    ``subprocess`` must not fail this, so only real call nodes count -- and a
    NEGATIVE CONTROL proves the walker can see a call when there is one.
 
-2. **Runtime.** Replace ``subprocess.Popen``/``run``/``check_output``,
-   ``os.system``, ``os.fork``, ``os.execv``, ``os.spawnv`` and ``builtins.exec``
-   with functions that raise, then answer real questions against a real file.
-   The answers must still be exact. A spy that is never armed proves nothing, so
-   the control asserts the armed API raises when called directly.
+2. **Runtime.** Run real questions in an isolated interpreter with a Python
+   audit hook that records and rejects process and dynamic-execution events.
+   A negative control calls real process and exec APIs and must be rejected.
+   This is not a replacement for the static native-import check above.
 
 usage:
   python3 -B canonical/tests/test_file_fact_adapters_never_execute_v1.py
@@ -27,7 +26,6 @@ usage:
 from __future__ import annotations
 
 import ast
-import builtins
 import os
 import pathlib
 import subprocess
@@ -38,6 +36,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from canonical.tests import audit_test_worker_v1 as audit_worker  # noqa: E402
 from canonical.runtime import capability_composer_v1 as graph  # noqa: E402
 from canonical.runtime.bound_capabilities import (  # noqa: E402
     file_command_view,
@@ -129,82 +128,48 @@ def test_the_walker_sees_a_process_call_when_there_is_one() -> None:
     assert calls & FORBIDDEN_CALLS, calls
 
 
-def _armed_spy(record: list[str]):
-    """Every process API raises and records itself."""
-
-    def boom(api: str):
-        def _raise(*_a, **_k):
-            record.append(api)
-            raise AssertionError("PROCESS_API_CALLED:" + api)
-        return _raise
-
-    originals = {
-        "subprocess.Popen": subprocess.Popen,
-        "subprocess.run": subprocess.run,
-        "subprocess.call": subprocess.call,
-        "subprocess.check_call": subprocess.check_call,
-        "subprocess.check_output": subprocess.check_output,
-        "os.system": os.system,
-        "builtins.exec": builtins.exec,
-    }
-    subprocess.Popen = boom("subprocess.Popen")
-    subprocess.run = boom("subprocess.run")
-    subprocess.call = boom("subprocess.call")
-    subprocess.check_call = boom("subprocess.check_call")
-    subprocess.check_output = boom("subprocess.check_output")
-    os.system = boom("os.system")
-    builtins.exec = boom("builtins.exec")
-    for attr in ("fork", "execv", "execvp", "spawnv", "spawnvp"):
-        if hasattr(os, attr):
-            originals["os." + attr] = getattr(os, attr)
-            setattr(os, attr, boom("os." + attr))
-    return originals
-
-
-def _disarm(originals) -> None:
-    for dotted, value in originals.items():
-        module_name, attr = dotted.split(".")
-        module = {"subprocess": subprocess, "os": os, "builtins": builtins}[module_name]
-        setattr(module, attr, value)
-
-
 def test_the_armed_api_really_raises() -> None:
-    """The spy is only evidence if it fires. Control for `test_answers_with_no_process`."""
-    record: list[str] = []
-    originals = _armed_spy(record)
+    audit_worker.run_isolated(__file__, "--control", block_exec=True)
+
+
+def test_a_caught_audit_refusal_still_fails_the_test() -> None:
+    # A caller could catch the hook's exception. The event must still fail the
+    # enclosing test, not be mistaken for evidence that no process was tried.
     try:
-        try:
-            subprocess.run([sys.executable, "-c", "pass"], check=False)
-        except AssertionError as exc:
-            assert "PROCESS_API_CALLED:subprocess.run" in str(exc)
-        else:  # pragma: no cover - the spy must fire
-            raise AssertionError("THE_SPY_DID_NOT_FIRE")
-    finally:
-        _disarm(originals)
-    assert record == ["subprocess.run"], record
+        audit_worker.run_isolated(__file__, "_audit_swallowed_process", block_exec=True)
+    except AssertionError as exc:
+        assert "FORBIDDEN_AUDIT_EVENTS" in str(exc), exc
+        assert "subprocess.Popen" in str(exc), exc
+    else:
+        raise AssertionError("caught process attempt escaped the audit")
+
+
+def _audit_swallowed_process() -> None:
+    try:
+        subprocess.run([sys.executable, "-c", "pass"], check=False)
+    except AssertionError:
+        pass
 
 
 def test_answers_with_no_process() -> None:
-    record: list[str] = []
-    originals = _armed_spy(record)
-    try:
-        with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
-            base = pathlib.Path(tmp)
-            target = base / "three.txt"
-            target.write_text("alpha\nbeta\ngamma", encoding="utf-8")
-            rel = target.relative_to(ROOT.resolve()).as_posix()
+    audit_worker.run_isolated(__file__, "_audit_answers_with_no_process", block_exec=True)
 
-            counted = file_line_count.run({"path": rel}, ROOT)
-            assert counted["line_count"] == 3, counted
-            assert counted["newline_count"] == 2, counted
-            assert counted["ends_with_newline"] is False
 
-            statted = file_stat.run({"path": rel}, ROOT)
-            assert statted["size_bytes"] == target.stat().st_size, statted
-            assert statted["is_file"] is True
-    finally:
-        _disarm(originals)
-    assert record == [], record
+def _audit_answers_with_no_process() -> None:
+    with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+        base = pathlib.Path(tmp)
+        target = base / "three.txt"
+        target.write_text("alpha\nbeta\ngamma", encoding="utf-8")
+        rel = target.relative_to(ROOT.resolve()).as_posix()
+
+        counted = file_line_count.run({"path": rel}, ROOT)
+        assert counted["line_count"] == 3, counted
+        assert counted["newline_count"] == 2, counted
+        assert counted["ends_with_newline"] is False
+
+        statted = file_stat.run({"path": rel}, ROOT)
+        assert statted["size_bytes"] == target.stat().st_size, statted
+        assert statted["is_file"] is True
 
 
 def test_the_command_view_answers_with_no_process() -> None:
@@ -212,67 +177,63 @@ def test_the_command_view_answers_with_no_process() -> None:
 
     `sort`, `tac` and `cat` are programs. Answering with them would put the
     original refusal back one layer down -- the door would dispatch an adapter
-    that spawns a process it has no confinement for -- so the armed spy is used
-    on the command view exactly as on the two counters.
+    that spawns a process it has no confinement for -- so the same isolated
+    audit is used on the command view as on the two counters.
     """
-    record: list[str] = []
-    originals = _armed_spy(record)
-    try:
-        with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
-            base = pathlib.Path(tmp)
-            target = base / "u.txt"
-            target.write_text("gamma\nalpha\nbeta\n", encoding="utf-8")
-            rel = target.relative_to(ROOT.resolve()).as_posix()
-            sorted_out = file_command_view.run({"command": "sort", "path": rel}, ROOT)
-            assert sorted_out["answer"] == "alpha\nbeta\ngamma\n", sorted_out["answer"]
-            reversed_out = file_command_view.run({"command": "tac", "path": rel}, ROOT)
-            assert reversed_out["answer"] == "beta\nalpha\ngamma\n", reversed_out["answer"]
-            cat_out = file_command_view.run({"command": "cat", "path": rel}, ROOT)
-            assert cat_out["answer"] == "gamma\nalpha\nbeta\n", cat_out["answer"]
-            # A closed vocabulary: a command it does not implement is refused, not
-            # approximated. Measured control for the table itself.
-            for bad in ({"command": "sed", "path": rel}, {"command": "rm", "path": rel},
-                        {"command": "sort", "path": "-n"}):
-                try:
-                    file_command_view.run(bad, ROOT)
-                except RuntimeError as exc:
-                    assert "NOT_IMPLEMENTED" in str(exc) or "OPERANDS_REQUIRED" in str(exc), exc
-                else:
-                    raise AssertionError("the command view attempted %r" % (bad,))
-    finally:
-        _disarm(originals)
-    assert record == [], record
+    audit_worker.run_isolated(__file__, "_audit_the_command_view_answers_with_no_process", block_exec=True)
+
+
+def _audit_the_command_view_answers_with_no_process() -> None:
+    with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+        base = pathlib.Path(tmp)
+        target = base / "u.txt"
+        target.write_text("gamma\nalpha\nbeta\n", encoding="utf-8")
+        rel = target.relative_to(ROOT.resolve()).as_posix()
+        sorted_out = file_command_view.run({"command": "sort", "path": rel}, ROOT)
+        assert sorted_out["answer"] == "alpha\nbeta\ngamma\n", sorted_out["answer"]
+        reversed_out = file_command_view.run({"command": "tac", "path": rel}, ROOT)
+        assert reversed_out["answer"] == "beta\nalpha\ngamma\n", reversed_out["answer"]
+        cat_out = file_command_view.run({"command": "cat", "path": rel}, ROOT)
+        assert cat_out["answer"] == "gamma\nalpha\nbeta\n", cat_out["answer"]
+        # A closed vocabulary: a command it does not implement is refused, not
+        # approximated. Measured control for the table itself.
+        for bad in ({"command": "sed", "path": rel}, {"command": "rm", "path": rel},
+                    {"command": "sort", "path": "-n"}):
+            try:
+                file_command_view.run(bad, ROOT)
+            except RuntimeError as exc:
+                assert "NOT_IMPLEMENTED" in str(exc) or "OPERANDS_REQUIRED" in str(exc), exc
+            else:
+                raise AssertionError("the command view attempted %r" % (bad,))
 
 
 def test_the_survey_answers_with_no_process() -> None:
-    record: list[str] = []
-    originals = _armed_spy(record)
-    try:
-        with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
-            base = pathlib.Path(tmp)
-            (base / "words.txt").write_text("apple banana banana\n", encoding="utf-8")
-            (base / "sub").mkdir()
-            rel = base.relative_to(ROOT.resolve()).as_posix()
-            counted = file_survey.run(
-                {"command": "word_frequency", "path": rel + "/words.txt"}, ROOT)
-            assert counted["most_common_word"] == "banana", counted
-            listed = file_survey.run({"command": "directory_list", "path": rel}, ROOT)
-            assert sorted(listed["names"]) == ["sub", "words.txt"], listed["names"]
-            searched = file_survey.run(
-                {"command": "directory_search", "path": rel,
-                 "goal": "Which files in %s contain banana?" % rel}, ROOT)
-            assert [p.rsplit("/", 1)[-1] for p in searched["files_with_matches"]] == ["words.txt"], searched
-            for bad in ({"command": "rm", "path": rel},
-                        {"command": "directory_list", "path": rel + "/words.txt"}):
-                try:
-                    file_survey.run(bad, ROOT)
-                except RuntimeError as exc:
-                    assert "NOT_IMPLEMENTED" in str(exc) or "NOT_A_DIRECTORY" in str(exc), exc
-                else:
-                    raise AssertionError("the survey attempted %r" % (bad,))
-    finally:
-        _disarm(originals)
-    assert record == [], record
+    audit_worker.run_isolated(__file__, "_audit_the_survey_answers_with_no_process", block_exec=True)
+
+
+def _audit_the_survey_answers_with_no_process() -> None:
+    with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+        base = pathlib.Path(tmp)
+        (base / "words.txt").write_text("apple banana banana\n", encoding="utf-8")
+        (base / "sub").mkdir()
+        rel = base.relative_to(ROOT.resolve()).as_posix()
+        counted = file_survey.run(
+            {"command": "word_frequency", "path": rel + "/words.txt"}, ROOT)
+        assert counted["most_common_word"] == "banana", counted
+        listed = file_survey.run({"command": "directory_list", "path": rel}, ROOT)
+        assert sorted(listed["names"]) == ["sub", "words.txt"], listed["names"]
+        searched = file_survey.run(
+            {"command": "directory_search", "path": rel,
+             "goal": "Which files in %s contain banana?" % rel}, ROOT)
+        assert [p.rsplit("/", 1)[-1] for p in searched["files_with_matches"]] == ["words.txt"], searched
+        for bad in ({"command": "rm", "path": rel},
+                    {"command": "directory_list", "path": rel + "/words.txt"}):
+            try:
+                file_survey.run(bad, ROOT)
+            except RuntimeError as exc:
+                assert "NOT_IMPLEMENTED" in str(exc) or "NOT_A_DIRECTORY" in str(exc), exc
+            else:
+                raise AssertionError("the survey attempted %r" % (bad,))
 
 
 def test_refusals_happen_before_any_read_of_the_outside_world() -> None:
@@ -356,4 +317,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    if not audit_worker.dispatch(globals(), sys.argv):
+        raise SystemExit(main())
