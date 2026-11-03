@@ -116,6 +116,11 @@ data the system produced and I did not hand it.
 The ledger of settled predictions already exists; nothing fits it. Replace the hand-set update with
 a posterior fitted to `(predicted_pass_probability, outcome_pass)` over history, and score it with
 the module's own `score()`/`gate()`.
+
+> **SUPERSEDED 2026-11-04 — see §6.** L2 as written above is the wrong implementation of a right
+> target. Built and measured, the fit was net-negative and was deleted. What L2 actually needed was
+> input correctness: the engine was being handed a hardcoded all-true feature vector. That is what
+> shipped.
 *Success:* across six sessions the skill goes positive and stays positive, and the gate's
 `refuse` fires on a *constructed* overconfident history. *Failure test that must keep passing:*
 delete the fit and skill must collapse to ≈0.
