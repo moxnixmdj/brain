@@ -952,8 +952,8 @@ class VerifiedSkillStore:
         *,
         audit: Mapping[str, Any] | None = None,
     ) -> bool:
-        """Persist `rule_scope_learning_v1` calibrated scope (`SCOPE_STATEMENT`..`SCOPE_ALGEBRAIC`) on `skill_id`."""
-        valid_scopes = {"SCOPE_STATEMENT", "SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC"}
+        """Persist `rule_scope_learning_v1` calibrated `[G_-, B_+]` version-space bounds on `skill_id`."""
+        valid_scopes = {"SCOPE_STATEMENT", "SCOPE_EXPRESSION", "SCOPE_OPERATOR", "SCOPE_SEMANTIC", "SCOPE_ALGEBRAIC"}
         if learned_scope not in valid_scopes or not skill_id:
             return False
         from canonical.runtime.memory_policy_v1 import can_write_memory
@@ -974,12 +974,60 @@ class VerifiedSkillStore:
                     lang_key = str(row[0] or "")
                     rule_obj = json.loads(row[1])
                     rule_obj["learned_scope"] = learned_scope
+                    rule_obj["version_space_bounds"] = {
+                        "narrow_g_minus": "SCOPE_STATEMENT",
+                        "broad_b_plus": learned_scope,
+                        "b_plus_requires": "TEST_SUITE",
+                    }
                     if isinstance(audit, Mapping):
                         rule_obj["scope_calibration"] = {
                             "result": audit.get("result"),
                             "scope": learned_scope,
                             "observations_used": audit.get("observations_used"),
                         }
+                    conn.execute(
+                        "UPDATE crystallized_skills SET pattern_json = ? WHERE skill_id = ?",
+                        (json.dumps(rule_obj, sort_keys=True), skill_id),
+                    )
+                    updated = True
+        finally:
+            conn.close()
+        if updated and lang_key is not None:
+            _MEM_SKILLS.pop(f"{self.db_path.resolve()}::{lang_key}", None)
+        return updated
+
+    def record_permanence_witnesses(
+        self,
+        skill_id: str,
+        *,
+        distinct_inputs: int,
+        distinct_outputs: int,
+    ) -> bool:
+        """Record `permanence_amplifies_check_v1` non-constant witness counts on `skill_id`."""
+        if not skill_id:
+            return False
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if not can_write_memory():
+            return False
+        conn = _connect(self.db_path)
+        updated = False
+        lang_key: str | None = None
+        try:
+            with conn:
+                conn.execute("BEGIN IMMEDIATE")
+                row = conn.execute(
+                    "SELECT language, pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                    (skill_id,),
+                ).fetchone()
+                if row is not None:
+                    lang_key = str(row[0] or "")
+                    rule_obj = json.loads(row[1])
+                    rule_obj["permanence_witnesses"] = {
+                        "distinct_inputs": int(distinct_inputs),
+                        "distinct_outputs": int(distinct_outputs),
+                        "nonconstant_amplified": bool(distinct_inputs >= 2 and distinct_outputs >= 2),
+                    }
                     conn.execute(
                         "UPDATE crystallized_skills SET pattern_json = ? WHERE skill_id = ?",
                         (json.dumps(rule_obj, sort_keys=True), skill_id),

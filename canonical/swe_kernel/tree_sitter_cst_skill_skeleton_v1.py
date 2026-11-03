@@ -1065,6 +1065,198 @@ def _is_in_return_or_tail_position(node: Any, target_language: str) -> bool:
     return False
 
 
+def _iter_python_guard_statement_candidates(
+    source_text: str,
+    rule: Mapping[str, Any],
+    *,
+    max_candidates: int = 16,
+) -> Iterator[str]:
+    """General AST/CST multi-statement guard-insertion unification over compound operands & sibling operators."""
+    import ast
+    import textwrap
+
+    pat_toks = rule.get("pattern_tokens")
+    rep_toks = rule.get("replacement_tokens")
+    if not isinstance(pat_toks, list) or not isinstance(rep_toks, list):
+        return
+
+    hole_map: dict[str, str] = {}
+    rev_hole: dict[str, str] = {}
+    idx_h = 0
+    for kind, val in pat_toks + rep_toks:
+        if str(kind).startswith("hole_") and str(val) not in hole_map:
+            placeholder = f"__brain_h{idx_h}__"
+            hole_map[str(val)] = placeholder
+            rev_hole[placeholder] = str(val)
+            idx_h += 1
+    if not hole_map:
+        return
+
+    def _render_toks(toks: Sequence[Sequence[Any]], bind_map: Mapping[str, str], op_override: tuple[str, str] | None = None) -> str:
+        parts: list[str] = []
+        for kind, val in toks:
+            sk, sv = str(kind), str(val)
+            if sk.startswith("hole_") and sv in bind_map:
+                parts.append(bind_map[sv])
+            elif op_override is not None and sk == "op" and sv == op_override[0]:
+                parts.append(op_override[1])
+            else:
+                parts.append(sv)
+        return "".join(parts)
+
+    pat_code = textwrap.dedent(_render_toks(pat_toks, hole_map)).strip()
+    rep_code = textwrap.dedent(_render_toks(rep_toks, hole_map)).strip()
+    try:
+        pat_mod = ast.parse(pat_code)
+        rep_mod = ast.parse(rep_code)
+    except SyntaxError:
+        return
+    if len(pat_mod.body) != 1 or len(rep_mod.body) < 2:
+        return
+    pat_stmt = pat_mod.body[0]
+    if not isinstance(pat_stmt, ast.Return) or pat_stmt.value is None:
+        return
+
+    import operator as _py_op
+
+    _AST_BINOP_EVAL: dict[type[ast.operator], tuple[Any, str]] = {
+        ast.Add: (_py_op.add, "+"),
+        ast.Sub: (_py_op.sub, "-"),
+        ast.Mult: (_py_op.mul, "*"),
+        ast.Div: (_py_op.truediv, "/"),
+        ast.FloorDiv: (_py_op.floordiv, "//"),
+        ast.Mod: (_py_op.mod, "%"),
+        ast.Pow: (_py_op.pow, "**"),
+        ast.BitAnd: (_py_op.and_, "&"),
+        ast.BitOr: (_py_op.or_, "|"),
+        ast.BitXor: (_py_op.xor, "^"),
+        ast.LShift: (_py_op.lshift, "<<"),
+        ast.RShift: (_py_op.rshift, ">>"),
+    }
+
+    def _singularity_signature(op_cls: type[ast.operator]) -> tuple[type[BaseException] | None, type[BaseException] | None]:
+        spec = _AST_BINOP_EVAL.get(op_cls)
+        if spec is None:
+            return (None, None)
+        fn = spec[0]
+        sig: list[type[BaseException] | None] = []
+        for probe_rhs in (0, -1):
+            try:
+                fn(8, probe_rhs)
+                sig.append(None)
+            except Exception as exc:
+                sig.append(type(exc))
+        return (sig[0], sig[1])
+
+    def _adapt_guard_zero_return_type(block_code: str, target_op_cls: type[ast.operator] | None) -> list[str]:
+        if target_op_cls is None or target_op_cls not in _AST_BINOP_EVAL:
+            return [block_code]
+        try:
+            sample_val = _AST_BINOP_EVAL[target_op_cls][0](8, 2)
+        except Exception:
+            return [block_code]
+        target_zero = type(sample_val)(0)
+        try:
+            bmod = ast.parse(block_code)
+        except SyntaxError:
+            return [block_code]
+        changed = False
+        for sub in ast.walk(bmod):
+            if (
+                isinstance(sub, ast.Return)
+                and isinstance(sub.value, ast.Constant)
+                and isinstance(sub.value.value, (int, float))
+                and not isinstance(sub.value.value, bool)
+                and sub.value.value == 0
+                and type(sub.value.value) is not type(target_zero)
+            ):
+                sub.value = ast.Constant(value=target_zero)
+                changed = True
+        if not changed:
+            return [block_code]
+        return [ast.unparse(bmod), block_code]
+
+    def _match_ast_expr(
+        p_nd: ast.AST,
+        c_nd: ast.AST,
+        binds: dict[str, str],
+        op_pair: list[tuple[str, str, type[ast.operator]]],
+    ) -> bool:
+        if isinstance(p_nd, ast.Name) and p_nd.id in rev_hole:
+            h_nm = rev_hole[p_nd.id]
+            c_txt = ast.unparse(c_nd).strip()
+            if isinstance(c_nd, (ast.BinOp, ast.BoolOp, ast.IfExp, ast.Compare)):
+                c_txt = f"({c_txt})"
+            prev = binds.get(h_nm)
+            if prev is not None and prev.strip("() ") != c_txt.strip("() "):
+                return False
+            binds[h_nm] = c_txt
+            return True
+        if isinstance(p_nd, ast.BinOp) and isinstance(c_nd, ast.BinOp):
+            p_op_t, c_op_t = type(p_nd.op), type(c_nd.op)
+            if p_op_t is c_op_t:
+                pass
+            elif (
+                p_op_t in _AST_BINOP_EVAL
+                and c_op_t in _AST_BINOP_EVAL
+                and _singularity_signature(p_op_t) != (None, None)
+                and _singularity_signature(p_op_t) == _singularity_signature(c_op_t)
+            ):
+                op_pair.append((_AST_BINOP_EVAL[p_op_t][1], _AST_BINOP_EVAL[c_op_t][1], c_op_t))
+            else:
+                return False
+            return _match_ast_expr(p_nd.left, c_nd.left, binds, op_pair) and _match_ast_expr(
+                p_nd.right, c_nd.right, binds, op_pair
+            )
+        return ast.dump(p_nd) == ast.dump(c_nd)
+
+    try:
+        src_tree = ast.parse(source_text)
+    except SyntaxError:
+        return
+    src_lines = source_text.splitlines(keepends=True)
+    line_offs = [0]
+    for ln in src_lines:
+        line_offs.append(line_offs[-1] + len(ln))
+
+    seen: set[str] = {source_text}
+    yielded = 0
+    for nd in ast.walk(src_tree):
+        if not isinstance(nd, ast.Return) or nd.value is None or nd.lineno is None or nd.end_lineno is None:
+            continue
+        binds: dict[str, str] = {}
+        op_swaps: list[tuple[str, str, type[ast.operator]]] = []
+        if not _match_ast_expr(pat_stmt.value, nd.value, binds, op_swaps):
+            continue
+        op_ov = (op_swaps[0][0], op_swaps[0][1]) if op_swaps else None
+        target_op_cls = op_swaps[0][2] if op_swaps else None
+        rendered_block = textwrap.dedent(_render_toks(rep_toks, binds, op_override=op_ov)).strip()
+        variants = _adapt_guard_zero_return_type(rendered_block, target_op_cls)
+
+        line_start_idx = line_offs[nd.lineno - 1]
+        stmt_start = line_start_idx + nd.col_offset
+        stmt_end = line_offs[nd.end_lineno - 1] + nd.end_col_offset
+        indent = " " * nd.col_offset
+
+        for var_block in variants:
+            indented_lines = [
+                (indent + ln if i > 0 and ln.strip() else ln)
+                for i, ln in enumerate(var_block.splitlines())
+            ]
+            cand = source_text[:stmt_start] + "\n".join(indented_lines) + source_text[stmt_end:]
+            if cand in seen:
+                continue
+            try:
+                ast.parse(cand)
+            except SyntaxError:
+                continue
+            seen.add(cand)
+            yielded += 1
+            yield cand
+            if yielded >= max_candidates:
+                return
+
+
 def iter_cst_skeleton_candidates(
     source_text: str,
     rule: Mapping[str, Any],
@@ -1080,6 +1272,10 @@ def iter_cst_skeleton_candidates(
         return
     compiled = compile_rule_to_cst_skeleton(rule)
     if compiled is None:
+        if lang == "python":
+            yield from _iter_python_guard_statement_candidates(
+                source_text, rule, max_candidates=max_candidates
+            )
         return
 
     skeleton_pairs: list[tuple[tuple[Any, ...], tuple[Any, ...]]] = [

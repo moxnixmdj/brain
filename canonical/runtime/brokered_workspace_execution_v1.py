@@ -935,10 +935,84 @@ def run_staged_confined_command(
 
 
 _PERSISTENT_ZYGOTE_DAEMON_SCRIPT = r"""
-import contextlib, importlib, importlib.util, inspect, io, json, os, pathlib, resource, select, shutil, signal, socket, struct, sys, time, unittest
+import ast, contextlib, importlib, importlib.util, inspect, io, json, os, pathlib, resource, select, shutil, signal, socket, struct, sys, time, types, unittest
 
 sock = socket.socket(fileno=int(os.environ['PROJECT_BRAIN_BROKER_FD']))
 sys.dont_write_bytecode = True
+
+class _BrainAssertCounter(ast.NodeTransformer):
+    def _inc_stmt(self, loc_node):
+        inc = ast.AugAssign(
+            target=ast.Subscript(
+                value=ast.Name(id='__brain_asserts_ran__', ctx=ast.Load()),
+                slice=ast.Constant(value=0),
+                ctx=ast.Store(),
+            ),
+            op=ast.Add(),
+            value=ast.Constant(value=1),
+        )
+        ast.copy_location(inc, loc_node)
+        ast.fix_missing_locations(inc)
+        return inc
+
+    def visit_Assert(self, node):
+        self.generic_visit(node)
+        return [self._inc_stmt(node), node]
+
+    def visit_Expr(self, node):
+        self.generic_visit(node)
+        if isinstance(node.value, ast.Call) and isinstance(node.value.func, ast.Attribute):
+            attr = node.value.func.attr
+            if attr.startswith('assert') or attr in ('raises', 'fail'):
+                return [self._inc_stmt(node), node]
+        return node
+
+    def visit_With(self, node):
+        self.generic_visit(node)
+        for item in node.items:
+            if isinstance(item.context_expr, ast.Call) and isinstance(item.context_expr.func, ast.Attribute):
+                if item.context_expr.func.attr in ('assertRaises', 'assertRaisesRegex', 'raises'):
+                    return [self._inc_stmt(node), node]
+        return node
+
+def _restore_slot_delta(slot_dir, batch_id, base_dirs_set, base_files_set, prev_ov_keys):
+    # O(|Delta W|) restore: revert overridden paths back to base symlinks and purge any untracked creations
+    for ov_rel in prev_ov_keys:
+        p_ov = slot_dir / ov_rel
+        if p_ov.is_symlink() or p_ov.exists():
+            if p_ov.is_dir() and not p_ov.is_symlink():
+                shutil.rmtree(p_ov, ignore_errors=True)
+            else:
+                try:
+                    p_ov.unlink()
+                except OSError:
+                    pass
+        if ov_rel in base_files_set:
+            p_ov.parent.mkdir(parents=True, exist_ok=True)
+            os.symlink(f'/input/{batch_id}/{ov_rel}', p_ov)
+    for r_s, dirs, files in os.walk(slot_dir, followlinks=False):
+        rp = pathlib.Path(r_s)
+        rd = rp.relative_to(slot_dir).as_posix()
+        for d in list(dirs):
+            d_rel = d if rd == '.' else f'{rd}/{d}'
+            if d == '__pycache__' or d_rel not in base_dirs_set:
+                shutil.rmtree(rp / d, ignore_errors=True)
+                dirs.remove(d)
+        for fn in files:
+            f_rel = fn if rd == '.' else f'{rd}/{fn}'
+            if f_rel not in base_files_set:
+                try:
+                    (rp / fn).unlink()
+                except OSError:
+                    pass
+            else:
+                fp = rp / fn
+                if not fp.is_symlink():
+                    try:
+                        fp.unlink()
+                    except OSError:
+                        pass
+                    os.symlink(f'/input/{batch_id}/{f_rel}', fp)
 
 def _send(obj):
     raw = json.dumps(obj, separators=(',', ':')).encode('utf-8')
@@ -996,31 +1070,52 @@ while True:
 
     work_batch = pathlib.Path('/work') / batch_id
     passing = []
+    cand_details = []
     authoritative = True
     wave_size = 6
+    base_dirs_set = set(rel_dirs)
+    base_files_set = set(rel_files)
 
     try:
         idx = 0
         n_cands = len(candidates)
+        n_slots = min(wave_size, max(1, n_cands))
+        slot_dirs = []
+        slot_tmp_dirs = []
+        slot_prev_overrides = [set() for _ in range(n_slots)]
+        for s_i in range(n_slots):
+            s_dir = work_batch / f's_{s_i}'
+            t_dir = work_batch / f't_{s_i}'
+            s_dir.mkdir(parents=True, exist_ok=True)
+            t_dir.mkdir(parents=True, exist_ok=True)
+            for rd in rel_dirs:
+                (s_dir / rd).mkdir(parents=True, exist_ok=True)
+            for rf in rel_files:
+                os.symlink(f'/input/{batch_id}/{rf}', s_dir / rf)
+            slot_dirs.append(s_dir)
+            slot_tmp_dirs.append(t_dir)
+
         while idx < n_cands and authoritative:
             end_idx = min(n_cands, idx + wave_size)
             active = {}
-            dirs_to_clean = []
             for c_idx in range(idx, end_idx):
-                cand_entry = candidates[c_idx]
-                ov_map = cand_entry if isinstance(cand_entry, dict) else {target_rel: cand_entry}
-                c_dir = work_batch / f'c_{c_idx}'
-                t_dir = work_batch / f't_{c_idx}'
-                c_dir.mkdir(parents=True, exist_ok=True)
+                slot_i = c_idx - idx
+                c_dir = slot_dirs[slot_i]
+                t_dir = slot_tmp_dirs[slot_i]
+                if slot_prev_overrides[slot_i]:
+                    _restore_slot_delta(c_dir, batch_id, base_dirs_set, base_files_set, slot_prev_overrides[slot_i])
+                shutil.rmtree(t_dir, ignore_errors=True)
                 t_dir.mkdir(parents=True, exist_ok=True)
-                dirs_to_clean.extend((c_dir, t_dir))
-                for rd in rel_dirs:
-                    (c_dir / rd).mkdir(parents=True, exist_ok=True)
-                for rf in rel_files:
-                    if rf not in ov_map:
-                        os.symlink(f'/input/{batch_id}/{rf}', c_dir / rf)
+
+                cand_entry = candidates[c_idx]
+                ov_map = cand_entry if isinstance(cand_entry, dict) else ({target_rel: cand_entry} if target_rel else {})
+                slot_prev_overrides[slot_i] = set(ov_map.keys()) | {'__check_untracked__'}
                 for ov_rel, ov_txt in ov_map.items():
+                    if not ov_rel:
+                        continue
                     dest_t = c_dir / ov_rel
+                    if dest_t.is_symlink() or dest_t.is_file():
+                        dest_t.unlink()
                     dest_t.parent.mkdir(parents=True, exist_ok=True)
                     dest_t.write_text(ov_txt, encoding='utf-8')
 
@@ -1056,24 +1151,31 @@ while True:
                         importlib.invalidate_caches()
                         sink = io.StringIO()
                         ran_count = 0
+                        total_asserts_ran = 0
                         cand_ok = True
                         non_auth = False
                         with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
                             for tp_i, rel_tp in enumerate(test_rels):
                                 tfp = c_dir / rel_tp
                                 mname = f'_zyg_cand_{c_idx}_{tp_i}'
-                                spec = importlib.util.spec_from_file_location(mname, tfp)
-                                if spec is None or spec.loader is None:
-                                    non_auth = True
-                                    break
-                                mod = importlib.util.module_from_spec(spec)
+                                src_tp = tfp.read_text(encoding='utf-8', errors='replace')
+                                tree_tp = ast.parse(src_tp, filename=str(tfp))
+                                inst_tree = _BrainAssertCounter().visit(tree_tp)
+                                ast.fix_missing_locations(inst_tree)
+                                code_tp = compile(inst_tree, str(tfp), 'exec')
+                                mod = types.ModuleType(mname)
+                                mod.__file__ = str(tfp)
+                                mod.__package__ = ''
+                                assert_box = [0]
+                                mod.__dict__['__brain_asserts_ran__'] = assert_box
                                 sys.modules[mname] = mod
-                                spec.loader.exec_module(mod)
+                                exec(code_tp, mod.__dict__)
                                 suite = unittest.defaultTestLoader.loadTestsFromModule(mod)
                                 n_ut = suite.countTestCases()
                                 if n_ut > 0:
                                     res_ut = unittest.TextTestRunner(stream=sink, verbosity=0).run(suite)
                                     ran_count += int(res_ut.testsRun)
+                                    total_asserts_ran += int(assert_box[0])
                                     if not res_ut.wasSuccessful():
                                         cand_ok = False
                                         break
@@ -1095,18 +1197,20 @@ while True:
                                                 break
                                             fn_t()
                                             ran_count += 1
+                                        total_asserts_ran += int(assert_box[0])
                                         if non_auth or not cand_ok:
                                             break
                                     else:
-                                        src_tp = tfp.read_text(encoding='utf-8', errors='replace')
-                                        if 'assert ' in src_tp:
-                                            ran_count += 1
+                                        if assert_box[0] > 0:
+                                            ran_count += int(assert_box[0])
+                                            total_asserts_ran += int(assert_box[0])
                                         else:
-                                            non_auth = True
-                                            break
+                                            os._exit(3)
                         if non_auth:
                             os._exit(2)
-                        os._exit(0 if (cand_ok and ran_count > 0) else 1)
+                        if cand_ok and ran_count > 0 and total_asserts_ran == 0:
+                            os._exit(3)
+                        os._exit(0 if (cand_ok and ran_count > 0 and total_asserts_ran > 0) else 1)
                     except BaseException:
                         os._exit(1)
 
@@ -1144,25 +1248,28 @@ while True:
                     _, wstatus = os.waitpid(pid, 0)
                     wave_codes[c_idx] = os.WEXITSTATUS(wstatus) if os.WIFEXITED(wstatus) else 1
 
-            for d_p in dirs_to_clean:
-                shutil.rmtree(d_p, ignore_errors=True)
-
             for c_idx in range(idx, end_idx):
                 ec = wave_codes.get(c_idx, 1)
                 if ec == 2:
                     authoritative = False
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'NON_AUTHORITATIVE_FIXTURE'})
                     break
                 if ec == 0:
                     passing.append(c_idx)
+                    cand_details.append({'index': c_idx, 'passed': True, 'failure': None})
                     if stop_first:
                         break
+                elif ec == 3:
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'ZERO_ASSERTIONS_EXECUTED'})
+                else:
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'TEST_FAILED'})
             if passing and stop_first:
                 break
             idx = end_idx
     finally:
         shutil.rmtree(work_batch, ignore_errors=True)
 
-    _send({'ok': True, 'authoritative': authoritative, 'passing_indices': passing})
+    _send({'ok': True, 'authoritative': authoritative, 'passing_indices': passing, 'candidates': cand_details})
 """
 
 
@@ -1459,6 +1566,7 @@ def run_confined_python_candidate_batch(
         "carrier_qualified": False,
         "screen_authoritative": ok,
         "passing_indices": [int(i) for i in (resp.get("passing_indices") or [])] if ok else list(range(len(cand_list))),
+        "candidates": list(resp.get("candidates") or []),
         "live_workspace_untouched": untouched,
         "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
     }
