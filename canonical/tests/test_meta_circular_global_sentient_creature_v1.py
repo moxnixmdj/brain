@@ -725,7 +725,7 @@ class CreatureCounterexampleClosureTests(unittest.TestCase):
             }
             row = c.step()
             self.assertEqual(row.get("work"), "forge_sensor")
-            self.assertTrue(any(o.stratum == MCOG.POLICY for o in c.organ_graph.organs.values()) or True)
+            self.assertTrue(any(o.stratum == MCOG.POLICY for o in c.organ_graph.organs.values()))
 
     def test_unified_planner_exposes_organ_graph_and_global_extrapolation(self):
         with tempfile.TemporaryDirectory() as tmp:
