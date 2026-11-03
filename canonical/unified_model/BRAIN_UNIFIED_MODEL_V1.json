@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9809bb11e4f79f968d3f71229a103a32c6d63a4c6031b13bbca09f9d8f1a6662"
+  "value": "ddd157b84884137643d8f4df9891ad95c2d8db6d3818bdf6a7f6cf858f170806"
  },
  "engines": [
   {
@@ -230784,10 +230784,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "39f9f982fee2987b001b6d28ba33021975c6b8f8661e047b653f5a0bae32bcc4",
+   "sha256": "087bcd11550478f62e0753ffb8145f98d5aaab0c5508c66a825cd30eb0100ad3",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
-   "symbol_count": 20,
+   "symbol_count": 21,
    "symbols": [
+    "SovereignZeroLLMPlanner",
     "UnifiedModel",
     "UnifiedModelError",
     "_core_cache_dir",
@@ -230834,6 +230835,7 @@
     "over": 1,
     "path_literals": 1,
     "print": 1,
+    "sovereignzerollmplanner": 1,
     "tokenize": 1,
     "unified": 2,
     "unifiedmodel": 1,
@@ -239090,7 +239092,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "398aa06208df0ad20e70ebd09b635b544e9cb87ec749aa83ff44831a5d33285d",
+   "sha256": "f6484b175a379e1f4af37a24e5264636a70523b0752465f2fd92283a02bcc1e3",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 14,
    "symbols": [
@@ -285538,12 +285540,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_observational_program_synthesizer_v1.py",
-   "sha256": "b78c94ee82daf0bddc1f70be3b5261e256886ef54c7a66db1753ec9c4458299f",
+   "sha256": "e9c67431a31620fcde9dd34fdf1abca7cabd509f524745bc8efe8abf2c4563c2",
    "summary": "Deterministic Program Synthesis & Multi-Module Package Builder.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_eval_compiled",
     "_freeze_val",
+    "_materialize_concept_helpers",
     "architect_multi_module_package",
     "extract_io_examples_from_test_source",
     "synthesize_python_function_body"
@@ -285555,6 +285558,7 @@
     "eval_compiled": 1,
     "extract_io_examples_from_test_source": 1,
     "freeze_val": 1,
+    "materialize_concept_helpers": 1,
     "multi-module": 1,
     "observational": 1,
     "package": 1,

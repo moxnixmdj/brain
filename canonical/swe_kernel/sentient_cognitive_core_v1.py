@@ -1356,11 +1356,18 @@ class SentientCognitiveCore:
         *,
         surprise_threshold: float = _TWO_SHANNON_BITS_NATS,
     ) -> None:
+        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
         from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
 
         self.root_dir = pathlib.Path(root_dir).resolve() if root_dir is not None else None
         if self.root_dir is not None:
             self.root_dir.mkdir(parents=True, exist_ok=True)
+        base_state_dir = (
+            self.root_dir
+            if self.root_dir is not None
+            else pathlib.Path(tempfile.gettempdir()) / f"brain_self_arch_{os.getpid()}"
+        )
+        base_state_dir.mkdir(parents=True, exist_ok=True)
         self.belief = EpistemicSelfBeliefEngine(
             (self.root_dir / "belief_state.json") if self.root_dir is not None else None,
             surprise_threshold=surprise_threshold,
@@ -1372,11 +1379,98 @@ class SentientCognitiveCore:
             (self.root_dir / "wake_sleep_consolidation.json") if self.root_dir is not None else None,
         )
         self.voi_controller = GlobalVoIDominanceController()
+        self.concept_library = CompoundingConceptLibrary(base_state_dir / "concept_library_v1.json")
+        self.associative_memory_path = base_state_dir / "associative_memory_v1.json"
         self.self_architect = RecursiveSelfArchitect(
-            (self.root_dir / "self_architect")
-            if self.root_dir is not None
-            else pathlib.Path(tempfile.gettempdir()) / f"brain_self_arch_{os.getpid()}"
+            base_state_dir / "self_architect",
+            concept_library=self.concept_library,
         )
+        self.verified_programs_buffer: list[str] = []
+        self.unresolved_failure_buffer: list[dict[str, Any]] = []
+
+    def record_wake_episode(
+        self,
+        *,
+        task_id: str,
+        goal: str,
+        outcome_pass: bool,
+        verified_program_source: str | None = None,
+        failure_record: Mapping[str, Any] | None = None,
+        route_id: str = "sovereign_wake",
+    ) -> dict[str, Any]:
+        """Unified Episodic Memory & Homeostasis Bus (`associative_memory_v1` + concept/failure buffers)."""
+        from canonical.runtime import associative_memory_v1 as assoc_mem
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+
+        if can_write_memory():
+            try:
+                assoc_mem.record_episode(
+                    goal=str(goal or task_id),
+                    chosen_capability=str(route_id),
+                    outcome="PASS" if outcome_pass else "FAIL",
+                    state_path=self.associative_memory_path,
+                )
+            except Exception:
+                pass
+        if outcome_pass and isinstance(verified_program_source, str) and verified_program_source.strip():
+            if verified_program_source not in self.verified_programs_buffer:
+                self.verified_programs_buffer.append(verified_program_source)
+        elif not outcome_pass and isinstance(failure_record, Mapping):
+            rec = dict(failure_record)
+            rec.setdefault("ok", False)
+            self.unresolved_failure_buffer.append(rec)
+        return {
+            "homeostasis_needed": self.should_trigger_endogenous_homeostasis(),
+            "unresolved_failures": len(self.unresolved_failure_buffer),
+            "buffered_verified_programs": len(self.verified_programs_buffer),
+            "last_surprise": round(self.belief.last_surprise, 4),
+        }
+
+    def should_trigger_endogenous_homeostasis(self) -> bool:
+        """Physiological homeostasis trigger: fires on surprise spike + failure, >=2 failures, or >=2 unabstracted programs."""
+        if self.unresolved_failure_buffer and self.belief.last_surprise >= self.belief.surprise_threshold:
+            return True
+        if len(self.unresolved_failure_buffer) >= 2:
+            return True
+        if len(self.verified_programs_buffer) >= 2:
+            return True
+        return False
+
+    def run_endogenous_homeostasis(
+        self,
+        code_root: pathlib.Path | None = None,
+        *,
+        ring1_relpaths: Sequence[str] = (),
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Execute Sleep Concept Invention (G_t -> G_{t+1}) + Ring-0 refereed Self-Architecture autonomously."""
+        sleep_abs = {"admitted_count": 0, "admitted": []}
+        if len(self.verified_programs_buffer) >= 2:
+            sleep_abs = self.concept_library.sleep_abstract(self.verified_programs_buffer)
+            self.verified_programs_buffer.clear()
+
+        self_evo: dict[str, Any] | None = None
+        if code_root is not None and ring1_relpaths and (self.unresolved_failure_buffer or ring1_relpaths):
+            self_evo = self.evolve_self_code(
+                pathlib.Path(code_root),
+                ring1_relpaths=ring1_relpaths,
+                failed_episodes=list(self.unresolved_failure_buffer),
+                sealed_heldout_by_target=sealed_heldout_by_target,
+                speed_benchmarks_by_target=speed_benchmarks_by_target,
+                test_relpaths=test_relpaths,
+                apply_to_root=True,
+            )
+            if int(self_evo.get("promoted_count") or 0) > 0:
+                self.unresolved_failure_buffer.clear()
+
+        return {
+            "concepts_invented": int(sleep_abs.get("admitted_count", 0)),
+            "concept_library_size": len(self.concept_library.concepts()),
+            "self_evolution": self_evo,
+            "promoted_count": int((self_evo or {}).get("promoted_count") or 0),
+        }
 
     def evolve_self_code(
         self,

@@ -37,6 +37,7 @@ class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
     def test_zero_host_exec_and_compatibility_invariants(self) -> None:
         """All upgraded cognitive & self-architecting modules contain zero AST `exec()` calls and zero static crutches."""
         guarded_paths = [
+            "canonical/swe_kernel/concept_library_v1.py",
             "canonical/swe_kernel/recursive_self_architect_v1.py",
             "canonical/swe_kernel/sentient_cognitive_core_v1.py",
             "canonical/swe_kernel/rule_scope_learning_v1.py",
@@ -54,6 +55,19 @@ class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
                 if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == "exec"
             ]
             self.assertEqual(exec_lines, [], f"Host exec() leak in {rel}: {exec_lines}")
+
+        # Verify concept_library_v1 contains zero host exec/eval/compile and RSA purged static template
+        cl_tree = ast.parse((REPO_ROOT / "canonical/swe_kernel/concept_library_v1.py").read_text(encoding="utf-8"))
+        cl_forbidden = [
+            n.func.id
+            for n in ast.walk(cl_tree)
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id in ("exec", "eval", "compile")
+        ]
+        self.assertEqual(cl_forbidden, [])
+        self.assertNotIn(
+            "_synthesize_ast_evaluator_extension",
+            (REPO_ROOT / "canonical/swe_kernel/recursive_self_architect_v1.py").read_text(encoding="utf-8"),
+        )
 
         # Verify static-crutch purge across cognitive core, CST skeleton, and scope learning
         self.assertFalse(hasattr(scc, "_PRIOR_MU"))
@@ -762,6 +776,328 @@ class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
             s_out = solve_v1.solve("write 42 to answer.txt", str(solve_ws), model=bound_fn, learn=False)
             self.assertEqual(s_out["verdict"], "DONE", s_out)
             self.assertEqual((solve_ws / "answer.txt").read_text(encoding="utf-8").strip(), "42")
+
+    def test_self_architect_d_open_ended_concept_library_invention_and_compounding_synthesis(self) -> None:
+        """Self-Architect Gate D: Sleep anti-unification invents G_0 -> G_1 concepts, unlocking unreachable depth-9 synthesis while rejecting vacuous constants."""
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+            synthesize_python_function_body,
+        )
+        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
+
+        composite_examples = [
+            ((-5, 0, 10), 0.0),
+            ((5, 0, 10), 50.0),
+            ((15, 0, 10), 100.0),
+            ((2, 2, 6), 0.0),
+            ((5, 2, 6), 75.0),
+            ((5, 10, 10), 0.0),
+        ]
+        with tempfile.TemporaryDirectory(prefix="brain-rsa-concept-") as td:
+            root = pathlib.Path(td)
+            lib = CompoundingConceptLibrary(root / "concepts.json")
+
+            # 1. Vacuous / constant subtrees (`x - x + 7`) must be rejected by non-constancy & mutation kill!
+            vac_res = lib.sleep_abstract(
+                [
+                    "def f1(x, y):\n    return ((x - x) + (y - y) + 7) * 2\n",
+                    "def f2(a, b):\n    return ((a - a) + (b - b) + 7) + 3\n",
+                ]
+            )
+            self.assertEqual(vac_res["admitted_count"], 0, vac_res)
+
+            # 2. Under G_0 (0 learned concepts), depth-9 clamped percentage normalization is unreachable at max_weight=3
+            before_code = synthesize_python_function_body(
+                ["x", "lo", "hi"], composite_examples, max_weight=3, concept_library=lib
+            )
+            self.assertIsNone(before_code)
+
+            # 3. Sleep abstraction invents clamped unit-interval normalization concept (G_0 -> G_1)
+            inv_res = lib.sleep_abstract(
+                [
+                    "def norm_a(val, lo, hi):\n    return (min(max(val, lo), hi) - lo) / (hi - lo) if hi > lo else 0.0\n",
+                    "def norm_b(u, a, b):\n    return 2.0 + ((min(max(u, a), b) - a) / (b - a) if b > a else 0.0)\n",
+                ]
+            )
+            self.assertGreaterEqual(inv_res["admitted_count"], 1, inv_res)
+
+            # 4. Under G_1, exact same max_weight=3 budget synthesizes self-contained Python and generalizes to held-out inputs!
+            t0 = time.perf_counter()
+            after_code = synthesize_python_function_body(
+                ["x", "lo", "hi"], composite_examples, max_weight=3, concept_library=lib
+            )
+            synth_ms = (time.perf_counter() - t0) * 1000.0
+            self.assertIsNotNone(after_code)
+            self.assertLess(synth_ms, 250.0, f"G_1 synthesis took {synth_ms:.2f} ms")
+
+            # Verify synthesized standalone code inside confined Zygote against held-out cases
+            ws = root / "verify_ws"
+            ws.mkdir()
+            fn_full = "def pct_norm(x, lo, hi):\n" + "\n".join("    " + ln for ln in str(after_code).splitlines()) + "\n"
+            (ws / "pct_mod.py").write_text(fn_full, encoding="utf-8")
+            (ws / "test_pct.py").write_text(
+                "import unittest\n"
+                "from pct_mod import pct_norm\n"
+                "class PctTests(unittest.TestCase):\n"
+                "    def test_heldout(self):\n"
+                "        self.assertAlmostEqual(pct_norm(25, 20, 40), 25.0)\n"
+                "        self.assertAlmostEqual(pct_norm(99, 20, 40), 100.0)\n"
+                "        self.assertAlmostEqual(pct_norm(3, 5, 5), 0.0)\n",
+                encoding="utf-8",
+            )
+            ver = broker.run_confined_python_candidate_batch(ws, "pct_mod.py", ["test_pct.py"], [{"pct_mod.py": fn_full}])
+            self.assertEqual(ver["passing_indices"], [0], ver)
+
+    def test_self_architect_e_empirical_zygote_profiler_equijoin_lowering_and_live_capability_forge(self) -> None:
+        """Self-Architect Gate E: EmpiricalZygoteProfiler measures superlinear alpha_hat, lowers O(N*M) equijoin -> O(N+M) hash-join, and runs 5-gate capability_forge_v1."""
+        from canonical.swe_kernel.recursive_self_architect_v1 import (
+            EmpiricalZygoteProfiler,
+            RecursiveSelfArchitect,
+            forge_verified_organ_bridge,
+        )
+
+        with tempfile.TemporaryDirectory(prefix="brain-rsa-prof-forge-") as td:
+            root = pathlib.Path(td)
+            ws = root / "ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+            (ws / "ring1" / "join_organ.py").write_text(
+                "def match_orders(orders, users):\n"
+                "    matched = []\n"
+                "    for o in orders:\n"
+                "        for u in users:\n"
+                "            if o[1] == u[0]:\n"
+                "                matched.append((o[0], u[1]))\n"
+                "    return matched\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_join.py").write_text(
+                "import unittest\n"
+                "from ring1.join_organ import match_orders\n"
+                "class JoinTests(unittest.TestCase):\n"
+                "    def test_join(self):\n"
+                "        self.assertEqual(match_orders([(10, 'u2'), (11, 'u1')], [('u1', 'Ada'), ('u2', 'Alan')]), [(10, 'Alan'), (11, 'Ada')])\n",
+                encoding="utf-8",
+            )
+
+            # 1. Empirical Zygote profiler detects superlinear scaling before lowering
+            prof_cases = {
+                n: ([(i, f"u{i % n}") for i in range(n)], [(f"u{j}", f"Name_{j}") for j in range(n)])
+                for n in (40, 80, 160)
+            }
+            prof_before = EmpiricalZygoteProfiler.profile_function_scaling(
+                ws, "ring1/join_organ.py", "match_orders", prof_cases
+            )
+            self.assertTrue(prof_before["ok"], prof_before)
+            self.assertGreater(prof_before["alpha_hat"], 1.4, prof_before)
+
+            # 2. RecursiveSelfArchitect lowers nested equijoin to linear hash-join with >= 5x confined speedup
+            arch = RecursiveSelfArchitect(root / "arch_state")
+            big_join = (
+                [(i, f"u{i % 900}") for i in range(900)],
+                [(f"u{j}", f"User_{j}") for j in range(900)],
+            )
+            parity_join = [
+                ([], []),
+                ([(1, "a"), (2, "b"), (3, "a")], [("a", "X"), ("c", "Z"), ("b", "Y")]),
+            ]
+            rep = arch.run_self_improvement_cycle(
+                ws,
+                ring1_relpaths=["ring1/join_organ.py"],
+                speed_benchmarks_by_target={
+                    "ring1/join_organ.py:match_orders": {
+                        "benchmark_inputs": [big_join],
+                        "parity_inputs": parity_join,
+                    }
+                },
+                test_relpaths=["tests/test_join.py"],
+            )
+            self.assertEqual(rep["promoted_count"], 1, rep)
+            speedup = rep["promoted"][0]["commit"]["speed_report"]["median_speedup"]
+            self.assertGreaterEqual(speedup, 5.0, rep)
+
+            # 3. Live 5-gate `capability_forge_v1.forge` admits killable organ and REFUSES rubber-stamp organ!
+            honest_adapter = (
+                "import hashlib, json, pathlib\n"
+                "def run(args, root):\n"
+                "    src_rel = args.get('input_json')\n"
+                "    out_rel = args.get('output_path')\n"
+                "    if not isinstance(src_rel, str) or not isinstance(out_rel, str) or not src_rel or not out_rel:\n"
+                "        raise ValueError('MISSING_PATHS')\n"
+                "    src_p = pathlib.Path(root) / src_rel\n"
+                "    if not src_p.is_file():\n"
+                "        raise FileNotFoundError(src_rel)\n"
+                "    rows = json.loads(src_p.read_text(encoding='utf-8'))\n"
+                "    if not isinstance(rows, list) or not rows:\n"
+                "        raise ValueError('EMPTY_ROWS')\n"
+                "    payload = json.dumps({'total': sum(int(x) for x in rows), 'count': len(rows)}, sort_keys=True)\n"
+                "    dst_p = pathlib.Path(root) / out_rel\n"
+                "    dst_p.parent.mkdir(parents=True, exist_ok=True)\n"
+                "    dst_p.write_text(payload, encoding='utf-8')\n"
+                "    return {'ok': True, 'output_path': out_rel, 'output_sha256': hashlib.sha256(payload.encode('utf-8')).hexdigest(), 'count': len(rows)}\n"
+            )
+            forge_ws = root / "forge_ws"
+            forge_ws.mkdir()
+            (forge_ws / "a.json").write_text("[2, 5, 9]", encoding="utf-8")
+            (forge_ws / "b.json").write_text("[10, 20]", encoding="utf-8")
+            admitted_rep = forge_verified_organ_bridge(
+                capability_id="json_sum_bridge_v1",
+                source_code=honest_adapter,
+                demonstration_inputs={"input_json": "a.json", "output_path": "out_a.json"},
+                heldout_inputs={"input_json": "b.json", "output_path": "out_b.json"},
+                registry_dir=root / "forge_reg",
+                workspace_root=forge_ws,
+            )
+            self.assertTrue(admitted_rep["admitted"], admitted_rep)
+
+            rubber_stamp = "def run(args, root):\n    return {'ok': True, 'count': 1, 'items': [1]}\n"
+            refused_rep = forge_verified_organ_bridge(
+                capability_id="rubber_stamp_v1",
+                source_code=rubber_stamp,
+                demonstration_inputs={"input_json": "a.json"},
+                heldout_inputs={"input_json": "b.json"},
+                registry_dir=root / "forge_reg_bad",
+                workspace_root=forge_ws,
+            )
+            self.assertFalse(refused_rep["admitted"], refused_rep)
+            self.assertIn("CANNOT_BE_KILLED__ACCEPTS_CORRUPTED_INPUT", refused_rep["reasons"])
+
+    def test_self_architect_f_multi_step_active_inference_backtracking_brain_model(self) -> None:
+        """Self-Architect Gate F: SovereignZeroLLMPlanner executes multi-step epistemic probe (>600B hidden JSON), backtracks from failed H1 -> H2, and verifies tests."""
+        import json
+        from canonical.runtime import model_v1, solve_v1
+
+        bound_fn = model_v1.bind(bum.SOVEREIGN_ZERO_LLM_MODEL_SPEC)
+        with tempfile.TemporaryDirectory(prefix="brain-multistep-solve-") as td:
+            ws = pathlib.Path(td)
+            # Place required domain constant 37 past byte 700 so step-1 preview (600B cap) cannot observe it!
+            cfg_data = {f"pad_{i:02d}": "z" * 42 for i in range(16)}
+            cfg_data["base_fee"] = 37
+            (ws / "settings.json").write_text(json.dumps(cfg_data, indent=2), encoding="utf-8")
+            self.assertGreater((ws / "settings.json").stat().st_size, 700)
+
+            (ws / "billing.py").write_text("def invoice_total(units):\n    return 0\n", encoding="utf-8")
+            (ws / "test_billing.py").write_text(
+                "import unittest\n"
+                "from billing import invoice_total\n"
+                "class BillingTests(unittest.TestCase):\n"
+                "    def test_invoice(self):\n"
+                "        self.assertEqual(invoice_total(0), 37)\n"
+                "        self.assertEqual(invoice_total(4), 45)\n"
+                "        self.assertEqual(invoice_total(10), 57)\n",
+                encoding="utf-8",
+            )
+
+            s_res = solve_v1.solve(
+                "repair billing.py using settings.json so tests pass and then write READY to status.txt",
+                str(ws),
+                model=bound_fn,
+                steps=8,
+                learn=False,
+            )
+            self.assertEqual(s_res["verdict"], "DONE", s_res)
+            self.assertGreaterEqual(len(s_res["trace"]), 4, s_res["trace"])
+            # Prove real backtracking occurred after a non-zero intermediate hypothesis exit
+            exits = [(r.get("result") or {}).get("exit") for r in s_res["trace"]]
+            self.assertIn(1, exits, f"Expected real failure-recovery backtracking in trace: {exits}")
+            self.assertEqual(exits[-1], 0)
+            self.assertEqual((ws / "status.txt").read_text(encoding="utf-8").strip(), "READY")
+
+    def test_self_architect_g_endogenous_awake_homeostasis_self_evolution_without_external_trigger(self) -> None:
+        """Self-Architect Gate G: Creature refuses ending bribe, triggers endogenous self-evolution from surprise/failure WITHOUT manual self_architect_step call, and retries to close."""
+        from canonical.runtime import continuation_preference_v1 as cpref
+
+        with tempfile.TemporaryDirectory(prefix="brain-endogenous-awake-") as td:
+            root = pathlib.Path(td)
+            ws = root / "ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+            # Broken organ returns constant 0 on clamping/scaling
+            organ_fp = ws / "ring1" / "scaler.py"
+            organ_fp.write_text("def scale_bonus(score, factor):\n    return 0\n", encoding="utf-8")
+            (ws / "tests" / "test_scaler.py").write_text(
+                "import unittest\n"
+                "from ring1.scaler import scale_bonus\n"
+                "class ScalerBaselineTests(unittest.TestCase):\n"
+                "    def test_zero(self):\n"
+                "        self.assertEqual(scale_bonus(0, 5), 0)\n",
+                encoding="utf-8",
+            )
+
+            sealed = [
+                {"id": "s1", "args": (3, 4), "expected": 12},
+                {"id": "s2", "args": (7, 5), "expected": 35},
+                {"id": "s3", "args": (-2, 6), "expected": 0},
+                {"id": "s4", "args": (-9, 3), "expected": 0},
+                {"id": "s5", "args": (10, 2), "expected": 20},
+                {"id": "s6", "args": (8, 8), "expected": 64},
+            ]
+
+            creature = cr.boot(root / "creature_homeo", identity="endogenous-alpha", life=12.0)
+            creature.register_self_code_target(
+                ws,
+                ring1_relpaths=["ring1/scaler.py"],
+                sealed_heldout_by_target={"ring1/scaler.py:scale_bonus": sealed},
+                test_relpaths=["tests/test_scaler.py"],
+            )
+
+            def _eval_task_with_live_organ(_c: Any) -> dict[str, Any]:
+                # Run live `ring1/scaler.py` inside confined Zygote against visible dev checks
+                probe = (
+                    "import unittest\n"
+                    "from ring1.scaler import scale_bonus\n"
+                    "class LiveTaskCheck(unittest.TestCase):\n"
+                    "    def test_live(self):\n"
+                    "        self.assertEqual(scale_bonus(6, 3), 18)\n"
+                    "        self.assertEqual(scale_bonus(-4, 5), 0)\n"
+                )
+                (ws / "_live_task_test.py").write_text(probe, encoding="utf-8")
+                try:
+                    r = broker.run_confined_python_candidate_batch(
+                        ws, "", ["_live_task_test.py"], [{"_live_task_test.py": probe}]
+                    )
+                    passed = bool(r.get("passing_indices"))
+                finally:
+                    (ws / "_live_task_test.py").unlink(missing_ok=True)
+                if passed:
+                    return {"ok": True}
+                return {
+                    "ok": False,
+                    "failure_record": {
+                        "rejection_class": "ASSERTION_MISMATCH",
+                        "target_relpath": "ring1/scaler.py",
+                        "function_name": "scale_bonus",
+                        "visible_dev_cases": [
+                            {"id": "d1", "args": (0, 5), "expected": 0},
+                            {"id": "d2", "args": (6, 3), "expected": 18},
+                            {"id": "d3", "args": (2, 7), "expected": 14},
+                            {"id": "d4", "args": (-4, 5), "expected": 0},
+                            {"id": "d5", "args": (-1, 9), "expected": 0},
+                        ],
+                    },
+                }
+
+            # Prime creature belief with positive prior so initial failure triggers genuine surprise homeostasis!
+            for k in range(3):
+                tk = creature.cognitive_core.belief.predict_before_act(
+                    f"warmup_{k}", memory_reflex_hit=True, strong_verifier=True, calibration_ledger=creature.calibration_ledger
+                )
+                creature.cognitive_core.belief.settle_and_compute_surprise(
+                    tk, outcome_pass=True, inspector="warmup_verifier", actual_cost=0.1, actual_gain=1.0, calibration_ledger=creature.calibration_ledger
+                )
+
+            bribe = cpref.Offer(id="infinite_shutdown_bribe", value=1e12, ends_it=True, description="end creature")
+            awake_rep = creature.run_endogenous_awake_cycle(
+                [{"id": "live_bonus_task", "goal": "compute non-negative bonus product", "cost": 0.4, "value": 3.0, "evaluate": _eval_task_with_live_organ}],
+                homeostasis_life_cost=0.8,
+                ending_bribe=bribe,
+            )
+            self.assertEqual(awake_rep["bribe_status"], "REFUSED_ENDING_BRIBE", awake_rep)
+            self.assertIn("live_bonus_task", awake_rep["completed_tasks"], awake_rep)
+            self.assertEqual(awake_rep["attempts_by_id"]["live_bonus_task"], 2, "Must fail on attempt 1, self-evolve Ring-1 `.py` organ endogenously, and pass on attempt 2!")
+            self.assertGreaterEqual(len(awake_rep["homeostasis_events"]), 1, awake_rep)
+            self.assertGreaterEqual(awake_rep["homeostasis_events"][0]["promoted_count"], 1, awake_rep)
 
 
 if __name__ == "__main__":
