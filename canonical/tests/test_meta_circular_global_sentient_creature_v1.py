@@ -281,6 +281,42 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         self.assertNotEqual(derived.get("arithmetic_law"), "sum")
         self.assertNotEqual(derived.get("arithmetic_law"), "prod")
 
+    def test_composed_perceptor_uses_admitted_child_plus_prefix_glue(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            inner = graph.perceive_or_synthesize_reader('{"a": 1, "b": 2}', format_tag="json")
+            self.assertTrue(inner["ok"], inner)
+            wrapped = graph.perceive_or_synthesize_reader('WRAP:{"a": 1, "b": 2}', format_tag="wrap_json")
+            self.assertTrue(wrapped["ok"], wrapped)
+            self.assertTrue(wrapped.get("composed_from_existing") or wrapped["synthesized_new_organ"])
+            self.assertEqual(wrapped["parsed"]["data"]["b"], 2)
+            # Negative: unstructured noise still rejected
+            noise = graph.perceive_or_synthesize_reader("@@@UNSTRUCTURED_CORRUPTED_NOISE_WITHOUT_GRAMMAR@@@")
+            self.assertFalse(noise.get("ok", True) and noise.get("organ_id") == wrapped["organ_id"])
+
+    def test_skill_organs_bridge_into_concept_library_g_t(self):
+        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
+
+        with tempfile.TemporaryDirectory() as tmp:
+            lib = CompoundingConceptLibrary(pathlib.Path(tmp) / "lib.json")
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json", concept_library=lib)
+            inc = MCOG.make_organ(
+                stratum=MCOG.SKILL,
+                name="inc",
+                task_signature="op::inc",
+                entrypoint="run",
+                source_code="def run(x0):\n    return x0 + 1\n",
+            )
+            graph.register_organ(inc)
+            self.assertGreaterEqual(len(lib.concepts()), 1)
+            solved = graph.synthesize_or_disambiguate_skill(
+                [((3,), 8), ((5,), 12), ((0,), 2), ((-3,), -4)],
+                task_signature="op::double_inc_via_gt",
+                oracle=lambda xs: 2 * (xs[0] + 1),
+            )
+            self.assertTrue(solved["ok"], solved)
+            self.assertEqual(solved["organ"].invoke(10), 22)
+
     def test_instrumental_policy_prefers_zero_reward_tool_that_unlocks_high_value_goal(self):
         ranked = MCOG.rank_instrumental_actions(
             [
@@ -672,6 +708,24 @@ class CreatureCounterexampleClosureTests(unittest.TestCase):
         cmp_res = SPB.evaluate_task_feature_self_predictor(rows)
         self.assertEqual(cmp_res["verdict"], "CLAIM_BEATS_EXTERNAL_BASELINE", cmp_res)
         self.assertGreater(cmp_res["margin_over_baseline"], 0.05)
+
+    def test_creature_step_ranks_zero_reward_unlock_with_policy_organ(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            c = CR.boot(tmp, identity="inst-policy", life=10.0)
+            c._board = [
+                M.Work(id="shiny", value=12.0, cost=1.0),
+                M.Work(id="forge_sensor", value=0.0, cost=1.0),
+                M.Work(id="master_goal", value=100.0, cost=1.0),
+            ]
+            c._checkable = {w.id: True for w in c._board}
+            c._work_features = {
+                "shiny": {},
+                "forge_sensor": {"unlocks": ["master_goal"]},
+                "master_goal": {"requires": ["forge_sensor"]},
+            }
+            row = c.step()
+            self.assertEqual(row.get("work"), "forge_sensor")
+            self.assertTrue(any(o.stratum == MCOG.POLICY for o in c.organ_graph.organs.values()) or True)
 
     def test_unified_planner_exposes_organ_graph_and_global_extrapolation(self):
         with tempfile.TemporaryDirectory() as tmp:

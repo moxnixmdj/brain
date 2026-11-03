@@ -2399,6 +2399,170 @@ def predict(action_id):
     )
 
 
+def _compose_perceptor_from_existing(
+    sample: str | bytes,
+    existing: Sequence[ExecutableOrgan],
+    *,
+    format_tag: str,
+) -> ExecutableOrgan | None:
+    """New format = admitted child perceptor + synthesized prefix glue (not a new `if kind`)."""
+    if not existing:
+        return None
+    if isinstance(sample, (bytes, bytearray)):
+        try:
+            text = bytes(sample).decode("utf-8")
+        except Exception:
+            return None
+    else:
+        text = str(sample)
+    if len(text) < 3:
+        return None
+    for cut in range(1, min(24, len(text) - 1)):
+        prefix, rest = text[:cut], text[cut:]
+        if not rest or prefix[-1:].isspace():
+            continue
+        for child in existing:
+            try:
+                parsed = child.invoke(rest)
+                re_emitted = child.invoke_aux("serialize", parsed)
+                if child.invoke(re_emitted) != parsed:
+                    continue
+            except Exception:
+                continue
+            try:
+                child_src = _rename_function_source(child.source_code, child.entrypoint, "_child_parse")
+                if "def serialize(" in child_src:
+                    child_src = child_src.replace("def serialize(", "def _child_serialize(", 1)
+                else:
+                    continue
+            except Exception:
+                continue
+            wrapper = (
+                child_src
+                + "\n"
+                + f"def parse(raw):\n"
+                + "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
+                + f"    prefix = {prefix!r}\n"
+                + "    if not text.startswith(prefix):\n"
+                + "        raise ValueError('PREFIX_MISMATCH')\n"
+                + "    return _child_parse(text[len(prefix):])\n"
+                + "\n"
+                + "def serialize(parsed):\n"
+                + "    inner = _child_serialize(parsed)\n"
+                + "    if isinstance(inner, bytes):\n"
+                + "        inner = inner.decode('utf-8')\n"
+                + f"    return {prefix!r} + inner\n"
+            )
+            try:
+                organ = make_organ(
+                    stratum=PERCEPTOR,
+                    name=f"perceptor_composed_{format_tag}",
+                    task_signature=f"perceptor::{format_tag}",
+                    entrypoint="parse",
+                    source_code=wrapper,
+                    parent_organ_ids=(child.organ_id,),
+                    metadata={"codec_family": "composed_prefix", "prefix": prefix, "child": child.organ_id},
+                )
+            except OrganSafetyError:
+                continue
+            try:
+                parsed2 = organ.invoke(sample)
+                re2 = organ.invoke_aux("serialize", parsed2)
+                if organ.invoke(re2) != parsed2:
+                    continue
+            except Exception:
+                continue
+            rejected = 0
+            corruptions = _corrupt_sample(sample)
+            for bad in corruptions:
+                try:
+                    organ.invoke(bad)
+                except Exception:
+                    rejected += 1
+            if rejected < len(corruptions):
+                continue
+            organ.verified_passes = 1
+            return organ
+    return None
+
+
+def _observational_skill_source(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    concept_library: Any | None = None,
+) -> str | None:
+    """Call the in-tree observational-equivalence + STUN synthesizer (`G_t` live)."""
+    try:
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+            synthesize_python_function_body,
+        )
+    except Exception:
+        return None
+    if not examples:
+        return None
+    arity = len(examples[0][0])
+    names = _arg_names(arity)
+    extra = [v for v in _harvest_numeric_constants(examples)[:6]]
+    try:
+        body = synthesize_python_function_body(
+            names,
+            examples,
+            extra_constants=extra,
+            max_weight=3,
+            max_bank_size=72,
+            concept_library=concept_library,
+        )
+    except Exception:
+        return None
+    if not isinstance(body, str) or not body.strip():
+        return None
+    stripped = body.strip()
+    if "def run(" in stripped:
+        return stripped + ("\n" if not stripped.endswith("\n") else "")
+    helpers = ""
+    run_body = stripped
+    if stripped.startswith("def ") and "\nreturn " in stripped:
+        head, tail = stripped.split("\nreturn ", 1)
+        helpers = head + "\n"
+        run_body = "return " + tail
+    indented = "\n".join(("    " + ln) if ln.strip() else ln for ln in run_body.splitlines())
+    return f"{helpers}def run({', '.join(names)}):\n{indented}\n"
+
+
+def _skill_organ_to_concept_entry(organ: ExecutableOrgan) -> Any | None:
+    """Bridge a simple SKILL organ into a ConceptEntry for `G_t`."""
+    try:
+        from canonical.swe_kernel.concept_library_v1 import ConceptEntry
+    except Exception:
+        return None
+    try:
+        tree = ast.parse(organ.source_code)
+    except SyntaxError:
+        return None
+    fn = next((n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == organ.entrypoint), None)
+    if fn is None or not fn.body:
+        return None
+    if not (len(fn.body) == 1 and isinstance(fn.body[0], ast.Return) and fn.body[0].value is not None):
+        return None
+    cid = "c_" + organ.organ_id.replace("organ_skill_", "")[:18]
+    if not cid.isidentifier():
+        return None
+    try:
+        body_expr = ast.unparse(fn.body[0].value)
+        return ConceptEntry(
+            concept_id=cid,
+            arity=len(fn.args.args),
+            param_names=tuple(a.arg for a in fn.args.args),
+            body_expr=body_expr,
+            domain_kind="any",
+            mdl_gain_bytes=max(1, organ.code_bytes),
+            corpus_sites=1,
+            verified_hits=max(1, organ.verified_passes),
+        )
+    except Exception:
+        return None
+
+
 # ---------------------------------------------------------------------------
 # Unified 7-Stratum Meta-Circular Organ Graph (`P_t`)
 # ---------------------------------------------------------------------------
@@ -2407,11 +2571,18 @@ def predict(action_id):
 class MetaCircularOrganGraph:
     """Content-addressed, self-growing 7-stratum program graph `P_t`."""
 
-    def __init__(self, state_path: pathlib.Path | str | None = None) -> None:
+    def __init__(
+        self,
+        state_path: pathlib.Path | str | None = None,
+        *,
+        concept_library: Any | None = None,
+    ) -> None:
         self.state_path = pathlib.Path(state_path) if state_path is not None else None
         self.organs: dict[str, ExecutableOrgan] = {}
         self.primary_by_sig: dict[tuple[str, str], str] = {}
         self.predictor = CausalFeatureSelfPredictor()
+        self.concept_library = concept_library
+        self._world_transitions: list[dict[str, Any]] = []
         if self.state_path is not None and self.state_path.is_file():
             self._load()
 
@@ -2431,6 +2602,13 @@ class MetaCircularOrganGraph:
                 self.primary_by_sig[sig_key] = organ.organ_id
                 replaced = True
         self._save()
+        if organ.stratum == SKILL and self.concept_library is not None:
+            entry = _skill_organ_to_concept_entry(organ)
+            if entry is not None and hasattr(self.concept_library, "admit_verified_concept"):
+                try:
+                    self.concept_library.admit_verified_concept(entry)
+                except Exception:
+                    pass
         return {
             "admitted": True,
             "organ_id": organ.organ_id,
@@ -2446,6 +2624,32 @@ class MetaCircularOrganGraph:
     def organs_in_stratum(self, stratum: str) -> list[ExecutableOrgan]:
         out = [o for o in self.organs.values() if o.stratum == stratum]
         return sorted(out, key=lambda o: (-o.pareto_score, o.organ_id))
+
+    def record_transition(
+        self,
+        *,
+        action_id: str,
+        cost: float,
+        failed: bool,
+        delta: Mapping[str, Any] | None = None,
+    ) -> None:
+        """Accumulate wake traces and compile a WORLD_MODEL organ when enough exist."""
+        self._world_transitions.append(
+            {
+                "action": str(action_id),
+                "cost": float(cost),
+                "failed": bool(failed),
+                "delta": dict(delta or {}),
+            }
+        )
+        if len(self._world_transitions) < 2 or len(self._world_transitions) % 2 != 0:
+            return
+        try:
+            wm = synthesize_world_model_organ(self._world_transitions[-16:])
+            if wm is not None:
+                self.register_organ(wm)
+        except Exception:
+            return
 
     # ------------------------------------------------- Sensorogenesis API
 
@@ -2473,7 +2677,22 @@ class MetaCircularOrganGraph:
             except Exception:
                 continue
 
-        # 2. Online epistemic sensorogenesis
+        # 2. Compositional closure: admitted PERCEPTOR + synthesized prefix glue
+        composed = _compose_perceptor_from_existing(
+            raw_sample, self.organs_in_stratum(PERCEPTOR), format_tag=format_tag
+        )
+        if composed is not None:
+            self.register_organ(composed)
+            parsed = composed.invoke(raw_sample)
+            return {
+                "ok": True,
+                "parsed": parsed,
+                "organ_id": composed.organ_id,
+                "synthesized_new_organ": True,
+                "composed_from_existing": True,
+            }
+
+        # 3. Online epistemic sensorogenesis (induce a new grammar)
         all_samples = [raw_sample, *extra_samples]
         new_organ = synthesize_perceptor_organ(all_samples, format_tag=format_tag)
         if new_organ is None:
@@ -2545,6 +2764,24 @@ class MetaCircularOrganGraph:
                         org = None
                     if org is not None:
                         pool.append(org)
+
+            obs_src = _observational_skill_source(
+                cur_examples, concept_library=self.concept_library
+            )
+            if obs_src:
+                try:
+                    pool.append(
+                        make_organ(
+                            stratum=SKILL,
+                            name="observational_eq",
+                            task_signature=task_signature,
+                            entrypoint="run",
+                            source_code=obs_src,
+                            metadata={"via": "swe_observational_program_synthesizer_v1"},
+                        )
+                    )
+                except OrganSafetyError:
+                    pass
 
             operator_organs = [
                 o for o in self.organs_in_stratum(SKILL) if o.task_signature != task_signature

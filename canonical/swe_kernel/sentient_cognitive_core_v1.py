@@ -2061,7 +2061,10 @@ class SentientCognitiveCore:
         from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
         from canonical.swe_kernel.transactional_parallel_execution_v1 import LatencyReliabilityCostRouter
 
-        self.organ_graph = MetaCircularOrganGraph(base_state_dir / "meta_circular_organ_graph_v1.json")
+        self.organ_graph = MetaCircularOrganGraph(
+            base_state_dir / "meta_circular_organ_graph_v1.json",
+            concept_library=self.concept_library,
+        )
         self.cost_router = LatencyReliabilityCostRouter()
         self.verified_programs_buffer: list[str] = []
         self.unresolved_failure_buffer: list[dict[str, Any]] = []
@@ -2139,6 +2142,15 @@ class SentientCognitiveCore:
             rec = dict(failure_record)
             rec.setdefault("ok", False)
             self.unresolved_failure_buffer.append(rec)
+        try:
+            self.organ_graph.record_transition(
+                action_id=str(task_id),
+                cost=max(0.0, float(elapsed_ms) / 1000.0),
+                failed=not bool(outcome_pass),
+                delta={"pass": 1.0 if outcome_pass else 0.0},
+            )
+        except Exception:
+            pass
         return {
             "homeostasis_needed": self.should_trigger_endogenous_homeostasis(),
             "unresolved_failures": len(self.unresolved_failure_buffer),
@@ -2170,6 +2182,17 @@ class SentientCognitiveCore:
         if len(self.verified_programs_buffer) >= 2:
             sleep_abs = self.concept_library.sleep_abstract(self.verified_programs_buffer)
             self.verified_programs_buffer.clear()
+        skill_srcs = [o.source_code for o in self.organ_graph.organs_in_stratum("SKILL")[:8]]
+        if len(skill_srcs) >= 2:
+            try:
+                extra_abs = self.concept_library.sleep_abstract(skill_srcs)
+                sleep_abs = {
+                    "admitted_count": int(sleep_abs.get("admitted_count", 0))
+                    + int(extra_abs.get("admitted_count", 0)),
+                    "admitted": list(sleep_abs.get("admitted") or []) + list(extra_abs.get("admitted") or []),
+                }
+            except Exception:
+                pass
 
         self_evo: dict[str, Any] | None = None
         if code_root is not None and ring1_relpaths and (self.unresolved_failure_buffer or ring1_relpaths):
