@@ -122,7 +122,7 @@ import pathlib
 import re
 import shlex
 import sys
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from canonical.runtime import capability_planner
 from canonical.runtime import goal_compiler as gc
@@ -3173,9 +3173,33 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                 retrieved["match_evidence"]["displaced_pinned_selection"] = selected
                 retrieved["match_evidence"]["displaced_unserved_files"] = unserved
                 return retrieved
-            raise GoalCompilationFailure(
-                "GOAL_INPUT_BINDING_REQUIRED",
-                selected + ":unserved_stated_files:" + ",".join(unserved))
+            # THE FROZEN TEMPLATE IS NOT THE WHOLE BINDING.
+            #
+            # A complete staged-workflow grammar (`crossfile_task_binding_v1`) binds one input
+            # per stated path, request-locally, and cannot change the shared registry -- which is
+            # why its rows' frozen `action_template` names only the slots every request shares.
+            # This completeness check ran first, on the template, and refused BEFORE anything had
+            # a chance to add the remaining slot.
+            #
+            # Measured 2026-11-03: `test_normal_entry_binds_and_replays_actual_crossfile_change`
+            # raised GOAL_INPUT_BINDING_REQUIRED:…:unserved_stated_files:<scratch>/issue.json and
+            # then `test_extra_goal_requirements_refuse_before_execution` -- whose whole point is
+            # that a refusal is PRECISE -- read `COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`
+            # instead of `CROSSFILE_TASK_UNBOUND`, because an unrecognised refusal is re-served.
+            # 18 of 38 cases in that file failed on this, reporting a safety refusal they never
+            # reached.
+            #
+            # The check is not weakened: it is REPEATED against the binding the request-local
+            # binder will actually use, and only a binding whose stated paths are all consumed
+            # clears the refusal.
+            request_local = _request_local_complete_binding(selected, text, root, unserved)
+            if request_local is not None:
+                compiled.setdefault("inputs", {}).update(request_local)
+                compiled["request_local_inputs"] = sorted(request_local)
+            else:
+                raise GoalCompilationFailure(
+                    "GOAL_INPUT_BINDING_REQUIRED",
+                    selected + ":unserved_stated_files:" + ",".join(unserved))
 
     # F17 (pinned catch-all): the pinned scorer answers a STRUCTURED sentence with a capability
     # whose only declared inputs are {goal, output_path} - it binds any sentence at all, which is
@@ -3407,3 +3431,31 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     raise GoalCompilationFailure(
         "GOAL_INPUT_BINDING_REQUIRED",
         "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+
+
+def _request_local_complete_binding(selected: str, text: str, root: pathlib.Path,
+                                    unserved: Sequence[str]) -> dict[str, Any] | None:
+    """The request-local binding that consumes every stated path, or None.
+
+    Asked only when the frozen template dropped a stated input file. Two grammars exist, each
+    named by capability id, and each is asked to bind the SENTENCE -- never to run anything. The
+    result is accepted only if the stated paths it consumes are exactly the ones the frozen
+    template dropped, so this can add a slot but can never remove one.
+    """
+    from canonical.runtime.crossfile_task_binding_v1 import CAPABILITY_ID as _CROSSFILE
+    if selected != _CROSSFILE:
+        return None
+    try:
+        from canonical.runtime import crossfile_task_binding_v1 as _binder
+        from canonical.runtime import goal_front_compiler_v1 as _self
+        wanted = _binder.parse_goal(text)             # raises on unconsumed prose/paths
+        entry = {"action_template": {"args": {k: "${input.%s}" % k for k in wanted}}}
+        bound = _self.bind_all_inputs(text, entry, root)
+    except Exception:  # noqa: BLE001 - an unbound request is the honest outcome
+        return None
+    if dict(bound) != dict(wanted):
+        return None
+    still_unserved = _unserved_stated_file_paths(text, bound, root)
+    if still_unserved:
+        return None
+    return dict(bound)
