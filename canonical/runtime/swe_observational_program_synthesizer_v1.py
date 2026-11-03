@@ -242,7 +242,11 @@ def _materialize_concept_helpers(
         helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
         if concept_library is not None and hasattr(concept_library, "record_concept_outcome"):
             try:
-                concept_library.record_concept_outcome(cid, helped=True)
+                # helped=None, NOT True. This point in the code has only just emitted a body; it
+                # has verified nothing. Crediting here was measured to give a concept used solely
+                # inside WRONG bodies `verified_hits=1` and a higher own prior (2026-11-04).
+                # Verification is the caller's evidence to supply, via `record_concept_outcome`.
+                concept_library.record_concept_outcome(cid, helped=None)
             except Exception:
                 pass
     return "\n".join(helper_lines) + "\n" + body_src

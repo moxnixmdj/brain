@@ -1,0 +1,81 @@
+{
+  "authority": "NONE",
+  "findings": [
+    {
+      "id": "credit_requires_evidence",
+      "pass": true,
+      "question": "does emitting a body that mentions a concept count as verifying it?",
+      "uses_before_after": [
+        0,
+        1
+      ],
+      "verified_hits_before_after": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "history_changes_the_answer",
+      "pass": true,
+      "question": "does the same question get a different answer after bad experience?",
+      "trajectory": [
+        {
+          "disconfirmations": 0,
+          "log_prior": 2.303,
+          "retired": false,
+          "verdict": "SOLVED"
+        },
+        {
+          "disconfirmations": 1,
+          "log_prior": 1.946,
+          "retired": false,
+          "verdict": "SOLVED"
+        },
+        {
+          "disconfirmations": 2,
+          "log_prior": 1.386,
+          "retired": false,
+          "verdict": "SOLVED"
+        },
+        {
+          "disconfirmations": 3,
+          "log_prior": 0.693,
+          "retired": true,
+          "verdict": "OVERFIT"
+        }
+      ]
+    },
+    {
+      "id": "junk_cannot_crowd_out_real",
+      "junk_in_window_after": 0,
+      "junk_in_window_before": 16,
+      "pass": true,
+      "question": "with 20 junk concepts sorting first, does evidence restore the real one?",
+      "retired": 20,
+      "verdict_after_evidence": "SOLVED",
+      "verdict_before_evidence": "UNREACHED"
+    },
+    {
+      "id": "retirement_preserves_the_past",
+      "pass": true,
+      "question": "does a retired concept still resolve for bodies already built from it?",
+      "retired_still_callable": true
+    },
+    {
+      "id": "no_recovery_without_evidence",
+      "pass": true,
+      "question": "does anything improve on a use count alone, with no verdicts?",
+      "verdict_without_evidence": "UNREACHED"
+    }
+  ],
+  "measured": "2026-11-04",
+  "not_claimed": [
+    "'pass' means the predicted behaviour occurred, not that the mechanism is correct",
+    "disconfirming evidence is supplied BY HAND here; nothing in this benchmark decides when a concept has failed, only what happens once that is known",
+    "retirement is a heuristic threshold (3 failures, 0 verified hits), not a derived law"
+  ],
+  "passed": 5,
+  "schema": "PROJECT_BRAIN_CONCEPT_LIFECYCLE_BENCHMARK_V1",
+  "total": 5,
+  "truth_achieved": false
+}

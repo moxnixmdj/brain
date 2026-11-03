@@ -395,10 +395,26 @@ class ConceptEntry:
     corpus_sites: int
     uses: int = 0
     verified_hits: int = 0
+    # Added 2026-11-04. Until this existed, `log_prior` could only rise: measured, 50 recorded
+    # failures left it unchanged at 2.8904, and the synthesizer only ever looks at the top 16
+    # concepts, so surviving junk crowded out useful concepts (reach 2/2 -> 0/2). A library that
+    # cannot be wrong about itself is not a memory, it is an append-only log.
+    disconfirmations: int = 0
+
+    RETIREMENT_THRESHOLD = 3
+
+    @property
+    def retired(self) -> bool:
+        """True when the record says this concept has failed more often than it has ever helped."""
+        return self.disconfirmations >= self.RETIREMENT_THRESHOLD and self.verified_hits == 0
 
     @property
     def log_prior(self) -> float:
-        return math.log1p(self.verified_hits * 2 + self.corpus_sites + 1)
+        # Disconfirmations SUBTRACT. The asymmetry is deliberate: one verified help is worth a
+        # little, repeated unexplained failure is worth a lot, because a wrong concept is not
+        # merely unhelpful -- it fills one of the 16 slots the search can see.
+        return math.log1p(max(0, self.verified_hits * 2 + self.corpus_sites
+                              - self.disconfirmations * 3) + 1)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -411,6 +427,7 @@ class ConceptEntry:
             "corpus_sites": self.corpus_sites,
             "uses": self.uses,
             "verified_hits": self.verified_hits,
+            "disconfirmations": self.disconfirmations,
         }
 
     @classmethod
@@ -427,6 +444,7 @@ class ConceptEntry:
             corpus_sites=int(raw.get("corpus_sites") or 2),
             uses=int(raw.get("uses") or 0),
             verified_hits=int(raw.get("verified_hits") or 0),
+            disconfirmations=int(raw.get("disconfirmations") or 0),
         )
 
 
@@ -518,7 +536,11 @@ class CompoundingConceptLibrary:
     def concepts(self) -> list[ConceptEntry]:
         if not self._can_read():
             return []
-        return sorted(self._concepts.values(), key=lambda c: (-c.log_prior, -c.mdl_gain_bytes, c.concept_id))
+        # Retired concepts are NOT offered to new searches. `callable_map()` still resolves them,
+        # so bodies already built from a retired concept keep working -- retirement removes an
+        # option from future search, it does not rewrite the past.
+        live = [c for c in self._concepts.values() if not c.retired]
+        return sorted(live, key=lambda c: (-c.log_prior, -c.mdl_gain_bytes, c.concept_id))
 
     def callable_map(self) -> dict[str, Callable[..., Any]]:
         """Return pure AST-interpreted callables for all admitted concepts."""
@@ -541,7 +563,15 @@ class CompoundingConceptLibrary:
                 cmap[cid] = _make_fn(entry, parsed)
         return cmap
 
-    def record_concept_outcome(self, concept_id: str, *, helped: bool) -> None:
+    def record_concept_outcome(self, concept_id: str, *, helped: bool | None) -> None:
+        """Record what happened when a concept was used.
+
+        `helped=None` means the concept was USED but nothing has been verified. This is the case
+        the synthesizer was previously mislabelling as `helped=True`: it credited a concept at the
+        moment a body mentioning it was emitted, before anyone could know whether the body was
+        right. Measured 2026-11-04: a concept used only inside WRONG bodies reached
+        `verified_hits=1` and raised its own prior.
+        """
         if not self._can_write() or concept_id not in self._concepts:
             return
         cur = self._concepts[concept_id]
@@ -554,9 +584,14 @@ class CompoundingConceptLibrary:
             mdl_gain_bytes=cur.mdl_gain_bytes,
             corpus_sites=cur.corpus_sites,
             uses=cur.uses + 1,
-            verified_hits=cur.verified_hits + (1 if helped else 0),
+            verified_hits=cur.verified_hits + (1 if helped is True else 0),
+            disconfirmations=cur.disconfirmations + (1 if helped is False else 0),
         )
         self.save()
+
+    def retired_concept_ids(self) -> frozenset[str]:
+        """Concepts the record says to stop offering. Their callables still resolve."""
+        return frozenset(cid for cid, e in self._concepts.items() if e.retired)
 
     def _verify_candidate_concept(self, canon_expr_src: str, arity: int) -> tuple[bool, str]:
         """Verify determinism, non-constancy, and mutation-kill (`property_v1.mutate`) without `exec()`/`eval()`."""
