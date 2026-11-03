@@ -47,3 +47,9 @@ canonical/tmp_*.json
 # a cache of what this machine's programs do: keyed on their bytes, so it is
 # machine-local by construction and must never be committed
 *.fingerprints.json
+
+# The creature life-support loop's durable body (creature state, ignorance
+# ledger, skill store, heartbeats). It is carried between scheduled runs as a
+# workflow artifact, never versioned as source: `git add -A` must not commit a
+# life as if it were evidence.
+creature_life_state/
