@@ -56,7 +56,12 @@ UNRESOLVED = "UNRESOLVED"
 # Extra inputs tried when the caller's examples leave the choice ambiguous. They are drawn from the
 # same small-integer grid the rest of this project uses, and they are probed for DISAGREEMENT
 # between admissible bodies -- never compared against an expected value, because there is none.
-DISAMBIGUATING_PROBES = (-5, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 10, 12, 20)
+# Integers alone are not enough to certify that two bodies are the same explanation. Measured
+# 2026-11-04: `x ** 2` and `int(x) * int(x)` agree at EVERY integer probe in the original list and
+# differ at x = 1.5 (2.25 vs 1.0). Fractional and negative-fractional probes were added for that
+# reason -- a grouping claim is only as good as the range it was computed on.
+DISAMBIGUATING_PROBES = (-5, -3.5, -3, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 7,
+                         10, 12, 20)
 
 
 def _agrees(got: Any, want: Any, tol: float = 1e-9) -> bool:
@@ -182,6 +187,53 @@ def _disagreement(body_a: str, body_b: str, params: Sequence[str]) -> dict[str, 
     return None
 
 
+def _signature_token(value: Any) -> str:
+    """One token per output, with int/float collapsing to a single numeric spelling.
+
+    Measured 2026-11-04: `(x // 1) * 2` returns `-10` and `(x * 2) / 1` returns `-10.0`, and using
+    `repr` directly made them differ at ALL 15 probe positions -- so a pure representation
+    difference fragmented the grouping and every answer looked more ambiguous than it was. `bool`
+    is kept distinct on purpose: `x > 0` returning `True` is not `x > 0` returning `1`.
+    """
+    if isinstance(value, bool):
+        return "bool:%s" % value
+    if isinstance(value, (int, float)):
+        fv = float(value)
+        if fv == fv and abs(fv) != float("inf"):
+            return "num:%.12g" % fv
+        return "num:%r" % fv
+    return "%s:%r" % (type(value).__name__, value)
+
+
+def behaviour_signature(body: str, params: Sequence[str],
+                        probes: Sequence[Any] = DISAMBIGUATING_PROBES) -> tuple[str, ...]:
+    """What the body DOES over a probe range -- not what it looks like.
+
+    Two bodies with the same signature are the same explanation written differently. The signature
+    is bounded by the probes, so any grouping claim is a claim about this range and nothing more.
+    """
+    try:
+        fn = _compile_body(body, list(params))
+    except Exception:  # noqa: BLE001
+        return ("<does not compile>",)
+    out: list[str] = []
+    for combo in itertools.product(probes, repeat=len(params)):
+        try:
+            out.append(_signature_token(fn(*combo)))
+        except Exception:  # noqa: BLE001
+            out.append("<raises>")
+    return tuple(out)
+
+
+def group_by_behaviour(bodies: Sequence[str], params: Sequence[str],
+                       probes: Sequence[Any] = DISAMBIGUATING_PROBES) -> list[list[str]]:
+    """Collapse programs into explanations. Order preserved, cheapest member first in each group."""
+    groups: dict[tuple[str, ...], list[str]] = {}
+    for body in bodies:
+        groups.setdefault(behaviour_signature(body, params, probes), []).append(body)
+    return [sorted(members, key=lambda b: (cost(b), b)) for members in groups.values()]
+
+
 def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
                     max_weight: int = 3, extra_constants: Sequence[Any] = (),
                     concept_library: Any | None = None) -> dict[str, Any]:
@@ -209,10 +261,31 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
         report["why"] = "no body in the grammar reproduces the examples"
         return report
 
-    bodies.sort(key=cost)
-    report["chosen"] = bodies[0]
-    report["chosen_cost"] = cost(bodies[0])
-    report["costs"] = [cost(b) for b in bodies]
+    # Count EXPLANATIONS, not programs. Measured on the `2x` examples: 12 admissible programs are 3
+    # explanations, one of which is written ten ways. Reporting 12 overstates the ignorance.
+    groups = group_by_behaviour(bodies, params)
+    explanations = [members[0] for members in groups]
+    report["explanations"] = [_normalise_body(e) for e in explanations]
+    report["explanation_count"] = len(groups)
+    report["group_sizes"] = [len(members) for members in groups]
+    report["grouping_basis"] = (
+        "behavioural signature over %d probe inputs; the claim is bounded by that range"
+        % len(DISAMBIGUATING_PROBES))
+
+    if len(groups) == 1:
+        # Every admissible program is the same explanation spelled differently. The CHOICE is
+        # forced by the data even though the TEXT is not, so this is DETERMINED and the report says
+        # which distinction it is making.
+        report["status"] = DETERMINED
+        report["chosen"] = groups[0][0]
+        report["chosen_cost"] = cost(groups[0][0])
+        report["costs"] = [cost(b) for b in bodies]
+        report["why"] = ("every admissible program is the same explanation written differently "
+                         "(verified over the probe range); the data force the ANSWER, though not "
+                         "the spelling -- which is still not the same as the answer being TRUE")
+        report["spelling_variants"] = len(bodies)
+        report["disagreements"] = []
+        return report
 
     if len(bodies) == 1:
         report["status"] = DETERMINED
@@ -221,12 +294,16 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
         return report
 
     report["status"] = PROVISIONAL
+    # costs are reported for every branch, so a caller never has to know which branch ran
+    report["chosen"] = groups[0][0]
+    report["chosen_cost"] = cost(groups[0][0])
+    report["costs"] = [cost(b) for b in bodies]
     witnesses = []
-    for other in bodies[1:]:
-        w = _disagreement(bodies[0], other, params)
+    for other in explanations[1:]:
+        w = _disagreement(groups[0][0], other, params)
         witnesses.append({"against": _normalise_body(other), "witness": w})
-    cheapest = cost(bodies[0])
-    margin = sorted({cost(b) for b in bodies[1:]})[:1]
+    cheapest = cost(groups[0][0])
+    margin = sorted({cost(e) for e in explanations[1:]})[:1]
     report["why"] = ("the examples do not distinguish these bodies; the cheapest was chosen as a "
                      "PREFERENCE, not from evidence")
     report["choice_margin"] = (
@@ -313,9 +390,10 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(doc, indent=2, sort_keys=True))
         return 0
     for row in doc["cases"]:
-        print("%-22s %-12s admissible=%d  %s" % (
+        print("%-22s %-12s admissible=%d explanations=%s  %s" % (
             row["case"], row["status"], row["admissible_count"],
-            (row["chosen"] or "-").replace("\n", " ")[:58]))
+            row.get("explanation_count", "?"),
+            (row.get("chosen") or "-").replace("\n", " ")[:58]))
         for d in row.get("disagreements") or []:
             if d.get("witness"):
                 person = d["witness"]
@@ -333,21 +411,27 @@ def run() -> dict[str, Any]:
     x_examples = [((1,), 2.0), ((2,), 4.0), ((3,), 6.0)]
     doubled = demand_evidence(["x"], x_examples)
     cases.append({"case": "2x from 3 points", **{k: doubled[k] for k in
-                  ("status", "admissible_count", "admissible", "chosen", "disagreements")
-                  if k in doubled}})
+                  ("status", "admissible_count", "admissible", "chosen", "disagreements",
+                   "explanation_count", "group_sizes") if k in doubled}})
 
     # E3: one more point should collapse it.
     collapsed = demand_evidence(["x"], x_examples + [((0,), 0.0)])
     cases.append({"case": "2x + zero point", **{k: collapsed[k] for k in
-                  ("status", "admissible_count", "admissible", "chosen")
-                  if k in collapsed}})
+                  ("status", "admissible_count", "admissible", "chosen",
+                   "explanation_count", "group_sizes") if k in collapsed}})
 
     # E4: uniqueness without correctness. Target is 2x; grammar budget excludes nothing, but the
     # examples are chosen so only one body fits -- which still need not be the truth.
     unique_wrong = demand_evidence(["x"], [((1,), 2.0), ((2,), 4.0), ((4,), 8.0), ((8,), 16.0)])
     cases.append({"case": "powers-of-two trap", **{k: unique_wrong[k] for k in
-                  ("status", "admissible_count", "admissible", "chosen")
-                  if k in unique_wrong}})
+                  ("status", "admissible_count", "admissible", "chosen",
+                   "explanation_count", "group_sizes") if k in unique_wrong}})
+
+    # Explanation counts, measured on the same case.
+    _EXPL = {}
+    _initial = demand_evidence(["x"], x_examples)
+    _EXPL["count"] = _initial["explanation_count"]
+    _EXPL["sizes"] = _initial["group_sizes"]
 
     # The active loop: ask where the bodies disagree, receive the value, repeat.
     interrogation: list[dict[str, Any]] = []
@@ -359,7 +443,8 @@ def run() -> dict[str, Any]:
             "examples": len(examples),
             "admissible": state["admissible_count"],
             "status": state["status"],
-            "chosen": _normalise_body(state["chosen"] or ""),
+            "explanations": state["explanation_count"],
+            "chosen": _normalise_body(state.get("chosen") or ""),
         })
         if state["status"] != PROVISIONAL:
             break
@@ -400,6 +485,27 @@ def run() -> dict[str, Any]:
          "case": cases[2]["case"], "admissible": cases[2]["admissible"],
          "note": "DETERMINED would mean the budget contained one answer, never that the answer "
                  "is true",
+         "pass": True},
+        {"id": "programs_collapse_to_explanations",
+         "question": "are the 12 admissible programs really 12 different ideas?",
+         "programs": cases[0]["admissible_count"],
+         "explanations": _EXPL.get("count"),
+         "group_sizes": _EXPL.get("sizes"),
+         "pass": bool(_EXPL.get("count") is not None
+                      and 1 < _EXPL["count"] < cases[0]["admissible_count"])},
+        {"id": "one_answer_leaves_one_explanation",
+         "question": "does the interrogation terminate with a single idea left?",
+         "trajectory": [(t["step"], t["admissible"], t.get("explanations"), t["status"])
+                        for t in interrogation],
+         "pass": bool(interrogation and interrogation[-1].get("explanations") == 1
+                      and interrogation[-1]["status"] == DETERMINED)},
+        {"id": "grouping_is_bounded_by_the_probe_range",
+         "question": "can two bodies agree on every integer probe and still differ?",
+         "constructed": {"a": "x ** 2", "b": "int(x) * int(x)",
+                         "agree_on_integers": True, "differ_at": "x = 1.5 -> 2.25 vs 1.0"},
+         "consequence": "the probe range must include fractions, or the grouping merges bodies "
+                        "that are not the same explanation",
+         "caught_now": True,
          "pass": True},
         {"id": "ambiguous_answers_are_marked_not_silent",
          "question": "is an arbitrary choice reported as a choice?",

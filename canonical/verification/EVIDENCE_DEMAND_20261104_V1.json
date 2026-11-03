@@ -188,6 +188,8 @@
   ],
   "passed": 6,
   "schema": "PROJECT_BRAIN_EVIDENCE_DEMAND_V1_BENCHMARK",
+  "superseded_by": "EVIDENCE_DEMAND_20261104_V2.json",
+  "superseded_reason": "V1 counted admissible PROGRAMS and called them explanations: 12 for the 2x case, when 10 of the 12 are one function spelled differently. V2 groups by behavioural signature and reports 12 programs -> 3 explanations, with the grouping bounded by an explicit probe range (now including fractions).",
   "total": 6,
   "truth_achieved": false
 }

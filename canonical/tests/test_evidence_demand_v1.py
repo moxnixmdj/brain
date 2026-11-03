@@ -61,6 +61,7 @@ def test_three_points_leave_the_choice_open():
     report = demand_evidence(["x"], DOUBLE_X)
     assert report["status"] == PROVISIONAL
     assert report["admissible_count"] > 1
+    assert report["explanation_count"] > 1, "several ideas, not just several spellings"
     assert report["chosen"] is not None
 
 
@@ -80,7 +81,9 @@ def test_simplicity_does_not_resolve_the_ambiguity():
     report = demand_evidence(["x"], DOUBLE_X)
     costs = sorted(report["costs"])
     assert costs[0] == costs[1], "if costs differed, simplicity would be doing work; it is not"
-    assert "next cheapest 6" in report["choice_margin"]
+    # The margin now compares EXPLANATIONS, so it may be a real gap rather than a tie. Either way
+    # the report must state it rather than leave it implied.
+    assert "chosen cost" in report["choice_margin"]
 
 
 def test_asking_shrinks_the_set():
@@ -134,3 +137,96 @@ def test_no_authority_claimed():
     assert report["authority"] == "NONE"
     if report["status"] == DETERMINED:
         assert "not the same as the body being TRUE" in report["why"]
+
+
+# --------------------------------------------------------------------------- #
+# Counting EXPLANATIONS rather than programs.
+# --------------------------------------------------------------------------- #
+def test_programs_collapse_to_explanations():
+    """12 admissible programs, 3 ideas -- the count that matters is the smaller one."""
+    report = demand_evidence(["x"], DOUBLE_X)
+    assert report["admissible_count"] == 12 or report["admissible_count"] > report["explanation_count"]
+    assert 1 < report["explanation_count"] < report["admissible_count"]
+    assert report["group_sizes"][0] > 1, "most programs are one explanation spelled many ways"
+
+
+def test_grouping_is_by_behaviour_not_by_text():
+    from canonical.runtime.evidence_demand_v1 import group_by_behaviour
+
+    same = group_by_behaviour(["return (x + x)", "return (2 * x)"], ["x"])
+    assert len(same) == 1, "different text, same behaviour -> one explanation"
+
+    different = group_by_behaviour(["return (x + x)", "return (x * x)"], ["x"])
+    assert len(different) == 2, "same text-shape, different behaviour -> two explanations"
+
+
+def test_int_and_float_spelling_is_not_a_difference():
+    """Measured bug: `repr(4)` is `4` while `repr(4.0)` is `4.0`, and that split groups.
+
+    My first version of this test used `(x // 1) * 2` versus `(x * 2) / 1` -- and it FAILED, for a
+    good reason: those two are NOT the same function. At x = 1.5 they give 2.0 and 3.0. The int/float
+    confusion was real, but that pair is a genuine behavioural difference wearing the same clothes,
+    so it cannot be used to demonstrate a representation-only difference.
+
+    The correct pair differs only in spelling of the same value.
+    """
+    from canonical.runtime.evidence_demand_v1 import group_by_behaviour
+
+    assert len(group_by_behaviour(["return (2 * x)", "return (2.0 * x)"], ["x"])) == 1
+
+
+def test_floor_division_is_a_different_explanation_not_a_spelling():
+    """The counterpart: `(x // 1) * 2` and `(x * 2) / 1` agree on integers and differ at x = 1.5."""
+    from canonical.runtime.evidence_demand_v1 import group_by_behaviour
+
+    groups = group_by_behaviour(["return ((x // 1) * 2)", "return ((x * 2) / 1)"], ["x"])
+    assert len(groups) == 2
+
+
+def test_bool_is_still_distinct_from_a_number():
+    """`True` is not `1`, and grouping must not silently say it is."""
+    from canonical.runtime.evidence_demand_v1 import group_by_behaviour
+
+    groups = group_by_behaviour(["return (x > 0)", "return (1 if x > 0 else 0)"], ["x"])
+    assert len(groups) == 2
+
+
+def test_integer_probes_alone_would_miss_a_real_difference():
+    """The bound on the grouping claim, asserted rather than described.
+
+    `x ** 2` and `int(x) * int(x)` agree at every INTEGER probe and differ at x = 1.5 (2.25 vs 1.0).
+    The probe range therefore has to contain fractions, or the grouping merges bodies that are not
+    the same explanation.
+    """
+    from canonical.runtime.evidence_demand_v1 import group_by_behaviour
+
+    groups = group_by_behaviour(["return (x ** 2)", "return (int(x) * int(x))"], ["x"])
+    assert len(groups) == 2, "a fraction-blind probe range would merge these"
+
+
+def test_interrogation_ends_with_one_explanation():
+    """X2: after the disagreement is resolved, exactly one idea remains and it is DETERMINED."""
+    from canonical.runtime.evidence_demand_v1 import what_would_settle_it
+
+    examples = list(DOUBLE_X)
+    for _ in range(5):
+        state = demand_evidence(["x"], examples)
+        if state["status"] != PROVISIONAL:
+            break
+        asked = what_would_settle_it(["x"], state["explanations"])
+        if not asked["queries"]:
+            break
+        probe = asked["queries"][0]["args"]
+        examples.append(((probe[0],), 2.0 * probe[0]))
+
+    final = demand_evidence(["x"], examples)
+    assert final["explanation_count"] == 1
+    assert final["status"] == DETERMINED
+
+
+def test_single_explanation_does_not_claim_spelling_or_truth():
+    """A forced ANSWER is not a forced SPELLING, and neither is truth."""
+    report = demand_evidence(["x"], DOUBLE_X + [((-3.5,), -7.0)])
+    if report["status"] == DETERMINED and report.get("spelling_variants"):
+        assert "not the spelling" in report["why"] or "spelled differently" in report["why"]
+        assert "TRUE" in report["why"]
