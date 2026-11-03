@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6643,
+  "research_index_records": 6644,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ddd157b84884137643d8f4df9891ad95c2d8db6d3818bdf6a7f6cf858f170806"
+  "value": "b298b8e6daa9d2390cec368b2021ebae73cdd28a52897f836bc3e308c918e8c0"
  },
  "engines": [
   {
@@ -215911,6 +215911,51 @@
     "runner": 3,
     "so": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1",
+   "capability": false,
+   "date": "2026-11-03",
+   "id": "research:canonical/action_intents/OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a50f73f60610f19bec339740e956c31c85fa6c99cf6547d47c9610f08e269b85",
+   "status": "",
+   "terms": {
+    "1-step": 1,
+    "20261103": 1,
+    "5-gate": 1,
+    "50": 1,
+    "5x": 1,
+    "600b": 1,
+    "6603": 1,
+    "abstraction": 1,
+    "accumulation": 1,
+    "adds": 1,
+    "admission": 1,
+    "alpha_hat": 1,
+    "anti-unification": 1,
+    "architect": 1,
+    "ast": 1,
+    "backtracking": 1,
+    "base": 1,
+    "brain_model_callable": 2,
+    "broken": 1,
+    "c5f67c95": 1,
+    "capability_forge_v1.forge": 1,
+    "catamorphisms": 1,
+    "ceilings": 1,
+    "compile": 1,
+    "composite": 1,
+    "concept": 3,
+    "failure": 2,
+    "imports": 2,
+    "open_ended_concept_and_endogenous_self_architect_20261103_v1": 2,
+    "synthesize_ast_evaluator_extension": 2,
+    "test": 2,
+    "via": 2
    }
   },
   {
