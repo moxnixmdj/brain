@@ -447,6 +447,9 @@ class AwakeAgencyDaemon:
         import hashlib
         from canonical.runtime import creature_runtime_v1 as cr
 
+        # How many never-verified capabilities one pulse may probe. Small on purpose:
+        # self-measurement must never crowd out the work the creature exists to do.
+        self.self_verify_budget = 2
         self.workspace_root = pathlib.Path(workspace_root).resolve()
         ws_hash = hashlib.sha256(str(self.workspace_root).encode("utf-8")).hexdigest()[:12]
         self.ledger_path = str(ledger_path) if ledger_path else ledger.DEFAULT_STATE
@@ -793,7 +796,41 @@ class AwakeAgencyDaemon:
                     )
                     noted_gaps.append(gid)
 
+        # A capability nothing has ever run can verify itself by running.
+        #
+        # `sense_reality` already audits stored CODE RULES against the live environment
+        # through rule_expiry_v1. It never audited the BOUND CAPABILITIES, and at 0875df1c
+        # all 138 of the unverified ones were unverified for one reason: nobody had run
+        # them. Measured once across all 136 resolvable rows -- 87 RAN, 40 had a missing
+        # dependency, 8 needed input, 1 failed, ZERO were structurally broken.
+        #
+        # Bounded per pulse so a cycle can always still do work that is not self-measurement,
+        # and memoized on (module mtimes, environment) so a warm workspace pays nothing.
+        self_verification: dict[str, Any] = {}
+        try:
+            from canonical.runtime import capability_self_verification_v1 as _sv
+            _ground = _sv.load_evidence(self.workspace_root)
+            _mtime_key = tuple(sorted(
+                (k, int((self.workspace_root / v.get("module_path", "")).stat().st_mtime_ns)
+                 if (self.workspace_root / v.get("module_path", "")).is_file() else 0)
+                for k, v in (_ground.get("observations") or {}).items()))
+            _sv_key = (_mtime_key, _sv.environment_digest())
+            _cached_sv = getattr(self, "_cached_self_verification", None)
+            if _cached_sv is not None and _cached_sv[0] == _sv_key:
+                self_verification = _cached_sv[1]
+            else:
+                _report = _sv.verify(self.workspace_root, budget=self.self_verify_budget)
+                self_verification = {
+                    "probed": _report.get("probed", 0),
+                    "counts": _report.get("counts") or {},
+                    "seconds": _report.get("seconds", 0.0),
+                }
+                self._cached_self_verification = (_sv_key, self_verification)
+        except Exception as _sv_exc:  # a broken probe must not stop the creature
+            self_verification = {"error": type(_sv_exc).__name__}
+
         return {
+            "self_verified_capabilities": self_verification,
             "binary_count": disc_rep.get("binary_count", 0),
             "entrypoint_count": disc_rep.get("entrypoint_count", 0),
             "runnable_commands": len(fit_rep.get("runnable") or []),

@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6651,
+  "research_index_records": 6653,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
-  "source_index_modules": 1926
+  "source_index_modules": 1927
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8b397ab950b0c5a64dd7ba002dc2d077881a467beb70066e142d3329147db897"
+  "value": "a1e38bd8e34a062ce2f635f56d5d42fb0e37df7ce23b0c399ef3342019d8bf6f"
  },
  "engines": [
   {
@@ -192860,6 +192860,25 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/__pycache__/verify_pinned_image_ocr_surface.cpython-311.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/verify_pinned_image_ocr_surface.cpython-311.pyc",
+   "schema": "",
+   "sha256": "d8d4dea390aa2152fced7423df4abcec33e62ec2995a675898d9daf865544769",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "image": 1,
+    "ocr": 1,
+    "pinned": 1,
+    "surface.cpython": 1,
+    "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
@@ -207614,6 +207633,51 @@
     "substrate": 2,
     "tokens": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "A_CAPABILITY_VERIFIES_ITSELF_BY_RUNNING_V1_20261103_V1",
+   "capability": false,
+   "date": "2026-11-03",
+   "id": "research:canonical/action_intents/A_CAPABILITY_VERIFIES_ITSELF_BY_RUNNING_V1_20261103_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CAPABILITY_VERIFIES_ITSELF_BY_RUNNING_V1_20261103_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9ec24367d6141e9eb83900627e8d27e10142c320e21e46256fcaad89975428f2",
+   "status": "",
+   "terms": {
+    "138": 1,
+    "141": 1,
+    "15": 2,
+    "20261103": 1,
+    "a_capability_verifies_itself_by_running_v1_20261103_v1": 1,
+    "already": 1,
+    "audited": 1,
+    "awake": 1,
+    "been": 1,
+    "being": 1,
+    "binds": 1,
+    "bound": 3,
+    "bounded": 1,
+    "broken": 1,
+    "but": 1,
+    "capabilities": 2,
+    "capability": 4,
+    "capability_receipt_lane_v1": 1,
+    "code": 2,
+    "currency": 1,
+    "environment": 2,
+    "fresh": 3,
+    "itself": 2,
+    "permanent": 2,
+    "pulse": 2,
+    "record": 2,
+    "running": 2,
+    "stale": 3,
+    "status": 2,
+    "unverified": 4,
+    "v1": 2,
+    "verifies": 2
    }
   },
   {
@@ -235302,6 +235366,50 @@
     "typed": 1,
     "v1": 1,
     "version_sequence": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/capability_self_verification_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/capability_self_verification_v1.py",
+   "sha256": "7cb0b095d0a47a04e9417ba16a6c4259d0359160922bbdf49520b629cd9fbe58",
+   "summary": "A capability nothing has ever run can verify itself by running.",
+   "symbol_count": 10,
+   "symbols": [
+    "_sha256_file",
+    "classify",
+    "environment_digest",
+    "load_evidence",
+    "outcome",
+    "probe",
+    "resolve_adapter",
+    "run",
+    "save_evidence",
+    "verify"
+   ],
+   "terms": {
+    "capability": 2,
+    "classify": 1,
+    "environment_digest": 1,
+    "ever": 1,
+    "itself": 1,
+    "load_evidence": 1,
+    "nothing": 1,
+    "outcome": 1,
+    "probe": 1,
+    "resolve_adapter": 1,
+    "run": 2,
+    "running": 1,
+    "save_evidence": 1,
+    "self": 1,
+    "sha256_file": 1,
+    "v1": 1,
+    "verification": 1,
+    "verify": 2
    }
   },
   {
