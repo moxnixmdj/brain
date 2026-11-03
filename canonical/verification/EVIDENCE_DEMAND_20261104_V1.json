@@ -1,0 +1,193 @@
+{
+  "authority": "NONE",
+  "cases": [
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))",
+        "return (2 * (x / 1))",
+        "return (2 / (1 / x))",
+        "return (2 // (1 / x))"
+      ],
+      "admissible_count": 12,
+      "case": "2x from 3 points",
+      "chosen": "return ((x / 1) + x)",
+      "disagreements": [
+        {
+          "against": "return ((x / 1) * 2)",
+          "witness": null
+        },
+        {
+          "against": "return ((x * 2) / 1)",
+          "witness": null
+        },
+        {
+          "against": "return ((2 / 1) * x)",
+          "witness": null
+        },
+        {
+          "against": "return (x + (x / 1))",
+          "witness": null
+        },
+        {
+          "against": "return (x / (1 / 2))",
+          "witness": null
+        },
+        {
+          "against": "return (x // (1 / 2))",
+          "witness": null
+        },
+        {
+          "against": "return (x * (2 / 1))",
+          "witness": null
+        },
+        {
+          "against": "return (2 * (x / 1))",
+          "witness": null
+        },
+        {
+          "against": "return (2 / (1 / x))",
+          "witness": null
+        },
+        {
+          "against": "return (2 // (1 / x))",
+          "witness": {
+            "args": [
+              -3
+            ],
+            "value_a": "-6.0",
+            "value_b": "-7.0"
+          }
+        },
+        {
+          "against": "return (x - (x / -1))",
+          "witness": null
+        }
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)"
+      ],
+      "admissible_count": 4,
+      "case": "2x + zero point",
+      "chosen": "return ((x / 1) + x)",
+      "status": "PROVISIONAL"
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))"
+      ],
+      "admissible_count": 9,
+      "case": "powers-of-two trap",
+      "chosen": "return ((x / 1) + x)",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "findings": [
+    {
+      "admissible_count": 12,
+      "case": "2x from 3 points",
+      "id": "three_points_are_usually_ambiguous",
+      "pass": true,
+      "question": "do the previous round's examples admit more than one explanation?"
+    },
+    {
+      "admissible_count": 12,
+      "id": "x_squared_case_is_seen_as_ambiguity",
+      "pass": true,
+      "question": "is the body that defeated the self-audit visibly one of several?"
+    },
+    {
+      "id": "one_answer_buys_information",
+      "pass": true,
+      "question": "does answering the disagreement point shrink the admissible set?",
+      "trajectory": [
+        {
+          "admissible": 12,
+          "asked_at": -3,
+          "chosen": "return ((x / 1) + x)",
+          "examples": 3,
+          "status": "PROVISIONAL",
+          "step": 0
+        },
+        {
+          "admissible": 3,
+          "chosen": "return ((x / 1) + x)",
+          "examples": 4,
+          "status": "PROVISIONAL",
+          "step": 1,
+          "stopped": "the remaining bodies are syntactically distinct but agree on every probe this module can formulate; no question here would separate them"
+        }
+      ]
+    },
+    {
+      "final": {
+        "admissible": 3,
+        "chosen": "return ((x / 1) + x)",
+        "examples": 4,
+        "status": "PROVISIONAL",
+        "step": 1,
+        "stopped": "the remaining bodies are syntactically distinct but agree on every probe this module can formulate; no question here would separate them"
+      },
+      "id": "the_loop_stops_when_asking_stops_helping",
+      "pass": true,
+      "question": "does it terminate instead of asking forever?",
+      "terminated": true
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))"
+      ],
+      "case": "powers-of-two trap",
+      "id": "uniqueness_is_not_truth",
+      "note": "DETERMINED would mean the budget contained one answer, never that the answer is true",
+      "pass": true,
+      "question": "can exactly one admissible body still be the wrong function?"
+    },
+    {
+      "id": "ambiguous_answers_are_marked_not_silent",
+      "pass": true,
+      "question": "is an arbitrary choice reported as a choice?",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "measured": "2026-11-04",
+  "not_claimed": [
+    "that DETERMINED means correct -- it means the budget contained one answer",
+    "that the admissible set is complete -- it is what the grammar reaches within max_weight, and a larger budget can always reveal another explanation",
+    "that preferring the cheapest body is justified by the data; it is a stated preference and is reported separately from evidence -- and measured here, eleven of twelve admissible bodies tie on cost, so simplicity resolved nothing",
+    "that the interrogation loop reaches the truth; it removes explanations, and the values it asks for were supplied by the benchmark, which is playing the oracle"
+  ],
+  "passed": 6,
+  "schema": "PROJECT_BRAIN_EVIDENCE_DEMAND_V1_BENCHMARK",
+  "total": 6,
+  "truth_achieved": false
+}
