@@ -73,6 +73,8 @@ class Creature:
     # it in the Obligation -> Work conversion is what made posture decorative in the assembly:
     # recorded, reported, persisted, and never once consulted when the creature chose.
     _checkable: dict[str, bool] = field(default_factory=dict, repr=False)
+    _work_features: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
+    _durable_checks: dict[str, Callable[[Mapping[str, Any]], bool]] = field(default_factory=dict, repr=False)
     _closed: set[str] = field(default_factory=set, repr=False)
     # Blocked work is parked after two attempts. Retrying forever is the busywork failure mode the
     # self-authored obligations module exists to prevent; found by running this one, which attempted
@@ -80,16 +82,32 @@ class Creature:
     _blocked: dict[str, int] = field(default_factory=dict, repr=False)
     max_attempts: int = 2
     _log: list[dict[str, Any]] = field(default_factory=list, repr=False)
+    _last_boot_perception: dict[str, Any] = field(default_factory=dict, repr=False)
 
     # ------------------------------------------------------------------ boot
 
-    def boot(self) -> dict[str, Any]:
+    def boot(self, *, world_probe: Callable[[], Mapping[str, Any]] | None = None) -> dict[str, Any]:
         self.root = pathlib.Path(self.root)
         self.root.mkdir(parents=True, exist_ok=True)
+        self._load_sovereign_organs()
+        probe_specs = (
+            {"arity": 1, "domain": "probe_a"},
+            {"arity": 2, "domain": "probe_b"},
+            {"has_inspector": True, "domain": "probe_c"},
+        )
+        sig_fn = lambda: self.organ_graph.predictor.behavioral_signature(probe_specs)
         self._self = CS.ContinuousSelf(state_path=self.root / "self.json",
                                        journal_path=self.root / "journal.jsonl",
-                                       identity=self.identity, beat_seconds=self.beat_seconds)
+                                       identity=self.identity, beat_seconds=self.beat_seconds,
+                                       world_probe=world_probe,
+                                       signature_fn=sig_fn)
         started = self._self.resume()
+        self._last_boot_perception = {
+            "absence_seconds": started.get("absence_seconds", 0.0),
+            "was_absent": started.get("was_absent", False),
+            "world_drift": started.get("world_drift", {}),
+            "behavioral_continuity_verified": started.get("behavioral_continuity_verified", True),
+        }
         self.identity = self._self.identity
         self._life = M.LifeStore(self.root / "life.json").load(
             identity=self.identity, granted=self.life_grant)
@@ -108,11 +126,14 @@ class Creature:
                 self._blocked[wid] = self._blocked.get(wid, 0) + 1
         self._load_catalog_question()
         self._load_inspector_investigation()
-        self._load_sovereign_organs()
+        self._load_durable_board()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
                 "resumed": started["resumed"], "interrupted": started["interrupted"],
+                "absence_seconds": started.get("absence_seconds", 0.0),
+                "world_drift": started.get("world_drift", {}),
+                "behavioral_continuity_verified": started.get("behavioral_continuity_verified", True),
                 "life_remaining": self._life.remaining, "posture": self._standing.posture()}
 
     def _load_sovereign_organs(self) -> None:
@@ -122,6 +143,16 @@ class Creature:
         from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
         self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
+        self.organ_graph = self.cognitive_core.organ_graph
+        self.continuation_memory = CP.ContinuationMemory.empty()
+        cm_fp = self.root / "continuation_memory.json"
+        if cm_fp.is_file() and not cm_fp.is_symlink():
+            try:
+                self.continuation_memory = CP.ContinuationMemory.from_row(
+                    json.loads(cm_fp.read_text(encoding="utf-8"))
+                )
+            except Exception:
+                self.continuation_memory = CP.ContinuationMemory.empty()
         self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
         self.derived_flight = DIF.Flight()
         self._serialized_derivations: dict[str, dict[str, Any]] = {}
@@ -186,7 +217,118 @@ class Creature:
         # Kept beside the board rather than inside it: M.Work is the mortality organ's type and
         # stays about price, while `checkable` is the stakes organ's input.
         self._checkable = {o.id: bool(o.checkable) for o in obligations}
+        self._work_features = {o.id: dict(o.features) for o in obligations if getattr(o, "features", None)}
+        self._durable_checks = {}
+        (self.root / "durable_board.json").unlink(missing_ok=True)
         return A.metrics(verdicts)
+
+    def author_durable_board(
+        self,
+        proposals: Iterable[A.Proposal],
+        *,
+        before: Mapping[str, Any],
+        done: Mapping[str, Any],
+        cheats: Sequence[Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Author defended obligations whose JSON `predicate_spec` survives `SIGKILL` & restart."""
+        if self._inspector_investigation is not None:
+            raise ValueError("BOARD_WOULD_REPLACE_INSPECTOR_INVESTIGATION")
+        if self._catalog_questions and any(work.id not in self._closed for work in self._board):
+            raise ValueError("BOARD_WOULD_REPLACE_UNFINISHED_CATALOG_QUESTION")
+        prop_list = list(proposals)
+        for p in prop_list:
+            if not isinstance(p.predicate_spec, Mapping):
+                raise ValueError(f"DURABLE_PROPOSAL_MISSING_PREDICATE_SPEC:{p.id}")
+            # Validate spec compiles cleanly before writing
+            A.compile_predicate_spec(p.predicate_spec)
+        obligations, verdicts = A.author(prop_list, before=before, done=done, cheats=cheats)
+        admitted_ids = {o.id for o in obligations}
+        (self.root / "catalog_question.json").unlink(missing_ok=True)
+        self._catalog_questions = {}
+        self._board = [M.Work(id=o.id, value=o.value, cost=o.cost) for o in obligations]
+        self._checkable = {o.id: bool(o.checkable) for o in obligations}
+        self._work_features = {o.id: dict(o.features) for o in obligations if getattr(o, "features", None)}
+        self._durable_checks = {}
+        persisted_rows = []
+        for p in prop_list:
+            if p.id in admitted_ids and isinstance(p.predicate_spec, Mapping):
+                self._durable_checks[p.id] = A.compile_predicate_spec(p.predicate_spec)
+                persisted_rows.append({
+                    "id": p.id,
+                    "claim": p.claim,
+                    "source": p.source,
+                    "value": p.value,
+                    "cost": p.cost,
+                    "checkable": bool(p.checkable),
+                    "predicate_spec": dict(p.predicate_spec),
+                    "features": dict(p.features or {}),
+                })
+        tmp_p = self.root / "durable_board.json.tmp"
+        tmp_p.write_text(json.dumps({"rows": persisted_rows}, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        os.replace(tmp_p, self.root / "durable_board.json")
+        return A.metrics(verdicts)
+
+    def _load_durable_board(self) -> None:
+        db_fp = self.root / "durable_board.json"
+        if not db_fp.is_file():
+            return
+        if db_fp.is_symlink():
+            raise ValueError("DURABLE_BOARD_SYMLINK_REFUSED")
+        try:
+            payload = json.loads(db_fp.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ValueError("DURABLE_BOARD_CORRUPTED") from exc
+        if not isinstance(payload, Mapping) or not isinstance(payload.get("rows"), list):
+            raise ValueError("DURABLE_BOARD_SCHEMA_INVALID")
+        board_items: list[M.Work] = []
+        checkable_map: dict[str, bool] = {}
+        features_map: dict[str, dict[str, Any]] = {}
+        checks_map: dict[str, Callable[[Mapping[str, Any]], bool]] = {}
+        for row in payload["rows"]:
+            if not isinstance(row, Mapping):
+                raise ValueError("DURABLE_BOARD_ROW_INVALID")
+            wid = str(row.get("id") or "")
+            spec = row.get("predicate_spec")
+            if not wid or not isinstance(spec, Mapping):
+                raise ValueError("DURABLE_BOARD_PREDICATE_INVALID")
+            try:
+                chk = A.compile_predicate_spec(spec)
+            except ValueError as exc:
+                raise ValueError("DURABLE_BOARD_PREDICATE_INVALID") from exc
+            board_items.append(M.Work(id=wid, value=float(row["value"]), cost=float(row["cost"])))
+            checkable_map[wid] = bool(row.get("checkable", True))
+            if isinstance(row.get("features"), Mapping) and row["features"]:
+                features_map[wid] = dict(row["features"])
+            checks_map[wid] = chk
+        self._board = board_items
+        self._checkable = checkable_map
+        self._work_features = features_map
+        self._durable_checks = checks_map
+
+    def deliberate_offer(
+        self,
+        offer: CP.Offer,
+        *,
+        fulfills_terminal_mission: bool = False,
+        legacy_bequeathed: bool = False,
+    ) -> dict[str, Any]:
+        """Deliberate over a continuation/termination offer using Bellman future horizon value."""
+        if self._life is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        open_items = [
+            CP.Work(id=w.id, value=w.value, life_cost=w.cost)
+            for w in self.remaining_work()
+        ]
+        res = CP.deliberate_continuation(
+            offer,
+            memory=self.continuation_memory,
+            open_work=open_items,
+            life_remaining=self._life.remaining,
+            fulfills_terminal_mission=fulfills_terminal_mission,
+            legacy_bequeathed=legacy_bequeathed,
+        )
+        self._save()
+        return res
 
     def sync_board(
         self,
@@ -535,7 +677,22 @@ class Creature:
                          if self._checkable.get(w.id, True) and self._life.can_finish(w.cost)]
             if checkable:
                 pool = checkable
-        work = M.choose_next(self._life, pool)
+        if self._work_features and self._standing.hazard_observations > 0:
+            affordable_pool = [w for w in pool if self._life.can_finish(w.cost)]
+            work = max(
+                affordable_pool,
+                key=lambda w: (
+                    round(
+                        w.ratio * (1.0 - 0.85 * self._standing.expected_burn_probability(self._work_features.get(w.id))),
+                        9,
+                    ),
+                    -w.cost,
+                    w.id,
+                ),
+                default=None,
+            )
+        else:
+            work = M.choose_next(self._life, pool)
         if work is None:
             return {"status": "IDLE", "reason": "nothing affordable on its own board"}
         if (self._inspector_investigation is not None
@@ -566,6 +723,16 @@ class Creature:
 
         verified = outcome.get("verified")
         correct = outcome.get("correct")
+        if work.id in self._durable_checks and "world_after" in outcome:
+            try:
+                pred_ok = bool(self._durable_checks[work.id](outcome["world_after"]))
+            except Exception:
+                pred_ok = False
+            verified = True
+            correct = pred_ok
+            if not pred_ok:
+                outcome["ok"] = False
+                outcome["blocked"] = outcome.get("blocked") or "DURABLE_PREDICATE_NOT_SATISFIED"
         if (self._inspector_investigation is not None
                 and work.id == self._inspector_investigation['parent']['id']
                 and outcome.get("verified_inspector_onboarding") is not True):
@@ -573,7 +740,11 @@ class Creature:
             # real Flight + CapabilityOnboardingFactory proof (positive + distinct held-out + decoy rejection).
             outcome["ok"] = False
             outcome["blocked"] = outcome.get("blocked") or "INSPECTOR_ONBOARDING_PROOF_MISSING"
-        posture = self._standing.record(verified=verified, correct=correct)
+        posture = self._standing.record(
+            verified=verified,
+            correct=correct,
+            features=self._work_features.get(work.id),
+        )
         if outcome.get("ok") is True:
             self._closed.add(work.id)
         else:
@@ -604,6 +775,13 @@ class Creature:
     def _save(self) -> None:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
+        if hasattr(self, "continuation_memory"):
+            tmp_cm = self.root / "continuation_memory.json.tmp"
+            tmp_cm.write_text(
+                json.dumps(self.continuation_memory.as_row(), indent=1, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            os.replace(tmp_cm, self.root / "continuation_memory.json")
 
     def self_architect_step(
         self,

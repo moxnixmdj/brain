@@ -171,3 +171,90 @@ def gate(before_source: str, after_source: str) -> dict[str, Any]:
         "lost": [],
         "terminal_authority": False,
     }
+
+
+def semantic_sensitivity_gate(
+    before_source: str,
+    after_source: str,
+    *,
+    function_name: str,
+    probe_pairs: list[tuple[tuple[Any, ...], tuple[Any, ...]]],
+    expected_direction_by_pair: list[str] | None = None,
+) -> dict[str, Any]:
+    """Behavioral input-sensitivity & directional monotonicity gate beyond syntactic parameter reads.
+
+    Directly closes `REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1`:
+    catches wrong-operator patches that syntactically read every parameter (such as
+    `total * 100.0 / disc`, which crashes on `disc=0` or increases instead of decreasing
+    as discount increases) by verifying finite evaluation and directional sensitivity
+    across paired perturbations `(x_low, x_high)`.
+    """
+    from canonical.swe_kernel.meta_circular_organ_graph_v1 import compile_organ_namespace
+
+    base_verdict = gate(before_source, after_source)
+    if base_verdict["status"] != PASS:
+        return base_verdict
+    try:
+        _, ns = compile_organ_namespace(after_source)
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "status": REFUSED,
+            "reason": f"PATCH_NOT_PURE_EXECUTABLE:{exc}",
+            "lost": [],
+            "terminal_authority": False,
+        }
+    fn = ns.get(function_name)
+    if not callable(fn):
+        return {
+            "schema": SCHEMA,
+            "status": REFUSED,
+            "reason": f"FUNCTION_MISSING:{function_name}",
+            "lost": [],
+            "terminal_authority": False,
+        }
+    for idx, (inp_a, inp_b) in enumerate(probe_pairs):
+        try:
+            out_a = fn(*inp_a)
+            out_b = fn(*inp_b)
+        except Exception as exc:
+            return {
+                "schema": SCHEMA,
+                "status": REFUSED,
+                "reason": f"PATCH_CRASHED_ON_PERTURBATION_PROBE:{type(exc).__name__}",
+                "probe_index": idx,
+                "terminal_authority": False,
+            }
+        if out_a == out_b:
+            return {
+                "schema": SCHEMA,
+                "status": REFUSED,
+                "reason": "PATCH_INSENSITIVE_TO_INPUT_PERTURBATION",
+                "probe_index": idx,
+                "terminal_authority": False,
+            }
+        if expected_direction_by_pair and idx < len(expected_direction_by_pair):
+            direction = expected_direction_by_pair[idx]
+            if direction == "decreasing" and not (out_b < out_a):
+                return {
+                    "schema": SCHEMA,
+                    "status": REFUSED,
+                    "reason": "PATCH_VIOLATES_MONOTONIC_DIRECTION:expected_decreasing",
+                    "probe_index": idx,
+                    "terminal_authority": False,
+                }
+            if direction == "increasing" and not (out_b > out_a):
+                return {
+                    "schema": SCHEMA,
+                    "status": REFUSED,
+                    "reason": "PATCH_VIOLATES_MONOTONIC_DIRECTION:expected_increasing",
+                    "probe_index": idx,
+                    "terminal_authority": False,
+                }
+    return {
+        "schema": SCHEMA,
+        "status": PASS,
+        "reason": "INPUT_DEPENDENCIES_AND_SEMANTIC_SENSITIVITY_VERIFIED",
+        "lost": [],
+        "terminal_authority": False,
+    }

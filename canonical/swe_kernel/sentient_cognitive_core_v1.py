@@ -2058,11 +2058,53 @@ class SentientCognitiveCore:
             concept_library=self.concept_library,
         )
         self.trace_harvester = SelfTraceHarvester(salt=f"escrow:{base_state_dir.name}")
+        from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
         from canonical.swe_kernel.transactional_parallel_execution_v1 import LatencyReliabilityCostRouter
 
+        self.organ_graph = MetaCircularOrganGraph(base_state_dir / "meta_circular_organ_graph_v1.json")
         self.cost_router = LatencyReliabilityCostRouter()
         self.verified_programs_buffer: list[str] = []
         self.unresolved_failure_buffer: list[dict[str, Any]] = []
+
+    def evaluate_global_open_world_decision(
+        self,
+        observed_channels: Sequence[Any],
+        *,
+        goal: str = "",
+        target_gap: float | None = None,
+        remaining_budget: float = 10.0,
+        universe_size_hint: int | None = None,
+        ledger_path: str | None = None,
+    ) -> dict[str, Any]:
+        """Global non-local opportunity-space extrapolation (`OWNER_ACTIVE_GOAL` Law 5)."""
+        from canonical.runtime.global_open_world_extrapolator_v1 import (
+            ChannelObservation,
+            estimate_unseen_opportunity_space,
+        )
+
+        normalized: list[ChannelObservation] = []
+        for item in observed_channels:
+            if isinstance(item, ChannelObservation):
+                normalized.append(item)
+            elif isinstance(item, Mapping):
+                normalized.append(
+                    ChannelObservation(
+                        channel_id=str(item["channel_id"]),
+                        samples=int(item.get("samples", 1)),
+                        mean_payoff=float(item.get("mean_payoff", 0.0)),
+                        max_payoff=item.get("max_payoff"),
+                        payoff_std=float(item.get("payoff_std", 0.0)),
+                        unit_cost=float(item.get("unit_cost", 1.0)),
+                    )
+                )
+        return estimate_unseen_opportunity_space(
+            normalized,
+            goal=goal,
+            target_gap=target_gap,
+            remaining_budget=remaining_budget,
+            universe_size_hint=universe_size_hint,
+            ledger_path=ledger_path,
+        )
 
     def record_wake_episode(
         self,

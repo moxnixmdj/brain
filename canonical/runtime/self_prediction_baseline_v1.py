@@ -156,6 +156,40 @@ def _verdict(n: int, margin: float) -> tuple[str, str]:
     return "CLAIM_BEATS_EXTERNAL_BASELINE", "THE_STATED_EXPECTATIONS_CARRY_INFORMATION"
 
 
+def evaluate_task_feature_self_predictor(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
+    """Causally train & score `CausalFeatureSelfPredictor` against the history-only lookup baseline.
+
+    Directly closes `EXTERNAL_BASELINE_KNOWN_COUNTEREXAMPLE_20261102_V1`:
+    each row carries `task_features` (structural properties of the task itself, unseen by the
+    history-only lookup table). For row `t`, the feature predictor predicts `p_t` using ONLY
+    rows `0..t-1`, is scored by `compare(...)` against the external history baseline, and only
+    then updates its weights on `outcome_pass_t`.
+    """
+    from canonical.swe_kernel.meta_circular_organ_graph_v1 import CausalFeatureSelfPredictor
+
+    ordered = sorted(
+        [r for r in rows if isinstance(r.get("outcome_pass"), bool)],
+        key=lambda r: (r.get("settled_at_unix") or 0.0),
+    )
+    predictor = CausalFeatureSelfPredictor(learning_rate=0.45, l2_reg=0.005)
+    scored_rows: list[dict[str, Any]] = []
+    for row in ordered:
+        feats = row.get("task_features") if isinstance(row.get("task_features"), Mapping) else {}
+        claim_p = predictor.predict_pass_probability(feats)
+        scored_rows.append({
+            "capability_id": str(row.get("capability_id") or ""),
+            "settled_at_unix": float(row.get("settled_at_unix") or 0.0),
+            "predicted_pass_probability": claim_p,
+            "outcome_pass": bool(row["outcome_pass"]),
+        })
+        predictor.update(feats, outcome_pass=bool(row["outcome_pass"]))
+
+    comparison = compare(scored_rows)
+    comparison["predictor_kind"] = "CAUSAL_TASK_FEATURE_LOGISTIC_V1"
+    comparison["predictor_observations"] = predictor.observations
+    return comparison
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     import argparse
     import json

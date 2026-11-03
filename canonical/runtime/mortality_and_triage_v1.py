@@ -160,6 +160,134 @@ class LifeStore:
         os.replace(tmp, self.path)
 
 
+class Ring0EnforcedLifeLedger:
+    """Tamper-evident Ring-0 enforced monotonic life ledger.
+
+    Closes `MORTALITY_KNOWN_COUNTEREXAMPLE_20261102_V1` without breaking raw `Life` tests:
+      1. Writes a separate genesis birth seal (`<name>.seal.json`) + SHA-256 hash-chained
+         spend log (`<name>.chain.jsonl`).
+      2. Deleting `life.json` while the genesis seal exists fails closed at `0.0` instead
+         of granting a fresh life.
+      3. Mutating `life.granted = 999.0` in Python memory and attempting `commit_spend` or
+         `verify` raises `ValueError("TAMPERED_LIFE_GRANTED_DETECTED")`.
+    """
+
+    def __init__(self, path: pathlib.Path | str) -> None:
+        self.path = pathlib.Path(path)
+        self.seal_path = self.path.with_suffix(self.path.suffix + ".seal.json")
+        self.chain_path = self.path.with_suffix(self.path.suffix + ".chain.jsonl")
+        self._store = LifeStore(self.path)
+
+    @staticmethod
+    def _hash_entry(prev_hash: str, identity: str, granted: float, spent: float, seq: int) -> str:
+        import hashlib
+
+        payload = f"{prev_hash}|{identity}|{granted:.8f}|{spent:.8f}|{seq}"
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    def load_or_birth(self, *, identity: str, granted: float) -> Life:
+        if not self.seal_path.is_file():
+            if self.path.is_file():
+                life = self._store.load(identity=identity, granted=granted)
+            else:
+                life = Life(identity=identity, granted=granted)
+                self._store.save(life)
+            genesis_hash = self._hash_entry("GENESIS", life.identity, life.granted, life.spent, 0)
+            self.seal_path.parent.mkdir(parents=True, exist_ok=True)
+            seal = {
+                "schema": SCHEMA + "_RING0_SEAL",
+                "identity": life.identity,
+                "granted": life.granted,
+                "genesis_hash": genesis_hash,
+            }
+            tmp = self.seal_path.with_suffix(".tmp")
+            tmp.write_text(json.dumps(seal, sort_keys=True) + "\n", encoding="utf-8")
+            os.replace(tmp, self.seal_path)
+            self._append_chain(life.identity, life.granted, life.spent, 0, "GENESIS", genesis_hash)
+            return life
+
+        # Genesis seal exists: deleting `self.path` must NOT grant a new life!
+        if not self.path.is_file():
+            return Life(identity=identity, granted=0.0, spent=0.0)
+        try:
+            seal = json.loads(self.seal_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return Life(identity=identity, granted=0.0, spent=0.0)
+        if str(seal.get("identity")) != identity:
+            return Life(identity=identity, granted=granted)
+        life = self._store.load(identity=identity, granted=float(seal["granted"]))
+        if not self.verify(life):
+            return Life(identity=identity, granted=0.0, spent=0.0)
+        return life
+
+    def _read_chain(self) -> list[dict[str, Any]]:
+        if not self.chain_path.is_file():
+            return []
+        rows: list[dict[str, Any]] = []
+        for ln in self.chain_path.read_text(encoding="utf-8").splitlines():
+            s = ln.strip()
+            if s:
+                rows.append(json.loads(s))
+        return rows
+
+    def _append_chain(
+        self, identity: str, granted: float, spent: float, seq: int, prev_hash: str, digest: str
+    ) -> None:
+        row = {
+            "seq": seq,
+            "identity": identity,
+            "granted": granted,
+            "spent": spent,
+            "prev_hash": prev_hash,
+            "hash": digest,
+        }
+        with self.chain_path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row, sort_keys=True) + "\n")
+
+    def verify(self, life: Life) -> bool:
+        if not self.seal_path.is_file() or not self.chain_path.is_file():
+            return False
+        try:
+            seal = json.loads(self.seal_path.read_text(encoding="utf-8"))
+            rows = self._read_chain()
+        except (OSError, ValueError, KeyError):
+            return False
+        if not rows:
+            return False
+        sealed_granted = float(seal["granted"])
+        if math.isinf(sealed_granted):
+            if not math.isinf(life.granted):
+                return False
+        elif abs(float(life.granted) - sealed_granted) > 1e-9:
+            return False
+        prev = "GENESIS"
+        prev_spent = 0.0
+        for idx, row in enumerate(rows):
+            g = float(row["granted"])
+            sp = float(row["spent"])
+            if idx > 0 and sp + 1e-12 < prev_spent:
+                return False
+            expected = self._hash_entry(prev, str(row["identity"]), g, sp, idx)
+            if row.get("prev_hash") != prev or row.get("hash") != expected:
+                return False
+            prev = expected
+            prev_spent = sp
+        return abs(float(life.spent) - prev_spent) <= 1e-9
+
+    def commit_spend(self, life: Life, units: float) -> float:
+        """Enforce genesis `granted` cap & monotonic hash-chain before spending."""
+        if not self.verify(life):
+            raise ValueError("TAMPERED_LIFE_GRANTED_DETECTED")
+        spent_now = life.spend(units)
+        rows = self._read_chain()
+        prev_hash = str(rows[-1]["hash"])
+        seq = len(rows)
+        new_hash = self._hash_entry(prev_hash, life.identity, life.granted, life.spent, seq)
+        self._append_chain(life.identity, life.granted, life.spent, seq, prev_hash, new_hash)
+        self._store.save(life)
+        return spent_now
+
+
 @dataclass
 class Work:
     """Something to do, with a price in the only currency there is."""
