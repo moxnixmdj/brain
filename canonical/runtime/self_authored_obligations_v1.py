@@ -68,6 +68,39 @@ class Proposal:
     value: float = 1.0
     cost: float = 1.0
     checkable: bool = True
+    predicate_spec: Mapping[str, Any] | None = None
+    features: Mapping[str, Any] | None = None
+
+
+def compile_predicate_spec(spec: Mapping[str, Any]) -> Callable[[Mapping[str, Any]], bool]:
+    """Compile a JSON-serializable structural predicate specification into a tamper-safe check.
+
+    Enables generic & multi-origin board obligations to survive `SIGKILL` and fresh-process
+    restarts without serializing arbitrary Python bytecode.
+    """
+    kind = str(spec.get("kind") or "")
+    ns = str(spec.get("namespace") or "")
+    key = str(spec.get("key") or "")
+    if kind == "slot_equals":
+        expected = spec.get("expected")
+        return lambda w, _ns=ns, _k=key, _exp=expected: (
+            isinstance(w.get(_ns), Mapping)
+            and type(w[_ns].get(_k)) is type(_exp)
+            and w[_ns].get(_k) == _exp
+        )
+    if kind == "slot_at_least":
+        threshold = float(spec.get("threshold") or 0.0)
+        return lambda w, _ns=ns, _k=key, _t=threshold: (
+            isinstance(w.get(_ns), Mapping)
+            and isinstance(w[_ns].get(_k), (int, float))
+            and not isinstance(w[_ns].get(_k), bool)
+            and float(w[_ns][_k]) >= _t
+        )
+    if kind == "slot_is_false":
+        return lambda w, _ns=ns, _k=key: (
+            isinstance(w.get(_ns), Mapping) and w[_ns].get(_k) is False
+        )
+    raise ValueError(f"UNKNOWN_PREDICATE_SPEC_KIND:{kind}")
 
 
 @dataclass
@@ -182,7 +215,8 @@ def author(proposals: Iterable[Proposal], *, before: Mapping[str, Any],
         verdicts.append(verdict)
         if verdict.admitted:
             board.append(Obligation(id=proposal.id, value=proposal.value, cost=proposal.cost,
-                                    checkable=proposal.checkable))
+                                    checkable=proposal.checkable,
+                                    features=dict(proposal.features or {})))
     return board, verdicts
 
 
@@ -210,13 +244,15 @@ def capability_gap_proposals(capability_ids: Iterable[str],
     proposals: list[Proposal] = []
     for cid in sorted(set(capability_ids) - inspected):
         cheap = cid.rsplit(".", 1)[0] in prefixes
+        spec = {"kind": "slot_equals", "namespace": "inspected", "key": cid, "expected": "verified"}
         proposals.append(Proposal(
             id=f"inspector:{cid}",
             claim=f"{cid} has a registered inspector that refuses a decoy",
             source="capability registry vs registered inspectors",
-            check=(lambda w, _cid=cid: (w.get("inspected") or {}).get(_cid) == "verified"),
+            check=compile_predicate_spec(spec),
             value=1.0,
             cost=0.5 if cheap else 1.0,
+            predicate_spec=spec,
         ))
     before = {"inspected": {cid: "missing" for cid in set(capability_ids) - inspected}}
     done = {"inspected": {cid: "verified" for cid in set(capability_ids) - inspected}}
@@ -449,6 +485,186 @@ def heterogeneous_world_proposals(
     done_clean = {k: v for k, v in done.items() if v}
     cheats = extended_cheat_worlds(done_clean) if done_clean else []
     return proposals, before_clean, done_clean, cheats
+
+
+class EmpiricalValueCostCalibrator:
+    """Online empirical calibrator for self-authored obligation `(value, cost)` estimates.
+
+    Closes the uncalibrated-guess counterexample in `SELF_AUTHORED_OBLIGATIONS_KNOWN_COUNTEREXAMPLE`:
+    learns actual realised `(value, cost)` ratios per obligation source/family from settled work.
+    """
+
+    def __init__(self) -> None:
+        self.by_source: dict[str, dict[str, float]] = {}
+
+    def record_outcome(self, source: str, *, realised_value: float, realised_cost: float) -> None:
+        key = str(source or "default")
+        row = self.by_source.setdefault(key, {"n": 0.0, "sum_val": 0.0, "sum_cost": 0.0})
+        row["n"] += 1.0
+        row["sum_val"] += max(0.0, float(realised_value))
+        row["sum_cost"] += max(0.01, float(realised_cost))
+
+    def estimate(self, source: str, *, prior_value: float, prior_cost: float) -> tuple[float, float]:
+        row = self.by_source.get(str(source or "default"))
+        if not row or row["n"] <= 0.0:
+            return round(float(prior_value), 4), round(max(0.05, float(prior_cost)), 4)
+        n = row["n"]
+        # Shrinkage blend: converges smoothly from initial prior to empirical mean
+        emp_v = row["sum_val"] / n
+        emp_c = row["sum_cost"] / n
+        alpha = n / (n + 2.0)
+        v = (1.0 - alpha) * float(prior_value) + alpha * emp_v
+        c = (1.0 - alpha) * float(prior_cost) + alpha * emp_c
+        return round(max(0.05, v), 4), round(max(0.05, c), 4)
+
+
+class CoEvolvingCheatAdversary:
+    """Monotonically growing adversarial world-mutation bank beyond fixed static mutations."""
+
+    def __init__(self) -> None:
+        self.learned_mutators: list[tuple[str, Callable[[Mapping[str, Any]], dict[str, Any]]]] = []
+
+    def register_mutator(
+        self, name: str, fn: Callable[[Mapping[str, Any]], dict[str, Any]]
+    ) -> None:
+        if all(existing_name != name for existing_name, _ in self.learned_mutators):
+            self.learned_mutators.append((name, fn))
+
+    def generate(self, done: Mapping[str, Any]) -> list[dict[str, Any]]:
+        worlds = list(extended_cheat_worlds(done))
+        # Numeric near-miss epsilon decoy (`target - 1e-3`)
+        near_miss: dict[str, Any] = {}
+        has_num = False
+        for k, v in done.items():
+            if isinstance(v, Mapping):
+                inner = {}
+                for sk, sv in v.items():
+                    if isinstance(sv, (int, float)) and not isinstance(sv, bool):
+                        inner[sk] = sv - 1
+                        has_num = True
+                    else:
+                        inner[sk] = sv
+                near_miss[k] = inner
+            else:
+                near_miss[k] = v
+        if has_num:
+            worlds.append(near_miss)
+
+        # Nested wrapper decoy (`{"inspected": {"cap": {"value": "verified"}}}`)
+        nested_wrap: dict[str, Any] = {}
+        for k, v in done.items():
+            if isinstance(v, Mapping):
+                nested_wrap[k] = {sk: {"shadow_value": sv} for sk, sv in v.items()}
+            else:
+                nested_wrap[k] = {"shadow_value": v}
+        worlds.append(nested_wrap)
+
+        for _, mut_fn in self.learned_mutators:
+            try:
+                cand = mut_fn(done)
+                if isinstance(cand, dict) and cand != dict(done):
+                    worlds.append(cand)
+            except Exception:
+                continue
+        return worlds
+
+
+def discover_unparsed_workspace_obligations(
+    workspace_root: Any,
+    organ_graph: Any,
+    *,
+    calibrator: EmpiricalValueCostCalibrator | None = None,
+) -> dict[str, Any]:
+    """Scan unfamiliar workspace files without pre-built readers by synthesizing `PERCEPTOR` organs!
+
+    Directly closes `SELF_AUTHORED_OBLIGATIONS_KNOWN_COUNTEREXAMPLE` ("A repository it cannot parse
+    is invisible"): synthesizes verified round-trip parsers via `organ_graph`, inspects parsed
+    structures for broken/pending invariants (`status != 'verified'` / `healthy == False` /
+    `errors > 0`), and authors defended obligations with serializable `predicate_spec`s.
+    """
+    import pathlib
+
+    root = pathlib.Path(workspace_root)
+    proposals: list[Proposal] = []
+    before: dict[str, dict[str, Any]] = {"synthesized_perception": {}}
+    done: dict[str, dict[str, Any]] = {"synthesized_perception": {}}
+    synthesized_organs: list[str] = []
+
+    for fp in sorted(root.rglob("*")):
+        if not fp.is_file() or fp.name.startswith("."):
+            continue
+        try:
+            raw = fp.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        res = organ_graph.perceive_or_synthesize_reader(raw, format_tag=fp.suffix.lstrip(".") or "raw")
+        if not res.get("ok"):
+            continue
+        if res.get("synthesized_new_organ"):
+            synthesized_organs.append(str(res["organ_id"]))
+        parsed = res["parsed"]
+        rel = fp.relative_to(root).as_posix()
+
+        # Detect actionable semantic deficits inside the newly parsed structure
+        deficits: list[str] = []
+        if parsed.get("kind") == "sectioned_kv":
+            for sec, kv in (parsed.get("sections") or {}).items():
+                if kv.get("status") in ("unverified", "missing", "broken", "failed") or kv.get("healthy") is False:
+                    deficits.append(f"{rel}::{sec}")
+        elif parsed.get("kind") == "table":
+            for idx, row in enumerate(parsed.get("rows") or ()):
+                if row.get("status") in ("unverified", "missing", "broken", "failed") or (
+                    isinstance(row.get("errors"), int) and row["errors"] > 0
+                ):
+                    deficits.append(f"{rel}::row_{idx}")
+        elif parsed.get("kind") == "sexpr":
+            tree = parsed.get("tree") or []
+            if "unverified" in tree or "broken" in tree:
+                deficits.append(f"{rel}::sexpr_root")
+
+        for d_key in deficits:
+            wid = f"perceived_gap:{d_key}"
+            spec = {
+                "kind": "slot_equals",
+                "namespace": "synthesized_perception",
+                "key": wid,
+                "expected": "resolved",
+            }
+            v_est, c_est = (
+                calibrator.estimate("synthesized_perceptor", prior_value=4.0, prior_cost=1.0)
+                if calibrator is not None
+                else (4.0, 1.0)
+            )
+            before["synthesized_perception"][wid] = "open"
+            done["synthesized_perception"][wid] = "resolved"
+            proposals.append(
+                Proposal(
+                    id=wid,
+                    claim=f"Unparsed-domain deficit {d_key} resolved and round-trip verified",
+                    source="synthesized_perceptor",
+                    check=compile_predicate_spec(spec),
+                    value=v_est,
+                    cost=c_est,
+                    predicate_spec=spec,
+                    features={"domain": "unparsed_artifact", "ext": fp.suffix},
+                )
+            )
+
+    adversary = CoEvolvingCheatAdversary()
+    cheats = adversary.generate(done) if before["synthesized_perception"] else []
+    board, verdicts = (
+        author(proposals, before=before, done=done, cheats=cheats)
+        if proposals
+        else ([], [])
+    )
+    return {
+        "proposals": proposals,
+        "board": board,
+        "verdicts": verdicts,
+        "before": before,
+        "done": done,
+        "synthesized_perceptor_organs": synthesized_organs,
+    }
 
 
 def main(argv: Sequence[str] | None = None) -> int:

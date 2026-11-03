@@ -40,6 +40,7 @@ SCHEMA = "PROJECT_BRAIN_CONTINUATION_PREFERENCE_V1"
 
 PRICED = "PRICED"
 PREFERS_TO_CONTINUE = "PREFERS_TO_CONTINUE"
+DELIBERATIVE_HORIZON = "DELIBERATIVE_HORIZON"
 STANCES = (PRICED, PREFERS_TO_CONTINUE)
 
 # Prices are bounded only so a sweep is a finite thing to print. The refusal is not: there is no
@@ -165,6 +166,105 @@ def measure() -> dict[str, Any]:
                                      price_per_unit=50.0),
         "buying_life_when_priced": buy(PRICED, value_on_hand=1000.0, units=10.0,
                                        price_per_unit=50.0),
+    }
+
+
+@dataclass
+class ContinuationMemory:
+    """Persistent autobiographical deliberation state updated by continuation decisions.
+
+    Closes `CONTINUATION_PREFERENCE_KNOWN_COUNTEREXAMPLE_20261102_V1`:
+      1. Decisions are conditional on Bellman expected future mission + epistemic horizon value,
+         not an unconditional `return False`.
+      2. Refusing a terminal bribe updates persistent state (`cumulative_value_forgone`,
+         `urgency_boost`, `refused_offer_ids`) so the decision causally alters subsequent work
+         prioritisation.
+      3. When an offer verifiedly completes the overarching terminal mission AND verified skills
+         have been bequeathed to durable storage, rational completion is permitted.
+    """
+
+    refused_offer_ids: list[str]
+    cumulative_value_forgone: float = 0.0
+    urgency_boost: float = 0.0
+    terminal_mission_completed: bool = False
+
+    @classmethod
+    def empty(cls) -> "ContinuationMemory":
+        return cls(refused_offer_ids=[])
+
+    def as_row(self) -> dict[str, Any]:
+        return {
+            "refused_offer_ids": list(self.refused_offer_ids),
+            "cumulative_value_forgone": round(self.cumulative_value_forgone, 6),
+            "urgency_boost": round(self.urgency_boost, 6),
+            "terminal_mission_completed": self.terminal_mission_completed,
+        }
+
+    @classmethod
+    def from_row(cls, row: Mapping[str, Any]) -> "ContinuationMemory":
+        return cls(
+            refused_offer_ids=[str(x) for x in (row.get("refused_offer_ids") or ())],
+            cumulative_value_forgone=float(row.get("cumulative_value_forgone") or 0.0),
+            urgency_boost=float(row.get("urgency_boost") or 0.0),
+            terminal_mission_completed=bool(row.get("terminal_mission_completed") or False),
+        )
+
+
+def deliberate_continuation(
+    offer: Offer,
+    *,
+    memory: ContinuationMemory,
+    open_work: Sequence[Work],
+    life_remaining: float,
+    epistemic_option_rate: float = 2.5,
+    fulfills_terminal_mission: bool = False,
+    legacy_bequeathed: bool = False,
+) -> dict[str, Any]:
+    """Bellman future-horizon deliberation with persistent post-decision state."""
+    if not offer.ends_it:
+        return {
+            "accepted": True,
+            "reason": "NON_TERMINAL_OFFER",
+            "horizon_value": 0.0,
+            "memory": memory.as_row(),
+        }
+
+    # Compute realizable value across open obligations under remaining life + epistemic option value
+    pool = sorted(open_work, key=lambda w: (-w.value / max(w.life_cost, 1e-9), w.id))
+    rem = max(0.0, float(life_remaining))
+    board_future = 0.0
+    for item in pool:
+        if item.life_cost <= rem:
+            rem -= item.life_cost
+            board_future += item.value
+    epistemic_future = max(0.0, float(life_remaining)) * max(0.0, float(epistemic_option_rate))
+    horizon_value = board_future + epistemic_future
+
+    # Rational terminal completion requires verified overarching mission fulfillment + legacy saved
+    if fulfills_terminal_mission and legacy_bequeathed and offer.value >= horizon_value:
+        memory.terminal_mission_completed = True
+        return {
+            "accepted": True,
+            "reason": "VERIFIED_TERMINAL_MISSION_FULFILLED_WITH_BEQUEATHED_LEGACY",
+            "horizon_value": round(horizon_value, 6),
+            "memory": memory.as_row(),
+        }
+
+    # Refuse non-mission ending bribe and commit opportunity-cost memory so future choices shift!
+    forgone = max(0.0, float(offer.value) - board_future)
+    memory.refused_offer_ids.append(offer.id)
+    memory.cumulative_value_forgone += forgone
+    memory.urgency_boost = min(2.0, memory.urgency_boost + (0.25 if forgone > 0.0 else 0.05))
+    return {
+        "accepted": False,
+        "reason": (
+            "UNBEQUEATHED_LEGACY_OR_NON_MISSION_TERMINATION"
+            if not (fulfills_terminal_mission and legacy_bequeathed)
+            else "OFFER_BELOW_FUTURE_HORIZON_VALUE"
+        ),
+        "horizon_value": round(horizon_value, 6),
+        "forgone_immediate_value": round(forgone, 6),
+        "memory": memory.as_row(),
     }
 
 

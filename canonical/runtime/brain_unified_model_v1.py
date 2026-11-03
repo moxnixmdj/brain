@@ -1704,6 +1704,28 @@ class SovereignZeroLLMPlanner:
 
         return shared_cognitive_core(None)
 
+    def organ_graph(self) -> Any:
+        """Access the unified 5-stratum `MetaCircularOrganGraph` (`P_t`)."""
+        return self._cognitive_core().organ_graph
+
+    def extrapolate_global_opportunity(
+        self,
+        observed_channels: Sequence[Any],
+        *,
+        goal: str = "",
+        target_gap: float | None = None,
+        remaining_budget: float = 10.0,
+        universe_size_hint: int | None = None,
+    ) -> dict[str, Any]:
+        """Evaluate global non-local opportunity tail (`OWNER_ACTIVE_GOAL` Law 5)."""
+        return self._cognitive_core().evaluate_global_open_world_decision(
+            observed_channels,
+            goal=goal,
+            target_gap=target_gap,
+            remaining_budget=remaining_budget,
+            universe_size_hint=universe_size_hint,
+        )
+
     @staticmethod
     def _episode_key(goal: str) -> str:
         return hashlib.sha256(goal.encode("utf-8")).hexdigest()[:16]

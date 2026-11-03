@@ -67,6 +67,11 @@ class SelfState:
     completed: list[dict[str, Any]] = field(default_factory=list)
     interrupted: list[dict[str, Any]] = field(default_factory=list)
     epoch: int = 1
+    last_absence_seconds: float = 0.0
+    total_absence_seconds: float = 0.0
+    world_snapshot: dict[str, Any] = field(default_factory=dict)
+    last_world_drift: dict[str, Any] = field(default_factory=dict)
+    behavioral_signature: str | None = None
 
     def as_row(self) -> dict[str, Any]:
         return {
@@ -78,6 +83,11 @@ class SelfState:
             "completed": self.completed,
             "interrupted": self.interrupted,
             "epoch": self.epoch,
+            "last_absence_seconds": round(self.last_absence_seconds, 6),
+            "total_absence_seconds": round(self.total_absence_seconds, 6),
+            "world_snapshot": dict(self.world_snapshot),
+            "last_world_drift": dict(self.last_world_drift),
+            "behavioral_signature": self.behavioral_signature,
         }
 
     @classmethod
@@ -91,7 +101,35 @@ class SelfState:
             completed=list(row.get("completed") or []),
             interrupted=list(row.get("interrupted") or []),
             epoch=int(row.get("epoch") or 1),
+            last_absence_seconds=float(row.get("last_absence_seconds") or 0.0),
+            total_absence_seconds=float(row.get("total_absence_seconds") or 0.0),
+            world_snapshot=dict(row.get("world_snapshot") or {}),
+            last_world_drift=dict(row.get("last_world_drift") or {}),
+            behavioral_signature=(
+                str(row["behavioral_signature"])
+                if row.get("behavioral_signature") is not None
+                else None
+            ),
         )
+
+
+def compute_world_drift(
+    before: Mapping[str, Any] | None,
+    after: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    """Compute exogenous changes in world state that occurred while the self was absent."""
+    b = dict(before or {})
+    a = dict(after or {})
+    added = sorted(k for k in a if k not in b)
+    removed = sorted(k for k in b if k not in a)
+    changed = sorted(k for k in (set(a) & set(b)) if a[k] != b[k])
+    return {
+        "drifted": bool(added or removed or changed),
+        "added": added,
+        "removed": removed,
+        "changed": changed,
+        "drift_count": len(added) + len(removed) + len(changed),
+    }
 
 
 class ContinuousSelf:
@@ -99,12 +137,16 @@ class ContinuousSelf:
 
     def __init__(self, *, state_path: pathlib.Path | str, journal_path: pathlib.Path | str,
                  beat_seconds: float = DEFAULT_BEAT_SECONDS,
-                 identity: str | None = None, clock: Callable[[], float] = _now):
+                 identity: str | None = None, clock: Callable[[], float] = _now,
+                 world_probe: Callable[[], Mapping[str, Any]] | None = None,
+                 signature_fn: Callable[[], str] | None = None):
         self.state_path = pathlib.Path(state_path)
         self.journal_path = pathlib.Path(journal_path)
         self.beat_seconds = beat_seconds
         self.clock = clock
         self.identity = identity or uuid.uuid4().hex
+        self.world_probe = world_probe
+        self.signature_fn = signature_fn
         self.state: SelfState | None = None
         self._stopping = False
 
@@ -150,36 +192,117 @@ class ContinuousSelf:
         # Atomic replace: a kill during the write must not leave a half-written self behind.
         os.replace(tmp, self.state_path)
 
+    def commit_world_and_signature(self) -> None:
+        """Snapshot current world & behavioral competence signature before sleeping/continuing."""
+        if self.state is None:
+            return
+        if self.world_probe is not None:
+            try:
+                self.state.world_snapshot = dict(self.world_probe())
+            except Exception:
+                pass
+        if self.signature_fn is not None:
+            try:
+                self.state.behavioral_signature = str(self.signature_fn())
+            except Exception:
+                pass
+        self._save()
+
     def resume(self) -> dict[str, Any]:
-        """Load the durable self, and account for whatever was in flight when it stopped."""
+        """Load the durable self, perceive absence & world drift, and verify behavioral continuity."""
+        now = self.clock()
+        cur_world = {}
+        if self.world_probe is not None:
+            try:
+                cur_world = dict(self.world_probe())
+            except Exception:
+                cur_world = {}
+        cur_sig: str | None = None
+        if self.signature_fn is not None:
+            try:
+                cur_sig = str(self.signature_fn())
+            except Exception:
+                cur_sig = None
+
         prior = self._load()
         if prior is None:
-            self.state = SelfState(identity=self.identity, started_at=self.clock(),
-                                   last_beat_at=self.clock())
+            self.state = SelfState(
+                identity=self.identity,
+                started_at=now,
+                last_beat_at=now,
+                world_snapshot=cur_world,
+                behavioral_signature=cur_sig,
+            )
             self._append("BIRTH", beat=0)
             self._save()
-            return {"schema": SCHEMA, "epoch": 1, "resumed": False, "identity": self.identity,
-                    "interrupted": []}
+            return {
+                "schema": SCHEMA,
+                "epoch": 1,
+                "resumed": False,
+                "identity": self.identity,
+                "interrupted": [],
+                "absence_seconds": 0.0,
+                "was_absent": False,
+                "world_drift": {"drifted": False, "added": [], "removed": [], "changed": [], "drift_count": 0},
+                "behavioral_continuity_verified": True,
+            }
+
+        # Measure real inter-epoch absence before overwriting last_beat_at!
+        absence_sec = max(0.0, now - float(prior.last_beat_at or prior.started_at))
+        was_absent = absence_sec >= self.beat_seconds
+        world_drift = (
+            compute_world_drift(prior.world_snapshot, cur_world)
+            if self.world_probe is not None
+            else {"drifted": False, "added": [], "removed": [], "changed": [], "drift_count": 0}
+        )
+        behavioral_verified = True
+        if prior.behavioral_signature is not None and cur_sig is not None:
+            behavioral_verified = (cur_sig == prior.behavioral_signature)
 
         # Same identity, next epoch. The identity is the point: an epoch ends, the self does not.
         self.identity = prior.identity
         prior.epoch += 1
         prior.beat = 0
-        prior.last_beat_at = self.clock()
+        prior.last_beat_at = now
+        prior.last_absence_seconds = absence_sec
+        prior.total_absence_seconds += absence_sec
+        prior.last_world_drift = world_drift
+        if self.world_probe is not None:
+            prior.world_snapshot = cur_world
+        if prior.behavioral_signature is None and cur_sig is not None:
+            prior.behavioral_signature = cur_sig
+
         interrupted: list[dict[str, Any]] = []
         if prior.in_flight:
             row = dict(prior.in_flight)
             row["status"] = "INTERRUPTED"
-            row["interrupted_at"] = self.clock()
+            row["interrupted_at"] = now
+            row["absence_seconds"] = round(absence_sec, 6)
             interrupted.append(row)
             prior.interrupted.append(row)
             prior.in_flight = None
             self._append("INTERRUPTED", task=row.get("task"), started_at=row.get("started_at"))
         self.state = prior
-        self._append("RESUME", epoch=prior.epoch, interrupted=len(interrupted))
+        self._append(
+            "RESUME",
+            epoch=prior.epoch,
+            interrupted=len(interrupted),
+            absence_seconds=round(absence_sec, 6),
+            world_drifted=world_drift["drifted"],
+            behavioral_continuity_verified=behavioral_verified,
+        )
         self._save()
-        return {"schema": SCHEMA, "epoch": prior.epoch, "resumed": True,
-                "identity": self.identity, "interrupted": interrupted}
+        return {
+            "schema": SCHEMA,
+            "epoch": prior.epoch,
+            "resumed": True,
+            "identity": self.identity,
+            "interrupted": interrupted,
+            "absence_seconds": round(absence_sec, 6),
+            "was_absent": was_absent,
+            "world_drift": world_drift,
+            "behavioral_continuity_verified": behavioral_verified,
+        }
 
     # ------------------------------------------------------------------ work
 
@@ -233,6 +356,10 @@ class ContinuousSelf:
             "last_completed": (self.state.completed[-1]["task"]
                                if self.state.completed else None),
             "age_seconds": round(self.clock() - self.state.started_at, 3),
+            "last_absence_seconds": round(self.state.last_absence_seconds, 6),
+            "total_absence_seconds": round(self.state.total_absence_seconds, 6),
+            "last_world_drift": dict(self.state.last_world_drift),
+            "behavioral_signature": self.state.behavioral_signature,
         }
 
     # ------------------------------------------------------------------ loop
