@@ -1237,7 +1237,7 @@ class LocalExecutionFailure(RuntimeError):
     pass
 
 
-def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
+def _check_expectation(expect: Any, result: Mapping[str, Any], args: Mapping[str, Any] | None = None) -> None:
     """The kernel's expectation semantics (field_nonempty / field_contains / field_equals)."""
     if expect is None:
         return
@@ -1254,6 +1254,11 @@ def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
         ok = str(expect.get("value", "")) in str(value or "")
     elif typ == "field_equals":
         ok = value == expect.get("value")
+    elif typ == "file_sha256_matches":
+        from canonical.runtime import file_artifact_expectation_v1 as artifact_expectation
+        ok, detail = artifact_expectation.verify(expect, result, args or {}, ROOT)
+        if not ok:
+            raise LocalExecutionFailure("ACTION_EXPECTATION_FAILED:" + detail)
     else:
         raise LocalExecutionFailure("ACTION_EXPECTATION_TYPE_UNKNOWN:" + str(typ))
     if not ok:
@@ -1462,7 +1467,7 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure(str(exc)) from exc
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
-    _check_expectation(action.get("expect"), result)
+    _check_expectation(action.get("expect"), result, call_args)
     return result
 
 

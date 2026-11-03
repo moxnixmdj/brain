@@ -12744,9 +12744,12 @@
           "output_path": "${input.output_path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "destination_sha256",
+          "path_field": "destination_path",
+          "path_input": "output_path",
+          "source_state": "retained",
+          "same_as_source": true
         }
       },
       "adapter_module": "file_ops",
@@ -12836,9 +12839,12 @@
           "output_path": "${input.output_path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "destination_sha256",
+          "path_field": "destination_path",
+          "path_input": "output_path",
+          "source_state": "absent",
+          "same_as_source": true
         }
       },
       "adapter_module": "file_ops",
@@ -12927,9 +12933,12 @@
           "output_path": "${input.output_path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "destination_sha256",
+          "path_field": "destination_path",
+          "path_input": "output_path",
+          "source_state": "retained",
+          "content_kind": "tar_gzip"
         }
       },
       "adapter_module": "file_archive_tar",
@@ -13027,9 +13036,13 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "destination_sha256",
+          "path_field": "destination_path",
+          "path_input": "path",
+          "path_suffix": ".bak",
+          "source_state": "retained",
+          "same_as_source": true
         }
       },
       "adapter_module": "file_ops",
@@ -13116,9 +13129,10 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "after_sha256",
+          "path_field": "path",
+          "path_input": "path"
         }
       },
       "adapter_module": "file_edit",
@@ -13210,9 +13224,10 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "after_sha256",
+          "path_field": "path",
+          "path_input": "path"
         }
       },
       "adapter_module": "file_edit",
@@ -13294,9 +13309,13 @@
           "path": "${input.path}"
         },
         "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
+          "type": "file_sha256_matches",
+          "field": "destination_sha256",
+          "path_field": "destination_path",
+          "path_input": "path",
+          "path_suffix": ".gz",
+          "source_state": "absent",
+          "content_kind": "gzip"
         }
       },
       "adapter_module": "file_compress",

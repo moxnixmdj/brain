@@ -21778,7 +21778,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "destination_sha256"
    ],
    "platforms": [
     "darwin",
@@ -21852,7 +21852,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "destination_sha256"
    ],
    "platforms": [
     "darwin",
@@ -21920,7 +21920,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "destination_sha256"
    ],
    "platforms": [
     "darwin",
@@ -22060,7 +22060,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "destination_sha256"
    ],
    "platforms": [
     "darwin",
@@ -22341,7 +22341,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "after_sha256"
    ],
    "platforms": [
     "darwin",
@@ -22487,7 +22487,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "destination_sha256"
    ],
    "platforms": [
     "linux"
@@ -22760,7 +22760,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "after_sha256"
    ],
    "platforms": [
     "darwin",
@@ -32080,12 +32080,12 @@
   "routing_tokens": 2423,
   "skills": 18,
   "source_index_entry_points": 439,
-  "source_index_modules": 1924
+  "source_index_modules": 1925
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7ab8a1b3c4c273be30bb211bb5748b6802f55531c23cf7d54c8acd7a2096efeb"
+  "value": "af78b5aa6fc6cfcd6a9459ac5ade88a5675a3ca8e282566f9d4a52bc63e02097"
  },
  "engines": [
   {
@@ -65790,7 +65790,7 @@
   "included_source_count": 1080,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e1197c0320e78c1e4b012c584f67a6bab9fcae25cac046f7b4ca76fd74e74ff3"
+  "source_tree_digest": "17f26461674b82f8a4e098817ddec0b4723deb27744f9af5b8ce575e9ddda91c"
  },
  "research_index": [
   {
@@ -226793,7 +226793,7 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "195824440b77960708847b05ec049b96ea3efa4d8cd8a75e322130430a91f7d3",
+   "sha256": "72ff65bef666815b759c01cb7da1b88d2eddec747871cc3f5a1201347123c32b",
    "summary": "",
    "symbol_count": 118,
    "symbols": [
@@ -235641,7 +235641,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
-   "sha256": "b26fba1612f6c8c9c924344b284f5424adc29013ba5ede0e148379a63a0e924f",
+   "sha256": "dcb703f00f597ddcbdd80ea7efcfdf5c24686a0f06f8d9d78c1b4f6e9ccbe38f",
    "summary": "Compile a deterministic capability execution into a verified state/provenance capsule.",
    "symbol_count": 7,
    "symbols": [
@@ -246685,6 +246685,42 @@
   },
   {
    "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/file_artifact_expectation_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/file_artifact_expectation_v1.py",
+   "sha256": "fc865119196c16322987ebd1c69f382dc3164b3a4f78d43e0fb78e90db5425e2",
+   "summary": "Re-read a stated file effect instead of accepting a constant success bit.",
+   "symbol_count": 4,
+   "symbols": [
+    "_claimed_digest",
+    "_digest_stream",
+    "_path",
+    "verify"
+   ],
+   "terms": {
+    "accepting": 1,
+    "artifact": 1,
+    "bit": 1,
+    "claimed_digest": 1,
+    "constant": 1,
+    "digest_stream": 1,
+    "effect": 1,
+    "expectation": 1,
+    "file": 2,
+    "instead": 1,
+    "path": 1,
+    "re-read": 1,
+    "stated": 1,
+    "success": 1,
+    "v1": 1,
+    "verify": 1
+   }
+  },
+  {
+   "capability": false,
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
    "id": "source:canonical/runtime/final_terminal_cleanroom_gate_v1.py",
@@ -251044,7 +251080,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/grounded_action_v1.py",
-   "sha256": "3260796a181746d81445536616ddc89b31760f9a9df321e0d0d516b8dd27e760",
+   "sha256": "500298ef3fb12af3c2fab1877df0d2e5cff36c6336e56a6b3b0b9411a43e46b1",
    "summary": "Plain goal in, verified work out -- over the whole registry, with no model.",
    "symbol_count": 14,
    "symbols": [
@@ -257130,7 +257166,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "d6a404e4f7586d78481ece3c1cdde92516d6777ed52a9e060a5ac0804af65ee4",
+   "sha256": "a9a2b7a537bf1ea50971f54a6347bbb8b64f838c376a688271fef0a080b00c52",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 116,
    "symbols": [
