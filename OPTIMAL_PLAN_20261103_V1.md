@@ -88,7 +88,16 @@ still no unbounded computer.
 
 ---
 
-### P2 — Re-measure the honest suite, because you do not know your own denominator
+### P2 — DONE 2026-11-03 — Re-measure the honest suite, because you do not know your own denominator
+
+**Closed.** `P2_HONEST_SUITE_MEASURED_20261103_V1.md`, commit `252d05f`. Measured 16,361 cases
+(15,255 passed / 984 failed); split into 48 environment, 642 regressions, 336 standing debt;
+substrate restored 1/10 -> 9/10 (which removed 25 failures legitimately). The largest cluster,
+233 failures in one file, is a **front-door** defect with the capability already working —
+which is measurement 2's argument for P3, now with a count. `AGENTS.md` still cites the stale
+baseline; the corrected text is staged for the owner at
+`canonical/verification/proposed/AGENTS_MD_HONEST_BASELINE_PROPOSAL_20261103.md` because that
+file is a protected path.
 
 **Why now.** `AGENTS.md` says the 344-failure baseline *is* the backlog, "reduce it by fixing
 runtime code". The cited document is from **2026-10-17**, 380 failures, and the tree has taken
@@ -246,6 +255,23 @@ P3 is the only one that changes what a user sees. P4 is the only one that stops 
 measurements from lying.
 
 ---
+
+## 5b. P1 and P2, closed — the delta in numbers
+
+| measurement | before | after |
+|---|---|---|
+| carried model, genuine saving on a new instance | 1/15 | **8/15** |
+| carried model, one trial | 1/15 | **8/15** |
+| worse on trials | — | **0/15** |
+| second benchmark, one trial | 0/10 | **6/10** |
+| honest suite cases / failed | 11,754 / 380 (17 days stale) | **16,361 / 984** |
+| failure split | unknown | 48 environment / 642 regressions / 336 debt |
+| substrate modules present | 1/10 | **9/10** |
+| fingerprint cache policy | FIFO — lost keys read 20x | **LRU, pinned by 5 tests** |
+
+The fourth line of the backlog split is the one that changed the plan: **642 failures are
+regressions against a tree that was clean four weeks ago**, not standing debt, and 233 of them
+are a single door defect whose capability already works.
 
 ## 6. Standing non-claims
 
