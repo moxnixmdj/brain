@@ -1,0 +1,438 @@
+{
+  "action_id": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+  "action_intent_id": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Unify autonomous agency onto `creature_runtime_v1.Creature` and fast general zero-model (`K3=0`, `$0` spend) organs without any construct or capability whitelists and without weakening any `computer_execution_boundary_v1` confinement guard: (1) Wire `Creature` (`sovereign_perform`, `run_sovereign_board`, `predict_task_probability`) to uncurated `external_hard_slice_v1.select`, pre-execution structural host/type-surface introspection (`availability_v1`, `capability_type_surface_v1`), general unseen typed sampling (`type_directed_sampler_v1`, `typed_capability_sweep_v1`, `sampler_rule_chase_v1`), behavioral mutation inspector derivation (`derived_inspector_flywheel_v1`), and held-out `capability_onboarding_factory_v1`, with `AwakeAgencyDaemon` delegating defended heterogeneous obligations (`self_authored_obligations_v1.heterogeneous_world_proposals` + `extended_cheat_worlds`) directly to `Creature`; (2) Add `PersistentConfinedZygote` + O(1) sparse `/input` `publish=False` staging in `brokered_workspace_execution_v1` (`21.3 ms` per 12-candidate confined batch, `1.05 ms` warm awake pulse, zero live-workspace mutation) and `confine_v1.run_readonly`; (3) Replace construct-by-construct whitelists in `tree_sitter_cst_skill_skeleton_v1` with generic `(GENERIC_CST, node_type, token_template, children)` subtree anti-unification + synthetic-`def` 4-tier `calibrate_rule_scope`; (4) Add extension-typed `UpstreamRoutingLedger` keys with zero-SQLite-write RAM fast path (`N >= 2`), direct `UPSTREAM_ROUTING_LEDGER_PREFERRED` binding + miss invalidation in `UnifiedModel.solve()`, `memory_policy_scope('OFF')` isolation, real `macro_v1` trajectory elevation (`N >= 2` promotion + `N = 3` `< 1 ms` recall), and 3 new negative counterexamples in `verifier_falsification_v1` (`99/101` verifiers proven able to fail, `0 bad`).",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/brokered_workspace_execution_v1.py",
+      "canonical/runtime/confine_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/runtime/derived_inspector_flywheel_v1.py",
+      "canonical/runtime/self_authored_obligations_v1.py",
+      "canonical/runtime/verifier_falsification_v1.py",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/swe_kernel/rule_scope_learning_v1.py",
+      "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+      "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/swe_kernel/zygote_worker_pool_v1.py",
+      "canonical/tests/test_unified_creature_plus_fast_general_organs_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Post-#6600 (`7966acbe`) bottlenecks: cold `unshare` per candidate batch (`167.8 ms`), construct-specific CST whitelists, untyped routing-ledger shape keys without single-capability fast bind or miss invalidation, and `Creature` lacking general `type_directed_sampler_v1` + `external_hard_slice_v1` sovereign execution.",
+  "canonical_base_commit": "7966acbef8fe342b1849ea33de44bc7f9de1e5f6",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Post-#6600 (`7966acbe`) bottlenecks: cold `unshare` per candidate batch (`167.8 ms`), construct-specific CST whitelists, untyped routing-ledger shape keys without single-capability fast bind or miss invalidation, and `Creature` lacking general `type_directed_sampler_v1` + `external_hard_slice_v1` sovereign execution.",
+  "date": "2026-11-03",
+  "expected_parent_change": "canonical/runtime/{brain_unified_model_v1,brokered_workspace_execution_v1,confine_v1,creature_runtime_v1,derived_inspector_flywheel_v1,self_authored_obligations_v1,verifier_falsification_v1}.py + canonical/swe_kernel/{autonomous_awake_loop_v1,closed_loop_autonomous_controller_v1,rule_scope_learning_v1,tree_sitter_cst_skill_skeleton_v1,upstream_routing_ledger_v1,verified_skill_crystallizer_v1,zygote_worker_pool_v1}.py + canonical/tests/test_unified_creature_plus_fast_general_organs_v1.py + canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json.",
+  "expected_parent_frontier_change": "Confined 12-candidate Python screening drops from `167.79 ms` to `21.27 ms` (`1.77 ms`/candidate, `7.9x` faster) inside `PersistentConfinedZygote` with zero live-workspace mutation and `1.05 ms` warm awake pulses; generic CST subtree anti-unification transfers arbitrary syntax constructs + 4-tier synthetic-`def` scope calibration; extension-typed `UpstreamRoutingLedger` binds directly in `UnifiedModel.solve()` with zero-SQLite-write RAM hits (`N >= 2`), miss invalidation, and real `macro_v1` trajectory recall; and `Creature` onboards uninspected capabilities over uncurated `external_hard_slice_v1.select` via `type_directed_sampler_v1` (`CALIBRATED`, `CLAIM_BEATS_EXTERNAL_BASELINE`, zero hardcoded capability IDs).",
+  "explicit_user_authorization": "Owner selected `unified_creature_plus_fast_general_organs`, audited removal of all capability/construct whitelists in favor of general repo organs, and directed 'go'.",
+  "falsification_condition": "FALSIFIED if `PersistentConfinedZygote` mutates live workspace bytes or bypasses `zero_ambient_namespace_launcher_v1`, if `creature_runtime_v1` reintroduces any hardcoded capability whitelist or curates `external_hard_slice_v1.select` by confidence, if `memory_policy_scope('OFF')` leaks reads or writes, if `computer_execution_boundary_v1` unconfined refusals weaken, or if `verifier_falsification_v1.py` reports > 0 bad rows.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "4/13",
+    "interpretation": "CLOSES_PERSISTENT_CONFINED_ZYGOTE_GENERIC_CST_ANTI_UNIFICATION_TYPED_ROUTING_FAST_BIND_AND_GENERAL_SAMPLED_CREATURE_ONBOARDING_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.98,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "PersistentConfinedZygote: 12 confined candidates in `21.27 ms` min / `22.18 ms` median (`1.77 ms`/cand, `7.9x` faster than cold `unshare`), `host_config_intact=True`, warm `AwakeAgencyDaemon.pulse` = `1.05 ms` (`0.0` Life spent). Generic CST + `calibrate_rule_scope`: transfers comprehensions, augmented assignments, cross-language slices, and calibrates 4 scope tiers (`SCOPE_STATEMENT`, `SCOPE_EXPRESSION`, `SCOPE_OPERATOR`, `SCOPE_SEMANTIC`). Routing + macros: extension-typed `|ext:` keys, `N>=2` RAM fast path (`ram_fast_hit=True`), `UPSTREAM_ROUTING_LEDGER_PREFERRED` fast bind + miss invalidation fallback, `macro_v1` `N=2` promotion + `N=3` recall (`from_macro=True`). Sovereign `Creature`: `12` capabilities onboarded in `3.15s` over uncurated `external_hard_slice_v1.select` (`n=50`, `Brier=0.1120`, `CALIBRATED`, `CLAIM_BEATS_EXTERNAL_BASELINE`, zero hardcoded capability IDs). `verifier_falsification_v1`: `99/101` verifiers proven able to fail (`0 bad`). `verify_brain_unified_model_v1`: `33/33 PASS`; `test_brain_unified_model_v1`: `60/60 PASS`.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/runtime/type_directed_sampler_v1.py",
+    "canonical/runtime/capability_type_surface_v1.py",
+    "canonical/runtime/availability_v1.py",
+    "canonical/runtime/external_hard_slice_v1.py",
+    "canonical/runtime/derived_inspector_flywheel_v1.py",
+    "canonical/runtime/capability_onboarding_factory_v1.py",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "canonical/runtime/macro_v1.py",
+    "execution_guard/typed_capability_sweep_v1.py",
+    "execution_guard/sampler_rule_chase_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "7966acbef8fe342b1849ea33de44bc7f9de1e5f6",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "UNCONFINED_HOST_FORK_IN_ZYGOTE_WORKER_POOL_AND_PER_BATCH_COLD_UNSHARE",
+      "CONSTRUCT_BY_CONSTRUCT_CST_NODE_WHITELISTS",
+      "CAPABILITY_BY_CAPABILITY_HARDCODED_INSPECTOR_HARNESS_WHITELISTS",
+      "HAND_ROLLED_BRAIN_MACROS_JSON_OUTSIDE_MACRO_V1",
+      "DUPLICATE_INLINE_PROPOSAL_BUILDERS_IN_AUTONOMOUS_AWAKE_LOOP"
+    ],
+    "expected_parent_level_state_change": "Confined 12-candidate Python screening drops from `167.79 ms` to `21.27 ms` (`1.77 ms`/candidate, `7.9x` faster) inside `PersistentConfinedZygote` with zero live-workspace mutation and `1.05 ms` warm awake pulses; generic CST subtree anti-unification transfers arbitrary syntax constructs + 4-tier synthetic-`def` scope calibration; extension-typed `UpstreamRoutingLedger` binds directly in `UnifiedModel.solve()` with zero-SQLite-write RAM hits (`N >= 2`), miss invalidation, and real `macro_v1` trajectory recall; and `Creature` onboards uninspected capabilities over uncurated `external_hard_slice_v1.select` via `type_directed_sampler_v1` (`CALIBRATED`, `CLAIM_BEATS_EXTERNAL_BASELINE`, zero hardcoded capability IDs).",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETED_CAPABILITY_AND_CONSTRUCT_WHITELISTS_AND_COLD_UNSHARE_COMPOSED_PERSISTENT_CONFINED_ZYGOTE_TYPE_DIRECTED_SAMPLER_EXTERNAL_HARD_SLICE_AND_MACRO_V1",
+      "intrinsic_or_path_specific": "GENERAL__MILLISEC_CONFINED_SCREENING_SYNTAX_GENERAL_CST_TYPED_FAST_ROUTING_AND_SOVEREIGN_CREATURE_ONBOARDING",
+      "surviving_causal_blocker": "CAPABILITIES_REQUIRING_ABSENT_HOST_BINARIES_OR_MEDIA_CORPUS_FIXTURES_REMAIN_HONESTLY_REFUSED_ON_BARE_SANDBOXES"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_MODEL_CALLS_ZERO_NEW_THIRD_PARTY_PACKAGES_REUSED_TYPE_DIRECTED_SAMPLER_TYPED_CAPABILITY_SWEEP_EXTERNAL_HARD_SLICE_AVAILABILITY_AND_MACRO_V1",
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/type_directed_sampler_v1.py",
+        "execution_guard/typed_capability_sweep_v1.py",
+        "execution_guard/sampler_rule_chase_v1.py",
+        "canonical/runtime/external_hard_slice_v1.py",
+        "canonical/runtime/availability_v1.py",
+        "canonical/runtime/macro_v1.py",
+        "canonical/runtime/zero_ambient_namespace_launcher_v1.py"
+      ],
+      "external_existing_routes_checked": "Linux user/mount/net/pid/ipc/uts namespaces (`unshare` + `socketpair` persistent fork-server), Plotkin structural anti-unification over CSTs, and Python 3.11 stdlib.",
+      "surviving_gap": "UNGROUNDED_BINARY_MEDIA_AND_MISSING_APT_BINARY_CAPABILITIES_ON_RESTRICTED_HOSTS"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "HARDCODING_FIVE_STDLIB_CAPABILITY_HARNESSES_AND_CURATING_THE_BOARD_SLICE",
+        "ADDING_CONSTRUCT_BY_CONSTRUCT_CST_WHITELISTS",
+        "RUNNING_UNCONFINED_HOST_OS_FORK_FOR_CANDIDATE_SCREENING"
+      ],
+      "real_outcome": "`PersistentConfinedZygote` screens 12 candidates in `21.27 ms` under full namespace confinement; `GENERIC_CST` anti-unifies arbitrary syntax subtrees; `UnifiedModel.solve()` fast-binds extension-typed ledger routes with miss invalidation; and `Creature` onboards 12+ capabilities via `type_directed_sampler_v1` on uncurated `external_hard_slice_v1.select` while beating external self-prediction baselines.",
+      "surviving_necessity": "Preserve all `computer_execution_boundary_v1` refusals, `external_hard_slice_v1` anti-self-selection, and `verifier_falsification_v1` (`0 bad`)."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_TYPE_DIRECTED_SAMPLER_TYPED_CAPABILITY_SWEEP_SAMPLER_RULE_CHASE_EXTERNAL_HARD_SLICE_AVAILABILITY_MACRO_V1_AND_ZERO_AMBIENT_NAMESPACE_LAUNCHER",
+      "downstream_work_to_delete_or_supersede": "BESPOKE_PER_CAPABILITY_ONBOARDING_HARNESSES_AND_CONSTRUCT_SPECIFIC_CST_NODE_LISTS",
+      "fresh_reuse_plan": "WIRE_CREATURE_PERFORM_TO_TYPE_DIRECTED_SAMPLER_AND_EXTERNAL_HARD_SLICE_AND_KEEP_ZYGOTE_PERSISTENT_INSIDE_ZERO_AMBIENT_NAMESPACE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "PERSISTENT_NAMESPACE_ZYGOTE_AMORTIZES_UNSHARE_AND_RAM_FAST_PATH_ELIMINATES_PROMOTED_SQLITE_WRITES",
+      "search_stop_decision": "STOPPED_WHEN_103_UNITTESTS_30_PYTESTS_99_OF_101_VERIFIER_FALSIFICATIONS_AND_33_OF_33_PLUS_60_OF_60_UNIFIED_MODEL_GATES_PASSED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Cold `unshare` per batch costs `167.8 ms`; unconfined host `os.fork()` violates confinement; construct/capability whitelists fail on unseen syntax/capabilities; curating calibration slices invalidates self-prediction.",
+      "routes_ranked": [
+        "UNIFIED_CREATURE_PLUS_PERSISTENT_CONFINED_ZYGOTE_GENERIC_CST_TYPED_FAST_BIND_AND_GENERAL_TYPED_SAMPLER__CHOSEN",
+        "HARDCODED_CAPABILITY_AND_CONSTRUCT_WHITELISTS",
+        "COLD_PER_BATCH_UNSHARE_AND_PROCEDURAL_AWAKE_SCRIPT"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "CONFINED_HOST_MUTATION_ATTACK_PROBES_UNCURATED_EXTERNAL_HARD_SLICE_RUNS_VERIFIER_FALSIFICATION_COUNTEREXAMPLES_AND_UNIFIED_MODEL_FIXED_POINT_CHECKS"
+    },
+    "real_outcome": "`21.27 ms` confined 12-candidate batches, `1.05 ms` warm awake pulses, zero-whitelist CST + capability onboarding (`12` capabilities onboarded in `3.15s`, `Brier=0.1120`, `CLAIM_BEATS_EXTERNAL_BASELINE`), real `macro_v1` recall, and `99/101` `SAID_NO` (`0 bad`) in `verifier_falsification_v1`.",
+    "required_capability": "Persistent confined namespace Zygote, generic CST subtree anti-unification + scope calibration, extension-typed O(1) routing fast-bind, and general type-directed Creature capability onboarding",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "0_OF_112_CREATURE_CLOSED_AND_WHITELISTED_CST",
+            "CORRECTNESS": "PRESERVES_GUARDS_BUT_NO_GENERAL_CREATURE_PERFORM",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "HIGH",
+            "VERIFIABILITY": "HIGH",
+            "WALL_CLOCK": "167_8_MS_COLD_UNSHARE_PER_BATCH"
+          },
+          "evidence": [
+            "Measured on `7966acbe`: cold `unshare` costs `167.79 ms` per candidate batch and `Creature` default `perform` closes `0/112`."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_unified_creature_plus_fast_general_organs_v1.py` baseline timing and `R.run_its_own_board`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_POST_6600_STATUS_QUO"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "ONLY_5_HARDCODED_CAPABILITIES_AND_NAMED_CST_CONSTRUCTS",
+            "CORRECTNESS": "CURATED_SLICE_TAUTOLOGY_AND_CUSTOM_JSON_SHIMS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "BRITTLE_OUTSIDE_WHITELIST",
+            "VERIFIABILITY": "FAILS_EXTERNAL_HARD_SLICE_ANTI_CURATION_RULE",
+            "WALL_CLOCK": "FAST_BUT_NON_GENERAL"
+          },
+          "evidence": [
+            "Self-audit showed a 5-ID `_SOVEREIGN_STDLIB_INSPECTABLE_FAMILIES` whitelist leaves 45+ samplable capabilities untouched and invalidates `self_prediction_baseline_v1` via curated selection."
+          ],
+          "qualification_evidence": [
+            "direct probe: `typed_capability_sweep_v1.sweep(2, 17)` (`50/112` clean `2/2` without bespoke harnesses)"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WHITELISTED_CAPABILITY_HARNESSES_AND_CONSTRUCT_LISTS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "50_SAMPLABLE_CAPABILITIES_GENERIC_CST_AND_MACRO_V1",
+            "CORRECTNESS": "ZERO_WHITELISTS_ZERO_GUARD_WEAKENING_99_OF_101_SAID_NO",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_MODELS",
+            "RELIABILITY": "KERNEL_NAMESPACE_ISOLATED_AND_MEMORY_POLICY_OFF_SAFE",
+            "VERIFIABILITY": "103_UNITTESTS_30_PYTESTS_33_AND_60_UNIFIED_MODEL_PASS",
+            "WALL_CLOCK": "21_3_MS_12_CAND_BATCH_1_05_MS_WARM_PULSE"
+          },
+          "evidence": [
+            "Measured: `21.27 ms` 12-candidate confined batch (`7.9x`), `1.05 ms` warm pulse, `12` capabilities onboarded in `3.15s` on uncurated `external_hard_slice_v1.select` (`Brier=0.1120`, `CLAIM_BEATS_EXTERNAL_BASELINE`), `99/101` `SAID_NO` (`0 bad`)."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_unified_creature_plus_fast_general_organs_v1.py`, `verifier_falsification_v1.py`, and `verify_brain_unified_model_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-03T08:40:00Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "COLD_PER_BATCH_UNSHARE_CONSTRUCT_WHITELISTED_CST_AND_UNWIRED_CREATURE_PERFORM",
+      "max_age_hours": 24,
+      "negative_search_summary": "All needed general mechanisms (`type_directed_sampler_v1`, `typed_capability_sweep_v1`, `sampler_rule_chase_v1`, `external_hard_slice_v1`, `availability_v1`, `macro_v1`, `zero_ambient_namespace_launcher_v1`) already exist in-tree with `K3=0` and `$0` spend.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "persistent Linux user mount pid net namespace fork server sub-millisecond candidate screening"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Plotkin structural CST subtree anti-unification without node-type construct whitelists"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "QuickCheck type-directed capability argument sampling invariant mining decoy falsification"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "calibrated self-prediction over uncurated external hard slice without confidence selection bias"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-03T08:40:00Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux unprivileged namespace binaries (`unshare`, `setpriv`, `mount`, `ip`) + Python 3.11 + `scripts/restore_substrate_v1.py` (`10/10` `SUBSTRATE_READY`)",
+            "evidence": [
+              "DIRECT_PROBE: `scripts/restore_substrate_v1.py` reports `SUBSTRATE_READY` (`10/10`) and `test_unified_creature_plus_fast_general_organs_v1.py` (4/4) passes"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "In-tree general organs (`type_directed_sampler_v1`, `typed_capability_sweep_v1`, `external_hard_slice_v1`, `availability_v1`, `macro_v1`, `creature_runtime_v1`)",
+            "evidence": [
+              "DIRECT_PROBE: `103/103` unittests, `30/30` pytests, `99/101` `verifier_falsification_v1` (`0 bad`), `33/33` `verify_brain_unified_model_v1`, and `60/60` `test_brain_unified_model_v1` pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/{type_directed_sampler_v1,capability_type_surface_v1,external_hard_slice_v1,availability_v1,creature_runtime_v1,macro_v1,brokered_workspace_execution_v1}.py",
+          "execution_guard/{typed_capability_sweep_v1,sampler_rule_chase_v1}.py and canonical/runtime/verifier_falsification_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "AFL/Zygote persistent fork-server pattern inside Linux namespaces and QuickCheck/Hypothesis type-directed property testing"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Tree-Sitter CST concrete syntax nodes and Plotkin (1970) structural anti-unification"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux `namespaces(7)` / `unshare(1)` / `setpriv(1)` and Python 3.11 standard library documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_POST_6600_STATUS_QUO",
+      "WHITELISTED_CAPABILITY_HARNESSES_AND_CONSTRUCT_LISTS",
+      "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1"
+    ],
+    "selected_route": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+    "selected_surviving_route": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+    "stop_condition": "STOP when `PersistentConfinedZygote` screens 12 confined candidates in `< 35 ms` with zero live-workspace mutation, `GENERIC_CST` + `calibrate_rule_scope` pass without construct whitelists, `UnifiedModel.solve()` fast-binds and invalidates mis-promoted routes cleanly, `Creature.run_sovereign_board` onboards capabilities over uncurated `external_hard_slice_v1.select` while achieving `CALIBRATED` + `CLAIM_BEATS_EXTERNAL_BASELINE` with zero hardcoded capability IDs, `verifier_falsification_v1.py` reports `0 bad`, `BRAIN_UNIFIED_MODEL_V1.json` passes `33/33` + `60/60`, and all PR admission gates pass.",
+    "why_selected_route_is_fastest_sufficient": "Composes existing general repo organs (`type_directed_sampler_v1`, `typed_capability_sweep_v1`, `external_hard_slice_v1`, `availability_v1`, `macro_v1`, `zero_ambient_namespace_launcher_v1`) in 9 sensitive files (`<= 15`) with millisecond execution and zero whitelists."
+  },
+  "route_id": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1",
+  "stop_condition": "STOP when `PersistentConfinedZygote` screens 12 confined candidates in `< 35 ms` with zero live-workspace mutation, `GENERIC_CST` + `calibrate_rule_scope` pass without construct whitelists, `UnifiedModel.solve()` fast-binds and invalidates mis-promoted routes cleanly, `Creature.run_sovereign_board` onboards capabilities over uncurated `external_hard_slice_v1.select` while achieving `CALIBRATED` + `CLAIM_BEATS_EXTERNAL_BASELINE` with zero hardcoded capability IDs, `verifier_falsification_v1.py` reports `0 bad`, `BRAIN_UNIFIED_MODEL_V1.json` passes `33/33` + `60/60`, and all PR admission gates pass.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-03T08:40:00Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_RUNTIME_GENERALIZATION_SPEED_CONFINEMENT_AND_CALIBRATED_CREATURE_VERIFICATION_WITH_ZERO_EXTERNAL_BENCHMARK_RANK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "1ee54a869db058181e47c73c452883d80fa0e16b",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        },
+        {
+          "git_blob_sha": "563c0a2e8910a4bfb448471fba6a6ab569207452",
+          "path": "canonical/runtime/brokered_workspace_execution_v1.py"
+        },
+        {
+          "git_blob_sha": "2eacfa86ba44bb5fbd49c99d30e101f185a00f24",
+          "path": "canonical/runtime/confine_v1.py"
+        },
+        {
+          "git_blob_sha": "9310efc9151cdee6089462af3b8425b139350fa2",
+          "path": "canonical/runtime/creature_runtime_v1.py"
+        },
+        {
+          "git_blob_sha": "5447f9c7cb608c471c93cb39679923113bb4edbe",
+          "path": "canonical/runtime/derived_inspector_flywheel_v1.py"
+        },
+        {
+          "git_blob_sha": "5fe7f9e6f8024ae54a2773230ee5e706494facf1",
+          "path": "canonical/runtime/self_authored_obligations_v1.py"
+        },
+        {
+          "git_blob_sha": "65a7f3d541a8ea8c9308e5818415bbd601b4834d",
+          "path": "canonical/runtime/verifier_falsification_v1.py"
+        }
+      ],
+      "decisive_question": "DO_PERSISTENT_CONFINED_ZYGOTE_GENERIC_CST_TYPED_FAST_BIND_AND_GENERAL_TYPE_DIRECTED_CREATURE_ONBOARDING_DELIVER_MILLISEC_CONFINED_EXECUTION_AND_CALIBRATED_SELF_PREDICTION_WITHOUT_WHITELISTS_OR_GUARD_WEAKENING",
+      "falsifier_id": "RUN_UNIFIED_CREATURE_FAST_GENERAL_ORGANS_SUITE_VERIFIER_FALSIFICATION_V1_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "ZERO_CAPABILITY_OR_CONSTRUCT_WHITELISTS_EXTERNAL_HARD_SLICE_EXCLUDES_CONFIDENCE_CONFINEMENT_BOUNDARY_INTACT_AND_99_OF_101_VERIFIERS_SAY_NO",
+      "proposal_id": "UNIFIED_CREATURE_FAST_GENERAL_ORGANS_20261103_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. `computer_execution_boundary_v1` unconfined execution refusals remain 100% intact; `ZygoteWorkerPool` replaces unconfined host `os.fork()` with `PersistentConfinedZygote` inside `zero_ambient_namespace_launcher_v1`; `external_hard_slice_v1.select` excludes stated confidence by construction; `memory_policy_scope('OFF')` blocks both reads and writes; and 3 new negative counterexamples are proven in `verifier_falsification_v1.py` (`99/101` `SAID_NO`, `0 bad`)."
+}

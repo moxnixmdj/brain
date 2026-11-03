@@ -206,6 +206,20 @@ def _run_py_test_file(test_file: pathlib.Path, cwd: pathlib.Path, timeout: float
     tf_res = test_file.resolve()
     rel_tf = tf_res.relative_to(cwd_res).as_posix()
     txt = tf_res.read_text(encoding="utf-8", errors="replace")
+    needs_pytest = ("import pytest" in txt or "from pytest" in txt) or (cwd_res / "conftest.py").is_file()
+    if not needs_pytest:
+        fast = broker.run_confined_python_candidate_batch(
+            cwd_res,
+            "",
+            [rel_tf],
+            [{}],
+            stop_on_first_pass=True,
+            per_candidate_timeout_s=min(2.5, max(0.5, float(timeout))),
+            allow_cow_hardlinks=True,
+        )
+        if fast.get("ok") and fast.get("confined") and 0 in (fast.get("passing_indices") or []):
+            return True, ""
+
     if "def test_" in txt and "__main__" not in txt:
         cmd = [sys.executable, "-B", "-m", "pytest", "-q", "--tb=short", rel_tf]
     else:
@@ -226,6 +240,104 @@ def _run_py_test_file(test_file: pathlib.Path, cwd: pathlib.Path, timeout: float
         return False, "TIMEOUT"
     combined = (str(res.get("stdout") or "")) + "\n" + (str(res.get("stderr") or ""))
     return bool(res.get("ok")), combined[-600:]
+
+
+_POLYGLOT_EXT_TO_LANG: dict[str, str] = {
+    ".js": "javascript",
+    ".ts": "typescript",
+    ".go": "go",
+    ".rs": "rust",
+}
+
+
+def _is_polyglot_test_filename(fn: str) -> bool:
+    return (
+        (fn.endswith(".js") and (fn.startswith("test_") or fn.endswith(".test.js") or fn.endswith("_test.js")))
+        or fn.endswith("_test.go")
+        or (fn.endswith(".rs") and (fn.startswith("test_") or fn.endswith("_test.rs")))
+    )
+
+
+def _run_polyglot_test_file(test_file: pathlib.Path, cwd: pathlib.Path, timeout: float = 8.0) -> tuple[bool, str]:
+    """Execute a JS / Go / Rust test file inside zero-ambient namespace confinement (`brokered_workspace_execution_v1`)."""
+    import shutil as _shutil
+    from canonical.runtime import brokered_workspace_execution_v1 as broker
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    cwd_res = cwd.resolve()
+    tf_res = test_file.resolve()
+    rel_tf = tf_res.relative_to(cwd_res).as_posix()
+    suf = tf_res.suffix.lower()
+    if suf == ".js":
+        node_bin = _shutil.which("node")
+        if not node_bin:
+            return False, "NODE_RUNTIME_MISSING"
+        cmd = [node_bin, rel_tf]
+    elif suf == ".go":
+        go_bin = _shutil.which("go")
+        if not go_bin:
+            return False, "GO_RUNTIME_MISSING"
+        cmd = [go_bin, "test", "./" + pathlib.PurePosixPath(rel_tf).parent.as_posix()]
+    elif suf == ".rs":
+        rustc_bin = _shutil.which("rustc")
+        if not rustc_bin:
+            return False, "RUSTC_RUNTIME_MISSING"
+        cmd = [rustc_bin, "--test", rel_tf, "-o", "/tmp/rust_test_bin"]
+    else:
+        return False, f"UNSUPPORTED_TEST_EXT:{suf}"
+
+    res = broker.run_staged_confined_command(
+        cwd_res,
+        cmd,
+        publish=False,
+        allow_cow_hardlinks=True,
+        timeout=max(4, int(round(timeout))),
+        task_id=f"awake-poly-test:{rel_tf}",
+        goal=f"run confined polyglot test {rel_tf}",
+    )
+    if not res.get("confined"):
+        return False, str(res.get("blocked") or boundary.STATUS)
+    if res.get("timed_out"):
+        return False, "TIMEOUT"
+    combined = (str(res.get("stdout") or "")) + "\n" + (str(res.get("stderr") or ""))
+    if suf == ".rs" and res.get("ok"):
+        # Compile + run in one confined sh invocation if rustc succeeded
+        sh_bin = _shutil.which("sh") or "/bin/sh"
+        res2 = broker.run_staged_confined_command(
+            cwd_res,
+            [sh_bin, "-c", f'"{rustc_bin}" --test "{rel_tf}" -o /tmp/rust_t && /tmp/rust_t'],
+            publish=False,
+            allow_cow_hardlinks=True,
+            timeout=max(4, int(round(timeout))),
+            task_id=f"awake-rust-exec:{rel_tf}",
+            goal=f"run confined rust test {rel_tf}",
+        )
+        combined2 = (str(res2.get("stdout") or "")) + "\n" + (str(res2.get("stderr") or ""))
+        return bool(res2.get("ok")), combined2[-600:]
+    return bool(res.get("ok")), combined[-600:]
+
+
+class ConfinedLanguageTestOracle:
+    """Callable test-suite verifier running candidate patches inside `brokered_workspace_execution_v1` confinement."""
+
+    def __init__(self, cow_root: pathlib.Path, target_mod: pathlib.Path, test_file: pathlib.Path) -> None:
+        self.cow_root = cow_root.resolve()
+        self.target_mod = target_mod.resolve()
+        self.test_file = test_file.resolve()
+
+    def __call__(self, candidate_source: str) -> bool:
+        from canonical.swe_kernel.cow_impact_repair_engine_v1 import cow_write_text
+
+        orig = self.target_mod.read_text(encoding="utf-8")
+        try:
+            cow_write_text(self.target_mod, candidate_source)
+            if self.test_file.suffix.lower() == ".py":
+                ok, _ = _run_py_test_file(self.test_file, self.cow_root)
+            else:
+                ok, _ = _run_polyglot_test_file(self.test_file, self.cow_root)
+            return ok
+        finally:
+            cow_write_text(self.target_mod, orig)
 
 
 def _build_twin_callable_oracle(
@@ -390,6 +502,8 @@ class AwakeAgencyDaemon:
         self._journal_store = FileAtomicJournalStore(journal_dir) if journal_dir is not None else None
         self._journal_prefix: list[dict[str, Any]] = []
         self.committed_action_ids: dict[str, dict[str, Any]] = {}
+        self._registered_chases: dict[str, dict[str, Any]] = {}
+        self._registered_trajectories: dict[str, dict[str, Any]] = {}
         if self._journal_store is not None:
             from execution_guard import terminal_causal_journal_v2 as tcj
 
@@ -534,7 +648,8 @@ class AwakeAgencyDaemon:
         if not self.workspace_root.is_dir():
             return []
         test_files: list[pathlib.Path] = []
-        py_files: list[pathlib.Path] = []
+        poly_tests: list[pathlib.Path] = []
+        src_files: list[pathlib.Path] = []
         root_str = str(self.workspace_root)
         for dirpath, dirnames, filenames in os.walk(root_str):
             dirnames[:] = [
@@ -542,20 +657,21 @@ class AwakeAgencyDaemon:
                 if d not in {".git", "__pycache__", "node_modules", ".pytest_cache", ".mypy_cache", ".venv"}
             ]
             for fn in sorted(filenames):
-                if not fn.endswith(".py"):
-                    continue
                 fp = pathlib.Path(dirpath) / fn
-                if len(py_files) < 32:
-                    py_files.append(fp)
-                if fn.startswith("test_") and len(test_files) < 12:
+                if fn.endswith((".py", ".js", ".ts", ".go", ".rs")) and len(src_files) < 40:
+                    src_files.append(fp)
+                if fn.endswith(".py") and fn.startswith("test_") and len(test_files) < 12:
                     test_files.append(fp)
+                elif _is_polyglot_test_filename(fn) and len(poly_tests) < 8:
+                    poly_tests.append(fp)
         test_files.sort()
-        py_files.sort()
-        if not test_files:
+        poly_tests.sort()
+        src_files.sort()
+        if not test_files and not poly_tests:
             return []
 
         tree_h = hashlib.sha256()
-        for pf in py_files:
+        for pf in src_files:
             rel_pf = pf.relative_to(self.workspace_root).as_posix()
             tree_h.update(f"{rel_pf}:{self._fast_file_sha256(pf)}\n".encode("utf-8"))
         tree_sig = tree_h.hexdigest()
@@ -572,7 +688,7 @@ class AwakeAgencyDaemon:
                 ok = False
                 ran_fast = False
                 target_stem = tf.stem[len("test_"):]
-                cand_targets = [p for p in py_files if p.name == f"{target_stem}.py"]
+                cand_targets = [p for p in src_files if p.name == f"{target_stem}.py"]
                 if cand_targets:
                     try:
                         from canonical.swe_kernel.zygote_worker_pool_v1 import screen_python_candidates_cow
@@ -593,6 +709,19 @@ class AwakeAgencyDaemon:
                         ran_fast = False
                 if not ran_fast:
                     ok, _ = _run_py_test_file(tf, self.workspace_root)
+                self._test_health_cache[rel_tf] = {"sig": sig, "passing": bool(ok)}
+                dirty = True
+            if not ok:
+                failing.append((rel_tf, sig[:12]))
+
+        for ptf in poly_tests:
+            rel_tf = ptf.relative_to(self.workspace_root).as_posix()
+            sig = hashlib.sha256(f"{rel_tf}:{tree_sig}".encode("utf-8")).hexdigest()
+            cached = self._test_health_cache.get(rel_tf)
+            if isinstance(cached, Mapping) and cached.get("sig") == sig and isinstance(cached.get("passing"), bool):
+                ok = bool(cached["passing"])
+            else:
+                ok, _ = _run_polyglot_test_file(ptf, self.workspace_root)
                 self._test_health_cache[rel_tf] = {"sig": sig, "passing": bool(ok)}
                 dirty = True
             if not ok:
@@ -641,8 +770,17 @@ class AwakeAgencyDaemon:
                     pass
 
         # Epistemic hygiene: check stored code rules against live environment via `rule_expiry_v1`
+        # Memoize on `(env_key, db_mtime_ns)` so warm unchanged workspaces sense in `< 2 ms`.
         stale_rules: list[str] = []
-        audit_rep = rule_exp.audit(self.skill_store.db_path)
+        db_p = pathlib.Path(self.skill_store.db_path)
+        db_mtime = int(db_p.stat().st_mtime_ns) if db_p.exists() else 0
+        audit_cache_key = (env_key, db_mtime)
+        cached_audit = getattr(self, "_cached_rule_audit", None)
+        if cached_audit is not None and cached_audit[0] == audit_cache_key:
+            audit_rep = cached_audit[1]
+        else:
+            audit_rep = rule_exp.audit(self.skill_store.db_path)
+            self._cached_rule_audit = (audit_cache_key, audit_rep)
         for r in audit_rep.get("rules") or []:
             if r.get("state") == rule_exp.STALE:
                 sid = str(r.get("skill_id") or "rule")
@@ -667,8 +805,116 @@ class AwakeAgencyDaemon:
             "newly_noted_gap_ids": noted_gaps,
         }
 
+    def _repair_multifile_python_confined(
+        self,
+        cow_root: pathlib.Path,
+        cow_tf: pathlib.Path,
+        fail_out: str,
+    ) -> dict[str, Any] | None:
+        """Localize suspect non-test `.py` files and screen single/coupled patches in `PersistentConfinedZygote`."""
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+        from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
+            cow_write_text,
+            propose_stun_and_guard_repairs,
+        )
+
+        rel_tf = cow_tf.relative_to(cow_root).as_posix()
+        test_src = cow_tf.read_text(encoding="utf-8", errors="replace")
+        non_test_py = [
+            p
+            for p in sorted(cow_root.rglob("*.py"))
+            if ".git" not in p.parts
+            and "__pycache__" not in p.parts
+            and not p.name.startswith("test_")
+            and not p.name.endswith("_test.py")
+            and "tests" not in p.relative_to(cow_root).parts
+        ]
+        if not non_test_py:
+            return None
+
+        # Rank suspects by traceback citation + import reference in `test_src`
+        scored: list[tuple[int, pathlib.Path]] = []
+        for pf in non_test_py:
+            rel_p = pf.relative_to(cow_root).as_posix()
+            score = 0
+            if rel_p in fail_out or pf.name in fail_out:
+                score += 10
+            if pf.stem != "__init__" and pf.stem in test_src:
+                score += 5
+            scored.append((-score, pf))
+        scored.sort(key=lambda t: (t[0], t[1].as_posix()))
+        suspects = [pf for _, pf in scored[:4]]
+
+        per_file_cands: dict[str, list[str]] = {}
+        for pf in suspects:
+            rel_p = pf.relative_to(cow_root).as_posix()
+            orig_s = pf.read_text(encoding="utf-8", errors="replace")
+            cands = (
+                propose_stun_and_guard_repairs(orig_s, [test_src], max_candidates=6)
+                + _propose_deterministic_ast_repairs(orig_s, max_candidates=10)
+            )
+            dedup: list[str] = []
+            for c in cands:
+                if c != orig_s and c not in dedup:
+                    dedup.append(c)
+            if dedup:
+                per_file_cands[rel_p] = dedup[:10]
+
+        override_batch: list[dict[str, str]] = []
+        for rel_p, clist in per_file_cands.items():
+            for c in clist:
+                override_batch.append({rel_p: c})
+        # Add top coupled 2-file combinations when a bug spans 2 modules
+        rel_keys = list(per_file_cands.keys())
+        if len(rel_keys) >= 2:
+            r0, r1 = rel_keys[0], rel_keys[1]
+            for c0 in per_file_cands[r0][:4]:
+                for c1 in per_file_cands[r1][:4]:
+                    override_batch.append({r0: c0, r1: c1})
+                    if len(override_batch) >= 48:
+                        break
+                if len(override_batch) >= 48:
+                    break
+
+        if not override_batch:
+            return None
+
+        batch_res = broker.run_confined_python_candidate_batch(
+            cow_root,
+            "",
+            [rel_tf],
+            override_batch,
+            stop_on_first_pass=True,
+            per_candidate_timeout_s=2.0,
+            allow_cow_hardlinks=True,
+        )
+        passing = batch_res.get("passing_indices") or []
+        if not (batch_res.get("ok") and batch_res.get("confined") and passing):
+            return None
+
+        winner = override_batch[int(passing[0])]
+        skill_ids: list[str] = []
+        for rel_p, new_s in winner.items():
+            before_s = (cow_root / rel_p).read_text(encoding="utf-8")
+            cow_write_text(cow_root / rel_p, new_s)
+            if self.apply_verified_repairs:
+                _atomic_write_text(self.workspace_root / rel_p, new_s)
+            cryst = self.skill_store.crystallize_code_fix(
+                before_snippet=before_s,
+                after_snippet=new_s,
+                language="python",
+                error_class="AWAKE_CONFINED_MULTIFILE_REPAIR",
+            )
+            if cryst.get("crystallized") and cryst.get("skill_id"):
+                skill_ids.append(str(cryst["skill_id"]))
+        return {
+            "files_repaired": sorted(winner.keys()),
+            "mode": "CONFINED_ZYGOTE_MULTIFILE_REPAIR",
+            "crystallized_skill_ids": skill_ids,
+        }
+
     def experiment_in_cow_sandbox(self, *, max_repairs: int = 3) -> dict[str, Any]:
-        """Autonomously detect failing Python modules in a zero-copy `os.link` CoW twin (`< 10 ms`), repair & crystallize."""
+        """Autonomously detect failing Python & polyglot modules in a zero-copy `os.link` CoW twin (`< 10 ms`), repair & crystallize."""
         from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
             cow_write_text,
             create_zero_copy_cow_workspace,
@@ -680,7 +926,15 @@ class AwakeAgencyDaemon:
             p for p in self.workspace_root.glob("**/test_*.py")
             if ".git" not in p.parts and "__pycache__" not in p.parts
         )[:12]
-        if not test_files:
+        poly_test_files = sorted(
+            p
+            for p in self.workspace_root.rglob("*")
+            if p.is_file()
+            and ".git" not in p.parts
+            and "node_modules" not in p.parts
+            and _is_polyglot_test_filename(p.name)
+        )[:8]
+        if not test_files and not poly_test_files:
             return {"tested": 0, "failures_found": 0, "repaired": 0, "crystallized_skills": []}
 
         repaired_records: list[dict[str, Any]] = []
@@ -701,7 +955,15 @@ class AwakeAgencyDaemon:
                 target_stem = orig_tf.stem[len("test_"):]
                 cand_targets = list(cow_root.glob(f"**/{target_stem}.py"))
                 if not cand_targets:
-                    # Multi-file / non-obvious target layout: invoke full CoW coupled/STUN repair engine!
+                    mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
+                    if mf_out is not None:
+                        repaired_records.append({
+                            "module": ",".join(mf_out["files_repaired"]),
+                            "mode": mf_out["mode"],
+                            "skill_ids": mf_out["crystallized_skill_ids"],
+                        })
+                        continue
+                    # Multi-file / non-obvious target layout fallback
                     coupled_out = repair_repository_in_cow_zygote(
                         cow_root,
                         skill_store=self.skill_store,
@@ -808,6 +1070,14 @@ class AwakeAgencyDaemon:
                         break
                 if solved_src is None:
                     cow_write_text(cow_mod, before_src)
+                    mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
+                    if mf_out is not None:
+                        repaired_records.append({
+                            "module": ",".join(mf_out["files_repaired"]),
+                            "mode": mf_out["mode"],
+                            "skill_ids": mf_out["crystallized_skill_ids"],
+                        })
+                        continue
                     # Try coupled multi-file repair across sibling modules before recording open gap
                     coupled_out = repair_repository_in_cow_zygote(
                         cow_root,
@@ -867,8 +1137,80 @@ class AwakeAgencyDaemon:
                     "skill_id": cryst.get("skill_id"),
                 })
 
+            # Polyglot confined test repair (`.js` / `.go` / `.rs`) via cross-language CST skill bridge
+            for orig_ptf in poly_test_files:
+                if len(repaired_records) >= max_repairs:
+                    break
+                rel_ptf = orig_ptf.relative_to(self.workspace_root)
+                cow_ptf = cow_root / rel_ptf
+                ok_p, fail_p = _run_polyglot_test_file(cow_ptf, cow_root)
+                if ok_p:
+                    continue
+                failures_found += 1
+                suf = cow_ptf.suffix.lower()
+                lang = _POLYGLOT_EXT_TO_LANG.get(suf)
+                if not lang:
+                    continue
+                stem = cow_ptf.name
+                for pfx in ("test_",):
+                    if stem.startswith(pfx):
+                        stem = stem[len(pfx):]
+                for sfx in (".test" + suf, "_test" + suf, suf):
+                    if stem.endswith(sfx):
+                        stem = stem[: -len(sfx)]
+                        break
+                poly_targets = [
+                    p
+                    for p in cow_root.rglob(f"{stem}{suf}")
+                    if p.resolve() != cow_ptf.resolve() and "node_modules" not in p.parts
+                ]
+                if not poly_targets:
+                    poly_targets = [
+                        p
+                        for p in cow_root.rglob(f"*{suf}")
+                        if p.resolve() != cow_ptf.resolve()
+                        and not _is_polyglot_test_filename(p.name)
+                        and "node_modules" not in p.parts
+                    ]
+                if not poly_targets:
+                    continue
+                cow_pmod = poly_targets[0]
+                rel_pmod = cow_pmod.relative_to(cow_root)
+                before_psrc = cow_pmod.read_text(encoding="utf-8")
+                poly_oracle = ConfinedLanguageTestOracle(cow_root, cow_pmod, cow_ptf)
+                recalled_p = self.skill_store.recall_and_apply_verified(
+                    source_text=before_psrc,
+                    language=lang,
+                    verifier=poly_oracle,
+                    allow_cross_language=True,
+                )
+                if recalled_p is None:
+                    from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+                        recall_across_languages_cst,
+                    )
+
+                    recalled_p = recall_across_languages_cst(
+                        self.skill_store,
+                        source_text=before_psrc,
+                        target_language=lang,
+                        verifier=poly_oracle,
+                        minimize=True,
+                        rule_filter=lambda r: r.get("state") != "INVALIDATED",
+                    )
+                if recalled_p is not None:
+                    patched_p = str(recalled_p["patched_source"])
+                    cow_write_text(cow_pmod, patched_p)
+                    if self.apply_verified_repairs:
+                        _atomic_write_text(self.workspace_root / rel_pmod, patched_p)
+                    repaired_records.append({
+                        "module": str(rel_pmod),
+                        "language": lang,
+                        "mode": "POLYGLOT_CST_SKILL_TRANSFER",
+                        "skill_id": recalled_p.get("skill_id"),
+                    })
+
         return {
-            "tested": len(test_files),
+            "tested": len(test_files) + len(poly_test_files),
             "failures_found": failures_found,
             "repaired": len(repaired_records),
             "cow_clone_ms": clone_info["clone_ms"],
@@ -1291,6 +1633,48 @@ class AwakeAgencyDaemon:
 
         return discover_symbolic_or_scientific_law(problem)
 
+    def register_numeric_chase(
+        self,
+        chase_id: str,
+        *,
+        goal: str,
+        measure: Callable[[], float | int],
+        act: Callable[[Mapping[str, Any]], Mapping[str, Any]],
+        target: float | None = None,
+        direction: str | None = None,
+        max_rounds: int = 8,
+    ) -> str:
+        """Register a quantitative hill-climb obligation (`execution_guard.goal_chase_v1`) for `self.creature`."""
+        wid = f"awake:chase:{chase_id.strip()}"
+        self._registered_chases[wid] = {
+            "id": chase_id.strip(),
+            "goal": str(goal),
+            "measure": measure,
+            "act": act,
+            "target": target,
+            "direction": direction,
+            "max_rounds": int(max_rounds),
+            "closed": False,
+        }
+        return wid
+
+    def register_trajectory_goal(
+        self,
+        traj_id: str,
+        *,
+        goal: str,
+        workflow_db_path: str | pathlib.Path | None = None,
+    ) -> str:
+        """Register a multi-step confined trajectory obligation (`execute_and_elevate_confined_trajectory`) for `self.creature`."""
+        wid = f"awake:traj:{traj_id.strip()}"
+        self._registered_trajectories[wid] = {
+            "id": traj_id.strip(),
+            "goal": str(goal),
+            "workflow_db_path": pathlib.Path(workflow_db_path) if workflow_db_path else self.workflow_db_path,
+            "closed": False,
+        }
+        return wid
+
     def pulse(
         self,
         *,
@@ -1376,6 +1760,7 @@ class AwakeAgencyDaemon:
         )
 
         def _build_and_sync_board() -> tuple[dict[str, Any], str | None]:
+            nonlocal cow_wid
             uncal_ids = sorted(str(r.get("skill_id") or "") for r in self._uncalibrated_python_rules())
             r3_dig = self._current_r3_digest()
             needs_gov = bool(uncal_ids) or (self._r3_explicit and bool(r3_dig) and r3_dig not in self._converged_r3_digests)
@@ -1384,63 +1769,73 @@ class AwakeAgencyDaemon:
                 gov_sig = hashlib.sha256(f"{r3_dig}|{'/'.join(uncal_ids)}".encode("utf-8")).hexdigest()[:12]
                 cur_gov_wid = f"awake:r3_scope:{gov_sig}"
 
-            props: list[A.Proposal] = []
-            w_before: dict[str, dict[str, Any]] = {
-                "failing_tests": {},
-                "open_gaps": {},
-                "pending_governance": {},
-                "speculative": {},
-            }
-            w_done: dict[str, dict[str, Any]] = {
-                "failing_tests": {},
-                "open_gaps": {},
-                "pending_governance": {},
-                "speculative": {},
-            }
+            gap_rows_for_world: list[dict[str, Any]] = []
+            gap_map.clear()
+            for idx_g, gap in enumerate(ranked):
+                raw_gid = str(gap.get("id") or f"idx{idx_g}")
+                g_wid = f"gap:awake:{raw_gid}"
+                gap_map[g_wid] = (idx_g, gap)
+                gap_rows_for_world.append(
+                    {
+                        "id": g_wid,
+                        "source": "ignorance_ledger",
+                        "value": max(1.5, float(gap.get("priority", 2.0)) * 2.0),
+                        "cost": min(1.5, max(0.25, round(float(gap.get("cost", 1.0)) * 0.25, 3))),
+                    }
+                )
+            for tr_wid, tr_spec in sorted(self._registered_trajectories.items()):
+                if not tr_spec.get("closed"):
+                    gap_rows_for_world.append(
+                        {"id": tr_wid, "source": "closed_loop_trajectory", "value": 5.5, "cost": 0.5}
+                    )
 
-            if cow_wid is not None:
-                w_before["failing_tests"][cow_wid] = len(failing_pairs)
-                w_done["failing_tests"][cow_wid] = 0
+            props, w_before, w_done, _ = A.heterogeneous_world_proposals(
+                failing_tests=[failing_pairs[0]] if failing_pairs else (),
+                open_gaps=gap_rows_for_world,
+                calibration_ledger=getattr(self.creature, "calibration_ledger", None),
+                max_inspector_gaps=0,
+                repair_id_prefix="awake:cow_repair",
+            )
+            if failing_pairs and props and props[0].id.startswith("awake:cow_repair:"):
+                cow_wid = props[0].id
+
+            for ch_wid, ch_spec in sorted(self._registered_chases.items()):
+                if ch_spec.get("closed"):
+                    continue
+                cur_val = float(ch_spec["measure"]())
+                tgt_val = float(ch_spec["target"]) if ch_spec.get("target") is not None else 0.0
+                dir_s = str(ch_spec.get("direction") or ("minimize" if "at most" in ch_spec["goal"].lower() or "0" in ch_spec["goal"] else "maximize"))
+                already_met = (cur_val <= tgt_val) if dir_s in ("minimize", "<=", "<") else (cur_val >= tgt_val)
+                if already_met and ch_spec.get("target") is not None:
+                    ch_spec["closed"] = True
+                    continue
+                w_before.setdefault("numeric_chases", {})[ch_wid] = cur_val
+                w_done.setdefault("numeric_chases", {})[ch_wid] = tgt_val
                 props.append(
                     A.Proposal(
-                        id=cow_wid,
-                        claim=f"Repair {len(failing_pairs)} failing workspace test(s) ({failing_pairs[0][0]})",
-                        source="workspace_test_observation",
-                        check=lambda w, k=cow_wid: (w.get("failing_tests") or {}).get(k) == 0,
-                        value=8.0,
+                        id=ch_wid,
+                        claim=f"Chase quantitative goal `{ch_spec['goal']}` to target",
+                        source="goal_chase_v1",
+                        check=(
+                            (lambda w, k=ch_wid, t=tgt_val: isinstance((w.get("numeric_chases") or {}).get(k), (int, float)) and not isinstance((w.get("numeric_chases") or {}).get(k), bool) and float(w["numeric_chases"][k]) <= t)
+                            if dir_s in ("minimize", "<=", "<")
+                            else (lambda w, k=ch_wid, t=tgt_val: isinstance((w.get("numeric_chases") or {}).get(k), (int, float)) and not isinstance((w.get("numeric_chases") or {}).get(k), bool) and float(w["numeric_chases"][k]) >= t)
+                        ),
+                        value=6.0,
                         cost=0.5,
                         checkable=True,
                     )
                 )
 
-            gap_map.clear()
-            for idx_g, gap in enumerate(ranked):
-                raw_gid = str(gap.get("id") or f"idx{idx_g}")
-                g_wid = f"awake:gap:{raw_gid}"
-                gap_map[g_wid] = (idx_g, gap)
-                w_before["open_gaps"][g_wid] = True
-                w_done["open_gaps"][g_wid] = False
-                props.append(
-                    A.Proposal(
-                        id=g_wid,
-                        claim=f"Curriculum gap {raw_gid} studied and verified",
-                        source="ignorance_ledger",
-                        check=lambda w, k=g_wid: (w.get("open_gaps") or {}).get(k) is False,
-                        value=max(1.5, float(gap.get("priority", 2.0)) * 2.0),
-                        cost=min(1.5, max(0.25, round(float(gap.get("cost", 1.0)) * 0.25, 3))),
-                        checkable=True,
-                    )
-                )
-
             if cur_gov_wid is not None:
-                w_before["pending_governance"][cur_gov_wid] = True
-                w_done["pending_governance"][cur_gov_wid] = False
+                w_before.setdefault("pending_governance", {})[cur_gov_wid] = True
+                w_done.setdefault("pending_governance", {})[cur_gov_wid] = False
                 props.append(
                     A.Proposal(
                         id=cur_gov_wid,
                         claim="Calibrate uncalibrated rule scopes and converge R3 improvement queue",
                         source="r3_governance_queue",
-                        check=lambda w, k=cur_gov_wid: (w.get("pending_governance") or {}).get(k) is False,
+                        check=lambda w, k=cur_gov_wid: isinstance(w.get("pending_governance"), Mapping) and w["pending_governance"].get(k) is False,
                         value=2.0,
                         cost=0.25,
                         checkable=True,
@@ -1448,21 +1843,22 @@ class AwakeAgencyDaemon:
                 )
 
             if spec_wid is not None:
-                w_before["speculative"][spec_wid] = "untested"
-                w_done["speculative"][spec_wid] = "explored"
+                w_before.setdefault("speculative", {})[spec_wid] = "untested"
+                w_done.setdefault("speculative", {})[spec_wid] = "explored"
                 props.append(
                     A.Proposal(
                         id=spec_wid,
                         claim="Unverified speculative exploration opportunity",
                         source="speculative_channel",
-                        check=lambda w, k=spec_wid: (w.get("speculative") or {}).get(k) == "explored",
+                        check=lambda w, k=spec_wid: isinstance(w.get("speculative"), Mapping) and w["speculative"].get(k) == "explored",
                         value=12.0,
                         cost=0.25,
                         checkable=False,
                     )
                 )
 
-            return self.creature.sync_board(props, before=w_before, done=w_done), cur_gov_wid
+            cheats = A.extended_cheat_worlds(w_done) if w_done else None
+            return self.creature.sync_board(props, before=w_before, done=w_done, cheats=cheats), cur_gov_wid
 
         authored_metrics, gov_wid = _build_and_sync_board()
 
@@ -1544,13 +1940,14 @@ class AwakeAgencyDaemon:
                 }
             if gov_wid is not None and work.id == gov_wid:
                 scope_audits = self.self_falsify_and_narrow_rule_scopes()
-                r3_drain = self.drain_r3_self_improvement_queue(max_actions=2)
-                r3_fixed_point = self.drive_r3_to_verified_fixed_point(
-                    max_rounds=4,
-                    max_actions_per_round=4,
-                )
-                if r3_fixed_point.get("fixed_point") is True:
-                    self._converged_r3_digests.add(self._current_r3_digest())
+                if self._r3_explicit:
+                    r3_drain = self.drain_r3_self_improvement_queue(max_actions=2)
+                    r3_fixed_point = self.drive_r3_to_verified_fixed_point(
+                        max_rounds=4,
+                        max_actions_per_round=4,
+                    )
+                    if r3_fixed_point.get("fixed_point") is True:
+                        self._converged_r3_digests.add(self._current_r3_digest())
                 return {
                     "ok": True,
                     "verified": True,
@@ -1565,6 +1962,56 @@ class AwakeAgencyDaemon:
                     "verified": False,
                     "correct": None,
                     "value": work.value if ok_s else 0.0,
+                }
+            if work.id in self._registered_chases:
+                from execution_guard import goal_chase_v1 as gc
+
+                ch_spec = self._registered_chases[work.id]
+                kw: dict[str, Any] = {
+                    "measure": ch_spec["measure"],
+                    "act": ch_spec["act"],
+                    "max_rounds": ch_spec["max_rounds"],
+                    "patience": 2,
+                }
+                if ch_spec.get("target") is not None:
+                    kw["target"] = ch_spec["target"]
+                if ch_spec.get("direction") is not None:
+                    kw["direction"] = ch_spec["direction"]
+                ch_res = gc.run(ch_spec["goal"], **kw)
+                ok_ch = bool(ch_res.get("pass"))
+                if ok_ch:
+                    ch_spec["closed"] = True
+                ch_spec["last_result"] = ch_res
+                return {
+                    "ok": ok_ch,
+                    "verified": True,
+                    "correct": ok_ch,
+                    "value": work.value if ok_ch else 0.0,
+                    "blocked": None if ok_ch else str(ch_res.get("status") or "GOAL_CHASE_UNMET"),
+                }
+            if work.id in self._registered_trajectories:
+                from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+                    execute_and_elevate_confined_trajectory,
+                )
+
+                tr_spec = self._registered_trajectories[work.id]
+                tr_res = execute_and_elevate_confined_trajectory(
+                    tr_spec["goal"],
+                    cwd=self.workspace_root,
+                    workflow_db_path=tr_spec["workflow_db_path"],
+                )
+                ok_tr = bool(tr_res.get("pass"))
+                if ok_tr:
+                    tr_spec["closed"] = True
+                    if tr_res.get("macro_id"):
+                        promoted_workflows.append(str(tr_res["macro_id"]))
+                tr_spec["last_result"] = tr_res
+                return {
+                    "ok": ok_tr,
+                    "verified": True,
+                    "correct": ok_tr,
+                    "value": work.value if ok_tr else 0.0,
+                    "blocked": None if ok_tr else "TRAJECTORY_NOT_VERIFIED",
                 }
             return {"ok": False, "verified": None, "correct": None, "blocked": "UNKNOWN_AWAKE_WORK"}
 

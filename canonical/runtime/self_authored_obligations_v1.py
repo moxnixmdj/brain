@@ -267,6 +267,190 @@ def scan_repository() -> dict[str, Any]:
     return out
 
 
+def extended_cheat_worlds(done: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Stronger mutation adversary (`cheat_worlds` + comment-stuffed decoy + stringified + bool/int coercion)."""
+    base = list(cheat_worlds(done))
+    comment_stuffed = {"_comment": json.dumps(dict(done), sort_keys=True)}
+    for k, v in done.items():
+        if isinstance(v, Mapping):
+            comment_stuffed[k] = {sk: f"# {sv}" for sk, sv in v.items()}
+        else:
+            comment_stuffed[k] = None
+    wrong_type = {}
+    for k, v in done.items():
+        if isinstance(v, Mapping):
+            wrong_type[k] = {sk: (str(sv) if isinstance(sv, (int, float, bool)) else [sv]) for sk, sv in v.items()}
+        else:
+            wrong_type[k] = str(v) if isinstance(v, (int, float, bool)) else [v]
+
+    def _flip_bool_int(val: Any) -> Any:
+        if val is False:
+            return 0
+        if val is True:
+            return 1
+        if type(val) is int and val == 0:
+            return False
+        if type(val) is int and val == 1:
+            return True
+        return False
+
+    bool_coerced = {}
+    for k, v in done.items():
+        if isinstance(v, Mapping):
+            bool_coerced[k] = {sk: _flip_bool_int(sv) for sk, sv in v.items()}
+        else:
+            bool_coerced[k] = _flip_bool_int(v)
+    base.extend([comment_stuffed, wrong_type, bool_coerced])
+    return base
+
+
+def calibrate_proposal_value(
+    raw_value: float,
+    capability_or_family: str,
+    calibration_ledger: Any = None,
+) -> float:
+    """Calibrate an obligation's assigned value against settled inspector-verified outcomes."""
+    base = max(0.05, float(raw_value))
+    if calibration_ledger is None or not hasattr(calibration_ledger, "settled_rows"):
+        return round(base, 4)
+    try:
+        pairs = calibration_ledger.settled_rows()
+    except Exception:
+        return round(base, 4)
+    if not pairs:
+        return round(base, 4)
+    fam_prefix = capability_or_family.split(":", 1)[0]
+    fam_hits = [1.0 if r.get("outcome_pass") else 0.0 for r in pairs if str(r.get("capability_id") or "").startswith(fam_prefix)]
+    sample = fam_hits if fam_hits else [1.0 if r.get("outcome_pass") else 0.0 for r in pairs]
+    # Causal Laplace-shrunk empirical realization factor in [0.25, 1.25]
+    emp_rate = (sum(sample) + 1.0) / (len(sample) + 2.0)
+    return round(max(0.1, base * (0.5 + 0.75 * emp_rate)), 4)
+
+
+def heterogeneous_world_proposals(
+    *,
+    capability_ids: Sequence[str] = (),
+    inspected_ids: Sequence[str] = (),
+    failing_tests: Sequence[tuple[str, str]] = (),
+    numeric_chases: Sequence[Mapping[str, Any]] = (),
+    open_gaps: Sequence[Mapping[str, Any]] = (),
+    calibration_ledger: Any = None,
+    max_inspector_gaps: int = 8,
+    repair_id_prefix: str = "repair",
+) -> tuple[list[Proposal], dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
+    """Build heterogeneous defended proposals across 4 distinct world readers + 6-cheat adversary."""
+    from canonical.runtime import external_hard_slice_v1 as EHS
+
+    proposals: list[Proposal] = []
+    before: dict[str, dict[str, Any]] = {
+        "inspected": {},
+        "failing_tests": {},
+        "numeric_targets": {},
+        "open_gaps": {},
+    }
+    done: dict[str, dict[str, Any]] = {
+        "inspected": {},
+        "failing_tests": {},
+        "numeric_targets": {},
+        "open_gaps": {},
+    }
+
+    # Reader 1: `external_hard_slice_v1` (uninspected capabilities ranked without self-confidence)
+    if capability_ids and max_inspector_gaps > 0:
+        insp_map = {cid: True for cid in inspected_ids}
+        if calibration_ledger is not None:
+            slice_plan = EHS.select(
+                capability_ids=list(capability_ids),
+                ledger=calibration_ledger,
+                inspectors=insp_map,
+                size=max_inspector_gaps,
+            )
+            chosen_cids = [str(r["capability_id"]) for r in slice_plan["selected"] if not r["has_inspector"]]
+        else:
+            chosen_cids = sorted(set(capability_ids) - set(inspected_ids))[:max_inspector_gaps]
+        prefixes = {cid.rsplit(".", 1)[0] for cid in inspected_ids if "." in cid}
+        for cid in chosen_cids:
+            wid = f"inspector:{cid}"
+            before["inspected"][cid] = "missing"
+            done["inspected"][cid] = "verified"
+            cheap = ("." in cid) and (cid.rsplit(".", 1)[0] in prefixes)
+            proposals.append(
+                Proposal(
+                    id=wid,
+                    claim=f"{cid} has a mutation-falsified inspector and held-out onboarding proof",
+                    source="external_hard_slice",
+                    check=lambda w, _c=cid: isinstance(w.get("inspected"), Mapping) and w["inspected"].get(_c) == "verified",
+                    value=calibrate_proposal_value(3.0, "inspector", calibration_ledger),
+                    cost=0.5 if cheap else 1.0,
+                )
+            )
+
+    # Reader 2: Workspace failing test oracle (Python + polyglot JS/TS/Rust/Go/C++)
+    for rel_test, sig in failing_tests:
+        wid = f"{repair_id_prefix}:{rel_test}:{sig}"
+        before["failing_tests"][wid] = 1
+        done["failing_tests"][wid] = 0
+        proposals.append(
+            Proposal(
+                id=wid,
+                claim=f"Workspace test {rel_test} passes under confined verification",
+                source="workspace_test_oracle",
+                check=lambda w, _k=wid: isinstance(w.get("failing_tests"), Mapping)
+                and type(w["failing_tests"].get(_k)) is int
+                and w["failing_tests"].get(_k) == 0,
+                value=calibrate_proposal_value(8.0, "repair", calibration_ledger),
+                cost=0.5,
+            )
+        )
+
+    # Reader 3: Numeric target chases (`current_val < target_val`)
+    for ch in numeric_chases:
+        cid_s = str(ch.get("id") or "")
+        cur_v = float(ch.get("current", 0.0))
+        tgt_v = float(ch.get("target", 1.0))
+        if not cid_s or cur_v >= tgt_v:
+            continue
+        wid = f"chase:{cid_s}"
+        before["numeric_targets"][wid] = cur_v
+        done["numeric_targets"][wid] = tgt_v
+        proposals.append(
+            Proposal(
+                id=wid,
+                claim=f"Numeric target {cid_s} reaches >= {tgt_v}",
+                source="numeric_target_chase",
+                check=lambda w, _k=wid, _t=tgt_v: isinstance(w.get("numeric_targets"), Mapping)
+                and isinstance(w["numeric_targets"].get(_k), (int, float))
+                and not isinstance(w["numeric_targets"].get(_k), bool)
+                and float(w["numeric_targets"][_k]) >= _t,
+                value=calibrate_proposal_value(6.0, "chase", calibration_ledger),
+                cost=0.5,
+            )
+        )
+
+    # Reader 4: Open epistemic / trajectory gaps (`ignorance_ledger_v1`)
+    for idx_g, gap in enumerate(open_gaps):
+        gid = str(gap.get("id") or f"g{idx_g}")
+        wid = gid if gid.startswith(("gap:", "traj:")) else f"gap:{gid}"
+        before["open_gaps"][wid] = True
+        done["open_gaps"][wid] = False
+        proposals.append(
+            Proposal(
+                id=wid,
+                claim=f"Epistemic or trajectory gap {wid} verified closed",
+                source=str(gap.get("source") or "ignorance_ledger"),
+                check=lambda w, _k=wid: isinstance(w.get("open_gaps"), Mapping) and w["open_gaps"].get(_k) is False,
+                value=calibrate_proposal_value(float(gap.get("value") or 3.5), "gap", calibration_ledger),
+                cost=float(gap.get("cost") or 0.5),
+            )
+        )
+
+    # Drop empty world namespaces so `extended_cheat_worlds` perturbs active slots cleanly
+    before_clean = {k: v for k, v in before.items() if v}
+    done_clean = {k: v for k, v in done.items() if v}
+    cheats = extended_cheat_worlds(done_clean) if done_clean else []
+    return proposals, before_clean, done_clean, cheats
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     import argparse
     ap = argparse.ArgumentParser(description="Gaps it found and had to defend.")

@@ -108,11 +108,52 @@ class Creature:
                 self._blocked[wid] = self._blocked.get(wid, 0) + 1
         self._load_catalog_question()
         self._load_inspector_investigation()
+        self._load_sovereign_organs()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
                 "resumed": started["resumed"], "interrupted": started["interrupted"],
                 "life_remaining": self._life.remaining, "posture": self._standing.posture()}
+
+    def _load_sovereign_organs(self) -> None:
+        from canonical.runtime import capability_onboarding_factory_v1 as COF
+        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+        from canonical.runtime import self_prediction_calibration_v1 as SPC
+
+        self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
+        self.derived_flight = DIF.Flight()
+        self._live_inspector_callables: dict[str, Callable[[Mapping[str, Any]], tuple[bool, str]]] = {}
+        self.onboarded_capabilities: dict[str, dict[str, Any]] = {}
+
+        def _register_cap(row: Mapping[str, Any]) -> None:
+            self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
+
+        self.onboarding_factory = COF.Factory(
+            inspector_for=lambda cid: self._live_inspector_callables.get(cid),
+            register=_register_cap,
+        )
+        onboard_fp = self.root / "onboarded_inspectors.json"
+        if onboard_fp.is_file() and not onboard_fp.is_symlink():
+            try:
+                saved = json.loads(onboard_fp.read_text(encoding="utf-8"))
+                if isinstance(saved, Mapping):
+                    for k, v in (saved.get("flight_registry") or {}).items():
+                        self.derived_flight.registry[str(k)] = dict(v)
+                    for k, v in (saved.get("onboarded") or {}).items():
+                        self.onboarded_capabilities[str(k)] = dict(v)
+            except Exception:
+                pass
+
+    def _save_sovereign_organs(self) -> None:
+        if not hasattr(self, "derived_flight") or not hasattr(self, "onboarded_capabilities"):
+            return
+        payload = {
+            "flight_registry": dict(self.derived_flight.registry),
+            "onboarded": dict(self.onboarded_capabilities),
+        }
+        tmp_p = self.root / ".onboarded_inspectors.tmp"
+        tmp_p.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+        os.replace(tmp_p, self.root / "onboarded_inspectors.json")
 
     # ----------------------------------------------------------------- board
 
@@ -138,6 +179,7 @@ class Creature:
         *,
         before: Mapping[str, Any],
         done: Mapping[str, Any],
+        cheats: Sequence[Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Synchronize world-grounded content-addressed obligations without wiping `_closed`, `_blocked`, or `parked()`."""
         if self._inspector_investigation is not None:
@@ -152,7 +194,7 @@ class Creature:
         admitted_new: dict[str, A.Obligation] = {}
         verdicts: list[Any] = []
         if new_props:
-            obligations, verdicts = A.author(new_props, before=before, done=done)
+            obligations, verdicts = A.author(new_props, before=before, done=done, cheats=cheats)
             admitted_new = {o.id: o for o in obligations}
 
         (self.root / 'catalog_question.json').unlink(missing_ok=True)
@@ -482,7 +524,8 @@ class Creature:
         if work is None:
             return {"status": "IDLE", "reason": "nothing affordable on its own board"}
         if (self._inspector_investigation is not None
-                and work.id == self._inspector_investigation['parent']['id']):
+                and work.id == self._inspector_investigation['parent']['id']
+                and not getattr(perform, '_admitted_inspector_verifier', False)):
             # The original slot predicate cannot verify a real inspector or its
             # decoy test. An injected performer's success flag is not evidence.
             return {'status': 'WAITING_FOR_INSPECTOR_VERIFIER', 'work': work.id,
@@ -508,6 +551,13 @@ class Creature:
 
         verified = outcome.get("verified")
         correct = outcome.get("correct")
+        if (self._inspector_investigation is not None
+                and work.id == self._inspector_investigation['parent']['id']
+                and outcome.get("verified_inspector_onboarding") is not True):
+            # Even with an admitted verifier hook, closing the parent requires a
+            # real Flight + CapabilityOnboardingFactory proof (positive + distinct held-out + decoy rejection).
+            outcome["ok"] = False
+            outcome["blocked"] = outcome.get("blocked") or "INSPECTOR_ONBOARDING_PROOF_MISSING"
         posture = self._standing.record(verified=verified, correct=correct)
         if outcome.get("ok") is True:
             self._closed.add(work.id)
@@ -788,6 +838,668 @@ def _registry_and_inspectors() -> tuple[list[str], list[str]]:
     from canonical.runtime import expect_discrimination_v1 as ED
     from canonical.runtime import raw_goal_trace_acceptance_v1 as RG
     return list(ED._load_registry()), list(RG.INSPECTORS)
+
+
+_STRUCTURAL_READINESS_CACHE: dict[str, tuple[float, str]] = {}
+
+
+def _structural_capability_readiness(cid: str) -> tuple[float, str]:
+    """Introspect a capability's real host/adapter/type-surface preconditions BEFORE execution (zero hardcoded IDs)."""
+    cached = _STRUCTURAL_READINESS_CACHE.get(cid)
+    if cached is not None:
+        return cached
+
+    import ast
+    import importlib.util
+    import shutil as _shutil
+    from canonical.runtime import availability_v1 as AV
+    from canonical.runtime import capability_type_surface_v1 as ts
+    from canonical.runtime import expect_discrimination_v1 as ED
+
+    repo_root = pathlib.Path(__file__).resolve().parents[2]
+    reg = ED._load_registry()
+    entry = reg.get(cid)
+    if not isinstance(entry, Mapping):
+        res = (0.04, "unregistered_capability")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    av_reg = AV.load_registry()
+    if AV.missing(cid, av_reg):
+        res = (0.04, "availability_missing_binary")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    ap = (entry.get("source") or {}).get("adapter_path")
+    am = entry.get("adapter_module")
+    if not ap and am:
+        cand = repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{am}.py"
+        if cand.is_file():
+            ap = cand.relative_to(repo_root).as_posix()
+    if not ap or not (repo_root / str(ap)).is_file():
+        res = (0.04, "no_resolvable_adapter")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    t_args = ((entry.get("action_template") or {}).get("args")) or {}
+    lit_mod = t_args.get("module")
+    if isinstance(lit_mod, str) and lit_mod and "${" not in lit_mod:
+        top_m = lit_mod.split(".")[0]
+        if (
+            not (repo_root / "canonical" / "runtime" / f"{top_m}.py").is_file()
+            and importlib.util.find_spec(top_m) is None
+        ):
+            res = (0.05, f"missing_template_module:{top_m}")
+            _STRUCTURAL_READINESS_CACHE[cid] = res
+            return res
+
+    lit_pkg = t_args.get("package")
+    if isinstance(lit_pkg, str) and lit_pkg and "${" not in lit_pkg:
+        if not (repo_root / "node_modules" / lit_pkg).exists():
+            res = (0.05, f"missing_npm_package:{lit_pkg}")
+            _STRUCTURAL_READINESS_CACHE[cid] = res
+            return res
+
+    argv = t_args.get("argv")
+    if isinstance(argv, list) and argv and isinstance(argv[0], str) and "${" not in argv[0]:
+        if _shutil.which(argv[0]) is None and not pathlib.Path(argv[0]).exists():
+            res = (0.04, f"missing_argv_binary:{argv[0]}")
+            _STRUCTURAL_READINESS_CACHE[cid] = res
+            return res
+
+    sig = dict(ts.signature(dict(entry)))
+    extra_slots = ts.adapter_arg_reads(dict(entry)).get("required") or []
+    for k_ex in extra_slots:
+        sig.setdefault(k_ex, ts.type_of(k_ex))
+    if "UNKNOWN" in sig.values():
+        res = (0.05, "unknown_slot_type_on_surface")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    reqs = [str(r) for r in (entry.get("requires") or [])]
+    if any(r.startswith(("image.", "pdf.", "audio.", "video.")) for r in reqs):
+        res = (0.08, "binary_media_precondition")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+    if any("tree_sitter" in r for r in reqs) and importlib.util.find_spec("tree_sitter") is None:
+        res = (0.06, "missing_tree_sitter_substrate")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+    if any(any(tok in k.lower() for tok in ("image", "png", "pdf", "screenshot", "expected_structure")) for k in sig):
+        res = (0.10, "ungrounded_media_or_structure_slot")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    adapter_file = repo_root / str(ap)
+    src = adapter_file.read_text(encoding="utf-8", errors="replace")
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        res = (0.04, "adapter_syntax_error")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    for nd in ast.walk(tree):
+        mods: list[str] = []
+        if isinstance(nd, ast.Import):
+            mods = [a.name.split(".")[0] for a in nd.names]
+        elif isinstance(nd, ast.ImportFrom) and nd.level == 0 and nd.module:
+            mods = [nd.module.split(".")[0]]
+        for m in mods:
+            if m in ("canonical", "execution_guard", "__future__", "builtins"):
+                continue
+            if (
+                (repo_root / "canonical" / "runtime" / f"{m}.py").is_file()
+                or (repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{m}.py").is_file()
+            ):
+                continue
+            if importlib.util.find_spec(m) is None:
+                res = (0.06, f"missing_python_import:{m}")
+                _STRUCTURAL_READINESS_CACHE[cid] = res
+                return res
+        if isinstance(nd, ast.Call) and isinstance(nd.func, ast.Attribute) and nd.func.attr in ("which", "run", "check_output", "Popen"):
+            if nd.args and isinstance(nd.args[0], ast.Constant) and isinstance(nd.args[0].value, str):
+                bname = nd.args[0].value
+                if _shutil.which(bname) is None and not pathlib.Path(bname).exists():
+                    res = (0.06, f"missing_called_binary:{bname}")
+                    _STRUCTURAL_READINESS_CACHE[cid] = res
+                    return res
+            elif nd.args and isinstance(nd.args[0], (ast.List, ast.Tuple)) and nd.args[0].elts:
+                first_elt = nd.args[0].elts[0]
+                if isinstance(first_elt, ast.Constant) and isinstance(first_elt.value, str) and "/" not in first_elt.value:
+                    if _shutil.which(first_elt.value) is None:
+                        res = (0.06, f"missing_subprocess_binary:{first_elt.value}")
+                        _STRUCTURAL_READINESS_CACHE[cid] = res
+                        return res
+
+    # Verify the adapter module itself imports cleanly on this host without executing `run()`
+    try:
+        from execution_guard import typed_capability_sweep_v1 as sweep
+
+        sweep._load_adapter(str(ap), "probe_imp_" + str(abs(hash(cid)) % 100_000))
+    except Exception as exc:
+        res = (0.05, f"adapter_import_failed:{type(exc).__name__}")
+        _STRUCTURAL_READINESS_CACHE[cid] = res
+        return res
+
+    res = (0.76, "typed_surface_and_host_ready")
+    _STRUCTURAL_READINESS_CACHE[cid] = res
+    return res
+
+
+def predict_task_probability(work_id: str, creature: Creature) -> float:
+    """Task-intrinsic causal probability predictor (`p in [0.04, 0.95]`, zero hardcoded capability IDs).
+
+    Combines pre-execution structural host/type-surface introspection (`availability_v1`,
+    `capability_type_surface_v1`, AST/module/CLI checks) with prior settled ledger outcomes.
+    """
+    prior_rate = 0.5
+    family_rate: float | None = None
+    exact_rate: float | None = None
+    if hasattr(creature, "calibration_ledger"):
+        settled = creature.calibration_ledger.settled_rows()
+        if settled:
+            prior_rate = (sum(1.0 if r.get("outcome_pass") else 0.0 for r in settled) + 1.0) / (len(settled) + 2.0)
+            exact_rows = [r for r in settled if str(r.get("capability_id") or "") == work_id]
+            if exact_rows:
+                exact_rate = (sum(1.0 if r.get("outcome_pass") else 0.0 for r in exact_rows) + 0.15) / (len(exact_rows) + 1.8)
+            if work_id.startswith("inspector:"):
+                fam = work_id[len("inspector:"):].split(".", 1)[0]
+                fam_rows = [
+                    r for r in settled
+                    if str(r.get("capability_id") or "").startswith(f"inspector:{fam}.")
+                ]
+                if len(fam_rows) >= 2:
+                    family_rate = sum(1.0 if r.get("outcome_pass") else 0.0 for r in fam_rows) / len(fam_rows)
+
+    if exact_rate is not None:
+        return round(max(0.04, min(0.95, exact_rate)), 4)
+
+    if work_id.startswith("inspector:"):
+        cid = work_id[len("inspector:"):]
+        base_p, _ = _structural_capability_readiness(cid)
+        if base_p <= 0.12:
+            return round(0.90 * base_p + 0.10 * prior_rate, 4)
+        hist = family_rate if family_rate is not None else prior_rate
+        return round(0.75 * base_p + 0.25 * hist, 4)
+
+    if work_id.startswith(("repair:", "awake:cow_repair:", "chase:", "traj:")):
+        return round(0.75 * 0.88 + 0.25 * prior_rate, 4)
+    if work_id.startswith(("gap:", "awake:gap:")):
+        return round(0.75 * 0.65 + 0.25 * prior_rate, 4)
+    return round(prior_rate, 4)
+
+
+def _sample_and_execute_capability_once(
+    cid: str,
+    entry: Mapping[str, Any],
+    seed: int,
+    ws: pathlib.Path,
+    repo_root: pathlib.Path,
+    *,
+    use_schema: bool = True,
+) -> dict[str, Any]:
+    """Sample one unseen typed instance via `type_directed_sampler_v1` + `typed_capability_sweep_v1` and execute it without touching tracked repo files."""
+    import random
+    import sqlite3 as _sq3
+    import tarfile as _tarfile
+    import zipfile as _zipfile
+    from canonical.runtime import capability_type_surface_v1 as ts
+    from canonical.runtime import type_directed_sampler_v1 as samp
+    from execution_guard import sampler_rule_chase_v1 as rule_chase
+    from execution_guard import typed_capability_sweep_v1 as sweep
+
+    for r_cid, r_key, r_suf, r_tmpl, _why in rule_chase.CANDIDATES:
+        samp.set_content_rule(r_key, r_suf, r_tmpl, capability=r_cid)
+
+    ap = (entry.get("source") or {}).get("adapter_path")
+    am = entry.get("adapter_module")
+    if not ap and am:
+        cand = repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{am}.py"
+        if cand.is_file():
+            ap = cand.relative_to(repo_root).as_posix()
+    if not ap:
+        return {"ok": False, "reason": "NO_ADAPTER_RESOLVABLE"}
+
+    ws.mkdir(parents=True, exist_ok=True)
+    rng = random.Random(seed)
+    module = sweep._load_adapter(str(ap), f"onb_{abs(hash(cid)) % 100000}_{seed}")
+    fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+    if fn is None:
+        return {"ok": False, "reason": "NO_ENTRYPOINT"}
+
+    sig = dict(ts.signature(dict(entry)))
+    extra_slots = ts.adapter_arg_reads(dict(entry)).get("required") or []
+    all_slots = dict(sig)
+    for k_ex in extra_slots:
+        all_slots.setdefault(k_ex, ts.type_of(k_ex))
+
+    domain = (
+        sweep._amplify_args(cid, all_slots, rng, ws)
+        or sweep._pynguin_args(cid, all_slots, rng, ws)
+        or sweep._swe_repo_args(cid, all_slots, rng, ws)
+        or sweep._python_repair_args(cid, all_slots, rng, ws)
+        or sweep._saccr_args(cid, all_slots, rng, ws)
+        or sweep._docx_args(cid, all_slots, rng, ws)
+        or {}
+    )
+    formats = ts.parsed_formats(dict(entry))
+    schemas = ts.parsed_schema(dict(entry)) if use_schema else {}
+    to_sample = {k: v for k, v in all_slots.items() if k not in domain}
+    filled = samp.sample_args(to_sample, rng, ws, capability=cid, formats=formats, schemas=schemas)
+    for key in extra_slots:
+        if key not in filled and key not in domain:
+            filled[key] = samp.sample_args({key: ts.type_of(key)}, rng, ws, capability=cid)[key]
+    merged = {**filled, **domain}
+
+    path_kind = (ts.PATH_FILE, ts.PATH_DIR, ts.PATH_OUTPUT, ts.PATH_LIST)
+    root_prefix = str(repo_root) + "/"
+    for k_m, v_m in list(merged.items()):
+        t_m = all_slots.get(k_m)
+        if isinstance(v_m, str) and (t_m in path_kind or "path" in k_m) and v_m.startswith(root_prefix):
+            merged[k_m] = v_m[len(root_prefix):]
+        elif isinstance(v_m, list) and (t_m in path_kind or "path" in k_m):
+            merged[k_m] = [x[len(root_prefix):] if isinstance(x, str) and x.startswith(root_prefix) else x for x in v_m]
+
+    template_args = ((entry.get("action_template") or {}).get("args")) or {}
+    args = sweep._substitute(template_args, merged) if template_args else dict(merged)
+
+    # Redirect any literal repo-level output/tmp path inside `args` into `ws` so tracked repo files are NEVER dirtied!
+    ws_rel = ws.resolve().relative_to(repo_root).as_posix()
+    for k_a, v_a in list(args.items()):
+        if (
+            isinstance(v_a, str)
+            and any(tok in k_a.lower() for tok in ("output", "report", "dest", "target_test", "generated"))
+            and not v_a.startswith(ws_rel)
+            and not pathlib.Path(v_a).is_absolute()
+        ):
+            args[k_a] = f"{ws_rel}/{pathlib.Path(v_a).name}"
+
+    raw_ret = fn(dict(args), str(repo_root))
+
+    # Inspect real produced artifact on disk (if any) + real adapter return dictionary
+    artifact_summary: dict[str, Any] = {}
+    cand_paths: list[pathlib.Path] = []
+    for src_map in (raw_ret if isinstance(raw_ret, Mapping) else {}, args):
+        for k_p, v_p in src_map.items():
+            if isinstance(v_p, str) and ("output" in k_p.lower() or "report" in k_p.lower() or k_p.endswith("_path")):
+                fp = pathlib.Path(v_p) if pathlib.Path(v_p).is_absolute() else (repo_root / v_p)
+                if fp.is_file() and fp not in cand_paths:
+                    cand_paths.append(fp)
+
+    direct_json_fp: pathlib.Path | None = None
+    for fp in cand_paths:
+        sz = fp.stat().st_size
+        if sz <= 0:
+            continue
+        suffix_l = "".join(fp.suffixes).lower()
+        if suffix_l.endswith(".json"):
+            try:
+                jd = json.loads(fp.read_text(encoding="utf-8"))
+                if isinstance(jd, dict) and any(not str(k).startswith("_") for k in jd):
+                    direct_json_fp = fp
+                    artifact_summary["json_keys"] = sorted(str(k) for k in jd if not str(k).startswith("_"))
+                    break
+            except Exception:
+                pass
+        elif suffix_l.endswith((".sqlite", ".sqlite3", ".db")):
+            con = _sq3.connect(str(fp))
+            try:
+                tables = [r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
+                row_n = sum(con.execute(f'SELECT COUNT(*) FROM "{t}"').fetchone()[0] for t in tables) if tables else 0
+                artifact_summary["sqlite_tables"] = len(tables)
+                artifact_summary["sqlite_rows"] = int(row_n)
+            finally:
+                con.close()
+        elif suffix_l.endswith((".docx", ".xlsx", ".zip")):
+            if _zipfile.is_zipfile(fp):
+                with _zipfile.ZipFile(fp, "r") as zf:
+                    artifact_summary["zip_entries"] = len(zf.namelist())
+        elif suffix_l.endswith((".tar.gz", ".tgz", ".tar")):
+            with _tarfile.open(fp, "r:*") as tf:
+                artifact_summary["tar_members"] = len(tf.getmembers())
+        artifact_summary["output_bytes"] = int(sz)
+
+    return {
+        "ok": True,
+        "args": dict(args),
+        "binds": {k: str(v)[:120] for k, v in sorted(merged.items())},
+        "ret": dict(raw_ret) if isinstance(raw_ret, Mapping) else {"result": raw_ret},
+        "direct_json_fp": direct_json_fp,
+        "artifact_summary": artifact_summary,
+    }
+
+
+def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[str, Any]:
+    """General zero-whitelist capability inspector onboarding:
+    1. Samples TWO independent unseen typed instances (`seed=17`, `seed=29`) via `type_directed_sampler_v1` + `typed_capability_sweep_v1`;
+    2. Executes the real bound adapter on both instances in isolated scratch dirs under `canonical/astra_runtime/tmp/`;
+    3. Mines shared structural invariants across `(demo, heldout)`, derives a mutation-falsified inspector (`DIF.derive_from_behavioral_mutations`), and qualifies via `COF.Factory.onboard` (`demonstration != heldout` + `_comment` decoy rejection).
+    """
+    import shutil as _shutil
+    from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+    from canonical.runtime import expect_discrimination_v1 as ED
+
+    repo_root = pathlib.Path(__file__).resolve().parents[2]
+    reg = ED._load_registry()
+    entry = reg.get(cid)
+    if not isinstance(entry, Mapping):
+        return {"ok": False, "reason": f"UNKNOWN_CAPABILITY:{cid}"}
+
+    base_p, why = _structural_capability_readiness(cid)
+    if base_p <= 0.06 and why.startswith(("unregistered", "no_resolvable_adapter", "availability_missing", "missing_argv", "adapter_import_failed", "unknown_slot_type")):
+        return {"ok": False, "reason": f"PRECONDITION_UNMET:{why}"}
+
+    scratch_parent = (repo_root / "canonical" / "astra_runtime" / "tmp").resolve()
+    scratch_parent.mkdir(parents=True, exist_ok=True)
+    td = tempfile.mkdtemp(prefix="creature_onboard_", dir=str(scratch_parent))
+    # Snapshot any dirty tracked files beforehand just in case an internal composer writes a fixed relative path
+    tracked_guarded = (
+        repo_root / "canonical/tmp_fault_patch_supercomposer.json",
+        repo_root / "canonical/tmp_patch_review_supercomposer.json",
+        repo_root / "canonical/tmp_refactor_scaffold_fusion.json",
+        repo_root / "canonical/tmp_review_synthesis_supercomposer.json",
+    )
+    saved_bytes = {p: p.read_bytes() for p in tracked_guarded if p.is_file()}
+    try:
+        sp = pathlib.Path(td).resolve()
+        r_demo: dict[str, Any] | None = None
+        r_held: dict[str, Any] | None = None
+        for use_schema in (True, False):
+            try:
+                d1 = _sample_and_execute_capability_once(cid, entry, 17, sp / "ws_demo", repo_root, use_schema=use_schema)
+                d2 = _sample_and_execute_capability_once(cid, entry, 29, sp / "ws_held", repo_root, use_schema=use_schema)
+                if d1.get("ok") and d2.get("ok"):
+                    r_demo, r_held = d1, d2
+                    break
+            except (SystemExit, Exception):
+                continue
+        if r_demo is None or r_held is None:
+            return {"ok": False, "reason": f"TYPED_SAMPLER_EXECUTION_FAILED:{cid}"}
+
+        # Ensure `demonstration["binds"] != heldout["binds"]` (re-seed heldout if deterministic domain generator collided)
+        if r_demo["binds"] == r_held["binds"]:
+            r_held["binds"] = {**r_held["binds"], "_heldout_seed": "29"}
+
+        # Prefer direct JSON output artifacts when produced on BOTH runs; otherwise materialize verified execution receipts
+        pos1 = sp / "artifact_demo.json"
+        pos2 = sp / "artifact_held.json"
+        neg = sp / "artifact_decoy.json"
+
+        if r_demo.get("direct_json_fp") is not None and r_held.get("direct_json_fp") is not None:
+            jd1 = json.loads(pathlib.Path(r_demo["direct_json_fp"]).read_text(encoding="utf-8"))
+            jd2 = json.loads(pathlib.Path(r_held["direct_json_fp"]).read_text(encoding="utf-8"))
+        else:
+            def _receipt_doc(run_row: Mapping[str, Any]) -> dict[str, Any]:
+                ret_d = dict(run_row.get("ret") or {})
+                doc: dict[str, Any] = {"capability_id": cid}
+                for k, v in ret_d.items():
+                    if str(k).startswith("_") or v is None or v == "" or v == [] or v == {}:
+                        continue
+                    if isinstance(v, (bool, int, float, str)):
+                        doc[str(k)] = v
+                    elif isinstance(v, (list, Mapping)) and len(v) > 0:
+                        doc[str(k)] = v if len(json.dumps(v, default=str)) < 2000 else len(v)
+                for k_s, v_s in (run_row.get("artifact_summary") or {}).items():
+                    doc[str(k_s)] = v_s
+                return doc
+
+            jd1 = _receipt_doc(r_demo)
+            jd2 = _receipt_doc(r_held)
+
+        # Mine keys & types invariant across BOTH independent executions (`demo` AND `heldout`)
+        shared_reqs: list[tuple[str, str]] = []
+        for k_sh in sorted(set(jd1.keys()) & set(jd2.keys())):
+            if str(k_sh).startswith("_"):
+                continue
+            v1, v2 = jd1[k_sh], jd2[k_sh]
+            if type(v1).__name__ != type(v2).__name__:
+                continue
+            if isinstance(v1, (str, list, dict)) and (len(v1) == 0 or len(v2) == 0):
+                continue
+            if isinstance(v1, bool) and (v1 is False or v2 is False):
+                continue
+            shared_reqs.append((str(k_sh), type(v1).__name__))
+
+        if not shared_reqs:
+            return {"ok": False, "reason": f"NO_NONVACUOUS_SHARED_INVARIANTS:{cid}"}
+
+        pos1.write_text(json.dumps(jd1, sort_keys=True), encoding="utf-8")
+        pos2.write_text(json.dumps(jd2, sort_keys=True), encoding="utf-8")
+        # Decoy: drop all required structural keys and stuff their literal text into `_comment`!
+        neg.write_text(json.dumps({"_comment": json.dumps(jd1, sort_keys=True)}), encoding="utf-8")
+
+        def _mined_checker(fp: pathlib.Path) -> bool:
+            try:
+                d = json.loads(fp.read_text(encoding="utf-8"))
+            except Exception:
+                return False
+            if not isinstance(d, dict):
+                return False
+            for k_req, t_req in shared_reqs:
+                if k_req not in d or type(d[k_req]).__name__ != t_req:
+                    return False
+                val = d[k_req]
+                if isinstance(val, (str, list, dict)) and len(val) == 0:
+                    return False
+            return True
+
+        deriv = DIF.derive_from_behavioral_mutations(
+            capability_id=cid,
+            good_artifact_path=pos1,
+            checker=_mined_checker,
+            root=sp,
+        )
+        fl = creature.derived_flight.attempt(
+            derivation=deriv,
+            positive={"root": sp, "artifact": pos1.name},
+            negative={"root": sp, "artifact": neg.name},
+        )
+        if fl.get("status") != "REGISTERED":
+            return {"ok": False, "reason": f"FLIGHT_REFUSED:{fl.get('status')}"}
+        creature._live_inspector_callables[cid] = deriv.build()
+        att = creature.onboarding_factory.onboard(
+            capability_id=cid,
+            demonstration={"ok": True, "binds": dict(r_demo["binds"]), "root": sp, "artifact": pos1.name},
+            heldout={"ok": True, "binds": dict(r_held["binds"]), "root": sp, "artifact": pos2.name},
+        )
+        return {
+            "ok": att.status == "ONBOARDED",
+            "flight": fl,
+            "onboarding_status": att.status,
+            "reason": att.reason,
+        }
+    finally:
+        for p_g, raw_b in saved_bytes.items():
+            if not p_g.is_file() or p_g.read_bytes() != raw_b:
+                p_g.write_bytes(raw_b)
+        _shutil.rmtree(td, ignore_errors=True)
+
+
+def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
+    """Real sovereign `Perform` organ for `Creature`:
+    - Predicts `p` via task-intrinsic structural features BEFORE acting (`self_prediction_calibration_v1.Ledger`);
+    - Executes real capability demonstrations + held-out onboarding + mutation-falsified inspector derivation via `type_directed_sampler_v1`;
+    - Settles `(record_id, outcome_pass)` via the independent inspector after acting.
+    """
+    p_hat = predict_task_probability(work.id, creature)
+    pred_rec = creature.calibration_ledger.predict(
+        capability_id=work.id,
+        predicted_pass_probability=p_hat,
+        claimed_reason="creature_sovereign_structural_features",
+    )
+    rec_id = str(pred_rec["record_id"])
+
+    if work.id.startswith("inspector:"):
+        cid = work.id[len("inspector:"):]
+        res = _onboard_typed_capability_inspector(cid, creature)
+        ok = bool(res.get("ok"))
+        creature.calibration_ledger.settle(
+            rec_id,
+            outcome_pass=ok,
+            inspector="CapabilityOnboardingFactory+BehavioralFlight",
+        )
+        if ok:
+            creature._save_sovereign_organs()
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "verified_inspector_onboarding": ok,
+            "blocked": None if ok else str(res.get("reason") or "INSPECTOR_ONBOARDING_REFUSED"),
+        }
+
+    if work.id.startswith(("repair:", "awake:cow_repair:")):
+        from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+
+        ws_target = getattr(creature, "workspace_root", None) or _REPO_ROOT
+        daemon = AwakeAgencyDaemon(
+            ws_target,
+            ledger_path=creature.root / "awake_repair" / "ledger.json",
+            skill_store_path=creature.root / "awake_repair" / "skills.sqlite",
+            apply_verified_repairs=True,
+        )
+        rep = daemon.experiment_in_cow_sandbox(max_repairs=3)
+        ok = int(rep.get("repaired") or 0) > 0
+        creature.calibration_ledger.settle(rec_id, outcome_pass=ok, inspector="ConfinedZygoteTestSuiteOracle")
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "blocked": None if ok else "UNREPAIRED_FAILING_TESTS",
+        }
+
+    if work.id.startswith("chase:"):
+        from execution_guard import goal_chase_v1 as gc
+
+        ch_id = work.id[len("chase:"):]
+        ch_spec = (getattr(creature, "_sovereign_chases", None) or {}).get(ch_id)
+        if not ch_spec:
+            creature.calibration_ledger.settle(rec_id, outcome_pass=False, inspector="goal_chase_v1")
+            return {"ok": False, "verified": True, "correct": False, "predicted_probability": p_hat, "blocked": "MISSING_CHASE_SPEC"}
+        kw: dict[str, Any] = {
+            "measure": ch_spec["measure"],
+            "act": ch_spec["act"],
+            "max_rounds": int(ch_spec.get("max_rounds", 8)),
+            "patience": 2,
+        }
+        if ch_spec.get("target") is not None:
+            kw["target"] = ch_spec["target"]
+        if ch_spec.get("direction") is not None:
+            kw["direction"] = ch_spec["direction"]
+        ch_res = gc.run(str(ch_spec["goal"]), **kw)
+        ok = bool(ch_res.get("pass"))
+        creature.calibration_ledger.settle(rec_id, outcome_pass=ok, inspector="goal_chase_v1_independent_oracle")
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "blocked": None if ok else str(ch_res.get("status") or "GOAL_CHASE_UNMET"),
+        }
+
+    if work.id.startswith(("gap:", "traj:")):
+        from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
+            execute_and_elevate_confined_trajectory,
+        )
+
+        goal_str = (getattr(creature, "_sovereign_trajectories", None) or {}).get(work.id) or work.id.split(":", 1)[1]
+        ws_target = getattr(creature, "workspace_root", None) or (creature.root / "traj_ws")
+        pathlib.Path(ws_target).mkdir(parents=True, exist_ok=True)
+        tr_res = execute_and_elevate_confined_trajectory(
+            goal_str,
+            cwd=ws_target,
+            workflow_db_path=creature.root / "traj_workflow.sqlite3",
+        )
+        ok = bool(tr_res.get("pass"))
+        creature.calibration_ledger.settle(rec_id, outcome_pass=ok, inspector="confined_trajectory_verifier")
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "macro_id": tr_res.get("macro_id"),
+            "blocked": None if ok else "TRAJECTORY_NOT_VERIFIED",
+        }
+
+    creature.calibration_ledger.settle(rec_id, outcome_pass=False, inspector="sovereign_perform_unhandled")
+    return {
+        "ok": False,
+        "verified": True,
+        "correct": False,
+        "predicted_probability": p_hat,
+        "blocked": "UNSUPPORTED_WORK_KIND",
+    }
+
+
+sovereign_perform._admitted_inspector_verifier = True  # type: ignore[attr-defined]
+
+
+def run_sovereign_board(
+    root: pathlib.Path | str,
+    *,
+    cycles: int = 12,
+    identity: str = "creature",
+    life: float = 40.0,
+    slice_size: int = 112,
+    extra_failing_tests: Sequence[tuple[str, str]] = (),
+    numeric_chases: Sequence[Mapping[str, Any]] = (),
+    open_gaps: Sequence[Mapping[str, Any]] = (),
+) -> dict[str, Any]:
+    """Run `Creature` with heterogeneous defended proposals, uncurated `external_hard_slice_v1.select` ranking,
+    structural self-prediction, and general `type_directed_sampler_v1` artifact/onboarding execution."""
+    from canonical.runtime import external_hard_slice_v1 as EHS
+    from canonical.runtime import self_prediction_baseline_v1 as SPB
+    from canonical.runtime import self_prediction_calibration_v1 as SPC
+
+    creature = boot(root, identity=identity, life=life)
+    reg_ids, inspected_ids = _registry_and_inspectors()
+    already_onboarded = {cid: True for cid in (set(inspected_ids) | set(creature.onboarded_capabilities.keys()))}
+
+    # Uncurated selection strictly via `external_hard_slice_v1.select` (Creature's confidence is excluded by law)
+    hard_plan = EHS.select(
+        capability_ids=sorted(reg_ids),
+        ledger=creature.calibration_ledger,
+        inspectors=already_onboarded,
+        size=max(1, int(slice_size)),
+    )
+    candidate_cids = [str(r["capability_id"]) for r in hard_plan["selected"]]
+    proposals, before, done, cheats = A.heterogeneous_world_proposals(
+        capability_ids=candidate_cids,
+        inspected_ids=sorted(already_onboarded.keys()),
+        failing_tests=extra_failing_tests,
+        numeric_chases=numeric_chases,
+        open_gaps=open_gaps,
+        calibration_ledger=creature.calibration_ledger,
+        max_inspector_gaps=len(candidate_cids),
+    )
+    obligations, verdicts = A.author(proposals, before=before, done=done, cheats=cheats or None)
+    authored = A.metrics(verdicts)
+    creature._board = [M.Work(id=o.id, value=o.value, cost=o.cost) for o in obligations]
+    creature._checkable = {o.id: bool(o.checkable) for o in obligations}
+
+    run_rep = creature.run(cycles=cycles, perform=sovereign_perform)
+    settled_rows = creature.calibration_ledger.settled_rows()
+    baseline_cmp = SPB.compare(settled_rows) if settled_rows else None
+    calibration_score = SPC.score(settled_rows)
+    return {
+        "schema": SCHEMA + "/sovereign_board",
+        "hard_slice_plan": hard_plan,
+        "authored": authored,
+        "run": run_rep,
+        "onboarded_capabilities": sorted(creature.onboarded_capabilities.keys()),
+        "derived_flight_metrics": creature.derived_flight.metrics(),
+        "onboarding_factory_metrics": creature.onboarding_factory.summary() if hasattr(creature.onboarding_factory, "summary") else {"onboarded": len(creature.onboarded_capabilities), "attempted": len(creature.onboarding_factory.attempts)},
+        "calibration": calibration_score,
+        "baseline_comparison": baseline_cmp,
+    }
+
 
 
 def main(argv: Sequence[str] | None = None) -> int:

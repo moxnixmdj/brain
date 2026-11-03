@@ -224,3 +224,172 @@ def _tally(rows: Sequence[Mapping[str, Any]]) -> dict[str, int]:
         key = str(row.get("status"))
         counts[key] = counts.get(key, 0) + 1
     return counts
+
+
+@dataclass
+class BehavioralDerivation(Derivation):
+    """Inspector derived by probing which mutations of a known-good artifact the real checker rejects."""
+
+    json_required_keys: list[tuple[str, str]] = field(default_factory=list)
+    active_line_requirements: list[str] = field(default_factory=list)
+    mutations_tested: int = 0
+    mutations_rejected_by_checker: int = 0
+
+    def build(self) -> Callable[[Mapping[str, Any]], tuple[bool, str]]:
+        cpaths = list(self.checker_paths)
+        json_reqs = list(self.json_required_keys)
+        line_reqs = list(self.active_line_requirements)
+        lit_reqs = [r.literal for r in self.requirements]
+
+        def inspect(world: Mapping[str, Any]) -> tuple[bool, str]:
+            import json as _json
+
+            root = pathlib.Path(world.get("root") or ".").resolve()
+            for rel in cpaths:
+                if not (root / rel).is_file():
+                    return False, f"DERIVED_INSPECTOR_CHECKER_MISSING:{rel}"
+            art_rel = str(world.get("artifact") or "")
+            if not art_rel:
+                return False, "DERIVED_INSPECTOR_NO_ARTIFACT_NAMED"
+            target = (root / art_rel).resolve()
+            try:
+                target.relative_to(root)
+            except ValueError:
+                return False, "DERIVED_INSPECTOR_ARTIFACT_OUTSIDE_ROOT"
+            if not target.is_file():
+                return False, f"DERIVED_INSPECTOR_ARTIFACT_MISSING:{art_rel}"
+            raw_text = target.read_text(encoding="utf-8", errors="replace")
+
+            if json_reqs:
+                try:
+                    parsed = _json.loads(raw_text)
+                except Exception:
+                    return False, "DERIVED_INSPECTOR_INVALID_JSON"
+                if not isinstance(parsed, Mapping):
+                    return False, "DERIVED_INSPECTOR_JSON_ROOT_NOT_OBJECT"
+                for k_req, t_req in json_reqs:
+                    if k_req not in parsed or k_req.startswith("_"):
+                        return False, f"DERIVED_INSPECTOR_MISSING_JSON_KEY:{k_req}"
+                    val = parsed[k_req]
+                    if type(val).__name__ != t_req:
+                        return False, f"DERIVED_INSPECTOR_WRONG_JSON_TYPE:{k_req}:{type(val).__name__}!={t_req}"
+                    if isinstance(val, (str, list, dict)) and len(val) == 0:
+                        return False, f"DERIVED_INSPECTOR_EMPTY_JSON_VALUE:{k_req}"
+                return True, "BEHAVIORAL_JSON_INSPECTOR_PASSED"
+
+            # Strip comment-only lines so moving required tokens into `# ...` or `// ...` decoys fails closed!
+            active_lines = [
+                ln.strip()
+                for ln in raw_text.splitlines()
+                if ln.strip() and not ln.lstrip().startswith(("#", "//", "/*", "--"))
+            ]
+            active_text = "\n".join(active_lines)
+            for req_tok in (line_reqs or lit_reqs):
+                if req_tok not in active_text:
+                    return False, f"DERIVED_INSPECTOR_MISSING_ACTIVE_REQUIREMENT:{req_tok[:48]}"
+            return True, "BEHAVIORAL_INSPECTOR_PASSED"
+
+        return inspect
+
+
+def derive_from_behavioral_mutations(
+    *,
+    capability_id: str,
+    good_artifact_path: pathlib.Path | str,
+    checker: Callable[[pathlib.Path], bool],
+    checker_paths: Sequence[str] = (),
+    root: pathlib.Path | str | None = None,
+) -> BehavioralDerivation:
+    """Derive an inspector by mutating a known-good artifact and recording what `checker` actually rejects."""
+    import json as _json
+    import tempfile as _tempfile
+
+    base_root = pathlib.Path(root).resolve() if root is not None else pathlib.Path(".").resolve()
+    art_p = pathlib.Path(good_artifact_path)
+    if not art_p.is_absolute():
+        art_p = (base_root / art_p).resolve()
+    usable_checkers = [str(p) for p in checker_paths if (base_root / str(p)).is_file()]
+    if not art_p.is_file():
+        return BehavioralDerivation(
+            capability_id, [], usable_checkers, refused=True, reason="KNOWN_GOOD_ARTIFACT_MISSING"
+        )
+    if not bool(checker(art_p)):
+        return BehavioralDerivation(
+            capability_id, [], usable_checkers, refused=True, reason="KNOWN_GOOD_REJECTED_BY_CHECKER"
+        )
+
+    raw_good = art_p.read_text(encoding="utf-8", errors="replace")
+    tested = 0
+    rejected = 0
+    json_reqs: list[tuple[str, str]] = []
+    line_reqs: list[str] = []
+    req_rows: list[Requirement] = []
+
+    with _tempfile.TemporaryDirectory(prefix="brain_mut_probe_") as td:
+        probe_fp = pathlib.Path(td) / art_p.name
+
+        def _probe_text(txt: str) -> bool:
+            nonlocal tested, rejected
+            tested += 1
+            probe_fp.write_text(txt, encoding="utf-8")
+            ok_m = bool(checker(probe_fp))
+            if not ok_m:
+                rejected += 1
+            return ok_m
+
+        parsed_json: Any = None
+        is_json = False
+        try:
+            parsed_json = _json.loads(raw_good)
+            is_json = isinstance(parsed_json, dict) and bool(parsed_json)
+        except Exception:
+            is_json = False
+
+        if is_json:
+            for key, val in list(parsed_json.items()):
+                if str(key).startswith("_"):
+                    continue
+                dropped = {k: v for k, v in parsed_json.items() if k != key}
+                # Decoy: stuff the removed key/value into a `_comment` field so pure substring checkers pass while real structural checkers fail
+                dropped["_comment"] = f"{key}: {_json.dumps(val)}"
+                if not _probe_text(_json.dumps(dropped)):
+                    json_reqs.append((str(key), type(val).__name__))
+                    req_rows.append(Requirement(str(key), usable_checkers[0] if usable_checkers else "<behavioral_checker>"))
+        else:
+            lines = raw_good.splitlines()
+            for idx, ln in enumerate(lines):
+                stripped = ln.strip()
+                if len(stripped) < 3 or stripped.startswith(("#", "//")):
+                    continue
+                # Comment-out mutation: keeps exact literal bytes in file behind `# `, testing real semantic discrimination!
+                commented = "\n".join((f"# {l}" if i == idx else l) for i, l in enumerate(lines)) + "\n"
+                removed = "\n".join(l for i, l in enumerate(lines) if i != idx) + "\n"
+                if not _probe_text(commented) or not _probe_text(removed):
+                    token = stripped.split(":", 1)[0].strip() if ":" in stripped and len(stripped.split(":", 1)[0].strip()) >= 4 else stripped
+                    if token not in line_reqs:
+                        line_reqs.append(token)
+                        req_rows.append(
+                            Requirement(token, usable_checkers[0] if usable_checkers else "<behavioral_checker>")
+                        )
+
+    if not req_rows:
+        return BehavioralDerivation(
+            capability_id,
+            [],
+            usable_checkers,
+            refused=True,
+            reason="CHECKER_REJECTED_NO_BEHAVIORAL_MUTATIONS",
+            mutations_tested=tested,
+            mutations_rejected_by_checker=rejected,
+        )
+    return BehavioralDerivation(
+        capability_id,
+        req_rows,
+        usable_checkers,
+        refused=False,
+        json_required_keys=json_reqs,
+        active_line_requirements=line_reqs,
+        mutations_tested=tested,
+        mutations_rejected_by_checker=rejected,
+    )
+
