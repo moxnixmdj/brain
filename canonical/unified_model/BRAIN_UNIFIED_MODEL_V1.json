@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5bd05f674ba931e938d573b5242e8c65a6664c504d61a7360be679537aa9d1ab"
+  "value": "9809bb11e4f79f968d3f71229a103a32c6d63a4c6031b13bbca09f9d8f1a6662"
  },
  "engines": [
   {
@@ -217472,7 +217472,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SENTIENT_COGNITIVE_CORE_20261103_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "4ece0499ac8f9e16fed87310976b71138407087ca3a1220ed2a331e5abd6d08c",
+   "sha256": "fc95da7f0656245088e4a2a550c115bcc4b486e54d35b7d2cc3735239a8f4f2c",
    "status": "",
    "terms": {
     "0-assertion": 2,
@@ -230784,9 +230784,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "ed8ae1fcf03f5b7134a5398baf1c0a1297c248ed6687b73369912606579f5e2b",
+   "sha256": "39f9f982fee2987b001b6d28ba33021975c6b8f8661e047b653f5a0bae32bcc4",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
-   "symbol_count": 19,
+   "symbol_count": 20,
    "symbols": [
     "UnifiedModel",
     "UnifiedModelError",
@@ -230800,6 +230800,7 @@
     "adapter_ast_entry",
     "artifact_digest",
     "ask_tokens",
+    "brain_model_callable",
     "canonical_json",
     "digest_value",
     "load_model",
@@ -230813,6 +230814,7 @@
     "artifact_digest": 1,
     "ask_tokens": 1,
     "brain": 3,
+    "brain_model_callable": 1,
     "canonical_json": 1,
     "compiled": 1,
     "core_cache_dir": 1,
@@ -239088,7 +239090,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "d52fef33aec5e24c0c6e8d93d86d298728da6b1debfbf66c32b118d054d962e5",
+   "sha256": "398aa06208df0ad20e70ebd09b635b544e9cb87ec749aa83ff44831a5d33285d",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 14,
    "symbols": [
@@ -285606,7 +285608,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "04e33c348f51691221ba8af8ccaa32cb99cf9386881024573f09b25a30eb0e38",
+   "sha256": "f7d0cc529bbdbf174892c032d4ef5949637861c04d8086378cfae6fba9fe56f9",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 19,
    "symbols": [

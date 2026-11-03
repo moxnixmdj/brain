@@ -1117,9 +1117,71 @@ def _iter_python_guard_statement_candidates(
     if not isinstance(pat_stmt, ast.Return) or pat_stmt.value is None:
         return
 
-    _DIV_FAMILY = {ast.Div: "/", ast.FloorDiv: "//", ast.Mod: "%"}
+    import operator as _py_op
 
-    def _match_ast_expr(p_nd: ast.AST, c_nd: ast.AST, binds: dict[str, str], op_pair: list[tuple[str, str]]) -> bool:
+    _AST_BINOP_EVAL: dict[type[ast.operator], tuple[Any, str]] = {
+        ast.Add: (_py_op.add, "+"),
+        ast.Sub: (_py_op.sub, "-"),
+        ast.Mult: (_py_op.mul, "*"),
+        ast.Div: (_py_op.truediv, "/"),
+        ast.FloorDiv: (_py_op.floordiv, "//"),
+        ast.Mod: (_py_op.mod, "%"),
+        ast.Pow: (_py_op.pow, "**"),
+        ast.BitAnd: (_py_op.and_, "&"),
+        ast.BitOr: (_py_op.or_, "|"),
+        ast.BitXor: (_py_op.xor, "^"),
+        ast.LShift: (_py_op.lshift, "<<"),
+        ast.RShift: (_py_op.rshift, ">>"),
+    }
+
+    def _singularity_signature(op_cls: type[ast.operator]) -> tuple[type[BaseException] | None, type[BaseException] | None]:
+        spec = _AST_BINOP_EVAL.get(op_cls)
+        if spec is None:
+            return (None, None)
+        fn = spec[0]
+        sig: list[type[BaseException] | None] = []
+        for probe_rhs in (0, -1):
+            try:
+                fn(8, probe_rhs)
+                sig.append(None)
+            except Exception as exc:
+                sig.append(type(exc))
+        return (sig[0], sig[1])
+
+    def _adapt_guard_zero_return_type(block_code: str, target_op_cls: type[ast.operator] | None) -> list[str]:
+        if target_op_cls is None or target_op_cls not in _AST_BINOP_EVAL:
+            return [block_code]
+        try:
+            sample_val = _AST_BINOP_EVAL[target_op_cls][0](8, 2)
+        except Exception:
+            return [block_code]
+        target_zero = type(sample_val)(0)
+        try:
+            bmod = ast.parse(block_code)
+        except SyntaxError:
+            return [block_code]
+        changed = False
+        for sub in ast.walk(bmod):
+            if (
+                isinstance(sub, ast.Return)
+                and isinstance(sub.value, ast.Constant)
+                and isinstance(sub.value.value, (int, float))
+                and not isinstance(sub.value.value, bool)
+                and sub.value.value == 0
+                and type(sub.value.value) is not type(target_zero)
+            ):
+                sub.value = ast.Constant(value=target_zero)
+                changed = True
+        if not changed:
+            return [block_code]
+        return [ast.unparse(bmod), block_code]
+
+    def _match_ast_expr(
+        p_nd: ast.AST,
+        c_nd: ast.AST,
+        binds: dict[str, str],
+        op_pair: list[tuple[str, str, type[ast.operator]]],
+    ) -> bool:
         if isinstance(p_nd, ast.Name) and p_nd.id in rev_hole:
             h_nm = rev_hole[p_nd.id]
             c_txt = ast.unparse(c_nd).strip()
@@ -1134,8 +1196,13 @@ def _iter_python_guard_statement_candidates(
             p_op_t, c_op_t = type(p_nd.op), type(c_nd.op)
             if p_op_t is c_op_t:
                 pass
-            elif p_op_t in _DIV_FAMILY and c_op_t in _DIV_FAMILY:
-                op_pair.append((_DIV_FAMILY[p_op_t], _DIV_FAMILY[c_op_t]))
+            elif (
+                p_op_t in _AST_BINOP_EVAL
+                and c_op_t in _AST_BINOP_EVAL
+                and _singularity_signature(p_op_t) != (None, None)
+                and _singularity_signature(p_op_t) == _singularity_signature(c_op_t)
+            ):
+                op_pair.append((_AST_BINOP_EVAL[p_op_t][1], _AST_BINOP_EVAL[c_op_t][1], c_op_t))
             else:
                 return False
             return _match_ast_expr(p_nd.left, c_nd.left, binds, op_pair) and _match_ast_expr(
@@ -1158,15 +1225,13 @@ def _iter_python_guard_statement_candidates(
         if not isinstance(nd, ast.Return) or nd.value is None or nd.lineno is None or nd.end_lineno is None:
             continue
         binds: dict[str, str] = {}
-        op_swaps: list[tuple[str, str]] = []
+        op_swaps: list[tuple[str, str, type[ast.operator]]] = []
         if not _match_ast_expr(pat_stmt.value, nd.value, binds, op_swaps):
             continue
-        op_ov = op_swaps[0] if op_swaps else None
+        op_ov = (op_swaps[0][0], op_swaps[0][1]) if op_swaps else None
+        target_op_cls = op_swaps[0][2] if op_swaps else None
         rendered_block = textwrap.dedent(_render_toks(rep_toks, binds, op_override=op_ov)).strip()
-        variants = [rendered_block]
-        # Preserve integer vs float zero-return parity when transferring `/` -> `//` or `%`
-        if op_ov is not None and op_ov[1] in ("//", "%") and "return 0.0" in rendered_block:
-            variants = [rendered_block.replace("return 0.0", "return 0"), rendered_block]
+        variants = _adapt_guard_zero_return_type(rendered_block, target_op_cls)
 
         line_start_idx = line_offs[nd.lineno - 1]
         stmt_start = line_start_idx + nd.col_offset

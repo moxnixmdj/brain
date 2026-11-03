@@ -360,31 +360,36 @@ def _make_confined_reference_verifier(fn_name: str, orig_src: str, ref_src: str,
     if arity <= 0:
         inputs_repr = "[()]"
     elif arity == 1:
-        inputs_repr = "[(3,), (0,), (-2,), ([1, 2, 3],), ('ab',)]"
+        inputs_repr = "[(3,), (0,), (-2,), ([],), ([1, 2, 3],), ('',), ('ab',)]"
     elif arity == 2:
-        inputs_repr = "[(3, 7), (8, 2), (5, 5), (-2, 4), (0, 1)]"
+        inputs_repr = "[(3, 7), (8, 2), (5, 5), (-2, 4), (0, 1), (4, 0), (0, 0), (-1, -1)]"
     else:
         tup_a = "(" + ", ".join(str(i + 2) for i in range(arity)) + ")"
         tup_b = "(" + ", ".join(str(10 - i) for i in range(arity)) + ")"
-        inputs_repr = f"[{tup_a}, {tup_b}]"
+        tup_z = "(" + ", ".join("0" for _ in range(arity)) + ")"
+        inputs_repr = f"[{tup_a}, {tup_b}, {tup_z}]"
 
     test_src = (
         f"import orig_mod, ref_mod, cand_mod\n"
         f"_fn_o = getattr(orig_mod, {fn_name!r})\n"
         f"_fn_r = getattr(ref_mod, {fn_name!r})\n"
         f"_fn_c = getattr(cand_mod, {fn_name!r})\n"
+        f"def _obs(_f, _a):\n"
+        f"    try:\n"
+        f"        return ('VAL', _f(*_a))\n"
+        f"    except Exception as _e:\n"
+        f"        return ('EXC', type(_e).__name__)\n"
         f"_valid = 0\n"
         f"_diff = 0\n"
         f"for _args in {inputs_repr}:\n"
-        f"    try:\n"
-        f"        _ro = _fn_o(*_args)\n"
-        f"        _rr = _fn_r(*_args)\n"
-        f"    except Exception:\n"
+        f"    _ro = _obs(_fn_o, _args)\n"
+        f"    _rr = _obs(_fn_r, _args)\n"
+        f"    if _ro[0] == 'EXC' and _rr[0] == 'EXC' and _ro[1] == 'TypeError':\n"
         f"        continue\n"
         f"    _valid += 1\n"
         f"    if _ro != _rr:\n"
         f"        _diff += 1\n"
-        f"    assert _fn_c(*_args) == _rr\n"
+        f"    assert _obs(_fn_c, _args) == _rr\n"
         f"assert _valid > 0 and _diff > 0\n"
     )
 
@@ -488,7 +493,11 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                 seen_h.add(hv)
                 holes.append((str(item[0]), hv))
     bind: dict[str, str] = {}
-    id_names = ["_fn_probe", "a", "b", "c", "d"]
+    starts_with_def = any(
+        isinstance(t, (list, tuple)) and len(t) >= 2 and str(t[0]) == "kw" and str(t[1]) == "def"
+        for t in pat_toks[:3]
+    )
+    id_names = ["_fn_probe", "a", "b", "c", "d"] if starts_with_def else ["a", "b", "c", "d", "e"]
     id_idx = 0
     for hk, hv in holes:
         if hk == "hole_num":
@@ -588,18 +597,56 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
         else:
             from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import iter_cst_skeleton_candidates
 
-            guard_ctx = "def _expr_ctx(a, b):\n    return (a + 2) // b\n"
-            cands_g = list(iter_cst_skeleton_candidates(guard_ctx, rule, target_language="python", minimize=True))
-            if cands_g:
-                probes_out.append(
-                    {
-                        "label": "expression_context_probe",
-                        "language": "python",
-                        "source_text": guard_ctx,
-                        "expected_expr_rewrite": cands_g[0].strip(),
-                        "verifier": _make_confined_io_verifier("_expr_ctx", [(8, 2, 5), (8, 0, 0)]),
-                    }
-                )
+            id_holes = [hv for hk, hv in holes if hk != "hole_num" and hv in bind and not bind[hv].isdigit() and bind[hv] != "_fn_probe"]
+            if id_holes:
+                try:
+                    p_fn_mod = ast.parse(pat_ded)
+                    r_fn_mod = ast.parse(rep_ded)
+                except SyntaxError:
+                    p_fn_mod = r_fn_mod = None
+                if (
+                    p_fn_mod is not None
+                    and r_fn_mod is not None
+                    and p_fn_mod.body
+                    and r_fn_mod.body
+                    and isinstance(p_fn_mod.body[0], ast.FunctionDef)
+                    and isinstance(r_fn_mod.body[0], ast.FunctionDef)
+                ):
+                    p_fn = p_fn_mod.body[0]
+                    r_fn = r_fn_mod.body[0]
+                    target_arg = p_fn.args.args[0].arg if p_fn.args.args else id_holes[0]
+
+                    class _BodyCompoundSubst(ast.NodeTransformer):
+                        def visit_Name(self, node: ast.Name) -> ast.AST:
+                            if isinstance(node.ctx, ast.Load) and node.id == target_arg:
+                                return ast.BinOp(
+                                    left=ast.Name(id=target_arg, ctx=ast.Load()),
+                                    op=ast.Add(),
+                                    right=ast.Name(id=target_arg, ctx=ast.Load()),
+                                )
+                            return node
+
+                    p_fn.name = "_expr_ctx"
+                    r_fn.name = "_expr_ctx"
+                    p_fn.body = [_BodyCompoundSubst().visit(st) for st in p_fn.body]
+                    r_fn.body = [_BodyCompoundSubst().visit(st) for st in r_fn.body]
+                    ast.fix_missing_locations(p_fn_mod)
+                    ast.fix_missing_locations(r_fn_mod)
+                    ctx_src = ast.unparse(p_fn_mod) + "\n"
+                    exp_src = ast.unparse(r_fn_mod) + "\n"
+                    cands_g = list(iter_cst_skeleton_candidates(ctx_src, rule, target_language="python", minimize=True))
+                    if cands_g:
+                        probes_out.append(
+                            {
+                                "label": "expression_context_probe",
+                                "language": "python",
+                                "source_text": ctx_src,
+                                "expected_expr_rewrite": exp_src.strip(),
+                                "verifier": _make_confined_reference_verifier(
+                                    "_expr_ctx", ctx_src.strip(), exp_src.strip(), len(p_fn.args.args)
+                                ),
+                            }
+                        )
     except Exception:
         pass
     return probes_out

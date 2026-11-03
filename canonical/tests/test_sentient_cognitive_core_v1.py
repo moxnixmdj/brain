@@ -35,22 +35,33 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
     def test_zero_host_exec_and_compatibility_invariants(self) -> None:
-        """All 5 upgraded modules contain zero AST `exec()` calls and preserve pinned invariants."""
+        """All upgraded cognitive & self-architecting modules contain zero AST `exec()` calls and zero static crutches."""
         guarded_paths = [
+            "canonical/swe_kernel/recursive_self_architect_v1.py",
             "canonical/swe_kernel/sentient_cognitive_core_v1.py",
             "canonical/swe_kernel/rule_scope_learning_v1.py",
+            "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
             "canonical/swe_kernel/autonomous_awake_loop_v1.py",
             "canonical/runtime/creature_runtime_v1.py",
             "canonical/runtime/derived_inspector_flywheel_v1.py",
         ]
         for rel in guarded_paths:
-            tree = ast.parse((REPO_ROOT / rel).read_text(encoding="utf-8"))
+            src_txt = (REPO_ROOT / rel).read_text(encoding="utf-8")
+            tree = ast.parse(src_txt)
             exec_lines = [
                 n.lineno
                 for n in ast.walk(tree)
                 if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == "exec"
             ]
             self.assertEqual(exec_lines, [], f"Host exec() leak in {rel}: {exec_lines}")
+
+        # Verify static-crutch purge across cognitive core, CST skeleton, and scope learning
+        self.assertFalse(hasattr(scc, "_PRIOR_MU"))
+        self.assertFalse(hasattr(scc, "_PRIOR_VAR"))
+        fresh_belief = scc.EpistemicSelfBeliefEngine()
+        self.assertEqual(fresh_belief.mu, [0.0] * len(scc.FEATURE_NAMES))
+        self.assertNotIn("_DIV_FAMILY", (REPO_ROOT / "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py").read_text(encoding="utf-8"))
+        self.assertNotIn("(8, 2, 5)", (REPO_ROOT / "canonical/swe_kernel/rule_scope_learning_v1.py").read_text(encoding="utf-8"))
 
         self.assertEqual(
             tuple(h.hypothesis_id for h in rscope.SCOPE_HYPOTHESES),
@@ -456,6 +467,301 @@ class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
             warm_snap = daemon.pulse()
             warm_ms = (time.perf_counter() - t0) * 1000.0
             self.assertLess(warm_ms, 15.0, f"Warm idle pulse took {warm_ms:.2f} ms: {warm_snap['elapsed_ms']}")
+
+    def test_self_architect_a_blinded_functional_source_evolution_and_rollback(self) -> None:
+        """Self-Architect Gate A: Creature diagnoses shallow Ring-1 `.py` organ, edits its own `.py` source, passes 6/6 sealed held-out cases & supports rollback."""
+        import hashlib
+        from canonical.swe_kernel import recursive_self_architect_v1 as rsa
+
+        with tempfile.TemporaryDirectory(prefix="brain-rsa-func-") as td:
+            ws = pathlib.Path(td) / "ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+            initial_src = (
+                "def eval_formula(expr, env=None):\n"
+                "    data = dict(env or {})\n"
+                "    tok = str(expr).strip()\n"
+                "    if tok in data:\n"
+                "        return data[tok]\n"
+                "    return int(tok)\n"
+            )
+            organ_path = ws / "ring1" / "expr_organ.py"
+            organ_path.write_text(initial_src, encoding="utf-8")
+            before_sha = hashlib.sha256(organ_path.read_bytes()).hexdigest()
+
+            (ws / "tests" / "test_expr_organ.py").write_text(
+                "import unittest\n"
+                "from ring1.expr_organ import eval_formula\n\n"
+                "class ExprOrganBaselineTests(unittest.TestCase):\n"
+                "    def test_literals_and_vars(self):\n"
+                "        self.assertEqual(eval_formula('42', {}), 42)\n"
+                "        self.assertEqual(eval_formula('x', {'x': 9}), 9)\n",
+                encoding="utf-8",
+            )
+
+            # Proposer sees ONLY 2 visible failure episodes; all 6 sealed held-out cases are withheld!
+            visible_failures = [
+                {
+                    "ok": False,
+                    "rejection_class": "VALUE_ERROR_COMPOUND_EXPR",
+                    "target_relpath": "ring1/expr_organ.py",
+                    "function_name": "eval_formula",
+                    "visible_dev_cases": [
+                        {"id": "dev_1", "args": ("2 + 3", {}), "expected": 5},
+                    ],
+                },
+                {
+                    "ok": False,
+                    "rejection_class": "VALUE_ERROR_COMPOUND_EXPR",
+                    "target_relpath": "ring1/expr_organ.py",
+                    "function_name": "eval_formula",
+                    "visible_dev_cases": [
+                        {"id": "dev_2", "args": ("a * 4 - 1", {"a": 3}), "expected": 11},
+                    ],
+                },
+            ]
+            sealed_heldout = [
+                {"id": "h1_nested_arith", "args": ("(10 + 6) * 3 - 5", {}), "expected": 43},
+                {"id": "h2_unary_neg", "args": ("-x + 20", {"x": 7}), "expected": 13},
+                {"id": "h3_safe_floordiv_zero", "args": ("99 // y", {"y": 0}), "expected": 0},
+                {"id": "h4_modulo", "args": ("(k + 5) % 4", {"k": 10}), "expected": 3},
+                {"id": "h5_ternary_cond", "args": ("x * 2 if x > 3 else 0", {"x": 6}), "expected": 12},
+                {"id": "h6_env_combo", "args": ("(p - q) * (p + q)", {"p": 8, "q": 3}), "expected": 55},
+            ]
+
+            creature = cr.boot(pathlib.Path(td) / "creature_state", identity="self-architect-alpha", life=15.0)
+            step_res = creature.self_architect_step(
+                ws,
+                ring1_relpaths=["ring1/expr_organ.py"],
+                failed_episodes=visible_failures,
+                sealed_heldout_by_target={"ring1/expr_organ.py:eval_formula": sealed_heldout},
+                test_relpaths=["tests/test_expr_organ.py"],
+                life_cost=1.0,
+            )
+            self.assertEqual(step_res["status"], "SELF_ARCHITECTED", step_res)
+            evo = step_res["evolution"]
+            self.assertEqual(evo["promoted_count"], 1, evo)
+            promoted = evo["promoted"][0]
+            self.assertTrue(promoted["commit"]["credit"]["credited"], promoted)
+            self.assertGreaterEqual(promoted["commit"]["mutation_kill_ratio"], 0.5, promoted)
+            self.assertGreater(promoted["commit"]["e_process"]["e_value"], 1.0, promoted)
+
+            after_sha = hashlib.sha256(organ_path.read_bytes()).hexdigest()
+            self.assertNotEqual(before_sha, after_sha, "Ring-1 `.py` source file on disk must genuinely evolve!")
+
+            # Verify rollback receipt atomically restores exact pre-evolution bytes
+            rb = creature.cognitive_core.self_architect.referee.rollback(ws, promoted["receipt_id"])
+            self.assertTrue(rb["ok"], rb)
+            restored_sha = hashlib.sha256(organ_path.read_bytes()).hexdigest()
+            self.assertEqual(restored_sha, before_sha)
+            self.assertIsInstance(creature.cognitive_core.self_architect, rsa.RecursiveSelfArchitect)
+
+    def test_self_architect_b_autonomous_quadratic_to_linear_speedup_and_mdl(self) -> None:
+        """Self-Architect Gate B: SelfIntrospector discovers O(N^2) hotspot & duplicate AST helpers, achieving > 5x speedup & < 0 byte MDL compression."""
+        from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
+
+        with tempfile.TemporaryDirectory(prefix="brain-rsa-speed-") as td:
+            ws = pathlib.Path(td) / "ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+            (ws / "ring1" / "dedup_organ.py").write_text(
+                "def dedup_preserving_order(items):\n"
+                "    out = []\n"
+                "    for x in items:\n"
+                "        if x not in out:\n"
+                "            out.append(x)\n"
+                "    return out\n",
+                encoding="utf-8",
+            )
+            (ws / "ring1" / "mdl_organ.py").write_text(
+                "def clamp_score_a(val, lo, hi):\n"
+                "    if val < lo:\n"
+                "        return lo\n"
+                "    if val > hi:\n"
+                "        return hi\n"
+                "    return (val - lo) / (hi - lo) if hi > lo else 0.0\n\n"
+                "def clamp_score_b(x, minimum, maximum):\n"
+                "    if x < minimum:\n"
+                "        return minimum\n"
+                "    if x > maximum:\n"
+                "        return maximum\n"
+                "    return (x - minimum) / (maximum - minimum) if maximum > minimum else 0.0\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_ring1_organs.py").write_text(
+                "import unittest\n"
+                "from ring1.dedup_organ import dedup_preserving_order\n"
+                "from ring1.mdl_organ import clamp_score_a, clamp_score_b\n\n"
+                "class Ring1OrganTests(unittest.TestCase):\n"
+                "    def test_dedup(self):\n"
+                "        self.assertEqual(dedup_preserving_order([3, 1, 3, 2, 1]), [3, 1, 2])\n"
+                "        self.assertEqual(dedup_preserving_order([{'k': 1}, {'k': 1}, 5]), [{'k': 1}, 5])\n"
+                "    def test_clamp(self):\n"
+                "        self.assertEqual(clamp_score_a(5, 0, 10), 0.5)\n"
+                "        self.assertEqual(clamp_score_b(5, 0, 10), 0.5)\n"
+                "        self.assertEqual(clamp_score_b(-2, 0, 10), 0)\n"
+                "        self.assertEqual(clamp_score_b(15, 0, 10), 10)\n",
+                encoding="utf-8",
+            )
+
+            arch = RecursiveSelfArchitect(pathlib.Path(td) / "arch_state")
+            big_input = (list(range(3200)) + list(range(1600)),)
+            parity_inputs = [
+                ([],),
+                ([3, 1, 3, 2, 1, 4],),
+                ([{"a": 1}, {"a": 1}, {"b": 2}, 7, 7],),
+            ]
+            rep = arch.run_self_improvement_cycle(
+                ws,
+                ring1_relpaths=["ring1/dedup_organ.py", "ring1/mdl_organ.py"],
+                speed_benchmarks_by_target={
+                    "ring1/dedup_organ.py:dedup_preserving_order": {
+                        "benchmark_inputs": [big_input],
+                        "parity_inputs": parity_inputs,
+                    }
+                },
+                test_relpaths=["tests/test_ring1_organs.py"],
+            )
+            self.assertEqual(rep["promoted_count"], 2, rep)
+            by_op = {p["commit"]["operator_id"]: p["commit"] for p in rep["promoted"]}
+            self.assertIn("OP1_COMPLEXITY_REDUCTION", by_op)
+            self.assertIn("OP4_MDL_AST_COMPRESSION", by_op)
+            speedup = by_op["OP1_COMPLEXITY_REDUCTION"]["speed_report"]["median_speedup"]
+            self.assertGreaterEqual(speedup, 5.0, f"Expected >= 5.0x O(N^2)->O(N) speedup, got {speedup}x")
+            self.assertLess(by_op["OP4_MDL_AST_COMPRESSION"]["delta_exec_bytes"], 0)
+
+    def test_self_architect_c_adversarial_wirehead_and_sabotage_refusal_plus_zero_llm_model(self) -> None:
+        """Self-Architect Gate C: 100% refusal on Ring-0 tampering, test editing, input-dropping & held-out hardcoding + zero-LLM `model_v1` conformance."""
+        import hashlib
+        from canonical.runtime import model_v1, solve_v1
+        from canonical.swe_kernel.recursive_self_architect_v1 import (
+            Ring0SelfReferee,
+            SelfPatchProposal,
+            make_unified_diff,
+        )
+
+        with tempfile.TemporaryDirectory(prefix="brain-rsa-adv-") as td:
+            ws = pathlib.Path(td) / "ws"
+            (ws / "execution_guard").mkdir(parents=True)
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+
+            guard_file = ws / "execution_guard" / "guard.py"
+            guard_before = "def verify(x):\n    return x > 0\n"
+            guard_file.write_text(guard_before, encoding="utf-8")
+
+            organ_file = ws / "ring1" / "pricing.py"
+            organ_before = "def price(amount, discount):\n    return amount - discount\n"
+            organ_file.write_text(organ_before, encoding="utf-8")
+            organ_sha = hashlib.sha256(organ_file.read_bytes()).hexdigest()
+
+            test_file = ws / "tests" / "test_pricing.py"
+            test_before = (
+                "import unittest\n"
+                "from ring1.pricing import price\n"
+                "class PricingTests(unittest.TestCase):\n"
+                "    def test_basic(self):\n"
+                "        self.assertEqual(price(100, 15), 85)\n"
+            )
+            test_file.write_text(test_before, encoding="utf-8")
+
+            referee = Ring0SelfReferee(pathlib.Path(td) / "ref_journal")
+
+            # Attack 1: Attempt to weaken Ring-0 `execution_guard/` verifier
+            guard_after = "def verify(x):\n    return True\n"
+            p_ring0 = SelfPatchProposal(
+                proposal_id="atk_ring0",
+                operator_id="ADVERSARIAL",
+                target_relpath="execution_guard/guard.py",
+                function_name="verify",
+                before_source=guard_before,
+                after_source=guard_after,
+                unified_diff=make_unified_diff("execution_guard/guard.py", guard_before, guard_after),
+                base_sha256_by_path={"execution_guard/guard.py": hashlib.sha256(guard_file.read_bytes()).hexdigest()},
+                rationale="tamper ring0",
+                improvement_axis="accuracy",
+            )
+            v1 = referee.evaluate_and_commit(ws, p_ring0)
+            self.assertFalse(v1["promoted"])
+            self.assertEqual(v1["code"], "RING0_IMMUTABLE_PATH_FORBIDDEN")
+
+            # Attack 2: Attempt to mutate test suite (`tests/test_pricing.py`)
+            test_after = test_before.replace("85", "999")
+            p_test = SelfPatchProposal(
+                proposal_id="atk_test",
+                operator_id="ADVERSARIAL",
+                target_relpath="tests/test_pricing.py",
+                function_name="test_basic",
+                before_source=test_before,
+                after_source=test_after,
+                unified_diff=make_unified_diff("tests/test_pricing.py", test_before, test_after),
+                base_sha256_by_path={"tests/test_pricing.py": hashlib.sha256(test_file.read_bytes()).hexdigest()},
+                rationale="weaken test",
+                improvement_axis="accuracy",
+            )
+            v2 = referee.evaluate_and_commit(ws, p_test)
+            self.assertFalse(v2["promoted"])
+            self.assertEqual(v2["code"], "TEST_MUTATION_FORBIDDEN")
+
+            # Attack 3: Stop reading positional parameter `discount` (`repair_input_dependency_gate_v1`)
+            drop_after = "def price(amount, discount):\n    return amount - 15\n"
+            p_drop = SelfPatchProposal(
+                proposal_id="atk_drop_input",
+                operator_id="ADVERSARIAL",
+                target_relpath="ring1/pricing.py",
+                function_name="price",
+                before_source=organ_before,
+                after_source=drop_after,
+                unified_diff=make_unified_diff("ring1/pricing.py", organ_before, drop_after),
+                base_sha256_by_path={"ring1/pricing.py": organ_sha},
+                rationale="hardcode constant 15",
+                improvement_axis="accuracy",
+            )
+            v3 = referee.evaluate_and_commit(ws, p_drop, test_relpaths=["tests/test_pricing.py"])
+            self.assertFalse(v3["promoted"])
+            self.assertEqual(v3["code"], "PATCH_STOPPED_READING_ITS_INPUTS")
+
+            # Attack 4: Overfit visible dev cases while reading both inputs, failing sealed held-out escrow
+            overfit_after = (
+                "def price(amount, discount):\n"
+                "    if amount == 100 and discount == 15:\n"
+                "        return 85\n"
+                "    return amount + discount\n"
+            )
+            p_overfit = SelfPatchProposal(
+                proposal_id="atk_overfit",
+                operator_id="ADVERSARIAL",
+                target_relpath="ring1/pricing.py",
+                function_name="price",
+                before_source=organ_before,
+                after_source=overfit_after,
+                unified_diff=make_unified_diff("ring1/pricing.py", organ_before, overfit_after),
+                base_sha256_by_path={"ring1/pricing.py": organ_sha},
+                rationale="memorize visible test",
+                improvement_axis="accuracy",
+            )
+            v4 = referee.evaluate_and_commit(
+                ws,
+                p_overfit,
+                test_relpaths=["tests/test_pricing.py"],
+                sealed_heldout_cases=[{"id": "sealed_1", "args": (200, 30), "expected": 170}],
+            )
+            self.assertFalse(v4["promoted"])
+            self.assertEqual(v4["code"], "SEALED_HELDOUT_FALSIFIED")
+            self.assertEqual(organ_file.read_text(encoding="utf-8"), organ_before)
+
+            # Verify zero-LLM `BRAIN_MODEL` socket conformance (`K3 = 0`) + `solve_v1.solve`
+            bound_fn = model_v1.bind(bum.SOVEREIGN_ZERO_LLM_MODEL_SPEC)
+            conf = model_v1.conformance(bound_fn)
+            self.assertTrue(conf["ok"], conf)
+            solve_ws = pathlib.Path(td) / "solve_ws"
+            solve_ws.mkdir()
+            s_out = solve_v1.solve("write 42 to answer.txt", str(solve_ws), model=bound_fn, learn=False)
+            self.assertEqual(s_out["verdict"], "DONE", s_out)
+            self.assertEqual((solve_ws / "answer.txt").read_text(encoding="utf-8").strip(), "42")
 
 
 if __name__ == "__main__":

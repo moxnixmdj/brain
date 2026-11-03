@@ -2279,6 +2279,26 @@ class AwakeAgencyDaemon:
             "k3_external_llm_calls": 0,
         }
 
+    def evolve_ring1_organs(
+        self,
+        *,
+        ring1_relpaths: Sequence[str],
+        failed_episodes: Sequence[Mapping[str, Any]] = (),
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Run a continuous awake Ring-1 self-inspection, CoW synthesis & Ring-0 refereed evolution cycle."""
+        return self.cognitive_core.evolve_self_code(
+            self.workspace_root,
+            ring1_relpaths=ring1_relpaths,
+            failed_episodes=failed_episodes,
+            sealed_heldout_by_target=sealed_heldout_by_target,
+            speed_benchmarks_by_target=speed_benchmarks_by_target,
+            test_relpaths=test_relpaths,
+            apply_to_root=bool(self.apply_verified_repairs),
+        )
+
     def run_cycles(
         self,
         max_cycles: int = 3,

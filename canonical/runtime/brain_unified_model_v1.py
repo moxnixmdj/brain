@@ -1659,6 +1659,69 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
 # --------------------------------------------------------------------------- cli
 
 
+SOVEREIGN_ZERO_LLM_MODEL_SPEC = "canonical.runtime.brain_unified_model_v1:brain_model_callable"
+
+
+def brain_model_callable(goal: str, seeing: dict[str, Any]) -> str | None:
+    """Zero-LLM (`K3 = 0`) `BRAIN_MODEL` callable conforming to `canonical.runtime.model_v1`.
+
+    Observes kernel truth `seeing`, emits `"DONE"` once the requested state transition
+    is verified in `seeing`, emits deterministic Python code when grounded, and
+    abstains (`None`) when the goal has no grounded route or evidence.
+    """
+    text = str(goal or "").strip()
+    if not text or not isinstance(seeing, dict):
+        return None
+    previews = seeing.get("preview") if isinstance(seeing.get("preview"), dict) else (
+        seeing.get("previews") if isinstance(seeing.get("previews"), dict) else {}
+    )
+    raw_files = seeing.get("tree") if seeing.get("tree") is not None else (seeing.get("files") or ())
+    file_set = set(raw_files.keys()) if isinstance(raw_files, dict) else {str(x) for x in raw_files}
+    last = seeing.get("last") if isinstance(seeing.get("last"), dict) else None
+
+    write_m = re.match(r"^\s*write\s+(.+?)\s+to\s+([A-Za-z0-9_./-]+)\s*[.!]*$", text, re.IGNORECASE)
+    if write_m:
+        payload_raw = write_m.group(1).strip().strip("'\"")
+        rel_dst = write_m.group(2).strip()
+        if ".." in Path(rel_dst).parts or rel_dst.startswith("/"):
+            return None
+        if rel_dst in file_set and str(previews.get(rel_dst, "")).strip() == payload_raw:
+            return None
+        return (
+            f"import pathlib\n"
+            f"_p = pathlib.Path({rel_dst!r})\n"
+            f"_p.parent.mkdir(parents=True, exist_ok=True)\n"
+            f"_p.write_text({(payload_raw + chr(10))!r}, encoding='utf-8')\n"
+        )
+
+    if last is not None:
+        if last.get("exit") == 0 and seeing.get("changed"):
+            return None
+        return None
+
+    if not file_set:
+        return None
+    try:
+        routed = open_model().route(text, top_k=1)
+        ranked = routed.get("ranked_capabilities") or []
+        if not ranked or float(ranked[0].get("score") or 0.0) <= 0.0:
+            return None
+        cid = str(ranked[0].get("id") or "")
+        if not cid:
+            return None
+        repo_root = str(ROOT)
+        return (
+            f"import pathlib, sys\n"
+            f"sys.path.insert(0, {repo_root!r})\n"
+            f"from canonical.runtime.brain_unified_model_v1 import open_model\n"
+            f"_res = open_model().solve({text!r}, declared_resources={sorted(file_set)!r})\n"
+            f"if not _res.get('pass'):\n"
+            f"    raise SystemExit(1)\n"
+        )
+    except Exception:
+        return None
+
+
 def _print(payload: Any) -> None:
     print(json.dumps(payload, indent=1, sort_keys=True, ensure_ascii=False))
 

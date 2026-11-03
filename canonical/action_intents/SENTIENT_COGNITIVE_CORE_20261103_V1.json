@@ -2,7 +2,7 @@
   "action_id": "SENTIENT_COGNITIVE_CORE_20261103_V1",
   "action_intent_id": "SENTIENT_COGNITIVE_CORE_20261103_V1",
   "action_kind": "FRESH_REUSE",
-  "action_summary": "Build and wire the non-static `K3=0` (`$0` spend) Sentient Cognitive Core (`canonical/swe_kernel/sentient_cognitive_core_v1.py`) from mathematical, information-theoretic, causal, and persistent-self first principles, eliminating static probability ladders, unconfined host `exec()`, tautological 0-assertion test passes, per-candidate full CoW workspace wipes, YouTube-fallacy low-ceiling convergence, and unpersisted inspector callables across `Creature.boot()`: (1) Add `EpistemicSelfBeliefEngine` (Beta-Binomial + empirical-Bayes `self_prediction_calibration_v1` + predictive entropy `< 0.68` bits System-1 -> System-2 gate + surprise `-log2 p`), `CausalWorldGraph` (`(Read, Write, Destroy)` effect polarity, contrastive pre-state differencing for silent-stderr missing-file precondition learning, and BFS minimal causal precondition chains), `GlobalVoIDominanceController` (`incumbent_dominance_search_v1` ceiling pruning + `open_world_hypothesis_guard_v4` + Good-Turing residual mass), `WakeSleepConsolidationEngine` (`[G_-, B_+]` version-space calibration via confined Zygote probes, `macro_v1` trajectory abstraction, `rule_expiry_v1` + `permanence_amplifies_check_v1` Pareto kill-gates), and `SentientCognitiveCore` (`continuation_preference_v1`, `mortality_and_triage_v1`, `creature_stakes_and_initiative_v1`, `self_authored_obligations_v1`); (2) Upgrade `PersistentConfinedZygote` in `brokered_workspace_execution_v1` with AST runtime assertion counting (`ZERO_ASSERTIONS_EXECUTED` exit `3`, zero `exec()`) and 6-slot O(|Delta W|) delta restore; (3) Eliminate all host `exec()` in `rule_scope_learning_v1` and `autonomous_awake_loop_v1`, add multi-statement AST/CST guard-insertion compound-operand & sibling-operator (`{'/', '//', '%'}`) unification in `tree_sitter_cst_skill_skeleton_v1` + `'SCOPE_EXPRESSION'` `[G_-, B_+]` bounds in `verified_skill_crystallizer_v1`; (4) Enforce pre-execution polarity + high-ceiling dominance in `global_extrapolation_chase_spine_v1`, `property_v1.mutate >= 0.5` + failure-JSON refusal + `BehavioralDerivation` reboot rehydration in `derived_inspector_flywheel_v1` and `creature_runtime_v1` (with `/work/repo` confined onboarding and live EFE board ordering), and wire `SentientCognitiveCore` into `Creature`, `AwakeAgencyDaemon`, and `UnifiedModel.act_or_learn`.",
+  "action_summary": "Build and wire the non-static `K3=0` (`$0` spend) Sentient Cognitive Core (`sentient_cognitive_core_v1.py`) and 4-Law Recursive Self-Architecting Engine (`recursive_self_architect_v1.py`), purging static prior/operator/fixture crutches (`_PRIOR_MU`, `0.68`, `_DIV_FAMILY`, `(8, 2, 5)`) and restoring `28/28` SWE surface census (`fix_then_regression_test` via `software.repair.choreograph.crossfile.v1` in `swe_typed_plan_v1.py`). `Ring0SelfReferee` enforces 6 deterministic anti-wireheading gates (`SelfPatchFirewall`, `repair_input_dependency_gate_v1`, `<10 ms` CoW + `_BrainAssertCounter` confined regression, sealed held-out escrow + AST diff-mutant kill + `property_v1.mutate`, `credit_gates_v1` + interleaved A/B/B/A speedup, and executable-byte MDL budget + rollback receipts) over Ring-1 `.py` self-upgrades.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -32,8 +32,10 @@
       "canonical/runtime/brokered_workspace_execution_v1.py",
       "canonical/runtime/creature_runtime_v1.py",
       "canonical/runtime/derived_inspector_flywheel_v1.py",
+      "canonical/runtime/swe_typed_plan_v1.py",
       "canonical/swe_kernel/autonomous_awake_loop_v1.py",
       "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
+      "canonical/swe_kernel/recursive_self_architect_v1.py",
       "canonical/swe_kernel/rule_scope_learning_v1.py",
       "canonical/swe_kernel/sentient_cognitive_core_v1.py",
       "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
@@ -81,7 +83,7 @@
     "success_probability_lcb": 0.98,
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "`test_sentient_cognitive_core_v1`: `6/6 PASS` in `4.91s` across Controls A-E + `0` AST `exec()` invariant (`< 500 us` System-1 -> System-2 gate, `5/5` unseen compound/sibling-operator repairs in `0` search steps, `0` weak-verifier misapplications, `1,250,000 >= 1,000,000` orthogonal dominance chase with `0` irreversible retries, `< 15 ms` warm awake pulse). `test_unified_creature_plus_fast_general_organs_v1`: `4/4 PASS` in `23.6s` (`CALIBRATED`, `BEATS_EXTERNAL_BASELINE`, `property_v1.mutate >= 0.5`, live callable rehydration across `Creature.boot()`). `verify_brain_unified_model_v1`: `33/33 PASS`; `test_computer_unconfined_route_guard_v1` (`14/14`), `test_retained_repair_boundary_v1` (`25/25`), `test_rule_scope_learning_v1` (`14/14`), and `155/155` related pytest suites PASS with `0` host state dirtying.",
+  "measured_effect": "`test_sentient_cognitive_core_v1`: `9/9 PASS` (`5.94s`) proving lived-history divergence (`mu_0=[0]*10`), zero-prior causal destroyer avoidance, `5/5` zero-search `[G_-, B_+]` transfer, `$1M` global VoI dominance, `<15 ms` warm curiosity pulse, blinded Ring-1 `.py` functional self-evolution (`6/6` sealed held-out + rollback), autonomous `>5x` O(N^2)->O(N) complexity self-upgrade + `<0` byte MDL compression, `4/4` wirehead/sabotage attack refusals, and zero-LLM `model_v1` conformance. `hardcore_swe_surface_probe_20261030.py --floor 28`: `28/28 PASS`; `swe_advanced_probe_v1.py --floor 35`: `37/49 SERVED`; `verify_brain_unified_model_v1`: `33/33 PASS`; `verifier_falsification_v1`: `98/101 SAID_NO (0 bad)`.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/runtime/continuous_self_v1.py",
@@ -241,7 +243,7 @@
           "route": "SENTIENT_COGNITIVE_CORE_20261103_V1"
         }
       ],
-      "checked_at_utc": "2026-11-03T11:15:00Z",
+      "checked_at_utc": "2026-11-03T13:01:52Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -281,7 +283,7 @@
       "selected_route": "SENTIENT_COGNITIVE_CORE_20261103_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-03T11:15:00Z",
+        "checked_at_utc": "2026-11-03T13:01:52Z",
         "execution_dependencies": [
           {
             "dependency": "Linux unprivileged namespace binaries (`unshare`, `setpriv`, `mount`, `ip`) + `/usr/bin/python3` (`10/10` `SUBSTRATE_READY`)",
@@ -363,7 +365,7 @@
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-03T11:15:00Z",
+    "checked_at_utc": "2026-11-03T13:01:52Z",
     "currentness": {
       "accepted_families": 5,
       "meta_envelope_open_count": 8,
@@ -399,7 +401,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "8ee41b4123709bebd18cc7cf89a99514181b1661",
+          "git_blob_sha": "a4a8c44b8cb597062c8ce452c64972e389b09f1e",
           "path": "canonical/runtime/brain_unified_model_v1.py"
         },
         {
@@ -407,7 +409,7 @@
           "path": "canonical/runtime/brokered_workspace_execution_v1.py"
         },
         {
-          "git_blob_sha": "07f497fbb9b5be681323803fafa4ab0b1026ca95",
+          "git_blob_sha": "be2094e3544f10c6911f457cca15024892826761",
           "path": "canonical/runtime/creature_runtime_v1.py"
         },
         {
@@ -415,7 +417,11 @@
           "path": "canonical/runtime/derived_inspector_flywheel_v1.py"
         },
         {
-          "git_blob_sha": "dc1e60e33f25cdf79159cc6ed11e885a47dd8a8a",
+          "git_blob_sha": "d51f39f7b2e1e84ad4cc779d92768799d4b8d240",
+          "path": "canonical/runtime/swe_typed_plan_v1.py"
+        },
+        {
+          "git_blob_sha": "0f563fdee48c9dce7527fef7c7db9fb91e742bfd",
           "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py"
         },
         {
@@ -423,15 +429,19 @@
           "path": "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py"
         },
         {
-          "git_blob_sha": "22b80c7043dc3f1a87d09f2c5485f0712759bd89",
+          "git_blob_sha": "c5df6c4cce6931cbaf37e4c7cf14e02169077d24",
+          "path": "canonical/swe_kernel/recursive_self_architect_v1.py"
+        },
+        {
+          "git_blob_sha": "bd7e77d37326954598c6b60ccf1afd6caa9add88",
           "path": "canonical/swe_kernel/rule_scope_learning_v1.py"
         },
         {
-          "git_blob_sha": "e1c7a2d824fda8b3444bdabc90944c05cb60dce8",
+          "git_blob_sha": "0e1edf0854767e8469bb0bf366e61b1524646cff",
           "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py"
         },
         {
-          "git_blob_sha": "f6325881033aa9dc284fe589dd5dfc8674bb56b3",
+          "git_blob_sha": "126d35d291f59fa20fb61046d86c1ae47eae14cb",
           "path": "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py"
         },
         {

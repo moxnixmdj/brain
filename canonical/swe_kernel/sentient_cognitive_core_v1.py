@@ -81,32 +81,11 @@ FEATURE_NAMES: tuple[str, ...] = (
     "family_observation_confidence",
 )
 
-# Informed zero-LLM structural prior (immediately plastic under Kalman/Laplace updates!)
-_PRIOR_MU: tuple[float, ...] = (
-    -0.35,   # bias
-    1.10,    # host_ready (1 only when all deps/imports/binaries ready AND not env-blocked)
-    1.05,    # grounding_complete (1 only when all slots typed & grounded AND not env-blocked)
-    0.85,    # causal_precond_met (1 only when causal/consistency preconditions satisfied)
-    1.35,    # memory_reflex_hit
-    0.20,    # strong_verifier
-    -2.95,   # missing_dep_or_env_block
-    -1.35,   # nested_cost_or_timeout_risk
-    2.20,    # family_empirical_pass_centered (rate - 0.5)
-    0.45,    # family_observation_confidence
-)
-
-_PRIOR_VAR: tuple[float, ...] = (
-    0.18,
-    0.35,
-    0.35,
-    0.35,
-    0.35,
-    0.12,
-    0.45,
-    0.40,
-    0.65,
-    0.30,
-)
+# Zero hand-tuned prior weights: `EpistemicSelfBeliefEngine` initializes at exact
+# zero-mean isotropic residual `mu_0 = [0.0] * d`, `Sigma_0 = [1.0 / d] * d` over
+# Laplace's Rule of Succession (`(1 + n_+) / (2 + n_+ + n_-)`) and deductive
+# precondition feasibility, updating `mu_t` online from independently inspected outcomes.
+_TWO_SHANNON_BITS_NATS: float = 2.0 * math.log(2.0)
 
 
 def _atomic_write_json(path: pathlib.Path, payload: Mapping[str, Any]) -> None:
@@ -183,7 +162,7 @@ class EpistemicSelfBeliefEngine:
         self,
         state_path: pathlib.Path | str | None = None,
         *,
-        surprise_threshold: float = 1.35,
+        surprise_threshold: float = _TWO_SHANNON_BITS_NATS,
         process_drift_var: float = 0.0015,
         min_var: float = 0.015,
     ) -> None:
@@ -191,8 +170,9 @@ class EpistemicSelfBeliefEngine:
         self.surprise_threshold = float(surprise_threshold)
         self.process_drift_var = float(process_drift_var)
         self.min_var = float(min_var)
-        self.mu: list[float] = list(_PRIOR_MU)
-        self.var: list[float] = list(_PRIOR_VAR)
+        dim = len(FEATURE_NAMES)
+        self.mu: list[float] = [0.0] * dim
+        self.var: list[float] = [1.0 / dim] * dim
         # Per-family Beta(alpha, beta) + Welford cost/gain/latency trackers & exact-task memory
         self.family_stats: dict[str, dict[str, float]] = {}
         self.task_stats: dict[str, dict[str, int]] = {}
@@ -288,21 +268,32 @@ class EpistemicSelfBeliefEngine:
         phi = tuple(float(v) for v in features) if features is not None else self.build_feature_vector(task_id, **feature_kwargs)
         if len(phi) != len(self.mu):
             raise ValueError(f"Expected {len(self.mu)} features, got {len(phi)}")
-        mean_logit = sum(m * x for m, x in zip(self.mu, phi))
+        # Deductive precondition violation count & Laplace Rule-of-Succession structural base log-odds
+        violated_necessary = int(phi[1] < 0.5) + int(phi[2] < 0.5) + int(phi[3] < 0.5) + int(phi[6] > 0.5)
+        n_pos = sum(1.0 for idx in (1, 2, 3, 4, 5) if phi[idx] >= 0.5)
+        n_neg = float(violated_necessary) + (2.0 if phi[7] >= 0.5 else 0.0)
+        laplace_base_logit = math.log((1.0 + n_pos) / (1.0 + n_neg))
+
+        learned_residual = sum(m * x for m, x in zip(self.mu, phi))
+        mean_logit = laplace_base_logit + learned_residual
         epistemic_var = sum(v * (x * x) for v, x in zip(self.var, phi))
         # MacKay Bayesian logistic marginal integrating Gaussian parameter uncertainty
         kappa = 1.0 / math.sqrt(1.0 + (math.pi / 8.0) * max(0.0, epistemic_var))
         p_raw = _sigmoid(kappa * mean_logit)
 
-        # Incorporate exact-task Beta posterior update when this exact task was already attempted
         tst = self.task_stats.get(str(task_id))
-        if tst and (tst.get("pass", 0) + tst.get("fail", 0)) > 0:
-            tp = int(tst.get("pass", 0))
-            tf = int(tst.get("fail", 0))
-            # Conjugate pseudo-prior weight = 0.8 centered at `p_raw`
-            p_raw = (tp + 0.8 * p_raw) / (tp + tf + 0.8)
+        tp = int((tst or {}).get("pass", 0))
+        tf = int((tst or {}).get("fail", 0))
+        if violated_necessary > 0 and tp == 0:
+            # Deductive necessary-condition bound under Laplace smoothing `1 / (dim + violated)`
+            p_raw = min(p_raw, 1.0 / float(len(self.mu) + violated_necessary + tf))
+        elif (tp + tf) > 0:
+            # Unit Laplace pseudo-count centered at `p_raw`
+            p_raw = (float(tp) + p_raw) / (float(tp + tf) + 1.0)
 
         p_hat = min(0.985, max(0.015, p_raw))
+        eff_n = 2.0 + n_pos + n_neg + float(tp + tf)
+        posterior_std = math.sqrt(max(1e-9, p_hat * (1.0 - p_hat) / eff_n))
 
         fam = task_family_key(task_id)
         st = self.family_stats.get(fam) or {}
@@ -316,6 +307,8 @@ class EpistemicSelfBeliefEngine:
             "features": phi,
             "mean_logit": round(mean_logit, 6),
             "epistemic_variance": round(epistemic_var, 6),
+            "posterior_std": round(posterior_std, 6),
+            "lower_confidence_bound": round(p_hat - posterior_std, 6),
             "predicted_pass_probability": round(p_hat, 6),
             "predictive_entropy_bits": round(_binary_entropy(p_hat), 6),
             "expected_cost": round(exp_cost, 4),
@@ -1355,19 +1348,19 @@ class WakeSleepConsolidationEngine:
 
 
 class SentientCognitiveCore:
-    """Unified Non-Static Cognitive Core fusing Epistemic Self-Belief, Causal World Graph, VoI Dominance, and Wake-Sleep."""
+    """Unified Non-Static Cognitive Core fusing Epistemic Self-Belief, Causal World Graph, VoI Dominance, Wake-Sleep & Recursive Self-Architecting."""
 
     def __init__(
         self,
         root_dir: pathlib.Path | str | None = None,
         *,
-        reflex_confidence_threshold: float = 0.72,
-        surprise_threshold: float = 1.35,
+        surprise_threshold: float = _TWO_SHANNON_BITS_NATS,
     ) -> None:
+        from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
+
         self.root_dir = pathlib.Path(root_dir).resolve() if root_dir is not None else None
         if self.root_dir is not None:
             self.root_dir.mkdir(parents=True, exist_ok=True)
-        self.reflex_confidence_threshold = float(reflex_confidence_threshold)
         self.belief = EpistemicSelfBeliefEngine(
             (self.root_dir / "belief_state.json") if self.root_dir is not None else None,
             surprise_threshold=surprise_threshold,
@@ -1379,6 +1372,33 @@ class SentientCognitiveCore:
             (self.root_dir / "wake_sleep_consolidation.json") if self.root_dir is not None else None,
         )
         self.voi_controller = GlobalVoIDominanceController()
+        self.self_architect = RecursiveSelfArchitect(
+            (self.root_dir / "self_architect")
+            if self.root_dir is not None
+            else pathlib.Path(tempfile.gettempdir()) / f"brain_self_arch_{os.getpid()}"
+        )
+
+    def evolve_self_code(
+        self,
+        code_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str],
+        failed_episodes: Sequence[Mapping[str, Any]] = (),
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+        apply_to_root: bool = True,
+    ) -> dict[str, Any]:
+        """Inspect, benchmark, synthesize, Ring-0 verify, and promote Ring-1 `.py` self-upgrades."""
+        return self.self_architect.run_self_improvement_cycle(
+            pathlib.Path(code_root),
+            ring1_relpaths=ring1_relpaths,
+            failed_episodes=failed_episodes,
+            sealed_heldout_by_target=sealed_heldout_by_target,
+            speed_benchmarks_by_target=speed_benchmarks_by_target,
+            test_relpaths=test_relpaths,
+            apply_to_root=apply_to_root,
+        )
 
     def decide_cognitive_regime(
         self,
@@ -1388,7 +1408,7 @@ class SentientCognitiveCore:
         verification_kind: str = "TEST_SUITE",
         **feature_kwargs: Any,
     ) -> dict[str, Any]:
-        """Gate System-1 (`< 0.5 ms` amortized reflex) vs System-2 deliberation using `Theta_t` and `S_{t-1}`."""
+        """Gate System-1 (`< 0.5 ms` amortized reflex) vs System-2 deliberation via lower-confidence-bound dominance (`p_lcb > 0.5`)."""
         t0 = time.perf_counter_ns()
         dist = self.belief.predict_distribution(
             task_id,
@@ -1398,16 +1418,26 @@ class SentientCognitiveCore:
         )
         p_hat = float(dist["predicted_pass_probability"])
         ep_var = float(dist["epistemic_variance"])
+        p_lcb = float(dist["lower_confidence_bound"])
+        tst = self.belief.task_stats.get(str(task_id)) or {}
+        fam_st = self.belief.family_stats.get(str(dist["family_key"])) or {}
+        has_verified_evidence = (
+            self.belief.total_updates > 0
+            or int(tst.get("pass", 0)) > 0
+            or float(fam_st.get("alpha", 1.0)) > 1.0
+        )
         recent_surprise = self.belief.last_surprise > self.belief.surprise_threshold
+        # Parameter-free binary symmetry dominance: lower confidence bound strictly exceeds 1/2
         use_system1 = (
             has_consolidated_reflex
-            and p_hat >= self.reflex_confidence_threshold
-            and float(dist["predictive_entropy_bits"]) <= 0.68
+            and has_verified_evidence
+            and p_lcb > 0.5
             and not recent_surprise
         )
         return {
             "regime": "SYSTEM_1_REFLEX" if use_system1 else "SYSTEM_2_DELIBERATION",
             "predicted_pass_probability": p_hat,
+            "lower_confidence_bound": p_lcb,
             "epistemic_variance": ep_var,
             "predictive_entropy_bits": dist["predictive_entropy_bits"],
             "broad_b_plus_unlocked": verification_kind == "TEST_SUITE",

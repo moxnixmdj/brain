@@ -605,6 +605,43 @@ class Creature:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
 
+    def self_architect_step(
+        self,
+        code_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str],
+        failed_episodes: Sequence[Mapping[str, Any]] = (),
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+        life_cost: float = 0.5,
+        apply_to_root: bool = True,
+    ) -> dict[str, Any]:
+        """Autonomously inspect, benchmark, patch, Ring-0 verify, and evolve Ring-1 `.py` organs under mortality."""
+        cost = max(0.05, float(life_cost))
+        if self._life.remaining <= 0 or not self._life.can_finish(cost):
+            return {"status": "CANNOT_AFFORD_SELF_ARCHITECTING", "life_remaining": self._life.remaining}
+        self._life.spend(cost)
+        self._save()
+        res = self.cognitive_core.evolve_self_code(
+            pathlib.Path(code_root),
+            ring1_relpaths=ring1_relpaths,
+            failed_episodes=failed_episodes,
+            sealed_heldout_by_target=sealed_heldout_by_target,
+            speed_benchmarks_by_target=speed_benchmarks_by_target,
+            test_relpaths=test_relpaths,
+            apply_to_root=apply_to_root,
+        )
+        promoted_ok = int(res.get("promoted_count") or 0) > 0
+        posture = self._standing.record(verified=True, correct=promoted_ok)
+        self._save()
+        return {
+            "status": "SELF_ARCHITECTED" if promoted_ok else "NO_SELF_PATCH_PROMOTED",
+            "life_remaining": self._life.remaining,
+            "posture": posture,
+            "evolution": res,
+        }
+
     # ---------------------------------------------------------------- report
 
     def report(self) -> dict[str, Any]:
