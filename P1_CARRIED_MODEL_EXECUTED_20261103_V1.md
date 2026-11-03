@@ -110,6 +110,42 @@ the cold arm is still asserted to be `MODEL_LEARNED_…` only.
 
 ---
 
+## 4b. Does memory accumulate or interfere? Measured, because the owner's strategy turns on it
+
+"Give it a try in all those new environments" only pays if lessons **accumulate**. Two ways it
+could fail: unrelated memory pollutes recall, or each kind stays separate so nothing compounds.
+Both measured on the same 15 cases, with the store deliberately loaded.
+
+| arm | store contains | solved | one-trial | mean trials | mean act calls |
+|---|---|---|---|---|---|
+| clean | only this family's source lesson | 15/15 | 8/15 | 22.4 | 182 |
+| loaded | four OTHER families taught first, then this one | 15/15 | 8/15 | **22.4** | **182** |
+
+**Byte-identical.** Two conclusions, one good and one bad:
+
+- **No interference (good).** Unrelated lessons do not pollute recall. Cross-kind separation is
+  the fingerprint, and it discriminates correctly: with one shared `goal_key` forcing all five
+  kinds into a single recall pool, the most-similar stored kind matched the target's own kind in
+  **5/5** cases (0.92–1.00 against 0.00 for everything else).
+- **No compounding (the important one).** Adding a fifth kind did not make the fifth instance
+  cheaper than the first instance of the first kind was. The store gets **bigger, not better**.
+  Compounding exists *inside* a kind (8/15 one-trial) and not *across* kinds (0/5).
+
+So breadth of environments buys breadth: N kinds each learnable after one example. It does not
+buy depth, and it does not lower the cost of the first encounter with a new kind — which is
+exactly what the strategy assumes. The per-kind variance also shows why: `lock_3dial` still
+needs 24–200 trials on a new target while `grid`/`modulo`/`toggles` need 1, and the difference is
+whether the stored model happens to contain the target's path. That is the representational
+frontier again, now measured as a number rather than argued.
+
+The one layer that *does* transfer across environments is the operating manual, and it was
+re-checked today on three repos it was never tuned for: `Makefile` wrapper followed through to
+`python3 -m unittest discover -s tests` and **1 test actually ran**; a CI-declared
+`python -m pytest -q` **actually ran**; a `package.json` whose script ran no tests was
+**refused with the count that proved it** (`npm run test -> no tests (0, -)`). Two executed, one
+honest refusal — the mechanism works because it counts tests that really ran rather than
+reporting success.
+
 ## 5. What is still wrong, and is not fixed here
 
 - **7 of 15 cases still spend more act calls than carrying nothing** (worst 1.40×). That is the
