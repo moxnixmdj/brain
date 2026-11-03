@@ -106,6 +106,14 @@ then on, new instances each call:
 
 10/10 new instances solved by recalled plan. Consistent with §2, independently derived.
 
+> **CORRECTION 2026-11-03.** "New instances" in the row above is not true: four of the five
+> families build the *same* instance for all three phases (`lock`, `accumulator`, `grid`,
+> `modulo` — identical start state and goal predicate). This is exact-episode replay, not
+> transfer. Re-measured on genuinely distinct instances: **1/15** cases show a genuine saving,
+> median trial speedup **1.00×**, **3027 vs 3028** environment calls. See
+> `INSTANT_LEARNING_NEW_INSTANCE_REMEASUREMENT_20261103_V1.md` §2 and
+> `transfer_learning_new_instance_probe_20261103.py`. The rest of this document is unaffected.
+
 ---
 
 ## 5. The one gap that survived everything — and was then closed
