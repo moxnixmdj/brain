@@ -27,6 +27,7 @@ compiled model fails here rather than in production.
 """
 from __future__ import annotations
 
+import copy
 import json
 import pathlib
 import sys
@@ -78,10 +79,29 @@ def test_the_request_is_routed_to_the_row_whose_inputs_the_caller_supplied() -> 
 
 
 def test_the_reroute_is_reported_rather_than_silent() -> None:
-    model = _model()
-    _base, inputs = _manifest_world()
-    result = model.solve("create a tar gz archive from a manifest", inputs=inputs)
+    # Main 2ce359e6 changed ranking so the manifest row now wins outright.
+    # Exercise the original ordering as a controlled route while still running
+    # the real solver and real adapter, rather than requiring today's scoring to
+    # keep reproducing a historical ranking mistake.
+    goal = "create a tar gz archive from a manifest"
+    original = _model().route(goal)
+    candidates = original.get("candidates") or []
+    first = next(row for row in candidates if row.get("id") == "file.archive.tar_gz.v1")
+    second = next(row for row in candidates if row.get("id") == "archive.tar_gz.create_from_manifest")
+    forced = dict(original, confident=True, best=first, candidates=[first, second])
+
+    class HistoricalRanking(um.UnifiedModel):
+        def route(self, *args, **kwargs):
+            return copy.deepcopy(forced)
+
+    model = HistoricalRanking(um.load_model(ARTIFACT))
+    base, inputs = _manifest_world()
+    with tempfile.TemporaryDirectory(dir=str(ROOT / "canonical/astra_runtime/tmp")) as tmp:
+        inputs["ledger_db_path"] = str(pathlib.Path(tmp) / "routing.sqlite3")
+        result = model.solve(goal, inputs=inputs)
     routing = result.get("routing") or {}
+    assert result.get("pass") is True, result.get("reason")
+    assert (base / "out" / "bundle.tar.gz").is_file()
     assert routing.get("rerouted_from") == "file.archive.tar_gz.v1", routing.get("rerouted_from")
     assert routing.get("reroute_rule") == (
         "TOP_CANDIDATE_INPUTS_UNFILLABLE__NEXT_FILLABLE_CANDIDATE"), routing.get("reroute_rule")

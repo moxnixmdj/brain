@@ -221,10 +221,15 @@ def _materialize_concept_helpers(
             continue
         entry = concept_entries[cid]
         try:
-            c_tree = ast.parse(entry.body_expr, mode="eval")
+            c_src = (
+                entry.render_helper_def()
+                if getattr(entry, "is_stmt_fn", False) and hasattr(entry, "render_helper_def")
+                else entry.body_expr
+            )
+            c_tree = ast.parse(c_src) if getattr(entry, "is_stmt_fn", False) else ast.parse(c_src, mode="eval")
             for sub in ast.walk(c_tree):
                 if isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id in concept_entries:
-                    if sub.func.id not in expanded:
+                    if sub.func.id not in expanded and sub.func.id != cid:
                         queue.insert(0, sub.func.id)
         except SyntaxError:
             pass
@@ -238,8 +243,11 @@ def _materialize_concept_helpers(
     helper_lines: list[str] = []
     for cid in ordered:
         entry = concept_entries[cid]
-        p_sig = ", ".join(entry.param_names)
-        helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
+        if getattr(entry, "is_stmt_fn", False) and hasattr(entry, "render_helper_def"):
+            helper_lines.append(entry.render_helper_def())
+        else:
+            p_sig = ", ".join(entry.param_names)
+            helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
         if concept_library is not None and hasattr(concept_library, "record_concept_outcome"):
             try:
                 concept_library.record_concept_outcome(cid, helped=True)
@@ -468,12 +476,26 @@ def synthesize_python_function_body(
                     break
 
     # STUN Stage (Alur et al., CAV 2015): unify partial terms under synthesized predicates!
+    # Anti-memorization Occam filter: reject constant expressions forged out of multi-op arithmetic
+    # (e.g. `(1 + 2) * 2 == 6`) that read zero parameters and match only a single example.
+    allowed_const_reprs = {repr(c) for c in (0, 0.0, 1, -1, 100, True, False, None, "", [], {}, *extra_constants)}
+
+    def _reads_any_param(expr_s: str) -> bool:
+        try:
+            et = ast.parse(expr_s, mode="eval")
+        except SyntaxError:
+            return False
+        return any(isinstance(nd, ast.Name) and nd.id in param_set for nd in ast.walk(et))
+
     n_ex = len(examples)
-    all_terms: list[tuple[str, tuple[bool, ...]]] = []
+    all_terms: list[tuple[str, tuple[bool, ...], bool]] = []
     for sig, expr_src in seen_sigs.items():
         mask = tuple(sig[i] == target_sig[i] for i in range(n_ex))
         if any(mask):
-            all_terms.append((expr_src, mask))
+            reads_p = _reads_any_param(expr_src)
+            if not reads_p and expr_src not in allowed_const_reprs and sum(mask) < 2:
+                continue
+            all_terms.append((expr_src, mask, reads_p))
 
     # Collect boolean predicates from bank + standard guard predicates
     predicates: list[tuple[str, tuple[bool, ...]]] = []
@@ -500,8 +522,6 @@ def synthesize_python_function_body(
             f"{p} <= 0",
             f"{p} < 0",
             f"{p} == 0",
-            f"{p} == 1",
-            f"{p} % 2 == 0",
         ):
             _add_pred(cand_p)
         for c in extra_constants[:6]:
@@ -511,7 +531,51 @@ def synthesize_python_function_body(
                     _add_pred(f"{p} <= {c!r}")
                     _add_pred(f"{p} < {c!r}")
                     _add_pred(f"{p} >= {c!r}")
+    # Also include direct relational boundary guards between two parameters (e.g. `hi <= lo`)
+    if len(param_names) >= 2:
+        for i_p, pa in enumerate(param_names):
+            for pb in param_names[i_p + 1 :]:
+                for rel_op in ("==", "<=", "<", ">="):
+                    _add_pred(f"{pa} {rel_op} {pb}")
 
+    boundary_pred_count = len(predicates)
+
+    def _reads_all_params(stmt_code: str) -> bool:
+        try:
+            st_mod = ast.parse(stmt_code)
+        except SyntaxError:
+            return False
+        names = {nd.id for nd in ast.walk(st_mod) if isinstance(nd, ast.Name)}
+        return param_set.issubset(names)
+
+    # Stage 3A: Boundary-Guarded 1-level STUN (canonical degenerate boundary guards only;
+    # at least one branch — the non-degenerate general law — must depend on ALL parameters)
+    for p_src, pmask in predicates[:boundary_pred_count]:
+        then_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if pmask[i])]
+        if not then_cands:
+            continue
+        else_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if not pmask[i])]
+        if else_cands:
+            e_then, rp_t = min(then_cands, key=lambda x: len(x[0]))
+            e_else, rp_e = min(else_cands, key=lambda x: len(x[0]))
+            if (rp_t or rp_e) and (_reads_all_params(e_then) or _reads_all_params(e_else)):
+                return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
+
+    # Stage 3B: Unified Higher-Order Recursion Schemes (HORS: Fold, Hash-Join, Tabulated Fix/DP, AST Algebra)
+    # Solomonoff MDL law: a single unified algorithmic recurrence strictly dominates ad-hoc derived case splits.
+    hors_body = _synthesize_hors_algorithmic_body(
+        param_names=param_names,
+        inputs=inputs,
+        target_sig=target_sig,
+        concept_callables=concept_callables,
+    )
+    if hors_body is not None:
+        return _finish(hors_body)
+
+    # Stage 4: General STUN over parity & synthesized compound predicates
+    for p in param_names:
+        _add_pred(f"{p} == 1")
+        _add_pred(f"{p} % 2 == 0")
     for sig, expr_src in seen_sigs.items():
         if all(t == "bool" for t, _ in sig):
             pmask = tuple(bool(v) for _, v in sig)
@@ -519,20 +583,20 @@ def synthesize_python_function_body(
                 seen_pmasks.add(pmask)
                 predicates.append((expr_src, pmask))
 
-    # 1-level STUN: if P: return E_then else: return E_else
-    for p_src, pmask in predicates:
-        then_cands = [e for e, m in all_terms if all(m[i] for i in range(n_ex) if pmask[i])]
+    for p_src, pmask in predicates[boundary_pred_count:]:
+        then_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if pmask[i])]
         if not then_cands:
             continue
-        else_cands = [e for e, m in all_terms if all(m[i] for i in range(n_ex) if not pmask[i])]
+        else_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if not pmask[i])]
         if else_cands:
-            e_then = min(then_cands, key=len)
-            e_else = min(else_cands, key=len)
-            return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
+            e_then, rp_t = min(then_cands, key=lambda x: len(x[0]))
+            e_else, rp_e = min(else_cands, key=lambda x: len(x[0]))
+            if rp_t or rp_e:
+                return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
 
     # 2-level STUN: if P1: return E1 / elif P2: return E2 / return E3
     for i, (p1_src, pm1) in enumerate(predicates[:40]):
-        t1_cands = [e for e, m in all_terms if all(m[k] for k in range(n_ex) if pm1[k])]
+        t1_cands = [(e, rp) for e, m, rp in all_terms if all(m[k] for k in range(n_ex) if pm1[k])]
         if not t1_cands:
             continue
         rem_indices = [k for k in range(n_ex) if not pm1[k]]
@@ -543,15 +607,210 @@ def synthesize_python_function_body(
             b3 = [k for k in rem_indices if not pm2[k]]
             if not b2 or not b3:
                 continue
-            t2_cands = [e for e, m in all_terms if all(m[k] for k in b2)]
+            t2_cands = [(e, rp) for e, m, rp in all_terms if all(m[k] for k in b2)]
             if not t2_cands:
                 continue
-            t3_cands = [e for e, m in all_terms if all(m[k] for k in b3)]
+            t3_cands = [(e, rp) for e, m, rp in all_terms if all(m[k] for k in b3)]
             if t3_cands:
-                e1 = min(t1_cands, key=len)
-                e2 = min(t2_cands, key=len)
-                e3 = min(t3_cands, key=len)
-                return _finish(f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}")
+                e1, rp1 = min(t1_cands, key=lambda x: len(x[0]))
+                e2, rp2 = min(t2_cands, key=lambda x: len(x[0]))
+                e3, rp3 = min(t3_cands, key=lambda x: len(x[0]))
+                if rp1 or rp2 or rp3:
+                    return _finish(f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}")
+
+    return None
+
+
+def _synthesize_hors_algorithmic_body(
+    *,
+    param_names: Sequence[str],
+    inputs: Sequence[tuple[Any, ...]],
+    target_sig: tuple[Any, ...],
+    concept_callables: Mapping[str, Any] | None = None,
+) -> str | None:
+    """Synthesize multi-statement HORS programs verified via `eval_pure_ast_function` (zero `exec`)."""
+    from canonical.swe_kernel.concept_library_v1 import (
+        build_programmatic_ast_catamorphism_stmts,
+        eval_pure_ast_expr,
+        eval_pure_ast_function,
+    )
+
+    if not inputs or not param_names:
+        return None
+    params_sig = ", ".join(param_names)
+
+    def _verify_body(body_src: str) -> bool:
+        indented = "\n".join("    " + ln for ln in body_src.splitlines())
+        try:
+            mod = ast.parse(f"def _hors_cand({params_sig}):\n{indented}\n")
+            if not mod.body or not isinstance(mod.body[0], ast.FunctionDef):
+                return False
+            fdef = mod.body[0]
+        except SyntaxError:
+            return False
+        for row, exp_s in zip(inputs, target_sig):
+            try:
+                out = eval_pure_ast_function(fdef, row, extra_callables=concept_callables, max_steps=25_000)
+            except Exception:
+                return False
+            if _freeze_val(out) != exp_s:
+                return False
+        return True
+
+    arity = len(param_names)
+    p0 = param_names[0]
+    first_args0 = [row[0] for row in inputs]
+
+    # 4A. HORS_AST_ALGEBRA: Empirical AST catamorphism when arg0 is str syntax expression
+    if arity in (1, 2) and len(inputs) >= 2 and all(isinstance(v, str) and v.strip() for v in first_args0):
+        env_p = param_names[1] if arity == 2 else None
+        all_denot_match = True
+        has_bw = False
+        for row, exp_s in zip(inputs, target_sig):
+            raw_e = str(row[0]).strip()
+            raw_env = dict(row[1]) if arity == 2 and isinstance(row[1], Mapping) else {}
+            try:
+                pt = ast.parse(raw_e, mode="eval")
+                if any(isinstance(sub, (ast.BitAnd, ast.BitOr, ast.BitXor, ast.RShift, ast.Invert)) for sub in ast.walk(pt)):
+                    has_bw = True
+                val = eval_pure_ast_expr(pt, raw_env)
+            except ZeroDivisionError:
+                val = 0
+            except Exception:
+                all_denot_match = False
+                break
+            if _freeze_val(val) != exp_s:
+                all_denot_match = False
+                break
+        if all_denot_match:
+            cata_stmts = build_programmatic_ast_catamorphism_stmts(p0, env_p, has_bitwise=has_bw)
+            return "\n".join(ast.unparse(st) for st in cata_stmts)
+
+    # 4B. HORS_FOLD: Stateful folds, deduplication, frequency/group-by, and 2-register prefix/scan DP
+    if arity == 1 and all(isinstance(v, (list, tuple, str)) for v in first_args0):
+        fold_candidates: list[str] = [
+            # Order-preserving linear deduplication (hashable fast-path + unhashable repr fallback)
+            f"_seen = set()\n_out = []\nfor _x in {p0}:\n"
+            f"    _k = (type(_x), _x) if _x is None or isinstance(_x, (bool, int, float, str, bytes, tuple, frozenset)) else (type(_x), repr(_x))\n"
+            f"    if _k not in _seen:\n        _seen.add(_k)\n        _out.append(_x)\nreturn _out",
+            # Frequency histogram -> dict or sorted items or mode
+            f"_cnt = {{}}\nfor _x in {p0}:\n    _cnt[_x] = _cnt.get(_x, 0) + 1\nreturn _cnt",
+            f"_cnt = {{}}\nfor _x in {p0}:\n    _cnt[_x] = _cnt.get(_x, 0) + 1\nreturn sorted(_cnt.items())",
+            # Kadane maximum subarray sum (empty-safe 0 & non-empty max)
+            f"_cur = 0\n_best = 0\nfor _x in {p0}:\n    _cur = max(0, _cur + _x)\n    _best = max(_best, _cur)\nreturn _best",
+            f"if not {p0}:\n    return 0\n_cur = {p0}[0]\n_best = {p0}[0]\nfor _x in {p0}[1:]:\n    _cur = max(_x, _cur + _x)\n    _best = max(_best, _cur)\nreturn _best",
+            # Max drawdown (peak - x) and Max single-trade profit (x - valley)
+            f"if not {p0}:\n    return 0\n_pk = {p0}[0]\n_dd = 0\nfor _x in {p0}:\n    _pk = max(_pk, _x)\n    _dd = max(_dd, _pk - _x)\nreturn _dd",
+            f"if not {p0}:\n    return 0\n_lo = {p0}[0]\n_ gain = 0\n".replace("_ gain", "_gain")
+            + f"for _x in {p0}:\n    _gain = max(_gain, _x - _lo)\n    _lo = min(_lo, _x)\nreturn _gain",
+            # Longest consecutive equal run / positive streak
+            f"if not {p0}:\n    return 0\n_run = 1\n_best = 1\nfor _i in range(1, len({p0})):\n"
+            f"    _run = _run + 1 if {p0}[_i] == {p0}[_i - 1] else 1\n    _best = max(_best, _run)\nreturn _best",
+            f"_run = 0\n_best = 0\nfor _x in {p0}:\n    _run = _run + 1 if _x > 0 else 0\n    _best = max(_best, _run)\nreturn _best",
+            # Key-value pair group-by sum & list aggregation
+            f"_grp = {{}}\nfor _k, _v in {p0}:\n    _grp[_k] = _grp.get(_k, 0) + _v\nreturn _grp",
+            f"_grp = {{}}\nfor _k, _v in {p0}:\n    _grp.setdefault(_k, []).append(_v)\nreturn _grp",
+            # Run-length encoding [(val, count), ...]
+            f"if not {p0}:\n    return []\n_out = []\n_cur = {p0}[0]\n_n = 1\nfor _x in {p0}[1:]:\n"
+            f"    if _x == _cur:\n        _n += 1\n    else:\n        _out.append((_cur, _n))\n        _cur = _x\n        _n = 1\n_out.append((_cur, _n))\nreturn _out",
+        ]
+        for cand in fold_candidates:
+            if _verify_body(cand):
+                return cand
+
+    # 4C. HORS_HASH_JOIN: O(N + M) set-membership filter & relational hash-indexed equijoin
+    if arity == 2 and all(isinstance(row[0], (list, tuple)) and isinstance(row[1], (list, tuple, set)) for row in inputs):
+        pa, pb = param_names[0], param_names[1]
+        join_cands: list[str] = [
+            f"_s = set({pb})\nreturn [_x for _x in {pa} if _x in _s]",
+            f"_s = set({pb})\nreturn [_x for _x in {pa} if _x not in _s]",
+            f"_s = set({pb})\n_seen = set()\n_out = []\nfor _x in {pa}:\n    if _x in _s and _x not in _seen:\n        _seen.add(_x)\n        _out.append(_x)\nreturn _out",
+        ]
+        # Probe tuple equijoin column indices empirically from non-empty sample rows
+        non_empty = [row for row in inputs if row[0] and row[1] and isinstance(row[0][0], tuple) and isinstance(row[1][0], tuple)]
+        if non_empty:
+            la = min(len(r[0][0]) for r in non_empty)
+            lb = min(len(r[1][0]) for r in non_empty)
+            for ka in range(min(la, 3)):
+                for kb in range(min(lb, 3)):
+                    for va in range(min(la, 3)):
+                        for vb in range(min(lb, 3)):
+                            join_cands.append(
+                                f"_idx = {{}}\nfor _r in {pb}:\n    _idx.setdefault(_r[{kb}], []).append(_r[{vb}])\n"
+                                f"_out = []\nfor _l in {pa}:\n    for _m in _idx.get(_l[{ka}], ()):\n        _out.append((_l[{va}], _m))\nreturn _out"
+                            )
+                    join_cands.append(
+                        f"_idx = {{}}\nfor _r in {pb}:\n    _idx.setdefault(_r[{kb}], []).append(_r)\n"
+                        f"_out = []\nfor _l in {pa}:\n    for _m in _idx.get(_l[{ka}], ()):\n        _out.append((_l, _m))\nreturn _out"
+                    )
+        for cand in join_cands:
+            if _verify_body(cand):
+                return cand
+
+    # 4D. HORS_FIX_MEMO: Tabulated structural recursion / Dynamic Programming
+    # (i) 1D integer recurrence `f(n)`
+    if arity == 1 and all(isinstance(v, int) and not isinstance(v, bool) and 0 <= v <= 60 for v in first_args0):
+        obs = {int(row[0]): exp_s[1] for row, exp_s in zip(inputs, target_sig) if exp_s[0] == "int"}
+        b0_opts = [obs[0]] if 0 in obs else [0, 1]
+        b1_opts = [obs[1]] if 1 in obs else [1, 2, 0]
+        b2_opts = [obs[2]] if 2 in obs else [1, 2, 3, 4]
+        dp_cands: list[str] = []
+        for b0 in b0_opts:
+            for b1 in b1_opts:
+                for step_expr in ("_dp[_i - 1] + _dp[_i - 2]", "2 * _dp[_i - 1] + _dp[_i - 2]", "_dp[_i - 1] + 2 * _dp[_i - 2]", "_i * _dp[_i - 1]"):
+                    dp_cands.append(
+                        f"if {p0} <= 0:\n    return {b0}\nif {p0} == 1:\n    return {b1}\n"
+                        f"_dp = [{b0}, {b1}] + [0] * ({p0} - 1)\nfor _i in range(2, {p0} + 1):\n    _dp[_i] = {step_expr}\nreturn _dp[{p0}]"
+                    )
+                for b2 in b2_opts:
+                    dp_cands.append(
+                        f"if {p0} <= 0:\n    return {b0}\nif {p0} == 1:\n    return {b1}\nif {p0} == 2:\n    return {b2}\n"
+                        f"_dp = [{b0}, {b1}, {b2}] + [0] * ({p0} - 2)\nfor _i in range(3, {p0} + 1):\n    _dp[_i] = _dp[_i - 1] + _dp[_i - 2] + _dp[_i - 3]\nreturn _dp[{p0}]"
+                    )
+        # Catalan DP: C_0 = 1, C_n = sum(C_k * C_{n-1-k})
+        dp_cands.append(
+            f"if {p0} <= 1:\n    return 1\n_dp = [0] * ({p0} + 1)\n_dp[0] = 1\n_dp[1] = 1\n"
+            f"for _i in range(2, {p0} + 1):\n    _s = 0\n    for _k in range(_i):\n        _s += _dp[_k] * _dp[_i - 1 - _k]\n    _dp[_i] = _s\nreturn _dp[{p0}]"
+        )
+        for cand in dp_cands:
+            if _verify_body(cand):
+                return cand
+
+    # (ii) Unbounded knapsack / coin-change `(items, target)` DP
+    if (
+        arity == 2
+        and all(isinstance(row[0], (list, tuple)) and isinstance(row[1], int) and not isinstance(row[1], bool) and 0 <= row[1] <= 500 for row in inputs)
+    ):
+        pc, pt = param_names[0], param_names[1]
+        knap_cands = [
+            # Min-coins DP (-1 if unreachable)
+            f"if {pt} <= 0:\n    return 0\n_inf = {pt} + 1\n_dp = [0] + [_inf] * {pt}\n"
+            f"for _a in range(1, {pt} + 1):\n    for _c in {pc}:\n        if 0 < _c <= _a and _dp[_a - _c] + 1 < _dp[_a]:\n            _dp[_a] = _dp[_a - _c] + 1\n"
+            f"return -1 if _dp[{pt}] > {pt} else _dp[{pt}]",
+            # Combination count DP (ways to sum to target)
+            f"_dp = [1] + [0] * max(0, {pt})\nfor _c in {pc}:\n    if _c > 0:\n        for _a in range(_c, {pt} + 1):\n            _dp[_a] += _dp[_a - _c]\nreturn _dp[{pt}] if {pt} >= 0 else 0",
+        ]
+        for cand in knap_cands:
+            if _verify_body(cand):
+                return cand
+
+    # (iii) 2-sequence 2D DP (LCS & Levenshtein Edit Distance)
+    if arity == 2 and all(isinstance(row[0], (str, list, tuple)) and isinstance(row[1], (str, list, tuple)) for row in inputs):
+        pa, pb = param_names[0], param_names[1]
+        seq2_cands = [
+            # Longest Common Subsequence length
+            f"_prev = [0] * (len({pb}) + 1)\nfor _i in range(len({pa})):\n    _cur = [0] * (len({pb}) + 1)\n"
+            f"    for _j in range(len({pb})):\n        _cur[_j + 1] = _prev[_j] + 1 if {pa}[_i] == {pb}[_j] else max(_prev[_j + 1], _cur[_j])\n"
+            f"    _prev = _cur\nreturn _prev[len({pb})]",
+            # Levenshtein Edit Distance
+            f"_prev = list(range(len({pb}) + 1))\nfor _i in range(len({pa})):\n    _cur = [_i + 1] + [0] * len({pb})\n"
+            f"    for _j in range(len({pb})):\n        _cost = 0 if {pa}[_i] == {pb}[_j] else 1\n"
+            f"        _cur[_j + 1] = min(_prev[_j + 1] + 1, _cur[_j] + 1, _prev[_j] + _cost)\n"
+            f"    _prev = _cur\nreturn _prev[len({pb})]",
+        ]
+        for cand in seq2_cands:
+            if _verify_body(cand):
+                return cand
 
     return None
 
