@@ -7,7 +7,7 @@
  "route_id": "STATED_ROOT_BOUND_DECLARED_DEFAULT_AND_SNAPSHOT_CANNOT_DELETE_EVIDENCE_20261103_V1",
  "date": "2026-11-03",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "73f773d164805d9f8c131eb0e45c67a1112af1fa",
+ "canonical_base_commit": "9c80f46225697b28c08f793cc2d85bcf575b2496",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -97,7 +97,7 @@
   "canonical/runtime/verified_bound_capability_execution_adapter_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "73f773d164805d9f8c131eb0e45c67a1112af1fa",
+  "canonical_base_commit": "9c80f46225697b28c08f793cc2d85bcf575b2496",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_DIRECTORY_THE_SENTENCE_NAMES_IS_THE_DIRECTORY_THE_ACTION_READS_WITHOUT_MAKING_A_SILENT_GOAL_UNSERVICEABLE__AND_A_VERIFIED_CAPABILITY_IS_NO_LONGER_REFUSED_FOR_EVIDENCE_A_PROJECTION_SET_TO_NULL",
