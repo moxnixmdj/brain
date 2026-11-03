@@ -25,7 +25,6 @@ from __future__ import annotations
 
 import math
 import os
-import re
 from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping, Sequence
 
@@ -40,13 +39,6 @@ TARGET_REACHED = "PASS__MEASURED_TARGET_REACHED"
 TARGET_UNREACHED_BUDGET_EXHAUSTED = "OPEN__TARGET_NOT_YET_REACHED"
 FAIL_MISSING_EXTERNAL_MEASURE = "FAIL_CLOSED__EXTERNAL_MEASUREMENT_REQUIRED"
 FAIL_NO_QUANTITATIVE_TARGET = "FAIL_CLOSED__NO_NUMERIC_TARGET_IN_GOAL"
-
-_GLOBAL_QUANTIFIER_RE = re.compile(
-    r"\b(?:fastest|best|optimal|global|globally|maximum|maximize|minimum|minimize|"
-    r"highest|lowest|all|every|anywhere|million|billion|most\s+effective)\b",
-    re.IGNORECASE,
-)
-
 
 @dataclass
 class ChannelObservation:
@@ -70,7 +62,51 @@ class ChannelObservation:
 
 
 def has_global_quantifier(goal: str) -> bool:
-    return bool(_GLOBAL_QUANTIFIER_RE.search(str(goal or "")))
+    """Deprecated name kept for API continuity.
+
+    English keywords are not an optimality detector. Any non-empty goal may have
+    unseen better channels; locality must be *proved*, never inferred from prose.
+    """
+    return bool(str(goal or "").strip())
+
+
+def discover_unseen_machine_channel(
+    round_idx: int,
+    known_ids: Sequence[str],
+) -> "ChannelObservation | None":
+    """Native unseen-channel discovery via curriculum + installed programs (`K3 = 0`)."""
+    del round_idx
+    known = {str(x) for x in known_ids}
+    try:
+        for ch in curriculum_v1.ordered_channels():
+            cid = f"curriculum:{ch}"
+            if cid not in known:
+                return ChannelObservation(
+                    channel_id=cid,
+                    samples=1,
+                    mean_payoff=0.0,
+                    unit_cost=1.0,
+                    metadata={"source": "curriculum", "channel": str(ch)},
+                )
+    except Exception:
+        pass
+    try:
+        from canonical.runtime import computer_env_v1
+
+        for prog in computer_env_v1.installed_programs(limit=16):
+            name = str(prog)
+            cid = f"program:{name}"
+            if cid not in known:
+                return ChannelObservation(
+                    channel_id=cid,
+                    samples=1,
+                    mean_payoff=0.0,
+                    unit_cost=1.0,
+                    metadata={"source": "computer_env", "program": name},
+                )
+    except Exception:
+        pass
+    return None
 
 
 def discoverable_machine_universe_size(*, fallback: int = 24) -> int:
@@ -153,18 +189,21 @@ def estimate_unseen_opportunity_space(
     expected_gain_per_unit = m_unseen * max(0.0, u_unseen_velocity - best_vel)
     evoi_global = expected_gain_per_unit * max(1.0, exploit_budget_after_probe) - float(probe_cost)
 
-    global_claim = has_global_quantifier(goal)
+    # Decision-theoretic: never treat English keywords as an optimality detector.
+    # A quantitative target gap, positive EVOI, or empty observation set is sufficient.
     known_max_total = best_vel * max(0.0, float(remaining_budget))
     known_insufficient_for_target = (
         target_gap is not None and float(target_gap) > 0.0 and known_max_total < float(target_gap)
     )
+    pursuing_target = target_gap is not None and float(target_gap) > 0.0
+    global_claim = pursuing_target or has_global_quantifier(goal)
 
     must_expand = (
         float(remaining_budget) > float(probe_cost)
         and unobserved_count > 0
         and m_unseen >= unseen_tail_threshold
         and (
-            (global_claim and evoi_global > 0.0)
+            (evoi_global > 0.0 and (global_claim or known_insufficient_for_target))
             or known_insufficient_for_target
             or k_obs == 0
         )
@@ -212,6 +251,7 @@ def pursue_global_target_to_completion(
     initial_channels: Sequence[ChannelObservation],
     execute_channel: Callable[[str, int], Mapping[str, Any]],
     discover_unseen_channel: Callable[[int, Sequence[str]], ChannelObservation | None] | None = None,
+    native_discovery: bool = False,
     budget: float = 25.0,
     probe_cost: float = 1.0,
     universe_size_hint: int | None = None,
@@ -279,6 +319,8 @@ def pursue_global_target_to_completion(
     history: list[dict[str, Any]] = []
     discoveries: list[str] = []
     discovery_exhausted = False
+    if discover_unseen_channel is None and native_discovery:
+        discover_unseen_channel = discover_unseen_machine_channel
 
     for round_idx in range(max_rounds):
         if _is_met(current_measured):
