@@ -265,3 +265,79 @@ inside the second under `supersedes`.
 The pressure this creates is now concrete rather than hypothetical: **the highest-leverage
 action in the tree — turning on a measured 6 → 0 — is blocked by a schema for a question it
 does not ask.** That is the owner's call.
+
+---
+
+## Execution log — shape ceiling (Step 4, cheapest item): landed, and it contained a real bug
+
+The plan's Step 4.1 said "admit a tail-expression form of the pattern. Small edit." It was a
+small edit, and it turned up a defect that had been silently generating garbage:
+
+**`operator_generalization_v1._occurrences` searched for an operator's characters without
+asking whether it had found a whole token.** Taught `<= → <` and offered
+
+    fn within(x: i64, hi: i64) -> bool { x <= hi }
+
+it produced **two** candidates — the correct rewrite, and `->= bool`, because the `>` of the
+arrow looked like a comparison. `-` is generalizable too, so `x -> y` could become `x +> y`,
+and `>>` could become `>>=`. The caller's mandatory verifier rejected all of it, so nothing
+wrong was ever applied — but a generator emitting syntactically impossible candidates spends
+the caller's oracle budget on proposals that cannot succeed, and the candidate count it reports
+becomes a number about noise.
+
+Fixed with a maximal-token guard (`_is_standalone`). Three tests fail on the old matcher.
+
+**Then the bridge was wired to it.** `recall_across_languages` asked only the narrow question —
+"does the stored skeleton unify?" — so a rule taught inside a `return` could only fire inside a
+`return`. It now offers the operator-swap form second, still through `parses_in` and still
+through the caller's mandatory verifier. It can propose more; it still cannot accept anything.
+
+| | before | after |
+|---|---|---|
+| C++ | CROSSED, executed 3/3 | CROSSED, executed 3/3 |
+| Go, TypeScript, Java | CROSSED, text-only | CROSSED, text-only |
+| **Rust** | **refused** (`RULE_PATTERN_ABSENT`) | **CROSSED** |
+| carried | 4/5 | **5/5** |
+
+An existing test asserted `hit is None` for Rust *"because the pattern needs a token Rust does
+not have."* That was true of the stored skeleton and false of the lesson, so the test now
+asserts the crossing **and** a new test holds the refusal side: the same lesson against a
+verifier that says no must still return nothing. Widening what may be proposed is not widening
+what may be accepted.
+
+## Routing, measured (Step 3) — the denominator, not the guess
+
+Fresh count of the registry, replacing the stale "443 rows / 11 reached":
+
+| | |
+|---|---|
+| capabilities | **141** |
+| distinct declared effects | **259** |
+| effects claimed by exactly one capability | 247 |
+| effects claimed by more than one | 12 |
+| capabilities declaring no effect | 0 |
+
+What is still **not** measured is *reach*: how many of those 259 effects a real sentence can
+actually bind. That is the next measurement, and it is the one that sizes Step 3. Measuring it
+requires driving the live binder with a corpus and recording which rows fire — not counting
+rows. Until then any reach figure is a guess, and the honest statement is 259 declared, reach
+unknown.
+
+## What is left, ranked, with the reason each is where it is
+
+1. **Routing reach census.** 259 effects, reach unmeasured. A lesson lives inside a row, so
+   this is a hard ceiling on everything below it. Mechanical work, high multiplier, no research.
+2. **The governance blocker.** The drift guard refuses an internal default for want of
+   external-supplier evidence. This is now the cheapest unblock in the tree and it needs an
+   owner decision, not another agent's workaround.
+3. **Cross-project carry.** Learning is contained to one repository because
+   `RetainedRepairSession` refuses outside paths. Loosening that is a safety boundary, not a
+   configuration, and it was deliberately not loosened to improve a number.
+4. **Screen → state.** The only genuine research gap left in "anything on a computer."
+5. **`pyautogui` on a real OS.** 90 modules rest on one unproven sentence.
+
+## The shape of the plan now, in one line
+
+**The learner is on, the shape ceiling is higher, and the two things left are a counting
+exercise (routing) and a permissions decision (cross-project carry) — plus one research gap
+that no amount of engineering around it will close.**

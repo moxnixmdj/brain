@@ -188,6 +188,35 @@ def _quote_aware_mask(source: str) -> list[bool]:
     return mask
 
 
+# Characters that can build up a longer operator token. A match is only a standalone
+# operator when neither neighbour is one of these.
+_OP_CHARS = frozenset("+-*/%<>=!&|^~?")
+
+
+def _is_standalone(probe: str, idx: int, end: int) -> bool:
+    """Is ``probe[idx:end]`` a whole operator token rather than a fragment of a longer one?
+
+    Measured 2026-11-02, before this guard existed: taught `<= -> <` and offered the Rust
+    function `fn within(x: i64, hi: i64) -> bool { x <= hi }`, the generalizer produced TWO
+    candidates --
+
+        fn within(x: i64, hi: i64) -> bool { x < hi }      correct
+        fn within(x: i64, hi: i64) ->= bool { x <= hi }    garbage: it swapped the `>` in `->`
+
+    The `>` of an arrow is not a comparison, and `-` is in GENERALIZABLE too, so `x -> y`
+    could be rewritten to `x +> y`. Both are malformed proposals produced by a matcher that
+    looked for the operator's characters without asking whether it had found a whole token.
+
+    The caller's verifier rejected the garbage, so nothing wrong was ever *applied* -- the
+    mandatory-verifier design held. But a generator that emits syntactically impossible
+    candidates spends the caller's oracle budget on proposals that could never succeed, and
+    an honest candidate count is one of the things this module reports.
+    """
+    before_ok = idx == 0 or probe[idx - 1] not in _OP_CHARS
+    after_ok = end >= len(probe) or probe[end] not in _OP_CHARS
+    return before_ok and after_ok
+
+
 def _occurrences(source: str, operator: str, *, language: str) -> list[int]:
     """Index of every *code* occurrence of the operator, longest-match first."""
     if not operator:
@@ -224,8 +253,11 @@ def _occurrences(source: str, operator: str, *, language: str) -> list[int]:
             if end < len(probe) and probe[end] == "=" and not operator.endswith("="):
                 start = idx + 1
                 continue
-            if idx > 0 and probe[idx - 1] == operator[0] == "<" :
-                pass
+            # ...and it must be a WHOLE operator token. This is what stops `>` in `->` and
+            # `<` in `<<` from being treated as comparisons.
+            if not _is_standalone(probe, idx, end):
+                start = idx + 1
+                continue
         out.append(idx)
         start = end
     return out

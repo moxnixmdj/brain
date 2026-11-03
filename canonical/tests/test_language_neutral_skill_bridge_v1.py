@@ -34,8 +34,11 @@ CROSSERS = {
     "java": "boolean within(int v, int top) {\n    return v <= top;\n}\n",
 }
 
-# Rust needs no `return`, so the lesson's pattern (which contains `return`) does not unify.
-# It is recorded as a shape difference, not hidden.
+# Rust writes the same function as a TAIL EXPRESSION, with no `return`, so the stored
+# skeleton `return ?id0 <= ?id1` does not unify. From 2026-11-02 the bridge also offers the
+# lesson's operator swap wherever that operator appears on two operands, so this now crosses.
+# Note the `-> bool`: it is the fixture that proves the matcher does not treat an arrow's `>`
+# as a comparison.
 RUST = "fn within(v: i64, top: i64) -> bool {\n    v <= top\n}\n"
 
 
@@ -87,12 +90,43 @@ def test_the_same_store_still_refuses_go_with_the_plain_lookup(tmp_path):
     assert len(store.lookup_rules("python")) == 1
 
 
-def test_rust_is_refused_because_the_pattern_needs_a_token_rust_does_not_have(tmp_path):
+def test_a_tail_expression_in_rust_is_reached_by_the_lesson_not_the_skeleton(tmp_path):
+    """This test used to assert the OPPOSITE, and the change is the finding.
+
+    It previously required `hit is None` on the grounds that "the pattern needs a token Rust
+    does not have". That was true of the stored skeleton and false of the lesson: `<=` -> `<`
+    is one operator swap, and Rust writes it as a tail expression. The bridge now offers both
+    forms, so a correct refusal by one matcher is no longer allowed to hide a crossing that
+    the other one can make.
+
+    Nothing about safety is relaxed: the candidate still has to parse in Rust and still has to
+    pass the caller's verifier, and the next test holds the refusal side under the same change.
+    """
     store = _store(tmp_path)
     assert _teach(store)["crystallized"] is True
     hit = bridge.recall_across_languages(
         store, source_text=RUST, target_language="rust",
         verifier=_exclusive_bound, error_class="BOUNDARY",
+    )
+    assert hit is not None, "the lesson is an operator swap and Rust can express it"
+    assert hit["patched_source"] == "fn within(v: i64, top: i64) -> bool {\n    v < top\n}\n"
+    # the arrow's `>` was NOT rewritten into `->=`, which the matcher did before 2026-11-02
+    assert "->=" not in hit["patched_source"]
+    assert hit["whole_task_correctness_proved"] is False
+
+
+def test_the_generalization_cannot_land_in_rust_without_the_verifier(tmp_path):
+    """The nearest world: a lesson that parses in Rust but is not the right answer.
+
+    Generalizing widens what is *proposed*, so the mandatory verifier is the whole safety
+    property. Here the caller asks the opposite question, and the bridge must return nothing
+    rather than hand back a patch it has not verified.
+    """
+    store = _store(tmp_path)
+    assert _teach(store)["crystallized"] is True
+    hit = bridge.recall_across_languages(
+        store, source_text=RUST, target_language="rust",
+        verifier=lambda src: False, error_class="BOUNDARY",
     )
     assert hit is None
 

@@ -182,6 +182,41 @@ def cross_language_candidates(
     return out
 
 
+def _candidates_in_target(source_text: str, rule: Mapping[str, Any],
+                          target_language: str) -> Iterable[str]:
+    """Every way this rule could apply in the target language, narrow form first.
+
+    THE BRIDGE USED TO ASK ONLY THE NARROW QUESTION, and that is why Rust never crossed.
+
+    `iter_crystallized_code_rule_candidates` matches the rule's stored *skeleton*. A rule
+    taught from `def within(x, hi): return x <= hi` stores the pattern
+    `return ?id0 <= ?id1`, so it can only fire where the target language spells the fix with
+    a `return`. Measured 2026-11-02: C++, Go, Java and TypeScript all crossed; Rust did not,
+    and the refusal was reported as `RULE_PATTERN_ABSENT:rule_requires_'return'`.
+
+    Rust was not wrong to be refused by that matcher -- it was wrong that the bridge had only
+    that matcher. The lesson here is not a statement skeleton, it is ONE OPERATOR SWAP, and
+    `operator_generalization_v1` already derives exactly that and applies it wherever the
+    operator appears on two operands. Offering those candidates second keeps the narrow,
+    skeleton-exact proposals first, so a rule that already crossed is unaffected.
+
+    Safety is unchanged because this only widens what is *proposed*. Every candidate still
+    passes `parses_in(target_language)` and then the caller's mandatory verifier; a candidate
+    that cannot compile or cannot pass is discarded. This function cannot accept anything.
+    """
+    from canonical.swe_kernel import verified_skill_crystallizer_v1 as cry
+
+    yield from cry.iter_crystallized_code_rule_candidates(source_text, rule)
+    try:
+        from canonical.swe_kernel import operator_generalization_v1 as operator
+        yield from operator.propose_operator_swaps(
+            source_text, rule, language=target_language)
+    except Exception:
+        # A rule whose tokens do not reduce to a single-operator swap is not generalizable.
+        # Refusing to generalize is always safe: the narrow path above has already run.
+        return
+
+
 def recall_across_languages(
     store: Any,
     *,
@@ -215,7 +250,7 @@ def recall_across_languages(
             if sid and sid in seen:
                 continue
             seen.add(sid)
-            for candidate in cry.iter_crystallized_code_rule_candidates(source_text, rule):
+            for candidate in _candidates_in_target(source_text, rule, target_language):
                 if not candidate or candidate == source_text:
                     continue
                 ok, why = parses_in(target_language, candidate)

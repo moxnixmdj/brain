@@ -172,3 +172,52 @@ def test_the_module_cannot_accept_anything():
     """There is no accept/commit entry point: only proposals. The caller verifies."""
     names = {n for n in dir(gen) if not n.startswith("_")}
     assert "accept" not in names and "commit" not in names and "apply" not in names
+
+
+# --------------------------------------------------------------------------- whole tokens
+def _boundary_rule():
+    import tempfile
+    from pathlib import Path
+    from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+    with tempfile.TemporaryDirectory() as td:
+        store = VerifiedSkillStore(Path(td) / "s.sqlite", seed=False)
+        store.crystallize_code_fix(
+            before_snippet="def within(x, hi):\n    return x <= hi\n",
+            after_snippet="def within(x, hi):\n    return x < hi\n",
+            language="python", error_class="BOUNDARY",
+            twin_oracle=lambda s: ("<=" not in s) and ("<" in s),
+        )
+        return store.lookup_rules("python", "BOUNDARY")[0]
+
+
+def test_an_arrow_is_not_a_comparison():
+    """Measured 2026-11-02: the `>` of `->` was swapped, producing `->= bool`.
+
+    The garbage was never applied -- the caller's verifier rejected it -- but a generator
+    that emits syntactically impossible candidates spends the caller's oracle budget on
+    proposals that cannot succeed, and the candidate count this module reports becomes a
+    number about noise rather than about the lesson.
+    """
+    rule = _boundary_rule()
+    source = "fn within(v: i64, top: i64) -> bool {\n    v <= top\n}\n"
+    candidates = list(gen.propose_operator_swaps(source, rule, language="rust"))
+    assert candidates == ["fn within(v: i64, top: i64) -> bool {\n    v < top\n}\n"]
+    assert not any("->=" in c for c in candidates)
+
+
+def test_a_shift_is_not_a_comparison():
+    rule = _boundary_rule()
+    # `<<` and `>>` must not be seen as `<` or `>` on the operand of a comparison.
+    candidates = list(gen.propose_operator_swaps(
+        "a = b >> 2\nc = a <= b\n", rule, language="rust"))
+    assert not any(">>=" in c or ">=" in c.split("c = ")[0] for c in candidates)
+    assert candidates == ["a = b >> 2\nc = a < b\n"]
+
+
+def test_the_comparison_it_should_find_is_still_found_next_to_an_arrow():
+    """The nearest world: the guard must not silence the occurrence that is real."""
+    rule = _boundary_rule()
+    source = "let ok = v <= top;\nfn f(x: i32) -> i32 { x }\n"
+    candidates = list(gen.propose_operator_swaps(source, rule, language="rust"))
+    assert candidates == ["let ok = v < top;\nfn f(x: i32) -> i32 { x }\n"]
