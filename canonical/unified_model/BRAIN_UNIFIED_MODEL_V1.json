@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6649,
+  "research_index_records": 6650,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "659455b07ff93c4cad0365693453bcaf48b1ba310ab95f69d308e29a09a00b00"
+  "value": "c8becaa861fd26828e5012a3c13945e668ed57f6b79c009e500bc2d023b04799"
  },
  "engines": [
   {
@@ -215218,6 +215218,31 @@
    }
   },
   {
+   "action_id": "LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c9b47129c8e2cf6542fc9cfafc0efd7da466629ac1e59afa536977f11b1f4115",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "algebra": 1,
+    "board": 1,
+    "compose_in_tree_observational_synth_and_concept_library_with_live_policy_on_creature_board": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "live": 1,
+    "live_organ_algebra_on_the_board_verified_at_zero_model_dependency__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "live_organ_algebra_policy_on_board_20261104_v1": 1,
+    "organ": 1,
+    "parallel_toy_enumerator_dead_policy_organ_and_unwired_g_t_bridge_on_51080f0": 1,
+    "policy": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "LIVE_SOLVER_END_TO_END_MEASUREMENT_AND_ROUTE_ADMISSION_20261015_V1",
    "capability": false,
    "date": "2026-10-15",
@@ -239313,7 +239338,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "ccf1dc5e8981c88119e00c7c68448453ab7eb5a4dc11e8a727d35c54881c9c62",
+   "sha256": "766bc9515f3a9fb1131ac4c2c104ff402f75fd409ad04ff2f50b382b391eca3e",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 14,
    "symbols": [

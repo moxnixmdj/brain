@@ -144,6 +144,13 @@ class Creature:
 
         self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
         self.organ_graph = self.cognitive_core.organ_graph
+        try:
+            from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, compile_policy_organ
+
+            if not self.organ_graph.organs_in_stratum(POLICY):
+                self.organ_graph.register_organ(compile_policy_organ())
+        except Exception:
+            pass
         self.continuation_memory = CP.ContinuationMemory.empty()
         cm_fp = self.root / "continuation_memory.json"
         if cm_fp.is_file() and not cm_fp.is_symlink():
@@ -643,6 +650,52 @@ class Creature:
             info['parent_id'] = question['parent_id']
         return {'ok': True, 'verified': None, 'correct': None, 'information': info, 'value': work.value}
 
+    def _choose_instrumental(self, pool: Sequence[M.Work]) -> M.Work | None:
+        """Rank the board with the live POLICY organ (0-reward unlocks inherit Q)."""
+        if self._life is None or self._standing is None:
+            return None
+        affordable = [w for w in pool if self._life.can_finish(w.cost)]
+        if not affordable:
+            return None
+        actions: list[dict[str, Any]] = []
+        burns: dict[str, float] = {}
+        for w in affordable:
+            feat = self._work_features.get(w.id) or {}
+            actions.append(
+                {
+                    "id": w.id,
+                    "value": w.value,
+                    "cost": w.cost,
+                    "unlocks": list(feat.get("unlocks") or ()),
+                    "requires": list(feat.get("requires") or ()),
+                }
+            )
+            if self._standing.hazard_observations > 0:
+                burns[w.id] = self._standing.expected_burn_probability(feat)
+        ranked: list[dict[str, Any]] = []
+        try:
+            from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, rank_instrumental_actions
+
+            policy = None
+            if getattr(self, "organ_graph", None) is not None:
+                policy = self.organ_graph.get_primary(POLICY, "policy::instrumental_q")
+            if policy is not None:
+                ranked = list(policy.invoke(actions, self._life.remaining, burns or None) or [])
+            else:
+                ranked = rank_instrumental_actions(
+                    actions,
+                    remaining_budget=self._life.remaining,
+                    p_burn_by_id=burns,
+                )
+        except Exception:
+            ranked = []
+        if ranked:
+            pick = str(ranked[0].get("id") or "")
+            for w in affordable:
+                if w.id == pick:
+                    return w
+        return M.choose_next(self._life, pool)
+
     def remaining_work(self) -> list[M.Work]:
         return [w for w in self._board
                 if w.id not in self._closed and self._blocked.get(w.id, 0) < self.max_attempts]
@@ -677,7 +730,13 @@ class Creature:
                          if self._checkable.get(w.id, True) and self._life.can_finish(w.cost)]
             if checkable:
                 pool = checkable
-        if self._work_features and self._standing.hazard_observations > 0:
+        if self._work_features and any(
+            (self._work_features.get(w.id) or {}).get("unlocks")
+            or (self._work_features.get(w.id) or {}).get("requires")
+            for w in pool
+        ):
+            work = self._choose_instrumental(pool)
+        elif self._work_features and self._standing.hazard_observations > 0:
             affordable_pool = [w for w in pool if self._life.can_finish(w.cost)]
             work = max(
                 affordable_pool,

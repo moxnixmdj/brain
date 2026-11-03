@@ -1267,6 +1267,28 @@ class CompoundingConceptLibrary:
             return []
         return sorted(self._concepts.values(), key=lambda c: (-c.log_prior, -c.mdl_gain_bytes, c.concept_id))
 
+    def admit_verified_concept(self, entry: ConceptEntry) -> bool:
+        """Admit a verified expression/algorithmic concept into `G_t` (organ-graph sleep bridge)."""
+        if not isinstance(entry, ConceptEntry) or not str(entry.concept_id).isidentifier():
+            return False
+        try:
+            if entry.is_stmt_fn:
+                fn_mod = ast.parse(entry.render_helper_def())
+                if not fn_mod.body or not isinstance(fn_mod.body[0], ast.FunctionDef):
+                    return False
+                self._concepts[entry.concept_id] = entry
+                self._compiled_fn_asts[entry.concept_id] = fn_mod.body[0]
+            elif entry.body_expr:
+                parsed = ast.parse(entry.body_expr, mode="eval")
+                self._concepts[entry.concept_id] = entry
+                self._compiled_asts[entry.concept_id] = parsed
+            else:
+                return False
+        except Exception:
+            return False
+        self.save()
+        return True
+
     def callable_map(self) -> dict[str, Callable[..., Any]]:
         """Return pure AST-interpreted callables for all admitted expression & algorithmic concepts."""
         if not self._can_read():
