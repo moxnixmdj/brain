@@ -275,6 +275,47 @@ def _corpus_index(registry: Mapping[str, Mapping[str, Any]], declared: Mapping[s
     return compiled_idx
 
 
+# A STATED PATH IS DATA, NOT PART OF THE ASK.
+#
+# Measured 2026-11-02: "Tell me what changed in <repo>/canonical/astra_runtime/tmp/x today"
+# proposed exactly ONE candidate -- `git.history.bisect_regression.v1` -- matched on the
+# single token `runtime`, which came from the DIRECTORY THE FILE LIVES IN.  The row was
+# then selected, ran, and refused with NAMED_TEST_NOT_IN_GIT_HISTORY: a question about a
+# directory's history was answered by a row that wanted a test to bisect.  Nothing in the
+# sentence asked for a bisect; the sandbox's own path spelling did.
+#
+# The same sentence against a neutral directory (probe_neutral_dir) proposes nothing at
+# all, which is the honest reading: no row is matched by the words "tell me what changed
+# ... today".  So the token was not evidence, it was contamination -- and it is systematic
+# here, because every probe path in this repository begins canonical/astra_runtime, so
+# `canonical`, `astra` and `runtime` vote on every request that names a file.
+#
+# Binding still reads the whole sentence, so a path the request names is still bound
+# exactly as before; what changes is only what the ranker is allowed to treat as a word.
+# Two guards keep this from eating an address: a token that IS a capability id is kept
+# (294 of the registry's ids are themselves repository paths), and the mask is applied
+# only when a query remains -- a sentence that is nothing but a path keeps the reading it
+# had rather than collapsing to RELEVANCE_UNRESOLVED.
+_PATH_GRAMMAR = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+")
+
+
+def _without_stated_paths(objective: str, registry: Mapping[str, Mapping[str, Any]]
+                          ) -> tuple[str, list[str]]:
+    """The ask with stated repository paths removed, and what was removed."""
+    kept: list[str] = []
+    removed: list[str] = []
+    addressed = set(registry)
+    for token in str(objective or "").split():
+        bare = token.strip(".,;:!?()[]{}\"'`")
+        if _PATH_GRAMMAR.fullmatch(bare) and bare not in addressed:
+            removed.append(bare)
+            continue
+        kept.append(token)
+    if not removed or not bm25._tokens(" ".join(kept)):
+        return objective, []
+    return " ".join(kept), removed
+
+
 def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k: int = DEFAULT_K) -> dict[str, Any]:
     """Top-k lexical proposals via pre-indexed inverted BM25 postings (bit-identical to `bm25.rank`)."""
     declared = declarations(root)
@@ -282,10 +323,12 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
     n = idx["n"]
     limit = max(1, int(k))
     objective = bm25._canon(goal)
+    objective, masked_paths = _without_stated_paths(objective, registry)
     if not objective:
         return {
             "schema": SCHEMA,
             "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
             "status": "RELEVANCE_UNRESOLVED",
             "ranker_reason": "OBJECTIVE_REQUIRED",
             "k": limit,
@@ -296,6 +339,7 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
         return {
             "schema": SCHEMA,
             "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
             "status": "RELEVANCE_UNRESOLVED",
             "ranker_reason": "CANDIDATES_REQUIRED",
             "k": limit,
@@ -307,6 +351,7 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
         return {
             "schema": SCHEMA,
             "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
             "status": "RELEVANCE_UNRESOLVED",
             "ranker_reason": "RESEARCH_QUERY_FOCUS_UNRESOLVED",
             "k": limit,
@@ -318,6 +363,7 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
         return {
             "schema": SCHEMA,
             "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
             "status": "RELEVANCE_UNRESOLVED",
             "ranker_reason": "NO_DISCRIMINATIVE_OBJECTIVE_TOKENS",
             "k": limit,
@@ -349,6 +395,7 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
         return {
             "schema": SCHEMA,
             "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
             "status": "RELEVANCE_UNRESOLVED",
             "ranker_reason": "NO_LEXICAL_OBJECTIVE_EVIDENCE",
             "k": limit,
@@ -364,6 +411,7 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
         return {
             "schema": SCHEMA,
             "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
             "status": "RELEVANCE_UNRESOLVED",
             "ranker_reason": "NO_LEXICAL_OBJECTIVE_EVIDENCE",
             "k": limit,
@@ -395,6 +443,7 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
     return {
         "schema": SCHEMA,
         "authority": "PROPOSAL_ONLY__objective_relevance_bm25",
+            "stated_paths_masked_from_the_ask": list(masked_paths),
         "status": status,
         "ranker_reason": reason,
         "k": limit,
@@ -1070,10 +1119,16 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
         from canonical.runtime import capability_type_surface_v1 as _ts
         slots = {str(k or "").lower() for k in _ts.signature(entry)}
         if slots and "argv" not in slots:
-            return {"capability_id": cid, "admitted": False,
-                    "reason": "BINDING_REFUSED:NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND:"
-                              + ",".join(sorted(slots))[:120],
-                    "required_inputs": required}
+            # The same declaration the route-admission gate honours.  A row that
+            # computes this argv's answer in process does not ignore the command,
+            # so it is not refused for the spelling of its slots.  The row that
+            # declares nothing keeps this refusal word for word.
+            from canonical.runtime import declared_command_equivalence_v1 as _declared
+            if _declared.states_the_command_this_row_computes(goal, entry) is None:
+                return {"capability_id": cid, "admitted": False,
+                        "reason": "BINDING_REFUSED:NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND:"
+                                  + ",".join(sorted(slots))[:120],
+                        "required_inputs": required}
     return {"capability_id": cid, "admitted": True, "inputs": inputs,
             "required_inputs": required, "specific": is_specific(required),
             "derivation": _derivation_report}

@@ -154,7 +154,7 @@ _SELF_REPORTED_FAILURE = frozenset({
 })
 
 
-def _check_expect(expect, result):
+def _check_expect(expect, result, args=None, root=ROOT):
     """Apply the template's own proof. Unknown check types FAIL, never pass."""
     if isinstance(result, dict):
         if "pass" in result and not result.get("pass"):
@@ -176,6 +176,12 @@ def _check_expect(expect, result):
         return ok, f"{kind}:{field}={expect.get('value')!r}"
     if kind == "field_truthy":
         return bool(value), f"{kind}:{field}"
+    if kind in ("file_sha256_matches", "file_observation_matches"):
+        if kind == "file_sha256_matches":
+            from canonical.runtime import file_artifact_expectation_v1 as independent
+        else:
+            from canonical.runtime import file_observation_expectation_v1 as independent
+        return independent.verify(expect, result, args or {}, root)
     return False, "UNKNOWN_EXPECT_TYPE:" + kind
 
 
@@ -765,7 +771,7 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             except Exception as exc:
                 result, invoked, error = None, False, type(exc).__name__ + ":" + str(exc)
         expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
-        verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+        verified, expect_note = _check_expect(expect, result, call, root) if invoked else (False, "NOT_INVOKED")
         independent = _independent_artifact_check(result, root) if invoked else None
         if independent is not None:
             if not independent[0]:
@@ -811,7 +817,7 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     exec_ms = (time.perf_counter() - t1) * 1000.0
 
     expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
-    verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+    verified, expect_note = _check_expect(expect, result, args, root) if invoked else (False, "NOT_INVOKED")
     independent = _independent_artifact_check(result, root) if invoked else None
     if independent is not None:
         if not independent[0]:

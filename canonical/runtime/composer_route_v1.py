@@ -185,6 +185,26 @@ def _contradicts_the_stated_payload(goal: str, token: str) -> bool:
     return not re.search(r"\bjson\b", str(prose), re.I)
 
 
+def _states_a_payload_and_its_destination(goal: str) -> bool:
+    """The sentence states text to write AND the path it goes to.
+
+    Reused rather than re-derived: the retrieval layer already owns this
+    predicate, and it answers exactly the question asked here.
+    """
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as selection
+        return bool(selection._states_a_payload_and_its_destination(goal))
+    except Exception:  # noqa: BLE001 - an unreadable sentence states nothing
+        return False
+
+
+def _token_is_read_only(token: str, registry: Mapping[str, Any]) -> bool:
+    """Does every row providing this token declare that it only reads?"""
+    rows = [entry for entry in registry.values()
+            if isinstance(entry, Mapping) and token in (entry.get("provides") or [])]
+    return bool(rows) and all(entry.get("read_only") is True for entry in rows)
+
+
 def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]:
     """Tokens the goal might be asking for, best guess first.
 
@@ -248,6 +268,21 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     # same test PR #6135 established as DECLARED_CONTRACT_FULLY_BOUND.
     scored = [(score(gw, tok, extra), tok) for tok in provided]
     scored = [(s0, t) for s0, t in scored if s0 > 0]
+    # A READ-ONLY ROW IS NOT A WAY TO WRITE THE FILE THE SENTENCE NAMED.
+    #
+    # Measured 2026-11-02: "Write the line 'PROJECT BRAIN' to the file <out>"
+    # ranked `fileview.reversed` first -- the words "line" and "file" -- bound the
+    # row with `path` = the DESTINATION the sentence named, and composed a chain
+    # that read the file it was asked to write.  The chain then raised and the
+    # request was reported as STEP_RAISED_OUTCOME_UNKNOWN, while on the previous
+    # commit the sentence was served by the text writer.
+    #
+    # The row is refused here only for a sentence that states BOTH a payload and
+    # where it goes: that sentence is a write by its own words, and a row that
+    # cannot write is not a candidate for it.  Every other sentence is scored
+    # exactly as before.
+    if _states_a_payload_and_its_destination(goal):
+        scored = [(s0, t) for s0, t in scored if not _token_is_read_only(t, reg)]
     bound = _fully_bound_contract_tokens(goal, g, reg)
     # The last two terms are the tiebreak, and their ORDER is the fix.  A
     # capability that contradicts the payload the sentence states is demoted
@@ -310,8 +345,52 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE",
                             "executed": False, "semantic_acceptance_complete": False}
 
+    # A ONE-FILE ROW IS NOT THE PROVIDER FOR A PAYLOAD-PLUS-DESTINATION SENTENCE.
+    #
+    # The graph is typed, so any row that PROVIDES the token the goal's words
+    # point at is reachable -- and a row whose whole contract is one file has no
+    # place for the payload.  Measured 2026-11-02: "Write the line 'PROJECT
+    # BRAIN' to the file <out>" was composed from `file.uppercased.v1` (the word
+    # "line" is in both), the chain ran, the destination did not exist yet, and
+    # the request that had been served by the writer became an unknown-outcome
+    # failure.  A sentence that states a value and where it goes has two
+    # operands; a one-file contract cannot be its answer.
+    # ...and only for the verbs that REPLACE a file's content, because "Add a
+    # line containing delta to <f>" states a payload and a destination too, and
+    # appending is exactly the one-file row's job.
+    _write_sentence = False
+    if _states_a_payload_and_its_destination(goal):
+        for _raw in str(goal or "").lower().replace("?", " ").split():
+            _word = _raw.strip(".,:;!\"'`()[]")
+            if _word:
+                _write_sentence = _word in frozenset(
+                    {"write", "save", "output", "put", "store", "create"})
+                break
+    _registry: Mapping[str, Any] = {}
+    if _write_sentence:
+        try:
+            from canonical.runtime import capability_composer_v1 as _composer
+            _registry = _composer.load_registry()
+        except Exception:  # noqa: BLE001 - no registry, no filter
+            _registry = {}
+
+    def _is_a_one_file_row(cid: str) -> bool:
+        entry = _registry.get(cid)
+        if not isinstance(entry, Mapping):
+            return False
+        bindings = entry.get("proposal_bindings") or {}
+        if not isinstance(bindings, Mapping):
+            return False
+        types = sorted(str((spec or {}).get("type")) for spec in bindings.values()
+                       if isinstance(spec, Mapping))
+        return types == ["goal_text", "path_file_or_dir"]
+
     for token in candidate_tokens(goal, g)[:max_candidates]:
         chain = composer.plan(have, token, g)
+        if chain and _write_sentence and len(chain) == 1 and _is_a_one_file_row(chain[0]):
+            tried.append({"token": token, "reachable": False, "chain": None,
+                          "refused": "ONE_FILE_ROW_CANNOT_CARRY_A_PAYLOAD_AND_A_DESTINATION"})
+            continue
         tried.append({"token": token, "reachable": chain is not None,
                       "chain": chain})
         if chain:
@@ -1166,7 +1245,30 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"(?![^\n]*\b(?:contain|contains|containing|contained|hold|holds|holding"
      r"|include|includes|including)\b)"
      r"(?:\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
+     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b"
+     # "WHAT FILES ARE IN <D>" ASKS THE SAME QUESTION AS "LIST THE DIRECTORY <D>"
+     # and names neither of this row's words.  Measured 2026-11-02: it matched
+     # no program, settled no argv and reached no capability at all
+     # (FAIL__RAW_GOAL_COMPILATION_GAP), while the sentence with "list the
+     # directory" in it was served.  The noun it asks about is FILES and the
+     # operand is the directory, which is what `ls` answers.  It is here, after
+     # the containment guard, so a question about which files CONTAIN text is
+     # still the search row's.
      r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b)", "ls", _no_flags, 1),
+    # "WHAT FILES ARE IN <D>" IS THE LISTING WRITTEN AS A QUESTION, and it names
+    # neither of the words the row above keys on.  Measured 2026-11-02: the
+    # sentence settled no argv and reached no capability (the "?": nothing
+    # matched), while "List the directory <D>" was served.
+    #
+    # It binds `ls -A`, not `ls`, because the row that answers it reads the
+    # directory it is given and includes dot-files: measured against the real
+    # program, `_directory_list` and `ls -A` print the same bytes on a directory
+    # holding `.hidden`, `B.txt`, `a.txt` and a subdirectory, while plain `ls`
+    # omits `.hidden`.  The flag states which listing is meant instead of
+    # letting the declaration claim one it does not produce.
+    (r"\b(?:what|which)\s+files?\s+(?:are|exist)\s+(?:in|inside|under)\b"
+     r"|\b(?:what|which)\s+files?\s+(?:are|exist)\s+in\s+the\s+director(?:y|ies)\b",
+     "ls", lambda _n: ["-A"], 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
     # The pattern is deliberately narrow.  The PROGRAM is called `file`, and the
@@ -1270,7 +1372,35 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"(?![^\n]{0,120}?\blines?\b[^\n]{0,80}?\b(?:contain|includ|match|hold)\w*\b)"
      r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
      r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b"
-     r"|\bcontents?\b[^\n]{0,20}?\bof\b", "cat", _no_flags, 1),
+     r"|\bcontents?\b[^\n]{0,20}?\bof\b"
+     # "Read <path>", with no noun.  The word `file` above is the reason this
+     # sentence had no route at all: measured 2026-11-02, "Read
+     # <dir>/a.txt" settled NO argv and reached no capability, while "Show me
+     # the contents of <dir>/a.txt" was served -- the only difference was the
+     # noun.  A path is a stronger statement of the operand than the word
+     # "file" is, so a read verb followed directly by a repository path is a
+     # read of that path.  The path must contain a separator: a bare word after
+     # "read" is prose ("read carefully, then ..."), not an operand.
+     # The MASKED form matters: every path is blanked out before these patterns
+     # run, so a rule that spells the operand out never fires.  What survives is
+     # the sentence's opening verb, and `extract_paths` above has already proved
+     # there is at least one path.  Anchored to the START so that "read the report
+     # and write X" (two paths) is refused on arity rather than read as a cat.
+     # ...and only when the sentence asks for nothing else.  Measured without
+     # this: "Read the report and write it to out/r.json" bound `cat out/r.json`
+     # -- it would have printed the file it was about to write.  A sentence that
+     # asks for a write is not a read, whatever verb it opens with.
+     r"|^(?!.*\b(?:write|save|output|append|create|put|store)\b)"
+     r"\s*(?:read|print|display|cat)\b"
+     # "WHAT IS IN <F>" IS THE READER WRITTEN AS A QUESTION.  Measured 2026-11-02:
+     # the sentence settled no argv and reached no row
+     # (FAIL__RAW_GOAL_COMPILATION_GAP) while "Show the contents of <F>" was
+     # served -- the difference is the verb, not the operand.  The ask is for the
+     # file's text, which is what `cat` prints.  It names a singular thing and
+     # keeps the same write exclusion as the arm above, so "What is in <F>,
+     # then write it to <G>" is not turned into a read of G.
+     r"|^(?!.*\b(?:write|save|output|append|create|put|store)\b)"
+     r"\s*what(?:'s|\s+is)\s+(?:in|inside)\b", "cat", _no_flags, 1),
 )
 
 # A command whose first operand is NOT a path but a value the sentence states.
@@ -1455,6 +1585,12 @@ _PROSE_COMMAND_DEST_FLAG: tuple[tuple[str, str, str], ...] = (
 # The words that put a command's result somewhere.  Scoped to the claim the
 # sentence makes: a path is only a destination if the sentence introduces it as
 # one, so a command that simply takes two files keeps taking two files.
+# A sentence that compresses a file INTO a tar archive states a tar command line.
+_COMPRESSES_INTO_A_TAR_ARCHIVE = re.compile(
+    r"\bcompress\b[^\n]{0,120}?\binto\b[^\n]{0,120}?\.(?:tar\.gz|tgz)\b",
+    re.IGNORECASE)
+
+
 _RESULT_DESTINATION = re.compile(
     r"\b(?:into|to|onto|as|inside)\b[^\n]{0,40}?$"
     r"|\b(?:write|save|put|store|output|send|direct)\b[^\n]{0,40}?$",
@@ -2217,6 +2353,19 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # programs are unaffected -- their stdout is what lands there, which is the
     # mechanism that already existed ("write the unique lines of A to the file B").
     reserved_for_report = _reserved_for_the_report(sentence)
+    # A COMPRESS SENTENCE THAT NAMES A TAR ARCHIVE IS A TAR COMMAND LINE.
+    #
+    # Measured 2026-11-02: "Compress <d>/a.txt into <d>/a.tar.gz" extracted
+    # `gzip <d>/a.txt` -- the "into" clause is not part of gzip's command line --
+    # so the sentence stated a command that writes `a.txt.gz` while naming
+    # `a.tar.gz` as the result.  `tar czf <destination> <source>` is the command
+    # line that sentence does settle: it writes exactly the archive named, and it
+    # copies rather than removes.  The suffix is part of the test, so a plain
+    # "Compress <f>" keeps the gzip reading it always had, and this runs before
+    # the masking below because the suffix IS part of a path.
+    if "tar" in known and _COMPRESSES_INTO_A_TAR_ARCHIVE.search(str(sentence or "")):
+        if len(paths) == 2 and _states_a_destination_for_the_result(sentence, paths[1]):
+            return ["tar", "czf", str(paths[1]), str(paths[0])]
     # The table is matched against the sentence with every path masked out.  A
     # path is a name, not prose, and leaving it in measured two ways: a fixture
     # called `blank.txt` satisfied the blank-line pattern by its own name, and

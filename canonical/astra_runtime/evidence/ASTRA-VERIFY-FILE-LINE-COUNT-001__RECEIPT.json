@@ -1,0 +1,83 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_line_count.py",
+ "adapter_sha256": "ba5f6a03dbb363ba619eadd5aaef9f373efe7eb397dfbb5f361b2d4de84dc255",
+ "capability_id": "file.line_count.v1",
+ "checks": [
+  {
+   "adapter_returned": 5,
+   "computed_here": 5,
+   "expected_by_construction": 5,
+   "name": "counts five_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 3,
+   "computed_here": 3,
+   "expected_by_construction": 3,
+   "name": "counts three_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 0,
+   "computed_here": 0,
+   "expected_by_construction": 0,
+   "name": "counts empty.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 5,
+   "command_output": "5",
+   "name": "computes `wc -l` on five_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 2,
+   "command_output": "2",
+   "name": "computes `wc -l` on three_lines.txt",
+   "ok": true
+  },
+  {
+   "adapter_returned": 0,
+   "command_output": "0",
+   "name": "computes `wc -l` on empty.txt",
+   "ok": true
+  },
+  {
+   "name": "refuses a non-UTF-8 file",
+   "ok": true,
+   "refused_with": "RuntimeError:NOT_UTF8_TEXT"
+  },
+  {
+   "name": "refuses a directory",
+   "ok": true,
+   "refused_with": "RuntimeError:PATH_NOT_A_REGULAR_FILE"
+  },
+  {
+   "name": "refuses a missing file",
+   "ok": true,
+   "refused_with": "RuntimeError:PATH_NOT_A_REGULAR_FILE"
+  },
+  {
+   "name": "refuses a path outside the repository",
+   "ok": true,
+   "refused_with": "RuntimeError:PATH_OUTSIDE_REPOSITORY"
+  },
+  {
+   "name": "refuses a traversal path",
+   "ok": true,
+   "refused_with": "RuntimeError:PATH_OUTSIDE_REPOSITORY"
+  }
+ ],
+ "claim": "counts the lines of a UTF-8 file exactly, and refuses what it cannot read",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-LINE-COUNT-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.line_count.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-03T11:51:29Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

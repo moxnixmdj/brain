@@ -1,0 +1,80 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+ "adapter_sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28",
+ "capability_id": "file.rename.v1",
+ "checks": [
+  {
+   "destination": "canonical/astra_runtime/tmp/file_facts_provenance_v1/ops_rename_destination.txt",
+   "name": "the destination exists after the operation",
+   "ok": true
+  },
+  {
+   "adapter_reported_destination": "c2097f55f01fc297fc7f4acf21438123e06e4d409a818524428534e850642f4f",
+   "adapter_reported_source": "c2097f55f01fc297fc7f4acf21438123e06e4d409a818524428534e850642f4f",
+   "digest_recomputed_here": "c2097f55f01fc297fc7f4acf21438123e06e4d409a818524428534e850642f4f",
+   "name": "the destination's bytes are the source's bytes",
+   "ok": true
+  },
+  {
+   "adapter_returned": {
+    "byte_count": 23,
+    "destination_sha256": "c2097f55f01fc297fc7f4acf21438123e06e4d409a818524428534e850642f4f",
+    "source_sha256": "c2097f55f01fc297fc7f4acf21438123e06e4d409a818524428534e850642f4f"
+   },
+   "name": "the adapter's own digests match the bytes on disk",
+   "ok": true
+  },
+  {
+   "adapter_returned": true,
+   "name": "the operation reports itself verified",
+   "ok": true
+  },
+  {
+   "name": "rename leaves nothing at the source",
+   "ok": true,
+   "source_still_exists": false
+  },
+  {
+   "expects": "DESTINATION_EXISTS",
+   "name": "refuses an existing destination the sentence did not ask to overwrite",
+   "ok": true,
+   "refused_with": "DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE"
+  },
+  {
+   "expects": "PATH_OUTSIDE_REPOSITORY",
+   "name": "refuses a destination outside the repository",
+   "ok": true,
+   "refused_with": "PATH_OUTSIDE_REPOSITORY:output_path"
+  },
+  {
+   "expects": "SAME_FILE",
+   "name": "refuses the source as its own destination",
+   "ok": true,
+   "refused_with": "SOURCE_AND_DESTINATION_ARE_THE_SAME_FILE"
+  },
+  {
+   "expects": "PATH_REQUIRED",
+   "name": "refuses when no destination is stated",
+   "ok": true,
+   "refused_with": "PATH_REQUIRED:output_path"
+  },
+  {
+   "expects": "PATH_NOT_STATED_IN_THE_SENTENCE",
+   "name": "refuses a source the sentence never names",
+   "ok": true,
+   "refused_with": "PATH_NOT_STATED_IN_THE_SENTENCE:path:ops_source_rename.txt"
+  }
+ ],
+ "claim": "moves the stated file to the stated destination in process, leaving nothing at the source, and refuses to overwrite, to escape the repository, or to rename onto itself",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-RENAME-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.rename.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-03T15:27:57Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

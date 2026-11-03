@@ -1,0 +1,73 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_archive_tar.py",
+ "adapter_sha256": "19f5315c42eeb8aa753941d517946c15c2368c87500077ec77b0e3fe8a14adb7",
+ "capability_id": "file.archive.tar_gz.v1",
+ "checks": [
+  {
+   "archive": "canonical/astra_runtime/tmp/file_facts_provenance_v1/archive_me.tar.gz",
+   "name": "the archive lands at the path the sentence named",
+   "ok": true
+  },
+  {
+   "adapter_reported_source": "64a697da0812df20da56e256687854cb474f31b792184a62e5db3482d47697f5",
+   "expected_sha256": "64a697da0812df20da56e256687854cb474f31b792184a62e5db3482d47697f5",
+   "name": "the archive's member is exactly the bytes that were read",
+   "ok": true
+  },
+  {
+   "adapter_reported": false,
+   "name": "the source survives, unchanged: tar copies",
+   "ok": true,
+   "source_exists": true
+  },
+  {
+   "name": "gzip's own archive was never written",
+   "ok": true
+  },
+  {
+   "name": "the adapter reports the run verified",
+   "ok": true
+  },
+  {
+   "expects": "THE_ARCHIVE_ALREADY_EXISTS",
+   "name": "refuses an archive that already exists",
+   "ok": true
+  },
+  {
+   "expects": "DESTINATION_IS_NOT_A_TAR_ARCHIVE",
+   "name": "refuses a destination that is not a tar archive",
+   "ok": true,
+   "refused_with": "DESTINATION_IS_NOT_A_TAR_ARCHIVE:archive_me.zip"
+  },
+  {
+   "expects": "DESTINATION_NOT_STATED_IN_THE_SENTENCE",
+   "name": "refuses an archive the sentence never named",
+   "ok": true,
+   "refused_with": "DESTINATION_NOT_STATED_IN_THE_SENTENCE:archive_me.tar.gz"
+  },
+  {
+   "expects": "PATH_NOT_STATED_IN_THE_SENTENCE",
+   "name": "refuses a source the sentence never named",
+   "ok": true,
+   "refused_with": "PATH_NOT_STATED_IN_THE_SENTENCE:archive_me.txt"
+  },
+  {
+   "expects": "DESTINATION_OUTSIDE_REPOSITORY",
+   "name": "refuses a destination outside the repository",
+   "ok": true,
+   "refused_with": "DESTINATION_OUTSIDE_REPOSITORY:/tmp/elsewhere.tar.gz"
+  }
+ ],
+ "claim": "writes the tar archive the sentence names, proves the archive's member is the source bytes, keeps the source in place, and refuses any other destination",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-TAR-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.archive.tar_gz.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-03T14:42:47Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

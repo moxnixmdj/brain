@@ -2950,6 +2950,1477 @@
     "state_path": "canonical/astra_runtime/state/HARDCORE_EXECUTION_PIPELINE_8STAGE_V1.json"
    }
   },
+  "file.archive.tar_gz.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "compress",
+     "goal": "${input.goal}",
+     "path": "${input.path}",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "output_path",
+     "source_state": "retained",
+     "content_kind": "tar_gzip"
+    }
+   },
+   "adapter_module": "file_archive_tar",
+   "computes_command": {
+    "argvs": [
+     [
+      "tar",
+      "czf",
+      "${output_path}",
+      "${path}"
+     ]
+    ],
+    "answer_field": "destination_path",
+    "note": "performed in process with the stdlib tarfile and gzip modules; no shell and no subprocess. The archive is re-opened from disk and its member compared with the source bytes. This row COPIES: the source is never removed."
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "handles_verbs": [
+    "compress"
+   ],
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "compress the file into a tar archive",
+    "tar the file",
+    "make a tar archive",
+    "compress the file into a tar"
+   ],
+   "limitations": [
+    "Writes the tar archive the sentence names and KEEPS the source: tar czf copies. source_removed is false and source_kept is true in the answer.",
+    "Refuses an existing archive, a destination that is not a .tar.gz/.tgz path, a missing destination directory, a source or destination outside the repository, a non-regular file, and any path the sentence does not name.",
+    "One member per archive: the file the sentence names. Directories and multi-file archives are not this row."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    },
+    "output_path": {
+     "type": "auto_path",
+     "suffix": ""
+    }
+   },
+   "provides": [
+    "compress.file.tar_gz"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "member_name",
+    "original_byte_count",
+    "output_verified",
+    "path",
+    "schema",
+    "source_kept",
+    "source_removed",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_archive_tar.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-TAR-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the archive is re-opened from disk and its member compared with the bytes read, and the source is confirmed unchanged. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_archive_tar",
+     "command": "compress"
+    }
+   }
+  },
+  "file.backup.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "backup",
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "path",
+     "path_suffix": ".bak",
+     "source_state": "retained",
+     "same_as_source": true
+    }
+   },
+   "adapter_module": "file_ops",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "make a backup",
+    "back up the file",
+    "save a backup",
+    "a backup of the file"
+   ],
+   "limitations": [
+    "Writes <file>.bak beside the file and keeps the original; never moves or removes it.",
+    "Refuses when a <file>.bak already exists, when the file is outside the repository, and when the sentence names no file; reads the copy back and digests both ends."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "backup.file"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "output_verified",
+    "path",
+    "schema",
+    "source_retained",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+    "modules": [
+     "ctypes",
+     "errno",
+     "hashlib",
+     "os",
+     "pathlib",
+     "re",
+     "sys"
+    ],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-BACKUP-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: a world is built with known bytes, the copy is read back and digested, and the source is re-digested after the write. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_ops",
+     "command": "backup"
+    }
+   }
+  },
+  "file.compressed.gzip.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "compress",
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "path",
+     "path_suffix": ".gz",
+     "source_state": "absent",
+     "content_kind": "gzip"
+    }
+   },
+   "adapter_module": "file_compress",
+   "computes_command": {
+    "argvs": [
+     [
+      "gzip",
+      "${path}"
+     ]
+    ],
+    "answer_field": "destination_path",
+    "note": "performed in process with the stdlib gzip module; no shell and no subprocess. The original is removed only after the archive on disk is decompressed and compared byte for byte."
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "handles_verbs": [
+    "compress"
+   ],
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "compress the file",
+    "gzip the file",
+    "compress the file into"
+   ],
+   "limitations": [
+    "Performs gzip's own operation: writes <file>.gz and then REMOVES the original, after decompressing the archive on disk and comparing it with the source byte for byte. source_removed is reported in the answer.",
+    "Refuses an existing archive, a path outside the repository, a non-regular file, and any file the sentence does not name."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "compress.file.gzip"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "original_byte_count",
+    "output_verified",
+    "path",
+    "schema",
+    "source_removed",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_compress.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COMPRESS-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the archive is decompressed and compared with the bytes read before the write, and the source is checked for removal. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_compress",
+     "command": "compress"
+    }
+   }
+  },
+  "file.contents.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "cat",
+     "path": "${input.path}",
+     "capability_id": "file.contents.v1"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "contents"
+    }
+   },
+   "adapter_module": "file_command_view",
+   "computes_command": {
+    "argvs": [
+     [
+      "cat",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "computed in process by file_command_view; no shell, no subprocess, closed command table, flags refused"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "show the contents",
+    "contents of",
+    "cat the file",
+    "print the file"
+   ],
+   "limitations": [
+    "Answers the command question in process; it never runs the command and never writes the input file.",
+    "Refuses flags, unknown commands, non-UTF-8 input and any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "fileview.contents"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "argv",
+    "argv_sha256",
+    "command",
+    "output_path",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-CONTENTS-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers are computed from a constructed world with the standard library, and compared against the real command where it is installed. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_command_view",
+     "command": "cat"
+    }
+   }
+  },
+  "file.copy.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "copy",
+     "goal": "${input.goal}",
+     "path": "${input.path}",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "output_path",
+     "source_state": "retained",
+     "same_as_source": true
+    }
+   },
+   "adapter_module": "file_ops",
+   "computes_command": {
+    "argvs": [
+     [
+      "cp",
+      "${path}",
+      "${output_path}"
+     ]
+    ],
+    "answer_field": "destination_path",
+    "note": "performed in process with pathlib; no shell and no subprocess"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "copy the file",
+    "copy to",
+    "make a copy",
+    "duplicate the file"
+   ],
+   "limitations": [
+    "Writes only the destination the sentence states, and only inside the repository.",
+    "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    },
+    "output_path": {
+     "type": "auto_path",
+     "suffix": ""
+    }
+   },
+   "provides": [
+    "copy.file"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+    "modules": [
+     "ctypes",
+     "errno",
+     "hashlib",
+     "os",
+     "pathlib",
+     "re",
+     "sys"
+    ],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COPY-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: a world is built with known bytes and the result is read back and digested. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_ops",
+     "command": "copy"
+    }
+   }
+  },
+  "file.diff.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "diff",
+     "path": "${input.path}",
+     "other_path": "${input.other_path}"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "diff"
+    }
+   },
+   "adapter_module": "file_command_view",
+   "computes_command": {
+    "argvs": [
+     [
+      "diff",
+      "${path}",
+      "${other_path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "unified diff computed in process (difflib); the receipt compares it with the real diff -u"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "compare",
+    "differences between",
+    "diff the files",
+    "how do they differ"
+   ],
+   "limitations": [
+    "Produces the UNIFIED diff (`diff -u`), three lines of context -- not the historical default format.",
+    "Reads both files; never writes either, and refuses any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    },
+    "other_path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "compare.files"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "argv",
+    "argv_sha256",
+    "command",
+    "differences",
+    "identical",
+    "other_path",
+    "output_path",
+    "output_verified",
+    "path",
+    "schema"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIFF-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the answer is compared with the real `diff -u` on a world this repository builds. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_command_view",
+     "command": "diff"
+    }
+   }
+  },
+  "file.directory_listing.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "directory_list",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "directory_listing"
+    }
+   },
+   "adapter_module": "file_survey",
+   "computes_command": {
+    "argvs": [
+     [
+      "ls",
+      "-A",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "computed in process by file_survey; no shell, no subprocess. The listing includes dot-files and is sorted by name, which is what `ls -A` prints -- measured byte-identical on a directory holding a dot-file, two files and a subdirectory -- and NOT what plain `ls` prints, which omits them."
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "list the files",
+    "list the directory",
+    "files in the directory",
+    "show the files",
+    "list the folder"
+   ],
+   "limitations": [
+    "Reads only; it never writes the path it reads.",
+    "Refuses a non-UTF-8 file, a missing path and any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "survey.directory_listing"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "command",
+    "entries",
+    "entry_count",
+    "files",
+    "names",
+    "output_path",
+    "output_verified",
+    "path",
+    "schema"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIRECTORY-LISTING-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers computed from a constructed world with the standard library. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_survey",
+     "command": "directory_list"
+    }
+   }
+  },
+  "file.directory_search.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "directory_search",
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "directory_search"
+    }
+   },
+   "adapter_module": "file_survey",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "files contain",
+    "files containing",
+    "files that mention",
+    "files mention",
+    "search the directory for",
+    "search for the word",
+    "find files with"
+   ],
+   "limitations": [
+    "Reads only. The string to look for is parsed from the sentence by a closed grammar; when the sentence does not state exactly one string, the row refuses rather than guessing.",
+    "Skips binary and unreadable files, and any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "survey.directory_search"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "command",
+    "files",
+    "files_scanned",
+    "files_with_matches",
+    "match_count",
+    "matches",
+    "output_path",
+    "output_verified",
+    "path",
+    "pattern",
+    "schema"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-DIRECTORY-SEARCH-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the world and its expected matches are built by the check, and the adapter is reached through the real dispatcher. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_survey",
+     "command": "directory_search"
+    }
+   }
+  },
+  "file.line.appended.v1": {
+   "computes_command": {
+    "argvs": [
+     [
+      "sed",
+      "-i",
+      "$a ${line}",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "performed in process by rewriting the file atomically and reading it back; no shell and no subprocess. `$a ${line}` is a literal `$a ` followed by the stated line, so this declaration covers appending THAT line and nothing else -- a substitution at the same position does not match."
+   },
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "append_line",
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "after_sha256",
+     "path_field": "path",
+     "path_input": "path"
+    }
+   },
+   "adapter_module": "file_edit",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "add a line containing",
+    "append a line",
+    "add a line to the file",
+    "append the line"
+   ],
+   "handles_verbs": [
+    "add",
+    "append",
+    "insert"
+   ],
+   "limitations": [
+    "Declares the command line it is byte-identical to (sed -i '$a <stated line>'), checked against the real program. The declaration covers only that subcommand -- a substitution does not match -- and it stops at one case: sed's $a addresses the LAST LINE, so on an EMPTY file sed appends nothing while this row adds the line, which is the useful reading and is stated rather than hidden.",
+    "Refuses when the line to add is not stated in the sentence, rather than inventing one.",
+    "Rewrites the stated file in place, atomically, and reads it back; refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "edit.file.append_line"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "after_line_count",
+    "after_sha256",
+    "answer",
+    "before_line_count",
+    "before_sha256",
+    "byte_count",
+    "command",
+    "output_verified",
+    "path",
+    "schema",
+    "unchanged"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_edit.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-APPEND-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the expected bytes are computed before the write, the temporary file is digested, and the source is re-read and re-digested after the atomic move. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_edit",
+     "command": "append_line"
+    }
+   }
+  },
+  "file.line_count.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "line_count",
+     "observation": "line_count"
+    }
+   },
+   "adapter_module": "file_line_count",
+   "computes_command": {
+    "argvs": [
+     [
+      "wc",
+      "-l",
+      "${path}"
+     ]
+    ],
+    "answer_field": "newline_count",
+    "note": "newline_count is the number of newline bytes, which is what wc -l prints; line_count is the human line count and equals it only when the last line is terminated (ends_with_newline reports which). No process is spawned."
+   },
+   "cost": 1,
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "count the lines",
+    "count lines",
+    "number of lines",
+    "how many lines",
+    "line count",
+    "lines in",
+    "wc -l"
+   ],
+   "limitations": [
+    "Counts str.splitlines() of a UTF-8 file; a trailing newline does not add a line, and ends_with_newline is reported so the wc -l difference is visible.",
+    "Refuses a non-UTF-8 file, a directory, a missing file and any path outside the repository.",
+    "Answers the wc -l question in process and reports both numbers; it does not run wc."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "file.line_count.answer"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "ends_with_newline",
+    "line_count",
+    "newline_count",
+    "output_path",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_line_count.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-LINE-COUNT-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers are computed from a constructed world with the standard library; the rows are reached through the real dispatcher; agreement with wc -l is checked where wc exists. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_line_count",
+     "world_answers": {
+      "five_lines.txt": 5,
+      "three_lines.txt": 3,
+      "empty.txt": 0
+     }
+    }
+   },
+   "entrypoint": "run"
+  },
+  "file.rename.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "rename",
+     "goal": "${input.goal}",
+     "path": "${input.path}",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "output_path",
+     "source_state": "absent",
+     "same_as_source": true
+    }
+   },
+   "adapter_module": "file_ops",
+   "computes_command": {
+    "argvs": [
+     [
+      "mv",
+      "${path}",
+      "${output_path}"
+     ]
+    ],
+    "answer_field": "destination_path",
+    "note": "performed in process using an atomic non-replacing rename on Linux; no shell and no subprocess"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "rename the file",
+    "rename to",
+    "move the file",
+    "change the name"
+   ],
+   "limitations": [
+    "Writes only the destination the sentence states, and only inside the repository.",
+    "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes.",
+    "Non-overwriting rename uses Linux renameat2(RENAME_NOREPLACE) and refuses where that atomic primitive is unavailable."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    },
+    "output_path": {
+     "type": "auto_path",
+     "suffix": ""
+    }
+   },
+   "provides": [
+    "rename.file"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+    "modules": [
+     "ctypes",
+     "errno",
+     "hashlib",
+     "os",
+     "pathlib",
+     "re",
+     "sys"
+    ],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-RENAME-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: a world is built with known bytes and the result is read back and digested. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_ops",
+     "command": "rename"
+    }
+   }
+  },
+  "file.reversed.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "tac",
+     "path": "${input.path}",
+     "capability_id": "file.reversed.v1"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "reversed"
+    }
+   },
+   "adapter_module": "file_command_view",
+   "computes_command": {
+    "argvs": [
+     [
+      "tac",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "computed in process by file_command_view; no shell, no subprocess, closed command table, flags refused"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "reverse the lines",
+    "reversed lines",
+    "last line first",
+    "backwards order"
+   ],
+   "limitations": [
+    "Answers the command question in process; it never runs the command and never writes the input file.",
+    "Refuses flags, unknown commands, non-UTF-8 input and any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "fileview.reversed"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "argv",
+    "argv_sha256",
+    "command",
+    "line_count",
+    "output_path",
+    "output_verified",
+    "path",
+    "reversed_lines",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-REVERSED-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers are computed from a constructed world with the standard library, and compared against the real command where it is installed. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_command_view",
+     "command": "tac"
+    }
+   }
+  },
+  "file.sorted.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "sort",
+     "path": "${input.path}",
+     "capability_id": "file.sorted.v1"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "sorted"
+    }
+   },
+   "adapter_module": "file_command_view",
+   "computes_command": {
+    "argvs": [
+     [
+      "sort",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "computed in process by file_command_view; no shell, no subprocess, closed command table, flags refused"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sort the lines",
+    "sorted lines",
+    "sort the file",
+    "alphabetical order"
+   ],
+   "limitations": [
+    "Answers the command question in process; it never runs the command and never writes the input file.",
+    "Refuses flags, unknown commands, non-UTF-8 input and any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "fileview.sorted"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "argv",
+    "argv_sha256",
+    "command",
+    "line_count",
+    "output_path",
+    "output_verified",
+    "path",
+    "schema",
+    "sorted_lines",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_command_view.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-SORTED-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers are computed from a constructed world with the standard library, and compared against the real command where it is installed. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_command_view",
+     "command": "sort"
+    }
+   }
+  },
+  "file.stat.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "size_bytes",
+     "observation": "stat"
+    }
+   },
+   "adapter_module": "file_stat",
+   "computes_command": {
+    "argvs": [
+     [
+      "stat",
+      "-c",
+      "%s",
+      "${path}"
+     ],
+     [
+      "stat",
+      "-c",
+      "%A",
+      "${path}"
+     ],
+     [
+      "stat",
+      "-c",
+      "%a",
+      "${path}"
+     ]
+    ],
+    "answer_field": "size_bytes (stat -c %s); permissions_octal (stat -c %a or %A)",
+    "note": "size_bytes is exactly stat -c %s and permissions_octal is the %a bits. No process is spawned."
+   },
+   "cost": 1,
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "file size",
+    "size of the file",
+    "how big",
+    "permissions",
+    "file permissions",
+    "mode bits",
+    "stat the file",
+    "metadata of"
+   ],
+   "limitations": [
+    "Reads metadata only; it never reads the contents.",
+    "Refuses a missing path and any path resolving outside the repository.",
+    "Answers the stat question in process; it does not run stat."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "file.stat.answer"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "is_dir",
+    "is_file",
+    "is_symlink",
+    "output_path",
+    "output_verified",
+    "path",
+    "permissions_octal",
+    "schema",
+    "size_bytes"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_stat.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-STAT-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers are computed from a constructed world with the standard library; the rows are reached through the real dispatcher; agreement with stat is checked where stat exists. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_stat",
+     "world_answers": {
+      "size_bytes": 24,
+      "permissions_octal": "0640"
+     }
+    }
+   },
+   "entrypoint": "run"
+  },
+  "file.uppercased.v1": {
+   "computes_command": {
+    "argvs": [
+     [
+      "sed",
+      "-e",
+      "s/.*/\\U&/",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "performed in process by rewriting the file atomically and reading it back; no shell and no subprocess. The declared command line is the one this row's output is byte-identical to, and the equivalence is checked against real sed."
+   },
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "uppercase",
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "after_sha256",
+     "path_field": "path",
+     "path_input": "path"
+    }
+   },
+   "adapter_module": "file_edit",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "uppercase every line",
+    "uppercase the file",
+    "upper case every line",
+    "capitalise every line"
+   ],
+   "handles_verbs": [
+    "uppercase"
+   ],
+   "limitations": [
+    "Declares the command line it is byte-identical to (sed -e 's/.*/\\U&/'); the equivalence is checked against the real program, not asserted.",
+    "Rewrites the stated file in place, atomically, and reads it back; a result identical to the input is reported unchanged instead of written.",
+    "Refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "edit.file.uppercase"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "after_line_count",
+    "after_sha256",
+    "answer",
+    "before_line_count",
+    "before_sha256",
+    "byte_count",
+    "command",
+    "output_verified",
+    "path",
+    "schema",
+    "unchanged"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_edit.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-UPPERCASE-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the expected bytes are computed before the write, the temporary file is digested, and the source is re-read and re-digested after the atomic move. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_edit",
+     "command": "uppercase"
+    }
+   }
+  },
+  "file.word_frequency.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "word_frequency",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_observation_matches",
+     "field": "answer",
+     "observation": "word_frequency"
+    }
+   },
+   "adapter_module": "file_survey",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "most common word",
+    "word frequency",
+    "most frequent word",
+    "word appears most"
+   ],
+   "limitations": [
+    "Reads only; it never writes the path it reads.",
+    "Refuses a non-UTF-8 file, a missing path and any path resolving outside the repository."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "survey.word_frequency"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "command",
+    "count",
+    "counts",
+    "distinct_words",
+    "most_common_word",
+    "output_path",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256",
+    "tied_for_first"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-WORD-FREQUENCY-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: expected answers computed from a constructed world with the standard library. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_survey",
+     "command": "word_frequency"
+    }
+   }
+  },
   "finance.saccr.credit.addon.v1": {
    "action_template": {
     "args": {

@@ -946,6 +946,10 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
+        # Callers may supply a one-shot iterable. Routing and execution both
+        # inspect the declaration, so neither may consume it for the other.
+        if context_paths is not None:
+            context_paths = list(context_paths)
         if requested == "RECALL":
             return self.recall(goal)
         if requested == "SOLVE_OR_LEARN":
@@ -1011,6 +1015,7 @@ class UnifiedModel:
                     routing=routing,
                 )
             chosen = str(routing["best"]["id"])
+            chosen = self._first_fillable(chosen, goal, routing, inputs, context_paths)
 
         if chosen.startswith("engine:") or chosen.startswith("meta:"):
             return self._dispatch_engine(goal, chosen, inputs, routing)
@@ -1260,6 +1265,85 @@ class UnifiedModel:
             reason=reason,
             **extra,
         )
+
+    def _first_fillable(
+        self,
+        chosen: str,
+        goal: str,
+        routing: Mapping[str, Any],
+        inputs: Mapping[str, Any],
+        context_paths: Iterable[str] | None,
+    ) -> str:
+        """The highest-scoring candidate whose declared inputs this caller can fill.
+
+        Measured 2026-11-02: `file.archive.tar_gz.v1` -- a row that needs a stated
+        FILE and the archive to write -- outscored `archive.tar_gz.create_from_manifest`
+        by 1344.75 to 1332.28 on "create a tar gz archive from a manifest", a margin
+        of 0.9%.  The router was confident, `solve()` then reported
+        CAPABILITY_INPUTS_MISSING:goal,path, and a request the model could serve
+        came back FAIL_CLOSED.  The row that lost was not wrong about anything; the
+        model simply had no notion of "can this caller fill what this row needs".
+
+        The rule is deliberately narrow:
+
+        * it only runs when the router's own best pick is missing a declared input;
+        * a replacement must have NOTHING missing from explicit caller inputs;
+          when declared context is supplied the original route is retained;
+        * a capability the goal addresses by its own id is never displaced;
+        * candidates come from the route's own ranking, so this never reaches a
+          capability the model did not already consider for this sentence;
+        * if nothing else is fillable, the original choice stands and fails closed
+          exactly as before.
+
+        It cannot turn a FAILED run into a passed one: the choice is made before
+        anything executes, and the replacement still has to pass its own adapter.
+        """
+        row = self.capabilities.get(chosen) or {}
+        required = [str(x) for x in (row.get("input_names") or [])]
+        if not required:
+            return chosen
+        declared = [str(p) for p in (context_paths or []) if str(p).strip()]
+        # Declared context is an admission boundary, not evidence that a
+        # different capability answers the request. A replacement selected
+        # only because it can consume that context can bypass a missing-input
+        # refusal or substitute a different operation. Keep the original route
+        # whenever context is supplied; this fallback is for explicit inputs.
+        if declared:
+            return chosen
+
+        def fillable(cid: str) -> bool:
+            row = self.capabilities.get(cid) or {}
+            need = [str(x) for x in (row.get("input_names") or [])]
+            missing = [name for name in need if name not in inputs]
+            if not missing:
+                return True
+            return False
+
+        if fillable(chosen):
+            return chosen
+        if chosen in self._ids_mentioned(goal):
+            return chosen
+        best_kind = str((routing.get("best") or {}).get("kind") or "")
+        for candidate in (routing.get("candidates") or []):
+            cid = str(candidate.get("id") or "")
+            if not cid or cid == chosen or cid not in self.capabilities:
+                continue
+            # A ROW THAT NEEDS NOTHING IS NOT A REPLACEMENT -- IT IS A DIFFERENT
+            # QUESTION.  Measured while writing this: with no inputs supplied at
+            # all, `canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1`
+            # declares no required input, so it was "fillable" by definition and
+            # inherited a route it had nothing to do with.  A candidate with an
+            # empty contract is exactly the catch-all the front compiler already
+            # refuses to route; it cannot become the answer here either.
+            if str(candidate.get("kind") or "") != best_kind:
+                continue
+            if not [str(x) for x in ((self.capabilities.get(cid) or {}).get("input_names") or [])]:
+                continue
+            if fillable(cid):
+                routing["rerouted_from"] = chosen
+                routing["reroute_rule"] = "TOP_CANDIDATE_INPUTS_UNFILLABLE__NEXT_FILLABLE_CANDIDATE"
+                return cid
+        return chosen
 
     def _execute_capability(
         self,

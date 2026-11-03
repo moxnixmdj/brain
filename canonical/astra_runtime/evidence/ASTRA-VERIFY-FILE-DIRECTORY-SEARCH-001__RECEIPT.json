@@ -1,0 +1,76 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_survey.py",
+ "adapter_sha256": "fc116fd29da8c53d00f0617772de09d77789fc88c4335591509697582b08c5b8",
+ "capability_id": "file.directory_search.v1",
+ "checks": [
+  {
+   "adapter_returned": [
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/deep/hit_two.txt",
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/hit_one.txt"
+   ],
+   "built_here": [
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/deep/hit_two.txt",
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/hit_one.txt"
+   ],
+   "name": "names exactly the files this check seeded the string into",
+   "ok": true
+  },
+  {
+   "adapter_returned": 2,
+   "built_here": 2,
+   "name": "counts matching LINES, and the line count is the seeded one",
+   "ok": true
+  },
+  {
+   "adapter_returned": [
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/deep/hit_two.txt",
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/hit_one.txt"
+   ],
+   "name": "the answer-shape gate can project the result onto `files`",
+   "ok": true
+  },
+  {
+   "adapter_returned": [
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/deep/hit_two.txt",
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/hit_one.txt"
+   ],
+   "name": "a case-different string is not the string asked for",
+   "ok": true
+  },
+  {
+   "adapter_returned": [
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/deep/hit_two.txt",
+    "canonical/astra_runtime/tmp/file_facts_provenance_v1/search/hit_one.txt"
+   ],
+   "name": "a binary file is skipped rather than failing the search",
+   "ok": true
+  },
+  {
+   "name": "refuses a sentence that states no string to look for",
+   "ok": true,
+   "refused_with": "SEARCH_TEXT_NOT_STATED"
+  },
+  {
+   "name": "refuses two grammars that do not agree",
+   "ok": true,
+   "refused_with": "SEARCH_TEXT_AMBIGUOUS"
+  },
+  {
+   "name": "refuses a file where a directory is required",
+   "ok": true,
+   "refused_with": "PATH_NOT_A_DIRECTORY"
+  }
+ ],
+ "claim": "names the files whose text contains the stated string, and refuses when the sentence states none or two",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-DIRECTORY-SEARCH-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.directory_search.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-03T11:51:29Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

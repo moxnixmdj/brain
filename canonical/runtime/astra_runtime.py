@@ -1549,6 +1549,14 @@ def _verify_action_expectation(action,result):
         ok=str(expect.get("value","")) in str(value or "")
     elif typ=="field_equals":
         ok=value==expect.get("value")
+    elif typ in ("file_sha256_matches","file_observation_matches"):
+        if typ=="file_sha256_matches":
+            from canonical.runtime import file_artifact_expectation_v1 as independent
+        else:
+            from canonical.runtime import file_observation_expectation_v1 as independent
+        ok,detail=independent.verify(expect,result,action.get("args") or {},ROOT)
+        if not ok:
+            raise Blocker("ACTION_EXPECTATION_FAILED:"+detail)
     else:
         raise Blocker("ACTION_EXPECTATION_TYPE_UNKNOWN:"+str(typ))
     if not ok:
