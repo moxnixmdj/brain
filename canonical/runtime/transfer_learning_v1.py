@@ -262,6 +262,11 @@ def _save(rows: list[dict[str, Any]]) -> bool:
 # cache of the machine's own shape MUST be keyed on the machine.
 FP_MAX = 256
 
+# How stale a recorded use may be before a hit bothers to rewrite the file.  A read costs
+# 0.39 ms and a write 3.2 ms (measured 2026-11-03, 256 entries), and the eviction order only
+# needs to distinguish "used this hour" from "used last month".
+TOUCH_EVERY_S = 60.0
+
 
 def _fp_path() -> str:
     """Where the cache lives, read per call so a test (or a second machine) can move it."""
@@ -300,7 +305,36 @@ def _fp_save(data: Mapping[str, Any]) -> bool:
 def cached_fingerprint(key: str) -> dict[str, Any] | None:
     """The fingerprint this machine produced for this key, if it is still this machine."""
     row = (_fp_load().get("fingerprints") or {}).get(str(key))
-    return dict(row) if isinstance(row, Mapping) else None
+    if not isinstance(row, Mapping):
+        return None
+    # A HIT IS A USE, and it is recorded on the row so eviction can see it.  Without this
+    # the cache was FIFO: measured 2026-11-03, a key written 20 times and then read every
+    # day was evicted by 256 one-shot keys, while the one-shot key written most recently
+    # survived.  A fingerprint costs 5-8 s of real acting to produce and a touch costs
+    # 3.2 ms to write, so losing a reused one to a never-reused one is a pure loss.
+    # Persist the touch, but not on every single read: a rewrite costs 3.2 ms and the order
+    # only needs to be right to within a minute, so a hit inside TOUCH_EVERY_S of the last
+    # recorded use is left alone.  Single write per file, last-writer-wins; that is the same
+    # contract every other writer here already has.
+    now = _fp_clock()
+    if isinstance(row, dict) and now - float(row.get("_used") or 0.0) > TOUCH_EVERY_S:
+        data = _fp_load()
+        live = (data.get("fingerprints") or {}).get(str(key))
+        if isinstance(live, dict):
+            live["_used"] = now
+            _fp_save(data)
+        row["_used"] = now
+    # Bookkeeping never leaves through the door: `_used` is this module's business, and a
+    # caller comparing a recalled fingerprint with a freshly taken one (computer_env_v1 does
+    # exactly that) would see a field the fresh one cannot have and conclude "not the same
+    # machine". That is a cache that misses forever while reporting hits.
+    out = {k: v for k, v in row.items() if k != "_used"}
+    return out
+
+
+def _fp_clock() -> float:
+    """A monotonic-ish use counter: wall clock, which is fine for ordering by last use."""
+    return time.time()
 
 
 def cache_fingerprint(key: str, fp: Mapping[str, Any]) -> None:
@@ -308,10 +342,18 @@ def cache_fingerprint(key: str, fp: Mapping[str, Any]) -> None:
     store = data.setdefault("fingerprints", {})
     if not isinstance(store, dict):
         store = data["fingerprints"] = {}
-    store[str(key)] = dict(fp)
-    # bounded: the oldest keys go, which is what a cache is for
+    row = dict(fp)
+    row["_used"] = _fp_clock()
+    store[str(key)] = row
+    # Bounded: the keys used LONGEST AGO go -- not the keys written longest ago.
+    # Measured 2026-11-03: FIFO eviction lost a fingerprint that had been read 20 times to
+    # 256 keys read zero times.  A cache whose policy discards the entry with the most
+    # evidence of use is not a cache, it is a queue; the reuse it was supposed to buy is
+    # silently paid for again at 5-8 s a time.  Rows written before this change carry no
+    # `_used`; they are treated as oldest, which is the conservative direction.
     if len(store) > FP_MAX:
-        for stale in list(store)[:len(store) - FP_MAX]:
+        by_use = sorted(store, key=lambda k: (store[k] or {}).get("_used", 0.0))
+        for stale in by_use[:len(store) - FP_MAX]:
             store.pop(stale, None)
     _fp_save(data)
 
