@@ -42,6 +42,7 @@ import hashlib
 import os
 import pathlib
 import re
+import stat
 import sys
 
 # Replacement is dangerous: a word such as "overwrite" is not consent when
@@ -112,26 +113,73 @@ def _prepare(args, root: pathlib.Path):
     return source, destination, overwrite
 
 
+def _open_destination_beneath_root(root: pathlib.Path, destination: pathlib.Path,
+                                   overwrite: bool) -> int:
+    """Open the destination through no-follow directory descriptors.
+
+    Resolving a path before a write is insufficient: another process can replace
+    an ancestor or the final component with a symlink. Descend from the already
+    admitted root using directory fds and refuse symlinks at every component.
+    This does not prove safety against every concurrent inode replacement.
+    """
+    directory = getattr(os, "O_DIRECTORY", None)
+    nofollow = getattr(os, "O_NOFOLLOW", None)
+    nonblock = getattr(os, "O_NONBLOCK", None)
+    if directory is None or nofollow is None or nonblock is None or os.open not in os.supports_dir_fd:
+        raise RuntimeError("SAFE_DESTINATION_OPEN_UNSUPPORTED")
+    parts = destination.relative_to(root).parts
+    if not parts:
+        raise RuntimeError("DESTINATION_REQUIRED")
+    parent_fd = os.open(root, os.O_RDONLY | directory | nofollow)
+    try:
+        for name in parts[:-1]:
+            try:
+                child_fd = os.open(name, os.O_RDONLY | directory | nofollow, dir_fd=parent_fd)
+            except OSError as exc:
+                if exc.errno in (errno.ELOOP, errno.ENOTDIR):
+                    raise RuntimeError("DESTINATION_PARENT_IS_SYMLINK_OR_UNSAFE") from exc
+                raise
+            os.close(parent_fd)
+            parent_fd = child_fd
+        # Do not truncate at open: a hard link may have appeared after the
+        # original admission check. Inspect the opened inode first. Nonblocking
+        # open prevents an attacker-supplied FIFO from blocking this check.
+        flags = os.O_WRONLY | os.O_CREAT | nofollow | nonblock
+        if not overwrite:
+            flags |= os.O_EXCL
+        try:
+            fd = os.open(parts[-1], flags, 0o666, dir_fd=parent_fd)
+        except OSError as exc:
+            if exc.errno == errno.ELOOP:
+                raise RuntimeError("DESTINATION_IS_SYMLINK_OR_UNSAFE") from exc
+            if not overwrite and exc.errno == errno.EEXIST:
+                raise RuntimeError("DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE") from exc
+            raise
+        try:
+            info = os.fstat(fd)
+            if not stat.S_ISREG(info.st_mode):
+                raise RuntimeError("DESTINATION_NOT_A_REGULAR_FILE")
+            if info.st_nlink != 1:
+                raise RuntimeError("DESTINATION_HAS_MULTIPLE_LINKS")
+            if overwrite:
+                os.ftruncate(fd, 0)
+            return fd
+        except BaseException:
+            os.close(fd)
+            raise
+    finally:
+        os.close(parent_fd)
+
+
 def _copy(args, root: pathlib.Path) -> dict:
     source, destination, overwrite = _prepare(args, root)
     before = _digest(source)
-    destination.parent.mkdir(parents=True, exist_ok=True)
+    # Do not create a parent directory the caller did not name as a separate
+    # effect. Opening beneath the root refuses a missing or replaced parent.
     data = source.read_bytes()
-    if overwrite:
-        destination.write_bytes(data)
-    else:
-        # The destination can appear after _prepare. Exclusive creation keeps
-        # a concurrent file (or a dangling symlink) from being overwritten.
-        try:
-            handle = destination.open("xb")
-        except FileExistsError as exc:
-            raise RuntimeError("DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE") from exc
-        try:
-            with handle:
-                handle.write(data)
-        except Exception:
-            destination.unlink(missing_ok=True)
-            raise
+    fd = _open_destination_beneath_root(root, destination, overwrite)
+    with os.fdopen(fd, "wb") as handle:
+        handle.write(data)
     after, written = _digest(destination), _digest(source)
     if after != before or written != before:
         raise RuntimeError("COPY_DID_NOT_ROUNDTRIP")

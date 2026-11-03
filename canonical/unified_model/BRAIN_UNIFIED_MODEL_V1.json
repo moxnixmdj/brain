@@ -21837,6 +21837,7 @@
      "os",
      "pathlib",
      "re",
+     "stat",
      "sys"
     ],
     "declared_dependency_executables": [],
@@ -21863,7 +21864,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_ops.py",
-    "source_sha256": "98fe12fbdc08a4a6be6eff86db43fee7b35b60064949abe61d3f5113a8fbe1f2",
+    "source_sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -21889,7 +21890,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-BACKUP-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "cb389b3661ae3785f80f29183f4944d9be982f4356492fc27e1cdb9b0f29e159",
+    "evidence_sha256": "a551fbd2e3d2976ec1c31af6bfa75c74b5a9ed9284a4179db0c5fc8317c7439b",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22042,6 +22043,7 @@
      "os",
      "pathlib",
      "re",
+     "stat",
      "sys"
     ],
     "declared_dependency_executables": [],
@@ -22069,7 +22071,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_ops.py",
-    "source_sha256": "98fe12fbdc08a4a6be6eff86db43fee7b35b60064949abe61d3f5113a8fbe1f2",
+    "source_sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22095,7 +22097,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COPY-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "f9936fa49c692191521e1d20f493eb3884388f27ee1817a7ed8e05daf17d07f3",
+    "evidence_sha256": "901463928df11b397428684687b1fd91b55772220f9c292c646dc71e7756f654",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22461,6 +22463,7 @@
      "os",
      "pathlib",
      "re",
+     "stat",
      "sys"
     ],
     "declared_dependency_executables": [],
@@ -22486,7 +22489,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_ops.py",
-    "source_sha256": "98fe12fbdc08a4a6be6eff86db43fee7b35b60064949abe61d3f5113a8fbe1f2",
+    "source_sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22512,7 +22515,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-RENAME-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "f7fb3a1fc2948fbf244f0f32856eb58341c69a680df168a594c0bb25de5db178",
+    "evidence_sha256": "253ef87af99a06579df17c48183cb9065213b9eaf2bacfb1183dfa8d1d65210b",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -32066,7 +32069,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7032d0720e2a307127699ba496eb9c7296e53c715abd0de29b076fb7c717c4f1"
+  "value": "5239d28081ad9635f9b186d5db2dd96ae8724771afbcf22876fe924a6b5bc89a"
  },
  "engines": [
   {
@@ -32783,7 +32786,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "98fe12fbdc08a4a6be6eff86db43fee7b35b60064949abe61d3f5113a8fbe1f2"
+    "sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28"
    },
    "canonical/runtime/bound_capabilities/file_stat.py": {
     "defaulted_keys": {},
@@ -65771,7 +65774,7 @@
   "included_source_count": 1080,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e516ea2c5816f07e7f9a2a726ff96311d52f44fb74bddd46da836c17cfbbad5d"
+  "source_tree_digest": "3c38fda7b1d4afc470829adfcad9ae8a01660be5981c3cc0e205c194c4bfb5eb"
  },
  "research_index": [
   {

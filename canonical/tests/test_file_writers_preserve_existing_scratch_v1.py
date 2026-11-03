@@ -120,7 +120,7 @@ def _race_worker(kind: str, negated_overwrite: bool = False) -> None:
             is_publish = event == "os.link" and pathlib.Path(event_args[1]) == dest
             is_atomic_rename = (kind == "rename" and event == "ctypes.dlsym"
                                 and event_args[1] == "renameat2")
-            is_creation = (event == "open" and pathlib.Path(event_args[0]) == dest
+            is_creation = (event == "open" and pathlib.Path(event_args[0]) in (dest, pathlib.Path(dest.name))
                            and bool(event_args[2] & os.O_WRONLY))
             if is_publish or is_atomic_rename or (kind in ("copy", "backup") and is_creation):
                 events.append(event)
@@ -168,6 +168,170 @@ def test_negated_overwrite_does_not_overwrite_a_racing_destination() -> None:
         assert result.returncode == 0, (kind, result.stdout, result.stderr)
 
 
+def _overwrite_symlink_race_worker() -> None:
+    SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world, tempfile.TemporaryDirectory() as outside:
+        source, destination, _scratch, args, adapter = _setup(pathlib.Path(world), "copy")
+        destination.write_bytes(PRECIOUS)
+        victim = pathlib.Path(outside) / "outside.txt"
+        victim.write_bytes(PRECIOUS)
+        args["goal"] += " and overwrite it"
+        events = []
+
+        def replace_destination(event, event_args):
+            if (not events and event == "open" and pathlib.Path(event_args[0]) in
+                    (destination, pathlib.Path(destination.name)) and bool(event_args[2] & os.O_WRONLY)):
+                events.append(event)
+                destination.unlink()
+                destination.symlink_to(victim)
+
+        sys.addaudithook(replace_destination)
+        try:
+            adapter.run(args, ROOT)
+        except RuntimeError as exc:
+            assert "DESTINATION_IS_SYMLINK_OR_UNSAFE" in str(exc), exc
+        else:
+            raise AssertionError("an overwrite followed a competing symlink")
+        assert events == ["open"], events
+        assert source.read_bytes() == ORIGINAL
+        assert victim.read_bytes() == PRECIOUS
+        assert destination.is_symlink() and os.readlink(destination) == str(victim)
+
+
+def test_overwrite_does_not_follow_a_competing_symlink_outside_the_root() -> None:
+    result = subprocess.run([sys.executable, "-B", __file__, "--race-overwrite-symlink"],
+                            capture_output=True, text=True, check=False)
+    assert result.returncode == 0, (result.stdout, result.stderr)
+
+
+def _parent_symlink_race_worker(overwrite: bool) -> None:
+    SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world, tempfile.TemporaryDirectory() as outside:
+        base = pathlib.Path(world)
+        source = base / "source.txt"
+        source.write_bytes(ORIGINAL)
+        parent = base / "race_parent"
+        parent.mkdir()
+        destination = parent / "destination.txt"
+        if overwrite:
+            destination.write_bytes(b"old destination\n")
+        external = pathlib.Path(outside) / "destination.txt"
+        if overwrite:
+            external.write_bytes(PRECIOUS)
+        source_rel, dest_rel = (path.relative_to(ROOT).as_posix() for path in (source, destination))
+        args = {"command": "copy", "path": source_rel, "output_path": dest_rel,
+                "goal": "Copy %s to %s%s" % (source_rel, dest_rel,
+                                                " and overwrite it" if overwrite else "")}
+        events = []
+
+        def replace_parent(event, event_args):
+            if (not events and event == "open" and event_args[0] == "race_parent"
+                    and bool(event_args[2] & os.O_DIRECTORY)):
+                events.append(event)
+                parent.rename(base / "old_parent")
+                parent.symlink_to(outside, target_is_directory=True)
+
+        sys.addaudithook(replace_parent)
+        try:
+            file_ops.run(args, ROOT)
+        except RuntimeError as exc:
+            assert "DESTINATION_PARENT_IS_SYMLINK_OR_UNSAFE" in str(exc), exc
+        else:
+            raise AssertionError("copy followed a competing parent symlink")
+        assert events == ["open"], events
+        assert source.read_bytes() == ORIGINAL
+        assert parent.is_symlink() and os.readlink(parent) == outside
+        if overwrite:
+            assert external.read_bytes() == PRECIOUS
+            assert (base / "old_parent" / "destination.txt").read_bytes() == b"old destination\n"
+        else:
+            assert not external.exists()
+            assert not (base / "old_parent" / "destination.txt").exists()
+
+
+def test_copy_neither_creates_nor_overwrites_through_a_competing_parent_symlink() -> None:
+    for mode in ("new", "overwrite"):
+        result = subprocess.run([sys.executable, "-B", __file__, "--race-parent-symlink", mode],
+                                capture_output=True, text=True, check=False)
+        assert result.returncode == 0, (mode, result.stdout, result.stderr)
+
+
+def _overwrite_hardlink_race_worker() -> None:
+    SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world, tempfile.TemporaryDirectory() as outside:
+        source, destination, _scratch, args, adapter = _setup(pathlib.Path(world), "copy")
+        destination.write_bytes(b"original destination\n")
+        victim = pathlib.Path(outside) / "outside.txt"
+        victim.write_bytes(PRECIOUS)
+        args["goal"] += " and overwrite it"
+        events = []
+
+        def replace_destination(event, event_args):
+            if (not events and event == "open" and event_args[0] == destination.name
+                    and bool(event_args[2] & os.O_WRONLY)):
+                events.append(event)
+                destination.unlink()
+                os.link(victim, destination)
+
+        sys.addaudithook(replace_destination)
+        try:
+            adapter.run(args, ROOT)
+        except RuntimeError as exc:
+            assert "DESTINATION_HAS_MULTIPLE_LINKS" in str(exc), exc
+        else:
+            raise AssertionError("copy truncated a competing hard link")
+        assert events == ["open"], events
+        assert source.read_bytes() == ORIGINAL
+        assert victim.read_bytes() == PRECIOUS
+        assert os.path.samefile(victim, destination)
+
+
+def test_overwrite_does_not_truncate_a_competing_hardlink() -> None:
+    result = subprocess.run([sys.executable, "-B", __file__, "--race-overwrite-hardlink"],
+                            capture_output=True, text=True, check=False)
+    assert result.returncode == 0, (result.stdout, result.stderr)
+
+
+def test_copy_does_not_create_an_unstated_parent_directory() -> None:
+    SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world:
+        base = pathlib.Path(world)
+        source = base / "source.txt"
+        source.write_bytes(ORIGINAL)
+        parent = base / "not-created"
+        destination = parent / "destination.txt"
+        source_rel, dest_rel = (p.relative_to(ROOT).as_posix() for p in (source, destination))
+        try:
+            file_ops.run({"command": "copy", "path": source_rel, "output_path": dest_rel,
+                          "goal": "Copy %s to %s" % (source_rel, dest_rel)}, ROOT)
+        except FileNotFoundError:
+            pass  # The descriptor walk refuses a missing parent.
+        else:
+            raise AssertionError("copy created a missing parent directory")
+        assert not parent.exists()
+        assert source.read_bytes() == ORIGINAL
+
+
+def test_copy_refuses_an_existing_hard_link_to_another_file() -> None:
+    SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world:
+        base = pathlib.Path(world)
+        source, destination, _scratch, args, adapter = _setup(base, "copy")
+        protected = base / "protected.txt"
+        protected.write_bytes(PRECIOUS)
+        os.link(protected, destination)
+        args["goal"] += " and overwrite it"
+        try:
+            adapter.run(args, ROOT)
+        except RuntimeError as exc:
+            assert "DESTINATION_HAS_MULTIPLE_LINKS" in str(exc), exc
+        else:
+            raise AssertionError("copy truncated an existing hard link")
+        assert source.read_bytes() == ORIGINAL
+        assert protected.read_bytes() == destination.read_bytes() == PRECIOUS
+        assert os.path.samefile(protected, destination)
+
+
 def test_copy_or_rename_cannot_overwrite_a_hard_link_to_the_source() -> None:
     SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
     for kind in ("copy", "rename"):
@@ -203,5 +367,11 @@ def main() -> int:
 if __name__ == "__main__":
     if len(sys.argv) == 3 and sys.argv[1] in ("--race", "--race-negated"):
         _race_worker(sys.argv[2], negated_overwrite=(sys.argv[1] == "--race-negated"))
+    elif len(sys.argv) == 2 and sys.argv[1] == "--race-overwrite-symlink":
+        _overwrite_symlink_race_worker()
+    elif len(sys.argv) == 2 and sys.argv[1] == "--race-overwrite-hardlink":
+        _overwrite_hardlink_race_worker()
+    elif len(sys.argv) == 3 and sys.argv[1] == "--race-parent-symlink":
+        _parent_symlink_race_worker(overwrite=sys.argv[2] == "overwrite")
     else:
         raise SystemExit(main())
