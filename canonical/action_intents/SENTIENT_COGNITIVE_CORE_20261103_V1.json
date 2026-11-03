@@ -1,0 +1,460 @@
+{
+  "action_id": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+  "action_intent_id": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Build and wire the non-static `K3=0` (`$0` spend) Sentient Cognitive Core (`sentient_cognitive_core_v1.py`) and 4-Law Recursive Self-Architecting Engine (`recursive_self_architect_v1.py`), purging static prior/operator/fixture crutches (`_PRIOR_MU`, `0.68`, `_DIV_FAMILY`, `(8, 2, 5)`) and restoring `28/28` SWE surface census (`fix_then_regression_test` via `software.repair.choreograph.crossfile.v1` in `swe_typed_plan_v1.py`). `Ring0SelfReferee` enforces 6 deterministic anti-wireheading gates (`SelfPatchFirewall`, `repair_input_dependency_gate_v1`, `<10 ms` CoW + `_BrainAssertCounter` confined regression, sealed held-out escrow + AST diff-mutant kill + `property_v1.mutate`, `credit_gates_v1` + interleaved A/B/B/A speedup, and executable-byte MDL budget + rollback receipts) over Ring-1 `.py` self-upgrades.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/brokered_workspace_execution_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/runtime/derived_inspector_flywheel_v1.py",
+      "canonical/runtime/swe_typed_plan_v1.py",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
+      "canonical/swe_kernel/recursive_self_architect_v1.py",
+      "canonical/swe_kernel/rule_scope_learning_v1.py",
+      "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+      "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/tests/test_sentient_cognitive_core_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Post-#6601 (`19bc4b05`) soundness & static-pipeline gaps: static probability ladders in `Creature.predict_task_probability`, host `exec()` in `rule_scope_learning_v1`/`autonomous_awake_loop_v1`, 0-assertion tautology in Zygote tests, unpersisted `BehavioralDerivation` callables across `boot()`, low-ceiling YouTube fallacy in `global_extrapolation_chase_spine_v1`, and absence of a live Active-Inference + Causal-World + Wake-Sleep cognitive core.",
+  "canonical_base_commit": "19bc4b057adaced5210a6b57864535f4cdd3f470",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Post-#6601 (`19bc4b05`) soundness & static-pipeline gaps: static probability ladders in `Creature.predict_task_probability`, host `exec()` in `rule_scope_learning_v1`/`autonomous_awake_loop_v1`, 0-assertion tautology in Zygote tests, unpersisted `BehavioralDerivation` callables across `boot()`, low-ceiling YouTube fallacy in `global_extrapolation_chase_spine_v1`, and absence of a live Active-Inference + Causal-World + Wake-Sleep cognitive core.",
+  "date": "2026-11-03",
+  "expected_parent_change": "canonical/runtime/{brain_unified_model_v1,brokered_workspace_execution_v1,creature_runtime_v1,derived_inspector_flywheel_v1}.py + canonical/swe_kernel/{autonomous_awake_loop_v1,global_extrapolation_chase_spine_v1,rule_scope_learning_v1,sentient_cognitive_core_v1,tree_sitter_cst_skill_skeleton_v1,verified_skill_crystallizer_v1}.py + canonical/tests/test_sentient_cognitive_core_v1.py + canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json.",
+  "expected_parent_frontier_change": "Two identical creatures diverge in cognitive regime (`SYSTEM_1_CRYSTALLIZED_REFLEX` vs `SYSTEM_2_EPISTEMIC_EXPLORATION`, `< 500 us` escalation) purely from lived experience; `CausalWorldGraph` discovers irreversible destroyers (`IRREVERSIBLE_DESTRUCTIVE`) and silent-stderr missing-file precondition chains from zero priors; `PersistentConfinedZygote` rejects 0-assertion tautologies (`exit 3`) and screens batches in `< 20 ms` via 6-slot O(|Delta W|) delta restore with `0` host `exec()`; Wake-Sleep consolidation calibrates `[G_-, B_+]` (`SCOPE_EXPRESSION`) to solve `5/5` unseen compound/sibling-operator variants in `0` search steps while withholding broadened patterns from weak verifiers (`0` misapplications); `GlobalVoIDominanceController` refuses low-ceiling channels (`max=450 < 1,000,000`) and reaches `measure() >= 1,000,000` without retrying irreversible writes; and `BehavioralDerivation` enforces `property_v1.mutate >= 0.5` and rehydrates live callables across `Creature.boot()`.",
+  "explicit_user_authorization": "Owner challenged static code vs first-principles sentient-like architecture (`OWNER_ACTIVE_GOAL_20261018_V1.md`, `K3=0`) and directed 'go'.",
+  "falsification_condition": "FALSIFIED if any upgraded module contains an AST `exec()` call, if two creatures with identical code fail to diverge in regime/probability from lived history, if `PersistentConfinedZygote` accepts a 0-assertion test suite, if broadened `[G_-, B_+]` rules fire under `CALLER_PREDICATE`/`SYNTAX`, if `GlobalVoIDominanceController` accepts low-ceiling channels (`< 1,000,000`) or retries an irreversible write, if `BehavioralDerivation` fails to reject failing JSON or lose live callables across `Creature.boot()`, or if any `computer_execution_boundary_v1` / `retained_repair_boundary_v1` guard weakens.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "5/13",
+    "interpretation": "CLOSES_FIRST_PRINCIPLES_NON_STATIC_SENTIENT_COGNITIVE_CORE_CAUSAL_WORLD_LEARNING_WAKE_SLEEP_VERSION_SPACE_CONSOLIDATION_AND_SOUND_CONFINED_ZYGOTE_WITHOUT_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.98,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "`test_sentient_cognitive_core_v1`: `9/9 PASS` (`5.94s`) proving lived-history divergence (`mu_0=[0]*10`), zero-prior causal destroyer avoidance, `5/5` zero-search `[G_-, B_+]` transfer, `$1M` global VoI dominance, `<15 ms` warm curiosity pulse, blinded Ring-1 `.py` functional self-evolution (`6/6` sealed held-out + rollback), autonomous `>5x` O(N^2)->O(N) complexity self-upgrade + `<0` byte MDL compression, `4/4` wirehead/sabotage attack refusals, and zero-LLM `model_v1` conformance. `hardcore_swe_surface_probe_20261030.py --floor 28`: `28/28 PASS`; `swe_advanced_probe_v1.py --floor 35`: `37/49 SERVED`; `verify_brain_unified_model_v1`: `33/33 PASS`; `verifier_falsification_v1`: `98/101 SAID_NO (0 bad)`.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/continuous_self_v1.py",
+    "canonical/runtime/mortality_and_triage_v1.py",
+    "canonical/runtime/continuation_preference_v1.py",
+    "canonical/runtime/creature_stakes_and_initiative_v1.py",
+    "canonical/runtime/self_authored_obligations_v1.py",
+    "canonical/runtime/self_prediction_calibration_v1.py",
+    "canonical/runtime/ignorance_ledger_v1.py",
+    "canonical/runtime/incumbent_dominance_search_v1.py",
+    "canonical/runtime/open_world_hypothesis_guard_v4.py",
+    "canonical/runtime/permanence_amplifies_check_v1.py",
+    "canonical/runtime/property_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "19bc4b057adaced5210a6b57864535f4cdd3f470",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "STATIC_PROBABILITY_LADDER_IN_CREATURE_PREDICT_TASK_PROBABILITY",
+      "UNCONFINED_HOST_EXEC_IN_RULE_SCOPE_LEARNING_AND_AUTONOMOUS_AWAKE_LOOP",
+      "ZERO_ASSERTION_VACUOUS_PASSES_AND_FULL_PER_CANDIDATE_WORKSPACE_COPY_IN_ZYGOTE",
+      "LOW_CEILING_TWO_CHANNEL_YOUTUBE_FALLACY_CONVERGENCE_IN_GLOBAL_CHASE_SPINE",
+      "UNPERSISTED_DERIVED_INSPECTOR_CALLABLES_ACROSS_CREATURE_BOOT"
+    ],
+    "expected_parent_level_state_change": "Two identical creatures diverge in cognitive regime (`SYSTEM_1_CRYSTALLIZED_REFLEX` vs `SYSTEM_2_EPISTEMIC_EXPLORATION`, `< 500 us` escalation) purely from lived experience; `CausalWorldGraph` discovers irreversible destroyers (`IRREVERSIBLE_DESTRUCTIVE`) and silent-stderr missing-file precondition chains from zero priors; `PersistentConfinedZygote` rejects 0-assertion tautologies (`exit 3`) and screens batches in `< 20 ms` via 6-slot O(|Delta W|) delta restore with `0` host `exec()`; Wake-Sleep consolidation calibrates `[G_-, B_+]` (`SCOPE_EXPRESSION`) to solve `5/5` unseen compound/sibling-operator variants in `0` search steps while withholding broadened patterns from weak verifiers (`0` misapplications); `GlobalVoIDominanceController` refuses low-ceiling channels (`max=450 < 1,000,000`) and reaches `measure() >= 1,000,000` without retrying irreversible writes; and `BehavioralDerivation` enforces `property_v1.mutate >= 0.5` and rehydrates live callables across `Creature.boot()`.",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETED_HOST_EXEC_STATIC_PROBABILITY_LADDERS_AND_LOW_CEILING_STOPPING_COMPOSED_SEVEN_CREATURE_ORGANS_INCUMBENT_DOMINANCE_OPEN_WORLD_GUARD_PROPERTY_V1_AND_PERMANENCE_AMPLIFIES_CHECK",
+      "intrinsic_or_path_specific": "GENERAL__ACTIVE_INFERENCE_BELIEF_CAUSAL_WORLD_LEARNING_GLOBAL_VOI_DOMINANCE_WAKE_SLEEP_VERSION_SPACES_AND_CONFINED_AST_ASSERTION_COUNTER",
+      "surviving_causal_blocker": "CAPABILITIES_REQUIRING_ABSENT_HOST_BINARIES_OR_EXTERNAL_NETWORK_CREDENTIALS_REMAIN_HONESTLY_REFUSED_ON_CONFINED_SANDBOXES"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_EXTERNAL_LLM_CALLS_ZERO_NEW_THIRD_PARTY_PACKAGES_REUSED_INCUMBENT_DOMINANCE_SEARCH_OPEN_WORLD_HYPOTHESIS_GUARD_PROPERTY_V1_PERMANENCE_AMPLIFIES_CHECK_AND_SEVEN_CREATURE_ORGANS",
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/continuous_self_v1.py",
+        "canonical/runtime/mortality_and_triage_v1.py",
+        "canonical/runtime/continuation_preference_v1.py",
+        "canonical/runtime/creature_stakes_and_initiative_v1.py",
+        "canonical/runtime/self_authored_obligations_v1.py",
+        "canonical/runtime/self_prediction_calibration_v1.py",
+        "canonical/runtime/incumbent_dominance_search_v1.py",
+        "canonical/runtime/open_world_hypothesis_guard_v4.py",
+        "canonical/runtime/permanence_amplifies_check_v1.py",
+        "canonical/runtime/property_v1.py"
+      ],
+      "external_existing_routes_checked": "Active Inference / Expected Free Energy (Friston), Pearl interventional causal precondition discovery, Mitchell `[G_-, B_+]` version spaces, Good-Turing missing-mass estimation, and Wake-Sleep abstraction consolidation.",
+      "surviving_gap": "UNGROUNDED_EXTERNAL_CREDENTIALS_AND_MISSING_HOST_APT_PACKAGES_ON_AIRGAPPED_RUNNERS"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "CHASING_N_OVER_112_REGISTRY_INSPECTOR_COUNTS_AS_SURROGATE_OBJECTIVE",
+        "STATIC_CALL_RETURN_PROBABILITY_LADDERS_DISGUISED_AS_AGENCY",
+        "CONVERGING_ON_LOW_CEILING_TWO_CHANNEL_AGREEMENT_WHILE_HIGH_CEILING_CHANNELS_EXIST"
+      ],
+      "real_outcome": "Non-static lived-history belief & causal world learning (`Controls A & B`), confined AST-assertion-counted `[G_-, B_+]` Wake-Sleep zero-search skill transfer (`Control C`), anti-YouTube `$1M` ceiling dominance (`Control D`), and cheat-defended idle curiosity + continuation preference (`Control E`) proven end-to-end with `0` host `exec()`.",
+      "surviving_necessity": "Preserve `OWNER_ACTIVE_GOAL_20261018_V1.md` (`RED_ROW_IS_NOT_AUTHORITY`), `computer_execution_boundary_v1`, `retained_repair_boundary_v1`, and `external_hard_slice_v1` anti-curation."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_CONTINUOUS_SELF_MORTALITY_CONTINUATION_PREFERENCE_CREATURE_STAKES_SELF_AUTHORED_OBLIGATIONS_SELF_PREDICTION_CALIBRATION_IGNORANCE_LEDGER_INCUMBENT_DOMINANCE_OPEN_WORLD_GUARD_PROPERTY_V1_AND_PERMANENCE_AMPLIFIES_CHECK",
+      "downstream_work_to_delete_or_supersede": "STATIC_PROBABILITY_CONSTANTS_IN_PROCESS_EXEC_PROBES_AND_VACUOUS_ZERO_ASSERTION_PASSES",
+      "fresh_reuse_plan": "BIND_ALL_SEVEN_CREATURE_ORGANS_INTO_SENTIENT_COGNITIVE_CORE_AND_ROUTE_CREATURE_AWAKE_DAEMON_AND_UNIFIED_MODEL_THROUGH_IT"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "SIX_SLOT_DELTA_RESTORE_IN_PERSISTENT_CONFINED_ZYGOTE_AND_SUB_500_US_SYSTEM_1_ENTROPY_GATE",
+      "search_stop_decision": "STOPPED_WHEN_6_OF_6_SENTIENT_CONTROLS_49_BOUNDARY_UNITTESTS_155_PYTESTS_AND_33_OF_33_UNIFIED_MODEL_VERIFIER_PASSED_WITH_ZERO_DIRTY_STATE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Static pipeline code cannot diverge from lived experience or discover unknown causal destroyers; host `exec()` violates confinement; 0-assertion test passes and unpersisted inspectors corrupt permanent memory; 2-channel agreement without ceiling checks commits the YouTube Fallacy.",
+      "routes_ranked": [
+        "SENTIENT_COGNITIVE_CORE_20261103_V1__CHOSEN",
+        "STATIC_CONTROLLER_PLUMBING_AND_PROBABILITY_LADDERS",
+        "CHASING_SYNTHETIC_N_OVER_112_INSPECTOR_COUNTS"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "FIVE_ADVERSARIAL_FALSIFICATION_CONTROLS_A_THROUGH_E_ZERO_EXEC_AST_SCAN_CONFINED_BOUNDARY_SUITES_AND_UNIFIED_MODEL_VERIFIER"
+    },
+    "real_outcome": "`6/6` adversarial Controls A-E (`4.91s`), `4/4` unified creature fast-general suite (`23.6s`), `33/33` `verify_brain_unified_model_v1`, `39/39` confined/retained-repair boundary guards, and `155/155` pytest suites green with `0` host `exec()` and `0` host state dirtying.",
+    "required_capability": "Non-static Active-Inference belief & EFE triage, interventional CausalWorldGraph, GlobalVoIDominanceController, Wake-Sleep `[G_-, B_+]` consolidation, and AST-assertion-counted O(|Delta W|) PersistentConfinedZygote",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "STATIC_PROBABILITY_LADDER_AND_LOW_CEILING_CONVERGENCE",
+            "CORRECTNESS": "HOST_EXEC_AND_ZERO_ASSERTION_VACUOUS_PASS_GAPS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "LOSES_LIVE_INSPECTOR_CALLABLES_ON_REBOOT",
+            "VERIFIABILITY": "VULNERABLE_TO_YOUTUBE_FALLACY_AND_VACUOUS_TESTS",
+            "WALL_CLOCK": "FULL_WORKSPACE_COPY_PER_CANDIDATE"
+          },
+          "evidence": [
+            "Empirical audit of `19bc4b05` exposed static probability constants in `Creature.predict_task_probability`, AST `exec()` in `rule_scope_learning_v1` and `autonomous_awake_loop_v1`, 0-assertion pass acceptance in Zygote, unpersisted inspector callables on reboot, and 2-channel low-ceiling convergence."
+          ],
+          "qualification_evidence": [
+            "direct probe: post-#6601 soundness audit and `test_sentient_cognitive_core_v1.py` adversarial controls"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_POST_6601_STATIC_PIPELINE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SURROGATE_ROW_COUNT_ONLY",
+            "CORRECTNESS": "VIOLATES_OWNER_ACTIVE_GOAL_20261018_V1_RED_ROW_IS_NOT_AUTHORITY",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "DOES_NOT_BUILD_CAUSAL_OR_EPISTEMIC_AGENCY",
+            "VERIFIABILITY": "PROXY_GAMING_RISK",
+            "WALL_CLOCK": "WASTED_ITERATION"
+          },
+          "evidence": [
+            "`OWNER_ACTIVE_GOAL_20261018_V1.md` explicitly forbids replacing the mission objective with surrogate `N/112` row counts."
+          ],
+          "qualification_evidence": [
+            "direct probe: `canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "CHASE_N_OVER_112_REGISTRY_INSPECTOR_COUNTS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NON_STATIC_ACTIVE_INFERENCE_CAUSAL_WORLD_GLOBAL_VOI_AND_WAKE_SLEEP_VERSION_SPACES",
+            "CORRECTNESS": "ZERO_HOST_EXEC_AST_ASSERTION_COUNTER_PROPERTY_KILL_GATE_AND_REBOOT_REHYDRATION",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_EXTERNAL_LLMS",
+            "RELIABILITY": "CONFINED_NAMESPACE_ISOLATED_AND_STATE_CLEAN",
+            "VERIFIABILITY": "6_OF_6_ADVERSARIAL_CONTROLS_39_BOUNDARY_GUARDS_155_PYTESTS_33_OF_33_MODEL_PASS",
+            "WALL_CLOCK": "SUB_500_US_SYSTEM_1_GATE_19_6_MS_6_SLOT_DELTA_ZYGOTE_SUB_15_MS_WARM_PULSE"
+          },
+          "evidence": [
+            "Measured: `6/6` adversarial Controls A-E (`4.91s`), `< 500 us` System-1 -> System-2 escalation, `5/5` zero-search `[G_-, B_+]` transfer, `1,250,000 >= 1,000,000` anti-YouTube dominance chase, `0` AST `exec()`, `33/33` `verify_brain_unified_model_v1`."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_sentient_cognitive_core_v1.py`, `test_unified_creature_plus_fast_general_organs_v1.py`, and `verify_brain_unified_model_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "SENTIENT_COGNITIVE_CORE_20261103_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-03T13:01:52Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "POST_6601_STATIC_PROBABILITY_PIPELINE_HOST_EXEC_PROBES_AND_LOW_CEILING_CONVERGENCE",
+      "max_age_hours": 24,
+      "negative_search_summary": "All foundational existential, causal-dominance, calibration, and mutation-kill organs (`continuous_self_v1`, `mortality_and_triage_v1`, `continuation_preference_v1`, `creature_stakes_and_initiative_v1`, `self_authored_obligations_v1`, `self_prediction_calibration_v1`, `incumbent_dominance_search_v1`, `open_world_hypothesis_guard_v4`, `property_v1`, `permanence_amplifies_check_v1`) already exist in-tree at `K3=0` and `$0` spend.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Active Inference Expected Free Energy Beta-Binomial empirical Bayes self-prediction calibration System-1 System-2 gate"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Pearl interventional causal precondition discovery contrastive pre-state differencing irreversible action polarity"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Mitchell version space G_minus B_plus confined Zygote diagnostic probes CST minimal guard insertion"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Good-Turing missing mass incumbent ceiling dominance pruning anti-local-optima search"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-03T13:01:52Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux unprivileged namespace binaries (`unshare`, `setpriv`, `mount`, `ip`) + `/usr/bin/python3` (`10/10` `SUBSTRATE_READY`)",
+            "evidence": [
+              "DIRECT_PROBE: `scripts/restore_substrate_v1.py --check` reports `SUBSTRATE_READY` (`10/10`) and `test_sentient_cognitive_core_v1.py` (`6/6`) passes"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "In-tree existential & epistemic organs (`continuous_self_v1`, `mortality_and_triage_v1`, `continuation_preference_v1`, `creature_stakes_and_initiative_v1`, `self_authored_obligations_v1`, `self_prediction_calibration_v1`, `incumbent_dominance_search_v1`, `open_world_hypothesis_guard_v4`, `property_v1`, `permanence_amplifies_check_v1`)",
+            "evidence": [
+              "DIRECT_PROBE: `49/49` unittests, `155/155` pytests, `33/33` `verify_brain_unified_model_v1`, and `CAPABILITY_TRANSFER_STATIC_GOVERNANCE_PASS` pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/{continuous_self_v1,mortality_and_triage_v1,continuation_preference_v1,creature_stakes_and_initiative_v1,self_authored_obligations_v1,self_prediction_calibration_v1,incumbent_dominance_search_v1,open_world_hypothesis_guard_v4,property_v1,permanence_amplifies_check_v1}.py",
+          "canonical/swe_kernel/{rule_scope_learning_v1,tree_sitter_cst_skill_skeleton_v1,verified_skill_crystallizer_v1,global_extrapolation_chase_spine_v1,autonomous_awake_loop_v1}.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Active Inference / Expected Free Energy (Friston 2015), Wake-Sleep consolidation (Hinton et al. / DreamCoder), and Good-Turing missing-mass smoothing"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Mitchell (1982) `[G_-, B_+]` version spaces, Pearl (2000) interventional `do(a)` causal graphs, and Python `ast` assertion instrumentation"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux `namespaces(7)` / `unshare(1)` confinement and Python 3.11 `ast` / `sqlite3` standard library specifications"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_POST_6601_STATIC_PIPELINE",
+      "CHASE_N_OVER_112_REGISTRY_INSPECTOR_COUNTS",
+      "SENTIENT_COGNITIVE_CORE_20261103_V1"
+    ],
+    "selected_route": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+    "selected_surviving_route": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+    "stop_condition": "STOP when all 6 tests in `test_sentient_cognitive_core_v1` (Controls A-E + zero-host-`exec()` invariants), `4/4` `test_unified_creature_plus_fast_general_organs_v1`, `39/39` confined & retained-repair boundary guards, `33/33` `verify_brain_unified_model_v1`, and all CI admission gates pass cleanly on `main`.",
+    "why_selected_route_is_fastest_sufficient": "Fuses all 7 existing existential `Creature` organs with existing causal/dominance/calibration/mutation-kill modules into one coherent `SentientCognitiveCore` across `<= 12` sensitive files (`<= 15`) with sub-millisecond System-1 gating and zero external model dependency."
+  },
+  "route_id": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "SENTIENT_COGNITIVE_CORE_20261103_V1",
+  "stop_condition": "STOP when all 6 tests in `test_sentient_cognitive_core_v1` (Controls A-E + zero-host-`exec()` invariants), `4/4` `test_unified_creature_plus_fast_general_organs_v1`, `39/39` confined & retained-repair boundary guards, `33/33` `verify_brain_unified_model_v1`, and all CI admission gates pass cleanly on `main`.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-03T13:01:52Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_NON_STATIC_COGNITIVE_CORE_CAUSAL_LEARNING_WAKE_SLEEP_CONSOLIDATION_AND_CONFINEMENT_SOUNDNESS_WITH_ZERO_EXTERNAL_BENCHMARK_RANK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "a4a8c44b8cb597062c8ce452c64972e389b09f1e",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        },
+        {
+          "git_blob_sha": "ea510c32511f48d7205f08fef437a9566e7a711f",
+          "path": "canonical/runtime/brokered_workspace_execution_v1.py"
+        },
+        {
+          "git_blob_sha": "be2094e3544f10c6911f457cca15024892826761",
+          "path": "canonical/runtime/creature_runtime_v1.py"
+        },
+        {
+          "git_blob_sha": "d27fe6b4735e0f39fe5cacb3e011423d6f6fa570",
+          "path": "canonical/runtime/derived_inspector_flywheel_v1.py"
+        },
+        {
+          "git_blob_sha": "d51f39f7b2e1e84ad4cc779d92768799d4b8d240",
+          "path": "canonical/runtime/swe_typed_plan_v1.py"
+        },
+        {
+          "git_blob_sha": "0f563fdee48c9dce7527fef7c7db9fb91e742bfd",
+          "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py"
+        },
+        {
+          "git_blob_sha": "91dce3b98dbbb790b83864773eeacdaeb35c0fb4",
+          "path": "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py"
+        },
+        {
+          "git_blob_sha": "c5df6c4cce6931cbaf37e4c7cf14e02169077d24",
+          "path": "canonical/swe_kernel/recursive_self_architect_v1.py"
+        },
+        {
+          "git_blob_sha": "bd7e77d37326954598c6b60ccf1afd6caa9add88",
+          "path": "canonical/swe_kernel/rule_scope_learning_v1.py"
+        },
+        {
+          "git_blob_sha": "0e1edf0854767e8469bb0bf366e61b1524646cff",
+          "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+        },
+        {
+          "git_blob_sha": "126d35d291f59fa20fb61046d86c1ae47eae14cb",
+          "path": "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py"
+        },
+        {
+          "git_blob_sha": "894c33bc26250e20f9dba78d94e264d5872c0c97",
+          "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+        }
+      ],
+      "decisive_question": "DOES_SENTIENT_COGNITIVE_CORE_PROVE_LIVED_HISTORY_DIVERGENCE_ZERO_PRIOR_CAUSAL_DISCOVERY_WAKE_SLEEP_VERSION_SPACE_TRANSFER_ANTI_YOUTUBE_DOMINANCE_AND_ZERO_HOST_EXEC_WITHOUT_GUARD_WEAKENING",
+      "falsifier_id": "RUN_TEST_SENTIENT_COGNITIVE_CORE_V1_BOUNDARY_GUARDS_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "ALL_5_POST_6601_SOUNDNESS_GAPS_CLOSED_ZERO_HOST_EXEC_AST_ASSERTION_COUNTER_ACTIVE_AND_ALL_CONFINEMENT_BOUNDARY_GUARDS_GREEN",
+      "proposal_id": "SENTIENT_COGNITIVE_CORE_20261103_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. All host `exec()` calls in `rule_scope_learning_v1` and `autonomous_awake_loop_v1` are replaced with confined Zygote verification; `PersistentConfinedZygote` adds AST runtime assertion counting (`ZERO_ASSERTIONS_EXECUTED` exit `3`); `BehavioralDerivation` enforces `property_v1.mutate >= 0.5` and rejects failing JSON payloads; `GlobalVoIDominanceController` blocks low-ceiling YouTube-fallacy convergence and post-mutation destructive retries; and `computer_execution_boundary_v1` (`14/14`) and `retained_repair_boundary_v1` (`25/25`) remain 100% intact."
+}

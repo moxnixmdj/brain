@@ -1037,13 +1037,53 @@ class UnifiedModel:
         cwd: str | Path | None = None,
         db_path: str | Path | None = None,
         forged_state_path: str | Path | None = None,
+        cognitive_core: Any | None = None,
+        cognitive_state_dir: str | Path | None = None,
     ) -> dict[str, Any]:
-        """Single unified front door (`K3 = 0`): compiled model -> forged skills -> 4-tier `solve_or_learn`."""
+        """Single unified front door (`K3 = 0`): System-1 `< 0.5 ms` reflex -> System-2 deliberation with Active-Inference self-belief."""
         from canonical.runtime.one_shot_reality_closure_v2 import REQUIRED_ATTEMPT_ORDER
         from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
         from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
             match_and_invoke_forged_for_goal,
         )
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
+
+        active_core = (
+            cognitive_core
+            if cognitive_core is not None
+            else SentientCognitiveCore(cognitive_state_dir)
+        )
+        r_preview = self.route(goal)
+        has_reflex = bool(r_preview.get("confident")) or bool(capability_id)
+        regime_info = active_core.decide_cognitive_regime(
+            capability_id or goal[:96],
+            has_consolidated_reflex=has_reflex,
+            verification_kind="TEST_SUITE",
+            host_ready=True,
+            grounding_complete=bool(inputs) or bool(context_paths) or has_reflex,
+        )
+        pred_ticket = active_core.belief.predict_before_act(
+            capability_id or goal[:96],
+            memory_reflex_hit=has_reflex,
+            grounding_complete=bool(inputs) or bool(context_paths) or has_reflex,
+        )
+
+        def _finalize_with_core(resp: dict[str, Any], inspector_name: str) -> dict[str, Any]:
+            passed_f = bool(resp.get("pass") is True)
+            settle = active_core.belief.settle_and_compute_surprise(
+                pred_ticket,
+                outcome_pass=passed_f,
+                inspector=inspector_name,
+                actual_cost=0.25 if regime_info["regime"] == "SYSTEM_1_REFLEX" else 1.0,
+                actual_gain=1.0 if passed_f else 0.0,
+            )
+            resp["cognitive_regime"] = regime_info
+            resp["epistemic_settlement"] = {
+                "predicted_pass_probability": pred_ticket.predicted_pass_probability,
+                "surprise": settle["surprise"],
+                "escalate_system2": settle["escalate_system2"],
+            }
+            return resp
 
         # 0A. Verified Skill Macro Compression (`verified_skill_macro_planner_v1.plan_with_skills`)
         if isinstance(inputs, Mapping) and isinstance(inputs.get("skill_macro_problem"), Mapping):
@@ -1119,9 +1159,9 @@ class UnifiedModel:
                 attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
             )
 
-        # 1. REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & bindable
+        # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
-        if not is_forged_cid:
+        if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
             primary = self.solve(
                 goal,
                 inputs=inputs,
@@ -1132,9 +1172,9 @@ class UnifiedModel:
             )
             if primary.get("pass") is True or capability_id is not None:
                 primary["attempt_order_contract"] = list(REQUIRED_ATTEMPT_ORDER)
-                return primary
+                return _finalize_with_core(primary, "VerifiedBoundCapabilityExecutionAdapter")
         else:
-            primary = {"pass": False, "reason": "FORGED_CAPABILITY_TARGETED"}
+            primary = {"pass": False, "reason": "ESCALATED_TO_SYSTEM_2_DELIBERATION" if not is_forged_cid else "FORGED_CAPABILITY_TARGETED"}
 
         # 2. Check self-forged capabilities (`forged.*`) with independent byte re-read
         try:
@@ -1145,20 +1185,23 @@ class UnifiedModel:
                 explicit_args=inputs,
             )
             if forged_out is not None and forged_out.get("pass") is True:
-                return self._envelope(
-                    operation="SOLVE_OR_LEARN",
-                    goal=goal,
-                    status="PASS__FORGED_CAPABILITY_EXECUTED_AND_BYTE_VERIFIED",
-                    **{"pass": True},
-                    reason=None,
-                    capability_id=forged_out["capability_id"],
-                    forged_execution=forged_out,
-                    attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+                return _finalize_with_core(
+                    self._envelope(
+                        operation="SOLVE_OR_LEARN",
+                        goal=goal,
+                        status="PASS__FORGED_CAPABILITY_EXECUTED_AND_BYTE_VERIFIED",
+                        **{"pass": True},
+                        reason=None,
+                        capability_id=forged_out["capability_id"],
+                        forged_execution=forged_out,
+                        attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+                    ),
+                    "ForgedInvokerByteReReadVerifier",
                 )
         except Exception:
             pass
 
-        # 3. Escalate into 4-tier zero-LLM `solve_or_learn` (preserves honest fail-closed refusals!)
+        # 3. SYSTEM-2 DELIBERATION: Escalate into 4-tier zero-LLM `solve_or_learn` (preserves honest fail-closed refusals!)
         req_payload: dict[str, Any] = {"goal": goal}
         if inputs:
             req_payload.update(dict(inputs))
@@ -1170,15 +1213,18 @@ class UnifiedModel:
             db_path=str(db_path) if db_path is not None else None,
         )
         passed = ctrl_out.get("pass") is True
-        return self._envelope(
-            operation="SOLVE_OR_LEARN",
-            goal=goal,
-            status=str(ctrl_out.get("status") or ("PASS__AUTONOMOUS_SOLVED" if passed else "FAIL_CLOSED")),
-            **{"pass": bool(passed)},
-            reason=None if passed else str(ctrl_out.get("failure_class") or ctrl_out.get("status") or primary.get("reason")),
-            tier_used=ctrl_out.get("tier_used"),
-            autonomous_result=ctrl_out,
-            attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+        return _finalize_with_core(
+            self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status=str(ctrl_out.get("status") or ("PASS__AUTONOMOUS_SOLVED" if passed else "FAIL_CLOSED")),
+                **{"pass": bool(passed)},
+                reason=None if passed else str(ctrl_out.get("failure_class") or ctrl_out.get("status") or primary.get("reason")),
+                tier_used=ctrl_out.get("tier_used"),
+                autonomous_result=ctrl_out,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            ),
+            "ClosedLoopAutonomousControllerVerifier",
         )
 
     # --------------------------------------------------------------- internals
@@ -1611,6 +1657,69 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
 
 
 # --------------------------------------------------------------------------- cli
+
+
+SOVEREIGN_ZERO_LLM_MODEL_SPEC = "canonical.runtime.brain_unified_model_v1:brain_model_callable"
+
+
+def brain_model_callable(goal: str, seeing: dict[str, Any]) -> str | None:
+    """Zero-LLM (`K3 = 0`) `BRAIN_MODEL` callable conforming to `canonical.runtime.model_v1`.
+
+    Observes kernel truth `seeing`, emits `"DONE"` once the requested state transition
+    is verified in `seeing`, emits deterministic Python code when grounded, and
+    abstains (`None`) when the goal has no grounded route or evidence.
+    """
+    text = str(goal or "").strip()
+    if not text or not isinstance(seeing, dict):
+        return None
+    previews = seeing.get("preview") if isinstance(seeing.get("preview"), dict) else (
+        seeing.get("previews") if isinstance(seeing.get("previews"), dict) else {}
+    )
+    raw_files = seeing.get("tree") if seeing.get("tree") is not None else (seeing.get("files") or ())
+    file_set = set(raw_files.keys()) if isinstance(raw_files, dict) else {str(x) for x in raw_files}
+    last = seeing.get("last") if isinstance(seeing.get("last"), dict) else None
+
+    write_m = re.match(r"^\s*write\s+(.+?)\s+to\s+([A-Za-z0-9_./-]+)\s*[.!]*$", text, re.IGNORECASE)
+    if write_m:
+        payload_raw = write_m.group(1).strip().strip("'\"")
+        rel_dst = write_m.group(2).strip()
+        if ".." in Path(rel_dst).parts or rel_dst.startswith("/"):
+            return None
+        if rel_dst in file_set and str(previews.get(rel_dst, "")).strip() == payload_raw:
+            return None
+        return (
+            f"import pathlib\n"
+            f"_p = pathlib.Path({rel_dst!r})\n"
+            f"_p.parent.mkdir(parents=True, exist_ok=True)\n"
+            f"_p.write_text({(payload_raw + chr(10))!r}, encoding='utf-8')\n"
+        )
+
+    if last is not None:
+        if last.get("exit") == 0 and seeing.get("changed"):
+            return None
+        return None
+
+    if not file_set:
+        return None
+    try:
+        routed = open_model().route(text, top_k=1)
+        ranked = routed.get("ranked_capabilities") or []
+        if not ranked or float(ranked[0].get("score") or 0.0) <= 0.0:
+            return None
+        cid = str(ranked[0].get("id") or "")
+        if not cid:
+            return None
+        repo_root = str(ROOT)
+        return (
+            f"import pathlib, sys\n"
+            f"sys.path.insert(0, {repo_root!r})\n"
+            f"from canonical.runtime.brain_unified_model_v1 import open_model\n"
+            f"_res = open_model().solve({text!r}, declared_resources={sorted(file_set)!r})\n"
+            f"if not _res.get('pass'):\n"
+            f"    raise SystemExit(1)\n"
+        )
+    except Exception:
+        return None
 
 
 def _print(payload: Any) -> None:

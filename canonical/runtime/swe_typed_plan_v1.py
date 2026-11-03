@@ -292,6 +292,12 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("benchmark_git_ref",), ("diagnose", "hotspot"), "diagnose_and_architect"
     if "regression test" in raw_low and "reproduces" in raw_low and "fix" not in raw_low and ".py" in raw_low:
         return ("write_regression_test",), ("swe_transform",), "swe.transform_and_synthesize"
+    if (
+        "regression test" in raw_low
+        and any(w in raw_low for w in ("fix ", "repair "))
+        and not _ASKED_RE.search(intent_goal)
+    ):
+        return ("regression test",), ("choreography.verified",), "choreograph"
     if "find the race condition" in raw_low:
         _root_p = pathlib.Path(__file__).resolve().parents[2]
         _rfiles = [p for p in re.findall(r"[A-Za-z0-9_./-]+\.py\b", str(goal or "")) if (_root_p / p).is_file()]
@@ -852,6 +858,12 @@ def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict
         return cid, inputs
     entry = registry.get(_APPLYING_REPAIR_CAPABILITY)
     if not entry:
+        return cid, inputs
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    if boundary.refuses_execution(_APPLYING_REPAIR_CAPABILITY, entry) and front.capability_edits_source(
+        registry.get(cid) or {}
+    ):
         return cid, inputs
     try:
         decision = selection.admit(goal, _APPLYING_REPAIR_CAPABILITY, entry, root,

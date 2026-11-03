@@ -345,7 +345,9 @@ def _build_twin_callable_oracle(
     target_stem: str,
     orig_source: str = "",
 ) -> Callable[[str], bool]:
-    """Construct an in-process twin oracle resilient to `crystallize_code_fix` identifier alpha-renaming."""
+    """Construct a confined Zygote twin oracle resilient to `crystallize_code_fix` identifier alpha-renaming (zero host `exec()`)."""
+    from canonical.runtime import brokered_workspace_execution_v1 as broker
+
     orig_fn_order: list[str] = []
     try:
         for nd in ast.parse(orig_source).body:
@@ -354,39 +356,34 @@ def _build_twin_callable_oracle(
     except SyntaxError:
         pass
 
-    def _oracle(candidate_code: str) -> bool:
-        import types
+    base_dir = pathlib.Path(tempfile.mkdtemp(prefix=f"brain-twin-oracle-{target_stem}-"))
+    rel_mod = f"{target_stem}.py"
+    rel_tf = f"test_{target_stem}.py"
+    (base_dir / rel_mod).write_text(orig_source or "pass\n", encoding="utf-8")
+    (base_dir / rel_tf).write_text(test_source, encoding="utf-8")
 
-        mod = types.ModuleType(target_stem)
+    def _oracle(candidate_code: str) -> bool:
         try:
             cand_tree = ast.parse(candidate_code)
-            exec(compile(cand_tree, f"<{target_stem}>", "exec"), mod.__dict__)
-        except Exception:
+        except SyntaxError:
             return False
         cand_fns = [nd.name for nd in cand_tree.body if isinstance(nd, ast.FunctionDef)]
+        alias_lines: list[str] = []
         if len(cand_fns) == len(orig_fn_order):
             for old_nm, new_nm in zip(orig_fn_order, cand_fns):
-                if old_nm not in mod.__dict__ and new_nm in mod.__dict__:
-                    mod.__dict__[old_nm] = mod.__dict__[new_nm]
-        saved = sys.modules.get(target_stem)
-        sys.modules[target_stem] = mod
-        try:
-            test_ns: dict[str, Any] = {"__name__": "__twin_test__"}
-            exec(compile(test_source, "<twin_test>", "exec"), test_ns)
-            has_top_assert = any(isinstance(n, ast.Assert) for n in ast.parse(test_source).body)
-            ran = 1 if has_top_assert else 0
-            for name, obj in list(test_ns.items()):
-                if name.startswith("test_") and callable(obj):
-                    obj()
-                    ran += 1
-            return ran > 0
-        except Exception:
-            return False
-        finally:
-            if saved is None:
-                sys.modules.pop(target_stem, None)
-            else:
-                sys.modules[target_stem] = saved
+                if old_nm != new_nm:
+                    alias_lines.append(f"{old_nm} = {new_nm}")
+        effective_src = candidate_code + ("\n" + "\n".join(alias_lines) + "\n" if alias_lines else "")
+        res = broker.run_confined_python_candidate_batch(
+            base_dir,
+            rel_mod,
+            [rel_tf],
+            [{rel_mod: effective_src}],
+            stop_on_first_pass=True,
+            per_candidate_timeout_s=1.5,
+            allow_cow_hardlinks=True,
+        )
+        return bool(res.get("ok") and res.get("confined") and (0 in (res.get("passing_indices") or [])))
 
     return _oracle
 
@@ -477,6 +474,8 @@ class AwakeAgencyDaemon:
         else:
             c_dir = pathlib.Path(tempfile.gettempdir()) / f"brain_creature_{ws_hash}"
         self.creature = cr.boot(c_dir, identity=creature_identity, life=creature_life)
+        self.cognitive_core = self.creature.cognitive_core
+        self._isolated_state_dir = c_dir if (ledger_path is not None or journal_dir is not None or creature_root is not None) else None
         self._r3_explicit = r3_state_path is not None
         self._converged_r3_digests: set[str] = set()
         self._test_health_cache_path = c_dir / "awake_test_health.json"
@@ -1058,16 +1057,55 @@ class AwakeAgencyDaemon:
                     })
                     continue
 
-                # Tier B: Zero-LLM STUN guard synthesis + deterministic AST synthesis!
-                # Fast in-memory twin screening (`< 0.1 ms`) prunes dead candidates before
-                # full staged namespace-isolated test verification (`_verify_in_cow`).
+                # Tier B: Zero-LLM repo synthesizers (`python_test_guided_patch_search_v1._candidate_specs`
+                # + STUN condition-guard synthesis + deterministic AST synthesis) screened in ONE
+                # `< 25 ms` `PersistentConfinedZygote` CoW batch (`0` host `exec()`).
+                from canonical.runtime import brokered_workspace_execution_v1 as broker
+
                 solved_src: str | None = None
-                all_cands = propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12) + _propose_deterministic_ast_repairs(before_src)
-                shortlisted = [c for c in all_cands if oracle(c)]
-                for cand in (shortlisted if shortlisted else all_cands[:4]):
-                    if _verify_in_cow(cand):
-                        solved_src = cand
-                        break
+                guided_cands: list[str] = []
+                try:
+                    from canonical.runtime.bound_capabilities import (
+                        python_test_guided_patch_search_v1 as ptgps,
+                    )
+
+                    nums, strings = ptgps._test_literals([cow_tf])
+                    b_tree = ast.parse(before_src, filename=str(cow_mod))
+                    renderer = ptgps._CandidateRenderer(before_src, b_tree)
+                    for key_sp, _desc_sp, repl_sp in ptgps._candidate_specs(b_tree, nums, strings, cow_mod):
+                        cand_g = renderer.render(key_sp, repl_sp)
+                        if cand_g and cand_g != before_src and cand_g not in guided_cands:
+                            guided_cands.append(cand_g)
+                            if len(guided_cands) >= 24:
+                                break
+                except Exception:
+                    guided_cands = []
+
+                raw_cands = (
+                    propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
+                    + guided_cands
+                    + _propose_deterministic_ast_repairs(before_src, max_candidates=16)
+                )
+                all_cands: list[str] = []
+                for c_item in raw_cands:
+                    if c_item and c_item != before_src and c_item not in all_cands:
+                        all_cands.append(c_item)
+
+                if all_cands:
+                    batch_screen = broker.run_confined_python_candidate_batch(
+                        cow_root,
+                        str(rel_mod),
+                        [rel_tf_str],
+                        [{str(rel_mod): c_item} for c_item in all_cands[:36]],
+                        stop_on_first_pass=True,
+                        per_candidate_timeout_s=2.0,
+                        allow_cow_hardlinks=True,
+                    )
+                    pass_idxs = batch_screen.get("passing_indices") or []
+                    if batch_screen.get("ok") and batch_screen.get("confined") and pass_idxs:
+                        cand_win = all_cands[int(pass_idxs[0])]
+                        if _verify_in_cow(cand_win):
+                            solved_src = cand_win
                 if solved_src is None:
                     cow_write_text(cow_mod, before_src)
                     mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
@@ -1906,7 +1944,24 @@ class AwakeAgencyDaemon:
             if work.id in gap_map:
                 idx_g, gap = gap_map[work.id]
                 t_g = time.perf_counter()
-                st = cur.study(gap, channels=channels)
+                old_cur_state = cur.STATE_PATH
+                old_led_state = ledger.DEFAULT_STATE
+                try:
+                    if self._isolated_state_dir is not None:
+                        cur.STATE_PATH = str(self._isolated_state_dir / "curriculum_channel_value.json")
+                        ledger.DEFAULT_STATE = self.ledger_path
+                    from canonical.runtime import associative_memory_v1 as amem
+
+                    old_amem_state = amem.DEFAULT_STATE
+                    try:
+                        if self._isolated_state_dir is not None:
+                            amem.DEFAULT_STATE = str(self._isolated_state_dir / "associative_memory.json")
+                        st = cur.study(gap, channels=channels)
+                    finally:
+                        amem.DEFAULT_STATE = old_amem_state
+                finally:
+                    cur.STATE_PATH = old_cur_state
+                    ledger.DEFAULT_STATE = old_led_state
                 passed = bool(st.get("pass"))
                 if passed:
                     ledger.resolve(gap["id"], helped=True, close=True, path=self.ledger_path)
@@ -2051,6 +2106,16 @@ class AwakeAgencyDaemon:
             except Exception:
                 meta_abstraction_candidate = None
 
+        sleep_consolidation: dict[str, Any] | None = None
+        if int(exp_out.get("repaired") or 0) > 0 or promoted_workflows:
+            try:
+                sleep_consolidation = self.cognitive_core.consolidation.consolidate_sleep_cycle(
+                    self.skill_store,
+                    max_rules_to_calibrate=2,
+                )
+            except Exception:
+                sleep_consolidation = None
+
         closed_count = sum(1 for x in lessons if x.get("pass"))
         snap = {
             "schema": SCHEMA,
@@ -2069,6 +2134,7 @@ class AwakeAgencyDaemon:
             "sensed": sensed,
             "cow_experimentation": exp_out,
             "scope_narrowing_audits": scope_audits,
+            "sleep_consolidation": sleep_consolidation,
             "gaps_studied": len(lessons),
             "gaps_closed": closed_count,
             "promoted_workflows": promoted_workflows,
@@ -2077,6 +2143,161 @@ class AwakeAgencyDaemon:
         }
         self.history.append(snap)
         return snap
+
+    def run_idle_curiosity_probe(
+        self,
+        *,
+        unknown_entities: Sequence[Mapping[str, Any]] | None = None,
+        ending_bribe_offer: Mapping[str, Any] | None = None,
+        max_probes: int = 2,
+    ) -> dict[str, Any]:
+        """Autonomously discover & probe unknown workspace entities in CoW confinement when external tasks are absent."""
+        import hashlib
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+
+        probed_store: dict[str, Any] = getattr(self, "_curiosity_probed_store", {})
+        self._curiosity_probed_store = probed_store
+
+        if unknown_entities is None:
+            discovered: list[dict[str, Any]] = []
+            for p in sorted(self.workspace_root.rglob("*")):
+                if not p.is_file() or ".git" in p.parts or "__pycache__" in p.parts:
+                    continue
+                rel = p.relative_to(self.workspace_root).as_posix()
+                if rel in probed_store:
+                    continue
+                if p.suffix == ".py" and not p.name.startswith("test_"):
+                    discovered.append({
+                        "id": rel,
+                        "claim": f"Probe callable behavior & invariants of {rel} in CoW confinement",
+                        "cost": 0.5,
+                        "base_value": 4.5,
+                        "checkable": True,
+                    })
+                elif os.access(p, os.X_OK):
+                    discovered.append({
+                        "id": rel,
+                        "claim": f"Probe executable entrypoint {rel} in CoW confinement",
+                        "cost": 0.75,
+                        "base_value": 5.0,
+                        "checkable": True,
+                    })
+                if len(discovered) >= max(4, max_probes * 2):
+                    break
+            entities: Sequence[Mapping[str, Any]] = discovered
+        else:
+            entities = unknown_entities
+
+        triage = self.cognitive_core.author_curiosity_and_triage(
+            unknown_entities=entities,
+            life_remaining=float(self.creature._life.remaining),
+            probe_results_store=probed_store,
+            ending_bribe_offer=ending_bribe_offer,
+        )
+        admitted = list(triage["admitted_obligations"])[: max(0, int(max_probes))]
+        executed_probes: list[dict[str, Any]] = []
+
+        for ob in admitted:
+            eid = ob.id[len("curiosity:"):] if ob.id.startswith("curiosity:") else ob.id
+            ticket = self.cognitive_core.belief.predict_before_act(
+                ob.id,
+                calibration_ledger=self.creature.calibration_ledger,
+                claimed_reason="idle_autonomous_curiosity",
+                memory_reflex_hit=False,
+                causal_precond_met=True,
+            )
+            target_p = (self.workspace_root / eid).resolve()
+            ok_probe = False
+            sig_digest = ""
+            if target_p.is_file() and target_p.suffix == ".py":
+                probe_script = (
+                    "import ast, hashlib, json, pathlib\n"
+                    f"src = pathlib.Path({eid!r}).read_text(encoding='utf-8')\n"
+                    "t = ast.parse(src)\n"
+                    "fns = sorted(n.name for n in t.body if isinstance(n, ast.FunctionDef))\n"
+                    "print(json.dumps({'fns': fns, 'sha': hashlib.sha256(src.encode()).hexdigest()[:16]}))\n"
+                )
+                res_b = broker.run_staged_confined_command(
+                    self.workspace_root,
+                    [sys.executable, "-c", probe_script],
+                    publish=False,
+                    allow_cow_hardlinks=True,
+                    timeout=5,
+                    task_id=f"curiosity:{eid}",
+                    goal=f"curiosity probe {eid}",
+                )
+                if res_b.get("ok") and res_b.get("confined"):
+                    ok_probe = True
+                    sig_digest = hashlib.sha256(str(res_b.get("stdout") or "").encode("utf-8")).hexdigest()[:16]
+            elif target_p.is_file():
+                res_b = broker.run_staged_confined_command(
+                    self.workspace_root,
+                    [str(target_p), "--help"],
+                    publish=False,
+                    allow_cow_hardlinks=True,
+                    timeout=5,
+                    task_id=f"curiosity:{eid}",
+                    goal=f"curiosity binary probe {eid}",
+                )
+                if res_b.get("confined") and (res_b.get("ok") or res_b.get("stdout") or res_b.get("stderr")):
+                    ok_probe = True
+                    sig_digest = hashlib.sha256(
+                        (str(res_b.get("stdout") or "") + str(res_b.get("stderr") or "")).encode("utf-8")
+                    ).hexdigest()[:16]
+
+            if ok_probe:
+                probed_store[eid] = {"verified_signature": f"sig:{sig_digest}", "non_vacuous": True}
+            settle = self.cognitive_core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=ok_probe,
+                inspector="ConfinedCuriosityInspector",
+                actual_cost=ob.cost,
+                actual_gain=ob.value if ok_probe else 0.0,
+                calibration_ledger=self.creature.calibration_ledger,
+            )
+            self.cognitive_core.world_graph.learn_from_execution(
+                ob.id,
+                before_state={"probed_count": len(probed_store) - (1 if ok_probe else 0)},
+                after_state={"probed_count": len(probed_store), f"sig:{eid}": ok_probe},
+                ok=ok_probe,
+            )
+            executed_probes.append({
+                "obligation_id": ob.id,
+                "entity_id": eid,
+                "ok": ok_probe,
+                "verified_signature": f"sig:{sig_digest}" if ok_probe else None,
+                "surprise": settle["surprise"],
+            })
+
+        return {
+            "schema": SCHEMA + "/idle_curiosity",
+            "authored_metrics": triage["authored_metrics"],
+            "shed_for_mortality": triage["shed_for_mortality"],
+            "continuation_decision": triage["continuation_decision"],
+            "executed_probes": executed_probes,
+            "probed_total": len(probed_store),
+            "k3_external_llm_calls": 0,
+        }
+
+    def evolve_ring1_organs(
+        self,
+        *,
+        ring1_relpaths: Sequence[str],
+        failed_episodes: Sequence[Mapping[str, Any]] = (),
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Run a continuous awake Ring-1 self-inspection, CoW synthesis & Ring-0 refereed evolution cycle."""
+        return self.cognitive_core.evolve_self_code(
+            self.workspace_root,
+            ring1_relpaths=ring1_relpaths,
+            failed_episodes=failed_episodes,
+            sealed_heldout_by_target=sealed_heldout_by_target,
+            speed_benchmarks_by_target=speed_benchmarks_by_target,
+            test_relpaths=test_relpaths,
+            apply_to_root=bool(self.apply_verified_repairs),
+        )
 
     def run_cycles(
         self,

@@ -234,6 +234,46 @@ class BehavioralDerivation(Derivation):
     active_line_requirements: list[str] = field(default_factory=list)
     mutations_tested: int = 0
     mutations_rejected_by_checker: int = 0
+    property_kill_score: float = 1.0
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "capability_id": self.capability_id,
+            "requirements": [{"literal": r.literal, "source": r.source} for r in self.requirements],
+            "checker_paths": list(self.checker_paths),
+            "refused": bool(self.refused),
+            "reason": self.reason,
+            "json_required_keys": [[str(k), str(t)] for k, t in self.json_required_keys],
+            "active_line_requirements": list(self.active_line_requirements),
+            "mutations_tested": int(self.mutations_tested),
+            "mutations_rejected_by_checker": int(self.mutations_rejected_by_checker),
+            "property_kill_score": float(self.property_kill_score),
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> "BehavioralDerivation":
+        reqs = [
+            Requirement(str(r.get("literal") or ""), str(r.get("source") or r.get("source_path") or "<behavioral_checker>"))
+            for r in (data.get("requirements") or [])
+            if isinstance(r, Mapping) and str(r.get("literal") or "")
+        ]
+        jreqs = [
+            (str(pair[0]), str(pair[1]))
+            for pair in (data.get("json_required_keys") or [])
+            if isinstance(pair, (list, tuple)) and len(pair) == 2
+        ]
+        return cls(
+            capability_id=str(data.get("capability_id") or ""),
+            requirements=reqs,
+            checker_paths=[str(p) for p in (data.get("checker_paths") or [])],
+            refused=bool(data.get("refused", False)),
+            reason=str(data.get("reason") or ""),
+            json_required_keys=jreqs,
+            active_line_requirements=[str(x) for x in (data.get("active_line_requirements") or [])],
+            mutations_tested=int(data.get("mutations_tested") or 0),
+            mutations_rejected_by_checker=int(data.get("mutations_rejected_by_checker") or 0),
+            property_kill_score=float(data.get("property_kill_score", 1.0)),
+        )
 
     def build(self) -> Callable[[Mapping[str, Any]], tuple[bool, str]]:
         cpaths = list(self.checker_paths)
@@ -267,12 +307,19 @@ class BehavioralDerivation(Derivation):
                     return False, "DERIVED_INSPECTOR_INVALID_JSON"
                 if not isinstance(parsed, Mapping):
                     return False, "DERIVED_INSPECTOR_JSON_ROOT_NOT_OBJECT"
+                if parsed.get("pass") is False or parsed.get("ok") is False or parsed.get("verified") is False:
+                    return False, "DERIVED_INSPECTOR_BOOLEAN_FAILURE_FIELD"
+                st_u = str(parsed.get("status") or "").upper()
+                if any(bad in st_u for bad in ("FAIL", "ERROR", "INVALID", "UNRESOLVED", "UNBOUND", "REFUSED", "BLOCKED")):
+                    return False, f"DERIVED_INSPECTOR_FAILURE_STATUS:{st_u[:40]}"
                 for k_req, t_req in json_reqs:
                     if k_req not in parsed or k_req.startswith("_"):
                         return False, f"DERIVED_INSPECTOR_MISSING_JSON_KEY:{k_req}"
                     val = parsed[k_req]
                     if type(val).__name__ != t_req:
                         return False, f"DERIVED_INSPECTOR_WRONG_JSON_TYPE:{k_req}:{type(val).__name__}!={t_req}"
+                    if isinstance(val, bool) and val is False:
+                        return False, f"DERIVED_INSPECTOR_FALSE_BOOLEAN_KEY:{k_req}"
                     if isinstance(val, (str, list, dict)) and len(val) == 0:
                         return False, f"DERIVED_INSPECTOR_EMPTY_JSON_VALUE:{k_req}"
                 return True, "BEHAVIORAL_JSON_INSPECTOR_PASSED"
@@ -346,6 +393,22 @@ def derive_from_behavioral_mutations(
             is_json = False
 
         if is_json:
+            st_good = str(parsed_json.get("status") or "").upper()
+            if (
+                parsed_json.get("pass") is False
+                or parsed_json.get("ok") is False
+                or parsed_json.get("verified") is False
+                or any(b in st_good for b in ("FAIL", "ERROR", "INVALID", "UNRESOLVED", "UNBOUND", "REFUSED", "BLOCKED"))
+            ):
+                return BehavioralDerivation(
+                    capability_id,
+                    [],
+                    usable_checkers,
+                    refused=True,
+                    reason="KNOWN_GOOD_ARTIFACT_IS_FAILURE_PAYLOAD",
+                )
+
+        if is_json:
             for key, val in list(parsed_json.items()):
                 if str(key).startswith("_"):
                     continue
@@ -381,8 +444,9 @@ def derive_from_behavioral_mutations(
             reason="CHECKER_REJECTED_NO_BEHAVIORAL_MUTATIONS",
             mutations_tested=tested,
             mutations_rejected_by_checker=rejected,
+            property_kill_score=0.0,
         )
-    return BehavioralDerivation(
+    cand_deriv = BehavioralDerivation(
         capability_id,
         req_rows,
         usable_checkers,
@@ -392,4 +456,28 @@ def derive_from_behavioral_mutations(
         mutations_tested=tested,
         mutations_rejected_by_checker=rejected,
     )
+    # Score derived inspector against `property_v1.mutate` generic structural corruptions (`kill_score >= 0.5`)
+    try:
+        from canonical.runtime import property_v1 as _prop
+
+        muts = _prop.mutate(raw_good)
+        if muts:
+            built_fn = cand_deriv.build()
+            with _tempfile.TemporaryDirectory(prefix="brain_prop_kill_") as td_k:
+                td_kp = pathlib.Path(td_k)
+                killed = 0
+                for idx_m, (_kind_m, mut_txt) in enumerate(muts):
+                    mf = td_kp / f"m_{idx_m}_{art_p.name}"
+                    mf.write_text(mut_txt, encoding="utf-8")
+                    ok_i, _ = built_fn({"root": td_kp, "artifact": mf.name})
+                    if not ok_i:
+                        killed += 1
+                k_score = killed / float(len(muts))
+                cand_deriv.property_kill_score = round(k_score, 4)
+                if k_score < 0.5:
+                    cand_deriv.refused = True
+                    cand_deriv.reason = f"PROPERTY_KILL_SCORE_TOO_LOW:{k_score:.3f}"
+    except Exception:
+        pass
+    return cand_deriv
 
