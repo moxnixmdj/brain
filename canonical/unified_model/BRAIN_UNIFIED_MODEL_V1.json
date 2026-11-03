@@ -22346,7 +22346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_edit.py",
-    "source_sha256": "ef3b7d669ecb17dff66f5f7d82b5663fae81aa5fca4fc35df14ddc772611fdf2",
+    "source_sha256": "cf2c08573da656b81b631d1178150c3c5365fd500ee835859e455727c3b72b76",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22757,7 +22757,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_edit.py",
-    "source_sha256": "ef3b7d669ecb17dff66f5f7d82b5663fae81aa5fca4fc35df14ddc772611fdf2",
+    "source_sha256": "cf2c08573da656b81b631d1178150c3c5365fd500ee835859e455727c3b72b76",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -32069,7 +32069,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a1b45d9b1bcc732891b66444fd88ac8d5cbf82459b576f2a5ad5196b94db41b2"
+  "value": "547bdea0dd521299a0bec4361e74eae28deaaf60c51b274a064505090496b703"
  },
  "engines": [
   {
@@ -32774,7 +32774,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "ef3b7d669ecb17dff66f5f7d82b5663fae81aa5fca4fc35df14ddc772611fdf2"
+    "sha256": "cf2c08573da656b81b631d1178150c3c5365fd500ee835859e455727c3b72b76"
    },
    "canonical/runtime/bound_capabilities/file_line_count.py": {
     "defaulted_keys": {},
@@ -65774,7 +65774,7 @@
   "included_source_count": 1080,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3c38fda7b1d4afc470829adfcad9ae8a01660be5981c3cc0e205c194c4bfb5eb"
+  "source_tree_digest": "af200d68cea78d3c960d424a3b6fb5ed3e83519d4e83b6aefdf9226b33aca28a"
  },
  "research_index": [
   {

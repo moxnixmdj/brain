@@ -180,6 +180,12 @@ def run(args, root):
         raise RuntimeError("COMMAND_NOT_IMPLEMENTED:" + (command or "<none>"))
     path, text, stated = _source(args, root)
     before = path.read_bytes()
+    # The transformation must apply to the same bytes recorded as its input.
+    # Refuse a competing write between _source's read and this read instead of
+    # replacing the newer file with a transformation of the older contents. This
+    # does not eliminate races after this check or prove atomic compare-and-swap.
+    if before != text.encode("utf-8"):
+        raise RuntimeError("SOURCE_CHANGED_BETWEEN_READS:" + path.name)
     expected_text = _HANDLERS[command](text, args, stated)
     expected = expected_text.encode("utf-8")
     payload = {"schema": "PROJECT_BRAIN_FILE_EDIT_V1", "adapter": "file_edit",

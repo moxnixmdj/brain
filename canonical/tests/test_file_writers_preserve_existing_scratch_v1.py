@@ -349,6 +349,36 @@ def test_copy_or_rename_cannot_overwrite_a_hard_link_to_the_source() -> None:
             assert os.path.samefile(src, dest), kind
 
 
+def _edit_source_change_worker() -> None:
+    SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world:
+        source, _dest, scratch, args, adapter = _setup(pathlib.Path(world), "edit")
+        reads = []
+
+        def change_between_reads(event, event_args):
+            if event == "open" and event_args[0] == str(source) and event_args[1] == "r":
+                reads.append(event)
+                if len(reads) == 2:
+                    source.write_bytes(PRECIOUS)
+
+        sys.addaudithook(change_between_reads)
+        try:
+            adapter.run(args, ROOT)
+        except RuntimeError as exc:
+            assert "SOURCE_CHANGED_BETWEEN_READS" in str(exc), exc
+        else:
+            raise AssertionError("edit overwrote a competing source change")
+        assert len(reads) >= 2, reads
+        assert source.read_bytes() == PRECIOUS
+        assert not scratch.exists()
+
+
+def test_edit_refuses_a_source_changed_between_its_reads() -> None:
+    result = subprocess.run([sys.executable, "-B", __file__, "--race-edit-read"],
+                            capture_output=True, text=True, check=False)
+    assert result.returncode == 0, (result.stdout, result.stderr)
+
+
 def main() -> int:
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
     failures = 0
@@ -367,6 +397,8 @@ def main() -> int:
 if __name__ == "__main__":
     if len(sys.argv) == 3 and sys.argv[1] in ("--race", "--race-negated"):
         _race_worker(sys.argv[2], negated_overwrite=(sys.argv[1] == "--race-negated"))
+    elif len(sys.argv) == 2 and sys.argv[1] == "--race-edit-read":
+        _edit_source_change_worker()
     elif len(sys.argv) == 2 and sys.argv[1] == "--race-overwrite-symlink":
         _overwrite_symlink_race_worker()
     elif len(sys.argv) == 2 and sys.argv[1] == "--race-overwrite-hardlink":
