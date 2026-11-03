@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6646,
+  "research_index_records": 6647,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
-  "source_index_modules": 1922
+  "source_index_modules": 1924
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dc15352d3f7567b23bd91967c5a8817f3b64dbbb43a896a106107e14ee49e190"
+  "value": "0551326cdcecca2ea0611e9bd257b0fb7dab554ff32ff3658361e5d164aa19b9"
  },
  "engines": [
   {
@@ -64259,7 +64259,7 @@
   "included_source_count": 1047,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "137437af288eefb173636eca062eb40c6a350b570372ace080bbea77a3b4a75d"
+  "source_tree_digest": "3e71c1db1475c2cf9fafa12c13b734446a46e59b11ce9c7d8f18e799b12a3080"
  },
  "research_index": [
   {
@@ -204103,6 +204103,37 @@
    }
   },
   {
+   "action_id": "STATED_ROOT_BOUND_DECLARED_DEFAULT_AND_SNAPSHOT_CANNOT_DELETE_EVIDENCE_20261103_V1",
+   "capability": false,
+   "date": "2026-11-03",
+   "id": "research:canonical/action_intents/2026-11-03_STATED_ROOT_BOUND_DECLARED_DEFAULT_AND_SNAPSHOT_CANNOT_DELETE_EVIDENCE_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/2026-11-03_STATED_ROOT_BOUND_DECLARED_DEFAULT_AND_SNAPSHOT_CANNOT_DELETE_EVIDENCE_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d8978cb75c414a369f5b37c5da302aef2f4d573fa4949308e7d4c2e418896ba2",
+   "status": "",
+   "terms": {
+    "03": 1,
+    "11": 1,
+    "2026": 1,
+    "bound": 1,
+    "cannot": 1,
+    "declared": 1,
+    "default": 1,
+    "delete": 1,
+    "delete_the_frozen_constant_and_give_the_template_a_declared_default_the_goal_outranks": 1,
+    "evidence": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "root": 1,
+    "snapshot": 1,
+    "stated": 1,
+    "stated_root_bound_declared_default_and_snapshot_cannot_delete_evidence_20261103_v1": 1,
+    "the_repository_no_longer_forces_a_row_to_choose_between_overriding_the_operators_sentence_and_refusing_a_silent_one__the_default_is_data_the_row_states_and_is_reported_when_used__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "the_template_language_had_only_two_modes_and_both_were_wrong__a_bare_literal_never_enters_the_binders_precedence_chain_goal_gt_demonstrated_receipt_gt_world_heuristic_because_it_is_not_a_placeholder_so_it_is_never_bound_nothing_can_override_it_and_render_args_emits_it_unchanged_making_the_effective_precedence_frozen_literal_gt_goal__and_a_bare_placeholder_binds_the_goal_but_makes_the_row_unbindable_when_the_goal_is_silent_because_complete_inputs_reports_the_slot_in_missing_and_every_caller_refuses_on_a_non_empty_missing__measured_the_sentence_find_the_function_in_the_python_source_root_x_that_is_never_executed_returned_pass__raw_goal_executed_and_exact_semantic_acceptance_verified_while_enumerating_400_files_under_canonical_runtime_and_never_reading_x": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -241387,6 +241418,42 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/declared_argument_default_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/declared_argument_default_v1.py",
+   "sha256": "1977c84de552b908debe924ba31aebe0ffff37bcd13977aca058fc2f4328553a",
+   "summary": "A template argument may declare a default that the goal still outranks.",
+   "symbol_count": 5,
+   "symbols": [
+    "all_names",
+    "conflicting_defaults",
+    "declared_defaults",
+    "required_names",
+    "substitute"
+   ],
+   "terms": {
+    "all_names": 1,
+    "argument": 2,
+    "conflicting_defaults": 1,
+    "declare": 1,
+    "declared": 1,
+    "declared_defaults": 1,
+    "default": 2,
+    "goal": 1,
+    "may": 1,
+    "outranks": 1,
+    "required_names": 1,
+    "still": 1,
+    "substitute": 1,
+    "template": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/declared_artifact_semantic_policy_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -276639,7 +276706,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "f7201cd5c667bdf4e4cab731377c8c1c773d64c915ebae94c99f057d427efa4b",
+   "sha256": "335eb20af58888db8ccccf3d79c203314be2b3022ea37bae413f5c298fb42a10",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
    "symbol_count": 77,
    "symbols": [
@@ -285161,6 +285228,45 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/stated_root_is_the_bound_root_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/stated_root_is_the_bound_root_v1.py",
+   "sha256": "173203517bc1150da9dc805f4b7d20c4fabf74266d252484149cc1911be2f1ad",
+   "summary": "The directory the sentence names is the directory the action reads.",
+   "symbol_count": 7,
+   "symbols": [
+    "_effective",
+    "_norm",
+    "_row_args",
+    "bound_read_roots",
+    "refusal",
+    "stated_read_roots",
+    "unread_stated_roots"
+   ],
+   "terms": {
+    "action": 1,
+    "bound": 1,
+    "bound_read_roots": 1,
+    "directory": 2,
+    "effective": 1,
+    "names": 1,
+    "norm": 1,
+    "reads": 1,
+    "refusal": 1,
+    "root": 2,
+    "row_args": 1,
+    "sentence": 1,
+    "stated": 1,
+    "stated_read_roots": 1,
+    "unread_stated_roots": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/stochastic_kernel_transform_universality_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -293590,7 +293696,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
-   "sha256": "ef5eac50015e800d1048576d3a961555020fe57395750f4b2be9592a99ccbf2e",
+   "sha256": "1954b8a5e76c630328fdde8c63af8c83b32d0f35297216e92730707fbd2a7792",
    "summary": "Execute one promoted verified Brain capability and reverify its trace.",
    "symbol_count": 11,
    "symbols": [
@@ -294489,7 +294595,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_binding_v1.py",
-   "sha256": "4868532d2f9beb78104a2bbb4696898a1ee56b2343cb04900987bfbfcd7ced01",
+   "sha256": "50799172394ba010815581263495f3abe47fec0b00be3c76f4b58f4f5e199b27",
    "summary": "Complete a capability's inputs when the goal does not state all of them.",
    "symbol_count": 23,
    "symbols": [
