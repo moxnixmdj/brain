@@ -1,0 +1,144 @@
+{
+  "authority": "NONE",
+  "findings": [
+    {
+      "id": "flag_predicts_being_wrong",
+      "matrix": {
+        "clean_and_right": 10,
+        "clean_and_wrong": 1,
+        "flagged_and_right": 0,
+        "flagged_and_wrong": 9
+      },
+      "pass": true,
+      "precision": 1.0,
+      "question": "are flagged bodies wrong more often than chance would give?",
+      "recall": 0.9
+    },
+    {
+      "correct_answers": 10,
+      "false_alarms": 0,
+      "id": "no_false_alarm_on_correct_answers",
+      "pass": true,
+      "question": "does the audit ever flag a correct answer? (it must not)",
+      "why_it_matters": "a false alarm triggers attribution against an innocent concept, which is the exact failure the attribution round fixed"
+    },
+    {
+      "conclusion": "a well-formed, total, balanced body that is simply false is invisible",
+      "constructed_clean_but_wrong": [
+        {
+          "body": "return (x * x)",
+          "name": "x*x_for_2x",
+          "params": [
+            "x"
+          ],
+          "train": [
+            [
+              [
+                1
+              ],
+              2.0
+            ],
+            [
+              [
+                2
+              ],
+              4.0
+            ],
+            [
+              [
+                3
+              ],
+              6.0
+            ]
+          ],
+          "verdict": "OVERFIT",
+          "withheld": [
+            [
+              [
+                5
+              ],
+              10.0
+            ],
+            [
+              [
+                -2
+              ],
+              -4.0
+            ]
+          ]
+        },
+        {
+          "body": "return (x + 2)",
+          "name": "x+2_for_x+1",
+          "params": [
+            "x"
+          ],
+          "train": [
+            [
+              [
+                1
+              ],
+              2.0
+            ],
+            [
+              [
+                2
+              ],
+              3.0
+            ],
+            [
+              [
+                3
+              ],
+              4.0
+            ]
+          ],
+          "verdict": "OVERFIT",
+          "withheld": [
+            [
+              [
+                10
+              ],
+              11.0
+            ],
+            [
+              [
+                -1
+              ],
+              0.0
+            ]
+          ]
+        }
+      ],
+      "id": "there_are_misses_and_they_are_structural",
+      "misses": [
+        {
+          "body": "def concept_640d4492(_v0, _v1, _v2):\n    return (min(max(_v0, _v1), _v2) - _v1) / (_v2 - _v1) if _v2 > _v1 else 0.0\nif not (concept_640d4492(v, l, 1)):\n    return concept_640d4492(l, v, 0)\nreturn (3.0 / h)",
+          "form": "1-c",
+          "library": "grown",
+          "verdict": "OVERFIT"
+        }
+      ],
+      "pass": true,
+      "question": "can a body be wrong with NO observable structural defect?"
+    },
+    {
+      "evidence": true,
+      "id": "audit_reads_no_expected_values",
+      "pass": true,
+      "question": "does the audit see the answer it is auditing?",
+      "report_states_it": true
+    }
+  ],
+  "measured": "2026-11-04",
+  "not_claimed": [
+    "that the audit detects wrong answers -- it detects DEFECTS, and only 9 of 10 wrong answers had one in this sample",
+    "that recall 0.90 generalises; the sample is 20 synthesized bodies over one corpus",
+    "that a clean verdict means correct -- it means nothing was visibly wrong, which is a different and much weaker statement",
+    "that this is a judgement about when to spend effort; the benchmark treats every flagged body as worth auditing"
+  ],
+  "passed": 4,
+  "schema": "PROJECT_BRAIN_SELF_AUDIT_BENCHMARK_V1",
+  "total": 4,
+  "truth_achieved": false
+}
