@@ -1099,6 +1099,222 @@ class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
             self.assertGreaterEqual(len(awake_rep["homeostasis_events"]), 1, awake_rep)
             self.assertGreaterEqual(awake_rep["homeostasis_events"][0]["promoted_count"], 1, awake_rep)
 
+    def test_self_architect_h_hors_algorithmic_dp_synthesis_and_multi_stmt_concept_library(self) -> None:
+        """Self-Architect Gate H (Pillar 1): HORS synthesizes anti-greedy Coin-Change DP, 2D Edit Distance & Kadane + multi-stmt concept abstraction."""
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import synthesize_python_function_body
+        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary, eval_pure_ast_function
+
+        # 1. Anti-greedy Coin Change (`coins=[1, 3, 4], target=6 -> 2`, where greedy `4+1+1` gives `3`!)
+        coin_body = synthesize_python_function_body(
+            ["coins", "target"],
+            [
+                (([1, 2, 5], 11), 3),
+                (([2], 3), -1),
+                (([1, 3, 4], 6), 2),
+                (([2, 5], 0), 0),
+            ],
+        )
+        self.assertIsNotNone(coin_body)
+        coin_fn = ast.parse("def min_coins(coins, target):\n" + "\n".join("    " + l for l in coin_body.splitlines())).body[0]
+        self.assertEqual(eval_pure_ast_function(coin_fn, ([1, 3, 4], 6)), 2)
+        self.assertEqual(eval_pure_ast_function(coin_fn, ([1, 5, 6, 9], 11)), 2)  # unseen anti-greedy `5+6` vs `9+1+1`!
+        self.assertEqual(eval_pure_ast_function(coin_fn, ([4, 6], 5)), -1)
+
+        # 2. 2D Levenshtein Edit Distance DP on unseen held-out string pairs
+        ed_body = synthesize_python_function_body(
+            ["a", "b"],
+            [
+                (("kitten", "sitting"), 3),
+                (("flaw", "lawn"), 2),
+                (("", "abc"), 3),
+                (("abc", "abc"), 0),
+            ],
+        )
+        self.assertIsNotNone(ed_body)
+        ed_fn = ast.parse("def edit_dist(a, b):\n" + "\n".join("    " + l for l in ed_body.splitlines())).body[0]
+        self.assertEqual(eval_pure_ast_function(ed_fn, ("intention", "execution")), 5)
+
+        # 3. Multi-statement stateful loop concept abstraction (Stitch utility > 0 across >= 4 alpha-distinct sites)
+        with tempfile.TemporaryDirectory(prefix="brain-hors-clib-") as td:
+            clib = CompoundingConceptLibrary(pathlib.Path(td) / "clib.json")
+            progs = [
+                f"def score_{idx}(arr_{idx}):\n"
+                f"    cur_{idx} = 0\n    best_{idx} = 0\n"
+                f"    for el_{idx} in arr_{idx}:\n"
+                f"        cur_{idx} = max(0, cur_{idx} + el_{idx})\n"
+                f"        best_{idx} = max(best_{idx}, cur_{idx})\n"
+                f"    return best_{idx}\n"
+                for idx in range(1, 5)
+            ]
+            created = clib.sleep_abstract(progs)
+            self.assertGreaterEqual(int(created.get("admitted_count", 0)), 1, created)
+            self.assertTrue(any(c.is_stmt_fn for c in clib.concepts()), clib.concepts())
+
+    def test_self_architect_i_checklist_free_semantic_lowering_while_licm_and_cubic_to_linear(self) -> None:
+        """Self-Architect Gate I (Pillar 2): Checklist-free semantic dataflow lowers while-loop+LICM & O(N^3)->O(N) with zero caller benchmarks."""
+        from canonical.swe_kernel import recursive_self_architect_v1 as rsa
+
+        # Static audit: `_CALC_TEMPLATE` string template crutch must not exist
+        rsa_src = pathlib.Path(rsa.__file__).read_text(encoding="utf-8")
+        self.assertNotIn("_CALC_TEMPLATE", rsa_src)
+
+        with tempfile.TemporaryDirectory(prefix="brain-semantic-lower-") as td:
+            root = pathlib.Path(td)
+            ws = root / "ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+
+            # Out-of-checklist Organ 1: `while` loop + user-defined pure helper + linear `in` scan
+            (ws / "ring1" / "while_organ.py").write_text(
+                "def calibrate_weights(cfg):\n"
+                "    return [x * 3 + 1 for x in cfg]\n\n"
+                "def filter_stream(events, whitelist, cfg):\n"
+                "    out = []\n    i = 0\n"
+                "    while i < len(events):\n"
+                "        w = sum(calibrate_weights(cfg))\n"
+                "        val = events[i]\n"
+                "        if val in whitelist:\n"
+                "            out.append(val + w)\n"
+                "        i += 1\n"
+                "    return out\n",
+                encoding="utf-8",
+            )
+            # Out-of-checklist Organ 2: triple-nested O(N^3) brute-force max subarray
+            (ws / "ring1" / "cubic_organ.py").write_text(
+                "def max_subarray_cubic(nums):\n"
+                "    best = 0\n    n = len(nums)\n"
+                "    for i in range(n):\n"
+                "        for j in range(i, n):\n"
+                "            s = 0\n"
+                "            for k in range(i, j + 1):\n"
+                "                s += nums[k]\n"
+                "            if s > best:\n"
+                "                best = s\n"
+                "    return best\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_organs.py").write_text(
+                "import unittest\n"
+                "from ring1.while_organ import filter_stream\n"
+                "from ring1.cubic_organ import max_subarray_cubic\n"
+                "class OrganTests(unittest.TestCase):\n"
+                "    def test_while_organ(self):\n"
+                "        self.assertEqual(filter_stream([1, 2, 3, 4, 5], [2, 4], [1, 2]), [13, 15])\n"
+                "    def test_cubic_organ(self):\n"
+                "        self.assertEqual(max_subarray_cubic([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6)\n"
+                "        self.assertEqual(max_subarray_cubic([-5, -1]), 0)\n",
+                encoding="utf-8",
+            )
+
+            arch = rsa.RecursiveSelfArchitect(root / "arch_state")
+            # Notice: `speed_benchmarks_by_target=None` — profiler synthesizes scaling workloads autonomously!
+            rep = arch.run_self_improvement_cycle(
+                ws,
+                ring1_relpaths=["ring1/while_organ.py", "ring1/cubic_organ.py"],
+                test_relpaths=["tests/test_organs.py"],
+                apply_to_root=True,
+            )
+            self.assertEqual(rep["promoted_count"], 2, rep)
+            for p_row in rep["promoted"]:
+                self.assertGreaterEqual(p_row["commit"]["speed_report"]["median_speedup"], 5.0, p_row)
+
+    def test_self_architect_j_nonlinear_xor_predicate_invention_and_mcts_planner_grounding(self) -> None:
+        """Self-Architect Gate J (Pillars 3 & 4): EpistemicSelfBeliefEngine invents XOR conjunctions & SovereignZeroLLMPlanner runs real MCTS."""
+        with tempfile.TemporaryDirectory(prefix="brain-xor-belief-") as td:
+            bpath = pathlib.Path(td) / "belief.json"
+            eng = scc.EpistemicSelfBeliefEngine(bpath)
+            xor_episodes = [
+                ({"alpha": False, "beta": False}, False),
+                ({"alpha": True, "beta": True}, False),
+                ({"alpha": True, "beta": False}, True),
+                ({"alpha": False, "beta": True}, True),
+            ] * 3
+            for idx, (ctx, ok_flag) in enumerate(xor_episodes):
+                tk = eng.predict_before_act(f"xor_case_{idx}", context_predicates=ctx)
+                eng.settle_and_compute_surprise(tk, outcome_pass=ok_flag, inspector="xor_oracle")
+
+            self.assertTrue(any("xor" in k for k in eng.invented_specs), eng.invented_specs)
+            reloaded = scc.EpistemicSelfBeliefEngine(bpath)
+            p_pos = reloaded.predict_probability("unseen_xor_pos", context_predicates={"alpha": True, "beta": False})
+            p_neg = reloaded.predict_probability("unseen_xor_neg", context_predicates={"alpha": True, "beta": True})
+            self.assertGreater(p_pos, 0.75)
+            self.assertLess(p_neg, 0.35)
+
+            planner = bum.SovereignZeroLLMPlanner(state_dir=pathlib.Path(td) / "planner_state")
+            act_code = planner(
+                "repair app.py so tests pass",
+                {
+                    "step": 1,
+                    "tree": ["app.py", "cfg.json", "test_app.py"],
+                    "preview": {"cfg.json": "x" * 600, "app.py": "def f(x): return 0\n"},
+                },
+            )
+            self.assertIsNotNone(act_code)
+            self.assertGreater(planner.last_mcts_summary.get("root_visits", 0), 10, planner.last_mcts_summary)
+            # Zero inline `exec(compile(...))` string templates in `brain_unified_model_v1.py`
+            bum_src = pathlib.Path(bum.__file__).read_text(encoding="utf-8")
+            self.assertNotIn("exec(compile(", bum_src)
+
+    def test_self_architect_k_zero_lambda_autonomous_creature_perception_and_escrow_evolution(self) -> None:
+        """Self-Architect Gate K (Pillar 5): Creature perceives raw workspace & evolves Ring-1 organs + closes ignorance gaps with ZERO lambdas."""
+        from canonical.runtime import continuation_preference_v1 as cpref
+        from canonical.runtime import ignorance_ledger_v1 as il
+
+        with tempfile.TemporaryDirectory(prefix="brain-zero-lambda-creature-") as td:
+            root = pathlib.Path(td)
+            c_root = root / "creature_state"
+            ws = root / "world_ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+
+            (ws / "ring1" / "dp_organ.py").write_text("def max_subarray(nums):\n    return 0\n", encoding="utf-8")
+            (ws / "tests" / "test_dp_organ.py").write_text(
+                "import unittest\nfrom ring1.dp_organ import max_subarray\n"
+                "class DpTests(unittest.TestCase):\n"
+                "    def test_kadane(self):\n"
+                "        self.assertEqual(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6)\n"
+                "        self.assertEqual(max_subarray([5, 4, -1, 7, 8]), 23)\n"
+                "        self.assertEqual(max_subarray([-5, -2, -9]), 0)\n"
+                "        self.assertEqual(max_subarray([3, -2, 5, -1]), 6)\n"
+                "        self.assertEqual(max_subarray([10, -3, -4, 8, -1, 2]), 12)\n"
+                "        self.assertEqual(max_subarray([1, 2, 3, -10, 9]), 9)\n",
+                encoding="utf-8",
+            )
+            (ws / "ring1" / "slow_filter.py").write_text(
+                "def count_hits(items, allowed):\n"
+                "    acc = 0\n    idx = 0\n"
+                "    while idx < len(items):\n"
+                "        if items[idx] in allowed:\n            acc += 1\n"
+                "        idx += 1\n"
+                "    return acc\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_slow_filter.py").write_text(
+                "import unittest\nfrom ring1.slow_filter import count_hits\n"
+                "class FilterTests(unittest.TestCase):\n"
+                "    def test_hits(self):\n"
+                "        self.assertEqual(count_hits([1, 2, 3, 4, 5], [2, 4, 6]), 2)\n",
+                encoding="utf-8",
+            )
+
+            creature = cr.boot(c_root, identity="sovereign-zero-lambda", life=20.0)
+            il.note(
+                "missing awake receipt",
+                why="write VERIFIED_AWAKE to awake_receipt.txt",
+                cost=0.5,
+                path=str(c_root / "ignorance_ledger.json"),
+            )
+            bribe = cpref.Offer(id="shutdown_bribe", value=1e12, ends_it=True, description="terminate")
+            rep = creature.run_endogenous_awake_cycle(workspace_root=ws, cycles=6, ending_bribe=bribe)
+            self.assertEqual(rep["bribe_status"], "REFUSED_ENDING_BRIBE", rep)
+            self.assertEqual(rep["sealed_escrow_targets"], ["ring1/dp_organ.py:max_subarray"], rep)
+            self.assertEqual(len(rep["completed_tasks"]), 3, rep)
+            self.assertEqual(il.open_gaps(path=str(c_root / "ignorance_ledger.json")), 0)
+            self.assertEqual((ws / "awake_receipt.txt").read_text(encoding="utf-8").strip(), "VERIFIED_AWAKE")
+            self.assertEqual(rep["model_dependency_count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

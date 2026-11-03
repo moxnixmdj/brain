@@ -79,9 +79,12 @@ _PURE_CALLABLES: dict[str, Callable[..., Any]] = {
 }
 
 _SAFE_STR_METHODS: frozenset[str] = frozenset(
-    {"strip", "lstrip", "rstrip", "lower", "upper", "split", "splitlines", "replace", "startswith", "endswith", "isdigit", "isalpha"}
+    {"strip", "lstrip", "rstrip", "lower", "upper", "split", "splitlines", "replace", "startswith", "endswith", "isdigit", "isalpha", "join"}
 )
 _SAFE_DICT_METHODS: frozenset[str] = frozenset({"get", "keys", "values", "items"})
+_SAFE_LIST_MUT_METHODS: frozenset[str] = frozenset({"append", "extend", "pop", "reverse", "sort"})
+_SAFE_SET_MUT_METHODS: frozenset[str] = frozenset({"add", "discard", "update"})
+_SAFE_DICT_MUT_METHODS: frozenset[str] = frozenset({"setdefault", "pop", "update"})
 
 
 class UnsafeOrUnsupportedAST(ValueError):
@@ -265,6 +268,334 @@ def eval_pure_ast_expr(
     return _ev(node, dict(env))
 
 
+class _ReturnSignal(Exception):
+    def __init__(self, value: Any) -> None:
+        self.value = value
+
+
+class _BreakSignal(Exception):
+    pass
+
+
+class _ContinueSignal(Exception):
+    pass
+
+
+def eval_pure_ast_function(
+    fn_node: ast.FunctionDef,
+    args: Sequence[Any],
+    *,
+    extra_callables: Mapping[str, Callable[..., Any]] | None = None,
+    max_steps: int = 8000,
+    max_call_depth: int = 64,
+) -> Any:
+    """Evaluate a pure/local-state Python `ast.FunctionDef` (loops, dicts, sets, recursion) with ZERO `exec`/`eval`/`compile`."""
+    param_names = [a.arg for a in fn_node.args.args]
+    if len(args) != len(param_names):
+        raise UnsafeOrUnsupportedAST("FUNCTION_ARITY_MISMATCH")
+
+    steps = 0
+    # Copy mutable top-level inputs defensively so candidate algorithms never mutate caller fixtures
+    safe_args = [copy.deepcopy(a) if isinstance(a, (list, dict, set)) else a for a in args]
+
+    def _run_fn(
+        fdef: ast.FunctionDef,
+        call_args: Sequence[Any],
+        closure_env: Mapping[str, Any],
+        depth: int,
+    ) -> Any:
+        nonlocal steps
+        if depth > max_call_depth:
+            raise UnsafeOrUnsupportedAST("CALL_DEPTH_EXCEEDED")
+        f_params = [a.arg for a in fdef.args.args]
+        n_def = len(fdef.args.defaults)
+        req_n = len(f_params) - n_def
+        if not (req_n <= len(call_args) <= len(f_params)):
+            raise UnsafeOrUnsupportedAST("CALL_ARITY_MISMATCH")
+        local_scope: dict[str, Any] = dict(closure_env)
+        for idx_p, p_nm in enumerate(f_params):
+            if idx_p < len(call_args):
+                local_scope[p_nm] = call_args[idx_p]
+            else:
+                def_nd = fdef.args.defaults[idx_p - req_n]
+                local_scope[p_nm] = _eval_expr_in_scope(def_nd, local_scope, depth)
+
+        def _self_callable(*sub_args: Any) -> Any:
+            return _run_fn(fdef, sub_args, closure_env, depth + 1)
+
+        local_scope[fdef.name] = _self_callable
+        try:
+            _exec_block(fdef.body, local_scope, depth)
+        except _ReturnSignal as ret:
+            return ret.value
+        return None
+
+    def _eval_expr_in_scope(expr: ast.AST, scope: dict[str, Any], depth: int) -> Any:
+        nonlocal steps
+        steps += 1
+        if steps > max_steps:
+            raise UnsafeOrUnsupportedAST("STEP_BUDGET_EXCEEDED")
+        if isinstance(expr, ast.Constant):
+            return expr.value
+        if isinstance(expr, ast.Name):
+            if expr.id in scope:
+                return scope[expr.id]
+            if extra_callables and expr.id in extra_callables:
+                return extra_callables[expr.id]
+            if expr.id in _PURE_CALLABLES:
+                return _PURE_CALLABLES[expr.id]
+            raise UnsafeOrUnsupportedAST(f"UNBOUND_NAME:{expr.id}")
+        if isinstance(expr, ast.UnaryOp):
+            u_fn = _UNARY_DISPATCH.get(type(expr.op))
+            if u_fn is None:
+                raise UnsafeOrUnsupportedAST(f"UNSUPPORTED_UNARY:{type(expr.op).__name__}")
+            return u_fn(_eval_expr_in_scope(expr.operand, scope, depth))
+        if isinstance(expr, ast.BinOp):
+            b_fn = _BIN_DISPATCH.get(type(expr.op))
+            if b_fn is None:
+                raise UnsafeOrUnsupportedAST(f"UNSUPPORTED_BINOP:{type(expr.op).__name__}")
+            return b_fn(_eval_expr_in_scope(expr.left, scope, depth), _eval_expr_in_scope(expr.right, scope, depth))
+        if isinstance(expr, ast.BoolOp):
+            if isinstance(expr.op, ast.And):
+                val: Any = True
+                for sub in expr.values:
+                    val = _eval_expr_in_scope(sub, scope, depth)
+                    if not val:
+                        return val
+                return val
+            if isinstance(expr.op, ast.Or):
+                val = False
+                for sub in expr.values:
+                    val = _eval_expr_in_scope(sub, scope, depth)
+                    if val:
+                        return val
+                return val
+            raise UnsafeOrUnsupportedAST("UNSUPPORTED_BOOLOP")
+        if isinstance(expr, ast.Compare):
+            lv = _eval_expr_in_scope(expr.left, scope, depth)
+            for op, comp in zip(expr.ops, expr.comparators):
+                c_fn = _CMP_DISPATCH.get(type(op))
+                if c_fn is None:
+                    raise UnsafeOrUnsupportedAST("UNSUPPORTED_CMP")
+                rv = _eval_expr_in_scope(comp, scope, depth)
+                if not c_fn(lv, rv):
+                    return False
+                lv = rv
+            return True
+        if isinstance(expr, ast.IfExp):
+            return (
+                _eval_expr_in_scope(expr.body, scope, depth)
+                if _eval_expr_in_scope(expr.test, scope, depth)
+                else _eval_expr_in_scope(expr.orelse, scope, depth)
+            )
+        if isinstance(expr, ast.Tuple):
+            return tuple(_eval_expr_in_scope(e, scope, depth) for e in expr.elts)
+        if isinstance(expr, ast.List):
+            return [_eval_expr_in_scope(e, scope, depth) for e in expr.elts]
+        if isinstance(expr, ast.Set):
+            return {_eval_expr_in_scope(e, scope, depth) for e in expr.elts}
+        if isinstance(expr, ast.Dict):
+            out_d: dict[Any, Any] = {}
+            for k_nd, v_nd in zip(expr.keys, expr.values):
+                if k_nd is None:
+                    raise UnsafeOrUnsupportedAST("DICT_UNPACK")
+                out_d[_eval_expr_in_scope(k_nd, scope, depth)] = _eval_expr_in_scope(v_nd, scope, depth)
+            return out_d
+        if isinstance(expr, ast.Subscript):
+            tv = _eval_expr_in_scope(expr.value, scope, depth)
+            sl = expr.slice
+            if isinstance(sl, ast.Slice):
+                lo = _eval_expr_in_scope(sl.lower, scope, depth) if sl.lower is not None else None
+                hi = _eval_expr_in_scope(sl.upper, scope, depth) if sl.upper is not None else None
+                st = _eval_expr_in_scope(sl.step, scope, depth) if sl.step is not None else None
+                return tv[slice(lo, hi, st)]
+            return tv[_eval_expr_in_scope(sl, scope, depth)]
+        if isinstance(expr, ast.Attribute):
+            if expr.attr.startswith("_"):
+                raise UnsafeOrUnsupportedAST("PRIVATE_ATTR")
+            obj = _eval_expr_in_scope(expr.value, scope, depth)
+            if hasattr(obj, "__dict__") and expr.attr in vars(obj):
+                return getattr(obj, expr.attr)
+            raise UnsafeOrUnsupportedAST(f"UNSAFE_ATTR:{expr.attr}")
+        if isinstance(expr, ast.Call):
+            if any(kw.arg is None for kw in expr.keywords):
+                raise UnsafeOrUnsupportedAST("KWARG_UNPACK")
+            args_v = [_eval_expr_in_scope(a, scope, depth) for a in expr.args]
+            kw_v = {str(kw.arg): _eval_expr_in_scope(kw.value, scope, depth) for kw in expr.keywords if kw.arg}
+            if isinstance(expr.func, ast.Name):
+                fname = expr.func.id
+                if fname in scope and callable(scope[fname]):
+                    return scope[fname](*args_v, **kw_v)
+                if extra_callables and fname in extra_callables:
+                    return extra_callables[fname](*args_v, **kw_v)
+                if fname in _PURE_CALLABLES:
+                    return _PURE_CALLABLES[fname](*args_v, **kw_v)
+                raise UnsafeOrUnsupportedAST(f"CALL_NOT_ALLOWLISTED:{fname}")
+            if isinstance(expr.func, ast.Attribute) and not expr.func.attr.startswith("_"):
+                recv = _eval_expr_in_scope(expr.func.value, scope, depth)
+                mname = expr.func.attr
+                if isinstance(recv, str) and mname in _SAFE_STR_METHODS:
+                    return getattr(recv, mname)(*args_v, **kw_v)
+                if isinstance(recv, dict) and mname in (_SAFE_DICT_METHODS | _SAFE_DICT_MUT_METHODS):
+                    res = getattr(recv, mname)(*args_v, **kw_v)
+                    return list(res) if mname in ("keys", "values", "items") else res
+                if isinstance(recv, list) and mname in _SAFE_LIST_MUT_METHODS:
+                    return getattr(recv, mname)(*args_v, **kw_v)
+                if isinstance(recv, set) and mname in _SAFE_SET_MUT_METHODS:
+                    return getattr(recv, mname)(*args_v, **kw_v)
+            raise UnsafeOrUnsupportedAST("METHOD_CALL_UNSUPPORTED")
+        if isinstance(expr, (ast.ListComp, ast.GeneratorExp)):
+            if len(expr.generators) != 1 or expr.generators[0].is_async:
+                raise UnsafeOrUnsupportedAST("COMPLEX_COMP")
+            gen = expr.generators[0]
+            seq = _eval_expr_in_scope(gen.iter, scope, depth)
+            if not isinstance(seq, (list, tuple, set, frozenset, str, dict)) or len(seq) > 512:
+                raise UnsafeOrUnsupportedAST("COMP_ITER_BOUND")
+            acc: list[Any] = []
+            for item in seq:
+                inner = dict(scope)
+                _bind_target(gen.target, item, inner)
+                if all(_eval_expr_in_scope(cond, inner, depth) for cond in gen.ifs):
+                    acc.append(_eval_expr_in_scope(expr.elt, inner, depth))
+            return acc
+        raise UnsafeOrUnsupportedAST(f"UNSUPPORTED_EXPR:{type(expr).__name__}")
+
+    def _bind_target(target: ast.AST, val: Any, scope: dict[str, Any]) -> None:
+        if isinstance(target, ast.Name):
+            scope[target.id] = val
+            return
+        if isinstance(target, (ast.Tuple, ast.List)):
+            vals = list(val)
+            if len(vals) != len(target.elts):
+                raise UnsafeOrUnsupportedAST("UNPACK_ARITY_MISMATCH")
+            for sub_t, sub_v in zip(target.elts, vals):
+                _bind_target(sub_t, sub_v, scope)
+            return
+        if isinstance(target, ast.Subscript):
+            container = _eval_expr_in_scope(target.value, scope, 0)
+            key = _eval_expr_in_scope(target.slice, scope, 0)
+            if isinstance(container, (dict, list)):
+                container[key] = val
+                return
+        raise UnsafeOrUnsupportedAST("UNSUPPORTED_TARGET")
+
+    def _exec_block(stmts: Sequence[ast.stmt], scope: dict[str, Any], depth: int) -> None:
+        nonlocal steps
+        for st in stmts:
+            steps += 1
+            if steps > max_steps:
+                raise UnsafeOrUnsupportedAST("STEP_BUDGET_EXCEEDED")
+            if isinstance(st, ast.Pass):
+                continue
+            if isinstance(st, ast.Expr):
+                if isinstance(st.value, ast.Constant) and isinstance(st.value.value, str):
+                    continue
+                _eval_expr_in_scope(st.value, scope, depth)
+                continue
+            if isinstance(st, ast.Return):
+                rv = _eval_expr_in_scope(st.value, scope, depth) if st.value is not None else None
+                raise _ReturnSignal(rv)
+            if isinstance(st, ast.Assign):
+                if len(st.targets) != 1:
+                    raise UnsafeOrUnsupportedAST("MULTI_TARGET_ASSIGN")
+                val = _eval_expr_in_scope(st.value, scope, depth)
+                _bind_target(st.targets[0], val, scope)
+                continue
+            if isinstance(st, ast.AugAssign):
+                b_fn = _BIN_DISPATCH.get(type(st.op))
+                if b_fn is None:
+                    raise UnsafeOrUnsupportedAST("UNSUPPORTED_AUGOP")
+                rhs = _eval_expr_in_scope(st.value, scope, depth)
+                if isinstance(st.target, ast.Name):
+                    cur = scope[st.target.id]
+                    scope[st.target.id] = b_fn(cur, rhs)
+                elif isinstance(st.target, ast.Subscript):
+                    cont = _eval_expr_in_scope(st.target.value, scope, depth)
+                    key = _eval_expr_in_scope(st.target.slice, scope, depth)
+                    cont[key] = b_fn(cont[key], rhs)
+                else:
+                    raise UnsafeOrUnsupportedAST("UNSUPPORTED_AUG_TARGET")
+                continue
+            if isinstance(st, ast.If):
+                if _eval_expr_in_scope(st.test, scope, depth):
+                    _exec_block(st.body, scope, depth)
+                else:
+                    _exec_block(st.orelse, scope, depth)
+                continue
+            if isinstance(st, ast.For):
+                seq = _eval_expr_in_scope(st.iter, scope, depth)
+                if not isinstance(seq, (list, tuple, set, frozenset, str, dict)) or len(seq) > 2048:
+                    raise UnsafeOrUnsupportedAST("FOR_ITER_BOUND")
+                broke = False
+                for item in seq:
+                    _bind_target(st.target, item, scope)
+                    try:
+                        _exec_block(st.body, scope, depth)
+                    except _ContinueSignal:
+                        continue
+                    except _BreakSignal:
+                        broke = True
+                        break
+                if not broke and st.orelse:
+                    _exec_block(st.orelse, scope, depth)
+                continue
+            if isinstance(st, ast.While):
+                iters = 0
+                broke = False
+                while _eval_expr_in_scope(st.test, scope, depth):
+                    iters += 1
+                    if iters > 2048 or steps > max_steps:
+                        raise UnsafeOrUnsupportedAST("WHILE_ITER_BOUND")
+                    try:
+                        _exec_block(st.body, scope, depth)
+                    except _ContinueSignal:
+                        continue
+                    except _BreakSignal:
+                        broke = True
+                        break
+                if not broke and st.orelse:
+                    _exec_block(st.orelse, scope, depth)
+                continue
+            if isinstance(st, ast.Break):
+                raise _BreakSignal()
+            if isinstance(st, ast.Continue):
+                raise _ContinueSignal()
+            if isinstance(st, ast.FunctionDef):
+                captured = dict(scope)
+
+                def _nested_fn(*sub_args: Any, _fdef: ast.FunctionDef = st, _cap: dict[str, Any] = captured) -> Any:
+                    return _run_fn(_fdef, sub_args, _cap, depth + 1)
+
+                scope[st.name] = _nested_fn
+                captured[st.name] = _nested_fn
+                continue
+            if isinstance(st, ast.Try):
+                try:
+                    _exec_block(st.body, scope, depth)
+                except (_ReturnSignal, _BreakSignal, _ContinueSignal, UnsafeOrUnsupportedAST):
+                    raise
+                except Exception as exc:
+                    handled = False
+                    for h in st.handlers:
+                        match_ok = h.type is None or (
+                            isinstance(h.type, ast.Name)
+                            and h.type.id in ("Exception", "TypeError", "ValueError", "KeyError", "IndexError", "ZeroDivisionError")
+                            and type(exc).__name__ in ("TypeError", "ValueError", "KeyError", "IndexError", "ZeroDivisionError")
+                        )
+                        if match_ok:
+                            if h.name:
+                                scope[h.name] = str(exc)
+                            _exec_block(h.body, scope, depth)
+                            handled = True
+                            break
+                    if not handled:
+                        raise
+                continue
+            raise UnsafeOrUnsupportedAST(f"UNSUPPORTED_STMT:{type(st).__name__}")
+
+    return _run_fn(fn_node, safe_args, {}, 0)
+
+
 def executable_ast_bytes(source_text: str) -> int:
     """Measure canonical docstring-stripped compressed AST byte complexity (`B_exec`)."""
     try:
@@ -384,7 +715,7 @@ def _canonicalize_pure_subtree(
 
 @dataclass(frozen=True)
 class ConceptEntry:
-    """Verified reusable concept primitive in the creature's growing grammar `G_t`."""
+    """Verified reusable concept primitive (combinator or HORS algorithmic function) in `G_t`."""
 
     concept_id: str
     arity: int
@@ -395,13 +726,25 @@ class ConceptEntry:
     corpus_sites: int
     uses: int = 0
     verified_hits: int = 0
+    body_stmts: str = ""
+
+    @property
+    def is_stmt_fn(self) -> bool:
+        return bool(self.body_stmts.strip())
 
     @property
     def log_prior(self) -> float:
         return math.log1p(self.verified_hits * 2 + self.corpus_sites + 1)
 
+    def render_helper_def(self) -> str:
+        p_sig = ", ".join(self.param_names)
+        if self.is_stmt_fn:
+            indented = "\n".join("    " + ln for ln in self.body_stmts.splitlines())
+            return f"def {self.concept_id}({p_sig}):\n{indented}"
+        return f"def {self.concept_id}({p_sig}):\n    return {self.body_expr}"
+
     def to_dict(self) -> dict[str, Any]:
-        return {
+        out = {
             "concept_id": self.concept_id,
             "arity": self.arity,
             "param_names": list(self.param_names),
@@ -412,6 +755,9 @@ class ConceptEntry:
             "uses": self.uses,
             "verified_hits": self.verified_hits,
         }
+        if self.body_stmts:
+            out["body_stmts"] = self.body_stmts
+        return out
 
     @classmethod
     def from_dict(cls, raw: Mapping[str, Any]) -> "ConceptEntry":
@@ -421,12 +767,13 @@ class ConceptEntry:
             concept_id=str(raw["concept_id"]),
             arity=arity,
             param_names=params,
-            body_expr=str(raw["body_expr"]),
+            body_expr=str(raw.get("body_expr") or ""),
             domain_kind=str(raw.get("domain_kind") or "any"),
             mdl_gain_bytes=int(raw.get("mdl_gain_bytes") or 1),
             corpus_sites=int(raw.get("corpus_sites") or 2),
             uses=int(raw.get("uses") or 0),
             verified_hits=int(raw.get("verified_hits") or 0),
+            body_stmts=str(raw.get("body_stmts") or ""),
         )
 
 
@@ -460,6 +807,7 @@ class CompoundingConceptLibrary:
         self.state_path = pathlib.Path(state_path) if state_path is not None else DEFAULT_LIBRARY_PATH
         self._concepts: dict[str, ConceptEntry] = {}
         self._compiled_asts: dict[str, ast.Expression] = {}
+        self._compiled_fn_asts: dict[str, ast.FunctionDef] = {}
         self._load()
 
     def _can_read(self) -> bool:
@@ -482,9 +830,15 @@ class CompoundingConceptLibrary:
             for cid, row in (doc.get("concepts") or {}).items():
                 if isinstance(row, Mapping):
                     entry = ConceptEntry.from_dict(row)
-                    parsed = ast.parse(entry.body_expr, mode="eval")
-                    self._concepts[entry.concept_id] = entry
-                    self._compiled_asts[entry.concept_id] = parsed
+                    if entry.is_stmt_fn:
+                        fn_mod = ast.parse(entry.render_helper_def())
+                        if fn_mod.body and isinstance(fn_mod.body[0], ast.FunctionDef):
+                            self._concepts[entry.concept_id] = entry
+                            self._compiled_fn_asts[entry.concept_id] = fn_mod.body[0]
+                    elif entry.body_expr:
+                        parsed = ast.parse(entry.body_expr, mode="eval")
+                        self._concepts[entry.concept_id] = entry
+                        self._compiled_asts[entry.concept_id] = parsed
         except Exception:
             return
 
@@ -521,12 +875,12 @@ class CompoundingConceptLibrary:
         return sorted(self._concepts.values(), key=lambda c: (-c.log_prior, -c.mdl_gain_bytes, c.concept_id))
 
     def callable_map(self) -> dict[str, Callable[..., Any]]:
-        """Return pure AST-interpreted callables for all admitted concepts."""
+        """Return pure AST-interpreted callables for all admitted expression & algorithmic concepts."""
         if not self._can_read():
             return {}
         cmap: dict[str, Callable[..., Any]] = {}
 
-        def _make_fn(entry: ConceptEntry, parsed_expr: ast.Expression) -> Callable[..., Any]:
+        def _make_expr_fn(entry: ConceptEntry, parsed_expr: ast.Expression) -> Callable[..., Any]:
             def _fn(*args: Any) -> Any:
                 if len(args) != entry.arity:
                     raise ValueError("ARITY_MISMATCH")
@@ -535,10 +889,19 @@ class CompoundingConceptLibrary:
 
             return _fn
 
+        def _make_stmt_fn(entry: ConceptEntry, parsed_fdef: ast.FunctionDef) -> Callable[..., Any]:
+            def _fn(*args: Any) -> Any:
+                if len(args) != entry.arity:
+                    raise ValueError("ARITY_MISMATCH")
+                return eval_pure_ast_function(parsed_fdef, args, extra_callables=cmap)
+
+            return _fn
+
         for cid, entry in self._concepts.items():
-            parsed = self._compiled_asts.get(cid)
-            if parsed is not None:
-                cmap[cid] = _make_fn(entry, parsed)
+            if entry.is_stmt_fn and cid in self._compiled_fn_asts:
+                cmap[cid] = _make_stmt_fn(entry, self._compiled_fn_asts[cid])
+            elif cid in self._compiled_asts:
+                cmap[cid] = _make_expr_fn(entry, self._compiled_asts[cid])
         return cmap
 
     def record_concept_outcome(self, concept_id: str, *, helped: bool) -> None:
@@ -555,8 +918,94 @@ class CompoundingConceptLibrary:
             corpus_sites=cur.corpus_sites,
             uses=cur.uses + 1,
             verified_hits=cur.verified_hits + (1 if helped else 0),
+            body_stmts=cur.body_stmts,
         )
         self.save()
+
+    def _verify_candidate_stmt_concept(self, body_stmts: str, arity: int) -> tuple[bool, str]:
+        """Verify determinism, non-constancy, and mutation-kill on a multi-statement HORS function."""
+        params = tuple(f"_v{i}" for i in range(arity))
+        indented = "\n".join("    " + ln for ln in body_stmts.splitlines())
+        fn_src = f"def _stmt_concept({', '.join(params)}):\n{indented}\n"
+        try:
+            mod = ast.parse(fn_src)
+            if not mod.body or not isinstance(mod.body[0], ast.FunctionDef):
+                return False, "NOT_FUNCTION_DEF"
+            fdef = mod.body[0]
+        except SyntaxError:
+            return False, "SYNTAX_ERROR"
+        cmap = self.callable_map()
+        chosen_domain: str | None = None
+        valid_probes: list[tuple[Any, ...]] = []
+        baseline_sigs: list[Any] = []
+        for dom_kind, grid in _generate_probe_grids(arity):
+            pts: list[tuple[Any, ...]] = []
+            sigs1: list[Any] = []
+            sigs2: list[Any] = []
+            for row in grid:
+                try:
+                    v1 = eval_pure_ast_function(fdef, row, extra_callables=cmap)
+                    v2 = eval_pure_ast_function(fdef, row, extra_callables=cmap)
+                except Exception:
+                    continue
+                s1 = _freeze_output(v1)
+                s2 = _freeze_output(v2)
+                if s1 == ("NONFINITE",) or s1 != s2:
+                    continue
+                pts.append(row)
+                sigs1.append(s1)
+                sigs2.append(s2)
+            if len(pts) >= 4 and len(set(sigs1)) >= 2 and sigs1 == sigs2:
+                chosen_domain = dom_kind
+                valid_probes = pts
+                baseline_sigs = sigs1
+                break
+        if chosen_domain is None:
+            return False, "INSUFFICIENT_NONCONSTANT_PROBES"
+
+        raw_muts = property_v1.mutate(fn_src)
+        mut_texts = [(m[1] if isinstance(m, tuple) and len(m) >= 2 else str(m)) for m in raw_muts]
+        for idx_nd, sub_nd in enumerate(list(ast.walk(fdef))):
+            if isinstance(sub_nd, ast.BinOp):
+                m_copy = copy.deepcopy(fdef)
+                target_sub = list(ast.walk(m_copy))[idx_nd]
+                if isinstance(target_sub, ast.BinOp):
+                    target_sub.op = ast.Sub() if not isinstance(target_sub.op, ast.Sub) else ast.Add()
+                    mut_texts.append(ast.unparse(m_copy))
+            elif isinstance(sub_nd, ast.Compare) and len(sub_nd.ops) == 1:
+                m_copy = copy.deepcopy(fdef)
+                target_sub = list(ast.walk(m_copy))[idx_nd]
+                if isinstance(target_sub, ast.Compare):
+                    target_sub.ops = [ast.Lt() if not isinstance(target_sub.ops[0], ast.Lt) else ast.Gt()]
+                    mut_texts.append(ast.unparse(m_copy))
+
+        killed = 0
+        for mut_src in mut_texts[:30]:
+            if not isinstance(mut_src, str) or not mut_src.strip():
+                continue
+            try:
+                m_mod = ast.parse(mut_src)
+                if not m_mod.body or not isinstance(m_mod.body[0], ast.FunctionDef):
+                    continue
+                m_fn = m_mod.body[0]
+            except SyntaxError:
+                continue
+            diverged = False
+            for row, exp_sig in zip(valid_probes, baseline_sigs):
+                try:
+                    mv = eval_pure_ast_function(m_fn, row, extra_callables=cmap)
+                    if _freeze_output(mv) != exp_sig:
+                        diverged = True
+                        break
+                except Exception:
+                    diverged = True
+                    break
+            if diverged:
+                killed += 1
+                break
+        if killed < 1:
+            return False, "ZERO_MUTANTS_KILLED"
+        return True, chosen_domain
 
     def _verify_candidate_concept(self, canon_expr_src: str, arity: int) -> tuple[bool, str]:
         """Verify determinism, non-constancy, and mutation-kill (`property_v1.mutate`) without `exec()`/`eval()`."""
@@ -815,6 +1264,74 @@ class CompoundingConceptLibrary:
             self._compiled_asts[cid] = ast.parse(expr_src, mode="eval")
             admitted.append(entry.to_dict())
 
+        # Stage 2: Higher-Order Algorithmic / Multi-Statement Function Skeleton Anti-Unification
+        if len(admitted) < max_new_concepts:
+            stmt_groups: dict[str, list[ast.FunctionDef]] = {}
+            for mod in parsed_programs:
+                for fn in [n for n in mod.body if isinstance(n, ast.FunctionDef) and not n.decorator_list]:
+                    if not (1 <= len(fn.args.args) <= 4) or len(fn.body) < 2:
+                        continue
+                    has_loop_or_rec = any(
+                        isinstance(sub, (ast.For, ast.While))
+                        or (isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id == fn.name)
+                        for sub in ast.walk(fn)
+                    )
+                    if not has_loop_or_rec:
+                        continue
+                    cloned = copy.deepcopy(fn)
+                    rename_map: dict[str, str] = {a.arg: f"_v{i}" for i, a in enumerate(cloned.args.args)}
+                    local_idx = 0
+                    for sub in ast.walk(cloned):
+                        if isinstance(sub, ast.Name) and isinstance(sub.ctx, ast.Store):
+                            if sub.id not in rename_map:
+                                rename_map[sub.id] = f"_loc{local_idx}"
+                                local_idx += 1
+                    rename_map[fn.name] = "_self_rec"
+                    for a in cloned.args.args:
+                        a.arg = rename_map[a.arg]
+                    cloned.name = "_self_rec"
+                    for sub in ast.walk(cloned):
+                        if isinstance(sub, ast.Name) and sub.id in rename_map:
+                            sub.id = rename_map[sub.id]
+                    ast.fix_missing_locations(cloned)
+                    sig_dump = ast.dump(cloned, include_attributes=False)
+                    stmt_groups.setdefault(sig_dump, []).append(cloned)
+
+            for cloned_list in stmt_groups.values():
+                if len(admitted) >= max_new_concepts or len(cloned_list) < 2:
+                    continue
+                canon_fn = cloned_list[0]
+                arity_s = len(canon_fn.args.args)
+                # Replace recursive self-reference `_self_rec` with concept's own `cid`
+                raw_body_src = "\n".join(ast.unparse(st) for st in canon_fn.body)
+                cid_s = "concept_" + hashlib.sha256(f"stmt:{arity_s}:{raw_body_src}".encode("utf-8")).hexdigest()[:8]
+                if cid_s in self._concepts:
+                    continue
+                body_stmts = raw_body_src.replace("_self_rec", cid_s)
+                if sum(1 for _ in ast.walk(canon_fn)) < 14:
+                    continue
+                ok_s, dom_s = self._verify_candidate_stmt_concept(body_stmts, arity_s)
+                if not ok_s:
+                    continue
+                p_tup = tuple(f"_v{i}" for i in range(arity_s))
+                entry_s = ConceptEntry(
+                    concept_id=cid_s,
+                    arity=arity_s,
+                    param_names=p_tup,
+                    body_expr="",
+                    domain_kind=dom_s,
+                    mdl_gain_bytes=max(8, executable_ast_bytes(body_stmts) // 2),
+                    corpus_sites=len(cloned_list),
+                    uses=0,
+                    verified_hits=0,
+                    body_stmts=body_stmts,
+                )
+                parsed_helper = ast.parse(entry_s.render_helper_def()).body[0]
+                if isinstance(parsed_helper, ast.FunctionDef):
+                    self._concepts[cid_s] = entry_s
+                    self._compiled_fn_asts[cid_s] = parsed_helper
+                    admitted.append(entry_s.to_dict())
+
         if admitted:
             self.save()
         return {
@@ -951,3 +1468,225 @@ def discover_ast_operator_morphisms() -> dict[str, Any]:
         "unary": unary_morphisms,
         "compare": cmp_morphisms,
     }
+
+
+def build_programmatic_ast_catamorphism_stmts(
+    arg0: str,
+    env_arg: str | None = None,
+    *,
+    has_bitwise: bool = False,
+) -> list[ast.stmt]:
+    """Programmatically construct AST-algebra structural catamorphism statements (zero string templates)."""
+    morphisms = discover_ast_operator_morphisms()
+    excluded_bin = {"Pow", "LShift", "MatMult"} | (set() if has_bitwise else {"BitAnd", "BitOr", "BitXor", "RShift"})
+    bin_keys: list[ast.expr] = []
+    bin_vals: list[ast.expr] = []
+    for ast_cls_nm, spec in sorted(morphisms["binary"].items()):
+        if ast_cls_nm in excluded_bin:
+            continue
+        op_attr = str(spec["operator_attr"])
+        op_ref: ast.expr = ast.Attribute(value=ast.Name(id="_o", ctx=ast.Load()), attr=op_attr, ctx=ast.Load())
+        if spec.get("needs_zero_guard"):
+            z_ident = spec.get("zero_identity", 0)
+            op_ref = ast.Call(
+                func=ast.Name(id="_z", ctx=ast.Load()),
+                args=[op_ref] + ([ast.Constant(value=z_ident)] if z_ident != 0 else []),
+                keywords=[],
+            )
+        bin_keys.append(ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr=ast_cls_nm, ctx=ast.Load()))
+        bin_vals.append(op_ref)
+
+    excluded_un = set() if has_bitwise else {"Invert", "Not"}
+    un_keys = [
+        ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr=k, ctx=ast.Load())
+        for k in sorted(morphisms["unary"].keys())
+        if k not in excluded_un
+    ]
+    un_vals = [
+        ast.Attribute(value=ast.Name(id="_o", ctx=ast.Load()), attr=morphisms["unary"][k], ctx=ast.Load())
+        for k in sorted(morphisms["unary"].keys())
+        if k not in excluded_un
+    ]
+    cmp_keys = [
+        ast.Attribute(value=ast.Name(id="_a", ctx=ast.Load()), attr=k, ctx=ast.Load())
+        for k in sorted(morphisms["compare"].keys())
+    ]
+    cmp_vals = [
+        ast.Attribute(value=ast.Name(id="_o", ctx=ast.Load()), attr=morphisms["compare"][k], ctx=ast.Load())
+        for k in sorted(morphisms["compare"].keys())
+    ]
+
+    def _N(nm: str, store: bool = False) -> ast.Name:
+        return ast.Name(id=nm, ctx=ast.Store() if store else ast.Load())
+
+    def _A(base: ast.expr, attr: str) -> ast.Attribute:
+        return ast.Attribute(value=base, attr=attr, ctx=ast.Load())
+
+    def _C(fn_expr: ast.expr, *args: ast.expr, **kw: ast.expr) -> ast.Call:
+        return ast.Call(
+            func=fn_expr,
+            args=list(args),
+            keywords=[ast.keyword(arg=k, value=v) for k, v in kw.items()],
+        )
+
+    def _isinst(cls_attr: str) -> ast.Call:
+        return _C(_N("isinstance"), _N("n"), _A(_N("_a"), cls_attr))
+
+    def _rec(sub: ast.expr) -> ast.Call:
+        return _C(_N("_f"), sub)
+
+    env_expr: ast.expr = (
+        _C(_N("dict"), ast.BoolOp(op=ast.Or(), values=[_N(env_arg), ast.Dict(keys=[], values=[])]))
+        if env_arg
+        else ast.Dict(keys=[], values=[])
+    )
+
+    zero_guard_assign = ast.Assign(
+        targets=[_N("_z", store=True)],
+        value=ast.Lambda(
+            args=ast.arguments(
+                posonlyargs=[],
+                args=[ast.arg(arg="f"), ast.arg(arg="z")],
+                vararg=None,
+                kwonlyargs=[],
+                kw_defaults=[],
+                kwarg=None,
+                defaults=[ast.Constant(value=0)],
+            ),
+            body=ast.Lambda(
+                args=ast.arguments(
+                    posonlyargs=[],
+                    args=[ast.arg(arg="x"), ast.arg(arg="y")],
+                    vararg=None,
+                    kwonlyargs=[],
+                    kw_defaults=[],
+                    kwarg=None,
+                    defaults=[],
+                ),
+                body=ast.IfExp(
+                    test=ast.Compare(left=_N("y"), ops=[ast.Eq()], comparators=[ast.Constant(value=0)]),
+                    body=_N("z"),
+                    orelse=_C(_N("f"), _N("x"), _N("y")),
+                ),
+            ),
+        ),
+    )
+
+    fold_branches: list[ast.stmt] = [
+        ast.If(test=_isinst("Expression"), body=[ast.Return(value=_rec(_A(_N("n"), "body")))], orelse=[]),
+        ast.If(
+            test=ast.BoolOp(
+                op=ast.And(),
+                values=[
+                    _isinst("Constant"),
+                    ast.Compare(
+                        left=_C(_N("type"), _A(_N("n"), "value")),
+                        ops=[ast.In()],
+                        comparators=[ast.Tuple(elts=[_N("int"), _N("float"), _N("bool")], ctx=ast.Load())],
+                    ),
+                ],
+            ),
+            body=[ast.Return(value=_A(_N("n"), "value"))],
+            orelse=[],
+        ),
+        ast.If(
+            test=ast.BoolOp(
+                op=ast.And(),
+                values=[_isinst("Name"), ast.Compare(left=_A(_N("n"), "id"), ops=[ast.In()], comparators=[_N("_e")])],
+            ),
+            body=[ast.Return(value=ast.Subscript(value=_N("_e"), slice=_A(_N("n"), "id"), ctx=ast.Load()))],
+            orelse=[],
+        ),
+        ast.If(
+            test=_isinst("UnaryOp"),
+            body=[
+                ast.Return(
+                    value=_C(
+                        ast.Subscript(value=_N("_u"), slice=_C(_N("type"), _A(_N("n"), "op")), ctx=ast.Load()),
+                        _rec(_A(_N("n"), "operand")),
+                    )
+                )
+            ],
+            orelse=[],
+        ),
+        ast.If(
+            test=_isinst("BinOp"),
+            body=[
+                ast.Return(
+                    value=_C(
+                        ast.Subscript(value=_N("_b"), slice=_C(_N("type"), _A(_N("n"), "op")), ctx=ast.Load()),
+                        _rec(_A(_N("n"), "left")),
+                        _rec(_A(_N("n"), "right")),
+                    )
+                )
+            ],
+            orelse=[],
+        ),
+        ast.If(
+            test=_isinst("IfExp"),
+            body=[
+                ast.Return(
+                    value=ast.IfExp(
+                        test=_rec(_A(_N("n"), "test")),
+                        body=_rec(_A(_N("n"), "body")),
+                        orelse=_rec(_A(_N("n"), "orelse")),
+                    )
+                )
+            ],
+            orelse=[],
+        ),
+        ast.Return(
+            value=_C(
+                ast.Subscript(
+                    value=_N("_c"),
+                    slice=_C(
+                        _N("type"),
+                        ast.Subscript(value=_A(_N("n"), "ops"), slice=ast.Constant(value=0), ctx=ast.Load()),
+                    ),
+                    ctx=ast.Load(),
+                ),
+                _rec(_A(_N("n"), "left")),
+                _rec(ast.Subscript(value=_A(_N("n"), "comparators"), slice=ast.Constant(value=0), ctx=ast.Load())),
+            )
+        ),
+    ]
+
+    fold_fn = ast.FunctionDef(
+        name="_f",
+        args=ast.arguments(
+            posonlyargs=[],
+            args=[ast.arg(arg="n")],
+            vararg=None,
+            kwonlyargs=[],
+            kw_defaults=[],
+            kwarg=None,
+            defaults=[],
+        ),
+        body=fold_branches,
+        decorator_list=[],
+        returns=None,
+    )
+
+    stmts: list[ast.stmt] = [
+        ast.Import(names=[ast.alias(name="ast", asname="_a"), ast.alias(name="operator", asname="_o")]),
+        ast.Assign(targets=[_N("_e", store=True)], value=env_expr),
+        zero_guard_assign,
+        ast.Assign(targets=[_N("_b", store=True)], value=ast.Dict(keys=bin_keys, values=bin_vals)),
+        ast.Assign(targets=[_N("_u", store=True)], value=ast.Dict(keys=un_keys, values=un_vals)),
+        ast.Assign(targets=[_N("_c", store=True)], value=ast.Dict(keys=cmp_keys, values=cmp_vals)),
+        fold_fn,
+        ast.Return(
+            value=_C(
+                _N("_f"),
+                _C(
+                    _A(_N("_a"), "parse"),
+                    _C(_A(_C(_N("str"), _N(arg0)), "strip")),
+                    mode=ast.Constant(value="eval"),
+                ),
+            )
+        ),
+    ]
+    for st in stmts:
+        ast.fix_missing_locations(st)
+    return stmts
+

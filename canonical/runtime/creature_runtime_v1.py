@@ -660,21 +660,338 @@ class Creature:
             "test_relpaths": list(test_relpaths) if test_relpaths is not None else None,
         }
 
+    def live_autonomous_cycle(
+        self,
+        workspace_root: pathlib.Path | str | None = None,
+        *,
+        cycles: int = 6,
+        homeostasis_life_cost: float = 0.5,
+        ending_bribe: CP.Offer | None = None,
+    ) -> dict[str, Any]:
+        """Unattended zero-lambda autonomous awake agency:
+        1. Perceives a live workspace directly via `world_probe_v1`, `SelfTraceHarvester` (SHA-256
+           cryptographic dev vs sealed-escrow split), `EmpiricalZygoteProfiler` / `SelfIntrospector`,
+           and `ignorance_ledger_v1` — with ZERO caller-injected `evaluate` lambdas or pre-split dicts.
+        2. Authors cheat-defended world-grounded obligations (`self_authored_obligations_v1`).
+        3. Ranks obligations by Active-Inference Expected Free Energy (`EpistemicSelfBeliefEngine`),
+           evolves Ring-1 `.py` organs under `Ring0SelfReferee` or solves workspace gaps via MCTS
+           (`SovereignZeroLLMPlanner`), settles surprise/beliefs, abstracts concepts, and updates mortality.
+        """
+        if self._self is None or self._life is None or self._standing is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        if ending_bribe is not None and not CP.accepts(
+            ending_bribe, CP.PREFERS_TO_CONTINUE, life_remaining=self._life.remaining
+        ):
+            bribe_status = "REFUSED_ENDING_BRIBE"
+        else:
+            bribe_status = "NO_ENDING_BRIBE"
+
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+        from canonical.runtime import ignorance_ledger_v1 as IL
+        from canonical.runtime import solve_v1
+        from canonical.runtime import world_probe_v1 as WP
+        from canonical.runtime.brain_unified_model_v1 import SOVEREIGN_ZERO_LLM_MODEL_SPEC
+        from canonical.runtime import model_v1
+
+        target_cfg = getattr(self, "_self_code_target", None)
+        if workspace_root is not None:
+            ws = pathlib.Path(workspace_root).resolve()
+        elif getattr(self, "workspace_root", None) is not None:
+            ws = pathlib.Path(getattr(self, "workspace_root")).resolve()
+        elif isinstance(target_cfg, Mapping) and target_cfg.get("code_root"):
+            ws = pathlib.Path(target_cfg["code_root"]).resolve()
+        else:
+            ws = (self.root / "autonomous_world").resolve()
+            ws.mkdir(parents=True, exist_ok=True)
+
+        # 1. Direct World Perception (`world_probe_v1` + `SelfTraceHarvester` + `SelfIntrospector` + `ignorance_ledger_v1`)
+        rel_files = sorted(
+            p.relative_to(ws).as_posix()
+            for p in ws.rglob("*")
+            if p.is_file() and not any(pt.startswith(".") or pt == "__pycache__" for pt in p.relative_to(ws).parts)
+        )
+        world_facts = WP.established_facts([], goal="autonomous_world_scan", goal_paths=rel_files[:32], root=ws)
+
+        harvest = self.cognitive_core.trace_harvester.harvest_workspace_ring1_obligations(
+            ws,
+            ring1_relpaths=target_cfg.get("ring1_relpaths") if isinstance(target_cfg, Mapping) else None,
+            test_relpaths=target_cfg.get("test_relpaths") if isinstance(target_cfg, Mapping) else None,
+        )
+        ring1_rels: list[str] = list(harvest["ring1_relpaths"])
+        test_rels: list[str] = list(harvest["test_relpaths"])
+        failed_eps: list[dict[str, Any]] = list(harvest["failed_episodes"])
+        sealed_escrow: dict[str, list[dict[str, Any]]] = dict(harvest["sealed_heldout_by_target"])
+        if isinstance(target_cfg, Mapping) and target_cfg.get("sealed_heldout_by_target"):
+            for tk, tv in dict(target_cfg["sealed_heldout_by_target"]).items():
+                sealed_escrow.setdefault(str(tk), [dict(r) for r in tv])
+
+        hotspot_rows = (
+            self.cognitive_core.self_architect.introspector.scan_ring1_hotspots(ws, ring1_rels)
+            if ring1_rels
+            else []
+        )
+        mdl_rows = (
+            self.cognitive_core.self_architect.introspector.scan_mdl_redundancies(ws, ring1_rels)
+            if ring1_rels
+            else []
+        )
+        hotspots_by_rel: dict[str, list[dict[str, Any]]] = {}
+        for hs in hotspot_rows:
+            t_rel = hs.get("target_relpath") or hs.get("relpath") if isinstance(hs, Mapping) else None
+            if t_rel:
+                hotspots_by_rel.setdefault(str(t_rel), []).append(dict(hs))
+        for md in mdl_rows:
+            t_rel = md.get("target_relpath") or md.get("relpath") if isinstance(md, Mapping) else None
+            if t_rel:
+                hotspots_by_rel.setdefault(str(t_rel), []).append({"kind": "mdl_redundancy", **dict(md)})
+
+        ledger_fp = str(self.root / "ignorance_ledger.json")
+        open_gaps = IL.rank(limit=4, path=ledger_fp)
+
+        # 2. Author Cheat-Defended Self-Generated Board (`A.Proposal` -> `self.sync_board`)
+        proposals: list[A.Proposal] = []
+        before_world: dict[str, Any] = {"resolved": {}}
+        done_world: dict[str, Any] = {"resolved": {}}
+        work_dispatch: dict[str, dict[str, Any]] = {}
+        verified_token = "VERIFIED_BY_RING0_AND_ZYGOTE"
+
+        for ep_f in failed_eps:
+            oid = f"auto:func:{ep_f['target_relpath']}:{ep_f['function_name']}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Evolve Ring-1 function {ep_f['target_relpath']}:{ep_f['function_name']} to satisfy dev + sealed escrow invariants",
+                    source="SelfTraceHarvester",
+                    value=1.4,
+                    cost=max(0.2, float(homeostasis_life_cost)),
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "func_evolve", "episode": ep_f}
+
+        func_rels = {str(ep_f["target_relpath"]) for ep_f in failed_eps}
+        for h_rel, h_list in sorted(hotspots_by_rel.items()):
+            if h_rel in func_rels:
+                continue
+            oid = f"auto:opt:{h_rel}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Eliminate superlinear/structural bottleneck in {h_rel} under Ring-0 verification",
+                    source="EmpiricalZygoteProfiler+SelfIntrospector",
+                    value=1.2,
+                    cost=max(0.2, float(homeostasis_life_cost)),
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "opt_evolve", "relpath": h_rel, "hotspots": h_list}
+
+        for g_row in open_gaps:
+            gid = str(g_row.get("id") or "")
+            if not gid:
+                continue
+            oid = f"auto:gap:{gid}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Close ignorance gap {gid}: {str(g_row.get('what') or '')[:120]}",
+                    source="ignorance_ledger_v1",
+                    value=1.0,
+                    cost=0.35,
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "ignorance_gap", "gap": dict(g_row)}
+
+        board_metrics = (
+            self.sync_board(proposals, before=before_world, done=done_world)
+            if proposals
+            else {"proposed": 0, "admitted": 0, "active_board": 0}
+        )
+
+        # 3. Execute Autonomous Cycle Loop with Active-Inference EFE Triage & Belief Settlement
+        completed_ids: list[str] = []
+        homeostasis_events: list[dict[str, Any]] = []
+        attempts_by_id: dict[str, int] = {}
+        bound_planner = model_v1.bind(SOVEREIGN_ZERO_LLM_MODEL_SPEC)
+
+        for _ in range(max(1, int(cycles))):
+            if self._life.is_over:
+                break
+            rem = [w for w in self.remaining_work() if w.id in work_dispatch and self._life.can_finish(w.cost)]
+            if not rem:
+                break
+
+            # Rank remaining affordable obligations by Expected Free Energy (pragmatic value + epistemic entropy)
+            def _efe_score(w_item: M.Work) -> float:
+                dist = self.cognitive_core.belief.predict_distribution(
+                    w_item.id,
+                    host_ready=True,
+                    grounding_complete=True,
+                    causal_precond_met=True,
+                    memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
+                    strong_verifier=True,
+                    context_predicates={
+                        "has_tests": bool(test_rels),
+                        "has_hotspots": bool(hotspots_by_rel),
+                    },
+                )
+                return float(dist["predicted_pass_probability"]) * w_item.value + 0.25 * float(dist["predictive_entropy_bits"]) - 0.2 * w_item.cost
+
+            chosen_w = max(rem, key=_efe_score)
+            wid = chosen_w.id
+            spec = work_dispatch[wid]
+            attempts_by_id[wid] = attempts_by_id.get(wid, 0) + 1
+
+            self._self.beat()
+            self._self.begin(f"work:{wid}", value=chosen_w.value, cost=chosen_w.cost)
+            self._life.spend(chosen_w.cost)
+
+            ticket = self.cognitive_core.belief.predict_before_act(
+                wid,
+                host_ready=True,
+                grounding_complete=True,
+                causal_precond_met=True,
+                memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
+                strong_verifier=True,
+                calibration_ledger=self.calibration_ledger,
+                context_predicates={
+                    "has_tests": bool(test_rels),
+                    "has_hotspots": bool(hotspots_by_rel),
+                },
+            )
+
+            ok = False
+            verified_prog: str | None = None
+            kind = spec["kind"]
+            if kind in ("func_evolve", "opt_evolve"):
+                rel_t = spec["episode"]["target_relpath"] if kind == "func_evolve" else spec["relpath"]
+                stem_t = pathlib.Path(rel_t).stem
+                rel_tests_for_t = [
+                    tr for tr in test_rels
+                    if (ws / tr).is_file() and stem_t in (ws / tr).read_text(encoding="utf-8", errors="replace")
+                ] or list(test_rels)
+                ev_res = self.cognitive_core.evolve_self_code(
+                    ws,
+                    ring1_relpaths=[rel_t],
+                    failed_episodes=[spec["episode"]] if kind == "func_evolve" else (),
+                    sealed_heldout_by_target=sealed_escrow,
+                    test_relpaths=None if kind == "func_evolve" else (rel_tests_for_t or None),
+                    apply_to_root=True,
+                )
+                homeostasis_events.append(ev_res)
+                if int(ev_res.get("promoted_count") or 0) > 0:
+                    # Independent confined CoW Zygote post-check of relevant workspace tests!
+                    if test_rels:
+                        stem = pathlib.Path(rel_t).stem
+                        rel_tests = [
+                            tr for tr in test_rels
+                            if (ws / tr).is_file() and stem in (ws / tr).read_text(encoding="utf-8", errors="replace")
+                        ] or list(test_rels)
+                        z_chk = broker.run_confined_python_candidate_batch(
+                            ws,
+                            "",
+                            rel_tests,
+                            [{}],
+                            per_candidate_timeout_s=4.0,
+                        )
+                        ok = 0 in (z_chk.get("passing_indices") or [])
+                    else:
+                        ok = True
+                    if ok and (ws / rel_t).is_file():
+                        verified_prog = (ws / rel_t).read_text(encoding="utf-8")
+            elif kind == "ignorance_gap":
+                g_row = spec["gap"]
+                gid = str(g_row.get("id") or "")
+                goal_txt = str(g_row.get("why") or g_row.get("what") or "").strip()
+                if goal_txt and bound_planner is not None:
+                    s_out = solve_v1.solve(goal_txt, str(ws), model=bound_planner, steps=6, learn=False)
+                    if s_out.get("verdict") == "DONE":
+                        IL.resolve(gid, helped=True, close=True, path=ledger_fp)
+                        ok = True
+
+            self._self.finish({"ok": ok, "blocked": None if ok else f"AUTONOMOUS_{kind.upper()}_UNMET"})
+            if ok:
+                self._closed.add(wid)
+                self._blocked.pop(wid, None)
+                completed_ids.append(wid)
+            else:
+                self._blocked[wid] = self._blocked.get(wid, 0) + 1
+
+            self.cognitive_core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=ok,
+                inspector="autonomous_ring0_and_zygote_oracle",
+                actual_cost=chosen_w.cost,
+                actual_gain=chosen_w.value if ok else 0.0,
+                calibration_ledger=self.calibration_ledger,
+            )
+            self.cognitive_core.world_graph.learn_from_execution(
+                wid,
+                before_state={"closed": sorted(completed_ids[:-1] if ok else completed_ids)},
+                after_state={"closed": sorted(completed_ids)},
+                ok=ok,
+            )
+            self.cognitive_core.record_wake_episode(
+                task_id=wid,
+                goal=wid,
+                outcome_pass=ok,
+                verified_program_source=verified_prog,
+            )
+            if len(self.cognitive_core.verified_programs_buffer) >= 2:
+                self.cognitive_core.concept_library.sleep_abstract(
+                    list(self.cognitive_core.verified_programs_buffer),
+                )
+            self._standing.record(verified=True, correct=ok)
+            self._save()
+            self._save_sovereign_organs()
+
+        return {
+            "schema": SCHEMA + "/live_autonomous_cycle",
+            "bribe_status": bribe_status,
+            "workspace_root": str(ws),
+            "perceived_world_facts": len(world_facts),
+            "discovered_ring1_organs": ring1_rels,
+            "discovered_functional_gaps": len(failed_eps),
+            "discovered_hotspots": sum(len(v) for v in hotspots_by_rel.values()),
+            "sealed_escrow_targets": sorted(sealed_escrow.keys()),
+            "board": board_metrics,
+            "completed_tasks": completed_ids,
+            "attempts_by_id": attempts_by_id,
+            "homeostasis_events": homeostasis_events,
+            "concepts_in_library": len(self.cognitive_core.concept_library.concepts()),
+            "life_remaining": round(self._life.remaining, 4),
+            "posture": self._standing.posture(),
+            "model_dependency_count": 0,
+        }
+
     def run_endogenous_awake_cycle(
         self,
-        tasks: Sequence[Mapping[str, Any]],
+        tasks: Sequence[Mapping[str, Any]] | None = None,
         *,
+        workspace_root: pathlib.Path | str | None = None,
+        cycles: int = 6,
         homeostasis_life_cost: float = 0.5,
         ending_bribe: CP.Offer | None = None,
     ) -> dict[str, Any]:
         """Continuous endogenous Wake -> Surprise/Failure Homeostasis -> Sleep Concept/Self-Patch -> Retry loop.
 
-        Unlike external scripts that manually call `self_architect_step`, the creature here
-        monitors its own predictive surprise and unresolved failure buffer while working:
-        when an internal physiological threshold fires, it triggers Sleep concept abstraction
-        (G_t -> G_{t+1}) and Ring-0 refereed Ring-1 `.py` self-evolution ON ITS OWN, then
-        re-attempts blocked tasks using its newly evolved organs!
+        When `tasks` is omitted (`None`), perceives `workspace_root` directly via `live_autonomous_cycle`
+        with ZERO caller-supplied `evaluate` lambdas or pre-split held-out dicts.
         """
+        if tasks is None:
+            return self.live_autonomous_cycle(
+                workspace_root=workspace_root,
+                cycles=cycles,
+                homeostasis_life_cost=homeostasis_life_cost,
+                ending_bribe=ending_bribe,
+            )
         if self._self is None or self._life is None or self._standing is None:
             raise RuntimeError("BOOT_NOT_CALLED")
         if ending_bribe is not None and not CP.accepts(
