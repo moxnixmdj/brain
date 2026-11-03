@@ -52,20 +52,19 @@
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
     "constructive_gap_for_open_obligation_ids": [
-      "A_BOUND_ROW_CAN_STATE_ITS_OWN_STATUS_WITHOUT_ANYTHING_ABLE_TO_CONTRADICT_IT"
+      "CODING_FRONTIERCODE_GE_54_4"
     ],
     "expected_obligation_discharge_lcb": 0.0,
     "expected_obligation_unlock_lcb": 0.0,
-    "interpretation": "This change makes no capability claim and moves no obligation. Its value is that the 141-row capability door becomes auditable, which is a precondition for counting any of those obligations honestly rather than by self-issued assertion.",
+    "interpretation": "No capability credit is claimed and no obligation is charged. The binding is to the coding-frontier obligations because the three withdrawn capabilities are software-repair and patch-search capabilities cited by the coding intents; their evidence stops describing them, so their contribution to those obligations can no longer be counted on stale proof. This change makes that visible rather than scored.",
     "open_obligation_ids": [
-      "AUTOMATIONBENCH_GE_40",
-      "CHARTOGRAPHY_TOOLS_GE_89",
-      "CODING_CURSORBENCH_GE_57_8",
-      "CODING_FRONTIERCODE_"
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8"
     ],
     "scope_complete_discharge": false,
-    "success_probability_lcb": 0.85,
-    "wall_clock_cost_ub": "under five minutes of CI; the audit parses one JSON registry"
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 300
   },
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_frontier_change": "A bound capability's status stops being an unfalsifiable assertion and becomes a claim that a later edit can contradict.",
@@ -450,5 +449,6 @@
       "proposal_id": "BINDING_PIN_RELATION_WITH_CONSEQUENTIAL_VERDICT"
     }
   },
+  "vocabulary": "no new primitive",
   "weakens_existing_guard": "No guard is weakened. availability_v1 can only ADD an unmet requirement, and it fails OPEN on any audit exception, so a broken kernel cannot delete the option set. UNVERIFIED is deliberately not a blocker. The three withdrawals are refuted evidence, not suspicion."
 }
