@@ -88,6 +88,14 @@ def lesson(tmp_path):
     return store, oracle, before, after, result
 
 
+# NOTE (2026-11-03): several tests below hand `recall` a *stub* that returns a
+# forged or mutated `VerificationResult`, on purpose, to pin `evaluate()`'s
+# evidence checks. Those calls now pass `allow_simulated_oracle=True`, which is
+# the only release from the provenance gate in
+# `verified_skill_crystallizer_v1.recall_and_apply_verified` (a declared
+# TEST_SUITE must come from a contract oracle — see
+# `test_a_declared_test_suite_needs_a_contract_oracle_v1.py`). The assertions
+# are unchanged: a forged result must still be refused.
 def recall(store, source, verifier, **kwargs):
     args = dict(source_text=source, language='python', verifier=verifier,
                 scope_id=SCOPE, context=CONTEXT, required_verification_kind='TEST_SUITE')
@@ -112,7 +120,7 @@ def test_parse_only_wrong_lesson_never_obtains_behavioral_assurance(tmp_path):
     values = {}
     exec(weak['patched_source'], values)
     assert values['combine'](2, 3) == 6  # the deliberately wrong negative control
-    assert recall(store, before, lambda _: True) is None
+    assert recall(store, before, lambda _: True, allow_simulated_oracle=True) is None
     oracle = ProjectTestOracle(root, target, ['test_behavior.py'], SCOPE)
     assert recall(store, before, oracle) is None  # legacy record is unscoped
     rejected = store.crystallize_code_fix(before_snippet=before, after_snippet=wrong, language='python',
@@ -140,7 +148,7 @@ def test_strict_verification_binds_candidate_scope_kind_and_nonempty_evidence(le
     if mutation == 'failed_returncode': value = replace(measured, evidence={**measured.evidence, 'returncode': 1})
     if mutation == 'bool_returncode': value = replace(measured, evidence={**measured.evidence, 'returncode': False})
     if mutation == 'missing_program': value = replace(measured, evidence={**measured.evidence, 'measurement_program_sha256': ''})
-    assert recall(store, before, lambda _: value) is None
+    assert recall(store, before, lambda _: value, allow_simulated_oracle=True) is None
 
 
 def test_real_compilation_has_compilation_only_assurance():
@@ -212,7 +220,7 @@ def test_invalidation_during_verification_refuses_return(lesson):
     def invalidate_then_check(candidate):
         assert VerifiedSkillStore(store.db_path, seed=False).invalidate(result['skill_id'], 'new counterexample')
         return oracle(candidate)
-    assert recall(store, before, invalidate_then_check) is None
+    assert recall(store, before, invalidate_then_check, allow_simulated_oracle=True) is None
 
 
 def test_external_sqlite_deletion_and_restore_refresh_warm_cache(lesson):

@@ -198,6 +198,13 @@ class GenuineSuiteGateTest(unittest.TestCase):
         this recall is scoped -- so a bool would leave this test green with the
         kind gate deleted. Right scope, wrong kind, means only
         `result.kind != required_kind` can refuse it.
+
+        UPDATED 2026-11-03: `allow_simulated_oracle=True` is now required here,
+        because a TEST_SUITE *declaration* backed by a non-contract callable is
+        refused outright by the provenance gate (pinned by
+        `test_a_declared_test_suite_needs_a_contract_oracle_v1.py`). Without the
+        flag this call raises and the kind check never runs, so the assertion
+        would go green while pinning nothing. The assertion itself is unchanged.
         """
         store = K.VerifiedSkillStore(pathlib.Path(self._tmp.name) / "wrong.db", seed=False)
         store.crystallize_code_fix(
@@ -221,6 +228,7 @@ class GenuineSuiteGateTest(unittest.TestCase):
             required_verification_kind="TEST_SUITE",
             scope_id=SCOPE,
             context=CONTEXT,
+            allow_simulated_oracle=True,
         )
         self.assertIsNone(weak)
 

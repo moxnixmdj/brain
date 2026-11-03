@@ -23,6 +23,65 @@ KINDS = frozenset({'CALLER_PREDICATE', 'SYNTAX', 'COMPILATION', 'TEST_SUITE'})
 def source_sha256(source: str) -> str:
     return hashlib.sha256(source.encode('utf-8')).hexdigest()
 
+# ---------------------------------------------------------------------------
+# Oracle provenance: a DECLARATION is not a CAPABILITY.
+#
+# `evaluate()` has always required the returned `kind` to match the caller's
+# declaration, and it has always rejected a bool callback demanding TEST_SUITE.
+# What it could not see is where a `VerificationResult` claiming TEST_SUITE came
+# from: any callable returning one satisfied the gate, including a hand-written
+# stub with fabricated evidence fields. Measured 2026-11-03: the kernel will
+# generate broadened candidate patterns only under TEST_SUITE, which is safe
+# only if TEST_SUITE is a contract-checked oracle rather than a label. Every
+# legitimate TEST_SUITE result in this tree is produced by `ProjectTestOracle`
+# or `ConfinedLanguageTestOracle`, both of which real-run a suite and read a
+# non-zero test count, so the set of producers is closed and attributable.
+#
+# `ALLOW_SIMULATED_ORACLE` exists for tests that exercise token-matching logic
+# with a stub. It is the only release from this gate, and a caller that sets it
+# never receives a broadened pattern. It is deliberately a loud, named opt-out
+# rather than a silent default.
+# ---------------------------------------------------------------------------
+ORACLE_PROVENANCE_ATTR = '_brain_contract_oracle'
+CONTRACT_ORACLE_CLASSES = ('ProjectTestOracle', 'ConfinedLanguageTestOracle')
+
+
+def mark_contract_oracle(verifier):
+    """Attribute a verifier as a contract-checked suite oracle.
+
+    The marker records the *class that constructed it*, not a bare bool. A bool
+    could be copied onto an impostor; a class identity cannot be forged by naming
+    a class the same thing.
+    """
+    owner = type(verifier)
+    # Identity requires the class to be *this module's* class, not merely a class
+    # that chose the same name. An in-tree caller that wants to forge this has to
+    # reach for `setattr` on its own type, which is a greppable act of forgery
+    # rather than an accident of naming.
+    if owner.__name__ not in CONTRACT_ORACLE_CLASSES or owner.__module__ != __name__:
+        raise ValueError('NOT_A_CONTRACT_ORACLE_CLASS')
+    try:
+        setattr(verifier, ORACLE_PROVENANCE_ATTR, owner)
+    except (AttributeError, TypeError) as exc:
+        raise ValueError('VERIFIER_CANNOT_BE_MARKED') from exc
+    return verifier
+
+
+def is_contract_oracle(verifier) -> bool:
+    """True only for a verifier this module itself marked.
+
+    Re-checks the class name at call time as well, so a marker copied onto an
+    unrelated callable cannot launder provenance. Deliberately NOT duck-typed.
+    """
+    if not callable(verifier):
+        return False
+    marker = getattr(verifier, ORACLE_PROVENANCE_ATTR, None)
+    if marker is None or marker is not type(verifier):
+        return False
+    owner = type(verifier)
+    return owner.__name__ in CONTRACT_ORACLE_CLASSES and owner.__module__ == __name__
+
+
 
 @dataclass(frozen=True)
 class VerificationResult:
@@ -168,6 +227,7 @@ class ProjectTestOracle:
             raise ValueError('SKILL_MUST_NOT_REWRITE_ITS_TESTS')
         if not scope_id:
             raise ValueError('VERIFICATION_SCOPE_REQUIRED')
+        mark_contract_oracle(self)
         self.target_path, self.test_paths, self.scope_id = target_path, selected, scope_id
         self.timeout_s = timeout_s
         self.calls = 0
@@ -244,6 +304,7 @@ class ConfinedLanguageTestOracle:
             raise ValueError('INVALID_SKILL_TARGET')
         if not scope_id:
             raise ValueError('VERIFICATION_SCOPE_REQUIRED')
+        mark_contract_oracle(self)
         self._initial_snap = rcb.snapshot_project(self.root)
         self.target_path = str(rel)
         self.test_paths = clean_tests

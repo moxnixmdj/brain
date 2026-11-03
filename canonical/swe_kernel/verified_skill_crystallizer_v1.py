@@ -28,7 +28,8 @@ from typing import Any, Callable, Mapping, Sequence
 from canonical.swe_kernel import python_scoped_edit_rule_v1 as _PY_EDIT
 
 from canonical.swe_kernel.skill_verification_contract_v1 import (
-    KINDS, VerificationResult, applicable, evaluate, normalize_contract, source_sha256,
+    KINDS, VerificationResult, applicable, evaluate, is_contract_oracle, normalize_contract,
+    source_sha256,
 )
 
 SCHEMA = "PROJECT_BRAIN_VERIFIED_SKILL_CRYSTALLIZER_V1"
@@ -1055,12 +1056,22 @@ class VerifiedSkillStore:
         allow_cross_scope_transfer: bool = False,
         now_world_fingerprint: Mapping[str, Any] | None = None,
         suspect_lines: Sequence[int] | None = None,
+        allow_simulated_oracle: bool = False,
     ) -> dict[str, Any] | None:
         """Propose only within recorded applicability and actual current assurance.
 
         Callbacks are trusted verifiers, not authenticated third-party attestations.
         Boolean callbacks never establish TEST_SUITE or whole-task correctness.
         Operator generalization is opt-in and requires scoped TEST_SUITE evidence.
+
+        Provenance (`P1`, 2026-11-03): a `TEST_SUITE` *declaration* is not a
+        `TEST_SUITE` *capability*. Broadened candidate patterns are only generated
+        when the verifier is one of this tree's contract-checked suite oracles
+        (`ProjectTestOracle`, `ConfinedLanguageTestOracle`), which real-run a suite
+        and read a non-zero test count. Any other callable declaring TEST_SUITE is
+        refused with `TEST_SUITE_REQUIRES_CONTRACT_ORACLE`. Tests that exercise
+        token matching with a stub pass `allow_simulated_oracle=True`, and such a
+        caller never receives a broadened candidate.
         """
         if required_verification_kind not in KINDS:
             raise ValueError('UNKNOWN_VERIFICATION_KIND')
@@ -1076,6 +1087,17 @@ class VerifiedSkillStore:
             raise ValueError('SCOPE_ESCALATION_REQUIRES_SCOPED_TEST_SUITE')
         if allow_cross_scope_transfer and (required_verification_kind != 'TEST_SUITE' or not scope_id):
             raise ValueError('CROSS_SCOPE_TRANSFER_REQUIRES_SCOPED_TEST_SUITE')
+        if type(allow_simulated_oracle) is not bool:
+            raise ValueError('INVALID_SIMULATED_ORACLE_SETTING')
+        # A declaration is not a capability. Only a contract-checked oracle may
+        # declare TEST_SUITE; anything else must say out loud that it is a stub,
+        # and a stub is not allowed to widen the pattern it is judging.
+        oracle_is_contract = is_contract_oracle(verifier)
+        if required_verification_kind == 'TEST_SUITE' and not oracle_is_contract and not allow_simulated_oracle:
+            raise ValueError('TEST_SUITE_REQUIRES_CONTRACT_ORACLE')
+        broadening_permitted = required_verification_kind == 'TEST_SUITE' and oracle_is_contract
+        if (allow_operator_generalization or allow_scope_escalation) and not broadening_permitted:
+            raise ValueError('PATTERN_BROADENING_REQUIRES_CONTRACT_ORACLE')
 
         from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
 
@@ -1244,7 +1266,7 @@ class VerifiedSkillStore:
             # `SYNTAX`, `COMPILATION`) NEVER receive broadened patterns.
             if (
                 not invalidated_mid_run
-                and required_verification_kind == "TEST_SUITE"
+                and broadening_permitted
                 and learned_scope != "SCOPE_STATEMENT"
             ):
                 narrowed = narrow_rule_at_apply_time(rule)
@@ -1354,7 +1376,7 @@ class VerifiedSkillStore:
         # 7-language Tree-Sitter CST skeleton `tree_sitter_cst_skill_skeleton_v1`).
         # Supported under legacy unscoped `CALLER_PREDICATE` and under contract-checked
         # `TEST_SUITE` (`ProjectTestOracle` / `ConfinedLanguageTestOracle`).
-        if allow_cross_language and required_verification_kind == 'TEST_SUITE' and scope_id:
+        if allow_cross_language and broadening_permitted and scope_id:
             try:
                 from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
                     recall_across_languages_cst,
