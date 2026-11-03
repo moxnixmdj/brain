@@ -38,10 +38,12 @@ import os
 import pathlib
 import tempfile
 import zlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import property_v1
+from canonical.swe_kernel import boundary_disjunction_normalization_v1 as _bdn
+from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import EClass, EGraph, ENode
 
 SCHEMA = "PROJECT_BRAIN_COMPOUNDING_CONCEPT_LIBRARY_V1"
 
@@ -226,12 +228,29 @@ def eval_pure_ast_expr(
             if hasattr(obj, "__dict__") and nd.attr in vars(obj):
                 return getattr(obj, nd.attr)
             raise UnsafeOrUnsupportedAST(f"UNSAFE_ATTR:{nd.attr}")
+        if isinstance(nd, ast.Lambda):
+            if nd.args.vararg or nd.args.kwarg or nd.args.kwonlyargs or nd.args.defaults:
+                raise UnsafeOrUnsupportedAST("COMPLEX_LAMBDA_ARGS")
+            lam_params = tuple(a.arg for a in nd.args.args)
+            captured_scope = dict(scope)
+
+            def _lam_closure(*c_args: Any, _lp: tuple[str, ...] = lam_params, _lb: ast.expr = nd.body, _cs: dict[str, Any] = captured_scope) -> Any:
+                if len(c_args) != len(_lp):
+                    raise UnsafeOrUnsupportedAST("LAMBDA_ARITY_MISMATCH")
+                call_sc = dict(_cs)
+                for p_n, p_v in zip(_lp, c_args):
+                    call_sc[p_n] = p_v
+                return _ev(_lb, call_sc)
+
+            return _lam_closure
         if isinstance(nd, ast.Call):
             if nd.keywords:
                 raise UnsafeOrUnsupportedAST("KEYWORD_CALL_UNSUPPORTED")
             args_v = [_ev(a, scope) for a in nd.args]
             if isinstance(nd.func, ast.Name):
                 fname = nd.func.id
+                if fname in scope and callable(scope[fname]):
+                    return scope[fname](*args_v)
                 if extra_callables and fname in extra_callables:
                     return extra_callables[fname](*args_v)
                 if fname in _PURE_CALLABLES:
@@ -417,6 +436,21 @@ def eval_pure_ast_function(
             if hasattr(obj, "__dict__") and expr.attr in vars(obj):
                 return getattr(obj, expr.attr)
             raise UnsafeOrUnsupportedAST(f"UNSAFE_ATTR:{expr.attr}")
+        if isinstance(expr, ast.Lambda):
+            if expr.args.vararg or expr.args.kwarg or expr.args.kwonlyargs or expr.args.defaults:
+                raise UnsafeOrUnsupportedAST("COMPLEX_LAMBDA_ARGS")
+            lam_params = tuple(a.arg for a in expr.args.args)
+            captured_scope = dict(scope)
+
+            def _fn_lam(*c_args: Any, _lp: tuple[str, ...] = lam_params, _lb: ast.expr = expr.body, _cs: dict[str, Any] = captured_scope) -> Any:
+                if len(c_args) != len(_lp):
+                    raise UnsafeOrUnsupportedAST("LAMBDA_ARITY_MISMATCH")
+                inner_sc = dict(_cs)
+                for p_n, p_v in zip(_lp, c_args):
+                    inner_sc[p_n] = p_v
+                return _eval_expr_in_scope(_lb, inner_sc, depth + 1)
+
+            return _fn_lam
         if isinstance(expr, ast.Call):
             if any(kw.arg is None for kw in expr.keywords):
                 raise UnsafeOrUnsupportedAST("KWARG_UNPACK")
@@ -715,22 +749,31 @@ def _canonicalize_pure_subtree(
 
 @dataclass(frozen=True)
 class ConceptEntry:
-    """Verified reusable concept primitive (combinator or HORS algorithmic function) in `G_t`."""
+    """Verified reusable concept primitive (combinator, HORS algorithmic function, or higher-order skeleton) in `G_t`."""
 
     concept_id: str
     arity: int
     param_names: tuple[str, ...]
     body_expr: str
-    domain_kind: str  # "numeric" | "sequence" | "string" | "mapping" | "any"
+    domain_kind: str  # "numeric" | "sequence" | "string" | "mapping" | "higher_order" | "any"
     mdl_gain_bytes: int
     corpus_sites: int
     uses: int = 0
     verified_hits: int = 0
     body_stmts: str = ""
+    callable_params: tuple[tuple[str, int], ...] = field(default_factory=tuple)
 
     @property
     def is_stmt_fn(self) -> bool:
         return bool(self.body_stmts.strip())
+
+    @property
+    def is_higher_order(self) -> bool:
+        return len(self.callable_params) > 0
+
+    @property
+    def callable_arity_map(self) -> dict[str, int]:
+        return dict(self.callable_params)
 
     @property
     def log_prior(self) -> float:
@@ -744,7 +787,7 @@ class ConceptEntry:
         return f"def {self.concept_id}({p_sig}):\n    return {self.body_expr}"
 
     def to_dict(self) -> dict[str, Any]:
-        out = {
+        out: dict[str, Any] = {
             "concept_id": self.concept_id,
             "arity": self.arity,
             "param_names": list(self.param_names),
@@ -757,12 +800,18 @@ class ConceptEntry:
         }
         if self.body_stmts:
             out["body_stmts"] = self.body_stmts
+        if self.callable_params:
+            out["callable_params"] = {k: int(v) for k, v in self.callable_params}
         return out
 
     @classmethod
     def from_dict(cls, raw: Mapping[str, Any]) -> "ConceptEntry":
         arity = int(raw["arity"])
         params = tuple(str(p) for p in (raw.get("param_names") or [f"_v{i}" for i in range(arity)]))
+        raw_cp = raw.get("callable_params")
+        cp_tup: tuple[tuple[str, int], ...] = ()
+        if isinstance(raw_cp, Mapping):
+            cp_tup = tuple((str(k), int(v)) for k, v in sorted(raw_cp.items()))
         return cls(
             concept_id=str(raw["concept_id"]),
             arity=arity,
@@ -774,7 +823,351 @@ class ConceptEntry:
             uses=int(raw.get("uses") or 0),
             verified_hits=int(raw.get("verified_hits") or 0),
             body_stmts=str(raw.get("body_stmts") or ""),
+            callable_params=cp_tup,
         )
+
+
+def canonicalize_ast_via_egraph(mod: ast.Module) -> ast.Module:
+    """Normalize boundary disjunctions & saturate sound non-erasing algebraic identities via `EGraph`."""
+    src_text = ast.unparse(mod)
+    try:
+        bdn_res = _bdn.normalize(src_text)
+        norm_text = bdn_res if isinstance(bdn_res, str) else str((bdn_res or {}).get("normalized") or src_text)
+        work_mod = ast.parse(norm_text)
+    except Exception:
+        work_mod = copy.deepcopy(mod)
+
+    _COMMUTATIVE_OPS = (ast.Add, ast.Mult, ast.BitAnd, ast.BitOr, ast.BitXor)
+    _BIN_OP_TO_TAG = {
+        ast.Add: "bin:+",
+        ast.Sub: "bin:-",
+        ast.Mult: "bin:*",
+    }
+    _TAG_TO_BIN_OP: dict[str, type[ast.operator]] = {
+        "bin:+": ast.Add,
+        "bin:-": ast.Sub,
+        "bin:*": ast.Mult,
+    }
+
+    def _saturate_pure_arith(expr: ast.expr) -> ast.expr:
+        eg = EGraph()
+        leaf_asts: dict[str, ast.expr] = {}
+
+        def _insert(nd: ast.expr) -> int:
+            if isinstance(nd, ast.Constant) and isinstance(nd.value, int) and not isinstance(nd.value, bool):
+                op_k = f"int:{nd.value}"
+                leaf_asts[op_k] = ast.Constant(value=nd.value)
+                return eg.add(ENode(op_k, ()))
+            if isinstance(nd, ast.Name) and isinstance(nd.ctx, ast.Load):
+                op_k = f"var:{nd.id}"
+                leaf_asts[op_k] = ast.Name(id=nd.id, ctx=ast.Load())
+                return eg.add(ENode(op_k, ()))
+            if isinstance(nd, ast.BinOp) and type(nd.op) in _BIN_OP_TO_TAG:
+                lc = _insert(nd.left)
+                rc = _insert(nd.right)
+                tag = _BIN_OP_TO_TAG[type(nd.op)]
+                cid = eg.add(ENode(tag, (lc, rc)))
+                # Commutativity on pure integer/variable addition & multiplication
+                if isinstance(nd.op, (ast.Add, ast.Mult)):
+                    comm_id = eg.add(ENode(tag, (rc, lc)))
+                    eg.union(cid, comm_id)
+                # Non-variable-erasing identity & doubling rules:
+                # x + 0 == x, 0 + x == x, x - 0 == x, x * 1 == x, 1 * x == x, x + x == 2 * x
+                z0 = eg.memo.get(ENode("int:0", ()))
+                z1 = eg.memo.get(ENode("int:1", ()))
+                if tag == "bin:+":
+                    if z0 is not None and eg.find(rc) == eg.find(z0):
+                        eg.union(cid, lc)
+                    if z0 is not None and eg.find(lc) == eg.find(z0):
+                        eg.union(cid, rc)
+                    if eg.find(lc) == eg.find(rc):
+                        c2 = eg.add(ENode("int:2", ()))
+                        leaf_asts["int:2"] = ast.Constant(value=2)
+                        mul2 = eg.add(ENode("bin:*", (c2, lc)))
+                        eg.union(cid, mul2)
+                elif tag == "bin:-":
+                    if z0 is not None and eg.find(rc) == eg.find(z0):
+                        eg.union(cid, lc)
+                elif tag == "bin:*":
+                    if z1 is not None and eg.find(rc) == eg.find(z1):
+                        eg.union(cid, lc)
+                    if z1 is not None and eg.find(lc) == eg.find(z1):
+                        eg.union(cid, rc)
+                return eg.find(cid)
+            dump_k = "opaque:" + hashlib.sha256(ast.dump(nd, include_attributes=False).encode("utf-8")).hexdigest()[:12]
+            leaf_asts[dump_k] = copy.deepcopy(nd)
+            return eg.add(ENode(dump_k, ()))
+
+        root_cid = _insert(expr)
+        eg.rebuild()
+        # Sanity check EClass structure & extract minimum-AST-cost canonical node
+        _ = [isinstance(ec, EClass) for ec in eg.classes.values()]
+        op_costs: dict[str, int] = {"bin:+": 4, "bin:-": 4, "bin:*": 3}
+        for k_op in leaf_asts:
+            op_costs[k_op] = 1 if k_op.startswith(("int:", "var:")) else 5
+
+        memo_best: dict[int, tuple[tuple[int, str], ENode]] = {}
+        changed = True
+        while changed:
+            changed = False
+            for cid, eclass in eg.classes.items():
+                rcid = eg.find(cid)
+                for en in eclass.nodes:
+                    if any(eg.find(ch) not in memo_best for ch in en.children):
+                        continue
+                    c_val = op_costs.get(en.op, 6) + sum(memo_best[eg.find(ch)][0][0] for ch in en.children)
+                    c_lex = en.op + "(" + ",".join(memo_best[eg.find(ch)][0][1] for ch in en.children) + ")"
+                    rank_key = (c_val, c_lex)
+                    if rcid not in memo_best or rank_key < memo_best[rcid][0]:
+                        memo_best[rcid] = (rank_key, en)
+                        changed = True
+
+        def _reconstruct(cid: int) -> ast.expr:
+            rc = eg.find(cid)
+            if rc not in memo_best:
+                return copy.deepcopy(expr)
+            en = memo_best[rc][1]
+            if en.op in leaf_asts:
+                return copy.deepcopy(leaf_asts[en.op])
+            if en.op in _TAG_TO_BIN_OP and len(en.children) == 2:
+                return ast.BinOp(
+                    left=_reconstruct(en.children[0]),
+                    op=_TAG_TO_BIN_OP[en.op](),
+                    right=_reconstruct(en.children[1]),
+                )
+            return copy.deepcopy(expr)
+
+        return _reconstruct(root_cid)
+
+    class _EGraphNormalizer(ast.NodeTransformer):
+        def generic_visit(self, node: ast.AST) -> ast.AST:
+            node = super().generic_visit(node)
+            if isinstance(node, ast.BinOp) and type(node.op) in _COMMUTATIVE_OPS:
+                if not isinstance(node.op, (ast.Add, ast.Mult)):
+                    l_s = ast.dump(node.left, include_attributes=False)
+                    r_s = ast.dump(node.right, include_attributes=False)
+                    if r_s < l_s:
+                        node.left, node.right = node.right, node.left
+            if isinstance(node, ast.BinOp) and type(node.op) in _BIN_OP_TO_TAG:
+                return _saturate_pure_arith(node)
+            return node
+
+    out_mod = _EGraphNormalizer().visit(work_mod)
+    ast.fix_missing_locations(out_mod)
+    return out_mod
+
+
+def _normalize_function_for_plotkin_lgg(fn: ast.FunctionDef) -> tuple[ast.FunctionDef, set[str], list[str]] | None:
+    """Alpha-normalize a loop function and desugar `AugAssign` (`acc += e` -> `acc = acc + e`) for Plotkin LGG."""
+    if fn.decorator_list or not (1 <= len(fn.args.args) <= 3) or len(fn.body) < 2:
+        return None
+    cloned = copy.deepcopy(fn)
+
+    class _DesugarAug(ast.NodeTransformer):
+        def visit_AugAssign(self, nd: ast.AugAssign) -> ast.AST:
+            nd = self.generic_visit(nd)  # type: ignore[assignment]
+            if isinstance(nd.target, ast.Name):
+                return ast.Assign(
+                    targets=[ast.Name(id=nd.target.id, ctx=ast.Store())],
+                    value=ast.BinOp(
+                        left=ast.Name(id=nd.target.id, ctx=ast.Load()),
+                        op=copy.deepcopy(nd.op),
+                        right=copy.deepcopy(nd.value),
+                    ),
+                )
+            return nd
+
+    cloned = _DesugarAug().visit(cloned)  # type: ignore[assignment]
+    outer_params = [f"_v{i}" for i in range(len(cloned.args.args))]
+    rename_map: dict[str, str] = {a.arg: f"_v{i}" for i, a in enumerate(cloned.args.args)}
+    loop_bound_vars: list[str] = []
+    local_idx = 0
+    in_loop_targets: set[str] = set()
+
+    for sub in ast.walk(cloned):
+        if isinstance(sub, ast.For) and isinstance(sub.target, ast.Name):
+            in_loop_targets.add(sub.target.id)
+            for b_sub in ast.walk(sub):
+                if isinstance(b_sub, ast.Name) and isinstance(b_sub.ctx, ast.Store):
+                    in_loop_targets.add(b_sub.id)
+
+    for sub in ast.walk(cloned):
+        if isinstance(sub, ast.Name) and isinstance(sub.ctx, ast.Store):
+            orig_nm = sub.id
+            if orig_nm not in rename_map:
+                new_nm = f"_loc{local_idx}"
+                rename_map[orig_nm] = new_nm
+                local_idx += 1
+            mapped = rename_map[orig_nm]
+            if orig_nm in in_loop_targets and mapped not in loop_bound_vars:
+                loop_bound_vars.append(mapped)
+
+    for idx_a, a in enumerate(cloned.args.args):
+        a.arg = outer_params[idx_a]
+    cloned.name = "_lgg_fn"
+    for sub in ast.walk(cloned):
+        if isinstance(sub, ast.Name) and sub.id in rename_map:
+            sub.id = rename_map[sub.id]
+    ast.fix_missing_locations(cloned)
+    return cloned, set(loop_bound_vars), loop_bound_vars
+
+
+def higher_order_plotkin_lgg(
+    fn1: ast.FunctionDef,
+    fn2: ast.FunctionDef,
+) -> dict[str, Any] | None:
+    """Compute Higher-Order Plotkin Least-General-Generalization `LGG(fn1, fn2)` over multi-statement ASTs.
+
+    - Closed differing subtrees (independent of loop-bound variables) lift to value holes `_v{k}`.
+    - Open differing subtrees referencing loop-bound variables `(b_0, ...)` lift to higher-order
+      callable parameters `_fn{m}(b_0, ...)`, discovering abstractions such as `fold_scan(xs, init, step_fn)`.
+    """
+    n1 = _normalize_function_for_plotkin_lgg(fn1)
+    n2 = _normalize_function_for_plotkin_lgg(fn2)
+    if n1 is None or n2 is None:
+        return None
+    cf1, lb_set1, lb_ord1 = n1
+    cf2, lb_set2, lb_ord2 = n2
+    if len(cf1.args.args) != len(cf2.args.args) or len(cf1.body) != len(cf2.body):
+        return None
+    if ast.dump(cf1, include_attributes=False) == ast.dump(cf2, include_attributes=False):
+        return None
+
+    base_arity = len(cf1.args.args)
+    loop_bound = lb_set1 | lb_set2
+    ordered_loop = list(dict.fromkeys([*lb_ord1, *lb_ord2]))
+    if not ordered_loop:
+        return None
+
+    val_holes: dict[tuple[str, str], str] = {}
+    fn_holes: dict[tuple[str, str, tuple[str, ...]], str] = {}
+    callable_arities: dict[str, int] = {}
+    extra_val_params: list[str] = []
+    extra_fn_params: list[str] = []
+
+    def _free_load_names(nd: ast.AST) -> set[str]:
+        return {s.id for s in ast.walk(nd) if isinstance(s, ast.Name) and isinstance(s.ctx, ast.Load)}
+
+    def _anti_unify_expr(e1: ast.expr, e2: ast.expr) -> ast.expr | None:
+        d1 = ast.dump(e1, include_attributes=False)
+        d2 = ast.dump(e2, include_attributes=False)
+        if d1 == d2:
+            return copy.deepcopy(e1)
+        captured = [v for v in ordered_loop if v in (_free_load_names(e1) | _free_load_names(e2))]
+        if not captured:
+            key_v = (d1, d2)
+            h_nm = val_holes.get(key_v)
+            if h_nm is None:
+                h_nm = f"_v{base_arity + len(extra_val_params)}"
+                val_holes[key_v] = h_nm
+                extra_val_params.append(h_nm)
+            return ast.Name(id=h_nm, ctx=ast.Load())
+        if len(captured) > 3:
+            return None
+        cap_t = tuple(captured)
+        key_f = (d1, d2, cap_t)
+        fn_nm = fn_holes.get(key_f)
+        if fn_nm is None:
+            fn_nm = f"_fn{len(extra_fn_params)}"
+            fn_holes[key_f] = fn_nm
+            extra_fn_params.append(fn_nm)
+            callable_arities[fn_nm] = len(cap_t)
+        return ast.Call(
+            func=ast.Name(id=fn_nm, ctx=ast.Load()),
+            args=[ast.Name(id=bv, ctx=ast.Load()) for bv in cap_t],
+            keywords=[],
+        )
+
+    def _anti_unify_stmt_list(s_list1: Sequence[ast.stmt], s_list2: Sequence[ast.stmt]) -> list[ast.stmt] | None:
+        if len(s_list1) != len(s_list2):
+            return None
+        out_s: list[ast.stmt] = []
+        for s1, s2 in zip(s_list1, s_list2):
+            if type(s1) is not type(s2):
+                return None
+            if isinstance(s1, ast.Assign) and isinstance(s2, ast.Assign):
+                if len(s1.targets) != 1 or len(s2.targets) != 1:
+                    return None
+                if ast.dump(s1.targets[0], include_attributes=False) != ast.dump(s2.targets[0], include_attributes=False):
+                    return None
+                ue = _anti_unify_expr(s1.value, s2.value)
+                if ue is None:
+                    return None
+                out_s.append(ast.Assign(targets=[copy.deepcopy(s1.targets[0])], value=ue))
+            elif isinstance(s1, ast.Return) and isinstance(s2, ast.Return):
+                if (s1.value is None) != (s2.value is None):
+                    return None
+                if s1.value is None or s2.value is None:
+                    out_s.append(ast.Return(value=None))
+                else:
+                    ue = _anti_unify_expr(s1.value, s2.value)
+                    if ue is None:
+                        return None
+                    out_s.append(ast.Return(value=ue))
+            elif isinstance(s1, ast.For) and isinstance(s2, ast.For):
+                if ast.dump(s1.target, include_attributes=False) != ast.dump(s2.target, include_attributes=False):
+                    return None
+                if s1.orelse or s2.orelse:
+                    return None
+                u_iter = _anti_unify_expr(s1.iter, s2.iter)
+                u_body = _anti_unify_stmt_list(s1.body, s2.body)
+                if u_iter is None or u_body is None:
+                    return None
+                out_s.append(ast.For(target=copy.deepcopy(s1.target), iter=u_iter, body=u_body, orelse=[]))
+            elif isinstance(s1, ast.If) and isinstance(s2, ast.If):
+                u_test = _anti_unify_expr(s1.test, s2.test)
+                u_b = _anti_unify_stmt_list(s1.body, s2.body)
+                u_o = _anti_unify_stmt_list(s1.orelse, s2.orelse)
+                if u_test is None or u_b is None or u_o is None:
+                    return None
+                out_s.append(ast.If(test=u_test, body=u_b, orelse=u_o))
+            elif isinstance(s1, ast.Expr) and isinstance(s2, ast.Expr):
+                if (
+                    isinstance(s1.value, ast.Call)
+                    and isinstance(s2.value, ast.Call)
+                    and isinstance(s1.value.func, ast.Attribute)
+                    and isinstance(s2.value.func, ast.Attribute)
+                    and s1.value.func.attr == s2.value.func.attr == "append"
+                    and ast.dump(s1.value.func.value, include_attributes=False) == ast.dump(s2.value.func.value, include_attributes=False)
+                    and len(s1.value.args) == len(s2.value.args) == 1
+                ):
+                    u_arg = _anti_unify_expr(s1.value.args[0], s2.value.args[0])
+                    if u_arg is None:
+                        return None
+                    out_s.append(
+                        ast.Expr(
+                            value=ast.Call(
+                                func=copy.deepcopy(s1.value.func),
+                                args=[u_arg],
+                                keywords=[],
+                            )
+                        )
+                    )
+                elif ast.dump(s1, include_attributes=False) == ast.dump(s2, include_attributes=False):
+                    out_s.append(copy.deepcopy(s1))
+                else:
+                    return None
+            else:
+                return None
+        return out_s
+
+    lgg_stmts = _anti_unify_stmt_list(cf1.body, cf2.body)
+    if lgg_stmts is None or not extra_fn_params:
+        return None
+    all_params = tuple([f"_v{i}" for i in range(base_arity)] + extra_val_params + extra_fn_params)
+    if len(all_params) > 5 or len(extra_fn_params) > 2:
+        return None
+    mod_tmp = ast.Module(body=lgg_stmts, type_ignores=[])
+    ast.fix_missing_locations(mod_tmp)
+    body_stmts = "\n".join(ast.unparse(st) for st in mod_tmp.body)
+    return {
+        "param_names": all_params,
+        "arity": len(all_params),
+        "body_stmts": body_stmts,
+        "callable_params": tuple((k, callable_arities[k]) for k in extra_fn_params),
+        "base_arity": base_arity,
+        "value_hole_count": len(extra_val_params),
+    }
 
 
 def _generate_probe_grids(arity: int) -> list[tuple[str, list[tuple[Any, ...]]]]:
@@ -919,8 +1312,84 @@ class CompoundingConceptLibrary:
             uses=cur.uses + 1,
             verified_hits=cur.verified_hits + (1 if helped else 0),
             body_stmts=cur.body_stmts,
+            callable_params=cur.callable_params,
         )
         self.save()
+
+    def levin_description_bits(self, concept_id: str) -> float:
+        """Empirical Solomonoff-Levin description length `-log2 P_G(c)` in bits."""
+        if not self._can_read() or concept_id not in self._concepts:
+            return 6.0
+        weights = {
+            cid: 1.0 + float(c.verified_hits) * 2.0 + float(c.uses) * 0.5 + float(c.corpus_sites) * 0.5
+            for cid, c in self._concepts.items()
+        }
+        total_w = sum(weights.values()) + 8.0  # reserve base grammar mass
+        p_c = weights[concept_id] / max(1e-9, total_w)
+        return round(-math.log2(max(1e-9, p_c)), 4)
+
+    def _verify_higher_order_stmt_concept(
+        self,
+        body_stmts: str,
+        param_names: tuple[str, ...],
+        callable_params: tuple[tuple[str, int], ...],
+    ) -> tuple[bool, str]:
+        """Verify determinism, data & callable sensitivity, and mutation-kill on a higher-order skeleton."""
+        indented = "\n".join("    " + ln for ln in body_stmts.splitlines())
+        fn_src = f"def _ho_concept({', '.join(param_names)}):\n{indented}\n"
+        try:
+            mod = ast.parse(fn_src)
+            if not mod.body or not isinstance(mod.body[0], ast.FunctionDef):
+                return False, "NOT_FUNCTION_DEF"
+            fdef = mod.body[0]
+        except SyntaxError:
+            return False, "SYNTAX_ERROR"
+
+        cp_map = dict(callable_params)
+        fn_bank_by_arity: dict[int, list[Callable[..., Any]]] = {
+            1: [lambda a: a + 1, lambda a: a * 2, lambda a: -a],
+            2: [py_operator.add, py_operator.mul, max],
+            3: [lambda a, b, c: a + b + c, lambda a, b, c: max(a, b * c)],
+        }
+        seq_probes = [[2, 3, 4], [1, 5, 2], [-2, 4, 3], [5]]
+        val_seeds = [0, 1, 2, -1]
+        cmap = self.callable_map()
+
+        valid_rows: list[tuple[Any, ...]] = []
+        sigs: list[Any] = []
+        callable_sensitive = False
+        for idx_s, seq_v in enumerate(seq_probes):
+            row_a: list[Any] = []
+            row_b: list[Any] = []
+            for p_idx, p_nm in enumerate(param_names):
+                if p_nm in cp_map:
+                    fn_opts = fn_bank_by_arity.get(cp_map[p_nm], [lambda *xs: xs[0]])
+                    row_a.append(fn_opts[0])
+                    row_b.append(fn_opts[min(1, len(fn_opts) - 1)])
+                elif p_idx == 0:
+                    row_a.append(seq_v)
+                    row_b.append(seq_v)
+                else:
+                    v_init = val_seeds[(idx_s + p_idx) % len(val_seeds)]
+                    row_a.append(v_init)
+                    row_b.append(v_init)
+            try:
+                va1 = eval_pure_ast_function(fdef, tuple(row_a), extra_callables=cmap)
+                va2 = eval_pure_ast_function(fdef, tuple(row_a), extra_callables=cmap)
+                vb1 = eval_pure_ast_function(fdef, tuple(row_b), extra_callables=cmap)
+            except Exception:
+                continue
+            sa1, sa2, sb1 = _freeze_output(va1), _freeze_output(va2), _freeze_output(vb1)
+            if sa1 == ("NONFINITE",) or sa1 != sa2:
+                continue
+            if sa1 != sb1:
+                callable_sensitive = True
+            valid_rows.append(tuple(row_a))
+            sigs.append(sa1)
+
+        if len(valid_rows) < 3 or len(set(sigs)) < 2 or not callable_sensitive:
+            return False, "INSUFFICIENT_HIGHER_ORDER_SENSITIVITY"
+        return True, "higher_order"
 
     def _verify_candidate_stmt_concept(self, body_stmts: str, arity: int) -> tuple[bool, str]:
         """Verify determinism, non-constancy, and mutation-kill on a multi-statement HORS function."""
@@ -1114,7 +1583,7 @@ class CompoundingConceptLibrary:
             if not isinstance(src, str) or not src.strip():
                 continue
             try:
-                parsed_programs.append(ast.parse(src))
+                parsed_programs.append(canonicalize_ast_via_egraph(ast.parse(src)))
             except SyntaxError:
                 continue
 
@@ -1331,6 +1800,55 @@ class CompoundingConceptLibrary:
                     self._concepts[cid_s] = entry_s
                     self._compiled_fn_asts[cid_s] = parsed_helper
                     admitted.append(entry_s.to_dict())
+
+            # Stage 2B: Higher-Order Plotkin Anti-Unification (`LGG(fn_i, fn_j)` lifting differing operators to `_fn0`)
+            if len(admitted) < max_new_concepts:
+                loop_fns: list[ast.FunctionDef] = [
+                    fn
+                    for mod in parsed_programs
+                    for fn in mod.body
+                    if isinstance(fn, ast.FunctionDef)
+                    and not fn.decorator_list
+                    and any(isinstance(sub, ast.For) for sub in ast.walk(fn))
+                ]
+                for i_fn in range(min(len(loop_fns), 12)):
+                    if len(admitted) >= max_new_concepts:
+                        break
+                    for j_fn in range(i_fn + 1, min(len(loop_fns), 12)):
+                        if len(admitted) >= max_new_concepts:
+                            break
+                        lgg = higher_order_plotkin_lgg(loop_fns[i_fn], loop_fns[j_fn])
+                        if lgg is None:
+                            continue
+                        ho_stmts = str(lgg["body_stmts"])
+                        ho_params: tuple[str, ...] = tuple(lgg["param_names"])
+                        ho_cp: tuple[tuple[str, int], ...] = tuple(lgg["callable_params"])
+                        cid_ho = "concept_ho_" + hashlib.sha256(
+                            f"ho:{','.join(ho_params)}:{ho_stmts}".encode("utf-8")
+                        ).hexdigest()[:8]
+                        if cid_ho in self._concepts:
+                            continue
+                        ok_ho, dom_ho = self._verify_higher_order_stmt_concept(ho_stmts, ho_params, ho_cp)
+                        if not ok_ho:
+                            continue
+                        entry_ho = ConceptEntry(
+                            concept_id=cid_ho,
+                            arity=len(ho_params),
+                            param_names=ho_params,
+                            body_expr="",
+                            domain_kind=dom_ho,
+                            mdl_gain_bytes=max(8, executable_ast_bytes(ho_stmts) // 2),
+                            corpus_sites=2,
+                            uses=0,
+                            verified_hits=0,
+                            body_stmts=ho_stmts,
+                            callable_params=ho_cp,
+                        )
+                        parsed_ho = ast.parse(entry_ho.render_helper_def()).body[0]
+                        if isinstance(parsed_ho, ast.FunctionDef):
+                            self._concepts[cid_ho] = entry_ho
+                            self._compiled_fn_asts[cid_ho] = parsed_ho
+                            admitted.append(entry_ho.to_dict())
 
         if admitted:
             self.save()

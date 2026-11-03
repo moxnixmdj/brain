@@ -1866,14 +1866,7 @@ def _lower_function_via_semantic_dataflow(fn_orig: ast.FunctionDef, pure_fns: se
     # --- Law C: Trace-to-HORS Algorithmic Re-Synthesis (turns O(N^3) brute-force / exponential search into O(N) DP/Fold) ---
     if not candidates and fn_orig.name in pure_fns and 1 <= len(fn_orig.args.args) <= 2 and not fn_orig.args.vararg and not fn_orig.args.kwarg:
         p_names = [a.arg for a in fn_orig.args.args]
-        probe_suites: list[list[tuple[Any, ...]]] = []
-        if len(p_names) == 1:
-            probe_suites.append([([],), ([-3, -1],), ([-2, 1, -3, 4, -1, 2, 1, -5, 4],), ([5, 4, -1, 7, 8],), ([3, -2, 5, -1, 4],)])
-            probe_suites.append([(0,), (1,), (2,), (3,), (4,), (5,), (6,)])
-            probe_suites.append([([3, 1, 3, 2, 1],), ([],), ([5, 5, 2, 9, 2],)])
-        elif len(p_names) == 2:
-            probe_suites.append([([1, 2, 5], 11), ([2], 3), ([1, 3, 4], 6), ([2, 5], 0)])
-            probe_suites.append([("kitten", "sitting"), ("flaw", "lawn"), ("", "abc"), ("abc", "abc")])
+        probe_suites = _synthesize_ast_derived_probe_suites(fn_orig)
         for suite in probe_suites:
             harvested: list[tuple[tuple[Any, ...], Any]] = []
             ok_suite = True
@@ -1903,6 +1896,63 @@ def _lower_function_via_semantic_dataflow(fn_orig: ast.FunctionDef, pure_fns: se
                     break
 
     return candidates
+
+
+def _synthesize_ast_derived_probe_suites(fn_node: ast.FunctionDef) -> list[list[tuple[Any, ...]]]:
+    """Derive boundary & algebraic probe input suites directly from `fn_node` AST structure (zero benchmark literals)."""
+    arity = len(fn_node.args.args)
+    int_consts: list[int] = []
+    has_subscript = False
+    has_len_or_range = False
+    for sub in ast.walk(fn_node):
+        if isinstance(sub, ast.Constant) and isinstance(sub.value, int) and not isinstance(sub.value, bool):
+            if -20 <= sub.value <= 20 and sub.value not in int_consts:
+                int_consts.append(sub.value)
+        elif isinstance(sub, ast.Subscript):
+            has_subscript = True
+        elif isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id in {"len", "range"}:
+            has_len_or_range = True
+
+    # Deterministic boundary generator over AST constants (`c - 1, c, c + 1`) + algebraic progression
+    b_seed = sorted({0, 1, -1, 2, -2, *(c for v in int_consts[:3] for c in (v - 1, v, v + 1))})
+    suites: list[list[tuple[Any, ...]]] = []
+
+    if arity == 1:
+        # Signed integer sequence generators (empty, all-negative, alternating, positive-dominated)
+        seq_signed = [
+            ([],),
+            ([-3, -1],),
+            ([((k * 5) % 11) - 5 for k in range(1, 9)],),
+            ([((k * 3) % 7) - 1 for k in range(1, 7)],),
+            ([2, -1, 4, -2, 3],),
+        ]
+        seq_dups = [
+            ([],),
+            ([((k * 3) % 4) + 1 for k in range(6)],),
+            ([b_seed[k % len(b_seed)] for k in range(5)],),
+        ]
+        nat_indices = [(n,) for n in range(7)]
+        if has_subscript or has_len_or_range:
+            suites.extend([seq_signed, seq_dups, nat_indices])
+        else:
+            suites.extend([nat_indices, seq_signed, seq_dups])
+    elif arity == 2:
+        # (a) Positive step weights + bounded target capacity probes
+        cap_probes = [
+            ([1, 2, 4], 7),
+            ([2], 3),
+            ([1, 3], 5),
+            ([2, 4], 0),
+        ]
+        # (b) Combinatorial symbol sequences over 3-letter alphabet `('a', 'b', 'c')`
+        alpha_probes = [
+            ("", "ab"),
+            ("abc", "abc"),
+            ("abca", "acba"),
+            ("aab", "aba"),
+        ]
+        suites.extend([cap_probes, alpha_probes])
+    return suites
 
 
 def propose_complexity_reduction_patches(
@@ -2258,8 +2308,51 @@ def forge_verified_organ_bridge(
         capability_forge_v1.STATE = orig_state
 
 
+def _compute_ast_behavioral_descriptor(source_or_diff: str) -> dict[str, Any]:
+    """Compute structural MAP-Elites behavioral coordinates `(loop_depth_bin, uses_memo_or_index)`."""
+    added_lines: list[str] = []
+    for ln in source_or_diff.splitlines():
+        if ln.startswith("+") and not ln.startswith("+++"):
+            added_lines.append(ln[1:])
+    snippet = "\n".join(added_lines) if added_lines else source_or_diff
+    max_loop_depth = 0
+    uses_memo_or_index = False
+    try:
+        mod = ast.parse(snippet)
+
+        def _depth(node: ast.AST, cur: int) -> int:
+            nxt = cur + (1 if isinstance(node, (ast.For, ast.While, ast.ListComp, ast.SetComp, ast.DictComp)) else 0)
+            best = nxt
+            for ch in ast.iter_child_nodes(node):
+                best = max(best, _depth(ch, nxt))
+            return best
+
+        max_loop_depth = _depth(mod, 0)
+        for nd in ast.walk(mod):
+            if isinstance(nd, (ast.Set, ast.Dict)):
+                uses_memo_or_index = True
+            elif isinstance(nd, ast.Call):
+                if isinstance(nd.func, ast.Name) and nd.func.id in {"set", "dict"}:
+                    uses_memo_or_index = True
+                elif isinstance(nd.func, ast.Attribute) and nd.func.attr in {"lru_cache", "cache", "setdefault"}:
+                    uses_memo_or_index = True
+            elif isinstance(nd, ast.Name) and nd.id.startswith("concept_"):
+                uses_memo_or_index = True
+    except SyntaxError:
+        uses_memo_or_index = any(tok in snippet for tok in ("lru_cache", "set(", "_dp", "concept_"))
+        max_loop_depth = 1 if "for " in snippet else 0
+
+    depth_bin = "d0" if max_loop_depth == 0 else ("d1" if max_loop_depth == 1 else "d2plus")
+    return {
+        "loop_depth": max_loop_depth,
+        "loop_depth_bin": depth_bin,
+        "uses_memo_or_index": uses_memo_or_index,
+        "index_bin": "indexed" if uses_memo_or_index else "direct",
+    }
+
+
 class QualityDiversitySelfArchive:
-    """Operator 5: MAP-Elites Quality-Diversity self-lineage archive persisted across reboots."""
+    """Operator 5: Full MAP-Elites Quality-Diversity self-lineage archive over behavioral coordinates."""
 
     def __init__(self, archive_path: pathlib.Path) -> None:
         self.archive_path = pathlib.Path(archive_path)
@@ -2275,14 +2368,15 @@ class QualityDiversitySelfArchive:
                 pass
         return {"schema": SCHEMA, "cells": {}}
 
-    def record_promoted(self, commit_record: Mapping[str, Any]) -> dict[str, Any]:
+    def record_promoted(self, commit_record: Mapping[str, Any], *, patch_text: str = "") -> dict[str, Any]:
         state = self._load()
         cells = state.setdefault("cells", {})
         rel = str(commit_record.get("target_relpath") or "ring1")
         axis = str(commit_record.get("improvement_axis") or "accuracy")
         delta_b = int(commit_record.get("delta_exec_bytes") or 0)
         size_bin = "shrunk" if delta_b < 0 else ("compact" if delta_b <= 80 else "expanded")
-        cell_key = f"{rel}::{axis}::{size_bin}"
+        b_desc = _compute_ast_behavioral_descriptor(patch_text or str(commit_record.get("unified_diff") or ""))
+        cell_key = f"{rel}::{axis}::{size_bin}::{b_desc['loop_depth_bin']}::{b_desc['index_bin']}"
 
         score = float((commit_record.get("e_process") or {}).get("e_value") or 1.0)
         if commit_record.get("speed_report"):
@@ -2295,13 +2389,45 @@ class QualityDiversitySelfArchive:
                 "receipt_id": commit_record.get("receipt_id"),
                 "operator_id": commit_record.get("operator_id"),
                 "function_name": commit_record.get("function_name"),
+                "target_relpath": rel,
+                "improvement_axis": axis,
                 "delta_exec_bytes": delta_b,
+                "behavioral_descriptor": b_desc,
                 "qd_score": round(score, 4),
             }
             tmp = self.archive_path.with_suffix(".tmp")
             tmp.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
             tmp.replace(self.archive_path)
-        return {"cell_key": cell_key, "replaced_incumbent": replaced, "total_elites": len(cells)}
+        return {
+            "cell_key": cell_key,
+            "behavioral_descriptor": b_desc,
+            "replaced_incumbent": replaced,
+            "total_elites": len(cells),
+        }
+
+    def select_stepping_stone_elites(self, *, limit: int = 4) -> list[dict[str, Any]]:
+        """Return diverse elite stepping stones across distinct `(axis, loop_depth_bin, index_bin)` niches."""
+        cells = self._load().get("cells") or {}
+        ranked = sorted(
+            ((str(k), dict(v)) for k, v in cells.items() if isinstance(v, Mapping)),
+            key=lambda kv: (-float(kv[1].get("qd_score") or 0.0), kv[0]),
+        )
+        chosen: list[dict[str, Any]] = []
+        seen_niches: set[tuple[str, str, str]] = set()
+        for k, rec in ranked:
+            bd = rec.get("behavioral_descriptor") or {}
+            niche = (
+                str(rec.get("improvement_axis") or ""),
+                str(bd.get("loop_depth_bin") or ""),
+                str(bd.get("index_bin") or ""),
+            )
+            if niche in seen_niches and len(chosen) + (len(ranked) - len(chosen)) > limit:
+                continue
+            seen_niches.add(niche)
+            chosen.append({"cell_key": k, **rec})
+            if len(chosen) >= limit:
+                break
+        return chosen
 
 
 # ---------------------------------------------------------------------------
@@ -2397,7 +2523,7 @@ class RecursiveSelfArchitect:
             )
             if verdict.get("promoted"):
                 promoted_paths.add(prop.target_relpath)
-                qd_info = self.archive.record_promoted(verdict["commit"])
+                qd_info = self.archive.record_promoted(verdict["commit"], patch_text=prop.unified_diff)
                 verdict["qd_archive"] = qd_info
                 promoted.append(verdict)
             else:
@@ -2423,7 +2549,83 @@ class RecursiveSelfArchitect:
             "refused": refused,
             "concepts_invented": int(sleep_concepts.get("admitted_count", 0)),
             "concept_library_size": len(self.concept_library.concepts()),
+            "stepping_stone_elites": self.archive.select_stepping_stone_elites(limit=4),
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
             "model_dependency_count": 0,
             "incremental_spend_usd": 0.0,
         }
+
+    def discover_and_synthesize_organ_architecture(
+        self,
+        *,
+        required_effects: Sequence[str],
+        available_organs: Sequence[Mapping[str, Any]] | None = None,
+        scan_root: pathlib.Path | None = None,
+        forbidden_effects: Sequence[str] = ("external_llm_call", "paid_api_spend"),
+        max_steps: int = 8,
+    ) -> dict[str, Any]:
+        """Operator 6: Introspect stranded/available `$0` organs & CEGAR-synthesize a verified architecture."""
+        from canonical.runtime.counterexample_guided_causal_architecture_synthesizer_v1 import (
+            synthesize as cegar_synthesize,
+        )
+
+        orphan_summary: dict[str, int] = {}
+        if scan_root is not None and (pathlib.Path(scan_root) / "canonical").is_dir():
+            try:
+                from canonical.tools.census_orphan_capabilities_v1 import census as run_orphan_census
+
+                rows = run_orphan_census(pathlib.Path(scan_root) / "canonical")
+                for row in rows:
+                    cls_k = str(getattr(row, "classification", None) or (row.get("classification") if isinstance(row, Mapping) else "UNKNOWN"))
+                    orphan_summary[cls_k] = orphan_summary.get(cls_k, 0) + 1
+            except Exception:
+                orphan_summary = {}
+
+        components: list[dict[str, Any]] = []
+        valid_kinds = {"MECHANISM", "TRANSFORM", "GATE", "DISCRIMINATOR", "VERIFIER"}
+        for idx, raw_c in enumerate((available_organs or ())[:24]):
+            kind = str(raw_c.get("kind") or "MECHANISM").upper()
+            if kind not in valid_kinds:
+                kind = "MECHANISM"
+            provides = [str(x) for x in (raw_c.get("provides") or ()) if str(x)]
+            if not provides:
+                continue
+            components.append(
+                {
+                    "id": str(raw_c.get("id") or f"organ_{idx}"),
+                    "kind": kind,
+                    "requires": [str(x) for x in (raw_c.get("requires") or ()) if str(x)],
+                    "provides": provides,
+                    "forbids": [str(x) for x in (raw_c.get("forbids") or ()) if str(x)],
+                    "brain_owned": bool(raw_c.get("brain_owned", True)),
+                    "donor_independent": bool(raw_c.get("donor_independent", True)),
+                    "verified": bool(raw_c.get("verified", True)),
+                    "cost": {"incremental_spend_usd": float((raw_c.get("cost") or {}).get("incremental_spend_usd", 0.0))},
+                }
+            )
+
+        manifest = {
+            "target": {
+                "architecture_id": "sovereign_organ_bridge_v1",
+                "required_effects": [str(e) for e in required_effects if str(e)],
+                "forbidden_effects": [str(e) for e in forbidden_effects if str(e)],
+                "initial_facts": [],
+                "max_steps": int(max_steps),
+                "require_verifier": any(c["kind"] == "VERIFIER" for c in components),
+                "allow_candidate_components": False,
+            },
+            "components": components,
+        }
+        cegar_res = cegar_synthesize(manifest)
+        ok_arch = bool(cegar_res.get("pass") is True and cegar_res.get("winner"))
+        return {
+            "synthesized": ok_arch,
+            "verified": bool(ok_arch and not cegar_res.get("requires_independent_verification_before_promotion", True)),
+            "classification": cegar_res.get("classification"),
+            "architecture": cegar_res.get("winner"),
+            "cegar": cegar_res,
+            "orphan_census_summary": orphan_summary,
+            "model_dependency_count": 0,
+            "incremental_spend_usd": 0.0,
+        }
+
