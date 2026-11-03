@@ -44,6 +44,9 @@ JUNIT = """<?xml version="1.0"?>
   <testcase classname="canonical.tests.test_net" name="test_c">
     <error message="ConnectionError: Network is unreachable">t</error>
   </testcase>
+  <testcase classname="canonical.tests.test_gate" name="test_refused">
+    <failure message="status FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT">t</failure>
+  </testcase>
 </testsuite></testsuites>
 """
 
@@ -74,8 +77,10 @@ def test_a_missing_module_is_the_machine_and_is_not_counted_as_backlog(tmp_path)
     report = _run(tmp_path)
     assert report["environment_failures"] == 3          # cv2, PIL, network
     assert report["real_failures"] == 2                 # the two assertion failures
+    assert report["blocked_deliberate_refusals"] == 1   # the gate did its job
     # Never the reverse: a real failure must not be excused as an environment gap.
-    assert report["environment_failures"] + report["real_failures"] == 5
+    assert (report["environment_failures"] + report["real_failures"]
+            + report["blocked_deliberate_refusals"]) == 6
 
 
 def test_the_tool_names_the_package_to_install(tmp_path):
@@ -111,3 +116,26 @@ def test_the_report_carries_no_authority(tmp_path):
     report = _run(tmp_path)
     assert report["authority"].startswith("NONE")
     assert "RECEIPT" in report["authority"].upper()
+
+
+def test_a_deliberate_refusal_is_a_blocked_lane_not_a_bug(tmp_path):
+    """Measured 2026-11-03: 189 of 984 "failures" are the code declining to act and saying
+    so; 117 of those are the carrier gate, which `REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md`
+    documents as a boundary that must NOT be opened. Counting them as defects tells the next
+    session to remove a working safety property."""
+    report = _run(tmp_path)
+    assert report["blocked_deliberate_refusals"] == 1
+    assert report["blocked_by_reason"] == {
+        "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT": 1}
+    # And it must NOT be in either of the two buckets that get worked on.
+    assert all("test_refused" not in r["test"] for r in report["regression_detail"])
+    assert all("test_refused" not in r["test"] for r in report["standing_detail"])
+
+
+def test_the_three_buckets_partition_every_failure(tmp_path):
+    """Environment + blocked + real must equal the failed+error total exactly. A failure that
+    falls between the buckets is a failure nobody is assigned."""
+    report = _run(tmp_path)
+    total = report["totals"]["failed"] + report["totals"]["error"]
+    assert (report["environment_failures"] + report["blocked_deliberate_refusals"]
+            + report["real_failures"]) == total

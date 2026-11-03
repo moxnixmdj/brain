@@ -56,13 +56,18 @@ below) separates failures that describe **the machine** from failures that descr
 |---|---|
 | environment failures (missing module / network) | **48** |
 | real failures | **978** |
-| of which **regressions** vs the 17 Oct baseline (file was clean then) | **642** |
-| of which **standing debt** (file also failed in the 17 Oct baseline) | **336** |
+| of which **deliberate refusals** (`FAIL_CLOSED__…`, i.e. a blocked lane) | see §10 |
+| of which **regressions** vs the 17 Oct baseline (file was clean then) | **642** → **486** in §10 |
+| of which **standing debt** (file also failed in the 17 Oct baseline) | **336** → **303** in §10 |
+
+> **Superseded by §10.** The four-way split is the correct one: 48 environment / 189 deliberate
+> refusals / 789 real. The three-way table above is what this section looked like before the
+> refusal bucket existed, and it is kept so the correction is visible rather than rewritten.
 
 Failure buckets: `ASSERTION` 793, `OTHER` 113, `CURRENTNESS_GUARD__DRIFT` 53,
 `IMPORT_ERROR` 43, `CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT` 16, `MISSING_FILE` 5, `NETWORK` 3.
 
-**There are 642 regressions, not 344.** That is the number that should worry the owner: on the
+**There are 486 regressions across 94 files, not 344 (§10 recuts this; 642 was before the refusal bucket).** That is the number that should worry the owner: on the
 2026-10-17 tree those files were clean. `test_an_ordinary_sentence_runs_the_command_it_states_v1.py`
 alone contributes **233** of them.
 
@@ -168,3 +173,45 @@ number that is (a) 984, (b) 48 of it is the machine, and (c) 642 of the remainde
 against a tree that was clean four weeks ago. An agent that trusts the old sentence will work on
 the wrong thing first — which is precisely the failure mode `README.md` says this repository was
 built to prevent.
+
+---
+
+## 10. Addendum 2 — the split was still wrong in the direction that gets work started on the wrong thing
+
+Applying the split to itself found a fourth category. **Not every `F` is a defect.** Some are the
+code declining to act and *saying so*, which is the behaviour the repository explicitly wants.
+
+Measured on the same junit: **189 of the 1,026 failed/error cases are a `FAIL_CLOSED__…` refusal**,
+and **117 of those are one refusal** —
+`FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`.
+
+| bucket | count | what work it implies |
+|---|---|---|
+| environment (missing module / network) | 48 | `pip install`, not backlog |
+| **deliberate refusal (blocked lane)** | **189** | **a review that does not exist; NOT a code fix** |
+| real failure | **789** | triage |
+| — of which regressions (file clean on 17 Oct, 94 files) | 486 | |
+| — of which standing debt | 303 | |
+
+**The refusal is correct.** `REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md` §"Separate carrier
+qualification, still missing" states that the namespace launcher uses host libraries, has no
+reviewed syscall filtering, no aggregate CPU/memory/PID limits, no bounded output capture and no
+proven descendant cleanup — "a research candidate, not a qualified carrier… **Do not run hostile
+code in it**", and that "a self-report from the worker" is not evidence of isolation. The gate
+refusing is the safety property working. Reading those 117 as bugs would put the next session to
+work removing it.
+
+So the true backlog number is **789**, not 984, and three of the four buckets need three different
+kinds of work — including one that needs a *person*, not a commit.
+
+## 11. A hypothesis that died, recorded so it is not retried
+
+`unittest` reports `ran N tests, OK` whether or not a test body does anything, so a hollow test
+would be green forever and would be the one mechanism by which nothing becomes evidence. I
+expected the 2026-10-14 note ("182 of the 184 formerly pinned files fail") to have left some.
+
+**Counted across all 16,153 test functions in 2,371 files: a test whose body is empty or
+`pass`-only does not exist. Zero.** The first detector said 4,188 (26%) — that was a false
+positive: it looked for assertion *calls* and missed `ast.parse(...)` used as a check, tests
+delegating to `self._ask(...)`, and tests whose assertion is the exception. Narrowed to the only
+unambiguous class, the answer is none. The hypothesis is dead; do not spend a session on it again.

@@ -265,7 +265,8 @@ measurements from lying.
 | worse on trials | — | **0/15** |
 | second benchmark, one trial | 0/10 | **6/10** |
 | honest suite cases / failed | 11,754 / 380 (17 days stale) | **16,361 / 984** |
-| failure split | unknown | 48 environment / 642 regressions / 336 debt |
+| ...of which real backlog, not a refusal or a missing module | unknown | **789** |
+| failure split | unknown | 48 environment / **189 blocked refusals** / 789 real (486 regressions, 303 debt) |
 | substrate modules present | 1/10 | **9/10** |
 | fingerprint cache policy | FIFO — lost keys read 20x | **LRU, pinned by 5 tests** |
 

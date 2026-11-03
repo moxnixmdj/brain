@@ -41,6 +41,7 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -67,6 +68,25 @@ MODULE_TO_PIP = {
 
 # Buckets that describe the MACHINE, not the code. A failure here does not say the tree is wrong.
 ENVIRONMENT_BUCKETS = ("IMPORT_ERROR", "NETWORK", "PERMISSION")
+
+
+# A FAIL-CLOSED refusal is not a defect: the code decided not to act and said so. Counting it
+# as a bug tells the next session to "fix" a working refusal. Counting it as nothing hides a
+# whole lane behind a status string. It is its own bucket, and it names WHY it is blocked.
+#
+# Measured 2026-11-03: 111 of 984 failures carry
+# FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT. That refusal is correct and
+# documented (`REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md`, "Separate carrier qualification,
+# still missing": the namespace launcher is a research candidate, "Do not run hostile code in
+# it"). The lane is blocked on a review that does not exist, not on code that does not work.
+# Reading those as 111 bugs is how a repository ends up "fixing" its own safety property.
+REFUSAL_RE = re.compile(r"FAIL_CLOSED__([A-Z0-9_]+)")
+
+
+def _refusal_class(message: str) -> str | None:
+    """The deliberate refusal a failure is, or None if it is a failure to act at all."""
+    hits = sorted(set(REFUSAL_RE.findall(message)))
+    return "FAIL_CLOSED__" + hits[0] if hits else None
 
 
 def _norm_file(name: str) -> str:
@@ -101,6 +121,7 @@ def classify(junit: Path) -> dict:
     environment: list[dict] = []
     missing: collections.Counter = collections.Counter()
     real_failures: list[dict] = []
+    blocked: list[dict] = []
 
     for suite in tree.getroot().iter("testsuite"):
         for case in suite.iter("testcase"):
@@ -144,12 +165,21 @@ def classify(junit: Path) -> dict:
                     "message_head": (message.strip().splitlines() or [""])[0][:160],
                 })
                 continue
+            refusal = _refusal_class(message)
+            if refusal:
+                blocked.append({
+                    "file": file_rel, "test": name, "status": status,
+                    "refusal_class": refusal,
+                    "message_head": (message.strip().splitlines() or [""])[0][:160],
+                })
+                continue
             real_failures.append({
                 "file": file_rel, "test": name, "status": status,
                 "message_head": (message.strip().splitlines() or [""])[0][:200],
             })
 
     return {
+        "blocked": blocked,
         "per_file": per_file,
         "environment": environment,
         "missing_modules": missing,
@@ -198,6 +228,9 @@ def split(junit: Path, baseline: Path | None, substrate_verdict: str) -> dict:
         "files_observed": measured["files_observed"],
         "environment_failures": len(measured["environment"]),
         "real_failures": len(measured["real_failures"]),
+        "blocked_deliberate_refusals": len(measured["blocked"]),
+        "blocked_by_reason": dict(collections.Counter(
+            row["refusal_class"] for row in measured["blocked"]).most_common()),
         "missing_modules": dict(measured["missing_modules"].most_common()),
         "install_to_measure": sorted({MODULE_TO_PIP.get(m, m)
                                       for m in measured["missing_modules"]}),

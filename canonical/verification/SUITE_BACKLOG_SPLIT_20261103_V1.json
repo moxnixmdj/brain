@@ -10,7 +10,38 @@
   },
   "files_observed": 2279,
   "environment_failures": 48,
-  "real_failures": 978,
+  "real_failures": 789,
+  "blocked_deliberate_refusals": 189,
+  "blocked_by_reason": {
+    "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT": 117,
+    "FAIL_CLOSED__SOURCE_BLOB_DRIFT": 15,
+    "FAIL_CLOSED__CONTRACT_CHECKS_UNBOUND": 10,
+    "FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN": 9,
+    "FAIL_CLOSED__NO_PARSEABLE_LATEX": 7,
+    "FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED": 3,
+    "FAIL_CLOSED__R1_LIVE_ARCHITECTURE_DRIFT": 3,
+    "FAIL_CLOSED__CURRENT_SCHEDULING_AUTHORITY_INVALID": 2,
+    "FAIL_CLOSED__COMPUTE": 2,
+    "FAIL_CLOSED__CAPABILITY_REFUSED_TS_PARSER_UNAVAILABLE": 2,
+    "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED": 2,
+    "FAIL_CLOSED__CAPABILITY_REFUSED_GIT_FAILED": 1,
+    "FAIL_CLOSED__CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID": 1,
+    "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT": 1,
+    "FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN": 1,
+    "FAIL_CLOSED__EXPLICIT_CROSS_STEP_PROJECTION_REQUIRES_REAUDIT": 1,
+    "FAIL_CLOSED__CC_R3_R3_PROMOTION_SAFETY_UNPROVED": 1,
+    "FAIL_CLOSED__FINITE_CELL_COMPLETENESS_UNPROVED": 1,
+    "FAIL_CLOSED__LIVE_WORLD_INVALID": 1,
+    "FAIL_CLOSED__ESCAPE13_ROUTE_MANIFEST_DRIFT": 1,
+    "FAIL_CLOSED__CAPABILITY_REFUSED_REPO_ROOT_NOT_DIRECTORY": 1,
+    "FAIL_CLOSED__AUDIT_INPUT_OR_COUNTEREXAMPLE_DRIFT": 1,
+    "FAIL_CLOSED__AUDIT_INPUT_DRIFT": 1,
+    "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED": 1,
+    "FAIL_CLOSED__R4_LIVE_BINDING_DRIFT": 1,
+    "FAIL_CLOSED__R4_LIVE_BINDING_INVALID": 1,
+    "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED": 1,
+    "FAIL_CLOSED__OWNED_PROBLEM_AUTHORITY_NOT_PROVED": 1
+  },
   "missing_modules": {
     "PIL": 19,
     "cv2": 9,
@@ -37,8 +68,8 @@
     "python-docx",
     "tree-sitter"
   ],
-  "regressions_vs_baseline": 642,
-  "standing_debt_vs_baseline": 336,
+  "regressions_vs_baseline": 486,
+  "standing_debt_vs_baseline": 303,
   "never_measured_files": [
     "<unknown>",
     "canonical/tests/test_brain_module_invoke_v1.py",
@@ -120,12 +151,6 @@
     },
     {
       "file": "canonical/tests/test_a_command_is_verified_by_running_it_again_v1.py",
-      "test": "test_a_command_that_writes_nothing_still_has_to_produce_the_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : reported anything at all for a file that was never produced: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_a_command_is_verified_by_running_it_again_v1.py",
       "test": "test_a_mutating_command_is_certified_from_its_effect_on_the_world",
       "status": "failed",
       "message_head": "AssertionError: False is not True : a stated command stopped running"
@@ -153,30 +178,6 @@
       "test": "test_the_record_names_the_command_that_was_dispatched",
       "status": "failed",
       "message_head": "AssertionError: [] is not true : no step record survived the adapter raising"
-    },
-    {
-      "file": "canonical/tests/test_a_command_that_ran_is_never_reported_as_one_that_could_not_v1.py",
-      "test": "test_mkdir_produces_the_directory_and_is_not_refused",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : the directory was never created: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_a_content_request_never_deletes_the_file_v1.py",
-      "test": "test_deleting_the_file_it_named_still_deletes_it",
-      "status": "failed",
-      "message_head": "AssertionError: True is not false : an explicit delete did not delete: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_a_definition_is_not_a_file_to_move_v1.py",
-      "test": "test_a_path_named_as_the_object_is_still_moved",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : ('FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', None)"
-    },
-    {
-      "file": "canonical/tests/test_a_directory_a_sentence_names_absolutely_must_survive_and_which_files_hold_the_text_must_be_read_v1.py",
-      "test": "test_the_command_actually_runs_on_the_absolute_directory",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_a_directory_a_sentence_names_absolutely_must_survive_and_which_files_hold_the_text_must_be_read_v1.py",
@@ -270,12 +271,6 @@
     },
     {
       "file": "canonical/tests/test_a_fact_about_a_file_is_not_answered_by_printing_the_file_v1.py",
-      "test": "test_the_permissions_are_answered_with_the_permissions",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_a_fact_about_a_file_is_not_answered_by_printing_the_file_v1.py",
       "test": "test_the_size_agrees_with_the_bytes_on_disk",
       "status": "failed",
       "message_head": "AssertionError: '' != '31'"
@@ -335,18 +330,6 @@
       "message_head": "AssertionError: 'canonical/astra_runtime/tmp/test_mutation_verb_is_a_verb/names/app/models.py' unexpectedly found in ['canonical/astra_runtime/tmp/test_mutation_verb_is_a_verb/names/app/models.py']"
     },
     {
-      "file": "canonical/tests/test_a_pending_inventory_row_is_not_an_answer_v1.py",
-      "test": "test_a_provenance_question_is_refused_rather_than_answered_with_the_files_text",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__CAPABILITY_REFUSED_GIT_FAILED' != 'FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED'"
-    },
-    {
-      "file": "canonical/tests/test_a_pending_inventory_row_is_not_an_answer_v1.py",
-      "test": "test_the_verified_command_runner_answers_and_no_inventory_row_does",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
       "file": "canonical/tests/test_a_program_is_judged_by_its_subcommand_v1.py",
       "test": "test_a_reading_git_subcommand_is_re_run_and_compared",
       "status": "failed",
@@ -360,45 +343,9 @@
     },
     {
       "file": "canonical/tests/test_a_promise_about_a_file_is_read_before_the_work_v1.py",
-      "test": "test_a_stated_copy_is_still_verified",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a correct copy stopped being certified: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_a_promise_about_a_file_is_read_before_the_work_v1.py",
-      "test": "test_a_stated_move_is_verified_not_refused_for_its_own_source",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a correct move was not certified: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT / None"
-    },
-    {
-      "file": "canonical/tests/test_a_promise_about_a_file_is_read_before_the_work_v1.py",
       "test": "test_a_stated_move_really_moved_the_bytes",
       "status": "failed",
       "message_head": "AssertionError: True is not false : the source is still there"
-    },
-    {
-      "file": "canonical/tests/test_a_promise_about_a_file_is_read_before_the_work_v1.py",
-      "test": "test_a_stated_read_is_still_verified",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a correct read stopped being certified: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_a_proposer_is_not_a_repair_v1.py",
-      "test": "test_an_already_green_tree_is_answered_without_an_edit",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : ('FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', None)"
-    },
-    {
-      "file": "canonical/tests/test_a_proposer_is_not_a_repair_v1.py",
-      "test": "test_an_unparseable_source_is_not_called_already_satisfied",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT' != 'FAIL_CLOSED__NAMED_SOURCE_UNPARSEABLE'"
-    },
-    {
-      "file": "canonical/tests/test_a_proposer_is_not_a_repair_v1.py",
-      "test": "test_the_source_really_changes_and_the_report_is_written",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : ('FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', None)"
     },
     {
       "file": "canonical/tests/test_a_provisional_pass_says_why_it_is_provisional_v1.py",
@@ -450,21 +397,9 @@
     },
     {
       "file": "canonical/tests/test_a_rename_question_is_answered_by_a_plan_v1.py",
-      "test": "test_the_planning_phrasing_reaches_the_same_row_and_changes_nothing",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID"
-    },
-    {
-      "file": "canonical/tests/test_a_rename_question_is_answered_by_a_plan_v1.py",
       "test": "test_the_rename_question_is_answered_by_the_planner_and_the_plan_is_real",
       "status": "failed",
       "message_head": "AssertionError: 'software.analysis.diagnose_and_architect.v1' != 'python.source.crossfile_edit.choreograph.v1'"
-    },
-    {
-      "file": "canonical/tests/test_a_repair_sentence_that_names_its_target_before_the_verb_v1.py",
-      "test": "test_the_measured_sentence_repairs_the_source_and_greens_the_test",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_a_repair_sentence_that_names_its_target_before_the_verb_v1.py",
@@ -491,34 +426,10 @@
       "message_head": "AssertionError: 'def add(a, b):\\n    return a - b\\n' != 'def add(a, b):\\n    return a + b\\n'"
     },
     {
-      "file": "canonical/tests/test_a_report_is_never_written_over_its_subject_v1.py",
-      "test": "test_the_report_lands_beside_the_source_and_the_source_still_repairs",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a repairable red source was not repaired: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT / python.software.repair.apply.verified.v1"
-    },
-    {
       "file": "canonical/tests/test_a_request_that_names_no_text_writes_nothing_v1.py",
       "test": "test_a_stated_mutation_does_what_was_stated_and_nothing_more",
       "status": "failed",
       "message_head": "AssertionError: Lists differ: [('Delete the file {f}', 'source present=T[278 chars]n'\")] != []"
-    },
-    {
-      "file": "canonical/tests/test_a_review_that_ran_is_not_a_compile_gap_v1.py",
-      "test": "test_mutation_and_perf_are_measurements_too",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT"
-    },
-    {
-      "file": "canonical/tests/test_a_role_named_by_its_declared_name_is_stated_v1.py",
-      "test": "test_both_capabilities_reach_exact_semantic_acceptance",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT' is not 'PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED' : decision.synthesis.typed.stdlib -> FAIL_CLOSED"
-    },
-    {
-      "file": "canonical/tests/test_a_route_the_binder_refused_may_still_be_served_by_a_chain_v1.py",
-      "test": "test_every_file_the_sentence_named_is_present_or_named_in_the_refusal",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : canonical/astra_runtime/tmp/chain1/w1/out.txt is neither on disk nor named in the refusal: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT /"
     },
     {
       "file": "canonical/tests/test_a_route_the_binder_refused_may_still_be_served_by_a_chain_v1.py",
@@ -552,12 +463,6 @@
     },
     {
       "file": "canonical/tests/test_a_stated_command_line_runs_and_is_checked_v1.py",
-      "test": "test_a_stated_copy_produces_the_copy",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : a stated command did not run: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_a_stated_command_line_runs_and_is_checked_v1.py",
       "test": "test_a_stated_line_count_reports_the_real_number",
       "status": "failed",
       "message_head": "AssertionError: False is not True"
@@ -573,12 +478,6 @@
       "test": "test_a_question_about_the_defect_is_not_a_request_to_change_it",
       "status": "failed",
       "message_head": "AssertionError: (('diagnose', 'root_cause'), 'diagnose_and_architect') is not None"
-    },
-    {
-      "file": "canonical/tests/test_a_stated_defect_is_a_request_to_repair_v1.py",
-      "test": "test_the_measured_bug_report_repairs_the_source_and_greens_the_test",
-      "status": "failed",
-      "message_head": "AssertionError: False is not True : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_a_stated_effect_is_answered_by_a_capability_that_declares_it_v1.py",
@@ -605,76 +504,10 @@
       "message_head": "AssertionError: False is not true"
     },
     {
-      "file": "canonical/tests/test_acceptance_clause_front_door_v1.py",
-      "test": "test_a_false_objective_cannot_be_accepted",
-      "status": "failed",
-      "message_head": "AssertionError: [] is not true : {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'ACCEPTANCE_CLAUSE_22f985d151164e3a', 'goal': 'Write a measured acceptance repair report to canoni"
-    },
-    {
-      "file": "canonical/tests/test_acceptance_clause_front_door_v1.py",
-      "test": "test_a_hidden_requirement_in_the_routing_prefix_still_fails_closed",
-      "status": "failed",
-      "message_head": "AssertionError: [] is not true : {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'ACCEPTANCE_CLAUSE_5b528807ea86419f', 'goal': 'Write a measured acceptance repair report to canoni"
-    },
-    {
-      "file": "canonical/tests/test_acceptance_clause_front_door_v1.py",
-      "test": "test_the_front_door_completes_repair_measurement_and_acceptance",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'ACCEPTANCE_CLAUSE_9b3fe08aacdf4a39', 'goal': 'Write a measured acceptance repair report to can"
-    },
-    {
-      "file": "canonical/tests/test_acquisition_to_execution_engine_v1.py",
-      "test": "test_phase1_speed_elevation_ownership_gate_and_sabotage_rejection",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'autonomous-solve', 'goal': 'Enable feature flag turbo_mode in database /tmp/brain_acq_exec_tes"
-    },
-    {
-      "file": "canonical/tests/test_acquisition_to_execution_engine_v1.py",
-      "test": "test_phase2_live_runtime_assertion_trace_synthesis_repairs_dynamic_spec",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1', 'status': 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', 'pass': False, 'task_id': 'dyn-trace"
-    },
-    {
       "file": "canonical/tests/test_acquisition_to_execution_engine_v1.py",
       "test": "test_phase3_cli_pipeline_crystallization_and_tier3_curriculum_closure",
       "status": "failed",
       "message_head": "AssertionError: False is not true : {'schema': 'BRAIN_CLOSED_LOOP_AUTONOMOUS_CONTROLLER_V1', 'task_id': 'autonomous-solve', 'pass': False, 'status': 'FAIL__COMPOSER_STEP_RAISED', 'failure_class': 'COM"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_byte_comparison_answers_with_the_code_the_world_agrees_with",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a byte comparison of identical files was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_comparison_answers_with_the_code_the_world_agrees_with",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a comparison against canonical/astra_runtime/tmp/m3v7x/same.txt was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_literal_search_finds_the_line_and_changes_nothing",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a literal search was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_pattern_search_answers_with_the_lines_the_pattern_matches",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a pattern search was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_an_ordinary_word_that_draws_a_tie_does_not_cost_the_command",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : 'List the directory %s' was refused while its synonyms ran -- a tie between capabilities cost the command: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFIN"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_counting_and_column_commands_run_and_report_the_real_numbers",
-      "status": "failed",
-      "message_head": "AssertionError: Lists differ: [('Count the lines in the file %s', 'FAIL_[256 chars]NT')] != []"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -684,93 +517,9 @@
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_phrasing_that_once_hijacked_the_binder_now_reaches_its_command",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : the phrasing binds egrep but was not verified -- the hijack is back: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT' / None"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_write_family_writes_the_stated_bytes_whatever_words_carry_it",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : \"Write the string 'PROJECT BRAIN' to the file canonical/astra_runtime/tmp/m3v7x/wfstr0.txt.\" was not verified: 'FAIL_CLOSED__STEP_RAISED_OUTCOME_UNKNOWN' / None"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
       "test": "test_the_writer_is_chosen_by_the_payload_not_by_the_alphabet",
       "status": "failed",
       "message_head": "AssertionError: 'software.hardcore.kernel.orchestrate.v1' != 'text.file.write'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_checksum_runs",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated sha256sum was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_copy_leaves_both_files",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated copy was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_directory_is_a_real_directory",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated mkdir was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_empty_file_is_empty",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated touch was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_line_count_reports_the_real_number",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated wc -l was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_move_leaves_only_the_destination",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated move was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_read_leaves_the_file_alone",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated read was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_removal_really_removes",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated removal was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_sort_into_a_file_writes_the_sorted_bytes_there",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated sort -o was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_stated_sort_to_stdout_leaves_the_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated sort was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_first_two_lines_are_the_first_two_lines",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a stated head was not verified: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_rest_of_the_verifiable_surface_runs_and_is_checked",
-      "status": "failed",
-      "message_head": "AssertionError: Lists differ: [('Compute the md5 of the file %s', 'FAIL_[588 chars]NT')] != []"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -801,12 +550,6 @@
       "test": "test_a_command_that_consumes_its_operand_is_never_written_over",
       "status": "failed",
       "message_head": "AssertionError: False is not true"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_commands_result_can_be_written_where_the_sentence_says",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -918,12 +661,6 @@
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_request_to_append_does_not_replace_the_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
       "test": "test_a_request_to_be_shown_a_line_does_not_change_the_file",
       "status": "failed",
       "message_head": "AssertionError: False is not true"
@@ -945,12 +682,6 @@
       "test": "test_a_search_that_finds_nothing_is_an_answer_not_a_crash",
       "status": "failed",
       "message_head": "AssertionError: False is not true : pattern 'apple' was not verified: status=None reason=None unverified=None"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_sentence_can_ask_for_text_to_be_replaced_in_a_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -1056,30 +787,6 @@
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_empty_names_one_exact_pattern_and_not_a_loose_one",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_every_way_of_saying_append_keeps_what_was_there",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : (\"Append the text 'hello' to the file %s\", 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT')"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_files_can_be_found_by_the_ending_the_sentence_spells_out",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_lines_can_be_filtered_out_by_what_they_do_not_contain",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
       "test": "test_reading_a_part_of_a_file_leaves_every_byte_of_it_alone",
       "status": "failed",
       "message_head": "AssertionError: False is not true : Show lines 2 to 4 of the file %s"
@@ -1131,12 +838,6 @@
       "test": "test_two_identical_files_and_two_different_files_are_distinguished",
       "status": "failed",
       "message_head": "AssertionError: False is not true"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_line_the_file_does_not_have_is_not_an_answer",
-      "status": "failed",
-      "message_head": "AssertionError: 'COMMAND_PRINTED_NONE_OF_THE_LINES_THE_SENTENCE_NAMED' not found in '{\"schema\": \"PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1\", \"status\": \"FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_C"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -1350,30 +1051,6 @@
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_an_append_adds_the_line_and_keeps_what_was_there",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : (\"Append the line 'date' to the file %s\", 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT')"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_deleting_a_directory_the_sentence_named_deletes_it",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_moving_a_file_into_a_directory_is_proven_by_the_world",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_directory_the_sentence_named_is_still_deleted_whole",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
       "test": "test_a_real_deletion_still_deletes",
       "status": "failed",
       "message_head": "AssertionError: False is not true : Remove the file %s"
@@ -1416,105 +1093,9 @@
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_appending_one_file_to_another_keeps_what_the_destination_held",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
       "test": "test_naming_a_tree_does_not_hijack_a_mutation_or_a_creation",
       "status": "failed",
       "message_head": "AssertionError: False is not true"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_second_operand_never_reaches_a_program_that_writes_to_it",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_sorting_two_files_merges_their_lines",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_first_line_of_two_files_is_asked_of_each_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_line_count_of_two_files_reports_each_one_and_the_total",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_lines_only_one_file_has_are_the_complement_of_the_shared_ones",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_lines_two_files_share_are_taken_from_the_other_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_single_file_forms_are_not_disturbed_by_the_second_operand",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_count_of_a_filtered_set_is_not_the_total_line_count",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_removing_the_duplicates_still_yields_the_distinct_set",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_distinct_set_is_served_under_both_of_its_names",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : Show the unique lines of the file canonical/astra_runtime/tmp/m3v7x/dl5/a.txt -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_removals_that_are_owned_are_untouched_by_the_new_refusals",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : Remove the empty lines from the file canonical/astra_runtime/tmp/m3v7x/dl7/b.txt -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_pattern_found_inside_the_path_does_not_break_the_path",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : the pattern 'an' was masked out of the path itself: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_value_is_still_masked_where_it_was_quoted",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_file_with_no_such_column_does_not_return_its_whole_lines",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_line_number_question_carries_the_number",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -1530,72 +1111,6 @@
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_prefix_shape_selects_by_prefix",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_shape_asked_for_over_a_tree_walks_the_tree",
-      "status": "failed",
-      "message_head": "AttributeError: 'NoneType' object has no attribute 'split'"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_shape_does_not_turn_a_deletion_or_a_creation_into_a_listing",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a creation answered with a listing creates nothing: FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_an_ending_selects_a_set_and_not_the_whole_directory",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_an_extension_in_front_of_the_word_files_names_the_set",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : the .log files in the directory canonical/astra_runtime/tmp/m3v7x/sf3 -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_plain_listing_is_still_a_listing",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_quoted_form_is_not_read_as_a_literal_filename",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : Find the files in the directory canonical/astra_runtime/tmp/m3v7x/sf2 that end with '.log' -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_reading_of_the_file_still_does_not_write_to_it",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_adding_to_the_beginning_is_the_mirror_of_adding_to_the_end",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : Add the text 'top' to the beginning of the file %s -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_removing_the_lines_that_contain_a_value_keeps_the_other_lines",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_replacing_every_occurrence_still_rewrites_the_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
       "test": "test_the_same_sentence_without_the_removal_verb_still_selects",
       "status": "failed",
       "message_head": "AssertionError: 'hello again\\n' != None"
@@ -1605,66 +1120,6 @@
       "test": "test_different_as_an_adjective_keeps_its_own_answer",
       "status": "failed",
       "message_head": "AssertionError: False is not true : hijacked: Write the unique lines of the file canonical/astra_runtime/tmp/m3v7x/df5/a.txt to a different file canonical/astra_runtime/tmp/m3v7x/df5/c.txt"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_removal_of_the_repeats_is_still_served",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_plain_count_a_file_has_is_still_served",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_three_synonyms_of_one_question_bind_one_operation",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : unique -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_file_named_after_a_verb_is_not_a_request_to_change_it",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_a_short_name_and_a_long_name_get_the_same_answer",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : a.txt -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_making_a_file_upper_case_changes_the_file",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_removing_the_blank_lines_is_still_a_filter",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_showing_a_file_in_upper_case_still_does_not_write",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_blank_lines_are_still_the_blank_lines",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
-    },
-    {
-      "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
-      "test": "test_the_lines_that_are_not_blank_are_not_the_blank_lines",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : that are not blank -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
     },
     {
       "file": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
@@ -2255,28 +1710,10 @@
       "message_head": "AssertionError: Lists differ: ['CHANNEL_SITE_DRIFT:write:_verify_and_promote_acquisition:expected=0:actual=1'] != []"
     },
     {
-      "file": "canonical/tests/test_composition_cross_step_no_bypass_audit_v2.py",
-      "test": "test_explicit_astra_step_projection_has_no_legacy_fallback",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_COMPOSITION_CROSS_STEP_NO_BYPASS_AUDIT_V2', 'status': 'FAIL_CLOSED__EXPLICIT_CROSS_STEP_PROJECTION_REQUIRES_REAUDIT', 'pass': False, 'erro"
-    },
-    {
-      "file": "canonical/tests/test_computer_env_v1.py",
-      "test": "test_a_goal_naming_no_format_is_refused_by_the_channel",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT' != 'OPEN__NO_OUTPUT_FORMAT_IN_GAP'"
-    },
-    {
       "file": "canonical/tests/test_computer_env_v1.py",
       "test": "test_the_channel_reports_how_many_actions_it_tried",
       "status": "failed",
       "message_head": "AssertionError: 0 not greater than 1"
-    },
-    {
-      "file": "canonical/tests/test_computer_env_v1.py",
-      "test": "test_the_first_time_learns_and_the_second_does_not",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRICULUM_V1', 'status': 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', 'pass': False, 'gap_id': '', 'gap': 'compress t"
     },
     {
       "file": "canonical/tests/test_confined_crossfile_qualification_v1.py",
@@ -2364,12 +1801,6 @@
     },
     {
       "file": "canonical/tests/test_curriculum_v1.py",
-      "test": "test_a_real_gap_is_closed_by_real_study",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRICULUM_V1', 'status': 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', 'pass': False, 'gap_id': 'g81d9a9ffa98f38f84966"
-    },
-    {
-      "file": "canonical/tests/test_curriculum_v1.py",
       "test": "test_an_awkwardly_phrased_goal_is_closed_without_any_learning",
       "status": "failed",
       "message_head": "AssertionError: 'PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED' != 'PASS__COMPOSED_CAPABILITY_CHAIN'"
@@ -2397,30 +1828,6 @@
       "test": "test_a_failed_channel_is_debited_so_it_falls_in_future",
       "status": "failed",
       "message_head": "AssertionError: 0.17857142857142858 not less than 0.17857142857142858"
-    },
-    {
-      "file": "canonical/tests/test_curriculum_v1.py",
-      "test": "test_a_gap_no_channel_can_close_stays_open",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT' != 'OPEN__GAP_STUDIED_NOT_CLOSED'"
-    },
-    {
-      "file": "canonical/tests/test_curriculum_v1.py",
-      "test": "test_a_gap_already_solvable_is_closed_by_the_cheap_channel",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRICULUM_V1', 'status': 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', 'pass': False, 'gap_id': '', 'gap': 'run shell "
-    },
-    {
-      "file": "canonical/tests/test_curriculum_v1.py",
-      "test": "test_it_stops_at_the_first_channel_that_works",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRICULUM_V1', 'status': 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', 'pass': False, 'gap_id': '', 'gap': 'run shell "
-    },
-    {
-      "file": "canonical/tests/test_curriculum_v1.py",
-      "test": "test_the_last_resort_is_not_wasted_on_what_is_already_known",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRICULUM_V1', 'status': 'FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT', 'pass': False, 'gap_id': '', 'gap': 'compress t"
     },
     {
       "file": "canonical/tests/test_decision_evidence_locate_independent_verification_v1.py",
@@ -2469,6 +1876,630 @@
       "test": "test_a_missing_binary_and_an_unresolved_input_are_distinguishable",
       "status": "failed",
       "message_head": "AssertionError: '' == ''"
+    },
+    {
+      "file": "canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py",
+      "test": "test_a_tool_dependent_refusal_names_the_missing_dependency",
+      "status": "failed",
+      "message_head": "AssertionError: False is not true :"
+    },
+    {
+      "file": "canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py",
+      "test": "test_each_portable_cause_names_its_real_blocker",
+      "status": "failed",
+      "message_head": "AssertionError: 'SQLITE_RECORD_COLLECTION_NOT_FOUND' not found in '' :"
+    },
+    {
+      "file": "canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py",
+      "test": "test_every_portably_failing_goal_still_fails",
+      "status": "failed",
+      "message_head": "AssertionError: True is not false"
+    },
+    {
+      "file": "canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py",
+      "test": "test_no_goal_reports_the_opaque_string_any_more",
+      "status": "failed",
+      "message_head": "AssertionError: '' == ''"
+    },
+    {
+      "file": "canonical/tests/test_failure_record_names_its_capability_v1.py",
+      "test": "test_a_named_failure_does_not_share_a_class_with_an_unnamed_one",
+      "status": "failed",
+      "message_head": "KeyError: '0c4e3aaed0bec4ed6f8b392ce1e763b7ac4491392ceb372773f2c1333324134d'"
+    },
+    {
+      "file": "canonical/tests/test_failure_record_names_its_capability_v1.py",
+      "test": "test_the_fixtures_really_failed",
+      "status": "failed",
+      "message_head": "AssertionError: True is not False : sqlite_verify must really fail"
+    },
+    {
+      "file": "canonical/tests/test_failure_record_names_its_capability_v1.py",
+      "test": "test_the_reason_is_the_unwrapped_code_not_the_envelope",
+      "status": "failed",
+      "message_head": "AssertionError: 'BOUND_SYSTEM_TOOL_MISSING' != 'BOUND_CAPABILITY_SOURCE_UNSUPPORTED'"
+    },
+    {
+      "file": "canonical/tests/test_failure_record_names_its_capability_v1.py",
+      "test": "test_the_record_does_not_claim_the_route_is_dead",
+      "status": "failed",
+      "message_head": "KeyError: '0c4e3aaed0bec4ed6f8b392ce1e763b7ac4491392ceb372773f2c1333324134d'"
+    },
+    {
+      "file": "canonical/tests/test_finance_saccr_addon_live_v1.py",
+      "test": "test_trade_without_a_credit_rating_fails_closed_and_writes_nothing",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'SACCR_CREDIT_RATING_REQUIRED' in 'None'"
+    },
+    {
+      "file": "canonical/tests/test_finance_saccr_addon_live_v1.py",
+      "test": "test_malformed_portfolios_fail_closed",
+      "status": "failed",
+      "message_head": "AssertionError: ('trades_nolist.json', None)"
+    },
+    {
+      "file": "canonical/tests/test_finance_saccr_addon_live_v1.py",
+      "test": "test_scope_violating_ratings_fail_closed",
+      "status": "failed",
+      "message_head": "AssertionError: None"
+    },
+    {
+      "file": "canonical/tests/test_four_wave_optimal_plan_v1.py",
+      "test": "test_wave2_pluggy_class_method_crystallizes_and_warm_recalls_fast",
+      "status": "failed",
+      "message_head": "AssertionError: []"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_normal_entry_binds_and_replays_actual_crossfile_change[issue-Write]",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'CROSSFILE_PUBLIC_ENTRY', 'goal': 'Write a cross-...xkf2_nyo/src using the issue path canonical/astra_runtime/tmp/f"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_normal_entry_binds_and_replays_actual_crossfile_change[task-Write]",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'CROSSFILE_PUBLIC_ENTRY', 'goal': 'Write a cross-...e-n40asit3/src using the task path canonical/astra_runtime/tmp/"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_normal_entry_binds_and_replays_actual_crossfile_change[issue-Create]",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'CROSSFILE_PUBLIC_ENTRY', 'goal': 'Create a cross...45simgpy/src using the issue path canonical/astra_runtime/tmp/f"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_normal_entry_move_can_create_a_module",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'CROSSFILE_PUBLIC_ENTRY', 'goal': 'Write a cross-...4qkne29h/src using the issue path canonical/astra_runtime/tmp/f"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_request_local_binding_does_not_mutate_registry",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_INPUT_BINDING_REQUIRED:software.repair.choreograph.crossfile.v1:unserved_stated_files:canonical/astra_runtime/tmp/front-crossfile-wi7m4kdl/"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_extra_goal_requirements_refuse_before_execution[ and preserve every secret file]",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'COMPUTER_EXE...D_CONFINEMENT' == 'CROSSFILE_TASK_UNBOUND'"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_extra_goal_requirements_refuse_before_execution[; then deploy the service]",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'COMPUTER_EXE...D_CONFINEMENT' == 'CROSSFILE_TASK_UNBOUND'"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_extra_goal_requirements_refuse_before_execution[ where all hidden requirements hold]",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'COMPUTER_EXE...D_CONFINEMENT' == 'CROSSFILE_TASK_UNBOUND'"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_unrelated_regression_failure_cannot_be_retried_away",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_bound_preimage_changes_refuse_before_adapter_side_effects[issue]",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_INPUT_BINDING_REQUIRED:software.repair.choreograph.crossfile.v1:unserved_stated_files:canonical/astra_runtime/tmp/front-crossfile-bny92ofs/"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_bound_preimage_changes_refuse_before_adapter_side_effects[source]",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_INPUT_BINDING_REQUIRED:software.repair.choreograph.crossfile.v1:unserved_stated_files:canonical/astra_runtime/tmp/front-crossfile-n1yupw0q/"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[binding]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[edits]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[candidate_hash]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[patch_hash]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[empty_patches]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[preimage_hash]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[diff]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[test_count]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[zero_tests]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[failed_tests]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[diff_hash]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[report_source]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_refuses_tampered_real_artifact_even_with_new_artifact_hash[oracle_credit]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_rejects_requirement_added_after_execution",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_reinspection_detects_source_change_after_execution",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_forged_patch_cannot_change_behavior_or_weaken_tests_even_with_consistent_hashes[False]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_forged_patch_cannot_change_behavior_or_weaken_tests_even_with_consistent_hashes[True]",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_crossfile_task_v1.py",
+      "test": "test_producer_success_is_insufficient_when_separate_replay_fails",
+      "status": "failed",
+      "message_head": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/canonical/astra_runtime/tmp/front-crossfile-qb6gm_jj/out/report.json'"
+    },
+    {
+      "file": "canonical/tests/test_front_door_task_bound_contracts_v1.py",
+      "test": "test_failed_property_cannot_be_dropped_by_router_or_retry",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_front_door_task_bound_contracts_v1.py",
+      "test": "test_unrelated_write_cannot_silently_discard_contracts",
+      "status": "failed",
+      "message_head": "assert True is False"
+    },
+    {
+      "file": "canonical/tests/test_front_door_task_bound_contracts_v1.py",
+      "test": "test_binding_does_not_mutate_registry_or_request",
+      "status": "failed",
+      "message_head": "ValueError: SELECTED_CAPABILITY_CANNOT_CHECK_REPAIRED_CONTRACTS"
+    },
+    {
+      "file": "canonical/tests/test_frontier_intelligence_v1.py",
+      "test": "test_all_three_terms_are_present",
+      "status": "failed",
+      "message_head": "AssertionError: assert 145 == 64"
+    },
+    {
+      "file": "canonical/tests/test_frontier_intelligence_v1.py",
+      "test": "test_owned_goal_uses_no_external_knowledge",
+      "status": "failed",
+      "message_head": "AssertionError: assert ['source.cand...rison.stdlib'] == ['source.obje...rison.stdlib']"
+    },
+    {
+      "file": "canonical/tests/test_git_sentence_routing_v1.py",
+      "test": "test_the_adapter_covers_every_declared_operation",
+      "status": "failed",
+      "message_head": "AssertionError: Tuples differ: ('log[22 chars]show', 'blame', 'branch', 'commit', 'cherry_pick', 'changelog') != ('log[22 chars]show', 'blame', 'branch', 'commit')"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f1_best_candidate_that_cannot_bind_fails_closed_instead_of_falling_through",
+      "status": "failed",
+      "message_head": "AssertionError: assert False"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_every_capability_is_reachable_from_one_sentence_by_prose_or_by_name",
+      "status": "failed",
+      "message_head": "AssertionError: [{'capability_id': 'decision.synthesis.verify.stdlib', 'state': 'NOT_REACHABLE', 'goal': 'Use audit decision independe...', 'detail': 'GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:tex"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_every_capability_is_reachable_BY_PROSE_alone",
+      "status": "failed",
+      "message_head": "AssertionError: [{'capability_id': 'decision.synthesis.verify.stdlib', 'state': 'NOT_REACHABLE', 'goal': 'Use audit decision independe...', 'detail': 'GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:tex"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f13_intermediate_spool_assigned_when_the_sentence_names_no_artifact",
+      "status": "failed",
+      "message_head": "AssertionError: FAIL__CAPABILITY_DAG_RESULT_INVALID"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f16_an_id_shaped_path_that_no_capability_answers_to_fails_closed",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_COMPILATION_BEST_MATCH_UNBINDABLE:{\"substitute_binding\": \"UNJUSTIFIED_WORLD_SLOTS\", \"substitute_refused\": \"python.repository.acceptance.mea"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f23_two_same_type_inputs_bind_by_the_roles_the_sentence_states",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_COMPILATION_AMBIGUOUS:{\"candidates\": [\"python.tests.audit.unittest\", \"python.source.audit.ast\"], \"score\": 15}"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f23_a_role_in_front_of_a_conjunction_stays_open",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'manifest_path' in 'archive.tar_gz.create_from_manifest:unserved_stated_files:canonical/astra_runtime/tmp/test_goal_front_compiler/b23.json'"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f24_a_candidate_the_sentence_never_gave_its_input_is_not_the_route",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_INPUT_BINDING_REQUIRED:docx.document.create_from_json_record:output_path_equals_an_input_path"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f24_a_runtime_native_capability_is_admitted_on_the_contract_the_sentence_states",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_INPUT_BINDING_REQUIRED:knowledge.consistency.assess:unserved_stated_files:canonical/astra_runtime/tmp/test_goal_front_compiler/ev24a.json,c"
+    },
+    {
+      "file": "canonical/tests/test_goal_front_compiler_v1.py",
+      "test": "test_f24_an_ambiguous_statement_still_keeps_the_request_open",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'manifest_path' in 'archive.tar_gz.create_from_manifest:unserved_stated_files:canonical/astra_runtime/tmp/test_goal_front_compiler/b24.json'"
+    },
+    {
+      "file": "canonical/tests/test_grounded_executable_composition.py",
+      "test": "test_registry_has_no_known_provider_backed_path_without_explicit_binding",
+      "status": "failed",
+      "message_head": "AssertionError: Lists differ: [{'capability_id': 'auto.npm.shelacek-ubjs[5896 chars]h']}] != []"
+    },
+    {
+      "file": "canonical/tests/test_historical_repair_transfer_v1.py",
+      "test": "test_historical_cross_issue_transfer_against_the_same_capable_solver[zero_consumption-0]",
+      "status": "failed",
+      "message_head": "assert 1 >= 2"
+    },
+    {
+      "file": "canonical/tests/test_historical_repair_transfer_v1.py",
+      "test": "test_historical_cross_issue_transfer_against_the_same_capable_solver[zero_consumption-1]",
+      "status": "failed",
+      "message_head": "assert 1 >= 2"
+    },
+    {
+      "file": "canonical/tests/test_jit_knowledge_v1.py",
+      "test": "test_a_badly_asked_question_still_reaches_two_kinds",
+      "status": "failed",
+      "message_head": "AssertionError: 0 not greater than or equal to 2 : one kind is not knowledge: {}"
+    },
+    {
+      "file": "canonical/tests/test_jit_knowledge_v1.py",
+      "test": "test_the_gap_is_recorded_so_it_is_known",
+      "status": "failed",
+      "message_head": "AssertionError: None is not true"
+    },
+    {
+      "file": "canonical/tests/test_live_brain_route_admission_v1.py",
+      "test": "test_path_token_only_match_is_rejected_before_execution",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    {
+      "file": "canonical/tests/test_live_brain_route_admission_v1.py",
+      "test": "test_single_word_evidence_is_rejected",
+      "status": "failed",
+      "message_head": "canonical.runtime.goal_compiler.GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    {
+      "file": "canonical/tests/test_live_brain_route_admission_v1.py",
+      "test": "test_a_source_root_key_binds_from_the_goal",
+      "status": "failed",
+      "message_head": "AssertionError: {'output_path': 'canonical/astra_runtime/tmp/test_live_brain_route_admission/auditroot.json', 'source_root': 'canonical/runtime/goal_compiler.py'}"
+    },
+    {
+      "file": "canonical/tests/test_live_brain_route_admission_v1.py",
+      "test": "test_a_repair_sentence_reaches_a_repair_capability_end_to_end",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1', 'status': 'PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED', 'pass': True, 'task_id': 'TEST_ROUTE_ADMISSION_REPAIR_3"
+    },
+    {
+      "file": "canonical/tests/test_live_brain_route_admission_v1.py",
+      "test": "test_r9_does_not_move_the_compile_or_selection_rates",
+      "status": "failed",
+      "message_head": "AssertionError: {'goals': 23, 'compiled': 21, 'expected_first_selected': 19, 'baseline_compiled': 5, ...}"
+    },
+    {
+      "file": "canonical/tests/test_live_route_memory_consult_v1.py",
+      "test": "test_consultation_does_not_change_the_verdict",
+      "status": "failed",
+      "message_head": "AssertionError: 'PASS__RAW_GOAL_COMPILED' not found in 'PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED'"
+    },
+    {
+      "file": "canonical/tests/test_live_route_memory_consult_v1.py",
+      "test": "test_a_goal_naming_a_real_program_is_attempted",
+      "status": "failed",
+      "message_head": "AssertionError: None is not true : {}"
+    },
+    {
+      "file": "canonical/tests/test_live_route_memory_consult_v1.py",
+      "test": "test_failure_says_what_to_learn_next",
+      "status": "failed",
+      "message_head": "AssertionError: [] is not true"
+    },
+    {
+      "file": "canonical/tests/test_live_solver_families_v3.py",
+      "test": "test_kernel_refuses_exactly_the_registry_source_types_the_kernel_rejects",
+      "status": "failed",
+      "message_head": "AssertionError: assert 40 == 17"
+    },
+    {
+      "file": "canonical/tests/test_live_solver_families_v4.py",
+      "test": "test_wave_four_decision_synthesis",
+      "status": "failed",
+      "message_head": "AssertionError: assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_live_solver_families_v4.py",
+      "test": "test_wave_four_python_source_audit",
+      "status": "failed",
+      "message_head": "AssertionError: assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_live_solver_families_v7.py",
+      "test": "test_the_compiler_alone_routes_a_named_capability_without_the_path_in_the_sentence",
+      "status": "failed",
+      "message_head": "AssertionError: only 12 of 13 named capabilities routed to themselves: [('brain_witness_contamination_admissibility_v1.py.auto.v1', '<raised:GOAL_INPUT_BINDING_REQUIRED>')]"
+    },
+    {
+      "file": "canonical/tests/test_live_solver_families_v7.py",
+      "test": "test_every_path_style_receipt_backed_capability_routes_to_itself_when_named",
+      "status": "failed",
+      "message_head": "AssertionError: 16 of 293 misrouted; first few: [('canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1', '<raised:GOAL_INPUT_BINDING_REQUIRED>'), ('canonical/runtime/professional"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_three_edit_pytest_repair_uses_existing_iterative_engine_and_measured_gate[src]",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_PYTHON_REPAIR_MEASURED_ACCEPTANCE_CONTROLLER_V1', 'capability_id': 'python.software.repair.measured_acceptance.v1', 'status': 'OPEN__NO_VERIFIED_REPAIR_IN_BOU"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_three_edit_pytest_repair_uses_existing_iterative_engine_and_measured_gate[.]",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_PYTHON_REPAIR_MEASURED_ACCEPTANCE_CONTROLLER_V1', 'capability_id': 'python.software.repair.measured_acceptance.v1', 'status': 'OPEN__NO_VERIFIED_REPAIR_IN_BOU"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_semantic_rejection_does_not_trigger_another_search_route",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_search_cannot_overwrite_or_delete_old_intermediate_file",
+      "status": "failed",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_confined_three_edit_portfolio_is_reconstructed_and_replayed",
+      "status": "failed",
+      "message_head": "ValueError: EXPLICIT_VENV_DEPENDENCIES_REQUIRED"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_failed_fresh_replay_restores_source_without_falling_back",
+      "status": "failed",
+      "message_head": "Failed: DID NOT RAISE RuntimeError"
+    },
+    {
+      "file": "canonical/tests/test_measured_repair_portfolio_v1.py",
+      "test": "test_round_exhaustion_falls_back_without_publishing_partial_iterative_edits",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'OPEN__NO_STR...ING_CANDIDATE' == 'OPEN__NO_COM...OUNDED_SEARCH'"
+    },
+    {
+      "file": "canonical/tests/test_next_frontier_autonomous_swe_and_computer_use_v1.py",
+      "test": "test_phase1_zero_hint_two_file_coupled_bug_and_door_integration",
+      "status": "failed",
+      "message_head": "AssertionError: 1 != 2"
+    },
+    {
+      "file": "canonical/tests/test_one_file_a_sentence_names_binds_the_two_halves_a_capability_declares_v1.py",
+      "test": "test_the_front_door_refactors_and_is_accepted",
+      "status": "failed",
+      "message_head": "AssertionError: False is not True : STEP_NOT_VERIFIED_BY_ITS_PRODUCER"
+    },
+    {
+      "file": "canonical/tests/test_optimal_four_phase_awake_mastery_v1.py",
+      "test": "test_phase2_byte_verified_two_step_capability_bridge_and_oracle_refusal",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'test-byte-bridge-1', 'goal': 'Write JSON records...ds.json and load them into SQLite canonical/astra_runtime/tmp/p"
+    },
+    {
+      "file": "canonical/tests/test_optimal_four_phase_awake_mastery_v1.py",
+      "test": "test_phase3_one_python_lesson_transfers_across_all_six_other_languages",
+      "status": "failed",
+      "message_head": "AssertionError: Failed CST transfer to rust"
+    },
+    {
+      "file": "canonical/tests/test_optimal_unified_creature_and_prc2_v1.py",
+      "test": "test_compound_cst_subtree_narrowing_cross_language_test_suite_and_suspect_line_priority",
+      "status": "failed",
+      "message_head": "AssertionError: unexpectedly None"
+    },
+    {
+      "file": "canonical/tests/test_optimal_unified_creature_and_prc2_v1.py",
+      "test": "test_optimal_pillar1_general_cst_algebra_and_auto_discovered_polyglot_cross_scope_transfer",
+      "status": "failed",
+      "message_head": "AssertionError: unexpectedly None"
+    },
+    {
+      "file": "canonical/tests/test_output_destination_is_not_an_input_candidate_v1.py",
+      "test": "test_the_selection_module_passes_as_a_whole",
+      "status": "failed",
+      "message_head": "AssertionError: Lists differ: [(<canonical.tests.test_capability_selecti[467 chars]\\n')] != []"
+    },
+    {
+      "file": "canonical/tests/test_post_066e8df_workspace_speed_and_r2_scientific_fabric_v1.py",
+      "test": "test_phase2_r2_direct_adequacy_p3_policy_cegar_and_escape_repair_cycle",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1', 'task_id': 'autonomous-solve', 'goal': 'Create a tar.gz arch...est.json, including all its verification_paths files, and save "
+    },
+    {
+      "file": "canonical/tests/test_post_066e8df_workspace_speed_and_r2_scientific_fabric_v1.py",
+      "test": "test_phase4_awake_pareto_capability_scheduler_confined_shell_and_unified_model_specialist_door",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_UNIFIED_MODEL_SOLUTION_V1', 'model_id': 'BRAIN-UNIFIED-MODEL-V1', 'model_digest': 'c54b1e1d6...d0f230156001e', 'credit': {'capability_credit_delta': 0, 'owner"
+    },
+    {
+      "file": "canonical/tests/test_python_change_impact_testselect_v1.py",
+      "test": "test_the_entry_is_a_verified_bound_capability",
+      "status": "failed",
+      "message_head": "AssertionError: Lists differ: ['pyt[23 chars]t.test_selection', 'python.source.change_impact.testselect.v1'] != ['pyt[23 chars]t.test_selection']"
+    },
+    {
+      "file": "canonical/tests/test_python_contract_mutation_gen_v1.py",
+      "test": "test_the_oracle_detects_every_violation_in_a_sample",
+      "status": "failed",
+      "message_head": "assert 0 == 10"
+    },
+    {
+      "file": "canonical/tests/test_raw_accepted_generic_plan_learning_v1.py",
+      "test": "test_the_independent_verifier_passes_on_the_real_one_step_run",
+      "status": "failed",
+      "message_head": "AssertionError: unexpectedly None : the adapter refused a one-step plan"
+    },
+    {
+      "file": "canonical/tests/test_raw_goal_failure_diagnosis_v1.py",
+      "test": "test_repeats_are_counted_and_not_duplicated",
+      "status": "failed",
+      "message_head": "AssertionError: 0 != 1 : one recurring failure must be ONE class, not one per run; a store that grows per run cannot express 'every time'"
+    },
+    {
+      "file": "canonical/tests/test_raw_goal_pathology_memory_v1.py",
+      "test": "test_a_front_door_failure_is_recorded_as_a_pathology",
+      "status": "failed",
+      "message_head": "AssertionError: unexpectedly None : the shipping path must remember how this box failed, not only that it failed: no cell 'image.extract.ocr.tesseract|bound_capability_source_unsupported'"
+    },
+    {
+      "file": "canonical/tests/test_raw_goal_pathology_memory_v1.py",
+      "test": "test_only_a_machine_fact_suppresses_a_capability",
+      "status": "failed",
+      "message_head": "AssertionError: False is not true : an unsupported source is true of this box forever and may suppress"
+    },
+    {
+      "file": "canonical/tests/test_repair_search_reuse_v1.py",
+      "test": "test_same_candidate_bytes_order_and_priority_as_parse_per_edit[def f(x):\\n    return x < 3\\n]",
+      "status": "failed",
+      "message_head": "assert [{'start': 21....}, ...}, ...] == [{'start': 21....}, ...}, ...]"
+    },
+    {
+      "file": "canonical/tests/test_repair_search_reuse_v1.py",
+      "test": "test_same_candidate_bytes_order_and_priority_as_parse_per_edit[def f(x):\\r\\n    return not (x < 3 and x != 2)\\r\\n]",
+      "status": "failed",
+      "message_head": "assert [{'start': 22....}, ...}, ...] == [{'start': 22....}, ...}, ...]"
+    },
+    {
+      "file": "canonical/tests/test_repair_search_reuse_v1.py",
+      "test": "test_same_candidate_bytes_order_and_priority_as_parse_per_edit[class C:\\n    async def f(self, x):\\n        while x < 3:\\n            x = x + 1\\n        return x\\n]",
+      "status": "failed",
+      "message_head": "assert [{'start': 49....}, ...}, ...] == [{'start': 49....}, ...}, ...]"
+    },
+    {
+      "file": "canonical/tests/test_repair_search_reuse_v1.py",
+      "test": "test_pool_parses_source_once_not_once_per_mutation",
+      "status": "failed",
+      "message_head": "AssertionError: assert 33 == 21"
+    },
+    {
+      "file": "canonical/tests/test_root3_astra_current_rebind_v1.py",
+      "test": "test_current_astra_blob_and_exact_eight_process_sites",
+      "status": "failed",
+      "message_head": "AssertionError: assert 'aa91d571a881...6fa10439434d9' == '0c613137b9c5...08e2fc268deb7'"
+    },
+    {
+      "file": "canonical/tests/test_root3_effect_membrane_e1_current_byte_v1.py",
+      "test": "test_current_exact_bytes_pass",
+      "status": "failed",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_ROOT3_EFFECT_MEMBRANE_E1_CURRENT_BYTE_OUTPUT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['BLOB_DRIFT:canonical/runtime/astra_runtime.py:aa91d571a8"
+    },
+    {
+      "file": "<unknown>",
+      "test": "canonical.tests.test_root3_production_astra_launcher_v1",
+      "status": "error",
+      "message_head": "collection failure"
     }
   ],
   "standing_detail": [
@@ -2659,12 +2690,6 @@
       "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED', 'errors': ['ACTIVE_CLAIM_MISSION_BINDING_STALE', 'R4_PROOF_CLOSURE_FLAG_DRIFT'], 'open_root_ids': [], ...}"
     },
     {
-      "file": "canonical/tests/test_coverage_cc_r3_r3_promotion_safety_v1.py",
-      "test": "test_cc_r3_semantic_certificate_and_canonical_authority_shape",
-      "status": "failed",
-      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__CC_R3_R3_PROMOTION_SAFETY_UNPROVED', 'root_id': 'CC_R3_TERMINAL_CLOSURE_V1', 'claim_id': 'e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c4"
-    },
-    {
       "file": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
       "test": "test_current_registry_is_valid_and_all_three_certificates_open",
       "status": "failed",
@@ -2696,21 +2721,9 @@
     },
     {
       "file": "canonical/tests/test_current_26_zero_reality_frontier_v1.py",
-      "test": "test_live_current_26",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_REDUCER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
-    },
-    {
-      "file": "canonical/tests/test_current_26_zero_reality_frontier_v1.py",
       "test": "test_tool_discovery_removed_from_frontier",
       "status": "failed",
       "message_head": "KeyError: 'active_nondominated_certificate_ids'"
-    },
-    {
-      "file": "canonical/tests/test_current_26_zero_reality_frontier_v2.py",
-      "test": "test_current",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_REDUCER_V2', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
     },
     {
       "file": "canonical/tests/test_current_authority_chain_provenance_v1.py",
@@ -2821,12 +2834,6 @@
       "message_head": "AssertionError: assert '0e6abf778d04...852c1211563fe' == 'a19d683f86b0...e2cc96f8f71fa'"
     },
     {
-      "file": "canonical/tests/test_current_terminal_coding_v5_adequacy_gate_v1.py",
-      "test": "test_terminal_authority_binds_gate_without_promoting_certificate",
-      "status": "failed",
-      "message_head": "AssertionError: assert 'EVENT_DRIVEN...ERNAL_JOB_NOW' == 'CODING_V5_AU...ERTIFICATE_V1'"
-    },
-    {
       "file": "canonical/tests/test_current_terminal_cursorbench_dependency_provenance_atom_v1.py",
       "test": "test_cursorbench_dependency_provenance_mechanism_bound_without_truth_promotion",
       "status": "failed",
@@ -2888,27 +2895,9 @@
     },
     {
       "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
-      "test": "test_exact_live_world",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1', 'status': 'FAIL_CLOSED__CURRENT_SCHEDULING_AUTHORITY_INVALID', 'pass': False, 'execution_autho"
-    },
-    {
-      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
-      "test": "test_missing_retrieval_gate_fails_closed",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__CURRENT_SCHEDULING_AUTHORITY_INVALID' != 'FAIL_CLOSED__LIVE_WORLD_INVALID'"
-    },
-    {
-      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
       "test": "test_zero_credit_zero_reality",
       "status": "failed",
       "message_head": "KeyError: 'new_reality_units_consumed'"
-    },
-    {
-      "file": "canonical/tests/test_current_terminal_information_dominance_v2.py",
-      "test": "test_authority_count_drift_fails_closed",
-      "status": "failed",
-      "message_head": "AssertionError: 'UNRESOLVED_COUNT_NE_AUTHORITY:27:30' not found in ['AUTHORITY_ACCEPTANCE_WORLD_INVALID', 'AUTHORITY_ATOMIC_COUNTS_DO_NOT_PARTITION_REGISTRY', 'PROVED_COUNT_NE_AUTHORITY:16:18', 'UNRES"
     },
     {
       "file": "canonical/tests/test_current_terminal_information_dominance_v2.py",
@@ -2995,18 +2984,6 @@
       "message_head": "AssertionError: ('canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json', 'f8b661abf7cb1b628aa14d966658394b80093879', 'eb4bca0fe6a015d49d2854998fbe046c979c7ea9')"
     },
     {
-      "file": "canonical/tests/test_dual_judgment_general_substrate_role_v1.py",
-      "test": "test_role_qualification_passes_current_bound_bytes",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_DUAL_JUDGMENT_GENERAL_SUBSTRATE_ROLE_VERDICT_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
-    },
-    {
-      "file": "canonical/tests/test_dual_judgment_source_gate_activation_v1.py",
-      "test": "test_exact_two_requirement_discharge_only",
-      "status": "failed",
-      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {'canonical/runt...2.py': {'expected': 'b168b131f6383e158bdc0d931439d14e61f2a5de',"
-    },
-    {
       "file": "canonical/tests/test_escape_gap_a_policy_cover_adapter_activation_v1.py",
       "test": "test_current_generation_lease_revalidated_after_oq_update",
       "status": "failed",
@@ -3023,12 +3000,6 @@
       "test": "test_oq_reduction_is_primary_research_compression",
       "status": "failed",
       "message_head": "AssertionError: False is not true"
-    },
-    {
-      "file": "canonical/tests/test_escape_progress_13_route_manifest_v1.py",
-      "test": "test_current_manifest_passes_but_cc_r3_remains_open",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'pass': False, 'status': 'FAIL_CLOSED__ESCAPE13_ROUTE_MANIFEST_DRIFT', 'errors': ['TB_SCIENCE_GE_58_7:EVIDENCE_BLOB_STALE', 'TB_SCIENCE_GE_58_7:SUPPORT_STRING_MISS"
     },
     {
       "file": "canonical/tests/test_escape_progress_frozen_13_claim_v3.py",
@@ -3065,12 +3036,6 @@
       "test": "test_urlopen_bridge_roundtrip_preserves_bytes_and_identity",
       "status": "failed",
       "message_head": "AssertionError: \"EXTERNAL_TOOL_REQUEST_PENDING\" does not match \"CONTINUOUS_OBS_INFORMATION_CONTEXT_NOT_BOUND\""
-    },
-    {
-      "file": "canonical/tests/test_external_benchmark_dominance_compiler_v1.py",
-      "test": "test_external_benchmark_dominance_gate",
-      "status": "failed",
-      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'drift': {'canonical/governance/OPUS55_ACCEPTANCE_PREDICAT...bacbd9c0cdb93b155ced0f72558', 'actual': 'd4e06fd50d49342282a320"
     },
     {
       "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
@@ -3119,12 +3084,6 @@
       "test": "test_full_supervisory_transaction_passes_with_certified_roles",
       "status": "failed",
       "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_JUDGMENT_CONTROL_ENVELOPE_V1', 'accepted': False, 'status': 'TERMINAL_BLOCKED', 'errors': ['EXPLICIT_SEMANTIC_OPERATOR_CONTRACT_FAIL'], ...}"
-    },
-    {
-      "file": "canonical/tests/test_finance_direct_source_coverage_audit_v1.py",
-      "test": "test_finance_source_coverage_gap_is_localized_on_bound_bytes",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_AUDIT_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', ...1.py': {'expected': '5ebfd1e7fa871da89ecca40ffeb8dd6575c21582',"
     },
     {
       "file": "canonical/tests/test_g_route_five_generator_dominance_reconciliation_v1.py",
@@ -3185,48 +3144,6 @@
       "test": "test_relative_who_does_not_override_leading_city_slot",
       "status": "failed",
       "message_head": "AssertionError: 'SHORT_TEXT' != 'LOCATION'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_arithmetic",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_det",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_integral",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_limit",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_linear",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_positive_root",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
-    },
-    {
-      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
-      "test": "test_sum",
-      "status": "failed",
-      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
     },
     {
       "file": "canonical/tests/test_honesty_load_bearing_bypass_verifier_v1.py",
@@ -3386,12 +3303,6 @@
     },
     {
       "file": "canonical/tests/test_p1_composite_proof_counterexample_audit_v1.py",
-      "test": "test_live_composite_restoration_stays_quarantined",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_COMPOSITE_PROOF_COUNTEREXAMPLE_AUDIT_V1', 'status': 'FAIL_CLOSED__AUDIT_INPUT_OR_COUNTEREXAMPLE_DRIFT', 'audit_valid': False, 'errors':"
-    },
-    {
-      "file": "canonical/tests/test_p1_composite_proof_counterexample_audit_v1.py",
       "test": "test_reconciliation_role_drift_fails_closed",
       "status": "failed",
       "message_head": "ValueError: list.remove(x): x not in list"
@@ -3407,12 +3318,6 @@
       "test": "test_live_exact_freeze_passes",
       "status": "failed",
       "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_PREFLIGHT_VERDICT_V2', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['AUTHORITY_SOURCE_BLOB:source_"
-    },
-    {
-      "file": "canonical/tests/test_p1_terminal_execution_scope_audit_v1.py",
-      "test": "test_exact_executed_route_is_narrower_than_frozen_p1",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_TERMINAL_EXECUTION_SCOPE_AUDIT_V1', 'status': 'FAIL_CLOSED__AUDIT_INPUT_DRIFT', 'audit_valid': False, 'scope_mismatch_proved': False, '"
     },
     {
       "file": "canonical/tests/test_p1_universal_generator_transport_theorem_v1.py",
@@ -3455,24 +3360,6 @@
       "test": "test_grounding_helper_persists_auditable_evidence",
       "status": "failed",
       "message_head": "AssertionError: 0 not greater than or equal to 1"
-    },
-    {
-      "file": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
-      "test": "test_current_post_dual_frontier_is_exact_17_requirement_cut",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
-    },
-    {
-      "file": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
-      "test": "test_source_admission_does_not_close_target_predicates",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
-    },
-    {
-      "file": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
-      "test": "test_global_fresh_reality_remains_false",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
     },
     {
       "file": "canonical/tests/test_post_unknown_domain_v6_root_authority_reconciliation_v1.py",
@@ -3871,30 +3758,6 @@
       "message_head": "AttributeError: 'NoneType' object has no attribute 'kwargs'"
     },
     {
-      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
-      "test": "test_exact_recovery_delta_only",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
-    },
-    {
-      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
-      "test": "test_integrator_cannot_self_promote_or_consume_reality",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
-    },
-    {
-      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
-      "test": "test_no_other_family_or_predicate_receives_credit",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
-    },
-    {
-      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
-      "test": "test_verified_hardened_receipt_is_only_new_basis",
-      "status": "failed",
-      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
-    },
-    {
       "file": "canonical/tests/test_regcap_facet_role_projection_v1.py",
       "test": "test_tlac_context_preserves_function_regime_and_subject_scope",
       "status": "failed",
@@ -4043,18 +3906,6 @@
       "test": "test_current_canonical_registry_is_authoritatively_open",
       "status": "failed",
       "message_head": "AssertionError: assert 'R4_CANONICAL...ISTRY_INVALID' == 'R4_CANONICAL...IFICATES_OPEN'"
-    },
-    {
-      "file": "canonical/tests/test_root_theorem_live_binding_v1.py",
-      "test": "test_current_repo_binding_passes",
-      "status": "failed",
-      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__R4_LIVE_BINDING_DRIFT', 'errors': ['ROOT_THEOREM_MISSION_BLOB_STALE', 'CLAIM_SCOPE_MISSION_BLOB_STALE', 'BINDING_MISSION_BLOB_STALE'], 'terminal"
-    },
-    {
-      "file": "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
-      "test": "test_current_r4_is_open_not_self_certified",
-      "status": "failed",
-      "message_head": "AssertionError: {'status': 'FAIL_CLOSED__R4_LIVE_BINDING_INVALID', 'pass': False, 'live_binding': {'pass': False, 'status': 'FAIL_CLOS...IM_SCOPE_MISSION_BLOB_STALE', 'BINDING_MISSION_BLOB_STALE'], 't"
     },
     {
       "file": "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
@@ -4363,18 +4214,6 @@
       "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_TERMINAL_ROUTE_EXECUTION_PLAN_VALIDATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'launch_authority': False, 'promotion_authority': Fa"
     },
     {
-      "file": "canonical/tests/test_terminal_scheduling_v11_candidate_v1.py",
-      "test": "test_v11_exact_current_world",
-      "status": "failed",
-      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {'canonical/gove...json': {'expected': '54be838a5a0a9698398893ad113641496d5051b8',"
-    },
-    {
-      "file": "canonical/tests/test_terminal_scheduling_v12_candidate_v1.py",
-      "test": "test_v12_exact_current_world",
-      "status": "failed",
-      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {'canonical/gove...: {'expected': 'b01292c1f198f251b8a9606b4de173541204c2dc', 'act"
-    },
-    {
       "file": "canonical/tests/test_terminal_tb_science_dynamic_currentness_v1.py",
       "test": "test_terminal_authority_uses_mutable_tb_science_path_currentness",
       "status": "failed",
@@ -4415,12 +4254,6 @@
       "test": "test_every_bound_component_matches_exact_blob",
       "status": "failed",
       "message_head": "AssertionError: '38ce771fbf5969f9de63cf5287779dae07076077' != '3cfd5e48b957c6e91fafbf1b9d69ddc624be4764'"
-    },
-    {
-      "file": "canonical/tests/test_universal_owned_execution_v1.py",
-      "test": "test_bound_goal_owned_contract_proves_plan_only_not_task_execution",
-      "status": "failed",
-      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_UNIVERSAL_OWNED_EXECUTION_V1', 'status': 'FAIL_CLOSED__OWNED_PROBLEM_AUTHORITY_NOT_PROVED', ...atus': 'FAIL_CLOSED', 'pass': False, 'errors': ['ProblemContrac"
     },
     {
       "file": "canonical/tests/test_universal_verified_adaptive_solver_v1.py",
