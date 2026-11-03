@@ -90,9 +90,18 @@ def _flatten(value, out=None):
 
 
 def placeholders(entry):
-    """The ${input.X} names an entry's action template actually needs."""
-    text = " ".join(_flatten((entry or {}).get("action_template") or {}))
-    return sorted(set(_PLACEHOLDER_RE.findall(text)))
+    """Every ${input.X} name an entry's action template references.
+
+    A declared default does NOT remove a slot from this list.  The binder must still
+    TRY to ground it -- that is how the goal gets to win -- and the default only
+    decides what happens when the try fails.  Removing the name here (the first way
+    this was written) made the goal lose silently: the slot was never attempted, so
+    the default took it, which is the very defect `declared_argument_default_v1`
+    exists to remove.  The forgiveness lives in `complete_inputs`, where a slot with
+    a declared default is dropped from `missing` instead of being bound.
+    """
+    from canonical.runtime import declared_argument_default_v1 as _dad
+    return _dad.all_names(entry)
 
 
 _EXT_BY_TOKEN = {}
@@ -493,11 +502,23 @@ def render_args(entry, bound):
 
     Raises on anything unbound rather than passing a None through: a missing
     argument is a fact to report, not a default to invent.
+
+    The ONE default this will ever apply is a default the row itself DECLARES, in
+    the `${input.X | fallback}` form.  It is applied only when `bound` is silent for
+    X -- a bound value always wins, including a falsy one -- and it is reported in
+    the returned mapping's provenance by the caller that asked for it.  A row that
+    declares nothing behaves exactly as it did before this existed.
     """
+    from canonical.runtime import declared_argument_default_v1 as _dad
     template = (entry or {}).get("action_template") or {}
     args = template.get("args")
     if not isinstance(args, dict) or not args:
         return dict(bound or {})
+
+    defaults = _dad.declared_defaults(entry)
+    conflicts = _dad.conflicting_defaults(entry)
+    if conflicts:
+        raise KeyError("AMBIGUOUS_DECLARED_DEFAULT:" + ",".join(conflicts))
 
     def repl(match):
         key = match.group(1)
@@ -514,6 +535,11 @@ def render_args(entry, bound):
                         for v in value]
         else:
             out[key] = value
+    if defaults:
+        # A default is applied ONLY where the plain substitution above left the slot
+        # unbound.  `bound` still wins every collision, so the goal keeps precedence.
+        out = {key: _dad.substitute(value, bound or {}, defaults)
+               for key, value in out.items()}
     return out
 
 
@@ -702,6 +728,9 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     from_world = {}
     from_companion = {}
     from_demonstrated = {}
+    filled_from_declared_default = {}
+    from canonical.runtime import declared_argument_default_v1 as _dad
+    _declared_defaults = _dad.declared_defaults(entry)
     for key in keys:
         low = key.lower()
         # A DESTINATION IS DETERMINED, NOT DISCOVERED.
@@ -821,6 +850,14 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
                 from_demonstrated[key] = value
         if value:
             filled[key] = value
+        elif key in _declared_defaults:
+            # THE GOAL DID NOT SPEAK, AND THIS ROW SAID WHAT TO DO ABOUT THAT.
+            #
+            # The slot is NOT missing: the row carries an honest value for it, and
+            # `render_args` will apply it.  Reporting it missing would make the row
+            # unbindable precisely when the goal is silent, which is the trap that
+            # pushed two rows into freezing a literal instead.
+            filled_from_declared_default[key] = _declared_defaults[key]
         else:
             missing.append(key)
 
@@ -834,4 +871,5 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
         "filled_from_world_not_goal": from_world,
         "filled_from_companion_not_goal": from_companion,
         "filled_from_demonstrated_case": from_demonstrated,
+        "filled_from_declared_default": filled_from_declared_default,
     }

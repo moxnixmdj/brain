@@ -106,6 +106,24 @@ def stated_read_roots(goal: str, existing_directories: Iterable[tuple[str, Any]]
     return out
 
 
+def _effective(value: str) -> str | None:
+    """The value an action will really use for this argument.
+
+    A template argument can be a declared-default form, `${input.X | fallback}`.
+    Unrendered it is not a directory, and reporting it as one would make this guard
+    accuse a plan of reading `${input.search_root | canonical/runtime}` -- true of the
+    template text and meaningless to a reader.  `declared_argument_default_v1` knows
+    the effective value, so the guard asks it rather than pattern-matching here.
+    """
+    from canonical.runtime import declared_argument_default_v1 as _dad
+    found = _dad.DECLARED_DEFAULT_RE.fullmatch(value.strip())
+    if found:
+        return found.group("default").strip() or None
+    if _dad._PLAIN_RE.fullmatch(value.strip()):
+        return None
+    return value.strip() or None
+
+
 def bound_read_roots(action_rows: Iterable[Mapping[str, Any]]) -> list[str]:
     """The directories the ACTIONS read, as they were actually bound."""
     out: list[str] = []
@@ -113,10 +131,14 @@ def bound_read_roots(action_rows: Iterable[Mapping[str, Any]]) -> list[str]:
         args = _row_args(row)
         for name in READ_ROOT_ARGS:
             value = args.get(name)
-            if isinstance(value, str) and value.strip():
-                rel = _norm(value)
-                if rel not in out:
-                    out.append(rel)
+            if not isinstance(value, str) or not value.strip():
+                continue
+            effective = _effective(value)
+            if effective is None:
+                continue
+            rel = _norm(effective)
+            if rel and rel not in out:
+                out.append(rel)
     return out
 
 
