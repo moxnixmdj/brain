@@ -1,0 +1,256 @@
+{
+ "schema": "CROSS_KIND_COMPOUNDING_BENCHMARK_V1",
+ "authority": "NONE -- PRODUCER-RUN, CONSTRUCTED ENVIRONMENTS",
+ "order": [
+  "append_letters",
+  "grid_walk",
+  "cyclic_counter",
+  "dial_lock",
+  "toggle_bank",
+  "adjacent_sort",
+  "two_jug_pour",
+  "queue_rotate",
+  "bit_register",
+  "string_affix"
+ ],
+ "rows": [
+  {
+   "index": 0,
+   "kind": "append_letters",
+   "description": "append a letter until the word matches",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 120,
+    "act_calls": 797
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 120,
+    "act_calls": 797
+   },
+   "kinds_before": 0,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 1,
+   "kind": "grid_walk",
+   "description": "move on a clamped 4x4 grid",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 68
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 68
+   },
+   "kinds_before": 1,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 2,
+   "kind": "cyclic_counter",
+   "description": "add a step modulo m",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 84
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 84
+   },
+   "kinds_before": 2,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 3,
+   "kind": "dial_lock",
+   "description": "increment each dial modulo its own size",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 85
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 85
+   },
+   "kinds_before": 3,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 4,
+   "kind": "toggle_bank",
+   "description": "flip switches until all are on",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 67
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 67
+   },
+   "kinds_before": 4,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 5,
+   "kind": "adjacent_sort",
+   "description": "sort by swapping neighbours",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 89
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 89
+   },
+   "kinds_before": 5,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 6,
+   "kind": "two_jug_pour",
+   "description": "measure a volume between two jugs",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 86
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 86
+   },
+   "kinds_before": 6,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 7,
+   "kind": "queue_rotate",
+   "description": "rotate a queue and drop its head",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 84
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 84
+   },
+   "kinds_before": 7,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 8,
+   "kind": "bit_register",
+   "description": "xor individual bits and shift left",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 81
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 81
+   },
+   "kinds_before": 8,
+   "acts_saved": 0,
+   "trials_saved": 0
+  },
+  {
+   "index": 9,
+   "kind": "string_affix",
+   "description": "append letters to a different word",
+   "cold": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 84
+   },
+   "grown": {
+    "pass": true,
+    "status": "PASS__ENVIRONMENT_SOLVED_BY_LEARNING",
+    "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
+    "trials": 8,
+    "act_calls": 84
+   },
+   "kinds_before": 9,
+   "acts_saved": 0,
+   "trials_saved": 0
+  }
+ ],
+ "summary": {
+  "kinds": 10,
+  "total_cold_acts": 1525,
+  "total_grown_acts": 1525,
+  "kinds_improved_by_more_kinds": 0,
+  "kinds_worsened_by_more_kinds": 0,
+  "kinds_unchanged": 10,
+  "net_act_saving": 0,
+  "early_mean_acts_saved": 0.0,
+  "late_mean_acts_saved": 0.0
+ },
+ "compounding": "NO -- meeting more kinds does not make the next kind cheaper",
+ "cannot_see": [
+  "GUI environments",
+  "pixels",
+  "unbounded action sets",
+  "any state that is not a small hashable value"
+ ]
+}

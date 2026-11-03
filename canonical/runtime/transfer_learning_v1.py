@@ -882,14 +882,52 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
 
 
 def _goal_key(is_goal: Callable[[Any], bool]) -> str:
-    """A stable identity for a goal, from the predicate itself."""
+    """A stable identity for a goal, from the predicate's BEHAVIOUR and its closure.
+
+    Measured 2026-11-03: this returned `__name__`, and every goal written as a lambda is named
+    `<lambda>`, so THREE DIFFERENT goals produced ONE key. A lesson recalled under that key was
+    recalled under every goal at once. That is not a name collision, it is the difference between
+    "recall the plan for this goal" and "recall a plan for any goal", and only the second was
+    ever implemented.
+
+    Identity now comes from two things a caller actually varies:
+      * the closure values, which is where a lambda's target lives (`lambda st: st == target`),
+      * the predicate's answers on a fixed probe ladder, which separates goals that differ only
+        in code rather than in captured values.
+
+    Bounded and side-effect free: the probes are values, not environments, and no environment is
+    touched. If a predicate raises on a probe, the exception TYPE is part of its identity.
+    """
+    name = ""
     try:
-        name = getattr(is_goal, "__name__", "")
-        if name:
-            return name
-    except Exception:
+        name = str(getattr(is_goal, "__name__", "") or "")
+    except Exception:  # noqa: BLE001
         pass
-    return "goal"
+    # A named goal is already an identity a caller chose; keep it stable and readable.
+    if name and name != "<lambda>":
+        return name
+    parts: list[str] = [name or "goal"]
+    try:
+        cells = getattr(is_goal, "__closure__", None) or ()
+        for cell in cells:
+            try:
+                parts.append(repr(cell.cell_contents))
+            except Exception:  # noqa: BLE001
+                parts.append("<empty>")
+    except Exception:  # noqa: BLE001
+        pass
+    # Behavioural probes. Chosen to be cheap and to separate common goal shapes; the exact
+    # ladder is not a claim about goal space, only a discriminator.
+    probes = (None, True, False, 0, 1, -1, "", "abc", (), (0, 0), (1, 2, 3), [0], [3, 3, 3],
+              {"a": 1}, frozenset())
+    answers: list[str] = []
+    for probe in probes:
+        try:
+            answers.append("T" if is_goal(probe) else "F")
+        except Exception as exc:  # noqa: BLE001
+            answers.append(type(exc).__name__[:1])
+    parts.append("".join(answers))
+    return "|".join(parts)[:300]
 
 
 def stats() -> dict[str, Any]:
