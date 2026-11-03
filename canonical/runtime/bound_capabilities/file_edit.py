@@ -147,8 +147,16 @@ _HANDLERS = {
 def _write_atomically(path: pathlib.Path, expected: bytes) -> None:
     """Write beside the target, prove the bytes, then move them into place."""
     temporary = path.with_name(path.name + ".brain-edit-tmp")
+    # Claim the scratch path exclusively before writing.  In particular, an
+    # existing file or symlink at the predictable name is somebody else's data:
+    # do not truncate it and do not remove it in our cleanup.
     try:
-        temporary.write_bytes(expected)
+        scratch = temporary.open("xb")
+    except FileExistsError as exc:
+        raise RuntimeError("TEMPORARY_PATH_ALREADY_EXISTS:" + temporary.name) from exc
+    try:
+        with scratch:
+            scratch.write(expected)
         if _digest(temporary.read_bytes()) != _digest(expected):
             raise RuntimeError("THE_EDIT_DID_NOT_ROUNDTRIP")
         os.replace(temporary, path)

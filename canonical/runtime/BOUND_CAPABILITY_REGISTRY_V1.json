@@ -12809,7 +12809,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
-        "modules": [],
+        "modules": ["ctypes", "errno", "hashlib", "os", "pathlib", "re", "sys"],
         "type": "python_stdlib",
         "version_family": "3.x"
       },
@@ -12851,7 +12851,7 @@
           ]
         ],
         "answer_field": "destination_path",
-        "note": "performed in process with pathlib; no shell and no subprocess"
+        "note": "performed in process using an atomic non-replacing rename on Linux; no shell and no subprocess"
       },
       "cost": 1,
       "entrypoint": "run",
@@ -12864,12 +12864,11 @@
       ],
       "limitations": [
         "Writes only the destination the sentence states, and only inside the repository.",
-        "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes."
+        "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes.",
+        "Non-overwriting rename uses Linux renameat2(RENAME_NOREPLACE) and refuses where that atomic primitive is unavailable."
       ],
       "platforms": [
-        "linux",
-        "darwin",
-        "windows"
+        "linux"
       ],
       "proposal_bindings": {
         "goal": {
@@ -12901,7 +12900,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
-        "modules": [],
+        "modules": ["ctypes", "errno", "hashlib", "os", "pathlib", "re", "sys"],
         "type": "python_stdlib",
         "version_family": "3.x"
       },
@@ -13079,7 +13078,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
-        "modules": [],
+        "modules": ["ctypes", "errno", "hashlib", "os", "pathlib", "re", "sys"],
         "type": "python_stdlib",
         "version_family": "3.x"
       },

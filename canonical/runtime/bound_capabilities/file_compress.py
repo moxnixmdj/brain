@@ -92,11 +92,25 @@ def run(args, root):
         raise RuntimeError("COMPRESSION_DID_NOT_ROUNDTRIP")
 
     temporary = source.with_name(source.name + ".gz.brain-compress-tmp")
+    # Claim the scratch path exclusively before writing.  In particular, an
+    # existing file or symlink at the predictable name is somebody else's data:
+    # do not truncate it and do not remove it in our cleanup.
     try:
-        temporary.write_bytes(packed)
+        scratch = temporary.open("xb")
+    except FileExistsError as exc:
+        raise RuntimeError("TEMPORARY_PATH_ALREADY_EXISTS:" + temporary.name) from exc
+    try:
+        with scratch:
+            scratch.write(packed)
         if _digest(temporary.read_bytes()) != _digest(packed):
             raise RuntimeError("THE_ARCHIVE_DID_NOT_LAND")
-        os.replace(temporary, destination)
+        # Publishing must also be exclusive: a destination can appear after
+        # the earlier existence check. A hard link in the same directory fails
+        # instead of overwriting that file (including a dangling symlink).
+        try:
+            os.link(temporary, destination)
+        except FileExistsError as exc:
+            raise RuntimeError("THE_ARCHIVE_ALREADY_EXISTS:" + destination.name) from exc
     finally:
         if temporary.exists():
             temporary.unlink()

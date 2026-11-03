@@ -1,6 +1,6 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_compress.py",
- "adapter_sha256": "cab2afb30bbfccfc580c688bca4547be0e94bdcdce872db77602d1159163e082",
+ "adapter_sha256": "8091e264f2bc114fa0d4212e8ba3a6fc2caad4ac2a1b44f46032de9a975ffb21",
  "capability_id": "file.compressed.gzip.v1",
  "checks": [
   {
@@ -59,6 +59,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.compressed.gzip.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T19:51:13Z",
+ "verified_at": "2026-11-03T11:35:14Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }

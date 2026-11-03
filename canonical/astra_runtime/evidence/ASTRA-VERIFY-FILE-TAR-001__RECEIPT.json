@@ -1,6 +1,6 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_archive_tar.py",
- "adapter_sha256": "057ab91c2285932b4b5e485c113c511a9a48ce8bc034614113f27988a176f0de",
+ "adapter_sha256": "5560334efdbc13acc6ebe2490f96a50c8f985a8da4227113f5ae3cad713c8eed",
  "capability_id": "file.archive.tar_gz.v1",
  "checks": [
   {
@@ -68,6 +68,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.archive.tar_gz.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-02T19:51:13Z",
+ "verified_at": "2026-11-03T11:35:14Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }

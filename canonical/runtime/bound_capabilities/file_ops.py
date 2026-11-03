@@ -33,10 +33,13 @@ root can be written.
 """
 from __future__ import annotations
 
+import ctypes
+import errno
 import hashlib
-import json
+import os
 import pathlib
 import re
+import sys
 
 #: Words a sentence uses when it MEANS to replace an existing destination.
 _OVERWRITE = re.compile(r"\b(?:overwrit\w*|over-writ\w*|replac\w*|clobber\w*|force)\b", re.I)
@@ -61,9 +64,9 @@ def _prepare(args, root: pathlib.Path):
                         role="output_path")
     if not source.is_file():
         raise RuntimeError("PATH_NOT_A_REGULAR_FILE")
-    if source == destination:
-        # Resolved, so `a.txt` and `./a.txt` are the same file here even though
-        # they are different strings.
+    if source == destination or (destination.exists() and os.path.samefile(source, destination)):
+        # Resolved paths catch symlinks, and samefile also catches hard links.
+        # Even an explicit overwrite must not target the source's own inode.
         raise RuntimeError("SOURCE_AND_DESTINATION_ARE_THE_SAME_FILE")
     # BOTH FILES MUST BE NAMED BY THE SENTENCE.
     #
@@ -90,7 +93,22 @@ def _copy(args, root: pathlib.Path) -> dict:
     source, destination = _prepare(args, root)
     before = _digest(source)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(source.read_bytes())
+    data = source.read_bytes()
+    if _OVERWRITE.search(str(args.get("goal") or "")):
+        destination.write_bytes(data)
+    else:
+        # The destination can appear after _prepare. Exclusive creation keeps
+        # a concurrent file (or a dangling symlink) from being overwritten.
+        try:
+            handle = destination.open("xb")
+        except FileExistsError as exc:
+            raise RuntimeError("DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE") from exc
+        try:
+            with handle:
+                handle.write(data)
+        except Exception:
+            destination.unlink(missing_ok=True)
+            raise
     after, written = _digest(destination), _digest(source)
     if after != before or written != before:
         raise RuntimeError("COPY_DID_NOT_ROUNDTRIP")
@@ -101,14 +119,45 @@ def _copy(args, root: pathlib.Path) -> dict:
             "answer": destination.relative_to(root).as_posix()}
 
 
+def _rename_without_replacing(source: pathlib.Path, destination: pathlib.Path) -> None:
+    """Atomically rename on Linux, or refuse if the OS cannot guarantee it.
+
+    A link-then-unlink sequence has a gap where the source path can be replaced
+    by a different file; deleting that path could delete somebody else's data.
+    Linux renameat2(RENAME_NOREPLACE) changes one name atomically and refuses
+    any destination that appeared after admission. No unsafe fallback is used.
+    """
+    if sys.platform != "linux":
+        raise RuntimeError("ATOMIC_NONREPLACING_RENAME_UNSUPPORTED")
+    library = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(library, "renameat2", None)
+    if renameat2 is None:
+        raise RuntimeError("ATOMIC_NONREPLACING_RENAME_UNSUPPORTED")
+    renameat2.argtypes = (ctypes.c_int, ctypes.c_char_p, ctypes.c_int,
+                          ctypes.c_char_p, ctypes.c_uint)
+    renameat2.restype = ctypes.c_int
+    result = renameat2(-100, os.fsencode(source), -100, os.fsencode(destination), 1)
+    if result:
+        code = ctypes.get_errno()
+        if code == errno.EEXIST:
+            raise RuntimeError("DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE")
+        raise OSError(code, os.strerror(code), str(destination))
+
+
 def _rename(args, root: pathlib.Path) -> dict:
     source, destination = _prepare(args, root)
     before = _digest(source)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    source.rename(destination)
+    if _OVERWRITE.search(str(args.get("goal") or "")):
+        source.rename(destination)
+        after = _digest(destination)
+    else:
+        # A checked-then-rename can overwrite a destination that appears later;
+        # this primitive enforces the refusal at the atomic rename itself.
+        _rename_without_replacing(source, destination)
+        after = _digest(destination)
     if source.exists():
         raise RuntimeError("RENAME_LEFT_THE_SOURCE_IN_PLACE")
-    after = _digest(destination)
     if after != before:
         raise RuntimeError("RENAME_CHANGED_THE_BYTES")
     return {"path": source.relative_to(root).as_posix(),
@@ -145,7 +194,17 @@ def _backup(args, root: pathlib.Path) -> dict:
     if destination.exists():
         raise RuntimeError("A_BACKUP_OF_THIS_FILE_ALREADY_EXISTS:" + destination.name)
     before = _digest(source)
-    destination.write_bytes(source.read_bytes())
+    data = source.read_bytes()
+    try:
+        handle = destination.open("xb")
+    except FileExistsError as exc:
+        raise RuntimeError("A_BACKUP_OF_THIS_FILE_ALREADY_EXISTS:" + destination.name) from exc
+    try:
+        with handle:
+            handle.write(data)
+    except Exception:
+        destination.unlink(missing_ok=True)
+        raise
     after, retained = _digest(destination), _digest(source)
     if after != before or retained != before:
         destination.unlink(missing_ok=True)
