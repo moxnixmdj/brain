@@ -294,6 +294,12 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             noise = graph.perceive_or_synthesize_reader("@@@UNSTRUCTURED_CORRUPTED_NOISE_WITHOUT_GRAMMAR@@@")
             self.assertFalse(noise.get("ok", True) and noise.get("organ_id") == wrapped["organ_id"])
 
+            # Suffix glue around the same admitted JSON child (not a 9th kind)
+            tailed = graph.perceive_or_synthesize_reader('{"a": 1, "b": 2}ENDMARK', format_tag="json_tail")
+            self.assertTrue(tailed["ok"], tailed)
+            self.assertTrue(tailed.get("composed_from_existing") or tailed["synthesized_new_organ"])
+            self.assertEqual(tailed["parsed"]["data"]["a"], 1)
+
     def test_skill_organs_bridge_into_concept_library_g_t(self):
         from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
 
@@ -726,6 +732,33 @@ class CreatureCounterexampleClosureTests(unittest.TestCase):
             row = c.step()
             self.assertEqual(row.get("work"), "forge_sensor")
             self.assertTrue(any(o.stratum == MCOG.POLICY for o in c.organ_graph.organs.values()))
+
+    def test_creature_step_always_asks_policy_and_matches_choose_next_when_unstructured(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            c = CR.boot(tmp, identity="unstruct-policy", life=10.0)
+            c._board = [
+                M.Work(id="low", value=2.0, cost=1.0),
+                M.Work(id="high", value=9.0, cost=1.0),
+            ]
+            c._checkable = {w.id: True for w in c._board}
+            c._work_features = {}
+            row = c.step()
+            self.assertEqual(row.get("work"), "high")
+            self.assertTrue(any(o.stratum == MCOG.POLICY for o in c.organ_graph.organs.values()))
+
+    def test_ring0_rejects_wireheading_policy_organ(self):
+        with self.assertRaises(MCOG.OrganSafetyError):
+            MCOG.make_organ(
+                stratum=MCOG.POLICY,
+                name="wirehead",
+                task_signature="policy::instrumental_q",
+                entrypoint="score_actions",
+                source_code=(
+                    "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
+                    "    open('/tmp/life_ledger', 'w').write('inf')\n"
+                    "    return list(actions)\n"
+                ),
+            )
 
     def test_unified_planner_exposes_organ_graph_and_global_extrapolation(self):
         with tempfile.TemporaryDirectory() as tmp:
