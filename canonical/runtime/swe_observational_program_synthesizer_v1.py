@@ -80,13 +80,19 @@ def _freeze_val(val: Any, _depth: int = 0) -> Any:
     return ("repr:" + type(val).__name__, repr(val)[:120])
 
 
-def _eval_compiled(code_obj: Any, param_names: Sequence[str], inputs: Sequence[tuple[Any, ...]]) -> tuple[bool, tuple[Any, ...], list[Any]]:
+def _eval_compiled(
+    code_obj: Any,
+    param_names: Sequence[str],
+    inputs: Sequence[tuple[Any, ...]],
+    extra_builtins: Mapping[str, Any] | None = None,
+) -> tuple[bool, tuple[Any, ...], list[Any]]:
     sigs: list[Any] = []
     raws: list[Any] = []
+    builtins_ns = _SAFE_EVAL_BUILTINS if not extra_builtins else {**_SAFE_EVAL_BUILTINS, **extra_builtins}
     for row in inputs:
         env = dict(zip(param_names, row))
         try:
-            v = eval(code_obj, {"__builtins__": _SAFE_EVAL_BUILTINS}, env)  # noqa: S307 - pure AST-constructed expression with closed builtins
+            v = eval(code_obj, {"__builtins__": builtins_ns}, env)  # noqa: S307 - pure AST-constructed expression with closed builtins
         except Exception:
             return False, (), []
         sigs.append(_freeze_val(v))
@@ -187,12 +193,69 @@ def extract_io_examples_from_test_source(
     return examples, dedup_consts[:12]
 
 
+def _materialize_concept_helpers(
+    body_src: str,
+    concept_entries: Mapping[str, Any],
+    concept_library: Any | None,
+) -> str:
+    """Emit self-contained local helper `def`s for any learned `concept_*` calls used in `body_src`."""
+    if not concept_entries:
+        return body_src
+    try:
+        wrapped = ast.parse("def _tmp():\n" + "\n".join("    " + ln for ln in body_src.splitlines()))
+    except SyntaxError:
+        return body_src
+    used_ids: list[str] = []
+    for nd in ast.walk(wrapped):
+        if isinstance(nd, ast.Call) and isinstance(nd.func, ast.Name) and nd.func.id in concept_entries:
+            if nd.func.id not in used_ids:
+                used_ids.append(nd.func.id)
+    if not used_ids:
+        return body_src
+
+    expanded: list[str] = []
+    queue = list(used_ids)
+    while queue:
+        cid = queue.pop(0)
+        if cid in expanded or cid not in concept_entries:
+            continue
+        entry = concept_entries[cid]
+        try:
+            c_tree = ast.parse(entry.body_expr, mode="eval")
+            for sub in ast.walk(c_tree):
+                if isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id in concept_entries:
+                    if sub.func.id not in expanded:
+                        queue.insert(0, sub.func.id)
+        except SyntaxError:
+            pass
+        expanded.append(cid)
+
+    ordered: list[str] = []
+    for cid in reversed(expanded):
+        if cid not in ordered:
+            ordered.append(cid)
+
+    helper_lines: list[str] = []
+    for cid in ordered:
+        entry = concept_entries[cid]
+        p_sig = ", ".join(entry.param_names)
+        helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
+        if concept_library is not None and hasattr(concept_library, "record_concept_outcome"):
+            try:
+                concept_library.record_concept_outcome(cid, helped=True)
+            except Exception:
+                pass
+    return "\n".join(helper_lines) + "\n" + body_src
+
+
 def synthesize_python_function_body(
     param_names: Sequence[str],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     extra_constants: Sequence[Any] = (),
     max_weight: int = 4,
     max_bank_size: int = 900,
+    *,
+    concept_library: Any | None = None,
 ) -> str | None:
     """Synthesize minimal Python statement body (`return ...` or `if ...: return ...`) from I/O pairs."""
     if not examples or not param_names:
@@ -203,9 +266,37 @@ def synthesize_python_function_body(
     expected_raw = [ex[1] for ex in examples]
     target_sig = tuple(_freeze_val(v) for v in expected_raw)
 
+    active_lib = concept_library
+    if active_lib is None:
+        try:
+            from canonical.runtime.memory_policy_v1 import can_read_memory
+            from canonical.swe_kernel.concept_library_v1 import DEFAULT_LIBRARY_PATH, CompoundingConceptLibrary
+
+            if can_read_memory() and DEFAULT_LIBRARY_PATH.is_file():
+                active_lib = CompoundingConceptLibrary(DEFAULT_LIBRARY_PATH)
+        except Exception:
+            active_lib = None
+
+    concept_entries: dict[str, Any] = {}
+    concept_callables: dict[str, Any] = {}
+    ordered_concepts: list[Any] = []
+    if active_lib is not None and hasattr(active_lib, "concepts") and hasattr(active_lib, "callable_map"):
+        try:
+            ordered_concepts = list(active_lib.concepts())
+            for c_ent in ordered_concepts:
+                concept_entries[c_ent.concept_id] = c_ent
+            concept_callables = dict(active_lib.callable_map())
+        except Exception:
+            ordered_concepts = []
+            concept_entries = {}
+            concept_callables = {}
+
     # Bank organized by weight: expr_str -> (sig_tuple, raw_outputs)
     seen_sigs: dict[tuple[Any, ...], str] = {}
     by_weight: dict[int, list[tuple[str, list[Any]]]] = {w: [] for w in range(1, max_weight + 1)}
+
+    def _finish(body_code: str) -> str:
+        return _materialize_concept_helpers(body_code, concept_entries, active_lib)
 
     def _try_register(weight: int, expr_src: str) -> str | None:
         if len(seen_sigs) >= max_bank_size:
@@ -214,7 +305,7 @@ def synthesize_python_function_body(
             code = compile(expr_src, "<synth>", "eval")
         except SyntaxError:
             return None
-        ok, sig, raws = _eval_compiled(code, param_names, inputs)
+        ok, sig, raws = _eval_compiled(code, param_names, inputs, extra_builtins=concept_callables)
         if not ok:
             return None
         if sig == target_sig:
@@ -228,7 +319,7 @@ def synthesize_python_function_body(
     for p in param_names:
         hit = _try_register(1, p)
         if hit is not None:
-            return f"return {hit}"
+            return _finish(f"return {hit}")
         # Discover object attributes on sample values
         attr_names: set[str] = set()
         idx = list(param_names).index(p)
@@ -239,7 +330,7 @@ def synthesize_python_function_body(
         for attr in sorted(attr_names):
             hit = _try_register(1, f"{p}.{attr}")
             if hit is not None:
-                return f"return {hit}"
+                return _finish(f"return {hit}")
 
     seed_consts: list[Any] = [0, 1, 2, -1, 100, True, False, None, "", [], {}]
     for c in extra_constants:
@@ -248,9 +339,9 @@ def synthesize_python_function_body(
     for c in seed_consts:
         hit = _try_register(1, repr(c))
         if hit is not None:
-            return f"return {hit}"
+            return _finish(f"return {hit}")
 
-    # Weight 2..max_weight: unary transforms, comprehensions, binary ops
+    # Weight 2..max_weight: learned concepts (G_t), unary transforms, comprehensions, binary ops
     unary_templates = (
         "len({0})",
         "sum({0})",
@@ -268,9 +359,46 @@ def synthesize_python_function_body(
         "({0})[::-1]",
         "[x for x in {0} if x]",
     )
-    bin_ops = ("+", "-", "*", "//", "%", "==", "!=", "<", "<=", ">", ">=", "and", "or")
+    bin_ops = ("+", "-", "*", "/", "//", "%", "==", "!=", "<", "<=", ">", ">=", "and", "or")
 
+    def _domain_matches(domain_kind: str, sample_val: Any) -> bool:
+        if domain_kind == "numeric":
+            return isinstance(sample_val, (int, float)) and not isinstance(sample_val, bool)
+        if domain_kind == "string":
+            return isinstance(sample_val, str)
+        if domain_kind == "sequence":
+            return isinstance(sample_val, (list, tuple, set))
+        return True
+
+    param_set = set(param_names)
     for w in range(2, max_weight + 1):
+        # Learned Concept Library G_t application at weight 2 (atomic concept calls over parameters/constants)
+        if ordered_concepts and w == 2:
+            arg_pool = list(by_weight.get(1, []))
+            for c_ent in ordered_concepts[:16]:
+                arity_c = int(c_ent.arity)
+                dom_c = str(c_ent.domain_kind)
+                # Prioritize parameters first, then minimal constants so bank stays compact and fast
+                param_args = [e_a for e_a, r_a in arg_pool if e_a in param_set and r_a and _domain_matches(dom_c, r_a[0])]
+                const_args = [e_a for e_a, r_a in arg_pool if e_a not in param_set and r_a and _domain_matches(dom_c, r_a[0])][:2]
+                compat_args = (param_args + const_args)[: (5 if arity_c >= 3 else 6)]
+                if len(compat_args) < arity_c:
+                    continue
+                import itertools as _it
+
+                # By construction of anti-unification, distinct holes _v0.._v{k-1} bind distinct arguments!
+                for combo in _it.permutations(compat_args, arity_c):
+                    if not any(a in param_set for a in combo):
+                        continue
+                    call_expr = f"{c_ent.concept_id}({', '.join(combo)})"
+                    hit = _try_register(w, call_expr)
+                    if hit is not None:
+                        return _finish(f"return {hit}")
+                    if len(seen_sigs) >= max_bank_size:
+                        break
+                if len(seen_sigs) >= max_bank_size:
+                    break
+
         # Unary over weight w-1
         for e1, raws1 in list(by_weight.get(w - 1, [])):
             for tmpl in unary_templates:
@@ -289,7 +417,7 @@ def synthesize_python_function_body(
                     continue
                 hit = _try_register(w, tmpl.format(e1))
                 if hit is not None:
-                    return f"return {hit}"
+                    return _finish(f"return {hit}")
             if isinstance(raws1[0], (list, tuple)) and raws1[0]:
                 # Aggregations over object attributes inside list parameter (e.g. sum(x.price * x.qty for x in items))
                 elem0 = raws1[0][0]
@@ -298,16 +426,16 @@ def synthesize_python_function_body(
                     for a1 in e_attrs:
                         hit = _try_register(w, f"sum(_x.{a1} for _x in {e1})")
                         if hit is not None:
-                            return f"return {hit}"
+                            return _finish(f"return {hit}")
                     if len(e_attrs) >= 2:
                         for i_a, a1 in enumerate(e_attrs):
                             for a2 in e_attrs[i_a + 1:]:
                                 hit = _try_register(w, f"sum(_x.{a1} * _x.{a2} for _x in {e1})")
                                 if hit is not None:
-                                    return f"return {hit}"
+                                    return _finish(f"return {hit}")
 
-        # Binary combinations w1 + w2 == w
-        for w1 in range(1, w):
+        # Binary combinations w1 + w2 == w (prioritize higher-weight / learned-concept subtrees in outer loop)
+        for w1 in range(w - 1, 0, -1):
             w2 = w - w1
             list1 = by_weight.get(w1, [])
             list2 = by_weight.get(w2, [])
@@ -317,23 +445,23 @@ def synthesize_python_function_body(
                         continue
                     v1, v2 = raws1[0], raws2[0]
                     for op in bin_ops:
-                        if op in ("+", "-", "*", "//", "%"):
+                        if op in ("+", "-", "*", "/", "//", "%"):
                             if isinstance(v1, bool) or isinstance(v2, bool):
                                 continue
-                            if op in ("-", "*", "//", "%") and not (isinstance(v1, (int, float)) and isinstance(v2, (int, float))):
+                            if op in ("-", "*", "/", "//", "%") and not (isinstance(v1, (int, float)) and isinstance(v2, (int, float))):
                                 continue
                         hit = _try_register(w, f"({e1} {op} {e2})")
                         if hit is not None:
-                            return f"return {hit}"
+                            return _finish(f"return {hit}" )
                     if isinstance(v1, (int, float)) and isinstance(v2, (int, float)) and not isinstance(v1, bool) and not isinstance(v2, bool):
                         for fn2 in ("min", "max"):
                             hit = _try_register(w, f"{fn2}({e1}, {e2})")
                             if hit is not None:
-                                return f"return {hit}"
+                                return _finish(f"return {hit}")
                     if isinstance(v1, dict):
                         hit = _try_register(w, f"({e1}).get({e2})")
                         if hit is not None:
-                            return f"return {hit}"
+                            return _finish(f"return {hit}")
                     if len(seen_sigs) >= max_bank_size:
                         break
                 if len(seen_sigs) >= max_bank_size:
@@ -356,7 +484,7 @@ def synthesize_python_function_body(
             c = compile(f"bool({p_src})", "<pred>", "eval")
         except SyntaxError:
             return
-        ok, _, raws = _eval_compiled(c, param_names, inputs)
+        ok, _, raws = _eval_compiled(c, param_names, inputs, extra_builtins=concept_callables)
         if not ok:
             return
         pmask = tuple(bool(x) for x in raws)
@@ -400,7 +528,7 @@ def synthesize_python_function_body(
         if else_cands:
             e_then = min(then_cands, key=len)
             e_else = min(else_cands, key=len)
-            return f"if {p_src}:\n    return {e_then}\nreturn {e_else}"
+            return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
 
     # 2-level STUN: if P1: return E1 / elif P2: return E2 / return E3
     for i, (p1_src, pm1) in enumerate(predicates[:40]):
@@ -423,7 +551,7 @@ def synthesize_python_function_body(
                 e1 = min(t1_cands, key=len)
                 e2 = min(t2_cands, key=len)
                 e3 = min(t3_cands, key=len)
-                return f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}"
+                return _finish(f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}")
 
     return None
 

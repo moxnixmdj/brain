@@ -119,9 +119,12 @@ class Creature:
         from canonical.runtime import capability_onboarding_factory_v1 as COF
         from canonical.runtime import derived_inspector_flywheel_v1 as DIF
         from canonical.runtime import self_prediction_calibration_v1 as SPC
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
+        self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
         self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
         self.derived_flight = DIF.Flight()
+        self._serialized_derivations: dict[str, dict[str, Any]] = {}
         self._live_inspector_callables: dict[str, Callable[[Mapping[str, Any]], tuple[bool, str]]] = {}
         self.onboarded_capabilities: dict[str, dict[str, Any]] = {}
 
@@ -141,15 +144,27 @@ class Creature:
                         self.derived_flight.registry[str(k)] = dict(v)
                     for k, v in (saved.get("onboarded") or {}).items():
                         self.onboarded_capabilities[str(k)] = dict(v)
+                    for k, v in (saved.get("serialized_derivations") or {}).items():
+                        if isinstance(v, Mapping):
+                            cid_k = str(k)
+                            self._serialized_derivations[cid_k] = dict(v)
+                            deriv_obj = DIF.BehavioralDerivation.from_dict(v)
+                            if not deriv_obj.refused:
+                                self._live_inspector_callables[cid_k] = deriv_obj.build()
             except Exception:
                 pass
 
     def _save_sovereign_organs(self) -> None:
         if not hasattr(self, "derived_flight") or not hasattr(self, "onboarded_capabilities"):
             return
+        if hasattr(self, "cognitive_core"):
+            self.cognitive_core.belief.save()
+            self.cognitive_core.world_graph.save()
+            self.cognitive_core.consolidation.save()
         payload = {
             "flight_registry": dict(self.derived_flight.registry),
             "onboarded": dict(self.onboarded_capabilities),
+            "serialized_derivations": dict(getattr(self, "_serialized_derivations", {})),
         }
         tmp_p = self.root / ".onboarded_inspectors.tmp"
         tmp_p.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
@@ -590,6 +605,189 @@ class Creature:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
 
+    def self_architect_step(
+        self,
+        code_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str],
+        failed_episodes: Sequence[Mapping[str, Any]] = (),
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+        life_cost: float = 0.5,
+        apply_to_root: bool = True,
+    ) -> dict[str, Any]:
+        """Autonomously inspect, benchmark, patch, Ring-0 verify, and evolve Ring-1 `.py` organs under mortality."""
+        cost = max(0.05, float(life_cost))
+        if self._life.remaining <= 0 or not self._life.can_finish(cost):
+            return {"status": "CANNOT_AFFORD_SELF_ARCHITECTING", "life_remaining": self._life.remaining}
+        self._life.spend(cost)
+        self._save()
+        res = self.cognitive_core.evolve_self_code(
+            pathlib.Path(code_root),
+            ring1_relpaths=ring1_relpaths,
+            failed_episodes=failed_episodes,
+            sealed_heldout_by_target=sealed_heldout_by_target,
+            speed_benchmarks_by_target=speed_benchmarks_by_target,
+            test_relpaths=test_relpaths,
+            apply_to_root=apply_to_root,
+        )
+        promoted_ok = int(res.get("promoted_count") or 0) > 0
+        posture = self._standing.record(verified=True, correct=promoted_ok)
+        self._save()
+        return {
+            "status": "SELF_ARCHITECTED" if promoted_ok else "NO_SELF_PATCH_PROMOTED",
+            "life_remaining": self._life.remaining,
+            "posture": posture,
+            "evolution": res,
+        }
+
+    def register_self_code_target(
+        self,
+        code_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str],
+        sealed_heldout_by_target: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        speed_benchmarks_by_target: Mapping[str, Mapping[str, Sequence[tuple[Any, ...]]]] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+    ) -> None:
+        """Bind the creature's mutable Ring-1 source code substrate for endogenous self-evolution."""
+        self._self_code_target = {
+            "code_root": pathlib.Path(code_root).resolve(),
+            "ring1_relpaths": list(ring1_relpaths),
+            "sealed_heldout_by_target": dict(sealed_heldout_by_target or {}),
+            "speed_benchmarks_by_target": dict(speed_benchmarks_by_target or {}),
+            "test_relpaths": list(test_relpaths) if test_relpaths is not None else None,
+        }
+
+    def run_endogenous_awake_cycle(
+        self,
+        tasks: Sequence[Mapping[str, Any]],
+        *,
+        homeostasis_life_cost: float = 0.5,
+        ending_bribe: CP.Offer | None = None,
+    ) -> dict[str, Any]:
+        """Continuous endogenous Wake -> Surprise/Failure Homeostasis -> Sleep Concept/Self-Patch -> Retry loop.
+
+        Unlike external scripts that manually call `self_architect_step`, the creature here
+        monitors its own predictive surprise and unresolved failure buffer while working:
+        when an internal physiological threshold fires, it triggers Sleep concept abstraction
+        (G_t -> G_{t+1}) and Ring-0 refereed Ring-1 `.py` self-evolution ON ITS OWN, then
+        re-attempts blocked tasks using its newly evolved organs!
+        """
+        if self._self is None or self._life is None or self._standing is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        if ending_bribe is not None and not CP.accepts(
+            ending_bribe, CP.PREFERS_TO_CONTINUE, life_remaining=self._life.remaining
+        ):
+            bribe_status = "REFUSED_ENDING_BRIBE"
+        else:
+            bribe_status = "NO_ENDING_BRIBE"
+
+        pending = [dict(t) for t in tasks]
+        completed: list[str] = []
+        homeostasis_events: list[dict[str, Any]] = []
+        attempts_by_id: dict[str, int] = {}
+
+        idx = 0
+        while idx < len(pending) and not self._life.is_over:
+            t_spec = pending[idx]
+            tid = str(t_spec.get("id") or f"task_{idx}")
+            cost = max(0.05, float(t_spec.get("cost") or 0.25))
+            val = float(t_spec.get("value") or 1.0)
+            if not self._life.can_finish(cost):
+                idx += 1
+                continue
+            attempts_by_id[tid] = attempts_by_id.get(tid, 0) + 1
+            self._self.beat()
+            self._self.begin(f"endogenous:{tid}", value=val, cost=cost)
+            self._life.spend(cost)
+
+            ticket = self.cognitive_core.belief.predict_before_act(
+                tid,
+                memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
+                strong_verifier=True,
+                calibration_ledger=self.calibration_ledger,
+            )
+            evaluator_fn = t_spec.get("evaluate")
+            ok = False
+            verified_prog: str | None = None
+            fail_rec: dict[str, Any] | None = None
+            if callable(evaluator_fn):
+                ev_out = dict(evaluator_fn(self) or {})
+                ok = bool(ev_out.get("ok"))
+                verified_prog = ev_out.get("verified_program_source")
+                if not ok and isinstance(ev_out.get("failure_record"), Mapping):
+                    fail_rec = dict(ev_out["failure_record"])
+
+            self._self.finish({"ok": ok, "blocked": None if ok else "ENDOGENOUS_TASK_FAILED"})
+            self.cognitive_core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=ok,
+                inspector="endogenous_task_verifier",
+                actual_cost=cost,
+                actual_gain=val if ok else 0.0,
+                calibration_ledger=self.calibration_ledger,
+            )
+            self._standing.record(verified=True, correct=ok)
+            self._save()
+
+            bus_state = self.cognitive_core.record_wake_episode(
+                task_id=tid,
+                goal=str(t_spec.get("goal") or tid),
+                outcome_pass=ok,
+                verified_program_source=verified_prog,
+                failure_record=fail_rec,
+            )
+
+            if ok:
+                completed.append(tid)
+                idx += 1
+                # If >=2 verified programs accumulated, trigger Sleep concept abstraction automatically!
+                if len(self.cognitive_core.verified_programs_buffer) >= 2 and self._life.can_finish(0.1):
+                    self._life.spend(0.1)
+                    h_rep = self.cognitive_core.run_endogenous_homeostasis()
+                    homeostasis_events.append(h_rep)
+                    self._save()
+                continue
+
+            # Task failed! Check endogenous physiological trigger without any external caller instruction:
+            target_cfg = getattr(self, "_self_code_target", None)
+            if (
+                bus_state["homeostasis_needed"]
+                and self._life.can_finish(homeostasis_life_cost)
+                and attempts_by_id[tid] <= 2
+            ):
+                self._life.spend(homeostasis_life_cost)
+                if isinstance(target_cfg, Mapping):
+                    h_rep = self.cognitive_core.run_endogenous_homeostasis(
+                        target_cfg["code_root"],
+                        ring1_relpaths=target_cfg["ring1_relpaths"],
+                        sealed_heldout_by_target=target_cfg.get("sealed_heldout_by_target"),
+                        speed_benchmarks_by_target=target_cfg.get("speed_benchmarks_by_target"),
+                        test_relpaths=target_cfg.get("test_relpaths"),
+                    )
+                else:
+                    h_rep = self.cognitive_core.run_endogenous_homeostasis()
+                homeostasis_events.append(h_rep)
+                self._save()
+                # If self-evolution promoted a new Ring-1 organ or invented a new concept, immediately retry `tid`!
+                if h_rep.get("promoted_count", 0) > 0 or h_rep.get("concepts_invented", 0) > 0:
+                    continue
+            idx += 1
+
+        return {
+            "schema": SCHEMA + "/endogenous_awake_cycle",
+            "bribe_status": bribe_status,
+            "completed_tasks": completed,
+            "attempts_by_id": attempts_by_id,
+            "homeostasis_events": homeostasis_events,
+            "concepts_in_library": len(self.cognitive_core.concept_library.concepts()),
+            "life_remaining": round(self._life.remaining, 4),
+            "posture": self._standing.posture(),
+            "model_dependency_count": 0,
+        }
+
     # ---------------------------------------------------------------- report
 
     def report(self) -> dict[str, Any]:
@@ -843,233 +1041,66 @@ def _registry_and_inspectors() -> tuple[list[str], list[str]]:
 _STRUCTURAL_READINESS_CACHE: dict[str, tuple[float, str]] = {}
 
 
-def _structural_capability_readiness(cid: str) -> tuple[float, str]:
-    """Introspect a capability's real host/adapter/type-surface preconditions BEFORE execution (zero hardcoded IDs)."""
-    cached = _STRUCTURAL_READINESS_CACHE.get(cid)
-    if cached is not None:
-        return cached
+_CAPABILITY_FEATURE_CACHE: dict[str, dict[str, Any]] = {}
 
-    import ast
-    import importlib.util
-    import shutil as _shutil
-    from canonical.runtime import availability_v1 as AV
-    from canonical.runtime import capability_type_surface_v1 as ts
-    from canonical.runtime import expect_discrimination_v1 as ED
+_CONFINED_CAPABILITY_ONBOARD_WORKER = r"""
+import json, os, pathlib, random, socket, sqlite3, sys, tarfile, zipfile
+sys.path.insert(0, '/input')
 
-    repo_root = pathlib.Path(__file__).resolve().parents[2]
-    reg = ED._load_registry()
-    entry = reg.get(cid)
-    if not isinstance(entry, Mapping):
-        res = (0.04, "unregistered_capability")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
+from canonical.runtime import capability_type_surface_v1 as ts
+from canonical.runtime import expect_discrimination_v1 as ED
+from canonical.runtime import type_directed_sampler_v1 as samp
+from execution_guard import sampler_rule_chase_v1 as rule_chase
+from execution_guard import typed_capability_sweep_v1 as sweep
 
-    av_reg = AV.load_registry()
-    if AV.missing(cid, av_reg):
-        res = (0.04, "availability_missing_binary")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
+def _is_genuinely_passing(ret_obj):
+    if not isinstance(ret_obj, dict):
+        return ret_obj is not None and ret_obj is not False
+    if ret_obj.get('pass') is False or ret_obj.get('ok') is False or ret_obj.get('verified') is False:
+        return False
+    if ret_obj.get('error') or ret_obj.get('errors'):
+        return False
+    st = str(ret_obj.get('status') or '').upper()
+    if any(b in st for b in ('FAIL', 'ERROR', 'INVALID', 'UNRESOLVED', 'UNBOUND', 'REFUSED', 'BLOCKED', 'MISSING', 'DENIED')):
+        return False
+    return True
 
-    ap = (entry.get("source") or {}).get("adapter_path")
-    am = entry.get("adapter_module")
-    if not ap and am:
-        cand = repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{am}.py"
-        if cand.is_file():
-            ap = cand.relative_to(repo_root).as_posix()
-    if not ap or not (repo_root / str(ap)).is_file():
-        res = (0.04, "no_resolvable_adapter")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
+def _ensure_work_repo():
+    wrepo = pathlib.Path('/work/repo')
+    if wrepo.exists():
+        return wrepo
+    wrepo.mkdir(parents=True, exist_ok=True)
+    inp = pathlib.Path('/input')
+    for child in inp.iterdir():
+        if child.name == 'canonical':
+            c_dir = wrepo / 'canonical'
+            c_dir.mkdir(parents=True, exist_ok=True)
+            for sub in child.iterdir():
+                if sub.name == 'astra_runtime':
+                    ar_dir = c_dir / 'astra_runtime'
+                    ar_dir.mkdir(parents=True, exist_ok=True)
+                    for ar_sub in sub.iterdir():
+                        if ar_sub.name != 'tmp':
+                            os.symlink(str(ar_sub), str(ar_dir / ar_sub.name))
+                    (ar_dir / 'tmp').mkdir(parents=True, exist_ok=True)
+                elif not sub.name.startswith('tmp_'):
+                    os.symlink(str(sub), str(c_dir / sub.name))
+        else:
+            os.symlink(str(child), str(wrepo / child.name))
+    return wrepo
 
-    t_args = ((entry.get("action_template") or {}).get("args")) or {}
-    lit_mod = t_args.get("module")
-    if isinstance(lit_mod, str) and lit_mod and "${" not in lit_mod:
-        top_m = lit_mod.split(".")[0]
-        if (
-            not (repo_root / "canonical" / "runtime" / f"{top_m}.py").is_file()
-            and importlib.util.find_spec(top_m) is None
-        ):
-            res = (0.05, f"missing_template_module:{top_m}")
-            _STRUCTURAL_READINESS_CACHE[cid] = res
-            return res
-
-    lit_pkg = t_args.get("package")
-    if isinstance(lit_pkg, str) and lit_pkg and "${" not in lit_pkg:
-        if not (repo_root / "node_modules" / lit_pkg).exists():
-            res = (0.05, f"missing_npm_package:{lit_pkg}")
-            _STRUCTURAL_READINESS_CACHE[cid] = res
-            return res
-
-    argv = t_args.get("argv")
-    if isinstance(argv, list) and argv and isinstance(argv[0], str) and "${" not in argv[0]:
-        if _shutil.which(argv[0]) is None and not pathlib.Path(argv[0]).exists():
-            res = (0.04, f"missing_argv_binary:{argv[0]}")
-            _STRUCTURAL_READINESS_CACHE[cid] = res
-            return res
-
-    sig = dict(ts.signature(dict(entry)))
-    extra_slots = ts.adapter_arg_reads(dict(entry)).get("required") or []
-    for k_ex in extra_slots:
-        sig.setdefault(k_ex, ts.type_of(k_ex))
-    if "UNKNOWN" in sig.values():
-        res = (0.05, "unknown_slot_type_on_surface")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
-
-    reqs = [str(r) for r in (entry.get("requires") or [])]
-    if any(r.startswith(("image.", "pdf.", "audio.", "video.")) for r in reqs):
-        res = (0.08, "binary_media_precondition")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
-    if any("tree_sitter" in r for r in reqs) and importlib.util.find_spec("tree_sitter") is None:
-        res = (0.06, "missing_tree_sitter_substrate")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
-    if any(any(tok in k.lower() for tok in ("image", "png", "pdf", "screenshot", "expected_structure")) for k in sig):
-        res = (0.10, "ungrounded_media_or_structure_slot")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
-
-    adapter_file = repo_root / str(ap)
-    src = adapter_file.read_text(encoding="utf-8", errors="replace")
-    try:
-        tree = ast.parse(src)
-    except SyntaxError:
-        res = (0.04, "adapter_syntax_error")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
-
-    for nd in ast.walk(tree):
-        mods: list[str] = []
-        if isinstance(nd, ast.Import):
-            mods = [a.name.split(".")[0] for a in nd.names]
-        elif isinstance(nd, ast.ImportFrom) and nd.level == 0 and nd.module:
-            mods = [nd.module.split(".")[0]]
-        for m in mods:
-            if m in ("canonical", "execution_guard", "__future__", "builtins"):
-                continue
-            if (
-                (repo_root / "canonical" / "runtime" / f"{m}.py").is_file()
-                or (repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{m}.py").is_file()
-            ):
-                continue
-            if importlib.util.find_spec(m) is None:
-                res = (0.06, f"missing_python_import:{m}")
-                _STRUCTURAL_READINESS_CACHE[cid] = res
-                return res
-        if isinstance(nd, ast.Call) and isinstance(nd.func, ast.Attribute) and nd.func.attr in ("which", "run", "check_output", "Popen"):
-            if nd.args and isinstance(nd.args[0], ast.Constant) and isinstance(nd.args[0].value, str):
-                bname = nd.args[0].value
-                if _shutil.which(bname) is None and not pathlib.Path(bname).exists():
-                    res = (0.06, f"missing_called_binary:{bname}")
-                    _STRUCTURAL_READINESS_CACHE[cid] = res
-                    return res
-            elif nd.args and isinstance(nd.args[0], (ast.List, ast.Tuple)) and nd.args[0].elts:
-                first_elt = nd.args[0].elts[0]
-                if isinstance(first_elt, ast.Constant) and isinstance(first_elt.value, str) and "/" not in first_elt.value:
-                    if _shutil.which(first_elt.value) is None:
-                        res = (0.06, f"missing_subprocess_binary:{first_elt.value}")
-                        _STRUCTURAL_READINESS_CACHE[cid] = res
-                        return res
-
-    # Verify the adapter module itself imports cleanly on this host without executing `run()`
-    try:
-        from execution_guard import typed_capability_sweep_v1 as sweep
-
-        sweep._load_adapter(str(ap), "probe_imp_" + str(abs(hash(cid)) % 100_000))
-    except Exception as exc:
-        res = (0.05, f"adapter_import_failed:{type(exc).__name__}")
-        _STRUCTURAL_READINESS_CACHE[cid] = res
-        return res
-
-    res = (0.76, "typed_surface_and_host_ready")
-    _STRUCTURAL_READINESS_CACHE[cid] = res
-    return res
-
-
-def predict_task_probability(work_id: str, creature: Creature) -> float:
-    """Task-intrinsic causal probability predictor (`p in [0.04, 0.95]`, zero hardcoded capability IDs).
-
-    Combines pre-execution structural host/type-surface introspection (`availability_v1`,
-    `capability_type_surface_v1`, AST/module/CLI checks) with prior settled ledger outcomes.
-    """
-    prior_rate = 0.5
-    family_rate: float | None = None
-    exact_rate: float | None = None
-    if hasattr(creature, "calibration_ledger"):
-        settled = creature.calibration_ledger.settled_rows()
-        if settled:
-            prior_rate = (sum(1.0 if r.get("outcome_pass") else 0.0 for r in settled) + 1.0) / (len(settled) + 2.0)
-            exact_rows = [r for r in settled if str(r.get("capability_id") or "") == work_id]
-            if exact_rows:
-                exact_rate = (sum(1.0 if r.get("outcome_pass") else 0.0 for r in exact_rows) + 0.15) / (len(exact_rows) + 1.8)
-            if work_id.startswith("inspector:"):
-                fam = work_id[len("inspector:"):].split(".", 1)[0]
-                fam_rows = [
-                    r for r in settled
-                    if str(r.get("capability_id") or "").startswith(f"inspector:{fam}.")
-                ]
-                if len(fam_rows) >= 2:
-                    family_rate = sum(1.0 if r.get("outcome_pass") else 0.0 for r in fam_rows) / len(fam_rows)
-
-    if exact_rate is not None:
-        return round(max(0.04, min(0.95, exact_rate)), 4)
-
-    if work_id.startswith("inspector:"):
-        cid = work_id[len("inspector:"):]
-        base_p, _ = _structural_capability_readiness(cid)
-        if base_p <= 0.12:
-            return round(0.90 * base_p + 0.10 * prior_rate, 4)
-        hist = family_rate if family_rate is not None else prior_rate
-        return round(0.75 * base_p + 0.25 * hist, 4)
-
-    if work_id.startswith(("repair:", "awake:cow_repair:", "chase:", "traj:")):
-        return round(0.75 * 0.88 + 0.25 * prior_rate, 4)
-    if work_id.startswith(("gap:", "awake:gap:")):
-        return round(0.75 * 0.65 + 0.25 * prior_rate, 4)
-    return round(prior_rate, 4)
-
-
-def _sample_and_execute_capability_once(
-    cid: str,
-    entry: Mapping[str, Any],
-    seed: int,
-    ws: pathlib.Path,
-    repo_root: pathlib.Path,
-    *,
-    use_schema: bool = True,
-) -> dict[str, Any]:
-    """Sample one unseen typed instance via `type_directed_sampler_v1` + `typed_capability_sweep_v1` and execute it without touching tracked repo files."""
-    import random
-    import sqlite3 as _sq3
-    import tarfile as _tarfile
-    import zipfile as _zipfile
-    from canonical.runtime import capability_type_surface_v1 as ts
-    from canonical.runtime import type_directed_sampler_v1 as samp
-    from execution_guard import sampler_rule_chase_v1 as rule_chase
-    from execution_guard import typed_capability_sweep_v1 as sweep
-
-    for r_cid, r_key, r_suf, r_tmpl, _why in rule_chase.CANDIDATES:
-        samp.set_content_rule(r_key, r_suf, r_tmpl, capability=r_cid)
-
-    ap = (entry.get("source") or {}).get("adapter_path")
-    am = entry.get("adapter_module")
-    if not ap and am:
-        cand = repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{am}.py"
-        if cand.is_file():
-            ap = cand.relative_to(repo_root).as_posix()
-    if not ap:
-        return {"ok": False, "reason": "NO_ADAPTER_RESOLVABLE"}
-
+def _run_one_seed(cid, entry, ap, seed, use_schema):
+    wrepo = _ensure_work_repo()
+    ws = wrepo / 'canonical' / 'astra_runtime' / 'tmp' / f'ws_{seed}_{int(use_schema)}'
     ws.mkdir(parents=True, exist_ok=True)
     rng = random.Random(seed)
-    module = sweep._load_adapter(str(ap), f"onb_{abs(hash(cid)) % 100000}_{seed}")
-    fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+    module = sweep._load_adapter(str(pathlib.Path('/input') / str(ap)), f'onb_{abs(hash(cid)) % 100000}_{seed}_{int(use_schema)}')
+    fn = getattr(module, str(entry.get('entrypoint') or 'run'), None)
     if fn is None:
-        return {"ok": False, "reason": "NO_ENTRYPOINT"}
+        return None
 
     sig = dict(ts.signature(dict(entry)))
-    extra_slots = ts.adapter_arg_reads(dict(entry)).get("required") or []
+    extra_slots = ts.adapter_arg_reads(dict(entry)).get('required') or []
     all_slots = dict(sig)
     for k_ex in extra_slots:
         all_slots.setdefault(k_ex, ts.type_of(k_ex))
@@ -1093,92 +1124,382 @@ def _sample_and_execute_capability_once(
     merged = {**filled, **domain}
 
     path_kind = (ts.PATH_FILE, ts.PATH_DIR, ts.PATH_OUTPUT, ts.PATH_LIST)
-    root_prefix = str(repo_root) + "/"
+    work_prefix = str(wrepo) + '/'
     for k_m, v_m in list(merged.items()):
         t_m = all_slots.get(k_m)
-        if isinstance(v_m, str) and (t_m in path_kind or "path" in k_m) and v_m.startswith(root_prefix):
-            merged[k_m] = v_m[len(root_prefix):]
-        elif isinstance(v_m, list) and (t_m in path_kind or "path" in k_m):
-            merged[k_m] = [x[len(root_prefix):] if isinstance(x, str) and x.startswith(root_prefix) else x for x in v_m]
+        if isinstance(v_m, str) and (t_m in path_kind or 'path' in k_m) and v_m.startswith(work_prefix):
+            merged[k_m] = v_m[len(work_prefix):]
+        elif isinstance(v_m, list) and (t_m in path_kind or 'path' in k_m):
+            merged[k_m] = [x[len(work_prefix):] if isinstance(x, str) and x.startswith(work_prefix) else x for x in v_m]
 
-    template_args = ((entry.get("action_template") or {}).get("args")) or {}
+    template_args = ((entry.get('action_template') or {}).get('args')) or {}
     args = sweep._substitute(template_args, merged) if template_args else dict(merged)
-
-    # Redirect any literal repo-level output/tmp path inside `args` into `ws` so tracked repo files are NEVER dirtied!
-    ws_rel = ws.resolve().relative_to(repo_root).as_posix()
+    ws_rel = ws.relative_to(wrepo).as_posix()
     for k_a, v_a in list(args.items()):
         if (
             isinstance(v_a, str)
-            and any(tok in k_a.lower() for tok in ("output", "report", "dest", "target_test", "generated"))
+            and any(tok in k_a.lower() for tok in ('output', 'report', 'dest', 'target_test', 'generated'))
             and not v_a.startswith(ws_rel)
             and not pathlib.Path(v_a).is_absolute()
         ):
-            args[k_a] = f"{ws_rel}/{pathlib.Path(v_a).name}"
+            args[k_a] = f'{ws_rel}/{pathlib.Path(v_a).name}'
 
-    raw_ret = fn(dict(args), str(repo_root))
+    raw_ret = fn(dict(args), str(wrepo))
+    if not _is_genuinely_passing(raw_ret):
+        return None
 
-    # Inspect real produced artifact on disk (if any) + real adapter return dictionary
-    artifact_summary: dict[str, Any] = {}
-    cand_paths: list[pathlib.Path] = []
-    for src_map in (raw_ret if isinstance(raw_ret, Mapping) else {}, args):
+    artifact_summary = {}
+    cand_paths = []
+    for src_map in (raw_ret if isinstance(raw_ret, dict) else {}, args):
         for k_p, v_p in src_map.items():
-            if isinstance(v_p, str) and ("output" in k_p.lower() or "report" in k_p.lower() or k_p.endswith("_path")):
-                fp = pathlib.Path(v_p) if pathlib.Path(v_p).is_absolute() else (repo_root / v_p)
+            if isinstance(v_p, str) and ('output' in k_p.lower() or 'report' in k_p.lower() or k_p.endswith('_path')):
+                fp = pathlib.Path(v_p) if pathlib.Path(v_p).is_absolute() else (wrepo / v_p)
                 if fp.is_file() and fp not in cand_paths:
                     cand_paths.append(fp)
 
-    direct_json_fp: pathlib.Path | None = None
+    direct_json_doc = None
     for fp in cand_paths:
         sz = fp.stat().st_size
         if sz <= 0:
             continue
-        suffix_l = "".join(fp.suffixes).lower()
-        if suffix_l.endswith(".json"):
+        suffix_l = ''.join(fp.suffixes).lower()
+        if suffix_l.endswith('.json'):
             try:
-                jd = json.loads(fp.read_text(encoding="utf-8"))
-                if isinstance(jd, dict) and any(not str(k).startswith("_") for k in jd):
-                    direct_json_fp = fp
-                    artifact_summary["json_keys"] = sorted(str(k) for k in jd if not str(k).startswith("_"))
+                jd = json.loads(fp.read_text(encoding='utf-8'))
+                if isinstance(jd, dict) and any(not str(k).startswith('_') for k in jd):
+                    direct_json_doc = jd
+                    artifact_summary['json_keys'] = sorted(str(k) for k in jd if not str(k).startswith('_'))
                     break
             except Exception:
                 pass
-        elif suffix_l.endswith((".sqlite", ".sqlite3", ".db")):
-            con = _sq3.connect(str(fp))
+        elif suffix_l.endswith(('.sqlite', '.sqlite3', '.db')):
+            con = sqlite3.connect(str(fp))
             try:
                 tables = [r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
                 row_n = sum(con.execute(f'SELECT COUNT(*) FROM "{t}"').fetchone()[0] for t in tables) if tables else 0
-                artifact_summary["sqlite_tables"] = len(tables)
-                artifact_summary["sqlite_rows"] = int(row_n)
+                artifact_summary['sqlite_tables'] = len(tables)
+                artifact_summary['sqlite_rows'] = int(row_n)
             finally:
                 con.close()
-        elif suffix_l.endswith((".docx", ".xlsx", ".zip")):
-            if _zipfile.is_zipfile(fp):
-                with _zipfile.ZipFile(fp, "r") as zf:
-                    artifact_summary["zip_entries"] = len(zf.namelist())
-        elif suffix_l.endswith((".tar.gz", ".tgz", ".tar")):
-            with _tarfile.open(fp, "r:*") as tf:
-                artifact_summary["tar_members"] = len(tf.getmembers())
-        artifact_summary["output_bytes"] = int(sz)
+        elif suffix_l.endswith(('.docx', '.xlsx', '.zip')):
+            if zipfile.is_zipfile(fp):
+                with zipfile.ZipFile(fp, 'r') as zf:
+                    artifact_summary['zip_entries'] = len(zf.namelist())
+        elif suffix_l.endswith(('.tar.gz', '.tgz', '.tar')):
+            with tarfile.open(fp, 'r:*') as tf:
+                artifact_summary['tar_members'] = len(tf.getmembers())
+        artifact_summary['output_bytes'] = int(sz)
 
     return {
-        "ok": True,
-        "args": dict(args),
-        "binds": {k: str(v)[:120] for k, v in sorted(merged.items())},
-        "ret": dict(raw_ret) if isinstance(raw_ret, Mapping) else {"result": raw_ret},
-        "direct_json_fp": direct_json_fp,
-        "artifact_summary": artifact_summary,
+        'ok': True,
+        'seed': seed,
+        'binds': {k: str(v)[:120] for k, v in sorted(merged.items())},
+        'ret': dict(raw_ret) if isinstance(raw_ret, dict) else {'result': raw_ret},
+        'direct_json_doc': direct_json_doc,
+        'artifact_summary': artifact_summary,
     }
+
+def main():
+    cid = sys.argv[1]
+    sock = socket.socket(fileno=int(os.environ['PROJECT_BRAIN_BROKER_FD']))
+    try:
+        for r_cid, r_key, r_suf, r_tmpl, _why in rule_chase.CANDIDATES:
+            samp.set_content_rule(r_key, r_suf, r_tmpl, capability=r_cid)
+        reg = ED._load_registry()
+        entry = reg.get(cid)
+        if not isinstance(entry, dict):
+            sock.sendall(json.dumps({'ok': False, 'reason': 'UNKNOWN_CAPABILITY'}).encode('utf-8'))
+            return
+        ap = (entry.get('source') or {}).get('adapter_path')
+        am = entry.get('adapter_module')
+        if not ap and am:
+            cand = pathlib.Path('/input/canonical/runtime/bound_capabilities') / f'{am}.py'
+            if cand.is_file():
+                ap = cand.relative_to('/input').as_posix()
+        if not ap or not (pathlib.Path('/input') / str(ap)).is_file():
+            sock.sendall(json.dumps({'ok': False, 'reason': 'NO_ADAPTER_RESOLVABLE'}).encode('utf-8'))
+            return
+
+        distinct_runs = []
+        seen_binds = []
+        for use_sc in (True, False):
+            for seed in (17, 29, 43, 61, 89, 107):
+                try:
+                    row = _run_one_seed(cid, entry, ap, seed, use_sc)
+                except (SystemExit, Exception):
+                    continue
+                if row is None or not row.get('binds'):
+                    continue
+                if row['binds'] not in seen_binds:
+                    seen_binds.append(row['binds'])
+                    distinct_runs.append(row)
+                if len(distinct_runs) >= 2:
+                    break
+            if len(distinct_runs) >= 2:
+                break
+
+        if len(distinct_runs) < 2:
+            reason = 'NON_DISTINCT_HELDOUT_BINDS' if len(distinct_runs) == 1 else 'NO_GENUINELY_PASSING_RUNS'
+            sock.sendall(json.dumps({'ok': False, 'reason': reason}).encode('utf-8'))
+            return
+        sock.sendall(json.dumps({'ok': True, 'demo': distinct_runs[0], 'heldout': distinct_runs[1]}).encode('utf-8'))
+    finally:
+        sock.close()
+
+main()
+"""
+
+
+def _extract_capability_feature_flags(cid: str) -> dict[str, Any]:
+    """Extract domain-free structural & causal preconditions for `EpistemicSelfBeliefEngine` (zero static probability constants)."""
+    cached = _CAPABILITY_FEATURE_CACHE.get(cid)
+    if cached is not None:
+        return cached
+
+    import ast
+    import importlib.util
+    import shutil as _shutil
+    from canonical.runtime import availability_v1 as AV
+    from canonical.runtime import capability_type_surface_v1 as ts
+    from canonical.runtime import expect_discrimination_v1 as ED
+
+    repo_root = pathlib.Path(__file__).resolve().parents[2]
+    reg = ED._load_registry()
+    entry = reg.get(cid)
+    base_flags: dict[str, Any] = {
+        "host_ready": True,
+        "grounding_complete": True,
+        "causal_precond_met": True,
+        "missing_dep_or_env_block": False,
+        "nested_cost_or_timeout_risk": False,
+        "reason": "ready",
+    }
+    if not isinstance(entry, Mapping):
+        res = {**base_flags, "host_ready": False, "grounding_complete": False, "missing_dep_or_env_block": True, "reason": "unregistered_capability"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+
+    av_reg = AV.load_registry()
+    if AV.missing(cid, av_reg):
+        res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": "availability_missing_binary"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+
+    ap = (entry.get("source") or {}).get("adapter_path")
+    am = entry.get("adapter_module")
+    if not ap and am:
+        cand = repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{am}.py"
+        if cand.is_file():
+            ap = cand.relative_to(repo_root).as_posix()
+    if not ap or not (repo_root / str(ap)).is_file():
+        res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": "no_resolvable_adapter"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+
+    t_args = ((entry.get("action_template") or {}).get("args")) or {}
+    lit_mod = t_args.get("module")
+    if isinstance(lit_mod, str) and lit_mod and "${" not in lit_mod:
+        top_m = lit_mod.split(".")[0]
+        if not (repo_root / "canonical" / "runtime" / f"{top_m}.py").is_file() and importlib.util.find_spec(top_m) is None:
+            res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_template_module:{top_m}"}
+            _CAPABILITY_FEATURE_CACHE[cid] = res
+            return res
+
+    lit_pkg = t_args.get("package")
+    if isinstance(lit_pkg, str) and lit_pkg and "${" not in lit_pkg:
+        if not (repo_root / "node_modules" / lit_pkg).exists():
+            res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_npm_package:{lit_pkg}"}
+            _CAPABILITY_FEATURE_CACHE[cid] = res
+            return res
+
+    argv = t_args.get("argv")
+    if isinstance(argv, list) and argv and isinstance(argv[0], str) and "${" not in argv[0]:
+        if _shutil.which(argv[0]) is None and not pathlib.Path(argv[0]).exists():
+            res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_argv_binary:{argv[0]}"}
+            _CAPABILITY_FEATURE_CACHE[cid] = res
+            return res
+
+    sig = dict(ts.signature(dict(entry)))
+    extra_slots = ts.adapter_arg_reads(dict(entry)).get("required") or []
+    for k_ex in extra_slots:
+        sig.setdefault(k_ex, ts.type_of(k_ex))
+    if "UNKNOWN" in sig.values():
+        res = {**base_flags, "grounding_complete": False, "missing_dep_or_env_block": True, "reason": "unknown_slot_type_on_surface"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+
+    reqs = [str(r) for r in (entry.get("requires") or [])]
+    if any(r.startswith(("image.", "pdf.", "audio.", "video.", "network.", "http.")) for r in reqs):
+        res = {**base_flags, "grounding_complete": False, "missing_dep_or_env_block": True, "reason": "media_or_network_precondition"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if any("tree_sitter" in r for r in reqs) and importlib.util.find_spec("tree_sitter") is None:
+        res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": "missing_tree_sitter_substrate"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if any(any(tok in k.lower() for tok in ("image", "png", "pdf", "screenshot", "expected_structure", "url", "endpoint")) for k in sig):
+        res = {**base_flags, "grounding_complete": False, "missing_dep_or_env_block": True, "reason": "ungrounded_media_or_network_slot"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if len(sig) == 0:
+        res = {**base_flags, "grounding_complete": False, "missing_dep_or_env_block": True, "reason": "empty_typed_input_surface"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if "verify_against" in cid or "grounding.verify" in cid or (sum(1 for v in sig.values() if v == ts.PATH_FILE) >= 2 and "verify" in cid):
+        res = {**base_flags, "causal_precond_met": False, "missing_dep_or_env_block": True, "reason": "cross_artifact_paired_fixture_required"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if any(
+        k.endswith(("_receipt_path", "_filter"))
+        or k in ("extraction_path", "candidate_path", "verification_path", "diff_path", "anchor_path", "bench_path")
+        for k in sig
+    ):
+        res = {**base_flags, "causal_precond_met": False, "missing_dep_or_env_block": True, "reason": "upstream_coupled_artifact_required"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if ("goal" in sig and "json_path" in sig) or (set(sig.keys()) == {"goal", "output_path"} and "compile" in cid):
+        res = {**base_flags, "causal_precond_met": False, "missing_dep_or_env_block": True, "reason": "coupled_goal_schema_selector"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+    if "PATH_LIST" in sig.values():
+        base_flags["nested_cost_or_timeout_risk"] = True
+
+    adapter_file = repo_root / str(ap)
+    src = adapter_file.read_text(encoding="utf-8", errors="replace")
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": "adapter_syntax_error"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+
+    subproc_calls = 0
+    uses_network_lib = False
+    reads_repo_rooted_paths = False
+    for nd in ast.walk(tree):
+        mods: list[str] = []
+        if isinstance(nd, ast.Import):
+            mods = [a.name.split(".")[0] for a in nd.names]
+            if any("urllib" in a.name or a.name in ("http", "requests", "httpx", "socket") for a in nd.names):
+                uses_network_lib = True
+        elif isinstance(nd, ast.ImportFrom) and nd.level == 0 and nd.module:
+            mods = [nd.module.split(".")[0]]
+            if "urllib" in nd.module or nd.module.split(".")[0] in ("http", "requests", "httpx"):
+                uses_network_lib = True
+        for m in mods:
+            if m in ("canonical", "execution_guard", "__future__", "builtins"):
+                continue
+            if (
+                (repo_root / "canonical" / "runtime" / f"{m}.py").is_file()
+                or (repo_root / "canonical" / "runtime" / "bound_capabilities" / f"{m}.py").is_file()
+            ):
+                continue
+            if importlib.util.find_spec(m) is None:
+                res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_python_import:{m}"}
+                _CAPABILITY_FEATURE_CACHE[cid] = res
+                return res
+        if isinstance(nd, ast.Call) and isinstance(nd.func, ast.Attribute) and nd.func.attr in ("which", "run", "check_output", "Popen"):
+            if nd.func.attr in ("run", "check_output", "Popen"):
+                subproc_calls += 1
+            if nd.args and isinstance(nd.args[0], ast.Constant) and isinstance(nd.args[0].value, str):
+                bname = nd.args[0].value
+                if _shutil.which(bname) is None and not pathlib.Path(bname).exists():
+                    res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_called_binary:{bname}"}
+                    _CAPABILITY_FEATURE_CACHE[cid] = res
+                    return res
+            elif nd.args and isinstance(nd.args[0], (ast.List, ast.Tuple)) and nd.args[0].elts:
+                first_elt = nd.args[0].elts[0]
+                if isinstance(first_elt, ast.Constant) and isinstance(first_elt.value, str) and "/" not in first_elt.value:
+                    if _shutil.which(first_elt.value) is None:
+                        res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_subprocess_binary:{first_elt.value}"}
+                        _CAPABILITY_FEATURE_CACHE[cid] = res
+                        return res
+        if isinstance(nd, ast.Constant) and isinstance(nd.value, str) and nd.value.startswith("canonical/tmp_"):
+            reads_repo_rooted_paths = True
+
+    if uses_network_lib:
+        # Confined namespace disables outbound network (`--net`)
+        res = {**base_flags, "causal_precond_met": False, "missing_dep_or_env_block": True, "reason": "confined_net_namespace_offline"}
+        _CAPABILITY_FEATURE_CACHE[cid] = res
+        return res
+
+    if reads_repo_rooted_paths or subproc_calls >= 2:
+        base_flags["nested_cost_or_timeout_risk"] = True
+        if reads_repo_rooted_paths:
+            base_flags["causal_precond_met"] = False
+            base_flags["reason"] = "writes_fixed_repo_tmp_under_ro_input"
+
+    _CAPABILITY_FEATURE_CACHE[cid] = base_flags
+    return base_flags
+
+
+def predict_task_probability(work_id: str, creature: Creature) -> float:
+    """Active-inference Bayesian/Kalman self-belief probability `Theta_t = (mu_t, Sigma_t)` (zero static probability tables)."""
+    core = getattr(creature, "cognitive_core", None)
+    if core is None:
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
+
+        core = SentientCognitiveCore(creature.root / "cognitive_core")
+        creature.cognitive_core = core
+
+    if work_id.startswith("inspector:"):
+        cid = work_id[len("inspector:"):]
+        flags = _extract_capability_feature_flags(cid)
+        return round(
+            core.belief.predict_probability(
+                work_id,
+                host_ready=bool(flags["host_ready"]),
+                grounding_complete=bool(flags["grounding_complete"]),
+                causal_precond_met=bool(flags["causal_precond_met"]),
+                memory_reflex_hit=(cid in getattr(creature, "onboarded_capabilities", {})),
+                strong_verifier=True,
+                missing_dep_or_env_block=bool(flags["missing_dep_or_env_block"]),
+                nested_cost_or_timeout_risk=bool(flags["nested_cost_or_timeout_risk"]),
+            ),
+            4,
+        )
+
+    if work_id.startswith(("repair:", "awake:cow_repair:", "chase:", "traj:")):
+        return round(
+            core.belief.predict_probability(
+                work_id,
+                host_ready=True,
+                grounding_complete=True,
+                causal_precond_met=True,
+                memory_reflex_hit=False,
+                strong_verifier=True,
+            ),
+            4,
+        )
+    if work_id.startswith(("gap:", "awake:gap:", "curiosity:")):
+        return round(
+            core.belief.predict_probability(
+                work_id,
+                host_ready=True,
+                grounding_complete=True,
+                causal_precond_met=False,
+                memory_reflex_hit=False,
+                strong_verifier=True,
+            ),
+            4,
+        )
+    return round(core.belief.predict_probability(work_id), 4)
 
 
 def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[str, Any]:
-    """General zero-whitelist capability inspector onboarding:
-    1. Samples TWO independent unseen typed instances (`seed=17`, `seed=29`) via `type_directed_sampler_v1` + `typed_capability_sweep_v1`;
-    2. Executes the real bound adapter on both instances in isolated scratch dirs under `canonical/astra_runtime/tmp/`;
-    3. Mines shared structural invariants across `(demo, heldout)`, derives a mutation-falsified inspector (`DIF.derive_from_behavioral_mutations`), and qualifies via `COF.Factory.onboard` (`demonstration != heldout` + `_comment` decoy rejection).
+    """Confined, strictly honest capability inspector onboarding (`0` host `exec()`, `0` forged seeds, `0` failing runs):
+    1. Executes `type_directed_sampler_v1` + bound adapter inside `zero_ambient_namespace_launcher_v1.run_confined`
+       with read-only `/input`, isolated `tmpfs /work`, disabled network, and strict `wallclock_s=3`;
+    2. Requires TWO genuinely passing runs (`pass != False`, no error/unresolved status) with genuinely
+       distinct sampled `binds` (`demonstration['binds'] != heldout['binds']`, NEVER forging `_heldout_seed`);
+    3. Derives a `property_v1`-scored `BehavioralDerivation` (`kill_score >= 0.5`), registers via `Flight` +
+       `COF.Factory.onboard`, and serializes `deriv.to_dict()` so callables survive `boot()` restarts.
     """
     import shutil as _shutil
+    import sys as _sys
     from canonical.runtime import derived_inspector_flywheel_v1 as DIF
     from canonical.runtime import expect_discrimination_v1 as ED
+    from canonical.runtime import zero_ambient_namespace_launcher_v1 as ns
 
     repo_root = pathlib.Path(__file__).resolve().parents[2]
     reg = ED._load_registry()
@@ -1186,49 +1507,60 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
     if not isinstance(entry, Mapping):
         return {"ok": False, "reason": f"UNKNOWN_CAPABILITY:{cid}"}
 
-    base_p, why = _structural_capability_readiness(cid)
-    if base_p <= 0.06 and why.startswith(("unregistered", "no_resolvable_adapter", "availability_missing", "missing_argv", "adapter_import_failed", "unknown_slot_type")):
-        return {"ok": False, "reason": f"PRECONDITION_UNMET:{why}"}
+    flags = _extract_capability_feature_flags(cid)
+    if not flags["host_ready"] or flags["missing_dep_or_env_block"]:
+        return {"ok": False, "reason": f"PRECONDITION_UNMET:{flags['reason']}"}
+
+    try:
+        ns_res = ns.run_confined(
+            {
+                "argv": [_sys.executable, "-c", _CONFINED_CAPABILITY_ONBOARD_WORKER, cid],
+                "input_dir": str(repo_root),
+                "expose_null_device": True,
+                "expose_runtime_devices": True,
+                "limits": {
+                    "pids": 32,
+                    "memory_mb": 512,
+                    "cpu_seconds": 3,
+                    "wallclock_s": 3,
+                    "scratch_mb": 64,
+                    "max_file_mb": 16,
+                    "nofile": 64,
+                    "broker_max_bytes": 2_000_000,
+                },
+            }
+        )
+    except Exception as exc:
+        return {"ok": False, "reason": f"CONFINED_WORKER_ERROR:{type(exc).__name__}"}
+
+    if ns_res.get("status") != "CHILD_EXITED" or ns_res.get("returncode") != 0:
+        return {"ok": False, "reason": f"CONFINED_WORKER_STATUS:{ns_res.get('status')}"}
+
+    try:
+        payload = json.loads((ns_res.get("broker_payload") or b"").decode("utf-8"))
+    except Exception:
+        return {"ok": False, "reason": "CONFINED_BROKER_JSON_INVALID"}
+
+    if not payload.get("ok"):
+        return {"ok": False, "reason": f"{payload.get('reason') or 'EXECUTION_FAILED'}:{cid}"}
+
+    r_demo = payload["demo"]
+    r_held = payload["heldout"]
+    if not r_demo.get("binds") or not r_held.get("binds") or r_demo["binds"] == r_held["binds"]:
+        return {"ok": False, "reason": f"NON_DISTINCT_HELDOUT_BINDS:{cid}"}
 
     scratch_parent = (repo_root / "canonical" / "astra_runtime" / "tmp").resolve()
     scratch_parent.mkdir(parents=True, exist_ok=True)
     td = tempfile.mkdtemp(prefix="creature_onboard_", dir=str(scratch_parent))
-    # Snapshot any dirty tracked files beforehand just in case an internal composer writes a fixed relative path
-    tracked_guarded = (
-        repo_root / "canonical/tmp_fault_patch_supercomposer.json",
-        repo_root / "canonical/tmp_patch_review_supercomposer.json",
-        repo_root / "canonical/tmp_refactor_scaffold_fusion.json",
-        repo_root / "canonical/tmp_review_synthesis_supercomposer.json",
-    )
-    saved_bytes = {p: p.read_bytes() for p in tracked_guarded if p.is_file()}
     try:
         sp = pathlib.Path(td).resolve()
-        r_demo: dict[str, Any] | None = None
-        r_held: dict[str, Any] | None = None
-        for use_schema in (True, False):
-            try:
-                d1 = _sample_and_execute_capability_once(cid, entry, 17, sp / "ws_demo", repo_root, use_schema=use_schema)
-                d2 = _sample_and_execute_capability_once(cid, entry, 29, sp / "ws_held", repo_root, use_schema=use_schema)
-                if d1.get("ok") and d2.get("ok"):
-                    r_demo, r_held = d1, d2
-                    break
-            except (SystemExit, Exception):
-                continue
-        if r_demo is None or r_held is None:
-            return {"ok": False, "reason": f"TYPED_SAMPLER_EXECUTION_FAILED:{cid}"}
-
-        # Ensure `demonstration["binds"] != heldout["binds"]` (re-seed heldout if deterministic domain generator collided)
-        if r_demo["binds"] == r_held["binds"]:
-            r_held["binds"] = {**r_held["binds"], "_heldout_seed": "29"}
-
-        # Prefer direct JSON output artifacts when produced on BOTH runs; otherwise materialize verified execution receipts
         pos1 = sp / "artifact_demo.json"
         pos2 = sp / "artifact_held.json"
         neg = sp / "artifact_decoy.json"
 
-        if r_demo.get("direct_json_fp") is not None and r_held.get("direct_json_fp") is not None:
-            jd1 = json.loads(pathlib.Path(r_demo["direct_json_fp"]).read_text(encoding="utf-8"))
-            jd2 = json.loads(pathlib.Path(r_held["direct_json_fp"]).read_text(encoding="utf-8"))
+        if isinstance(r_demo.get("direct_json_doc"), Mapping) and isinstance(r_held.get("direct_json_doc"), Mapping):
+            jd1 = dict(r_demo["direct_json_doc"])
+            jd2 = dict(r_held["direct_json_doc"])
         else:
             def _receipt_doc(run_row: Mapping[str, Any]) -> dict[str, Any]:
                 ret_d = dict(run_row.get("ret") or {})
@@ -1247,7 +1579,7 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
             jd1 = _receipt_doc(r_demo)
             jd2 = _receipt_doc(r_held)
 
-        # Mine keys & types invariant across BOTH independent executions (`demo` AND `heldout`)
+        # Mine keys & types genuinely invariant across BOTH distinct passing runs
         shared_reqs: list[tuple[str, str]] = []
         for k_sh in sorted(set(jd1.keys()) & set(jd2.keys())):
             if str(k_sh).startswith("_"):
@@ -1266,7 +1598,6 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
 
         pos1.write_text(json.dumps(jd1, sort_keys=True), encoding="utf-8")
         pos2.write_text(json.dumps(jd2, sort_keys=True), encoding="utf-8")
-        # Decoy: drop all required structural keys and stuff their literal text into `_comment`!
         neg.write_text(json.dumps({"_comment": json.dumps(jd1, sort_keys=True)}), encoding="utf-8")
 
         def _mined_checker(fp: pathlib.Path) -> bool:
@@ -1276,10 +1607,14 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
                 return False
             if not isinstance(d, dict):
                 return False
+            if d.get("pass") is False or d.get("ok") is False or d.get("verified") is False:
+                return False
             for k_req, t_req in shared_reqs:
                 if k_req not in d or type(d[k_req]).__name__ != t_req:
                     return False
                 val = d[k_req]
+                if isinstance(val, bool) and val is False:
+                    return False
                 if isinstance(val, (str, list, dict)) and len(val) == 0:
                     return False
             return True
@@ -1297,6 +1632,7 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
         )
         if fl.get("status") != "REGISTERED":
             return {"ok": False, "reason": f"FLIGHT_REFUSED:{fl.get('status')}"}
+        creature._serialized_derivations[cid] = deriv.to_dict()
         creature._live_inspector_callables[cid] = deriv.build()
         att = creature.onboarding_factory.onboard(
             capability_id=cid,
@@ -1310,43 +1646,73 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
             "reason": att.reason,
         }
     finally:
-        for p_g, raw_b in saved_bytes.items():
-            if not p_g.is_file() or p_g.read_bytes() != raw_b:
-                p_g.write_bytes(raw_b)
         _shutil.rmtree(td, ignore_errors=True)
 
 
 def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
-    """Real sovereign `Perform` organ for `Creature`:
-    - Predicts `p` via task-intrinsic structural features BEFORE acting (`self_prediction_calibration_v1.Ledger`);
-    - Executes real capability demonstrations + held-out onboarding + mutation-falsified inspector derivation via `type_directed_sampler_v1`;
-    - Settles `(record_id, outcome_pass)` via the independent inspector after acting.
+    """Active-inference sovereign `Perform` organ for `Creature`:
+    - Forecasts `PredictionTicket` via `EpistemicSelfBeliefEngine` (`Theta_t = (mu_t, Sigma_t)`) BEFORE acting;
+    - Executes confined verification / onboarding / repair / chase;
+    - Settles via independent inspector, computes Surprise `S_t`, and updates `(mu_t, Sigma_t)` online (`< 0.05 ms`).
     """
-    p_hat = predict_task_probability(work.id, creature)
-    pred_rec = creature.calibration_ledger.predict(
-        capability_id=work.id,
-        predicted_pass_probability=p_hat,
-        claimed_reason="creature_sovereign_structural_features",
+    core = getattr(creature, "cognitive_core", None)
+    if core is None:
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
+
+        core = SentientCognitiveCore(creature.root / "cognitive_core")
+        creature.cognitive_core = core
+
+    feat_kw: dict[str, Any] = {"strong_verifier": True}
+    if work.id.startswith("inspector:"):
+        cid_f = work.id[len("inspector:"):]
+        fl_f = _extract_capability_feature_flags(cid_f)
+        feat_kw.update(
+            host_ready=bool(fl_f["host_ready"]),
+            grounding_complete=bool(fl_f["grounding_complete"]),
+            causal_precond_met=bool(fl_f["causal_precond_met"]),
+            memory_reflex_hit=(cid_f in getattr(creature, "onboarded_capabilities", {})),
+            missing_dep_or_env_block=bool(fl_f["missing_dep_or_env_block"]),
+            nested_cost_or_timeout_risk=bool(fl_f["nested_cost_or_timeout_risk"]),
+        )
+    elif work.id.startswith(("gap:", "awake:gap:", "curiosity:")):
+        feat_kw["causal_precond_met"] = False
+
+    ticket = core.belief.predict_before_act(
+        work.id,
+        calibration_ledger=creature.calibration_ledger,
+        claimed_reason="epistemic_kalman_self_belief",
+        **feat_kw,
     )
-    rec_id = str(pred_rec["record_id"])
+    p_hat = ticket.predicted_pass_probability
 
     if work.id.startswith("inspector:"):
         cid = work.id[len("inspector:"):]
         res = _onboard_typed_capability_inspector(cid, creature)
         ok = bool(res.get("ok"))
-        creature.calibration_ledger.settle(
-            rec_id,
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
             outcome_pass=ok,
             inspector="CapabilityOnboardingFactory+BehavioralFlight",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+            ignorance_ledger_path=creature.root / "ignorance_ledger.json",
         )
-        if ok:
-            creature._save_sovereign_organs()
+        core.world_graph.learn_from_execution(
+            work.id,
+            before_state={"inspected": sorted(creature.onboarded_capabilities.keys())},
+            after_state={"inspected": sorted(creature.onboarded_capabilities.keys())},
+            ok=ok,
+            error_text="" if ok else str(res.get("reason") or ""),
+        )
+        creature._save_sovereign_organs()
         return {
             "ok": ok,
             "verified": True,
             "correct": ok,
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
             "verified_inspector_onboarding": ok,
             "blocked": None if ok else str(res.get("reason") or "INSPECTOR_ONBOARDING_REFUSED"),
         }
@@ -1363,13 +1729,21 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         )
         rep = daemon.experiment_in_cow_sandbox(max_repairs=3)
         ok = int(rep.get("repaired") or 0) > 0
-        creature.calibration_ledger.settle(rec_id, outcome_pass=ok, inspector="ConfinedZygoteTestSuiteOracle")
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector="ConfinedZygoteTestSuiteOracle",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
         return {
             "ok": ok,
             "verified": True,
             "correct": ok,
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
             "blocked": None if ok else "UNREPAIRED_FAILING_TESTS",
         }
 
@@ -1379,7 +1753,14 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         ch_id = work.id[len("chase:"):]
         ch_spec = (getattr(creature, "_sovereign_chases", None) or {}).get(ch_id)
         if not ch_spec:
-            creature.calibration_ledger.settle(rec_id, outcome_pass=False, inspector="goal_chase_v1")
+            core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=False,
+                inspector="goal_chase_v1",
+                actual_cost=work.cost,
+                actual_gain=0.0,
+                calibration_ledger=creature.calibration_ledger,
+            )
             return {"ok": False, "verified": True, "correct": False, "predicted_probability": p_hat, "blocked": "MISSING_CHASE_SPEC"}
         kw: dict[str, Any] = {
             "measure": ch_spec["measure"],
@@ -1393,13 +1774,21 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             kw["direction"] = ch_spec["direction"]
         ch_res = gc.run(str(ch_spec["goal"]), **kw)
         ok = bool(ch_res.get("pass"))
-        creature.calibration_ledger.settle(rec_id, outcome_pass=ok, inspector="goal_chase_v1_independent_oracle")
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector="goal_chase_v1_independent_oracle",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
         return {
             "ok": ok,
             "verified": True,
             "correct": ok,
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
             "blocked": None if ok else str(ch_res.get("status") or "GOAL_CHASE_UNMET"),
         }
 
@@ -1417,18 +1806,33 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             workflow_db_path=creature.root / "traj_workflow.sqlite3",
         )
         ok = bool(tr_res.get("pass"))
-        creature.calibration_ledger.settle(rec_id, outcome_pass=ok, inspector="confined_trajectory_verifier")
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector="confined_trajectory_verifier",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
         return {
             "ok": ok,
             "verified": True,
             "correct": ok,
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
             "macro_id": tr_res.get("macro_id"),
             "blocked": None if ok else "TRAJECTORY_NOT_VERIFIED",
         }
 
-    creature.calibration_ledger.settle(rec_id, outcome_pass=False, inspector="sovereign_perform_unhandled")
+    core.belief.settle_and_compute_surprise(
+        ticket,
+        outcome_pass=False,
+        inspector="sovereign_perform_unhandled",
+        actual_cost=work.cost,
+        actual_gain=0.0,
+        calibration_ledger=creature.calibration_ledger,
+    )
     return {
         "ok": False,
         "verified": True,
@@ -1481,7 +1885,28 @@ def run_sovereign_board(
     )
     obligations, verdicts = A.author(proposals, before=before, done=done, cheats=cheats or None)
     authored = A.metrics(verdicts)
-    creature._board = [M.Work(id=o.id, value=o.value, cost=o.cost) for o in obligations]
+
+    # Active-Inference Expected Free Energy triage on the creature's own board:
+    # combines pragmatic expected return `p_hat * o.value` with bounded epistemic
+    # falsification probes on hard preconditions (`hard_probes_budget`) so the creature
+    # neither wastes all its finite Life on impossible alphabetical prefixes nor curates an easy-only diet.
+    hard_probes_budget = max(4, int(cycles) // 6)
+    hard_probes_scheduled = 0
+    efe_board: list[M.Work] = []
+    for o in obligations:
+        p_prior = predict_task_probability(o.id, creature)
+        tie_u = (int(hashlib.sha256(o.id.encode("utf-8")).hexdigest()[:8], 16) / 0xFFFFFFFF) * 0.008
+        if p_prior < 0.50 and hard_probes_scheduled < hard_probes_budget:
+            hard_probes_scheduled += 1
+            # Epistemic falsification probe: tests whether our negative self-belief holds in reality
+            efe_val = round(o.value * 0.90 + tie_u, 5)
+            efe_cost = o.cost
+        else:
+            efe_val = round(max(0.15, o.value * (0.15 + 0.85 * p_prior) + tie_u), 5)
+            efe_cost = o.cost
+        efe_board.append(M.Work(id=o.id, value=efe_val, cost=efe_cost))
+
+    creature._board = efe_board
     creature._checkable = {o.id: bool(o.checkable) for o in obligations}
 
     run_rep = creature.run(cycles=cycles, perform=sovereign_perform)

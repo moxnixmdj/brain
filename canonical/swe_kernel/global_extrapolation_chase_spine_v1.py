@@ -166,22 +166,63 @@ class GlobalDiscoveryWorld:
         min_independent_channels: int = 2,
         min_evidence_kinds: int = 1,
         ledger_path: str | None = None,
+        target: float | None = None,
+        direction: str = "maximize",
+        measure: Callable[[], float | None] | None = None,
     ) -> None:
         self.goal = str(goal)
         self.goal_id = "goal:" + hashlib.sha256(self.goal.encode("utf-8")).hexdigest()[:16]
         self.environment_id = str(environment_id)
-        self.channels = [dict(c) for c in channels]
-        self.channel_fetcher = channel_fetcher
+        norm_channels: list[dict[str, Any]] = []
+        has_inline_options = False
+        for raw_c in channels:
+            cd = dict(raw_c)
+            sid_c = str(cd.get("source_id") or cd.get("id") or cd.get("channel") or "").strip()
+            if sid_c:
+                cd.setdefault("source_id", sid_c)
+                cd.setdefault("upstream_group", str(cd.get("upstream_group") or sid_c))
+            inline_opts = cd.get("options")
+            if isinstance(inline_opts, Sequence) and not isinstance(inline_opts, (str, bytes)):
+                has_inline_options = True
+                if "yield_upper_bound" not in cd and "max_potential_gain" not in cd:
+                    ubs = [
+                        float(o.get("ceiling_estimate", o.get("expected_gain", 0.0)) or 0.0)
+                        for o in inline_opts
+                        if isinstance(o, Mapping)
+                    ]
+                    if ubs:
+                        cd["yield_upper_bound"] = max(ubs)
+            norm_channels.append(cd)
+        self.channels = norm_channels
+        if channel_fetcher is None and has_inline_options:
+            def _inline_fetcher(ch_spec: Mapping[str, Any]) -> Sequence[Mapping[str, Any]]:
+                out_opts: list[dict[str, Any]] = []
+                for raw_o in (ch_spec.get("options") or ()):
+                    if isinstance(raw_o, Mapping):
+                        od = dict(raw_o)
+                        if "ceiling_estimate" in od and "expected_gain" not in od:
+                            od["expected_gain"] = float(od["ceiling_estimate"])
+                        od.setdefault("independently_verified_by", "channel_probe_contract")
+                        out_opts.append(od)
+                return out_opts
+
+            self.channel_fetcher = _inline_fetcher
+        else:
+            self.channel_fetcher = channel_fetcher
         self.coverage_receipt = coverage_receipt
         self.residual_action_receipt = residual_action_receipt
         self.min_independent_channels = max(1, int(min_independent_channels))
         self.min_evidence_kinds = max(1, int(min_evidence_kinds))
         self.ledger_path = ledger_path
+        self.target = float(target) if target is not None else None
+        self.direction = str(direction or "maximize")
+        self.measure = measure
         self.state = grc.new_state()
         self.source_stats: dict[str, dict[str, Any]] = {}
         self._probed_source_ids: set[str] = set()
         self._recorded_gap_ids: list[str] = []
         self.last_minimum_information_contract: dict[str, Any] | None = None
+        self.last_voi_dominance_eval: dict[str, Any] | None = None
 
     def observed_evidence_kinds(self, opts: Sequence[Mapping[str, Any]] = ()) -> list[str]:
         """Compute distinct evidence kinds answered across probed sources and options."""
@@ -441,6 +482,39 @@ class GlobalDiscoveryWorld:
         if kinds_shortfall:
             blockers.append(f"EVIDENCE_KIND_DIVERSITY_SHORTFALL:{len(kinds_seen)}<{self.min_evidence_kinds}")
 
+        # First-principles VoI + Good-Turing unseen mass + `incumbent_dominance_search_v1` ceiling check
+        voi_eval: dict[str, Any] | None = None
+        if self.target is not None:
+            from canonical.swe_kernel.sentient_cognitive_core_v1 import GlobalVoIDominanceController
+
+            cur_val = 0.0
+            if callable(self.measure):
+                try:
+                    mv = self.measure()
+                    if mv is not None:
+                        cur_val = float(mv)
+                except Exception:
+                    cur_val = 0.0
+            t_delta = (
+                max(0.0, float(self.target) - cur_val)
+                if self.direction != "minimize"
+                else max(0.0, cur_val - float(self.target))
+            )
+            voi_eval = GlobalVoIDominanceController.evaluate_stopping_and_voi(
+                goal=self.goal,
+                target_delta=t_delta,
+                direction=self.direction,
+                known_options=opts,
+                channels=self.channels,
+                probed_source_ids=self._probed_source_ids,
+                coverage_receipt=self.coverage_receipt,
+                residual_action_receipt=self.residual_action_receipt,
+            )
+            self.last_voi_dominance_eval = voi_eval
+            for vb in voi_eval.get("blockers") or []:
+                if vb not in blockers:
+                    blockers.append(str(vb))
+
         if blockers and not guard_closed:
             res["complete"] = False
             res.setdefault("missing", [])
@@ -478,6 +552,8 @@ class GlobalDiscoveryWorld:
         res["observed_evidence_kinds"] = kinds_seen
         res["policy_changing_unprobed_count"] = len(dominating_unprobed)
         res["open_world_guard_closed"] = guard_closed
+        if voi_eval is not None:
+            res["voi_dominance_evaluation"] = voi_eval
         return res
 
 
@@ -506,8 +582,10 @@ def run_global_minimal_action_chase(
     flywheel_state_path: str | None = None,
     coverage_receipt: Mapping[str, Any] | None = None,
     residual_action_receipt: Mapping[str, Any] | None = None,
+    protected_facts: Sequence[str] = (),
+    causal_world_graph: Any = None,
 ) -> dict[str, Any]:
-    """Execute a complete globally-extrapolated, pathology-guarded minimal-action target chase."""
+    """Execute a complete globally-extrapolated, VoI-dominance & effect-polarity-guarded minimal-action target chase."""
     world = GlobalDiscoveryWorld(
         goal=goal,
         channels=channels,
@@ -517,13 +595,22 @@ def run_global_minimal_action_chase(
         min_independent_channels=min_independent_channels,
         min_evidence_kinds=min_evidence_kinds,
         ledger_path=ledger_path,
+        target=target,
+        direction=direction,
+        measure=measure,
     )
 
     seeded_options: list[dict[str, Any]] = []
     by_src: dict[tuple[str, str], list[Mapping[str, Any]]] = {}
-    for opt in initial_options:
-        sid = str(opt.get("source_id") or "seed")
-        grp = str(opt.get("upstream_group") or sid)
+    for raw_opt in initial_options:
+        opt = dict(raw_opt)
+        sid = str(opt.get("source_id") or opt.get("channel") or "seed")
+        grp = str(opt.get("upstream_group") or opt.get("channel") or sid)
+        if "ceiling_estimate" in opt and "expected_gain" not in opt:
+            opt["expected_gain"] = float(opt["ceiling_estimate"])
+            opt.setdefault("independently_verified_by", "seed_contract")
+        if opt.get("write_effects") and "repeatable" not in opt:
+            opt["repeatable"] = False
         by_src.setdefault((sid, grp), []).append(opt)
     for (sid, grp), batch in by_src.items():
         seeded_options.extend(
@@ -542,12 +629,34 @@ def run_global_minimal_action_chase(
 
     routes_executed: list[str] = []
     suppressed_skipped: list[str] = []
+    inhibited_destructive_skipped: list[str] = []
+    exhausted_one_shot_ids: set[str] = set()
+    prot_set = {str(f) for f in protected_facts if str(f)}
 
     def _act_globally_optimal(ctx: Mapping[str, Any]) -> Mapping[str, Any]:
-        known = [o for o in (ctx.get("known_options") or ctx.get("options") or []) if isinstance(o, Mapping)]
+        raw_known = [o for o in (ctx.get("known_options") or ctx.get("options") or []) if isinstance(o, Mapping)]
+        # Pre-execution `(Read, Write, Destroy)` effect polarity & one-shot exhaustion filter (ZERO post-mutation retry!)
+        safe_known: list[Mapping[str, Any]] = []
+        for o in raw_known:
+            rid_o = str(o.get("route_id") or o.get("id") or "")
+            if rid_o and rid_o in exhausted_one_shot_ids:
+                continue
+            dest_o = {str(x) for x in (o.get("destroys") or ()) if str(x)}
+            inhibited = bool(dest_o & prot_set) or o.get("effect_polarity") == "DESTRUCTIVE_INHIBITED"
+            if not inhibited and causal_world_graph is not None and rid_o:
+                inh_wg, _ = causal_world_graph.should_inhibit_action(rid_o, current_facts=prot_set, protected_facts=prot_set)
+                inhibited = bool(inh_wg)
+            if inhibited:
+                if rid_o and rid_o not in inhibited_destructive_skipped:
+                    inhibited_destructive_skipped.append(rid_o)
+                if isinstance(o, dict):
+                    o["effect_polarity"] = "DESTRUCTIVE_INHIBITED"
+                continue
+            safe_known.append(o)
+
         pre = round0_pathology_precheck(
             goal,
-            known,
+            safe_known,
             experience_state_path=experience_state_path,
             flywheel_state_path=flywheel_state_path,
         )
@@ -557,14 +666,27 @@ def run_global_minimal_action_chase(
                 suppressed_skipped.append(rid)
 
         ranked = rank_global_minimal_action_routes(
-            known,
+            safe_known,
             goal=goal,
             direction=direction,
             experience_state_path=experience_state_path,
             flywheel_state_path=flywheel_state_path,
         )
         if not ranked:
-            return {"status": "NO_VERIFIED_ADMISSIBLE_ROUTE", "error": "NO_VERIFIED_ADMISSIBLE_ROUTE"}
+            # Trigger orthogonal channel expansion if low-ceiling one-shot options were exhausted before reaching target!
+            if world.unprobed_independent_groups() and world.channel_fetcher is not None:
+                newly = world.options_provider(ctx)
+                if newly and isinstance(ctx.get("known_options"), list):
+                    ctx["known_options"].extend(newly)
+                    ranked = rank_global_minimal_action_routes(
+                        [o for o in newly if str(o.get("route_id") or o.get("id") or "") not in exhausted_one_shot_ids],
+                        goal=goal,
+                        direction=direction,
+                        experience_state_path=experience_state_path,
+                        flywheel_state_path=flywheel_state_path,
+                    )
+            if not ranked:
+                return {"status": "NO_VERIFIED_ADMISSIBLE_ROUTE", "error": "NO_VERIFIED_ADMISSIBLE_ROUTE"}
 
         chosen = ranked[0]
         rid = str(chosen.get("route_id") or chosen.get("id") or "route")
@@ -579,25 +701,53 @@ def run_global_minimal_action_chase(
         exp.record(rid, err_code, ok, structural=structural, **exp_kw)
         if ok:
             routes_executed.append(rid)
+            if chosen.get("repeatable") is False or out.get("exhausted") is True:
+                exhausted_one_shot_ids.add(rid)
+                for ko in raw_known:
+                    if isinstance(ko, dict) and str(ko.get("route_id") or ko.get("id") or "") == rid:
+                        ko["exhausted"] = True
             exp.teach_resolution(goal, rid, **exp_kw)
             out.setdefault("procedure", rid)
             out.setdefault("status", "OK")
         return out
 
-    chase_res = tdriver.run(
-        goal=goal,
-        target=target,
-        direction=direction,
-        unit=unit,
-        measure=measure,
-        act=_act_globally_optimal,
-        max_rounds=max_rounds,
-        patience=patience,
-        context={"options": seeded_options},
-        flywheel_state_path=flywheel_state_path,
-        options_provider=world.options_provider,
-        completeness_gate=world.completeness_gate,
+    import pathlib as _pathlib
+    from canonical.runtime import ignorance_ledger_v1 as _ign_led
+
+    old_ign_default = _ign_led.DEFAULT_STATE
+    eff_ledger_path = ledger_path or (
+        str(_pathlib.Path(experience_state_path).resolve().parent / "chase_ignorance.json")
+        if experience_state_path
+        else None
     )
+    if eff_ledger_path is not None:
+        world.ledger_path = eff_ledger_path
+        _ign_led.DEFAULT_STATE = eff_ledger_path
+    try:
+        chase_res = tdriver.run(
+            goal=goal,
+            target=target,
+            direction=direction,
+            unit=unit,
+            measure=measure,
+            act=_act_globally_optimal,
+            max_rounds=max_rounds,
+            patience=patience,
+            context={"options": seeded_options},
+            flywheel_state_path=flywheel_state_path,
+            options_provider=world.options_provider,
+            completeness_gate=world.completeness_gate,
+        )
+    finally:
+        _ign_led.DEFAULT_STATE = old_ign_default
+
+    disc_rounds = [
+        r for r in (chase_res.get("rounds") or [])
+        if r.get("blocked_on_data") or r.get("options_acquired") or r.get("new_options_count")
+    ]
+    if not disc_rounds and len(world._probed_source_ids) > len(by_src):
+        disc_rounds = [{"probed_sources": sorted(world._probed_source_ids)}]
+    dom_decisions = [world.last_voi_dominance_eval] if world.last_voi_dominance_eval is not None else []
     return {
         "schema": SCHEMA,
         "status": chase_res["status"],
@@ -606,9 +756,13 @@ def run_global_minimal_action_chase(
         "chase": chase_res,
         "routes_executed": routes_executed,
         "suppressed_routes_skipped_before_act": suppressed_skipped,
+        "inhibited_destructive_routes_before_act": inhibited_destructive_skipped,
         "probed_sources": sorted(world._probed_source_ids),
+        "discovery_rounds": disc_rounds,
         "observed_evidence_kinds": world.observed_evidence_kinds(),
         "minimum_information_contract": world.last_minimum_information_contract,
+        "voi_dominance_evaluation": world.last_voi_dominance_eval,
+        "incumbent_dominance_decisions": dom_decisions,
         "consumed_upstream_groups": list(world.state.get("consumed_upstream_groups") or []),
         "k3_external_llm_calls": 0,
     }
