@@ -1604,6 +1604,49 @@ main()
 """
 
 
+def _writes_fixed_repo_tmp_unconditionally(tree: "ast.Module") -> bool:
+    """True only when a `canonical/tmp_*` literal is written regardless of caller input.
+
+    Three shapes are treated as caller-overridable, because each hands control back to the
+    argument: `X or "canonical/tmp_..."`, a ternary that can select the argument, and the
+    `fresh_output(repo, args.get("output_path"), "canonical/tmp_...")` helper convention whose
+    second parameter exists precisely to override the third. Anything else -- the literal reaching
+    a write with no override in scope -- keeps the refusal.
+    """
+    import ast as _ast
+
+    parents: dict[Any, Any] = {}
+    for node in _ast.walk(tree):
+        for child in _ast.iter_child_nodes(node):
+            parents[child] = node
+
+    def _overridable(node: "_ast.AST") -> bool:
+        cur: Any = node
+        for _ in range(6):
+            cur = parents.get(cur)
+            if cur is None:
+                return False
+            if isinstance(cur, _ast.BoolOp) and isinstance(cur.op, _ast.Or):
+                return True
+            if isinstance(cur, _ast.IfExp):
+                return True
+            if isinstance(cur, _ast.Call):
+                fn = cur.func
+                name = fn.id if isinstance(fn, _ast.Name) else (fn.attr if isinstance(fn, _ast.Attribute) else "")
+                if name in ("fresh_output", "_safe_output"):
+                    return True
+        return False
+
+    for node in _ast.walk(tree):
+        if not (isinstance(node, _ast.Constant) and isinstance(node.value, str)):
+            continue
+        if not node.value.startswith("canonical/tmp_"):
+            continue
+        if not _overridable(node):
+            return True
+    return False
+
+
 def _extract_capability_feature_flags(cid: str) -> dict[str, Any]:
     """Extract domain-free structural & causal preconditions for `EpistemicSelfBeliefEngine` (zero static probability constants)."""
     cached = _CAPABILITY_FEATURE_CACHE.get(cid)
@@ -1768,8 +1811,18 @@ def _extract_capability_feature_flags(cid: str) -> dict[str, Any]:
                         res = {**base_flags, "host_ready": False, "missing_dep_or_env_block": True, "reason": f"missing_subprocess_binary:{first_elt.value}"}
                         _CAPABILITY_FEATURE_CACHE[cid] = res
                         return res
-        if isinstance(nd, ast.Constant) and isinstance(nd.value, str) and nd.value.startswith("canonical/tmp_"):
-            reads_repo_rooted_paths = True
+    # A `canonical/tmp_*` string used as an `or` FALLBACK is not a fixed write: the caller's
+    # argument, when supplied, replaces it, and on the onboarding path the root is `/work/repo`
+    # (writable, per run) rather than the read-only `/input`. Measured 2026-11-03/04: all 19
+    # capabilities refused as `writes_fixed_repo_tmp_under_ro_input` use the literal only as
+    # `str(raw or "canonical/tmp_...")` or `fresh_output(repo, args.get("output_path"), "...")`,
+    # and with the refusal lifted 15 of the 19 onboard on genuine passing runs. So the previous
+    # blanket test was a false refusal, and its cost was 19 capabilities plus -- because
+    # `nested_cost_or_timeout_risk` was set by the same condition -- 16 more hidden behind it.
+    # A conditional write is now judged by whether it is UNCONDITIONAL, not by whether such a
+    # string appears at all. The write itself still runs confined against a read-only `/input`,
+    # which remains the authority; this only stops a static guess from pre-empting it.
+    reads_repo_rooted_paths = _writes_fixed_repo_tmp_unconditionally(tree)
 
     if uses_network_lib:
         # Confined namespace disables outbound network (`--net`)
