@@ -1263,6 +1263,40 @@ class VerifiedSkillStore:
                         return None
             finally:
                 conn.close()
+
+            # A rule that just reproduced its own lesson under a real suite in THIS
+            # world is provenanced in this world, and nothing recorded that. Measured
+            # 2026-11-03: a verified hit incremented `verified_hits` and left the
+            # expiry stamp untouched, while `rule_expiry_v1` refuses to promote an
+            # unstamped rule out of UNKNOWN. So a rule could be re-proven by
+            # execution forever and stay permanently unprovenanced.
+            #
+            # Only a TEST_SUITE result under a contract oracle stamps: that is the
+            # claim "this rule still reproduces here". A CALLER_PREDICATE hit proves
+            # far less and must not launder itself into a freshness claim.
+            world_stamp: dict[str, Any] = {"stamped": False, "reason": "NOT_PROVEN_HERE"}
+            if (
+                str(verification.get("kind") or "") == "TEST_SUITE"
+                and is_contract_oracle(verifier)
+            ):
+                if not can_write_memory():
+                    world_stamp = {"stamped": False, "reason": "MEMORY_POLICY_WRITE_DISABLED"}
+                else:
+                    try:
+                        from canonical.swe_kernel import rule_expiry_v1 as _expiry
+
+                        recorded = _expiry.record_taught(
+                            self.db_path,
+                            str(rule["skill_id"]),
+                            fingerprint=now_world_fingerprint or _current_world_fp(),
+                        )
+                        world_stamp = {
+                            "stamped": bool(recorded.get("recorded")),
+                            "reason": recorded.get("reason") or "WORLD_STAMPED_AFTER_VERIFIED_HIT",
+                            "digest": recorded.get("digest"),
+                        }
+                    except Exception as exc:  # noqa: BLE001 - a stamp must never undo a proven fix
+                        world_stamp = {"stamped": False, "reason": f"STAMP_FAILED:{type(exc).__name__}"}
             return {
                 "skill_id": rule["skill_id"],
                 "skeleton_fp": rule["skeleton_fp"],
@@ -1271,6 +1305,7 @@ class VerifiedSkillStore:
                 "scope_tier": scope_tier,
                 "recall_strategy": recall_strategy,
                 "verification": verification,
+                "world_stamp": world_stamp,
                 "whole_task_correctness_proved": False,
             }
 
