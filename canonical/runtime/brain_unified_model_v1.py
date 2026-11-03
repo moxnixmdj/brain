@@ -1037,13 +1037,53 @@ class UnifiedModel:
         cwd: str | Path | None = None,
         db_path: str | Path | None = None,
         forged_state_path: str | Path | None = None,
+        cognitive_core: Any | None = None,
+        cognitive_state_dir: str | Path | None = None,
     ) -> dict[str, Any]:
-        """Single unified front door (`K3 = 0`): compiled model -> forged skills -> 4-tier `solve_or_learn`."""
+        """Single unified front door (`K3 = 0`): System-1 `< 0.5 ms` reflex -> System-2 deliberation with Active-Inference self-belief."""
         from canonical.runtime.one_shot_reality_closure_v2 import REQUIRED_ATTEMPT_ORDER
         from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
         from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
             match_and_invoke_forged_for_goal,
         )
+        from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
+
+        active_core = (
+            cognitive_core
+            if cognitive_core is not None
+            else SentientCognitiveCore(cognitive_state_dir)
+        )
+        r_preview = self.route(goal)
+        has_reflex = bool(r_preview.get("confident")) or bool(capability_id)
+        regime_info = active_core.decide_cognitive_regime(
+            capability_id or goal[:96],
+            has_consolidated_reflex=has_reflex,
+            verification_kind="TEST_SUITE",
+            host_ready=True,
+            grounding_complete=bool(inputs) or bool(context_paths) or has_reflex,
+        )
+        pred_ticket = active_core.belief.predict_before_act(
+            capability_id or goal[:96],
+            memory_reflex_hit=has_reflex,
+            grounding_complete=bool(inputs) or bool(context_paths) or has_reflex,
+        )
+
+        def _finalize_with_core(resp: dict[str, Any], inspector_name: str) -> dict[str, Any]:
+            passed_f = bool(resp.get("pass") is True)
+            settle = active_core.belief.settle_and_compute_surprise(
+                pred_ticket,
+                outcome_pass=passed_f,
+                inspector=inspector_name,
+                actual_cost=0.25 if regime_info["regime"] == "SYSTEM_1_REFLEX" else 1.0,
+                actual_gain=1.0 if passed_f else 0.0,
+            )
+            resp["cognitive_regime"] = regime_info
+            resp["epistemic_settlement"] = {
+                "predicted_pass_probability": pred_ticket.predicted_pass_probability,
+                "surprise": settle["surprise"],
+                "escalate_system2": settle["escalate_system2"],
+            }
+            return resp
 
         # 0A. Verified Skill Macro Compression (`verified_skill_macro_planner_v1.plan_with_skills`)
         if isinstance(inputs, Mapping) and isinstance(inputs.get("skill_macro_problem"), Mapping):
@@ -1119,9 +1159,9 @@ class UnifiedModel:
                 attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
             )
 
-        # 1. REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & bindable
+        # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
-        if not is_forged_cid:
+        if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
             primary = self.solve(
                 goal,
                 inputs=inputs,
@@ -1132,9 +1172,9 @@ class UnifiedModel:
             )
             if primary.get("pass") is True or capability_id is not None:
                 primary["attempt_order_contract"] = list(REQUIRED_ATTEMPT_ORDER)
-                return primary
+                return _finalize_with_core(primary, "VerifiedBoundCapabilityExecutionAdapter")
         else:
-            primary = {"pass": False, "reason": "FORGED_CAPABILITY_TARGETED"}
+            primary = {"pass": False, "reason": "ESCALATED_TO_SYSTEM_2_DELIBERATION" if not is_forged_cid else "FORGED_CAPABILITY_TARGETED"}
 
         # 2. Check self-forged capabilities (`forged.*`) with independent byte re-read
         try:
@@ -1145,20 +1185,23 @@ class UnifiedModel:
                 explicit_args=inputs,
             )
             if forged_out is not None and forged_out.get("pass") is True:
-                return self._envelope(
-                    operation="SOLVE_OR_LEARN",
-                    goal=goal,
-                    status="PASS__FORGED_CAPABILITY_EXECUTED_AND_BYTE_VERIFIED",
-                    **{"pass": True},
-                    reason=None,
-                    capability_id=forged_out["capability_id"],
-                    forged_execution=forged_out,
-                    attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+                return _finalize_with_core(
+                    self._envelope(
+                        operation="SOLVE_OR_LEARN",
+                        goal=goal,
+                        status="PASS__FORGED_CAPABILITY_EXECUTED_AND_BYTE_VERIFIED",
+                        **{"pass": True},
+                        reason=None,
+                        capability_id=forged_out["capability_id"],
+                        forged_execution=forged_out,
+                        attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+                    ),
+                    "ForgedInvokerByteReReadVerifier",
                 )
         except Exception:
             pass
 
-        # 3. Escalate into 4-tier zero-LLM `solve_or_learn` (preserves honest fail-closed refusals!)
+        # 3. SYSTEM-2 DELIBERATION: Escalate into 4-tier zero-LLM `solve_or_learn` (preserves honest fail-closed refusals!)
         req_payload: dict[str, Any] = {"goal": goal}
         if inputs:
             req_payload.update(dict(inputs))
@@ -1170,15 +1213,18 @@ class UnifiedModel:
             db_path=str(db_path) if db_path is not None else None,
         )
         passed = ctrl_out.get("pass") is True
-        return self._envelope(
-            operation="SOLVE_OR_LEARN",
-            goal=goal,
-            status=str(ctrl_out.get("status") or ("PASS__AUTONOMOUS_SOLVED" if passed else "FAIL_CLOSED")),
-            **{"pass": bool(passed)},
-            reason=None if passed else str(ctrl_out.get("failure_class") or ctrl_out.get("status") or primary.get("reason")),
-            tier_used=ctrl_out.get("tier_used"),
-            autonomous_result=ctrl_out,
-            attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+        return _finalize_with_core(
+            self._envelope(
+                operation="SOLVE_OR_LEARN",
+                goal=goal,
+                status=str(ctrl_out.get("status") or ("PASS__AUTONOMOUS_SOLVED" if passed else "FAIL_CLOSED")),
+                **{"pass": bool(passed)},
+                reason=None if passed else str(ctrl_out.get("failure_class") or ctrl_out.get("status") or primary.get("reason")),
+                tier_used=ctrl_out.get("tier_used"),
+                autonomous_result=ctrl_out,
+                attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
+            ),
+            "ClosedLoopAutonomousControllerVerifier",
         )
 
     # --------------------------------------------------------------- internals

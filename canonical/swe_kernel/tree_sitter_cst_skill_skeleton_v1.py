@@ -1065,6 +1065,133 @@ def _is_in_return_or_tail_position(node: Any, target_language: str) -> bool:
     return False
 
 
+def _iter_python_guard_statement_candidates(
+    source_text: str,
+    rule: Mapping[str, Any],
+    *,
+    max_candidates: int = 16,
+) -> Iterator[str]:
+    """General AST/CST multi-statement guard-insertion unification over compound operands & sibling operators."""
+    import ast
+    import textwrap
+
+    pat_toks = rule.get("pattern_tokens")
+    rep_toks = rule.get("replacement_tokens")
+    if not isinstance(pat_toks, list) or not isinstance(rep_toks, list):
+        return
+
+    hole_map: dict[str, str] = {}
+    rev_hole: dict[str, str] = {}
+    idx_h = 0
+    for kind, val in pat_toks + rep_toks:
+        if str(kind).startswith("hole_") and str(val) not in hole_map:
+            placeholder = f"__brain_h{idx_h}__"
+            hole_map[str(val)] = placeholder
+            rev_hole[placeholder] = str(val)
+            idx_h += 1
+    if not hole_map:
+        return
+
+    def _render_toks(toks: Sequence[Sequence[Any]], bind_map: Mapping[str, str], op_override: tuple[str, str] | None = None) -> str:
+        parts: list[str] = []
+        for kind, val in toks:
+            sk, sv = str(kind), str(val)
+            if sk.startswith("hole_") and sv in bind_map:
+                parts.append(bind_map[sv])
+            elif op_override is not None and sk == "op" and sv == op_override[0]:
+                parts.append(op_override[1])
+            else:
+                parts.append(sv)
+        return "".join(parts)
+
+    pat_code = textwrap.dedent(_render_toks(pat_toks, hole_map)).strip()
+    rep_code = textwrap.dedent(_render_toks(rep_toks, hole_map)).strip()
+    try:
+        pat_mod = ast.parse(pat_code)
+        rep_mod = ast.parse(rep_code)
+    except SyntaxError:
+        return
+    if len(pat_mod.body) != 1 or len(rep_mod.body) < 2:
+        return
+    pat_stmt = pat_mod.body[0]
+    if not isinstance(pat_stmt, ast.Return) or pat_stmt.value is None:
+        return
+
+    _DIV_FAMILY = {ast.Div: "/", ast.FloorDiv: "//", ast.Mod: "%"}
+
+    def _match_ast_expr(p_nd: ast.AST, c_nd: ast.AST, binds: dict[str, str], op_pair: list[tuple[str, str]]) -> bool:
+        if isinstance(p_nd, ast.Name) and p_nd.id in rev_hole:
+            h_nm = rev_hole[p_nd.id]
+            c_txt = ast.unparse(c_nd).strip()
+            if isinstance(c_nd, (ast.BinOp, ast.BoolOp, ast.IfExp, ast.Compare)):
+                c_txt = f"({c_txt})"
+            prev = binds.get(h_nm)
+            if prev is not None and prev.strip("() ") != c_txt.strip("() "):
+                return False
+            binds[h_nm] = c_txt
+            return True
+        if isinstance(p_nd, ast.BinOp) and isinstance(c_nd, ast.BinOp):
+            p_op_t, c_op_t = type(p_nd.op), type(c_nd.op)
+            if p_op_t is c_op_t:
+                pass
+            elif p_op_t in _DIV_FAMILY and c_op_t in _DIV_FAMILY:
+                op_pair.append((_DIV_FAMILY[p_op_t], _DIV_FAMILY[c_op_t]))
+            else:
+                return False
+            return _match_ast_expr(p_nd.left, c_nd.left, binds, op_pair) and _match_ast_expr(
+                p_nd.right, c_nd.right, binds, op_pair
+            )
+        return ast.dump(p_nd) == ast.dump(c_nd)
+
+    try:
+        src_tree = ast.parse(source_text)
+    except SyntaxError:
+        return
+    src_lines = source_text.splitlines(keepends=True)
+    line_offs = [0]
+    for ln in src_lines:
+        line_offs.append(line_offs[-1] + len(ln))
+
+    seen: set[str] = {source_text}
+    yielded = 0
+    for nd in ast.walk(src_tree):
+        if not isinstance(nd, ast.Return) or nd.value is None or nd.lineno is None or nd.end_lineno is None:
+            continue
+        binds: dict[str, str] = {}
+        op_swaps: list[tuple[str, str]] = []
+        if not _match_ast_expr(pat_stmt.value, nd.value, binds, op_swaps):
+            continue
+        op_ov = op_swaps[0] if op_swaps else None
+        rendered_block = textwrap.dedent(_render_toks(rep_toks, binds, op_override=op_ov)).strip()
+        variants = [rendered_block]
+        # Preserve integer vs float zero-return parity when transferring `/` -> `//` or `%`
+        if op_ov is not None and op_ov[1] in ("//", "%") and "return 0.0" in rendered_block:
+            variants = [rendered_block.replace("return 0.0", "return 0"), rendered_block]
+
+        line_start_idx = line_offs[nd.lineno - 1]
+        stmt_start = line_start_idx + nd.col_offset
+        stmt_end = line_offs[nd.end_lineno - 1] + nd.end_col_offset
+        indent = " " * nd.col_offset
+
+        for var_block in variants:
+            indented_lines = [
+                (indent + ln if i > 0 and ln.strip() else ln)
+                for i, ln in enumerate(var_block.splitlines())
+            ]
+            cand = source_text[:stmt_start] + "\n".join(indented_lines) + source_text[stmt_end:]
+            if cand in seen:
+                continue
+            try:
+                ast.parse(cand)
+            except SyntaxError:
+                continue
+            seen.add(cand)
+            yielded += 1
+            yield cand
+            if yielded >= max_candidates:
+                return
+
+
 def iter_cst_skeleton_candidates(
     source_text: str,
     rule: Mapping[str, Any],
@@ -1080,6 +1207,10 @@ def iter_cst_skeleton_candidates(
         return
     compiled = compile_rule_to_cst_skeleton(rule)
     if compiled is None:
+        if lang == "python":
+            yield from _iter_python_guard_statement_candidates(
+                source_text, rule, max_candidates=max_candidates
+            )
         return
 
     skeleton_pairs: list[tuple[tuple[Any, ...], tuple[Any, ...]]] = [

@@ -326,8 +326,94 @@ def _render_rule_tokens_concrete(tokens: Sequence[Any], hole_bindings: Mapping[s
     return "".join(parts)
 
 
+def _make_confined_io_verifier(fn_name: str, expected_cases: Sequence[tuple[Any, Any, Any]]) -> Callable[[str], bool]:
+    """Verify `cand_src` behaviorally inside `PersistentConfinedZygote` (`0` host `exec()`)."""
+    test_lines = [f"from probe_mod import {fn_name}"]
+    for a_v, b_v, exp_v in expected_cases:
+        test_lines.append(f"assert {fn_name}({a_v!r}, {b_v!r}) == {exp_v!r}")
+    test_src = "\n".join(test_lines) + "\n"
+
+    def _verify(cand_src: str) -> bool:
+        import pathlib as _pl
+        import tempfile as _tf
+        from canonical.runtime import brokered_workspace_execution_v1 as _broker
+
+        with _tf.TemporaryDirectory() as td:
+            ws = _pl.Path(td)
+            (ws / "probe_mod.py").write_text("def " + fn_name + "(a, b): return None\n", encoding="utf-8")
+            (ws / "test_probe.py").write_text(test_src, encoding="utf-8")
+            res = _broker.run_confined_python_candidate_batch(
+                ws,
+                "probe_mod.py",
+                ["test_probe.py"],
+                [cand_src],
+                stop_on_first_pass=True,
+                per_candidate_timeout_s=1.0,
+            )
+            return bool(res.get("ok") and res.get("confined") and res.get("screen_authoritative") and 0 in (res.get("passing_indices") or []))
+
+    return _verify
+
+
+def _make_confined_reference_verifier(fn_name: str, orig_src: str, ref_src: str, arity: int) -> Callable[[str], bool]:
+    """Verify `cand_src` behaviorally against `ref_src` (requiring `orig_src != ref_src` on >=1 input) inside `PersistentConfinedZygote`."""
+    if arity <= 0:
+        inputs_repr = "[()]"
+    elif arity == 1:
+        inputs_repr = "[(3,), (0,), (-2,), ([1, 2, 3],), ('ab',)]"
+    elif arity == 2:
+        inputs_repr = "[(3, 7), (8, 2), (5, 5), (-2, 4), (0, 1)]"
+    else:
+        tup_a = "(" + ", ".join(str(i + 2) for i in range(arity)) + ")"
+        tup_b = "(" + ", ".join(str(10 - i) for i in range(arity)) + ")"
+        inputs_repr = f"[{tup_a}, {tup_b}]"
+
+    test_src = (
+        f"import orig_mod, ref_mod, cand_mod\n"
+        f"_fn_o = getattr(orig_mod, {fn_name!r})\n"
+        f"_fn_r = getattr(ref_mod, {fn_name!r})\n"
+        f"_fn_c = getattr(cand_mod, {fn_name!r})\n"
+        f"_valid = 0\n"
+        f"_diff = 0\n"
+        f"for _args in {inputs_repr}:\n"
+        f"    try:\n"
+        f"        _ro = _fn_o(*_args)\n"
+        f"        _rr = _fn_r(*_args)\n"
+        f"    except Exception:\n"
+        f"        continue\n"
+        f"    _valid += 1\n"
+        f"    if _ro != _rr:\n"
+        f"        _diff += 1\n"
+        f"    assert _fn_c(*_args) == _rr\n"
+        f"assert _valid > 0 and _diff > 0\n"
+    )
+
+    def _verify(cand_src: str) -> bool:
+        import pathlib as _pl
+        import tempfile as _tf
+        from canonical.runtime import brokered_workspace_execution_v1 as _broker
+
+        with _tf.TemporaryDirectory() as td:
+            ws = _pl.Path(td)
+            (ws / "orig_mod.py").write_text(orig_src + "\n", encoding="utf-8")
+            (ws / "ref_mod.py").write_text(ref_src + "\n", encoding="utf-8")
+            (ws / "cand_mod.py").write_text(orig_src + "\n", encoding="utf-8")
+            (ws / "test_behav.py").write_text(test_src, encoding="utf-8")
+            res = _broker.run_confined_python_candidate_batch(
+                ws,
+                "cand_mod.py",
+                ["test_behav.py"],
+                [cand_src],
+                stop_on_first_pass=True,
+                per_candidate_timeout_s=1.0,
+            )
+            return bool(res.get("ok") and res.get("confined") and res.get("screen_authoritative") and 0 in (res.get("passing_indices") or []))
+
+    return _verify
+
+
 def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]]:
-    """Synthesize real executable diagnostic probes for `rule` across relational, arithmetic, boolean & statement scopes."""
+    """Synthesize real confined behavioral diagnostic probes for `rule` (`0` host `exec()`)."""
     lang = str(rule.get("language") or "python").lower()
     if lang != "python":
         return []
@@ -347,18 +433,6 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
             )
             if any(fn_old(a, b) != fn_new(a, b) for a, b in sample_points):
                 expected = [(a, b, fn_new(a, b)) for a, b in sample_points]
-
-                def _make_verifier(fn_name: str) -> Callable[[str], bool]:
-                    def _verify(cand_src: str) -> bool:
-                        ns: dict[str, Any] = {}
-                        exec(cand_src, ns)  # noqa: S102
-                        fn = ns.get(fn_name)
-                        if not callable(fn):
-                            return False
-                        return all(fn(a, b) == exp for a, b, exp in expected)
-
-                    return _verify
-
                 lhs_expr = "bool(a)" if old_op in ("and", "or") else "a"
                 rhs_expr = "bool(b)" if old_op in ("and", "or") else "b"
                 probes: list[dict[str, Any]] = [
@@ -366,7 +440,7 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                         "label": f"direct_return_{old_op}_to_{new_op}",
                         "language": "python",
                         "source_text": f"def _probe_direct(a, b):\n    return {lhs_expr} {old_op} {rhs_expr}\n",
-                        "verifier": _make_verifier("_probe_direct"),
+                        "verifier": _make_confined_io_verifier("_probe_direct", expected),
                     },
                     {
                         "label": f"novel_context_{old_op}_to_{new_op}",
@@ -377,7 +451,7 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                             f"    if True:\n"
                             f"        return out\n"
                         ),
-                        "verifier": _make_verifier("_probe_ctx"),
+                        "verifier": _make_confined_io_verifier("_probe_ctx", expected),
                     },
                 ]
                 if old_op == "<=":
@@ -386,7 +460,7 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                             "label": "disjunctive_lte_boundary",
                             "language": "python",
                             "source_text": "def _probe_sem(a, b):\n    return a < b or a == b\n",
-                            "verifier": _make_verifier("_probe_sem"),
+                            "verifier": _make_confined_io_verifier("_probe_sem", expected),
                         }
                     )
                 elif old_op == ">=":
@@ -395,7 +469,7 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                             "label": "disjunctive_gte_boundary",
                             "language": "python",
                             "source_text": "def _probe_sem(a, b):\n    return a > b or a == b\n",
-                            "verifier": _make_verifier("_probe_sem"),
+                            "verifier": _make_confined_io_verifier("_probe_sem", expected),
                         }
                     )
                 return probes
@@ -447,20 +521,28 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
             pat_ded = f"def _probe_fn({sig}):\n{ind_p}"
             rep_ded = f"def _probe_fn({sig}):\n{ind_r}"
 
-    def _stmt_verifier(cand_src: str) -> bool:
-        return cand_src.strip() == rep_ded.strip()
-
     import ast
 
     probes_out: list[dict[str, Any]] = []
     try:
-        ast.parse(pat_ded)
+        p_tree = ast.parse(pat_ded)
+        r_tree = ast.parse(rep_ded)
+        fn_node = next((n for n in p_tree.body if isinstance(n, ast.FunctionDef)), None)
+        if fn_node is not None and any(isinstance(n, ast.FunctionDef) and n.name == fn_node.name for n in r_tree.body):
+            stmt_ver = _make_confined_reference_verifier(fn_node.name, pat_ded, rep_ded, len(fn_node.args.args))
+        else:
+            stmt_ver = _make_confined_reference_verifier(
+                "_stmt_wrap",
+                "def _stmt_wrap():\n" + "\n".join("    " + ln for ln in pat_ded.splitlines()),
+                "def _stmt_wrap():\n" + "\n".join("    " + ln for ln in rep_ded.splitlines()),
+                0,
+            )
         probes_out.append(
             {
                 "label": "statement_anchored_probe",
                 "language": "python",
                 "source_text": pat_ded + "\n",
-                "verifier": _stmt_verifier,
+                "verifier": stmt_ver,
             }
         )
     except SyntaxError:
@@ -486,11 +568,11 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                 sample_p = render_canonical_expr(p_sk, "python", sample_bind)
                 sample_r = render_canonical_expr(r_sk, "python", sample_bind)
                 if sample_p and sample_r and sample_p != sample_r:
-                    param_names = [v for v in sample_bind.values() if not v.isdigit()]
-                    sig = ", ".join(dict.fromkeys(param_names or ["a", "b"]))
+                    param_list = list(dict.fromkeys([v for v in sample_bind.values() if not v.isdigit()] or ["a", "b"]))
+                    sig = ", ".join(param_list)
                     if p_sk[0] == "GENERIC_CST" and "=" in "".join(p_sk[2]):
-                        ctx_src = f"def _expr_ctx({sig}):\n    if True:\n        {sample_p}\n    return {sig.split(',')[0].strip()}\n"
-                        exp_src = f"def _expr_ctx({sig}):\n    if True:\n        {sample_r}\n    return {sig.split(',')[0].strip()}\n"
+                        ctx_src = f"def _expr_ctx({sig}):\n    if True:\n        {sample_p}\n    return {param_list[0]}\n"
+                        exp_src = f"def _expr_ctx({sig}):\n    if True:\n        {sample_r}\n    return {param_list[0]}\n"
                     else:
                         ctx_src = f"def _expr_ctx({sig}):\n    _tmp = ({sample_p})\n    return _tmp\n"
                         exp_src = f"def _expr_ctx({sig}):\n    _tmp = ({sample_r})\n    return _tmp\n"
@@ -500,9 +582,24 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
                             "language": "python",
                             "source_text": ctx_src,
                             "expected_expr_rewrite": exp_src.strip(),
-                            "verifier": lambda cs, _exp=exp_src.strip(): cs.strip() == _exp,
+                            "verifier": _make_confined_reference_verifier("_expr_ctx", ctx_src.strip(), exp_src.strip(), len(param_list)),
                         }
                     )
+        else:
+            from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import iter_cst_skeleton_candidates
+
+            guard_ctx = "def _expr_ctx(a, b):\n    return (a + 2) // b\n"
+            cands_g = list(iter_cst_skeleton_candidates(guard_ctx, rule, target_language="python", minimize=True))
+            if cands_g:
+                probes_out.append(
+                    {
+                        "label": "expression_context_probe",
+                        "language": "python",
+                        "source_text": guard_ctx,
+                        "expected_expr_rewrite": cands_g[0].strip(),
+                        "verifier": _make_confined_io_verifier("_expr_ctx", [(8, 2, 5), (8, 0, 0)]),
+                    }
+                )
     except Exception:
         pass
     return probes_out
