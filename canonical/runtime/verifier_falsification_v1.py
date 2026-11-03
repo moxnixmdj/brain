@@ -1510,6 +1510,66 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a skill qualified by replaying its own training instance",
         skill_qualifies_without_any_heldout_instance)
 
+    # --- behavioral inspector, obligation cheat & scope gates (2026-11-03) ---
+
+    def behavioral_inspector_accepts_comment_stuffed_decoy() -> bool:
+        import json as _json
+        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+        with tempfile.TemporaryDirectory() as tmp:
+            td = Path(tmp)
+            good = td / "good.json"
+            decoy = td / "decoy.json"
+            good.write_text(_json.dumps({"status": "VERIFIED", "count": 4}), encoding="utf-8")
+            decoy.write_text(_json.dumps({"_comment": "status: VERIFIED, count: 4"}), encoding="utf-8")
+            deriv = DIF.derive_from_behavioral_mutations(
+                capability_id="json.file.write",
+                good_artifact_path=good,
+                checker=lambda fp: (lambda d: isinstance(d, dict) and d.get("status") == "VERIFIED" and isinstance(d.get("count"), int))(_json.loads(fp.read_text(encoding="utf-8"))),
+                root=td,
+            )
+            ok, _why = deriv.build()({"root": td, "artifact": decoy.name})
+            return bool(ok)
+
+    add("derived_inspector_flywheel_v1.derive_from_behavioral_mutations",
+        "a JSON decoy that drops required keys and stuffs their text into _comment",
+        behavioral_inspector_accepts_comment_stuffed_decoy)
+
+    def obligation_gate_accepts_bool_false_as_zero_cheat() -> bool:
+        from canonical.runtime import self_authored_obligations_v1 as A
+
+        before = {"failing_tests": {"repair:t": 1}}
+        done = {"failing_tests": {"repair:t": 0}}
+        # Naive `== 0` accepts Python `False == 0` under `extended_cheat_worlds`!
+        naive = A.Proposal(
+            id="repair:t",
+            claim="failing test count is zero",
+            source="test",
+            check=lambda w: (w.get("failing_tests") or {}).get("repair:t") == 0,
+        )
+        verdict = A.admit(naive, before=before, done=done, cheats=A.extended_cheat_worlds(done))
+        return bool(verdict.admitted)
+
+    add("self_authored_obligations_v1.extended_cheat_worlds",
+        "a naive numeric-zero check fooled by Python False == 0 type coercion",
+        obligation_gate_accepts_bool_false_as_zero_cheat)
+
+    def rule_scope_calibration_overgeneralizes_bare_literal_swap() -> bool:
+        from canonical.swe_kernel import rule_scope_learning_v1 as RSL
+
+        cal = RSL.calibrate_rule_scope(
+            {
+                "pattern_template": "def is_disabled():\n    return True\n",
+                "replacement_template": "def is_disabled():\n    return False\n",
+                "language": "python",
+            }
+        )
+        return cal.get("scope") in ("SCOPE_EXPRESSION", "SCOPE_OPERATOR", "SCOPE_SEMANTIC")
+
+    add("rule_scope_learning_v1.calibrate_rule_scope",
+        "a bare True->False return swap granted broad expression/operator/semantic scope",
+        rule_scope_calibration_overgeneralizes_bare_literal_swap)
+
     return out
 
 

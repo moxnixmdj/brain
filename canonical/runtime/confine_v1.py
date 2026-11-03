@@ -189,3 +189,27 @@ def run(program: str, root: str, timeout: int = 300,
                     "exit_status": None,
                     "output": f"{type(exc).__name__}: {exc}",
                     "confined": False, "carrier_qualified": False}
+
+
+def run_readonly(program: str, root: str, timeout: int = 60) -> dict:
+    """Execute `program` inside the staged read-only `/input` + tmpfs `/work` broker."""
+    from canonical.runtime.brokered_workspace_execution_v1 import run_staged_confined_command
+
+    res = run_staged_confined_command(
+        root,
+        [sys.executable, "-c", program],
+        publish=False,
+        timeout=timeout,
+        allow_cow_hardlinks=True,
+    )
+    return {
+        "schema": SCHEMA,
+        "verdict": "OK" if res.get("ok") else "FAILED",
+        "exit_status": res.get("exit"),
+        "output": ((res.get("stdout") or "") + (res.get("stderr") or ""))[-3000:],
+        "confined": bool(res.get("confined")),
+        "live_workspace_untouched": bool(res.get("live_workspace_untouched", True)),
+        "carrier_qualified": False,
+        "network": False,
+    }
+

@@ -110,14 +110,28 @@ def default_ledger_db_path() -> pathlib.Path:
     return base / "upstream_routing_ledger_v1.sqlite"
 
 
+_EXT_TOKEN_RE = re.compile(r"\b[A-Za-z0-9_.-]+\.([A-Za-z0-9]{1,8})\b")
+_DATA_ARTIFACT_EXTS = frozenset({
+    "pdf", "csv", "tsv", "json", "jsonl", "xml", "yaml", "yml", "toml", "ini",
+    "png", "jpg", "jpeg", "webp", "gif", "bmp", "svg", "html", "htm", "md", "txt",
+    "docx", "xlsx", "pptx", "sqlite", "db", "parquet", "tar", "gz", "zip",
+})
+
+
 def classify_goal_intent_signature(goal: str) -> dict[str, str]:
     """Extract a content-free `(object_domain, effect_polarity, shape_hash)` signature.
 
     Strips file paths, commit hashes, numbers, quoted literals, and arbitrary user
-    symbol/identifier names so the signature transfers across unseen repositories,
-    filenames, symbol names, and branch names.
+    symbol/identifier names while preserving explicit artifact file extensions
+    (`|ext:pdf`, `|ext:csv`, ...) so cross-format goals never collide.
     """
-    cleaned = _QUOTED_RE.sub(" <STR> ", str(goal or ""))
+    raw_goal = str(goal or "")
+    exts = sorted({
+        m.group(1).lower()
+        for m in _EXT_TOKEN_RE.finditer(raw_goal)
+        if m.group(1).lower() in _DATA_ARTIFACT_EXTS
+    })
+    cleaned = _QUOTED_RE.sub(" <STR> ", raw_goal)
     cleaned = _PATH_LIKE_RE.sub(" <PATH> ", cleaned)
     cleaned = _HEX_SHA_RE.sub(" <SHA> ", cleaned)
     cleaned = re.sub(r"\b\d+\b", " <NUM> ", cleaned)
@@ -145,7 +159,8 @@ def classify_goal_intent_signature(goal: str) -> dict[str, str]:
     intent_words = [w for w in words if w in _INTENT_VOCAB]
     if not intent_words and words:
         intent_words = [words[0]]
-    structural_skeleton = f"{domain}|{polarity}|{' '.join(intent_words[:5])}"
+    ext_tag = f"|ext:{','.join(exts)}" if exts else ""
+    structural_skeleton = f"{domain}|{polarity}|{' '.join(intent_words[:5])}{ext_tag}"
     shape_hash = hashlib.sha256(structural_skeleton.encode("utf-8")).hexdigest()[:20]
     return {
         "object_domain": domain,
@@ -333,6 +348,19 @@ class UpstreamRoutingLedger:
                 "recorded": False,
                 "promoted": False,
                 "reason": "MEMORY_POLICY_WRITE_DISABLED" if not can_write_memory() else "INVALID_ROUTE_ARGS",
+            }
+        threshold = max(2, int(promotion_threshold))
+        # O(1) zero-SQLite-write RAM fast path when `(shape_hash -> capability_id)` is already promoted!
+        cur_lookup = self.lookup_shape(goal)
+        if cur_lookup.get("preferred_capability") == capability_id and cur_lookup.get("promoted_route") is True:
+            return {
+                "recorded": True,
+                "promoted": True,
+                "ram_fast_hit": True,
+                "distinct_instances": int(cur_lookup.get("verified_hits") or threshold),
+                "promotion_threshold": threshold,
+                "shape_hash": str((cur_lookup.get("signature") or {}).get("shape_hash") or ""),
+                "preferred_capability": capability_id,
             }
         self._init_schema()
         sig = classify_goal_intent_signature(goal)

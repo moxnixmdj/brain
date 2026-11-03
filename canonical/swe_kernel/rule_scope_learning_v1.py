@@ -61,6 +61,8 @@ OUTCOMES = (SILENT, PROPOSES_UNVERIFIED, SOLVED)
 # because it was measured to matter: the boundary lesson reaches 6 of 7 re-spellings without it
 # and 7 of 7 with it. The space is nested, STATEMENT inside OPERATOR inside SEMANTIC, so a
 # surviving SEMANTIC is a strictly wider claim than a surviving OPERATOR.
+SCOPE_EXPRESSION = "SCOPE_EXPRESSION"
+
 SCOPE_HYPOTHESES: tuple[Hypothesis, ...] = (
     Hypothesis("SCOPE_STATEMENT", frozenset({"crystallizer.recall"})),
     Hypothesis("SCOPE_OPERATOR", frozenset({"crystallizer.recall", "operator_generalization"})),
@@ -144,10 +146,13 @@ def predicted_outcome(hypothesis_id: str, rule: Mapping[str, Any], instance: Map
         # apply the swap. Wider than SCOPE_OPERATOR, and it costs a real normalisation module.
         from canonical.swe_kernel import boundary_disjunction_normalization_v1 as normalise
 
-        return _first_verified(
-            normalise.propose_semantic_swaps(
-                source_text, rule, operator_swaps=gen.propose_operator_swaps),
-            source_text, verifier)
+        try:
+            return _first_verified(
+                normalise.propose_semantic_swaps(
+                    source_text, rule, operator_swaps=gen.propose_operator_swaps),
+                source_text, verifier)
+        except normalise.NormalizationError:
+            return SILENT
 
     raise ScopeLearningError(f"UNKNOWN_SCOPE_HYPOTHESIS:{hypothesis_id}")
 
@@ -417,22 +422,90 @@ def synthesize_diagnostic_probes(rule: Mapping[str, Any]) -> list[dict[str, Any]
         else:
             bind[hv] = id_names[min(id_idx, len(id_names) - 1)]
             id_idx += 1
-    pat_concrete = _render_rule_tokens_concrete(pat_toks, bind).strip()
-    rep_concrete = _render_rule_tokens_concrete(rep_toks, bind).strip()
-    if not pat_concrete.startswith("def ") or pat_concrete == rep_concrete:
+    pat_concrete = _render_rule_tokens_concrete(pat_toks, bind)
+    rep_concrete = _render_rule_tokens_concrete(rep_toks, bind)
+    if not pat_concrete.strip() or pat_concrete.strip() == rep_concrete.strip():
         return []
+    import textwrap
+
+    pat_ded = textwrap.dedent(pat_concrete).strip()
+    rep_ded = textwrap.dedent(rep_concrete).strip()
+    if not pat_ded.startswith("def "):
+        param_names = [v for k, v in bind.items() if not v.isdigit() and v != "_fn_probe"]
+        sig = ", ".join(dict.fromkeys(param_names or ["a", "b"]))
+        first = pat_ded.splitlines()[0].strip()
+        if len(pat_ded.splitlines()) == 1 and first.endswith(":"):
+            if first.startswith(("elif ", "else:", "except", "finally:")):
+                pat_ded = f"def _probe_fn({sig}):\n    if False:\n        return 0\n    {pat_ded}\n        return 1\n    return 0"
+                rep_ded = f"def _probe_fn({sig}):\n    if False:\n        return 0\n    {rep_ded}\n        return 1\n    return 0"
+            else:
+                pat_ded = f"def _probe_fn({sig}):\n    {pat_ded}\n        return 1\n    return 0"
+                rep_ded = f"def _probe_fn({sig}):\n    {rep_ded}\n        return 1\n    return 0"
+        else:
+            ind_p = "\n".join("    " + ln for ln in pat_ded.splitlines())
+            ind_r = "\n".join("    " + ln for ln in rep_ded.splitlines())
+            pat_ded = f"def _probe_fn({sig}):\n{ind_p}"
+            rep_ded = f"def _probe_fn({sig}):\n{ind_r}"
 
     def _stmt_verifier(cand_src: str) -> bool:
-        return cand_src.strip() == rep_concrete
+        return cand_src.strip() == rep_ded.strip()
 
-    return [
-        {
-            "label": "statement_anchored_probe",
-            "language": "python",
-            "source_text": pat_concrete + "\n",
-            "verifier": _stmt_verifier,
-        }
-    ]
+    import ast
+
+    probes_out: list[dict[str, Any]] = []
+    try:
+        ast.parse(pat_ded)
+        probes_out.append(
+            {
+                "label": "statement_anchored_probe",
+                "language": "python",
+                "source_text": pat_ded + "\n",
+                "verifier": _stmt_verifier,
+            }
+        )
+    except SyntaxError:
+        pass
+    try:
+        from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+            compile_rule_to_cst_skeleton,
+            minimize_cst_skeleton_pair,
+            render_canonical_expr,
+        )
+
+        comp = compile_rule_to_cst_skeleton(rule)
+        if comp is not None:
+            min_pair = minimize_cst_skeleton_pair(comp["pattern_skeleton"], comp["replacement_skeleton"]) or (
+                comp["pattern_skeleton"],
+                comp["replacement_skeleton"],
+            )
+            p_sk, r_sk = min_pair
+            if p_sk[0] not in ("ATOM", "NUM", "HOLE") and not (
+                p_sk[0] == "ATOM" and p_sk[1] in ("True", "False", "None")
+            ):
+                sample_bind = {hv: bind[hv] for _, hv in holes if hv in bind}
+                sample_p = render_canonical_expr(p_sk, "python", sample_bind)
+                sample_r = render_canonical_expr(r_sk, "python", sample_bind)
+                if sample_p and sample_r and sample_p != sample_r:
+                    param_names = [v for v in sample_bind.values() if not v.isdigit()]
+                    sig = ", ".join(dict.fromkeys(param_names or ["a", "b"]))
+                    if p_sk[0] == "GENERIC_CST" and "=" in "".join(p_sk[2]):
+                        ctx_src = f"def _expr_ctx({sig}):\n    if True:\n        {sample_p}\n    return {sig.split(',')[0].strip()}\n"
+                        exp_src = f"def _expr_ctx({sig}):\n    if True:\n        {sample_r}\n    return {sig.split(',')[0].strip()}\n"
+                    else:
+                        ctx_src = f"def _expr_ctx({sig}):\n    _tmp = ({sample_p})\n    return _tmp\n"
+                        exp_src = f"def _expr_ctx({sig}):\n    _tmp = ({sample_r})\n    return _tmp\n"
+                    probes_out.append(
+                        {
+                            "label": "expression_context_probe",
+                            "language": "python",
+                            "source_text": ctx_src,
+                            "expected_expr_rewrite": exp_src.strip(),
+                            "verifier": lambda cs, _exp=exp_src.strip(): cs.strip() == _exp,
+                        }
+                    )
+    except Exception:
+        pass
+    return probes_out
 
 
 def calibrate_rule_scope(rule: Mapping[str, Any], *, store: Any = None) -> dict[str, Any]:
@@ -447,10 +520,28 @@ def calibrate_rule_scope(rule: Mapping[str, Any], *, store: Any = None) -> dict[
             "persisted": False,
             "terminal_authority": False,
         }
-    report = dict(learn_scope(rule, probes))
-    # Conservative effective scope: narrowest surviving hypothesis in the nested lattice
+    stmt_probes = [p for p in probes if p.get("label") != "expression_context_probe"]
+    expr_probes = [p for p in probes if p.get("label") == "expression_context_probe"]
+    report = dict(learn_scope(rule, stmt_probes or probes))
     remaining = list(report.get("remaining") or [])
     effective_scope = str(report.get("scope") or (remaining[0] if remaining else "")) or None
+    if effective_scope == "SCOPE_STATEMENT" and expr_probes:
+        try:
+            from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import iter_cst_skeleton_candidates
+
+            ep = expr_probes[0]
+            v_fn = ep["verifier"]
+            if any(
+                v_fn(cand)
+                for cand in iter_cst_skeleton_candidates(
+                    ep["source_text"], rule, target_language="python", minimize=True
+                )
+            ):
+                effective_scope = SCOPE_EXPRESSION
+                report["scope"] = SCOPE_EXPRESSION
+                report["result"] = "RESOLVED"
+        except Exception:
+            pass
     report["effective_scope"] = effective_scope
     persisted = False
     sid = str(rule.get("skill_id") or "")

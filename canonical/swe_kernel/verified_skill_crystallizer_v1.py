@@ -1137,7 +1137,7 @@ class VerifiedSkillStore:
                 return None, False
 
             eval_list = batch
-            if is_py_project_oracle and len(batch) >= 2 and not eff_suspect_lines:
+            if is_py_project_oracle and len(batch) >= 2:
                 try:
                     from canonical.swe_kernel.zygote_worker_pool_v1 import screen_python_candidates_cow
 
