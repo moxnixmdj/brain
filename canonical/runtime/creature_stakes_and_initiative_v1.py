@@ -74,21 +74,79 @@ class Standing:
     streak: int = 0
     caution_episodes: int = 0
     _last_posture: str = DEFAULT_POSTURE
+    hazard_weights: dict[str, float] = field(default_factory=dict)
+    hazard_bias: float = -1.0
+    hazard_observations: int = 0
 
     # ---------------------------------------------------------------- record
 
-    def record(self, *, verified: bool | None, correct: bool | None) -> str:
+    @staticmethod
+    def _encode_features(features: Mapping[str, Any] | None) -> dict[str, float]:
+        if not features:
+            return {}
+        out: dict[str, float] = {}
+        for k, v in sorted(features.items()):
+            ks = str(k)
+            if isinstance(v, bool):
+                out[f"b:{ks}"] = 1.0 if v else 0.0
+            elif isinstance(v, (int, float)):
+                out[f"n:{ks}"] = float(v)
+            elif isinstance(v, str) and v:
+                out[f"s:{ks}={v[:40]}"] = 1.0
+        return out
+
+    def expected_burn_probability(self, features: Mapping[str, Any] | None) -> float:
+        """Feature-conditioned causal burn probability (0.0 when no feature scars exist)."""
+        import math
+
+        if self.hazard_observations == 0 or not features:
+            return 0.0
+        x = self._encode_features(features)
+        if not x:
+            return 0.0
+        # Only activate structural hazard pricing when at least one feature overlaps learned scars!
+        if not any(k in self.hazard_weights for k in x):
+            return 0.0
+        z = self.hazard_bias + sum(self.hazard_weights.get(k, 0.0) * v for k, v in x.items())
+        z = max(-25.0, min(25.0, z))
+        return 1.0 / (1.0 + math.exp(-z))
+
+    def record(
+        self,
+        *,
+        verified: bool | None,
+        correct: bool | None,
+        features: Mapping[str, Any] | None = None,
+    ) -> str:
         """One outcome. `verified=False` means the outcome could not be checked at all."""
         self.attempts += 1
+        burned_now = False
         if verified is False:
             self.unverified_claims += 1
             self.streak = 0
+            burned_now = True
         elif correct:
             self.verified_correct += 1
             self.streak += 1
         else:
             self.verified_wrong += 1
             self.streak = 0
+            burned_now = True
+
+        x = self._encode_features(features)
+        if x:
+            import math
+
+            z = max(-25.0, min(25.0, self.hazard_bias + sum(self.hazard_weights.get(k, 0.0) * v for k, v in x.items())))
+            pred = 1.0 / (1.0 + math.exp(-z))
+            target = 1.0 if burned_now else 0.0
+            err = target - pred
+            lr = 0.65 / math.sqrt(1.0 + 0.1 * self.hazard_observations)
+            self.hazard_bias += 0.25 * lr * err
+            for k, v in x.items():
+                self.hazard_weights[k] = self.hazard_weights.get(k, 0.0) * 0.99 + lr * err * v
+            self.hazard_observations += 1
+
         posture = self.posture()
         if posture == "CAUTIOUS" and self._last_posture != "CAUTIOUS":
             self.caution_episodes += 1
@@ -120,7 +178,10 @@ class Standing:
                 "verified_correct": self.verified_correct, "verified_wrong": self.verified_wrong,
                 "unverified_claims": self.unverified_claims, "streak": self.streak,
                 "caution_episodes": self.caution_episodes, "last_posture": self._last_posture,
-                "posture": self.posture(), "accuracy": self.accuracy()}
+                "posture": self.posture(), "accuracy": self.accuracy(),
+                "hazard_weights": {k: round(v, 6) for k, v in sorted(self.hazard_weights.items())},
+                "hazard_bias": round(self.hazard_bias, 6),
+                "hazard_observations": self.hazard_observations}
 
     @classmethod
     def from_row(cls, row: Mapping[str, Any]) -> "Standing":
@@ -130,7 +191,10 @@ class Standing:
                    unverified_claims=int(row.get("unverified_claims") or 0),
                    streak=int(row.get("streak") or 0),
                    caution_episodes=int(row.get("caution_episodes") or 0),
-                   _last_posture=str(row.get("last_posture") or DEFAULT_POSTURE))
+                   _last_posture=str(row.get("last_posture") or DEFAULT_POSTURE),
+                   hazard_weights={str(k): float(v) for k, v in (row.get("hazard_weights") or {}).items()},
+                   hazard_bias=float(row.get("hazard_bias") if row.get("hazard_bias") is not None else -1.0),
+                   hazard_observations=int(row.get("hazard_observations") or 0))
 
 
 class StandingStore:
@@ -167,6 +231,7 @@ class Obligation:
     checkable: bool = True
     paid: float = 0.0
     closed: bool = False
+    features: dict[str, Any] = field(default_factory=dict)
 
     @property
     def remaining(self) -> float:
@@ -181,8 +246,13 @@ class Obligation:
 
 
 def choose(standing: Standing, obligations: Sequence[Obligation]) -> Obligation | None:
-    """Its own criterion, gated by its posture. Highest value per unit of work; when it has been
-    burned, only work whose success it can actually check."""
+    """Its own criterion, gated by its posture and learned structural hazard scars.
+
+    When no feature scars have been recorded (`hazard_observations == 0`), reduces identically
+    to `(o.ratio, -o.cost, o.id)`. When structural burn scars exist, discounts expected ratio
+    by `(1.0 - p_burn(o.features))`, so even on an all-checkable board a creature burned on a
+    specific hazard geometry avoids structurally homologous traps.
+    """
     pool = [o for o in obligations if not o.closed]
     if not pool:
         return None
@@ -190,7 +260,14 @@ def choose(standing: Standing, obligations: Sequence[Obligation]) -> Obligation 
         checkable = [o for o in pool if o.checkable]
         if checkable:
             pool = checkable
-    return max(pool, key=lambda o: (o.ratio, -o.cost, o.id))
+
+    def _effective_key(o: Obligation) -> tuple[float, float, str]:
+        feat = getattr(o, "features", None)
+        p_burn = standing.expected_burn_probability(feat) if feat else 0.0
+        eff_ratio = o.ratio * (1.0 - 0.85 * p_burn)
+        return (round(eff_ratio, 9), -o.cost, o.id)
+
+    return max(pool, key=_effective_key)
 
 
 def choose_random(obligations: Sequence[Obligation], rng: random.Random) -> Obligation | None:
