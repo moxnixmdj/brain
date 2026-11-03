@@ -1,0 +1,384 @@
+{
+  "action_id": "A_CAPABILITY_VERIFIES_ITSELF_BY_RUNNING_V1_20261103_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "A capability nothing has ever run can verify itself by running. Measured at 0875df1c: 138 of 141 bound rows were UNVERIFIED, and executing all 136 resolvable ones showed 87 RAN, 40 MISSING_DEPENDENCY, 8 NEEDS_INPUT, 1 FAILED and ZERO structurally broken -- they were unverified because nobody had run them, not because they did not work. The record binds module identity, environment identity and observed outcome, so it goes STALE when either moves, and a re-run is the only thing that re-earns it. The creature now probes a bounded number per pulse inside sense_reality, memoized so a warm workspace pays nothing.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "Three routes were measured and rejected before this one. The receipt lane was tried first as the obvious oracle: 12 sampled adapters produced 0 receipts at 845 ms each, because it requires exit 0 plus JSON on stdout. Pinning module bytes at run time was then rejected as circular -- it would read FRESH forever regardless of behaviour. Withdrawing the 42 missing-dependency rows was rejected as the mirror image of an error already ruled out, since a missing optional dependency is a fact about the host.",
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/capability_self_verification_v1.py",
+      "canonical/evidence/CAPABILITY_SELF_VERIFICATION_V1.json",
+      "canonical/tests/test_capability_self_verification_v1.py",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::138 of 141 bound capabilities were UNVERIFIED and that status was permanent. The repository could record evidence (capability_receipt_lane_v1: 15/15 receipt pins FRESH) and currency (rule_expiry_v1: FRESH/STALE/UNKNOWN) and the awake loop already audited stored CODE RULES every pulse -- but nothing ever executed a bound CAPABILITY to find out whether it worked, so 'unverified' meant 'unlooked at', not 'broken'.",
+  "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "138 of 141 bound capabilities were UNVERIFIED and that status was permanent. The repository could record evidence (capability_receipt_lane_v1: 15/15 receipt pins FRESH) and currency (rule_expiry_v1: FRESH/STALE/UNKNOWN) and the awake loop already audited stored CODE RULES every pulse -- but nothing ever executed a bound CAPABILITY to find out whether it worked, so 'unverified' meant 'unlooked at', not 'broken'.",
+  "date": "2026-11-03",
+  "expected_parent_change": "A bound capability's UNVERIFIED status stops being permanent: a capability that has never been verified verifies itself by running, and the record it leaves goes stale when the code or the environment moves.",
+  "expected_parent_frontier_change": "A bound capability's UNVERIFIED status stops being permanent: a capability that has never been verified verifies itself by running, and the record it leaves goes stale when the code or the environment moves.",
+  "explicit_user_authorization": "Owner instruction 2026-11-03, verbatim: 'And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' A gate that reports is static; a capability that re-earns its own status by running, and loses it when the world moves, is not.",
+  "falsification_condition": "Any of: (a) editing a module after its run does NOT make it STALE; (b) changing the environment does NOT make it STALE; (c) a failed run counts as FRESH; (d) the budget is not honoured; (e) already-observed rows are re-probed forever; (f) a probe writes into the tree it measures; (g) a broken probe stops the pulse; (h) the registry file is modified by the observer.",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0.0,
+    "expected_obligation_unlock_lcb": 0.005,
+    "interpretation": "No capability credit is claimed and no obligation is discharged. Unlock is non-zero only because 87 software-repair and patch-search capabilities that the registry called bound had never been executed; their contribution to these obligations could not honestly be counted before, and now it can be observed.",
+    "open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_CURSORBENCH_GE_57_8"
+    ],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 300
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_frontier_change": "A bound capability's UNVERIFIED status stops being permanent: a capability that has never been verified verifies itself by running, and the record it leaves goes stale when the code or the environment moves.",
+  "prior_work_reused": "rule_expiry_v1 supplied the FRESH/STALE/UNKNOWN vocabulary and the reverify-is-the-only-way-back rule; binding_pin_is_current_v1 supplied the verdict map and the relation-not-vocabulary discipline; capability_receipt_lane_v1 supplied execute-and-record and was measured first (it requires exit 0 + non-empty JSON, which these adapters do not emit, so it could not be reused as the oracle -- that measurement is why this is a behavioural record and not a receipt); autonomous_awake_loop_v1.sense_reality supplied the cycle and already had a memoization pattern for rule_expiry_v1 that this copies.",
+  "recursive_obs": {
+    "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "deleted_or_bypassed_paths": [
+      "PINNING_MODULE_BYTES_AT_RUN_TIME_WHICH_IS_CIRCULAR_AND_WOULD_HAVE_READ_FRESH_FOREVER",
+      "USING_THE_RECEIPT_LANE_AS_AN_ORACLE_FOR_ADAPTERS_THAT_DO_NOT_EMIT_JSON",
+      "WITHDRAWING_THE_42_MISSING_DEPENDENCY_ROWS"
+    ],
+    "expected_parent_level_state_change": "A bound capability's UNVERIFIED status stops being permanent: a capability that has never been verified verifies itself by running, and the record it leaves goes stale when the code or the environment moves.",
+    "iteration_limit": 4,
+    "measurement_commands": [
+      "python3 -m pytest canonical/tests/test_capability_self_verification_v1.py -q",
+      "python3 -c \"import sys;sys.path.insert(0,'.');from canonical.runtime import capability_self_verification_v1 as S;print(S.outcome('.')['counts'])\""
+    ],
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_138_ROWS_REMOVES_THE_DOOR__BYPASSING_LEAVES_STATUS_PERMANENT__REUSING_THE_RECEIPT_LANE_WAS_MEASURED_AND_FAILS_ON_112_OF_136",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_138_UNVERIFIED_ROWS_ARE_ONE_REGISTRY__THE_MECHANISM_GENERALISES_BECAUSE_THE_RECORD_IS_BEHAVIOURAL_AND_ANY_FUTURE_CAPABILITY_EARNS_ITS_STATUS_THE_SAME_WAY",
+      "surviving_causal_blocker": "No execution observation existed for any bound capability, so 'unverified' could not distinguish 'unlooked at' from 'broken'."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "nothing new beyond one module and one evidence file",
+      "existing_inherited_routes_checked": "capability_receipt_lane_v1 (measured, could not serve), rule_expiry_v1 (vocabulary reused), binding_pin_is_current_v1 (verdict map reused), sense_reality (cycle reused)",
+      "external_existing_routes_checked": "live search across all four classes; cached-outcome schemes key on identity plus environment, same shape, nothing cheaper in-tree",
+      "surviving_gap": "nothing executed bound capabilities to find out whether they worked"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "COUNTING_UNVERIFIED_ROWS",
+        "TREATING_UNVERIFIED_AS_SUSPECT",
+        "STATUS_NOBODY_MEASURED"
+      ],
+      "real_outcome": "A capability is offered because it was observed to run, not because a row says bound.",
+      "surviving_necessity": "A capability whose functioning has never been observed cannot be relied on."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "rule_expiry_v1 vocabulary",
+        "binding_pin_is_current_v1 verdict map",
+        "sense_reality cycle and memoization pattern"
+      ],
+      "downstream_work_to_delete_or_supersede": "none",
+      "fresh_reuse_plan": "a capability that goes STALE is re-probed on a later pulse and re-earns FRESH"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "the mtime+environment memo means a warm workspace pays nothing",
+      "search_stop_decision": "stopped when the receipt lane was measured as unable to serve and the behavioural record was shown to advance the frontier"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "measured above",
+      "routes_ranked": []
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": "repo_integrity_guard_v1, verify_brain_unified_model_v1, agent_orientation_check_v1 verify, 16-test suite with mutation checks",
+      "synthetic_verification_necessity": "none claimed; measurements are sandbox measurements"
+    },
+    "real_outcome": "A capability offered to the creature is one that has been observed to run, or one whose observation has gone stale.",
+    "required_capability": "Execute a bounded number of never-verified bound capabilities and record what happened. No new capability is required.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LESS",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "SAME",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "LESS",
+            "WALL_CLOCK": "WORSE"
+          },
+          "evidence": [
+            "it already executes and records"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: 12 sampled adapters produced 0 receipts at 845 ms each. The lane requires exit 0 plus non-empty JSON on stdout; these adapters print markdown and usage lines, so they can never receipt. Using it would have marked 87 working capabilities unverifiable."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REUSE_capability_receipt_lane_v1_AS_THE_ORACLE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LESS",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "SAME",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "NOTHING_TO_PIN",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "a module hash is cheap and exact"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the pin would be derived from the same bytes it later checks, so it reads FRESH forever regardless of behaviour. A tautology dressed as evidence is worse than no evidence because it stops anyone looking."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "PIN_sha256_OF_MODULE_BYTES_AT_RUN_TIME"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LESS",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "SAME",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "they cannot run here"
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY/DIRECT_PROBE: a missing optional dependency is a fact about the host, not the capability; world_probe_v1 exists for exactly that question. Withdrawing them would repeat the mirror-image error already rejected in binding_pin_is_current_v1."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WITHDRAW_THE_42_MISSING_DEPENDENCY_ROWS"
+        }
+      ],
+      "checked_at_utc": "2026-11-03T23:38:18Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "LEAVE_UNVERIFIED_PERMANENT_AND_REPORT_THE_COUNT (the state at 0875df1c)",
+      "max_age_hours": 12,
+      "negative_search_summary": "Searched all four classes for an existing self-verifying capability record. Found cached-outcome schemes keyed on identity plus environment; found none that could be reused in-tree because the receipt lane's oracle is stricter than these adapters.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "existing mechanism verify a capability by executing it and invalidate on artifact change"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "self-verifying capability record environment digest staleness"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "how to cache an observed outcome and invalidate it when code or environment changes"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "behavioural verification cache invalidation environment fingerprint 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "Derive FRESH/STALE/UNVERIFIED from an execution observation that binds module sha, environment digest and outcome; probe a bounded number of never-verified capabilities per pulse inside the existing sense_reality step.",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-03T23:38:18Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3.11 stdlib (subprocess, hashlib, json, tempfile)",
+            "evidence": [
+              "136 probes executed in 4.4 s total in this sandbox"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "evidence": [
+              "read-only; the observer never writes it and a test pins byte equality"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "repository working tree (no network)",
+            "evidence": [
+              "every probe ran offline in a throwaway cwd"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "Derive FRESH/STALE/UNVERIFIED from an execution observation that binds module sha, environment digest and outcome; probe a bounded number of never-verified capabilities per pulse inside the existing sense_reality step.",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/capability_receipt_lane_v1.py (measured: 12/12 sampled adapters produced no receipt)",
+          "canonical/swe_kernel/rule_expiry_v1.py (FRESH/STALE/UNKNOWN, reverify is the only way back)",
+          "canonical/runtime/binding_pin_is_current_v1.py (the verdict map this extends)",
+          "canonical/swe_kernel/autonomous_awake_loop_v1.py sense_reality (already audits code rules per pulse)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "healthcheck/readyz patterns: a service is ready because it was just observed, not because it was once configured"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pytest --lf / rerun-failures: cached outcomes keyed on test identity plus environment",
+          "npm integrity + lockfile: install state invalidated when the resolved tree moves"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "property-based / golden-master verification: a recorded observation is only valid for the exact artifact and environment it was taken in"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REUSE_capability_receipt_lane_v1_AS_THE_ORACLE__REJECTED_ON_MEASUREMENT__IT_REQUIRES_EXIT_ZERO_AND_NON_EMPTY_JSON_ON_STDOUT_AND_12_OF_12_SAMPLED_ADAPTERS_RETURNED_NO_RECEIPT_AT_845MS_EACH",
+      "PIN_sha256_OF_MODULE_BYTES_AT_RUN_TIME__REJECTED__CIRCULAR_THE_PIN_WOULD_BE_DERIVED_FROM_THE_BYTES_IT_CHECKS_AND_WOULD_READ_FRESH_FOREVER",
+      "WITHDRAW_THE_42_MISSING_DEPENDENCY_ROWS_AS_UNRUNNABLE__REJECTED__A_MISSING_OPTIONAL_DEPENDENCY_IS_A_FACT_ABOUT_THE_HOST_NOT_THE_CAPABILITY_AND_world_probe_v1_EXISTS_FOR_THAT_QUESTION",
+      "EXECUTION_OBSERVATION_BINDING_MODULE_ENVIRONMENT_AND_OUTCOME__SELECTED"
+    ],
+    "selected_surviving_route": "Derive FRESH/STALE/UNVERIFIED from an execution observation that binds module sha, environment digest and outcome; probe a bounded number of never-verified capabilities per pulse inside the existing sense_reality step.",
+    "stop_condition": "Stops when the new suite passes, each mutation fails a test, the live frontier advances off 138 UNVERIFIED, repo_integrity_guard_v1 stays at violations=0, and the awake loop still senses.",
+    "why_selected_route_is_fastest_sufficient": "Reuses the existing pulse, the existing verdict map and the existing vocabulary; adds no dispatch, planner or adapter. It is sufficient because it converts a permanent status into a falsifiable one: 138 UNVERIFIED measured live, and 87 capabilities that had never been run now earn FRESH by actually running."
+  },
+  "route_id": "A_CAPABILITY_VERIFIES_ITSELF_BY_RUNNING_V1_20261103_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "Derive FRESH/STALE/UNVERIFIED from an execution observation that binds module sha, environment digest and outcome; probe a bounded number of never-verified capabilities per pulse inside the existing sense_reality step.",
+  "stop_condition": "Stops when the new suite passes, each mutation fails a test, the live frontier advances off 138 UNVERIFIED, repo_integrity_guard_v1 stays at violations=0, and the awake loop still senses.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "87 capabilities that had never been observed to run now carry an observation, so their truth obligations can no longer be credited on an untested claim.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "CODING_CURSORBENCH_GE_57_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "HEAD:canonical/tests/test_capability_self_verification_v1.py",
+          "path": "canonical/tests/test_capability_self_verification_v1.py"
+        }
+      ],
+      "decisive_question": "Does editing the module, or changing the environment, turn a recorded clean run STALE?",
+      "falsifier_id": "AN_OBSERVED_CAPABILITY_THAT_STAYS_FRESH_AFTER_ITS_MODULE_OR_ENVIRONMENT_MOVES",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "Both invalidations are exercised as tests and observed.",
+      "proposal_id": "BEHAVIOURAL_SELF_VERIFICATION_WITH_ENVIRONMENT_BINDING"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The registry is never written by the observer -- writing evidence into the claim would be marking its own homework. Probes run in a throwaway cwd with a timeout. The budget is 2 per pulse. A broken probe fails open and the rest of sensing still happens. Nothing is withdrawn from availability."
+}
