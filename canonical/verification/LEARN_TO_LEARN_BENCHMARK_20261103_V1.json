@@ -816,5 +816,6 @@
  "cannot_see": [
   "strategy invention -- the five policies are written by hand",
   "GUI environments, pixels, unbounded action sets"
- ]
+ ],
+ "superseded_by": "LEARN_TO_LEARN_BENCHMARK_20261103_V2.json -- this run used FOUR held-out kinds, which cannot distinguish a mechanism that needs more data from one that needs a different representation. Also its feature keys were b1_m2_r1_g0 style, before the fourth reading existed. Kept for the record of what the smaller experiment said."
 }

@@ -51,6 +51,8 @@ SCHEMA = "PROJECT_BRAIN_LEARN_TO_LEARN_V1"
 STATE_PATH = os.environ.get("BRAIN_LEARN_TO_LEARN_STATE")
 POLICY_LEDGER = "policy_credit_v1.json"
 DEFAULT_POLICY_MAX = 512
+# How far a single repeated action is followed while reading a problem's shape.
+HORIZON_DEPTH = 24
 
 
 # --------------------------------------------------------------------------- #
@@ -161,11 +163,37 @@ def features(env: Any, actions: Sequence[Any], is_goal: Callable[[Any], bool],
     except Exception:  # noqa: BLE001
         pass
     growth = (len(two) / max(1, len(one))) if one else 0.0
+
+    # A THIRD READING: is the goal a NEAR state or a FAR arrangement?
+    #
+    # Measured 2026-11-03: the two features above still put four of four unseen kinds into
+    # buckets the ledger had already seen, so the choice could not be informed on a new kind.
+    # The distinction that actually changes which search wins is DISTANCE: a goal reachable in
+    # one or two actions wants depth-first (plunge and check), a goal many actions away wants
+    # breadth-first (never lose the frontier). Distance is not given, but it is measurable along
+    # one action axis -- exactly the probe a searcher would run first.
+    depth_to_goal = 0
+    try:
+        for action in list(actions)[:horizon]:
+            env.reset()
+            for step in range(1, HORIZON_DEPTH + 1):
+                env.act(action)
+                if is_goal(env.state()):
+                    depth_to_goal = step if not depth_to_goal else min(depth_to_goal, step)
+                    break
+    except Exception:  # noqa: BLE001
+        depth_to_goal = 0
+    try:
+        env.reset()
+    except Exception:  # noqa: BLE001
+        pass
+
     return {
         "branching": len(actions),
         "moved_fraction": round(changed_by_action / max(1, len(list(actions)[:horizon])), 2),
         "start_reaches_goal_already": bool(is_goal(start)),
         "reachable_growth": round(growth, 2),
+        "single_action_goal_depth": int(depth_to_goal),
     }
 
 
@@ -178,10 +206,11 @@ def _bucket(value: Any, edges: Sequence[float]) -> int:
 
 def feature_key(feat: Mapping[str, Any]) -> str:
     """A coarse, transferable key. Coarse on purpose: a fine key cannot generalise."""
-    return "b%s_m%s_r%s_g%s" % (
+    return "b%s_m%s_r%s_d%s_g%s" % (
         _bucket(int(feat.get("branching") or 0), (2, 4, 6)),
         _bucket(float(feat.get("moved_fraction") or 0.0), (0.45, 0.8)),
         _bucket(float(feat.get("reachable_growth") or 0.0), (1.5, 3.0)),
+        _bucket(int(feat.get("single_action_goal_depth") or 0), (0, 3, 10)),
         int(bool(feat.get("start_reaches_goal_already"))),
     )
 

@@ -79,10 +79,32 @@ def test_the_learning_to_learn_benchmark_can_reach_a_negative_verdict():
     """
     from canonical.tools.cross_kind_learning_to_learn_benchmark_v1 import run as run_l2l
     doc = run_l2l()
-    assert doc["summary"]["test_kinds"] == 4
+    # TEN held-out kinds, not four. The first run was at four and could not distinguish a
+    # mechanism that needed data from one that needed a different representation.
+    assert doc["summary"]["test_kinds"] == 10
     assert doc["verdict"].split(" --")[0] in {"COMPOUNDING_OBSERVED", "NO_COMPOUNDING"}
     assert doc["policy_vocabulary_is_hand_written"] is True, (
         "the policies are mine, not the system's; the document must say so")
+
+
+def test_the_measured_answer_is_that_it_does_not_work_yet():
+    """The pre-registered experiment, and its actual result, held in place.
+
+    Measured 2026-11-03 on ten held-out kinds: learned solved 5/10, beat the default policy 1/10,
+    beat the mean of five random draws 3/10. This test exists so that a future session cannot
+    quietly re-tune the features until the number moves, then cite the moved number. If the
+    result becomes positive it must be because the MECHANISM changed, and this assertion must be
+    updated in the open, with the new benchmark and its random arm.
+    """
+    from canonical.tools.cross_kind_learning_to_learn_benchmark_v1 import run as run_l2l
+    doc = run_l2l()
+    s = doc["summary"]
+    if doc["verdict"].startswith("NO_COMPOUNDING"):
+        assert s["beat_default"] <= 2, s
+        assert s["beat_random_mean"] <= 5, s
+    else:
+        # A positive claim must clear both arms by a real margin before it is believed.
+        assert s["beat_default"] >= 8 and s["beat_random_mean"] >= 8, s
 
 
 def test_the_random_arm_is_part_of_the_measurement():
@@ -93,3 +115,31 @@ def test_the_random_arm_is_part_of_the_measurement():
     doc = bench.run()
     for row in doc["test_rows"]:
         assert len(row["random"]["arms"]) == 5, "the falsifier was sampled once, which proves nothing"
+
+
+def test_the_held_out_kinds_are_actually_reachable():
+    """INSTRUMENT CALIBRATION, pinning a bug that produced a confident false result.
+
+    `stack_pushout` was unsolvable BY CONSTRUCTION (push grew, pop shrank, start and target
+    differed by two), and `letter_shift` / `double_dial` raised on every action because of an
+    action-parsing typo. Both were then reported as "no policy can solve this kind" -- a fact
+    about the terrain that was really a fact about my code. A benchmark whose environments
+    cannot be solved measures its own bugs.
+    """
+    from canonical.tools.cross_kind_learning_to_learn_benchmark_v1 import (
+        _heldout_kinds, TEST_KINDS, NODE_BUDGET,
+    )
+    from canonical.runtime import learn_to_learn_v1 as l2l
+    kinds = _heldout_kinds()
+    reachable = []
+    for name in TEST_KINDS:
+        for policy in l2l.POLICIES:
+            env, actions, is_goal, _ = kinds[name](1)
+            out = l2l.search(env, actions, is_goal=is_goal, policy=policy, max_depth=14,
+                             node_budget=NODE_BUDGET, meter={"act_calls": 0})
+            if out["pass"]:
+                reachable.append(name)
+                break
+    assert len(reachable) >= 6, (
+        "only %d of %d held-out kinds are solvable by any policy; that is an instrument "
+        "failure, not a finding: %s" % (len(reachable), len(TEST_KINDS), reachable))
