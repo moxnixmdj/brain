@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6651,
+  "research_index_records": 6652,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8b397ab950b0c5a64dd7ba002dc2d077881a467beb70066e142d3329147db897"
+  "value": "68bc834c53503f3fca2a7bcceec652bf15d41c940d0d6d61ab8c985a2001e991"
  },
  "engines": [
   {
@@ -215938,6 +215938,30 @@
    }
   },
   {
+   "action_id": "ONE_ALGEBRA_ONE_CHOOSER_ONE_LOOP_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/ONE_ALGEBRA_ONE_CHOOSER_ONE_LOOP_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_ALGEBRA_ONE_CHOOSER_ONE_LOOP_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8d9fe70de7cc4bf4542578956303135a045c0db0d6b9e505fdc30d19eedf691c",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "algebra": 1,
+    "chooser": 1,
+    "delete_parallel_enumerator_unify_step_on_policy_compose_affix_glue": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "loop": 1,
+    "one": 3,
+    "one_algebra_one_chooser_one_loop_20261104_v1": 1,
+    "one_algebra_one_chooser_one_loop_verified_at_zero_model_dependency__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "toy_skill_enumerator_three_way_step_if_prefix_only_composition_awake_daemon_blind_to_p_t_on_0875df1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "ONE_ANSWER_FOR_WHY_A_GOAL_FAILED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -239433,7 +239457,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "766bc9515f3a9fb1131ac4c2c104ff402f75fd409ad04ff2f50b382b391eca3e",
+   "sha256": "865befabd97002ae04731686b225e78b13e764221d299a49a92803f09c35591a",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 14,
    "symbols": [

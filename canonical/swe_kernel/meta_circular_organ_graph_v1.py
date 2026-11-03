@@ -1564,55 +1564,17 @@ def _generate_candidate_expressions(
     ):
         cands.append(("constant_output", repr(first_out), ""))
 
-    # Primitive algebra over parameters (language basis, not a frozen complete-program menu)
-    binops = ("+", "-", "*", "/", "//", "%")
+    # Language basis for version-space underdetermination (projections), not a skill menu.
+    # Arithmetic / STUN / concepts live in swe_observational_program_synthesizer_v1 + G_t.
     for i, nm in enumerate(names):
         cands.append((f"proj_{i}", nm, ""))
-        v = first_in[i]
-        if isinstance(v, (int, float)) and not isinstance(v, bool):
-            cands.append((f"neg_{i}", f"-({nm})", ""))
-            cands.append((f"abs_{i}", f"abs({nm})", ""))
-            cands.append((f"sq_{i}", f"({nm} * {nm})", ""))
-        elif isinstance(v, (list, tuple)):
-            cands.append((f"sum_{i}", f"sum({nm})", ""))
-            cands.append((f"len_{i}", f"len({nm})", ""))
-            cands.append((f"prod_{i}", f"_prod({nm})", ""))
-            cands.append((f"sorted_{i}", f"sorted({nm})", ""))
-        elif isinstance(v, str):
-            cands.append((f"strip_{i}", f"{nm}.strip()", ""))
-            cands.append((f"lower_{i}", f"{nm}.lower()", ""))
-            cands.append((f"len_str_{i}", f"len({nm})", ""))
-            cands.append((f"rev_str_{i}", f"{nm}[::-1]", ""))
-    if arity >= 2:
-        for i in range(arity):
-            for j in range(arity):
-                if i == j:
-                    continue
-                a, b = names[i], names[j]
-                va, vb = first_in[i], first_in[j]
-                if isinstance(va, (int, float)) and isinstance(vb, (int, float)) and not isinstance(va, bool) and not isinstance(vb, bool):
-                    for op in binops:
-                        cands.append((f"bin_{op}_{i}_{j}", f"({a} {op} {b})", ""))
-                    cands.append((f"max_{i}_{j}", f"max({a}, {b})", ""))
-                    cands.append((f"min_{i}_{j}", f"min({a}, {b})", ""))
-                if isinstance(va, (list, tuple)) and isinstance(vb, (int, float)) and not isinstance(vb, bool):
-                    cands.append((f"sum_scale_{i}_{j}", f"(sum({a}) * {b})", ""))
-                    cands.append((f"sum_plus_{i}_{j}", f"(sum({a}) + {b})", ""))
 
     # 2. Exact uniquely-determined multilinear / affine closed form
     affine = _solve_multilinear(examples)
     if affine is not None:
         cands.append(("exact_affine", affine, ""))
 
-    # 3. Bottom-up observational-equivalence bank
-    for label, expr in _observational_bottom_up(examples):
-        cands.append((label, expr, ""))
-
-    # 4. STUN piecewise unification when a single term is insufficient later
-    for label, expr in _stun_piecewise(examples):
-        cands.append((label, expr, ""))
-
-    # 5. Live compositional closure over admitted organs
+    # 3. Live compositional closure over admitted organs
     for label, expr, helpers in _inline_operator_organs(examples, operator_organs):
         cands.append((label, expr, helpers))
 
@@ -2254,6 +2216,7 @@ def rank_instrumental_actions(
             "requires": tuple(str(x) for x in (raw.get("requires") or ())),
         }
     burns = {k: float(v) for k, v in (p_burn_by_id or {}).items()}
+    structured = any(n["unlocks"] or n["requires"] for n in by_id.values())
 
     def _q(aid: str, done: frozenset[str], budget: float, depth: int) -> float:
         if depth <= 0 or budget <= 1e-12:
@@ -2264,6 +2227,8 @@ def rank_instrumental_actions(
         if node["cost"] > budget + 1e-12:
             return -1e9
         p_burn = max(0.0, min(1.0, burns.get(aid, 0.0)))
+        if not structured:
+            return (node["value"] / node["cost"]) * (1.0 - 0.85 * p_burn)
         immediate = node["value"] * (1.0 - 0.85 * p_burn)
         leftover = budget - node["cost"]
         nxt = done | {aid}
@@ -2278,7 +2243,7 @@ def rank_instrumental_actions(
     for aid, node in by_id.items():
         qv = _q(aid, frozenset(), float(remaining_budget), max(1, int(horizon)))
         ranked.append({**node, "q": round(qv, 6)})
-    ranked.sort(key=lambda r: (-r["q"], r["cost"], r["id"]))
+    ranked.sort(key=lambda r: (r["q"], -r["cost"], r["id"]), reverse=True)
     return ranked
 
 
@@ -2306,6 +2271,7 @@ def score_actions(actions, remaining_budget, p_burn_by_id=None):
     burns = dict(p_burn_by_id or {{}})
     gamma = {float(gamma)!r}
     horizon = {int(horizon)!r}
+    structured = any(n['unlocks'] or n['requires'] for n in by_id.values())
 
     def _q(aid, done, budget, depth):
         if depth <= 0 or budget <= 1e-12:
@@ -2317,6 +2283,8 @@ def score_actions(actions, remaining_budget, p_burn_by_id=None):
         if node['cost'] > budget + 1e-12:
             return -1e9
         p_burn = burns.get(aid, 0.0)
+        if not structured:
+            return (node['value'] / node['cost']) * (1.0 - 0.85 * p_burn)
         immediate = node['value'] * (1.0 - 0.85 * p_burn)
         leftover = budget - node['cost']
         nxt = set(done)
@@ -2334,7 +2302,7 @@ def score_actions(actions, remaining_budget, p_burn_by_id=None):
         row = dict(node)
         row['q'] = qv
         ranked.append(row)
-    ranked.sort(key=lambda r: (-r['q'], r['cost'], r['id']))
+    ranked.sort(key=lambda r: (r['q'], -r['cost'], r['id']), reverse=True)
     return ranked
 """
     return make_organ(
@@ -2405,7 +2373,7 @@ def _compose_perceptor_from_existing(
     *,
     format_tag: str,
 ) -> ExecutableOrgan | None:
-    """New format = admitted child perceptor + synthesized prefix glue (not a new `if kind`)."""
+    """New format = admitted child perceptor + synthesized affix glue (not a new `if kind`)."""
     if not existing:
         return None
     if isinstance(sample, (bytes, bytearray)):
@@ -2415,15 +2383,30 @@ def _compose_perceptor_from_existing(
             return None
     else:
         text = str(sample)
-    if len(text) < 3:
+    n = len(text)
+    if n < 3:
         return None
-    for cut in range(1, min(24, len(text) - 1)):
-        prefix, rest = text[:cut], text[cut:]
-        if not rest or prefix[-1:].isspace():
+    children = list(existing)[:8]
+    cuts: list[tuple[int, int]] = []
+    for pre in range(0, min(20, n - 1)):
+        for suf in range(0, min(20, n - pre - 1)):
+            if pre == 0 and suf == 0:
+                continue
+            if pre and text[pre - 1].isspace():
+                continue
+            if suf and text[n - suf : n - suf + 1].isspace():
+                continue
+            cuts.append((pre, suf))
+    cuts.sort(key=lambda ps: (ps[0] + ps[1], ps[0], ps[1]))
+    for pre, suf in cuts[:64]:
+        prefix = text[:pre]
+        suffix = text[n - suf :] if suf else ""
+        middle = text[pre : n - suf if suf else n]
+        if not middle:
             continue
-        for child in existing:
+        for child in children:
             try:
-                parsed = child.invoke(rest)
+                parsed = child.invoke(middle)
                 re_emitted = child.invoke_aux("serialize", parsed)
                 if child.invoke(re_emitted) != parsed:
                     continue
@@ -2440,18 +2423,22 @@ def _compose_perceptor_from_existing(
             wrapper = (
                 child_src
                 + "\n"
-                + f"def parse(raw):\n"
+                + "def parse(raw):\n"
                 + "    text = raw.decode('utf-8') if isinstance(raw, bytes) else str(raw)\n"
                 + f"    prefix = {prefix!r}\n"
-                + "    if not text.startswith(prefix):\n"
+                + f"    suffix = {suffix!r}\n"
+                + "    if prefix and not text.startswith(prefix):\n"
                 + "        raise ValueError('PREFIX_MISMATCH')\n"
-                + "    return _child_parse(text[len(prefix):])\n"
+                + "    if suffix and not text.endswith(suffix):\n"
+                + "        raise ValueError('SUFFIX_MISMATCH')\n"
+                + "    body = text[len(prefix): len(text) - len(suffix) if suffix else None]\n"
+                + "    return _child_parse(body)\n"
                 + "\n"
                 + "def serialize(parsed):\n"
                 + "    inner = _child_serialize(parsed)\n"
                 + "    if isinstance(inner, bytes):\n"
                 + "        inner = inner.decode('utf-8')\n"
-                + f"    return {prefix!r} + inner\n"
+                + f"    return {prefix!r} + inner + {suffix!r}\n"
             )
             try:
                 organ = make_organ(
@@ -2461,7 +2448,12 @@ def _compose_perceptor_from_existing(
                     entrypoint="parse",
                     source_code=wrapper,
                     parent_organ_ids=(child.organ_id,),
-                    metadata={"codec_family": "composed_prefix", "prefix": prefix, "child": child.organ_id},
+                    metadata={
+                        "codec_family": "composed_affix",
+                        "prefix": prefix,
+                        "suffix": suffix,
+                        "child": child.organ_id,
+                    },
                 )
             except OrganSafetyError:
                 continue
@@ -2502,7 +2494,15 @@ def _observational_skill_source(
         return None
     arity = len(examples[0][0])
     names = _arg_names(arity)
-    extra = [v for v in _harvest_numeric_constants(examples)[:6]]
+    extra: list[Any] = []
+    for ins, _out in examples:
+        for v in ins:
+            if isinstance(v, (int, float)) and not isinstance(v, bool) and v not in extra:
+                extra.append(v)
+            if len(extra) >= 6:
+                break
+        if len(extra) >= 6:
+            break
     try:
         body = synthesize_python_function_body(
             names,

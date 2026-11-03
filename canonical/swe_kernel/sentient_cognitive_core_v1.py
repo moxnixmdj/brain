@@ -2194,6 +2194,15 @@ class SentientCognitiveCore:
             except Exception:
                 pass
 
+        try:
+            from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, compile_policy_organ
+
+            if self.organ_graph.get_primary("WORLD_MODEL", "world_model::action_delta") is not None:
+                if not self.organ_graph.organs_in_stratum(POLICY):
+                    self.organ_graph.register_organ(compile_policy_organ())
+        except Exception:
+            pass
+
         self_evo: dict[str, Any] | None = None
         if code_root is not None and ring1_relpaths and (self.unresolved_failure_buffer or ring1_relpaths):
             self_evo = self.evolve_self_code(
