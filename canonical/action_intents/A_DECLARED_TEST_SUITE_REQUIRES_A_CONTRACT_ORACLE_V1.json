@@ -1,0 +1,408 @@
+{
+  "action_id": "A_DECLARED_TEST_SUITE_REQUIRES_A_CONTRACT_ORACLE_V1",
+  "action_intent_id": "A_DECLARED_TEST_SUITE_REQUIRES_A_CONTRACT_ORACLE_V1",
+  "action_kind": "HARDENING",
+  "action_summary": "Make a declared TEST_SUITE require a contract-checked oracle before any broadened candidate pattern is generated. Measured 2026-11-03: broadening lifts recall 4/7 -> 6/6 under ProjectTestOracle and rewrites 3 of 4 correct sources under a weak callback, so the whole broadening surface reduced to one question - can a caller obtain TEST_SUITE grading by saying TEST_SUITE? It could: any callable returning a well-formed VerificationResult with kind='TEST_SUITE' satisfied the gate. recall_and_apply_verified now requires skill_verification_contract_v1.is_contract_oracle(verifier) for TEST_SUITE and for every broadening flag, with an explicit allow_simulated_oracle escape hatch that can judge but never widen.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+      "canonical/swe_kernel/skill_verification_contract_v1.py",
+      "canonical/runtime/brokered_workspace_execution_v1.py",
+      "canonical/swe_kernel/zygote_worker_pool_v1.py",
+      "canonical/swe_kernel/rule_scope_learning_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/swe_kernel/retained_repair_session_v1.py",
+      "canonical/runtime/macro_v1.py",
+      "canonical/swe_kernel/forged_binding_and_macro_spine_v1.py",
+      "canonical/swe_kernel/rule_expiry_v1.py",
+      "canonical/runtime/live_integrated_brain_v1.py",
+      "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "canonical/tests/test_optimal_unified_creature_and_prc2_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Five measured architectural gaps remained on `4f479886` after PR #6599: (1) `tree_sitter_cst_skill_skeleton_v1` whitelisted only 5 node shapes (returning `None` on general calls, subscripts, attributes, ternaries), `ConfinedLanguageTestOracle` raised `RUNNER_ARGV_REQUIRED_FOR_LANGUAGE` on `.ts`/`.rs`/`.go`/`.cpp`, and `recall_and_apply_verified` blocked cross-repo `TEST_SUITE` transfer unless `scope_id` matched verbatim; (2) `brokered_workspace_execution_v1` + `ConfinedLanguageTestOracle` copied full directory trees 4x-7x on `publish=False` verification and `recall_and_apply_verified` never pre-screened candidates via `ZygotePrewarmedPool`; (3) `AwakeAgencyDaemon.pulse()` stamped obligation IDs with `_pulse_count` and cleared `Creature._board` every pulse, preventing `max_attempts=2` parking and spending `0.5` `Life` (`185 ms`) on green workspaces; (4) `UpstreamRoutingLedger`, `macro_v1`, `forged_binding_and_macro_spine_v1` (including `_MACRO_MEM_CACHE`), `rule_expiry_v1`, R3 queue callers, and `live_integrated_brain_v1.run_raw_goal` lacked complete `MemoryPolicy` (`OFF`/`READ_ONLY`/`READ_WRITE`) gates; (5) `self_falsify_and_narrow_rule_scopes()` hardcoded `('<=', '<')` without persisting `learned_scope`, and `UpstreamRoutingLedger` lacked `N >= 2` verified positive route promotion with miss invalidation.",
+  "canonical_base_commit": "a70480d4f1f570a9ab366ace7a4041f2b54c5103",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "On a70480d, `recall_and_apply_verified` gated every broadened candidate pattern on the caller's DECLARATION `required_verification_kind == 'TEST_SUITE'` and on the returned result's `kind`, never on the verifier's provenance. `evaluate()` already refused bool callbacks and scoped results of the wrong kind, but a caller could return a VerificationResult with kind='TEST_SUITE', the right scope and fabricated evidence hashes, and the kernel would then generate narrowed/CST/operator/cross-language candidates for it. Measured the same day through the real production path (`live_scoped_transfer_benchmark_v1`): broadening is 6/6 recall with 0 misapplications under the contract oracle and rewrites 3 of 4 sources where `<=` was CORRECT under a weak callback. The gate was therefore a label, and the safety of the entire broadening surface rested on it.",
+  "date": "2026-11-03",
+  "expected_parent_change": "A TEST_SUITE declaration no longer buys TEST_SUITE grading: the kernel now requires a verifier constructed by this module (`ProjectTestOracle` / `ConfinedLanguageTestOracle`, recorded by class identity, so neither a same-named class nor a copied marker passes), and refuses with TEST_SUITE_REQUIRES_CONTRACT_ORACLE otherwise. Simulated oracles may judge but receive no broadened candidate at all.",
+  "expected_parent_frontier_change": "The broadening surface's precondition is now enforced instead of asserted. Recall behaviour under the real oracle is unchanged (production benchmark: generalized arm still 6/6 by memory, 0 searches, 7/7 external audits, negative control untouched).",
+  "explicit_user_authorization": "Owner reviewed the Turn 29 measured 5-gap architectural audit of PR #6599 and explicitly directed: 'Execute the optimal.'",
+  "falsification_condition": "Delete the two raised errors in recall_and_apply_verified and re-run `canonical/tests/test_a_declared_test_suite_needs_a_contract_oracle_v1.py`; if it still passes, the gate is decoration and this intent is false. Measured on 2026-11-03: 4 of 6 tests fail with the gate removed.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "5/13",
+    "interpretation": "CLOSES_ALL_FIVE_PR6599_ARCHITECTURAL_GAPS_WITH_GENERAL_CST_LCA_ZERO_COPY_STAGED_BROKER_ZYGOTE_COW_SCREENING_CONTENT_ADDRESSED_CREATURE_CONTINUITY_COMPLETE_MEMORY_POLICY_AND_VERIFIED_SCOPE_AND_ROUTE_LEARNING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.99,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "focused_suite": "167 passed",
+    "gate_present_passes": "6/6",
+    "gate_removed_fails": "4/6",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "production_benchmark_generalized_arm": "6/6 retained hits, 0 searches, 7/7 audits"
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+    "canonical/swe_kernel/skill_verification_contract_v1.py",
+    "canonical/runtime/brokered_workspace_execution_v1.py",
+    "canonical/swe_kernel/zygote_worker_pool_v1.py",
+    "canonical/swe_kernel/rule_scope_learning_v1.py",
+    "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/swe_kernel/autonomous_awake_loop_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "4f479886dc6566f51312db4df4b5cf5c2454da17",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "FIVE_SHAPE_HAND_CODED_CST_WHITELIST_AND_MANUAL_RUNNER_ARGV_REQUIREMENT",
+      "FOUR_TO_SEVEN_TIMES_FULL_WORKSPACE_SHUTIL_COPYTREE_AMPLIFICATION_ON_PUBLISH_FALSE",
+      "CYCLE_STAMPED_CREATURE_BOARD_WIPE_AND_REDUNDANT_INTRA_PULSE_RETRY_ON_UNCHANGED_WORLD",
+      "UNPROTECTED_ROUTING_MACRO_RAM_CACHE_AND_EXPIRY_STORES_UNDER_MEMORY_POLICY_OFF",
+      "HARDCODED_LTE_LT_SCOPE_PROBE_AND_NEGATIVE_ONLY_UPSTREAM_ROUTING_LEDGER"
+    ],
+    "expected_parent_level_state_change": "General 7-language Tree-Sitter CST expression algebra + lockstep LCA anti-unification (`CALL`, `MCALL`, `SUBSCRIPT`, `ATTR`, `TERNARY`, `LEN`, `UNOP`, `BINOP`), auto-discovered polyglot `ConfinedLanguageTestOracle`, and `allow_cross_scope_transfer` `TEST_SUITE` transfer; zero-copy `publish=False` `/input` + sparse tmpfs `/work` `candidate_overrides` broker scaling O(1) across workspace size plus `11 ms` 12-candidate `screen_python_candidates_cow` Zygote pre-screening; content-addressed `Creature.sync_board` continuity (`3.1 ms` warm green pulse, `0.0` `Life` wasted on green workspaces, `max_attempts=2` parking across pulses and restarts); complete `MemoryPolicy` (`OFF`/`READ_ONLY`/`READ_WRITE`) enforcement across `UpstreamRoutingLedger`, `macro_v1`, `forged_binding_and_macro_spine_v1`, `rule_expiry_v1`, R3 queue callers, and `live_integrated_brain_v1`; and general `calibrate_rule_scope` probe synthesis persisted to `VerifiedSkillStore` plus `N >= 2` verified route promotion with miss invalidation in `UpstreamRoutingLedger`.",
+    "iteration_limit": 3,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "COMPOSED_TREE_SITTER_LOCKSTEP_LCA_ZERO_COPY_RO_INPUT_SYMLINK_TMPFS_BROKER_ZYGOTE_COW_POOL_CONTENT_ADDRESSED_SYNC_BOARD_AND_VERIFIED_ROUTE_PROMOTION",
+      "intrinsic_or_path_specific": "GENERAL__SYNTAX_TREE_LCA_ZERO_COPY_STAGING_COW_PRE_SCREENING_ORGANISM_CONTINUITY_COMPLETE_MEMORY_ISOLATION_AND_BIDIRECTIONAL_LEARNING",
+      "surviving_causal_blocker": "HOSTILE_CODE_CARRIER_QUALIFICATION_AND_HUMAN_INDEPENDENT_VERIFICATION_REMAIN_GOVERNED_BY_PR6592_BOUNDARY"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "ZERO_EXTERNAL_MODELS_ZERO_NEW_PACKAGES_COMPOSED_EXISTING_TREE_SITTER_NAMESPACE_LAUNCHER_ZYGOTE_POOL_SCOPE_LEARNER_AND_CREATURE_ORGANS",
+      "existing_inherited_routes_checked": [
+        "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+        "canonical/runtime/brokered_workspace_execution_v1.py",
+        "canonical/swe_kernel/zygote_worker_pool_v1.py",
+        "canonical/swe_kernel/rule_scope_learning_v1.py",
+        "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+        "canonical/runtime/creature_runtime_v1.py"
+      ],
+      "external_existing_routes_checked": "Linux user/mount/net/PID namespaces (`unshare`), `fork()` CoW worker pools (`ZygotePrewarmedPool`), `tree_sitter_languages`, Node.js ESM, and Python 3.11 `contextvars`.",
+      "surviving_gap": "SEPARATE_HOSTILE_CODE_CARRIER_CERTIFICATION_FOR_FRONT_DOOR_COMPUTER_DISCOVERY"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "WHITELISTING_INDIVIDUAL_SYNTAX_SHAPES_ONE_BY_ONE",
+        "RESETTING_CREATURE_BOARD_IDS_WITH_PULSE_COUNTERS",
+        "PROMOTING_UNVERIFIED_SINGLE_HIT_ROUTES"
+      ],
+      "real_outcome": "General 7-language CST LCA + polyglot auto-discovery, zero-copy `/input` + `11 ms` Zygote CoW screening, content-addressed `Creature.sync_board` (`0.0` green `Life`, 2-pulse parking), complete `MemoryPolicy` isolation, and general scope + `N >= 2` route learning.",
+      "surviving_necessity": "Preserve every PR #6592 boundary, broker, and verification-strength contract (`carrier_qualified=False`, `allow_cross_scope_transfer=False` default unless opted in with `TEST_SUITE` oracle)."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "COMPOSED_TREE_SITTER_CST_SKELETON_ZYGOTE_WORKER_POOL_OPERATOR_GENERALIZATION_RULE_SCOPE_LEARNING_UPSTREAM_ROUTING_LEDGER_AND_CREATURE_SYNC_BOARD",
+      "downstream_work_to_delete_or_supersede": "FULL_TREE_PUBLISH_FALSE_COPYING_PULSE_STAMPED_BOARD_RESETS_AND_HARDCODED_LTE_SCOPE_FALSIFIER",
+      "fresh_reuse_plan": "LOCKSTEP_CST_LCA_WITH_SPARSE_CANDIDATE_OVERRIDES_ZYGOTE_COW_SHORTLISTING_SYNC_BOARD_CONTINUITY_AND_CALIBRATED_SCOPE_AND_ROUTE_PROMOTION"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "PRUNED_SINGLE_WALK_TREE_SIG_HEALTH_CACHE_SPARSE_SYMLINK_TMPFS_STAGING_AND_ZYGOTE_COW_SHORTLISTING",
+      "search_stop_decision": "STOPPED_WHEN_ALL_5_PILLARS_PASSED_EMPIRICAL_BENCHMARK_TARGETED_PYTEST_SWE_ADVANCED_CENSUS_AND_UNIFIED_MODEL_VERIFICATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "5-shape CST whitelists fail on ordinary calls/subscripts/attributes; 4x-7x full-tree copies waste hundreds of ms per candidate; cycle-stamped board wipes defeat `max_attempts=2` parking and waste `Life` on green workspaces; unguarded RAM/SQLite caches leak under `OFF`; hardcoded `<=` probes leave non-`<=` rules uncalibrated.",
+      "routes_ranked": [
+        "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1__CHOSEN",
+        "KEEP_PR6599_PARTIAL_WHITELIST_AND_COPYTREE_STAGING",
+        "PROMOTE_UNVERIFIED_CROSS_REPO_OR_SINGLE_HIT_RULES"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "REAL_POLYGLOT_TEST_ORACLES_NAMESPACE_CONFINED_STAGING_ZYGOTE_COW_BYTECODE_INVALIDATION_RESTART_PARKING_AND_MEMORY_POLICY_SIDE_CHANNEL_PROBES"
+    },
+    "real_outcome": "General 7-language Tree-Sitter CST expression algebra + lockstep LCA anti-unification (`CALL`, `MCALL`, `SUBSCRIPT`, `ATTR`, `TERNARY`, `LEN`, `UNOP`, `BINOP`), auto-discovered polyglot `ConfinedLanguageTestOracle`, and `allow_cross_scope_transfer` `TEST_SUITE` transfer; zero-copy `publish=False` `/input` + sparse tmpfs `/work` `candidate_overrides` broker scaling O(1) across workspace size plus `11 ms` 12-candidate `screen_python_candidates_cow` Zygote pre-screening; content-addressed `Creature.sync_board` continuity (`3.1 ms` warm green pulse, `0.0` `Life` wasted on green workspaces, `max_attempts=2` parking across pulses and restarts); complete `MemoryPolicy` (`OFF`/`READ_ONLY`/`READ_WRITE`) enforcement across `UpstreamRoutingLedger`, `macro_v1`, `forged_binding_and_macro_spine_v1`, `rule_expiry_v1`, R3 queue callers, and `live_integrated_brain_v1`; and general `calibrate_rule_scope` probe synthesis persisted to `VerifiedSkillStore` plus `N >= 2` verified route promotion with miss invalidation in `UpstreamRoutingLedger`.",
+    "required_capability": "General Tree-Sitter CST LCA & polyglot auto-discovery, zero-copy broker + Zygote CoW batch screening, content-addressed Creature.sync_board continuity, complete MemoryPolicy isolation, and general rule-scope + N>=2 verified route promotion",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "FIVE_NODE_CST_WHITELIST_AND_MANUAL_RUNNER_ARGV",
+            "CORRECTNESS": "MEMORY_POLICY_LEAKS_IN_ROUTING_MACRO_CACHE_AND_EXPIRY",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "CYCLE_STAMPED_BOARD_RESETS_NEVER_PARK_UNFIXABLE_WORK",
+            "VERIFIABILITY": "HARDCODED_LTE_ONLY_SCOPE_PROBE",
+            "WALL_CLOCK": "4X_7X_FULL_TREE_COPIES_AND_ZERO_ZYGOTE_SCREENING"
+          },
+          "evidence": [
+            "Measured on `4f479886`: `compile_rule_to_cst_skeleton` returned `None` on `max(a, b - 1)`, `items[i - 1]`, `self.x <= self.hi`; unfixable test spent `1.5` Life across 3 pulses with `parked() == []`; green pulse spent `0.5` Life in `185.3 ms`; `UpstreamRoutingLedger` wrote SQLite under `OFF`."
+          ],
+          "qualification_evidence": [
+            "direct probe: Turn 29 5-gap counterexample audit and `test_optimal_unified_creature_and_prc2_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "KEEP_PR6599_ARCHITECTURE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SEVEN_LANGUAGE_CST_ALGEBRA_AUTO_POLYGLOT_ORACLE_AND_CROSS_SCOPE_TRANSFER",
+            "CORRECTNESS": "COMPLETE_MEMORY_POLICY_ISOLATION_AND_ZERO_GUARD_WEAKENING",
+            "INCREMENTAL_COST": "ZERO_SPEND_ZERO_EXTERNAL_MODELS",
+            "RELIABILITY": "CONTENT_ADDRESSED_SYNC_BOARD_2_PULSE_PARKING_AND_N2_ROUTE_PROMOTION",
+            "VERIFIABILITY": "REAL_POLYGLOT_TEST_SUITE_ORACLES_AND_PERSISTED_SCOPE_CALIBRATION",
+            "WALL_CLOCK": "11MS_12_CANDIDATE_ZYGOTE_COW_AND_3MS_WARM_GREEN_PULSE"
+          },
+          "evidence": [
+            "Measured: 5-pillar benchmark passes in `2.88 s` (`11.08 ms` 12-candidate Zygote CoW, `3.13 ms` / `0.0` Life warm green pulse, `[0.5, 1.0, 1.0, 1.0]` parked curve across restart, `SCOPE_SEMANTIC` in 2 probes, `N >= 2` route promotion); `swe_advanced_probe_v1` 37/49; 42/42 targeted pytest pass."
+          ],
+          "qualification_evidence": [
+            "direct probe: `test_optimal_unified_creature_and_prc2_v1.py` and `execution_guard/swe_advanced_probe_v1.py`"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1"
+        }
+      ],
+      "checked_at_utc": "2026-11-02T20:13:26Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "PR6599_PARTIAL_CST_WHITELIST_COPYTREE_BROKER_CYCLE_STAMPED_BOARD_AND_NEGATIVE_ONLY_ROUTING",
+      "max_age_hours": 24,
+      "negative_search_summary": "All 5 architectural pillars compose directly from existing Brain organs (`tree_sitter_cst_skill_skeleton_v1`, `brokered_workspace_execution_v1`, `zygote_worker_pool_v1`, `rule_scope_learning_v1`, `upstream_routing_ledger_v1`, `creature_runtime_v1`) with `K3=0` and $0 spend.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "lockstep Concrete Syntax Tree lowest common ancestor subtree anti-unification"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "read-only bind mount sparse symlink tmpfs candidate_overrides and fork CoW test screening"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "content-addressed obligation board sync preserving attempts and parked set across restarts"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "version-space diagnostic probe synthesis and N>=2 verified route promotion with miss invalidation"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-02T20:13:26Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux user/mount/net/PID namespaces + Python 3.11 + Node 22 + tree_sitter_languages + Zygote fork CoW",
+            "evidence": [
+              "DIRECT_PROBE: `test_optimal_unified_creature_and_prc2_v1.py` (12/12) and `swe_advanced_probe_v1.py` (37/49) pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "tree_sitter_cst_skill_skeleton_v1.py, brokered_workspace_execution_v1.py, zygote_worker_pool_v1.py, rule_scope_learning_v1.py, upstream_routing_ledger_v1.py, and creature_runtime_v1.py",
+          "UNIFIED_LEARNING_MEMORY_POLICY_AUDIT_20261102.md and CREATURE_INFORMATION_CONTINUITY_DRAFT_20261102.md"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Hierarchical AST/CST anti-unification (Getafix / OOPSLA 2019), Mitchell version-space learning, and fork-server CoW candidate testing"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "tree-sitter / tree-sitter-languages CST cursors and Node.js ESM test execution"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux `namespaces(7)`, POSIX `fork(2)` copy-on-write, CPython `importlib` bytecode invalidation, and Python 3.11 `contextvars`"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_PR6599_ARCHITECTURE",
+      "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1"
+    ],
+    "selected_route": "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1",
+    "selected_surviving_route": "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1",
+    "stop_condition": "STOP when all 5 pillars pass empirical benchmarks and unit tests, SWE advanced census >= 37/49, unified model passes 33/33, and all governance/referee CI gates are green and merged into main.",
+    "why_selected_route_is_fastest_sufficient": "Replaces per-candidate full-tree copies and cold subprocesses with zero-copy `/input` + sparse tmpfs overrides and `11 ms` Zygote CoW screening while unifying CST LCA, `Creature.sync_board`, `MemoryPolicy`, and verified scope/route learning."
+  },
+  "route_id": "A_DECLARED_TEST_SUITE_REQUIRES_A_CONTRACT_ORACLE_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "A_DECLARED_TEST_SUITE_REQUIRES_A_CONTRACT_ORACLE_V1",
+  "stop_condition": "STOP when all 5 pillars pass empirical benchmarks and unit tests, SWE advanced census >= 37/49, unified model passes 33/33, and all governance/referee CI gates are green and merged into main.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-02T20:13:26Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__SANDBOX_RUNTIME_ISOLATION_CST_GENERALIZATION_ZYGOTE_COW_AND_ORGANISM_CONTINUITY_WITH_ZERO_EXTERNAL_BENCHMARK_AUTHORITY_CLAIM",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "37bc488379f04e67ba21325a8ad5abbb582867c2",
+          "path": "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py"
+        },
+        {
+          "git_blob_sha": "b385044f009fe164d528d4e8998a509e61821abb",
+          "path": "canonical/swe_kernel/skill_verification_contract_v1.py"
+        },
+        {
+          "git_blob_sha": "caefeb099ef365292cbb160f6c4b1d7676a18e9a",
+          "path": "canonical/runtime/brokered_workspace_execution_v1.py"
+        },
+        {
+          "git_blob_sha": "903614c08d9592ad82e361e6ce1f9728c903fba5",
+          "path": "canonical/swe_kernel/zygote_worker_pool_v1.py"
+        },
+        {
+          "git_blob_sha": "d81601a88a947600495f44b5104baacf9cad56f3",
+          "path": "canonical/swe_kernel/rule_scope_learning_v1.py"
+        },
+        {
+          "git_blob_sha": "10227580a79ddac3bb9c2391308fcde27e4c63f3",
+          "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+        },
+        {
+          "git_blob_sha": "7eed2a7d40fc7c0c90b714295698d1480702636d",
+          "path": "canonical/swe_kernel/retained_repair_session_v1.py"
+        },
+        {
+          "git_blob_sha": "3f5026f5cc621c27f00e1cb9f3ec59d9ea8c6358",
+          "path": "canonical/runtime/macro_v1.py"
+        }
+      ],
+      "decisive_question": "DO_GENERAL_CST_LCA_ZERO_COPY_BROKER_ZYGOTE_COW_CONTENT_ADDRESSED_SYNC_BOARD_COMPLETE_MEMORY_POLICY_AND_CALIBRATED_SCOPE_ROUTE_PROMOTION_CLOSE_ALL_FIVE_PR6599_GAPS_WITHOUT_WEAKENING_ANY_GUARD",
+      "falsifier_id": "RUN_OPTIMAL_FIVE_PILLAR_BENCHMARK_UNIT_SUITES_SWE_ADVANCED_CENSUS_REFEREE_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "CARRIER_QUALIFIED_REMAINS_FALSE_CROSS_SCOPE_DEFAULTS_FAIL_CLOSED_ZYGOTE_SCREENING_STILL_REQUIRES_AUTHORITATIVE_ORACLE_AND_N1_ROUTES_DO_NOT_PROMOTE",
+      "proposal_id": "OPTIMAL_FIVE_PILLAR_UNIFIED_ARCHITECTURE_20261102_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The change can only cause MORE refusals, never fewer: every path that worked under a genuine contract oracle still works (167 focused tests, including the production benchmark at 6/6). The single new escape, `allow_simulated_oracle=True`, is opt-in, named, and cannot enable any broadened pattern. Three existing gate tests that deliberately feed forged or stubbed VerificationResults now pass that flag; their assertions are unchanged, so they still pin the refusals they were written to pin."
+}
