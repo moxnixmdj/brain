@@ -1,0 +1,8 @@
+{
+  "frozen_at_commit": "a70480d4",
+  "frozen_at_rows": 141,
+  "note": "Frozen once, at the commit that first measured it. `unfalsifiable_count` may fall freely; a rise means a NEW bound row arrived without a checkable pin, and the gate refuses until someone re-freezes deliberately.",
+  "schema": "PROJECT_BRAIN_BINDING_PIN_IS_CURRENT_V1",
+  "stale_count": 3,
+  "unfalsifiable_count": 138
+}

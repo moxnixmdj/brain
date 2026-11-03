@@ -69,9 +69,50 @@ def load_registry() -> dict:
 
 
 def available(registry: dict | None = None) -> dict[str, list[str]]:
-    """capability_id -> unmet requirements. Empty list means runnable here."""
+    """capability_id -> unmet requirements. Empty list means runnable here.
+
+    A capability whose verification evidence no longer describes the code that would run
+    is not runnable, for the same reason a capability with no binary is not: offering it
+    would be a claim nobody measured. `binding_pin_is_current_v1` derives that verdict
+    (FRESH / STALE / UNVERIFIED) from the pins themselves, because the registry's own
+    `verification.status` has been positive on 141 of 141 rows in every one of the 142
+    commits that touched it -- a field that only ever takes one value is not a status.
+
+    UNVERIFIED is deliberately NOT a blocker. 138 rows carry no checkable pin; calling
+    them all unrunnable would delete 138 capabilities on a technicality. Only STALE is
+    refuted, and refuted evidence is the thing that must cost the capability its offer.
+    """
     reg = registry if registry is not None else load_registry()
-    return {cid: missing(cid, reg) for cid in reg}
+    stale = _stale_ids(reg)
+    out: dict[str, list[str]] = {}
+    for cid in reg:
+        unmet = missing(cid, reg)
+        if cid in stale:
+            unmet = unmet + ["verification_evidence_is_stale"]
+        out[cid] = unmet
+    return out
+
+
+_STALE_CACHE: dict[int, frozenset[str]] = {}
+
+
+def _stale_ids(reg: dict) -> frozenset[str]:
+    """Capability ids whose pin the file contradicts. Empty on any failure to compute.
+
+    Fails OPEN and only open: a broken audit must not remove capabilities, because
+    silently deleting the option set is a worse error than not auditing it.
+    """
+    key = id(reg)
+    if key in _STALE_CACHE:
+        return _STALE_CACHE[key]
+    try:
+        from canonical.runtime import binding_pin_is_current_v1 as pins
+        verdicts = pins.resolve(Path(__file__).resolve().parents[2])
+        stale = frozenset(cid for cid, v in verdicts.items() if v.get("verdict") == pins.STALE)
+    except Exception:
+        stale = frozenset()
+    _STALE_CACHE[key] = stale
+    return stale
 
 
 def runnable(registry: dict | None = None) -> list[str]:

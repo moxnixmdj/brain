@@ -3,9 +3,10 @@
 
 Every test pairs a constructive capability proof with an explicit negative/adversarial control,
 verifying:
-  1. 5-stratum Meta-Circular Organ Graph (`PERCEPTOR`, `PREDICTOR`, `SKILL`, `VERIFIER`,
-     `META_SYNTHESIZER`), online sensorogenesis, Level-1 meta-tactic compilation, and `< 0.5 ms`
-     Tier-0 warm recall (`K3 = 0`, `$0` spend).
+  1. 7-stratum Meta-Circular Organ Graph (`PERCEPTOR`, `WORLD_MODEL`, `PREDICTOR`, `SKILL`,
+     `VERIFIER`, `META_SYNTHESIZER`, `POLICY`): grammar-induced sensorogenesis, observational
+     + exact-linear + STUN + organ-composition skill synthesis, synthesized verifiers,
+     exact-coefficient meta-tactics, instrumental 0-reward unlocking, `< 0.5 ms` recall.
   2. Global Non-Local Extrapolation (`OWNER_ACTIVE_GOAL` Law 5: escaping the YouTube/TikTok
      local-data trap) + persistence to measured target (`$100 != $1,000,000`).
   3. Active version-space disambiguation (`(6, 7) -> 42` copy-42 trap), mutation-discriminating
@@ -113,7 +114,17 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
     def test_level1_meta_synthesizer_compiles_new_search_tactic_from_solved_skills(self):
         with tempfile.TemporaryDirectory() as tmp:
             graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
-            # Two complex structural organs beyond the base 2-arg grammar: `c0 * x0 - c1 * x1 + c2`
+            # Exact linear algebra in the bootstrap grammar now solves ordinary affines.
+            novel_examples = [((1, 1), 17), ((3, 2), 29), ((4, 5), 30)]
+            bootstrap = graph.synthesize_or_disambiguate_skill(
+                novel_examples,
+                task_signature="custom::lin_novel",
+            )
+            self.assertTrue(bootstrap["ok"], bootstrap)
+            self.assertEqual(bootstrap["organ"].invoke(10, 3), 7 * 10 - 2 * 3 + 12)
+
+            # META_SYNTHESIZER must solve coefficients OUTSIDE any frozen integer lattice
+            # (42, 9, 13 were not in the old 19-int grid).
             org_a = MCOG.make_organ(
                 stratum=MCOG.SKILL,
                 name="lin_comb_a",
@@ -128,32 +139,20 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                 entrypoint="run",
                 source_code="def run(x0, x1):\n    return 5 * x0 - 4 * x1 + 10\n",
             )
-            graph.register_organ(org_a)
-            graph.register_organ(org_b)
-
-            # Before compiling the META_SYNTHESIZER tactic, a novel instance `7 * x0 - 2 * x1 + 12`
-            # is NOT in the bootstrap 2-arg grammar!
-            novel_examples = [((1, 1), 17), ((3, 2), 29), ((4, 5), 30)]
-            before = graph.synthesize_or_disambiguate_skill(
-                novel_examples,
-                task_signature="custom::lin_novel",
-            )
-            self.assertFalse(before["ok"])
-
-            # Compile Level-1 META_SYNTHESIZER tactic from (org_a, org_b) and register it in P_t!
             meta_organ = MCOG.compile_meta_synthesizer_organ(org_a, org_b, tactic_name="meta_affine_2d")
             self.assertIsNotNone(meta_organ)
             assert meta_organ is not None
-            graph.register_organ(meta_organ)
-
-            # Now `P_t` solves the novel problem immediately!
-            after = graph.synthesize_or_disambiguate_skill(
-                novel_examples,
-                task_signature="custom::lin_novel",
-                oracle=lambda xy: 7 * xy[0] - 2 * xy[1] + 12,
+            off_grid = [((1, 1), 46), ((2, 0), 97), ((0, 1), 4)]  # 42*x0 - 9*x1 + 13
+            src = meta_organ.invoke(off_grid)
+            self.assertIsInstance(src, str)
+            organ = MCOG.make_organ(
+                stratum=MCOG.SKILL,
+                name="off_grid_affine",
+                task_signature="custom::lin_off_grid",
+                entrypoint="run",
+                source_code=src,
             )
-            self.assertTrue(after["ok"], after)
-            self.assertEqual(after["organ"].invoke(10, 3), 7 * 10 - 2 * 3 + 12)
+            self.assertEqual(organ.invoke(3, 2), 42 * 3 - 9 * 2 + 13)
 
     def test_semantic_inspector_kills_comment_stuffed_and_wrong_sum_decoys(self):
         def env_checker(text: str) -> bool:
@@ -187,6 +186,172 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         self.assertFalse(inspector.invoke("ROW 15\nROW 27\nREPORT TOTAL 99\n")[0])
         # Rejects out-of-order decoy!
         self.assertFalse(inspector.invoke("REPORT TOTAL 42\nROW 15\nROW 27\n")[0])
+
+    def test_grammar_induction_perceives_formats_outside_the_old_five_codecs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            rec = graph.perceive_or_synthesize_reader(
+                "id:7;name:alpha;ok:true\nid:8;name:beta;ok:false\n",
+                format_tag="records",
+            )
+            self.assertTrue(rec["ok"], rec)
+            self.assertTrue(rec["synthesized_new_organ"])
+            self.assertEqual(rec["parsed"]["rows"][1]["name"], "beta")
+            self.assertIs(rec["parsed"]["rows"][0]["ok"], True)
+
+            xml = graph.perceive_or_synthesize_reader(
+                '<user id="1">alice</user>\n<user id="2">bob</user>\n',
+                format_tag="xml",
+            )
+            self.assertTrue(xml["ok"], xml)
+            self.assertEqual(xml["parsed"]["nodes"][1]["text"], "bob")
+            self.assertEqual(xml["parsed"]["nodes"][0]["attrs"]["id"], 1)
+
+            lp = graph.perceive_or_synthesize_reader(
+                b"\x05hello\x05world",
+                format_tag="lenpref",
+            )
+            self.assertTrue(lp["ok"], lp)
+            self.assertEqual(lp["parsed"]["frames"], ["hello", "world"])
+
+    def test_organ_composition_and_stun_piecewise_are_live_operators(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            inc = MCOG.make_organ(
+                stratum=MCOG.SKILL,
+                name="inc",
+                task_signature="op::inc",
+                entrypoint="run",
+                source_code="def run(x0):\n    return x0 + 1\n",
+            )
+            double = MCOG.make_organ(
+                stratum=MCOG.SKILL,
+                name="double",
+                task_signature="op::double",
+                entrypoint="run",
+                source_code="def run(x0):\n    return x0 * 2\n",
+            )
+            graph.register_organ(inc)
+            graph.register_organ(double)
+            # 2*(x+1) via organ_B(organ_A(x)) — not a frozen template
+            composed = graph.synthesize_or_disambiguate_skill(
+                [((3,), 8), ((5,), 12), ((0,), 2), ((-3,), -4)],
+                task_signature="op::double_inc",
+                oracle=lambda xs: 2 * (xs[0] + 1),
+            )
+            self.assertTrue(composed["ok"], composed)
+            self.assertEqual(composed["organ"].invoke(10), 22)
+
+            # STUN piecewise: x0*x1 if x0 > 0 else x0 + x1
+            piecewise = graph.synthesize_or_disambiguate_skill(
+                [((3, 4), 12), ((5, 2), 10), ((-2, 7), 5), ((-4, 1), -3)],
+                task_signature="op::stun_piece",
+                oracle=lambda xs: xs[0] * xs[1] if xs[0] > 0 else xs[0] + xs[1],
+            )
+            self.assertTrue(piecewise["ok"], piecewise)
+            self.assertEqual(piecewise["organ"].invoke(6, 3), 18)
+            self.assertEqual(piecewise["organ"].invoke(-5, 9), 4)
+
+    def test_synthesized_verifier_discovers_difference_not_just_sum_or_prod(self):
+        def env_checker(text: str) -> bool:
+            active = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith("#")]
+            if len(active) != 3:
+                return False
+            if not (active[0].startswith("ROW ") and active[1].startswith("ROW ") and active[2].startswith("REPORT DIFF ")):
+                return False
+            try:
+                a = int(active[0].split()[-1])
+                b = int(active[1].split()[-1])
+                diff = int(active[2].split()[-1])
+            except ValueError:
+                return False
+            return a - b == diff
+
+        valid = ["ROW 50\nROW 8\nREPORT DIFF 42\n", "ROW 20\nROW 5\nREPORT DIFF 15\n"]
+        derived = MCOG.derive_semantic_inspector_organ(
+            capability_id="report.diff.v1",
+            valid_artifacts=valid,
+            environment_checker=env_checker,
+        )
+        self.assertTrue(derived["ok"], derived)
+        inspector = derived["organ"]
+        self.assertTrue(inspector.invoke("ROW 100\nROW 23\nREPORT DIFF 77\n")[0])
+        self.assertFalse(inspector.invoke("# ROW 50\n# ROW 8\n# REPORT DIFF 42\n")[0])
+        self.assertFalse(inspector.invoke("ROW 50\nROW 8\nREPORT DIFF 99\n")[0])
+        self.assertNotEqual(derived.get("arithmetic_law"), "sum")
+        self.assertNotEqual(derived.get("arithmetic_law"), "prod")
+
+    def test_composed_perceptor_uses_admitted_child_plus_prefix_glue(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            inner = graph.perceive_or_synthesize_reader('{"a": 1, "b": 2}', format_tag="json")
+            self.assertTrue(inner["ok"], inner)
+            wrapped = graph.perceive_or_synthesize_reader('WRAP:{"a": 1, "b": 2}', format_tag="wrap_json")
+            self.assertTrue(wrapped["ok"], wrapped)
+            self.assertTrue(wrapped.get("composed_from_existing") or wrapped["synthesized_new_organ"])
+            self.assertEqual(wrapped["parsed"]["data"]["b"], 2)
+            # Negative: unstructured noise still rejected
+            noise = graph.perceive_or_synthesize_reader("@@@UNSTRUCTURED_CORRUPTED_NOISE_WITHOUT_GRAMMAR@@@")
+            self.assertFalse(noise.get("ok", True) and noise.get("organ_id") == wrapped["organ_id"])
+
+    def test_skill_organs_bridge_into_concept_library_g_t(self):
+        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
+
+        with tempfile.TemporaryDirectory() as tmp:
+            lib = CompoundingConceptLibrary(pathlib.Path(tmp) / "lib.json")
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json", concept_library=lib)
+            inc = MCOG.make_organ(
+                stratum=MCOG.SKILL,
+                name="inc",
+                task_signature="op::inc",
+                entrypoint="run",
+                source_code="def run(x0):\n    return x0 + 1\n",
+            )
+            graph.register_organ(inc)
+            self.assertGreaterEqual(len(lib.concepts()), 1)
+            solved = graph.synthesize_or_disambiguate_skill(
+                [((3,), 8), ((5,), 12), ((0,), 2), ((-3,), -4)],
+                task_signature="op::double_inc_via_gt",
+                oracle=lambda xs: 2 * (xs[0] + 1),
+            )
+            self.assertTrue(solved["ok"], solved)
+            self.assertEqual(solved["organ"].invoke(10), 22)
+
+    def test_instrumental_policy_prefers_zero_reward_tool_that_unlocks_high_value_goal(self):
+        ranked = MCOG.rank_instrumental_actions(
+            [
+                {"id": "shiny", "value": 12.0, "cost": 1.0},
+                {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+                {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+            ],
+            remaining_budget=3.0,
+            horizon=3,
+        )
+        self.assertEqual(ranked[0]["id"], "forge_sensor")
+        policy = MCOG.compile_policy_organ()
+        scored = policy.invoke(
+            [
+                {"id": "shiny", "value": 12.0, "cost": 1.0},
+                {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+                {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+            ],
+            3.0,
+            None,
+        )
+        self.assertEqual(scored[0]["id"], "forge_sensor")
+        self.assertIn(MCOG.POLICY, MCOG.STRATA)
+        self.assertIn(MCOG.WORLD_MODEL, MCOG.STRATA)
+        wm = MCOG.synthesize_world_model_organ(
+            [
+                {"action": "forge_sensor", "cost": 1.0, "failed": False, "delta": {"sensors": 1}},
+                {"action": "forge_sensor", "cost": 1.2, "failed": False, "delta": {"sensors": 1}},
+                {"action": "shiny", "cost": 1.0, "failed": True, "delta": {}},
+            ]
+        )
+        self.assertIsNotNone(wm)
+        pred = wm.invoke("forge_sensor")
+        self.assertTrue(pred["known"])
+        self.assertGreater(pred["mean_delta"]["sensors"], 0.0)
 
     def test_repair_semantic_sensitivity_gate_catches_wrong_operator_reading_all_inputs(self):
         before_src = "def compute_invoice(items, disc):\n    return sum(items) - disc\n"
@@ -265,6 +430,24 @@ class GlobalNonLocalExtrapolationTests(unittest.TestCase):
             self.assertEqual(result["status"], GOWE.TARGET_REACHED)
             self.assertGreaterEqual(result["final_measured"], 500.0)
             self.assertIn("enterprise_b2b_direct", result["discovered_channels"])
+
+    def test_expands_without_english_superlative_keywords(self):
+        local_channels = [
+            GOWE.ChannelObservation("youtube", samples=4, mean_payoff=12.0, payoff_std=2.0, unit_cost=1.0),
+            GOWE.ChannelObservation("tiktok", samples=4, mean_payoff=18.0, payoff_std=3.0, unit_cost=1.0),
+        ]
+        decision = GOWE.estimate_unseen_opportunity_space(
+            local_channels,
+            goal="Earn 500 USD",
+            target_gap=500.0,
+            remaining_budget=10.0,
+            universe_size_hint=8,
+        )
+        self.assertEqual(decision["verdict"], GOWE.EXPAND_UNSEEN_SPACE_FIRST)
+        self.assertGreater(decision["evoi_global"], 0.0)
+        discovered = GOWE.discover_unseen_machine_channel(0, ["youtube", "tiktok"])
+        self.assertIsNotNone(discovered)
+        self.assertNotIn(discovered.channel_id, {"youtube", "tiktok"})
 
     def test_never_declares_100_dollars_victory_on_million_dollar_goal_and_requires_external_measure(self):
         # 1. Missing external measure fails closed (`VERIFICATION_IS_SOMEONE_ELSE`)
@@ -525,6 +708,24 @@ class CreatureCounterexampleClosureTests(unittest.TestCase):
         cmp_res = SPB.evaluate_task_feature_self_predictor(rows)
         self.assertEqual(cmp_res["verdict"], "CLAIM_BEATS_EXTERNAL_BASELINE", cmp_res)
         self.assertGreater(cmp_res["margin_over_baseline"], 0.05)
+
+    def test_creature_step_ranks_zero_reward_unlock_with_policy_organ(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            c = CR.boot(tmp, identity="inst-policy", life=10.0)
+            c._board = [
+                M.Work(id="shiny", value=12.0, cost=1.0),
+                M.Work(id="forge_sensor", value=0.0, cost=1.0),
+                M.Work(id="master_goal", value=100.0, cost=1.0),
+            ]
+            c._checkable = {w.id: True for w in c._board}
+            c._work_features = {
+                "shiny": {},
+                "forge_sensor": {"unlocks": ["master_goal"]},
+                "master_goal": {"requires": ["forge_sensor"]},
+            }
+            row = c.step()
+            self.assertEqual(row.get("work"), "forge_sensor")
+            self.assertTrue(any(o.stratum == MCOG.POLICY for o in c.organ_graph.organs.values()))
 
     def test_unified_planner_exposes_organ_graph_and_global_extrapolation(self):
         with tempfile.TemporaryDirectory() as tmp:

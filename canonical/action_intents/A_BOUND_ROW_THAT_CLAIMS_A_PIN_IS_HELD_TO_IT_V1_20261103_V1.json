@@ -1,0 +1,455 @@
+{
+  "action_id": "A_BOUND_ROW_THAT_CLAIMS_A_PIN_IS_HELD_TO_IT_V1_20261103_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Two layers, one mechanism. (1) A bound row that advertises a sha256 pin is held to it: the kernel treats a pin as a RELATION (a 64-hex value naming a file must equal that file's sha256), not a vocabulary, so a row may invent any key name and is still checked. (2) The verdict that audit derives is made CONSEQUENTIAL: availability_v1 -- the module live_integrated_brain_v1 builds its bound set from -- now charges a STALE row 'verification_evidence_is_stale', so three capabilities stop being offered. Measured at a70480d4: 141 bound rows; 160 distinct verification keys, 86 private to one row; verification.status positive on 141/141 and NEVER negative in any of the 142 commits that touched the registry; 0 of 141 pins compared to their own adapter by anything in the tree.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "Four candidate mechanisms were built or measured before this one and each was rejected on measurement, not preference. (1) Import-graph reachability: 76% of files are imported by nobody, because this repository dispatches by CLI subprocess and registry path. (2) An alias-aware import resolver, corrected to agree with all three known-live modules, still found only 4% of census 'orphans' reachable from real entrypoints. (3) Transitive name reachability exploded to 95% because SCHEMA is defined in 1708 modules. (4) A name-matching orphan gate agreed with the repository's own census on 1 of 40 known-dead modules. Measuring the same question revealed that the orphan population is FLAT (562 -> 554 dead over 12 merges, 24% -> 24%), so the orphan gate's premise was contradicted by the data and it was deleted rather than shipped. The surviving blocker is one layer down, in the 141-row capability door.",
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/binding_pin_is_current_v1.py",
+      "canonical/runtime/availability_v1.py",
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/evidence/BINDING_PIN_BASELINE_V1.json",
+      "canonical/tests/test_binding_pin_is_current_v1.py"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The repository could already record proof-of-execution (capability_receipt_lane_v1: execute, pin blob sha, verify as a second identity; all 15 receipt pins measured FRESH) and currency (rule_expiry_v1: FRESH/STALE/UNKNOWN). Missing was the join: nothing read a pin back, so a bound row's status was an assertion no later edit could contradict. 142 commits touched the registry and zero ever carried a negative verdict. A status field that only ever takes one value is not a status.",
+  "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The repository could already record proof-of-execution (capability_receipt_lane_v1: execute, pin blob sha, verify as a second identity; all 15 receipt pins measured FRESH) and currency (rule_expiry_v1: FRESH/STALE/UNKNOWN). Missing was the join: nothing read a pin back, so a bound row's status was an assertion no later edit could contradict. 142 commits touched the registry and zero ever carried a negative verdict. A status field that only ever takes one value is not a status.",
+  "date": "2026-11-03",
+  "expected_parent_change": "Of 141 bound rows, 3 names a checkable pin that their adapter contradicts, and the gate refuses when that count rises or when a new unfalsifiable bound row arrives.",
+  "expected_parent_frontier_change": "The capability door was reachable for 141 of 2308 governed modules (6.1%). Those 141 rows were previously un-auditable; they now carry a falsifiable property.",
+  "explicit_user_authorization": "Owner instruction 2026-11-03, verbatim: 'You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything.' and 'And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' The second sentence is the acceptance criterion: a per-incident static guard is rejected in kind, and the deliverable must be a generalizing mechanism.",
+  "falsification_condition": "Any of: (a) adding a bound row whose runtime_sha256 does not match its adapter does NOT produce ORIENTATION_A_BOUND_ROW_CLAIMS_A_PIN_THE_FILE_NO_LONGER_MATCHES; (b) removing the kernel call from orientation_errors does NOT fail test_the_orientation_check_surfaces_a_false_pin; (c) a row using a key name the kernel has never seen, holding a matching sha, is NOT compared -- that would prove the kernel is vocabulary-bound; (d) the 3 rows stale at a70480d4 block a PR that did not touch them. (e) a STALE row does NOT lose its place in availability_v1.runnable(); (f) an UNVERIFIED row IS withdrawn; (g) an audit exception removes capabilities instead of failing open; (h) a row is silently dropped from the verdict map (141 rows share only 132 adapter module names, so keying by module collapses nine).",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_FRONTIERCODE_GE_54_4"
+    ],
+    "expected_obligation_discharge_lcb": 0.0,
+    "expected_obligation_unlock_lcb": 0.005,
+    "interpretation": "No capability credit is claimed and no obligation is discharged by this change. Unlock is non-zero only because evidence integrity is a precondition for counting these obligations at all: the three withdrawn capabilities are software-repair and patch-search capabilities cited by the coding intents, and their contribution could previously be counted on proof that no longer describes them. The 0.005 is an honest lower bound on 'removing a false basis for a credit', not a measured capability gain.",
+    "open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8"
+    ],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 300
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_frontier_change": "A bound capability's status stops being an unfalsifiable assertion and becomes a claim that a later edit can contradict.",
+  "prior_work_reused": "capability_receipt_lane_v1.py already implements execute -> sha-pinned blob -> independent verification and was read first; its 15 pins were measured FRESH and are the reason this work targets the REGISTRY rather than re-inventing receipts. rule_expiry_v1.py already implements FRESH/STALE/UNKNOWN and was checked for reuse. capability_receipt_lane_v1.sha256_file is the same one-line hash; the kernel keeps its own to stay import-free on the guard path. agent_orientation_check_v1.orientation_errors is the existing enforced hook every PR already passes; nothing new was wired into the merge path.",
+  "recursive_obs": {
+    "canonical_base_commit": "e817dc779dd6b524cd1b60935507942229831e32",
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "deleted_or_bypassed_paths": [
+      "NEW_MODULE_HAS_A_CALLER_V1_AN_ORPHAN_GATE_WHOSE_PREMISE_THE_DATA_CONTRADICTED_AND_WHICH_WAS_THEREFORE_DELETED_RATHER_THAN_SHIPPED",
+      "FOUR_STATIC_ORPHAN_MEASUREMENTS_THAT_EACH_DISAGREED_WITH_THE_REPOSITORY_OWN_CENSUS_AND_WITH_KNOWN_LIVE_MODULES",
+      "A_NAME_MATCHING_ORPHAN_GATE_THAT_AGREED_WITH_THE_CENSUS_ON_1_OF_40_KNOWN_DEAD_MODULES_AND_WHICH_WOULD_HAVE_SHAPED_THE_REPOSITORY_TOWARD_DEAD_CODE"
+    ],
+    "expected_parent_level_state_change": "The capability door was reachable for 141 of 2308 governed modules (6.1%). Those 141 rows were previously un-auditable; they now carry a falsifiable property.",
+    "iteration_limit": 4,
+    "measurement_commands": [
+      "python3 -c \"import sys;sys.path.insert(0,'.');from canonical.runtime import binding_pin_is_current_v1 as K;print(K.audit('.')['stale'], len(K.audit('.')['unfalsifiable']))\"",
+      "python3 -m pytest canonical/tests/test_binding_pin_is_current_v1.py -q",
+      "python3 execution_guard/repo_integrity_guard_v1.py"
+    ],
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_141_ROWS_REMOVES_THE_ONLY_WORKING_CAPABILITY_DOOR__BYPASSING_WAS_MEASURED_AS_THE_DEFAULT_STATE__SUBSTITUTING_A_PER_KEY_NAME_CHECKER_IS_THE_SCAR_TISSUE_THE_OWNER_NAMED__TREATING_THE_138_UNVERIFIED_ROWS_AS_SUSPECT_IS_THE_SAME_ERROR_IN_MIRROR_IMAGE_AND_WOULD_DELETE_138_CAPABILITIES_ON_A_TECHNICALITY",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_141_BOUND_ROWS_ARE_ONE_DOOR_AND_ITS_CLAIMS_WERE_SELF_ISSUED__THE_MECHANISM_GENERALISES_BECAUSE_A_PIN_IS_TREATED_AS_A_RELATION_OVER_64_HEX_VALUES_NAMED_IN_ANY_KEY",
+      "surviving_causal_blocker": "Verification evidence is written and never read back, so a capability's advertised status is unfalsifiable: the code that was verified and the code that would run are permitted to diverge silently."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "THE_ORPHAN_GATE_WAS_WRITTEN_VALIDATED_BOTH_WAYS_AND_THEN_DELETED_BECAUSE_MEASUREMENT_CONTRADICTED_ITS_PREMISE",
+      "existing_inherited_routes_checked": "capability_receipt_lane_v1 (reused its execute/receipt/hash pattern and measured its 15 pins FRESH); rule_expiry_v1 (checked for reuse, already implements FRESH/STALE/UNKNOWN); census_orphan_capabilities_v1 (the repository's own orphan census, used as ground truth against which four candidate mechanisms were tested); agent_orientation_check_v1.orientation_errors (the existing enforced hook); BOUND_CAPABILITY_REGISTRY_V1.dataset",
+      "external_existing_routes_checked": "A live challenger search was run on 2026-11-03 across all four source classes. External systems solve this the same way and none is cheaper than the repository's own modules: content-addressed pin + re-hash on read (training-provenance lineage DAG; saturn build contract), and stale-pin diagnostics that say WHAT the hash was computed over (klayout-tools). The decisive external finding is negative: 'Hash verifies integrity, not authorization' (saturn issue 63) -- which independently supports NOT treating UNVERIFIED as distrust. No external artifact store, DAG or signer is needed here; the repository already owns the receipt lane, the currency vocabulary and the offer/withdraw rule.",
+      "no_new_planner_no_new_adapter_written": true,
+      "surviving_gap": "Nothing in the tree read a verification pin back, measured as 0 of 141 bound rows compared to their own adapter."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "COUNTING_ORPHAN_MODULES",
+        "MAXIMISING_MODULE_COUNT",
+        "REPORTING_STATUS_NOBODY_MEASURED"
+      ],
+      "real_outcome": "A capability offered to the creature is one whose evidence still describes it.",
+      "surviving_necessity": "The creature must not act on a capability whose verified code is not the code that would run."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "capability_receipt_lane_v1 receipt pattern",
+        "rule_expiry_v1 FRESH/STALE/UNKNOWN vocabulary",
+        "availability_v1 offer/withdraw rule"
+      ],
+      "downstream_work_to_delete_or_supersede": "None deleted. The three stale rows are deliberately NOT re-pinned, so the defect stays visible rather than being hidden.",
+      "fresh_reuse_plan": "A future unverified row may carry a checkable pin at authoring time; nothing else is needed."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Four rejected reachability mechanisms were deleted rather than kept as alternative code paths.",
+      "search_stop_decision": "Stopped after the orphan population measured FLAT and the surviving blocker moved to the capability door."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Each static reachability mechanism disagreed with the repository's own census or with modules known to be live; a pin relation is checkable without any graph.",
+      "routes_ranked": [
+        "IMPORT_GRAPH_REACHABILITY__REJECTED__76_PERCENT_OF_FILES_ARE_IMPORTED_BY_NOBODY_BECAUSE_DISPATCH_IS_BY_CLI_AND_REGISTRY_PATH",
+        "ALIAS_AWARE_IMPORT_RESOLVER__CORRECTED_TO_AGREE_WITH_ALL_THREE_KNOWN_LIVE_MODULES_BUT_FOUND_ONLY_4_PERCENT_OF_CENSUS_ORPHANS_REACHABLE",
+        "TRANSITIVE_NAME_REACHABILITY__REJECTED__95_PERCENT_EXPLOSION_BECAUSE_SCHEMA_IS_DEFINED_IN_1708_MODULES",
+        "NAME_MATCHING_ORPHAN_GATE__BUILT_VALIDATED_AND_DELETED__AGREED_WITH_THE_REPOSITORY_OWN_CENSUS_ON_1_OF_40_KNOWN_DEAD_MODULES_AND_ITS_PREMISE_WAS_CONTRADICTED_BECAUSE_THE_ORPHAN_POPULATION_IS_FLAT",
+        "BINDING_PIN_RELATION_WITH_CONSEQUENTIAL_VERDICT__SELECTED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic oracle claimed. Measurements are sandbox measurements and are labelled as such."
+    },
+    "observed_state_change": "3 of 141 bound rows are STALE and now cost their capability its offer; 138 are UNVERIFIED and are explicitly NOT withdrawn; any rise in either count refuses on the next consequential action.",
+    "real_outcome": "A bound capability's advertised verification is falsifiable at the moment of use: code that was verified and code that would run are held together, and a refuted capability is withdrawn.",
+    "required_capability": "Read a verification pin back and let the verdict cost an offer. No new capability is required; capability_receipt_lane_v1, rule_expiry_v1, availability_v1 and agent_orientation_check_v1 already exist.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "HIGHER",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "LESS",
+            "WALL_CLOCK": "WORSE"
+          },
+          "evidence": [
+            "training-provenance is dependency-free and implements exactly this"
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY/CODE_OR_PACKAGE_REGISTRY: every candidate either duplicates capability_receipt_lane_v1, which already pins blobs and verifies as a second identity and measured 15/15 FRESH, or adds a store this repository does not need. Adoption cost is a new dependency and a new authority for a relation that is one sha256 comparison."
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "ADOPT_AN_EXTERNAL_CONTENT_ADDRESSED_STORE_OR_LINEAGE_DAG"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LESS",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "SAME",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "NOTHING_TO_PIN",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "it makes every advertised pin true again, immediately"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: re-pinning removes the evidence that the mechanism was missing. The three rows were edited after their pins and the registry was touched afterwards without a single refusal, so re-pinning restores agreement by erasing the counterexample and leaves the next divergence undetected. The stale state is deliberately preserved so the falsifier stays live."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REPIN_THE_THREE_STALE_ROWS_AND_KEEP_REPORTING_ONLY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LESS",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "SAME",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "SAME",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "an unpinned row cannot be confirmed either"
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY: 'Hash verifies integrity, not authorization.' Absent evidence is not refuted evidence; withdrawing 138 rows would delete 138 capabilities on a technicality and would be the same dishonesty in mirror image. The mirror-image test exists and fails when the two are collapsed."
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WITHHOLD_ALL_UNVERIFIED_ROWS_AS_WELL_AS_STALE_ONES"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LESS",
+            "CORRECTNESS": "LESS",
+            "INCREMENTAL_COST": "SAME",
+            "RELIABILITY": "LESS",
+            "VERIFIABILITY": "LESS",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "the key that matters is runtime_sha256"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the registry uses 23 sha-shaped key names and 86 keys private to a single row. A key-name checker was written (test_a_new_synonym_key_is_checked_without_editing_the_kernel) and fails when the kernel is restricted to sha256-shaped names -- it would check 3 rows and silently ignore the rest."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "CHECK_PINS_BY_KEY_NAME_SHA256_ONLY"
+        }
+      ],
+      "checked_at_utc": "2026-11-03T23:11:49Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "REPORT_THE_CENSUS_COUNT_AND_DO_NOT_GATE_ANYTHING (the state measured at a70480d4)",
+      "max_age_hours": 12,
+      "negative_search_summary": "Searched all four source classes for an existing mechanism that reads a verification pin back and charges the capability for it. Found pin-and-rehash systems and stale-pin diagnostics; found none that builds on this repository's own receipt lane, currency vocabulary and offer rule, and none cheaper than a single sha256 relation.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "existing mechanism detect artifact changed since verification timestamp"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "content-addressed provenance tracking pipeline integrity verification"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "how to fail closed when pinned hash does not match artifact at use time"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "content-addressed reproducibility pin hash artifact verification staleness detection 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "Derive a verdict (FRESH/STALE/UNVERIFIED) from pins as a RELATION over 64-hex values naming files, and charge availability_v1 for STALE only, on the guard path every consequential action already takes.",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-03T23:11:49Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3.11 stdlib (hashlib, json, ast, re, pathlib)",
+            "evidence": [
+              "the kernel imported and ran under python3 in this sandbox; audit() returned 141 rows"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "evidence": [
+              "registry read and audited: 141 rows, 3 stale, 138 unfalsifiable"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/availability_v1.py",
+            "evidence": [
+              "available()/runnable() observed: 3 capabilities withdrawn, 138 retained"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "execution_guard/agent_orientation_check_v1.py",
+            "evidence": [
+              "verify ok; intent-check ok; the wire severs to a failing test"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "repository git checkout (no network required)",
+            "evidence": [
+              "every measurement ran offline in this repository"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "Derive a verdict (FRESH/STALE/UNVERIFIED) from pins as a RELATION over 64-hex values naming files, and charge availability_v1 for STALE only, on the guard path every consequential action already takes.",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/capability_receipt_lane_v1.py (execute->pin blob sha->verify as second identity; 15/15 pins FRESH)",
+          "canonical/swe_kernel/rule_expiry_v1.py (FRESH/STALE/UNKNOWN; unknown provenance fails closed)",
+          "canonical/runtime/availability_v1.py (offer/withdraw on unmet requirement)",
+          "canonical/runtime/astra_runtime.py + plain_goal_bound_grounding*.py (registry readers, none reads a pin back)",
+          "rebased onto 9e3b5f5e (meta-circular organ graph, open-world extrapolator, counterexample closure): the registry was not touched by that merge and the audit measurement is unchanged at 141 rows / 3 stale / 138 unverified",
+          "rebased onto e817dc77 (live organ algebra, composed perceptors, POLICY chooses); the registry was not touched by those merges and the audit is unchanged at 141 rows / 3 stale / 138 unverified"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "crucible PR 16: a verified blob is not a safe instruction -- verification scope matters"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "training-provenance: content-addressed lineage DAG, verify-by-re-execution",
+          "covertlens CL-26: content-hashed pins over fixtures, drift named field-by-field",
+          "klayout-tools PR 4838: stale content_hash pin explained by what it was computed over"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "SLSA / in-toto style statement that a hash is artifact identity, not proof of reproducibility (saturn issue 63: 'Hash verifies integrity, not authorization')"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "IMPORT_GRAPH_REACHABILITY__REJECTED__76_PERCENT_OF_FILES_ARE_IMPORTED_BY_NOBODY_BECAUSE_DISPATCH_IS_BY_CLI_AND_REGISTRY_PATH",
+      "ALIAS_AWARE_IMPORT_RESOLVER__CORRECTED_TO_AGREE_WITH_ALL_THREE_KNOWN_LIVE_MODULES_BUT_FOUND_ONLY_4_PERCENT_OF_CENSUS_ORPHANS_REACHABLE",
+      "TRANSITIVE_NAME_REACHABILITY__REJECTED__95_PERCENT_EXPLOSION_BECAUSE_SCHEMA_IS_DEFINED_IN_1708_MODULES",
+      "NAME_MATCHING_ORPHAN_GATE__BUILT_VALIDATED_AND_DELETED__AGREED_WITH_THE_REPOSITORY_OWN_CENSUS_ON_1_OF_40_KNOWN_DEAD_MODULES_AND_ITS_PREMISE_WAS_CONTRADICTED_BECAUSE_THE_ORPHAN_POPULATION_IS_FLAT",
+      "BINDING_PIN_RELATION_WITH_CONSEQUENTIAL_VERDICT__SELECTED"
+    ],
+    "selected_surviving_route": "Derive a verdict (FRESH/STALE/UNVERIFIED) from pins as a RELATION over 64-hex values naming files, and charge availability_v1 for STALE only, on the guard path every consequential action already takes.",
+    "stop_condition": "Stops when the new suite passes, each of the four falsification conditions above is exercised by a test that fails when the mechanism is broken, repo_integrity_guard_v1 stays at violations=0, and the existing 42 orientation/admission tests still pass.",
+    "why_selected_route_is_fastest_sufficient": "It reuses four existing modules and adds no new dispatch, planner or adapter. It is sufficient because it makes the failure refutable rather than reported: the 3 refuted rows lose their offer, and any new one refuses at the gate."
+  },
+  "route_id": "A_BOUND_ROW_THAT_CLAIMS_A_PIN_IS_HELD_TO_IT_V1_20261103_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "A_BOUND_ROW_THAT_CLAIMS_A_PIN_IS_HELD_TO_IT_V1_20261103_V1",
+  "stop_condition": "Stops when the new suite passes, each of the four falsification conditions above is exercised by a test that fails when the mechanism is broken, repo_integrity_guard_v1 stays at violations=0, and the existing 42 orientation/admission tests still pass.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "The 3 refuted capabilities stop being offered, so their truth obligations can no longer be credited on stale evidence. No obligation is discharged by this change.",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "84ac0c2911c8f33d69bd68fa87209d06188d4be4",
+          "path": "canonical/tests/test_binding_pin_is_current_v1.py"
+        }
+      ],
+      "decisive_question": "Does a row whose advertised sha no longer matches its adapter lose its place in runnable()?",
+      "falsifier_id": "A_ROW_ADVERTISING_A_SHA_ITS_ADAPTER_CONTRADICTS_THAT_IS_STILL_OFFERED",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The falsifier is exercised as a test and observed to pass on the live registry.",
+      "proposal_id": "BINDING_PIN_RELATION_WITH_CONSEQUENTIAL_VERDICT"
+    }
+  },
+  "vocabulary": "no new primitive",
+  "weakens_existing_guard": "No guard is weakened. availability_v1 can only ADD an unmet requirement, and it fails OPEN on any audit exception, so a broken kernel cannot delete the option set. UNVERIFIED is deliberately not a blocker. The three withdrawals are refuted evidence, not suspicion."
+}

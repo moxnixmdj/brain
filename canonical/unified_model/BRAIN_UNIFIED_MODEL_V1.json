@@ -32060,16 +32060,16 @@
   "engines": 26,
   "knowledge_documents": 254,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6648,
+  "research_index_records": 6651,
   "routing_tokens": 2423,
   "skills": 18,
   "source_index_entry_points": 439,
-  "source_index_modules": 1930
+  "source_index_modules": 1931
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a41e3e316bbff86b72f37178d3b91b8b23d994d9caaeff27796b38278fc936dd"
+  "value": "d8a9615eb124b4f24757e597274da4195e08d8c3e5a823920b940549cc755476"
  },
  "engines": [
   {
@@ -208952,6 +208952,51 @@
    }
   },
   {
+   "action_id": "A_BOUND_ROW_THAT_CLAIMS_A_PIN_IS_HELD_TO_IT_V1_20261103_V1",
+   "capability": false,
+   "date": "2026-11-03",
+   "id": "research:canonical/action_intents/A_BOUND_ROW_THAT_CLAIMS_A_PIN_IS_HELD_TO_IT_V1_20261103_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_BOUND_ROW_THAT_CLAIMS_A_PIN_IS_HELD_TO_IT_V1_20261103_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0279a0ff9d9edbd3ebeb0838a896712f89725d315ec74579f858aa59f2685028",
+   "status": "",
+   "terms": {
+    "141": 2,
+    "142": 1,
+    "15": 1,
+    "20261103": 1,
+    "2308": 1,
+    "6.1": 1,
+    "a_bound_row_that_claims_a_pin_is_held_to_it_v1_20261103_v1": 2,
+    "all": 1,
+    "already": 1,
+    "assertion": 1,
+    "back": 1,
+    "blob": 1,
+    "bound": 2,
+    "capability": 1,
+    "capability_receipt_lane_v1": 1,
+    "carried": 1,
+    "carry": 1,
+    "claims": 1,
+    "commits": 1,
+    "contradict": 1,
+    "currency": 1,
+    "door": 1,
+    "edit": 1,
+    "ever": 2,
+    "execute": 1,
+    "falsifiable": 1,
+    "field": 1,
+    "fresh": 2,
+    "pin": 3,
+    "row": 2,
+    "status": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1",
    "capability": false,
    "date": "2026-10-29",
@@ -216733,6 +216778,31 @@
    }
   },
   {
+   "action_id": "LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c9b47129c8e2cf6542fc9cfafc0efd7da466629ac1e59afa536977f11b1f4115",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "algebra": 1,
+    "board": 1,
+    "compose_in_tree_observational_synth_and_concept_library_with_live_policy_on_creature_board": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "live": 1,
+    "live_organ_algebra_on_the_board_verified_at_zero_model_dependency__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "live_organ_algebra_policy_on_board_20261104_v1": 1,
+    "organ": 1,
+    "parallel_toy_enumerator_dead_policy_organ_and_unwired_g_t_bridge_on_51080f0": 1,
+    "policy": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "LIVE_SOLVER_END_TO_END_MEASUREMENT_AND_ROUTE_ADMISSION_20261015_V1",
    "capability": false,
    "date": "2026-10-15",
@@ -222947,6 +223017,31 @@
     "write": 3,
     "write_the_tests_for_this_tree_must_write_tests_v1_20261027_v1": 2
    }
+  },
+  {
+   "action_id": "ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "20261556f97e6b9b81ef2f07028d61562c73abc8e0cc95fd389772d2785a264e",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "compose_seven_stratum_zero_template_organ_algebra_with_evoi_global_and_instrumental_policy": 1,
+    "creature": 1,
+    "disguised_static_five_codec_and_thirty_five_expression_and_three_law_menus_plus_english_keyword_optimality_gate_and_myopic_one_step_policy_on_9e3b5f5e": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "seven": 1,
+    "stratum": 1,
+    "template": 1,
+    "v1": 1,
+    "zero": 1,
+    "zero_template_seven_stratum_creature_20261104_v1": 1,
+    "zero_template_seven_stratum_organ_algebra_and_decision_theoretic_open_world_policy_verified_at_zero_model_dependency__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1
+   }
   }
  ],
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1",
@@ -228136,10 +228231,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/availability_v1.py",
-   "sha256": "330ef62c93ec6162d27055e8d5b03fa496e75d7656ae64dbcb0006f1942f2d03",
+   "sha256": "2d8f72b2105476ee0bf5787f9d383c02930bc957d9baab2313616b24d86ca5f1",
    "summary": "Know what you CANNOT do here.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
+    "_stale_ids",
     "available",
     "has",
     "load_registry",
@@ -228155,6 +228251,7 @@
     "load_registry": 1,
     "missing": 1,
     "runnable": 1,
+    "stale_ids": 1,
     "v1": 1
    }
   },
@@ -228537,6 +228634,54 @@
     "v4": 2,
     "verdict": 1,
     "witness": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/binding_pin_is_current_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/binding_pin_is_current_v1.py",
+   "sha256": "98890960cdc84921192122496581a2c8339bac30c58b909ab9e8d4aa68602cd4",
+   "summary": "A binding that claims a pin must still match the thing it pinned.",
+   "symbol_count": 11,
+   "symbols": [
+    "_candidate_files",
+    "_rows",
+    "_sha256_file",
+    "audit",
+    "baseline",
+    "counts",
+    "holder_items",
+    "load_baseline",
+    "refusal",
+    "resolve",
+    "run"
+   ],
+   "terms": {
+    "audit": 1,
+    "baseline": 1,
+    "binding": 2,
+    "candidate_files": 1,
+    "claims": 1,
+    "counts": 1,
+    "current": 1,
+    "holder_items": 1,
+    "load_baseline": 1,
+    "match": 1,
+    "must": 1,
+    "pin": 2,
+    "pinned": 1,
+    "refusal": 1,
+    "resolve": 1,
+    "rows": 1,
+    "run": 1,
+    "sha256_file": 1,
+    "still": 1,
+    "thing": 1,
+    "v1": 1
    }
   },
   {
@@ -240831,7 +240976,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "ccf1dc5e8981c88119e00c7c68448453ab7eb5a4dc11e8a727d35c54881c9c62",
+   "sha256": "766bc9515f3a9fb1131ac4c2c104ff402f75fd409ad04ff2f50b382b391eca3e",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 14,
    "symbols": [
@@ -250679,11 +250824,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/global_open_world_extrapolator_v1.py",
-   "sha256": "c7f7026fd5472b4afffb367f686e0c3552d32c216d7f7eb789fa22076e3674dc",
+   "sha256": "c34004505ae2dffe51717bea14b7ecdade20082ff042ec96f5f77c403decaf2d",
    "summary": "Global Non-Local Extrapolation & Target-Persistence Engine (`K3 = 0`, `$0` spend).",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "ChannelObservation",
+    "discover_unseen_machine_channel",
     "discoverable_machine_universe_size",
     "estimate_unseen_opportunity_space",
     "has_global_quantifier",
@@ -250691,6 +250837,7 @@
    ],
    "terms": {
     "channelobservation": 1,
+    "discover_unseen_machine_channel": 1,
     "discoverable_machine_universe_size": 1,
     "engine": 1,
     "estimate_unseen_opportunity_space": 1,
