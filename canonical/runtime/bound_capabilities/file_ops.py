@@ -18,8 +18,9 @@ is a refusal rather than a default:
 
 * both paths are required. A copy with no stated destination does not become
   "copy next to the source";
-* the destination must NOT already exist unless the sentence itself asks to
-  overwrite or replace. Silent overwrite is how an ordinary request eats a file;
+* the destination must NOT already exist unless the sentence matches a narrow,
+  explicit instruction to overwrite or replace it. Negated, conditional, or
+  otherwise ambiguous requests fail closed. Silent overwrite destroys data;
 * the destination may not be the source (also enforced upstream by
   `write_authority_v1`, and re-checked here on the resolved paths, since the
   upstream check compares names while a hard link shares bytes);
@@ -43,8 +44,24 @@ import pathlib
 import re
 import sys
 
-#: Words a sentence uses when it MEANS to replace an existing destination.
-_OVERWRITE = re.compile(r"\b(?:overwrit\w*|over-writ\w*|replac\w*|clobber\w*|force)\b", re.I)
+# Replacement is dangerous: a word such as "overwrite" is not consent when
+# negated, conditional, part of a filename, or directed at something else. Admit
+# only a complete, unambiguous imperative with two bound paths and an explicit
+# destination-directed clause. Other phrasings fail closed. This is not a
+# general natural-language consent parser.
+_EXPLICIT_OVERWRITE = re.compile(
+    r"\s*(?:please\s+)?(?P<verb>copy|rename)\s+"
+    r"(?P<source>[A-Za-z0-9_./-]+)\s+(?:to|into|onto)\s+"
+    r"(?P<destination>[A-Za-z0-9_./-]+)\s+and\s+"
+    r"(?:overwrite|replace)\s+it\s*[.!?]*\s*", re.I)
+
+
+def _authorizes_overwrite(goal: str, command: str, source: pathlib.Path,
+                          destination: pathlib.Path, root: pathlib.Path) -> bool:
+    match = _EXPLICIT_OVERWRITE.fullmatch(str(goal or ""))
+    return bool(match and match.group("verb").lower() == command
+                and names_path(match.group("source"), source, root)
+                and names_path(match.group("destination"), destination, root, sibling_of=source))
 
 
 def _safe(root: pathlib.Path, raw: str, *, role: str) -> pathlib.Path:
@@ -85,20 +102,22 @@ def _prepare(args, root: pathlib.Path):
         raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:output_path:" + destination.name)
     if not names_ordered_pair(stated, source, destination, root):
         raise RuntimeError("STATED_PATH_ROLES_MISMATCH")
+    overwrite = _authorizes_overwrite(stated, str(args.get("command") or "").strip(),
+                                       source, destination, root)
     if destination.exists():
-        if not _OVERWRITE.search(str(args.get("goal") or "")):
+        if not overwrite:
             raise RuntimeError("DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE")
         if destination.is_dir():
             raise RuntimeError("DESTINATION_IS_A_DIRECTORY")
-    return source, destination
+    return source, destination, overwrite
 
 
 def _copy(args, root: pathlib.Path) -> dict:
-    source, destination = _prepare(args, root)
+    source, destination, overwrite = _prepare(args, root)
     before = _digest(source)
     destination.parent.mkdir(parents=True, exist_ok=True)
     data = source.read_bytes()
-    if _OVERWRITE.search(str(args.get("goal") or "")):
+    if overwrite:
         destination.write_bytes(data)
     else:
         # The destination can appear after _prepare. Exclusive creation keeps
@@ -149,10 +168,10 @@ def _rename_without_replacing(source: pathlib.Path, destination: pathlib.Path) -
 
 
 def _rename(args, root: pathlib.Path) -> dict:
-    source, destination = _prepare(args, root)
+    source, destination, overwrite = _prepare(args, root)
     before = _digest(source)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    if _OVERWRITE.search(str(args.get("goal") or "")):
+    if overwrite:
         source.rename(destination)
         after = _digest(destination)
     else:

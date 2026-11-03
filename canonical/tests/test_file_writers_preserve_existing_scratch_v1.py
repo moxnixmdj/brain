@@ -106,10 +106,12 @@ def test_existing_scratch_symlink_and_its_target_are_not_touched() -> None:
                 assert not dest.exists(), kind
 
 
-def _race_worker(kind: str) -> None:
+def _race_worker(kind: str, negated_overwrite: bool = False) -> None:
     SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=SCRATCH_ROOT) as world:
         src, dest, scratch, args, adapter = _setup(pathlib.Path(world), kind)
+        if negated_overwrite:
+            args["goal"] += " and do not overwrite it"
         events = []
 
         def race(event, event_args):
@@ -159,6 +161,13 @@ def test_file_ops_destination_created_during_publish_is_not_overwritten() -> Non
         assert result.returncode == 0, (kind, result.stdout, result.stderr)
 
 
+def test_negated_overwrite_does_not_overwrite_a_racing_destination() -> None:
+    for kind in ("copy", "rename"):
+        result = subprocess.run([sys.executable, "-B", __file__, "--race-negated", kind],
+                                capture_output=True, text=True, check=False)
+        assert result.returncode == 0, (kind, result.stdout, result.stderr)
+
+
 def test_copy_or_rename_cannot_overwrite_a_hard_link_to_the_source() -> None:
     SCRATCH_ROOT.mkdir(parents=True, exist_ok=True)
     for kind in ("copy", "rename"):
@@ -192,7 +201,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3 and sys.argv[1] == "--race":
-        _race_worker(sys.argv[2])
+    if len(sys.argv) == 3 and sys.argv[1] in ("--race", "--race-negated"):
+        _race_worker(sys.argv[2], negated_overwrite=(sys.argv[1] == "--race-negated"))
     else:
         raise SystemExit(main())
