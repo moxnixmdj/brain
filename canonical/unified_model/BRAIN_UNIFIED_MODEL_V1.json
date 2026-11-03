@@ -21789,7 +21789,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_archive_tar.py",
-    "source_sha256": "5560334efdbc13acc6ebe2490f96a50c8f985a8da4227113f5ae3cad713c8eed",
+    "source_sha256": "19f5315c42eeb8aa753941d517946c15c2368c87500077ec77b0e3fe8a14adb7",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -21819,7 +21819,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-TAR-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "7db9c29b99ce50f416fe7020f838f03661b94e1cea20ef51304227111116c985",
+    "evidence_sha256": "2231798b1dc111ab0116080000d97800b5b990a3d1791ba58608daa1f9fa0e42",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -21863,7 +21863,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_ops.py",
-    "source_sha256": "60e6726af91a59a803e1ebe0d146a53d62902f98a45fd6769aca89180bebbda2",
+    "source_sha256": "bae807664fc7b7d91fcbcb47f4ab883a4323593ef66c9839fc2c92f09fb9570d",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -21889,7 +21889,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-BACKUP-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "2dcab77c975403e34f4128772fd8a653f4a959b9c956a359d1c3a4d6f19769f6",
+    "evidence_sha256": "6da207fd04f1050c5dd9ac853ebd5ecb2b0792063a6ec56690ca8fdce705f43d",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -21931,7 +21931,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_compress.py",
-    "source_sha256": "8091e264f2bc114fa0d4212e8ba3a6fc2caad4ac2a1b44f46032de9a975ffb21",
+    "source_sha256": "3c78c5ef7c372a5f5ebddcdfb4b5ea9c87c5d5bbffa80ae3364de06d3afd0dd0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -21958,7 +21958,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COMPRESS-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "3bcffe3d4a2c60422d5501f25c32e806f7e91d6f136d1d6bd984b6c774fb9856",
+    "evidence_sha256": "d25eb2246c7a77e52b54dca6ec60e6af9dc4a1b5695e5be5c9d7a5d2546616a5",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22069,7 +22069,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_ops.py",
-    "source_sha256": "60e6726af91a59a803e1ebe0d146a53d62902f98a45fd6769aca89180bebbda2",
+    "source_sha256": "bae807664fc7b7d91fcbcb47f4ab883a4323593ef66c9839fc2c92f09fb9570d",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22095,7 +22095,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COPY-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "a85cf02d1d55f91fbf4d443f7c8fca8d1dcc602e39371412d8cb49a0424791c3",
+    "evidence_sha256": "789fb32835410f42c0820640a5a0f23ec0a648532c0a58013f204c499c3b7a14",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22344,7 +22344,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_edit.py",
-    "source_sha256": "61cefed65f81f0f85a0ea1a926cd8d01faf32ace6e358973a8c4627e0ba98582",
+    "source_sha256": "ef3b7d669ecb17dff66f5f7d82b5663fae81aa5fca4fc35df14ddc772611fdf2",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22373,7 +22373,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-APPEND-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "ece6f34051bcb1f3c31351100f41c0582487649a417459ba2600bbedb4b7f547",
+    "evidence_sha256": "390f485351242a8cc8eeeaeb2c7d6ac28a817fb824edc4db367290bdd3e62985",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22486,7 +22486,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_ops.py",
-    "source_sha256": "60e6726af91a59a803e1ebe0d146a53d62902f98a45fd6769aca89180bebbda2",
+    "source_sha256": "bae807664fc7b7d91fcbcb47f4ab883a4323593ef66c9839fc2c92f09fb9570d",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22512,7 +22512,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-RENAME-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "dcddb4ca23852c008fe073460503b4914db59c2a6571ccb9a9b1f2e0cf649bac",
+    "evidence_sha256": "9ce6ffdf286df863a65d5c9a261f8bcbe2a6b01bae6e7ba5fcfc7e1c70f3b5fb",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -22754,7 +22754,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/file_edit.py",
-    "source_sha256": "61cefed65f81f0f85a0ea1a926cd8d01faf32ace6e358973a8c4627e0ba98582",
+    "source_sha256": "ef3b7d669ecb17dff66f5f7d82b5663fae81aa5fca4fc35df14ddc772611fdf2",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22782,7 +22782,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-UPPERCASE-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "e42b7140a6644318e2f04cf496e191fc4faf1dd87bc234c277c54221b3343acf",
+    "evidence_sha256": "ef636dfcb398cd0ed40cec40fc5ad5a6a28a6c61fbd91c50f51fe0168cb2dda1",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -32061,12 +32061,12 @@
   "routing_tokens": 2423,
   "skills": 18,
   "source_index_entry_points": 439,
-  "source_index_modules": 1926
+  "source_index_modules": 1927
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fba43274fc914db8da0b35426bbb880ac6d972d0654654b569f781f851dcc32c"
+  "value": "922c2e1014b94ed577d4706f8d5a63360de386d9c2619ae3f084e8531960f02f"
  },
  "engines": [
   {
@@ -32751,7 +32751,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "5560334efdbc13acc6ebe2490f96a50c8f985a8da4227113f5ae3cad713c8eed"
+    "sha256": "19f5315c42eeb8aa753941d517946c15c2368c87500077ec77b0e3fe8a14adb7"
    },
    "canonical/runtime/bound_capabilities/file_command_view.py": {
     "defaulted_keys": {
@@ -32765,13 +32765,13 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "8091e264f2bc114fa0d4212e8ba3a6fc2caad4ac2a1b44f46032de9a975ffb21"
+    "sha256": "3c78c5ef7c372a5f5ebddcdfb4b5ea9c87c5d5bbffa80ae3364de06d3afd0dd0"
    },
    "canonical/runtime/bound_capabilities/file_edit.py": {
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "61cefed65f81f0f85a0ea1a926cd8d01faf32ace6e358973a8c4627e0ba98582"
+    "sha256": "ef3b7d669ecb17dff66f5f7d82b5663fae81aa5fca4fc35df14ddc772611fdf2"
    },
    "canonical/runtime/bound_capabilities/file_line_count.py": {
     "defaulted_keys": {},
@@ -32783,7 +32783,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "60e6726af91a59a803e1ebe0d146a53d62902f98a45fd6769aca89180bebbda2"
+    "sha256": "bae807664fc7b7d91fcbcb47f4ab883a4323593ef66c9839fc2c92f09fb9570d"
    },
    "canonical/runtime/bound_capabilities/file_stat.py": {
     "defaulted_keys": {},
@@ -65771,7 +65771,7 @@
   "included_source_count": 1080,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b624c61d66fd5c374a606645fec7adeda46eae990655af2cff7a4aa205ab65f0"
+  "source_tree_digest": "67245bc5652fc5e6829c078c645f41d320eecadb9a77ef4a1a6eb24e3be85b5a"
  },
  "research_index": [
   {
@@ -230928,6 +230928,34 @@
     "source-candidate": 1,
     "suffix_pattern": 1,
     "verify": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/bound_capabilities/stated_file_path.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bound_capabilities/stated_file_path.py",
+   "sha256": "feccfa9e337e27e4a56761f85690c568b2fa1a8ee5fd50b8b01371c5cd8262eb",
+   "summary": "Conservative path-token matching for destructive file operations.",
+   "symbol_count": 2,
+   "symbols": [
+    "names_ordered_pair",
+    "names_path"
+   ],
+   "terms": {
+    "conservative": 1,
+    "destructive": 1,
+    "file": 2,
+    "matching": 1,
+    "names_ordered_pair": 1,
+    "names_path": 1,
+    "operations": 1,
+    "path": 1,
+    "path-token": 1,
+    "stated": 1
    }
   },
   {

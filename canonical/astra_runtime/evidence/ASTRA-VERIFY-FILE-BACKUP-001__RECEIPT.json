@@ -1,6 +1,6 @@
 {
  "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
- "adapter_sha256": "60e6726af91a59a803e1ebe0d146a53d62902f98a45fd6769aca89180bebbda2",
+ "adapter_sha256": "bae807664fc7b7d91fcbcb47f4ab883a4323593ef66c9839fc2c92f09fb9570d",
  "capability_id": "file.backup.v1",
  "checks": [
   {
@@ -54,6 +54,6 @@
  "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.backup.v1",
  "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
  "status": "COMPLETE",
- "verified_at": "2026-11-03T11:35:14Z",
+ "verified_at": "2026-11-03T14:42:47Z",
  "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
 }

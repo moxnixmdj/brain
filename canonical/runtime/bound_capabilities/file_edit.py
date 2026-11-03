@@ -35,6 +35,8 @@ read, and `before_sha256` / `after_sha256` are both recomputed from disk.
 """
 from __future__ import annotations
 
+from canonical.runtime.bound_capabilities.stated_file_path import names_path
+
 import hashlib
 import os
 import pathlib
@@ -86,7 +88,13 @@ def _source(args, root: pathlib.Path) -> tuple[pathlib.Path, bytes, str]:
     if path.stat().st_size > _MAX_BYTES:
         raise RuntimeError("FILE_TOO_LARGE")
     stated = str(args.get("goal") or "")
-    if path.name not in stated and path.relative_to(root).as_posix() not in stated:
+    path_statement = stated
+    if (str(args.get("command") or "").strip().lower() == "append_line"
+            and not _NOT_AN_APPEND.search(stated)):
+        line_match = _STATED_TEXT.search(stated)
+        if line_match is not None:
+            path_statement = stated[:line_match.start()] + " " + stated[line_match.end():]
+    if not names_path(path_statement, path, root):
         raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:" + path.name)
     data = path.read_bytes()
     try:

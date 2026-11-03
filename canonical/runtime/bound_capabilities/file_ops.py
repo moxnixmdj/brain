@@ -33,6 +33,8 @@ root can be written.
 """
 from __future__ import annotations
 
+from canonical.runtime.bound_capabilities.stated_file_path import names_ordered_pair, names_path
+
 import ctypes
 import errno
 import hashlib
@@ -77,10 +79,12 @@ def _prepare(args, root: pathlib.Path):
     # line of defence is the sentence itself: the source's name and the
     # destination's name must both appear in it.
     stated = str(args.get("goal") or "")
-    for role, target in (("path", source), ("output_path", destination)):
-        name = target.name
-        if not name or (name not in stated and target.as_posix() not in stated):
-            raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:" + role + ":" + name)
+    if not names_path(stated, source, root):
+        raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:path:" + source.name)
+    if not names_path(stated, destination, root, sibling_of=source):
+        raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:output_path:" + destination.name)
+    if not names_ordered_pair(stated, source, destination, root):
+        raise RuntimeError("STATED_PATH_ROLES_MISMATCH")
     if destination.exists():
         if not _OVERWRITE.search(str(args.get("goal") or "")):
             raise RuntimeError("DESTINATION_EXISTS_AND_THE_SENTENCE_DID_NOT_ASK_TO_OVERWRITE")
@@ -188,7 +192,7 @@ def _backup(args, root: pathlib.Path) -> dict:
     if not source.is_file():
         raise RuntimeError("PATH_NOT_A_REGULAR_FILE")
     stated = str(args.get("goal") or "")
-    if source.name not in stated and source.relative_to(root).as_posix() not in stated:
+    if not names_path(stated, source, root):
         raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:path:" + source.name)
     destination = source.with_name(source.name + ".bak")
     if destination.exists():

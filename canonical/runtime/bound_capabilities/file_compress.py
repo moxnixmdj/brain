@@ -30,6 +30,8 @@ gone -- the answer states the consequence rather than leaving it to be found.
 """
 from __future__ import annotations
 
+from canonical.runtime.bound_capabilities.stated_file_path import names_path
+
 import gzip
 import hashlib
 import os
@@ -56,7 +58,7 @@ def run(args, root):
     if not source.is_file():
         raise RuntimeError("PATH_NOT_A_REGULAR_FILE")
     stated = str(args.get("goal") or "")
-    if source.name not in stated and source.relative_to(root).as_posix() not in stated:
+    if not names_path(stated, source, root):
         raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:" + source.name)
     if source.stat().st_size > _MAX_BYTES:
         raise RuntimeError("FILE_TOO_LARGE")

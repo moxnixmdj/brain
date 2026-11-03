@@ -38,6 +38,8 @@ are produced with the standard library's `tarfile` and `gzip`.
 """
 from __future__ import annotations
 
+from canonical.runtime.bound_capabilities.stated_file_path import names_ordered_pair, names_path
+
 import gzip
 import hashlib
 import io
@@ -107,11 +109,13 @@ def run(args, root):
     stated = str(args.get("goal") or "")
     source_rel = source.relative_to(root).as_posix()
     destination_rel = destination.relative_to(root).as_posix()
-    if source.name not in stated and source_rel not in stated:
+    if not names_path(stated, source, root):
         raise RuntimeError("PATH_NOT_STATED_IN_THE_SENTENCE:" + source.name)
-    if destination.name not in stated and destination_rel not in stated:
+    if not names_path(stated, destination, root, sibling_of=source):
         raise RuntimeError("DESTINATION_NOT_STATED_IN_THE_SENTENCE:" + destination.name)
 
+    if not names_ordered_pair(stated, source, destination, root):
+        raise RuntimeError("STATED_PATH_ROLES_MISMATCH")
     if not source.is_file():
         raise RuntimeError("PATH_NOT_A_REGULAR_FILE:" + source_rel)
     if source.stat().st_size > _MAX_BYTES:
