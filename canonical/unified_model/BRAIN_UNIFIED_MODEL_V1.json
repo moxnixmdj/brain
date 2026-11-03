@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6644,
+  "research_index_records": 6645,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "14915d2879dda1867e3b72fc328f46c52ba88250b5bd1a66ffe6f535bad35aa0"
+  "value": "065c419cba0b37561618d791b18c38101a27e57492793fa849e21d3bfbcf435a"
  },
  "engines": [
   {
@@ -213835,6 +213835,51 @@
    }
   },
   {
+   "action_id": "FIRST_PRINCIPLES_NON_STATIC_CREATURE_ARCHITECTURE_20261103_V1",
+   "capability": false,
+   "date": "2026-11-03",
+   "id": "research:canonical/action_intents/FIRST_PRINCIPLES_NON_STATIC_CREATURE_ARCHITECTURE_20261103_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FIRST_PRINCIPLES_NON_STATIC_CREATURE_ARCHITECTURE_20261103_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "545d9b8776f4176ba0482e72138d9ed2aa9bdcc24ea7d1ff1c21455030045948",
+   "status": "",
+   "terms": {
+    "10-feature": 1,
+    "20261103": 1,
+    "5-gate": 1,
+    "5-pattern": 1,
+    "50": 1,
+    "5x": 1,
+    "600b": 1,
+    "6604": 1,
+    "73f773d1": 1,
+    "abstraction": 1,
+    "accumulation": 1,
+    "adds": 1,
+    "admission": 1,
+    "alpha_hat": 1,
+    "anti-unification": 1,
+    "architecture": 1,
+    "ast": 2,
+    "backtracking": 1,
+    "belief": 1,
+    "brain_model_callable": 1,
+    "broken": 1,
+    "compile": 2,
+    "creature.run_endogenous_awake_cycle": 2,
+    "exec": 2,
+    "failure": 2,
+    "first_principles_non_static_creature_architecture_20261103_v1": 2,
+    "sovereignzerollmplanner": 2,
+    "static": 2,
+    "string": 2,
+    "synthesis": 2,
+    "test": 2,
+    "via": 2
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-10-09",
@@ -230829,7 +230874,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "260084d8c8b9518c3f4140dc986a96cab99ea6c57509a56a25b3d367e11ea999",
+   "sha256": "7de8bebffd0a46f0984eaafb07a62befef9f956277703f7e6700b03b1a9ede7f",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -239137,7 +239182,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "f6484b175a379e1f4af37a24e5264636a70523b0752465f2fd92283a02bcc1e3",
+   "sha256": "9500ff1cd45f9a86c83549a89733c34eb4466183e645b9d5b26a83b9a8beb075",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 14,
    "symbols": [
@@ -285585,13 +285630,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_observational_program_synthesizer_v1.py",
-   "sha256": "e9c67431a31620fcde9dd34fdf1abca7cabd509f524745bc8efe8abf2c4563c2",
+   "sha256": "27e42c2c15b0d2715dbab39f511f6d5bd6f4fcef6a961bc0e953afc2e3980aaa",
    "summary": "Deterministic Program Synthesis & Multi-Module Package Builder.",
-   "symbol_count": 6,
+   "symbol_count": 7,
    "symbols": [
     "_eval_compiled",
     "_freeze_val",
     "_materialize_concept_helpers",
+    "_synthesize_hors_algorithmic_body",
     "architect_multi_module_package",
     "extract_io_examples_from_test_source",
     "synthesize_python_function_body"
@@ -285610,6 +285656,7 @@
     "program": 2,
     "swe": 1,
     "synthesis": 1,
+    "synthesize_hors_algorithmic_body": 1,
     "synthesize_python_function_body": 1,
     "synthesizer": 1,
     "v1": 1
