@@ -3090,6 +3090,34 @@ def verify(
                 return _unresolved("UNCONSUMED_STEP_THE_SENTENCE_DID_NOT_ASK_FOR",
                                    capability_id=cid)
 
+        # --- the directory the sentence names must be the one the action read ---
+        # `source.candidates.enumerate.stdlib` carries
+        # `action_template.args.search_root = "canonical/runtime"` as a LITERAL, so the
+        # directory the sentence states is never a placeholder and the binder has
+        # nothing to bind.  Measured on 73f773d: the sentence
+        #   "Find the function in the python source root <X> that is never executed,
+        #    and write its name to <Y>"
+        # enumerated 400 files under `canonical/runtime`, never touched `<X>`, never
+        # created `<Y>`, and returned
+        # PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.  With `<X>`
+        # absent `world_binding_v1` refuses it; with `<X>` present -- the ordinary case,
+        # and the one that sets the constant's value -- the constant simply won, because
+        # the only check on the root was "is it a directory".  The per-step
+        # re-inspection cannot catch it either: it re-hashes candidates against the root
+        # the action used, which is self-consistent and never compared to the sentence.
+        # So the comparison happens here, against the sentence, once for the whole plan.
+        from canonical.runtime import goal_compiler as _gc
+        from canonical.runtime import stated_root_is_the_bound_root_v1 as _stated_root
+        try:
+            _directories = _gc._repo_paths(goal, root)
+        except Exception:  # noqa: BLE001 - an unreadable sentence names no directory
+            _directories = ()
+        _unread = _stated_root.refusal(goal, rows, _directories)
+        if _unread is not None:
+            return _unresolved(_stated_root.REFUSAL,
+                               stated_roots_not_read=_unread["stated_roots_not_read"],
+                               roots_actually_read=_unread["roots_actually_read"])
+
         # --- every path must be real, every declared digest must match -----
         for row in rows:
             cid = row["args"].get("capability_id")

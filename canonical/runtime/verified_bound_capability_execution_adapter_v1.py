@@ -145,7 +145,33 @@ def _load_registry() -> tuple[bytes, Mapping[str, Any], Mapping[str, Any]]:
     caps = dict(doc.get("capabilities") or {})
     if snap.is_file() and target == REGISTRY_PATH:
         sdoc = json.loads(snap.read_text(encoding="utf-8"))
-        caps.update(sdoc.get("capabilities") or {})
+        # A PROJECTION MAY ADD OR UPDATE A ROW; IT MAY NEVER DELETE ONE.  That is the
+        # rule `live_integrated_brain_v1` states for this same file, and a whole-row
+        # `update()` broke it at FIELD level: the snapshot carries 12 rows whose
+        # `verification` is null, and 6 of those ids are also canonical rows whose
+        # `verification` is a real, independently-verified mission with a receipt on
+        # disk.  Merging the row wholesale replaced the evidence with the null, so the
+        # gate below refused six capabilities it had just been handed proof for:
+        #     python.source.dead_code.v1            -> BOUND_CAPABILITY_VERIFICATION_MISSING
+        #     python.source.complexity.v1           -> BOUND_CAPABILITY_VERIFICATION_MISSING
+        #     python.source.definition_count.v1     -> BOUND_CAPABILITY_VERIFICATION_MISSING
+        #     python.source.test_adequacy.v1        -> BOUND_CAPABILITY_VERIFICATION_MISSING
+        #     python.refactor.inline_helper.v1      -> BOUND_CAPABILITY_VERIFICATION_MISSING
+        #     python.vcs.merge_conflict.resolve.v1  -> BOUND_CAPABILITY_VERIFICATION_MISSING
+        # Measured: the same six are admitted by this module when the snapshot merge is
+        # skipped, and refused when it is not, so the null is the whole cause.  The
+        # rule is therefore applied at field level: the snapshot still wins every key
+        # it actually states, but a key it leaves null cannot delete a value the
+        # canonical row carries.  A snapshot that states a DIFFERENT non-null value
+        # still wins -- that is an update, not a deletion, and 0 rows do so today.
+        for cid, snap_entry in (sdoc.get("capabilities") or {}).items():
+            canon_entry = caps.get(cid)
+            if isinstance(canon_entry, Mapping) and isinstance(snap_entry, Mapping):
+                overlay = {k: v for k, v in snap_entry.items()
+                           if not (v is None and canon_entry.get(k) is not None)}
+                caps[cid] = {**canon_entry, **overlay}
+            else:
+                caps[cid] = snap_entry
     if not isinstance(caps, Mapping) or not caps:
         raise BoundExecutionError("BOUND_CAPABILITY_REGISTRY_CAPABILITIES_INVALID")
     doc["capabilities"] = caps
