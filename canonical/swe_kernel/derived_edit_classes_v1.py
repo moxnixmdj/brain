@@ -121,8 +121,50 @@ class DerivedEditClasses:
         return closure - self._observed
 
     def all_pairs(self) -> list[tuple[str, str]]:
-        """Observed first (performed, therefore most likely), then inferred."""
-        return sorted(self._observed) + sorted(self.inferred())
+        """Every usable edit, each LEFT-HAND TOKEN in turn, ordered by origin then confidence.
+
+        Grouping by left token keeps a proposal limit from being spent on tokens the failing line
+        does not contain, and within a token it ranks performed edits above inferred ones, and
+        one-hop inferences above longer chains. Nothing here decides correctness; it only decides
+        which plausible edit is offered first.
+
+        Correction to an earlier note of mine: I claimed this ordering explained why `- -> *` fired
+        while `* -> -` did not. It does not, and I was wrong. `* -> -` was never inferred at all --
+        the observed edges were `* -> +`, `+ -> *`, `- -> +`, and from `*` the only reachable node is
+        `+` (plus `*` itself, which is excluded as a self-loop). The closure was right; my reading of
+        it was not.
+        """
+        observed = self.observed()
+        inferred = self.inferred()
+        by_left: dict[str, list[tuple[int, str, str]]] = {}
+        for a, b in observed:
+            by_left.setdefault(a, []).append((0, b, "observed"))
+        for a, b in inferred:
+            by_left.setdefault(a, []).append((1 + self._hops(a, b), b, "inferred"))
+        out: list[tuple[str, str]] = []
+        for a in sorted(by_left):
+            for _rank, b, _origin in sorted(by_left[a]):
+                out.append((a, b))
+        return out
+
+    def _hops(self, start: str, target: str) -> int:
+        """Shortest chain length from `start` to `target`, or a large number if unreachable."""
+        edges: dict[str, set[str]] = {}
+        for a, b in self._observed:
+            edges.setdefault(a, set()).add(b)
+        frontier, seen, depth = [start], {start}, 0
+        while frontier:
+            depth += 1
+            nxt: list[str] = []
+            for node in frontier:
+                for cand in edges.get(node, ()):
+                    if cand == target:
+                        return depth
+                    if cand not in seen:
+                        seen.add(cand)
+                        nxt.append(cand)
+            frontier = nxt
+        return 99
 
     # -- proposal ---------------------------------------------------------------------------
     def propose(self, source_text: str, limit: int = 48) -> list[str]:
