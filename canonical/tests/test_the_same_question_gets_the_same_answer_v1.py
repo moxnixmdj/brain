@@ -242,3 +242,12 @@ def test_an_instruction_to_change_the_tree_is_not_answered_as_a_question(goal, t
     root = _tree(tmp_path, **{"data.py": "x\n"})
     out = A.run(goal=goal, root=root)
     assert out.get("answer") is None, out
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield
