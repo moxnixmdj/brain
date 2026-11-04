@@ -1091,7 +1091,18 @@ while True:
             for rd in rel_dirs:
                 (s_dir / rd).mkdir(parents=True, exist_ok=True)
             for rf in rel_files:
-                os.symlink(f'/input/{batch_id}/{rf}', s_dir / rf)
+                # Hard-link, not symlink, and write a real directory path. Measured 2026-11-05: a
+                # test that does `pathlib.Path(__file__).resolve().parents[1]` had that symlink
+                # resolved straight back to /input, so it imported the ORIGINAL module and every
+                # candidate was invisible -- the screen then scored candidates by the world's
+                # behaviour instead of their own, in both directions (a correct fix read as FAILED,
+                # a wrong one read as PASSED). `resolve()` cannot escape a hard link.
+                _src_f = pathlib.Path(f'/input/{batch_id}/{rf}')
+                _dst_f = s_dir / rf
+                try:
+                    os.link(_src_f, _dst_f)
+                except OSError:
+                    shutil.copy2(_src_f, _dst_f)
             slot_dirs.append(s_dir)
             slot_tmp_dirs.append(t_dir)
 
@@ -1163,11 +1174,12 @@ while True:
                                 inst_tree = _BrainAssertCounter().visit(tree_tp)
                                 ast.fix_missing_locations(inst_tree)
                                 code_tp = compile(inst_tree, str(tfp), 'exec')
-                                mod = types.ModuleType(mname)
+                                mod = types.ModuleType(tfp.stem)
                                 mod.__file__ = str(tfp)
                                 mod.__package__ = ''
                                 assert_box = [0]
                                 mod.__dict__['__brain_asserts_ran__'] = assert_box
+                                sys.modules[tfp.stem] = mod
                                 sys.modules[mname] = mod
                                 exec(code_tp, mod.__dict__)
                                 suite = unittest.defaultTestLoader.loadTestsFromModule(mod)
