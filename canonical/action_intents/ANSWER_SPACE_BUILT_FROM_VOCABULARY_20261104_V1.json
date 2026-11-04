@@ -63,7 +63,27 @@
   },
   "measured_effect": "DECLARING_ONE_OPERATOR_AS_DATA_YIELDS_17_NEW_EXPRESSIONS_AND_7_NEW_SHAPES_EVERY_ONE_CONTAINING_IT__REMOVAL_RESTORES_THE_EXACT_COUNT__99_TESTS_PASS__SWEEP_UNCHANGED__12_OF_12_THROUGH_THE_FRONT_DOOR",
   "load_bearing_primary": {
-    "interpretation": "Claims no general capability. Claims that the number of answerable questions is now a function of the declared operator vocabulary rather than of the number of sentences in the source, and that this is MEASURED by counting expressions, not asserted."
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__WHAT_IS_MEASURED_IS_THAT_DECLARING_AN_OPERATOR_AS_DATA_ADDS_EVERY_COMPOSITION_CONTAINING_IT_WITH_NO_SENTENCE_WRITTEN_AND_THAT_REMOVING_IT_RESTORES_THE_PREVIOUS_COUNT_EXACTLY",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ]
   },
   "prior_work_reused": "The choice rules -- a word is spent once; filter on full accounting then fewest operators; ties go to the operator the question named; 'per' is a filter not a rank -- are the incumbent search's, kept rather than re-derived. The existing search still runs first and answers everything it always answered.",
   "recursive_obs": {
