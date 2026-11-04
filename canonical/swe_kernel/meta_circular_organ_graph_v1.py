@@ -1288,194 +1288,6 @@ def _eval_expr(expr_src: str, names: Sequence[str], args: tuple[Any, ...], helpe
         return False, None
 
 
-def _observational_bottom_up(
-    examples: Sequence[tuple[tuple[Any, ...], Any]],
-    *,
-    max_weight: int = 3,
-    max_bank: int = 96,
-) -> list[tuple[str, str]]:
-    """Bottom-up observational-equivalence enumeration over a primitive combinator basis."""
-    first_in, first_out = examples[0]
-    arity = len(first_in)
-    names = _arg_names(arity)
-    inputs = [ex[0] for ex in examples]
-    target = [ex[1] for ex in examples]
-    seen_sig: dict[tuple[Any, ...], str] = {}
-    by_weight: dict[int, list[str]] = {1: []}
-    hits: list[tuple[str, str]] = []
-
-    def _sig_of(expr: str) -> tuple[Any, ...] | None:
-        outs: list[Any] = []
-        for args in inputs:
-            ok, val = _eval_expr(expr, names, args)
-            if not ok:
-                return None
-            outs.append(val)
-        return tuple(repr(v) if isinstance(v, (list, dict, set)) else v for v in outs)
-
-    def _register(weight: int, expr: str, label: str) -> None:
-        if len(seen_sig) >= max_bank:
-            return
-        sig = _sig_of(expr)
-        if sig is None or sig in seen_sig:
-            return
-        seen_sig[sig] = expr
-        by_weight.setdefault(weight, []).append(expr)
-        if all(_outputs_match(got, exp) for got, exp in zip(sig, target)):
-            hits.append((label, expr))
-
-    # Weight-1: projections, harvested constants (includes the copy-42 Occam trap)
-    for i, nm in enumerate(names):
-        _register(1, nm, f"proj_{i}")
-    for c in _harvest_numeric_constants(examples)[:24]:
-        try:
-            _register(1, repr(c), f"const_{type(c).__name__}")
-        except Exception:
-            continue
-
-    unaries = (
-        ("neg", "-({0})"),
-        ("abs", "abs({0})"),
-        ("len", "len({0})"),
-        ("sum", "sum({0})"),
-        ("min", "min({0})"),
-        ("max", "max({0})"),
-        ("sorted", "sorted({0})"),
-        ("rev", "list(reversed({0})) if not isinstance({0}, str) else {0}[::-1]"),
-        ("strip", "{0}.strip() if isinstance({0}, str) else {0}"),
-        ("lower", "{0}.lower() if isinstance({0}, str) else {0}"),
-        ("sq", "({0} * {0})"),
-        ("prod", "_prod({0}) if isinstance({0}, (list, tuple)) else {0}"),
-    )
-    binops = ("+", "-", "*", "/", "//", "%")
-
-    for w in range(2, max_weight + 1):
-        prev = list(by_weight.get(w - 1, []))
-        for expr in prev[:32]:
-            ok0, sample0 = _eval_expr(expr, names, inputs[0])
-            for uname, tmpl in unaries:
-                if uname in ("strip", "lower") and not isinstance(sample0, str):
-                    continue
-                if uname in ("len", "sum", "min", "max", "sorted", "rev", "prod") and not isinstance(sample0, (str, list, tuple, set, dict)):
-                    continue
-                if uname in ("neg", "abs", "sq") and (isinstance(sample0, bool) or not isinstance(sample0, (int, float))):
-                    continue
-                if not ok0:
-                    continue
-                _register(w, tmpl.format(expr), f"u_{uname}_w{w}")
-                if len(seen_sig) >= max_bank:
-                    return hits
-        # Binary combinations of cheaper terms
-        cheap = list(by_weight.get(1, [])) + list(by_weight.get(max(1, w - 2), []))
-        lefts = prev[:12]
-        rights = cheap[:12]
-        for e1 in lefts:
-            for e2 in rights:
-                if e1 == e2:
-                    continue
-                for op in binops:
-                    _register(w, f"({e1} {op} {e2})", f"bin_{op}_w{w}")
-                    if len(seen_sig) >= max_bank:
-                        return hits
-                _register(w, f"max({e1}, {e2})", f"max_w{w}")
-                _register(w, f"min({e1}, {e2})", f"min_w{w}")
-        # Percent combinators parameterized by harvested scale constants (not a frozen 100)
-        scales = [c for c in _harvest_numeric_constants(examples)[:24] if isinstance(c, (int, float)) and not isinstance(c, bool) and abs(float(c)) >= 2]
-        if 100 not in scales and 100.0 not in scales:
-            scales.append(100.0)
-        if arity >= 2:
-            a, b = names[0], names[1]
-            for sc in scales[:4]:
-                scs = _pretty_number(float(sc))
-                _register(w, f"({a} * ({scs} - {b}) / {scs})", f"discount_{scs}")
-                _register(w, f"({a} * ({scs} + {b}) / {scs})", f"markup_{scs}")
-            if isinstance(first_in[0], (list, tuple)):
-                _register(w, f"(sum({a}) * {b})", "sum_scale")
-                _register(w, f"(sum({a}) + {b})", "sum_plus")
-                _register(w, f"sum(z for z in {a} if z > {b})", "filter_gt_sum")
-                for sc in scales[:2]:
-                    scs = _pretty_number(float(sc))
-                    _register(w, f"(sum({a}) * ({scs} - {b}) / {scs})", f"sum_discount_{scs}")
-    return hits
-
-
-def _stun_piecewise(
-    examples: Sequence[tuple[tuple[Any, ...], Any]],
-) -> list[tuple[str, str]]:
-    """STUN: unify two partial branch terms under a synthesized atomic predicate."""
-    if len(examples) < 2:
-        return []
-    names = _arg_names(len(examples[0][0]))
-    first_in = examples[0][0]
-    predicates: list[tuple[str, str]] = []
-    if all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in first_in):
-        for i, nm in enumerate(names):
-            predicates.append((f"{nm} > 0", f"pred_gt0_{i}"))
-            predicates.append((f"{nm} < 0", f"pred_lt0_{i}"))
-            predicates.append((f"{nm} == 0", f"pred_eq0_{i}"))
-        if len(names) >= 2:
-            predicates.append((f"{names[0]} > {names[1]}", "pred_gt"))
-            predicates.append((f"{names[0]} >= {names[1]}", "pred_ge"))
-            predicates.append((f"{names[0]} == {names[1]}", "pred_eq"))
-    out: list[tuple[str, str]] = []
-    for pred, pname in predicates:
-        left_ex = []
-        right_ex = []
-        ok_split = True
-        for inp, y in examples:
-            ok, flag = _eval_expr(pred, names, inp)
-            if not ok:
-                ok_split = False
-                break
-            (left_ex if flag else right_ex).append((inp, y))
-        if not ok_split or not left_ex or not right_ex:
-            continue
-        def _fit_branch(sub_ex: Sequence[tuple[tuple[Any, ...], Any]]) -> str | None:
-            aff = _solve_multilinear(sub_ex)
-            if aff is not None:
-                return aff
-            sub_names = _arg_names(len(sub_ex[0][0]))
-            primitives = list(sub_names)
-            if len(sub_names) >= 2:
-                a, b = sub_names[0], sub_names[1]
-                primitives.extend(
-                    [
-                        f"({a} * {b})",
-                        f"({a} + {b})",
-                        f"({a} - {b})",
-                        f"({b} - {a})",
-                        f"max({a}, {b})",
-                        f"min({a}, {b})",
-                    ]
-                )
-            for expr in primitives:
-                good = True
-                for inp, y in sub_ex:
-                    ok, got = _eval_expr(expr, sub_names, inp)
-                    if not ok or not _outputs_match(got, y):
-                        good = False
-                        break
-                if good:
-                    return expr
-            hits = _observational_bottom_up(sub_ex, max_weight=3, max_bank=96)
-            return hits[0][1] if hits else None
-
-        left_expr = _fit_branch(left_ex)
-        right_expr = _fit_branch(right_ex)
-        if left_expr is None or right_expr is None:
-            continue
-        expr = f"({left_expr} if {pred} else {right_expr})"
-        # verify
-        good = True
-        for inp, y in examples:
-            ok, got = _eval_expr(expr, names, inp)
-            if not ok or not _outputs_match(got, y):
-                good = False
-                break
-        if good:
-            out.append((f"stun_{pname}", expr))
-    return out
-
 
 def _inline_operator_organs(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -1802,9 +1614,19 @@ def derive_semantic_inspector_organ(
             for i, _ in enumerate(num_rows[0][:-1]):
                 synthesized_expr = synthesized_expr.replace(f"x{i}", f"vals[{i}]")
         if synthesized_expr is None:
-            hits = _observational_bottom_up(io_examples, max_weight=3, max_bank=64)
-            if hits:
-                synthesized_expr = hits[0][1]
+            try:
+                from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+                    synthesize_python_function_body,
+                )
+
+                names = _arg_names(len(io_examples[0][0]))
+                body = synthesize_python_function_body(
+                    names, io_examples, max_weight=3, max_bank_size=64
+                )
+            except Exception:
+                body = None
+            if isinstance(body, str) and "return " in body:
+                synthesized_expr = body.rsplit("return ", 1)[-1].strip()
                 for i, _ in enumerate(num_rows[0][:-1]):
                     synthesized_expr = synthesized_expr.replace(f"x{i}", f"vals[{i}]")
         if synthesized_expr is not None:
