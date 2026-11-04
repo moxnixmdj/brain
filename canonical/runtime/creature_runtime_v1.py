@@ -2141,18 +2141,29 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
         _shutil.rmtree(td, ignore_errors=True)
 
 
-def _perturb(value: Any) -> Any:
-    """Move a value onto input the test never showed, keeping its shape."""
+def _perturb(value: Any, index: int = 0, round_no: int = 0) -> Any:
+    """Move a value onto input the test never showed, keeping its shape.
+
+    MEASURED 2026-11-05 -- this function was rejecting correct repairs. It used to add a UNIFORM +7 to
+    every numeric argument, so both arguments moved by the same amount and every function of the form
+    `a <op> b` that depends only on the *difference* was invariant: `a - b`, `a // b`, `a % b` all
+    produced the same output at `(9, 4)` and `(16, 11)`. The probe then reported
+    `OUTPUT_IGNORES_INPUTS` and threw the repair away. It was not a conservative gate, it was a wrong
+    one, and it under-counted honest repairs everywhere it ran.
+
+    The offsets now depend on the ARGUMENT POSITION and on which perturbation round this is, so the
+    difference between arguments always changes and a difference-based function must move.
+    """
     if isinstance(value, bool):
         return not value
     if isinstance(value, int):
-        return value + 7
+        return value + (3 + 5 * index + 7 * round_no)
     if isinstance(value, float):
-        return value + 7.5
+        return value + (1.5 + 2.5 * index + 3.5 * round_no)
     if isinstance(value, str):
-        return value + "z" if len(value) > 1 else value * 3
+        return value + chr(ord("z") - index - round_no) if len(value) > 1 else value * (3 + index)
     if isinstance(value, (list, tuple)):
-        _moved = [_perturb(v) for v in value]
+        _moved = [_perturb(v, i, round_no) for i, v in enumerate(value)]
         return type(value)(_moved + [value[-1] if value else 0]) if value else type(value)([1])
     return value
 
@@ -2254,8 +2265,8 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
         # the same thing to the probe: an expression to execute against the repaired code.
         return eval(f"{func_src}({', '.join(repr(v) for v in values)})", ns)  # noqa: S307
 
-    args_a = tuple(_perturb(a) for a in args)
-    args_b = tuple(_perturb(a) for a in args_a)
+    args_a = tuple(_perturb(a, i, 0) for i, a in enumerate(args))
+    args_b = tuple(_perturb(a, i, 1) for i, a in enumerate(args_a))
     try:
         produced = _call_with(args)
         out_a = _call_with(args_a)

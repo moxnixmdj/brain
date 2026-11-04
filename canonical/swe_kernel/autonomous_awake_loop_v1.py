@@ -493,6 +493,12 @@ class AwakeAgencyDaemon:
             (_store_p.parent / "learned_edit_habits.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_habits_{ws_hash}.json")
         )
+        # Interpretations live beside habits, and for the same reason: a creature that keeps its
+        # memories keeps its understanding, and one given a fresh store starts genuinely naive.
+        self.interpretations_path = (
+            (_store_p.parent / "interpretations.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_interp_{ws_hash}.json")
+        )
         if r3_state_path is not None:
             self.r3_state_path = pathlib.Path(r3_state_path).resolve()
         elif journal_dir is not None:
@@ -1171,6 +1177,15 @@ class AwakeAgencyDaemon:
                 from canonical.swe_kernel.learned_edit_habits_v1 import live_habits
 
                 _habits = live_habits(self.habits_path)
+                # INTERPRETIVE REPAIR. Habits record which edits worked; this records what the
+                # creature's own measurements MEAN. Given a row of evidence -- arguments (7, 2),
+                # produced 3, owed 3.5 -- it asks which operator in the language would have produced
+                # the owed value, and proposes that. Unlike a habit it needs no prior success, so it is
+                # the first producer in this file that can act on a cold creature; and unlike a habit it
+                # can never propose a constant, because a constant is not a function of the arguments.
+                from canonical.swe_kernel.interpretive_repair_v1 import live_interpretations
+
+                _interp = live_interpretations(self.interpretations_path)
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
                 # Syntax repairs exist because a file that does not parse makes every other reading
@@ -1179,8 +1194,13 @@ class AwakeAgencyDaemon:
                 # repair: a candidate that only parses is still screened by the owed test.
                 from canonical.swe_kernel.syntax_repair_v1 import propose_syntax_repairs
 
+                # Learn from THIS failure before proposing: the evidence is in hand, and a mechanism
+                # that only ever learns after a success cannot help with the failure in front of it.
+                _interp.interpret(str(fail_out))
+
                 raw_cands = (
-                    _habits.propose(before_src, limit=8)
+                    _interp.propose(before_src, fail_out, limit=8)
+                    + _habits.propose(before_src, limit=8)
                     + propose_operator_family_swaps(before_src, max_candidates=24)
                     + propose_binding_repairs(before_src, fail_out, max_candidates=6)
                     + propose_signature_repairs(before_src, fail_out, max_candidates=6)
