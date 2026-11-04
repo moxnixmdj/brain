@@ -218,3 +218,226 @@ def test_a_composition_that_ignores_a_word_is_not_accepted(tmp_path):
     built = _build("how many digits are in the total of the amounts in sales.csv", root)
     assert built is not None
     assert "digit" in V.describe(built["node"])
+
+
+# ---------------------------------------------------------------------------
+# A TABLE IS A VALUE, SO GROUPING AND FILTERING COMPOSE.
+#
+# These questions needed a TYPE the algebra did not have. `TABLE` and `TEXTVEC` were
+# declared and NEVER PRODUCED, so "per region", "in north", "how many regions" had no
+# expression at all -- six of seven refused. Ten operators later they are expressions,
+# and the point is not the ten: it is that a grouped result IS a table, so `count`,
+# `cell`, `argmax_table` and `values_of` consume it without knowing grouping happened.
+#
+# Every expected value below is computed BY HAND from the fixture.
+# ---------------------------------------------------------------------------
+
+REPEATED = ("region,amount\nnorth,100\nsouth,150\nnorth,50\nwest,250\n")
+# north 150, south 150, west 250. `north` and `south` both total 150, so a filter that
+# matched EVERYTHING would return 550 for all three and be caught by `west`.
+assert 100 + 50 == 150 and 150 == 150 and 250 == 250 and 100 + 150 + 50 + 250 == 550
+
+
+def test_a_grouping_answers_a_per_group_question_with_every_group(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    out = A.run(goal="what is the total amount per region in sales.csv", root=root, iterations=8)
+    answer = out["answer"]
+    assert out["verification"]["verified"] is True, out["verification"]["reason"]
+    assert answer["answered"] is True, answer.get("unresolved_terms")
+    # 150, 150, 250 -- all three, in key order. NOT 3 (the number of groups) and NOT a
+    # single total: "per" asks for one answer PER group.
+    assert (answer["computation"] or {}).get("value") == "[150.0, 150.0, 250.0]"
+
+
+def test_the_number_of_groups_is_not_the_number_of_rows(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    four_rows_three_regions = {
+        "how many regions are in sales.csv": "3",
+        "how many rows are in sales.csv": "4",
+        "how many different regions are in sales.csv": "3",
+    }
+    for question, want in four_rows_three_regions.items():
+        assert _value(question, root) == want, question
+
+
+def test_a_filter_answers_about_part_of_the_file_not_all_of_it(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    # west is 250 and the whole file is 550: the two cannot be confused.
+    assert _value("what is the total amount in west in sales.csv", root) == "250"
+    # north is two rows: 100 + 50.
+    assert _value("what is the total amount in north in sales.csv", root) == "150"
+
+
+def test_a_question_naming_a_subset_is_not_answered_with_the_whole_file(tmp_path):
+    """"the amounts in west add up to" was answered 550 -- verified, and rendered.
+
+    The account checked the AGGREGATE WORD and never asked whether a word naming a
+    filter value had been applied, so an aggregate over every row passed as an answer
+    about one region. This is the assertion that the row set is part of the account.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    out = A.run(goal="what do the amounts in west in sales.csv add up to", root=root, iterations=8)
+    answer = out["answer"]
+    comp = answer.get("computation") or {}
+    assert str(comp.get("value")) != "550", "a subset question was answered with the whole file"
+    # It must be the right subset answer, or an honest refusal -- never 550.
+    if out["verification"]["verified"] and answer.get("answered"):
+        assert str(comp.get("value")) == "250"
+
+
+def test_the_same_group_question_gets_one_answer_in_many_wordings(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    variants = [
+        "what is the total amount in west in sales.csv",
+        "how much is the amount in west in sales.csv",
+        "sum the amounts in west in sales.csv",
+        "what do the amounts in west in sales.csv add up to",
+    ]
+    got = set()
+    for question in variants:
+        out = A.run(goal=question, root=root, iterations=8)
+        comp = (out["answer"].get("computation") or {})
+        if out["verification"]["verified"] and out["answer"].get("answered"):
+            got.add(str(comp.get("value")))
+    assert got == {"250"}, got
+
+
+def test_the_largest_group_is_found_by_value_not_by_position(tmp_path):
+    """west is largest (250) and north is smallest (150, tied with south at 150).
+
+    A positional shortcut returns the first or last group and looks right.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    assert _value("which region has the largest total amount in sales.csv", root) == "west"
+    # north and south tie at 150; `argmin` may return either, and must NOT return west.
+    smallest = _value("which region has the smallest total amount in sales.csv", root)
+    assert smallest in ("north", "south"), smallest
+
+
+# ---------------------------------------------------------------------------
+# VERIFICATION MUST BE ABLE TO FAIL.
+#
+# `verify()` re-ran `evaluate()` and compared. Same interpreter, same file, same order:
+# it proved DETERMINISM and was read as CORRECTNESS. Every wrong answer this algebra
+# produced passed it, because a wrong answer is perfectly reproducible. These tests
+# exist to keep it from becoming that again.
+# ---------------------------------------------------------------------------
+
+def test_verification_rejects_a_value_the_expression_does_not_produce(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    built = _build("what is the total amount per region in sales.csv", root)
+    assert V.verify("q", root, built) is True
+    corrupted = dict(built, value=[150.0, 150.0, 999.0])
+    assert V.verify("q", root, corrupted) is False
+
+
+def test_verification_catches_a_partition_that_does_not_add_up(tmp_path, monkeypatch):
+    """THE TEST THAT DISTINGUISHES THE TWO KINDS OF CHECK.
+
+    `groups` is made to silently drop the `north` rows -- a stale cache, a race in a
+    reducer, a typo. Evaluation is still FAITHFUL and DETERMINISTIC: re-running it
+    returns the same truncated grouping every time, so a re-run check passes. Only a
+    check that re-derives the whole from the ROWS WHERE THE EXPRESSION DID NOT LOOK can
+    see that the parts no longer partition the table. 400 != 550.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    built = _build("what is the total amount per region in sales.csv", root)
+    node, value = built["node"], built["value"]
+    assert V.verify("q", root, built) is True
+
+    real = V.evaluate
+    def lossy(n):
+        out = real(n)
+        if isinstance(out, dict) and "_body" in out and getattr(n, "op", "") == "groups":
+            out = dict(out)
+            out["_body"] = [row for row in out["_body"] if row[0] != "north"]
+        return out
+    monkeypatch.setattr(V, "evaluate", lossy)
+    truncated = V.evaluate(node)
+    assert truncated != value, "the fixture must actually change the grouping"
+    # Same expression, same interpreter, deterministic -- and WRONG.
+    assert V.evaluate(node) == truncated
+    assert V.verify("q", root, {"node": node, "value": truncated}) is False
+
+
+def test_a_distinct_count_is_pinned_to_the_distinct_set(tmp_path):
+    """`count(distinct(k))` must equal the size of the set it distinguishes.
+
+    This is the relationship the weak check could not state: the old verification
+    accepted 4 for "how many regions" because 4 reproduces.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    built = _build("how many different regions are in sales.csv", root)
+    assert V.verify("q", root, built) is True
+    assert V.verify("q", root, dict(built, value=4)) is False
+
+
+# ---------------------------------------------------------------------------
+# A TYPE DECLARATION AND THE VALUE MUST AGREE.
+#
+# `groups` declared its aggregate column numeric and stored `str(_fmt(...))`. Everything
+# downstream that read it as a number -- a comparison, a second aggregate, `values_of` --
+# silently received a different type than the node promised. The formatting belongs at
+# the EDGE, where the answer is rendered, not in the value that operators consume.
+# ---------------------------------------------------------------------------
+
+def test_a_grouped_table_holds_numbers_not_formatted_text(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    built = _build("what is the total amount per region in sales.csv", root)
+    # Walk to the `groups` node actually used, rather than trusting a label.
+    grouped = built["node"].args[0]
+    assert grouped.op == "groups", built["node"].label
+    table = V.evaluate(grouped)
+    header, body = table["_header"], table["_body"]
+    column = header.index("sum(amount)")
+    cells = [row[column] for row in body]
+    assert all(isinstance(c, (int, float)) and not isinstance(c, bool) for c in cells), cells
+    # and the totals are the hand-computed ones
+    assert sorted(cells) == [150.0, 150.0, 250.0], cells
+
+
+def test_the_declared_type_of_a_vector_is_the_type_its_values_have(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    grouped = _build("what is the total amount per region in sales.csv", root)["node"].args[0]
+    numeric = V._n("values_of", (grouped, "sum(amount)"), V.NUMVEC, set(), "v")
+    assert V.evaluate(numeric) == [150.0, 150.0, 250.0]
+    assert all(isinstance(v, float) for v in V.evaluate(numeric))
+    # the same column read as TEXT is the same values, rendered -- the type chooses.
+    textual = V._n("values_of", (grouped, "sum(amount)"), V.TEXTVEC, set(), "v")
+    assert V.evaluate(textual) == ["150", "150", "250"]
+
+
+def test_a_subset_question_is_never_answered_by_a_whole_file_aggregate(tmp_path):
+    """The primitive path must refuse it even when the composer does not run.
+
+    The composer currently answers "the amounts in west add up to" correctly, so this
+    guard is DEFENCE IN DEPTH rather than the only line -- which is exactly why it needs
+    its own test: a future change that routes the question back to the primitives would
+    otherwise silently reinstate the 550.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    ents = T.entities("what is the total amount in west in sales.csv", root)
+    words = T._subject_words("what is the total amount in west in sales.csv", ents)
+    assert T._names_a_subset(words, {w.lower() for w in words}, ents) is True
+    # and a question that names NO cell is not a subset question
+    ents_all = T.entities("what is the total amount in sales.csv", root)
+    words_all = T._subject_words("what is the total amount in sales.csv", ents_all)
+    assert T._names_a_subset(words_all, {w.lower() for w in words_all}, ents_all) is False
+
+
+def test_per_group_asks_for_one_answer_per_group_not_a_single_count(tmp_path):
+    """"how many rows per region" is [2, 1, 1], not 4 and not 3.
+
+    4 is the number of rows; 3 is the number of groups. Both are honest numbers to
+    OTHER questions, and both were returned for this one. A count cannot answer a
+    "per" question, because the answer has one part per group.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    out = A.run(goal="how many rows per region in sales.csv", root=root, iterations=8)
+    answer = out["answer"]
+    comp = answer.get("computation") or {}
+    value = str(comp.get("value"))
+    assert value not in ("4", "3"), f"a single count answered a per-group question: {value}"
+    if out["verification"]["verified"] and answer.get("answered"):
+        # north has 2 rows (100, 50); south has 1 (150); west has 1 (250).
+        assert value == "[2.0, 1.0, 1.0]", value

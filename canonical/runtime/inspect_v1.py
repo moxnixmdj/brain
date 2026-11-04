@@ -474,7 +474,7 @@ def _needs_composition(question: str, trial: dict) -> bool:
     return bool(words - accounted)
 
 
-def _composed_computation(built: dict, V) -> dict:
+def _composed_computation(built: dict, V, question: str = "") -> dict:
     """Present a built expression the way every other computation is presented."""
     node = built["node"]
     value = built["value"]
@@ -819,11 +819,24 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
             if built is not None and _V.verify(question, root, built):
                 trial = dict(trial)
                 trial["composed"] = built
-                trial["computation"] = _composed_computation(built, _V)
-                # The composed expression says which words it consumed; without this the
-                # door judges a correct answer against a vocabulary built from its NAME.
-                trial["accounted"] = sorted(set(trial.get("accounted") or [])
-                                            | set(built.get("accounted") or []))
+                trial["computation"] = _composed_computation(built, _V, question)
+                # THE EXPRESSION SPEAKS IN ITS OWN WORDS; THE QUESTION SPOKE IN ITS.
+                #
+                # `built["accounted"]` holds normalised vocabulary (`region`, `amount`),
+                # and the unresolved-terms pass compares against the question's RAW words
+                # (`regions`, `amounts`). Unioning the two sets left `regions` unresolved
+                # on the answer that had just counted them, so the door refused THREE
+                # correct answers -- how many regions, how many names, and the totals per
+                # region -- with SUBJECT_ABSENT_FROM_NAMED_FILE. The expression has to
+                # report which of the user's own words it explained.
+                accounted_words = set(trial.get("accounted") or [])
+                _norm = getattr(_V, "_norm", None)
+                for word in (trial.get("words") or []):
+                    if _norm is None:
+                        break
+                    if _norm(word) in {_norm(a) for a in (built.get("accounted") or [])}:
+                        accounted_words.add(word)
+                trial["accounted"] = sorted(accounted_words)
                 trial["words"] = trial.get("words") or []
                 comp = trial["computation"]
     except Exception as exc:

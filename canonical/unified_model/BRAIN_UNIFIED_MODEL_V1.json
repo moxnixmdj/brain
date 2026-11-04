@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 293,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6683,
+  "research_index_records": 6684,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "31b36e84ce35ea9d367d09e0301d1ced63868064d93d521d33004468a9863ea3"
+  "value": "dcd58e5f8312f5f076b92b5f470bc207c0131302eee02ffd407268f10edbc5a2"
  },
  "engines": [
   {
@@ -215025,6 +215025,29 @@
    }
   },
   {
+   "action_id": "A_TABLE_IS_A_VALUE_AND_VERIFICATION_CAN_FAIL_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/A_TABLE_IS_A_VALUE_AND_VERIFICATION_CAN_FAIL_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_TABLE_IS_A_VALUE_AND_VERIFICATION_CAN_FAIL_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a42acbfe0627bd33e7952e2d0409f5c6df10684ea1b292cd2c40d8dcb7794665",
+   "status": "",
+   "terms": {
+    "a_table_is_a_value_and_verification_can_fail_v1": 1,
+    "answers_composed_from_typed_primitives_with_verification_that_can_fail": 1,
+    "compose_typed_table_operators_and_partition_invariant_verification": 1,
+    "fail": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "table": 1,
+    "table_and_textvec_declared_with_zero_producing_operators__six_of_seven_grouping_and_filter_questions_refused__and_verify_compared_evaluate_against_itself_so_every_wrong_answer_passed": 1,
+    "v1": 1,
+    "value": 1,
+    "verification": 1
+   }
+  },
+  {
    "action_id": "A_TEST_ARGV_TOKEN_IS_AN_ARGUMENT_NOT_A_PATH_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T00:00:00Z",
@@ -259382,7 +259405,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "64640a9398ebe440622a6e19537955d7cf385c7d6549d1d0e4ee055f198efa52",
+   "sha256": "cdaab39cb1ec96ade1e41ab1a7e913a322bff4d33721404f8eed98f5e30027c4",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
    "symbol_count": 20,
    "symbols": [
@@ -265692,9 +265715,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/operation_trial_v1.py",
-   "sha256": "7db0d5fe3b9dd56d18856a12c6732c0c12e7e23198378ea92a6fd71217e3cdf5",
+   "sha256": "b0aca981b329ad066b645c2c624f41dff5a94720d0590b4a7114c020c7c24459",
    "summary": "A question is an attempt, not a classification.",
-   "symbol_count": 24,
+   "symbol_count": 25,
    "symbols": [
     "Entity",
     "_accounts_for",
@@ -265703,6 +265726,7 @@
     "_is_text",
     "_lines_of",
     "_match_column",
+    "_names_a_subset",
     "_numeric",
     "_op_aggregate",
     "_op_catalog",
@@ -265718,8 +265742,7 @@
     "accounted_words",
     "entities",
     "render",
-    "run",
-    "verify"
+    "run"
    ],
    "terms": {
     "accounted_words": 1,
@@ -265733,6 +265756,7 @@
     "is_text": 1,
     "lines_of": 1,
     "match_column": 1,
+    "names_a_subset": 1,
     "not": 1,
     "numeric": 1,
     "op_aggregate": 1,
@@ -265745,7 +265769,6 @@
     "operation": 1,
     "question": 1,
     "read": 1,
-    "render": 1,
     "run": 1,
     "subject_words": 1,
     "table": 1,
@@ -298105,9 +298128,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/value_algebra_v1.py",
-   "sha256": "3f04f89b3f5b36aca444a9e49d81f56fc29f67cd3a13e5fd5a0e047a35d92311",
+   "sha256": "4f58f86bf6eb6fff6bf236a359a50b8b55df20b8f18ce5140ea66279ec70ad38",
    "summary": "Answers are BUILT OUT OF typed pieces, not looked up in a menu.",
-   "symbol_count": 27,
+   "symbol_count": 36,
    "symbols": [
     "EvalError",
     "Lexicon",
@@ -298120,19 +298143,19 @@
     "_columns",
     "_digits",
     "_double",
+    "_eq_text",
+    "_fmt",
     "_half",
+    "_holds_invariants",
     "_length",
+    "_literal_values",
     "_n",
     "_negate",
     "_norm",
+    "_numeric_candidates",
     "_numeric_columns",
     "_read_text",
-    "_row_leaf",
-    "_rows_of",
-    "_structural_words",
-    "_to_float",
-    "compose",
-    "describe"
+    "_row_leaf"
    ],
    "terms": {
     "aggregate": 1,
@@ -298144,11 +298167,12 @@
     "column_at": 1,
     "column_leaf": 1,
     "columns": 1,
-    "compose": 1,
     "digits": 1,
     "double": 1,
+    "eq_text": 1,
     "evalerror": 1,
     "evaluate": 1,
+    "fmt": 1,
     "half": 1,
     "length": 1,
     "lexicon": 1,
@@ -298164,7 +298188,6 @@
     "read_text": 1,
     "row_leaf": 1,
     "rows_of": 1,
-    "structural_words": 1,
     "to_float": 1,
     "typed": 1,
     "up": 1,

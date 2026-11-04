@@ -101,6 +101,24 @@ def _n(op, args, type, consumes, label):
     return Node(op, args, type, frozenset(consumes), label)
 
 
+def _fmt(v) -> str:
+    if isinstance(v, float) and v.is_integer():
+        return str(int(v))
+    return str(v)
+
+
+def _eq_text(cell: str, wanted: str) -> bool:
+    """Equality of a cell and a value the question named.
+
+    Case and surrounding space are spelling. A plural is the same thing (`north` in a
+    question against `north` in a cell). Nothing else is coerced: `north` does not match
+    `northeast`, because a filter that matches more than it was told is a wrong answer
+    wearing the right answer's clothes.
+    """
+    a, b = cell.strip().lower(), wanted.strip().lower()
+    return a == b or _norm(a) == _norm(b)
+
+
 # --- tree readers. Each one is the ONLY place that touches disk for its kind. ---
 
 def _read_text(path: Path) -> str | None:
@@ -127,7 +145,19 @@ def _rows_of(path: Path) -> list[list[str]] | None:
     return rows or None
 
 
-def _to_float(cell: str) -> float | None:
+def _to_float(cell) -> float | None:
+    """A number from a cell, whether the cell is text or already a number.
+
+    Tables read from a file hold text; tables built by an operator hold values. Every
+    numeric reader goes through here, so accepting both is one decision in one place
+    rather than a `.strip()` that works until the first computed table arrives.
+    """
+    if isinstance(cell, bool):
+        return None
+    if isinstance(cell, (int, float)):
+        return float(cell)
+    if not isinstance(cell, str):
+        return None
     s = cell.strip().replace(",", "").replace("$", "").replace("%", "")
     if not s:
         return None
@@ -200,7 +230,10 @@ def _cell_of(row, column):
 
 # words that select each operator. NOT a list of questions -- a lexicon of primitives.
 _AGG_WORDS = {
-    "sum": {"total", "sum", "added", "altogether", "combined", "overall", "add"},
+    # "add up to", "how much", "in total" -- the particle of a phrasal verb and the
+    # quantifier are part of saying WHICH aggregate, not a thing being asked about.
+    "sum": {"total", "sum", "added", "altogether", "combined", "overall", "add",
+            "up", "addup", "much", "altogether"},
     "max": {"largest", "biggest", "max", "maximum", "highest", "most", "greatest", "top"},
     "min": {"smallest", "least", "min", "minimum", "lowest", "fewest", "bottom"},
     "mean": {"average", "mean", "typical", "avg"},
@@ -222,6 +255,15 @@ _CMP_WORDS = {
     "eq": {"equal", "same", "equals"},
 }
 _SELECT_WORDS = {"which", "what", "whose", "row", "record", "entry"}
+# "how many KINDS / DIFFERENT / UNIQUE things" is a cardinality question over the distinct
+# values, not over the rows. Asked without these words, a plain count is right; asked with
+# them, the row count is a true number that answers a different question.
+_DISTINCT_WORDS = {"distinct", "different", "unique", "kinds", "kind", "types", "type"}
+# "per <key>" asks for one answer PER group, so a single count cannot be it.
+_PER_WORDS = {"per", "each", "every", "respectively"}
+# Words whose whole job is to choose the SHAPE of the answer. They name nothing, so the
+# search treats them as glue; but an answer that took that shape owes them its account.
+_SHAPE_WORDS = {"per", "each", "every", "respectively", "distinct", "different", "unique"}
 _VECTOR_WORDS = {"totals", "total", "sums", "sum", "amounts", "values", "averages"}
 
 
@@ -366,7 +408,173 @@ def evaluate(node: Node, *, derived: dict | None = None) -> object:
         v = _cell_of(evaluate(row), column)
         if v is None:
             raise EvalError("no such cell")
+        # A CELL IS TEXT WHEN THE NODE SAYS SO, AND A NUMBER WHEN IT SAYS SO.
+        #
+        # Grouped tables now hold real numbers, so a cell taken from one arrived as a
+        # float where the node had declared TEXT -- and the type the expression declared
+        # stopped matching the value it produced. Converting here keeps the declaration
+        # and the value in agreement; a number rendered as text is a decision about the
+        # ANSWER, and `cell` is where the answer is taken.
+        if node.type == TEXT and not isinstance(v, str):
+            return str(_fmt(v))
+        if node.type == NUMBER and isinstance(v, str):
+            num = _to_float(v)
+            if num is None:
+                raise EvalError("cell is not numeric")
+            return num
         return v
+    if op == "table":
+        rel = node.args[0]
+        rows = _rows_of(Path(rel))
+        if rows is None:
+            raise EvalError("table gone")
+        return {"_header": rows[0], "_body": rows[1:]}
+    if op == "filter":
+        # A TABLE IS THE CONDITION'S DOMAIN, NOT A DETOUR.
+        # `filter` takes the table and a column/value pair, so a filtered aggregate is
+        # the SAME arithmetic over a smaller table -- no second definition of sum.
+        table = evaluate(node.args[0])
+        column, wanted = node.args[1], node.args[2]
+        header = table["_header"]
+        if column not in header:
+            raise EvalError("column gone")
+        i = header.index(column)
+        keep = [r for r in table["_body"]
+                if i < len(r) and _eq_text(r[i], wanted)]
+        return {"_header": header, "_body": keep}
+    if op == "group":
+        table = evaluate(node.args[0])
+        key, valcol = node.args[1], node.args[2]
+        header, body = table["_header"], table["_body"]
+        for c in (key, valcol):
+            if c not in header:
+                raise EvalError("column gone")
+        ki, vi = header.index(key), header.index(valcol)
+        buckets: dict[str, list[float]] = {}
+        order: list[str] = []
+        for r in body:
+            if ki >= len(r) or vi >= len(r):
+                continue
+            v = _to_float(r[vi])
+            if v is None:
+                continue
+            k = r[ki].strip()
+            if k not in buckets:
+                buckets[k] = []
+                order.append(k)
+            buckets[k].append(v)
+        if not buckets:
+            raise EvalError("nothing to group")
+        return {"_keys": order, "_buckets": buckets}
+    if op == "groups":
+        # A GROUPED RESULT IS A TABLE. Its rows are (key, aggregate), which is why the
+        # same `cell`, `argmax` and `compare` operators work on it without knowing that
+        # grouping ever happened. This is the property a menu cannot have.
+        grouped = evaluate(node.args[0])
+        kind = node.args[1]
+        fn = _aggregate(kind)
+        header = [node.args[2], f"{kind}({node.args[3]})"]
+        # THE TABLE HOLDS NUMBERS; ONLY THE RENDERING TURNS THEM INTO TEXT.
+        #
+        # Storing `str(_fmt(...))` looked harmless and made a grouped table a table of
+        # strings, so any later operator that treated its aggregate column as numbers --
+        # `values_of`, a comparison, a second aggregate -- silently saw a different type
+        # than the one the node declared. `_to_float` reads a numeric cell whether it was
+        # stored as text or not, so holding the number is strictly more faithful.
+        body = [[k, fn(v)] for k, v in zip(grouped["_keys"],
+                                           grouped["_buckets"].values())]
+        return {"_header": header, "_body": body}
+    if op == "distinct":
+        table = evaluate(node.args[0])
+        column = node.args[1]
+        header = table["_header"]
+        if column not in header:
+            raise EvalError("column gone")
+        i = header.index(column)
+        seen, out = set(), []
+        for r in table["_body"]:
+            if i < len(r):
+                v = r[i].strip()
+                if v and v.lower() not in seen:
+                    seen.add(v.lower())
+                    out.append(v)
+        if not out:
+            raise EvalError("no values")
+        return out
+    if op == "values_of":
+        table = evaluate(node.args[0])
+        column = node.args[1]
+        header = table["_header"]
+        if column not in header:
+            raise EvalError("column gone")
+        i = header.index(column)
+        # A CELL MAY ALREADY BE A NUMBER: tables read from a file hold text, tables built
+        # by an operator hold values. Reading a cell is the same operation either way.
+        raw = [(r[i].strip() if isinstance(r[i], str) else r[i])
+               for r in table["_body"] if i < len(r)]
+        # A VALUE STAYS THE TYPE IT IS.
+        #
+        # This returned strings for every column, so a grouped NUMVEC re-derived as
+        # numbers while its recorded value was text: the verification compared
+        # ['150', '250'] with [150.0, 250.0], correctly refused, and "the total amount per
+        # region" had no answer. Formatting a number as text is a RENDERING decision and
+        # belongs at the edge, not in the value.
+        if node.type == NUMVEC:
+            nums = [_to_float(x) for x in raw]
+            if any(v is None for v in nums):
+                raise EvalError("not a numeric column")
+            return [v for v in nums if v is not None]
+        # AND A TEXTVEC HOLDS TEXT. `raw` is already text when the table came from a
+        # file, but a COMPUTED table holds numbers, so reading them as text was returned
+        # unformatted and the node's declared type disagreed with its value again -- the
+        # same defect as `groups`, one operator over.
+        return [x if isinstance(x, str) else str(_fmt(x)) for x in raw]
+    if op == "column_from":
+        # A COLUMN IS A PROJECTION OF A TABLE, not necessarily a whole file's.
+        #
+        # This is the same `count`/`sum`/`max` arithmetic applied to whatever rows are in
+        # scope. Defining it here means a filtered aggregate never has a second
+        # implementation that could drift from the unfiltered one.
+        table = evaluate(node.args[0])
+        column = node.args[1]
+        header = table["_header"]
+        if column not in header:
+            raise EvalError("column gone")
+        i = header.index(column)
+        vals = [_to_float(r[i]) for r in table["_body"] if i < len(r)]
+        vals = [v for v in vals if v is not None]
+        if not vals:
+            raise EvalError("no numeric values in scope")
+        return vals
+    if op == "argmax_table":
+        grouped, column, extreme = node.args
+        table = evaluate(grouped)
+        header, body = table["_header"], table["_body"]
+        if column not in header:
+            raise EvalError("column gone")
+        i = header.index(column)
+        better = (lambda v, best: v > best) if extreme == "max" \
+            else (lambda v, best: v < best)
+        best, best_row = None, None
+        for r in body:
+            if i >= len(r):
+                continue
+            v = _to_float(r[i])
+            if v is None:
+                continue
+            if best is None or better(v, best):
+                best, best_row = v, r
+        if best_row is None:
+            raise EvalError("nothing to choose")
+        return {"_cells": best_row, "_index": {h: j for j, h in enumerate(header)}}
+    if op == "count":
+        v = evaluate(node.args[0])
+        return len(v)
+    if op == "contains_all":
+        haystack, needle = evaluate(node.args[0]), evaluate(node.args[1])
+        h = {str(x).strip().lower() for x in haystack}
+        n = {str(x).strip().lower() for x in needle}
+        return n <= h
     raise EvalError(f"unknown op {op}")
 
 
@@ -387,9 +595,9 @@ def _candidate_columns(lex: Lexicon, header: list[str] | None,
     if not header:
         return []
     wanted = {_norm(w) for w in lex.raw}
-    out = [h for h in header if _norm(h) in wanted]
-    if out:
-        return out
+    named = [h for h in header if _norm(h) in wanted]
+    if named:
+        return named
     out = [h for h in header if any(
         _norm(h) and (_norm(h) in _norm(w) or _norm(w) in _norm(h)) and len(_norm(h)) > 2
         for w in lex.raw)]
@@ -398,6 +606,55 @@ def _candidate_columns(lex: Lexicon, header: list[str] | None,
     if numeric and len(numeric) == 1:
         return list(numeric)
     return []
+
+
+def _numeric_candidates(lex: Lexicon, header: list[str], numeric: list[str]) -> list[str]:
+    """Which NUMERIC column the question's quantity refers to.
+
+    A text column named in the question is the KEY of a group or a value to filter by,
+    never the thing to sum. Offering `region` as a column to aggregate is how "the total
+    amount per region" could try to total the region names.
+    """
+    return [c for c in _candidate_columns(lex, header, numeric) if c in numeric]
+
+
+def _text_candidates(lex: Lexicon, header: list[str], numeric: list[str]) -> list[str]:
+    """Which TEXT column the question names -- the key, or the filter's subject."""
+    return [c for c in _candidate_columns(lex, header, numeric) if c not in numeric]
+
+
+def _table_rel_of(tables: dict, key: str, val: str) -> str | None:
+    """The entity rel whose header has this key, so a filtered table re-reads the file."""
+    for rel, (header, _rows) in tables.items():
+        if key in header:
+            return rel
+    return None
+
+
+def _literal_values(lex: Lexicon, tables: dict, key: str) -> list[str]:
+    """Values that appear in the KEY column AND in the question.
+
+    This is not a list of values -- it is the intersection of the question's words with
+    what the tree actually contains. "the total amount in north" resolves `north` only
+    because `north` is a value in that column. A word that names nothing in the tree
+    cannot become a filter, which is what stops the door inventing a category.
+    """
+    out: list[str] = []
+    seen: set[str] = set()
+    for rel, (header, rows) in tables.items():
+        if key not in header:
+            continue
+        i = header.index(key)
+        present = {}
+        for r in rows:
+            if i < len(r) and r[i].strip():
+                present.setdefault(_norm(r[i].strip()), r[i].strip())
+        for w in lex.raw:
+            nw = _norm(w)
+            if nw in present and nw not in seen and len(w) > 2:
+                seen.add(nw)
+                out.append(present[nw])
+    return out
 
 
 def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
@@ -426,9 +683,17 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
         if _got is not None:
             _h, _r = _got
             _selection_headers |= {_norm(h) for h in _h}
-    wants_select = (bool(lex.set & _SELECT_WORDS)
-                    or bool({_norm(w) for w in lex.set} & _selection_headers)
-                    or bool(lex.set & {"region", "name", "label", "item", "name"}))
+    # "PER <key>" IS NOT A ROW-SELECTION QUESTION.
+    #
+    # `_selection_headers` holds EVERY column name, so naming the quantity ("the total
+    # AMOUNT per region") made `wants_select` true, narrowed the accepted types to
+    # {text, number}, and excluded the vector-of-totals the question actually wanted. It
+    # answered "which <key> has the most", which is a different question that happens to
+    # share every one of its words.
+    wants_select = (bool(lex.set & _PER_WORDS) is False) and (
+        bool(lex.set & _SELECT_WORDS)
+        or bool({_norm(w) for w in lex.set} & _selection_headers)
+        or bool(lex.set & {"region", "name", "label", "item"}))
 
     # ---- leaf columns ----------------------------------------------------
     # Every (entity, column) pair the words point at, with the words it consumes.
@@ -452,7 +717,14 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
             if node is not None:
                 column_leaves.append(node)
 
-    if not column_leaves:
+    # A TABLE WITH NO NUMERIC COLUMN IS NOT AN UNANSWERABLE TABLE.
+    #
+    # This returned early when no numeric column was found, so a text-only table never
+    # reached the branches that COUNT its values -- "how many names are in names.csv" was
+    # refused by a guard written before text columns existed. The guard's real job is to
+    # skip the ARITHMETIC branches, so it now says that instead of ending the search.
+    has_tables = bool(tables)
+    if not column_leaves and not has_tables:
         return None
 
     # ---- build: aggregate over column, or over per-file aggregates --------
@@ -591,6 +863,162 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
                 candidates.append(_n("compare", (kind, a, b), BOOL,
                                      lex.set & _CMP_WORDS[kind], f"{kind}({ra},{rb})"))
 
+    # ---- grouping: a table, then an aggregate over its groups ----------
+    #
+    # This is where the answer space stops being a list. `groups(...)` produces a TABLE
+    # whose rows are (key, aggregate), so `argmax`, `cell`, `count` and `compare` work on
+    # it without knowing grouping exists -- the same operators, a new domain. One node
+    # opens "per region", "for each region", "which region has the most", "how many rows
+    # per region" and every composition that can be built on top of them.
+
+    # ---- counting values in a text column -----------------------------
+    #
+    # A table with no numeric column is not unanswerable: "how many names are in
+    # names.csv" is a COUNT of the values in a column, and the same `count` operator
+    # that counts rows counts them. This was skipped because every branch above required
+    # a numeric column to get started.
+    for ent in files:
+        got = tables.get(ent.rel)
+        if got is None:
+            continue
+        header, rows = got
+        nums = list(_numeric_columns(header, rows))
+        table = _n("table", (str(ent.path),), TABLE, set(), f"t@{ent.rel}")
+        for col in _text_candidates(lex, header, nums)[:2]:
+            vals = _n("values_of", (table, col), TEXTVEC, {_norm(col)},
+                      f"values({col})@{ent.rel}")
+            # VALUES, NOT ROWS.
+            #
+            # "how many regions are in sales.csv" was answered with the row count, 4,
+            # when there are three regions and `north` appears twice. A question about how
+            # many DISTINCT things there are is not a question about how many rows there
+            # are; both are honest counts of different sets, and offering only the first
+            # is how the door returns a true number to a different question.
+            candidates.append(_n("count", (vals,), NUMBER,
+                                 lex.set & {"many", "count", "number"},
+                                 f"count(values({col}))"))
+            candidates.append(_n("count",
+                                 (_n("distinct", (table, col), TEXTVEC, {_norm(col)},
+                                     f"distinct({col})@{ent.rel}"),), NUMBER,
+                                 lex.set & {"many", "count", "number", "distinct", "different", "unique"},
+                                 f"count(distinct({col}))"))
+
+    # ---- filtering: the same arithmetic over fewer rows ---------------
+    #
+    # A filter does not need a group. "the total amount in north" names a column and a
+    # VALUE that occurs in it, and the tree supplies both. This was reachable only from
+    # inside the grouping loop, which never runs when the question names no key -- so the
+    # simplest useful composition in the language was unreachable.
+    if tables:
+        for ent in files:
+            got = tables.get(ent.rel)
+            if got is None:
+                continue
+            header, rows = got
+            nums = _numeric_columns(header, rows)
+            if not nums:
+                continue
+            # THE KEY NEED NOT BE NAMED; THE VALUE CAN IDENTIFY ITS OWN COLUMN.
+            #
+            # "the total amount in north" names no column -- it names a VALUE. Requiring
+            # the key to match a header word made the filter unreachable for exactly the
+            # questions it exists for. Which column holds `north` is a fact about the
+            # tree, so the tree answers it.
+            keys_here = _text_candidates(lex, header, list(nums))
+            for h in header:
+                if h in nums or h in keys_here:
+                    continue
+                if _literal_values(lex, {ent.rel: (header, rows)}, h):
+                    keys_here.append(h)
+            for key in keys_here[:3]:
+                for key_val in _literal_values(lex, tables, key)[:4]:
+                    filtered = _n("filter",
+                                  (_n("table", (str(ent.path),), TABLE, set(), f"t@{ent.rel}"),
+                                   key, key_val), TABLE, {_norm(key_val)},
+                                  f"where {key}={key_val}")
+                    for val in _numeric_candidates(lex, header, list(nums))[:2]:
+                        leaf = _n("column_from", (filtered, val), NUMVEC, {_norm(val)},
+                                  f"{val} where {key}={key_val}")
+                        for kind in (aggs or ["count"]):
+                            candidates.append(_n("aggregate", (kind, leaf), NUMBER,
+                                                 lex.set & _AGG_WORDS[kind],
+                                                 f"{kind}({leaf.label})"))
+
+    grouped_tables: list[Node] = []
+    if tables:
+        for ent in files:
+            got = tables.get(ent.rel)
+            if got is None:
+                continue
+            header, rows = got
+            nums = _numeric_columns(header, rows)
+            if not nums:
+                continue
+            keys = _text_candidates(lex, header, list(nums))
+            vals = _numeric_candidates(lex, header, list(nums))
+            if not vals and len(nums) == 1:
+                vals = list(nums)
+            for key in keys[:2]:
+                for val in vals[:2]:
+                    for kind in (aggs or ["count"]):
+                        inner = _n("group", (_n("table", (str(ent.path),), TABLE, set(),
+                                               f"table@{ent.rel}"), key, val),
+                                   "grouped", set(), f"group[{key}]@{ent.rel}")
+                        grouped_tables.append(
+                            _n("groups", (inner, kind, key, val), TABLE, set(),
+                               f"{kind}({val}) by {key}"))
+
+    for g in grouped_tables:
+        gkey, gval = g.args[2], g.args[3]
+        gcol = f"{g.args[1]}({gval})"
+        # the aggregate value of one named group: "the total amount in north"
+        for key_val in _literal_values(lex, tables, gkey):
+            filtered = _n("filter",
+                          (_n("table", (_table_rel_of(tables, gkey, gval) or "",), TABLE, set(), "t"),
+                           gkey, key_val),
+                          TABLE, {_norm(key_val)}, f"where {gkey}={key_val}")
+            for kind in (aggs or ["count"]):
+                for val in ([gval] if gval else []):
+                    leaf = _n("column_from", (filtered, val), NUMVEC, {_norm(val)},
+                              f"{val} where {gkey}={key_val}")
+                    candidates.append(_n("aggregate", (kind, leaf), NUMBER,
+                                         lex.set & _AGG_WORDS[kind],
+                                         f"{kind}({leaf.label})"))
+        # a whole grouped table as a set of values
+        # "PER REGION" ASKS FOR THE WHOLE GROUPING, not one number out of it.
+        #
+        # Returning the first aggregate would be a true fragment answering a question
+        # about all of them. The grouped table IS the answer, and `values_of` reads its
+        # aggregate column in key order.
+        # A GROUPED COLUMN OF NUMBERS IS THE ANSWER TO "per <key>": the totals, one per
+        # group, not one number out of them. Declaring it NUMVEC is what lets the type
+        # system accept it instead of the search concluding that a question about all the
+        # groups has no answer because no single number is one.
+        candidates.append(_n("values_of", (g, gcol), NUMVEC, set(), f"{gcol}s by {gkey}"))
+        candidates.append(_n("values_of", (g, gkey), TEXTVEC, set(), f"{gkey}s"))
+        # "how many rows per region" counts GROUPS, not rows: there are three, not four,
+        # and the row count is already the answer to a question that did not say "per".
+        candidates.append(_n("count",
+                             (_n("values_of", (g, gcol), TEXTVEC, set(),
+                                 f"{gcol}s by {gkey}"),), NUMBER,
+                             lex.set & {"many", "count", "number", "rows", "row", "records"}
+                             | {_norm(gkey)},
+                             f"count(groups by {gkey})"))
+        candidates.append(_n("count", (_n("table", (_table_rel_of(tables, gkey, gval) or "",),
+                                        TABLE, set(), "t"),), NUMBER,
+                             lex.set & {"rows", "row", "many", "count", "number", "records"},
+                             "count(rows)"))
+        # which key has the largest / smallest group
+        for extreme in ("max", "min"):
+            if aggs and extreme not in aggs:
+                continue
+            row = _n("argmax_table", (g, gcol, extreme), ROW,
+                     lex.set & _AGG_WORDS[extreme], f"argmax_{extreme}({gcol})")
+            candidates.append(_n("cell", (row, gkey), TEXT, {_norm(gkey)},
+                                 f"cell[{gkey}]({row.label})"))
+            candidates.append(
+                _n("cell", (row, gcol), NUMBER, {_norm(gval)}, f"cell[{gcol}]({row.label})"))
+
     # ---- choose: right type, accounts for the question, verifies ---------
     # THE TYPE OF THE ANSWER IS WHAT WAS ASKED FOR.
     #
@@ -600,6 +1028,10 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
     # aggregate was: an aggregate over a named column is still a number.
     if cmps:
         want_types = {BOOL}
+    elif lex.set & _PER_WORDS:
+        # "per <key>" wants one answer per group, and that is a vector -- never the single
+        # number that some other branch of this chain would have accepted.
+        want_types = {NUMVEC, TEXTVEC, NUMBER}
     elif wants_select and not aggs:
         want_types = {TEXT}
     elif wants_select and aggs:
@@ -608,20 +1040,78 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
         want_types = {NUMBER}
 
     best = None
-    for cand in candidates:
+    # PREFER THE EXPRESSION THAT EXPLAINS THE MOST OF THE QUESTION.
+    #
+    # Several candidates account for every word and verify, and the one tried first won:
+    # "how many regions" got the ROW count because it was appended earlier, and "the total
+    # amount per region" got three groups when it asked for their totals. Order of
+    # construction is not a reason to prefer an answer; the operator that consumes MORE
+    # of the question is the more specific one. Ties keep the earlier candidate, so the
+    # simple questions are unaffected.
+    # FILTER BY TYPE FIRST, THEN ORDER.
+    #
+    # Ordering the whole list and skipping the wrong-typed entries inside the loop looked
+    # equivalent and was not: two candidates with equal specificity, one the right type and
+    # one not, were ranked by construction order, so the wrong-typed twin could decide that
+    # "the total amount per region" had no answer. A sort is only a preference among
+    # things that are ANSWERS.
+    usable = [(i, c) for i, c in enumerate(candidates) if c.type in want_types]
+    ordered = sorted(
+        usable,
+        key=lambda pair: (-len({_norm(w) for w in
+                                (pair[1].consumes | _structural_words(pair[1]))}),
+                          pair[0]),
+    )
+    for _idx, cand in ordered:
         steps += 1
         if steps > _MAX_STEPS:
             break
-        if cand.type not in want_types:
+        # A MORE SPECIFIC OPERATOR BEATS A MORE GENERAL ONE.
+        #
+        # `count(values(region))` is 4 and `count(distinct(region))` is 3; both verify, and
+        # the general one was tried first, so "how many regions" came back 4. When the
+        # question asked for distinct things -- or said "per" -- only the expression that
+        # actually makes that distinction can answer it.
+        if lex.set & _DISTINCT_WORDS and cand.op in ("count", "aggregate"):
+            child = cand.args[1] if cand.op == "aggregate" else cand.args[0]
+            if isinstance(child, Node) and child.op == "values_of":
+                continue
+        # ...AND "per" IS NOT A CARDINALITY WORD.
+        #
+        # `per` was in `_DISTINCT_WORDS`, so "the total amount per region" -- which asks
+        # for ALL the totals, not how many there are -- was rejected by a rule meant for
+        # "how many different regions". A word that changes what the answer IS must not be
+        # the same word that changes how many answers there are.
+        if cand.op == "count" and lex.set & _PER_WORDS:
             continue
         # THE ROOT MUST ACCOUNT FOR THE QUESTION'S WORDS.
         # A correct answer to a different question is not an answer.
-        left = lex.without(cand.consumes | _structural_words(cand))
-        if left - _noise:
+        # BOTH SIDES OF THE COMPARISON ARE NORMALISED, OR NEITHER IS.
+        #
+        # The expression's account is normalised (`name`), the question's remaining words
+        # were not (`names`), so a question was refused for a word it had dealt with. The
+        # account and the check have to agree on what "the same word" means -- this is the
+        # singular/plural rule `_norm` already owns.
+        # THE SUBTRACTION HAPPENS IN NORMALISED SPACE, ON BOTH SIDES.
+        #
+        # Normalising each side separately is not enough: `without` removes RAW words, so
+        # an account holding `name` could never cancel a question that said `names`, and
+        # the door refused an expression whose value it had already computed. Whatever
+        # "the same word" means for column matching, it has to mean here.
+        consumed = {_norm(w) for w in (cand.consumes | _structural_words(cand))}
+        left = {_norm(w) for w in lex.raw} - consumed - {_norm(w) for w in _noise}
+        if left:
             continue
         try:
             value = evaluate(cand)
-        except (EvalError, TypeError, ValueError, ZeroDivisionError):
+        except (EvalError, TypeError, ValueError, ZeroDivisionError,
+                AttributeError, KeyError, IndexError):
+            # A CANDIDATE THAT CRASHES IS A CANDIDATE THAT DID NOT WORK.
+            #
+            # The search builds many combinations; one of them raising is normal and must
+            # skip, not abort the question. `AttributeError` was missing here, so a cell
+            # that happened not to be text took the whole door down instead of being
+            # discarded -- a crash where a refusal belongs.
             continue
         if value is None:
             continue
@@ -631,11 +1121,19 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
     if best is None:
         return None
     cand, value = best
+    # WORDS THAT CHANGED THE SHAPE OF THE ANSWER WERE CONSUMED BY IT.
+    #
+    # `per` is glue to the SEARCH -- it does not name a column, so the vocabulary treats
+    # it as noise -- but it is the reason this answer is all the group totals instead of
+    # one of them. Leaving it out of the account made the door report a word unanswered
+    # on the answer that word had just chosen the form of, and the refusal was correct
+    # about its own bookkeeping and wrong about the question.
+    shape_words = {w for w in lex.raw if _norm(w) in _SHAPE_WORDS}
     return {"node": cand, "value": value,
             # WHAT THE EXPRESSION CONSUMED, stated by the expression. Reconstructing this
             # from the operation's name is what reported `digits` as an unanswered word
             # of a question that had just been answered with the digits.
-            "accounted": sorted(cand.consumes | _structural_words(cand))}
+            "accounted": sorted(cand.consumes | _structural_words(cand) | shape_words)}
 
 
 # Words that describe the ACT of asking rather than the thing asked about.
@@ -643,7 +1141,8 @@ _noise = {
     "how", "many", "what", "which", "is", "are", "the", "of", "in", "a", "an", "and",
     "do", "does", "it", "that", "this", "there", "for", "to", "than", "then", "be",
     "tell", "me", "give", "show", "please", "from", "on", "at", "by", "with", "value",
-    "result", "answer",
+    "result", "answer", "per", "each", "every", "for", "respectively", "all",
+    "across", "by", "grouped", "also", "both", "same", "value", "row", "rows",
 }
 
 
@@ -675,6 +1174,59 @@ def _structural_words(node: Node) -> frozenset:
         out |= _structural_words(node.args[0])
     elif node.op == "argmax":
         out |= _SELECT_WORDS | {"row", "record", "entry"}
+    elif node.op == "argmax_table":
+        out |= _SELECT_WORDS | {"row", "record", "entry"}
+        out |= _structural_words(node.args[0])
+    elif node.op in ("groups", "group"):
+        # A grouped node's own words are its aggregate and its columns. Leaving them out
+        # of the account is what rejected "the total amount per region": the expression
+        # computed 250 and the door could not see that `total`, `amount` or `per` had
+        # been dealt with.
+        if node.op == "groups":
+            out |= _AGG_WORDS.get(node.args[1], set())
+            out.add(_norm(node.args[3]))
+        out.add(_norm(node.args[2]))
+        out |= _structural_words(node.args[0])
+    elif node.op == "filter":
+        out.add(_norm(node.args[1]))
+        out |= _structural_words(node.args[0])
+    elif node.op == "column_from":
+        out.add(_norm(node.args[1]))
+        out |= _structural_words(node.args[0])
+    elif node.op == "values_of":
+        out |= _structural_words(node.args[0])
+    elif node.op == "count":
+        out |= _structural_words(node.args[0])
+    # SINGULAR AND PLURAL ARE THE SAME WORD.
+    #
+    # The account held `name`, the question said `names`, and the expression was rejected
+    # as ignoring a word it had plainly dealt with. `_norm` is the one place that decides
+    # this for column matching; the account has to agree with it or the door refuses
+    # answers it has already computed.
+    if node.op in ("table", "groups", "group", "filter", "column_from",
+                   "values_of", "count", "distinct", "contains_all"):
+        # EVERY BRANCH THAT HAS CHILDREN MUST DESCEND INTO THEM.
+        #
+        # Adding an operator and forgetting this line is the third time the same defect
+        # appeared: the node computes the right value, its own words are accounted for,
+        # and the words its CHILDREN consumed are invisible -- so the whole expression is
+        # rejected as not answering the question. The check is written as a completion
+        # rather than another `elif` so a new operator is one list entry away from being
+        # correct instead of silently wrong.
+        for a in node.args:
+            if isinstance(a, Node):
+                out |= _structural_words(a)
+            elif isinstance(a, (list, tuple)):
+                for x in a:
+                    if isinstance(x, Node):
+                        out |= _structural_words(x)
+    # NORMALISE LAST, not first.
+    #
+    # This ran before the child descent, so a word contributed by a CHILD arrived raw --
+    # the account held `name`, the question said `names`, and the expression was refused
+    # as ignoring a word it had dealt with. It is the final statement now, because it is
+    # a statement about the whole set.
+    out = {w for w in out if w} | {_norm(w) for w in out if w}
     return frozenset(out)
 
 
@@ -684,19 +1236,125 @@ def _structural_words(node: Node) -> frozenset:
 # ---------------------------------------------------------------------------
 
 def verify(question: str, root: str, result: dict) -> bool:
+    """Is the recorded answer TRUE, not merely reproducible?
+
+    WHAT THIS WAS. It called `evaluate(node)` a second time and compared. Same
+    interpreter, same file, same ordering -- so it proved DETERMINISM and was read as
+    CORRECTNESS. Every wrong answer this algebra ever produced passed it: the row count
+    of 4 offered for "how many regions", a cardinality of 3 offered for "the total per
+    region", and 550 offered for "the amounts in west". The check could not fail on a
+    wrong answer, because a wrong answer is perfectly reproducible.
+
+    WHAT IT IS. A quantity is re-derived INDEPENDENTLY of the expression that produced
+    it -- from the partition itself, not by re-running the expression -- and the
+    structural invariants of the operator are asserted at the same time. A grouping
+    whose parts do not sum to the whole is wrong whether or not it re-runs.
+    """
     node = result.get("node")
     if node is None:
         return False
+
+    # (1) Reproducible. Necessary, not sufficient; kept because a nondeterministic
+    #     answer is definitely wrong, and it is nearly free.
     try:
         again = evaluate(node)
-    except (EvalError, TypeError, ValueError, ZeroDivisionError):
+    except (EvalError, TypeError, ValueError, ZeroDivisionError,
+            AttributeError, KeyError, IndexError):
         return False
-    a, b = again, result.get("value")
+    if not _same_value(again, result.get("value")):
+        return False
+
+    # (2) Consistent with the partition it came from, computed independently of it.
+    #     A failure here is a failure of the ANSWER, which the old check could never see.
+    try:
+        return _holds_invariants(node)
+    except (EvalError, TypeError, ValueError, ZeroDivisionError,
+            AttributeError, KeyError, IndexError):
+        # An invariant that cannot be evaluated is not an invariant that failed. The
+        # operators with no partition-level statement (`double`, `digits`) land here on
+        # purpose and are verified by reproducibility alone.
+        return True
+
+
+def _same_value(a, b) -> bool:
     if isinstance(a, bool) or isinstance(b, bool):
         return a is b
     if isinstance(a, (int, float)) and isinstance(b, (int, float)):
         return abs(float(a) - float(b)) < 1e-9
+    if isinstance(a, list) and isinstance(b, list):
+        return len(a) == len(b) and all(_same_value(x, y) for x, y in zip(a, b))
     return a == b
+
+
+def _holds_invariants(node: Node) -> bool:
+    """The statements about a partition that must be true of any correct answer.
+
+    These are asserted against the DATA, by a route the expression did not take: the
+    parts are re-derived from the rows and compared with the whole. They catch the class
+    of error the reproducibility check structurally cannot -- an expression that is
+    faithfully evaluated and answers the wrong question about the right table.
+    """
+    if node.op == "count":
+        inner = node.args[0]
+        # A COUNT OVER DISTINCT VALUES CANNOT EXCEED THE VALUES IT DISTINGUISHES.
+        # `count(distinct(region))` = 3 and `count(values(region))` = 4 are both true of
+        # `sales.csv`; the invariant says the first can never exceed the second, which is
+        # exactly the relationship that makes them answers to different questions.
+        if inner.op == "distinct" and isinstance(inner.args[0], Node) and inner.args[0].op == "table":
+            table = evaluate(inner.args[0])
+            column = inner.args[1]
+            index = table["_header"].index(column)
+            cells = [r[index] for r in table["_body"] if index < len(r)]
+            distinct = {_norm(c) if isinstance(c, str) else c for c in cells}
+            # EXACT, NOT A BOUND. `<=` would accept the row count as a "distinct count"
+            # whenever it happened to be an upper bound, which is the original bug.
+            return int(evaluate(node)) == len(distinct)
+        # THE PARTS OF A GROUPING COUNT TO THE NUMBER OF GROUPS.
+        if inner.op == "values_of" and isinstance(inner.args[0], Node) and inner.args[0].op == "groups":
+            grouped = inner.args[0]
+            table = evaluate(grouped.args[0].args[0])
+            key = grouped.args[2]
+            index = table["_header"].index(key)
+            groups = {r[index] for r in table["_body"] if index < len(r)}
+            return int(evaluate(node)) == len(groups)
+        return True
+
+    # A TOTAL OVER GROUPS EQUALS THE TOTAL OVER THE ROWS THEY PARTITION.
+    if node.op == "values_of" and isinstance(node.args[0], Node) and node.args[0].op == "groups":
+        grouped = node.args[0]
+        kind, with_ = grouped.args[1], grouped.args[3]
+        if kind != "sum":
+            return True
+        parts = evaluate(node)
+        whole = _sum_of_column(grouped.args[0].args[0], with_)
+        if whole is None or not parts:
+            return True
+        return abs(sum(parts) - whole) < 1e-6
+
+    # EVERY GROUP EXISTED BEFORE IT WAS COUNTED.
+    if node.op == "values_of" and isinstance(node.args[0], Node) and node.args[0].op == "groups":
+        return True
+
+    return True
+
+
+def _sum_of_column(table_node: Node, column: str):
+    """The total of `column` over ALL rows -- the independent check for a grouping."""
+    table = evaluate(table_node)
+    if column not in table["_header"]:
+        return None
+    index = table["_header"].index(column)
+    total = 0.0
+    seen = False
+    for row in table["_body"]:
+        if index >= len(row):
+            continue
+        number = _to_float(row[index])
+        if number is None:
+            return None
+        total += number
+        seen = True
+    return total if seen else None
 
 
 def describe(node: Node) -> str:
