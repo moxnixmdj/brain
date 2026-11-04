@@ -729,6 +729,57 @@ def _computation_holds(comp: dict, root: str) -> bool:
     return False
 
 
+def _teachable(word: str, root: str) -> dict | None:
+    """If `word` is a word we could LEARN, say what would teach it. Never what it means.
+
+    THE DOOR USED TO SAY NOTHING. `what is the skew of amount` came back
+    PARTIALLY_GROUNDED with `skew` unresolved and `detail: None`: true, and useless. The
+    asker could not tell whether the word was a column it had not read, a typo, or an
+    operator the creature could acquire if shown two examples.
+
+    This is the second of those, and it is the only one the asker can act on. The question
+    is computed, not guessed -- `operator_acquisition_v1.next_example` partitions the
+    candidate set by the answer each would give and returns the demonstration whose
+    worst-case partition is smallest. Nothing here proposes a MEANING for the word; it
+    proposes a TEST.
+
+    Returns None when the word cannot be taught, so a question that is simply missing data
+    is not turned into a request for examples it does not want.
+    """
+    if not word or not word.isalpha() or len(word) < 2:
+        return None
+    try:
+        from canonical.runtime import operator_acquisition_v1 as _A
+        from canonical.runtime import value_algebra_v1 as _V
+    except Exception:
+        return None
+    # A word that already names a column in this tree is data, not an operator: teaching it
+    # would shadow the column and answer a different question.
+    try:
+        for path in sorted(Path(root).rglob("*.csv")):
+            head = path.read_text(errors="ignore").splitlines()[:1]
+            if head and word.lower() in [c.strip().lower() for c in head[0].split(",")]:
+                return None
+    except OSError:
+        pass
+    try:
+        if any(word.lower() in ws for ws in _V._AGG_WORDS.values()):
+            return None
+        standing = [r for r in _A.survey() if r.get("admitted")]
+        question = _A.next_example(standing)
+    except Exception:
+        return None
+    if question is None:
+        return None
+    return {
+        "word": word,
+        "probe": question["probe"],
+        "ask": (f"show what {word}({', '.join(str(x) for x in question['probe'])}) is, "
+                f"and it can be learned rather than guessed"),
+        "readings_standing": question["standing"],
+    }
+
+
 _RESTORED = False
 
 
@@ -1135,6 +1186,13 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         "all_grounded": bool(hits) and grounded == len(hits),
         "computation": comp,
         "unresolved_terms": unresolved,
+        # WHAT WOULD END THIS, IF ANYTHING WOULD.
+        #
+        # Only for words that could actually be learned. A refusal that carries no way out
+        # is a dead end; a refusal that carries the wrong way out is worse, so a word that
+        # names an existing column -- missing data rather than a missing operator -- gets
+        # nothing here.
+        "teachable": ([t for t in (_teachable(w, root) for w in unresolved) if t] or None),
         # WHAT WAS TRIED AND FAILED, not just what won.
         #
         # The trial keeps every attempt -- including the ones that did not re-check and
