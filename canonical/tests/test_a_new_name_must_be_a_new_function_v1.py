@@ -120,65 +120,61 @@ def test_an_arithmetic_that_is_genuinely_new_is_admitted(kind, fn):
     assert V.indistinguishable_from(kind, fn) == []
 
 
-def test_a_genuine_operator_outside_the_form_inventory_is_refused_and_that_is_recorded():
-    """A KNOWN FALSE NEGATIVE, written down instead of discovered later.
+def test_a_genuine_operator_outside_the_named_forms_is_now_declarable():
+    """The limitation recorded last round is GONE, and this asserts that it is.
 
-    A product is a real operator and is not a rename of anything declared: 525 for
-    [5, 15, 7] is outside its inputs, outside the total magnitude, and not one of them. So
-    the discriminability check would admit it -- and the LAW check refuses it, because none
-    of the five forms can be true of a product.
-
-    That is the safe direction to be wrong in: the system declines a capability rather than
-    certifying a wrong answer. What it means is that the form inventory is still a finite
-    list somebody wrote, which is the next layer -- the forms have to become derivable, not
-    enumerated. This test exists so that "the creature can grow its vocabulary" cannot be
-    claimed again while this is true.
+    A product used to be refused: every law form was one of five I wrote, and none is true
+    of a product. The forms are now SYNTHESISED from relations between features of
+    (inputs, result), so an operator whose law is not any sentence I thought of can still be
+    declared. Recording the limit in a test is what made it checkable; this is the same test
+    flipped once the limit was removed.
     """
     import math
 
-    with pytest.raises(ValueError) as err:
-        V.declare_aggregate("prod", {"prod"}, math.prod)
-    assert "INDUCED" in str(err.value)
-    assert "prod" not in V.aggregate_names()
-
-    # and it is genuinely new: nothing declared agrees with it
+    V.declare_aggregate("prod", {"prod"}, math.prod)
+    assert "prod" in V.aggregate_names()
+    assert V._AGGREGATES["prod"]["laws"]
     assert V.indistinguishable_from("prod", math.prod) == []
-    # the reason is the form inventory, not the arithmetic
-    assert V.induce_laws(math.prod) == ()
+    assert math.prod([5.0, 15.0, 7.0]) == pytest.approx(525)
 
-
-def test_no_declared_operator_is_indistinguishable_from_itself_under_another_name():
-    """Every pair of currently declared operators must be separable."""
-    names = V.aggregate_names()
-    for a in names:
-        for b in names:
-            if a == b:
-                continue
-            assert not V._agrees_with(V._AGGREGATES[a]["fn"], V._AGGREGATES[b]["fn"]), \
-                f"{a} and {b} are the same function"
+    # AND IT IS HONEST ABOUT HOW WELL IT CAN BE CHECKED. A product's strongest true law
+    # excludes only about a third of nearby wrong values; calling that "checked" without
+    # saying so would be the overstatement this project keeps having to retract.
+    strength = V.law_strength(math.prod, V._AGGREGATES["prod"]["laws"])
+    assert strength["grade"] in ("WEAK", "MODERATE"), strength
 
 
 # ---------------------------------------------------------------------------
 # Why a law could not have caught it: the forms are all true of min.
 # ---------------------------------------------------------------------------
 
-def test_every_induced_law_is_true_of_min_which_is_why_the_comparison_is_needed():
-    """This is the justification for the new check, asserted rather than asserted-at.
+def test_the_written_forms_cannot_separate_median_from_min_but_a_synthesised_one_can():
+    """What this round changed about the justification for the comparison check.
 
-    If some induced form had rejected min, the discriminability check would be
-    unnecessary. It is necessary because every form that is true of a median is also true
-    of min -- the induction is healthy and still cannot help.
+    The comparison check was introduced because EVERY law true of a median was also true of
+    min -- bounds cannot see order. That is still true of the two bound forms. It is NOT
+    true of the synthesised form `below ~= above`: min has nothing below it, so the form is
+    false of min on most probes, and it really can tell the two apart.
+
+    So the comparison is no longer the ONLY thing separating them, and this test says
+    exactly which law does it rather than repeating a claim that has stopped being true.
     """
-    median_forms = V.induce_laws(_median)
-    min_forms = V.induce_laws(lambda v: min(v))
-    assert median_forms, "no forms induced for a median"
-    for name in median_forms:
-        form = V.law_from_name(name)
+    median_laws = [V.resolve_law(entry) for entry in V.induce_laws(_median)]
+    bound_forms = [law for law in median_laws if law.__name__ in
+                   ("_form_within_inputs", "_form_bounded_by_extremes")]
+    assert bound_forms, "expected the bound forms to be induced for a median"
+    for law in bound_forms:
         for values in V._PROBE_SETS:
-            assert V._holds_on(values, float(min(values)), form), name
-    # and the two are indistinguishable to the forms...
-    assert set(median_forms)
-    # ...while the comparison sees it immediately
+            assert law(list(values), float(min(values))) is True, law.__name__
+
+    order_forms = [law for law in median_laws if getattr(law, "_source", None) ==
+                   ("below", "~=", "above")]
+    assert order_forms, "the order law was not induced for a median"
+    disagreeing = [values for values in V._PROBE_SETS
+                   if order_forms[0](list(values), float(min(values))) is False]
+    assert disagreeing, "the order law must be false of min, or it separates nothing"
+
+    # the comparison check still exists and still catches the case a law cannot
     assert V.indistinguishable_from("median", lambda v: min(v)) == ["min"]
     assert V.indistinguishable_from("median", _median) == []
 

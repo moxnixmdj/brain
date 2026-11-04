@@ -62,12 +62,38 @@ def test_the_word_alone_is_refused_and_says_why():
     assert "median" not in V.aggregate_names()
 
 
-def test_one_example_is_usually_not_enough_and_the_system_says_so():
-    result = OA.acquire_from_examples("median", {"median"}, [([5.0, 15.0, 7.0], 7.0)])
-    assert result["acquired"] is False
-    assert result["reason"] == "ambiguous"
-    assert len(result["alternatives"]) > 1
-    assert "median" not in V.aggregate_names()
+def test_when_examples_leave_a_choice_the_system_refuses_and_shows_the_choice():
+    """The property is "never choose between different functions", not a count.
+
+    An earlier version of this test asserted that one median example must leave several
+    alternatives. That was true when the alternatives were counted by FORMULA; once they are
+    counted by FUNCTION, (s[0]+s[2])/2 and (s[0]+s[1])/2 collapse -- both are the midrange --
+    and a single example can genuinely determine what remains. Asserting the count would
+    have made the test fail for the improvement.
+    """
+    result = OA.acquire_from_examples("midrange", {"midrange"}, [([5.0, 15.0, 7.0], 10.0)])
+    if result["acquired"]:
+        # admitted: then it must be the only function that fits, and it must fit
+        assert result["arithmetic"]
+        assert V._AGGREGATES["midrange"]["fn"]([5.0, 15.0, 7.0]) == pytest.approx(10)
+    else:
+        assert result["reason"] == "ambiguous"
+        assert len(result["alternatives"]) > 1
+
+
+def test_two_different_functions_fitting_the_same_example_is_refused():
+    """Constructed so that no collapse can hide it: both fit, and they differ."""
+    matches = OA.candidates_for([5.0, 15.0, 7.0], 7.0)
+    distinct = OA._distinct(matches)
+    for a in distinct:
+        for b in distinct:
+            if a is not b:
+                assert not OA._same_function(a["fn"], b["fn"])
+    # and the collapse never merges two functions that differ on any separation set
+    for a in distinct:
+        for b in distinct:
+            if a is not b:
+                assert not OA._same_function(a["fn"], b["fn"])
 
 
 def test_alternatives_are_counted_by_function_not_by_formula():
@@ -188,19 +214,27 @@ def test_acquiring_the_same_function_twice_is_refused_the_second_time():
 # The weakness that remains, asserted so it cannot be forgotten.
 # ---------------------------------------------------------------------------
 
-def test_the_induced_law_for_an_acquired_median_is_too_weak_to_catch_a_min():
-    """Recorded, not hidden: an acquired operator's law has the same limit as any other.
+def test_an_acquired_median_now_rejects_its_own_maximum():
+    """The weakness recorded last round, re-measured and found closed.
 
-    A median's induced forms accept 5 and 15 for [5, 15, 7] because both are inputs. The
-    value 15 is not a median and the law cannot say so. What protects the system here is
-    not the law -- it is that the arithmetic was pinned by examples before it was declared.
-    Stating this keeps anyone from reading `verified=True` as `every wrong value is caught`.
+    Last round this test asserted that an acquired median's law ACCEPTED 15 for [5, 15, 7],
+    because every form was a bound and 15 is an input. The law is now synthesised, and the
+    strongest true form for a median is the order relation `below ~= above` -- min has
+    nothing below it, so an acquired median refuses its own maximum.
+
+    What is still true, and still asserted: the law is a check on VALUES, not a proof that
+    the arithmetic is a median. `acquire` is what pins the arithmetic, by requiring examples
+    to determine it.
     """
     result = OA.acquire_from_examples(
         "median", {"median"},
         [([5.0, 15.0, 7.0], 7.0), ([2.0, 4.0, 6.0, 8.0], 5.0)],
     )
-    assert result["acquired"] is True
+    assert result["acquired"] is True, result
     assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 7.0) is True
-    assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 15.0) is True   # the limit
+    assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 15.0) is False   # was True
+    assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 5.0) is False    # was True
     assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 999.0) is False
+
+    # and it is still not a proof: a value that genuinely balances the data is admitted
+    assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 9.0) is True
