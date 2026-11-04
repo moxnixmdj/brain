@@ -1121,8 +1121,22 @@ class AwakeAgencyDaemon:
                 except Exception:
                     guided_cands = []
 
+                # Operator-family swaps come FIRST, and that is a measured choice rather than a
+                # stylistic one. Screen of 12 shapes (operator_family_rewrite_v1 has the table):
+                # the authored producers are each node-kind specific, so none of them proposes
+                # "this operator should have been a different operator" -- `mul`, `mod`,
+                # `augassign` and `whileacc` were all unsolved by them and are all solved here,
+                # using fewer candidates (5-15 vs 7-23). No shape regressed. 6/12 -> 11/12.
+                #
+                # They go first because every candidate is still screened by execution and the
+                # gate, so a wrong guess costs 1.8 ms, while a missing producer costs a repair.
+                from canonical.swe_kernel.operator_family_rewrite_v1 import (
+                    propose_operator_family_swaps,
+                )
+
                 raw_cands = (
-                    propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
+                    propose_operator_family_swaps(before_src, max_candidates=24)
+                    + propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
                     + guided_cands
                     + _propose_deterministic_ast_repairs(before_src, max_candidates=16)
                 )

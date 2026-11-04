@@ -58,5 +58,54 @@
     "trials": 1,
     "successes": 1,
     "last_used_utc": "2026-10-26T22:59:31Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "goto_auth",
+        "login",
+        "noop",
+        "ship"
+      ],
+      "shapes": [
+        "map[html]"
+      ],
+      "growth": 0.708,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "3a7640483cf336ffab55",
+    "goal_key": "is_shipped",
+    "plan": [
+      "goto_auth",
+      "login",
+      "ship"
+    ],
+    "reached": true,
+    "model": {
+      "1b3fff80f86fe2ad": {
+        "noop": "1b3fff80f86fe2ad",
+        "goto_auth": "79b6dd06cdab83a1",
+        "ship": "1b3fff80f86fe2ad",
+        "login": "1b3fff80f86fe2ad"
+      },
+      "79b6dd06cdab83a1": {
+        "ship": "79b6dd06cdab83a1",
+        "noop": "79b6dd06cdab83a1",
+        "goto_auth": "79b6dd06cdab83a1",
+        "login": "f789474cf95e394d"
+      },
+      "f789474cf95e394d": {
+        "goto_auth": "79b6dd06cdab83a1",
+        "ship": "920bf79be30107d5"
+      },
+      "920bf79be30107d5": {
+        "goto_auth": "09e8a0ff98081da3"
+      },
+      "09e8a0ff98081da3": {}
+    },
+    "trials": 2,
+    "successes": 2,
+    "last_used_utc": "2026-11-04T09:42:36Z"
   }
 ]
