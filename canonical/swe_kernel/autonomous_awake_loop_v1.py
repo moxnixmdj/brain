@@ -912,7 +912,8 @@ class AwakeAgencyDaemon:
             "crystallized_skill_ids": skill_ids,
         }
 
-    def experiment_in_cow_sandbox(self, *, max_repairs: int = 3) -> dict[str, Any]:
+    def experiment_in_cow_sandbox(self, *, max_repairs: int = 3,
+                                  owed_tests: Sequence[str] | None = None) -> dict[str, Any]:
         """Autonomously detect failing Python & polyglot modules in a zero-copy `os.link` CoW twin (`< 10 ms`), repair & crystallize."""
         from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
             cow_write_text,
@@ -921,22 +922,35 @@ class AwakeAgencyDaemon:
             repair_repository_in_cow_zygote,
         )
 
-        test_files = sorted(
-            p for p in self.workspace_root.glob("**/test_*.py")
-            if ".git" not in p.parts and "__pycache__" not in p.parts
-        )[:12]
-        poly_test_files = sorted(
-            p
-            for p in self.workspace_root.rglob("*")
-            if p.is_file()
-            and ".git" not in p.parts
-            and "node_modules" not in p.parts
-            and _is_polyglot_test_filename(p.name)
-        )[:8]
+        # Measured 2026-11-04: the discovery below was blind to the case this loop exists for. A
+        # `repair:` obligation names one owed test; the loop ignored it, globbed the first 12 test
+        # files in the tree plus up to 8 polyglot files, and each one cost 3-5 s of subprocess in
+        # the sandbox. A single repair exceeded every wallclock and raised TimeoutExpired. So the
+        # creature picked real repair work (it did -- ratio 13.46, chosen 2/2) and could never
+        # finish one: the handler's `done` was unreachable. `owed_tests` is now the scope; the
+        # old glob remains the fallback for callers that owe nothing in particular.
+        if owed_tests:
+            _owed = [self.workspace_root / str(rel) for rel in owed_tests]
+            test_files = [p for p in _owed if p.suffix == ".py" and p.is_file()][:max_repairs or 1]
+            poly_test_files = [p for p in _owed if p.is_file() and _is_polyglot_test_filename(p.name)]
+        else:
+            test_files = sorted(
+                p for p in self.workspace_root.glob("**/test_*.py")
+                if ".git" not in p.parts and "__pycache__" not in p.parts
+            )[:12]
+            poly_test_files = sorted(
+                p
+                for p in self.workspace_root.rglob("*")
+                if p.is_file()
+                and ".git" not in p.parts
+                and "node_modules" not in p.parts
+                and _is_polyglot_test_filename(p.name)
+            )[:8]
         if not test_files and not poly_test_files:
             return {"tested": 0, "failures_found": 0, "repaired": 0, "crystallized_skills": []}
 
         repaired_records: list[dict[str, Any]] = []
+        _staged: dict[str, str] = {}
         failures_found = 0
 
         with tempfile.TemporaryDirectory(prefix="brain-awake-cow-") as tmp_str:
@@ -965,16 +979,15 @@ class AwakeAgencyDaemon:
                     # Multi-file / non-obvious target layout fallback
                     coupled_out = repair_repository_in_cow_zygote(
                         cow_root,
+                        owed_tests=owed_tests,
                         skill_store=self.skill_store,
-                        apply_to_workspace=True,
+                        apply_to_workspace=False,  # engine must not write the world; caller stages + accepts
                     )
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                (self.workspace_root / rel_rep).write_text(
-                                    (cow_root / rel_rep).read_text(encoding="utf-8"),
-                                    encoding="utf-8",
-                                )
+                                _staged[str(rel_rep)] = (cow_root / rel_rep).read_text(
+                                    encoding="utf-8")
                         repaired_records.append({
                             "module": ",".join(coupled_out.get("files_repaired") or []),
                             "mode": coupled_out.get("mode") or "COW_ZYGOTE_COUPLED_REPAIR",
@@ -1129,15 +1142,13 @@ class AwakeAgencyDaemon:
                     coupled_out = repair_repository_in_cow_zygote(
                         cow_root,
                         skill_store=self.skill_store,
-                        apply_to_workspace=True,
+                        apply_to_workspace=False,  # engine must not write the world; caller stages + accepts
                     )
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                _atomic_write_text(
-                                    self.workspace_root / rel_rep,
-                                    (cow_root / rel_rep).read_text(encoding="utf-8"),
-                                )
+                                _staged[str(rel_rep)] = (cow_root / rel_rep).read_text(
+                                    encoding="utf-8")
                         repaired_records.append({
                             "module": ",".join(coupled_out.get("files_repaired") or []),
                             "mode": coupled_out.get("mode") or "COW_ZYGOTE_COUPLED_REPAIR",
@@ -1176,7 +1187,13 @@ class AwakeAgencyDaemon:
                         str(cryst["skill_id"]),
                     )
                 if self.apply_verified_repairs:
-                    _atomic_write_text(self.workspace_root / rel_mod, solved_src)
+                    # The write to the real workspace is DEFERRED, not performed here. Verification
+                    # passed inside the CoW twin, but a twin's test file is not the world's: measured
+                    # 2026-11-04, the synth oracle accepted `return 5` for `add(2, 3) == 5` and the
+                    # workspace was overwritten with an answer a held-out input then failed. The twin's
+                    # version is kept, and the caller decides whether to accept it after seeing whether
+                    # the repair generalizes. A rejected candidate must leave no trace in the world.
+                    _staged[str(rel_mod)] = solved_src
                 repaired_records.append({
                     "module": str(rel_mod),
                     "mode": "AUTONOMOUS_COW_SYNTHESIS_AND_CRYSTALLIZATION",
@@ -1265,6 +1282,9 @@ class AwakeAgencyDaemon:
             "repaired": len(repaired_records),
             "cow_clone_ms": clone_info["clone_ms"],
             "repairs": repaired_records,
+            # Candidate sources, verified only against the twin. Nothing here has been written to
+            # the world: the caller must accept or discard them.
+            "staged": dict(_staged),
         }
 
     def chase_quantitative_target(

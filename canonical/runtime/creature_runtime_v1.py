@@ -791,7 +791,19 @@ class Creature:
                     check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
                 )
             )
+            # Every authored obligation needs a dispatch entry: `live_autonomous_cycle` only runs
+            # `rem = [w for w in self.remaining_work() if w.id in work_dispatch]`, so an obligation
+            # without one is admitted to the board and then can never be chosen -- it silently
+            # consumes a slot and reports nothing. Measured 2026-11-04: the repair reader authors
+            # `repair:<test>:<sig>` with the highest value on the board (8.0) and it was attempted
+            # ZERO times in every run for exactly this reason.
             work_dispatch[oid] = {"kind": "func_evolve", "episode": ep_f}
+
+        # Repair work owed to the world, not authored here: `readers` may hand `author_board` real
+        # failing tests, and `sovereign_perform` has a confined CoW-sandbox repair path for
+        # `repair:` ids. Without this dispatch entry that path is unreachable from the live loop.
+        for _rid in list(getattr(self, "_repair_ids", ()) or ()):
+            work_dispatch.setdefault(_rid, {"kind": "repair"})
 
         func_rels = {str(ep_f["target_relpath"]) for ep_f in failed_eps}
         for h_rel, h_list in sorted(hotspots_by_rel.items()):
@@ -1388,6 +1400,8 @@ def run_unattended_inspector_investigation(root: pathlib.Path | str, *, cycles: 
     is unavailable. It does not replace the existing legacy board runner.
     """
     creature = boot(root, identity=identity, life=life)
+    if workspace is not None:
+        creature.workspace_root = pathlib.Path(workspace).resolve()
     investigation = creature.inspector_investigation()
     authored_now = investigation is None
     if authored_now:
@@ -2127,6 +2141,102 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
         _shutil.rmtree(td, ignore_errors=True)
 
 
+def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dict[str, Any]:
+    """Is the repair a capability, or a memorized answer?
+
+    Takes the passing test file, replaces each literal argument tuple with a *different* tuple of
+    the same arity, and derives the expected result from the source's own repaired body evaluated
+    on the new inputs. A function that computed the answer passes; a function that returns the
+    number it saw fails. Nothing here consults the repair organ's opinion.
+    """
+    import ast as _ast
+    import re as _re
+
+    try:
+        txt = test_file.read_text(encoding="utf-8")
+    except OSError as exc:
+        return {"generalizes": False, "reason": f"UNREADABLE_OWED_TEST: {exc}"}
+
+    call_re = _re.compile(r"assert\s+([A-Za-z_][\w.]*)\(([^()]*)\)\s*==\s*([^\n#]+)")
+    calls = call_re.findall(txt)
+    if not calls:
+        return {"generalizes": False, "reason": "NO_LITERAL_CALL_TO_PERTURB"}
+
+    fn_name, arg_src, exp_src = calls[0]
+    try:
+        args = _ast.literal_eval(f"({arg_src},)")
+        expected = _ast.literal_eval(exp_src.strip())
+    except Exception as exc:
+        return {"generalizes": False, "reason": f"UNPERTURBABLE_LITERALS: {exc}"}
+    if not args or not all(isinstance(a, (int, float)) for a in args):
+        return {"generalizes": False, "reason": "NON_NUMERIC_ARGS"}
+    if not isinstance(expected, (int, float)):
+        return {"generalizes": False, "reason": "NON_NUMERIC_EXPECTATION"}
+
+    # Find the source file that defines the function -- by following the test's own imports, not
+    # by scanning the tree. Scanning is how this took minutes on a real repository (5,210 .py
+    # files): a probe that is too slow to run is a probe that silently decides "no gain".
+    short = fn_name.split(".")[-1]
+    candidates: list[pathlib.Path] = []
+    try:
+        tree = _ast.parse(txt)
+    except SyntaxError:
+        tree = None
+    if tree is not None:
+        for node in _ast.walk(tree):
+            mods: list[str] = []
+            if isinstance(node, _ast.ImportFrom) and node.module:
+                mods = [f"{node.module}.{a.name}" for a in node.names] + [node.module]
+            elif isinstance(node, _ast.Import):
+                mods = [a.name for a in node.names]
+            for mod in mods:
+                rel = pathlib.Path(*mod.split("."))
+                for cand in (ws_root / rel.with_suffix(".py"), ws_root / rel / "__init__.py"):
+                    if cand.is_file() and cand not in candidates:
+                        candidates.append(cand)
+    target = None
+    for cand in candidates:
+        try:
+            if f"def {short}(" in cand.read_text(encoding="utf-8", errors="replace"):
+                target = cand
+                break
+        except OSError:
+            continue
+    if target is None:
+        return {"generalizes": False, "reason": f"DEFINITION_NOT_FOUND: {short}"}
+
+    new_args = tuple(int(a) + 7 for a in args) if all(isinstance(a, int) for a in args) \
+        else tuple(float(a) + 7.0 for a in args)
+    # Ask the repaired code itself what it now produces for the new inputs. If it cannot run, or
+    # it produces the same constant it produced before, that is precisely the failure we are testing
+    # for -- not an error to be excused.
+    try:
+        ns: dict[str, Any] = {}
+        exec(compile(target.read_text(encoding="utf-8"), str(target), "exec"), ns)  # noqa: S102
+        fn = ns.get(short)
+        if fn is None:
+            return {"generalizes": False, "reason": f"NOT_CALLABLE: {short}"}
+        produced = fn(*args)
+        produced_new = fn(*new_args)
+    except Exception as exc:  # noqa: BLE001
+        return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
+
+    # A function that ignores its arguments is not a capability, whatever its test says.
+    ignores_inputs = produced == expected and produced_new == produced
+    return {
+        "generalizes": (not ignores_inputs) and produced == expected,
+        "args": list(args),
+        "new_args": list(new_args),
+        "produced": produced,
+        "produced_on_new_args": produced_new,
+        "expected": expected,
+        "ignores_inputs": ignores_inputs,
+        "source": str(target.relative_to(ws_root)),
+        "reason": ("RETURNS_A_CONSTANT" if ignores_inputs
+                   else "WRONG_ON_OWED_INPUT" if produced != expected else "COMPUTES"),
+    }
+
+
 def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
     """Active-inference sovereign `Perform` organ for `Creature`:
     - Forecasts `PredictionTicket` via `EpistemicSelfBeliefEngine` (`Theta_t = (mu_t, Sigma_t)`) BEFORE acting;
@@ -2198,15 +2308,88 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
     if work.id.startswith(("repair:", "awake:cow_repair:")):
         from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
 
-        ws_target = getattr(creature, "workspace_root", None) or _REPO_ROOT
+        # `_REPO_ROOT` never existed: this line raised NameError on every repair dispatch, which is
+        # what `Creature.step`'s `except Exception` turned into an ordinary failed action. The
+        # creature has been picking the highest-value work on its board and crashing on the first
+        # line of the handler. Derive the root the same way the rest of this module does.
+        ws_target = getattr(creature, "workspace_root", None) or pathlib.Path(__file__).resolve().parents[2]
         daemon = AwakeAgencyDaemon(
             ws_target,
             ledger_path=creature.root / "awake_repair" / "ledger.json",
             skill_store_path=creature.root / "awake_repair" / "skills.sqlite",
             apply_verified_repairs=True,
         )
-        rep = daemon.experiment_in_cow_sandbox(max_repairs=3)
-        ok = int(rep.get("repaired") or 0) > 0
+        # The obligation IS the owed test: `repair:<test_relpath>:<signature>`. Handing the whole
+        # repo's suite to the repair engine made it time out and the failure was swallowed by
+        # `Creature.step`, so this path never produced a result in any run.
+        _owed = [work.id.split(":", 1)[1].rsplit(":", 1)[0]] if ":" in work.id else None
+        # A named test is a claim about the repo, and claims are only advisory until measured. So
+        # run the owed test itself first: if it is already green there is nothing to repair and no
+        # gain to claim, and if it is not, the repair organ has to change the repo *and* leave the
+        # test green. Before this, the handler's `ok` came from the organ's own bookkeeping and its
+        # cost was the whole repo's suite -- it never once returned a result.
+        from canonical.swe_kernel.autonomous_awake_loop_v1 import _run_py_test_file
+        _green_before = False
+        if _owed:
+            _green_before, _ = _run_py_test_file(
+                pathlib.Path(ws_target) / _owed[0], pathlib.Path(ws_target), timeout=120.0
+            )
+        rep = {"repaired": 0, "failures_found": 0, "crystallized_skills": []}
+        if not _green_before:
+            try:
+                rep = daemon.experiment_in_cow_sandbox(max_repairs=1, owed_tests=_owed)
+            except Exception as exc:  # noqa: BLE001 - a repair that cannot run is a failure to decide
+                rep = {"repaired": 0, "failures_found": 0, "crystallized_skills": [],
+                       "error": f"{type(exc).__name__}: {str(exc)[:200]}"}
+        ok = (not _green_before) and int(rep.get("repaired") or 0) > 0
+        # Trial, then decide. The order matters and it took three attempts to get right: the owed
+        # test must be run with the candidate IN the world (otherwise it simply re-reports the
+        # original failure), and the generalization probe must inspect the code that is actually
+        # there. So the organ's staged candidate is written first, measured, and rolled back
+        # byte-for-byte if it does not hold up. A rejected candidate leaves no trace; an accepted
+        # one is the only thing the creature gets to keep.
+        generalization = None
+        accepted: list[str] = []
+        staged = dict(rep.get("staged") or {})
+        if ok and staged:
+            originals: dict[str, bytes | None] = {}
+            for _rel in staged:
+                _dst = pathlib.Path(ws_target) / _rel
+                originals[_rel] = _dst.read_bytes() if _dst.is_file() else None
+                _dst.parent.mkdir(parents=True, exist_ok=True)
+                _dst.write_text(staged[_rel], encoding="utf-8")
+            try:
+                if _owed:
+                    ok, _ = _run_py_test_file(
+                        pathlib.Path(ws_target) / _owed[0], pathlib.Path(ws_target), timeout=120.0
+                    )
+                # A green owed test is NOT evidence of a repair. Measured 2026-11-04: handed
+                # `assert add(2, 3) == 5`, the organ rewrote the source to `return 5` and passed,
+                # 3/3 trials; a held-out `add(10, 20) == 30` then failed 3/3. It memorized the
+                # oracle's answer. A capability that only works on the example it was fitted to has
+                # not been acquired, and crediting it would teach the creature that its
+                # best-paying work is satisfying the checker rather than the claim. So a green owed
+                # test is only a candidate; what settles it is whether the answer survives an input
+                # it was never shown.
+                if ok and _owed:
+                    generalization = _generalization_probe(
+                        pathlib.Path(ws_target) / _owed[0], pathlib.Path(ws_target)
+                    )
+                    if not generalization["generalizes"]:
+                        ok = False
+            finally:
+                if not ok:
+                    for _rel, _orig in originals.items():
+                        _dst = pathlib.Path(ws_target) / _rel
+                        try:
+                            if _orig is None:
+                                _dst.unlink(missing_ok=True)
+                            else:
+                                _dst.write_bytes(_orig)
+                        except OSError:
+                            pass
+                else:
+                    accepted = sorted(staged)
         settle_rep = core.belief.settle_and_compute_surprise(
             ticket,
             outcome_pass=ok,
@@ -2222,7 +2405,12 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
             "surprise": settle_rep["surprise"],
-            "blocked": None if ok else "UNREPAIRED_FAILING_TESTS",
+            "generalization": generalization,
+            "accepted_into_world": accepted,
+            "blocked": None if ok else (
+                "REPAIR_DOES_NOT_GENERALIZE" if generalization and not generalization["generalizes"]
+                else "UNREPAIRED_FAILING_TESTS"
+            ),
         }
 
     if work.id.startswith("chase:"):
@@ -2333,14 +2521,24 @@ def run_sovereign_board(
     extra_failing_tests: Sequence[tuple[str, str]] = (),
     numeric_chases: Sequence[Mapping[str, Any]] = (),
     open_gaps: Sequence[Mapping[str, Any]] = (),
+    workspace: pathlib.Path | str | None = None,
 ) -> dict[str, Any]:
     """Run `Creature` with heterogeneous defended proposals, uncurated `external_hard_slice_v1.select` ranking,
-    structural self-prediction, and general `type_directed_sampler_v1` artifact/onboarding execution."""
+    structural self-prediction, and general `type_directed_sampler_v1` artifact/onboarding execution.
+
+    `workspace` is the world the creature acts on and repairs. Without it the creature defaults to
+    the repository it lives in -- a world whose remaining failures are unmet learnings that no
+    bounded repair can close, so every repair obligation is a genuinely failing test it cannot fix.
+    Measured 2026-11-04: the same creature closes `add(a, b) -> a - b` in a 4-file workspace in
+    0.2 s and fails the repo's own tests after 160 s. The path was never the problem; the world was.
+    """
     from canonical.runtime import external_hard_slice_v1 as EHS
     from canonical.runtime import self_prediction_baseline_v1 as SPB
     from canonical.runtime import self_prediction_calibration_v1 as SPC
 
     creature = boot(root, identity=identity, life=life)
+    if workspace is not None:
+        creature.workspace_root = pathlib.Path(workspace).resolve()
     reg_ids, inspected_ids = _registry_and_inspectors()
     already_onboarded = {cid: True for cid in (set(inspected_ids) | set(creature.onboarded_capabilities.keys()))}
 
@@ -2363,6 +2561,10 @@ def run_sovereign_board(
     )
     obligations, verdicts = A.author(proposals, before=before, done=done, cheats=cheats or None)
     authored = A.metrics(verdicts)
+    # Repair work is authored by the WORLD reader, not by the creature, and `live_autonomous_cycle`
+    # only considers obligations that carry a dispatch entry. Without this the highest-value work on
+    # the board is admitted and then unreachable -- measured 2026-11-04: attempted zero times.
+    creature._repair_ids = [o.id for o in obligations if str(o.id).startswith("repair:")]
 
     # Active-Inference Expected Free Energy triage on the creature's own board:
     # combines pragmatic expected return `p_hat * o.value` with bounded epistemic

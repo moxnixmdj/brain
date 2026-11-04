@@ -938,14 +938,26 @@ def _run_disk_suite_check(
         py_entries.append(env["PYTHONPATH"])
     env["PYTHONPATH"] = os.pathsep.join(py_entries)
 
+    # The 12 s wallclock was sized for "the suite"; when the caller has narrowed the suite to what
+    # is actually owed, one file can legitimately need longer (measured: a 16 s test file). Scale
+    # with the scope, and never let the wallclock escape as an exception: a timeout is a *failure to
+    # decide*, which the caller must be able to hear, and which `Creature.step` would otherwise
+    # swallow into an ordinary failed action.
+    timeout = min(120.0, timeout * max(1, len(test_files)))
     combined_out: list[str] = []
     if has_pytest_style:
         cmd = [sys.executable, "-B", "-m", "pytest", "-q", "--tb=short"] + [str(tf) for tf in test_files]
-        proc = subprocess.run(cmd, cwd=str(repo_root), env=env, capture_output=True, text=True, timeout=timeout)
+        try:
+            proc = subprocess.run(cmd, cwd=str(repo_root), env=env, capture_output=True, text=True, timeout=timeout)
+        except subprocess.TimeoutExpired as exc:
+            return False, f"TIMEOUT after {timeout:.0f}s: {str(exc)[:400]}"
         return proc.returncode == 0, ((proc.stdout or "") + "\n" + (proc.stderr or ""))[-6000:]
 
     for tf in test_files:
-        proc = subprocess.run([sys.executable, "-B", str(tf)], cwd=str(repo_root), env=env, capture_output=True, text=True, timeout=timeout)
+        try:
+            proc = subprocess.run([sys.executable, "-B", str(tf)], cwd=str(repo_root), env=env, capture_output=True, text=True, timeout=timeout)
+        except subprocess.TimeoutExpired as exc:
+            return False, f"TIMEOUT after {timeout:.0f}s: {str(exc)[:400]}"
         combined_out.append((proc.stdout or "") + "\n" + (proc.stderr or ""))
         if proc.returncode != 0:
             return False, "\n".join(combined_out)[-6000:]
@@ -1040,6 +1052,7 @@ def bisect_git_regression_in_cow(
 def repair_repository_in_cow_zygote(
     workspace_root: str | pathlib.Path,
     *,
+    owed_tests: Sequence[str] | None = None,
     skill_store: VerifiedSkillStore | None = None,
     zygote: ZygotePrewarmedPool | None = None,
     apply_to_workspace: bool = False,
@@ -1056,10 +1069,25 @@ def repair_repository_in_cow_zygote(
         cow_root = pathlib.Path(td) / "repo"
         clone_stats = create_zero_copy_cow_workspace(ws, cow_root)
 
-        test_files = sorted(
-            p for p in cow_root.rglob("test_*.py")
-            if not any(part in _IGNORED_DIRS for part in p.parts)
-        )
+        # The suite is what is OWED, not everything that exists. Measured 2026-11-04: this
+        # `rglob("test_*.py")` pulled every test file in the tree -- hundreds of them -- into a
+        # single `_run_disk_suite_check` call with a 12 s wallclock, so a repair raised
+        # `subprocess.TimeoutExpired` and `Creature.step` swallowed it as a failed action. That is
+        # why the creature's only work ever performed was inspector onboarding: its repair path
+        # could not run at all, and reported nothing.
+        #
+        # `owed_tests`, when supplied, is the caller's statement of which tests are failing. The
+        # fallback preserves the old behaviour for callers that make no such statement.
+        if owed_tests:
+            test_files = sorted(
+                cand for cand in (cow_root / str(rel) for rel in owed_tests)
+                if cand.is_file() and not any(part in _IGNORED_DIRS for part in cand.parts)
+            )
+        else:
+            test_files = sorted(
+                p for p in cow_root.rglob("test_*.py")
+                if not any(part in _IGNORED_DIRS for part in p.parts)
+            )
         if not test_files:
             return {"schema": SCHEMA, "pass": True, "status": "NO_TESTS_FOUND", "clone": clone_stats}
 
