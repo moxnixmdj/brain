@@ -3263,8 +3263,177 @@ def _apply_nested_fn(
         return None
 
 
+def _iterative_unlock_mutations(source_code: str) -> list[str]:
+    """RSA-style recursion→loop: same multi-step unlock law, no `_q` self-call."""
+    src = str(source_code or "")
+    if not src.strip():
+        return []
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    walk_body = ast.parse(
+        "def _w():\n"
+        "    frontier = [u for u in node['unlocks'] if u in by_id and u not in nxt]\n"
+        "    seen_u = set(nxt)\n"
+        "    left = leftover\n"
+        "    while frontier and left > 0:\n"
+        "        u = frontier.pop(0)\n"
+        "        if u in seen_u or u not in by_id:\n"
+        "            continue\n"
+        "        ch = by_id[u]\n"
+        "        skip = False\n"
+        "        for r in ch['requires']:\n"
+        "            if r not in seen_u:\n"
+        "                skip = True\n"
+        "                break\n"
+        "        if skip or ch['cost'] > left + 1e-12:\n"
+        "            continue\n"
+        "        future = max(future, ch['value'] * (1.0 - 0.85 * burns.get(u, 0.0)) - ch['cost'] * 0.05)\n"
+        "        left = left - ch['cost']\n"
+        "        seen_u.add(u)\n"
+        "        frontier.extend([x for x in ch['unlocks'] if x in by_id and x not in seen_u])\n"
+    ).body[0].body
+
+    class _IterQ(ast.NodeTransformer):
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
+            if node.name != "_q":
+                return self.generic_visit(node)
+            new_body: list[ast.stmt] = []
+            skip_until_return = False
+            inserted = False
+            for st in node.body:
+                if skip_until_return:
+                    if isinstance(st, ast.Return):
+                        skip_until_return = False
+                        new_body.append(st)
+                    continue
+                new_body.append(st)
+                if (
+                    isinstance(st, ast.Assign)
+                    and len(st.targets) == 1
+                    and isinstance(st.targets[0], ast.Name)
+                    and st.targets[0].id == "future"
+                    and isinstance(st.value, ast.Constant)
+                    and st.value.value == 0.0
+                ):
+                    new_body.extend(copy.deepcopy(walk_body))
+                    skip_until_return = True
+                    inserted = True
+            if not inserted:
+                return node
+            node = copy.deepcopy(node)
+            node.body = new_body
+            return node
+
+    new_tree = _IterQ().visit(copy.deepcopy(tree))
+    ast.fix_missing_locations(new_tree)
+    try:
+        after = ast.unparse(new_tree) + "\n"
+    except Exception:
+        return []
+    if after == src:
+        return []
+    return [after]
+
+
 def _structural_policy_mutations(source_code: str) -> list[str]:
-    """Produce structurally different POLICY genomes (flat one-level unlock, not recursive `_q`)."""
+    """Structurally different POLICY genomes: 1-step flatten and iterative multi-step walk."""
+    src = str(source_code or "")
+    if not src.strip():
+        return []
+    out: list[str] = []
+    try:
+        out.extend(_flatten_recursive_q(src))
+    except Exception:
+        pass
+    try:
+        out.extend(_iterative_unlock_mutations(src))
+    except Exception:
+        pass
+    return out
+
+
+def _nested_named_function(source_code: str, name: str) -> ast.FunctionDef | None:
+    try:
+        tree = ast.parse(source_code)
+    except SyntaxError:
+        return None
+    for fn in ast.walk(tree):
+        if isinstance(fn, ast.FunctionDef) and fn.name == name:
+            return fn
+    return None
+
+
+def _hors_crossover_mutations(src_a: str, src_b: str) -> list[str]:
+    """Invent a POLICY genome by Plotkin LGG of two living organs, filling holes from both parents.
+
+    Not a compiler pass on one `_q`: rec × flat anti-unifies the child-scorer and the candidate
+    set, then mixed instantiations are new programs Ring-0 still has to admit.
+    """
+    src_a = str(src_a or "")
+    src_b = str(src_b or "")
+    if not src_a.strip() or not src_b.strip() or src_a == src_b:
+        return []
+    try:
+        from canonical.swe_kernel.concept_library_v1 import (
+            higher_order_plotkin_lgg,
+            instantiate_plotkin_lgg,
+        )
+        from canonical.swe_kernel.recursive_self_architect_v1 import _splice_nested_function
+    except Exception:
+        return []
+    qa = _nested_named_function(src_a, "_q")
+    qb = _nested_named_function(src_b, "_q")
+    if qa is None or qb is None:
+        return []
+    try:
+        lgg = higher_order_plotkin_lgg(qa, qb)
+    except Exception:
+        return []
+    if not lgg:
+        return []
+    fillings = lgg.get("hole_fillings") or {}
+    extra_holes = [p for p in (lgg.get("param_names") or ()) if p in fillings]
+    if len(extra_holes) < 1:
+        return []
+    n_extra = len(extra_holes)
+    out: list[str] = []
+    seen: set[str] = {src_a, src_b}
+    # Mixed fillings only: skip all-parent-A and all-parent-B (those ARE the parents).
+    masks = range(1, (1 << n_extra) - 1) if n_extra >= 2 else range(1, 1 << n_extra)
+    for mask in masks:
+        if len(out) >= 4:
+            break
+        choice = {h: (mask >> i) & 1 for i, h in enumerate(extra_holes)}
+        try:
+            new_q = instantiate_plotkin_lgg(lgg, parent_choice=choice, name="_q")
+        except Exception:
+            continue
+        if new_q is None:
+            continue
+        for parent in (src_a, src_b):
+            try:
+                tree = ast.parse(parent)
+            except SyntaxError:
+                continue
+            outer = next((n for n in tree.body if isinstance(n, ast.FunctionDef)), None)
+            if outer is None:
+                continue
+            try:
+                spliced = _splice_nested_function(tree, outer.name, "_q", new_q)
+                ast.fix_missing_locations(spliced)
+                text = ast.unparse(spliced) + "\n"
+            except Exception:
+                continue
+            if text and text not in seen:
+                seen.add(text)
+                out.append(text)
+    return out
+
+
+def _flatten_recursive_q(source_code: str) -> list[str]:
+    """One-level unlock genome (no recursive `_q` self-call)."""
     src = str(source_code or "")
     if not src.strip():
         return []
@@ -3325,6 +3494,7 @@ def _successors_from_incumbent_source(
     learned_immediate: str | None,
     learned_combiner: str | None,
     concept_library: Any | None = None,
+    peer_sources: Sequence[str] = (),
 ) -> list[str]:
     """RSA/egraph/`G_t` mutations of incumbent source. Not a factory."""
     del concept_library  # used by callers when synthesizing bodies
@@ -3378,19 +3548,29 @@ def _successors_from_incumbent_source(
             structural.extend(_structural_policy_mutations(seed))
         except Exception:
             continue
+    invented: list[str] = []
+    for peer in [*peer_sources, *structural]:
+        if not peer or peer == source_code:
+            continue
+        try:
+            invented.extend(_hors_crossover_mutations(source_code, peer))
+        except Exception:
+            continue
+        if len(invented) >= 4:
+            break
     rewritten: list[str] = []
-    for s in [source_code, *out, *structural]:
+    for s in [source_code, *out, *structural, *invented]:
         eg = _egraph_simplify_organ_source(s)
         if eg:
             rewritten.append(eg)
     seen: set[str] = {source_code}
     uniq: list[str] = []
-    for s in [*out[:4], *structural, *out[4:], *rewritten]:
+    for s in [*invented, *out[:4], *structural, *out[4:], *rewritten]:
         if not s or s in seen:
             continue
         seen.add(s)
         uniq.append(s)
-        if len(uniq) >= 10:
+        if len(uniq) >= 12:
             break
     return uniq
 
@@ -3977,6 +4157,7 @@ class MetaCircularOrganGraph:
                     learned_immediate=learned,
                     learned_combiner=comb_learned,
                     concept_library=self.concept_library,
+                    peer_sources=[p for p in parents if p and p != parent_src][:3],
                 )
                 parent_id = incumbent.organ_id if parent_src == incumbent.source_code else "archive_elite"
                 for src in srcs:
@@ -3997,6 +4178,7 @@ class MetaCircularOrganGraph:
                                 "bootstrap_factory": False,
                                 "learned_immediate": bool(learned),
                                 "learned_combiner": bool(comb_learned),
+                                "hors_crossover": "def _q(_v0" in src,
                             },
                         )
                     except OrganSafetyError:

@@ -178,14 +178,526 @@ def _norm(s: str) -> str:
 # Operators. (accepted type, result type, apply, words that select it)
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# AN OPERATOR IS ONE DECLARATION, NOT FIVE.
+# ---------------------------------------------------------------------------
+#
+# An aggregate used to be stated in five places that had no way to check each other:
+# its words in `_AGG_WORDS`, its arithmetic in a hardcoded dict here, its arity in the
+# enumerator's `_OPERATORS`, its word-accounting in `_structural_words`, and its
+# invariant in `_holds_invariants`. Every defect this project has found for several
+# rounds has been two of those disagreeing, and there was no way to notice, because
+# there was nothing that WAS the operator to compare them against.
+#
+# The cost is not tidiness. `_AGG_WORDS["median"] = {...}` alone produced an operator
+# that ENUMERATED fine and raised KeyError when evaluated: the vocabulary grew and the
+# arithmetic did not. And an operator added that way carried NO invariant, because
+# `_holds_invariants` returned True for every aggregate except `sum`. A creature able to
+# extend its own vocabulary while unable to check the extension would grow confident and
+# wrong -- which is worse than not growing.
+#
+# So an aggregate is declared once and must supply all four parts. `laws` is not
+# decoration: it is the function that says a value is a legitimate answer, and a
+# declaration without one is REFUSED. The weakest law -- the value is one of the inputs,
+# between the least and the greatest -- holds for every aggregate there is, so nothing
+# may escape by claiming it has no property to check.
+
+#: the weakest law: an aggregate of numbers is one of them, hence between min and max
+_WITHIN_INPUTS = "within_inputs"
+
+
+def _law_within_inputs(values, result, *_):
+    """Every aggregate of a set of numbers lies between its least and greatest member.
+
+    True of a sum only when there is one member, of a mean always, of a median always, of
+    a count never in value but always in ORDER -- so this is stated only for aggregates
+    that return a member-like value and the declaration says which law it claims.
+    """
+    vals = [v for v in values if v is not None]
+    if not vals or result is None:
+        return True
+    try:
+        return min(vals) - 1e-9 <= float(result) <= max(vals) + 1e-9
+    except (TypeError, ValueError):
+        return True
+
+
+def _law_non_negative(values, result, *_):
+    vals = [v for v in values if v is not None]
+    if result is None:
+        return True
+    try:
+        return float(result) >= 0
+    except (TypeError, ValueError):
+        return True
+
+
+def _law_integral(values, result, *_):
+    if result is None:
+        return True
+    try:
+        return abs(float(result) - round(float(result))) < 1e-9
+    except (TypeError, ValueError):
+        return True
+
+
+def _law_equals_row_count(values, result, *_):
+    """A count of a table is its number of rows -- not merely non-negative or integral.
+
+    `integral` and `non_negative` let 99 through for a three-row table. They were chosen
+    because they are true of every count, which is exactly the problem: a law that is true
+    of every value in a large set cannot reject the wrong ones. Where a stronger statement
+    is true, the weaker one is not a check, it is a formality.
+    """
+    if result is None:
+        return True
+    try:
+        return abs(float(result) - float(len(values))) < 1e-9
+    except (TypeError, ValueError):
+        return True
+
+
+def _law_sum_between(values, result, *_):
+    """A sum of n numbers lies between n*min and n*max, which follows from the definition.
+
+    Lower bound: adding the others can only move the total toward them, and if they are
+    all at least as large as the largest then the sum is at least n*max >= max. The
+    honest, simple statement is: the sum is at least min and at most sum(|v|). Both hold
+    for negative values, which "non_negative" did not.
+    """
+    vals = [float(v) for v in values if v is not None]
+    if not vals or result is None:
+        return True
+    try:
+        r = float(result)
+    except (TypeError, ValueError):
+        return True
+    # A SUM IS BOUNDED BY n TIMES THE EXTREMES, and that is the tight statement.
+    #
+    # My first attempt said "at least min and at most sum(|v|)", which is false for
+    # [-3, -1, -7]: the sum is -11, below the minimum of -7. The honest bound falls out
+    # of the definition -- n numbers each at least min and at most max -- and it is tight
+    # enough to reject a count wearing a sum's clothes, which is what it is for.
+    n = len(vals)
+    return (n * min(vals) - 1e-9) <= r <= (n * max(vals) + 1e-9)
+
+
+_LAWS = {
+    _WITHIN_INPUTS: _law_within_inputs,
+    "non_negative": _law_non_negative,
+    "integral": _law_integral,
+}
+
+_AGGREGATES: dict[str, dict] = {
+    "sum": {
+        "fn": lambda v: sum(v),
+        # A SUM IS AT LEAST ITS LARGEST MEMBER AND AT MOST ITS TOTAL MAGNITUDE.
+        #
+        # The law used to be "non_negative", which is true of sums of positives and false
+        # in general -- the falsifiability probe found it on [-3, -1, -7], where an honest
+        # sum of -11 was reported as violating its own declaration. A law that only holds
+        # for convenient data is not a law; it would have rejected correct answers the
+        # first time a column held a negative.
+        "laws": (_law_sum_between,),
+    },
+    "max": {"fn": lambda v: max(v), "laws": (_WITHIN_INPUTS,)},
+    "min": {"fn": lambda v: min(v), "laws": (_WITHIN_INPUTS,)},
+    "mean": {"fn": lambda v: sum(v) / len(v), "laws": (_WITHIN_INPUTS,)},
+    "count": {"fn": lambda v: len(v), "laws": (_law_equals_row_count, "integral")},
+}
+
+
+#: Numbers chosen to be awkward: odd length, even length, negatives, zero, a repeat,
+#: and one value. A law that survives all of these has not been tested, it has been
+#: ignored -- there is nothing left for real data to break that these did not.
+_PROBE_SETS = (
+    [5.0, 15.0, 7.0],
+    [2.0, 4.0, 6.0, 8.0],
+    [-3.0, -1.0, -7.0],
+    [0.0],
+    [1.0, 1.0, 4.0],
+    [0.5, 2.25, 9.0, 1.75],
+    # the rest are here to SEPARATE operators from each other, not to exercise them:
+    # repeats, two values, an outlier, an ascending run, and a single value. min and max
+    # agree on every ascending run, so a set without an unordered case cannot tell either
+    # from a median.
+    [10.0, 10.0],
+    [1.0, 2.0, 3.0],
+    [100.0, 1.0, 1.0],
+    [7.0],
+    [3.0, 1.0, 3.0, 1.0],
+)
+
+
+def _agrees_with(fn, other, probes=None) -> bool:
+    """Do these two arithmetics give the same number on every probe, to the last bit?"""
+    for values in (probes or _PROBE_SETS):
+        try:
+            a, b = float(fn(list(values))), float(other(list(values)))
+        except Exception:
+            return False
+        if a != a or b != b:            # NaN agrees with nothing
+            return False
+        if abs(a - b) > 1e-9:
+            return False
+    return True
+
+
+def indistinguishable_from(kind: str, fn) -> list[str]:
+    """Which already-declared operators is this arithmetic the SAME FUNCTION as?
+
+    A CAPABILITY THAT CANNOT BE TOLD APART FROM ONE ALREADY PRESENT IS NOT A CAPABILITY.
+
+    Declaring `median` as `min` passed every check last round: the words were the
+    question's, the arithmetic ran, and the induced laws (within_inputs, is_one_of_the
+    inputs, bounded_by_extremes) were all true of it -- because min, max and median are
+    structurally identical: permutation-invariant, positively homogeneous, and inside
+    their inputs. NO predicate on (inputs, result) can separate them, so no amount of
+    inventing more values would have caught it. `I.answer("what is the median qty")`
+    returned 5 with verified=True.
+
+    What separates them is not a property of one operator, it is a COMPARISON against the
+    operators that already exist. `min` is already declared, so an arithmetic identical to
+    `min` adds nothing and must not be allowed to claim a new name. The rivals are not a
+    list somebody wrote -- they are whatever is declared, which is why this check gets
+    stronger on its own as the vocabulary grows.
+    """
+    rivals = []
+    for other in aggregate_names():
+        if other == kind:
+            continue
+        try:
+            if _agrees_with(fn, _AGGREGATES[other]["fn"]):
+                rivals.append(other)
+        except (KeyError, TypeError):
+            continue
+    return rivals
+
+
+def _law_is_falsifiable(kind: str, fn, laws) -> str | None:
+    """Is there data on which this law REJECTS something? Returns a reason, or None.
+
+    A LAW THAT CANNOT FAIL LICENSES ANYTHING.
+
+    `declare_aggregate("liar", {"liar"}, lambda v: 999.0, (lambda values, result, *_: True,))`
+    was accepted: the declaration had a law, the law was callable, and it passed every
+    value -- so a median of [5, 15, 7] was licensed as 999 and "an operator cannot exist
+    unchecked" was false in the most direct way. It existed, checked by nothing.
+
+    So a law must be shown to DISCRIMINATE before it is accepted: over the probes below,
+    at least one honest value must pass and at least one corrupt value must fail. That is
+    the weakest standard that still means something, and it is the same standard the whole
+    system applies to answers -- a check that cannot fail is not a check.
+    """
+    if kind in ("count",):
+        # a count is a property of the ROWS, not of their values, so the value probes
+        # below do not apply to it; it is falsified directly against table shapes.
+        bad = [(3, -1), (0, 5), (2, 1.5)]
+        good = [(3, 3), (0, 0), (2, 2)]
+        passed = any(_run_laws(laws, [float(i) for i in range(n)], n) is not False
+                     for n, _ in good)
+        failed = any(_run_laws(laws, [float(i) for i in range(n)], v) is False
+                     for n, v in bad)
+        if not (passed and failed):
+            return (f"{kind}: the law accepts every value it was shown, so it can never "
+                    "say no -- a check that cannot fail is not a check")
+        return None
+
+    passed = failed = False
+    for values in _PROBE_SETS:
+        try:
+            honest = fn(list(values))
+        except Exception:
+            return f"{kind}: the arithmetic raised on {values!r}"
+        if _run_laws(laws, list(values), honest) is False:
+            return (f"{kind}: the declaration's own arithmetic VIOLATES its own law on "
+                    f"{values!r} -- it computed {honest!r}")
+        passed = True
+        for corrupt in (999.0, -999.0, max(values) + 1000.0, min(values) - 1000.0):
+            if _run_laws(laws, list(values), corrupt) is False:
+                failed = True
+    if not passed:
+        return f"{kind}: no probe produced an honest value, so nothing was tested"
+    if not failed:
+        return (f"{kind}: the law accepts every value it was shown, so it can never say "
+                "no -- a check that cannot fail is not a check")
+    return None
+
+
+# ---------------------------------------------------------------------------
+# DERIVING a law instead of writing one.
+#
+# The laws above were all written by hand: I decided a sum is bounded by n*min and
+# n*max, that a mean stays inside its inputs, that a count equals its row count. That
+# makes the vocabulary static in the way that matters -- the system can declare a new
+# operator, but only a human can say what would make it wrong.
+#
+# So the laws are stated as FORMS that take the arithmetic and the data, not as
+# sentences about a particular operator. Nothing here mentions sum, mean or count. The
+# forms are candidates; which ones are true of a given arithmetic is MEASURED by running
+# that arithmetic, and the strongest surviving form is the one admitted. A form that the
+# arithmetic violates anywhere is discarded, which is also how the hand-written
+# "non_negative" law for sum was found to be false.
+#
+# This is the difference between a checkable declaration and a declaration that merely
+# contains a check: the check is a claim about the arithmetic, and the arithmetic decides
+# whether the claim survives.
+# ---------------------------------------------------------------------------
+
+
+def _form_within_inputs(values, result):
+    return min(values) - 1e-9 <= result <= max(values) + 1e-9
+
+
+def _form_bounded_by_extremes(values, result):
+    # A RESULT CANNOT EXCEED THE TOTAL MAGNITUDE OF ITS INPUTS.
+    #
+    # This was n*min <= result <= n*max, which is a false claim about differences and
+    # ranges: max-min of [-3, -1, -7] is 6, but n*max is -3, so a correct answer was
+    # reported as violating its own law. Caught by running the form against an arithmetic
+    # rather than by reasoning about the form -- which is the point of measuring laws
+    # instead of asserting them. The surviving bound is true of sums, means, ranges and
+    # totals alike, and still rejects a value larger than any combination of the inputs.
+    return abs(result) <= sum(abs(v) for v in values) + 1e-9
+
+
+def _form_is_one_of_the_inputs(values, result):
+    return any(abs(result - v) <= 1e-9 for v in values)
+
+
+def _form_is_a_whole_number(values, result):
+    return abs(result - round(result)) <= 1e-9
+
+
+def _form_is_the_row_count(values, result):
+    return abs(result - len(values)) <= 1e-9
+
+
+#: Nothing in this table says which operator it is for. Each is a statement that either
+#: does or does not hold of an arithmetic, and the arithmetic is what decides.
+_LAW_FORMS = (
+    ("within_inputs", _form_within_inputs),
+    ("bounded_by_extremes", _form_bounded_by_extremes),
+    ("is_one_of_the_inputs", _form_is_one_of_the_inputs),
+    ("is_a_whole_number", _form_is_a_whole_number),
+    ("is_the_row_count", _form_is_the_row_count),
+)
+
+
+def _holds_on(values, result, form):
+    try:
+        return bool(form([float(v) for v in values], float(result)))
+    except (TypeError, ValueError, ZeroDivisionError, OverflowError):
+        return False
+
+
+def induce_laws(fn, probes=None) -> tuple[str, ...]:
+    """Derive the law forms this arithmetic actually satisfies, strongest first.
+
+    A form survives if the arithmetic satisfies it on every probe. Surviving forms are
+    then ranked by how many WRONG values they reject, because a form that is true and
+    never says no is the vacuity this whole layer exists to refuse. Ties keep the earlier,
+    tighter form.
+
+    Returns names from `_LAW_FORMS`, or () if the arithmetic satisfies none of them --
+    in which case a declaration has nothing checkable to say and must be refused.
+    """
+    probe_sets = probes or _PROBE_SETS
+    tested = []
+    for values in probe_sets:
+        try:
+            got = fn(list(values))
+        except Exception:
+            return ()
+        if got is None:
+            continue
+        try:
+            float(got)
+        except (TypeError, ValueError):
+            return ()
+        tested.append((list(values), float(got)))
+    if not tested:
+        return ()
+
+    # AN ARITHMETIC THAT DOES NOT DEPEND ON ITS DATA CANNOT BE CHECKED BY A LAW ABOUT
+    # ITS DATA, and saying so is the fix for a liar that got through here.
+    #
+    # `lambda v: 0.0` passed the previous test: |0| is within the total magnitude, and the
+    # form rejected an invented 1000, so it looked like a check. It was not -- the value it
+    # would give for any input is the same, and no statement about a single input can
+    # distinguish it from a correct answer. The test has to be CROSS-DATA: does the law
+    # reject the honest answer computed from DIFFERENT rows?
+    if len({round(r, 9) for _, r in tested}) < 2:
+        return ()
+
+    survivors = []
+    for name, form in _LAW_FORMS:
+        if not all(_holds_on(v, r, form) for v, r in tested):
+            continue
+        rejected = 0
+        for i, (v_i, _) in enumerate(tested):
+            for j, (_, r_j) in enumerate(tested):
+                if i != j and not _holds_on(v_i, r_j, form):
+                    rejected += 1
+        if rejected:                           # it separates answers from other data
+            survivors.append((-rejected, name))
+    survivors.sort()
+    return tuple(name for _, name in survivors)
+
+
+def law_strength(fn, laws, probes=None) -> dict:
+    """How much of the space of wrong answers does this law actually exclude?
+
+    A LAW'S STRENGTH IS NOT ITS CONFIDENCE, IT IS ITS REACH, and a caller needs to be able
+    to tell a check that catches 999 from one that would also catch a plausible mistake.
+    An INDUCED law is weaker than a written one by construction -- it can only say what is
+    true of every input the probes tried, and a median's induced law accepts the minimum
+    and the maximum because both really are inputs.
+
+    This reports the fraction of a dense range around the data that the law rejects, so a
+    weak law is visible as weak instead of looking like a strong one that happened to pass.
+    """
+    tested = []
+    for values in (probes or _PROBE_SETS):
+        try:
+            got = fn(list(values))
+        except Exception:
+            continue
+        if got is None:
+            continue
+        tested.append((list(values), float(got)))
+    if not tested:
+        return {"probes": 0, "rejected_fraction": 0.0}
+    rejected = considered = 0
+    for values, honest in tested:
+        span = max(abs(honest), max(abs(v) for v in values), 1.0)
+        for k in range(-10, 11):
+            candidate = honest + k * span / 5.0
+            considered += 1
+            if any(_run_laws(laws, values, candidate) is False for _ in (0,)):
+                rejected += 1
+    return {"probes": len(tested),
+            "rejected_fraction": round(rejected / considered, 4) if considered else 0.0}
+
+
+def law_from_name(name):
+    """The callable behind a form name, so an induced law is a real law."""
+    for n, form in _LAW_FORMS:
+        if n == name:
+            return form
+    raise ValueError(f"unknown law form {name!r}")
+
+def _run_laws(laws, values, result):
+    """True/False from the laws, or None when no law could judge."""
+    judged = False
+    ok = True
+    for law in laws:
+        checker = _LAWS[law] if isinstance(law, str) else law
+        try:
+            verdict = checker(list(values), result)
+        except Exception:
+            continue
+        if verdict is False:
+            return False
+        if verdict is True:
+            judged = True
+    return True if judged else None
+
+
+def declare_aggregate(kind: str, words, fn, laws=()) -> None:
+    """Add an aggregate as ONE declaration: its words, its arithmetic, and its check.
+
+    `laws` may be omitted, in which case they are induced from the arithmetic itself.
+
+    Refusing a declaration with no law is the point. An operator nobody can be wrong
+    with is not a capability, it is a way to be confidently wrong, and this system's
+    whole purpose is to not do that.
+
+    But having a law is not enough -- the law has to be able to SAY NO, and the
+    declaration's own arithmetic has to satisfy it. Both are checked here, before
+    anything is registered, because a declaration that fails later has already been
+    used.
+    """
+    if not isinstance(kind, str) or not kind.strip():
+        raise ValueError("an aggregate needs a name")
+    if not words:
+        raise ValueError(f"{kind}: an aggregate needs at least one word or nothing can ask for it")
+    if not callable(fn):
+        raise ValueError(f"{kind}: an aggregate needs arithmetic")
+    # A DECLARATION MAY SUPPLY ITS LAW OR HAVE ONE INDUCED FROM ITS ARITHMETIC.
+    #
+    # Requiring a hand-written law made the system's vocabulary static in the way that
+    # matters: anyone could add an operator, but only a human could say what would make it
+    # wrong. When no law is given, the arithmetic is measured against the law FORMS and the
+    # strongest ones it satisfies become its law. If it satisfies none -- it is not tied to
+    # its data in any way the system can express, like an arithmetic that always returns
+    # 999 -- the declaration is refused. The operator does not get to exist unchecked
+    # merely because its author chose not to say what would make it wrong.
+    if not laws:
+        induced = induce_laws(fn)
+        if not induced:
+            raise ValueError(
+                f"{kind}: no law was given and none could be INDUCED from the arithmetic "
+                "-- nothing this system can state would make an answer from it wrong, so "
+                "a value nobody can check is a way to be confidently wrong")
+        laws = tuple(law_from_name(n) for n in induced)
+    for law in laws:
+        if law not in _LAWS and not callable(law):
+            raise ValueError(f"{kind}: unknown law {law!r}")
+    reason = _law_is_falsifiable(kind, fn, tuple(laws))
+    if reason is not None:
+        raise ValueError(reason)
+    same_as = indistinguishable_from(kind, fn)
+    if same_as:
+        raise ValueError(
+            f"{kind}: this arithmetic is the SAME FUNCTION as {', '.join(same_as)} on "
+            "every value it was shown, so it adds no capability -- a new name for an "
+            "operator that already exists is not a new operator")
+    _AGG_WORDS[kind] = {str(w).strip().lower() for w in words}
+    _AGGREGATES[kind] = {"fn": fn, "laws": tuple(laws)}
+
+
+def aggregate_names() -> tuple[str, ...]:
+    """The aggregates that are really declared: words AND arithmetic AND a law."""
+    return tuple(k for k, v in _AGGREGATES.items() if k in _AGG_WORDS and v.get("laws"))
+
+
+def aggregate_holds(kind: str, values, result) -> bool | None:
+    """Does `result` satisfy what was declared about `kind`? None if it cannot be judged."""
+    spec = _AGGREGATES.get(kind)
+    if not spec:
+        return None
+    if isinstance(values, dict) and "_body" in values:
+        # A table's law is about its ROWS, and the row count is the value being judged.
+        vals = [1.0] * len(values["_body"])
+    else:
+        vals = [v for v in values if v is not None] if isinstance(values, list) else None
+    # "I COULD NOT JUDGE" IS NOT "FINE".
+    #
+    # This returned True whenever `values` was not a list -- including for every TABLE,
+    # because a table is a dict -- so no law ran at all on table-valued aggregates and a
+    # count of a table was licensed at any value. The return type already says `None`
+    # means not-judged; the bug was that the caller could not tell True from None because
+    # both looked like success. It still cannot, so the distinction is made here: an
+    # aggregate whose law cannot be evaluated is reported None, and `holds` treats None
+    # as "no verdict" rather than as a pass.
+    if vals is None:
+        return None
+    verdict = _run_laws(spec.get("laws", ()), vals, result)
+    if verdict is False:
+        return False
+    extra = spec.get("extra")
+    if callable(extra):
+        try:
+            if extra(vals, result) is False:
+                return False
+        except (TypeError, ValueError):
+            pass
+    return verdict
+
+
 def _aggregate(kind: str):
-    fn = {
-        "sum": lambda v: sum(v),
-        "max": lambda v: max(v),
-        "min": lambda v: min(v),
-        "mean": lambda v: sum(v) / len(v),
-        "count": lambda v: len(v),
-    }[kind]
+    fn = _AGGREGATES[kind]["fn"]
 
     def apply(values, *_):
         # A TABLE HAS ROWS, AND A COUNT OF THEM IS ITS ROW COUNT.
@@ -1468,7 +1980,20 @@ def holds(node: Node, value) -> bool:
     `verify` is `reproducible AND holds`. The search uses `holds`.
     """
     try:
-        return _holds_invariants(node)
+        # JUDGE THE VALUE GIVEN, NOT ONE RE-DERIVED FROM THE SAME EXPRESSION.
+        #
+        # This call dropped `value` on the floor: `_holds_invariants(node)` re-evaluated the
+        # node and compared the expression with ITSELF. `holds(node, 1027)` for a sum that
+        # is 27 checked 27 and returned True. Every law declared on an operator was
+        # therefore a tautology -- the one thing an invariant exists to catch, a value the
+        # expression *should not* have been able to produce, was the one thing it could not
+        # see, because it never looked at the value.
+        #
+        # An invariant is only worth stating if it derives the expected value by a route
+        # the expression did not take. Passing the value in is what makes the routes
+        # different: the expression computed it once, and the law asks whether that number
+        # is possible.
+        return _holds_invariants(node, value)
     except (EvalError, TypeError, ValueError, ZeroDivisionError,
             AttributeError, KeyError, IndexError):
         return True
@@ -1495,7 +2020,10 @@ def _child_nodes(node: Node):
                     yield item
 
 
-def _holds_invariants(node: Node) -> bool:
+_NO_VALUE = object()
+
+
+def _holds_invariants(node: Node, value=_NO_VALUE) -> bool:
     """The statements about a partition that must be true of any correct answer.
 
     These are asserted against the DATA, by a route the expression did not take: the
@@ -1512,7 +2040,38 @@ def _holds_invariants(node: Node) -> bool:
     # judgement about a value here is really a judgement about the whole expression that
     # produced it, so the walk descends before it answers.
     for child in _child_nodes(node):
+        # a child is judged on its own value, which is a different route from the parent's
         if not _holds_invariants(child):
+            return False
+
+    # EVERY AGGREGATE ANSWERS TO ITS OWN DECLARED LAW.
+    #
+    # Until now `_holds_invariants` returned True for every aggregate except `sum`, so a
+    # newly declared operator -- `median`, say -- was a word nothing could check. The law
+    # lives in the operator's declaration, so a declaration cannot exist without one and
+    # an operator cannot be added that the system is unable to be wrong with.
+    if node.op == "aggregate":
+        kind, child = node.args[0], node.args[1]
+        try:
+            values = evaluate(child)
+        except (EvalError, TypeError, ValueError, ZeroDivisionError, KeyError, IndexError):
+            return True
+        if value is _NO_VALUE:
+            # reached from an invariant walk that has no value to judge: nothing to check
+            try:
+                got = evaluate(node)
+            except (EvalError, TypeError, ValueError, ZeroDivisionError, KeyError, IndexError):
+                return True
+        else:
+            got = value
+        # PASS THE TABLE THROUGH; DO NOT FLATTEN IT TO "NOT JUDGED".
+        #
+        # `values if isinstance(values, list) else None` discarded every table before the
+        # law could see it, so `count(t@file)` was never checked at all -- and a count of a
+        # table is exactly the operator that returned 2 for every file in the world. The
+        # law for a count is about rows, and rows are what the table has.
+        verdict = aggregate_holds(kind, values, got)
+        if verdict is False:
             return False
 
     # A GROUPING'S KEYS ARE THE DISTINCT KEYS IN THE ROWS IT SUMMARISES.

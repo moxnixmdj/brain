@@ -1,0 +1,237 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "AN_INVARIANT_THAT_CANNOT_FAIL_IS_NOT_AN_INVARIANT_AND_A_LAW_CAN_BE_DERIVED_20261104",
+  "action_intent_id": "AN_INVARIANT_THAT_CANNOT_FAIL_IS_NOT_AN_INVARIANT_AND_A_LAW_CAN_BE_DERIVED_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1",
+  "date": "2026-11-04",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "90e0c1aba24d20879e0ad365e3ec39ac18001df4",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Falsify the previous round's claim that operators cannot exist unchecked: it was false three ways, and the third made the first two unavoidable. holds() dropped its value and re-derived the expression's own answer, so every law was a tautology. A vacuous law satisfied 'has a law'. 'Could not judge' was reported as 'fine'. Then replace the hand-written laws with laws INDUCED from the arithmetic, so the vocabulary can grow without a human writing its check.",
+  "selected_route": "ENUMERATE_BY_OPERATOR_TYPE_THEN_CHOOSE_WITH_THE_INHERITED_RULES",
+  "causal_blocker": "holds(node, value) called _holds_invariants(node), which re-evaluated the node and compared the expression with itself: holds(node, 1027) for a sum that is 27 checked 27 and returned True. Every law declared the previous round was therefore unfalsifiable by construction, and 'a declaration must be checkable' was false in the most direct way. The laws were also all hand-written, so a declared operator could only be checked by a human who wrote its law for it.",
+  "expected_parent_change": "holds judges the value it is given, so a value the expression could not have produced is refused at the search and at the front door; a law must be able to say no before a declaration registers; and a declaration with no law has one induced from its own arithmetic, or is refused if none can be.",
+  "expected_parent_frontier_change": "A capability can be added without a human writing what would make it wrong, and the reach of the resulting check is measured instead of assumed.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::holds(node, value) called _holds_invariants(node), which re-evaluated the node and compared the expression with itself: holds(node, 1027) for a sum that is 27 checked 27 and returned True. Every law declared the previous round was therefore unfalsifiable by construction, and 'a declaration must be checkable' was false in the most direct way. The laws were also all hand-written, so a declared operator could only be checked by a human who wrote its law for it.",
+  "falsification_condition": "holds(node, v) returns the same verdict for two different v on the same node, or a constant arithmetic is accepted, or an induced law is false of the arithmetic that induced it, or a declaration with no law is refused when a true law exists.",
+  "stop_condition": "THE_VALUE_IS_JUDGED__A_CONSTANT_IS_REFUSED__AN_INDUCED_LAW_IS_TRUE_OF_ITS_ARITHMETIC__CHECKS_REPORT_THEIR_REACH__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "explicit_user_authorization": "Owner directive 2026-11-04, repeated six times: 'You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' Then: 'go'. The answer given each round was No. $0 spend, zero capability credit claimed.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/value_algebra_v1.py",
+      "canonical/tests/test_an_invariant_that_cannot_fail_is_not_an_invariant_v1.py",
+      "canonical/tests/test_a_law_can_be_derived_from_an_arithmetic_v1.py",
+      "canonical/action_intents/AN_INVARIANT_THAT_CANNOT_FAIL_IS_NOT_AN_INVARIANT_AND_A_LAW_CAN_BE_DERIVED_20261104_V1.json"
+    ],
+    "route_class": "COMPOSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_AN_OPERATOR_CANNOT_EXIST_UNCHECKED_BECAUSE_ITS_DECLARATION_CARRIES_A_LAW__THE_LAW_WAS_NEVER_APPLIED_TO_THE_VALUE",
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S"
+  },
+  "measured_effect": "HOLDS_27_TRUE_AND_HOLDS_1027_FALSE_ON_THE_SAME_NODE__A_LYING_SUM_PRIMITIVE_IS_REFUSED_AT_THE_FRONT_DOOR_INSTEAD_OF_REPORTED_AS_1550__MEDIAN_DECLARED_WITH_NO_LAW_ANSWERS_7.0_VERIFIED__EVERY_CONSTANT_ARITHMETIC_REFUSED__LAW_STRENGTH_MEASURED_COUNT_95PCT_MEAN_83PCT_SUM_66PCT__139_TESTS_PASS__SWEEP_UNCHANGED",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__WHAT_IS_MEASURED_IS_THAT_A_VALUE_THE_EXPRESSION_COULD_NOT_HAVE_PRODUCED_IS_REFUSED_AND_THAT_A_LAW_CAN_BE_DERIVED_FROM_AN_ARITHMETIC_OR_REFUSED",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "prior_work_reused": "The choice rules -- a word is spent once; filter on full accounting then fewest operators; ties go to the operator the question named; 'per' is a filter not a rank -- are the incumbent search's, kept rather than re-derived. The existing search still runs first and answers everything it always answered.",
+  "recursive_obs": {
+    "canonical_base_commit": "90e0c1aba24d20879e0ad365e3ec39ac18001df4",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "LAWS_DERIVED_FROM_ARITHMETIC__HOLDS_JUDGES_THE_VALUE_GIVEN__CONSTANTS_REFUSED__LAW_STRENGTH_MEASURED",
+    "selected_route": "ENUMERATE_BY_OPERATOR_TYPE_THEN_CHOOSE_WITH_THE_INHERITED_RULES",
+    "selected_surviving_route": "DECLARE_OPERATORS_AS_DATA_AND_ENUMERATE_THEIR_TYPED_COMPOSITIONS_INSTEAD_OF_APPENDING_SENTENCES",
+    "deleted_or_bypassed_paths": [
+      "THE_HARDCODED_FIVE_ENTRY_AGGREGATE_DICT",
+      "THE_TRIALS_SECOND_COPY_OF_THE_AGGREGATE_VOCABULARY",
+      "AN_INVARIANT_WALK_THAT_EXEMPTED_EVERY_AGGREGATE_EXCEPT_SUM",
+      "A_GROWTH_TEST_THAT_PATCHED_THE_ARITHMETIC_AND_CALLED_IT_A_DECLARATION"
+    ],
+    "stop_condition": "THE_VALUE_IS_JUDGED__A_CONSTANT_IS_REFUSED__AN_INDUCED_LAW_IS_TRUE_OF_ITS_ARITHMETIC__CHECKS_REPORT_THEIR_REACH__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+    "expected_parent_level_state_change": "A capability can be added without a human writing what would make it wrong, and the reach of the resulting check is measured instead of assumed.",
+    "why_selected_route_is_fastest_sufficient": "THE_EXISTING_SEARCH_ALREADY_ENCODES_314_LINES_OF_MEASURED_RULES__ENUMERATION_REUSES_THEM_INSTEAD_OF_RE_DERIVING_THEM_AND_IS_CONSULTED_ONLY_WHERE_THEY_PRODUCE_NOTHING",
+    "iteration_limit": 4,
+    "routes_considered": [
+      "ENUMERATE_TYPED_COMPOSITIONS_AND_DEFER_TO_THE_EXISTING_SEARCH",
+      "ENUMERATE_FIRST_AND_DISPLACE_THE_SEARCH__REJECTED_BROKE_SIX_MEASURED_RULES",
+      "ADD_MEDIAN_RATIO_AND_RUNNING_TOTAL_AS_THREE_MORE_APPENDS__REJECTED_STILL_A_STATIC_MENU"
+    ],
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
+      "challenger_routes": []
+    },
+    "obs_goal": {
+      "real_outcome": "AN_ANSWER_SPACE_THAT_GROWS_WITH_THE_VOCABULARY_RATHER_THAN_WITH_EDITS_TO_THE_SEARCH",
+      "proxy_goals_deleted": [
+        "COUNTING_CANDIDATES_APPENDED_AS_A_MEASURE_OF_CAPABILITY",
+        "ASSERTING_GENERALISATION_IN_A_COMMIT_MESSAGE"
+      ],
+      "surviving_necessity": "ENUMERATE_WELL_TYPED_COMPOSITIONS_TO_A_FIXED_POINT_AND_CHOOSE_BY_ACCOUNTING_AND_SIZE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__THE_SET_OF_ANSERABLE_QUESTIONS_WAS_THE_SET_OF_SENTENCES_SOMEBODY_WROTE",
+      "surviving_causal_blocker": "A_CHECK_THAT_RE_RAN_THE_EXPRESSION_COMPARED_IT_WITH_ITSELF",
+      "delete_bypass_substitute_options": [
+        "DELETE_THE_APPENDS_BY_DERIVING_THEM_FROM_THE_OPERATOR_TABLE",
+        "BYPASS_THE_LIST_WHEN_IT_BUILDS_NOTHING",
+        "SUBSTITUTE_TYPE_DIRECTED_ENUMERATION_FOR_ENUMERATED_SENTENCES"
+      ]
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "RE_DERIVING_THE_INCUMBENT_RULES_IN_A_SECOND_IMPLEMENTATION",
+        "WRITING_ONE_SENTENCE_PER_EXPRESSION_SHAPE"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/value_algebra_v1.py",
+        "canonical/runtime/operation_trial_v1.py",
+        "canonical/runtime/inspect_v1.py",
+        "canonical/runtime/autonomous_v1.py",
+        "canonical/runtime/regression_sweep_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__PURE_STDLIB_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
+      ],
+      "surviving_gap": "AN_INDUCED_LAW_IS_WEAKER_THAN_A_DEFINITIONAL_ONE__A_MEDIANS_INDUCED_LAW_ACCEPTS_ITS_MINIMUM_AND_MAXIMUM__THE_REACH_IS_MEASURED_BUT_NOT_EXTENDED"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "THE_INCUMBENT_CHOICE_RULES_ARE_REUSED_RATHER_THAN_REPLACED",
+        "THE_FRONT_DOOR_ROUTING_IS_UNTOUCHED"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "HAND_MAINTAINED_CANDIDATE_SENTENCES_SUPERSEDED_BY_ENUMERATION"
+      ],
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SEARCH_FIRST_AND_THE_ENUMERATION_ONLY_WHERE_IT_IS_SILENT"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "ENUMERATION_BUILDS_344_EXPRESSIONS_FOR_ONE_QUESTION_IN_UNDER_A_TENTH_OF_A_SECOND"
+      ],
+      "search_stop_decision": "STOP_WHEN_AN_ITERATION_ADDS_NO_NEW_EXPRESSION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ENUMERATION_FIRST_BROKE_SIX_RULES_THE_INCUMBENT_HAD_ALREADY_PAID_FOR__THREE_MORE_APPENDS_WOULD_STILL_HAVE_BEEN_A_MENU",
+      "routes_ranked": [
+        "ENUMERATE_AND_DEFER__SELECTED",
+        "ENUMERATE_FIRST__REJECTED",
+        "THREE_MORE_APPENDS__REJECTED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "THIRTEEN_PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS__GROWTH_MEASURED_BY_COUNTING_EXPRESSIONS_BEFORE_AND_AFTER_A_DECLARATION__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-11-04T00:00:00Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_HAND_WRITTEN_CANDIDATE_SENTENCES_AS_THE_ANSWER_SPACE",
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "tournament": {
+      "proposal_id": "LAWS_INDUCED_FROM_ARITHMETIC_WITH_MEASURED_REACH",
+      "decisive_question": "DOES_DECLARING_ONLY_WORDS_AND_ARITHMETIC_YIELD_A_LAW_TRUE_OF_THAT_ARITHMETIC_AND_STRONG_ENOUGH_TO_REFUSE_A_DIFFERENT_DATASETS_ANSWER",
+      "falsifier_id": "A_CONSTANT_ARITHMETIC_IS_ACCEPTED_OR_AN_INDUCED_LAW_IS_FALSE_OF_ITS_OWN_ARITHMETIC_OR_HOLDS_IGNORES_ITS_VALUE_ARGUMENT",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
+    }
+  },
+  "next_step": "Let the creature PROPOSE the law FORM a failed question needs, not merely select from the forms I wrote: the forms are still mine. A proposal that no data can falsify is refused by the induction test that already exists."
+}

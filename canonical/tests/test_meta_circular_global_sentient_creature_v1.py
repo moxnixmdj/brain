@@ -20,6 +20,7 @@ verifying:
 """
 from __future__ import annotations
 
+import ast
 import pathlib
 import subprocess
 import sys
@@ -457,6 +458,19 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         self.assertTrue(MCOG.admit_policy_organ(flat_organ)["ok"])
         self.assertEqual(MCOG._policy_horizon_bin(factory), "h2")
         self.assertEqual(MCOG._policy_horizon_bin(flat_organ), "h1")
+        self.assertGreaterEqual(len(flats), 2)
+        iter_src = flats[1]
+        self.assertIn("while ", iter_src)
+        self.assertFalse(RSA._organ_source_is_self_recursive(iter_src))
+        iter_organ = MCOG.make_organ(
+            stratum=MCOG.POLICY,
+            name="instrumental_policy",
+            task_signature="policy::instrumental_q",
+            entrypoint="score_actions",
+            source_code=iter_src,
+        )
+        self.assertTrue(MCOG._policy_organ_holds_ring0(iter_organ))
+        self.assertEqual(MCOG._policy_horizon_bin(iter_organ), "h2")
         scored = flat_organ.invoke(
             [
                 {"id": "shiny", "value": 12.0, "cost": 1.0},
@@ -477,20 +491,65 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             self.assertIsNotNone(graph.policy_archive)
             rec_flags = set()
             horizons = set()
+            pairs = set()
             cells = graph.policy_archive._load().get("cells") or {}
             self.assertGreaterEqual(len(cells), 2)
             for rec in cells.values():
                 if rec.get("source_code"):
                     rec_flags.add(bool(rec.get("recursive")))
                     horizons.add(str(rec.get("horizon_bin") or ""))
+                    pairs.add((bool(rec.get("recursive")), str(rec.get("horizon_bin") or "")))
             self.assertEqual(rec_flags, {True, False})
             self.assertTrue({"h1", "h2"} <= horizons)
+            self.assertIn((False, "h2"), pairs)
             elites = graph.policy_archive.elite_organ_sources(limit=4)
             self.assertGreaterEqual(len(elites), 2)
             pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
             self.assertIsNotNone(pol)
             self.assertFalse(pol.metadata.get("bootstrap_factory"))
             self.assertTrue(MCOG._policy_organ_holds_ring0(pol))
+
+    def test_hors_crossover_invents_policy_from_living_parents(self):
+        """Plotkin LGG of rec × flat is not a compiler pass: mixed hole fillings are new genomes."""
+        factory = MCOG.compile_policy_organ()
+        flats = MCOG._structural_policy_mutations(factory.source_code)
+        self.assertTrue(flats)
+        kids = MCOG._hors_crossover_mutations(factory.source_code, flats[0])
+        self.assertTrue(kids)
+        self.assertTrue(all(k != factory.source_code and k != flats[0] for k in kids))
+        admitted = []
+        board = [
+            {"id": "shiny", "value": 12.0, "cost": 1.0},
+            {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+            {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+        ]
+        for src in kids:
+            organ = MCOG.make_organ(
+                stratum=MCOG.POLICY,
+                name="instrumental_policy",
+                task_signature="policy::instrumental_q",
+                entrypoint="score_actions",
+                source_code=src,
+            )
+            if not MCOG.admit_policy_organ(organ).get("ok"):
+                continue
+            ranked = organ.invoke(board, 3.0, None)
+            self.assertEqual(ranked[0]["id"], "forge_sensor")
+            admitted.append(organ)
+        self.assertTrue(admitted)
+        # Recurse only along unlocks: not the factory (also scores remaining ids) and not flatten.
+        q_fn = next(
+            fn
+            for fn in ast.walk(ast.parse(admitted[0].source_code))
+            if isinstance(fn, ast.FunctionDef) and fn.name == "_q"
+        )
+        rec_calls = [
+            n
+            for n in ast.walk(q_fn)
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == "_q"
+        ]
+        self.assertTrue(rec_calls)
+        self.assertNotIn("or[", ast.unparse(q_fn).replace(" ", ""))
 
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")

@@ -90,8 +90,22 @@ def admit_policy_organ(organ: Any, traces: Sequence[Mapping[str, Any]] = ()) -> 
     return _admit(organ, traces)
 
 
+def _splice_nested_function(
+    tree: ast.Module, outer_name: str, nested_name: str, new_nested: ast.FunctionDef
+) -> ast.Module:
+    out = copy.deepcopy(tree)
+    for outer in out.body:
+        if not (isinstance(outer, ast.FunctionDef) and outer.name == outer_name):
+            continue
+        outer.body = [
+            new_nested if isinstance(stmt, ast.FunctionDef) and stmt.name == nested_name else stmt
+            for stmt in outer.body
+        ]
+    return out
+
+
 def mutate_organ_source(source_code: str) -> list[str]:
-    """RSA Op1 on an in-memory organ source (no Ring-1 `.py` file)."""
+    """RSA Op1 on an in-memory organ source, including nested `_q` / `_immediate`."""
     src = str(source_code or "")
     if not src.strip():
         return []
@@ -104,24 +118,52 @@ def mutate_organ_source(source_code: str) -> list[str]:
     pure = _infer_module_pure_functions(tree)
     out: list[str] = []
     seen: set[str] = {src}
+
+    def _accept(cand_tree: ast.AST) -> None:
+        if any(isinstance(s, (ast.Import, ast.ImportFrom)) for s in getattr(cand_tree, "body", ())):
+            return
+        try:
+            after = ast.unparse(cand_tree) + "\n"
+        except Exception:
+            return
+        if after in seen:
+            return
+        seen.add(after)
+        out.append(after)
+
     for nd in tree.body:
         if not isinstance(nd, ast.FunctionDef):
             continue
         try:
             lowered = _lower_function_via_semantic_dataflow(nd, pure, tree)
         except Exception:
-            continue
+            lowered = []
         for cand_tree, _law in lowered[:3]:
+            _accept(cand_tree)
+            if len(out) >= 6:
+                return out
+        for nested in nd.body:
+            if not isinstance(nested, ast.FunctionDef):
+                continue
+            wrap = ast.Module(body=[copy.deepcopy(nested)], type_ignores=[])
+            ast.fix_missing_locations(wrap)
             try:
-                after = ast.unparse(cand_tree) + "\n"
+                nested_lowered = _lower_function_via_semantic_dataflow(nested, {nested.name} | pure, wrap)
             except Exception:
                 continue
-            if after in seen:
-                continue
-            seen.add(after)
-            out.append(after)
-            if len(out) >= 4:
-                return out
+            for cand_tree, _law in nested_lowered[:2]:
+                fns = [
+                    s
+                    for s in cand_tree.body
+                    if isinstance(s, ast.FunctionDef) and s.name == nested.name
+                ]
+                if not fns or any(isinstance(s, (ast.Import, ast.ImportFrom)) for s in cand_tree.body):
+                    continue
+                spliced = _splice_nested_function(tree, nd.name, nested.name, fns[0])
+                ast.fix_missing_locations(spliced)
+                _accept(spliced)
+                if len(out) >= 6:
+                    return out
     return out
 
 RING0_IMMUTABLE_PREFIXES: tuple[str, ...] = (
