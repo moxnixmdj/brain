@@ -45,6 +45,21 @@ from canonical.runtime import self_authored_obligations_v1 as A
 
 SCHEMA = "PROJECT_BRAIN_CREATURE_RUNTIME_V1"
 
+# What a creature is given to live on, and how much of it one attempt costs.
+#
+# Measured 2026-11-04: at the previous default of 40 life against 1.0 per attempt, a creature gets
+# FORTY attempts in its entire existence and `Life` has no earn method. The predictor's own
+# MIN_SETTLED is 20, so it reached a verdict on 40 samples and then died. Raising the grant alone
+# moved its own-scorer skill +0.465 -> +0.681 (CALIBRATED at every grant; the curve saturates).
+#
+# At a fed budget it stops from WORK EXHAUSTION, not life, and this is the number that decides the
+# next piece of work: 23 distinct capabilities closed out of 155 registered, across 33 sessions and
+# 379 settled predictions, and 89 parked at max_attempts=4. Every ladder step it takes is a RETRY of
+# a capability it already failed, because a settled pass is never re-attempted. So extra life buys
+# calibration evidence about a fixed repertoire and cannot add one capability to it. That is the
+# ceiling, and it is a property of what a failure does (increments a counter), not of the budget.
+DEFAULT_LIFE_GRANT = 480.0
+
 Perform = Callable[[M.Work, "Creature"], Mapping[str, Any]]
 
 
@@ -74,9 +89,16 @@ class Creature:
     # recorded, reported, persisted, and never once consulted when the creature chose.
     _checkable: dict[str, bool] = field(default_factory=dict, repr=False)
     _closed: set[str] = field(default_factory=set, repr=False)
-    # Blocked work is parked after two attempts. Retrying forever is the busywork failure mode the
+    # Blocked work is parked after `max_attempts`. Retrying forever is the busywork failure mode the
     # self-authored obligations module exists to prevent; found by running this one, which attempted
     # the same blocked item six times in six cycles and reported progress each time.
+    #
+    # Measured 2026-11-04 against a fed life budget, this was proposed as a capability lever and it
+    # is not one: at max_attempts 2 -> 379 settled predictions and 23 closed; 4 -> the same 23; 6 ->
+    # the same 23, with skill flat-to-down across it (+0.681 / +0.690 / +0.610). Raising it only
+    # re-attempts capabilities already known to fail, and it breaks three tests that encode this
+    # deliberate anti-busywork design. So it is UNCHANGED at 2: the measurement rejected the change,
+    # and shipping it anyway would have been churn dressed as progress.
     _blocked: dict[str, int] = field(default_factory=dict, repr=False)
     max_attempts: int = 2
     _log: list[dict[str, Any]] = field(default_factory=list, repr=False)
@@ -1307,7 +1329,7 @@ def run_awake_creature_pulse(
     *,
     state_root: pathlib.Path | str | None = None,
     identity: str = "creature",
-    life: float = 40.0,
+    life: float = DEFAULT_LIFE_GRANT,
     ledger_path: str | pathlib.Path | None = None,
     skill_store_path: str | pathlib.Path | None = None,
     workflow_db_path: str | pathlib.Path | None = None,
@@ -1349,7 +1371,7 @@ def run_awake_creature_pulse(
     )
 
 
-def boot(root: pathlib.Path | str, *, identity: str = "creature", life: float = 40.0
+def boot(root: pathlib.Path | str, *, identity: str = "creature", life: float = DEFAULT_LIFE_GRANT
          ) -> Creature:
     creature = Creature(identity=identity, root=pathlib.Path(root), life_grant=life)
     creature.boot()
@@ -1357,7 +1379,7 @@ def boot(root: pathlib.Path | str, *, identity: str = "creature", life: float = 
 
 
 def run_unattended_inspector_investigation(root: pathlib.Path | str, *, cycles: int = 6,
-                                           identity: str = 'creature', life: float = 40.0
+                                           identity: str = 'creature', life: float = DEFAULT_LIFE_GRANT
                                            ) -> dict[str, Any]:
     """Select or resume one real inspector gap, without a caller naming the target.
 
@@ -2306,7 +2328,7 @@ def run_sovereign_board(
     *,
     cycles: int = 12,
     identity: str = "creature",
-    life: float = 40.0,
+    life: float = DEFAULT_LIFE_GRANT,
     slice_size: int = 112,
     extra_failing_tests: Sequence[tuple[str, str]] = (),
     numeric_chases: Sequence[Mapping[str, Any]] = (),

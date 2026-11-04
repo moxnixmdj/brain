@@ -294,7 +294,9 @@ class OptimalUnifiedCreatureAndPrC2Tests(unittest.TestCase):
             self.assertEqual(p1["creature"]["identity"], "unified-creature")
             epoch_1 = p1["creature"]["epoch"]
             life_after_1 = p1["creature"]["life_remaining"]
-            self.assertLess(life_after_1, 40.0)
+            # Bound to the named grant, not the literal 40.0: the assertion is "life was spent",
+            # which is what this test is about, and 40.0 would silently re-starve the creature.
+            self.assertLess(life_after_1, creature_mod.DEFAULT_LIFE_GRANT)
 
             # Second boot on same state_root increments epoch, preserves spent life, and wastes 0.0 Life on green proj
             p2 = creature_mod.run_awake_creature_pulse(

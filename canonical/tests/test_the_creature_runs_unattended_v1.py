@@ -69,7 +69,11 @@ class AssemblyTests(unittest.TestCase):
     def test_it_boots_with_an_identity_a_life_and_a_posture(self):
         report = R.boot(self.root).report()
         self.assertEqual(report["identity"], "creature")
-        self.assertEqual(report["life_remaining"], 40.0)
+        # Deliberately bound to the named default rather than the literal 40.0. Measured 2026-11-04:
+        # at 40 the creature gets 40 attempts for its entire life against 1.0 per attempt, while its
+        # own predictor needs 20 settled samples per verdict; raising the grant alone moved its
+        # own-scorer skill +0.465 -> +0.681. A literal here would silently re-starve it.
+        self.assertEqual(report["life_remaining"], R.DEFAULT_LIFE_GRANT)
         self.assertEqual(report["posture"], "MEASURED")
 
     def test_it_works_with_nobody_assigning_anything(self):
