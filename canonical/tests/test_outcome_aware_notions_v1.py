@@ -413,11 +413,11 @@ def test_legacy_test_with_unchanged_sufficient_feedback_can_be_requalified_at_pu
 def test_new_real_experience_can_invalidate_an_old_plan_under_the_search_budget(tmp_path):
     root, trained, _ = train_once(tmp_path / "learn_add")
     assert NotionStore(trained.notions_path).learned_operators() == ["Add"]
-    source = "def ref(z):\n    return 5*z\n\ndef target(a,b):\n    return a*b\n"
+    source = "def ref(z):\n    return 6*z\n\ndef target(a,b):\n    return a*b\n"
     workspace = tmp_path / "pending"
     module = make_workspace(workspace, source)
     d = daemon(workspace, root)
-    original, _ = provide_feedback(d, "ref", "target", lambda v: 3 * v[0] + 2 * v[1])
+    original, _ = provide_feedback(d, "ref", "target", lambda v: 4 * v[0] + 2 * v[1])
     assert original["status"] == "bounded_agreement" and d._sense_failing_workspace_tests()
     test = workspace / "tests" / "test_example.py"
     binding = json.loads(test.read_text().splitlines()[0][len("# brain-notion-v1 "):])
@@ -440,12 +440,14 @@ def test_new_real_experience_can_invalidate_an_old_plan_under_the_search_budget(
     assert store.plans[original["id"]]["status"] == "bounded_agreement"  # old cached plan
     with store.hold_reviewed_feedback(binding, workspace_root=workspace) as valid:
         assert not valid
-    candidate = source.replace("return a*b", "return a + (a + (a + (b + b)))")
+    candidate = source.replace("return a*b", "return a + (a + (a + (a + (b + b))))")
     published, _, reason = _publish_notion_candidate(
         workspace, test, {"pkg/example.py": candidate}, notions_path=d.notions_path)
     assert not published and reason == "NOTION_FEEDBACK_STALE" and module.read_text() == source
     refreshed = finding(d, "ref", "target")
     assert refreshed["status"] == "truncated_search" and refreshed["plan"]["truncated"]
+    assert refreshed["plan"]["search"]["reason"] == "intermediate_signature_budget"
+    assert refreshed["plan"]["search"]["learned_binary_nodes_explored"] == 4
 
 
 def test_exception_aware_semantic_compression_matches_exhaustive_small_grammar():

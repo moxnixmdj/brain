@@ -447,9 +447,11 @@ def _semantic_compositions(
 
     Exact typed values and modeled exception outcomes compose on these points;
     unknowns propagate conservatively in Python's left-to-right evaluation order.
-    A shared unknown is not proof of equal behavior. Every level must complete
-    within both caps and without an unrefuted unknown before it can justify
-    deeper search. The finite domain says nothing about other inputs.
+    At a possible stopping depth, fully refuted root behaviors may be discarded
+    while all combinations are streamed. That suffices to enumerate survivors,
+    but never to expand another depth: if no survivor is found after discarding
+    intermediates, report incomplete search. A shared unknown is not proof of
+    equal behavior. The finite domain says nothing about other inputs.
     """
     domain = _semantic_points(len(target.params), constraints)
     base = {"method": "finite_domain_signature", "learned_binary_node_budget": MAX_LEARNED_BINARY_NODES,
@@ -466,76 +468,128 @@ def _semantic_compositions(
     levels: list[dict[tuple[Any, ...], tuple[tuple[Any, ...], ast.expr]]] = []
     seen: dict[tuple[Any, ...], tuple[tuple[Any, ...], ast.expr]] = {}
     leaves: dict[tuple[Any, ...], tuple[tuple[Any, ...], ast.expr]] = {}
+    leaf_overflow = False
     for i, name in enumerate(target.params):
         values = tuple(point[i] for point in points)
         key = _signature(values)
+        if key not in leaves and len(leaves) >= limit:
+            leaf_overflow = True
+            break
         leaves.setdefault(key, (values, ast.Name(id=name, ctx=ast.Load())))
     seen.update(leaves)
     levels.append(leaves)
     supported = {cls.__name__: cls for cls in _BINARY}
     attempts = 0
+    full_vectors = 0
+    early_refutations = 0
+    terminal_filtering = False
+    peak_retained = len(seen)
+
+    def combine(op: type[ast.operator], left: Any, right: Any) -> Any:
+        # Python evaluates the left operand before the right. A model-unknown
+        # child is not itself a predicted exception.
+        if left is None or isinstance(left, str):
+            return left
+        if right is None or isinstance(right, str):
+            return right
+        try:
+            return _apply_binary(op, left, right)
+        except (ZeroDivisionError, OverflowError) as exc:
+            return type(exc).__name__
+        except (ArithmeticError, KeyError, TypeError, ValueError, RecursionError):
+            return None
+
+    def classify(values: Sequence[Any]) -> bool | None:
+        return _constraint_result([_vector_outcome(values[i]) for i, _ in required],
+                                  [expected for _, expected in required])
 
     def finish(depth: int, current: Mapping[tuple[Any, ...], tuple[tuple[Any, ...], ast.expr]],
-               truncated: bool) -> tuple[list[ast.expr], bool, dict[str, Any]]:
+               truncated: bool, reason: str = "") -> tuple[list[ast.expr], bool, dict[str, Any]]:
         survivors: list[ast.expr] = []
         indeterminate = 0
         if depth > INITIAL_LEARNED_BINARY_NODES:
             for values, expr in current.values():
-                match = _constraint_result([_vector_outcome(values[i]) for i, _ in required],
-                                           [expected for _, expected in required])
+                match = classify(values)
                 if match is True:
                     survivors.append(expr)
                 elif match is None:
                     indeterminate += 1
         incomplete = truncated or bool(indeterminate)
+        retained = len(seen) + len(current)
         info = {**base, "learned_binary_nodes_explored": depth,
                 "expansion_rounds": max(0, depth - INITIAL_LEARNED_BINARY_NODES),
-                "candidates_examined": len(seen) + len(current), "semantic_combinations": attempts,
-                "domain_points": len(points), "complete_through_depth": not incomplete,
-                "indeterminate_candidates": indeterminate}
+                # After streaming, this is a lower bound rather than the number
+                # of distinct behaviors examined; discarded ones are not counted.
+                "candidates_examined": retained, "candidates_examined_is_lower_bound": terminal_filtering,
+                "retained_signatures": retained, "peak_retained_signatures": peak_retained,
+                "terminal_refutation_filtering": terminal_filtering,
+                "semantic_combinations": attempts, "full_domain_combinations": full_vectors,
+                "constraint_first_refutations": early_refutations, "domain_points": len(points),
+                "complete_through_depth": not incomplete, "indeterminate_candidates": indeterminate}
         if indeterminate:
             info["reason"] = "candidate_evaluation_unknown"
+        elif reason:
+            info["reason"] = reason
         return survivors, incomplete, info
 
+    if leaf_overflow:
+        return finish(0, {}, True, "semantic_signature_budget")
     for depth in range(1, MAX_LEARNED_BINARY_NODES + 1):
         current: dict[tuple[Any, ...], tuple[tuple[Any, ...], ast.expr]] = {}
+        terminal_filtering = False
         for left_depth in range(depth):
             for name in operators:
                 op = supported[name]
                 for left_values, left_expr in levels[left_depth].values():
                     for right_values, right_expr in levels[depth - left_depth - 1].values():
+                        if attempts >= MAX_SEMANTIC_COMBINATIONS:
+                            return finish(depth, current, True, "semantic_combination_budget")
                         attempts += 1
-                        if attempts > MAX_SEMANTIC_COMBINATIONS:
-                            return finish(depth, current, True)
-                        values_list: list[int | float | str | None] = []
-                        for left, right in zip(left_values, right_values):
-                            # Evaluating the left operand can stop evaluation of
-                            # the right. Unknown is not a predicted exception.
-                            if left is None or isinstance(left, str):
-                                values_list.append(left)
+                        if terminal_filtering and len(required) < len(points):
+                            # Once this level is terminal-only, a known
+                            # contradiction needs no full-domain vector. An
+                            # unknown alone cannot eliminate a candidate.
+                            refuted = False
+                            for index, expected in required:
+                                value = combine(op, left_values[index], right_values[index])
+                                if matches_expected(_vector_outcome(value), expected) is False:
+                                    refuted = True
+                                    break
+                            if refuted:
+                                early_refutations += 1
                                 continue
-                            if right is None or isinstance(right, str):
-                                values_list.append(right)
-                                continue
-                            try:
-                                values_list.append(_apply_binary(op, left, right))
-                            except (ZeroDivisionError, OverflowError) as exc:
-                                values_list.append(type(exc).__name__)
-                            except (ArithmeticError, KeyError, TypeError, ValueError, RecursionError):
-                                values_list.append(None)
-                        values = tuple(values_list)
+                        values = tuple(combine(op, left, right) for left, right in zip(left_values, right_values))
+                        full_vectors += 1
                         key = _signature(values)
                         if key in seen or key in current:
                             continue
                         if len(seen) + len(current) >= limit:
-                            return finish(depth, current, True)
+                            if depth <= INITIAL_LEARNED_BINARY_NODES:
+                                return finish(depth, current, True, "semantic_signature_budget")
+                            if not terminal_filtering:
+                                # Keep every possible survivor, including unknowns.
+                                # Refuted expressions are safe to drop only if this
+                                # turns out to be the first surviving depth.
+                                current = {k: item for k, item in current.items() if classify(item[0]) is not False}
+                                terminal_filtering = True
+                            if classify(values) is False:
+                                continue
+                            if len(seen) + len(current) >= limit:
+                                return finish(depth, current, True, "semantic_signature_budget")
+                        elif terminal_filtering and classify(values) is False:
+                            continue
                         expr = ast.fix_missing_locations(ast.BinOp(
                             left=copy.deepcopy(left_expr), op=op(), right=copy.deepcopy(right_expr)))
                         current[key] = (values, expr)
+                        peak_retained = max(peak_retained, len(seen) + len(current))
         if depth > INITIAL_LEARNED_BINARY_NODES:
             survivors, truncated, info = finish(depth, current, False)
             if survivors or truncated:
                 return survivors, truncated, info
+            if terminal_filtering:
+                # Those refuted roots may be required as children at the next
+                # depth; their absence must not masquerade as complete search.
+                return finish(depth, current, True, "intermediate_signature_budget")
         seen.update(current)
         levels.append(current)
     return finish(MAX_LEARNED_BINARY_NODES, {}, False)
