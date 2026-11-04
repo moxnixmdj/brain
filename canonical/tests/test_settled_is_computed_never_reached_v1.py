@@ -197,9 +197,18 @@ def test_single_surviving_hypothesis_is_not_automatically_crystallized():
         task_signature="mod_family",
         oracle=lambda p: float(p[0] % 5),
     )
-    assert result["status"] == "HELD_OUT_REFUTED"
-    assert result["organ"] if "organ" in result else True
-    assert "organ" not in result or result["organ"] is None or not result["ok"]
+    # The identity function must never be the answer. Two acceptable outcomes, both honest:
+    #   * INDUCED_OPERATOR_CRYSTALLIZED -- the refusal became a question and bought the real operator;
+    #   * HELD_OUT_REFUTED_*            -- no structure could be acquired, so it refuses.
+    # What is NOT acceptable, and is what this test exists to prevent, is `proj_0` / the identity being
+    # crystallized because the grammar could think of only one thing.
+    assert result["status"] in {"INDUCED_OPERATOR_CRYSTALLIZED"} or result["status"].startswith(
+        "HELD_OUT_REFUTED"
+    )
+    organ = result.get("organ")
+    if organ is not None:
+        wrong = [x for x in range(-40, 0, 3) if organ.invoke(x) == x]
+        assert not wrong, "the identity function was crystallized as the answer"
 
 
 def test_ambiguity_that_is_inconsequential_still_crystallizes():

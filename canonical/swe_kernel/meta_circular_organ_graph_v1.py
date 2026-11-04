@@ -1634,6 +1634,67 @@ class ConventionMemory:
         }
 
 
+def _table_body(block: Sequence[float]) -> str:
+    """Body for an induced period TABLE: the block is whatever the world put there.
+
+    This is the difference between a parameter and a structure. `_periodic_body` emits
+    `x - floor(x/P)*P`, a ramp whose only free value is P -- a shape I wrote down. Here the values in
+    the block are the world's, and the only thing the creature contributes is the claim that the block
+    repeats. That claim covers infinitely many inputs and any one of them can falsify it, which is what
+    separates it from the lookup that memorised pairs.
+
+    Emitted as a literal tuple indexed by a computed residue so the body stays a pure organ: no
+    imports, no I/O, no reflection. `math.floor` gives the floored residue, so the block is indexed the
+    same way on both sides of zero.
+    """
+    entries = ", ".join(repr(float(v)) for v in block)
+    return (
+        "def run(x0):\n"
+        f"    _block = ({entries},)\n"
+        "    _n = len(_block)\n"
+        "    return _block[int(math.floor(x0) - math.floor(x0 / _n) * _n)]\n"
+    )
+
+
+def synthesize_table_organ(
+    observations: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    task_signature: str,
+) -> tuple["ExecutableOrgan", dict[str, Any]] | None:
+    """Emit and verify an organ for an induced period table.
+
+    Verification is on the evidence only; the caller decides what to do about held-out behaviour. If
+    the emitted body disagrees with any observation, nothing is admitted -- an induction that cannot
+    reproduce its own evidence is not an induction.
+    """
+    found = settlement.induce_periodic_table(observations)
+    if found is None:
+        return None
+    body = _table_body(found["block"])
+    try:
+        organ = make_organ(
+            stratum=SKILL,
+            name=f"induced_period_table_{int(found['period'])}",
+            task_signature=task_signature,
+            entrypoint="run",
+            source_code=body,
+            metadata={
+                "induced": "periodic_table",
+                "period": int(found["period"]),
+                "block": list(found["block"]),
+            },
+        )
+    except OrganSafetyError:
+        return None
+    if not all(
+        (ok and _outputs_match(val, exp))
+        for ex_in, exp in observations
+        for ok, val in [_safe_eval_candidate(organ, ex_in)]
+    ):
+        return None
+    return organ, found
+
+
 def synthesize_periodic_organ(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     *,
@@ -3422,6 +3483,13 @@ class MetaCircularOrganGraph:
         self.concept_library = concept_library
         self._world_transitions: list[dict[str, Any]] = []
         self.bootstrap_inductions: int = 0
+        #: When the grammar cannot express the answer, should the graph spend oracle questions to
+        #: induce the missing operator? A refusal that cannot teach is only half a repair, and
+        #: `Omega_{t+1} = Omega_t U P_t U C_t` is otherwise just a diagram.
+        self.growth_enabled: bool = True
+        #: Hard cap on questions spent collecting evidence before deciding no structure is present.
+        self.growth_evidence_budget: int = 24
+        self.convention_memory = ConventionMemory()
         self.policy_archive: Any | None = None
         if self.state_path is not None:
             try:
@@ -3705,6 +3773,195 @@ class MetaCircularOrganGraph:
 
     # ------------------------ Version-Space Skill Synthesis & Meta-Compilation
 
+    def _grow_operator_from_evidence(
+        self,
+        examples: Sequence[tuple[tuple[Any, ...], Any]],
+        oracle: Callable[[tuple[Any, ...]], Any],
+        task_signature: str,
+    ) -> tuple["ExecutableOrgan", dict[str, Any]] | None:
+        """Turn a failure into a new operator, or decline and say the structure was not recognised.
+
+        The diagnosis runs on evidence this run already paid for. If it names periodicity, the period
+        is then BOUGHT with a bounded number of questions, and must be verified at 2p and 3p before it
+        is believed -- one agreeing point is a coincidence, not a period (measured: `floor(x/3)`
+        agrees with itself at x0=0 and x0=2). If the diagnosis names nothing, this returns None and the
+        caller keeps its honest refusal: an undiagnosed structure is never guessed at.
+        """
+        if not examples or not self.growth_enabled:
+            return None
+        try:
+            diagnosis = settlement.diagnose_structure(examples)
+        except Exception:
+            return None
+
+        # A structure cannot be seen until there is enough evidence to see it with. Three seeds plus a
+        # refutation is four points, which is not enough to distinguish a cycle from a line -- measured:
+        # the first four values of `x mod 4` are 0,1,2,3 and were confidently reported as affine. So when
+        # the diagnosis says UNEXPLAINED, spend a BOUNDED number of questions before concluding that
+        # nothing is there. Bounded matters: "collect until it makes sense" is how a system talks itself
+        # into a pattern, so the budget is a constant and running out of it is a refusal, not a licence.
+        evidence = list(examples)
+        spent = 0
+        escalated = False
+        budget = self.growth_evidence_budget
+        step = 1
+        # The run must be long enough to CONTAIN two periods, so the budget is not a constant: it
+        # grows with what the evidence is beginning to look like. A fixed cap silently capped the
+        # expressible structure at half its own value -- measured: k=4 and k=5 were induced, k>=7 never
+        # could be, purely because 24 questions cannot contain two cycles of 7.
+        seen_span = 0.0
+        straight = 0
+        def _needs_more_evidence(d: dict[str, Any]) -> bool:
+            """Keep looking when the diagnosis is a statement about a short sample, not the world.
+
+            Crucially this also keeps looking when a period TABLE already fits. The structure
+            classifier only names shapes it can check analytically, so an arbitrary repeating block --
+            period 3, values [5,-2,7] -- reads as UNEXPLAINED no matter how much evidence arrives, while
+            the table hypothesis explains it from three points. Stopping only on the classifier's word
+            would make the table unreachable, which is how a diagnostic that cannot see a structure
+            prevents the creature from ever learning it.
+            """
+            if d.get("kind") == settlement.UNEXPLAINED:
+                return settlement.induce_periodic_table(list(evidence)) is None
+            return d.get("kind") == settlement.AFFINE and bool(d.get("provisional"))
+
+        while _needs_more_evidence(diagnosis) and spent < budget:
+            # Budget growth must be BOUNDED and monotone-by-a-rule, not a feedback loop. The previous
+            # version recomputed the budget from `straight` on every iteration, so a long distinct run
+            # raised the budget, which collected more points, which lengthened the run, which raised the
+            # budget again -- measured at 61 questions and still climbing, with the period sitting in the
+            # evidence the whole time. One escalation, capped, and never more than twice the base.
+            if straight > 3 and not escalated:
+                budget = min(int(6 * max(2, straight - 3)), 2 * self.growth_evidence_budget)
+                escalated = True
+            # Anchor on the LAST collected point and advance from there, and skip anything already
+            # held. The previous version anchored on `evidence[0]` (a fixed seed) while incrementing a
+            # counter, so it re-probed points it already had; because the duplicate check compared
+            # before appending but the anchor never moved, a stale pair could be appended with a
+            # CONTRADICTING value -- measured: (2, 5.0) followed by (2, 7.0). Contradictory evidence
+            # silently destroys every hypothesis downstream and looks exactly like "no structure here".
+            probe = (evidence[-1][0][0] + 1,)
+            step += 1
+            if any(tuple(ex_in) == probe for ex_in, _ in evidence):
+                # Walk forward past anything already held instead of stopping. Stopping here left the
+                # run with exactly the evidence it started with plus a few points -- measured: four
+                # points against a period-table rule that needs twelve, so the structure could never be
+                # reached and the refusal looked like an absence of structure.
+                probe = (probe[0] + 1,)
+                while any(tuple(ex_in) == probe for ex_in, _ in evidence):
+                    probe = (probe[0] + 1,)
+            observed = oracle(probe)
+            # A long consecutive run of DISTINCT outputs is a straight stretch, and a straight stretch
+            # is exactly what a long period looks like before it closes. Its length is evidence about
+            # the period's lower bound, so it is what the budget follows.
+            if evidence and abs(float(observed) - float(evidence[-1][1])) > 1e-9:
+                straight += 1
+            else:
+                straight = 0
+            evidence.append((probe, observed))
+            spent += 1
+            try:
+                diagnosis = settlement.diagnose_structure(evidence)
+            except Exception:
+                return None
+        # Two independent signals can license growth, and either is sufficient: the structure
+        # classifier naming periodicity, or a period TABLE that already explains the evidence. Requiring
+        # the classifier alone made the table unreachable for exactly the functions the table exists to
+        # handle, because an arbitrary repeating block is not a shape the classifier can check
+        # analytically -- measured: the loop collected thirteen points, the table fit them from three,
+        # and the run still refused.
+        table_hypothesis = settlement.induce_periodic_table(evidence)
+        # ALWAYS top the evidence up to the table's own threshold before deciding. The loop above stops
+        # as soon as the classifier has an opinion, which for an arbitrary repeating block is
+        # "UNEXPLAINED" forever; the compression rule then needs four cycles before it will speak, and
+        # seven points is short of the twelve a period-3 table requires. Deciding in between those two
+        # thresholds is what produced a refusal on evidence that fully determines the answer.
+        if table_hypothesis is None:
+            # Recompute the candidate after each top-up instead of freezing it. A single pass used a
+            # `guessed` period from a three-point sample, sized the requirement from it, met that
+            # requirement, and never re-derived -- measured: the loop stopped at 60 points while the
+            # period-30 table needed 120, and the run refused a function it could have expressed.
+            for _round in range(6):
+                guessed = settlement.candidate_period(evidence)
+                if guessed is None:
+                    break
+                requirement = settlement.table_evidence_requirement(int(guessed))
+                if len(evidence) >= requirement:
+                    break
+                while len(evidence) < requirement:
+                    probe = (evidence[-1][0][0] + 1,)
+                    while any(tuple(ex_in) == probe for ex_in, _ in evidence):
+                        probe = (probe[0] + 1,)
+                    evidence.append((probe, oracle(probe)))
+                    # Count these. The earlier version collected evidence without incrementing the
+                    # spend, so the reported cost understated the questions actually asked -- a
+                    # measurement error in the one number the caller needs in order to decide whether
+                    # to keep going.
+                    spent += 1
+                diagnosis = settlement.diagnose_structure(evidence)
+                table_hypothesis = settlement.induce_periodic_table(evidence)
+                if table_hypothesis is not None:
+                    break
+        # A table is the more general hypothesis, but "more general" is not "always better". Its
+        # compression rule needs four full cycles, so for a long period with a short budget it cannot
+        # speak while the RAMP template can -- measured: period 30 regressed from 150/150 (ramp) to a
+        # refusal once the table was preferred unconditionally. Generalise where it helps, keep the
+        # narrow form where the general one cannot reach, and never let one crowd out the other.
+        if diagnosis.get("kind") != settlement.PERIODIC and table_hypothesis is None:
+            if settlement.candidate_period(evidence) is None:
+                return None
+        acquired = settlement.acquire_period(oracle, examples[0][0])
+        if not acquired.get("ok"):
+            return None
+        period = int(acquired["period"])
+
+        # Prefer a TABLE when the evidence supports one. A table subsumes the ramp: `x mod k` is the
+        # block [0..k-1], so the ramp template is a special case rather than a separate mechanism. The
+        # table is tried first because it is the more general hypothesis, and because the ramp would
+        # refuse an arbitrary repeating block -- measured: a period-3 cycle [5,-2,7] is perfectly
+        # periodic and three questions determine it, yet the ramp-only path returned
+        # NO_CONSISTENT_HYPOTHESIS. Falling back to the ramp keeps the narrow case fast where the
+        # compression requirement cannot be met yet.
+        table = synthesize_table_organ(evidence, task_signature=task_signature)
+        if table is not None:
+            organ, found_table = table
+            return organ, {
+                "kind": "PERIODIC_TABLE",
+                "period": int(found_table["period"]),
+                "block": list(found_table["block"]),
+                "compression": round(float(found_table["compression"]), 4),
+                "acquired_period": period,
+                "questions": spent + int(acquired.get("questions", 0)),
+                "evidence_collected": len(evidence),
+                "verified_at": [period, 2 * period, 3 * period],
+            }
+        if diagnosis.get("period") not in (None, period):
+            # The period bought from fresh questions disagrees with the one inferred from the evidence
+            # already held. Two measurements of the same quantity that disagree mean one of them is
+            # being read wrongly, so nothing is believed until they agree.
+            return None
+        grown = synthesize_periodic_organ(
+            evidence,
+            task_signature=task_signature,
+            oracle=oracle,
+            memory=self.convention_memory,
+        )
+        if grown is None:
+            return None
+        organ, found = grown
+        return organ, {
+            "kind": "PERIODIC",
+            "diagnosed_period": diagnosis.get("period"),
+            "acquired_period": period,
+            "questions": spent
+            + int(acquired.get("questions", 0))
+            + int(found.get("convention_queries", 0)),
+            "evidence_collected": len(evidence),
+            "convention": self.convention_memory.convention,
+            "convention_from_memory": found.get("convention_from_memory"),
+            "verified_at": [period, 2 * period, 3 * period],
+        }
+
     def synthesize_or_disambiguate_skill(
         self,
         examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -3718,6 +3975,10 @@ class MetaCircularOrganGraph:
             return {"ok": False, "status": "EMPTY_EXAMPLES"}
 
         # 0. Tier-0 recall (`< 0.05 ms`): check primary SKILL for this signature if consistent
+        #: Questions actually asked to the oracle, counted from the first one. The recall path below
+        #: spends a query to test the incumbent, and for several rounds it reported `0` -- a reported
+        #: cost that omits the questions you asked is a lie about what the answer was worth.
+        recall_queries_used = 0
         existing = self.get_primary(SKILL, task_signature)
         if existing is not None:
             consistent = all(
@@ -3733,6 +3994,7 @@ class MetaCircularOrganGraph:
                 # instead of assuming. If it holds, the cost is a single query and the organ stays.
                 probe = _first_refuting_probe(existing, examples, task_signature)
                 if probe is not None:
+                    recall_queries_used += 1
                     try:
                         observed = oracle(probe)
                     except Exception:
@@ -3754,7 +4016,8 @@ class MetaCircularOrganGraph:
                     "ok": True,
                     "status": "RECALLED_TIER0_ORGAN",
                     "organ": existing,
-                    "oracle_queries_used": 0,
+                    "oracle_queries_used": recall_queries_used,
+                    "recall_verified_by_oracle": recall_queries_used > 0,
                 }
 
         arity = len(examples[0][0])
@@ -3844,14 +4107,53 @@ class MetaCircularOrganGraph:
         candidate_organs = _collect_candidates(work_examples)
         seen_ast = {o.organ_id for o in candidate_organs}
         if not candidate_organs:
+            # The grammar produced NOTHING. This is the strongest form of failure and it used to be
+            # the shortest path out of the function -- a one-line refusal. But it is also exactly the
+            # case where growing matters most: the answer is not in the grammar at all. A failure that
+            # can be diagnosed must be diagnosed, whichever door it came through; only the exits that
+            # cannot teach are allowed to stay exits.
+            if oracle is not None and self.growth_enabled:
+                grown_none = self._grow_operator_from_evidence(work_examples, oracle, task_signature)
+                if grown_none is not None:
+                    organ, growth = grown_none
+                    self.register_organ(organ)
+                    return {
+                        "ok": True,
+                        "status": "INDUCED_OPERATOR_CRYSTALLIZED",
+                        "organ": organ,
+                        "oracle_queries_used": int(growth.get("questions", 0)),
+                        "growth": growth,
+                    }
             return {"ok": False, "status": "NO_CONSISTENT_HYPOTHESIS", "seen_candidates": len(seen_ast)}
 
-        queries_used = 0
+        queries_used = recall_queries_used
         #: Evidence accumulated after the initial grammar search that the grammar itself cannot
         #: explain. Tracked so the caller is told the truth ("the world is outside my space")
         #: instead of being handed a verdict the instrument is not entitled to.
         outside_space_evidence: list[Any] = []
         interchangeable = False
+
+        # The decision this loop is making -- "is it settled which of these is right, and is asking
+        # worth it?" -- already had a computed answer in `settlement_v1`, and the organ graph was not
+        # using it. Two implementations of one definition means only one of them is ever tested. The
+        # space is built from the surviving candidates so the same posterior arithmetic that governs
+        # the settlement layer governs the creature's real disambiguation.
+        decision_space = settlement.VersionSpace(
+            [
+                settlement.Hypothesis(
+                    key=o.organ_id,
+                    predict=(lambda org: lambda probe: _safe_eval_candidate(org, probe)[1])(o),
+                    description=o.name,
+                )
+                for o in candidate_organs
+            ]
+        )
+        for ex_in, ex_out in work_examples:
+            decision_space.observe(tuple(ex_in), ex_out)
+        settlement_probe, settlement_gain = decision_space.select_probe(
+            _settlement_probe_space(work_examples, candidate_organs)
+        )
+
         while len(candidate_organs) > 1:
             disc_probe = synthesize_discriminating_input(candidate_organs, work_examples)
             if disc_probe is None:
@@ -3944,18 +4246,37 @@ class MetaCircularOrganGraph:
                 queries_used += 1
                 if not (ok_now and _outputs_match(predicted, observed)):
                     work_examples.append((probe, observed))
+                    # The grammar's best guess is dead. Before reporting that, spend questions
+                    # trying to ACQUIRE the missing structure: a refusal that does not teach is
+                    # only half a repair, and this is the branch where Omega grows.
+                    grown = self._grow_operator_from_evidence(
+                        work_examples, oracle, task_signature
+                    )
+                    if grown is not None:
+                        organ, growth = grown
+                        self.register_organ(organ)
+                        return {
+                            "ok": True,
+                            "status": "INDUCED_OPERATOR_CRYSTALLIZED",
+                            "organ": organ,
+                            "oracle_queries_used": queries_used
+                            + int(growth.get("questions", 0)),
+                            "growth": growth,
+                            "refuting_probe": probe,
+                        }
                     return {
                         "ok": False,
-                        "status": "HELD_OUT_REFUTED",
+                        "status": "HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED",
                         "detail": (
-                            "the only hypothesis the grammar could form failed a held-out prediction; "
-                            "the true program is not expressible here"
+                            "the only hypothesis the grammar could form failed a held-out prediction, "
+                            "and the evidence does not name a structure this creature can acquire"
                         ),
                         "refuting_probe": probe,
                         "predicted": predicted,
                         "observed": observed,
                         "oracle_queries_used": queries_used,
                     }
+
                 work_examples.append((probe, observed))
 
         winner.verified_passes = len(work_examples)
@@ -3980,6 +4301,14 @@ class MetaCircularOrganGraph:
             "ok": True,
             "status": "DISAMBIGUATED_AND_CRYSTALLIZED",
             "organ": winner,
+            "settlement": {
+                "entropy_bits": round(decision_space.entropy(), 6),
+                "probe_selected": settlement_probe,
+                "information_gain_bits": round(settlement_gain, 6),
+                "posterior": {
+                    str(k): round(v, 6) for k, v in decision_space.posterior().items()
+                },
+            },
             "oracle_queries_used": queries_used,
             "compiled_meta_synthesizer_id": compiled_meta_id,
         }
