@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "44cf318429f17fc5db69896f3c2014e0c3f75e015eb564067b76eb450710b0dd"
+  "value": "3a7b4de43f63190ef3ae76d2bcb39d1ea48e1fc5b06dbd741107c0c8b367e3f8"
  },
  "engines": [
   {
@@ -211314,7 +211314,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/AN_INVARIANT_THAT_CANNOT_FAIL_IS_NOT_AN_INVARIANT_AND_A_LAW_CAN_BE_DERIVED_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "5df94e0a1839df3a209059ddc0395c97b21bfe58721b0f66fbb5072127a4621f",
+   "sha256": "6f5f53a4dfd3dffe7fd9be1b7f01742ce35dac2242f02c4c0e2197776f303996",
    "status": "",
    "terms": {
     "1027": 1,
