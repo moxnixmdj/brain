@@ -360,5 +360,9 @@ def screen_python_candidates_cow(
         "passing_indices": [int(i) for i in (res.get("passing_indices") or [])],
         "live_workspace_untouched": bool(res.get("live_workspace_untouched", True)),
         "elapsed_ms": float(res.get("elapsed_ms") or 0.0),
+        # Passed through, not summarised: each candidate's own failure kind and what it SAW. Before
+        # 2026-11-05 this was dropped here, so a caller could only learn which index passed, never
+        # why the others did not. Callers that ignore it are unaffected; nothing verifies on it.
+        "candidates": list(res.get("candidates") or []),
     }
 
