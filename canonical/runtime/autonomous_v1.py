@@ -411,11 +411,23 @@ def run(goal: str, root: str, binary_limit: int = 0,
             "answer": result,
             "rendered": IN.render(result),
             "verification": {
-                "verified": result["all_grounded"],
-                "reason": ("ANSWER_GROUNDED" if result["all_grounded"]
+                # Verified means ANSWERED, not merely READ.
+                #
+                # This read `result["all_grounded"]`, so "how many lines are in
+                # data.py" came back verified=True with one hit -- the file, found by
+                # name -- and no number in it. The evidence was real and the question
+                # was untouched; reporting that as a pass is the exact behaviour this
+                # project exists to not do. `answered` is the question-level claim and
+                # `all_grounded` stays the evidence-level one.
+                "verified": bool(result.get("answered", result["all_grounded"])),
+                "reason": ("ANSWER_GROUNDED" if result.get("answered", result["all_grounded"])
                            else ("UNVERIFIABLE_ANSWER"
                                  if result["verdict"] == "UNVERIFIABLE"
-                                 else "ANSWER_NOT_GROUNDED")),
+                                 else ("LOCATED_BUT_NOT_ANSWERED"
+                                       if result["verdict"] == "LOCATED_NOT_COMPUTED"
+                                       else ("SUBJECT_ABSENT_FROM_NAMED_FILE"
+                                             if result["verdict"] == "NOT_IN_NAMED_FILE"
+                                             else "ANSWER_NOT_GROUNDED")))),
                 "grounded": result["grounded"],
                 "total": result["total"],
                 "unverifiable": result["unverifiable"],
