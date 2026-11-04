@@ -1,0 +1,270 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1",
+ "action_intent_id": "THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1",
+ "date": "2026-11-04",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "3920898055453f1d8a57bf4687853510701496ad",
+ "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Puts the soundness check inside the search: a candidate whose value violates its own operator's invariant aborts the question instead of being returned, invariants are asserted over the whole expression rather than the root, and a refused quantity is never replaced by answering a different question.",
+ "selected_route": "SOUNDNESS_AS_A_SEARCH_CRITERION_OVER_THE_WHOLE_EXPRESSION",
+ "causal_blocker": "VERIFY_COULD_REJECT_A_WRONG_ANSWER_AND_NOTHING_CONSULTED_IT_WHILE_CHOOSING__WITH_A_LOSSY_groups_THE_SEARCH_RETURNED_150_150_WITH_WEST_MISSING_AND_verify_SAID_FALSE_ON_EXACTLY_THAT_RESULT",
+ "expected_parent_change": "THE_CREATURE_REFUSES_WHEN_ITS_OWN_OPERATOR_IS_UNSOUND_INSTEAD_OF_ANSWERING_CONFIDENTLY_WRONG__AND_STILL_ANSWERS_QUESTIONS_THAT_DO_NOT_DEPEND_ON_THE_BROKEN_OPERATOR",
+ "expected_parent_frontier_change": "ANSWERS_THAT_ARE_SOUND_BY_CONSTRUCTION_RATHER_THAN_AUDITED_AFTERWARDS",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFY_COULD_REJECT_A_WRONG_ANSWER_AND_NOTHING_CONSULTED_IT_WHILE_CHOOSING__WITH_A_LOSSY_groups_THE_SEARCH_RETURNED_150_150_WITH_WEST_MISSING_AND_verify_SAID_FALSE_ON_EXACTLY_THAT_RESULT",
+ "falsification_condition": "A_WRONG_ANSWER_RETURNED_BY_THE_SEARCH__OR_A_REFUSED_QUANTITY_REPLACED_BY_AN_ANSWER_TO_A_DIFFERENT_QUESTION__OR_A_SOUNDNESS_VIOLATION_ONE_LEVEL_DOWN_THAT_PASSES",
+ "stop_condition": "WITH_A_LOSSY_OPERATOR_THE_GROUPING_QUESTIONS_REFUSE_AND_THE_INDEPENDENT_ONES_ANSWER__10_OF_10_CORRECT_ON_SOUND_OPERATORS_THROUGH_autonomous_v1.run__EVERY_FIX_MUTANT_KILLED",
+ "explicit_user_authorization": "Owner directive 2026-11-04 (fourth time): \"You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.\" Standing authority to implement, commit and merge.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/value_algebra_v1.py",
+   "canonical/tests/test_an_answer_is_built_not_looked_up_v1.py"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_CHECK_RUNNING_AFTER_THE_DECISION_CONSTRAINS_THE_DECISION__AND_THAT_A_QUANTITY_REFUSED_FOR_UNSOUNDNESS_MAY_BE_ANSWERED_BY_SUBSTITUTING_A_DIFFERENT_QUESTION",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED__LOSSY_groups_MADE_THE_SEARCH_RETURN_150_150_WITH_WEST_MISSING_WHILE_verify_SAID_FALSE_ON_THAT_EXACT_RESULT__AFTER_THE_CHANGE_THE_SAME_OPERATOR_MAKES_THE_GROUPING_QUESTIONS_REFUSE_AND_LEAVES_THE_INDEPENDENT_ONES_ANSWERING"
+ },
+ "measured_effect": "10/10_THROUGH_THE_DOOR__86_TESTS__SWEEP_116/117_ENV_TOOLCHAIN_FAILS_IDENTICALLY_AT_39208980__LOSSY_OPERATOR_YIELDS_REFUSAL_INSTEAD_OF_150_150_north_OR_4",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+  "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+  "canonical/runtime/incumbent_dominance_search_v1.py",
+  "canonical/runtime/computer_env_v1.py",
+  "canonical/runtime/curriculum_v1.py",
+  "canonical/runtime/ignorance_ledger_v1.py",
+  "canonical/swe_kernel/concept_library_v1.py",
+  "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+  "execution_guard/goal_target_binding_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "3920898055453f1d8a57bf4687853510701496ad",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "SOUNDNESS_VIOLATIONS_ARE_DETECTED_INSIDE_THE_SEARCH_AND_ABORT_THE_QUESTION__THE_CREATURE_DISTRUSTS_ITS_OWN_OPERATOR_INSTEAD_OF_ANSWERING_WRONG",
+  "selected_route": "COMPOSE_TYPED_TABLE_OPERATORS_AND_PARTITION_INVARIANT_VERIFICATION",
+  "selected_surviving_route": "SOUNDNESS_AS_A_SEARCH_CRITERION_OVER_THE_WHOLE_EXPRESSION",
+  "deleted_or_bypassed_paths": [
+   "VERIFY_AS_A_GATE_AFTER_THE_DECISION",
+   "INVARIANTS_CHECKED_ONLY_AT_THE_ROOT",
+   "FALLING_THROUGH_TO_A_DIFFERENT_QUESTION_AFTER_A_VIOLATION",
+   "UNCACHED_FULL_TREE_WALK_PER_CANDIDATE"
+  ],
+  "stop_condition": "WITH_A_LOSSY_OPERATOR_THE_GROUPING_QUESTIONS_REFUSE_AND_THE_INDEPENDENT_ONES_ANSWER__10_OF_10_CORRECT_ON_SOUND_OPERATORS_THROUGH_autonomous_v1.run__EVERY_FIX_MUTANT_KILLED",
+  "expected_parent_level_state_change": "ANSWERS_THAT_ARE_SOUND_BY_CONSTRUCTION_RATHER_THAN_AUDITED_AFTERWARDS",
+  "obs_goal": {
+   "real_outcome": "Answer 'how many regions', 'the total in west', 'the totals per region' and 'which region is largest' correctly through the front door, from a typed composition, and make verification able to reject a wrong answer.",
+   "proxy_goals_deleted": [
+    "add another per-key checker for grouping questions",
+    "accept a verified refusal as a pass",
+    "treat a re-run of evaluate() as evidence of correctness"
+   ],
+   "surviving_necessity": "TABLE and TEXTVEC had no producing operators, so no expression existed; and verify() compared evaluate() with itself, so no wrong answer could ever fail it."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "value_algebra_v1.compose",
+    "operation_trial_v1._accounts_for",
+    "inspect_v1 unresolved-term accounting",
+    "autonomous_v1.run"
+   ],
+   "external_existing_routes_checked": [
+    "None: no external route can supply a verified answer inside this repository's own accounting."
+   ],
+   "capability_work_deleted": [
+    "the sixth separate reconstruction of what an answer depends on",
+    "re-run verification as a correctness claim",
+    "formatted text stored in a numeric column"
+   ],
+   "surviving_gap": "A typed operator whose result another operator can consume, and a verification that can fail."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: the algebra was closed under application but not under composition.",
+   "delete_bypass_substitute_options": [
+    "delete the verification claim (rejected: leaves wrong answers rendering)",
+    "bypass with a per-question check (rejected: the defect the project exists to catch)",
+    "substitute a second evaluator (rejected: two reconstructions drift)",
+    "re-derive from the partition (survives)"
+   ],
+   "surviving_causal_blocker": "Verification could not distinguish determinism from correctness."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "Ten typed operators producing TABLE/TEXTVEC, plus partition invariants in verify()"
+   ],
+   "losing_routes_reason": "Any route that adds a checker per question grows the answer space by one per unit of work, which is the measured defect at every earlier layer.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "falsification_tests": [
+    "10/10 through autonomous_v1.run",
+    "86 tests",
+    "four mutants killed",
+    "a lossy groups refuses the grouping questions and still answers the row count"
+   ],
+   "passed": true,
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "No synthetic oracle: the oracle is the partition of the data itself. A grouped sum must equal the column total and a group count must equal the distinct key count, re-derived from the rows rather than by re-running the expression."
+  },
+  "obs_inherited_system": {
+   "reused": [
+    "value_algebra_v1 operators",
+    "operation_trial_v1 entities and accounting",
+    "inspect_v1 door",
+    "regression_sweep_v1"
+   ],
+   "not_rebuilt": "No new door, no new dispatcher, no new vocabulary.",
+   "downstream_work_to_delete_or_supersede": [
+    "the re-run comparison in verify()",
+    "formatted text stored in a NUMVEC column",
+    "six separate reconstructions of what an answer depends on"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "operation_trial_v1 accounting",
+    "inspect_v1 unresolved-term pass",
+    "regression_sweep_v1 expectations"
+   ],
+   "fresh_reuse_plan": "Reuse the existing door and operators; supply only the missing productive types and a falsifiable verification."
+  },
+  "obs_obs": {
+   "measured_before": "verify() returned False on the answer the search was returning.",
+   "measured_after": "The same operator yields a refusal for every grouping question and a correct row count.",
+   "baseline_failure": "env_toolchain fails identically at 4f1b9408.",
+   "analysis_steps_deleted_or_cached": [
+    "hand-evaluating the grouping fixture: now asserted by tests",
+    "re-measuring which questions refuse: now pinned by name"
+   ],
+   "search_stop_decision": "Stop adding operators when a new operator composes with the existing ones without a new consumer; the answer space grew by composition, not by menu.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "add per-question checkers",
+   "route grouping through a new dispatcher",
+   "embed a second evaluator",
+   "ten typed operators composing through the existing door"
+  ],
+  "why_selected_route_is_fastest_sufficient": "The door, the accounting and the operators already existed; only the missing types and a falsifiable check had to be supplied.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "INTERNAL_ALGEBRA_SOUNDNESS_REPAIR_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM__THE_ORACLE_IS_THE_PARTITION_OF_THE_DATA_IN_THE_TREE",
+   "challenger_routes": [],
+   "frontier_id": "SOUNDNESS_AS_A_SEARCH_CRITERION_OVER_THE_WHOLE_EXPRESSION",
+   "selected_route": "SOUNDNESS_AS_A_SEARCH_CRITERION_OVER_THE_WHOLE_EXPRESSION",
+   "incumbent_route": "VERIFY_AS_A_GATE_AFTER_THE_DECISION"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-04T00:00:00Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "tournament": {
+   "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA",
+   "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
+   "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
+  }
+ },
+ "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT",
+ "active_probe": null
+}
