@@ -182,10 +182,126 @@ def cost(body: str) -> int:
 DEFAULT_BANK = 5000
 
 
+# The invention record for the most recent enumeration, so `demand_evidence` can report it. Same
+# handoff discipline as `last_search_coverage`, and cleared on every call so a stale record cannot
+# answer a fresh question.
+_LAST_INVENTION: dict[str, Any] = {}
+
+
+def invented_constants(examples: Sequence[Any]) -> dict[str, Any]:
+    """The numbers the DATA is asking for, recovered exactly, instead of a menu of twelve.
+
+    MEASURED 2026-11-04, the finding that produced this function. At the default weight bound
+    `demand_evidence` reported `UNRESOLVED` for `3x+1`, `2x+7`, `x+5` and `5x-1`, and the remedy it
+    prescribed -- a larger `max_weight` -- was wrong. Supplying the single constant each one needed
+    made `3x+1` and `2x+7` `DETERMINED` with one explanation at the SAME weight bound. Raising the
+    weight instead took `3x+1` to weight 5 and found 28 programs.
+
+    The cause is this line in the synthesizer:
+
+        seed_consts = [0, 1, 2, -1, 100, True, False, None, "", [], {}]
+
+    Twelve frozen entries. `2x` and `3x` are reachable because 2 and 1 are on the menu; `3x+1` is
+    not, because 3 is not. A creature that cannot name the coefficient the data is asking for will
+    report a solvable problem as an exhausted ontology, fluently.
+
+    This is the seventh appearance of one defect class: a frozen list standing where a computation
+    belongs (regime predicates round 11, vocabulary round 12, rivals round 14). The remedy is
+    generative rather than a longer list: SOLVE for the parameters, and admit them only if they
+    reproduce every example under the search's own equality.
+
+    Degree of freedom, stated rather than assumed: an affine fit spends TWO parameters. With fewer
+    than two distinct inputs nothing is invented -- a line through one point is a choice, not a
+    measurement. Values are exact rationals; a plausible float is not a recovered parameter.
+    """
+    from canonical.runtime.generalization_check_v1 import _compile_body
+    from canonical.runtime.hypothesis_classes_v1 import Affine, Constant, compile_body
+
+    def _pairs() -> list[tuple[Any, Any]] | None:
+        out = []
+        for row in examples:
+            try:
+                args, value = row
+            except (TypeError, ValueError):
+                return None
+            args = args if isinstance(args, (tuple, list)) else (args,)
+            if len(args) != 1:
+                return None
+            out.append((args[0], value))
+        return out
+
+    pts = _pairs()
+    result: dict[str, Any] = {"fits": [], "constants": [], "bodies": [], "why": ""}
+    if not pts or len(pts) < 2:
+        result["why"] = ("fewer than two observations: an affine family spends two parameters, so "
+                         "any value it returned here would be invented rather than measured")
+        return result
+    distinct = {_signature_token(x) for x, _y in pts}
+    if len(distinct) < 2:
+        result["why"] = ("the observations fix too few distinct inputs; a two-parameter family is "
+                         "not pinned by them")
+        return result
+
+    for family in (Affine, Constant):
+        try:
+            fit = family.fit(pts)
+        except Exception as exc:  # noqa: BLE001
+            result.setdefault("errors", []).append("%s: %r" % (getattr(family, "name", "?"), exc))
+            continue
+        if fit.get("status") != "FITS":
+            continue
+        body = compile_body(fit)
+        if not body:
+            continue
+        # `compile_body` emits a bare `return`, so it must be compiled INSIDE a function. The first
+        # version exec'd it at module level and every family raised SyntaxError, which the loop
+        # swallowed as "does not fit" -- a correct parameterisation reported as absent because the
+        # harness could not run it. Use the repository's checked compiler.
+        try:
+            fn = _compile_body(body, ["x"])
+        except Exception as exc:  # noqa: BLE001
+            result.setdefault("errors", []).append("compile %r: %r" % (body, exc))
+            continue
+        ok = True
+        for x, want in pts:
+            try:
+                got = fn(x)
+            except Exception:  # noqa: BLE001
+                ok = False
+                break
+            # Compare NUMERICALLY, not by repr. `_freeze_val` keeps `4` and `4.0` distinct, so an
+            # exactly-correct `3 * x + 1` was rejected against a float target -- the parameter was
+            # found and then thrown away by a spelling difference. This module already owns the
+            # right notion of behavioural equality (`_sig_token`, which collapses int/float and
+            # exists because repr-level comparison fragmented grouping); use it rather than
+            # inventing a third convention.
+            if _signature_token(got) != _signature_token(want):
+                ok = False
+                break
+        if not ok:
+            result.setdefault("rejected", []).append(
+                {"family": fit.get("class"), "body": body,
+                 "why": "did not reproduce every example under the search's own equality"})
+            continue
+        params = fit.get("parameters") or {}
+        for value in params.values():
+            if isinstance(value, bool) or not isinstance(value, (int, float, str)):
+                continue
+            if isinstance(value, (int, float)) and value not in result["constants"]:
+                result["constants"].append(value)
+        result["fits"].append({"family": fit.get("class"), "parameters": params, "body": body})
+        result["bodies"].append(body)
+    result["why"] = ("parameters solved exactly from the data and verified against every example"
+                     if result["bodies"] else
+                     "no exact affine or constant fit reproduces every example")
+    return result
+
+
 def enumerate_admissible(params: Sequence[str], examples: Sequence[Any], *,
                          max_weight: int = 3, extra_constants: Sequence[Any] = (),
                          concept_library: Any | None = None,
-                         max_bank_size: int = DEFAULT_BANK) -> list[str]:
+                         max_bank_size: int = DEFAULT_BANK,
+                         invent_parameters: bool = True) -> list[str]:
     """Every DISTINCT body the grammar produces that reproduces all the examples.
 
     Uses `collect_admissible=True`, which the synthesizer gained for this purpose. The first version
@@ -201,11 +317,28 @@ def enumerate_admissible(params: Sequence[str], examples: Sequence[Any], *,
         synthesize_python_function_body,
     )
 
+    # The constants the data is asking for are SOLVED, not looked up in the twelve-entry menu. This
+    # has to happen before the sweep, because the sweep's alphabet is fixed when it starts.
+    supplied = list(extra_constants)
+    invented: dict[str, Any] = {"constants": [], "bodies": [], "why": "disabled"}
+    if invent_parameters and len(params) == 1:
+        invented = invented_constants(examples)
+        for c in invented["constants"]:
+            if c not in supplied:
+                supplied.append(c)
+
     synthesize_python_function_body(
-        list(params), list(examples), extra_constants=tuple(extra_constants),
+        list(params), list(examples), extra_constants=tuple(supplied),
         max_weight=max_weight, max_bank_size=max_bank_size, concept_library=concept_library,
         collect_admissible=True)
     collected = last_admissible_bodies()
+    # An invented body is a CANDIDATE like any other and is verified like any other: `invented_constants`
+    # only returns bodies that already reproduce every example under this module's own equality.
+    for body in invented.get("bodies") or []:
+        if body not in collected:
+            collected.append(body)
+    _LAST_INVENTION.clear()
+    _LAST_INVENTION.update(invented)
 
     seen: dict[str, str] = {}
     for body in collected:
@@ -286,7 +419,8 @@ def group_by_behaviour(bodies: Sequence[str], params: Sequence[str],
 def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
                     max_weight: int = 3, extra_constants: Sequence[Any] = (),
                     concept_library: Any | None = None,
-                    max_bank_size: int = DEFAULT_BANK) -> dict[str, Any]:
+                    max_bank_size: int = DEFAULT_BANK,
+                    invent_parameters: bool = True) -> dict[str, Any]:
     """Decide whether the examples force a unique answer, and say so.
 
     Returns `chosen` (the cheapest admissible body), `status`:
@@ -297,7 +431,8 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
     bodies = enumerate_admissible(params, examples, max_weight=max_weight,
                                   extra_constants=extra_constants,
                                   concept_library=concept_library,
-                                  max_bank_size=max_bank_size)
+                                  max_bank_size=max_bank_size,
+                                  invent_parameters=invent_parameters)
     from canonical.runtime.swe_observational_program_synthesizer_v1 import last_search_coverage
 
     coverage = last_search_coverage()
@@ -331,10 +466,24 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
         # grammar is a stack of enumeration STAGES; a complete sweep of the weights actually visited
         # says only that nothing below `max_weight` fits. Saying more turns a bound on our own effort
         # into a claim about the world, which is the same defect this module exists to catch.
+        # `invented` records whether exact affine/constant parameters were solved and rejected. It
+        # matters for the ADVICE: "raise max_weight" was measurably the wrong remedy for `3x+1`,
+        # `2x+7`, `x+5` and `5x-1`, where the missing item was a number, not an operation. Telling a
+        # caller to spend four times as much search on the wrong axis is its own kind of dishonesty.
+        invented = dict(_LAST_INVENTION)
+        fit_note = ""
+        if invent_parameters and invented.get("constants"):
+            fit_note = (" Exact parameter fits were attempted and rejected"
+                        + (" (%s)" % ", ".join(str(c) for c in invented["constants"][:6])
+                           if invented.get("constants") else "")
+                        + ", so the obstacle is not a missing constant.")
+        elif invent_parameters:
+            fit_note = (" Exact affine and constant parameter fits were attempted too; none "
+                        "reproduces the examples.")
         report["why"] = (f"no body of weight <= {max_weight} reproduces the examples, and the sweep "
                          f"was complete over every candidate the search reaches at that bound. This "
                          f"is a statement about the WEIGHT BOUND, not about the grammar: a heavier "
-                         f"body may reproduce the examples perfectly")
+                         f"body may reproduce the examples perfectly.{fit_note}")
         report["retry_with"] = (f"a larger max_weight; the body may need more operations than "
                                 f"{max_weight}")
         return report
@@ -359,10 +508,33 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
                                      "grammar" % (coverage.get("bank_size", 0),
                                                   coverage.get("bank_capacity", 0)))
 
+    if len(groups) == 1 and not coverage.get("complete", False):
+        # ONE explanation found in a sweep that SATURATED its bank. This is not certainty: the bank
+        # was cut off, so "only one" means "only one among the candidates reached". This exact defect
+        # was found and fixed once on this branch (bank=900 gave DETERMINED where a complete sweep
+        # gave three explanations), and inventing constants bring it back in miniature -- the larger
+        # alphabet makes the bank fill sooner, so a truncated sweep can now terminate on a single
+        # explanation that a complete sweep would have contradicted.
+        #
+        # The count is reported with its provenance rather than upgraded to a verdict.
+        report["status"] = SEARCH_TRUNCATED
+        report["chosen"] = groups[0][0]
+        report["chosen_cost"] = cost(groups[0][0])
+        report["costs"] = [cost(b) for b in bodies]
+        report["spelling_variants"] = len(bodies)
+        report["disagreements"] = []
+        report["why"] = ("exactly one explanation was found, but the candidate bank saturated at "
+                         "%d/%d, so the sweep ended early. 'Only one' here means 'only one among the "
+                         "candidates reached' -- a statement about the BUDGET, not about the data. "
+                         "Retry with a larger max_bank_size before believing this answer"
+                         % (coverage.get("bank_size", 0), coverage.get("bank_capacity", 0)))
+        report["retry_with"] = "a larger max_bank_size; the single explanation may not be the only one"
+        return report
+
     if len(groups) == 1:
-        # Every admissible program is the same explanation spelled differently. The CHOICE is
-        # forced by the data even though the TEXT is not, so this is DETERMINED and the report says
-        # which distinction it is making.
+        # Every admissible program is the same explanation spelled differently, over a COMPLETE
+        # sweep. The CHOICE is forced by the data even though the TEXT is not, so this is DETERMINED
+        # and the report says which distinction it is making.
         report["status"] = DETERMINED
         report["chosen"] = groups[0][0]
         report["chosen_cost"] = cost(groups[0][0])
