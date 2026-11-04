@@ -238,3 +238,12 @@ def test_an_acquired_median_now_rejects_its_own_maximum():
 
     # and it is still not a proof: a value that genuinely balances the data is admitted
     assert V.aggregate_holds("median", [5.0, 15.0, 7.0], 9.0) is True
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

@@ -89,6 +89,16 @@ _CACHE: dict[str, str | None] = {}
 #: the committed experience store -- measured: the suite wrote 61 lines into
 #: canonical/runtime/state/experience_v1.json before this existed, which means a test run
 #: on CI and a test run on a laptop disagreed depending on order.
+#: Does a measurement get remembered? A TEST RUN MUST NOT MUTATE THE COMMITTED STORE.
+#:
+#: Measured: the suite wrote dozens of lines into
+#: canonical/runtime/state/experience_v1.json, so CI and a laptop disagreed depending on
+#: what had already been recorded, and the working tree was dirty after every pytest run.
+#:
+#: Tests that exercise the path switch this off with a one-line fixture (see
+#: `canonical/tests/_memory.py`). This is deliberately a module-level switch rather than a
+#: hook or a monkeypatch: the referee forbids conftest from doing anything at all, and it
+#: is right to -- conftest is imported before collection, so work done there is invisible.
 REMEMBER = True
 
 

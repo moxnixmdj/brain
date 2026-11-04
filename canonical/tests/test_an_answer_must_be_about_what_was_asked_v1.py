@@ -69,13 +69,11 @@ def _clean():
     depending on what had already been recorded. Memory is a product behaviour; a test of
     the law must not change the product's memory to observe it.
     """
-    from canonical.runtime import decomposition_law_v1 as D
-    was = D.REMEMBER
-    D.REMEMBER = False
-    L.reset()
-    yield
-    L.reset()
-    D.REMEMBER = was
+    from canonical.tests._memory import no_persistent_memory
+    with no_persistent_memory():
+        L.reset()
+        yield
+        L.reset()
 
 
 # ---------------------------------------------------------------------------
