@@ -501,7 +501,12 @@ _ASKS = {
                 "entries", "contents", "what", "which", "exist", "here"},
 }
 _AGG_WORDS = {
-    "sum": {"total", "sum", "add", "added", "altogether", "combined", "overall"},
+    # THE SAME PHRASAL PARTICLES THE COMPOSER KNOWS. Teaching `up` to the expression
+    # builder alone let the COMPOSED path answer "add up the amounts in sales.csv" and
+    # return a string where the primitive returns a number -- the composed path
+    # DISPLACING the primitive it was supposed to defer to. One vocabulary or none.
+    "sum": {"total", "sum", "add", "added", "altogether", "combined", "overall",
+            "up", "addup", "much"},
     "max": {"max", "maximum", "largest", "biggest", "highest", "most", "top", "greatest"},
     "min": {"min", "minimum", "smallest", "lowest", "least", "fewest", "bottom"},
     "mean": {"average", "mean", "typical", "avg"},
@@ -601,6 +606,46 @@ def accounted_words(op: str, words: list[str], comp: dict) -> set[str]:
     return out
 
 
+def _names_a_subset(words: list[str], low: set[str],
+                     ents: list['Entity'] | None) -> bool:
+    """Does the question name a value that selects SOME of the rows?
+
+    A word that is a cell in a text column of one of the named files -- `west` in
+    `region` -- narrows the question to part of the file. An operation that answers with
+    an aggregate over all rows has answered a broader question than the one asked, and
+    the door must not render it. Absence of evidence is not evidence: only a word that
+    really occurs as a value counts, so `total` and `amount` never trigger this.
+    """
+    if not ents:
+        return False
+    for ent in ents:
+        path = getattr(ent, "path", None)
+        if path is None:
+            continue
+        try:
+            from canonical.runtime.value_algebra_v1 import _columns, _norm
+            got = _columns(path)
+        except Exception:
+            continue
+        if got is None:
+            continue
+        header, rows = got
+        for i, name in enumerate(header):
+            try:
+                from canonical.runtime.value_algebra_v1 import _numeric_columns
+                if name in set(_numeric_columns(header, rows)):
+                    continue
+            except Exception:
+                pass
+            values = {_norm(r[i]) for r in rows if i < len(r) and isinstance(r[i], str)}
+            if not values:
+                continue
+            for word in low:
+                if _norm(word) in values:
+                    return True
+    return False
+
+
 def _accounts_for(op: str, words: list[str], comp: dict,
                   ents: list['Entity'] | None = None) -> bool:
     """Does this operation answer the words this question is made of?
@@ -620,8 +665,20 @@ def _accounts_for(op: str, words: list[str], comp: dict,
         agg = op.rsplit("_", 1)[1]
         asked = _asked_operation(words, ents)
         if asked is not None and asked.startswith("aggregate_"):
-            return op == asked
-        return bool(low & _AGG_WORDS[agg])
+            if op != asked:
+                return False
+        elif not (low & _AGG_WORDS[agg]):
+            return False
+        # A QUESTION THAT NAMES A SUBSET IS NOT ANSWERED BY THE WHOLE FILE.
+        #
+        # "what do the amounts in west add up to" was answered with the sum over every
+        # row -- 550 instead of 250 -- verified, and rendered. The aggregate word was
+        # accounted for and `west` was not, and nothing above ever asked whether a word
+        # naming a FILTER VALUE had been applied. An aggregate over rows the question did
+        # not ask about is a true number to a different question.
+        return not _names_a_subset(words, low, ents)
+    if op == "compose:":
+        return True
     if op == "locate":
         return True                      # the word searched for is the account
     asked = _asked_operation(words, ents)

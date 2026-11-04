@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "489d0ba53303b79c07c68b0a0e3fa84991120aec8bc68a495595f45d18e00726"
+  "value": "415ff8867ddcab9329ad591b6b9e8efd4f62c4603bd5cfdf8cff3a8c9f505157"
  },
  "engines": [
   {
@@ -259184,7 +259184,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "64640a9398ebe440622a6e19537955d7cf385c7d6549d1d0e4ee055f198efa52",
+   "sha256": "cdaab39cb1ec96ade1e41ab1a7e913a322bff4d33721404f8eed98f5e30027c4",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
    "symbol_count": 20,
    "symbols": [
@@ -265494,9 +265494,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/operation_trial_v1.py",
-   "sha256": "7db0d5fe3b9dd56d18856a12c6732c0c12e7e23198378ea92a6fd71217e3cdf5",
+   "sha256": "b0aca981b329ad066b645c2c624f41dff5a94720d0590b4a7114c020c7c24459",
    "summary": "A question is an attempt, not a classification.",
-   "symbol_count": 24,
+   "symbol_count": 25,
    "symbols": [
     "Entity",
     "_accounts_for",
@@ -265505,6 +265505,7 @@
     "_is_text",
     "_lines_of",
     "_match_column",
+    "_names_a_subset",
     "_numeric",
     "_op_aggregate",
     "_op_catalog",
@@ -265520,8 +265521,7 @@
     "accounted_words",
     "entities",
     "render",
-    "run",
-    "verify"
+    "run"
    ],
    "terms": {
     "accounted_words": 1,
@@ -265535,6 +265535,7 @@
     "is_text": 1,
     "lines_of": 1,
     "match_column": 1,
+    "names_a_subset": 1,
     "not": 1,
     "numeric": 1,
     "op_aggregate": 1,
@@ -265547,7 +265548,6 @@
     "operation": 1,
     "question": 1,
     "read": 1,
-    "render": 1,
     "run": 1,
     "subject_words": 1,
     "table": 1,
@@ -297907,9 +297907,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/value_algebra_v1.py",
-   "sha256": "3f04f89b3f5b36aca444a9e49d81f56fc29f67cd3a13e5fd5a0e047a35d92311",
+   "sha256": "4f58f86bf6eb6fff6bf236a359a50b8b55df20b8f18ce5140ea66279ec70ad38",
    "summary": "Answers are BUILT OUT OF typed pieces, not looked up in a menu.",
-   "symbol_count": 27,
+   "symbol_count": 36,
    "symbols": [
     "EvalError",
     "Lexicon",
@@ -297922,19 +297922,19 @@
     "_columns",
     "_digits",
     "_double",
+    "_eq_text",
+    "_fmt",
     "_half",
+    "_holds_invariants",
     "_length",
+    "_literal_values",
     "_n",
     "_negate",
     "_norm",
+    "_numeric_candidates",
     "_numeric_columns",
     "_read_text",
-    "_row_leaf",
-    "_rows_of",
-    "_structural_words",
-    "_to_float",
-    "compose",
-    "describe"
+    "_row_leaf"
    ],
    "terms": {
     "aggregate": 1,
@@ -297946,11 +297946,12 @@
     "column_at": 1,
     "column_leaf": 1,
     "columns": 1,
-    "compose": 1,
     "digits": 1,
     "double": 1,
+    "eq_text": 1,
     "evalerror": 1,
     "evaluate": 1,
+    "fmt": 1,
     "half": 1,
     "length": 1,
     "lexicon": 1,
@@ -297966,7 +297967,6 @@
     "read_text": 1,
     "row_leaf": 1,
     "rows_of": 1,
-    "structural_words": 1,
     "to_float": 1,
     "typed": 1,
     "up": 1,
