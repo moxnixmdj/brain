@@ -2911,47 +2911,98 @@ def compile_combiner_organ(
     return organ
 
 
+def _trace_realized(tr: Mapping[str, Any]) -> float:
+    if tr.get("failed"):
+        return 0.0
+    raw_v = tr.get("value")
+    if raw_v is None:
+        delta = tr.get("delta") or {}
+        nums = [
+            float(v)
+            for v in (delta.values() if isinstance(delta, Mapping) else ())
+            if isinstance(v, (int, float)) and not isinstance(v, bool)
+        ]
+        raw_v = nums[0] if nums else 0.0
+    return float(raw_v)
+
+
+def _perceived_unlock_value(aid: str, board: Any) -> float:
+    """Value sitting behind `aid` on the board. Perception at decision time, not a backup."""
+    if not isinstance(board, list):
+        return 0.0
+    by_id: dict[str, Mapping[str, Any]] = {}
+    unlocks: tuple[str, ...] = ()
+    for raw in board:
+        if not isinstance(raw, Mapping):
+            continue
+        i = str(raw.get("id") or "")
+        if not i:
+            continue
+        by_id[i] = raw
+        if i == aid:
+            unlocks = tuple(str(x) for x in (raw.get("unlocks") or ()))
+    vals: list[float] = []
+    for u in unlocks:
+        row = by_id.get(u)
+        if row is None:
+            continue
+        try:
+            vals.append(float(row.get("value") or 0.0))
+        except (TypeError, ValueError):
+            continue
+    return max(vals) if vals else 0.0
+
+
+def _board_episode_key(board: Any) -> tuple[str, ...]:
+    if not isinstance(board, list) or not board:
+        return ()
+    ids: list[str] = []
+    for raw in board:
+        if isinstance(raw, Mapping):
+            i = str(raw.get("id") or "")
+            if i:
+                ids.append(i)
+    return tuple(ids)
+
+
 def _credited_combiner_examples(
     transitions: Sequence[Mapping[str, Any]],
 ) -> list[tuple[tuple[Any, ...], Any]]:
-    """Credit along unlock edges the creature perceived. Future is not a human constant."""
+    """`(immediate, cost, perceived_future) -> observed path return`.
+
+    Future is what the board showed behind this action. The label is what later
+    actually arrived. They are not the same number computed twice.
+    """
     seq: list[dict[str, Any]] = []
     for tr in transitions:
         aid = str(tr.get("action") or tr.get("action_id") or "")
         if not aid:
             continue
-        failed = bool(tr.get("failed"))
-        cost = float(tr.get("cost") or 1.0)
-        raw_v = tr.get("value")
-        if raw_v is None:
-            delta = tr.get("delta") or {}
-            nums = [
-                float(v)
-                for v in (delta.values() if isinstance(delta, Mapping) else ())
-                if isinstance(v, (int, float)) and not isinstance(v, bool)
-            ]
-            raw_v = nums[0] if nums else 0.0
-        realized = 0.0 if failed else float(raw_v)
-        unlocks: tuple[str, ...] = ()
         board = tr.get("board")
-        if isinstance(board, list):
-            for raw in board:
-                if isinstance(raw, Mapping) and str(raw.get("id") or "") == aid:
-                    unlocks = tuple(str(x) for x in (raw.get("unlocks") or ()))
-                    break
-        seq.append({"id": aid, "imm": realized, "cost": cost, "unlocks": unlocks, "realized": realized})
-    g_next = 0.0
-    next_id = ""
-    for i in range(len(seq) - 1, -1, -1):
-        row = seq[i]
-        if next_id and next_id in row["unlocks"]:
-            row["future"] = g_next
-            row["g"] = row["realized"] + g_next
-        else:
-            row["future"] = 0.0
-            row["g"] = row["realized"]
-        g_next = float(row["g"])
-        next_id = str(row["id"])
+        realized = _trace_realized(tr)
+        seq.append(
+            {
+                "id": aid,
+                "imm": realized,
+                "cost": float(tr.get("cost") or 1.0),
+                "future": _perceived_unlock_value(aid, board),
+                "realized": realized,
+                "ep": _board_episode_key(board),
+            }
+        )
+    # Observed suffix return inside each perceived board-episode.
+    i = 0
+    n = len(seq)
+    while i < n:
+        j = i + 1
+        if seq[i]["ep"]:
+            while j < n and seq[j]["ep"] == seq[i]["ep"]:
+                j += 1
+        acc = 0.0
+        for k in range(j - 1, i - 1, -1):
+            acc += float(seq[k]["realized"])
+            seq[k]["g"] = acc
+        i = j
     examples: list[tuple[tuple[Any, ...], Any]] = []
     seen: set[tuple[Any, ...]] = set()
     for row in seq:
@@ -2973,7 +3024,7 @@ def _synthesize_combiner_from_traces(
     *,
     concept_library: Any | None = None,
 ) -> str | None:
-    """Observational `(immediate, cost, future) -> credited return`. Future comes from perceived unlocks."""
+    """Observational `(immediate, cost, future) -> observed path return`. Future is perceived, not backed up."""
     examples = _credited_combiner_examples(transitions)
     if len(examples) < 2:
         return None

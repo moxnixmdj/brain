@@ -666,21 +666,35 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             self.assertFalse(MCOG.admit_policy_organ(locked, graph._world_transitions).get("ok"))
 
     def test_combiner_is_invented_from_credited_unlock_traces(self):
-        """Live boards are a sensor. Credit along perceived unlocks invents the combiner."""
+        """Perceived future is the board; the label is what later arrived. Not y = r + G'."""
+        board = [
+            {"id": "shiny", "value": 12.0, "cost": 1.0},
+            {"id": "tool", "value": 0.0, "cost": 1.0, "unlocks": ("payoff",)},
+            {"id": "payoff", "value": 100.0, "cost": 1.0, "requires": ("tool",)},
+        ]
+        # Incomplete path: tool taken, payoff never arrived. Future is perceived; y is 0.
+        incomplete = [
+            {"action": "tool", "cost": 1.0, "failed": False, "value": 0.0, "board": board},
+        ]
+        inc = MCOG._credited_combiner_examples(incomplete)
+        self.assertTrue(inc)
+        (_imm, _c, fut), y = inc[0]
+        self.assertGreater(fut, 50.0)
+        self.assertLess(abs(y), 1e-9)
+
         with tempfile.TemporaryDirectory() as tmp:
             graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
             boot = MCOG.compile_policy_organ()
             graph.register_organ(boot)
-            board = [
-                {"id": "shiny", "value": 12.0, "cost": 1.0},
-                {"id": "tool", "value": 0.0, "cost": 1.0, "unlocks": ("payoff",)},
-                {"id": "payoff", "value": 100.0, "cost": 1.0, "requires": ("tool",)},
-            ]
             boot.invoke(board, 3.0, None)
             graph.record_transition(action_id="tool", cost=1.0, failed=False, value=0.0, delta={"ok": 1.0})
             graph.record_transition(action_id="payoff", cost=1.0, failed=False, value=100.0, delta={"ok": 1.0})
             examples = MCOG._credited_combiner_examples(graph._world_transitions)
             self.assertTrue(any(abs(fut) > 1e-9 for (_i, _c, fut), _y in examples))
+            # Complete path: observed suffix return on the tool is the payoff that actually arrived.
+            tool_ex = [((_i, _c, fut), gy) for (_i, _c, fut), gy in examples if abs(fut) > 50]
+            self.assertTrue(tool_ex)
+            self.assertGreater(tool_ex[0][1], 50.0)
             combiners = [
                 o for o in graph.organs_in_stratum(MCOG.SKILL) if o.task_signature == "policy::combiner"
             ]
