@@ -182,6 +182,11 @@ def resolve(gap_id: str, *, helped: bool = True, close: bool = True,
     gap["trials"] = int(gap.get("trials") or 0) + 1
     if helped:
         gap["helped"] = int(gap.get("helped") or 0) + 1
+    # `close and helped`, and that is CORRECT -- nearly changed, and the existing
+    # `test_failed_attempt_leaves_it_open` caught it. If closing a gap did not help, the
+    # doubt is STILL THERE; only its expected value drops, because `trials` rose and
+    # `helped` did not. `resolved` means the doubt is gone. A failed attempt is not a cure,
+    # and recording it as one would empty the ledger of exactly the gaps it should chase.
     if close and helped:
         gap["resolved"] = True
     gap["last_seen"] = time.time()
