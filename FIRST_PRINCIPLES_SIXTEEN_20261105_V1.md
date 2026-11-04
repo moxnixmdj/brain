@@ -94,3 +94,45 @@ Different at the end than at the start: **yes, and for the first time the differ
 habit earned in one process changed a verdict in another. That is one narrow mechanism on a board of
 twelve shapes, and it is the only thing in sixteen passes that is true in the sense the owner has been
 asking for all along.
+
+---
+
+## Addendum — S12 executed, and my prediction was falsified
+
+I predicted: *"the earned-habit path produces nothing, because a cold creature repairs nothing and so
+earns no habits."* **Wrong, and in the good direction.**
+
+| step | result |
+|---|---|
+| curriculum, authored tables ON | **3 / 4** worlds repaired |
+| habits recorded *by the creature itself* | `* -> +`, `+ -> *`, `- -> +` |
+| inferred, never performed | `- -> *` |
+| later process, **all authored producers silenced** | **2 / 3** worlds repaired |
+
+The 2/3 is the interesting number. Both successes came from habits the creature earned by repairing
+other worlds, and one of them (`- -> *`) is a substitution it has **never performed in any context** —
+available only through transitive closure over habits it did earn.
+
+So the bootstrap question has a real answer, and it is better than the one I wrote down an hour ago:
+
+> A cold creature cannot repair, so a creature that never had authored tables would earn nothing.
+> But a creature that has tables *for some shapes* earns habits from those, and the habits then cover
+> shapes the tables never enumerated.
+
+That is a different claim from "habits are decorative" and a weaker one than "habits replace tables".
+It is the honest middle, and it is the first mechanism here that improves the system rather than its
+author.
+
+The failures are equally informative and I am keeping them:
+
+- `% -> //` failed after the curriculum: never performed, never implied. Closed class, working as
+  specified.
+- `* -> -` failed while `- -> *` succeeded, though the closure derives both. The reasons are mechanical
+  (habits are ordered `observed` then `inferred`, and the proposal limit truncates), not conceptual —
+  worth fixing, but I will not describe a mechanism as complete when one of its two derived edges
+  demonstrably does not fire.
+
+**S13 (next, so it can fail):** seed an empty creature with habits ONLY (no authored tables) from a
+single taught world, and measure whether closure alone climbs a chain of unvisited operators. If one
+taught edge cannot bootstrap a second, the mechanism needs a curriculum to exist at all and should be
+described that way in every future claim.
