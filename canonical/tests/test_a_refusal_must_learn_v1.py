@@ -157,12 +157,33 @@ def test_determined_problems_still_crystallize():
     for r in range(1, 41):
         assert product["organ"].invoke(r, r + 2) == r * (r + 2)
 
+    # AFFINE FROM THREE POINTS: the assertion below used to demand `ok`, and that expectation is
+    # now wrong on the merits, not merely inconvenient. Three observations, two arguments, three
+    # affine parameters -- the fit is exactly determined and has ZERO leftover data, so "it fits" is
+    # arithmetic, not corroboration. Round 26 built `refutability_v1` for exactly this and the verdict
+    # is TOO_FEW_POINTS (needs arity + 2 = 4).
+    #
+    # This test was passing before only because nothing had checked, and the file was missed from the
+    # regression sweep for several rounds because the sweep list lived in /tmp. The correct assertion
+    # is that the creature is CANDID about it: it refuses to call the claim corroborated, and it says
+    # which verdict withheld it.
     graph2 = M.MetaCircularOrganGraph(None)
     affine = graph2.synthesize_or_disambiguate_skill(
         [((1, 1), 17), ((3, 2), 29), ((4, 5), 30)], task_signature="a"
     )
-    assert affine["ok"]
-    assert affine["organ"].invoke(10, 3) == 76
+    assert not affine["ok"], "an exactly-determined fit must not be reported as corroborated"
+    verdict = (affine.get("refutability") or {}).get("verdict")
+    assert verdict == "TOO_FEW_POINTS", verdict
+
+    # And with one more observation it IS settled and the answer must be exact. The law here is
+    # 7*x - 2*y + 12, so at (10, 3) the value is 76 -- which is what the ORIGINAL assertion in this
+    # test already said. I wrote 61 first, from careless arithmetic, and the creature was right.
+    graph3 = M.MetaCircularOrganGraph(None)
+    settled = graph3.synthesize_or_disambiguate_skill(
+        [((1, 1), 17), ((3, 2), 29), ((4, 5), 30), ((6, 4), 46)], task_signature="a2"
+    )
+    assert settled["ok"], settled.get("status")
+    assert settled["organ"].invoke(10, 3) == 76
 
 
 # --------------------------------------------------------------------------------------------
@@ -185,7 +206,15 @@ def test_structure_beyond_the_default_budget_is_still_reachable(k):
 def test_nothing_is_fabricated_for_structure_it_cannot_acquire():
     """A refusal must remain available. A creature that invents structure is worse than one that
     admits it cannot express something."""
-    for name, fn in (("x*x", lambda v: float(v * v)), ("floor(x/7)", lambda v: float(v // 7))):
+    # `x*x` was in this list and is no longer, and that is a corrected test rather than a weakened
+    # one. Measured 2026-11-04: from seeds 1..3 the creature now returns `((x0 / 1) * x0)` -- the
+    # IDENTITY times x, which is exact everywhere and 0/40 wrong on held-out integers. Asserting a
+    # refusal there would have been asserting that the creature is worse than it is, which is the
+    # same error round 28 caught in itself.
+    #
+    # What must still refuse is anything the basis cannot express. `floor(x/7)` over seeds 1..3 gives
+    # 0,0,0 -- one distinct output -- and the true function ramps, so a claim there is a fabrication.
+    for name, fn in (("floor(x/7)", lambda v: float(v // 7)),):
         graph = M.MetaCircularOrganGraph(None)
         result = graph.synthesize_or_disambiguate_skill(
             [((x,), fn(x)) for x in SEEDS],
@@ -193,8 +222,15 @@ def test_nothing_is_fabricated_for_structure_it_cannot_acquire():
             oracle=lambda p, fn=fn: fn(p[0]),
         )
         assert not result["ok"], f"{name} must not be crystallized as if it were understood"
+        # The status set here was narrower than the refusal vocabulary, so it was testing a
+        # spelling rather than the property. `UNSETTLEABLE_BY_THIS_INSTRUMENT` is a refusal with a
+        # MORE informative reason -- it names the survivors and says no reachable probe separates
+        # them -- and adding it does not weaken the assertion, which still requires `ok` to be False
+        # and still forbids an organ.
         assert result["status"] in {
             "NO_CONSISTENT_HYPOTHESIS",
             "HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED",
             "UNDERDETERMINED_VERSION_SPACE",
+            "UNSETTLEABLE_BY_THIS_INSTRUMENT",
         }, result["status"]
+        assert result.get("organ") is None, "a refusal must not hand back a program"

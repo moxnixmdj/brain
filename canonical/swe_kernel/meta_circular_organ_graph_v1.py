@@ -1299,6 +1299,210 @@ def _eval_expr(expr_src: str, names: Sequence[str], args: tuple[Any, ...], helpe
 
 
 
+def _compose_learned_laws(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    operator_organs: Sequence["ExecutableOrgan"],
+) -> list[tuple[str, str, str]]:
+    """Use an already-learned law as a TERM inside a new expression. Returns (name, expr, helpers).
+
+    THE DEEPEST DEFECT FOUND SO FAR, measured 2026-11-04.
+
+    `T_3(x) + 2*T_5(x)` was reported DISAMBIGUATED_AND_CRYSTALLIZED -- correctly -- by storing a
+    FIFTEEN-ENTRY TABLE. The compositional description is two small tables and one coefficient: eight
+    numbers. The creature did not choose the worse of two available answers. It could not express the
+    better one.
+
+    `_inline_operator_organs` only ever builds `f(g(x))`. So a learned law could be COMPOSED WITH
+    ANOTHER LAW and could never be a TERM. That is not a tuning gap -- it fixes the shape of every
+    future hypothesis:
+
+        Omega_{t+1} = Omega_t + {compositions of what Omega_t can already express}
+
+    `Omega_{t+1}` genuinely grows, but it never comes to contain a FORM that `Omega_t` lacked -- only
+    more instances of the same shapes. A creature whose new ideas are all instances of old shapes is
+    not learning a language, it is POPULATING one. Rounds 29 and 30 made that population richer by
+    deriving coefficients and degrees. Neither changed its shape.
+
+    THE FIX IS DELIBERATELY MINIMAL, because a bigger fix would be me authoring again. No new form is
+    added: the residual-and-solve machinery already exists, the operations already exist. What
+    changes is that a CO-FACTOR may now be a law this creature learned rather than a function I typed.
+
+    For each admitted unary law `L`, each period `k` the evidence supports, and each operation, ask
+    whether the residual (`y - L`, `y + L`, `y / L`) is constant per residue. The block is SOLVED.
+    """
+    if not operator_organs or not examples:
+        return []
+    arity = len(examples[0][0])
+    if arity != 1:
+        return []  # a unary law used as a term needs a one-argument expression
+    param = _arg_names(1)[0]
+    if any(
+        not isinstance(ex[0][0], (int, float)) or isinstance(ex[0][0], bool) for ex in examples
+    ):
+        return []
+    if any(not isinstance(ex[1], (int, float)) or isinstance(ex[1], bool) for ex in examples):
+        return []
+
+    max_period = max(2, len({int(math.floor(float(ex[0][0]))) for ex in examples}))
+
+    out: list[tuple[str, str, str]] = []
+    seen_src: set[str] = set()
+    for idx, org in enumerate(operator_organs[:8]):
+        src = getattr(org, "source_code", "") or ""
+        if not src or src in seen_src:
+            continue
+        seen_src.add(src)
+        try:
+            tree = ast.parse(src)
+        except SyntaxError:
+            continue
+        fn = next(
+            (n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == org.entrypoint),
+            None,
+        )
+        if fn is None or len(fn.args.args) != 1:
+            continue
+        hname = f"_law_{idx}"
+        try:
+            helper = _rename_function_source(src, org.entrypoint, hname)
+            # `compile_organ_namespace` returns `(tree, namespace)` -- NOT `(ok, namespace)`. Reading
+            # its first element as a boolean and its second as the namespace silently yielded None for
+            # every law, so the composer produced zero candidates and the defect it was written to fix
+            # looked unchanged. And `_rename_function_source` returns source WITHOUT a trailing
+            # newline, so joining it to the next `def` produced `return x0 % 3def run(...)` and a
+            # SyntaxError that the except swallowed. Two silent failures in a row on a fix whose whole
+            # point was that it must actually run.
+            _tree, hns = compile_organ_namespace(
+                helper.rstrip("\n") + "\n\ndef run(" + param + "):\n    return " + param + "\n"
+            )
+            law = hns.get(hname)
+        except Exception:
+            continue
+        if law is None:
+            continue
+        helper_block = helper + "\n"
+
+        for k in range(2, max_period + 1):
+            if len({int(math.floor(float(ex[0][0]))) % k for ex in examples}) < k:
+                continue
+            for op in ("add", "sub", "mul"):
+                block: dict[int, float] = {}
+                ok = True
+                for xin, outv in examples:
+                    x = float(xin[0])
+                    try:
+                        lv = float(law(x))
+                        y = float(outv)
+                        if op == "add":
+                            residual = y - lv
+                        elif op == "sub":
+                            residual = y + lv
+                        else:
+                            if abs(lv) < 1e-12:
+                                ok = False
+                                break
+                            residual = y / lv
+                    except Exception:
+                        ok = False
+                        break
+                    r = int(math.floor(x)) % k
+                    if r in block:
+                        if abs(block[r] - residual) > 1e-9:
+                            ok = False
+                            break
+                    else:
+                        block[r] = residual
+                if not ok or len(block) < k:
+                    continue
+                body = ", ".join(repr(float(block[r])) for r in range(k))
+                inner = _table_index_expr(param, k, body)
+                if op == "add":
+                    expr = f"({inner} + {hname}({param}))"
+                elif op == "sub":
+                    expr = f"({inner} - {hname}({param}))"
+                else:
+                    expr = f"({inner} * {hname}({param}))"
+                out.append((f"lawcomp_{idx}_{k}_{op}", expr, helper_block))
+    return out
+
+
+_TABLE_DOMAIN_GUARD = "__TABLE_NOT_DEFINED_HERE__"
+
+
+def _table_index_expr(param: str, k: int, body: str) -> str:
+    """Index a period-`k` block, and SAY SO where the block is not defined.
+
+    A period table is a lookup by POSITION: block[p % k]. It is a total function on the integers and
+    asserts nothing at all about a non-integer input -- there is no "the table's value at 2.5".
+
+    The emitted formula did not say that. `int(math.floor(x)) - math.floor(math.floor(x)/k)*k`
+    silently EXTENDS the table to the reals by taking the block of the floor, which is a claim nobody
+    made and which the evidence can never support. Measured 2026-11-04: forty surviving hypotheses for
+    `T_3(x) + 2*T_5(x)` were eliminated by a single probe at x = -39.5, because each one answered 6.0
+    there -- extrapolated from a table of three values -- while the oracle said 3.5. The creature then
+    re-collected, found nothing, and reported CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it had already
+    solved, including from a correct composed form.
+
+    So the body raises on non-integer input instead of inventing an answer. That is not a trick to
+    dodge the probe; it is the honest statement of the hypothesis, and it is what lets the settlement
+    loop apply the right rule -- a hypothesis with nothing to say about an input is not refuted by it,
+    whereas one that returns a wrong number is.
+    """
+    table = "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])" % (
+        "(" + body + ",)",
+        param,
+        param,
+        k,
+        k,
+    )
+    # `(0).__class__` reaches `int` through an instance, so no builtin NAME is involved and the
+    # restricted `__builtins__` the organ namespace installs cannot block it -- measured, because a
+    # guard that fails to raise would restore exactly the silent extrapolation it exists to prevent.
+    # The generator is consumed by `tuple(...)`, so the raise happens at evaluation time and not at
+    # creation time, which keeps the expression an expression.
+    guard = (
+        "(lambda _v: (_v if _v == math.floor(_v) else tuple("
+        "(_ for _ in ()).throw(ValueError(%r)))))(%s)" % (_TABLE_DOMAIN_GUARD, param)
+    )
+    return "((%s) + (%s) if (%s) == math.floor(%s) else %s)" % (
+        table,
+        "0 * " + param,
+        param,
+        param,
+        guard,
+    )
+
+
+def _numeric_literal_count(organ: "ExecutableOrgan") -> int:
+    """How many NUMBERS this body contains. The right complexity measure, and bytes are not.
+
+    MEASURED 2026-11-04, and this is the defect that made composition useless even once it worked.
+    `T_3(x) + 2*T_5(x)` has two correct descriptions:
+
+        composed    two small tables + one learned law      8 numeric literals, 161 bytes
+        memorised   ONE table of period 15                 17 numeric literals, 165 bytes
+
+    Survivors were ordered by `(code_bytes, organ_id)` and those two are within FOUR BYTES of each
+    other, so the tie was broken by an identifier hash. The creature could build the composition,
+    verify it exactly, and still discard it for a table that memorises fifteen values -- because the
+    metric it sorted by was the length of the TEXT rather than the amount of the DATA.
+
+    Bytes count syntax (brackets, `math.floor`, commas); they do not count what a claim asserts about
+    the world. A period-15 table asserts fifteen numbers; the composed form asserts eight.
+    """
+    try:
+        tree = ast.parse(organ.source_code)
+    except SyntaxError:
+        return 0
+    return sum(
+        1
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Constant)
+        and isinstance(node.value, (int, float))
+        and not isinstance(node.value, bool)
+    )
+
+
 def _inline_operator_organs(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     operator_organs: Sequence["ExecutableOrgan"],
@@ -1456,10 +1660,7 @@ def _solve_parametric_table(
         # structure. (A `.replace("P", ...)` fix then corrupted the call it was building -- substituting
         # into a format string substitutes into the SUBSTITUTE too. Built by concatenation instead.)
         pname = _arg_names(1)[0]
-        expr = (
-            "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])"
-            % ("(" + body + ",)", pname, pname, k, k)
-        )
+        expr = _table_index_expr(pname, k, body)
         proposed.append((f"parametric_table_{k}", expr))
     if not proposed:
         return None
@@ -1752,10 +1953,7 @@ def _solve_composed_table(
                 else:
                     slope_src = gsrc
                 body = ", ".join(repr(float(block[r])) for r in range(k))
-                inner = (
-                    "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])"
-                    % ("(" + body + ",)", param, param, k, k)
-                )
+                inner = _table_index_expr(param, k, body)
                 if op == "add":
                     expr = f"({inner} + {slope_src})"
                 elif op == "sub":
@@ -1812,6 +2010,16 @@ def _generate_candidate_expressions(
     # 5. Live compositional closure over admitted organs
     for label, expr, helpers in _inline_operator_organs(examples, operator_organs):
         cands.append((label, expr, helpers))
+
+    # 6. A LEARNED LAW AS A TERM. Step 5 can only call a law on the whole input (`f(g(x))`); this
+    #    lets a law sit INSIDE an expression beside a solved table. Without it, `T_3(x) + 2*T_5(x)`
+    #    is reachable only as a 15-entry table -- the compositional form, eight numbers, is not in the
+    #    language at all. See `_compose_learned_laws`.
+    try:
+        for label, expr, helpers in _compose_learned_laws(examples, operator_organs):
+            cands.append((label, expr, helpers))
+    except Exception:  # noqa: BLE001 - a failed composition must not lose the rest of the grammar
+        pass
 
     # 4. Congruence-closed algebraic rewrite of admitted expressions (in-tree egraph)
     extra: list[tuple[str, str, str]] = []
@@ -2113,7 +2321,7 @@ def synthesize_periodic_organ(
             survivors.append(org)
     if not survivors:
         return None
-    survivors.sort(key=lambda o: (o.code_bytes, o.organ_id))
+    survivors.sort(key=lambda o: (_numeric_literal_count(o), o.code_bytes, o.organ_id))
     found = dict(found)
 
     # Two conventions can both reproduce every observation while disagreeing wherever the evidence is
@@ -2198,6 +2406,24 @@ def _periodic_survivors(
     return out
 
 
+def _survives_probe(organ: "ExecutableOrgan", probe: tuple[Any, ...], answer: Any) -> bool:
+    """Does this hypothesis survive an observation at `probe`?
+
+    THE DISTINCTION IS THE WHOLE POINT: "this program says something false" is evidence against it
+    and must remove it; "this program has nothing to say here" is not evidence against it. The filter
+    in the disambiguation loop used to read `ok and match`, which conflated the two, so a period
+    table -- a function on the integers that is undefined elsewhere -- was eliminated by a probe at
+    x = -39.5 exactly as if it had answered wrongly. Forty survivors died at once, including a
+    correct composed form, and the creature reported CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it
+    had solved cold. Named and factored out so the rule can be tested on its own, because when it
+    was an inline lambda the mistake read as ordinary code.
+    """
+    ok, value = _safe_eval_candidate(organ, probe)
+    if not ok:
+        return True  # no opinion here; silence is not refutation
+    return _outputs_match(value, answer)
+
+
 def _survivors_disagree_on_domain(
     survivors: Sequence["ExecutableOrgan"],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -2217,10 +2443,25 @@ def _survivors_disagree_on_domain(
             for probe in domain:
                 oka, va = _safe_eval_candidate(a, probe)
                 okb, vb = _safe_eval_candidate(b, probe)
+                # DISAGREEMENT MEANS TWO DIFFERENT ANSWERS, NOT AN ANSWER AND A SILENCE. This used to
+                # read `if oka != okb: return True`, so "one of them is undefined here" counted as
+                # grounds to refuse -- which is how a period table and the identity function came to
+                # look irreconcilable at x = -39.5 even though the table has no opinion there. See
+                # `_table_index_expr`: a table is a function on the integers and says nothing off them.
+                if not oka and not okb:
+                    continue
+                if oka and okb and not _outputs_match(va, vb):
+                    return True
                 if oka != okb:
-                    return True
-                if oka and not _outputs_match(va, vb):
-                    return True
+                    # One speaks and one does not. That is only consequential if the silent one is
+                    # silent somewhere the CALLER can reach -- which is an integral input here, since
+                    # that is what the evidence is made of.
+                    live = probe if oka else probe
+                    if all(
+                        (isinstance(v, int) and not isinstance(v, bool))
+                        for v in live
+                    ):
+                        return True
     return False
 
 
@@ -2351,10 +2592,22 @@ def synthesize_discriminating_input(
                     break
             else:
                 buckets.append([out, 1])
-        if errors:
-            buckets.append(["ERR", errors])
+        # A CRASH IS NOT A PREDICTION, so it must not be counted as one, and this was the same
+        # conflated distinction as the elimination rule below -- measured 2026-11-04.
+        #
+        # This used to append an "ERR" bucket, which made "raises here" a distinct predicted outcome.
+        # So the entropy search kept proposing probes whose only effect was to separate the
+        # hypotheses that are DEFINED at a point from those that are not: with two survivors,
+        # `parametric_table_3` (a table, undefined off the integers) and `observational_eq`, every
+        # half-step scored a full bit of entropy and NONE of them eliminated anything, because the
+        # table simply had no opinion there. The loop then exhausted the oracle budget asking
+        # questions that could not be answered and refused with UNSETTLEABLE_BY_THIS_INSTRUMENT on a
+        # task it had solved before the guard existed.
+        #
+        # Entropy here must measure disagreement among opinions, not presence of opinion. A probe is
+        # worth asking only if two hypotheses that CAN answer would answer differently.
         counts = [b[1] for b in buckets]
-        if len(counts) <= 1 or valid_total == 0:
+        if len(counts) <= 1 or valid_total < 2:
             continue
         n = float(len(hypotheses))
         ent = -sum((cnt / n) * math.log2(cnt / n) for cnt in counts)
@@ -5285,7 +5538,12 @@ class MetaCircularOrganGraph:
                 if consistent:
                     local_seen.add(org.organ_id)
                     surviving.append(org)
-            return sorted(surviving, key=lambda o: (o.code_bytes, o.organ_id))
+            # Order by how much DATA a claim asserts, then by text, then by identity. Sorting on
+            # bytes alone let a 15-entry memorised table beat an 8-number composition by four bytes.
+            return sorted(
+                surviving,
+                key=lambda o: (_numeric_literal_count(o), o.code_bytes, o.organ_id),
+            )
 
         candidate_organs = _collect_candidates(work_examples)
         #: How many syntactic survivors the grammar produced. Free to compute -- it spends no oracle
@@ -5375,7 +5633,8 @@ class MetaCircularOrganGraph:
                     # caller. This is deliberately distinguished from the blind case below, because
                     # refusing here would make the creature timid (P5) without buying any safety.
                     candidate_organs = sorted(
-                        candidate_organs, key=lambda o: (o.code_bytes, o.organ_id)
+                        candidate_organs,
+                        key=lambda o: (_numeric_literal_count(o), o.code_bytes, o.organ_id),
                     )[:1]
                     interchangeable = True
                     break
@@ -5409,13 +5668,28 @@ class MetaCircularOrganGraph:
             # would have concluded exactly the same thing without spending it. Counting that is what
             # lets a shape become cheaper later without ever guessing: only questions PROVEN to have
             # been avoidable may be withheld.
+            # AN EXCEPTION AT A PROBE IS "NOT APPLICABLE", NOT "REFUTED", and conflating the two
+            # cost real capability. Measured 2026-11-04.
+            #
+            # This filter used to read `ok_val[0] and _outputs_match(...)`, so a hypothesis that
+            # CRASHED on the probe was eliminated exactly as if it had returned the wrong answer.
+            # The probe sequence for an accepted task is not under the creature's control at this
+            # point, and a period table whose index is a floor of the input is undefined off its
+            # domain -- so a single fractional probe (`-39.5`) removed all forty survivors at once,
+            # including eight that were exactly right everywhere observable. The loop then
+            # re-collected from the enlarged evidence, found nothing, and answered
+            # CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it had already solved cold.
+            #
+            # The distinction is not cosmetic. "This program says something false" is evidence
+            # against it and must remove it. "This program has nothing to say here" is not evidence
+            # against it, and treating it as such means the creature can be talked out of a correct
+            # law by an input outside that law's domain -- which is the opposite of understanding.
+            #
+            # Safety is unaffected: a total program that returns a wrong value still dies here, and a
+            # partial one still has to survive every probe it CAN answer plus all of the evidence.
             _before_survivors = {org.organ_id for org in candidate_organs}
             candidate_organs = [
-                org
-                for org in candidate_organs
-                if (lambda ok_val: ok_val[0] and _outputs_match(ok_val[1], oracle_answer))(
-                    _safe_eval_candidate(org, disc_probe)
-                )
+                org for org in candidate_organs if _survives_probe(org, disc_probe, oracle_answer)
             ]
             if {org.organ_id for org in candidate_organs} == _before_survivors:
                 self._last_avoidable_questions += 1

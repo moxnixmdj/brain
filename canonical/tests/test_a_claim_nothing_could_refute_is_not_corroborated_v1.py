@@ -65,14 +65,35 @@ def test_a_real_law_is_refutable(name, fn, points):
 
 
 def test_a_memorisation_is_not_refutable():
-    """`x^3` over twenty points is outside this grammar. Any body that 'explains' it is reciting.
+    """The case that separates this module from a fit check: the body FITS, and fitting is not the
+    question. What must refuse is a structure the grammar can only RECITE.
 
-    This is the case that separates the module from a fit check: the body FITS, and fitting is not
-    the question.
+    THIS TEST USED `x^3` AND THAT EXAMPLE IS NOW OBSOLETE, measured 2026-11-04. Its comment said
+    "`x^3` over twenty points is outside this grammar", and that was true when it was written. Round
+    30 replaced the hardcoded polynomial degree with a degree MEASURED from the differencing order that
+    flattens, so a cubic is now expressible as a law rather than as twenty memorised values, and
+    withholding a point leaves nineteen points that regenerate the twentieth. The verdict correctly
+    became REFUTABLE: `x^3` is no longer memorisation, it is a claim the evidence can test, and
+    asserting NOT_REFUTABLE would have been asserting that the creature is blinder than it is.
+
+    The distinction is preserved with a structure that is still genuinely outside the grammar: a
+    lookup over literals with no arithmetic pattern, which no law and no table-of-period-k can
+    regenerate off its own points.
     """
-    report = R.assess(_mk(lambda x: float(x ** 3), [(x,) for x in range(0, 20)]))
+    recitation = [((x,), float(v)) for x, v in zip(range(0, 20), [3, 1, 4, 1, 5, 9, 2, 6, 5, 3,
+                                                               5, 8, 9, 7, 9, 3, 2, 3, 8, 4])]
+    report = R.assess(recitation)
     assert report["verdict"] == R.NOT_REFUTABLE, report["why"]
     assert not R.may_be_permanent(report["verdict"])
+
+
+def test_a_cubic_is_refutable_now_that_its_degree_is_measured_not_assumed():
+    """The converse assertion, so the change above is a correction and not a concession: the same
+    twenty points of `x^3` must now be testable, because round 30 made the form reachable."""
+    report = R.assess(_mk(lambda x: float(x ** 3), [(x,) for x in range(0, 20)]))
+    assert report["verdict"] == R.REFUTABLE, report["why"]
+    assert report["withheld_predictions"] > 0
+    assert R.may_be_permanent(report["verdict"])
 
 
 def test_a_zero_degree_of_freedom_fit_is_not_testable():

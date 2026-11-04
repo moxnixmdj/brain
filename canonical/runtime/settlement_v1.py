@@ -158,7 +158,27 @@ def derive_probe_space(
 
     for x in ordered:
         _add(tuple([x] * arity))
-    # half-steps, so non-integer domains are not invisible
+    # HALF-STEPS, so non-integer domains are not invisible -- but they must not be taken FIRST for a
+    # problem whose evidence is all integers, and this was a real defect, measured 2026-11-04.
+    #
+    # They were emitted UNCONDITIONALLY and immediately after the integer sweep, so the
+    # disambiguation loop could ask the oracle at x = -39.5 for an integer-only task. Every
+    # period-table hypothesis then indexes its block at a non-integral position; the ENTIRE surviving
+    # set dies at once, the loop re-collects, still finds nothing, and the answer becomes
+    # CONTRADICTORY_OR_OUT_OF_GRAMMAR.
+    #
+    # Measured: `T_3(x) + 2*T_5(x)` over 19 integer points was DISAMBIGUATED when solved cold, and
+    # CONTRADICTORY once two learned laws let the grammar build the correct COMPOSED form. The
+    # composition was not the problem -- it added candidates that were exact -- and the fractional
+    # probe then destroyed those together with the table. A capability was reported as LOST because a
+    # probe asked a question the domain cannot answer.
+    #
+    # The fix is ORDERING, not deletion, and I got this wrong once before committing to it: I first
+    # suppressed half-steps entirely for integer evidence, which also removed the probe that
+    # separates continuous hypotheses, and caught myself when two suites went red. Ints are a subset
+    # of the reals, so an integer point is always a legal probe for a continuous claim; a half-step is
+    # only illegal for a claim whose index must be integral. Taking the integer probes FIRST settles
+    # integer-shaped problems on their own terms and leaves every continuous distinction reachable.
     for x in (v + 0.5 for v in range(-dense_range, dense_range)):
         _add(tuple([x] * arity))
 
