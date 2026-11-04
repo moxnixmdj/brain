@@ -178,14 +178,141 @@ def _norm(s: str) -> str:
 # Operators. (accepted type, result type, apply, words that select it)
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# AN OPERATOR IS ONE DECLARATION, NOT FIVE.
+# ---------------------------------------------------------------------------
+#
+# An aggregate used to be stated in five places that had no way to check each other:
+# its words in `_AGG_WORDS`, its arithmetic in a hardcoded dict here, its arity in the
+# enumerator's `_OPERATORS`, its word-accounting in `_structural_words`, and its
+# invariant in `_holds_invariants`. Every defect this project has found for several
+# rounds has been two of those disagreeing, and there was no way to notice, because
+# there was nothing that WAS the operator to compare them against.
+#
+# The cost is not tidiness. `_AGG_WORDS["median"] = {...}` alone produced an operator
+# that ENUMERATED fine and raised KeyError when evaluated: the vocabulary grew and the
+# arithmetic did not. And an operator added that way carried NO invariant, because
+# `_holds_invariants` returned True for every aggregate except `sum`. A creature able to
+# extend its own vocabulary while unable to check the extension would grow confident and
+# wrong -- which is worse than not growing.
+#
+# So an aggregate is declared once and must supply all four parts. `laws` is not
+# decoration: it is the function that says a value is a legitimate answer, and a
+# declaration without one is REFUSED. The weakest law -- the value is one of the inputs,
+# between the least and the greatest -- holds for every aggregate there is, so nothing
+# may escape by claiming it has no property to check.
+
+#: the weakest law: an aggregate of numbers is one of them, hence between min and max
+_WITHIN_INPUTS = "within_inputs"
+
+
+def _law_within_inputs(values, result, *_):
+    """Every aggregate of a set of numbers lies between its least and greatest member.
+
+    True of a sum only when there is one member, of a mean always, of a median always, of
+    a count never in value but always in ORDER -- so this is stated only for aggregates
+    that return a member-like value and the declaration says which law it claims.
+    """
+    vals = [v for v in values if v is not None]
+    if not vals or result is None:
+        return True
+    try:
+        return min(vals) - 1e-9 <= float(result) <= max(vals) + 1e-9
+    except (TypeError, ValueError):
+        return True
+
+
+def _law_non_negative(values, result, *_):
+    vals = [v for v in values if v is not None]
+    if result is None:
+        return True
+    try:
+        return float(result) >= 0
+    except (TypeError, ValueError):
+        return True
+
+
+def _law_integral(values, result, *_):
+    if result is None:
+        return True
+    try:
+        return abs(float(result) - round(float(result))) < 1e-9
+    except (TypeError, ValueError):
+        return True
+
+
+_LAWS = {
+    _WITHIN_INPUTS: _law_within_inputs,
+    "non_negative": _law_non_negative,
+    "integral": _law_integral,
+}
+
+_AGGREGATES: dict[str, dict] = {
+    "sum": {
+        "fn": lambda v: sum(v),
+        "laws": ("non_negative",),
+        # a sum of positives cannot be less than its largest member
+        "extra": lambda values, result: (not values or result is None
+                                         or float(result) >= max(values) - 1e-9),
+    },
+    "max": {"fn": lambda v: max(v), "laws": (_WITHIN_INPUTS,)},
+    "min": {"fn": lambda v: min(v), "laws": (_WITHIN_INPUTS,)},
+    "mean": {"fn": lambda v: sum(v) / len(v), "laws": (_WITHIN_INPUTS,)},
+    "count": {"fn": lambda v: len(v), "laws": ("integral", "non_negative")},
+}
+
+
+def declare_aggregate(kind: str, words, fn, laws) -> None:
+    """Add an aggregate as ONE declaration: its words, its arithmetic, and its check.
+
+    Refusing a declaration with no law is the point. An operator nobody can be wrong
+    with is not a capability, it is a way to be confidently wrong, and this system's
+    whole purpose is to not do that.
+    """
+    if not isinstance(kind, str) or not kind.strip():
+        raise ValueError("an aggregate needs a name")
+    if not words:
+        raise ValueError(f"{kind}: an aggregate needs at least one word or nothing can ask for it")
+    if not callable(fn):
+        raise ValueError(f"{kind}: an aggregate needs arithmetic")
+    if not laws:
+        raise ValueError(f"{kind}: an aggregate needs at least one law -- a value nobody "
+                         "can check is a way to be confidently wrong")
+    for law in laws:
+        if law not in _LAWS and not callable(law):
+            raise ValueError(f"{kind}: unknown law {law!r}")
+    _AGG_WORDS[kind] = {str(w).strip().lower() for w in words}
+    _AGGREGATES[kind] = {"fn": fn, "laws": tuple(laws)}
+
+
+def aggregate_names() -> tuple[str, ...]:
+    """The aggregates that are really declared: words AND arithmetic AND a law."""
+    return tuple(k for k, v in _AGGREGATES.items() if k in _AGG_WORDS and v.get("laws"))
+
+
+def aggregate_holds(kind: str, values, result) -> bool | None:
+    """Does `result` satisfy what was declared about `kind`? None if it cannot be judged."""
+    spec = _AGGREGATES.get(kind)
+    if not spec:
+        return None
+    vals = [v for v in values if v is not None] if isinstance(values, list) else None
+    ok = True
+    for law in spec.get("laws", ()):
+        checker = _LAWS[law] if isinstance(law, str) else law
+        if vals is not None and checker(vals, result) is False:
+            ok = False
+    extra = spec.get("extra")
+    if vals is not None and callable(extra):
+        try:
+            if extra(vals, result) is False:
+                ok = False
+        except (TypeError, ValueError):
+            pass
+    return ok
+
+
 def _aggregate(kind: str):
-    fn = {
-        "sum": lambda v: sum(v),
-        "max": lambda v: max(v),
-        "min": lambda v: min(v),
-        "mean": lambda v: sum(v) / len(v),
-        "count": lambda v: len(v),
-    }[kind]
+    fn = _AGGREGATES[kind]["fn"]
 
     def apply(values, *_):
         # A TABLE HAS ROWS, AND A COUNT OF THEM IS ITS ROW COUNT.
@@ -1513,6 +1640,23 @@ def _holds_invariants(node: Node) -> bool:
     # produced it, so the walk descends before it answers.
     for child in _child_nodes(node):
         if not _holds_invariants(child):
+            return False
+
+    # EVERY AGGREGATE ANSWERS TO ITS OWN DECLARED LAW.
+    #
+    # Until now `_holds_invariants` returned True for every aggregate except `sum`, so a
+    # newly declared operator -- `median`, say -- was a word nothing could check. The law
+    # lives in the operator's declaration, so a declaration cannot exist without one and
+    # an operator cannot be added that the system is unable to be wrong with.
+    if node.op == "aggregate":
+        kind, child = node.args[0], node.args[1]
+        try:
+            got = evaluate(node)
+            values = evaluate(child)
+        except (EvalError, TypeError, ValueError, ZeroDivisionError, KeyError, IndexError):
+            return True
+        verdict = aggregate_holds(kind, values if isinstance(values, list) else None, got)
+        if verdict is False:
             return False
 
     # A GROUPING'S KEYS ARE THE DISTINCT KEYS IN THE ROWS IT SUMMARISES.

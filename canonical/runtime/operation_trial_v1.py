@@ -500,17 +500,23 @@ _ASKS = {
     "catalog": {"list", "listing", "files", "file", "directory", "dir", "folder",
                 "entries", "contents", "what", "which", "exist", "here"},
 }
-_AGG_WORDS = {
-    # THE SAME PHRASAL PARTICLES THE COMPOSER KNOWS. Teaching `up` to the expression
-    # builder alone let the COMPOSED path answer "add up the amounts in sales.csv" and
-    # return a string where the primitive returns a number -- the composed path
-    # DISPLACING the primitive it was supposed to defer to. One vocabulary or none.
-    "sum": {"total", "sum", "add", "added", "altogether", "combined", "overall",
-            "up", "addup", "much"},
-    "max": {"max", "maximum", "largest", "biggest", "highest", "most", "top", "greatest"},
-    "min": {"min", "minimum", "smallest", "lowest", "least", "fewest", "bottom"},
-    "mean": {"average", "mean", "typical", "avg"},
-}
+# ONE VOCABULARY OR NONE -- AND NOW LITERALLY ONE OBJECT.
+#
+# This was a second dict, kept in step by hand. Checked, the two already disagreed:
+# the trial knew `sum/max/min/mean` and not `count`, and the algebra knew all five. That
+# was harmless only because nothing yet declared an operator at runtime -- and the moment
+# one is declared, a copy means the declaring path can see it and this one cannot.
+#
+# `declare_aggregate` writes to the algebra's dict, so referring to that dict makes a
+# declaration visible here without anybody remembering to copy it.
+def _algebra_words():
+    try:
+        from canonical.runtime import value_algebra_v1 as V
+        return V._AGG_WORDS
+    except Exception:                                    # pragma: no cover - import cycle
+        return {}
+
+_AGG_WORDS = _algebra_words()
 # A column reference is what makes an aggregate specific to this question.
 _COLUMNISH = {"column", "field", "amount", "amounts", "value", "values", "score",
               "scores", "price", "prices", "total", "qty", "quantity", "count"}
@@ -519,7 +525,16 @@ _COLUMNISH = {"column", "field", "amount", "amounts", "value", "values", "score"
 def _asked_operation(words: list[str], ents: list['Entity'] | None = None) -> str | None:
     """Which operation the question's words point at. None when they are ambiguous."""
     low = {w.lower() for w in words}
+    # A COUNT OF LINES AND A COUNT OF A COLUMN SHARE ONE WORD: "how many".
+    #
+    # `count` now owns "many"/"number" in the shared vocabulary, so this loop started
+    # answering "how many lines are in data.py" with `aggregate_count` and never reached
+    # the noun test below -- the operation was chosen by a word that does not distinguish
+    # it. A count is only a count of a COLUMN when a column was named; with no column, the
+    # noun decides, and the noun is further down on purpose.
     for agg, wants in _AGG_WORDS.items():
+        if agg == "count":
+            continue
         if low & wants:
             return f"aggregate_{agg}"
     # "how many rows" / "how many lines" / "how many files" are distinguished by the
