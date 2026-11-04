@@ -313,6 +313,76 @@ class EffectOrgan(Organ):
         return (acted.get("row") or {}).get("verdict")
 
 
+class ForgeOrgan(Organ):
+    """The world-building faculty. Its targets are capabilities it cannot yet drive at all.
+
+    Log 12 ended with a pile of crashes that were really my fixture's fault, and the observation
+    that a world is not something a person should have to enumerate. This organ treats each
+    undrivable capability as a target, runs one repair round against it, and reports whether the
+    capability now reaches a verdict of its own. The repair is read from the capability's refusal
+    -- no branch knows a capability's name.
+
+    It runs on the organism's clock like everything else: it is not invoked, it is attended to.
+    """
+
+    name = "forge"
+
+    def __init__(self, artifact: Path | None = None) -> None:
+        self._artifact = artifact or (ROOT / "canonical/verification/WORLD_FORGE_V1.json")
+        self._rows = None
+
+    def _load(self):
+        if self._rows is None:
+            try:
+                doc = json.loads(self._artifact.read_text(encoding="utf-8"))
+                self._rows = [r for r in doc.get("rows") or [] if not r.get("reached")]
+            except (OSError, ValueError):
+                self._rows = []
+        return self._rows
+
+    def targets(self):
+        out = []
+        for row in self._load():
+            stopped = str(row.get("stopped_by") or "")
+            if stopped == "UNREPAIRABLE_MISSING_PACKAGE":
+                continue                      # a package this machine does not have: no world fixes it
+            out.append({"id": row["capability"], "capability": row["capability"]})
+        return out
+
+    def predict(self, target, record):
+        return _expected(record, default="DECLARED")
+
+    def senses(self, target):
+        return {"is_forge": 1.0, "is_loop_defect": 0.0, "is_effect": 0.0,
+                "path_is_json": 0.0, "path_is_canonical": 0.0, "path_depth": 0.0,
+                "defect_has_path": 0.0, "expects_effect": 0.0, "n_supplied": 0.0,
+                "supplied_all_prefixed": 0.0, "capability_is_archive": 0.0}
+
+    def act(self, target):
+        from canonical.tools import world_forge_v1 as forge
+        from canonical.tools.capability_world_v1 import registry
+        try:
+            module = registry()[target["capability"]].get("adapter_module") or ""
+            result = forge.forge(target["capability"], module)
+        except Exception as exc:                                     # noqa: BLE001
+            return {"applied": False, "reason": str(exc)[:80]}
+        return {"applied": True, "result": result}
+
+    def observe(self, target, acted):
+        if not acted.get("applied"):
+            return "REFUSED:" + str(acted.get("reason") or "UNKNOWN")
+        result = acted.get("result") or {}
+        if result.get("reached"):
+            return "DECLARED:" + str(result.get("verdict"))
+        return "STILL_CRASHING:" + str(result.get("stopped_by") or "UNKNOWN")
+
+
+# The organ set is CLOSED and literal. Nothing at runtime may add to it, and membership may not
+# depend on a file that happens to exist: measured 2026-11-04, adding an organ conditionally on an
+# artifact on disk broke the safety test, and the test was right. Targets may depend on the world;
+# organs may not.
+ORGAN_NAMES = ("effect", "receipt", "lease", "measurement", "derived", "forge")
+
 ORGANS: dict[str, Organ] = {}
 
 
@@ -327,6 +397,7 @@ def build_organs() -> dict[str, Organ]:
         _LoopOrgan("lease", lambda: loop.make_stale_lease_class()),
         _LoopOrgan("measurement", lambda: loop.make_stale_measurement_class()),
     ]
+    organs.append(ForgeOrgan())
     try:
         from canonical.tools import derivation_inference_v1 as infer
         if infer.load_model(recompute_if_missing=False) is not None:

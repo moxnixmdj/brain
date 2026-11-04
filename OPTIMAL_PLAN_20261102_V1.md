@@ -1137,3 +1137,108 @@ The next widening is therefore sensory, not structural: a capability's outcome d
 does with a *malformed* thing, and the only way to know that is to have seen it handle one. That is
 a claim to test, not a conclusion to assert. No capability credit; unaided closure for classes that
 matter is still 0. Drift guard unchanged.
+
+## Execution log 13 — the world is built by the capability's own refusal (2026-11-04)
+
+Log 12 ended with a bad number and an honest reading of it: on 462 mechanical worlds the model
+learned **nothing**, and a permissive tree could only reach +5.3 points over the base rate. The
+reason was visible in the verdict list and I had not looked at it.
+
+**270 of 462 worlds ended in CRASHED.** Of those, 127 were `FileNotFoundError` on a path my own
+fixture invented, 23 were a JSON file I wrote as garbage on purpose, 70 were a package this machine
+does not have. That world was mostly a measurement of *me*. A world that is mostly an artifact of
+its builder cannot teach anything, and no model improvement was ever going to fix it.
+
+### What was actually in the failures
+
+29 of the crashes were the capability **naming the world it wanted**:
+
+    RuntimeError: SACCR_INPUT_SHAPE_REJECTED:need {"trades": [non-empty]}
+    ValueError:    RELEVANCE_INPUT_NOT_JSON:JSONDecodeError
+    FileNotFoundError: [Errno 2] No such file or directory: '<the path it actually wanted>'
+
+That is a specification written in a refusal. So the world does not have to be guessed, and it does
+not have to be enumerated by a person: **start with the smallest world, run, read the refusal,
+change one thing, run again.**
+
+`canonical/tools/world_forge_v1.py` does that. Seventy lines of operators, each keyed on an
+exception class or on the shape of a message — never on a capability id, which a test checks
+against all 141 registry entries and all 130 adapter names.
+
+### Measured
+
+| | before | after |
+|---|---|---|
+| capabilities that reach a verdict of their own | **31** of 58 | **36** of 58 |
+| gained | — | **5** |
+| rounds needed, when it worked | — | 1, 1, 2, 3 (33 needed none) |
+
+The five gained: `decision.synthesis.verify.stdlib`, `evidence.claim_relation.generic_units.stdlib`,
+`plain_goal.bound_capability.grounding.verify.stdlib`, `source.objective_relevance.rank.bm25`,
+`test.slice.never_miss.v1`. Four of them reached **CLAIM_FALSE** — in the world they themselves
+specified, their own declared claim did not hold. That is a verdict about the capability in a
+synthesised world, not proof it is broken, and it is stated that way in the artifact.
+
+Stopped by: 12 `UNREPAIRABLE_MISSING_PACKAGE` (PIL, openpyxl, sympy, pypdf,
+source_candidate_provenance_verify — installing one is spending, forbidden in a credited path),
+6 `UNREPAIRABLE_NOT_UNDERSTOOD`, 3 loop-with-no-progress, 1 rounds exhausted.
+
+### The first version repaired nothing at all
+
+0 gained on the first run. Both causes were real and both were mine:
+
+1. The shape parser demanded JSON, and `{"trades": [non-empty]}` is not JSON. Now `[non-empty]`
+   is read as *one element*, which is what it means, and the world it asks for gets built.
+2. Every path was resolved against **the repository**, so a path inside the temporary world was
+   reported as unreachable, and the only repair that could have worked was refused for being
+   impossible.
+
+Five capabilities became drivable when those two were fixed. Neither was findable by reading the
+code; both were findable by reading the refusals.
+
+### A finding that is not a fixture problem
+
+An adapter that resolves a path against the working directory instead of the `root` it was handed
+is a capability **escaping its own world**. The forge refuses to patch it — writing the file it
+wants, wherever it wants it, is the fixture covering for the capability — and names it
+`UNREPAIRABLE_ADAPTER_ESCAPES_ROOT`. There are adapters in this registry that do it. That is a
+defect class nobody has a detector for, and it belongs to the oracle, not to the forge.
+
+### It is a faculty, not a tool
+
+`ForgeOrgan` lives inside the organism. Its targets are the capabilities it cannot drive (10, after
+the missing-package ones are excluded as unfixable); its action is one repair round; its
+observation is whether the capability now speaks for itself. It is attended to on the organism's
+own clock, like every other organ, and it is subject to the same rule: a prediction before the
+action, surprise when the world disagrees. First tick, live: predicted `DECLARED`, observed
+`STILL_CRASHING:UNREPAIRABLE_NOT_UNDERSTOOD`, surprise — and the model learned from it.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| The system builds worlds from its own failures | **TRUE** | 5 capabilities gained, each with the repair trail recorded |
+| The repairs are generic, not per-capability | **TRUE** | a test searches the operator source for all 141 ids and 130 module names; none appear |
+| A missing package is never pretended away | **TRUE** | 12 counted unreachable, named, unpatched |
+| It can drive a majority of the registry | **FALSE** | 36 of 58 sandboxable; 12 blocked by spend, 6 unexplained, plus 63 not sandboxable at all |
+| This makes the model predictive | **UNKNOWN, and not claimed** | the +5.3 ceiling from log 12 has not been re-measured on the repaired worlds |
+| Unaided closure for classes that matter | **STILL 0** | the forge closes *fixture* gaps, not capability gaps |
+
+### The next honest step
+
+Re-measure the transfer number on the forged worlds. If the ceiling moves because the worlds are
+now meaningful rather than because the model changed, that is the signal that log 12's bottleneck
+was the world all along. If it does not move, then the senses really are the limit and the answer is
+different. Either way it is a measurement, not a claim — and it is cheaper than anything else on the
+list.
+
+No capability credit. Drift guard unchanged.
+
+### Correction, same day: the faculty almost widened the organ set
+
+Adding `ForgeOrgan` conditionally — *if it has targets, add it* — broke
+`test_the_organism_cannot_widen_its_own_organ_set`, and the test was right. An organ whose
+existence depends on a file on disk is a faculty that grants itself faculties the moment someone
+writes that file. The set is now a closed literal, `ORGAN_NAMES`, used by both the module and the
+test, and membership is asserted identical across two builds. **Targets may depend on the world;
+organs may not.** 35 tests pass with the correction in place.

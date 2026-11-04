@@ -192,8 +192,13 @@ def test_the_organism_cannot_widen_its_own_organ_set():
     """A faculty that grants itself faculties is a privileges bug wearing a metaphor."""
     organs = org.build_organs()
     assert set(org.PROTECTED_ACTIONS) >= {"widen_organs", "promote_self", "flip_terminal"}
+    assert set(org.ORGAN_NAMES) == {"effect", "receipt", "lease", "measurement", "derived",
+                                    "forge"}, "the closed organ set changed"
     for name in organs:
-        assert name in {"effect", "receipt", "lease", "measurement", "derived"}, name
+        assert name in org.ORGAN_NAMES, name
+    # Membership must not depend on what is on disk: a faculty that appears because a file
+    # appeared is a privileges bug, however useful the file is.
+    assert set(org.build_organs()) == set(org.build_organs())
     source = Path(ROOT / "canonical/runtime/organism_v1.py").read_text()
     assert "ORGANS = {" not in source, "a global mutable organ registry invites self-widening"
 

@@ -1,0 +1,1002 @@
+{
+ "after": {
+  "crashing_or_silent": 22,
+  "reached_a_declared_verdict": 36
+ },
+ "attempted": 58,
+ "authority": "NO_CAPABILITY_CREDIT_WORLD_CONSTRUCTION_MEASUREMENT_ONLY",
+ "before": {
+  "crashing_or_silent": 27,
+  "reached_a_declared_verdict": 31
+ },
+ "gained": 5,
+ "gained_capabilities": [
+  "decision.synthesis.verify.stdlib",
+  "evidence.claim_relation.generic_units.stdlib",
+  "plain_goal.bound_capability.grounding.verify.stdlib",
+  "source.objective_relevance.rank.bm25",
+  "test.slice.never_miss.v1"
+ ],
+ "non_claims": [
+  "BUILDING_A_RUNNABLE_WORLD_IS_NOT_BUILDING_A_MEANINGFUL_ONE",
+  "A_REFUSAL_NAMED_IS_A_GOOD_OUTCOME_NOT_A_FIXED_CAPABILITY",
+  "OPERATORS_ARE_GENERIC_NO_BRANCH_KNOWS_A_CAPABILITY_NAME",
+  "MISSING_PACKAGES_ARE_UNREPAIRABLE_WITHOUT_SPEND"
+ ],
+ "operators": {
+  "BUILD_THE_SHAPE_IT_NAMED": 1,
+  "CREATE_DATABASE": 1,
+  "CREATE_DIRECTORY": 6,
+  "CREATE_FILE": 2,
+  "MAKE_THE_WORLD_JSON": 9,
+  "UNREPAIRABLE_MISSING_PACKAGE": 12,
+  "UNREPAIRABLE_NOT_UNDERSTOOD": 6,
+  "WRITE_A_PARSEABLE_PYTHON_FILE": 4
+ },
+ "question": "Can the system build a world a capability can actually run in, by reading what the capability says when the world is wrong?",
+ "rounds_to_verdict": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  1,
+  1,
+  2,
+  3
+ ],
+ "rows": [
+  {
+   "capability": "archive.tar_gz.create_from_manifest",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: MANIFEST_INPUT_REQUIRED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "auto.pypi.bson-modern",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: PYTHON_CODEC_CONTRACT_INCOMPLETE",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "auto.pypi.msgpack",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: PYTHON_CODEC_CONTRACT_INCOMPLETE",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "chart.raster.curve_value_query.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "chart.raster.curve_x_at_y_query.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "chart.raster.direct_curve_label_family_rank.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "chart.raster.legend_style_binding.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "chart.raster.scene_graph.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "chart.read.binary_phase_solvus.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "chart.read.legend_linear_intersection.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "code.impact.tree_sitter.testselect.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "TreeSitterSWEError: CHANGED_PATHS_INVALID",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "code.index.tree_sitter.incremental.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "TreeSitterSWEError: NO_SUPPORTED_SOURCE_FILES",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "code.multilanguage.parse.tree_sitter.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=False want True",
+     "round": 0,
+     "verdict": "CLAIM_FALSE"
+    }
+   ],
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "decision.synthesis.typed.stdlib",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "DecisionSynthesisError: DECISION_INPUT_JSON_INVALID",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "decision.synthesis.verify.stdlib",
+   "reached": true,
+   "rounds": 1,
+   "trail": [
+    {
+     "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "verified=False want True",
+     "round": 1,
+     "verdict": "CLAIM_FALSE"
+    }
+   ],
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "docx.document.create.python_docx",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: PYTHON_LIBRARY_CONTRACT_INCOMPLETE",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "docx.document.create_from_json_record",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: JSON_DOCX_SPEC_UNRESOLVED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "docx.document.verify.intent_ooxml",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: DOCX_INTENT_SIDECAR_MISSING",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "docx.document.verify.ooxml",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: DOCX_EXPECTED_STRUCTURE_REQUIRED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "evidence.claim_relation.generic_units.stdlib",
+   "reached": true,
+   "rounds": 1,
+   "trail": [
+    {
+     "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "ValueError: EXTRACTION_SCHEMA_INVALID",
+     "round": 1,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "evidence.oracle.concrete_execution.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "ValueError: OUTPUT_ALREADY_EXISTS",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "execution.pipeline.8stage.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=False want True",
+     "round": 0,
+     "verdict": "CLAIM_FALSE"
+    }
+   ],
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "finance.saccr.credit.addon.v1",
+   "reached": false,
+   "rounds": 1,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "trail": [
+    {
+     "detail": "RuntimeError: SACCR_INPUT_SHAPE_REJECTED:need {\"trades\": [non-empty]}",
+     "operator": "BUILD_THE_SHAPE_IT_NAMED",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "RuntimeError: SACCR_INPUT_SHAPE_REJECTED:trade[0] not an object",
+     "operator": "UNREPAIRABLE_NOT_UNDERSTOOD",
+     "round": 1,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "json.file.write",
+   "reached": false,
+   "rounds": 1,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "trail": [
+    {
+     "detail": "RuntimeError: CONTENT_NOT_VALID_JSON:JSONDecodeError",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "RuntimeError: CONTENT_NOT_VALID_JSON:JSONDecodeError",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 1,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "knowledge.status.assert",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'source_candidate_provenance_verify'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "knowledge.support.materialize",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'source_candidate_provenance_verify'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "math.numeric_expression.sympy",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'sympy'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "orchestration.verify.bridge_enumeration.v1",
+   "reached": false,
+   "rounds": 6,
+   "stopped_by": "ROUNDS_EXHAUSTED",
+   "trail": [
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/x'",
+     "operator": "CREATE_DIRECTORY",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/x'",
+     "operator": "CREATE_DIRECTORY",
+     "round": 1,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/x'",
+     "operator": "CREATE_DIRECTORY",
+     "round": 2,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/x'",
+     "operator": "CREATE_DIRECTORY",
+     "round": 3,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/x'",
+     "operator": "CREATE_DIRECTORY",
+     "round": 4,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/x'",
+     "operator": "CREATE_DIRECTORY",
+     "round": 5,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "pdf.extract.text.pypdf",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "trail": [
+    {
+     "detail": "RuntimeError: PYPDF_IMPORT_FAILED:ModuleNotFoundError:No module named 'pypdf'",
+     "operator": "UNREPAIRABLE_NOT_UNDERSTOOD",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "plain_goal.bound_capability.grounding.stdlib",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "GroundingError: REGISTRY_MISSING",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "plain_goal.bound_capability.grounding.verify.stdlib",
+   "reached": true,
+   "rounds": 3,
+   "trail": [
+    {
+     "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/forge_6xk0v9jw/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json'",
+     "operator": "CREATE_FILE",
+     "round": 1,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 2,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "verified=False want True",
+     "round": 3,
+     "verdict": "CLAIM_FALSE"
+    }
+   ],
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "professional.artifact.visual_observer.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'PIL'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.issue.natural_language.parse_edit_intent.v1",
+   "reached": false,
+   "rounds": 1,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "trail": [
+    {
+     "detail": "{\n  \"capability\": \"python.issue.natural_language.parse_edit_intent.v1\",\n  \"error\": true,\n  \"reason\": \"ISSUE_UNREADABLE_JSON:JSONDecodeError\"\n}\n",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 0,
+     "verdict": "NO_OUTPUT"
+    },
+    {
+     "detail": "{\n  \"capability\": \"python.issue.natural_language.parse_edit_intent.v1\",\n  \"error\": true,\n  \"reason\": \"ISSUE_SCHEMA_MISSING:issue_id\"\n}\n",
+     "operator": "UNREPAIRABLE_NOT_UNDERSTOOD",
+     "round": 1,
+     "verdict": "NO_OUTPUT"
+    }
+   ],
+   "verdict": "NO_OUTPUT"
+  },
+  {
+   "capability": "python.software.repair.guided.provenance.coupled.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "GuidedRepairError: FILE_INVALID",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.software.repair.loop.coupled.ast.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RepairLoopError: FILE_INVALID",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.software.repair.loop.strict_progress.ast.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RepairLoopError: FILE_INVALID",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.software.repair.loop.test_guided.ast.v1",
+   "reached": false,
+   "rounds": 1,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "trail": [
+    {
+     "detail": "RepairLoopError: PATH_INVALID:t",
+     "operator": "WRITE_A_PARSEABLE_PYTHON_FILE",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "RepairLoopError: PATH_INVALID:t",
+     "operator": "WRITE_A_PARSEABLE_PYTHON_FILE",
+     "round": 1,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.software.repair.semantic_acceptance.v1",
+   "reached": false,
+   "rounds": 1,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "trail": [
+    {
+     "detail": "RepairAcceptanceError: TEST_PATH_INVALID:t",
+     "operator": "WRITE_A_PARSEABLE_PYTHON_FILE",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "RepairAcceptanceError: TEST_PATH_INVALID:t",
+     "operator": "WRITE_A_PARSEABLE_PYTHON_FILE",
+     "round": 1,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.source.audit.ast",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: PYTHON_AUDIT_EMPTY",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.source.change_impact.testselect.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: CHANGE_IMPACT_INPUT_REQUIRED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.source.complexity.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=True want True",
+     "round": 0,
+     "verdict": "CLAIM_CHECKED"
+    }
+   ],
+   "verdict": "CLAIM_CHECKED"
+  },
+  {
+   "capability": "python.source.dead_code.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: PYTHON_INDEX_EMPTY",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.source.definition_count.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=True want True",
+     "round": 0,
+     "verdict": "CLAIM_CHECKED"
+    }
+   ],
+   "verdict": "CLAIM_CHECKED"
+  },
+  {
+   "capability": "python.swe.transform_and_synthesize.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "trail": [
+    {
+     "detail": "RuntimeError: PYTHON_SWE_UNSUPPORTED_OPERATION:x",
+     "operator": "UNREPAIRABLE_NOT_UNDERSTOOD",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "software.analysis.diagnose_and_architect.v1",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "trail": [
+    {
+     "detail": "RuntimeError: DIAGNOSE_ARCHITECT_UNSUPPORTED_OPERATION:x",
+     "operator": "UNREPAIRABLE_NOT_UNDERSTOOD",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "software.hardcore.kernel.orchestrate.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=True want True",
+     "round": 0,
+     "verdict": "CLAIM_CHECKED"
+    }
+   ],
+   "verdict": "CLAIM_CHECKED"
+  },
+  {
+   "capability": "software.patch.synthesize.cegis.z3.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "ValueError: OUTPUT_ALREADY_EXISTS",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "software.synthesis.grid_induction.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=True want True",
+     "round": 0,
+     "verdict": "CLAIM_CHECKED"
+    }
+   ],
+   "verdict": "CLAIM_CHECKED"
+  },
+  {
+   "capability": "source.candidates.enumerate.stdlib",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: JSON_OUTPUT_REQUIRED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "source.objective_relevance.rank.bm25",
+   "reached": true,
+   "rounds": 1,
+   "trail": [
+    {
+     "detail": "ValueError: RELEVANCE_INPUT_NOT_JSON:JSONDecodeError",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "output_verified=False want True",
+     "round": 1,
+     "verdict": "CLAIM_FALSE"
+    }
+   ],
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "sqlite.table.create_from_json_records",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: SQLITE_COLUMNS_UNRESOLVED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "sqlite.table.verify_against_json_records",
+   "reached": false,
+   "rounds": 1,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "trail": [
+    {
+     "detail": "DatabaseError: file is not a database",
+     "operator": "CREATE_DATABASE",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "anonical/tools/world_forge_v1.py\", line 115, in _worker\n    connection.execute(\"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY, value TEXT)\")\nsqlite",
+     "operator": "UNREPAIRABLE_NOT_UNDERSTOOD",
+     "round": 1,
+     "verdict": "NO_OUTPUT"
+    }
+   ],
+   "verdict": "NO_OUTPUT"
+  },
+  {
+   "capability": "structured.decision_evidence.locate.stdlib",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: JSON_OUTPUT_REQUIRED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "task.acceptance.objective.lossless.v1",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "no 'output_verified'; keys=['acceptance_stop_authorized', 'adapter', 'all_raw_obligations_accounted_for', 'candidate_accepted', 'candidate_sha256', 'capability_",
+     "round": 0,
+     "verdict": "CLAIM_FIELD_ABSENT"
+    }
+   ],
+   "verdict": "CLAIM_FIELD_ABSENT"
+  },
+  {
+   "capability": "test.slice.never_miss.v1",
+   "reached": true,
+   "rounds": 2,
+   "trail": [
+    {
+     "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/forge_93tg7vd8/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json'",
+     "operator": "CREATE_FILE",
+     "round": 0,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+     "operator": "MAKE_THE_WORLD_JSON",
+     "round": 1,
+     "verdict": "CRASHED"
+    },
+    {
+     "detail": "output_verified=False want True",
+     "round": 2,
+     "verdict": "CLAIM_FALSE"
+    }
+   ],
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "text.file.write",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "output_verified=True want True",
+     "round": 0,
+     "verdict": "CLAIM_CHECKED"
+    }
+   ],
+   "verdict": "CLAIM_CHECKED"
+  },
+  {
+   "capability": "xlsx.table.create_from_json_records",
+   "reached": true,
+   "rounds": 0,
+   "trail": [
+    {
+     "detail": "RuntimeError: XLSX_COLUMNS_UNRESOLVED",
+     "round": 0,
+     "verdict": "REFUSED_NAMED"
+    }
+   ],
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "xlsx.table.verify_against_json_records",
+   "reached": false,
+   "rounds": 0,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "trail": [
+    {
+     "detail": "ModuleNotFoundError: No module named 'openpyxl'",
+     "operator": "UNREPAIRABLE_MISSING_PACKAGE",
+     "round": 0,
+     "verdict": "CRASHED"
+    }
+   ],
+   "verdict": "CRASHED"
+  }
+ ],
+ "schema": "PROJECT_BRAIN_WORLD_FORGE_V1",
+ "stopped_by": {
+  "LOOP_NO_PROGRESS": 3,
+  "ROUNDS_EXHAUSTED": 1,
+  "UNREPAIRABLE_MISSING_PACKAGE": 12,
+  "UNREPAIRABLE_NOT_UNDERSTOOD": 6
+ },
+ "unreachable": [
+  "PIL",
+  "openpyxl",
+  "source_candidate_provenance_verify",
+  "sympy"
+ ]
+}
