@@ -41,7 +41,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_LEARNED_LAW_HAD_NO_TERM_POSITION_SO_A_NEW_LAW_COULD_ONLY_BE_COMPOSED_WITH_ANOTHER_LAW_AND_NEVER_USED_AS_A_COFACTOR__OMEGA_T_PLUS_1_CONTAINED_ONLY_MORE_INSTANCES_OF_THE_SHAPES_IN_OMEGA_T",
-  "canonical_base_commit": "8d73036987e94b0431bbc945b5ff659b485badbc",
+  "canonical_base_commit": "cc5b71763b93b752c5f03f94dbfaff6ea5448f7f",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -90,7 +90,7 @@
     "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "8d73036987e94b0431bbc945b5ff659b485badbc",
+    "canonical_base_commit": "cc5b71763b93b752c5f03f94dbfaff6ea5448f7f",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ONE_LEARNED_LAW_PER_COMPOSED_FORM",
@@ -253,7 +253,7 @@
           "route": "WIRE_THE_CONCEPT_LIBRARY_IN_AS_A_TEMPLATE_SOURCE"
         }
       ],
-      "checked_at_utc": "2026-11-04T22:09:55Z",
+      "checked_at_utc": "2026-11-04T22:12:59Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -293,7 +293,7 @@
       "selected_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-04T22:09:55Z",
+        "checked_at_utc": "2026-11-04T22:12:59Z",
         "execution_dependencies": [
           {
             "dependency": "CPython 3.11 standard library runtime",
@@ -387,7 +387,7 @@
     "why_selected_route_is_fastest_sufficient": "INVERTING_ONE_COMBINING_OPERATION_AND_TESTING_CONSTANCY_PER_RESIDUE_COVERS_T(x)+x_T(x)-x_T(x)*x_AND_T(x)+x*x_WITH_NO_NEW_NODE_PER_CASE_AND_NO_ENUMERATION__EVERY_CANDIDATE_STILL_ENTER THE_EXISTING_VERSION_SPACE"
   },
   "route_frontier": {
-    "checked_at_utc": "2026-11-04T22:09:55Z",
+    "checked_at_utc": "2026-11-04T22:12:59Z",
     "discovery_required": true,
     "max_age_hours": 24,
     "selected_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE"
