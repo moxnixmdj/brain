@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 293,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6684,
+  "research_index_records": 6685,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0d36bcb06a76a4aa72dcfcafc4ed476819bf4f3fabff43419454397f2c67bd98"
+  "value": "29206fa07321b84c077c1a80d095d364f51f182bef8c2a0ec5fa79e0189dea74"
  },
  "engines": [
   {
@@ -222355,6 +222355,30 @@
     "the_census_records_reason_and_route_admission_rule_for_every_row_and_histograms_by_named_cause_and_the_git_fixture_has_one_owner_sweep_git_fixture_v1_that_the_matrix_already_used_and_the_census_now_seeds_for_any_sentence_that_talks_about_history": 1,
     "the_census_reported_the_failure_family_and_never_the_cause_the_door_already_returns_and_it_asked_seven_history_sentences_of_directories_with_no_history__measured_2026_10_31_ten_different_failures_read_as_live_controller_execution_or_verification_failure_and_three_history_sentences_read_as_named_test_not_in_git_history_which_is_a_fact_about_the_fixture": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2d23aa6b54647281b0da4a4a0e0cb5fa02fc696b49898a05a449e2376ad2acc2",
+   "status": "",
+   "terms": {
+    "answers_that_are_sound_by_construction_rather_than_audited_afterwards": 1,
+    "check": 1,
+    "choice": 1,
+    "gate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "part": 1,
+    "soundness_as_a_search_criterion_over_the_whole_expression": 1,
+    "the_check_is_part_of_the_choice_not_a_gate_v1": 1,
+    "v1": 1,
+    "verify_could_reject_a_wrong_answer_and_nothing_consulted_it_while_choosing__with_a_lossy_groups_the_search_returned_150_150_with_west_missing_and_verify_said_false_on_exactly_that_result": 1
    }
   },
   {
