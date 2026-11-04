@@ -3975,6 +3975,10 @@ class MetaCircularOrganGraph:
             return {"ok": False, "status": "EMPTY_EXAMPLES"}
 
         # 0. Tier-0 recall (`< 0.05 ms`): check primary SKILL for this signature if consistent
+        #: Questions actually asked to the oracle, counted from the first one. The recall path below
+        #: spends a query to test the incumbent, and for several rounds it reported `0` -- a reported
+        #: cost that omits the questions you asked is a lie about what the answer was worth.
+        recall_queries_used = 0
         existing = self.get_primary(SKILL, task_signature)
         if existing is not None:
             consistent = all(
@@ -3990,6 +3994,7 @@ class MetaCircularOrganGraph:
                 # instead of assuming. If it holds, the cost is a single query and the organ stays.
                 probe = _first_refuting_probe(existing, examples, task_signature)
                 if probe is not None:
+                    recall_queries_used += 1
                     try:
                         observed = oracle(probe)
                     except Exception:
@@ -4011,7 +4016,8 @@ class MetaCircularOrganGraph:
                     "ok": True,
                     "status": "RECALLED_TIER0_ORGAN",
                     "organ": existing,
-                    "oracle_queries_used": 0,
+                    "oracle_queries_used": recall_queries_used,
+                    "recall_verified_by_oracle": recall_queries_used > 0,
                 }
 
         arity = len(examples[0][0])
@@ -4120,7 +4126,7 @@ class MetaCircularOrganGraph:
                     }
             return {"ok": False, "status": "NO_CONSISTENT_HYPOTHESIS", "seen_candidates": len(seen_ast)}
 
-        queries_used = 0
+        queries_used = recall_queries_used
         #: Evidence accumulated after the initial grammar search that the grammar itself cannot
         #: explain. Tracked so the caller is told the truth ("the world is outside my space")
         #: instead of being handed a verdict the instrument is not entitled to.
