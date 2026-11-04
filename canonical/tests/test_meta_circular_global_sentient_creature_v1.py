@@ -633,6 +633,47 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             admitted += 1
         self.assertGreaterEqual(admitted, 1)
 
+    def test_live_boards_are_experience_not_named_probes(self):
+        """The board the creature ranked is the held-out. Perception that is thrown away cannot teach."""
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            boot = MCOG.compile_policy_organ()
+            graph.register_organ(boot)
+            board = [
+                {"id": "dead_end", "value": 12.0, "cost": 1.0},
+                {"id": "tool", "value": 0.0, "cost": 1.0, "unlocks": ("payoff",)},
+                {"id": "payoff", "value": 100.0, "cost": 1.0, "requires": ("tool",)},
+            ]
+            ranked = boot.invoke(board, 3.0, None)
+            self.assertEqual(ranked[0]["id"], "tool")
+            self.assertTrue(graph._live_policy_boards)
+            self.assertEqual(graph._live_policy_boards[-1][1]["id"], "tool")
+            self.assertEqual(graph._live_policy_boards[-1][1]["unlocks"], ("payoff",))
+            graph.record_transition(action_id="dead_end", cost=1.0, failed=True, value=12.0, delta={})
+            graph.record_transition(action_id="tool", cost=1.0, failed=False, value=0.0, delta={"ok": 1.0})
+            self.assertTrue(any(isinstance(tr.get("board"), list) for tr in graph._world_transitions))
+            pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(pol)
+            again = pol.invoke(board, 3.0, None)
+            self.assertEqual(again[0]["id"], "tool")
+            self.assertTrue(MCOG._policy_respects_live_boards(pol, graph._live_policy_boards))
+            # Locked-first ranking is refused by the board the creature saw.
+            locked_src = (
+                "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
+                "    rows = [dict(a) for a in actions]\n"
+                "    rows.sort(key=lambda r: -float(r.get('value') or 0.0))\n"
+                "    return rows\n"
+            )
+            locked = MCOG.make_organ(
+                stratum=MCOG.POLICY,
+                name="instrumental_policy",
+                task_signature="policy::instrumental_q",
+                entrypoint="score_actions",
+                source_code=locked_src,
+            )
+            self.assertFalse(MCOG._policy_respects_live_boards(locked, graph._live_policy_boards))
+            self.assertFalse(MCOG.admit_policy_organ(locked, graph._world_transitions).get("ok"))
+
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")
         self.assertIsNotNone(simplified)
