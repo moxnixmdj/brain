@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ANSWER_SPACE_BUILT_FROM_VOCABULARY_20261104",
+  "action_intent_id": "THE_ANSWER_SPACE_IS_A_PRODUCT_OF_THE_VOCABULARY_V1",
+  "action_kind": "capability_extension",
+  "active_program": "THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_CREATURE",
+  "route_id": "compiled_enumerated_operator_composition",
+  "date": "2026-11-04",
+  "canonical_generation": "v22",
+  "canonical_base_commit": "8be9375b5238eb93d21a5bb80696acb50e4ac5bf",
+  "terminal_objective": "An answer the system has never been told how to produce must be BUILT from the operators it has, so the set of expressible answers grows with the vocabulary rather than with edits to the search.",
+  "capability_target": "A question naming a COLUMN instead of a file, and a question needing an operator the search never appended, are both answered by composition.",
+  "parent_capability": "composition_over_hand_written_candidate_sentences",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 1,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Add a type-directed enumerator that builds every well-typed composition of the operator table to a fixed point, and consult it only where the existing hand-written search can build nothing. Measure growth as a PRODUCT: declaring one operator as data yields 17 new expressions, 7 new shapes, every one containing it, with the declaration removed restoring the exact previous count.",
+  "selected_route": "enumerate_by_operator_type_then_choose_with_the_lemma_rules",
+  "causal_blocker": "The answer space was a hand-written list: sixteen candidates.append sites, eight word sets, eighteen lex.set tests, reaching five distinct structures. A question whose shape nobody appended was refused while its pieces existed in the same file.",
+  "expected_parent_change": "Questions that name a column and no file are answered from the column's referent; questions needing an unappended operator are answered once that operator is declared as data.",
+  "expected_parent_frontier_change": "The answer space becomes a function of the operator vocabulary.",
+  "blocker_lease_key": "answer_space_is_enumerated_not_listed",
+  "falsification_condition": "Declaring a new operator as data produces no new expressions, or produces expressions not containing it, or the removal of the declaration does not restore the previous count, or an answer the existing search gives changes.",
+  "stop_condition": "The enumerator defers to the existing search; 99 tests pass; the 117-case sweep is unchanged; 12 of 12 questions answer through the front door.",
+  "explicit_user_authorization": "Owner directive on 2026-11-04, repeated six times: 'You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' Then: 'go'. Answer given each round: No. $0 spend.",
+  "agent_orientation": {
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_CREATURE",
+    "progress_evidence_paths": [
+      "canonical/runtime/value_enumeration_v1.py",
+      "canonical/runtime/value_algebra_v1.py",
+      "canonical/tests/test_the_vocabulary_grows_from_data_not_from_sentences_v1.py"
+    ]
+  },
+  "measured_effect": "DECLARING_ONE_OPERATOR_AS_DATA_YIELDS_17_NEW_EXPRESSIONS_AND_7_NEW_SHAPES_EVERY_ONE_CONTAINING_IT__REMOVAL_RESTORES_THE_EXACT_COUNT__99_TESTS_PASS__117_CASE_SWEEP_UNCHANGED_AT_116__12_OF_12_THROUGH_THE_FRONT_DOOR",
+  "load_bearing_primary": {
+    "interpretation": "This does NOT claim general intelligence. It claims that the number of answerable questions is now a function of the declared operator vocabulary rather than of the number of sentences in the source, and that this is measured rather than asserted."
+  },
+  "prior_work_reused": "The choice rules -- a word is spent once, filter on full accounting then fewest operators, ties go to the operator the question named, per is a filter not a rank -- are the incumbent search's, kept rather than re-derived. The existing search still runs first and answers what it always answered.",
+  "recursive_obs": {
+    "observation": "Every defect found this round was one fact stated in two places: the numeric-column test and the count, the type table and the builder, the invariant and its reader, the size comparison and its sign.",
+    "consequence": "The next layer down is to make an operator a single record that carries its arity, its words, its evaluation and its invariants together, so the disagreement has nowhere to live."
+  },
+  "v22_prewrite_admission": {
+    "checked_at_utc": "2026-11-04T00:00:00Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION"
+  },
+  "next_step": "Collapse the operator's five statements into one record and re-measure whether the defects of this round are expressible at all."
+}
