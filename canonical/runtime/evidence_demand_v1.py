@@ -407,6 +407,90 @@ def behaviour_signature(body: str, params: Sequence[str],
     return tuple(out)
 
 
+def disclose_probes(bodies: Sequence[str], examples: Sequence[Any] = (),
+                    base: Sequence[Any] | None = None) -> tuple[Any, ...]:
+    """Probes derived from what the BODIES can tell apart, not from a frozen range.
+
+    MEASURED 2026-11-04 -- the eighth instance of this project's recurring defect, and the first one
+    found by a check rather than by hand. `DISAMBIGUATING_PROBES` is a fixed 21-value list that jumps
+    from 12 to 20. Two admissible bodies were therefore declared THE SAME EXPLANATION while
+    disagreeing at x = 14, an ordinary input:
+
+        A: if x % 2 == 0: return (0 / x)          -> 0.0 at x=14
+        B: if (100 % x) == 2: ...                 -> 1.0 at x=14
+
+    Both are the same at 20 of the 21 probes; 14 is simply not one of them. The explanation count --
+    the number that decides DETERMINED -- was thus a property of the probe list, exactly as the
+    constant menu was a property of the twelve-entry table and the candidate bank was a property of
+    the budget. A frozen list standing where a computation belongs.
+
+    Probes are taken from the LITERALS the bodies themselves mention (plus +/- 3 around each) and
+    from the observed inputs, because those are the only places a piecewise body can change
+    behaviour. This is an AUDIT, not a decision procedure: no finite sampling decides equality of
+    functions, and the report must keep saying so.
+    """
+    import re
+
+    # The frozen range is SPARSE, not merely short: it runs -5..20 while omitting 8, 9, 11 and
+    # everything from 13 to 19. The pair that exposed this disagreed at x = 14, which is inside the
+    # stated range and simply not sampled -- so "widen the range" would have been the wrong repair.
+    # Density is what matters, so the derived set adds every integer across a wider span, half-steps
+    # (because fractional structure is real), and neighbourhoods around the bodies' literals.
+    values: set[Any] = set(base if base is not None else DISAMBIGUATING_PROBES)
+    for i in range(-40, 41):
+        values.add(i)
+        values.add(i + 0.5)
+    for row in examples:
+        try:
+            args, _value = row
+        except (TypeError, ValueError):
+            continue
+        args = args if isinstance(args, (tuple, list)) else (args,)
+        for a in args:
+            if isinstance(a, (int, float)) and not isinstance(a, bool):
+                values.add(a)
+    literals: set[float] = set()
+    for body in bodies:
+        for token in re.findall(r"(?<![\w.])\d+(?:\.\d+)?", body):
+            try:
+                literals.add(float(token))
+            except ValueError:
+                continue
+    for v in literals:
+        for delta in (-3, -2, -1, 1, 2, 3):
+            nxt = v + delta
+            values.add(int(nxt) if float(nxt).is_integer() else nxt)
+    # Round and de-duplicate: a float 14.0 and an int 14 must not both appear, or the signature
+    # tuples of two runs would differ for a spelling reason (the same class of bug as `_freeze_val`
+    # keeping 4 and 4.0 apart, which already cost this branch one wrong rejection).
+    out: list[Any] = []
+    for v in values:
+        if isinstance(v, float) and v.is_integer():
+            v = int(v)
+        out.append(v)
+    return tuple(sorted(out, key=lambda v: (float(v), repr(v))))
+
+
+def group_by_behaviour_oracle(bodies: Sequence[str], params: Sequence[str],
+                              examples: Sequence[Any] = (),
+                              base: Sequence[Any] | None = None
+                              ) -> tuple[list[list[str]], dict[str, Any]]:
+    """Group by behaviour over DISCLOSED probes; report whether the frozen range was hiding splits.
+
+    Returns the groups plus a disclosure record. `withheld_by_frozen_range` is the number of groups
+    the fixed probe list had merged in error -- the size of the lie the old grouping was telling.
+    """
+    frozen = group_by_behaviour(bodies, params, base if base is not None else DISAMBIGUATING_PROBES)
+    widened = group_by_behaviour(bodies, params, disclose_probes(bodies, examples, base))
+    return widened, {
+        "groups_frozen": len(frozen),
+        "groups_disclosed": len(widened),
+        "split_by_disclosure": len(widened) - len(frozen),
+        "basis": ("behaviour over probes derived from the bodies' own literals and the observed "
+                  "inputs -- an AUDIT, not a proof: no finite sampling decides equality of functions"),
+    }
+
+
 def group_by_behaviour(bodies: Sequence[str], params: Sequence[str],
                        probes: Sequence[Any] = DISAMBIGUATING_PROBES) -> list[list[str]]:
     """Collapse programs into explanations. Order preserved, cheapest member first in each group."""
@@ -414,6 +498,109 @@ def group_by_behaviour(bodies: Sequence[str], params: Sequence[str],
     for body in bodies:
         groups.setdefault(behaviour_signature(body, params, probes), []).append(body)
     return [sorted(members, key=lambda b: (cost(b), b)) for members in groups.values()]
+
+
+FROZEN_DIMENSIONS = ("probe_range", "constant_alphabet", "weight_bound", "candidate_budget")
+
+
+def audit_frozen_dimensions(params: Sequence[str], examples: Sequence[Any], **kwargs: Any
+                            ) -> dict[str, Any]:
+    """Ask, for each frozen dimension in the decision path: does widening it change the answer?
+
+    THE POINT, and the reason this is a function rather than a habit. Eight defects on this project
+    have had one shape -- a frozen list quietly deciding an answer a computation should have decided:
+
+        regime predicates (round 11) | vocabulary (round 12) | rivals (round 14)
+        the constant alphabet (round 14) | the candidate budget (round 14)
+        the probe range (this round, found by THIS check rather than by hand)
+
+    Every one was noticed by a human staring at a table. A check that recomputes the answer with one
+    frozen dimension widened, and reports whether the answer MOVED, finds the class without knowing
+    in advance which table is at fault. That is the difference between fixing instance nine and
+    removing the need to find it.
+
+    A dimension is "load-bearing" when widening it changes the answer. Load-bearing is not the same
+    as wrong: a larger weight bound legitimately finds heavier programs. What load-bearing means is
+    that the currently reported verdict is a statement about the FROZEN VALUE, and must be reported
+    that way rather than as a fact about the data.
+
+    `stable` dimensions are still not proven sound -- only not currently moving.
+    """
+    findings: dict[str, Any] = {}
+    base = demand_evidence(params, list(examples), **kwargs)
+    baseline = {"status": base["status"], "explanations": base.get("explanation_count"),
+                "programs": base["admissible_count"]}
+
+    # 1. probe range -- widen the grouping basis only
+    disclosure = base.get("probe_disclosure") or {}
+    findings["probe_range"] = {
+        "baseline": disclosure.get("groups_frozen"),
+        "widened": disclosure.get("groups_disclosed"),
+        "moved": bool(disclosure.get("split_by_disclosure")),
+        "verdict": ("the frozen 21-value probe list was merging explanations that differ on inputs "
+                    "it never sampled" if disclosure.get("split_by_disclosure") else
+                    "no split found on this data"),
+    }
+
+    # 2. constant alphabet -- allow more constants to be invented
+    wide_kwargs = dict(kwargs)
+    wide_kwargs["invent_parameters"] = True
+    blind_kwargs = dict(kwargs)
+    blind_kwargs["invent_parameters"] = False
+    with_inv = demand_evidence(params, list(examples), **wide_kwargs)
+    without_inv = demand_evidence(params, list(examples), **blind_kwargs)
+    findings["constant_alphabet"] = {
+        "baseline": {"status": without_inv["status"],
+                     "explanations": without_inv.get("explanation_count")},
+        "widened": {"status": with_inv["status"],
+                    "explanations": with_inv.get("explanation_count")},
+        "moved": (without_inv["status"], without_inv.get("explanation_count")) != (
+            with_inv["status"], with_inv.get("explanation_count")),
+        "verdict": ("solving the parameters the data asks for changes the verdict, so the frozen "
+                    "menu was deciding it" if (
+                        without_inv["status"], without_inv.get("explanation_count")) != (
+                        with_inv["status"], with_inv.get("explanation_count")) else
+                    "the frozen menu and solved parameters agree here"),
+    }
+
+    # 3. weight bound -- can a heavier body change the verdict?
+    w = int(kwargs.get("max_weight", 3))
+    heavy = demand_evidence(params, list(examples), **{**kwargs, "max_weight": w + 1})
+    findings["weight_bound"] = {
+        "baseline": {"status": base["status"], "explanations": base.get("explanation_count")},
+        "widened": {"status": heavy["status"], "explanations": heavy.get("explanation_count")},
+        "moved": (base["status"], base.get("explanation_count")) != (
+            heavy["status"], heavy.get("explanation_count")),
+        "verdict": ("a body above the weight bound changes the verdict" if (
+            base["status"], base.get("explanation_count")) != (
+            heavy["status"], heavy.get("explanation_count")) else
+            "one extra operation does not change the verdict"),
+    }
+
+    # 4. candidate budget -- did the sweep actually finish?
+    coverage = base.get("coverage") or {}
+    findings["candidate_budget"] = {
+        "baseline": {"bank": coverage.get("bank_size"), "capacity": coverage.get("bank_capacity")},
+        "complete": bool(coverage.get("complete")),
+        "moved": not bool(coverage.get("complete")),
+        "verdict": ("the bank saturated, so the count describes the budget" if not coverage.get(
+            "complete") else "the sweep completed within its budget"),
+    }
+
+    moved = [k for k, v in findings.items() if v.get("moved")]
+    return {
+        "schema": SCHEMA + "_FROZEN_AUDIT",
+        "baseline": baseline,
+        "dimensions": findings,
+        "frozen_dimensions": list(FROZEN_DIMENSIONS),
+        "load_bearing": moved,
+        "why": (("the reported verdict depends on the frozen value of: %s -- it is a statement "
+                 "about those settings, not only about the data" % ", ".join(moved))
+                if moved else
+                "no frozen dimension currently changes the verdict on this data; that is not a "
+                "proof of soundness, only the absence of movement"),
+        "authority": "NONE",
+    }
 
 
 def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
@@ -490,8 +677,13 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
 
     # Count EXPLANATIONS, not programs. Measured on the `2x` examples: 12 admissible programs are 3
     # explanations, one of which is written ten ways. Reporting 12 overstates the ignorance.
-    groups = group_by_behaviour(bodies, params)
+    # Group over DISCLOSED probes, not the frozen 21-value list. MEASURED 2026-11-04: two admissible
+    # bodies for `mod 2` disagree at x = 14 -- inside the frozen range and simply never sampled --
+    # and were reported as one explanation. Widening the range would not have fixed it (the list
+    # omits 8, 9, 11 and 13..19); the probes have to be derived from what the bodies can distinguish.
+    groups, disclosure = group_by_behaviour_oracle(bodies, params, list(examples))
     explanations = [members[0] for members in groups]
+    report["probe_disclosure"] = disclosure
     report["explanations"] = [_normalise_body(e) for e in explanations]
     report["explanation_count"] = len(groups)
     report["group_sizes"] = [len(members) for members in groups]
