@@ -1,0 +1,128 @@
+{
+ "schema": "PROJECT_BRAIN_FROZEN_DIMENSION_AUDIT_20261104_V1",
+ "authority": "NONE",
+ "note": "Each dimension is recomputed with that dimension widened; \"moved\" means the reported verdict is a statement about the frozen value. Stable is NOT proven sound.",
+ "cases": {
+  "2x (1..5)": {
+   "load_bearing": [
+    "probe_range",
+    "constant_alphabet",
+    "weight_bound"
+   ],
+   "dimensions": {
+    "probe_range": {
+     "moved": true,
+     "verdict": "the frozen 21-value probe list was merging explanations that differ on inputs it never sampled"
+    },
+    "constant_alphabet": {
+     "moved": true,
+     "verdict": "solving the parameters the data asks for changes the verdict, so the frozen menu was deciding it"
+    },
+    "weight_bound": {
+     "moved": true,
+     "verdict": "a body above the weight bound changes the verdict"
+    },
+    "candidate_budget": {
+     "moved": false,
+     "verdict": "the sweep completed within its budget"
+    }
+   }
+  },
+  "3x+1 (1..5)": {
+   "load_bearing": [
+    "constant_alphabet",
+    "weight_bound"
+   ],
+   "dimensions": {
+    "probe_range": {
+     "moved": false,
+     "verdict": "no split found on this data"
+    },
+    "constant_alphabet": {
+     "moved": true,
+     "verdict": "solving the parameters the data asks for changes the verdict, so the frozen menu was deciding it"
+    },
+    "weight_bound": {
+     "moved": true,
+     "verdict": "a body above the weight bound changes the verdict"
+    },
+    "candidate_budget": {
+     "moved": false,
+     "verdict": "the sweep completed within its budget"
+    }
+   }
+  },
+  "mod2 (1..9)": {
+   "load_bearing": [
+    "probe_range",
+    "weight_bound"
+   ],
+   "dimensions": {
+    "probe_range": {
+     "moved": true,
+     "verdict": "the frozen 21-value probe list was merging explanations that differ on inputs it never sampled"
+    },
+    "constant_alphabet": {
+     "moved": false,
+     "verdict": "the frozen menu and solved parameters agree here"
+    },
+    "weight_bound": {
+     "moved": true,
+     "verdict": "a body above the weight bound changes the verdict"
+    },
+    "candidate_budget": {
+     "moved": false,
+     "verdict": "the sweep completed within its budget"
+    }
+   }
+  },
+  "x*x (1..5)": {
+   "load_bearing": [
+    "probe_range",
+    "weight_bound"
+   ],
+   "dimensions": {
+    "probe_range": {
+     "moved": true,
+     "verdict": "the frozen 21-value probe list was merging explanations that differ on inputs it never sampled"
+    },
+    "constant_alphabet": {
+     "moved": false,
+     "verdict": "the frozen menu and solved parameters agree here"
+    },
+    "weight_bound": {
+     "moved": true,
+     "verdict": "a body above the weight bound changes the verdict"
+    },
+    "candidate_budget": {
+     "moved": false,
+     "verdict": "the sweep completed within its budget"
+    }
+   }
+  },
+  "const 5": {
+   "load_bearing": [
+    "constant_alphabet",
+    "weight_bound"
+   ],
+   "dimensions": {
+    "probe_range": {
+     "moved": false,
+     "verdict": "no split found on this data"
+    },
+    "constant_alphabet": {
+     "moved": true,
+     "verdict": "solving the parameters the data asks for changes the verdict, so the frozen menu was deciding it"
+    },
+    "weight_bound": {
+     "moved": true,
+     "verdict": "a body above the weight bound changes the verdict"
+    },
+    "candidate_budget": {
+     "moved": false,
+     "verdict": "the sweep completed within its budget"
+    }
+   }
+  }
+ }
+}
