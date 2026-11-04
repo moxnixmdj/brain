@@ -2009,6 +2009,33 @@ def _survivors_disagree_on_domain(
     return False
 
 
+def settlement_refutability(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+) -> dict[str, Any]:
+    """Ask, from the evidence alone, whether a claim could have been refuted by it.
+
+    Adapter only: the computation lives in `canonical.runtime.refutability_v1` so that the test and
+    the crystallizer cannot drift into two definitions of the same word -- which is the failure mode
+    this whole round is about. Returns a dict with at least `refutable` and `verdict`; if the module
+    is unavailable the answer is NON-REFUTABLE with a stated reason, never a silent True, because a
+    missing test must not become a licence to assert.
+    """
+    try:
+        from canonical.runtime import refutability_v1 as _R
+
+        report = _R.assess(examples)
+        report["refutable"] = _R.may_be_permanent(str(report.get("verdict")))
+        return report
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "schema": "PROJECT_BRAIN_REFUTABILITY_V1",
+            "verdict": "NOT_COMPUTED",
+            "refutable": False,
+            "why": "refutability could not be computed: " + str(exc)[:120],
+            "authority": "NONE",
+        }
+
+
 def _settlement_probe_space(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     hypotheses: Sequence["ExecutableOrgan"],
@@ -4330,6 +4357,19 @@ class MetaCircularOrganGraph:
         """
         if not examples or not self.growth_enabled:
             return None
+        # Growth INDUCES A PERIOD, and a period is a statement about an ordered domain: `x`, `x+1`,
+        # `x mod k`. `settlement.acquire_period` walks numeric successors and `table_evidence_requirement`
+        # counts residues, so there is no defined answer for a list or dict argument -- not a hard one,
+        # an UNDEFINED one. Declining here is a scope statement, and it also closes the third of four
+        # crash sites found on 2026-11-04, where a list-argument task reached `acquire_period` and the
+        # oracle was called with an `int` substituted for a list.
+        #
+        # This is deliberately a statement about the DOMAIN and not a try/except around the whole
+        # function: a numeric task that raises inside growth is a real defect and must stay visible.
+        for _inp, _out in examples:
+            for _v in _inp:
+                if not (isinstance(_v, (int, float)) and not isinstance(_v, bool)):
+                    return None
         try:
             diagnosis = settlement.diagnose_structure(examples)
         except Exception:
@@ -4392,6 +4432,13 @@ class MetaCircularOrganGraph:
             # Advance every slot that is a number; slots that are not stay put (there is no ordered
             # successor for a string, a list, or a dict, and inventing one would be a fabricated domain).
             def _advance(base: tuple[Any, ...], by: int) -> tuple[Any, ...]:
+                """Advance numeric slots; keep every other slot's VALUE AND TYPE.
+
+                MEASURED, 2026-11-04: the first probe was built by advancing the whole tuple, so for a
+                list-argument task slot 0 became an `int` and an oracle calling `len()` on it raised
+                TypeError inside the growth loop. Refusing to invent a successor for a list must not
+                degenerate into substituting a number for one.
+                """
                 return tuple(
                     (v + by) if isinstance(v, (int, float)) and not isinstance(v, bool) else v
                     for v in base
@@ -4406,7 +4453,14 @@ class MetaCircularOrganGraph:
                 probe = _advance(probe, 1)
                 while any(tuple(ex_in) == probe for ex_in, _ in evidence):
                     probe = _advance(probe, 1)
-            observed = oracle(probe)
+            try:
+                observed = oracle(probe)
+            except Exception:
+                # A probe built from an ordered successor may have no successor to build from -- for a
+                # list or dict argument there is none. An unanswerable question is not evidence, and
+                # it must not escape as an exception through a refusal path. Stop growing; the caller
+                # keeps its honest refusal.
+                break
             # A long consecutive run of DISTINCT outputs is a straight stretch, and a straight stretch
             # is exactly what a long period looks like before it closes. Its length is evidence about
             # the period's lower bound, so it is what the budget follows.
@@ -4450,7 +4504,14 @@ class MetaCircularOrganGraph:
                     probe = _advance(tuple(evidence[-1][0]), 1)
                     while any(tuple(ex_in) == probe for ex_in, _ in evidence):
                         probe = _advance(probe, 1)
-                    evidence.append((probe, oracle(probe)))
+                    try:
+                        observed = oracle(probe)
+                    except Exception:
+                        # No ordered successor exists for this domain, so the probe is unanswerable.
+                        # Stop buying evidence rather than escaping through a refusal path with an
+                        # exception (measured 2026-11-04 on a list-argument task).
+                        break
+                    evidence.append((probe, observed))
                     # Count these. The earlier version collected evidence without incrementing the
                     # spend, so the reported cost understated the questions actually asked -- a
                     # measurement error in the one number the caller needs in order to decide whether
@@ -4865,6 +4926,55 @@ class MetaCircularOrganGraph:
 
                 work_examples.append((probe, observed))
 
+        # --- REFUTABILITY: could this claim have been wrong? ----------------------------------
+        # MEASURED, 2026-11-04. `x*x + y` over three points reached this point as
+        # `((4.5 * x0) + (-0.5 * x1) + -0.5)` and was CRYSTALLISED, returning 34.5 where the truth is
+        # 120 at (10, 20). The reason is not a weak search: three observations exactly determine an
+        # affine fit's three parameters, so the body has zero residual on ZERO LEFTOVER DATA. The
+        # crystallizer asked "does it fit?" and accepted the answer.
+        #
+        # This sits AFTER the disambiguation loop on purpose. Everything above may have bought tests
+        # from an oracle; a claim that was just checked on points it predicted has been tested, and
+        # re-judging it on the seeds alone would discard work the creature actually did. What is
+        # judged here is the whole accumulated evidence, so a claim is permitted exactly when the
+        # evidence that exists could have caught it being wrong.
+        refutability = settlement_refutability(work_examples)
+        # Evidence the creature BOUGHT and then correctly PREDICTED is the strongest test available,
+        # and the leave-one-out test above cannot see it: with only a handful of points it reports
+        # TOO_FEW_POINTS even though the claim was just checked against the world. Door 3 only falls
+        # through when the winner PREDICTED the probe and the prediction matched, so a longer
+        # `work_examples` means exactly that -- a successful prediction on unseen input. Counting it
+        # is not leniency; discarding it would throw away the only test that actually happened.
+        bought_and_predicted = len(work_examples) > len(examples)
+        if bought_and_predicted:
+            refutability = dict(refutability)
+            refutability["refutable"] = True
+            refutability["bought_predictions"] = len(work_examples) - len(examples)
+            # Keep the verdict and the flag consistent. A report that says `refutable: True` beside
+            # `verdict: TOO_FEW_POINTS` is the same class of defect as the status string this round
+            # is about: two fields answering one question, and any caller reading only one of them
+            # gets a different answer.
+            refutability["verdict"] = "REFUTABLE_BY_PURCHASED_PREDICTION"
+            refutability["why"] = (
+                "the claim predicted " + str(len(work_examples) - len(examples)) +
+                " input(s) it had not been shown, and each prediction was confirmed by an oracle"
+            )
+        if not refutability.get("refutable"):
+            # Crystal is a BOND. A claim nothing could have refuted does not get one, so it is
+            # returned as a proposal and NOT registered as settled knowledge. The verdict is
+            # reported verbatim: "too few points" and "absorbed its evidence" are different facts
+            # and the caller needs to know which one it is holding.
+            winner.verified_passes = len(work_examples)
+            return {
+                "ok": False,
+                "status": "PROVISIONAL_UNTESTABLE_CLAIM",
+                "organ": winner,
+                "refutability": refutability,
+                "why": ("the evidence could not have refuted this claim, so fitting it is not "
+                        "corroboration and it is not crystallised"),
+                "oracle_queries_used": queries_used,
+            }
+
         winner.verified_passes = len(work_examples)
         self.register_organ(winner)
 
@@ -4885,7 +4995,16 @@ class MetaCircularOrganGraph:
 
         return {
             "ok": True,
-            "status": "DISAMBIGUATED_AND_CRYSTALLIZED",
+            # The word DISAMBIGUATED asserts that survivors were SEPARATED. When only one candidate
+            # was ever in play nothing was separated, and saying so was an overstatement the caller
+            # could not detect -- `x*x + y` reached this line with a single survivor and reported
+            # DISAMBIGUATED_AND_CRYSTALLIZED while zero tests had run (measured 2026-11-04). The
+            # refutability verdict below is what actually licenses the claim now; the status names
+            # which of the two things happened.
+            "status": ("DISAMBIGUATED_AND_CRYSTALLIZED"
+                       if len(work_examples) > len(examples) or interchangeable
+                       else "SOLE_HYPOTHESIS_CRYSTALLIZED"),
+            "refutability": refutability,
             "organ": winner,
             "settlement": {
                 "entropy_bits": round(decision_space.entropy(), 6),

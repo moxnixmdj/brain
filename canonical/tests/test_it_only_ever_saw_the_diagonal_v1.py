@@ -86,15 +86,25 @@ def test_canonical_key_identifies_equal_containers():
 def test_list_and_dict_tasks_are_solved_not_crashed(name, fn):
     """The crash was masking a capability: these are all reachable once perception stops throwing."""
     graph = M.MetaCircularOrganGraph(None)
-    seeds = [([1, 2, 3],), ([4, 5],), ([6],)]
+    # The input is a 1-TUPLE WRAPPING the argument. Writing `([1,2,3], 3.0)` instead would be read by
+    # Python as a THREE-argument example `(1, 2, 3) -> 3.0`, so the task would silently become an
+    # arity-3 integer task and the assertion would be about something else entirely. That mistake was
+    # made and measured on 2026-11-04: the growth loop saw only ints and correctly refused.
+    seeds = [(([1, 2, 3],),), (([4, 5],),), (([6],),)]
     if name == "sorted_list":
-        seeds = [([3, 1],), ([9, 2],), ([5, 4],)]
+        seeds = [(([3, 1],),), (([9, 2],),), (([5, 4],),)]
     elif name == "dict_len":
-        seeds = [({"a": 1},), ({"a": 1, "b": 2},), ({},)]
+        seeds = [(({"a": 1},),), (({"a": 1, "b": 2},),), (({},),)]
     elif name == "tuple_len":
-        seeds = [((1, 2),), ((1, 2, 3),), ((),)]
+        seeds = [(((1, 2),),), (((1, 2, 3),),), (((),),)]
+    # UPDATED 2026-11-04: an oracle is now supplied on purpose. Three observations cannot TEST a
+    # claim, so without one the creature reports PROVISIONAL_UNTESTABLE_CLAIM -- the same verdict
+    # `x*x + y` gets, and correctly so, because three points fit both equally. The capability being
+    # asserted here is that perception no longer CRASHES and the law is reachable once it is tested.
     result = graph.synthesize_or_disambiguate_skill(
-        [(s, fn(*s)) for s in seeds], task_signature=f"p1_{name}"
+        [(s, fn(*s)) for s in seeds],
+        task_signature=f"p1_{name}",
+        oracle=lambda p, fn=fn: fn(p[0]),
     )
     assert result["ok"], f"{name} failed: {result.get('status')}"
 

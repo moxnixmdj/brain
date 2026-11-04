@@ -150,8 +150,18 @@ def test_determined_problems_still_crystallize():
     affine = graph2.synthesize_or_disambiguate_skill(
         [((1, 1), 17), ((3, 2), 29), ((4, 5), 30)], task_signature="a"
     )
-    assert affine["ok"]
-    assert affine["organ"].invoke(10, 3) == 76
+    # UPDATED 2026-11-04, deliberately, and this is a behaviour change rather than a repair.
+    # Three points uniquely determine a two-input affine function, so this used to crystallise. It
+    # no longer does, and the reason is measurable: `x*x + y` fits these same three points exactly
+    # and is WRONG everywhere else (34.5 where the truth is 120 at (10, 20)). A three-parameter fit
+    # to three points has zero residual on ZERO LEFTOVER DATA, so "it fits" is not corroboration --
+    # any three points admit such a surface. The creature may still ANSWER with that surface; it may
+    # not call it settled, because nothing tested it. What is asserted now is the honest contract:
+    # a usable proposal comes back, it is correct at the probe, and it is NOT registered as settled.
+    assert not affine["ok"], "a three-point fit with no oracle is not a settled law"
+    assert affine["status"] == "PROVISIONAL_UNTESTABLE_CLAIM", affine["status"]
+    assert affine["refutability"]["verdict"] == "TOO_FEW_POINTS"
+    assert affine["organ"].invoke(10, 3) == 76, "the provisional proposal is still usable"
 
 
 # --------------------------------------------------------------------------------------------

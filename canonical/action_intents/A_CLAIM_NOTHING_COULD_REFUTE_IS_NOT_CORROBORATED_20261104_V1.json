@@ -1,8 +1,8 @@
 {
-  "action_id": "A_MISSING_ANSWER_IS_NOT_A_MISSING_LANGUAGE_20261104_V1",
-  "action_intent_id": "A_MISSING_ANSWER_IS_NOT_A_MISSING_LANGUAGE_20261104_V1",
+  "action_id": "A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1",
+  "action_intent_id": "A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "action_summary": "Round 25 went one layer below inference, to PERCEPTION, and found something the pre-registration did not predict. P1 was confirmed: derive_probe_space raised TypeError on any list/dict/set input, so four rounds of inference work had never been shown a container. Fixed with canonical_key(). P2 was confirmed: every probe was tuple([x]*arity), so a two-argument task was only ever observed at f(n,n); non-diagonal probes were added and x*y then solved. The pre-registration then FALSIFIED ITSELF on the reason x*y+1 still refused: the grammar was never the limit. ((x0*x1)+1) is found in 64 ms at the synthesizer's own default bank of 900, but every organ-graph call site searched with max_bank_size 64-80, and at 72 the bank fills (72/72) and misses it. The organ graph reported NO_CONSISTENT_HYPOTHESIS -- a statement about the language -- for a limit that was a statement about an integer, while evidence_demand_v1 already had SEARCH_TRUNCATED for exactly this case. Coverage is now recorded on every miss, four call sites escalate a 72/900/5000 ladder only while the failure is a budget, a truncated search now reports SEARCH_TRUNCATED, and one collecting sweep decides grammar-exhausted vs budget-exhausted so the refusal names its real cause. Widening the search exposed three further pre-existing defects: a memorising STUN body crystallised as a law for x*y-7 (16 where the truth is 193), now rejected structurally by _is_a_restatement because it branches on EQUALITY with an observed input rather than an inequality; a one-slot probe tuple in two places in _grow_operator_from_evidence that crashed the oracle for every multi-argument task; and a zero-degree-of-freedom affine fit (x*x+y over three points) that is recorded as xfail(strict) for the next round rather than hidden. P4 (the 4x table-evidence constant) was measured and left open, recorded rather than rushed. CORRECTION RECORDED 2026-11-04: the earlier belief that main had been REWOUND was WRONG and was an artefact of a SHALLOW CLONE whose .git/shallow file listed 72e27486 and 48d18c84 as boundaries. After `git fetch --unshallow`, 72e27486 IS an ancestor of origin/main, the merge-base is 72e27486, and no history was lost. A shallow clone can forge both 'no merge base' and 'X is not an ancestor', and both were reported as findings before the shallow file was read.",
+  "action_summary": "Round 26 answers round 25's open xfail. x*x + y over three points was CRYSTALLISED as (4.5*x0)+(-0.5*x1)+-0.5, which returns 34.5 where the truth is 120 at (10,20). The cause is not a weak search: x*x+y and x+y fit those same three points perfectly, because three observations exactly determine an affine fit's three parameters, so the body has zero residual on zero leftover data. The crystallizer asked 'does it fit?' and accepted the answer; it never asked 'could this have been wrong?'. That is round 25's defect in a different costume -- 25 spoke about the grammar from an unfinished search, 26 spoke of crystallisation for a claim nothing had tested. A new module, refutability_v1, withholds each observation, refits the rest, and reports REFUTABLE / NOT_REFUTABLE / TOO_FEW_POINTS from the evidence alone -- no oracle and no cooperation required. The third verdict is the finding, not a cop-out: with n <= parameters the question has no answer, and saying so is different from either yes or no. Only REFUTABLE may become permanent. This is REUSE of what the tree already had -- generalization_check_v1.classify holds points back and is used by SEVEN modules, while the crystallizer, the one place that grants permanence, used it not at all. The most important result is uncomfortable: EVERY failure while building this was the instrument, not the reasoner -- a vacuous test that failed all laws, an unusable API, backwards degrees of freedom, an auditor narrower than the synthesizer, a sandbox without `sorted`, a header-split that read a correct body as overfit three times, a shadowed variable that discarded every validated body, and a doubled return. Five of them presented as findings. A creature whose instruments are weaker than its reasoner does not discover its own blindness; it reports the blindness as a property of the world. Round 22's inert library, round 24's 'the grammar is the limit' and round 25's 'the rewind' were all this error.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "causal_evidence": "T_OF_X_PLUS_X_AND_T_OF_X_TIMES_X_ARE_REFUSED_COLD_AND_REFUSED_AFTER_THREE_TABLES_ARE_ADMITTED__PERIOD_12_COSTS_2_QUESTIONS_COLD_AND_2_WARM_WHICH_IS_THE_INFORMATION_FLOOR__AFTER_THE_CLOSURE_ALL_FOUR_COMPOSED_FORMS_ARE_EXACT_ON_37_HELD_OUT_INPUTS_IN_3_QUESTIONS_AND_15_ADVERSARIAL_CASES_YIELD_ZERO_FALSE_CLAIMS",
@@ -30,26 +30,25 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
-      "canonical/runtime/settlement_v1.py",
-      "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+      "canonical/runtime/refutability_v1.py",
       "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
-      "canonical/tests/test_it_only_ever_saw_the_diagonal_v1.py",
-      "A_MISSING_ANSWER_IS_NOT_A_MISSING_LANGUAGE_20261104_V1.md"
+      "canonical/tests/test_a_claim_nothing_could_refute_is_not_corroborated_v1.py",
+      "A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1.md"
     ],
     "route_class": "ADAPT"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_CALL_SITE_IN_THE_ORGAN_GRAPH_SEARCHED_WITH_A_BANK_OF_64_TO_80_WHILE_THE_SYNTHESIZERS_OWN_DEFAULT_IS_900_SO_THE_POOL_FILLED_AND_MISSED_BODIES_THAT_EXIST_AND_THE_EMPTY_POOL_WAS_THEN_REPORTED_AS_NO_CONSISTENT_HYPOTHESIS_A_VERDICT_ABOUT_THE_LANGUAGE_ISSUED_FROM_AN_UNFINISHED_SEARCH",
-  "canonical_base_commit": "48d18c84b604ca9c8218d4acb916c2fc108a9b10",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CRYSTALLIZER_ASKED_DOES_IT_FIT_AND_ACCEPTED_THE_ANSWER_IT_NEVER_ASKED_COULD_THIS_HAVE_BEEN_WRONG_SO_THREE_OBSERVATIONS_THAT_EXACTLY_DETERMINE_AN_AFFINE_FITS_THREE_PARAMETERS_WERE_TREATED_AS_CORROBORATION_AND_A_BODY_WRONG_ON_EVERY_UNSEEN_INPUT_BECAME_A_LAW",
+  "canonical_base_commit": "2989ad662bfc0d1475f386dd06c8eab0cd839620",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "EVERY_CALL_SITE_IN_THE_ORGAN_GRAPH_SEARCHED_WITH_A_BANK_OF_64_TO_80_WHILE_THE_SYNTHESIZERS_OWN_DEFAULT_IS_900_SO_THE_POOL_FILLED_AND_MISSED_BODIES_THAT_EXIST_AND_THE_EMPTY_POOL_WAS_THEN_REPORTED_AS_NO_CONSISTENT_HYPOTHESIS_A_VERDICT_ABOUT_THE_LANGUAGE_ISSUED_FROM_AN_UNFINISHED_SEARCH",
+  "causal_blocker": "THE_CRYSTALLIZER_ASKED_DOES_IT_FIT_AND_ACCEPTED_THE_ANSWER_IT_NEVER_ASKED_COULD_THIS_HAVE_BEEN_WRONG_SO_THREE_OBSERVATIONS_THAT_EXACTLY_DETERMINE_AN_AFFINE_FITS_THREE_PARAMETERS_WERE_TREATED_AS_CORROBORATION_AND_A_BODY_WRONG_ON_EVERY_UNSEEN_INPUT_BECAME_A_LAW",
   "date": "2026-11-04",
-  "expected_parent_change": "AN_ABSENCE_IS_EVIDENCE_ABOUT_THE_LANGUAGE_ONLY_WHEN_THE_SEARCH_FINISHED__FOUR_CALL_SITES_ESCALATE_ON_A_PROVEN_BUDGET_AND_A_TRUNCATION_IS_REPORTED_AS_TRUNCATION__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
-  "expected_parent_frontier_change": "AN_ABSENCE_IS_EVIDENCE_ABOUT_THE_LANGUAGE_ONLY_WHEN_THE_SEARCH_FINISHED__FOUR_CALL_SITES_ESCALATE_ON_A_PROVEN_BUDGET_AND_A_TRUNCATION_IS_REPORTED_AS_TRUNCATION__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
+  "expected_parent_change": "ONLY_A_CLAIM_THE_EVIDENCE_COULD_HAVE_REFUTED_MAY_BECOME_PERMANENT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
+  "expected_parent_frontier_change": "ONLY_A_CLAIM_THE_EVIDENCE_COULD_HAVE_REFUTED_MAY_BECOME_PERMANENT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
   "explicit_user_authorization": "Owner directive on 2026-11-04: 'Execute perfectly and merge all of your work' and 'You must think from the deepest layer, from first principles of everything.' $0 spend, K3=0, zero protected or SHA-pinned paths touched, no sentience claim.",
-  "falsification_condition": "X_TIMES_Y_PLUS_ONE_STILL_REFUSES__OR_A_LARGER_BANK_INTRODUCES_A_WRONG_CLAIM__OR_A_RAMP_OR_TABLE_STOPS_WORKING__OR_A_MEMORISING_BODY_IS_CRYSTALLIZED_AS_A_LAW__OR_A_TRUNCATED_SEARCH_IS_REPORTED_AS_NO_CONSISTENT_HYPOTHESIS__OR_A_MULTI_ARGUMENT_TASK_CRASHES_THE_GROWTH_ORACLE",
+  "falsification_condition": "A_THREE_POINT_FIT_IS_STILL_CALLED_SETTLED__OR_AN_UNTESTABLE_CLAIM_IS_CRYSTALLISED__OR_A_REFUTABLE_LAW_IS_REFUSED__OR_A_RAMP_OR_TABLE_OR_COMPOSITION_STOPS_WORKING__OR_THE_AUDITOR_CANNOT_REACH_WHAT_THE_SYNTHESIZER_CAN",
   "governance_change": false,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
@@ -76,24 +75,25 @@
     "success_probability_lcb": "1",
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "X_TIMES_Y_PLUS_ONE_SOLVED_EXACTLY_FIVE_OF_FIVE_HELD_OUT__TWO_X_TIMES_Y_SOLVED_EXACTLY_THREE_OF_THREE__X_TIMES_Y_PLUS_FOUR_SOLVED__LIST_AND_DICT_TASKS_SOLVED_INSTEAD_OF_CRASHING__X_TIMES_Y_MINUS_SEVEN_NOW_REFUSED_INSTEAD_OF_CRYSTALLIZING_A_BODY_THAT_IS_WRONG_AT_TEN_TWENTY__ONE_SLOT_PROBE_CRASH_REMOVED_FROM_TWO_SITES__ZERO_SPEND",
-  "next_step": "MEASURE_WHETHER_A_ZERO_DEGREE_OF_FREEDOM_FIT_SHOULD_BE_REFUSED__THREE_POINTS_EXACTLY_DETERMINE_AN_AFFINE_BODY_SO_ZERO_RESIDUAL_IS_NOT_CORROBORATION_AND_X_SQUARED_PLUS_Y_IS_STILL_CRYSTALLIZED_WRONG",
+  "measured_effect": "X_SQUARED_PLUS_Y_IS_NO_LONGER_A_LAW_BECAUSE_ITS_EVIDENCE_COULD_NOT_TEST_IT__A_PROPOSAL_IS_STILL_RETURNED_AND_STILL_EXACT__SORTED_AND_LEN_AND_DICT_LEN_AND_MOD4_AND_TABLE_PLUS_X_ALL_REFUTABLE__X_CUBED_NOT_REFUTABLE_AS_A_MEMORISER__THREE_POINT_AFFINE_AND_X_SQUARED_PLUS_Y_BOTH_TOO_FEW_POINTS__ZERO_SPEND",
+  "next_step": "MEASURE_WHETHER_TOO_FEW_POINTS_CAN_BE_TREATED_AS_A_SHOPPING_LIST__THE_MODULE_CAN_NOW_SAY_THE_EVIDENCE_IS_INCAPABLE_BUT_THE_CREATURE_DOES_NOT_YET_DECIDE_HOW_MANY_MORE_OBSERVATIONS_WOULD_MAKE_A_CLAIM_REFUTABLE",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
-    "canonical/runtime/settlement_v1.py",
-    "canonical/runtime/evidence_demand_v1.py",
+    "canonical/runtime/generalization_check_v1.py",
     "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+    "canonical/runtime/evidence_demand_v1.py",
+    "canonical/runtime/observation_refutation_v1.py",
     "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "48d18c84b604ca9c8218d4acb916c2fc108a9b10",
+    "canonical_base_commit": "2989ad662bfc0d1475f386dd06c8eab0cd839620",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ONE_HAND_WRITTEN_NODE_PER_COMPOSED_FORM",
       "ROUND_22_ZERO_CONCEPTS_DIAGNOSIS_WHICH_IS_MEASURED_FALSE_ON_ROUND_23_ORGANS",
       "A_ROUND_23_ASSERTION_THAT_X_SQUARED_MUST_BE_REFUSED"
     ],
-    "expected_parent_level_state_change": "A_COMPOSED_STRUCTURE_IS_EXPRESSIBLE_BY_ONE_CLOSURE_RULE_INSTEAD_OF_ONE_NODE_PER_COMPOSED_FORM__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
+    "expected_parent_level_state_change": "ONLY_A_CLAIM_THE_EVIDENCE_COULD_HAVE_REFUTED_MAY_BECOME_PERMANENT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
     "iteration_limit": 4,
     "obs_blocker": {
       "delete_bypass_substitute_options": [
@@ -171,7 +171,7 @@
       "existing_oracle_considered": true,
       "synthetic_verification_necessity": "NINE_POSITIVE_AND_NEGATIVE_TESTS_WITH_GROWTH_DISABLED_PLUS_A_FIFTEEN_CASE_ADVERSARIAL_FALSE_POSITIVE_BATTERY_PLUS_A_LIVE_EXECUTOR_RUN_PLUS_A_BOUNDEDNESS_TEST__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
     },
-    "real_outcome": "A_MISSING_ANSWER_IS_SHOWN_TO_BE_A_MISSING_BUDGET_OR_A_MISSING_SENSE_AND_NOT_A_MISSING_LANGUAGE",
+    "real_outcome": "ONLY_A_CLAIM_WHOSE_EVIDENCE_COULD_HAVE_REFUTED_IT_IS_TREATED_AS_CORROBORATED_AND_EVERY_OTHER_ANSWER_IS_HANDED_BACK_AS_PROVISIONAL",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "route_frontier": {
       "challenger_routes": [
@@ -377,19 +377,19 @@
       "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
     ],
     "selected_route": "COMPOSE_SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_WITH_EVOI_GLOBAL_AND_INSTRUMENTAL_POLICY",
-    "selected_surviving_route": "NON_DIAGONAL_PROBE_SPACE_PLUS_A_COVERAGE_PROVEN_BANK_LADDER_AND_A_STRUCTURAL_RESTATEMENT_GUARD",
-    "stop_condition": "29_NEW_TESTS_PASS_WITH_ONE_STRICT_XFAIL_THE_19_SUITE_REGRESSION_AROUND_THIS_SUBSYSTEM_AT_279_PASSED_WITH_ONE_PRE_EXISTING_FAILURE_THAT_FAILS_IDENTICALLY_ON_THE_STASHED_BASELINE__ROUND_24_COMPOSITIONS_ZERO_OF_150_HELD_OUT_WRONG__ROUND_23_X_SQUARED_EXACT_AT_1E6__ZERO_FALSE_POSITIVES_OVER_EIGHT_PRODUCT_FAMILY_CASES__MODEL_ARTIFACT_VERIFIES_33_OF_33__ZERO_CAPABILITY_CREDIT__ROUND_24_NOTE_RETAINED_WITHOUT_A_SECOND_INTENT_BECAUSE_THE_GATE_ADMITS_EXACTLY_ONE",
+    "selected_surviving_route": "REFUTABILITY_FROM_EVIDENCE_ALONE_GATES_CRYSTALLISATION",
+    "stop_condition": "15_NEW_TESTS_PASS__A_22_SUITE_REGRESSION_AT_291_PASSED_WITH_ONE_PRE_EXISTING_FAILURE_THAT_FAILS_IDENTICALLY_ON_THE_STASHED_BASELINE__ROUND_24_COMPOSITIONS_ZERO_OF_150_HELD_OUT_WRONG__ROUND_25_CASES_ALL_EXACT_WHEN_TESTED__REFUTABILITY_SEPARATES_REFUTABLE_NOT_REFUTABLE_AND_TOO_FEW_POINTS_ON_EIGHT_CASES__MODEL_ARTIFACT_VERIFIES_33_OF_33__ZERO_CAPABILITY_CREDIT",
     "why_selected_route_is_fastest_sufficient": "INVERTING_ONE_COMBINING_OPERATION_AND_TESTING_CONSTANCY_PER_RESIDUE_COVERS_T(x)+x_T(x)-x_T(x)*x_AND_T(x)+x*x_WITH_NO_NEW_NODE_PER_CASE_AND_NO_ENUMERATION__EVERY_CANDIDATE_STILL_ENTER THE_EXISTING_VERSION_SPACE"
   },
   "route_frontier": {
-    "checked_at_utc": "2026-11-04T14:00:00Z",
+    "checked_at_utc": "2026-11-04T15:30:00Z",
     "discovery_required": true,
     "max_age_hours": 24
   },
-  "route_id": "A_MISSING_ANSWER_IS_NOT_A_MISSING_LANGUAGE_20261104_V1",
+  "route_id": "A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "PERCEPTION_AND_BUDGET_ARE_LOAD_BEARING__A_TRUNCATED_SEARCH_MAY_NOT_SPEAK_ABOUT_THE_GRAMMAR",
-  "stop_condition": "29_NEW_TESTS_PASS_WITH_ONE_STRICT_XFAIL_THE_19_SUITE_REGRESSION_AROUND_THIS_SUBSYSTEM_AT_279_PASSED_WITH_ONE_PRE_EXISTING_FAILURE_THAT_FAILS_IDENTICALLY_ON_THE_STASHED_BASELINE__ROUND_24_COMPOSITIONS_ZERO_OF_150_HELD_OUT_WRONG__ROUND_23_X_SQUARED_EXACT_AT_1E6__ZERO_FALSE_POSITIVES_OVER_EIGHT_PRODUCT_FAMILY_CASES__MODEL_ARTIFACT_VERIFIES_33_OF_33__ZERO_CAPABILITY_CREDIT__ROUND_24_NOTE_RETAINED_WITHOUT_A_SECOND_INTENT_BECAUSE_THE_GATE_ADMITS_EXACTLY_ONE",
+  "selected_route": "REFUTABILITY_FROM_EVIDENCE_ALONE_GATES_CRYSTALLISATION",
+  "stop_condition": "15_NEW_TESTS_PASS__A_22_SUITE_REGRESSION_AT_291_PASSED_WITH_ONE_PRE_EXISTING_FAILURE_THAT_FAILS_IDENTICALLY_ON_THE_STASHED_BASELINE__ROUND_24_COMPOSITIONS_ZERO_OF_150_HELD_OUT_WRONG__ROUND_25_CASES_ALL_EXACT_WHEN_TESTED__REFUTABILITY_SEPARATES_REFUTABLE_NOT_REFUTABLE_AND_TOO_FEW_POINTS_ON_EIGHT_CASES__MODEL_ARTIFACT_VERIFIES_33_OF_33__ZERO_CAPABILITY_CREDIT",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "user_authorized_governance_change": false,
