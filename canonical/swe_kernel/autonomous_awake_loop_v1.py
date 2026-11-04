@@ -495,6 +495,10 @@ class AwakeAgencyDaemon:
         )
         # Interpretations live beside habits, and for the same reason: a creature that keeps its
         # memories keeps its understanding, and one given a fresh store starts genuinely naive.
+        self.competence_path = (
+            (_store_p.parent / "tool_competence.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_competence_{ws_hash}.json")
+        )
         self.growth_path = (
             (_store_p.parent / "grammar_growth.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_growth_{ws_hash}.json")
@@ -1208,6 +1212,16 @@ class AwakeAgencyDaemon:
                 from canonical.swe_kernel.grammar_growth_v1 import live_growth
 
                 _growth = live_growth(self.growth_path)
+                # TOOL COMPETENCE. `failure_kind_v1._FAMILY_FOR` says which producer should run first,
+                # was authored, is wrong in 3 of 4 measured cases, and `family_order()` is called from
+                # nowhere. This replaces the guess with counts: what each producer actually produced and
+                # actually won, per kind of failure. Ordering only -- the screen and the gate still
+                # decide correctness, so a wrong ranking costs probes and nothing else.
+                from canonical.swe_kernel.tool_competence_v1 import live_competence
+                from canonical.swe_kernel.failure_kind_v1 import classify as _fk_classify
+
+                _competence = live_competence(self.competence_path)
+                _kind = _fk_classify(str(fail_out))
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
                 # Syntax repairs exist because a file that does not parse makes every other reading
@@ -1223,18 +1237,34 @@ class AwakeAgencyDaemon:
                 _args = _rows[0]["args"] if _rows else []
                 _owed = _rows[0]["expected"] if _rows else None
 
-                raw_cands = (
-                    _synth.propose(before_src, fail_out, args=_args, owed=_owed, limit=12)
-                    + _interp.propose(before_src, fail_out, limit=8)
-                    + _habits.propose(before_src, limit=8)
-                    + propose_operator_family_swaps(before_src, max_candidates=24)
-                    + propose_binding_repairs(before_src, fail_out, max_candidates=6)
-                    + propose_signature_repairs(before_src, fail_out, max_candidates=6)
-                    + propose_syntax_repairs(before_src, fail_out, max_candidates=6)
-                    + propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
-                    + guided_cands
-                    + _propose_deterministic_ast_repairs(before_src, max_candidates=16)
-                )
+                # Each producer is consulted as a NAMED tool so its output can be credited to it.
+                _by_tool: dict[str, list[str]] = {
+                    "interpretive": _interp.propose(before_src, fail_out, limit=8),
+                    "synth_grammar": _synth.propose(before_src, fail_out, args=_args, owed=_owed, limit=12),
+                    "habits": _habits.propose(before_src, limit=8),
+                    "operator_family": propose_operator_family_swaps(before_src, max_candidates=24),
+                    "binding": propose_binding_repairs(before_src, fail_out, max_candidates=6),
+                    "signature": propose_signature_repairs(before_src, fail_out, max_candidates=6),
+                    "syntax": propose_syntax_repairs(before_src, fail_out, max_candidates=6),
+                    "stun_guard": propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12),
+                    "guided": guided_cands,
+                    "deterministic_ast": _propose_deterministic_ast_repairs(before_src, max_candidates=16),
+                }
+                _competence.note_produced(_kind, {k: len(v) for k, v in _by_tool.items()})
+                # ORDER BY MEASURED COMPETENCE, not by the order I happened to write the calls in. The
+                # first-ranked tool's candidates are screened first, so the earn-rate is what the
+                # creature pays attention to; every tool still contributes, so nothing is lost by being
+                # ranked low.
+                _order = _competence.rank(_kind)
+                # ... and a tool measured to NEVER produce for this kind is not consulted at all. This
+                # is the only form of the competence model that can actually save work: reordering was
+                # measured to save nothing (14 candidates screened cold, 14 warm), because every tool
+                # runs regardless. Scope is deliberately narrow -- never-produced is the one failure
+                # that justifies not asking, since a tool that produces wrong candidates might produce
+                # the right one and only the screen can tell.
+                _consult = {t: _competence.should_consult(_kind, t) for t in _by_tool}
+                raw_cands = [c for tool in _order if _consult.get(tool, True)
+                             for c in (_by_tool.get(tool) or [])]
                 all_cands: list[str] = []
                 for c_item in raw_cands:
                     if c_item and c_item != before_src and c_item not in all_cands:
@@ -1271,6 +1301,12 @@ class AwakeAgencyDaemon:
                         _synth.observe(before_src, _c, passed=_ok, residual=_r)
                     if batch_screen.get("ok") and batch_screen.get("confined") and pass_idxs:
                         cand_win = all_cands[int(pass_idxs[0])]
+                        # Which tool actually produced the winner? This is the only evidence that says
+                        # a producer is good rather than merely productive.
+                        for _tool, _outs in _by_tool.items():
+                            if cand_win in _outs:
+                                _competence.note_win(_kind, _tool)
+                                break
                         if _verify_in_cow(cand_win):
                             solved_src = cand_win
                 if solved_src is None:
