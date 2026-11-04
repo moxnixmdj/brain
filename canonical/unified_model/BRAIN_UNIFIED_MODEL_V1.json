@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 304,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6698,
+  "research_index_records": 6697,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fb0d4d9c15ba165117afed9021fb3f187a4ea65e1377715695371bbce6f9de65"
+  "value": "fcefea774bba9320a69c10df12eb4ea9e5c47ca357e065e90606690e96c122b9"
  },
  "engines": [
   {
@@ -213539,51 +213539,6 @@
     "show": 2,
     "status": 3,
     "v1": 2
-   }
-  },
-  {
-   "action_id": "A_MEASURED_CONCLUSION_MUST_OUTLIVE_THE_PROCESS",
-   "capability": false,
-   "date": "2026-11-04",
-   "id": "research:canonical/action_intents/A_MEASURED_CONCLUSION_MUST_OUTLIVE_THE_PROCESS_20261104_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_MEASURED_CONCLUSION_MUST_OUTLIVE_THE_PROCESS_20261104_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "515fe91b3897494b426c2769fe9982d24345190080c90bb6e0cd381d249908ca",
-   "status": "",
-   "terms": {
-    "20261104": 1,
-    "a_measured_conclusion_must_outlive_the_process": 1,
-    "accumulated": 1,
-    "accumulates": 1,
-    "across": 1,
-    "answer": 1,
-    "any": 1,
-    "because": 1,
-    "behaviour": 1,
-    "call": 1,
-    "change": 1,
-    "changes": 1,
-    "check": 1,
-    "checks": 1,
-    "cold": 1,
-    "computes": 1,
-    "conclusion": 1,
-    "creature": 1,
-    "distinction": 1,
-    "function": 1,
-    "gated": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "in-process": 1,
-    "instead": 1,
-    "judgement": 1,
-    "later": 1,
-    "measured": 1,
-    "measurement": 1,
-    "memory": 1,
-    "must": 1,
-    "rounds": 2,
-    "six": 2
    }
   },
   {
