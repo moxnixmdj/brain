@@ -30950,9 +30950,9 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 289,
+  "knowledge_documents": 291,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6676,
+  "research_index_records": 6679,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "738f8cf7c9e023859b603d75071f763c2138f111506020bb429777afccc17798"
+  "value": "937c70a7c2f42535f9c4927a447cbd1ab32e6f469d2a3b131dbd769e52a4b760"
  },
  "engines": [
   {
@@ -51558,6 +51558,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6001,
+   "headings": [
+    "Parameters the data asks for, instead of a menu of twelve",
+    "The measurement that forced this",
+    "Predictions",
+    "Falsifiers",
+    "What would count as a genuine gain",
+    "Non-claims, fixed in advance"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PREREG_PARAMETERS_THE_DATA_ASKS_FOR_20261104_V1.md",
+   "sha256": "263aca0fdf703914e4f29c3a1e5d034c6307369e95ff121b982b182f68d6f76a",
+   "summary": "Pre-registered 2026-11-04, **before** implementation. Branch `arena/0d9138ce-brain`, base `4db59c51`.",
+   "terms": {
+    "12": 3,
+    "14": 3,
+    "2x": 3,
+    "2x+7": 3,
+    "3x+1": 5,
+    "5x-1": 3,
+    "affine": 3,
+    "already": 3,
+    "any": 3,
+    "bound": 3,
+    "change": 3,
+    "claim": 4,
+    "coefficient": 4,
+    "constant": 9,
+    "data": 4,
+    "determined": 6,
+    "exact": 6,
+    "example": 3,
+    "explanation": 5,
+    "fit": 3,
+    "fitter": 3,
+    "fixed": 3,
+    "four": 5,
+    "functions": 5,
+    "invented": 3,
+    "max_weight": 3,
+    "menu": 4,
+    "must": 12,
+    "no": 6,
+    "not": 15,
+    "one": 5,
+    "parameter": 4,
+    "parameters": 3,
+    "pass": 7,
+    "predicted": 7,
+    "provisional": 4,
+    "rather": 3,
+    "rational": 3,
+    "recovered": 3,
+    "round": 3,
+    "same": 3,
+    "search": 3,
+    "status": 4,
+    "system": 3,
+    "than": 5,
+    "unresolved": 6,
+    "weight": 4,
+    "would": 3
+   },
+   "title": "Parameters the data asks for, instead of a menu of twelve",
+   "title_terms": [
+    "asks",
+    "data",
+    "instead",
+    "menu",
+    "parameters",
+    "twelve"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 2693,
    "headings": [
     "Pre-registration: noticing a failure without being told",
@@ -53505,6 +53580,82 @@
    "title_terms": [
     "blind",
     "instrument"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5430,
+   "headings": [
+    "The twelve-entry menu was deciding which functions exist",
+    "Score: 6 of 7 predictions, 1 falsified and kept",
+    "P5 failed, and the failure is the more useful result",
+    "The gain, stated narrowly",
+    "Two instrument bugs found while building it",
+    "Blame, sharpened",
+    "Verification",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_MENU_WAS_DECIDING_WHICH_FUNCTIONS_EXIST_20261104_V1.md",
+   "sha256": "d7cadc58d105983bfc1952d328a241a02c4037c27347d0bfc995300351ffd3fe",
+   "summary": "Result note, 2026-11-04. Branch `arena/0d9138ce-brain`, base `4db59c51`. Pre-registration: `PREREG_PARAMETERS_THE_DATA_ASKS_FOR_20261104_V1.md`.",
+   "terms": {
+    "10": 3,
+    "12": 2,
+    "14": 2,
+    "2x": 3,
+    "2x+7": 2,
+    "3x+1": 2,
+    "affine": 3,
+    "alphabet": 2,
+    "already": 2,
+    "bank": 4,
+    "because": 2,
+    "before": 2,
+    "being": 2,
+    "blame": 2,
+    "bodies": 2,
+    "bound": 2,
+    "branch": 3,
+    "budget": 2,
+    "change": 2,
+    "claim": 2,
+    "compared": 2,
+    "comparing": 2,
+    "complete": 2,
+    "constant": 2,
+    "counts": 3,
+    "determined": 4,
+    "explanation": 4,
+    "false": 3,
+    "menu": 3,
+    "no": 3,
+    "not": 10,
+    "nothing": 3,
+    "now": 3,
+    "number": 3,
+    "observation": 3,
+    "one": 8,
+    "over": 3,
+    "pass": 7,
+    "recovered": 3,
+    "result": 4,
+    "same": 3,
+    "search": 3,
+    "so": 6,
+    "than": 3,
+    "two": 3,
+    "went": 3,
+    "were": 3,
+    "wrong": 3
+   },
+   "title": "The twelve-entry menu was deciding which functions exist",
+   "title_terms": [
+    "deciding",
+    "exist",
+    "functions",
+    "menu",
+    "twelve-entry"
    ]
   },
   {
@@ -66964,10 +67115,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1083,
+  "included_source_count": 1085,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6e71f23a4325a01cb0121430728082ea1b87396ebffc844a6c271149dfa86022"
+  "source_tree_digest": "603f3f4348c6189fec73fbbc092b848d364df1d3ea7f2fe85c653ebfd180a235"
  },
  "research_index": [
   {
@@ -148696,7 +148847,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EVIDENCE_DEMAND_20261104_V2.json",
    "schema": "PROJECT_BRAIN_EVIDENCE_DEMAND_V1_BENCHMARK",
-   "sha256": "9a3b0bacdfde2a74af8b6979e4f92cc41a8df4391c5f24fdcaf614b3421a8c67",
+   "sha256": "1b1f952e225ede48aad6ae4c7536bf00305e765b3d0d44870f730b0b9965706e",
    "status": "",
    "terms": {
     "20261104": 1,
@@ -159190,6 +159341,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/OBSERVATION_REFUTATION_20261104_V2.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OBSERVATION_REFUTATION_20261104_V2.json",
+   "schema": "PROJECT_BRAIN_OBSERVATION_REFUTATION_V1",
+   "sha256": "8450164e5b0ca671878344ced4eb602004eda35f21fefdb82f4c4d7a65487f87",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "observation": 1,
+    "refutation": 1,
+    "v2": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/OEWN_2025_RELEASE_SENSE_UNIVERSE_REMOTE_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -164482,6 +164650,23 @@
     "t3": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PARAMETER_INVENTION_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PARAMETER_INVENTION_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_PARAMETER_INVENTION_20261104_V1",
+   "sha256": "c029615bb53b2933d74123071c2ea5614dc8bbff06df145fba5dc16a8725d509",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "invention": 1,
+    "parameter": 1,
+    "v1": 1
    }
   },
   {
@@ -221090,6 +221275,30 @@
    }
   },
   {
+   "action_id": "SOLVE_THE_PARAMETER_THE_DATA_ASKS_FOR_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/SOLVE_THE_PARAMETER_THE_DATA_ASKS_FOR_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOLVE_THE_PARAMETER_THE_DATA_ASKS_FOR_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "db78288fa15df95babb2a395e334077d276312229db0ee8d78b78cf4ec1375c5",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "asks": 1,
+    "data": 1,
+    "frozen_twelve_entry_constant_alphabet_made_ordinary_affine_functions_look_unrepresentable_and_prescribed_the_wrong_remedy": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "parameter": 1,
+    "solve": 1,
+    "solve_exact_affine_and_constant_parameters_then_verify_against_every_example": 1,
+    "solve_the_parameter_the_data_asks_for_20261104_v1": 1,
+    "the_system_no_longer_calls_a_solvable_problem_unrepresentable_and_no_longer_prescribes_a_larger_grammar_when_a_number_was_missing__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "SOURCE_CANDIDATE_INDEPENDENT_VERIFICATION_AND_RESULT_REF_LIFT_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -247545,9 +247754,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/evidence_demand_v1.py",
-   "sha256": "5202858d76aecff09e8e81af05e28dac9924f4c12a70a7910abd975b15ed1dcb",
+   "sha256": "b1f3c4c8c2f5ebb3c5cbc02d0df184c2da9bac43729b8b18f2fe1eb5b70ffef8",
    "summary": "Refuse to commit when the evidence cannot distinguish between explanations.",
-   "symbol_count": 18,
+   "symbol_count": 19,
    "symbols": [
     "_agrees",
     "_bank_probe",
@@ -247564,6 +247773,7 @@
     "enumerate_admissible",
     "frozen_alphabet",
     "group_by_behaviour",
+    "invented_constants",
     "main",
     "run",
     "what_would_settle_it"
@@ -247588,6 +247798,7 @@
     "fits": 1,
     "frozen_alphabet": 1,
     "group_by_behaviour": 1,
+    "invented_constants": 1,
     "main": 1,
     "normalise_body": 1,
     "refuse": 1,
@@ -264707,7 +264918,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/observation_refutation_v1.py",
-   "sha256": "53d3fab05e482b00844a86d0ba94297c4841f985b06d5c651233efc5eea370fe",
+   "sha256": "64c8213eb51437ee45a47974047d1e1c2e11892d36facfe6fe97f8ebe63ef65d",
    "summary": "Interrogate a real observation surface, and survive an answer that contradicts the model.",
    "symbol_count": 7,
    "symbols": [
