@@ -38,11 +38,15 @@ def test_changed_state_benchmark_uses_distinct_states_and_real_observations(tmp_
             for arm in ("cold", "transfer"):
                 outcome = target[arm]
                 assert outcome["pass"] is True
+                # Three authorities, because they are three different wins. Added
+                # 2026-11-03: a carried model that is PLANNED THROUGH is neither an exact
+                # plan replay nor a fresh search, and it used to be reported as the second.
                 assert outcome["authority"] in {
                     "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED",
+                    "CARRIED_MODEL_PLAN_EXECUTED_GOAL_OBSERVED",
                     "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
                 }
                 assert outcome["elapsed_ms"] >= 0
                 assert outcome["action_calls"] > 0
-            # The disabled arm must not be reported as direct recall.
+            # The disabled arm must not be reported as anything that used prior experience.
             assert target["cold"]["authority"] == "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED"

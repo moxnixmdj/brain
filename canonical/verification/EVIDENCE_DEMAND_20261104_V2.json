@@ -1,0 +1,216 @@
+{
+  "authority": "NONE",
+  "cases": [
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))",
+        "return (2 * (x / 1))",
+        "return (2 / (1 / x))",
+        "return (2 // (1 / x))"
+      ],
+      "admissible_count": 12,
+      "case": "2x from 3 points",
+      "chosen": "return ((2 / 1) * x)",
+      "disagreements": [
+        {
+          "against": "return (2 / (1 / x))",
+          "witness": null
+        },
+        {
+          "against": "return (2 // (1 / x))",
+          "witness": {
+            "args": [
+              -3.5
+            ],
+            "value_a": "-7.0",
+            "value_b": "-8.0"
+          }
+        }
+      ],
+      "explanation_count": 3,
+      "group_sizes": [
+        10,
+        1,
+        1
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)"
+      ],
+      "admissible_count": 4,
+      "case": "2x + zero point",
+      "chosen": "return ((2 / 1) * x)",
+      "explanation_count": 1,
+      "group_sizes": [
+        4
+      ],
+      "status": "DETERMINED"
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))"
+      ],
+      "admissible_count": 9,
+      "case": "powers-of-two trap",
+      "chosen": "return ((2 / 1) * x)",
+      "explanation_count": 1,
+      "group_sizes": [
+        9
+      ],
+      "status": "DETERMINED"
+    }
+  ],
+  "findings": [
+    {
+      "admissible_count": 12,
+      "case": "2x from 3 points",
+      "id": "three_points_are_usually_ambiguous",
+      "pass": true,
+      "question": "do the previous round's examples admit more than one explanation?"
+    },
+    {
+      "admissible_count": 12,
+      "id": "x_squared_case_is_seen_as_ambiguity",
+      "pass": true,
+      "question": "is the body that defeated the self-audit visibly one of several?"
+    },
+    {
+      "id": "one_answer_buys_information",
+      "pass": true,
+      "question": "does answering the disagreement point shrink the admissible set?",
+      "trajectory": [
+        {
+          "admissible": 12,
+          "asked_at": -3.5,
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 3,
+          "explanations": 3,
+          "status": "PROVISIONAL",
+          "step": 0
+        },
+        {
+          "admissible": 3,
+          "chosen": "return ((x * 2) / 1)",
+          "examples": 4,
+          "explanations": 1,
+          "status": "DETERMINED",
+          "step": 1
+        }
+      ]
+    },
+    {
+      "final": {
+        "admissible": 3,
+        "chosen": "return ((x * 2) / 1)",
+        "examples": 4,
+        "explanations": 1,
+        "status": "DETERMINED",
+        "step": 1
+      },
+      "id": "the_loop_stops_when_asking_stops_helping",
+      "pass": true,
+      "question": "does it terminate instead of asking forever?",
+      "terminated": true
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))"
+      ],
+      "case": "powers-of-two trap",
+      "id": "uniqueness_is_not_truth",
+      "note": "DETERMINED would mean the budget contained one answer, never that the answer is true",
+      "pass": true,
+      "question": "can exactly one admissible body still be the wrong function?"
+    },
+    {
+      "explanations": 3,
+      "group_sizes": [
+        10,
+        1,
+        1
+      ],
+      "id": "programs_collapse_to_explanations",
+      "pass": true,
+      "programs": 12,
+      "question": "are the 12 admissible programs really 12 different ideas?"
+    },
+    {
+      "id": "one_answer_leaves_one_explanation",
+      "pass": true,
+      "question": "does the interrogation terminate with a single idea left?",
+      "trajectory": [
+        [
+          0,
+          12,
+          3,
+          "PROVISIONAL"
+        ],
+        [
+          1,
+          3,
+          1,
+          "DETERMINED"
+        ]
+      ]
+    },
+    {
+      "caught_now": true,
+      "consequence": "the probe range must include fractions, or the grouping merges bodies that are not the same explanation",
+      "constructed": {
+        "a": "x ** 2",
+        "agree_on_integers": true,
+        "b": "int(x) * int(x)",
+        "differ_at": "x = 1.5 -> 2.25 vs 1.0"
+      },
+      "id": "grouping_is_bounded_by_the_probe_range",
+      "pass": true,
+      "question": "can two bodies agree on every integer probe and still differ?"
+    },
+    {
+      "id": "ambiguous_answers_are_marked_not_silent",
+      "pass": true,
+      "question": "is an arbitrary choice reported as a choice?",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "measured": "2026-11-04",
+  "not_claimed": [
+    "that DETERMINED means correct -- it means the budget contained one answer",
+    "that the admissible set is complete -- it is what the grammar reaches within max_weight, and a larger budget can always reveal another explanation",
+    "that preferring the cheapest body is justified by the data; it is a stated preference and is reported separately from evidence -- and measured here, eleven of twelve admissible bodies tie on cost, so simplicity resolved nothing",
+    "that the interrogation loop reaches the truth; it removes explanations, and the values it asks for were supplied by the benchmark, which is playing the oracle"
+  ],
+  "passed": 9,
+  "schema": "PROJECT_BRAIN_EVIDENCE_DEMAND_V1_BENCHMARK",
+  "total": 9,
+  "truth_achieved": false
+}

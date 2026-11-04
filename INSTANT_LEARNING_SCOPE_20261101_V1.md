@@ -8,12 +8,34 @@ there things that are wrong, and what is smartest to do?*
 This is the answer after five rounds of measurement. The document below records the whole
 argument including every place I was wrong; this section is what is true now.
 
+> **CORRECTION, 2026-11-03 — read before the table below.**
+> One row of this table is wrong. **"Instant learning works in new arbitrary environments"** cites
+> *10/10 new instances solved by recalled plan*. The probe behind it
+> (`transfer_learning_new_environment_probe_20261101.py`) builds the **same instance** in four of
+> its five families — `lock_3dial`, `accum_word`, `grid_reach` and `modulo_counter` start
+> identically and have identical goal predicates for seeds 0, 1 and 2 — so "a new instance" there
+> means "the same instance, called again". The 1-trial rows are real measurements of
+> **exact-episode replay**, which is not transfer.
+>
+> Re-measured on genuinely distinct instances (`transfer_learning_new_instance_probe_20261103.py`,
+> 5 families × 3 seeds, identical target instance in both arms): **1/15 cases showed a genuine
+> saving; median trial speedup 1.00×; 3027 vs 3028 environment calls.** The warm arm inherits the
+> lesson and pays for it twice — the prior model is injected but the trial budget is not reduced,
+> and up to three stored plans are replayed before the search begins. The tree's own
+> `canonical/tools/changed_state_transfer_benchmark_v1.py` has been reporting this all along:
+> `direct_plan_replays: 1`.
+>
+> The corrected verdict for that row: **exact-episode replay is TRUE; transfer to a new instance
+> is measured at 1/15 and is not claimed.** Full argument and the ranked next steps:
+> `INSTANT_LEARNING_NEW_INSTANCE_REMEASUREMENT_20261103_V1.md`. Every other row in this table
+> survives re-measurement unchanged.
+
 ## The verdict, in one place
 
 | the owner's claim | verdict | the evidence |
 |---|---|---|
 | Instant learning works | **TRUE** | store, restart, bundle transport; 12 + 13 tests passing |
-| Instant learning works in **new arbitrary environments** | **TRUE** | 5/5 families, **10/10** new instances solved by recalled plan, several at **1 trial** (§0.7); cross-machine **7,147 → 699 ms**; variants mean **1,268 → 284 ms** |
+| Instant learning works in **new arbitrary environments** | **EXACT-EPISODE REPLAY: TRUE. TRANSFER TO A NEW INSTANCE: 1/15, NOT CLAIMED** — see the 2026-11-03 correction above | superseded as stated. The original evidence ("5/5 families, **10/10** new instances solved by recalled plan, several at **1 trial**", §0.7) measured a **re-created** instance in 4 of 5 families. On genuinely distinct instances: **1/15** genuine savings, median **1.00×** trials, **3027 → 3028** act calls (`transfer_learning_new_instance_probe_20261103.py`). What does transfer is the *environment operation* manual (`environment_fit_v1`), and the tree's own `changed_state_transfer_benchmark_v1` already reported `direct_plan_replays: 1` |
 | "Does it once, learns it permanently" | **TRUE, verified end to end** | one-shot teaching **5/5 languages**. The bundle that ships holds **5 rules across python/go/typescript/rust**; a brand-new store in a fresh directory is seeded with all five and applies one to a **renamed** source it has never seen (`return p + p * t` -> `return p - p * t`). Permanence is real for the rules that exist. Qualification of a *workflow* skill now requires a genuinely distinct held-out instance (§6.2) — before that fix it was optional and the receipt claimed it anyway. |
 | "Give it a try and after doing it **at least once** he learns **all of those**" | **FALSE — measured, three ways** | (1) 1 example -> **6/7**, 2 examples -> **6/7**, 3 examples -> **6/7**: more exposure bought nothing. (2) Taught the one case it missed *directly*, `derive_operator_swap` still returns `None` and it cannot solve the lesson it was just shown — the failure is **representational, not statistical**. (3) Measured on its own shipped corpus: **2/5** rules can reach past their instance, **3/5** replay and stop. Repetition moves the count of rules, never their reach. |
 | "Anything on a computer" | **STRUCTURED HALF EXECUTED; GUI HALF CLOSED MODULO THE OS** | code ops run for real (real filesystem, real `pytest`, real `git status`), state ops run **verbatim**, media ops run **real ffmpeg encodes** re-measured by an independent `ffprobe`. The GUI loop closes end to end against a virtual 1920x1080 desktop — "leftmost/rightmost red box" -> correct pixel -> world changes -> next screenshot differs. What remains is one sentence: *pyautogui drives a real OS.* `host_app_ops` still needs the VM's `libreoffice_calc`. |
@@ -292,6 +314,16 @@ in new environments" but **"it must learn again in each environment, and one les
 generalize across the boundary between them."**
 
 ### 0.7 The layer I kept dismissing, actually run: transfer to a NEW environment is 5/5
+
+> **SUPERSEDED 2026-11-03. Do not cite this section as transfer evidence.** The table below is
+> accurate, but its "new instance" column re-creates the same instance: for `lock_3dial`,
+> `accum_word`, `grid_reach` and `modulo_counter` the three seeds produce identical start states
+> and identical goal predicates. What was measured is **exact-episode replay**, and it reproduces.
+> Re-measured on genuinely distinct instances: **1/15 genuine savings, median 1.00× trials,
+> 3027 → 3028 act calls** (`transfer_learning_new_instance_probe_20261103.py`). The corrected
+> argument is `INSTANT_LEARNING_NEW_INSTANCE_REMEASUREMENT_20261103_V1.md` §2. The lesson:
+> the probe reported a real behaviour under a label it had not earned, and the tree's own
+> `changed_state_transfer_benchmark_v1` (`direct_plan_replays: 1`) disagreed the whole time.
 
 I had dismissed `transfer_learning_v1` with "the entire recorded corpus is one episode"
 **without ever running it on more than one environment.** That was laziness dressed as rigor.

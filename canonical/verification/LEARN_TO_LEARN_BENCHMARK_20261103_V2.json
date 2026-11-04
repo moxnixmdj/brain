@@ -1,0 +1,1511 @@
+{
+ "schema": "CROSS_KIND_LEARNING_TO_LEARN_BENCHMARK_V1",
+ "authority": "NONE -- PRODUCER-RUN, CONSTRUCTED ENVIRONMENTS",
+ "train_kinds": [
+  "append_letters",
+  "grid_walk",
+  "cyclic_counter",
+  "dial_lock",
+  "toggle_bank",
+  "adjacent_sort",
+  "two_jug_pour",
+  "queue_rotate",
+  "bit_register",
+  "string_affix"
+ ],
+ "test_kinds": [
+  "reverse_string",
+  "parity_lights",
+  "sliding_pairs",
+  "stack_pushout",
+  "letter_shift",
+  "binary_odometer",
+  "ring_rotate",
+  "double_dial",
+  "last_wins",
+  "tri_lock"
+ ],
+ "policy_vocabulary_is_hand_written": true,
+ "train_rows": [
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_d0_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 366,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": false,
+   "act_calls": 2526,
+   "plan": null,
+   "steps": 0
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_d0_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 386,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_d0_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 366,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_d0_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 366,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 185,
+   "plan": [
+    "mv_l",
+    "mv_d",
+    "mv_d"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 1099,
+   "plan": [
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_l",
+    "mv_l",
+    "mv_l"
+   ],
+   "steps": 14
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 137,
+   "plan": [
+    "mv_l",
+    "mv_d",
+    "mv_d"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 185,
+   "plan": [
+    "mv_l",
+    "mv_d",
+    "mv_d"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 65,
+   "plan": [
+    "mv_d",
+    "mv_d",
+    "mv_l"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 3,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 16,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 33,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 47,
+   "plan": [
+    "sw_0",
+    "sw_3",
+    "sw_0",
+    "sw_1"
+   ],
+   "steps": 4
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 24,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 33,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 33,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "bfs_lex",
+   "pass": false,
+   "act_calls": 547,
+   "plan": null,
+   "steps": 0
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 913,
+   "plan": [
+    "swap_0",
+    "swap_2",
+    "swap_0",
+    "swap_2",
+    "swap_0",
+    "swap_2",
+    "swap_0",
+    "swap_2",
+    "swap_0",
+    "swap_2",
+    "swap_1",
+    "swap_2",
+    "swap_0",
+    "swap_1"
+   ],
+   "steps": 14
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "repeat_last",
+   "pass": false,
+   "act_calls": 547,
+   "plan": null,
+   "steps": 0
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "never_last",
+   "pass": false,
+   "act_calls": 547,
+   "plan": null,
+   "steps": 0
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "policy": "rarest",
+   "pass": false,
+   "act_calls": 547,
+   "plan": null,
+   "steps": 0
+  },
+  {
+   "kind": "two_jug_pour",
+   "feature_key": "b2_m0_r1_d0_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 233,
+   "plan": [
+    "fill_a",
+    "pour_ab",
+    "empty_b"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "two_jug_pour",
+   "feature_key": "b2_m0_r1_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 1045,
+   "plan": [
+    "fill_a",
+    "pour_ba",
+    "fill_a",
+    "pour_ba",
+    "fill_a",
+    "pour_ba",
+    "fill_a",
+    "pour_ba",
+    "fill_a",
+    "pour_ba",
+    "fill_a",
+    "pour_ba",
+    "pour_ab",
+    "empty_b"
+   ],
+   "steps": 14
+  },
+  {
+   "kind": "two_jug_pour",
+   "feature_key": "b2_m0_r1_d0_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 261,
+   "plan": [
+    "fill_a",
+    "pour_ab",
+    "empty_b"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "two_jug_pour",
+   "feature_key": "b2_m0_r1_d0_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 233,
+   "plan": [
+    "fill_a",
+    "pour_ab",
+    "empty_b"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "two_jug_pour",
+   "feature_key": "b2_m0_r1_d0_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 513,
+   "plan": [
+    "fill_a",
+    "pour_ab",
+    "empty_b"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "queue_rotate",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 5,
+   "plan": [
+    "rot_r"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "queue_rotate",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 5,
+   "plan": [
+    "rot_r"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "queue_rotate",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 5,
+   "plan": [
+    "rot_r"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "queue_rotate",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 5,
+   "plan": [
+    "rot_r"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "queue_rotate",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "rot_r"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "bit_register",
+   "feature_key": "b2_m2_r1_d0_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 35,
+   "plan": [
+    "xor_1",
+    "xor_2"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "bit_register",
+   "feature_key": "b2_m2_r1_d0_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 46,
+   "plan": [
+    "xor_0",
+    "shift",
+    "xor_0"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "bit_register",
+   "feature_key": "b2_m2_r1_d0_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 38,
+   "plan": [
+    "xor_1",
+    "xor_2"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "bit_register",
+   "feature_key": "b2_m2_r1_d0_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 35,
+   "plan": [
+    "xor_1",
+    "xor_2"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "bit_register",
+   "feature_key": "b2_m2_r1_d0_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 53,
+   "plan": [
+    "xor_1",
+    "xor_2"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "string_affix",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "put_z"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "string_affix",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 3,
+   "plan": [
+    "put_z"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "string_affix",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "put_z"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "string_affix",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "put_z"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "string_affix",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "put_z"
+   ],
+   "steps": 1
+  }
+ ],
+ "test_rows": [
+  {
+   "kind": "reverse_string",
+   "feature_key": "b1_m1_r0_d0_g0",
+   "chosen_policy": "bfs_lex",
+   "why": {
+    "why": "UNSEEN_FEATURE_KEY",
+    "evidence": 0
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 72,
+    "plan": [
+     "put_a",
+     "put_b",
+     "put_c"
+    ],
+    "steps": 3,
+    "policy": "bfs_lex",
+    "cost": 72
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 72,
+    "plan": [
+     "put_a",
+     "put_b",
+     "put_c"
+    ],
+    "steps": 3,
+    "policy": "bfs_lex",
+    "cost": 72
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 72,
+      "plan": [
+       "put_a",
+       "put_b",
+       "put_c"
+      ],
+      "steps": 3,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": false,
+      "act_calls": 323,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": false,
+      "act_calls": 323,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": false,
+      "act_calls": 323,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": false,
+      "act_calls": 323,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     }
+    ],
+    "mean_cost": 800014.4,
+    "solved": 1
+   },
+   "beat_default": false,
+   "beat_random_mean": true
+  },
+  {
+   "kind": "parity_lights",
+   "feature_key": "b1_m2_r0_d0_g0",
+   "chosen_policy": "bfs_lex",
+   "why": {
+    "why": "UNSEEN_FEATURE_KEY",
+    "evidence": 0
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 21,
+    "plan": [
+     "fl_0",
+     "fl_3"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 21
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 21,
+    "plan": [
+     "fl_0",
+     "fl_3"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 21
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 21,
+      "plan": [
+       "fl_0",
+       "fl_3"
+      ],
+      "steps": 2,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 21,
+      "plan": [
+       "fl_0",
+       "fl_3"
+      ],
+      "steps": 2,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 21,
+      "plan": [
+       "fl_0",
+       "fl_3"
+      ],
+      "steps": 2,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 21,
+      "plan": [
+       "fl_0",
+       "fl_3"
+      ],
+      "steps": 2,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 21,
+      "plan": [
+       "fl_0",
+       "fl_3"
+      ],
+      "steps": 2,
+      "policy": "rarest"
+     }
+    ],
+    "mean_cost": 21.0,
+    "solved": 5
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  },
+  {
+   "kind": "sliding_pairs",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 4,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "rarest": 0.75,
+     "repeat_last": 0.75,
+     "never_last": 0.75,
+     "bfs_lex": 0.75
+    }
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 913,
+    "plan": [
+     "sw_0",
+     "sw_2",
+     "sw_0",
+     "sw_2",
+     "sw_0",
+     "sw_2",
+     "sw_0",
+     "sw_2",
+     "sw_0",
+     "sw_2",
+     "sw_1",
+     "sw_2",
+     "sw_0",
+     "sw_1"
+    ],
+    "steps": 14,
+    "policy": "dfs_reversed",
+    "cost": 913
+   },
+   "default": {
+    "pass": false,
+    "act_calls": 547,
+    "plan": null,
+    "steps": 0,
+    "policy": "bfs_lex",
+    "cost": 1000000
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "rarest"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "rarest"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 913,
+      "plan": [
+       "sw_0",
+       "sw_2",
+       "sw_0",
+       "sw_2",
+       "sw_0",
+       "sw_2",
+       "sw_0",
+       "sw_2",
+       "sw_0",
+       "sw_2",
+       "sw_1",
+       "sw_2",
+       "sw_0",
+       "sw_1"
+      ],
+      "steps": 14,
+      "policy": "dfs_reversed"
+     }
+    ],
+    "mean_cost": 800182.6,
+    "solved": 1
+   },
+   "beat_default": true,
+   "beat_random_mean": true
+  },
+  {
+   "kind": "stack_pushout",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 4,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "rarest": 0.75,
+     "repeat_last": 0.75,
+     "never_last": 0.75,
+     "bfs_lex": 0.75
+    }
+   },
+   "learned": {
+    "pass": false,
+    "act_calls": 2009,
+    "plan": null,
+    "steps": 0,
+    "policy": "dfs_reversed",
+    "cost": 1000000
+   },
+   "default": {
+    "pass": false,
+    "act_calls": 693,
+    "plan": null,
+    "steps": 0,
+    "policy": "bfs_lex",
+    "cost": 1000000
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "never_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 2009,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "rarest"
+     },
+     {
+      "pass": false,
+      "act_calls": 2009,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     }
+    ],
+    "mean_cost": 1000000.0,
+    "solved": 0
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  },
+  {
+   "kind": "letter_shift",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 4,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "rarest": 0.75,
+     "repeat_last": 0.75,
+     "never_last": 0.75,
+     "bfs_lex": 0.75
+    }
+   },
+   "learned": {
+    "pass": false,
+    "act_calls": 2009,
+    "plan": null,
+    "steps": 0,
+    "policy": "dfs_reversed",
+    "cost": 1000000
+   },
+   "default": {
+    "pass": false,
+    "act_calls": 693,
+    "plan": null,
+    "steps": 0,
+    "policy": "bfs_lex",
+    "cost": 1000000
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "never_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 693,
+      "plan": null,
+      "steps": 0,
+      "policy": "never_last"
+     }
+    ],
+    "mean_cost": 1000000.0,
+    "solved": 0
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  },
+  {
+   "kind": "binary_odometer",
+   "feature_key": "b1_m2_r1_d1_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 3,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "repeat_last": 1.0,
+     "never_last": 1.0,
+     "bfs_lex": 1.0,
+     "rarest": 1.0
+    }
+   },
+   "learned": {
+    "pass": false,
+    "act_calls": 1498,
+    "plan": null,
+    "steps": 0,
+    "policy": "dfs_reversed",
+    "cost": 1000000
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 38,
+    "plan": [
+     "inc",
+     "inc",
+     "inc"
+    ],
+    "steps": 3,
+    "policy": "bfs_lex",
+    "cost": 38
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": false,
+      "act_calls": 1498,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": false,
+      "act_calls": 1498,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 142,
+      "plan": [
+       "inc",
+       "inc",
+       "inc"
+      ],
+      "steps": 3,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 38,
+      "plan": [
+       "inc",
+       "inc",
+       "inc"
+      ],
+      "steps": 3,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 38,
+      "plan": [
+       "inc",
+       "inc",
+       "inc"
+      ],
+      "steps": 3,
+      "policy": "bfs_lex"
+     }
+    ],
+    "mean_cost": 400043.6,
+    "solved": 3
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  },
+  {
+   "kind": "ring_rotate",
+   "feature_key": "b0_m2_r0_d0_g0",
+   "chosen_policy": "bfs_lex",
+   "why": {
+    "why": "UNSEEN_FEATURE_KEY",
+    "evidence": 0
+   },
+   "learned": {
+    "pass": false,
+    "act_calls": 447,
+    "plan": null,
+    "steps": 0,
+    "policy": "bfs_lex",
+    "cost": 1000000
+   },
+   "default": {
+    "pass": false,
+    "act_calls": 447,
+    "plan": null,
+    "steps": 0,
+    "policy": "bfs_lex",
+    "cost": 1000000
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": false,
+      "act_calls": 447,
+      "plan": null,
+      "steps": 0,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": false,
+      "act_calls": 447,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 987,
+      "plan": null,
+      "steps": 0,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": false,
+      "act_calls": 447,
+      "plan": null,
+      "steps": 0,
+      "policy": "rarest"
+     },
+     {
+      "pass": false,
+      "act_calls": 447,
+      "plan": null,
+      "steps": 0,
+      "policy": "never_last"
+     }
+    ],
+    "mean_cost": 1000000.0,
+    "solved": 0
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  },
+  {
+   "kind": "double_dial",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 4,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "rarest": 0.75,
+     "repeat_last": 0.75,
+     "never_last": 0.75,
+     "bfs_lex": 0.75
+    }
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 18,
+    "plan": [
+     "d0_up",
+     "d1_up"
+    ],
+    "steps": 2,
+    "policy": "dfs_reversed",
+    "cost": 18
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 18,
+    "plan": [
+     "d0_up",
+     "d1_up"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 18
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 18,
+      "plan": [
+       "d0_up",
+       "d1_up"
+      ],
+      "steps": 2,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 18,
+      "plan": [
+       "d0_up",
+       "d1_up"
+      ],
+      "steps": 2,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 18,
+      "plan": [
+       "d0_up",
+       "d1_up"
+      ],
+      "steps": 2,
+      "policy": "never_last"
+     },
+     {
+      "pass": true,
+      "act_calls": 21,
+      "plan": [
+       "d0_up",
+       "d1_up"
+      ],
+      "steps": 2,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": true,
+      "act_calls": 18,
+      "plan": [
+       "d0_up",
+       "d1_up"
+      ],
+      "steps": 2,
+      "policy": "bfs_lex"
+     }
+    ],
+    "mean_cost": 18.6,
+    "solved": 5
+   },
+   "beat_default": false,
+   "beat_random_mean": true
+  },
+  {
+   "kind": "last_wins",
+   "feature_key": "b1_m1_r0_d0_g0",
+   "chosen_policy": "bfs_lex",
+   "why": {
+    "why": "UNSEEN_FEATURE_KEY",
+    "evidence": 0
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 25,
+    "plan": [
+     "on_1",
+     "on_2"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 25
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 25,
+    "plan": [
+     "on_1",
+     "on_2"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 25
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 25,
+      "plan": [
+       "on_1",
+       "on_2"
+      ],
+      "steps": 2,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 25,
+      "plan": [
+       "on_1",
+       "on_2"
+      ],
+      "steps": 2,
+      "policy": "never_last"
+     },
+     {
+      "pass": true,
+      "act_calls": 24,
+      "plan": [
+       "on_0",
+       "on_2",
+       "on_1"
+      ],
+      "steps": 3,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 24,
+      "plan": [
+       "on_0",
+       "on_2",
+       "on_1"
+      ],
+      "steps": 3,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 25,
+      "plan": [
+       "on_1",
+       "on_2"
+      ],
+      "steps": 2,
+      "policy": "rarest"
+     }
+    ],
+    "mean_cost": 24.6,
+    "solved": 5
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  },
+  {
+   "kind": "tri_lock",
+   "feature_key": "b1_m2_r1_d0_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 4,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "rarest": 0.75,
+     "repeat_last": 0.75,
+     "never_last": 0.75,
+     "bfs_lex": 0.75
+    }
+   },
+   "learned": {
+    "pass": false,
+    "act_calls": 1498,
+    "plan": null,
+    "steps": 0,
+    "policy": "dfs_reversed",
+    "cost": 1000000
+   },
+   "default": {
+    "pass": false,
+    "act_calls": 547,
+    "plan": null,
+    "steps": 0,
+    "policy": "bfs_lex",
+    "cost": 1000000
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "rarest"
+     },
+     {
+      "pass": false,
+      "act_calls": 547,
+      "plan": null,
+      "steps": 0,
+      "policy": "bfs_lex"
+     }
+    ],
+    "mean_cost": 1000000.0,
+    "solved": 0
+   },
+   "beat_default": false,
+   "beat_random_mean": false
+  }
+ ],
+ "summary": {
+  "test_kinds": 10,
+  "learned_solved": 5,
+  "beat_default": 1,
+  "beat_random_mean": 3
+ },
+ "verdict": "NO_COMPOUNDING -- the learned choice is not better than a coin flip on unseen kinds; the features do not generalise and this is not learning-to-learn",
+ "cannot_see": [
+  "strategy invention -- the five policies are written by hand",
+  "GUI environments, pixels, unbounded action sets"
+ ],
+ "stopping_rule": "The features were changed twice after seeing a negative result. This run is the last change decided that way; the verdict is a decision, not an invitation to tune again. See LEARN_TO_LEARN_VERDICT_20261103_V1.md."
+}

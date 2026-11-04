@@ -1,0 +1,179 @@
+{
+  "authority": "NONE",
+  "cases": [
+    {
+      "body": "_r = int(x) % 2\nif _r == 0:\n    return 0\nelif _r == 1:\n    return 1\nreturn 1",
+      "case": "mod 2",
+      "name": "value repeats every 2 inputs",
+      "operators": [
+        "%",
+        "-",
+        "/"
+      ],
+      "period": 2,
+      "status": "INDUCED",
+      "survivors": 75
+    },
+    {
+      "body": "_r = int(x) % 3\nif _r == 0:\n    return 0\nelif _r == 1:\n    return 1\nelif _r == 2:\n    return 2\nreturn 2",
+      "case": "mod 3",
+      "name": "value repeats every 3 inputs",
+      "operators": [],
+      "period": 3,
+      "status": "INDUCED",
+      "survivors": 0
+    },
+    {
+      "body": null,
+      "case": "x*x",
+      "name": null,
+      "operators": [
+        "*",
+        "/"
+      ],
+      "period": null,
+      "status": "NO_STRUCTURE",
+      "survivors": 2
+    },
+    {
+      "body": null,
+      "case": "noise",
+      "name": null,
+      "operators": [],
+      "period": null,
+      "status": "NO_EVIDENCE",
+      "survivors": 0
+    }
+  ],
+  "findings": [
+    {
+      "id": "the_survivors_restrict_the_vocabulary",
+      "operators": [
+        "%",
+        "-",
+        "/"
+      ],
+      "pass": true,
+      "question": "do the admissible programs for mod 2 use a narrow operator set including %?"
+    },
+    {
+      "id": "a_periodic_hypothesis_is_induced",
+      "pass": true,
+      "period": 2,
+      "question": "is a hypothesis of a kind that was not in the ontology recovered?",
+      "status": "INDUCED"
+    },
+    {
+      "errors": [],
+      "id": "the_induced_body_reproduces_every_observation",
+      "pass": true,
+      "question": "does the recovered program actually fit, with no tolerance?",
+      "verified": true
+    },
+    {
+      "id": "the_name_comes_from_the_parameters",
+      "name_period_2": "value repeats every 2 inputs",
+      "name_period_3": "value repeats every 3 inputs",
+      "pass": true,
+      "question": "does the kind's name change when the data's period changes?"
+    },
+    {
+      "id": "a_different_target_yields_a_different_vocabulary",
+      "mod_2_ops": [
+        "%",
+        "-",
+        "/"
+      ],
+      "pass": true,
+      "question": "is the recovered operator set a function of the data rather than of the code?",
+      "x_squared_ops": [
+        "*",
+        "/"
+      ]
+    },
+    {
+      "id": "structureless_data_is_not_fitted",
+      "operators": [],
+      "pass": true,
+      "question": "does the pathway invent a kind for observations with no structure?",
+      "status": "NO_EVIDENCE"
+    },
+    {
+      "before": "ONTOLOGY_EXHAUSTED",
+      "first": "INDUCED",
+      "id": "a_lifetime_changes_the_verdict",
+      "pass": true,
+      "question": "does the same input get a different answer after it has been learned?",
+      "second": "RECOGNISED"
+    },
+    {
+      "id": "the_second_encounter_does_not_rederive",
+      "induced_after_two": 1,
+      "pass": true,
+      "question": "is the second answer produced from what was kept, not recomputed?"
+    },
+    {
+      "id": "a_partition_must_witness_every_residue_twice",
+      "noise": "NO_EVIDENCE",
+      "pass": true,
+      "question": "are six unrelated points 'explained' by period 6?"
+    },
+    {
+      "id": "a_smooth_non_periodic_target_is_not_called_periodic",
+      "pass": true,
+      "quadratic": "NO_EVIDENCE",
+      "question": "does a quadratic get a period fitted to it?"
+    },
+    {
+      "id": "two_points_cannot_certify_anything",
+      "pass": true,
+      "question": "is anything concluded from two observations?",
+      "two_points": "NO_EVIDENCE"
+    },
+    {
+      "id": "absence_of_evidence_is_not_a_finding_about_the_data",
+      "pass": true,
+      "question": "with no admissible programs, does it say so instead of guessing?",
+      "status": "NO_EVIDENCE"
+    }
+  ],
+  "lifetime": {
+    "authority": "NONE",
+    "first_encounter": {
+      "admitted": true,
+      "name": "value repeats every 2 inputs",
+      "status": "INDUCED"
+    },
+    "induced": 1,
+    "refuted": 0,
+    "schema": "PROJECT_BRAIN_VOCABULARY_INDUCTION_V1_LIFETIME",
+    "second_encounter": {
+      "name": "value repeats every 2 inputs",
+      "status": "RECOGNISED",
+      "why": "a hypothesis induced earlier reproduces every observation; nothing new was derived, and nothing was assumed beyond it"
+    },
+    "status_before_learning": "ONTOLOGY_EXHAUSTED"
+  },
+  "mod2_verification": {
+    "against": 6,
+    "errors": [],
+    "verified": true
+  },
+  "negative_controls": {
+    "noise_without_survivors": {
+      "name": null,
+      "status": "NO_EVIDENCE"
+    },
+    "quadratic_without_survivors": {
+      "name": null,
+      "status": "NO_EVIDENCE"
+    },
+    "two_points": {
+      "name": null,
+      "status": "NO_EVIDENCE"
+    }
+  },
+  "passed": 12,
+  "schema": "PROJECT_BRAIN_VOCABULARY_INDUCTION_V1",
+  "total": 12
+}

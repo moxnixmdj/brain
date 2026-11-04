@@ -1,0 +1,120 @@
+{
+ "schema": "CONCEPT_LADDER_BENCHMARK_V1",
+ "authority": "NONE -- PRODUCER-RUN, CONSTRUCTED PROBLEMS",
+ "budget_max_weight": 3,
+ "rows": [
+  {
+   "index": 0,
+   "discriminating": false,
+   "name": "clamped_interval",
+   "description": "map a value into [0,1] over a clamped interval",
+   "library_size_before": 0,
+   "admitted": 1,
+   "library_size_after": 1,
+   "before": {
+    "solved": 3,
+    "of": 3,
+    "mean_ms": 106.84
+   },
+   "after": {
+    "solved": 3,
+    "of": 3,
+    "mean_ms": 44.5
+   },
+   "rung_1_after": {
+    "solved": 3,
+    "of": 3,
+    "mean_ms": 44.5
+   }
+  },
+  {
+   "index": 1,
+   "discriminating": false,
+   "name": "signed_distance",
+   "description": "how far one value is from another, direction preserved",
+   "library_size_before": 1,
+   "admitted": 0,
+   "library_size_after": 1,
+   "before": {
+    "solved": 1,
+    "of": 3,
+    "mean_ms": 133.87
+   },
+   "after": {
+    "solved": 1,
+    "of": 3,
+    "mean_ms": 135.53
+   },
+   "rung_1_after": {
+    "solved": 3,
+    "of": 3,
+    "mean_ms": 34.88
+   }
+  },
+  {
+   "index": 2,
+   "discriminating": false,
+   "name": "weighted_blend",
+   "description": "a 50/50 blend of two quantities",
+   "library_size_before": 1,
+   "admitted": 0,
+   "library_size_after": 1,
+   "before": {
+    "solved": 1,
+    "of": 3,
+    "mean_ms": 148.66
+   },
+   "after": {
+    "solved": 1,
+    "of": 3,
+    "mean_ms": 144.59
+   },
+   "rung_1_after": {
+    "solved": 3,
+    "of": 3,
+    "mean_ms": 35.54
+   }
+  },
+  {
+   "index": 3,
+   "discriminating": false,
+   "name": "scaled_ratio",
+   "description": "a ratio scaled by a constant factor",
+   "library_size_before": 1,
+   "admitted": 0,
+   "library_size_after": 1,
+   "before": {
+    "solved": 0,
+    "of": 3,
+    "mean_ms": 144.44
+   },
+   "after": {
+    "solved": 0,
+    "of": 3,
+    "mean_ms": 143.87
+   },
+   "rung_1_after": {
+    "solved": 3,
+    "of": 3,
+    "mean_ms": 35.92
+   }
+  }
+ ],
+ "summary": {
+  "rungs": 4,
+  "discriminating_rungs": 0,
+  "vacuous_rungs": 4,
+  "held_out_solved_before_teaching_all": 0,
+  "held_out_solved_after_teaching_all": 0,
+  "held_out_of": 0,
+  "later_rungs_solved_by_earlier_learning": 0,
+  "rungs_that_diluted_rung_1": 0,
+  "final_library_size": 1
+ },
+ "what_this_shows": "Concept invention raised held-out solve rate and reduced time. Later rungs solved from earlier learning is TRANSFER; it is measured separately from 'solved after its own teaching', which only shows the mechanism works once.",
+ "cannot_see": [
+  "pure Python functions over small numeric tuples",
+  "no I/O, no host execution, no GUI",
+  "says nothing about reaching a shell or browser: that lane is gated"
+ ]
+}

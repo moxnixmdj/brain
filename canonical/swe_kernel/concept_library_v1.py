@@ -760,8 +760,19 @@ class ConceptEntry:
     corpus_sites: int
     uses: int = 0
     verified_hits: int = 0
+    # Merged 2026-11-04: main added statement-function and higher-order support; this branch added
+    # disconfirmation/retirement. The two are orthogonal -- one is about what a concept CAN be, the
+    # other about whether the record still vouches for it -- so both fields survive.
     body_stmts: str = ""
     callable_params: tuple[tuple[str, int], ...] = field(default_factory=tuple)
+
+    # Until `disconfirmations` existed, `log_prior` could only rise: measured, 50 recorded failures
+    # left it unchanged at 2.8904, and the synthesizer only ever looks at the top 16 concepts, so
+    # surviving junk crowded out useful concepts (reach 2/2 -> 0/2). A library that cannot be wrong
+    # about itself is not a memory, it is an append-only log.
+    disconfirmations: int = 0
+
+    RETIREMENT_THRESHOLD = 3
 
     @property
     def is_stmt_fn(self) -> bool:
@@ -776,8 +787,17 @@ class ConceptEntry:
         return dict(self.callable_params)
 
     @property
+    def retired(self) -> bool:
+        """True when the record says this concept has failed more often than it has ever helped."""
+        return self.disconfirmations >= self.RETIREMENT_THRESHOLD and self.verified_hits == 0
+
+    @property
     def log_prior(self) -> float:
-        return math.log1p(self.verified_hits * 2 + self.corpus_sites + 1)
+        # Disconfirmations SUBTRACT. The asymmetry is deliberate: one verified help is worth a
+        # little, repeated unexplained failure is worth a lot, because a wrong concept is not
+        # merely unhelpful -- it fills one of the 16 slots the search can see.
+        return math.log1p(max(0, self.verified_hits * 2 + self.corpus_sites
+                              - self.disconfirmations * 3) + 1)
 
     def render_helper_def(self) -> str:
         p_sig = ", ".join(self.param_names)
@@ -797,6 +817,7 @@ class ConceptEntry:
             "corpus_sites": self.corpus_sites,
             "uses": self.uses,
             "verified_hits": self.verified_hits,
+            "disconfirmations": self.disconfirmations,
         }
         if self.body_stmts:
             out["body_stmts"] = self.body_stmts
@@ -824,6 +845,7 @@ class ConceptEntry:
             verified_hits=int(raw.get("verified_hits") or 0),
             body_stmts=str(raw.get("body_stmts") or ""),
             callable_params=cp_tup,
+            disconfirmations=int(raw.get("disconfirmations") or 0),
         )
 
 
@@ -1174,10 +1196,16 @@ def _generate_probe_grids(arity: int) -> list[tuple[str, list[tuple[Any, ...]]]]
     """Deterministic independent-coordinate probe banks testing all variable orderings."""
     base_nums = (-4, -1, 0, 1, 3, 7, 12, 20)
     strides = (1, 3, 5, 7)
+    # Equal-argument points, added 2026-11-04. Every probe in the original grid had distinct
+    # coordinates, so a division by (a - b) was NEVER evaluated at a == b -- the one input where it
+    # dies. Measured: the library admitted `... / (_v2 - _v1)` with no guard and called it verified.
+    equal_tuples: list[tuple[Any, ...]] = [
+        tuple(base_nums[k % len(base_nums)] for _ in range(arity)) for k in range(4)
+    ]
     num_tuples: list[tuple[Any, ...]] = [
         tuple(base_nums[(i * strides[j % 4] + j * 2) % len(base_nums)] for j in range(arity))
         for i in range(16)
-    ] + [
+    ] + equal_tuples + [
         tuple(float(base_nums[(i * strides[(j + 1) % 4] + j * 3) % len(base_nums)]) * 0.5 for j in range(arity))
         for i in range(10)
     ]
@@ -1265,7 +1293,11 @@ class CompoundingConceptLibrary:
     def concepts(self) -> list[ConceptEntry]:
         if not self._can_read():
             return []
-        return sorted(self._concepts.values(), key=lambda c: (-c.log_prior, -c.mdl_gain_bytes, c.concept_id))
+        # Retired concepts are NOT offered to new searches. `callable_map()` still resolves them,
+        # so bodies already built from a retired concept keep working -- retirement removes an
+        # option from future search, it does not rewrite the past.
+        live = [c for c in self._concepts.values() if not c.retired]
+        return sorted(live, key=lambda c: (-c.log_prior, -c.mdl_gain_bytes, c.concept_id))
 
     def admit_verified_concept(self, entry: ConceptEntry) -> bool:
         """Admit a verified expression/algorithmic concept into `G_t` (organ-graph sleep bridge)."""
@@ -1319,7 +1351,15 @@ class CompoundingConceptLibrary:
                 cmap[cid] = _make_expr_fn(entry, self._compiled_asts[cid])
         return cmap
 
-    def record_concept_outcome(self, concept_id: str, *, helped: bool) -> None:
+    def record_concept_outcome(self, concept_id: str, *, helped: bool | None) -> None:
+        """Record what happened when a concept was used.
+
+        `helped=None` means the concept was USED but nothing has been verified. This is the case
+        the synthesizer was previously mislabelling as `helped=True`: it credited a concept at the
+        moment a body mentioning it was emitted, before anyone could know whether the body was
+        right. Measured 2026-11-04: a concept used only inside WRONG bodies reached
+        `verified_hits=1` and raised its own prior.
+        """
         if not self._can_write() or concept_id not in self._concepts:
             return
         cur = self._concepts[concept_id]
@@ -1332,23 +1372,48 @@ class CompoundingConceptLibrary:
             mdl_gain_bytes=cur.mdl_gain_bytes,
             corpus_sites=cur.corpus_sites,
             uses=cur.uses + 1,
-            verified_hits=cur.verified_hits + (1 if helped else 0),
+            verified_hits=cur.verified_hits + (1 if helped is True else 0),
+            disconfirmations=cur.disconfirmations + (1 if helped is False else 0),
             body_stmts=cur.body_stmts,
             callable_params=cur.callable_params,
         )
         self.save()
 
-    def levin_description_bits(self, concept_id: str) -> float:
-        """Empirical Solomonoff-Levin description length `-log2 P_G(c)` in bits."""
-        if not self._can_read() or concept_id not in self._concepts:
-            return 6.0
-        weights = {
-            cid: 1.0 + float(c.verified_hits) * 2.0 + float(c.uses) * 0.5 + float(c.corpus_sites) * 0.5
-            for cid, c in self._concepts.items()
-        }
-        total_w = sum(weights.values()) + 8.0  # reserve base grammar mass
-        p_c = weights[concept_id] / max(1e-9, total_w)
-        return round(-math.log2(max(1e-9, p_c)), 4)
+
+    def revive(self, concept_id: str) -> bool:
+        """Undo a retirement. Returns True if the concept was retired and is now live.
+
+        Retirement triggered by ONE refuted program is weaker evidence than a threshold's worth of
+        failures, so it must be reversible. An apparatus that can only escalate its own convictions
+        is the append-only-prior failure this library already fixed once; reintroducing it one level
+        up would be a poor joke.
+        """
+        if not self._can_write() or concept_id not in self._concepts:
+            return False
+        cur = self._concepts[concept_id]
+        if not cur.retired:
+            return False
+        self._concepts[concept_id] = ConceptEntry(
+            concept_id=cur.concept_id,
+            arity=cur.arity,
+            param_names=cur.param_names,
+            body_expr=cur.body_expr,
+            domain_kind=cur.domain_kind,
+            mdl_gain_bytes=cur.mdl_gain_bytes,
+            corpus_sites=cur.corpus_sites,
+            uses=cur.uses,
+            verified_hits=cur.verified_hits,
+            disconfirmations=0,
+            body_stmts=cur.body_stmts,
+            callable_params=cur.callable_params,
+        )
+        self.save()
+        return True
+
+    def retired_concept_ids(self) -> frozenset[str]:
+        """Concepts the record says to stop offering. Their callables still resolve."""
+        return frozenset(cid for cid, e in self._concepts.items() if e.retired)
+
 
     def _verify_higher_order_stmt_concept(
         self,
@@ -1515,11 +1580,16 @@ class CompoundingConceptLibrary:
             pts: list[tuple[Any, ...]] = []
             sigs1: list[Any] = []
             sigs2: list[Any] = []
+            undefined: list[tuple[tuple[Any, ...], str]] = []
             for row in grid:
                 try:
                     v1 = eval_pure_ast_expr(parsed, dict(zip(params, row)), extra_callables=cmap)
                     v2 = eval_pure_ast_expr(parsed, dict(zip(params, row)), extra_callables=cmap)
-                except Exception:
+                except Exception as exc:  # noqa: BLE001
+                    # NOT a skip. A concept that raises on an input in its own domain is not a
+                    # total building block: any program built from it can die there. This `continue`
+                    # was the whole defect measured on 2026-11-04 (2/2 admitted concepts partial).
+                    undefined.append((tuple(row), type(exc).__name__))
                     continue
                 s1 = _freeze_output(v1)
                 s2 = _freeze_output(v2)
@@ -1529,6 +1599,10 @@ class CompoundingConceptLibrary:
                 sigs1.append(s1)
                 sigs2.append(s2)
             if len(pts) >= 4 and len(set(sigs1)) >= 2 and sigs1 == sigs2:
+                if undefined:
+                    # Would have qualified, but is partial. Report the domain it fails on rather
+                    # than silently certifying the subdomain where it happens to survive.
+                    return False, "PARTIAL_DOMAIN:%s:%s" % (dom_kind, undefined[0][1])
                 chosen_domain = dom_kind
                 valid_probes = pts
                 baseline_sigs = sigs1

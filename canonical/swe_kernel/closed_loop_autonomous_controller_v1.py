@@ -69,6 +69,14 @@ _HONEST_REFUSAL_CLASSES: frozenset[str] = frozenset(
         "REQUEST_INVALID",
         "COMPOSITION_EXECUTION_OUTCOME_UNKNOWN",
         "COMPOSED_GOAL_NOT_VERIFIED",
+        # A crossfile request whose prose/paths the grammar did not consume is a REAL answer to
+        # a real defect in the request: the goal named files it does not bind. Measured
+        # 2026-11-03: without this token the refusal was replaced by the generic execution
+        # boundary status, because an unrecognised refusal is treated as "serve it by acting".
+        # The effect was that `test_extra_goal_requirements_refuse_before_execution` -- a test
+        # whose entire point is that the refusal is PRECISE -- read the wrong failure class, and
+        # the door lost the reason it had already computed.
+        "CROSSFILE_TASK_UNBOUND",
         computer_boundary.FAILURE_CLASS,
     }
 )

@@ -1,0 +1,2441 @@
+{
+ "schema": "PINNED_INVARIANT_DRIFT_V1",
+ "authority": "NONE -- INVENTORY OF STALE PINS, NOT A DECISION",
+ "how_to_read": [
+  "satisfied_if_it_identifies_this_module=False on a `sha` pin means THIS module's own blob moved after the pin was written.",
+  "Some pins identify a DIFFERENT file (the name says which); those read False here by construction and are not evidence of drift. Check the name before acting.",
+  "A pin with tests_referencing_module>0 and satisfied=False is a live red clock."
+ ],
+ "rows": [
+  {
+   "module": "canonical/runtime/aa_briefcase_current_epoch_result_bridge_v2.py",
+   "pin": "EXPECTED_BENCHMARK",
+   "kind": "string",
+   "pinned": "AA-Briefcase v1.1",
+   "current_blob_sha": "50c85c96bc0a6a73354349f05421572274d21cf5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 8,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_aa_briefcase_current_epoch_result_bridge_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_current_epoch_result_bridge_v2.py",
+   "pin": "EXPECTED_MODEL",
+   "kind": "string",
+   "pinned": "Claude Opus 5.5 (Max, Default Fallback)",
+   "current_blob_sha": "50c85c96bc0a6a73354349f05421572274d21cf5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 9,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_aa_briefcase_current_epoch_result_bridge_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_current_epoch_result_bridge_v2.py",
+   "pin": "EXPECTED_UNIT",
+   "kind": "string",
+   "pinned": "Elo",
+   "current_blob_sha": "50c85c96bc0a6a73354349f05421572274d21cf5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 10,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_aa_briefcase_current_epoch_result_bridge_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_public_interface_outcome_superdomain_v1.py",
+   "pin": "EXPECTED_PUBLIC_CONTRACT_PATH",
+   "kind": "string",
+   "pinned": "canonical/evidence/AA_BRIEFCASE_PUBLIC_INTERFACE_CONTRACT_20261011_V1.json",
+   "current_blob_sha": "5369c1b03310a3c74095c60f5607c754dc5c403c",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 7,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_public_interface_outcome_superdomain_v1.py",
+   "pin": "EXPECTED_PUBLIC_CONTRACT_BLOB",
+   "kind": "sha",
+   "pinned": "32b44233529221ac6aa21132782690a1fbf0f748",
+   "current_blob_sha": "5369c1b03310a3c74095c60f5607c754dc5c403c",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 10,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+   "pin": "EXPECTED_TESSERACT_VERSION",
+   "kind": "string",
+   "pinned": "5.3.4",
+   "current_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 15,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_image_ocr_tesseract.py",
+    "canonical/tests/test_image_ocr_tesseract_positioned.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+   "pin": "EXPECTED_ENG_MODEL_SHA256",
+   "kind": "string",
+   "pinned": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+   "current_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 22,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_image_ocr_tesseract.py",
+    "canonical/tests/test_image_ocr_tesseract_positioned.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/brain_witness_normalization_verifier_v3.py",
+   "pin": "EXPECTED_SCHEMA",
+   "kind": "string",
+   "pinned": "PROJECT_BRAIN_OPUS55_BRAIN_WITNESS_NORMALIZATION_V3",
+   "current_blob_sha": "c697cd912e59d837de52d8547850314ed83d1106",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 5,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_brain_witness_normalization_v3.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/composition_acceptance_boundary_firewall_v1.py",
+   "pin": "REQUIRED_RUNTIME_SCOPE",
+   "kind": "string",
+   "pinned": "DETERMINISTIC_CAPABILITY_GRAPH_DECLARED_CROSS_CAPABILITY_STATE",
+   "current_blob_sha": "49d565acb66a3893c129add6fdca2b28b0315d11",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 14,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_composition_acceptance_boundary_firewall_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r2_professional_r12_semantic_mission_soundness_verify_v1.py",
+   "pin": "EXPECTED_MISSION_AXIOM",
+   "kind": "string",
+   "pinned": "FAIL_CLOSED_NO_PROGRESS_CREDIT_WITHOUT_SOUND_VERIFICATION",
+   "current_blob_sha": "dd541805a06a4cc158af36967206d102ce5014f7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 80,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_coverage_cc_r2_professional_r12_semantic_mission_soundness_verify_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/coverage_claim_scope_guard_v2.py",
+   "pin": "EXPECTED_REAL_OBJECTIVE",
+   "kind": "string",
+   "pinned": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+   "current_blob_sha": "f28a25ad29cec75fd76f50754ce9a36618583c8d",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 14,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_coverage_claim_scope_guard_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/escape_progress_shared_gap_audit_v6.py",
+   "pin": "EXPECTED_RECLASS_BLOB",
+   "kind": "sha",
+   "pinned": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+   "current_blob_sha": "67635dc07213d82e94ea99661d575fcfd5932ac7",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 33,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_escape_progress_shared_gap_audit_v6.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/escape_progress_shared_gap_audit_v6.py",
+   "pin": "EXPECTED_RECLASS_VERIFY_BLOB",
+   "kind": "sha",
+   "pinned": "1be936fc211b06baa480f2b747cb933ca2cd6dcf",
+   "current_blob_sha": "67635dc07213d82e94ea99661d575fcfd5932ac7",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 34,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_escape_progress_shared_gap_audit_v6.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py",
+   "pin": "EXPECTED_CLASS_COUNT",
+   "kind": "count",
+   "pinned": 253,
+   "current_blob_sha": "1ff1143aa2d659db76020b22c6f30313d81f23e3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 39,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_fibo_q2_2026_bounded_finance_authority_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py",
+   "pin": "EXPECTED_EDGE_COUNT",
+   "kind": "count",
+   "pinned": 177,
+   "current_blob_sha": "1ff1143aa2d659db76020b22c6f30313d81f23e3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 40,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_fibo_q2_2026_bounded_finance_authority_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
+   "pin": "EXPECTED_SOURCE_FILE_COUNT",
+   "kind": "count",
+   "pinned": 295,
+   "current_blob_sha": "4d94a315ac4ba8e728ff15500a114ee8134b5bf3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 47,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_fibo_q2_2026_full_release_authority_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
+   "pin": "EXPECTED_CLASS_COUNT",
+   "kind": "count",
+   "pinned": 2671,
+   "current_blob_sha": "4d94a315ac4ba8e728ff15500a114ee8134b5bf3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 48,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_fibo_q2_2026_full_release_authority_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
+   "pin": "EXPECTED_EDGE_COUNT",
+   "kind": "count",
+   "pinned": 3443,
+   "current_blob_sha": "4d94a315ac4ba8e728ff15500a114ee8134b5bf3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 49,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_fibo_q2_2026_full_release_authority_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
+   "pin": "EXPECTED_AMBIGUOUS_EXACT_LABEL_COUNT",
+   "kind": "count",
+   "pinned": 5,
+   "current_blob_sha": "4d94a315ac4ba8e728ff15500a114ee8134b5bf3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 50,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_fibo_q2_2026_full_release_authority_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_bounded_concept_registry_v1.py",
+   "pin": "EXPECTED_AUTHORITY_GIT_BLOB_SHA",
+   "kind": "sha",
+   "pinned": "7530b3717eda4429a7903bf5d317384d727b8de7",
+   "current_blob_sha": "53910611bfee595a6579630f975b3ce816bf23e9",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 26,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_finance_bounded_concept_registry_fabric_v1.py",
+    "canonical/tests/test_finance_bounded_concept_registry_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_bounded_concept_registry_verify_v1.py",
+   "pin": "EXPECTED_AUTHORITY_GIT_BLOB_SHA",
+   "kind": "sha",
+   "pinned": "7530b3717eda4429a7903bf5d317384d727b8de7",
+   "current_blob_sha": "2da499510a6344b90a93cc65855dc3f480c3f809",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 20,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_finance_bounded_concept_registry_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+   "pin": "EXPECTED_BENCHMARK",
+   "kind": "string",
+   "pinned": "Artificial Analysis Finance & Accounting Index",
+   "current_blob_sha": "d9a75f82e41b4b70052cf0974caacf7faef82e07",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 15,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_finance_index_direct_result_bridge_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+   "pin": "EXPECTED_BENCHMARK_VERSION",
+   "kind": "string",
+   "pinned": "1.1",
+   "current_blob_sha": "d9a75f82e41b4b70052cf0974caacf7faef82e07",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 16,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_finance_index_direct_result_bridge_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+   "pin": "EXPECTED_EVALUATOR",
+   "kind": "string",
+   "pinned": "Artificial Analysis",
+   "current_blob_sha": "d9a75f82e41b4b70052cf0974caacf7faef82e07",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 17,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_finance_index_direct_result_bridge_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+   "pin": "EXPECTED_UNIT",
+   "kind": "string",
+   "pinned": "index_points",
+   "current_blob_sha": "d9a75f82e41b4b70052cf0974caacf7faef82e07",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 18,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_finance_index_direct_result_bridge_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+   "pin": "EXPECTED_SCORE_SCALE",
+   "kind": "string",
+   "pinned": "RAW_CAPABILITY_INDEX_POINTS",
+   "current_blob_sha": "d9a75f82e41b4b70052cf0974caacf7faef82e07",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 19,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_finance_index_direct_result_bridge_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/gdpval_evaluator_facing_quotient_u_route_v1.py",
+   "pin": "EXPECTED_TASKS",
+   "kind": "count",
+   "pinned": 220,
+   "current_blob_sha": "713ed6d55071bfdf6ec2c50f1f0b05a4ab342426",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 9,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_gdpval_evaluator_facing_quotient_u_route_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/gdpval_necessary_preference_certificate_v1.py",
+   "pin": "EXPECTED_TASKS",
+   "kind": "count",
+   "pinned": 220,
+   "current_blob_sha": "1d8a9c83506929662d6e095e9c708d48e5662702",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 8,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_gdpval_necessary_preference_certificate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/gdpval_semantic_complement_localizer_v2.py",
+   "pin": "EXPECTED_TASKS",
+   "kind": "count",
+   "pinned": 220,
+   "current_blob_sha": "347607991ccd68c9a27b0afcb56a271f45ed0326",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 33,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_frozen_active_legacy15_v1.py",
+   "pin": "EXPECTED_COMMITMENT",
+   "kind": "string",
+   "pinned": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+   "current_blob_sha": "34440ee69322e9d519cbe656cb03c55683a8b9c6",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 8,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_frozen_active_legacy15_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+   "pin": "EXPECTED_ENVELOPE_FAMILIES",
+   "kind": "count",
+   "pinned": 19,
+   "current_blob_sha": "8259959828398e7b1415e305fd9bbd8ca308dfc5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_frozen_schema19_envelope_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+   "pin": "EXPECTED_COMPATIBLE_TOTAL",
+   "kind": "count",
+   "pinned": 3108,
+   "current_blob_sha": "8259959828398e7b1415e305fd9bbd8ca308dfc5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 25,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_frozen_schema19_envelope_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+   "pin": "EXPECTED_ACTIVE15_TOTAL",
+   "kind": "count",
+   "pinned": 928,
+   "current_blob_sha": "8259959828398e7b1415e305fd9bbd8ca308dfc5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 26,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_frozen_schema19_envelope_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+   "pin": "EXPECTED_EXTRA_BEARING_TOTAL",
+   "kind": "count",
+   "pinned": 2180,
+   "current_blob_sha": "8259959828398e7b1415e305fd9bbd8ca308dfc5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 27,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_frozen_schema19_envelope_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+   "pin": "EXPECTED_EXTRA_SIGNATURES",
+   "kind": "count",
+   "pinned": 6,
+   "current_blob_sha": "8259959828398e7b1415e305fd9bbd8ca308dfc5",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 28,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_frozen_schema19_envelope_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_if_public_description_inverter_v1.py",
+   "pin": "PINNED_IFBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+   "current_blob_sha": "1c19a86be900b528b816e890364b370e94e81e62",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 21,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_if_public_description_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_if_public_description_inverter_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "7f167018e0c5472b04e13cbf847e5988c04ecb11",
+   "current_blob_sha": "1c19a86be900b528b816e890364b370e94e81e62",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 22,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_if_public_description_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_if_public_description_inverter_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "221b70a015715f63677735f341c7c86484c03073",
+   "current_blob_sha": "1c19a86be900b528b816e890364b370e94e81e62",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 23,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_if_public_description_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_if_public_zero_spend_carrier_v1.py",
+   "pin": "EXPECTED_REPOSITORY",
+   "kind": "string",
+   "pinned": "moxnixmdj/verification-capsule-runner",
+   "current_blob_sha": "ef658254e1cf285ff882a239e4f57026cf267a6f",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 5,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_if_public_zero_spend_carrier_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 41,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 42,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_LANGDETECT_VERSION",
+   "kind": "string",
+   "pinned": "1.0.9",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 43,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_LANGDETECT_COMMIT",
+   "kind": "sha",
+   "pinned": "5071871742170034557c0e6ec8d6e410f3d9652f",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 44,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_DETECTOR_BLOB",
+   "kind": "sha",
+   "pinned": "cc831a0e7530d49fa9b544c9b779ba075ffdbe5c",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 45,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_DETECTOR_FACTORY_BLOB",
+   "kind": "sha",
+   "pinned": "aa5a7b24b46b460d6faece5e4afcd23f7178a578",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 46,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_NGRAM_BLOB",
+   "kind": "sha",
+   "pinned": "ee82e38f73aadbf118ec03a6342c328d808539d2",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 47,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+   "pin": "PINNED_UNICODE_BLOCK_BLOB",
+   "kind": "sha",
+   "pinned": "f0741890f03e7ac8811ecd568e5aa8e17919d0e2",
+   "current_blob_sha": "f07c889dc84961a17815090710d8bbf2c331ff12",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 48,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+   "pin": "EXPECTED_PRIOR_KERNELS",
+   "kind": "count",
+   "pinned": 64,
+   "current_blob_sha": "10a1fd2d3edd327dcdf35022053a53e2fb694134",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 74,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_failopen_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+   "pin": "EXPECTED_PRIOR_LANGUAGE_SENSITIVE_KERNELS",
+   "kind": "count",
+   "pinned": 31,
+   "current_blob_sha": "10a1fd2d3edd327dcdf35022053a53e2fb694134",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 75,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_failopen_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+   "pin": "EXPECTED_LANGUAGE_RESIDUAL_KERNELS",
+   "kind": "count",
+   "pinned": 8,
+   "current_blob_sha": "10a1fd2d3edd327dcdf35022053a53e2fb694134",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 76,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_failopen_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+   "pin": "EXPECTED_FAILOPEN_KERNELS",
+   "kind": "count",
+   "pinned": 33,
+   "current_blob_sha": "10a1fd2d3edd327dcdf35022053a53e2fb694134",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 77,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_langdetect_failopen_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_composition_partition_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "b817b4f63f4e98c2705f221c7a4abd8e571f9d80",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 19,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_composition_partition_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_composition_partition_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "b817b4f63f4e98c2705f221c7a4abd8e571f9d80",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 20,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_composition_partition_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 30,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_contract_composer_v2.py",
+    "canonical/tests/test_livebench_legacy15_pointwise_optimal_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 31,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_contract_composer_v2.py",
+    "canonical/tests/test_livebench_legacy15_pointwise_optimal_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 32,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_contract_composer_v2.py",
+    "canonical/tests/test_livebench_legacy15_pointwise_optimal_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "8dbdd4c1d62c2c7220e311ddeddd3227f14a5614",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 20,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_exact_postvalidator_v1.py",
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "8dbdd4c1d62c2c7220e311ddeddd3227f14a5614",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 21,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_exact_postvalidator_v1.py",
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "8dbdd4c1d62c2c7220e311ddeddd3227f14a5614",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 22,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_exact_postvalidator_v1.py",
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+   "pin": "PINNED_UTIL_BLOB",
+   "kind": "sha",
+   "pinned": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+   "current_blob_sha": "8dbdd4c1d62c2c7220e311ddeddd3227f14a5614",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_exact_postvalidator_v1.py",
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+   "pin": "PINNED_EVALUATION_MAIN_BLOB",
+   "kind": "sha",
+   "pinned": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+   "current_blob_sha": "8dbdd4c1d62c2c7220e311ddeddd3227f14a5614",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 24,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_exact_postvalidator_v1.py",
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_hermetic_nltk_binding_v1.py",
+   "pin": "PINNED_NLTK_VERSION",
+   "kind": "string",
+   "pinned": "3.10.3",
+   "current_blob_sha": "fd56a8cceba2f6d6eb864b11c3119f184278de0d",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 26,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_hermetic_nltk_binding_v1.py",
+   "pin": "PINNED_NLTK_WHEEL_SHA256",
+   "kind": "string",
+   "pinned": "ff9598a8e20518ee0d557745890cc4435b9578489e2dcbc69c4f81fa060caf7c",
+   "current_blob_sha": "fd56a8cceba2f6d6eb864b11c3119f184278de0d",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 27,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_hermetic_nltk_binding_v1.py",
+   "pin": "PINNED_NLTK_DATA_COMMIT",
+   "kind": "sha",
+   "pinned": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a",
+   "current_blob_sha": "fd56a8cceba2f6d6eb864b11c3119f184278de0d",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 28,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_proofgrade_runtime_binding_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_lexical_collision_signatures_v2.py",
+   "pin": "PINNED_UTIL_BLOB",
+   "kind": "sha",
+   "pinned": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+   "current_blob_sha": "c2a35033e338c753f1ae371fce33e4aa03ea2e59",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_lexical_collision_signatures_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_lexical_collision_signatures_v2.py",
+   "pin": "EXPECTED_WORD_COUNT",
+   "kind": "count",
+   "pinned": 1525,
+   "current_blob_sha": "c2a35033e338c753f1ae371fce33e4aa03ea2e59",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 24,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_lexical_collision_signatures_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 43,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_lexical_slot_quotient_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_UTIL_BLOB",
+   "kind": "sha",
+   "pinned": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+   "current_blob_sha": "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 44,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_lexical_slot_quotient_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+   "pin": "PINNED_GENERATOR_COMMIT",
+   "kind": "sha",
+   "pinned": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+   "current_blob_sha": "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 45,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_lexical_slot_quotient_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+   "pin": "PINNED_GENERATOR_BLOB",
+   "kind": "sha",
+   "pinned": "6ff390d6885cf90f88d9d36959735cb327613edc",
+   "current_blob_sha": "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 46,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_lexical_slot_quotient_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 21,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 22,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 23,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+   "pin": "PINNED_EVALUATION_MAIN_BLOB",
+   "kind": "sha",
+   "pinned": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+   "current_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 24,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+   "pin": "PINNED_NLTK_VERSION",
+   "kind": "string",
+   "pinned": "3.10.3",
+   "current_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 25,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+   "pin": "PINNED_NLTK_PUNKT_SOURCE_BLOB",
+   "kind": "sha",
+   "pinned": "48496d2448c009221d2452c8e928699027b20ebe",
+   "current_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 26,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_visible_prompt_compiler_v1.py",
+   "pin": "PINNED_GENERATOR_BLOB",
+   "kind": "sha",
+   "pinned": "6ff390d6885cf90f88d9d36959735cb327613edc",
+   "current_blob_sha": "6e4ae278c4ba81cf0fb589d4e948384d1bd61ae2",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 10,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_visible_prompt_compiler_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_visible_prompt_compiler_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "6e4ae278c4ba81cf0fb589d4e948384d1bd61ae2",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 11,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy15_visible_prompt_compiler_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "a2bae437d1efe418f38f453e974b5208f2a06d6c",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 15,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy25_prompt_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "a2bae437d1efe418f38f453e974b5208f2a06d6c",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 16,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy25_prompt_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "a2bae437d1efe418f38f453e974b5208f2a06d6c",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 17,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy25_prompt_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+   "pin": "PINNED_UTIL_BLOB",
+   "kind": "sha",
+   "pinned": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+   "current_blob_sha": "a2bae437d1efe418f38f453e974b5208f2a06d6c",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 18,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy25_prompt_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py",
+   "pin": "EXPECTED_ACTIVE_ID_COMMITMENT",
+   "kind": "string",
+   "pinned": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+   "current_blob_sha": "bc75cf315f5ced79927a107cd50e6887cb3a1acc",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 21,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_composition_shape_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py",
+   "pin": "EXPECTED_TOTAL",
+   "kind": "count",
+   "pinned": 928,
+   "current_blob_sha": "bc75cf315f5ced79927a107cd50e6887cb3a1acc",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 88,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_composition_shape_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "ba0f5e58abfcd3d0db356468b97d1c6c21c2920f",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 21,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_visible_constraint_compiler_v3.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py",
+   "pin": "PINNED_EVALUATOR_SEMANTICS",
+   "kind": "string",
+   "pinned": "FOR_EACH_INDEX_IN_instruction_id_list__BUILD_CHECKER_WITH_kwargs[index]",
+   "current_blob_sha": "ba0f5e58abfcd3d0db356468b97d1c6c21c2920f",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 22,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_visible_constraint_compiler_v3.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_visible_description_inverter_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "56e217c3190be33529a3e876b32d9ec96064fec7",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 16,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_visible_description_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_visible_description_inverter_v1.py",
+   "pin": "PINNED_LEGACY_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "56e217c3190be33529a3e876b32d9ec96064fec7",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 17,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_visible_description_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy_visible_description_inverter_v1.py",
+   "pin": "PINNED_LEGACY_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "56e217c3190be33529a3e876b32d9ec96064fec7",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 18,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_legacy_visible_description_inverter_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py",
+   "pin": "EXPECTED_ALLOWED_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 19,
+   "current_blob_sha": "3ddf71ec3ab9c5b43711ac025784eeae335386a3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 27,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_release_unconditional_schema_envelope_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py",
+   "pin": "EXPECTED_COMPATIBLE_TOTAL",
+   "kind": "count",
+   "pinned": 3108,
+   "current_blob_sha": "3ddf71ec3ab9c5b43711ac025784eeae335386a3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 29,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_release_unconditional_schema_envelope_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_shadow_point_of_use_preflight_v1.py",
+   "pin": "EXPECTED_PLAN_SHA256",
+   "kind": "string",
+   "pinned": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31",
+   "current_blob_sha": "4c12fa8c2a7dcf549a991da470ab50b7faaac399",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 19,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_shadow_atomic_claim_transaction_v1.py",
+    "canonical/tests/test_livebench_shadow_point_of_use_preflight_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_archetypes_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 17,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 4,
+   "test_files": [
+    "canonical/tests/test_livebench_active15_plus_one_singleton_regression_v1.py",
+    "canonical/tests/test_livebench_release_schema_scope_bridge_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py",
+    "canonical/tests/test_livebench_union25_archetypes_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_archetypes_v1.py",
+   "pin": "EXPECTED_NONSELF_CONFLICT_PAIR_COUNT",
+   "kind": "count",
+   "pinned": 97,
+   "current_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 94,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 4,
+   "test_files": [
+    "canonical/tests/test_livebench_active15_plus_one_singleton_regression_v1.py",
+    "canonical/tests/test_livebench_release_schema_scope_bridge_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py",
+    "canonical/tests/test_livebench_union25_archetypes_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_archetypes_v1.py",
+   "pin": "EXPECTED_COMPATIBLE_TOTAL",
+   "kind": "count",
+   "pinned": 14559,
+   "current_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 96,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 4,
+   "test_files": [
+    "canonical/tests/test_livebench_active15_plus_one_singleton_regression_v1.py",
+    "canonical/tests/test_livebench_release_schema_scope_bridge_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py",
+    "canonical/tests/test_livebench_union25_archetypes_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_archetypes_v1.py",
+   "pin": "EXPECTED_ACTIVE15_TOTAL",
+   "kind": "count",
+   "pinned": 928,
+   "current_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 97,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 4,
+   "test_files": [
+    "canonical/tests/test_livebench_active15_plus_one_singleton_regression_v1.py",
+    "canonical/tests/test_livebench_release_schema_scope_bridge_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py",
+    "canonical/tests/test_livebench_union25_archetypes_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_archetypes_v1.py",
+   "pin": "EXPECTED_EXTRA_BEARING_TOTAL",
+   "kind": "count",
+   "pinned": 13631,
+   "current_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 98,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 4,
+   "test_files": [
+    "canonical/tests/test_livebench_active15_plus_one_singleton_regression_v1.py",
+    "canonical/tests/test_livebench_release_schema_scope_bridge_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py",
+    "canonical/tests/test_livebench_union25_archetypes_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_archetypes_v1.py",
+   "pin": "EXPECTED_DISTINCT_EXTRA_SIGNATURES",
+   "kind": "count",
+   "pinned": 156,
+   "current_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 99,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 4,
+   "test_files": [
+    "canonical/tests/test_livebench_active15_plus_one_singleton_regression_v1.py",
+    "canonical/tests/test_livebench_release_schema_scope_bridge_v1.py",
+    "canonical/tests/test_livebench_schema19_pointwise_candidate_v1.py",
+    "canonical/tests/test_livebench_union25_archetypes_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "2f33f00d2dfdba82597f7d273898c3da4f920b3a",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 28,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_language_exception_carrier_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "2f33f00d2dfdba82597f7d273898c3da4f920b3a",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 29,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_language_exception_carrier_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py",
+   "pin": "PINNED_LANGDETECT_VERSION",
+   "kind": "string",
+   "pinned": "1.0.9",
+   "current_blob_sha": "2f33f00d2dfdba82597f7d273898c3da4f920b3a",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 30,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_language_exception_carrier_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "4e0c036e18265ad89206ab9c47ba8420ecee6069",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 17,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_mandatory_footprint_v1.py",
+    "canonical/tests/test_livebench_union25_mandatory_footprint_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "4e0c036e18265ad89206ab9c47ba8420ecee6069",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 18,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_mandatory_footprint_v1.py",
+    "canonical/tests/test_livebench_union25_mandatory_footprint_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+   "pin": "PINNED_LIVEBENCH_COMMIT",
+   "kind": "sha",
+   "pinned": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+   "current_blob_sha": "0f7f22e3ac694d1181e7956ed6552cee376c9d21",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 14,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_mandatory_loss_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+   "pin": "PINNED_INSTRUCTIONS_BLOB",
+   "kind": "sha",
+   "pinned": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+   "current_blob_sha": "0f7f22e3ac694d1181e7956ed6552cee376c9d21",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 15,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_mandatory_loss_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+   "pin": "PINNED_REGISTRY_BLOB",
+   "kind": "sha",
+   "pinned": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+   "current_blob_sha": "0f7f22e3ac694d1181e7956ed6552cee376c9d21",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 16,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_mandatory_loss_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+   "pin": "EXPECTED_STRUCTURAL_SIGNATURES",
+   "kind": "count",
+   "pinned": 156,
+   "current_blob_sha": "fa44695e07d9b520ddfe91836f8e3b75a7d20ba7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 64,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_semantic_kernel_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+   "pin": "EXPECTED_CONSERVATIVE_KERNELS",
+   "kind": "count",
+   "pinned": 64,
+   "current_blob_sha": "fa44695e07d9b520ddfe91836f8e3b75a7d20ba7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 65,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_semantic_kernel_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+   "pin": "EXPECTED_CONSERVATIVE_LANGUAGE_KERNELS",
+   "kind": "count",
+   "pinned": 31,
+   "current_blob_sha": "fa44695e07d9b520ddfe91836f8e3b75a7d20ba7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 66,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_semantic_kernel_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+   "pin": "EXPECTED_CONSERVATIVE_NONLANGUAGE_HARD_KERNELS",
+   "kind": "count",
+   "pinned": 31,
+   "current_blob_sha": "fa44695e07d9b520ddfe91836f8e3b75a7d20ba7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 67,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_semantic_kernel_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+   "pin": "EXPECTED_LANGUAGE_NEUTRAL_KERNELS",
+   "kind": "count",
+   "pinned": 41,
+   "current_blob_sha": "fa44695e07d9b520ddfe91836f8e3b75a7d20ba7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 68,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_semantic_kernel_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+   "pin": "EXPECTED_LANGUAGE_NEUTRAL_HARD_KERNELS",
+   "kind": "count",
+   "pinned": 39,
+   "current_blob_sha": "fa44695e07d9b520ddfe91836f8e3b75a7d20ba7",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 69,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_livebench_union25_semantic_kernel_reduction_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/matched_coding_debug_tool_discovery_fresh_v1.py",
+   "pin": "REQUIRED_CAP",
+   "kind": "string",
+   "pinned": "python_program_repair",
+   "current_blob_sha": "d401dd3add197505ab21be92e1925cf92d371a74",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 22,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_matched_coding_debug_tool_discovery_fresh_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/matched_coding_debug_tool_discovery_v1.py",
+   "pin": "REQUIRED_CAP",
+   "kind": "string",
+   "pinned": "python_program_repair",
+   "current_blob_sha": "396d270a41939321194506b1f4d47a6b146a335b",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 21,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_matched_coding_debug_tool_discovery_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/opus55_acceptance_calibration_reducer_v1.py",
+   "pin": "EXPECTED_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 19,
+   "current_blob_sha": "57f593f4e583f329015d720dfde7e52811107abf",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 14,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_opus55_acceptance_calibration_reducer_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py",
+   "pin": "EXPECTED_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 19,
+   "current_blob_sha": "73b0b27644e0fa0d89ff8fbdb51005c20eae3632",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 17,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/opus55_acceptance_residual_compiler_v2.py",
+   "pin": "EXPECTED_RESIDUAL_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 17,
+   "current_blob_sha": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 17,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v2.py",
+    "canonical/tests/test_terminal_ceiling_witness_residual_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/opus55_acceptance_residual_compiler_v3.py",
+   "pin": "EXPECTED_RESIDUAL_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 17,
+   "current_blob_sha": "6eaea32aedc88591091000557a15189eff2ab911",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 17,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v3.py",
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v4_projection.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/p1_shared_failure_semantics_batch_preflight_v1.py",
+   "pin": "EXPECTED_FREEZE_BLOB",
+   "kind": "sha",
+   "pinned": "6a4b606a759d5479bb5ddbdf29426b1a1808b007",
+   "current_blob_sha": "13c33adda55f58d1eac913e63daa7f6ae1eb6a63",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 24,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_p1_shared_failure_semantics_batch_preflight_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/p1_terminal_execution_scope_audit_v1.py",
+   "pin": "EXPECTED_SUITE_BLOB",
+   "kind": "sha",
+   "pinned": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+   "current_blob_sha": "6793cc98fa8ef767cb6ec8fdd33d8e7d50b2833d",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 26,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_p1_composite_proof_role_reconciliation_v1.py",
+    "canonical/tests/test_p1_terminal_execution_scope_audit_v1.py"
+   ],
+   "measured_drift_failures": 1
+  },
+  {
+   "module": "canonical/runtime/p1_trajectory_t0_t2_multiplex_preflight.py",
+   "pin": "REQUIRED_ROUTE",
+   "kind": "string",
+   "pinned": "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+   "current_blob_sha": "d2f8135b62cb6593f3fb1b1ee9d8f0b92ad31f46",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 9,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_p1_trajectory_t0_t2_multiplex_preflight.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/p2_professional_quality_t1_multiplex_preflight.py",
+   "pin": "REQUIRED_ROUTE",
+   "kind": "string",
+   "pinned": "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+   "current_blob_sha": "d5a3d5990c8573f73d1c68952d2d59a14f4499d2",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 12,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_p2_professional_quality_t1_multiplex_preflight.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/p3_synthesis_t1_t3_multiplex_preflight.py",
+   "pin": "REQUIRED_ROUTE",
+   "kind": "string",
+   "pinned": "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF",
+   "current_blob_sha": "37e67adc87c000f578618eda5c754a7843d4845b",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 9,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_p3_synthesis_t1_t3_multiplex_preflight.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/post_delegation_frontier_recompile_v1.py",
+   "pin": "EXPECTED_REQUIREMENT",
+   "kind": "string",
+   "pinned": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL",
+   "current_blob_sha": "47adb1b3c91fde4972563a58b466c22eba0278a1",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 17,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_post_delegation_frontier_recompile_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/postwave_global_ownership_reducer_v1.py",
+   "pin": "REQUIRED_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 19,
+   "current_blob_sha": "10da9e4209051c11c57aab7f21acb032974f9477",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 19,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_postwave_global_ownership_reducer_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_quality_r10_constitution_cover_v1.py",
+   "pin": "EXPECTED_ROOT_CONTRACT",
+   "kind": "string",
+   "pinned": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known.",
+   "current_blob_sha": "20f9274af1feace53590e41a10b57869f42f27ce",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 24,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_quality_r10_constitution_cover_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py",
+   "pin": "EXPECTED_BINDING_BLOB",
+   "kind": "sha",
+   "pinned": "e702e0d0ea567db92869cfe0be7ca9745d94c8cc",
+   "current_blob_sha": "be8c5b2d196df0cd7da360a86f9f4042bfded3ac",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 13,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v2.py",
+   "pin": "EXPECTED_BINDING_BLOB",
+   "kind": "sha",
+   "pinned": "710a8ad78dffb4910a50b3b67c56b22e1e2db224",
+   "current_blob_sha": "306e468d246ab7bb8de9193e4c6f6dcb37dec4bc",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 13,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py",
+   "pin": "EXPECTED_BINDING_BLOB",
+   "kind": "sha",
+   "pinned": "25f02a605da31c8f9d2c6208b82597e85f00be87",
+   "current_blob_sha": "1d012414149ac2f937032a895904b4a36e4a03b5",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 13,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v3.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py",
+   "pin": "EXPECTED_BINDING_BLOB",
+   "kind": "sha",
+   "pinned": "4e29f1a01832158d9897f3c71c81e015b5e51b05",
+   "current_blob_sha": "7f59df92413cd3fd09e5e97aead1eee623a41d91",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 12,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v4.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py",
+   "pin": "EXPECTED_ACCEPTANCE",
+   "kind": "string",
+   "pinned": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+   "current_blob_sha": "1b2d3f94eabc79b8907636374a6d50cce03ac1c3",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 25,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_quality_semantic_shared_blocker_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_r12_semantic_stable_c1_v1.py",
+   "pin": "EXPECTED_ACCEPTANCE",
+   "kind": "string",
+   "pinned": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+   "current_blob_sha": "2ea9cd1967c45b6487318d800b3e1c07082618cc",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_r12_semantic_stable_c1_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_r12_semantic_stable_roots_v1.py",
+   "pin": "EXPECTED_R12_CLAIM_ID",
+   "kind": "string",
+   "pinned": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+   "current_blob_sha": "12aeb70f107e87ecc89eac3b7f58349127940f85",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 19,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_r12_semantic_stable_roots_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_r12_semantic_stable_roots_v1.py",
+   "pin": "EXPECTED_ACCEPTANCE",
+   "kind": "string",
+   "pinned": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+   "current_blob_sha": "12aeb70f107e87ecc89eac3b7f58349127940f85",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 21,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_r12_semantic_stable_roots_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_r12_semantic_stable_roots_v1.py",
+   "pin": "EXPECTED_QUANTIFICATION",
+   "kind": "string",
+   "pinned": "FOR_ALL_ADMISSIBLE_INPUTS_IN_VERIFIED_WHOLE_LEAF_SCOPE",
+   "current_blob_sha": "12aeb70f107e87ecc89eac3b7f58349127940f85",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 22,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_r12_semantic_stable_roots_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_r12_semantic_stable_roots_v1.py",
+   "pin": "EXPECTED_CORRECTNESS",
+   "kind": "string",
+   "pinned": "FAIL_CLOSED_NO_PROGRESS_CREDIT_WITHOUT_SOUND_VERIFICATION",
+   "current_blob_sha": "12aeb70f107e87ecc89eac3b7f58349127940f85",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_r12_semantic_stable_roots_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_identity_carrier_v1.py",
+   "pin": "EXPECTED_R12_CLAIM_ID",
+   "kind": "string",
+   "pinned": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+   "current_blob_sha": "3a8a27b6fdd0a397b83b94f2daaf185996e9ad62",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 37,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_semantic_identity_carrier_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_identity_carrier_v2.py",
+   "pin": "EXPECTED_R12_CLAIM_ID",
+   "kind": "string",
+   "pinned": "97ff74650749db87f378d5926ed820e004f3f792583c2c8455e51c3ccacbe7f7",
+   "current_blob_sha": "4065ecbd755a998315b47bae77802c172474817e",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 28,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_semantic_identity_carrier_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_identity_carrier_v3.py",
+   "pin": "EXPECTED_R12_CLAIM_ID",
+   "kind": "string",
+   "pinned": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+   "current_blob_sha": "a3d818c133bc91e6f417aa938c9afb44287ed8da",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 15,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_semantic_identity_carrier_v3.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_totality_claim_pack_v2.py",
+   "pin": "EXPECTED_SEMANTIC_COUNT",
+   "kind": "count",
+   "pinned": 12,
+   "current_blob_sha": "20fa4b310665f2b24a6385e7893f7794325b382f",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 32,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_semantic_totality_claim_pack_v2.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_v10_totality_compiler_v1.py",
+   "pin": "REQUIRED_ACCEPTANCE",
+   "kind": "string",
+   "pinned": "FOR_EVERY_ADMISSIBLE_INPUT__POSITIVE_SEMANTIC_AUTHORITY_ONLY_IF_DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_DECISION_RELEVANT_ROOT_RELEVANT_DEFEATERS_ARE_RESOLVED_OR_PROVED_DECISION_NULL_WITH_TYPED_EVIDENCE__OTHERWISE_FAIL_CLOSED_NONPOSITIVE_WITH_EXPLICIT_BLOCKING_DIAGNOSTIC__AND_POSITIVE_ROUTE_NONVACUOUS",
+   "current_blob_sha": "bcccbf8cdc769a5068567f99c81a00b3894e6752",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 31,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_professional_semantic_v10_totality_compiler_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
+   "pin": "EXPECTED_PUBLIC_ENTRYPOINT",
+   "kind": "string",
+   "pinned": "canonical.runtime.unified_cognitive_fabric_v1.run",
+   "current_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 27,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_r1_live_architecture_closure_gate_v1.py"
+   ],
+   "measured_drift_failures": 1
+  },
+  {
+   "module": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
+   "pin": "EXPECTED_SUBRUNTIME_ENTRYPOINT",
+   "kind": "string",
+   "pinned": "canonical.runtime.live_brain_runtime_v1.run",
+   "current_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 28,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_r1_live_architecture_closure_gate_v1.py"
+   ],
+   "measured_drift_failures": 1
+  },
+  {
+   "module": "canonical/runtime/r2_v45_residual_top_authority_verify_v1.py",
+   "pin": "EXPECTED_ROUTE_ID",
+   "kind": "string",
+   "pinned": "DIRECT_ADEQUACY::CROSS_DOCUMENT_RESIDUAL_EFFECT_FRONTIER_V1",
+   "current_blob_sha": "0e745cb5cf061023ed9ef4476b9e79df1ca56ee0",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_r2_v45_residual_top_authority_verify_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/r3_root1_adapter_gap_witness_v1.py",
+   "pin": "REQUIRED_PRIMITIVE",
+   "kind": "string",
+   "pinned": "R3_SUCCESS_VERIFICATION_FRONTIER_EXPANSION",
+   "current_blob_sha": "4f2a9a30da1835ba3b5bbf0578177f3c56090412",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 21,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 5,
+   "test_files": [
+    "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+    "canonical/tests/test_r3_deterministic_mode_guard_patch_author_v1.py",
+    "canonical/tests/test_r3_root1_adapter_gap_driver_v1.py",
+    "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py",
+    "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+   "pin": "EXPECTED_ASTRA_BLOB",
+   "kind": "sha",
+   "pinned": "0c613137b9c578c8afadb9482da08e2fc268deb7",
+   "current_blob_sha": "8ac7b8d2ea1e754763820d0bbf3575999d50b221",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 19,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_root3_astra_current_rebind_v1.py",
+    "canonical/tests/test_root3_child_process_channel_registry_v1.py"
+   ],
+   "measured_drift_failures": 3
+  },
+  {
+   "module": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+   "pin": "_ALLOWED_ASTRA_BLOBS",
+   "kind": "sha_set",
+   "pinned": 3,
+   "current_blob_sha": "8ac7b8d2ea1e754763820d0bbf3575999d50b221",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 20,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_root3_astra_current_rebind_v1.py",
+    "canonical/tests/test_root3_child_process_channel_registry_v1.py"
+   ],
+   "measured_drift_failures": 3
+  },
+  {
+   "module": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+   "pin": "EXPECTED_C1_VERIFY_BLOB",
+   "kind": "sha",
+   "pinned": "519f02995f6ff7cb344cecab1d4a9a5615e6b36e",
+   "current_blob_sha": "8ac7b8d2ea1e754763820d0bbf3575999d50b221",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 33,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_root3_astra_current_rebind_v1.py",
+    "canonical/tests/test_root3_child_process_channel_registry_v1.py"
+   ],
+   "measured_drift_failures": 3
+  },
+  {
+   "module": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+   "pin": "EXPECTED_SNAPSHOT_BLOB",
+   "kind": "sha",
+   "pinned": "426189ed3a8c37d3ecb515cc8f89ab31e927fd24",
+   "current_blob_sha": "8ac7b8d2ea1e754763820d0bbf3575999d50b221",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 35,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_root3_astra_current_rebind_v1.py",
+    "canonical/tests/test_root3_child_process_channel_registry_v1.py"
+   ],
+   "measured_drift_failures": 3
+  },
+  {
+   "module": "canonical/runtime/synthesis_proof_obligation_delta_verifier_v1.py",
+   "pin": "EXPECTED_TARGET",
+   "kind": "string",
+   "pinned": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+   "current_blob_sha": "9fb4425fb5168da86fc3095864e36c090f3e1d67",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 19,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_synthesis_proof_obligation_delta_verifier_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/target_role_escape_frontier_v1.py",
+   "pin": "EXPECTED_BASIS_BLOB",
+   "kind": "sha",
+   "pinned": "62c0e207ce935a02611700a69e0917f938792b11",
+   "current_blob_sha": "ef91e67b82dd30bf13f47af772302f2a879df5ee",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 10,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_target_role_escape_frontier_v1.py",
+    "canonical/tests/test_the_tool_s_own_printed_verdict_is_the_verdict_v1.py"
+   ],
+   "measured_drift_failures": 1
+  },
+  {
+   "module": "canonical/runtime/target_role_escape_frontier_v1.py",
+   "pin": "EXPECTED_OWN_BLOB",
+   "kind": "sha",
+   "pinned": "cf736088c1ff460283f9b62d873b8e0710374e79",
+   "current_blob_sha": "ef91e67b82dd30bf13f47af772302f2a879df5ee",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 11,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_target_role_escape_frontier_v1.py",
+    "canonical/tests/test_the_tool_s_own_printed_verdict_is_the_verdict_v1.py"
+   ],
+   "measured_drift_failures": 1
+  },
+  {
+   "module": "canonical/runtime/tb4_success_slot_certificate_v1.py",
+   "pin": "EXPECTED_SCOPE_BLOB",
+   "kind": "sha",
+   "pinned": "cc18e607aa403906944deaf5097751fc3e1f1015",
+   "current_blob_sha": "73c20c2e515b8036655b8545366bf60a6cf7f790",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 20,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_tb4_success_slot_certificate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/tb4_success_slot_certificate_v1.py",
+   "pin": "EXPECTED_PROTOCOL_RECEIPT_BLOB",
+   "kind": "sha",
+   "pinned": "b963c13eee7b58d97279fe249919d3c489b19cf8",
+   "current_blob_sha": "73c20c2e515b8036655b8545366bf60a6cf7f790",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 21,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_tb4_success_slot_certificate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/tb4_success_slot_certificate_v1.py",
+   "pin": "EXPECTED_ZERO_SPEND_RECEIPT_BLOB",
+   "kind": "sha",
+   "pinned": "75afb4de1594a858b873ec28bbca453ae3c9f40d",
+   "current_blob_sha": "73c20c2e515b8036655b8545366bf60a6cf7f790",
+   "satisfied_if_it_identifies_this_module": false,
+   "lineno": 22,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 1,
+   "test_files": [
+    "canonical/tests/test_tb4_success_slot_certificate_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/terminal_closure_reducer.py",
+   "pin": "REQUIRED_FAMILY_COUNT",
+   "kind": "count",
+   "pinned": 19,
+   "current_blob_sha": "5c198f5f0a1cbc80cf183b12940870917afaf9b9",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 23,
+   "load_hint": "IMPORT_BREAKING",
+   "tests_referencing_module": 6,
+   "test_files": [
+    "canonical/tests/test_opus_checkpoint_claim_aggregator_v1.py",
+    "canonical/tests/test_runtime_cognition_credit_guard_v1.py",
+    "canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py",
+    "canonical/tests/test_terminal_closure_reducer_v2.py",
+    "canonical/tests/test_terminal_frontier_reducer.py",
+    "canonical/tests/test_terminal_kstar_promotion_bridge_v1.py"
+   ],
+   "measured_drift_failures": 0
+  },
+  {
+   "module": "canonical/runtime/terminal_parent_portfolio_launcher_v1.py",
+   "pin": "EXPECTED_ACTIVE_CONTRACT_COUNT",
+   "kind": "count",
+   "pinned": 12,
+   "current_blob_sha": "d7f20a66f1f534b06ea11782cb350a582c07d985",
+   "satisfied_if_it_identifies_this_module": null,
+   "lineno": 39,
+   "load_hint": "never-raised?",
+   "tests_referencing_module": 2,
+   "test_files": [
+    "canonical/tests/test_terminal_contract_result_reducer_v1.py",
+    "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py"
+   ],
+   "measured_drift_failures": 0
+  }
+ ],
+ "summary": {
+  "modules_with_pins_and_tests": 76,
+  "pins": 157,
+  "self_blob_moved": 69
+ },
+ "what_this_cannot_tell_you": [
+  "whether a moved pin is BENIGN -- read the diff",
+  "anything about a pin no measured failure points at (it may still be wrong)",
+  "whether an invariant should be relaxed -- that is the owner's call, not a tool's",
+  "anything about a pin whose test currently passes"
+ ]
+}

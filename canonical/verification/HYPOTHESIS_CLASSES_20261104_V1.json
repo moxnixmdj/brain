@@ -1,0 +1,227 @@
+{
+  "authority": "NONE",
+  "cases": [
+    {
+      "case": "3x+1",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "affine",
+          "parameters": {
+            "a": 3,
+            "b": 1
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    },
+    {
+      "case": "2x",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "affine",
+          "parameters": {
+            "a": 2,
+            "b": 0
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    },
+    {
+      "case": "piecewise",
+      "explanations": 0,
+      "fit": [],
+      "needs": 0,
+      "status": "ONTOLOGY_EXHAUSTED",
+      "why": "every class that could be tested was refuted by the observations; no further input will help, because the gap is in the ontology and not in the evidence"
+    },
+    {
+      "case": "x+1",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "affine",
+          "parameters": {
+            "a": 1,
+            "b": 1
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    },
+    {
+      "case": "x*x",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "power",
+          "parameters": {
+            "a": 1,
+            "k": 2
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    }
+  ],
+  "composition": [
+    {
+      "body": "if x <= (5 / 2):\n    return 2 * x + 1\nreturn 2 * x + 2",
+      "branches": 2,
+      "case": "regime change at 2.5",
+      "reached": true,
+      "split_at": "5/2",
+      "status": "DETERMINED"
+    },
+    {
+      "body": "if x <= (1 / 2):\n    return 0\nreturn x",
+      "branches": 2,
+      "case": "relu",
+      "reached": true,
+      "split_at": "1/2",
+      "status": "DETERMINED"
+    },
+    {
+      "body": "if x <= 0:\n    return 99\nreturn 2 * x",
+      "branches": 2,
+      "case": "clipped",
+      "reached": true,
+      "split_at": 0,
+      "status": "DETERMINED"
+    },
+    {
+      "body": null,
+      "branches": 0,
+      "case": "mod 2",
+      "reached": false,
+      "split_at": null,
+      "status": "ONTOLOGY_EXHAUSTED"
+    }
+  ],
+  "findings": [
+    {
+      "have": 2,
+      "id": "a_two_parameter_family_needs_two_points",
+      "needs": 2,
+      "pass": true,
+      "question": "is the evidence requirement computed from the class rather than discovered?",
+      "status": "FITS"
+    },
+    {
+      "id": "further_points_test_rather_than_inform",
+      "pass": true,
+      "question": "is a third point on a two-parameter family counted as new information?",
+      "status": "FITS",
+      "surplus": 1
+    },
+    {
+      "id": "the_line_the_search_could_not_fit_fits_exactly",
+      "parameters": {
+        "a": 3,
+        "b": 1
+      },
+      "pass": true,
+      "question": "does the family explain 3x+1, which the string search left UNRESOLVED?"
+    },
+    {
+      "id": "a_non_affine_point_set_is_refused_not_rounded",
+      "pass": true,
+      "question": "does a quadratic get forced onto a straight line?",
+      "status": "INCONSISTENT",
+      "violations": 1
+    },
+    {
+      "explanations": 1,
+      "id": "the_headline_case_is_one_explanation_as_a_family",
+      "pass": true,
+      "question": "how many explanations are the three 2x points, once a family exists?"
+    },
+    {
+      "id": "the_question_is_derived_before_the_answer",
+      "pass": true,
+      "queries": [
+        {
+          "x": 1
+        }
+      ],
+      "question": "can the class say what input would pin it while it is still unpinned?"
+    },
+    {
+      "all_statuses": [
+        "FITS",
+        "FITS"
+      ],
+      "explanations": 1,
+      "id": "subsumed_families_are_not_counted_twice",
+      "pass": true,
+      "question": "does power(k=1) get counted as a second explanation alongside affine?"
+    },
+    {
+      "id": "an_exhausted_ontology_is_not_reported_as_ask_me_again",
+      "one_short_status": "PROVISIONAL",
+      "pass": true,
+      "question": "does a refuted-and-unpinned-free ontology stop asking for data?",
+      "status": "ONTOLOGY_EXHAUSTED"
+    },
+    {
+      "body": "if x <= (1 / 2):\n    return 0\nreturn x",
+      "branches": 2,
+      "id": "relu_composes_from_two_branches",
+      "pass": true,
+      "question": "is a kink at zero explained by two families rather than by 50 programs?"
+    },
+    {
+      "id": "a_regime_change_composes",
+      "pass": true,
+      "question": "does a boundary no whole-number grid would hit get found?",
+      "split_at": "5/2"
+    },
+    {
+      "id": "mod_two_is_refused_rather_than_fitted",
+      "pass": true,
+      "question": "does the mechanism decline to invent a boundary to match its answers?",
+      "status": "ONTOLOGY_EXHAUSTED"
+    },
+    {
+      "errors": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "id": "composed_bodies_verify_against_the_search_checker",
+      "pass": true,
+      "question": "does the compiled program reproduce every observation?"
+    },
+    {
+      "id": "two_branches_need_four_observations",
+      "needs": 4,
+      "pass": true,
+      "question": "is the evidence requirement of a composition computed rather than guessed?",
+      "status": "PROVISIONAL"
+    },
+    {
+      "explanations": 1,
+      "id": "composition_does_not_replace_the_family_layer",
+      "pass": true,
+      "question": "does a one-region explanation still come back as one explanation?"
+    }
+  ],
+  "passed": 14,
+  "schema": "PROJECT_BRAIN_HYPOTHESIS_CLASSES_V1",
+  "total": 14
+}

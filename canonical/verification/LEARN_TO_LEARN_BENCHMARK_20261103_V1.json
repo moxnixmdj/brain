@@ -1,0 +1,821 @@
+{
+ "schema": "CROSS_KIND_LEARNING_TO_LEARN_BENCHMARK_V1",
+ "authority": "NONE -- PRODUCER-RUN, CONSTRUCTED ENVIRONMENTS",
+ "train_kinds": [
+  "append_letters",
+  "grid_walk",
+  "cyclic_counter",
+  "dial_lock",
+  "toggle_bank",
+  "adjacent_sort"
+ ],
+ "test_kinds": [
+  "two_jug_pour",
+  "queue_rotate",
+  "bit_register",
+  "string_affix"
+ ],
+ "policy_vocabulary_is_hand_written": true,
+ "train_rows": [
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 366,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_g0",
+   "policy": "dfs_reversed",
+   "pass": false,
+   "act_calls": 214816,
+   "plan": null,
+   "steps": 0
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 386,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 366,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "append_letters",
+   "feature_key": "b2_m2_r2_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 366,
+   "plan": [
+    "put_c",
+    "put_d",
+    "put_e"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 185,
+   "plan": [
+    "mv_l",
+    "mv_d",
+    "mv_d"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 715,
+   "plan": [
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_d",
+    "mv_r",
+    "mv_l",
+    "mv_l",
+    "mv_l"
+   ],
+   "steps": 10
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 137,
+   "plan": [
+    "mv_l",
+    "mv_d",
+    "mv_d"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 185,
+   "plan": [
+    "mv_l",
+    "mv_d",
+    "mv_d"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "grid_walk",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 65,
+   "plan": [
+    "mv_d",
+    "mv_d",
+    "mv_l"
+   ],
+   "steps": 3
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 3,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "cyclic_counter",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 7,
+   "plan": [
+    "add_3"
+   ],
+   "steps": 1
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 16,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "dial_lock",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 13,
+   "plan": [
+    "dial_0",
+    "dial_1"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 33,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 47,
+   "plan": [
+    "sw_0",
+    "sw_3",
+    "sw_0",
+    "sw_1"
+   ],
+   "steps": 4
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 24,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 33,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "toggle_bank",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 33,
+   "plan": [
+    "sw_1",
+    "sw_3"
+   ],
+   "steps": 2
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "bfs_lex",
+   "pass": true,
+   "act_calls": 2726,
+   "plan": [
+    "swap_0",
+    "swap_1",
+    "swap_0",
+    "swap_2",
+    "swap_1",
+    "swap_0"
+   ],
+   "steps": 6
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "dfs_reversed",
+   "pass": true,
+   "act_calls": 599,
+   "plan": [
+    "swap_0",
+    "swap_2",
+    "swap_0",
+    "swap_2",
+    "swap_0",
+    "swap_2",
+    "swap_1",
+    "swap_2",
+    "swap_0",
+    "swap_1"
+   ],
+   "steps": 10
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "repeat_last",
+   "pass": true,
+   "act_calls": 2047,
+   "plan": [
+    "swap_0",
+    "swap_2",
+    "swap_1",
+    "swap_2",
+    "swap_0",
+    "swap_1"
+   ],
+   "steps": 6
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "never_last",
+   "pass": true,
+   "act_calls": 2726,
+   "plan": [
+    "swap_0",
+    "swap_1",
+    "swap_0",
+    "swap_2",
+    "swap_1",
+    "swap_0"
+   ],
+   "steps": 6
+  },
+  {
+   "kind": "adjacent_sort",
+   "feature_key": "b1_m2_r1_g0",
+   "policy": "rarest",
+   "pass": true,
+   "act_calls": 2726,
+   "plan": [
+    "swap_0",
+    "swap_1",
+    "swap_0",
+    "swap_2",
+    "swap_1",
+    "swap_0"
+   ],
+   "steps": 6
+  }
+ ],
+ "test_rows": [
+  {
+   "kind": "two_jug_pour",
+   "feature_key": "b2_m0_r1_g0",
+   "chosen_policy": "bfs_lex",
+   "why": {
+    "why": "UNSEEN_FEATURE_KEY",
+    "evidence": 0
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 233,
+    "plan": [
+     "fill_a",
+     "pour_ab",
+     "empty_b"
+    ],
+    "steps": 3,
+    "policy": "bfs_lex",
+    "cost": 233
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 233,
+    "plan": [
+     "fill_a",
+     "pour_ab",
+     "empty_b"
+    ],
+    "steps": 3,
+    "policy": "bfs_lex",
+    "cost": 233
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 233,
+      "plan": [
+       "fill_a",
+       "pour_ab",
+       "empty_b"
+      ],
+      "steps": 3,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 633,
+      "plan": [
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "pour_ab",
+       "empty_b"
+      ],
+      "steps": 10,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 633,
+      "plan": [
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "pour_ab",
+       "empty_b"
+      ],
+      "steps": 10,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 633,
+      "plan": [
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "pour_ab",
+       "empty_b"
+      ],
+      "steps": 10,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 633,
+      "plan": [
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "fill_a",
+       "pour_ba",
+       "pour_ab",
+       "empty_b"
+      ],
+      "steps": 10,
+      "policy": "dfs_reversed"
+     }
+    ],
+    "mean_cost": 553.0,
+    "solved": 5
+   },
+   "beat_default": false,
+   "beat_random_mean": true
+  },
+  {
+   "kind": "queue_rotate",
+   "feature_key": "b1_m2_r1_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 5,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "repeat_last": 1.0,
+     "rarest": 1.0,
+     "never_last": 1.0,
+     "bfs_lex": 1.0
+    }
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 5,
+    "plan": [
+     "rot_r"
+    ],
+    "steps": 1,
+    "policy": "dfs_reversed",
+    "cost": 5
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 5,
+    "plan": [
+     "rot_r"
+    ],
+    "steps": 1,
+    "policy": "bfs_lex",
+    "cost": 5
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 7,
+      "plan": [
+       "rot_r"
+      ],
+      "steps": 1,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 7,
+      "plan": [
+       "rot_r"
+      ],
+      "steps": 1,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 5,
+      "plan": [
+       "rot_r"
+      ],
+      "steps": 1,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 5,
+      "plan": [
+       "rot_r"
+      ],
+      "steps": 1,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 7,
+      "plan": [
+       "rot_r"
+      ],
+      "steps": 1,
+      "policy": "rarest"
+     }
+    ],
+    "mean_cost": 6.2,
+    "solved": 5
+   },
+   "beat_default": false,
+   "beat_random_mean": true
+  },
+  {
+   "kind": "bit_register",
+   "feature_key": "b2_m2_r1_g0",
+   "chosen_policy": "bfs_lex",
+   "why": {
+    "why": "UNSEEN_FEATURE_KEY",
+    "evidence": 0
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 35,
+    "plan": [
+     "xor_1",
+     "xor_2"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 35
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 35,
+    "plan": [
+     "xor_1",
+     "xor_2"
+    ],
+    "steps": 2,
+    "policy": "bfs_lex",
+    "cost": 35
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 38,
+      "plan": [
+       "xor_1",
+       "xor_2"
+      ],
+      "steps": 2,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": true,
+      "act_calls": 53,
+      "plan": [
+       "xor_1",
+       "xor_2"
+      ],
+      "steps": 2,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 53,
+      "plan": [
+       "xor_1",
+       "xor_2"
+      ],
+      "steps": 2,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 35,
+      "plan": [
+       "xor_1",
+       "xor_2"
+      ],
+      "steps": 2,
+      "policy": "bfs_lex"
+     },
+     {
+      "pass": true,
+      "act_calls": 46,
+      "plan": [
+       "xor_0",
+       "shift",
+       "xor_0"
+      ],
+      "steps": 3,
+      "policy": "dfs_reversed"
+     }
+    ],
+    "mean_cost": 45.0,
+    "solved": 5
+   },
+   "beat_default": false,
+   "beat_random_mean": true
+  },
+  {
+   "kind": "string_affix",
+   "feature_key": "b1_m2_r1_g0",
+   "chosen_policy": "dfs_reversed",
+   "why": {
+    "why": "BEST_OBSERVED_ON_THIS_FEATURE_KEY",
+    "evidence": 5,
+    "candidates": {
+     "dfs_reversed": 1.0,
+     "repeat_last": 1.0,
+     "rarest": 1.0,
+     "never_last": 1.0,
+     "bfs_lex": 1.0
+    }
+   },
+   "learned": {
+    "pass": true,
+    "act_calls": 3,
+    "plan": [
+     "put_z"
+    ],
+    "steps": 1,
+    "policy": "dfs_reversed",
+    "cost": 3
+   },
+   "default": {
+    "pass": true,
+    "act_calls": 7,
+    "plan": [
+     "put_z"
+    ],
+    "steps": 1,
+    "policy": "bfs_lex",
+    "cost": 7
+   },
+   "random": {
+    "arms": [
+     {
+      "pass": true,
+      "act_calls": 7,
+      "plan": [
+       "put_z"
+      ],
+      "steps": 1,
+      "policy": "never_last"
+     },
+     {
+      "pass": true,
+      "act_calls": 3,
+      "plan": [
+       "put_z"
+      ],
+      "steps": 1,
+      "policy": "dfs_reversed"
+     },
+     {
+      "pass": true,
+      "act_calls": 7,
+      "plan": [
+       "put_z"
+      ],
+      "steps": 1,
+      "policy": "repeat_last"
+     },
+     {
+      "pass": true,
+      "act_calls": 7,
+      "plan": [
+       "put_z"
+      ],
+      "steps": 1,
+      "policy": "rarest"
+     },
+     {
+      "pass": true,
+      "act_calls": 3,
+      "plan": [
+       "put_z"
+      ],
+      "steps": 1,
+      "policy": "dfs_reversed"
+     }
+    ],
+    "mean_cost": 5.4,
+    "solved": 5
+   },
+   "beat_default": true,
+   "beat_random_mean": true
+  }
+ ],
+ "summary": {
+  "test_kinds": 4,
+  "learned_solved": 4,
+  "beat_default": 1,
+  "beat_random_mean": 4
+ },
+ "verdict": "NO_COMPOUNDING -- the learned choice is not better than a coin flip on unseen kinds; the features do not generalise and this is not learning-to-learn",
+ "cannot_see": [
+  "strategy invention -- the five policies are written by hand",
+  "GUI environments, pixels, unbounded action sets"
+ ],
+ "superseded_by": "LEARN_TO_LEARN_BENCHMARK_20261103_V2.json -- this run used FOUR held-out kinds, which cannot distinguish a mechanism that needs more data from one that needs a different representation. Also its feature keys were b1_m2_r1_g0 style, before the fourth reading existed. Kept for the record of what the smaller experiment said."
+}

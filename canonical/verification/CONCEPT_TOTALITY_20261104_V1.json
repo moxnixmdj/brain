@@ -1,0 +1,67 @@
+{
+  "authority": "NONE",
+  "findings": [
+    {
+      "id": "gate_discriminates_totality",
+      "pass": true,
+      "question": "does verification admit the guarded form and reject the unguarded one?",
+      "verdicts": {
+        "abs_distance": {
+          "admitted": true,
+          "reason": ""
+        },
+        "guarded_norm": {
+          "admitted": true,
+          "reason": ""
+        },
+        "guarded_ratio": {
+          "admitted": true,
+          "reason": ""
+        },
+        "mean": {
+          "admitted": true,
+          "reason": ""
+        },
+        "reciprocal": {
+          "admitted": false,
+          "reason": "PARTIAL_DOMAIN:numeric:ZeroDivisionError"
+        },
+        "unguarded_norm": {
+          "admitted": false,
+          "reason": "PARTIAL_DOMAIN:numeric:ZeroDivisionError"
+        }
+      }
+    },
+    {
+      "admitted": 2,
+      "id": "no_admitted_concept_is_partial",
+      "pass": true,
+      "question": "can the library hold a concept that raises on its own domain?",
+      "raises_per_concept": {
+        "concept_640d4492": 0,
+        "concept_fb92458e": 0
+      }
+    },
+    {
+      "bodies": {
+        "norm_plus_half": "return (concept_640d4492(v, l, h) + 0.5)",
+        "norm_times_2": "return (concept_640d4492(v, l, h) * 2)"
+      },
+      "id": "strictness_costs_no_reach",
+      "pass": true,
+      "question": "does requiring totality lose the generalising reach the concept bought?",
+      "solved_empty_library": 0,
+      "solved_with_strict_library": 2
+    }
+  ],
+  "measured": "2026-11-04",
+  "not_claimed": [
+    "totality is checked on a probe grid, not proved -- a concept can raise at a point the grid does not contain",
+    "the counter-risk is real: a legitimately useful partial concept (e.g. a guarded reciprocal that callers promise never to feed zero) is now rejected, and this benchmark cannot show that because it only contains candidates I chose",
+    "rejection is by domain, not by call-site contract; there is no way to say 'total on the inputs this program will actually use'"
+  ],
+  "passed": 3,
+  "schema": "PROJECT_BRAIN_CONCEPT_TOTALITY_BENCHMARK_V1",
+  "total": 3,
+  "truth_achieved": false
+}

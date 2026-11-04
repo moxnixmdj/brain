@@ -1,0 +1,59 @@
+{
+  "authority": "NONE",
+  "findings": [
+    {
+      "bad_retired": true,
+      "concepts_used": [
+        "concept_bad0001"
+      ],
+      "first_body": "return (concept_bad0001(v, 1, h) * 2)",
+      "first_verdict": "OVERFIT",
+      "good_retired": false,
+      "id": "guilty_charged_innocent_spared",
+      "pass": true,
+      "question": "of two concepts in one failed program, is only the guilty one charged?",
+      "suspects": [
+        "concept_bad0001"
+      ]
+    },
+    {
+      "body_after": "return (concept_good0001(v, l, h) + 0.5)",
+      "id": "charging_repairs_the_next_answer",
+      "pass": true,
+      "question": "does the same problem then get a correct answer that spares the guilty concept?",
+      "verdict_after": "SOLVED"
+    },
+    {
+      "body_emitted": false,
+      "id": "no_culprit_for_an_unsolvable_problem",
+      "pass": true,
+      "question": "is anything charged when the problem is simply out of reach?",
+      "retired": []
+    },
+    {
+      "conclusion": "inlining cannot change behaviour, so a substitution-based counterfactual carries no information -- the mechanism must ablate the concept from the SEARCH instead",
+      "id": "vacuity_control",
+      "inlined_body_is_behaviourally_identical": true,
+      "pass": true,
+      "question": "does inlining a concept's body change the program's behaviour?"
+    },
+    {
+      "disconfirmations_after": 0,
+      "id": "revision_is_reversible",
+      "pass": true,
+      "question": "can a wrongly retired concept be restored to full standing?",
+      "retired_after": false,
+      "revived": true
+    }
+  ],
+  "measured": "2026-11-04",
+  "not_claimed": [
+    "the NOTICE that a failure occurred still comes from outside; this benchmark decides attribution, not detection",
+    "attribution is only possible when ablating the concept makes the problem solvable; when nothing solves it, no culprit is identified and none is invented",
+    "thresholds (3 disconfirmations per refutation) are heuristics, not derived laws"
+  ],
+  "passed": 5,
+  "schema": "PROJECT_BRAIN_FAILURE_ATTRIBUTION_BENCHMARK_V1",
+  "total": 5,
+  "truth_achieved": false
+}

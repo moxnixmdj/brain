@@ -269,10 +269,57 @@ def _materialize_concept_helpers(
             helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
         if concept_library is not None and hasattr(concept_library, "record_concept_outcome"):
             try:
-                concept_library.record_concept_outcome(cid, helped=True)
+                # helped=None, NOT True. This point in the code has only just emitted a body; it
+                # has verified nothing. Crediting here was measured to give a concept used solely
+                # inside WRONG bodies `verified_hits=1` and a higher own prior (2026-11-04).
+                # Verification is the caller's evidence to supply, via `record_concept_outcome`.
+                concept_library.record_concept_outcome(cid, helped=None)
             except Exception:
                 pass
     return "\n".join(helper_lines) + "\n" + body_src
+
+
+# Handoff for `collect_admissible=True`: the collected bodies for the most recent call. Cleared at
+# the start of each collecting call. Absent unless collection was requested, so ordinary callers
+# cannot observe it.
+_LAST_ADMISSIBLE: list[str] = []
+
+# Whether the most recent collecting call saw the WHOLE grammar. A capped bank is not a fact about
+# the grammar, and reporting "no body reproduces the examples" from a full bank attributes a budget
+# failure to the world. Measured 2026-11-04: `2x + 1` IS in the grammar (`((x + 1) + x) / 1`) but is
+# only reached after the weight-4 tier overflows a 900-entry bank, so the search said UNRESOLVED.
+_LAST_COVERAGE: dict[str, Any] = {}
+
+
+def last_admissible_bodies() -> list[str]:
+    """Bodies collected by the most recent `collect_admissible=True` call."""
+    return list(_LAST_ADMISSIBLE)
+
+
+def last_search_coverage() -> dict[str, Any]:
+    """Did the most recent search see the whole grammar, or did it run out of bank?
+
+    `complete=True`  -- the bank never filled and the weight sweep finished, so a body that
+                        reproduces the examples does not exist in the grammar at this weight bound.
+                        "Not in the grammar" is then a defensible claim.
+    `complete=False` -- the bank filled. Absence of a match is a statement about the budget. The
+                        caller must NOT report it as a fact about the data.
+    """
+    return dict(_LAST_COVERAGE)
+
+
+def _is_statement_block(body_src: str) -> bool:
+    """True when `body_src` is already a sequence of statements rather than one expression.
+
+    Only the STUN arms pass statements. Deciding on the TEXT alone is wrong: `return_ratio` and
+    `x.returncode` both start with the letters `return` without being statements.
+    """
+    for line in body_src.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        return stripped.startswith("return ") or stripped == "return" or stripped.endswith(":")
+    return False
 
 
 def synthesize_python_function_body(
@@ -283,6 +330,7 @@ def synthesize_python_function_body(
     max_bank_size: int = 900,
     *,
     concept_library: Any | None = None,
+    collect_admissible: bool = False,
 ) -> str | None:
     """Synthesize minimal Python statement body (`return ...` or `if ...: return ...`) from I/O pairs."""
     if not examples or not param_names:
@@ -322,8 +370,38 @@ def synthesize_python_function_body(
     seen_sigs: dict[tuple[Any, ...], str] = {}
     by_weight: dict[int, list[tuple[str, list[Any]]]] = {w: [] for w in range(1, max_weight + 1)}
 
+    # Populated only when `collect_admissible` is set. The default path is byte-identical: the
+    # first match still returns immediately. Adding `collect_admissible` was the honest fix for a
+    # vacuous enumeration -- sweeping max_weight still surfaced only one body per weight, because a
+    # match returns from inside the search and multiplicity was never observable.
+    admissible_bodies: list[str] = []
+    global _LAST_COVERAGE
+    if collect_admissible:
+        _LAST_COVERAGE = {"complete": False, "reason": "did not finish", "bank_size": 0,
+                          "bank_capacity": int(max_bank_size)}
+        # Clear at the START. Measured 2026-11-04: the 1-level STUN arm below returned a body
+        # instead of recording it, so a collecting call could exit without reaching the handoff at
+        # the end -- and `last_admissible_bodies()` then reported the PREVIOUS call's bodies to a
+        # caller that had every reason to believe it was asking a fresh question. The module
+        # answered "12 admissible, PROVISIONAL" for data that admits none. Clearing here makes a
+        # stale report impossible regardless of which exit is taken.
+        _LAST_ADMISSIBLE.clear()
+
     def _finish(body_code: str) -> str:
         return _materialize_concept_helpers(body_code, concept_entries, active_lib)
+
+    def _record(expr_src: str) -> None:
+        # Two dialects reach this function: an EXPRESSION (from `_try_register`) and a complete
+        # BODY (from the STUN arms, which return their own `return`s). Wrapping the second in
+        # `return` produced `return if x <= 0:` -- a body that does not compile, recorded as
+        # admissible, and then handed to `demand_evidence`, which saw 50 such entries collapse to
+        # ONE behaviour signature ("<does not compile>") and reported DETERMINED. Measured
+        # 2026-11-04. `_finish` is idempotent for already-`return`ed text, so always routing
+        # through it makes the dialect distinction impossible to get wrong.
+        body = _finish(expr_src if _is_statement_block(expr_src) else f"return {expr_src}")
+        key = " ".join(body.split())
+        if key not in {" ".join(b.split()) for b in admissible_bodies}:
+            admissible_bodies.append(body)
 
     def _try_register(weight: int, expr_src: str) -> str | None:
         if len(seen_sigs) >= max_bank_size:
@@ -336,6 +414,9 @@ def synthesize_python_function_body(
         if not ok:
             return None
         if sig == target_sig:
+            if collect_admissible:
+                _record(expr_src)
+                return None
             return expr_src
         if sig not in seen_sigs:
             seen_sigs[sig] = expr_src
@@ -346,6 +427,9 @@ def synthesize_python_function_body(
     for p in param_names:
         hit = _try_register(1, p)
         if hit is not None:
+            if collect_admissible:
+                _record(hit)
+                continue
             return _finish(f"return {hit}")
         # Discover object attributes on sample values
         attr_names: set[str] = set()
@@ -357,6 +441,9 @@ def synthesize_python_function_body(
         for attr in sorted(attr_names):
             hit = _try_register(1, f"{p}.{attr}")
             if hit is not None:
+                if collect_admissible:
+                    _record(hit)
+                    continue
                 return _finish(f"return {hit}")
 
     seed_consts: list[Any] = [0, 1, 2, -1, 100, True, False, None, "", [], {}]
@@ -366,6 +453,9 @@ def synthesize_python_function_body(
     for c in seed_consts:
         hit = _try_register(1, repr(c))
         if hit is not None:
+            if collect_admissible:
+                _record(hit)
+                continue
             return _finish(f"return {hit}")
 
     # Weight 2..max_weight: learned concepts (G_t), unary transforms, comprehensions, binary ops
@@ -422,6 +512,9 @@ def synthesize_python_function_body(
                     call_expr = f"{c_ent.concept_id}({', '.join(combo)})"
                     hit = _try_register(w, call_expr)
                     if hit is not None:
+                        if collect_admissible:
+                            _record(hit)
+                            continue
                         return _finish(f"return {hit}")
                     if len(seen_sigs) >= max_bank_size:
                         break
@@ -446,6 +539,9 @@ def synthesize_python_function_body(
                     continue
                 hit = _try_register(w, tmpl.format(e1))
                 if hit is not None:
+                    if collect_admissible:
+                        _record(hit)
+                        continue
                     return _finish(f"return {hit}")
             if isinstance(v0, (list, tuple)) and v0:
                 # Aggregations over object attributes inside list parameter (e.g. sum(x.price * x.qty for x in items))
@@ -455,12 +551,18 @@ def synthesize_python_function_body(
                     for a1 in e_attrs:
                         hit = _try_register(w, f"sum(_x.{a1} for _x in {e1})")
                         if hit is not None:
+                            if collect_admissible:
+                                _record(hit)
+                                continue
                             return _finish(f"return {hit}")
                     if len(e_attrs) >= 2:
                         for i_a, a1 in enumerate(e_attrs):
                             for a2 in e_attrs[i_a + 1:]:
                                 hit = _try_register(w, f"sum(_x.{a1} * _x.{a2} for _x in {e1})")
                                 if hit is not None:
+                                    if collect_admissible:
+                                        _record(hit)
+                                        continue
                                     return _finish(f"return {hit}")
 
         # Binary combinations w1 + w2 == w (prioritize higher-weight / learned-concept subtrees in outer loop)
@@ -482,15 +584,24 @@ def synthesize_python_function_body(
                                 continue
                         hit = _try_register(w, f"({e1} {op} {e2})")
                         if hit is not None:
-                            return _finish(f"return {hit}" )
+                            if collect_admissible:
+                                _record(hit)
+                                continue
+                            return _finish(f"return {hit}")
                     if isinstance(v1, (int, float)) and isinstance(v2, (int, float)) and not isinstance(v1, bool) and not isinstance(v2, bool):
                         for fn2 in ("min", "max"):
                             hit = _try_register(w, f"{fn2}({e1}, {e2})")
                             if hit is not None:
+                                if collect_admissible:
+                                    _record(hit)
+                                    continue
                                 return _finish(f"return {hit}")
                     if isinstance(v1, dict):
                         hit = _try_register(w, f"({e1}).get({e2})")
                         if hit is not None:
+                            if collect_admissible:
+                                _record(hit)
+                                continue
                             return _finish(f"return {hit}")
                     if len(seen_sigs) >= max_bank_size:
                         break
@@ -580,8 +691,12 @@ def synthesize_python_function_body(
         if else_cands:
             e_then, rp_t = min(then_cands, key=lambda x: len(x[0]))
             e_else, rp_e = min(else_cands, key=lambda x: len(x[0]))
+            guarded_stun = f"if {p_src}:\n    return {e_then}\nreturn {e_else}"
             if (rp_t or rp_e) and (_reads_all_params(e_then) or _reads_all_params(e_else)):
-                return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
+                if collect_admissible:
+                    _record(guarded_stun)
+                    continue
+                return _finish(guarded_stun)
 
     # Stage 3B: Constructive Recursion-Scheme Algebra + Levin Universal Search (HORS)
     # Solomonoff-Levin MDL law: constructive recursion morphisms ranked by description bits + log2(steps).
@@ -594,7 +709,16 @@ def synthesize_python_function_body(
         concept_library=active_lib,
     )
     if hors_body is not None:
-        return _finish(hors_body)
+        # MEASURED BUG (merge, 2026-11-04): this early return ignored `collect_admissible`, so a
+        # collecting sweep that produced a HORS body returned having recorded NOTHING. The bank read
+        # 0/5000 and `demand_evidence` reported SEARCH_TRUNCATED for data whose 12 explanations were
+        # sitting one stage away. Every other return site in this function had been guarded; these
+        # were not, and the failure was silent because an empty collection is indistinguishable from
+        # an empty grammar.
+        if collect_admissible:
+            _record(hors_body if _is_statement_block(hors_body) else f"return {hors_body}")
+        else:
+            return _finish(hors_body)
 
     # Stage 4: General STUN over parity & synthesized compound predicates
     for p in param_names:
@@ -615,8 +739,18 @@ def synthesize_python_function_body(
         if else_cands:
             e_then, rp_t = min(then_cands, key=lambda x: len(x[0]))
             e_else, rp_e = min(else_cands, key=lambda x: len(x[0]))
+            stun1 = f"if {p_src}:\n    return {e_then}\nreturn {e_else}"
+            if collect_admissible:
+                # Collection records the body UNCONDITIONALLY, even when neither branch mentions a
+                # partial-domain term. A piecewise body reproducing every example IS admissible, and
+                # an admissible set that omits it understates how many explanations the data permit.
+                # This arm was the only early return that ignored the collection flag; failing to
+                # record it is the same class of error as failing to see a second explanation.
+                _record(stun1)
+                continue
+            # Default path unchanged: only emit when a branch carries partial-domain evidence.
             if rp_t or rp_e:
-                return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
+                return _finish(stun1)
 
     # 2-level STUN: if P1: return E1 / elif P2: return E2 / return E3
     for i, (p1_src, pm1) in enumerate(predicates[:40]):
@@ -639,9 +773,35 @@ def synthesize_python_function_body(
                 e1, rp1 = min(t1_cands, key=lambda x: len(x[0]))
                 e2, rp2 = min(t2_cands, key=lambda x: len(x[0]))
                 e3, rp3 = min(t3_cands, key=lambda x: len(x[0]))
+                stun_body = f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}"
+                if collect_admissible:
+                    # As above: recorded unconditionally, so a truncated-looking admissible set is
+                    # never the artefact of a search heuristic that only emitted partial-domain arms.
+                    _record(stun_body)
+                    continue
                 if rp1 or rp2 or rp3:
-                    return _finish(f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}")
+                    return _finish(stun_body)
 
+    if collect_admissible:
+        # Expose the collection through a module-level handoff. Returning a list here would change
+        # the function's contract for every existing caller; the default path is untouched.
+        _LAST_ADMISSIBLE.clear()
+        _LAST_ADMISSIBLE.extend(admissible_bodies)
+        # Completeness is decidable from state the search already keeps: the bank either filled or
+        # it did not, and the weight sweep either reached `max_weight` or broke out early. No new
+        # enumeration is needed to know whether the enumeration was exhaustive.
+        exhausted = len(seen_sigs) >= max_bank_size
+        _LAST_COVERAGE = {
+            "complete": not exhausted,
+            "bank_size": len(seen_sigs),
+            "bank_capacity": int(max_bank_size),
+            "max_weight": int(max_weight),
+            "reason": ("the candidate bank filled before the weight sweep finished, so a missing "
+                       "body is a missing BUDGET, not a missing grammar"
+                       if exhausted else
+                       "the bank did not fill and the sweep finished; absence is a fact about the "
+                       "grammar at this weight bound"),
+        }
     return None
 
 

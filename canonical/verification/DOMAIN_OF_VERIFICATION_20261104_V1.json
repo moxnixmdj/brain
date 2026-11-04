@@ -1,0 +1,137 @@
+{
+  "authority": "NONE",
+  "domains": {
+    "2x on 0..2": {
+      "distinct_inputs": 3,
+      "hi": 2,
+      "lo": 0,
+      "only_point": false,
+      "width": 2
+    },
+    "3x+1 on 0..2": {
+      "distinct_inputs": 3,
+      "hi": 2,
+      "lo": 0,
+      "only_point": false,
+      "width": 2
+    },
+    "relu on -2..3": {
+      "distinct_inputs": 6,
+      "hi": 3,
+      "lo": -2,
+      "only_point": false,
+      "width": 5
+    },
+    "relu on 0..2": {
+      "distinct_inputs": 3,
+      "hi": 2,
+      "lo": 0,
+      "only_point": false,
+      "width": 2
+    }
+  },
+  "findings": [
+    {
+      "id": "a_prediction_outside_the_verified_interval_is_flagged",
+      "inside": "INSIDE",
+      "outside": "EXTRAPOLATION",
+      "pass": true,
+      "question": "does the report distinguish a prediction from an extrapolation?"
+    },
+    {
+      "domains": {
+        "2x on 0..2": [
+          0,
+          2
+        ],
+        "3x+1 on 0..2": [
+          0,
+          2
+        ],
+        "relu on -2..3": [
+          -2,
+          3
+        ],
+        "relu on 0..2": [
+          0,
+          2
+        ]
+      },
+      "id": "the_domain_is_reported_with_every_hypothesis",
+      "pass": true,
+      "question": "is the interval a hypothesis was checked over recorded at all?"
+    },
+    {
+      "id": "prequential_finds_what_the_ontology_hides",
+      "pass": true,
+      "question": "does an affine hypothesis die on the very next observation for non-affine data?",
+      "refutations": {
+        "2x": 0,
+        "3x+1": 0,
+        "mod 2": 1,
+        "x*x": 1
+      }
+    },
+    {
+      "id": "an_affine_truth_survives_every_prequential_step",
+      "pass": true,
+      "question": "does the test ever falsely refute a hypothesis that is right?",
+      "survived": {
+        "2x": true,
+        "3x+1": true,
+        "mod 2": false,
+        "x*x": false
+      }
+    },
+    {
+      "id": "the_rival_check_finds_nothing_and_that_is_recorded_as_weakness",
+      "note": "D1 predicted a rival for relu-on-{0,1,2}; there is none, because relu IS the identity there. The rival check is reported as a NEGATIVE RESULT: constrained against degeneracy it found no rival in any case, so it cannot currently distinguish a well-supported hypothesis from an unrepresentable truth.",
+      "pass": true,
+      "question": "does the rival search do any work at all once degeneracy is excluded?",
+      "rivals_found": {
+        "2x on 0..2": 0,
+        "3x+1 on 0..2": 0,
+        "relu on -2..3": 3,
+        "relu on 0..2": 0
+      }
+    },
+    {
+      "id": "absence_of_a_rival_is_not_reported_as_support",
+      "pass": true,
+      "question": "does 'no rival' get read as reassurance?",
+      "wording": "the rival search can only find what the ontology can represent; absence of a rival is a statement about the ontology, not about the world"
+    },
+    {
+      "degenerate_admitted": false,
+      "id": "a_degenerate_rival_is_rejected",
+      "pass": true,
+      "question": "is every hypothesis under-written by a constant fitted to one point?"
+    }
+  ],
+  "held_out_note": "measured with a truth function in the same turn: 42/45 interpolated; the failures were a hypothesis fitted on a strictly positive range and asked about negatives, which is the domain question this module is about",
+  "passed": 7,
+  "prequential": {
+    "2x": {
+      "refutations": 0,
+      "survived_all": true,
+      "tested": 5
+    },
+    "3x+1": {
+      "refutations": 0,
+      "survived_all": true,
+      "tested": 5
+    },
+    "mod 2": {
+      "refutations": 1,
+      "survived_all": false,
+      "tested": 7
+    },
+    "x*x": {
+      "refutations": 1,
+      "survived_all": false,
+      "tested": 5
+    }
+  },
+  "schema": "PROJECT_BRAIN_DOMAIN_OF_VERIFICATION_V1",
+  "total": 7
+}
