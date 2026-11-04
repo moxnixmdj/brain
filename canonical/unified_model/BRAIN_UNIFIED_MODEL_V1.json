@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "03f31081aaad622819fdea900f76eb2d76f3b6c469a0b71bab9fe015e4ecbff7"
+  "value": "894b08751e9b8e70a853ec9540f970d1ecbdf84aa364405d815b57541164ec9e"
  },
  "engines": [
   {
@@ -218887,7 +218887,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "b20638d1937992f058c2fba9ea6b389afd6d86c22c9658bec15ba4efdfa737e2",
+   "sha256": "92b8d7e305e5b5cd51afc47d1ac75d864a2a43d3a611055b77e203e90803c21b",
    "status": "",
    "terms": {
     "20261104": 1,
@@ -218902,7 +218902,7 @@
     "report": 1,
     "success": 1,
     "the_door_answers_questions_it_used_to_report_success_it_never_earned_20261104_v1": 1,
-    "the_inspect_door_answered_one_of_nine_plain_questions_and_reported_grounded_verified_true_for_how_many_lines_are_in_data_py_with_no_number_in_the_answer_on_305cd6c68f": 1,
+    "the_inspect_door_answered_one_of_nine_plain_questions_and_reported_grounded_verified_true_for_how_many_lines_are_in_data_py_with_no_number_in_the_answer_on_d4c7c53f5d": 1,
     "used": 1,
     "v1": 1
    }
