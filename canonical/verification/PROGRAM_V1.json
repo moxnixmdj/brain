@@ -1,0 +1,337 @@
+{
+  "schema": "PROJECT_BRAIN_PROGRAM_V1",
+  "measured": "2026-11-05",
+  "train": 120,
+  "test": 120,
+  "seeds": 1,
+  "worlds": {
+    "xor3": {
+      "methods_only": 0.8583,
+      "with_programs": 0.8583,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.85,
+      "nested_with_programs": 0.85,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "nearest(k=1)[raw]",
+        "nearest(k=1)[raw]"
+      ],
+      "admitted": 4,
+      "set_aside": 0,
+      "deepest_size": 5,
+      "searched": 573,
+      "proposed": 5,
+      "pays_for_itself": {
+        "with": 0.85,
+        "without": 0.5167,
+        "pays": true
+      },
+      "programs": [
+        "mindiff(c, div(b, a))",
+        "mindiff(c, div(a, b))",
+        "mindiff(a, div(b, c))",
+        "maxdiff(c, sub(b, a))"
+      ]
+    },
+    "count3": {
+      "methods_only": 1.0,
+      "with_programs": 1.0,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 1.0,
+      "nested_with_programs": 1.0,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "tree(depth=3)[raw]",
+        "tree(depth=3)[raw]"
+      ],
+      "admitted": 0,
+      "set_aside": 3,
+      "deepest_size": 0,
+      "searched": 573,
+      "proposed": 30,
+      "pays_for_itself": {
+        "with": 0.9083,
+        "without": 1.0,
+        "pays": false
+      },
+      "programs": []
+    },
+    "and": {
+      "methods_only": 1.0,
+      "with_programs": 1.0,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.725,
+      "nested_with_programs": 0.725,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "belief[incumbent]",
+        "belief[incumbent]"
+      ],
+      "admitted": 3,
+      "set_aside": 0,
+      "deepest_size": 5,
+      "searched": 161,
+      "proposed": 4,
+      "pays_for_itself": {
+        "with": 0.9667,
+        "without": 0.775,
+        "pays": true
+      },
+      "programs": [
+        "add(a, mindiff(a, b))",
+        "mul(a, b)",
+        "mul(a, mul(b, b))"
+      ]
+    },
+    "or": {
+      "methods_only": 0.9917,
+      "with_programs": 0.9917,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.9917,
+      "nested_with_programs": 0.9917,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "belief[incumbent]",
+        "belief[incumbent]"
+      ],
+      "admitted": 0,
+      "set_aside": 4,
+      "deepest_size": 0,
+      "searched": 161,
+      "proposed": 4,
+      "pays_for_itself": {
+        "with": 1.0,
+        "without": 1.0,
+        "pays": false
+      },
+      "programs": []
+    },
+    "xor": {
+      "methods_only": 0.975,
+      "with_programs": 0.975,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.975,
+      "nested_with_programs": 0.975,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "tree(depth=3)[raw]",
+        "tree(depth=3)[raw]"
+      ],
+      "admitted": 4,
+      "set_aside": 0,
+      "deepest_size": 5,
+      "searched": 161,
+      "proposed": 4,
+      "pays_for_itself": {
+        "with": 0.875,
+        "without": 0.5333,
+        "pays": true
+      },
+      "programs": [
+        "abs(sub(a, b))",
+        "maxdiff(a, maxdiff(a, b))",
+        "sub(a, maxdiff(a, b))",
+        "mindiff(a, mindiff(a, b))"
+      ]
+    },
+    "circles": {
+      "methods_only": 0.975,
+      "with_programs": 0.975,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.975,
+      "nested_with_programs": 0.975,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "nearest(k=1)[raw]",
+        "nearest(k=1)[raw]"
+      ],
+      "admitted": 0,
+      "set_aside": 0,
+      "deepest_size": 0,
+      "searched": 161,
+      "proposed": 30,
+      "pays_for_itself": {
+        "with": 0.0,
+        "without": 0.0,
+        "pays": false
+      },
+      "programs": []
+    },
+    "product": {
+      "methods_only": 1.0,
+      "with_programs": 1.0,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 1.0,
+      "nested_with_programs": 0.9667,
+      "nested_lift": -0.0333,
+      "family_chosen": [
+        "nearest(k=1)[raw]",
+        "stump[invented]"
+      ],
+      "admitted": 3,
+      "set_aside": 0,
+      "deepest_size": 5,
+      "searched": 161,
+      "proposed": 4,
+      "pays_for_itself": {
+        "with": 1.0,
+        "without": 0.9417,
+        "pays": true
+      },
+      "programs": [
+        "mul(a, b)",
+        "add(a, b)",
+        "mul(a, mul(b, b))"
+      ]
+    },
+    "sum": {
+      "methods_only": 0.9417,
+      "with_programs": 1.0,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0583,
+      "nested_methods_only": 0.9417,
+      "nested_with_programs": 1.0,
+      "nested_lift": 0.0583,
+      "family_chosen": [
+        "nearest(k=1)[raw]",
+        "stump[invented]"
+      ],
+      "admitted": 2,
+      "set_aside": 0,
+      "deepest_size": 5,
+      "searched": 161,
+      "proposed": 4,
+      "pays_for_itself": {
+        "with": 1.0,
+        "without": 0.95,
+        "pays": true
+      },
+      "programs": [
+        "add(a, b)",
+        "mul(a, mul(a, b))"
+      ]
+    },
+    "stripe": {
+      "methods_only": 0.9917,
+      "with_programs": 0.9917,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.9917,
+      "nested_with_programs": 0.9917,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "belief[incumbent]",
+        "belief[incumbent]"
+      ],
+      "admitted": 0,
+      "set_aside": 0,
+      "deepest_size": 0,
+      "searched": 161,
+      "proposed": 30,
+      "pays_for_itself": {
+        "with": 0.0,
+        "without": 0.0,
+        "pays": false
+      },
+      "programs": []
+    },
+    "noise": {
+      "methods_only": 0.5667,
+      "with_programs": 0.5667,
+      "families_fitted": [
+        14,
+        14
+      ],
+      "lift": 0.0,
+      "nested_methods_only": 0.5667,
+      "nested_with_programs": 0.5667,
+      "nested_lift": 0.0,
+      "family_chosen": [
+        "majority[raw]",
+        "majority[raw]"
+      ],
+      "admitted": 0,
+      "set_aside": 0,
+      "deepest_size": 0,
+      "searched": 161,
+      "proposed": 30,
+      "pays_for_itself": {
+        "with": 0.0,
+        "without": 0.0,
+        "pays": false
+      },
+      "programs": []
+    }
+  },
+  "parity": {
+    "exact_rule_separability": 1.0,
+    "exact_rule_size": 11,
+    "best_part_separability": 0.575,
+    "size_limit": 7,
+    "distinct_columns_searched": 3067,
+    "best_found_separability": 0.7417
+  },
+  "headline": {
+    "worlds_measured": 10,
+    "worlds_where_composition_lifted_the_method_space": [
+      "sum"
+    ],
+    "claim": "deeper composition buys almost nothing: one world out of ten gains a small, repeatable lift under nested selection (['sum']); everywhere else the augmented and unaugmented arms are identical",
+    "lift_is_repeatable_on_sum": {
+      "nested_lift_by_seed": [
+        0.058,
+        0.058,
+        0.042,
+        0.075,
+        0.0
+      ],
+      "mean": 0.047,
+      "seeds_positive": 4,
+      "mechanism": "the winning family is stump[invented] -- one cut on a computed column the unaugmented arm cannot express"
+    },
+    "real_and_not_a_capability": "programs raise the weak incumbent learner (xor3 0.517 without -> 0.85 with); that is the incumbent improving, not a new capability",
+    "parity_is_a_limit_not_a_capability": true
+  },
+  "still_mine": [
+    "the operator set (abs, add, sub, mul, div, mindiff, maxdiff) is a person's idea",
+    "the algebra contains no constants at all; parity needs one injected as a column",
+    "the size budget and the gate thresholds are chosen, not discovered"
+  ],
+  "residue": "parity is unreachable by any search guided by agreement with the answer, so a different GUIDANCE signal, not more depth or budget, is the open problem",
+  "authority": "NONE",
+  "terminal_truth": false
+}

@@ -1835,3 +1835,89 @@ data's own invariances rather than from operators I named. Neither is a token ch
 this log removed them would be false.
 
 Authority: **NONE**. Terminal truth: `false`. No capability credit.
+
+---
+
+## Log 19 — the shape of a thought (2026-11-05)
+
+**The static thing this log attacks.** Logs 16 and 18 both worked inside a hypothesis *language* I
+wrote down. `vocabulary_v1.candidate_expressions` was a fixed shapelist: every unary application,
+every pair of senses, and each signal with itself. Nothing recurses, so `(a * b) * c` — a three-way
+interaction — could not be spelled at all, however much evidence arrived or however many gates
+approved. The creature could think about two things together and never about three. That is not a
+limit of arithmetic; it is a limit of a list I authored.
+
+**What was built.** `canonical/runtime/program_v1.py` synthesises expressions bottom-up. At each
+size it combines everything from the sizes below and keeps one representative per distinct *value
+vector* the data produces — because `add(a, b)` and `add(b, a)` are one idea, and an
+enumerator that cannot tell them apart spends its budget on arithmetic's synonyms. Size counts
+nodes: `base` 1, `abs(x)` 2, `mul(a,b)` 3, `mul(mul(a,b),c)` 5. Two worlds with a third signal
+(`xor3`, `count3`) were added to `worlds_v1` so a three-wide thought has something to be true about.
+Candidates face `vocabulary_v1`'s gates **unchanged**, then one new gate, `pays_for_itself`: does a
+model that can see these computed senses predict better than one that cannot?
+
+### What is real
+
+| Claim | Verdict | Measurement |
+|---|---|---|
+| A composition can be wider than a pair | **TRUE** | deepest admitted size 5; a size-11 rule is spellable |
+| Wider composition beats the method space | **TRUE on one world in ten** | `sum` 0.942 → 1.000, nested lift +0.047 over 5 seeds (4 positive) |
+| The lift is repeatable, not a single lucky seed | **TRUE** | +0.058, +0.058, +0.042, +0.075, 0.000 |
+| The lift is a new capability | **FALSE** | the winning family is `stump[invented]` — the same stump, reading a column it could not express |
+| Composition helps anywhere else | **FALSE** | xor3, count3, and, or, xor, circles, stripe, noise: lift 0.000 |
+| Composition can hurt | **TRUE** | `product` 1.000 → 0.967 under nested selection |
+| Programs lift the weak incumbent | **TRUE, not a capability** | xor3 0.517 without → 0.85 with; the incumbent improved |
+| Passing the gates is paying for yourself | **FALSE** | `count3` admits programs that score 0.908 against 1.000 without |
+| The operator set is no longer mine | **FALSE** | `abs add sub mul div mindiff maxdiff` are a person's idea |
+| The algebra can find a threshold on its own | **FALSE** | there are **no constants at all**; parity needs one injected as a column |
+| Parity is reachable by searching harder | **FALSE, and structurally so** | see below |
+
+### The parity result — a limit, not a capability
+
+The exact three-way rule exists; with a constant column `k` it is
+`mul(mul(sub(a,k),sub(b,k)),sub(c,k))`, size **11**, and it separates `xor3` at **1.000**. Every
+proper part of it is at **chance** (`sub(a,k)` 0.575, the pair 0.517). A gain-guided search over
+**3,067** distinct columns up to size 7 reaches **0.742**. So the search does not fail for lack of
+budget or depth: it prunes the only path because the path looks worthless at every step it can see.
+This is why parity has failed in every single log, and it says the open problem is a different
+**guidance signal**, not a bigger search.
+
+### Three defects this log found in itself
+
+1. **Size accounting made the search a shapelist in disguise.** At `MAX_SIZE = 3` the search kept
+   **35** columns — because `mul(a,b)` alone is size 3, nothing could nest. The budget looked tiny
+   and the result looked like a finding. Check the searched count before interpreting any "search
+   failed".
+2. **The fixture moved under the measurement.** Adding a third signal to `worlds_v1` drew
+   `rng.random()` for *every* world, burning one draw per row and silently renumbering every
+   two-signal fixture other logs were measured on. Two committed tests failed; the guard was
+   asserting nothing about the stream. Now `c` is drawn only inside the three-signal branch, and
+   every two-signal world is verified byte-identical to the previous commit.
+3. **A record whose schema depended on its own verdict.** `set_aside` was created only when a
+   program *failed* to pay, so reading it on a world that worked raised `KeyError` — the describe
+   path worked exactly on the failures. Both keys now exist on every return path.
+
+Two more, carried from the mutation pass: the first A/B built folds before augmentation so "with"
+and "without" compared a thing with itself (third occurrence of this bug class); and the first
+probe handed the programs arm 14 method families against the baseline's 8, so "programs help" was
+partly "more candidates were tried". The probe now holds the menu fixed and chooses the family by
+inner validation.
+
+### Cost
+
+Expressions per world: 573 distinct columns on three-signal, 161 on two-signal; 3,067 for the
+parity probe. Fits: 4 time-folds × 2 arms per world, 10 worlds, plus 14 families × 4 inner folds for
+nested selection. Nothing here is a solve rate.
+
+### What the deepest layer says now
+
+Log 18 left the primitives — a tree, a distance, a threshold — as the layer a person wrote. This
+log added a fourth: **the operator set and the absence of constants**. I can now say precisely what
+composition does not fix. A creature whose hypothesis language is `add/sub/mul/div` of signals
+cannot find a rule that is invisible from inside that language one step at a time, and no amount of
+search repairs it. The next honest target is not a wider expression but a **guidance signal that
+survives a step with no gain** — or a representation learned from the data's own invariances rather
+than from operators I named.
+
+Authority: **NONE**. Terminal truth: `false`. No capability credit. Unaided closure for classes
+that matter: **still 0**.

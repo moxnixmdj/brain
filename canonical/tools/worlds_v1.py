@@ -25,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+THREE_SIGNAL = {"xor3", "count3"}
+
 RULES = {
     "and": "BOTH if a > 0.5 and b > 0.5 else NOT",
     "or": "ANY if a > 0.5 or b > 0.5 else NEITHER",
@@ -33,6 +35,8 @@ RULES = {
     "product": "HIGH if a * b > 0.25 else LOW",
     "sum": "HI if a + b > 1 else LO",
     "stripe": "LEFT if b > 0.35 else RIGHT",
+    "xor3": "DIFF if an odd number of a, b, c are above 0.5 (three-way parity)",
+    "count3": "MANY if at least two of a, b, c are above 0.5",
     "noise": "a label independent of every signal",
 }
 
@@ -50,6 +54,11 @@ def world(kind: str, n: int, seed: int) -> list[dict]:
     rows = []
     for index in range(n):
         a, b = rng.random(), rng.random()
+        signals = {"a": a, "b": b}
+        if kind in THREE_SIGNAL:
+            # Drawn ONLY here: an unconditional third draw would shift the seeded stream for
+            # every two-signal world and silently renumber fixtures other logs were measured on.
+            signals["c"] = rng.random()
         if kind == "and":
             verdict = "BOTH" if (a > 0.5 and b > 0.5) else "NOT"
         elif kind == "or":
@@ -64,9 +73,14 @@ def world(kind: str, n: int, seed: int) -> list[dict]:
             verdict = "HI" if a + b > 1 else "LO"
         elif kind == "stripe":
             verdict = "LEFT" if b > 0.35 else "RIGHT"
+        elif kind == "xor3":
+            high = sum(1 for value in (a, b, signals["c"]) if value > 0.5)
+            verdict = "ODD" if high % 2 else "EVEN"
+        elif kind == "count3":
+            verdict = "MANY" if sum(1 for v in (a, b, signals["c"]) if v > 0.5) >= 2 else "FEW"
         else:
             verdict = rng.choice(["X", "Y"])
-        rows.append({"group": f"g{index}", "signals": {"a": a, "b": b}, "verdict": verdict})
+        rows.append({"group": f"g{index}", "signals": signals, "verdict": verdict})
     return rows
 
 
