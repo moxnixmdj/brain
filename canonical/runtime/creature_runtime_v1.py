@@ -2141,13 +2141,41 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
         _shutil.rmtree(td, ignore_errors=True)
 
 
-def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dict[str, Any]:
-    """Is the repair a capability, or a memorized answer?
+def _perturb(value: Any) -> Any:
+    """Move a value onto input the test never showed, keeping its shape."""
+    if isinstance(value, bool):
+        return not value
+    if isinstance(value, int):
+        return value + 7
+    if isinstance(value, float):
+        return value + 7.5
+    if isinstance(value, str):
+        return value + "z" if len(value) > 1 else value * 3
+    if isinstance(value, (list, tuple)):
+        _moved = [_perturb(v) for v in value]
+        return type(value)(_moved + [value[-1] if value else 0]) if value else type(value)([1])
+    return value
 
-    Takes the passing test file, replaces each literal argument tuple with a *different* tuple of
-    the same arity, and derives the expected result from the source's own repaired body evaluated
-    on the new inputs. A function that computed the answer passes; a function that returns the
-    number it saw fails. Nothing here consults the repair organ's opinion.
+
+def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dict[str, Any]:
+    """Is the repair a capability, or an answer fitted to the case it was shown?
+
+    Method, and why it is this and not something cleverer:
+
+      1. Find every assertion in the owed test that calls a workspace function on literal inputs.
+         Not just the first -- measured 2026-11-05, looking only at the first made the probe reject
+         honest repairs (`div(1, 0) is None`) for the reason `NO_LITERAL_CALL_TO_PERTURB`.
+      2. Perturb the inputs, keeping their shape, and ask the *repaired code itself* what it now
+         returns. The answer must move. A function that returns `5` whatever you give it has
+         memorized a constant, and a constant is not a capability.
+      3. Perturb once more. A function whose output does not move between two different inputs is
+         not using its arguments: `head(xs) -> xs` passes `head([1,2,3]) == [1,2,3]` and would pass
+         any held-out the test's shape allows, while doing nothing the function was asked to do.
+         This is the check that catches "moves, but always to the same place".
+
+    What this cannot do, stated plainly so the creature is not credited for more than it did:
+    proving `a + b` correct requires a specification the test does not contain. This probe rejects
+    memorization and argument-blindness. It cannot confirm intent.
     """
     import ast as _ast
     import re as _re
@@ -2157,26 +2185,26 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
     except OSError as exc:
         return {"generalizes": False, "reason": f"UNREADABLE_OWED_TEST: {exc}"}
 
-    call_re = _re.compile(r"assert\s+([A-Za-z_][\w.]*)\(([^()]*)\)\s*==\s*([^\n#]+)")
-    calls = call_re.findall(txt)
-    if not calls:
+    pat = _re.compile(
+        r"assert\s+([A-Za-z_][\w.]*)\(([^()]*)\)\s*(==|is)\s*([^\n#]+)"
+    )
+    cases = []
+    for fn_name, arg_src, op, exp_src in pat.findall(txt):
+        try:
+            args = _ast.literal_eval(f"({arg_src},)")
+            expected = _ast.literal_eval(exp_src.strip())
+        except Exception:
+            continue
+        if args:
+            cases.append((fn_name, args, op, expected))
+    if not cases:
         return {"generalizes": False, "reason": "NO_LITERAL_CALL_TO_PERTURB"}
 
-    fn_name, arg_src, exp_src = calls[0]
-    try:
-        args = _ast.literal_eval(f"({arg_src},)")
-        expected = _ast.literal_eval(exp_src.strip())
-    except Exception as exc:
-        return {"generalizes": False, "reason": f"UNPERTURBABLE_LITERALS: {exc}"}
-    if not args or not all(isinstance(a, (int, float)) for a in args):
-        return {"generalizes": False, "reason": "NON_NUMERIC_ARGS"}
-    if not isinstance(expected, (int, float)):
-        return {"generalizes": False, "reason": "NON_NUMERIC_EXPECTATION"}
-
-    # Find the source file that defines the function -- by following the test's own imports, not
-    # by scanning the tree. Scanning is how this took minutes on a real repository (5,210 .py
-    # files): a probe that is too slow to run is a probe that silently decides "no gain".
+    fn_name, args, op, expected = cases[0]
     short = fn_name.split(".")[-1]
+
+    # Locate the definition by following the test's own imports. Scanning the tree is how this once
+    # took minutes on a real repository; a probe too slow to run is a probe that silently says no.
     candidates: list[pathlib.Path] = []
     try:
         tree = _ast.parse(txt)
@@ -2205,35 +2233,48 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
     if target is None:
         return {"generalizes": False, "reason": f"DEFINITION_NOT_FOUND: {short}"}
 
-    new_args = tuple(int(a) + 7 for a in args) if all(isinstance(a, int) for a in args) \
-        else tuple(float(a) + 7.0 for a in args)
-    # Ask the repaired code itself what it now produces for the new inputs. If it cannot run, or
-    # it produces the same constant it produced before, that is precisely the failure we are testing
-    # for -- not an error to be excused.
     try:
         ns: dict[str, Any] = {}
         exec(compile(target.read_text(encoding="utf-8"), str(target), "exec"), ns)  # noqa: S102
         fn = ns.get(short)
         if fn is None:
             return {"generalizes": False, "reason": f"NOT_CALLABLE: {short}"}
-        produced = fn(*args)
-        produced_new = fn(*new_args)
     except Exception as exc:  # noqa: BLE001
         return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
 
-    # A function that ignores its arguments is not a capability, whatever its test says.
-    ignores_inputs = produced == expected and produced_new == produced
+    args_a = tuple(_perturb(a) for a in args)
+    args_b = tuple(_perturb(a) for a in args_a)
+    try:
+        produced = fn(*args)
+        out_a = fn(*args_a)
+        out_b = fn(*args_b)
+    except Exception as exc:  # noqa: BLE001
+        return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
+
+    matches_owed = (produced == expected) if op == "==" else (produced is expected)
+    ignores_inputs = out_a == out_b and not isinstance(expected, bool)
+    # An identity function survives every shape-preserving perturbation, so no held-out input of
+    # this form can tell `head(xs) -> xs` apart from a correct `head`. That is a property of the
+    # *evidence*, not of the repair: the owed assertion carries nothing that discriminates them.
+    # Credit is withheld, and the reason says so rather than pretending the code was exonerated.
+    identity_like = all(isinstance(o, (list, tuple, str)) and o == a[0]
+                        for o, a in ((out_a, args_a), (out_b, args_b)))
+    generalizes = bool(matches_owed and not ignores_inputs and not identity_like)
     return {
-        "generalizes": (not ignores_inputs) and produced == expected,
+        "generalizes": generalizes,
         "args": list(args),
-        "new_args": list(new_args),
+        "perturbed": [list(args_a), list(args_b)],
         "produced": produced,
-        "produced_on_new_args": produced_new,
+        "produced_perturbed": [out_a, out_b],
         "expected": expected,
         "ignores_inputs": ignores_inputs,
+        "identity_like": identity_like,
         "source": str(target.relative_to(ws_root)),
-        "reason": ("RETURNS_A_CONSTANT" if ignores_inputs
-                   else "WRONG_ON_OWED_INPUT" if produced != expected else "COMPUTES"),
+        "reason": ("REPAIRED_CODE_DISAGREES_WITH_OWED_TEST" if not matches_owed
+                   else "OUTPUT_IGNORES_INPUTS" if ignores_inputs
+                   else "TEST_CANNOT_DISTINGUISH_IDENTITY" if identity_like
+                   else "BOOLEAN_RESULT_INPUT_SENSITIVITY_UNPROBED" if isinstance(expected, bool)
+                   else "RESPONDS_TO_INPUT"),
     }
 
 

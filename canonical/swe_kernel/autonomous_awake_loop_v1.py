@@ -640,6 +640,23 @@ class AwakeAgencyDaemon:
         self._file_sha_memo[key] = (int(st.st_mtime_ns), int(st.st_size), digest)
         return digest
 
+    def _note_staged_change(self, staging: dict[str, str], rel: str, src: str) -> bool:
+        """Record a candidate only if it differs from what the world already holds.
+
+        Measured 2026-11-05: the coupled engine returned `pass: True` with `files_repaired` naming
+        two modules whose content was byte-identical to the originals. That is a no-op reported as
+        a repair, and because that branch `continue`d, it suppressed the honest failure of the owed
+        test. A repair that changes nothing has not repaired anything.
+        """
+        try:
+            current = (self.workspace_root / rel).read_text(encoding="utf-8")
+        except OSError:
+            current = None
+        if current == src:
+            return False
+        staging[str(rel)] = src
+        return True
+
     def _sense_failing_workspace_tests(self, within: Sequence[str] | None = None) -> list[tuple[str, str]]:
         """Incrementally sense failing `test_*.py` pairs via `(mtime_ns, size) -> sha256` memoization (`< 1 ms` warm)."""
         import hashlib
@@ -816,6 +833,7 @@ class AwakeAgencyDaemon:
         cow_root: pathlib.Path,
         cow_tf: pathlib.Path,
         fail_out: str,
+        staged_out: dict[str, str] | None = None,
     ) -> dict[str, Any] | None:
         """Localize suspect non-test `.py` files and screen single/coupled patches in `PersistentConfinedZygote`."""
         from canonical.runtime import brokered_workspace_execution_v1 as broker
@@ -903,8 +921,8 @@ class AwakeAgencyDaemon:
         for rel_p, new_s in winner.items():
             before_s = (cow_root / rel_p).read_text(encoding="utf-8")
             cow_write_text(cow_root / rel_p, new_s)
-            if self.apply_verified_repairs:
-                _stage_if_changed(str(rel_p), new_s)  # staged; the caller accepts or discards
+            if self.apply_verified_repairs and staged_out is not None:
+                self._note_staged_change(staged_out, str(rel_p), new_s)
             cryst = self.skill_store.crystallize_code_fix(
                 before_snippet=before_s,
                 after_snippet=new_s,
@@ -960,22 +978,6 @@ class AwakeAgencyDaemon:
         _staged: dict[str, str] = {}
         failures_found = 0
 
-        def _stage_if_changed(rel: str, src: str) -> bool:
-            """Stage a candidate only if it differs from what the world already holds.
-
-            Measured 2026-11-05: the coupled engine returned `pass: True` with `files_repaired`
-            naming two modules whose staged content was byte-identical to the originals. That is a
-            no-op reported as a repair, and because it `continue`d, it suppressed the honest
-            failure of the owed test. A repair that changes nothing has not repaired anything.
-            """
-            try:
-                current = (self.workspace_root / rel).read_text(encoding="utf-8")
-            except OSError:
-                current = None
-            if current == src:
-                return False
-            _staged[str(rel)] = src
-            return True
 
         with tempfile.TemporaryDirectory(prefix="brain-awake-cow-") as tmp_str:
             cow_root = pathlib.Path(tmp_str) / "ws"
@@ -992,10 +994,10 @@ class AwakeAgencyDaemon:
                 target_stem = orig_tf.stem[len("test_"):]
                 cand_targets = list(cow_root.glob(f"**/{target_stem}.py"))
                 if not cand_targets:
-                    mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
+                    mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out, _staged)
                     if mf_out is not None:
                         _changed = [r for r in (mf_out["files_repaired"] or [])
-                                    if _stage_if_changed(str(r), (cow_root / r).read_text(
+                                    if self._note_staged_change(_staged, str(r), (cow_root / r).read_text(
                                         encoding="utf-8"))]
                         if _changed:
                             repaired_records.append({
@@ -1022,7 +1024,7 @@ class AwakeAgencyDaemon:
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                if _stage_if_changed(str(rel_rep),
+                                if self._note_staged_change(_staged, str(rel_rep),
                                                      (cow_root / rel_rep).read_text(encoding="utf-8")):
                                     _changed.append(rel_rep)
                     if _changed:
@@ -1109,7 +1111,7 @@ class AwakeAgencyDaemon:
                 if recalled is not None:
                     patched = str(recalled["patched_source"])
                     cow_write_text(cow_mod, patched)
-                    if self.apply_verified_repairs and _stage_if_changed(str(rel_mod), patched):
+                    if self.apply_verified_repairs and self._note_staged_change(_staged, str(rel_mod), patched):
                         repaired_records.append({
                             "module": str(rel_mod),
                             "mode": "VERIFIED_SKILL_RECALL",
@@ -1169,10 +1171,10 @@ class AwakeAgencyDaemon:
                             solved_src = cand_win
                 if solved_src is None:
                     cow_write_text(cow_mod, before_src)
-                    mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
+                    mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out, _staged)
                     if mf_out is not None:
                         _changed = [r for r in (mf_out["files_repaired"] or [])
-                                    if _stage_if_changed(str(r), (cow_root / r).read_text(
+                                    if self._note_staged_change(_staged, str(r), (cow_root / r).read_text(
                                         encoding="utf-8"))]
                         if _changed:
                             repaired_records.append({
@@ -1198,7 +1200,7 @@ class AwakeAgencyDaemon:
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                if _stage_if_changed(str(rel_rep),
+                                if self._note_staged_change(_staged, str(rel_rep),
                                                      (cow_root / rel_rep).read_text(encoding="utf-8")):
                                     _changed.append(rel_rep)
                     if _changed:
@@ -1245,7 +1247,7 @@ class AwakeAgencyDaemon:
                 # with an answer a held-out input then failed. The caller decides, and a rejected
                 # candidate leaves no trace in the world.
                 if self.apply_verified_repairs and solved_src != before_src \
-                        and _stage_if_changed(str(rel_mod), solved_src):
+                        and self._note_staged_change(_staged, str(rel_mod), solved_src):
                     repaired_records.append({
                         "module": str(rel_mod),
                         "mode": "AUTONOMOUS_COW_SYNTHESIS_AND_CRYSTALLIZATION",
@@ -1319,7 +1321,7 @@ class AwakeAgencyDaemon:
                 if recalled_p is not None:
                     patched_p = str(recalled_p["patched_source"])
                     cow_write_text(cow_pmod, patched_p)
-                    if self.apply_verified_repairs and _stage_if_changed(str(rel_pmod), patched_p):
+                    if self.apply_verified_repairs and self._note_staged_change(_staged, str(rel_pmod), patched_p):
                         repaired_records.append({
                             "module": str(rel_pmod),
                             "language": lang,
