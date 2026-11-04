@@ -3186,8 +3186,99 @@ def _apply_nested_fn(
         return None
 
 
+def _iterative_unlock_mutations(source_code: str) -> list[str]:
+    """RSA-style recursion→loop: same multi-step unlock law, no `_q` self-call."""
+    src = str(source_code or "")
+    if not src.strip():
+        return []
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    walk_body = ast.parse(
+        "def _w():\n"
+        "    frontier = [u for u in node['unlocks'] if u in by_id and u not in nxt]\n"
+        "    seen_u = set(nxt)\n"
+        "    left = leftover\n"
+        "    while frontier and left > 0:\n"
+        "        u = frontier.pop(0)\n"
+        "        if u in seen_u or u not in by_id:\n"
+        "            continue\n"
+        "        ch = by_id[u]\n"
+        "        skip = False\n"
+        "        for r in ch['requires']:\n"
+        "            if r not in seen_u:\n"
+        "                skip = True\n"
+        "                break\n"
+        "        if skip or ch['cost'] > left + 1e-12:\n"
+        "            continue\n"
+        "        future = max(future, ch['value'] * (1.0 - 0.85 * burns.get(u, 0.0)) - ch['cost'] * 0.05)\n"
+        "        left = left - ch['cost']\n"
+        "        seen_u.add(u)\n"
+        "        frontier.extend([x for x in ch['unlocks'] if x in by_id and x not in seen_u])\n"
+    ).body[0].body
+
+    class _IterQ(ast.NodeTransformer):
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
+            if node.name != "_q":
+                return self.generic_visit(node)
+            new_body: list[ast.stmt] = []
+            skip_until_return = False
+            inserted = False
+            for st in node.body:
+                if skip_until_return:
+                    if isinstance(st, ast.Return):
+                        skip_until_return = False
+                        new_body.append(st)
+                    continue
+                new_body.append(st)
+                if (
+                    isinstance(st, ast.Assign)
+                    and len(st.targets) == 1
+                    and isinstance(st.targets[0], ast.Name)
+                    and st.targets[0].id == "future"
+                    and isinstance(st.value, ast.Constant)
+                    and st.value.value == 0.0
+                ):
+                    new_body.extend(copy.deepcopy(walk_body))
+                    skip_until_return = True
+                    inserted = True
+            if not inserted:
+                return node
+            node = copy.deepcopy(node)
+            node.body = new_body
+            return node
+
+    new_tree = _IterQ().visit(copy.deepcopy(tree))
+    ast.fix_missing_locations(new_tree)
+    try:
+        after = ast.unparse(new_tree) + "\n"
+    except Exception:
+        return []
+    if after == src:
+        return []
+    return [after]
+
+
 def _structural_policy_mutations(source_code: str) -> list[str]:
-    """Produce structurally different POLICY genomes (flat one-level unlock, not recursive `_q`)."""
+    """Structurally different POLICY genomes: 1-step flatten and iterative multi-step walk."""
+    src = str(source_code or "")
+    if not src.strip():
+        return []
+    out: list[str] = []
+    try:
+        out.extend(_flatten_recursive_q(src))
+    except Exception:
+        pass
+    try:
+        out.extend(_iterative_unlock_mutations(src))
+    except Exception:
+        pass
+    return out
+
+
+def _flatten_recursive_q(source_code: str) -> list[str]:
+    """One-level unlock genome (no recursive `_q` self-call)."""
     src = str(source_code or "")
     if not src.strip():
         return []
