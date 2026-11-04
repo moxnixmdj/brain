@@ -1031,7 +1031,17 @@ def _restore_slot_delta(slot_dir, batch_id, base_dirs_set, base_files_set, prev_
                     pass
         if ov_rel in base_files_set:
             p_ov.parent.mkdir(parents=True, exist_ok=True)
-            os.symlink(f'/input/{batch_id}/{ov_rel}', p_ov)
+            # HARD LINK, not symlink -- for the same reason the slots are built with hard links. A
+            # symlink here resolves back to /input, so a test that inserts its own parent on
+            # `sys.path` imports the ORIGINAL module instead of the candidate's. Measured 2026-11-05:
+            # every wave-2 candidate in slot 0 of a package-layout world ran the base source, so a
+            # correct fix reported the base value and was scored TEST_FAILED. Wave 1 was unaffected
+            # because a fresh slot is hard-linked; only the rested slots were poisoned. This made
+            # candidate 7..36 of every batch -- most of the creature's list -- unreliable.
+            try:
+                os.link(f'/input/{batch_id}/{ov_rel}', p_ov)
+            except OSError:
+                shutil.copy2(f'/input/{batch_id}/{ov_rel}', p_ov)
     for r_s, dirs, files in os.walk(slot_dir, followlinks=False):
         rp = pathlib.Path(r_s)
         rd = rp.relative_to(slot_dir).as_posix()
@@ -1049,12 +1059,17 @@ def _restore_slot_delta(slot_dir, batch_id, base_dirs_set, base_files_set, prev_
                     pass
             else:
                 fp = rp / fn
-                if not fp.is_symlink():
+                if fp.is_symlink():
+                    # same fix as above: replace any lingering symlink with a hard link so the file
+                    # cannot resolve back to the original tree
                     try:
                         fp.unlink()
                     except OSError:
                         pass
-                    os.symlink(f'/input/{batch_id}/{f_rel}', fp)
+                    try:
+                        os.link(f'/input/{batch_id}/{f_rel}', fp)
+                    except OSError:
+                        shutil.copy2(f'/input/{batch_id}/{f_rel}', fp)
 
 def _send(obj):
     raw = json.dumps(obj, separators=(',', ':')).encode('utf-8')

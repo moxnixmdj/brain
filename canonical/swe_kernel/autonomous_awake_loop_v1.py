@@ -1159,11 +1159,17 @@ class AwakeAgencyDaemon:
                 # third of it, and this repairs it from the file's own vocabulary.
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
+                # Syntax repairs exist because a file that does not parse makes every other reading
+                # meaningless -- and because the oracle that authorised every repair in this project
+                # cannot run at all until the file parses. `ast.parse` is a PRECONDITION here, never a
+                # repair: a candidate that only parses is still screened by the owed test.
+                from canonical.swe_kernel.syntax_repair_v1 import propose_syntax_repairs
 
                 raw_cands = (
                     propose_operator_family_swaps(before_src, max_candidates=24)
                     + propose_binding_repairs(before_src, fail_out, max_candidates=6)
                     + propose_signature_repairs(before_src, fail_out, max_candidates=6)
+                    + propose_syntax_repairs(before_src, fail_out, max_candidates=6)
                     + propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
                     + guided_cands
                     + _propose_deterministic_ast_repairs(before_src, max_candidates=16)
