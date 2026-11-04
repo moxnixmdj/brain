@@ -61,6 +61,7 @@ from __future__ import annotations
 import csv
 import io
 import math
+import pathlib
 from pathlib import Path
 
 #: THE PROBE MUST ACTUALLY CHANGE THE COLUMN. A fixed probe is a false-positive machine.
@@ -118,6 +119,39 @@ def _numeric_columns(header: list[str], body: list[list[str]]) -> list[str]:
     return out
 
 
+def _perturb_reversed(path: Path, column: str) -> str | None:
+    """The same table with `column` values REVERSED down the rows.
+
+    WHY UNIFORM PERTURBATION IS NOT ENOUGH. Setting every value to the same number leaves
+    the argmin/argmax unchanged -- every row ties, and the first one wins -- so
+    `which region has the smallest amount` answered `north` no matter what the probe was,
+    and was reported as ignoring `amount` while being entirely about it.
+
+    Reversing the column keeps the multiset of values identical and changes WHICH ROW holds
+    each one. A selection ("which region has the smallest") therefore flips, while an
+    aggregate over the column does not move at all -- which is the correct, distinguishing
+    behaviour: the two read the column in genuinely different ways.
+    """
+    got = _read_table(path)
+    if got is None:
+        return None
+    header, body = got
+    if column not in header:
+        return None
+    idx = header.index(column)
+    values = [r[idx] if idx < len(r) else "" for r in body]
+    out = io.StringIO()
+    writer = csv.writer(out, lineterminator="\n")
+    writer.writerow(header)
+    for row, value in zip(body, reversed(values)):
+        new = list(row)
+        while len(new) <= idx:
+            new.append("")
+        new[idx] = value
+        writer.writerow(new)
+    return out.getvalue()
+
+
 def _perturb(path: Path, column: str, value: float) -> str | None:
     """The same table with `column` set to `value` in every row, rendered as CSV text."""
     got = _read_table(path)
@@ -170,7 +204,17 @@ def _parse(text: str) -> list[float] | None:
     return out
 
 
-def depends_on_column(root: str, question_referent: str, ask) -> dict:
+def _referent_file(base: Path, column: str, prefer: str | None = None):
+    for path in sorted(base.rglob("*.csv")):
+        if prefer and path.name.lower() != prefer and path.stem.lower() != prefer:
+            continue
+        got = _read_table(path)
+        if got and column in got[0]:
+            return path
+    return None
+
+
+def depends_on_column(root: str, question_referent: str, ask, prefer_file=None) -> dict:
     """Does `ask(...)` change when the column it claims to be about changes?
 
     `ask` is called with a directory containing one perturbed table and returns the
@@ -184,7 +228,8 @@ def depends_on_column(root: str, question_referent: str, ask) -> dict:
     if not base.is_dir() or not question_referent:
         return {"verdict": "uncheckable", "why": "nothing to perturb"}
 
-    for path in sorted(base.rglob("*.csv")):
+    first = _referent_file(base, question_referent, prefer_file)
+    for path in ([first] if first else sorted(base.rglob("*.csv"))):
         got = _read_table(path)
         if got is None:
             continue
@@ -276,9 +321,21 @@ def numeric_referent(question: str, root: str) -> str | None:
     if not words:
         return None
     base = Path(root)
+    # THE REFERENT IS SCOPED TO THE FILE THE QUESTION NAMES.
+    #
+    # Measured false positive: with `inventory.csv` and `returns.csv` both carrying
+    # `units`, `what is the total units in returns.csv` perturbed inventory.csv -- the
+    # answer correctly did not move, and it was reported as IGNORING its own referent.
+    # When a question names a file, the column in that file is the referent and the same
+    # header elsewhere is a different column about a different thing.
+    named = {w.strip("?,.:;!") for w in words}
+    tables = [(p, _read_table(p)) for p in sorted(base.rglob("*.csv"))]
+    named_tables = [(p, t) for p, t in tables
+                    if p.name.lower() in named or p.stem.lower() in named]
+    if named_tables:
+        tables = named_tables
     matches = set()
-    for path in sorted(base.rglob("*.csv")):
-        got = _read_table(path)
+    for path, got in tables:
         if got is None:
             continue
         header, body = got
@@ -299,3 +356,130 @@ def check(root: str, question: str, ask) -> dict:
                 "why": "the question does not pick out exactly one numeric column, so "
                        "there is no column it is obliged to depend on"}
     return depends_on_column(root, referent, ask)
+
+
+def is_ordinal(answer) -> bool:
+    """Is this answer a DECISION or a LABEL, as opposed to a quantity or a listing?
+
+    THE FALSE POSITIVES THAT MADE THIS NECESSARY, each measured.
+
+      * A comparison: `is the total units in returns.csv less than ...` answers `yes`. It
+        is entirely about `units`, and its answer cannot move gradually because it is
+        ordinal.
+      * A selection: `which region has the smallest amount` answers `north`. Also entirely
+        about `amount`. (This one needed a second fix -- a uniform probe leaves every row
+        tied and the argmin unchanged; see `_perturb_reversed`.)
+
+    AND THE CASE THAT MADE IT TOO BROAD. Treating every non-number as a decision flagged
+    `what is amount in sales.csv` -- answered `3 line(s)`, a LISTING -- as ignoring
+    `amount`. A listing is not about the column's values at all, so demanding that it move
+    with them is a category error of the opposite kind.
+
+    So this is deliberately narrow: a yes/no word, or a single short bare word that could
+    be a cell value. Anything with structure -- a count of lines, a bracketed vector, a
+    sentence -- is not a decision and is not given the flip test.
+    """
+    text = str(answer).strip()
+    low = text.lower()
+    if low in {"yes", "no", "true", "false"}:
+        return True
+    if _parse(text) is not None:
+        return False
+    # a bare label like `north`; not `3 line(s)`, not `[1, 2]`, not a rendered sentence
+    return bool(text) and " " not in text and "(" not in text and not text.startswith("[")
+
+
+def depends_ordinal(root: str, column: str, ask, prefer_file=None) -> dict:
+    """For a yes/no answer, look for a FLIP rather than for movement.
+
+    A comparison is about its operands even though its answer is a decision, so the probe
+    sweeps the column in both directions and asks whether the decision ever changes. If it
+    never does, the comparison is not about that column and the accusation stands.
+    """
+    from pathlib import Path
+
+    base = Path(root)
+    pick = _referent_file(base, column, prefer_file)
+    for path in [pick] if pick else sorted(base.rglob("*.csv")):
+        got = _read_table(path)
+        if got is None:
+            continue
+        header, body = got
+        if column not in header:
+            continue
+        if column not in _numeric_columns(header, body):
+            return {"verdict": "uncheckable",
+                    "why": f"{column!r} is not a numeric column"}
+        original = ask(root)
+        if original is None:
+            return {"verdict": "uncheckable", "why": "the question was not answered"}
+        idx = header.index(column)
+        values = []
+        for row in body:
+            if idx < len(row):
+                try:
+                    values.append(float(row[idx]))
+                except ValueError:
+                    pass
+        if not values:
+            return {"verdict": "uncheckable", "why": "the column holds no numbers"}
+        low, high = min(values), max(values)
+        span = (abs(high - low) or abs(high) or 1.0)
+        # sweep far enough either way that any comparison against this column flips
+        reversals = [_perturb_reversed(path, column)]
+        for probe in (low - span * 10, high + span * 10, 0.0, low, high):
+            reversals.append(_perturb(path, column, probe))
+        for text in reversals:
+            if text is None:
+                continue
+            probe_root = _build_probe_tree(base, path, text)
+            if probe_root is None:
+                continue
+            try:
+                moved = ask(probe_root)
+            finally:
+                _cleanup(probe_root)
+            if not _same(original, moved):
+                return {"verdict": "depends", "column": column,
+                        "value": original, "perturbed": moved}
+        return {"verdict": "ignores", "column": column, "value": original,
+                "why": (f"the question names {column!r} and the answer is {original}, but "
+                        f"sweeping that column far past either side of its range never "
+                        f"changed the decision")}
+    return {"verdict": "uncheckable", "why": f"no table carries {column!r}"}
+
+
+def named_file_in(question: str, root: str) -> str | None:
+    """The file name the question mentions, if it mentions exactly one."""
+    words = {w.lower().strip("?,.:;!") for w in str(question).split()}
+    hits = []
+    for path in sorted(pathlib.Path(root).rglob("*.csv")):
+        if path.name.lower() in words or path.stem.lower() in words:
+            hits.append(path.name)
+    return hits[0] if len(hits) == 1 else None
+
+
+def check_answer(root: str, question: str, ask, answer=None) -> dict:
+    """The entry point the door uses: ordinal answers get the flip test."""
+    referent = numeric_referent(question, root)
+    if referent is None:
+        return {"verdict": "uncheckable",
+                "why": "the question does not pick out exactly one numeric column"}
+    prefer = named_file_in(question, root)
+    if answer is not None and is_ordinal(answer):
+        return depends_ordinal(root, referent, ask, prefer_file=prefer)
+    if answer is not None and _parse(str(answer)) is None:
+        # A LISTING IS NOT A QUANTITY AND CANNOT BE EXPECTED TO MOVE.
+        #
+        # `what is amount in sales.csv` answers `3 line(s)` -- it lists the file. That
+        # answer is not a function of the column's VALUES, so demanding that it change
+        # when they change is a category error. Measured: it was reported as ignoring
+        # `amount`, which is the worst possible verdict for it -- the question was
+        # answered, the reader just wanted to know what is in the file.
+        #
+        # Saying so is different from saying it passed, which is why this is its own
+        # verdict rather than a quiet True.
+        return {"verdict": "uncheckable", "column": referent,
+                "why": (f"the answer {answer!r} is not a quantity, so there is no sense in "
+                        f"which it could depend on the values of {referent!r}")}
+    return depends_on_column(root, referent, ask, prefer_file=prefer)

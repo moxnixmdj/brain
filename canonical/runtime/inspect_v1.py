@@ -1042,8 +1042,23 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         ambiguous = dict(getattr(_ve, "_AMBIGUOUS_COLUMNS", {}) or {})
     except Exception:
         ambiguous = {}
+    # ASK THE REFERENT QUESTION BEFORE DECIDING WHAT HAPPENED, because the answer decides it.
+    referent = _checks_its_referent(question, comp, root)
     if ambiguous and comp is None:
         verdict = "AMBIGUOUS_REFERENT"
+    elif comp is not None and comp["verified"] and (referent or {}).get("verdict") == "ignores":
+        # THE ARITHMETIC HOLDS AND IT IS NOT AN ANSWER TO THIS QUESTION.
+        #
+        # `what is the total amount times region` returns 6 from
+        # double(count(sum(amount) by region)): verified, reproducible, and it never reads
+        # an amount. Reporting COMPUTED for that put it in the same verdict as `550` for
+        # `what is the total amount`, which is how a caller -- and a reader -- was expected
+        # to tell them apart. Nothing could.
+        #
+        # It is not NOTHING_FOUND either: something was computed and it was checkably not
+        # about the question. This is the third distinct reason in the same family as
+        # AMBIGUOUS_REFERENT, and the reason has to name itself.
+        verdict = "REFERENT_NOT_READ"
     elif comp is not None and comp["verified"] and comp["operation"] == "read_content" and unresolved:
         # It read the file and some of what was asked about is still unaccounted for.
         verdict = "READ_INCOMPLETE"
@@ -1115,7 +1130,19 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # the original defect, one layer up: the operation was real, and the subject was
         # never dealt with. An answer needs the work to hold AND the question's words to
         # be accounted for.
-        "answered": (bool(comp["verified"]) and not unresolved) if comp is not None
+        # AN ANSWER THAT IGNORES ITS OWN REFERENT IS NOT ANSWERED.
+        #
+        # The referent check shipped last round computed `ignores` and then nothing read
+        # it: `what is the total amount times region` still returned verified=True,
+        # answered=True, COMPUTED -- identical to a correct answer in every field a caller
+        # looks at. A distinction that changes no behaviour is not a distinction; it is a
+        # comment with a dict around it.
+        #
+        # `ignores` means the expression never reads the column the question names, which
+        # is the strongest possible evidence that it is not an answer. It is the same
+        # arithmetic as the `unresolved` term beside it: real work, and the question not
+        # dealt with.
+        "answered": (_answer_stands(comp, unresolved, referent)) if comp is not None
                     else (bool(hits) and not asks_for_number and not unresolved),
         "grounding_summary": summary,
         # WHAT THIS ANSWER DOES TO THE ONES ALREADY GIVEN.
@@ -1144,8 +1171,24 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # never about it. The probe value is derived from the data so the perturbation is
         # always real -- a fixed probe accused three correct answers of ignoring the column
         # they were entirely made of, on a tree that already held that value.
-        "depends_on_referent": _checks_its_referent(question, comp, root),
+        "depends_on_referent": referent,
     }
+
+
+def _answer_stands(comp, unresolved, referent: dict) -> bool:
+    """Does the work hold, the question's words get accounted for, AND the answer be about
+    the thing that was asked?
+
+    Three separate ways an answer can fail, and only the first two were ever checked. A
+    referent verdict of `uncheckable` does not block: "I could not test this" is not
+    evidence against it, and blocking on it would refuse every text-referent question in
+    the system.
+    """
+    if not comp.get("verified"):
+        return False
+    if unresolved:
+        return False
+    return (referent or {}).get("verdict") != "ignores"
 
 
 def _checks_its_referent(question: str, comp, root) -> dict:
@@ -1184,7 +1227,8 @@ def _checks_its_referent(question: str, comp, root) -> dict:
             _IN_REFERENT_PROBE = False
 
     try:
-        return _R.check(root, question, ask)
+        return _R.check_answer(root, question, ask,
+                               answer=(comp or {}).get("value"))
     except Exception as exc:
         # A CHECK THAT CRASHED IS NOT A CHECK THAT PASSED.
         return {"verdict": "uncheckable", "why": f"the check raised {type(exc).__name__}: {exc}"}

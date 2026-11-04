@@ -85,6 +85,12 @@ _RECOMBINATORS = {
 
 _CACHE: dict[str, str | None] = {}
 
+#: Set to False to measure without remembering. Tests use this so a test run cannot mutate
+#: the committed experience store -- measured: the suite wrote 61 lines into
+#: canonical/runtime/state/experience_v1.json before this existed, which means a test run
+#: on CI and a test run on a laptop disagreed depending on order.
+REMEMBER = True
+
 
 def decomposes_by(kind: str) -> str | None:
     """Which combination of the parts reproduces the whole, or None if none does.
@@ -95,6 +101,20 @@ def decomposes_by(kind: str) -> str | None:
     """
     if kind in _CACHE:
         return _CACHE[kind]
+
+    # HAS THIS BEEN MEASURED BEFORE, OFTEN ENOUGH TO REUSE?
+    #
+    # _CACHE lived and died with the process, so every fresh start rediscovered the same
+    # facts and the discovery could never influence anything it had learned last time.
+    # The evidence now goes through the creature's own experience store, which gates it:
+    # a conclusion is reused only after consistent observation (e-process, Ville), and an
+    # unproven one is measured again rather than trusted. Memory removes the NEED TO
+    # MEASURE, never the need for the measurement to have happened.
+    known, remembered = _recall(kind)
+    if known:
+        _CACHE[kind] = remembered
+        return remembered
+
     spec = V._AGGREGATES.get(kind)
     if spec is None:
         _CACHE[kind] = None
@@ -125,7 +145,38 @@ def decomposes_by(kind: str) -> str | None:
     # same as "either is valid". Prefer the narrowest, and say so by returning the name.
     result = next(iter(sorted(survivors)), None)
     _CACHE[kind] = result
+    if REMEMBER:
+        _remember(kind, result)
     return result
+
+
+def _recall(kind: str):
+    """The remembered answer for this aggregate, or (False, None) if it must be measured.
+
+    A missing memory module is not an error -- this law works without memory, it just
+    works harder. Swallowing the import keeps the discovery usable in isolation.
+    """
+    try:
+        from canonical.runtime import answer_memory_v1 as _M
+    except Exception:
+        return (False, None)
+    try:
+        return _M.recall_decomposition(kind)
+    except Exception:
+        return (False, None)
+
+
+def _remember(kind: str, result) -> None:
+    """Record what the measurement found. Never raises: a memory that fails to write is a
+    degraded system, not a broken computation."""
+    try:
+        from canonical.runtime import answer_memory_v1 as _M
+    except Exception:
+        return
+    try:
+        _M.remember_decomposition(kind, result)
+    except Exception:
+        return
 
 
 def aggregate_kind(node) -> str | None:
