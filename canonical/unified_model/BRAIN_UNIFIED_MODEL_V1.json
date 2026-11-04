@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 304,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6696,
+  "research_index_records": 6697,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d809936ab8e04fcf021ca934410629365bb1600168d910bb443839a771c890f8"
+  "value": "381625a4f72bb9bb216551850162742c59a354481737e6569231ec345bfa1bb6"
  },
  "engines": [
   {
@@ -220786,6 +220786,51 @@
    }
   },
   {
+   "action_id": "ONE_SIDE_CANNOT_DICTATE_THE_LAW_FOR_BOTH",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/ONE_SIDE_CANNOT_DICTATE_THE_LAW_FOR_BOTH_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_SIDE_CANNOT_DICTATE_THE_LAW_FOR_BOTH_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dc86e87fe9eaa61670fa3c30d5268cae5da48a34ac9e8de04540d350f01a46ef",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "aggregate": 1,
+    "anywhere": 1,
+    "applied": 1,
+    "asked": 1,
+    "because": 1,
+    "both": 1,
+    "breakdown": 2,
+    "bucket": 1,
+    "cannot": 1,
+    "carry": 1,
+    "caught": 1,
+    "check": 1,
+    "correct": 1,
+    "data": 2,
+    "decomposition": 1,
+    "derived": 1,
+    "dictate": 1,
+    "entries": 1,
+    "firing": 1,
+    "fix": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "grouping": 1,
+    "guard": 1,
+    "law": 2,
+    "longer": 1,
+    "looked": 1,
+    "loses": 1,
+    "no": 2,
+    "node": 2,
+    "not": 4,
+    "parts": 2
+   }
+  },
+  {
    "action_id": "OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1",
    "capability": false,
    "date": "2026-11-03",
@@ -229869,7 +229914,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_ledger_v1.py",
-   "sha256": "8dcbf2809b30acc0fac31c156afeceadb45fcbf2915be127f68028dba71a4577",
+   "sha256": "10b602679c7dc28b251b6ff81a6e4620396f54c7474bcc44f543a9527a75c6b5",
    "summary": "The system holds what it has already said, and checks new answers against it.",
    "symbol_count": 9,
    "symbols": [
@@ -246727,7 +246772,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/decomposition_law_v1.py",
-   "sha256": "712af1a6814d29a80c2f67fd31492ca828940dbcbbef9a6a0e1df55a851cc27c",
+   "sha256": "ab53993f6117a02a0724e55e4d9dd46ef6546a02ff3c86e5bd613fe45d061a9c",
    "summary": "Whether one answer can be checked against another is DISCOVERED, not declared.",
    "symbol_count": 9,
    "symbols": [
