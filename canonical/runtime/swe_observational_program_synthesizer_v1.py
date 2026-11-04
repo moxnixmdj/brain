@@ -376,9 +376,19 @@ def synthesize_python_function_body(
     # match returns from inside the search and multiplicity was never observable.
     admissible_bodies: list[str] = []
     global _LAST_COVERAGE
+    # MEASURED, 2026-11-04: coverage used to be written only when `collect_admissible` was set, so the
+    # DEFAULT path -- the one every caller in the organ graph uses -- returned `None` and said nothing
+    # about why. `last_search_coverage()` then answered `{}` after a miss, and a caller had no way to
+    # distinguish "no body in this grammar reproduces the examples" from "the bank filled". Those are
+    # different facts: the first is about the language, the second about a number. A miss on the
+    # default path must therefore announce its budget too, or every refusal built on top of it is
+    # attributing a limit to the grammar that may only be a limit on how hard the search was allowed
+    # to look. Measured cost of the difference: `x*y+1` is UNREACHABLE at the organ graph's
+    # `max_bank_size=72` and FOUND at 900, the function's own default.
+    _LAST_COVERAGE = {"complete": False, "reason": "did not finish", "bank_size": 0,
+                      "bank_capacity": int(max_bank_size), "max_weight": int(max_weight),
+                      "collecting": bool(collect_admissible)}
     if collect_admissible:
-        _LAST_COVERAGE = {"complete": False, "reason": "did not finish", "bank_size": 0,
-                          "bank_capacity": int(max_bank_size)}
         # Clear at the START. Measured 2026-11-04: the 1-level STUN arm below returned a body
         # instead of recording it, so a collecting call could exit without reaching the handoff at
         # the end -- and `last_admissible_bodies()` then reported the PREVIOUS call's bodies to a
@@ -787,21 +797,24 @@ def synthesize_python_function_body(
         # the function's contract for every existing caller; the default path is untouched.
         _LAST_ADMISSIBLE.clear()
         _LAST_ADMISSIBLE.extend(admissible_bodies)
-        # Completeness is decidable from state the search already keeps: the bank either filled or
-        # it did not, and the weight sweep either reached `max_weight` or broke out early. No new
-        # enumeration is needed to know whether the enumeration was exhaustive.
-        exhausted = len(seen_sigs) >= max_bank_size
-        _LAST_COVERAGE = {
-            "complete": not exhausted,
-            "bank_size": len(seen_sigs),
-            "bank_capacity": int(max_bank_size),
-            "max_weight": int(max_weight),
-            "reason": ("the candidate bank filled before the weight sweep finished, so a missing "
-                       "body is a missing BUDGET, not a missing grammar"
-                       if exhausted else
-                       "the bank did not fill and the sweep finished; absence is a fact about the "
-                       "grammar at this weight bound"),
-        }
+    # Completeness is decidable from state the search already keeps: the bank either filled or
+    # it did not, and the weight sweep either reached `max_weight` or broke out early. No new
+    # enumeration is needed to know whether the enumeration was exhaustive. This is now recorded on
+    # EVERY fall-off-the-end miss, collecting or not, because a caller that only learns the budget
+    # when it asked for the collection cannot attribute its own refusal.
+    exhausted = len(seen_sigs) >= max_bank_size
+    _LAST_COVERAGE = {
+        "complete": not exhausted,
+        "bank_size": len(seen_sigs),
+        "bank_capacity": int(max_bank_size),
+        "max_weight": int(max_weight),
+        "collecting": bool(collect_admissible),
+        "reason": ("the candidate bank filled before the weight sweep finished, so a missing "
+                   "body is a missing BUDGET, not a missing grammar"
+                   if exhausted else
+                   "the bank did not fill and the sweep finished; absence is a fact about the "
+                   "grammar at this weight bound"),
+    }
     return None
 
 

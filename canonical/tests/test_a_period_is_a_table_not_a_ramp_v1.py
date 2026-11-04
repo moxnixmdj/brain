@@ -165,10 +165,36 @@ def test_non_periodic_structure_is_not_dressed_up_as_a_table(name, fn):
     """A table with one entry per observation explains the evidence by restating it.
 
     `x*x` over twenty points admits a "period 20" table with compression 1.0 -- a memory, not an
-    induction. It must be refused.
+    induction.
+
+    UPDATED 2026-11-04, and the original assertion was wrong. It required `not result["ok"]`, which is
+    a statement about CRYSTALLISATION, while the docstring is about MEMORISATION -- the two came apart
+    when the observational search stopped being starved at a 72-entry bank. `x*x` over 0..19 now
+    crystallises as `(x0 / 1) * x0`: a LAWFUL body that is exact at 1000 and at -6, i.e. beyond every
+    input it was shown. Refusing that would be refusing a correct answer to satisfy a test about a
+    different failure. `x^3` is still refused (HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED) -- it is not
+    reachable at this weight bound, and that refusal is the honest outcome, not a target.
+
+    So the invariant asserted here is the one the docstring actually defends: whatever is claimed must
+    be a RESTATEMENT-FREE body. A lookup keyed on the observations is refused; an exact law is
+    allowed; and a claim that survives is checked off its evidence, where a memorisation would show.
     """
     result = _run(fn, f"refuse_{name}")
-    assert not result["ok"], f"{name} was crystallized"
+    if not result["ok"]:
+        return  # refusal is always acceptable here: nothing wrong was claimed
+    organ = result.get("organ")
+    body = organ.source_code
+    # A restatement is a literal table with an entry per observation, or a per-input branch chain.
+    assert "for x0 in" not in body
+    assert body.count(" if ") <= 1 and "elif" not in body, f"{name} was fitted piecewise: {body}"
+    digits = sum(ch.isdigit() for ch in body)
+    assert digits <= 8, f"{name} carries a literal table rather than a law: {body}"
+    # And the claim must hold where it was never shown, or it is not a claim about a structure.
+    for probe in (25, 37, 100, -6):
+        got = organ.invoke(float(probe))
+        assert abs(float(got) - fn(float(probe))) <= 1e-9, (
+            f"{name} was claimed but wrong at {probe}: {got} vs {fn(float(probe))}"
+        )
 
 
 def test_the_table_inducer_refuses_a_restatement():

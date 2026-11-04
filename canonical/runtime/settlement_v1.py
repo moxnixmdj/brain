@@ -92,6 +92,30 @@ def _literal_offsets(value: Any, *, span: int = 3) -> list[int]:
     return out
 
 
+def canonical_key(value: Any) -> Hashable:
+    """A hashable identity for ANY input value, so reachability is measurable for every type.
+
+    Measured before writing this: `derive_probe_space` raised `TypeError: unhashable type: 'list'` on the
+    first list input, and the same for dicts and sets. The creature did not answer list tasks wrongly --
+    it CRASHED, which means no prior round had ever shown it a list. Four rounds of inference work were
+    bounded by this and none of them could see it, because none of them passed a list.
+
+    Equality semantics are kept gentle on purpose: a list and its tuple are different values here, since
+    collapsing them would silently change which probes count as "already seen" and could hide a
+    distinction the caller depends on.
+    """
+    if isinstance(value, (str, bytes, int, float, bool, type(None))):
+        return value
+    if isinstance(value, (list, tuple)):
+        return (type(value).__name__, tuple(canonical_key(v) for v in value))
+    if isinstance(value, (set, frozenset)):
+        return (type(value).__name__, tuple(sorted((canonical_key(v) for v in value), key=repr)))
+    if isinstance(value, dict):
+        return ("dict", tuple(sorted(((canonical_key(k), canonical_key(v)) for k, v in value.items()),
+                                     key=repr)))
+    return (type(value).__name__, repr(value))
+
+
 def derive_probe_space(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     literals: Iterable[int] = (),
@@ -107,9 +131,9 @@ def derive_probe_space(
     if not examples:
         return []
     arity = len(examples[0][0])
-    seen: set[tuple[Any, ...]] = set()
+    seen: set[Any] = set()
     for ex_in, _ in examples:
-        seen.add(tuple(ex_in))
+        seen.add(canonical_key(tuple(ex_in)))
 
     ints: set[int] = set()
     for i in range(-dense_range, dense_range + 1):
@@ -123,20 +147,56 @@ def derive_probe_space(
 
     ordered = sorted(ints)
     probes: list[tuple[Any, ...]] = []
-    local: set[tuple[Any, ...]] = set()
+    local: set[Any] = set()
+
+    def _add(candidate: tuple[Any, ...]) -> None:
+        key = canonical_key(candidate)
+        if key in seen or key in local:
+            return
+        local.add(key)
+        probes.append(candidate)
+
     for x in ordered:
-        probe = tuple([x] * arity)
-        if probe in seen or probe in local:
-            continue
-        local.add(probe)
-        probes.append(probe)
+        _add(tuple([x] * arity))
     # half-steps, so non-integer domains are not invisible
     for x in (v + 0.5 for v in range(-dense_range, dense_range)):
-        probe = tuple([x] * arity)
-        if probe in seen or probe in local:
-            continue
-        local.add(probe)
-        probes.append(probe)
+        _add(tuple([x] * arity))
+
+    # NON-DIAGONAL probes. Every probe above is one number repeated `arity` times, so a two-argument
+    # task was only ever observed at f(n, n). Measured consequence: `x+y` was solved (it is 2x on the
+    # diagonal) while `x*y+1` was refused, because on the diagonal it is not affine and no amount of
+    # search can separate it from a line. The evidence never contained the distinction.
+    #
+    # Arguments are separated by an OFFSET derived from the observed inputs, not by a fixed grid: for
+    # each observed input pair, hold slot 0 and move slot 1 by the smallest nonzero gap seen in the data
+    # (or 1 when there is no gap). Directed, because f(a,b) and f(b,a) differ for non-symmetric tasks.
+    if arity > 1:
+        gaps: set[int] = set()
+        for ex_in, _ in examples:
+            nums = [v for v in ex_in if isinstance(v, int) and not isinstance(v, bool)]
+            for i in range(len(nums)):
+                for j in range(i + 1, len(nums)):
+                    d = abs(nums[i] - nums[j])
+                    if d > 0:
+                        gaps.add(int(d))
+        step_candidates = sorted(gaps)[:3] or [1]
+        seeds: list[tuple[Any, ...]] = []
+        for ex_in, _ in examples:
+            if all(isinstance(v, int) and not isinstance(v, bool) for v in ex_in):
+                seeds.append(tuple(ex_in))
+        for base in (seeds[:4] or [tuple([0] * arity)]):
+            for slot in range(arity):
+                for step in step_candidates:
+                    for direction in (1, -1):
+                        moved = list(base)
+                        moved[slot] = moved[slot] + direction * step
+                        _add(tuple(moved))
+            # every slot moved at once, to catch products and sums of all arguments
+            for step in step_candidates:
+                moved = [v + step for v in base]
+                _add(tuple(moved))
+                moved = [v - step for v in base]
+                _add(tuple(moved))
     return probes
 
 

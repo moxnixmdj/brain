@@ -83,8 +83,13 @@ class StillRefusesTests(unittest.TestCase):
     """P4: widening the grammar must not start claiming things it cannot do."""
 
     def test_non_periodic_functions_still_refuse(self):
-        for name, fn in (("x*x", lambda x: x * x), ("x^3", lambda x: x ** 3),
-                         ("floor(x/7)", lambda x: x // 7)):
+        # Round 24 moved `x*x` out of this list, and that is not a weakened test -- it is a corrected
+        # one. `x*x` is genuinely expressible as a solved table T_2(x) = [0,0] plus x*x, and the organ
+        # is exact at 10**6. Asserting a refusal there would have been asserting that the creature is
+        # worse than it is. What must still refuse is anything the basis cannot compose: a genuine
+        # period-2 table cannot reproduce x**3 or floor(x/7).
+        for name, fn in (("x^3", lambda x: x ** 3), ("floor(x/7)", lambda x: x // 7),
+                         ("2^x", lambda x: 2 ** x)):
             with tempfile.TemporaryDirectory() as tmp:
                 g = M.MetaCircularOrganGraph(pathlib.Path(tmp) / "g.json")
                 g.growth_enabled = False
@@ -93,6 +98,39 @@ class StillRefusesTests(unittest.TestCase):
                     task_signature="test::refuse", oracle=lambda p, fn=fn: fn(p[0]),
                 )
                 self.assertFalse(res["ok"], f"{name} must not be claimed: {res.get('status')}")
+
+    def test_a_claim_is_never_wrong_on_held_out(self):
+        """Whatever it claims must be exact, whatever the corpus. This is the invariant that matters.
+
+        Checking names is a proxy; checking the answers is the property. Anything claimed and then wrong
+        on unseen inputs is a false positive, and this catches it without me guessing which functions
+        are 'supposed' to be refused.
+        """
+        cases = {
+            "x*x": lambda x: x * x, "x^3": lambda x: x ** 3, "floor(x/7)": lambda x: x // 7,
+            "2^x": lambda x: 2 ** x, "x^2+x": lambda x: x * x + x,
+            "abs(x-5)": lambda x: abs(x - 5), "staircase": lambda x: float(int(x / 2)),
+        }
+        held = [x for x in range(-20, 0)] + [x for x in (500, 1000, 12345)]
+        for name, fn in cases.items():
+            with tempfile.TemporaryDirectory() as tmp:
+                g = M.MetaCircularOrganGraph(pathlib.Path(tmp) / "g.json")
+                g.growth_enabled = False
+                res = g.synthesize_or_disambiguate_skill(
+                    [((x,), fn(x)) for x in range(1, 10)],
+                    task_signature="test::heldout", oracle=lambda p, fn=fn: fn(p[0]),
+                )
+                if not res["ok"]:
+                    continue
+                organ = res["organ"]
+                for x in held:
+                    hit, got = M._safe_eval_candidate(organ, (x,))
+                    if not hit:
+                        continue  # an undefined point is not a wrong claim
+                    self.assertAlmostEqual(
+                        float(got), float(fn(x)), places=6,
+                        msg=f"{name}: claimed {organ.name} but wrong at x={x}",
+                    )
 
     def test_the_node_declines_when_evidence_is_thin(self):
         self.assertIsNone(M._solve_parametric_table([((1,), 5.0)]))
