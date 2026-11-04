@@ -265,6 +265,8 @@ _PER_WORDS = {"per", "each", "every", "respectively"}
 # search treats them as glue; but an answer that took that shape owes them its account.
 _SHAPE_WORDS = {"per", "each", "every", "respectively", "distinct", "different", "unique"}
 _VECTOR_WORDS = {"totals", "total", "sums", "sum", "amounts", "values", "averages"}
+_ROW_WORDS = frozenset({"row", "rows", "record", "records", "entry", "entries",
+                       "line", "lines", "*"})
 
 
 # ---------------------------------------------------------------------------
@@ -285,28 +287,64 @@ class Lexicon:
         return self.set - set(used)
 
 
+_TABLE_SUFFIXES = (".csv", ".tsv")
+
 def _columns(path: Path) -> tuple[list[str], list[list[str]]] | None:
+    """A file read as a TABLE: first row is the header, the rest are records.
+
+    WHETHER A FILE IS A TABLE IS A FACT ABOUT THE FILE, NOT AN ASSUMPTION.
+
+    Every file was read this way, so `count(t@data.py)` on a four-line Python file
+    counted its five "rows" minus the header and answered 2. It passed every invariant --
+    the arithmetic was right about a table that does not exist -- and it REPLACED the
+    correct answer of 4 that the door had already computed. A wrong answer delivered
+    confidently over a right one is the worst outcome this system can produce.
+
+    A delimiter that never appears is the giveaway: a real table has a header row with
+    more than one field, or a suffix that says it is tabular. Everything else is text
+    that happens to end in a dot and three letters.
+    """
     rows = _rows_of(path)
     if not rows or len(rows) < 2:
+        return None
+    suffix = path.suffix.lower()
+    header = rows[0]
+    wide_header = len([c for c in header if c.strip()]) > 1
+    if not (wide_header or suffix in _TABLE_SUFFIXES):
         return None
     return rows[0], rows[1:]
 
 
 def _numeric_columns(header: list[str], rows: list[list[str]]) -> dict[str, list[float]]:
+    """The columns that hold numbers, with missing cells left out.
+
+    ONE MISSING CELL USED TO ERASE A WHOLE COLUMN.
+
+    The test was all-or-nothing -- every cell had to parse -- so a single blank amount
+    made `amount` stop being a quantity. `sum(amount)` then could not be built at all,
+    and "the total amount" was answered by the only thing left: the row count, 5.0. The
+    arithmetic was never wrong; the column had been discarded before the arithmetic was
+    asked, and every later check reasoned about a quantity that was no longer there.
+
+    An EMPTY cell and a NON-NUMERIC cell are different facts. Empty is absent data: a
+    total over the column is the total of what is present, which is what `sum` already
+    means everywhere else. A non-empty cell that does not parse ("n/a", "twelve") says
+    this column is not a column of numbers, and that is still refused.
+    """
     out: dict[str, list[float]] = {}
     for i, name in enumerate(header):
-        vals = []
-        ok = True
+        vals: list[float] = []
+        numeric = True
         for r in rows:
-            if i >= len(r):
-                ok = False
-                break
-            v = _to_float(r[i])
+            cell = r[i] if i < len(r) else ""
+            if cell is None or (isinstance(cell, str) and not cell.strip()):
+                continue                      # missing, not wrong
+            v = _to_float(cell)
             if v is None:
-                ok = False
-                break
+                numeric = False
+                break                         # present and not a number: not numeric
             vals.append(v)
-        if ok and vals:
+        if numeric and vals:
             out[name] = vals
     return out
 
@@ -472,18 +510,31 @@ def _evaluate(node: Node, *, derived: dict | None = None) -> object:
         table = evaluate(node.args[0])
         key, valcol = node.args[1], node.args[2]
         header, body = table["_header"], table["_body"]
-        for c in (key, valcol):
+        for c in (key,):
             if c not in header:
                 raise EvalError("column gone")
-        ki, vi = header.index(key), header.index(valcol)
+        ki = header.index(key)
+        # "*" IS THE ROW ITSELF, NOT A COLUMN.
+        #
+        # "how many rows per region" has no column to count: the natural spelling is
+        # count(amount), which silently counts only the rows where the amount parses --
+        # a blank cell removes a row from the answer. Counting ROWS is a property of the
+        # table, so the value column is allowed to name the row instead of a field. With
+        # this, `count` over `*` is a row count and needs no operator of its own.
+        vi = None if valcol == "*" else header.index(valcol)
         buckets: dict[str, list[float]] = {}
         order: list[str] = []
         for r in body:
-            if ki >= len(r) or vi >= len(r):
+            if ki >= len(r):
                 continue
-            v = _to_float(r[vi])
-            if v is None:
-                continue
+            if vi is None:
+                v = 1.0                      # the row exists; no cell decides that
+            else:
+                if vi >= len(r):
+                    continue
+                v = _to_float(r[vi])
+                if v is None:
+                    continue
             k = r[ki].strip()
             if k not in buckets:
                 buckets[k] = []
@@ -693,6 +744,44 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
     why a question nobody wrote down can still be answered.
     """
     _reset_memo()
+
+    # ---- THE ENUMERATION RUNS FIRST ----------------------------------
+    #
+    # The rest of this function is a hand-written list: sixteen appends, one per operator
+    # shape somebody thought of. Measured, it reaches FIVE distinct structures, and a
+    # question needing a shape nobody appended is refused while its pieces sit in this
+    # file unused. `value_enumeration_v1` builds the same expressions from the operator
+    # table BY TYPE, to a fixed point, so adding an operator adds every composition of it
+    # rather than one sentence.
+    #
+    # It runs FIRST and the list below is the fallback, so this can only help: if the
+    # enumeration has nothing, the incumbent path behaves exactly as it did.
+    # IT DEFERS TO THE LIST, IT DOES NOT DISPLACE IT.
+    #
+    # Trying this the other way round -- enumeration first -- broke six tests, and every
+    # break was a rule the incumbent had already paid for: comparison operands follow the
+    # SENTENCE's order; a row question wants a cell of the extreme row, not a count; a
+    # grouped table's aggregate column is named by its aggregation; plural and singular
+    # are one word; and the type asked for is read from what the question asks, not from
+    # a superlative. The incumbent search records 314 lines of such rules, essentially
+    # one per comment, and each is a defect that was measured and fixed.
+    #
+    # Re-deriving them inside a second implementation is not progress; it is doing the
+    # same work twice with no guarantee of a second success. So the enumeration is used
+    # as an EXTENSION, not a replacement: the list runs first, and only when it can build
+    # NOTHING does the enumerator look. That is exactly the case it was written for -- an
+    # operator nobody appended -- and it cannot regress an answer the list already gives.
+    list_answer = _compose_from_list(question, root, ents, words)
+    if list_answer is not None:
+        return list_answer
+    try:
+        from canonical.runtime import value_enumeration_v1 as _EN
+        return _EN.choose(question, root, ents, words)
+    except Exception:
+        return None
+
+
+def _compose_from_list(question: str, root: str, ents, words: list[str]):
     lex = Lexicon(words)
     steps = 0
     files = [e for e in ents if e.kind == "file"]
@@ -1236,7 +1325,11 @@ def _structural_words(node: Node) -> frozenset:
         # been dealt with.
         if node.op == "groups":
             out |= _AGG_WORDS.get(node.args[1], set())
-            out.add(_norm(node.args[3]))
+            # "*" is not a word of the question. Accounting for it adds a token no
+            # sentence contains, and an expression that accounts for `*` is not thereby
+            # answering "rows" -- the ROW is what the question already said.
+            if node.args[3] != "*":
+                out.add(_norm(node.args[3]))
         out.add(_norm(node.args[2]))
         out |= _structural_words(node.args[0])
     elif node.op == "filter":
@@ -1249,6 +1342,10 @@ def _structural_words(node: Node) -> frozenset:
         out |= _structural_words(node.args[0])
     elif node.op == "count":
         out |= _structural_words(node.args[0])
+        if isinstance(node.args[0], Node) and node.args[0].op == "table":
+            # counting a TABLE's rows is the question "how many rows", and `rows` is
+            # exactly what it accounts for.
+            out |= _ROW_WORDS
     # SINGULAR AND PLURAL ARE THE SAME WORD.
     #
     # The account held `name`, the question said `names`, and the expression was rejected
@@ -1401,6 +1498,33 @@ def _holds_invariants(node: Node) -> bool:
         if not _holds_invariants(child):
             return False
 
+    # A GROUPING'S KEYS ARE THE DISTINCT KEYS IN THE ROWS IT SUMMARISES.
+    #
+    # This was stated separately for every READER of a grouping -- `count(values_of(...))`,
+    # `values_of(groups)`, `column_from(groups)`, `argmax_table(groups)` -- and the fourth
+    # reader, `distinct(groups)`, had no check at all: with a lossy `groups` it returned
+    # ['north','south'] for a question about amounts and passed. One statement about the
+    # grouping covers every reader that will ever exist, including ones not written yet;
+    # one statement per reader covers only the readers somebody remembered.
+    if node.op == "groups" and isinstance(node.args[0], Node) and node.args[0].op == "group":
+        inner = node.args[0]
+        # `group` is (table, key, value) and `groups` is (grouped, agg, key, value).
+        # Using the wrong slot here compares the DISTINCT VALUES of a column against the
+        # distinct KEYS of a grouping, which never agree -- so the check said every
+        # grouping was broken and the enumerator refused three questions it had answered
+        # a minute earlier. An invariant that fires on correct data is worse than none.
+        key = inner.args[1]
+        try:
+            source = evaluate(inner.args[0])
+            index = source["_header"].index(key)
+            expected = {r[index] for r in source["_body"] if index < len(r)}
+            got = evaluate(node)
+            keys = {r[0] for r in got["_body"]}
+        except (EvalError, KeyError, IndexError, TypeError, ValueError):
+            return True
+        if keys != expected:
+            return False
+
     if node.op == "count":
         inner = node.args[0]
         # A COUNT OVER DISTINCT VALUES CANNOT EXCEED THE VALUES IT DISTINGUISHES.
@@ -1433,7 +1557,14 @@ def _holds_invariants(node: Node) -> bool:
         return True
 
     # A TOTAL OVER GROUPS EQUALS THE TOTAL OVER THE ROWS THEY PARTITION.
-    if node.op == "values_of" and isinstance(node.args[0], Node) and node.args[0].op == "groups":
+    #
+    # This is stated for EVERY operator that reads a grouping's aggregate column, not
+    # just `values_of`. `column_from(groups(...))` -- the enumerator's favourite way to
+    # read the same thing -- returned [150.0, 150.0] from a grouping that had lost west,
+    # and `holds` passed it because the invariant only knew the `values_of` spelling. An
+    # invariant that holds for one spelling of an operation and not another is not an
+    # invariant; it is a fact about a string.
+    if node.op in ("values_of", "column_from") and isinstance(node.args[0], Node) and node.args[0].op == "groups":
         grouped = node.args[0]
         kind, with_ = grouped.args[1], grouped.args[3]
         if kind != "sum":
