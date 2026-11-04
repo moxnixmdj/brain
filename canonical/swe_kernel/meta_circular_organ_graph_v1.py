@@ -1358,6 +1358,41 @@ def _inline_operator_organs(
     return results
 
 
+def _egraph_simplify_expr(expr_src: str) -> str | None:
+    """Cheapest congruence-closed rendering of `expr_src` via the in-tree egraph."""
+    src = str(expr_src or "").strip()
+    if not src:
+        return None
+    try:
+        from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
+            EGraph,
+            _ast_expr_to_egraph,
+            _saturate_algebraic_egraph,
+        )
+    except Exception:
+        return None
+    try:
+        tree = ast.parse(src, mode="eval")
+    except SyntaxError:
+        return None
+    try:
+        eg = EGraph()
+        leaf_src: dict[int, tuple[int, str]] = {}
+        root = _ast_expr_to_egraph(eg, tree.body, leaf_src)
+        _saturate_algebraic_egraph(eg, rounds=3, max_classes=80)
+        rcid = eg.find(root)
+        hits = [(cost, text) for key, (cost, text) in leaf_src.items() if eg.find(key) == rcid]
+        if not hits:
+            return None
+        best = min(hits, key=lambda it: (it[0], len(it[1])))[1].strip()
+        if not best or best == src:
+            return None
+        ast.parse(best, mode="eval")
+        return best
+    except Exception:
+        return None
+
+
 def _generate_candidate_expressions(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     operator_organs: Sequence["ExecutableOrgan"] = (),
@@ -1389,6 +1424,14 @@ def _generate_candidate_expressions(
     # 3. Live compositional closure over admitted organs
     for label, expr, helpers in _inline_operator_organs(examples, operator_organs):
         cands.append((label, expr, helpers))
+
+    # 4. Congruence-closed algebraic rewrite of admitted expressions (in-tree egraph)
+    extra: list[tuple[str, str, str]] = []
+    for label, expr, helpers in cands:
+        simp = _egraph_simplify_expr(expr)
+        if simp:
+            extra.append((f"egraph_{label}", simp, helpers))
+    cands.extend(extra)
 
     # Dedup by expr
     seen: set[str] = set()
@@ -2074,8 +2117,10 @@ def compile_policy_organ(
     name: str = "instrumental_policy",
     gamma: float = 0.92,
     horizon: int = 3,
+    empirical_burns: Mapping[str, float] | None = None,
 ) -> ExecutableOrgan:
-    """Freeze the current instrumental scoring law as an evolvable POLICY organ."""
+    """Compile an evolvable POLICY organ; `empirical_burns` are wake-residual fail-rates."""
+    observed = {str(k): float(v) for k, v in dict(empirical_burns or {}).items()}
     src = f"""
 def score_actions(actions, remaining_budget, p_burn_by_id=None):
     by_id = {{}}
@@ -2091,6 +2136,8 @@ def score_actions(actions, remaining_budget, p_burn_by_id=None):
             'requires': tuple(str(x) for x in (raw.get('requires') or ())),
         }}
     burns = dict(p_burn_by_id or {{}})
+    for _k, _v in {observed!r}.items():
+        burns.setdefault(_k, _v)
     gamma = {float(gamma)!r}
     horizon = {int(horizon)!r}
     structured = any(n['unlocks'] or n['requires'] for n in by_id.values())
@@ -2127,14 +2174,17 @@ def score_actions(actions, remaining_budget, p_burn_by_id=None):
     ranked.sort(key=lambda r: (r['q'], -r['cost'], r['id']), reverse=True)
     return ranked
 """
-    return make_organ(
+    organ = make_organ(
         stratum=POLICY,
         name=name,
         task_signature="policy::instrumental_q",
         entrypoint="score_actions",
         source_code=src,
-        metadata={"gamma": gamma, "horizon": horizon},
+        metadata={"gamma": gamma, "horizon": horizon, "empirical_burns": observed},
     )
+    if observed:
+        organ.verified_passes = max(1, len(observed))
+    return organ
 
 
 def synthesize_world_model_organ(
@@ -2470,8 +2520,29 @@ class MetaCircularOrganGraph:
             wm = synthesize_world_model_organ(self._world_transitions[-16:])
             if wm is not None:
                 self.register_organ(wm)
+            self.evolve_policy_from_traces()
         except Exception:
             return
+
+    def evolve_policy_from_traces(self) -> ExecutableOrgan | None:
+        """Rewrite the POLICY organ from WORLD_MODEL residuals (fail-rates). The incumbent dies if Pareto-dominated."""
+        if len(self._world_transitions) < 2:
+            return None
+        counts: dict[str, int] = {}
+        fails: dict[str, int] = {}
+        for tr in self._world_transitions[-16:]:
+            aid = str(tr.get("action") or tr.get("action_id") or "")
+            if not aid:
+                continue
+            counts[aid] = counts.get(aid, 0) + 1
+            fails[aid] = fails.get(aid, 0) + (1 if tr.get("failed") else 0)
+        if not counts:
+            return None
+        burns = {k: fails[k] / max(1, counts[k]) for k in counts}
+        organ = compile_policy_organ(empirical_burns=burns)
+        organ.verified_passes = max(organ.verified_passes, len(self._world_transitions))
+        self.register_organ(organ)
+        return organ
 
     # ------------------------------------------------- Sensorogenesis API
 

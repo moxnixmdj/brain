@@ -359,6 +359,47 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         self.assertTrue(pred["known"])
         self.assertGreater(pred["mean_delta"]["sensors"], 0.0)
 
+    def test_policy_organ_rewrites_from_world_residuals(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            boot = MCOG.compile_policy_organ()
+            graph.register_organ(boot)
+            boot_id = graph.get_primary(MCOG.POLICY, "policy::instrumental_q").organ_id
+            for _ in range(2):
+                graph.record_transition(action_id="burned", cost=1.0, failed=True, delta={})
+            for _ in range(2):
+                graph.record_transition(action_id="safe", cost=1.0, failed=False, delta={"ok": 1.0})
+            pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(pol)
+            self.assertIn("burned", pol.source_code)
+            self.assertNotEqual(pol.organ_id, boot_id)
+            ranked = pol.invoke(
+                [
+                    {"id": "burned", "value": 10.0, "cost": 1.0},
+                    {"id": "safe", "value": 10.0, "cost": 1.0},
+                ],
+                10.0,
+                None,
+            )
+            self.assertEqual(ranked[0]["id"], "safe")
+            # Instrumental Q still prefers the 0-reward unlocker after rewrite
+            scored = pol.invoke(
+                [
+                    {"id": "shiny", "value": 12.0, "cost": 1.0},
+                    {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+                    {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+                ],
+                3.0,
+                None,
+            )
+            self.assertEqual(scored[0]["id"], "forge_sensor")
+
+    def test_egraph_simplifies_admitted_skill_expressions(self):
+        simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")
+        self.assertIsNotNone(simplified)
+        self.assertLess(len(simplified), len("(x0 * 1) + 0"))
+        self.assertIn("x0", simplified)
+
     def test_repair_semantic_sensitivity_gate_catches_wrong_operator_reading_all_inputs(self):
         before_src = "def compute_invoice(items, disc):\n    return sum(items) - disc\n"
         # Reads both `items` and `disc`, passing syntactic dependency check, but uses wrong operator!

@@ -2195,11 +2195,11 @@ class SentientCognitiveCore:
                 pass
 
         try:
-            from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, compile_policy_organ
+            evolved = self.organ_graph.evolve_policy_from_traces()
+            if evolved is None and not self.organ_graph.organs_in_stratum("POLICY"):
+                from canonical.swe_kernel.meta_circular_organ_graph_v1 import compile_policy_organ
 
-            if self.organ_graph.get_primary("WORLD_MODEL", "world_model::action_delta") is not None:
-                if not self.organ_graph.organs_in_stratum(POLICY):
-                    self.organ_graph.register_organ(compile_policy_organ())
+                self.organ_graph.register_organ(compile_policy_organ())
         except Exception:
             pass
 
