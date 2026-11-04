@@ -36,7 +36,7 @@
       "canonical/tests/test_it_only_ever_saw_the_diagonal_v1.py",
       "A_MISSING_ANSWER_IS_NOT_A_MISSING_LANGUAGE_20261104_V1.md"
     ],
-    "route_class": "PERCEIVE"
+    "route_class": "ADAPT"
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_CALL_SITE_IN_THE_ORGAN_GRAPH_SEARCHED_WITH_A_BANK_OF_64_TO_80",
