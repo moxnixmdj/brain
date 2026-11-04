@@ -179,3 +179,103 @@ def test_the_auditor_does_not_reject_what_the_synthesizer_accepts():
     """
     body = R._SynthBody("return sorted(x0)", ["x0"])
     assert R._safe_agrees(body, ([9, 2],), [2, 9])
+
+
+# ================================================================================================
+# DERIVED vs CHOSEN: which numbers are theorems and which are policies
+# ================================================================================================
+def test_the_table_requirement_declares_itself_a_policy():
+    """The 4x constant was justified by a false claim, and the justification is now measured wrong.
+
+    `table_evidence_requirement` used to say the block "must be at most a quarter of the evidence,
+    which is what separates an induction from a restatement". Measured 2026-11-04: requirement `k*p`
+    accepts a false table exactly when the signal was truly periodic for `T >= k` cycles, for every k
+    and every p. No finite multiple removes it, so the number cannot be a separator -- it is a
+    tolerance. It now reports itself as one.
+    """
+    import canonical.runtime.settlement_v1 as S
+
+    policy = S.table_requirement_policy()
+    assert "POLICY, NOT THEOREM" in policy["status"]
+    assert policy["extra_repeats"] == S.TABLE_REPEAT_POLICY
+    # The floor is the only part that is derivable: every residue seen twice means one real repeat.
+    assert S.table_evidence_requirement(3) == (2 + S.TABLE_REPEAT_POLICY) * 3
+
+
+def test_a_false_table_survives_every_finite_requirement():
+    """The measurement that makes the constant a policy. If this ever stops holding, re-derive it."""
+
+    def table_fits(seq, p, n):
+        block = {}
+        for i in range(n):
+            slot = i % p
+            if slot in block and abs(block[slot] - seq[i]) > 1e-9:
+                return None
+            block[slot] = seq[i]
+        return block if len(block) == p else None
+
+    p = 3
+    for k in (2, 4, 6):
+        # Truly periodic for exactly k cycles, then breaks.
+        seq = [float(i % p) if i < k * p else 50.0 + i for i in range(12 * p)]
+        block = table_fits(seq, p, k * p)
+        assert block is not None, f"k={k}: no table induced, the premise changed"
+        holds = all(abs(block[i % p] - seq[i]) < 1e-9 for i in range(k * p, len(seq)))
+        assert not holds, (
+            f"k={k}: a table from k cycles did NOT break -- either the construction changed or the "
+            "requirement is genuinely sufficient, in which case the policy note must be revised"
+        )
+
+
+def test_refutability_and_the_repeat_policy_answer_different_questions():
+    """They were briefly conflated, and the conflation is worth a test because it is tempting.
+
+    refutability:  did this EVIDENCE constrain the claim?      -> yes after ONE repeat
+    repeat policy: have I seen enough REPEATS to trust it?     -> a risk tolerance
+
+    Measured: a period-3 table is REFUTABLE at n=4 (one repeat) while the same evidence would be
+    refused by the 4p requirement. Both are correct; they are not the same question, and neither can
+    stand in for the other.
+    """
+    import canonical.runtime.settlement_v1 as S
+
+    block = [1.0, 8.0, 4.0]
+    obs = [((x,), block[x % 3]) for x in range(1, 5)]
+    assert R.assess(obs)["verdict"] == R.REFUTABLE, "one repeat already constrains the claim"
+    assert len(obs) < S.table_evidence_requirement(3), "but it is below the repeat policy"
+
+
+def test_the_probe_planner_is_not_allowed_to_beat_a_sweep_yet():
+    """A recorded NEGATIVE result, guarded so it cannot be silently re-wired.
+
+    `plan_probes` computes the deficit correctly (`arity + 2 - n`) and ranks probes by how many
+    surviving pairs disagree at them, which reads as strictly better than a fixed grid. Measured
+    2026-11-04: for `x // 7` over seeds 1..5 it bought probes at -1, -10, -11 -- all negative, all
+    where every candidate agrees -- and never reached x >= 8 where `x // 8` and `x // 7` differ. The
+    creature crystallised `x // 8`, wrong at 37, 100 and 999. The old sweep did not.
+
+    So the decision path must keep the sweep. This test fails the moment the planner is wired back in
+    without beating that measurement.
+    """
+    fn = lambda x: x // 7
+    graph = M.MetaCircularOrganGraph(None)
+    graph.growth_enabled = False
+    result = graph.synthesize_or_disambiguate_skill(
+        [((x,), fn(x)) for x in range(1, 6)],
+        task_signature="planner_guard",
+        oracle=lambda p: fn(p[0]),
+    )
+    if result["ok"]:
+        organ = result["organ"]
+        for probe in (37, 100, 999):
+            got = M._safe_eval_candidate(organ, (probe,))[1]
+            assert got == fn(probe), (
+                f"claimed a body wrong at {probe} ({got} vs {fn(probe)}): the probe planner is "
+                "buying tests where nothing differs"
+            )
+    else:
+        assert result["status"] in {
+            "HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED",
+            "CONTRADICTORY_ORACLE_OR_OUT_OF_GRAMMAR",
+            "NO_CONSISTENT_HYPOTHESIS",
+        }, result["status"]

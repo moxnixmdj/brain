@@ -152,3 +152,101 @@ least trustworthy thing it owned.**
 A creature that cannot tell "I could not have been wrong" apart from "I was right" will accumulate
 false confidence at exactly the rate it learns. `truth.achieved` is still **false** — but the creature
 now knows, in a way a caller can audit, which of its own answers it was ever in a position to doubt.
+
+---
+
+# Part 2: what is DERIVED and what is merely CHOSEN
+
+The first half of this round made a claim stop being permanent when nothing tested it. That is
+protective, and protective alone is not enough — it also *cost* a capability: three-point fits used to
+be answered and now refuse. So this half asks the question that actually distinguishes a living system
+from a careful one:
+
+> **which of my numbers are theorems, and which are preferences I have been reporting as theorems?**
+
+## The 4× constant was justified by a false sentence
+
+`settlement_v1.table_evidence_requirement(period, factor=4)` carried this docstring:
+
+> the block must be at most a quarter of the evidence, **which is what separates an induction from a
+> restatement**
+
+That is a claim, so it can be measured. Requirement `k·p`, signal truly periodic for `T` cycles and
+then breaking:
+
+| requirement | false tables accepted when |
+|---|---|
+| `2p` | `T ∈ {2,3,4,5,6,7}` |
+| `3p` | `T ∈ {3,4,5,6,7}` |
+| `4p` | `T ∈ {4,5,6,7}` |
+| `6p` | `T ∈ {6,7}` |
+
+**A false table is accepted exactly when `T ≥ k`, for every `k` and every `p`.** No finite multiple
+removes the failure; raising `k` slides the boundary and buys nothing categorical. So `4` does not
+separate induction from restatement. It refuses tables from signals that broke before the fourth
+cycle, and that is all it does.
+
+The number is now written as what it is — `2·period` (the only derivable part: every residue seen
+twice means one real repeat) **plus a stated repeat policy**, exported through
+`table_requirement_policy()`, whose `status` field begins `POLICY, NOT THEOREM`. The numeric value is
+unchanged, so nothing regressed; what changed is that the tree no longer asserts something false.
+
+**This is the discipline the round is about, applied to a docstring instead of a program.** A false
+sentence in a justification is the same defect as a false claim in an organ: it licenses belief that
+evidence did not earn.
+
+## A deliberate negative result: the experiment planner is worse than what it replaced
+
+The obvious next step after `TOO_FEW_POINTS` is to *buy the missing evidence*, and the deficit is
+computable: an arity-`a` fit needs `a + 2` observations, so the plan is exact. `plan_probes` computes
+it, and on a three-point affine it correctly says **one more observation**.
+
+It also ranks candidate probes by how many surviving pairs disagree at them, which sounds strictly
+better than a fixed grid. **It is not, and I shipped it before checking.**
+
+For `x // 7` over seeds 1..5 it bought probes at `-1`, `-10`, `-11` — every one negative, every one
+where all candidates agree — and never visited `x ≥ 8`, where `x // 8` and `x // 7` actually differ.
+The creature crystallised `x // 8`, **wrong at 37, 100 and 999**. The old code did not have this
+failure: its probe space starts at −40 and sweeps far enough to reach the separating region.
+
+So the wiring is **reverted**. The decision path keeps the space that demonstrably separates, the
+computed deficit is used only when it is *larger* than the default, and `plan_probes` is retained as an
+**advisory report** with its limitation stated in the source. Its ranking was not better; it was
+untested, and the first test falsified it.
+
+This is recorded rather than quietly removed because a tree that only records its wins is a tree that
+cannot tell the difference between progress and motion.
+
+## What the two halves together say
+
+| | asks | can be derived? |
+|---|---|---|
+| refutability | did this evidence constrain the claim? | yes — degrees of freedom |
+| table requirement | have I seen enough repeats to trust it? | **no** — a tolerance |
+| probe deficit | how many more observations? | yes — `arity + 2 − n` |
+| probe *choice* | which observations? | **not yet** — the naive ranking lost to a sweep |
+
+Two of four are theorems. Two are not, and the tree now says which is which instead of implying all
+four were discovered.
+
+## The correction this forces on the guard
+
+The action intent carried `canonical_base_commit` as a hand-maintained field, which went stale three
+times in one session as main advanced — I re-based it twice and was about to do it a third time. That
+is exactly the static artefact this project is supposed to be replacing: a derived value maintained by
+hand, which fails by going stale rather than by being wrong.
+
+Recorded here rather than papered over: **re-basing is a treadmill, not a fix.** The field should be
+computed from the base the guard already has, and until it is, every merge makes the intent lie by one
+commit.
+
+## Measured
+
+- `x // 7`, `x^3`, `2^x` from seeds 1..5: **identical to baseline** (refuted / out-of-grammar). The
+  planner revert removed the only observed false positive.
+- `table_evidence_requirement(3) = 12`, `(10) = 40` — unchanged, so no capability moved.
+- Refutability on 8 cases: correct separation, including `x^3` NOT_REFUTABLE as memorisation.
+- 97 passed, 1 xfailed across the five suites that touch this subsystem.
+
+`truth.achieved: false`. What is true: the creature can now distinguish a claim it tested from one it
+merely fitted, and the tree can distinguish a number it derived from one it chose.

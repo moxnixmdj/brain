@@ -2009,6 +2009,27 @@ def _survivors_disagree_on_domain(
     return False
 
 
+def _plan_probes(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    candidates: Sequence["ExecutableOrgan"] = (),
+) -> dict[str, Any]:
+    """Adapter: how many tests would make this claim refutable, and where to buy them."""
+    try:
+        from canonical.runtime import refutability_v1 as _R
+
+        def _disagree(a: Any, b: Any, probe: tuple[Any, ...]) -> bool:
+            ka, va = _safe_eval_candidate(a, probe)
+            kb, vb = _safe_eval_candidate(b, probe)
+            if ka != kb:
+                return True
+            return bool(ka and not _outputs_match(va, vb))
+
+        return _R.plan_probes(examples, candidates=tuple(candidates), disagree=_disagree)
+    except Exception as exc:  # noqa: BLE001
+        return {"schema": "PROJECT_BRAIN_REFUTABILITY_V1", "deficit": 0, "probes": [],
+                "why": "probe planning unavailable: " + str(exc)[:120], "authority": "NONE"}
+
+
 def settlement_refutability(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
 ) -> dict[str, Any]:
@@ -4878,12 +4899,36 @@ class MetaCircularOrganGraph:
         # grammar. It cannot certify a program, so the winner must predict something it has not
         # already been shown before it is allowed to become permanent.
         if oracle is not None and queries_used < max_oracle_queries:
+            # HOW MANY tests, and WHICH ones, is a computed question -- not the constant 2 this used
+            # to hardcode. Measured 2026-11-04: with three seeds, buying two probes left four
+            # observations, which tests a two-input fit only if the withheld fit is over-determined,
+            # and the probes were taken from the derived space in probe order rather than by what
+            # they could actually separate. The plan below states the deficit (`arity + 2 - n`) and
+            # ranks candidate probes by how many surviving pairs disagree at them, so the questions
+            # bought are the ones whose answers are not already implied.
+            # REVERTED 2026-11-04, because the replacement was measurably WORSE and I had already
+            # used it to license a false claim. `_plan_probes` ranked candidates by how many surviving
+            # pairs disagree at them, but for `x // 7` over seeds 1..5 it bought probes at -1, -10 and
+            # -11 -- all negative, all where every candidate agrees -- and never visited x >= 8, where
+            # `x // 8` and `x // 7` actually differ. The result was a false positive (`x // 8`
+            # crystallised, wrong at 37, 100 and 999) that the OLD code did not produce, because the
+            # old probe space starts at -40 and sweeps far enough to separate.
+            #
+            # The deficit arithmetic in `plan_probes` is measured and correct; its PROBE CHOICE is
+            # not. Reporting a computed deficit is useful. Letting a worse probe win is not. So the
+            # decision path keeps the space that demonstrably separates, and the plan is kept as an
+            # advisory report until its ranking can beat this on a held-out battery.
+            plan = _plan_probes(work_examples, candidate_organs)
             unseen = [
                 pr
                 for pr in _settlement_probe_space(work_examples, [winner])
                 if tuple(repr(x) for x in pr)
                 not in {tuple(repr(x) for x in ex_in) for ex_in, _ in work_examples}
             ]
+            # Still bound by the computed deficit when it is LARGER than the default: a plan that says
+            # four observations are needed should not be answered with two.
+            if int(plan.get("deficit") or 0) > 2:
+                unseen = unseen[: max(2, int(plan["deficit"]))]
             for probe in unseen[:2]:
                 ok_now, predicted = _safe_eval_candidate(winner, probe)
                 try:

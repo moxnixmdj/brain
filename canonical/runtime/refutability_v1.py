@@ -327,3 +327,164 @@ def may_be_permanent(verdict: str) -> bool:
     claim has been corroborated. Neither one has.
     """
     return verdict == REFUTABLE
+
+
+def plan_probes(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    arity: int | None = None,
+    candidates: Sequence[Any] = (),
+    disagree: Callable[[Any, Any], bool] | None = None,
+) -> dict[str, Any]:
+    """Turn "this claim is untestable" into the smallest experiment that would test it.
+
+    WHY THIS EXISTS
+    ---------------
+    A verdict is not a decision. `assess` can say TOO_FEW_POINTS, and until this function existed the
+    only thing the creature did with that was refuse -- which is safe and useless. A refusal that does
+    not say WHAT WOULD CHANGE ITS MIND is just a quieter way of not knowing.
+
+    The deficit is COMPUTABLE, not a policy. An affine fit over `arity` inputs has `arity + 1`
+    parameters and leave-one-out needs one more training point than parameters, so the evidence is
+    testable at
+
+        n >= arity + 2      observations
+
+    measured: 3 points for a 2-input affine is one short, and the 4th point is exactly what makes the
+    claim refutable. That is why Door 3's hardcoded "buy 2 probes" restored nothing -- with 3 seeds it
+    left 4, which tests only if the withheld fit is over-determined, and it picked its probes from the
+    derived space without asking how many were needed.
+
+    Which probes is a second question, and it has a better answer than "the next integers". A probe is
+    worth buying where the SURVIVING CANDIDATES DISAGREE: at a point they all agree on, the answer is
+    already implied and the observation is free information about nothing. So when candidates and a
+    disagreement predicate are supplied, probes are ranked by how many surviving pairs they separate.
+
+    Returns the deficit, the probes, and an explicit statement of what the experiment buys.
+    """
+    if not examples:
+        return {
+            "schema": SCHEMA,
+            "deficit": 0,
+            "probes": [],
+            "why": "no evidence at all; the first observation is not a question of design",
+            "authority": "NONE",
+        }
+    if arity is None:
+        arity = len(examples[0][0])
+    need = int(arity) + 2
+    deficit = max(0, need - len(examples))
+
+    # Candidate probe inputs, from TWO sources, and the second one is not optional.
+    #
+    # (a) neighbours of what was observed; and
+    # (b) the numbers the SURVIVING HYPOTHESES themselves mention.
+    #
+    # MEASURED, 2026-11-04, and this was a genuine false positive. Seeds 1..5 of `x // 7` are all 0,
+    # so probes taken only near the evidence sat at x <= 7 where EVERY candidate returns 0. The
+    # creature bought its tests there, learned nothing that separated `x // 7` from `x // 8`, and
+    # crystallised `x // 8` -- wrong at 37 (4 for 5) and at 100 (12 for 14).
+    #
+    # Locality is the defect: tests near the evidence are worthless when the competing explanations
+    # differ only far away. A hypothesis that mentions 8 can only be distinguished from one that
+    # mentions 7 at points that straddle them, so those literals are where the experiment belongs.
+    # This is the candidate's own model choosing its test -- not a frozen grid.
+    numeric: list[int] = []
+    for inp, _out in examples:
+        for v in inp:
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                for delta in (1, -1, 2, -2):
+                    cand = int(round(float(v))) + delta
+                    if cand not in numeric:
+                        numeric.append(cand)
+    import re as _re
+
+    for organ in candidates:
+        body = getattr(organ, "source_code", "") or ""
+        for lit in _re.findall(r"-?\d+", body):
+            try:
+                value = int(lit)
+            except ValueError:
+                continue
+            for delta in (0, 1, -1, 2):
+                cand = value + delta
+                if cand not in numeric:
+                    numeric.append(cand)
+
+
+
+    def _probe_for(value: int) -> tuple[Any, ...]:
+        return tuple([value] * int(arity))
+
+    # (c) THE BOUNDARY OF THE EVIDENCE, and beyond it.
+    #
+    # A degrees-of-freedom deficit is not the only reason a claim is untested. Measured 2026-11-04:
+    # seeds 1..5 of `x // 7` are all 0, everything fits, arity+2 <= 5 so the deficit was ZERO, one
+    # probe was bought at x = -1 where nearly every candidate also returns 0, and `x // 8` was
+    # crystallised -- wrong at 37, 100, 999. The ambiguity was never about parameters; it was about
+    # WHERE the ramp breaks, and that can only be seen past the last observation.
+    #
+    # A structure that behaves one way on all the evidence is exactly a structure whose behaviour
+    # changes next. So the region just outside the observed range is always probed, in both
+    # directions, whatever the deficit says.
+    observed_values = [
+        int(round(float(v)))
+        for inp, _out in examples
+        for v in inp
+        if isinstance(v, (int, float)) and not isinstance(v, bool)
+    ]
+    if observed_values:
+        lo, hi = min(observed_values), max(observed_values)
+        span = max(1, hi - lo)
+        for cand in (hi + 1, hi + 2, hi + span, lo - 1, lo - 2):
+            if cand not in numeric:
+                numeric.append(cand)
+
+    # `fresh` is computed AFTER every source above has contributed, including the boundary probes.
+    # It used to be computed here, before (c) was appended to `numeric`, so the boundary values never
+    # reached the ranking -- the fix was invisible and the defect reproduced exactly (measured
+    # 2026-11-04).
+    seen = {tuple(repr(x) for x in inp) for inp, _ in examples}
+    fresh = [v for v in numeric if tuple(repr(x) for x in (v,) * int(arity)) not in seen] or numeric
+
+    ranked: list[tuple[int, tuple[Any, ...]]] = []
+    for value in fresh:
+        probe = _probe_for(value)
+        score = 0
+        if candidates and disagree is not None:
+            for i, a in enumerate(candidates):
+                for b in list(candidates)[i + 1:]:
+                    try:
+                        if disagree(a, b, probe):
+                            score += 1
+                    except Exception:  # noqa: BLE001 - an unusable pair separates nothing
+                        continue
+        ranked.append((score, probe))
+    ranked.sort(key=lambda pair: (-pair[0], repr(pair[1])))
+    # HOW MANY is not the degrees-of-freedom deficit. Measured 2026-11-04: for `x // 7` over seeds
+    # 1..5 the deficit is ZERO (five points, arity 1, need three), so the old `max(deficit, 1)` bought
+    # exactly ONE probe -- at x = -1, where `x // 7` and `x // 8` BOTH return -1. One question was
+    # asked, nothing was separated, and `x // 8` was crystallised, wrong at 37, 100 and 999.
+    #
+    # A claim is untested when its SURVIVORS are still distinguishable, which is a different quantity
+    # from whether an over-determined fit exists. So the plan returns enough probes to actually press
+    # on the disagreement, and never fewer than a small floor: the cheapest possible experiment that
+    # can still fail.
+    separating = [p for s, p in ranked if s > 0]
+    budget = max(deficit, 3)
+    probes = (separating or [p for _s, p in ranked])[:budget]
+
+    return {
+        "schema": SCHEMA,
+        "deficit": deficit,
+        "need_observations": need,
+        "have_observations": len(examples),
+        "probes": probes,
+        "separating_probes": sum(1 for s, _p in ranked if s > 0),
+        "why": (
+            f"{len(examples)} observation(s) cannot test an arity-{arity} fit, which needs {need}; "
+            f"{deficit} more would make the claim refutable, and they are chosen where surviving "
+            "candidates disagree so the answer is not already implied"
+        ),
+        "authority": "NONE",
+    }

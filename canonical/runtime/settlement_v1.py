@@ -786,14 +786,56 @@ def acquire_period(
 # ---------------------------------------------------------------------------------------------
 # Inducing a period TABLE: the structure comes from the world, not from a template I wrote
 # ---------------------------------------------------------------------------------------------
-def table_evidence_requirement(period: int, *, factor: int = 4) -> int:
+#: Repeats demanded beyond the information-theoretic floor. See `table_evidence_requirement`.
+TABLE_REPEAT_POLICY = 2
+
+
+def table_evidence_requirement(period: int, *, factor: int | None = None) -> int:
     """How many observations a period table needs before it may claim a structure.
 
-    Exposed so a caller can BUDGET for the compression rule instead of discovering it by failing.
-    The rule itself is that the block must be at most a quarter of the evidence, which is what
-    separates an induction from a restatement.
+    THE INFORMATION FLOOR is `2 * period`: every residue must be seen at least twice before a single
+    repeat exists, and without a repeat there is nothing to call periodic.
+
+    THE NUMBER IS A POLICY, NOT A THEOREM, and the previous docstring said otherwise. It claimed the
+    block "must be at most a quarter of the evidence, which is what separates an induction from a
+    restatement". That sentence is false, and it was measured on 2026-11-04:
+
+        requirement k*p, signal TRULY periodic for T cycles then breaking
+        -> a false table is accepted exactly when T >= k, for every k and every p
+
+        p=3  k=2 (needs  6): false tables accepted when T in [2,3,4,5,6,7]
+        p=3  k=4 (needs 12): false tables accepted when T in [4,5,6,7]
+        p=5  k=2 (needs 10): false tables accepted when T in [2,3,4,5,6,7]
+        p=5  k=4 (needs 20): false tables accepted when T in [4,5,6,7]
+
+    No finite k eliminates this. A signal that repeats k times and then breaks is ALWAYS accepted at
+    requirement k*p, because nothing inside the evidence distinguishes it from one that repeats
+    forever. Raising k narrows the band and buys nothing categorical; 4 does not separate induction
+    from restatement, it merely refuses tables from signals that broke earlier than the fourth cycle.
+
+    So the count is `2 * period` (the floor) plus `TABLE_REPEAT_POLICY` extra repeats -- a stated
+    2-cycle confidence margin over the minimum, reported as a margin rather than dressed up as a law.
+    A caller that wants to pay for more certainty can raise the policy; a caller that wants the floor
+    can set it to 0 and accept that tables will be claimed on a single repeat.
+
+    `factor` is still accepted so an explicit multiple can be requested, and it OVERRIDES the policy.
     """
-    return factor * int(period)
+    if factor is not None:
+        return int(factor) * int(period)
+    return (2 + int(TABLE_REPEAT_POLICY)) * int(period)
+
+
+def table_requirement_policy() -> dict[str, Any]:
+    """What the table requirement is, and what it is not. Reported with the claim it licenses."""
+    return {
+        "floor_observations": "2 * period  (every residue seen twice, i.e. one repeat)",
+        "extra_repeats": int(TABLE_REPEAT_POLICY),
+        "formula": "(2 + extra_repeats) * period",
+        "status": ("POLICY, NOT THEOREM: a signal that repeats extra_repeats times and then breaks is "
+                   "still accepted. Measured 2026-11-04 -- no finite multiple removes this, so the "
+                   "number states a tolerance rather than a guarantee"),
+        "authority": "NONE",
+    }
 
 
 def induce_periodic_table(
