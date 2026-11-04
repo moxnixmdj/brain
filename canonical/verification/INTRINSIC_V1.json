@@ -1,0 +1,658 @@
+{
+  "schema": "PROJECT_BRAIN_INTRINSIC_V1",
+  "measured": "2026-11-05",
+  "train": 120,
+  "test": 120,
+  "budget": 1200,
+  "per_level": 16,
+  "max_size": 11,
+  "worlds": {
+    "xor3": {
+      "objective": {
+        "archive": 1204,
+        "train_separability": 0.7667,
+        "test_separability": 0.725,
+        "size": 6,
+        "renders": [
+          "mindiff(a, abs(('base', 'b') sub ('base', 'c')))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.7167,
+        "test_separability": 0.6667,
+        "size": 5,
+        "renders": [
+          "mindiff(a, ('base', 'b') div ('base', 'c'))"
+        ]
+      },
+      "random": {
+        "archive": 1200,
+        "train_separability": 0.625,
+        "test_separability": 0.5667,
+        "size": 3,
+        "renders": [
+          "mindiff(b, c)"
+        ]
+      },
+      "mixed": {
+        "archive": 1202,
+        "train_separability": 0.7667,
+        "test_separability": 0.725,
+        "size": 6,
+        "renders": [
+          "mindiff(a, abs(('base', 'b') sub ('base', 'c')))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.5087,
+        "med_b": 0.5071,
+        "med_c": 0.436
+      }
+    },
+    "count3": {
+      "objective": {
+        "archive": 1202,
+        "train_separability": 0.9083,
+        "test_separability": 0.8833,
+        "size": 5,
+        "renders": [
+          "add(a, add(b, c))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.85,
+        "test_separability": 0.8083,
+        "size": 7,
+        "renders": [
+          "add(a, ('base', 'c') sub ('bin', 'div', ('base', 'med_a'), ('base', 'b')))"
+        ]
+      },
+      "random": {
+        "archive": 1200,
+        "train_separability": 0.8167,
+        "test_separability": 0.7417,
+        "size": 3,
+        "renders": [
+          "add(a, b)"
+        ]
+      },
+      "mixed": {
+        "archive": 1200,
+        "train_separability": 0.9083,
+        "test_separability": 0.8833,
+        "size": 5,
+        "renders": [
+          "add(a, add(b, c))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.5087,
+        "med_b": 0.5071,
+        "med_c": 0.436
+      }
+    },
+    "and": {
+      "objective": {
+        "archive": 1203,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 7,
+        "renders": [
+          "add(a, add(b, mindiff(a, b)))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.9833,
+        "test_separability": 0.9583,
+        "size": 7,
+        "renders": [
+          "add(a, mindiff(a, ('base', 'a') div ('base', 'b')))"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 0.9583,
+        "test_separability": 0.95,
+        "size": 3,
+        "renders": [
+          "mul(a, b)"
+        ]
+      },
+      "mixed": {
+        "archive": 1203,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 7,
+        "renders": [
+          "add(b, add(a, mindiff(a, b)))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "or": {
+      "objective": {
+        "archive": 1202,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 7,
+        "renders": [
+          "add(a, add(b, maxdiff(a, b)))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.95,
+        "test_separability": 0.9333,
+        "size": 3,
+        "renders": [
+          "maxdiff(a, b)"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 0.95,
+        "test_separability": 0.9333,
+        "size": 3,
+        "renders": [
+          "maxdiff(a, b)"
+        ]
+      },
+      "mixed": {
+        "archive": 1200,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 7,
+        "renders": [
+          "add(a, add(b, maxdiff(a, b)))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "xor": {
+      "objective": {
+        "archive": 1205,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 7,
+        "renders": [
+          "mindiff(mul(a, b), add(a, b))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.875,
+        "test_separability": 0.775,
+        "size": 4,
+        "renders": [
+          "abs(('base', 'b') sub ('base', 'a'))"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 0.7917,
+        "test_separability": 0.7417,
+        "size": 3,
+        "renders": [
+          "mindiff(a, b)"
+        ]
+      },
+      "mixed": {
+        "archive": 1213,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 7,
+        "renders": [
+          "mindiff(mul(a, b), add(a, b))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "circles": {
+      "objective": {
+        "archive": 1207,
+        "train_separability": 0.9167,
+        "test_separability": 0.8083,
+        "size": 7,
+        "renders": [
+          "add(maxdiff(b, med_b), maxdiff(a, med_b))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.85,
+        "test_separability": 0.8,
+        "size": 7,
+        "renders": [
+          "('base', 'b') sub ('bin', 'div', ('base', 'med_b'), ('bin', 'mindiff', ('base', 'a'), ('base', 'b')))"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 0.8917,
+        "test_separability": 0.8167,
+        "size": 5,
+        "renders": [
+          "maxdiff(a, maxdiff(b, med_a))"
+        ]
+      },
+      "mixed": {
+        "archive": 1203,
+        "train_separability": 0.9167,
+        "test_separability": 0.8333,
+        "size": 7,
+        "renders": [
+          "mindiff(mindiff(a, b), mindiff(a, med_a))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "product": {
+      "objective": {
+        "archive": 1202,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "mul(a, b)"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "mul(a, b)"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "mul(a, b)"
+        ]
+      },
+      "mixed": {
+        "archive": 1203,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "mul(a, b)"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "sum": {
+      "objective": {
+        "archive": 1204,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "add(a, b)"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "add(a, b)"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "add(a, b)"
+        ]
+      },
+      "mixed": {
+        "archive": 1202,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 3,
+        "renders": [
+          "add(a, b)"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "stripe": {
+      "objective": {
+        "archive": 1204,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 1,
+        "renders": [
+          "b"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 1,
+        "renders": [
+          "b"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 1,
+        "renders": [
+          "b"
+        ]
+      },
+      "mixed": {
+        "archive": 1202,
+        "train_separability": 1.0,
+        "test_separability": 1.0,
+        "size": 1,
+        "renders": [
+          "b"
+        ]
+      },
+      "constants": {
+        "med_a": 0.4926,
+        "med_b": 0.5127
+      }
+    },
+    "noise": {
+      "objective": {
+        "archive": 1204,
+        "train_separability": 0.625,
+        "test_separability": 0.5917,
+        "size": 6,
+        "renders": [
+          "abs(mindiff(med_b, add(b, b)))"
+        ]
+      },
+      "novelty": {
+        "archive": 1200,
+        "train_separability": 0.65,
+        "test_separability": 0.5833,
+        "size": 7,
+        "renders": [
+          "mindiff(('base', 'med_a') div ('base', 'b'), ('base', 'a') div ('base', 'med_a'))"
+        ]
+      },
+      "random": {
+        "archive": 1204,
+        "train_separability": 0.625,
+        "test_separability": 0.6,
+        "size": 5,
+        "renders": [
+          "mindiff(b, maxdiff(a, med_a))"
+        ]
+      },
+      "mixed": {
+        "archive": 1202,
+        "train_separability": 0.625,
+        "test_separability": 0.5917,
+        "size": 6,
+        "renders": [
+          "abs(mindiff(med_b, add(b, b)))"
+        ]
+      },
+      "constants": {
+        "med_a": 0.464,
+        "med_b": 0.5131
+      }
+    }
+  },
+  "adaptive": {
+    "xor3": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "objective",
+        "7": "objective"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.0845,
+        "4": 0.0451,
+        "5": 0.1677,
+        "6": 0.2602,
+        "7": 0.2288
+      }
+    },
+    "count3": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "objective",
+        "7": "novelty"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.3216,
+        "4": 0.0457,
+        "5": 0.5685,
+        "6": 0.3216,
+        "7": 0.5685
+      }
+    },
+    "and": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "objective",
+        "7": "objective"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.6217,
+        "4": 0.1188,
+        "5": 0.6388,
+        "6": 0.6388,
+        "7": 0.8366
+      }
+    },
+    "or": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "objective",
+        "7": "objective"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.5516,
+        "4": 0.0413,
+        "5": 0.6388,
+        "6": 0.3853,
+        "7": 0.8366
+      }
+    },
+    "xor": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "novelty",
+        "7": "objective"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.2767,
+        "4": 0.4568,
+        "5": 0.4212,
+        "6": 0.4568,
+        "7": 0.9968
+      }
+    },
+    "circles": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "objective",
+        "7": "objective"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.259,
+        "4": 0.1488,
+        "5": 0.3453,
+        "6": 0.2436,
+        "7": 0.5156
+      }
+    },
+    "product": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "novelty",
+        "6": "novelty",
+        "7": "novelty"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.9659,
+        "4": 0.0371,
+        "5": 0.9659,
+        "6": 0.3609,
+        "7": 0.9659
+      }
+    },
+    "sum": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "novelty",
+        "6": "novelty",
+        "7": "novelty"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.995,
+        "4": 0.0458,
+        "5": 0.995,
+        "6": 0.3289,
+        "7": 0.995
+      }
+    },
+    "stripe": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "novelty",
+        "6": "novelty",
+        "7": "novelty"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.9097,
+        "4": 0.2944,
+        "5": 0.9097,
+        "6": 0.9097,
+        "7": 0.9097
+      }
+    },
+    "noise": {
+      "policy_by_size": {
+        "2": "objective",
+        "3": "objective",
+        "4": "objective",
+        "5": "objective",
+        "6": "objective",
+        "7": "objective"
+      },
+      "gain_by_size": {
+        "2": 0.0,
+        "3": 0.0532,
+        "4": 0.0624,
+        "5": 0.0806,
+        "6": 0.1208,
+        "7": 0.0806
+      }
+    }
+  },
+  "parity_expressibility": {
+    "constant": 0.4956,
+    "structure_size": 11,
+    "arms": {
+      "typed_half": {
+        "value": 0.5,
+        "train_separability": 1.0,
+        "test_separability": 1.0
+      },
+      "derived_pooled_median": {
+        "value": 0.4956,
+        "train_separability": 0.9917,
+        "test_separability": 1.0
+      }
+    },
+    "reading": "the rule needs a centre, not MY centre: the data's own median reaches 1.000 on held-out data"
+  },
+  "headline": {
+    "fixed": "constants are derived from the data -- the creature's own pooled median spells the parity rule at 0.992 held-out, and a single computed column now solves xor and sum exactly (1.000) where the method space reached 0.975/0.942",
+    "not_fixed": "none of the four policies HOLDS the parity chain: best reach on xor3 is 0.767 against 0.992 for the structure it can already spell",
+    "intrinsic_valuation": "novelty beats the paired random null at the same archive budget (0.717 vs 0.625 on xor3), so it is a real signal -- but it does not beat plain objective ranking, and it does not hold the chain",
+    "self_direction": "the adaptive stall detector fires on xor and sum, where progress exists, and never on xor3, where it is hopeless: incidental gains look like progress, so stagnation is the wrong self-signal",
+    "reached_by_any_policy": {
+      "xor3": 0.725,
+      "count3": 0.8833,
+      "and": 1.0,
+      "or": 1.0,
+      "xor": 1.0,
+      "circles": 0.8333,
+      "product": 1.0,
+      "sum": 1.0,
+      "stripe": 1.0,
+      "noise": 0.6
+    }
+  },
+  "still_mine": [
+    "the median as the choice of constant, and pooling across signals",
+    "the novelty metric (eight quantiles) and the per-level memory of 16",
+    "the stall rule (two sizes without improvement)"
+  ],
+  "residue": "the wall is now RETENTION, not ranking and not expressibility: every prefix of the parity chain is at chance, and the chain is one column among ~19,000, so a memory of 16 cannot be expected to keep it. Credit assignment over intermediate thoughts -- not a better ranking -- is the next layer",
+  "authority": "NONE",
+  "terminal_truth": false
+}

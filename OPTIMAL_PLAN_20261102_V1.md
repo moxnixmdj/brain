@@ -1921,3 +1921,90 @@ than from operators I named.
 
 Authority: **NONE**. Terminal truth: `false`. No capability credit. Unaided closure for classes
 that matter: **still 0**.
+
+---
+
+## Log 20 — constants it derives, and a reason to keep a thought that is not yet right (2026-11-05)
+
+**What was static.** Log 19 ended on two named blockers and I had been treating them as one. They
+are different in kind:
+
+1. **Every constant in the system was a person's number.** `vocabulary_v1` had *no constants at
+   all* — `("const", 0.5)` raised `IndexError` — so no threshold-centred rule was even spellable.
+   To show parity I had to *inject* a column of 0.5. The creature could not express the rule it was
+   being asked to be unable to find.
+2. **Every thought had to pay immediately.** All three previous search procedures ranked a candidate
+   by how much it agreed with the answer *right now*. Since every proper part of the parity rule is
+   at chance, that ranking deletes the only path to it.
+
+The first is now removed. The second is now built and **measured, and it does not work** — that is
+the honest headline of this log.
+
+**What was built.** `canonical/runtime/intrinsic_v1.py`:
+
+- `derived_constants` computes each signal's **median from the data in front of it**. Nothing in the
+  file contains a threshold; shift the signal by 3.0 and the constant moves by 3.0, corrupt one row
+  with 1000.0 and it moves by less than 0.05.
+- `search(..., policy=...)` grows expressions to size 11 (the parity rule's size; log 19 stopped at
+  5) with four valuations: `objective` (agreement, the old one), `novelty` (keep what is least like
+  anything already held), `mixed` (half of each), and `adaptive` (start objective-guided, switch to
+  novelty when its *own* measured progress stalls).
+
+### What is real
+
+| Claim | Verdict | Measurement |
+|---|---|---|
+| The parity rule is spellable with a constant nobody typed | **TRUE** | size 11, separability **0.992** train / **1.000** test with the data's own pooled median (0.4956) |
+| A derived constant is robust, not a lucky sample | **TRUE** | one row corrupted to 1000.0 moves the centre < 0.05 |
+| `xor` is now solved exactly by one computed column | **TRUE** | 1.000 train and held-out; log 19: 0.975 by the method space, 0.931 by `nearest(k)` in log 18 |
+| `sum` likewise | **TRUE** | 1.000; log 19: 0.942 |
+| Novelty is a real valuation, not decoration | **TRUE, narrow** | vs the paired random null at the same archive budget on xor3: 0.717 vs 0.625 |
+| Novelty keeps *different* thoughts than agreement | **TRUE** | at size 6, median gain 0.0236 vs 0.1029, **zero overlap** between the memories |
+| Novelty is better than agreement | **FALSE** | xor 0.875 vs 1.000; count3 0.850 vs 0.908; circles 0.850 vs 0.917 |
+| Any of the four policies **holds** the parity chain | **FALSE** | best reach on xor3 **0.767** against **0.992** for a rule the search can already spell |
+| Self-direction via stall detection helps | **FALSE** | it fires on `xor` and `sum` (progress exists but is bumpy) and **never** on `xor3` (0.085 → 0.045 → 0.168 → 0.260 → 0.229 reads as progress), i.e. it switches exactly where switching was not needed |
+| The operator list is no longer mine | **FALSE** | unchanged from log 19 |
+
+### The decisive decomposition
+
+The wall was **two** walls and I had been measuring them as one:
+
+| centre used | parity structure (size 11) train | test |
+|---|---|---|
+| typed 0.5 (the oracle log 19 needed) | 1.000 | 1.000 |
+| **derived pooled median 0.4956** | 0.992 | 1.000 |
+
+So expressibility is genuinely solved: the creature can spell the rule using only a quantity it
+measured. What it cannot do is *hold the chain while it is worthless*. At every level except the
+last, the true prefix has no gain, each level keeps 16 of thousands of columns, and the chain is
+dropped long before it pays. **The remaining wall is retention — credit over intermediate thoughts —
+not ranking and not expressibility.**
+
+### A measurement caveat, stated plainly
+
+This probe's dependent variable is the separability of a **single column**, not the system's best
+predictor. `circles` therefore reads 0.808 where the method space reached 0.975, and `count3` 0.883
+where it reached 1.000. Those are not regressions of the creature; they are the single-cut
+instrument being weaker than a tree. Any future comparison must hold the learner fixed, and I am
+flagging it rather than letting the table imply a loss that did not happen.
+
+### Cost
+
+Archive 1,200 columns per arm (16 survivors/level, 10 worlds, 4 policies); 13,795–23,344 columns in
+the deep size-11 runs at 24 survivors/level. Deterministic — no seed sensitivity, because no policy
+draws a random number; the "random" arm is a stable hash. Nine tests, four mutants killed
+(typed constants, novelty scored by gain, adaptive never switching, constant from one sample).
+
+### What the deepest layer says now
+
+Log 19 removed the authored hypothesis *language*. This log removes the authored *constant*, and
+confirms that removing the authored *valuation* is not enough on its own. A creature that can spell
+a three-way interaction, and can derive its centre from the world, and has a reason to keep a
+thought that does not pay — still cannot reach it, because it has no way to know which worthless
+intermediate will matter later. That is credit assignment, and it is the next layer: a thought must
+be able to earn its keep *retrospectively*, from a descendant that pays, rather than being judged at
+birth. Novelty was my attempt to approximate that and the measurement says it is a proxy, not the
+thing.
+
+Authority: **NONE**. Terminal truth: `false`. No capability credit. Unaided closure for classes that
+matter: **still 0**.
