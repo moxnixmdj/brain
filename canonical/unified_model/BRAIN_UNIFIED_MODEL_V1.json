@@ -30950,7 +30950,7 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 301,
+  "knowledge_documents": 302,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6689,
   "routing_tokens": 2360,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3b87802fa1543d162154b04a6c74c42821be78c8839320c835d8ffb51a8b2cd0"
+  "value": "5d9f565e81c61abb6f7e2dfa1cb3d3f4f593bfa96f2ede5c826e7e57970ae7e7"
  },
  "engines": [
   {
@@ -54270,6 +54270,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7036,
+   "headings": [
+    "THE DEEPEST STILL-OPEN DEFECT: NOTHING IS EVER COMPRESSED",
+    "1. What round 21 claimed, and the measurement that killed it",
+    "2. Why nothing transfers: the two solved programs are the same program",
+    "3. And the abstraction machinery that should capture it never fires — measured",
+    "4. What the field says the answer is",
+    "5. So: is round 21 the smartest approach?",
+    "6. The next round, stated so it can fail",
+    "7. Honest limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md",
+   "sha256": "4d7bbca3f0a7eebd4aeba55fc3562614b2393ca4958d9a00c861a386bed7de4e",
+   "summary": "2026-11-04, round 22 investigation note. Base `55d2522c` (round 21 merged as PR #6633). Authority `NONE`. `truth.achieved` false. $0.",
+   "terms": {
+    "14": 4,
+    "2.0": 3,
+    "21": 6,
+    "24": 5,
+    "5.0": 3,
+    "abstraction": 5,
+    "abstractions": 5,
+    "after": 3,
+    "al": 3,
+    "any": 3,
+    "assign": 4,
+    "block": 6,
+    "body": 4,
+    "cache": 5,
+    "cannot": 5,
+    "compound": 5,
+    "compression": 5,
+    "concepts": 5,
+    "corpus": 4,
+    "every": 4,
+    "fn.body": 4,
+    "learning": 4,
+    "len": 4,
+    "library": 7,
+    "make": 4,
+    "math.floor": 4,
+    "no": 6,
+    "none": 5,
+    "not": 14,
+    "note": 4,
+    "nothing": 6,
+    "now": 6,
+    "only": 4,
+    "organ": 5,
+    "over": 4,
+    "period": 5,
+    "problem": 4,
+    "programs": 5,
+    "real": 4,
+    "return": 8,
+    "round": 9,
+    "same": 4,
+    "search": 4,
+    "so": 6,
+    "solved": 4,
+    "synthesizer": 4,
+    "than": 4,
+    "x0": 6
+   },
+   "title": "THE DEEPEST STILL-OPEN DEFECT: NOTHING IS EVER COMPRESSED",
+   "title_terms": [
+    "compressed",
+    "deepest",
+    "defect",
+    "ever",
+    "nothing",
+    "still-open"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7722,
    "headings": [
     "The Instrument Was Blind",
@@ -67873,10 +67950,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1095,
+  "included_source_count": 1096,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4c1a5108228fd92e893be53d627dd9e453f85c103111a61b2c2a1ba591a7729f"
+  "source_tree_digest": "45c90afbf3278d9acad20f0d27d058b3a795fda76fa54ee1557248a39f172bc3"
  },
  "research_index": [
   {
