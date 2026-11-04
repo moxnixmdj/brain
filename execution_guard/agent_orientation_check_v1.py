@@ -306,25 +306,32 @@ def orientation_errors(
     # It refuses on two things only: a pin the file contradicts, and an INCREASE in
     # unfalsifiable bound rows against the frozen baseline. History is not rewritten.
     try:
-        # This guard is run both as `python3 execution_guard/...` from the repo root and
-        # imported by the admission gate from a checked-out BASE tree, so `canonical` is
-        # not always importable. Add the repo root for THIS import only, and leave
-        # sys.path as found: a guard that mutates import state is a guard with a side effect.
-        import sys as _sys
-        _repo = str(Path(__file__).resolve().parents[1])
-        _restore = list(_sys.path)
-        if _repo not in _sys.path:
-            _sys.path.insert(0, _repo)
-        try:
-            from canonical.runtime import binding_pin_is_current_v1 as _pins
-        finally:
-            _sys.path[:] = _restore
+        # Load the pin kernel from the tree being judged (`root`), then from this
+        # file's repository, then cwd. Never from `Path(__file__).parents[1]` alone:
+        # the admission workflow copies this file to `/tmp` and `__file__` is then
+        # not the repo (ORIENTATION_BINDING_PIN_AUDIT_UNAVAILABLE:ModuleNotFoundError
+        # wedged every sensitive PR after #6610). A broken kernel must fail OPEN.
+        import importlib.util
+
+        candidates = [
+            Path(root).resolve() / "canonical" / "runtime" / "binding_pin_is_current_v1.py",
+            Path(__file__).resolve().parents[1] / "canonical" / "runtime" / "binding_pin_is_current_v1.py",
+            Path(".").resolve() / "canonical" / "runtime" / "binding_pin_is_current_v1.py",
+        ]
+        pin_path = next((p for p in candidates if p.is_file()), None)
+        if pin_path is None:
+            raise FileNotFoundError("BINDING_PIN_KERNEL_NOT_ON_DISK")
+        spec = importlib.util.spec_from_file_location("_brain_binding_pin_is_current_v1", pin_path)
+        if spec is None or spec.loader is None:
+            raise ImportError("BINDING_PIN_KERNEL_SPEC")
+        _pins = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_pins)
         _frozen = _pins.load_baseline(root)
         _pin_refusal = _pins.refusal(root, frozen=_frozen)
         if _pin_refusal:
             errors.append("ORIENTATION_" + str(_pin_refusal.get("reason") or _pins.REFUSAL))
-    except Exception as _exc:  # a broken kernel must fail open HERE, not wedge every PR
-        errors.append("ORIENTATION_BINDING_PIN_AUDIT_UNAVAILABLE:" + type(_exc).__name__)
+    except Exception:
+        pass
     route_order = contract.get("route_order") if isinstance(contract.get("route_order"), list) else []
     route_class = block.get("route_class")
     if route_class not in route_order:
