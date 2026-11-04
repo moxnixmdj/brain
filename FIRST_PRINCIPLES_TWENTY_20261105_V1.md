@@ -34,7 +34,7 @@ The screen executes *every* candidate and the loop read only the winner. Every r
 half of everything measured — was thrown away. So the system could only ever learn from successes, which
 is why it needed a prior success to learn anything at all (the habit mechanism's fatal limit).
 
-`synthhesized_edit_grammar_v1` — `synthesized_edit_grammar_v1` — keeps the whole screen:
+`synthesized_edit_grammar_v1` — keeps the whole screen:
 
 * the hypothesis space is a grammar: `root × argument index × transformation × operator`, plus a
   subscript shape. Not a list of edits.
