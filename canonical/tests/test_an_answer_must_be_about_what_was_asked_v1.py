@@ -149,7 +149,13 @@ def test_the_referent_comes_from_the_question_not_from_the_caller(tmp_path):
     # a question naming no numeric column picks out nothing
     assert D.numeric_referent("how many regions", root) is None
     # and a question naming two is genuinely ambiguous, which is not this check's verdict
-    assert D.numeric_referent("what is the total amount and region", root) is not None or True
+    # A question naming two numeric columns is genuinely ambiguous. This check must
+    # not pick one and hold the answer to it -- a wrong pick would accuse a correct
+    # answer of ignoring a column it was never asked about.
+    two_dir = tmp_path / "two"
+    two_dir.mkdir()
+    two = _tree(two_dir, **{"t.csv": "amount,region_count\n10,1\n20,2\n"})
+    assert D.numeric_referent("what is the total amount and region_count", two) is None
 
 
 # ---------------------------------------------------------------------------
