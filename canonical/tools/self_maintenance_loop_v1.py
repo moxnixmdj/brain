@@ -360,11 +360,30 @@ def make_stale_measurement_class(artifact: str = REACH_ARTIFACT,
         find=find, fix=fix, verify=verify)
 
 
+def _derived_value_class(base_ref: str | None) -> DefectClass:
+    """The class nobody wrote: its predicates come from derivations the system inferred.
+
+    The model is read from `DERIVATION_MODEL_V1.json`, which `derivation_inference_v1`
+    learned from 445k of this repository's own records. If the model is absent this class
+    finds nothing and says so -- it must never silently become a person's hand-written rule.
+    """
+    from canonical.tools import derivation_inference_v1 as infer
+    model = infer.load_model(recompute_if_missing=False)
+    if model is None:
+        return DefectClass(
+            class_id="DERIVED_VALUE_DISAGREES",
+            describes="(model absent: no inferred derivation is available, so nothing is checked)",
+            find=lambda: [], fix=lambda d: {"applied": False, "reason": "MODEL_ABSENT"},
+            verify=lambda d: False)
+    return infer.make_derived_value_class(base_ref, model=model)
+
+
 def default_classes(base_ref: str | None = None) -> list[DefectClass]:
     return [
         make_stale_receipt_class(base_ref),
         make_stale_lease_class(base_ref),
         make_stale_measurement_class(),
+        _derived_value_class(base_ref),
     ]
 
 

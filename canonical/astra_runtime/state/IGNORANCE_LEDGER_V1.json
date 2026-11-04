@@ -286,6 +286,17 @@
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
   },
+  "g334574638445": {
+   "cost": 1.0,
+   "created": 1793792805.8884485,
+   "helped": 0,
+   "id": "g334574638445",
+   "last_seen": 1793792805.8884485,
+   "resolved": false,
+   "trials": 0,
+   "what": "DERIVED_VALUE_DISAGREES",
+   "why": "bytes does not follow size_of_referenced_file (EXPLICIT)"
+  },
   "g373341029941": {
    "cost": 1.0,
    "created": 1793438077.2404861,
@@ -758,6 +769,17 @@
    "trials": 0,
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
+  },
+  "g775083486565": {
+   "cost": 1.0,
+   "created": 1793792686.396127,
+   "helped": 0,
+   "id": "g775083486565",
+   "last_seen": 1793792686.397163,
+   "resolved": false,
+   "trials": 0,
+   "what": "DERIVED_VALUE_DISAGREES",
+   "why": "bytes does not follow size_of_referenced_file (EXPLICIT)"
   },
   "g779741228193": {
    "cost": 1.0,

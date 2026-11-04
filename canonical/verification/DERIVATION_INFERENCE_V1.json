@@ -1,0 +1,606 @@
+{
+ "anomalies": {
+  "count": 227,
+  "examples": [
+   {
+    "candidate": "length_of_sibling_list",
+    "derived": 1,
+    "site": {
+     "doc": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-QR-001__BLOCKER.json",
+     "field": "cycles",
+     "pointer": "/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "derived": 1,
+    "site": {
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-INHERITED-PDF-TEXT-001.json",
+     "field": "cycles",
+     "pointer": "/history[1]/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "derived": 1,
+    "site": {
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json",
+     "field": "cycles",
+     "pointer": "/blocker/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "derived": 1,
+    "site": {
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json",
+     "field": "cycles",
+     "pointer": "/history[1]/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "derived": 1,
+    "site": {
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json",
+     "field": "cycles",
+     "pointer": "/history[2]/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "derived": "59f8b8bfa30b8c0026c8a15eaa5d231a3e73092df421be48795b6295d8192d55",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[0]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "f931c5fd8d9a376640ef52ca9dd47d1d26cf161f2d98d155ea873e1bb3ad00bc"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "derived": "45be61a85e2057bb3fcec901dd097cdc1f492e6c361d73d09245d813377ffa7c",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[1]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "3499f58d9a569ab5e54f44d8d83cd79eadc97ac455641878e59bc713c6ffabd4"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "derived": "4a6666ec92e15ea6beb68c854b0bbf66c556197ec34b34e2dfe15b644130abb9",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[2]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "0b1e90d25855a6627ba3dd7010c864d30eee9c3449c443da75cfc3bc01bf4464"
+    }
+   }
+  ]
+ },
+ "attributed_fields": 66,
+ "attribution_agreement": 0.9926,
+ "authority": "NO_CAPABILITY_CREDIT_INFERENCE_MEASUREMENT_ONLY",
+ "corpus": {
+  "contexts": 171033,
+  "documents": 9550,
+  "fields": 38867,
+  "sites": 368460
+ },
+ "fields_by_state": {
+  "ATTRIBUTED": 66,
+  "INSUFFICIENT_SUPPORT": 37876,
+  "UNDERDETERMINED": 5,
+  "UNEXPLAINED": 920
+ },
+ "generalisation_across_contexts": {
+  "accuracy": 0.9987,
+  "agreed": 772,
+  "contexts_withheld_and_predicted": 17,
+  "detail": [
+   {
+    "agreed": 390,
+    "candidate": "sha256_of_referenced_file",
+    "field": "source_sha256|hex64",
+    "records": 391,
+    "withheld_context": "source_executable,source_module,source_path,source_type"
+   },
+   {
+    "agreed": 118,
+    "candidate": "length_of_sibling_list",
+    "field": "associated_target_count|int",
+    "records": 118,
+    "withheld_context": "associated_target_predicates,atom_id,candidate_match_count,candidate_match_truncated,candidate_matches,candidate_only,proposition,stored_candidate_match_count"
+   },
+   {
+    "agreed": 105,
+    "candidate": "length_of_sibling_list",
+    "field": "next_action_index|int",
+    "records": 105,
+    "withheld_context": "completed_actions,created_at_utc,mission_id,plan_sha256,resume_count,schema,status,step_id,test_interrupt_injected,updated_at_utc"
+   },
+   {
+    "agreed": 68,
+    "candidate": "length_of_sibling_list",
+    "field": "member_count|int",
+    "records": 68,
+    "withheld_context": "adapter,archive_path,archive_sha256,capability_id,dependency,manifest_path,manifest_sha256,members,verified"
+   },
+   {
+    "agreed": 16,
+    "candidate": "git_blob_at_record_commit",
+    "field": "source_sha|hex40",
+    "records": 16,
+    "withheld_context": "basis,brain_value,independent_or_objective,normalized_target_atoms,objective_ceiling,objective_ceiling_value,proof_kind,scope_complete,semantic_implications,source_path,source_predicate_id,supporting_sources,witness_id"
+   },
+   {
+    "agreed": 14,
+    "candidate": "size_of_referenced_file",
+    "field": "raw_bytes|int",
+    "records": 14,
+    "withheld_context": "git_blob_sha,path"
+   },
+   {
+    "agreed": 13,
+    "candidate": "length_of_sibling_list",
+    "field": "root_binding_count|int",
+    "records": 13,
+    "withheld_context": "accounting,binding_stability_rule,composition_admissible,date,execution_order,global_rule,hard_nonclaims,roots,roots_with_bounded_execution_support,roots_with_bounded_semantic_support,same_subject_gate,schema,scoped_registry,status,subject,subject_dependency_closure_complete,supersedes,verified_root_subject_binding_count"
+   },
+   {
+    "agreed": 13,
+    "candidate": "length_of_sibling_list",
+    "field": "roots_with_bounded_execution_support|int",
+    "records": 13,
+    "withheld_context": "accounting,binding_stability_rule,composition_admissible,date,execution_order,global_rule,hard_nonclaims,root_binding_count,roots,roots_with_bounded_semantic_support,same_subject_gate,schema,scoped_registry,status,subject,subject_dependency_closure_complete,supersedes,verified_root_subject_binding_count"
+   },
+   {
+    "agreed": 13,
+    "candidate": "length_of_sibling_list",
+    "field": "roots_with_bounded_semantic_support|int",
+    "records": 13,
+    "withheld_context": "accounting,binding_stability_rule,composition_admissible,date,execution_order,global_rule,hard_nonclaims,root_binding_count,roots,roots_with_bounded_execution_support,same_subject_gate,schema,scoped_registry,status,subject,subject_dependency_closure_complete,supersedes,verified_root_subject_binding_count"
+   },
+   {
+    "agreed": 7,
+    "candidate": "length_of_sibling_list",
+    "field": "wheel_count|int",
+    "records": 7,
+    "withheld_context": "closure_sha256,network_required_for_install,resolver,root_filename,root_project,root_version,schema,source_only_artifacts_allowed,wheels"
+   }
+  ],
+  "fields_tested": 17,
+  "note": "each field's largest context withheld; rule bound from the others",
+  "records_predicted": 773,
+  "rule_identical_when_neighbourhood_removed": 17
+ },
+ "generalisation_within_field": {
+  "accuracy": 0.9886,
+  "agreed": 8617,
+  "failures": [
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[0]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "f931c5fd8d9a376640ef52ca9dd47d1d26cf161f2d98d155ea873e1bb3ad00bc"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[2]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "0b1e90d25855a6627ba3dd7010c864d30eee9c3449c443da75cfc3bc01bf4464"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[4]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "a4cfb348e017bd9c9b400cfea97d0725b6c36babf29a3ccb5411ac619a6c74e7"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[6]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "30239dfb108b1c9f3cf93a16b9c2d3c80ca307489cdf93358a5a679dd48c790b"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+     "field": "sha256",
+     "pointer": "/records[7]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "87f474d573dc0abf7781b3837640416c03bb3473d6f428cc7dad44b7a2f57a24"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
+     "field": "sha256",
+     "pointer": "/records[1]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "3499f58d9a569ab5e54f44d8d83cd79eadc97ac455641878e59bc713c6ffabd4"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
+     "field": "sha256",
+     "pointer": "/records[2]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "cc4348e35da204c69b93db0ba332719bfdf1dc6846298a740598dc7a32e6d45b"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
+     "field": "sha256",
+     "pointer": "/records[4]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "a4cfb348e017bd9c9b400cfea97d0725b6c36babf29a3ccb5411ac619a6c74e7"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
+     "field": "sha256",
+     "pointer": "/records[6]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "23c7704a4966c6333f21fb385a3330bbfc40fa62e06e736d4fad9f96f5ddde81"
+    }
+   },
+   {
+    "candidate": "sha256_of_referenced_file",
+    "field": "sha256|hex64",
+    "site": {
+     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
+     "field": "sha256",
+     "pointer": "/records[7]/sha256",
+     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
+     "value": "87f474d573dc0abf7781b3837640416c03bb3473d6f428cc7dad44b7a2f57a24"
+    }
+   }
+  ],
+  "fields_bound_on_half": 38,
+  "note": "fit on half of each attributed field, predicted the other half",
+  "records_predicted": 8716
+ },
+ "history_complete": true,
+ "hypothesis_space": [
+  {
+   "name": "git_blob_of_referenced_file",
+   "why": "the field is a content address of the file its record points at"
+  },
+  {
+   "name": "git_blob_at_head",
+   "why": "the field is a content address of the file as last committed"
+  },
+  {
+   "name": "git_blob_at_record_commit",
+   "why": "the blob of the referenced file at the commit that last wrote this record"
+  },
+  {
+   "name": "sha1_of_referenced_file",
+   "why": "a plain sha1 of the referenced bytes"
+  },
+  {
+   "name": "sha256_of_referenced_file",
+   "why": "a sha256 of the referenced bytes"
+  },
+  {
+   "name": "size_of_referenced_file",
+   "why": "a byte count of the referenced file"
+  },
+  {
+   "name": "sha1_of_path_string",
+   "why": "a hash of the path itself, not of its contents"
+  },
+  {
+   "name": "length_of_sibling_list",
+   "why": "a total that is just the length of a sibling list"
+  }
+ ],
+ "ignorance": {
+  "by_reason": {
+   "INSUFFICIENT_SUPPORT": 37876,
+   "UNDERDETERMINED": 5,
+   "UNEXPLAINED": 920
+  },
+  "ranked": [
+   {
+    "best_candidate": "git_blob_at_head",
+    "best_rate": 0.8535,
+    "contenders": [
+     "git_blob_at_head",
+     "git_blob_of_referenced_file"
+    ],
+    "records": 20075,
+    "shape": "git_blob_sha|hex40",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0,
+    "contenders": [
+     "length_of_sibling_list",
+     "sha1_of_path_string",
+     "git_blob_at_head",
+     "git_blob_of_referenced_file",
+     "sha1_of_referenced_file",
+     "sha256_of_referenced_file",
+     "size_of_referenced_file",
+     "git_blob_at_record_commit"
+    ],
+    "records": 9141,
+    "shape": "incremental_spend_usd|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.005,
+    "contenders": [],
+    "records": 7206,
+    "shape": "original_index|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": null,
+    "best_rate": null,
+    "contenders": [],
+    "records": 6370,
+    "shape": "v1|int",
+    "state": "INSUFFICIENT_SUPPORT"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0,
+    "contenders": [],
+    "records": 6014,
+    "shape": "score|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0243,
+    "contenders": [],
+    "records": 5418,
+    "shape": "required_secret_count|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0065,
+    "contenders": [],
+    "records": 5417,
+    "shape": "required_environment_count|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": null,
+    "best_rate": null,
+    "contenders": [],
+    "records": 5251,
+    "shape": "passing_cases|int",
+    "state": "INSUFFICIENT_SUPPORT"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0005,
+    "contenders": [],
+    "records": 4963,
+    "shape": "id|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0,
+    "contenders": [
+     "length_of_sibling_list",
+     "sha1_of_path_string",
+     "git_blob_at_head",
+     "git_blob_of_referenced_file",
+     "sha1_of_referenced_file",
+     "sha256_of_referenced_file",
+     "size_of_referenced_file",
+     "git_blob_at_record_commit"
+    ],
+    "records": 4780,
+    "shape": "terminal_credit_delta|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0123,
+    "contenders": [],
+    "records": 4526,
+    "shape": "capability_credit_delta|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0,
+    "contenders": [],
+    "records": 3953,
+    "shape": "archive_sha256|hex64",
+    "state": "UNEXPLAINED"
+   }
+  ],
+  "records_stranded": 327259,
+  "shapes_unexplained": 38801
+ },
+ "instrument": "DERIVATION_INFERENCE_FROM_OWN_RECORDS",
+ "non_claims": [
+  "NO_CAPABILITY_CREDIT_KNOWING_A_HASH_IS_NOT_BEING_CAPABLE",
+  "HYPOTHESIS_SPACE_IS_SUPPLIED_BY_A_PERSON_THE_ATTRIBUTION_IS_NOT",
+  "AN_ATTRIBUTION_IS_AGREEMENT_WITH_DATA_NOT_PROOF_OF_CAUSATION",
+  "ARCHIVE_ANOMALIES_ARE_HISTORY_NOT_DEBT"
+ ],
+ "residual_diagnosis": {
+  "candidate": "git_blob_at_head",
+  "causes": {
+   "HISTORICAL_BLOB": 43,
+   "REAL_OBJECT_OTHER_PATH": 17
+  },
+  "conclusion": "FINAL",
+  "disagreements": 2864,
+  "examples": {
+   "HISTORICAL_BLOB": [
+    {
+     "path": "canonical/verification/LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_PROMOTION_EXACT_BYTE_VERIFICATION_20261004_V1.json",
+     "site": {
+      "doc": "canonical/action_intents/2026-10-04_PROMOTE_LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_V1.json",
+      "field": "git_blob_sha",
+      "pointer": "/independent_promotion_verification/git_blob_sha",
+      "shape": "git_blob_sha|hex40|conclusion,path,repository,workflow_job_id,workflow_run_id",
+      "value": "8b2071fb31f359b2f990d8c7da1fe6feeabfcb31"
+     },
+     "value": "8b2071fb31f359b2f990d8c7da1fe6feeabfcb31"
+    },
+    {
+     "path": "canonical/runtime/goal_compiler.py",
+     "site": {
+      "doc": "canonical/action_intents/ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1.json",
+      "field": "git_blob_sha",
+      "pointer": "/v22_prewrite_admission/tournament/counterexample_receipts[0]/git_blob_sha",
+      "shape": "git_blob_sha|hex40|path",
+      "value": "9c69ecdb13d5a569d0a516ab5f4667636e73e490"
+     },
+     "value": "9c69ecdb13d5a569d0a516ab5f4667636e73e490"
+    },
+    {
+     "path": "canonical/tests/test_live_brain_route_admission_v1.py",
+     "site": {
+      "doc": "canonical/action_intents/ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1.json",
+      "field": "git_blob_sha",
+      "pointer": "/v22_prewrite_admission/tournament/counterexample_receipts[1]/git_blob_sha",
+      "shape": "git_blob_sha|hex40|path",
+      "value": "f57eb88fdba9dd126372f2f673db1bac344893b6"
+     },
+     "value": "f57eb88fdba9dd126372f2f673db1bac344893b6"
+    }
+   ],
+   "REAL_OBJECT_OTHER_PATH": [
+    {
+     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+     "site": {
+      "doc": "canonical/action_intents/ACTION_INTENT_GDPVAL_OBJECTIVE_ARTIFACT_CRITERIA_20261007_V1.json",
+      "field": "git_blob_sha",
+      "pointer": "/current_scheduler_binding/git_blob_sha",
+      "shape": "git_blob_sha|hex40|closure_condition,gdpval_brain_owner_elo_score_bound,open_ABC_refinement_count,path,pointer,public_gdpval_rubric_item_count,terminal",
+      "value": "fceee71ce448c3b8e3fbd6eb0e892fd27ab4ce02"
+     },
+     "value": "fceee71ce448c3b8e3fbd6eb0e892fd27ab4ce02"
+    },
+    {
+     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+     "site": {
+      "doc": "canonical/action_intents/ACTION_INTENT_MYSTERYMECHANISM_INTRINSIC_BAR_PROPAGATION_20261007_V1.json",
+      "field": "git_blob_sha",
+      "pointer": "/evidence_bindings/current_authority/git_blob_sha",
+      "shape": "git_blob_sha|hex40|path",
+      "value": "ea4b79620c09d31fc7d59d4b2fdfe6b65069e312"
+     },
+     "value": "ea4b79620c09d31fc7d59d4b2fdfe6b65069e312"
+    },
+    {
+     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+     "site": {
+      "doc": "canonical/action_intents/ACTION_INTENT_PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_BINDING_20261009_V2.json",
+      "field": "git_blob_sha",
+      "pointer": "/source_bindings/assurance_pointer/git_blob_sha",
+      "shape": "git_blob_sha|hex40|path",
+      "value": "2adee7bb282cd01ce7b62f69c8f093268a891753"
+     },
+     "value": "2adee7bb282cd01ce7b62f69c8f093268a891753"
+    }
+   ]
+  },
+  "field": "git_blob_sha|hex40",
+  "history_complete": true,
+  "note": "only NEVER_AN_OBJECT is a defect; the rest is archive discipline. In a shallow clone not even that can be concluded.",
+  "records": 20075,
+  "sampled_disagreements": 60
+ },
+ "roles": {
+  "hex40|nopath": {
+   "candidate": "length_of_sibling_list",
+   "rate": 0.0,
+   "records": 25423,
+   "state": "UNEXPLAINED"
+  },
+  "hex40|path": {
+   "candidate": "git_blob_at_head",
+   "rate": 0.7813,
+   "records": 23172,
+   "state": "UNDERDETERMINED"
+  },
+  "hex64|nopath": {
+   "candidate": "length_of_sibling_list",
+   "rate": 0.0,
+   "records": 29383,
+   "state": "UNEXPLAINED"
+  },
+  "hex64|path": {
+   "candidate": "sha256_of_referenced_file",
+   "rate": 0.8859,
+   "records": 10773,
+   "state": "TRANSFERABLE_BY_ANALOGY"
+  },
+  "int|nopath": {
+   "candidate": "length_of_sibling_list",
+   "rate": 0.0692,
+   "records": 262864,
+   "state": "UNEXPLAINED"
+  },
+  "int|path": {
+   "candidate": "length_of_sibling_list",
+   "rate": 0.316,
+   "records": 16845,
+   "state": "UNEXPLAINED"
+  }
+ },
+ "schema": "PROJECT_BRAIN_DERIVATION_INFERENCE_V1",
+ "widening": null
+}

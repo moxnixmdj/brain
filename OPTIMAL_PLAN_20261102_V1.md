@@ -513,3 +513,86 @@ artifact itself** — a blob sha, a derived key, a recomputation. Capability ids
 bindings and semantic choices are not derivable, and no class here touches them. That
 boundary is the next thing to widen, and widening it is where unaided closure rate stops
 being a bookkeeping number.
+
+---
+
+## Execution log 7 — the system infers its own checking predicates (2026-11-04)
+
+The loop in log 6 was still mine in the way that matters: I wrote its three defect classes. The
+system executed them and reordered them; it did not work out *what to check*. So the ceiling
+was my enumeration.
+
+`canonical/tools/derivation_inference_v1.py` removes that ceiling for one kind of question:
+**which numbers in this repository are pure functions of the tree, and of which function?**
+
+The hypothesis space (8 candidate derivations) is supplied by a person. The attribution is
+not. From 368,460 recorded values in 9,550 documents:
+
+| measurement | result |
+|---|---|
+| fields whose meaning was inferred (`ATTRIBUTED`, ≥90% agreement) | **66** |
+| fields declared ambiguous (`UNDERDETERMINED`) | 5 |
+| fields it cannot explain (`UNEXPLAINED`) | 920 |
+| fields with too little evidence to say | 37,876 |
+| mean agreement on attributed fields | **99.26%** |
+| held-out records of the same field | **8,617 / 8,716 = 98.86%** |
+| contexts withheld whole, rule learned only from others | **772 / 773 = 99.87%** over 17 |
+| anomalies inside fields it *does* understand | 227 |
+| model size written to disk | 991 fields, 218 KB |
+
+The learned model is persisted (`canonical/verification/DERIVATION_MODEL_V1.json`) and consumed
+by `self_maintenance_loop_v1` as a fourth defect class, `DERIVED_VALUE_DISAGREES`. Live proof,
+unattended, on a document the system had never seen with a field nobody named:
+
+```
+found 1  closed 1  certified 1   (bytes: 1 -> 59,476, the real size of the file it names)
+```
+
+### A hypothesis of mine, falsified by the system
+
+`git_blob_sha` binds at only **85.4%** against the current blob. I proposed that receipts record
+the file *as it was when the receipt was written*, and implemented `git_blob_at_record_commit`.
+It binds at **76.7%** of the records it can compute — **worse than the hypothesis it was meant
+to replace**. The records do not say that. Kept in the space, reported as beaten.
+
+### And a headline of mine, retracted
+
+Before that: 40 of 40 sampled disagreements under `git_blob_sha` were shas that "never existed"
+— 2,864 disagreements, apparently systematic fabrication. **It was the sandbox.** The clone was
+depth-1 (8 commits). After `git fetch --unshallow` (21,236 commits), a 60-record sample gives
+**43 HISTORICAL_BLOB, 17 REAL_OBJECT_OTHER_PATH, 0 NEVER_AN_OBJECT**. Every single "fabrication"
+was a real blob from history I had not fetched.
+
+The instrument now refuses to make that claim in a shallow clone: it emits
+`UNVERIFIABLE_IN_SHALLOW_CLONE` and marks the conclusion `PROVISIONAL`. Pinned by a test, and
+by a mutant that removes the guard.
+
+### Four errors in this module, all found before landing
+
+1. **Shape granularity.** Keying on the exact sibling-key set produced 477 shapes with 1 record
+   each and everything `INSUFFICIENT_SUPPORT` — a measurement of my key, not the repository.
+   Split into FIELD (what is asserted) and CONTEXT (where it appears): inference at field,
+   transfer measured at context.
+2. **Booleans as sites.** 100,893 policy decisions were counted as unexplained "derivations".
+   A `true` in a governance document is a choice, not a computation over bytes. Excluded.
+3. **Name-only model.** It could never say anything about a field it had not seen. Added a role
+   tier (value class × names-a-path) that *can*, and kept it separate: an analogy at ≥80% is
+   reported as a suspicion and is **never allowed to rewrite a document**. Pinned by a mutant.
+4. **A 70%-explained field marked `ATTRIBUTED`.** A stale `.pyc` from a mutation run made this
+   look like a threshold problem; clearing caches showed the threshold was real and the test
+   that caught it is now permanent — a threshold nobody pins is a threshold that drifts.
+
+Mutation results: ignore shallow blindness → 1 test fails; let an analogy repair → 1 fails;
+lower the binding threshold → 1 fails.
+
+### The honest limit, stated as the next target
+
+The hypothesis space is still supplied. The system picks among eight derivations a person
+imagined; it does not invent a ninth. `widen()` exists and composes candidates from primitives,
+but on this corpus nearly every unexplained field is a count, a score or an index that no
+function of the tree produces — so it accepts few and says so. **The next real widening is not
+more candidates; it is a hypothesis space that grows from the falsifications.** Log 6's classes
+were mine; log 7's predicates are inferred; log 8 has to make the *space* learned.
+
+No capability credit. Knowing that a recorded number equals a function of the tree is not
+being capable, and neither is repairing the document that quoted it.
