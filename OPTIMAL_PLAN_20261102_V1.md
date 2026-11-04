@@ -394,3 +394,58 @@ figure this tool can manufacture.
 
 7 new tests, all passing. Nothing in the routing path was changed — this adds a measurement and
 a limit, and modifies no behaviour.
+
+---
+
+## Execution log — the real reach number, from real sentences
+
+The previous section said a corpus of real user sentences was the only thing that would turn
+reach into a number. The repository already has one: **49 hand-written advanced
+software-engineering requests** in `execution_guard/swe_advanced_probe_v1.py`, spanning
+polyglot, build, CI, performance, concurrency, test authoring, debugging, refactoring, git and
+design. `route_reach_census_v1.py --real` routes them and reports reach.
+
+### Measured 2026-11-02, routing only, nothing executed
+
+| | |
+|---|---|
+| sentences | 49 |
+| routed somewhere | **32** |
+| capabilities reached | **12 / 141** (8.5%) |
+| declared effects reached | **43 / 259** (16.6%) |
+| unrouted | **17** |
+
+This is the figure that was quoted for months as *"443 rows, 11 reached"* — an unverified
+number from a superseded document that did not even match the current tree's row count. It is
+now **12 of 141 at a named commit, reproducible in five seconds**, and the old figure's shape
+turns out to have been right while its denominator was wrong.
+
+### Where the 17 go, and why it is not one problem
+
+| cause | count |
+|---|---|
+| `GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH` | 14 |
+| `GOAL_INPUT_BINDING_REQUIRED` | 3 |
+
+The 14 are **declaration gaps**: the door has no row whose declared effect matches the request.
+The 3 are **template defects**: a row exists but demands inputs the sentence never states.
+
+### The concrete gap this exposed
+
+`Add a target lint to .../Makefile`, `Fix the failing CI job in .../ci.yml`, and
+`Make the CI workflow ... run the tests on Python 3.11 and 3.12` all route nowhere. The tree
+contains `canonical/swe_kernel/polyglot_build_ci_engine_v1.py`, which is written, tested and
+referenced by four action intents — and **has no registry row at all**. A working build/CI
+capability exists and no sentence can reach it.
+
+That is the same shape as the two defects already fixed this session (a learner nobody enabled,
+a status that over-claimed), and it is now **named and measured** rather than inferred. It is
+also deliberately **not** half-built here: registering a capability requires adapter wiring,
+declared effects, and verification on held-out requests, and the honest state is that the gap
+is diagnosed and the fix is scoped.
+
+### Concentration is the routing story
+
+Three rows absorb most of the routed traffic — one row takes **11 of the 32** routed sentences
+on its own, another 6. That is why "reach" and "capability count" are different numbers, and
+why adding a 142nd row would move neither.

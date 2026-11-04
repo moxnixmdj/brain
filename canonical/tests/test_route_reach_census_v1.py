@@ -109,3 +109,55 @@ def test_the_census_claims_no_capability_credit(registry):
     report = census.census(registry)
     assert report["authority"] == "NO_CAPABILITY_CREDIT_ROUTING_MEASUREMENT_ONLY"
     assert "rows" in report and report["rows"]
+
+
+# --------------------------------------------------------------------------- real sentences
+@pytest.fixture(scope="module")
+def real_reach():
+    return census.reach_over_real_sentences()
+
+
+def test_the_real_corpus_is_the_repositorys_own_hand_written_sentences(real_reach):
+    """Not a template of capability ids: the requests a person wrote for this tree."""
+    assert real_reach["corpus"].endswith("swe_advanced_probe_v1.py")
+    assert real_reach["sentences"] >= 40
+    goals = [r["goal"] for r in real_reach["rows"]]
+    assert len(set(goals)) == len(goals), "the corpus must not repeat a sentence"
+    # a real request, not a keyword bag
+    assert any(" " in g and g.endswith(".") for g in goals)
+
+
+def test_reach_over_real_sentences_is_a_fraction_not_a_whole(real_reach):
+    """THE MEASUREMENT. Measured 2026-11-02: 12 of 141 capabilities, 43 of 259 effects.
+
+    Asserted as a strict inequality rather than an exact number so that a registry change
+    does not make the test red for the wrong reason; the numbers themselves live in the
+    artifact. What must stay true is that these sentences do NOT reach the whole registry --
+    if they ever did, this test should be deleted along with the finding it records.
+    """
+    assert 0 < real_reach["capabilities_reached"] < real_reach["capabilities_total"]
+    assert 0 < real_reach["declared_effects_reached"] < real_reach["declared_effects_total"]
+    assert real_reach["sentences_routed"] <= real_reach["sentences"]
+
+
+def test_every_unrouted_real_sentence_names_its_cause(real_reach):
+    """"Refused" is not a diagnosis. The cause is what makes the gap fixable."""
+    unrouted = [r for r in real_reach["rows"] if not r["selected"]]
+    assert unrouted, "if every sentence routes, this instrument has nothing to report"
+    for row in unrouted:
+        assert row["reason"], f"{row['goal']!r} was unrouted with no cause"
+
+
+def test_routing_is_concentrated_and_the_magnets_are_named(real_reach):
+    """Three rows doing most of the work is a routing fact, not a capability fact."""
+    magnets = real_reach["reach_magnets"]
+    assert magnets
+    top_count = magnets[0][1]
+    assert top_count >= 2, "the concentration this instrument reports must be visible"
+    routed = real_reach["sentences_routed"]
+    assert sum(n for _, n in magnets) >= routed, "the magnet list must cover the routed set"
+
+
+def test_the_real_sentence_instrument_claims_no_capability_credit(real_reach):
+    assert real_reach["authority"] == "NO_CAPABILITY_CREDIT_ROUTING_MEASUREMENT_ONLY"
+    assert real_reach["instrument"] == "REAL_SENTENCES_ROUTING_ONLY"

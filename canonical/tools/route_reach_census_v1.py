@@ -233,10 +233,121 @@ def census(registry: dict | None = None, *, limit: int | None = None) -> dict:
     }
 
 
+# --------------------------------------------------------------------------- real sentences
+REAL_CORPUS_PROBE = "execution_guard/swe_advanced_probe_v1.py"
+
+
+def real_sentence_corpus() -> list[dict]:
+    """The repository's OWN hand-written advanced-SWE sentences, not a template of its ids.
+
+    Why this is a different instrument from the templated addresses above
+    --------------------------------------------------------------------
+    The templated census measured its own phrasings and produced a diagnostic, not a reach
+    denominator. This reuses sentences a person wrote as requests -- 49 of them, across
+    polyglot, build, CI, performance, concurrency, test authoring, debugging, refactoring and
+    design -- which is the corpus the diagnostic said it could not manufacture.
+
+    It only ROUTES: it compiles each sentence and records which capability the front door
+    picks. It does not execute anything, so a reach figure from this is about the door, not
+    about whether the capability would then have worked.
+    """
+    import importlib.util
+
+    path = ROOT / REAL_CORPUS_PROBE
+    spec = importlib.util.spec_from_file_location("_brain_real_swe_probe", path)
+    if spec is None or spec.loader is None:
+        return []
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception:                                           # noqa: BLE001
+        return []
+
+    base = ".brain_reach_scratch"
+    paths = {rel: f"{base}/{rel}" for rel in getattr(module, "FILES", {})}
+    paths.update(pkg=f"{base}/pkg", tests=f"{base}/tests",
+                 src=f"{base}/src", root=base)
+    sentences: list[dict] = []
+    for axis, template, allow in getattr(module, "PROBES", []):
+        try:
+            goal = template.format(**paths)
+        except (KeyError, IndexError):
+            continue
+        sentences.append({"axis": axis, "goal": goal, "authorised_files": list(allow)})
+    return sentences
+
+
+def reach_over_real_sentences(registry: dict | None = None) -> dict:
+    """How many capabilities and effects do REAL sentences actually reach?"""
+    from canonical.runtime import goal_front_compiler_v1 as front
+
+    registry = registry or load_registry()
+    sentences = real_sentence_corpus()
+    rows: list[dict] = []
+    for item in sentences:
+        row = dict(item, selected=None, compiler_mode=None, reason=None)
+        try:
+            compiled = front.compile_goal(item["goal"], registry, ROOT)
+        except Exception as exc:                                # noqa: BLE001
+            row["reason"] = f"COMPILER_RAISED:{getattr(exc, 'code', type(exc).__name__)}"
+        else:
+            row["selected"] = compiled.get("selected_capability")
+            row["compiler_mode"] = compiled.get("compiler_mode")
+            if not row["selected"]:
+                row["reason"] = "NO_SELECTION"
+        rows.append(row)
+
+    reached = sorted({r["selected"] for r in rows if r["selected"]})
+    effects = declared_effects(registry)
+    reached_effects = sorted({
+        str(effect) for effect, owners in effects.items()
+        if any(o in reached for o in owners)
+    })
+    counts: dict[str, int] = {}
+    for row in rows:
+        if row["selected"]:
+            counts[row["selected"]] = counts.get(row["selected"], 0) + 1
+    served = sum(1 for r in rows if r["selected"])
+    return {
+        "schema": SCHEMA,
+        "instrument": "REAL_SENTENCES_ROUTING_ONLY",
+        "corpus": REAL_CORPUS_PROBE,
+        "authority": "NO_CAPABILITY_CREDIT_ROUTING_MEASUREMENT_ONLY",
+        "sentences": len(rows),
+        "sentences_routed": served,
+        "capabilities_total": len(registry),
+        "capabilities_reached": len(reached),
+        "declared_effects_total": len(effects),
+        "declared_effects_reached": len(reached_effects),
+        "reach_magnets": sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:12],
+        "rows": rows,
+    }
+
+
 def main(argv: list[str]) -> int:
     limit = None
     if "--limit" in argv:
         limit = int(argv[argv.index("--limit") + 1])
+
+    if "--real" in argv:
+        real = reach_over_real_sentences()
+        print(f"corpus                      : {real['corpus']}")
+        print(f"sentences                   : {real['sentences']}")
+        print(f"sentences routed somewhere  : {real['sentences_routed']}")
+        print(f"capabilities reached        : {real['capabilities_reached']}"
+              f" / {real['capabilities_total']}")
+        print(f"declared effects reached    : {real['declared_effects_reached']}"
+              f" / {real['declared_effects_total']}")
+        print()
+        print("rows doing the most work (a magnet is a routing concentration, not a win):")
+        for cid, n in real["reach_magnets"]:
+            print(f"  {n:3} sentences  {cid}")
+        print()
+        out = ROOT / "canonical/verification/ROUTE_REACH_REAL_SENTENCES_V1.json"
+        out.write_text(json.dumps(real, indent=1, sort_keys=True) + "\n")
+        print(f"written: {out.relative_to(ROOT)}")
+        return 0
+
     report = census(limit=limit)
     print(f"capabilities                : {report['capabilities']}")
     print(f"declared effects            : {report['declared_effects']}")

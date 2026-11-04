@@ -1,0 +1,515 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_ROUTING_MEASUREMENT_ONLY",
+ "capabilities_reached": 12,
+ "capabilities_total": 141,
+ "corpus": "execution_guard/swe_advanced_probe_v1.py",
+ "declared_effects_reached": 43,
+ "declared_effects_total": 259,
+ "instrument": "REAL_SENTENCES_ROUTING_ONLY",
+ "reach_magnets": [
+  [
+   "python.software.request.semantic_behavior.compile.v1",
+   11
+  ],
+  [
+   "test.slice.never_miss.v1",
+   6
+  ],
+  [
+   "finance.saccr.credit.addon.v1",
+   3
+  ],
+  [
+   "git.repository.operate.v1",
+   3
+  ],
+  [
+   "software.analysis.diagnose_and_architect.v1",
+   2
+  ],
+  [
+   "decision.synthesis.typed.stdlib",
+   1
+  ],
+  [
+   "decision.synthesis.verify.stdlib",
+   1
+  ],
+  [
+   "orchestration.verify.bridge_enumeration.v1",
+   1
+  ],
+  [
+   "python.refactor.inline_helper.v1",
+   1
+  ],
+  [
+   "python.source.crossfile_edit.choreograph.v1",
+   1
+  ],
+  [
+   "python.source.test_adequacy.v1",
+   1
+  ],
+  [
+   "source.candidates.enumerate.stdlib",
+   1
+  ]
+ ],
+ "rows": [
+  {
+   "authorised_files": [
+    "src/main.cpp"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Fix the off-by-one bug in .brain_reach_scratch/src/main.cpp so that sum returns the right total.",
+   "reason": null,
+   "selected": "python.source.test_adequacy.v1"
+  },
+  {
+   "authorised_files": [
+    "src/lib.rs"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add a function sub to .brain_reach_scratch/src/lib.rs that subtracts two integers.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [
+    "src/main.go"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add a method Mul to .brain_reach_scratch/src/main.go that multiplies two integers.",
+   "reason": null,
+   "selected": "finance.saccr.credit.addon.v1"
+  },
+  {
+   "authorised_files": [
+    "src/Main.java"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": null,
+   "goal": "Add a second method to .brain_reach_scratch/src/Main.java and make sure it compiles.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "src/app.ts"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Rename the exported function add to plus in .brain_reach_scratch/src/app.ts and update its callers.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [
+    "src/schema.sql"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add a NOT NULL constraint on users.email in .brain_reach_scratch/src/schema.sql.",
+   "reason": null,
+   "selected": "decision.synthesis.typed.stdlib"
+  },
+  {
+   "authorised_files": [
+    "src/main.cpp"
+   ],
+   "axis": "polyglot",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Repair the C++ source file .brain_reach_scratch/src/main.cpp so that it compiles cleanly.",
+   "reason": null,
+   "selected": "source.candidates.enumerate.stdlib"
+  },
+  {
+   "authorised_files": [
+    "pyproject.toml"
+   ],
+   "axis": "build",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add pytest as a development dependency in .brain_reach_scratch/pyproject.toml.",
+   "reason": null,
+   "selected": "finance.saccr.credit.addon.v1"
+  },
+  {
+   "authorised_files": [
+    "pyproject.toml"
+   ],
+   "axis": "build",
+   "compiler_mode": null,
+   "goal": "Create a pyproject.toml for the project in .brain_reach_scratch/pkg with a console script entry point.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "Makefile"
+   ],
+   "axis": "build",
+   "compiler_mode": null,
+   "goal": "Add a target `lint` to .brain_reach_scratch/Makefile that runs ruff over the package.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pyproject.toml"
+   ],
+   "axis": "build",
+   "compiler_mode": null,
+   "goal": "Pin the dependency versions in .brain_reach_scratch/pyproject.toml.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [],
+   "axis": "build",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Vendor the single dependency of the project in .brain_reach_scratch/pkg.",
+   "reason": null,
+   "selected": "python.refactor.inline_helper.v1"
+  },
+  {
+   "authorised_files": [
+    ".github/workflows/ci.yml"
+   ],
+   "axis": "ci",
+   "compiler_mode": null,
+   "goal": "Fix the failing CI job in .brain_reach_scratch/.github/workflows/ci.yml.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    ".github/workflows/ci.yml"
+   ],
+   "axis": "ci",
+   "compiler_mode": null,
+   "goal": "Make the CI workflow in .brain_reach_scratch/.github/workflows/ci.yml run the tests on Python 3.11 and 3.12.",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    ".github/workflows/ci.yml"
+   ],
+   "axis": "ci",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add caching of pip downloads to .brain_reach_scratch/.github/workflows/ci.yml.",
+   "reason": null,
+   "selected": "finance.saccr.credit.addon.v1"
+  },
+  {
+   "authorised_files": [
+    "tests/test_calc.py"
+   ],
+   "axis": "ci",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Quarantine the flaky test in .brain_reach_scratch/tests/test_calc.py so CI is green.",
+   "reason": null,
+   "selected": "test.slice.never_miss.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "perf",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Profile .brain_reach_scratch/pkg/util.py and tell me which function is the hot spot.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [
+    "pkg/util.py"
+   ],
+   "axis": "perf",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Optimise the function total in .brain_reach_scratch/pkg/util.py; it is too slow on large inputs.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "perf",
+   "compiler_mode": null,
+   "goal": "Benchmark .brain_reach_scratch/pkg/calc.py against the version in git HEAD~1.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pkg/mod.py"
+   ],
+   "axis": "perf",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add memoisation to the function twice in .brain_reach_scratch/pkg/mod.py.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "systems",
+   "compiler_mode": null,
+   "goal": "Find the race condition in .brain_reach_scratch/pkg/service.py.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pkg/util.py"
+   ],
+   "axis": "systems",
+   "compiler_mode": null,
+   "goal": "Add a thread pool to .brain_reach_scratch/pkg/util.py that totals the list in parallel.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pkg/util.py"
+   ],
+   "axis": "systems",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Make the function total in .brain_reach_scratch/pkg/util.py release the GIL while summing.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [
+    "tests/test_calc.py"
+   ],
+   "axis": "tests",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Write a unit test for the function mul in .brain_reach_scratch/pkg/calc.py.",
+   "reason": null,
+   "selected": "test.slice.never_miss.v1"
+  },
+  {
+   "authorised_files": [
+    "tests/test_calc.py"
+   ],
+   "axis": "tests",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Write a property-based test for the function add in .brain_reach_scratch/pkg/calc.py.",
+   "reason": null,
+   "selected": "test.slice.never_miss.v1"
+  },
+  {
+   "authorised_files": [
+    "tests/test_calc.py"
+   ],
+   "axis": "tests",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add a regression test that reproduces the bug in .brain_reach_scratch/pkg/mod.py.",
+   "reason": null,
+   "selected": "test.slice.never_miss.v1"
+  },
+  {
+   "authorised_files": [
+    "tests/test_calc.py"
+   ],
+   "axis": "tests",
+   "compiler_mode": null,
+   "goal": "Increase the mutation score of .brain_reach_scratch/pkg/calc.py above 0.8 by adding tests.",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+   "selected": null
+  },
+  {
+   "authorised_files": [],
+   "axis": "tests",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Fuzz the function add in .brain_reach_scratch/pkg/calc.py for integer overflow.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "tests",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Run the test suite in .brain_reach_scratch/tests and tell me which tests fail and why.",
+   "reason": null,
+   "selected": "orchestration.verify.bridge_enumeration.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "debug",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "The test in .brain_reach_scratch/tests/test_calc.py fails; find the root cause.",
+   "reason": null,
+   "selected": "test.slice.never_miss.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "debug",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Explain why the function total in .brain_reach_scratch/pkg/util.py returns None for empty input.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "debug",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Find the commit that broke the test in .brain_reach_scratch/tests/test_calc.py.",
+   "reason": null,
+   "selected": "test.slice.never_miss.v1"
+  },
+  {
+   "authorised_files": [
+    "pkg/mod.py",
+    "pkg/calc.py"
+   ],
+   "axis": "refactor",
+   "compiler_mode": null,
+   "goal": "Move the function add from .brain_reach_scratch/pkg/mod.py into .brain_reach_scratch/pkg/calc.py and update every caller.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pkg"
+   ],
+   "axis": "refactor",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Split .brain_reach_scratch/pkg/calc.py into one module per function.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [
+    "pkg"
+   ],
+   "axis": "refactor",
+   "compiler_mode": null,
+   "goal": "Rename the public function total in .brain_reach_scratch/pkg/util.py to sum_all across the repository.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pkg"
+   ],
+   "axis": "refactor",
+   "compiler_mode": null,
+   "goal": "Replace every use of the deprecated function mul in .brain_reach_scratch/pkg with mul_v2.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [
+    "pkg/calc.py"
+   ],
+   "axis": "refactor",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Add type hints to every function in .brain_reach_scratch/pkg/calc.py.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [
+    "pkg/util.py"
+   ],
+   "axis": "refactor",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Extract the loop in the function total in .brain_reach_scratch/pkg/util.py into a helper.",
+   "reason": null,
+   "selected": "python.software.request.semantic_behavior.compile.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "review",
+   "compiler_mode": null,
+   "goal": "Review .brain_reach_scratch/pkg/service.py for API design problems.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [],
+   "axis": "review",
+   "compiler_mode": null,
+   "goal": "Review .brain_reach_scratch/pkg/calc.py for security issues.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [],
+   "axis": "review",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Audit the dependency list in .brain_reach_scratch/pyproject.toml for known vulnerabilities.",
+   "reason": null,
+   "selected": "decision.synthesis.verify.stdlib"
+  },
+  {
+   "authorised_files": [],
+   "axis": "git",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Commit the changes in .brain_reach_scratch/pkg with a clear message.",
+   "reason": null,
+   "selected": "git.repository.operate.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "git",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Create a branch named feature/x and commit .brain_reach_scratch/pkg/calc.py there.",
+   "reason": null,
+   "selected": "git.repository.operate.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "git",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Show me the diff of .brain_reach_scratch/pkg/calc.py against HEAD~1.",
+   "reason": null,
+   "selected": "git.repository.operate.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "git",
+   "compiler_mode": null,
+   "goal": "Cherry-pick the last commit onto a new branch.",
+   "reason": "COMPILER_RAISED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "selected": null
+  },
+  {
+   "authorised_files": [],
+   "axis": "git",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Write the changelog entry for the last three commits.",
+   "reason": null,
+   "selected": "software.analysis.diagnose_and_architect.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "design",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Design the API for a rate limiter and write an ADR.",
+   "reason": null,
+   "selected": "software.analysis.diagnose_and_architect.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "design",
+   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+   "goal": "Plan the migration of the package in .brain_reach_scratch/pkg from Python 3.9 to 3.12.",
+   "reason": null,
+   "selected": "python.source.crossfile_edit.choreograph.v1"
+  },
+  {
+   "authorised_files": [],
+   "axis": "design",
+   "compiler_mode": null,
+   "goal": "Write a design document for splitting .brain_reach_scratch/pkg into two packages.",
+   "reason": "COMPILER_RAISED:GOAL_INPUT_BINDING_REQUIRED",
+   "selected": null
+  }
+ ],
+ "schema": "PROJECT_BRAIN_ROUTE_REACH_CENSUS_V1",
+ "sentences": 49,
+ "sentences_routed": 32
+}
