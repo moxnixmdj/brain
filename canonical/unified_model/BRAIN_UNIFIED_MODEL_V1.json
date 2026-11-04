@@ -30956,12 +30956,12 @@
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
-  "source_index_modules": 1947
+  "source_index_modules": 1948
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2c87e169dad9de93cbc5c138e7ba7a1d4ca8d50b0a23c9be931479c430fe67c5"
+  "value": "9904fa7c4de4909725a5286def7836ecb1ed661bd05bd9cb25a293e7993c4e54"
  },
  "engines": [
   {
@@ -212988,6 +212988,51 @@
    }
   },
   {
+   "action_id": "A_DOUBT_MUST_BE_WORTH_SOMETHING",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/A_DOUBT_MUST_BE_WORTH_SOMETHING_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DOUBT_MUST_BE_WORTH_SOMETHING_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "000f0bf960ec71361d59810e5c942ce0c245e833a767311983538b4aef55ad81",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "a_doubt_must_be_worth_something": 1,
+    "about": 1,
+    "answer": 1,
+    "arithmetic": 1,
+    "call": 1,
+    "called": 1,
+    "close_the_loop_between_noticing_ignorance_and_being_told_wether_it_mattered": 1,
+    "costing": 1,
+    "creature": 1,
+    "currently": 1,
+    "doubt": 3,
+    "ever": 1,
+    "every": 1,
+    "feedback": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "ignorance": 1,
+    "informed": 1,
+    "itself": 1,
+    "learn": 1,
+    "ledger": 2,
+    "list": 1,
+    "modules": 1,
+    "must": 1,
+    "name": 1,
+    "next": 1,
+    "nine": 1,
+    "no": 2,
+    "none": 1,
+    "nothing": 1,
+    "prior": 2,
+    "ranking": 2
+   }
+  },
+  {
    "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
    "capability": false,
    "date": "2026-10-29",
@@ -214803,51 +214848,6 @@
     "the_creature_could_notice_its_own_blindness_but_had_no_way_to_acquire_sight_so_held_out_refuted_was_terminal_and_the_settlement_layer_was_dead_code_reachable_only_from_its_own_tests": 1,
     "turn_the_refusal_into_the_branch_where_the_operator_basis_grows_and_wire_it_into_the_real_path": 1,
     "v1": 1
-   }
-  },
-  {
-   "action_id": "A_REFUSAL_MUST_SAY_WHAT_WOULD_END_IT",
-   "capability": false,
-   "date": "2026-11-04",
-   "id": "research:canonical/action_intents/A_REFUSAL_MUST_SAY_WHAT_WOULD_END_IT_20261104_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_REFUSAL_MUST_SAY_WHAT_WOULD_END_IT_20261104_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "82ffda0309188e3948f708f52670cafa595ff281239a5a05614d0681437df3c9",
-   "status": "",
-   "terms": {
-    "20261104": 1,
-    "a_refusal_must_say_what_would_end_it": 1,
-    "about": 1,
-    "ambiguity": 1,
-    "ambiguous": 1,
-    "becomes": 1,
-    "been": 1,
-    "being": 1,
-    "candidates": 1,
-    "checked": 1,
-    "compute_the_discriminating_demonstration_instead_of_reporting_a_dead_end": 1,
-    "conflated": 1,
-    "creature": 1,
-    "deciding": 1,
-    "demonstrate": 1,
-    "direction": 1,
-    "end": 1,
-    "enough": 1,
-    "ever": 1,
-    "every": 1,
-    "example": 1,
-    "five": 1,
-    "gap": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "grows": 1,
-    "had": 2,
-    "help": 1,
-    "human": 1,
-    "identical": 1,
-    "instead": 2,
-    "shown": 2,
-    "would": 2
    }
   },
   {
@@ -260646,7 +260646,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/ignorance_ledger_v1.py",
-   "sha256": "09cc1f05046f0748d6ce1d882b4809c0770ae6f73f1475d2f23538c36816a1ec",
+   "sha256": "ca858b56267eced4628824c01be26a14790b18252ca4434d7efaf621a9676cdd",
    "summary": "The machine's own model of what it does not know, ranked by what it is worth.",
    "symbol_count": 11,
    "symbols": [
@@ -260684,6 +260684,42 @@
     "v1": 1,
     "value": 1,
     "worth": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/ignorance_loop_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/ignorance_loop_v1.py",
+   "sha256": "e46f9628bb90b2c6a4088a3379668ea40ff1d93d9c704709d45d9c7901dfb602",
+   "summary": "The gap between noticing a doubt and doing something about it.",
+   "symbol_count": 5,
+   "symbols": [
+    "_ledger_path",
+    "_subject",
+    "close",
+    "credit_if_answered",
+    "notice_unanswered"
+   ],
+   "terms": {
+    "about": 1,
+    "between": 1,
+    "close": 1,
+    "credit_if_answered": 1,
+    "doing": 1,
+    "doubt": 1,
+    "gap": 1,
+    "ignorance": 1,
+    "ledger_path": 1,
+    "loop": 1,
+    "notice_unanswered": 1,
+    "noticing": 1,
+    "something": 1,
+    "subject": 1,
+    "v1": 1
    }
   },
   {
@@ -260880,9 +260916,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "468325a84607cfaf6d81497be2eb179e11cfa64b3497bcb74d9f9847e8883b3a",
+   "sha256": "9c5d773654482fdd3ef53dabfd3d45ac46493ba285e751cb3531e7097cd83c3f",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
-   "symbol_count": 30,
+   "symbol_count": 32,
    "symbols": [
     "_answer_stands",
     "_applied_aggregate",
@@ -260895,6 +260931,7 @@
     "_is_readable_text",
     "_named_file",
     "_needs_composition",
+    "_note_doubts",
     "_operation_vocabulary",
     "_path_components",
     "_project_files",
@@ -260902,12 +260939,11 @@
     "_remember_and_check",
     "_restore_acquired_operators",
     "_restricts_rows",
+    "_settle_taught_gaps",
     "_teachable",
     "accounted_terms",
     "answer",
-    "compute",
-    "find",
-    "listing"
+    "compute"
    ],
    "terms": {
     "about": 1,
@@ -260935,9 +260971,9 @@
     "question_terms": 1,
     "read_content": 1,
     "reads_column": 1,
-    "restore_acquired_operators": 1,
     "restricts_rows": 1,
     "search_named": 1,
+    "settle_taught_gaps": 1,
     "teachable": 1,
     "v1": 1,
     "wants_a_listing": 1,

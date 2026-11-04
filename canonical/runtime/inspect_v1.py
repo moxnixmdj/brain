@@ -780,6 +780,66 @@ def _teachable(word: str, root: str) -> dict | None:
     }
 
 
+#: Gaps noticed but not yet closed, for this process. word -> (root, verdict when noticed).
+_PENDING_GAPS: dict[str, tuple[str, str]] = {}
+
+
+def _settle_taught_gaps(root: str) -> None:
+    """A word that was DOUBTED and is now KNOWN closes its gap, and the ledger is told
+    whether that helped -- from the answer, never from the act of teaching.
+
+    Never raises: bookkeeping must not be able to fail an answer.
+    """
+    if not _PENDING_GAPS:
+        return
+    try:
+        from canonical.runtime import acquired_operator_memory_v1 as _M
+        from canonical.runtime import ignorance_loop_v1 as _C
+        from canonical.runtime import value_algebra_v1 as _V
+    except Exception:
+        return
+    try:
+        known = {w for ws in _V._AGG_WORDS.values() for w in ws}
+    except Exception:
+        return
+    for word, (gap_root, before) in list(_PENDING_GAPS.items()):
+        if word not in known:
+            continue
+        try:
+            _C.credit_if_answered(before, "COMPUTED", word, root=gap_root)
+        except Exception:
+            continue
+        _PENDING_GAPS.pop(word, None)
+
+
+def _note_doubts(teachable, verdict: str, root: str) -> None:
+    """Record, in the creature's own ledger, each word it could not answer with.
+
+    THE ANSWER PATH HAS NEVER WRITTEN TO THIS LEDGER. Measured: 82 gaps on disk, and asking
+    the same unanswerable question three times changed the file by nothing. Every doubt was
+    re-derived from scratch on the next call, so the system could not tell which gaps keep
+    coming back -- which is the one thing a ledger of ignorance exists to know.
+
+    Recording is best-effort and cannot fail an answer. Nothing here guesses a meaning: it
+    records that a doubt occurred, so that the ranking has something real to rank.
+    """
+    if not teachable:
+        return
+    try:
+        from canonical.runtime import ignorance_loop_v1 as _C
+    except Exception:
+        return
+    for item in teachable:
+        word = str((item or {}).get("word") or "").strip().lower()
+        if not word:
+            continue
+        try:
+            _C.notice_unanswered(word, root=root, ask=item.get("ask"))
+        except Exception:
+            continue
+        _PENDING_GAPS.setdefault(word, (root, verdict))
+
+
 _RESTORED = False
 
 
@@ -822,6 +882,12 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     # cannot fail an answer: a store that will not load leaves the vocabulary exactly as it
     # was declared in source.
     _restore_acquired_operators()
+    # REMEMBER WHAT WAS TAUGHT SINCE THE LAST QUESTION.
+    #
+    # A gap is closed by a later REAL answer, not by the act of teaching: `helped` must come
+    # from evidence, or the ledger learns only that it is pleased with itself. This is also
+    # where a doubt recorded on an earlier call gets its verdict.
+    _settle_taught_gaps(root)
     # A listing question asks for a SET, not for a word occurrence. Routing it to
     # `find` is what made "list the files in this directory" return NOTHING_FOUND on a
     # directory holding three files: no term in it names anything inside the tree.
@@ -1169,6 +1235,15 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     else:
         verdict = "GROUNDED"
 
+    # WHAT COULD BE LEARNED HERE, AND WHAT WAS NOTICED.
+    #
+    # Computed once, then both returned and recorded: the answer carries the question, and
+    # the creature's ledger carries the doubt. Those are different jobs -- one is for the
+    # asker, the other is for the ranking of its own ignorance -- and doing only the first
+    # is why 82 gaps sat on disk with the answer path never touching them.
+    _TEACHABLE = [t for t in (_teachable(w, root) for w in unresolved) if t]
+    _note_doubts(_TEACHABLE, verdict, root)
+
     return {
         "schema": SCHEMA,
         "question": question,
@@ -1192,7 +1267,7 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # is a dead end; a refusal that carries the wrong way out is worse, so a word that
         # names an existing column -- missing data rather than a missing operator -- gets
         # nothing here.
-        "teachable": ([t for t in (_teachable(w, root) for w in unresolved) if t] or None),
+        "teachable": (_TEACHABLE if _TEACHABLE else None),
         # WHAT WAS TRIED AND FAILED, not just what won.
         #
         # The trial keeps every attempt -- including the ones that did not re-check and
