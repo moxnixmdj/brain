@@ -98,6 +98,14 @@ _SYMBOL_TO_NAME: dict[str, str] = {
     "&": "and_",
     "|": "or_",
     "^": "xor",
+    # Comparisons. Still a lexicon -- it says what `<` is *called*, never what it should become -- and
+    # it widens the mechanism from arithmetic to predicates without adding a single rewrite rule.
+    "<": "lt",
+    ">": "gt",
+    "<=": "le",
+    ">=": "ge",
+    "==": "eq",
+    "!=": "ne",
 }
 _NAME_TO_SYMBOL: dict[str, str] = {v: k for k, v in _SYMBOL_TO_NAME.items()}
 # `operator.itruediv` and `operator.truediv` are both candidates for a `/`, and the reflective
@@ -105,6 +113,7 @@ _NAME_TO_SYMBOL: dict[str, str] = {v: k for k, v in _SYMBOL_TO_NAME.items()}
 for _sym, _name in list(_SYMBOL_TO_NAME.items()):
     _NAME_TO_SYMBOL.setdefault("i" + _name, _sym)
 
+_UNREADABLE = object()
 _SEEN_RE = re.compile(r"SEEN\s+(\[.*?\])(?:\n|$)", re.S)
 _CALL_RE = re.compile(r"^([A-Za-z_][\w.]*)\s*\((.*)\)$")
 
@@ -123,17 +132,40 @@ def _to_number(text: str) -> float | int | None:
     return int(f) if f.is_integer() and "." not in t else f
 
 
+def _read_arg(piece: str) -> Any:
+    """Read one printed argument as a *value*, not merely as a number.
+
+    MEASURED 2026-11-05: the first version parsed every argument as a number and discarded the row
+    otherwise, so a string world (`f('x', 'y')`) could not be interpreted at all even though Python's
+    `operator` module defines `add` and `mul` on strings. The limit was my lexer, not the mechanism.
+    Strings, numbers and the literal `True`/`False`/`None` are all read; anything else (a list, an
+    expression) is still refused rather than guessed at.
+    """
+    t = piece.strip()
+    if not t:
+        return _UNREADABLE
+    if (len(t) >= 2) and t[0] == t[-1] and t[0] in "'\"":
+        return t[1:-1]
+    low = t.lower()
+    if low in ("true", "false"):
+        return low == "true"
+    if low == "none":
+        return None
+    n = _to_number(t)
+    return _UNREADABLE if n is None else n
+
+
 def _split_args(raw: str) -> list[Any] | None:
-    """Split a printed argument list into numbers. Anything non-numeric makes the row unusable."""
+    """Split a printed argument list into values. Any unreadable argument makes the row unusable."""
     raw = raw.strip()
     if not raw:
         return []
     vals: list[Any] = []
     for piece in raw.split(","):
-        n = _to_number(piece)
-        if n is None:
+        v = _read_arg(piece)
+        if v is _UNREADABLE:
             return None
-        vals.append(n)
+        vals.append(v)
     return vals
 
 
@@ -167,9 +199,9 @@ def parse_pytest_evidence(reason_text: str) -> list[dict[str, Any]]:
             continue
         m = where_re.search(line)
         if m:
-            produced = _to_number(m.group(1))
+            produced = _read_arg(m.group(1))
             args = _split_args(m.group(3))
-            if produced is not None and args:
+            if produced is not _UNREADABLE and args:
                 wheres.append({
                     "subject": m.group(2).rsplit(".", 1)[-1],
                     "args": args,
@@ -185,11 +217,11 @@ def parse_pytest_evidence(reason_text: str) -> list[dict[str, Any]]:
     for w in wheres:
         prod = w["produced"]
         for left, right in asserts:
-            lv, rv = _to_number(left), _to_number(right)
+            lv, rv = _read_arg(left), _read_arg(right)
             owed = None
-            if lv is not None and lv == prod and rv is not None and rv != prod:
+            if lv is not _UNREADABLE and lv == prod and rv is not _UNREADABLE and rv != prod:
                 owed = rv
-            elif rv is not None and rv == prod and lv is not None and lv != prod:
+            elif rv is not _UNREADABLE and rv == prod and lv is not _UNREADABLE and lv != prod:
                 owed = lv
             if owed is not None:
                 rows.append({**w, "expected": owed})
@@ -224,8 +256,8 @@ def parse_evidence(reason_text: str) -> list[dict[str, Any]]:
             args = _split_args(m.group(2))
             if args is None or not args:
                 continue
-            produced, expected = _to_number(seen[0]), _to_number(seen[1])
-            if produced is None or expected is None:
+            produced, expected = _read_arg(str(seen[0])), _read_arg(str(seen[1]))
+            if produced is _UNREADABLE or expected is _UNREADABLE:
                 continue
             rows.append(
                 {
@@ -424,7 +456,36 @@ class InterpretiveRepair:
                     out.append(cand)
                     if len(out) >= limit:
                         return out
+        # OPERAND repair, a different kind of edit to the same line. MEASURED 2026-11-05: `a + a` owed
+        # `f(3, 4) == 7` was interpretable all along (the hypothesis was plain `add`) and was still never
+        # repaired, because every rewrite only touched the operator token. The vocabulary already holds
+        # what is needed: the source names its parameters, and substituting one for another is an edit
+        # the creature can make without being told that "the wrong variable was used".
+        for cand in self._operand_rewrites(lines, source_text):
+            if cand not in out:
+                out.append(cand)
+                if len(out) >= limit:
+                    return out
         return out
+
+    def _operand_rewrites(self, lines, source_text):
+        """Replace a repeated operand with the other parameter the source declares."""
+        import re as _re
+        match = _re.search(r"^def\s+\w+\s*\(([^)]*)\)", source_text, _re.M)
+        if not match:
+            return
+        names = [p.strip().split("=")[0].split(":")[0].strip()
+                 for p in match.group(1).split(",") if p.strip()]
+        if len(names) < 2:
+            return
+        for row, line in enumerate(lines):
+            for a in names:
+                for b in names:
+                    if a == b:
+                        continue
+                    for m in _re.finditer(rf"\b{_re.escape(a)}\b(\s*[+\-*/%]+\s*)\b{_re.escape(a)}\b", line):
+                        new_line = line[:m.start()] + f"{a}{m.group(1)}{b}" + line[m.end():]
+                        yield "".join(lines[:row]) + new_line + "".join(lines[row + 1:])
 
     def _rewrites(self, lines, name, sym, source_text):
         for row, line in enumerate(lines):
