@@ -438,6 +438,55 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                 self.assertIn(boot_id, evolved.parent_organ_ids)
                 self.assertFalse(evolved.metadata.get("bootstrap_factory"))
 
+    def test_qd_archive_holds_structurally_different_policy_organs(self):
+        factory = MCOG.compile_policy_organ()
+        flats = MCOG._structural_policy_mutations(factory.source_code)
+        self.assertTrue(flats)
+        flat_src = flats[0]
+        self.assertNotEqual(flat_src, factory.source_code)
+        self.assertTrue(RSA._organ_source_is_self_recursive(factory.source_code))
+        self.assertFalse(RSA._organ_source_is_self_recursive(flat_src))
+        flat_organ = MCOG.make_organ(
+            stratum=MCOG.POLICY,
+            name="instrumental_policy",
+            task_signature="policy::instrumental_q",
+            entrypoint="score_actions",
+            source_code=flat_src,
+        )
+        self.assertTrue(MCOG._policy_organ_holds_ring0(flat_organ))
+        self.assertTrue(MCOG.admit_policy_organ(flat_organ)["ok"])
+        scored = flat_organ.invoke(
+            [
+                {"id": "shiny", "value": 12.0, "cost": 1.0},
+                {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+                {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+            ],
+            3.0,
+            None,
+        )
+        self.assertEqual(scored[0]["id"], "forge_sensor")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            for _ in range(2):
+                graph.record_transition(action_id="burned", cost=1.0, failed=True, value=10.0, delta={})
+            for _ in range(2):
+                graph.record_transition(action_id="safe", cost=1.0, failed=False, value=10.0, delta={"ok": 1.0})
+            self.assertIsNotNone(graph.policy_archive)
+            rec_flags = set()
+            cells = graph.policy_archive._load().get("cells") or {}
+            self.assertGreaterEqual(len(cells), 2)
+            for rec in cells.values():
+                if rec.get("source_code"):
+                    rec_flags.add(bool(rec.get("recursive")))
+            self.assertEqual(rec_flags, {True, False})
+            elites = graph.policy_archive.elite_organ_sources(limit=4)
+            self.assertGreaterEqual(len(elites), 2)
+            pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(pol)
+            self.assertFalse(pol.metadata.get("bootstrap_factory"))
+            self.assertTrue(MCOG._policy_organ_holds_ring0(pol))
+
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")
         self.assertIsNotNone(simplified)
