@@ -1134,8 +1134,20 @@ class AwakeAgencyDaemon:
                     propose_operator_family_swaps,
                 )
 
+                # Binding repairs read the failure the run has ALREADY produced (`fail_out`, computed
+                # once before any producer ran), so this costs nothing when the failure is not a
+                # NameError: the producer returns [] unless the text names a missing identifier.
+                #
+                # Measured 2026-11-05: every shape on the board fails as VALUE, so routing producers
+                # by failure kind had nothing to route -- and when I built genuinely non-value worlds,
+                # BINDING / SIGNATURE / SYNTAX were solved by NO producer at all. The gap was a
+                # missing capability, not missing scheduling. A misspelled identifier is the tractable
+                # third of it, and this repairs it from the file's own vocabulary.
+                from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
+
                 raw_cands = (
                     propose_operator_family_swaps(before_src, max_candidates=24)
+                    + propose_binding_repairs(before_src, fail_out, max_candidates=6)
                     + propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
                     + guided_cands
                     + _propose_deterministic_ast_repairs(before_src, max_candidates=16)
