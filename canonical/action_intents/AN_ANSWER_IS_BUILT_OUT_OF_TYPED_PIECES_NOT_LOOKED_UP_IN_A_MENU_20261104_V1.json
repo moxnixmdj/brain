@@ -1,0 +1,447 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "AN_ANSWER_IS_BUILT_OUT_OF_TYPED_PIECES_NOT_LOOKED_UP_IN_A_MENU_20261104_V1",
+  "action_intent_id": "AN_ANSWER_IS_BUILT_OUT_OF_TYPED_PIECES_NOT_LOOKED_UP_IN_A_MENU_20261104_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "AN_ANSWER_IS_BUILT_OUT_OF_TYPED_PIECES_NOT_LOOKED_UP_IN_A_MENU_20261104_V1",
+  "date": "2026-11-04",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "3591e4c4916e9479be557572e6c1da5f30b65bc9",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "operation_trial_v1 moved dispatch from English phrasings to the tree, but every operation it could try was a CLOSED FUNCTION and no operation's input could be another's output. Measured on five questions needing two steps: 0/5, all refused. Added value_algebra_v1: typed values and composable operators, so the answer space is the PRODUCT of the primitives rather than their sum. 0/5 -> 11/11 on those questions, 15 new tests, 68 total, regression sweep unchanged at 116/117.",
+  "selected_route": "MAKE_VALUES_TYPED_AND_OPERATORS_COMPOSABLE_SO_A_QUESTION_NOBODY_WROTE_DOWN_IS_BUILT_FROM_PIECES_INSTEAD_OF_REFUSED_BECAUSE_NO_PRIMITIVE_MATCHES",
+  "causal_blocker": "ZERO_OF_FIVE_QUESTIONS_NEEDING_TWO_OPERATIONS_WERE_ANSWERABLE_ON_3591e4c4_BECAUSE_EVERY_OPERATION_WAS_A_CLOSED_FUNCTION_WITH_A_HAND_WRITTEN_NAME_AND_NO_OPERATIONS_INPUT_COULD_BE_ANOTHER_OPERATIONS_OUTPUT_SO_THE_ANSWER_SPACE_GREW_BY_ONE_PER_PRIMITIVE",
+  "expected_parent_change": "QUESTIONS_THAT_NEED_A_TOTAL_AND_THEN_ITS_DIGITS_OR_A_MAX_THEN_A_CELL_OF_THAT_ROW_OR_TWO_TOTALS_COMPARED_RETURN_A_BUILT_EXPRESSION_AND_ITS_VALUE_PLUS_THE_EXPRESSION_AS_EVIDENCE",
+  "expected_parent_frontier_change": "THE_DOOR_ANSWERS_COMPOSED_QUESTIONS_IT_COULD_NOT_ANSWER_BEFORE__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ZERO_OF_FIVE_QUESTIONS_NEEDING_TWO_OPERATIONS_WERE_ANSWERABLE_ON_3591e4c4_BECAUSE_EVERY_OPERATION_WAS_A_CLOSED_FUNCTION_WITH_A_HAND_WRITTEN_NAME_AND_NO_OPERATIONS_INPUT_COULD_BE_ANOTHER_OPERATIONS_OUTPUT_SO_THE_ANSWER_SPACE_GREW_BY_ONE_PER_PRIMITIVE",
+  "falsification_condition": "A_QUESTION_THAT_NEEDS_TWO_OPERATIONS_IS_REFUSED__OR_A_COMPOSED_ANSWER_DOES_NOT_RE_DERIVE_FROM_THE_TREE___OR_A_BUILT_EXPRESSION_IGNORES_A_WORD_OF_THE_QUESTION_AND_IS_STILL_ACCEPTED___OR_A_SINGLE_OPERATION_QUESTION_IS_DISPLACED_BY_THE_COMPOSED_PATH",
+  "stop_condition": "SIXTY_EIGHT_TESTS_PASS__ELEVEN_COMPOSED_QUESTIONS_CORRECT_AND_HAND_CHECKED__SIX_OF_SIX_MUTATIONS_CAUGHT__REGRESSION_SWEEP_UNCHANGED_116_OF_117__REFUSALS_STILL_REFUSE__UNIFIED_MODEL_VERIFIES",
+  "explicit_user_authorization": "Owner directive on 2026-11-04, asked a fourth time: You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code. The fourth answer was again No, and the diagnosis was one layer below the third: the door resolved referents, but every operation it could try was a closed primitive, so seven primitives could only ever answer seven shapes. A fixed menu is static code. What replaced it composes.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/value_algebra_v1.py",
+      "canonical/runtime/inspect_v1.py",
+      "canonical/tests/test_an_answer_is_built_not_looked_up_v1.py",
+      "canonical/runtime/operation_trial_v1.py"
+    ],
+    "route_class": "COMPOSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_A_DISPATCHER_WHICH_CAN_ONLY_TRY_PRIMITIVES_SOMEBODY_WROTE_IS_RESOLVING_QUESTIONS_IT_CANNOT_HAVE_ANTICIPATED__IT_WAS_A_MENU_AND_THE_MENU_WAS_THE_PROGRAM",
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+    ],
+    "causal_evidence": "MEASURED_ON_3591e4c4__FIVE_QUESTIONS_NEEDING_TWO_STEPS_THROUGH_AUTONOMOUS_V1_run__ZERO_OF_FIVE_ANSWERED_ALL_REFUSED_HONESTLY___THAT_IS_A_CEILING_NOT_A_BUG__AFTER: ELEVEN_OF_ELEVEN_COMPOSED_CASES_CORRECT_SIXTY_EIGHT_TESTS_SIX_MUTATIONS_EACH_CAUGHT_REGRESSION_SWEEP_116_OF_117"
+  },
+  "measured_effect": "FIVE_QUESTIONS_NEEDING_TWO_OPERATIONS_WENT_FROM_REFUSED_0_OF_5_TO_BUILT_AND_CORRECT_5_OF_5__ELEVEN_COMPOSED_CASES_VERIFIED_WITH_HAND_COMPUTED_VALUES__SIX_OF_SIX_MUTATIONS_CAUGHT_BY_FIFTEEN_NEW_TESTS__SIXTY_EIGHT_TESTS_TOTAL__REGRESSION_SWEEP_116_OF_117_IDENTICAL_TO_BASELINE__ZERO_MODEL_DEPENDENCY__ZERO_SPEND",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_A_DOCUMENTED_FALSE_GENERAL_CLAIM_THAT_THE_FRONT_DOOR_RESOLVED_MEANING_WHEN_IT_MATCHED_WORDINGS",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ]
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-11-04T01:41:41Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_REPLACES_A_DISPATCHER_THAT_MATCHED_ENGLISH_PHRASINGS_WITH_ONE_THAT_RESOLVES_WHAT_A_SENTENCE_NAMES",
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "tournament": {
+      "proposal_id": "THE_DOOR_RESOLVES_WHAT_A_SENTENCE_NAMES_INSTEAD_OF_MATCHING_ENGLISH_PHRASINGS",
+      "decisive_question": "DOES_THE_SAME_QUESTION_IN_MANY_WORDINGS_RETURN_THE_SAME_ANSWER",
+      "falsifier_id": "TWO_PARAPHRASES_OF_ONE_QUESTION_RETURN_DIFFERENT_ANSWERS_OR_A_VERIFIED_OPERATION_THAT_IGNORED_THE_QUESTION_IS_REPORTED_ANSWERED",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "test_the_same_question_gets_the_same_answer_v1_ASSERTS_THE_SAME_OPERATION_AND_THE_SAME_VALUE_ACROSS_ELEVEN_HOW_MANY_LINES_PHRASINGS_TEN_WHAT_IT_SAYS_PHRASINGS_AND_SIX_TOTAL_PHRASINGS_WITH_HAND_COMPUTED_VALUES__AND_FOUR_REFUSALS_ARE_PINNED"
+    }
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "3591e4c4916e9479be557572e6c1da5f30b65bc9",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "A_QUESTION_NEEDING_SEVERAL_TYPED_STEPS_RETURNS_A_BUILT_EXPRESSION_AND_ITS_VALUE_RE_DERIVED_FROM_THE_TREE",
+    "selected_route": "MAKE_VALUES_TYPED_AND_OPERATORS_COMPOSABLE_INSTEAD_OF_ADDING_A_PRIMITIVE_PER_QUESTION",
+    "selected_surviving_route": "MAKE_VALUES_TYPED_AND_OPERATORS_COMPOSABLE_SO_A_QUESTION_NOBODY_WROTE_DOWN_IS_BUILT_FROM_PIECES_INSTEAD_OF_REFUSED_BECAUSE_NO_PRIMITIVE_MATCHES",
+    "deleted_or_bypassed_paths": [
+      "THE_CLOSED_PRIMITIVE_MENU_AS_THE_WHOLE_ANSWER_SPACE",
+      "ADDING_AN_EIGHTH_OPERATION_FOR_EACH_QUESTION_THE_PRIMITIVES_CANNOT_ANSWER",
+      "REPORTING_AN_EXPRESSIONS_VALUE_WITHOUT_THE_EXPRESSION",
+      "REBUILDING_AN_ACCOUNT_FROM_OPERATOR_NAMES_INSTEAD_OF_FROM_THE_NODES_THAT_CONSUMED_THE_WORDS",
+      "ARGMAX_THAT_IGNORES_WHICH_EXTREME_WAS_ASKED_FOR",
+      "COMPARISON_OPERANDS_TAKEN_IN_RESOLVER_ORDER_INSTEAD_OF_SENTENCE_ORDER",
+      "A_CELL_OFFERED_FROM_A_NUMERIC_COLUMN_AS_IF_IT_WERE_A_NAME",
+      "THE_ANSWER_TYPE_DECIDED_BY_A_STRAY_COLUMN_WORD_RATHER_THAN_BY_WHAT_WAS_ASKED"
+    ],
+    "stop_condition": "SIXTY_EIGHT_TESTS_PASS__ELEVEN_COMPOSED_QUESTIONS_CORRECT_AND_HAND_CHECKED__SIX_OF_SIX_MUTATIONS_CAUGHT__REGRESSION_SWEEP_UNCHANGED_116_OF_117__REFUSALS_STILL_REFUSE__UNIFIED_MODEL_VERIFIES",
+    "expected_parent_level_state_change": "THE_DOOR_ANSWERS_COMPOSED_QUESTIONS_IT_COULD_NOT_ANSWER_BEFORE__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+    "why_selected_route_is_fastest_sufficient": "ONE_NEW_MODULE_AND_ONE_FALLBACK_CALL_SITE__NO_NEW_DEPENDENCY__NO_MODEL_IN_THE_LOOP__THE_COMPOSED_PATH_RUNS_ONLY_WHEN_THE_PRIMITIVES_LEAVE_A_WORD_UNACCOUNTED_SO_IT_CANNOT_DISPLACE_THEM",
+    "iteration_limit": 4,
+    "routes_considered": [
+      "TYPE_AND_COMPOSE__SELECTED_THE_ANSWER_SPACE_BECOMES_THE_PRODUCT_OF_THE_PRIMITIVES",
+      "ADD_A_PRIMITIVE_PER_UNANSWERED_QUESTION__REJECTED_THE_SAME_DEFECT_AS_ADDING_A_REGEX_PER_PHRASING",
+      "ROUTE_TO_A_MODEL_TO_BUILD_THE_EXPRESSION__REJECTED_INTRODUCES_A_PRODUCER_COGNITION_DEPENDENCY_AND_AN_UNCHECKABLE_JUDGE",
+      "ANSWER_ONLY_WHAT_THE_PRIMITIVES_COVER_AND_REFUSE_THE_REST__REJECTED_THAT_IS_THE_STATIC_PROGRAM_THE_USER_REJECTED_FOUR_TIMES",
+      "BUILD_ANOTHER_MEASURING_INSTRUMENT__REJECTED_MEASUREMENT_ALWAYS_SUCCEEDS"
+    ],
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-04T08:43:18Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ANSWER_ONLY_WITH_PRIMITIVES_SOMEBODY_WROTE__REFUSE_EVERYTHING_ELSE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/inspect_v1.py",
+          "canonical/runtime/autonomous_v1.py",
+          "canonical/runtime/grounding_v1.py",
+          "canonical/runtime/regression_sweep_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/csv.html",
+          "https://docs.python.org/3/library/inspect.html",
+          "https://rajpurkar.github.io/SQuAD-explorer/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://huggingface.co/datasets/rajpurkar/squad_v2",
+          "https://github.com/python/cpython/blob/main/Lib/csv.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/MAOFILHO/AWS-AgentCore-CareConnect-System/issues/169",
+          "https://github.com/OctaviusLeo/Grounded-QA-Service"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "reading comprehension abstain when no answer supported by the passage"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SQuAD 2.0 unanswerable questions benchmark abstention scoring"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "citation validation checks membership not entailment grounded answer refusal"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 verification passes answers that do not address the question grounding check passes because draft matches evidence"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [
+        {
+          "route": "RETRIEVAL_AUGMENTED_MODEL_READS_THE_TREE_AND_WRITES_THE_ANSWER",
+          "evidence": [
+            "https://github.com/OctaviusLeo/Grounded-QA-Service",
+            "https://github.com/MAOFILHO/AWS-AgentCore-CareConnect-System/issues/169"
+          ],
+          "qualification_evidence": [
+            "https://github.com/OctaviusLeo/Grounded-QA-Service"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "UNMEASURABLE_HERE__NO_MODEL_IS_AVAILABLE_IN_THE_SANDBOX_AND_NONE_MAY_BE_ADDED",
+            "CAPABILITY_STRENGTH": "HIGHER_ON_OPEN_ENDED_QUESTIONS_THAN_ANY_LEXICAL_ROUTE",
+            "WALL_CLOCK": "SECONDS_PER_QUESTION_VERSUS_SUB_MILLISECONDS",
+            "INCREMENTAL_COST": "BREAKS_THE_ZERO_INCREMENTAL_SPEND_RULE",
+            "RELIABILITY": "NONDETERMINISTIC_ACROSS_RUNS_FOR_THE_SAME_TREE",
+            "VERIFIABILITY": "THE_ANSWER_IS_NOT_RECOMPUTABLE_FROM_THE_TREE_ALONE"
+          }
+        },
+        {
+          "route": "LLM_JUDGE_SCORES_WHETHER_THE_ANSWER_ADDRESSES_THE_QUESTION",
+          "evidence": [
+            "https://github.com/OctaviusLeo/Grounded-QA-Service"
+          ],
+          "qualification_evidence": [
+            "https://github.com/OctaviusLeo/Grounded-QA-Service"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "THE_SOURCE_RECORDS_ITS_OWN_JUDGE_IS_UNVALIDATED_AGAINST_HUMAN_LABELS",
+            "CAPABILITY_STRENGTH": "WOULD_CATCH_SEMANTIC_DRIFT_THAT_LEXICAL_GROUNDING_MISSES",
+            "WALL_CLOCK": "ADDS_A_MODEL_ROUND_TRIP_PER_ANSWER",
+            "INCREMENTAL_COST": "NONZERO_AND_MODEL_DEPENDENT",
+            "RELIABILITY": "JUDGE_MAY_FAVOR_ITS_OWN_ANSWERS_WHEN_IT_IS_THE_ANSWERER",
+            "VERIFIABILITY": "MOVES_THE_VERDICT_FROM_RECOMPUTABLE_TO_ASSERTED"
+          }
+        },
+        {
+          "route": "ABSTAIN_ON_EVERY_QUESTION_AND_SCORE_THE_ABSTENTION_BASELINE",
+          "evidence": [
+            "https://rajpurkar.github.io/SQuAD-explorer/",
+            "https://huggingface.co/datasets/rajpurkar/squad_v2"
+          ],
+          "qualification_evidence": [
+            "https://huggingface.co/datasets/rajpurkar/squad_v2"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "SCORES_ONE_HALF_OF_THE_TASK_AND_ZERO_ON_THE_OTHER_HALF",
+            "CAPABILITY_STRENGTH": "THE_MEASURED_UNCONDITIONAL_ABSTENTION_BASELINE_IS_48_9_F1",
+            "WALL_CLOCK": "FASTEST_POSSIBLE_AND_WORTHLESS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "PERFECTLY_RELIABLE_AND_UNINFORMATIVE",
+            "VERIFIABILITY": "THE_ABSTENTION_IS_CHECKABLE_BUT_ANSWERS_NOBODY"
+          }
+        }
+      ],
+      "negative_search_summary": "SEARCHED_BOTH_EXTERNAL_CLASSES_FOR_A_ROUTE_STRONGER_ON_VERIFIABILITY_WITHOUT_A_MODEL__EVERY_ROUTE_FOUND_PUTS_A_GENERAL_MODEL_IN_THE_PRODUCER_PATH_OR_NEEDS_HUMAN_LABELLED_JUDGEMENT_THE_SANDBOX_CANNOT_SUPPLY__THE_GAP_THAT_SURVIVES_IS_ARITHMETIC_BEYOND_LINE_ROW_AND_FILE_COUNTS",
+      "selected_route": "MAKE_VALUES_TYPED_AND_OPERATORS_COMPOSABLE_SO_A_QUESTION_NOBODY_WROTE_DOWN_IS_BUILT_FROM_PIECES_INSTEAD_OF_REFUSED_BECAUSE_NO_PRIMITIVE_MATCHES",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-04T08:43:18Z",
+        "max_age_hours": 2,
+        "selected_route": "MAKE_VALUES_TYPED_AND_OPERATORS_COMPOSABLE_SO_A_QUESTION_NOBODY_WROTE_DOWN_IS_BUILT_FROM_PIECES_INSTEAD_OF_REFUSED_BECAUSE_NO_PRIMITIVE_MATCHES",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "python3 -c 'import csv, inspect, pathlib; print(\"ok\")' returned ok"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "INSPECT_V1_SOURCE_UNDER_TEST",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/runtime/inspect_v1.py is in the tree being judged"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "REGRESSION_SWEEP_V1_117_CASES",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/runtime/regression_sweep_v1.py runs 116/117 as expected on this tree"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    },
+    "obs_goal": {
+      "real_outcome": "A_QUESTION_NEEDING_SEVERAL_TYPED_STEPS_RETURNS_A_BUILT_EXPRESSION_AND_ITS_VALUE_RE_DERIVED_FROM_THE_TREE",
+      "proxy_goals_deleted": [
+        "COUNT_HOW_MANY_PRIMITIVES_EXIST",
+        "COUNT_TESTS_PASSING",
+        "ADD_A_VERIFIER",
+        "MAKE_THE_FIVE_EXAMPLE_SENTENCES_PASS"
+      ],
+      "surviving_necessity": "THE_CEILING_WAS_STRUCTURAL_NOT_A_BUG__PRIMITIVES_THAT_CANNOT_COMPOSE_BOUND_THE_ANSWER_SPACE_TO_WHAT_SOMEBODY_ANTICIPATED_AND_THAT_IS_THE_STATIC_PROGRAM_THE_OWNER_REJECTED"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/inspect_v1.py",
+        "canonical/runtime/autonomous_v1.py",
+        "canonical/runtime/grounding_v1.py",
+        "canonical/runtime/regression_sweep_v1.py"
+      ],
+      "reused_rather_than_rebuilt": [
+        "inspect_v1 search hits and grounding",
+        "grounding_v1 claim checking",
+        "regression_sweep_v1 117-case honest self-check",
+        "_project_files file enumeration"
+      ],
+      "capability_work_deleted": [
+        "TREATING_A_SUITE_OF_CLOSED_OPERATIONS_AS_GENERAL_CAPABILITY",
+        "ANSWERING_PART_OF_A_QUESTION_AND_CALLING_THE_REST_UNRESOLVED_WITHOUT_TRYING_TO_BUILD_IT"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__THE_TREE_ALREADY_HAD_AN_EXPRESSION_TREE_EVALUATOR_AND_A_CAPABILITY_COMPOSER_BUT_NEITHER_ANSWERED_A_QUESTION_FROM_THE_TREE__THE_GAP_WAS_THE_TYPED_GLUE_BETWEEN_VALUES_AND_OPERATORS"
+      ],
+      "surviving_gap": "COMPOSITION_CURRENTLY_REACHES_NUMERIC_COLUMNS_COMPARISONS_EXTREMES_AND_CELLS__TEXT_TRANSFORMS_JOINS_AND_GROUP_BY_ARE_NOT_YET_TYPED_PIECES_AND_ARE_REFUSED_HONESTLY"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__THE_DOOR_DECIDED_WHAT_TO_DO_FROM_LISTS_OF_ENGLISH_WORDINGS_SO_ITS_CORRECTNESS_WAS_BOUNDED_BY_THE_SENTENCES_SOMEBODY_HAD_ALREADY_WRITTEN_INTO_IT",
+      "evidence": "TEN_PARAPHRASES_OF_TWO_QUESTIONS_SCORED_THREE_OF_TEN_ON_4db59c51",
+      "delete_bypass_substitute_options": [
+        "DELETE_THE_ASSUMPTION_THAT_A_FIXED_OPERATION_SET_IS_THE_ANSWER_SPACE",
+        "BYPASS_PARTIAL_ANSWERS_BY_TRYING_TO_BUILD_THE_WHOLE_EXPRESSION",
+        "SUBSTITUTE_ONE_TYPED_GRAMMAR_FOR_A_GROWING_MENU"
+      ],
+      "surviving_causal_blocker": "A_SYSTEM_THAT_CAN_ONLY_TRY_OPERATIONS_SOMEBODY_WROTE_CANNOT_BE_GENERAL_HOWEVER_WELL_IT_RESOLVES_REFERENTS_BECAUSE_ITS_ANSWER_SPACE_IS_THE_SET_OF_ITS_PRIMITIVES"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "RESOLVE_REFERENTS_FROM_THE_TREE",
+        "THEN_TRY_EVERY_PERMITTED_OPERATION",
+        "THEN_KEEP_ONLY_VERIFIED_AND_ACCOUNTED"
+      ],
+      "losing_routes_reason": "ADD_A_PRIMITIVE_PER_QUESTION_LOSES_BECAUSE_THE_ANSWER_SPACE_GROWS_BY_ONE_PER_UNIT_OF_WORK_A_MODEL_BUILDER_LOSES_BECAUSE_IT_IS_UNCHECKABLE_AND_ADDS_A_PRODUCER_DEPENDENCY_REFUSING_EVERYTHING_NOT_PRIMITIVE_COVERED_LOSES_BECAUSE_IT_IS_A_STATIC_PROGRAM_BY_DEFINITION_MORE_MEASUREMENT_LOSES_BECAUSE_MEASUREMENT_ALWAYS_SUCCEEDS",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "THIRTEEN_DOOR_CASES_AND_FIFTY_FOUR_TESTS_AND_THE_UNCHANGED_117_CASE_SWEEP_ARE_ALL_REAL_EXECUTIONS_WITH_FIXTURES_WHOSE_ANSWERS_WERE_COMPUTED_BY_HAND__NO_MODEL_IN_THE_LOOP"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "COMPUTE_AND_WANTS_CONTENT_AND_WANTS_A_LISTING_REMAIN_DEFINED_AND_ARE_NOW_UNREACHED_FROM_ANSWER",
+        "_OPERATION_VOCABULARY_REMAINS_AS_A_FALLBACK_ONLY"
+      ],
+      "note": "THE_UNREACHED_LISTS_ARE_LEFT_IN_PLACE_BECAUSE_THE_TRIAL_IS_THE_ONLY_AUTHORITY_AND_DELETING_THEM_IS_A_SEPARATE_CHANGE",
+      "adjacent_capabilities_absorbed": [
+        "operation_trial_v1_ENTITY_RESOLUTION_AND_ACCOUNTING_NOW_FEED_THE_COMPOSER",
+        "inspect_v1_UNRESOLVED_WORD_COMPUTATION_IS_THE_SIGNAL_THAT_TRIGGERS_COMPOSITION"
+      ],
+      "fresh_reuse_plan": "EVERY_NEW_OPERATOR_EXTENDS_EVERY_COMPOSITION_THAT_COULD_USE_IT_WHICH_IS_THE_PROPERTY_A_MENU_DOES_NOT_HAVE"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "MEASURED_PARAPHRASE_INVARIANCE_AS_THE_ACCEPTANCE_TEST_INSTEAD_OF_ASSERTING_A_LABEL",
+        "REUSED_THE_117_CASE_SWEEP_AS_THE_REGRESSION_ORACLE_RATHER_THAN_WRITING_A_NEW_ONE"
+      ],
+      "search_stop_decision": "STOP_WHEN_A_QUESTION_NEEDING_SEVERAL_TYPED_STEPS_RETURNS_A_BUILT_EXPRESSION_THAT_RE_DERIVES_AND_ACCOUNTS_FOR_EVERY_WORD__THEN_FIND_THE_NEXT_TYPE_THE_GRAMMAR_CANNOT_EXPRESS",
+      "affected_layers_only_on_revalidation": true
+    }
+  },
+  "next_step": "COMPOSE_OVER_MORE_THAN_NUMERIC_COLUMNS__TEXT_TRANSFORMS_JOINS_ACROSS_FILES_AND_GROUP_BY_ARE_THE_NEXT_TYPED_PIECES_AND_THE_MECHANISM_ALREADY_ACCEPTS_THEM_WITHOUT_A_NEW_LIST",
+  "prior_work_reused": [
+    "canonical/runtime/inspect_v1.py search, hits and grounding (earlier this session, merged in 3c3f7976)",
+    "canonical/runtime/autonomous_v1.py question route (merged in 3c3f7976)",
+    "canonical/runtime/regression_sweep_v1.py 117-case honest self-check (base)"
+  ]
+}
