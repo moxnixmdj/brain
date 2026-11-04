@@ -495,6 +495,10 @@ class AwakeAgencyDaemon:
         )
         # Interpretations live beside habits, and for the same reason: a creature that keeps its
         # memories keeps its understanding, and one given a fresh store starts genuinely naive.
+        self.synth_path = (
+            (_store_p.parent / "synth_grammar.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_synth_{ws_hash}.json")
+        )
         self.interpretations_path = (
             (_store_p.parent / "interpretations.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_interp_{ws_hash}.json")
@@ -1186,6 +1190,13 @@ class AwakeAgencyDaemon:
                 from canonical.swe_kernel.interpretive_repair_v1 import live_interpretations
 
                 _interp = live_interpretations(self.interpretations_path)
+                # SYNTHESIZED EDIT GRAMMAR. The producers below are a fixed list of hypotheses I wrote;
+                # this one carries the hypothesis *space* and fits it to its own screened history. It
+                # predicts the effect of an edit before screening it, so candidates it can refute
+                # offline never cost a probe -- something no table-driven producer does.
+                from canonical.swe_kernel.synthesized_edit_grammar_v1 import live_synth
+
+                _synth = live_synth(self.synth_path)
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
                 # Syntax repairs exist because a file that does not parse makes every other reading
@@ -1197,9 +1208,13 @@ class AwakeAgencyDaemon:
                 # Learn from THIS failure before proposing: the evidence is in hand, and a mechanism
                 # that only ever learns after a success cannot help with the failure in front of it.
                 _interp.interpret(str(fail_out))
+                _rows = _interp.parse_rows(str(fail_out))
+                _args = _rows[0]["args"] if _rows else []
+                _owed = _rows[0]["expected"] if _rows else None
 
                 raw_cands = (
-                    _interp.propose(before_src, fail_out, limit=8)
+                    _synth.propose(before_src, fail_out, args=_args, owed=_owed, limit=12)
+                    + _interp.propose(before_src, fail_out, limit=8)
                     + _habits.propose(before_src, limit=8)
                     + propose_operator_family_swaps(before_src, max_candidates=24)
                     + propose_binding_repairs(before_src, fail_out, max_candidates=6)
@@ -1225,6 +1240,19 @@ class AwakeAgencyDaemon:
                         allow_cow_hardlinks=True,
                     )
                     pass_idxs = batch_screen.get("passing_indices") or []
+                    # The screen already executed every candidate. Until now the result was read for
+                    # the winner and the rest was thrown away -- the larger half of the signal. Every
+                    # pass and every rejection is evidence about which edits work in this codebase.
+                    _resid = {int(d.get("index", i)): d for i, d in enumerate(batch_screen.get("candidates") or [])}
+                    for _i, _c in enumerate(all_cands[:36]):
+                        _d = _resid.get(_i) or {}
+                        _ok = _i in [int(x) for x in pass_idxs]
+                        _r = None
+                        try:
+                            _r = abs(float(_owed) - float(_d.get("produced"))) if _owed is not None and _d.get("produced") is not None else None
+                        except (TypeError, ValueError):
+                            _r = None
+                        _synth.observe(before_src, _c, passed=_ok, residual=_r)
                     if batch_screen.get("ok") and batch_screen.get("confined") and pass_idxs:
                         cand_win = all_cands[int(pass_idxs[0])]
                         if _verify_in_cow(cand_win):

@@ -144,13 +144,15 @@ def _read_arg(piece: str) -> Any:
     t = piece.strip()
     if not t:
         return _UNREADABLE
-    if (len(t) >= 2) and t[0] == t[-1] and t[0] in "'\"":
-        return t[1:-1]
-    low = t.lower()
-    if low in ("true", "false"):
-        return low == "true"
-    if low == "none":
-        return None
+    # Read any Python literal, not a hand-rolled subset. MEASURED 2026-11-05: my first reader knew only
+    # numbers and then only strings, so `f([1, 2, 3], 2)` was unreadable and the whole index world was
+    # invisible to the mechanism -- a lexer limit of mine reported as a limit of the idea. `literal_eval`
+    # is the language's own answer and is safe: it evaluates literals only, never code.
+    try:
+        import ast as _ast
+        return _ast.literal_eval(t)
+    except (ValueError, SyntaxError, TypeError, MemoryError, RecursionError):
+        pass
     n = _to_number(t)
     return _UNREADABLE if n is None else n
 
@@ -160,8 +162,35 @@ def _split_args(raw: str) -> list[Any] | None:
     raw = raw.strip()
     if not raw:
         return []
+    # Split on top-level commas only. MEASURED 2026-11-05: `raw.split(",")` tore `f([1, 2, 3], 2)` into
+    # three pieces, the row was discarded, and the index world -- the very falsifier I had written down
+    # for myself -- was invisible to the mechanism for a reason that had nothing to do with the idea.
+    pieces: list[str] = []
+    depth = 0
+    quote: str | None = None
+    cur: list[str] = []
+    for ch in raw:
+        if quote:
+            cur.append(ch)
+            if ch == quote:
+                quote = None
+            continue
+        if ch in "'\"":
+            quote = ch
+            cur.append(ch)
+            continue
+        if ch in "([{":
+            depth += 1
+        elif ch in ")]}":
+            depth -= 1
+        if ch == "," and depth == 0:
+            pieces.append("".join(cur))
+            cur = []
+            continue
+        cur.append(ch)
+    pieces.append("".join(cur))
     vals: list[Any] = []
-    for piece in raw.split(","):
+    for piece in pieces:
         v = _read_arg(piece)
         if v is _UNREADABLE:
             return None
@@ -536,6 +565,11 @@ class InterpretiveRepair:
                 return i
             i += 1
         return -1
+
+    @staticmethod
+    def parse_rows(reason_text: str) -> list[dict[str, Any]]:
+        """Expose the measurement rows so other organs can use the same evidence without re-parsing it."""
+        return parse_evidence(reason_text)
 
     def summary(self) -> Mapping[str, Any]:
         return {
