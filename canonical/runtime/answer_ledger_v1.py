@@ -33,6 +33,7 @@ the sum of its parts. It does not know what the parts are unless the expressions
 
 from __future__ import annotations
 
+import canonical.runtime.decomposition_law_v1 as _D
 import canonical.runtime.value_algebra_v1 as V
 
 #: One record per answered question. In-process only, and cleared explicitly -- the same
@@ -40,10 +41,15 @@ import canonical.runtime.value_algebra_v1 as V
 #: unless it is re-derivable from the tree.
 _LEDGER: list[dict] = []
 
+#: Pairs that could not be compared, kept apart from contradictions so the contradiction
+#: list never contains a "I could not tell".
+_NOTES: list[dict] = []
+
 
 def reset() -> None:
     """Forget everything. Same discipline as the evaluation memo."""
     _LEDGER.clear()
+    _NOTES.clear()
 
 
 def entries() -> list[dict]:
@@ -51,7 +57,9 @@ def entries() -> list[dict]:
 
 
 def record(question: str, node, value, *, verified: bool, root: str | None = None,
-           shape: str | None = None) -> dict:
+           shape: str | None = None, aggregate: str | None = None,
+           reads_column: str | None = None, restricts_rows: bool | None = None,
+           is_a_whole: bool | None = None) -> dict:
     """Remember one answer, keyed by the expression that produced it AND the tree it read.
 
     AN ANSWER IS ONLY COMPARABLE WITH AN ANSWER ABOUT THE SAME TREE. The first version of
@@ -69,7 +77,18 @@ def record(question: str, node, value, *, verified: bool, root: str | None = Non
     check nothing reaches is indistinguishable from no check.
     """
     entry = {"question": question, "node": node, "value": value,
-             "verified": bool(verified), "root": str(root) if root is not None else None}
+             "verified": bool(verified), "root": str(root) if root is not None else None,
+             # WHICH AGGREGATE PRODUCED THIS, if any. Recorded because in production there
+             # is no node to ask, and the decomposition law needs the operator to decide
+             # how -- or whether -- the parts can be checked against the whole.
+             "aggregate": aggregate if aggregate is not None else
+             (_D.aggregate_kind(node) if node is not None else None),
+             "reads_column": reads_column if reads_column is not None else
+             (_D.read_column(node) if node is not None else None),
+             "restricts_rows": bool(restricts_rows) if restricts_rows is not None else
+             (_D.restricts_rows(node) if node is not None else False),
+             "is_a_whole": bool(is_a_whole) if is_a_whole is not None else
+             (_D.is_a_whole(node) if node is not None else False)}
     if shape is None and node is not None:
         shape = shape_of(node)
     if shape and verified:
@@ -175,6 +194,7 @@ def contradictions() -> list[dict]:
     grouping invariant already makes INSIDE one answer, applied across two.
     """
     found: list[dict] = []
+    noted: list[dict] = []
     verified = [e for e in _LEDGER if e.get("verified")]
 
     for i, a in enumerate(verified):
@@ -199,73 +219,61 @@ def contradictions() -> list[dict]:
         for sc_entry, sc in scalars:
             if not _same_tree(vec_entry, sc_entry):
                 continue
+            if not _same_column(vec_entry, sc_entry):
+                continue
+            if not sc_entry.get("is_a_whole"):
+                continue
             # only compare a total against a set of parts, and only when the parts really
             # are a partition -- not every list of numbers is the parts of that total
-            if not _looks_like_parts_of(vec_entry, sc_entry):
-                continue
-            if abs(sum(vec) - sc[0]) > 1e-9:
+            # THE RECOMBINATION IS DISCOVERED FROM THE OPERATOR, not hardcoded to sum().
+            # `max` and `min` were named as totals in the old typed list and then compared
+            # with `sum`, which is wrong for both; and an operator that does not decompose
+            # at all (`mean`) must be reported as UNCHECKABLE rather than passed over in
+            # silence, which is how "I could not judge" kept being read as "fine".
+            from canonical.runtime import decomposition_law_v1 as _D
+            verdict = _D.check_parts_against_whole(
+                vec_entry.get("node"), vec, sc_entry.get("node"), sc[0],
+                kind=sc_entry.get("aggregate"),
+                whole_restricts=sc_entry.get("restricts_rows"))
+            if verdict["verdict"] == "disagrees":
                 found.append({"kind": "PARTS_NOT_WHOLE",
                               "question_a": vec_entry["question"],
                               "question_b": sc_entry["question"],
-                              "parts": vec_entry.get("value"), "sum_of_parts": sum(vec),
+                              "parts": vec_entry.get("value"),
+                              "recombined": verdict["recombined"],
                               "whole": sc_entry.get("value"),
-                              "why": "the parts do not add up to the total already reported"})
+                              "why": verdict["why"]})
+            elif verdict["verdict"] == "uncheckable":
+                # AN UNCHECKABLE PAIR IS NOT A CONTRADICTION, and reporting it as one is
+                # exactly the false positive this round was supposed to stop making: on a
+                # coherent conversation it produced six "contradictions" and none was real.
+                # It is recorded as a NOTE, kept out of `contradictions()` so the list stays
+                # trustworthy, and available to a reader that wants to know what could not
+                # be checked -- which is different from what failed.
+                noted.append({"kind": "UNCHECKABLE_PAIR",
+                              "question_a": vec_entry["question"],
+                              "question_b": sc_entry["question"],
+                              "why": verdict["why"]})
+    _NOTES[:] = noted
     return found
 
 
-#: The operators that produce a TOTAL of something. A vector is the parts of a scalar only
-#: if the scalar is one of these.
-_TOTAL_OPS = ("sum", "count", "mean", "max", "min")
-
-
-def _is_a_total(node) -> bool:
-    """Does this expression claim to be the total of what it reads?
-
-    THE FIRST VERSION OF THIS CHECK ASSUMED ANY SCALAR WAS A TOTAL, and it produced a false
-    contradiction: `[150, 150, 250]` (whose sum is 550) was reported as not adding up to
-    `1.5`, the answer to "the total amount divided by how many regions". That answer never
-    claimed to be a total -- it is a quotient -- so the check was comparing two things that
-    were never supposed to agree.
-
-    A false contradiction is worse than a missed one: it teaches a reader to ignore every
-    contradiction the system reports, which costs more than the feature is worth. The rule
-    has to come from what the expression SAYS it is, not from the shape of its value.
-    """
-    op = getattr(node, "op", None)
-    if op == "aggregate":
-        return node.args and node.args[0] in _TOTAL_OPS
-    if op == "count":
-        return True
-    # map/quotion/vector/composition: not a total unless it is literally an aggregate
-    return False
-
-
-def _looks_like_parts_of(vec_entry, sc_entry) -> bool:
-    """Is this vector the breakdown of that scalar?
-
-    Both conditions are required, and each is there because removing it produced a false
-    positive that I measured:
-
-      * they read the SAME column -- a partition of `amount` is the parts of the total of
-        `amount`, and a vector of `qty` is not;
-      * the scalar CLAIMS to be a total -- otherwise it is a quotient, a maximum, or
-        something else that was never supposed to equal the parts.
-    """
-    if not _is_a_total(sc_entry.get("node")):
-        return False
-    a, b = _leaves(vec_entry.get("node")), _leaves(sc_entry.get("node"))
-    return bool(a) and a == b
-
-
 def _leaves(node) -> frozenset:
-    """The (op, literal) pairs that identify WHAT an expression reads."""
-    out = set()
-    stack = [node]
-    while stack:
-        cur = stack.pop()
-        if cur is None or not hasattr(cur, "op"):
-            continue
-        if cur.op in ("column", "table", "cell"):
-            out.add((cur.op,) + tuple(a for a in cur.args if isinstance(a, str)))
-        stack.extend(a for a in getattr(cur, "args", ()) if hasattr(a, "op"))
-    return frozenset(out)
+    from canonical.runtime import decomposition_law_v1 as _D
+    return _D._leaves(node)
+
+
+def _same_column(a, b) -> bool:
+    """Two answers are about the same thing only if they aggregate the same column.
+
+    THE SECOND FALSE POSITIVE, MEASURED. With the leaf-set check removed, `[150, 150, 250]`
+    -- the amounts per region -- was compared against `27`, the total of `qty`. Both are
+    correct and they are about different columns. The column is the fact that decides it;
+    full leaf sets are too strict (a grouping reads a table, a flat total reads a column)
+    and no check at all is too loose.
+    """
+    ca = a.get("reads_column") if a.get("reads_column") is not None else _D.read_column(a.get("node"))
+    cb = b.get("reads_column") if b.get("reads_column") is not None else _D.read_column(b.get("node"))
+    if ca is None or cb is None:
+        return True                      # cannot tell: do not invent a distinction
+    return ca == cb

@@ -474,6 +474,31 @@ def _needs_composition(question: str, trial: dict) -> bool:
     return bool(words - accounted)
 
 
+def _is_a_whole(node) -> bool:
+    from canonical.runtime import decomposition_law_v1 as _D
+    return bool(_D.is_a_whole(node))
+
+
+def _reads_column(node):
+    from canonical.runtime import decomposition_law_v1 as _D
+    return _D.read_column(node)
+
+
+def _restricts_rows(node) -> bool:
+    from canonical.runtime import decomposition_law_v1 as _D
+    return bool(_D.restricts_rows(node))
+
+
+def _applied_aggregate(node) -> str | None:
+    """The declared aggregate this expression applies, if it applies one.
+
+    The kind can be spelled as a bare string beside node arguments (`groups` keeps it in
+    `args[1]`), which is why a walk that follows only `hasattr(x, "op")` misses it.
+    """
+    from canonical.runtime import decomposition_law_v1 as _D
+    return _D.aggregate_kind(node)
+
+
 def _composed_computation(built: dict, V, question: str = "") -> dict:
     """Present a built expression the way every other computation is presented."""
     node = built["node"]
@@ -499,6 +524,22 @@ def _composed_computation(built: dict, V, question: str = "") -> dict:
         "verified": True,
         "law_grade": built.get("law_grade"),
         "expression": node.label,
+        # WHICH AGGREGATE THIS APPLIES, so the ledger can ask the operator how its parts
+        # recombine. Without it every pair fell through to "uncheckable" and the
+        # decomposition law -- the whole point of this round -- was unreachable from the
+        # door while passing its own tests. Same defect as the grade and the ledger node:
+        # measured in isolation, unwired in the product.
+        "aggregate": _applied_aggregate(node),
+        # WHICH COLUMN, AND WHETHER THIS IS A SLICE. Extracted here, at the one place a
+        # node exists, because no computation dict carries one downstream -- and every
+        # check that needed a node was therefore unreachable from the door.
+        "reads_column": _reads_column(node),
+        "restricts_rows": _restricts_rows(node),
+        # IS THE AGGREGATE THE OUTERMOST THING, or is something applied on top of it?
+        # 1.5 is `half(count(...))` -- it contains an aggregate, reads the same column, and
+        # never claimed to be the total, so comparing it with [150,150,250] was the false
+        # positive that had to be removed twice.
+        "is_a_whole": _is_a_whole(node),
     }
 
 
@@ -1127,7 +1168,11 @@ def _remember_and_check(question: str, comp, verified: bool, root=None) -> list:
         # nothing in the product.
         shape = _expression_shape(comp, root)
         ledger.record(question, comp.get("node"), comp.get("value"),
-                      verified=verified, root=root, shape=shape)
+                      verified=verified, root=root, shape=shape,
+                      aggregate=comp.get("aggregate"),
+                      reads_column=comp.get("reads_column"),
+                      restricts_rows=comp.get("restricts_rows"),
+                      is_a_whole=comp.get("is_a_whole"))
         return ledger.contradictions()
     except Exception as exc:
         # A CHECK THAT CRASHED IS NOT A CHECK THAT PASSED.

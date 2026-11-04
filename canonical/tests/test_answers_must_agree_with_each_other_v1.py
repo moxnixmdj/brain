@@ -63,7 +63,7 @@ def _clean():
 # The contradiction is reported, and the parts are not silently preferred.
 # ---------------------------------------------------------------------------
 
-def test_a_vector_that_claims_to_be_the_parts_must_add_up(tmp_path):
+def test_a_vector_that_claims_to_be_the_parts_must_recombine(tmp_path):
     """[150, 150] cannot be the parts of a total that was already reported as 550."""
     L.record("what is the total amount", _total_node(tmp_path), 550.0, verified=True)
     L.record("the total amount split in two", _parts_node(tmp_path, [150.0, 150.0]),
@@ -71,7 +71,7 @@ def test_a_vector_that_claims_to_be_the_parts_must_add_up(tmp_path):
 
     out = L.contradictions()
     assert [c["kind"] for c in out] == ["PARTS_NOT_WHOLE"], out
-    assert "add up" in out[0]["why"]
+    assert "recombine" in out[0]["why"]
 
 
 def test_parts_that_do_add_up_are_not_reported(tmp_path):
@@ -325,3 +325,179 @@ def test_a_filtered_total_is_a_different_question_from_the_whole(tmp_path):
     whole = I.answer("what is the total amount", root)["computation"]
     west = I.answer("what is the total amount in west", root)["computation"]
     assert whole["expression"] != west["expression"]
+
+
+# ---------------------------------------------------------------------------
+# Which answers CAN be checked against each other is discovered, not declared.
+#
+# The rule above started life as three typed lists: `_TOTAL_OPS`, `_is_a_total`, and a
+# hardcoded `sum()`. That is the defect this whole project is about -- a vocabulary nobody
+# derived -- and it was reproduced here in the same commit that removed it elsewhere. The
+# list named `mean` as a total, so a mean would have been "checked" by adding up means,
+# which is not a property of a mean; and `max`/`min` were named as totals and then compared
+# with `sum`, which is false for both.
+#
+# The question is put to the operator instead: split a probe set every way, apply the
+# aggregate to the whole and to each part, and see which recombination reproduces the
+# whole. A newly declared operator decomposes correctly with no edit to the law.
+# ---------------------------------------------------------------------------
+
+from canonical.runtime import decomposition_law_v1 as D  # noqa: E402
+
+
+def test_each_aggregate_decomposes_the_way_its_own_definition_says():
+    assert D.decomposes_by("sum") == "sum"
+    assert D.decomposes_by("count") == "sum"      # a total count is the sum of the counts
+    assert D.decomposes_by("max") == "max"        # the largest of all is the largest of each
+    assert D.decomposes_by("min") == "min"
+
+
+def test_a_mean_declares_that_it_does_not_decompose():
+    """THE PAYOFF. A mean of means is not the mean; it needs the group sizes.
+
+    A typed list called `mean` a total and would have compared it with a sum. The
+    discovery returns None, which is a real statement: this answer cannot be checked
+    against its parts, and the system has to say so instead of blessing it.
+    """
+    assert D.decomposes_by("mean") is None
+
+
+def test_an_operator_declared_after_the_law_was_written_decomposes_correctly():
+    """The property that makes this a creature and not a table: no edit is needed here."""
+    import math
+
+    import canonical.runtime.value_algebra_v1 as valg
+    saved = valg._AGGREGATES.get("product")
+    try:
+        valg._AGGREGATES["product"] = {
+            "fn": lambda v: math.prod([float(x) for x in v]),
+            "laws": ("non_negative",),
+        }
+        D._CACHE.pop("product", None)
+        assert D.decomposes_by("product") == "product"
+    finally:
+        if saved is None:
+            valg._AGGREGATES.pop("product", None)
+        else:
+            valg._AGGREGATES["product"] = saved
+        D._CACHE.pop("product", None)
+
+
+def test_an_operator_that_does_not_decompose_is_reported_uncheckable_not_agreed():
+    import canonical.runtime.value_algebra_v1 as valg
+    saved = valg._AGGREGATES.get("median")
+    try:
+        valg._AGGREGATES["median"] = {
+            "fn": lambda v: sorted([float(x) for x in v])[len(v) // 2],
+            "laws": ("within_inputs",),
+        }
+        D._CACHE.pop("median", None)
+        assert D.decomposes_by("median") is None
+        verdict = D.check_parts_against_whole(None, [1.0, 2.0], None, 3.0, kind="median")
+        assert verdict["verdict"] == "uncheckable", verdict
+    finally:
+        if saved is None:
+            valg._AGGREGATES.pop("median", None)
+        else:
+            valg._AGGREGATES["median"] = saved
+        D._CACHE.pop("median", None)
+
+
+def test_a_max_is_not_checked_by_adding_up():
+    """The typed list compared maxima with sum(). 150+150+250 is 550, and max is 250."""
+    L.record("the totals per region", _grouped_parts("max"), [150.0, 150.0, 250.0], verified=True)
+    L.record("the largest amount", _flat("max"), 250.0, verified=True)
+    assert L.contradictions() == []
+
+
+def test_a_max_that_is_not_the_largest_part_is_a_contradiction():
+    L.record("the totals per region", _grouped_parts("max"), [150.0, 150.0, 250.0], verified=True)
+    L.record("the largest amount", _flat("max"), 999.0, verified=True)
+    kinds = [c["kind"] for c in L.contradictions()]
+    assert kinds == ["PARTS_NOT_WHOLE"], kinds
+
+
+def test_something_that_cannot_be_checked_is_not_reported_as_a_contradiction():
+    """A note, not a contradiction -- otherwise a coherent conversation floods with them."""
+    L.record("the totals per region", _grouped_parts("mean"), [150.0, 150.0, 250.0], verified=True)
+    L.record("the average amount", _flat("mean"), 137.5, verified=True)
+    assert L.contradictions() == []
+    assert [n["kind"] for n in L._NOTES] == ["UNCHECKABLE_PAIR"]
+
+
+def test_the_door_records_which_aggregate_an_answer_applies(tmp_path):
+    root = _tree(tmp_path, **{"sales.csv": SALES})
+    seen = {}
+    for question in ("what is the total amount", "what is the total amount per region",
+                     "what is the average amount"):
+        seen[question] = I.answer(question, root)["computation"].get("aggregate")
+    assert seen["what is the total amount"] == "sum"
+    # the sum is declared on the CHILD `groups` node here; the search has to descend
+    assert seen["what is the total amount per region"] == "sum"
+    assert seen["what is the average amount"] == "mean"
+
+
+def _flat(kind: str):
+    c = V._n("column", ("sales.csv", "amount"), V.NUMVEC, set(), "c")
+    return V._n("aggregate", (kind, c), V.NUMBER, set(), "s")
+
+
+def _grouped_parts(kind: str):
+    t = V._n("table", ("sales.csv",), V.TABLE, set(), "t")
+    g = V._n("group", (t, "region", "amount"), V.TABLE, set(), "g")
+    gs = V._n("groups", (g, kind, "region", "amount"), V.TABLE, set(), "gs")
+    return V._n("values_of", (gs, f"{kind}(amount)"), V.NUMVEC, set(), "v")
+
+
+# ---------------------------------------------------------------------------
+# The false positives, kept as tests because each one came back after I removed it.
+#
+# Every guard below exists because a specific wrong pair was MEASURED on a coherent
+# conversation. Removing any of them re-introduced the pair it prevents.
+# ---------------------------------------------------------------------------
+
+def test_a_breakdown_of_one_column_is_not_compared_with_another_column(tmp_path):
+    """[150,150,250] of `amount` against 27 of `qty` -- both correct, unrelated."""
+    root = _tree(tmp_path, **{"sales.csv": SALES,
+                              "stock.csv": "item,qty\nbolt,5\nnut,15\nbolt,7\n"})
+    I.answer("what is the total qty", root)
+    out = I.answer("what is the total amount per region", root)
+    assert out["contradicts"] == []
+
+
+def test_a_filtered_slice_is_not_the_whole(tmp_path):
+    """250 is the total *in west*; 150+150+250 is every region. Not the same question."""
+    root = _tree(tmp_path, **{"sales.csv": SALES})
+    I.answer("what is the total amount in west", root)
+    out = I.answer("what is the total amount per region", root)
+    assert out["contradicts"] == []
+
+
+def test_a_quotient_is_not_the_whole(tmp_path):
+    """1.5 is `half(count(...))`. It applies an aggregate and reads the same column, and
+    it still never claimed to be the total of anything."""
+    root = _tree(tmp_path, **{"sales.csv": SALES})
+    I.answer("what is the total amount per region", root)
+    out = I.answer("what is the total amount divided by how many regions", root)
+    assert out["contradicts"] == []
+
+
+def test_the_whole_conversation_on_one_tree_reports_nothing(tmp_path):
+    """The end-to-end statement: eight correct answers, no contradictions."""
+    root = _tree(tmp_path, **{"sales.csv": SALES,
+                              "stock.csv": "item,qty\nbolt,5\nnut,15\nbolt,7\n"})
+    for question in ("what is the total amount", "what is the total qty",
+                     "what is the total amount in west", "what is the total amount in north",
+                     "what is the total amount per region", "what is the average amount",
+                     "count the items", "what is the total amount divided by how many regions"):
+        out = I.answer(question, root)
+        assert out["contradicts"] == [], (question, out["contradicts"])
+
+
+def test_is_a_whole_is_decided_by_where_the_aggregate_sits():
+    """The aggregate has to be the OUTERMOST operator, not merely present."""
+    c = V._n("column", ("sales.csv", "amount"), V.NUMVEC, set(), "c")
+    whole = V._n("aggregate", ("sum", c), V.NUMBER, set(), "s")
+    covered = V._n("map", ("half", whole), V.NUMBER, set(), "m")
+    assert D.is_a_whole(whole) is True
+    assert D.is_a_whole(covered) is False
