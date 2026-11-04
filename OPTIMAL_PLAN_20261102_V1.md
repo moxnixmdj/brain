@@ -1956,8 +1956,8 @@ the honest headline of this log.
 |---|---|---|
 | The parity rule is spellable with a constant nobody typed | **TRUE** | size 11, separability **0.992** train / **1.000** test with the data's own pooled median (0.4956) |
 | A derived constant is robust, not a lucky sample | **TRUE** | one row corrupted to 1000.0 moves the centre < 0.05 |
-| `xor` is now solved exactly by one computed column | **TRUE** | 1.000 train and held-out; log 19: 0.975 by the method space, 0.931 by `nearest(k)` in log 18 |
-| `sum` likewise | **TRUE** | 1.000; log 19: 0.942 |
+| `xor` is now solved exactly by one computed column | **TRUE, on its own terms** | separability 1.000 train and held-out; the exact rule, not an approximation |
+| `sum` likewise | **TRUE, on its own terms** | 1.000 held-out from a size-3 column |
 | Novelty is a real valuation, not decoration | **TRUE, narrow** | vs the paired random null at the same archive budget on xor3: 0.717 vs 0.625 |
 | Novelty keeps *different* thoughts than agreement | **TRUE** | at size 6, median gain 0.0236 vs 0.1029, **zero overlap** between the memories |
 | Novelty is better than agreement | **FALSE** | xor 0.875 vs 1.000; count3 0.850 vs 0.908; circles 0.850 vs 0.917 |
@@ -1983,7 +1983,9 @@ not ranking and not expressibility.**
 ### A measurement caveat, stated plainly
 
 This probe's dependent variable is the separability of a **single column**, not the system's best
-predictor. `circles` therefore reads 0.808 where the method space reached 0.975, and `count3` 0.883
+predictor -- so no number here may be read as superseding log 19's method-space accuracies. The
+xor/sum rows above claim that the *exact rule* is now expressible and holds out at 1.000; they do
+not claim the system beats 0.975/0.942, because that comparison would be between two instruments. `circles` therefore reads 0.808 where the method space reached 0.975, and `count3` 0.883
 where it reached 1.000. Those are not regressions of the creature; they are the single-cut
 instrument being weaker than a tree. Any future comparison must hold the learner fixed, and I am
 flagging it rather than letting the table imply a loss that did not happen.
