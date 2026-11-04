@@ -414,6 +414,51 @@ def search_named(root: str, rel: str, terms: list[str], limit: int = 40) -> list
     return hits
 
 
+def _operation_vocabulary(comp: dict) -> set[str]:
+    """The words the CHOSEN operation is made of, so they are not called unresolved.
+
+    Distinct from the per-operation sets above, which are static tables used before an
+    operation was chosen. This reads the answer that was actually returned: a count of
+    lines accounts for `lines`; an aggregate over the `amount` column accounts for
+    `amount` and for the aggregate's own name.
+    """
+    op = comp.get("operation") or ""
+    out: set[str] = set()
+    if op == "count_lines":
+        out |= {"line", "lines", "length", "long", "count", "number", "many"}
+    elif op == "count_rows":
+        out |= {"row", "rows", "record", "records", "entry", "entries", "count",
+                "number", "many", "data"}
+    elif op == "count_files":
+        out |= {"file", "files", "count", "number", "many", "directory", "dir",
+                "folder", "here", "this", "tree", "project"}
+    elif op == "catalog":
+        out |= {"list", "listing", "file", "files", "directory", "dir", "folder",
+                "entries", "contents", "which", "exist", "here"}
+    elif op == "read_content":
+        out |= {"what", "say", "says", "said", "written", "written", "contain",
+                "contains", "show", "see", "display", "cat", "print", "read",
+                "contents", "content", "text", "inside", "look", "open", "quote",
+                "let", "me", "tell"}
+    elif op == "locate":
+        for h in comp.get("hits") or []:
+            out.add(str(h.get("term") or "").lower())
+    elif op.startswith("aggregate_"):
+        agg = op.rsplit("_", 1)[1]
+        out |= {"total", "sum", "add", "added", "altogether", "combined", "overall",
+                "max", "maximum", "largest", "biggest", "highest", "most", "top",
+                "greatest", "min", "minimum", "smallest", "lowest", "least", "fewest",
+                "bottom", "average", "mean", "typical", "avg", "column", "field"}
+        col = str(comp.get("column") or "").lower()
+        if col:
+            out.add(col)
+            if len(col) > 3 and col.endswith("s"):
+                out.add(col[:-1])
+            else:
+                out.add(col + "s")
+    return {w for w in out if w}
+
+
 def compute(question: str, root: str) -> dict | None:
     """Answer a question that needs a computation, not a citation.
 
@@ -482,12 +527,25 @@ def compute(question: str, root: str) -> dict | None:
 # "what does data.py define" asks to be shown contents; `define` is the operation the
 # asker wants performed, not a thing to be found inside the file. Counting request
 # verbs as content terms made every such question look partly unanswered.
+# Words that ask the door to DO something with the content. They are not subjects.
+#
+# `define`, `declare`, `export`, `mean`, `explain` and `describe` were in this set and
+# are not: they name WHAT the question is about. Dropping them deleted the question's
+# subject before anything could report it, so "what does data.py define" -- a file with
+# no `define` in it -- came back NOTHING_FOUND with an EMPTY unresolved list, as if the
+# word had never been asked about. A word that matched nothing must never disappear.
+#
+# What remains is vocabulary for retrievING content: it says how to answer, not what.
 _REQUEST_VERBS = {
-    "define", "defines", "defined", "declare", "declares", "declared", "export",
-    "exports", "exported", "say", "says", "said", "contain", "contains", "contained",
-    "hold", "holds", "mean", "means", "show", "shows", "explain", "explains",
-    "describe", "describes", "tell", "give", "find", "print", "display", "quote",
+    "say", "says", "said", "contain", "contains", "contained",
+    "hold", "holds", "show", "shows", "tell", "give", "find", "print",
+    "display", "quote", "read", "cat", "list", "see", "look",
 }
+
+# ...but a content word and a retrieval word can be the same word ("show", "print").
+# An operation that consumed a word accounts for it; the trial says which ones, and
+# that subtraction is what decides `unresolved`. This set is only a first cut for the
+# words the trial never saw, so it must not remove a word the trial left owed.
 
 
 _ASKS_CONTENT = re.compile(
@@ -691,13 +749,42 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     # the word absent, and `retry` in `retry.py` went back to GROUNDED and answered --
     # the fix undone by its own evidence trail. A file only becomes evidence here when
     # there is a finding that points at it, or a number that came out of it.
-    named_ev = _named_file(question, root)
-    will_compute = False
+
+    # THE OPERATION IS TRIED, NOT CLASSIFIED.
+    #
+    # This called `compute()`, which chose the operation by matching the question
+    # against `_COUNT_LINES` / `_COUNT_ROWS` / `_COUNT_FILES` / `_ASKS_CONTENT`. Eight
+    # regexes, seven of them added one defect at a time, and a question phrased any
+    # other way was not answered. `operation_trial_v1` resolves what the sentence names
+    # against the tree, tries every operation those things permit, and returns only one
+    # that both re-checks against the tree AND accounts for the question's own words.
+    trial = None
+    comp = None
     try:
-        will_compute = (compute(question, root) is not None
-                        or (not wants_a_listing(question) and wants_content(question)))
-    except Exception:
-        will_compute = False
+        try:
+            from canonical.runtime import operation_trial_v1 as _T
+        except ImportError:
+            import operation_trial_v1 as _T
+        trial = _T.run(question, root)
+        comp = trial.get("computation")
+    except Exception as exc:
+        # AN OPERATION THAT CRASHED IS NOT AN OPERATION THAT DID NOT APPLY.
+        #
+        # This swallowed every exception into `comp = None`, which is indisting-
+        # uishable from "no operation was applicable" -- so a genuine bug in the trial
+        # looked exactly like a question the tree cannot answer. Keep the fact.
+        comp = None
+        trial = {"computation": None, "attempted": [],
+                 "reason": f"the operation trial raised {type(exc).__name__}: {exc}"}
+    if comp is not None:
+        comp["verified"] = True     # operation_trial_v1 only returns what re-checked
+
+    named_ev = _named_file(question, root)
+    # Whether this question will be ANSWERED, decided once, by the trial that answers
+    # it. This called `compute()` and `wants_content()` -- two of the phrasing lists the
+    # dispatcher was supposed to replace -- so a question could be answered by the trial
+    # and still be treated as unanswered here because a regex disagreed with it.
+    will_compute = bool((trial or {}).get("computation"))
     # `unresolved` is not computed yet at this point, so the refusal case is decided by
     # whether the question asked about a subject the file does not contain -- which is
     # exactly what a named file with nothing found inside it means. Cited when there is
@@ -708,18 +795,6 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
             h.get("file") == named_ev for h in hits):
         hits.append({"file": named_ev, "line": 0, "term": named_ev,
                      "text": "", "matched": "filename"})
-
-    comp = None
-    try:
-        comp = compute(question, root)
-        # A listing question about a directory is not a request to read one file,
-        # so this runs only when no listing already answered it.
-        if comp is None and not wants_a_listing(question) and wants_content(question):
-            comp = read_content(question, root)
-    except Exception:
-        comp = None
-    if comp is not None:
-        comp["verified"] = _computation_holds(comp, root)
 
     # Ground the filename hit before counting, so the evidence tally is about the same
     # list of hits the verdict is computed from.
@@ -751,9 +826,44 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     # The words a file's PATH is spelled with name it; they are not things to find inside
     # anything. Leaving them in made every question about a nested path score as
     # partially unanswered on its own correct answer.
+    # WHEN THE TRIAL ANSWERED, THE QUESTION WAS ANSWERED.
+    #
+    # `unresolved_terms` exists so a search that found nothing cannot look like a
+    # success. When an operation was tried, re-checked against the tree, AND accounts
+    # for the question's words, the question is answered -- and computing "unresolved"
+    # from a separate list of English request verbs produced the opposite: `cat data.py`
+    # answered correctly and was then marked READ_INCOMPLETE because `cat` was not in
+    # `_REQUEST_VERBS`. That list was a fourth template list contradicting the
+    # dispatcher, which is the defect this whole change removes.
     subject_terms = [t for t in terms if t not in _REQUEST_VERBS]
-    subject_terms = _drop_path_fragments(subject_terms, _named_file(question, root) or "",
-                                         question)
+    subject_terms = _drop_path_fragments(
+        subject_terms, _named_file(question, root) or "", question)
+    if comp is not None:
+        # THE OPERATION'S OWN VOCABULARY IS ACCOUNTED FOR; THE QUESTION'S SUBJECT IS NOT.
+        #
+        # Dropping every subject term whenever a computation existed made refusals
+        # regress: "what is the profit margin in data.py" returned READ, having dumped
+        # the file and called it an answer. `read` verifies on any text file, so it is
+        # only an answer when nothing else was asked for -- and the trial already
+        # decides that. What is still owed is the question's SUBJECT: `profit` and
+        # `margin` were never found, and that must survive.
+        # THE TRIAL SAYS WHICH WORDS IT ACCOUNTED FOR.
+        #
+        # `_operation_vocabulary(comp)` was a SECOND reconstruction of the same
+        # knowledge, built from the operation's name rather than from its result, and
+        # it drifted immediately: `altogether` and `has` were reported as unanswered
+        # subjects of questions the door had answered correctly. One authority.
+        accounted = (trial or {}).get("accounted")
+        if accounted is None:
+            accounted = sorted(_operation_vocabulary(comp))
+        # The trial's own word list is the one its decision was made from: it already
+        # dropped glue, and the address of the named file. Judging its answer against a
+        # DIFFERENT tokenisation marked `has` -- which the trial never even considered a
+        # subject -- as an unanswered word, and refused a correct answer.
+        trial_words = (trial or {}).get("words")
+        if trial_words is not None:
+            accounted = set(accounted) | {t for t in subject_terms if t not in trial_words}
+        subject_terms = [t for t in subject_terms if t not in set(accounted)]
     # A term that is the name of a file the question names is accounted for by that
     # file being there; it was never a thing to look for inside a body.
     named = _named_file(question, root)
@@ -782,9 +892,13 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     # asks for a number and we did not compute one, the verdict must not be GROUNDED,
     # because "the evidence is real" and "the question is answered" are different
     # claims and this is precisely the case where they come apart.
-    asks_for_number = bool(_COUNT_LINES.search(question or "")
-                           or _COUNT_ROWS.search(question or "")
-                           or _COUNT_FILES.search(question or ""))
+    # THE TRIAL ALREADY KNOWS WHETHER A NUMBER WAS ASKED FOR -- it is how `run()` chose
+    # what to try. Asking three regexes the same question here meant this verdict was
+    # decided by a fourth copy of the vocabulary, and any phrasing those three did not
+    # spell was reported GROUNDED with no number in it. Read the decision that was made.
+    asked_op = (trial or {}).get("asked") or ""
+    asks_for_number = asked_op.startswith("aggregate_") or asked_op in (
+        "count_lines", "count_rows", "count_files", "catalog")
 
     if comp is not None and comp["verified"] and comp["operation"] == "read_content" and unresolved:
         # It read the file and some of what was asked about is still unaccounted for.
@@ -831,7 +945,27 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         "all_grounded": bool(hits) and grounded == len(hits),
         "computation": comp,
         "unresolved_terms": unresolved,
-        "answered": bool(comp["verified"]) if comp is not None
+        # WHAT WAS TRIED AND FAILED, not just what won.
+        #
+        # The trial keeps every attempt -- including the ones that did not re-check and
+        # the ones that re-checked but did not answer -- because "I tried to count the
+        # rows and could not" is information a reader needs to judge the answer. This
+        # dropped it, so a failed operation vanished and the reply looked as if the door
+        # had never attempted it.
+        "attempted": (trial or {}).get("attempted") or [],
+        "trial_reason": (trial or {}).get("reason"),
+        # The file the question named, if any. Returned as a fact so that a reader --
+        # including the door's own reason code -- can distinguish "looked in the file
+        # you named and the words are not in it" from "searched the tree, found nothing".
+        "named_file": (named.name if hasattr(named, "name") else named),
+        # AN OPERATION THAT RAN IS NOT AN ANSWER TO A QUESTION IT IGNORED.
+        #
+        # This read `answered = comp["verified"]`, so "what is the profit margin in
+        # data.py" came back answered=True after reading the file -- the arithmetic of
+        # the original defect, one layer up: the operation was real, and the subject was
+        # never dealt with. An answer needs the work to hold AND the question's words to
+        # be accounted for.
+        "answered": (bool(comp["verified"]) and not unresolved) if comp is not None
                     else (bool(hits) and not asks_for_number and not unresolved),
         "grounding_summary": summary,
     }

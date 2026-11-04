@@ -277,25 +277,112 @@ _QUESTION = re.compile(
 )
 
 
-def _is_question(goal: str) -> bool:
+def _reason(result: dict) -> str:
+    """Why the verification has the value it has.
+
+    Derived from what the answer SAYS rather than from a chain of verdict labels:
+    a label's spelling is not a fact about the question, and a chain of literals
+    silently degrades to a fallback every time a verdict is renamed -- which is how
+    "looked in the file you named and the word is not in it" collapsed into a generic
+    "not grounded". These read the answer's own fields.
+    """
+    if result.get("answered", result.get("all_grounded")):
+        return "ANSWER_GROUNDED"
+    if result.get("verdict") == "UNVERIFIABLE":
+        return "UNVERIFIABLE_ANSWER"
+    comp = result.get("computation") or {}
+    unresolved = result.get("unresolved_terms") or []
+    # MOST SPECIFIC FACT FIRST. Several of these are true at once; the reason should
+    # be the one that tells the reader the most. "The door read data.py and `profit`
+    # is not in it" is more useful than "something was answered that was not asked",
+    # and it is the same distinction the verdict used to draw.
+    if result.get("named_file") and unresolved:
+        return "SUBJECT_ABSENT_FROM_NAMED_FILE"
+    if comp.get("verified"):
+        # An operation ran and re-checked, and the question still has words nothing
+        # accounted for. That is the failure this project exists to name.
+        return "ANSWERED_SOMETHING_NOT_ASKED" if comp.get("operation") == "read_content" \
+            else "PARTIAL_ANSWER"
+    if comp and result.get("verdict") == "LOCATED_NOT_COMPUTED":
+        return "LOCATED_BUT_NOT_ANSWERED"
+    if not result.get("total"):
+        return "NOTHING_FOUND"
+    return "ANSWER_NOT_GROUNDED"
+
+
+def _is_question(goal: str, root: str | None = None) -> bool:
     """Does this goal ask about the files here, rather than to change them?
 
-    Kept to the shape of the sentence, not a list of phrasings. A
-    template list would only recognise questions someone thought of in
-    advance, which is the brittleness this system exists to avoid.
+    A LIST OF INTERROGATIVES IS A LIST OF ENGLISH PHRASINGS, whatever it is called.
+    This was `_QUESTION` -- what/which/how/is/are/... -- and it was the first of three
+    such lists a question had to get through. Measured: "display data.py" was rejected
+    here even though `display` was in the content list two modules away, and "line
+    count of data.py" was not recognised as a question at all. Three lists, none of
+    which knew about the others, and a question had to satisfy the right one.
 
-    A question naming a URL is not this route: it asks about somewhere
-    else, and answering it from the local files would be a confident
-    answer to a question that was never asked. Routing by the shape of
-    the words alone sent "what does the page at https://github.com/...
-    say" to the filesystem, and the browser stopped being used at all.
+    The replacement is a fact about the tree, not about English: a goal is a question
+    when it ASKS RATHER THAN COMMANDS, and the way to tell is whether it names things
+    that already exist. "delete data.py" also names it, so an imperative verb that
+    would CHANGE the tree keeps this route closed. Everything else that names
+    something real here is a question about it.
+
+    A URL is still not this route: it asks about somewhere else, and answering it from
+    the local files would be a confident answer to a question that was never asked.
     """
     text = (goal or "").strip()
     if not text:
         return False
     if re.search(r"https?://|\bwww\.", text, re.I):
         return False
+
+    # An imperative that changes the tree is not a question, whatever it names.
+    if _CHANGES_THE_TREE.search(text):
+        return False
+
+    # It asks about things that exist here -- and NAMING one is necessary, not enough.
+    #
+    # "produce a report from the data" names `data/`. So does "how many lines are in
+    # data.py". Routing on the entity alone sent the first to the question path, where
+    # it could not be answered (nothing accounts for `produce`), and the environment
+    # task that must PRODUCE the report instead reported that it could not answer a
+    # question nobody asked. Two environment cases regressed exactly this way.
+    #
+    # The difference is not a longer list of command verbs -- that is the same trap one
+    # level down. It is whether the sentence is asking:
+    #   * grammatically a question (what/which/how/...) -- it is asking, and if the
+    #     answer is not in the tree, the honest reply is a refusal, not an action;
+    #   * not a question in shape, but the door CAN answer it from what it names --
+    #     "cat data.py", "line count of data.py" -- so it is asking, phrased as a noun;
+    #   * neither -- it is an instruction to do something, and doing it is another
+    #     route's job.
+    if root:
+        try:
+            from canonical.runtime import operation_trial_v1 as _T
+        except ImportError:  # direct-path import
+            import operation_trial_v1 as _T
+        if _T.entities(text, root):
+            if _QUESTION.search(text):
+                return True
+            try:
+                if _T.run(text, root).get("computation"):
+                    return True
+            except Exception:
+                # A trial that cannot run has not shown it can answer; fall through
+                # rather than claiming the question route on its behalf.
+                pass
+            return False
+
+    # Nothing resolvable: fall back to the shape, which can only under-route, never
+    # invent an answer.
     return bool(_QUESTION.search(text))
+
+
+# Only the operations that would CHANGE the tree. Kept deliberately narrow: this list
+# cannot make the door answer something it does not understand, it can only decline to
+# treat a write as a question.
+_CHANGES_THE_TREE = re.compile(
+    r"^\s*(delete|rm|remove|move|mv|rename|create|write|append|edit|modify|"
+    r"chmod|chown|install|commit|push|merge|revert|drop|truncate)\b", re.I)
 
 
 def _snapshot(root: str) -> dict:
@@ -398,7 +485,7 @@ def run(goal: str, root: str, binary_limit: int = 0,
     # reads the grounded evidence and says what it means; the harness
     # guarantees the evidence is real. That is the division throughout:
     # perception is grounded, judgement sits on top of it.
-    if _is_question(goal):
+    if _is_question(goal, root):
         try:
             import inspect_v1 as IN
         except ImportError:
@@ -420,14 +507,13 @@ def run(goal: str, root: str, binary_limit: int = 0,
                 # project exists to not do. `answered` is the question-level claim and
                 # `all_grounded` stays the evidence-level one.
                 "verified": bool(result.get("answered", result["all_grounded"])),
-                "reason": ("ANSWER_GROUNDED" if result.get("answered", result["all_grounded"])
-                           else ("UNVERIFIABLE_ANSWER"
-                                 if result["verdict"] == "UNVERIFIABLE"
-                                 else ("LOCATED_BUT_NOT_ANSWERED"
-                                       if result["verdict"] == "LOCATED_NOT_COMPUTED"
-                                       else ("SUBJECT_ABSENT_FROM_NAMED_FILE"
-                                             if result["verdict"] == "NOT_IN_NAMED_FILE"
-                                             else "ANSWER_NOT_GROUNDED")))),
+                "reason": _reason(result),
+                # The words that matched nothing travel with the verdict. A reason
+                # string that says "not grounded" without saying WHICH terms were
+                # unaccounted for makes the reader re-derive what the door already
+                # knows, and lets the specific fact ("profit" is not in data.py)
+                # collapse into a generic one.
+                "unresolved": list(result.get("unresolved_terms") or []),
                 "grounded": result["grounded"],
                 "total": result["total"],
                 "unverifiable": result["unverifiable"],
