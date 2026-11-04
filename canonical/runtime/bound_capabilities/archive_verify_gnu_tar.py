@@ -35,7 +35,25 @@ def _manifest_paths(manifest):
         if not isinstance(rec,dict):
             raise RuntimeError("MANIFEST_RECORDS_REQUIRED")
         for p in rec.get("verification_paths") or []:
-            if isinstance(p,str) and p.startswith("canonical/") and p not in out:
+            # A manifest lists repository-relative paths. This used to require the
+            # "canonical/" prefix and SILENTLY DROP everything else, so a manifest naming
+            # ordinary files produced a bundle containing only the manifest itself -- and the
+            # adapter still reported output_verified: true.
+            #
+            #     asked for ['notes.txt', 'report.md'] -> archive ['m.json'], verified=True
+            #
+            # Found 2026-11-04 by canonical/tools/executed_effect_oracle_v1.py, which asks the
+            # artifact rather than the adapter. No test in the tree caught it because every
+            # test passes canonical/-prefixed paths.
+            #
+            # Paths that could escape the repository are still excluded here; _safe() would
+            # reject them at archive time anyway, and a listed file that does not exist raises
+            # ARCHIVE_MEMBER_SOURCE_MISSING rather than being skipped.
+            if not isinstance(p,str) or not p.strip():
+                continue
+            if p.startswith("/") or ".." in pathlib.PurePosixPath(p).parts:
+                continue
+            if p not in out:
                 out.append(p)
     return out
 

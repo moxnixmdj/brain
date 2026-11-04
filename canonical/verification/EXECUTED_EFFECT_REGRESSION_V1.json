@@ -1,0 +1,67 @@
+{
+ "changed": 1,
+ "note": "the repair was authored by the agent; the DETECTION and the verdict came from the oracle reading the artifact",
+ "rev": "ec230a32e4",
+ "rows": [
+  {
+   "after": "EFFECT_HELD",
+   "after_artifact": [
+    "canonical/a.txt",
+    "canonical/b.txt",
+    "m.json"
+   ],
+   "at": "ec230a32",
+   "before": "EFFECT_HELD",
+   "before_artifact": [
+    "canonical/a.txt",
+    "canonical/b.txt",
+    "m.json"
+   ],
+   "capability": "archive.tar_gz.create_from_manifest",
+   "changed": false,
+   "situation": "archive_of_prefixed_paths"
+  },
+  {
+   "after": "EFFECT_HELD",
+   "after_artifact": [
+    "m.json",
+    "notes.txt",
+    "report.md"
+   ],
+   "at": "ec230a32",
+   "before": "INPUTS_IGNORED_SILENTLY",
+   "before_artifact": [
+    "m.json"
+   ],
+   "capability": "archive.tar_gz.create_from_manifest",
+   "changed": true,
+   "situation": "archive_of_plain_repository_files"
+  },
+  {
+   "after": "REFUSED_AS_DECLARED",
+   "after_artifact": [],
+   "at": "ec230a32",
+   "before": "REFUSED_AS_DECLARED",
+   "before_artifact": [],
+   "capability": "archive.tar_gz.create_from_manifest",
+   "changed": false,
+   "situation": "archive_of_a_path_that_does_not_exist"
+  },
+  {
+   "after": "EFFECT_HELD",
+   "after_artifact": [
+    "canonical/a.txt",
+    "m.json"
+   ],
+   "at": "ec230a32",
+   "before": "EFFECT_HELD",
+   "before_artifact": [
+    "canonical/a.txt",
+    "m.json"
+   ],
+   "capability": "archive.verify.tar_gz.gnu",
+   "changed": false,
+   "situation": "verify_an_archive_that_was_just_created"
+  }
+ ]
+}

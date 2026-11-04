@@ -798,3 +798,94 @@ prediction about *executed actions* (does the declared effect hold when the capa
 runs?), where refusal costs something and the oracle is the result, not the declaration.
 
 No capability credit. A model of oneself is not capability.
+
+---
+
+## Execution log 10 — the oracle leaves the book (2026-11-04)
+
+Log 9 ended with the diagnosis that every previous layer judged the system by a book the system
+holds. A closed book never says no.
+
+`canonical/tools/executed_effect_oracle_v1.py` opens it. It takes a capability the registry ships,
+builds a world around it, lets it **run**, and asks the only question whose answer the system does
+not control:
+
+> did the artifact do what this capability's own declaration promised?
+
+The declaration is `action_template.expect` plus the recomputable part of
+`verification.observed_effect` — a *prediction* written down in advance. The verdict never reads
+it as evidence; it reads the filesystem.
+
+### The first defect found by execution, in two years of a passing suite
+
+`archive.tar_gz.create_from_manifest` archives the paths a manifest lists and reports
+`output_verified: true`. Given ordinary repository files:
+
+```
+asked for : ['notes.txt', 'report.md']
+archive   : ['m.json']                        <- only the manifest itself
+reported  : output_verified = True, member_count = 1
+```
+
+`_manifest_paths` silently dropped every path that did not start with `canonical/`, then reported
+success over a bundle containing nothing the caller asked for. **No test in the tree caught it
+because every test passes `canonical/`-prefixed paths.**
+
+Same defect in `archive_verify_gnu_tar.py`, same filter.
+
+### Reproducible before/after, not a memory of one
+
+`--regress <rev>` replays every situation against the adapter source at that commit and against
+the tree, and recomputes both verdicts. On `ec230a32e4`:
+
+| situation | before | after |
+|---|---|---|
+| `archive_of_plain_repository_files` | **INPUTS_IGNORED_SILENTLY**, artifact `['m.json']` | **EFFECT_HELD**, artifact `['m.json','notes.txt','report.md']` |
+| `archive_of_prefixed_paths` | EFFECT_HELD | EFFECT_HELD |
+| `archive_of_a_path_that_does_not_exist` | REFUSED_AS_DECLARED | REFUSED_AS_DECLARED |
+| `verify_an_archive_that_was_just_created` | EFFECT_HELD | EFFECT_HELD |
+
+**One verdict changed.** Regression check on the archive, compiler, capability-type and unified-
+model suites: **the same 4 failures before and after** — all pre-existing, none caused by the fix.
+
+Credit where it is due and nowhere else: **the detection and the verdict came from the oracle
+reading the artifact. The repair was authored by the agent.** A test pins that sentence in the
+artifact so it cannot drift into a claim the system earned it.
+
+### Two verdicts that will never be merged
+
+```
+REFUSED_AS_DECLARED      ARCHIVE_MEMBER_SOURCE_MISSING:canonical/absent.txt
+                         The system saying no to a world that does not fit its contract.
+                         A good outcome, not a failure to be scored against.
+INPUTS_IGNORED_SILENTLY  success claimed over an artifact missing what was asked for.
+                         The only verdict here that is a lie about the world.
+```
+
+### Learning that changes behaviour
+
+A contradiction demotes the capability: `distrust` is persisted, and from then on the system may
+not accept that capability's `expect` field as evidence — it must recompute. Restoring the word
+takes **two** independent confirmations, not one, because a single pass can be the same input that
+already failed. Mutation-checked: restoring after one pass fails a test.
+
+### The honest denominator
+
+**2 of 141 capabilities could be situated.** 139 could not: no fixture builder exists, and several
+need libraries this sandbox does not have (`tree_sitter`, `docx`, `PIL`) or live network and
+credentials. The oracle says so in its own output rather than reporting 141.
+
+And what it cannot see, stated in every run: it checks that the artifact reflects the supplied
+inputs. A bundle with the right files in the wrong order passes. That is `INDEPENDENT_CHECK_KIND`,
+recorded per verdict so nobody has to guess what was established.
+
+### What this does and does not change
+
+It changes one thing that nine logs could not: **the system now has a source of truth it cannot
+edit.** That is the precondition for a creature — not its existence. Two situated capabilities is
+not a life; it is the first breath, and the honest count is two.
+
+The next widening is the fixture surface: 139 capabilities with no world built for them. Every one
+built is a place the system can be wrong in a way it cannot talk its way out of.
+
+No capability credit.

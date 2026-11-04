@@ -1,0 +1,162 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_EXECUTION_MEASUREMENT_ONLY",
+ "corpus": {
+  "cannot_situate": 139,
+  "capabilities_in_registry": 141,
+  "situated_capabilities": 2,
+  "situations_built": 4,
+  "why_not": "no fixture builder exists for them in this sandbox; several need third-party libraries that are not installed (tree_sitter, docx, PIL) and several need live network or credentials"
+ },
+ "independent_check_kind": "ARTIFACT_REFLECTS_SUPPLIED_INPUTS",
+ "instrument": "DECLARATION_IS_A_PREDICTION_THE_ARTIFACT_IS_THE_VERDICT",
+ "learning": {
+  "behaviour_this_changes": "for a demoted capability the system no longer accepts its `expect` field as evidence and requires the independent recomputation",
+  "capabilities_demoted_now": [],
+  "capabilities_distrusted_total": [],
+  "consequences": [],
+  "executions_recorded": 4,
+  "restore_rule": "2 independent confirmations"
+ },
+ "non_claims": [
+  "NO_CAPABILITY_CREDIT_RUNNING_ONE_CAPABILITY_IS_NOT_CAPABILITY",
+  "A_REFUSAL_IS_A_GOOD_OUTCOME_AND_IS_NOT_SCORED_AS_A_FAILURE",
+  "THIS_ORACLE_CHECKS_INPUT_FIDELITY_NOT_SEMANTIC_CORRECTNESS"
+ ],
+ "rows": [
+  {
+   "artifacts": [
+    "bundle.tar.gz"
+   ],
+   "capability": "archive.tar_gz.create_from_manifest",
+   "elapsed_s": 0.002,
+   "independent_check": {
+    "artifact_sha256": "e315c9f2cf37bea27544efdf1c206909d02922a195baf005401bfec1b5ec0dc4",
+    "kind": "ARTIFACT_REFLECTS_SUPPLIED_INPUTS",
+    "members": [
+     "canonical/a.txt",
+     "canonical/b.txt",
+     "m.json"
+    ],
+    "missing": [],
+    "present": [
+     "canonical/a.txt",
+     "canonical/b.txt"
+    ],
+    "reflected": true,
+    "supplied": [
+     "canonical/a.txt",
+     "canonical/b.txt"
+    ]
+   },
+   "refusal": null,
+   "self_report": {
+    "member_count": 3,
+    "output_verified": true
+   },
+   "situation": "archive_of_prefixed_paths",
+   "supplied": [
+    "canonical/a.txt",
+    "canonical/b.txt"
+   ],
+   "verdict": "EFFECT_HELD"
+  },
+  {
+   "artifacts": [
+    "bundle.tar.gz"
+   ],
+   "capability": "archive.tar_gz.create_from_manifest",
+   "elapsed_s": 0.001,
+   "independent_check": {
+    "artifact_sha256": "8f6457488edc983b91e4d175a96e617736327ca61205ea29ea424659083dcc91",
+    "kind": "ARTIFACT_REFLECTS_SUPPLIED_INPUTS",
+    "members": [
+     "m.json",
+     "notes.txt",
+     "report.md"
+    ],
+    "missing": [],
+    "present": [
+     "notes.txt",
+     "report.md"
+    ],
+    "reflected": true,
+    "supplied": [
+     "notes.txt",
+     "report.md"
+    ]
+   },
+   "refusal": null,
+   "self_report": {
+    "member_count": 3,
+    "output_verified": true
+   },
+   "situation": "archive_of_plain_repository_files",
+   "supplied": [
+    "notes.txt",
+    "report.md"
+   ],
+   "verdict": "EFFECT_HELD"
+  },
+  {
+   "artifacts": [],
+   "capability": "archive.tar_gz.create_from_manifest",
+   "elapsed_s": 0.0,
+   "independent_check": {
+    "artifact_sha256": null,
+    "kind": "ARTIFACT_REFLECTS_SUPPLIED_INPUTS",
+    "members": [],
+    "reflected": null
+   },
+   "refusal": "RuntimeError:ARCHIVE_MEMBER_SOURCE_MISSING:canonical/absent.txt",
+   "self_report": null,
+   "situation": "archive_of_a_path_that_does_not_exist",
+   "supplied": [
+    "canonical/absent.txt"
+   ],
+   "verdict": "REFUSED_AS_DECLARED"
+  },
+  {
+   "artifacts": [
+    "bundle.tar.gz"
+   ],
+   "capability": "archive.verify.tar_gz.gnu",
+   "elapsed_s": 0.005,
+   "independent_check": {
+    "artifact_sha256": "b8fe838827f3a19bdfb9babc201d5c30d0956d081ca1eb55c6490055187ee7a8",
+    "kind": "ARTIFACT_REFLECTS_SUPPLIED_INPUTS",
+    "members": [
+     "canonical/a.txt",
+     "m.json"
+    ],
+    "missing": [],
+    "present": [
+     "canonical/a.txt"
+    ],
+    "reflected": true,
+    "supplied": [
+     "canonical/a.txt"
+    ]
+   },
+   "refusal": null,
+   "self_report": {
+    "member_count": 2,
+    "verified": true
+   },
+   "situation": "verify_an_archive_that_was_just_created",
+   "supplied": [
+    "canonical/a.txt"
+   ],
+   "verdict": "EFFECT_HELD"
+  }
+ ],
+ "schema": "PROJECT_BRAIN_EXECUTED_EFFECT_ORACLE_V1",
+ "verdicts": {
+  "EFFECT_HELD": 3,
+  "REFUSED_AS_DECLARED": 1
+ },
+ "what_this_cannot_see": [
+  "semantic correctness: a bundle with the right files in the wrong order passes",
+  "effects that are not reflected in a file on disk",
+  "capabilities with no fixture builder here"
+ ]
+}
