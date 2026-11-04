@@ -495,6 +495,10 @@ class AwakeAgencyDaemon:
         )
         # Interpretations live beside habits, and for the same reason: a creature that keeps its
         # memories keeps its understanding, and one given a fresh store starts genuinely naive.
+        self.notions_path = (
+            (_store_p.parent / "notions.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_notions_{ws_hash}.json")
+        )
         self.competence_path = (
             (_store_p.parent / "tool_competence.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_competence_{ws_hash}.json")
@@ -682,6 +686,69 @@ class AwakeAgencyDaemon:
         except Exception:
             pass
 
+    def _author_tests_from_notions(self, src_files: Sequence[pathlib.Path]) -> list[pathlib.Path]:
+        """Derive falsifiable expectations from the modules themselves and write them as tests.
+
+        This is the only producer of work in this file that does not begin with a failing assertion
+        somebody else wrote. It is deliberately narrow: a notion that cannot be stated as a concrete
+        assertion is dropped rather than guessed at, a module that already has a real test file is left
+        alone (an authored test outranks an invented one), and every notion's fire is recorded so one
+        that fires on everything can be seen to be worthless.
+        """
+        try:
+            from canonical.swe_kernel.notions_v1 import live_notions, notions_for_source
+        except Exception:  # noqa: BLE001
+            return []
+        store = live_notions(self.notions_path)
+        authored: list[pathlib.Path] = []
+        for mod in list(src_files)[:12]:
+            if mod.name.startswith("test_") or mod.name == "__init__.py":
+                continue
+            try:
+                src = mod.read_text(encoding="utf-8")
+            except OSError:
+                continue
+            found = notions_for_source(src, mod.stem)
+            if not found:
+                continue
+            results = [n.evaluate() for n in found]
+            store.record(results)
+            try:
+                names = {f.name for f in ast.parse(src).body if isinstance(f, ast.FunctionDef)}
+            except SyntaxError:
+                continue
+            lines: list[str] = []
+            for n, r in zip(found, results):
+                if not r["fired"] or r.get("declined"):
+                    continue
+                # A notion that has fired on everything it has ever seen is not a reason to edit the
+                # code; it is a sign that the expectation does not describe this program. Skipping it
+                # here is what keeps noise off the board, where it would otherwise be written into a
+                # test file and veto every repair of the module -- MEASURED 2026-11-05: the perimeter
+                # identity did exactly that to a correct `return w * h` fix.
+                if store.is_noise(n):
+                    continue
+                expr = self._notion_to_assertion(n, names)
+                if expr is None:
+                    continue
+                lines += [f"def test_notion_{len(lines) // 4}():",
+                          f"    # notion [{n.kind}] {n.claim[:110]}", f"    assert {expr}", ""]
+            if not lines:
+                continue
+            target = self.workspace_root / "tests" / f"test_{mod.stem}.py"
+            if target.exists():
+                continue
+            # Import the MODULE the notion is about, by its real dotted path. MEASURED 2026-11-05:
+            # writing `from pkg import *` against an empty `__init__.py` meant every notion died as a
+            # NameError before it reached an assertion -- the test file looked authored and measured
+            # nothing, and the repair engine had no disagreement to interpret.
+            dotted = ".".join(mod.relative_to(self.workspace_root).with_suffix("").parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f"from {dotted} import *  # noqa: F401,F403\n\n" + "\n".join(lines),
+                              encoding="utf-8")
+            authored.append(target)
+        return authored
+
     def _fast_file_sha256(self, fp: pathlib.Path) -> str:
         import hashlib
 
@@ -744,6 +811,25 @@ class AwakeAgencyDaemon:
         test_files.sort()
         poly_tests.sort()
         src_files.sort()
+        if not test_files and not poly_tests:
+            # NOBODY WROTE A TEST. Measured 2026-11-05 (S29): handed `rect_area(w, h)` returning
+            # `w + h`, a correct sibling, and a placeholder test, the creature took zero actions -- and
+            # with no test file at all, this sensor returned `[]` before it ever looked at the code.
+            # The sensor was not failing to find work; it was incapable of conceiving of any. Every
+            # other organ downstream acts on a failing assertion someone else wrote.
+            #
+            # So the creature supplies its own doubt. Notions are derived from the program's own
+            # structure (a degenerate input where two functions must agree, a symmetry that must hold),
+            # each is falsifiable by construction, and a fired notion becomes a test file the creature
+            # writes and names after the module it indicts -- which is what makes the existing repair
+            # path reachable, since it maps `test_<stem>.py` to `<stem>.py`.
+            #
+            # A scope was requested: invent nothing outside it.
+            if within is None:
+                authored = self._author_tests_from_notions(src_files)
+                if authored:
+                    test_files = [p for p in authored if p.suffix == ".py" and p.name.startswith("test_")]
+                    poly_tests = [p for p in authored if _is_polyglot_test_filename(p.name)]
         if not test_files and not poly_tests:
             return []
 
@@ -881,6 +967,32 @@ class AwakeAgencyDaemon:
             "stale_rules": stale_rules,
             "newly_noted_gap_ids": noted_gaps,
         }
+
+    @staticmethod
+    def _notion_to_assertion(n, names: set[str]) -> str | None:
+        """Express a fired notion as an assertion, using only what the notion itself names.
+
+        MEASURED 2026-11-05: this parsed the subject with a regex matching the literal string `(x, x)`.
+        When the subject changed to `(equal args)` so the notion could cover any arity, the regex
+        stopped matching, returned None, and EVERY notion was silently dropped -- the creature wrote no
+        test, and the result was indistinguishable from having no notion machinery at all. That is the
+        fourth silent no-op in this series, so the rule now is: the assertion is built from the same
+        pair of names and the same arity the notion was constructed with, not from its prose.
+        """
+        import re as _re
+
+        m = _re.match(r"(\w+) vs (\w+)\(", str(getattr(n, "subject", "")))
+        if not m or m.group(1) not in names or m.group(2) not in names:
+            return None
+        a, b = m.group(1), m.group(2)
+        kind = str(getattr(n, "kind", ""))
+        arity = int(getattr(n, "arity", 0) or 0)
+        if kind == "IDENTITY" and arity:
+            return f"{a}(3) == {b}({', '.join(['3'] * arity)})"
+        if kind == "SYMMETRY" and arity:
+            args = ", ".join("2" if i % 2 == 0 else "3" for i in range(arity))
+            return f"{a}({args}) + {b}({args}) == {b}({args}) + {a}({args})"
+        return None
 
     def _repair_multifile_python_confined(
         self,
@@ -1026,7 +1138,55 @@ class AwakeAgencyDaemon:
                 and _is_polyglot_test_filename(p.name)
             )[:8]
         if not test_files and not poly_test_files:
-            return {"tested": 0, "failures_found": 0, "repaired": 0, "crystallized_skills": []}
+            # NOTHING OWES A TEST. Measured 2026-11-05: handed a module with `rect_area(w, h)` returning
+            # `w + h` and a placeholder test asserting nothing, six cycles produced no action -- every
+            # organ in this file acts on a failing assertion somebody else wrote. So the creature looks
+            # for its own reasons to act: notions derived from the program's own structure, each one a
+            # falsifiable expectation, turned into a test it writes itself and names after the module it
+            # indicts. This is the only path here that does not begin with work handed to it.
+            from canonical.swe_kernel.notions_v1 import notions_for_source, live_notions
+
+            _notions = live_notions(self.notions_path)
+            _authored: list[str] = []
+            for _mod in sorted(p for p in self.workspace_root.glob("**/*.py")
+                               if "__pycache__" not in p.parts and ".git" not in p.parts)[:12]:
+                try:
+                    _src = _mod.read_text(encoding="utf-8")
+                except OSError:
+                    continue
+                _found = notions_for_source(_src, _mod.stem)
+                if not _found:
+                    continue
+                _results = [n.evaluate() for n in _found]
+                _notions.record(_results)
+                _fired = [n for n, r in zip(_found, _results) if r["fired"]]
+                if not _fired:
+                    continue
+                # Only notions that name the module's own functions can become a test of that module.
+                _names = {f.name for f in ast.parse(_src).body if isinstance(f, ast.FunctionDef)}
+                _lines = ["from pkg import *  # noqa", ""]
+                _usable = 0
+                for _n in _fired:
+                    _expr = self._notion_to_assertion(_n, _names)
+                    if _expr is None:
+                        continue
+                    _lines.append(f"def test_notion_{_usable}():")
+                    _lines.append(f"    # notion [{_n.kind}] {_n.claim[:110]}")
+                    _lines.append(f"    assert {_expr}")
+                    _lines.append("")
+                    _usable += 1
+                if not _usable:
+                    continue
+                _tf = self.workspace_root / "tests" / f"test_{_mod.stem}.py"
+                if _tf.exists():
+                    continue  # a real test file outranks an invented one, always
+                _tf.parent.mkdir(parents=True, exist_ok=True)
+                _tf.write_text("\n".join(_lines), encoding="utf-8")
+                _authored.append(str(_tf.relative_to(self.workspace_root)))
+                test_files.append(_tf)
+            if not test_files and not poly_test_files:
+                return {"tested": 0, "failures_found": 0, "repaired": 0,
+                        "crystallized_skills": [], "notions_authored_tests": 0}
 
         repaired_records: list[dict[str, Any]] = []
         _staged: dict[str, str] = {}

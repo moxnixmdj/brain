@@ -2220,6 +2220,33 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
             args = tuple(_ast.literal_eval(a) for a in call.args)
             expected = _ast.literal_eval(expected_node)
         except Exception:
+            # MEASURED 2026-11-05: a CALL-versus-CALL assertion (`f(x) == g(x)`) was skipped entirely,
+            # so every property-style test -- including any test a notion could generate, since a notion
+            # is a relation between two things in the program -- produced NO_LITERAL_CALL_TO_PERTURB and
+            # the repair was discarded as if it had been refuted. The owed value can be computed from
+            # the other side of the comparison when that side is a literal-argument call; what matters
+            # is that the expected value is independently determinable, not that it is typed as a
+            # literal in the source.
+            if not isinstance(expected_node, _ast.Call) or expected_node.keywords:
+                continue
+            try:
+                other_args = tuple(_ast.literal_eval(a) for a in expected_node.args)
+            except Exception:
+                continue
+            # Do NOT require the two calls to take the same arguments. MEASURED 2026-11-05: a notion
+            # like "a square is a rectangle with equal sides" is exactly `square_area(3) ==
+            # rect_area(3, 3)` -- one argument against two -- and requiring equal argument tuples
+            # rejected the whole class of degenerate-case identities this probe most needs to support.
+            if not other_args:
+                continue
+            other_src = _ast.get_source_segment(txt, expected_node.func)
+            call_src0 = _ast.get_source_segment(txt, call)
+            func_src0 = _ast.get_source_segment(txt, call.func)
+            if not other_src or not call_src0 or not func_src0:
+                continue
+            # Keep the pair, marked as call-vs-call so the probe can compute the owed value at run time.
+            cases.append((call_src0, func_src0, args, op,
+                          ("__CALLPAIR__", other_src, tuple(other_args))))
             continue
         if not args:
             continue
@@ -2232,6 +2259,13 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
         return {"generalizes": False, "reason": "NO_LITERAL_CALL_TO_PERTURB"}
 
     call_src, func_src, args, op, expected = cases[0]
+    _pair_other: str | None = None
+    if isinstance(expected, tuple) and expected and expected[0] == "__CALLPAIR__":
+        # Call-vs-call: the owed value is whatever the OTHER call returns for the same arguments, so it
+        # is computed here from the repaired namespace rather than read from the source. This keeps the
+        # probe's guarantee -- the expected value cannot be fitted to the candidate -- because the other
+        # function is part of the program under study, not part of the candidate.
+        _pair_other, _pair_other_args, expected = expected[1], expected[2], None
 
     # Namespace = the test's own imports, resolved inside the workspace. Scanning the whole tree is
     # how this once took minutes on a real repository; a probe too slow to run says no by default.
@@ -2264,6 +2298,17 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
         # Rebuild from the recorded callee, so `C()`, `ops['add']`, `make()` and a bare name are all
         # the same thing to the probe: an expression to execute against the repaired code.
         return eval(f"{func_src}({', '.join(repr(v) for v in values)})", ns)  # noqa: S307
+
+    if _pair_other is not None:
+        try:
+            # Each side is evaluated with ITS OWN arguments. The first attempt passed the left call's
+            # arguments to the right function, which for `square_area(3) == rect_area(3, 3)` meant
+            # `rect_area(3)` and a TypeError that refused a correct repair for the wrong reason.
+            expected = eval(
+                f"{_pair_other}({', '.join(repr(v) for v in _pair_other_args)})", ns  # noqa: S307
+            )
+        except Exception as exc:  # noqa: BLE001
+            return {"generalizes": False, "reason": f"CALLPAIR_OTHER_RAISES: {type(exc).__name__}"}
 
     args_a = tuple(_perturb(a, i, 0) for i, a in enumerate(args))
     args_b = tuple(_perturb(a, i, 1) for i, a in enumerate(args_a))

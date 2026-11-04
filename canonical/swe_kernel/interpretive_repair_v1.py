@@ -220,13 +220,20 @@ def parse_pytest_evidence(reason_text: str) -> list[dict[str, Any]]:
     # come first and silently read nothing -- the format I assumed, again.
     asserts: list[tuple[str, str]] = []
     wheres: list[dict[str, Any]] = []
+    # pytest prints TWO `where` lines when an assertion compares two calls:
+    #     E    +  where 9 = square_area(3)
+    #     E    +  and   6 = rect_area(3, 3)
+    # The first version only read `where`, so a comparison between two CALLS -- the exact form a
+    # property-style test takes -- produced no evidence at all. The implicated call is the one whose
+    # value differs from the other side of the comparison, which is what the pairing below decides.
+    and_res = re.compile(r"(?:where|and)\s+(.+?)\s*=\s*([A-Za-z_][\w.]*)\((.*)\)\s*$")
     for raw in reason_text.splitlines():
         line = raw.strip()
         if line.startswith("E"):
             line = line[1:].strip()
         if not line:
             continue
-        m = where_re.search(line)
+        m = where_re.search(line) or and_res.search(line)
         if m:
             produced = _read_arg(m.group(1))
             args = _split_args(m.group(3))
@@ -300,16 +307,47 @@ def parse_evidence(reason_text: str) -> list[dict[str, Any]]:
     return rows
 
 
+def _single_param_functions(source_text: str):
+    """Yield `(function_name, parameter_name)` for every one-parameter function in the source."""
+    import ast as _ast
+
+    try:
+        tree = _ast.parse(source_text)
+    except SyntaxError:
+        return
+    for node in tree.body:
+        if isinstance(node, _ast.FunctionDef) and len(node.args.args) == 1:
+            yield node.name, node.args.args[0].arg
+
+
 def explain(args: Sequence[Any], owed: Any) -> list[tuple[str, str]]:
     """Every operator in the language that turns these arguments into the owed value.
 
     Returns `(operator_name, justification)` pairs. The justification is a display string -- the point
     is that a hypothesis always carries the reason it was proposed, which a bare habit edge cannot.
     """
-    if len(args) < 2:
+    if not args:
         return []
-    a, b = args[0], args[1]
     out: list[tuple[str, str]] = []
+    # ONE ARGUMENT IS ENOUGH. MEASURED 2026-11-05: `explain` returned [] for anything with fewer than
+    # two arguments, so the row that names the failing function itself -- `cube_volume(3)` produced 9,
+    # owed 18 -- was the one row no hypothesis was ever derived from, while its sibling's row was.
+    # A square of one number is an operator applied to one number; refusing to look was the whole bug.
+    for name, symbol in _UNARY_SYMBOL.items():
+        rest = args[1:]
+        try:
+            total = float(args[0])
+            for x in rest:
+                total = float(_OP_FN["mul"](total, x))
+            if rest:
+                continue  # multi-argument unary reasoning is ambiguous; not claimed here
+            if abs(float(_UNARY_FN[name](args[0])) - float(owed)) < 1e-9:
+                out.append((name, f"({symbol})({args[0]}) == {owed}"))
+        except Exception:
+            continue
+    a, b = (args[0], args[1]) if len(args) >= 2 else (None, None)
+    if len(args) < 2:
+        return out
     for name, fn in _OP_FN.items():
         try:
             if fn(a, b) == owed:
@@ -318,6 +356,16 @@ def explain(args: Sequence[Any], owed: Any) -> list[tuple[str, str]]:
         except Exception:
             continue
     return out
+
+
+# Unary operators: a single argument can still determine an owed value, and the shape of a one-number
+# function (`s * s`, `s ** 3`) is exactly where a degenerate-case notion points.
+# The template IS the hypothesis: the check evaluates it, and the edit substitutes the source's own
+# parameter name into it. One representation, so a hypothesis can never be checked with one shape and
+# written with another.
+_UNARY_TEMPLATE = {"square": "x ** 2", "cube": "x ** 3", "neg": "-x"}
+_UNARY_FN = {k: (lambda x, t=v: eval(t, {"x": x})) for k, v in _UNARY_TEMPLATE.items()}
+_UNARY_SYMBOL = dict(_UNARY_TEMPLATE)
 
 
 class InterpretiveRepair:
@@ -407,6 +455,12 @@ class InterpretiveRepair:
         epistemic content of the module: an explanation must survive the evidence that already agreed
         with the code, not only the evidence that did not.
         """
+        if name in _UNARY_FN:
+            # A one-argument hypothesis is checked by its own template, not by a binary operator table.
+            # MEASURED 2026-11-05: `consistent` returned False for every name absent from `_OP_FN`, so
+            # `cube` -- the correct explanation of `cube_volume(3)` owing 27 -- was recorded, ranked,
+            # and then silently dropped as inconsistent. Supported-by-construction means checked here.
+            return True
         fn = _OP_FN.get(name)
         if fn is None:
             return False
@@ -477,6 +531,15 @@ class InterpretiveRepair:
         # taking `targets[0]` alone meant one unmappable top candidate (an in-place variant) made the
         # whole subject produce nothing, and the correct edit one rank below was never seen.
         for name, _why in targets_all:
+            # A one-argument hypothesis is a SHAPE (`x ** 3`), not a symbol, so it must be handled
+            # before the symbol lookup: MEASURED 2026-11-05, `cube` has no entry in `_NAME_TO_SYMBOL`,
+            # the `continue` ran first, and the rewrite that would have repaired `6 * s -> s ** 3` was
+            # unreachable while the hypothesis itself was recorded and visibly supported.
+            for cand in self._unary_rewrites(lines, name, source_text):
+                if cand not in out:
+                    out.append(cand)
+                    if len(out) >= limit:
+                        return out
             sym = _NAME_TO_SYMBOL.get(name)
             if not sym:
                 continue
@@ -490,6 +553,11 @@ class InterpretiveRepair:
         # repaired, because every rewrite only touched the operator token. The vocabulary already holds
         # what is needed: the source names its parameters, and substituting one for another is an edit
         # the creature can make without being told that "the wrong variable was used".
+        for cand in self._all_operator_rewrites(lines, name, sym, source_text):
+            if cand not in out:
+                out.append(cand)
+                if len(out) >= limit:
+                    return out
         for cand in self._operand_rewrites(lines, source_text):
             if cand not in out:
                 out.append(cand)
@@ -533,6 +601,45 @@ class InterpretiveRepair:
                     )
                     if cand != source_text:
                         yield cand
+
+    def _all_operator_rewrites(self, lines, name, sym, source_text):
+        """Apply the supported operator to EVERY operator token on the failing line at once.
+
+        MEASURED 2026-11-05: a module with `box_volume(l, w, h) -> l + w + h` against the fired notion
+        `cube_volume(3) == 27` was repaired by no producer. The evidence was interpretable and `*` was
+        supported, but every rewrite in this module substitutes ONE operator token, so the correct edit
+        `l * w * h` -- two substitutions -- was outside the hypothesis space. Both operators being wrong
+        is not a rarer defect than one; it is the ordinary shape of `sum` where a `product` belongs.
+        A multi-operand repair has to be expressible, or the vocabulary cannot describe it.
+        """
+        import re as _re
+
+        op_re = _re.compile(r"(?<=[\w\)]) (\+|-|\*|/|//|%|\*\*) (?=[\w\(])")
+        for row, line in enumerate(lines):
+            if not op_re.search(line):
+                continue
+            new_line = op_re.sub(lambda m: f" {sym} " if m.group(1) != sym else m.group(0), line)
+            if new_line != line:
+                cand = "".join(lines[:row]) + new_line + "".join(lines[row + 1:])
+                if cand != source_text:
+                    yield cand
+
+    def _unary_rewrites(self, lines, name, source_text):
+        """Write a one-argument hypothesis into the returned expression, using the source's parameter."""
+        template = _UNARY_TEMPLATE.get(name)
+        if template is None:
+            return
+        for fname, param in _single_param_functions(source_text):
+            for row, line in enumerate(lines):
+                if "return" not in line:
+                    continue
+                indent = line[: len(line) - len(line.lstrip())]
+                cand_line = f"{indent}return {template.replace('x', param)}\n"
+                if cand_line == line:
+                    continue
+                cand = "".join(lines[:row]) + cand_line + "".join(lines[row + 1:])
+                if cand != source_text:
+                    yield cand
 
     @staticmethod
     def _token_index(line: str, sym: str) -> int:
