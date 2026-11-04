@@ -2728,10 +2728,71 @@ def _trace_action_rows(transitions: Sequence[Mapping[str, Any]]) -> list[dict[st
     return list(rows.values())
 
 
+def _snapshot_action_board(actions: Any, *, max_rows: int = 32) -> list[dict[str, Any]]:
+    """Persist the board the creature actually ranked — unlocks/requires included."""
+    if not isinstance(actions, (list, tuple)):
+        return []
+    out: list[dict[str, Any]] = []
+    for raw in actions[:max_rows]:
+        if not isinstance(raw, Mapping):
+            continue
+        aid = str(raw.get("id") or "")
+        if not aid:
+            continue
+        try:
+            value = float(raw.get("value") or 0.0)
+            cost = max(1e-9, float(raw.get("cost") or 1.0))
+        except (TypeError, ValueError):
+            continue
+        out.append(
+            {
+                "id": aid,
+                "value": value,
+                "cost": cost,
+                "unlocks": tuple(str(x) for x in (raw.get("unlocks") or ())),
+                "requires": tuple(str(x) for x in (raw.get("requires") or ())),
+            }
+        )
+    return out
+
+
+def _policy_respects_live_boards(
+    organ: ExecutableOrgan, boards: Sequence[Any]
+) -> bool:
+    """Never rank a locked action first on a board the creature actually saw."""
+    for board in list(boards)[-4:]:
+        rows = _snapshot_action_board(board)
+        if len(rows) < 2:
+            continue
+        if not any(r["unlocks"] or r["requires"] for r in rows):
+            continue
+        try:
+            ranked = organ.invoke(rows, 10.0, None)
+        except Exception:
+            return False
+        if not ranked:
+            return False
+        by_id = {r["id"]: r for r in rows}
+        top = str(ranked[0].get("id"))
+        top_row = by_id.get(top)
+        if top_row is None:
+            return False
+        if top_row["requires"]:
+            return False
+    return True
+
+
 def _policy_respects_trace_ranking(
     organ: ExecutableOrgan, transitions: Sequence[Mapping[str, Any]]
 ) -> bool:
-    """Held-out world return: among observed actions, do not rank a worse realized first."""
+    """Held-out world return: live boards if present, else among observed actions."""
+    live = [
+        tr.get("board")
+        for tr in transitions
+        if isinstance(tr.get("board"), list) and len(tr.get("board") or []) >= 2
+    ]
+    if live and not _policy_respects_live_boards(organ, live):
+        return False
     rows = _trace_action_rows(transitions)
     if len(rows) < 2:
         return True
@@ -3829,6 +3890,7 @@ class MetaCircularOrganGraph:
         self.predictor = CausalFeatureSelfPredictor()
         self.concept_library = concept_library
         self._world_transitions: list[dict[str, Any]] = []
+        self._live_policy_boards: list[list[dict[str, Any]]] = []
         self.bootstrap_inductions: int = 0
         #: When the grammar cannot express the answer, should the graph spend oracle questions to
         #: induce the missing operator? A refusal that cannot teach is only half a repair, and
@@ -3850,9 +3912,29 @@ class MetaCircularOrganGraph:
         if self.state_path is not None and self.state_path.is_file():
             self._load()
 
+    def _tap_policy_invoke(self, organ: ExecutableOrgan) -> None:
+        """Remember the board a POLICY organ ranked. Perception that is thrown away cannot teach."""
+        if organ.stratum != POLICY or getattr(organ, "_board_tap", False):
+            return
+        graph = self
+        orig = organ.invoke
+
+        def _tapped(*args: Any, **kwargs: Any) -> Any:
+            if args:
+                snap = _snapshot_action_board(args[0])
+                if snap and any(r["unlocks"] or r["requires"] for r in snap):
+                    graph._live_policy_boards.append(snap)
+                    if len(graph._live_policy_boards) > 8:
+                        del graph._live_policy_boards[:-8]
+            return orig(*args, **kwargs)
+
+        organ.invoke = _tapped  # type: ignore[method-assign]
+        organ._board_tap = True  # type: ignore[attr-defined]
+
     def register_organ(self, organ: ExecutableOrgan) -> dict[str, Any]:
         """Admit or Pareto-update an organ in `P_t`."""
         organ.ensure_compiled()
+        self._tap_policy_invoke(organ)
         self.organs[organ.organ_id] = organ
         sig_key = (organ.stratum, organ.task_signature)
         cur_id = self.primary_by_sig.get(sig_key)
@@ -3907,6 +3989,8 @@ class MetaCircularOrganGraph:
         }
         if value is not None:
             row["value"] = float(value)
+        if self._live_policy_boards:
+            row["board"] = self._live_policy_boards[-1]
         self._world_transitions.append(row)
         if len(self._world_transitions) < 2 or len(self._world_transitions) % 2 != 0:
             return
@@ -4721,6 +4805,7 @@ class MetaCircularOrganGraph:
             try:
                 org = ExecutableOrgan.from_row(row)
                 org.ensure_compiled()
+                self._tap_policy_invoke(org)
                 self.organs[org.organ_id] = org
             except Exception:
                 continue
