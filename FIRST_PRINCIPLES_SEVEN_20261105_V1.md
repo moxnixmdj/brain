@@ -85,17 +85,21 @@ End-to-end shape coverage of the owed world, cold, nothing taught:
 
 ## What is still not real
 
-1. **The board does not always schedule a repair inside a short slice.** On a single
-   failing module the repair work is sometimes never dispatched, so `run_sovereign_board`
-   leaves the world unchanged while the same daemon called directly repairs it. Being
-   honest about this matters: a warm/cold comparison taken through the board can measure
-   the scheduler rather than memory.
+1. ~~**The board does not always schedule a repair inside a short slice.**~~ **RETRACTED,
+   same day, by re-measurement.** This was my own instrumentation bug: I read
+   `out["repairs"]`, a key the board never returns, and concluded nothing happened. The real
+   key is `out["run"]["steps"]`, where a repair appears as
+   `{"status": "WORKED", "work": "repair:tests/...", "accepted_into_world": ["pkg/m2.py"]}`.
+   Re-measured at slice sizes 155/240/480 and 4/6/8 cycles, the board dispatched the repair
+   every time and the file was repaired and persisted every time. **There is no scheduler
+   defect.** The lesson is about my own measuring, not the creature: a claim of the form
+   "it did not happen" is a claim about my instrument first.
 2. **The property gap is not closed.** An honest `@property` repair is refused by the probe
    because no argument can discriminate a constant from a computation. Reading the
    *assertion* (`C().v == 9`) as the evidence would close it, but that weakens a gate that
    exists to stop memorization, so it is left open and named rather than quietly relaxed.
-3. **S2 has not been shown through the board**, only through the store and the daemon,
-   because of (1).
+3. **S2 through the board is now open to measurement** — it was blocked only by (1), which
+   was retracted. S4 below is the board-level version of S2.
 4. Memory still cannot make a run faster than a cold run that *can* solve the problem — by
    construction, since it is only consulted when the cold path has already failed. Its
    value is bounded by the reach of the synthesizers, and 1/8 of the shapes measured are
@@ -105,8 +109,9 @@ End-to-end shape coverage of the owed world, cold, nothing taught:
 
 - **S4.** Take a world the synthesizers cannot reach (a `@property`, a decorator chain),
   have a teacher supply the fix once, and require the *board* — not the daemon — to repair a
-  new world of the same shape with no help. If the board cannot be made to dispatch it, that
-  is the finding, and the memory is worth exactly nothing in the live loop.
+  new world of the same shape with no help. Measure through `out["run"]["steps"]`, and
+  require the step to name `MEMORY_FALLBACK_RECALL`; a world repaired by the ordinary
+  synthesizer proves nothing about memory.
 - **S5.** Count, over many runs, how often the fallback fires at all. A fallback that fires
   never is a feature that does not exist; a fallback that fires often is a statement that
   the synthesizers are the actual ceiling.
