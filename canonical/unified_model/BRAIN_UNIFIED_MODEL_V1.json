@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d31cdfbb0cecafe5e370caa43e32b4791754c65a9eaa6cdd123310a69594e0e7"
+  "value": "69aa3c0ebb205e3fd78652962b4efcbc20918c451de4a880ad7ac34d0b85f34f"
  },
  "engines": [
   {
@@ -212675,18 +212675,18 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "e71f1020e76d9aff5e5d4f19c5ed3bc5981e30580181383b12da59817cd928b1",
+   "sha256": "ef851d93af7f3eecbdb18528df1eb3cfb78980b496ce288237b7ae985d0c15fe",
    "status": "",
    "terms": {
     "20261104": 1,
     "a_claim_nothing_could_refute_is_not_corroborated_20261104_v1": 1,
     "claim": 1,
     "corroborated": 1,
+    "derive_what_is_a_theorem_and_name_what_is_only_a_policy": 1,
     "general_reusable_problem_solving_capability_frontier": 1,
     "not": 1,
     "nothing": 1,
     "only_a_claim_the_evidence_could_have_refuted_may_become_permanent__zero_capability_credit__zero_terminal_credit__no_family_flipped__not_emergence": 1,
-    "refutability_from_evidence_alone_gates_crystallisation": 1,
     "refute": 1,
     "the_crystallizer_asked_does_it_fit_and_accepted_the_answer_it_never_asked_could_this_have_been_wrong_so_three_observations_that_exactly_determine_an_affine_fits_three_parameters_were_treated_as_corroboration_and_a_body_wrong_on_every_unseen_input_became_a_law": 1,
     "v1": 1
