@@ -2478,16 +2478,22 @@ class QualityDiversitySelfArchive:
         organ_id: str,
         score: float,
         stratum: str = "POLICY",
+        horizon_bin: str = "",
     ) -> dict[str, Any]:
-        """MAP-Elites cell for a `P_t` organ source (structurally diverse POLICY genomes)."""
+        """MAP-Elites cell for a `P_t` organ source (behavior + structure, not one `_q`)."""
         state = self._load()
         cells = state.setdefault("cells", {})
         b_desc = _compute_ast_behavioral_descriptor(source_code)
         recursive = _organ_source_is_self_recursive(source_code)
+        h_bin = str(horizon_bin or "h?")
         b_desc["recursive"] = recursive
+        b_desc["horizon_bin"] = h_bin
         rec_bin = "rec" if recursive else "flat"
         imm_bin = "imm" if "def _immediate" in source_code else "noimm"
-        cell_key = f"{stratum}::{b_desc['loop_depth_bin']}::{b_desc['index_bin']}::{rec_bin}::{imm_bin}"
+        cell_key = (
+            f"{stratum}::{b_desc['loop_depth_bin']}::{b_desc['index_bin']}"
+            f"::{rec_bin}::{imm_bin}::{h_bin}"
+        )
         qd_score = float(score)
         incumbent = cells.get(cell_key)
         replaced = incumbent is None or qd_score >= float(incumbent.get("qd_score") or 0.0)
@@ -2499,6 +2505,7 @@ class QualityDiversitySelfArchive:
                 "behavioral_descriptor": b_desc,
                 "qd_score": round(qd_score, 4),
                 "recursive": recursive,
+                "horizon_bin": h_bin,
             }
             tmp = self.archive_path.with_suffix(".tmp")
             tmp.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -2527,7 +2534,10 @@ class QualityDiversitySelfArchive:
             if not isinstance(src, str) or src in seen_src:
                 continue
             bd = rec.get("behavioral_descriptor") or {}
-            niche = f"{bd.get('loop_depth_bin')}:{bd.get('index_bin')}:{rec.get('recursive')}"
+            niche = (
+                f"{bd.get('loop_depth_bin')}:{bd.get('index_bin')}:"
+                f"{rec.get('recursive')}:{bd.get('horizon_bin') or rec.get('horizon_bin')}"
+            )
             if niche in seen_niche and len(out) >= 1:
                 continue
             seen_niche.add(niche)

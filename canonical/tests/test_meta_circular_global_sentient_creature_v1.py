@@ -455,6 +455,8 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         )
         self.assertTrue(MCOG._policy_organ_holds_ring0(flat_organ))
         self.assertTrue(MCOG.admit_policy_organ(flat_organ)["ok"])
+        self.assertEqual(MCOG._policy_horizon_bin(factory), "h2")
+        self.assertEqual(MCOG._policy_horizon_bin(flat_organ), "h1")
         scored = flat_organ.invoke(
             [
                 {"id": "shiny", "value": 12.0, "cost": 1.0},
@@ -474,12 +476,15 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                 graph.record_transition(action_id="safe", cost=1.0, failed=False, value=10.0, delta={"ok": 1.0})
             self.assertIsNotNone(graph.policy_archive)
             rec_flags = set()
+            horizons = set()
             cells = graph.policy_archive._load().get("cells") or {}
             self.assertGreaterEqual(len(cells), 2)
             for rec in cells.values():
                 if rec.get("source_code"):
                     rec_flags.add(bool(rec.get("recursive")))
+                    horizons.add(str(rec.get("horizon_bin") or ""))
             self.assertEqual(rec_flags, {True, False})
+            self.assertTrue({"h1", "h2"} <= horizons)
             elites = graph.policy_archive.elite_organ_sources(limit=4)
             self.assertGreaterEqual(len(elites), 2)
             pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
