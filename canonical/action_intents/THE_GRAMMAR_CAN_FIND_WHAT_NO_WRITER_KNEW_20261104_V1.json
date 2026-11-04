@@ -1,0 +1,437 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "THE_GRAMMAR_CAN_FIND_WHAT_NO_WRITER_KNEW_20261104_V1",
+  "action_intent_id": "THE_GRAMMAR_CAN_FIND_WHAT_NO_WRITER_KNEW_20261104_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "THE_GRAMMAR_CAN_FIND_WHAT_NO_WRITER_KNEW_20261104_V1",
+  "date": "2026-11-04",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "499f731c1be053a2dc6afce06ad0a4f1ad4908aa",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Adds a PARAMETRIC table node to the general grammar so a repeating structure is reachable by SEARCH instead of only by a writer. Measured before the change: with growth disabled the grammar returned NO_CONSISTENT_HYPOTHESIS for a period-3 block, and a registered table organ did not help because a token that hardcodes a block is a remembered answer. After: periods 2,3,4,5,7 are all found by one rule with no writer, 60/60 held-out each, 2-3 questions -- 7x cheaper than the 14 the writer path spent. x*x, x^3 and floor(x/7) still refuse. Also records a failed prediction: with three examples a longer period CANNOT be identified, because an unobserved entry makes the shorter period fit every observation; the creature must not claim it.",
+  "selected_route": "INDUCE_THE_BLOCK_NOT_THE_PARAMETER_AND_MAKE_GROWTH_REACHABLE_FROM_EVERY_DOOR",
+  "causal_blocker": "THE_PREVIOUS_ROUND_HARDCODED_THE_SHAPE_OF_THE_ANSWER_AND_ONLY_COMPUTED_A_PARAMETER_INSIDE_IT_SO_A_PERIODIC_FUNCTION_WITH_AN_ARBITRARY_BLOCK_WAS_REFUSED_WHILE_THE_ROUND_REPORTED_GENERAL_OPERATOR_GROWTH",
+  "expected_parent_change": "A_REPEATING_STRUCTURE_IS_FOUND_BY_VERSION_SPACE_SEARCH_INSTEAD_OF_EMITTED_BY_A_WRITER__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
+  "expected_parent_frontier_change": "A_REPEATING_STRUCTURE_IS_FOUND_BY_VERSION_SPACE_SEARCH_INSTEAD_OF_EMITTED_BY_A_WRITER__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PREVIOUS_ROUND_HARDCODED_THE_SHAPE_OF_THE_ANSWER_AND_ONLY_COMPUTED_A_PARAMETER_INSIDE_IT_SO_A_PERIODIC_FUNCTION_WITH_AN_ARBITRARY_BLOCK_WAS_REFUSED_WHILE_THE_ROUND_REPORTED_GENERAL_OPERATOR_GROWTH",
+  "falsification_condition": "THE_ARBITRARY_BLOCK_STILL_REFUSES__OR_A_RAMP_STOPS_WORKING__OR_A_NON_PERIODIC_FUNCTION_IS_CRYSTALLIZED_AS_A_TABLE__OR_A_DETERMINED_PROBLEM_STOPS_CRYSTALLIZING__OR_REPORTED_COST_UNDERSTATES_QUESTIONS_ASKED",
+  "stop_condition": "163_TESTS_PASS_ACROSS_NINE_SUITES__REPO_INTEGRITY_GUARD_PASSES__MODEL_ARTIFACT_VERIFIES__PRE_REGISTERED_FAILURES_KEPT_INTACT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "explicit_user_authorization": "Owner directive on 2026-11-04: 'Execute perfectly and merge all of your work' and 'You must think from the deepest layer, from first principles of everything.' $0 spend, K3=0, zero protected or SHA-pinned paths touched, no sentience claim.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+      "canonical/tests/test_the_grammar_can_find_what_no_writer_knew_v1.py",
+      "THE_GRAMMAR_CAN_NOW_FIND_WHAT_NO_WRITER_KNEW_20261104_V1.md"
+    ],
+    "route_class": "COMPOSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_THE_CREATURE_CAN_EXPRESS_REPEATING_STRUCTURE_BECAUSE_IT_INDUCES_IT__IT_COULD_ONLY_EXPRESS_WHAT_A_WRITER_WAS_WRITTEN_FOR",
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "causal_evidence": "WITH_GROWTH_DISABLED_A_PERIOD_3_BLOCK_RETURNS_NO_CONSISTENT_HYPOTHESIS__A_REGISTERED_PERIOD_3_TABLE_ORGAN_DOES_NOT_HELP_PERIOD_4__AFTER_THE_PARAMETRIC_NODE_PERIODS_2_3_4_5_7_ARE_ALL_FOUND_BY_ONE_RULE_AT_60_OF_60_HELD_OUT_WITH_2_TO_3_QUESTIONS_VERSUS_14_FOR_THE_WRITER__X_SQUARED_X_CUBED_AND_FLOOR_X_OVER_7_STILL_REFUSE"
+  },
+  "measured_effect": "ARBITRARY_PERIOD_3_BLOCK_150_OF_150_HELD_OUT_WITH_14_QUESTIONS__RAMPS_K4_TO_K44_ALL_150_OF_150__NON_PERIODIC_STRUCTURE_STILL_REFUSED__DETERMINED_PROBLEMS_UNCHANGED__ZERO_SPEND",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "prior_work_reused": [
+    "canonical/runtime/settlement_v1.py",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "499f731c1be053a2dc6afce06ad0a4f1ad4908aa",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "THE_GENERAL_GRAMMAR_REACHES_PERIOD_TABLES_WITH_NO_WRITER_ENABLED",
+    "selected_route": "COMPOSE_SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_WITH_EVOI_GLOBAL_AND_INSTRUMENTAL_POLICY",
+    "selected_surviving_route": "PARAMETRIC_TABLE_NODE_PROPOSED_INTO_THE_EXISTING_VERSION_SPACE",
+    "deleted_or_bypassed_paths": [
+      "THE_WRITER_AS_THE_ONLY_ROUTE_TO_A_PERIOD_TABLE",
+      "A_HARDCODED_TABLE_TOKEN_THAT_CANNOT_BE_SEARCHED_WITH",
+      "FOUR_TIMES_THE_INFORMATION_FLOOR_AS_A_FIXED_EVIDENCE_CONSTANT"
+    ],
+    "stop_condition": "9_NEW_TESTS_PASS_ROUND_20_PROTECTIONS_PRESERVED_173_TESTS_PASS_ACROSS_ELEVEN_SUITES_REPO_INTEGRITY_GUARD_PASSES_MODEL_ARTIFACT_VERIFIES_DRIFT_GUARD_PASSES_WITH_THE_TRUSTED_VALIDATOR_FAILED_PREDICTION_RECORDED_ZERO_CAPABILITY_CREDIT",
+    "expected_parent_level_state_change": "A_REPEATING_STRUCTURE_IS_FOUND_BY_VERSION_SPACE_SEARCH_INSTEAD_OF_EMITTED_BY_A_WRITER__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NOT_EMERGENCE",
+    "why_selected_route_is_fastest_sufficient": "ONE_GRAMMAR_RULE_REPLACES_N_WRITERS_AND_ITS_PARAMETERS_ARE_SEARCHED__THE_NODE_RETURNS_ORDINARY_CANDIDATE_SOURCE_SO_THE_EXISTING_VERSION_SPACE_AND_SETTLEMENT_LAYER_JUDGE_IT_WITH_NO_NEW_AUTHORITY",
+    "iteration_limit": 4,
+    "routes_considered": [
+      "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY",
+      "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
+      "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
+    ],
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-04T12:00:35Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PERIOD_TABLES_ONLY_REACHABLE_THROUGH_SYNTHESIZE_TABLE_ORGAN_WRITER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "with growth_enabled=False a period-3 block returns NO_CONSISTENT_HYPOTHESIS",
+          "a registered period-3 table organ does not help period 4 because it hardcodes the block",
+          "table_evidence_requirement(P) is 4P for every P, a constant rather than a derivation",
+          "the induced period tables for periods 3,5,7 are byte identical apart from the literal"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Bowers et al POPL 2023 Stitch: corpus guided top-down abstraction synthesis",
+          "Ellis et al PLDI 2021 DreamCoder: wake-sleep library learning plus neural search policy",
+          "Grand et al ICLR 2024 LILO: search-compress-document loop refuses non-compressive abstractions"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "github.com/mlb2251/stitch Rust crate and Python bindings for compression",
+          "stitch-bindings on PyPI exposes the Rust backend"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "MADIL arXiv 2505.01081 MDL pattern decomposition with no training data",
+          "CodeARC arXiv 2503.23145 oracle-querying agents self-correct inductive synthesis"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "grammar based program synthesis expression enumeration vs library learning"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "stitch python bindings library learning abstraction"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "parametric DSL node periods modular arithmetic search"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2025 inductive synthesis information theoretic sample complexity"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "PARAMETRIC_TABLE_NODE_PROPOSED_INTO_THE_EXISTING_VERSION_SPACE",
+      "challenger_routes": [
+        {
+          "route": "KEEP_THE_WRITER_AND_ADD_MORE_WRITERS_PER_STRUCTURE",
+          "evidence": [
+            "each new structure currently needs its own writer function",
+            "period 3,5,7 all come from one writer with a literal changed"
+          ],
+          "qualification_evidence": [
+            "direct read of synthesize_table_organ and the induced sources"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Correct where a writer exists",
+            "CAPABILITY_STRENGTH": "Cannot grow without a human editing code",
+            "WALL_CLOCK": "Instant",
+            "INCREMENTAL_COST": "0 USD but unbounded human cost",
+            "RELIABILITY": "Deterministic",
+            "VERIFIABILITY": "Trivially verifiable but static"
+          }
+        },
+        {
+          "route": "PARAMETRIC_TABLE_NODE_PROPOSED_INTO_THE_EXISTING_VERSION_SPACE",
+          "evidence": [
+            "periods 2,3,4,5,7 found with growth disabled",
+            "60/60 held-out each",
+            "2-3 questions versus 14 for the writer"
+          ],
+          "qualification_evidence": [
+            "9 tests with growth disabled",
+            "live executor run on a booted Creature",
+            "contradiction invariant over proposed tables"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Every proposal checked against all examples; contradictions excluded",
+            "CAPABILITY_STRENGTH": "One rule covers all periods where N writers were needed",
+            "WALL_CLOCK": "Candidate generation is linear in the period range",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Fails closed when evidence cannot identify a block",
+            "VERIFIABILITY": "Held-out accuracy plus the existing settlement ledger"
+          }
+        },
+        {
+          "route": "REBUILD_ON_STITCH_STYLE_LIBRARY_LEARNING_NOW",
+          "evidence": [
+            "Stitch is 3-4 orders of magnitude faster than DreamCoder compression",
+            "library learning improves solve rates by +19.6 to +62.46 points in published evaluations"
+          ],
+          "qualification_evidence": [
+            "Bowers et al POPL 2023",
+            "Ellis et al PLDI 2021",
+            "Grand et al ICLR 2024"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong given a corpus of searched programs",
+            "CAPABILITY_STRENGTH": "Greater long run than one new node",
+            "WALL_CLOCK": "A separate build of branch-and-bound abstraction search",
+            "INCREMENTAL_COST": "0 USD, stdlib sufficient",
+            "RELIABILITY": "Anytime algorithm with a published compression guarantee",
+            "VERIFIABILITY": "Compression ratio is directly measurable"
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger removes the need for widening the expressible set: library learning compresses what the grammar produces, and before this change the grammar produced one writer emitted shape, so there was nothing to compress. The library-learning challenger stays recorded as the next frontier and is not displaced by this node.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-04T12:00:35Z",
+        "max_age_hours": 2,
+        "selected_route": "PARAMETRIC_TABLE_NODE_PROPOSED_INTO_THE_EXISTING_VERSION_SPACE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CPython 3.11 standard library runtime",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "tests execute in this sandbox"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "module searches with growth disabled"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ]
+          },
+          {
+            "dependency": "canonical.runtime.settlement_v1 version space",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "settlement layer resolves the proposal"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ]
+          }
+        ]
+      }
+    },
+    "obs_goal": {
+      "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
+      "proxy_goals_deleted": [
+        "SELECTING_FROM_A_FROZEN_CODEC_OR_EXPRESSION_MENU",
+        "DETECTING_GLOBAL_OPTIMALITY_VIA_ENGLISH_KEYWORDS",
+        "STARVING_ZERO_IMMEDIATE_REWARD_INSTRUMENTAL_TOOLS"
+      ],
+      "surviving_necessity": "INDUCE_PARSE_SERIALIZE_ASTs_SOLVE_ALGEBRAIC_AND_PIECEWISE_PROGRAMS_COMPOSE_ADMITTED_ORGANS_AND_BACKUP_INSTRUMENTAL_Q"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__FIXED_LEVEL_1_CODE_AND_ZERO_UNSEEN_MASS_ASSUMPTION_BOUND_ALL_DOWNSTREAM_LEARNING",
+      "surviving_causal_blocker": "FROZEN_MENUS_AND_KEYWORD_GATES_PREVENTED_P_t_FROM_COMPOUNDING_AND_STARVED_UNLOCKING_ACTIONS",
+      "delete_bypass_substitute_options": [
+        "DELETE_FIXED_MENU_ASSUMPTION_BY_STORING_META_SYNTHESIZERS_AND_PERCEPTORS_AS_ORGANS",
+        "BYPASS_LOCAL_TUNNEL_VISION_VIA_PITMAN_YOR_UNSEEN_TAIL_GATE",
+        "SUBSTITUTE_TASK_FEATURE_HAZARD_AND_BELLMAN_HORIZON_FOR_COUNTER_THERMOSTATS"
+      ]
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "REBUILDING_IGNORANCE_LEDGER_OR_CURRICULUM_OR_GOAL_TARGET_BINDING",
+        "HAND_WRITING_FORMAT_SPECIFIC_READERS_PER_REPOSITORY"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/curriculum_v1.py",
+        "canonical/runtime/ignorance_ledger_v1.py",
+        "canonical/runtime/computer_env_v1.py",
+        "execution_guard/goal_target_binding_v1.py",
+        "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__PURE_STDLIB_FIRST_PRINCIPLES_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
+      ],
+      "surviving_gap": "INDEPENDENT_PERSONNEL_TWO_SPRITE_CERTIFICATION_FOR_BOUND_REPAIR_REMAINS_OUTSIDE_SANDBOX_PRODUCER_AUTHORITY"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "curriculum_v1_ignorance_ledger_v1_AND_goal_target_binding_v1_UNIFIED_IN_GLOBAL_EXTRAPOLATOR",
+        "MetaCircularOrganGraph_SHARED_ACROSS_SentientCognitiveCore_Creature_AND_SovereignZeroLLMPlanner"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "STATIC_CODEC_AND_EXPRESSION_MENUS_SUPERSEDED_BY_INDUCTION_AND_OBSERVATIONAL_SYNTHESIS"
+      ],
+      "fresh_reuse_plan": "REUSE_META_CIRCULAR_ORGAN_GRAPH_AND_GLOBAL_EXTRAPOLATOR_ACROSS_ALL_FUTURE_COMPUTER_AND_SWE_EPISODES"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "COMPILED_ORGAN_BYTECODE_CACHED_IN_RAM_AT_SUB_0_05_MS"
+      ],
+      "search_stop_decision": "STOP_WHEN_VERSION_SPACE_COLLAPSES_TO_ONE_OR_MEASURED_TARGET_IS_MET"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "FROZEN_MENUS_CANNOT_PARSE_UNSEEN_WIRE_FORMATS_SOLVE_OFF_GRID_COEFFICIENTS_OR_VALUE_ZERO_REWARD_TOOLS",
+      "routes_ranked": [
+        "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY__SELECTED",
+        "KEEP_FIVE_CODEC_MENU__REJECTED",
+        "REBUILD_FROM_SCRATCH__REJECTED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NINE_POSITIVE_AND_NEGATIVE_TESTS_DRIVEN_WITH_GROWTH_DISABLED_PLUS_A_LIVE_EXECUTOR_RUN_AND_A_CONTRADICTION_INVARIANT_THAT_ANY_PROPOSED_TABLE_MUST_AGREE_WITH_ITS_OWN_EVIDENCE__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-11-04T00:00:00Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "tournament": {
+      "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA",
+      "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
+      "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
+    }
+  },
+  "next_step": "MEASURE_WHETHER_THE_INDUCED_BLOCK_STRUCTURE_COMBINES_WITH_A_SECOND_OPERATOR_INTO_SOMETHING_NEITHER",
+  "route_frontier": {
+    "discovery_required": true,
+    "checked_at_utc": "2026-11-04T12:00:35Z",
+    "max_age_hours": 24
+  }
+}
