@@ -7,13 +7,15 @@ structure; it does not give those questions authority to change the workspace.
 
 The static numeric model is deliberately limited and never executes the source.
 A reviewer may confirm or reject a question, identify a trusted reference, and
-supply independent examples.  Such feedback is scoped to the exact source hash
-and is used to rank future questions; the ranking itself never authorizes a test
-or repair.  A feedback reference is a caller-supplied claim, not authenticated
-proof of independent verification.
+supply examples attributed to an external basis. Such feedback is scoped to the
+exact source hash and can rank questions and support future structural proposals;
+neither mechanism authorizes a new test or repair. A reference and its evidence
+are caller-supplied claims, not authenticated independent verification.
 """
 from __future__ import annotations
 
+import contextlib
+import functools
 import hashlib
 import json
 import math
@@ -24,10 +26,13 @@ import tempfile
 from typing import Any, Callable, Iterable, Mapping
 
 from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
-from canonical.swe_kernel.expression_hypotheses_v1 import evaluate, function_models, same_number
+from canonical.swe_kernel.expression_hypotheses_v1 import (
+    evaluate, function_models, observed_binary_operators, same_number, supported_binary_operator_names,
+)
 
 SCHEMA = "BRAIN_NOTIONS_V1"
 MAX_FINDINGS = 512
+MAX_EXPERIENCES = 256
 
 
 def _identifier(kind: str, module: str, digest: str, left: str, right: str, arity: int) -> str:
@@ -138,6 +143,28 @@ def _features(finding: Mapping[str, Any]) -> set[str]:
             {f"kind:{finding.get('kind')}", f"arity:{finding.get('arity')}"})
 
 
+def _serialized_update(method):
+    """Serialize local read-modify-replace updates across processes.
+
+    The lock is advisory and only coordinates writers that use this store. It
+    does not authenticate data or guarantee correctness on every filesystem.
+    """
+    @functools.wraps(method)
+    def guarded(self, *args, **kwargs):
+        if not can_write_memory() or self.path is None:
+            return method(self, *args, **kwargs)
+        import fcntl
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        lock_path = self.path.with_name("." + self.path.name + ".lock")
+        with lock_path.open("a+b") as lock:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+            try:
+                return method(self, *args, **kwargs)
+            finally:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+    return guarded
+
+
 class NotionStore:
     """Persists questions and caller-supplied reviews, without self-authorization."""
 
@@ -148,31 +175,44 @@ class NotionStore:
         self.reviews: dict[str, dict[str, Any]] = {}
         self.examples: dict[str, list[dict[str, Any]]] = {}
         self.plans: dict[str, dict[str, Any]] = {}
+        self.experiences: dict[str, dict[str, Any]] = {}
+        self.authored_tests: dict[str, dict[str, Any]] = {}
         self.load()
 
     def to_dict(self) -> dict[str, Any]:
         return {"schema": SCHEMA, "seen": self.seen, "findings": self.findings,
-                "reviews": self.reviews, "examples": self.examples, "plans": self.plans}
+                "reviews": self.reviews, "examples": self.examples, "plans": self.plans,
+                "experiences": self.experiences, "authored_tests": self.authored_tests}
 
     def load(self) -> None:
-        if not can_read_memory() or not self.path or not self.path.is_file():
+        if not can_read_memory() or not self.path:
+            return
+        names = ("seen", "findings", "reviews", "examples", "plans", "experiences", "authored_tests")
+        # Missing or corrupt files must not leave old in-process approvals live.
+        for name in names:
+            setattr(self, name, {})
+        if not self.path.is_file():
             return
         try:
             data = json.loads(self.path.read_text(encoding="utf-8"))
             if not isinstance(data, dict) or data.get("schema") != SCHEMA:
-                return
-            for name in ("seen", "findings", "reviews", "examples", "plans"):
-                value = data.get(name)
+                raise ValueError("notion memory schema mismatch")
+            snapshot: dict[str, dict[str, Any]] = {}
+            for name in names:
+                value = data.get(name, {})  # older stores have no experiences
                 if not isinstance(value, dict):
-                    continue
+                    raise ValueError(f"notion memory field is invalid: {name}")
                 if name == "examples":
-                    clean = {k: [row for row in v if isinstance(row, dict)]
-                             for k, v in value.items() if isinstance(k, str) and isinstance(v, list)}
-                else:
-                    clean = {k: v for k, v in value.items() if isinstance(k, str) and isinstance(v, dict)}
-                setattr(self, name, clean)
-        except (ValueError, OSError, TypeError):
-            return
+                    if not all(isinstance(k, str) and isinstance(v, list) and
+                               all(isinstance(row, dict) for row in v) for k, v in value.items()):
+                        raise ValueError("notion examples are invalid")
+                elif not all(isinstance(k, str) and isinstance(v, dict) for k, v in value.items()):
+                    raise ValueError(f"notion memory entries are invalid: {name}")
+                snapshot[name] = value
+            for name, value in snapshot.items():
+                setattr(self, name, value)
+        except (ValueError, TypeError, UnicodeError) as exc:
+            raise ValueError("notion memory is corrupt or incompatible") from exc
 
     def save(self) -> None:
         if not can_write_memory() or not self.path:
@@ -199,6 +239,7 @@ class NotionStore:
     def key(n: Notion) -> str:
         return f"{n.kind}::{n.subject}"
 
+    @_serialized_update
     def record(self, results: Iterable[Mapping[str, Any]]) -> None:
         """Remember each exact source/question once; repeated sensing is not new evidence."""
         if not can_write_memory():
@@ -228,6 +269,7 @@ class NotionStore:
         if changed:
             self.save()
 
+    @_serialized_update
     def review(self, finding_id: str, *, decision: str, reviewer: str, basis: str,
                trusted_function: str | None = None) -> dict[str, Any]:
         """Record a caller's explicit relation decision, not a self-generated label.
@@ -260,17 +302,27 @@ class NotionStore:
             self.save()
         return dict(review)
 
-    def record_plan(self, finding_id: str, plan: Mapping[str, Any]) -> None:
-        if not can_write_memory():
-            return
+    @_serialized_update
+    def record_plan(self, finding_id: str, plan: Mapping[str, Any], *,
+                    expected_feedback_hash: str | None = None) -> bool:
+        if not can_read_memory():
+            return False
         self.load()
         if finding_id not in self.findings:
-            return
+            return False
+        if expected_feedback_hash is not None:
+            current = self._feedback_hash(self.reviews.get(finding_id) or {}, self.examples.get(finding_id) or [])
+            if current != expected_feedback_hash:
+                return False  # the review/examples changed while planning
         value = dict(plan)
+        if not can_write_memory():
+            return self.plans.get(finding_id) == value
         if self.plans.get(finding_id) != value:
             self.plans[finding_id] = value
             self.save()
+        return True
 
+    @_serialized_update
     def answer(self, finding_id: str, *, args: list[int | float], expected: int | float,
                reviewer: str, basis: str) -> dict[str, Any]:
         """Record an external answer to the currently proposed input, once."""
@@ -301,6 +353,277 @@ class NotionStore:
         self.save()
         return dict(example)
 
+    @staticmethod
+    def _feedback_hash(review: Mapping[str, Any], examples: list[dict[str, Any]]) -> str:
+        payload = json.dumps({"review": review, "examples": examples}, sort_keys=True,
+                             separators=(",", ":"), ensure_ascii=False)
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    def _feedback_binding_valid(self, binding: Mapping[str, Any]) -> bool:
+        """Whether this snapshot still contains the reviewed feedback in a marker."""
+        fid = binding.get("finding_id")
+        if not isinstance(fid, str):
+            return False
+        finding = self.findings.get(fid) or {}
+        review = self.reviews.get(fid) or {}
+        examples = self.examples.get(fid) or []
+        plan = self.plans.get(fid) or {}
+        target, reference = binding.get("target"), binding.get("reference")
+        if not isinstance(target, str) or not isinstance(reference, str):
+            return False
+        if (not finding.get("fired") or finding.get("declined")
+                or binding.get("module") != finding.get("module")
+                or binding.get("source_sha256") != finding.get("source_sha256")
+                or {target, reference} != {finding.get("left"), finding.get("right")}
+                or review.get("decision") != "confirm" or review.get("trusted_function") != reference
+                or len(examples) < 2 or plan.get("status") != "bounded_agreement"
+                or plan.get("truncated") or plan.get("external_examples") != len(examples)):
+            return False
+        return binding.get("feedback_sha256") == self._feedback_hash(review, examples)
+
+    @contextlib.contextmanager
+    def hold_reviewed_feedback(self, binding: Mapping[str, Any]):
+        """Hold a cooperative read lock while checking and using reviewed feedback.
+
+        A concurrent store-method retraction waits until the current operation
+        ends. This is local advisory synchronization, not authentication or a
+        hostile-writer guarantee.
+        """
+        if not can_read_memory() or self.path is None:
+            yield False
+            return
+        import fcntl
+        lock_path = self.path.with_name("." + self.path.name + ".lock")
+        try:
+            # READ_ONLY may use an existing lock, but must not create one.
+            mode = "a+b" if can_write_memory() else "rb"
+            handle = lock_path.open(mode)
+        except OSError:
+            yield False
+            return
+        with handle:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_SH)
+            try:
+                try:
+                    self.load()
+                    valid = self._feedback_binding_valid(binding)
+                except (OSError, ValueError, TypeError):
+                    valid = False
+                yield valid
+            finally:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+    def render_reviewed_test(self, binding: Mapping[str, Any]) -> str:
+        """Reconstruct the exact test from the currently locked feedback snapshot."""
+        if not self._feedback_binding_valid(binding):
+            raise ValueError("stale reviewed feedback")
+        fid = str(binding["finding_id"])
+        finding = self.findings[fid]
+        examples = self.examples[fid]
+        module = pathlib.PurePosixPath(str(binding["module"]))
+        parts = module.with_suffix("").parts
+        if module.suffix != ".py" or not parts or not all(part.isidentifier() for part in parts):
+            raise ValueError("invalid reviewed module")
+        target, reference = str(binding["target"]), str(binding["reference"])
+        if not target.isidentifier() or not reference.isidentifier():
+            raise ValueError("invalid reviewed function")
+        arity = finding.get("arity")
+        if type(arity) is not int or not 2 <= arity <= 4:
+            raise ValueError("invalid reviewed arity")
+        target_arity = arity if target == finding.get("right") else 1
+        reference_arity = arity if reference == finding.get("right") else 1
+        checks: list[tuple[list[Any], Any, list[Any] | None]] = []
+        for observation in finding.get("observations") or []:
+            x = observation["input"]
+            expected = observation["left"] if reference == observation.get("left_name") else observation["right"]
+            checks.append(([x] * target_arity, expected, [x] * reference_arity))
+        for example in examples:
+            checks.append((list(example["args"]), example["expected"], None))
+        if not checks:
+            raise ValueError("review has no observations")
+        lines: list[str] = []
+        for i, (args, expected, anchor_args) in enumerate(checks):
+            call = f"{target}({', '.join(repr(x) for x in args)})"
+            lines.extend([f"def test_notion_{fid[:12]}_{i}():", f"    assert {call} == {expected!r}"])
+            if anchor_args is not None:
+                anchor = f"{reference}({', '.join(repr(x) for x in anchor_args)})"
+                lines.append(f"    assert {anchor} == {expected!r}")
+            lines.append("")
+        return ("# brain-notion-v1 " + json.dumps(dict(binding), sort_keys=True) + "\n"
+                "# Based on explicitly supplied review and examples; not a proof.\n"
+                f"from {'.'.join(parts)} import {', '.join(sorted((target, reference)))}\n\n"
+                + "\n".join(lines))
+
+    @staticmethod
+    def _authored_test_key(workspace_root: pathlib.Path, rel_test: str) -> str:
+        root = pathlib.Path(workspace_root).resolve()
+        rel = pathlib.PurePosixPath(rel_test)
+        if rel.is_absolute() or ".." in rel.parts or not rel.parts:
+            raise ValueError("invalid authored test path")
+        return hashlib.sha256(str(root).encode("utf-8")).hexdigest() + ":" + rel.as_posix()
+
+    def authored_test_binding(self, workspace_root: pathlib.Path, rel_test: str) -> dict[str, Any] | None:
+        if not can_read_memory():
+            return None
+        self.load()
+        key = self._authored_test_key(workspace_root, rel_test)
+        entry = self.authored_tests.get(key)
+        if entry is None:
+            return None
+        # An existing but malformed origin is not the same as an unregistered
+        # user test. Refuse publication rather than silently losing provenance.
+        binding = entry.get("binding")
+        required = ("module", "source_sha256", "target", "reference", "finding_id", "feedback_sha256")
+        if (not isinstance(binding, dict)
+                or not all(isinstance(binding.get(k), str) and binding[k] for k in required)
+                or not isinstance(entry.get("test_sha256"), str)
+                or re.fullmatch(r"[0-9a-f]{64}", entry["test_sha256"]) is None):
+            raise ValueError("authored test origin is corrupt")
+        return dict(binding)
+
+    @_serialized_update
+    def author_reviewed_test(self, binding: Mapping[str, Any], workspace_root: pathlib.Path,
+                             test_file: pathlib.Path) -> bool:
+        """Record origin before creating the reviewed test under one local lock.
+
+        Origin stays recorded if creation fails, so an interrupted write fails
+        closed rather than silently turning a generated test into a user test.
+        """
+        if not can_write_memory():
+            return False
+        self.load()
+        if not self._feedback_binding_valid(binding):
+            return False
+        root = pathlib.Path(workspace_root).resolve()
+        destination = pathlib.Path(test_file)
+        if not destination.is_absolute():
+            destination = root / destination
+        try:
+            rel_test = destination.relative_to(root).as_posix()
+            module = (root / str(binding["module"])).resolve()
+            if (not destination.resolve().is_relative_to(root) or destination.parent.resolve() != destination.parent
+                    or destination.is_symlink() or not module.is_relative_to(root) or not module.is_file()
+                    or destination.exists()
+                    or hashlib.sha256(module.read_bytes()).hexdigest() != binding.get("source_sha256")):
+                return False
+            text = self.render_reviewed_test(binding)
+            key = self._authored_test_key(root, rel_test)
+        except (OSError, ValueError, TypeError, KeyError):
+            return False
+        if key not in self.authored_tests and len(self.authored_tests) >= MAX_FINDINGS:
+            return False
+        sidecar = destination.with_name("." + destination.name + ".brain-origin")
+        if sidecar.exists() or sidecar.is_symlink():
+            return False
+        self.authored_tests[key] = {"binding": dict(binding),
+                                    "test_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()}
+        self.save()
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        # This workspace integrity marker carries no learned semantic content.
+        # It remains visible when learned-memory reads are OFF, so removing the
+        # test header cannot silently reclassify the test as user-authored.
+        with sidecar.open("x", encoding="utf-8") as stream:
+            stream.write("brain-generated-test-v1\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        with destination.open("x", encoding="utf-8") as stream:
+            stream.write(text)
+            stream.flush()
+            os.fsync(stream.fileno())
+        return True
+
+    @_serialized_update
+    def record_checked_repair(self, binding: Mapping[str, Any], candidate_source: str) -> dict[str, Any]:
+        """Record syntax from a local reviewed repair, for proposals only.
+
+        The caller must call this *after* the scoped candidate was published and
+        checked; these checks are repeated here against stored attribution and
+        every example. The evidence is unauthenticated and is not verification of
+        intent. No future question is approved by remembering an operator.
+        """
+        if not can_write_memory():
+            return {"status": "memory_policy_blocks_learning", "operators": []}
+        self.load()
+        fid = binding.get("finding_id")
+        finding = self.findings.get(fid) if isinstance(fid, str) else None
+        review = self.reviews.get(fid) if isinstance(fid, str) else None
+        examples = self.examples.get(fid, []) if isinstance(fid, str) else []
+        plan = self.plans.get(fid, {}) if isinstance(fid, str) else {}
+        if not finding or not review or not isinstance(candidate_source, str):
+            return {"status": "missing_attributed_feedback", "operators": []}
+        target, reference = binding.get("target"), binding.get("reference")
+        if (not isinstance(target, str) or not isinstance(reference, str)
+                or review.get("decision") != "confirm" or review.get("trusted_function") != reference
+                or {target, reference} != {finding.get("left"), finding.get("right")}
+                or binding.get("source_sha256") != finding.get("source_sha256")
+                or binding.get("module") != finding.get("module")
+                or plan.get("status") != "bounded_agreement" or plan.get("truncated")
+                or len(examples) < 2
+                or binding.get("feedback_sha256") != self._feedback_hash(review, examples)):
+            return {"status": "feedback_scope_mismatch", "operators": []}
+        models = function_models(candidate_source)
+        model, ref = models.get(target), models.get(reference)
+        if not model or not ref:
+            return {"status": "unsupported_candidate", "operators": []}
+        seen_args: set[tuple[Any, ...]] = set()
+        try:
+            for example in examples:
+                args = tuple(example.get("args", []))
+                if args in seen_args or len(args) != len(model.params):
+                    return {"status": "feedback_mismatch", "operators": []}
+                seen_args.add(args)
+                valid, value = evaluate(model, args)
+                if not valid or not same_number(value, example.get("expected")):
+                    return {"status": "feedback_mismatch", "operators": []}
+            for observation in finding.get("observations", []):
+                x = observation.get("input")
+                expected = observation.get("left") if reference == observation.get("left_name") else observation.get("right")
+                target_result = evaluate(model, (x,) * len(model.params))
+                ref_result = evaluate(ref, (x,) * len(ref.params))
+                if not (target_result[0] and ref_result[0] and same_number(target_result[1], expected)
+                        and same_number(ref_result[1], expected)):
+                    return {"status": "feedback_mismatch", "operators": []}
+        except (TypeError, ValueError):
+            return {"status": "feedback_mismatch", "operators": []}
+        operators = observed_binary_operators(model.expression)
+        if not operators:
+            return {"status": "no_observed_operators", "operators": []}
+        if fid not in self.experiences and len(self.experiences) >= MAX_EXPERIENCES:
+            return {"status": "experience_capacity_reached", "operators": []}
+        self.experiences[fid] = {
+            "finding_id": fid, "module": finding["module"], "source_sha256": finding["source_sha256"],
+            "candidate_sha256": hashlib.sha256(candidate_source.encode("utf-8")).hexdigest(),
+            "target": target, "reference": reference, "operators": operators,
+            "feedback_sha256": self._feedback_hash(review, examples),
+            "observation": "locally_checked_reviewed_repair_not_independent_verification",
+        }
+        self.save()
+        return {"status": "recorded_for_proposals", "operators": operators, "finding_id": fid}
+
+    def learned_operators(self) -> list[str]:
+        """Current evidence-supported primitives; retracted feedback contributes none."""
+        if not can_read_memory():
+            return []
+        self.load()  # observe cross-process revocations rather than cached approval
+        out: set[str] = set()
+        for fid, experience in self.experiences.items():
+            finding = self.findings.get(fid) or {}
+            review = self.reviews.get(fid) or {}
+            examples = self.examples.get(fid) or []
+            if (review.get("decision") != "confirm" or len(examples) < 2
+                    or review.get("trusted_function") != experience.get("reference")
+                    or experience.get("source_sha256") != finding.get("source_sha256")):
+                continue
+            try:
+                if self._feedback_hash(review, examples) != experience.get("feedback_sha256"):
+                    continue
+            except (TypeError, ValueError):
+                continue
+            ops = experience.get("operators")
+            if isinstance(ops, list):
+                out.update(op for op in ops if isinstance(op, str) and op in supported_binary_operator_names())
+        return sorted(out)
+
     def score(self, finding: Mapping[str, Any]) -> float:
         """A learned review-priority score, not a probability or a permission.
 
@@ -308,6 +631,8 @@ class NotionStore:
         frequency is learned from feedback, not authored as an error-class table.
         Leave the current question out so its own label cannot score itself.
         """
+        if not can_read_memory():
+            return 0.0
         wanted = _features(finding)
         if not wanted:
             return 0.0
@@ -341,8 +666,14 @@ class NotionStore:
         return self.score(n.evaluate())
 
     def summary(self) -> Mapping[str, Any]:
+        if not can_read_memory():
+            return {"schema": SCHEMA, "tracked": 0, "reviewed": 0, "pending_examples": 0,
+                    "learned_operators": [], "experiences": 0, "authored_tests": 0, "persisted_to": None}
+        operators = self.learned_operators()  # reloads the same snapshot used by the counts
         return {"schema": SCHEMA, "tracked": len(self.findings), "reviewed": len(self.reviews),
                 "pending_examples": sum(bool(p.get("next_query")) for p in self.plans.values()),
+                "learned_operators": operators,
+                "experiences": len(self.experiences), "authored_tests": len(self.authored_tests),
                 "persisted_to": str(self.path) if self.path else None}
 
 

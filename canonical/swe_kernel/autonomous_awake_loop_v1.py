@@ -533,11 +533,14 @@ class AwakeAgencyDaemon:
         creature_root: str | pathlib.Path | None = None,
         creature_identity: str = "creature",
         creature_life: float = 40.0,
+        notions_path: str | pathlib.Path | None = None,
+        isolated_repair_memory: bool = False,
     ) -> None:
         import hashlib
         from canonical.runtime import creature_runtime_v1 as cr
 
         self.workspace_root = pathlib.Path(workspace_root).resolve()
+        self.isolated_repair_memory = bool(isolated_repair_memory)
         ws_hash = hashlib.sha256(str(self.workspace_root).encode("utf-8")).hexdigest()[:12]
         self.ledger_path = str(ledger_path) if ledger_path else ledger.DEFAULT_STATE
         self.skill_store = VerifiedSkillStore(
@@ -557,6 +560,7 @@ class AwakeAgencyDaemon:
         # Interpretations live beside habits, and for the same reason: a creature that keeps its
         # memories keeps its understanding, and one given a fresh store starts genuinely naive.
         self.notions_path = (
+            pathlib.Path(notions_path) if notions_path is not None else
             (_store_p.parent / "notions.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_notions_{ws_hash}.json")
         )
@@ -789,8 +793,6 @@ class AwakeAgencyDaemon:
             found = notions_for_source(src, rel_mod.as_posix())
             results = [n.evaluate() for n in found]
             store.record(results)
-            lines: list[str] = []
-            imports: set[str] = set()
             test_binding: dict[str, str] | None = None
             for n, result in zip(found, results):
                 if not result.get("fired") or result.get("declined"):
@@ -807,37 +809,25 @@ class AwakeAgencyDaemon:
                 elif decision == "confirm" and trusted in {n.left, n.right}:
                     target = n.right if trusted == n.left else n.left
                     examples = store.examples.get(n.id) or []
+                    feedback_hash = store._feedback_hash(review, examples)
                     plan = investigate(src, target_name=target, reference_name=trusted,
-                                       observations=result.get("observations") or [], examples=examples)
-                    store.record_plan(n.id, plan)
+                                       observations=result.get("observations") or [], examples=examples,
+                                       learned_operators=store.learned_operators())
+                    if not store.record_plan(n.id, plan, expected_feedback_hash=feedback_hash):
+                        finding.update({"status": "feedback_changed", "trusted_function": trusted,
+                                        "target_function": target, "plan": plan})
+                        self.notion_findings.append(finding)
+                        continue
                     finding.update({"status": plan["status"], "trusted_function": trusted,
                                     "target_function": target, "plan": plan})
-                    # Bounded agreement is not proof, but the tests below are
-                    # justified by an explicit review and external examples.  No
-                    # score, name overlap or self-generated output grants authority.
+                    # A score, name or remembered primitive cannot authorize
+                    # authorship. Bind the precise still-current feedback.
                     if allow_authoring and plan["status"] == "bounded_agreement" and test_binding is None:
                         test_binding = {"module": rel_mod.as_posix(), "source_sha256": n.source_sha256,
-                                        "target": target, "reference": trusted, "finding_id": n.id}
-                        target_arity = n.arity if target == n.right else 1
-                        trusted_arity = n.arity if trusted == n.right else 1
-                        checks: list[tuple[list[Any], Any, list[Any] | None]] = []
-                        for observation in result.get("observations") or []:
-                            v = observation["input"]
-                            expected = observation["left"] if trusted == n.left else observation["right"]
-                            checks.append(([v] * target_arity, expected, [v] * trusted_arity))
-                        for example in examples:
-                            checks.append((list(example["args"]), example["expected"], None))
-                        imports.update((target, trusted))
-                        for i, (args, expected, anchor_args) in enumerate(checks):
-                            call = f"{target}({', '.join(repr(x) for x in args)})"
-                            lines.extend([f"def test_notion_{n.id[:12]}_{i}():",
-                                          f"    assert {call} == {expected!r}"])
-                            if anchor_args is not None:
-                                anchor = f"{trusted}({', '.join(repr(x) for x in anchor_args)})"
-                                lines.append(f"    assert {anchor} == {expected!r}")
-                            lines.append("")
+                                        "target": target, "reference": trusted, "finding_id": n.id,
+                                        "feedback_sha256": feedback_hash}
                 self.notion_findings.append(finding)
-            if not lines:
+            if test_binding is None:
                 continue
             # Existing repair localization uses a module's stem. If another module
             # has that stem, decline rather than let it repair the wrong file.
@@ -851,22 +841,20 @@ class AwakeAgencyDaemon:
                 continue
             target_file = self.workspace_root / "tests" / f"test_{mod.stem}.py"
             try:
-                # Do not overwrite a user test, follow a symlink outside the
-                # workspace, or use an approval for source that has since changed.
-                if target_file.exists() or not target_file.resolve().is_relative_to(self.workspace_root):
-                    continue
-                if mod.read_text(encoding="utf-8") != src:
-                    continue
-                target_file.parent.mkdir(parents=True, exist_ok=True)
-                import json as _json
-                with target_file.open("x", encoding="utf-8") as stream:
-                    stream.write("# brain-notion-v1 " + _json.dumps(test_binding, sort_keys=True) + "\n")
-                    stream.write("# Based on explicitly supplied review and examples; not a proof.\n")
-                    stream.write(f"from {'.'.join(parts)} import {', '.join(sorted(imports))}\n\n")
-                    stream.write("\n".join(lines))
-                authored.append(target_file)
-            except (OSError, UnicodeError):
-                continue
+                # Record the origin before writing, under the same cooperative
+                # lock as retractions. A removed marker must not silently turn
+                # an authored test into a new user-supplied specification.
+                if store.author_reviewed_test(test_binding, self.workspace_root, target_file):
+                    authored.append(target_file)
+                else:
+                    for finding in self.notion_findings:
+                        if finding["id"] == test_binding["finding_id"]:
+                            finding["status"] = "authoring_refused"
+            except (OSError, UnicodeError, ValueError, TypeError, KeyError) as exc:
+                for finding in self.notion_findings:
+                    if finding["id"] == test_binding["finding_id"]:
+                        finding["status"] = "authoring_error"
+                        finding["authoring_error"] = type(exc).__name__
         self.notion_findings.sort(key=lambda f: (-f["priority_score"], f["id"]))
         return authored
 
@@ -1392,41 +1380,48 @@ class AwakeAgencyDaemon:
                 # entries the creature taught itself: each is a substitution it was never told about,
                 # derived from its own earlier successes and composed by transitive closure. Screened
                 # by execution exactly like the rest, so a bad habit costs probes and nothing else.
-                from canonical.swe_kernel.learned_edit_habits_v1 import live_habits
+                from canonical.swe_kernel.learned_edit_habits_v1 import LearnedEditHabits, live_habits
 
-                _habits = live_habits(self.habits_path)
+                _habits = (LearnedEditHabits(self.habits_path).load() if self.isolated_repair_memory
+                           else live_habits(self.habits_path))
                 # INTERPRETIVE REPAIR. Habits record which edits worked; this records what the
                 # creature's own measurements MEAN. Given a row of evidence -- arguments (7, 2),
                 # produced 3, owed 3.5 -- it asks which operator in the language would have produced
                 # the owed value, and proposes that. Unlike a habit it needs no prior success, so it is
                 # the first producer in this file that can act on a cold creature; and unlike a habit it
                 # can never propose a constant, because a constant is not a function of the arguments.
-                from canonical.swe_kernel.interpretive_repair_v1 import live_interpretations
+                from canonical.swe_kernel.interpretive_repair_v1 import InterpretiveRepair, live_interpretations
 
-                _interp = live_interpretations(self.interpretations_path)
+                _interp = (InterpretiveRepair(self.interpretations_path) if self.isolated_repair_memory
+                           else live_interpretations(self.interpretations_path))
+                from canonical.swe_kernel.notions_v1 import live_notions
+                _learned_ops = live_notions(self.notions_path).learned_operators()
                 # SYNTHESIZED EDIT GRAMMAR. The producers below are a fixed list of hypotheses I wrote;
                 # this one carries the hypothesis *space* and fits it to its own screened history. It
                 # predicts the effect of an edit before screening it, so candidates it can refute
                 # offline never cost a probe -- something no table-driven producer does.
-                from canonical.swe_kernel.synthesized_edit_grammar_v1 import live_synth
+                from canonical.swe_kernel.synthesized_edit_grammar_v1 import SynthesizedEdits, live_synth
 
-                _synth = live_synth(self.synth_path)
+                _synth = (SynthesizedEdits(self.synth_path) if self.isolated_repair_memory
+                          else live_synth(self.synth_path))
                 # GRAMMAR GROWTH. An edit that no key explains is evidence of a hole in the space, and
                 # until now it was dropped on the floor -- the same mistake as discarding rejections.
                 # This records it; it does not act on it. Naming a hole is measurement, inventing a
                 # shape from one is guessing, and only the first is defensible.
-                from canonical.swe_kernel.grammar_growth_v1 import live_growth
+                from canonical.swe_kernel.grammar_growth_v1 import GrammarGrowth, live_growth
 
-                _growth = live_growth(self.growth_path)
+                _growth = (GrammarGrowth(self.growth_path) if self.isolated_repair_memory
+                           else live_growth(self.growth_path))
                 # TOOL COMPETENCE. `failure_kind_v1._FAMILY_FOR` says which producer should run first,
                 # was authored, is wrong in 3 of 4 measured cases, and `family_order()` is called from
                 # nowhere. This replaces the guess with counts: what each producer actually produced and
                 # actually won, per kind of failure. Ordering only -- the screen and the gate still
                 # decide correctness, so a wrong ranking costs probes and nothing else.
-                from canonical.swe_kernel.tool_competence_v1 import live_competence
+                from canonical.swe_kernel.tool_competence_v1 import ToolCompetence, live_competence
                 from canonical.swe_kernel.failure_kind_v1 import classify as _fk_classify
 
-                _competence = live_competence(self.competence_path)
+                _competence = (ToolCompetence(self.competence_path) if self.isolated_repair_memory
+                               else live_competence(self.competence_path))
                 _kind = _fk_classify(str(fail_out))
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
@@ -1446,7 +1441,7 @@ class AwakeAgencyDaemon:
 
                 # Each producer is consulted as a NAMED tool so its output can be credited to it.
                 _by_tool: dict[str, list[str]] = {
-                    "interpretive": _interp.propose(before_src, fail_out, limit=8),
+                    "interpretive": _interp.propose(before_src, fail_out, limit=8, learned_operators=_learned_ops),
                     "synth_grammar": _synth.propose(before_src, fail_out, args=_args, owed=_owed, limit=12),
                     "habits": _habits.propose(before_src, limit=8),
                     "operator_family": propose_operator_family_swaps(before_src, max_candidates=24),

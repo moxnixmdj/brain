@@ -31,8 +31,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     answer.add_argument("--reviewer", required=True)
     answer.add_argument("--basis", required=True)
     ns = parser.parse_args(argv)
-    store = NotionStore(ns.store)
     try:
+        store = NotionStore(ns.store)
         if ns.command == "list":
             result = [{**finding, "priority_score": store.score(finding),
                        "review": store.reviews.get(fid), "plan": store.plans.get(fid)}

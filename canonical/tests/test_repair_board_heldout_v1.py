@@ -44,7 +44,9 @@ def test_board_repairs_with_independent_holdout(tmp_path, name, source, call, ex
     root.mkdir()
     result = creature.run_sovereign_board(root, cycles=4, identity="p", life=480, slice_size=480, workspace=workspace)
     steps = [s for s in result["run"].get("steps", []) if str(s.get("work", "")).startswith("repair:")]
-    assert any(s.get("accepted_into_world") == ["pkg/m.py"] for s in steps), (name, steps)
+    accepted = next((s for s in steps if s.get("accepted_into_world") == ["pkg/m.py"]), None)
+    assert accepted is not None, (name, steps)
+    assert accepted["verified"] is False and accepted["correct"] is None
     spec = importlib.util.spec_from_file_location("board_fixture", module)
     assert spec and spec.loader
     loaded = importlib.util.module_from_spec(spec)

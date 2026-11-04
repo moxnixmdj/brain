@@ -1907,6 +1907,21 @@ def _sovereign_feature_kwargs(work_id: str, creature: Creature) -> dict[str, Any
             "missing_dep_or_env_block": bool(flags["missing_dep_or_env_block"]),
             "nested_cost_or_timeout_risk": bool(flags["nested_cost_or_timeout_risk"]),
         }
+    if str(work_id).startswith(("repair:", "awake:cow_repair:")):
+        from canonical.runtime import brokered_workspace_execution_v1 as _broker
+        try:
+            confined_available = bool(_broker.namespace_broker_available())
+        except Exception:
+            confined_available = False
+        return {
+            "host_ready": confined_available,
+            "grounding_complete": False,  # examples are not a complete specification
+            "causal_precond_met": confined_available,
+            "memory_reflex_hit": False,
+            "strong_verifier": False,  # this agent's local checks are not independent
+            "missing_dep_or_env_block": not confined_available,
+            "nested_cost_or_timeout_risk": False,
+        }
     if str(work_id).startswith(("gap:", "awake:gap:", "curiosity:")):
         # A gap is by construction something whose causal precondition is not yet met.
         return {
@@ -1934,48 +1949,7 @@ def predict_task_probability(work_id: str, creature: Creature) -> float:
         core = SentientCognitiveCore(creature.root / "cognitive_core")
         creature.cognitive_core = core
 
-    if work_id.startswith("inspector:"):
-        cid = work_id[len("inspector:"):]
-        flags = _extract_capability_feature_flags(cid)
-        return round(
-            core.belief.predict_probability(
-                work_id,
-                host_ready=bool(flags["host_ready"]),
-                grounding_complete=bool(flags["grounding_complete"]),
-                causal_precond_met=bool(flags["causal_precond_met"]),
-                memory_reflex_hit=(cid in getattr(creature, "onboarded_capabilities", {})),
-                strong_verifier=True,
-                missing_dep_or_env_block=bool(flags["missing_dep_or_env_block"]),
-                nested_cost_or_timeout_risk=bool(flags["nested_cost_or_timeout_risk"]),
-            ),
-            4,
-        )
-
-    if work_id.startswith(("repair:", "awake:cow_repair:", "chase:", "traj:")):
-        return round(
-            core.belief.predict_probability(
-                work_id,
-                host_ready=True,
-                grounding_complete=True,
-                causal_precond_met=True,
-                memory_reflex_hit=False,
-                strong_verifier=True,
-            ),
-            4,
-        )
-    if work_id.startswith(("gap:", "awake:gap:", "curiosity:")):
-        return round(
-            core.belief.predict_probability(
-                work_id,
-                host_ready=True,
-                grounding_complete=True,
-                causal_precond_met=False,
-                memory_reflex_hit=False,
-                strong_verifier=True,
-            ),
-            4,
-        )
-    return round(core.belief.predict_probability(work_id), 4)
+    return round(core.belief.predict_probability(work_id, **_sovereign_feature_kwargs(work_id, creature)), 4)
 
 
 def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[str, Any]:
@@ -2291,6 +2265,24 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
     if not targets:
         return {"generalizes": False, "reason": "TEST_IMPORTS_NO_WORKSPACE_MODULE"}
 
+    # Do not put arbitrary Python in the verifier's interpreter: untrusted code
+    # could inspect frames and forge its result. Accept only a deliberately
+    # restricted, syntactically checked language, with direct call names. This
+    # is an abstention policy, not a general Python sandbox or carrier proof.
+    from canonical.swe_kernel.probe_syntax_guard_v1 import probe_source_supported, simple_probe_name
+    if not simple_probe_name(func_src) or (_pair_other is not None and not simple_probe_name(_pair_other)):
+        return {"generalizes": False, "reason": "PROBE_CALL_SHAPE_UNSUPPORTED"}
+    checked_sources: dict[str, str] = {}
+    for rel in targets:
+        try:
+            source = (ws_root / rel).read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            return {"generalizes": False, "reason": "PROBE_SOURCE_UNREADABLE"}
+        supported, why = probe_source_supported(source)
+        if not supported:
+            return {"generalizes": False, "reason": "PROBE_SOURCE_UNSUPPORTED", "detail": why}
+        checked_sources[rel] = source
+
     args_a = tuple(_perturb(a, i, 0) for i, a in enumerate(args))
     args_b = tuple(_perturb(a, i, 1) for i, a in enumerate(args_a))
     payload = {"targets": targets, "func": func_src, "args": args, "args_a": args_a,
@@ -2316,10 +2308,14 @@ try:
     produced, out_a, out_b = call(args), call(args_a), call(args_b)
     matches = (produced == expected) if payload["op"] == "==" else (produced is expected)
     ignores = out_a == out_b and not isinstance(expected, bool)
+    # Equal boolean outputs do not prove a predicate is constant, but they also
+    # do not show input sensitivity. Abstain rather than mark an unprobed result
+    # as generalizing. Different outputs are direct evidence of sensitivity only.
+    boolean_unprobed = isinstance(expected, bool) and out_a == out_b
     identity = all(isinstance(o, (list, tuple, str)) and o == a[0]
                    for o, a in ((out_a, args_a), (out_b, args_b)))
     result = {
-        "generalizes": bool(matches and not ignores and not identity),
+        "generalizes": bool(matches and not ignores and not identity and not boolean_unprobed),
         "args": list(args), "perturbed": [list(args_a), list(args_b)],
         "produced": produced, "produced_perturbed": [out_a, out_b], "expected": expected,
         "ignores_inputs": bool(ignores), "identity_like": bool(identity),
@@ -2328,7 +2324,7 @@ try:
         "reason": ("REPAIRED_CODE_DISAGREES_WITH_OWED_TEST" if not matches
                    else "OUTPUT_IGNORES_INPUTS" if ignores
                    else "TEST_CANNOT_DISTINGUISH_IDENTITY" if identity
-                   else "BOOLEAN_RESULT_INPUT_SENSITIVITY_UNPROBED" if isinstance(expected, bool)
+                   else "BOOLEAN_RESULT_INPUT_SENSITIVITY_UNPROBED" if boolean_unprobed
                    else "RESPONDS_TO_INPUT"),
     }
 except BaseException as exc:
@@ -2340,6 +2336,7 @@ _emit_result("BRAIN_PROBE_RESULT " + _encode_result(result, default=_represent_r
 
     res = _broker.run_staged_confined_command(
         ws_root, [_sys.executable, "-c", worker], publish=False, timeout=8,
+        candidate_overrides=checked_sources,
         pythonpath_work=True, task_id="generalization-probe", goal="check candidate input sensitivity",
     )
     if not res.get("ok") or not res.get("confined") or not res.get("live_workspace_untouched"):
@@ -2395,13 +2392,15 @@ def _notion_repair_scope(test_file: pathlib.Path, ws_root: pathlib.Path,
     return None
 
 
-def _publish_notion_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
-                              staged: Mapping[str, str]) -> tuple[bool, dict[str, Any] | None, str | None]:
-    """Check a reviewed-notion candidate in a private stage before broker publication.
+def _publish_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
+                       staged: Mapping[str, str], *, notion_required: bool = False,
+                       notions_path: pathlib.Path | None = None
+                       ) -> tuple[bool, dict[str, Any] | None, str | None]:
+    """Check a single-file candidate in a private stage before broker publication.
 
-    The broker enforces a single target, preserves the test file, checks source
-    drift and atomically replaces the target. Its carrier is not independently
-    qualified; this is not a claim of hostile-code certification.
+    The snapshot binds the candidate, original source and owed test. The broker
+    checks for drift and atomically replaces one target; the carrier is not
+    independently qualified and this is not a multi-file transaction guarantee.
     """
     import sys as _sys
     from canonical.runtime import brokered_workspace_execution_v1 as _broker
@@ -2409,23 +2408,41 @@ def _publish_notion_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
 
     ws_root = ws_root.resolve()
     try:
-        rel_test = test_file.resolve().relative_to(ws_root).as_posix()
+        # Check the sidecar beside the actual test, not beside a symlink alias.
+        # Bind subsequent reads to that same resolved file.
+        test_file = test_file.resolve()
+        rel_test = test_file.relative_to(ws_root).as_posix()
         test_bytes = test_file.read_bytes()
-        if not test_bytes.startswith(b"# brain-notion-v1 ") or len(staged) != 1:
+        is_notion = test_bytes.startswith(b"# brain-notion-v1 ")
+        sidecar = test_file.with_name("." + test_file.name + ".brain-origin")
+        if (sidecar.exists() or sidecar.is_symlink()) and not is_notion:
+            return False, None, "NOTION_TEST_CHANGED"
+        if notion_required and not is_notion:
             return False, None, "NOTION_SCOPE_INVALID"
-        initial_error = _notion_repair_scope(test_file, ws_root, staged)
-        if initial_error:
-            return False, None, initial_error
+        if len(staged) != 1:
+            return False, None, "MULTIFILE_PUBLICATION_UNSUPPORTED"
         target = next(iter(staged))
-    except (OSError, ValueError, TypeError):
-        return False, None, "NOTION_SCOPE_INVALID"
+        target_path = (ws_root / target).resolve()
+        if not target_path.is_relative_to(ws_root) or not target_path.is_file():
+            return False, None, "REPAIR_SCOPE_INVALID"
+        before_hash = hashlib.sha256(target_path.read_bytes()).hexdigest()
+        binding = None
+        if is_notion:
+            initial_error = _notion_repair_scope(test_file, ws_root, staged)
+            if initial_error:
+                return False, None, initial_error
+            binding = json.loads(test_bytes.splitlines()[0][len(b"# brain-notion-v1 "):])
+    except (OSError, ValueError, TypeError, IndexError):
+        return False, None, "REPAIR_SCOPE_INVALID"
     checked: dict[str, Any] = {"generalization": None}
 
     def checker(stage_dir: pathlib.Path) -> bool:
         try:
             if test_file.read_bytes() != test_bytes or (stage_dir / rel_test).read_bytes() != test_bytes:
                 return False
-            if _notion_repair_scope(test_file, ws_root, staged):
+            if hashlib.sha256(target_path.read_bytes()).hexdigest() != before_hash:
+                return False
+            if is_notion and _notion_repair_scope(test_file, ws_root, staged):
                 return False
             ok, _ = _run_py_test_file(stage_dir / rel_test, stage_dir, timeout=120.0)
             if not ok:
@@ -2435,20 +2452,90 @@ def _publish_notion_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
         except (OSError, ValueError, TypeError):
             return False
 
-    res = _broker.run_staged_confined_command(
-        ws_root, [_sys.executable, "-c", "pass"], checker=checker, publish=True,
-        target=target, protected_tests=(rel_test,), candidate_overrides=staged,
-        timeout=8, task_id="reviewed-notion-repair", goal="check reviewed examples and publish one scoped edit",
-    )
-    ok = bool(res.get("ok") and res.get("confined") and res.get("published"))
-    return ok, checked["generalization"], None if ok else str(res.get("blocked") or "NOTION_PUBLICATION_REFUSED")
+    def publish() -> tuple[bool, dict[str, Any] | None, str | None]:
+        res = _broker.run_staged_confined_command(
+            ws_root, [_sys.executable, "-c", "pass"], checker=checker, publish=True,
+            target=target, protected_tests=(rel_test,), candidate_overrides=staged,
+            timeout=8, task_id="scoped-repair", goal="check examples and publish one scoped edit",
+        )
+        ok = bool(res.get("ok") and res.get("confined") and res.get("published"))
+        return ok, checked["generalization"], None if ok else str(res.get("blocked") or "REPAIR_PUBLICATION_REFUSED")
+
+    from canonical.swe_kernel.notions_v1 import live_notions
+    store = None
+    try:
+        if notions_path is not None:
+            store = live_notions(notions_path)
+            registered = store.authored_test_binding(ws_root, rel_test)
+            # The marker can be edited away. Persisted origin prevents that from
+            # becoming an ordinary caller-authored test while memory is readable.
+            if registered is not None and (not is_notion or registered != binding):
+                return False, None, "NOTION_TEST_CHANGED"
+        if not is_notion:
+            return publish()
+        if store is None or not isinstance(binding, dict):
+            return False, None, "NOTION_FEEDBACK_UNAVAILABLE"
+        # Hold the read lock through publication. A cooperating feedback writer
+        # cannot retract the approval in the middle of this operation.
+        with store.hold_reviewed_feedback(binding) as valid:
+            if not valid:
+                return False, None, "NOTION_FEEDBACK_STALE"
+            key = store._authored_test_key(ws_root, rel_test)
+            origin = store.authored_tests.get(key) or {}
+            if origin.get("binding") != binding:
+                return False, None, "NOTION_ORIGIN_UNRECORDED"
+            if (origin.get("test_sha256") != hashlib.sha256(test_bytes).hexdigest()
+                    or store.render_reviewed_test(binding).encode("utf-8") != test_bytes):
+                return False, None, "NOTION_TEST_CHANGED"
+            return publish()
+    except (OSError, ValueError, TypeError, KeyError):
+        return False, None, "NOTION_FEEDBACK_UNAVAILABLE"
+
+
+def _publish_notion_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
+                              staged: Mapping[str, str], *, notions_path: pathlib.Path | None = None
+                              ) -> tuple[bool, dict[str, Any] | None, str | None]:
+    return _publish_candidate(ws_root, test_file, staged, notion_required=True, notions_path=notions_path)
+
+
+def _snapshot_repair_memory(source: pathlib.Path, destination: pathlib.Path) -> None:
+    """Give a repair experiment a disposable snapshot of legacy repair memory.
+
+    Older learners record wins on a local test pass, before the board's
+    publication checks. Their writes must not persist for unaccepted or stale
+    candidates. Existing memory may propose candidates; experiment writes stay
+    in this private copy. Newly accepted reviewed syntax is recorded separately.
+    """
+    import shutil
+    import sqlite3
+    from contextlib import closing
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    destination.mkdir(parents=True, exist_ok=True)
+    if not can_read_memory() or not source.is_dir():
+        return
+    for entry in source.glob("*.json"):
+        if entry.is_symlink() or not entry.is_file():
+            continue
+        if entry.stat().st_size > 16 * 1024 * 1024:
+            raise ValueError(f"repair memory file too large to snapshot: {entry.name}")
+        shutil.copyfile(entry, destination / entry.name)
+    database = source / "skills.sqlite"
+    if database.is_symlink():
+        raise ValueError("repair skill database must not be a symlink")
+    if database.is_file():
+        # Backup includes committed WAL entries and avoids copying a torn DB.
+        with closing(sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True)) as src:
+            with closing(sqlite3.connect(destination / database.name)) as dst:
+                src.backup(dst)
 
 
 def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
     """Active-inference sovereign `Perform` organ for `Creature`:
     - Forecasts `PredictionTicket` via `EpistemicSelfBeliefEngine` (`Theta_t = (mu_t, Sigma_t)`) BEFORE acting;
-    - Executes confined verification / onboarding / repair / chase;
-    - Settles via independent inspector, computes Surprise `S_t`, and updates `(mu_t, Sigma_t)` online (`< 0.05 ms`).
+    - Executes confined checks / onboarding / repair / chase;
+    - Settles independently checked outcomes where available. Local repair
+      checks report heuristic surprise without training the independent ledger.
     """
     core = getattr(creature, "cognitive_core", None)
     if core is None:
@@ -2457,24 +2544,13 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         core = SentientCognitiveCore(creature.root / "cognitive_core")
         creature.cognitive_core = core
 
-    feat_kw: dict[str, Any] = {"strong_verifier": True}
-    if work.id.startswith("inspector:"):
-        cid_f = work.id[len("inspector:"):]
-        fl_f = _extract_capability_feature_flags(cid_f)
-        feat_kw.update(
-            host_ready=bool(fl_f["host_ready"]),
-            grounding_complete=bool(fl_f["grounding_complete"]),
-            causal_precond_met=bool(fl_f["causal_precond_met"]),
-            memory_reflex_hit=(cid_f in getattr(creature, "onboarded_capabilities", {})),
-            missing_dep_or_env_block=bool(fl_f["missing_dep_or_env_block"]),
-            nested_cost_or_timeout_risk=bool(fl_f["nested_cost_or_timeout_risk"]),
-        )
-    elif work.id.startswith(("gap:", "awake:gap:", "curiosity:")):
-        feat_kw["causal_precond_met"] = False
-
+    is_local_repair = work.id.startswith(("repair:", "awake:cow_repair:"))
+    feat_kw = _sovereign_feature_kwargs(work.id, creature)
     ticket = core.belief.predict_before_act(
         work.id,
-        calibration_ledger=creature.calibration_ledger,
+        # The independent calibration ledger must not be settled by our own
+        # tests. Local repair predictions remain uncalibrated observations.
+        calibration_ledger=None if is_local_repair else creature.calibration_ledger,
         claimed_reason="epistemic_kalman_self_belief",
         **feat_kw,
     )
@@ -2520,12 +2596,7 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         # creature has been picking the highest-value work on its board and crashing on the first
         # line of the handler. Derive the root the same way the rest of this module does.
         ws_target = getattr(creature, "workspace_root", None) or pathlib.Path(__file__).resolve().parents[2]
-        daemon = AwakeAgencyDaemon(
-            ws_target,
-            ledger_path=creature.root / "awake_repair" / "ledger.json",
-            skill_store_path=creature.root / "awake_repair" / "skills.sqlite",
-            apply_verified_repairs=True,
-        )
+        _notions_path = creature.root / "awake_sense" / "notions.json"
         # The obligation IS the owed test: `repair:<test_relpath>:<signature>`. Handing the whole
         # repo's suite to the repair engine made it time out and the failure was swallowed by
         # `Creature.step`, so this path never produced a result in any run.
@@ -2544,15 +2615,28 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         rep = {"repaired": 0, "failures_found": 0, "crystallized_skills": []}
         if not _green_before:
             try:
-                rep = daemon.experiment_in_cow_sandbox(max_repairs=1, owed_tests=_owed)
+                # Seed a private copy from prior repair memory. The legacy
+                # learners write on CoW test passes, which may later be rejected
+                # or have their review revoked; never persist those trial writes.
+                with tempfile.TemporaryDirectory(prefix="brain-repair-memory-") as scratch:
+                    scratch_root = pathlib.Path(scratch)
+                    _snapshot_repair_memory(creature.root / "awake_repair", scratch_root)
+                    daemon = AwakeAgencyDaemon(
+                        ws_target,
+                        ledger_path=scratch_root / "ledger.json",
+                        skill_store_path=scratch_root / "skills.sqlite",
+                        notions_path=_notions_path,
+                        apply_verified_repairs=True,
+                        isolated_repair_memory=True,
+                    )
+                    rep = daemon.experiment_in_cow_sandbox(max_repairs=1, owed_tests=_owed)
             except Exception as exc:  # noqa: BLE001 - a repair that cannot run is a failure to decide
                 rep = {"repaired": 0, "failures_found": 0, "crystallized_skills": [],
                        "error": f"{type(exc).__name__}: {str(exc)[:200]}"}
         ok = (not _green_before) and int(rep.get("repaired") or 0) > 0
-        # Reviewed-notion candidates are checked in a private stage before the
-        # single-file broker publishes them. The older path for other tests still
-        # writes into the live workspace before its checks and rolls back on
-        # failure; it is not a transactional publication guarantee.
+        # Candidate files are not written to the live workspace for trials.
+        # Only a single target can currently be published with a drift check;
+        # multi-file proposals are refused instead of being partially staged.
         generalization = None
         accepted: list[str] = []
         staged = dict(rep.get("staged") or {})
@@ -2565,75 +2649,55 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
                 pass
         if ok and not staged:
             ok = False
+        if ok and staged and not _owed:
+            ok, scope_block = False, "REPAIR_TEST_REQUIRED"
         if ok and staged and _owed:
-            _test_path = pathlib.Path(ws_target) / _owed[0]
-            scope_block = _notion_repair_scope(_test_path, pathlib.Path(ws_target), staged)
-            if scope_block:
-                ok = False
-        if ok and staged and notion_test:
-            ok, generalization, scope_block = _publish_notion_candidate(
-                pathlib.Path(ws_target), pathlib.Path(ws_target) / _owed[0], staged
+            ok, generalization, scope_block = _publish_candidate(
+                pathlib.Path(ws_target), pathlib.Path(ws_target) / _owed[0], staged,
+                notion_required=notion_test, notions_path=_notions_path,
             )
             if ok:
                 accepted = sorted(staged)
-        elif ok and staged:
-            originals: dict[str, bytes | None] = {}
-            for _rel in staged:
-                _dst = pathlib.Path(ws_target) / _rel
-                originals[_rel] = _dst.read_bytes() if _dst.is_file() else None
-                _dst.parent.mkdir(parents=True, exist_ok=True)
-                _dst.write_text(staged[_rel], encoding="utf-8")
+        structure_learning = None
+        if ok and notion_test and _owed:
+            # Local success is evidence for trying the observed syntax later,
+            # not independent proof. A future task still requires its own review
+            # and examples before this memory can cause test authorship.
             try:
-                if _owed:
-                    ok, _ = _run_py_test_file(
-                        pathlib.Path(ws_target) / _owed[0], pathlib.Path(ws_target), timeout=120.0
-                    )
-                # A green owed test is NOT evidence of a repair. Measured 2026-11-04: handed
-                # `assert add(2, 3) == 5`, the organ rewrote the source to `return 5` and passed,
-                # 3/3 trials; a held-out `add(10, 20) == 30` then failed 3/3. It memorized the
-                # oracle's answer. A capability that only works on the example it was fitted to has
-                # not been acquired, and crediting it would teach the creature that its
-                # best-paying work is satisfying the checker rather than the claim. So a green owed
-                # test is only a candidate; what settles it is whether the answer survives an input
-                # it was never shown.
-                if ok and _owed:
-                    generalization = _generalization_probe(
-                        pathlib.Path(ws_target) / _owed[0], pathlib.Path(ws_target)
-                    )
-                    if not generalization["generalizes"]:
-                        ok = False
-            finally:
-                if not ok:
-                    for _rel, _orig in originals.items():
-                        _dst = pathlib.Path(ws_target) / _rel
-                        try:
-                            if _orig is None:
-                                _dst.unlink(missing_ok=True)
-                            else:
-                                _dst.write_bytes(_orig)
-                        except OSError:
-                            pass
-                else:
-                    accepted = sorted(staged)
-        settle_rep = core.belief.settle_and_compute_surprise(
-            ticket,
-            outcome_pass=ok,
-            inspector="ConfinedZygoteTestSuiteOracle",
-            actual_cost=work.cost,
-            actual_gain=work.value if ok else 0.0,
-            calibration_ledger=creature.calibration_ledger,
-        )
+                from canonical.swe_kernel.notions_v1 import live_notions
+                first = (pathlib.Path(ws_target) / _owed[0]).read_text(encoding="utf-8").splitlines()[0]
+                binding = json.loads(first[len("# brain-notion-v1 "):])
+                structure_learning = live_notions(_notions_path).record_checked_repair(
+                    binding, staged[binding["module"]]
+                )
+            except Exception as exc:  # publication already happened: report, do not falsely undo it
+                structure_learning = {"status": "learning_error", "error": type(exc).__name__}
+        # This is a local prediction error, not independent correctness and
+        # not a settled calibration record. Do not train the independently
+        # assessed self-belief model from its own test results.
+        import math as _math
+        assigned = p_hat if ok else 1.0 - p_hat
+        local_surprise = -_math.log(max(1e-6, min(1.0, assigned)))
         return {
             "ok": ok,
-            # Caller-supplied examples and our own checker are not an independent
-            # verifier of intent; do not turn a local test pass into verified truth.
-            "verified": False if notion_test else True,
-            "correct": None if notion_test else ok,
+            # Neither caller-supplied examples nor this same agent's local
+            # checker are an independent verification of intended correctness.
+            "verified": False,
+            "correct": None,
             "verification_scope": "reviewed examples and input sensitivity" if notion_test else "owed test and input sensitivity",
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
-            "surprise": settle_rep["surprise"],
+            "prediction_scope": "heuristic self-belief with incomplete grounding; not calibrated correctness",
+            "prediction_variance": ticket.epistemic_variance,
+            "prediction_entropy_bits": ticket.predictive_entropy_bits,
+            "prediction_features": {key: ticket.feature_map.get(key) for key in
+                                    ("host_ready", "grounding_complete", "strong_verifier")},
+            "independent_calibration_recorded": False,
+            "surprise": round(local_surprise, 6),
+            "surprise_scope": "local test outcome only; not an independent calibration sample",
             "generalization": generalization,
+            "structure_learning": structure_learning,
+            "repair_error": rep.get("error"),
             "accepted_into_world": accepted,
             "blocked": None if ok else (scope_block or (
                 "REPAIR_DOES_NOT_GENERALIZE" if generalization and not generalization["generalizes"]
@@ -2783,8 +2847,10 @@ def run_sovereign_board(
                 skill_store_path=creature.root / "awake_sense" / "skills.sqlite",
             )
             extra_failing_tests = [(rel, sig) for rel, sig in _sensor._sense_failing_workspace_tests()]
+            from canonical.swe_kernel.notions_v1 import live_notions
             notion_review = {"store": str(_sensor.notions_path),
                              "findings": list(_sensor.notion_findings),
+                             "memory": dict(live_notions(_sensor.notions_path).summary()),
                              "authority": "questions only; feedback is caller-supplied"}
         except Exception as exc:  # noqa: BLE001 - report uncertainty rather than claiming an empty world
             extra_failing_tests = ()

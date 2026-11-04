@@ -481,7 +481,8 @@ class InterpretiveRepair:
         return [(name, why) for _n, _h, _i, name, why in ranked]
 
     # -- proposal -----------------------------------------------------------------------------
-    def propose(self, source_text: str, *evidence: Any, limit: int = 8, **__) -> list[str]:
+    def propose(self, source_text: str, *evidence: Any, limit: int = 8,
+                learned_operators: Sequence[str] = (), **__) -> list[str]:
         """Offer source-derived expression and supported-operator candidates for screening.
 
         Candidate generation does not establish correctness. In particular, an
@@ -492,7 +493,7 @@ class InterpretiveRepair:
         reason = str(evidence[0]) if evidence else ""
         rows = [r for r in parse_evidence(reason) if r.get("expected_source") != "peer_observation"]
         out: list[str] = []
-        for cand in self._source_expression_rewrites(source_text, rows):
+        for cand in self._source_expression_rewrites(source_text, rows, learned_operators):
             if cand not in out:
                 out.append(cand)
                 if len(out) >= limit:
@@ -522,8 +523,9 @@ class InterpretiveRepair:
                     return out
         return out
 
-    def _source_expression_rewrites(self, source_text: str, rows: Sequence[Mapping[str, Any]]):
-        """Rebind expressions already present in source, filtered by an owed example."""
+    def _source_expression_rewrites(self, source_text: str, rows: Sequence[Mapping[str, Any]],
+                                    learned_operators: Sequence[str] = ()):
+        """Filter source and learned-grammar expressions against owed examples."""
         from canonical.swe_kernel.expression_hypotheses_v1 import (
             evaluate_expression, expression_candidates, function_models, replace_return_expression, same_number,
         )
@@ -538,7 +540,7 @@ class InterpretiveRepair:
             ):
                 continue
             templates = [m for m in models.values() if m.name != target.name]
-            candidates, _truncated = expression_candidates(target, templates)
+            candidates, _truncated = expression_candidates(target, templates, learned_operators=learned_operators)
             for expr in candidates:
                 # Every independently asserted example already in the failure
                 # report is evidence.  Fitting only the first diagonal example

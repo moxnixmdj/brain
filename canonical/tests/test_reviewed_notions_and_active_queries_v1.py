@@ -282,6 +282,9 @@ def test_review_priority_learns_from_feedback_without_granting_authority(tmp_pat
         assert reloaded.score(negative) == -0.055556
     # A learned priority never confirms a new question or grants permission.
     assert all(f["id"] not in reloaded.reviews for f in heldout)
+    # Even an object loaded before entering OFF must not consult its old labels.
+    with memory_policy_scope(OFF):
+        assert reloaded.score(positive) == 0.0
 
 
 def test_duplicate_or_contradictory_reviews_are_not_extra_labels(tmp_path):
@@ -423,20 +426,26 @@ def test_truncated_hypothesis_space_cannot_authorize(tmp_path):
 
 @pytest.mark.skipif(not broker.namespace_broker_available(), reason="confined execution unavailable")
 def test_reviewed_candidate_is_checked_before_live_publication(tmp_path):
-    _, workspace, module, _ = make_daemon(tmp_path, GEOM)
+    d, workspace, module, _ = make_daemon(tmp_path, GEOM)
     before = module.read_text()
-    (workspace / "tests").mkdir()
+    finding = finding_for(d, "square_area", "rect_area")
+    store = NotionStore(d.notions_path)
+    store.review(finding["id"], decision="confirm", reviewer="fixture", basis="contract",
+                 trusted_function="square_area")
+    for _ in range(2):
+        plan = finding_for(d, "square_area", "rect_area")["plan"]
+        args = plan["next_query"]["args"]
+        store.answer(finding["id"], args=args, expected=args[0] * args[1],
+                     reviewer="fixture", basis="outside oracle")
+    assert d._sense_failing_workspace_tests()
     test = workspace / "tests" / "test_example.py"
-    binding = {"module": "pkg/example.py", "source_sha256": hashlib.sha256(before.encode()).hexdigest(),
-               "target": "rect_area", "reference": "square_area", "finding_id": "fixture"}
-    test.write_text("# brain-notion-v1 " + json.dumps(binding) + "\n"
-                    "from pkg.example import rect_area\n\n"
-                    "def test_examples():\n    assert rect_area(3, 3) == 9\n    assert rect_area(2, 3) == 6\n")
     wrong = before.replace("return w + h", "return w * w", 1)
-    ok, _, _ = creature._publish_notion_candidate(workspace, test, {"pkg/example.py": wrong})
+    ok, _, _ = creature._publish_notion_candidate(workspace, test, {"pkg/example.py": wrong},
+                                                  notions_path=d.notions_path)
     assert not ok and module.read_text() == before
     right = before.replace("return w + h", "return w * h", 1)
-    ok, probe, reason = creature._publish_notion_candidate(workspace, test, {"pkg/example.py": right})
+    ok, probe, reason = creature._publish_notion_candidate(workspace, test, {"pkg/example.py": right},
+                                                           notions_path=d.notions_path)
     assert ok and reason is None and probe["generalizes"]
     assert module.read_text() == right
 
@@ -474,10 +483,10 @@ def test_generalization_probe_resists_simple_print_hijack(tmp_path):
     test.write_text("from bad import constant\ndef test_value():\n    assert constant(1) == 5\n")
     result = creature._generalization_probe(test, workspace)
     assert result["generalizes"] is False
-    assert result["reason"] == "OUTPUT_IGNORES_INPUTS"
+    assert result["reason"] == "PROBE_SOURCE_UNSUPPORTED"
 
 
-@pytest.mark.xfail(strict=True, reason="untrusted Python can mutate the in-process probe's own globals")
+
 @pytest.mark.skipif(not broker.namespace_broker_available(), reason="confined execution unavailable")
 def test_generalization_probe_would_refuse_frame_introspection_spoof(tmp_path):
     workspace = tmp_path / "workspace"
@@ -497,7 +506,9 @@ def test_generalization_probe_would_refuse_frame_introspection_spoof(tmp_path):
     )
     test = workspace / "test_bad.py"
     test.write_text("from bad import constant\ndef test_value():\n    assert constant(1) == 5\n")
-    assert creature._generalization_probe(test, workspace)["generalizes"] is False
+    result = creature._generalization_probe(test, workspace)
+    assert result["generalizes"] is False
+    assert result["reason"] == "PROBE_SOURCE_UNSUPPORTED"
 
 
 @pytest.mark.skipif(not broker.namespace_broker_available(), reason="confined execution unavailable")
@@ -513,7 +524,7 @@ def test_generalization_probe_refuses_duplicate_spoofed_records(tmp_path):
     test.write_text("from bad import constant\ndef test_value():\n    assert constant(1) == 5\n")
     result = creature._generalization_probe(test, workspace)
     assert result["generalizes"] is False
-    assert result["reason"] == "CONFINED_PROBE_RESULT_AMBIGUOUS"
+    assert result["reason"] == "PROBE_SOURCE_UNSUPPORTED"
 
 
 @pytest.mark.skipif(not broker.namespace_broker_available(), reason="confined execution unavailable")

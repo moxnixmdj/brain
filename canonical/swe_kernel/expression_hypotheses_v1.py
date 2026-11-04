@@ -1,10 +1,11 @@
 """Bounded, non-executing models of simple numeric functions.
 
-This module supplies a small *hypothesis space*, not a specification.  It copies
-expression structure from the program under examination and explores different
-bindings of its parameters.  An independent example can eliminate models; a query
-is chosen to separate the survivors.  Agreement in this bounded space is not a
-proof that a program is correct, nor evidence that two functions should agree.
+This module supplies a small *hypothesis space*, not a specification. It rebinds
+source expressions and can compose supported operators observed in previous
+locally checked repairs. An externally supplied example can eliminate models; a
+query is chosen to separate survivors. Experience supplies proposals, not facts
+or permission. Agreement in this bounded space is not a proof of correctness or
+that two functions should agree.
 
 No workspace module is imported or executed. Arithmetic is interpreted directly
 from a restricted AST. Unsupported functions and arithmetic decline. The bounds
@@ -28,6 +29,7 @@ MAX_FUNCTIONS = 24
 MAX_ARITY = 4
 MAX_CANDIDATES = 256
 MAX_QUERY_POINTS = 256
+MAX_LEARNED_BINARY_NODES = 2
 MIN_EXTERNAL_EXAMPLES = 2
 
 # Python operator semantics, not a mapping from error classes to repairs.
@@ -177,14 +179,54 @@ def evaluate(model: FunctionModel, args: Sequence[Any]) -> tuple[bool, int | flo
     return evaluate_expression(model.expression, dict(zip(model.params, args)))
 
 
+def supported_binary_operator_names() -> frozenset[str]:
+    return frozenset(cls.__name__ for cls in _BINARY)
+
+
+def observed_binary_operators(expression: ast.AST) -> list[str]:
+    """Describe supported primitives actually present in a restricted expression."""
+    return sorted({type(node.op).__name__ for node in ast.walk(expression)
+                   if isinstance(node, ast.BinOp) and type(node.op) in _BINARY})
+
+
+def _learned_compositions(params: Sequence[str], operator_names: Sequence[str]):
+    """Enumerate small programs from observed operators, not a failure/repair table.
+
+    Only parameters are leaves; no value is copied from a previous task. Each
+    binary-node count is enumerated bottom-up. The caller applies the budget and
+    tests every resulting model against this task's own observations.
+    """
+    supported = {cls.__name__: cls for cls in _BINARY}
+    operators = [supported[name] for name in sorted({n for n in operator_names if isinstance(n, str)})
+                 if name in supported]
+    if not operators:
+        return
+    levels: list[list[ast.expr]] = [[ast.Name(id=p, ctx=ast.Load()) for p in params]]
+    max_nodes = MAX_LEARNED_BINARY_NODES
+    for count in range(1, max_nodes + 1):
+        level: list[ast.expr] = []
+        for left_count in range(count):
+            right_count = count - left_count - 1
+            for op in operators:
+                for left in levels[left_count]:
+                    for right in levels[right_count]:
+                        expr = ast.fix_missing_locations(ast.BinOp(
+                            left=copy.deepcopy(left), op=op(), right=copy.deepcopy(right)))
+                        level.append(expr)
+                        yield expr
+        levels.append(level)
+
+
 def expression_candidates(target: FunctionModel, templates: Sequence[FunctionModel], *,
+                          learned_operators: Sequence[str] = (),
                           limit: int = MAX_CANDIDATES) -> tuple[list[ast.expr], bool]:
     """Rebind each parameter occurrence in source expressions to a target parameter.
 
     Bindings are not chosen by a table: all combinations within the budget are
     considered.  For example, a two-occurrence expression can bind its occurrences
     to the same target parameter or to two different ones.  Constants and operator
-    nodes come from the source templates, not from a catalogue of repairs.
+    nodes come from the source templates or previously observed primitives,
+    not a catalogue of failure classes. Learned compositions are proposals only.
     """
     limit = max(1, min(int(limit), MAX_CANDIDATES))
     out: list[ast.expr] = []
@@ -233,6 +275,24 @@ def expression_candidates(target: FunctionModel, templates: Sequence[FunctionMod
                 if combinations > 1:
                     truncated = True
                 break
+    if learned_operators and not truncated:
+        # Bound attempts as well as distinct candidates. Encountering a budget
+        # makes incomplete search explicit; it cannot become agreement evidence.
+        attempts = 0
+        for expr in _learned_compositions(target.params, learned_operators):
+            attempts += 1
+            if attempts > MAX_CANDIDATES * 4:
+                truncated = True
+                break
+            before = len(out)
+            add(expr)
+            if len(out) > limit:
+                truncated = True
+                break
+            if before < limit and len(out) == limit:
+                # Continue until a further distinct candidate, if any, shows
+                # that this exact-sized space was actually truncated.
+                continue
     return out[:limit], truncated
 
 
@@ -280,21 +340,25 @@ def only_target_expression_changed(before: str, after: str, target_name: str) ->
 
 def investigate(source: str, *, target_name: str, reference_name: str,
                 observations: Sequence[Mapping[str, Any]],
-                examples: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+                examples: Sequence[Mapping[str, Any]],
+                learned_operators: Sequence[str] = ()) -> dict[str, Any]:
     """Filter source-derived models and ask a discriminating, externally answered query.
 
     The caller must supply observations from an explicitly trusted reference and
     separately supplied examples; neither source-derived predictions nor a model's
     own output may be fed back as an external answer.
     """
+    learned_operators = tuple(sorted({n for n in learned_operators
+                                      if isinstance(n, str) and n in supported_binary_operator_names()}))
     models = function_models(source)
     target, reference = models.get(target_name), models.get(reference_name)
     if not target or not reference or target_name == reference_name:
-        return {"status": "unsupported", "candidates": 0, "next_query": None}
-    candidates, truncated = expression_candidates(target, [reference])
-    # The query grid is separately bounded; do not mistake a truncated grid
-    # for agreement across all inputs in the declared finite domain.
-    truncated = truncated or (6 ** len(target.params) > MAX_QUERY_POINTS)
+        return {"status": "unsupported", "candidates": 0, "next_query": None,
+                "reason": "target/reference unavailable in restricted static model"}
+    candidates, truncated = expression_candidates(target, [reference], learned_operators=learned_operators)
+    # The main grid and the out-of-range stress grid are separately bounded.
+    # A partial exploration must not count as agreement across either grid.
+    truncated = truncated or (6 ** len(target.params) + 3 ** len(target.params) > MAX_QUERY_POINTS)
     constraints: list[tuple[tuple[Any, ...], Any]] = []
     for observation in observations:
         x = observation.get("input")
@@ -309,49 +373,78 @@ def investigate(source: str, *, target_name: str, reference_name: str,
         if isinstance(args, (list, tuple)) and len(args) == len(target.params) and all(_number(a) for a in args) and _number(expected):
             constraints.append((tuple(args), expected))
     if not constraints:
-        return {"status": "no_reference_observations", "candidates": 0, "next_query": None}
+        return {"status": "no_reference_observations", "candidates": 0, "next_query": None,
+                "reason": "no supported, attributed constraints"}
     survivors: list[ast.expr] = []
     for expr in candidates:
         if all((lambda r: r[0] and same_number(r[1], expected))(
                 evaluate_expression(expr, dict(zip(target.params, args)))) for args, expected in constraints):
             survivors.append(expr)
     if not survivors:
-        return {"status": "no_candidates", "candidates": 0, "truncated": truncated, "next_query": None}
+        return {"status": "no_candidates", "candidates": 0, "truncated": truncated, "next_query": None,
+                "external_examples": len(examples), "learned_operators_considered": list(learned_operators),
+                "reason": "no explored model fits the supplied evidence"}
 
     asked = {args for args, _ in constraints}
     best: tuple[float, tuple[int, ...], list[int | float]] | None = None
     fallback: tuple[tuple[int, ...], list[int | float]] | None = None
-    # Small, explicit exploration domain. This is a budget, not an invented oracle.
-    for args in itertools.islice(itertools.product((2, 3, 4, 5, 6, 7), repeat=len(target.params)), MAX_QUERY_POINTS):
+    checked = {"primary": 0, "stress": 0, "undefined": 0}
+
+    def examine(args: tuple[int, ...], domain: str) -> tuple[float, list[int | float]] | None:
         if args in asked:
-            continue
+            return None
         results = [evaluate_expression(expr, dict(zip(target.params, args))) for expr in survivors]
         if not all(ok for ok, _ in results):
-            continue
-        values = [value for _, value in results]
+            checked["undefined"] += 1
+            return None
+        checked[domain] += 1
         buckets: list[tuple[int | float, int]] = []
-        for value in values:
+        for _, value in results:
             for i, (known, count) in enumerate(buckets):
                 if same_number(value, known):
                     buckets[i] = (known, count + 1)
                     break
             else:
                 buckets.append((value, 1))
-        predictions = [value for value, _ in buckets]
+        entropy = -sum((count / len(results)) * math.log2(count / len(results)) for _, count in buckets)
+        return entropy, [value for value, _ in buckets]
+
+    # Discriminate on the original finite grid first. If models agree there,
+    # challenge that agreement on a small second grid with negative, zero and
+    # larger inputs. These values are generic stress choices, not an oracle.
+    for args in itertools.islice(itertools.product((2, 3, 4, 5, 6, 7), repeat=len(target.params)), MAX_QUERY_POINTS):
+        result = examine(args, "primary")
+        if result is None:
+            continue
+        entropy, predictions = result
         if fallback is None:
             fallback = (args, predictions)
-        if len(buckets) < 2:
-            continue
-        entropy = -sum((count / len(values)) * math.log2(count / len(values)) for _, count in buckets)
-        if best is None or entropy > best[0] + 1e-12:
+        if len(predictions) >= 2 and (best is None or entropy > best[0] + 1e-12):
             best = (entropy, args, predictions)
+
+    stress_complete = best is None
+    stress_fallback: tuple[tuple[int, ...], list[int | float]] | None = None
+    if stress_complete:
+        stress = list(itertools.product((-3, 0, 11), repeat=len(target.params)))
+        # Prioritize varied inputs at opposite ends of the domain; diagonal
+        # points have already been proposed by the source relationship.
+        stress.sort(key=lambda a: (-(max(a) - min(a)), -max(abs(x) for x in a), a))
+        for args in stress:
+            result = examine(args, "stress")
+            if result is None:
+                continue
+            entropy, predictions = result
+            if stress_fallback is None:
+                stress_fallback = (args, predictions)
+            if len(predictions) >= 2 and (best is None or entropy > best[0] + 1e-12):
+                best = (entropy, args, predictions)
 
     query = None
     if best:
         entropy, args, predictions = best
         query = {"args": list(args), "predictions": predictions, "reason": "models_disagree", "entropy_bits": round(entropy, 6)}
-    elif len(examples) < MIN_EXTERNAL_EXAMPLES and fallback:
-        args, predictions = fallback
+    elif len(examples) < MIN_EXTERNAL_EXAMPLES and (stress_fallback or fallback):
+        args, predictions = stress_fallback or fallback
         query = {"args": list(args), "predictions": predictions, "reason": "independent_validation", "entropy_bits": 0.0}
     status = "needs_example" if query else (
         "insufficient_external_examples" if len(examples) < MIN_EXTERNAL_EXAMPLES else
@@ -363,6 +456,8 @@ def investigate(source: str, *, target_name: str, reference_name: str,
         "candidate_expressions": [ast.unparse(expr) for expr in survivors[:12]],
         "truncated": truncated,
         "external_examples": len(examples),
+        "learned_operators_considered": sorted(set(learned_operators)),
+        "coverage": {**checked, "stress_grid_completed": stress_complete},
         "next_query": query,
-        "scope": "bounded source-derived numeric expressions and a finite input grid; not proof of intent",
+        "scope": "bounded source and experience-derived models on jointly defined points in two finite grids; not proof of intent",
     }
