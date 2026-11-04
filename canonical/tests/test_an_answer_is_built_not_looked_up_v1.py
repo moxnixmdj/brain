@@ -353,6 +353,13 @@ def test_verification_catches_a_partition_that_does_not_add_up(tmp_path, monkeyp
             out["_body"] = [row for row in out["_body"] if row[0] != "north"]
         return out
     monkeypatch.setattr(V, "evaluate", lossy)
+    # THE MEMO IS PART OF THE QUESTION'S SCOPE.
+    #
+    # Evaluation is memoised per node for the duration of one question, so a value the
+    # search already computed is not recomputed here. This test changes the operator
+    # under the expression, which cannot happen inside a real question -- so it must
+    # start a fresh scope, exactly as `compose` does on entry.
+    V._reset_memo()
     truncated = V.evaluate(node)
     assert truncated != value, "the fixture must actually change the grouping"
     # Same expression, same interpreter, deterministic -- and WRONG.
@@ -441,3 +448,108 @@ def test_per_group_asks_for_one_answer_per_group_not_a_single_count(tmp_path):
     if out["verification"]["verified"] and answer.get("answered"):
         # north has 2 rows (100, 50); south has 1 (150); west has 1 (250).
         assert value == "[2.0, 1.0, 1.0]", value
+
+
+# ---------------------------------------------------------------------------
+# THE CHECK IS PART OF THE CHOICE, NOT A GATE AFTER IT.
+#
+# `verify()` could reject a wrong answer, and nothing consulted it while choosing: it ran
+# after the decision had been made. Measured with a `groups` that silently drops a group,
+# the search returned [150.0, 150.0] -- west's 250 missing -- and `verify()` said False on
+# exactly that result. The machinery to reject it existed and was not in the loop.
+#
+# These tests make the search answer for its own soundness, using the only kind of
+# failure that matters: an operator that is WRONG while being deterministic, so that
+# every "run it again and compare" check passes.
+# ---------------------------------------------------------------------------
+
+def _lossy_groups(monkeypatch, keep=lambda key: key != "west"):
+    """Make `groups` silently drop buckets -- a stale cache, a race, a reducer typo."""
+    real = V._evaluate
+    def lossy(n, *, derived=None):
+        out = real(n, derived=derived)
+        if isinstance(out, dict) and "_body" in out and getattr(n, "op", "") == "groups":
+            out = dict(out)
+            out["_body"] = [row for row in out["_body"] if keep(row[0])]
+        return out
+    monkeypatch.setattr(V, "_evaluate", lossy)
+    V._reset_memo()
+
+
+def test_a_selected_answer_must_satisfy_its_own_operator_invariant(tmp_path, monkeypatch):
+    """THE SEARCH REFUSES A WRONG ANSWER INSTEAD OF A LATER GATE CATCHING IT.
+
+    With one bucket missing, every grouping-derived question becomes unsound. The search
+    must not return the truncated totals, and must not fall through to a DIFFERENT
+    question either -- answering "how many rows" for "how many regions" would be the same
+    defect reported as a success.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    monkeypatch.setattr(V, "_evaluate", V._evaluate)
+    _lossy_groups(monkeypatch)
+    for question in ("what is the total amount per region in sales.csv",
+                     "which region has the largest total amount in sales.csv"):
+        built = _build(question, root)
+        assert built is None, (question, built and built["value"])
+
+
+def test_a_question_that_does_not_depend_on_the_broken_operator_still_answers(tmp_path, monkeypatch):
+    """Refusing everything would hide the bug behind a blanket refusal.
+
+    "how many rows" never touches grouping, so an unsound `groups` is no reason to refuse
+    it. Soundness is per-expression, not a global mood.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    _lossy_groups(monkeypatch)
+    built = _build("how many rows are in sales.csv", root)
+    assert built is not None and str(built["value"]) in ("4", "4.0"), built and built["value"]
+
+
+def test_a_corrupted_answer_is_rejected_whether_the_memo_is_warm_or_cold(tmp_path):
+    """The memo must not be able to launder a wrong answer into a passing one.
+
+    I expected a warm memo to make the reproducibility leg compare the sitting answer with
+    itself. MEASURED: it does not, and the reason is worth keeping. The memo caches the
+    value the EXPRESSION produces (30.0), not the value recorded in the answer, so a
+    corrupted record still disagrees with it and the answer is still rejected. The hazard
+    I feared is not a hazard; this test holds the property that makes it not one, at both
+    temperatures, rather than asserting a defence that is not load-bearing.
+    """
+    root = _tree(tmp_path, **{"a.csv": A_CSV})
+    built = _build("what is the total of the x in a.csv", root)
+    assert float(built["value"]) == 30.0, built["value"]      # 10 + 20
+    corrupted = dict(built, value=999.0)
+
+    # cold memo
+    V._reset_memo()
+    assert V.verify("q", root, corrupted) is False
+    # warm memo for the very node being judged
+    V._reset_memo()
+    V.evaluate(built["node"])
+    assert V.verify("q", root, corrupted) is False
+    # and the true answer still passes at both temperatures
+    assert V.verify("q", root, built) is True
+
+
+def test_the_memo_serves_only_the_node_it_stored(tmp_path):
+    """An id is not an identity: CPython reuses the address of a collected object.
+
+    SCOPE OF THE CLAIM, measured: I could not make id reuse actually bite, because
+    `compose` clears the memo on entry, so no entry outlives the search that made it. This
+    is therefore DEFENCE IN DEPTH, and the test pins the mechanism directly -- a planted
+    entry under a live node's id must not be served -- rather than pretending the door
+    exercises it.
+    """
+    root = _tree(tmp_path, **{"sales.csv": REPEATED})
+    V._reset_memo()
+    node = _build("how many regions are in sales.csv", root)["node"]
+    true_value = V.evaluate(node)
+    assert true_value == 3
+
+    # Plant a different node's value under this node's id, as a reused address would.
+    decoy = _build("how many rows are in sales.csv", root)["node"]
+    V._EVAL_MEMO[id(node)] = (decoy, 999)
+    # The identity check must refuse it and recompute.
+    assert V.evaluate(node) == 3, "the memo served a value belonging to another node"
+    assert V._EVAL_MEMO[id(node)][0] is node
+    V._reset_memo()

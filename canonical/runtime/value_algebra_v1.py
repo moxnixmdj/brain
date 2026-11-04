@@ -357,7 +357,33 @@ def _row_leaf(rel: str, column: str, index: int, header: list[str]) -> dict:
 
 
 def evaluate(node: Node, *, derived: dict | None = None) -> object:
-    """The value of an expression, computed freshly from the tree."""
+    """The value of an expression, computed from the tree.
+
+    Memoised per node identity for the duration of one question (`_reset_memo` clears it).
+    A `Node` is immutable after construction and its value depends only on the files it
+    names, so within one question the memo cannot return a stale answer -- and without it,
+    asking a soundness question about sub-expressions the search has already built turned
+    a single question into hundreds of full tree walks.
+    """
+    if derived is None:
+        key = id(node)
+        hit = _EVAL_MEMO.get(key)
+        # THE CACHE HOLDS THE NODE, NOT ONLY ITS ID.
+        #
+        # Keying on `id()` alone is unsound on its own: a candidate that is dropped is
+        # collected, and CPython hands its address to the next object -- so a later node
+        # can inherit a dead node's id and be served that node's value. Storing the node
+        # beside the value pins it for as long as the entry lives, which makes id reuse
+        # impossible while the entry is live. The identity check catches anything else.
+        if hit is not None and hit[0] is node:
+            return hit[1]
+        value = _evaluate(node, derived=None)
+        _EVAL_MEMO[key] = (node, value)
+        return value
+    return _evaluate(node, derived=derived)
+
+
+def _evaluate(node: Node, *, derived: dict | None = None) -> object:
     op = node.op
     if op == "column":
         rel, name = node.args
@@ -660,10 +686,13 @@ def _literal_values(lex: Lexicon, tables: dict, key: str) -> list[str]:
 def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
     """Try to BUILD an answer out of typed pieces. None when nothing builds.
 
+    (The memo is cleared on entry: one question, one set of values.)
+
     The search is bounded and typed, and it is not a table of question shapes: it
     enumerates operators that TYPE-CHECK against the values the tree provides, which is
     why a question nobody wrote down can still be answered.
     """
+    _reset_memo()
     lex = Lexicon(words)
     steps = 0
     files = [e for e in ents if e.kind == "file"]
@@ -1115,6 +1144,29 @@ def compose(question: str, root: str, ents, words: list[str]) -> dict | None:
             continue
         if value is None:
             continue
+        # THE CHECK IS PART OF THE CHOICE, NOT A GATE AFTER IT.
+        #
+        # `verify()` re-derived the quantity from the partition and could reject a wrong
+        # answer -- but nothing consulted it while choosing, so it ran after the decision
+        # had already been made. Measured: with `groups` silently dropping one group, the
+        # search returned [150.0, 150.0] (west's 250 missing) and `verify()` said False on
+        # exactly that result. The machinery to reject it existed and was NOT IN THE LOOP.
+        #
+        # A candidate whose value violates its own operator's invariant is not a weaker
+        # answer to fall back on; it is a wrong one, and the search must keep looking.
+        if holds(cand, value) is False:
+            # AN UNSOUND CANDIDATE ABORTS THE QUESTION; IT DOES NOT HAND OVER TO A WEAKER ONE.
+            #
+            # The first version `continue`d, and that was wrong in a way worth recording:
+            # with `groups` lossy, the totals were correctly refused and the search then
+            # answered a DIFFERENT question from the leftovers -- the key vector
+            # ['north','south'] for a question about amounts, and the row count 4 for
+            # "how many regions". Seeing the violation and then quietly substituting
+            # another question is the defect this project exists to catch, one layer up.
+            #
+            # `holds` is not a preference; it is a contradiction between the expression
+            # and the data. When it fires, nothing built from that data here is an answer.
+            return None
         best = (cand, value)
         break
 
@@ -1255,9 +1307,16 @@ def verify(question: str, root: str, result: dict) -> bool:
         return False
 
     # (1) Reproducible. Necessary, not sufficient; kept because a nondeterministic
-    #     answer is definitely wrong, and it is nearly free.
+    #     answer is definitely wrong.
+    #
+    # THE CHECK MUST NOT READ THE ANSWER OUT OF THE CACHE IT IS CHECKING.
+    #
+    # `evaluate` is memoised, and the memo is populated by the very search that produced
+    # this value -- so calling `evaluate(node)` here would return the sitting answer and
+    # compare it with itself, which is exactly the tautology this function was rewritten
+    # to stop being. `_evaluate` is the uncached body: a second real computation.
     try:
-        again = evaluate(node)
+        again = _evaluate(node)
     except (EvalError, TypeError, ValueError, ZeroDivisionError,
             AttributeError, KeyError, IndexError):
         return False
@@ -1266,13 +1325,38 @@ def verify(question: str, root: str, result: dict) -> bool:
 
     # (2) Consistent with the partition it came from, computed independently of it.
     #     A failure here is a failure of the ANSWER, which the old check could never see.
+    return holds(node, result.get("value"))
+
+
+# EVALUATION MEMO, SCOPED TO ONE QUESTION.
+#
+# Checking soundness asks about sub-expressions the search has already evaluated, and
+# candidates SHARE subtrees -- one `groups` node sits under a dozen of them. Without a
+# memo, putting the check in the loop re-evaluated whole trees once per candidate: the
+# trace showed hundreds of identical `count(amount)s by region` evaluations for a single
+# question. Nodes are immutable after construction, so a node's value cannot change
+# inside one question and caching it is exactly a memo.
+_EVAL_MEMO: dict = {}
+
+
+def _reset_memo() -> None:
+    _EVAL_MEMO.clear()
+
+
+def holds(node: Node, value) -> bool:
+    """Is `value` a correct value FOR THIS NODE, checked without trusting the evaluation?
+
+    This is the half of `verify` that can fail. It is separate from reproducibility
+    because the SEARCH needs it: a candidate has just been evaluated, so re-running the
+    evaluation would only confirm determinism, and the invariants are exactly the part
+    that can say "this expression produced a value it should not have been able to".
+
+    `verify` is `reproducible AND holds`. The search uses `holds`.
+    """
     try:
         return _holds_invariants(node)
     except (EvalError, TypeError, ValueError, ZeroDivisionError,
             AttributeError, KeyError, IndexError):
-        # An invariant that cannot be evaluated is not an invariant that failed. The
-        # operators with no partition-level statement (`double`, `digits`) land here on
-        # purpose and are verified by reproducibility alone.
         return True
 
 
@@ -1286,6 +1370,17 @@ def _same_value(a, b) -> bool:
     return a == b
 
 
+def _child_nodes(node: Node):
+    """The sub-expressions of `node`, for a check that must hold at every depth."""
+    for arg in getattr(node, "args", ()) or ():
+        if isinstance(arg, Node):
+            yield arg
+        elif isinstance(arg, (list, tuple)):
+            for item in arg:
+                if isinstance(item, Node):
+                    yield item
+
+
 def _holds_invariants(node: Node) -> bool:
     """The statements about a partition that must be true of any correct answer.
 
@@ -1294,6 +1389,18 @@ def _holds_invariants(node: Node) -> bool:
     of error the reproducibility check structurally cannot -- an expression that is
     faithfully evaluated and answers the wrong question about the right table.
     """
+    # AN INVARIANT IS A PROPERTY OF THE EXPRESSION, NOT OF ITS ROOT.
+    #
+    # This checked only the node it was handed, so a violation one level down was
+    # invisible: `cell[region](argmax(groups))` was judged on the `cell`, whose own
+    # statement is vacuous, and the lossy `groups` underneath was never examined --
+    # "which region has the largest total" returned `north` with west's 250 missing. Every
+    # judgement about a value here is really a judgement about the whole expression that
+    # produced it, so the walk descends before it answers.
+    for child in _child_nodes(node):
+        if not _holds_invariants(child):
+            return False
+
     if node.op == "count":
         inner = node.args[0]
         # A COUNT OVER DISTINCT VALUES CANNOT EXCEED THE VALUES IT DISTINGUISHES.
@@ -1309,7 +1416,13 @@ def _holds_invariants(node: Node) -> bool:
             # EXACT, NOT A BOUND. `<=` would accept the row count as a "distinct count"
             # whenever it happened to be an upper bound, which is the original bug.
             return int(evaluate(node)) == len(distinct)
-        # THE PARTS OF A GROUPING COUNT TO THE NUMBER OF GROUPS.
+        # THE PARTS OF A GROUPING COUNT TO THE DISTINCT KEYS IN THE ROWS.
+        #
+        # This compared against the grouping's OWN `_keys`, so a `groups` that dropped a
+        # bucket dropped the key with it and the count agreed with itself: "how many
+        # regions" would have answered 2, and the search -- seeing nothing wrong -- fell
+        # through to the row count of 4. The keys have to be counted from the ROWS, which
+        # is the route the grouping did not take.
         if inner.op == "values_of" and isinstance(inner.args[0], Node) and inner.args[0].op == "groups":
             grouped = inner.args[0]
             table = evaluate(grouped.args[0].args[0])
@@ -1330,6 +1443,21 @@ def _holds_invariants(node: Node) -> bool:
         if whole is None or not parts:
             return True
         return abs(sum(parts) - whole) < 1e-6
+
+    # A CHOICE AMONG GROUPS IS ONLY AS GOOD AS THE GROUPS.
+    #
+    # `argmax_table` over a grouping that lost a key returns the largest of what is left
+    # and looks exactly like an answer -- with `groups` lossy, "which region has the
+    # largest total" returned `north`, because west's 250 was not in the table. The
+    # invariant is the same one the totals use: the groups must partition the rows.
+    if node.op == "argmax_table":
+        grouped = node.args[0]
+        if isinstance(grouped, Node) and grouped.op == "groups" and grouped.args[1] == "sum":
+            whole = _sum_of_column(grouped.args[0].args[0], grouped.args[3])
+            parts = evaluate(_n("values_of", (grouped, f"{grouped.args[1]}({grouped.args[3]})"),
+                                 NUMVEC, set(), "parts"))
+            if whole is not None and parts:
+                return abs(sum(parts) - whole) < 1e-6
 
     # EVERY GROUP EXISTED BEFORE IT WAS COUNTED.
     if node.op == "values_of" and isinstance(node.args[0], Node) and node.args[0].op == "groups":

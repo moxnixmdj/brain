@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dcd58e5f8312f5f076b92b5f470bc207c0131302eee02ffd407268f10edbc5a2"
+  "value": "0d36bcb06a76a4aa72dcfcafc4ed476819bf4f3fabff43419454397f2c67bd98"
  },
  "engines": [
   {
@@ -298128,9 +298128,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/value_algebra_v1.py",
-   "sha256": "4f58f86bf6eb6fff6bf236a359a50b8b55df20b8f18ce5140ea66279ec70ad38",
+   "sha256": "dcc0e0187d06d65c739d5a6b17fe0231e49a853d337dc25c1ce252de62cfc962",
    "summary": "Answers are BUILT OUT OF typed pieces, not looked up in a menu.",
-   "symbol_count": 36,
+   "symbol_count": 40,
    "symbols": [
     "EvalError",
     "Lexicon",
@@ -298138,12 +298138,14 @@
     "_aggregate",
     "_candidate_columns",
     "_cell_of",
+    "_child_nodes",
     "_column_at",
     "_column_leaf",
     "_columns",
     "_digits",
     "_double",
     "_eq_text",
+    "_evaluate",
     "_fmt",
     "_half",
     "_holds_invariants",
@@ -298153,16 +298155,13 @@
     "_negate",
     "_norm",
     "_numeric_candidates",
-    "_numeric_columns",
-    "_read_text",
-    "_row_leaf"
+    "_numeric_columns"
    ],
    "terms": {
     "aggregate": 1,
     "algebra": 1,
     "answers": 1,
     "built": 1,
-    "candidate_columns": 1,
     "cell_of": 1,
     "column_at": 1,
     "column_leaf": 1,
@@ -298171,7 +298170,7 @@
     "double": 1,
     "eq_text": 1,
     "evalerror": 1,
-    "evaluate": 1,
+    "evaluate": 2,
     "fmt": 1,
     "half": 1,
     "length": 1,
