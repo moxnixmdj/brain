@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3a97db830080d35d24e9491d63a0aa609a9c0a069330f63491365ffd8f8b161f"
+  "value": "372748a73c550623ec556b17744d02ef47727bf88c331d56d2cb54f2f384a412"
  },
  "engines": [
   {
@@ -218887,7 +218887,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "dfcf9b5f855589b2f7ad010bec8315ffad04d04ad33a6fd6ed13548dd42089d6",
+   "sha256": "7bb55c773a6e1057b9dd2e4601154af63558556dfc0497ae74bd31f92b029eb4",
    "status": "",
    "terms": {
     "20261104": 1,
@@ -218902,7 +218902,7 @@
     "report": 1,
     "success": 1,
     "the_door_answers_questions_it_used_to_report_success_it_never_earned_20261104_v1": 1,
-    "the_inspect_door_answered_one_of_nine_plain_questions_and_reported_grounded_verified_true_for_how_many_lines_are_in_data_py_with_no_number_in_the_answer_on_d4c7c53f5d": 1,
+    "the_inspect_door_answered_one_of_nine_plain_questions_and_reported_grounded_verified_true_for_how_many_lines_are_in_data_py_with_no_number_in_the_answer_on_16bf5e1ca5": 1,
     "used": 1,
     "v1": 1
    }
@@ -255495,12 +255495,13 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "2299518c5490327140f565eeeb3d6783967ff4ccb0136d618856e810f9a07a0e",
+   "sha256": "c9d8a726d6384612d08021d8b5da0da0dde8f5f96a6c27c05100a5a258192d21",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
-   "symbol_count": 16,
+   "symbol_count": 17,
    "symbols": [
     "_computation_holds",
     "_drop_path_fragments",
+    "_is_readable_text",
     "_named_file",
     "_path_components",
     "_project_files",
@@ -255527,6 +255528,7 @@
     "evidence": 1,
     "find": 1,
     "inspect": 1,
+    "is_readable_text": 1,
     "listing": 1,
     "made": 1,
     "named_file": 1,
