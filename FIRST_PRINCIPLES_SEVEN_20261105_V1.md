@@ -135,6 +135,57 @@ gate's ability to certify what they produce.
   I had credited with that win is labelled as never having run.
 - Three of my own claims retracted by re-measurement.
 
+## S6 — can it learn with no teacher? **It writes the memory, and then cannot spend it**
+
+This is the only path by which memory could pay on problems the synthesizers *can* reach, so it
+was tested directly.
+
+**What works.** With no teacher, no external `crystallize_code_fix`, and no lesson of any kind,
+the creature repairs a failing module on its own and **stores a rule for it**:
+
+    step 1  repaired=True   mode=AUTONOMOUS_COW_SYNTHESIS_AND_CRYSTALLIZATION   skill_1652442b...
+    stored: 1 contract rule, error_class=AWAKE_DISCOVERED_REPAIR
+
+So the writing side of learning is real and needs no supervisor. (It is also intermittent: the
+same shape threw `AWAKE_CONFINED_MULTIFILE_REPAIR → crystallized: True` in one run and stored
+nothing in another. That variance is unnamed and unfixed.)
+
+**What does not work.** In every paired world tried, the self-taught record then had **no effect**:
+
+| second world (same shape, new names) | repaired? | record consulted? |
+|---|---|---|
+| `def plus(x, y): return x - y` after self-learning the same shape | yes — by cold synthesis | **no** |
+| while-loop accumulator, new names | yes — by cold synthesis | **no** |
+
+"No" is measured three ways: no `SKILL_RECALL` mode in the winning step; zero calls from the
+coupled engine's Tier-0 recall (`_iter_file_or_method_rule_candidates` never fired); and the
+stored rule was not even consulted for applicability.
+
+**Why, structurally.** Inline synthesis runs *before* the coupled engine. When inline succeeds,
+the engine — the only component that consults memory first — is never called. The window in which
+a self-taught lesson can be spent is therefore only "inline failed, engine ran, engine's recall
+returned something", and in the worlds measured inline either succeeded (so recall never ran) or
+the engine did not run at all.
+
+**The comparison that makes it concrete.** A rule supplied by an *external teacher* did change an
+outcome — the augmented-assignment world was repaired warm and refused cold, mode
+`SKILL_RECALL:skill_211f...`. The identical rule, when the creature produced it itself, changed
+nothing. The difference is not the rule. It is that the teacher-placed rule existed *before* the
+run started, so the very first attempt went through the recall-first engine.
+
+**Conclusion.** Learning without a teacher is not yet a closed loop: the creature writes memories
+it does not spend. The gap is not in remembering — it is that the only consumer of memory sits
+behind a synthesizer that usually answers first. Closing it means letting memory be consulted
+*after* inline synthesis fails but *before* the multi-file engine gives up — which is exactly the
+fallback block measured above to have never fired, because the multi-file engine always returned
+a patch first. That block, the missing wiring, and the intermittency are the three real defects
+this pass leaves behind.
+
+## Corrections to my own measurements in this pass (4)
+
+4. **`add(2)` was not a valid probe of the plain shape** (two-parameter function, one argument) —
+   it reported "not repaired" for a world that repairs fine. Re-run with a valid call: repaired.
+
 ## What is still not real
 
 1. ~~**The board does not always schedule a repair inside a short slice.**~~ **RETRACTED,
