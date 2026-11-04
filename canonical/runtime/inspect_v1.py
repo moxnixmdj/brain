@@ -107,6 +107,20 @@ def find(root: str, terms: list[str], limit: int = 40) -> list[dict]:
             continue
         if path.suffix.lower() not in _TEXT_SUFFIX:
             continue
+        # A QUESTION ABOUT A FILE NAMES THE FILE, AND THAT NAME IS NOT IN ITS BODY.
+        #
+        # This loop only ever matched file CONTENTS, so "how many lines are in
+        # data.py" could not find data.py unless the word "data" happened to appear
+        # inside it. Measured on a three-file tree: 'what is retries in config.json'
+        # answered PARTIALLY_GROUNDED only because `retries` is a key inside that
+        # file, while 'how many lines are in data.py' and 'what does notes.md say'
+        # both returned NOTHING_FOUND -- the filename is the one thing a question
+        # usually gives you, and it was the one thing never looked at.
+        #
+        # A filename match is recorded at line 0: it says the file exists and was
+        # selected, which is a different fact from "this word occurs at this line",
+        # and claiming a line number nobody read would be the lie this module exists
+        # to avoid.
         try:
             if path.stat().st_size > _MAX_BYTES:
                 continue
@@ -114,6 +128,36 @@ def find(root: str, terms: list[str], limit: int = 40) -> list[dict]:
         except OSError:
             continue
         files += 1
+        name_matched = [t for t in terms
+                        if re.search(r"\b" + re.escape(t) + r"\b", rel, re.I)]
+        # A filename hit and a content hit are the same FILE. Recording both would
+        # count one file twice and inflate `grounded`, which is the number the verdict
+        # is computed from -- so the name is recorded only when this loop finds no
+        # content hit for the same file. The check has to span the whole file, not the
+        # hits so far: content is scanned line by line AFTER this point, so a
+        # `rel in hits` test made at the top missed every file that matched both ways.
+        name_hit_added = False
+        # Suppress the name hit only when THIS SAME TERM was found in the body. A
+        # different term matching the body is a different fact and must not hide the
+        # fact that the file the question named was selected.
+        same_term_in_body = any(
+            pat.search(text)
+            for term, pat in zip(terms, patterns)
+            if re.search(r"\b" + re.escape(term) + r"\b", rel, re.I)
+        )
+        if name_matched and not same_term_in_body:
+            hits.append({
+                "file": rel,
+                "line": 0,
+                "term": name_matched[0],
+                "text": "",
+                "matched": "filename",
+            })
+            name_hit_added = True
+            if len(hits) >= limit:
+                break
+        if name_hit_added:
+            continue
         for index, line in enumerate(text.splitlines(), start=1):
             for i, pat in enumerate(patterns):
                 if pat.search(line):
@@ -149,6 +193,20 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
 
     claims, results = [], []
     for h in hits:
+        if h.get("matched") == "filename":
+            # A filename hit claims the file EXISTS, not that it contains some text.
+            # The generic claim (`file` contains `text`) grounds by searching the body,
+            # and for a name hit the body text is empty -- so it correctly refused, and
+            # every question that named a file scored grounded=0 and came back
+            # unverified. That refusal was right about the wrong claim: existence is a
+            # different, checkable fact. Verified directly, here, without pretending a
+            # line was read.
+            exists = (Path(root) / h["file"]).is_file()
+            h["verdict"] = "GROUNDED" if exists else "UNVERIFIABLE"
+            claims.append({"file": h["file"], "exists": True})
+            if exists:
+                results.append({"verdict": "GROUNDED", "claim": "file_exists"})
+            continue
         claim = {"file": h["file"], "contains": h["text"][:120]}
         claims.append(claim)
         if G is not None:
