@@ -839,6 +839,15 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
                 trial["accounted"] = sorted(accounted_words)
                 trial["words"] = trial.get("words") or []
                 comp = trial["computation"]
+                # HOW THIS WAS CHECKED, AND WHAT ELSE FIT.
+                #
+                # Both were measured -- the law grade for every declared operator, and the
+                # count of other well-typed readings -- and neither reached the reader.
+                # `verified: True` looked identical whether the law behind it excluded 95%
+                # or 37% of wrong answers, and whether one reading was possible or thirty.
+                # Carrying them here is the difference between a verdict and a claim.
+                comp.setdefault("law_grade", (built or {}).get("law_grade"))
+                comp.setdefault("rival_readings", (built or {}).get("rival_readings"))
     except Exception as exc:
         # AN OPERATION THAT CRASHED IS NOT AN OPERATION THAT DID NOT APPLY.
         #
@@ -972,7 +981,21 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     asks_for_number = asked_op.startswith("aggregate_") or asked_op in (
         "count_lines", "count_rows", "count_files", "catalog")
 
-    if comp is not None and comp["verified"] and comp["operation"] == "read_content" and unresolved:
+    # "TWO FILES CARRY THIS, I CANNOT CHOOSE" IS NOT "THE QUESTION NAMES NOTHING".
+    #
+    # `what is the total of x` against a tree where a.csv and b.csv both have a column x
+    # came back NOTHING_FOUND with the reason "the question names nothing that exists in
+    # this tree". The column exists -- in two places. The system refused for the right
+    # reason and reported the wrong one, which is a false statement, not a careful refusal.
+    # Ambiguity is now its own verdict and carries the candidates.
+    try:
+        from canonical.runtime import value_enumeration_v1 as _ve
+        ambiguous = dict(getattr(_ve, "_AMBIGUOUS_COLUMNS", {}) or {})
+    except Exception:
+        ambiguous = {}
+    if ambiguous and comp is None:
+        verdict = "AMBIGUOUS_REFERENT"
+    elif comp is not None and comp["verified"] and comp["operation"] == "read_content" and unresolved:
         # It read the file and some of what was asked about is still unaccounted for.
         verdict = "READ_INCOMPLETE"
     elif comp is not None and comp["verified"] and comp["operation"] == "read_content":
@@ -1025,7 +1048,13 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # dropped it, so a failed operation vanished and the reply looked as if the door
         # had never attempted it.
         "attempted": (trial or {}).get("attempted") or [],
-        "trial_reason": (trial or {}).get("reason"),
+        "trial_reason": ((f"the question names {sorted(ambiguous)!r}, which more than one "
+                          f"file carries: {ambiguous} -- choosing one would answer a "
+                          f"question nobody asked") if ambiguous and comp is None
+                         else (trial or {}).get("reason")),
+        # WHY A REFUSAL HAPPENED, when it is not "nothing matched". Empty when the answer
+        # stands on its own, so its presence is the signal.
+        "ambiguous": ambiguous if comp is None else {},
         # The file the question named, if any. Returned as a fact so that a reader --
         # including the door's own reason code -- can distinguish "looked in the file
         # you named and the words are not in it" from "searched the tree, found nothing".

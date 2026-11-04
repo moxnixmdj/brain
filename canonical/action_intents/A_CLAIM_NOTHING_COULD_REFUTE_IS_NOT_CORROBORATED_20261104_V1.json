@@ -39,7 +39,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CRYSTALLIZER_ASKED_DOES_IT_FIT_AND_ACCEPTED_THE_ANSWER_IT_NEVER_ASKED_COULD_THIS_HAVE_BEEN_WRONG_SO_THREE_OBSERVATIONS_THAT_EXACTLY_DETERMINE_AN_AFFINE_FITS_THREE_PARAMETERS_WERE_TREATED_AS_CORROBORATION_AND_A_BODY_WRONG_ON_EVERY_UNSEEN_INPUT_BECAME_A_LAW",
-  "canonical_base_commit": "2989ad662bfc0d1475f386dd06c8eab0cd839620",
+  "canonical_base_commit": "5e196d0af89aa073fe6d2de954769a6949cc45eb",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -86,7 +86,7 @@
     "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "2989ad662bfc0d1475f386dd06c8eab0cd839620",
+    "canonical_base_commit": "5e196d0af89aa073fe6d2de954769a6949cc45eb",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ONE_HAND_WRITTEN_NODE_PER_COMPOSED_FORM",

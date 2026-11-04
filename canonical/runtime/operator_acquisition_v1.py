@@ -194,7 +194,7 @@ def _gate(fn) -> tuple[str | None, tuple]:
     induced = V.induce_laws(fn)
     if not induced:
         return "no law can be induced -- nothing this system can state would make it wrong", ()
-    laws = tuple(V.law_from_name(n) for n in induced)
+    laws = tuple(V.resolve_law(n) for n in induced)
     reason = V._law_is_falsifiable("candidate", fn, laws)
     if reason:
         return reason, ()
