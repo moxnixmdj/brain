@@ -83,6 +83,58 @@ End-to-end shape coverage of the owed world, cold, nothing taught:
 | plain function, method, staticmethod, lambda, dict-lambda, closure, comprehension | 2/8 (plain, comprehension) | **7/8** |
 | `@property` | fail | **fail** |
 
+
+## Corrections made to this pass, in order (because being wrong quietly is worse)
+
+1. **"The board never dispatches a repair."** WRONG — I read `out["repairs"]`, a key that does
+   not exist. Real key is `out["run"]["steps"]`. The board dispatched and persisted the repair at
+   slice 155/240/480 and 4/6/8 cycles. No scheduler defect.
+2. **"The gate is the whole ceiling."** OVERSTATED — but only partly. A real checkout of the
+   pre-work commit `15900f40` gives, cold/warm, through the board:
+
+   | shape | before (15900f40) | now |
+   |---|---|---|
+   | plain, comprehension | fix / fix | fix / fix |
+   | method, staticmethod, lambda, dict-lambda, closure | **fail / fail** | **fix / fix** |
+   | property | fail / fail | fail / fail |
+   | augassign | fail / **fix** | fail / **fix** |
+
+   So the gate fix is worth 5 real shapes. It is not the only thing that was wrong.
+3. **"My fallback block is why memory pays."** WRONG, and this is the one that mattered. The
+   winning step in a warm repair is `mode = SKILL_RECALL:<skill_id>`, produced by the **pre-existing
+   Tier-0 recall inside `cow_impact_repair_engine_v1`**, which proposes stored rules as candidates
+   before it synthesizes anything. My `MEMORY_FALLBACK_RECALL` block has **never fired** in any
+   world tested: whenever it would be reached, the coupled engine had already returned a patch
+   (which the acceptance gate then judged). The block is now labelled in the source as unreached.
+
+## S5 — how often does memory change the outcome? **Once, on the shapes measured**
+
+Same 9-shape world, with one lesson taught (`augassign` shape) before the run:
+
+| | cold | warm |
+|---|---|---|
+| shapes repaired | 7/9 | **8/9** |
+
+Memory wins exactly one shape — the augmented-assignment defect, which the synthesizers cannot
+construct a candidate for and which the gate *can* certify (arguments exist, so it can be
+perturbed). Every other shape (5 of them thanks to the gate fix) is repaired cold, so memory
+changes nothing there and costs a store lookup. `@property` fails both ways for the reason in
+item 2 above.
+
+That is the honest shape of the claim: **memory is worth one shape out of nine, and only after
+the gate stopped discarding honest work.** It is not what makes the creature work, and it was
+never going to be: the ceiling is the reach of the synthesizers (7/9 before memory) plus the
+gate's ability to certify what they produce.
+
+## What this pass changed, honestly
+
+- The gate now certifies honest repairs instead of discarding them: **5 shapes** newly repaired
+  cold, verified against a real pre-work checkout.
+- Duplicate recall removed; recall moved off the pre-search path, where it was a measured tax.
+- Memory's real mechanism identified (`SKILL_RECALL` Tier-0 in the coupled engine), and a block
+  I had credited with that win is labelled as never having run.
+- Three of my own claims retracted by re-measurement.
+
 ## What is still not real
 
 1. ~~**The board does not always schedule a repair inside a short slice.**~~ **RETRACTED,

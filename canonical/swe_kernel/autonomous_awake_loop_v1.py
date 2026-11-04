@@ -1172,6 +1172,16 @@ class AwakeAgencyDaemon:
                             "skill_ids": coupled_out.get("crystallized_skill_ids") or [],
                         })
                         continue
+                    # MEASURED STATUS: this block has never fired in any world tested (2026-11-05).
+                    # Do not mistake it for the reason memory works. The path that pays is the
+                    # pre-existing Tier-0 recall inside `cow_impact_repair_engine_v1`, which proposes
+                    # stored rules as candidates before it synthesizes; it is what repairs `augassign`
+                    # and the lambda/closure worlds when cold cannot. This block is reached only when
+                    # the confined batch, the multi-file repair and the coupled engine all return no
+                    # patch at all -- and in every such world the coupled engine still returned one
+                    # (which the acceptance gate then judged). Kept as a cheap safety net, labelled
+                    # so nobody credits it with a win it has not had.
+                    #
                     # MEMORY AS FALLBACK, NOT AS PRESEARCH (S1 in FIRST_PRINCIPLES_SIX, measured
                     # 2026-11-05). Consulted first, recall was a pure tax: every repair paid one
                     # contract-suite run (~0.15-0.3 s) whether or not memory held anything relevant,
