@@ -24,7 +24,7 @@
   "causal_blocker": "Verification was per-expression. Nothing compared two answers, so 550, [150,150,250] and 1.5 could all be verified with nothing noticing. The ledger that fixed this chose WHICH answers to compare using a hand-typed list of operators that produce a total; that list named mean as a total (a mean of means is not the mean), compared max and min with sum(), and could not say which of its own answers were mutually uncheckable.",
   "expected_parent_change": "A ledger of answers; the DECOMPOSITION LAW of an aggregate discovered by probing its own function rather than declared; contradictions reported only when a discovered recombination actually disagrees, with uncheckable pairs kept separate so a coherent conversation reports nothing.",
   "expected_parent_frontier_change": "The system knows which of its own answers are mutually checkable and which ones it must admit it cannot check.",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Which answers may be compared was decided by a list written by hand, so the comparison was only as good as the author's memory of which operators produce totals.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Verification was per-expression. Nothing compared two answers, so 550, [150,150,250] and 1.5 could all be verified with nothing noticing. The ledger that fixed this chose WHICH answers to compare using a hand-typed list of operators that produce a total; that list named mean as a total (a mean of means is not the mean), compared max and min with sum(), and could not say which of its own answers were mutually uncheckable.",
   "falsification_condition": "A coherent conversation on one tree reports a contradiction, or an incoherent one reports none, or adding a new aggregate requires editing the law, or a mean is reported as checked against its parts.",
   "stop_condition": "DECOMPOSITION_DISCOVERED_NOT_DECLARED__A_MEAN_REPORTS_UNCHECKABLE__A_NEW_AGGREGATE_NEEDS_NO_EDIT__ZERO_FALSE_POSITIVES_ON_A_COHERENT_CONVERSATION__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
   "explicit_user_authorization": "Owner directive 2026-11-04, repeated seven times: 'You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' The answer given each round was No. $0 spend, zero capability credit claimed.",
@@ -89,26 +89,26 @@
   },
   "prior_work_reused": "The choice rules -- a word is spent once; filter on full accounting then fewest operators; ties go to the operator the question named; 'per' is a filter not a rank -- are the incumbent search's, kept rather than re-derived. The existing search still runs first and answers everything it always answered.",
   "recursive_obs": {
-    "canonical_base_commit": "2989ad662bfc0d1475f386dd06c8eab0cd839620",
+    "canonical_base_commit": "5e196d0af89aa073fe6d2de954769a6949cc45eb",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-    "real_outcome": "AMBIGUOUS_REFERENT_VERDICT_WITH_CANDIDATES__COLUMN_X_IN_ONE_FILE_ANSWERS_30__COLUMN_X_IN_TWO_FILES_IS_AMBIGUOUS__LAW_GRADE_MODERATE_AND_RIVAL_READINGS_30_ON_THE_TOTAL_AMOUNT_ANSWER",
-    "selected_route": "ENUMERATE_BY_OPERATOR_TYPE_THEN_CHOOSE_WITH_THE_INHERITED_RULES",
-    "selected_surviving_route": "DECLARE_OPERATORS_AS_DATA_AND_ENUMERATE_THEIR_TYPED_COMPOSITIONS_INSTEAD_OF_APPENDING_SENTENCES",
+    "real_outcome": "DECOMPOSITION_DISCOVERED_NOT_DECLARED__SUM_AND_COUNT_DECOMPOSE_BY_SUM__MAX_BY_MAX__MIN_BY_MIN__MEAN_BY_NOTHING_SO_A_MEAN_REPORTS_UNCHECKABLE__ZERO_CONTRADICTIONS_ON_A_COHERENT_CONVERSATION__SAME_SHAPE_FIRES_WHEN_THE_DATA_CHANGES_UNDER_IT",
+    "selected_route": "PROBE_THE_OPERATOR_FOR_ITS_OWN_DECOMPOSITION_LAW",
+    "selected_surviving_route": "PROBE_THE_OPERATOR_FOR_ITS_OWN_DECOMPOSITION_LAW_AND_COMPARE_ONLY_WHAT_RECOMBINES",
     "deleted_or_bypassed_paths": [
-      "THE_HARDCODED_FIVE_ENTRY_AGGREGATE_DICT",
-      "THE_TRIALS_SECOND_COPY_OF_THE_AGGREGATE_VOCABULARY",
-      "AN_INVARIANT_WALK_THAT_EXEMPTED_EVERY_AGGREGATE_EXCEPT_SUM",
-      "A_GROWTH_TEST_THAT_PATCHED_THE_ARITHMETIC_AND_CALLED_IT_A_DECLARATION"
+      "THE_TYPED_TOTAL_OPS_TUPLE",
+      "THE_IS_A_TOTAL_OPERATOR_NAME_LIST",
+      "A_HARDCODED_SUM_IN_THE_CROSS_ANSWER_COMPARISON",
+      "A_LEAF_SET_COMPARISON_THAT_NEVER_MATCHED_A_GROUPING_AGAINST_A_TOTAL"
     ],
-    "stop_condition": "AMBIGUITY_NAMES_ITS_CANDIDATES__A_ONE_LETTER_NAME_IS_A_NAME__THE_ANSWER_CARRIES_ITS_LAW_GRADE_AND_ITS_RIVAL_COUNT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
-    "expected_parent_level_state_change": "What the system does not know is now separable from what it knows too little to choose.",
-    "why_selected_route_is_fastest_sufficient": "THE_EXISTING_SEARCH_ALREADY_ENCODES_314_LINES_OF_MEASURED_RULES__ENUMERATION_REUSES_THEM_INSTEAD_OF_RE_DERIVING_THEM_AND_IS_CONSULTED_ONLY_WHERE_THEY_PRODUCE_NOTHING",
+    "stop_condition": "DECOMPOSITION_DISCOVERED_NOT_DECLARED__A_MEAN_REPORTS_UNCHECKABLE__A_NEW_AGGREGATE_NEEDS_NO_EDIT__ZERO_FALSE_POSITIVES_ON_A_COHERENT_CONVERSATION__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+    "expected_parent_level_state_change": "The system knows which of its own answers are mutually checkable and which ones it must admit it cannot check.",
+    "why_selected_route_is_fastest_sufficient": "THE_MAINTAINED_OPERATOR_TABLE_ALREADY_DECLARES_EACH_AGGREGATES_FUNCTION__PROBING_THAT_FUNCTION_COSTS_MILLISECONDS_AND_NEEDS_NO_EDIT_WHEN_AN_OPERATOR_IS_ADDED",
     "iteration_limit": 4,
     "routes_considered": [
-      "ENUMERATE_TYPED_COMPOSITIONS_AND_DEFER_TO_THE_EXISTING_SEARCH",
-      "ENUMERATE_FIRST_AND_DISPLACE_THE_SEARCH__REJECTED_BROKE_SIX_MEASURED_RULES",
-      "ADD_MEDIAN_RATIO_AND_RUNNING_TOTAL_AS_THREE_MORE_APPENDS__REJECTED_STILL_A_STATIC_MENU"
+      "PROBE_THE_OPERATOR_FOR_ITS_DECOMPOSITION",
+      "KEEP_A_TYPED_LIST_OF_TOTALLING_OPERATORS__REJECTED_WRONG_FOR_MAX_MIN_AND_MEAN",
+      "COMPARE_FULL_LEAF_SETS__REJECTED_NEVER_MATCHES_A_GROUPING_AGAINST_A_COLUMN"
     ],
     "route_frontier": {
       "discovery_required": false,
