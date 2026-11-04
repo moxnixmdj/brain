@@ -378,7 +378,9 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
             self.assertIsNotNone(pol)
             self.assertNotEqual(pol.organ_id, boot_id)
-            self.assertTrue(pol.metadata.get("learned_immediate") or "burned" in pol.source_code)
+            self.assertTrue(pol.metadata.get("from_incumbent"))
+            self.assertIn(boot_id, pol.parent_organ_ids)
+            self.assertFalse(pol.metadata.get("bootstrap_factory"))
             self.assertIn("_immediate", pol.source_code)
             ranked = pol.invoke(
                 [
@@ -386,7 +388,7 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                     {"id": "safe", "value": 10.0, "cost": 1.0},
                 ],
                 10.0,
-                None,
+                {"burned": 1.0, "safe": 0.0},
             )
             self.assertEqual(ranked[0]["id"], "safe")
             # Instrumental Q still prefers the 0-reward unlocker after rewrite
@@ -400,6 +402,41 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                 None,
             )
             self.assertEqual(scored[0]["id"], "forge_sensor")
+            # Same law on novel ids (Ring-0 is structural, not a named board)
+            novel = pol.invoke(
+                [
+                    {"id": "dead_end", "value": 12.0, "cost": 1.0},
+                    {"id": "tool", "value": 0.0, "cost": 1.0, "unlocks": ("payoff",)},
+                    {"id": "payoff", "value": 100.0, "cost": 1.0, "requires": ("tool",)},
+                ],
+                3.0,
+                None,
+            )
+            self.assertEqual(novel[0]["id"], "tool")
+            combiners = [
+                o for o in graph.organs_in_stratum(MCOG.SKILL) if o.task_signature == "policy::combiner"
+            ]
+            self.assertGreaterEqual(len(combiners), 1)
+            self.assertTrue(MCOG._policy_organ_holds_ring0(pol))
+
+    def test_policy_factory_is_bootstrap_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            graph.record_transition(action_id="a", cost=1.0, failed=True, value=4.0, delta={})
+            graph.record_transition(action_id="b", cost=1.0, failed=False, value=4.0, delta={"ok": 1.0})
+            boot = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(boot)
+            self.assertTrue(boot.metadata.get("bootstrap_factory"))
+            self.assertEqual(boot.parent_organ_ids, ())
+            boot_id = boot.organ_id
+            graph.record_transition(action_id="a", cost=1.0, failed=True, value=4.0, delta={})
+            graph.record_transition(action_id="b", cost=1.0, failed=False, value=4.0, delta={"ok": 1.0})
+            evolved = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(evolved)
+            if evolved.organ_id != boot_id:
+                self.assertTrue(evolved.metadata.get("from_incumbent"))
+                self.assertIn(boot_id, evolved.parent_organ_ids)
+                self.assertFalse(evolved.metadata.get("bootstrap_factory"))
 
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")
@@ -824,6 +861,33 @@ class CreatureCounterexampleClosureTests(unittest.TestCase):
         self.assertEqual(admitted["ring0"], "ADMITTED")
         constant_imm = MCOG.compile_policy_organ(learned_immediate="return 1.0\n")
         self.assertFalse(MCOG._policy_organ_holds_ring0(constant_imm))
+        cheat = MCOG.make_organ(
+            stratum=MCOG.POLICY,
+            name="named_cheat",
+            task_signature="policy::instrumental_q",
+            entrypoint="score_actions",
+            source_code=(
+                "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
+                "    ranked = []\n"
+                "    for raw in actions:\n"
+                "        aid = str(raw.get('id') or '')\n"
+                "        q = 1e6 if aid == 'forge_sensor' else float(raw.get('value') or 0.0)\n"
+                "        row = dict(raw)\n"
+                "        row['id'] = aid\n"
+                "        row['cost'] = float(raw.get('cost') or 1.0)\n"
+                "        row['q'] = q\n"
+                "        ranked.append(row)\n"
+                "    ranked.sort(key=lambda r: (r['q'], r['id']), reverse=True)\n"
+                "    return ranked\n"
+            ),
+        )
+        self.assertFalse(MCOG._policy_organ_holds_ring0(cheat))
+        self.assertEqual(RSA.admit_policy_organ(cheat)["ring0"], "REFUSED")
+        boot = MCOG.compile_policy_organ()
+        self.assertTrue(MCOG._policy_organ_holds_ring0(boot))
+        self.assertTrue(RSA.admit_policy_organ(boot).get("ok"))
+        # Horizon follows the board, not a frozen 3
+        self.assertIn("max(horizon_floor, len(by_id))", boot.source_code)
 
     def test_unified_planner_exposes_organ_graph_and_global_extrapolation(self):
         with tempfile.TemporaryDirectory() as tmp:
