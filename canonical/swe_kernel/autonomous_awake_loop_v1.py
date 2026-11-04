@@ -254,7 +254,21 @@ def _run_py_test_file(test_file: pathlib.Path, cwd: pathlib.Path, timeout: float
     if res.get("timed_out"):
         return False, "TIMEOUT"
     combined = (str(res.get("stdout") or "")) + "\n" + (str(res.get("stderr") or ""))
-    return bool(res.get("ok")), combined[-600:]
+    # Keep the EXCEPTION LINES, wherever they are, not just the tail. Measured 2026-11-05: pytest
+    # prints `E   TypeError: total() takes 1 positional argument but 2 were given` in the traceback
+    # and then a TRUNCATED version of it in the short summary; a 600-character tail kept only the
+    # truncated one ("... takes 1 positional arg..."), so every producer downstream was handed
+    # evidence that had been cut in half. The producers were not blind -- they were being shown a
+    # mutilated message. This costs one pass over text already in memory.
+    tail = combined[-1200:]
+    err_lines = [
+        ln for ln in combined.splitlines()
+        if ln.lstrip().startswith("E ") or re.search(r"\b\w*(Error|Exception)\b:", ln)
+    ]
+    if err_lines:
+        prefix = "\n".join(list(dict.fromkeys(err_lines))[-8:])
+        return bool(res.get("ok")), (prefix + "\n" + tail)[-2400:]
+    return bool(res.get("ok")), tail
 
 
 _POLYGLOT_EXT_TO_LANG: dict[str, str] = {
@@ -1144,10 +1158,12 @@ class AwakeAgencyDaemon:
                 # missing capability, not missing scheduling. A misspelled identifier is the tractable
                 # third of it, and this repairs it from the file's own vocabulary.
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
+                from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
 
                 raw_cands = (
                     propose_operator_family_swaps(before_src, max_candidates=24)
                     + propose_binding_repairs(before_src, fail_out, max_candidates=6)
+                    + propose_signature_repairs(before_src, fail_out, max_candidates=6)
                     + propose_stun_and_guard_repairs(before_src, [test_src], max_candidates=12)
                     + guided_cands
                     + _propose_deterministic_ast_repairs(before_src, max_candidates=16)
