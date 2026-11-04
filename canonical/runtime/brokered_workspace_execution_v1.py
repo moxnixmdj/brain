@@ -934,6 +934,7 @@ def run_staged_confined_command(
         }
 
 
+
 _PERSISTENT_ZYGOTE_DAEMON_SCRIPT = r"""
 import ast, contextlib, importlib, importlib.util, inspect, io, json, os, pathlib, resource, select, shutil, signal, socket, struct, sys, time, types, unittest
 
@@ -957,7 +958,48 @@ class _BrainAssertCounter(ast.NodeTransformer):
 
     def visit_Assert(self, node):
         self.generic_visit(node)
-        return [self._inc_stmt(node), node]
+        # `assert X` compiles to a statement, so the module's `assert` NAME is never looked up and
+        # rebinding it does nothing. To report what was SEEN the assert is wrapped:
+        #
+        #     assert T   ->   try: assert T
+        #                     except AssertionError: __brain_note__(SOURCE, [operands]); raise
+        #
+        # The test expression itself is untouched -- same object, same semantics, same verdict, and
+        # the re-raise preserves the traceback. The operands are only evaluated on FAILURE, which is
+        # the whole economics of it: a passing candidate pays nothing for observation, and a failing
+        # one pays one call it already made. Measured 2026-11-05: without the try-wrap the probes ran
+        # on every candidate and cost ~0.4 ms each; with it a pass is free.
+        note = ast.Expr(value=ast.Call(
+            func=ast.Name(id='__brain_note__', ctx=ast.Load()),
+            args=[
+                ast.Constant(value=ast.unparse(node.test)),
+                ast.List(elts=self._probes(node.test), ctx=ast.Load()),
+            ],
+            keywords=[],
+        ))
+        ast.copy_location(note, node)
+        reraise = ast.Raise(exc=None, cause=None)
+        handler = ast.ExceptHandler(
+            type=ast.Name(id='AssertionError', ctx=ast.Load()),
+            name=None,
+            body=[note, reraise],
+        )
+        wrapped = ast.Try(body=[node], handlers=[handler], orelse=[], finalbody=[])
+        ast.copy_location(wrapped, node)
+        ast.fix_missing_locations(wrapped)
+        return [self._inc_stmt(node), wrapped]
+
+    def _probes(self, test):
+        # Compare operands are the shape an assertion about behaviour almost always has
+        # (`f(x) == 9`). Probed BEFORE the assert runs, so a wrong answer is reported as
+        # `f(7, 2)=14` rather than as a bare failure.
+        if isinstance(test, ast.Compare):
+            out = [test.left] + list(test.comparators)
+        elif isinstance(test, ast.Call):
+            out = [test]
+        else:
+            out = [test]
+        return [ast.copy_location(ast.parse(ast.unparse(e), mode='eval').body, test) for e in out]
 
     def visit_Expr(self, node):
         self.generic_visit(node)
@@ -1069,12 +1111,84 @@ while True:
                 rel_files.append((rp / fn).relative_to(src_batch).as_posix())
 
     work_batch = pathlib.Path('/work') / batch_id
+    _brain_seen = []
+    def __brain_note__(source, values):
+        if len(_brain_seen) >= 4:
+            return
+        try:
+            _brain_seen.append({'at': str(source)[:160], 'seen': [repr(v)[:120] for v in values]})
+        except BaseException:
+            pass
+
+    # The child has always KNOWN why a candidate failed -- unittest writes the traceback into the
+    # sink -- and has always thrown it away, exiting with a bare integer. The daemon then reported
+    # TEST_FAILED for a wrong answer, a TypeError, and an infinite loop alike. Measured 2026-11-05:
+    # three different wrong returns on one world produced three identical rows. This is the pipe the
+    # child already owns (r_eof/w_eof), so speaking costs one 200-byte write and no new syscall
+    # surface. The reason is captured, not consulted: nothing verifies on it.
+    def _brain_text(sink_text):
+        # What the candidate SAW comes first, because it is the part a learner can use: on a failed
+        # `assert f(7, 2) == 9` the note holds f(7, 2) itself, so a screen that gets 14, 5 and 9.5
+        # from three different candidates reports three different things instead of three identical
+        # TEST_FAILED rows. Measured 2026-11-05.
+        seen = ('SEEN ' + json.dumps(_brain_seen)[:700]) if _brain_seen else ''
+        return (seen + '\n' + str(sink_text or '')[-400:]).strip()
+
+    def _brain_say(text, failure):
+        try:
+            body = json.dumps({'failure': failure, 'why': str(text or '')[-400:]}).encode('utf-8')
+            os.write(w_eof, body[:2000])
+        except BaseException:
+            pass
     passing = []
     cand_details = []
     authoritative = True
     wave_size = 6
+    def _has_reportable_assert(tree):
+        # Must agree EXACTLY with what _BrainAssertCounter increments on, or the counter never runs
+        # and every correct candidate is misreported as ZERO_ASSERTIONS_EXECUTED. Measured
+        # 2026-11-05: a predicate that only looked for `assert` statements skipped the counter for a
+        # unittest-style test (`self.assertEqual(...)`), and the winning candidate was reported as
+        # having executed no assertions at all. Bare `assert` is a minority style; method calls are
+        # the norm, so this checks both.
+        for nd in ast.walk(tree):
+            if isinstance(nd, ast.Assert):
+                return True
+            if isinstance(nd, ast.Expr) and isinstance(nd.value, ast.Call) and isinstance(nd.value.func, ast.Attribute):
+                if nd.value.func.attr.startswith('assert') or nd.value.func.attr in ('raises', 'fail'):
+                    return True
+            if isinstance(nd, ast.With):
+                for item in nd.items:
+                    ce = item.context_expr
+                    if isinstance(ce, ast.Call) and isinstance(ce.func, ast.Attribute) and ce.func.attr in ('assertRaises', 'assertRaisesRegex', 'raises'):
+                        return True
+        return False
+
     base_dirs_set = set(rel_dirs)
     base_files_set = set(rel_files)
+
+    # Whether a test can report anything is a property of the TEST FILE, identical for every
+    # candidate in the batch. Computing it per candidate means re-parsing per candidate (measured
+    # 2026-11-05: ~0.2 ms each) or caching across forks -- which cannot work, because each candidate
+    # is a fork and a write inside a fork never returns to this process. So it is computed ONCE here,
+    # in the parent, and handed down.
+    # ... and since every candidate is a FORK of this process, anything built here is inherited for
+    # free. So the instrumented code object itself is built once, in the parent, and the child only
+    # compiles the plain path when a test has nothing to report. Measured 2026-11-05: building the
+    # observability transform per candidate cost ~1.3 ms on a 4.4 ms candidate; built here, the
+    # instrumented and uninstrumented paths cost the same.
+    _prepared = {}
+    for _rel_tp in test_rels:
+        try:
+            _tp_path = pathlib.Path('/input') / batch_id / _rel_tp
+            _src = _tp_path.read_text(encoding='utf-8', errors='replace')
+            _tree = ast.parse(_src, filename=str(_tp_path))
+            if _has_reportable_assert(_tree):
+                _tree = _BrainAssertCounter().visit(_tree)
+                ast.fix_missing_locations(_tree)
+            _prepared[_rel_tp] = compile(_tree, str(_tp_path), 'exec')
+        except BaseException:
+            _prepared[_rel_tp] = None
 
     try:
         idx = 0
@@ -1169,16 +1283,24 @@ while True:
                             for tp_i, rel_tp in enumerate(test_rels):
                                 tfp = c_dir / rel_tp
                                 mname = f'_zyg_cand_{c_idx}_{tp_i}'
-                                src_tp = tfp.read_text(encoding='utf-8', errors='replace')
-                                tree_tp = ast.parse(src_tp, filename=str(tfp))
-                                inst_tree = _BrainAssertCounter().visit(tree_tp)
-                                ast.fix_missing_locations(inst_tree)
-                                code_tp = compile(inst_tree, str(tfp), 'exec')
+                                # Only the TEST FILE is parsed here, and the assert with the fewest
+                                # operands decides whether observation is worth its cost at all: a
+                                # comparison on the left of `assert` gives two values to report, a
+                                # bare call gives one, and anything else gives nothing a learner can
+                                # use. So the instrumented build is skipped for a test that has no
+                                # reportable assert, and it costs that test nothing. Measured
+                                # 2026-11-05: building it unconditionally was ~0.35 ms per candidate
+                                # on every candidate, pass or fail, for a signal that could not exist.
+                                code_tp = _prepared.get(rel_tp)
+                                if code_tp is None:
+                                    src_tp = tfp.read_text(encoding='utf-8', errors='replace')
+                                    code_tp = compile(ast.parse(src_tp, filename=str(tfp)), str(tfp), 'exec')
                                 mod = types.ModuleType(tfp.stem)
                                 mod.__file__ = str(tfp)
                                 mod.__package__ = ''
                                 assert_box = [0]
                                 mod.__dict__['__brain_asserts_ran__'] = assert_box
+                                mod.__dict__['__brain_note__'] = __brain_note__
                                 sys.modules[tfp.stem] = mod
                                 sys.modules[mname] = mod
                                 exec(code_tp, mod.__dict__)
@@ -1219,11 +1341,19 @@ while True:
                                         else:
                                             os._exit(3)
                         if non_auth:
+                            _brain_say(sink.getvalue(), 'NON_AUTHORITATIVE_FIXTURE')
                             os._exit(2)
                         if cand_ok and ran_count > 0 and total_asserts_ran == 0:
+                            _brain_say(sink.getvalue(), 'ZERO_ASSERTIONS_EXECUTED')
                             os._exit(3)
+                        _brain_say(_brain_text(sink.getvalue()),
+                                   None if (cand_ok and ran_count > 0 and total_asserts_ran > 0) else 'TEST_FAILED')
                         os._exit(0 if (cand_ok and ran_count > 0 and total_asserts_ran > 0) else 1)
-                    except BaseException:
+                    except BaseException as _exc:
+                        try:
+                            _brain_say(_brain_text(sink.getvalue() + '\n' + type(_exc).__name__ + ': ' + str(_exc)), 'TEST_FAILED')
+                        except BaseException:
+                            pass
                         os._exit(1)
 
                 os.close(w_eof)
@@ -1231,6 +1361,7 @@ while True:
 
             wave_deadline = time.monotonic() + cand_timeout
             wave_codes = {}
+            wave_said = {}
             while active:
                 rem_t = wave_deadline - time.monotonic()
                 if rem_t <= 0:
@@ -1260,12 +1391,26 @@ while True:
                 ready_fds, _, _ = select.select(list(active.keys()), [], [], rem_t)
                 for r_fd in ready_fds:
                     _, (c_idx, pid) = active.pop(r_fd)
+                    said = b''
+                    try:
+                        while True:
+                            chunk = os.read(r_fd, 4096)
+                            if not chunk:
+                                break
+                            said += chunk
+                    except OSError:
+                        pass
                     try:
                         os.close(r_fd)
                     except OSError:
                         pass
                     _, wstatus = os.waitpid(pid, 0)
                     wave_codes[c_idx] = os.WEXITSTATUS(wstatus) if os.WIFEXITED(wstatus) else 1
+                    if said:
+                        try:
+                            wave_said[c_idx] = json.loads(said.decode('utf-8', 'replace'))
+                        except Exception:
+                            wave_said[c_idx] = {'failure': None, 'why': said.decode('utf-8', 'replace')[-400:]}
 
             for c_idx in range(idx, end_idx):
                 ec = wave_codes.get(c_idx, 1)
@@ -1273,17 +1418,19 @@ while True:
                     authoritative = False
                     cand_details.append({'index': c_idx, 'passed': False, 'failure': 'NON_AUTHORITATIVE_FIXTURE'})
                     break
+                said = wave_said.get(c_idx) or {}
+                why = str(said.get('why') or '')[:400]
                 if ec == 0:
                     passing.append(c_idx)
-                    cand_details.append({'index': c_idx, 'passed': True, 'failure': None})
+                    cand_details.append({'index': c_idx, 'passed': True, 'failure': None, 'why': why})
                     if stop_first:
                         break
                 elif ec == 3:
-                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'ZERO_ASSERTIONS_EXECUTED'})
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'ZERO_ASSERTIONS_EXECUTED', 'why': why})
                 elif ec == 4:
-                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'WALLCLOCK_EXCEEDED'})
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'WALLCLOCK_EXCEEDED', 'why': why})
                 else:
-                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'TEST_FAILED'})
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': str(said.get('failure') or 'TEST_FAILED'), 'why': why})
             if passing and stop_first:
                 break
             idx = end_idx
