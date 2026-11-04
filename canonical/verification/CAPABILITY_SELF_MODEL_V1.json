@@ -1,0 +1,175 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_SELF_MODEL_OF_OWN_BEHAVIOUR_ONLY",
+ "blindness": [
+  "NEITHER_MODEL_READS_MATCH_EVIDENCE_BINDING_PROVENANCE_OR_SCORE",
+  "A_SELF_MODEL_THAT_COPIES_THE_ROUTERS_REASONS_CAN_NEVER_BE_SURPRISED"
+ ],
+ "corpus": {
+  "refusal_codes": {
+   "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH": 14,
+   "GOAL_INPUT_BINDING_REQUIRED": 3
+  },
+  "refused": 17,
+  "routed": 32,
+  "sentences": 49
+ },
+ "defects_visible_in_the_registry": {
+  "count": 5,
+  "label": "ROUTE_TO_CAPABILITY_DECLARING_ANOTHER_LANGUAGE",
+  "rows": [
+   {
+    "chosen": "python.source.test_adequacy.v1",
+    "declared": [
+     "python"
+    ],
+    "goal": "Fix the off-by-one bug in .brain_reach_scratch/src/main.cpp so that sum returns the right total.",
+    "wanted": [
+     "c++"
+    ]
+   },
+   {
+    "chosen": "python.software.request.semantic_behavior.compile.v1",
+    "declared": [
+     "go",
+     "python"
+    ],
+    "goal": "Add a function sub to .brain_reach_scratch/src/lib.rs that subtracts two integers.",
+    "wanted": [
+     "rust"
+    ]
+   },
+   {
+    "chosen": "python.software.request.semantic_behavior.compile.v1",
+    "declared": [
+     "go",
+     "python"
+    ],
+    "goal": "Rename the exported function add to plus in .brain_reach_scratch/src/app.ts and update its callers.",
+    "wanted": [
+     "javascript"
+    ]
+   },
+   {
+    "chosen": "decision.synthesis.typed.stdlib",
+    "declared": [
+     "python"
+    ],
+    "goal": "Add a NOT NULL constraint on users.email in .brain_reach_scratch/src/schema.sql.",
+    "wanted": [
+     "sql"
+    ]
+   },
+   {
+    "chosen": "source.candidates.enumerate.stdlib",
+    "declared": [
+     "go",
+     "python"
+    ],
+    "goal": "Repair the C++ source file .brain_reach_scratch/src/main.cpp so that it compiles cleanly.",
+    "wanted": [
+     "c++"
+    ]
+   }
+  ],
+  "what_this_label_cannot_see": [
+   "A wrong route that shares the request's language",
+   "A right route whose capability declares no language at all"
+  ]
+ },
+ "gate": {
+  "correct_lost": 21,
+  "correct_preserved": 6,
+  "cost": "every DISTRUST is either a defect caught or a correct answer lost; both numbers are above and neither is allowed to be omitted",
+  "defects_caught": 4,
+  "defects_missed": 1,
+  "precision_against_mechanical_label": 0.16,
+  "rule": "TRUST only when the declared model AND the learned model both agree with the router's own choice"
+ },
+ "instrument": "PREDICT_OWN_ACTION_THEN_SCORE_AGAINST_IT",
+ "non_claims": [
+  "NO_CAPABILITY_CREDIT_A_MODEL_OF_ONESELF_IS_NOT_CAPABILITY",
+  "PREDICTING_ONES_OWN_ACTION_DOES_NOT_MAKE_THAT_ACTION_CORRECT",
+  "CONSENSUS_OF_TWO_MODELS_IS_EVIDENCE_NOT_PROOF",
+  "THE_MECHANICAL_DEFECT_LABEL_ONLY_SEES_LANGUAGE_MISMATCHES"
+ ],
+ "schema": "PROJECT_BRAIN_CAPABILITY_SELF_MODEL_V1",
+ "self_prediction": {
+  "fit": {
+   "declared_accuracy": 0.2353,
+   "declared_correct": 4,
+   "learned_abstained": 0,
+   "learned_accuracy": 1.0,
+   "learned_correct": 17,
+   "routed": 17,
+   "sentences": 32,
+   "split": "fit"
+  },
+  "holdout": {
+   "declared_accuracy": 0.3333,
+   "declared_correct": 5,
+   "learned_abstained": 0,
+   "learned_accuracy": 0.3333,
+   "learned_correct": 5,
+   "routed": 15,
+   "sentences": 17,
+   "split": "holdout"
+  }
+ },
+ "surprise": {
+  "events_on_holdout": 12,
+  "examples": [
+   {
+    "actual": "python.source.test_adequacy.v1",
+    "declared": "code.multilanguage.parse.tree_sitter.v1",
+    "defect": "ROUTE_TO_CAPABILITY_DECLARING_ANOTHER_LANGUAGE",
+    "goal": "Fix the off-by-one bug in .brain_reach_scratch/src/main.cpp so that sum returns the right total.",
+    "kind": "MODELS_DISAGREE",
+    "learned": "python.software.request.semantic_behavior.compile.v1"
+   },
+   {
+    "actual": "source.candidates.enumerate.stdlib",
+    "declared": "code.polyglot.transform_and_verify.v1",
+    "defect": "ROUTE_TO_CAPABILITY_DECLARING_ANOTHER_LANGUAGE",
+    "goal": "Repair the C++ source file .brain_reach_scratch/src/main.cpp so that it compiles cleanly.",
+    "kind": "MODELS_DISAGREE",
+    "learned": "finance.saccr.credit.addon.v1"
+   },
+   {
+    "actual": "finance.saccr.credit.addon.v1",
+    "declared": "python.repo.diff_apply_full_testgate.v1",
+    "defect": null,
+    "goal": "Add pytest as a development dependency in .brain_reach_scratch/pyproject.toml.",
+    "kind": "MODELS_DISAGREE",
+    "learned": "decision.synthesis.verify.stdlib"
+   },
+   {
+    "actual": "python.refactor.inline_helper.v1",
+    "declared": null,
+    "defect": null,
+    "goal": "Vendor the single dependency of the project in .brain_reach_scratch/pkg.",
+    "kind": "MODELS_DISAGREE",
+    "learned": "python.source.crossfile_edit.choreograph.v1"
+   },
+   {
+    "actual": "finance.saccr.credit.addon.v1",
+    "declared": "code.polyglot.transform_and_verify.v1",
+    "defect": null,
+    "goal": "Add caching of pip downloads to .brain_reach_scratch/.github/workflows/ci.yml.",
+    "kind": "MODELS_DISAGREE",
+    "learned": "python.source.crossfile_edit.choreograph.v1"
+   },
+   {
+    "actual": "test.slice.never_miss.v1",
+    "declared": "code.polyglot.transform_and_verify.v1",
+    "defect": null,
+    "goal": "Quarantine the flaky test in .brain_reach_scratch/tests/test_calc.py so CI is green.",
+    "kind": "MODELS_DISAGREE",
+    "learned": "test.slice.never_miss.v1"
+   }
+  ],
+  "kinds": {
+   "MODELS_DISAGREE": 12
+  }
+ },
+ "what_is_predicted": "which capability the front door will select, or that it refuses"
+}

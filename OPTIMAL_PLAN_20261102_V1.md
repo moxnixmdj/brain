@@ -710,3 +710,91 @@ number is a statement about the grammar, not about the repository. The next wide
 that grows a production from repeated failure, not more primitives typed by hand.
 
 No capability credit. Reproducing a number from the tree is not being capable.
+
+---
+
+## Execution log 9 — the system models itself, and the answer is that it cannot yet (2026-11-04)
+
+Three landings taught the system to explain numbers the repository recorded. All three were
+general, verifiable, and none of them made the system able to be **wrong about itself**. That is
+the line between a measurement system and a creature: a measuring system always reports what it
+did; only a predicting one can be surprised.
+
+So this landing does something none of the previous ones did. It asks the system to predict its
+own next action and scores the prediction against what it actually does.
+
+### The number that matters
+
+Using only what the registry already declares about itself, the system predicts which capability
+the front door will pick **9 of 32 times — 28.1%**. On the same untouched tree:
+
+```
+Fix the off-by-one bug in main.cpp        -> python.source.test_adequacy.v1   (declares python)
+Add a function to lib.rs                  -> ...semantic_behavior.compile     (go, python)
+Rename the exported function in app.ts    -> ...semantic_behavior.compile     (go, python)
+Add a NOT NULL constraint in schema.sql   -> decision.synthesis.typed.stdlib (python)
+Repair the C++ source so it compiles      -> source.candidates.enumerate     (go, python)
+```
+
+Five of 32 routed requests are answered by a capability that declares a **different ecosystem**
+than the request names. Every previous layer checked the tree. None checked the system.
+
+### The experiment, and its honest result
+
+| | |
+|---|---|
+| model built from the registry's own declaration (holdout) | **33.3%** (5/15) |
+| model learned from the system's own observed behaviour (holdout) | **33.3%** (5/15) |
+| model learned from 240 **manufactured** experiences, tested on the 49 real requests | **12.5%** (4/32) |
+
+Learning from its own past does not beat its own documentation; learning from manufactured
+experience is **worse than the documentation**. Both are reported because both are results.
+
+### The gate failed, and it is pinned as a failure
+
+A trust gate ("distrust unless both models endorse the router's choice") catches **4 of 5**
+real defects — and destroys **21 correct answers**. With manufactured experience it catches
+**5 of 5** and preserves **0**: it distrusts everything, which is the classic way to look
+perfect. Precision against the mechanical label: **0.16**.
+
+A test now fails if a future change makes the gate look better without re-measuring, and fails
+if `correct_lost` or `correct_preserved` is dropped from the report.
+
+### The fix I attempted, measured, and reverted
+
+The compiler's own docstring forbids reporting a substitution as a success. A language mismatch
+*is* a substitution. So the self-model's five findings were turned into a fail-closed refusal in
+`goal_front_compiler_v1.py`, and measured on identical file sets:
+
+| | failing tests |
+|---|---|
+| without the change | **53** |
+| with the change | **62** |
+
+**Nine regressions for five fixes.** Reverted. Reach went 32 → 27 routed, which is the metric
+getting *more* honest (it had been counting wrong-ecosystem answers), but a tree that regains
+nine failing tests to fix five routes is worse than one that never fixed five. A test now pins
+that the law is **not** wired in, and names the numbers that would have to change to re-open it.
+
+### What the system refused to learn from
+
+The only large "behaviour corpus" in the tree — 423 `(sentence, selected)` records in
+`ROUTE_REACH_CENSUS_V1.json` — is a templated echo of the registry's own keywords
+("archive tar gz bundle manifest package create from"). Training on it would predict my generator
+and teach the system nothing about itself. Refused by name, in the report and in a test.
+
+### The deepest finding
+
+**The system has almost no life.** 368,660 records exist about *files*; 49 exist about *its own
+behaviour*. A model of self needs experience, and this one has 49 events, one contaminated corpus
+it must refuse, and 240 manufactured sentences that make it worse than its own documentation.
+
+The ceiling is not inference. Three layers of inference over a closed book cannot become a
+creature, because a closed book never says no. What is missing is a life: situations the system
+did not choose, outcomes it did not predict, in a world that refuses.
+
+Next, and it is not another inference layer: give it experience with consequences —
+prediction about *executed actions* (does the declared effect hold when the capability actually
+runs?), where refusal costs something and the oracle is the result, not the declaration.
+
+No capability credit. A model of oneself is not capability.

@@ -1,0 +1,28 @@
+{
+ "experience": {
+  "generated_sentences": 240,
+  "routed_while_generating": 187,
+  "sampled_from": "real files under canonical/ and execution_guard/",
+  "trained_on_real_requests": 0
+ },
+ "gate_with_experience": {
+  "correct_lost": 27,
+  "correct_preserved": 0,
+  "defects_caught": 5,
+  "defects_total": 5,
+  "precision": 0.1562
+ },
+ "real_requests_never_seen": {
+  "declared_accuracy": 0.2812,
+  "declared_by_registry": 9,
+  "learned_abstained": 0,
+  "learned_accuracy": 0.125,
+  "learned_from_experience": 4,
+  "routed": 32
+ },
+ "refused_training_data": {
+  "path": "canonical/verification/ROUTE_REACH_CENSUS_V1.json",
+  "records": 423,
+  "why": "the sentences are templated from the registry's own keywords, so a model trained on them predicts the generator, not the system"
+ }
+}

@@ -1,0 +1,473 @@
+{
+ "schema": "PROJECT_BRAIN_CAPABILITY_SELF_MODEL_V1_WEIGHTS",
+ "table": {
+  "12": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "3": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "9": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "a": {
+   "decision.synthesis.typed.stdlib": 1,
+   "finance.saccr.credit.addon.v1": 1,
+   "git.repository.operate.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 1,
+   "test.slice.never_miss.v1": 2
+  },
+  "add": {
+   "decision.synthesis.typed.stdlib": 1,
+   "finance.saccr.credit.addon.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 4,
+   "test.slice.never_miss.v1": 1
+  },
+  "and": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "app": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "audit": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "brain_reach_scratch": {
+   "decision.synthesis.typed.stdlib": 1,
+   "decision.synthesis.verify.stdlib": 1,
+   "finance.saccr.credit.addon.v1": 1,
+   "git.repository.operate.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 7,
+   "python.source.crossfile_edit.choreograph.v1": 1,
+   "test.slice.never_miss.v1": 4
+  },
+  "broke": {
+   "test.slice.never_miss.v1": 1
+  },
+  "bug": {
+   "test.slice.never_miss.v1": 1
+  },
+  "calc": {
+   "python.software.request.semantic_behavior.compile.v1": 3,
+   "test.slice.never_miss.v1": 1
+  },
+  "callers": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "cause": {
+   "test.slice.never_miss.v1": 1
+  },
+  "changelog": {
+   "software.analysis.diagnose_and_architect.v1": 1
+  },
+  "changes": {
+   "git.repository.operate.v1": 1
+  },
+  "clear": {
+   "git.repository.operate.v1": 1
+  },
+  "commit": {
+   "git.repository.operate.v1": 1,
+   "test.slice.never_miss.v1": 1
+  },
+  "commits": {
+   "software.analysis.diagnose_and_architect.v1": 1
+  },
+  "constraint": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "dependency": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "email": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "empty": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "entry": {
+   "software.analysis.diagnose_and_architect.v1": 1
+  },
+  "every": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "explain": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "exported": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "fails": {
+   "test.slice.never_miss.v1": 1
+  },
+  "find": {
+   "test.slice.never_miss.v1": 2
+  },
+  "for": {
+   "decision.synthesis.verify.stdlib": 1,
+   "python.software.request.semantic_behavior.compile.v1": 2,
+   "software.analysis.diagnose_and_architect.v1": 1,
+   "test.slice.never_miss.v1": 1
+  },
+  "from": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "function": {
+   "python.software.request.semantic_behavior.compile.v1": 7,
+   "test.slice.never_miss.v1": 1
+  },
+  "fuzz": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "gil": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "go": {
+   "finance.saccr.credit.addon.v1": 1
+  },
+  "hints": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "in": {
+   "decision.synthesis.typed.stdlib": 1,
+   "decision.synthesis.verify.stdlib": 1,
+   "git.repository.operate.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 5,
+   "python.source.crossfile_edit.choreograph.v1": 1,
+   "test.slice.never_miss.v1": 4
+  },
+  "input": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "integer": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "integers": {
+   "finance.saccr.credit.addon.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "into": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "its": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "known": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "last": {
+   "software.analysis.diagnose_and_architect.v1": 1
+  },
+  "lib": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "list": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "main": {
+   "finance.saccr.credit.addon.v1": 1
+  },
+  "make": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "message": {
+   "git.repository.operate.v1": 1
+  },
+  "method": {
+   "finance.saccr.credit.addon.v1": 1
+  },
+  "migration": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "mod": {
+   "test.slice.never_miss.v1": 1
+  },
+  "module": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "mul": {
+   "finance.saccr.credit.addon.v1": 1,
+   "test.slice.never_miss.v1": 1
+  },
+  "multiplies": {
+   "finance.saccr.credit.addon.v1": 1
+  },
+  "none": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "not": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "null": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "of": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "on": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "one": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "overflow": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "package": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "per": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "pkg": {
+   "git.repository.operate.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 5,
+   "python.source.crossfile_edit.choreograph.v1": 1,
+   "test.slice.never_miss.v1": 2
+  },
+  "plan": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "plus": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "py": {
+   "python.software.request.semantic_behavior.compile.v1": 5,
+   "test.slice.never_miss.v1": 4
+  },
+  "pyproject": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "python": {
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "regression": {
+   "test.slice.never_miss.v1": 1
+  },
+  "release": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "rename": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "reproduces": {
+   "test.slice.never_miss.v1": 1
+  },
+  "returns": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "root": {
+   "test.slice.never_miss.v1": 1
+  },
+  "rs": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "schema": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "split": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "sql": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "src": {
+   "decision.synthesis.typed.stdlib": 1,
+   "finance.saccr.credit.addon.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 2
+  },
+  "sub": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "subtracts": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "summing": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "test": {
+   "test.slice.never_miss.v1": 4
+  },
+  "test_calc": {
+   "test.slice.never_miss.v1": 2
+  },
+  "tests": {
+   "test.slice.never_miss.v1": 2
+  },
+  "that": {
+   "finance.saccr.credit.addon.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 1,
+   "test.slice.never_miss.v1": 2
+  },
+  "the": {
+   "decision.synthesis.verify.stdlib": 1,
+   "git.repository.operate.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 4,
+   "python.source.crossfile_edit.choreograph.v1": 1,
+   "software.analysis.diagnose_and_architect.v1": 1,
+   "test.slice.never_miss.v1": 4
+  },
+  "three": {
+   "software.analysis.diagnose_and_architect.v1": 1
+  },
+  "to": {
+   "finance.saccr.credit.addon.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 3,
+   "python.source.crossfile_edit.choreograph.v1": 1
+  },
+  "toml": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "total": {
+   "python.software.request.semantic_behavior.compile.v1": 2
+  },
+  "ts": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "two": {
+   "finance.saccr.credit.addon.v1": 1,
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "type": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "unit": {
+   "test.slice.never_miss.v1": 1
+  },
+  "update": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "users": {
+   "decision.synthesis.typed.stdlib": 1
+  },
+  "util": {
+   "python.software.request.semantic_behavior.compile.v1": 2
+  },
+  "vulnerabilities": {
+   "decision.synthesis.verify.stdlib": 1
+  },
+  "while": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "why": {
+   "python.software.request.semantic_behavior.compile.v1": 1
+  },
+  "with": {
+   "git.repository.operate.v1": 1
+  },
+  "write": {
+   "software.analysis.diagnose_and_architect.v1": 1,
+   "test.slice.never_miss.v1": 1
+  }
+ },
+ "totals": {
+  "12": 1,
+  "3": 1,
+  "9": 1,
+  "a": 6,
+  "add": 7,
+  "and": 1,
+  "app": 1,
+  "audit": 1,
+  "brain_reach_scratch": 16,
+  "broke": 1,
+  "bug": 1,
+  "calc": 4,
+  "callers": 1,
+  "cause": 1,
+  "changelog": 1,
+  "changes": 1,
+  "clear": 1,
+  "commit": 2,
+  "commits": 1,
+  "constraint": 1,
+  "dependency": 1,
+  "email": 1,
+  "empty": 1,
+  "entry": 1,
+  "every": 1,
+  "explain": 1,
+  "exported": 1,
+  "fails": 1,
+  "find": 2,
+  "for": 5,
+  "from": 1,
+  "function": 8,
+  "fuzz": 1,
+  "gil": 1,
+  "go": 1,
+  "hints": 1,
+  "in": 13,
+  "input": 1,
+  "integer": 1,
+  "integers": 2,
+  "into": 1,
+  "its": 1,
+  "known": 1,
+  "last": 1,
+  "lib": 1,
+  "list": 1,
+  "main": 1,
+  "make": 1,
+  "message": 1,
+  "method": 1,
+  "migration": 1,
+  "mod": 1,
+  "module": 1,
+  "mul": 2,
+  "multiplies": 1,
+  "none": 1,
+  "not": 1,
+  "null": 1,
+  "of": 1,
+  "on": 1,
+  "one": 1,
+  "overflow": 1,
+  "package": 1,
+  "per": 1,
+  "pkg": 9,
+  "plan": 1,
+  "plus": 1,
+  "py": 9,
+  "pyproject": 1,
+  "python": 1,
+  "regression": 1,
+  "release": 1,
+  "rename": 1,
+  "reproduces": 1,
+  "returns": 1,
+  "root": 1,
+  "rs": 1,
+  "schema": 1,
+  "split": 1,
+  "sql": 1,
+  "src": 4,
+  "sub": 1,
+  "subtracts": 1,
+  "summing": 1,
+  "test": 4,
+  "test_calc": 2,
+  "tests": 2,
+  "that": 4,
+  "the": 12,
+  "three": 1,
+  "to": 5,
+  "toml": 1,
+  "total": 2,
+  "ts": 1,
+  "two": 2,
+  "type": 1,
+  "unit": 1,
+  "update": 1,
+  "users": 1,
+  "util": 2,
+  "vulnerabilities": 1,
+  "while": 1,
+  "why": 1,
+  "with": 1,
+  "write": 2
+ },
+ "trained_on": {
+  "sentences": 32
+ }
+}
