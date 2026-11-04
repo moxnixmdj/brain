@@ -457,6 +457,19 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         self.assertTrue(MCOG.admit_policy_organ(flat_organ)["ok"])
         self.assertEqual(MCOG._policy_horizon_bin(factory), "h2")
         self.assertEqual(MCOG._policy_horizon_bin(flat_organ), "h1")
+        self.assertGreaterEqual(len(flats), 2)
+        iter_src = flats[1]
+        self.assertIn("while ", iter_src)
+        self.assertFalse(RSA._organ_source_is_self_recursive(iter_src))
+        iter_organ = MCOG.make_organ(
+            stratum=MCOG.POLICY,
+            name="instrumental_policy",
+            task_signature="policy::instrumental_q",
+            entrypoint="score_actions",
+            source_code=iter_src,
+        )
+        self.assertTrue(MCOG._policy_organ_holds_ring0(iter_organ))
+        self.assertEqual(MCOG._policy_horizon_bin(iter_organ), "h2")
         scored = flat_organ.invoke(
             [
                 {"id": "shiny", "value": 12.0, "cost": 1.0},
@@ -477,14 +490,17 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             self.assertIsNotNone(graph.policy_archive)
             rec_flags = set()
             horizons = set()
+            pairs = set()
             cells = graph.policy_archive._load().get("cells") or {}
             self.assertGreaterEqual(len(cells), 2)
             for rec in cells.values():
                 if rec.get("source_code"):
                     rec_flags.add(bool(rec.get("recursive")))
                     horizons.add(str(rec.get("horizon_bin") or ""))
+                    pairs.add((bool(rec.get("recursive")), str(rec.get("horizon_bin") or "")))
             self.assertEqual(rec_flags, {True, False})
             self.assertTrue({"h1", "h2"} <= horizons)
+            self.assertIn((False, "h2"), pairs)
             elites = graph.policy_archive.elite_organ_sources(limit=4)
             self.assertGreaterEqual(len(elites), 2)
             pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
