@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2390186f60fe0441488db3a1be017d22fdd9f4ddb22cc9f0dffd2a6c0b0dd380"
+  "value": "d87b5e7c5fe6f0e7cb9ea667add9cef9f97445c43c40c7c248866bbc7202e7c5"
  },
  "engines": [
   {
@@ -225436,7 +225436,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "65f51dea3891ce541e1f53a7b768efc2961d778588a1086e7c4d69f690da8678",
+   "sha256": "87c4ae2da33d96c67cfb80e7835b1fec2d1a37e589210ead90d5dc8463b24422",
    "status": "",
    "terms": {
     "20261104": 1,
