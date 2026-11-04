@@ -50,6 +50,10 @@ from typing import Any, Mapping, Sequence
 
 SCHEMA = "BRAIN_TOOL_COMPETENCE_V1"
 
+# A tool must be consulted this many times on a kind before it can be skipped there. Below this,
+# absence of evidence is not evidence of absence.
+SKIP_AFTER = 4
+
 # Every producer the awake loop consults, by the name the loop knows it by. This list is the one thing
 # here I authored, and it is unavoidable: the creature cannot name a tool it does not have.
 TOOLS = (
@@ -156,14 +160,24 @@ class ToolCompetence:
         return any(float(v.get("won") or 0) > 0 for v in row.values())
 
     def should_consult(self, kind: str, tool: str, *, floor: float = 0.05) -> bool:
-        """May this tool be skipped for this kind? Only with strong evidence against it.
+        """May this tool be skipped for this kind? Only with evidence against it, never on a hunch.
 
-        MEASURED 2026-11-05: reordering producers saved exactly nothing -- 14 candidates screened cold
-        and 14 warm, identical -- because the screen takes the whole batch and stops on first pass, so
-        every tool runs regardless of rank. Ordering is not a decision. This is: a tool may be skipped
-        only when it has been consulted on this kind at least 3 times AND never once produced a
-        candidate. Producing nothing is the only failure that justifies not asking, because a tool that
-        produces wrong candidates still might produce the right one, and only the screen can tell.
+        Ordering is not a decision: measured 2026-11-05, reordering producers saved exactly nothing
+        (14 candidates screened cold, 14 warm), because the screen takes the whole batch. This method is
+        the decision, and it has two forms:
+
+          1. the tool has never PRODUCED a candidate for this kind
+          2. the tool has produced candidates for this kind and never WON one
+
+        The second form is what actually removes overhead: `guided`, `deterministic_ast` and
+        `stun_guard` were screening 4-12 candidates on every VALUE failure and had never produced the
+        winning one.
+
+        Two guards keep it from being reckless. A tool is always consulted for its first SKIP_AFTER
+        appearances, so absence of evidence is never treated as evidence of absence. And the skip is
+        per KIND, so a tool that is useless on VALUE is still consulted on BINDING -- which is the
+        mistake a global prune would make, measured this pass: removing the five never-winning
+        producers broke binding and syntax repair completely while the board still passed 10/10.
         """
         row = self.table.get(str(kind or "UNKNOWN")) or {}
         slot = row.get(str(tool))
@@ -171,7 +185,12 @@ class ToolCompetence:
             return True  # never tried: try it
         seen = float(slot.get("seen") or 0)
         produced = float(slot.get("produced") or 0)
-        if seen >= 3 and produced <= floor:
+        won = float(slot.get("won") or 0)
+        if seen < SKIP_AFTER:
+            return True
+        if produced <= floor:
+            return False
+        if won <= 0:
             return False
         return True
 
