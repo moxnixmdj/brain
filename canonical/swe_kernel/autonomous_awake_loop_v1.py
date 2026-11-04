@@ -763,7 +763,7 @@ class AwakeAgencyDaemon:
         return list(self.notion_findings)
 
     def _author_tests_from_notions(self, src_files: Sequence[pathlib.Path], *,
-                                   allow_authoring: bool = True) -> list[pathlib.Path]:
+                                   allow_authoring: bool = True, refresh_only: bool = False) -> list[pathlib.Path]:
         """Surface tentative questions; author tests only from explicit external feedback.
 
         A firing relation and its learned priority are not a specification.  Even
@@ -810,9 +810,12 @@ class AwakeAgencyDaemon:
                     target = n.right if trusted == n.left else n.left
                     examples = store.examples.get(n.id) or []
                     feedback_hash = store._feedback_hash(review, examples)
+                    operators = store.learned_operators()
+                    target_arity = n.arity if target == n.right else 1
+                    experience_inputs = store.learned_challenge_inputs(n.id, target_arity)
                     plan = investigate(src, target_name=target, reference_name=trusted,
                                        observations=result.get("observations") or [], examples=examples,
-                                       learned_operators=store.learned_operators())
+                                       learned_operators=operators, experience_inputs=experience_inputs)
                     if not store.record_plan(n.id, plan, expected_feedback_hash=feedback_hash):
                         finding.update({"status": "feedback_changed", "trusted_function": trusted,
                                         "target_function": target, "plan": plan})
@@ -841,6 +844,15 @@ class AwakeAgencyDaemon:
                 continue
             target_file = self.workspace_root / "tests" / f"test_{mod.stem}.py"
             try:
+                if refresh_only:
+                    # Never invent a test when ordinary tests already exist. A
+                    # refresh may touch only a registered file at this location.
+                    if not target_file.is_file() or target_file.is_symlink():
+                        continue
+                    old_binding = store.authored_test_binding(self.workspace_root,
+                                                               target_file.relative_to(self.workspace_root).as_posix())
+                    if old_binding is None or old_binding == test_binding:
+                        continue
                 # Record the origin before writing, under the same cooperative
                 # lock as retractions. A removed marker must not silently turn
                 # an authored test into a new user-supplied specification.
@@ -920,6 +932,13 @@ class AwakeAgencyDaemon:
         test_files.sort()
         poly_tests.sort()
         src_files.sort()
+        if within is None and any(t.with_name("." + t.name + ".brain-origin").is_file() for t in test_files):
+            # Existing generated tests may bind older feedback. Replan and
+            # refresh only registered, unchanged files; never create a new test
+            # merely because a workspace already has ordinary tests.
+            for refreshed in self._author_tests_from_notions(src_files, refresh_only=True):
+                self._file_sha_memo.pop(str(refreshed), None)
+                self._test_health_cache.pop(refreshed.relative_to(self.workspace_root).as_posix(), None)
         if not test_files and not poly_tests:
             # Without tests, inspect the source for questions. A disagreement or
             # name similarity is NOT an oracle. Tests are created only after the

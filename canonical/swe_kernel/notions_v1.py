@@ -18,7 +18,6 @@ import contextlib
 import functools
 import hashlib
 import json
-import math
 import os
 import pathlib
 import re
@@ -27,10 +26,11 @@ from typing import Any, Callable, Iterable, Mapping
 
 from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
 from canonical.swe_kernel.expression_hypotheses_v1 import (
-    OUTCOME_MODEL_VERSION, candidate_agrees_with_bounded_plan, evaluate, evaluate_model_outcome,
-    function_models, investigate, matches_expected, model_agrees_with_outcome_reference,
-    observed_binary_operators, same_number, supported_binary_operator_names, supported_expected,
-    target_expression_scope_sha256, validate_external_examples,
+    MAX_TRANSFERRED_INPUTS, MIN_EXTERNAL_EXAMPLES, OUTCOME_MODEL_VERSION, candidate_agrees_with_bounded_plan,
+    distinct_numeric_example_inputs, evaluate, evaluate_model_outcome,
+    function_models, investigate, matches_expected, model_agrees_with_outcome_reference, numeric_input_key,
+    observed_binary_operators, outside_default_query_grids, same_number, supported_binary_operator_names, supported_expected,
+    target_expression_scope_sha256, validate_external_examples, validate_transferred_inputs,
 )
 
 SCHEMA = "BRAIN_NOTIONS_V1"
@@ -318,9 +318,14 @@ class NotionStore:
             if current != expected_feedback_hash:
                 return False  # the review/examples changed while planning
         value = dict(plan)
+        # Python mapping equality conflates int/float and positive/negative
+        # zero. Plans include typed input coordinates, so compare their JSON
+        # representations rather than silently retaining a different query.
+        current = json.dumps(self.plans.get(finding_id), sort_keys=True, separators=(",", ":"))
+        proposed = json.dumps(value, sort_keys=True, separators=(",", ":"))
         if not can_write_memory():
-            return self.plans.get(finding_id) == value
-        if self.plans.get(finding_id) != value:
+            return current == proposed
+        if current != proposed:
             self.plans[finding_id] = value
             self.save()
         return True
@@ -332,26 +337,77 @@ class NotionStore:
         if not can_write_memory():
             raise PermissionError("memory policy forbids feedback")
         self.load()
+        finding = self.findings.get(finding_id) or {}
         review = self.reviews.get(finding_id) or {}
         plan = self.plans.get(finding_id) or {}
         query = plan.get("next_query") or {}
-        if (review.get("decision") != "confirm" or not review.get("trusted_function")
-                or not isinstance(args, list) or query.get("args") != args
-                or any(type(a) not in (int, float) or (isinstance(a, float) and not math.isfinite(a)) for a in args)):
+        reference, left, right, arity = (review.get("trusted_function"), finding.get("left"),
+                                         finding.get("right"), finding.get("arity"))
+        if (review.get("decision") != "confirm" or reference not in (left, right)
+                or not isinstance(reference, str) or left == right or type(arity) is not int or not 2 <= arity <= 4
+                or plan.get("status") != "needs_example" or not isinstance(args, list)
+                or not isinstance(query.get("args"), list)):
+            raise ValueError("answer does not match an active, reviewed query")
+        target_arity = arity if reference == left else 1
+        query_args = query["args"]
+        if (not validate_transferred_inputs([args], target_arity)[0]
+                or not validate_transferred_inputs([query_args], target_arity)[0]
+                or numeric_input_key(args) != numeric_input_key(query_args)):
             raise ValueError("answer does not match an active, reviewed query")
         if (not isinstance(reviewer, str) or not reviewer.strip() or not isinstance(basis, str)
                 or not basis.strip() or not supported_expected(expected)):
             raise ValueError("a supported external outcome and its provenance are required")
-        prior = self.examples.setdefault(finding_id, [])
-        if any(e.get("args") == args for e in prior):
-            raise ValueError("query was already answered")
         example = {"args": list(args), "expected": dict(expected) if isinstance(expected, dict) else expected,
                    "reviewer": reviewer[:200], "basis": basis[:500]}
-        prior.append(example)
+        prior = self.examples.get(finding_id) or []
+        rows = [*prior, example]
+        valid, reason = validate_external_examples(rows, target_arity, require_attribution=True)
+        if not valid:
+            raise ValueError(reason)
+        self.examples[finding_id] = rows
         # Require a new plan before accepting another answer; the model must actually update.
         self.plans.pop(finding_id, None)
         self.save()
-        return dict(example)
+        return {**example, "args": list(example["args"]),
+                "expected": dict(example["expected"]) if isinstance(example["expected"], dict) else example["expected"]}
+
+    @_serialized_update
+    def provide_example(self, finding_id: str, *, args: list[int | float], expected: int | float | dict[str, str],
+                        reviewer: str, basis: str) -> dict[str, Any]:
+        """Add a caller-supplied example, even when it was not the active query.
+
+        This is explicit external feedback, not a prediction or authentication.
+        Adding it invalidates the old plan and any test bound to the old hash.
+        """
+        if not can_write_memory():
+            raise PermissionError("memory policy forbids feedback")
+        self.load()
+        finding = self.findings.get(finding_id) or {}
+        review = self.reviews.get(finding_id) or {}
+        reference = review.get("trusted_function")
+        left, right = finding.get("left"), finding.get("right")
+        arity = finding.get("arity")
+        if (not finding.get("fired") or finding.get("declined") or review.get("decision") != "confirm"
+                or not isinstance(left, str) or not isinstance(right, str) or left == right
+                or not isinstance(reference, str) or reference not in (left, right)
+                or type(arity) is not int or not 2 <= arity <= 4):
+            raise ValueError("an active confirmed review with a reference is required")
+        if (not isinstance(args, list) or not isinstance(reviewer, str) or not reviewer.strip()
+                or not isinstance(basis, str) or not basis.strip()):
+            raise ValueError("example arguments and attribution are required")
+        target_arity = arity if reference == left else 1
+        example = {"args": list(args), "expected": dict(expected) if isinstance(expected, dict) else expected,
+                   "reviewer": reviewer[:200], "basis": basis[:500]}
+        prior = self.examples.get(finding_id) or []
+        rows = [*prior, example]
+        valid, reason = validate_external_examples(rows, target_arity, require_attribution=True)
+        if not valid:
+            raise ValueError(reason)
+        self.examples[finding_id] = rows
+        self.plans.pop(finding_id, None)
+        self.save()
+        return {**example, "args": list(example["args"]),
+                "expected": dict(example["expected"]) if isinstance(example["expected"], dict) else example["expected"]}
 
     @staticmethod
     def _feedback_hash(review: Mapping[str, Any], examples: list[dict[str, Any]]) -> str:
@@ -389,7 +445,7 @@ class NotionStore:
             return False
         target_arity = arity if target == finding.get("right") else 1
         valid, _ = validate_external_examples(examples, target_arity, require_attribution=True)
-        if not valid:
+        if not valid or distinct_numeric_example_inputs(examples) < MIN_EXTERNAL_EXAMPLES:
             return False
         return binding.get("feedback_sha256") == self._feedback_hash(review, examples)
 
@@ -426,9 +482,12 @@ class NotionStore:
             if any(observed.get(k) != stored.get(k) for k in keys) or not observed["fired"] or observed["declined"]:
                 return None
             operators = self.learned_operators()  # reads the current locked snapshot
+            target_arity = stored["arity"] if binding["target"] == stored["right"] else 1
+            experience_inputs = self.learned_challenge_inputs(fid, target_arity)
             examples = self.examples.get(fid) or []
             plan = investigate(source, target_name=str(binding["target"]), reference_name=str(binding["reference"]),
-                               observations=observed["observations"], examples=examples, learned_operators=operators)
+                               observations=observed["observations"], examples=examples, learned_operators=operators,
+                               experience_inputs=experience_inputs)
             if (plan.get("status") != "bounded_agreement" or plan.get("truncated")
                     or plan.get("external_examples") != len(examples)):
                 return None
@@ -558,10 +617,12 @@ class NotionStore:
     @_serialized_update
     def author_reviewed_test(self, binding: Mapping[str, Any], workspace_root: pathlib.Path,
                              test_file: pathlib.Path) -> bool:
-        """Record origin before creating the reviewed test under one local lock.
+        """Create or refresh an unchanged, registered reviewed test under one lock.
 
-        Origin stays recorded if creation fails, so an interrupted write fails
-        closed rather than silently turning a generated test into a user test.
+        Refresh only a generated file whose old binding, hash, scope and sidecar
+        still match. Record the new origin before writing, so interruption fails
+        closed rather than silently reclassifying a generated test as a user test.
+        The local metadata and advisory lock are not authentication.
         """
         if not can_write_memory():
             return False
@@ -577,7 +638,7 @@ class NotionStore:
             module = (root / str(binding["module"])).resolve()
             if (not destination.resolve().is_relative_to(root) or destination.parent.resolve() != destination.parent
                     or destination.is_symlink() or not module.is_relative_to(root) or not module.is_file()
-                    or destination.exists()
+                    or (destination.exists() and not destination.is_file())
                     or hashlib.sha256(module.read_bytes()).hexdigest() != binding.get("source_sha256")):
                 return False
             snapshot = self._workspace_plan(binding, root)
@@ -598,7 +659,37 @@ class NotionStore:
         if key not in self.authored_tests and len(self.authored_tests) >= MAX_FINDINGS:
             return False
         sidecar = destination.with_name("." + destination.name + ".brain-origin")
-        if sidecar.exists() or sidecar.is_symlink():
+        old_bytes: bytes | None = None
+        old_mode: int | None = None
+        if destination.exists():
+            # Never replace an ordinary or edited test. This registry and marker
+            # can still be forged by a hostile writer; they are consistency
+            # evidence, not a signature or a secure transaction boundary.
+            origin = self.authored_tests.get(key)
+            old_binding = origin.get("binding") if isinstance(origin, dict) else None
+            if (not isinstance(old_binding, dict) or old_binding == dict(binding)
+                    or not isinstance(old_binding.get("feedback_sha256"), str)
+                    or re.fullmatch(r"[0-9a-f]{64}", old_binding["feedback_sha256"]) is None):
+                return False
+            if ({k: v for k, v in old_binding.items() if k != "feedback_sha256"}
+                    != {k: v for k, v in binding.items() if k != "feedback_sha256"}):
+                return False
+            try:
+                if (sidecar.is_symlink() or not sidecar.is_file()
+                        or sidecar.read_bytes() != b"brain-generated-test-v1\n"
+                        or destination.stat().st_size > 400_000
+                        or origin.get("non_target_sha256") != scope_hash):
+                    return False
+                old_bytes = destination.read_bytes()
+                old_mode = destination.stat().st_mode & 0o777
+                header = old_bytes.splitlines()[0]
+                if (origin.get("test_sha256") != hashlib.sha256(old_bytes).hexdigest()
+                        or not header.startswith(b"# brain-notion-v1 ")
+                        or json.loads(header[len(b"# brain-notion-v1 "):]) != old_binding):
+                    return False
+            except (OSError, IndexError, ValueError, TypeError):
+                return False
+        elif sidecar.exists() or sidecar.is_symlink():
             return False
         self.authored_tests[key] = {"binding": dict(binding),
                                     "test_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
@@ -607,6 +698,29 @@ class NotionStore:
                                     "outcome_reference": outcome_reference}
         self.save()
         destination.parent.mkdir(parents=True, exist_ok=True)
+        if old_bytes is not None:
+            # Origin first, then atomic replacement: an interrupted or changed
+            # file mismatches the new origin and is refused until repaired.
+            if (destination.is_symlink() or sidecar.is_symlink()
+                    or sidecar.read_bytes() != b"brain-generated-test-v1\n"
+                    or destination.read_bytes() != old_bytes):
+                return False
+            tmp: str | None = None
+            try:
+                with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=destination.parent,
+                                                 prefix=".notion-test-", delete=False) as stream:
+                    tmp = stream.name
+                    if old_mode is not None:
+                        os.fchmod(stream.fileno(), old_mode)
+                    stream.write(text)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                os.replace(tmp, destination)
+                tmp = None
+            finally:
+                if tmp is not None:
+                    pathlib.Path(tmp).unlink(missing_ok=True)
+            return True
         # This workspace integrity marker carries no learned semantic content.
         # It remains visible when learned-memory reads are OFF, so removing the
         # test header cannot silently reclassify the test as user-authored.
@@ -687,9 +801,12 @@ class NotionStore:
         try:
             for example in examples:
                 args = tuple(example.get("args", []))
-                if args in seen_args or len(args) != len(model.params):
+                if len(args) != len(model.params):
                     return {"status": "feedback_mismatch", "operators": []}
-                seen_args.add(args)
+                key = numeric_input_key(args)
+                if key in seen_args:
+                    return {"status": "feedback_mismatch", "operators": []}
+                seen_args.add(key)
                 if matches_expected(evaluate_model_outcome(model, args), example.get("expected")) is not True:
                     return {"status": "feedback_mismatch", "operators": []}
             for observation in finding.get("observations", []):
@@ -702,6 +819,10 @@ class NotionStore:
                     return {"status": "feedback_mismatch", "operators": []}
         except (TypeError, ValueError):
             return {"status": "feedback_mismatch", "operators": []}
+        # Another experience might have introduced a new validation input after
+        # publication. Do not treat its old answer as a label for this task.
+        if any(numeric_input_key(args) not in seen_args for args in self.learned_challenge_inputs(fid, len(model.params))):
+            return {"status": "experience_validation_pending", "operators": []}
         outcome_reference = origin.get("outcome_reference")
         if origin.get("outcome_model_version") != OUTCOME_MODEL_VERSION or not isinstance(outcome_reference, str):
             return {"status": "outcome_evidence_missing", "operators": []}
@@ -740,14 +861,70 @@ class NotionStore:
                     or experience.get("source_sha256") != finding.get("source_sha256")):
                 continue
             try:
-                if self._feedback_hash(review, examples) != experience.get("feedback_sha256"):
+                if (distinct_numeric_example_inputs(examples) < MIN_EXTERNAL_EXAMPLES
+                        or self._feedback_hash(review, examples) != experience.get("feedback_sha256")):
                     continue
-            except (TypeError, ValueError):
+            except (KeyError, TypeError, ValueError):
                 continue
             ops = experience.get("operators")
             if isinstance(ops, list):
                 out.update(op for op in ops if isinstance(op, str) and op in supported_binary_operator_names())
         return sorted(out)
+
+    def learned_challenge_inputs(self, finding_id: str, arity: int) -> list[list[int | float]]:
+        """Propose a few prior-task inputs, not their outputs or an authorization.
+
+        Only currently feedback-bound repair experiences from different source
+        bytes contribute. Reviewers and local records are unauthenticated; this
+        is a bounded query heuristic, not evidence that a new task is correct.
+        """
+        if not can_read_memory() or type(arity) is not int or not 1 <= arity <= 4:
+            return []
+        self.load()
+        current = self.findings.get(finding_id) or {}
+        source_hash = current.get("source_sha256")
+        if not isinstance(source_hash, str) or not source_hash:
+            return []
+        sources_by_input: dict[tuple[tuple[str, Any], ...], set[str]] = {}
+        points_by_key: dict[tuple[tuple[str, Any], ...], tuple[int | float, ...]] = {}
+        for old_id, experience in sorted(self.experiences.items()):
+            old = self.findings.get(old_id) or {}
+            review = self.reviews.get(old_id) or {}
+            examples = self.examples.get(old_id) or []
+            old_hash = old.get("source_sha256")
+            reference, target = experience.get("reference"), experience.get("target")
+            if (old_id == finding_id or not old.get("fired") or old.get("declined")
+                    or not isinstance(old_hash, str) or not old_hash or old_hash == source_hash
+                    or experience.get("source_sha256") != old_hash
+                    or not isinstance(reference, str) or not isinstance(target, str)
+                    or not isinstance(old.get("left"), str) or not isinstance(old.get("right"), str)
+                    or {reference, target} != {old.get("left"), old.get("right")}
+                    or review.get("decision") != "confirm" or review.get("trusted_function") != reference
+                    or len(examples) < 2):
+                continue
+            old_arity = old.get("arity") if target == old.get("right") else 1
+            if type(old_arity) is not int or old_arity != arity:
+                continue
+            valid, _ = validate_external_examples(examples, arity, require_attribution=True)
+            if not valid or distinct_numeric_example_inputs(examples) < MIN_EXTERNAL_EXAMPLES:
+                continue
+            try:
+                if self._feedback_hash(review, examples) != experience.get("feedback_sha256"):
+                    continue
+            except (TypeError, ValueError):
+                continue
+            for row in examples:
+                args = tuple(row["args"])
+                if outside_default_query_grids(args):
+                    key = numeric_input_key(args)
+                    points_by_key[key] = args
+                    sources_by_input.setdefault(key, set()).add(old_hash)
+        # Identical source copies count once. Frequency and input magnitude are
+        # scheduling signals only; neither supplies an outcome or authority.
+        ordered = sorted(sources_by_input,
+                         key=lambda key: (-len(sources_by_input[key]),
+                                          -max(abs(v) for v in points_by_key[key]), repr(key)))
+        return [list(points_by_key[key]) for key in ordered[:MAX_TRANSFERRED_INPUTS]]
 
     def score(self, finding: Mapping[str, Any]) -> float:
         """A learned review-priority score, not a probability or a permission.

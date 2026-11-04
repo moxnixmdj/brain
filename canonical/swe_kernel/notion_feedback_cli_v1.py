@@ -31,6 +31,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                         help='external JSON number or {"raises":"ZeroDivisionError"} / {"raises":"OverflowError"}')
     answer.add_argument("--reviewer", required=True)
     answer.add_argument("--basis", required=True)
+    example = commands.add_parser("example", help="provide an additional external example")
+    example.add_argument("finding_id")
+    example.add_argument("--args", required=True, help="JSON array of input values")
+    example.add_argument("--expected", required=True,
+                         help='external JSON number or {"raises":"ZeroDivisionError"} / {"raises":"OverflowError"}')
+    example.add_argument("--reviewer", required=True)
+    example.add_argument("--basis", required=True)
     ns = parser.parse_args(argv)
     try:
         store = NotionStore(ns.store)
@@ -45,8 +52,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         else:
             args = json.loads(ns.args)
             expected = json.loads(ns.expected)
-            result = store.answer(ns.finding_id, args=args, expected=expected,
-                                  reviewer=ns.reviewer, basis=ns.basis)
+            method = store.answer if ns.command == "answer" else store.provide_example
+            result = method(ns.finding_id, args=args, expected=expected,
+                            reviewer=ns.reviewer, basis=ns.basis)
     except (ValueError, OSError, TypeError) as exc:
         parser.error(str(exc))
     print(json.dumps(result, indent=2, sort_keys=True))

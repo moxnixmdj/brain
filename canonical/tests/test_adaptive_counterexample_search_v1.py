@@ -198,8 +198,11 @@ def test_real_experience_reopens_a_shallow_search_and_enables_a_deeper_board_rep
         assert func(*values) == oracle(values)
 
 
+# Exact typed duplicates are invalid. Equal numeric coordinates with different
+# types remain separate constraints but must not count as two distinct locations;
+# that invariant is exercised by the transfer tests.
 @pytest.mark.parametrize("examples", [
-    [{"args": [2, 3], "expected": 5}, {"args": [2.0, 3], "expected": 5}],
+    [{"args": [2, 3], "expected": 5}, {"args": [2, 3], "expected": 5}],
     [{"args": [2, 3], "expected": True}],
     [{"args": [2, 3], "expected": float("nan")}],
     [{"args": [2], "expected": 5}],

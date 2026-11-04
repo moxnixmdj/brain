@@ -31,6 +31,9 @@ MAX_ARITY = 4
 MAX_CANDIDATES = 256
 MAX_QUERY_POINTS = 256
 MAX_EXTERNAL_EXAMPLES = 256
+MAX_TRANSFERRED_INPUTS = 4
+PRIMARY_QUERY_VALUES = (2, 3, 4, 5, 6, 7)
+STRESS_QUERY_VALUES = (-3, 0, 11)
 INITIAL_LEARNED_BINARY_NODES = 2
 MAX_LEARNED_BINARY_NODES = 6
 MAX_SEMANTIC_COMBINATIONS = 4096
@@ -73,10 +76,47 @@ def _number(value: Any) -> bool:
     return False
 
 
+def _number_key(value: int | float) -> tuple[str, Any]:
+    # Python considers 0, 0.0 and -0.0 equal; numeric operations can still
+    # distinguish their types or signed zero. Do not merge those behaviors.
+    return ("int", value) if type(value) is int else ("float", value.hex())
+
+
+def numeric_input_key(args: Sequence[int | float]) -> tuple[tuple[str, Any], ...]:
+    """Identity of validated inputs, preserving numeric type and signed zero."""
+    return tuple(_number_key(value) for value in args)
+
+
 def supported_expected(expected: Any) -> bool:
     """Only bounded numbers or an explicit, modelled built-in exception label."""
     return (_number(expected) or (type(expected) is dict and set(expected) == {"raises"}
             and type(expected["raises"]) is str and expected["raises"] in MODELED_EXCEPTIONS))
+
+
+def outside_default_query_grids(args: Sequence[int | float]) -> bool:
+    """Whether this typed point is absent from both fixed Cartesian query grids."""
+    primary = {_number_key(value) for value in PRIMARY_QUERY_VALUES}
+    stress = {_number_key(value) for value in STRESS_QUERY_VALUES}
+    return not (all(_number_key(value) in primary for value in args)
+                or all(_number_key(value) in stress for value in args))
+
+
+def validate_transferred_inputs(inputs: Sequence[Sequence[Any]], arity: int
+                                ) -> tuple[bool, list[tuple[int | float, ...]]]:
+    """Validate bounded input-only proposals; no prior outcomes are accepted."""
+    if not isinstance(inputs, (list, tuple)) or len(inputs) > MAX_TRANSFERRED_INPUTS:
+        return False, []
+    seen: set[tuple[tuple[str, Any], ...]] = set()
+    points: list[tuple[int | float, ...]] = []
+    for args in inputs:
+        if (not isinstance(args, (list, tuple)) or len(args) != arity
+                or not all(_number(value) for value in args)):
+            return False, []
+        key = numeric_input_key(args)
+        if key not in seen:
+            seen.add(key)
+            points.append(tuple(args))
+    return True, points
 
 
 def validate_external_examples(examples: Sequence[Mapping[str, Any]], arity: int, *,
@@ -95,11 +135,21 @@ def validate_external_examples(examples: Sequence[Mapping[str, Any]], arity: int
         if require_attribution and any(not isinstance(example.get(field), str) or not example[field].strip()
                                        for field in ("reviewer", "basis")):
             return False, "example lacks attribution"
-        key = tuple(args)
+        key = numeric_input_key(args)
         if key in seen:
             return False, "duplicate example input"
         seen.add(key)
     return True, "valid"
+
+
+def distinct_numeric_example_inputs(examples: Sequence[Mapping[str, Any]]) -> int:
+    """Count numeric locations after validation, ignoring type and signed-zero aliases.
+
+    Separate typed examples can expose different behavior, but writing the same
+    numeric coordinates as both int and float must not satisfy the minimum
+    diversity requirement. This count does not establish independent evidence.
+    """
+    return len({tuple(example["args"]) for example in examples})
 
 
 def same_number(a: Any, b: Any) -> bool:
@@ -385,25 +435,21 @@ def expression_candidates(target: FunctionModel, templates: Sequence[FunctionMod
     return out[:limit], truncated
 
 
-def _number_key(value: int | float) -> tuple[str, Any]:
-    # Python considers 0, 0.0 and -0.0 equal; numeric operations can still
-    # distinguish their types or signed zero. Do not merge those behaviors.
-    return ("int", value) if type(value) is int else ("float", value.hex())
-
-
-def _semantic_points(arity: int, constraints: Sequence[tuple[Sequence[Any], Any]]
+def _semantic_points(arity: int, constraints: Sequence[tuple[Sequence[Any], Any]],
+                     extra_points: Sequence[Sequence[Any]] = ()
                      ) -> tuple[list[tuple[Any, ...]], dict[tuple[Any, ...], int]] | None:
-    if 6 ** arity + 3 ** arity > MAX_QUERY_POINTS:
+    if len(PRIMARY_QUERY_VALUES) ** arity + len(STRESS_QUERY_VALUES) ** arity > MAX_QUERY_POINTS:
         return None
     points: list[tuple[Any, ...]] = []
     index: dict[tuple[Any, ...], int] = {}
-    domains = (itertools.product((2, 3, 4, 5, 6, 7), repeat=arity),
-               itertools.product((-3, 0, 11), repeat=arity),
-               (tuple(args) for args, _ in constraints))
+    domains = (itertools.product(PRIMARY_QUERY_VALUES, repeat=arity),
+               itertools.product(STRESS_QUERY_VALUES, repeat=arity),
+               (tuple(args) for args, _ in constraints),
+               (tuple(args) for args in extra_points))
     for point in itertools.chain.from_iterable(domains):
         if len(point) != arity or not all(_number(v) for v in point):
             return None
-        key = tuple(_number_key(v) for v in point)
+        key = numeric_input_key(point)
         if key not in index:
             if len(points) >= MAX_QUERY_POINTS:
                 return None
@@ -441,7 +487,7 @@ def _constraint_result(outcomes: Sequence[tuple[str, Any]], expected: Sequence[A
 
 def _semantic_compositions(
     target: FunctionModel, constraints: Sequence[tuple[Sequence[Any], Any]],
-    operators: Sequence[str], *, limit: int,
+    operators: Sequence[str], *, limit: int, extra_points: Sequence[Sequence[Any]] = (),
 ) -> tuple[list[ast.expr], bool, dict[str, Any]]:
     """Compose one minimal representative per exact finite-domain behavior.
 
@@ -453,7 +499,7 @@ def _semantic_compositions(
     intermediates, report incomplete search. A shared unknown is not proof of
     equal behavior. The finite domain says nothing about other inputs.
     """
-    domain = _semantic_points(len(target.params), constraints)
+    domain = _semantic_points(len(target.params), constraints, extra_points)
     base = {"method": "finite_domain_signature", "learned_binary_node_budget": MAX_LEARNED_BINARY_NODES,
             "more_complex_learned_models_unexamined": True}
     if domain is None:
@@ -462,7 +508,7 @@ def _semantic_compositions(
                           "semantic_combinations": 0, "domain_points": 0,
                           "complete_through_depth": False, "reason": "semantic_domain_budget"}
     points, point_index = domain
-    required = [(point_index[tuple(_number_key(v) for v in args)], expected)
+    required = [(point_index[numeric_input_key(args)], expected)
                 for args, expected in constraints]
     # key -> (typed values, exception labels or unknowns; representative AST)
     levels: list[dict[tuple[Any, ...], tuple[tuple[Any, ...], ast.expr]]] = []
@@ -599,6 +645,7 @@ def fitting_expression_candidates(
     target: FunctionModel, templates: Sequence[FunctionModel],
     constraints: Sequence[tuple[Sequence[Any], Any]], *,
     learned_operators: Sequence[str] = (), limit: int = MAX_CANDIDATES,
+    extra_points: Sequence[Sequence[Any]] = (),
 ) -> tuple[list[ast.expr], bool, dict[str, Any]]:
     """Fit, then deepen only after a complete shallower search is refuted.
 
@@ -637,7 +684,7 @@ def fitting_expression_candidates(
     if survivors or truncated or not operators:
         return survivors, truncated, info
     # Only complete refutation licenses additional search, not publication.
-    return _semantic_compositions(target, constraints, operators, limit=limit)
+    return _semantic_compositions(target, constraints, operators, limit=limit, extra_points=extra_points)
 
 
 def replace_return_expression(source: str, model: FunctionModel, replacement: ast.expr) -> str | None:
@@ -695,14 +742,15 @@ def model_agrees_with_outcome_reference(candidate: FunctionModel, expression: st
     """Compare a modeled candidate with one reference on a bounded domain."""
     if (not isinstance(expression, str) or len(expression) > MAX_SOURCE_BYTES
             or not validate_external_examples(examples, len(candidate.params))[0]
-            or 6 ** len(candidate.params) + 3 ** len(candidate.params) > MAX_QUERY_POINTS):
+            or (len(PRIMARY_QUERY_VALUES) ** len(candidate.params)
+                + len(STRESS_QUERY_VALUES) ** len(candidate.params) > MAX_QUERY_POINTS)):
         return False
     try:
         representative = ast.parse(expression, mode="eval").body
     except (SyntaxError, ValueError, TypeError, RecursionError, MemoryError):
         return False
-    domains = (itertools.product((2, 3, 4, 5, 6, 7), repeat=len(candidate.params)),
-               itertools.product((-3, 0, 11), repeat=len(candidate.params)),
+    domains = (itertools.product(PRIMARY_QUERY_VALUES, repeat=len(candidate.params)),
+               itertools.product(STRESS_QUERY_VALUES, repeat=len(candidate.params)),
                (tuple(example["args"]) for example in examples))
     for args in itertools.chain.from_iterable(domains):
         bindings = dict(zip(candidate.params, args))
@@ -744,12 +792,14 @@ def candidate_agrees_with_bounded_plan(source: str, candidate_source: str, *, ta
 def investigate(source: str, *, target_name: str, reference_name: str,
                 observations: Sequence[Mapping[str, Any]],
                 examples: Sequence[Mapping[str, Any]],
-                learned_operators: Sequence[str] = ()) -> dict[str, Any]:
+                learned_operators: Sequence[str] = (),
+                experience_inputs: Sequence[Sequence[Any]] = ()) -> dict[str, Any]:
     """Filter source-derived models and ask a discriminating, externally answered query.
 
     The caller must supply observations from an explicitly trusted reference and
     separately supplied examples; neither source-derived predictions nor a model's
-    own output may be fed back as an external answer.
+    own output may be fed back as an external answer. Prior-task inputs can propose
+    additional questions, but their former outputs never answer the new task.
     """
     learned_operators = tuple(sorted({n for n in learned_operators
                                       if isinstance(n, str) and n in supported_binary_operator_names()}))
@@ -759,6 +809,10 @@ def investigate(source: str, *, target_name: str, reference_name: str,
         return {"status": "unsupported", "outcome_model_version": OUTCOME_MODEL_VERSION,
                 "candidates": 0, "next_query": None,
                 "reason": "target/reference unavailable in restricted static model"}
+    inputs_valid, transferred = validate_transferred_inputs(experience_inputs, len(target.params))
+    if not inputs_valid:
+        return {"status": "invalid_experience_inputs", "outcome_model_version": OUTCOME_MODEL_VERSION,
+                "candidates": 0, "next_query": None, "reason": "invalid or excessive input proposals"}
     constraints: list[tuple[tuple[Any, ...], Any]] = []
     for observation in observations:
         x = observation.get("input")
@@ -774,31 +828,38 @@ def investigate(source: str, *, target_name: str, reference_name: str,
                 "candidates": 0, "next_query": None, "reason": reason}
     for example in examples:
         constraints.append((tuple(example["args"]), example["expected"]))
+    distinct_example_inputs = distinct_numeric_example_inputs(examples)
+    numeric_example_inputs = {tuple(example["args"]) for example in examples}
     if not constraints:
         return {"status": "no_reference_observations", "outcome_model_version": OUTCOME_MODEL_VERSION,
                 "candidates": 0, "next_query": None, "reason": "no supported, attributed constraints"}
     survivors, candidate_truncated, search = fitting_expression_candidates(
-        target, [reference], constraints, learned_operators=learned_operators)
-    # The main grid and the out-of-range stress grid are separately bounded.
+        target, [reference], constraints, learned_operators=learned_operators, extra_points=transferred)
     # A partial exploration must not count as agreement across either grid.
-    truncated = candidate_truncated or (6 ** len(target.params) + 3 ** len(target.params) > MAX_QUERY_POINTS)
+    truncated = candidate_truncated or (
+        len(PRIMARY_QUERY_VALUES) ** len(target.params) + len(STRESS_QUERY_VALUES) ** len(target.params)
+        > MAX_QUERY_POINTS)
     if not survivors:
         return {"status": "truncated_search" if truncated else "no_candidates",
                 "outcome_model_version": OUTCOME_MODEL_VERSION,
                 "candidates": 0, "truncated": truncated, "next_query": None, "search": search,
-                "external_examples": len(examples), "learned_operators_considered": list(learned_operators),
+                "external_examples": len(examples), "distinct_numeric_example_inputs": distinct_example_inputs,
+                "learned_operators_considered": list(learned_operators),
+                "experience_inputs_considered": [list(args) for args in transferred],
                 "reason": ("model limits leave a potentially fitting candidate unresolved"
                            if search.get("reason") == "candidate_evaluation_unknown" else
                            "no explored model fits the supplied evidence")}
 
-    asked = {args for args, _ in constraints}
-    best: tuple[float, tuple[int, ...], dict[str, Any]] | None = None
-    fallback: tuple[tuple[int, ...], dict[str, Any]] | None = None
-    unknown_fallback: tuple[tuple[int, ...], dict[str, Any]] | None = None
-    checked = {"primary": 0, "stress": 0, "undefined": 0, "modeled_exception_points": 0, "unknown_points": 0}
+    asked = {numeric_input_key(args) for args, _ in constraints}
+    best: tuple[float, tuple[int | float, ...], dict[str, Any]] | None = None
+    fallback: tuple[tuple[int | float, ...], dict[str, Any]] | None = None
+    unknown_fallback: tuple[tuple[int | float, ...], dict[str, Any]] | None = None
+    experience_fallback: tuple[tuple[int | float, ...], dict[str, Any]] | None = None
+    checked = {"primary": 0, "stress": 0, "experience": 0, "undefined": 0,
+               "modeled_exception_points": 0, "unknown_points": 0}
 
-    def examine(args: tuple[int, ...], domain: str) -> dict[str, Any] | None:
-        if args in asked:
+    def examine(args: tuple[int | float, ...], domain: str) -> dict[str, Any] | None:
+        if numeric_input_key(args) in asked:
             return None
         results = [evaluate_outcome(expr, dict(zip(target.params, args))) for expr in survivors]
         unknown = sum(kind == "unknown" for kind, _ in results)
@@ -826,37 +887,46 @@ def investigate(source: str, *, target_name: str, reference_name: str,
                 "exception_predictions": [v for k, v, _ in buckets if k == "raises"],
                 "unknown_models": unknown, "outcome_buckets": len(buckets)}
 
-    def consider(args: tuple[int, ...], domain: str) -> None:
-        nonlocal best, fallback, unknown_fallback
+    def consider(args: tuple[int | float, ...], domain: str) -> None:
+        nonlocal best, fallback, unknown_fallback, experience_fallback
         result = examine(args, domain)
         if result is None:
             return
+        result = {**result, "domain": domain}
+        if domain == "experience" and experience_fallback is None:
+            experience_fallback = (args, result)
         if result["unknown_models"]:
             if unknown_fallback is None:
                 unknown_fallback = (args, result)
-        elif fallback is None or domain == "stress" and fallback[1].get("domain") != "stress":
-            fallback = (args, {**result, "domain": domain})
+        elif (domain != "experience" and args not in numeric_example_inputs
+              and (fallback is None or domain == "stress" and fallback[1]["domain"] != "stress")):
+            fallback = (args, result)
         if result["outcome_buckets"] >= 2 and (best is None or result["entropy"] > best[0] + 1e-12):
             best = (result["entropy"], args, result)
 
     # Ask about known value/exception disagreements instead of silently
     # discarding the inputs where one candidate raises. No prediction comes
     # from the broken target or supplies the external answer.
-    for args in itertools.islice(itertools.product((2, 3, 4, 5, 6, 7), repeat=len(target.params)), MAX_QUERY_POINTS):
+    for args in itertools.islice(itertools.product(PRIMARY_QUERY_VALUES, repeat=len(target.params)), MAX_QUERY_POINTS):
         consider(args, "primary")
 
     stress_complete = best is None
     if stress_complete:
-        stress = list(itertools.product((-3, 0, 11), repeat=len(target.params)))
+        stress = list(itertools.product(STRESS_QUERY_VALUES, repeat=len(target.params)))
         stress.sort(key=lambda a: (-(max(a) - min(a)), -max(abs(x) for x in a), a))
         for args in stress:
             consider(args, "stress")
+    if stress_complete and best is None:
+        # Even unanimous models can share a blind spot. A previous task may
+        # contribute an input, never its answer, for external validation here.
+        for args in transferred:
+            consider(args, "experience")
 
-    def make_query(args: tuple[int, ...], result: Mapping[str, Any], reason: str) -> dict[str, Any]:
+    def make_query(args: tuple[int | float, ...], result: Mapping[str, Any], reason: str) -> dict[str, Any]:
         return {"args": list(args), "predictions": result["predictions"],
                 "exception_predictions": result["exception_predictions"],
                 "unknown_models": result["unknown_models"], "reason": reason,
-                "entropy_bits": round(result["entropy"], 6)}
+                "input_origin": result["domain"], "entropy_bits": round(result["entropy"], 6)}
 
     query = None
     if best:
@@ -865,11 +935,15 @@ def investigate(source: str, *, target_name: str, reference_name: str,
     elif unknown_fallback:
         args, result = unknown_fallback
         query = make_query(args, result, "model_unknown")
-    elif len(examples) < MIN_EXTERNAL_EXAMPLES and fallback:
+    elif experience_fallback:
+        args, result = experience_fallback
+        query = make_query(args, result, "experience_validation")
+    elif distinct_example_inputs < MIN_EXTERNAL_EXAMPLES and fallback:
         args, result = fallback
         query = make_query(args, result, "independent_validation")
-    status = "needs_example" if query else (
-        "insufficient_external_examples" if len(examples) < MIN_EXTERNAL_EXAMPLES else
+    example_budget_exhausted = query is not None and len(examples) >= MAX_EXTERNAL_EXAMPLES
+    status = ("example_budget_exhausted" if example_budget_exhausted else "needs_example") if query else (
+        "insufficient_external_examples" if distinct_example_inputs < MIN_EXTERNAL_EXAMPLES else
         "truncated_search" if truncated else "bounded_agreement"
     )
     return {
@@ -877,12 +951,17 @@ def investigate(source: str, *, target_name: str, reference_name: str,
         "outcome_model_version": OUTCOME_MODEL_VERSION,
         "candidates": len(survivors),
         "candidate_expressions": [ast.unparse(expr) for expr in survivors[:12]],
-        "truncated": truncated,
+        "truncated": truncated or example_budget_exhausted,
         "external_examples": len(examples),
+        "distinct_numeric_example_inputs": distinct_example_inputs,
         "learned_operators_considered": sorted(set(learned_operators)),
+        "experience_inputs_considered": [list(args) for args in transferred],
         "search": search,
         "coverage": {**checked, "stress_grid_completed": stress_complete},
         "next_query": query,
+        **({"reason": "an additional answer is required but the external-example budget is exhausted"}
+           if example_budget_exhausted else {}),
         "scope": ("bounded source and learned models at the first surviving depth on modeled value or "
-                  "exception outcomes in two finite grids; unknown and deeper behaviors remain open; not proof of intent"),
+                  "exception outcomes in two finite grids and supplied examples; transferred inputs require "
+                  "new answers; unknown and deeper behaviors remain open; not proof of intent"),
     }
