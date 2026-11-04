@@ -2581,6 +2581,36 @@ def _policy_unlocker_beats_shiny(
     return bool(ranked) and str(ranked[0].get("id")) == unlock_id
 
 
+def _policy_two_step_unlock(
+    organ: ExecutableOrgan, shiny_id: str, tool_id: str, mid_id: str, goal_id: str
+) -> bool:
+    """Behavioral probe: a 0-immediate tool that unlocks a 0-immediate mid that unlocks payoff."""
+    ranked = organ.invoke(
+        [
+            {"id": shiny_id, "value": 12.0, "cost": 1.0},
+            {"id": tool_id, "value": 0.0, "cost": 1.0, "unlocks": (mid_id,)},
+            {"id": mid_id, "value": 0.0, "cost": 1.0, "requires": (tool_id,), "unlocks": (goal_id,)},
+            {"id": goal_id, "value": 100.0, "cost": 1.0, "requires": (mid_id,)},
+        ],
+        4.0,
+        None,
+    )
+    return bool(ranked) and str(ranked[0].get("id")) == tool_id
+
+
+def _policy_horizon_bin(organ: ExecutableOrgan) -> str:
+    """MAP-Elites behavioral niche: how far the organ actually looks, not AST rec/flat."""
+    try:
+        organ.ensure_compiled()
+        if _policy_two_step_unlock(organ, "zz_sh_h", "aa_t_h", "mm_m_h", "mm_g_h"):
+            return "h2"
+        if _policy_unlocker_beats_shiny(organ, "zz_sh_h", "aa_t_h", "mm_g_h"):
+            return "h1"
+    except Exception:
+        return "h0"
+    return "h0"
+
+
 def _policy_organ_holds_ring0(organ: ExecutableOrgan) -> bool:
     """Structural invariants, not named boards: fail-rate loses; 0-immediate unlocker wins."""
     try:
@@ -3675,7 +3705,15 @@ class MetaCircularOrganGraph:
                         organ_id=organ.organ_id,
                         score=float(organ.pareto_score),
                         stratum=POLICY,
+                        horizon_bin=_policy_horizon_bin(organ),
                     )
+                except Exception:
+                    pass
+        if self.concept_library is not None and hasattr(self.concept_library, "sleep_abstract"):
+            pol_srcs = [o.source_code for o in self.organs_in_stratum(POLICY)[:8]]
+            if len(pol_srcs) >= 2:
+                try:
+                    self.concept_library.sleep_abstract(pol_srcs)
                 except Exception:
                     pass
         if not admitted:

@@ -2183,9 +2183,12 @@ class SentientCognitiveCore:
             sleep_abs = self.concept_library.sleep_abstract(self.verified_programs_buffer)
             self.verified_programs_buffer.clear()
         skill_srcs = [o.source_code for o in self.organ_graph.organs_in_stratum("SKILL")[:8]]
-        if len(skill_srcs) >= 2:
+        policy_srcs = [o.source_code for o in self.organ_graph.organs_in_stratum("POLICY")[:8]]
+        for extra_srcs in (skill_srcs, policy_srcs):
+            if len(extra_srcs) < 2:
+                continue
             try:
-                extra_abs = self.concept_library.sleep_abstract(skill_srcs)
+                extra_abs = self.concept_library.sleep_abstract(extra_srcs)
                 sleep_abs = {
                     "admitted_count": int(sleep_abs.get("admitted_count", 0))
                     + int(extra_abs.get("admitted_count", 0)),
