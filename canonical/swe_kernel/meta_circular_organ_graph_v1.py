@@ -1403,6 +1403,72 @@ def _egraph_simplify_expr(expr_src: str) -> str | None:
         return None
 
 
+def _solve_parametric_table(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+) -> tuple[str, str] | None:
+    """Propose a period TABLE as a grammar candidate whose period and block are SOLVED, not emitted.
+
+    Measured before writing this (see PREREG_THE_GRAMMAR_CAN_ONLY_EXPRESS_WHAT_A_WRITER_KNOWS): asked
+    for a period-3 block with growth disabled, `_generate_candidate_expressions` returned nothing --
+    the program was unreachable by search and existed only because `synthesize_table_organ` writes it.
+    Handing the grammar a "primitive" organ did not help either, because a token that hardcodes a block
+    is a remembered answer, not a composable one: asking it for period 4 still failed.
+
+    The missing thing is a PARAMETRIC node -- a table constructor whose period and entries are
+    variables the search solves. This derives them from the evidence the caller already paid for and
+    returns ordinary candidate source, so the hypothesis then competes in the SAME version space as
+    projections and affine forms instead of being a privileged path.
+
+    Returns `(name, expr_src)` or None. It proposes only; it never decides. Every candidate is still
+    checked against all examples by the caller, so a wrong guess here costs a candidate slot, not
+    correctness.
+    """
+    if len(examples) < 3:
+        return None
+    ins = [ex[0][0] for ex in examples]
+    if any(not isinstance(v, (int, float)) or isinstance(v, bool) for v in ins):
+        return None
+    # The period must be a candidate the evidence can actually support. Rather than trust one guess,
+    # propose every period that the observed inputs can distinguish, and let the examples eliminate
+    # the wrong ones -- that is what makes this search rather than a decision.
+    lo = int(math.floor(min(ins)))
+    proposed: list[tuple[str, str]] = []
+    for k in range(2, 33):
+        # A table with period k is only testable if the examples contain at least two full cycles,
+        # otherwise any block of that period can be fitted and the hypothesis says nothing.
+        if len({int(math.floor(v)) % k for v in ins}) < min(k, len(ins)):
+            continue
+        block: list[Any] = [None] * k
+        resolved = True
+        for xin, out in examples:
+            r = int(math.floor(xin[0])) % k
+            if block[r] is None:
+                block[r] = out
+            elif abs(float(block[r]) - float(out)) > 1e-9:
+                resolved = False
+                break
+        if not resolved or any(b is None for b in block):
+            continue
+        body = ", ".join(repr(float(b)) for b in block)
+        # Use the SAME parameter name the wrapper emits, or the candidate is dead on arrival: measured
+        # with `_a0`, the node produced a candidate referencing a name that does not exist in `run`'s
+        # scope, so the table never entered the version space and the failure looked like an absence of
+        # structure. (A `.replace("P", ...)` fix then corrupted the call it was building -- substituting
+        # into a format string substitutes into the SUBSTITUTE too. Built by concatenation instead.)
+        pname = _arg_names(1)[0]
+        expr = (
+            "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])"
+            % ("(" + body + ",)", pname, pname, k, k)
+        )
+        proposed.append((f"parametric_table_{k}", expr))
+    if not proposed:
+        return None
+    # Shortest description first: a smaller period that explains the evidence is preferred, which is
+    # the same MDL ordering the rest of this function uses.
+    proposed.sort(key=lambda item: (len(item[1]), item[0]))
+    return proposed[0]
+
+
 def _generate_candidate_expressions(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     operator_organs: Sequence["ExecutableOrgan"] = (),
@@ -1431,7 +1497,15 @@ def _generate_candidate_expressions(
     if affine is not None:
         cands.append(("exact_affine", affine, ""))
 
-    # 3. Live compositional closure over admitted organs
+    # 3. Parametric table node: period and block are SOLVED from the evidence, so a repeating
+    #    structure is reachable by search instead of only by a writer. Proposed, not privileged --
+    #    it is checked against the examples like every other candidate.
+    if arity == 1:
+        table_cand = _solve_parametric_table(examples)
+        if table_cand is not None:
+            cands.append((table_cand[0], table_cand[1], ""))
+
+    # 4. Live compositional closure over admitted organs
     for label, expr, helpers in _inline_operator_organs(examples, operator_organs):
         cands.append((label, expr, helpers))
 
