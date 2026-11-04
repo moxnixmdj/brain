@@ -665,6 +665,34 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             self.assertFalse(MCOG._policy_respects_live_boards(locked, graph._live_policy_boards))
             self.assertFalse(MCOG.admit_policy_organ(locked, graph._world_transitions).get("ok"))
 
+    def test_combiner_is_invented_from_credited_unlock_traces(self):
+        """Live boards are a sensor. Credit along perceived unlocks invents the combiner."""
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            boot = MCOG.compile_policy_organ()
+            graph.register_organ(boot)
+            board = [
+                {"id": "shiny", "value": 12.0, "cost": 1.0},
+                {"id": "tool", "value": 0.0, "cost": 1.0, "unlocks": ("payoff",)},
+                {"id": "payoff", "value": 100.0, "cost": 1.0, "requires": ("tool",)},
+            ]
+            boot.invoke(board, 3.0, None)
+            graph.record_transition(action_id="tool", cost=1.0, failed=False, value=0.0, delta={"ok": 1.0})
+            graph.record_transition(action_id="payoff", cost=1.0, failed=False, value=100.0, delta={"ok": 1.0})
+            examples = MCOG._credited_combiner_examples(graph._world_transitions)
+            self.assertTrue(any(abs(fut) > 1e-9 for (_i, _c, fut), _y in examples))
+            combiners = [
+                o for o in graph.organs_in_stratum(MCOG.SKILL) if o.task_signature == "policy::combiner"
+            ]
+            self.assertTrue(combiners)
+            learned = [o for o in combiners if o.metadata.get("learned")]
+            self.assertTrue(learned, [o.source_code for o in combiners])
+            src = learned[-1].source_code
+            self.assertIn("future", src)
+            self.assertNotIn("0.92", src)
+            q = learned[-1].invoke(0.0, 1.0, 100.0)
+            self.assertGreater(q, 50.0)
+
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")
         self.assertIsNotNone(simplified)

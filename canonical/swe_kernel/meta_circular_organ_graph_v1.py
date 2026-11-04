@@ -2911,24 +2911,70 @@ def compile_combiner_organ(
     return organ
 
 
+def _credited_combiner_examples(
+    transitions: Sequence[Mapping[str, Any]],
+) -> list[tuple[tuple[Any, ...], Any]]:
+    """Credit along unlock edges the creature perceived. Future is not a human constant."""
+    seq: list[dict[str, Any]] = []
+    for tr in transitions:
+        aid = str(tr.get("action") or tr.get("action_id") or "")
+        if not aid:
+            continue
+        failed = bool(tr.get("failed"))
+        cost = float(tr.get("cost") or 1.0)
+        raw_v = tr.get("value")
+        if raw_v is None:
+            delta = tr.get("delta") or {}
+            nums = [
+                float(v)
+                for v in (delta.values() if isinstance(delta, Mapping) else ())
+                if isinstance(v, (int, float)) and not isinstance(v, bool)
+            ]
+            raw_v = nums[0] if nums else 0.0
+        realized = 0.0 if failed else float(raw_v)
+        unlocks: tuple[str, ...] = ()
+        board = tr.get("board")
+        if isinstance(board, list):
+            for raw in board:
+                if isinstance(raw, Mapping) and str(raw.get("id") or "") == aid:
+                    unlocks = tuple(str(x) for x in (raw.get("unlocks") or ()))
+                    break
+        seq.append({"id": aid, "imm": realized, "cost": cost, "unlocks": unlocks, "realized": realized})
+    g_next = 0.0
+    next_id = ""
+    for i in range(len(seq) - 1, -1, -1):
+        row = seq[i]
+        if next_id and next_id in row["unlocks"]:
+            row["future"] = g_next
+            row["g"] = row["realized"] + g_next
+        else:
+            row["future"] = 0.0
+            row["g"] = row["realized"]
+        g_next = float(row["g"])
+        next_id = str(row["id"])
+    examples: list[tuple[tuple[Any, ...], Any]] = []
+    seen: set[tuple[Any, ...]] = set()
+    for row in seq:
+        key = (
+            round(float(row["imm"]), 9),
+            round(float(row["cost"]), 9),
+            round(float(row["future"]), 9),
+            round(float(row["g"]), 9),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        examples.append(((float(row["imm"]), float(row["cost"]), float(row["future"])), float(row["g"])))
+    return examples
+
+
 def _synthesize_combiner_from_traces(
     transitions: Sequence[Mapping[str, Any]],
     *,
     concept_library: Any | None = None,
 ) -> str | None:
-    """Observational `(immediate, cost, future) -> realized`. Future is 0 unless traces carry it."""
-    examples: list[tuple[tuple[Any, ...], Any]] = []
-    seen: set[tuple[Any, ...]] = set()
-    for row in _trace_action_rows(transitions):
-        imm = float(row["realized"])
-        cost = float(row["cost"])
-        future = 0.0
-        realized = float(row["realized"])
-        key = (round(imm, 9), round(cost, 9), future, round(realized, 9))
-        if key in seen:
-            continue
-        seen.add(key)
-        examples.append(((imm, cost, future), realized))
+    """Observational `(immediate, cost, future) -> credited return`. Future comes from perceived unlocks."""
+    examples = _credited_combiner_examples(transitions)
     if len(examples) < 2:
         return None
     try:
@@ -2937,10 +2983,14 @@ def _synthesize_combiner_from_traces(
         )
     except Exception:
         return None
-    attempts: list[tuple[list[str], list[tuple[tuple[Any, ...], Any]]]] = [
-        (["immediate", "cost"], [((a, b), y) for (a, b, _f), y in examples]),
-        (["immediate", "cost", "future"], examples),
-    ]
+    any_future = any(abs(fut) > 1e-12 for (_i, _c, fut), _y in examples)
+    attempts: list[tuple[list[str], list[tuple[tuple[Any, ...], Any]]]] = []
+    if any_future:
+        attempts.append(
+            (["immediate", "future"], [((a, f), y) for (a, _c, f), y in examples])
+        )
+    attempts.append((["immediate", "cost"], [((a, b), y) for (a, b, _f), y in examples]))
+    attempts.append((["immediate", "cost", "future"], examples))
     for names, ex in attempts:
         try:
             body = synthesize_python_function_body(
@@ -4035,6 +4085,8 @@ class MetaCircularOrganGraph:
             boot = compile_policy_organ(empirical_burns=burns)
             boot.verified_passes = max(boot.verified_passes, len(self._world_transitions))
             boot.metadata["bootstrap_factory"] = True
+            if comb_learned:
+                boot.metadata["learned_combiner_src"] = comb_learned
             candidates.append(boot)
         else:
             if self.concept_library is not None and hasattr(self.concept_library, "sleep_abstract"):
