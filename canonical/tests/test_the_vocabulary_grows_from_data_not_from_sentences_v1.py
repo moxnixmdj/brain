@@ -127,14 +127,18 @@ def test_adding_an_operator_adds_every_composition_containing_it(tmp_path):
     assert "median" not in V._AGG_WORDS, "test assumes a vocabulary without median"
     before = _build(question, root)
 
-    real_agg = V._aggregate
+    # DECLARED, not patched. The earlier version replaced `_aggregate` with a lambda and
+    # wrote straight into `_AGG_WORDS`, which proved that a code edit changes behaviour --
+    # and left a wordless, lawless operator behind for every later test in the session,
+    # because it removed the words and not the declaration. `declare_aggregate` is the
+    # whole declaration: words, arithmetic, law. No law is supplied here on purpose -- it
+    # is induced from the arithmetic, which is the capability this round adds.
+    V.declare_aggregate("median", {"median", "middle"}, _median)
     try:
-        V._aggregate = lambda kind: (_median if kind == "median" else real_agg(kind))
-        V._AGG_WORDS["median"] = {"median", "middle"}
         after = _build(question, root)
     finally:
-        V._aggregate = real_agg
         V._AGG_WORDS.pop("median", None)
+        V._AGGREGATES.pop("median", None)
 
     old_labels = {n.label for n in before["expressions"]}
     added = [n.label for n in after["expressions"] if n.label not in old_labels]
@@ -165,14 +169,12 @@ def test_a_declared_operator_is_answered_without_touching_the_builder(tmp_path):
         mid = len(vals) // 2
         return vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) / 2
 
-    real_agg = V._aggregate
     try:
-        V._aggregate = lambda kind: (_median if kind == "median" else real_agg(kind))
-        V._AGG_WORDS["median"] = {"median", "middle"}
+        V.declare_aggregate("median", {"median", "middle"}, _median)
         built = _ask(question, root)
     finally:
-        V._aggregate = real_agg
         V._AGG_WORDS.pop("median", None)
+        V._AGGREGATES.pop("median", None)
 
     assert built is not None
     assert built["value"] == pytest.approx(7)          # stock qty: 5, 15, 7

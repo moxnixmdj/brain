@@ -72,10 +72,15 @@ def test_an_aggregate_without_a_law_is_refused():
     one through, the vocabulary would grow faster than the ability to check it, and every
     later answer built on it would be unfalsifiable by construction.
     """
+    # AN OMITTED LAW IS NO LONGER A REFUSAL -- it is a request to INDUCE one. So the
+    # declaration that must be refused is the one where induction can find nothing: an
+    # arithmetic that does not depend on its data. `lambda v: 999.0` gives the same answer
+    # for every input, so no statement about a single input can tell it apart from a
+    # correct one, and it is refused with nothing registered.
     before = V.aggregate_names()
     with pytest.raises(ValueError) as err:
-        V.declare_aggregate("median", {"median"}, _median, ())
-    assert "law" in str(err.value)
+        V.declare_aggregate("median", {"median"}, lambda values, *_: 999.0)
+    assert "law" in str(err.value).lower()
     assert "median" not in V._AGG_WORDS
     assert V.aggregate_names() == before
 
@@ -157,38 +162,97 @@ def test_a_declaration_must_state_what_makes_an_answer_wrong(median_declared):
     assert V.aggregate_holds("median", [5, 7, 15], 1) is False
 
 
-def test_the_invariant_walk_can_reject_a_wrong_answer_from_a_new_operator(tmp_path, median_declared):
-    """The law must be reachable from `holds`, not merely callable from a test.
+def test_an_arithmetic_that_breaks_its_own_law_is_refused_at_declaration(tmp_path, median_declared):
+    """A declaration is checked against itself before it is registered.
 
-    This declares TWO aggregates over the same data: an honest one and a liar. The liar
-    returns a value outside the inputs, which is impossible for any aggregate of numbers
-    and is therefore caught by the invariant walk -- the same walk that already catches a
-    grouping that drops a bucket. Nothing here is patched; the liar is a real declaration
-    that would really be used, which is what makes the check meaningful.
+    The earlier version of this test declared an arithmetic returning 999 with a
+    within-inputs law and asserted that the ANSWER was refused. That was the weaker
+    outcome, and it was avoidable: an arithmetic that violates its own law is detectable
+    at the moment it is declared, with no data and no question. Catching it there means
+    the operator never exists to be selected, so no later check has to be trusted to
+    catch it -- the same reason the lossy-grouping invariant is stated about the grouping
+    rather than about each of its readers.
     """
     root = _tree(tmp_path, **{"stock.csv": STOCK})
-
     V.declare_aggregate("median", {"median"}, _median, (V._WITHIN_INPUTS,))
-    honest = _ask("what is the median qty", root)
-    assert honest is not None and honest["value"] == pytest.approx(7)
-    assert V.holds(honest["node"], honest["value"]) is not False
+    assert _ask("what is the median qty", root)["value"] == pytest.approx(7)
 
-    # a declaration whose arithmetic lies in a way ONLY the law can see: 999 is not one
-    # of [5, 15, 7] and cannot be, whatever the operator is called.
-    V.declare_aggregate("liar", {"liar"}, lambda v: 999.0, (V._WITHIN_INPUTS,))
-    try:
-        built = _ask("what is the liar qty", root)
-        # THE CHECK IS CONSULTED WHILE CHOOSING, NOT AFTERWARDS.
-        #
-        # This refuses outright rather than returning 999 and reporting it as unverified.
-        # That is the whole distinction the project is built on: a check applied after the
-        # answer is a gate that can be routed around, and a check applied while choosing
-        # is what makes the answer. An unverified 999 that reaches a caller is a worse
-        # outcome than no answer, even when the verdict beside it is honest.
-        assert built is None, f"a law-breaking declaration was ANSWERED with {built and built['value']}"
-    finally:
-        V._AGG_WORDS.pop("liar", None)
-        V._AGGREGATES.pop("liar", None)
+    before = V.aggregate_names()
+    with pytest.raises(ValueError) as err:
+        V.declare_aggregate("liar", {"liar"}, lambda v: 999.0, (V._WITHIN_INPUTS,))
+    assert "VIOLATES its own law" in str(err.value)
+    assert "liar" not in V.aggregate_names()
+    assert V.aggregate_names() == before
+
+
+def test_a_law_that_cannot_fail_is_refused(median_declared):
+    """The hole that made the last round's claim false.
+
+    `declare_aggregate("liar", {"liar"}, lambda v: 999.0, (lambda values, result, *_: True,))`
+    was ACCEPTED: it had a law, the law was callable, and it passed everything. So a median
+    of [5, 15, 7] was licensed as 999 by a declaration that was "checked" by a function
+    incapable of returning False. Having a law is not the property that matters; a law
+    that can SAY NO is.
+    """
+    with pytest.raises(ValueError) as err:
+        V.declare_aggregate("vacuous", {"vacuous"}, _median,
+                            (lambda values, result, *_: True,))
+    assert "can never say no" in str(err.value) or "cannot fail" in str(err.value)
+    assert "vacuous" not in V.aggregate_names()
+
+
+def test_every_declared_law_can_actually_reject_something():
+    """No exemption, including the operators that were here before the rule."""
+    for name in V.aggregate_names():
+        fn = V._AGGREGATES[name]["fn"]
+        laws = V._AGGREGATES[name]["laws"]
+        assert V._law_is_falsifiable(name, fn, laws) is None, name
+
+
+def test_a_sum_is_bounded_by_its_extremes_not_by_sign():
+    """The first law here was `non_negative`, true only of convenient data.
+
+    The falsifiability probe found it on [-3, -1, -7]: an honest sum of -11 was reported
+    as violating its own declaration, so the first column holding a negative would have
+    been rejected as wrong. A law that only holds for some data is not a law.
+    """
+    assert V.aggregate_holds("sum", [-3, -1, -7], -11) is True
+    assert V.aggregate_holds("sum", [-3, -1, -7], -50) is False
+    assert V.aggregate_holds("sum", [5, 15, 7], 27) is True
+    assert V.aggregate_holds("sum", [5, 15, 7], 3) is False      # a count in a sum's clothes
+
+
+def test_a_count_is_checked_against_the_row_count_not_merely_for_sign():
+    """`integral` and `non_negative` let 99 through for a three-row table.
+
+    Those were chosen because they are true of every count, which is the problem: a
+    statement true of a huge set cannot reject the wrong members of it. The count's law is
+    now the equality it always was, and it rejects the exact bug that started this
+    project's count work -- `len()` of a table dict, which is 2, for a three-row table.
+    """
+    table = {"_header": ["a"], "_body": [[1], [2], [3]]}
+    assert V.aggregate_holds("count", table, 3) is True
+    assert V.aggregate_holds("count", table, 99) is False
+    assert V.aggregate_holds("count", table, 2) is False
+
+
+# ---------------------------------------------------------------------------
+# A declared operator is CHECKABLE -- the property that makes the growth safe.
+# ---------------------------------------------------------------------------
+
+def test_a_declaration_must_state_what_makes_an_answer_wrong(median_declared):
+    """The law is a testable statement, not documentation.
+
+    `within_inputs` is the weakest honest thing to say about an aggregate of numbers: the
+    answer is one of them, so it lies between the least and the greatest. Weak is still
+    falsifiable -- 99 is not in [5, 7, 15], and a declared operator that said 99 would be
+    caught by the same walk that catches a lossy grouping.
+    """
+    V.declare_aggregate("median", {"median"}, _median, (V._WITHIN_INPUTS,))
+    assert V.aggregate_holds("median", [5, 7, 15], 7) is True
+    assert V.aggregate_holds("median", [5, 7, 15], 99) is False
+    assert V.aggregate_holds("median", [5, 7, 15], 1) is False
+
 
 
 def test_every_built_in_aggregate_declares_a_law():
