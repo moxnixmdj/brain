@@ -152,3 +152,31 @@ as a fact about the world.
 
 `truth.achieved` remains **false**. What is true is narrower and checkable: a missing answer is not a
 missing language, and the tree now says so in the place where it used to say otherwise.
+
+---
+
+## Correction: the "rewind" was a shallow-clone artefact
+
+An earlier report to the owner stated that `origin/main` had been **rewound** — that `72e27486` (the merge
+commit of #6636) was no longer an ancestor of main and that there was **no merge base** with this branch.
+That report was **wrong**, and the way it was wrong is worth recording.
+
+`.git/shallow` listed `72e27486` and `48d18c84` as graft boundaries. Git will not walk past a boundary, so
+`git merge-base --is-ancestor` answered "no" and `git diff origin/main...HEAD` failed with *"no merge base"* —
+both of which read exactly like rewritten history, and neither of which was checked against the one file
+that explains them.
+
+`git cat-file -p` was enough to disprove it: `48d18c84`'s **first parent is `72e27486`**. After
+`git fetch --unshallow`:
+
+    merge-base(origin/main, HEAD) = 72e27486
+    72e27486 IS an ancestor of origin/main
+    commits ahead: 1   commits behind: 22
+
+No history was lost. **A shallow clone can forge both "not an ancestor" and "no merge base", and both were
+reported as findings before the shallow file was read.** The tree keeps this because the same mistake was
+made twice — it was reported to the owner, and it shaped a round of decisions.
+
+What remains true: this branch is 22 commits behind main, so it must be brought up to date before merge, and
+the round-24 note travels with round 25 because round 24 only ever existed in the working tree. The gate
+also admits exactly one action intent per PR, so round 24 keeps its note and not a second intent.
