@@ -459,6 +459,41 @@ def _operation_vocabulary(comp: dict) -> set[str]:
     return {w for w in out if w}
 
 
+def _needs_composition(question: str, trial: dict) -> bool:
+    """Is the trial's answer leaving part of the question unaccounted for?
+
+    Two operations chained ("the total, then its digits") cannot be one of the trial's
+    primitives, and the trial answers PART of such a question and reports the rest as
+    unresolved. That is the signal to try building the expression instead.
+    """
+    comp = (trial or {}).get("computation")
+    if comp is None:
+        return True
+    words = {w.lower() for w in (trial or {}).get("words") or []}
+    accounted = {w.lower() for w in (trial or {}).get("accounted") or []}
+    return bool(words - accounted)
+
+
+def _composed_computation(built: dict, V) -> dict:
+    """Present a built expression the way every other computation is presented."""
+    node = built["node"]
+    value = built["value"]
+    if isinstance(value, bool):
+        text = "yes" if value else "no"
+    else:
+        text = str(int(value)) if isinstance(value, float) and value.is_integer() else str(value)
+    return {
+        "ok": True,
+        "operation": f"compose:{node.label}",
+        "subject": node.label,
+        "value": text,
+        "detail": f"built {node.label} = {text}",
+        "claims": [],
+        "verified": True,
+        "expression": node.label,
+    }
+
+
 def compute(question: str, root: str) -> dict | None:
     """Answer a question that needs a computation, not a citation.
 
@@ -767,6 +802,30 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
             import operation_trial_v1 as _T
         trial = _T.run(question, root)
         comp = trial.get("computation")
+        # A SINGLE OPERATION IS THE DEGENERATE CASE OF A COMPOSITION.
+        #
+        # The trial can only pick from operations somebody wrote. When it answers
+        # nothing -- or answers only part of the question -- the sentence may still be
+        # buildable out of typed pieces, which is how a question nobody wrote down gets
+        # answered. This runs only as a fallback, so the seven primitives keep winning
+        # everything they already answer and the composed path never regresses them.
+        if comp is None or _needs_composition(question, trial):
+            try:
+                from canonical.runtime import value_algebra_v1 as _V
+            except ImportError:
+                import value_algebra_v1 as _V      # direct-path import
+            ents = _T.entities(question, root)
+            built = _V.compose(question, root, ents, _T._subject_words(question, ents))
+            if built is not None and _V.verify(question, root, built):
+                trial = dict(trial)
+                trial["composed"] = built
+                trial["computation"] = _composed_computation(built, _V)
+                # The composed expression says which words it consumed; without this the
+                # door judges a correct answer against a vocabulary built from its NAME.
+                trial["accounted"] = sorted(set(trial.get("accounted") or [])
+                                            | set(built.get("accounted") or []))
+                trial["words"] = trial.get("words") or []
+                comp = trial["computation"]
     except Exception as exc:
         # AN OPERATION THAT CRASHED IS NOT AN OPERATION THAT DID NOT APPLY.
         #
