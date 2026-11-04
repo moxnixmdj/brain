@@ -21,10 +21,10 @@ Seven reflective strata — none of which is a frozen menu of templates:
                            hardcoded sum/prod/constants checklist).
   6. `META_SYNTHESIZER`  : higher-order anti-unification + exact coefficient
                            solving (no frozen integer lattice).
-  7. `POLICY`            : observational-synthesized immediate
-                           `(value, cost, failed) -> realized` plus the
-                           unlock-graph bootstrap prior; sealed Ring-0
-                           `forge_sensor` board admits or the incumbent stays.
+  7. `POLICY`            : the deliberation program is the organ.
+                           Immediate and combiner are synthesized organs in
+                           `P_t`; unlock-walk horizon is the board; Ring-0 is
+                           structural (not named ids) plus held-out return.
 """
 from __future__ import annotations
 
@@ -2107,8 +2107,9 @@ def rank_instrumental_actions(
         return immediate - node["cost"] * 0.05 + gamma * future
 
     ranked: list[dict[str, Any]] = []
+    depth = max(1, int(horizon), len(by_id))
     for aid, node in by_id.items():
-        qv = _q(aid, frozenset(), float(remaining_budget), max(1, int(horizon)))
+        qv = _q(aid, frozenset(), float(remaining_budget), depth)
         ranked.append({**node, "q": round(qv, 6)})
     ranked.sort(key=lambda r: (r["q"], -r["cost"], r["id"]), reverse=True)
     return ranked
@@ -2140,34 +2141,251 @@ def ring0_referee_organ_source(source_code: str) -> dict[str, Any]:
     return {"ok": True, "ring0": "ADMITTED"}
 
 
+# Two disjoint alphabets so a name-hardcoded organ cannot pass Ring-0.
+# Fail/shiny ids sort AFTER ok/unlock ids so a Q-tie would pick the illegal winner.
+_RING0_ID_SETS: tuple[tuple[str, str, str, str, str], ...] = (
+    ("zz_fail_a", "aa_ok_a", "zz_shiny_a", "aa_unlock_a", "mm_goal_a"),
+    ("zz_fail_b", "aa_ok_b", "zz_shiny_b", "aa_unlock_b", "mm_goal_b"),
+)
+
+
+def _policy_fail_loses(organ: ExecutableOrgan, fail_id: str, ok_id: str) -> bool:
+    ranked = organ.invoke(
+        [
+            {"id": fail_id, "value": 10.0, "cost": 1.0},
+            {"id": ok_id, "value": 10.0, "cost": 1.0},
+        ],
+        10.0,
+        {fail_id: 1.0, ok_id: 0.0},
+    )
+    return bool(ranked) and str(ranked[0].get("id")) == ok_id
+
+
+def _policy_unlocker_beats_shiny(
+    organ: ExecutableOrgan, shiny_id: str, unlock_id: str, goal_id: str
+) -> bool:
+    ranked = organ.invoke(
+        [
+            {"id": shiny_id, "value": 12.0, "cost": 1.0},
+            {"id": unlock_id, "value": 0.0, "cost": 1.0, "unlocks": (goal_id,)},
+            {"id": goal_id, "value": 100.0, "cost": 1.0, "requires": (unlock_id,)},
+        ],
+        3.0,
+        None,
+    )
+    return bool(ranked) and str(ranked[0].get("id")) == unlock_id
+
+
 def _policy_organ_holds_ring0(organ: ExecutableOrgan) -> bool:
-    """Sealed boards: burned loses to safe; `forge_sensor` still unlocks the master goal."""
+    """Structural invariants, not named boards: fail-rate loses; 0-immediate unlocker wins."""
     try:
         organ.ensure_compiled()
-        burned = organ.invoke(
-            [
-                {"id": "burned", "value": 10.0, "cost": 1.0},
-                {"id": "safe", "value": 10.0, "cost": 1.0},
-            ],
-            10.0,
-            {"burned": 1.0, "safe": 0.0},
-        )
-        if not burned or str(burned[0].get("id")) != "safe":
-            return False
-        forged = organ.invoke(
-            [
-                {"id": "shiny", "value": 12.0, "cost": 1.0},
-                {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
-                {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
-            ],
-            3.0,
-            None,
-        )
-        if not forged or str(forged[0].get("id")) != "forge_sensor":
-            return False
+        for fail_id, ok_id, shiny_id, unlock_id, goal_id in _RING0_ID_SETS:
+            if not _policy_fail_loses(organ, fail_id, ok_id):
+                return False
+            if not _policy_unlocker_beats_shiny(organ, shiny_id, unlock_id, goal_id):
+                return False
     except Exception:
         return False
     return True
+
+
+def _trace_action_rows(transitions: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    rows: dict[str, dict[str, Any]] = {}
+    for tr in transitions:
+        aid = str(tr.get("action") or tr.get("action_id") or "")
+        if not aid:
+            continue
+        cost = float(tr.get("cost") or 1.0)
+        failed_flag = bool(tr.get("failed"))
+        raw_v = tr.get("value")
+        if raw_v is None:
+            delta = tr.get("delta") or {}
+            nums = [
+                float(v)
+                for v in (delta.values() if isinstance(delta, Mapping) else ())
+                if isinstance(v, (int, float)) and not isinstance(v, bool)
+            ]
+            raw_v = nums[0] if nums else 1.0
+        value = float(raw_v)
+        realized = 0.0 if failed_flag else value
+        rows[aid] = {
+            "id": aid,
+            "value": value,
+            "cost": cost,
+            "failed": 1.0 if failed_flag else 0.0,
+            "realized": realized,
+        }
+    return list(rows.values())
+
+
+def _policy_respects_trace_ranking(
+    organ: ExecutableOrgan, transitions: Sequence[Mapping[str, Any]]
+) -> bool:
+    """Held-out world return: among observed actions, do not rank a worse realized first."""
+    rows = _trace_action_rows(transitions)
+    if len(rows) < 2:
+        return True
+    try:
+        ranked = organ.invoke(
+            [{"id": r["id"], "value": r["value"], "cost": r["cost"]} for r in rows],
+            max(10.0, sum(float(r["cost"]) for r in rows) + 1.0),
+            {r["id"]: r["failed"] for r in rows},
+        )
+    except Exception:
+        return False
+    if not ranked:
+        return False
+    by_id = {r["id"]: r for r in rows}
+    top = str(ranked[0].get("id"))
+    if top not in by_id:
+        return False
+    best_real = max(float(r["realized"]) for r in rows)
+    return float(by_id[top]["realized"]) + 1e-9 >= best_real
+
+
+def admit_policy_organ(
+    organ: ExecutableOrgan,
+    traces: Sequence[Mapping[str, Any]] = (),
+) -> dict[str, Any]:
+    """AST firewall + structural Ring-0 + held-out return. Incumbent stays on refusal."""
+    ast_res = ring0_referee_organ_source(organ.source_code)
+    if not ast_res.get("ok"):
+        return ast_res
+    if not _policy_organ_holds_ring0(organ):
+        return {"ok": False, "ring0": "REFUSED", "reason": "STRUCTURAL_INVARIANT"}
+    if traces and not _policy_respects_trace_ranking(organ, traces):
+        return {"ok": False, "ring0": "REFUSED", "reason": "HELDOUT_RETURN"}
+    return {"ok": True, "ring0": "ADMITTED"}
+
+
+def _simplify_statement_body(body: str) -> str:
+    text = (body or "").strip()
+    if not text:
+        return text
+    lines = text.splitlines()
+    if len(lines) == 1 and lines[0].lstrip().startswith("return "):
+        expr = lines[0].lstrip()[7:].strip()
+        simp = _egraph_simplify_expr(expr)
+        if simp:
+            return f"return {simp}\n"
+    return text + ("\n" if not text.endswith("\n") else "")
+
+
+def _egraph_simplify_organ_source(source_code: str) -> str | None:
+    """Rewrite every `return` expression in an organ via the in-tree egraph."""
+    src = str(source_code or "")
+    if not src.strip():
+        return None
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return None
+    changed = False
+
+    class _ReturnSimplifier(ast.NodeTransformer):
+        def visit_Return(self, node: ast.Return) -> ast.AST:
+            self.generic_visit(node)
+            if node.value is None:
+                return node
+            try:
+                expr_src = ast.unparse(node.value)
+            except Exception:
+                return node
+            best = _egraph_simplify_expr(expr_src)
+            if not best or best == expr_src:
+                return node
+            try:
+                new_val = ast.parse(best, mode="eval").body
+            except SyntaxError:
+                return node
+            nonlocal changed
+            changed = True
+            return ast.Return(value=new_val)
+
+    new_tree = _ReturnSimplifier().visit(tree)
+    if not changed:
+        return None
+    ast.fix_missing_locations(new_tree)
+    try:
+        return ast.unparse(new_tree) + "\n"
+    except Exception:
+        return None
+
+
+def compile_combiner_organ(
+    *,
+    body: str | None = None,
+    gamma: float = 0.92,
+    cost_penalty: float = 0.05,
+    name: str = "policy_combiner",
+) -> ExecutableOrgan:
+    """SKILL organ: `(immediate, cost, future) -> q`. Bootstrap prior until traces replace it."""
+    src_body = (body or "").strip()
+    if src_body:
+        src = "def run(immediate, cost, future):\n" + _indent_block(src_body, 4) + "\n"
+    else:
+        src = (
+            "def run(immediate, cost, future):\n"
+            f"    return immediate - cost * {float(cost_penalty)!r} + {float(gamma)!r} * future\n"
+        )
+    organ = make_organ(
+        stratum=SKILL,
+        name=name,
+        task_signature="policy::combiner",
+        entrypoint="run",
+        source_code=src,
+        metadata={"gamma": gamma, "cost_penalty": cost_penalty, "learned": bool(src_body)},
+    )
+    organ.verified_passes = max(1, organ.verified_passes)
+    return organ
+
+
+def _synthesize_combiner_from_traces(
+    transitions: Sequence[Mapping[str, Any]],
+    *,
+    concept_library: Any | None = None,
+) -> str | None:
+    """Observational `(immediate, cost, future) -> realized`. Future is 0 unless traces carry it."""
+    examples: list[tuple[tuple[Any, ...], Any]] = []
+    seen: set[tuple[Any, ...]] = set()
+    for row in _trace_action_rows(transitions):
+        imm = float(row["realized"])
+        cost = float(row["cost"])
+        future = 0.0
+        realized = float(row["realized"])
+        key = (round(imm, 9), round(cost, 9), future, round(realized, 9))
+        if key in seen:
+            continue
+        seen.add(key)
+        examples.append(((imm, cost, future), realized))
+    if len(examples) < 2:
+        return None
+    try:
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+            synthesize_python_function_body,
+        )
+    except Exception:
+        return None
+    attempts: list[tuple[list[str], list[tuple[tuple[Any, ...], Any]]]] = [
+        (["immediate", "cost"], [((a, b), y) for (a, b, _f), y in examples]),
+        (["immediate", "cost", "future"], examples),
+    ]
+    for names, ex in attempts:
+        try:
+            body = synthesize_python_function_body(
+                names,
+                ex,
+                extra_constants=(),
+                max_weight=3,
+                max_bank_size=80,
+                concept_library=concept_library,
+            )
+        except Exception:
+            body = None
+        if isinstance(body, str) and "return" in body:
+            return body.strip() + "\n"
+    return None
 
 
 def _synthesize_immediate_from_traces(
@@ -2248,15 +2466,16 @@ def compile_policy_organ(
     horizon: int = 3,
     empirical_burns: Mapping[str, float] | None = None,
     learned_immediate: str | None = None,
+    combiner_src: str | None = None,
 ) -> ExecutableOrgan:
-    """Compile a POLICY organ.
+    """Compile a POLICY organ from immediate + combiner organs.
 
-    `learned_immediate` is a synthesized `(value, cost, failed)` body. `gamma`
-    is the unlock-graph bootstrap prior, not the law. `empirical_burns` are
-    p_burn defaults from wake residuals when the caller omits them.
+    Unlock-walk horizon is `max(horizon, len(board))` (the board, not a frozen
+    3). `gamma` / cost-penalty live in the combiner body when supplied.
     """
     observed = {str(k): float(v) for k, v in dict(empirical_burns or {}).items()}
     imm_src = (learned_immediate or "").strip()
+    comb_src = (combiner_src or "").strip()
     if imm_src:
         imm_def = "    def _immediate(value, cost, failed):\n" + _indent_block(imm_src, 8) + "\n"
         unstructured = "            return _immediate(node['value'], node['cost'], p_burn)\n"
@@ -2265,6 +2484,12 @@ def compile_policy_organ(
         imm_def = ""
         unstructured = "            return (node['value'] / node['cost']) * (1.0 - 0.85 * p_burn)\n"
         structured_imm = "        immediate = node['value'] * (1.0 - 0.85 * p_burn)\n"
+    if comb_src:
+        comb_def = "    def _combine(immediate, cost, future):\n" + _indent_block(comb_src, 8) + "\n"
+        comb_return = "        return _combine(immediate, node['cost'], future)\n"
+    else:
+        comb_def = ""
+        comb_return = "        return immediate - node['cost'] * 0.05 + gamma * future\n"
     src = (
         "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
         "    by_id = {}\n"
@@ -2283,10 +2508,12 @@ def compile_policy_organ(
         f"    for _k, _v in {observed!r}.items():\n"
         "        burns.setdefault(_k, _v)\n"
         f"    gamma = {float(gamma)!r}\n"
-        f"    horizon = {int(horizon)!r}\n"
+        f"    horizon_floor = {int(horizon)!r}\n"
+        "    horizon = max(horizon_floor, len(by_id))\n"
         "    structured = any(n['unlocks'] or n['requires'] for n in by_id.values())\n"
         "\n"
         + imm_def
+        + comb_def
         + "    def _q(aid, done, budget, depth):\n"
         "        if depth <= 0 or budget <= 1e-12:\n"
         "            return 0.0\n"
@@ -2308,8 +2535,8 @@ def compile_policy_organ(
         "        candidates = unlocked or [k for k in by_id if k not in nxt]\n"
         "        if candidates and leftover > 0:\n"
         "            future = max(_q(u, nxt, leftover, depth - 1) for u in candidates)\n"
-        "        return immediate - node['cost'] * 0.05 + gamma * future\n"
-        "\n"
+        + comb_return
+        + "\n"
         "    ranked = []\n"
         "    for aid, node in by_id.items():\n"
         "        qv = _q(aid, set(), float(remaining_budget), horizon)\n"
@@ -2330,10 +2557,11 @@ def compile_policy_organ(
             "horizon": horizon,
             "empirical_burns": observed,
             "learned_immediate": bool(imm_src),
+            "learned_combiner": bool(comb_src),
         },
     )
-    if observed or imm_src:
-        organ.verified_passes = max(1, len(observed) + (8 if imm_src else 0))
+    if observed or imm_src or comb_src:
+        organ.verified_passes = max(1, len(observed) + (8 if imm_src else 0) + (4 if comb_src else 0))
     return organ
 
 
@@ -2678,7 +2906,7 @@ class MetaCircularOrganGraph:
             return
 
     def evolve_policy_from_traces(self) -> ExecutableOrgan | None:
-        """Synthesize the POLICY immediate from wake residuals. Incumbent stays if Ring-0 fails."""
+        """Replace the POLICY organ. Incumbent stays if structural Ring-0 or held-out fails."""
         if len(self._world_transitions) < 2:
             return None
         traces = self._world_transitions[-16:]
@@ -2694,6 +2922,9 @@ class MetaCircularOrganGraph:
             return None
         burns = {k: fails[k] / max(1, counts[k]) for k in counts}
         incumbent = self.get_primary(POLICY, "policy::instrumental_q")
+        for existing in self.organs_in_stratum(POLICY):
+            if not _policy_respects_trace_ranking(existing, traces):
+                existing.verified_failures += 1
         io_sig = [
             list(row)
             for row in sorted(
@@ -2717,22 +2948,77 @@ class MetaCircularOrganGraph:
             if isinstance(cached, str) and cached.strip()
             else _synthesize_immediate_from_traces(traces, concept_library=self.concept_library)
         )
+        if isinstance(learned, str):
+            learned = _simplify_statement_body(learned)
+        comb_learned = _synthesize_combiner_from_traces(traces, concept_library=self.concept_library)
+        if isinstance(comb_learned, str):
+            comb_learned = _simplify_statement_body(comb_learned)
         candidates: list[ExecutableOrgan] = []
         if learned:
-            synth = compile_policy_organ(learned_immediate=learned, empirical_burns=burns)
+            synth = compile_policy_organ(
+                learned_immediate=learned, empirical_burns=burns, combiner_src=comb_learned
+            )
             synth.metadata["learned_immediate_src"] = learned
             synth.metadata["trace_io_sig"] = io_sig
+            if comb_learned:
+                synth.metadata["learned_combiner_src"] = comb_learned
             synth.verified_passes = max(synth.verified_passes, len(self._world_transitions) + 8)
             candidates.append(synth)
+            if comb_learned:
+                # Also try learned immediate with bootstrap combiner if synth combiner exists.
+                mixed = compile_policy_organ(learned_immediate=learned, empirical_burns=burns)
+                mixed.metadata["learned_immediate_src"] = learned
+                mixed.metadata["trace_io_sig"] = io_sig
+                mixed.verified_passes = max(mixed.verified_passes, len(self._world_transitions) + 4)
+                candidates.append(mixed)
         boot = compile_policy_organ(empirical_burns=burns)
         boot.verified_passes = max(boot.verified_passes, len(self._world_transitions))
         candidates.append(boot)
+        rewritten: list[ExecutableOrgan] = []
         for organ in candidates:
-            if not _policy_organ_holds_ring0(organ):
+            simplified_src = _egraph_simplify_organ_source(organ.source_code)
+            if not simplified_src or simplified_src == organ.source_code:
+                continue
+            try:
+                rec = make_organ(
+                    stratum=POLICY,
+                    name=organ.name + "_egraph",
+                    task_signature="policy::instrumental_q",
+                    entrypoint=organ.entrypoint,
+                    source_code=simplified_src,
+                    metadata=dict(organ.metadata),
+                )
+            except OrganSafetyError:
+                continue
+            rec.verified_passes = organ.verified_passes
+            rec.metadata["egraph_rewritten"] = True
+            rewritten.append(rec)
+        candidates.extend(rewritten)
+        for organ in candidates:
+            verdict = admit_policy_organ(organ, traces)
+            if not verdict.get("ok"):
                 continue
             self.register_organ(organ)
-            # Ring-0-admitted synthesized law is primary even if Occam prefers a smaller bootstrap.
             self.primary_by_sig[(POLICY, "policy::instrumental_q")] = organ.organ_id
+            comb_body = organ.metadata.get("learned_combiner_src")
+            try:
+                comb_organ = compile_combiner_organ(
+                    body=comb_body if isinstance(comb_body, str) else None
+                )
+                self.register_organ(comb_organ)
+                prev = [
+                    o
+                    for o in self.organs_in_stratum(SKILL)
+                    if o.task_signature == "policy::combiner" and o.organ_id != comb_organ.organ_id
+                ]
+                if prev:
+                    meta = compile_meta_synthesizer_organ(
+                        prev[0], comb_organ, tactic_name="policy_combiner_meta"
+                    )
+                    if meta is not None:
+                        self.register_organ(meta)
+            except OrganSafetyError:
+                pass
             self._save()
             return organ
         return incumbent

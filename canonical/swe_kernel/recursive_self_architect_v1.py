@@ -82,6 +82,13 @@ def referee_executable_organ(source_code: str) -> dict[str, Any]:
 
     return ring0_referee_organ_source(source_code)
 
+
+def admit_policy_organ(organ: Any, traces: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any]:
+    """Point Ring-0 at a POLICY organ: AST + structural invariants + held-out return."""
+    from canonical.swe_kernel.meta_circular_organ_graph_v1 import admit_policy_organ as _admit
+
+    return _admit(organ, traces)
+
 RING0_IMMUTABLE_PREFIXES: tuple[str, ...] = (
     "execution_guard/",
     "canonical/governance/",
@@ -2470,6 +2477,10 @@ class RecursiveSelfArchitect:
     def referee_executable_organ(self, source_code: str) -> dict[str, Any]:
         """Point Ring-0 at organ sources in `P_t` (AST firewall), not only Ring-1 files."""
         return referee_executable_organ(source_code)
+
+    def admit_policy_organ(self, organ: Any, traces: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any]:
+        """Admit a POLICY organ into `P_t` only if Ring-0 structural + held-out return pass."""
+        return admit_policy_organ(organ, traces)
 
     def run_self_improvement_cycle(
         self,
