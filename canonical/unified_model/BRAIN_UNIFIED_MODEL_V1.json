@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 304,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6697,
+  "research_index_records": 6698,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
-  "source_index_modules": 1946
+  "source_index_modules": 1947
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "90fa443fb0701e7f9289092f6fb86e2f20bd732a9659c37763f57345970b3323"
+  "value": "fb0d4d9c15ba165117afed9021fb3f187a4ea65e1377715695371bbce6f9de65"
  },
  "engines": [
   {
@@ -219871,6 +219871,51 @@
    }
   },
   {
+   "action_id": "LEARNING_MUST_SURVIVE_THE_PROCESS",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/LEARNING_MUST_SURVIVE_THE_PROCESS_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LEARNING_MUST_SURVIVE_THE_PROCESS_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f446d9add105f66f6c56058d8537b989b777ac18854a8862ed870a53f71f9b5b",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "acceptance": 1,
+    "again": 1,
+    "always": 1,
+    "answer": 1,
+    "ask": 2,
+    "attempt": 1,
+    "began": 1,
+    "better": 1,
+    "cache": 1,
+    "code": 1,
+    "defect": 1,
+    "died": 1,
+    "down": 1,
+    "editing": 1,
+    "every": 1,
+    "exactly": 1,
+    "exit": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "grows": 1,
+    "human": 1,
+    "induction": 1,
+    "instead": 1,
+    "interesting": 1,
+    "layer": 1,
+    "learning": 2,
+    "learning_must_survive_the_process": 1,
+    "literal": 1,
+    "measured": 1,
+    "memory": 1,
+    "process": 2,
+    "vocabulary": 2
+   }
+  },
+  {
    "action_id": "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -229544,6 +229589,45 @@
     "v4": 1,
     "v5": 1,
     "verify_acceptance_quotient_certificate_v5": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/acquired_operator_memory_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/acquired_operator_memory_v1.py",
+   "sha256": "dc8c5ecd481bc967c2782404c65828b79de0b960b7091e4b30c4ca7f4740be05",
+   "summary": "An operator the creature INDUCED must outlive the process that induced it.",
+   "symbol_count": 7,
+   "symbols": [
+    "_coerce_examples",
+    "_load",
+    "_path",
+    "_save",
+    "recall",
+    "restore",
+    "teach"
+   ],
+   "terms": {
+    "acquired": 1,
+    "coerce_examples": 1,
+    "creature": 1,
+    "induced": 2,
+    "load": 1,
+    "memory": 1,
+    "must": 1,
+    "operator": 2,
+    "outlive": 1,
+    "path": 1,
+    "process": 1,
+    "recall": 1,
+    "restore": 1,
+    "save": 1,
+    "teach": 1,
+    "v1": 1
    }
   },
   {
@@ -246809,7 +246893,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/decomposition_law_v1.py",
-   "sha256": "80bc1510d24aa8aa1cbbe18ebd24bc15013e4e62df0691d2bf6f9054bcda616d",
+   "sha256": "53b26202068ca8212415393a31a3169b2137ab14c19a2b04c067c0ecdc987b67",
    "summary": "Whether one answer can be checked against another is DISCOVERED, not declared.",
    "symbol_count": 11,
    "symbols": [
@@ -260841,9 +260925,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "7ce66d947f781a1f64c2084b08c67d5ea3bb2e220eefdc6e7d41fed69237da84",
+   "sha256": "7f37e8e478c7cd4366fae0483924dc25f19b866526b4f290f18b9b81a56f4e17",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
-   "symbol_count": 28,
+   "symbol_count": 29,
    "symbols": [
     "_answer_stands",
     "_applied_aggregate",
@@ -260861,20 +260945,19 @@
     "_project_files",
     "_reads_column",
     "_remember_and_check",
+    "_restore_acquired_operators",
     "_restricts_rows",
     "accounted_terms",
     "answer",
     "compute",
     "find",
     "listing",
-    "question_terms",
-    "read_content"
+    "question_terms"
    ],
    "terms": {
     "about": 1,
     "accounted_terms": 1,
     "answer": 3,
-    "answer_stands": 1,
     "applied_aggregate": 1,
     "composed_computation": 1,
     "computation_holds": 1,
@@ -260897,6 +260980,7 @@
     "question_terms": 1,
     "read_content": 1,
     "reads_column": 1,
+    "restore_acquired_operators": 1,
     "restricts_rows": 1,
     "search_named": 1,
     "v1": 1,
