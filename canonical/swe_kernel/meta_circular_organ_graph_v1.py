@@ -3277,6 +3277,84 @@ def _structural_policy_mutations(source_code: str) -> list[str]:
     return out
 
 
+def _nested_named_function(source_code: str, name: str) -> ast.FunctionDef | None:
+    try:
+        tree = ast.parse(source_code)
+    except SyntaxError:
+        return None
+    for fn in ast.walk(tree):
+        if isinstance(fn, ast.FunctionDef) and fn.name == name:
+            return fn
+    return None
+
+
+def _hors_crossover_mutations(src_a: str, src_b: str) -> list[str]:
+    """Invent a POLICY genome by Plotkin LGG of two living organs, filling holes from both parents.
+
+    Not a compiler pass on one `_q`: rec × flat anti-unifies the child-scorer and the candidate
+    set, then mixed instantiations are new programs Ring-0 still has to admit.
+    """
+    src_a = str(src_a or "")
+    src_b = str(src_b or "")
+    if not src_a.strip() or not src_b.strip() or src_a == src_b:
+        return []
+    try:
+        from canonical.swe_kernel.concept_library_v1 import (
+            higher_order_plotkin_lgg,
+            instantiate_plotkin_lgg,
+        )
+        from canonical.swe_kernel.recursive_self_architect_v1 import _splice_nested_function
+    except Exception:
+        return []
+    qa = _nested_named_function(src_a, "_q")
+    qb = _nested_named_function(src_b, "_q")
+    if qa is None or qb is None:
+        return []
+    try:
+        lgg = higher_order_plotkin_lgg(qa, qb)
+    except Exception:
+        return []
+    if not lgg:
+        return []
+    fillings = lgg.get("hole_fillings") or {}
+    extra_holes = [p for p in (lgg.get("param_names") or ()) if p in fillings]
+    if len(extra_holes) < 1:
+        return []
+    n_extra = len(extra_holes)
+    out: list[str] = []
+    seen: set[str] = {src_a, src_b}
+    # Mixed fillings only: skip all-parent-A and all-parent-B (those ARE the parents).
+    masks = range(1, (1 << n_extra) - 1) if n_extra >= 2 else range(1, 1 << n_extra)
+    for mask in masks:
+        if len(out) >= 4:
+            break
+        choice = {h: (mask >> i) & 1 for i, h in enumerate(extra_holes)}
+        try:
+            new_q = instantiate_plotkin_lgg(lgg, parent_choice=choice, name="_q")
+        except Exception:
+            continue
+        if new_q is None:
+            continue
+        for parent in (src_a, src_b):
+            try:
+                tree = ast.parse(parent)
+            except SyntaxError:
+                continue
+            outer = next((n for n in tree.body if isinstance(n, ast.FunctionDef)), None)
+            if outer is None:
+                continue
+            try:
+                spliced = _splice_nested_function(tree, outer.name, "_q", new_q)
+                ast.fix_missing_locations(spliced)
+                text = ast.unparse(spliced) + "\n"
+            except Exception:
+                continue
+            if text and text not in seen:
+                seen.add(text)
+                out.append(text)
+    return out
+
+
 def _flatten_recursive_q(source_code: str) -> list[str]:
     """One-level unlock genome (no recursive `_q` self-call)."""
     src = str(source_code or "")
@@ -3339,6 +3417,7 @@ def _successors_from_incumbent_source(
     learned_immediate: str | None,
     learned_combiner: str | None,
     concept_library: Any | None = None,
+    peer_sources: Sequence[str] = (),
 ) -> list[str]:
     """RSA/egraph/`G_t` mutations of incumbent source. Not a factory."""
     del concept_library  # used by callers when synthesizing bodies
@@ -3392,19 +3471,29 @@ def _successors_from_incumbent_source(
             structural.extend(_structural_policy_mutations(seed))
         except Exception:
             continue
+    invented: list[str] = []
+    for peer in [*peer_sources, *structural]:
+        if not peer or peer == source_code:
+            continue
+        try:
+            invented.extend(_hors_crossover_mutations(source_code, peer))
+        except Exception:
+            continue
+        if len(invented) >= 4:
+            break
     rewritten: list[str] = []
-    for s in [source_code, *out, *structural]:
+    for s in [source_code, *out, *structural, *invented]:
         eg = _egraph_simplify_organ_source(s)
         if eg:
             rewritten.append(eg)
     seen: set[str] = {source_code}
     uniq: list[str] = []
-    for s in [*out[:4], *structural, *out[4:], *rewritten]:
+    for s in [*invented, *out[:4], *structural, *out[4:], *rewritten]:
         if not s or s in seen:
             continue
         seen.add(s)
         uniq.append(s)
-        if len(uniq) >= 10:
+        if len(uniq) >= 12:
             break
     return uniq
 
@@ -3821,6 +3910,7 @@ class MetaCircularOrganGraph:
                     learned_immediate=learned,
                     learned_combiner=comb_learned,
                     concept_library=self.concept_library,
+                    peer_sources=[p for p in parents if p and p != parent_src][:3],
                 )
                 parent_id = incumbent.organ_id if parent_src == incumbent.source_code else "archive_elite"
                 for src in srcs:
@@ -3841,6 +3931,7 @@ class MetaCircularOrganGraph:
                                 "bootstrap_factory": False,
                                 "learned_immediate": bool(learned),
                                 "learned_combiner": bool(comb_learned),
+                                "hors_crossover": "def _q(_v0" in src,
                             },
                         )
                     except OrganSafetyError:
