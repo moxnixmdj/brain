@@ -176,8 +176,13 @@ def test_the_language_law_is_not_wired_into_the_compiler():
     assert "_language_mismatch" not in source, (
         "the external language law is wired in again; re-measure the regression count and "
         "update the plan before landing it")
-    assert "_language_mismatch" in Path(
-        ROOT / "canonical/tools/capability_self_model_v1.py").read_text() or True
+    # The second half of this test used to read `... or True`, which is not a test: it cannot
+    # fail. The repository integrity guard flagged it on 2026-11-04 (TAUTOLOGICAL_ASSERTION).
+    # The claim it was reaching for -- that the law survives as a measurable instrument while
+    # staying out of the compiler -- is FALSE: after the revert the mechanism is in neither
+    # file. A claim that is already true needs no assertion, and a claim about where a reverted
+    # mechanism *lives* would encode a limitation rather than a safety property, which may not
+    # block a later widening. So only the safety property is pinned, above.
 
 
 def test_the_self_model_claims_no_capability():

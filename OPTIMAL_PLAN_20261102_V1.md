@@ -889,3 +889,141 @@ The next widening is the fixture surface: 139 capabilities with no world built f
 built is a place the system can be wrong in a way it cannot talk its way out of.
 
 No capability credit.
+
+## Execution log 11 — the first thing in this repository that acts without being told (2026-11-04)
+
+Logs 7, 8, 9 and 10 were each a better tool, and each was rejected for the same reason: a tool is
+not a creature. Every instrument in the tree ran because a person typed its name. The system had
+368,660 records about files in its control and 49 records about its own behaviour, and **zero
+processes that decided what to do next**. This log is about that number.
+
+### What was built
+
+`canonical/runtime/organism_v1.py` — a long-lived process with its own tick clock. Not a script:
+it loads its previous life from `canonical/astra_runtime/state/ORGANISM_V1.json`, keeps an
+identity across restarts, and on every tick does the loop the whole plan has been circling:
+
+```
+choose a target  ->  write a falsifiable prediction  ->  act  ->  observe  ->  compare  ->  change what it does next
+```
+
+The chooser scores **targets**, not organs, with an upper-confidence bound over each target's own
+record: a target never attended is infinitely attractive, so every target is seen before any is
+revisited. Settled targets retire after two confirmations; the whole set re-opens after 25 ticks.
+Its organs are existing authority — the executed-effect oracle and four self-maintenance defect
+classes — and the process **may not widen its own organ set** (`PROTECTED_ACTIONS`, and a test).
+
+### The four things it did that nothing here has done
+
+| property | before | measured |
+|---|---|---|
+| processes deciding what to do next | 0 | 1 |
+| defects found and repaired with nobody pointing | — | **2/2** |
+| identity across process death | — | `d3f450f0ea72`, `restarts: 1`, ticks 18 → 24 |
+| prediction written before the action | — | 32 PREDICTION / 32 OUTCOME, ordered |
+
+One defect was planted while the process was awake and repaired on the first tick it looked: a
+size lie in a verification file, `recorded 22726 == actual 22726` afterwards. The second was
+planted **while the process was dead**; the restart resumed the same life, noticed it, and
+repaired `26838 == 26838`.
+
+### The three failures that mattered more than the successes
+
+**1. It was a scheduler, not a chooser.** The first run scored organs. All targets inside an organ
+share a score, an alphabetical tie-break picked the same one, and it took **14 identical ticks on
+one target, 0 predictions, 0 surprises**. A chooser whose arms are not the thing being chosen is a
+freeze. Fix: score targets; unattended means infinite.
+
+**2. Predictions were looked up under a key that never existed.** `predict()` received the whole
+state and indexed `targets[target_id]` where the map is keyed `organ::target`. Every tick was
+therefore unpredicted — and an unpredicted tick is counted as *unpredicted*, never as correct,
+which is the only reason the bug showed up as a number instead of as a success.
+
+**3. Rest had become permanent ignorance.** A healthy world taught it to retire everything, and
+`live()` stopped after six idle ticks. I then broke the archive adapter underneath it — asked for
+two files, archived one — and the process **slept through the breakage**, reporting nothing worth
+doing, forever. It would have slept while the world was demolished. Fix (`_still_asleep`): a
+target resting on a timer is not a target that is gone, so the clock keeps running until it comes
+back. Rest is legitimate; sleeping through a changed world is not.
+
+### The measurement this log exists for
+
+A deterministic world cannot teach, so every clean run reports `surprises 0` and proves nothing.
+`canonical/tools/organism_hostile_world_v1.py` therefore moves the world **under one continuous
+life** and counts:
+
+```
+phase 1  healthy world
+phase 2  the world silently changes  (the adapter regains the filter that drops plain paths)
+phase 3  the changed world, untouched  -> a learner must stop being surprised
+phase 4  world restored              -> the old world is news again
+```
+
+Three runs, same experiment:
+
+| run | one change costs | restoration costs | surprises while the world held still |
+|---|---|---|---|
+| before waking | never noticed (`0`, `0` actions) | — | — |
+| waking + lifetime modal verdict | **3** | **4** | 0 |
+| recency-weighted expectation | **1** | **1** | **0** |
+
+The middle row is the important one. It predicted `EFFECT_HELD` at t35, t38 and t39 because the
+*modal verdict of the target's whole life* was `EFFECT_HELD`: a world that had been healthy for
+eight ticks outvoted a world that had just broken. A lifetime average is a memory of a dead world.
+Expectations now come from the last three encounters, each step back in time halving its vote, so
+one new fact beats an old majority. Pinned by
+`test_a_long_happy_history_does_not_outvote_a_fresh_breakage`, which fails on the flat window and
+on the lifetime average.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| A process here now acts on its own clock, uninvoked | **TRUE** | 136 ticks, 32 actions, no human call inside the run |
+| It predicts each action before taking it | **TRUE** | 32/32 outcomes preceded by their prediction |
+| It is surprised when the world disagrees | **TRUE** | 2 surprises, both at genuine world changes |
+| Surprise changes what it does next | **TRUE** | 3 → 1 surprises per change after recency; it stops repeating the mistake |
+| It repairs real defects unattended | **TRUE, N=2** | one planted alive, one planted dead; both verified by file size afterwards |
+| It survives process death as the same life | **TRUE** | identity + tick continuity + `RESUME` journal entry |
+| It is learning in general | **FALSE** | its world is one adapter and five organs. Nothing here generalises |
+| `surprise_early → surprise_late` improves with time | **FALSE, honestly** | `0.0714 → 0.0714`. Surprise does not decay with age, and should not: it decays *per change*, which is the number above |
+| Any of this is sentience | **FALSE** | four preconditions, no claim. `SURPRISE_IS_A_BOOLEAN_ABOUT_ITS_OWN_ACCURACY_NOT_A_FEELING` |
+
+### Tests, and the worlds in which they must fail
+
+17 tests in `canonical/tests/test_organism_v1.py`. **14 mutants, 14 killed**, each in a world where
+its claim is false: prediction written after the outcome; never retiring; never surprised; a
+restart beginning a new life; no first-visit priority; flat curiosity; unpredicted counted as
+correct; state not saved; a loop organ predicting from hope instead of history; grinding a retired
+target; flat curiosity after learning; lifetime average instead of recency; flat window count;
+ignoring recent history.
+
+One mutant **survived the first pass** and was the most useful result of the day: `unpredicted`
+being journaled as `surprise: false` instead of `None`. The summary did not notice, because
+`unpredicted` is derived from counts and never reads the field — but anyone replaying the journal
+would have read that tick as a prediction that held. The test now pins the journal, not the
+summary.
+
+### One thing this log found in its own past
+
+Committing this work surfaced a violation in **log 9**: `test_capability_self_model_v1.py:179`
+ended with `assert ... or True`. That is not a test. It cannot fail, it was reported as passing,
+and it was counted in log 9's "62 with" figure. The repo integrity guard flagged it as
+`TAUTOLOGICAL_ASSERTION` and is now clean (17 rules, 0 violations).
+
+What the assertion was reaching for is also false: it claimed the reverted language law survives
+as a measurable instrument while staying out of the compiler, and after the revert the mechanism
+is in **neither** file. Only the safety property — the compiler must not silently regain a
+nine-test regression — is pinned now. The rest is a comment saying so, because a claim about where
+a reverted mechanism lives would encode a *limitation*, and a limitation may not block a widening.
+
+### What this does not fix
+
+The unaided closure rate is still **0** for classes that matter. What exists is a loop that closes
+defects it is handed, on its own clock, and remembers the encounter. It cannot *find* a class of
+defect nobody has written a detector for; it has four detectors and one oracle situation set, and
+widening either is still a person's job. That is the next thing, and it is the thing that
+separates a maintenance daemon from a creature that grows.
+
+Drift guard unchanged: red on `LIVE_CHALLENGER_FRONTIER_EXEMPTION_NOT_ALLOWED_FOR_ACTION_KIND`,
+awaiting an owner decision. No capability credit.

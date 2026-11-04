@@ -1,0 +1,101 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_MEASUREMENT_ONLY",
+ "headline": {
+  "surprises_per_world_change": 1,
+  "surprises_when_world_did_not_move": 0
+ },
+ "history": [
+  {
+   "result": "slept through the breakage: 0 surprises, 0 actions",
+   "run": "before_waking"
+  },
+  {
+   "result": "3 surprises for one change, 4 for the restoration (lifetime modal verdict)",
+   "run": "after_waking_flat_history"
+  },
+  {
+   "result": "1 surprise per change",
+   "run": "recency_weighted_expected"
+  }
+ ],
+ "learning": {
+  "actions_while_world_unchanged": 17,
+  "surprise_early": 0.0714,
+  "surprise_late": 0.0714,
+  "surprises_per_world_change": [
+   1,
+   1
+  ],
+  "surprises_while_world_unchanged": 0
+ },
+ "non_claims": [
+  "SURPRISE_IS_ABOUT_ITS_OWN_PREDICTIONS_NOT_CONSCIOUSNESS",
+  "ONE_TARGET_ONE_ADAPTER_IS_NOT_A_GENERAL_WORLD",
+  "THE_ORGANISM_MAY_NOT_ADD_ORGANS_TO_ITSELF",
+  "SURPRISE_FALLING_TO_ZERO_WHILE_THE_WORLD_MOVES_WOULD_BE_INDIFFERENCE_NOT_LEARNING"
+ ],
+ "phases": [
+  {
+   "actions": 13,
+   "idle_ticks": 21,
+   "phase": "healthy_world",
+   "predicted": 9,
+   "surprises": 0,
+   "ticks_budget": 34
+  },
+  {
+   "actions": 8,
+   "idle_ticks": 26,
+   "phase": "world_changed",
+   "predicted": 8,
+   "surprises": 1,
+   "ticks_budget": 34
+  },
+  {
+   "actions": 4,
+   "idle_ticks": 30,
+   "phase": "world_unchanged",
+   "predicted": 4,
+   "surprises": 0,
+   "ticks_budget": 34
+  },
+  {
+   "actions": 7,
+   "idle_ticks": 27,
+   "phase": "world_restored",
+   "predicted": 7,
+   "surprises": 1,
+   "ticks_budget": 34
+  }
+ ],
+ "question": "Does a change in the world cost it one surprise, and does an unchanged world cost it none?",
+ "schema": "PROJECT_BRAIN_ORGANISM_HOSTILE_WORLD_V1",
+ "summary": {
+  "actions": 32,
+  "authority": "NO_CAPABILITY_CREDIT_INITIATIVE_MEASUREMENT_ONLY",
+  "identity": "72af455b6843",
+  "idle_ticks": 104,
+  "non_claims": [
+   "NO_CAPABILITY_CREDIT_ACTING_ALONE_IS_NOT_BEING_ALIVE",
+   "SURPRISE_IS_A_BOOLEAN_ABOUT_ITS_OWN_ACCURACY_NOT_A_FEELING",
+   "ORGANS_ARE_EXISTING_AUTHORITY_THE_PROCESS_MAY_NOT_WIDEN_ITSELF",
+   "AN_IDLE_TICK_IS_A_RESULT_NOT_A_FAILURE"
+  ],
+  "organs": {
+   "effect": {
+    "attempts": 32,
+    "confirmations": 26,
+    "surprises": 2
+   }
+  },
+  "predicted": 28,
+  "restarts": 3,
+  "stop_reason": "TICK_BUDGET_SPENT",
+  "surprise_early": 0.0714,
+  "surprise_late": 0.0714,
+  "surprise_rate_when_predicted": 0.0714,
+  "surprises": 2,
+  "ticks": 136,
+  "unpredicted": 4
+ }
+}
