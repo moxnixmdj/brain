@@ -427,7 +427,7 @@
      "path": "canonical/tools/route_reach_census_v1.py"
     },
     {
-     "git_blob_sha": "b1daa737f714622a03e6c8e7566ee7295a010e91",
+     "git_blob_sha": "5ea275d017e2df860c322299363d0f209cf36619",
      "path": "canonical/tests/test_route_reach_census_v1.py"
     },
     {
@@ -439,7 +439,7 @@
      "path": "canonical/tools/route_reach_census_v1.py"
     },
     {
-     "git_blob_sha": "b1daa737f714622a03e6c8e7566ee7295a010e91",
+     "git_blob_sha": "5ea275d017e2df860c322299363d0f209cf36619",
      "path": "canonical/tests/test_route_reach_census_v1.py"
     },
     {

@@ -161,3 +161,21 @@ def test_routing_is_concentrated_and_the_magnets_are_named(real_reach):
 def test_the_real_sentence_instrument_claims_no_capability_credit(real_reach):
     assert real_reach["authority"] == "NO_CAPABILITY_CREDIT_ROUTING_MEASUREMENT_ONLY"
     assert real_reach["instrument"] == "REAL_SENTENCES_ROUTING_ONLY"
+
+
+def test_the_published_reach_figure_still_reproduces_from_the_tree():
+    """A verification artifact that no longer follows from the tree is a lie with a filename.
+
+    This is the same predicate the self-maintenance loop uses to repair the artifact, asked
+    here as a standing question: does the published `ROUTE_REACH_REAL_SENTENCES_V1.json`
+    still equal a fresh computation? If this fails, the file is stale and the loop's
+    STALE_VERIFICATION_ARTIFACT class is what is supposed to close it, unattended.
+    """
+    import json
+
+    from canonical.tools import self_maintenance_loop_v1 as loop
+
+    assert loop.make_stale_measurement_class().find() == [], (
+        "canonical/verification/ROUTE_REACH_REAL_SENTENCES_V1.json no longer reproduces; "
+        "run canonical/tools/self_maintenance_loop_v1.py --apply"
+    )

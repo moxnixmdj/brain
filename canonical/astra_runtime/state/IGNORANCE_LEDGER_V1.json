@@ -176,6 +176,28 @@
    "what": "transcribe the audio in this recording to text",
    "why": "raw goal compilation gap"
   },
+  "g254903093942": {
+   "cost": 1.0,
+   "created": 1793785488.4651308,
+   "helped": 0,
+   "id": "g254903093942",
+   "last_seen": 1793785488.4651308,
+   "resolved": false,
+   "trials": 0,
+   "what": "STALE_ACTION_INTENT_RECEIPT",
+   "why": "receipt[9] binds canonical/tests/test_route_reach_census_v1.py"
+  },
+  "g277582775916": {
+   "cost": 1.0,
+   "created": 1793785488.4663942,
+   "helped": 0,
+   "id": "g277582775916",
+   "last_seen": 1793785488.4663942,
+   "resolved": false,
+   "trials": 0,
+   "what": "STALE_ACTION_INTENT_RECEIPT",
+   "why": "receipt[12] binds canonical/tests/test_route_reach_census_v1.py"
+  },
   "g284143994353": {
    "cost": 1.0,
    "created": 1793266064.380599,
@@ -539,6 +561,17 @@
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
   },
+  "g595310678551": {
+   "cost": 1.0,
+   "created": 1793785427.2791135,
+   "helped": 0,
+   "id": "g595310678551",
+   "last_seen": 1793785427.2791135,
+   "resolved": false,
+   "trials": 0,
+   "what": "STALE_ACTION_INTENT_RECEIPT",
+   "why": "receipt[9] binds canonical/tests/test_route_reach_census_v1.py"
+  },
   "g610520316647": {
    "cost": 1.0,
    "created": 1793295116.2316787,
@@ -791,6 +824,17 @@
    "trials": 2,
    "what": "probe:--outfile|stdin",
    "why": "empirical cli probe"
+  },
+  "g870924739094": {
+   "cost": 1.0,
+   "created": 1793785427.28046,
+   "helped": 0,
+   "id": "g870924739094",
+   "last_seen": 1793785427.28046,
+   "resolved": false,
+   "trials": 0,
+   "what": "STALE_ACTION_INTENT_RECEIPT",
+   "why": "receipt[12] binds canonical/tests/test_route_reach_census_v1.py"
   },
   "g880454033332": {
    "cost": 1.0,
