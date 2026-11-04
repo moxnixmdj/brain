@@ -16,6 +16,7 @@ from __future__ import annotations
 import ast
 from collections import Counter
 import copy
+import hashlib
 import itertools
 import math
 import operator
@@ -29,7 +30,10 @@ MAX_FUNCTIONS = 24
 MAX_ARITY = 4
 MAX_CANDIDATES = 256
 MAX_QUERY_POINTS = 256
-MAX_LEARNED_BINARY_NODES = 2
+MAX_EXTERNAL_EXAMPLES = 256
+INITIAL_LEARNED_BINARY_NODES = 2
+MAX_LEARNED_BINARY_NODES = 6
+MAX_SEMANTIC_COMBINATIONS = 4096
 MIN_EXTERNAL_EXAMPLES = 2
 
 # Python operator semantics, not a mapping from error classes to repairs.
@@ -58,6 +62,29 @@ def _number(value: Any) -> bool:
     if type(value) is float:
         return math.isfinite(value) and abs(value) <= 1e20
     return False
+
+
+def validate_external_examples(examples: Sequence[Mapping[str, Any]], arity: int, *,
+                               require_attribution: bool = False) -> tuple[bool, str]:
+    """Validate distinct, modelable answers; attribution fields are not authentication."""
+    if not isinstance(examples, (list, tuple)) or len(examples) > MAX_EXTERNAL_EXAMPLES:
+        return False, "invalid example collection or budget"
+    seen: set[tuple[Any, ...]] = set()
+    for example in examples:
+        if not isinstance(example, Mapping):
+            return False, "example is not a mapping"
+        args, expected = example.get("args"), example.get("expected")
+        if (not isinstance(args, (list, tuple)) or len(args) != arity
+                or not all(_number(a) for a in args) or not _number(expected)):
+            return False, "example is outside the numeric model"
+        if require_attribution and any(not isinstance(example.get(field), str) or not example[field].strip()
+                                       for field in ("reviewer", "basis")):
+            return False, "example lacks attribution"
+        key = tuple(args)
+        if key in seen:
+            return False, "duplicate example input"
+        seen.add(key)
+    return True, "valid"
 
 
 def same_number(a: Any, b: Any) -> bool:
@@ -144,6 +171,16 @@ def function_models(source: str) -> dict[str, FunctionModel]:
     return models
 
 
+def _apply_binary(op: type[ast.operator], left: int | float, right: int | float) -> int | float:
+    """One numeric operation under the same limits used by all static models."""
+    if op is ast.Pow and (abs(right) > 12 or abs(left) > 1e6):
+        raise ValueError("power exceeds model budget")
+    result = _BINARY[op](left, right)
+    if not _number(result):
+        raise ValueError("value exceeds model budget")
+    return result
+
+
 def evaluate_expression(expression: ast.AST, bindings: Mapping[str, Any]) -> tuple[bool, int | float | None]:
     """Interpret a whitelisted numeric AST with bounded intermediate results."""
     if not _expression_supported(expression, tuple(bindings)) or not all(_number(v) for v in bindings.values()):
@@ -158,9 +195,7 @@ def evaluate_expression(expression: ast.AST, bindings: Mapping[str, Any]) -> tup
             result = _UNARY[type(node.op)](visit(node.operand))
         elif isinstance(node, ast.BinOp):
             left, right = visit(node.left), visit(node.right)
-            if isinstance(node.op, ast.Pow) and (abs(right) > 12 or abs(left) > 1e6):
-                raise ValueError("power exceeds model budget")
-            result = _BINARY[type(node.op)](left, right)
+            result = _apply_binary(type(node.op), left, right)
         else:
             raise ValueError("unsupported expression")
         if not _number(result):
@@ -189,7 +224,7 @@ def observed_binary_operators(expression: ast.AST) -> list[str]:
                    if isinstance(node, ast.BinOp) and type(node.op) in _BINARY})
 
 
-def _learned_compositions(params: Sequence[str], operator_names: Sequence[str]):
+def _learned_compositions(params: Sequence[str], operator_names: Sequence[str], *, max_nodes: int):
     """Enumerate small programs from observed operators, not a failure/repair table.
 
     Only parameters are leaves; no value is copied from a previous task. Each
@@ -202,7 +237,6 @@ def _learned_compositions(params: Sequence[str], operator_names: Sequence[str]):
     if not operators:
         return
     levels: list[list[ast.expr]] = [[ast.Name(id=p, ctx=ast.Load()) for p in params]]
-    max_nodes = MAX_LEARNED_BINARY_NODES
     for count in range(1, max_nodes + 1):
         level: list[ast.expr] = []
         for left_count in range(count):
@@ -219,6 +253,7 @@ def _learned_compositions(params: Sequence[str], operator_names: Sequence[str]):
 
 def expression_candidates(target: FunctionModel, templates: Sequence[FunctionModel], *,
                           learned_operators: Sequence[str] = (),
+                          max_learned_binary_nodes: int = INITIAL_LEARNED_BINARY_NODES,
                           limit: int = MAX_CANDIDATES) -> tuple[list[ast.expr], bool]:
     """Rebind each parameter occurrence in source expressions to a target parameter.
 
@@ -276,10 +311,17 @@ def expression_candidates(target: FunctionModel, templates: Sequence[FunctionMod
                     truncated = True
                 break
     if learned_operators and not truncated:
+        # Parameters are the leaves of the learned grammar. Include them as
+        # zero-node candidates before considering compositions.
+        for name in target.params:
+            add(ast.Name(id=name, ctx=ast.Load()))
+            if len(out) > limit:
+                return out[:limit], True
         # Bound attempts as well as distinct candidates. Encountering a budget
         # makes incomplete search explicit; it cannot become agreement evidence.
         attempts = 0
-        for expr in _learned_compositions(target.params, learned_operators):
+        depth = max(0, min(int(max_learned_binary_nodes), MAX_LEARNED_BINARY_NODES))
+        for expr in _learned_compositions(target.params, learned_operators, max_nodes=depth):
             attempts += 1
             if attempts > MAX_CANDIDATES * 4:
                 truncated = True
@@ -294,6 +336,156 @@ def expression_candidates(target: FunctionModel, templates: Sequence[FunctionMod
                 # that this exact-sized space was actually truncated.
                 continue
     return out[:limit], truncated
+
+
+def _number_key(value: int | float) -> tuple[str, Any]:
+    # Python considers 0, 0.0 and -0.0 equal; numeric operations can still
+    # distinguish their types or signed zero. Do not merge those behaviors.
+    return ("int", value) if type(value) is int else ("float", value.hex())
+
+
+def _semantic_points(arity: int, constraints: Sequence[tuple[Sequence[Any], Any]]
+                     ) -> tuple[list[tuple[Any, ...]], dict[tuple[Any, ...], int]] | None:
+    if 6 ** arity + 3 ** arity > MAX_QUERY_POINTS:
+        return None
+    points: list[tuple[Any, ...]] = []
+    index: dict[tuple[Any, ...], int] = {}
+    domains = (itertools.product((2, 3, 4, 5, 6, 7), repeat=arity),
+               itertools.product((-3, 0, 11), repeat=arity),
+               (tuple(args) for args, _ in constraints))
+    for point in itertools.chain.from_iterable(domains):
+        if len(point) != arity or not all(_number(v) for v in point):
+            return None
+        key = tuple(_number_key(v) for v in point)
+        if key not in index:
+            if len(points) >= MAX_QUERY_POINTS:
+                return None
+            index[key] = len(points)
+            points.append(tuple(point))
+    return points, index
+
+
+def _signature(values: Sequence[int | float | None]) -> tuple[Any, ...]:
+    return tuple(None if v is None else _number_key(v) for v in values)
+
+
+def _semantic_compositions(
+    target: FunctionModel, constraints: Sequence[tuple[Sequence[Any], Any]],
+    operators: Sequence[str], *, limit: int,
+) -> tuple[list[ast.expr], bool, dict[str, Any]]:
+    """Compose one minimal representative per exact finite-domain behavior.
+
+    All operator inputs are bounded built-in numbers, so equal typed subexpression
+    vectors give equal parent vectors on these points. This preserves distinctions
+    *on this domain*, not on unobserved inputs. Every level must complete within
+    both caps before it can support bounded agreement or justify deeper search.
+    """
+    domain = _semantic_points(len(target.params), constraints)
+    base = {"method": "finite_domain_signature", "learned_binary_node_budget": MAX_LEARNED_BINARY_NODES,
+            "more_complex_learned_models_unexamined": True}
+    if domain is None:
+        return [], True, {**base, "learned_binary_nodes_explored": INITIAL_LEARNED_BINARY_NODES,
+                          "expansion_rounds": 0, "candidates_examined": 0,
+                          "semantic_combinations": 0, "domain_points": 0,
+                          "complete_through_depth": False, "reason": "semantic_domain_budget"}
+    points, point_index = domain
+    required = [(point_index[tuple(_number_key(v) for v in args)], expected)
+                for args, expected in constraints]
+    # key -> (typed values at all points, representative AST)
+    levels: list[dict[tuple[Any, ...], tuple[tuple[int | float | None, ...], ast.expr]]] = []
+    seen: dict[tuple[Any, ...], tuple[tuple[int | float | None, ...], ast.expr]] = {}
+    leaves: dict[tuple[Any, ...], tuple[tuple[int | float | None, ...], ast.expr]] = {}
+    for i, name in enumerate(target.params):
+        values = tuple(point[i] for point in points)
+        key = _signature(values)
+        leaves.setdefault(key, (values, ast.Name(id=name, ctx=ast.Load())))
+    seen.update(leaves)
+    levels.append(leaves)
+    supported = {cls.__name__: cls for cls in _BINARY}
+    attempts = 0
+
+    def finish(depth: int, current: Mapping[tuple[Any, ...], tuple[tuple[int | float | None, ...], ast.expr]],
+               truncated: bool) -> tuple[list[ast.expr], bool, dict[str, Any]]:
+        survivors = [expr for values, expr in current.values()
+                     if all(values[i] is not None and same_number(values[i], expected)
+                            for i, expected in required)] if depth > INITIAL_LEARNED_BINARY_NODES else []
+        info = {**base, "learned_binary_nodes_explored": depth,
+                "expansion_rounds": max(0, depth - INITIAL_LEARNED_BINARY_NODES),
+                "candidates_examined": len(seen) + len(current), "semantic_combinations": attempts,
+                "domain_points": len(points), "complete_through_depth": not truncated}
+        return survivors, truncated, info
+
+    for depth in range(1, MAX_LEARNED_BINARY_NODES + 1):
+        current: dict[tuple[Any, ...], tuple[tuple[int | float | None, ...], ast.expr]] = {}
+        for left_depth in range(depth):
+            for name in operators:
+                op = supported[name]
+                for left_values, left_expr in levels[left_depth].values():
+                    for right_values, right_expr in levels[depth - left_depth - 1].values():
+                        attempts += 1
+                        if attempts > MAX_SEMANTIC_COMBINATIONS:
+                            return finish(depth, current, True)
+                        values_list: list[int | float | None] = []
+                        for left, right in zip(left_values, right_values):
+                            if left is None or right is None:
+                                values_list.append(None)
+                                continue
+                            try:
+                                values_list.append(_apply_binary(op, left, right))
+                            except (ArithmeticError, KeyError, TypeError, ValueError, OverflowError, RecursionError):
+                                values_list.append(None)
+                        values = tuple(values_list)
+                        key = _signature(values)
+                        if key in seen or key in current:
+                            continue
+                        if len(seen) + len(current) >= limit:
+                            return finish(depth, current, True)
+                        expr = ast.fix_missing_locations(ast.BinOp(
+                            left=copy.deepcopy(left_expr), op=op(), right=copy.deepcopy(right_expr)))
+                        current[key] = (values, expr)
+        if depth > INITIAL_LEARNED_BINARY_NODES:
+            survivors, truncated, info = finish(depth, current, False)
+            if survivors:
+                return survivors, truncated, info
+        seen.update(current)
+        levels.append(current)
+    return finish(MAX_LEARNED_BINARY_NODES, {}, False)
+
+
+def fitting_expression_candidates(
+    target: FunctionModel, templates: Sequence[FunctionModel],
+    constraints: Sequence[tuple[Sequence[Any], Any]], *,
+    learned_operators: Sequence[str] = (), limit: int = MAX_CANDIDATES,
+) -> tuple[list[ast.expr], bool, dict[str, Any]]:
+    """Fit, then deepen only after a complete shallower search is refuted.
+
+    A larger grammar supplies hypotheses, not evidence. We stop at the first
+    depth with survivors, explicitly bounded by a finite semantic domain and
+    resource caps; larger programs and behaviors outside that domain remain open.
+    """
+    operators = sorted({name for name in learned_operators
+                        if isinstance(name, str) and name in supported_binary_operator_names()})
+    limit = max(1, min(int(limit), MAX_CANDIDATES))
+    depth = INITIAL_LEARNED_BINARY_NODES if operators else 0
+    info = {"method": "syntactic", "learned_binary_nodes_explored": depth,
+            "learned_binary_node_budget": MAX_LEARNED_BINARY_NODES if operators else 0,
+            "expansion_rounds": 0, "candidates_examined": 0, "semantic_combinations": 0,
+            "complete_through_depth": False, "more_complex_learned_models_unexamined": bool(operators)}
+    if (not constraints or any(not isinstance(args, (list, tuple)) or len(args) != len(target.params)
+                               or not all(_number(v) for v in args) or not _number(expected)
+                               for args, expected in constraints)):
+        return [], False, {**info, "reason": "missing_or_unsupported_constraints"}
+    candidates, truncated = expression_candidates(
+        target, templates, learned_operators=operators, max_learned_binary_nodes=depth, limit=limit)
+    survivors = [expr for expr in candidates if all(
+        (lambda result: result[0] and same_number(result[1], expected))(
+            evaluate_expression(expr, dict(zip(target.params, args))))
+        for args, expected in constraints)]
+    info["candidates_examined"], info["complete_through_depth"] = len(candidates), not truncated
+    if survivors or truncated or not operators:
+        return survivors, truncated, info
+    # Only complete refutation licenses additional search, not publication.
+    return _semantic_compositions(target, constraints, operators, limit=limit)
 
 
 def replace_return_expression(source: str, model: FunctionModel, replacement: ast.expr) -> str | None:
@@ -316,25 +508,33 @@ def replace_return_expression(source: str, model: FunctionModel, replacement: as
     return candidate if candidate != source else None
 
 
+def _masked_target_expression(source: str, expression: ast.expr) -> bytes | None:
+    if not all(hasattr(expression, f) for f in ("lineno", "col_offset", "end_lineno", "end_col_offset")):
+        return None
+    lines = source.encode("utf-8").splitlines(keepends=True)
+    if not (1 <= expression.lineno <= expression.end_lineno <= len(lines)):
+        return None
+    start = sum(len(x) for x in lines[:expression.lineno - 1]) + expression.col_offset
+    end = sum(len(x) for x in lines[:expression.end_lineno - 1]) + expression.end_col_offset
+    raw = source.encode("utf-8")
+    return raw[:start] + b"<EXPRESSION>" + raw[end:]
+
+
+def target_expression_scope_sha256(source: str, target_name: str) -> str | None:
+    """Fingerprint all source bytes except the modeled target return expression."""
+    model = function_models(source).get(target_name)
+    masked = _masked_target_expression(source, model.expression) if model else None
+    return hashlib.sha256(masked).hexdigest() if masked is not None else None
+
+
 def only_target_expression_changed(before: str, after: str, target_name: str) -> bool:
     """Require every source byte outside the named return expression to be unchanged."""
     old_model = function_models(before).get(target_name)
     new_model = function_models(after).get(target_name)
     if not old_model or not new_model or old_model.params != new_model.params or before == after:
         return False
-
-    def masked(source: str, expression: ast.expr) -> bytes | None:
-        if not all(hasattr(expression, f) for f in ("lineno", "col_offset", "end_lineno", "end_col_offset")):
-            return None
-        lines = source.encode("utf-8").splitlines(keepends=True)
-        if not (1 <= expression.lineno <= expression.end_lineno <= len(lines)):
-            return None
-        start = sum(len(x) for x in lines[:expression.lineno - 1]) + expression.col_offset
-        end = sum(len(x) for x in lines[:expression.end_lineno - 1]) + expression.end_col_offset
-        raw = source.encode("utf-8")
-        return raw[:start] + b"<EXPRESSION>" + raw[end:]
-
-    old_mask, new_mask = masked(before, old_model.expression), masked(after, new_model.expression)
+    old_mask = _masked_target_expression(before, old_model.expression)
+    new_mask = _masked_target_expression(after, new_model.expression)
     return old_mask is not None and old_mask == new_mask
 
 
@@ -355,10 +555,6 @@ def investigate(source: str, *, target_name: str, reference_name: str,
     if not target or not reference or target_name == reference_name:
         return {"status": "unsupported", "candidates": 0, "next_query": None,
                 "reason": "target/reference unavailable in restricted static model"}
-    candidates, truncated = expression_candidates(target, [reference], learned_operators=learned_operators)
-    # The main grid and the out-of-range stress grid are separately bounded.
-    # A partial exploration must not count as agreement across either grid.
-    truncated = truncated or (6 ** len(target.params) + 3 ** len(target.params) > MAX_QUERY_POINTS)
     constraints: list[tuple[tuple[Any, ...], Any]] = []
     for observation in observations:
         x = observation.get("input")
@@ -368,20 +564,22 @@ def investigate(source: str, *, target_name: str, reference_name: str,
         # The relation under review is the diagonal relation; a reference with
         # one parameter sees x once, a wider reference sees it in every slot.
         constraints.append(((x,) * len(target.params), expected))
+    examples_valid, reason = validate_external_examples(examples, len(target.params))
+    if not examples_valid:
+        return {"status": "invalid_external_examples", "candidates": 0, "next_query": None, "reason": reason}
     for example in examples:
-        args, expected = example.get("args"), example.get("expected")
-        if isinstance(args, (list, tuple)) and len(args) == len(target.params) and all(_number(a) for a in args) and _number(expected):
-            constraints.append((tuple(args), expected))
+        constraints.append((tuple(example["args"]), example["expected"]))
     if not constraints:
         return {"status": "no_reference_observations", "candidates": 0, "next_query": None,
                 "reason": "no supported, attributed constraints"}
-    survivors: list[ast.expr] = []
-    for expr in candidates:
-        if all((lambda r: r[0] and same_number(r[1], expected))(
-                evaluate_expression(expr, dict(zip(target.params, args)))) for args, expected in constraints):
-            survivors.append(expr)
+    survivors, candidate_truncated, search = fitting_expression_candidates(
+        target, [reference], constraints, learned_operators=learned_operators)
+    # The main grid and the out-of-range stress grid are separately bounded.
+    # A partial exploration must not count as agreement across either grid.
+    truncated = candidate_truncated or (6 ** len(target.params) + 3 ** len(target.params) > MAX_QUERY_POINTS)
     if not survivors:
-        return {"status": "no_candidates", "candidates": 0, "truncated": truncated, "next_query": None,
+        return {"status": "truncated_search" if truncated else "no_candidates",
+                "candidates": 0, "truncated": truncated, "next_query": None, "search": search,
                 "external_examples": len(examples), "learned_operators_considered": list(learned_operators),
                 "reason": "no explored model fits the supplied evidence"}
 
@@ -457,7 +655,9 @@ def investigate(source: str, *, target_name: str, reference_name: str,
         "truncated": truncated,
         "external_examples": len(examples),
         "learned_operators_considered": sorted(set(learned_operators)),
+        "search": search,
         "coverage": {**checked, "stress_grid_completed": stress_complete},
         "next_query": query,
-        "scope": "bounded source and experience-derived models on jointly defined points in two finite grids; not proof of intent",
+        "scope": ("bounded source and learned models at the first surviving depth on jointly defined points "
+                  "in two finite grids; deeper models may be unexamined; not proof of intent"),
     }

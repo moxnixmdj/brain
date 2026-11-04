@@ -527,7 +527,7 @@ class InterpretiveRepair:
                                     learned_operators: Sequence[str] = ()):
         """Filter source and learned-grammar expressions against owed examples."""
         from canonical.swe_kernel.expression_hypotheses_v1 import (
-            evaluate_expression, expression_candidates, function_models, replace_return_expression, same_number,
+            fitting_expression_candidates, function_models, replace_return_expression,
         )
         models = function_models(source_text)
         subjects = list(dict.fromkeys(str(row.get("subject") or "") for row in rows))
@@ -540,15 +540,13 @@ class InterpretiveRepair:
             ):
                 continue
             templates = [m for m in models.values() if m.name != target.name]
-            candidates, _truncated = expression_candidates(target, templates, learned_operators=learned_operators)
+            # The same counterexample-guided depth schedule is used by the
+            # planner and the real repair producer. These are asserted values,
+            # not independently verified intent; the full test still screens.
+            constraints = [(row["args"], row.get("expected")) for row in relevant]
+            candidates, _truncated, _search = fitting_expression_candidates(
+                target, templates, constraints, learned_operators=learned_operators)
             for expr in candidates:
-                # Every independently asserted example already in the failure
-                # report is evidence.  Fitting only the first diagonal example
-                # lets many wrong bindings consume the entire candidate budget.
-                if not all((lambda result: result[0] and same_number(result[1], row.get("expected")))(
-                        evaluate_expression(expr, dict(zip(target.params, row["args"]))))
-                           for row in relevant):
-                    continue
                 candidate = replace_return_expression(source_text, target, expr)
                 if candidate:
                     yield candidate

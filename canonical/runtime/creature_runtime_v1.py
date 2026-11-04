@@ -2668,7 +2668,7 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
                 first = (pathlib.Path(ws_target) / _owed[0]).read_text(encoding="utf-8").splitlines()[0]
                 binding = json.loads(first[len("# brain-notion-v1 "):])
                 structure_learning = live_notions(_notions_path).record_checked_repair(
-                    binding, staged[binding["module"]]
+                    binding, staged[binding["module"]], workspace_root=ws_target, test_file=_owed[0]
                 )
             except Exception as exc:  # publication already happened: report, do not falsely undo it
                 structure_learning = {"status": "learning_error", "error": type(exc).__name__}

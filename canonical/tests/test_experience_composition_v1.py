@@ -352,10 +352,10 @@ def test_truncated_learned_grammar_does_not_claim_agreement():
 
 
 def test_expression_budget_refuses_a_more_complex_unseen_specification():
-    source = "def ref(z):\n    return 4*z\ndef target(a,b):\n    return a*b\n"
-    oracle = lambda v: 2*v[0] + 2*v[1]
+    source = "def ref(z):\n    return 8*z\ndef target(a,b):\n    return a*b\n"
+    oracle = lambda v: 4*v[0] + 4*v[1]
     plan, _ = active_plan(source, "ref", "target", oracle, ["Add"])
-    assert plan["status"] == "no_candidates"  # three additions exceed the two-node budget
+    assert plan["status"] == "no_candidates"  # seven additions exceed the six-node ceiling
 
 
 def test_stress_query_catches_one_out_of_range_specification_change():

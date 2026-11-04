@@ -28,6 +28,7 @@ from typing import Any, Callable, Iterable, Mapping
 from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
 from canonical.swe_kernel.expression_hypotheses_v1 import (
     evaluate, function_models, observed_binary_operators, same_number, supported_binary_operator_names,
+    target_expression_scope_sha256, validate_external_examples,
 )
 
 SCHEMA = "BRAIN_NOTIONS_V1"
@@ -376,8 +377,17 @@ class NotionStore:
                 or binding.get("source_sha256") != finding.get("source_sha256")
                 or {target, reference} != {finding.get("left"), finding.get("right")}
                 or review.get("decision") != "confirm" or review.get("trusted_function") != reference
+                or any(not isinstance(review.get(field), str) or not review[field].strip()
+                       for field in ("reviewer", "basis"))
                 or len(examples) < 2 or plan.get("status") != "bounded_agreement"
                 or plan.get("truncated") or plan.get("external_examples") != len(examples)):
+            return False
+        arity = finding.get("arity")
+        if type(arity) is not int or not 2 <= arity <= 4:
+            return False
+        target_arity = arity if target == finding.get("right") else 1
+        valid, _ = validate_external_examples(examples, target_arity, require_attribution=True)
+        if not valid:
             return False
         return binding.get("feedback_sha256") == self._feedback_hash(review, examples)
 
@@ -507,8 +517,11 @@ class NotionStore:
                     or hashlib.sha256(module.read_bytes()).hexdigest() != binding.get("source_sha256")):
                 return False
             text = self.render_reviewed_test(binding)
+            scope_hash = target_expression_scope_sha256(module.read_text(encoding="utf-8"), str(binding["target"]))
+            if scope_hash is None:
+                return False
             key = self._authored_test_key(root, rel_test)
-        except (OSError, ValueError, TypeError, KeyError):
+        except (OSError, ValueError, TypeError, KeyError, UnicodeError):
             return False
         if key not in self.authored_tests and len(self.authored_tests) >= MAX_FINDINGS:
             return False
@@ -516,7 +529,8 @@ class NotionStore:
         if sidecar.exists() or sidecar.is_symlink():
             return False
         self.authored_tests[key] = {"binding": dict(binding),
-                                    "test_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()}
+                                    "test_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                                    "non_target_sha256": scope_hash}
         self.save()
         destination.parent.mkdir(parents=True, exist_ok=True)
         # This workspace integrity marker carries no learned semantic content.
@@ -533,13 +547,16 @@ class NotionStore:
         return True
 
     @_serialized_update
-    def record_checked_repair(self, binding: Mapping[str, Any], candidate_source: str) -> dict[str, Any]:
-        """Record syntax from a local reviewed repair, for proposals only.
+    def record_checked_repair(self, binding: Mapping[str, Any], candidate_source: str, *,
+                              workspace_root: str | pathlib.Path | None = None,
+                              test_file: str | pathlib.Path | None = None) -> dict[str, Any]:
+        """Record syntax from a current, locally checked reviewed repair for proposals only.
 
-        The caller must call this *after* the scoped candidate was published and
-        checked; these checks are repeated here against stored attribution and
-        every example. The evidence is unauthenticated and is not verification of
-        intent. No future question is approved by remembering an operator.
+        The board calls this after publication. Recheck that the candidate is
+        actually present and that the authored test and feedback still match.
+        Local files and caller claims are unauthenticated: matching workspace
+        bytes do not prove who wrote them or that an independent verifier ran.
+        No future question is approved by remembering an operator.
         """
         if not can_write_memory():
             return {"status": "memory_policy_blocks_learning", "operators": []}
@@ -548,19 +565,45 @@ class NotionStore:
         finding = self.findings.get(fid) if isinstance(fid, str) else None
         review = self.reviews.get(fid) if isinstance(fid, str) else None
         examples = self.examples.get(fid, []) if isinstance(fid, str) else []
-        plan = self.plans.get(fid, {}) if isinstance(fid, str) else {}
         if not finding or not review or not isinstance(candidate_source, str):
             return {"status": "missing_attributed_feedback", "operators": []}
         target, reference = binding.get("target"), binding.get("reference")
-        if (not isinstance(target, str) or not isinstance(reference, str)
-                or review.get("decision") != "confirm" or review.get("trusted_function") != reference
-                or {target, reference} != {finding.get("left"), finding.get("right")}
-                or binding.get("source_sha256") != finding.get("source_sha256")
-                or binding.get("module") != finding.get("module")
-                or plan.get("status") != "bounded_agreement" or plan.get("truncated")
-                or len(examples) < 2
-                or binding.get("feedback_sha256") != self._feedback_hash(review, examples)):
+        if not self._feedback_binding_valid(binding):
             return {"status": "feedback_scope_mismatch", "operators": []}
+        if workspace_root is None or test_file is None:
+            return {"status": "workspace_evidence_missing", "operators": []}
+        try:
+            root = pathlib.Path(workspace_root).resolve(strict=True)
+            module = pathlib.PurePosixPath(str(binding["module"]))
+            if not root.is_dir() or module.is_absolute() or ".." in module.parts:
+                raise ValueError("invalid workspace scope")
+            candidate_path = (root / module).resolve(strict=True)
+            if not candidate_path.is_relative_to(root) or not candidate_path.is_file():
+                raise ValueError("candidate outside workspace")
+            if candidate_path.read_bytes() != candidate_source.encode("utf-8"):
+                return {"status": "candidate_not_current", "operators": []}
+            owed_test = pathlib.Path(test_file)
+            if not owed_test.is_absolute():
+                owed_test = root / owed_test
+            owed_test = owed_test.resolve(strict=True)
+            rel_test = owed_test.relative_to(root).as_posix()
+            key = self._authored_test_key(root, rel_test)
+            origin = self.authored_tests.get(key)
+            test_bytes = owed_test.read_bytes()
+            if (not isinstance(origin, dict) or origin.get("binding") != dict(binding)
+                    or origin.get("test_sha256") != hashlib.sha256(test_bytes).hexdigest()
+                    or self.render_reviewed_test(binding).encode("utf-8") != test_bytes):
+                return {"status": "test_origin_mismatch", "operators": []}
+            original_scope = origin.get("non_target_sha256")
+            if not isinstance(original_scope, str) or re.fullmatch(r"[0-9a-f]{64}", original_scope) is None:
+                # Older origin records cannot prove what lay outside the target.
+                return {"status": "scope_evidence_missing", "operators": []}
+            scope_hash = target_expression_scope_sha256(candidate_source, target)
+            if (hashlib.sha256(candidate_source.encode("utf-8")).hexdigest() == binding.get("source_sha256")
+                    or not scope_hash or scope_hash != original_scope):
+                return {"status": "candidate_scope_changed", "operators": []}
+        except (OSError, ValueError, TypeError, KeyError, UnicodeError):
+            return {"status": "workspace_evidence_unavailable", "operators": []}
         models = function_models(candidate_source)
         model, ref = models.get(target), models.get(reference)
         if not model or not ref:
@@ -595,7 +638,9 @@ class NotionStore:
             "candidate_sha256": hashlib.sha256(candidate_source.encode("utf-8")).hexdigest(),
             "target": target, "reference": reference, "operators": operators,
             "feedback_sha256": self._feedback_hash(review, examples),
-            "observation": "locally_checked_reviewed_repair_not_independent_verification",
+            "test_origin_key": key, "test_sha256": origin["test_sha256"],
+            "non_target_sha256": original_scope,
+            "observation": "workspace_matches_reviewed_examples_publication_not_authenticated",
         }
         self.save()
         return {"status": "recorded_for_proposals", "operators": operators, "finding_id": fid}
