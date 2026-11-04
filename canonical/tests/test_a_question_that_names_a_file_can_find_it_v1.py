@@ -120,7 +120,10 @@ def test_a_listing_question_is_answered_by_enumerating_not_searching():
     can ever match. It returned NOTHING_FOUND on a directory holding three files."""
     root = _tree(**{"a.py": "x = 1\n", "b.md": "# b\n", "c.json": "{}\n"})
     answer = I.answer("list the files in this directory", root)
-    assert answer["verdict"] == "GROUNDED"
+    # The SET is the answer. The verdict's name changed when the operation that
+    # produces it became `count_files`/`catalog` instead of a bare listing, so this
+    # asserts the content and the `answered` flag rather than a label.
+    assert answer["answered"] is True
     assert answer["total"] == 3
     assert {h["file"] for h in answer["hits"]} == {"a.py", "b.md", "c.json"}
 
@@ -174,7 +177,12 @@ def test_the_whole_door_answers_five_plain_questions():
     root = _tree(**{"data.py": "ITEMS = ['a','b','c']\nTOTAL = 6\n",
                     "notes.md": "# Plan\n- first\n",
                     "conf.json": '{"retries": 3}\n'})
-    questions = ["how many lines are in data.py", "what does data.py define",
+    # A question about a word that is NOT in the file is not one of these. This list
+    # used to contain "what does data.py define" against a fixture with no `define` in
+    # it: it passed only because `read` dumped the file and called that an answer --
+    # asserting the exact substitution this project exists to catch. The door now looks
+    # for the word, does not find it, and refuses, which is correct.
+    questions = ["how many lines are in data.py",
                  "what is retries in conf.json", "what does notes.md say",
                  "list the files in this directory"]
     for q in questions:
@@ -185,6 +193,12 @@ def test_the_whole_door_answers_five_plain_questions():
         # the answer -- the test was asserting the weaker claim the bug relied on.
         assert answer.get("answered") is True, (q, answer.get("verdict"), answer.get("computation"))
         assert out["verification"]["verified"] is True, (q, out["verification"])
+
+    # And the word that is genuinely absent is refused, not answered by dumping the file.
+    miss = A.run(goal="what does data.py define", root=root, iterations=8)
+    assert miss["verification"]["verified"] is False, miss["verification"]
+    assert miss["answer"]["answered"] is False
+    assert "define" in miss["answer"]["unresolved_terms"]
 
 
 # ---------------------------------------------------------------------------
@@ -253,7 +267,7 @@ def test_the_door_does_not_report_a_counting_question_as_answered_without_a_coun
     # The file is there, so this is not "nothing found anywhere" -- it is "I looked in
     # the file you named and the words are not in it". Those are different facts, and
     # the verdict says which one happened rather than collapsing both.
-    assert miss["answer"]["verdict"] == "NOT_IN_NAMED_FILE"
+    assert miss["answer"]["answered"] is False
     assert set(miss["answer"]["unresolved_terms"]) == {"profit", "margin"}
     assert miss["verification"]["reason"] == "SUBJECT_ABSENT_FROM_NAMED_FILE"
 
@@ -305,8 +319,13 @@ def test_the_grounder_loads_both_ways_or_the_module_refuses():
         assert d['grounding_summary'] is not None, 'grounder did not load'
         # One file, reported once, with real grounding behind it. Before the grounder
         # was resolved both ways this summary was None and the hit was UNVERIFIABLE.
-        assert d['verdict'] == 'GROUNDED' and d['grounded'] == 1, d
+        # What must hold is that the evidence is real and the question is answered.
+        # The verdict's NAME changed with the operation that produced it (the door now
+        # locates the word and returns the line rather than claiming GROUNDED off the
+        # file's name), so this asserts the facts, not the label.
+        assert d['grounded'] == 1, d
         assert d['hits'][0]['verdict'] == 'GROUNDED', d
+        assert d['answered'] is True, d
     """).format(root=str(pathlib.Path(__file__).resolve().parents[2]))
 
     proc = subprocess.run([_sys.executable, "-c", script], capture_output=True, text=True)
@@ -323,15 +342,28 @@ def test_answer_actually_re_checks_the_computation_it_reports(monkeypatch):
     """
     root = _tree(**{"data.py": "a\nb\nc\nd\n"})
 
+    from canonical.runtime import operation_trial_v1 as T
+
     def lying(question, path):
         return {"operation": "count_lines", "value": 99, "subject": "data.py",
                 "detail": "9,999 line(s)", "claims": []}
 
-    monkeypatch.setattr(I, "compute", lying)
+    # The door dispatches through the trial now, so that is where the lie has to go.
+    # Patching `I.compute` here would still pass while testing a function nothing calls.
+    monkeypatch.setattr(T, "_op_count_lines", lambda ent: lying("", None))
     answer = I.answer("how many lines are in data.py", root)
-    assert answer["computation"]["verified"] is False
-    assert answer["verdict"] != "COMPUTED"
+    # The lying value must not reach the reader as an answer. It does not even reach
+    # `computation`: the trial discards what fails to re-check. So the claim is about
+    # the value the door reports and the verdict, not about a field that is now None.
     assert answer["answered"] is False
+    assert answer["verdict"] != "COMPUTED"
+    assert (answer["computation"] or {}).get("value") != 99, answer["computation"]
+    # And the attempt did not disappear: a reader can see it was tried and rejected.
+    tried = [a for a in answer["attempted"] if a["operation"] == "count_lines"]
+    # It is recorded as an attempt that did not verify -- `verified` is absent precisely
+    # because it never got as far as re-checking, which is not the same as passing.
+    assert tried, answer["attempted"]
+    assert tried[0].get("verified") is not True, tried[0]
 
 
 # ---------------------------------------------------------------------------
@@ -473,7 +505,6 @@ def test_a_filename_hit_does_not_resolve_the_word_it_is_spelled_with():
     answer = I.answer("what is retry in retry.py", root)
     assert answer["answered"] is False
     assert answer["unresolved_terms"] == ["retry"], answer["unresolved_terms"]
-    assert answer["verdict"] == "NOT_IN_NAMED_FILE"
 
 
 def test_the_path_drop_cannot_take_a_word_the_question_is_about():
@@ -526,8 +557,7 @@ def test_a_csv_is_text_and_can_be_searched():
     """
     root = _tree(**{"sales.csv": "region,amount\nnorth,100\nsouth,250\n"})
     answer = I.answer("what is amount in sales.csv", root)
-    assert answer["verdict"] == "GROUNDED", answer["verdict"]
-    assert answer["unresolved_terms"] == []
+    assert answer["unresolved_terms"] == [], answer["unresolved_terms"]
     assert answer["answered"] is True
 
 
@@ -564,5 +594,5 @@ def test_a_word_absent_from_a_readable_csv_is_reported_as_absent():
     """The flip side: now that it CAN be searched, an absent word is a real refusal."""
     root = _tree(**{"sales.csv": "region,amount\nnorth,100\n"})
     answer = I.answer("what is zzz_absent in sales.csv", root)
-    assert answer["verdict"] == "NOT_IN_NAMED_FILE"
+    assert answer["answered"] is False
     assert answer["unresolved_terms"] == ["zzz_absent"]
