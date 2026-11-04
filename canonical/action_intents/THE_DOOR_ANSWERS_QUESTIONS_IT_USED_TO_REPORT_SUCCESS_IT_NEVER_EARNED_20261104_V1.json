@@ -160,6 +160,77 @@
     },
     "obs_goal": {
       "real_outcome": "FRONT_DOOR_ANSWERS_PLAIN_QUESTIONS_WITH_CHECKABLE_ANSWERS_AND_REFUSES_HONESTLY"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/inspect_v1.py",
+        "canonical/runtime/autonomous_v1.py",
+        "canonical/runtime/grounding_v1.py",
+        "canonical/runtime/regression_sweep_v1.py",
+        "canonical/runtime/explore_v1.py",
+        "canonical/runtime/capability_self_verification_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__THE_DOOR_AND_EVERY_MODULE_IT_NEEDS_WERE_ALREADY_IN_THE_TREE__THE_DEFECT_WAS_TRACEABLE_BY_CALLING_RUN_ON_A_TEMPORARY_DIRECTORY"
+      ],
+      "capability_work_deleted": [
+        "BUILDING_ANOTHER_SELF_VERIFICATION_INSTRUMENT_TO_MEASURE_INTELLIGENCE",
+        "TREATING_A_VERDICT_VOCABULARY_WITH_ONE_WORD_FOR_TWO_CLAIMS_AS_GOOD_ENOUGH"
+      ],
+      "surviving_gap": "QUESTIONS_NEEDING_ARITHMETIC_OVER_MORE_THAN_LINES_ROWS_FILES_AND_ARITHMETIC_NEEDING_A_MODEL_TO_INTERPRET_EVIDENCE_REMAIN_OUTSIDE_THE_DOOR_AND_ARE_NOT_CLAIMED_HERE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__THE_DOOR_REPORTED_GROUNDED_VERIFIED_TRUE_FOR_how_many_lines_are_in_data_py_WITH_NO_NUMBER_IN_THE_ANSWER__ONE_VERDICT_WORD_COVERED_BOTH_THE_EVIDENCE_IS_REAL_AND_THE_QUESTION_IS_ANSWERED",
+      "surviving_causal_blocker": "A_FRONT_DOOR_THAT_REPORTS_SUCCESS_IT_NEVER_EARNED_CANNOT_BE_IMPROVED_BY_MEASURING_IT_HARDER_BECAUSE_THE_MEASUREMENT_INHERITS_THE_SAME_FALSE_PASS",
+      "delete_bypass_substitute_options": [
+        "DELETE_THE_SKIP_THAT_NEVER_SEARCHED_A_FILE_WHOSE_NAME_MATCHED",
+        "BYPASS_THE_CITATION_BY_COMPUTING_THE_COUNT_AND_RECHECKING_IT_AGAINST_THE_FILE",
+        "SUBSTITUTE_EXISTENCE_GROUNDING_FOR_THE_EMPTY_TEXT_CLAIM_THAT_REFUSED_EVERY_NAME_HIT"
+      ]
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "FIX_THE_EXISTING_DOOR_AND_MEASURE_IT_THROUGH_AUTONOMOUS_V1_RUN__SELECTED",
+        "BUILD_A_THIRD_SELF_VERIFICATION_INSTRUMENT__REJECTED",
+        "ADD_A_MODEL_TO_INTERPRET_THE_EVIDENCE__REJECTED",
+        "LEAVE_THE_DOOR_AND_ONLY_ADD_TESTS__REJECTED"
+      ],
+      "losing_routes_reason": "MEASUREMENT_ALWAYS_SUCCEEDS_AND_FLATTERS__AND_A_MODEL_IN_THE_PRODUCER_PATH_VIOLATES_THE_ZERO_MODEL_DEPENDENCY_BOUNDARY_THE_MISSION_LOCK_REQUIRES",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NINE_PLAIN_QUESTIONS_THROUGH_THE_PUBLIC_DOOR_SIX_ANSWERED_THREE_REFUSED__TWENTY_FIVE_PAIRED_POSITIVE_AND_NEGATIVE_CONTROL_TESTS_UNDER_TRUE_CAPABILITY_TEST_LAW_V1__SIX_MUTATIONS_EACH_CAUGHT__ONE_MUTATION_SURVIVED_A_FIRST_PASS_AND_EXPOSED_A_TEST_THAT_PROVED_THE_CHECKER_COULD_REJECT_BUT_NOT_THAT_ANSWER_CALLED_IT__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "SPLIT_VERDICT_FIELDS_answered_AND_all_grounded_SUPERSEDE_THE_SINGLE_GROUNDED_WORD",
+        "COMPUTED_READ_READ_INCOMPLETE_AND_LOCATED_NOT_COMPUTED_SUPERSEDE_CITING_THE_FILE_AS_THE_ANSWER"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "inspect_v1.find_LISTING_AND_CONTENT_READ_SHARE_ONE_named_file_RESOLVER",
+        "autonomous_v1_QUESTION_ROUTE_NOW_REPORTS_answered_RATHER_THAN_EVIDENCE_GROUNDED"
+      ],
+      "fresh_reuse_plan": "EVERY_LATER_QUESTION_ROUTE_THROUGH_AUTONOMOUS_V1_run_INHERITS_THE_ANSWER_VERSUS_EVIDENCE_SPLIT_AND_THE_RECOMPUTED_COMPUTATION"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "SIX_MUTATIONS_REPLAYED_FROM_ONE_SAVED_COPY_OF_THE_MODULE_INSTEAD_OF_HAND_EDITING_BETWEEN_RUNS",
+        "THE_117_CASE_REGRESSION_SWEEP_REUSED_AS_THE_REGISTERED_ORACLE_RATHER_THAN_WRITING_A_NEW_ONE"
+      ],
+      "search_stop_decision": "STOP_WHEN_SIX_ANSWER_AND_THREE_REFUSE_THROUGH_THE_PUBLIC_DOOR_AND_EVERY_MUTATION_IS_CAUGHT__THEN_FIND_THE_NEXT_QUESTION_IT_CANNOT_ANSWER",
+      "affected_layers_only_on_revalidation": true
     }
   },
   "next_step": "ASK_THE_SAME_NINE_QUESTIONS_OF_AN_UNSEEN_TREE_AND_OF_THE_REPOSITORY_ITSELF_AND_CONFIRM_THE_REFUSALS_STILL_REFUSE__THEN_FIND_THE_NEXT_QUESTION_IT_CANNOT_ANSWER",
