@@ -439,7 +439,8 @@ def solve_or_learn(
     from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
 
     with memory_policy_scope(READ_WRITE if learn else OFF):
-        return _solve_or_learn_impl(
+        t0_wrap = perf_counter_ns()
+        res = _solve_or_learn_impl(
             request,
             learn=bool(learn and can_read_memory()),
             registry_path=registry_path,
@@ -452,6 +453,23 @@ def solve_or_learn(
             record_open_gap=bool(record_open_gap and learn and can_read_memory()),
             confinement_admitted=confinement_admitted,
         )
+        if learn and can_read_memory() and isinstance(res, dict):
+            try:
+                from canonical.swe_kernel.sentient_cognitive_core_v1 import shared_cognitive_core
+
+                core = shared_cognitive_core(None)
+                g_txt = request if isinstance(request, str) else str(request.get("goal") or "")
+                t_id = "autonomous-solve" if isinstance(request, str) else str(request.get("task_id") or "autonomous-solve")
+                core.record_wake_episode(
+                    task_id=t_id,
+                    goal=g_txt,
+                    outcome_pass=bool(res.get("pass") is True),
+                    route_id=str(res.get("tier_used") or res.get("status") or "solve_or_learn"),
+                    elapsed_ms=max(0.05, (perf_counter_ns() - t0_wrap) / 1e6),
+                )
+            except Exception:
+                pass
+        return res
 
 
 def _solve_or_learn_impl(

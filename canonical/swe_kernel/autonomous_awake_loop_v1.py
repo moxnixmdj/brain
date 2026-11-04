@@ -1730,6 +1730,22 @@ class AwakeAgencyDaemon:
         t0 = time.perf_counter()
         self.cycle_count += 1
         sensed = self.sense_reality()
+        try:
+            og = getattr(self.cognitive_core, "organ_graph", None)
+            if og is not None:
+                import json as _json
+
+                blob = _json.dumps(
+                    {
+                        "cycle": int(self.cycle_count),
+                        "blocked": list(sensed.get("blocked_commands") or [])[:4],
+                    },
+                    separators=(",", ":"),
+                )
+                og.perceive_or_synthesize_reader(blob, format_tag="awake_sense_json")
+                og.evolve_policy_from_traces()
+        except Exception:
+            pass
         failing_pairs = self._sense_failing_workspace_tests()
         has_tests = bool(failing_pairs) or bool(self._test_health_cache)
         ctx_feats: list[str] = ["awake-workspace"]

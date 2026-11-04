@@ -18,40 +18,8 @@
       ],
       "admissible_count": 12,
       "case": "2x from 3 points",
-      "chosen": "return ((x / 1) + x)",
+      "chosen": "return ((2 / 1) * x)",
       "disagreements": [
-        {
-          "against": "return ((x / 1) * 2)",
-          "witness": null
-        },
-        {
-          "against": "return ((x * 2) / 1)",
-          "witness": null
-        },
-        {
-          "against": "return ((2 / 1) * x)",
-          "witness": null
-        },
-        {
-          "against": "return (x + (x / 1))",
-          "witness": null
-        },
-        {
-          "against": "return (x / (1 / 2))",
-          "witness": null
-        },
-        {
-          "against": "return (x // (1 / 2))",
-          "witness": null
-        },
-        {
-          "against": "return (x * (2 / 1))",
-          "witness": null
-        },
-        {
-          "against": "return (2 * (x / 1))",
-          "witness": null
-        },
         {
           "against": "return (2 / (1 / x))",
           "witness": null
@@ -60,29 +28,19 @@
           "against": "return (2 // (1 / x))",
           "witness": {
             "args": [
-              -3
+              -3.5
             ],
-            "value_a": "-6.0",
-            "value_b": "-7.0"
+            "value_a": "-7.0",
+            "value_b": "-8.0"
           }
-        },
-        {
-          "against": "return (x - (x / -1))",
-          "witness": null
         }
       ],
-      "status": "PROVISIONAL"
-    },
-    {
-      "admissible": [
-        "return ((x / 1) + x)",
-        "return ((x / 1) * 2)",
-        "return ((x * 2) / 1)",
-        "return ((2 / 1) * x)"
+      "explanation_count": 3,
+      "group_sizes": [
+        10,
+        1,
+        1
       ],
-      "admissible_count": 4,
-      "case": "2x + zero point",
-      "chosen": "return ((x / 1) + x)",
       "status": "PROVISIONAL"
     },
     {
@@ -95,11 +53,144 @@
         "return (x - (x / -1))",
         "return (x / (1 / 2))",
         "return (x // (1 / 2))",
-        "return (x * (2 / 1))"
+        "return (x * (2 / 1))",
+        "return (2 * (x / 1))",
+        "if not x:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if (x != 0):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nreturn (2 / (1 / x))",
+        "if (x > 1):\n    return (2 / (1 / x))\nreturn ((x and 2) / 1)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if not x:\n    return (x / 1)\nelif x == 1:\n    return (2 / x)\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif x % 2 == 0:\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif (x != 1):\n    return (2 / (1 / x))\nreturn (2 / x)",
+        "if not x:\n    return (x / 1)\nelif (x <= 1):\n    return (2 / x)\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif (x > 1):\n    return (2 / (1 / x))\nreturn (2 / x)",
+        "if not x:\n    return (x / 1)\nelif (x == 2):\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif (x != 2):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if not x:\n    return (x / 1)\nelif (x <= 2):\n    return (2 / (1 / x))\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif (x > 2):\n    return (2 / (1 / x))\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif ((x % 2) != 0):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if not x:\n    return (x / 1)\nelif ((x or 100) <= 2):\n    return (2 / (1 / x))\nreturn (2 / (1 / x))",
+        "if not x:\n    return (x / 1)\nelif ((x or 100) > 2):\n    return (2 / (1 / x))\nreturn (2 / (1 / x))",
+        "if x == 1:\n    return (2 / x)\nelif not x:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if x == 1:\n    return (2 / x)\nelif x % 2 == 0:\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if x == 1:\n    return (2 / x)\nelif (x != 0):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if x == 1:\n    return (2 / x)\nelif (x <= 1):\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if x == 1:\n    return (2 / x)\nelif (x > 1):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if x == 1:\n    return (2 / x)\nelif (x <= 2):\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if x == 1:\n    return (2 / x)\nelif (x > 2):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if x == 1:\n    return (2 / x)\nelif ((x % 2) != 0):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif x == 1:\n    return (2 / x)\nreturn (2 / (1 / x))",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif (x != 1):\n    return (2 / (1 / x))\nreturn (2 / x)",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif (x <= 1):\n    return (2 / x)\nreturn (2 / (1 / x))",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif (x > 1):\n    return (2 / (1 / x))\nreturn (2 / x)",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif (x <= 2):\n    return (2 / x)\nreturn (2 / (1 / x))",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif (x > 2):\n    return (2 / (1 / x))\nreturn (2 / x)",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif ((x or 100) <= 2):\n    return (2 / x)\nreturn (2 / (1 / x))",
+        "if x % 2 == 0:\n    return ((x / 1) * x)\nelif ((x or 100) > 2):\n    return (2 / (1 / x))\nreturn (2 / x)",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif x % 2 == 0:\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif (x == 2):\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif (x != 2):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif (x <= 2):\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif (x > 2):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif ((x % 2) != 0):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif ((x or 100) <= 2):\n    return ((x / 1) * x)\nreturn (2 / (1 / x))",
+        "if (x <= 1):\n    return ((x and 2) / 1)\nelif ((x or 100) > 2):\n    return (2 / (1 / x))\nreturn ((x / 1) * x)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif not x:\n    return (x / 1)\nreturn (2 / x)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif x == 1:\n    return (2 / x)\nreturn (x / 1)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif x % 2 == 0:\n    return (x / 1)\nreturn (2 / x)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif (x != 0):\n    return (2 / x)\nreturn (x / 1)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif (x != 1):\n    return (x / 1)\nreturn (2 / x)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif ((x % 2) != 0):\n    return (2 / x)\nreturn (x / 1)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif ((x or 100) <= 2):\n    return (2 / x)\nreturn (x / 1)",
+        "if (x > 1):\n    return (2 / (1 / x))\nelif ((x or 100) > 2):\n    return (x / 1)\nreturn (2 / x)",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif not x:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif x % 2 == 0:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif (x != 0):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif (x <= 1):\n    return ((x and 2) / 1)\nreturn (2 / (1 / x))",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif (x > 1):\n    return (2 / (1 / x))\nreturn ((x and 2) / 1)",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif (x <= 2):\n    return ((x and 2) / 1)\nreturn (2 / (1 / x))",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif (x > 2):\n    return (2 / (1 / x))\nreturn ((x and 2) / 1)",
+        "if (x == 2):\n    return ((x / 1) * x)\nelif ((x % 2) != 0):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif not x:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif x == 1:\n    return (2 / x)\nreturn ((x / 1) * x)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif x % 2 == 0:\n    return ((x / 1) * x)\nreturn (2 / x)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif (x != 0):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif (x != 1):\n    return ((x / 1) * x)\nreturn (2 / x)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif (x <= 1):\n    return ((x and 2) / 1)\nreturn ((x / 1) * x)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif (x > 1):\n    return ((x / 1) * x)\nreturn ((x and 2) / 1)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif (x == 2):\n    return ((x / 1) * x)\nreturn ((x and 2) / 1)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif (x != 2):\n    return ((x and 2) / 1)\nreturn ((x / 1) * x)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif ((x % 2) != 0):\n    return (2 / x)\nreturn ((x / 1) * x)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif ((x or 100) <= 2):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if (x > 2):\n    return (2 / (1 / x))\nelif ((x or 100) > 2):\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif not x:\n    return (x / 1)\nreturn ((x / 1) * x)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif (x != 0):\n    return ((x / 1) * x)\nreturn (x / 1)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif (x <= 1):\n    return (x / 1)\nreturn ((x / 1) * x)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif (x > 1):\n    return ((x / 1) * x)\nreturn (x / 1)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif (x == 2):\n    return ((x / 1) * x)\nreturn (x / 1)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif (x != 2):\n    return (x / 1)\nreturn ((x / 1) * x)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif ((x or 100) <= 2):\n    return ((x / 1) * x)\nreturn (x / 1)",
+        "if ((x % 2) != 0):\n    return (2 / (1 / x))\nelif ((x or 100) > 2):\n    return (x / 1)\nreturn ((x / 1) * x)",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif not x:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif x % 2 == 0:\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif (x != 0):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif (x <= 1):\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif (x > 1):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif (x <= 2):\n    return (x / 1)\nreturn (2 / (1 / x))",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif (x > 2):\n    return (2 / (1 / x))\nreturn (x / 1)",
+        "if ((x or 100) <= 2):\n    return (2 / (1 / x))\nelif ((x % 2) != 0):\n    return (2 / (1 / x))\nreturn (x / 1)"
       ],
-      "admissible_count": 9,
+      "admissible_count": 96,
+      "case": "2x + zero point",
+      "chosen": "return ((2 / 1) * x)",
+      "explanation_count": 17,
+      "group_sizes": [
+        34,
+        10,
+        6,
+        6,
+        4,
+        4,
+        2,
+        4,
+        2,
+        6,
+        2,
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "admissible": [
+        "return ((x / 1) + x)",
+        "return ((x / 1) * 2)",
+        "return ((x * 2) / 1)",
+        "return ((2 / 1) * x)",
+        "return (x + (x / 1))",
+        "return (x - (x / -1))",
+        "return (x / (1 / 2))",
+        "return (x // (1 / 2))",
+        "return (x * (2 / 1))",
+        "return (2 * (x / 1))",
+        "return (2 / (1 / x))",
+        "return (2 // (1 / x))"
+      ],
+      "admissible_count": 12,
       "case": "powers-of-two trap",
-      "chosen": "return ((x / 1) + x)",
+      "chosen": "return ((2 / 1) * x)",
+      "explanation_count": 3,
+      "group_sizes": [
+        10,
+        1,
+        1
+      ],
       "status": "PROVISIONAL"
     }
   ],
@@ -119,40 +210,70 @@
     },
     {
       "id": "one_answer_buys_information",
-      "pass": true,
+      "pass": false,
       "question": "does answering the disagreement point shrink the admissible set?",
       "trajectory": [
         {
           "admissible": 12,
-          "asked_at": -3,
-          "chosen": "return ((x / 1) + x)",
+          "asked_at": -3.5,
+          "chosen": "return ((2 / 1) * x)",
           "examples": 3,
+          "explanations": 3,
           "status": "PROVISIONAL",
           "step": 0
         },
         {
-          "admissible": 3,
-          "chosen": "return ((x / 1) + x)",
+          "admissible": 61,
+          "asked_at": -3,
+          "chosen": "return ((2 / 1) * x)",
           "examples": 4,
+          "explanations": 19,
           "status": "PROVISIONAL",
-          "step": 1,
-          "stopped": "the remaining bodies are syntactically distinct but agree on every probe this module can formulate; no question here would separate them"
+          "step": 1
+        },
+        {
+          "admissible": 11,
+          "asked_at": 0,
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 5,
+          "explanations": 2,
+          "status": "PROVISIONAL",
+          "step": 2
+        },
+        {
+          "admissible": 266,
+          "asked_at": -2,
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 6,
+          "explanations": 37,
+          "status": "PROVISIONAL",
+          "step": 3
+        },
+        {
+          "admissible": 386,
+          "asked_at": -0.5,
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 7,
+          "explanations": 25,
+          "status": "PROVISIONAL",
+          "step": 4
         }
       ]
     },
     {
       "final": {
-        "admissible": 3,
-        "chosen": "return ((x / 1) + x)",
-        "examples": 4,
+        "admissible": 386,
+        "asked_at": -0.5,
+        "chosen": "return ((2 / 1) * x)",
+        "examples": 7,
+        "explanations": 25,
         "status": "PROVISIONAL",
-        "step": 1,
-        "stopped": "the remaining bodies are syntactically distinct but agree on every probe this module can formulate; no question here would separate them"
+        "step": 4
       },
       "id": "the_loop_stops_when_asking_stops_helping",
-      "pass": true,
+      "pass": false,
       "question": "does it terminate instead of asking forever?",
-      "terminated": true
+      "terminated": false
     },
     {
       "admissible": [
@@ -164,13 +285,104 @@
         "return (x - (x / -1))",
         "return (x / (1 / 2))",
         "return (x // (1 / 2))",
-        "return (x * (2 / 1))"
+        "return (x * (2 / 1))",
+        "return (2 * (x / 1))",
+        "return (2 / (1 / x))",
+        "return (2 // (1 / x))"
       ],
       "case": "powers-of-two trap",
       "id": "uniqueness_is_not_truth",
       "note": "DETERMINED would mean the budget contained one answer, never that the answer is true",
       "pass": true,
       "question": "can exactly one admissible body still be the wrong function?"
+    },
+    {
+      "explanations": 3,
+      "group_sizes": [
+        10,
+        1,
+        1
+      ],
+      "id": "programs_collapse_to_explanations",
+      "pass": true,
+      "programs": 12,
+      "question": "are the 12 admissible programs really 12 different ideas?"
+    },
+    {
+      "id": "one_answer_leaves_one_explanation",
+      "pass": false,
+      "question": "does the interrogation terminate with a single idea left?",
+      "trajectory": [
+        [
+          0,
+          12,
+          3,
+          "PROVISIONAL"
+        ],
+        [
+          1,
+          61,
+          19,
+          "PROVISIONAL"
+        ],
+        [
+          2,
+          11,
+          2,
+          "PROVISIONAL"
+        ],
+        [
+          3,
+          266,
+          37,
+          "PROVISIONAL"
+        ],
+        [
+          4,
+          386,
+          25,
+          "PROVISIONAL"
+        ]
+      ]
+    },
+    {
+      "at_bank_5000": {
+        "bank": 5000,
+        "complete": true,
+        "explanations": 3,
+        "programs": 12
+      },
+      "at_bank_900": {
+        "bank": 900,
+        "complete": false,
+        "explanations": 1,
+        "programs": 9
+      },
+      "id": "truncation_created_the_three_point_certainty",
+      "note": "if this ever stops differing, the merge changed the enumeration again and every count in this module needs re-deriving",
+      "pass": true,
+      "question": "was `2x` DETERMINED from three points an artefact of the candidate budget?"
+    },
+    {
+      "after": 96,
+      "before": 12,
+      "id": "an_observation_can_enlarge_the_hypothesis_space",
+      "note": "measured 12 -> 96. The search harvests constants from the data, so the space is a function of the evidence; a rising count is not a loss of knowledge, and a falling one would not have been a gain. counts are only comparable under a FIXED alphabet and a COMPLETE sweep, which is what `collapse_with_answer` enforces.",
+      "pass": true,
+      "question": "can a true observation increase the number of admissible programs?"
+    },
+    {
+      "caught_now": true,
+      "consequence": "the probe range must include fractions, or the grouping merges bodies that are not the same explanation",
+      "constructed": {
+        "a": "x ** 2",
+        "agree_on_integers": true,
+        "b": "int(x) * int(x)",
+        "differ_at": "x = 1.5 -> 2.25 vs 1.0"
+      },
+      "id": "grouping_is_bounded_by_the_probe_range",
+      "pass": true,
+      "question": "can two bodies agree on every integer probe and still differ?"
     },
     {
       "id": "ambiguous_answers_are_marked_not_silent",
@@ -186,10 +398,8 @@
     "that preferring the cheapest body is justified by the data; it is a stated preference and is reported separately from evidence -- and measured here, eleven of twelve admissible bodies tie on cost, so simplicity resolved nothing",
     "that the interrogation loop reaches the truth; it removes explanations, and the values it asks for were supplied by the benchmark, which is playing the oracle"
   ],
-  "passed": 6,
+  "passed": 8,
   "schema": "PROJECT_BRAIN_EVIDENCE_DEMAND_V1_BENCHMARK",
-  "superseded_by": "EVIDENCE_DEMAND_20261104_V2.json",
-  "superseded_reason": "V1 counted admissible PROGRAMS and called them explanations: 12 for the 2x case, when 10 of the 12 are one function spelled differently. V2 groups by behavioural signature and reports 12 programs -> 3 explanations, with the grouping bounded by an explicit probe range (now including fractions).",
-  "total": 6,
+  "total": 11,
   "truth_achieved": false
 }

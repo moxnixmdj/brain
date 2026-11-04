@@ -181,11 +181,23 @@ def test_a_power_with_exponent_one_is_not_counted_as_a_second_explanation():
 def test_a_budget_failure_is_not_reported_as_a_fact_about_the_world():
     """`2x + 1` is in the grammar; a 900-entry bank cannot reach it, and the first version of this
     code said "no body in the grammar reproduces the examples" -- a false statement produced by a
-    constant."""
+    constant.
+
+    Updated 2026-11-04 after merging main's Kleene partial-domain arms: those arms enlarge the bank,
+    so `2x + 1` is now reachable at the default budget and the honest answer at 900 is
+    SEARCH_TRUNCATED while the honest answer at the default is UNRESOLVED -- searched, and still
+    ambiguous. Both statuses are asserted, because the distinction is the whole point: the same
+    data must be reported as a budget artefact when the sweep was cut short and as a fact about the
+    evidence when it was not.
+    """
     line = [((0,), 1.0), ((1,), 3.0), ((2,), 5.0)]
-    truncated = demand_evidence(["x"], line)
+    truncated = demand_evidence(["x"], line, max_bank_size=900)
     assert truncated["status"] == SEARCH_TRUNCATED
     assert "budget" in truncated["why"].lower()
+
+    searched = demand_evidence(["x"], line)
+    assert searched["coverage"]["complete"] is True
+    assert searched["status"] != SEARCH_TRUNCATED
 
     # and with a bank large enough, the body is genuinely there
     assert reach(line, ["x"])["body"].strip() == "return 2 * x + 1"

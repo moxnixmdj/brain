@@ -2,11 +2,13 @@
   "authority": "NONE",
   "findings": [
     {
+      "falsified_on": "2026-11-04, by the merge with origin/main",
       "id": "truthful_oracle_settles_in_one_question",
-      "pass": true,
+      "pass": false,
       "question": "with a truthful oracle does the loop reach DETERMINED in a single question?",
-      "questions_asked": 1,
-      "status": "DETERMINED"
+      "questions_asked": 5,
+      "status": "PROVISIONAL",
+      "why": "pre-registered against a bank that truncated at 900. At a complete sweep the three `2x` points admit THREE explanations, not one, so no truthful answer reaches DETERMINED in one step -- the prediction was measuring the budget, not the creature. Kept as a failure; the corrected claim is that a truthful answer removes every body that predicted otherwise, which is what `test_asking_removes_every_body_that_predicted_otherwise` asserts"
     },
     {
       "id": "impossible_answer_is_refuted_not_unresolved",
@@ -27,12 +29,12 @@
           "asked_at": [
             -3.5
           ],
-          "chosen": "",
+          "chosen": "if x <= 0:\n    return ((1 // x) + 100)\nreturn ((x / 1) + x)",
           "examples": 4,
-          "explanations": null,
+          "explanations": 16,
           "observed": 99.0,
           "predicted_by_chosen": -7.0,
-          "programs": 0,
+          "programs": 50,
           "status": "REFUTED",
           "step": 1,
           "suspects": {
@@ -153,7 +155,7 @@
       ]
     }
   ],
-  "passed": 9,
+  "passed": 8,
   "runs": {
     "blame": {
       "authority": "NONE",
@@ -238,12 +240,12 @@
           "asked_at": [
             -3.5
           ],
-          "chosen": "",
+          "chosen": "if x <= 0:\n    return ((1 // x) + 100)\nreturn ((x / 1) + x)",
           "examples": 4,
-          "explanations": null,
+          "explanations": 16,
           "observed": 99.0,
           "predicted_by_chosen": -7.0,
-          "programs": 0,
+          "programs": 50,
           "status": "REFUTED",
           "step": 1,
           "suspects": {
@@ -310,16 +312,16 @@
     },
     "truthful": {
       "authority": "NONE",
-      "chosen": "return ((x * 2) / 1)",
-      "examples": 4,
-      "explanations": 1,
+      "chosen": "return ((2 / 1) * x)",
+      "examples": 8,
+      "explanations": 20,
       "params": [
         "x"
       ],
-      "programs": 3,
-      "questions_asked": 1,
+      "programs": 304,
+      "questions_asked": 5,
       "schema": "PROJECT_BRAIN_OBSERVATION_REFUTATION_V1",
-      "status": "DETERMINED",
+      "status": "PROVISIONAL",
       "trajectory": [
         {
           "chosen": "return ((2 / 1) * x)",
@@ -333,14 +335,66 @@
           "asked_at": [
             -3.5
           ],
-          "chosen": "return ((x * 2) / 1)",
+          "chosen": "return ((2 / 1) * x)",
           "examples": 4,
-          "explanations": 1,
+          "explanations": 19,
           "observed": -7.0,
           "predicted_by_chosen": -7.0,
-          "programs": 3,
-          "status": "DETERMINED",
+          "programs": 61,
+          "status": "PROVISIONAL",
           "step": 1
+        },
+        {
+          "asked_at": [
+            -3
+          ],
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 5,
+          "explanations": 2,
+          "observed": -6.0,
+          "predicted_by_chosen": -6.0,
+          "programs": 11,
+          "status": "PROVISIONAL",
+          "step": 2
+        },
+        {
+          "asked_at": [
+            0
+          ],
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 6,
+          "explanations": 37,
+          "observed": 0.0,
+          "predicted_by_chosen": 0.0,
+          "programs": 266,
+          "status": "PROVISIONAL",
+          "step": 3
+        },
+        {
+          "asked_at": [
+            -2
+          ],
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 7,
+          "explanations": 25,
+          "observed": -4.0,
+          "predicted_by_chosen": -4.0,
+          "programs": 386,
+          "status": "PROVISIONAL",
+          "step": 4
+        },
+        {
+          "asked_at": [
+            -0.5
+          ],
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 8,
+          "explanations": 20,
+          "observed": -1.0,
+          "predicted_by_chosen": -1.0,
+          "programs": 304,
+          "status": "PROVISIONAL",
+          "step": 5
         }
       ]
     }

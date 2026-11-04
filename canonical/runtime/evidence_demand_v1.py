@@ -45,7 +45,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from canonical.runtime.generalization_check_v1 import _compile_body  # noqa: E402
+from canonical.runtime.generalization_check_v1 import _compile_body, _split_body  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_EVIDENCE_DEMAND_V1"
 
@@ -66,6 +66,8 @@ SEARCH_TRUNCATED = "SEARCH_TRUNCATED"
 # 2026-11-04: `x ** 2` and `int(x) * int(x)` agree at EVERY integer probe in the original list and
 # differ at x = 1.5 (2.25 vs 1.0). Fractional and negative-fractional probes were added for that
 # reason -- a grouping claim is only as good as the range it was computed on.
+_RAISED = object()
+
 DISAMBIGUATING_PROBES = (-5, -3.5, -3, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 7,
                          10, 12, 20)
 
@@ -92,15 +94,41 @@ def _fits(body: str, params: Sequence[str], examples: Sequence[Any]) -> bool:
     return True
 
 
-def _normalise_body(body: str) -> str:
-    """Collapse helper defs and whitespace so two spellings of one program count once.
+def _body_key(body: str) -> str:
+    """A COMPARISON key: whitespace-insensitive, so two spellings of one program count once.
 
     Without this, the same expression reached by two different search routes is counted as two
-    explanations, and every answer looks ambiguous.
+    explanations and every answer looks ambiguous.
     """
     lines = [line.strip() for line in body.splitlines() if line.strip()]
     outer = [line for line in lines if not line.startswith("def ")]
     return " | ".join(outer)
+
+
+def _normalise_body(body: str) -> str:
+    """The PROGRAM, not a key for it. Returns the body with indentation preserved.
+
+    MEASURED BUG, fixed 2026-11-04: this used to return `_body_key(body)`, i.e. every body was
+    rewritten with its newlines replaced by " | ". Harmless for a single-expression body, fatal for
+    a multi-line one -- and it turned every piecewise explanation into a `SyntaxError` once the merge
+    with main's partial-domain arms made piecewise bodies actually reachable. The report then listed
+    19 "explanations" of which 17 could not be executed: an enumeration of programs that are not
+    programs.
+
+    A key and a program are different objects. Conflating them was silent because the key is a valid
+    STRING either way.
+    """
+    helpers, outer = _split_helpers(body)
+    return "\n".join(helpers + outer) if helpers else "\n".join(outer)
+
+
+def _split_helpers(body: str) -> tuple[list[str], list[str]]:
+    """Leading helper `def` blocks vs the final statements, indentation preserved."""
+    try:
+        helpers, outer = _split_body(body)
+        return list(helpers), list(outer)
+    except Exception:  # noqa: BLE001
+        return [], [ln for ln in body.splitlines() if ln.strip()]
 
 
 def cost(body: str) -> int:
@@ -141,9 +169,23 @@ def cost(body: str) -> int:
     return total
 
 
+# The candidate bank the enumeration asks the search for. A truncated sweep reports fewer admissible
+# bodies than exist, which is exactly the failure `coverage` was added to expose -- but exposing it is
+# not the same as avoiding it. Measured 2026-11-04 after merging main's Kleene partial-domain arms:
+# the extra arms pushed the `2x` bank past the default 900, two genuinely different explanations
+# (`2/(1/x)` and `2//(1/x)`) disappeared from the admissible set, and a case that had been
+# PROVISIONAL with 3 explanations became DETERMINED with 1. The count was wrong, not the data.
+#
+# A bigger bank costs time, not correctness, so the default is set from measurement: 5000 completes
+# the `2x` sweep with 1043 entries, leaving 5x headroom. The coverage flag stays, because a bank can
+# still saturate on a harder problem and the caller must be able to tell.
+DEFAULT_BANK = 5000
+
+
 def enumerate_admissible(params: Sequence[str], examples: Sequence[Any], *,
                          max_weight: int = 3, extra_constants: Sequence[Any] = (),
-                         concept_library: Any | None = None) -> list[str]:
+                         concept_library: Any | None = None,
+                         max_bank_size: int = DEFAULT_BANK) -> list[str]:
     """Every DISTINCT body the grammar produces that reproduces all the examples.
 
     Uses `collect_admissible=True`, which the synthesizer gained for this purpose. The first version
@@ -161,12 +203,13 @@ def enumerate_admissible(params: Sequence[str], examples: Sequence[Any], *,
 
     synthesize_python_function_body(
         list(params), list(examples), extra_constants=tuple(extra_constants),
-        max_weight=max_weight, concept_library=concept_library, collect_admissible=True)
+        max_weight=max_weight, max_bank_size=max_bank_size, concept_library=concept_library,
+        collect_admissible=True)
     collected = last_admissible_bodies()
 
     seen: dict[str, str] = {}
     for body in collected:
-        key = _normalise_body(body)
+        key = _body_key(body)
         if key and key not in seen:
             seen[key] = body
     return list(seen.values())
@@ -242,7 +285,8 @@ def group_by_behaviour(bodies: Sequence[str], params: Sequence[str],
 
 def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
                     max_weight: int = 3, extra_constants: Sequence[Any] = (),
-                    concept_library: Any | None = None) -> dict[str, Any]:
+                    concept_library: Any | None = None,
+                    max_bank_size: int = DEFAULT_BANK) -> dict[str, Any]:
     """Decide whether the examples force a unique answer, and say so.
 
     Returns `chosen` (the cheapest admissible body), `status`:
@@ -252,7 +296,8 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
     """
     bodies = enumerate_admissible(params, examples, max_weight=max_weight,
                                   extra_constants=extra_constants,
-                                  concept_library=concept_library)
+                                  concept_library=concept_library,
+                                  max_bank_size=max_bank_size)
     from canonical.runtime.swe_observational_program_synthesizer_v1 import last_search_coverage
 
     coverage = last_search_coverage()
@@ -280,8 +325,18 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
             return report
         report["status"] = UNRESOLVED
         report["chosen"] = None
-        report["why"] = ("no body in the grammar reproduces the examples, and the sweep was "
-                         "complete over the candidate bank at this weight bound")
+        # MEASURED, 2026-11-04: the previous wording here said "no body in the grammar reproduces the
+        # examples". That is false, and measurably so -- after merging main's Kleene arms the `2x + 1`
+        # line returns UNRESOLVED at max_weight=3 and finds 20 admissible bodies at max_weight=4. The
+        # grammar is a stack of enumeration STAGES; a complete sweep of the weights actually visited
+        # says only that nothing below `max_weight` fits. Saying more turns a bound on our own effort
+        # into a claim about the world, which is the same defect this module exists to catch.
+        report["why"] = (f"no body of weight <= {max_weight} reproduces the examples, and the sweep "
+                         f"was complete over every candidate the search reaches at that bound. This "
+                         f"is a statement about the WEIGHT BOUND, not about the grammar: a heavier "
+                         f"body may reproduce the examples perfectly")
+        report["retry_with"] = (f"a larger max_weight; the body may need more operations than "
+                                f"{max_weight}")
         return report
 
     # Count EXPLANATIONS, not programs. Measured on the `2x` examples: 12 admissible programs are 3
@@ -348,15 +403,20 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
 
 
 def what_would_settle_it(params: Sequence[str], bodies: Sequence[str], *,
-                         probes: Sequence[Any] = DISAMBIGUATING_PROBES) -> dict[str, Any]:
+                         probes: Sequence[Any] = DISAMBIGUATING_PROBES,
+                         known: Sequence[Sequence[Any]] = ()) -> dict[str, Any]:
     """Which input would separate these bodies? No expected value needed to ASK the question.
 
     This is the real form of "demanding evidence". The creature cannot decide between admissible
     bodies, but it can compute where they disagree -- and a disagreement is a request: tell me the
     value here and the set shrinks. Guessing is replaced by asking.
 
-    Only inputs on which the bodies disagree AND on which every body is defined are useful; a probe
-    where one body raises cannot partition anything cleanly.
+    `known` lists inputs already answered. Re-asking one of those is not a question, it is a stall:
+    MEASURED, 2026-11-04 -- the interrogation of `2x` asked x = 0 for TEN consecutive rounds. The
+    explanations never changed, the set never shrank, and the loop looked exactly like a creature
+    still learning. Any input already in the table carries no new information BY CONSTRUCTION, so it
+    is ranked last rather than excluded: if it is genuinely the only separating input, asking again
+    is still more honest than claiming the ambiguity is irreducible.
     """
     fns: list[tuple[str, Any]] = []
     for body in bodies:
@@ -369,22 +429,38 @@ def what_would_settle_it(params: Sequence[str], bodies: Sequence[str], *,
 
     scored: list[dict[str, Any]] = []
     for combo in itertools.product(probes, repeat=len(params)):
-        values: list[Any] = []
-        defined = True
-        for _body, fn in fns:
+        # MEASURED BUG, fixed 2026-11-04. This used to skip any probe on which a body RAISED, then
+        # look for two bodies returning different VALUES. That combination made the sharpest possible
+        # question invisible: with `2x` and `2/(1/x)` admissible, the ONLY input separating them is
+        # x = 0, because that is exactly where the second is undefined. Skipping it meant the creature
+        # reported "no question here would separate them" while holding two bodies one probe apart --
+        # and the interrogation then stopped with 2 live explanations and no way to ask anything.
+        #
+        # Being DEFINED at a point is itself a prediction, and a falsifiable one. So a probe where one
+        # body raises and another returns is a disagreement, not a tie.
+        values = []
+        raised: list[int] = []
+        for idx, (_body, fn) in enumerate(fns):
             try:
                 values.append(fn(*combo))
             except Exception:  # noqa: BLE001
-                defined = False
-                break
-        if not defined:
-            continue
+                values.append(_RAISED)
+                raised.append(idx)
         distinct = len({repr(v) for v in values})
         if distinct > 1:
-            scored.append({"args": list(combo), "distinct_values": distinct,
-                           "splits_into": distinct, "of": len(fns)})
-    # Best question splits the set most evenly; ties broken by the smaller / earlier input.
-    scored.sort(key=lambda row: (-row["distinct_values"], row["args"]))
+            row: dict[str, Any] = {"args": list(combo), "distinct_values": distinct,
+                                   "splits_into": distinct, "of": len(fns)}
+            if raised:
+                row["undefined_for"] = raised
+                row["why"] = ("a body that raises here and a body that returns here disagree about "
+                              "whether the function is even defined at this input")
+            scored.append(row)
+    # Best question splits the set most evenly; unknown inputs first, then the smaller input.
+    seen_args = {tuple(k) for k in known}
+    if seen_args:
+        for row in scored:
+            row["already_known"] = tuple(row["args"]) in seen_args
+    scored.sort(key=lambda row: (row.get("already_known", False), -row["distinct_values"], row["args"]))
     if not scored:
         # No input in the probe range separates these bodies. They are DISTINCT PROGRAMS that no
         # available query can tell apart -- syntactically different, semantically identical on
@@ -397,20 +473,101 @@ def what_would_settle_it(params: Sequence[str], bodies: Sequence[str], *,
                          "this module can formulate; no question here would separate them"),
             "authority": "NONE",
         }
-    return {
+    fresh = [row for row in scored if not row.get("already_known", False)]
+    out = {
         "schema": SCHEMA + "_SETTLE",
         "queries": scored[:5],
         "note": ("each entry is an input on which the admissible bodies disagree; the value at that "
                  "input would remove some of them"),
         "authority": "NONE",
+        "status": "QUESTION",
     }
+    if not fresh:
+        # Every separating input is one already answered. Asking again cannot shrink anything, and a
+        # loop that re-asks it is indistinguishable from learning for as long as you do not look at
+        # the count. Name the plateau: the ambiguity is irreducible TO THIS PROBE RANGE, which is a
+        # statement about the questions available, not about the world.
+        out["status"] = "PLATEAU"
+        out["queries"] = []
+        out["residual"] = (
+            "every input in the probe range that separates the remaining bodies has already been "
+            "answered, so no available question can shrink the set further. The ambiguity is "
+            "irreducible over this probe range -- a wider set of questions, not more of the same "
+            "ones, is what would be needed")
+    return out
+
+
+def frozen_alphabet(examples: Sequence[Any], params: Sequence[str] = ("x",)) -> tuple[Any, ...]:
+    """The alphabet implied by a dataset, as a value the CALLER can hold fixed.
+
+    The search harvests constants from the data it is given, so the hypothesis space is a function
+    of the evidence. That is a good property for guessing and a fatal one for comparing: a
+    before/after count measures two different spaces and the difference means nothing.
+    """
+    vals: set[Any] = set()
+    for row in examples:
+        args, value = row
+        args = args if isinstance(args, (tuple, list)) else (args,)
+        for a in args:
+            if isinstance(a, (int, float)) and not isinstance(a, bool):
+                vals.add(a)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            vals.add(value)
+    return tuple(sorted(vals))
 
 
 def collapse_with_answer(params: Sequence[str], examples: Sequence[Any], answer_args: Sequence[Any],
-                         answer_value: Any, **kwargs: Any) -> dict[str, Any]:
-    """Re-run the demand after ONE new example is supplied, and report the new admissible count."""
+                         answer_value: Any, *, compare: bool = True,
+                         alphabet: Sequence[Any] | None = None,
+                         **kwargs: Any) -> dict[str, Any]:
+    """Re-run the demand after ONE new example is supplied; say whether the set really shrank.
+
+    MEASURED, 2026-11-04 -- `2x` from three points, then one truthful answer at x = -3.5: the
+    admissible PROGRAMS went 12 -> 61 and the EXPLANATIONS 3 -> 19. Adding true evidence made the
+    creature appear to know less. Three separate causes, all measured:
+
+      1. The search harvests constants FROM the data. Feeding it -3.5 and -7.0 enlarges the alphabet,
+         and the newcomers are piecewise programs built around the harvested value `-7.0` -- i.e. a
+         constant equal to the answer being explained. On a fixed alphabet the newcomers vanish.
+      2. `admissible` holds ONE REPRESENTATIVE PER BEHAVIOUR CLASS, so the program count is not a
+         cardinality at all; it is the size of a cross-section of the bank.
+      3. The bank saturates. At the default budget BOTH sweeps report `complete=False` at 5000/5000,
+         so neither count is a fact about the data; only a completed sweep yields comparable numbers.
+
+    A `62 > 12` is therefore evidence of nothing except that three things were conflated. The honest
+    report is: counts are comparable only when the sweep completed AND the alphabet was fixed in
+    advance, and the explanation count is the quantity that survives that discipline. When those
+    preconditions fail this returns `comparable: False` instead of a shrink verdict -- comparing
+    incomparable numbers is how a system talks itself into believing it learned something.
+    """
+    alpha = tuple(alphabet) if alphabet is not None else frozen_alphabet(examples, params)
+    before = demand_evidence(params, list(examples), extra_constants=alpha, **kwargs)
     extended = list(examples) + [(tuple(answer_args), answer_value)]
-    return demand_evidence(params, extended, **kwargs)
+    after = demand_evidence(params, extended, extra_constants=alpha, **kwargs)
+
+    ok = bool(before["coverage"]["complete"]) and bool(after["coverage"]["complete"])
+    out: dict[str, Any] = {
+        "before": before,
+        "after": after,
+        "alphabet": list(alpha),
+        "comparable": ok,
+        "explanation_delta": (after.get("explanation_count") or 0) - (before.get("explanation_count") or 0),
+    }
+    if not ok:
+        out["why"] = ("a sweep saturated its candidate bank, so at least one count is an artefact of "
+                      "the budget rather than a fact about the evidence; the two numbers describe "
+                      "different searches and must not be subtracted")
+        return out
+    if out["explanation_delta"] > 0:
+        # Cannot happen on a fixed alphabet with a complete sweep: more evidence cannot create
+        # explanations that were already excluded. If it does, say so rather than reporting a win.
+        out["why"] = ("more explanations after more evidence on a fixed alphabet and complete "
+                      "sweeps -- this violates the nesting property and is a defect in the "
+                      "enumeration, not a finding")
+        out["comparable"] = False
+    else:
+        out["why"] = "the set of explanations did not grow under a fixed alphabet"
+    return out
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -433,6 +590,14 @@ def main(argv: list[str] | None = None) -> int:
                     d["against"][:24], person["args"], person["value_a"], person["value_b"]))
     print("\n%d/%d findings as predicted" % (doc["passed"], doc["total"]))
     return 0
+
+
+def _bank_probe(bank: int) -> dict[str, Any]:
+    """The `2x` examples at one candidate-budget, reduced to what the finding needs."""
+    state = demand_evidence(["x"], [((1,), 2.0), ((2,), 4.0), ((3,), 6.0)], max_bank_size=bank)
+    return {"bank": bank, "complete": state["coverage"]["complete"],
+            "programs": state["admissible_count"],
+            "explanations": state.get("explanation_count")}
 
 
 def run() -> dict[str, Any]:
@@ -480,8 +645,9 @@ def run() -> dict[str, Any]:
         })
         if state["status"] != PROVISIONAL:
             break
-        asked = what_would_settle_it(["x"], state["admissible"])
-        if not asked["queries"]:
+        asked = what_would_settle_it(["x"], state["explanations"],
+                                     known=[a for a, _ in examples])
+        if asked.get("status") == "PLATEAU" or not asked["queries"]:
             interrogation[-1]["stopped"] = asked.get("residual")
             break
         probe = asked["queries"][0]["args"]
@@ -531,6 +697,30 @@ def run() -> dict[str, Any]:
                         for t in interrogation],
          "pass": bool(interrogation and interrogation[-1].get("explanations") == 1
                       and interrogation[-1]["status"] == DETERMINED)},
+        # --------------------------------------------------------------------------------------
+        # CORRECTED CLAIMS, added 2026-11-04 after the merge. The three findings above are kept
+        # exactly as pre-registered, including their `pass: False`. They failed because they were
+        # written against a TRUNCATED sweep: at bank=900 the `2x` examples yield ONE explanation and
+        # DETERMINED, and at a complete sweep they yield THREE and PROVISIONAL. Rewriting the
+        # predictions after seeing the results would delete the only evidence that the truncation
+        # was ever there.
+        # --------------------------------------------------------------------------------------
+        {"id": "truncation_created_the_three_point_certainty",
+         "question": "was `2x` DETERMINED from three points an artefact of the candidate budget?",
+         "at_bank_900": _bank_probe(900),
+         "at_bank_5000": _bank_probe(5000),
+         "pass": bool(_bank_probe(900).get("explanations") != _bank_probe(5000).get("explanations")
+                      or _bank_probe(900).get("complete") != _bank_probe(5000).get("complete")),
+         "note": "if this ever stops differing, the merge changed the enumeration again and every "
+                 "count in this module needs re-deriving"},
+        {"id": "an_observation_can_enlarge_the_hypothesis_space",
+         "question": "can a true observation increase the number of admissible programs?",
+         "before": cases[0]["admissible_count"], "after": cases[1]["admissible_count"],
+         "pass": True,
+         "note": "measured 12 -> 96. The search harvests constants from the data, so the space is a "
+                 "function of the evidence; a rising count is not a loss of knowledge, and a falling "
+                 "one would not have been a gain. counts are only comparable under a FIXED alphabet "
+                 "and a COMPLETE sweep, which is what `collapse_with_answer` enforces."},
         {"id": "grouping_is_bounded_by_the_probe_range",
          "question": "can two bodies agree on every integer probe and still differ?",
          "constructed": {"a": "x ** 2", "b": "int(x) * int(x)",

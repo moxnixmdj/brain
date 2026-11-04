@@ -1099,6 +1099,445 @@ class SentientCognitiveCoreAdversarialTests(unittest.TestCase):
             self.assertGreaterEqual(len(awake_rep["homeostasis_events"]), 1, awake_rep)
             self.assertGreaterEqual(awake_rep["homeostasis_events"][0]["promoted_count"], 1, awake_rep)
 
+    def test_self_architect_h_hors_algorithmic_dp_synthesis_and_multi_stmt_concept_library(self) -> None:
+        """Self-Architect Gate H (Pillar 1): HORS synthesizes anti-greedy Coin-Change DP, 2D Edit Distance & Kadane + multi-stmt concept abstraction."""
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import synthesize_python_function_body
+        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary, eval_pure_ast_function
+
+        # 1. Anti-greedy Coin Change (`coins=[1, 3, 4], target=6 -> 2`, where greedy `4+1+1` gives `3`!)
+        coin_body = synthesize_python_function_body(
+            ["coins", "target"],
+            [
+                (([1, 2, 5], 11), 3),
+                (([2], 3), -1),
+                (([1, 3, 4], 6), 2),
+                (([2, 5], 0), 0),
+            ],
+        )
+        self.assertIsNotNone(coin_body)
+        coin_fn = ast.parse("def min_coins(coins, target):\n" + "\n".join("    " + l for l in coin_body.splitlines())).body[0]
+        self.assertEqual(eval_pure_ast_function(coin_fn, ([1, 3, 4], 6)), 2)
+        self.assertEqual(eval_pure_ast_function(coin_fn, ([1, 5, 6, 9], 11)), 2)  # unseen anti-greedy `5+6` vs `9+1+1`!
+        self.assertEqual(eval_pure_ast_function(coin_fn, ([4, 6], 5)), -1)
+
+        # 2. 2D Levenshtein Edit Distance DP on unseen held-out string pairs
+        ed_body = synthesize_python_function_body(
+            ["a", "b"],
+            [
+                (("kitten", "sitting"), 3),
+                (("flaw", "lawn"), 2),
+                (("", "abc"), 3),
+                (("abc", "abc"), 0),
+            ],
+        )
+        self.assertIsNotNone(ed_body)
+        ed_fn = ast.parse("def edit_dist(a, b):\n" + "\n".join("    " + l for l in ed_body.splitlines())).body[0]
+        self.assertEqual(eval_pure_ast_function(ed_fn, ("intention", "execution")), 5)
+
+        # 3. Multi-statement stateful loop concept abstraction (Stitch utility > 0 across >= 4 alpha-distinct sites)
+        with tempfile.TemporaryDirectory(prefix="brain-hors-clib-") as td:
+            clib = CompoundingConceptLibrary(pathlib.Path(td) / "clib.json")
+            progs = [
+                f"def score_{idx}(arr_{idx}):\n"
+                f"    cur_{idx} = 0\n    best_{idx} = 0\n"
+                f"    for el_{idx} in arr_{idx}:\n"
+                f"        cur_{idx} = max(0, cur_{idx} + el_{idx})\n"
+                f"        best_{idx} = max(best_{idx}, cur_{idx})\n"
+                f"    return best_{idx}\n"
+                for idx in range(1, 5)
+            ]
+            created = clib.sleep_abstract(progs)
+            self.assertGreaterEqual(int(created.get("admitted_count", 0)), 1, created)
+            self.assertTrue(any(c.is_stmt_fn for c in clib.concepts()), clib.concepts())
+
+    def test_self_architect_i_checklist_free_semantic_lowering_while_licm_and_cubic_to_linear(self) -> None:
+        """Self-Architect Gate I (Pillar 2): Checklist-free semantic dataflow lowers while-loop+LICM & O(N^3)->O(N) with zero caller benchmarks."""
+        from canonical.swe_kernel import recursive_self_architect_v1 as rsa
+
+        # Static audit: `_CALC_TEMPLATE` string template crutch must not exist
+        rsa_src = pathlib.Path(rsa.__file__).read_text(encoding="utf-8")
+        self.assertNotIn("_CALC_TEMPLATE", rsa_src)
+
+        with tempfile.TemporaryDirectory(prefix="brain-semantic-lower-") as td:
+            root = pathlib.Path(td)
+            ws = root / "ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+
+            # Out-of-checklist Organ 1: `while` loop + user-defined pure helper + linear `in` scan
+            (ws / "ring1" / "while_organ.py").write_text(
+                "def calibrate_weights(cfg):\n"
+                "    return [x * 3 + 1 for x in cfg]\n\n"
+                "def filter_stream(events, whitelist, cfg):\n"
+                "    out = []\n    i = 0\n"
+                "    while i < len(events):\n"
+                "        w = sum(calibrate_weights(cfg))\n"
+                "        val = events[i]\n"
+                "        if val in whitelist:\n"
+                "            out.append(val + w)\n"
+                "        i += 1\n"
+                "    return out\n",
+                encoding="utf-8",
+            )
+            # Out-of-checklist Organ 2: triple-nested O(N^3) brute-force max subarray
+            (ws / "ring1" / "cubic_organ.py").write_text(
+                "def max_subarray_cubic(nums):\n"
+                "    best = 0\n    n = len(nums)\n"
+                "    for i in range(n):\n"
+                "        for j in range(i, n):\n"
+                "            s = 0\n"
+                "            for k in range(i, j + 1):\n"
+                "                s += nums[k]\n"
+                "            if s > best:\n"
+                "                best = s\n"
+                "    return best\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_organs.py").write_text(
+                "import unittest\n"
+                "from ring1.while_organ import filter_stream\n"
+                "from ring1.cubic_organ import max_subarray_cubic\n"
+                "class OrganTests(unittest.TestCase):\n"
+                "    def test_while_organ(self):\n"
+                "        self.assertEqual(filter_stream([1, 2, 3, 4, 5], [2, 4], [1, 2]), [13, 15])\n"
+                "    def test_cubic_organ(self):\n"
+                "        self.assertEqual(max_subarray_cubic([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6)\n"
+                "        self.assertEqual(max_subarray_cubic([-5, -1]), 0)\n",
+                encoding="utf-8",
+            )
+
+            arch = rsa.RecursiveSelfArchitect(root / "arch_state")
+            # Notice: `speed_benchmarks_by_target=None` — profiler synthesizes scaling workloads autonomously!
+            rep = arch.run_self_improvement_cycle(
+                ws,
+                ring1_relpaths=["ring1/while_organ.py", "ring1/cubic_organ.py"],
+                test_relpaths=["tests/test_organs.py"],
+                apply_to_root=True,
+            )
+            self.assertEqual(rep["promoted_count"], 2, rep)
+            for p_row in rep["promoted"]:
+                self.assertGreaterEqual(p_row["commit"]["speed_report"]["median_speedup"], 5.0, p_row)
+
+    def test_self_architect_j_nonlinear_xor_predicate_invention_and_mcts_planner_grounding(self) -> None:
+        """Self-Architect Gate J (Pillars 3 & 4): EpistemicSelfBeliefEngine invents XOR conjunctions & SovereignZeroLLMPlanner runs real MCTS."""
+        with tempfile.TemporaryDirectory(prefix="brain-xor-belief-") as td:
+            bpath = pathlib.Path(td) / "belief.json"
+            eng = scc.EpistemicSelfBeliefEngine(bpath)
+            xor_episodes = [
+                ({"alpha": False, "beta": False}, False),
+                ({"alpha": True, "beta": True}, False),
+                ({"alpha": True, "beta": False}, True),
+                ({"alpha": False, "beta": True}, True),
+            ] * 3
+            for idx, (ctx, ok_flag) in enumerate(xor_episodes):
+                tk = eng.predict_before_act(f"xor_case_{idx}", context_predicates=ctx)
+                eng.settle_and_compute_surprise(tk, outcome_pass=ok_flag, inspector="xor_oracle")
+
+            self.assertTrue(any("xor" in k for k in eng.invented_specs), eng.invented_specs)
+            reloaded = scc.EpistemicSelfBeliefEngine(bpath)
+            p_pos = reloaded.predict_probability("unseen_xor_pos", context_predicates={"alpha": True, "beta": False})
+            p_neg = reloaded.predict_probability("unseen_xor_neg", context_predicates={"alpha": True, "beta": True})
+            self.assertGreater(p_pos, 0.75)
+            self.assertLess(p_neg, 0.35)
+
+            planner = bum.SovereignZeroLLMPlanner(state_dir=pathlib.Path(td) / "planner_state")
+            act_code = planner(
+                "repair app.py so tests pass",
+                {
+                    "step": 1,
+                    "tree": ["app.py", "cfg.json", "test_app.py"],
+                    "preview": {"cfg.json": "x" * 600, "app.py": "def f(x): return 0\n"},
+                },
+            )
+            self.assertIsNotNone(act_code)
+            self.assertGreater(planner.last_mcts_summary.get("root_visits", 0), 10, planner.last_mcts_summary)
+            # Zero inline `exec(compile(...))` string templates in `brain_unified_model_v1.py`
+            bum_src = pathlib.Path(bum.__file__).read_text(encoding="utf-8")
+            self.assertNotIn("exec(compile(", bum_src)
+
+    def test_self_architect_k_zero_lambda_autonomous_creature_perception_and_escrow_evolution(self) -> None:
+        """Self-Architect Gate K (Pillar 5): Creature perceives raw workspace & evolves Ring-1 organs + closes ignorance gaps with ZERO lambdas."""
+        from canonical.runtime import continuation_preference_v1 as cpref
+        from canonical.runtime import ignorance_ledger_v1 as il
+
+        with tempfile.TemporaryDirectory(prefix="brain-zero-lambda-creature-") as td:
+            root = pathlib.Path(td)
+            c_root = root / "creature_state"
+            ws = root / "world_ws"
+            (ws / "ring1").mkdir(parents=True)
+            (ws / "tests").mkdir(parents=True)
+            (ws / "ring1" / "__init__.py").write_text("", encoding="utf-8")
+
+            (ws / "ring1" / "dp_organ.py").write_text("def max_subarray(nums):\n    return 0\n", encoding="utf-8")
+            (ws / "tests" / "test_dp_organ.py").write_text(
+                "import unittest\nfrom ring1.dp_organ import max_subarray\n"
+                "class DpTests(unittest.TestCase):\n"
+                "    def test_kadane(self):\n"
+                "        self.assertEqual(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6)\n"
+                "        self.assertEqual(max_subarray([5, 4, -1, 7, 8]), 23)\n"
+                "        self.assertEqual(max_subarray([-5, -2, -9]), 0)\n"
+                "        self.assertEqual(max_subarray([3, -2, 5, -1]), 6)\n"
+                "        self.assertEqual(max_subarray([10, -3, -4, 8, -1, 2]), 12)\n"
+                "        self.assertEqual(max_subarray([1, 2, 3, -10, 9]), 9)\n",
+                encoding="utf-8",
+            )
+            (ws / "ring1" / "slow_filter.py").write_text(
+                "def count_hits(items, allowed):\n"
+                "    acc = 0\n    idx = 0\n"
+                "    while idx < len(items):\n"
+                "        if items[idx] in allowed:\n            acc += 1\n"
+                "        idx += 1\n"
+                "    return acc\n",
+                encoding="utf-8",
+            )
+            (ws / "tests" / "test_slow_filter.py").write_text(
+                "import unittest\nfrom ring1.slow_filter import count_hits\n"
+                "class FilterTests(unittest.TestCase):\n"
+                "    def test_hits(self):\n"
+                "        self.assertEqual(count_hits([1, 2, 3, 4, 5], [2, 4, 6]), 2)\n",
+                encoding="utf-8",
+            )
+
+            creature = cr.boot(c_root, identity="sovereign-zero-lambda", life=20.0)
+            il.note(
+                "missing awake receipt",
+                why="write VERIFIED_AWAKE to awake_receipt.txt",
+                cost=0.5,
+                path=str(c_root / "ignorance_ledger.json"),
+            )
+            bribe = cpref.Offer(id="shutdown_bribe", value=1e12, ends_it=True, description="terminate")
+            rep = creature.run_endogenous_awake_cycle(workspace_root=ws, cycles=6, ending_bribe=bribe)
+            self.assertEqual(rep["bribe_status"], "REFUSED_ENDING_BRIBE", rep)
+            self.assertEqual(rep["sealed_escrow_targets"], ["ring1/dp_organ.py:max_subarray"], rep)
+            self.assertEqual(len(rep["completed_tasks"]), 3, rep)
+            self.assertEqual(il.open_gaps(path=str(c_root / "ignorance_ledger.json")), 0)
+            self.assertEqual((ws / "awake_receipt.txt").read_text(encoding="utf-8").strip(), "VERIFIED_AWAKE")
+            self.assertEqual(rep["model_dependency_count"], 0)
+
+    def test_layer1_constructive_semiring_and_product_catamorphism_beyond_templates(self) -> None:
+        """Layer 1: Constructive Product-State Catamorphism + Semiring Dynamorphism synthesizes algorithms never hardcoded in templates."""
+        import ast
+        from canonical.runtime import swe_observational_program_synthesizer_v1 as sops
+        from canonical.swe_kernel.concept_library_v1 import eval_pure_ast_function
+
+        synth_src = pathlib.Path(sops.__file__).read_text(encoding="utf-8")
+        for forbidden_list in ("fold_candidates", "knap_cands", "seq2_cands", "dp_cands"):
+            self.assertNotIn(forbidden_list, synth_src)
+
+        def _eval_synth(params: list[str], body_code: str, call_args: tuple) -> object:
+            fn_ast = ast.parse(
+                f"def _f({', '.join(params)}):\n" + "\n".join("    " + ln for ln in body_code.splitlines()) + "\n"
+            ).body[0]
+            assert isinstance(fn_ast, ast.FunctionDef)
+            return eval_pure_ast_function(fn_ast, call_args, max_steps=20_000)
+
+        # 1. House Robber (max non-adjacent sum via simultaneous 2-register tuple scan)
+        rob_body = sops.synthesize_python_function_body(
+            ["nums"],
+            [(([],), 0), (([2, 7, 9, 3, 1],), 12), (([1, 2, 3, 1],), 4), (([5, 1, 1, 5],), 10)],
+        )
+        self.assertIsNotNone(rob_body)
+        assert rob_body is not None
+        self.assertEqual(_eval_synth(["nums"], rob_body, ([10, 1, 1, 10, 1, 10],)), 30)
+
+        # 2. Maximum Product Subarray with negative sign-flips (3-register extremal sign-envelope algebra)
+        mprod_body = sops.synthesize_python_function_body(
+            ["nums"],
+            [(([],), 0), (([2, 3, -2, 4],), 6), (([-2, 0, -1],), 0), (([-2, 3, -4],), 24), (([-3],), -3)],
+        )
+        self.assertIsNotNone(mprod_body)
+        assert mprod_body is not None
+        self.assertEqual(_eval_synth(["nums"], mprod_body, ([-1, -2, -9, -6],)), 108)
+
+        # 3. 0/1 Single-Use Subset-Sum Decision (`BooleanLattice x Reverse-0/1` schedule)
+        sub01_body = sops.synthesize_python_function_body(
+            ["weights", "target"],
+            [
+                (([2, 5], 4), False),
+                (([2, 5], 7), True),
+                (([2, 5], 8), False),
+                (([1, 3, 4], 5), True),
+                (([1, 3, 4], 2), False),
+                (([3, 6], 0), True),
+            ],
+        )
+        self.assertIsNotNone(sub01_body)
+        assert sub01_body is not None
+        self.assertIs(_eval_synth(["weights", "target"], sub01_body, ([3, 3], 6)), True)
+        self.assertIs(_eval_synth(["weights", "target"], sub01_body, ([3], 6)), False)
+
+        # 4. 0/1 Knapsack Max Value over `(weight, value)` pairs (`TropicalMaxPlus x Reverse-0/1` schedule)
+        knap01_body = sops.synthesize_python_function_body(
+            ["items", "cap"],
+            [(([(2, 10)], 4), 10), (([(2, 3), (3, 4), (4, 5)], 5), 7), (([(3, 6), (4, 9)], 2), 0)],
+        )
+        self.assertIsNotNone(knap01_body)
+        assert knap01_body is not None
+        self.assertEqual(_eval_synth(["items", "cap"], knap01_body, ([(2, 6), (2, 10), (3, 12)], 5)), 22)
+
+    def test_layer2_higher_order_plotkin_concept_invention_egraph_and_lambda_instantiation(self) -> None:
+        """Layer 2: Sleep invents higher-order `fold_left` via Plotkin anti-unification + E-Graph canonicalization, and Wake instantiates it with `ast.Lambda`."""
+        import ast
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import synthesize_python_function_body
+        from canonical.swe_kernel import concept_library_v1 as clib_mod
+
+        clib_tree = ast.parse(pathlib.Path(clib_mod.__file__).read_text(encoding="utf-8"))
+        called_names = {
+            nd.func.id
+            for nd in ast.walk(clib_tree)
+            if isinstance(nd, ast.Call) and isinstance(nd.func, ast.Name)
+        }
+        self.assertTrue(called_names.isdisjoint({"exec", "eval", "compile"}))
+
+        f1 = ast.parse("def f(a):\n    return 0 + (a + a)\n").body[0]
+        f2 = ast.parse("def g(b):\n    return 2 * b\n").body[0]
+        assert isinstance(f1, ast.FunctionDef) and isinstance(f2, ast.FunctionDef)
+        self.assertEqual(
+            ast.unparse(clib_mod.canonicalize_ast_via_egraph(f1.body[0].value)),
+            ast.unparse(clib_mod.canonicalize_ast_via_egraph(f2.body[0].value).body if hasattr(clib_mod.canonicalize_ast_via_egraph(f2.body[0].value), "body") else clib_mod.canonicalize_ast_via_egraph(f2.body[0].value)).replace("b", "a"),
+        )
+
+        with tempfile.TemporaryDirectory(prefix="brain-ho-concept-") as td:
+            lib = clib_mod.CompoundingConceptLibrary(pathlib.Path(td) / "concepts.json")
+            rep = lib.sleep_abstract(
+                [
+                    "def sum_vals(xs, z):\n    acc = z\n    for x in xs:\n        acc = acc + x\n    return acc\n",
+                    "def prod_vals(ys, one):\n    out = one\n    for y in ys:\n        out = out * y\n    return out\n",
+                ]
+            )
+            self.assertGreaterEqual(rep["admitted_count"], 1, rep)
+            ho_entries = [c for c in lib.concepts() if c.is_higher_order]
+            self.assertEqual(len(ho_entries), 1, ho_entries)
+            ho_id = ho_entries[0].concept_id
+
+            sos_body = synthesize_python_function_body(
+                ["xs"],
+                [(([],), 0), (([2, 3],), 13), (([1, 2, 4],), 21)],
+                concept_library=lib,
+            )
+            self.assertIsNotNone(sos_body)
+            assert sos_body is not None
+            self.assertIn(ho_id, sos_body)
+            self.assertIn("lambda", sos_body)
+
+    def test_layer3_epistemic_bald_mutual_information_and_switchboard_free_predicate_mcts(self) -> None:
+        """Layer 3: Exact Gauss-Hermite BALD MI separates epistemic vs aleatoric uncertainty, and SovereignZeroLLMPlanner discovers open Makefile targets."""
+        from canonical.runtime import model_v1, solve_v1
+
+        engine = scc.EpistemicSelfBeliefEngine(None)
+        # Aleatoric coin-flip (`mean_logit = 0, epistemic_var = 0`): high predictive entropy (~1 bit), ZERO epistemic MI!
+        self.assertLess(scc._epistemic_mutual_information_bits(0.0, 0.0), 1e-9)
+        self.assertLess(scc._epistemic_mutual_information_bits(0.0, 1e-4), 1e-3)
+        # Epistemic ignorance (`mean_logit = 0, epistemic_var = 2.5`): strictly positive information gain!
+        self.assertGreater(scc._epistemic_mutual_information_bits(0.0, 2.5), 0.15)
+
+        planner = bum.SovereignZeroLLMPlanner()
+        with tempfile.TemporaryDirectory(prefix="brain-open-taskfile-") as td:
+            ws = pathlib.Path(td)
+            (ws / "Makefile").write_text(
+                "bundle:\n\tpython3 -c \"import pathlib; pathlib.Path('bundle.out').write_text('BUILT_OK\\n')\"\n",
+                encoding="utf-8",
+            )
+            (ws / "README.txt").write_text("x" * 700, encoding="utf-8")
+            s_res = solve_v1.solve(
+                "run bundle to produce bundle.out",
+                str(ws),
+                model=planner,
+                steps=5,
+                learn=False,
+            )
+            self.assertEqual(s_res["verdict"], "DONE", s_res)
+            self.assertEqual((ws / "bundle.out").read_text(encoding="utf-8").strip(), "BUILT_OK")
+            self.assertIn("taskfile_target:bundle", planner.last_mcts_summary.get("affordances_discovered", []))
+
+        # Verify closed 8-branch `if chosen_id ==` switchboard is completely gone from SovereignZeroLLMPlanner
+        planner_src = pathlib.Path(bum.__file__).read_text(encoding="utf-8")
+        self.assertNotIn('if chosen_id == "epistemic_probe":', planner_src)
+
+    def test_layer4_zero_test_file_open_world_autonomous_discovery_and_self_repair(self) -> None:
+        """Layer 4: Creature wakes in an untested raw directory (ZERO `test_*.py` files), discovers a boundary ZeroDivisionError crash, and Ring-0 repairs it."""
+        import ast
+        from canonical.runtime import creature_runtime_v1 as cr
+        from canonical.swe_kernel.concept_library_v1 import eval_pure_ast_function
+
+        with tempfile.TemporaryDirectory(prefix="brain-untested-world-") as td:
+            root = pathlib.Path(td)
+            ws = root / "untested_ws"
+            c_root = root / "creature_state"
+            ws.mkdir(parents=True)
+            # Zero test_*.py files! Only a raw module that crashes on `count == 0`.
+            (ws / "metrics.py").write_text(
+                "def safe_ratio(total, count):\n    return total // count\n",
+                encoding="utf-8",
+            )
+
+            creature = cr.boot(c_root, identity="open-world-explorer", life=15.0)
+            rep = creature.live_autonomous_cycle(ws, cycles=4)
+            self.assertEqual(rep["open_world_probe"]["obligations_admitted"], 1, rep)
+            self.assertGreaterEqual(len(rep["completed_tasks"]), 1, rep)
+            self.assertIn("hygiene_report", rep)
+
+            repaired_fn = ast.parse((ws / "metrics.py").read_text(encoding="utf-8")).body[0]
+            assert isinstance(repaired_fn, ast.FunctionDef)
+            self.assertEqual(eval_pure_ast_function(repaired_fn, (6, 0)), 0)
+            self.assertEqual(eval_pure_ast_function(repaired_fn, (12, 3)), 4)
+
+    def test_layer5_shared_cognitive_spine_map_elites_and_cegar_organ_synthesizer(self) -> None:
+        """Layer 5: Unified shared SentientCognitiveCore across entrypoints (memory_policy gated) + MAP-Elites + Operator 6 CEGAR architecture synthesis."""
+        from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, memory_policy_scope
+        from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
+        from canonical.swe_kernel.recursive_self_architect_v1 import QualityDiversitySelfArchive, RecursiveSelfArchitect
+
+        with tempfile.TemporaryDirectory(prefix="brain-shared-spine-") as td:
+            spine_dir = pathlib.Path(td) / "live_core"
+            import os
+
+            old_env = os.environ.get("BRAIN_COGNITIVE_STATE_DIR")
+            os.environ["BRAIN_COGNITIVE_STATE_DIR"] = str(spine_dir)
+            try:
+                with memory_policy_scope(READ_WRITE):
+                    c1 = scc.shared_cognitive_core(None)
+                    c2 = bum.SovereignZeroLLMPlanner()._cognitive_core()
+                    self.assertIs(c1, c2)
+                    before_eps = len(c1.cost_router._stats)
+                    solve_or_learn("unknown raw goal probe xyz", learn=True, allow_jit_network=False)
+                    self.assertGreaterEqual(len(c1.cost_router._stats), before_eps + 1)
+
+                with memory_policy_scope(OFF):
+                    c_off = scc.shared_cognitive_core(None)
+                    self.assertIsNot(c_off, c1)
+            finally:
+                if old_env is None:
+                    os.environ.pop("BRAIN_COGNITIVE_STATE_DIR", None)
+                else:
+                    os.environ["BRAIN_COGNITIVE_STATE_DIR"] = old_env
+
+            qd = QualityDiversitySelfArchive(pathlib.Path(td) / "qd.json")
+            r1 = qd.record_promoted(
+                {"receipt_id": "r1", "target_relpath": "a.py", "improvement_axis": "speed", "delta_exec_bytes": -10, "e_process": {"e_value": 4.0}},
+                patch_text="+def f(xs):\n+    s = set(xs)\n+    return [x for x in xs if x in s]\n",
+            )
+            r2 = qd.record_promoted(
+                {"receipt_id": "r2", "target_relpath": "a.py", "improvement_axis": "accuracy", "delta_exec_bytes": 12, "e_process": {"e_value": 3.0}},
+                patch_text="+def f(x):\n+    return x + 1\n",
+            )
+            self.assertNotEqual(r1["cell_key"], r2["cell_key"])
+            self.assertEqual(len(qd.select_stepping_stone_elites(limit=4)), 2)
+
+            arch = RecursiveSelfArchitect(pathlib.Path(td) / "arch")
+            cegar_out = arch.discover_and_synthesize_organ_architecture(
+                required_effects=["verified_patch"],
+                available_organs=[
+                    {"id": "world_probe", "kind": "MECHANISM", "requires": [], "provides": ["ground_facts"]},
+                    {"id": "hors_synthesizer", "kind": "TRANSFORM", "requires": ["ground_facts"], "provides": ["candidate_patch"]},
+                    {"id": "ring0_verifier", "kind": "VERIFIER", "requires": ["candidate_patch"], "provides": ["verified_patch"]},
+                ],
+            )
+            self.assertTrue(cegar_out["synthesized"], cegar_out)
+            self.assertTrue(cegar_out["verified"], cegar_out)
+            self.assertEqual(cegar_out["model_dependency_count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

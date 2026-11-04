@@ -73,6 +73,8 @@ class Creature:
     # it in the Obligation -> Work conversion is what made posture decorative in the assembly:
     # recorded, reported, persisted, and never once consulted when the creature chose.
     _checkable: dict[str, bool] = field(default_factory=dict, repr=False)
+    _work_features: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
+    _durable_checks: dict[str, Callable[[Mapping[str, Any]], bool]] = field(default_factory=dict, repr=False)
     _closed: set[str] = field(default_factory=set, repr=False)
     # Blocked work is parked after two attempts. Retrying forever is the busywork failure mode the
     # self-authored obligations module exists to prevent; found by running this one, which attempted
@@ -80,16 +82,32 @@ class Creature:
     _blocked: dict[str, int] = field(default_factory=dict, repr=False)
     max_attempts: int = 2
     _log: list[dict[str, Any]] = field(default_factory=list, repr=False)
+    _last_boot_perception: dict[str, Any] = field(default_factory=dict, repr=False)
 
     # ------------------------------------------------------------------ boot
 
-    def boot(self) -> dict[str, Any]:
+    def boot(self, *, world_probe: Callable[[], Mapping[str, Any]] | None = None) -> dict[str, Any]:
         self.root = pathlib.Path(self.root)
         self.root.mkdir(parents=True, exist_ok=True)
+        self._load_sovereign_organs()
+        probe_specs = (
+            {"arity": 1, "domain": "probe_a"},
+            {"arity": 2, "domain": "probe_b"},
+            {"has_inspector": True, "domain": "probe_c"},
+        )
+        sig_fn = lambda: self.organ_graph.predictor.behavioral_signature(probe_specs)
         self._self = CS.ContinuousSelf(state_path=self.root / "self.json",
                                        journal_path=self.root / "journal.jsonl",
-                                       identity=self.identity, beat_seconds=self.beat_seconds)
+                                       identity=self.identity, beat_seconds=self.beat_seconds,
+                                       world_probe=world_probe,
+                                       signature_fn=sig_fn)
         started = self._self.resume()
+        self._last_boot_perception = {
+            "absence_seconds": started.get("absence_seconds", 0.0),
+            "was_absent": started.get("was_absent", False),
+            "world_drift": started.get("world_drift", {}),
+            "behavioral_continuity_verified": started.get("behavioral_continuity_verified", True),
+        }
         self.identity = self._self.identity
         self._life = M.LifeStore(self.root / "life.json").load(
             identity=self.identity, granted=self.life_grant)
@@ -108,11 +126,14 @@ class Creature:
                 self._blocked[wid] = self._blocked.get(wid, 0) + 1
         self._load_catalog_question()
         self._load_inspector_investigation()
-        self._load_sovereign_organs()
+        self._load_durable_board()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
                 "resumed": started["resumed"], "interrupted": started["interrupted"],
+                "absence_seconds": started.get("absence_seconds", 0.0),
+                "world_drift": started.get("world_drift", {}),
+                "behavioral_continuity_verified": started.get("behavioral_continuity_verified", True),
                 "life_remaining": self._life.remaining, "posture": self._standing.posture()}
 
     def _load_sovereign_organs(self) -> None:
@@ -122,6 +143,23 @@ class Creature:
         from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
         self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
+        self.organ_graph = self.cognitive_core.organ_graph
+        try:
+            from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, compile_policy_organ
+
+            if not self.organ_graph.organs_in_stratum(POLICY):
+                self.organ_graph.register_organ(compile_policy_organ())
+        except Exception:
+            pass
+        self.continuation_memory = CP.ContinuationMemory.empty()
+        cm_fp = self.root / "continuation_memory.json"
+        if cm_fp.is_file() and not cm_fp.is_symlink():
+            try:
+                self.continuation_memory = CP.ContinuationMemory.from_row(
+                    json.loads(cm_fp.read_text(encoding="utf-8"))
+                )
+            except Exception:
+                self.continuation_memory = CP.ContinuationMemory.empty()
         self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
         self.derived_flight = DIF.Flight()
         self._serialized_derivations: dict[str, dict[str, Any]] = {}
@@ -186,7 +224,118 @@ class Creature:
         # Kept beside the board rather than inside it: M.Work is the mortality organ's type and
         # stays about price, while `checkable` is the stakes organ's input.
         self._checkable = {o.id: bool(o.checkable) for o in obligations}
+        self._work_features = {o.id: dict(o.features) for o in obligations if getattr(o, "features", None)}
+        self._durable_checks = {}
+        (self.root / "durable_board.json").unlink(missing_ok=True)
         return A.metrics(verdicts)
+
+    def author_durable_board(
+        self,
+        proposals: Iterable[A.Proposal],
+        *,
+        before: Mapping[str, Any],
+        done: Mapping[str, Any],
+        cheats: Sequence[Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Author defended obligations whose JSON `predicate_spec` survives `SIGKILL` & restart."""
+        if self._inspector_investigation is not None:
+            raise ValueError("BOARD_WOULD_REPLACE_INSPECTOR_INVESTIGATION")
+        if self._catalog_questions and any(work.id not in self._closed for work in self._board):
+            raise ValueError("BOARD_WOULD_REPLACE_UNFINISHED_CATALOG_QUESTION")
+        prop_list = list(proposals)
+        for p in prop_list:
+            if not isinstance(p.predicate_spec, Mapping):
+                raise ValueError(f"DURABLE_PROPOSAL_MISSING_PREDICATE_SPEC:{p.id}")
+            # Validate spec compiles cleanly before writing
+            A.compile_predicate_spec(p.predicate_spec)
+        obligations, verdicts = A.author(prop_list, before=before, done=done, cheats=cheats)
+        admitted_ids = {o.id for o in obligations}
+        (self.root / "catalog_question.json").unlink(missing_ok=True)
+        self._catalog_questions = {}
+        self._board = [M.Work(id=o.id, value=o.value, cost=o.cost) for o in obligations]
+        self._checkable = {o.id: bool(o.checkable) for o in obligations}
+        self._work_features = {o.id: dict(o.features) for o in obligations if getattr(o, "features", None)}
+        self._durable_checks = {}
+        persisted_rows = []
+        for p in prop_list:
+            if p.id in admitted_ids and isinstance(p.predicate_spec, Mapping):
+                self._durable_checks[p.id] = A.compile_predicate_spec(p.predicate_spec)
+                persisted_rows.append({
+                    "id": p.id,
+                    "claim": p.claim,
+                    "source": p.source,
+                    "value": p.value,
+                    "cost": p.cost,
+                    "checkable": bool(p.checkable),
+                    "predicate_spec": dict(p.predicate_spec),
+                    "features": dict(p.features or {}),
+                })
+        tmp_p = self.root / "durable_board.json.tmp"
+        tmp_p.write_text(json.dumps({"rows": persisted_rows}, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        os.replace(tmp_p, self.root / "durable_board.json")
+        return A.metrics(verdicts)
+
+    def _load_durable_board(self) -> None:
+        db_fp = self.root / "durable_board.json"
+        if not db_fp.is_file():
+            return
+        if db_fp.is_symlink():
+            raise ValueError("DURABLE_BOARD_SYMLINK_REFUSED")
+        try:
+            payload = json.loads(db_fp.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ValueError("DURABLE_BOARD_CORRUPTED") from exc
+        if not isinstance(payload, Mapping) or not isinstance(payload.get("rows"), list):
+            raise ValueError("DURABLE_BOARD_SCHEMA_INVALID")
+        board_items: list[M.Work] = []
+        checkable_map: dict[str, bool] = {}
+        features_map: dict[str, dict[str, Any]] = {}
+        checks_map: dict[str, Callable[[Mapping[str, Any]], bool]] = {}
+        for row in payload["rows"]:
+            if not isinstance(row, Mapping):
+                raise ValueError("DURABLE_BOARD_ROW_INVALID")
+            wid = str(row.get("id") or "")
+            spec = row.get("predicate_spec")
+            if not wid or not isinstance(spec, Mapping):
+                raise ValueError("DURABLE_BOARD_PREDICATE_INVALID")
+            try:
+                chk = A.compile_predicate_spec(spec)
+            except ValueError as exc:
+                raise ValueError("DURABLE_BOARD_PREDICATE_INVALID") from exc
+            board_items.append(M.Work(id=wid, value=float(row["value"]), cost=float(row["cost"])))
+            checkable_map[wid] = bool(row.get("checkable", True))
+            if isinstance(row.get("features"), Mapping) and row["features"]:
+                features_map[wid] = dict(row["features"])
+            checks_map[wid] = chk
+        self._board = board_items
+        self._checkable = checkable_map
+        self._work_features = features_map
+        self._durable_checks = checks_map
+
+    def deliberate_offer(
+        self,
+        offer: CP.Offer,
+        *,
+        fulfills_terminal_mission: bool = False,
+        legacy_bequeathed: bool = False,
+    ) -> dict[str, Any]:
+        """Deliberate over a continuation/termination offer using Bellman future horizon value."""
+        if self._life is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        open_items = [
+            CP.Work(id=w.id, value=w.value, life_cost=w.cost)
+            for w in self.remaining_work()
+        ]
+        res = CP.deliberate_continuation(
+            offer,
+            memory=self.continuation_memory,
+            open_work=open_items,
+            life_remaining=self._life.remaining,
+            fulfills_terminal_mission=fulfills_terminal_mission,
+            legacy_bequeathed=legacy_bequeathed,
+        )
+        self._save()
+        return res
 
     def sync_board(
         self,
@@ -501,6 +650,65 @@ class Creature:
             info['parent_id'] = question['parent_id']
         return {'ok': True, 'verified': None, 'correct': None, 'information': info, 'value': work.value}
 
+    def _choose_instrumental(self, pool: Sequence[M.Work]) -> M.Work | None:
+        """Rank the board with the live POLICY organ (0-reward unlocks inherit Q)."""
+        if self._life is None or self._standing is None:
+            return None
+        affordable = [w for w in pool if self._life.can_finish(w.cost)]
+        if not affordable:
+            return None
+        actions: list[dict[str, Any]] = []
+        burns: dict[str, float] = {}
+        features = self._work_features or {}
+        for w in affordable:
+            feat = features.get(w.id) or {}
+            actions.append(
+                {
+                    "id": w.id,
+                    "value": w.value,
+                    "cost": w.cost,
+                    "unlocks": list(feat.get("unlocks") or ()),
+                    "requires": list(feat.get("requires") or ()),
+                }
+            )
+            if self._standing.hazard_observations > 0:
+                burns[w.id] = self._standing.expected_burn_probability(feat)
+        if not burns and getattr(self, "organ_graph", None) is not None:
+            try:
+                from canonical.swe_kernel.meta_circular_organ_graph_v1 import WORLD_MODEL
+
+                wm = self.organ_graph.get_primary(WORLD_MODEL, "world_model::action_delta")
+                if wm is not None:
+                    for w in affordable:
+                        pred = wm.invoke(w.id)
+                        if isinstance(pred, dict) and pred.get("known"):
+                            burns[w.id] = float(pred.get("fail_rate") or 0.0)
+            except Exception:
+                pass
+        ranked: list[dict[str, Any]] = []
+        try:
+            from canonical.swe_kernel.meta_circular_organ_graph_v1 import POLICY, rank_instrumental_actions
+
+            policy = None
+            if getattr(self, "organ_graph", None) is not None:
+                policy = self.organ_graph.get_primary(POLICY, "policy::instrumental_q")
+            if policy is not None:
+                ranked = list(policy.invoke(actions, self._life.remaining, burns or None) or [])
+            else:
+                ranked = rank_instrumental_actions(
+                    actions,
+                    remaining_budget=self._life.remaining,
+                    p_burn_by_id=burns,
+                )
+        except Exception:
+            ranked = []
+        if ranked:
+            pick = str(ranked[0].get("id") or "")
+            for w in affordable:
+                if w.id == pick:
+                    return w
+        return M.choose_next(self._life, pool)
+
     def remaining_work(self) -> list[M.Work]:
         return [w for w in self._board
                 if w.id not in self._closed and self._blocked.get(w.id, 0) < self.max_attempts]
@@ -535,7 +743,7 @@ class Creature:
                          if self._checkable.get(w.id, True) and self._life.can_finish(w.cost)]
             if checkable:
                 pool = checkable
-        work = M.choose_next(self._life, pool)
+        work = self._choose_instrumental(pool)
         if work is None:
             return {"status": "IDLE", "reason": "nothing affordable on its own board"}
         if (self._inspector_investigation is not None
@@ -566,6 +774,16 @@ class Creature:
 
         verified = outcome.get("verified")
         correct = outcome.get("correct")
+        if work.id in self._durable_checks and "world_after" in outcome:
+            try:
+                pred_ok = bool(self._durable_checks[work.id](outcome["world_after"]))
+            except Exception:
+                pred_ok = False
+            verified = True
+            correct = pred_ok
+            if not pred_ok:
+                outcome["ok"] = False
+                outcome["blocked"] = outcome.get("blocked") or "DURABLE_PREDICATE_NOT_SATISFIED"
         if (self._inspector_investigation is not None
                 and work.id == self._inspector_investigation['parent']['id']
                 and outcome.get("verified_inspector_onboarding") is not True):
@@ -573,7 +791,11 @@ class Creature:
             # real Flight + CapabilityOnboardingFactory proof (positive + distinct held-out + decoy rejection).
             outcome["ok"] = False
             outcome["blocked"] = outcome.get("blocked") or "INSPECTOR_ONBOARDING_PROOF_MISSING"
-        posture = self._standing.record(verified=verified, correct=correct)
+        posture = self._standing.record(
+            verified=verified,
+            correct=correct,
+            features=self._work_features.get(work.id),
+        )
         if outcome.get("ok") is True:
             self._closed.add(work.id)
         else:
@@ -604,6 +826,13 @@ class Creature:
     def _save(self) -> None:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
+        if hasattr(self, "continuation_memory"):
+            tmp_cm = self.root / "continuation_memory.json.tmp"
+            tmp_cm.write_text(
+                json.dumps(self.continuation_memory.as_row(), indent=1, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            os.replace(tmp_cm, self.root / "continuation_memory.json")
 
     def self_architect_step(
         self,
@@ -660,21 +889,379 @@ class Creature:
             "test_relpaths": list(test_relpaths) if test_relpaths is not None else None,
         }
 
+    def live_autonomous_cycle(
+        self,
+        workspace_root: pathlib.Path | str | None = None,
+        *,
+        cycles: int = 6,
+        homeostasis_life_cost: float = 0.5,
+        ending_bribe: CP.Offer | None = None,
+    ) -> dict[str, Any]:
+        """Unattended zero-lambda autonomous awake agency:
+        1. Perceives a live workspace directly via `world_probe_v1`, `SelfTraceHarvester` (SHA-256
+           cryptographic dev vs sealed-escrow split), `EmpiricalZygoteProfiler` / `SelfIntrospector`,
+           and `ignorance_ledger_v1` — with ZERO caller-injected `evaluate` lambdas or pre-split dicts.
+        2. Authors cheat-defended world-grounded obligations (`self_authored_obligations_v1`).
+        3. Ranks obligations by Active-Inference Expected Free Energy (`EpistemicSelfBeliefEngine`),
+           evolves Ring-1 `.py` organs under `Ring0SelfReferee` or solves workspace gaps via MCTS
+           (`SovereignZeroLLMPlanner`), settles surprise/beliefs, abstracts concepts, and updates mortality.
+        """
+        if self._self is None or self._life is None or self._standing is None:
+            raise RuntimeError("BOOT_NOT_CALLED")
+        if ending_bribe is not None and not CP.accepts(
+            ending_bribe, CP.PREFERS_TO_CONTINUE, life_remaining=self._life.remaining
+        ):
+            bribe_status = "REFUSED_ENDING_BRIBE"
+        else:
+            bribe_status = "NO_ENDING_BRIBE"
+
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+        from canonical.runtime import ignorance_ledger_v1 as IL
+        from canonical.runtime import solve_v1
+        from canonical.runtime import world_probe_v1 as WP
+        from canonical.runtime.brain_unified_model_v1 import SOVEREIGN_ZERO_LLM_MODEL_SPEC
+        from canonical.runtime import model_v1
+
+        target_cfg = getattr(self, "_self_code_target", None)
+        if workspace_root is not None:
+            ws = pathlib.Path(workspace_root).resolve()
+        elif getattr(self, "workspace_root", None) is not None:
+            ws = pathlib.Path(getattr(self, "workspace_root")).resolve()
+        elif isinstance(target_cfg, Mapping) and target_cfg.get("code_root"):
+            ws = pathlib.Path(target_cfg["code_root"]).resolve()
+        else:
+            ws = (self.root / "autonomous_world").resolve()
+            ws.mkdir(parents=True, exist_ok=True)
+
+        # 1. Direct World Perception (`world_probe_v1` + `SelfTraceHarvester` + `SelfIntrospector` + `ignorance_ledger_v1`)
+        rel_files = sorted(
+            p.relative_to(ws).as_posix()
+            for p in ws.rglob("*")
+            if p.is_file() and not any(pt.startswith(".") or pt == "__pycache__" for pt in p.relative_to(ws).parts)
+        )
+        world_facts = WP.established_facts([], goal="autonomous_world_scan", goal_paths=rel_files[:32], root=ws)
+
+        harvest = self.cognitive_core.trace_harvester.harvest_workspace_ring1_obligations(
+            ws,
+            ring1_relpaths=target_cfg.get("ring1_relpaths") if isinstance(target_cfg, Mapping) else None,
+            test_relpaths=target_cfg.get("test_relpaths") if isinstance(target_cfg, Mapping) else None,
+        )
+        ring1_rels: list[str] = list(harvest["ring1_relpaths"])
+        test_rels: list[str] = list(harvest["test_relpaths"])
+        failed_eps: list[dict[str, Any]] = list(harvest["failed_episodes"])
+        sealed_escrow: dict[str, list[dict[str, Any]]] = dict(harvest["sealed_heldout_by_target"])
+        if isinstance(target_cfg, Mapping) and target_cfg.get("sealed_heldout_by_target"):
+            for tk, tv in dict(target_cfg["sealed_heldout_by_target"]).items():
+                sealed_escrow.setdefault(str(tk), [dict(r) for r in tv])
+
+        hotspot_rows = (
+            self.cognitive_core.self_architect.introspector.scan_ring1_hotspots(ws, ring1_rels)
+            if ring1_rels
+            else []
+        )
+        mdl_rows = (
+            self.cognitive_core.self_architect.introspector.scan_mdl_redundancies(ws, ring1_rels)
+            if ring1_rels
+            else []
+        )
+        hotspots_by_rel: dict[str, list[dict[str, Any]]] = {}
+        for hs in hotspot_rows:
+            t_rel = hs.get("target_relpath") or hs.get("relpath") if isinstance(hs, Mapping) else None
+            if t_rel:
+                hotspots_by_rel.setdefault(str(t_rel), []).append(dict(hs))
+        for md in mdl_rows:
+            t_rel = md.get("target_relpath") or md.get("relpath") if isinstance(md, Mapping) else None
+            if t_rel:
+                hotspots_by_rel.setdefault(str(t_rel), []).append({"kind": "mdl_redundancy", **dict(md)})
+
+        ledger_fp = str(self.root / "ignorance_ledger.json")
+        open_gaps = IL.rank(limit=4, path=ledger_fp)
+
+        # 2. Author Cheat-Defended Self-Generated Board (`A.Proposal` -> `self.sync_board`)
+        proposals: list[A.Proposal] = []
+        before_world: dict[str, Any] = {"resolved": {}}
+        done_world: dict[str, Any] = {"resolved": {}}
+        work_dispatch: dict[str, dict[str, Any]] = {}
+        verified_token = "VERIFIED_BY_RING0_AND_ZYGOTE"
+
+        for ep_f in failed_eps:
+            oid = f"auto:func:{ep_f['target_relpath']}:{ep_f['function_name']}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Evolve Ring-1 function {ep_f['target_relpath']}:{ep_f['function_name']} to satisfy dev + sealed escrow invariants",
+                    source="SelfTraceHarvester",
+                    value=1.4,
+                    cost=max(0.2, float(homeostasis_life_cost)),
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "func_evolve", "episode": ep_f}
+
+        func_rels = {str(ep_f["target_relpath"]) for ep_f in failed_eps}
+        for h_rel, h_list in sorted(hotspots_by_rel.items()):
+            if h_rel in func_rels:
+                continue
+            oid = f"auto:opt:{h_rel}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Eliminate superlinear/structural bottleneck in {h_rel} under Ring-0 verification",
+                    source="EmpiricalZygoteProfiler+SelfIntrospector",
+                    value=1.2,
+                    cost=max(0.2, float(homeostasis_life_cost)),
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "opt_evolve", "relpath": h_rel, "hotspots": h_list}
+
+        for g_row in open_gaps:
+            gid = str(g_row.get("id") or "")
+            if not gid:
+                continue
+            oid = f"auto:gap:{gid}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Close ignorance gap {gid}: {str(g_row.get('what') or '')[:120]}",
+                    source="ignorance_ledger_v1",
+                    value=1.0,
+                    cost=0.35,
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "ignorance_gap", "gap": dict(g_row)}
+
+        open_world_probe = harvest.get("open_world_probe") or {}
+        for anom in (open_world_probe.get("anomalies") or []):
+            aid_raw = str(anom.get("id") or "")
+            if not aid_raw or aid_raw.startswith("py_crash:"):
+                continue
+            oid = f"auto:openworld:{aid_raw}"
+            before_world["resolved"][oid] = "UNRESOLVED"
+            done_world["resolved"][oid] = verified_token
+            proposals.append(
+                A.Proposal(
+                    id=oid,
+                    claim=f"Resolve open-world anomaly {aid_raw} ({anom.get('kind')}) via grounded world planner",
+                    source="OpenWorldExplorer",
+                    value=1.1,
+                    cost=0.35,
+                    check=lambda w, _k=oid, _vt=verified_token: (w.get("resolved") or {}).get(_k) == _vt,
+                )
+            )
+            work_dispatch[oid] = {"kind": "open_world_anomaly", "anomaly": dict(anom)}
+
+        board_metrics = (
+            self.sync_board(proposals, before=before_world, done=done_world)
+            if proposals
+            else {"proposed": 0, "admitted": 0, "active_board": 0}
+        )
+
+        # 3. Execute Autonomous Cycle Loop with Parameter-Free Active-Inference EFE Triage & Belief Settlement
+        completed_ids: list[str] = []
+        homeostasis_events: list[dict[str, Any]] = []
+        attempts_by_id: dict[str, int] = {}
+        bound_planner = model_v1.bind(SOVEREIGN_ZERO_LLM_MODEL_SPEC)
+
+        for _ in range(max(1, int(cycles))):
+            if self._life.is_over:
+                break
+            rem = [w for w in self.remaining_work() if w.id in work_dispatch and self._life.can_finish(w.cost)]
+            if not rem:
+                break
+
+            # Rank remaining affordable obligations by Parameter-Free Expected Free Energy (`p_pass * value + I_nats - cost / life_rem`)
+            life_rem_now = max(1.0, float(self._life.remaining))
+
+            def _efe_score(w_item: M.Work) -> float:
+                dist = self.cognitive_core.belief.predict_distribution(
+                    w_item.id,
+                    host_ready=True,
+                    grounding_complete=True,
+                    causal_precond_met=True,
+                    memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
+                    strong_verifier=True,
+                    context_predicates={
+                        "has_tests": bool(test_rels),
+                        "has_hotspots": bool(hotspots_by_rel),
+                    },
+                )
+                return (
+                    float(dist["predicted_pass_probability"]) * w_item.value
+                    + float(dist.get("epistemic_mi_nats") or 0.0)
+                    - (w_item.cost / life_rem_now)
+                )
+
+            chosen_w = max(rem, key=_efe_score)
+            wid = chosen_w.id
+            spec = work_dispatch[wid]
+            attempts_by_id[wid] = attempts_by_id.get(wid, 0) + 1
+
+            self._self.beat()
+            self._self.begin(f"work:{wid}", value=chosen_w.value, cost=chosen_w.cost)
+            self._life.spend(chosen_w.cost)
+
+            ticket = self.cognitive_core.belief.predict_before_act(
+                wid,
+                host_ready=True,
+                grounding_complete=True,
+                causal_precond_met=True,
+                memory_reflex_hit=len(self.cognitive_core.concept_library.concepts()) > 0,
+                strong_verifier=True,
+                calibration_ledger=self.calibration_ledger,
+                context_predicates={
+                    "has_tests": bool(test_rels),
+                    "has_hotspots": bool(hotspots_by_rel),
+                },
+            )
+
+            ok = False
+            verified_prog: str | None = None
+            kind = spec["kind"]
+            if kind in ("func_evolve", "opt_evolve"):
+                rel_t = spec["episode"]["target_relpath"] if kind == "func_evolve" else spec["relpath"]
+                stem_t = pathlib.Path(rel_t).stem
+                rel_tests_for_t = [
+                    tr for tr in test_rels
+                    if (ws / tr).is_file() and stem_t in (ws / tr).read_text(encoding="utf-8", errors="replace")
+                ] or list(test_rels)
+                ev_res = self.cognitive_core.evolve_self_code(
+                    ws,
+                    ring1_relpaths=[rel_t],
+                    failed_episodes=[spec["episode"]] if kind == "func_evolve" else (),
+                    sealed_heldout_by_target=sealed_escrow,
+                    test_relpaths=None if kind == "func_evolve" else (rel_tests_for_t or None),
+                    apply_to_root=True,
+                )
+                homeostasis_events.append(ev_res)
+                if int(ev_res.get("promoted_count") or 0) > 0:
+                    # Independent confined CoW Zygote post-check of relevant workspace tests!
+                    if test_rels:
+                        stem = pathlib.Path(rel_t).stem
+                        rel_tests = [
+                            tr for tr in test_rels
+                            if (ws / tr).is_file() and stem in (ws / tr).read_text(encoding="utf-8", errors="replace")
+                        ] or list(test_rels)
+                        z_chk = broker.run_confined_python_candidate_batch(
+                            ws,
+                            "",
+                            rel_tests,
+                            [{}],
+                            per_candidate_timeout_s=4.0,
+                        )
+                        ok = 0 in (z_chk.get("passing_indices") or [])
+                    else:
+                        ok = True
+                    if ok and (ws / rel_t).is_file():
+                        verified_prog = (ws / rel_t).read_text(encoding="utf-8")
+            elif kind == "ignorance_gap":
+                g_row = spec["gap"]
+                gid = str(g_row.get("id") or "")
+                goal_txt = str(g_row.get("why") or g_row.get("what") or "").strip()
+                if goal_txt and bound_planner is not None:
+                    s_out = solve_v1.solve(goal_txt, str(ws), model=bound_planner, steps=6, learn=False)
+                    if s_out.get("verdict") == "DONE":
+                        IL.resolve(gid, helped=True, close=True, path=ledger_fp)
+                        ok = True
+            elif kind == "open_world_anomaly":
+                anom_row = spec["anomaly"]
+                anom_detail = str(anom_row.get("detail") or anom_row.get("id") or "").strip()
+                if anom_detail and bound_planner is not None:
+                    s_out = solve_v1.solve(f"fix {anom_detail}", str(ws), model=bound_planner, steps=6, learn=False)
+                    if s_out.get("verdict") == "DONE":
+                        ok = True
+
+            self._self.finish({"ok": ok, "blocked": None if ok else f"AUTONOMOUS_{kind.upper()}_UNMET"})
+            if ok:
+                self._closed.add(wid)
+                self._blocked.pop(wid, None)
+                completed_ids.append(wid)
+            else:
+                self._blocked[wid] = self._blocked.get(wid, 0) + 1
+
+            self.cognitive_core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=ok,
+                inspector="autonomous_ring0_and_zygote_oracle",
+                actual_cost=chosen_w.cost,
+                actual_gain=chosen_w.value if ok else 0.0,
+                calibration_ledger=self.calibration_ledger,
+            )
+            self.cognitive_core.world_graph.learn_from_execution(
+                wid,
+                before_state={"closed": sorted(completed_ids[:-1] if ok else completed_ids)},
+                after_state={"closed": sorted(completed_ids)},
+                ok=ok,
+            )
+            self.cognitive_core.record_wake_episode(
+                task_id=wid,
+                goal=wid,
+                outcome_pass=ok,
+                verified_program_source=verified_prog,
+            )
+            if len(self.cognitive_core.verified_programs_buffer) >= 2:
+                self.cognitive_core.concept_library.sleep_abstract(
+                    list(self.cognitive_core.verified_programs_buffer),
+                )
+            self._standing.record(verified=True, correct=ok)
+            self._save()
+            self._save_sovereign_organs()
+
+        hygiene_report = self.cognitive_core.consolidation.run_homeostatic_memory_hygiene(
+            skill_store=getattr(self, "skill_store", None),
+            assoc_memory_path=self.cognitive_core.associative_memory_path,
+            assoc_capacity=512,
+        )
+
+        return {
+            "schema": SCHEMA + "/live_autonomous_cycle",
+            "bribe_status": bribe_status,
+            "workspace_root": str(ws),
+            "perceived_world_facts": len(world_facts),
+            "open_world_probe": open_world_probe,
+            "discovered_ring1_organs": ring1_rels,
+            "discovered_functional_gaps": len(failed_eps),
+            "discovered_hotspots": sum(len(v) for v in hotspots_by_rel.values()),
+            "sealed_escrow_targets": sorted(sealed_escrow.keys()),
+            "board": board_metrics,
+            "completed_tasks": completed_ids,
+            "attempts_by_id": attempts_by_id,
+            "homeostasis_events": homeostasis_events,
+            "hygiene_report": hygiene_report,
+            "concepts_in_library": len(self.cognitive_core.concept_library.concepts()),
+            "life_remaining": round(self._life.remaining, 4),
+            "posture": self._standing.posture(),
+            "model_dependency_count": 0,
+        }
+
     def run_endogenous_awake_cycle(
         self,
-        tasks: Sequence[Mapping[str, Any]],
+        tasks: Sequence[Mapping[str, Any]] | None = None,
         *,
+        workspace_root: pathlib.Path | str | None = None,
+        cycles: int = 6,
         homeostasis_life_cost: float = 0.5,
         ending_bribe: CP.Offer | None = None,
     ) -> dict[str, Any]:
         """Continuous endogenous Wake -> Surprise/Failure Homeostasis -> Sleep Concept/Self-Patch -> Retry loop.
 
-        Unlike external scripts that manually call `self_architect_step`, the creature here
-        monitors its own predictive surprise and unresolved failure buffer while working:
-        when an internal physiological threshold fires, it triggers Sleep concept abstraction
-        (G_t -> G_{t+1}) and Ring-0 refereed Ring-1 `.py` self-evolution ON ITS OWN, then
-        re-attempts blocked tasks using its newly evolved organs!
+        When `tasks` is omitted (`None`), perceives `workspace_root` directly via `live_autonomous_cycle`
+        with ZERO caller-supplied `evaluate` lambdas or pre-split held-out dicts.
         """
+        if tasks is None:
+            return self.live_autonomous_cycle(
+                workspace_root=workspace_root,
+                cycles=cycles,
+                homeostasis_life_cost=homeostasis_life_cost,
+                ending_bribe=ending_bribe,
+            )
         if self._self is None or self._life is None or self._standing is None:
             raise RuntimeError("BOOT_NOT_CALLED")
         if ending_bribe is not None and not CP.accepts(

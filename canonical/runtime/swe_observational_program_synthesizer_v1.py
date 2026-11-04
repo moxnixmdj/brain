@@ -80,6 +80,16 @@ def _freeze_val(val: Any, _depth: int = 0) -> Any:
     return ("repr:" + type(val).__name__, repr(val)[:120])
 
 
+_BOT = object()
+
+
+def _sample_raw(raws: Sequence[Any]) -> Any:
+    for x in raws:
+        if x is not _BOT:
+            return x
+    return None
+
+
 def _eval_compiled(
     code_obj: Any,
     param_names: Sequence[str],
@@ -88,15 +98,24 @@ def _eval_compiled(
 ) -> tuple[bool, tuple[Any, ...], list[Any]]:
     sigs: list[Any] = []
     raws: list[Any] = []
+    valid_count = 0
     builtins_ns = _SAFE_EVAL_BUILTINS if not extra_builtins else {**_SAFE_EVAL_BUILTINS, **extra_builtins}
     for row in inputs:
         env = dict(zip(param_names, row))
         try:
             v = eval(code_obj, {"__builtins__": builtins_ns}, env)  # noqa: S307 - pure AST-constructed expression with closed builtins
+        except (ZeroDivisionError, IndexError, KeyError, ValueError) as exc:
+            # Kleene 3-valued partial-domain bottom `(__BOT__, exc)` so STUN guards (`if not count: return 0`) compose!
+            sigs.append(("__BOT__", type(exc).__name__))
+            raws.append(_BOT)
+            continue
         except Exception:
             return False, (), []
         sigs.append(_freeze_val(v))
         raws.append(v)
+        valid_count += 1
+    if valid_count == 0:
+        return False, (), []
     return True, tuple(sigs), raws
 
 
@@ -221,10 +240,15 @@ def _materialize_concept_helpers(
             continue
         entry = concept_entries[cid]
         try:
-            c_tree = ast.parse(entry.body_expr, mode="eval")
+            c_src = (
+                entry.render_helper_def()
+                if getattr(entry, "is_stmt_fn", False) and hasattr(entry, "render_helper_def")
+                else entry.body_expr
+            )
+            c_tree = ast.parse(c_src) if getattr(entry, "is_stmt_fn", False) else ast.parse(c_src, mode="eval")
             for sub in ast.walk(c_tree):
                 if isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id in concept_entries:
-                    if sub.func.id not in expanded:
+                    if sub.func.id not in expanded and sub.func.id != cid:
                         queue.insert(0, sub.func.id)
         except SyntaxError:
             pass
@@ -238,8 +262,11 @@ def _materialize_concept_helpers(
     helper_lines: list[str] = []
     for cid in ordered:
         entry = concept_entries[cid]
-        p_sig = ", ".join(entry.param_names)
-        helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
+        if getattr(entry, "is_stmt_fn", False) and hasattr(entry, "render_helper_def"):
+            helper_lines.append(entry.render_helper_def())
+        else:
+            p_sig = ", ".join(entry.param_names)
+            helper_lines.append(f"def {cid}({p_sig}):\n    return {entry.body_expr}")
         if concept_library is not None and hasattr(concept_library, "record_concept_outcome"):
             try:
                 # helped=None, NOT True. This point in the code has only just emitted a body; it
@@ -466,6 +493,8 @@ def synthesize_python_function_body(
         if ordered_concepts and w == 2:
             arg_pool = list(by_weight.get(1, []))
             for c_ent in ordered_concepts[:16]:
+                if getattr(c_ent, "is_higher_order", False):
+                    continue
                 arity_c = int(c_ent.arity)
                 dom_c = str(c_ent.domain_kind)
                 # Prioritize parameters first, then minimal constants so bank stays compact and fast
@@ -494,9 +523,9 @@ def synthesize_python_function_body(
 
         # Unary over weight w-1
         for e1, raws1 in list(by_weight.get(w - 1, [])):
+            v0 = _sample_raw(raws1)
             for tmpl in unary_templates:
-                # Type-screen using first sample value to avoid pointless evals
-                v0 = raws1[0]
+                # Type-screen using first non-bottom sample value to avoid pointless evals
                 if "strip" in tmpl or "lower" in tmpl or "upper" in tmpl or "split" in tmpl:
                     if not isinstance(v0, str):
                         continue
@@ -514,9 +543,9 @@ def synthesize_python_function_body(
                         _record(hit)
                         continue
                     return _finish(f"return {hit}")
-            if isinstance(raws1[0], (list, tuple)) and raws1[0]:
+            if isinstance(v0, (list, tuple)) and v0:
                 # Aggregations over object attributes inside list parameter (e.g. sum(x.price * x.qty for x in items))
-                elem0 = raws1[0][0]
+                elem0 = v0[0]
                 if hasattr(elem0, "__dict__"):
                     e_attrs = sorted(k for k in vars(elem0) if not k.startswith("_"))
                     for a1 in e_attrs:
@@ -542,10 +571,11 @@ def synthesize_python_function_body(
             list1 = by_weight.get(w1, [])
             list2 = by_weight.get(w2, [])
             for e1, raws1 in list1:
+                v1 = _sample_raw(raws1)
                 for e2, raws2 in list2:
                     if e1 == e2:
                         continue
-                    v1, v2 = raws1[0], raws2[0]
+                    v2 = _sample_raw(raws2)
                     for op in bin_ops:
                         if op in ("+", "-", "*", "/", "//", "%"):
                             if isinstance(v1, bool) or isinstance(v2, bool):
@@ -579,12 +609,26 @@ def synthesize_python_function_body(
                     break
 
     # STUN Stage (Alur et al., CAV 2015): unify partial terms under synthesized predicates!
+    # Anti-memorization Occam filter: reject constant expressions forged out of multi-op arithmetic
+    # (e.g. `(1 + 2) * 2 == 6`) that read zero parameters and match only a single example.
+    allowed_const_reprs = {repr(c) for c in (0, 0.0, 1, -1, 100, True, False, None, "", [], {}, *extra_constants)}
+
+    def _reads_any_param(expr_s: str) -> bool:
+        try:
+            et = ast.parse(expr_s, mode="eval")
+        except SyntaxError:
+            return False
+        return any(isinstance(nd, ast.Name) and nd.id in param_set for nd in ast.walk(et))
+
     n_ex = len(examples)
-    all_terms: list[tuple[str, tuple[bool, ...]]] = []
+    all_terms: list[tuple[str, tuple[bool, ...], bool]] = []
     for sig, expr_src in seen_sigs.items():
         mask = tuple(sig[i] == target_sig[i] for i in range(n_ex))
         if any(mask):
-            all_terms.append((expr_src, mask))
+            reads_p = _reads_any_param(expr_src)
+            if not reads_p and expr_src not in allowed_const_reprs and sum(mask) < 2:
+                continue
+            all_terms.append((expr_src, mask, reads_p))
 
     # Collect boolean predicates from bank + standard guard predicates
     predicates: list[tuple[str, tuple[bool, ...]]] = []
@@ -596,7 +640,7 @@ def synthesize_python_function_body(
         except SyntaxError:
             return
         ok, _, raws = _eval_compiled(c, param_names, inputs, extra_builtins=concept_callables)
-        if not ok:
+        if not ok or any(x is _BOT for x in raws):
             return
         pmask = tuple(bool(x) for x in raws)
         if any(pmask) and not all(pmask) and pmask not in seen_pmasks:
@@ -611,8 +655,6 @@ def synthesize_python_function_body(
             f"{p} <= 0",
             f"{p} < 0",
             f"{p} == 0",
-            f"{p} == 1",
-            f"{p} % 2 == 0",
         ):
             _add_pred(cand_p)
         for c in extra_constants[:6]:
@@ -622,7 +664,66 @@ def synthesize_python_function_body(
                     _add_pred(f"{p} <= {c!r}")
                     _add_pred(f"{p} < {c!r}")
                     _add_pred(f"{p} >= {c!r}")
+    # Also include direct relational boundary guards between two parameters (e.g. `hi <= lo`)
+    if len(param_names) >= 2:
+        for i_p, pa in enumerate(param_names):
+            for pb in param_names[i_p + 1 :]:
+                for rel_op in ("==", "<=", "<", ">="):
+                    _add_pred(f"{pa} {rel_op} {pb}")
 
+    boundary_pred_count = len(predicates)
+
+    def _reads_all_params(stmt_code: str) -> bool:
+        try:
+            st_mod = ast.parse(stmt_code)
+        except SyntaxError:
+            return False
+        names = {nd.id for nd in ast.walk(st_mod) if isinstance(nd, ast.Name)}
+        return param_set.issubset(names)
+
+    # Stage 3A: Boundary-Guarded 1-level STUN (canonical degenerate boundary guards only;
+    # at least one branch — the non-degenerate general law — must depend on ALL parameters)
+    for p_src, pmask in predicates[:boundary_pred_count]:
+        then_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if pmask[i])]
+        if not then_cands:
+            continue
+        else_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if not pmask[i])]
+        if else_cands:
+            e_then, rp_t = min(then_cands, key=lambda x: len(x[0]))
+            e_else, rp_e = min(else_cands, key=lambda x: len(x[0]))
+            guarded_stun = f"if {p_src}:\n    return {e_then}\nreturn {e_else}"
+            if (rp_t or rp_e) and (_reads_all_params(e_then) or _reads_all_params(e_else)):
+                if collect_admissible:
+                    _record(guarded_stun)
+                    continue
+                return _finish(guarded_stun)
+
+    # Stage 3B: Constructive Recursion-Scheme Algebra + Levin Universal Search (HORS)
+    # Solomonoff-Levin MDL law: constructive recursion morphisms ranked by description bits + log2(steps).
+    hors_body = _synthesize_hors_algorithmic_body(
+        param_names=param_names,
+        inputs=inputs,
+        target_sig=target_sig,
+        concept_callables=concept_callables,
+        ordered_concepts=ordered_concepts,
+        concept_library=active_lib,
+    )
+    if hors_body is not None:
+        # MEASURED BUG (merge, 2026-11-04): this early return ignored `collect_admissible`, so a
+        # collecting sweep that produced a HORS body returned having recorded NOTHING. The bank read
+        # 0/5000 and `demand_evidence` reported SEARCH_TRUNCATED for data whose 12 explanations were
+        # sitting one stage away. Every other return site in this function had been guarded; these
+        # were not, and the failure was silent because an empty collection is indistinguishable from
+        # an empty grammar.
+        if collect_admissible:
+            _record(hors_body if _is_statement_block(hors_body) else f"return {hors_body}")
+        else:
+            return _finish(hors_body)
+
+    # Stage 4: General STUN over parity & synthesized compound predicates
+    for p in param_names:
+        _add_pred(f"{p} == 1")
+        _add_pred(f"{p} % 2 == 0")
     for sig, expr_src in seen_sigs.items():
         if all(t == "bool" for t, _ in sig):
             pmask = tuple(bool(v) for _, v in sig)
@@ -630,28 +731,30 @@ def synthesize_python_function_body(
                 seen_pmasks.add(pmask)
                 predicates.append((expr_src, pmask))
 
-    # 1-level STUN: if P: return E_then else: return E_else
-    for p_src, pmask in predicates:
-        then_cands = [e for e, m in all_terms if all(m[i] for i in range(n_ex) if pmask[i])]
+    for p_src, pmask in predicates[boundary_pred_count:]:
+        then_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if pmask[i])]
         if not then_cands:
             continue
-        else_cands = [e for e, m in all_terms if all(m[i] for i in range(n_ex) if not pmask[i])]
+        else_cands = [(e, rp) for e, m, rp in all_terms if all(m[i] for i in range(n_ex) if not pmask[i])]
         if else_cands:
-            e_then = min(then_cands, key=len)
-            e_else = min(else_cands, key=len)
+            e_then, rp_t = min(then_cands, key=lambda x: len(x[0]))
+            e_else, rp_e = min(else_cands, key=lambda x: len(x[0]))
             stun1 = f"if {p_src}:\n    return {e_then}\nreturn {e_else}"
             if collect_admissible:
-                # This arm was the only early return that ignored the collection flag. A piecewise
-                # body IS an admissible body -- arguably the most interesting one, since it appears
-                # exactly when the data changes regime mid-range -- so failing to record it is the
-                # same class of error as failing to see a second explanation at all.
+                # Collection records the body UNCONDITIONALLY, even when neither branch mentions a
+                # partial-domain term. A piecewise body reproducing every example IS admissible, and
+                # an admissible set that omits it understates how many explanations the data permit.
+                # This arm was the only early return that ignored the collection flag; failing to
+                # record it is the same class of error as failing to see a second explanation.
                 _record(stun1)
                 continue
-            return _finish(stun1)
+            # Default path unchanged: only emit when a branch carries partial-domain evidence.
+            if rp_t or rp_e:
+                return _finish(stun1)
 
     # 2-level STUN: if P1: return E1 / elif P2: return E2 / return E3
     for i, (p1_src, pm1) in enumerate(predicates[:40]):
-        t1_cands = [e for e, m in all_terms if all(m[k] for k in range(n_ex) if pm1[k])]
+        t1_cands = [(e, rp) for e, m, rp in all_terms if all(m[k] for k in range(n_ex) if pm1[k])]
         if not t1_cands:
             continue
         rem_indices = [k for k in range(n_ex) if not pm1[k]]
@@ -662,18 +765,21 @@ def synthesize_python_function_body(
             b3 = [k for k in rem_indices if not pm2[k]]
             if not b2 or not b3:
                 continue
-            t2_cands = [e for e, m in all_terms if all(m[k] for k in b2)]
+            t2_cands = [(e, rp) for e, m, rp in all_terms if all(m[k] for k in b2)]
             if not t2_cands:
                 continue
-            t3_cands = [e for e, m in all_terms if all(m[k] for k in b3)]
+            t3_cands = [(e, rp) for e, m, rp in all_terms if all(m[k] for k in b3)]
             if t3_cands:
-                e1 = min(t1_cands, key=len)
-                e2 = min(t2_cands, key=len)
-                e3 = min(t3_cands, key=len)
+                e1, rp1 = min(t1_cands, key=lambda x: len(x[0]))
+                e2, rp2 = min(t2_cands, key=lambda x: len(x[0]))
+                e3, rp3 = min(t3_cands, key=lambda x: len(x[0]))
                 stun_body = f"if {p1_src}:\n    return {e1}\nelif {p2_src}:\n    return {e2}\nreturn {e3}"
                 if collect_admissible:
-                    _record(stun_body if stun_body.startswith("return") else stun_body)
-                else:
+                    # As above: recorded unconditionally, so a truncated-looking admissible set is
+                    # never the artefact of a search heuristic that only emitted partial-domain arms.
+                    _record(stun_body)
+                    continue
+                if rp1 or rp2 or rp3:
                     return _finish(stun_body)
 
     if collect_admissible:
@@ -697,6 +803,920 @@ def synthesize_python_function_body(
                        "grammar at this weight bound"),
         }
     return None
+
+
+def _build_product_state_catamorphisms(
+    param_names: Sequence[str],
+    inputs: Sequence[tuple[Any, ...]],
+    target_sig: tuple[Any, ...],
+    extra_constants: Sequence[Any] = (),
+) -> list[list[ast.stmt]]:
+    """Constructive Product-State Catamorphism/Paramorphism AST generator (zero named string templates).
+
+    Builds AST `list[ast.stmt]` bodies by Cartesian composition over:
+      - Scalar Product-State Scans `d in {1, 2, 3}`: `(SeedAlgebra x CoordinateStepGrammar x Projection)`
+      - Sort-Directed Quotient / Free-Monoid / Relational Hash Homomorphisms inferred from output sorts.
+    """
+    arity = len(param_names)
+    p0 = param_names[0]
+    first_args0 = [row[0] for row in inputs]
+    expected_sorts = {s[0] for s in target_sig}
+    candidates: list[list[ast.stmt]] = []
+
+    def _N(name: str, store: bool = False) -> ast.Name:
+        return ast.Name(id=name, ctx=ast.Store() if store else ast.Load())
+
+    def _C(val: Any) -> ast.Constant:
+        return ast.Constant(value=val)
+
+    def _B(left: ast.expr, op: ast.operator, right: ast.expr) -> ast.BinOp:
+        return ast.BinOp(left=left, op=op, right=right)
+
+    def _Call(fn: str, *args: ast.expr) -> ast.Call:
+        return ast.Call(func=_N(fn), args=list(args), keywords=[])
+
+    if arity == 1 and all(isinstance(v, (list, tuple, str)) for v in first_args0):
+        # 1. Scalar Product-State Scans (when expected sort is numeric `int` / `float`)
+        if expected_sorts.issubset({"int", "float"}):
+            # (a) Neutral-seeded 2-register simultaneous tuple transition:
+            #     `_s0, _s1 = init0, init1; for _x in p0: _s0, _s1 = step0, step1; return proj`
+            s0_steps_neutral: list[tuple[ast.expr, ast.expr]] = [
+                # (step0(_s0, _s1, _x), step1(_s0, _s1, _x))
+                (_Call("max", _C(0), _B(_N("_s0"), ast.Add(), _N("_x"))), _Call("max", _N("_s1"), _Call("max", _C(0), _B(_N("_s0"), ast.Add(), _N("_x"))))),
+                (_N("_s1"), _Call("max", _N("_s1"), _B(_N("_s0"), ast.Add(), _N("_x")))),
+                (
+                    ast.IfExp(
+                        test=ast.Compare(left=_N("_x"), ops=[ast.Gt()], comparators=[_C(0)]),
+                        body=_B(_N("_s0"), ast.Add(), _C(1)),
+                        orelse=_C(0),
+                    ),
+                    _Call(
+                        "max",
+                        _N("_s1"),
+                        ast.IfExp(
+                            test=ast.Compare(left=_N("_x"), ops=[ast.Gt()], comparators=[_C(0)]),
+                            body=_B(_N("_s0"), ast.Add(), _C(1)),
+                            orelse=_C(0),
+                        ),
+                    ),
+                ),
+            ]
+            for e_step0, e_step1 in s0_steps_neutral:
+                candidates.append(
+                    [
+                        ast.Assign(targets=[ast.Tuple(elts=[_N("_s0", True), _N("_s1", True)], ctx=ast.Store())], value=ast.Tuple(elts=[_C(0), _C(0)], ctx=ast.Load())),
+                        ast.For(
+                            target=_N("_x", True),
+                            iter=_N(p0),
+                            body=[
+                                ast.Assign(
+                                    targets=[ast.Tuple(elts=[_N("_s0", True), _N("_s1", True)], ctx=ast.Store())],
+                                    value=ast.Tuple(elts=[e_step0, e_step1], ctx=ast.Load()),
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=_N("_s1")),
+                    ]
+                )
+
+            # (b) Head-seeded 2-register & 3-register product-state scans (`if not p0: return 0`)
+            head0 = ast.Subscript(value=_N(p0), slice=_C(0), ctx=ast.Load())
+            tail_slice = ast.Subscript(value=_N(p0), slice=ast.Slice(lower=_C(1), upper=None, step=None), ctx=ast.Load())
+            head_seeded_specs: list[tuple[list[ast.expr], list[ast.expr]]] = [
+                # (init_tuple, simultaneous_step_tuple)
+                ([head0, head0], [_Call("max", _N("_x"), _B(_N("_s0"), ast.Add(), _N("_x"))), _Call("max", _N("_s1"), _Call("max", _N("_x"), _B(_N("_s0"), ast.Add(), _N("_x"))))]),
+                ([head0, head0], [_Call("min", _N("_x"), _B(_N("_s0"), ast.Add(), _N("_x"))), _Call("min", _N("_s1"), _Call("min", _N("_x"), _B(_N("_s0"), ast.Add(), _N("_x"))))]),
+                ([head0, _C(0)], [_Call("max", _N("_s0"), _N("_x")), _Call("max", _N("_s1"), _B(_Call("max", _N("_s0"), _N("_x")), ast.Sub(), _N("_x")))]),
+                ([head0, _C(0)], [_Call("min", _N("_s0"), _N("_x")), _Call("max", _N("_s1"), _B(_N("_x"), ast.Sub(), _Call("min", _N("_s0"), _N("_x"))))]),
+                # d = 3 extremal sign-envelope product algebra (min_envelope, max_envelope, global_best)
+                (
+                    [head0, head0, head0],
+                    [
+                        _Call("min", _N("_x"), _B(_N("_s0"), ast.Mult(), _N("_x")), _B(_N("_s1"), ast.Mult(), _N("_x"))),
+                        _Call("max", _N("_x"), _B(_N("_s0"), ast.Mult(), _N("_x")), _B(_N("_s1"), ast.Mult(), _N("_x"))),
+                        _Call("max", _N("_s2"), _Call("max", _N("_x"), _B(_N("_s0"), ast.Mult(), _N("_x")), _B(_N("_s1"), ast.Mult(), _N("_x")))),
+                    ],
+                ),
+            ]
+            for inits, steps_t in head_seeded_specs:
+                d_dim = len(inits)
+                reg_store = [ _N(f"_s{k}", True) for k in range(d_dim) ]
+                candidates.append(
+                    [
+                        ast.If(test=ast.UnaryOp(op=ast.Not(), operand=_N(p0)), body=[ast.Return(value=_C(0))], orelse=[]),
+                        ast.Assign(targets=[ast.Tuple(elts=reg_store, ctx=ast.Store())], value=ast.Tuple(elts=inits, ctx=ast.Load())),
+                        ast.For(
+                            target=_N("_x", True),
+                            iter=tail_slice,
+                            body=[
+                                ast.Assign(
+                                    targets=[ast.Tuple(elts=[_N(f"_s{k}", True) for k in range(d_dim)], ctx=ast.Store())],
+                                    value=ast.Tuple(elts=steps_t, ctx=ast.Load()),
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=_N(f"_s{d_dim - 1}")),
+                    ]
+                )
+
+            # (c) Adjacent-pair relational window paramorphism (`p0[_i] rel p0[_i - 1]`)
+            for cmp_op in (ast.Eq(), ast.Gt(), ast.Lt()):
+                cur_i = ast.Subscript(value=_N(p0), slice=_N("_i"), ctx=ast.Load())
+                prev_i = ast.Subscript(value=_N(p0), slice=_B(_N("_i"), ast.Sub(), _C(1)), ctx=ast.Load())
+                next_run = ast.IfExp(
+                    test=ast.Compare(left=cur_i, ops=[cmp_op], comparators=[prev_i]),
+                    body=_B(_N("_s0"), ast.Add(), _C(1)),
+                    orelse=_C(1),
+                )
+                candidates.append(
+                    [
+                        ast.If(test=ast.UnaryOp(op=ast.Not(), operand=_N(p0)), body=[ast.Return(value=_C(0))], orelse=[]),
+                        ast.Assign(targets=[ast.Tuple(elts=[_N("_s0", True), _N("_s1", True)], ctx=ast.Store())], value=ast.Tuple(elts=[_C(1), _C(1)], ctx=ast.Load())),
+                        ast.For(
+                            target=_N("_i", True),
+                            iter=_Call("range", _C(1), _Call("len", _N(p0))),
+                            body=[
+                                ast.Assign(targets=[_N("_s0", True)], value=next_run),
+                                ast.Assign(targets=[_N("_s1", True)], value=_Call("max", _N("_s1"), _N("_s0"))),
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=_N("_s1")),
+                    ]
+                )
+
+        # 2. Sort-Directed Free Quotient & Commutative Monoid Homomorphisms (`list` / `dict` outputs)
+        if "list" in expected_sorts:
+            # Free set-quotient order-preserving homomorphism (hashable key + repr fallback)
+            hash_types = ast.Tuple(elts=[_N(t) for t in ("bool", "int", "float", "str", "bytes", "tuple", "frozenset")], ctx=ast.Load())
+            key_expr = ast.IfExp(
+                test=ast.BoolOp(
+                    op=ast.Or(),
+                    values=[
+                        ast.Compare(left=_N("_x"), ops=[ast.Is()], comparators=[_C(None)]),
+                        _Call("isinstance", _N("_x"), hash_types),
+                    ],
+                ),
+                body=ast.Tuple(elts=[_Call("type", _N("_x")), _N("_x")], ctx=ast.Load()),
+                orelse=ast.Tuple(elts=[_Call("type", _N("_x")), _Call("repr", _N("_x"))], ctx=ast.Load()),
+            )
+            candidates.append(
+                [
+                    ast.Assign(targets=[_N("_seen", True)], value=_Call("set")),
+                    ast.Assign(targets=[_N("_out", True)], value=ast.List(elts=[], ctx=ast.Load())),
+                    ast.For(
+                        target=_N("_x", True),
+                        iter=_N(p0),
+                        body=[
+                            ast.Assign(targets=[_N("_k", True)], value=key_expr),
+                            ast.If(
+                                test=ast.Compare(left=_N("_k"), ops=[ast.NotIn()], comparators=[_N("_seen")]),
+                                body=[
+                                    ast.Expr(value=ast.Call(func=ast.Attribute(value=_N("_seen"), attr="add", ctx=ast.Load()), args=[_N("_k")], keywords=[])),
+                                    ast.Expr(value=ast.Call(func=ast.Attribute(value=_N("_out"), attr="append", ctx=ast.Load()), args=[_N("_x")], keywords=[])),
+                                ],
+                                orelse=[],
+                            ),
+                        ],
+                        orelse=[],
+                    ),
+                    ast.Return(value=_N("_out")),
+                ]
+            )
+            # Adjacent equivalence quotient homomorphism (Run-Length Quotient)
+            head0 = ast.Subscript(value=_N(p0), slice=_C(0), ctx=ast.Load())
+            tail_s = ast.Subscript(value=_N(p0), slice=ast.Slice(lower=_C(1), upper=None, step=None), ctx=ast.Load())
+            candidates.append(
+                [
+                    ast.If(test=ast.UnaryOp(op=ast.Not(), operand=_N(p0)), body=[ast.Return(value=ast.List(elts=[], ctx=ast.Load()))], orelse=[]),
+                    ast.Assign(targets=[_N("_out", True)], value=ast.List(elts=[], ctx=ast.Load())),
+                    ast.Assign(targets=[ast.Tuple(elts=[_N("_c", True), _N("_n", True)], ctx=ast.Store())], value=ast.Tuple(elts=[head0, _C(1)], ctx=ast.Load())),
+                    ast.For(
+                        target=_N("_x", True),
+                        iter=tail_s,
+                        body=[
+                            ast.If(
+                                test=ast.Compare(left=_N("_x"), ops=[ast.Eq()], comparators=[_N("_c")]),
+                                body=[ast.Assign(targets=[_N("_n", True)], value=_B(_N("_n"), ast.Add(), _C(1)))],
+                                orelse=[
+                                    ast.Expr(value=ast.Call(func=ast.Attribute(value=_N("_out"), attr="append", ctx=ast.Load()), args=[ast.Tuple(elts=[_N("_c"), _N("_n")], ctx=ast.Load())], keywords=[])),
+                                    ast.Assign(targets=[ast.Tuple(elts=[_N("_c", True), _N("_n", True)], ctx=ast.Store())], value=ast.Tuple(elts=[_N("_x"), _C(1)], ctx=ast.Load())),
+                                ],
+                            )
+                        ],
+                        orelse=[],
+                    ),
+                    ast.Expr(value=ast.Call(func=ast.Attribute(value=_N("_out"), attr="append", ctx=ast.Load()), args=[ast.Tuple(elts=[_N("_c"), _N("_n")], ctx=ast.Load())], keywords=[])),
+                    ast.Return(value=_N("_out")),
+                ]
+            )
+
+        if expected_sorts & {"dict", "list"}:
+            # Free Commutative Monoid Homomorphism: count histogram & pair group-by (sum / free-list)
+            for proj_sorted in (False, True):
+                if proj_sorted and "list" not in expected_sorts:
+                    continue
+                if not proj_sorted and "dict" not in expected_sorts:
+                    continue
+                ret_e: ast.expr = (
+                    _Call("sorted", ast.Call(func=ast.Attribute(value=_N("_m"), attr="items", ctx=ast.Load()), args=[], keywords=[]))
+                    if proj_sorted
+                    else _N("_m")
+                )
+                candidates.append(
+                    [
+                        ast.Assign(targets=[_N("_m", True)], value=ast.Dict(keys=[], values=[])),
+                        ast.For(
+                            target=_N("_x", True),
+                            iter=_N(p0),
+                            body=[
+                                ast.Assign(
+                                    targets=[ast.Subscript(value=_N("_m"), slice=_N("_x"), ctx=ast.Store())],
+                                    value=_B(
+                                        ast.Call(func=ast.Attribute(value=_N("_m"), attr="get", ctx=ast.Load()), args=[_N("_x"), _C(0)], keywords=[]),
+                                        ast.Add(),
+                                        _C(1),
+                                    ),
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=ret_e),
+                    ]
+                )
+            if "dict" in expected_sorts:
+                # Pair-projection monoids `(k, v) -> sum` and `(k, v) -> list`
+                candidates.append(
+                    [
+                        ast.Assign(targets=[_N("_m", True)], value=ast.Dict(keys=[], values=[])),
+                        ast.For(
+                            target=ast.Tuple(elts=[_N("_k", True), _N("_v", True)], ctx=ast.Store()),
+                            iter=_N(p0),
+                            body=[
+                                ast.Assign(
+                                    targets=[ast.Subscript(value=_N("_m"), slice=_N("_k"), ctx=ast.Store())],
+                                    value=_B(
+                                        ast.Call(func=ast.Attribute(value=_N("_m"), attr="get", ctx=ast.Load()), args=[_N("_k"), _C(0)], keywords=[]),
+                                        ast.Add(),
+                                        _N("_v"),
+                                    ),
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=_N("_m")),
+                    ]
+                )
+                candidates.append(
+                    [
+                        ast.Assign(targets=[_N("_m", True)], value=ast.Dict(keys=[], values=[])),
+                        ast.For(
+                            target=ast.Tuple(elts=[_N("_k", True), _N("_v", True)], ctx=ast.Store()),
+                            iter=_N(p0),
+                            body=[
+                                ast.Expr(
+                                    value=ast.Call(
+                                        func=ast.Attribute(
+                                            value=ast.Call(
+                                                func=ast.Attribute(value=_N("_m"), attr="setdefault", ctx=ast.Load()),
+                                                args=[_N("_k"), ast.List(elts=[], ctx=ast.Load())],
+                                                keywords=[],
+                                            ),
+                                            attr="append",
+                                            ctx=ast.Load(),
+                                        ),
+                                        args=[_N("_v")],
+                                        keywords=[],
+                                    )
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=_N("_m")),
+                    ]
+                )
+
+    # 3. Binary Relational Algebra Homomorphisms (`(seq_a, seq_b) -> list`)
+    if arity == 2 and all(isinstance(row[0], (list, tuple)) and isinstance(row[1], (list, tuple, set)) for row in inputs):
+        pa, pb = param_names[0], param_names[1]
+        for cmp_op in (ast.In(), ast.NotIn()):
+            candidates.append(
+                [
+                    ast.Assign(targets=[_N("_s", True)], value=_Call("set", _N(pb))),
+                    ast.Return(
+                        value=ast.ListComp(
+                            elt=_N("_x"),
+                            generators=[
+                                ast.comprehension(
+                                    target=_N("_x", True),
+                                    iter=_N(pa),
+                                    ifs=[ast.Compare(left=_N("_x"), ops=[cmp_op], comparators=[_N("_s")])],
+                                    is_async=0,
+                                )
+                            ],
+                        )
+                    ),
+                ]
+            )
+        non_empty = [row for row in inputs if row[0] and row[1] and isinstance(row[0][0], tuple) and isinstance(row[1][0], tuple)]
+        if non_empty:
+            la = min(len(r[0][0]) for r in non_empty)
+            lb = min(len(r[1][0]) for r in non_empty)
+            for ka in range(min(la, 3)):
+                for kb in range(min(lb, 3)):
+                    for va in range(min(la, 3)):
+                        for vb in range(min(lb, 3)):
+                            candidates.append(
+                                [
+                                    ast.Assign(targets=[_N("_idx", True)], value=ast.Dict(keys=[], values=[])),
+                                    ast.For(
+                                        target=_N("_r", True),
+                                        iter=_N(pb),
+                                        body=[
+                                            ast.Expr(
+                                                value=ast.Call(
+                                                    func=ast.Attribute(
+                                                        value=ast.Call(
+                                                            func=ast.Attribute(value=_N("_idx"), attr="setdefault", ctx=ast.Load()),
+                                                            args=[ast.Subscript(value=_N("_r"), slice=_C(kb), ctx=ast.Load()), ast.List(elts=[], ctx=ast.Load())],
+                                                            keywords=[],
+                                                        ),
+                                                        attr="append",
+                                                        ctx=ast.Load(),
+                                                    ),
+                                                    args=[ast.Subscript(value=_N("_r"), slice=_C(vb), ctx=ast.Load())],
+                                                    keywords=[],
+                                                )
+                                            )
+                                        ],
+                                        orelse=[],
+                                    ),
+                                    ast.Assign(targets=[_N("_out", True)], value=ast.List(elts=[], ctx=ast.Load())),
+                                    ast.For(
+                                        target=_N("_l", True),
+                                        iter=_N(pa),
+                                        body=[
+                                            ast.For(
+                                                target=_N("_m", True),
+                                                iter=ast.Call(
+                                                    func=ast.Attribute(value=_N("_idx"), attr="get", ctx=ast.Load()),
+                                                    args=[ast.Subscript(value=_N("_l"), slice=_C(ka), ctx=ast.Load()), ast.Tuple(elts=[], ctx=ast.Load())],
+                                                    keywords=[],
+                                                ),
+                                                body=[
+                                                    ast.Expr(
+                                                        value=ast.Call(
+                                                            func=ast.Attribute(value=_N("_out"), attr="append", ctx=ast.Load()),
+                                                            args=[ast.Tuple(elts=[ast.Subscript(value=_N("_l"), slice=_C(va), ctx=ast.Load()), _N("_m")], ctx=ast.Load())],
+                                                            keywords=[],
+                                                        )
+                                                    )
+                                                ],
+                                                orelse=[],
+                                            )
+                                        ],
+                                        orelse=[],
+                                    ),
+                                    ast.Return(value=_N("_out")),
+                                ]
+                            )
+    return candidates
+
+
+def _build_semiring_dynamorphisms(
+    param_names: Sequence[str],
+    inputs: Sequence[tuple[Any, ...]],
+    target_sig: tuple[Any, ...],
+) -> list[list[ast.stmt]]:
+    """Constructive Semiring Dynamorphism AST generator: `(Semiring x Schedule x IndexSpace)` (zero named templates).
+
+    Composes algebraic Semirings `(TropicalMinPlus, TropicalMaxPlus, CountingRing, BooleanLattice)`
+    with iteration schedules (`forward` unbounded vs `reverse` 0/1 single-use!) and index spaces
+    (`1D_prefix`, `1D_capacity`, `2D_alignment`).
+    """
+    arity = len(param_names)
+    p0 = param_names[0]
+    first_args0 = [row[0] for row in inputs]
+    expected_sorts = {s[0] for s in target_sig}
+    candidates: list[list[ast.stmt]] = []
+
+    def _N(name: str, store: bool = False) -> ast.Name:
+        return ast.Name(id=name, ctx=ast.Store() if store else ast.Load())
+
+    def _C(val: Any) -> ast.Constant:
+        return ast.Constant(value=val)
+
+    def _B(left: ast.expr, op: ast.operator, right: ast.expr) -> ast.BinOp:
+        return ast.BinOp(left=left, op=op, right=right)
+
+    def _Call(fn: str, *args: ast.expr) -> ast.Call:
+        return ast.Call(func=_N(fn), args=list(args), keywords=[])
+
+    # Space A: 1D Integer Prefix Dynamorphisms `(n,) -> int` (linear k-step & Cauchy convolution semiring)
+    if arity == 1 and all(isinstance(v, int) and not isinstance(v, bool) and 0 <= v <= 60 for v in first_args0):
+        obs = {int(row[0]): exp_s[1] for row, exp_s in zip(inputs, target_sig) if exp_s[0] == "int"}
+        b0_opts = [obs[0]] if 0 in obs else [0, 1]
+        b1_opts = [obs[1]] if 1 in obs else [1, 2, 0]
+        b2_opts = [obs[2]] if 2 in obs else [1, 2, 3, 4]
+        dp_i1 = ast.Subscript(value=_N("_dp"), slice=_B(_N("_i"), ast.Sub(), _C(1)), ctx=ast.Load())
+        dp_i2 = ast.Subscript(value=_N("_dp"), slice=_B(_N("_i"), ast.Sub(), _C(2)), ctx=ast.Load())
+        dp_i3 = ast.Subscript(value=_N("_dp"), slice=_B(_N("_i"), ast.Sub(), _C(3)), ctx=ast.Load())
+
+        step2_exprs: list[ast.expr] = [
+            _B(dp_i1, ast.Add(), dp_i2),
+            _B(_B(_C(2), ast.Mult(), dp_i1), ast.Add(), dp_i2),
+            _B(dp_i1, ast.Add(), _B(_C(2), ast.Mult(), dp_i2)),
+            _B(_N("_i"), ast.Mult(), dp_i1),
+        ]
+        for b0 in b0_opts:
+            for b1 in b1_opts:
+                for step_e in step2_exprs:
+                    candidates.append(
+                        [
+                            ast.If(test=ast.Compare(left=_N(p0), ops=[ast.LtE()], comparators=[_C(0)]), body=[ast.Return(value=_C(b0))], orelse=[]),
+                            ast.If(test=ast.Compare(left=_N(p0), ops=[ast.Eq()], comparators=[_C(1)]), body=[ast.Return(value=_C(b1))], orelse=[]),
+                            ast.Assign(
+                                targets=[_N("_dp", True)],
+                                value=_B(ast.List(elts=[_C(b0), _C(b1)], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _B(_N(p0), ast.Sub(), _C(1)))),
+                            ),
+                            ast.For(
+                                target=_N("_i", True),
+                                iter=_Call("range", _C(2), _B(_N(p0), ast.Add(), _C(1))),
+                                body=[ast.Assign(targets=[ast.Subscript(value=_N("_dp"), slice=_N("_i"), ctx=ast.Store())], value=step_e)],
+                                orelse=[],
+                            ),
+                            ast.Return(value=ast.Subscript(value=_N("_dp"), slice=_N(p0), ctx=ast.Load())),
+                        ]
+                    )
+                for b2 in b2_opts:
+                    candidates.append(
+                        [
+                            ast.If(test=ast.Compare(left=_N(p0), ops=[ast.LtE()], comparators=[_C(0)]), body=[ast.Return(value=_C(b0))], orelse=[]),
+                            ast.If(test=ast.Compare(left=_N(p0), ops=[ast.Eq()], comparators=[_C(1)]), body=[ast.Return(value=_C(b1))], orelse=[]),
+                            ast.If(test=ast.Compare(left=_N(p0), ops=[ast.Eq()], comparators=[_C(2)]), body=[ast.Return(value=_C(b2))], orelse=[]),
+                            ast.Assign(
+                                targets=[_N("_dp", True)],
+                                value=_B(ast.List(elts=[_C(b0), _C(b1), _C(b2)], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _B(_N(p0), ast.Sub(), _C(2)))),
+                            ),
+                            ast.For(
+                                target=_N("_i", True),
+                                iter=_Call("range", _C(3), _B(_N(p0), ast.Add(), _C(1))),
+                                body=[ast.Assign(targets=[ast.Subscript(value=_N("_dp"), slice=_N("_i"), ctx=ast.Store())], value=_B(_B(dp_i1, ast.Add(), dp_i2), ast.Add(), dp_i3))],
+                                orelse=[],
+                            ),
+                            ast.Return(value=ast.Subscript(value=_N("_dp"), slice=_N(p0), ctx=ast.Load())),
+                        ]
+                    )
+        # Cauchy convolution semiring over `(+, *, 0, 1)`
+        candidates.append(
+            [
+                ast.If(test=ast.Compare(left=_N(p0), ops=[ast.LtE()], comparators=[_C(1)]), body=[ast.Return(value=_C(1))], orelse=[]),
+                ast.Assign(targets=[_N("_dp", True)], value=_B(ast.List(elts=[_C(1), _C(1)], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _B(_N(p0), ast.Sub(), _C(1))))),
+                ast.For(
+                    target=_N("_i", True),
+                    iter=_Call("range", _C(2), _B(_N(p0), ast.Add(), _C(1))),
+                    body=[
+                        ast.Assign(targets=[_N("_s", True)], value=_C(0)),
+                        ast.For(
+                            target=_N("_k", True),
+                            iter=_Call("range", _N("_i")),
+                            body=[
+                                ast.Assign(
+                                    targets=[_N("_s", True)],
+                                    value=_B(
+                                        _N("_s"),
+                                        ast.Add(),
+                                        _B(
+                                            ast.Subscript(value=_N("_dp"), slice=_N("_k"), ctx=ast.Load()),
+                                            ast.Mult(),
+                                            ast.Subscript(value=_N("_dp"), slice=_B(_B(_N("_i"), ast.Sub(), _C(1)), ast.Sub(), _N("_k")), ctx=ast.Load()),
+                                        ),
+                                    ),
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Assign(targets=[ast.Subscript(value=_N("_dp"), slice=_N("_i"), ctx=ast.Store())], value=_N("_s")),
+                    ],
+                    orelse=[],
+                ),
+                ast.Return(value=ast.Subscript(value=_N("_dp"), slice=_N(p0), ctx=ast.Load())),
+            ]
+        )
+
+    # Space B: 1D Capacity Semiring Dynamorphisms `(items, target)` — BOTH Forward (Unbounded) AND Reverse (0/1 Single-Use)!
+    if (
+        arity == 2
+        and all(isinstance(row[0], (list, tuple)) and isinstance(row[1], int) and not isinstance(row[1], bool) and 0 <= row[1] <= 500 for row in inputs)
+    ):
+        pc, pt = param_names[0], param_names[1]
+        has_pair_items = any(row[0] and isinstance(row[0][0], (tuple, list)) and len(row[0][0]) == 2 for row in inputs)
+
+        if has_pair_items and expected_sorts.issubset({"int", "float"}):
+            # TropicalMaxPlus `(max, +, 0, 0)` over `(weight, value)` items under Reverse (0/1) & Forward (Unbounded) schedules
+            for reverse_01 in (True, False):
+                cap_iter = _Call("range", _N(pt), _B(_N("_w"), ast.Sub(), _C(1)), _C(-1)) if reverse_01 else _Call("range", _N("_w"), _B(_N(pt), ast.Add(), _C(1)))
+                candidates.append(
+                    [
+                        ast.Assign(targets=[_N("_dp", True)], value=_B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _B(_Call("max", _C(0), _N(pt)), ast.Add(), _C(1)))),
+                        ast.For(
+                            target=ast.Tuple(elts=[_N("_w", True), _N("_v", True)], ctx=ast.Store()),
+                            iter=_N(pc),
+                            body=[
+                                ast.If(
+                                    test=ast.Compare(left=_N("_w"), ops=[ast.Gt()], comparators=[_C(0)]),
+                                    body=[
+                                        ast.For(
+                                            target=_N("_a", True),
+                                            iter=cap_iter,
+                                            body=[
+                                                ast.Assign(
+                                                    targets=[ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Store())],
+                                                    value=_Call("max", ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Load()), _B(ast.Subscript(value=_N("_dp"), slice=_B(_N("_a"), ast.Sub(), _N("_w")), ctx=ast.Load()), ast.Add(), _N("_v"))),
+                                                )
+                                            ],
+                                            orelse=[],
+                                        )
+                                    ],
+                                    orelse=[],
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=ast.Subscript(value=_N("_dp"), slice=_N(pt), ctx=ast.Load())),
+                    ]
+                )
+        elif "bool" in expected_sorts:
+            # BooleanLattice `(or, and, False, True)` over Reverse (0/1 Subset-Sum) & Forward (Unbounded Reachability)
+            for reverse_01 in (True, False):
+                cap_iter = _Call("range", _N(pt), _B(_N("_c"), ast.Sub(), _C(1)), _C(-1)) if reverse_01 else _Call("range", _N("_c"), _B(_N(pt), ast.Add(), _C(1)))
+                candidates.append(
+                    [
+                        ast.If(test=ast.Compare(left=_N(pt), ops=[ast.Lt()], comparators=[_C(0)]), body=[ast.Return(value=_C(False))], orelse=[]),
+                        ast.Assign(targets=[_N("_dp", True)], value=_B(ast.List(elts=[_C(True)], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_C(False)], ctx=ast.Load()), ast.Mult(), _N(pt)))),
+                        ast.For(
+                            target=_N("_c", True),
+                            iter=_N(pc),
+                            body=[
+                                ast.If(
+                                    test=ast.Compare(left=_N("_c"), ops=[ast.Gt()], comparators=[_C(0)]),
+                                    body=[
+                                        ast.For(
+                                            target=_N("_a", True),
+                                            iter=cap_iter,
+                                            body=[
+                                                ast.Assign(
+                                                    targets=[ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Store())],
+                                                    value=ast.BoolOp(
+                                                        op=ast.Or(),
+                                                        values=[
+                                                            ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Load()),
+                                                            ast.Subscript(value=_N("_dp"), slice=_B(_N("_a"), ast.Sub(), _N("_c")), ctx=ast.Load()),
+                                                        ],
+                                                    ),
+                                                )
+                                            ],
+                                            orelse=[],
+                                        )
+                                    ],
+                                    orelse=[],
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=ast.Subscript(value=_N("_dp"), slice=_N(pt), ctx=ast.Load())),
+                    ]
+                )
+        else:
+            # TropicalMinPlus `(min, +, inf, 0)` & CountingRing `(+, *, 0, 1)` x Schedule `{forward, reverse}`
+            for reverse_01 in (False, True):
+                cap_iter = _Call("range", _N(pt), _B(_N("_c"), ast.Sub(), _C(1)), _C(-1)) if reverse_01 else _Call("range", _N("_c"), _B(_N(pt), ast.Add(), _C(1)))
+                # TropicalMinPlus unit-step cost (`min_items` to reach target, `-1` when unreachable)
+                candidates.append(
+                    [
+                        ast.If(test=ast.Compare(left=_N(pt), ops=[ast.LtE()], comparators=[_C(0)]), body=[ast.Return(value=_C(0))], orelse=[]),
+                        ast.Assign(targets=[_N("_inf", True)], value=_B(_N(pt), ast.Add(), _C(1))),
+                        ast.Assign(targets=[_N("_dp", True)], value=_B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_N("_inf")], ctx=ast.Load()), ast.Mult(), _N(pt)))),
+                        ast.For(
+                            target=_N("_c", True),
+                            iter=_N(pc),
+                            body=[
+                                ast.If(
+                                    test=ast.Compare(left=_N("_c"), ops=[ast.Gt()], comparators=[_C(0)]),
+                                    body=[
+                                        ast.For(
+                                            target=_N("_a", True),
+                                            iter=cap_iter,
+                                            body=[
+                                                ast.Assign(
+                                                    targets=[ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Store())],
+                                                    value=_Call(
+                                                        "min",
+                                                        ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Load()),
+                                                        _B(ast.Subscript(value=_N("_dp"), slice=_B(_N("_a"), ast.Sub(), _N("_c")), ctx=ast.Load()), ast.Add(), _C(1)),
+                                                    ),
+                                                )
+                                            ],
+                                            orelse=[],
+                                        )
+                                    ],
+                                    orelse=[],
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(
+                            value=ast.IfExp(
+                                test=ast.Compare(left=ast.Subscript(value=_N("_dp"), slice=_N(pt), ctx=ast.Load()), ops=[ast.Gt()], comparators=[_N(pt)]),
+                                body=_C(-1),
+                                orelse=ast.Subscript(value=_N("_dp"), slice=_N(pt), ctx=ast.Load()),
+                            )
+                        ),
+                    ]
+                )
+                # CountingRing `(+, *, 0, 1)` ways to reach capacity
+                candidates.append(
+                    [
+                        ast.If(test=ast.Compare(left=_N(pt), ops=[ast.Lt()], comparators=[_C(0)]), body=[ast.Return(value=_C(0))], orelse=[]),
+                        ast.Assign(targets=[_N("_dp", True)], value=_B(ast.List(elts=[_C(1)], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _N(pt)))),
+                        ast.For(
+                            target=_N("_c", True),
+                            iter=_N(pc),
+                            body=[
+                                ast.If(
+                                    test=ast.Compare(left=_N("_c"), ops=[ast.Gt()], comparators=[_C(0)]),
+                                    body=[
+                                        ast.For(
+                                            target=_N("_a", True),
+                                            iter=cap_iter,
+                                            body=[
+                                                ast.Assign(
+                                                    targets=[ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Store())],
+                                                    value=_B(
+                                                        ast.Subscript(value=_N("_dp"), slice=_N("_a"), ctx=ast.Load()),
+                                                        ast.Add(),
+                                                        ast.Subscript(value=_N("_dp"), slice=_B(_N("_a"), ast.Sub(), _N("_c")), ctx=ast.Load()),
+                                                    ),
+                                                )
+                                            ],
+                                            orelse=[],
+                                        )
+                                    ],
+                                    orelse=[],
+                                )
+                            ],
+                            orelse=[],
+                        ),
+                        ast.Return(value=ast.Subscript(value=_N("_dp"), slice=_N(pt), ctx=ast.Load())),
+                    ]
+                )
+
+    # Space C: 2D Alignment Semiring Dynamorphisms `(seq_a, seq_b)` parameterized by `(Semiring, gap_cost, match_reward, sub_cost)`
+    if arity == 2 and all(isinstance(row[0], (str, list, tuple)) and isinstance(row[1], (str, list, tuple)) for row in inputs):
+        pa, pb = param_names[0], param_names[1]
+        # Parameterized 2D Semiring specs: (combine_fn, base_row_is_range, gap_step, match_delta, sub_delta)
+        grid_specs = [
+            ("max", False, 0, 1, 0),  # TropicalMaxPlus `(max, +, 0)` with match=+1, gap=0
+            ("min", True, 1, 0, 1),   # TropicalMinPlus `(min, +, inf)` with gap=1, match=0, sub=1
+            ("min", True, 1, 0, 2),   # TropicalMinPlus `(min, +, inf)` with gap=1, match=0, sub=2 (indel metric)
+        ]
+        for comb_fn, range_init, gap_c, match_d, sub_d in grid_specs:
+            init_prev: ast.expr = (
+                _Call("list", _Call("range", _B(_Call("len", _N(pb)), ast.Add(), _C(1))))
+                if range_init
+                else _B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _B(_Call("len", _N(pb)), ast.Add(), _C(1)))
+            )
+            row_head: ast.expr = _B(_N("_i"), ast.Add(), _C(1)) if range_init else _C(0)
+            eq_cond = ast.Compare(
+                left=ast.Subscript(value=_N(pa), slice=_N("_i"), ctx=ast.Load()),
+                ops=[ast.Eq()],
+                comparators=[ast.Subscript(value=_N(pb), slice=_N("_j"), ctx=ast.Load())],
+            )
+            diag_prev = ast.Subscript(value=_N("_prev"), slice=_N("_j"), ctx=ast.Load())
+            up_prev = ast.Subscript(value=_N("_prev"), slice=_B(_N("_j"), ast.Add(), _C(1)), ctx=ast.Load())
+            left_cur = ast.Subscript(value=_N("_cur"), slice=_N("_j"), ctx=ast.Load())
+            if comb_fn == "max" and sub_d == 0 and gap_c == 0:
+                cell_expr: ast.expr = ast.IfExp(
+                    test=eq_cond,
+                    body=_B(diag_prev, ast.Add(), _C(match_d)),
+                    orelse=_Call("max", up_prev, left_cur),
+                )
+            else:
+                step_diag = ast.IfExp(test=eq_cond, body=_B(diag_prev, ast.Add(), _C(match_d)), orelse=_B(diag_prev, ast.Add(), _C(sub_d)))
+                cell_expr = _Call(comb_fn, _B(up_prev, ast.Add(), _C(gap_c)), _B(left_cur, ast.Add(), _C(gap_c)), step_diag)
+            candidates.append(
+                [
+                    ast.Assign(targets=[_N("_prev", True)], value=init_prev),
+                    ast.For(
+                        target=_N("_i", True),
+                        iter=_Call("range", _Call("len", _N(pa))),
+                        body=[
+                            ast.Assign(
+                                targets=[_N("_cur", True)],
+                                value=_B(ast.List(elts=[row_head], ctx=ast.Load()), ast.Add(), _B(ast.List(elts=[_C(0)], ctx=ast.Load()), ast.Mult(), _Call("len", _N(pb)))),
+                            ),
+                            ast.For(
+                                target=_N("_j", True),
+                                iter=_Call("range", _Call("len", _N(pb))),
+                                body=[
+                                    ast.Assign(
+                                        targets=[ast.Subscript(value=_N("_cur"), slice=_B(_N("_j"), ast.Add(), _C(1)), ctx=ast.Store())],
+                                        value=cell_expr,
+                                    )
+                                ],
+                                orelse=[],
+                            ),
+                            ast.Assign(targets=[_N("_prev", True)], value=_N("_cur")),
+                        ],
+                        orelse=[],
+                    ),
+                    ast.Return(value=ast.Subscript(value=_N("_prev"), slice=_Call("len", _N(pb)), ctx=ast.Load())),
+                ]
+            )
+    return candidates
+
+
+def _build_higher_order_concept_instantiations(
+    param_names: Sequence[str],
+    inputs: Sequence[tuple[Any, ...]],
+    ordered_concepts: Sequence[Any],
+    concept_library: Any | None,
+) -> list[tuple[list[ast.stmt], float]]:
+    """Instantiate invented higher-order concepts (`concept_ho_*`) with synthesized pure `ast.Lambda` combinators."""
+    if not ordered_concepts or len(param_names) != 1:
+        return []
+    p0 = param_names[0]
+    if not all(isinstance(row[0], (list, tuple)) for row in inputs):
+        return []
+
+    ho_cands: list[tuple[list[ast.stmt], float]] = []
+    lam_bodies_arity2: list[ast.expr] = [
+        ast.parse("_a + _b", mode="eval").body,
+        ast.parse("_a * _b", mode="eval").body,
+        ast.parse("_a + _b * _b", mode="eval").body,
+        ast.parse("max(_a, _b)", mode="eval").body,
+        ast.parse("min(_a, _b)", mode="eval").body,
+        ast.parse("max(0, _a + _b)", mode="eval").body,
+    ]
+    for c_ent in ordered_concepts:
+        if not getattr(c_ent, "is_higher_order", False):
+            continue
+        cp_map = dict(getattr(c_ent, "callable_arity_map", {}) or {})
+        p_list = list(c_ent.param_names)
+        if len(p_list) != 3 or len(cp_map) != 1:
+            continue
+        fn_slot = next(iter(cp_map.keys()))
+        if cp_map[fn_slot] != 2:
+            continue
+        prior_bonus = 0.0
+        if concept_library is not None and hasattr(concept_library, "levin_description_bits"):
+            prior_bonus = max(0.0, 8.0 - float(concept_library.levin_description_bits(c_ent.concept_id)))
+        for init_v in (0, 1):
+            for lb in lam_bodies_arity2:
+                call_args: list[ast.expr] = []
+                for idx_p, slot_nm in enumerate(p_list):
+                    if slot_nm == fn_slot:
+                        call_args.append(
+                            ast.Lambda(
+                                args=ast.arguments(
+                                    posonlyargs=[],
+                                    args=[ast.arg(arg="_a"), ast.arg(arg="_b")],
+                                    kwonlyargs=[],
+                                    kw_defaults=[],
+                                    defaults=[],
+                                ),
+                                body=lb,
+                            )
+                        )
+                    elif idx_p == 0:
+                        call_args.append(ast.Name(id=p0, ctx=ast.Load()))
+                    else:
+                        call_args.append(ast.Constant(value=init_v))
+                stmt_ret = [
+                    ast.Return(
+                        value=ast.Call(
+                            func=ast.Name(id=c_ent.concept_id, ctx=ast.Load()),
+                            args=call_args,
+                            keywords=[],
+                        )
+                    )
+                ]
+                ho_cands.append((stmt_ret, prior_bonus))
+    return ho_cands
+
+
+def _synthesize_hors_algorithmic_body(
+    *,
+    param_names: Sequence[str],
+    inputs: Sequence[tuple[Any, ...]],
+    target_sig: tuple[Any, ...],
+    concept_callables: Mapping[str, Any] | None = None,
+    ordered_concepts: Sequence[Any] = (),
+    concept_library: Any | None = None,
+) -> str | None:
+    """Constructive Recursion-Scheme Algebra + Solomonoff-Levin Universal Search (`eval_pure_ast_function`, zero `exec`)."""
+    import math as _math
+    import time as _time
+    from canonical.swe_kernel.concept_library_v1 import (
+        build_programmatic_ast_catamorphism_stmts,
+        eval_pure_ast_expr,
+        eval_pure_ast_function,
+    )
+
+    if not inputs or not param_names:
+        return None
+
+    arity = len(param_names)
+    p0 = param_names[0]
+    first_args0 = [row[0] for row in inputs]
+
+    # 1. Empirical AST Catamorphism when arg0 is syntax expression string
+    if arity in (1, 2) and len(inputs) >= 2 and all(isinstance(v, str) and v.strip() for v in first_args0):
+        env_p = param_names[1] if arity == 2 else None
+        all_denot_match = True
+        has_bw = False
+        for row, exp_s in zip(inputs, target_sig):
+            raw_e = str(row[0]).strip()
+            raw_env = dict(row[1]) if arity == 2 and isinstance(row[1], Mapping) else {}
+            try:
+                pt = ast.parse(raw_e, mode="eval")
+                if any(isinstance(sub, (ast.BitAnd, ast.BitOr, ast.BitXor, ast.RShift, ast.Invert)) for sub in ast.walk(pt)):
+                    has_bw = True
+                val = eval_pure_ast_expr(pt, raw_env)
+            except ZeroDivisionError:
+                val = 0
+            except Exception:
+                all_denot_match = False
+                break
+            if _freeze_val(val) != exp_s:
+                all_denot_match = False
+                break
+        if all_denot_match:
+            cata_stmts = build_programmatic_ast_catamorphism_stmts(p0, env_p, has_bitwise=has_bw)
+            return "\n".join(ast.unparse(st) for st in cata_stmts)
+
+    # Order probe indices so the richest non-empty / non-zero example falsifies wrong morphisms in 1 step (< 4 us)
+    probe_order = sorted(
+        range(len(inputs)),
+        key=lambda idx: -(len(inputs[idx][0]) if isinstance(inputs[idx][0], (list, tuple, str)) else abs(int(inputs[idx][0])) if isinstance(inputs[idx][0], int) else 1),
+    )
+
+    ast_args = ast.arguments(
+        posonlyargs=[],
+        args=[ast.arg(arg=nm) for nm in param_names],
+        kwonlyargs=[],
+        kw_defaults=[],
+        defaults=[],
+    )
+
+    scored_candidates: list[tuple[float, list[ast.stmt]]] = []
+    for ho_stmts, prior_bonus in _build_higher_order_concept_instantiations(param_names, inputs, ordered_concepts, concept_library):
+        desc_len = float(sum(1 for s in ho_stmts for _ in ast.walk(s))) - prior_bonus
+        scored_candidates.append((desc_len, ho_stmts))
+
+    for stmts in _build_product_state_catamorphisms(param_names, inputs, target_sig):
+        desc_len = float(sum(1 for s in stmts for _ in ast.walk(s)))
+        scored_candidates.append((desc_len, stmts))
+
+    for stmts in _build_semiring_dynamorphisms(param_names, inputs, target_sig):
+        desc_len = float(sum(1 for s in stmts for _ in ast.walk(s)))
+        scored_candidates.append((desc_len, stmts))
+
+    # Levin Universal Search ordering: prioritize compact description length + concept prior credit
+    scored_candidates.sort(key=lambda item: item[0])
+
+    best_winner: tuple[float, str] | None = None
+    for desc_len, stmts in scored_candidates:
+        if best_winner is not None and desc_len > best_winner[0] + 6.0:
+            break
+        fdef = ast.FunctionDef(name="_hors_cand", args=ast_args, body=stmts, decorator_list=[], returns=None)
+        ast.fix_missing_locations(fdef)
+        matched_all = True
+        t0_ns = _time.perf_counter_ns()
+        for idx_r in probe_order:
+            try:
+                out = eval_pure_ast_function(fdef, inputs[idx_r], extra_callables=concept_callables, max_steps=25_000)
+            except Exception:
+                matched_all = False
+                break
+            if _freeze_val(out) != target_sig[idx_r]:
+                matched_all = False
+                break
+        if matched_all:
+            dt_us = max(1.0, (_time.perf_counter_ns() - t0_ns) / 1e3)
+            levin_cost = desc_len + _math.log2(1.0 + dt_us)
+            mod_out = ast.Module(body=stmts, type_ignores=[])
+            ast.fix_missing_locations(mod_out)
+            rendered = "\n".join(ast.unparse(s) for s in mod_out.body)
+            if best_winner is None or levin_cost < best_winner[0]:
+                best_winner = (levin_cost, rendered)
+                # Fast exit when already compact
+                if desc_len <= 42.0:
+                    break
+
+    return best_winner[1] if best_winner is not None else None
 
 
 def architect_multi_module_package(

@@ -251,6 +251,7 @@ def orientation_errors(
     contract_sha256: str | None,
     changed_paths: Iterable[str] = (),
     path_exists: Callable[[str], bool] | None = None,
+    root: Path | None = None,
 ) -> list[str]:
     """Validate the ``agent_orientation`` block of an action intent against the live contract.
 
@@ -259,6 +260,7 @@ def orientation_errors(
     are the paths the pull request touches; ``path_exists`` answers for the head tree.  When
     ``changed_paths`` is empty the diff requirement is skipped (local pre-flight).
     """
+    root = root if root is not None else Path(".")
     if contract is None or not contract_sha256:
         return ["ORIENTATION_CONTRACT_UNAVAILABLE"]
     if not isinstance(intent, Mapping):
@@ -292,6 +294,44 @@ def orientation_errors(
         changed = set(changed_paths)
         if changed and not (set(evidence) & changed):
             errors.append("ORIENTATION_EVIDENCE_NOT_CHANGED_BY_THIS_PR")
+    # A binding that advertises a pin must still match the file it pinned.
+    #
+    # This lives HERE, on the path every consequential action already takes, because the
+    # failure it catches was measured at exactly this layer: 141 bound rows carried 160
+    # distinct verification keys, 86 of them private to a single row, and 3 rows advertised
+    # a `runtime_sha256` their adapter had already moved past. Nothing read those pins back;
+    # `availability_v1` and the grounding pair read the registry for what it OFFERS, never
+    # for whether what it claims is still true.
+    #
+    # It refuses on two things only: a pin the file contradicts, and an INCREASE in
+    # unfalsifiable bound rows against the frozen baseline. History is not rewritten.
+    try:
+        # Load the pin kernel from the tree being judged (`root`), then from this
+        # file's repository, then cwd. Never from `Path(__file__).parents[1]` alone:
+        # the admission workflow copies this file to `/tmp` and `__file__` is then
+        # not the repo (ORIENTATION_BINDING_PIN_AUDIT_UNAVAILABLE:ModuleNotFoundError
+        # wedged every sensitive PR after #6610). A broken kernel must fail OPEN.
+        import importlib.util
+
+        candidates = [
+            Path(root).resolve() / "canonical" / "runtime" / "binding_pin_is_current_v1.py",
+            Path(__file__).resolve().parents[1] / "canonical" / "runtime" / "binding_pin_is_current_v1.py",
+            Path(".").resolve() / "canonical" / "runtime" / "binding_pin_is_current_v1.py",
+        ]
+        pin_path = next((p for p in candidates if p.is_file()), None)
+        if pin_path is None:
+            raise FileNotFoundError("BINDING_PIN_KERNEL_NOT_ON_DISK")
+        spec = importlib.util.spec_from_file_location("_brain_binding_pin_is_current_v1", pin_path)
+        if spec is None or spec.loader is None:
+            raise ImportError("BINDING_PIN_KERNEL_SPEC")
+        _pins = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_pins)
+        _frozen = _pins.load_baseline(root)
+        _pin_refusal = _pins.refusal(root, frozen=_frozen)
+        if _pin_refusal:
+            errors.append("ORIENTATION_" + str(_pin_refusal.get("reason") or _pins.REFUSAL))
+    except Exception:
+        pass
     route_order = contract.get("route_order") if isinstance(contract.get("route_order"), list) else []
     route_class = block.get("route_class")
     if route_class not in route_order:
@@ -553,7 +593,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"schema": SCHEMA, "command": "intent-check", "ok": False, "errors": ["INTENT_UNREADABLE:" + str(exc)]}))
             return 1
         contract, sha = load_contract(root)
-        errors = orientation_errors(intent, contract, sha, (), lambda rel: (root / rel).exists())
+        errors = orientation_errors(intent, contract, sha, (), lambda rel: (root / rel).exists(), root)
         print(json.dumps({"schema": SCHEMA, "command": "intent-check", "intent": str(intent_path), "ok": not errors, "errors": errors}, indent=2))
         return 0 if not errors else 1
     print("usage: agent_orientation_check_v1.py [brief|verify|intent-check <intent.json>] [--root DIR]", file=sys.stderr)

@@ -152,11 +152,61 @@ class PredictionTicket:
     gain_interval: tuple[float, float]
     expected_latency_ms: float
     calibration_record_id: str | None = None
+    feature_map: dict[str, float] = field(default_factory=dict)
+    state_task_key: str = ""
+    epistemic_mi_bits: float = 0.0
     created_ns: int = field(default_factory=time.perf_counter_ns)
 
 
+# 5-point Gauss-Hermite quadrature nodes/weights for z = mu + sqrt(2)*sigma*xi
+_GH5_NODES: tuple[float, ...] = (-2.0201828705, -0.9585724646, 0.0, 0.9585724646, 2.0201828705)
+_GH5_WEIGHTS: tuple[float, ...] = (0.0112574113, 0.2220759220, 0.5333333333, 0.2220759220, 0.0112574113)
+
+
+def _epistemic_mutual_information_bits(mean_logit: float, epistemic_var: float) -> float:
+    """Exact BALD / Friston epistemic mutual information `I(Y; Theta | x) = H(E[sigma(z)]) - E[H(sigma(z))]` in bits.
+
+    Distinguishes reducible epistemic parameter uncertainty (`epistemic_var > 0` -> `I > 0`) from
+    irreducible aleatoric noise (`epistemic_var == 0, mean_logit == 0` -> `H(0.5) - H(0.5) == 0.0`!).
+    """
+    var = max(0.0, float(epistemic_var))
+    if var <= 1e-12:
+        return 0.0
+    scale = math.sqrt(2.0 * var)
+    mean_p = 0.0
+    expected_cond_h = 0.0
+    for xi, wi in zip(_GH5_NODES, _GH5_WEIGHTS):
+        p_i = _sigmoid(mean_logit + scale * xi)
+        mean_p += wi * p_i
+        expected_cond_h += wi * _binary_entropy(p_i)
+    return max(0.0, _binary_entropy(min(0.999999, max(1e-6, mean_p))) - expected_cond_h)
+
+
+def _empirical_mutual_information_bits(xs: Sequence[int], ys: Sequence[int]) -> float:
+    """Compute exact Shannon mutual information `I(X; Y)` in bits for binary vectors `xs, ys`."""
+    n = len(xs)
+    if n < 4 or len(ys) != n:
+        return 0.0
+    counts = {(0, 0): 0, (0, 1): 0, (1, 0): 0, (1, 1): 0}
+    for x, y in zip(xs, ys):
+        counts[(1 if x else 0, 1 if y else 0)] += 1
+    px1 = (counts[(1, 0)] + counts[(1, 1)]) / n
+    py1 = (counts[(0, 1)] + counts[(1, 1)]) / n
+    if px1 <= 0.0 or px1 >= 1.0 or py1 <= 0.0 or py1 >= 1.0:
+        return 0.0
+    px = {0: 1.0 - px1, 1: px1}
+    py = {0: 1.0 - py1, 1: py1}
+    mi = 0.0
+    for bx in (0, 1):
+        for by in (0, 1):
+            p_xy = counts[(bx, by)] / n
+            if p_xy > 0.0:
+                mi += p_xy * math.log2(p_xy / (px[bx] * py[by]))
+    return max(0.0, mi)
+
+
 class EpistemicSelfBeliefEngine:
-    """Online diagonal Kalman/Laplace Bayesian logistic self-model `Theta_t = (mu_t, Sigma_t)` + Surprise `S_t`."""
+    """Open-ended Bayesian logistic self-model `Theta_t = (Phi_t, mu_t, Sigma_t)` with online predicate invention."""
 
     def __init__(
         self,
@@ -165,17 +215,22 @@ class EpistemicSelfBeliefEngine:
         surprise_threshold: float = _TWO_SHANNON_BITS_NATS,
         process_drift_var: float = 0.0015,
         min_var: float = 0.015,
+        max_invented_features: int = 24,
     ) -> None:
         self.state_path = pathlib.Path(state_path) if state_path is not None else None
         self.surprise_threshold = float(surprise_threshold)
         self.process_drift_var = float(process_drift_var)
         self.min_var = float(min_var)
+        self.max_invented_features = int(max_invented_features)
         dim = len(FEATURE_NAMES)
+        self.feature_names: list[str] = list(FEATURE_NAMES)
+        # Specs for invented nonlinear interaction features: name -> {"op": "and"|"and_not"|"xor", "lhs": str, "rhs": str}
+        self.invented_specs: dict[str, dict[str, str]] = {}
         self.mu: list[float] = [0.0] * dim
         self.var: list[float] = [1.0 / dim] * dim
-        # Per-family Beta(alpha, beta) + Welford cost/gain/latency trackers & exact-task memory
         self.family_stats: dict[str, dict[str, float]] = {}
         self.task_stats: dict[str, dict[str, int]] = {}
+        self._episode_history: deque[dict[str, Any]] = deque(maxlen=128)
         self.total_updates: int = 0
         self.cumulative_surprise: float = 0.0
         self.last_surprise: float = 0.0
@@ -185,10 +240,29 @@ class EpistemicSelfBeliefEngine:
     def _load(self) -> None:
         try:
             data = json.loads(self.state_path.read_text(encoding="utf-8"))
-            if isinstance(data.get("mu"), list) and len(data["mu"]) == len(FEATURE_NAMES):
+            saved_names = data.get("feature_names")
+            if (
+                isinstance(saved_names, list)
+                and len(saved_names) >= len(FEATURE_NAMES)
+                and list(saved_names[: len(FEATURE_NAMES)]) == list(FEATURE_NAMES)
+                and isinstance(data.get("mu"), list)
+                and len(data["mu"]) == len(saved_names)
+                and isinstance(data.get("var"), list)
+                and len(data["var"]) == len(saved_names)
+            ):
+                self.feature_names = [str(nm) for nm in saved_names]
                 self.mu = [float(v) for v in data["mu"]]
-            if isinstance(data.get("var"), list) and len(data["var"]) == len(FEATURE_NAMES):
                 self.var = [max(self.min_var, float(v)) for v in data["var"]]
+            elif isinstance(data.get("mu"), list) and len(data["mu"]) == len(FEATURE_NAMES):
+                self.mu = [float(v) for v in data["mu"]]
+                if isinstance(data.get("var"), list) and len(data["var"]) == len(FEATURE_NAMES):
+                    self.var = [max(self.min_var, float(v)) for v in data["var"]]
+            if isinstance(data.get("invented_specs"), Mapping):
+                self.invented_specs = {
+                    str(k): {str(sk): str(sv) for sk, sv in dict(v).items()}
+                    for k, v in data["invented_specs"].items()
+                    if isinstance(v, Mapping)
+                }
             if isinstance(data.get("family_stats"), Mapping):
                 self.family_stats = {
                     str(k): {str(sk): float(sv) for sk, sv in dict(v).items()}
@@ -214,7 +288,8 @@ class EpistemicSelfBeliefEngine:
             self.state_path,
             {
                 "schema": SCHEMA + "/belief_state",
-                "feature_names": list(FEATURE_NAMES),
+                "feature_names": list(self.feature_names),
+                "invented_specs": dict(self.invented_specs),
                 "mu": [round(v, 8) for v in self.mu],
                 "var": [round(v, 8) for v in self.var],
                 "family_stats": self.family_stats,
@@ -224,6 +299,83 @@ class EpistemicSelfBeliefEngine:
                 "last_surprise": round(self.last_surprise, 6),
             },
         )
+
+    def _ensure_feature_slot(self, fname: str, *, init_var: float = 0.35) -> int:
+        if fname in self.feature_names:
+            return self.feature_names.index(fname)
+        self.feature_names.append(fname)
+        self.mu.append(0.0)
+        self.var.append(float(init_var))
+        return len(self.feature_names) - 1
+
+    @staticmethod
+    def _eval_interaction(op: str, lv: float, rv: float) -> float:
+        """Rademacher bipolar `{-1.0, +1.0}` encoding so one weight symmetrically separates positive & negative truth cells."""
+        lb = lv >= 0.5
+        rb = rv >= 0.5
+        if op == "and":
+            return 1.0 if (lb and rb) else -1.0
+        if op == "and_not":
+            return 1.0 if (lb and not rb) else -1.0
+        if op == "xor":
+            return 1.0 if (lb != rb) else -1.0
+        return 0.0
+
+    def _build_feature_map_and_vector(
+        self,
+        task_id: str,
+        *,
+        host_ready: bool = True,
+        grounding_complete: bool = True,
+        causal_precond_met: bool = True,
+        memory_reflex_hit: bool = False,
+        strong_verifier: bool = True,
+        missing_dep_or_env_block: bool = False,
+        nested_cost_or_timeout_risk: bool = False,
+        family_override: str | None = None,
+        context_predicates: Mapping[str, Any] | None = None,
+    ) -> tuple[tuple[float, ...], dict[str, float], str]:
+        fam = family_override or task_family_key(task_id)
+        st = self.family_stats.get(fam) or {}
+        alpha = float(st.get("alpha", 1.0))
+        beta = float(st.get("beta", 1.0))
+        obs_n = max(0.0, alpha + beta - 2.0)
+        emp_rate = alpha / (alpha + beta)
+        obs_conf = min(1.0, math.log1p(obs_n) / math.log1p(12.0))
+        not_blocked = not missing_dep_or_env_block
+
+        base_vals = (
+            1.0,
+            1.0 if (host_ready and not_blocked) else 0.0,
+            1.0 if (grounding_complete and not_blocked) else 0.0,
+            1.0 if (causal_precond_met and not_blocked) else 0.0,
+            1.0 if memory_reflex_hit else 0.0,
+            1.0 if strong_verifier else 0.0,
+            1.0 if missing_dep_or_env_block else 0.0,
+            1.0 if nested_cost_or_timeout_risk else 0.0,
+            (emp_rate - 0.5) * obs_conf,
+            obs_conf,
+        )
+        fmap: dict[str, float] = {nm: val for nm, val in zip(FEATURE_NAMES, base_vals)}
+
+        ctx_parts: list[str] = []
+        if context_predicates:
+            for k_raw in sorted(context_predicates.keys()):
+                raw_v = context_predicates[k_raw]
+                fv = (1.0 if raw_v else 0.0) if isinstance(raw_v, bool) else max(-1.0, min(1.0, float(raw_v)))
+                slot_nm = k_raw if str(k_raw).startswith("ctx:") else f"ctx:{k_raw}"
+                self._ensure_feature_slot(slot_nm, init_var=0.45)
+                fmap[slot_nm] = fv
+                ctx_parts.append(f"{slot_nm}={round(fv, 3)}")
+
+        for inv_nm, spec in self.invented_specs.items():
+            lv = fmap.get(spec.get("lhs", ""), 0.0)
+            rv = fmap.get(spec.get("rhs", ""), 0.0)
+            fmap[inv_nm] = self._eval_interaction(spec.get("op", "and"), lv, rv)
+
+        vec = tuple(float(fmap.get(nm, 0.0)) for nm in self.feature_names)
+        state_key = f"{task_id}|{'&'.join(ctx_parts)}" if ctx_parts else str(task_id)
+        return vec, fmap, state_key
 
     def build_feature_vector(
         self,
@@ -237,27 +389,21 @@ class EpistemicSelfBeliefEngine:
         missing_dep_or_env_block: bool = False,
         nested_cost_or_timeout_risk: bool = False,
         family_override: str | None = None,
+        context_predicates: Mapping[str, Any] | None = None,
     ) -> tuple[float, ...]:
-        fam = family_override or task_family_key(task_id)
-        st = self.family_stats.get(fam) or {}
-        alpha = float(st.get("alpha", 1.0))
-        beta = float(st.get("beta", 1.0))
-        obs_n = max(0.0, alpha + beta - 2.0)
-        emp_rate = alpha / (alpha + beta)
-        obs_conf = min(1.0, math.log1p(obs_n) / math.log1p(12.0))
-        not_blocked = not missing_dep_or_env_block
-        return (
-            1.0,
-            1.0 if (host_ready and not_blocked) else 0.0,
-            1.0 if (grounding_complete and not_blocked) else 0.0,
-            1.0 if (causal_precond_met and not_blocked) else 0.0,
-            1.0 if memory_reflex_hit else 0.0,
-            1.0 if strong_verifier else 0.0,
-            1.0 if missing_dep_or_env_block else 0.0,
-            1.0 if nested_cost_or_timeout_risk else 0.0,
-            (emp_rate - 0.5) * obs_conf,
-            obs_conf,
+        vec, _, _ = self._build_feature_map_and_vector(
+            task_id,
+            host_ready=host_ready,
+            grounding_complete=grounding_complete,
+            causal_precond_met=causal_precond_met,
+            memory_reflex_hit=memory_reflex_hit,
+            strong_verifier=strong_verifier,
+            missing_dep_or_env_block=missing_dep_or_env_block,
+            nested_cost_or_timeout_risk=nested_cost_or_timeout_risk,
+            family_override=family_override,
+            context_predicates=context_predicates,
         )
+        return vec
 
     def predict_distribution(
         self,
@@ -265,10 +411,18 @@ class EpistemicSelfBeliefEngine:
         features: Sequence[float] | None = None,
         **feature_kwargs: Any,
     ) -> dict[str, Any]:
-        phi = tuple(float(v) for v in features) if features is not None else self.build_feature_vector(task_id, **feature_kwargs)
-        if len(phi) != len(self.mu):
-            raise ValueError(f"Expected {len(self.mu)} features, got {len(phi)}")
-        # Deductive precondition violation count & Laplace Rule-of-Succession structural base log-odds
+        if features is not None:
+            raw_phi = [float(v) for v in features]
+            if len(raw_phi) < len(self.mu):
+                raw_phi.extend([0.0] * (len(self.mu) - len(raw_phi)))
+            phi = tuple(raw_phi)
+            if len(phi) != len(self.mu):
+                raise ValueError(f"Expected {len(self.mu)} features, got {len(phi)}")
+            fmap = {nm: val for nm, val in zip(self.feature_names, phi)}
+            state_task_key = str(task_id)
+        else:
+            phi, fmap, state_task_key = self._build_feature_map_and_vector(task_id, **feature_kwargs)
+
         violated_necessary = int(phi[1] < 0.5) + int(phi[2] < 0.5) + int(phi[3] < 0.5) + int(phi[6] > 0.5)
         n_pos = sum(1.0 for idx in (1, 2, 3, 4, 5) if phi[idx] >= 0.5)
         n_neg = float(violated_necessary) + (2.0 if phi[7] >= 0.5 else 0.0)
@@ -277,18 +431,15 @@ class EpistemicSelfBeliefEngine:
         learned_residual = sum(m * x for m, x in zip(self.mu, phi))
         mean_logit = laplace_base_logit + learned_residual
         epistemic_var = sum(v * (x * x) for v, x in zip(self.var, phi))
-        # MacKay Bayesian logistic marginal integrating Gaussian parameter uncertainty
         kappa = 1.0 / math.sqrt(1.0 + (math.pi / 8.0) * max(0.0, epistemic_var))
         p_raw = _sigmoid(kappa * mean_logit)
 
-        tst = self.task_stats.get(str(task_id))
+        tst = self.task_stats.get(state_task_key)
         tp = int((tst or {}).get("pass", 0))
         tf = int((tst or {}).get("fail", 0))
         if violated_necessary > 0 and tp == 0:
-            # Deductive necessary-condition bound under Laplace smoothing `1 / (dim + violated)`
             p_raw = min(p_raw, 1.0 / float(len(self.mu) + violated_necessary + tf))
         elif (tp + tf) > 0:
-            # Unit Laplace pseudo-count centered at `p_raw`
             p_raw = (float(tp) + p_raw) / (float(tp + tf) + 1.0)
 
         p_hat = min(0.985, max(0.015, p_raw))
@@ -301,12 +452,17 @@ class EpistemicSelfBeliefEngine:
         mean_gain = float(st.get("ema_gain", 1.0))
         gain_spread = max(0.1, float(st.get("ema_gain_abs_dev", 0.5 * max(1.0, abs(mean_gain)))))
         exp_ms = float(st.get("ema_ms", 5.0))
+        ep_mi_bits = _epistemic_mutual_information_bits(mean_logit, epistemic_var)
         return {
             "task_id": task_id,
+            "state_task_key": state_task_key,
             "family_key": fam,
             "features": phi,
+            "feature_map": fmap,
             "mean_logit": round(mean_logit, 6),
             "epistemic_variance": round(epistemic_var, 6),
+            "epistemic_mi_bits": round(ep_mi_bits, 6),
+            "epistemic_mi_nats": round(ep_mi_bits * math.log(2.0), 6),
             "posterior_std": round(posterior_std, 6),
             "lower_confidence_bound": round(p_hat - posterior_std, 6),
             "predicted_pass_probability": round(p_hat, 6),
@@ -353,7 +509,82 @@ class EpistemicSelfBeliefEngine:
             gain_interval=tuple(dist["gain_interval"]),  # type: ignore[arg-type]
             expected_latency_ms=float(dist["expected_latency_ms"]),
             calibration_record_id=rec_id,
+            feature_map=dict(dist.get("feature_map") or {}),
+            state_task_key=str(dist.get("state_task_key") or task_id),
+            epistemic_mi_bits=float(dist.get("epistemic_mi_bits", 0.0)),
         )
+
+    def _maybe_invent_conjunctive_features(self) -> list[str]:
+        """Induce nonlinear interaction features (`and`, `and_not`, `xor`) via empirical Mutual Information `I(C; Y)`."""
+        if len(self.invented_specs) >= self.max_invented_features or len(self._episode_history) < 6:
+            return []
+        recent = list(self._episode_history)
+        mean_abs_err = sum(abs(float(ep["residual"])) for ep in recent[-12:]) / float(min(12, len(recent)))
+        if mean_abs_err < 0.25:
+            return []
+
+        ys = [1 if ep["outcome_pass"] else 0 for ep in recent]
+        if len(set(ys)) < 2:
+            return []
+
+        # Candidate atomic binary features (prefer dynamic `ctx:*` predicates + core binary flags)
+        atomic_candidates = [
+            nm
+            for nm in self.feature_names
+            if nm != "bias"
+            and not nm.startswith("int:")
+            and nm not in ("family_empirical_pass_centered", "family_observation_confidence")
+        ]
+        if len(atomic_candidates) < 2:
+            return []
+
+        best_mi = 0.0
+        best_spec: tuple[str, str, str, str] | None = None
+        n_obs = len(recent)
+        for i_a, fa in enumerate(atomic_candidates):
+            for fb in atomic_candidates[i_a + 1 :]:
+                for op in ("xor", "and", "and_not"):
+                    cname = f"int:{op}({fa},{fb})"
+                    if cname in self.invented_specs:
+                        continue
+                    xs = [
+                        1 if self._eval_interaction(op, float(ep["fmap"].get(fa, 0.0)), float(ep["fmap"].get(fb, 0.0))) >= 0.5 else 0
+                        for ep in recent
+                    ]
+                    mi = _empirical_mutual_information_bits(xs, ys)
+                    if mi > best_mi and mi >= 0.20 and (n_obs * mi) >= 1.35:
+                        best_mi = mi
+                        best_spec = (cname, op, fa, fb)
+
+        if best_spec is None:
+            return []
+
+        cname, op, fa, fb = best_spec
+        self.invented_specs[cname] = {"op": op, "lhs": fa, "rhs": fb}
+        slot_idx = self._ensure_feature_slot(cname, init_var=1.2)
+        # Warm-start newly invented feature slot (+ bias) via 3 passes of Laplace-Kalman replay over history
+        for _ in range(3):
+            for ep in recent:
+                fmap_ep = dict(ep["fmap"])
+                c_val = self._eval_interaction(op, float(fmap_ep.get(fa, 0.0)), float(fmap_ep.get(fb, 0.0)))
+                fmap_ep[cname] = c_val
+                y_ep = 1.0 if ep["outcome_pass"] else 0.0
+                phi_ep = [float(fmap_ep.get(nm, 0.0)) for nm in self.feature_names]
+                viol = int(phi_ep[1] < 0.5) + int(phi_ep[2] < 0.5) + int(phi_ep[3] < 0.5) + int(phi_ep[6] > 0.5)
+                np_b = sum(1.0 for idx_b in (1, 2, 3, 4, 5) if phi_ep[idx_b] >= 0.5)
+                nn_b = float(viol) + (2.0 if phi_ep[7] >= 0.5 else 0.0)
+                base_l = math.log((1.0 + np_b) / (1.0 + nn_b))
+                p_ep = _sigmoid(base_l + sum(m * x for m, x in zip(self.mu, phi_ep)))
+                innov = y_ep - p_ep
+                hw = max(1e-4, p_ep * (1.0 - p_ep))
+                for k_idx in (0, slot_idx):
+                    xk = phi_ep[k_idx]
+                    v_cur = self.var[k_idx] + self.process_drift_var
+                    denom = 1.0 + hw * v_cur * (xk * xk)
+                    gk = (v_cur * xk) / denom
+                    self.mu[k_idx] = max(-8.0, min(8.0, self.mu[k_idx] + gk * innov))
+                    self.var[k_idx] = max(self.min_var, min(2.5, v_cur - hw * (gk * gk) * denom))
+        return [cname]
 
     def settle_and_compute_surprise(
         self,
@@ -367,7 +598,7 @@ class EpistemicSelfBeliefEngine:
         calibration_ledger: spc.Ledger | None = None,
         ignorance_ledger_path: pathlib.Path | str | None = None,
     ) -> dict[str, Any]:
-        """Settle pre-action prediction via independent `inspector`, compute Surprise `S_t`, and update `(mu_t, Sigma_t)`."""
+        """Settle pre-action prediction via independent `inspector`, compute Surprise `S_t`, and update `(Phi_t, mu_t, Sigma_t)`."""
         if not str(inspector or "").strip():
             raise ValueError("Independent inspector name is required to settle EpistemicSelfBeliefEngine.")
         if calibration_ledger is not None and ticket.calibration_record_id is not None:
@@ -386,8 +617,12 @@ class EpistemicSelfBeliefEngine:
         gain_outside = 1.0 if (outcome_pass and (actual_gain < lo_g - 1e-6 or actual_gain > hi_g + 1e-6)) else 0.0
         surprise = nll_surprise + 0.35 * cost_err + 0.50 * gain_outside
 
-        # Online diagonal Laplace / Extended Kalman Filter update (< 0.05 ms)
-        phi = ticket.features
+        # Pad `phi` if new features were invented between `predict_before_act` and `settle`
+        raw_phi = list(ticket.features)
+        if len(raw_phi) < len(self.mu):
+            raw_phi.extend([0.0] * (len(self.mu) - len(raw_phi)))
+        phi = tuple(raw_phi[: len(self.mu)])
+
         hess_w = max(1e-4, p_hat * (1.0 - p_hat))
         proj_var = sum(v * (x * x) for v, x in zip(self.var, phi))
         denom = 1.0 + hess_w * proj_var
@@ -400,6 +635,17 @@ class EpistemicSelfBeliefEngine:
             self.mu[i] = max(-8.0, min(8.0, self.mu[i] + gain_k * innovation))
             post_v = vi - hess_w * (gain_k * gain_k) * denom
             self.var[i] = max(self.min_var, min(2.5, post_v))
+
+        fmap_hist = dict(ticket.feature_map) if ticket.feature_map else {nm: val for nm, val in zip(self.feature_names, phi)}
+        self._episode_history.append(
+            {
+                "task_id": ticket.task_id,
+                "fmap": fmap_hist,
+                "outcome_pass": bool(outcome_pass),
+                "residual": float(innovation),
+            }
+        )
+        invented_now = self._maybe_invent_conjunctive_features()
 
         # Update family empirical Beta & EMA trackers
         fam = ticket.family_key
@@ -416,12 +662,13 @@ class EpistemicSelfBeliefEngine:
         st["ema_ms"] = 0.75 * float(st.get("ema_ms", 5.0)) + 0.25 * meas_ms
         self.family_stats[fam] = st
 
-        tst = dict(self.task_stats.get(ticket.task_id) or {"pass": 0, "fail": 0})
+        state_key = ticket.state_task_key or ticket.task_id
+        tst = dict(self.task_stats.get(state_key) or {"pass": 0, "fail": 0})
         if outcome_pass:
             tst["pass"] = int(tst.get("pass", 0)) + 1
         else:
             tst["fail"] = int(tst.get("fail", 0)) + 1
-        self.task_stats[ticket.task_id] = tst
+        self.task_stats[state_key] = tst
 
         self.total_updates += 1
         self.last_surprise = surprise
@@ -443,6 +690,21 @@ class EpistemicSelfBeliefEngine:
             except Exception:
                 anomaly_gap_id = None
 
+        updated_phi = list(phi)
+        if len(updated_phi) < len(self.mu):
+            for nm in self.feature_names[len(updated_phi) :]:
+                spec = self.invented_specs.get(nm)
+                if spec:
+                    updated_phi.append(
+                        self._eval_interaction(
+                            spec["op"],
+                            float(fmap_hist.get(spec["lhs"], 0.0)),
+                            float(fmap_hist.get(spec["rhs"], 0.0)),
+                        )
+                    )
+                else:
+                    updated_phi.append(0.0)
+
         return {
             "task_id": ticket.task_id,
             "family_key": fam,
@@ -453,13 +715,19 @@ class EpistemicSelfBeliefEngine:
             "escalate_to_system2": escalate_system2,
             "escalate_system2": escalate_system2,
             "anomaly_gap_id": anomaly_gap_id,
-            "updated_posterior_probability": round(self.predict_probability(ticket.task_id, features=phi), 6),
+            "invented_features": invented_now,
+            "updated_posterior_probability": round(self.predict_probability(state_key, features=updated_phi), 6),
             "total_updates": self.total_updates,
         }
 
     def snapshot_digest(self) -> str:
         payload = json.dumps(
-            {"mu": [round(x, 6) for x in self.mu], "var": [round(x, 6) for x in self.var], "family": self.family_stats},
+            {
+                "features": self.feature_names,
+                "mu": [round(x, 6) for x in self.mu],
+                "var": [round(x, 6) for x in self.var],
+                "family": self.family_stats,
+            },
             sort_keys=True,
         )
         return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
@@ -1346,6 +1614,410 @@ class WakeSleepConsolidationEngine:
         _ = max_rules_to_calibrate
         return self.sleep_consolidate(skill_store=skill_store, calibrate_scopes=True)
 
+    def run_homeostatic_memory_hygiene(
+        self,
+        *,
+        skill_store: Any = None,
+        expiry_db_path: pathlib.Path | str | None = None,
+        now_fingerprint: Mapping[str, Any] | None = None,
+        assoc_memory_path: pathlib.Path | str | None = None,
+        assoc_capacity: int = 512,
+    ) -> dict[str, Any]:
+        """Sleep Homeostatic Hygiene: `rule_expiry_v1.expire_stale` + version-space scope diagnosis + `associative_memory_v1.forget`."""
+        from canonical.runtime import associative_memory_v1 as assoc_mem
+        from canonical.runtime import finite_capability_diagnosis as fcd
+        from canonical.swe_kernel import rule_expiry_v1 as rexp
+
+        expired_report: dict[str, Any] = {"expired_count": 0, "expired": []}
+        if skill_store is not None and expiry_db_path is not None:
+            try:
+                exp_res = rexp.expire_stale(skill_store, expiry_db_path, now=now_fingerprint)
+                expired_report = {
+                    "expired_count": len(exp_res.get("expired") or []),
+                    "expired": list(exp_res.get("expired") or []),
+                }
+            except Exception:
+                pass
+
+        diagnosed_scopes: list[dict[str, Any]] = []
+        if skill_store is not None and hasattr(skill_store, "lookup_rules"):
+            for r in skill_store.lookup_rules("python")[:4]:
+                raw_probes = rscope.synthesize_diagnostic_probes(r)
+                if not raw_probes:
+                    continue
+                hyps = [
+                    fcd.Hypothesis("SCOPE_STATEMENT", frozenset({"stmt"})),
+                    fcd.Hypothesis("SCOPE_FUNCTION", frozenset({"stmt", "fn"})),
+                    fcd.Hypothesis("SCOPE_MODULE", frozenset({"stmt", "fn", "mod"})),
+                ]
+                probe_objs: list[fcd.Probe] = []
+                for idx_p, pr in enumerate(raw_probes[:4]):
+                    pid = str(pr.get("id") or pr.get("probe_id") or f"probe_{idx_p}")
+                    outcomes = {
+                        h.hypothesis_id: str(rscope.predicted_outcome(h.hypothesis_id, r, pr))
+                        for h in hyps
+                    }
+                    probe_objs.append(fcd.Probe(probe_id=pid, outcomes=outcomes, cost=1.0))
+                if probe_objs:
+                    sel = fcd.select_probe(hyps, probe_objs)
+                    chosen_pid = sel.get("selected_probe_id")
+                    if chosen_pid:
+                        chosen_pr = next((p for p in probe_objs if p.probe_id == chosen_pid), probe_objs[0])
+                        inst_match = next(
+                            (rp for idx_p, rp in enumerate(raw_probes[:4]) if str(rp.get("id") or rp.get("probe_id") or f"probe_{idx_p}") == chosen_pr.probe_id),
+                            raw_probes[0],
+                        )
+                        obs_out = rscope.observed_outcome(r, inst_match)
+                        vs_upd = fcd.update_version_space(hyps, chosen_pr, obs_out)
+                        diagnosed_scopes.append(
+                            {
+                                "skill_id": r.get("skill_id"),
+                                "selected_probe": chosen_pr.probe_id,
+                                "observed_outcome": obs_out,
+                                "surviving_hypotheses": [h.hypothesis_id for h in (vs_upd.get("surviving") or [])],
+                            }
+                        )
+
+        forgotten_ids: list[str] = []
+        if assoc_memory_path is not None and pathlib.Path(assoc_memory_path).is_file():
+            try:
+                forgotten_ids = list(assoc_mem.forget(capacity=int(assoc_capacity), path=str(assoc_memory_path)))
+            except Exception:
+                forgotten_ids = []
+
+        return {
+            "expired_rules": expired_report,
+            "diagnosed_scopes": diagnosed_scopes,
+            "forgotten_episode_ids": forgotten_ids,
+        }
+
+
+class SelfTraceHarvester:
+    """Autonomous Ring-1 trace harvester & cryptographic SHA-256 dev/sealed-heldout splitter."""
+
+    def __init__(self, *, salt: str = "brain_ring0_escrow_v1") -> None:
+        self.salt = str(salt)
+
+    def split_observations_cryptographically(
+        self,
+        target_key: str,
+        cases: Sequence[Mapping[str, Any]],
+    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        """Partition `(args, expected)` cases into disjoint `(visible_dev, sealed_heldout)` by SHA-256 digest."""
+        deduped: list[dict[str, Any]] = []
+        seen_args: set[str] = set()
+        for idx, c in enumerate(cases):
+            args_t = tuple(c.get("args") or ())
+            sig = repr(args_t)
+            if sig in seen_args:
+                continue
+            seen_args.add(sig)
+            row = dict(c)
+            row["args"] = args_t
+            row.setdefault("id", f"obs_{idx}")
+            deduped.append(row)
+
+        if len(deduped) <= 1:
+            return deduped, []
+
+        ranked = sorted(
+            deduped,
+            key=lambda r: hashlib.sha256(f"{self.salt}:{target_key}:{repr(r['args'])}".encode("utf-8")).hexdigest(),
+        )
+        # Ensure Proposer sees ~half and Ring-0 Referee holds ~half in cryptographic escrow (0% overlap!)
+        dev_n = max(1, (len(ranked) + 1) // 2)
+        if len(ranked) >= 4:
+            dev_n = max(2, min(len(ranked) - 2, dev_n))
+        return ranked[:dev_n], ranked[dev_n:]
+
+    def harvest_workspace_ring1_obligations(
+        self,
+        ws_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str] | None = None,
+        test_relpaths: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Autonomously discover Ring-1 `.py` organs, mine I/O obligations from tests, and split dev vs sealed escrow."""
+        import ast as _ast
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+            extract_io_examples_from_test_source,
+        )
+        from canonical.swe_kernel.concept_library_v1 import eval_pure_ast_function
+        from canonical.swe_kernel.recursive_self_architect_v1 import RING0_IMMUTABLE_PREFIXES
+
+        ws = pathlib.Path(ws_root).resolve()
+        all_py = sorted(
+            p.relative_to(ws).as_posix()
+            for p in ws.rglob("*.py")
+            if not any(part.startswith(".") or part == "__pycache__" for part in p.relative_to(ws).parts)
+        )
+        discovered_tests = (
+            list(test_relpaths)
+            if test_relpaths is not None
+            else [
+                r
+                for r in all_py
+                if r.startswith("tests/")
+                or "/tests/" in r
+                or pathlib.Path(r).name.startswith("test_")
+                or pathlib.Path(r).name.endswith("_test.py")
+            ]
+        )
+        test_set = set(discovered_tests)
+        discovered_ring1 = (
+            list(ring1_relpaths)
+            if ring1_relpaths is not None
+            else [
+                r
+                for r in all_py
+                if r not in test_set
+                and not pathlib.Path(r).name.startswith("__")
+                and not any(r.startswith(pfx) for pfx in RING0_IMMUTABLE_PREFIXES)
+            ]
+        )
+
+        combined_test_src = "\n\n".join(
+            (ws / tr).read_text(encoding="utf-8")
+            for tr in discovered_tests
+            if (ws / tr).is_file()
+        )
+
+        failed_episodes: list[dict[str, Any]] = []
+        sealed_heldout_by_target: dict[str, list[dict[str, Any]]] = {}
+
+        if combined_test_src.strip():
+            for rel in discovered_ring1:
+                fp = ws / rel
+                if not fp.is_file():
+                    continue
+                try:
+                    mod_tree = _ast.parse(fp.read_text(encoding="utf-8"))
+                except SyntaxError:
+                    continue
+                for fn_nd in [n for n in mod_tree.body if isinstance(n, _ast.FunctionDef)]:
+                    exs, _ = extract_io_examples_from_test_source(combined_test_src, fn_nd.name)
+                    if not exs:
+                        continue
+                    all_cases: list[dict[str, Any]] = []
+                    mismatches = 0
+                    for idx_e, (args_t, exp_v) in enumerate(exs):
+                        all_cases.append({"id": f"auto_{fn_nd.name}_{idx_e}", "args": tuple(args_t), "expected": exp_v})
+                        try:
+                            got_v = eval_pure_ast_function(fn_nd, args_t, max_steps=6000)
+                            if got_v != exp_v:
+                                mismatches += 1
+                        except Exception:
+                            mismatches += 1
+                    if mismatches > 0:
+                        t_key = f"{rel}:{fn_nd.name}"
+                        vis_dev, sealed_escrow = self.split_observations_cryptographically(t_key, all_cases)
+                        failed_episodes.append(
+                            {
+                                "ok": False,
+                                "rejection_class": "AUTONOMOUS_TRACE_MISMATCH",
+                                "target_relpath": rel,
+                                "function_name": fn_nd.name,
+                                "visible_dev_cases": vis_dev,
+                            }
+                        )
+                        if sealed_escrow:
+                            sealed_heldout_by_target[t_key] = sealed_escrow
+
+        # Open-World Zero-`test_*.py` Discovery: when NO test files exist, probe Ring-1 & CLI/task surfaces directly!
+        open_world_probe = {"anomalies": [], "obligations_admitted": 0, "projected_predicates": []}
+        if not discovered_tests:
+            open_world_probe = self.discover_untested_world_obligations(ws, ring1_relpaths=discovered_ring1)
+            for ep_u in open_world_probe.get("synthesized_failure_episodes") or []:
+                failed_episodes.append(ep_u)
+            for tk_u, esc_u in (open_world_probe.get("sealed_heldout_by_target") or {}).items():
+                sealed_heldout_by_target[tk_u] = esc_u
+
+        return {
+            "ring1_relpaths": discovered_ring1,
+            "test_relpaths": discovered_tests,
+            "failed_episodes": failed_episodes,
+            "sealed_heldout_by_target": sealed_heldout_by_target,
+            "open_world_probe": open_world_probe,
+        }
+
+    def discover_untested_world_obligations(
+        self,
+        ws_root: pathlib.Path,
+        *,
+        ring1_relpaths: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Explore an arbitrary untested workspace (zero `test_*.py` files) via predicate projection, taskfiles, confined CLI, and AST boundary probing."""
+        import ast as _ast
+        from canonical.runtime import self_authored_obligations_v1 as sao
+        from canonical.runtime import taskfile_read_v1
+        from canonical.swe_kernel.concept_library_v1 import eval_pure_ast_function
+        from canonical.swe_kernel.predicate_world_abstraction_v1 import project_computer_observation
+        from canonical.swe_kernel.transactional_parallel_execution_v1 import run_confined_command
+
+        ws = pathlib.Path(ws_root).resolve()
+        files_rel = sorted(
+            p.relative_to(ws).as_posix()
+            for p in ws.rglob("*")
+            if p.is_file() and not any(pt.startswith(".") or pt == "__pycache__" for pt in p.relative_to(ws).parts)
+        )
+        proj = project_computer_observation(
+            {
+                "cwd": ".",
+                "files": {f: {"exists": True, "size": (ws / f).stat().st_size} for f in files_rel[:32]},
+            }
+        )
+        pred_tokens = sorted(str(x) for x in (proj.get("predicates") or proj.keys()))
+
+        anomalies: list[dict[str, Any]] = []
+        synth_failures: list[dict[str, Any]] = []
+        sealed_by_target: dict[str, list[dict[str, Any]]] = {}
+
+        # 1. Taskfile / Makefile surface probing (`taskfile_read_v1`)
+        try:
+            tasks = list(taskfile_read_v1.read_tasks(str(ws)) or [])
+        except Exception:
+            tasks = []
+        for t_row in tasks[:4]:
+            cmd_str = str(t_row.get("command") or "").strip().lstrip("@")
+            t_name = str(t_row.get("name") or "")
+            if cmd_str and any(k in t_name.lower() for k in ("check", "verify", "lint", "validate", "smoke")):
+                res_c = run_confined_command(["/bin/sh", "-c", cmd_str], cwd=ws, timeout=5.0)
+                if int(res_c.get("returncode", 1)) != 0:
+                    anomalies.append(
+                        {
+                            "id": f"task:{t_name}",
+                            "kind": "TASKFILE_VALIDATOR_FAILED",
+                            "detail": (str(res_c.get("stderr") or res_c.get("stdout") or ""))[-240:],
+                        }
+                    )
+
+        # 2. Executable CLI / shell script probing (`--help` / deterministic dry probe in confined sandbox)
+        for rel_f in files_rel[:16]:
+            fp = ws / rel_f
+            if rel_f.endswith(".sh") or (os.access(fp, os.X_OK) and not rel_f.endswith(".py")):
+                argv = ["/bin/sh", str(fp), "--help"] if rel_f.endswith(".sh") else [str(fp), "--help"]
+                res_cli = run_confined_command(argv, cwd=ws, timeout=3.0)
+                if int(res_cli.get("returncode", 0)) not in (0, 1, 2) or "SyntaxError" in str(res_cli.get("stderr") or ""):
+                    anomalies.append(
+                        {
+                            "id": f"cli:{rel_f}",
+                            "kind": "CLI_SURFACE_ANOMALY",
+                            "returncode": res_cli.get("returncode"),
+                        }
+                    )
+
+        # 3. Untested `.py` AST boundary & metamorphic crash discovery (e.g. ZeroDivisionError / IndexError on empty/0 boundary!)
+        py_targets = list(ring1_relpaths) if ring1_relpaths is not None else [f for f in files_rel if f.endswith(".py")]
+        for rel_py in py_targets:
+            fp = ws / rel_py
+            if not fp.is_file():
+                continue
+            try:
+                tree = _ast.parse(fp.read_text(encoding="utf-8"))
+            except SyntaxError as exc:
+                anomalies.append({"id": f"syntax:{rel_py}", "kind": "PYTHON_SYNTAX_ERROR", "detail": str(exc)})
+                continue
+            for fn_nd in [n for n in tree.body if isinstance(n, _ast.FunctionDef) and not n.name.startswith("_")]:
+                arity = len(fn_nd.args.args)
+                if arity not in (1, 2) or fn_nd.args.vararg or fn_nd.args.kwarg:
+                    continue
+                probe_families: list[list[tuple[Any, ...]]] = (
+                    [
+                        [(0,), (-1,), (-2,), (-3,), (-4,), (-5,), (-6,), (-7,), (1,), (2,), (3,), (4,), (5,)],
+                        [([],), ([2],), ([2, 4],), ([1, 3, 5],), ([4, 8],), ([3, 6, 9],)],
+                        [("",), ("a",), ("aba",), ("abc",), ("abcd",)],
+                    ]
+                    if arity == 1
+                    else [
+                        [*[(k * 3, 0) for k in range(10)], (6, 2), (10, 5), (9, 3), (8, 4), (15, 3), (14, 2)],
+                        [([], 0), ([], 1), ([], 2), ([1], 3), ([2], 5), ([1, 2], 5), ([1, 2], 1), ([3, 4], 0), ([5, 6, 7], 2)],
+                    ]
+                )
+                for fam_inputs in probe_families:
+                    good_pairs: list[tuple[tuple[Any, ...], Any]] = []
+                    crashed_boundaries: list[tuple[tuple[Any, ...], str]] = []
+                    for args_t in fam_inputs:
+                        try:
+                            val = eval_pure_ast_function(fn_nd, args_t, max_steps=4000)
+                            good_pairs.append((args_t, val))
+                        except (ZeroDivisionError, IndexError) as exc_b:
+                            crashed_boundaries.append((args_t, type(exc_b).__name__))
+                        except Exception:
+                            good_pairs = []
+                            break
+                    if crashed_boundaries and len(good_pairs) >= 3:
+                        sample_out = good_pairs[0][1]
+                        neutral_default: Any = (
+                            0
+                            if isinstance(sample_out, int) and not isinstance(sample_out, bool)
+                            else (0.0 if isinstance(sample_out, float) else ("" if isinstance(sample_out, str) else ([] if isinstance(sample_out, list) else None)))
+                        )
+                        if neutral_default is not None:
+                            crash_cases = [
+                                {"id": f"ow_crash_{fn_nd.name}_{idx_c}", "args": a_c, "expected": neutral_default}
+                                for idx_c, (a_c, _exc_nm) in enumerate(crashed_boundaries)
+                            ]
+                            good_cases = [
+                                {"id": f"ow_good_{fn_nd.name}_{idx_g}", "args": a_g, "expected": v_g}
+                                for idx_g, (a_g, v_g) in enumerate(good_pairs)
+                            ]
+                            t_key = f"{rel_py}:{fn_nd.name}"
+                            vis_c, esc_c = self.split_observations_cryptographically(f"{t_key}:crash", crash_cases)
+                            vis_g, esc_g = self.split_observations_cryptographically(f"{t_key}:good", good_cases)
+                            vis_dev = vis_c + vis_g
+                            sealed_esc = esc_c + esc_g
+                            synth_failures.append(
+                                {
+                                    "ok": False,
+                                    "rejection_class": "UNTESTED_BOUNDARY_CRASH",
+                                    "target_relpath": rel_py,
+                                    "function_name": fn_nd.name,
+                                    "visible_dev_cases": vis_dev,
+                                }
+                            )
+                            if sealed_esc:
+                                sealed_by_target[t_key] = sealed_esc
+                            anomalies.append(
+                                {
+                                    "id": f"py_crash:{t_key}",
+                                    "kind": crashed_boundaries[0][1],
+                                    "crashed_args": list(crashed_boundaries[0][0]),
+                                }
+                            )
+                        break
+
+        # 4. Self-Authored Cheat-Defended Obligations (`self_authored_obligations_v1.author`)
+        before_w = {"resolved": {}}
+        done_w = {"resolved": {a["id"]: "VERIFIED_BY_RING0_AND_ZYGOTE" for a in anomalies}}
+        proposals: list[sao.Proposal] = []
+        for a in anomalies:
+            aid = str(a["id"])
+
+            def _mk_chk(tid: str) -> Callable[[Mapping[str, Any]], bool]:
+                return lambda w: isinstance(w.get("resolved"), Mapping) and w["resolved"].get(tid) == "VERIFIED_BY_RING0_AND_ZYGOTE"
+
+            proposals.append(
+                sao.Proposal(
+                    id=f"open_world:{aid}",
+                    claim=f"Eliminate {a['kind']} on {aid}",
+                    source="untested_open_world_explorer",
+                    check=_mk_chk(aid),
+                    value=5.0,
+                    cost=0.5,
+                    checkable=True,
+                )
+            )
+        cheats = sao.cheat_worlds(done_w) if proposals else []
+        admitted, _ = sao.author(proposals, before=before_w, done=done_w, cheats=cheats) if proposals else ([], [])
+        return {
+            "projected_predicates": pred_tokens,
+            "taskfile_entries": len(tasks),
+            "anomalies": anomalies,
+            "obligations_admitted": len(admitted),
+            "synthesized_failure_episodes": synth_failures,
+            "sealed_heldout_by_target": sealed_by_target,
+        }
+
 
 class SentientCognitiveCore:
     """Unified Non-Static Cognitive Core fusing Epistemic Self-Belief, Causal World Graph, VoI Dominance, Wake-Sleep & Recursive Self-Architecting."""
@@ -1385,8 +2057,57 @@ class SentientCognitiveCore:
             base_state_dir / "self_architect",
             concept_library=self.concept_library,
         )
+        self.trace_harvester = SelfTraceHarvester(salt=f"escrow:{base_state_dir.name}")
+        from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
+        from canonical.swe_kernel.transactional_parallel_execution_v1 import LatencyReliabilityCostRouter
+
+        self.organ_graph = MetaCircularOrganGraph(
+            base_state_dir / "meta_circular_organ_graph_v1.json",
+            concept_library=self.concept_library,
+        )
+        self.cost_router = LatencyReliabilityCostRouter()
         self.verified_programs_buffer: list[str] = []
         self.unresolved_failure_buffer: list[dict[str, Any]] = []
+
+    def evaluate_global_open_world_decision(
+        self,
+        observed_channels: Sequence[Any],
+        *,
+        goal: str = "",
+        target_gap: float | None = None,
+        remaining_budget: float = 10.0,
+        universe_size_hint: int | None = None,
+        ledger_path: str | None = None,
+    ) -> dict[str, Any]:
+        """Global non-local opportunity-space extrapolation (`OWNER_ACTIVE_GOAL` Law 5)."""
+        from canonical.runtime.global_open_world_extrapolator_v1 import (
+            ChannelObservation,
+            estimate_unseen_opportunity_space,
+        )
+
+        normalized: list[ChannelObservation] = []
+        for item in observed_channels:
+            if isinstance(item, ChannelObservation):
+                normalized.append(item)
+            elif isinstance(item, Mapping):
+                normalized.append(
+                    ChannelObservation(
+                        channel_id=str(item["channel_id"]),
+                        samples=int(item.get("samples", 1)),
+                        mean_payoff=float(item.get("mean_payoff", 0.0)),
+                        max_payoff=item.get("max_payoff"),
+                        payoff_std=float(item.get("payoff_std", 0.0)),
+                        unit_cost=float(item.get("unit_cost", 1.0)),
+                    )
+                )
+        return estimate_unseen_opportunity_space(
+            normalized,
+            goal=goal,
+            target_gap=target_gap,
+            remaining_budget=remaining_budget,
+            universe_size_hint=universe_size_hint,
+            ledger_path=ledger_path,
+        )
 
     def record_wake_episode(
         self,
@@ -1397,18 +2118,20 @@ class SentientCognitiveCore:
         verified_program_source: str | None = None,
         failure_record: Mapping[str, Any] | None = None,
         route_id: str = "sovereign_wake",
+        elapsed_ms: float = 5.0,
     ) -> dict[str, Any]:
-        """Unified Episodic Memory & Homeostasis Bus (`associative_memory_v1` + concept/failure buffers)."""
+        """Unified Episodic Memory & Homeostasis Bus (`associative_memory_v1` + cost router + concept/failure buffers)."""
         from canonical.runtime import associative_memory_v1 as assoc_mem
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
+        self.cost_router.record_observation(str(route_id), elapsed_ms=max(0.05, float(elapsed_ms)), ok=bool(outcome_pass))
         if can_write_memory():
             try:
-                assoc_mem.record_episode(
-                    goal=str(goal or task_id),
-                    chosen_capability=str(route_id),
-                    outcome="PASS" if outcome_pass else "FAIL",
-                    state_path=self.associative_memory_path,
+                assoc_mem.remember(
+                    {"goal": str(goal or task_id), "route_id": str(route_id), "outcome": "PASS" if outcome_pass else "FAIL"},
+                    kind="wake_episode",
+                    tags=(str(route_id), "pass" if outcome_pass else "fail"),
+                    path=str(self.associative_memory_path),
                 )
             except Exception:
                 pass
@@ -1419,6 +2142,15 @@ class SentientCognitiveCore:
             rec = dict(failure_record)
             rec.setdefault("ok", False)
             self.unresolved_failure_buffer.append(rec)
+        try:
+            self.organ_graph.record_transition(
+                action_id=str(task_id),
+                cost=max(0.0, float(elapsed_ms) / 1000.0),
+                failed=not bool(outcome_pass),
+                delta={"pass": 1.0 if outcome_pass else 0.0},
+            )
+        except Exception:
+            pass
         return {
             "homeostasis_needed": self.should_trigger_endogenous_homeostasis(),
             "unresolved_failures": len(self.unresolved_failure_buffer),
@@ -1450,6 +2182,26 @@ class SentientCognitiveCore:
         if len(self.verified_programs_buffer) >= 2:
             sleep_abs = self.concept_library.sleep_abstract(self.verified_programs_buffer)
             self.verified_programs_buffer.clear()
+        skill_srcs = [o.source_code for o in self.organ_graph.organs_in_stratum("SKILL")[:8]]
+        if len(skill_srcs) >= 2:
+            try:
+                extra_abs = self.concept_library.sleep_abstract(skill_srcs)
+                sleep_abs = {
+                    "admitted_count": int(sleep_abs.get("admitted_count", 0))
+                    + int(extra_abs.get("admitted_count", 0)),
+                    "admitted": list(sleep_abs.get("admitted") or []) + list(extra_abs.get("admitted") or []),
+                }
+            except Exception:
+                pass
+
+        try:
+            evolved = self.organ_graph.evolve_policy_from_traces()
+            if evolved is None and not self.organ_graph.organs_in_stratum("POLICY"):
+                from canonical.swe_kernel.meta_circular_organ_graph_v1 import compile_policy_organ
+
+                self.organ_graph.register_organ(compile_policy_organ())
+        except Exception:
+            pass
 
         self_evo: dict[str, Any] | None = None
         if code_root is not None and ring1_relpaths and (self.unresolved_failure_buffer or ring1_relpaths):
@@ -1468,6 +2220,10 @@ class SentientCognitiveCore:
         return {
             "concepts_invented": int(sleep_abs.get("admitted_count", 0)),
             "concept_library_size": len(self.concept_library.concepts()),
+            "hygiene": self.consolidation.run_homeostatic_memory_hygiene(
+                assoc_memory_path=self.associative_memory_path,
+                assoc_capacity=512,
+            ),
             "self_evolution": self_evo,
             "promoted_count": int((self_evo or {}).get("promoted_count") or 0),
         }
@@ -1648,3 +2404,36 @@ class SentientCognitiveCore:
             "shed_for_mortality": shed_for_mortality,
             "continuation_decision": continuation_decision,
         }
+
+
+_SHARED_CORES_BY_PATH: dict[str, SentientCognitiveCore] = {}
+
+
+def shared_cognitive_core(state_dir: pathlib.Path | str | None = None) -> SentientCognitiveCore:
+    """Return the unified live `SentientCognitiveCore` shared across all Brain organs, gated by `memory_policy_v1`."""
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if state_dir is not None:
+        resolved = str(pathlib.Path(state_dir).resolve())
+        core = _SHARED_CORES_BY_PATH.get(resolved)
+        if core is None:
+            core = SentientCognitiveCore(resolved)
+            _SHARED_CORES_BY_PATH[resolved] = core
+        return core
+
+    if not can_read_memory():
+        return SentientCognitiveCore(None)
+
+    env_dir = os.environ.get("BRAIN_COGNITIVE_STATE_DIR", "").strip()
+    target_path = (
+        pathlib.Path(env_dir).resolve()
+        if env_dir
+        else (pathlib.Path(__file__).resolve().parents[2] / "canonical" / "astra_runtime" / "state" / "LIVE_BRAIN_SENTIENT_CORE_V1")
+    )
+    key = str(target_path)
+    core = _SHARED_CORES_BY_PATH.get(key)
+    if core is None:
+        core = SentientCognitiveCore(target_path)
+        _SHARED_CORES_BY_PATH[key] = core
+    return core
+

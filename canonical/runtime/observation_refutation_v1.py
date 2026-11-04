@@ -54,6 +54,8 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from canonical.runtime.swe_observational_program_synthesizer_v1 import _freeze_val
+from canonical.runtime.generalization_check_v1 import _compile_body
 from canonical.runtime.evidence_demand_v1 import (  # noqa: E402
     PROVISIONAL,
     _normalise_body,
@@ -88,8 +90,11 @@ def interrogate(
     for step in range(1, max_steps + 1):
         if prior is None or prior["status"] != PROVISIONAL:
             break
-        asked = what_would_settle_it(list(params), prior["admissible"])
-        if not asked["queries"]:
+        # Report/compare EXPLANATIONS, and tell the question-finder what is already known, so it
+        # cannot re-ask an answered input and stall (measured 2026-11-04: ten consecutive x = 0).
+        asked = what_would_settle_it(list(params), prior["explanations"],
+                                     known=[a for a, _ in current])
+        if asked.get("status") == "PLATEAU" or not asked["queries"]:
             trajectory[-1]["stopped"] = asked.get("residual") or "no question separates the bodies"
             break
         question = list(asked["queries"][0]["args"])
@@ -106,7 +111,16 @@ def interrogate(
         entry["predicted_by_chosen"] = _predict(prior.get("chosen"), list(params), question)
         trajectory.append(entry)
 
-        if after["admissible_count"] == 0:
+        # A refutation is an answer that NO explanation admissible a moment ago could have produced.
+        # Emptiness of the whole set is sufficient but not the only case, and after the merge it is
+        # rare: main's partial-domain arms mean a piecewise body can survive almost any single
+        # observation, so a permanent liar (always 99.0) drove the set 3 -> 16 -> 13 -> 14 -> 16
+        # explanations and was never called a contradiction -- it looked like progress. Measured
+        # 2026-11-04. Test the answer against the SURVIVORS ONE STEP EARLIER, which is what a
+        # falsified prediction actually means.
+        contradicted = after["admissible_count"] == 0 or not _any_fits(
+            prior.get("admissible") or [], list(params), tuple(question), answer)
+        if contradicted:
             # The set was non-empty BEFORE this answer and is empty AFTER it. That is a
             # refutation, not an absence of description, and it must not be softened.
             entry["status"] = REFUTED
@@ -208,6 +222,22 @@ def _predict(body: str | None, params: list[str], question: Sequence[Any]) -> An
         return None
 
 
+def _any_fits(bodies: Sequence[str], params: Sequence[str], args: tuple[Any, ...],
+              value: Any) -> bool:
+    """Did any body that was admissible BEFORE this answer predict exactly this value?"""
+    if not bodies:
+        return False
+    for body in bodies:
+        try:
+            fn = _compile_body(body, list(params))
+            got = fn(*args)
+        except Exception:  # noqa: BLE001
+            continue
+        if _freeze_val(got) == _freeze_val(value):
+            return True
+    return False
+
+
 def _summarise(step: int, state: dict[str, Any], question: Sequence[Any] | None) -> dict[str, Any]:
     row: dict[str, Any] = {
         "step": step,
@@ -262,7 +292,14 @@ def run() -> dict[str, Any]:
         {"id": "truthful_oracle_settles_in_one_question",
          "question": "with a truthful oracle does the loop reach DETERMINED in a single question?",
          "questions_asked": honest["questions_asked"], "status": honest["status"],
-         "pass": bool(honest["questions_asked"] == 1 and honest["status"] == DETERMINED)},
+         "pass": bool(honest["questions_asked"] == 1 and honest["status"] == DETERMINED),
+         "falsified_on": "2026-11-04, by the merge with origin/main",
+         "why": ("pre-registered against a bank that truncated at 900. At a complete sweep the three "
+                 "`2x` points admit THREE explanations, not one, so no truthful answer reaches "
+                 "DETERMINED in one step -- the prediction was measuring the budget, not the "
+                 "creature. Kept as a failure; the corrected claim is that a truthful answer removes "
+                 "every body that predicted otherwise, which is what "
+                 "`test_asking_removes_every_body_that_predicted_otherwise` asserts")},
 
         {"id": "impossible_answer_is_refuted_not_unresolved",
          "question": "is an answer no admissible body predicts reported as REFUTED?",
