@@ -257,10 +257,28 @@ def _materialize_concept_helpers(
 # cannot observe it.
 _LAST_ADMISSIBLE: list[str] = []
 
+# Whether the most recent collecting call saw the WHOLE grammar. A capped bank is not a fact about
+# the grammar, and reporting "no body reproduces the examples" from a full bank attributes a budget
+# failure to the world. Measured 2026-11-04: `2x + 1` IS in the grammar (`((x + 1) + x) / 1`) but is
+# only reached after the weight-4 tier overflows a 900-entry bank, so the search said UNRESOLVED.
+_LAST_COVERAGE: dict[str, Any] = {}
+
 
 def last_admissible_bodies() -> list[str]:
     """Bodies collected by the most recent `collect_admissible=True` call."""
     return list(_LAST_ADMISSIBLE)
+
+
+def last_search_coverage() -> dict[str, Any]:
+    """Did the most recent search see the whole grammar, or did it run out of bank?
+
+    `complete=True`  -- the bank never filled and the weight sweep finished, so a body that
+                        reproduces the examples does not exist in the grammar at this weight bound.
+                        "Not in the grammar" is then a defensible claim.
+    `complete=False` -- the bank filled. Absence of a match is a statement about the budget. The
+                        caller must NOT report it as a fact about the data.
+    """
+    return dict(_LAST_COVERAGE)
 
 
 def _is_statement_block(body_src: str) -> bool:
@@ -330,7 +348,10 @@ def synthesize_python_function_body(
     # vacuous enumeration -- sweeping max_weight still surfaced only one body per weight, because a
     # match returns from inside the search and multiplicity was never observable.
     admissible_bodies: list[str] = []
+    global _LAST_COVERAGE
     if collect_admissible:
+        _LAST_COVERAGE = {"complete": False, "reason": "did not finish", "bank_size": 0,
+                          "bank_capacity": int(max_bank_size)}
         # Clear at the START. Measured 2026-11-04: the 1-level STUN arm below returned a body
         # instead of recording it, so a collecting call could exit without reaching the handoff at
         # the end -- and `last_admissible_bodies()` then reported the PREVIOUS call's bodies to a
@@ -660,6 +681,21 @@ def synthesize_python_function_body(
         # the function's contract for every existing caller; the default path is untouched.
         _LAST_ADMISSIBLE.clear()
         _LAST_ADMISSIBLE.extend(admissible_bodies)
+        # Completeness is decidable from state the search already keeps: the bank either filled or
+        # it did not, and the weight sweep either reached `max_weight` or broke out early. No new
+        # enumeration is needed to know whether the enumeration was exhaustive.
+        exhausted = len(seen_sigs) >= max_bank_size
+        _LAST_COVERAGE = {
+            "complete": not exhausted,
+            "bank_size": len(seen_sigs),
+            "bank_capacity": int(max_bank_size),
+            "max_weight": int(max_weight),
+            "reason": ("the candidate bank filled before the weight sweep finished, so a missing "
+                       "body is a missing BUDGET, not a missing grammar"
+                       if exhausted else
+                       "the bank did not fill and the sweep finished; absence is a fact about the "
+                       "grammar at this weight bound"),
+        }
     return None
 
 

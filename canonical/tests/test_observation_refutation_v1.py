@@ -167,11 +167,15 @@ def test_a_second_dissenting_observation_rules_out_the_delete_one_repair():
 
 def test_a_stale_collection_cannot_answer_a_fresh_question():
     """A collecting call that returns early must still clear the handoff."""
-    impossible = DOUBLE_X + [((-3.5,), 99.0)] * 0 + [((0,), 5.0)]
+    impossible = DOUBLE_X + [((0,), 5.0)]
     demand_evidence(["x"], DOUBLE_X)                       # populate with 12
     stale = demand_evidence(["x"], impossible)             # asks a question that admits none
     assert stale["admissible_count"] == 0
-    assert stale["status"] == UNRESOLVED
+    # The status is UNRESOLVED when the sweep was complete and SEARCH_TRUNCATED when the bank filled.
+    # Both mean "nothing was found"; neither may be the previous call's 12. Pinning one of them here
+    # would be pinning an observation rather than a property, and the property is: not 12, not stale.
+    assert stale["status"] in (UNRESOLVED, "SEARCH_TRUNCATED")
+    assert stale["admissible"] == []
 
 
 def test_every_collected_body_actually_compiles():

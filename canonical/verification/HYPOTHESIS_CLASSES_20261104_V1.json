@@ -1,0 +1,143 @@
+{
+  "authority": "NONE",
+  "cases": [
+    {
+      "case": "3x+1",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "affine",
+          "parameters": {
+            "a": 3,
+            "b": 1
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    },
+    {
+      "case": "2x",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "affine",
+          "parameters": {
+            "a": 2,
+            "b": 0
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    },
+    {
+      "case": "piecewise",
+      "explanations": 0,
+      "fit": [],
+      "needs": 0,
+      "status": "UNRESOLVED",
+      "why": "no family in this ontology explains the observations"
+    },
+    {
+      "case": "x+1",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "affine",
+          "parameters": {
+            "a": 1,
+            "b": 1
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    },
+    {
+      "case": "x*x",
+      "explanations": 1,
+      "fit": [
+        {
+          "class": "power",
+          "parameters": {
+            "a": 1,
+            "k": 2
+          },
+          "status": "FITS"
+        }
+      ],
+      "needs": 0,
+      "status": "DETERMINED",
+      "why": "exactly one family fits and pins its parameters"
+    }
+  ],
+  "findings": [
+    {
+      "have": 2,
+      "id": "a_two_parameter_family_needs_two_points",
+      "needs": 2,
+      "pass": true,
+      "question": "is the evidence requirement computed from the class rather than discovered?",
+      "status": "FITS"
+    },
+    {
+      "id": "further_points_test_rather_than_inform",
+      "pass": true,
+      "question": "is a third point on a two-parameter family counted as new information?",
+      "status": "FITS",
+      "surplus": 1
+    },
+    {
+      "id": "the_line_the_search_could_not_fit_fits_exactly",
+      "parameters": {
+        "a": 3,
+        "b": 1
+      },
+      "pass": true,
+      "question": "does the family explain 3x+1, which the string search left UNRESOLVED?"
+    },
+    {
+      "id": "a_non_affine_point_set_is_refused_not_rounded",
+      "pass": true,
+      "question": "does a quadratic get forced onto a straight line?",
+      "status": "INCONSISTENT",
+      "violations": 1
+    },
+    {
+      "explanations": 1,
+      "id": "the_headline_case_is_one_explanation_as_a_family",
+      "pass": true,
+      "question": "how many explanations are the three 2x points, once a family exists?"
+    },
+    {
+      "id": "the_question_is_derived_before_the_answer",
+      "pass": true,
+      "queries": [
+        {
+          "x": 1
+        }
+      ],
+      "question": "can the class say what input would pin it while it is still unpinned?"
+    },
+    {
+      "all_statuses": [
+        "FITS",
+        "FITS"
+      ],
+      "explanations": 1,
+      "id": "subsumed_families_are_not_counted_twice",
+      "pass": true,
+      "question": "does power(k=1) get counted as a second explanation alongside affine?"
+    }
+  ],
+  "passed": 7,
+  "schema": "PROJECT_BRAIN_HYPOTHESIS_CLASSES_V1",
+  "total": 7
+}

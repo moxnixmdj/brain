@@ -52,6 +52,12 @@ SCHEMA = "PROJECT_BRAIN_EVIDENCE_DEMAND_V1"
 DETERMINED = "DETERMINED"
 PROVISIONAL = "PROVISIONAL"
 UNRESOLVED = "UNRESOLVED"
+# The search ran out of candidate bank before the weight sweep finished. This is NOT "no body in
+# the grammar reproduces the examples" -- that claim needs a complete sweep, and a truncated one
+# cannot support it. Measured 2026-11-04: `y = 2x + 1` is expressible as `((x + 1) + x) / 1`, but a
+# 900-entry bank fills at weight 3 and the body is reached at weight 4, so the honest report is
+# "I stopped looking", not "it is not there".
+SEARCH_TRUNCATED = "SEARCH_TRUNCATED"
 
 # Extra inputs tried when the caller's examples leave the choice ambiguous. They are drawn from the
 # same small-integer grid the rest of this project uses, and they are probed for DISAGREEMENT
@@ -247,18 +253,35 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
     bodies = enumerate_admissible(params, examples, max_weight=max_weight,
                                   extra_constants=extra_constants,
                                   concept_library=concept_library)
+    from canonical.runtime.swe_observational_program_synthesizer_v1 import last_search_coverage
+
+    coverage = last_search_coverage()
     report: dict[str, Any] = {
         "schema": SCHEMA,
         "params": list(params),
         "examples": len(list(examples)),
         "admissible": [_normalise_body(b) for b in bodies],
         "admissible_count": len(bodies),
+        # Every count below is a count over a SWEEP, and a sweep has a budget. Reporting the counts
+        # without the budget would be reporting a measurement as though it were a fact.
+        "coverage": coverage,
         "authority": "NONE",
     }
     if not bodies:
+        if coverage and not coverage.get("complete", False):
+            report["status"] = SEARCH_TRUNCATED
+            report["chosen"] = None
+            report["why"] = (
+                "the candidate bank filled before the sweep finished, so nothing was found -- which "
+                "is a statement about the BUDGET. It is not evidence that no body reproduces the "
+                "examples, and it must not be reported as one")
+            report["retry_with"] = ("a larger max_bank_size, or a cheaper weight bound; the body "
+                                    "may exist and be unreachable at this budget")
+            return report
         report["status"] = UNRESOLVED
         report["chosen"] = None
-        report["why"] = "no body in the grammar reproduces the examples"
+        report["why"] = ("no body in the grammar reproduces the examples, and the sweep was "
+                         "complete over the candidate bank at this weight bound")
         return report
 
     # Count EXPLANATIONS, not programs. Measured on the `2x` examples: 12 admissible programs are 3
@@ -271,6 +294,15 @@ def demand_evidence(params: Sequence[str], examples: Sequence[Any], *,
     report["grouping_basis"] = (
         "behavioural signature over %d probe inputs; the claim is bounded by that range"
         % len(DISAMBIGUATING_PROBES))
+    if not coverage.get("complete", False):
+        # A grouping is a claim about ALL admissible bodies. If the enumeration was truncated, the
+        # grouping is a claim about the ones that fit in the bank -- which is a weaker and different
+        # statement. Measured: the `2x` counts are stable from bank=900 to bank=50000, but stability
+        # was never certified, only observed.
+        report["grouping_basis"] += ("; NOTE the enumeration was TRUNCATED at bank=%d/%d, so this "
+                                     "grouping covers the bodies that were reached, not the "
+                                     "grammar" % (coverage.get("bank_size", 0),
+                                                  coverage.get("bank_capacity", 0)))
 
     if len(groups) == 1:
         # Every admissible program is the same explanation spelled differently. The CHOICE is
