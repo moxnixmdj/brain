@@ -30950,7 +30950,7 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 311,
+  "knowledge_documents": 312,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6697,
   "routing_tokens": 2360,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "99af371bf08c7af1b0d21e0f1bd5939d3a24ca27e063c220b22391d88db38da7"
+  "value": "7817a118653b61d385d54976b1d293df139c3c1afec7ed18a92e03b769480625"
  },
  "engines": [
   {
@@ -55127,6 +55127,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5991,
+   "headings": [
+    "Round 29: the language was a list I typed",
+    "What I had been doing",
+    "The question I had never asked",
+    "The rule that replaces the list",
+    "Measured",
+    "The regression that taught me the rule was working",
+    "Still true, and now more clearly",
+    "Measured state"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1.md",
+   "sha256": "10a479196f0f5a23d66080c68d0841ee81827a1216ff0dd98f9b09527b232707",
+   "summary": "You asked a fourth time. Four times is not a request for another bug fix — it is a statement that my *direction* is wrong. So this round I did not look for a defect. I looked for the thing that would still be wrong after every defect was fixed.",
+   "terms": {
+    "13": 5,
+    "2x": 4,
+    "30": 9,
+    "3x": 3,
+    "before": 4,
+    "cap": 3,
+    "capability": 3,
+    "cases": 3,
+    "claim": 3,
+    "co-factor": 3,
+    "code": 4,
+    "constant": 4,
+    "creature": 3,
+    "d_k": 5,
+    "defect": 4,
+    "did": 3,
+    "difference": 3,
+    "every": 4,
+    "evidence": 3,
+    "exactly": 3,
+    "fixed": 5,
+    "forms": 3,
+    "had": 4,
+    "impossible": 5,
+    "language": 7,
+    "list": 6,
+    "measured": 4,
+    "mine": 3,
+    "more": 3,
+    "my": 4,
+    "never": 3,
+    "no": 6,
+    "not": 16,
+    "nothing": 3,
+    "one": 9,
+    "period": 10,
+    "rather": 3,
+    "recovered": 3,
+    "refused": 5,
+    "replaces": 3,
+    "round": 6,
+    "rule": 4,
+    "same": 3,
+    "so": 6,
+    "solved": 9,
+    "still": 4,
+    "test": 3,
+    "than": 3
+   },
+   "title": "Round 29: the language was a list I typed",
+   "title_terms": [
+    "29",
+    "language",
+    "list",
+    "round",
+    "typed"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5430,
    "headings": [
     "The twelve-entry menu was deciding which functions exist",
@@ -68658,10 +68734,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1105,
+  "included_source_count": 1106,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "48e55ab228d865442af28e7e76d3a3cfe8e1437cbefff718f9f1c7f5133e5b2d"
+  "source_tree_digest": "5344d6ee2196cbbc50a00b2c6caecc05f081a08567634f8f2ee0796dbc6dfccf"
  },
  "research_index": [
   {
@@ -224584,26 +224660,25 @@
    }
   },
   {
-   "action_id": "THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1",
+   "action_id": "THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1",
    "capability": false,
    "date": "2026-11-04",
-   "id": "research:canonical/action_intents/THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1.json",
+   "id": "research:canonical/action_intents/THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1.json",
    "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1.json",
+   "path": "canonical/action_intents/THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d079ad745b1ad5215104590c9091bb317c0a7baf79c6d6262b2146af60ec6ea3",
+   "sha256": "6c0bbfc6f75bf372bc3dadfa8486d85ef1e6887f12775a311fabd621b588749b",
    "status": "",
    "terms": {
     "20261104": 1,
-    "abstraction": 1,
-    "bin": 1,
     "derive_what_is_a_theorem_and_name_what_is_only_a_policy": 1,
     "general_reusable_problem_solving_capability_frontier": 1,
-    "instrument": 1,
-    "lying": 1,
+    "language": 1,
+    "list": 1,
     "only_a_claim_the_evidence_could_have_refuted_may_become_permanent__zero_capability_credit__zero_terminal_credit__no_family_flipped__not_emergence": 1,
     "the_crystallizer_asked_does_it_fit_and_accepted_the_answer_it_never_asked_could_this_have_been_wrong_so_three_observations_that_exactly_determine_an_affine_fits_three_parameters_were_treated_as_corroboration_and_a_body_wrong_on_every_unseen_input_became_a_law": 1,
-    "the_instrument_was_lying_and_the_abstraction_was_a_bin_20261104_v1": 1,
+    "the_language_was_a_list_i_typed_20261104_v1": 1,
+    "typed": 1,
     "v1": 1
    }
   },

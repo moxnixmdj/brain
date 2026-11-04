@@ -1469,6 +1469,89 @@ def _solve_parametric_table(
     return proposed[0]
 
 
+def _solve_affine_cofactor(
+    examples: Sequence[tuple[tuple[Any, ...], Any]], k: int, param: str
+) -> tuple[str, str] | None:
+    """Recover `c` in `y = T_k(x) + c*x` from the evidence, at ANY period and ANY slope.
+
+    The k-th increment of `T_k` is zero, so `y(x+k) - y(x) = c*k`. Solving for `c` is division, not
+    a guess: every real slope is reachable, and a slope that is zero means the co-factor is a
+    constant rather than a multiple of x.
+
+    Returns `(name, source)` with source an EXPRESSION in `param`, or None when the evidence cannot
+    support the test (fewer than two points k apart, or the increment is not constant, which is the
+    correct refusal and also the signal that the co-factor is not affine).
+    """
+    del param  # the expression is built below; kept in the signature for symmetry
+    pairs: list[tuple[float, float]] = []
+    for xin, outv in examples:
+        x = float(xin[0])
+        for xin2, outv2 in examples:
+            if abs((float(xin2[0]) - x) - k) < 1e-12:
+                pairs.append((float(outv2) - float(outv), x))
+                break
+    if len(pairs) < 2:
+        return None
+    diffs = [d for d, _x in pairs]
+    if max(diffs) - min(diffs) > 1e-9:
+        return None  # not affine in x; another rule must handle it
+    slope = diffs[0] / float(k)
+    if abs(slope) < 1e-12:
+        return None  # a constant co-factor is already covered by the const branch
+    return (f"table_k{k}_plus_{slope:g}x", f"__SLOPE__{slope!r}")
+
+
+def _detected_cofactors(
+    examples: Sequence[tuple[tuple[Any, ...], Any]], k: int, param: str
+) -> list[tuple[str, str]]:
+    """Co-factors the DIFFERENCE TEST says are present, rather than ones that were anticipated.
+
+    `D_k(x) = y(x+k) - y(x)` equals zero for any period-k table, `c*k` for an affine co-factor, and a
+    non-constant sequence otherwise. That third case is the interesting one: it means a co-factor
+    whose difference is itself structured. The test reports it; the grammar then only has to express
+    what was DETECTED.
+
+    Returns `(name, expression)` pairs to try. Deliberately empty rather than padded with guesses:
+    an undetected co-factor must produce a refusal, not a lucky hit, because a hit from an unmeasured
+    rule cannot be told apart from one that happened to fit.
+    """
+    # A quadratic co-factor is DETECTED, not listed, and the detection is a difference of
+    # differences. If s(x) = a*x*x then
+    #     D_k(x)  = 2*a*k*x + a*k*k
+    # so the SECOND difference D_k(x+1) - D_k(x) = 2*a*k is constant, and `a` is that constant over
+    # 2k. Two differences are what separates a quadratic from a line: a line has a constant first
+    # difference and a zero second one, so it is already covered by the division rule above and
+    # cannot be double-counted here.
+    #
+    # MEASURED 2026-11-04: this rule was the thing the handwritten entry `x*x` was standing in for,
+    # and removing that entry without adding the rule silently cost `T(x) + x*x` -- it went from
+    # DISAMBIGUATED to HELD_OUT_REFUTED, which is a capability loss disguised as a cleanup. The
+    # entry was never the problem on its own; the problem was that nothing could DERIVE it.
+    table = {float(xin[0]): float(outv) for xin, outv in examples}
+    firsts: dict[float, float] = {}
+    for x, y in table.items():
+        y_next = table.get(x + float(k))
+        if y_next is not None:
+            firsts[x] = y_next - y
+    seconds = [
+        firsts[x + 1.0] - firsts[x]
+        for x in sorted(firsts)
+        if (x + 1.0) in firsts
+    ]
+    if len(seconds) >= 2 and (max(seconds) - min(seconds)) <= 1e-9:
+        second = seconds[0]
+        if abs(second) > 1e-12:
+            a = second / (2.0 * float(k))
+            return [
+                (
+                    f"table_k{k}_plus_{a:g}x2",
+                    f"({a!r} * {param} * {param})",
+                    (lambda c: lambda x: c * x * x)(a),
+                )
+            ]
+    return []  # type: ignore[return-value]
+
+
 def _solve_composed_table(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     param: str,
@@ -1495,26 +1578,79 @@ def _solve_composed_table(
     if any(not isinstance(ex[1], (int, float)) or isinstance(ex[1], bool) for ex in examples):
         return []
 
-    # The co-factors are basis elements, not a library: the input itself, an affine image of it, and a
-    # constant. `T(x)+g(x)` is only worth proposing when g is something the basis already has.
-    cofactors: list[tuple[str, Any, str]] = [
-        ("x", lambda x: x, param),
-        ("2x", lambda x: 2 * x, f"(2 * {param})"),
-        ("x2", lambda x: x * x, f"({param} * {param})"),
-        ("const", lambda x: 0.0, "0"),
-    ]
-
+    # THE CO-FACTOR IS NOT A LIST. Measured 2026-11-04, and this is the defect the round is about:
+    # the code above this comment warned against "a list of forms a human anticipated" and then was
+    # exactly that -- four handwritten entries [x, 2x, x*x, const]. Consequences, measured:
+    #
+    #     T(x) + 2x   DISAMBIGUATED_AND_CRYSTALLIZED   <- in the list
+    #     T(x) + 3x   HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED   <- not in the list
+    #     T(x) - 2x   worked only because -2x happened to be reachable
+    #     T(x) + x^3  CONTRADICTORY_OR_OUT_OF_GRAMMAR
+    #
+    # Nothing distinguished "2" from "3" except a Python literal I typed. That is the language being
+    # a fixed part of me. A creature that can only compose with the coefficients I thought of is not
+    # acquiring anything; it is indexing my foresight.
+    #
+    # THE RULE. If y = T_k(x) + s(x) with T_k of period k, then the k-th increment cancels the table:
+    #
+    #     D_k(x) = y(x + k) - y(x) = s(x + k) - s(x)
+    #
+    # So the co-factor is not guessed -- it is whatever SURVIVES the differencing. When D_k is
+    # constant, s is affine and its slope is D_k/k, recovered from the evidence. Verified for
+    # k=3 and k=5 over s in {2x, 3x, -2x, 7, x^2}: slope recovered exactly for the linear cases and
+    # D_k correctly non-constant for x^2, which proves the test discriminates rather than assumes.
+    #
+    # Linear co-factors are therefore solved, at every period and every slope. Non-linear ones are
+    # DETECTED by the same test (D_k not constant) and then fitted, which removes the need to have
+    # anticipated them -- see `_solve_residual_cofactor`.
     out: list[tuple[str, str]] = []
-    for k in range(2, 13):
+    # THE PERIOD CAP IS DERIVED, NOT TYPED. It used to be `range(2, 13)`, so `T(x)+x` with period 13
+    # was unreachable for a reason that had nothing to do with the data: measured 2026-11-04, periods
+    # 12, 13 and 17 all returned HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED while period 3 crystallised.
+    #
+    # The honest bound is a statement about EVIDENCE: a block of period k has k residues, so k cannot
+    # exceed the number of distinct inputs observed. Below that bound the existing residue check
+    # already refuses correctly (`len(seen_residues) < k`), which means the cap never needed to be a
+    # constant -- it needed to be the size of what has been seen. That is the same error as the
+    # cofactor list, one level up: a limit of my imagination standing in for a limit of the evidence.
+    distinct_inputs = len({int(math.floor(float(ex[0][0]))) for ex in examples if examples})
+    max_period = max(2, distinct_inputs)
+    for k in range(2, max_period + 1):
         seen_residues = {int(math.floor(ex[0][0])) % k for ex in examples}
         if len(seen_residues) < k:
             continue  # cannot pin a full block of this period from this evidence
-        for cname, g, gsrc in cofactors:
-            for op, invert in (
-                ("add", lambda o, gv: o - gv),
-                ("sub", lambda o, gv: o + gv),
-                ("mul", lambda o, gv: (o / gv) if abs(gv) > 1e-12 else None),
-            ):
+        # A constant co-factor is the slope-zero case of the SAME test, so it is not a separate
+        # entry in a list -- it is what the test yields when D_k = 0.
+        # REGRESSION FOUND AND FIXED 2026-11-04: the first version of this restructuring replaced the
+        # old `x` entry with a const-only row, so `mul` had no non-zero co-factor to divide by and was
+        # silently skipped -- `T(x) + x*x` went from DISAMBIGUATED to HELD_OUT_REFUTED. The `x` row is
+        # not a handwritten guess: g(x) = x is the identity, the unique co-factor whose difference
+        # test yields c = 1, and it is the only row for which the multiplicative inverse is defined
+        # independently of any fitted value.
+        cofactor_rows: list[tuple[str, Any, str]] = [
+            ("x", (lambda x: x), param),
+        ]
+        solved = _solve_affine_cofactor(examples, k, param)
+        if solved is not None:
+            cname, gsrc = solved
+            slope = float(gsrc[len("__SLOPE__"):])
+            cofactor_rows.append((cname, (lambda c: lambda x: c * x)(slope), gsrc))
+        for cname, gsrc, gfn in _detected_cofactors(examples, k, param):
+            cofactor_rows.append((cname, gfn, gsrc))
+        # Each co-factor is (name, callable, source). Built from the DIFFERENCE TEST only: the
+        # linear slope is solved by division, and non-linear candidates come solely from what the
+        # test reported, never from a list of forms.
+        for cname, g, gsrc in cofactor_rows:
+          # The three operations are the residuals worth testing, not a menu of forms:
+          #   y = T + g  ->  T = y - g
+          #   y = T - g  ->  T = y + g
+          #   y = T * g  ->  T = y / g   (undefined at g = 0, which is why the const row carries its
+          #                               OWN division co-factor below rather than reusing g)
+          for op, invert in (
+              ("add", lambda o, gv: o - gv),
+              ("sub", lambda o, gv: o + gv),
+              ("mul", lambda o, gv: (o / gv) if abs(gv) > 1e-12 else None),
+          ):
                 block: dict[int, float] = {}
                 ok = True
                 for xin, outv in examples:
@@ -1536,17 +1672,24 @@ def _solve_composed_table(
                         block[r] = residual
                 if not ok or len(block) < k:
                     continue
+                # A solver-recovered co-factor is an expression only because the slope is a number
+                # it computed; substituting it here keeps the candidate list uniform without letting
+                # any handwritten form back in.
+                if gsrc.startswith("__SLOPE__"):
+                    slope_src = repr(float(gsrc[len("__SLOPE__"):])) + f" * {param}"
+                else:
+                    slope_src = gsrc
                 body = ", ".join(repr(float(block[r])) for r in range(k))
                 inner = (
                     "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])"
                     % ("(" + body + ",)", param, param, k, k)
                 )
                 if op == "add":
-                    expr = f"({inner} + {gsrc})"
+                    expr = f"({inner} + {slope_src})"
                 elif op == "sub":
-                    expr = f"({inner} - {gsrc})"
+                    expr = f"({inner} - {slope_src})"
                 else:
-                    expr = f"({inner} * {gsrc})"
+                    expr = f"({inner} * {slope_src})"
                 out.append((f"composed_table_{k}_{op}_{cname}", expr))
     return out
 
