@@ -1,0 +1,310 @@
+{
+ "after": {
+  "breakdown": {
+   "accounted": 38911,
+   "closes": true,
+   "explained": 36,
+   "insufficient_support": 37919,
+   "low_coverage": 621,
+   "not_found_in_space": 196,
+   "total_fields": 38911,
+   "values_refuse_derivation": 139
+  },
+  "fields_attributed": 36,
+  "fields_still_unknown": 38736,
+  "fields_whose_values_refuse_a_content_derivation": 139
+ },
+ "authority": "NO_CAPABILITY_CREDIT_INFERENCE_MEASUREMENT_ONLY",
+ "before": {
+  "fields_attributed": 34,
+  "fields_unexplained": 337
+ },
+ "corpus": {
+  "documents": 9553,
+  "fields": 38911,
+  "records": 368658
+ },
+ "instrument": "GENERATED_HYPOTHESIS_SPACE_SEARCHED_UNDER_FALSIFICATION",
+ "learned_examples": [
+  {
+   "already_in_previous_space": true,
+   "coverage": 1.0,
+   "facts": {
+    "all_equal": false,
+    "all_zero": false,
+    "distinct": 44,
+    "identical_inputs_with_different_values": 0,
+    "is_int_class": false,
+    "records": 75
+   },
+   "field": "actual|hex40",
+   "holdout": 0.9412,
+   "outcome": "LEARNED",
+   "recipe": "gitblob|file|raw",
+   "records": 75,
+   "train": 0.9512,
+   "tried": 2
+  },
+  {
+   "already_in_previous_space": false,
+   "coverage": 1.0,
+   "facts": {
+    "all_equal": false,
+    "all_small_nonnegative": true,
+    "all_zero": false,
+    "distinct": 2,
+    "equals_own_position": false,
+    "identical_inputs_with_different_values": 0,
+    "is_int_class": true,
+    "max_to_median_ratio": 2.0,
+    "records": 6,
+    "strictly_increasing": false
+   },
+   "field": "pages_total|int",
+   "holdout": 1.0,
+   "outcome": "LEARNED",
+   "recipe": "countdistinct|pathlist|raw",
+   "records": 6,
+   "train": 1.0,
+   "tried": 1
+  }
+ ],
+ "non_claims": [
+  "NO_CAPABILITY_CREDIT_A_RECIPE_IS_NOT_A_CAPABILITY",
+  "FACTS_ABOUT_THE_DATA_AND_FACTS_ABOUT_THE_INSTRUMENT_ARE_REPORTED_APART",
+  "THE_PRIMITIVES_ARE_SUPPLIED_THE_COMPOSITIONS_AND_THE_SEARCH_ARE_NOT",
+  "PROVEN_NON_DERIVABLE_IS_A_STATEMENT_ABOUT_THE_VALUES_NOT_ABOUT_US",
+  "NOT_DERIVABLE_CANDIDATE_IS_A_STATEMENT_ABOUT_US_AND_IS_LABELLED_AS_ONE"
+ ],
+ "non_derivable_examples": [
+  {
+   "field": "git_blob_sha|hex40",
+   "records": 400,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "INPUTS_NOT_RECORDED",
+   "why": "identical recorded inputs, different values -- the record omits an input the value depends on"
+  },
+  {
+   "field": "original_index|int",
+   "records": 400,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "INPUTS_NOT_RECORDED",
+   "why": "identical recorded inputs, different values -- the record omits an input the value depends on"
+  },
+  {
+   "field": "score|int",
+   "records": 400,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "INPUTS_NOT_RECORDED",
+   "why": "identical recorded inputs, different values -- the record omits an input the value depends on"
+  },
+  {
+   "field": "segment_index|int",
+   "records": 400,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "INPUTS_NOT_RECORDED",
+   "why": "identical recorded inputs, different values -- the record omits an input the value depends on"
+  },
+  {
+   "field": "producer_cognition_model_dependency_count|int",
+   "records": 352,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  },
+  {
+   "field": "expected_obligation_discharge_lcb|int",
+   "records": 331,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  },
+  {
+   "field": "spend_usd|int",
+   "records": 329,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  },
+  {
+   "field": "power|int",
+   "records": 305,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "INPUTS_NOT_RECORDED",
+   "why": "identical recorded inputs, different values -- the record omits an input the value depends on"
+  },
+  {
+   "field": "iteration_limit|int",
+   "records": 265,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  },
+  {
+   "field": "pre_apply_test_returncode|int",
+   "records": 81,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  },
+  {
+   "field": "agent_timeout_sec|int",
+   "records": 76,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  },
+  {
+   "field": "post_apply_test_returncode|int",
+   "records": 54,
+   "tier": "FACT_ABOUT_DATA",
+   "verdict": "UNDECIDABLE_FROM_CORPUS",
+   "why": "constant across every record, so this corpus cannot tell it from a literal"
+  }
+ ],
+ "not_found_examples": [
+  {
+   "field": "required_secret_count|int",
+   "recipes_tried": 15,
+   "records": 400
+  },
+  {
+   "field": "required_environment_count|int",
+   "recipes_tried": 15,
+   "records": 400
+  },
+  {
+   "field": "archive_sha256|hex64",
+   "recipes_tried": 11,
+   "records": 400
+  },
+  {
+   "field": "integration_friction|int",
+   "recipes_tried": 15,
+   "records": 400
+  },
+  {
+   "field": "lines|int",
+   "recipes_tried": 15,
+   "records": 400
+  },
+  {
+   "field": "imported_by_count|int",
+   "recipes_tried": 15,
+   "records": 400
+  },
+  {
+   "field": "cost|int",
+   "recipes_tried": 15,
+   "records": 400
+  },
+  {
+   "field": "segment_sha256|hex64",
+   "recipes_tried": 11,
+   "records": 400
+  }
+ ],
+ "rejected_examples": [
+  {
+   "coverage": 0.4872,
+   "reason": "LOW_COVERAGE",
+   "recipe": "countdistinct|pathlist|raw"
+  },
+  {
+   "coverage": 0.4872,
+   "reason": "LOW_COVERAGE",
+   "recipe": "count|pathlist|raw"
+  },
+  {
+   "coverage": 0.4872,
+   "reason": "LOW_COVERAGE",
+   "recipe": "len|pathlist|raw"
+  },
+  {
+   "coverage": 0.4872,
+   "reason": "LOW_COVERAGE",
+   "recipe": "len|pathlist|dedup_sortnl"
+  },
+  {
+   "coverage": 0.4872,
+   "reason": "LOW_COVERAGE",
+   "recipe": "len|pathlist|sortcomma"
+  },
+  {
+   "coverage": 0.5692,
+   "reason": "LOW_COVERAGE",
+   "recipe": "countdistinct|pathlist|raw"
+  },
+  {
+   "coverage": 0.5692,
+   "reason": "LOW_COVERAGE",
+   "recipe": "count|pathlist|raw"
+  },
+  {
+   "coverage": 0.5692,
+   "reason": "LOW_COVERAGE",
+   "recipe": "len|pathlist|raw"
+  }
+ ],
+ "schema": "PROJECT_BRAIN_DERIVATION_GRAMMAR_V1",
+ "search": {
+  "fields_searched": 337,
+  "learned": 2,
+  "learned_with_a_recipe_the_old_list_could_not_express": 1,
+  "not_a_function_of_the_record": 139,
+  "not_found_in_space": 196,
+  "recipes_tried": 3107,
+  "verdicts_about_the_data": {
+   "EVIDENCE_OF_WRITE_TIME_CHOICE": 4,
+   "INPUTS_NOT_RECORDED": 15,
+   "UNDECIDABLE_FROM_CORPUS": 120
+  },
+  "verdicts_about_the_instrument": {
+   "NOT_FOUND_IN_GENERATED_SPACE": 196
+  }
+ },
+ "space": {
+  "by_class": {
+   "hex40": 22,
+   "hex64": 11,
+   "int": 15
+  },
+  "cross_product": 44,
+  "cross_product_naive": 80,
+  "duplicates_removed": 36,
+  "elements": 5,
+  "generated": 48,
+  "hand_written_in_previous_layer": 8,
+  "pres": 4,
+  "structural_counts": 4,
+  "transforms": 4
+ },
+ "tiers": {
+  "EVIDENCE_OF_WRITE_TIME_CHOICE": "FACT_ABOUT_DATA",
+  "INPUTS_NOT_RECORDED": "FACT_ABOUT_DATA",
+  "NOT_FOUND_IN_GENERATED_SPACE": "FACT_ABOUT_INSTRUMENT",
+  "UNDECIDABLE_FROM_CORPUS": "FACT_ABOUT_DATA"
+ },
+ "yield_primitives": {
+  "elements:file": {
+   "confirmed": 6,
+   "tried": 6
+  },
+  "elements:pathlist": {
+   "confirmed": 7,
+   "tried": 7
+  },
+  "pre:raw": {
+   "confirmed": 13,
+   "tried": 13
+  },
+  "transform:countdistinct": {
+   "confirmed": 7,
+   "tried": 7
+  },
+  "transform:gitblob": {
+   "confirmed": 6,
+   "tried": 6
+  }
+ }
+}

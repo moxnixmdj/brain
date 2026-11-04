@@ -1,0 +1,25 @@
+{
+ "primitives": {
+  "elements:file": {
+   "confirmed": 6,
+   "tried": 6
+  },
+  "elements:pathlist": {
+   "confirmed": 7,
+   "tried": 7
+  },
+  "pre:raw": {
+   "confirmed": 13,
+   "tried": 13
+  },
+  "transform:countdistinct": {
+   "confirmed": 7,
+   "tried": 7
+  },
+  "transform:gitblob": {
+   "confirmed": 6,
+   "tried": 6
+  }
+ },
+ "runs": 25
+}

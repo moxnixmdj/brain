@@ -957,6 +957,17 @@
    "what": "probe:--file|positional",
    "why": "empirical cli probe"
   },
+  "g990839091496": {
+   "cost": 1.0,
+   "created": 1793798142.0611324,
+   "helped": 0,
+   "id": "g990839091496",
+   "last_seen": 1793798142.0611324,
+   "resolved": false,
+   "trials": 0,
+   "what": "DERIVED_VALUE_DISAGREES",
+   "why": "size_bytes does not follow size_of_referenced_file (EXPLICIT)"
+  },
   "g991901507885": {
    "cost": 1.0,
    "created": 1793266064.3796365,

@@ -82,6 +82,13 @@ MIN_SUPPORT = 3
 # A role-level rule below the binding threshold is still a useful analogy -- but it is a
 # suspicion, never a repair. Measured: hex40 fields that name a path are 85.35% blob ids.
 ANALOGY_THRESHOLD = 0.80
+# How much of a field a derivation must actually compute for before its accuracy means
+# anything. Measured 2026-11-04: 32 of the 66 "attributed" fields had their winning candidate
+# computing on under 90% of their records -- the worst at 2.5% -- because agreement was
+# counted only where the candidate produced a value at all. A recipe that explains 2.5% of a
+# field perfectly, and is silent about the rest, has not explained the field; it has found a
+# corner of it. This constant is the difference between those two claims.
+COVERAGE_MIN = 0.90
 # Majority agreement required to call a shape attributed rather than undetermined.
 BIND_THRESHOLD = 0.90
 
@@ -519,7 +526,8 @@ def _rate(candidates: Iterable[Candidate], sites: list[Site], tree: Tree) -> lis
             if verdict:
                 tallies[name][0] += 1
     scored = [{"candidate": name, "agreements": ok, "computable": total,
-               "rate": round(ok / total, 4)}
+               "rate": round(ok / total, 4),
+               "coverage": round(total / len(sites), 4) if sites else None}
               for name, (ok, total) in tallies.items() if total]
     scored.sort(key=lambda r: (-r["rate"], -r["computable"], r["candidate"]))
     return scored
@@ -548,6 +556,8 @@ def attribute(sites: list[Site], tree: Tree,
         contexts = len({s.context for s in group})
         if best is None or best["computable"] < MIN_SUPPORT:
             state = "INSUFFICIENT_SUPPORT"
+        elif (best.get("coverage") or 0) < COVERAGE_MIN:
+            state = "LOW_COVERAGE"
         elif best["rate"] >= BIND_THRESHOLD:
             state = "UNDERDETERMINED" if len(contenders) > 1 else "ATTRIBUTED"
         else:
@@ -556,6 +566,7 @@ def attribute(sites: list[Site], tree: Tree,
             "field": key, "records": len(group), "contexts": contexts, "state": state,
             "candidate": best["candidate"] if best else None,
             "rate": best["rate"] if best else None,
+            "coverage": best.get("coverage") if best else None,
             "contenders": contenders if len(contenders) > 1 else [],
             "runner_up": scored[1] if len(scored) > 1 else None,
             "scored": scored,
@@ -579,6 +590,8 @@ def attribute_roles(sites: list[Site], tree: Tree,
                       if best and r["rate"] == best["rate"] and r["computable"] > 0]
         if best is None or best["computable"] < MIN_SUPPORT:
             state = "INSUFFICIENT_SUPPORT"
+        elif (best.get("coverage") or 0) < COVERAGE_MIN:
+            state = "LOW_COVERAGE"
         elif len(contenders) > 1:
             state = "UNDERDETERMINED"
         elif best["rate"] >= BIND_THRESHOLD:
@@ -638,6 +651,8 @@ def generalise_within_field(sites: list[Site], tree: Tree) -> dict:
     return {"fields_bound_on_half": bound_fields,
             "records_predicted": checked, "agreed": agreed,
             "accuracy": round(agreed / checked, 4) if checked else None,
+            "note_on_denominator": "checked counts only records where the candidate computed; "
+                                   "fields with low coverage are no longer attributed at all",
             "failures": failures,
             "note": "fit on half of each attributed field, predicted the other half"}
 
@@ -979,6 +994,11 @@ def _grade(cand: Candidate, sites: list[Site], tree: Tree) -> dict | None:
     return {"agreements": ok, "computable": total, "rate": round(ok / total, 4)}
 
 
+def _mean_coverage(shapes: Mapping[str, dict]) -> float | None:
+    vals = [v["coverage"] for v in shapes.values() if v.get("coverage") is not None]
+    return round(sum(vals) / len(vals), 4) if vals else None
+
+
 def _mean_rate(shapes: Mapping[str, dict]) -> float | None:
     rates = [v["rate"] for v in shapes.values() if v.get("rate") is not None]
     return round(sum(rates) / len(rates), 4) if rates else None
@@ -1045,6 +1065,7 @@ def model_document(limit_files: int | None = None) -> dict:
         # single record each carry no knowledge, and writing them out made a 7.5 MB artifact
         # that said nothing; this is 200 KB that does.
         "fields": {k: {"state": v["state"], "candidate": v["candidate"], "rate": v["rate"],
+                       "coverage": v.get("coverage"),
                        "records": v["records"], "contexts": v["contexts"],
                        "runner_up": v["runner_up"]}
                    for k, v in fields.items() if v["state"] != "INSUFFICIENT_SUPPORT"},
@@ -1269,6 +1290,8 @@ def measure(*, widen_shapes: bool = False, limit_files: int | None = None) -> di
         "fields_by_state": dict(counts),
         "attributed_fields": len(attributed),
         "attribution_agreement": _mean_rate(attributed),
+        "attribution_coverage": _mean_coverage(attributed),
+        "coverage_floor": COVERAGE_MIN,
         "generalisation_within_field": within,
         "generalisation_across_contexts": across,
         "anomalies": {"count": len(anom), "examples": anom[:8]},
@@ -1282,6 +1305,7 @@ def measure(*, widen_shapes: bool = False, limit_files: int | None = None) -> di
             "NO_CAPABILITY_CREDIT_KNOWING_A_HASH_IS_NOT_BEING_CAPABLE",
             "HYPOTHESIS_SPACE_IS_SUPPLIED_BY_A_PERSON_THE_ATTRIBUTION_IS_NOT",
             "AN_ATTRIBUTION_IS_AGREEMENT_WITH_DATA_NOT_PROOF_OF_CAUSATION",
+            "ACCURACY_WITHOUT_COVERAGE_IS_A_MEASUREMENT_OF_THE_SUBSET_THAT_WORKED",
             "ARCHIVE_ANOMALIES_ARE_HISTORY_NOT_DEBT",
         ],
     }
@@ -1306,6 +1330,8 @@ def main(argv: list[str]) -> int:
           f"(supplied); attribution (inferred)")
     print(f"  fields by state           : {report['fields_by_state']}")
     print(f"  attribution agreement     : {report['attribution_agreement']}")
+    print(f"  attribution coverage      : {report['attribution_coverage']} "
+          f"(floor {report['coverage_floor']})")
     within = report["generalisation_within_field"]
     across = report["generalisation_across_contexts"]
     print(f"  held-out records (same shape) : {within['agreed']}/{within['records_predicted']}"

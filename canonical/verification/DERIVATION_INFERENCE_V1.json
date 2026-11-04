@@ -1,6 +1,6 @@
 {
  "anomalies": {
-  "count": 227,
+  "count": 93,
   "examples": [
    {
     "candidate": "length_of_sibling_list",
@@ -58,67 +58,63 @@
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "derived": "59f8b8bfa30b8c0026c8a15eaa5d231a3e73092df421be48795b6295d8192d55",
+    "candidate": "size_of_referenced_file",
+    "derived": 32672,
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[0]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "f931c5fd8d9a376640ef52ca9dd47d1d26cf161f2d98d155ea873e1bb3ad00bc"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[2]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 31995
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "derived": "45be61a85e2057bb3fcec901dd097cdc1f492e6c361d73d09245d813377ffa7c",
+    "candidate": "size_of_referenced_file",
+    "derived": 19876,
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[1]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "3499f58d9a569ab5e54f44d8d83cd79eadc97ac455641878e59bc713c6ffabd4"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[322]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 16244
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "derived": "4a6666ec92e15ea6beb68c854b0bbf66c556197ec34b34e2dfe15b644130abb9",
+    "candidate": "size_of_referenced_file",
+    "derived": 2226,
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[2]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "0b1e90d25855a6627ba3dd7010c864d30eee9c3449c443da75cfc3bc01bf4464"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[333]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 1587
     }
    }
   ]
  },
- "attributed_fields": 66,
- "attribution_agreement": 0.9926,
+ "attributed_fields": 34,
+ "attribution_agreement": 0.996,
+ "attribution_coverage": 0.9917,
  "authority": "NO_CAPABILITY_CREDIT_INFERENCE_MEASUREMENT_ONLY",
  "corpus": {
-  "contexts": 171033,
-  "documents": 9550,
-  "fields": 38867,
-  "sites": 368460
+  "contexts": 171122,
+  "documents": 9553,
+  "fields": 38913,
+  "sites": 368660
  },
+ "coverage_floor": 0.9,
  "fields_by_state": {
-  "ATTRIBUTED": 66,
-  "INSUFFICIENT_SUPPORT": 37876,
-  "UNDERDETERMINED": 5,
-  "UNEXPLAINED": 920
+  "ATTRIBUTED": 34,
+  "INSUFFICIENT_SUPPORT": 37921,
+  "LOW_COVERAGE": 621,
+  "UNDERDETERMINED": 4,
+  "UNEXPLAINED": 333
  },
  "generalisation_across_contexts": {
-  "accuracy": 0.9987,
-  "agreed": 772,
-  "contexts_withheld_and_predicted": 17,
+  "accuracy": 1.0,
+  "agreed": 244,
+  "contexts_withheld_and_predicted": 5,
   "detail": [
-   {
-    "agreed": 390,
-    "candidate": "sha256_of_referenced_file",
-    "field": "source_sha256|hex64",
-    "records": 391,
-    "withheld_context": "source_executable,source_module,source_path,source_type"
-   },
    {
     "agreed": 118,
     "candidate": "length_of_sibling_list",
@@ -134,27 +130,6 @@
     "withheld_context": "completed_actions,created_at_utc,mission_id,plan_sha256,resume_count,schema,status,step_id,test_interrupt_injected,updated_at_utc"
    },
    {
-    "agreed": 68,
-    "candidate": "length_of_sibling_list",
-    "field": "member_count|int",
-    "records": 68,
-    "withheld_context": "adapter,archive_path,archive_sha256,capability_id,dependency,manifest_path,manifest_sha256,members,verified"
-   },
-   {
-    "agreed": 16,
-    "candidate": "git_blob_at_record_commit",
-    "field": "source_sha|hex40",
-    "records": 16,
-    "withheld_context": "basis,brain_value,independent_or_objective,normalized_target_atoms,objective_ceiling,objective_ceiling_value,proof_kind,scope_complete,semantic_implications,source_path,source_predicate_id,supporting_sources,witness_id"
-   },
-   {
-    "agreed": 14,
-    "candidate": "size_of_referenced_file",
-    "field": "raw_bytes|int",
-    "records": 14,
-    "withheld_context": "git_blob_sha,path"
-   },
-   {
     "agreed": 13,
     "candidate": "length_of_sibling_list",
     "field": "root_binding_count|int",
@@ -162,150 +137,144 @@
     "withheld_context": "accounting,binding_stability_rule,composition_admissible,date,execution_order,global_rule,hard_nonclaims,roots,roots_with_bounded_execution_support,roots_with_bounded_semantic_support,same_subject_gate,schema,scoped_registry,status,subject,subject_dependency_closure_complete,supersedes,verified_root_subject_binding_count"
    },
    {
-    "agreed": 13,
-    "candidate": "length_of_sibling_list",
-    "field": "roots_with_bounded_execution_support|int",
-    "records": 13,
-    "withheld_context": "accounting,binding_stability_rule,composition_admissible,date,execution_order,global_rule,hard_nonclaims,root_binding_count,roots,roots_with_bounded_semantic_support,same_subject_gate,schema,scoped_registry,status,subject,subject_dependency_closure_complete,supersedes,verified_root_subject_binding_count"
-   },
-   {
-    "agreed": 13,
-    "candidate": "length_of_sibling_list",
-    "field": "roots_with_bounded_semantic_support|int",
-    "records": 13,
-    "withheld_context": "accounting,binding_stability_rule,composition_admissible,date,execution_order,global_rule,hard_nonclaims,root_binding_count,roots,roots_with_bounded_execution_support,same_subject_gate,schema,scoped_registry,status,subject,subject_dependency_closure_complete,supersedes,verified_root_subject_binding_count"
-   },
-   {
     "agreed": 7,
     "candidate": "length_of_sibling_list",
     "field": "wheel_count|int",
     "records": 7,
     "withheld_context": "closure_sha256,network_required_for_install,resolver,root_filename,root_project,root_version,schema,source_only_artifacts_allowed,wheels"
+   },
+   {
+    "agreed": 1,
+    "candidate": "length_of_sibling_list",
+    "field": "proposal_candidate_count|int",
+    "records": 1,
+    "withheld_context": "acceptance_credit_delta,benchmark_task_exposure,benchmark_trials_executed,effective_timeout_s,observed_input_tokens,pass,planner_duration_s,planner_model,planner_transport,proposal_material_requirements,scientific_capability_credit,selected_input_tokens,selection_token_count_calls,target_max_input_tokens,target_min_input_tokens,terminal_credit_delta"
    }
   ],
-  "fields_tested": 17,
+  "fields_tested": 5,
   "note": "each field's largest context withheld; rule bound from the others",
-  "records_predicted": 773,
-  "rule_identical_when_neighbourhood_removed": 17
+  "records_predicted": 244,
+  "rule_identical_when_neighbourhood_removed": 5
  },
  "generalisation_within_field": {
-  "accuracy": 0.9886,
-  "agreed": 8617,
+  "accuracy": 0.9893,
+  "agreed": 3408,
   "failures": [
    {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "candidate": "length_of_sibling_list",
+    "field": "cycles|int",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[0]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "f931c5fd8d9a376640ef52ca9dd47d1d26cf161f2d98d155ea873e1bb3ad00bc"
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json",
+     "field": "cycles",
+     "pointer": "/blocker/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "field": "cycles|int",
+    "site": {
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json",
+     "field": "cycles",
+     "pointer": "/history[1]/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "field": "cycles|int",
+    "site": {
+     "doc": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json",
+     "field": "cycles",
+     "pointer": "/history[2]/result/cycles",
+     "shape": "cycles|int|adapter,capability_plan,controller_mode,final_summary,goal_compilation,inherited_bound_capabilities,planner_model_last,planner_source,planner_transport,planning_mode,returncode,stdout,trace",
+     "value": 2
+    }
+   },
+   {
+    "candidate": "length_of_sibling_list",
+    "field": "cycles|int",
+    "site": {
+     "doc": "canonical/verification/TB_SCIENCE_EXPLICIT_OUTPUT_DIRECTIVE_LIVE_PREFLIGHT_20261008_V1.json",
+     "field": "cycles",
+     "pointer": "/observed/cycles",
+     "shape": "cycles|int|brain_mandated_deliverables,controller_status,path_content,path_exists,resolved_requirements,task_completion_claimed",
+     "value": 4
     }
    },
    {
     "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "field": "source_sha256|hex64",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[2]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "0b1e90d25855a6627ba3dd7010c864d30eee9c3449c443da75cfc3bc01bf4464"
+     "doc": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+     "field": "source_sha256",
+     "pointer": "/capabilities[381]/provenance/source_sha256",
+     "shape": "source_sha256|hex64|source_executable,source_module,source_path,source_type",
+     "value": "fd96af03475835c7d87eac7281568c373e58a881cb3eac20389d8a57d29a0638"
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "candidate": "size_of_referenced_file",
+    "field": "size_bytes|int",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[4]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "a4cfb348e017bd9c9b400cfea97d0725b6c36babf29a3ccb5411ac619a6c74e7"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[537]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 1644
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "candidate": "size_of_referenced_file",
+    "field": "size_bytes|int",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[6]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "30239dfb108b1c9f3cf93a16b9c2d3c80ca307489cdf93358a5a679dd48c790b"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[615]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 51723
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "candidate": "size_of_referenced_file",
+    "field": "size_bytes|int",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
-     "field": "sha256",
-     "pointer": "/records[7]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "87f474d573dc0abf7781b3837640416c03bb3473d6f428cc7dad44b7a2f57a24"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[803]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 23310
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "candidate": "size_of_referenced_file",
+    "field": "size_bytes|int",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
-     "field": "sha256",
-     "pointer": "/records[1]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "3499f58d9a569ab5e54f44d8d83cd79eadc97ac455641878e59bc713c6ffabd4"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[807]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 13868
     }
    },
    {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
+    "candidate": "size_of_referenced_file",
+    "field": "size_bytes|int",
     "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
-     "field": "sha256",
-     "pointer": "/records[2]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "cc4348e35da204c69b93db0ba332719bfdf1dc6846298a740598dc7a32e6d45b"
-    }
-   },
-   {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
-    "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
-     "field": "sha256",
-     "pointer": "/records[4]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "a4cfb348e017bd9c9b400cfea97d0725b6c36babf29a3ccb5411ac619a6c74e7"
-    }
-   },
-   {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
-    "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
-     "field": "sha256",
-     "pointer": "/records[6]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "23c7704a4966c6333f21fb385a3330bbfc40fa62e06e736d4fad9f96f5ddde81"
-    }
-   },
-   {
-    "candidate": "sha256_of_referenced_file",
-    "field": "sha256|hex64",
-    "site": {
-     "doc": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json",
-     "field": "sha256",
-     "pointer": "/records[7]/sha256",
-     "shape": "sha256|hex64|duration_s,errors,exit_code,failed,passed,path,reported_test_duration_s,skipped,tests",
-     "value": "87f474d573dc0abf7781b3837640416c03bb3473d6f428cc7dad44b7a2f57a24"
+     "doc": "canonical/runtime/generated/proof_atom_git_object_corpus_freeze_v1.json",
+     "field": "size_bytes",
+     "pointer": "/candidate_universe/objects[834]/size_bytes",
+     "shape": "size_bytes|int|git_blob_sha,path,source_class",
+     "value": 17016
     }
    }
   ],
-  "fields_bound_on_half": 38,
+  "fields_bound_on_half": 17,
   "note": "fit on half of each attributed field, predicted the other half",
-  "records_predicted": 8716
+  "note_on_denominator": "checked counts only records where the candidate computed; fields with low coverage are no longer attributed at all",
+  "records_predicted": 3445
  },
  "history_complete": true,
  "hypothesis_space": [
@@ -344,9 +313,9 @@
  ],
  "ignorance": {
   "by_reason": {
-   "INSUFFICIENT_SUPPORT": 37876,
-   "UNDERDETERMINED": 5,
-   "UNEXPLAINED": 920
+   "INSUFFICIENT_SUPPORT": 37921,
+   "UNDERDETERMINED": 4,
+   "UNEXPLAINED": 333
   },
   "ranked": [
    {
@@ -358,23 +327,6 @@
     ],
     "records": 20075,
     "shape": "git_blob_sha|hex40",
-    "state": "UNEXPLAINED"
-   },
-   {
-    "best_candidate": "length_of_sibling_list",
-    "best_rate": 0.0,
-    "contenders": [
-     "length_of_sibling_list",
-     "sha1_of_path_string",
-     "git_blob_at_head",
-     "git_blob_of_referenced_file",
-     "sha1_of_referenced_file",
-     "sha256_of_referenced_file",
-     "size_of_referenced_file",
-     "git_blob_at_record_commit"
-    ],
-    "records": 9141,
-    "shape": "incremental_spend_usd|int",
     "state": "UNEXPLAINED"
    },
    {
@@ -427,54 +379,54 @@
    },
    {
     "best_candidate": "length_of_sibling_list",
-    "best_rate": 0.0005,
-    "contenders": [],
-    "records": 4963,
-    "shape": "id|int",
-    "state": "UNEXPLAINED"
-   },
-   {
-    "best_candidate": "length_of_sibling_list",
-    "best_rate": 0.0,
-    "contenders": [
-     "length_of_sibling_list",
-     "sha1_of_path_string",
-     "git_blob_at_head",
-     "git_blob_of_referenced_file",
-     "sha1_of_referenced_file",
-     "sha256_of_referenced_file",
-     "size_of_referenced_file",
-     "git_blob_at_record_commit"
-    ],
-    "records": 4780,
-    "shape": "terminal_credit_delta|int",
-    "state": "UNEXPLAINED"
-   },
-   {
-    "best_candidate": "length_of_sibling_list",
-    "best_rate": 0.0123,
-    "contenders": [],
-    "records": 4526,
-    "shape": "capability_credit_delta|int",
-    "state": "UNEXPLAINED"
-   },
-   {
-    "best_candidate": "length_of_sibling_list",
     "best_rate": 0.0,
     "contenders": [],
     "records": 3953,
     "shape": "archive_sha256|hex64",
     "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.0539,
+    "contenders": [],
+    "records": 3785,
+    "shape": "integration_friction|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "size_of_referenced_file",
+    "best_rate": 0.0019,
+    "contenders": [],
+    "records": 2614,
+    "shape": "lines|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": "length_of_sibling_list",
+    "best_rate": 0.001,
+    "contenders": [],
+    "records": 1916,
+    "shape": "imported_by_count|int",
+    "state": "UNEXPLAINED"
+   },
+   {
+    "best_candidate": null,
+    "best_rate": null,
+    "contenders": [],
+    "records": 1497,
+    "shape": "verification|int",
+    "state": "INSUFFICIENT_SUPPORT"
    }
   ],
-  "records_stranded": 327259,
-  "shapes_unexplained": 38801
+  "records_stranded": 238098,
+  "shapes_unexplained": 38258
  },
  "instrument": "DERIVATION_INFERENCE_FROM_OWN_RECORDS",
  "non_claims": [
   "NO_CAPABILITY_CREDIT_KNOWING_A_HASH_IS_NOT_BEING_CAPABLE",
   "HYPOTHESIS_SPACE_IS_SUPPLIED_BY_A_PERSON_THE_ATTRIBUTION_IS_NOT",
   "AN_ATTRIBUTION_IS_AGREEMENT_WITH_DATA_NOT_PROOF_OF_CAUSATION",
+  "ACCURACY_WITHOUT_COVERAGE_IS_A_MEASUREMENT_OF_THE_SUBSET_THAT_WORKED",
   "ARCHIVE_ANOMALIES_ARE_HISTORY_NOT_DEBT"
  ],
  "residual_diagnosis": {
@@ -567,20 +519,20 @@
   "hex40|nopath": {
    "candidate": "length_of_sibling_list",
    "rate": 0.0,
-   "records": 25423,
-   "state": "UNEXPLAINED"
+   "records": 25429,
+   "state": "LOW_COVERAGE"
   },
   "hex40|path": {
    "candidate": "git_blob_at_head",
-   "rate": 0.7813,
-   "records": 23172,
+   "rate": 0.781,
+   "records": 23178,
    "state": "UNDERDETERMINED"
   },
   "hex64|nopath": {
    "candidate": "length_of_sibling_list",
    "rate": 0.0,
-   "records": 29383,
-   "state": "UNEXPLAINED"
+   "records": 29399,
+   "state": "LOW_COVERAGE"
   },
   "hex64|path": {
    "candidate": "sha256_of_referenced_file",
@@ -590,15 +542,15 @@
   },
   "int|nopath": {
    "candidate": "length_of_sibling_list",
-   "rate": 0.0692,
-   "records": 262864,
-   "state": "UNEXPLAINED"
+   "rate": 0.0691,
+   "records": 263036,
+   "state": "LOW_COVERAGE"
   },
   "int|path": {
    "candidate": "length_of_sibling_list",
    "rate": 0.316,
    "records": 16845,
-   "state": "UNEXPLAINED"
+   "state": "LOW_COVERAGE"
   }
  },
  "schema": "PROJECT_BRAIN_DERIVATION_INFERENCE_V1",

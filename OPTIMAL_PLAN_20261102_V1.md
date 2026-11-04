@@ -596,3 +596,117 @@ were mine; log 7's predicates are inferred; log 8 has to make the *space* learne
 
 No capability credit. Knowing that a recorded number equals a function of the tree is not
 being capable, and neither is repairing the document that quoted it.
+
+---
+
+## Execution log 8 — the hypothesis space itself, and a correction to log 7 (2026-11-04)
+
+Log 7 said the honest limit was that "the hypothesis space is still supplied by a person". This
+removes that limit for one class of question, and in doing so found that last log's headline
+number was inflated.
+
+### The space is now generated, not listed
+
+`canonical/tools/derivation_grammar_v1.py` replaces eight hand-written `Candidate(...)` lines
+with a grammar and searches its cross product:
+
+```
+recipe = transform( arrange( elements ) )
+elements   5   file bytes | committed bytes | path text | the record's path list | value list
+arrange    4   raw | sorted-newline | sorted-comma | deduplicated-sorted-newline
+transform  4   length | sha1 | sha256 | git blob
+```
+
+| | |
+|---|---|
+| naive cross product | 80 |
+| duplicates of the identity that a naive cross product generates | 36 |
+| **semantically distinct recipes** | **44** (+4 structural counts = 48) |
+| previous layer could express | 8 |
+| coverage of the previous layer | **6 of 8** — the grammar cannot select "the commit that last wrote this record" |
+
+Measured on the full corpus (368,658 records, 9,553 documents, 38,911 fields):
+
+| | |
+|---|---|
+| fields the previous layer explained | 34 |
+| additional fields learned from the generated space | **2** (1 of them needs a recipe the old list could not express) |
+| recipes tried searching **337** unexplained fields | 3,107 |
+| values that refuse a content derivation, with evidence | **139** |
+| not found in the generated space (our limit, labelled as ours) | 196 |
+| accounting | 38,911 of 38,911 fields, `closes=True` |
+
+The 139 are split into three facts about the data, kept separate from the one fact about the
+instrument:
+
+```
+INPUTS_NOT_RECORDED             15   identical recorded inputs, different values
+UNDECIDABLE_FROM_CORPUS        120   constant across every record
+EVIDENCE_OF_WRITE_TIME_CHOICE    4   tracks position or order
+NOT_FOUND_IN_GENERATED_SPACE   196   FACT_ABOUT_INSTRUMENT, never counted as non-derivability
+```
+
+### The correction: 32 of 66 was measured on a subset
+
+`derivation_inference_v1` counted agreement only where the candidate produced a value **at all**.
+A derivation that computed for 3% of a field and was right about all of it scored 100%. The
+audit: **32 of the 66 "attributed" fields had their winning derivation computing on under 90% of
+their records**, the worst at 2.5% (`git_blob_at_record_commit`, 160 records, one of which it
+could answer).
+
+With `COVERAGE_MIN = 0.90` as a precondition:
+
+| | log 7 claimed | corrected |
+|---|---|---|
+| fields attributed | 66 | **34** |
+| attribution agreement | 99.26% | 99.60% (higher, on a smaller and honest set) |
+| attribution coverage | not measured | **99.17%** |
+| held-out accuracy | 98.86% (8,617/8,716) | **98.93%** (3,408/3,445) |
+| live predicates the loop may act on | 66 | **34** |
+
+Half the model was asserting more than its evidence covered. The loop now repairs on 34
+predicates instead of 66, and the 32 dropped ones were exactly the ones that would have rewritten
+documents on the strength of a corner.
+
+The same bug was in the new module in a worse form: `countdistinct|pathlist|raw` "bound" a
+396-record field at 100% by computing on **47** records and being silently skipped on the other
+349. Coverage is now a precondition in both layers, and where it fails the state is `LOW_COVERAGE`,
+not `ATTRIBUTED`.
+
+### Two more errors, and one that was mine to be embarrassed by
+
+1. **`git_blob_sha` was "proven nondeterministic"** — a field that demonstrably *is* a blob id.
+   Adding the writing commit to the input signature did not fix it, so I looked at a collision
+   instead of simplifying: five action intents quoting the same path's blob at five different
+   commits, **none of which the receipt names**. The verdict is now `INPUTS_NOT_RECORDED`, which
+   says what is true — the record is under-specified — instead of claiming a proof.
+2. **36 of 80 generated recipes were duplicates.** Sorting, splitting or deduplicating a *single*
+   element is the identity, so `len|file|sortnl` and `len|file|raw` are the same hypothesis. Worse
+   than wasted search: a duplicate could win a field and be credited in the yield table under a
+   name that learned nothing.
+3. **A constant-output recipe can match by coincidence.** `count|pathlist|raw` returns 1 for every
+   one-file record. Rejected now by `_is_constant_predictor` — a derivation that yields the same
+   value for every record explains nothing about any of them.
+
+### What is learned now, and what that changes next run
+
+Each primitive carries a yield (`confirmed` count), persisted to
+`canonical/verification/DERIVATION_YIELDS_V1.json`. Search order is by yield, so a confirmed
+recipe is tried first next time. Current leaders: `pre:raw`, `transform:countdistinct`,
+`elements:pathlist`. That is learning that changes behaviour across runs, and its unit is
+**recipes tried** (3,107 this run), never a solve rate.
+
+Mutation results — each mutant must kill a test:
+drop the coverage precondition → fails; allow constant predictors → fails (only after the fixture
+was rebuilt: the first version let `UNDECIDABLE_FROM_CORPUS` fire first, so the test passed for
+the wrong reason); ignore the holdout → fails; relabel under-specification as our own limit → fails.
+
+### The remaining honest limit
+
+The **primitives** are still supplied. The system composes them, searches them, proves some fields
+are not functions of anything it can read, and learns which primitives pay off — but it has not
+invented an element type or a transform. 196 fields are `NOT_FOUND_IN_GENERATED_SPACE`, and that
+number is a statement about the grammar, not about the repository. The next widening is a grammar
+that grows a production from repeated failure, not more primitives typed by hand.
+
+No capability credit. Reproducing a number from the tree is not being capable.
