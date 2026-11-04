@@ -1031,30 +1031,71 @@ def choose(question: str, root: str, ents, words: list[str],
             "rival_readings": _rival_readings(built, lex, words, value)}
 
 
+#: The operators that carry a law. Anything else is UNCHECKED, not ungraded.
 def _answer_law_grade(node) -> str | None:
-    """The weakest grade among the laws of the operators used in this expression.
+    """The weakest law among the operators this expression actually applies.
 
     A composite answer is only as well checked as its least checked operator. Reporting the
     strongest would be exactly the kind of summary that flatters the system.
+
+    TWO VERSIONS OF THIS FUNCTION WERE WRONG IN THE SAME WAY, and the fix was not a longer
+    list. The first walked only `op == "aggregate"`, so `half(count(sum(amount) by region))`
+    -- ops map/count/groups/group/table -- graded `None`, which was documented and read as
+    "this expression needs no law"; it was in fact unchecked and answered 1.5 to a question
+    whose answer is 183.33. The second added a hand-typed `_GRADED_OPS` tuple. That tuple
+    then missed `column_from`, whose subtree applies `sum` through a `groups` node, so
+    `what is the total amount per region` graded `None` -- the null, the "could not judge"
+    value -- while being a correct answer that nothing had checked.
+
+    A list I typed is not an inventory of what carries a law. So this does not enumerate
+    the operators that use an aggregate: it CONSULTS THE OPERATOR TABLE. Any node whose
+    arguments name a declared aggregate is graded by that aggregate's laws, whatever the
+    node is called and however the kind is spelled -- `groups` keeps its kind as a bare
+    string in `args`, next to node arguments, and a walk that only follows `hasattr(x,
+    "op")` never sees it.
+
+    When an expression applies an aggregate and no grade came back, the answer is NONE:
+    unchecked. `None` is reserved for an expression that applies no aggregate at all --
+    a bare table read or a row count, where there is genuinely nothing to grade.
     """
     from canonical.runtime import value_algebra_v1 as V
 
-    grades, seen = [], set()
+    aggregates = V._AGGREGATES
+    order = ["NONE", "WEAK", "MODERATE", "STRONG"]
+    grades, seen, applies_aggregate = [], set(), False
     stack = [node]
     while stack:
         cur = stack.pop()
         if cur is None or id(cur) in seen:
             continue
         seen.add(id(cur))
-        if getattr(cur, "op", None) == "aggregate":
-            kind = cur.args[0]
-            spec = V._AGGREGATES.get(kind)
-            if spec:
-                grades.append(V.law_strength(spec["fn"], spec["laws"])["grade"])
+
+        found = None
+        for arg in getattr(cur, "args", ()):
+            if isinstance(arg, str) and arg in aggregates:
+                found = arg
+                break
+
+        if found is not None:
+            applies_aggregate = True
+            spec = aggregates[found]
+            grades.append(V.law_strength(spec["fn"], spec["laws"])["grade"])
+
+        if getattr(cur, "op", None) == "count" and found is None:
+            # counts rows rather than a declared aggregate: a real check, but a weak one,
+            # and it must not be able to hide behind a sibling's strong grade.
+            grades.append("NONE")
+            applies_aggregate = True
+
         stack.extend(a for a in getattr(cur, "args", ()) if hasattr(a, "op"))
-    if not grades:
+
+    if not applies_aggregate:
+        # nothing in this expression applies an aggregate, so there is no law to grade.
+        # This is the ONLY case that returns None, and it no longer covers any expression
+        # that computed a number by aggregating.
         return None
-    order = ["NONE", "WEAK", "MODERATE", "STRONG"]
+    if not grades:
+        return "NONE"
     return min(grades, key=order.index)
 
 
