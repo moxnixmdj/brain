@@ -1,1507 +1,761 @@
 {
  "alive": false,
- "born_at": 1793804409.4189408,
- "counts": {
-  "actions": 32,
-  "confirmations": 26,
-  "idle_ticks": 104,
-  "predicted": 28,
-  "refused": 8,
-  "surprised": 2
+ "belief": {
+  "accepted": [],
+  "depth_reached": 0,
+  "rejected": [
+   {
+    "accepted": false,
+    "attempts": [],
+    "depth": 0
+   }
+  ],
+  "root": {
+   "counts": {
+    "UNTESTABLE": 14
+   },
+   "kind": "leaf"
+  },
+  "schema": "PROJECT_BRAIN_BELIEF_V1",
+  "seen": 14,
+  "splits_accepted": 0,
+  "splits_proposed": 1
  },
- "identity": "72af455b6843",
+ "born_at": 1793808865.6947076,
+ "counts": {
+  "actions": 14,
+  "confirmations": 11,
+  "idle_ticks": 0,
+  "model_regrown": 1,
+  "predicted": 14,
+  "refused": 0,
+  "surprised": 3
+ },
+ "experiences": [
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::adapter",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::member_count",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::members",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::output_bytes",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::output_path",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::output_sha256",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::output_verified",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::archive.tar_gz.create_from_manifest::source_sha256",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::auto.npm.dfinity-cbor::adapter",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::auto.npm.dfinity-cbor::decode_export",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::auto.npm.dfinity-cbor::encode_export",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::auto.npm.dfinity-cbor::output_bytes",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::auto.npm.dfinity-cbor::output_path",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  },
+  {
+   "group": "doubt::auto.npm.dfinity-cbor::output_sha256",
+   "signals": {
+    "capability_is_archive": 0.0,
+    "defect_has_path": 0.0,
+    "expects_effect": 0.0,
+    "is_doubt": 1.0,
+    "is_effect": 0.0,
+    "is_forge": 0.0,
+    "is_loop_defect": 0.0,
+    "n_supplied": 0.0,
+    "path_depth": 0.0,
+    "path_is_canonical": 0.0,
+    "path_is_json": 0.0,
+    "supplied_all_prefixed": 0.0
+   },
+   "verdict": "UNTESTABLE"
+  }
+ ],
+ "identity": "b407e7ca2aad",
  "journal": [
   {
-   "at": 1793804415.397,
+   "at": 1793808871.711,
+   "first_visit": true,
+   "from_model": false,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": null,
+   "organ": "doubt",
+   "predicts": "HOLDS",
    "seq": 1,
-   "target": "archive_of_a_path_that_does_not_exist",
+   "target": "archive.tar_gz.create_from_manifest::adapter",
    "tick": 1
   },
   {
-   "at": 1793804415.401,
+   "at": 1793808871.77,
    "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": null,
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "HOLDS",
    "seq": 2,
-   "surprise": null,
-   "target": "archive_of_a_path_that_does_not_exist",
+   "surprise": true,
+   "target": "archive.tar_gz.create_from_manifest::adapter",
    "tick": 1
   },
   {
-   "at": 1793804420.546,
+   "at": 1793808876.66,
+   "first_visit": true,
+   "from_model": false,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": null,
+   "organ": "doubt",
+   "predicts": "HOLDS",
    "seq": 3,
-   "target": "archive_of_plain_repository_files",
+   "target": "archive.tar_gz.create_from_manifest::member_count",
    "tick": 2
   },
   {
-   "at": 1793804420.551,
+   "at": 1793808876.66,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": null,
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "HOLDS",
    "seq": 4,
-   "surprise": null,
-   "target": "archive_of_plain_repository_files",
+   "surprise": true,
+   "target": "archive.tar_gz.create_from_manifest::member_count",
    "tick": 2
   },
   {
-   "at": 1793804425.67,
+   "at": 1793808881.577,
+   "first_visit": true,
+   "from_model": false,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": null,
+   "organ": "doubt",
+   "predicts": "HOLDS",
    "seq": 5,
-   "target": "archive_of_prefixed_paths",
+   "target": "archive.tar_gz.create_from_manifest::members",
    "tick": 3
   },
   {
-   "at": 1793804425.675,
+   "at": 1793808881.577,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": null,
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "HOLDS",
    "seq": 6,
-   "surprise": null,
-   "target": "archive_of_prefixed_paths",
+   "surprise": true,
+   "target": "archive.tar_gz.create_from_manifest::members",
    "tick": 3
   },
   {
-   "at": 1793804430.873,
+   "at": 1793808886.472,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": null,
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 7,
-   "target": "verify_an_archive_that_was_just_created",
+   "target": "archive.tar_gz.create_from_manifest::output_bytes",
    "tick": 4
   },
   {
-   "at": 1793804430.885,
+   "at": 1793808886.473,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": null,
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 8,
-   "surprise": null,
-   "target": "verify_an_archive_that_was_just_created",
+   "surprise": false,
+   "target": "archive.tar_gz.create_from_manifest::output_bytes",
    "tick": 4
   },
   {
-   "at": 1793804435.873,
+   "at": 1793808891.507,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 9,
-   "target": "archive_of_a_path_that_does_not_exist",
+   "target": "archive.tar_gz.create_from_manifest::output_path",
    "tick": 5
   },
   {
-   "at": 1793804435.878,
+   "at": 1793808891.507,
    "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 10,
    "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
+   "target": "archive.tar_gz.create_from_manifest::output_path",
    "tick": 5
   },
   {
-   "at": 1793804441.084,
+   "at": 1793808896.503,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 11,
-   "target": "archive_of_plain_repository_files",
+   "target": "archive.tar_gz.create_from_manifest::output_sha256",
    "tick": 6
   },
   {
-   "at": 1793804441.091,
+   "at": 1793808896.503,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 12,
    "surprise": false,
-   "target": "archive_of_plain_repository_files",
+   "target": "archive.tar_gz.create_from_manifest::output_sha256",
    "tick": 6
   },
   {
-   "at": 1793804446.116,
+   "at": 1793808901.416,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 13,
-   "target": "archive_of_prefixed_paths",
+   "target": "archive.tar_gz.create_from_manifest::output_verified",
    "tick": 7
   },
   {
-   "at": 1793804446.121,
+   "at": 1793808901.416,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 14,
    "surprise": false,
-   "target": "archive_of_prefixed_paths",
+   "target": "archive.tar_gz.create_from_manifest::output_verified",
    "tick": 7
   },
   {
-   "at": 1793804451.167,
+   "at": 1793808906.528,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 15,
-   "target": "verify_an_archive_that_was_just_created",
+   "target": "archive.tar_gz.create_from_manifest::source_sha256",
    "tick": 8
   },
   {
-   "at": 1793804451.177,
+   "at": 1793808906.528,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 16,
    "surprise": false,
-   "target": "verify_an_archive_that_was_just_created",
+   "target": "archive.tar_gz.create_from_manifest::source_sha256",
    "tick": 8
   },
   {
-   "at": 1793804456.068,
+   "at": 1793808911.907,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 17,
-   "target": "archive_of_a_path_that_does_not_exist",
+   "target": "auto.npm.dfinity-cbor::adapter",
    "tick": 9
   },
   {
-   "at": 1793804456.073,
+   "at": 1793808912.045,
    "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 18,
    "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
+   "target": "auto.npm.dfinity-cbor::adapter",
    "tick": 9
   },
   {
-   "at": 1793804461.214,
+   "at": 1793808917.391,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 19,
-   "target": "archive_of_plain_repository_files",
+   "target": "auto.npm.dfinity-cbor::decode_export",
    "tick": 10
   },
   {
-   "at": 1793804461.222,
+   "at": 1793808917.391,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 20,
    "surprise": false,
-   "target": "archive_of_plain_repository_files",
+   "target": "auto.npm.dfinity-cbor::decode_export",
    "tick": 10
   },
   {
-   "at": 1793804466.583,
+   "at": 1793808922.553,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 21,
-   "target": "archive_of_prefixed_paths",
+   "target": "auto.npm.dfinity-cbor::encode_export",
    "tick": 11
   },
   {
-   "at": 1793804466.591,
+   "at": 1793808922.553,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 22,
    "surprise": false,
-   "target": "archive_of_prefixed_paths",
+   "target": "auto.npm.dfinity-cbor::encode_export",
    "tick": 11
   },
   {
-   "at": 1793804471.681,
+   "at": 1793808927.707,
+   "first_visit": true,
+   "from_model": true,
    "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 23,
-   "target": "verify_an_archive_that_was_just_created",
+   "target": "auto.npm.dfinity-cbor::output_bytes",
    "tick": 12
   },
   {
-   "at": 1793804471.693,
+   "at": 1793808927.707,
    "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 24,
    "surprise": false,
-   "target": "verify_an_archive_that_was_just_created",
+   "target": "auto.npm.dfinity-cbor::output_bytes",
    "tick": 12
   },
   {
-   "at": 1793804476.855,
-   "kind": "IDLE",
-   "saw": [],
+   "at": 1793808932.765,
+   "first_visit": true,
+   "from_model": true,
+   "kind": "PREDICTION",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
    "seq": 25,
+   "target": "auto.npm.dfinity-cbor::output_path",
    "tick": 13
   },
   {
-   "at": 1793804482.109,
-   "kind": "IDLE",
-   "saw": [],
+   "at": 1793808932.765,
+   "kind": "OUTCOME",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 26,
+   "surprise": false,
+   "target": "auto.npm.dfinity-cbor::output_path",
+   "tick": 13
+  },
+  {
+   "at": 1793808937.915,
+   "first_visit": true,
+   "from_model": true,
+   "kind": "PREDICTION",
+   "organ": "doubt",
+   "predicts": "UNTESTABLE",
+   "seq": 27,
+   "target": "auto.npm.dfinity-cbor::output_sha256",
    "tick": 14
   },
   {
-   "at": 1793804487.115,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 27,
-   "tick": 15
-  },
-  {
-   "at": 1793804492.118,
-   "kind": "IDLE",
-   "saw": [],
+   "at": 1793808937.915,
+   "kind": "OUTCOME",
+   "observed": "UNTESTABLE",
+   "organ": "doubt",
+   "predicted": "UNTESTABLE",
    "seq": 28,
-   "tick": 16
+   "surprise": false,
+   "target": "auto.npm.dfinity-cbor::output_sha256",
+   "tick": 14
   },
   {
-   "at": 1793804497.165,
-   "kind": "IDLE",
-   "saw": [],
+   "at": 1793808937.916,
+   "identity": "b407e7ca2aad",
+   "kind": "STOP",
+   "reason": "TICK_BUDGET_SPENT",
    "seq": 29,
-   "tick": 17
-  },
-  {
-   "at": 1793804502.257,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 30,
-   "tick": 18
-  },
-  {
-   "at": 1793804507.219,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 31,
-   "tick": 19
-  },
-  {
-   "at": 1793804512.253,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 32,
-   "tick": 20
-  },
-  {
-   "at": 1793804517.406,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 33,
-   "tick": 21
-  },
-  {
-   "at": 1793804522.787,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 34,
-   "tick": 22
-  },
-  {
-   "at": 1793804527.937,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 35,
-   "tick": 23
-  },
-  {
-   "at": 1793804533.091,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 36,
-   "tick": 24
-  },
-  {
-   "at": 1793804538.176,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 37,
-   "tick": 25
-  },
-  {
-   "at": 1793804543.211,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 38,
-   "tick": 26
-  },
-  {
-   "at": 1793804548.308,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 39,
-   "tick": 27
-  },
-  {
-   "at": 1793804553.382,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 40,
-   "tick": 28
-  },
-  {
-   "at": 1793804558.635,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 41,
-   "tick": 29
-  },
-  {
-   "at": 1793804563.791,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 42,
-   "tick": 30
-  },
-  {
-   "at": 1793804568.786,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 43,
-   "tick": 31
-  },
-  {
-   "at": 1793804573.986,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 44,
-   "tick": 32
-  },
-  {
-   "at": 1793804579.271,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 45,
-   "tick": 33
-  },
-  {
-   "at": 1793804584.384,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
-   "seq": 46,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 34
-  },
-  {
-   "at": 1793804584.388,
-   "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
-   "seq": 47,
-   "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 34
-  },
-  {
-   "at": 1793804584.389,
-   "identity": "72af455b6843",
-   "kind": "STOP",
-   "reason": "TICK_BUDGET_SPENT",
-   "seq": 48,
-   "tick": 34
-  },
-  {
-   "at": 1793804584.391,
-   "identity": "72af455b6843",
-   "kind": "RESUME",
-   "restarts": 1,
-   "seq": 49,
-   "tick": 34
-  },
-  {
-   "at": 1793804589.531,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 50,
-   "target": "archive_of_plain_repository_files",
-   "tick": 35
-  },
-  {
-   "at": 1793804589.537,
-   "kind": "OUTCOME",
-   "observed": "INPUTS_IGNORED_SILENTLY",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 51,
-   "surprise": true,
-   "target": "archive_of_plain_repository_files",
-   "tick": 35
-  },
-  {
-   "at": 1793804594.49,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 52,
-   "target": "archive_of_prefixed_paths",
-   "tick": 36
-  },
-  {
-   "at": 1793804594.495,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 53,
-   "surprise": false,
-   "target": "archive_of_prefixed_paths",
-   "tick": 36
-  },
-  {
-   "at": 1793804599.423,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 54,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 37
-  },
-  {
-   "at": 1793804599.433,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 55,
-   "surprise": false,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 37
-  },
-  {
-   "at": 1793804604.815,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "INPUTS_IGNORED_SILENTLY",
-   "seq": 56,
-   "target": "archive_of_plain_repository_files",
-   "tick": 38
-  },
-  {
-   "at": 1793804604.82,
-   "kind": "OUTCOME",
-   "observed": "INPUTS_IGNORED_SILENTLY",
-   "organ": "effect",
-   "predicted": "INPUTS_IGNORED_SILENTLY",
-   "seq": 57,
-   "surprise": false,
-   "target": "archive_of_plain_repository_files",
-   "tick": 38
-  },
-  {
-   "at": 1793804610.188,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 58,
-   "tick": 39
-  },
-  {
-   "at": 1793804615.343,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 59,
-   "tick": 40
-  },
-  {
-   "at": 1793804620.501,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 60,
-   "tick": 41
-  },
-  {
-   "at": 1793804625.538,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 61,
-   "tick": 42
-  },
-  {
-   "at": 1793804630.589,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 62,
-   "tick": 43
-  },
-  {
-   "at": 1793804635.556,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 63,
-   "tick": 44
-  },
-  {
-   "at": 1793804640.642,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 64,
-   "tick": 45
-  },
-  {
-   "at": 1793804645.715,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 65,
-   "tick": 46
-  },
-  {
-   "at": 1793804650.703,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 66,
-   "tick": 47
-  },
-  {
-   "at": 1793804655.889,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 67,
-   "tick": 48
-  },
-  {
-   "at": 1793804661.437,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 68,
-   "tick": 49
-  },
-  {
-   "at": 1793804666.752,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 69,
-   "tick": 50
-  },
-  {
-   "at": 1793804671.862,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 70,
-   "tick": 51
-  },
-  {
-   "at": 1793804676.852,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 71,
-   "tick": 52
-  },
-  {
-   "at": 1793804682.009,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 72,
-   "tick": 53
-  },
-  {
-   "at": 1793804687.098,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 73,
-   "tick": 54
-  },
-  {
-   "at": 1793804692.427,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 74,
-   "tick": 55
-  },
-  {
-   "at": 1793804697.711,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 75,
-   "tick": 56
-  },
-  {
-   "at": 1793804702.885,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 76,
-   "tick": 57
-  },
-  {
-   "at": 1793804708.007,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 77,
-   "tick": 58
-  },
-  {
-   "at": 1793804713.062,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
-   "seq": 78,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 59
-  },
-  {
-   "at": 1793804713.065,
-   "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
-   "seq": 79,
-   "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 59
-  },
-  {
-   "at": 1793804718.357,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 80,
-   "tick": 60
-  },
-  {
-   "at": 1793804723.36,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 81,
-   "target": "archive_of_prefixed_paths",
-   "tick": 61
-  },
-  {
-   "at": 1793804723.366,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 82,
-   "surprise": false,
-   "target": "archive_of_prefixed_paths",
-   "tick": 61
-  },
-  {
-   "at": 1793804728.47,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 83,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 62
-  },
-  {
-   "at": 1793804728.48,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 84,
-   "surprise": false,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 62
-  },
-  {
-   "at": 1793804733.581,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "INPUTS_IGNORED_SILENTLY",
-   "seq": 85,
-   "target": "archive_of_plain_repository_files",
-   "tick": 63
-  },
-  {
-   "at": 1793804733.586,
-   "kind": "OUTCOME",
-   "observed": "INPUTS_IGNORED_SILENTLY",
-   "organ": "effect",
-   "predicted": "INPUTS_IGNORED_SILENTLY",
-   "seq": 86,
-   "surprise": false,
-   "target": "archive_of_plain_repository_files",
-   "tick": 63
-  },
-  {
-   "at": 1793804738.73,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 87,
-   "tick": 64
-  },
-  {
-   "at": 1793804743.881,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 88,
-   "tick": 65
-  },
-  {
-   "at": 1793804749.502,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 89,
-   "tick": 66
-  },
-  {
-   "at": 1793804754.695,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 90,
-   "tick": 67
-  },
-  {
-   "at": 1793804759.862,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 91,
-   "tick": 68
-  },
-  {
-   "at": 1793804759.864,
-   "identity": "72af455b6843",
-   "kind": "STOP",
-   "reason": "TICK_BUDGET_SPENT",
-   "seq": 92,
-   "tick": 68
-  },
-  {
-   "at": 1793804759.865,
-   "identity": "72af455b6843",
-   "kind": "RESUME",
-   "restarts": 2,
-   "seq": 93,
-   "tick": 68
-  },
-  {
-   "at": 1793804765.093,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 94,
-   "tick": 69
-  },
-  {
-   "at": 1793804770.423,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 95,
-   "tick": 70
-  },
-  {
-   "at": 1793804775.537,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 96,
-   "tick": 71
-  },
-  {
-   "at": 1793804780.733,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 97,
-   "tick": 72
-  },
-  {
-   "at": 1793804785.828,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 98,
-   "tick": 73
-  },
-  {
-   "at": 1793804791.012,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 99,
-   "tick": 74
-  },
-  {
-   "at": 1793804796.239,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 100,
-   "tick": 75
-  },
-  {
-   "at": 1793804801.382,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 101,
-   "tick": 76
-  },
-  {
-   "at": 1793804806.561,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 102,
-   "tick": 77
-  },
-  {
-   "at": 1793804811.813,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 103,
-   "tick": 78
-  },
-  {
-   "at": 1793804816.727,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 104,
-   "tick": 79
-  },
-  {
-   "at": 1793804821.861,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 105,
-   "tick": 80
-  },
-  {
-   "at": 1793804827.149,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 106,
-   "tick": 81
-  },
-  {
-   "at": 1793804832.206,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 107,
-   "tick": 82
-  },
-  {
-   "at": 1793804837.385,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 108,
-   "tick": 83
-  },
-  {
-   "at": 1793804842.571,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
-   "seq": 109,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 84
-  },
-  {
-   "at": 1793804842.575,
-   "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
-   "seq": 110,
-   "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 84
-  },
-  {
-   "at": 1793804847.518,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 111,
-   "tick": 85
-  },
-  {
-   "at": 1793804852.528,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 112,
-   "target": "archive_of_prefixed_paths",
-   "tick": 86
-  },
-  {
-   "at": 1793804852.533,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 113,
-   "surprise": false,
-   "target": "archive_of_prefixed_paths",
-   "tick": 86
-  },
-  {
-   "at": 1793804857.468,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 114,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 87
-  },
-  {
-   "at": 1793804857.479,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 115,
-   "surprise": false,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 87
-  },
-  {
-   "at": 1793804862.555,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "INPUTS_IGNORED_SILENTLY",
-   "seq": 116,
-   "target": "archive_of_plain_repository_files",
-   "tick": 88
-  },
-  {
-   "at": 1793804862.559,
-   "kind": "OUTCOME",
-   "observed": "INPUTS_IGNORED_SILENTLY",
-   "organ": "effect",
-   "predicted": "INPUTS_IGNORED_SILENTLY",
-   "seq": 117,
-   "surprise": false,
-   "target": "archive_of_plain_repository_files",
-   "tick": 88
-  },
-  {
-   "at": 1793804867.565,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 118,
-   "tick": 89
-  },
-  {
-   "at": 1793804872.85,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 119,
-   "tick": 90
-  },
-  {
-   "at": 1793804877.808,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 120,
-   "tick": 91
-  },
-  {
-   "at": 1793804883.037,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 121,
-   "tick": 92
-  },
-  {
-   "at": 1793804888.314,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 122,
-   "tick": 93
-  },
-  {
-   "at": 1793804893.381,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 123,
-   "tick": 94
-  },
-  {
-   "at": 1793804898.458,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 124,
-   "tick": 95
-  },
-  {
-   "at": 1793804903.54,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 125,
-   "tick": 96
-  },
-  {
-   "at": 1793804908.587,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 126,
-   "tick": 97
-  },
-  {
-   "at": 1793804913.586,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 127,
-   "tick": 98
-  },
-  {
-   "at": 1793804918.823,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 128,
-   "tick": 99
-  },
-  {
-   "at": 1793804924.078,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 129,
-   "tick": 100
-  },
-  {
-   "at": 1793804929.135,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 130,
-   "tick": 101
-  },
-  {
-   "at": 1793804934.278,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 131,
-   "tick": 102
-  },
-  {
-   "at": 1793804934.279,
-   "identity": "72af455b6843",
-   "kind": "STOP",
-   "reason": "TICK_BUDGET_SPENT",
-   "seq": 132,
-   "tick": 102
-  },
-  {
-   "at": 1793804934.281,
-   "identity": "72af455b6843",
-   "kind": "RESUME",
-   "restarts": 3,
-   "seq": 133,
-   "tick": 102
-  },
-  {
-   "at": 1793804939.266,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 134,
-   "tick": 103
-  },
-  {
-   "at": 1793804944.274,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 135,
-   "tick": 104
-  },
-  {
-   "at": 1793804949.331,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 136,
-   "tick": 105
-  },
-  {
-   "at": 1793804954.476,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 137,
-   "tick": 106
-  },
-  {
-   "at": 1793804959.433,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 138,
-   "tick": 107
-  },
-  {
-   "at": 1793804964.654,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 139,
-   "tick": 108
-  },
-  {
-   "at": 1793804969.717,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
-   "seq": 140,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 109
-  },
-  {
-   "at": 1793804969.722,
-   "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
-   "seq": 141,
-   "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 109
-  },
-  {
-   "at": 1793804974.757,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 142,
-   "tick": 110
-  },
-  {
-   "at": 1793804979.749,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 143,
-   "target": "archive_of_prefixed_paths",
-   "tick": 111
-  },
-  {
-   "at": 1793804979.754,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 144,
-   "surprise": false,
-   "target": "archive_of_prefixed_paths",
-   "tick": 111
-  },
-  {
-   "at": 1793804985.062,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 145,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 112
-  },
-  {
-   "at": 1793804985.072,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 146,
-   "surprise": false,
-   "target": "verify_an_archive_that_was_just_created",
-   "tick": 112
-  },
-  {
-   "at": 1793804990.059,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "INPUTS_IGNORED_SILENTLY",
-   "seq": 147,
-   "target": "archive_of_plain_repository_files",
-   "tick": 113
-  },
-  {
-   "at": 1793804990.064,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "INPUTS_IGNORED_SILENTLY",
-   "seq": 148,
-   "surprise": true,
-   "target": "archive_of_plain_repository_files",
-   "tick": 113
-  },
-  {
-   "at": 1793804995.118,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 149,
-   "target": "archive_of_plain_repository_files",
-   "tick": 114
-  },
-  {
-   "at": 1793804995.124,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 150,
-   "surprise": false,
-   "target": "archive_of_plain_repository_files",
-   "tick": 114
-  },
-  {
-   "at": 1793805000.16,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 151,
-   "tick": 115
-  },
-  {
-   "at": 1793805005.25,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 152,
-   "tick": 116
-  },
-  {
-   "at": 1793805010.373,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 153,
-   "tick": 117
-  },
-  {
-   "at": 1793805015.424,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 154,
-   "tick": 118
-  },
-  {
-   "at": 1793805020.456,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 155,
-   "tick": 119
-  },
-  {
-   "at": 1793805025.321,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 156,
-   "tick": 120
-  },
-  {
-   "at": 1793805030.357,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 157,
-   "tick": 121
-  },
-  {
-   "at": 1793805035.418,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 158,
-   "tick": 122
-  },
-  {
-   "at": 1793805040.769,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 159,
-   "tick": 123
-  },
-  {
-   "at": 1793805045.9,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 160,
-   "tick": 124
-  },
-  {
-   "at": 1793805050.984,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 161,
-   "tick": 125
-  },
-  {
-   "at": 1793805056.216,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 162,
-   "tick": 126
-  },
-  {
-   "at": 1793805061.71,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 163,
-   "tick": 127
-  },
-  {
-   "at": 1793805067.169,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 164,
-   "tick": 128
-  },
-  {
-   "at": 1793805072.409,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 165,
-   "tick": 129
-  },
-  {
-   "at": 1793805078.395,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 166,
-   "tick": 130
-  },
-  {
-   "at": 1793805083.481,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 167,
-   "tick": 131
-  },
-  {
-   "at": 1793805088.65,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 168,
-   "tick": 132
-  },
-  {
-   "at": 1793805093.757,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 169,
-   "tick": 133
-  },
-  {
-   "at": 1793805098.987,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "REFUSED_AS_DECLARED",
-   "seq": 170,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 134
-  },
-  {
-   "at": 1793805098.99,
-   "kind": "OUTCOME",
-   "observed": "REFUSED_AS_DECLARED",
-   "organ": "effect",
-   "predicted": "REFUSED_AS_DECLARED",
-   "seq": 171,
-   "surprise": false,
-   "target": "archive_of_a_path_that_does_not_exist",
-   "tick": 134
-  },
-  {
-   "at": 1793805104.062,
-   "kind": "IDLE",
-   "saw": [],
-   "seq": 172,
-   "tick": 135
-  },
-  {
-   "at": 1793805109.38,
-   "kind": "PREDICTION",
-   "organ": "effect",
-   "predicts": "EFFECT_HELD",
-   "seq": 173,
-   "target": "archive_of_prefixed_paths",
-   "tick": 136
-  },
-  {
-   "at": 1793805109.386,
-   "kind": "OUTCOME",
-   "observed": "EFFECT_HELD",
-   "organ": "effect",
-   "predicted": "EFFECT_HELD",
-   "seq": 174,
-   "surprise": false,
-   "target": "archive_of_prefixed_paths",
-   "tick": 136
-  },
-  {
-   "at": 1793805109.387,
-   "identity": "72af455b6843",
-   "kind": "STOP",
-   "reason": "TICK_BUDGET_SPENT",
-   "seq": 175,
-   "tick": 136
+   "tick": 14
   }
  ],
  "organs": {
-  "effect": {
-   "attempts": 32,
-   "confirmations": 26,
-   "surprises": 2
+  "doubt": {
+   "attempts": 14,
+   "confirmations": 11,
+   "surprises": 3
   }
  },
- "restarts": 3,
+ "restarts": 0,
  "schema": "PROJECT_BRAIN_ORGANISM_V1",
- "seq": 175,
+ "seq": 29,
  "stop_reason": "TICK_BUDGET_SPENT",
  "targets": {
-  "effect::archive_of_a_path_that_does_not_exist": {
-   "attempts": 8,
-   "confirmations": 7,
+  "doubt::archive.tar_gz.create_from_manifest::adapter": {
+   "attempts": 1,
    "recent": [
-    "REFUSED_AS_DECLARED",
-    "REFUSED_AS_DECLARED",
-    "REFUSED_AS_DECLARED"
+    "UNTESTABLE"
    ],
-   "retired_at": 134,
+   "surprises": 1,
    "verdicts": {
-    "REFUSED_AS_DECLARED": 8
+    "UNTESTABLE": 1
    }
   },
-  "effect::archive_of_plain_repository_files": {
-   "attempts": 9,
-   "confirmations": 6,
+  "doubt::archive.tar_gz.create_from_manifest::member_count": {
+   "attempts": 1,
    "recent": [
-    "INPUTS_IGNORED_SILENTLY",
-    "EFFECT_HELD",
-    "EFFECT_HELD"
+    "UNTESTABLE"
    ],
-   "retired_at": 114,
-   "surprises": 2,
+   "surprises": 1,
    "verdicts": {
-    "EFFECT_HELD": 5,
-    "INPUTS_IGNORED_SILENTLY": 4
+    "UNTESTABLE": 1
    }
   },
-  "effect::archive_of_prefixed_paths": {
-   "attempts": 8,
-   "confirmations": 7,
+  "doubt::archive.tar_gz.create_from_manifest::members": {
+   "attempts": 1,
    "recent": [
-    "EFFECT_HELD",
-    "EFFECT_HELD",
-    "EFFECT_HELD"
+    "UNTESTABLE"
    ],
-   "retired_at": 136,
+   "surprises": 1,
    "verdicts": {
-    "EFFECT_HELD": 8
+    "UNTESTABLE": 1
    }
   },
-  "effect::verify_an_archive_that_was_just_created": {
-   "attempts": 7,
-   "confirmations": 6,
+  "doubt::archive.tar_gz.create_from_manifest::output_bytes": {
+   "attempts": 1,
+   "confirmations": 1,
    "recent": [
-    "EFFECT_HELD",
-    "EFFECT_HELD",
-    "EFFECT_HELD"
+    "UNTESTABLE"
    ],
-   "retired_at": 112,
    "verdicts": {
-    "EFFECT_HELD": 7
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::archive.tar_gz.create_from_manifest::output_path": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::archive.tar_gz.create_from_manifest::output_sha256": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::archive.tar_gz.create_from_manifest::output_verified": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::archive.tar_gz.create_from_manifest::source_sha256": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::auto.npm.dfinity-cbor::adapter": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::auto.npm.dfinity-cbor::decode_export": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::auto.npm.dfinity-cbor::encode_export": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::auto.npm.dfinity-cbor::output_bytes": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::auto.npm.dfinity-cbor::output_path": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
+   }
+  },
+  "doubt::auto.npm.dfinity-cbor::output_sha256": {
+   "attempts": 1,
+   "confirmations": 1,
+   "recent": [
+    "UNTESTABLE"
+   ],
+   "verdicts": {
+    "UNTESTABLE": 1
    }
   }
  },
- "tick": 136
+ "tick": 14
 }

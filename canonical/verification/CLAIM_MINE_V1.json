@@ -1,0 +1,94 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_HYPOTHESIS_GENERATION_ONLY",
+ "by_kind": {
+  "COUNT": {
+   "HISTORICAL": 11058
+  },
+  "FILE_EXISTS": {
+   "HOLDS": 5331,
+   "UNPAIRED": 149
+  },
+  "FILE_HASH": {
+   "CONTRADICTED": 5,
+   "HOLDS": 32,
+   "UNPAIRED": 1705
+  },
+  "FILE_SIZE": {
+   "UNPAIRED": 1027
+  },
+  "LIMITATION": {
+   "UNTESTABLE": 352
+  },
+  "REQUIRES": {
+   "UNTESTABLE": 181
+  },
+  "RESULT_FIELD": {
+   "CONTRADICTED": 1,
+   "HOLDS": 245,
+   "UNTESTABLE": 860
+  }
+ },
+ "by_verdict": {
+  "CONTRADICTED": 6,
+  "HISTORICAL": 11058,
+  "HOLDS": 5608,
+  "UNPAIRED": 2881,
+  "UNTESTABLE": 1393
+ },
+ "claims_enumerated_by_a_person": 0,
+ "claims_mined": 20946,
+ "contradicted": [
+  {
+   "asserts": "runtime_sha256 = cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
+   "detail": "claims cfa9b3f5446a5c88..., file is 89ac7f978488624c...",
+   "kind": "FILE_HASH",
+   "source": "canonical/verification/PYTHON_INTERPROCEDURAL_VALUE_PROVENANCE_V1_VERIFY_20261011_V1.json",
+   "where": "/runtime_sha256"
+  },
+  {
+   "asserts": "runtime_sha256 = 111e1a5c30a529a0e0ab2b727c74313b9b2b1875348cc11fae12690f91b15324",
+   "detail": "claims 111e1a5c30a529a0..., file is d837e6b0a01510a1...",
+   "kind": "FILE_HASH",
+   "source": "canonical/verification/PYTHON_PROVENANCE_GUIDED_COUPLED_REPAIR_V1_VERIFY_20261011_V1.json",
+   "where": "/runtime_sha256"
+  },
+  {
+   "asserts": "test_sha256 = f4f133f246f1e6adf37225b0f5acad1bf3fc375b8dc0a74ebbed37b2f9df8149",
+   "detail": "claims f4f133f246f1e6ad..., file is 9d77722d1b23212f...",
+   "kind": "FILE_HASH",
+   "source": "canonical/verification/PYTHON_PROVENANCE_GUIDED_COUPLED_REPAIR_V1_VERIFY_20261011_V1.json",
+   "where": "/test_sha256"
+  },
+  {
+   "asserts": "runtime_sha256 = 76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b",
+   "detail": "claims 76ba334b9539def5..., file is 9e5c69564e1f52a6...",
+   "kind": "FILE_HASH",
+   "source": "canonical/verification/PYTHON_TEST_GUIDED_PATCH_SEARCH_MAIN_REPLAY_VERIFY_20261011_V1.json",
+   "where": "/subject/runtime_sha256"
+  },
+  {
+   "asserts": "source_full_result_sha256 = f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+   "detail": "claims f4bec690aa0580cb..., file is 93ed2da62f59b0f3...",
+   "kind": "FILE_HASH",
+   "source": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+   "where": "/source_full_result_sha256"
+  },
+  {
+   "asserts": "python.software.request.semantic_behavior.compile.v1 returns acceptance_program_sha256",
+   "detail": "the run REPORTED SUCCESS and declares 'acceptance_program_sha256', but returned 20 keys without it",
+   "kind": "RESULT_FIELD",
+   "source": "registry",
+   "where": "python.software.request.semantic_behavior.compile.v1"
+  }
+ ],
+ "contradicted_total": 6,
+ "non_claims": [
+  "A_CONTRADICTION_IS_A_LEAD_NOT_A_PROVEN_DEFECT",
+  "THE_MINER_READS_STRUCTURE_NOT_MEANING",
+  "UNTESTABLE_IS_THE_MAJORITY_AND_IS_REPORTED_AS_SUCH"
+ ],
+ "question": "Can the system generate things to be wrong about from the claims already written down, instead of from a list a person typed?",
+ "schema": "PROJECT_BRAIN_CLAIM_MINER_V1",
+ "why_counts_are_not_defects": "A recorded count describes a moment. Comparing it to now reports history as a fault.",
+ "why_unpaired_is_not_false": "A hash with no path beside it cannot be tested. Calling it false would manufacture a finding from an absence."
+}

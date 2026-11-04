@@ -126,8 +126,10 @@ def _worker(capability_id: str, module: str, out_dir: str, recipe_json: str) -> 
         spec.loader.exec_module(loaded)
         returned = loaded.run(args, root)
         if not isinstance(returned, dict):
-            result.update(verdict="NON_DICT", detail=type(returned).__name__)
+            result.update(verdict="NON_DICT", detail=type(returned).__name__,
+                          returned_keys=[])
         else:
+            result["returned_keys"] = sorted(str(k) for k in returned)
             expect = (entry.get("action_template") or {}).get("expect") or {}
             field, want = expect.get("field"), expect.get("value")
             if field and field in returned:
@@ -318,7 +320,8 @@ def forge(capability_id: str, module: str) -> dict:
                       "detail": (outcome.get("detail") or "")[:160]})
         if outcome["verdict"] in DECLARED:
             return {"capability": capability_id, "reached": True, "verdict": outcome["verdict"],
-                    "rounds": round_no, "trail": trail}
+                    "rounds": round_no, "trail": trail,
+                    "returned_keys": outcome.get("returned_keys") or []}
         recipe, op = operators(capability_id, module, recipe, outcome, outcome.get("root"))
         trail[-1]["operator"] = op
         if op.startswith("UNREPAIRABLE"):

@@ -381,7 +381,63 @@ class ForgeOrgan(Organ):
 # depend on a file that happens to exist: measured 2026-11-04, adding an organ conditionally on an
 # artifact on disk broke the safety test, and the test was right. Targets may depend on the world;
 # organs may not.
-ORGAN_NAMES = ("effect", "receipt", "lease", "measurement", "derived", "forge")
+ORGAN_NAMES = ("effect", "receipt", "lease", "measurement", "derived", "forge", "doubt")
+
+class DoubtOrgan(Organ):
+    """Curiosity, mechanically: the targets are claims somebody else already wrote down.
+
+    Every other organ attends to a list. `effect` has four situations I wrote; `receipt`, `lease`,
+    `measurement` and `derived` are defect classes somebody wrote; `forge` reads an artifact that
+    a previous run of the organism produced. Measured 2026-11-04: that is fourteen targets, all of
+    them enumerated by a person, in a repository holding roughly twenty thousand checkable claims.
+
+    This organ mines the corpus. It does not know what a capability is for and it never names one:
+    a claim is tested because it was asserted, and the hypothesis space grows whenever anybody
+    writes a claim -- registry fields, artifacts, docstrings. That is the difference between a
+    list of things to check and a way of generating things to check.
+    """
+
+    name = "doubt"
+
+    def __init__(self) -> None:
+        self._claims = None
+
+    def _mine(self):
+        if self._claims is None:
+            try:
+                from canonical.tools import claim_miner_v1 as miner
+                mined = miner.mine_registry_claims()
+                pending = [c for c in mined if c["kind"] == "RESULT_FIELD"]
+                self._claims = pending
+            except Exception:                                        # noqa: BLE001
+                self._claims = []
+        return self._claims
+
+    def targets(self):
+        return [{"id": f"{c['capability']}::{c['subject']}", "claim": c} for c in self._mine()]
+
+    def predict(self, target, record):
+        return _expected(record, default="HOLDS")
+
+    def senses(self, target):
+        claim = target["claim"]
+        return {"is_doubt": 1.0, "is_forge": 0.0, "is_effect": 0.0, "is_loop_defect": 0.0,
+                "path_is_json": 0.0, "path_is_canonical": 0.0, "path_depth": 0.0,
+                "defect_has_path": 0.0, "expects_effect": 0.0, "n_supplied": 0.0,
+                "supplied_all_prefixed": 0.0, "capability_is_archive": 0.0}
+
+    def act(self, target):
+        from canonical.tools import claim_miner_v1 as miner
+        try:
+            return {"applied": True, "result": miner.test_claim(target["claim"])}
+        except Exception as exc:                                     # noqa: BLE001
+            return {"applied": False, "reason": str(exc)[:80]}
+
+    def observe(self, target, acted):
+        if not acted.get("applied"):
+            return "REFUSED:" + str(acted.get("reason") or "UNKNOWN")
+        return str((acted.get("result") or {}).get("verdict") or "UNKNOWN")
+
 
 ORGANS: dict[str, Organ] = {}
 
@@ -398,6 +454,7 @@ def build_organs() -> dict[str, Organ]:
         _LoopOrgan("measurement", lambda: loop.make_stale_measurement_class()),
     ]
     organs.append(ForgeOrgan())
+    organs.append(DoubtOrgan())
     try:
         from canonical.tools import derivation_inference_v1 as infer
         if infer.load_model(recompute_if_missing=False) is not None:

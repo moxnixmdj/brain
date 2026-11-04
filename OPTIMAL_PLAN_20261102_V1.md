@@ -1242,3 +1242,127 @@ existence depends on a file on disk is a faculty that grants itself faculties th
 writes that file. The set is now a closed literal, `ORGAN_NAMES`, used by both the module and the
 test, and membership is asserted identical across two builds. **Targets may depend on the world;
 organs may not.** 35 tests pass with the correction in place.
+
+## Execution log 14 — curiosity, and the 962 findings that were all mine (2026-11-04)
+
+The question asked again was the right one. So I measured the thing I had never measured:
+
+```
+every target the organism can ever attend to   14
+of those, typed by a person                    14
+```
+
+Thirteen logs produced initiative, surprise, persistence, a generalising model and a world-forge.
+**It had an agenda and no curiosity.** Its entire universe was the list I wrote, in a repository
+holding roughly twenty thousand checkable claims. That is what "static code" means, and no amount
+of machinery around a fourteen-item list changes it.
+
+### The first principle
+
+**Every check is a test of a claim.** A detector has to be enumerated by somebody. A claim is
+already written down. Counted here on 2026-11-04:
+
+| source | checkable claims |
+|---|---|
+| registry (`result_fields`, `requires`, `limitations`, `provides`) | 1,916 |
+| verification artifacts (hash, size, path, count fields) | 17,121 |
+| behaviour-asserting docstring sentences | 340 |
+| assert statements | 14,662 |
+
+`canonical/tools/claim_miner_v1.py` mines them and tests them. **20,946 hypotheses, 0 enumerated by
+a person.** The hypothesis space grows whenever anybody writes anything.
+
+### The part that matters more than the mining
+
+The first run reported **962 contradictions**. Almost none were real: prose sentences matched as
+paths, the fraction `9/10` matched as a path, a capability id matched as a file, `payload_sha256`
+compared against an unrelated file in the same row, and a recorded count compared against the
+present. **A miner that reports everything is indistinguishable from a working one until somebody
+checks**, which is exactly the trap this repository exists to avoid.
+
+Six rules now stand between the corpus and a finding, each one written because it was violated:
+
+| rule | what it stopped |
+|---|---|
+| a value is a path only if it is *shaped* like one | prose, `9/10`, capability ids |
+| a hash pairs only with a **same-stem** path in the same row | `payload_sha256` vs another file |
+| two quantities sharing one stem are **unpaired** | one file, two subjects, two false findings |
+| a recorded **count** describes a moment | history reported as a fault |
+| the named thing must have **ever existed here** (git decides) | claims about *other* repositories |
+| the subject must not have **changed since** the document (git decides) | stale-by-design hashes; all 5 survivors were this |
+| a field missing on a **degraded** path is not a false claim | 10 of 11 behavioural contradictions |
+
+Result:
+
+| verdict | count |
+|---|---|
+| HOLDS | **5,608** |
+| HISTORICAL (true when written) | 11,058 |
+| UNPAIRED (cannot be tested) | 2,881 |
+| UNTESTABLE | 1,393 |
+| **CONTRADICTED** | **6** |
+
+Verified by hand: five of the six are still my mispairings. **One is real.**
+
+### The one real finding
+
+`python.software.request.semantic_behavior.compile.v1` declares 20 `result_fields`, including
+`acceptance_program_sha256`. Its adapter:
+
+```python
+result = compile_request(task_text)
+if result.get("coverage_complete") is True:
+    program = render_test(result)
+    result = {**result, "acceptance_program_sha256": _sha(program.encode("utf-8"))}
+...
+    return {**result, ..., "output_verified": True}
+```
+
+When coverage is incomplete the hash is never computed — and the capability **still returns
+`output_verified: True`**. A declared output absent from a run that reports success. Same shape as
+log 10's finding, in a capability I had never looked at, found by testing a claim nobody asked me
+to test.
+
+It is a lead, not a proven defect: whether that path *should* be verified is a judgement. It is
+recorded as such.
+
+### The structural change
+
+`DoubtOrgan` is inside the organism. Its targets are claims, mined at runtime. The creature's
+universe went from **14 targets I typed to 1,130 it found**: 1,106 behavioural claims plus the
+forge's 10 plus the 14 that were already there. Live, 14 ticks: all on doubt targets, 14 predicted,
+**11 predictions came from its own model**, 3 surprises.
+
+And there is an honest problem in that run: 860 of the 1,106 behavioural claims are UNTESTABLE
+because the forge cannot yet drive their capabilities. The creature now mostly doubts things it
+cannot settle. Widening the world is what makes curiosity pay — the two systems are one system.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| The system generates hypotheses without a person listing them | **TRUE** | 20,946 mined, 0 enumerated; a test fails if that number is ever above zero |
+| Its target set now grows with the corpus | **TRUE** | 14 → 1,130; targets are mined, organs are still closed |
+| It found a real defect nobody pointed at | **TRUE, N=1** | declared field absent on a success path, code cited |
+| Precision is good enough to trust the volume | **PARTLY** | 962 → 6, and 5 of those 6 are still mine |
+| Most claims can be settled | **FALSE** | 5,608 hold, but 2,881 unpaired and 1,393 untestable |
+| Unaided closure rate for classes that matter | **STILL 0** | one lead is not a fixed and proven defect |
+
+### What the deepest layer says
+
+The thing that was static was never the loop, the model or the agenda. It was **where the
+questions come from**. A creature that is handed its doubts is a maintenance daemon no matter how
+good its clock is. A creature that reads what the world says about itself and asks whether it is
+true has a universe the size of everything written down.
+
+The next widening is not more claims and not more organs. It is making the 860 unsettleable claims
+settleable — because a doubt you can never resolve is not curiosity, it is noise with a schedule.
+
+No capability credit. Drift guard unchanged.
+
+### Same-commit note on the closed set
+
+Adding `doubt` moved the organ-set pin, deliberately and in this commit, with the test updated
+beside it. The property being protected is not "the set never changes" — it is "the set never
+changes *at runtime*, because of something on disk". A closed set with an explicit, reviewed edit
+is the mechanism working; a set that grows because a file appeared is the bug.
