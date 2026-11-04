@@ -234,7 +234,8 @@ def contradictions() -> list[dict]:
             verdict = _D.check_parts_against_whole(
                 vec_entry.get("node"), vec, sc_entry.get("node"), sc[0],
                 kind=sc_entry.get("aggregate"),
-                whole_restricts=sc_entry.get("restricts_rows"))
+                whole_restricts=sc_entry.get("restricts_rows"),
+                parts_kind=vec_entry.get("aggregate"))
             if verdict["verdict"] == "disagrees":
                 found.append({"kind": "PARTS_NOT_WHOLE",
                               "question_a": vec_entry["question"],
