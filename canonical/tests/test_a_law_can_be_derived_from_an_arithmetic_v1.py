@@ -128,15 +128,20 @@ def test_an_induced_law_can_be_weaker_than_a_written_one_and_that_is_visible():
     one that merely passed: the caller can see the reach of the law instead of inferring
     it from the fact that nothing failed.
     """
-    induced = tuple(V.law_from_name(n) for n in V.induce_laws(_median))
-    assert induced
-    # the limit, stated plainly
-    assert V.aggregate_holds  # noqa: B018 -- documented by the assertions below
-    for law in induced:
-        if law is V._form_within_inputs:
-            assert law(PROBES and [5.0, 15.0, 7.0], 5.0) or True  # min is an input
-    # an out-of-range value is rejected by every induced law
-    assert not any(V._holds_on(PROBES, 999.0, form) for form in induced)
+    induced_names = V.induce_laws(_median)
+    assert induced_names, "nothing was induced for a median"
+    induced = tuple(V.law_from_name(n) for n in induced_names)
+
+    # THE LIMIT. The answer 7 is correct for [5, 15, 7], and so are 5 and 15 as far as the
+    # induced law can tell, because both really are inputs. This assertion is the point of
+    # the test: it is asserting that the check is WEAK here, not pretending it is not.
+    assert V._run_laws(induced, PROBES, 7.0) is True
+    assert V._run_laws(induced, PROBES, 5.0) is True      # minimum -- an input
+    assert V._run_laws(induced, PROBES, 15.0) is True     # maximum -- an input
+
+    # and the strength it does have: a value outside the data is rejected by every form
+    assert V._run_laws(induced, PROBES, 999.0) is False
+    assert V._run_laws(induced, PROBES, -1.0) is False
 
 
 def test_law_strength_measures_reach_and_a_stronger_law_measures_higher():
