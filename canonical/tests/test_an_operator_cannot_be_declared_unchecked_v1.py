@@ -72,10 +72,15 @@ def test_an_aggregate_without_a_law_is_refused():
     one through, the vocabulary would grow faster than the ability to check it, and every
     later answer built on it would be unfalsifiable by construction.
     """
+    # AN OMITTED LAW IS NO LONGER A REFUSAL -- it is a request to INDUCE one. So the
+    # declaration that must be refused is the one where induction can find nothing: an
+    # arithmetic that does not depend on its data. `lambda v: 999.0` gives the same answer
+    # for every input, so no statement about a single input can tell it apart from a
+    # correct one, and it is refused with nothing registered.
     before = V.aggregate_names()
     with pytest.raises(ValueError) as err:
-        V.declare_aggregate("median", {"median"}, _median, ())
-    assert "law" in str(err.value)
+        V.declare_aggregate("median", {"median"}, lambda values, *_: 999.0)
+    assert "law" in str(err.value).lower()
     assert "median" not in V._AGG_WORDS
     assert V.aggregate_names() == before
 

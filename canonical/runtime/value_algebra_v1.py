@@ -370,6 +370,169 @@ def _law_is_falsifiable(kind: str, fn, laws) -> str | None:
     return None
 
 
+# ---------------------------------------------------------------------------
+# DERIVING a law instead of writing one.
+#
+# The laws above were all written by hand: I decided a sum is bounded by n*min and
+# n*max, that a mean stays inside its inputs, that a count equals its row count. That
+# makes the vocabulary static in the way that matters -- the system can declare a new
+# operator, but only a human can say what would make it wrong.
+#
+# So the laws are stated as FORMS that take the arithmetic and the data, not as
+# sentences about a particular operator. Nothing here mentions sum, mean or count. The
+# forms are candidates; which ones are true of a given arithmetic is MEASURED by running
+# that arithmetic, and the strongest surviving form is the one admitted. A form that the
+# arithmetic violates anywhere is discarded, which is also how the hand-written
+# "non_negative" law for sum was found to be false.
+#
+# This is the difference between a checkable declaration and a declaration that merely
+# contains a check: the check is a claim about the arithmetic, and the arithmetic decides
+# whether the claim survives.
+# ---------------------------------------------------------------------------
+
+
+def _form_within_inputs(values, result):
+    return min(values) - 1e-9 <= result <= max(values) + 1e-9
+
+
+def _form_bounded_by_extremes(values, result):
+    # A RESULT CANNOT EXCEED THE TOTAL MAGNITUDE OF ITS INPUTS.
+    #
+    # This was n*min <= result <= n*max, which is a false claim about differences and
+    # ranges: max-min of [-3, -1, -7] is 6, but n*max is -3, so a correct answer was
+    # reported as violating its own law. Caught by running the form against an arithmetic
+    # rather than by reasoning about the form -- which is the point of measuring laws
+    # instead of asserting them. The surviving bound is true of sums, means, ranges and
+    # totals alike, and still rejects a value larger than any combination of the inputs.
+    return abs(result) <= sum(abs(v) for v in values) + 1e-9
+
+
+def _form_is_one_of_the_inputs(values, result):
+    return any(abs(result - v) <= 1e-9 for v in values)
+
+
+def _form_is_a_whole_number(values, result):
+    return abs(result - round(result)) <= 1e-9
+
+
+def _form_is_the_row_count(values, result):
+    return abs(result - len(values)) <= 1e-9
+
+
+#: Nothing in this table says which operator it is for. Each is a statement that either
+#: does or does not hold of an arithmetic, and the arithmetic is what decides.
+_LAW_FORMS = (
+    ("within_inputs", _form_within_inputs),
+    ("bounded_by_extremes", _form_bounded_by_extremes),
+    ("is_one_of_the_inputs", _form_is_one_of_the_inputs),
+    ("is_a_whole_number", _form_is_a_whole_number),
+    ("is_the_row_count", _form_is_the_row_count),
+)
+
+
+def _holds_on(values, result, form):
+    try:
+        return bool(form([float(v) for v in values], float(result)))
+    except (TypeError, ValueError, ZeroDivisionError, OverflowError):
+        return False
+
+
+def induce_laws(fn, probes=None) -> tuple[str, ...]:
+    """Derive the law forms this arithmetic actually satisfies, strongest first.
+
+    A form survives if the arithmetic satisfies it on every probe. Surviving forms are
+    then ranked by how many WRONG values they reject, because a form that is true and
+    never says no is the vacuity this whole layer exists to refuse. Ties keep the earlier,
+    tighter form.
+
+    Returns names from `_LAW_FORMS`, or () if the arithmetic satisfies none of them --
+    in which case a declaration has nothing checkable to say and must be refused.
+    """
+    probe_sets = probes or _PROBE_SETS
+    tested = []
+    for values in probe_sets:
+        try:
+            got = fn(list(values))
+        except Exception:
+            return ()
+        if got is None:
+            continue
+        try:
+            float(got)
+        except (TypeError, ValueError):
+            return ()
+        tested.append((list(values), float(got)))
+    if not tested:
+        return ()
+
+    # AN ARITHMETIC THAT DOES NOT DEPEND ON ITS DATA CANNOT BE CHECKED BY A LAW ABOUT
+    # ITS DATA, and saying so is the fix for a liar that got through here.
+    #
+    # `lambda v: 0.0` passed the previous test: |0| is within the total magnitude, and the
+    # form rejected an invented 1000, so it looked like a check. It was not -- the value it
+    # would give for any input is the same, and no statement about a single input can
+    # distinguish it from a correct answer. The test has to be CROSS-DATA: does the law
+    # reject the honest answer computed from DIFFERENT rows?
+    if len({round(r, 9) for _, r in tested}) < 2:
+        return ()
+
+    survivors = []
+    for name, form in _LAW_FORMS:
+        if not all(_holds_on(v, r, form) for v, r in tested):
+            continue
+        rejected = 0
+        for i, (v_i, _) in enumerate(tested):
+            for j, (_, r_j) in enumerate(tested):
+                if i != j and not _holds_on(v_i, r_j, form):
+                    rejected += 1
+        if rejected:                           # it separates answers from other data
+            survivors.append((-rejected, name))
+    survivors.sort()
+    return tuple(name for _, name in survivors)
+
+
+def law_strength(fn, laws, probes=None) -> dict:
+    """How much of the space of wrong answers does this law actually exclude?
+
+    A LAW'S STRENGTH IS NOT ITS CONFIDENCE, IT IS ITS REACH, and a caller needs to be able
+    to tell a check that catches 999 from one that would also catch a plausible mistake.
+    An INDUCED law is weaker than a written one by construction -- it can only say what is
+    true of every input the probes tried, and a median's induced law accepts the minimum
+    and the maximum because both really are inputs.
+
+    This reports the fraction of a dense range around the data that the law rejects, so a
+    weak law is visible as weak instead of looking like a strong one that happened to pass.
+    """
+    tested = []
+    for values in (probes or _PROBE_SETS):
+        try:
+            got = fn(list(values))
+        except Exception:
+            continue
+        if got is None:
+            continue
+        tested.append((list(values), float(got)))
+    if not tested:
+        return {"probes": 0, "rejected_fraction": 0.0}
+    rejected = considered = 0
+    for values, honest in tested:
+        span = max(abs(honest), max(abs(v) for v in values), 1.0)
+        for k in range(-10, 11):
+            candidate = honest + k * span / 5.0
+            considered += 1
+            if any(_run_laws(laws, values, candidate) is False for _ in (0,)):
+                rejected += 1
+    return {"probes": len(tested),
+            "rejected_fraction": round(rejected / considered, 4) if considered else 0.0}
+
+
+def law_from_name(name):
+    """The callable behind a form name, so an induced law is a real law."""
+    for n, form in _LAW_FORMS:
+        if n == name:
+            return form
+    raise ValueError(f"unknown law form {name!r}")
+
 def _run_laws(laws, values, result):
     """True/False from the laws, or None when no law could judge."""
     judged = False
@@ -387,8 +550,10 @@ def _run_laws(laws, values, result):
     return True if judged else None
 
 
-def declare_aggregate(kind: str, words, fn, laws) -> None:
+def declare_aggregate(kind: str, words, fn, laws=()) -> None:
     """Add an aggregate as ONE declaration: its words, its arithmetic, and its check.
+
+    `laws` may be omitted, in which case they are induced from the arithmetic itself.
 
     Refusing a declaration with no law is the point. An operator nobody can be wrong
     with is not a capability, it is a way to be confidently wrong, and this system's
@@ -405,9 +570,23 @@ def declare_aggregate(kind: str, words, fn, laws) -> None:
         raise ValueError(f"{kind}: an aggregate needs at least one word or nothing can ask for it")
     if not callable(fn):
         raise ValueError(f"{kind}: an aggregate needs arithmetic")
+    # A DECLARATION MAY SUPPLY ITS LAW OR HAVE ONE INDUCED FROM ITS ARITHMETIC.
+    #
+    # Requiring a hand-written law made the system's vocabulary static in the way that
+    # matters: anyone could add an operator, but only a human could say what would make it
+    # wrong. When no law is given, the arithmetic is measured against the law FORMS and the
+    # strongest ones it satisfies become its law. If it satisfies none -- it is not tied to
+    # its data in any way the system can express, like an arithmetic that always returns
+    # 999 -- the declaration is refused. The operator does not get to exist unchecked
+    # merely because its author chose not to say what would make it wrong.
     if not laws:
-        raise ValueError(f"{kind}: an aggregate needs at least one law -- a value nobody "
-                         "can check is a way to be confidently wrong")
+        induced = induce_laws(fn)
+        if not induced:
+            raise ValueError(
+                f"{kind}: no law was given and none could be INDUCED from the arithmetic "
+                "-- nothing this system can state would make an answer from it wrong, so "
+                "a value nobody can check is a way to be confidently wrong")
+        laws = tuple(law_from_name(n) for n in induced)
     for law in laws:
         if law not in _LAWS and not callable(law):
             raise ValueError(f"{kind}: unknown law {law!r}")
