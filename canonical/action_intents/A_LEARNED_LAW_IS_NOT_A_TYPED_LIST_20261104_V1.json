@@ -1,0 +1,239 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "A_LEARNED_LAW_IS_NOT_A_TYPED_LIST",
+  "action_intent_id": "A_LEARNED_LAW_IS_NOT_A_TYPED_LIST_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1",
+  "date": "2026-11-04",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "5e196d0af89aa073fe6d2de954769a6949cc45eb",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Every per-expression check in the system could pass while its SET of answers was incoherent, and the coherence check I first wrote was itself three typed lists -- the exact defect the project exists to remove. Which answers can be checked against each other is now DISCOVERED by probing each aggregate's own function: a whole is recoverable from its parts exactly when the operator is associative, and the discovered recombination is sum for sum and count, max for max, min for min, and NOTHING for mean -- which is a derived statement that a mean cannot be checked against its parts at all, reported as uncheckable rather than blessed as consistent.",
+  "selected_route": "PROBE_THE_OPERATOR_FOR_ITS_OWN_DECOMPOSITION_LAW",
+  "causal_blocker": "Verification was per-expression. Nothing compared two answers, so 550, [150,150,250] and 1.5 could all be verified with nothing noticing. The ledger that fixed this chose WHICH answers to compare using a hand-typed list of operators that produce a total; that list named mean as a total (a mean of means is not the mean), compared max and min with sum(), and could not say which of its own answers were mutually uncheckable.",
+  "expected_parent_change": "A ledger of answers; the DECOMPOSITION LAW of an aggregate discovered by probing its own function rather than declared; contradictions reported only when a discovered recombination actually disagrees, with uncheckable pairs kept separate so a coherent conversation reports nothing.",
+  "expected_parent_frontier_change": "The system knows which of its own answers are mutually checkable and which ones it must admit it cannot check.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Verification was per-expression. Nothing compared two answers, so 550, [150,150,250] and 1.5 could all be verified with nothing noticing. The ledger that fixed this chose WHICH answers to compare using a hand-typed list of operators that produce a total; that list named mean as a total (a mean of means is not the mean), compared max and min with sum(), and could not say which of its own answers were mutually uncheckable.",
+  "falsification_condition": "A coherent conversation on one tree reports a contradiction, or an incoherent one reports none, or adding a new aggregate requires editing the law, or a mean is reported as checked against its parts.",
+  "stop_condition": "DECOMPOSITION_DISCOVERED_NOT_DECLARED__A_MEAN_REPORTS_UNCHECKABLE__A_NEW_AGGREGATE_NEEDS_NO_EDIT__ZERO_FALSE_POSITIVES_ON_A_COHERENT_CONVERSATION__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "explicit_user_authorization": "Owner directive 2026-11-04, repeated seven times: 'You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' The answer given each round was No. $0 spend, zero capability credit claimed.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/decomposition_law_v1.py",
+      "canonical/runtime/answer_ledger_v1.py",
+      "canonical/runtime/value_enumeration_v1.py",
+      "canonical/runtime/inspect_v1.py",
+      "canonical/tests/test_answers_must_agree_with_each_other_v1.py",
+      "canonical/action_intents/A_LEARNED_LAW_IS_NOT_A_TYPED_LIST_20261104_V1.json"
+    ],
+    "route_class": "COMPOSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_A_HAND_TYPED_LIST_OF_TOTALLING_OPERATORS_WAS_AN_ADEQUATE_STATEMENT_OF_WHICH_ANSWERS_MAY_BE_CHECKED_AGAINST_EACH_OTHER",
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S"
+  },
+  "measured_effect": "AMBIGUOUS_REFERENT_INSTEAD_OF_NOTHING_FOUND_WITH_THE_CANDIDATES_NAMED__COLUMN_X_ANSWERS_30_IN_ONE_FILE_AND_IS_AMBIGUOUS_IN_TWO__LAW_GRADE_AND_RIVAL_READINGS_NOW_ON_EVERY_COMPUTED_ANSWER__181_TESTS_PASS__SWEEP_UNCHANGED",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__WHAT_IS_MEASURED_IS_THAT_A_REFUSAL_IS_TRUE_ABOUT_WHY_IT_HAPPENED_AND_THAT_A_VERIFIED_ANSWER_SAYS_HOW_STRONGLY_IT_WAS_CHECKED",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "prior_work_reused": "The choice rules -- a word is spent once; filter on full accounting then fewest operators; ties go to the operator the question named; 'per' is a filter not a rank -- are the incumbent search's, kept rather than re-derived. The existing search still runs first and answers everything it always answered.",
+  "recursive_obs": {
+    "canonical_base_commit": "5e196d0af89aa073fe6d2de954769a6949cc45eb",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "DECOMPOSITION_DISCOVERED_NOT_DECLARED__SUM_AND_COUNT_DECOMPOSE_BY_SUM__MAX_BY_MAX__MIN_BY_MIN__MEAN_BY_NOTHING_SO_A_MEAN_REPORTS_UNCHECKABLE__ZERO_CONTRADICTIONS_ON_A_COHERENT_CONVERSATION__SAME_SHAPE_FIRES_WHEN_THE_DATA_CHANGES_UNDER_IT",
+    "selected_route": "PROBE_THE_OPERATOR_FOR_ITS_OWN_DECOMPOSITION_LAW",
+    "selected_surviving_route": "PROBE_THE_OPERATOR_FOR_ITS_OWN_DECOMPOSITION_LAW_AND_COMPARE_ONLY_WHAT_RECOMBINES",
+    "deleted_or_bypassed_paths": [
+      "THE_TYPED_TOTAL_OPS_TUPLE",
+      "THE_IS_A_TOTAL_OPERATOR_NAME_LIST",
+      "A_HARDCODED_SUM_IN_THE_CROSS_ANSWER_COMPARISON",
+      "A_LEAF_SET_COMPARISON_THAT_NEVER_MATCHED_A_GROUPING_AGAINST_A_TOTAL"
+    ],
+    "stop_condition": "DECOMPOSITION_DISCOVERED_NOT_DECLARED__A_MEAN_REPORTS_UNCHECKABLE__A_NEW_AGGREGATE_NEEDS_NO_EDIT__ZERO_FALSE_POSITIVES_ON_A_COHERENT_CONVERSATION__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+    "expected_parent_level_state_change": "The system knows which of its own answers are mutually checkable and which ones it must admit it cannot check.",
+    "why_selected_route_is_fastest_sufficient": "THE_MAINTAINED_OPERATOR_TABLE_ALREADY_DECLARES_EACH_AGGREGATES_FUNCTION__PROBING_THAT_FUNCTION_COSTS_MILLISECONDS_AND_NEEDS_NO_EDIT_WHEN_AN_OPERATOR_IS_ADDED",
+    "iteration_limit": 4,
+    "routes_considered": [
+      "PROBE_THE_OPERATOR_FOR_ITS_DECOMPOSITION",
+      "KEEP_A_TYPED_LIST_OF_TOTALLING_OPERATORS__REJECTED_WRONG_FOR_MAX_MIN_AND_MEAN",
+      "COMPARE_FULL_LEAF_SETS__REJECTED_NEVER_MATCHES_A_GROUPING_AGAINST_A_COLUMN"
+    ],
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
+      "challenger_routes": []
+    },
+    "obs_goal": {
+      "real_outcome": "AN_ANSWER_SPACE_THAT_GROWS_WITH_THE_VOCABULARY_RATHER_THAN_WITH_EDITS_TO_THE_SEARCH",
+      "proxy_goals_deleted": [
+        "COUNTING_CANDIDATES_APPENDED_AS_A_MEASURE_OF_CAPABILITY",
+        "ASSERTING_GENERALISATION_IN_A_COMMIT_MESSAGE"
+      ],
+      "surviving_necessity": "ENUMERATE_WELL_TYPED_COMPOSITIONS_TO_A_FIXED_POINT_AND_CHOOSE_BY_ACCOUNTING_AND_SIZE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__THE_SET_OF_ANSERABLE_QUESTIONS_WAS_THE_SET_OF_SENTENCES_SOMEBODY_WROTE",
+      "surviving_causal_blocker": "ONE_WORD_FOR_NOT_FOUND_FOR_UNSOUND_AND_FOR_AMBIGUOUS__THE_FIRST_WAS_A_FALSE_STATEMENT_ABOUT_THE_TREE",
+      "delete_bypass_substitute_options": [
+        "DELETE_THE_APPENDS_BY_DERIVING_THEM_FROM_THE_OPERATOR_TABLE",
+        "BYPASS_THE_LIST_WHEN_IT_BUILDS_NOTHING",
+        "SUBSTITUTE_TYPE_DIRECTED_ENUMERATION_FOR_ENUMERATED_SENTENCES"
+      ]
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "RE_DERIVING_THE_INCUMBENT_RULES_IN_A_SECOND_IMPLEMENTATION",
+        "WRITING_ONE_SENTENCE_PER_EXPRESSION_SHAPE"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/value_algebra_v1.py",
+        "canonical/runtime/operation_trial_v1.py",
+        "canonical/runtime/inspect_v1.py",
+        "canonical/runtime/autonomous_v1.py",
+        "canonical/runtime/regression_sweep_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__PURE_STDLIB_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
+      ],
+      "surviving_gap": "THE_RANKING_STILL_DECIDES_BY_SIZE_THEN_ALPHABETICAL_ORDER__THIRTY_RIVAL_READINGS_EXIST_AND_THE_CORRECT_ONE_WINS_BECAUSE_IT_IS_SHORTER_NOT_BECAUSE_IT_IS_MORE_JUSTIFIED"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "THE_INCUMBENT_CHOICE_RULES_ARE_REUSED_RATHER_THAN_REPLACED",
+        "THE_FRONT_DOOR_ROUTING_IS_UNTOUCHED"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "HAND_MAINTAINED_CANDIDATE_SENTENCES_SUPERSEDED_BY_ENUMERATION"
+      ],
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SEARCH_FIRST_AND_THE_ENUMERATION_ONLY_WHERE_IT_IS_SILENT"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "ENUMERATION_BUILDS_344_EXPRESSIONS_FOR_ONE_QUESTION_IN_UNDER_A_TENTH_OF_A_SECOND"
+      ],
+      "search_stop_decision": "STOP_WHEN_AN_ITERATION_ADDS_NO_NEW_EXPRESSION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ENUMERATION_FIRST_BROKE_SIX_RULES_THE_INCUMBENT_HAD_ALREADY_PAID_FOR__THREE_MORE_APPENDS_WOULD_STILL_HAVE_BEEN_A_MENU",
+      "routes_ranked": [
+        "ENUMERATE_AND_DEFER__SELECTED",
+        "ENUMERATE_FIRST__REJECTED",
+        "THREE_MORE_APPENDS__REJECTED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "THIRTEEN_PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS__GROWTH_MEASURED_BY_COUNTING_EXPRESSIONS_BEFORE_AND_AFTER_A_DECLARATION__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-11-04T00:00:00Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_HAND_WRITTEN_CANDIDATE_SENTENCES_AS_THE_ANSWER_SPACE",
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "tournament": {
+      "proposal_id": "SEPARATE_NOT_FOUND_FROM_AMBIGUOUS_AND_CARRY_THE_CHECK_STRENGTH",
+      "decisive_question": "DOES_A_REFUSAL_STATE_SOMETHING_TRUE_ABOUT_WHY_AND_DOES_A_VERIFIED_ANSWER_DISTINGUISH_A_STRONG_LAW_FROM_A_FORMALITY",
+      "falsifier_id": "AN_AMBIGUOUS_REFERENT_IS_REPORTED_AS_ABSENT_OR_A_GRADE_IS_ABSENT_FROM_A_VERIFIED_COMPOSITE",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
+    }
+  },
+  "next_step": "The ranking still decides by size and then ALPHABETICAL ORDER among candidates that all pass every filter: 550 beats thirty rivals because it is shorter and sorts first, not because it is more justified. The evidence that should decide is already computed and thrown away -- how many words a reading invents that the question never said. Ranking by that alone is WORSE (it answers 4, a row count, for 'what is the total amount'), so the rule is not a constant but a comparison that must respect which words the question actually spent."
+}
