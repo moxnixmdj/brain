@@ -29,14 +29,27 @@ import contextlib
 
 @contextlib.contextmanager
 def no_persistent_memory():
-    """Measure without remembering, for the duration of the block."""
+    """Measure without remembering, for the duration of the block.
+
+    Covers both stores: the decomposition facts and the operators learned by example. A
+    test that taught an operator into the real store would leave every later process with a
+    vocabulary nobody declared, which is the worst kind of dirty state -- invisible, and it
+    changes answers.
+    """
+    from canonical.runtime import acquired_operator_memory_v1 as A
     from canonical.runtime import decomposition_law_v1 as D
+    from canonical.runtime import inspect_v1 as I
 
     was = D.REMEMBER
     D.REMEMBER = False
     D._CACHE.clear()
+    A._STATE_CACHE.clear()
+    was_restored = I._RESTORED
+    I._RESTORED = True  # do not pull the real store into a test process
     try:
         yield
     finally:
         D.REMEMBER = was
         D._CACHE.clear()
+        A._STATE_CACHE.clear()
+        I._RESTORED = was_restored

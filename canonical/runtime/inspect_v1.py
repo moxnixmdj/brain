@@ -729,6 +729,23 @@ def _computation_holds(comp: dict, root: str) -> bool:
     return False
 
 
+_RESTORED = False
+
+
+def _restore_acquired_operators() -> None:
+    """Bring taught operators into this process, once. Never raises."""
+    global _RESTORED
+    if _RESTORED:
+        return
+    _RESTORED = True
+    try:
+        from canonical.runtime import acquired_operator_memory_v1 as _M
+        _M.restore()
+    except Exception:
+        # A vocabulary that cannot be restored is the vocabulary that was declared.
+        return
+
+
 def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     """Answer by reading, and ground every line of the answer."""
     if not Path(root).is_dir():
@@ -740,6 +757,20 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
             "detail": f"{root!r} is not a directory; nothing could be read",
         }
     terms = question_terms(question)
+    # AN OPERATOR THE CREATURE INDUCED MUST BE PRESENT BEFORE IT ANSWERS.
+    #
+    # Without this, `acquire_from_examples` could genuinely derive a new operator, the door
+    # would answer with it, and the next process would report the same word as unexplained
+    # -- measured: taught `spreadv` from two worked examples, answered 300 through the door,
+    # then a fresh process returned PARTIALLY_GROUNDED with `spreadv` unresolved. Learning
+    # that does not survive is a demonstration, not a capability.
+    #
+    # This restores from the store and re-derives each taught operator through the same
+    # gates that admitted it (see acquired_operator_memory_v1: the DEMONSTRATION is stored,
+    # never the function). It is idempotent -- `already_declared` short-circuits -- and it
+    # cannot fail an answer: a store that will not load leaves the vocabulary exactly as it
+    # was declared in source.
+    _restore_acquired_operators()
     # A listing question asks for a SET, not for a word occurrence. Routing it to
     # `find` is what made "list the files in this directory" return NOTHING_FOUND on a
     # directory holding three files: no term in it names anything inside the tree.

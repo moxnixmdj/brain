@@ -130,6 +130,14 @@ def decomposes_by(kind: str) -> str | None:
         _CACHE[kind] = None
         return None
     fn = spec["fn"]
+    # NO PROBES IS NOT THE SAME AS NO RECOMBINATION.
+    #
+    # Found by sabotage: with the probe tuples emptied, the loop ran zero times, every
+    # recombinator survived it, and the function returned `first` -- the alphabetically
+    # first survivor -- and REMEMBERED IT. A later process then recalled "sum decomposes
+    # by first" from the store as established fact. Weakening the evidence silently
+    # strengthened the claim. If there is nothing to measure with, say so.
+    checked = 0
     survivors = set(_RECOMBINATORS)
     for whole, parts in zip(_PROBE_WHOLES, _PROBE_PARTS):
         try:
@@ -146,6 +154,7 @@ def decomposes_by(kind: str) -> str | None:
         except (TypeError, ValueError):
             _CACHE[kind] = None
             return None
+        checked += 1
         survivors = {name for name in survivors
                      if abs(float(_RECOMBINATORS[name](ps)) - w) <= 1e-9}
         if not survivors:
@@ -153,7 +162,18 @@ def decomposes_by(kind: str) -> str | None:
             return None
     # More than one survivor means the probes could not tell them apart, which is not the
     # same as "either is valid". Prefer the narrowest, and say so by returning the name.
-    result = next(iter(sorted(survivors)), None)
+    if checked == 0:
+        _CACHE[kind] = None
+        return None
+    # More than one survivor means the probes could not tell them apart, which is NOT the
+    # same as "either is valid". The comment said "prefer the narrowest" while `sorted` is
+    # alphabetical, so `first` beat `sum`. That needs a probe designed to separate them;
+    # until then the result is cached but NOT remembered, because an ambiguity recorded
+    # once is an ambiguity resolved wrongly forever.
+    if len(survivors) > 1:
+        _CACHE[kind] = next(iter(sorted(survivors)))
+        return _CACHE[kind]
+    result = next(iter(survivors), None)
     _CACHE[kind] = result
     if REMEMBER:
         _remember(kind, result)
