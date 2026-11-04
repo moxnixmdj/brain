@@ -425,7 +425,9 @@ def run(goal: str, root: str, binary_limit: int = 0,
                                  if result["verdict"] == "UNVERIFIABLE"
                                  else ("LOCATED_BUT_NOT_ANSWERED"
                                        if result["verdict"] == "LOCATED_NOT_COMPUTED"
-                                       else "ANSWER_NOT_GROUNDED"))),
+                                       else ("SUBJECT_ABSENT_FROM_NAMED_FILE"
+                                             if result["verdict"] == "NOT_IN_NAMED_FILE"
+                                             else "ANSWER_NOT_GROUNDED")))),
                 "grounded": result["grounded"],
                 "total": result["total"],
                 "unverifiable": result["unverifiable"],

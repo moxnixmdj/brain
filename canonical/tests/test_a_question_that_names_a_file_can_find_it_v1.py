@@ -14,6 +14,7 @@ Each test fails if filename matching is removed.
 """
 from __future__ import annotations
 
+import pathlib
 import sys
 import tempfile
 from pathlib import Path
@@ -28,7 +29,10 @@ from canonical.runtime import inspect_v1 as I  # noqa: E402
 def _tree(**files: str) -> str:
     root = tempfile.mkdtemp(prefix="named-file-")
     for name, body in files.items():
-        (Path(root) / name).write_text(body, encoding="utf-8")
+        path = Path(root) / name
+        # A nested name is a real path; the directory above it may not exist yet.
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(body, encoding="utf-8")
     return root
 
 
@@ -246,11 +250,12 @@ def test_the_door_does_not_report_a_counting_question_as_answered_without_a_coun
     # absent must not be reported as answered.
     miss = A.run(goal="what is the profit margin in data.py", root=root)
     assert miss["verification"]["verified"] is False
-    # The file is there, so this is not "nothing found" -- it is "the file is there and
-    # what you asked about is not in it". Those are different facts and the verdict
-    # says which one this is.
-    assert miss["answer"]["verdict"] == "PARTIALLY_GROUNDED"
+    # The file is there, so this is not "nothing found anywhere" -- it is "I looked in
+    # the file you named and the words are not in it". Those are different facts, and
+    # the verdict says which one happened rather than collapsing both.
+    assert miss["answer"]["verdict"] == "NOT_IN_NAMED_FILE"
     assert set(miss["answer"]["unresolved_terms"]) == {"profit", "margin"}
+    assert miss["verification"]["reason"] == "SUBJECT_ABSENT_FROM_NAMED_FILE"
 
 
 # ---------------------------------------------------------------------------
@@ -327,3 +332,182 @@ def test_answer_actually_re_checks_the_computation_it_reports(monkeypatch):
     assert answer["computation"]["verified"] is False
     assert answer["verdict"] != "COMPUTED"
     assert answer["answered"] is False
+
+
+# ---------------------------------------------------------------------------
+# Found by pointing the door at THIS REPOSITORY, not at a fixture tree.
+#
+# A three-file fixture cannot show either defect. The first needs a tree big enough
+# for the hit cap to fill before the named file is reached; the second needs a .git.
+# ---------------------------------------------------------------------------
+
+def _mini_repo(root):
+    """A tree where a common word fills the hit cap before the named file is reached."""
+    pathlib.Path(root, "canonical", "runtime").mkdir(parents=True)
+    target = pathlib.Path(root, "canonical", "runtime", "mod.py")
+    target.write_text("a = 1\nretries = 3\nc = 4\n")
+    # Enough noise that a tree-wide search for `canonical`/`runtime` saturates first.
+    for i in range(60):
+        d = pathlib.Path(root, f"canonical/sibling_{i:02d}")
+        d.mkdir()
+        (d / "x.md").write_text("canonical runtime is mentioned here\n")
+    return root
+
+
+def test_a_path_is_one_name_not_a_pile_of_search_terms():
+    """`canonical/runtime/mod.py` was split into three search terms.
+
+    The fragments matched thousands of files in the real repository, the 40-hit cap
+    filled with unrelated ones, and the file that actually contains the word was never
+    opened -- so `retries` was reported absent from a file containing it.
+    """
+    root = _tree(**{"canonical/runtime/mod.py": "a = 1\nretries = 3\nc = 4\n"})
+    answer = I.answer("what is retries in canonical/runtime/mod.py", root)
+    assert answer["unresolved_terms"] == [], answer["unresolved_terms"]
+    assert any(h["file"] == "canonical/runtime/mod.py" for h in answer["hits"])
+    assert answer["answered"] is True
+
+
+def test_the_named_file_is_searched_even_when_the_tree_is_loud():
+    """The regression itself: a big tree must not hide the file the question named."""
+    root = _mini_repo(tempfile.mkdtemp(prefix="loud-"))
+    assert len(I.find(root, ["canonical"], limit=5)) == 5      # the noise is real
+    answer = I.answer("what is retries in canonical/runtime/mod.py", root)
+    assert answer["unresolved_terms"] == [], (answer["verdict"], answer["unresolved_terms"])
+    assert answer["answered"] is True
+
+
+def test_path_fragments_are_not_subject_terms():
+    """`canonical` and `runtime` address the file; they are not things to look for.
+
+    Only words the QUESTION contains are dropped, and only a final segment is matched by
+    its whole name. A substring rule ("retry" appears in "retry.py") also drops, and it
+    dropped `retry` from "what is retry in retry.py" on a file that never contains the
+    word -- a false pass.
+    """
+    q = "what is hello in a/b/c.py"
+    # Directory segments address the file; the final segment keeps the ".py" the
+    # asker typed, so `c` on its own is not dropped.
+    assert I._drop_path_fragments(["hello", "a", "b", "c.py"], "a/b/c.py", q) == ["hello", "c.py"]
+    # A FILE called retry.py must not make `retry` disappear from a question asking
+    # about it: the path containing a word is not the file containing it.
+    assert I._drop_path_fragments(["retry", "retry.py"], "retry.py",
+                                  "what is retry in retry.py") == ["retry", "retry.py"]
+    root = _tree(**{"a/b/c.py": "hello\n"})
+    answer = I.answer(q, root)
+    assert answer["unresolved_terms"] == [], answer["unresolved_terms"]
+
+
+def test_a_word_absent_from_the_named_file_is_not_satisfied_by_the_filename():
+    """`retry` in `retry.py`: the path contains the word, the FILE does not.
+
+    `find` matches terms against the path as well as the body, so a tree-wide fallback
+    produced a name hit carrying `retry` as its term, and the question came back
+    GROUNDED and answered. A question that names a file is about that file.
+    """
+    root = _tree(**{"retry.py": "nothing relevant here\n"})
+    answer = I.answer("what is retry in retry.py", root)
+    assert answer["answered"] is False
+    assert answer["verdict"] != "GROUNDED"
+
+
+def test_a_named_file_is_still_cited_when_the_answer_is_a_computation():
+    """A count over a file has to say which file it counted."""
+    root = _tree(**{"data.py": "a\nb\nc\n"})
+    answer = I.answer("how many lines are in data.py", root)
+    assert answer["verdict"] == "COMPUTED"
+    assert answer["computation"]["value"] == 3
+    assert answer["grounded"] > 0, answer["hits"]
+    assert any(h["file"] == "data.py" for h in answer["hits"])
+
+
+def test_counting_files_does_not_count_the_object_store():
+    """`.git` is 220 files of object store and is not part of the project.
+
+    The first version answered 20823 on a tree holding 20603 -- wrong in the one way a
+    count must not be wrong. The detail string now states what was skipped, so the
+    number reconciles against a plain `find` instead of silently differing from it.
+    """
+    root = tempfile.mkdtemp(prefix="cnt-")
+    for i in range(3):
+        pathlib.Path(root, f"f{i}.txt").write_text("x\n")
+    git = pathlib.Path(root, ".git", "objects", "ab")
+    git.mkdir(parents=True)
+    for i in range(7):
+        (git / f"obj{i}").write_text("y")
+
+    answer = I.answer("how many files are in this directory", root)
+    assert answer["computation"]["value"] == 3, answer["computation"]
+    assert "skipped 7" in answer["computation"]["detail"], answer["computation"]["detail"]
+    assert answer["unresolved_terms"] == [], answer["unresolved_terms"]
+
+
+def test_the_count_is_rechecked_with_the_same_exclusion_it_reported():
+    """Re-check must use one definition of 'the project's files', not two."""
+    root = tempfile.mkdtemp(prefix="cnt2-")
+    pathlib.Path(root, "a.txt").write_text("x")
+    pathlib.Path(root, ".git").mkdir()
+    pathlib.Path(root, ".git", "HEAD").write_text("ref")
+    comp = {"operation": "count_files", "value": 1, "subject": "<the directory>", "claims": []}
+    assert I._computation_holds(comp, root) is True
+    wrong = dict(comp, value=2)
+    assert I._computation_holds(wrong, root) is False
+
+
+# ---------------------------------------------------------------------------
+# Mutations that survived the first pass, pinned.
+#
+# Both of these were rules the code followed and the tests never checked. A mutation
+# that restores the old behaviour and leaves every test green means the tests were
+# exercising the code, not specifying it.
+# ---------------------------------------------------------------------------
+
+def test_a_filename_hit_does_not_resolve_the_word_it_is_spelled_with():
+    """A name hit says the file is there; it must not say the word was found.
+
+    With name hits counted as matches, `retry` in `retry.py` reads as resolved while
+    the file never contains it. Asserted at the tally as well as the verdict, because
+    the tally is what the verdict is computed from.
+    """
+    root = _tree(**{"retry.py": "nothing relevant here\n"})
+    answer = I.answer("what is retry in retry.py", root)
+    assert answer["answered"] is False
+    assert answer["unresolved_terms"] == ["retry"], answer["unresolved_terms"]
+    assert answer["verdict"] == "NOT_IN_NAMED_FILE"
+
+
+def test_the_path_drop_cannot_take_a_word_the_question_is_about():
+    """The substring rule dropped `retry` for `retry.py`. Exact basename does not.
+
+    `mod.py` IS resolved by the named `canonical/runtime/mod.py` -- the asker typed the
+    filename. `retry` is NOT resolved by `retry.py`, because asking about the word is
+    asking about what is inside the file.
+    """
+    assert I._drop_path_fragments(["retry", "retry.py"], "retry.py",
+                                  "what is retry in retry.py") == ["retry", "retry.py"]
+    # basename equality resolves the filename term, and only that term
+    root = _tree(**{"canonical/runtime/mod.py": "retries = 3\n"})
+    got = I.answer("what is retries in canonical/runtime/mod.py", root)
+    assert got["unresolved_terms"] == [], got["unresolved_terms"]
+
+    # ...while a word the file does not contain stays unresolved even though the
+    # filename contains it as a substring
+    missing = I.answer("what is retry in retry.py", _tree(**{"retry.py": "x\n"}))
+    assert missing["unresolved_terms"] == ["retry"], missing["unresolved_terms"]
+
+
+def test_a_name_hit_beside_a_body_hit_does_not_cover_the_body_term():
+    """The reachable form of the name-hit-as-match bug.
+
+    One file matches by name for `notes`, another by body for `budget`. The name hit
+    carries `notes` as its term; if name hits count as matches, `notes` reads as found
+    even when nothing in any file discusses it -- the file is merely called that.
+    """
+    root = _tree(**{"notes.md": "unrelated content\n", "plan.txt": "the budget is 300\n"})
+    answer = I.answer("what is the budget in notes", root)
+    # `budget` is genuinely found; `notes` is only a filename fragment.
+    assert "budget" not in answer["unresolved_terms"], answer["unresolved_terms"]
+    assert answer["answered"] is False, answer["unresolved_terms"]
+    named_hits = [h for h in answer["hits"]
+                  if h.get("matched") in ("filename", "listing") and h.get("term") == "notes"]
+    assert named_hits, "the fixture must produce a name hit carrying `notes`"

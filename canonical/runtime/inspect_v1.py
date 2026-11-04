@@ -248,6 +248,122 @@ def _named_file(question: str, root: str) -> str | None:
     return found[0] if len(found) == 1 else None
 
 
+# A PATH IS ONE NAME, NOT A PILE OF SEARCH TERMS.
+#
+# "what is retries in canonical/runtime/inspect_v1.py" tokenised to
+# ['retries','canonical','runtime','inspect_v1.py']. The three path fragments are not
+# things to look for -- they are the ADDRESS of the one file the question names -- but
+# they matched thousands of files across the tree, the forty-hit cap filled with
+# .github/ and markdown audits, and the file that actually contains `retries` was never
+# reached. The door reported `retries` as not found in a file containing it five times.
+#
+# This is the same defect as the earlier name/body one at a different layer: the search
+# answered a question about WHERE by searching WHAT. When the question names a file, the
+# file is searched first and its path fragments stop being subject terms.
+def _project_files(root: str) -> list[Path]:
+    """The files a person means when they ask what is in this directory.
+
+    `.git` is 220 files of object store in this repository and it is not part of the
+    project. Counting it made "how many files are in this directory" answer 20823 on a
+    tree holding 20603 -- an answer that is wrong in the one way a count must not be.
+    Uses the same skip list `find()` uses, so the two cannot drift apart.
+    """
+    base = Path(root)
+    out: list[Path] = []
+    for path in base.rglob("*"):
+        if not path.is_file():
+            continue
+        rel = path.relative_to(base).as_posix()
+        if _SKIP.search(rel + "/"):
+            continue
+        out.append(path)
+    return out
+
+
+def _path_components(rel: str, question: str = "") -> set[str]:
+    """Which of the question's own words are just the address of the named file.
+
+    Returns only terms the question actually contains, so nothing is invented and
+    nothing outside the question is dropped. A directory segment counts by its whole
+    name and by its stem; a FINAL segment counts only by its whole name, because
+    `mod.py` contains a dot that is part of what the asker wrote, while `retry.py`
+    should not make `retry` disappear from a question that asked about it.
+
+    `data` in "what is data in data/x.csv" is a directory name the asker typed -- it
+    addresses the file. `retry` in "what is retry in retry.py" is the subject, and a
+    file called retry.py is not evidence that the word retry is inside it.
+    """
+    raw = (rel or "").strip().strip("/")
+    if not raw:
+        return set()
+    # The question spells the path as ONE token, so the segments are looked for both as
+    # standalone words and inside that token. Looking only for standalone words found
+    # nothing at all and dropped no fragments; looking only inside the token would drop
+    # any segment whose name happens to appear elsewhere in the sentence.
+    words = {w.lower() for w in (question or "").split()}
+    words |= {w.lower().strip(".,;:\"'()") for w in words}
+    parts = [x for x in raw.split("/") if x]
+    out: set[str] = set()
+    for i, part in enumerate(parts):
+        low = part.lower()
+        is_final = (i == len(parts) - 1)
+        if low in words:
+            out.add(low)
+        if not is_final and "." in low:
+            stem = low.rsplit(".", 1)[0]
+            if stem in words:
+                out.add(stem)
+    return out
+
+
+def _drop_path_fragments(terms: list[str], rel: str, question: str) -> list[str]:
+    """Remove the terms that are only the address of the file the question names."""
+    if not rel:
+        return terms
+    parts = [x for x in rel.strip().strip("/").split("/") if x]
+    # Every segment except the final one is a directory the asker typed; it addresses
+    # the file and is not a thing to look for. `data` in "what is data in data/x.csv".
+    dir_words = set()
+    for part in parts[:-1]:
+        low = part.lower()
+        dir_words.add(low)
+        if "." in low:
+            dir_words.add(low.rsplit(".", 1)[0])
+    if not dir_words:
+        return terms
+    return [t for t in terms if t.lower() not in dir_words]
+
+
+def search_named(root: str, rel: str, terms: list[str], limit: int = 40) -> list[dict]:
+    """Search ONE named file for the subject terms.
+
+    Returns [] if the file cannot be read. Kept separate from `find` because the point
+    is to look somewhere specific rather than to rank the whole tree.
+    """
+    path = Path(root) / rel
+    if not path.is_file():
+        return []
+    if path.suffix.lower() not in _TEXT_SUFFIX:
+        return []
+    try:
+        if path.stat().st_size > _MAX_BYTES:
+            return []
+        text = path.read_text(errors="ignore")
+    except OSError:
+        return []
+    patterns = [re.compile(r"\b" + re.escape(t) + r"\b", re.I) for t in terms]
+    hits = []
+    for index, line in enumerate(text.splitlines(), start=1):
+        for i, pat in enumerate(patterns):
+            if pat.search(line):
+                hits.append({"file": rel, "line": index, "term": terms[i],
+                             "text": line.strip()[:200]})
+                break
+        if len(hits) >= limit:
+            break
+    return hits
+
+
 def compute(question: str, root: str) -> dict | None:
     """Answer a question that needs a computation, not a citation.
 
@@ -258,10 +374,14 @@ def compute(question: str, root: str) -> dict | None:
     base = Path(root)
 
     if _COUNT_FILES.search(question or "") and not _FILE_MENTION.search(question or ""):
-        files = [p for p in base.rglob("*") if p.is_file()]
+        files = _project_files(root)
+        total = len([q for q in base.rglob("*") if q.is_file()])
+        skipped = total - len(files)
         return {"operation": "count_files", "value": len(files),
                 "subject": "<the directory>",
-                "detail": f"counted {len(files)} files under {root!r}",
+                "detail": (f"counted {len(files)} files under {root!r}; skipped {skipped} "
+                           f"under .git, __pycache__ and dependency caches, so a plain "
+                           f"`find` that includes them will read higher"),
                 "claims": []}
 
     if _COUNT_LINES.search(question or ""):
@@ -366,7 +486,8 @@ _OPERATION_WORDS = {
     "count_rows": {"how", "many", "rows", "row", "records", "record", "entries",
                    "entry", "lines", "line", "count", "number", "of"},
     "count_files": {"how", "many", "files", "file", "python", "modules", "count",
-                    "number", "of"},
+                    "number", "of", "directory", "dir", "folder", "here", "there",
+                    "this", "tree", "project", "repo", "repository", "in"},
     "read_content": {"what", "does", "say", "says", "contain", "contains", "define",
                      "defines", "declared", "declares", "export", "exports", "show",
                      "me", "the", "of", "contents", "content", "read", "display",
@@ -391,7 +512,7 @@ def _computation_holds(comp: dict, root: str) -> bool:
     """Re-check the computation against the file. Nothing is taken on trust."""
     op, val = comp.get("operation"), comp.get("value")
     if op == "count_files":
-        return val == len([p for p in Path(root).rglob("*") if p.is_file()])
+        return val == len(_project_files(root))
     if op == "count_lines":
         path = Path(root) / comp["subject"]
         if not path.is_file():
@@ -430,7 +551,29 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     # A listing question asks for a SET, not for a word occurrence. Routing it to
     # `find` is what made "list the files in this directory" return NOTHING_FOUND on a
     # directory holding three files: no term in it names anything inside the tree.
-    hits = listing(root, limit=limit) if wants_a_listing(question) else find(root, terms, limit=limit)
+    named_q = _named_file(question, root)
+    if wants_a_listing(question):
+        hits = listing(root, limit=limit)
+    elif named_q:
+        # THE NAMED FILE IS SEARCHED FIRST, AND THE WHOLE TREE ONLY IF IT MISSES.
+        #
+        # Ranking the whole tree for a question that names one file lets a common word
+        # fill the hit cap with unrelated files before the named one is ever opened --
+        # measured on this repository, where `retries` lives in the named file five
+        # times and the door reported it absent. If the named file yields nothing, the
+        # tree-wide search still runs, so a question that names a file while asking
+        # about something else is not narrowed away.
+        # No tree-wide fallback here.
+        #
+        # Falling back to `find` when the named file yielded nothing put path hits back
+        # in: `find` matches terms against the PATH as well as the body, so a file called
+        # `retry.py` produced a "name hit" for the term `retry` and "what is retry in
+        # retry.py" came back GROUNDED and answered on a file that never contains the
+        # word. A question that names a file is a question about that file; if the word
+        # is not in it, the honest answer is that it is not in it.
+        hits = search_named(root, named_q, terms, limit=limit)
+    else:
+        hits = find(root, terms, limit=limit)
 
     # THE GROUNDER IS NOT OPTIONAL, AND IT IS NOT FOUND BY ACCIDENT.
     #
@@ -485,8 +628,36 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     else:
         summary = None
 
-    grounded = sum(1 for h in hits if h.get("verdict") == "GROUNDED")
-    unverifiable = sum(1 for h in hits if h.get("verdict") == "UNVERIFIABLE")
+    # THE FILE A NUMBER CAME FROM IS EVIDENCE AND MUST BE CITED.
+    #
+    # Narrowing the search to the named file removed the filename hit that `find` used
+    # to contribute, so a computed answer arrived with zero hits and -- worse -- a
+    # question whose subject was absent collapsed from "the file is there and this word
+    # is not in it" to a bare NOTHING_FOUND. A count over a file still has to say which
+    # file it counted, and a refusal still has to say which file it looked in.
+    # Cited only when something WAS found or a computation was actually run.
+    #
+    # Unconditionally, this re-added the filename hit right after the search had proved
+    # the word absent, and `retry` in `retry.py` went back to GROUNDED and answered --
+    # the fix undone by its own evidence trail. A file only becomes evidence here when
+    # there is a finding that points at it, or a number that came out of it.
+    named_ev = _named_file(question, root)
+    will_compute = False
+    try:
+        will_compute = (compute(question, root) is not None
+                        or (not wants_a_listing(question) and wants_content(question)))
+    except Exception:
+        will_compute = False
+    # `unresolved` is not computed yet at this point, so the refusal case is decided by
+    # whether the question asked about a subject the file does not contain -- which is
+    # exactly what a named file with nothing found inside it means. Cited when there is
+    # a finding, a computation, OR a named file we looked in and did not find the
+    # subject in. Not cited when the word was simply satisfied by the path, which is the
+    # `retry`/`retry.py` case: there the file was never really the answer.
+    if named_ev and (hits or will_compute) and not any(
+            h.get("file") == named_ev for h in hits):
+        hits.append({"file": named_ev, "line": 0, "term": named_ev,
+                     "text": "", "matched": "filename"})
 
     comp = None
     try:
@@ -500,6 +671,16 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     if comp is not None:
         comp["verified"] = _computation_holds(comp, root)
 
+    # Ground the filename hit before counting, so the evidence tally is about the same
+    # list of hits the verdict is computed from.
+    for h in hits:
+        if h.get("matched") in ("filename", "listing") and "verdict" not in h:
+            exists = (Path(root) / h["file"]).is_file()
+            h["verdict"] = "GROUNDED" if exists else "UNVERIFIABLE"
+
+    grounded = sum(1 for h in hits if h.get("verdict") == "GROUNDED")
+    unverifiable = sum(1 for h in hits if h.get("verdict") == "UNVERIFIABLE")
+
     # TERMS THAT MATCHED NOTHING ARE PART OF THE ANSWER.
     #
     # They used to vanish. "what is the profit margin in data.py" hit the filename,
@@ -509,21 +690,40 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     # carry its meaning were dealt with, so the ones that were not are named in the
     # result rather than dropped. Reporting "not answered, and here is what I could not
     # find" is useful; reporting a clean pass is not.
-    matched_terms = {h.get("term") for h in hits if h.get("term")}
+    # Only a hit that quotes a line resolves a term.
+    #
+    # A name hit says the file is there, which is a different fact from the file
+    # containing the word. Counting it as a match is how `retry` in `retry.py` read as
+    # found: the term appeared in the PATH, the name hit carried it as its term, and the
+    # word was never seen inside the file.
+    matched_terms = {h.get("term") for h in hits
+                     if h.get("term") and h.get("matched") not in ("filename", "listing")}
+    # The words a file's PATH is spelled with name it; they are not things to find inside
+    # anything. Leaving them in made every question about a nested path score as
+    # partially unanswered on its own correct answer.
     subject_terms = [t for t in terms if t not in _REQUEST_VERBS]
+    subject_terms = _drop_path_fragments(subject_terms, _named_file(question, root) or "",
+                                         question)
     # A term that is the name of a file the question names is accounted for by that
     # file being there; it was never a thing to look for inside a body.
     named = _named_file(question, root)
     used = accounted_terms(comp, question, wants_a_listing(question))
+    # NO SUBSTRING RULE. This used to also drop any term found inside the named file's
+    # path (`t in named.lower()`), which dropped `retry` for a file called `retry.py`
+    # even though that file never contains the word -- a question whose subject was
+    # genuinely absent came back answered. A file called `retry.py` is not evidence that
+    # the word `retry` appears inside it. The path drop above handles directory
+    # segments, which really are just the address.
+    # A term that IS the named file's basename is resolved by that file existing -- the
+    # asker wrote the filename, and the file is there. Exact equality, not containment:
+    # `mod.py` is resolved by `canonical/runtime/mod.py`, while `retry` is NOT resolved
+    # by `retry.py`, because a question about the word `retry` is a question about what
+    # is inside the file and the filename is not an answer to it.
+    basename = (named or "").rsplit("/", 1)[-1].lower()
     unresolved = [t for t in subject_terms
                   if t not in matched_terms
                   and t not in used
-                  and t != (named or "").lower()
-                  and not (named and t in named.lower())]
-    if named:
-        # The file named in the question is evidence in its own right, so its name
-        # stops being an unresolved term once the file is known to exist.
-        unresolved = [t for t in unresolved if t not in named.lower()]
+                  and t != basename]
 
     # A QUESTION THAT NEEDS A COMPUTATION IS NOT ANSWERED BY FINDING THE FILE.
     #
@@ -548,7 +748,12 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # Saying GROUNDED would claim an answer nobody computed.
         verdict = "LOCATED_NOT_COMPUTED" if hits else "NOTHING_FOUND"
     elif not hits:
-        verdict = "NOTHING_FOUND"
+        # "I looked in the file you named and the word is not in it" is a different
+        # fact from "I searched the tree and found nothing", and a reader deciding
+        # whether to trust the answer needs to know which one happened. Reporting both
+        # as NOTHING_FOUND would be true and less useful.
+        # Only a question that actually named a file can be "not in that file".
+        verdict = "NOT_IN_NAMED_FILE" if (unresolved and named) else "NOTHING_FOUND"
     elif unverifiable:
         verdict = "PARTIALLY_GROUNDED"
     elif unresolved:
