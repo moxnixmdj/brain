@@ -144,8 +144,8 @@
       "SILENT_G_NONE_WHEN_THE_GROUNDER_IMPORT_DID_NOT_RESOLVE",
       "DROPPING_TERMS_THAT_MATCHED_NOTHING_FROM_THE_VERDICT"
     ],
-    "stop_condition": "NINE_PLAIN_QUESTIONS_SIX_ANSWERED_THREE_REFUSED__TWENTY_FIVE_TESTS_PASS__SIX_MUTATIONS_CAUGHT__REGRESSION_SWEEP_UNCHANGED_116_OF_117__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
-    "expected_parent_level_state_change": "FRONT_DOOR_ANSWERS_INSTEAD_OF_CITING_AT_ZERO_MODEL_DEPENDENCY__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+    "stop_condition": "NINE_PLAIN_QUESTIONS_PASS_IN_UNDER_1S__TWENTY_FIVE_TESTS_PASS__SIX_MUTATIONS_CAUGHT__REGRESSION_SWEEP_UNCHANGED_AT_116_OF_117_WITH_THE_ONE_FAILURE_PROVEN_PREEXISTING__UNIFIED_MODEL_VERIFIES_33_OF_33__REPO_INTEGRITY_AND_ADMISSION_GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+    "expected_parent_level_state_change": "FRONT_DOOR_ANSWERS_SIX_OF_NINE_PLAIN_QUESTIONS_AND_REFUSES_THREE_HONESTLY_UP_FROM_ONE_OF_SIX___ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
     "why_selected_route_is_fastest_sufficient": "THREE_FILES_IN_ONE_ALREADY_EXISTING_MODULE__NO_NEW_DEPENDENCY__NO_PROTECTED_OR_SHA_PINNED_GATE_TOUCHED__AND_THE_FAILURE_WAS_MEASURED_THROUGH_THE_PUBLIC_DOOR_RATHER_THAN_INFERRED",
     "iteration_limit": 4,
     "routes_considered": [
@@ -154,12 +154,98 @@
       "ADD_A_MODEL_TO_READ_THE_EVIDENCE__REJECTED_WOULD_BREAK_THE_ZERO_MODEL_DEPENDENCY_BOUNDARY"
     ],
     "route_frontier": {
-      "discovery_required": false,
-      "not_applicable_reason": "IN_TREE_FALSIFICATION_OF_A_MEASURED_FALSE_GENERAL_CLAIM_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
-      "challenger_routes": []
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-04T02:00:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "INSPECT_V1_FIND_OVER_CONTENTS_ONLY_WITH_ONE_GROUNDED_WORD_FOR_EVIDENCE_AND_ANSWER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/inspect_v1.py",
+          "canonical/runtime/autonomous_v1.py",
+          "canonical/runtime/grounding_v1.py",
+          "canonical/runtime/regression_sweep_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/csv.html",
+          "https://docs.python.org/3/library/inspect.html",
+          "https://rajpurkar.github.io/SQuAD-explorer/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://huggingface.co/datasets/rajpurkar/squad_v2",
+          "https://github.com/python/cpython/blob/main/Lib/csv.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/MAOFILHO/AWS-AgentCore-CareConnect-System/issues/169",
+          "https://github.com/OctaviusLeo/Grounded-QA-Service"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "reading comprehension abstain when no answer supported by the passage"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SQuAD 2.0 unanswerable questions benchmark abstention scoring"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "citation validation checks membership not entailment grounded answer refusal"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 verification passes answers that do not address the question grounding check passes because draft matches evidence"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [
+        {
+          "route": "RETRIEVAL_AUGMENTED_MODEL_READS_THE_TREE_AND_WRITES_THE_ANSWER",
+          "source": "https://github.com/OctaviusLeo/Grounded-QA-Service",
+          "loses_because": "A_MODEL_IN_THE_PRODUCER_PATH_BREAKS_THE_ZERO_MODEL_DEPENDENCY_MISSION_LOCK_AND_THE_ANSWER_WOULD_NO_LONGER_BE_RECOMPUTABLE_FROM_THE_TREE_ALONE"
+        },
+        {
+          "route": "LLM_JUDGE_SCORES_WHETHER_THE_ANSWER_ADDRESSES_THE_QUESTION",
+          "source": "https://github.com/OctaviusLeo/Grounded-QA-Service",
+          "loses_because": "THE_SAME_PROJECT_RECORDS_THAT_ITS_JUDGE_HAS_NOT_BEEN_VALIDATED_AGAINST_HUMAN_LABELS_AND_THAT_CITATION_VALIDATION_CHECKS_MEMBERSHIP_NOT_ENTAILMENT"
+        },
+        {
+          "route": "ABSTAIN_ON_EVERYTHING_AND_SCORE_THE_ABSTENTION_BASELINE",
+          "source": "https://rajpurkar.github.io/SQuAD-explorer/",
+          "loses_because": "SQUAD_2_0_MEASURES_THAT_A_SYSTEM_THAT_UNCONDITIONALLY_ABSTAINS_SCORES_48_9_F1__ABSTENTION_IS_ONLY_HALF_THE_TASK_AND_SIX_OF_THE_NINE_QUESTIONS_MUST_STILL_BE_ANSWERED"
+        }
+      ],
+      "negative_search_summary": "SEARCHED_BOTH_CLASSES_FOR_A_ROUTE_THAT_IS_STRONGER_ON_VERIFIABILITY_WITHOUT_A_MODEL__EVERY_EXTERNAL_ROUTE_FOUND_PUTS_A_GENERAL_MODEL_IN_THE_PRODUCER_PATH_OR_NEEDS_HUMAN_LABELLED_JUDGEMENT_WHICH_THE_SANDBOX_CANNOT_SUPPLY__THE_GAP_THAT_SURVIVES_IS_ARITHMETIC_BEYOND_LINE_ROW_AND_FILE_COUNTS",
+      "selected_route": "SEARCH_BODIES_NOT_ONLY_NAMES_COUNT_INSTEAD_OF_CITING_LIST_A_DIRECTORY_AS_A_SET_AND_NAME_UNFOUND_TERMS"
     },
     "obs_goal": {
-      "real_outcome": "FRONT_DOOR_ANSWERS_PLAIN_QUESTIONS_WITH_CHECKABLE_ANSWERS_AND_REFUSES_HONESTLY"
+      "real_outcome": "A_PLAIN_QUESTION_RETURNS_ITS_ANSWER_AND_AN_ABSENT_FACT_IS_REFUSED_BY_NAME",
+      "proxy_goals_deleted": [
+        "GREP_FOR_THE_NOUN_AND_REPORT_THE_FILE_AS_THE_ANSWER",
+        "SELF_VERIFICATION_SCORE_AS_A_STAND_IN_FOR_ANSWERING_ANYTHING",
+        "REGRESSION_SWEEP_ON_ITS_OWN_FIXTURES_AS_EVIDENCE_THE_DOOR_WORKS_ON_THE_WORLD"
+      ],
+      "surviving_necessity": "THE_DOOR_MUST_ANSWER_AND_REFUSE_CORRECTLY_ON_A_TREE_NOBODY_WROTE_FIXTURES_FOR__THAT_IS_STILL_THE_OPEN_WORK_AND_ONLY_SIX_OF_THE_NINE_QUESTIONS_EXERCISE_IT"
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
