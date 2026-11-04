@@ -1247,7 +1247,14 @@ while True:
                             os.close(r_fd)
                         except OSError:
                             pass
-                        wave_codes[c_idx] = 1
+                        # Marked distinctly, not as 1. A killed candidate used to be
+                        # indistinguishable from a candidate whose test honestly failed, so the
+                        # only signal that separates "this code never terminates" from "this code is
+                        # wrong" was thrown away -- measured 2026-11-05, on a while-loop world a
+                        # single hung candidate charged the full per-candidate budget and reported
+                        # a plain TEST_FAILED. Anything that wants to learn from these screens
+                        # needs to know which of the two it is looking at.
+                        wave_codes[c_idx] = 4
                     active.clear()
                     break
                 ready_fds, _, _ = select.select(list(active.keys()), [], [], rem_t)
@@ -1273,6 +1280,8 @@ while True:
                         break
                 elif ec == 3:
                     cand_details.append({'index': c_idx, 'passed': False, 'failure': 'ZERO_ASSERTIONS_EXECUTED'})
+                elif ec == 4:
+                    cand_details.append({'index': c_idx, 'passed': False, 'failure': 'WALLCLOCK_EXCEEDED'})
                 else:
                     cand_details.append({'index': c_idx, 'passed': False, 'failure': 'TEST_FAILED'})
             if passing and stop_first:

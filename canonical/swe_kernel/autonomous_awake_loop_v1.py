@@ -108,6 +108,21 @@ def promote_closed_lesson_to_workflow_db(
     return {"promoted": False, "reason": "NO_PROMOTABLE_TRACE_ARTIFACT"}
 
 
+# Per-candidate wallclock budget for every confined batch screen.
+#
+# Measured 2026-11-05: an honest candidate takes a MEDIAN of 4 ms (min 4 ms, max 215 ms across
+# 15 runs). The budget here was 2.0 s -- 452x the median -- and it is a *per candidate* budget, so
+# one candidate that never terminates charges the full amount and the batch waits. On a
+# while-loop world the override batch spent 2.43 s of which 2.07 s was a single hung candidate.
+#
+# 0.5 s is still 2.3x the slowest honest candidate ever measured and 125x the median. A/B over
+# seven worlds, three trials each: 7/7 repaired at both budgets, total 6.09-6.29 s -> 2.97-3.06 s,
+# worst single world 2.20-2.46 s -> 0.71-0.74 s. An earlier attempt to *learn* this number was
+# discarded: the gains available from reordering producers were ~40 ms, while this one constant
+# was worth half the wall time of every run.
+_PER_CANDIDATE_WALLCLOCK_S = 0.5
+
+
 def _propose_deterministic_ast_repairs(source_text: str, max_candidates: int = 24) -> list[str]:
     """Generate small, syntactically valid single-site operator/comparison repairs (`K3 = 0`)."""
     try:
@@ -909,7 +924,7 @@ class AwakeAgencyDaemon:
             [rel_tf],
             override_batch,
             stop_on_first_pass=True,
-            per_candidate_timeout_s=2.0,
+            per_candidate_timeout_s=_PER_CANDIDATE_WALLCLOCK_S,
             allow_cow_hardlinks=True,
         )
         passing = batch_res.get("passing_indices") or []
@@ -1123,7 +1138,7 @@ class AwakeAgencyDaemon:
                         [rel_tf_str],
                         [{str(rel_mod): c_item} for c_item in all_cands[:36]],
                         stop_on_first_pass=True,
-                        per_candidate_timeout_s=2.0,
+                        per_candidate_timeout_s=_PER_CANDIDATE_WALLCLOCK_S,
                         allow_cow_hardlinks=True,
                     )
                     pass_idxs = batch_screen.get("passing_indices") or []
