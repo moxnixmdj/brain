@@ -2539,6 +2539,23 @@ def run_sovereign_board(
     creature = boot(root, identity=identity, life=life)
     if workspace is not None:
         creature.workspace_root = pathlib.Path(workspace).resolve()
+
+    # What is owed to the world is a fact about the world, not a parameter of this function.
+    # Measured 2026-11-05: every repair this creature ever made was one whose failing test the
+    # caller had handed it. The organ that finds failing tests (`_sense_failing_workspace_tests`)
+    # only ever ran on `live_autonomous_cycle`, which is not the live path -- so the creature could
+    # repair, but could not notice that anything needed repair.
+    if not extra_failing_tests and getattr(creature, "workspace_root", None):
+        try:
+            from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
+            _sensor = AwakeAgencyDaemon(
+                pathlib.Path(creature.workspace_root),
+                ledger_path=creature.root / "awake_sense" / "ledger.json",
+                skill_store_path=creature.root / "awake_sense" / "skills.sqlite",
+            )
+            extra_failing_tests = [(rel, sig) for rel, sig in _sensor._sense_failing_workspace_tests()]
+        except Exception:  # noqa: BLE001 - a world that cannot be sensed is a world with no known work
+            extra_failing_tests = ()
     reg_ids, inspected_ids = _registry_and_inspectors()
     already_onboarded = {cid: True for cid in (set(inspected_ids) | set(creature.onboarded_capabilities.keys()))}
 

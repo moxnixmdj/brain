@@ -640,7 +640,7 @@ class AwakeAgencyDaemon:
         self._file_sha_memo[key] = (int(st.st_mtime_ns), int(st.st_size), digest)
         return digest
 
-    def _sense_failing_workspace_tests(self) -> list[tuple[str, str]]:
+    def _sense_failing_workspace_tests(self, within: Sequence[str] | None = None) -> list[tuple[str, str]]:
         """Incrementally sense failing `test_*.py` pairs via `(mtime_ns, size) -> sha256` memoization (`< 1 ms` warm)."""
         import hashlib
 
@@ -663,6 +663,13 @@ class AwakeAgencyDaemon:
                     test_files.append(fp)
                 elif _is_polyglot_test_filename(fn) and len(poly_tests) < 8:
                     poly_tests.append(fp)
+        if within is not None:
+            # Act only on the world you were asked about. Without this a scoped repair re-senses
+            # every test in the tree, which is the same unbounded work that made the first repair
+            # attempt time out.
+            _wanted = {pathlib.Path(str(r)).as_posix() for r in within}
+            test_files = [t for t in test_files if t.relative_to(self.workspace_root).as_posix() in _wanted]
+            poly_tests = [t for t in poly_tests if t.relative_to(self.workspace_root).as_posix() in _wanted]
         test_files.sort()
         poly_tests.sort()
         src_files.sort()
@@ -897,7 +904,7 @@ class AwakeAgencyDaemon:
             before_s = (cow_root / rel_p).read_text(encoding="utf-8")
             cow_write_text(cow_root / rel_p, new_s)
             if self.apply_verified_repairs:
-                _atomic_write_text(self.workspace_root / rel_p, new_s)
+                _stage_if_changed(str(rel_p), new_s)  # staged; the caller accepts or discards
             cryst = self.skill_store.crystallize_code_fix(
                 before_snippet=before_s,
                 after_snippet=new_s,
@@ -953,6 +960,23 @@ class AwakeAgencyDaemon:
         _staged: dict[str, str] = {}
         failures_found = 0
 
+        def _stage_if_changed(rel: str, src: str) -> bool:
+            """Stage a candidate only if it differs from what the world already holds.
+
+            Measured 2026-11-05: the coupled engine returned `pass: True` with `files_repaired`
+            naming two modules whose staged content was byte-identical to the originals. That is a
+            no-op reported as a repair, and because it `continue`d, it suppressed the honest
+            failure of the owed test. A repair that changes nothing has not repaired anything.
+            """
+            try:
+                current = (self.workspace_root / rel).read_text(encoding="utf-8")
+            except OSError:
+                current = None
+            if current == src:
+                return False
+            _staged[str(rel)] = src
+            return True
+
         with tempfile.TemporaryDirectory(prefix="brain-awake-cow-") as tmp_str:
             cow_root = pathlib.Path(tmp_str) / "ws"
             clone_info = create_zero_copy_cow_workspace(self.workspace_root, cow_root)
@@ -970,30 +994,46 @@ class AwakeAgencyDaemon:
                 if not cand_targets:
                     mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
                     if mf_out is not None:
-                        repaired_records.append({
-                            "module": ",".join(mf_out["files_repaired"]),
-                            "mode": mf_out["mode"],
-                            "skill_ids": mf_out["crystallized_skill_ids"],
-                        })
-                        continue
+                        _changed = [r for r in (mf_out["files_repaired"] or [])
+                                    if _stage_if_changed(str(r), (cow_root / r).read_text(
+                                        encoding="utf-8"))]
+                        if _changed:
+                            repaired_records.append({
+                                "module": ",".join(mf_out["files_repaired"]),
+                                "mode": mf_out["mode"],
+                                "skill_ids": mf_out["crystallized_skill_ids"],
+                            })
+                            continue
                     # Multi-file / non-obvious target layout fallback
                     coupled_out = repair_repository_in_cow_zygote(
                         cow_root,
                         owed_tests=owed_tests,
                         skill_store=self.skill_store,
-                        apply_to_workspace=False,  # engine must not write the world; caller stages + accepts
+                        # True is safe ONLY because `ws` (first arg) is `cow_root`, the disposable
+                        # twin: the engine repairs inside its own private clone, so with False
+                        # there is nothing to read back and this path reported a repair it had not
+                        # made (measured 2026-11-05). What must never happen is copying the twin's
+                        # bytes into the real workspace -- that is what put `return 5` into a world
+                        # whose held-out input then failed. Staging plus the caller's
+                        # accept-or-discard is what stands between a candidate and the world.
+                        apply_to_workspace=True,
                     )
+                    _changed = []
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                _staged[str(rel_rep)] = (cow_root / rel_rep).read_text(
-                                    encoding="utf-8")
+                                if _stage_if_changed(str(rel_rep),
+                                                     (cow_root / rel_rep).read_text(encoding="utf-8")):
+                                    _changed.append(rel_rep)
+                    if _changed:
                         repaired_records.append({
                             "module": ",".join(coupled_out.get("files_repaired") or []),
                             "mode": coupled_out.get("mode") or "COW_ZYGOTE_COUPLED_REPAIR",
                             "skill_ids": coupled_out.get("crystallized_skill_ids") or [],
                         })
                         continue
+                    # No change was staged: fall through and report the owed test as unrepaired
+                    # rather than recording a no-op as a repair.
                     ledger.note(
                         f"failing test without obvious target module: {rel_tf}",
                         why=fail_out[:160],
@@ -1069,15 +1109,14 @@ class AwakeAgencyDaemon:
                 if recalled is not None:
                     patched = str(recalled["patched_source"])
                     cow_write_text(cow_mod, patched)
-                    if self.apply_verified_repairs:
-                        _atomic_write_text(self.workspace_root / rel_mod, patched)
-                    repaired_records.append({
-                        "module": str(rel_mod),
-                        "mode": "VERIFIED_SKILL_RECALL",
-                        "scope_tier": recalled.get("scope_tier"),
-                        "skill_id": recalled.get("skill_id"),
-                    })
-                    continue
+                    if self.apply_verified_repairs and _stage_if_changed(str(rel_mod), patched):
+                        repaired_records.append({
+                            "module": str(rel_mod),
+                            "mode": "VERIFIED_SKILL_RECALL",
+                            "scope_tier": recalled.get("scope_tier"),
+                            "skill_id": recalled.get("skill_id"),
+                        })
+                        continue
 
                 # Tier B: Zero-LLM repo synthesizers (`python_test_guided_patch_search_v1._candidate_specs`
                 # + STUN condition-guard synthesis + deterministic AST synthesis) screened in ONE
@@ -1132,23 +1171,37 @@ class AwakeAgencyDaemon:
                     cow_write_text(cow_mod, before_src)
                     mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out)
                     if mf_out is not None:
-                        repaired_records.append({
-                            "module": ",".join(mf_out["files_repaired"]),
-                            "mode": mf_out["mode"],
-                            "skill_ids": mf_out["crystallized_skill_ids"],
-                        })
-                        continue
+                        _changed = [r for r in (mf_out["files_repaired"] or [])
+                                    if _stage_if_changed(str(r), (cow_root / r).read_text(
+                                        encoding="utf-8"))]
+                        if _changed:
+                            repaired_records.append({
+                                "module": ",".join(mf_out["files_repaired"]),
+                                "mode": mf_out["mode"],
+                                "skill_ids": mf_out["crystallized_skill_ids"],
+                            })
+                            continue
                     # Try coupled multi-file repair across sibling modules before recording open gap
                     coupled_out = repair_repository_in_cow_zygote(
                         cow_root,
                         skill_store=self.skill_store,
-                        apply_to_workspace=False,  # engine must not write the world; caller stages + accepts
+                        # True is safe ONLY because `ws` (first arg) is `cow_root`, the disposable
+                        # twin: the engine repairs inside its own private clone, so with False
+                        # there is nothing to read back and this path reported a repair it had not
+                        # made (measured 2026-11-05). What must never happen is copying the twin's
+                        # bytes into the real workspace -- that is what put `return 5` into a world
+                        # whose held-out input then failed. Staging plus the caller's
+                        # accept-or-discard is what stands between a candidate and the world.
+                        apply_to_workspace=True,
                     )
+                    _changed = []
                     if coupled_out.get("pass"):
                         if self.apply_verified_repairs:
                             for rel_rep in coupled_out.get("files_repaired") or []:
-                                _staged[str(rel_rep)] = (cow_root / rel_rep).read_text(
-                                    encoding="utf-8")
+                                if _stage_if_changed(str(rel_rep),
+                                                     (cow_root / rel_rep).read_text(encoding="utf-8")):
+                                    _changed.append(rel_rep)
+                    if _changed:
                         repaired_records.append({
                             "module": ",".join(coupled_out.get("files_repaired") or []),
                             "mode": coupled_out.get("mode") or "COW_ZYGOTE_COUPLED_REPAIR",
@@ -1186,20 +1239,19 @@ class AwakeAgencyDaemon:
                         self.skill_store.db_path,
                         str(cryst["skill_id"]),
                     )
-                if self.apply_verified_repairs:
-                    # The write to the real workspace is DEFERRED, not performed here. Verification
-                    # passed inside the CoW twin, but a twin's test file is not the world's: measured
-                    # 2026-11-04, the synth oracle accepted `return 5` for `add(2, 3) == 5` and the
-                    # workspace was overwritten with an answer a held-out input then failed. The twin's
-                    # version is kept, and the caller decides whether to accept it after seeing whether
-                    # the repair generalizes. A rejected candidate must leave no trace in the world.
-                    _staged[str(rel_mod)] = solved_src
-                repaired_records.append({
-                    "module": str(rel_mod),
-                    "mode": "AUTONOMOUS_COW_SYNTHESIS_AND_CRYSTALLIZATION",
-                    "crystallized": bool(cryst.get("crystallized")),
-                    "skill_id": cryst.get("skill_id"),
-                })
+                # The write to the real workspace is DEFERRED. Verification passed inside the CoW
+                # twin, but a twin's test file is not the world's: measured 2026-11-04, the synth
+                # oracle accepted `return 5` for `add(2, 3) == 5` and the workspace was overwritten
+                # with an answer a held-out input then failed. The caller decides, and a rejected
+                # candidate leaves no trace in the world.
+                if self.apply_verified_repairs and solved_src != before_src \
+                        and _stage_if_changed(str(rel_mod), solved_src):
+                    repaired_records.append({
+                        "module": str(rel_mod),
+                        "mode": "AUTONOMOUS_COW_SYNTHESIS_AND_CRYSTALLIZATION",
+                        "crystallized": bool(cryst.get("crystallized")),
+                        "skill_id": cryst.get("skill_id"),
+                    })
 
             # Polyglot confined test repair (`.js` / `.go` / `.rs`) via cross-language CST skill bridge
             for orig_ptf in poly_test_files:
@@ -1267,14 +1319,13 @@ class AwakeAgencyDaemon:
                 if recalled_p is not None:
                     patched_p = str(recalled_p["patched_source"])
                     cow_write_text(cow_pmod, patched_p)
-                    if self.apply_verified_repairs:
-                        _atomic_write_text(self.workspace_root / rel_pmod, patched_p)
-                    repaired_records.append({
-                        "module": str(rel_pmod),
-                        "language": lang,
-                        "mode": "POLYGLOT_CST_SKILL_TRANSFER",
-                        "skill_id": recalled_p.get("skill_id"),
-                    })
+                    if self.apply_verified_repairs and _stage_if_changed(str(rel_pmod), patched_p):
+                        repaired_records.append({
+                            "module": str(rel_pmod),
+                            "language": lang,
+                            "mode": "POLYGLOT_CST_SKILL_TRANSFER",
+                            "skill_id": recalled_p.get("skill_id"),
+                        })
 
         return {
             "tested": len(test_files) + len(poly_test_files),
