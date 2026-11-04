@@ -37,7 +37,7 @@
       "canonical/runtime/value_enumeration_v1.py",
       "canonical/runtime/value_algebra_v1.py",
       "canonical/tests/test_the_vocabulary_grows_from_data_not_from_sentences_v1.py",
-      "canonical/action_intents/ANSWER_SPACE_BUILT_FROM_VOCABULARY_20261104_V1.json"
+      "canonical/action_intents/OPERATOR_IS_ONE_DECLARATION_AND_IS_CHECKABLE_20261104_V1.json"
     ],
     "route_class": "COMPOSE",
     "producer_cognition_model_dependency_count": 0,
