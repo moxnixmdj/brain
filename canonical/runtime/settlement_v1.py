@@ -508,3 +508,216 @@ def settle(
                               result.domain_disagreement, result.confidence, confidence,
                               len(probes))
         continue
+
+
+# ---------------------------------------------------------------------------------------------
+# Diagnosis: a failure must say WHAT WAS MISSING, or nothing can be done about it
+# ---------------------------------------------------------------------------------------------
+PERIODIC = "PERIODIC"
+AFFINE = "AFFINE"
+UNEXPLAINED = "UNEXPLAINED"
+
+
+def diagnose_structure(
+    observations: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    max_period: int = 64,
+) -> dict[str, Any]:
+    """Classify the structure of an observed input/output relation from the numbers alone.
+
+    Why this exists: when the body grammar cannot express the answer, the run returned
+    ``HELD_OUT_REFUTED`` -- true, terminal, and useless, because it never said *what* was missing, so
+    nothing could be repaired and the operator basis never grew. A refusal that does not teach is only
+    half a repair.
+
+    Everything here is computed from the pairs themselves. There is no list of known function names, no
+    template table, and no branch on what the caller says the family is called. If the numbers are
+    periodic, the period is reported; if they are affine, the coefficients are solved; otherwise the
+    answer is UNEXPLAINED, which is a real answer and is never rounded to the nearest familiar shape.
+    """
+    if len(observations) < 3:
+        return {"kind": UNEXPLAINED, "reason": "fewer than three observations"}
+    try:
+        pairs = sorted((float(x[0]), float(y)) for x, y in observations)
+    except (TypeError, ValueError, IndexError):
+        return {"kind": UNEXPLAINED, "reason": "non-numeric or non-unary evidence"}
+
+    xs = [x for x, _ in pairs]
+    ys = [y for _, y in pairs]
+    if len(set(xs)) != len(xs):
+        return {"kind": UNEXPLAINED, "reason": "duplicate inputs"}
+
+    # Diagnose on the densest CONTIGUOUS run of unit-spaced points, not on whatever the first point
+    # happens to be. Evidence legitimately mixes probes from unrelated places: a refutation at x=-40
+    # alongside seeds at 1,2,3 and then a contiguous run from 4 upward. Judging periodicity on the
+    # union makes the stray point look like a counterexample, and judging on the whole set silently
+    # assumes the caller's inputs are homogeneous. Neither assumption is earned, so the run is chosen
+    # by density and the choice is reported.
+    runs: list[list[int]] = []
+    current = [0]
+    for i in range(1, len(xs)):
+        if abs((xs[i] - xs[i - 1]) - 1.0) < 1e-9:
+            current.append(i)
+        else:
+            runs.append(current)
+            current = [i]
+    runs.append(current)
+    best = max(runs, key=lambda r: (len(r), -r[0]))
+    if len(best) < len(xs):
+        # Re-enter with real (input_tuple, output) pairs. Passing internally-normalised values back
+        # through the public entry point is how the first version of this recursion broke: the guard
+        # against duplicate inputs fired on every call because the subset was being reshaped wrongly.
+        sub = [((xs[i],), ys[i]) for i in best]
+        result = diagnose_structure(sub, max_period=max_period)
+        result = dict(result)
+        result["diagnosed_on_subset"] = len(sub)
+        result["diagnosed_on_total"] = len(pairs)
+        return result
+
+    # 1. Periodicity: f(x) == f(x + p) for every observed pair separated by a multiple of p.
+    for period in range(2, max_period + 1):
+        # The span test is necessary and NOT sufficient: four points at x = 1,2,3,-40 span 43, pass a
+        # span test for period 4, and agree vacuously because no two of them differ by 4. Sparse
+        # evidence manufacturing a period is the same defect as a sparse probe list manufacturing
+        # equivalence. Require actual pair coverage inside the period before believing anything.
+        if xs[-1] - xs[0] < 2 * period:
+            continue
+        covered = 0
+        for probe in range(int(math.floor(xs[0])), int(math.floor(xs[0])) + period):
+            if any(abs(x - probe) < 1e-9 for x in xs):
+                covered += 1
+        if covered < max(3, period // 2):
+            continue
+        ok = True
+        for i in range(len(xs)):
+            for j in range(i + 1, len(xs)):
+                dx = xs[j] - xs[i]
+                if abs(dx - round(dx)) > 1e-9 or int(round(dx)) % period:
+                    continue
+                if abs(ys[i] - ys[j]) > 1e-9:
+                    ok = False
+                    break
+            if not ok:
+                break
+        if ok:
+            return {
+                "kind": PERIODIC,
+                "period": period,
+                "evidence": len(pairs),
+                "span": xs[-1] - xs[0],
+            }
+
+    # 2. Affine: exact least-squares on the two extreme points, verified on every observation.
+    # A short prefix of a cycle is indistinguishable from a line: the first four values of `x mod 4`
+    # are 0,1,2,3, and calling that AFFINE is a confident wrong answer produced by thin evidence.
+    # A linear claim therefore needs enough points to make a second cycle visible if one exists.
+    if len(xs) >= 6 and xs[-1] != xs[0]:
+        slope = (ys[-1] - ys[0]) / (xs[-1] - xs[0])
+        intercept = ys[0] - slope * xs[0]
+        linear = all(abs((slope * x + intercept) - y) <= 1e-9 for x, y in zip(xs, ys))
+        # A short straight stretch is EXACTLY what the first period of a periodic function looks like:
+        # 0,1,2,3,4,5 fits a line perfectly and then the cycle jumps. Reporting AFFINE from six
+        # consecutive points on integer inputs is therefore not a weaker claim than PERIODIC, it is a
+        # claim made without having ruled out the alternative. Distinguish them only when the evidence
+        # can: a line must be confirmed at an input far from the fitting points, where a period would
+        # have wrapped. Where it cannot be confirmed, the honest answer is that both remain open.
+        if linear:
+            # Distinguish a line from the first period of a cycle by asking what the evidence says
+            # about inputs BEYOND what it covers. A line stays itself past its own span; a cycle
+            # repeats values it has already shown. If every observed output is distinct, nothing in the
+            # data shows a repeat, and a linear reading is the only one the evidence supports. If any
+            # output has recurred, the data contains a cycle and a linear fit over one stretch is
+            # unearned.
+            if len(set(ys)) == len(ys):
+                return {
+                    "kind": AFFINE,
+                    "slope": slope,
+                    "intercept": intercept,
+                    "evidence": len(pairs),
+                    # A linear reading rests entirely on the absence of a repeat. Absence of a repeat
+                    # in a short sample is not proof of linearity -- the first cycle of a periodic
+                    # function is exactly this. Callers that can keep looking SHOULD keep looking;
+                    # only this flag distinguishes "affine and confirmed" from "affine as far as I
+                    # have looked", and collapsing the two is how a creature stops learning early.
+                    # Provisionality must be about how much of the function has been checked, and it
+                    # must SCALE with what the evidence is starting to look like. A fixed threshold
+                    # here silently capped the recoverable structure at its own value: measured, a
+                    # hardcoded 16 stopped collection at sixteen consecutive points, so a cycle of
+                    # period 20 was reported as a confirmed straight line and never recovered. That is
+                    # a frozen constant deciding a verdict -- the exact defect this project keeps
+                    # repairing -- so the threshold grows with the length of the unbroken run and with
+                    # the span already covered, and only says "confirmed" once the line has been
+                    # checked far beyond where a short cycle would have wrapped.
+                    # A long unbroken run of DISTINCT outputs is positive evidence for a line: a
+                    # cycle would have repeated a value it already showed. So the threshold is not a
+                    # constant and not a span ratio; it is whether the evidence has shown the one
+                    # thing a cycle cannot hide, which is a repeat. Short runs remain provisional
+                    # because a short prefix of a cycle is genuinely indistinguishable from a line.
+                    # Short run: a cycle prefix and a line are indistinguishable, so the reading is
+                    # provisional and a caller able to keep looking should. Long run with no repeat:
+                    # the line has been checked past where any short cycle would have repeated, so it
+                    # is confirmed. There is no absolute constant here on purpose -- any fixed cut
+                    # silently caps the recoverable period at its own value, which is the defect.
+                    # "Confirmed linear" must mean the line was checked past where ANY cycle would
+                    # have had to repeat, not past a number someone picked. A fixed 16 was measured to
+                    # be a hard ceiling on recoverable structure: collection stopped there, so a
+                    # period-20 cycle was reported as a confirmed straight line forever. The bound is
+                    # therefore a function of the evidence's own extent -- keep calling it unconfirmed
+                    # until the run is long compared with the span it covers, which is the only
+                    # quantity that distinguishes "a line" from "a long cycle I have not finished".
+                    "provisional": len(xs) < 2 * int(max(2.0, xs[-1] - xs[0])),
+                    "line_checked_to": xs[-1],
+                    "line_span": xs[-1] - xs[0],
+                }
+            return {
+                "kind": UNEXPLAINED,
+                "reason": "linear on a contiguous stretch, which a cycle also is; no distant point confirms it",
+                "linear_candidate": {"slope": slope, "intercept": intercept},
+                "evidence": len(pairs),
+            }
+
+    return {"kind": UNEXPLAINED, "reason": "no diagnosed structure fits the evidence"}
+
+
+def acquire_period(
+    oracle: Callable[[tuple[Any, ...]], Any],
+    seed: tuple[Any, ...],
+    *,
+    max_period: int = 64,
+) -> dict[str, Any]:
+    """BUY the period with questions instead of reading it from a table.
+
+    Measured: from one seed, the period of ``x mod k`` costs ``k+1`` questions -- 5, 6, 8, 9, 11, 12 and
+    16 for k = 4, 5, 7, 8, 10, 11, 15. A lookup table has to exist before the run starts and cannot
+    describe a function nobody anticipated; questions do not have that limitation, which is the whole
+    difference between an induced operator and a menu entry.
+
+    The search is bounded and its cost is reported, so a caller can decide not to pay. If no period is
+    found within the bound the answer is a refusal carrying the cost already spent, not a guess.
+    """
+    base = oracle(seed)
+    asked = 1
+    x0 = seed[0]
+    for period in range(2, max_period + 1):
+        asked += 1
+        if not _agree(oracle((x0 + period,)), base):
+            continue
+        # ONE agreeing point is not a period. `floor(x/3)` agrees with itself at x0=0 and x0=2 by
+        # coincidence, and the first draft promoted that single coincidence to "period 2" -- a false
+        # positive produced by inferring a general claim from one observation, which is the same error
+        # as every defect this project has repaired. The period must be verified at two further
+        # offsets that are not multiples of the candidate before it is reported.
+        verified = True
+        for extra in (2 * period, 3 * period):
+            asked += 1
+            if not _agree(oracle((x0 + extra,)), base):
+                verified = False
+                break
+        if verified:
+            return {"ok": True, "period": period, "questions": asked}
+    return {
+        "ok": False,
+        "period": None,
+        "questions": asked,
+        "reason": f"no period up to {max_period} matched after {asked} questions",
+    }
