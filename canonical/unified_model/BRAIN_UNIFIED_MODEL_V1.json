@@ -30950,7 +30950,7 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 310,
+  "knowledge_documents": 311,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6696,
   "routing_tokens": 2360,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0d394953d612fdc2c2936a517cc2f9e573accb3631a3c41838a82445b3a000a4"
+  "value": "7f6b4264077ff9966d06fb7cf43b97fc51beb295681fe04d5628cbe66110f0fc"
  },
  "engines": [
   {
@@ -55052,6 +55052,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6343,
+   "headings": [
+    "Round 28: the instrument was lying, and the abstraction was a bin",
+    "Defect 1: the self-model was reading the answer off the label",
+    "Defect 2: the shape key is worse than a constant",
+    "What turned out to be real",
+    "Measured",
+    "What I got wrong about method"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1.md",
+   "sha256": "abcceb08419b1478f6287c87696e330707bb6bb41f9bbb3e0b2121e44e303f24",
+   "summary": "Round 27 ended by challenging itself: *does the experience path carry anything worth having?* I closed with a floor and a promise to measure it. This round is that measurement, and the honest summary is that **most of what round 27 claimed does not survive it.**",
+   "terms": {
+    "0.615": 4,
+    "13": 4,
+    "19": 3,
+    "26": 3,
+    "27": 6,
+    "34": 3,
+    "48": 4,
+    "54": 4,
+    "abstraction": 5,
+    "accuracy": 4,
+    "after": 3,
+    "answer": 4,
+    "anything": 3,
+    "baseline": 4,
+    "beat": 3,
+    "because": 4,
+    "before": 5,
+    "budget": 5,
+    "built": 4,
+    "cold": 4,
+    "constant": 4,
+    "cost": 3,
+    "creature": 3,
+    "defect": 3,
+    "error": 4,
+    "every": 4,
+    "features": 5,
+    "fix": 4,
+    "form": 3,
+    "honest": 3,
+    "key": 5,
+    "mechanism": 4,
+    "must": 4,
+    "my": 5,
+    "no": 8,
+    "not": 18,
+    "one": 8,
+    "period": 4,
+    "real": 4,
+    "round": 12,
+    "self-model": 7,
+    "shape": 9,
+    "so": 5,
+    "solvable": 4,
+    "than": 6,
+    "warm": 4,
+    "worse": 6,
+    "wrong": 5
+   },
+   "title": "Round 28: the instrument was lying, and the abstraction was a bin",
+   "title_terms": [
+    "28",
+    "abstraction",
+    "bin",
+    "instrument",
+    "lying",
+    "round"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5430,
    "headings": [
     "The twelve-entry menu was deciding which functions exist",
@@ -68583,10 +68658,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1104,
+  "included_source_count": 1105,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5f2bdf71a8c0d01665b157a6b9a2244c63aaef3a783fbd83eed675680ac3114e"
+  "source_tree_digest": "48e55ab228d865442af28e7e76d3a3cfe8e1437cbefff718f9f1c7f5133e5b2d"
  },
  "research_index": [
   {
@@ -216004,31 +216079,6 @@
    }
   },
   {
-   "action_id": "A_SELF_MODEL_THAT_NEVER_OBSERVED_ITSELF_20261104_V1",
-   "capability": false,
-   "date": "2026-11-04",
-   "id": "research:canonical/action_intents/A_SELF_MODEL_THAT_NEVER_OBSERVED_ITSELF_20261104_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_SELF_MODEL_THAT_NEVER_OBSERVED_ITSELF_20261104_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "9afbc90242f238cac67cd0d38b5b6e4b772f42f8aa7aee85f82c7e22f3d8a021",
-   "status": "",
-   "terms": {
-    "20261104": 1,
-    "a_self_model_that_never_observed_itself_20261104_v1": 1,
-    "derive_what_is_a_theorem_and_name_what_is_only_a_policy": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "itself": 1,
-    "model": 1,
-    "never": 1,
-    "observed": 1,
-    "only_a_claim_the_evidence_could_have_refuted_may_become_permanent__zero_capability_credit__zero_terminal_credit__no_family_flipped__not_emergence": 1,
-    "self": 1,
-    "the_crystallizer_asked_does_it_fit_and_accepted_the_answer_it_never_asked_could_this_have_been_wrong_so_three_observations_that_exactly_determine_an_affine_fits_three_parameters_were_treated_as_corroboration_and_a_body_wrong_on_every_unseen_input_became_a_law": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "A_SENTENCE_CAN_ASK_FOR_TEXT_TO_BE_REPLACED_IN_A_FILE_SO_THE_EDIT_FAMILY_IS_NO_LONGER_UNAVAILABLE_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -224486,6 +224536,30 @@
     "v1": 2,
     "word": 2,
     "wrong": 4
+   }
+  },
+  {
+   "action_id": "THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ff3d74746c93e3e85ee055669d4aebaa815bbc2afaab845fd0d69af52c2cf071",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "abstraction": 1,
+    "bin": 1,
+    "derive_what_is_a_theorem_and_name_what_is_only_a_policy": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instrument": 1,
+    "lying": 1,
+    "only_a_claim_the_evidence_could_have_refuted_may_become_permanent__zero_capability_credit__zero_terminal_credit__no_family_flipped__not_emergence": 1,
+    "the_crystallizer_asked_does_it_fit_and_accepted_the_answer_it_never_asked_could_this_have_been_wrong_so_three_observations_that_exactly_determine_an_affine_fits_three_parameters_were_treated_as_corroboration_and_a_body_wrong_on_every_unseen_input_became_a_law": 1,
+    "the_instrument_was_lying_and_the_abstraction_was_a_bin_20261104_v1": 1,
+    "v1": 1
    }
   },
   {
@@ -250316,7 +250390,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/experience_v1.py",
-   "sha256": "e58858eb4f6d8e5657db84258ba8a612a767f2bccbb3b47c4e5be641e085f823",
+   "sha256": "a027c5b34c1d2b39e2c47f67cfdd4cef7c15342c2cc7d588796245c94f016300",
    "summary": "Experience: the part of memory that changes what the creature DOES, not just what it knows.",
    "symbol_count": 5,
    "symbols": [

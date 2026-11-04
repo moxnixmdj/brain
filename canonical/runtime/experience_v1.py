@@ -85,6 +85,7 @@ def problem_shape(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     *,
     candidate_count: int | None = None,
+    growth: bool = True,
 ) -> dict[str, Any]:
     """Describe a problem using ONLY information available before any question is asked.
 
@@ -127,12 +128,23 @@ def problem_shape(
         "distinct_outputs": len(outputs),
         "has_container": bool(has_container),
         "candidate_count": candidate_count,
+        "growth": bool(growth),
     }
 
 
 def shape_key(shape: Mapping[str, Any]) -> str:
     """A stable, human-readable key. Readable on purpose: this is meant to be inspected and argued
     with, not hidden inside a hash where it can grow into a lookup table nobody notices."""
+    # MEASURED 2026-11-04, and this key was under-specified in a way that made the whole ledger
+    # useless. Without `growth`, 13 of 26 benchmark tasks collapsed into ONE bucket spanning 1 to 54
+    # oracle questions, and the shape key predicted cost WORSE than a grand mean (leave-one-out MAE
+    # 9.74 vs 9.24). A bucket like that is not a generalisation, it is a bin.
+    #
+    # `growth` is the regime switch: whether the creature is willing to INDUCE a missing operator
+    # changes the cost distribution by an order of magnitude, and it is known before the attempt
+    # begins. That is the legitimate kind of refinement -- more PRE-DECISION information. It is NOT a
+    # licence to keep dividing until every task sits alone, which would be a lookup table wearing the
+    # word "shape"; `test_a_shape_is_not_a_lookup_table` pins that boundary.
     cc = shape.get("candidate_count")
     cc_part = "any" if cc is None else f"<={int(cc)}"
     return (
@@ -140,6 +152,7 @@ def shape_key(shape: Mapping[str, Any]) -> str:
         f"|given={int(shape.get('given') or 0)}"
         f"|distinct={int(shape.get('distinct_outputs') or 0)}"
         f"|container={int(bool(shape.get('has_container')))}"
+        f"|grow={int(bool(shape.get('growth', True)))}"
         f"|cands={cc_part}"
     )
 

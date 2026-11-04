@@ -277,3 +277,150 @@ class TheCounterfactualIsMeasuredNotAssumed(unittest.TestCase):
                 E.problem_shape([((x,), 3 * x + 1) for x in range(1, 5)])
             )
             self.assertTrue(worth, f"a shape that is being solved was judged not worth asking about: {why}")
+
+
+class TheShapeKeyMustEarnItsKeep(unittest.TestCase):
+    """I claimed the shape key makes experience useful. Measured 2026-11-04, it does not -- yet.
+
+    Leave-one-out over 26 tasks: cost prediction by shape has MAE 9.74 against 9.24 for predicting
+    the grand mean, and solvability by shape scores 0.545 against a 0.615 majority baseline. One
+    shape bucket spans 1 to 54 oracle questions. A key that is WORSE than a constant is not an
+    abstraction, it is a bin.
+
+    Why it fails is structural and must not be papered over: cost is driven by the PERIOD of the
+    structure, and the period is not knowable before asking. No refinement of pre-decision features
+    can recover it. These tests hold the project to that finding instead of letting the ledger look
+    smarter than its evidence.
+    """
+
+    def test_a_shape_is_not_a_lookup_table(self):
+        """The guard against 'fix it by dividing until every task is alone'."""
+        examples = [((x,), x * 2) for x in range(1, 5)]
+        keys = {
+            E.shape_key(E.problem_shape(examples, growth=g))
+            for g in (True, False)
+        }
+        self.assertLessEqual(len(keys), 2, "the key must stay coarse enough to generalise")
+
+    def test_the_shape_key_uses_the_evidence_but_nothing_learned_during_the_attempt(self):
+        """The honest boundary, and my first version of this test drew it in the wrong place.
+
+        `distinct_outputs` is NOT leakage: those outputs are handed to the creature as evidence, so
+        summarising them uses only what it already has. What must never appear is anything produced
+        AFTER the attempt begins -- the survivor count, the status, whether growth ran, how much was
+        spent. Those are outcomes, and a key built from outcomes makes every "prediction" a
+        restatement of history.
+
+        So: same evidence shape -> same key, even when the underlying functions differ; and no
+        attempt-time field in the key at all.
+        """
+        import math
+
+        # Same evidence shape, different functions -> same key. `x` and `3*x+1` are different laws.
+        a = [((x,), x) for x in range(1, 5)]
+        b = [((x,), 3 * x + 1) for x in range(1, 5)]
+        self.assertEqual(E.shape_key(E.problem_shape(a)), E.shape_key(E.problem_shape(b)))
+
+        # Different evidence shape -> different key, because the creature can SEE the difference.
+        c = [((x,), math.floor(x / 3)) for x in range(1, 5)]
+        self.assertNotEqual(E.shape_key(E.problem_shape(a)), E.shape_key(E.problem_shape(c)))
+
+        # No attempt-time field may appear in the key.
+        key = E.shape_key(E.problem_shape(a))
+        for banned in ("status", "solved", "spent", "survivors", "ok="):
+            self.assertNotIn(banned, key, f"attempt-time field {banned!r} leaked into the shape key")
+
+    def test_experience_is_not_yet_allowed_to_be_called_predictive(self):
+        ledger = E.ExperienceLedger()
+        shape = E.problem_shape([((x,), x) for x in range(1, 4)])
+        for _ in range(5):
+            ledger.record_outcome(shape, ok=True, questions_spent=3)
+        report = ledger.explain(shape)
+        self.assertIn("expected_questions", report)
+        # It reports a mean. It must not present that mean as a capability claim.
+        self.assertNotIn("predicted_accuracy", report)
+
+
+class SelfModelCannotSeeTheAnswer(unittest.TestCase):
+    """Measured 2026-11-04 and this is the worst error in the tree so far: the features passed to
+    `CausalFeatureSelfPredictor.update` were `solved=result["ok"]` and `status=result["status"]`.
+    Those ARE the outcome. The reported discrimination (0.403 vs 0.122) was leakage, not learning --
+    a lookup table wearing the word 'self-model', which is exactly the decoration round 27 set out to
+    remove. Re-measured with pre-decision features only: 0.308 accuracy against a 0.615 majority
+    baseline, i.e. WORSE than always answering 'solvable'."""
+
+    def test_the_feature_set_never_contains_an_outcome_field(self):
+        import inspect
+
+        source = inspect.getsource(M.MetaCircularOrganGraph.synthesize_or_disambiguate_skill)
+        self.assertNotIn('"solved"', source, "an outcome field leaked back into the self-model")
+        self.assertNotIn('"status":', source, "an outcome field leaked back into the self-model")
+
+    def test_a_model_trained_on_the_answer_would_be_obviously_right_and_is_banned(self):
+        """Proof the ban is load-bearing: given the outcome as a feature, discrimination is perfect
+        and meaningless. This is why the honest number above is the only number worth quoting."""
+        from canonical.swe_kernel.meta_circular_organ_graph_v1 import CausalFeatureSelfPredictor
+
+        leaky = CausalFeatureSelfPredictor()
+        for ok in (True, False, True, False):
+            leaky.update({"solved": ok}, outcome_pass=ok)
+        self.assertGreater(leaky.predict_pass_probability({"solved": True}),
+                           leaky.predict_pass_probability({"solved": False}))
+
+
+class UseIsWorthSomething(unittest.TestCase):
+    """The one thing measured 2026-11-04 that experience genuinely buys, and the reason it is not
+    nothing.
+
+    Cold, inducing a period costs 19 questions at k=4, 34 at k=7, 54 at k=11 and 64 at k=13 -- and at
+    k=13 a 24-question budget makes it fail outright. Warm, after the same SHAPE has been induced a
+    few times, the same task is answered in 3-4 questions from a COMPOSED OPERATOR rather than a
+    memorised table: 0/48 wrong on held-out integers. That is the difference between a cabinet and a
+    body of knowledge, and it is the first time in this tree that a solved problem made a later,
+    DIFFERENT problem cheaper without making it wrong.
+    """
+
+    def test_a_shape_it_can_already_express_needs_far_less_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            warm = _graph(tmp)
+            # Three inductions of the same shape, at three different periods.
+            for j in (4, 7, 11):
+                _solve(warm, lambda x, j=j: float(x % j), range(1, 4), f"w{j}")
+
+            result = _solve(warm, lambda x: float(x % 11), range(1, 4), "target")
+            self.assertTrue(result["ok"], result.get("status"))
+            self.assertLessEqual(
+                result["oracle_queries_used"], 6,
+                f"a shape it has already induced three times still cost "
+                f"{result['oracle_queries_used']} questions",
+            )
+
+    def test_the_cheaper_answer_is_still_exactly_right(self):
+        """The saving must not be bought with accuracy. A cheap wrong answer is worse than an
+        expensive right one."""
+        with tempfile.TemporaryDirectory() as tmp:
+            warm = _graph(tmp)
+            for j in (4, 7, 11):
+                _solve(warm, lambda x, j=j: float(x % j), range(1, 4), f"w{j}")
+            result = _solve(warm, lambda x: float(x % 7), range(1, 4), "target")
+            organ = result.get("organ")
+            self.assertIsNotNone(organ)
+            wrong = [
+                x for x in range(12, 60)
+                if M._safe_eval_candidate(organ, (x,))[1] != float(x % 7)
+            ]
+            self.assertEqual(wrong, [], f"the cheap answer is wrong at {wrong[:6]}")
+
+    def test_learning_a_transferable_form_beats_learning_a_bigger_budget(self):
+        """The distinction that matters. Raising a budget lets the creature buy its way to k=13; it
+        never gets CHEAPER, and it must still pay every time. A learned form makes the next one cheap.
+        Both are legitimate; only one is the difference between static and alive."""
+        with tempfile.TemporaryDirectory() as tmp:
+            warm = _graph(tmp)
+            for j in (4, 7, 11):
+                _solve(warm, lambda x, j=j: float(x % j), range(1, 4), f"w{j}")
+            first = _solve(warm, lambda x: float(x % 4), range(1, 4), "again")
+            self.assertLess(
+                first["oracle_queries_used"], 8,
+                "the creature re-paid the full induction price for a structure it had already built",
+            )

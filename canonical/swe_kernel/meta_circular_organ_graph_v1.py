@@ -4403,7 +4403,7 @@ class MetaCircularOrganGraph:
         try:
             from canonical.runtime import experience_v1 as _experience
 
-            shape = _experience.problem_shape(examples)
+            shape = _experience.problem_shape(examples, growth=bool(self.growth_enabled))
             spent = self.experience.expected_questions(shape)
             if spent is None:
                 return base
@@ -4676,7 +4676,7 @@ class MetaCircularOrganGraph:
         """
         from canonical.runtime import experience_v1 as _experience
 
-        shape = _experience.problem_shape(examples)
+        shape = _experience.problem_shape(examples, growth=bool(self.growth_enabled))
         self._last_avoidable_questions = 0
         result = self._synthesize_or_disambiguate_skill_impl(
             examples,
@@ -4726,13 +4726,27 @@ class MetaCircularOrganGraph:
         # nothing. Both are wired here, to the ONE event that is genuinely a self-observation --
         # this creature's own attempt, its own outcome, and what that attempt cost it.
         try:
+            # PRE-DECISION FEATURES ONLY, and the first version of this was a fabricated result
+            # because it was not.
+            #
+            # Measured 2026-11-04, and it is the worst kind of error in this tree so far: the features
+            # passed to `update` were `solved: result["ok"]` and `status: result["status"]`. Those ARE
+            # the outcome. The model was trained on the label and then asked to predict it, and it
+            # duly reported 0.403 for shapes it "kept solving" and 0.122 for ones it "kept failing".
+            # That discrimination was leakage, not learning -- I had wired a lookup table and reported
+            # it as a self-model, which is precisely the decorative construct this round set out to
+            # remove. Re-measured with pre-decision features only, over 26 tasks: solvability accuracy
+            # 0.308 against a 0.615 majority baseline, i.e. WORSE than always answering "solvable".
+            #
+            # Nothing that is known only AFTER the attempt may enter the features. `candidate_count`
+            # is allowed because the grammar search is free -- it spends no oracle question -- so it
+            # is genuinely available before the creature commits to asking anything.
             features = {
                 "arity": shape["arity"],
                 "given": shape["given"],
                 "distinct_outputs": shape["distinct_outputs"],
                 "has_container": shape["has_container"],
-                "solved": bool(result.get("ok")),
-                "status": str(result.get("status") or ""),
+                "candidate_count": int(getattr(self, "_last_candidate_count", 0) or 0),
             }
             self.predictor.update(
                 features,
@@ -4901,6 +4915,10 @@ class MetaCircularOrganGraph:
             return sorted(surviving, key=lambda o: (o.code_bytes, o.organ_id))
 
         candidate_organs = _collect_candidates(work_examples)
+        #: How many syntactic survivors the grammar produced. Free to compute -- it spends no oracle
+        #: question -- so it is a legitimate PRE-DECISION feature, unlike the outcome fields that
+        #: leaked into the self-model on 2026-11-04 and made its reported discrimination meaningless.
+        self._last_candidate_count = len(candidate_organs)
         seen_ast = {o.organ_id for o in candidate_organs}
         if not candidate_organs:
             # The grammar produced NOTHING. This is the strongest form of failure and it used to be

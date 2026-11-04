@@ -1,5 +1,5 @@
 {
-  "action_id": "A_SELF_MODEL_THAT_NEVER_OBSERVED_ITSELF_20261104_V1",
+  "action_id": "THE_INSTRUMENT_WAS_LYING_AND_THE_ABSTRACTION_WAS_A_BIN_20261104_V1",
   "action_intent_id": "A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "action_summary": "Round 26 answers round 25's open xfail. x*x + y over three points was CRYSTALLISED as (4.5*x0)+(-0.5*x1)+-0.5, which returns 34.5 where the truth is 120 at (10,20). The cause is not a weak search: x*x+y and x+y fit those same three points perfectly, because three observations exactly determine an affine fit's three parameters, so the body has zero residual on zero leftover data. The crystallizer asked 'does it fit?' and accepted the answer; it never asked 'could this have been wrong?'. That is round 25's defect in a different costume -- 25 spoke about the grammar from an unfinished search, 26 spoke of crystallisation for a claim nothing had tested. A new module, refutability_v1, withholds each observation, refits the rest, and reports REFUTABLE / NOT_REFUTABLE / TOO_FEW_POINTS from the evidence alone -- no oracle and no cooperation required. The third verdict is the finding, not a cop-out: with n <= parameters the question has no answer, and saying so is different from either yes or no. Only REFUTABLE may become permanent. This is REUSE of what the tree already had -- generalization_check_v1.classify holds points back and is used by SEVEN modules, while the crystallizer, the one place that grants permanence, used it not at all. The most important result is uncomfortable: EVERY failure while building this was the instrument, not the reasoner -- a vacuous test that failed all laws, an unusable API, backwards degrees of freedom, an auditor narrower than the synthesizer, a sandbox without `sorted`, a header-split that read a correct body as overfit three times, a shadowed variable that discarded every validated body, and a doubled return. Five of them presented as findings. A creature whose instruments are weaker than its reasoner does not discover its own blindness; it reports the blindness as a property of the world. Round 22's inert library, round 24's 'the grammar is the limit' and round 25's 'the rewind' were all this error.",
@@ -75,7 +75,7 @@
     "success_probability_lcb": "1",
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "THE_SELF_MODEL_WAS_NEVER_TRAINED_PREDICTOR_UPDATE_CALLED_ZERO_TIMES_WHILE_SUMMARY_PUBLISHED_PREDICTOR_OBSERVATIONS_AND_PREDICT_PASS_PROBABILITY_RETURNED_A_CONSTANT_0_5__NOW_TRAINED_BY_THE_CREATURES_OWN_ATTEMPTS_0_TO_27_OBSERVATIONS_AND_DISCRIMINATES_SOLVABLE_0_403_FROM_HOPELESS_0_122__EXPERIENCE_LEDGER_KEYED_BY_PRE_DECISION_PROBLEM_SHAPE_RECORDS_EVERY_EXIT_PATH_VIA_A_WRAPPER_AND_SIZES_GROWTH_INVESTMENT_ONE_DIRECTIONALLY_24_TO_38_TO_53_TO_71_NEVER_NARROWING__RECORDED_NEGATIVE_RESULT_AN_AVOIDABLE_QUESTION_METRIC_THAT_COUNTED_REFUTATION_PROBES_AS_WASTE_12_OF_25_AND_WAS_CORRECTED_BEFORE_IT_COULD_SUPPRESS_VERIFICATION",
+  "measured_effect": "THE_SELF_MODEL_TRAINED_ON_SOLVED_AND_STATUS_WHICH_ARE_THE_OUTCOME_SO_ITS_REPORTED_DISCRIMINATION_0_403_VS_0_122_WAS_LEAKAGE__NOW_PRE_DECISION_FEATURES_ONLY_AND_HONEST_ACCURACY_IS_0_308_AGAINST_A_0_615_MAJORITY_BASELINE_THEREFORE_BARRED_FROM_GOVERNING__THE_SHAPE_KEY_PREDICTS_COST_WORSE_THAN_A_GRAND_MEAN_MAE_9_74_VS_9_24_AND_SOLVABILITY_WORSE_THAN_BASE_RATE_0_545_VS_0_615_WITH_ONE_BUCKET_SPANNING_1_TO_54_QUESTIONS_BECAUSE_COST_IS_DRIVEN_BY_THE_PERIOD_WHICH_IS_NOT_KNOWABLE_BEFORE_ASKING__THE_REAL_RESULT_IS_TRANSFER_WARM_3_TO_4_QUESTIONS_VS_COLD_19_34_54_VIA_A_COMPOSED_OPERATOR_WITH_0_OF_48_HELD_OUT_WRONG",
   "next_step": "MEASURE_WHETHER_TOO_FEW_POINTS_CAN_BE_TREATED_AS_A_SHOPPING_LIST__THE_MODULE_CAN_NOW_SAY_THE_EVIDENCE_IS_INCAPABLE_BUT_THE_CREATURE_DOES_NOT_YET_DECIDE_HOW_MANY_MORE_OBSERVATIONS_WOULD_MAKE_A_CLAIM_REFUTABLE",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
@@ -248,7 +248,7 @@
           "route": "WIRE_THE_CONCEPT_LIBRARY_IN_AS_A_TEMPLATE_SOURCE"
         }
       ],
-      "checked_at_utc": "2026-11-04T15:07:04Z",
+      "checked_at_utc": "2026-11-04T15:22:18Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -258,7 +258,7 @@
         "VERIFIABILITY"
       ],
       "discovery_required": true,
-      "incumbent_route": "EXPERIENCE_MUST_GOVERN_EFFORT_NOT_WITHHOLD_EVIDENCE",
+      "incumbent_route": "MEASURE_AGAINST_THE_TRIVIAL_ALTERNATIVE_BEFORE_CLAIMING_A_MECHANISM",
       "max_age_hours": 2,
       "negative_search_summary": "No challenger removes the need for the closure rule: wiring the library in was measured inert on this corpus, and one node per composed form rebuilds the menu a level up. The library-learning challenger stays recorded as non-dominating and is not displaced; it becomes useful when the corpus contains varied searched programs rather than one solved skeleton.",
       "query_families": [
@@ -285,10 +285,10 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "EXPERIENCE_MUST_GOVERN_EFFORT_NOT_WITHHOLD_EVIDENCE",
+      "selected_route": "MEASURE_AGAINST_THE_TRIVIAL_ALTERNATIVE_BEFORE_CLAIMING_A_MECHANISM",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-04T15:07:04Z",
+        "checked_at_utc": "2026-11-04T15:22:18Z",
         "execution_dependencies": [
           {
             "dependency": "CPython 3.11 standard library runtime",
@@ -339,7 +339,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "EXPERIENCE_MUST_GOVERN_EFFORT_NOT_WITHHOLD_EVIDENCE",
+        "selected_route": "MEASURE_AGAINST_THE_TRIVIAL_ALTERNATIVE_BEFORE_CLAIMING_A_MECHANISM",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -376,8 +376,8 @@
       "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
       "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
     ],
-    "selected_route": "EXPERIENCE_MUST_GOVERN_EFFORT_NOT_WITHHOLD_EVIDENCE",
-    "selected_surviving_route": "EXPERIENCE_MUST_GOVERN_EFFORT_NOT_WITHHOLD_EVIDENCE",
+    "selected_route": "MEASURE_AGAINST_THE_TRIVIAL_ALTERNATIVE_BEFORE_CLAIMING_A_MECHANISM",
+    "selected_surviving_route": "MEASURE_AGAINST_THE_TRIVIAL_ALTERNATIVE_BEFORE_CLAIMING_A_MECHANISM",
     "stop_condition": "15_NEW_TESTS_PASS__A_22_SUITE_REGRESSION_AT_291_PASSED_WITH_ONE_PRE_EXISTING_FAILURE_THAT_FAILS_IDENTICALLY_ON_THE_STASHED_BASELINE__ROUND_24_COMPOSITIONS_ZERO_OF_150_HELD_OUT_WRONG__ROUND_25_CASES_ALL_EXACT_WHEN_TESTED__REFUTABILITY_SEPARATES_REFUTABLE_NOT_REFUTABLE_AND_TOO_FEW_POINTS_ON_EIGHT_CASES__MODEL_ARTIFACT_VERIFIES_33_OF_33__ZERO_CAPABILITY_CREDIT",
     "why_selected_route_is_fastest_sufficient": "INVERTING_ONE_COMBINING_OPERATION_AND_TESTING_CONSTANCY_PER_RESIDUE_COVERS_T(x)+x_T(x)-x_T(x)*x_AND_T(x)+x*x_WITH_NO_NEW_NODE_PER_CASE_AND_NO_ENUMERATION__EVERY_CANDIDATE_STILL_ENTER THE_EXISTING_VERSION_SPACE"
   },
