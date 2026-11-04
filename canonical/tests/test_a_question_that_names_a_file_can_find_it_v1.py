@@ -105,3 +105,76 @@ def test_the_full_door_answers_a_question_it_used_to_refuse():
     answer = out.get("answer") or {}
     assert answer.get("verdict") == "GROUNDED", answer
     assert out.get("verification", {}).get("verified") is True
+
+
+# ---------------------------------------------------------------------------
+# A question that names NO file asks for a SET, not for a word occurrence.
+# ---------------------------------------------------------------------------
+
+def test_a_listing_question_is_answered_by_enumerating_not_searching():
+    """'list the files in this directory' names nothing inside the tree, so no term
+    can ever match. It returned NOTHING_FOUND on a directory holding three files."""
+    root = _tree(**{"a.py": "x = 1\n", "b.md": "# b\n", "c.json": "{}\n"})
+    answer = I.answer("list the files in this directory", root)
+    assert answer["verdict"] == "GROUNDED"
+    assert answer["total"] == 3
+    assert {h["file"] for h in answer["hits"]} == {"a.py", "b.md", "c.json"}
+
+
+def test_the_listing_gate_does_not_swallow_content_questions():
+    """`files` alone must not make a question a listing. The gate needs a listing verb."""
+    assert I.wants_a_listing("list the files in this directory")
+    assert I.wants_a_listing("which files exist here")
+    assert not I.wants_a_listing("what is retries in files")
+    assert not I.wants_a_listing("how many lines are in a.py")
+    # A listing verb alone is not a listing: "list the exports of data.py" asks for the
+    # contents of one named file. Dropping the container half turns it into a directory
+    # listing and answers a question nobody asked.
+    assert not I.wants_a_listing("list the exports of data.py")
+
+
+def test_a_listing_verb_pointed_at_a_named_file_is_not_a_listing():
+    """The container word is what distinguishes 'which files are here' from
+    'what is in this one file'. Without it the gate answers the wrong question."""
+    root = _tree(**{"data.py": "exports = ['a']\n", "other.txt": "unrelated\n"})
+    answer = I.answer("list the exports of data.py", root)
+    assert [h["file"] for h in answer["hits"]] != ["data.py", "other.txt"]
+    assert all(h.get("matched") != "listing" for h in answer["hits"])
+
+
+def test_a_content_question_that_mentions_files_still_searches_content():
+    root = _tree(**{"notes.md": "retries is a word in here\n"})
+    answer = I.answer("what is retries in files", root)
+    assert any(h["file"] == "notes.md" for h in answer["hits"])
+
+
+def test_a_listing_hit_claims_existence_and_no_line():
+    root = _tree(**{"a.py": "x = 1\n"})
+    hits = I.listing(root)
+    assert hits[0]["line"] == 0
+    assert hits[0]["matched"] == "listing"
+    assert hits[0]["text"] == ""
+
+
+def test_a_listing_does_not_resurrect_the_missing_directory_ambiguity():
+    """'I could not look' and 'there is nothing there' are different facts."""
+    import pytest as _pytest
+    with _pytest.raises(NotADirectoryError):
+        I.listing("/tmp/definitely-not-a-real-directory-zzz")
+
+
+def test_the_whole_door_answers_five_plain_questions():
+    """The capability probe, as a test. 1/5 before the filename fix, 5/5 after."""
+    from canonical.runtime import autonomous_v1 as A
+
+    root = _tree(**{"data.py": "ITEMS = ['a','b','c']\nTOTAL = 6\n",
+                    "notes.md": "# Plan\n- first\n",
+                    "conf.json": '{"retries": 3}\n'})
+    questions = ["how many lines are in data.py", "what does data.py define",
+                 "what is retries in conf.json", "what does notes.md say",
+                 "list the files in this directory"]
+    for q in questions:
+        out = A.run(goal=q, root=root, iterations=8)
+        answer = out.get("answer") or {}
+        assert answer.get("verdict") in ("GROUNDED", "PARTIALLY_GROUNDED"), (q, answer.get("verdict"))
+        assert answer.get("grounded", 0) > 0, (q, answer)

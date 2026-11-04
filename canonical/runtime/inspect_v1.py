@@ -78,6 +78,51 @@ def question_terms(question: str) -> list[str]:
     return out
 
 
+# A LISTING QUESTION NAMES NO FILE, SO NO TERM CAN MATCH.
+#
+# "list the files in this directory" asks for the SET of entries. Every term in it
+# (`list`, `files`, `directory`) describes the request rather than naming a thing
+# inside the tree, so content matching can never answer it, and it returned
+# NOTHING_FOUND while the directory held three files. That is a different operation
+# from "where does this word appear", and it is answered by enumerating rather than
+# by searching.
+#
+# It is gated on the question ASKING FOR A LISTING, not on the word `files` alone:
+# "what is retries in files" is a content question and must stay one.
+_LISTING = re.compile(r"\b(list|listing|enumerate|what files|which files|what's in|"
+                      r"whats in|contents of|ls)\b", re.I)
+_CONTAINER = re.compile(r"\b(files?|dir|directory|folder|entries|contents|here)\b", re.I)
+
+
+def wants_a_listing(question: str) -> bool:
+    """Is this question asking for a set of entries rather than a word occurrence?"""
+    q = question or ""
+    return bool(_LISTING.search(q)) and bool(_CONTAINER.search(q))
+
+
+def listing(root: str, limit: int = 40) -> list[dict]:
+    """Every file under `root`, as hits: the answer to a listing question.
+
+    Recorded at line 0 with `matched: "listing"`, for the same reason a filename hit
+    is: it says this file EXISTS, and claims nothing about its contents.
+    """
+    base = Path(root)
+    if not base.is_dir():
+        raise NotADirectoryError(f"cannot inspect {root!r}: not a directory")
+    out: list[dict] = []
+    for path in sorted(base.rglob("*")):
+        if len(out) >= limit:
+            break
+        if not path.is_file():
+            continue
+        rel = path.relative_to(base).as_posix()
+        if _SKIP.search(rel):
+            continue
+        out.append({"file": rel, "line": 0, "term": "<listing>",
+                    "text": "", "matched": "listing"})
+    return out
+
+
 def find(root: str, terms: list[str], limit: int = 40) -> list[dict]:
     """Where the project mentions these words.
 
@@ -184,7 +229,10 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
             "detail": f"{root!r} is not a directory; nothing could be read",
         }
     terms = question_terms(question)
-    hits = find(root, terms, limit=limit)
+    # A listing question asks for a SET, not for a word occurrence. Routing it to
+    # `find` is what made "list the files in this directory" return NOTHING_FOUND on a
+    # directory holding three files: no term in it names anything inside the tree.
+    hits = listing(root, limit=limit) if wants_a_listing(question) else find(root, terms, limit=limit)
 
     try:
         import grounding_v1 as G
@@ -193,7 +241,7 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
 
     claims, results = [], []
     for h in hits:
-        if h.get("matched") == "filename":
+        if h.get("matched") in ("filename", "listing"):
             # A filename hit claims the file EXISTS, not that it contains some text.
             # The generic claim (`file` contains `text`) grounds by searching the body,
             # and for a name hit the body text is empty -- so it correctly refused, and
