@@ -3021,6 +3021,62 @@ def _apply_nested_fn(
         return None
 
 
+def _structural_policy_mutations(source_code: str) -> list[str]:
+    """Produce structurally different POLICY genomes (flat one-level unlock, not recursive `_q`)."""
+    src = str(source_code or "")
+    if not src.strip():
+        return []
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+
+    class _InnerQ(ast.NodeTransformer):
+        def visit_Call(self, node: ast.Call) -> ast.AST:
+            self.generic_visit(node)
+            if not (isinstance(node.func, ast.Name) and node.func.id == "_q" and node.args):
+                return node
+            u = node.args[0]
+            return ast.Subscript(
+                value=ast.Subscript(
+                    value=ast.Name(id="by_id", ctx=ast.Load()),
+                    slice=u,
+                    ctx=ast.Load(),
+                ),
+                slice=ast.Constant(value="value"),
+                ctx=ast.Load(),
+            )
+
+        def visit_Assign(self, node: ast.Assign) -> ast.AST:
+            self.generic_visit(node)
+            if (
+                len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+                and node.targets[0].id == "candidates"
+                and isinstance(node.value, ast.BoolOp)
+                and isinstance(node.value.op, ast.Or)
+                and node.value.values
+            ):
+                return ast.Assign(targets=node.targets, value=node.value.values[0])
+            return node
+
+    class _FlattenRecursiveQ(ast.NodeTransformer):
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
+            if node.name != "_q":
+                return self.generic_visit(node)
+            return _InnerQ().visit(node)
+
+    new_tree = _FlattenRecursiveQ().visit(copy.deepcopy(tree))
+    ast.fix_missing_locations(new_tree)
+    try:
+        after = ast.unparse(new_tree) + "\n"
+    except Exception:
+        return []
+    if after == src:
+        return []
+    return [after]
+
+
 def _successors_from_incumbent_source(
     source_code: str,
     *,
@@ -3074,20 +3130,27 @@ def _successors_from_incumbent_source(
                 out.extend(list(mutate_organ_source(seed) or ())[:2])
             except Exception:
                 continue
+    structural: list[str] = []
+    for seed in [source_code, *out[:3]]:
+        try:
+            structural.extend(_structural_policy_mutations(seed))
+        except Exception:
+            continue
     rewritten: list[str] = []
-    for s in [source_code, *out]:
+    for s in [source_code, *out, *structural]:
         eg = _egraph_simplify_organ_source(s)
         if eg:
             rewritten.append(eg)
-    out.extend(rewritten)
     seen: set[str] = {source_code}
     uniq: list[str] = []
-    for s in out:
+    for s in [*out[:4], *structural, *out[4:], *rewritten]:
         if not s or s in seen:
             continue
         seen.add(s)
         uniq.append(s)
-    return uniq[:8]
+        if len(uniq) >= 10:
+            break
+    return uniq
 
 
 def synthesize_world_model_organ(
@@ -3359,6 +3422,16 @@ class MetaCircularOrganGraph:
         self.concept_library = concept_library
         self._world_transitions: list[dict[str, Any]] = []
         self.bootstrap_inductions: int = 0
+        self.policy_archive: Any | None = None
+        if self.state_path is not None:
+            try:
+                from canonical.swe_kernel.recursive_self_architect_v1 import QualityDiversitySelfArchive
+
+                self.policy_archive = QualityDiversitySelfArchive(
+                    self.state_path.with_name("policy_qd_archive_v1.json")
+                )
+            except Exception:
+                self.policy_archive = None
         if self.state_path is not None and self.state_path.is_file():
             self._load()
 
@@ -3469,66 +3542,107 @@ class MetaCircularOrganGraph:
             if md.get("learned_immediate") and isinstance(md.get("learned_immediate_src"), str):
                 if not learned:
                     learned = str(md.get("learned_immediate_src"))
-            srcs = _successors_from_incumbent_source(
-                incumbent.source_code,
-                learned_immediate=learned,
-                learned_combiner=comb_learned,
-                concept_library=self.concept_library,
-            )
-            for src in srcs:
+            parents = [incumbent.source_code]
+            if self.policy_archive is not None:
                 try:
-                    rec = make_organ(
-                        stratum=POLICY,
-                        name=incumbent.name,
-                        task_signature="policy::instrumental_q",
-                        entrypoint=incumbent.entrypoint,
-                        source_code=src,
-                        parent_organ_ids=(incumbent.organ_id, *incumbent.parent_organ_ids)[:8],
-                        metadata={
-                            **dict(incumbent.metadata),
-                            "from_incumbent": True,
-                            "bootstrap_factory": False,
-                            "learned_immediate": bool(learned),
-                            "learned_combiner": bool(comb_learned),
-                        },
-                    )
-                except OrganSafetyError:
+                    parents.extend(list(self.policy_archive.elite_organ_sources(limit=3) or ()))
+                except Exception:
+                    pass
+            seen_parent: set[str] = set()
+            for parent_src in parents:
+                if not parent_src or parent_src in seen_parent:
                     continue
-                rec.verified_passes = max(incumbent.verified_passes, len(self._world_transitions) + 8)
-                if learned:
-                    rec.metadata["learned_immediate_src"] = learned
-                if comb_learned:
-                    rec.metadata["learned_combiner_src"] = comb_learned
-                candidates.append(rec)
+                seen_parent.add(parent_src)
+                srcs = _successors_from_incumbent_source(
+                    parent_src,
+                    learned_immediate=learned,
+                    learned_combiner=comb_learned,
+                    concept_library=self.concept_library,
+                )
+                parent_id = incumbent.organ_id if parent_src == incumbent.source_code else "archive_elite"
+                for src in srcs:
+                    if len(candidates) >= 12:
+                        break
+                    try:
+                        rec = make_organ(
+                            stratum=POLICY,
+                            name=incumbent.name,
+                            task_signature="policy::instrumental_q",
+                            entrypoint=incumbent.entrypoint,
+                            source_code=src,
+                            parent_organ_ids=(incumbent.organ_id, *incumbent.parent_organ_ids)[:8],
+                            metadata={
+                                **dict(incumbent.metadata),
+                                "from_incumbent": parent_id == incumbent.organ_id,
+                                "from_archive_elite": parent_id == "archive_elite",
+                                "bootstrap_factory": False,
+                                "learned_immediate": bool(learned),
+                                "learned_combiner": bool(comb_learned),
+                            },
+                        )
+                    except OrganSafetyError:
+                        continue
+                    rec.verified_passes = max(incumbent.verified_passes, len(self._world_transitions) + 8)
+                    rec.metadata["learned_immediate"] = "def _immediate" in src
+                    rec.metadata["learned_combiner"] = "def _combine" in src
+                    if learned:
+                        rec.metadata["learned_immediate_src"] = learned
+                    if comb_learned:
+                        rec.metadata["learned_combiner_src"] = comb_learned
+                    candidates.append(rec)
+                if len(candidates) >= 12:
+                    break
 
+        admitted: list[ExecutableOrgan] = []
         for organ in candidates:
             verdict = admit_policy_organ(organ, traces)
             if not verdict.get("ok"):
                 continue
             self.register_organ(organ)
-            self.primary_by_sig[(POLICY, "policy::instrumental_q")] = organ.organ_id
-            comb_body = organ.metadata.get("learned_combiner_src")
-            try:
-                comb_organ = compile_combiner_organ(
-                    body=comb_body if isinstance(comb_body, str) else None
-                )
-                self.register_organ(comb_organ)
-                prev = [
-                    o
-                    for o in self.organs_in_stratum(SKILL)
-                    if o.task_signature == "policy::combiner" and o.organ_id != comb_organ.organ_id
-                ]
-                if prev:
-                    meta = compile_meta_synthesizer_organ(
-                        prev[0], comb_organ, tactic_name="policy_combiner_meta"
+            admitted.append(organ)
+            if self.policy_archive is not None:
+                try:
+                    self.policy_archive.record_organ_source(
+                        source_code=organ.source_code,
+                        organ_id=organ.organ_id,
+                        score=float(organ.pareto_score),
+                        stratum=POLICY,
                     )
-                    if meta is not None:
-                        self.register_organ(meta)
-            except OrganSafetyError:
-                pass
-            self._save()
-            return organ
-        return incumbent
+                except Exception:
+                    pass
+        if not admitted:
+            return incumbent
+        best = max(
+            admitted,
+            key=lambda o: (
+                1 if o.metadata.get("learned_immediate") else 0,
+                1 if o.metadata.get("from_incumbent") else 0,
+                o.verified_passes,
+                o.pareto_score,
+            ),
+        )
+        self.primary_by_sig[(POLICY, "policy::instrumental_q")] = best.organ_id
+        comb_body = best.metadata.get("learned_combiner_src")
+        try:
+            comb_organ = compile_combiner_organ(
+                body=comb_body if isinstance(comb_body, str) else None
+            )
+            self.register_organ(comb_organ)
+            prev = [
+                o
+                for o in self.organs_in_stratum(SKILL)
+                if o.task_signature == "policy::combiner" and o.organ_id != comb_organ.organ_id
+            ]
+            if prev:
+                meta = compile_meta_synthesizer_organ(
+                    prev[0], comb_organ, tactic_name="policy_combiner_meta"
+                )
+                if meta is not None:
+                    self.register_organ(meta)
+        except OrganSafetyError:
+            pass
+        self._save()
+        return best
 
     # ------------------------------------------------- Sensorogenesis API
 
