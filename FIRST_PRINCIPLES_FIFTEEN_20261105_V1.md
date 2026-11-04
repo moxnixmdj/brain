@@ -92,3 +92,38 @@ Different at the end than the start, in the way that matters most: not one more 
 screen that tests what it says it tests. The creature repairs worlds in a class it could not touch
 this morning — and, more consequentially, every measurement in this project is now being taken with an
 instrument that is honest, which changes the value of everything measured before it.
+
+---
+
+## Addendum — S11 executed: the screen bug was costing more than indexing
+
+Re-measured every `operator_family` shape on the fixed screen (hard-link restore):
+
+| shape | before (poisoned screen) | after (fixed) |
+|---|---|---|
+| binop, cmp_gte, mul, mod, augassign, augassign2, whileacc, floordiv, cmp_eq, cmp_lt | solved | solved |
+| **offbyone** | **UNSOLVED** | **SOLVED at index 6** |
+| **boolop** | **UNSOLVED** | **SOLVED at index 0** |
+| total | 10/12 | **12/12** |
+
+`offbyone`'s only correct candidate sits at index 6 — precisely the first slot the symlink bug
+destroyed. A producer that was written off as "does not cover this shape" was covering it, and the
+screen was testing the base file instead. `boolop`'s original failure was my own arithmetic error in
+the world (`f(True, False)` can never distinguish `and` from `or`), not a capability limit.
+
+Prediction from S11 (stated before running it): *"at least one producer that appeared to cover N
+shapes actually covers more, because its correct candidates were in slots 6+."* It was right, and it
+was right for the reason that matters — the measurement, not the mechanism.
+
+**The standing conclusion of passes twelve through fifteen:**
+
+| pass | what was actually broken |
+|---|---|
+| 12 | the screen reported no reason for a failure |
+| 14 | the reason arrived truncated |
+| 15 | the screen tested the base file instead of the candidate |
+| 15 addendum | therefore two shapes were mis-scored as unsolved |
+
+Four passes of capability work; the three largest wins were repairs to the instrument. Every number in
+passes ten through fourteen that depended on a candidate at index ≥ 6 is now suspect and should be
+re-taken, and the ones re-taken here moved in the direction of *more* capability, not less.
