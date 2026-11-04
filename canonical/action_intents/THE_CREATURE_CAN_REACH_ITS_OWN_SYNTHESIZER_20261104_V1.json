@@ -7,7 +7,7 @@
   "route_id": "THE_CREATURE_CAN_REACH_ITS_OWN_SYNTHESIZER_20261104_V1",
   "date": "2026-11-04",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "644b17b593972d72515dc697869411f2190d93b6",
+  "canonical_base_commit": "9e45ed6b9176dc39ab67e4cf90a4dd3b13b546d4",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -88,7 +88,7 @@
     "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "644b17b593972d72515dc697869411f2190d93b6",
+    "canonical_base_commit": "9e45ed6b9176dc39ab67e4cf90a4dd3b13b546d4",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "real_outcome": "AN_UNROUTED_PROBLEM_IS_ATTEMPTED_INSTEAD_OF_REFUSED_BY_A_FROZEN_PREFIX_LIST_AND_THE_DEAD_REPAIR_ROUTE_IS_LIVE",
@@ -110,7 +110,7 @@
     ],
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-11-04T11:19:46Z",
+      "checked_at_utc": "2026-11-04T11:41:31Z",
       "max_age_hours": 24,
       "incumbent_route": "FOUR_FROZEN_WORK_ID_PREFIXES_WITH_UNSUPPORTED_WORK_KIND_FALLTHROUGH__EVERY_UNRECOGNISED_PROBLEM_REFUSED_BEFORE_ANY_REASONING",
       "source_classes_checked": [
@@ -275,7 +275,7 @@
       ],
       "negative_search_summary": "No challenger removes the need for this routing change: the synthesizer already answers unseen tasks and the only missing part was the door. The larger challenger, Stitch-style library learning, is NOT displaced by routing and is recorded as the next frontier, because the measured concept library is empty and the two induced period tables differ only in a literal -- so there is currently no discovered abstraction that could make a related problem cheaper.",
       "selected_route_preflight": {
-        "checked_at_utc": "2026-11-04T11:19:46Z",
+        "checked_at_utc": "2026-11-04T11:41:31Z",
         "max_age_hours": 2,
         "selected_route": "UNROUTED_WORK_ROUTED_TO_THE_EXISTING_SETTLED_SYNTHESIZER_KEYED_BY_EVIDENCE_SHAPE",
         "status": "READY",
@@ -455,7 +455,7 @@
   "next_step": "MEASURE_WHETHER_THE_INDUCED_BLOCK_STRUCTURE_COMBINES_WITH_A_SECOND_OPERATOR_INTO_SOMETHING_NEITHER",
   "route_frontier": {
     "discovery_required": true,
-    "checked_at_utc": "2026-11-04T11:19:46Z",
+    "checked_at_utc": "2026-11-04T11:41:31Z",
     "max_age_hours": 24
   }
 }

@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d44ac5d69e4bf70f862be261777025b8673106cfd2dc67f0d28e2570406d3616"
+  "value": "2361c3a0d4f6cf7022d749dcdcef0ab64506208365228adfe47c9d9b6d04593e"
  },
  "engines": [
   {
@@ -223279,7 +223279,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CREATURE_CAN_REACH_ITS_OWN_SYNTHESIZER_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "be3ee2daeb992dcc6b1cc5f50c5306d46fec3a394880ebfbecfd817bccf213a6",
+   "sha256": "67109d9af8a21d7ca502afcd90c40a2c3852e502b306e84fd3ca367c048a81a7",
    "status": "",
    "terms": {
     "20261104": 1,
