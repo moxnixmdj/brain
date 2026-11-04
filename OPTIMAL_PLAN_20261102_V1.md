@@ -449,3 +449,67 @@ is diagnosed and the fix is scoped.
 Three rows absorb most of the routed traffic — one row takes **11 of the 32** routed sentences
 on its own, another 6. That is why "reach" and "capability count" are different numbers, and
 why adding a 142nd row would move neither.
+
+---
+
+## Execution log 6 — the loop closes its own defects (2026-11-04, `2bbd14ad`)
+
+Four landings corrected strings, defaults and one measurement instrument. Every defect they
+fixed was found by an agent and pointed at, so the improvement rate was proportional to how
+many sessions a human ran. **Unaided closure rate was 0.**
+
+`canonical/tools/self_maintenance_loop_v1.py` is the first thing in this repository that
+finds, repairs and proves a defect with nobody pointing:
+
+```
+PERCEIVE -> MODEL -> SELECT -> ACT -> VERIFY -> LEARN
+3 defect classes, deterministic, deterministic, zero model spend, no new authority
+```
+
+### What it measured, live, unattended
+
+An ordinary edit to a receipted test file, then the loop, no instruction given to it:
+
+| | value |
+|---|---|
+| defects found | 2 (`STALE_ACTION_INTENT_RECEIPT:…:9`, `:12` — same file, two receipts) |
+| repairs prepared and independently verified on disk | 2 |
+| certified by the drift guard at the ref | 2 (`--certify`, after the commit) |
+| unaided closure rate | **100%** on this class, 2/2 |
+
+The drift guard's verdict moved from
+`V22_COUNTEREXAMPLE_RECEIPT_BLOB_STALE_OR_MISMATCH:9` + `:12` to **absent**, leaving only the
+known `LIVE_CHALLENGER_FRONTIER_EXEMPTION_NOT_ALLOWED_FOR_ACTION_KIND` objection that needs
+an owner decision.
+
+### Four defects in the loop itself, all found before landing
+
+1. **841 defects was fiction.** The finder scanned the whole intent archive; the drift guard
+   loads only intents in the change set. An archived receipt pointing at a file that has
+   since changed is the archive working. Scope is now the change set — pinned by two tests
+   that must fail together: the scope test, and the test that proves the archive really does
+   hold stale receipts (without which the scope test measures nothing).
+2. **A measure-only run wrote 2,436 lines into the real ledger.** Measure is not act; a dry
+   run now gets a throwaway copy. The first version of that test passed *against the bug*
+   because its fixture found nothing and recorded nothing. Mutation testing caught the vacuous
+   test; review did not.
+3. **The measurement class compared tuples in memory to lists on disk**, so every run
+   "found" a stale artifact and every repair rewrote it — a fix that fires forever is churn
+   wearing the costume of a fix.
+4. **It reported 2/2 closed (100%) while `enforce_goal_hierarchy.py` still failed.** The
+   guard resolves receipts at `ref:path`; the repair only becomes true when a commit exists.
+   A number that disagrees with the enforcer is the number that is wrong. Closure is now
+   credited on *certification*, and `--certify <result.json>` re-asks the ref afterwards.
+
+Each of the four is pinned by a test that was confirmed to fail in the world where the
+property breaks (five mutants: no canonicalisation, trust-the-fixer, scan-the-archive,
+dry-run-writes, credit-on-verification — each killed exactly one test).
+
+### What this does not mean
+
+The closed class is bookkeeping. No capability, no routing, no reach changed. The honest
+limit, stated in the module: **unattended repair is confined to facts derivable from the
+artifact itself** — a blob sha, a derived key, a recomputation. Capability ids, routing
+bindings and semantic choices are not derivable, and no class here touches them. That
+boundary is the next thing to widen, and widening it is where unaided closure rate stops
+being a bookkeeping number.
