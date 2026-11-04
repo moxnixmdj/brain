@@ -103,7 +103,7 @@ def test_the_full_door_answers_a_question_it_used_to_refuse():
     root = _tree(**{"data.py": "ITEMS = ['alpha', 'beta', 'gamma']\n"})
     out = A.run(goal="how many lines are in data.py", root=root, iterations=8)
     answer = out.get("answer") or {}
-    assert answer.get("verdict") == "GROUNDED", answer
+    assert answer.get("verdict") in ("COMPUTED", "READ", "GROUNDED"), answer
     assert out.get("verification", {}).get("verified") is True
 
 
@@ -176,5 +176,154 @@ def test_the_whole_door_answers_five_plain_questions():
     for q in questions:
         out = A.run(goal=q, root=root, iterations=8)
         answer = out.get("answer") or {}
-        assert answer.get("verdict") in ("GROUNDED", "PARTIALLY_GROUNDED"), (q, answer.get("verdict"))
-        assert answer.get("grounded", 0) > 0, (q, answer)
+        # ANSWERED, not merely grounded. The earlier version of this test accepted
+        # GROUNDED, and "how many lines are in data.py" passed it with no number in
+        # the answer -- the test was asserting the weaker claim the bug relied on.
+        assert answer.get("answered") is True, (q, answer.get("verdict"), answer.get("computation"))
+        assert out["verification"]["verified"] is True, (q, out["verification"])
+
+
+# ---------------------------------------------------------------------------
+# A question that asks for a COUNT must come back with the count in it.
+#
+# The worst defect found in this module was not a miss. "how many lines are in
+# data.py" returned verdict GROUNDED, verified=True, one hit -- the file, found by
+# name -- and NO NUMBER. It never counted. The verdict vocabulary had one word for
+# two different claims, so "the evidence is real" was read as "the question is
+# answered", and nothing downstream could tell them apart.
+# ---------------------------------------------------------------------------
+
+def test_a_counting_question_returns_the_number_it_counted():
+    root = _tree(**{"data.py": "a\nb\nc\nd\n"})
+    answer = I.answer("how many lines are in data.py", root)
+    assert answer["verdict"] == "COMPUTED"
+    assert answer["computation"]["value"] == 4
+    assert answer["answered"] is True
+
+
+def test_a_count_is_recomputed_and_a_wrong_one_does_not_verify():
+    """Nothing is taken on trust, including our own arithmetic."""
+    root = _tree(**{"data.py": "a\nb\nc\nd\n"})
+    lying = {"operation": "count_lines", "value": 99, "subject": "data.py", "claims": []}
+    truthful = {"operation": "count_lines", "value": 4, "subject": "data.py", "claims": []}
+    assert I._computation_holds(lying, root) is False
+    assert I._computation_holds(truthful, root) is True
+
+
+def test_csv_rows_do_not_silently_count_the_header():
+    root = _tree(**{"sales.csv": "region,amount\nnorth,100\nsouth,250\neast,50\n"})
+    answer = I.answer("how many rows are in sales.csv", root)
+    assert answer["computation"]["value"] == 3
+    assert "header" in answer["computation"]["detail"]
+
+
+def test_asking_what_a_file_says_shows_what_it_says():
+    """A name hit proves the file exists. It does not answer 'what does it say'."""
+    root = _tree(**{"notes.md": "# Plan\n- first\n- second\n"})
+    answer = I.answer("what does notes.md say", root)
+    assert answer["verdict"] == "READ"
+    assert answer["computation"]["body"] == ["# Plan", "- first", "- second"]
+
+
+def test_a_fabricated_read_does_not_verify():
+    root = _tree(**{"data.py": "a\nb\n"})
+    fake = {"operation": "read_content", "subject": "data.py",
+            "body": ["a", "b", "a line that is not in the file"], "claims": []}
+    assert I._computation_holds(fake, root) is False
+
+
+def test_the_door_does_not_report_a_counting_question_as_answered_without_a_count():
+    """The exact shape of the original defect, asserted from the outside."""
+    from canonical.runtime import autonomous_v1 as A
+
+    root = _tree(**{"data.py": "a\nb\nc\nd\n"})
+    out = A.run(goal="how many lines are in data.py", root=root)
+    # The strong claim: the number reached the rendered output a person reads.
+    assert "= 4" in out["rendered"], out["rendered"]
+    assert out["verification"]["verified"] is True
+
+    # And the honest-refusal half still holds: a question whose answer is genuinely
+    # absent must not be reported as answered.
+    miss = A.run(goal="what is the profit margin in data.py", root=root)
+    assert miss["verification"]["verified"] is False
+    # The file is there, so this is not "nothing found" -- it is "the file is there and
+    # what you asked about is not in it". Those are different facts and the verdict
+    # says which one this is.
+    assert miss["answer"]["verdict"] == "PARTIALLY_GROUNDED"
+    assert set(miss["answer"]["unresolved_terms"]) == {"profit", "margin"}
+
+
+# ---------------------------------------------------------------------------
+# Two defects that made the module report the opposite of the truth.
+# ---------------------------------------------------------------------------
+
+def test_a_file_matched_by_name_is_still_searched_for_content():
+    """The body scan was skipped whenever the filename matched.
+
+    "what is retries in conf.json" recorded the filename hit and then `continue`d past
+    the file, so `retries` was reported as missing from a file containing it. The
+    per-term dedup above that loop already prevented double counting; the skip guarded
+    against a duplicate that could not happen and discarded every other term.
+    """
+    root = _tree(**{"conf.json": '{"retries": 3}\n'})
+    answer = I.answer("what is retries in conf.json", root)
+    assert answer["unresolved_terms"] == []
+    assert any(h.get("term") == "retries" for h in answer["hits"])
+
+
+def test_terms_that_matched_nothing_are_reported_not_dropped():
+    """The pointer to a file is not an answer about what is inside it."""
+    root = _tree(**{"data.py": "a\nb\n"})
+    answer = I.answer("what is the profit margin in data.py", root)
+    assert set(answer["unresolved_terms"]) == {"profit", "margin"}
+    assert answer["answered"] is False
+
+
+def test_the_grounder_loads_both_ways_or_the_module_refuses():
+    """A silently absent verifier reports exactly like a working one.
+
+    `import grounding_v1` only resolved when canonical/runtime was already on sys.path,
+    which is true through autonomous_v1 and false for a package import. The failure
+    path set G = None and turned every content hit UNVERIFIABLE while verdicts still
+    read as confident. This asserts the result is identical from both entry points,
+    which it can only be if the grounder actually loaded.
+    """
+    import pathlib, subprocess, sys as _sys, textwrap
+
+    script = textwrap.dedent("""
+        import sys, tempfile, pathlib
+        sys.path.insert(0, {root!r})
+        from canonical.runtime import inspect_v1 as I
+        root = pathlib.Path(tempfile.mkdtemp())
+        (root / 'conf.json').write_text('{{"retries": 3}}\\n')
+        d = I.answer('what is retries in conf.json', str(root))
+        assert d['grounding_summary'] is not None, 'grounder did not load'
+        # One file, reported once, with real grounding behind it. Before the grounder
+        # was resolved both ways this summary was None and the hit was UNVERIFIABLE.
+        assert d['verdict'] == 'GROUNDED' and d['grounded'] == 1, d
+        assert d['hits'][0]['verdict'] == 'GROUNDED', d
+    """).format(root=str(pathlib.Path(__file__).resolve().parents[2]))
+
+    proc = subprocess.run([_sys.executable, "-c", script], capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr
+
+
+def test_answer_actually_re_checks_the_computation_it_reports(monkeypatch):
+    """A verifier nothing calls is not a verifier.
+
+    The previous test proved `_computation_holds` can reject a wrong count. It did not
+    prove `answer()` consults it -- and mutating the re-check to `verified = True` left
+    every test green. So: make the computation LIE, and check that the answer catches
+    it. Without the call site wired up, this returns a confident COMPUTED with 99.
+    """
+    root = _tree(**{"data.py": "a\nb\nc\nd\n"})
+
+    def lying(question, path):
+        return {"operation": "count_lines", "value": 99, "subject": "data.py",
+                "detail": "9,999 line(s)", "claims": []}
+
+    monkeypatch.setattr(I, "compute", lying)
+    answer = I.answer("how many lines are in data.py", root)
+    assert answer["computation"]["verified"] is False
+    assert answer["verdict"] != "COMPUTED"
+    assert answer["answered"] is False
