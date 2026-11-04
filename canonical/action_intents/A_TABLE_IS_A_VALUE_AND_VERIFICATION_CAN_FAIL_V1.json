@@ -7,7 +7,7 @@
  "route_id": "A_TABLE_IS_A_VALUE_AND_VERIFICATION_CAN_FAIL_V1",
  "date": "2026-11-04",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "4f1b94089f2932fecae03dbf93904ba125a807db",
+ "canonical_base_commit": "13a046daa1fe920bc5388808151c9c10ebeeb540",
  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -97,7 +97,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "4f1b94089f2932fecae03dbf93904ba125a807db",
+  "canonical_base_commit": "13a046daa1fe920bc5388808151c9c10ebeeb540",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "TEN_TYPED_OPERATORS_PRODUCING_TABLE_AND_TEXTVEC__PARTITION_INVARIANTS_REJECT_A_LOSSY_GROUPING_400_vs_550",
