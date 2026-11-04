@@ -981,7 +981,7 @@ def canonicalize_ast_via_egraph(mod: ast.Module) -> ast.Module:
 
 def _normalize_function_for_plotkin_lgg(fn: ast.FunctionDef) -> tuple[ast.FunctionDef, set[str], list[str]] | None:
     """Alpha-normalize a loop function and desugar `AugAssign` (`acc += e` -> `acc = acc + e`) for Plotkin LGG."""
-    if fn.decorator_list or not (1 <= len(fn.args.args) <= 3) or len(fn.body) < 2:
+    if fn.decorator_list or not (1 <= len(fn.args.args) <= 4) or len(fn.body) < 2:
         return None
     cloned = copy.deepcopy(fn)
 
@@ -1008,6 +1008,11 @@ def _normalize_function_for_plotkin_lgg(fn: ast.FunctionDef) -> tuple[ast.Functi
 
     for sub in ast.walk(cloned):
         if isinstance(sub, ast.For) and isinstance(sub.target, ast.Name):
+            in_loop_targets.add(sub.target.id)
+            for b_sub in ast.walk(sub):
+                if isinstance(b_sub, ast.Name) and isinstance(b_sub.ctx, ast.Store):
+                    in_loop_targets.add(b_sub.id)
+        elif isinstance(sub, ast.comprehension) and isinstance(sub.target, ast.Name):
             in_loop_targets.add(sub.target.id)
             for b_sub in ast.walk(sub):
                 if isinstance(b_sub, ast.Name) and isinstance(b_sub.ctx, ast.Store):
@@ -1066,39 +1071,162 @@ def higher_order_plotkin_lgg(
     callable_arities: dict[str, int] = {}
     extra_val_params: list[str] = []
     extra_fn_params: list[str] = []
+    hole_fillings: dict[str, tuple[str, str]] = {}
 
     def _free_load_names(nd: ast.AST) -> set[str]:
         return {s.id for s in ast.walk(nd) if isinstance(s, ast.Name) and isinstance(s.ctx, ast.Load)}
 
     def _anti_unify_expr(e1: ast.expr, e2: ast.expr) -> ast.expr | None:
+        """Plotkin LGG on expressions: same head recurses; else a value or HO hole."""
         d1 = ast.dump(e1, include_attributes=False)
         d2 = ast.dump(e2, include_attributes=False)
         if d1 == d2:
             return copy.deepcopy(e1)
-        captured = [v for v in ordered_loop if v in (_free_load_names(e1) | _free_load_names(e2))]
-        if not captured:
-            key_v = (d1, d2)
-            h_nm = val_holes.get(key_v)
-            if h_nm is None:
-                h_nm = f"_v{base_arity + len(extra_val_params)}"
-                val_holes[key_v] = h_nm
-                extra_val_params.append(h_nm)
-            return ast.Name(id=h_nm, ctx=ast.Load())
-        if len(captured) > 3:
-            return None
-        cap_t = tuple(captured)
-        key_f = (d1, d2, cap_t)
-        fn_nm = fn_holes.get(key_f)
-        if fn_nm is None:
-            fn_nm = f"_fn{len(extra_fn_params)}"
-            fn_holes[key_f] = fn_nm
-            extra_fn_params.append(fn_nm)
-            callable_arities[fn_nm] = len(cap_t)
-        return ast.Call(
-            func=ast.Name(id=fn_nm, ctx=ast.Load()),
-            args=[ast.Name(id=bv, ctx=ast.Load()) for bv in cap_t],
-            keywords=[],
-        )
+
+        def _hole() -> ast.expr | None:
+            captured = [v for v in ordered_loop if v in (_free_load_names(e1) | _free_load_names(e2))]
+            if not captured:
+                key_v = (d1, d2)
+                h_nm = val_holes.get(key_v)
+                if h_nm is None:
+                    h_nm = f"_v{base_arity + len(extra_val_params)}"
+                    val_holes[key_v] = h_nm
+                    extra_val_params.append(h_nm)
+                    hole_fillings[h_nm] = (ast.unparse(e1), ast.unparse(e2))
+                return ast.Name(id=h_nm, ctx=ast.Load())
+            if len(captured) > 3:
+                return None
+            cap_t = tuple(captured)
+            key_f = (d1, d2, cap_t)
+            fn_nm = fn_holes.get(key_f)
+            if fn_nm is None:
+                fn_nm = f"_fn{len(extra_fn_params)}"
+                fn_holes[key_f] = fn_nm
+                extra_fn_params.append(fn_nm)
+                callable_arities[fn_nm] = len(cap_t)
+                hole_fillings[fn_nm] = (ast.unparse(e1), ast.unparse(e2))
+            return ast.Call(
+                func=ast.Name(id=fn_nm, ctx=ast.Load()),
+                args=[ast.Name(id=bv, ctx=ast.Load()) for bv in cap_t],
+                keywords=[],
+            )
+
+        if type(e1) is not type(e2):
+            return _hole()
+        if isinstance(e1, ast.BinOp) and isinstance(e2, ast.BinOp):
+            if type(e1.op) is not type(e2.op):
+                return _hole()
+            left = _anti_unify_expr(e1.left, e2.left)
+            right = _anti_unify_expr(e1.right, e2.right)
+            if left is None or right is None:
+                return None
+            return ast.BinOp(left=left, op=copy.deepcopy(e1.op), right=right)
+        if isinstance(e1, ast.UnaryOp) and isinstance(e2, ast.UnaryOp):
+            if type(e1.op) is not type(e2.op):
+                return _hole()
+            opnd = _anti_unify_expr(e1.operand, e2.operand)
+            if opnd is None:
+                return None
+            return ast.UnaryOp(op=copy.deepcopy(e1.op), operand=opnd)
+        if isinstance(e1, ast.BoolOp) and isinstance(e2, ast.BoolOp):
+            if type(e1.op) is not type(e2.op) or len(e1.values) != len(e2.values):
+                return _hole()
+            vals: list[ast.expr] = []
+            for a, b in zip(e1.values, e2.values):
+                u = _anti_unify_expr(a, b)
+                if u is None:
+                    return None
+                vals.append(u)
+            return ast.BoolOp(op=copy.deepcopy(e1.op), values=vals)
+        if isinstance(e1, ast.Compare) and isinstance(e2, ast.Compare):
+            if [type(o) for o in e1.ops] != [type(o) for o in e2.ops] or len(e1.comparators) != len(e2.comparators):
+                return _hole()
+            left = _anti_unify_expr(e1.left, e2.left)
+            comps: list[ast.expr] = []
+            for a, b in zip(e1.comparators, e2.comparators):
+                u = _anti_unify_expr(a, b)
+                if u is None:
+                    return None
+                comps.append(u)
+            if left is None:
+                return None
+            return ast.Compare(left=left, ops=copy.deepcopy(e1.ops), comparators=comps)
+        if isinstance(e1, ast.Call) and isinstance(e2, ast.Call):
+            if e1.keywords or e2.keywords or len(e1.args) != len(e2.args):
+                return _hole()
+            fn_u = _anti_unify_expr(e1.func, e2.func)
+            if fn_u is None:
+                return None
+            args_u: list[ast.expr] = []
+            for a, b in zip(e1.args, e2.args):
+                if not isinstance(a, ast.expr) or not isinstance(b, ast.expr):
+                    return _hole()
+                u = _anti_unify_expr(a, b)
+                if u is None:
+                    return None
+                args_u.append(u)
+            return ast.Call(func=fn_u, args=args_u, keywords=[])
+        if isinstance(e1, ast.Subscript) and isinstance(e2, ast.Subscript):
+            val = _anti_unify_expr(e1.value, e2.value)
+            sl1, sl2 = e1.slice, e2.slice
+            if not isinstance(sl1, ast.expr) or not isinstance(sl2, ast.expr):
+                return _hole()
+            sl = _anti_unify_expr(sl1, sl2)
+            if val is None or sl is None:
+                return None
+            return ast.Subscript(value=val, slice=sl, ctx=ast.Load())
+        if isinstance(e1, ast.Attribute) and isinstance(e2, ast.Attribute):
+            if e1.attr != e2.attr:
+                return _hole()
+            val = _anti_unify_expr(e1.value, e2.value)
+            if val is None:
+                return None
+            return ast.Attribute(value=val, attr=e1.attr, ctx=ast.Load())
+        if isinstance(e1, ast.IfExp) and isinstance(e2, ast.IfExp):
+            bdy = _anti_unify_expr(e1.body, e2.body)
+            tst = _anti_unify_expr(e1.test, e2.test)
+            orelse = _anti_unify_expr(e1.orelse, e2.orelse)
+            if bdy is None or tst is None or orelse is None:
+                return None
+            return ast.IfExp(body=bdy, test=tst, orelse=orelse)
+        if isinstance(e1, (ast.List, ast.Tuple)) and isinstance(e2, type(e1)):
+            if len(e1.elts) != len(e2.elts):
+                return _hole()
+            elts: list[ast.expr] = []
+            for a, b in zip(e1.elts, e2.elts):
+                u = _anti_unify_expr(a, b)
+                if u is None:
+                    return None
+                elts.append(u)
+            return type(e1)(elts=elts, ctx=ast.Load())
+        if isinstance(e1, (ast.ListComp, ast.GeneratorExp, ast.SetComp)) and isinstance(e2, type(e1)):
+            if len(e1.generators) != len(e2.generators):
+                return _hole()
+            gens: list[ast.comprehension] = []
+            for g1, g2 in zip(e1.generators, e2.generators):
+                if ast.dump(g1.target, include_attributes=False) != ast.dump(g2.target, include_attributes=False):
+                    return _hole()
+                if len(g1.ifs) != len(g2.ifs):
+                    return _hole()
+                it = _anti_unify_expr(g1.iter, g2.iter)
+                if it is None:
+                    return None
+                ifs: list[ast.expr] = []
+                for i1, i2 in zip(g1.ifs, g2.ifs):
+                    iu = _anti_unify_expr(i1, i2)
+                    if iu is None:
+                        return None
+                    ifs.append(iu)
+                gens.append(ast.comprehension(target=copy.deepcopy(g1.target), iter=it, ifs=ifs, is_async=0))
+            elt = _anti_unify_expr(e1.elt, e2.elt)
+            if elt is None:
+                return None
+            if isinstance(e1, ast.ListComp):
+                return ast.ListComp(elt=elt, generators=gens)
+            if isinstance(e1, ast.SetComp):
+                return ast.SetComp(elt=elt, generators=gens)
+            return ast.GeneratorExp(elt=elt, generators=gens)
+        return _hole()
 
     def _anti_unify_stmt_list(s_list1: Sequence[ast.stmt], s_list2: Sequence[ast.stmt]) -> list[ast.stmt] | None:
         if len(s_list1) != len(s_list2):
@@ -1177,19 +1305,87 @@ def higher_order_plotkin_lgg(
     if lgg_stmts is None or not extra_fn_params:
         return None
     all_params = tuple([f"_v{i}" for i in range(base_arity)] + extra_val_params + extra_fn_params)
-    if len(all_params) > 5 or len(extra_fn_params) > 2:
+    if len(all_params) > 8 or len(extra_fn_params) > 2:
         return None
     mod_tmp = ast.Module(body=lgg_stmts, type_ignores=[])
     ast.fix_missing_locations(mod_tmp)
     body_stmts = "\n".join(ast.unparse(st) for st in mod_tmp.body)
     return {
         "param_names": all_params,
+        "hole_fillings": dict(hole_fillings),
         "arity": len(all_params),
         "body_stmts": body_stmts,
         "callable_params": tuple((k, callable_arities[k]) for k in extra_fn_params),
         "base_arity": base_arity,
         "value_hole_count": len(extra_val_params),
     }
+
+
+def instantiate_plotkin_lgg(
+    lgg: Mapping[str, Any],
+    *,
+    parent_choice: Mapping[str, int],
+    name: str,
+) -> ast.FunctionDef | None:
+    """Wake: fill Plotkin holes with a parent specialization. Extra params collapse; base arity stays."""
+    body_src = str(lgg.get("body_stmts") or "")
+    if not body_src.strip():
+        return None
+    try:
+        mod = ast.parse(body_src)
+    except SyntaxError:
+        return None
+    raw_fill = lgg.get("hole_fillings") or {}
+    if not isinstance(raw_fill, Mapping):
+        return None
+    parsed_fill: dict[str, tuple[ast.expr, ast.expr]] = {}
+    for h_nm, pair in raw_fill.items():
+        if not isinstance(pair, (tuple, list)) or len(pair) != 2:
+            return None
+        try:
+            parsed_fill[str(h_nm)] = (
+                ast.parse(str(pair[0]), mode="eval").body,
+                ast.parse(str(pair[1]), mode="eval").body,
+            )
+        except SyntaxError:
+            return None
+    fn_holes = {h for h in parsed_fill if h.startswith("_fn")}
+    val_holes = {h for h in parsed_fill if h not in fn_holes}
+
+    class _Fill(ast.NodeTransformer):
+        def visit_Call(self, node: ast.Call) -> ast.AST:
+            node = self.generic_visit(node)  # type: ignore[assignment]
+            if isinstance(node.func, ast.Name) and node.func.id in fn_holes:
+                idx = 1 if int(parent_choice.get(node.func.id, 0)) else 0
+                return copy.deepcopy(parsed_fill[node.func.id][idx])
+            return node
+
+        def visit_Name(self, node: ast.Name) -> ast.AST:
+            if isinstance(node.ctx, ast.Load) and node.id in val_holes:
+                idx = 1 if int(parent_choice.get(node.id, 0)) else 0
+                return copy.deepcopy(parsed_fill[node.id][idx])
+            return node
+
+    filled = _Fill().visit(copy.deepcopy(mod))
+    ast.fix_missing_locations(filled)
+    base_arity = int(lgg.get("base_arity") or 0)
+    if base_arity < 1:
+        return None
+    return ast.FunctionDef(
+        name=str(name),
+        args=ast.arguments(
+            posonlyargs=[],
+            args=[ast.arg(arg=f"_v{i}") for i in range(base_arity)],
+            vararg=None,
+            kwonlyargs=[],
+            kw_defaults=[],
+            kwarg=None,
+            defaults=[],
+        ),
+        body=list(filled.body),
+        decorator_list=[],
+        returns=None,
+    )
 
 
 def _generate_probe_grids(arity: int) -> list[tuple[str, list[tuple[Any, ...]]]]:
@@ -1833,7 +2029,7 @@ class CompoundingConceptLibrary:
         if len(admitted) < max_new_concepts:
             stmt_groups: dict[str, list[ast.FunctionDef]] = {}
             for mod in parsed_programs:
-                for fn in [n for n in mod.body if isinstance(n, ast.FunctionDef) and not n.decorator_list]:
+                for fn in [n for n in ast.walk(mod) if isinstance(n, ast.FunctionDef) and not n.decorator_list]:
                     if not (1 <= len(fn.args.args) <= 4) or len(fn.body) < 2:
                         continue
                     has_loop_or_rec = any(
@@ -1902,10 +2098,10 @@ class CompoundingConceptLibrary:
                 loop_fns: list[ast.FunctionDef] = [
                     fn
                     for mod in parsed_programs
-                    for fn in mod.body
+                    for fn in ast.walk(mod)
                     if isinstance(fn, ast.FunctionDef)
                     and not fn.decorator_list
-                    and any(isinstance(sub, ast.For) for sub in ast.walk(fn))
+                    and any(isinstance(sub, (ast.For, ast.While)) for sub in ast.walk(fn))
                 ]
                 for i_fn in range(min(len(loop_fns), 12)):
                     if len(admitted) >= max_new_concepts:
