@@ -248,7 +248,7 @@
           "route": "WIRE_THE_CONCEPT_LIBRARY_IN_AS_A_TEMPLATE_SOURCE"
         }
       ],
-      "checked_at_utc": "2026-11-04T14:47:36Z",
+      "checked_at_utc": "2026-11-04T14:47:48Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -259,7 +259,7 @@
       ],
       "discovery_required": true,
       "incumbent_route": "ONE_PARAMETRIC_NODE_SO_EVERY_COMPOSED_FORM_IS_REFUSED",
-      "max_age_hours": 6,
+      "max_age_hours": 2,
       "negative_search_summary": "No challenger removes the need for the closure rule: wiring the library in was measured inert on this corpus, and one node per composed form rebuilds the menu a level up. The library-learning challenger stays recorded as non-dominating and is not displaced; it becomes useful when the corpus contains varied searched programs rather than one solved skeleton.",
       "query_families": [
         {
@@ -288,7 +288,7 @@
       "selected_route": "DERIVE_WHAT_IS_A_THEOREM_AND_NAME_WHAT_IS_ONLY_A_POLICY",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-04T14:47:36Z",
+        "checked_at_utc": "2026-11-04T14:47:48Z",
         "execution_dependencies": [
           {
             "dependency": "CPython 3.11 standard library runtime",
@@ -338,7 +338,7 @@
         ],
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
-        "max_age_hours": 6,
+        "max_age_hours": 2,
         "selected_route": "DERIVE_WHAT_IS_A_THEOREM_AND_NAME_WHAT_IS_ONLY_A_POLICY",
         "status": "READY"
       },
