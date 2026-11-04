@@ -495,6 +495,10 @@ class AwakeAgencyDaemon:
         )
         # Interpretations live beside habits, and for the same reason: a creature that keeps its
         # memories keeps its understanding, and one given a fresh store starts genuinely naive.
+        self.growth_path = (
+            (_store_p.parent / "grammar_growth.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_growth_{ws_hash}.json")
+        )
         self.synth_path = (
             (_store_p.parent / "synth_grammar.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_synth_{ws_hash}.json")
@@ -1197,6 +1201,13 @@ class AwakeAgencyDaemon:
                 from canonical.swe_kernel.synthesized_edit_grammar_v1 import live_synth
 
                 _synth = live_synth(self.synth_path)
+                # GRAMMAR GROWTH. An edit that no key explains is evidence of a hole in the space, and
+                # until now it was dropped on the floor -- the same mistake as discarding rejections.
+                # This records it; it does not act on it. Naming a hole is measurement, inventing a
+                # shape from one is guessing, and only the first is defensible.
+                from canonical.swe_kernel.grammar_growth_v1 import live_growth
+
+                _growth = live_growth(self.growth_path)
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
                 # Syntax repairs exist because a file that does not parse makes every other reading
@@ -1247,6 +1258,11 @@ class AwakeAgencyDaemon:
                     for _i, _c in enumerate(all_cands[:36]):
                         _d = _resid.get(_i) or {}
                         _ok = _i in [int(x) for x in pass_idxs]
+                        # A VERIFIED repair that the grammar cannot describe is the only trustworthy
+                        # evidence that a shape is missing: a rejected candidate being unexplainable
+                        # means nothing, because most edits are wrong.
+                        if _ok and _synth.signature(before_src, _c) is None:
+                            _growth.note_unexplained(before_src, _c)
                         _r = None
                         try:
                             _r = abs(float(_owed) - float(_d.get("produced"))) if _owed is not None and _d.get("produced") is not None else None
