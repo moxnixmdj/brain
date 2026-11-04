@@ -49,6 +49,8 @@ SCHEMA = "PROJECT_BRAIN_BELIEF_V1"
 # A leaf may not be split on fewer than this many examples: below it, any two buckets "improve"
 # accuracy by accident, and the split is noise wearing a structure's clothes.
 MIN_EXAMPLES_FOR_SPLIT = 3
+MIN_LEAF_SHARE = 0.10
+MIN_LEAF_EXAMPLES = 5
 MAX_DEPTH = 4
 # A distinction must beat a chance null, not merely a fixed margin. Measured 2026-11-04: a 2%
 # margin let a pure-noise world accept 27 splits in 20 trials, because on 60 examples a random
@@ -56,6 +58,7 @@ MAX_DEPTH = 4
 # verdicts are shuffled and the split has to beat what shuffling produces.
 PERMUTATIONS = 200
 PERMUTATION_ALPHA = 0.01
+PERMUTATION_TRIALS_FAST = 60     # for per-pair tests, which run inside the search
 PERMUTATION_SEED = 20261104
 MIN_VALIDATION_GAIN = 0.03
 
@@ -359,6 +362,7 @@ def _accepts(node: dict, signal: str, threshold: float, folds, index: int,
     record = {"signal": signal, "threshold": round(threshold, 4),
               "cv_before": round(before, 4), "cv_after": round(after, 4),
               "worst_fold_delta": round(worst, 4)}
+
     if after - before < MIN_VALIDATION_GAIN:
         record["reason"] = "no_out_of_group_improvement"
         return False, record
@@ -372,6 +376,7 @@ def _accepts(node: dict, signal: str, threshold: float, folds, index: int,
     if p >= bar:
         record["reason"] = "not_beyond_chance"
         return False, record
+    record["accepted_by"] = "accuracy"
     return True, record
 
 
@@ -428,6 +433,229 @@ def grow(node: dict, train: list[dict], folds, depth: int = 0, log: list | None 
         grow(_leaf_from(high_all), high_all, high_folds, depth + 1, log))
 
 
+# --------------------------------------------------------------------------- small trees
+def _tree_from_cuts(cuts: list[tuple], train: list[dict], folds, depth: int = 0,
+                    log: list | None = None) -> dict:
+    """Turn an accepted cut list into a tree, then let ordinary growth refine its leaves."""
+    if log is None:
+        log = []
+    if not cuts:
+        return grow(_leaf_from(train), train, folds, depth, log)
+    signal, threshold = cuts[0]
+    low, high = _split_examples(train, signal, threshold)
+    low_folds, high_folds = [], []
+    for fold_train, fold_test in folds:
+        lo_tr, hi_tr = _split_examples(fold_train, signal, threshold)
+        lo_te = [x for x in fold_test if _side(ex_like(x), signal, threshold) == "low"] \
+            if fold_test else []
+        hi_te = [x for x in fold_test if _side(ex_like(x), signal, threshold) == "high"] \
+            if fold_test else []
+        if lo_tr and lo_te:
+            low_folds.append((lo_tr, lo_te))
+        if hi_tr and hi_te:
+            high_folds.append((hi_tr, hi_te))
+    return _split_node(
+        _leaf_from(train), signal, threshold,
+        _tree_from_cuts(cuts[1:], low, low_folds, depth + 1, log) if low else _leaf_from(low),
+        _tree_from_cuts(cuts[1:], high, high_folds, depth + 1, log) if high
+        else _leaf_from(high))
+
+
+def ex_like(example: dict) -> dict:
+    return example
+
+
+def _tree_predict(cuts: list[tuple], example: dict, leaves: dict) -> str | None:
+    """Walk a fixed small tree: apply each cut in turn, then answer from the leaf it lands in."""
+    key = 0
+    for index, (signal, threshold) in enumerate(cuts):
+        side = _side(example, signal, threshold)
+        key |= (1 if side == "high" else 0) << index
+    counts = leaves.get(key) or {}
+    if not counts:
+        return None
+    return max(counts.items(), key=lambda kv: (kv[1], str(kv[0])))[0]
+
+
+def _learn_leaves(cuts: list[tuple], examples: list[dict]) -> dict[int, dict[str, int]]:
+    leaves: dict[int, dict[str, int]] = {}
+    for ex in examples:
+        key = 0
+        for index, (signal, threshold) in enumerate(cuts):
+            key |= (1 if _side(ex, signal, threshold) == "high" else 0) << index
+        counts = leaves.setdefault(key, {})
+        label = str(ex.get("verdict"))
+        counts[label] = counts.get(label, 0) + 1
+    return leaves
+
+
+def small_tree_gain(cuts: list[tuple], folds) -> tuple[float, float, float]:
+    """Out-of-group accuracy of a whole small tree, and how it does against the prior per fold.
+
+    One judgement for the whole tree, not one per cut. Measured 2026-11-04: judging each cut in
+    turn cannot see a conjunction -- `a > 0.5 AND b > 0.5` gains exactly nothing from either cut
+    alone and the model refused to split at all, scoring 0.700 against a base rate of 0.750. The
+    fix is not to look ahead twice (that was tried, and it admitted a split in roughly a third of
+    structureless worlds); it is to stop judging pieces and judge the thing.
+    """
+    afters, deltas = [], []
+    for fold_train, fold_test in folds:
+        if not fold_train or not fold_test:
+            continue
+        leaves = _learn_leaves(cuts, fold_train)
+        prior = max((max(c.items(), key=lambda kv: (kv[1], str(kv[0])))[0]
+                     for c in leaves.values() if c), default=None)
+        before = sum(1 for ex in fold_test if ex.get("verdict") == prior) / len(fold_test)
+        right = sum(1 for ex in fold_test
+                    if (_tree_predict(cuts, ex, leaves) or prior) == ex.get("verdict"))
+        after = right / len(fold_test)
+        afters.append(after)
+        deltas.append(after - before)
+    if not afters:
+        return 0.0, 0.0, 0.0
+    return sum(afters) / len(afters), sum(deltas) / len(deltas), min(deltas)
+
+
+def judge_small_tree(mean_gain: float, worst_fold: float) -> tuple[bool, str]:
+    """The whole acceptance decision for a small tree, in one testable place.
+
+    A tree is admitted when it beats the prior by MIN_VALIDATION_GAIN on average AND in every
+    fold. Both halves matter: the average alone is what let noise through in earlier versions,
+    and the per-fold rule alone cannot see a distinction that pays unevenly but really.
+    """
+    if mean_gain < MIN_VALIDATION_GAIN:
+        return False, "no_out_of_group_improvement"
+    if worst_fold <= 0:
+        return False, "helped_on_average_but_hurt_a_group"
+    return True, ""
+
+
+def _leaf_too_small(train: list[dict], signal: str, threshold: float,
+                    share: float = MIN_LEAF_SHARE) -> bool:
+    """A cut that carves a handful of examples into their own leaf is a memorised accident.
+
+    Measured 2026-11-04: on structureless worlds the trees that slipped through the second and
+    third groupings cut at 0.83 and 0.96 -- tiny far-tail leaves that happened to be pure. The
+    fix is not another significance test; it is to refuse leaves too small to mean anything.
+    """
+    low, high = _split_examples(train, signal, threshold)
+    floor = max(MIN_LEAF_EXAMPLES, int(len(train) * share))
+    return len(low) < floor or len(high) < floor
+
+
+def small_tree_p(cuts: list[tuple], folds, observed: float, trials: int = 24) -> float:
+    """How often shuffled verdicts give THIS structure a score this good.
+
+    The whole-tree path had no null of its own, and measured 2026-11-04 that cost it: two of
+    twenty structureless worlds at 140 examples were recorded as discoveries. A structure selected
+    from eight combinations is not tested by the three groupings alone -- the groupings say it is
+    stable, not that it is better than chance.
+    """
+    import random as _random
+    if not folds:
+        return 1.0
+    rng = _random.Random(PERMUTATION_SEED + 13)
+    pool = [ex.get("verdict") for train, _ in folds for ex in train]
+    if not pool:
+        return 1.0
+    at_least = 0
+    for _ in range(trials):
+        shuffled = list(pool)
+        rng.shuffle(shuffled)
+        cursor = 0
+        relabelled = []
+        for train, test in folds:
+            take = len(train)
+            if cursor + take > len(shuffled):
+                break
+            relabelled.append(([{"signals": ex["signals"], "verdict": shuffled[cursor + i],
+                                 "group": ex.get("group", i)} for i, ex in enumerate(train)],
+                               test))
+            cursor += take
+        score, _, _ = small_tree_gain(cuts, relabelled)
+        if score >= observed:
+            at_least += 1
+    return at_least / trials
+
+
+def _combination_leaves_big_enough(cuts: list[tuple], train: list[dict],
+                                   share: float = MIN_LEAF_SHARE) -> bool:
+    """Every leaf the combination creates must be big enough to be evidence, not an accident."""
+    if not cuts or not train:
+        return False
+    floor = max(MIN_LEAF_EXAMPLES, int(len(train) * share))
+    leaves = _learn_leaves(cuts, train)
+    touched = {key for key in leaves}
+    if len(touched) < 2:
+        return False
+    return all(sum(counts.values()) >= floor for counts in leaves.values())
+
+
+def best_small_tree(train: list[dict], folds, width: int = 4, alt_folds=None,
+                    extra_groupings: int = 2, sizes=(1, 2)) -> dict:
+    """Search small trees over the candidates and keep the one the folds endorse, if any."""
+    cuts = [(signal, threshold) for _, signal, threshold in _candidates(train, limit=width)
+            if not _leaf_too_small(train, signal, threshold)]
+    tried = []
+    best = None
+    for first in cuts:
+        for size in sizes:
+            combo = [first] + ([second for second in cuts[:3] if second != first][:1] if size == 2
+                               else [])
+            if len(combo) != size:
+                continue
+            if not _combination_leaves_big_enough(combo, train):
+                continue
+            after, mean_gain, worst = small_tree_gain(combo, folds)
+            tried.append({"cuts": [[c[0], round(c[1], 4)] for c in combo],
+                          "cv_after": round(after, 4), "mean_gain": round(mean_gain, 4),
+                          "worst_fold": round(worst, 4)})
+            if best is None or after > best[0]:
+                best = (after, mean_gain, worst, combo)
+    if best is None:
+        return {"accepted": False, "tried": tried, "reason": "no_candidate"}
+    after, mean_gain, worst, combo = best
+    record = {"accepted": False, "tried": tried, "best": [list(c) for c in
+                                                          [[c[0], round(c[1], 4)] for c in combo]],
+              "cv_after": round(after, 4), "mean_gain": round(mean_gain, 4),
+              "worst_fold": round(worst, 4)}
+    ok, reason = judge_small_tree(mean_gain, worst)
+    if not ok:
+        record["reason"] = reason
+        return record
+    if alt_folds:
+        # The tree was CHOSEN on `folds`, so `folds` cannot also be its alibi. Measured 2026-11-04:
+        # selecting the best of eight small trees and judging it on the same grouping accepted ten
+        # of twenty structureless worlds. A rule about the world survives being regrouped; the
+        # winner of a search does not.
+        second_cv, second_gain, second_worst = small_tree_gain(combo, alt_folds)
+        record["second_grouping"] = {"cv_after": round(second_cv, 4),
+                                     "mean_gain": round(second_gain, 4),
+                                     "worst_fold": round(second_worst, 4)}
+        ok, reason = judge_small_tree(second_gain, second_worst)
+        if not ok:
+            record["reason"] = "did_not_survive_a_second_grouping" if reason else reason
+            return record
+        for extra in range(2, extra_groupings + 1):
+            more_cv, more_gain, more_worst = small_tree_gain(
+                combo, capability_folds(train, seed=PERMUTATION_SEED + extra))
+            record[f"grouping_{extra + 1}"] = {"cv_after": round(more_cv, 4),
+                                               "mean_gain": round(more_gain, 4)}
+            ok, _ = judge_small_tree(more_gain, more_worst)
+            if not ok:
+                record["reason"] = "did_not_survive_a_third_grouping"
+                return record
+    p = small_tree_p(combo, folds, after)
+    record["p"] = round(p, 4)
+    record["bar"] = PERMUTATION_ALPHA
+    if p >= PERMUTATION_ALPHA:
+        record["reason"] = "not_beyond_chance"
+        return record
+    record["accepted"] = True
+    record["cuts"] = combo
+    return record
+
+
 def fit(model: dict, train: list[dict], validation: list[dict] | None = None) -> dict:
     """Grow the model against out-of-group folds and record what it accepted and refused.
 
@@ -443,7 +671,29 @@ def fit(model: dict, train: list[dict], validation: list[dict] | None = None) ->
     # improvement and the gate had nothing to compare against -- twenty pure-noise worlds
     # produced ten accepted splits. A model always has a prior; the question is whether a
     # distinction beats it.
+    # Judge whole small trees first. Measured 2026-11-04: a conjunction gains nothing from either
+    # of its cuts alone, so the incremental gate refused to split at all and the model scored
+    # 0.700 against a base rate of 0.750 -- worse than a one-line rule. The whole-tree judgement
+    # fixes that without the lookahead's selection bias, because the tree is CHOSEN on one
+    # grouping and has to survive two more.
+    # The single-cut gate runs first and keeps its permutation null. The whole-tree judgement is
+    # used only for the case that gate is structurally blind to -- two cuts, where neither pays on
+    # its own. Measured 2026-11-04: letting the whole-tree path propose single cuts too admitted
+    # three of twenty structureless worlds at 140 examples, because it has no null for a lone cut.
     model["root"] = grow(_leaf_from(everything), everything, folds, 0, log, alt_folds)
+    if model["root"].get("kind") != "split":
+        small = best_small_tree(everything, folds, alt_folds=alt_folds, sizes=(2,))
+        model["small_tree"] = {k: v for k, v in small.items() if k != "cuts"}
+        if small.get("accepted"):
+            # The record has to say what happened. A structure admitted here is still an admitted
+            # structure, and reporting `splits_accepted: 0` next to a two-cut tree would be a
+            # status label that does not describe the thing it labels.
+            for position, (signal, threshold) in enumerate(small["cuts"]):
+                log.append({"depth": position, "accepted": True, "via": "whole_tree",
+                            "signal": signal, "threshold": round(threshold, 4),
+                            "cv_after": small.get("cv_after"),
+                            "groupings": small.get("second_grouping")})
+            model["root"] = _tree_from_cuts(small["cuts"], everything, folds, 0, log)
     if not _counts(model["root"]):
         model["root"]["counts"] = _leaf_from(everything)["counts"]
     model["splits_proposed"] = int(model.get("splits_proposed", 0)) + len(log)

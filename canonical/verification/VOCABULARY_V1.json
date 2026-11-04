@@ -4,13 +4,13 @@
   "what_this_is": "Whether a running system can grow the set of distinctions it thinks in. The algebra is given; which compositions become permanent is decided against held-out experience by the system itself. No feature is enumerated by a person.",
   "offline": {
     "ratio": {
-      "fixed_vocabulary": 0.6167,
-      "invented_vocabulary": 0.6167,
+      "fixed_vocabulary": 0.8333,
+      "invented_vocabulary": 1.0,
       "invented": [
         "sub(a, b)",
         "div(a, b)"
       ],
-      "proposed": 13,
+      "proposed": 15,
       "person_enumerated_features": 0
     },
     "product": {
@@ -20,7 +20,7 @@
         "mul(a, b)",
         "add(a, b)"
       ],
-      "proposed": 13,
+      "proposed": 15,
       "person_enumerated_features": 0
     },
     "sum": {
@@ -30,7 +30,7 @@
         "add(a, b)",
         "mul(a, b)"
       ],
-      "proposed": 13,
+      "proposed": 15,
       "person_enumerated_features": 0
     },
     "xor": {
@@ -54,11 +54,11 @@
     "seeds": 30,
     "ticks": 160,
     "product": {
-      "frozen_prediction_accuracy": 0.4467,
-      "growing_prediction_accuracy": 0.6838,
-      "worlds_that_invented": 16,
-      "predictions_frozen": 295,
-      "predictions_growing": 1573
+      "frozen_prediction_accuracy": 0.4477,
+      "growing_prediction_accuracy": 0.676,
+      "worlds_that_invented": 15,
+      "predictions_frozen": 341,
+      "predictions_growing": 1547
     },
     "noise": {
       "worlds_that_invented": 1,

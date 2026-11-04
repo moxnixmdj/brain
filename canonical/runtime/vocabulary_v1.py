@@ -169,6 +169,12 @@ def candidate_expressions(examples: list[dict], limit: int = MAX_CANDIDATES) -> 
         for right in base[i + 1:]:
             for op in BINARY:
                 expressions.append(("bin", op, ("base", left), ("base", right)))
+    # A signal with itself, which the first version of this generator skipped. Measured
+    # 2026-11-04: a world whose rule is `(a-0.5)^2 + (b-0.5)^2 > c` was unreachable for exactly
+    # this reason -- a square is `mul(a, a)`, and the list of shapes could not produce one.
+    for name in base:
+        for op in ("mul", "sub", "div"):
+            expressions.append(("bin", op, ("base", name), ("base", name)))
 
     scored = []
     for expr in expressions:

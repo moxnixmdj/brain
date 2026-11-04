@@ -1600,3 +1600,128 @@ choose *what could be built*. The next vocabulary is the one where the operators
 learned, and I will not pretend this log is that.
 
 Authority: **NONE**. Terminal truth: `false`. No capability credit.
+
+---
+
+## Log 17 — The model could not learn a conjunction, and I had not measured it
+
+Log 16 ended by naming its own next layer: the algebra was mine, so invent the operators. I tried
+that first, measured it, and it failed. What the failed experiment exposed was worse and more
+useful: **the learner underneath could not represent a rule that is not one cut at a time.**
+
+The measurement, on a world whose rule is `a > 0.5 AND b > 0.5`:
+
+```
+splits_accepted: 0     accuracy 0.700     majority baseline 0.750
+```
+
+It refused to split and predicted the majority class. Worse than a one-line rule. Seventeen logs,
+and no log had measured whether this thing can learn anything but an additive boundary.
+
+### Why: a conjunction pays nothing cut by cut
+
+Cut on `a`: above 0.5 the world is still half and half. Accuracy does not move. The gate judges each
+cut against the prior, so it rejects, and the pair that *would* work is never built.
+
+### What I tried that failed, because I measured it
+
+| attempt | result | why it was thrown away |
+|---|---|---|
+| judge the best PAIR before refusing a cut | and 1.000, or 1.000, product 0.883 | **6–7 of 20 structureless worlds admitted a split**, against 0–1 for the gate alone |
+| judge by log loss instead of accuracy | — | **57 accepted splits across 10 noise worlds**; more capacity, no control |
+| a search-matched permutation null on pairs | noise 6 → 2 of 20 | correct in principle, still not zero, 3× slower |
+
+Every one of those is in the log rather than in the tree, because each is a place I tuned a number
+against noise and called it progress.
+
+### What shipped
+
+Judge **the whole small tree**, not its cuts:
+
+- the tree is chosen on one grouping and must then pay on **two more independent groupings**;
+- every leaf must hold at least 5 examples (10%), and that is checked on the *combination*, not the
+  cut, because combinations strand small leaves;
+- the tree must beat its own prior in **every** fold, not on average;
+- and it must beat a permutation null of shuffled verdicts (0 of 24 shuffles — coarse, but it is a
+  null of the statistic that is actually used);
+- the single-cut gate still runs first and keeps its own null. The whole-tree path is used only for
+  the case that gate is structurally blind to, because letting it propose lone cuts admitted three
+  of twenty structureless worlds.
+
+### Measured, out of group, 6 worlds each
+
+| world | model | majority baseline | worlds with structure |
+|---|---|---|---|
+| `a > 0.5 AND b > 0.5` | **0.981** | 0.758 | 6 of 6 |
+| `a > 0.5 OR b > 0.5` | **0.986** | 0.769 | 6 of 6 |
+| `a * b > 0.25` | **0.908** | 0.647 | 6 of 6 |
+| `XOR` | 0.506 | 0.544 | **0 of 6** |
+
+Noise, same probe: **0 distinctions invented in 20 worlds at 60 examples, 0 in 20 at 90, 2 in 20 at
+140.** Those two come from the older single-cut gate and are stated rather than smoothed.
+
+Artifact: `canonical/verification/LEARNER_V1.json`, from `canonical/tools/learner_probe_v1.py`.
+
+### The thing I set out to do, and what it was worth
+
+Operator invention: let an admitted feature become a new sense and run the algebra over it.
+Measured against the falsification that mattered — a plain deeper enumeration of the same fixed
+algebra at the same budget — it **did not win once**:
+
+| world | grow (operator invention) | brute-force deeper search |
+|---|---|---|
+| circle | 0.683 (nothing admitted) | 0.711 |
+| and | 0.700 | 0.944 |
+| noise | 0.500 | 0.601 (ungated) |
+
+And carrying invented operators between worlds so a new world would be cheaper: **identical accuracy
+(0.832 → 0.832) at higher cost (75 → 134 candidate evaluations)**. Inventing is already cheap per
+world, so a vocabulary that persists buys nothing. The module was deleted rather than kept as
+decoration, and the negative stands.
+
+The attempt did leave one real finding behind: the generator never composed a signal with itself, so
+`a * a` could not be built and any world with a squared term was unreachable. That is fixed.
+
+### A side effect I did not plan and will report anyway
+
+The `ratio` world log 16 recorded as unsolved and unchanged (0.617 → 0.617) is **now solved:
+0.833 → 1.000**. The cause is the better learner, not the vocabulary. I did not tune for it; the
+vocabulary probe was re-run after the learner change and the number moved.
+
+### A bug in my own harness, again
+
+Every "depth-2 world" measurement in the first half of this session was taken on the wrong worlds:
+my generator built a dict literal with `r.choice(...)` inside it for the noise branch, and Python
+evaluates every value, so the noise draw advanced the RNG and every subsequent `a, b` differed. The
+worlds were not the worlds I named. This is the third harness-lie in three logs — the pattern is
+that I trust a fixture I have not printed.
+
+### Mutation
+
+9 mutants on the new gate, **9 killed**: no whole-tree path · no second grouping · no third grouping
+· no leaf-size check · no combination leaf-size check · accepts without gain · ignores a hurt fold ·
+always rejects · record hides the accepted tree.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| It learns a conjunction | **TRUE** | 0.981 against 0.758 baseline, 6 of 6 worlds |
+| It learns a disjunction, gain in the low branch | **TRUE** | 0.986 against 0.769 |
+| The widening cost nothing that worked | **TRUE** | product 0.908 vs 0.647 |
+| It refuses structure in noise (60, 90 examples) | **TRUE** | 0 of 40 worlds |
+| It refuses structure in noise at 140 examples | **FALSE** | 2 of 20; stated, not fixed |
+| It learns `xor` | **FALSE** | 0 of 6 worlds; a two-cut tree applies the same cuts everywhere |
+| Operator invention beats deeper enumeration | **FALSE** | it did not win once; module deleted |
+| Accumulated operators make a new world cheaper | **FALSE** | same accuracy, 79% more evaluations |
+| Unaided closure for classes that matter | **STILL 0** | bookkeeping 100% (N=2); the real lead, N=1, unfixed |
+
+### What the deepest layer says now
+
+The creature can now learn a rule it could not express before this log — that is the second time in
+seventeen logs that a change made it better at something instead of making the world bigger. But
+notice the shape of what it can learn: **two cuts, one shape.** `xor` needs a different cut in each
+branch and it fails completely. So the next layer is not more vocabulary and not a bigger search; it
+is a representation where the branch decides what is asked next. I will not pretend this log is that.
+
+Authority: **NONE**. Terminal truth: `false`. No capability credit.

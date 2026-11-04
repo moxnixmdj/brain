@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_LEARNER_V1",
+  "generated_by": "canonical/tools/learner_probe_v1.py",
+  "what_this_is": "Whether the model can learn a rule that is not one cut at a time. A conjunction gains nothing from either of its cuts alone; a model judged cut-by-cut cannot see it.",
+  "rules": {
+    "and": {
+      "model": 0.9806,
+      "majority_baseline": 0.7583,
+      "worlds_with_structure": "6 of 6"
+    },
+    "or": {
+      "model": 0.9861,
+      "majority_baseline": 0.7694,
+      "worlds_with_structure": "6 of 6"
+    },
+    "product": {
+      "model": 0.9083,
+      "majority_baseline": 0.6472,
+      "worlds_with_structure": "6 of 6"
+    },
+    "xor": {
+      "model": 0.5056,
+      "majority_baseline": 0.5444,
+      "worlds_with_structure": "0 of 6"
+    }
+  },
+  "noise": {
+    "60": {
+      "worlds": 20,
+      "distinctions_invented": 0
+    },
+    "90": {
+      "worlds": 20,
+      "distinctions_invented": 0
+    },
+    "140": {
+      "worlds": 20,
+      "distinctions_invented": 2
+    }
+  },
+  "honest_failures": [
+    "xor is not learned: a two-cut tree applies the same two cuts everywhere, and xor needs a different cut in each branch",
+    "the whole-tree search is bounded at two cuts; deeper interactions are out of reach",
+    "two earlier attempts were measured and discarded: pair lookahead admitted splits in 6-7 of 20 structureless worlds, log-loss judging in 57 across 10"
+  ],
+  "authority": "NONE",
+  "terminal_truth": false
+}
