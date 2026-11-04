@@ -62,3 +62,71 @@ space, so the creature's only reachable answer is the constant — which the gat
 Widening the candidate grammar is the honest next step. Adding another verifier is not: the verifier is
 already refusing more than the organ can usefully produce, and a stricter gate on a narrow search only
 converts silent overclaiming into a lower number with the same ceiling.
+
+---
+
+# Addendum, same day: the ceiling was a broken verifier
+
+I wrote the section above concluding that the candidate grammar was the binding constraint. **That was
+wrong**, and chasing it found something worse one layer down.
+
+## What happened
+
+I widened the grammar with `_propose_structured_ast_repairs` (integer offsets, identity swap, division
+guard) and measured the zoo again: **unchanged, 3/6**. Controlled test — same zoo with the generator
+deleted — also 3/6. The generator was dead weight.
+
+So I traced instead of widening further. Every repair, in every case, came from the coupled engine
+(`WHITEBOX_TRACE_AND_DUAL_SYNTHESIS`), never from the AST generators. The AST path was gated on
+`batch_screen["passing_indices"]`, which was **always empty**.
+
+## The bug
+
+`PersistentConfinedZygote.screen_batch` stages each candidate into a slot directory and symlinks the
+rest of the tree from `/input/<batch>`. A test doing the ordinary thing —
+
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
+— had that symlink **resolved back to the input copy**, so it imported the *original* module. The
+candidate was invisible to its own test. Verified against ground truth (apply the candidate, run pytest):
+
+| world | candidate | screen says | truth |
+|---|---|---|---|
+| GREEN | WRONG | `passing=[0]` — passed | FAIL |
+| BROKEN | RIGHT | `passing=[]` — failed | PASS |
+| BROKEN | no-op | `passing=[]` — failed | FAIL |
+
+Exactly inverted. The screen was grading the **world**, not the candidate.
+
+Consistent with everything above: 7/7 pinned tests could be made green (by the engine, which does its own
+verification), but only 2/7 became acquisitions (because the AST path could not report a pass at all in
+any world the creature repairs). No amount of candidate-space widening could have moved the number.
+
+## The fix
+
+Stage with **hard links** — `resolve()` cannot escape a hard link — and register each test module under
+its own file stem as well as the synthetic `_zyg_cand_N_M` name.
+
+Zoo after the fix, measured by executing tests, nothing handed in:
+
+| defect | owed | held-out |
+|---|---|---|
+| op swap | pass | **pass** (`return a + b`) |
+| off-by-one | fail | fail (refused — organ answers `return xs`, gate withholds) |
+| comparison | pass | pass |
+| zero guard | pass | pass |
+| identity | pass | **pass** (`return 0 if not xs else p`) |
+| string method | pass | pass |
+
+**5/6, up from 2/6.** Two of the three previously-unreachable shapes now acquire genuine fixes.
+
+## What this says about the method
+
+Two changes I wrote this turn — the structural generator and an edit-size ranking — were both correct
+code written against a bug I had not yet found, and both measured as doing nothing. They were deleted
+rather than shipped. The discipline that produced the 5/6 was not cleverer candidate generation; it was
+refusing to believe a number until I could point at the mechanism that produced it, and refusing to ship
+a change I could not show to be load-bearing.
+
+A verifier that cannot see the thing it verifies does not produce a low score. It produces a *plausible*
+one, in an inverted direction, and every layer above it inherits the sign error.
