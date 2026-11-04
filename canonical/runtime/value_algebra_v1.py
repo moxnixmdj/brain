@@ -188,6 +188,17 @@ def _aggregate(kind: str):
     }[kind]
 
     def apply(values, *_):
+        # A TABLE HAS ROWS, AND A COUNT OF THEM IS ITS ROW COUNT.
+        #
+        # `len()` on a table dict is the number of KEYS -- `_header` and `_body` -- so
+        # `count(t@file)` was 2 for every file in the world, however many rows it had.
+        # It never showed up because nothing built that expression until the enumerator
+        # did, and it passed every invariant: 2 is a number, and no statement relates a
+        # table's row count to anything else. The meaning of a count lives here, so this
+        # is where a table's count is defined -- not in each operator that might count.
+        if isinstance(values, dict) and "_body" in values:
+            rows = values["_body"]
+            return len(rows) if kind == "count" else None
         vals = list(values)
         if not vals:
             return None
@@ -645,8 +656,14 @@ def _evaluate(node: Node, *, derived: dict | None = None) -> object:
             raise EvalError("nothing to choose")
         return {"_cells": best_row, "_index": {h: j for j, h in enumerate(header)}}
     if op == "count":
-        v = evaluate(node.args[0])
-        return len(v)
+        # ONE DEFINITION OF WHAT A COUNT IS.
+        #
+        # This was a second implementation, with its own `len(v)` -- so it counted the
+        # KEYS of a table (2) while `_aggregate("count")` counted its rows, and "how many
+        # rows are in sales.csv" returned 2 for a file of five. The same value had two
+        # meanings depending on how it was spelled, which is the defect this file keeps
+        # finding: a fact is only true if there is one place that says it.
+        return _aggregate("count")(evaluate(node.args[0]), "count")
     if op == "contains_all":
         haystack, needle = evaluate(node.args[0]), evaluate(node.args[1])
         h = {str(x).strip().lower() for x in haystack}
