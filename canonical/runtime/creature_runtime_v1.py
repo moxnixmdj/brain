@@ -2162,138 +2162,104 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
 
     Method, and why it is this and not something cleverer:
 
-      1. Find every assertion in the owed test that calls a workspace function on literal inputs.
-         Not just the first -- measured 2026-11-05, looking only at the first made the probe reject
-         honest repairs (`div(1, 0) is None`) for the reason `NO_LITERAL_CALL_TO_PERTURB`.
-      2. Perturb the inputs, keeping their shape, and ask the *repaired code itself* what it now
-         returns. The answer must move. A function that returns `5` whatever you give it has
+      1. Read every assertion in the owed test that compares a call to a literal with a literal.
+         The call is executed *as written*, in a namespace built from the test's own imports, rather
+         than by looking up a `def` and calling it. Locating a definition was a blind spot, measured
+         2026-11-05: `assert ops['add'](7, 2) == 9`, a closure factory, and a `@property` all have a
+         call and no definition the probe can find, so three honest repairs came back
+         DEFINITION_NOT_FOUND. The evidence was always there; the probe was not reading it.
+      2. Perturb the literal arguments, keeping their shape, and ask the *repaired code itself* what
+         it now returns. The answer must move. A function returning `9` whatever you give it has
          memorized a constant, and a constant is not a capability.
-      3. Perturb once more. A function whose output does not move between two different inputs is
-         not using its arguments: `head(xs) -> xs` passes `head([1,2,3]) == [1,2,3]` and would pass
-         any held-out the test's shape allows, while doing nothing the function was asked to do.
-         This is the check that catches "moves, but always to the same place".
+      3. Perturb once more. A function whose output does not move between two different inputs is not
+         using its arguments: `head(xs) -> xs` passes `head([1,2,3]) == [1,2,3]` and would pass any
+         held-out the test's shape allows, while doing nothing the function was asked to do.
 
     What this cannot do, stated plainly so the creature is not credited for more than it did:
     proving `a + b` correct requires a specification the test does not contain. This probe rejects
     memorization and argument-blindness. It cannot confirm intent.
     """
     import ast as _ast
-    import re as _re
 
     try:
         txt = test_file.read_text(encoding="utf-8")
     except OSError as exc:
         return {"generalizes": False, "reason": f"UNREADABLE_OWED_TEST: {exc}"}
 
-    # Evidence the probe could not previously see. The old extractor was a regex over
-    # `assert name(args) == literal`, so `assert Calc().add(7, 2) == 9` produced no case and an
-    # honest O(1) repair came back `NO_LITERAL_CALL_TO_PERTURB` -- a false negative, measured
-    # 2026-11-05, which silently rejected every repair living on a method rather than a bare
-    # function. Parsing the assertion instead of scanning it finds both forms: a plain call, or a
-    # method on a constructed receiver. Nothing about what counts as generalizing is weakened
-    # here; the probe just stops being blind to half the code it is asked about.
-    cases: list[tuple[str, str | None, tuple, str, Any]] = []  # (callable, receiver class, args, op, expected)
     try:
-        _tree = _ast.parse(txt)
-    except SyntaxError:
-        _tree = None
-    if _tree is not None:
-        for node in _ast.walk(_tree):
-            if not isinstance(node, _ast.Assert):
-                continue
-            test = node.test
-            if not isinstance(test, _ast.Compare) or len(test.comparators) != 1:
-                continue
-            call = test.left
-            if not isinstance(call, _ast.Call):
-                continue
-            op = "==" if isinstance(test.ops[0], _ast.Eq) else (
-                "is" if isinstance(test.ops[0], _ast.Is) else None)
-            if op is None:
-                continue
-            try:
-                args = tuple(_ast.literal_eval(a) for a in call.args)
-                if call.keywords:
-                    continue
-                expected = _ast.literal_eval(test.comparators[0])
-            except Exception:
-                continue
-            if not args:
-                continue
-            fn = call.func
-            if isinstance(fn, _ast.Name):
-                cases.append((fn.id, None, args, op, expected))
-            elif isinstance(fn, _ast.Attribute):
-                recv = fn.value
-                cls = None
-                if isinstance(recv, _ast.Call) and isinstance(recv.func, _ast.Name) and not recv.args:
-                    cls = recv.func.id
-                elif isinstance(recv, _ast.Name):
-                    cls = recv.id  # an instance/class referenced by name in the test
-                if cls is not None:
-                    cases.append((fn.attr, cls, args, op, expected))
+        tree = _ast.parse(txt)
+    except SyntaxError as exc:
+        return {"generalizes": False, "reason": f"UNPARSABLE_OWED_TEST: {exc.msg}"}
+
+    cases: list[tuple[str, str, tuple, str, Any]] = []  # (call source, func source, args, op, expected)
+    for node in _ast.walk(tree):
+        if not isinstance(node, _ast.Assert):
+            continue
+        test = node.test
+        if not isinstance(test, _ast.Compare) or len(test.comparators) != 1:
+            continue
+        call, expected_node = test.left, test.comparators[0]
+        if not isinstance(call, _ast.Call) or call.keywords:
+            continue
+        op = "==" if isinstance(test.ops[0], _ast.Eq) else (
+            "is" if isinstance(test.ops[0], _ast.Is) else None)
+        if op is None:
+            continue
+        try:
+            args = tuple(_ast.literal_eval(a) for a in call.args)
+            expected = _ast.literal_eval(expected_node)
+        except Exception:
+            continue
+        if not args:
+            continue
+        call_src = _ast.get_source_segment(txt, call)
+        func_src = _ast.get_source_segment(txt, call.func)
+        if not call_src or not func_src:
+            continue
+        cases.append((call_src, func_src, args, op, expected))
     if not cases:
         return {"generalizes": False, "reason": "NO_LITERAL_CALL_TO_PERTURB"}
 
-    short, receiver_cls, args, op, expected = cases[0]
+    call_src, func_src, args, op, expected = cases[0]
 
-    # Locate the definition by following the test's own imports. Scanning the tree is how this once
-    # took minutes on a real repository; a probe too slow to run is a probe that silently says no.
-    candidates: list[pathlib.Path] = []
-    tree = _tree
-    if tree is not None:
-        for node in _ast.walk(tree):
-            mods: list[str] = []
-            if isinstance(node, _ast.ImportFrom) and node.module:
-                mods = [f"{node.module}.{a.name}" for a in node.names] + [node.module]
-            elif isinstance(node, _ast.Import):
-                mods = [a.name for a in node.names]
-            for mod in mods:
-                rel = pathlib.Path(*mod.split("."))
-                for cand in (ws_root / rel.with_suffix(".py"), ws_root / rel / "__init__.py"):
-                    if cand.is_file() and cand not in candidates:
-                        candidates.append(cand)
-    target = None
-    for cand in candidates:
+    # Namespace = the test's own imports, resolved inside the workspace. Scanning the whole tree is
+    # how this once took minutes on a real repository; a probe too slow to run says no by default.
+    ns: dict[str, Any] = {"__name__": "_probe_ns"}
+    executed: list[str] = []
+    targets: list[pathlib.Path] = []
+    for node in _ast.walk(tree):
+        mods: list[str] = []
+        if isinstance(node, _ast.ImportFrom) and node.module:
+            mods = [node.module]
+        elif isinstance(node, _ast.Import):
+            mods = [a.name for a in node.names]
+        for mod in mods:
+            rel = pathlib.Path(*mod.split("."))
+            for cand in (ws_root / rel.with_suffix(".py"), ws_root / rel / "__init__.py"):
+                if cand.is_file() and cand not in targets:
+                    targets.append(cand)
+    for cand in targets:
         try:
-            text_c = cand.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        if f"def {short}(" in text_c and (
-            receiver_cls is None or f"class {receiver_cls}" in text_c
-        ):
-            target = cand
-            break
-    if target is None:
-        return {"generalizes": False, "reason": f"DEFINITION_NOT_FOUND: {short}"}
+            if cand.stat().st_size > 400_000:
+                return {"generalizes": False, "reason": f"REPAIRED_CODE_TOO_LARGE: {cand.name}"}
+            exec(compile(cand.read_text(encoding="utf-8"), str(cand), "exec"), ns)  # noqa: S102
+            executed.append(str(cand.relative_to(ws_root)))
+        except Exception as exc:  # noqa: BLE001
+            return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
+    if not executed:
+        return {"generalizes": False, "reason": "TEST_IMPORTS_NO_WORKSPACE_MODULE"}
 
-    try:
-        ns: dict[str, Any] = {}
-        exec(compile(target.read_text(encoding="utf-8"), str(target), "exec"), ns)  # noqa: S102
-        if receiver_cls is None:
-            fn = ns.get(short)
-            subject = short
-        else:
-            _obj = ns.get(receiver_cls)
-            if not isinstance(_obj, type):
-                return {"generalizes": False, "reason": f"NOT_CALLABLE: {receiver_cls}"}
-            try:
-                _inst = _obj()
-            except Exception as exc:  # noqa: BLE001
-                return {"generalizes": False, "reason": f"RECEIVER_NOT_CONSTRUCTIBLE: {type(exc).__name__}"}
-            fn = getattr(_inst, short, None)
-            subject = f"{receiver_cls}.{short}"
-        if not callable(fn):
-            return {"generalizes": False, "reason": f"NOT_CALLABLE: {subject}"}
-    except Exception as exc:  # noqa: BLE001
-        return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
+    def _call_with(values: tuple) -> Any:
+        # Rebuild from the recorded callee, so `C()`, `ops['add']`, `make()` and a bare name are all
+        # the same thing to the probe: an expression to execute against the repaired code.
+        return eval(f"{func_src}({', '.join(repr(v) for v in values)})", ns)  # noqa: S307
 
     args_a = tuple(_perturb(a) for a in args)
     args_b = tuple(_perturb(a) for a in args_a)
     try:
-        produced = fn(*args)
-        out_a = fn(*args_a)
-        out_b = fn(*args_b)
+        produced = _call_with(args)
+        out_a = _call_with(args_a)
+        out_b = _call_with(args_b)
     except Exception as exc:  # noqa: BLE001
         return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
 
@@ -2315,8 +2281,8 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
         "expected": expected,
         "ignores_inputs": ignores_inputs,
         "identity_like": identity_like,
-        "source": str(target.relative_to(ws_root)),
-        "subject": subject,
+        "source": ",".join(executed),
+        "subject": func_src,
         "reason": ("REPAIRED_CODE_DISAGREES_WITH_OWED_TEST" if not matches_owed
                    else "OUTPUT_IGNORES_INPUTS" if ignores_inputs
                    else "TEST_CANNOT_DISTINGUISH_IDENTITY" if identity_like
