@@ -2477,7 +2477,7 @@ def _publish_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
             return False, None, "NOTION_FEEDBACK_UNAVAILABLE"
         # Hold the read lock through publication. A cooperating feedback writer
         # cannot retract the approval in the middle of this operation.
-        with store.hold_reviewed_feedback(binding) as valid:
+        with store.hold_reviewed_feedback(binding, workspace_root=ws_root) as valid:
             if not valid:
                 return False, None, "NOTION_FEEDBACK_STALE"
             key = store._authored_test_key(ws_root, rel_test)
@@ -2487,6 +2487,11 @@ def _publish_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
             if (origin.get("test_sha256") != hashlib.sha256(test_bytes).hexdigest()
                     or store.render_reviewed_test(binding).encode("utf-8") != test_bytes):
                 return False, None, "NOTION_TEST_CHANGED"
+            # The passing candidate must also agree with the recomputed model
+            # on its finite outcome domain. Owed examples and a sensitivity
+            # probe alone can admit an expression outside that consensus.
+            if not store._workspace_plan_valid(binding, ws_root, candidate_source=staged[binding["module"]]):
+                return False, None, "NOTION_CANDIDATE_DISAGREES"
             return publish()
     except (OSError, ValueError, TypeError, KeyError):
         return False, None, "NOTION_FEEDBACK_UNAVAILABLE"

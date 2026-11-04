@@ -15,6 +15,7 @@ from canonical.runtime import brokered_workspace_execution_v1 as broker
 from canonical.swe_kernel.expression_hypotheses_v1 import (
     _learned_compositions,
     _signature,
+    OUTCOME_MODEL_VERSION,
     evaluate_expression,
     fitting_expression_candidates,
     function_models,
@@ -235,6 +236,7 @@ def test_duplicated_feedback_cannot_author_a_test_even_with_a_forged_plan(tmp_pa
     store = NotionStore(d.notions_path)
     feedback_hash = store._feedback_hash(store.reviews[f["id"]], store.examples[f["id"]])
     assert store.record_plan(f["id"], {"status": "bounded_agreement", "truncated": False,
+                                       "outcome_model_version": OUTCOME_MODEL_VERSION,
                                        "external_examples": 2}, expected_feedback_hash=feedback_hash)
     binding = {"module": f["module"], "source_sha256": f["source_sha256"],
                "target": "pair", "reference": "narrow", "finding_id": f["id"],

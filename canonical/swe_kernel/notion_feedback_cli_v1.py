@@ -27,7 +27,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     answer = commands.add_parser("answer", help="answer the current active query")
     answer.add_argument("finding_id")
     answer.add_argument("--args", required=True, help="JSON array from next_query.args")
-    answer.add_argument("--expected", required=True, help="independently supplied JSON number")
+    answer.add_argument("--expected", required=True,
+                        help='external JSON number or {"raises":"ZeroDivisionError"} / {"raises":"OverflowError"}')
     answer.add_argument("--reviewer", required=True)
     answer.add_argument("--basis", required=True)
     ns = parser.parse_args(argv)

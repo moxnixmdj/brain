@@ -27,7 +27,9 @@ from typing import Any, Callable, Iterable, Mapping
 
 from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
 from canonical.swe_kernel.expression_hypotheses_v1 import (
-    evaluate, function_models, observed_binary_operators, same_number, supported_binary_operator_names,
+    OUTCOME_MODEL_VERSION, candidate_agrees_with_bounded_plan, evaluate, evaluate_model_outcome,
+    function_models, investigate, matches_expected, model_agrees_with_outcome_reference,
+    observed_binary_operators, same_number, supported_binary_operator_names, supported_expected,
     target_expression_scope_sha256, validate_external_examples,
 )
 
@@ -324,9 +326,9 @@ class NotionStore:
         return True
 
     @_serialized_update
-    def answer(self, finding_id: str, *, args: list[int | float], expected: int | float,
+    def answer(self, finding_id: str, *, args: list[int | float], expected: int | float | dict[str, str],
                reviewer: str, basis: str) -> dict[str, Any]:
-        """Record an external answer to the currently proposed input, once."""
+        """Record an external numeric or supported exception answer to the current query."""
         if not can_write_memory():
             raise PermissionError("memory policy forbids feedback")
         self.load()
@@ -338,16 +340,13 @@ class NotionStore:
                 or any(type(a) not in (int, float) or (isinstance(a, float) and not math.isfinite(a)) for a in args)):
             raise ValueError("answer does not match an active, reviewed query")
         if (not isinstance(reviewer, str) or not reviewer.strip() or not isinstance(basis, str)
-                or not basis.strip() or type(expected) not in (int, float)):
-            raise ValueError("an independent numeric answer and its provenance are required")
-        if isinstance(expected, int) and expected.bit_length() > 80:
-            raise ValueError("answer exceeds numeric budget")
-        if isinstance(expected, float) and (not math.isfinite(expected) or abs(expected) > 1e20):
-            raise ValueError("answer exceeds numeric budget")
+                or not basis.strip() or not supported_expected(expected)):
+            raise ValueError("a supported external outcome and its provenance are required")
         prior = self.examples.setdefault(finding_id, [])
         if any(e.get("args") == args for e in prior):
             raise ValueError("query was already answered")
-        example = {"args": list(args), "expected": expected, "reviewer": reviewer[:200], "basis": basis[:500]}
+        example = {"args": list(args), "expected": dict(expected) if isinstance(expected, dict) else expected,
+                   "reviewer": reviewer[:200], "basis": basis[:500]}
         prior.append(example)
         # Require a new plan before accepting another answer; the model must actually update.
         self.plans.pop(finding_id, None)
@@ -380,6 +379,9 @@ class NotionStore:
                 or any(not isinstance(review.get(field), str) or not review[field].strip()
                        for field in ("reviewer", "basis"))
                 or len(examples) < 2 or plan.get("status") != "bounded_agreement"
+                # Older plans ignored value-versus-exception disagreements.
+                # They must be replanned, not silently granted new semantics.
+                or plan.get("outcome_model_version") != OUTCOME_MODEL_VERSION
                 or plan.get("truncated") or plan.get("external_examples") != len(examples)):
             return False
         arity = finding.get("arity")
@@ -391,15 +393,68 @@ class NotionStore:
             return False
         return binding.get("feedback_sha256") == self._feedback_hash(review, examples)
 
+    def _workspace_plan(self, binding: Mapping[str, Any], workspace_root: str | pathlib.Path
+                        ) -> tuple[str, dict[str, Any], list[dict[str, Any]]] | None:
+        """Recompute agreement from the original source and current local feedback.
+
+        A stored status/version alone is not evidence that the planner ran, nor
+        is a plan still necessarily current after learned operators change. This
+        checks consistency, not the authenticity of reviewers or local metadata.
+        The caller holds the relevant cooperative store lock.
+        """
+        try:
+            if not self._feedback_binding_valid(binding):
+                return None
+            root = pathlib.Path(workspace_root).resolve(strict=True)
+            module = pathlib.PurePosixPath(str(binding["module"]))
+            if not root.is_dir() or module.is_absolute() or ".." in module.parts:
+                return None
+            path = (root / module).resolve(strict=True)
+            if not path.is_file() or not path.is_relative_to(root) or path.stat().st_size > 400_000:
+                return None
+            raw = path.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != binding.get("source_sha256"):
+                return None
+            source = raw.decode("utf-8")
+            fid = str(binding["finding_id"])
+            found = next((n for n in notions_for_source(source, module.as_posix()) if n.id == fid), None)
+            if found is None:
+                return None
+            observed = found.evaluate()
+            stored = self.findings.get(fid) or {}
+            keys = ("id", "module", "source_sha256", "left", "right", "arity", "fired", "declined", "observations")
+            if any(observed.get(k) != stored.get(k) for k in keys) or not observed["fired"] or observed["declined"]:
+                return None
+            operators = self.learned_operators()  # reads the current locked snapshot
+            examples = self.examples.get(fid) or []
+            plan = investigate(source, target_name=str(binding["target"]), reference_name=str(binding["reference"]),
+                               observations=observed["observations"], examples=examples, learned_operators=operators)
+            if (plan.get("status") != "bounded_agreement" or plan.get("truncated")
+                    or plan.get("external_examples") != len(examples)):
+                return None
+            return source, plan, examples
+        except (OSError, UnicodeError, ValueError, TypeError, KeyError, RecursionError, MemoryError):
+            return None
+
+    def _workspace_plan_valid(self, binding: Mapping[str, Any], workspace_root: str | pathlib.Path, *,
+                              candidate_source: str | None = None) -> bool:
+        snapshot = self._workspace_plan(binding, workspace_root)
+        if snapshot is None:
+            return False
+        source, plan, examples = snapshot
+        return (candidate_source is None or candidate_agrees_with_bounded_plan(
+            source, candidate_source, target_name=str(binding["target"]), plan=plan, examples=examples))
+
     @contextlib.contextmanager
-    def hold_reviewed_feedback(self, binding: Mapping[str, Any]):
-        """Hold a cooperative read lock while checking and using reviewed feedback.
+    def hold_reviewed_feedback(self, binding: Mapping[str, Any], *,
+                               workspace_root: str | pathlib.Path | None = None):
+        """Hold the cooperative read lock through workspace-plan checking and use.
 
         A concurrent store-method retraction waits until the current operation
-        ends. This is local advisory synchronization, not authentication or a
-        hostile-writer guarantee.
+        ends. Missing workspace evidence fails closed. This is local advisory
+        synchronization, not authentication or a hostile-writer guarantee.
         """
-        if not can_read_memory() or self.path is None:
+        if not can_read_memory() or self.path is None or workspace_root is None:
             yield False
             return
         import fcntl
@@ -416,7 +471,7 @@ class NotionStore:
             try:
                 try:
                     self.load()
-                    valid = self._feedback_binding_valid(binding)
+                    valid = self._workspace_plan_valid(binding, workspace_root)
                 except (OSError, ValueError, TypeError):
                     valid = False
                 yield valid
@@ -454,7 +509,16 @@ class NotionStore:
         lines: list[str] = []
         for i, (args, expected, anchor_args) in enumerate(checks):
             call = f"{target}({', '.join(repr(x) for x in args)})"
-            lines.extend([f"def test_notion_{fid[:12]}_{i}():", f"    assert {call} == {expected!r}"])
+            lines.append(f"def test_notion_{fid[:12]}_{i}():")
+            if isinstance(expected, dict):
+                # The validated label is from a closed set, never executable text
+                # supplied by the caller. Check the exact built-in exception type.
+                name = expected["raises"]
+                lines.extend(["    try:", f"        {call}", f"    except {name} as captured:",
+                              f"        assert type(captured) is {name}", "    else:",
+                              f"        raise AssertionError('expected {name}')"])
+            else:
+                lines.append(f"    assert {call} == {expected!r}")
             if anchor_args is not None:
                 anchor = f"{reference}({', '.join(repr(x) for x in anchor_args)})"
                 lines.append(f"    assert {anchor} == {expected!r}")
@@ -516,6 +580,14 @@ class NotionStore:
                     or destination.exists()
                     or hashlib.sha256(module.read_bytes()).hexdigest() != binding.get("source_sha256")):
                 return False
+            snapshot = self._workspace_plan(binding, root)
+            if snapshot is None:
+                return False
+            _, plan, _ = snapshot
+            expressions = plan.get("candidate_expressions")
+            if not isinstance(expressions, list) or not expressions or not isinstance(expressions[0], str):
+                return False
+            outcome_reference = expressions[0]
             text = self.render_reviewed_test(binding)
             scope_hash = target_expression_scope_sha256(module.read_text(encoding="utf-8"), str(binding["target"]))
             if scope_hash is None:
@@ -530,7 +602,9 @@ class NotionStore:
             return False
         self.authored_tests[key] = {"binding": dict(binding),
                                     "test_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
-                                    "non_target_sha256": scope_hash}
+                                    "non_target_sha256": scope_hash,
+                                    "outcome_model_version": OUTCOME_MODEL_VERSION,
+                                    "outcome_reference": outcome_reference}
         self.save()
         destination.parent.mkdir(parents=True, exist_ok=True)
         # This workspace integrity marker carries no learned semantic content.
@@ -553,9 +627,10 @@ class NotionStore:
         """Record syntax from a current, locally checked reviewed repair for proposals only.
 
         The board calls this after publication. Recheck that the candidate is
-        actually present and that the authored test and feedback still match.
-        Local files and caller claims are unauthenticated: matching workspace
-        bytes do not prove who wrote them or that an independent verifier ran.
+        present, that the test and feedback still match, and that its outcomes
+        fit the finite reference saved at authorship. Local files and caller
+        claims are unauthenticated: matching workspace bytes do not prove who
+        wrote them or that an independent verifier ran.
         No future question is approved by remembering an operator.
         """
         if not can_write_memory():
@@ -615,8 +690,7 @@ class NotionStore:
                 if args in seen_args or len(args) != len(model.params):
                     return {"status": "feedback_mismatch", "operators": []}
                 seen_args.add(args)
-                valid, value = evaluate(model, args)
-                if not valid or not same_number(value, example.get("expected")):
+                if matches_expected(evaluate_model_outcome(model, args), example.get("expected")) is not True:
                     return {"status": "feedback_mismatch", "operators": []}
             for observation in finding.get("observations", []):
                 x = observation.get("input")
@@ -628,6 +702,11 @@ class NotionStore:
                     return {"status": "feedback_mismatch", "operators": []}
         except (TypeError, ValueError):
             return {"status": "feedback_mismatch", "operators": []}
+        outcome_reference = origin.get("outcome_reference")
+        if origin.get("outcome_model_version") != OUTCOME_MODEL_VERSION or not isinstance(outcome_reference, str):
+            return {"status": "outcome_evidence_missing", "operators": []}
+        if not model_agrees_with_outcome_reference(model, outcome_reference, examples):
+            return {"status": "candidate_outcome_mismatch", "operators": []}
         operators = observed_binary_operators(model.expression)
         if not operators:
             return {"status": "no_observed_operators", "operators": []}
@@ -639,7 +718,8 @@ class NotionStore:
             "target": target, "reference": reference, "operators": operators,
             "feedback_sha256": self._feedback_hash(review, examples),
             "test_origin_key": key, "test_sha256": origin["test_sha256"],
-            "non_target_sha256": original_scope,
+            "non_target_sha256": original_scope, "outcome_model_version": OUTCOME_MODEL_VERSION,
+            "outcome_reference_sha256": hashlib.sha256(outcome_reference.encode("utf-8")).hexdigest(),
             "observation": "workspace_matches_reviewed_examples_publication_not_authenticated",
         }
         self.save()

@@ -600,7 +600,7 @@ def test_feedback_retraction_waits_for_the_publication_read_lock(tmp_path):
     store = NotionStore(d.notions_path)
     ctx = multiprocessing.get_context("fork")
     started, finished = ctx.Event(), ctx.Event()
-    with store.hold_reviewed_feedback(binding) as valid:
+    with store.hold_reviewed_feedback(binding, workspace_root=workspace) as valid:
         assert valid
         process = ctx.Process(target=_retract_concurrently, args=(str(d.notions_path), f["id"], started, finished))
         process.start()
