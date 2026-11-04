@@ -39,7 +39,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CRYSTALLIZER_ASKED_DOES_IT_FIT_AND_ACCEPTED_THE_ANSWER_IT_NEVER_ASKED_COULD_THIS_HAVE_BEEN_WRONG_SO_THREE_OBSERVATIONS_THAT_EXACTLY_DETERMINE_AN_AFFINE_FITS_THREE_PARAMETERS_WERE_TREATED_AS_CORROBORATION_AND_A_BODY_WRONG_ON_EVERY_UNSEEN_INPUT_BECAME_A_LAW",
-  "canonical_base_commit": "b1050701d8ebb11436b136fcc1e8004ac0bf3262",
+  "canonical_base_commit": "b14bdd5d8c362009ee3b3fac41b0e14d465caf63",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -86,7 +86,7 @@
     "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "b1050701d8ebb11436b136fcc1e8004ac0bf3262",
+    "canonical_base_commit": "b14bdd5d8c362009ee3b3fac41b0e14d465caf63",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ONE_HAND_WRITTEN_NODE_PER_COMPOSED_FORM",
@@ -248,7 +248,7 @@
           "route": "WIRE_THE_CONCEPT_LIBRARY_IN_AS_A_TEMPLATE_SOURCE"
         }
       ],
-      "checked_at_utc": "2026-11-04T17:17:03Z",
+      "checked_at_utc": "2026-11-04T17:24:39Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -288,7 +288,7 @@
       "selected_route": "IDENTIFY_THE_RESIDUAL_SHAPE_RATHER_THAN_ASSUME_IT",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-04T17:17:03Z",
+        "checked_at_utc": "2026-11-04T17:24:39Z",
         "execution_dependencies": [
           {
             "dependency": "CPython 3.11 standard library runtime",

@@ -1128,9 +1128,74 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # It does not resolve them. Choosing which of two verified answers to believe is the
         # guess this project keeps refusing to make; both are kept and the contradiction is
         # returned as a contradiction.
-        "contradicts": _remember_and_check(question, comp,
-                                           bool(comp and comp.get("verified")), root),
+        "contradicts": ([] if _IN_REFERENT_PROBE else
+                        _remember_and_check(question, comp,
+                                            bool(comp and comp.get("verified")), root)),
+        # IS THIS ANSWER ABOUT WHAT WAS ASKED?
+        #
+        # Every other field on this object answers "is the expression sound", and every one
+        # of them can say yes while the expression answers a different question. Measured:
+        # `what is the total amount times region` returned 6 via
+        # `double(count(sum(amount) by region))` -- a doubled count of the region groups,
+        # verified, and never touching an amount value.
+        #
+        # This perturbs the column the question names and asks whether the answer moves. An
+        # answer about `amount` must move when `amount` changes; an answer that does not was
+        # never about it. The probe value is derived from the data so the perturbation is
+        # always real -- a fixed probe accused three correct answers of ignoring the column
+        # they were entirely made of, on a tree that already held that value.
+        "depends_on_referent": _checks_its_referent(question, comp, root),
     }
+
+
+def _checks_its_referent(question: str, comp, root) -> dict:
+    """Does this answer depend on the column the question names?
+
+    Runs only for an answer that claims to have been computed; a refusal has no referent
+    to be wrong about. Costs one extra evaluation of the question against a perturbed copy
+    of the tree, so it is bounded and skipped when there is nothing to check.
+    """
+    if comp is None or not comp.get("verified"):
+        return {"verdict": "not_applicable", "why": "nothing was computed"}
+    try:
+        from canonical.runtime import referent_dependence_v1 as _R
+    except Exception as exc:
+        return {"verdict": "uncheckable", "why": f"{type(exc).__name__}: {exc}"}
+
+    # A CHECK MUST NOT RE-ENTER ITSELF.
+    #
+    # `ask` has to run the door again on a perturbed tree, and the door now calls this
+    # check -- so the first version recursed until the stack died. The guard is a flag,
+    # not a depth limit: inside the probe, the question is only being evaluated, so the
+    # referent check is skipped. Deeper recursion would not make the answer more certain.
+    global _IN_REFERENT_PROBE
+    if _IN_REFERENT_PROBE:
+        return {"verdict": "uncheckable", "why": "already inside a referent probe"}
+
+    def ask(re_root):
+        global _IN_REFERENT_PROBE
+        _IN_REFERENT_PROBE = True
+        try:
+            again = answer(question, re_root)
+            inner = again.get("computation") or {}
+            value = inner.get("value")
+            return None if value is None else str(value)
+        finally:
+            _IN_REFERENT_PROBE = False
+
+    try:
+        return _R.check(root, question, ask)
+    except Exception as exc:
+        # A CHECK THAT CRASHED IS NOT A CHECK THAT PASSED.
+        return {"verdict": "uncheckable", "why": f"the check raised {type(exc).__name__}: {exc}"}
+
+
+#: Set while a referent probe is running. It does two jobs, and both matter:
+#: the door must not re-enter the referent check from inside itself, and a PROBE IS NOT AN
+#: ANSWER -- its evaluations must never enter the ledger. Measured: without this, one
+#: question logged three entries, including the perturbed value 7004, and the ledger then
+#: reported a contradiction between the real answer and its own experiment.
+_IN_REFERENT_PROBE = False
 
 
 def _expression_shape(comp: dict, root=None) -> str | None:

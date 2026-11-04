@@ -208,7 +208,8 @@ def read_column(node) -> str | None:
 
 def check_parts_against_whole(parts_node, parts_value, whole_node, whole_value,
                               kind: str | None = None,
-                              whole_restricts: bool | None = None) -> dict:
+                              whole_restricts: bool | None = None,
+                              parts_kind: str | None = None) -> dict:
     """Can `parts_value` be reconciled with `whole_value`, and if not, why not.
 
     Returns one of three verdicts, and the third is the one that was missing everywhere
@@ -223,7 +224,24 @@ def check_parts_against_whole(parts_node, parts_value, whole_node, whole_value,
     defect that was removed three times from the law grade; a mean of means is a real
     answer that this check must refuse to bless, and it refuses by name.
     """
+    # THE PARTS AND THE WHOLE MUST APPLY THE SAME AGGREGATE.
+    #
+    # MEASURED ON MERGED MAIN as a contradiction reported between two CORRECT answers:
+    # `[150, 150, 250]` (one sum per region) against `50` (the smallest amount). The check
+    # took the aggregate from the WHOLE side -- `min` -- recombined the sums with `min`,
+    # got 150, and called it a disagreement. A breakdown of sums is not a breakdown of
+    # minima, whatever column they read.
+    #
+    # The parts' own aggregate is what has to recombine. One side cannot dictate the law
+    # for both, and this is the same shape of error as every other one this round: the law
+    # was applied to a pair it never described.
+    if parts_kind is None and parts_node is not None:
+        parts_kind = aggregate_kind(parts_node)
     kind = kind or aggregate_kind(whole_node)
+    if parts_kind is not None and kind is not None and parts_kind != kind:
+        return {"verdict": "uncheckable",
+                "why": f"the parts apply {parts_kind!r} and the whole applies {kind!r}, "
+                       f"so they are not the breakdown and total of one quantity"}
     if kind is None:
         return {"verdict": "uncheckable", "why": "the whole is not an aggregate"}
     is_slice = restricts_rows(whole_node) if whole_restricts is None else bool(whole_restricts)
