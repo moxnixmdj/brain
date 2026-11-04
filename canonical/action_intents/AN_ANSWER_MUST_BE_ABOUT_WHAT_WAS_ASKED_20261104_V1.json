@@ -19,7 +19,7 @@
   "weakens_existing_guard": false,
   "benchmark_or_family_rank_authority": false,
   "highest_leverage_now": true,
-  "action_summary": "Every check in the system asked whether an expression is sound, and none asked whether it answers the question. Measured: 'what is the total amount times region' returned 6 via double(count(sum(amount) by region)) -- verified, and never touching an amount. 'times' and 'divided' are binary words filed into the unary map lexicon, and nothing could notice. Rather than type a list of binary words, the check perturbs the column the question names and asks whether the answer moves.",
+  "action_summary": "Two defects, one cause: nothing asked whether an expression answers the question. (1) The cross-answer check took the recombination from the WHOLE side, so [150,150,250] (sums per region) was recombined with min and reported as contradicting 50 (the smallest amount) -- two correct answers. Parts and whole must apply the same aggregate. (2) 'what is the total amount times region' returned 6 via double(count(sum(amount) by region)), verified, never reading an amount: 'times' and 'divided' are binary words filed into the unary map lexicon, and the unary class declares no laws so every map grades NONE. Rather than type a list of binary words, the door now perturbs the column the question names and reports whether the answer depends on it.",
   "selected_route": "PERTURB_THE_REFERENT_AND_MEASURE_WHETHER_THE_ANSWER_DEPENDS_ON_IT",
   "causal_blocker": "holds() answers 'is this expression sound about itself', which an expression that answers a different question satisfies perfectly. The unary operator class (_MAP_WORDS) declares no laws at all, so every map grades NONE and nothing about it is falsifiable.",
   "expected_parent_change": "Every computed answer carries depends_on_referent: depends, ignores, or uncheckable. The probe value is derived from the data so a constant column cannot produce a false accusation; the probe is excluded from the ledger so an experiment is not recorded as an answer.",
@@ -34,8 +34,11 @@
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
+      "canonical/runtime/decomposition_law_v1.py",
+      "canonical/runtime/answer_ledger_v1.py",
       "canonical/runtime/referent_dependence_v1.py",
       "canonical/runtime/inspect_v1.py",
+      "canonical/tests/test_answers_must_agree_with_each_other_v1.py",
       "canonical/tests/test_an_answer_must_be_about_what_was_asked_v1.py",
       "canonical/action_intents/AN_ANSWER_MUST_BE_ABOUT_WHAT_WAS_ASKED_20261104_V1.json"
     ],
@@ -90,10 +93,12 @@
     "canonical_base_commit": "c184c012ce130fded1504298af7bb9850ea75c33",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-    "real_outcome": "EIGHT_CORRECT_ANSWERS_DEPEND__FOUR_FABRICATED_ANSWERS_IGNORE__TWO_UNCHECKABLE__ZERO_FALSE_POSITIVES_ACROSS_FOUR_CONSTANT_COLUMN_TREES__PROBE_EXCLUDED_FROM_LEDGER",
+    "real_outcome": "PARTS_AND_WHOLE_MUST_SHARE_THE_AGGREGATE__ELEVEN_CORRECT_ANSWERS_ZERO_CONTRADICTIONS__EIGHT_CORRECT_ANSWERS_DEPEND__FOUR_FABRICATED_ANSWERS_IGNORE__TWO_UNCHECKABLE__ZERO_FALSE_POSITIVES_ACROSS_FOUR_CONSTANT_COLUMN_TREES__PROBE_EXCLUDED_FROM_LEDGER",
     "selected_route": "PERTURB_THE_REFERENT_AND_MEASURE_WHETHER_THE_ANSWER_DEPENDS_ON_IT",
     "selected_surviving_route": "PERTURB_THE_REFERENT_AND_MEASURE_WHETHER_THE_ANSWER_DEPENDS_ON_IT",
     "deleted_or_bypassed_paths": [
+      "TAKING_THE_RECOMBINATION_FROM_THE_WHOLE_SIDE_ONLY",
+      "READING_THE_PARTS_AGGREGATE_FROM_A_NODE_THAT_PRODUCTION_NEVER_CARRIES",
       "DELETING_THE_BINARY_WORDS_FROM_THE_UNARY_LEXICON__STILL_A_TYPED_LIST",
       "A_FIXED_PROBE_VALUE__ACCUSED_THREE_CORRECT_ANSWERS_ON_A_TREE_THAT_ALREADY_HELD_IT",
       "CALLING_ANSWER_FROM_INSIDE_ANSWER__INFINITE_RECURSION"
