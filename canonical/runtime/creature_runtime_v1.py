@@ -45,6 +45,12 @@ from canonical.runtime import self_authored_obligations_v1 as A
 
 SCHEMA = "PROJECT_BRAIN_CREATURE_RUNTIME_V1"
 
+#: The repository this module lives in. The `repair:` route referred to this name and no such name
+#: existed anywhere in the module, so that route raised `NameError` on every call -- a capability
+#: reported in the tree and unreachable in fact, which is the same defect this round is about, one
+#: door over. Bound here so the name it already uses means something.
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
 Perform = Callable[[M.Work, "Creature"], Mapping[str, Any]]
 
 
@@ -2236,6 +2242,45 @@ def _onboard_typed_capability_inspector(cid: str, creature: Creature) -> dict[st
         _shutil.rmtree(td, ignore_errors=True)
 
 
+def _evidence_shape_signature(examples: Sequence[tuple[tuple[Any, ...], Any]]) -> str:
+    """A cache key derived from the SHAPE OF THE EVIDENCE, never from a name.
+
+    Two differently-named problems that share a shape should share what was learned; two problems with
+    the same name but different evidence should not. Keying on the id instead would make learning a
+    function of spelling, which is the defect this route exists to remove, moved one level down.
+    """
+    arity = len(examples[0][0]) if examples else 0
+    # Input kinds only, and NO evidence count. A signature is supposed to name the SHAPE OF THE
+    # PROBLEM, and the number of times the problem has been seen is not part of its shape: two
+    # sightings of one function at 3 and at 5 samples must land in the same place or experience never
+    # accumulates. Output type is excluded for the same reason -- it is a property of the answer, and
+    # it moves with the sample. Whether a recalled organ is actually RIGHT is the synthesizer's
+    # consistency check, which is a test of the answer and not of the spelling.
+    input_kinds = {type(v).__name__ for ex_in, _ in examples for v in ex_in}
+    kinds = ",".join(sorted(input_kinds))
+    return f"a{arity}:{kinds}"
+
+
+def _eval_learned_organ(organ: Any, probe: Any) -> tuple[bool, Any]:
+    """Evaluate a learned organ on one target input, refusing to guess if the call does not fit.
+
+    The organ kernel already exposes `_safe_eval_candidate` for exactly this; reusing it keeps one
+    notion of "did this program run" instead of a second, subtly different one here.
+    """
+    from canonical.swe_kernel.meta_circular_organ_graph_v1 import _safe_eval_candidate
+
+    if organ is None:
+        return False, None
+    # `_safe_eval_candidate` takes the probe TUPLE. A scalar target is a one-argument probe; a tuple is
+    # already the probe. Collapsing the two silently would turn a 2-argument organ into a 1-argument
+    # call and return a wrong answer that looks like a right one.
+    arity = getattr(organ, "_creature_probe_arity", None)
+    probe_tuple = probe if isinstance(probe, tuple) else (probe,)
+    if arity is not None and len(probe_tuple) != arity:
+        return False, None
+    return _safe_eval_candidate(organ, probe_tuple)
+
+
 def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
     """Active-inference sovereign `Perform` organ for `Creature`:
     - Forecasts `PredictionTicket` via `EpistemicSelfBeliefEngine` (`Theta_t = (mu_t, Sigma_t)`) BEFORE acting;
@@ -2308,13 +2353,25 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
 
         ws_target = getattr(creature, "workspace_root", None) or _REPO_ROOT
-        daemon = AwakeAgencyDaemon(
-            ws_target,
-            ledger_path=creature.root / "awake_repair" / "ledger.json",
-            skill_store_path=creature.root / "awake_repair" / "skills.sqlite",
-            apply_verified_repairs=True,
-        )
-        rep = daemon.experiment_in_cow_sandbox(max_repairs=3)
+        # This route runs a repair experiment in a sandbox, and a sandboxed suite can raise -- a
+        # timeout inside it is a normal outcome of running a real suite, not a defect. An exception
+        # here used to escape `sovereign_perform` entirely, taking the beat with it AFTER the belief
+        # ticket was already opened: the creature would act and then never learn what it had
+        # predicted. The name `_REPO_ROOT` this route relied on did not exist at all, so the route
+        # raised `NameError` on every single call. A route that cannot finish must settle and say
+        # why, like every other route in this function.
+        try:
+            daemon = AwakeAgencyDaemon(
+                ws_target,
+                ledger_path=creature.root / "awake_repair" / "ledger.json",
+                skill_store_path=creature.root / "awake_repair" / "skills.sqlite",
+                apply_verified_repairs=True,
+            )
+            rep = daemon.experiment_in_cow_sandbox(max_repairs=3)
+            repair_blocked = None
+        except Exception as exc:  # noqa: BLE001 - reported in the result, not swallowed
+            rep = {"repaired": 0}
+            repair_blocked = f"REPAIR_ROUTE_RAISED:{type(exc).__name__}"
         ok = int(rep.get("repaired") or 0) > 0
         settle_rep = core.belief.settle_and_compute_surprise(
             ticket,
@@ -2331,7 +2388,9 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
             "surprise": settle_rep["surprise"],
-            "blocked": None if ok else "UNREPAIRED_FAILING_TESTS",
+            "repaired": int(rep.get("repaired") or 0),
+            "route_blocked_by": repair_blocked,
+            "blocked": repair_blocked or (None if ok else "UNREPAIRED_FAILING_TESTS"),
         }
 
     if work.id.startswith("chase:"):
@@ -2410,6 +2469,113 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             "surprise": settle_rep["surprise"],
             "macro_id": tr_res.get("macro_id"),
             "blocked": None if ok else "TRAJECTORY_NOT_VERIFIED",
+        }
+
+    # --- A problem with a name I do not recognise -----------------------------------------------
+    # Everything above routes on four hardcoded id prefixes. Anything else was refused here, before any
+    # reasoning happened -- a frozen list of four problem names deciding what this creature is allowed
+    # to try to understand. The synthesizer that would be needed is already in the tree and already
+    # works on arbitrary unseen tasks with no prefix guidance (measured: an arbitrary period-3 block
+    # [5,-2,7], a period-7 ramp and an affine 3x-4 all reach 150/150 on inputs never shown). And the
+    # `task_signature` is only ever a cache key in that synthesizer, never a decision about whether or
+    # how to synthesize -- so the prefix gate was redundant as well as limiting.
+    #
+    # The route fails CLOSED. It requires examples and an oracle; it never invents evidence in order to
+    # have something to do, and it does not branch on the id beyond "not one of the kinds above".
+    learn_spec = (getattr(creature, "_sovereign_learn_tasks", None) or {}).get(work.id)
+    if isinstance(learn_spec, dict):
+        examples = learn_spec.get("examples") or ()
+        oracle = learn_spec.get("oracle")
+        target = learn_spec.get("target") or []
+        if not examples:
+            settle_rep = core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=False,
+                inspector="sovereign_learn_no_examples",
+                actual_cost=work.cost,
+                actual_gain=0.0,
+                calibration_ledger=creature.calibration_ledger,
+            )
+            return {
+                "ok": False,
+                "verified": True,
+                "correct": False,
+                "predicted_probability": p_hat,
+                "surprise": settle_rep["surprise"],
+                "learned_status": None,
+                "blocked": "NO_EXAMPLES_TO_LEARN_FROM",
+            }
+        if oracle is None:
+            settle_rep = core.belief.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=False,
+                inspector="sovereign_learn_no_oracle",
+                actual_cost=work.cost,
+                actual_gain=0.0,
+                calibration_ledger=creature.calibration_ledger,
+            )
+            return {
+                "ok": False,
+                "verified": True,
+                "correct": False,
+                "predicted_probability": p_hat,
+                "surprise": settle_rep["surprise"],
+                "learned_status": None,
+                "blocked": "NO_ORACLE_TO_CHECK_AGAINST",
+            }
+
+        organ_graph = getattr(core, "organ_graph", None)
+        learned = None
+        if organ_graph is not None:
+            # The signature is derived from the SHAPE OF THE EVIDENCE, not from the work id. Two
+            # differently-named problems that share a shape therefore share what was learned, and two
+            # identically-spelled problems with different evidence do not. Naming something is not
+            # understanding it, and a creature whose learning depends on the spelling of an id has the
+            # same defect one layer down.
+            shape_sig = "learned::" + _evidence_shape_signature(examples)
+            learned = organ_graph.synthesize_or_disambiguate_skill(
+                list(examples), task_signature=shape_sig, oracle=oracle
+            )
+
+        ok = bool(learned and learned.get("ok"))
+        verified_answers: list[Any] = []
+        if ok:
+            organ = learned.get("organ")
+            try:
+                object.__setattr__(organ, "_creature_probe_arity", len(examples[0][0]))
+            except Exception:
+                pass
+            for probe in target:
+                try:
+                    ok_p, val = _eval_learned_organ(organ, probe)
+                except Exception:
+                    ok_p, val = False, None
+                verified_answers.append(val if ok_p else None)
+                if not ok_p:
+                    ok = False
+
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector="settled_skill_synthesis",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
+            "learned_status": (learned or {}).get("status"),
+            "learned_organ": (
+                getattr((learned or {}).get("organ"), "name", None) if learned else None
+            ),
+            "questions_asked": int((learned or {}).get("oracle_queries_used") or 0),
+            "answers": verified_answers,
+            "blocked": None if ok else "LEARNED_SKILL_DID_NOT_ANSWER_THE_TARGET",
         }
 
     core.belief.settle_and_compute_surprise(
