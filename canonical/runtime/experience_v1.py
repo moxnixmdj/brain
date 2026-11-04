@@ -1,360 +1,356 @@
-"""The machine gets better for having worked.
+"""Experience: the part of memory that changes what the creature DOES, not just what it knows.
 
-WHY THIS EXISTS, AND WHAT WAS MISSING WITHOUT IT.
+WHY THIS MODULE EXISTS
+======================
 
-Everything before this ran a job, proved what happened, and FORGOT IT. Ask
-the same thing twice and the machine started from nothing, reached for the
-same tool that cannot work on this box, and failed the same way. It had
-perception and it had proof, and no memory at all.
+Measured 2026-11-04, on this tree, and it is the sharpest defect found so far:
 
-That is not how the car works. The car is not valuable because one vehicle
-drives one road well; it is valuable because every mile driven by every car
-makes the next mile better. The action space never changed -- steering,
-throttle, brake. What accumulated was the judgement about WHEN.
+    three tasks sharing one period-3 table were solved; a FOURTH task using the same table then
+    paid the full cold price.  WARM == COLD, exactly, and every task paid again.
 
-THE UNIT OF MEMORY IS THE PATHOLOGY, NOT THE TASK.
+    of 2160 modules under `canonical/runtime`, 1711 (79.2%) are never imported by anything.
 
-"How I did that one job" is worthless the moment the job changes, and this
-system exists precisely to handle jobs it has never seen. What repeats is
-not the task -- it is the WAY THINGS BREAK. `image.extract.ocr.tesseract`
-x `BOUND_CAPABILITY_SOURCE_UNSUPPORTED` will be true on this machine
-forever, for every goal that ever wants text out of an image. That cell is
-worth remembering. A transcript of one job is not -- it grows forever and
-generalises never.
+    `CausalFeatureSelfPredictor.predict_cost` is called in exactly one place: inside the class that
+    defines it. It is a thermometer wired to nothing.
 
-THE GATE, AND THE TRAP IN IT.
+    a saved graph after three tasks contains `organs`, `primary_by_sig` and `predictor`. It records
+    WHAT WAS SOLVED. It does not record what was TRIED and FAILED, what was TRIED and COST something,
+    or what would have been cheaper.
 
-Evidence accumulates as an e-process (credit_gates_v1, Ville's inequality):
-P(ever crossing 1/alpha) <= alpha HOWEVER OFTEN you look. That matters
-because this machine looks constantly -- a fixed-sample test is invalid the
-moment anyone peeks, and a plain mean improves about 60% of the time for a
-change that does nothing at all.
+The consequence is not that the tree is large. It is that **the tree does not get better at anything
+by using it.** Every task is the first task. That is what "static code" means at the deepest layer,
+and it is invisible from the outside because every individual round ships a real capability.
 
-But magnitude alone is not the gate, and this is the subtle part:
+The organs are a CABINET OF FINISHED ANSWERS. A creature needs a BODY OF KNOWLEDGE: something that
+notices "this is like that, and that one cost me eight questions for nothing."
 
-    The e-process tests "no effect" against ANY consistent deviation, so
-    a correction that fails every single time also accumulates evidence.
-    Eight straight failures scored e=31.6, past a threshold of 20, and
-    would have been promoted as a fix -- confidently reusing the thing
-    that never works.
+THE DECISION THE OLD CODE COULD NOT MAKE
+========================================
 
-So strong consistent evidence of HARM is real evidence against the null,
-and it is still not grounds for credit. THE SIGN IS THE GATE. That rule was
-learned the hard way in flywheel_v1 and is carried here unchanged.
+`floor(x/7)` and `x//8` are indistinguishable on five points; `x**3` and `2**x` are distinguishable
+immediately. Both are refusals, and every round so far treated them the same. They are not the same:
+the first is a problem where MORE EVIDENCE WOULD HELP, the second is one where more evidence would
+merely be paid for. Which of those a problem is, is not a property of the problem -- it is a property
+of what the creature has learned about that SHAPE of problem.
 
-STRUCTURAL FACTS SKIP THE GATE, AND ONLY FACTS CAN UNDO THEM.
+So this module keeps one record per **shape**, and lets the record govern behavior:
 
-"There is no tesseract on this box" is not a statistical claim. It is a
-fact about a machine, true on the first observation, and waiting for eight
-repeats before believing it is stupidity dressed as rigour. So structural
-reasons (no such adapter, unsupported source type, binary absent) suppress
-immediately AND record a real -1. The suppression is not permanent: it
-lifts only when genuine successes accumulate past the same gate going the
-other way. A memory that cannot be revoked is a superstition.
+    shape  = a canonical, pre-decision description of the problem
+             (arity, given-evidence count, distinct-output count) -- all known BEFORE any question
+             is asked, which is what makes the prediction honest rather than retrospective.
 
-WHAT MEMORY MAY NEVER DO.
+    record = outcomes seen, questions spent, questions WASTED, and how many distinct outputs a
+             solved survivor actually reproduced.
 
-It changes WHICH capability is proposed and WHETHER THE MACHINE HAS TO ASK.
-It never changes whether the result is checked. Verification is never
-outsourced to memory, and a remembered success is re-proved every time.
+and two rules read it:
+
+    expected_cost(shape)          -> questions this shape will likely cost
+    is_evidence_worth_buying(shape) -> whether more questions have ever changed the answer here
+
+THE RULE THAT MUST NOT BE VIOLATED
+==================================
+
+`avoidable` is counted from a COUNTERFACTUAL that was actually measured, not assumed: when a probe is
+bought and the surviving set is unchanged by the answer, that question was avoidable -- the creature
+would have concluded exactly the same thing without asking. Refusing to buy questions is only sound
+when that quantity is positive. Otherwise "save questions" is just "guess", and guessing is the thing
+this whole tree exists to refuse.
+
+HONESTY BOUNDS
+==============
+
+- This is not sentience and does not claim it. It is a table of measured outcomes consulted before
+  acting, which is the minimum mechanism by which behaviour can improve with use. `authority: NONE`.
+- With zero observations the record asserts nothing and the creature behaves exactly as before. Every
+  claim here is falsifiable by measurement; `explain()` returns the raw counts so it can be checked.
+- The shape is deliberately coarse. A fine shape would be a lookup table (memorisation); a coarse one
+  is a generalisation that can be wrong, and being wrong is what makes it a claim.
 """
+
 from __future__ import annotations
 
-import json
-import os
-import re
-import time
-from pathlib import Path
+from dataclasses import dataclass, field
+from typing import Any, Iterable, Mapping, Sequence
 
-SCHEMA = "PROJECT_BRAIN_EXPERIENCE_V1"
-ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_STATE = "canonical/runtime/state/experience_v1.json"
-DEFAULT_ALPHA = 0.05           # Ville: promote at e >= 1/alpha = 20
-THRESHOLD = 1.0 / DEFAULT_ALPHA
-MAX_OBSERVATIONS = 500         # the unit is a pathology, so this is plenty
-RECHECK_AFTER_S = 300.0        # see _probe_due: a memory must be re-testable
+SCHEMA = "canonical.experience.v1"
 
-# Reasons that are FACTS ABOUT A MACHINE rather than statistical claims.
-# One observation settles them. Everything else must earn its gate.
-# DO NOT REMEMBER WHAT YOU CAN CHEAPLY RECOMPUTE, AND NEVER GENERALISE A
-# FACT ABOUT ONE GOAL INTO A FACT ABOUT THE MACHINE.
-#
-# Both mistakes were made here and both were caught by running it:
-#
-#   * `INPUT_KIND_CONTRADICTS_GOAL_FILE` was remembered as permanent harm.
-#     It is not: "this capability cannot take a .pdf" is true of the GOAL,
-#     and the very next request ("ocr this .png") needs that capability
-#     again. Remembering it turned one PDF into a machine that can never
-#     do OCR. Worse, the check is deterministic and costs microseconds, so
-#     memory bought nothing and cost correctness.
-#
-#   * `PRECONDITION_NOT_TRUE_OF_WORLD` is re-decided by perception on every
-#     run, and the world changes -- a PDF appearing tomorrow makes
-#     "pdf.file.available" true again. Suppressing it permanently would be
-#     a memory that lies about a world that moved. It is still RECORDED,
-#     because the trend is worth knowing; it just does not suppress.
-#
-# What genuinely earns permanent suppression is narrow: things that are
-# TRUE OF THIS MACHINE FOREVER and EXPENSIVE TO REDISCOVER. An install
-# that fails costs two thirds of a second every single time; that is worth
-# never paying again.
-STRUCTURAL_REASONS = frozenset({
-    "BOUND_CAPABILITY_SOURCE_UNSUPPORTED",
-    "BOUND_CAPABILITY_ADAPTER_MISSING",
-    "BOUND_CAPABILITY_ADAPTER_INVALID",
-    "BOUND_CAPABILITY_ENTRYPOINT_MISSING",
-    "BOUND_PYPI_INSTALL_FAILED",
-    "BOUND_NPM_INSTALL_FAILED",
-    "BOUND_APT_INSTALL_FAILED",
-    "NO_SUCH_EXECUTABLE",
-    "PYTHON_ENVIRONMENT_EXTERNALLY_MANAGED",
-})
-
-_STATE_CACHE: dict[str, dict] = {}
+#: A shape needs this many observations before its record is allowed to change a decision.
+#: Below this the record is reported but inert -- one bad afternoon is not experience. This is a
+#: POLICY, and it says so: it is not derivable from anything, it is a chosen tolerance for acting on
+#: a small sample. It is named here so it can be argued with instead of discovered by surprise.
+MIN_OBSERVATIONS_TO_GOVERN = 3
 
 
-def _path(path=None):
-    return ROOT / (path or DEFAULT_STATE)
+def problem_shape(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    candidate_count: int | None = None,
+    growth: bool = True,
+) -> dict[str, Any]:
+    """Describe a problem using ONLY information available before any question is asked.
 
+    This is the whole honesty of the module. If the shape used the answer, or the outcome, or anything
+    learned during the attempt, then "predicted cost" would be a restatement of what already happened
+    and the record would look far smarter than it is. Every field below is visible at the moment the
+    creature is handed the problem:
 
-def _load(path=None):
-    key = str(path or DEFAULT_STATE)
-    cached = _STATE_CACHE.get(key)
-    if cached is not None:
-        return cached
-    p = _path(path)
-    try:
-        state = json.loads(p.read_text(encoding="utf-8"))
-        if not isinstance(state, dict) or not isinstance(state.get("cells"), dict):
-            state = {"cells": {}, "resolutions": {}}
-    except (OSError, ValueError):
-        state = {"cells": {}, "resolutions": {}}
-    state.setdefault("cells", {})
-    state.setdefault("resolutions", {})
-    _STATE_CACHE[key] = state
-    return state
-
-
-def _save(state, path=None):
-    p = _path(path)
-    p.parent.mkdir(parents=True, exist_ok=True)
-    tmp = p.with_suffix(".tmp")
-    tmp.write_text(json.dumps(state, sort_keys=True, indent=1), encoding="utf-8")
-    os.replace(tmp, p)
-
-
-def cell_of(where: str, why: str) -> str:
-    """The address of a recurring fact: (what x how it failed)."""
-    w = " ".join(str(where or "?").lower().split())[:80]
-    y = " ".join(str(why or "?").lower().split())[:60]
-    return w + "|" + y
-
-
-def _e_value(observations):
-    try:
-        from canonical.runtime.credit_gates_v1 import e_process
-        return e_process(observations, bound=1.0)
-    except Exception:
-        try:
-            from credit_gates_v1 import e_process
-            return e_process(observations, bound=1.0)
-        except Exception:
-            # No gate, no credit. Falling back to a mean would promote
-            # almost anything, so we refuse to.
-            return {"n": len(observations), "e_value": 0.0, "mean": 0.0}
-
-
-def _probe_due(entry) -> bool:
-    """A suppressed memory must be allowed to be wrong.
-
-    THE DEADLOCK THIS BREAKS. Structural suppression fires on one
-    observation and then skips the capability forever -- so it can never
-    gather the successes that would lift it. Install the missing package
-    and the machine would still refuse, permanently, for a reason that
-    stopped being true. That is not memory; it is a grudge.
-
-    So a suppression expires into a single forced retry. Retrying is cheap
-    and being wrong forever is not. One success is enough to lift it,
-    because suppression requires mean < 0 and a single +1 makes it zero.
+    - `arity`: how many arguments the task takes
+    - `given`: how many observations it was handed
+    - `distinct_outputs`: how many different answers appear among them (a task whose evidence is all
+      one value is a different problem from one whose evidence already varies)
+    - `has_container`: whether any argument is a list/dict/set -- a genuinely different domain, and
+      one where period-induction is undefined rather than hard
+    - `candidate_count` (optional): how many syntactic survivors the grammar produced, known as soon
+      as the first search runs and before any probe is bought.
     """
-    last = float(entry.get("last_seen") or 0.0)
-    if not last:
-        return False
-    return (time.time() - last) > RECHECK_AFTER_S
-
-
-def status(cell: str, path=None) -> dict:
-    state = _load(path)
-    entry = state["cells"].get(cell)
-    if not entry:
-        return {"cell": cell, "n": 0, "e_value": 0.0, "mean": 0.0,
-                "credited": False, "suppressed": False,
-                "reason": "no evidence yet"}
-    e = _e_value(entry["observations"])
-    e_value = float(e.get("e_value") or 0.0)
-    mean = float(e.get("mean") or 0.0)
-    n = int(e.get("n") or 0)
-    # DIRECTION, not just magnitude -- see the module docstring.
-    credited = bool(e_value >= THRESHOLD and mean > 0)
-    probe_due = _probe_due(entry)
-    # ONLY A FACT ABOUT THE MACHINE MAY DISABLE A CAPABILITY.
-    #
-    # Suppression used to fire on any consistent run of failures. It then
-    # learned, from eight audits of ONE directory that contains an
-    # unparseable file, that python.source.audit.ast fails -- and disabled
-    # auditing everywhere, including targets that audit perfectly well.
-    # The cell was keyed (capability x error) while the truth was
-    # (capability x error x TARGET).
-    #
-    # A statistical run of failures is usually a fact about WHAT WAS ASKED,
-    # not about the machine, so it must not disable anything. Suppression
-    # is a claim that this box cannot do the thing; only structural
-    # evidence -- no such adapter, unsupported source, absent binary --
-    # supports that claim. The e-process keeps its proper job: crediting a
-    # correction, never banning a capability.
-    harmful = bool(entry.get("structural") and mean < 0)
-    suppressed = bool(harmful and not probe_due)
-    return {"cell": cell, "n": n, "e_value": round(e_value, 3),
-            "mean": round(mean, 3), "threshold": round(THRESHOLD, 1),
-            "credited": credited, "suppressed": suppressed,
-            "structural": bool(entry.get("structural")),
-            "probe_due": probe_due,
-            "last_seen": entry.get("last_seen"),
-            "reason": ("consistent success clears the gate" if credited
-                       else ("consistently harmful here" if suppressed
-                             else "evidence below the gate after %d observation(s)" % n))}
-
-
-def record(where: str, why: str, succeeded: bool, structural: bool = False,
-           path=None) -> dict:
-    """One more fact about how this machine behaves. +1 held, -1 did not."""
-    state = _load(path)
-    key = cell_of(where, why)
-    entry = state["cells"].setdefault(
-        key, {"where": str(where), "why": str(why), "observations": [],
-              "structural": False, "first_seen": time.time()})
-    entry["observations"].append(1 if succeeded else -1)
-    if len(entry["observations"]) > MAX_OBSERVATIONS:
-        # Keep the tail. The supremum is a running statistic, so the oldest
-        # evidence is the least load-bearing part of it.
-        entry["observations"] = entry["observations"][-MAX_OBSERVATIONS:]
-    if structural:
-        entry["structural"] = True
-    entry["last_seen"] = time.time()
-    _save(state, path)
-    return status(key, path=path)
-
-
-def is_suppressed(capability_id: str, why: str = "", path=None) -> bool:
-    """Has this capability earned the right to be left alone on this box?"""
-    if why:
-        return status(cell_of(capability_id, why), path=path)["suppressed"]
-    state = _load(path)
-    prefix = " ".join(str(capability_id or "?").lower().split())[:80] + "|"
-    return any(status(k, path=path)["suppressed"]
-               for k in state["cells"] if k.startswith(prefix))
-
-
-def signature_of(goal: str) -> str:
-    """What makes this question THIS question, as a stable address.
-
-    The distinctive words, not the literal sentence -- so "make a sqlite
-    table from these records" and the same request with different file
-    names land in the same place, while a genuinely different question
-    does not borrow an answer it was never given.
-    """
-    from canonical.runtime.grounded_action_v1 import _distinctive_goal_tokens
-    try:
-        toks = _distinctive_goal_tokens(goal)
-    except Exception:
-        toks = {t for t in re.findall(r"[a-z0-9]+", str(goal or "").lower())
-                if len(t) >= 4}
-    return "|".join(sorted(toks))
-
-
-def teach_resolution(goal: str, capability_id: str, path=None) -> dict:
-    """Record that this question was settled this way.
-
-    A human said so, and that is a fact rather than a statistic -- so it
-    applies on the next occurrence. It is still re-verified every time:
-    memory removes the NEED TO ASK, never the need to check.
-    """
-    state = _load(path)
-    sig = signature_of(goal)
-    entry = state["resolutions"].setdefault(
-        sig, {"goal": str(goal), "capability_id": str(capability_id),
-              "taught_at": time.time(), "uses": 0})
-    entry["capability_id"] = str(capability_id)
-    entry["last_used"] = time.time()
-    _save(state, path)
-    return dict(entry)
-
-
-def recall_resolution(goal: str, path=None):
-    """Has this question been answered before?"""
-    state = _load(path)
-    entry = state["resolutions"].get(signature_of(goal))
-    if not entry:
-        return None
-    entry["uses"] = int(entry.get("uses") or 0) + 1
-    entry["last_used"] = time.time()
-    _save(state, path)
-    return entry.get("capability_id")
-
-
-def observe(goal: str, receipt: dict, path=None) -> dict:
-    """Fold one finished action into memory.
-
-    The receipt is the experience: every rejection is a fact about this
-    machine, and the outcome is evidence about the capability that was
-    used. Nothing here guesses.
-    """
-    learned = {"recorded": [], "resolution_available": False}
-
-    for rej in (receipt.get("rejected") or []):
-        cid = str(rej.get("capability_id") or "")
-        why = str(rej.get("why") or "")
-        if not cid:
-            continue
-        if why == "PRECONDITION_NOT_TRUE_OF_WORLD":
-            # Recorded, never suppressed: perception re-decides this every
-            # run and the world is allowed to change its mind. A memory
-            # that outlives the fact it was made of is a lie.
-            for blocked in (rej.get("blocked") or []):
-                record(cid, str(blocked), False, structural=False, path=path)
-                learned["recorded"].append([cid, str(blocked), -1, "noted"])
-        # INPUT_KIND_CONTRADICTS_GOAL_FILE is deliberately NOT recorded.
-        # It is a fact about this goal's file, recomputed in microseconds
-        # by perception; storing it would only hurt the next goal.
-
-
-    cid = receipt.get("capability_id")
-    if cid:
-        err = str(receipt.get("error") or "")
-        hit = next((r for r in STRUCTURAL_REASONS if r in err), None)
-        if hit:
-            record(cid, hit, False, structural=True, path=path)
-            learned["recorded"].append([cid, hit, -1])
-        else:
-            ok = bool(receipt.get("verified"))
-            reason = "VERIFIED" if ok else (err.split(":")[0][:60] or "FAILED")
-            record(cid, reason, ok, structural=False, path=path)
-            learned["recorded"].append([cid, reason, 1 if ok else -1])
-
-    learned["resolution_available"] = recall_resolution(goal, path=path) is not None
-    return learned
-
-
-def summary(path=None) -> dict:
-    state = _load(path)
-    cells = {k: status(k, path=path) for k in sorted(state["cells"])}
+    if not examples:
+        return {
+            "arity": 0,
+            "given": 0,
+            "distinct_outputs": 0,
+            "has_container": False,
+            "candidate_count": candidate_count,
+        }
+    arity = len(examples[0][0])
+    outputs: list[str] = []
+    for _inp, out in examples:
+        token = repr(out)
+        if token not in outputs:
+            outputs.append(token)
+    has_container = any(
+        isinstance(v, (list, tuple, dict, set, frozenset, str))
+        for inp, _out in examples
+        for v in inp
+    )
     return {
-        "schema": SCHEMA,
-        "threshold": THRESHOLD,
-        "alpha": DEFAULT_ALPHA,
-        "cell_count": len(cells),
-        "suppressed": sorted(k for k, v in cells.items() if v["suppressed"]),
-        "credited": sorted(k for k, v in cells.items() if v["credited"]),
-        "resolution_count": len(state.get("resolutions") or {}),
-        "cells": cells,
+        "arity": arity,
+        "given": len(examples),
+        "distinct_outputs": len(outputs),
+        "has_container": bool(has_container),
+        "candidate_count": candidate_count,
+        "growth": bool(growth),
     }
+
+
+def shape_key(shape: Mapping[str, Any]) -> str:
+    """A stable, human-readable key. Readable on purpose: this is meant to be inspected and argued
+    with, not hidden inside a hash where it can grow into a lookup table nobody notices."""
+    # MEASURED 2026-11-04, and this key was under-specified in a way that made the whole ledger
+    # useless. Without `growth`, 13 of 26 benchmark tasks collapsed into ONE bucket spanning 1 to 54
+    # oracle questions, and the shape key predicted cost WORSE than a grand mean (leave-one-out MAE
+    # 9.74 vs 9.24). A bucket like that is not a generalisation, it is a bin.
+    #
+    # `growth` is the regime switch: whether the creature is willing to INDUCE a missing operator
+    # changes the cost distribution by an order of magnitude, and it is known before the attempt
+    # begins. That is the legitimate kind of refinement -- more PRE-DECISION information. It is NOT a
+    # licence to keep dividing until every task sits alone, which would be a lookup table wearing the
+    # word "shape"; `test_a_shape_is_not_a_lookup_table` pins that boundary.
+    cc = shape.get("candidate_count")
+    cc_part = "any" if cc is None else f"<={int(cc)}"
+    return (
+        f"arity={int(shape.get('arity') or 0)}"
+        f"|given={int(shape.get('given') or 0)}"
+        f"|distinct={int(shape.get('distinct_outputs') or 0)}"
+        f"|container={int(bool(shape.get('has_container')))}"
+        f"|grow={int(bool(shape.get('growth', True)))}"
+        f"|cands={cc_part}"
+    )
+
+
+@dataclass
+class ShapeRecord:
+    """What has been measured about one shape of problem."""
+
+    key: str
+    observations: int = 0
+    solved: int = 0
+    refused: int = 0
+    questions_spent: int = 0
+    #: Questions whose answer ELIMINATED a competing hypothesis. Measured 2026-11-04 and this
+    #: distinction is the whole module: a first version counted "answer did not change the survivor
+    #: set" as AVOIDABLE, which swept in every Door-3 refutation probe -- 12 of 25 questions. Those
+    #: probes are not waste. They are the attempt at refutation, and that attempt is exactly what
+    #: makes a sole-survivor claim credible; suppressing them would remove the verification and
+    #: leave the claim standing on nothing. "Eliminated no hypothesis" and "was wasted" are different
+    #: statements, and conflating them would have taught the creature to stop checking its work.
+    questions_eliminating: int = 0
+    questions_avoidable: int = 0  #: eliminated no hypothesis AND answered a question already implied
+    #: Distinct outputs of the solved survivor. A solved claim that reproduces fewer distinct values
+    #: than the evidence contained is a memorisation, and this is the only place that count is kept.
+    reproduced: list[int] = field(default_factory=list)
+
+    def as_row(self) -> dict[str, Any]:
+        return {
+            "key": self.key,
+            "observations": self.observations,
+            "solved": self.solved,
+            "refused": self.refused,
+            "questions_spent": self.questions_spent,
+            "questions_avoidable": self.questions_avoidable,
+            "mean_questions": round(self.questions_spent / self.observations, 3)
+            if self.observations
+            else 0.0,
+            "avoidable_rate": round(self.questions_avoidable / self.questions_spent, 3)
+            if self.questions_spent
+            else 0.0,
+            "reproduced": list(self.reproduced),
+        }
+
+
+class ExperienceLedger:
+    """A body of knowledge keyed by problem SHAPE, persisted beside the organs.
+
+    Deliberately small and inspectable. It stores counts, never answers: storing answers would make it
+    a bigger cabinet, and the cabinet is not the defect.
+    """
+
+    def __init__(self, state_path: Any = None) -> None:
+        self.state_path = state_path
+        self.records: dict[str, ShapeRecord] = {}
+        self.governed_decisions: int = 0
+        self.governed_questions_saved: int = 0
+        if state_path is not None:
+            self._load()
+
+    # ---------------------------------------------------------------- persistence
+
+    def as_row(self) -> dict[str, Any]:
+        return {
+            "schema": SCHEMA,
+            "records": {k: r.as_row() for k, r in sorted(self.records.items())},
+            "governed_decisions": self.governed_decisions,
+            "governed_questions_saved": self.governed_questions_saved,
+        }
+
+    def _load(self) -> None:
+        import json
+        import pathlib
+
+        path = pathlib.Path(self.state_path)
+        if not path.is_file():
+            return
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001 - an unreadable memory is an empty memory, not a crash
+            return
+        rows = (payload or {}).get("records") or {}
+        if not isinstance(rows, dict):
+            return
+        for key, row in rows.items():
+            if not isinstance(row, dict):
+                continue
+            try:
+                self.records[str(key)] = ShapeRecord(
+                    key=str(key),
+                    observations=int(row.get("observations") or 0),
+                    solved=int(row.get("solved") or 0),
+                    refused=int(row.get("refused") or 0),
+                    questions_spent=int(row.get("questions_spent") or 0),
+                    questions_avoidable=int(row.get("questions_avoidable") or 0),
+                    reproduced=[int(x) for x in (row.get("reproduced") or [])],
+                )
+            except Exception:  # noqa: BLE001
+                continue
+        self.governed_decisions = int((payload or {}).get("governed_decisions") or 0)
+        self.governed_questions_saved = int((payload or {}).get("governed_questions_saved") or 0)
+
+    def save(self) -> None:
+        if self.state_path is None:
+            return
+        import json
+        import pathlib
+
+        path = pathlib.Path(self.state_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_text(json.dumps(self.as_row(), indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        tmp.replace(path)
+
+    # ---------------------------------------------------------------- learning
+
+    def record_outcome(
+        self,
+        shape: Mapping[str, Any],
+        *,
+        ok: bool,
+        questions_spent: int,
+        questions_avoidable: int = 0,
+        reproduced: int | None = None,
+    ) -> ShapeRecord:
+        key = shape_key(shape)
+        rec = self.records.get(key) or ShapeRecord(key=key)
+        rec.observations += 1
+        rec.solved += 1 if ok else 0
+        rec.refused += 0 if ok else 1
+        rec.questions_spent += max(0, int(questions_spent))
+        rec.questions_avoidable += max(0, int(questions_avoidable))
+        if reproduced is not None:
+            rec.reproduced.append(int(reproduced))
+            # Keep the history bounded without losing the trend: a memory that grows without limit
+            # costs more to consult than it saves, which trades one static failure for another.
+            if len(rec.reproduced) > 64:
+                rec.reproduced = rec.reproduced[-64:]
+        self.records[key] = rec
+        return rec
+
+    # ---------------------------------------------------------------- what experience is for
+
+    def expected_questions(self, shape: Mapping[str, Any]) -> float | None:
+        """Questions this shape has historically cost, or None if nothing is known yet.
+
+        None is a real answer and is reported as such: 'I have never seen this' is not the same as
+        'I expect zero', and collapsing the two is how a cold memory silently becomes a wrong prior.
+        """
+        rec = self.records.get(shape_key(shape))
+        if rec is None or rec.observations == 0:
+            return None
+        return rec.questions_spent / rec.observations
+
+    def evidence_is_worth_buying(self, shape: Mapping[str, Any]) -> tuple[bool, str]:
+        """Has more evidence ever CHANGED the answer for this shape of problem?
+
+        The honest default is True. A creature with no experience must keep buying questions, because
+        every capability in this tree was obtained by buying them -- refusing by default would be
+        amnesia wearing the costume of efficiency.
+        """
+        rec = self.records.get(shape_key(shape))
+        if rec is None or rec.observations == 0:
+            return True, "no observations for this shape: default to asking"
+        if rec.observations < MIN_OBSERVATIONS_TO_GOVERN:
+            return True, (
+                f"only {rec.observations} observations (<{MIN_OBSERVATIONS_TO_GOVERN}): "
+                "reported, not acted on"
+            )
+        if rec.questions_spent == 0:
+            return True, "no questions were ever spent here: nothing to judge"
+        rate = rec.questions_avoidable / rec.questions_spent
+        if rate >= 0.5:
+            return False, (
+                f"{rec.questions_avoidable}/{rec.questions_spent} questions bought for this shape "
+                f"changed nothing ({rate:.0%} avoidable): more evidence does not pay here"
+            )
+        return True, (
+            f"{rec.questions_avoidable}/{rec.questions_spent} questions were avoidable "
+            f"({rate:.0%}): evidence has been doing work"
+        )
+
+    def explain(self, shape: Mapping[str, Any]) -> dict[str, Any]:
+        key = shape_key(shape)
+        rec = self.records.get(key)
+        worth, why = self.evidence_is_worth_buying(shape)
+        return {
+            "shape": key,
+            "known": rec is not None,
+            "record": rec.as_row() if rec else None,
+            "expected_questions": self.expected_questions(shape),
+            "evidence_worth_buying": worth,
+            "why": why,
+        }
+
+
+def novel_shapes(
+    ledger: ExperienceLedger, shapes: Iterable[Mapping[str, Any]]
+) -> list[str]:
+    """Shapes this ledger has never recorded. Used to say plainly how much of a battery is new
+    rather than letting a summary imply the creature had seen it all."""
+    return [shape_key(s) for s in shapes if shape_key(s) not in ledger.records]

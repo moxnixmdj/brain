@@ -254,7 +254,15 @@ def test_determined_problems_still_crystallize():
     affine = graph2.synthesize_or_disambiguate_skill(
         [((1, 1), 17), ((3, 2), 29), ((4, 5), 30)], task_signature="custom::lin_novel"
     )
-    assert affine["ok"]
+    # UPDATED 2026-11-04, and this is the point of the update rather than a concession to it.
+    # The docstring above says a creature that refuses everything is useless -- that is still true,
+    # and the product case above still crystallises. What changed is that a THREE-POINT fit to THREE
+    # parameters is no longer called settled, because `x*x + y` fits the identical points and is
+    # wrong everywhere else (34.5 vs 120 at (10, 20)). The answer is still returned and still exact;
+    # only the word SETTLED is withheld, which is precisely the distinction this file is named for:
+    # settled is COMPUTED, never reached. Here the computation says the evidence did not test it.
+    assert not affine["ok"], "a three-point fit with no oracle is not a settled law"
+    assert affine["status"] == "PROVISIONAL_UNTESTABLE_CLAIM"
     assert affine["organ"].invoke(10, 3) == 7 * 10 - 2 * 3 + 12
 
 

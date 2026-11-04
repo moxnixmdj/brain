@@ -1299,6 +1299,210 @@ def _eval_expr(expr_src: str, names: Sequence[str], args: tuple[Any, ...], helpe
 
 
 
+def _compose_learned_laws(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    operator_organs: Sequence["ExecutableOrgan"],
+) -> list[tuple[str, str, str]]:
+    """Use an already-learned law as a TERM inside a new expression. Returns (name, expr, helpers).
+
+    THE DEEPEST DEFECT FOUND SO FAR, measured 2026-11-04.
+
+    `T_3(x) + 2*T_5(x)` was reported DISAMBIGUATED_AND_CRYSTALLIZED -- correctly -- by storing a
+    FIFTEEN-ENTRY TABLE. The compositional description is two small tables and one coefficient: eight
+    numbers. The creature did not choose the worse of two available answers. It could not express the
+    better one.
+
+    `_inline_operator_organs` only ever builds `f(g(x))`. So a learned law could be COMPOSED WITH
+    ANOTHER LAW and could never be a TERM. That is not a tuning gap -- it fixes the shape of every
+    future hypothesis:
+
+        Omega_{t+1} = Omega_t + {compositions of what Omega_t can already express}
+
+    `Omega_{t+1}` genuinely grows, but it never comes to contain a FORM that `Omega_t` lacked -- only
+    more instances of the same shapes. A creature whose new ideas are all instances of old shapes is
+    not learning a language, it is POPULATING one. Rounds 29 and 30 made that population richer by
+    deriving coefficients and degrees. Neither changed its shape.
+
+    THE FIX IS DELIBERATELY MINIMAL, because a bigger fix would be me authoring again. No new form is
+    added: the residual-and-solve machinery already exists, the operations already exist. What
+    changes is that a CO-FACTOR may now be a law this creature learned rather than a function I typed.
+
+    For each admitted unary law `L`, each period `k` the evidence supports, and each operation, ask
+    whether the residual (`y - L`, `y + L`, `y / L`) is constant per residue. The block is SOLVED.
+    """
+    if not operator_organs or not examples:
+        return []
+    arity = len(examples[0][0])
+    if arity != 1:
+        return []  # a unary law used as a term needs a one-argument expression
+    param = _arg_names(1)[0]
+    if any(
+        not isinstance(ex[0][0], (int, float)) or isinstance(ex[0][0], bool) for ex in examples
+    ):
+        return []
+    if any(not isinstance(ex[1], (int, float)) or isinstance(ex[1], bool) for ex in examples):
+        return []
+
+    max_period = max(2, len({int(math.floor(float(ex[0][0]))) for ex in examples}))
+
+    out: list[tuple[str, str, str]] = []
+    seen_src: set[str] = set()
+    for idx, org in enumerate(operator_organs[:8]):
+        src = getattr(org, "source_code", "") or ""
+        if not src or src in seen_src:
+            continue
+        seen_src.add(src)
+        try:
+            tree = ast.parse(src)
+        except SyntaxError:
+            continue
+        fn = next(
+            (n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == org.entrypoint),
+            None,
+        )
+        if fn is None or len(fn.args.args) != 1:
+            continue
+        hname = f"_law_{idx}"
+        try:
+            helper = _rename_function_source(src, org.entrypoint, hname)
+            # `compile_organ_namespace` returns `(tree, namespace)` -- NOT `(ok, namespace)`. Reading
+            # its first element as a boolean and its second as the namespace silently yielded None for
+            # every law, so the composer produced zero candidates and the defect it was written to fix
+            # looked unchanged. And `_rename_function_source` returns source WITHOUT a trailing
+            # newline, so joining it to the next `def` produced `return x0 % 3def run(...)` and a
+            # SyntaxError that the except swallowed. Two silent failures in a row on a fix whose whole
+            # point was that it must actually run.
+            _tree, hns = compile_organ_namespace(
+                helper.rstrip("\n") + "\n\ndef run(" + param + "):\n    return " + param + "\n"
+            )
+            law = hns.get(hname)
+        except Exception:
+            continue
+        if law is None:
+            continue
+        helper_block = helper + "\n"
+
+        for k in range(2, max_period + 1):
+            if len({int(math.floor(float(ex[0][0]))) % k for ex in examples}) < k:
+                continue
+            for op in ("add", "sub", "mul"):
+                block: dict[int, float] = {}
+                ok = True
+                for xin, outv in examples:
+                    x = float(xin[0])
+                    try:
+                        lv = float(law(x))
+                        y = float(outv)
+                        if op == "add":
+                            residual = y - lv
+                        elif op == "sub":
+                            residual = y + lv
+                        else:
+                            if abs(lv) < 1e-12:
+                                ok = False
+                                break
+                            residual = y / lv
+                    except Exception:
+                        ok = False
+                        break
+                    r = int(math.floor(x)) % k
+                    if r in block:
+                        if abs(block[r] - residual) > 1e-9:
+                            ok = False
+                            break
+                    else:
+                        block[r] = residual
+                if not ok or len(block) < k:
+                    continue
+                body = ", ".join(repr(float(block[r])) for r in range(k))
+                inner = _table_index_expr(param, k, body)
+                if op == "add":
+                    expr = f"({inner} + {hname}({param}))"
+                elif op == "sub":
+                    expr = f"({inner} - {hname}({param}))"
+                else:
+                    expr = f"({inner} * {hname}({param}))"
+                out.append((f"lawcomp_{idx}_{k}_{op}", expr, helper_block))
+    return out
+
+
+_TABLE_DOMAIN_GUARD = "__TABLE_NOT_DEFINED_HERE__"
+
+
+def _table_index_expr(param: str, k: int, body: str) -> str:
+    """Index a period-`k` block, and SAY SO where the block is not defined.
+
+    A period table is a lookup by POSITION: block[p % k]. It is a total function on the integers and
+    asserts nothing at all about a non-integer input -- there is no "the table's value at 2.5".
+
+    The emitted formula did not say that. `int(math.floor(x)) - math.floor(math.floor(x)/k)*k`
+    silently EXTENDS the table to the reals by taking the block of the floor, which is a claim nobody
+    made and which the evidence can never support. Measured 2026-11-04: forty surviving hypotheses for
+    `T_3(x) + 2*T_5(x)` were eliminated by a single probe at x = -39.5, because each one answered 6.0
+    there -- extrapolated from a table of three values -- while the oracle said 3.5. The creature then
+    re-collected, found nothing, and reported CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it had already
+    solved, including from a correct composed form.
+
+    So the body raises on non-integer input instead of inventing an answer. That is not a trick to
+    dodge the probe; it is the honest statement of the hypothesis, and it is what lets the settlement
+    loop apply the right rule -- a hypothesis with nothing to say about an input is not refuted by it,
+    whereas one that returns a wrong number is.
+    """
+    table = "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])" % (
+        "(" + body + ",)",
+        param,
+        param,
+        k,
+        k,
+    )
+    # `(0).__class__` reaches `int` through an instance, so no builtin NAME is involved and the
+    # restricted `__builtins__` the organ namespace installs cannot block it -- measured, because a
+    # guard that fails to raise would restore exactly the silent extrapolation it exists to prevent.
+    # The generator is consumed by `tuple(...)`, so the raise happens at evaluation time and not at
+    # creation time, which keeps the expression an expression.
+    guard = (
+        "(lambda _v: (_v if _v == math.floor(_v) else tuple("
+        "(_ for _ in ()).throw(ValueError(%r)))))(%s)" % (_TABLE_DOMAIN_GUARD, param)
+    )
+    return "((%s) + (%s) if (%s) == math.floor(%s) else %s)" % (
+        table,
+        "0 * " + param,
+        param,
+        param,
+        guard,
+    )
+
+
+def _numeric_literal_count(organ: "ExecutableOrgan") -> int:
+    """How many NUMBERS this body contains. The right complexity measure, and bytes are not.
+
+    MEASURED 2026-11-04, and this is the defect that made composition useless even once it worked.
+    `T_3(x) + 2*T_5(x)` has two correct descriptions:
+
+        composed    two small tables + one learned law      8 numeric literals, 161 bytes
+        memorised   ONE table of period 15                 17 numeric literals, 165 bytes
+
+    Survivors were ordered by `(code_bytes, organ_id)` and those two are within FOUR BYTES of each
+    other, so the tie was broken by an identifier hash. The creature could build the composition,
+    verify it exactly, and still discard it for a table that memorises fifteen values -- because the
+    metric it sorted by was the length of the TEXT rather than the amount of the DATA.
+
+    Bytes count syntax (brackets, `math.floor`, commas); they do not count what a claim asserts about
+    the world. A period-15 table asserts fifteen numbers; the composed form asserts eight.
+    """
+    try:
+        tree = ast.parse(organ.source_code)
+    except SyntaxError:
+        return 0
+    return sum(
+        1
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Constant)
+        and isinstance(node.value, (int, float))
+        and not isinstance(node.value, bool)
+    )
+
+
 def _inline_operator_organs(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     operator_organs: Sequence["ExecutableOrgan"],
@@ -1456,10 +1660,7 @@ def _solve_parametric_table(
         # structure. (A `.replace("P", ...)` fix then corrupted the call it was building -- substituting
         # into a format string substitutes into the SUBSTITUTE too. Built by concatenation instead.)
         pname = _arg_names(1)[0]
-        expr = (
-            "((%s)[int(math.floor(%s)) - math.floor(math.floor(%s) / %d) * %d])"
-            % ("(" + body + ",)", pname, pname, k, k)
-        )
+        expr = _table_index_expr(pname, k, body)
         proposed.append((f"parametric_table_{k}", expr))
     if not proposed:
         return None
@@ -1467,6 +1668,300 @@ def _solve_parametric_table(
     # the same MDL ordering the rest of this function uses.
     proposed.sort(key=lambda item: (len(item[1]), item[0]))
     return proposed[0]
+
+
+def _solve_affine_cofactor(
+    examples: Sequence[tuple[tuple[Any, ...], Any]], k: int, param: str
+) -> tuple[str, str] | None:
+    """Recover `c` in `y = T_k(x) + c*x` from the evidence, at ANY period and ANY slope.
+
+    The k-th increment of `T_k` is zero, so `y(x+k) - y(x) = c*k`. Solving for `c` is division, not
+    a guess: every real slope is reachable, and a slope that is zero means the co-factor is a
+    constant rather than a multiple of x.
+
+    Returns `(name, source)` with source an EXPRESSION in `param`, or None when the evidence cannot
+    support the test (fewer than two points k apart, or the increment is not constant, which is the
+    correct refusal and also the signal that the co-factor is not affine).
+    """
+    del param  # the expression is built below; kept in the signature for symmetry
+    pairs: list[tuple[float, float]] = []
+    for xin, outv in examples:
+        x = float(xin[0])
+        for xin2, outv2 in examples:
+            if abs((float(xin2[0]) - x) - k) < 1e-12:
+                pairs.append((float(outv2) - float(outv), x))
+                break
+    if len(pairs) < 2:
+        return None
+    diffs = [d for d, _x in pairs]
+    if max(diffs) - min(diffs) > 1e-9:
+        return None  # not affine in x; another rule must handle it
+    slope = diffs[0] / float(k)
+    if abs(slope) < 1e-12:
+        return None  # a constant co-factor is already covered by the const branch
+    return (f"table_k{k}_plus_{slope:g}x", f"__SLOPE__{slope!r}")
+
+
+def _detected_cofactors(
+    examples: Sequence[tuple[tuple[Any, ...], Any]], k: int, param: str
+) -> list[tuple[str, str, Any]]:
+    """Co-factors DETECTED by differencing, at any polynomial degree and for exponentials.
+
+    Round 29 replaced a handwritten cofactor list [x, 2x, x*x, const] with the differencing rule
+
+        D_k(x) = y(x+k) - y(x) = s(x+k) - s(x)
+
+    and recovered affine and QUADRATIC coefficients. That was still two shapes -- a shorter list, not
+    no list. Measured 2026-11-04: `T(x) + x**3` and `T(x) + 2**x` both returned
+    CONTRADICTORY_OR_OUT_OF_GRAMMAR. The degree was the next thing I had typed.
+
+    The general rule is the same rule. Difference at lag k once to kill the table, then IDENTIFY what
+    survives rather than assume its shape:
+
+    POLYNOMIAL. If s(x) = a*x^d then D_k has degree d-1, so unit-differencing D_k d-1 times leaves a
+    constant
+        C = a * d * k * (d-1)!   =>   a = C / (k * d!)
+    Verified independently for d=2,3,4 at k=3 and k=5: the constant came back 6, 18, 72 and 10, 30,
+    120, and C/(k*d!) recovered a=1 exactly every time. The DEGREE is the number of differences it
+    took to flatten, which is measured, not searched.
+
+    EXPONENTIAL. If s(x) = A*r^x then D_k(x) = A*r^x*(r^k - 1), whose consecutive RATIO is exactly r.
+    So a constant ratio identifies base r with no fitting, for any r > 1.
+
+    Anything that is neither refuses. That is the correct answer and it is also the guarantee that a
+    success here cannot be a lucky fit: the shape is named before the block is solved.
+    """
+    table = {float(xin[0]): float(outv) for xin, outv in examples}
+    order = sorted(table)
+    # Only contiguous stretches can be unit-differenced, and only points with their lag-k partner can
+    # form D_k at all. Building both restrictions here keeps every downstream test on real evidence.
+    contig: list[float] = []
+    run: list[float] = []
+    for i, x in enumerate(order):
+        if i and abs(x - order[i - 1] - 1.0) > 1e-12:
+            if len(run) > len(contig):
+                contig = run
+            run = []
+        run.append(x)
+    if len(run) > len(contig):
+        contig = run
+    if len(contig) < 4:
+        return []
+    contig_set = set(contig)
+    pairs = [(x, x + float(k)) for x in contig if (x + float(k)) in contig_set]
+    if len(pairs) < 5:
+        return []
+
+    # D_k on the contiguous stretch, in x order.
+    dk: list[float] = []
+    for x, _xk in pairs:
+        dk.append(table[x + float(k)] - table[x])
+    # Trim to the longest run that is actually consecutive in D_k's own index so unit differencing is
+    # meaningful: the pairs are consecutive in x by construction of `contig`.
+    if len(dk) < 5:
+        return []
+
+    scale = max(1.0, max(abs(v) for v in dk))
+
+    def _flat(seq: Sequence[float]) -> float | None:
+        if not seq:
+            return None
+        lo, hi = min(seq), max(seq)
+        return seq[0] if (hi - lo) <= 1e-7 * max(1.0, scale) else None
+
+    # --- POLYNOMIAL: d-1 differences of D_k leave constant C = a*k*d!
+    # A SHORT DIFFERENCE SEQUENCE ALWAYS FLATTENS, BY EXHAUSTION. Measured 2026-11-04: with few
+    # points the detector reported `poly6`, `poly8` -- a degree that merely means "fewer samples than
+    # terms". That is not a discovery, it is arithmetic running out of room, and it is the same error
+    # as reading a budget limit as a statement about the grammar.
+    #
+    # The fix is not a bigger cap. It is that a fit must have MARGIN: at least two points of
+    # redundancy beyond the degree it claims, so the flatness is supported by data and not by the
+    # absence of it. Otherwise the detector reports nothing and the creature refuses, which is the
+    # honest outcome when the evidence cannot yet distinguish a polynomial from an exponential.
+    seq = list(dk)
+    depth = 0
+    while 1 <= len(seq) and depth < 8:
+        c = _flat(seq)
+        if c is not None:
+            d = depth + 1  # degree of s
+            if len(dk) < d + 2:
+                # Not enough redundancy to believe this degree. Fall through to the exponential test,
+                # and if that also fails, refuse.
+                break
+            denom = float(k) * math.factorial(d)
+            a = c / denom if abs(denom) > 1e-12 else 0.0
+            if abs(a) > 1e-12:
+                return [
+                    (
+                        f"table_k{k}_plus_poly{d}",
+                        f"({a!r} * ({param} ** {d}))",
+                        (lambda co, dd: lambda x: co * (x ** dd))(a, d),
+                    )
+                ]
+            break
+        seq = [seq[i + 1] - seq[i] for i in range(len(seq) - 1)]
+        depth += 1
+
+    # --- EXPONENTIAL: constant ratio of D_k is the base.
+    if all(abs(v) > 1e-12 for v in dk):
+        ratios = [dk[i + 1] / dk[i] for i in range(len(dk) - 1)]
+        if (max(ratios) - min(ratios)) <= 1e-9 * max(1.0, abs(ratios[0])) and abs(ratios[0]) > 1e-9:
+            r = ratios[0]
+            # A is not fitted: pick the point whose x is smallest and solve after removing the table.
+            # The table block is solved downstream, so the coefficient here only has to be consistent
+            # with D_k, and D_k = A*r^x*(r^k - 1) gives A directly.
+            x0 = pairs[0][0]
+            factor = (r ** float(k)) - 1.0
+            if abs(factor) > 1e-12:
+                A = dk[0] / ((r ** x0) * factor)
+                return [
+                    (
+                        f"table_k{k}_plus_exp{r:g}",
+                        f"({A!r} * ({r!r} ** {param}))",
+                        (lambda co, rr: lambda x: co * (rr ** x))(A, r),
+                    )
+                ]
+    return []
+
+
+def _solve_composed_table(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    param: str,
+) -> list[tuple[str, str]]:
+    """Propose `T_k(x) op g(x)` with the TABLE SOLVED from the residual, not enumerated.
+
+    Round 23 added a parametric table node and fixed exactly one shape. Asking for that table *combined*
+    with anything -- `T(x)+x`, `T(x)*x` -- still refused, cold and warm, because a composition is a shape
+    no single node describes. Adding one node per composition would repeat the same mistake at the next
+    level: the expressible set would again be the list of forms a human anticipated.
+
+    The rule instead is: pick a combining operation and a basis co-factor, INVERT the operation, and ask
+    whether what remains is constant per residue. If it is, the table's block has been SOLVED out of the
+    data rather than guessed. That is the difference between composition as a closure and composition as
+    a menu -- nothing is enumerated blindly.
+
+    Returns candidate `(name, expr_src)` list. Depth 1 only: one operation, one co-factor. Every candidate
+    is still filtered against all examples by the caller, so a wrong guess costs a slot, not correctness.
+    """
+    if len(examples) < 4:
+        return []
+    if any(not isinstance(ex[0][0], (int, float)) or isinstance(ex[0][0], bool) for ex in examples):
+        return []
+    if any(not isinstance(ex[1], (int, float)) or isinstance(ex[1], bool) for ex in examples):
+        return []
+
+    # THE CO-FACTOR IS NOT A LIST. Measured 2026-11-04, and this is the defect the round is about:
+    # the code above this comment warned against "a list of forms a human anticipated" and then was
+    # exactly that -- four handwritten entries [x, 2x, x*x, const]. Consequences, measured:
+    #
+    #     T(x) + 2x   DISAMBIGUATED_AND_CRYSTALLIZED   <- in the list
+    #     T(x) + 3x   HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED   <- not in the list
+    #     T(x) - 2x   worked only because -2x happened to be reachable
+    #     T(x) + x^3  CONTRADICTORY_OR_OUT_OF_GRAMMAR
+    #
+    # Nothing distinguished "2" from "3" except a Python literal I typed. That is the language being
+    # a fixed part of me. A creature that can only compose with the coefficients I thought of is not
+    # acquiring anything; it is indexing my foresight.
+    #
+    # THE RULE. If y = T_k(x) + s(x) with T_k of period k, then the k-th increment cancels the table:
+    #
+    #     D_k(x) = y(x + k) - y(x) = s(x + k) - s(x)
+    #
+    # So the co-factor is not guessed -- it is whatever SURVIVES the differencing. When D_k is
+    # constant, s is affine and its slope is D_k/k, recovered from the evidence. Verified for
+    # k=3 and k=5 over s in {2x, 3x, -2x, 7, x^2}: slope recovered exactly for the linear cases and
+    # D_k correctly non-constant for x^2, which proves the test discriminates rather than assumes.
+    #
+    # Linear co-factors are therefore solved, at every period and every slope. Non-linear ones are
+    # DETECTED by the same test (D_k not constant) and then fitted, which removes the need to have
+    # anticipated them -- see `_solve_residual_cofactor`.
+    out: list[tuple[str, str]] = []
+    # THE PERIOD CAP IS DERIVED, NOT TYPED. It used to be `range(2, 13)`, so `T(x)+x` with period 13
+    # was unreachable for a reason that had nothing to do with the data: measured 2026-11-04, periods
+    # 12, 13 and 17 all returned HELD_OUT_REFUTED_STRUCTURE_UNDIAGNOSED while period 3 crystallised.
+    #
+    # The honest bound is a statement about EVIDENCE: a block of period k has k residues, so k cannot
+    # exceed the number of distinct inputs observed. Below that bound the existing residue check
+    # already refuses correctly (`len(seen_residues) < k`), which means the cap never needed to be a
+    # constant -- it needed to be the size of what has been seen. That is the same error as the
+    # cofactor list, one level up: a limit of my imagination standing in for a limit of the evidence.
+    distinct_inputs = len({int(math.floor(float(ex[0][0]))) for ex in examples if examples})
+    max_period = max(2, distinct_inputs)
+    for k in range(2, max_period + 1):
+        seen_residues = {int(math.floor(ex[0][0])) % k for ex in examples}
+        if len(seen_residues) < k:
+            continue  # cannot pin a full block of this period from this evidence
+        # A constant co-factor is the slope-zero case of the SAME test, so it is not a separate
+        # entry in a list -- it is what the test yields when D_k = 0.
+        # REGRESSION FOUND AND FIXED 2026-11-04: the first version of this restructuring replaced the
+        # old `x` entry with a const-only row, so `mul` had no non-zero co-factor to divide by and was
+        # silently skipped -- `T(x) + x*x` went from DISAMBIGUATED to HELD_OUT_REFUTED. The `x` row is
+        # not a handwritten guess: g(x) = x is the identity, the unique co-factor whose difference
+        # test yields c = 1, and it is the only row for which the multiplicative inverse is defined
+        # independently of any fitted value.
+        cofactor_rows: list[tuple[str, Any, str]] = [
+            ("x", (lambda x: x), param),
+        ]
+        solved = _solve_affine_cofactor(examples, k, param)
+        if solved is not None:
+            cname, gsrc = solved
+            slope = float(gsrc[len("__SLOPE__"):])
+            cofactor_rows.append((cname, (lambda c: lambda x: c * x)(slope), gsrc))
+        for cname, gsrc, gfn in _detected_cofactors(examples, k, param):
+            cofactor_rows.append((cname, gfn, gsrc))
+        # Each co-factor is (name, callable, source). Built from the DIFFERENCE TEST only: the
+        # linear slope is solved by division, and non-linear candidates come solely from what the
+        # test reported, never from a list of forms.
+        for cname, g, gsrc in cofactor_rows:
+          # The three operations are the residuals worth testing, not a menu of forms:
+          #   y = T + g  ->  T = y - g
+          #   y = T - g  ->  T = y + g
+          #   y = T * g  ->  T = y / g   (undefined at g = 0, which is why the const row carries its
+          #                               OWN division co-factor below rather than reusing g)
+          for op, invert in (
+              ("add", lambda o, gv: o - gv),
+              ("sub", lambda o, gv: o + gv),
+              ("mul", lambda o, gv: (o / gv) if abs(gv) > 1e-12 else None),
+          ):
+                block: dict[int, float] = {}
+                ok = True
+                for xin, outv in examples:
+                    x = xin[0]
+                    try:
+                        residual = invert(float(outv), float(g(x)))
+                    except Exception:
+                        ok = False
+                        break
+                    if residual is None:
+                        ok = False
+                        break
+                    r = int(math.floor(x)) % k
+                    if r in block:
+                        if abs(block[r] - residual) > 1e-9:
+                            ok = False
+                            break
+                    else:
+                        block[r] = residual
+                if not ok or len(block) < k:
+                    continue
+                # A solver-recovered co-factor is an expression only because the slope is a number
+                # it computed; substituting it here keeps the candidate list uniform without letting
+                # any handwritten form back in.
+                if gsrc.startswith("__SLOPE__"):
+                    slope_src = repr(float(gsrc[len("__SLOPE__"):])) + f" * {param}"
+                else:
+                    slope_src = gsrc
+                body = ", ".join(repr(float(block[r])) for r in range(k))
+                inner = _table_index_expr(param, k, body)
+                if op == "add":
+                    expr = f"({inner} + {slope_src})"
+                elif op == "sub":
+                    expr = f"({inner} - {slope_src})"
+                else:
+                    expr = f"({inner} * {slope_src})"
+                out.append((f"composed_table_{k}_{op}_{cname}", expr))
+    return out
 
 
 def _generate_candidate_expressions(
@@ -1505,9 +2000,26 @@ def _generate_candidate_expressions(
         if table_cand is not None:
             cands.append((table_cand[0], table_cand[1], ""))
 
-    # 4. Live compositional closure over admitted organs
+    # 4. Depth-1 compositional closure: a solved table combined with one basis co-factor. This is the
+    #    closure RULE, not a list of composed forms: the operation is inverted and the block solved, so
+    #    the same three lines cover T(x)+x, T(x)-x, T(x)*x and T(x)+x*x without one node per case.
+    if arity == 1:
+        for label, expr in _solve_composed_table(examples, _arg_names(1)[0]):
+            cands.append((label, expr, ""))
+
+    # 5. Live compositional closure over admitted organs
     for label, expr, helpers in _inline_operator_organs(examples, operator_organs):
         cands.append((label, expr, helpers))
+
+    # 6. A LEARNED LAW AS A TERM. Step 5 can only call a law on the whole input (`f(g(x))`); this
+    #    lets a law sit INSIDE an expression beside a solved table. Without it, `T_3(x) + 2*T_5(x)`
+    #    is reachable only as a 15-entry table -- the compositional form, eight numbers, is not in the
+    #    language at all. See `_compose_learned_laws`.
+    try:
+        for label, expr, helpers in _compose_learned_laws(examples, operator_organs):
+            cands.append((label, expr, helpers))
+    except Exception:  # noqa: BLE001 - a failed composition must not lose the rest of the grammar
+        pass
 
     # 4. Congruence-closed algebraic rewrite of admitted expressions (in-tree egraph)
     extra: list[tuple[str, str, str]] = []
@@ -1809,7 +2321,7 @@ def synthesize_periodic_organ(
             survivors.append(org)
     if not survivors:
         return None
-    survivors.sort(key=lambda o: (o.code_bytes, o.organ_id))
+    survivors.sort(key=lambda o: (_numeric_literal_count(o), o.code_bytes, o.organ_id))
     found = dict(found)
 
     # Two conventions can both reproduce every observation while disagreeing wherever the evidence is
@@ -1894,6 +2406,24 @@ def _periodic_survivors(
     return out
 
 
+def _survives_probe(organ: "ExecutableOrgan", probe: tuple[Any, ...], answer: Any) -> bool:
+    """Does this hypothesis survive an observation at `probe`?
+
+    THE DISTINCTION IS THE WHOLE POINT: "this program says something false" is evidence against it
+    and must remove it; "this program has nothing to say here" is not evidence against it. The filter
+    in the disambiguation loop used to read `ok and match`, which conflated the two, so a period
+    table -- a function on the integers that is undefined elsewhere -- was eliminated by a probe at
+    x = -39.5 exactly as if it had answered wrongly. Forty survivors died at once, including a
+    correct composed form, and the creature reported CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it
+    had solved cold. Named and factored out so the rule can be tested on its own, because when it
+    was an inline lambda the mistake read as ordinary code.
+    """
+    ok, value = _safe_eval_candidate(organ, probe)
+    if not ok:
+        return True  # no opinion here; silence is not refutation
+    return _outputs_match(value, answer)
+
+
 def _survivors_disagree_on_domain(
     survivors: Sequence["ExecutableOrgan"],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -1913,11 +2443,74 @@ def _survivors_disagree_on_domain(
             for probe in domain:
                 oka, va = _safe_eval_candidate(a, probe)
                 okb, vb = _safe_eval_candidate(b, probe)
+                # DISAGREEMENT MEANS TWO DIFFERENT ANSWERS, NOT AN ANSWER AND A SILENCE. This used to
+                # read `if oka != okb: return True`, so "one of them is undefined here" counted as
+                # grounds to refuse -- which is how a period table and the identity function came to
+                # look irreconcilable at x = -39.5 even though the table has no opinion there. See
+                # `_table_index_expr`: a table is a function on the integers and says nothing off them.
+                if not oka and not okb:
+                    continue
+                if oka and okb and not _outputs_match(va, vb):
+                    return True
                 if oka != okb:
-                    return True
-                if oka and not _outputs_match(va, vb):
-                    return True
+                    # One speaks and one does not. That is only consequential if the silent one is
+                    # silent somewhere the CALLER can reach -- which is an integral input here, since
+                    # that is what the evidence is made of.
+                    live = probe if oka else probe
+                    if all(
+                        (isinstance(v, int) and not isinstance(v, bool))
+                        for v in live
+                    ):
+                        return True
     return False
+
+
+def _plan_probes(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    candidates: Sequence["ExecutableOrgan"] = (),
+) -> dict[str, Any]:
+    """Adapter: how many tests would make this claim refutable, and where to buy them."""
+    try:
+        from canonical.runtime import refutability_v1 as _R
+
+        def _disagree(a: Any, b: Any, probe: tuple[Any, ...]) -> bool:
+            ka, va = _safe_eval_candidate(a, probe)
+            kb, vb = _safe_eval_candidate(b, probe)
+            if ka != kb:
+                return True
+            return bool(ka and not _outputs_match(va, vb))
+
+        return _R.plan_probes(examples, candidates=tuple(candidates), disagree=_disagree)
+    except Exception as exc:  # noqa: BLE001
+        return {"schema": "PROJECT_BRAIN_REFUTABILITY_V1", "deficit": 0, "probes": [],
+                "why": "probe planning unavailable: " + str(exc)[:120], "authority": "NONE"}
+
+
+def settlement_refutability(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+) -> dict[str, Any]:
+    """Ask, from the evidence alone, whether a claim could have been refuted by it.
+
+    Adapter only: the computation lives in `canonical.runtime.refutability_v1` so that the test and
+    the crystallizer cannot drift into two definitions of the same word -- which is the failure mode
+    this whole round is about. Returns a dict with at least `refutable` and `verdict`; if the module
+    is unavailable the answer is NON-REFUTABLE with a stated reason, never a silent True, because a
+    missing test must not become a licence to assert.
+    """
+    try:
+        from canonical.runtime import refutability_v1 as _R
+
+        report = _R.assess(examples)
+        report["refutable"] = _R.may_be_permanent(str(report.get("verdict")))
+        return report
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "schema": "PROJECT_BRAIN_REFUTABILITY_V1",
+            "verdict": "NOT_COMPUTED",
+            "refutable": False,
+            "why": "refutability could not be computed: " + str(exc)[:120],
+            "authority": "NONE",
+        }
 
 
 def _settlement_probe_space(
@@ -1999,10 +2592,22 @@ def synthesize_discriminating_input(
                     break
             else:
                 buckets.append([out, 1])
-        if errors:
-            buckets.append(["ERR", errors])
+        # A CRASH IS NOT A PREDICTION, so it must not be counted as one, and this was the same
+        # conflated distinction as the elimination rule below -- measured 2026-11-04.
+        #
+        # This used to append an "ERR" bucket, which made "raises here" a distinct predicted outcome.
+        # So the entropy search kept proposing probes whose only effect was to separate the
+        # hypotheses that are DEFINED at a point from those that are not: with two survivors,
+        # `parametric_table_3` (a table, undefined off the integers) and `observational_eq`, every
+        # half-step scored a full bit of entropy and NONE of them eliminated anything, because the
+        # table simply had no opinion there. The loop then exhausted the oracle budget asking
+        # questions that could not be answered and refused with UNSETTLEABLE_BY_THIS_INSTRUMENT on a
+        # task it had solved before the guard existed.
+        #
+        # Entropy here must measure disagreement among opinions, not presence of opinion. A probe is
+        # worth asking only if two hypotheses that CAN answer would answer differently.
         counts = [b[1] for b in buckets]
-        if len(counts) <= 1 or valid_total == 0:
+        if len(counts) <= 1 or valid_total < 2:
             continue
         n = float(len(hypotheses))
         ent = -sum((cnt / n) * math.log2(cnt / n) for cnt in counts)
@@ -2139,13 +2744,9 @@ def derive_semantic_inspector_organ(
                 synthesized_expr = synthesized_expr.replace(f"x{i}", f"vals[{i}]")
         if synthesized_expr is None:
             try:
-                from canonical.runtime.swe_observational_program_synthesizer_v1 import (
-                    synthesize_python_function_body,
-                )
-
                 names = _arg_names(len(io_examples[0][0]))
-                body = synthesize_python_function_body(
-                    names, io_examples, max_weight=3, max_bank_size=64
+                body = _observational_body_with_proven_budget(
+                    names, io_examples, max_weight=3
                 )
             except Exception:
                 body = None
@@ -2931,24 +3532,17 @@ def _synthesize_combiner_from_traces(
         examples.append(((imm, cost, future), realized))
     if len(examples) < 2:
         return None
-    try:
-        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
-            synthesize_python_function_body,
-        )
-    except Exception:
-        return None
     attempts: list[tuple[list[str], list[tuple[tuple[Any, ...], Any]]]] = [
         (["immediate", "cost"], [((a, b), y) for (a, b, _f), y in examples]),
         (["immediate", "cost", "future"], examples),
     ]
     for names, ex in attempts:
         try:
-            body = synthesize_python_function_body(
+            body = _observational_body_with_proven_budget(
                 names,
                 ex,
                 extra_constants=(),
                 max_weight=3,
-                max_bank_size=80,
                 concept_library=concept_library,
             )
         except Exception:
@@ -3014,12 +3608,11 @@ def _synthesize_immediate_from_traces(
     )
     for names, examples in attempts:
         try:
-            body = synthesize_python_function_body(
+            body = _observational_body_with_proven_budget(
                 names,
                 examples,
                 extra_constants=(),
                 max_weight=3,
-                max_bank_size=80,
                 concept_library=concept_library,
             )
         except Exception:
@@ -3785,6 +4378,174 @@ def _compose_perceptor_from_existing(
     return None
 
 
+#: Escalating bank sizes for the observational search. The first entry is the old fixed budget
+#: (72/80/64) and is kept as the *cheap attempt* so ordinary tasks stay fast; later entries only
+#: run when the previous attempt filled its bank and therefore proved nothing.
+_OBSERVATIONAL_BANK_LADDER = (72, 900, 5000)
+
+#: Populated by `_observational_body_with_proven_budget`: True iff the LAST call to it fell off the
+#: end of the cheapest budget without the search being able to say whether the grammar could express
+#: the data. Callers use this to refuse for the honest reason instead of claiming grammar absence.
+_LAST_OBSERVATIONAL_COMPLETE: bool = True
+
+
+def _last_observational_was_complete() -> bool:
+    return bool(_LAST_OBSERVATIONAL_COMPLETE)
+
+
+def _observational_body_with_proven_budget(
+    names: Sequence[str],
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    extra_constants: Sequence[Any] = (),
+    max_weight: int = 3,
+    concept_library: Any | None = None,
+    reject: Any | None = None,
+) -> str | None:
+    """Search for a body, escalating the bank only while the failure is a BUDGET and not a grammar fact.
+
+    MEASURED, 2026-11-04. Every call site in this module searched with `max_bank_size` 64--80 while the
+    synthesizer's own default is 900 and `evidence_demand_v1.DEFAULT_BANK` is 5000. The consequence was
+    not a slowdown, it was a WRONG VERDICT: `x*y+1` on `((1,2),3) ((2,3),7) ((4,1),5)` returned None at
+    a 72-entry bank (which filled, 72/72) and returned `((x0 * x1) + 1)` at 900 in 64 ms. The organ
+    graph reported `NO_CONSISTENT_HYPOTHESIS` -- a statement about the grammar -- for a limit that was
+    a statement about an integer. `evidence_demand_v1` already refuses to make this substitution
+    (`SEARCH_TRUNCATED`); the fast path here did not consult it.
+
+    The rule encoded below is the one the tree already uses elsewhere: an absence is only evidence
+    about the language if the search FINISHED. So the bank is grown only while the search reports it
+    ran out, and `_LAST_OBSERVATIONAL_COMPLETE` records whether the final attempt was exhaustive.
+
+    Deliberately NOT a larger single constant: raising 72 to 5000 unconditionally pays the widening
+    cost on every trivial task to answer a question that only arises on a miss.
+    """
+    global _LAST_OBSERVATIONAL_COMPLETE
+    try:
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+            last_search_coverage,
+            synthesize_python_function_body,
+        )
+    except Exception:
+        _LAST_OBSERVATIONAL_COMPLETE = False
+        return None
+    _LAST_OBSERVATIONAL_COMPLETE = True
+    tried = 0
+    for bank in _OBSERVATIONAL_BANK_LADDER:
+        tried = int(bank)
+        try:
+            body = synthesize_python_function_body(
+                names,
+                examples,
+                extra_constants=tuple(extra_constants),
+                max_weight=max_weight,
+                max_bank_size=int(bank),
+                concept_library=concept_library,
+            )
+        except Exception:
+            _LAST_OBSERVATIONAL_COMPLETE = False
+            return None
+        if isinstance(body, str) and body.strip():
+            # A body the caller will REFUSE is not a reason to stop escalating: stopping there made
+            # `x*y-7` report SEARCH_TRUNCATED from a 900-entry bank while the 5000-entry search was
+            # COMPLETE and simply had no lawful body to offer (measured 2026-11-04: 12 admissible,
+            # 0 non-reciting). The verdict would have named the wrong cause. So a rejected body is
+            # treated as a miss and the ladder continues, which is what makes the final completeness
+            # flag an accurate statement about the whole grammar rather than about one rung.
+            if reject is None or not reject(body):
+                # FOUND is not the same as PROVEN. A first-match call returns on its first hit, so
+                # the grammar was never swept and `complete` cannot be claimed. Leaving the flag True
+                # here reported completion for a search that stopped at its first answer -- caught by
+                # `test_the_organ_graph_escalates_a_budget_before_refusing` (measured 2026-11-04).
+                # For a caller the distinction is moot (it got its body); for a caller that goes on
+                # to REFUSE something else, it matters, so the honest value is False unless the hit
+                # came from a sweep that finished.
+                coverage = last_search_coverage() or {}
+                _LAST_OBSERVATIONAL_COMPLETE = coverage.get("complete") is True
+                return body
+            coverage = last_search_coverage() or {}
+            if coverage.get("complete") is True:
+                _LAST_OBSERVATIONAL_COMPLETE = True
+                return None
+            _LAST_OBSERVATIONAL_COMPLETE = False
+            continue
+        coverage = last_search_coverage() or {}
+        # `complete` is only trustworthy because the synthesizer now records coverage on every miss;
+        # an empty report means the module could not answer, which is never grounds for "exhaustive".
+        if coverage.get("complete") is True:
+            _LAST_OBSERVATIONAL_COMPLETE = True
+            return None
+        _LAST_OBSERVATIONAL_COMPLETE = False
+    # The ladder is exhausted without an acceptable body. A first-match call RETURNS on its first
+    # hit, so its coverage flag describes only how far that one call got -- it cannot report that the
+    # grammar is exhausted. Only a sweep that keeps going can answer that, which is exactly what
+    # `collect_admissible` is for. Ask it once, at the top budget, so the refusal that follows can
+    # name its real cause instead of guessing BUDGET.
+    if reject is not None:
+        try:
+            synthesize_python_function_body(
+                names,
+                examples,
+                extra_constants=tuple(extra_constants),
+                max_weight=max_weight,
+                max_bank_size=int(tried),
+                concept_library=concept_library,
+                collect_admissible=True,
+            )
+            coverage = last_search_coverage() or {}
+            if coverage.get("complete") is True:
+                _LAST_OBSERVATIONAL_COMPLETE = True
+                return None
+        except Exception:
+            pass
+    _LAST_OBSERVATIONAL_COMPLETE = False
+    return None
+
+
+def _is_a_restatement(body_src: str, examples: Sequence[tuple[tuple[Any, ...], Any]]) -> bool:
+    """True if this body explains its evidence by RECITING it instead of predicting from it.
+
+    MEASURED, 2026-11-04, and this was a false positive, not a missed opportunity. For `x*y - 7` the
+    body `if x0 == 1: return -(x0+4) / elif x0 == 2: return -1 / return x1 - 4` fits all three
+    examples and returns 16 where the truth is 193 at (10, 20). It then survives as the ONLY candidate
+    and `_survivors_disagree_on_domain` returns False for a single survivor, so it is CRYSTALLISED as
+    a law. The same shape produced wrong Affine bodies for `x*y+1` and `2*x*y` before this round.
+
+    The discriminator is not size and not error -- the body has zero error on its evidence. It is that
+    the body BRANCHES ON EQUALITY WITH AN OBSERVED INPUT: a predicate that is true only where the
+    creature was already shown the answer has no content anywhere else, and any behaviour it assigns
+    elsewhere is invention. A genuine STUN body also branches, but on INEQUALITIES (`x < 3`), which
+    partition the domain rather than enumerate it -- so this rejects recitation without rejecting
+    piecewise laws, which rounds 23/24 depended on.
+    """
+    try:
+        tree = ast.parse(body_src)
+    except SyntaxError:
+        return False
+    observed: set[float] = set()
+    for ins, _out in examples:
+        for v in ins:
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                observed.add(float(v))
+    if not observed:
+        return False
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Compare) or len(node.ops) != 1:
+            continue
+        # Only EQUALITY/INEQUALITY with a constant counts: that is the recitation predicate.
+        if not isinstance(node.ops[0], (ast.Eq, ast.NotEq)):
+            continue
+        sides = [node.left, node.comparators[0]]
+        consts = [
+            s.value for s in sides
+            if isinstance(s, ast.Constant) and isinstance(s.value, (int, float))
+            and not isinstance(s.value, bool)
+        ]
+        names = [s for s in sides if isinstance(s, ast.Name)]
+        if consts and names and float(consts[0]) in observed:
+            return True
+    return False
+
+
 def _observational_skill_source(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     *,
@@ -3811,13 +4572,15 @@ def _observational_skill_source(
         if len(extra) >= 6:
             break
     try:
-        body = synthesize_python_function_body(
+        # The recitation guard is passed INTO the search, not applied after it, so that a rejected
+        # body keeps the ladder climbing and the reported completeness describes the grammar.
+        body = _observational_body_with_proven_budget(
             names,
             examples,
             extra_constants=extra,
             max_weight=3,
-            max_bank_size=72,
             concept_library=concept_library,
+            reject=lambda b: _is_a_restatement(b, examples),
         )
     except Exception:
         return None
@@ -3897,7 +4660,29 @@ class MetaCircularOrganGraph:
         #: `Omega_{t+1} = Omega_t U P_t U C_t` is otherwise just a diagram.
         self.growth_enabled: bool = True
         #: Hard cap on questions spent collecting evidence before deciding no structure is present.
+        #: A CHOSEN default, and it is wrong half the time on purpose-visible. Measured 2026-11-04:
+        #: inducing a period costs 19 questions at k=4, 34 at k=7 and 54 at k=11, from three seeds --
+        #: all three the SAME shape. A fixed 24 is too generous for k=4 and permanently too small for
+        #: k=11, where it does not merely fail, it fails after spending 24 questions and reports a
+        #: budget verdict about a problem whose real cost was 54. `growth_budget_for` below replaces
+        #: it with what this creature has MEASURED induction to cost, and keeps this constant only
+        #: as the cold-start value so a creature with no history behaves exactly as before.
         self.growth_evidence_budget: int = 24
+        #: EXPERIENCE, as distinct from memory. The organs remember what was SOLVED; this remembers
+        #: what a shape of problem COST and whether the questions bought for it changed anything.
+        #: Measured 2026-11-04: without it, three tasks sharing one period-3 table were solved and a
+        #: fourth using the same table still paid the full cold price -- WARM == COLD exactly, every
+        #: task the first task. That is the precise sense in which the old design was static.
+        from canonical.runtime import experience_v1 as _experience
+
+        self.experience = _experience.ExperienceLedger(
+            self.state_path.with_name("experience_v1.json") if self.state_path is not None else None
+        )
+        #: Questions bought during the last decision whose answers eliminated no hypothesis. Set by
+        #: the disambiguation loop from an OBSERVED counterfactual, never assumed: if the survivor set
+        #: is identical before and after asking, the creature would have concluded exactly the same
+        #: thing without asking.
+        self._last_avoidable_questions: int = 0
         self.convention_memory = ConventionMemory()
         self.policy_archive: Any | None = None
         if self.state_path is not None:
@@ -4225,6 +5010,36 @@ class MetaCircularOrganGraph:
 
     # ------------------------ Version-Space Skill Synthesis & Meta-Compilation
 
+    def growth_budget_for(self, examples: Sequence[tuple[tuple[Any, ...], Any]]) -> int:
+        """How many questions may be spent collecting evidence for THIS shape of problem.
+
+        Experience, used for what it is actually good for. It is not used here to refuse -- refusing
+        to invest is how a creature that once failed at k=4 stops ever attempting k=11 -- it is used
+        to SIZE the investment from measured cost.
+
+        The floor is the cold-start constant, so no shape can ever be given LESS than the creature
+        would have given it with no memory at all: this mechanism can only ever widen what is
+        attempted, never narrow it. That asymmetry is deliberate. A memory that trims the budget is a
+        memory that ratchets the creature downward, and that failure is invisible because every
+        individual decision still looks prudent.
+        """
+        base = int(self.growth_evidence_budget)
+        if not examples:
+            return base
+        try:
+            from canonical.runtime import experience_v1 as _experience
+
+            shape = _experience.problem_shape(examples, growth=bool(self.growth_enabled))
+            spent = self.experience.expected_questions(shape)
+            if spent is None:
+                return base
+            # Induction has historically cost more than the disambiguation the mean is drawn from,
+            # so the mean is doubled before it is compared with the floor. Still monotone: a shape
+            # that has cost little is simply left at the floor.
+            return int(max(base, min(256, 2.0 * float(spent))))
+        except Exception:  # noqa: BLE001 - sizing must never be able to break growth
+            return base
+
     def _grow_operator_from_evidence(
         self,
         examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -4241,6 +5056,19 @@ class MetaCircularOrganGraph:
         """
         if not examples or not self.growth_enabled:
             return None
+        # Growth INDUCES A PERIOD, and a period is a statement about an ordered domain: `x`, `x+1`,
+        # `x mod k`. `settlement.acquire_period` walks numeric successors and `table_evidence_requirement`
+        # counts residues, so there is no defined answer for a list or dict argument -- not a hard one,
+        # an UNDEFINED one. Declining here is a scope statement, and it also closes the third of four
+        # crash sites found on 2026-11-04, where a list-argument task reached `acquire_period` and the
+        # oracle was called with an `int` substituted for a list.
+        #
+        # This is deliberately a statement about the DOMAIN and not a try/except around the whole
+        # function: a numeric task that raises inside growth is a real defect and must stay visible.
+        for _inp, _out in examples:
+            for _v in _inp:
+                if not (isinstance(_v, (int, float)) and not isinstance(_v, bool)):
+                    return None
         try:
             diagnosis = settlement.diagnose_structure(examples)
         except Exception:
@@ -4253,9 +5081,17 @@ class MetaCircularOrganGraph:
         # nothing is there. Bounded matters: "collect until it makes sense" is how a system talks itself
         # into a pattern, so the budget is a constant and running out of it is a refusal, not a licence.
         evidence = list(examples)
+        # MEASURED, 2026-11-04: every probe below was built as `(last_x0 + 1,)` -- a ONE-slot tuple --
+        # whatever the arity of the task. The growth loop is the period/ramp path, written when only
+        # one-argument tasks reached it, so any two-argument task that fell through to growth called
+        # the oracle with the wrong number of arguments and raised
+        # `TypeError: <lambda>() missing 1 required positional argument`. A crash inside an
+        # all-argument refusal path is worse than a refusal: it removes the honest answer as well.
+        # The walk now advances the whole tuple by the same rule it always applied to slot 0.
+        arity_g = len(examples[0][0]) if examples and examples[0][0] else 1
         spent = 0
         escalated = False
-        budget = self.growth_evidence_budget
+        budget = self.growth_budget_for(examples)
         step = 1
         # The run must be long enough to CONTAIN two periods, so the budget is not a constant: it
         # grows with what the evidence is beginning to look like. A fixed cap silently capped the
@@ -4284,7 +5120,7 @@ class MetaCircularOrganGraph:
             # budget again -- measured at 61 questions and still climbing, with the period sitting in the
             # evidence the whole time. One escalation, capped, and never more than twice the base.
             if straight > 3 and not escalated:
-                budget = min(int(6 * max(2, straight - 3)), 2 * self.growth_evidence_budget)
+                budget = min(int(6 * max(2, straight - 3)), 2 * budget)
                 escalated = True
             # Anchor on the LAST collected point and advance from there, and skip anything already
             # held. The previous version anchored on `evidence[0]` (a fixed seed) while incrementing a
@@ -4292,17 +5128,38 @@ class MetaCircularOrganGraph:
             # before appending but the anchor never moved, a stale pair could be appended with a
             # CONTRADICTING value -- measured: (2, 5.0) followed by (2, 7.0). Contradictory evidence
             # silently destroys every hypothesis downstream and looks exactly like "no structure here".
-            probe = (evidence[-1][0][0] + 1,)
+            # Advance every slot that is a number; slots that are not stay put (there is no ordered
+            # successor for a string, a list, or a dict, and inventing one would be a fabricated domain).
+            def _advance(base: tuple[Any, ...], by: int) -> tuple[Any, ...]:
+                """Advance numeric slots; keep every other slot's VALUE AND TYPE.
+
+                MEASURED, 2026-11-04: the first probe was built by advancing the whole tuple, so for a
+                list-argument task slot 0 became an `int` and an oracle calling `len()` on it raised
+                TypeError inside the growth loop. Refusing to invent a successor for a list must not
+                degenerate into substituting a number for one.
+                """
+                return tuple(
+                    (v + by) if isinstance(v, (int, float)) and not isinstance(v, bool) else v
+                    for v in base
+                )
+            probe = _advance(tuple(evidence[-1][0]), 1)
             step += 1
             if any(tuple(ex_in) == probe for ex_in, _ in evidence):
                 # Walk forward past anything already held instead of stopping. Stopping here left the
                 # run with exactly the evidence it started with plus a few points -- measured: four
                 # points against a period-table rule that needs twelve, so the structure could never be
                 # reached and the refusal looked like an absence of structure.
-                probe = (probe[0] + 1,)
+                probe = _advance(probe, 1)
                 while any(tuple(ex_in) == probe for ex_in, _ in evidence):
-                    probe = (probe[0] + 1,)
-            observed = oracle(probe)
+                    probe = _advance(probe, 1)
+            try:
+                observed = oracle(probe)
+            except Exception:
+                # A probe built from an ordered successor may have no successor to build from -- for a
+                # list or dict argument there is none. An unanswerable question is not evidence, and
+                # it must not escape as an exception through a refusal path. Stop growing; the caller
+                # keeps its honest refusal.
+                break
             # A long consecutive run of DISTINCT outputs is a straight stretch, and a straight stretch
             # is exactly what a long period looks like before it closes. Its length is evidence about
             # the period's lower bound, so it is what the budget follows.
@@ -4341,10 +5198,19 @@ class MetaCircularOrganGraph:
                 if len(evidence) >= requirement:
                     break
                 while len(evidence) < requirement:
-                    probe = (evidence[-1][0][0] + 1,)
+                    # Same one-slot defect as the main walk, in a second place: `(last_x0 + 1,)`.
+                    # Fixed here as well because a crash in either loop removes the refusal path.
+                    probe = _advance(tuple(evidence[-1][0]), 1)
                     while any(tuple(ex_in) == probe for ex_in, _ in evidence):
-                        probe = (probe[0] + 1,)
-                    evidence.append((probe, oracle(probe)))
+                        probe = _advance(probe, 1)
+                    try:
+                        observed = oracle(probe)
+                    except Exception:
+                        # No ordered successor exists for this domain, so the probe is unanswerable.
+                        # Stop buying evidence rather than escaping through a refusal path with an
+                        # exception (measured 2026-11-04 on a list-argument task).
+                        break
+                    evidence.append((probe, observed))
                     # Count these. The earlier version collected evidence without incrementing the
                     # spend, so the reported cost understated the questions actually asked -- a
                     # measurement error in the one number the caller needs in order to decide whether
@@ -4422,6 +5288,109 @@ class MetaCircularOrganGraph:
         oracle: Callable[[tuple[Any, ...]], Any] | None = None,
         max_oracle_queries: int = 5,
     ) -> dict[str, Any]:
+        """Every outcome is recorded against the SHAPE of the problem, then returned unchanged.
+
+        WHY THIS IS A WRAPPER AND NOT A FEW LINES INSIDE THE METHOD. The method has more than a dozen
+        exit points -- recall, no-candidates, truncation, contradictory oracle, unsetteable,
+        underdetermined, provisional, crystallised -- and the defect is precisely that the tree kept
+        the SUCCESSES and discarded everything else. Recording at each exit by hand would guarantee
+        that the next exit added is the one that is not recorded. One wrapper means no path can
+        escape learning, including paths that do not exist yet.
+
+        The result is returned byte-identical apart from an added `experience` key, so no existing
+        caller can be affected by the recording itself.
+        """
+        from canonical.runtime import experience_v1 as _experience
+
+        shape = _experience.problem_shape(examples, growth=bool(self.growth_enabled))
+        self._last_avoidable_questions = 0
+        result = self._synthesize_or_disambiguate_skill_impl(
+            examples,
+            task_signature=task_signature,
+            oracle=oracle,
+            max_oracle_queries=max_oracle_queries,
+        )
+        try:
+            ok = bool(result.get("ok"))
+            spent = int(result.get("oracle_queries_used") or 0)
+            reproduced = None
+            organ = result.get("organ")
+            if ok and organ is not None:
+                # How many of the DISTINCT outputs in the evidence the claim actually reproduces.
+                # A claim that reproduces fewer has memorised rather than explained, and this is the
+                # cheap standing measure of that across every future run.
+                seen: list[str] = []
+                for ex_in, exp in examples:
+                    ev = _safe_eval_candidate(organ, tuple(ex_in))
+                    if ev[0]:
+                        seen.append(repr(ev[1]))
+                reproduced = len(dict.fromkeys(seen))
+            self.experience.record_outcome(
+                shape,
+                ok=ok,
+                questions_spent=spent,
+                questions_avoidable=self._last_avoidable_questions,
+                reproduced=reproduced,
+            )
+            self.experience.save()
+            result = dict(result)
+            result["experience"] = self.experience.explain(shape)
+        except Exception:  # noqa: BLE001 - memory recording must never break reasoning
+            pass
+
+        # THE SELF-MODEL WAS A FOSSIL, AND THIS IS THE DEFECT THAT MATTERS MOST.
+        #
+        # Measured 2026-11-04: `self.predictor.update(...)` was called ZERO times in this module.
+        # The graph constructed a `CausalFeatureSelfPredictor`, persisted its weights, put
+        # `predictor_observations` in `summary()`, and never once fed it an outcome. After three
+        # tasks it still reported 0 observations and a constant 0.5 for every problem, while the
+        # summary published that number as though it meant something. A self-model that never
+        # observes itself is not a weak self-model; it is a decoration, and it is the purest form
+        # of the static code this project exists to replace.
+        #
+        # `predict_cost` was worse: called only from inside its own class, a thermometer wired to
+        # nothing. Both are wired here, to the ONE event that is genuinely a self-observation --
+        # this creature's own attempt, its own outcome, and what that attempt cost it.
+        try:
+            # PRE-DECISION FEATURES ONLY, and the first version of this was a fabricated result
+            # because it was not.
+            #
+            # Measured 2026-11-04, and it is the worst kind of error in this tree so far: the features
+            # passed to `update` were `solved: result["ok"]` and `status: result["status"]`. Those ARE
+            # the outcome. The model was trained on the label and then asked to predict it, and it
+            # duly reported 0.403 for shapes it "kept solving" and 0.122 for ones it "kept failing".
+            # That discrimination was leakage, not learning -- I had wired a lookup table and reported
+            # it as a self-model, which is precisely the decorative construct this round set out to
+            # remove. Re-measured with pre-decision features only, over 26 tasks: solvability accuracy
+            # 0.308 against a 0.615 majority baseline, i.e. WORSE than always answering "solvable".
+            #
+            # Nothing that is known only AFTER the attempt may enter the features. `candidate_count`
+            # is allowed because the grammar search is free -- it spends no oracle question -- so it
+            # is genuinely available before the creature commits to asking anything.
+            features = {
+                "arity": shape["arity"],
+                "given": shape["given"],
+                "distinct_outputs": shape["distinct_outputs"],
+                "has_container": shape["has_container"],
+                "candidate_count": int(getattr(self, "_last_candidate_count", 0) or 0),
+            }
+            self.predictor.update(
+                features,
+                outcome_pass=bool(result.get("ok")),
+                realised_cost=float(result.get("oracle_queries_used") or 0),
+            )
+        except Exception:  # noqa: BLE001
+            pass
+        return result
+
+    def _synthesize_or_disambiguate_skill_impl(
+        self,
+        examples: Sequence[tuple[tuple[Any, ...], Any]],
+        *,
+        task_signature: str,
+        oracle: Callable[[tuple[Any, ...]], Any] | None = None,
+        max_oracle_queries: int = 5,
+    ) -> dict[str, Any]:
         """Synthesize a `SKILL` organ using learned `META_SYNTHESIZER`s + version-space disambiguation."""
         if not examples:
             return {"ok": False, "status": "EMPTY_EXAMPLES"}
@@ -4478,8 +5447,15 @@ class MetaCircularOrganGraph:
         # Build initial hypothesis pool: learned META_SYNTHESIZER organs FIRST, then base grammar!
         candidate_organs: list[ExecutableOrgan] = []
         seen_ast: set[str] = set()
+        # Whether the LAST observational search actually finished. Declared here, not inside the
+        # closure: the refusal built on it happens outside `_collect_candidates`, and a local there
+        # raised `NameError: name 'observational_exhaustive' is not defined` at the first refusal
+        # (measured 2026-11-04). It starts True so a run that never reaches the observational search
+        # is never accused of having truncated it.
+        observational_exhaustive = True
 
         def _collect_candidates(cur_examples: Sequence[tuple[tuple[Any, ...], Any]]) -> list[ExecutableOrgan]:
+            nonlocal observational_exhaustive
             pool: list[ExecutableOrgan] = []
             for meta in self.organs_in_stratum(META_SYNTHESIZER):
                 try:
@@ -4505,6 +5481,14 @@ class MetaCircularOrganGraph:
             obs_src = _observational_skill_source(
                 cur_examples, concept_library=self.concept_library
             )
+            # Did the observational search actually finish? A miss from a search whose bank filled is
+            # a fact about the budget, and the refusal built on it below must say so. Read here, next
+            # to the call, so nothing between the call and the verdict can overwrite it.
+            observational_exhaustive = _last_observational_was_complete()
+            # A body that recites the evidence is not admitted as a law. If the search can offer
+            # nothing else, the search is allowed to continue rather than the recitation being
+            # promoted: refusing is honest, and a memoriser that answers 16 where the truth is 193 is
+            # not. See `_is_a_restatement` for the measurement.
             if obs_src:
                 try:
                     pool.append(
@@ -4554,9 +5538,18 @@ class MetaCircularOrganGraph:
                 if consistent:
                     local_seen.add(org.organ_id)
                     surviving.append(org)
-            return sorted(surviving, key=lambda o: (o.code_bytes, o.organ_id))
+            # Order by how much DATA a claim asserts, then by text, then by identity. Sorting on
+            # bytes alone let a 15-entry memorised table beat an 8-number composition by four bytes.
+            return sorted(
+                surviving,
+                key=lambda o: (_numeric_literal_count(o), o.code_bytes, o.organ_id),
+            )
 
         candidate_organs = _collect_candidates(work_examples)
+        #: How many syntactic survivors the grammar produced. Free to compute -- it spends no oracle
+        #: question -- so it is a legitimate PRE-DECISION feature, unlike the outcome fields that
+        #: leaked into the self-model on 2026-11-04 and made its reported discrimination meaningless.
+        self._last_candidate_count = len(candidate_organs)
         seen_ast = {o.organ_id for o in candidate_organs}
         if not candidate_organs:
             # The grammar produced NOTHING. This is the strongest form of failure and it used to be
@@ -4576,6 +5569,19 @@ class MetaCircularOrganGraph:
                         "oracle_queries_used": int(growth.get("questions", 0)),
                         "growth": growth,
                     }
+            if not observational_exhaustive:
+                # MEASURED, 2026-11-04: `x*y+1` reached this exit as NO_CONSISTENT_HYPOTHESIS while the
+                # body `((x0 * x1) + 1)` was in the grammar and 64 ms away at the synthesizer's own
+                # default bank. A verdict about the grammar was being issued about a search budget.
+                # The correct report names the budget and does NOT claim the space was searched.
+                return {
+                    "ok": False,
+                    "status": "SEARCH_TRUNCATED",
+                    "seen_candidates": len(seen_ast),
+                    "why": ("the candidate bank filled before the sweep finished, so an empty pool is "
+                            "a statement about the BUDGET, not about the grammar, and must not be "
+                            "reported as one"),
+                }
             return {"ok": False, "status": "NO_CONSISTENT_HYPOTHESIS", "seen_candidates": len(seen_ast)}
 
         queries_used = recall_queries_used
@@ -4627,7 +5633,8 @@ class MetaCircularOrganGraph:
                     # caller. This is deliberately distinguished from the blind case below, because
                     # refusing here would make the creature timid (P5) without buying any safety.
                     candidate_organs = sorted(
-                        candidate_organs, key=lambda o: (o.code_bytes, o.organ_id)
+                        candidate_organs,
+                        key=lambda o: (_numeric_literal_count(o), o.code_bytes, o.organ_id),
                     )[:1]
                     interchangeable = True
                     break
@@ -4656,13 +5663,36 @@ class MetaCircularOrganGraph:
             oracle_answer = oracle(disc_probe)
             queries_used += 1
             work_examples.append((disc_probe, oracle_answer))
+            # THE COUNTERFACTUAL, observed rather than assumed. If the survivor set is the same
+            # before and after the answer, then this question eliminated nothing and the creature
+            # would have concluded exactly the same thing without spending it. Counting that is what
+            # lets a shape become cheaper later without ever guessing: only questions PROVEN to have
+            # been avoidable may be withheld.
+            # AN EXCEPTION AT A PROBE IS "NOT APPLICABLE", NOT "REFUTED", and conflating the two
+            # cost real capability. Measured 2026-11-04.
+            #
+            # This filter used to read `ok_val[0] and _outputs_match(...)`, so a hypothesis that
+            # CRASHED on the probe was eliminated exactly as if it had returned the wrong answer.
+            # The probe sequence for an accepted task is not under the creature's control at this
+            # point, and a period table whose index is a floor of the input is undefined off its
+            # domain -- so a single fractional probe (`-39.5`) removed all forty survivors at once,
+            # including eight that were exactly right everywhere observable. The loop then
+            # re-collected from the enlarged evidence, found nothing, and answered
+            # CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it had already solved cold.
+            #
+            # The distinction is not cosmetic. "This program says something false" is evidence
+            # against it and must remove it. "This program has nothing to say here" is not evidence
+            # against it, and treating it as such means the creature can be talked out of a correct
+            # law by an input outside that law's domain -- which is the opposite of understanding.
+            #
+            # Safety is unaffected: a total program that returns a wrong value still dies here, and a
+            # partial one still has to survive every probe it CAN answer plus all of the evidence.
+            _before_survivors = {org.organ_id for org in candidate_organs}
             candidate_organs = [
-                org
-                for org in candidate_organs
-                if (lambda ok_val: ok_val[0] and _outputs_match(ok_val[1], oracle_answer))(
-                    _safe_eval_candidate(org, disc_probe)
-                )
+                org for org in candidate_organs if _survives_probe(org, disc_probe, oracle_answer)
             ]
+            if {org.organ_id for org in candidate_organs} == _before_survivors:
+                self._last_avoidable_questions += 1
             if not candidate_organs:
                 candidate_organs = _collect_candidates(work_examples)
                 if not candidate_organs:
@@ -4683,12 +5713,36 @@ class MetaCircularOrganGraph:
         # grammar. It cannot certify a program, so the winner must predict something it has not
         # already been shown before it is allowed to become permanent.
         if oracle is not None and queries_used < max_oracle_queries:
+            # HOW MANY tests, and WHICH ones, is a computed question -- not the constant 2 this used
+            # to hardcode. Measured 2026-11-04: with three seeds, buying two probes left four
+            # observations, which tests a two-input fit only if the withheld fit is over-determined,
+            # and the probes were taken from the derived space in probe order rather than by what
+            # they could actually separate. The plan below states the deficit (`arity + 2 - n`) and
+            # ranks candidate probes by how many surviving pairs disagree at them, so the questions
+            # bought are the ones whose answers are not already implied.
+            # REVERTED 2026-11-04, because the replacement was measurably WORSE and I had already
+            # used it to license a false claim. `_plan_probes` ranked candidates by how many surviving
+            # pairs disagree at them, but for `x // 7` over seeds 1..5 it bought probes at -1, -10 and
+            # -11 -- all negative, all where every candidate agrees -- and never visited x >= 8, where
+            # `x // 8` and `x // 7` actually differ. The result was a false positive (`x // 8`
+            # crystallised, wrong at 37, 100 and 999) that the OLD code did not produce, because the
+            # old probe space starts at -40 and sweeps far enough to separate.
+            #
+            # The deficit arithmetic in `plan_probes` is measured and correct; its PROBE CHOICE is
+            # not. Reporting a computed deficit is useful. Letting a worse probe win is not. So the
+            # decision path keeps the space that demonstrably separates, and the plan is kept as an
+            # advisory report until its ranking can beat this on a held-out battery.
+            plan = _plan_probes(work_examples, candidate_organs)
             unseen = [
                 pr
                 for pr in _settlement_probe_space(work_examples, [winner])
                 if tuple(repr(x) for x in pr)
                 not in {tuple(repr(x) for x in ex_in) for ex_in, _ in work_examples}
             ]
+            # Still bound by the computed deficit when it is LARGER than the default: a plan that says
+            # four observations are needed should not be answered with two.
+            if int(plan.get("deficit") or 0) > 2:
+                unseen = unseen[: max(2, int(plan["deficit"]))]
             for probe in unseen[:2]:
                 ok_now, predicted = _safe_eval_candidate(winner, probe)
                 try:
@@ -4730,6 +5784,64 @@ class MetaCircularOrganGraph:
                     }
 
                 work_examples.append((probe, observed))
+                # The same counterfactual as the loop above, and the one that matters most here:
+                # Door 3 asks questions of a claim that has already survived everything. If the
+                # answer AGREES with the claim, the question eliminated nothing -- the creature had
+                # already concluded exactly this. That is a question proven avoidable, and only
+                # questions proven avoidable may ever be withheld. Measured 2026-11-04: this loop
+                # was invisible to the first version of the instrument, which is why `floor(x/7)`
+                # showed 2 questions and 0 avoidable: both of them were spent HERE, where nothing
+                # was counted.
+                self._last_avoidable_questions += 1
+
+        # --- REFUTABILITY: could this claim have been wrong? ----------------------------------
+        # MEASURED, 2026-11-04. `x*x + y` over three points reached this point as
+        # `((4.5 * x0) + (-0.5 * x1) + -0.5)` and was CRYSTALLISED, returning 34.5 where the truth is
+        # 120 at (10, 20). The reason is not a weak search: three observations exactly determine an
+        # affine fit's three parameters, so the body has zero residual on ZERO LEFTOVER DATA. The
+        # crystallizer asked "does it fit?" and accepted the answer.
+        #
+        # This sits AFTER the disambiguation loop on purpose. Everything above may have bought tests
+        # from an oracle; a claim that was just checked on points it predicted has been tested, and
+        # re-judging it on the seeds alone would discard work the creature actually did. What is
+        # judged here is the whole accumulated evidence, so a claim is permitted exactly when the
+        # evidence that exists could have caught it being wrong.
+        refutability = settlement_refutability(work_examples)
+        # Evidence the creature BOUGHT and then correctly PREDICTED is the strongest test available,
+        # and the leave-one-out test above cannot see it: with only a handful of points it reports
+        # TOO_FEW_POINTS even though the claim was just checked against the world. Door 3 only falls
+        # through when the winner PREDICTED the probe and the prediction matched, so a longer
+        # `work_examples` means exactly that -- a successful prediction on unseen input. Counting it
+        # is not leniency; discarding it would throw away the only test that actually happened.
+        bought_and_predicted = len(work_examples) > len(examples)
+        if bought_and_predicted:
+            refutability = dict(refutability)
+            refutability["refutable"] = True
+            refutability["bought_predictions"] = len(work_examples) - len(examples)
+            # Keep the verdict and the flag consistent. A report that says `refutable: True` beside
+            # `verdict: TOO_FEW_POINTS` is the same class of defect as the status string this round
+            # is about: two fields answering one question, and any caller reading only one of them
+            # gets a different answer.
+            refutability["verdict"] = "REFUTABLE_BY_PURCHASED_PREDICTION"
+            refutability["why"] = (
+                "the claim predicted " + str(len(work_examples) - len(examples)) +
+                " input(s) it had not been shown, and each prediction was confirmed by an oracle"
+            )
+        if not refutability.get("refutable"):
+            # Crystal is a BOND. A claim nothing could have refuted does not get one, so it is
+            # returned as a proposal and NOT registered as settled knowledge. The verdict is
+            # reported verbatim: "too few points" and "absorbed its evidence" are different facts
+            # and the caller needs to know which one it is holding.
+            winner.verified_passes = len(work_examples)
+            return {
+                "ok": False,
+                "status": "PROVISIONAL_UNTESTABLE_CLAIM",
+                "organ": winner,
+                "refutability": refutability,
+                "why": ("the evidence could not have refuted this claim, so fitting it is not "
+                        "corroboration and it is not crystallised"),
+                "oracle_queries_used": queries_used,
+            }
 
         winner.verified_passes = len(work_examples)
         self.register_organ(winner)
@@ -4751,7 +5863,16 @@ class MetaCircularOrganGraph:
 
         return {
             "ok": True,
-            "status": "DISAMBIGUATED_AND_CRYSTALLIZED",
+            # The word DISAMBIGUATED asserts that survivors were SEPARATED. When only one candidate
+            # was ever in play nothing was separated, and saying so was an overstatement the caller
+            # could not detect -- `x*x + y` reached this line with a single survivor and reported
+            # DISAMBIGUATED_AND_CRYSTALLIZED while zero tests had run (measured 2026-11-04). The
+            # refutability verdict below is what actually licenses the claim now; the status names
+            # which of the two things happened.
+            "status": ("DISAMBIGUATED_AND_CRYSTALLIZED"
+                       if len(work_examples) > len(examples) or interchangeable
+                       else "SOLE_HYPOTHESIS_CRYSTALLIZED"),
+            "refutability": refutability,
             "organ": winner,
             "settlement": {
                 "entropy_bits": round(decision_space.entropy(), 6),
@@ -4788,6 +5909,7 @@ class MetaCircularOrganGraph:
                 f"{s}::{sig}": oid for (s, sig), oid in sorted(self.primary_by_sig.items())
             },
             "predictor": self.predictor.as_row(),
+            "experience": self.experience.as_row(),
             "bootstrap_inductions": int(self.bootstrap_inductions),
         }
         tmp = self.state_path.with_suffix(self.state_path.suffix + ".tmp")

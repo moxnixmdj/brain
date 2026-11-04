@@ -1,0 +1,447 @@
+{
+  "action_id": "THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1",
+  "action_intent_id": "THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Round 31 attacks the one property five rounds of derivation never touched: the SHAPE of the hypothesis space. Rounds 29-30 replaced every authored constant with a rule, were green, and were still answering the wrong question, because a rule inside a fixed grammar only POPULATES that grammar. Measured 2026-11-04: T_3(x)+2*T_5(x) over 19 integer points was solved COLD by storing a fifteen-entry table (18 numeric literals, 2264 bytes) and solved WARM by the identical table, even after the creature had learned both T_3 and T_5. The compositional description -- a three-entry table plus a law the creature already owned -- is eight numbers. It was not choosing the worse of two answers; it could not express the better one, because `_inline_operator_organs` only ever builds f(g(x)) and a learned law had no TERM position. That fixes the shape of every future hypothesis: Omega_t+1 = Omega_t + {compositions of what Omega_t can already express} grows in instances but never in forms. The fix adds NO new form: for each admitted unary law L, each period k the evidence supports, and op in {add,sub,mul}, the composer asks whether the residual y-L, y+L, or y/L is CONSTANT PER RESIDUE and emits T_k(x) star L(x) only when it is. The block is solved, never guessed. Result: 8 numbers instead of 18, exact on evidence, zero wrong on held-out 40..70. The change then exposed four pre-existing defects that were green for thirty rounds, all one mistake in four places: treating 'this program has nothing to say here' as 'this program says something false'. (1) derive_probe_space emitted half-steps unconditionally so an integer task was probed at x=-39.5. (2) The survivor filter read `ok and match`, so a crash eliminated a hypothesis exactly as a wrong answer did; forty survivors died at once and the creature reported CONTRADICTORY_OR_OUT_OF_GRAMMAR on a task it had solved cold. (3) synthesize_discriminating_input bucketed crashes as a distinct PREDICTION, so every half-step scored a full bit of entropy, eliminated nothing, and burned the oracle budget until it refused UNSETTLEABLE on `x mod 3`. (4) The emitted table formula silently extrapolated off the integers by taking the block of the floor, inventing a value at 2.5 that nobody claimed; a period table is a lookup by POSITION, total on the integers and silent elsewhere, and the body now raises instead of inventing. Safety is unchanged and both halves are asserted: a total program returning a wrong value still dies at the probe, and a partial one must still survive every probe it can answer plus all of the evidence. Also corrected, honestly: my comparison harness silently taught nothing for several hours (both teaching calls returned UNSETTLEABLE and organs_in_stratum was empty, so the composer was handed zero laws and produced zero candidates), which is round 30's 'a silent no-op is indistinguishable from a wrong answer' arriving in a new place -- the test file now asserts the premise before the conclusion. Two suites I had believed pre-existing were traced to my own round 26 and both were asserting OLDER, WORSE behaviour: an exactly-determined three-point affine must NOT be called corroborated (round 26's own rule), and `x*x` must NOT be refused when the weight-1 identity times x reproduces it exactly; both assertions were corrected, and I got the affine law's arithmetic wrong once in the process and the creature was right. Round 30's measured polynomial degree also made `x^3` expressible as a law, so a round-26 test whose premise was 'x^3 is outside this grammar' is now obsolete and was replaced with a genuine recitation, plus the converse assertion that a cubic IS testable.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "causal_evidence": "ROUND_31_COLD_VS_WARM_ON_T_3_PLUS_2_T_5_IDENTICAL_FIFTEEN_ENTRY_TABLE__AFTER_COMPOSER_8_NUMBER_COMPOSED_FORM_EXACT_ON_EVIDENCE_AND_0_OF_30_HELD_OUT_WRONG__42_CANDIDATES_ALL_BUILD_AND_EVALUATE__229_TESTS_PASS_ACROSS_THE_12_FILES_TOUCHING_THE_CHANGED_LAYERS__REFUTABILITY_SUITE_GOES_FROM_4_FAILING_ON_BASELINE_TO_20_PASSING",
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_DERIVING_CONSTANTS_INSIDE_A_FIXED_GRAMMAR_IS_LEARNING__MEASURED_OMEGA_GREW_ONLY_IN_INSTANCES_OF_SHAPES_IT_ALREADY_HAD_BECAUSE_A_LEARNED_LAW_HAD_NO_TERM_POSITION__AND_THAT_X_CUBED_IS_OUTSIDE_THE_GRAMMAR_WHICH_ROUND_30_MEASUREMENT_FALSIFIED",
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+      "canonical/runtime/settlement_v1.py",
+      "canonical/tests/test_a_learned_law_can_be_a_term_v1.py",
+      "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "canonical/tests/test_a_claim_nothing_could_refute_is_not_corroborated_v1.py",
+      "THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1.md"
+    ],
+    "route_class": "ADAPT"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_LEARNED_LAW_HAD_NO_TERM_POSITION_SO_A_NEW_LAW_COULD_ONLY_BE_COMPOSED_WITH_ANOTHER_LAW_AND_NEVER_USED_AS_A_COFACTOR__OMEGA_T_PLUS_1_CONTAINED_ONLY_MORE_INSTANCES_OF_THE_SHAPES_IN_OMEGA_T",
+  "canonical_base_commit": "cc5b71763b93b752c5f03f94dbfaff6ea5448f7f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A_LEARNED_LAW_HAD_NO_TERM_POSITION_SO_A_NEW_LAW_COULD_ONLY_BE_COMPOSED_WITH_ANOTHER_LAW_AND_NEVER_USED_AS_A_COFACTOR__OMEGA_T_PLUS_1_CONTAINED_ONLY_MORE_INSTANCES_OF_THE_SHAPES_IN_OMEGA_T",
+  "date": "2026-11-04",
+  "expected_parent_change": "A_LEARNED_LAW_MAY_NOW_SIT_INSIDE_AN_EXPRESSION_AS_A_TERM_WITH_ITS_COFACTOR_SOLVED_PER_RESIDUE__COMPLEXITY_ORDERED_BY_NUMERIC_LITERALS_NOT_BYTES__A_PERIOD_TABLE_DECLARES_ITSELF_UNDEFINED_OFF_THE_INTEGERS_INSTEAD_OF_EXTRAPOLATING__UNDEFINED_IS_DISTINGUISHED_FROM_WRONG_IN_ALL_THREE_PLACES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NOT_EMERGENCE",
+  "expected_parent_frontier_change": "A_LEARNED_LAW_MAY_NOW_SIT_INSIDE_AN_EXPRESSION_AS_A_TERM_WITH_ITS_COFACTOR_SOLVED_PER_RESIDUE__COMPLEXITY_ORDERED_BY_NUMERIC_LITERALS_NOT_BYTES__A_PERIOD_TABLE_DECLARES_ITSELF_UNDEFINED_OFF_THE_INTEGERS_INSTEAD_OF_EXTRAPOLATING__UNDEFINED_IS_DISTINGUISHED_FROM_WRONG_IN_ALL_THREE_PLACES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NOT_EMERGENCE",
+  "explicit_user_authorization": "Owner directive on 2026-11-04: 'Execute perfectly and merge all of your work' and 'You must think from the deepest layer, from first principles of everything.' $0 spend, K3=0, zero protected or SHA-pinned paths touched, no sentience claim.",
+  "falsification_condition": "A_LEARNED_LAW_CANNOT_BE_A_TERM__OR_A_PERIOD_TABLE_INVENTS_A_VALUE_OFF_THE_INTEGERS__OR_AN_UNDEFINED_PROBE_ELIMINATES_A_HYPOTHESIS__OR_A_CRASH_SCORES_AS_A_PREDICTION__OR_THE_MEMORISED_FORM_OUTRANKS_THE_COMPOSED_FORM__OR_A_REFUSAL_OR_A_TABLE_OR_A_COMPOSITION_STOPS_WORKING",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "BEFORE_COMPOSER_T_3_PLUS_2_T_5_COST_AN_18_NUMBER_FIFTEEN_ENTRY_TABLE_WHETHER_OR_NOT_THE_LANGUAGES_FOR_T_3_AND_T_5_HAD_BEEN_LEARNED__AFTER_IT_COSTS_8_NUMBERS_A_THREE_ENTRY_TABLE_PLUS_ONE_LEARNED_LAW_0_OF_30_HELD_OUT_WRONG__AND_THE_THREE_DISTINCTIONS_ABOVE_TURNED_FOUR_LONG_GREEN_DEFECTS_INTO_VISIBLE_AND_TESTED_PROPERTIES",
+  "next_step": "THE_COMPOSER_ADDS_ONE_TERM_POSITION_FOR_UNARY_LEARNED_LAWS_ONLY__QUANTIFICATION_BINDING_RECURSION_AND_COMPOSITION_OF_COMPOSITIONS_ARE_STILL_OUTSIDE_THE_SPACE_AND_THE_NEXT_ROUND_MUST_MEASURE_WHICH_OF_THEM_IS_ACTUALLY_LOAD_BEARING_RATHER_THAN_ASSUMING_THE_OBVIOUS_ONE",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/evidence_demand_v1.py",
+    "canonical/runtime/generalization_check_v1.py",
+    "canonical/runtime/observation_refutation_v1.py",
+    "canonical/runtime/refutability_v1.py",
+    "canonical/runtime/settlement_v1.py",
+    "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "cc5b71763b93b752c5f03f94dbfaff6ea5448f7f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "ONE_LEARNED_LAW_PER_COMPOSED_FORM",
+      "COMPLEXITY_MEASURED_IN_BYTES_OF_TEXT",
+      "A_PERIOD_TABLE_EXTRAPOLATED_TO_THE_REALS_BY_TAKING_THE_BLOCK_OF_THE_FLOOR",
+      "A_CRASH_TREATED_AS_A_WRONG_ANSWER"
+    ],
+    "expected_parent_level_state_change": "A_LEARNED_LAW_MAY_NOW_SIT_INSIDE_AN_EXPRESSION_AS_A_TERM_WITH_ITS_COFACTOR_SOLVED_PER_RESIDUE__COMPLEXITY_ORDERED_BY_NUMERIC_LITERALS_NOT_BYTES__A_PERIOD_TABLE_DECLARES_ITSELF_UNDEFINED_OFF_THE_INTEGERS_INSTEAD_OF_EXTRAPOLATING__UNDEFINED_IS_DISTINGUISHED_FROM_WRONG_IN_ALL_THREE_PLACES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NOT_EMERGENCE",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "DELETE_FIXED_MENU_ASSUMPTION_BY_STORING_META_SYNTHESIZERS_AND_PERCEPTORS_AS_ORGANS",
+        "BYPASS_LOCAL_TUNNEL_VISION_VIA_PITMAN_YOR_UNSEEN_TAIL_GATE",
+        "SUBSTITUTE_TASK_FEATURE_HAZARD_AND_BELLMAN_HORIZON_FOR_COUNTER_THERMOSTATS"
+      ],
+      "intrinsic_or_path_specific": "INTRINSIC__FIXED_LEVEL_1_CODE_AND_ZERO_UNSEEN_MASS_ASSUMPTION_BOUND_ALL_DOWNSTREAM_LEARNING",
+      "surviving_causal_blocker": "FROZEN_MENUS_AND_KEYWORD_GATES_PREVENTED_P_t_FROM_COMPOUNDING_AND_STARVED_UNLOCKING_ACTIONS"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "REBUILDING_IGNORANCE_LEDGER_OR_CURRICULUM_OR_GOAL_TARGET_BINDING",
+        "HAND_WRITING_FORMAT_SPECIFIC_READERS_PER_REPOSITORY"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/curriculum_v1.py",
+        "canonical/runtime/ignorance_ledger_v1.py",
+        "canonical/runtime/computer_env_v1.py",
+        "execution_guard/goal_target_binding_v1.py",
+        "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__PURE_STDLIB_FIRST_PRINCIPLES_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
+      ],
+      "surviving_gap": "INDEPENDENT_PERSONNEL_TWO_SPRITE_CERTIFICATION_FOR_BOUND_REPAIR_REMAINS_OUTSIDE_SANDBOX_PRODUCER_AUTHORITY"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "SELECTING_FROM_A_FROZEN_CODEC_OR_EXPRESSION_MENU",
+        "DETECTING_GLOBAL_OPTIMALITY_VIA_ENGLISH_KEYWORDS",
+        "STARVING_ZERO_IMMEDIATE_REWARD_INSTRUMENTAL_TOOLS"
+      ],
+      "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
+      "surviving_necessity": "INDUCE_PARSE_SERIALIZE_ASTs_SOLVE_ALGEBRAIC_AND_PIECEWISE_PROGRAMS_COMPOSE_ADMITTED_ORGANS_AND_BACKUP_INSTRUMENTAL_Q"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "curriculum_v1_ignorance_ledger_v1_AND_goal_target_binding_v1_UNIFIED_IN_GLOBAL_EXTRAPOLATOR",
+        "MetaCircularOrganGraph_SHARED_ACROSS_SentientCognitiveCore_Creature_AND_SovereignZeroLLMPlanner"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "STATIC_CODEC_AND_EXPRESSION_MENUS_SUPERSEDED_BY_INDUCTION_AND_OBSERVATIONAL_SYNTHESIS"
+      ],
+      "fresh_reuse_plan": "REUSE_META_CIRCULAR_ORGAN_GRAPH_AND_GLOBAL_EXTRAPOLATOR_ACROSS_ALL_FUTURE_COMPUTER_AND_SWE_EPISODES"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "COMPILED_ORGAN_BYTECODE_CACHED_IN_RAM_AT_SUB_0_05_MS"
+      ],
+      "search_stop_decision": "STOP_WHEN_VERSION_SPACE_COLLAPSES_TO_ONE_OR_MEASURED_TARGET_IS_MET"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "FROZEN_MENUS_CANNOT_PARSE_UNSEEN_WIRE_FORMATS_SOLVE_OFF_GRID_COEFFICIENTS_OR_VALUE_ZERO_REWARD_TOOLS",
+      "routes_ranked": [
+        "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY__SELECTED",
+        "KEEP_FIVE_CODEC_MENU__REJECTED",
+        "REBUILD_FROM_SCRATCH__REJECTED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NINE_POSITIVE_AND_NEGATIVE_TESTS_WITH_GROWTH_DISABLED_PLUS_A_FIFTEEN_CASE_ADVERSARIAL_FALSE_POSITIVE_BATTERY_PLUS_A_LIVE_EXECUTOR_RUN_PLUS_A_BOUNDEDNESS_TEST__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+    },
+    "real_outcome": "ONLY_A_CLAIM_WHOSE_EVIDENCE_COULD_HAVE_REFUTED_IT_IS_TREATED_AS_CORROBORATED_AND_EVERY_OTHER_ANSWER_IS_HANDED_BACK_AS_PROVISIONAL",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Grows only when a human edits code",
+            "CORRECTNESS": "Correct for each anticipated form",
+            "INCREMENTAL_COST": "0 USD but unbounded human cost",
+            "RELIABILITY": "Deterministic",
+            "VERIFIABILITY": "Verifiable but static",
+            "WALL_CLOCK": "Instant"
+          },
+          "evidence": [
+            "round 23 needed a new node to express period tables",
+            "each composition would need its own rule"
+          ],
+          "qualification_evidence": [
+            "direct read of the round-23 change and this round's cold refusals"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "ADD_ONE_HAND_WRITTEN_NODE_PER_COMPOSED_FORM"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "One rule covers add/sub/mul with four co-factors",
+            "CORRECTNESS": "Solved block plus basis element, checked against every example",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Fails closed; refusal unchanged when nothing survives",
+            "VERIFIABILITY": "Held-out exactness plus the settlement ledger",
+            "WALL_CLOCK": "About 5 ms candidate generation, flat in period"
+          },
+          "evidence": [
+            "four composed forms expressed cold at 37/37 held-out in 3 questions",
+            "fifteen adversarial cases with zero false claims",
+            "candidate count bounded and flat in period"
+          ],
+          "qualification_evidence": [
+            "nine tests with growth disabled",
+            "adversarial false-positive battery",
+            "live executor run on a booted Creature"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "route": "DEPTH_ONE_COMPOSITIONAL_CLOSURE_WITH_THE_TABLE_SOLVED_FROM_THE_RESIDUAL"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Real long-run lever in the literature",
+            "CORRECTNESS": "Strong on a corpus of varied searched programs",
+            "INCREMENTAL_COST": "0 USD, stdlib sufficient",
+            "RELIABILITY": "Anytime with a published compression guarantee",
+            "VERIFIABILITY": "Compression ratio is measurable",
+            "WALL_CLOCK": "Requires a compression pass"
+          },
+          "evidence": [
+            "the library now holds 1,2,3 concepts after periods 3,5,7",
+            "published library learning improves solve rates by 19.6 to 62.46 points"
+          ],
+          "qualification_evidence": [
+            "Bowers et al POPL 2023",
+            "Ellis et al PLDI 2021",
+            "Grand et al ICLR 2024"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "WIRE_THE_CONCEPT_LIBRARY_IN_AS_A_TEMPLATE_SOURCE"
+        }
+      ],
+      "checked_at_utc": "2026-11-04T22:12:59Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE",
+      "max_age_hours": 2,
+      "negative_search_summary": "No challenger removes the need for the closure rule: wiring the library in was measured inert on this corpus, and one node per composed form rebuilds the menu a level up. The library-learning challenger stays recorded as non-dominating and is not displaced; it becomes useful when the corpus contains varied searched programs rather than one solved skeleton.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "compositional generalization program synthesis closure over primitive basis"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "stitch python bindings corpus guided abstraction"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "residual decomposition solve parameters instead of enumerate grammar"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2025 neurosymbolic synthesis sample complexity information floor"
+        }
+      ],
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-04T22:12:59Z",
+        "execution_dependencies": [
+          {
+            "dependency": "CPython 3.11 standard library runtime",
+            "evidence": [
+              "tests execute in this sandbox"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+            "evidence": [
+              "closure solves with growth disabled"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical.runtime.creature_runtime_v1",
+            "evidence": [
+              "live executor returns exact answers"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "T(x)+x and T(x)*x are refused cold and refused after periods 3,5,7 are admitted, so the library is inert",
+          "period-12 costs 2 questions cold and 2 warm, the information floor, so cost cannot measure learning",
+          "the concept bridge does fire on round-23 organs (1,2,3 concepts), contradicting round 22",
+          "x*x is exactly expressible as solved T_2=[0,0] plus x*x and is exact at 10**6"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "MADIL arXiv 2505.01081 MDL decomposition without training data",
+          "CodeARC arXiv 2503.23145 differential-testing oracles for self-correction"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "github.com/mlb2251/stitch Rust crate and Python bindings for compression",
+          "stitch-bindings on PyPI exposes the Rust backend"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Bowers et al POPL 2023 Stitch corpus-guided top-down abstraction synthesis",
+          "Grand et al ICLR 2024 LILO compression admits only abstractions that reduce description length",
+          "Ellis et al PLDI 2021 DreamCoder wake-sleep library plus neural search policy"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY",
+      "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
+      "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
+    ],
+    "selected_route": "IDENTIFY_THE_RESIDUAL_SHAPE_RATHER_THAN_ASSUME_IT",
+    "selected_surviving_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE",
+    "stop_condition": "11_NEW_TESTS_PASS__229_PASS_ACROSS_THE_12_FILES_THAT_TOUCH_THE_CHANGED_LAYERS__T_3_PLUS_2_T_5_RETURNS_8_NUMBERS_WITH_0_OF_30_HELD_OUT_WRONG__ZERO_CAPABILITY_CREDIT",
+    "why_selected_route_is_fastest_sufficient": "INVERTING_ONE_COMBINING_OPERATION_AND_TESTING_CONSTANCY_PER_RESIDUE_COVERS_T(x)+x_T(x)-x_T(x)*x_AND_T(x)+x*x_WITH_NO_NEW_NODE_PER_CASE_AND_NO_ENUMERATION__EVERY_CANDIDATE_STILL_ENTER THE_EXISTING_VERSION_SPACE"
+  },
+  "route_frontier": {
+    "checked_at_utc": "2026-11-04T22:12:59Z",
+    "discovery_required": true,
+    "max_age_hours": 24,
+    "selected_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE"
+  },
+  "route_id": "A_CLAIM_NOTHING_COULD_REFUTE_IS_NOT_CORROBORATED_20261104_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "GIVE_A_LEARNED_LAW_A_TERM_POSITION_AND_SOLVE_ITS_COFACTOR_PER_RESIDUE",
+  "stop_condition": "11_NEW_TESTS_PASS__229_PASS_ACROSS_THE_12_FILES_THAT_TOUCH_THE_CHANGED_LAYERS__T_3_PLUS_2_T_5_RETURNS_8_NUMBERS_WITH_0_OF_30_HELD_OUT_WRONG__ZERO_CAPABILITY_CREDIT",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-04T00:00:00Z",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
+      "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA",
+      "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA"
+    }
+  },
+  "weakens_existing_guard": false
+}

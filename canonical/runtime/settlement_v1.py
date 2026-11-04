@@ -92,6 +92,30 @@ def _literal_offsets(value: Any, *, span: int = 3) -> list[int]:
     return out
 
 
+def canonical_key(value: Any) -> Hashable:
+    """A hashable identity for ANY input value, so reachability is measurable for every type.
+
+    Measured before writing this: `derive_probe_space` raised `TypeError: unhashable type: 'list'` on the
+    first list input, and the same for dicts and sets. The creature did not answer list tasks wrongly --
+    it CRASHED, which means no prior round had ever shown it a list. Four rounds of inference work were
+    bounded by this and none of them could see it, because none of them passed a list.
+
+    Equality semantics are kept gentle on purpose: a list and its tuple are different values here, since
+    collapsing them would silently change which probes count as "already seen" and could hide a
+    distinction the caller depends on.
+    """
+    if isinstance(value, (str, bytes, int, float, bool, type(None))):
+        return value
+    if isinstance(value, (list, tuple)):
+        return (type(value).__name__, tuple(canonical_key(v) for v in value))
+    if isinstance(value, (set, frozenset)):
+        return (type(value).__name__, tuple(sorted((canonical_key(v) for v in value), key=repr)))
+    if isinstance(value, dict):
+        return ("dict", tuple(sorted(((canonical_key(k), canonical_key(v)) for k, v in value.items()),
+                                     key=repr)))
+    return (type(value).__name__, repr(value))
+
+
 def derive_probe_space(
     examples: Sequence[tuple[tuple[Any, ...], Any]],
     literals: Iterable[int] = (),
@@ -107,9 +131,9 @@ def derive_probe_space(
     if not examples:
         return []
     arity = len(examples[0][0])
-    seen: set[tuple[Any, ...]] = set()
+    seen: set[Any] = set()
     for ex_in, _ in examples:
-        seen.add(tuple(ex_in))
+        seen.add(canonical_key(tuple(ex_in)))
 
     ints: set[int] = set()
     for i in range(-dense_range, dense_range + 1):
@@ -123,20 +147,76 @@ def derive_probe_space(
 
     ordered = sorted(ints)
     probes: list[tuple[Any, ...]] = []
-    local: set[tuple[Any, ...]] = set()
+    local: set[Any] = set()
+
+    def _add(candidate: tuple[Any, ...]) -> None:
+        key = canonical_key(candidate)
+        if key in seen or key in local:
+            return
+        local.add(key)
+        probes.append(candidate)
+
     for x in ordered:
-        probe = tuple([x] * arity)
-        if probe in seen or probe in local:
-            continue
-        local.add(probe)
-        probes.append(probe)
-    # half-steps, so non-integer domains are not invisible
+        _add(tuple([x] * arity))
+    # HALF-STEPS, so non-integer domains are not invisible -- but they must not be taken FIRST for a
+    # problem whose evidence is all integers, and this was a real defect, measured 2026-11-04.
+    #
+    # They were emitted UNCONDITIONALLY and immediately after the integer sweep, so the
+    # disambiguation loop could ask the oracle at x = -39.5 for an integer-only task. Every
+    # period-table hypothesis then indexes its block at a non-integral position; the ENTIRE surviving
+    # set dies at once, the loop re-collects, still finds nothing, and the answer becomes
+    # CONTRADICTORY_OR_OUT_OF_GRAMMAR.
+    #
+    # Measured: `T_3(x) + 2*T_5(x)` over 19 integer points was DISAMBIGUATED when solved cold, and
+    # CONTRADICTORY once two learned laws let the grammar build the correct COMPOSED form. The
+    # composition was not the problem -- it added candidates that were exact -- and the fractional
+    # probe then destroyed those together with the table. A capability was reported as LOST because a
+    # probe asked a question the domain cannot answer.
+    #
+    # The fix is ORDERING, not deletion, and I got this wrong once before committing to it: I first
+    # suppressed half-steps entirely for integer evidence, which also removed the probe that
+    # separates continuous hypotheses, and caught myself when two suites went red. Ints are a subset
+    # of the reals, so an integer point is always a legal probe for a continuous claim; a half-step is
+    # only illegal for a claim whose index must be integral. Taking the integer probes FIRST settles
+    # integer-shaped problems on their own terms and leaves every continuous distinction reachable.
     for x in (v + 0.5 for v in range(-dense_range, dense_range)):
-        probe = tuple([x] * arity)
-        if probe in seen or probe in local:
-            continue
-        local.add(probe)
-        probes.append(probe)
+        _add(tuple([x] * arity))
+
+    # NON-DIAGONAL probes. Every probe above is one number repeated `arity` times, so a two-argument
+    # task was only ever observed at f(n, n). Measured consequence: `x+y` was solved (it is 2x on the
+    # diagonal) while `x*y+1` was refused, because on the diagonal it is not affine and no amount of
+    # search can separate it from a line. The evidence never contained the distinction.
+    #
+    # Arguments are separated by an OFFSET derived from the observed inputs, not by a fixed grid: for
+    # each observed input pair, hold slot 0 and move slot 1 by the smallest nonzero gap seen in the data
+    # (or 1 when there is no gap). Directed, because f(a,b) and f(b,a) differ for non-symmetric tasks.
+    if arity > 1:
+        gaps: set[int] = set()
+        for ex_in, _ in examples:
+            nums = [v for v in ex_in if isinstance(v, int) and not isinstance(v, bool)]
+            for i in range(len(nums)):
+                for j in range(i + 1, len(nums)):
+                    d = abs(nums[i] - nums[j])
+                    if d > 0:
+                        gaps.add(int(d))
+        step_candidates = sorted(gaps)[:3] or [1]
+        seeds: list[tuple[Any, ...]] = []
+        for ex_in, _ in examples:
+            if all(isinstance(v, int) and not isinstance(v, bool) for v in ex_in):
+                seeds.append(tuple(ex_in))
+        for base in (seeds[:4] or [tuple([0] * arity)]):
+            for slot in range(arity):
+                for step in step_candidates:
+                    for direction in (1, -1):
+                        moved = list(base)
+                        moved[slot] = moved[slot] + direction * step
+                        _add(tuple(moved))
+            # every slot moved at once, to catch products and sums of all arguments
+            for step in step_candidates:
+                moved = [v + step for v in base]
+                _add(tuple(moved))
+                moved = [v - step for v in base]
+                _add(tuple(moved))
     return probes
 
 
@@ -726,14 +806,56 @@ def acquire_period(
 # ---------------------------------------------------------------------------------------------
 # Inducing a period TABLE: the structure comes from the world, not from a template I wrote
 # ---------------------------------------------------------------------------------------------
-def table_evidence_requirement(period: int, *, factor: int = 4) -> int:
+#: Repeats demanded beyond the information-theoretic floor. See `table_evidence_requirement`.
+TABLE_REPEAT_POLICY = 2
+
+
+def table_evidence_requirement(period: int, *, factor: int | None = None) -> int:
     """How many observations a period table needs before it may claim a structure.
 
-    Exposed so a caller can BUDGET for the compression rule instead of discovering it by failing.
-    The rule itself is that the block must be at most a quarter of the evidence, which is what
-    separates an induction from a restatement.
+    THE INFORMATION FLOOR is `2 * period`: every residue must be seen at least twice before a single
+    repeat exists, and without a repeat there is nothing to call periodic.
+
+    THE NUMBER IS A POLICY, NOT A THEOREM, and the previous docstring said otherwise. It claimed the
+    block "must be at most a quarter of the evidence, which is what separates an induction from a
+    restatement". That sentence is false, and it was measured on 2026-11-04:
+
+        requirement k*p, signal TRULY periodic for T cycles then breaking
+        -> a false table is accepted exactly when T >= k, for every k and every p
+
+        p=3  k=2 (needs  6): false tables accepted when T in [2,3,4,5,6,7]
+        p=3  k=4 (needs 12): false tables accepted when T in [4,5,6,7]
+        p=5  k=2 (needs 10): false tables accepted when T in [2,3,4,5,6,7]
+        p=5  k=4 (needs 20): false tables accepted when T in [4,5,6,7]
+
+    No finite k eliminates this. A signal that repeats k times and then breaks is ALWAYS accepted at
+    requirement k*p, because nothing inside the evidence distinguishes it from one that repeats
+    forever. Raising k narrows the band and buys nothing categorical; 4 does not separate induction
+    from restatement, it merely refuses tables from signals that broke earlier than the fourth cycle.
+
+    So the count is `2 * period` (the floor) plus `TABLE_REPEAT_POLICY` extra repeats -- a stated
+    2-cycle confidence margin over the minimum, reported as a margin rather than dressed up as a law.
+    A caller that wants to pay for more certainty can raise the policy; a caller that wants the floor
+    can set it to 0 and accept that tables will be claimed on a single repeat.
+
+    `factor` is still accepted so an explicit multiple can be requested, and it OVERRIDES the policy.
     """
-    return factor * int(period)
+    if factor is not None:
+        return int(factor) * int(period)
+    return (2 + int(TABLE_REPEAT_POLICY)) * int(period)
+
+
+def table_requirement_policy() -> dict[str, Any]:
+    """What the table requirement is, and what it is not. Reported with the claim it licenses."""
+    return {
+        "floor_observations": "2 * period  (every residue seen twice, i.e. one repeat)",
+        "extra_repeats": int(TABLE_REPEAT_POLICY),
+        "formula": "(2 + extra_repeats) * period",
+        "status": ("POLICY, NOT THEOREM: a signal that repeats extra_repeats times and then breaks is "
+                   "still accepted. Measured 2026-11-04 -- no finite multiple removes this, so the "
+                   "number states a tolerance rather than a guarantee"),
+        "authority": "NONE",
+    }
 
 
 def induce_periodic_table(

@@ -122,7 +122,16 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                 novel_examples,
                 task_signature="custom::lin_novel",
             )
-            self.assertTrue(bootstrap["ok"], bootstrap)
+            # UPDATED 2026-11-04, deliberately. Three points uniquely determine a two-input affine
+            # function and this used to crystallise. It no longer does, for a measured reason:
+            # `x*x + y` fits these same three points exactly and is WRONG everywhere else (34.5 where
+            # the truth is 120 at (10, 20)). A three-parameter fit to three points has zero residual on
+            # ZERO LEFTOVER DATA, so "it fits" cannot distinguish the plane from the surface. The
+            # solution is still produced and is still exact -- it is simply not called SETTLED until
+            # something tests it, which is what an oracle is for.
+            self.assertFalse(bootstrap["ok"], "a three-point fit with no oracle is not a settled law")
+            self.assertEqual(bootstrap["status"], "PROVISIONAL_UNTESTABLE_CLAIM")
+            self.assertEqual(bootstrap["refutability"]["verdict"], "TOO_FEW_POINTS")
             self.assertEqual(bootstrap["organ"].invoke(10, 3), 7 * 10 - 2 * 3 + 12)
 
             # META_SYNTHESIZER must solve coefficients OUTSIDE any frozen integer lattice
