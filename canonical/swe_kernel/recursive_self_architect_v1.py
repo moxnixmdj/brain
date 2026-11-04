@@ -2357,6 +2357,23 @@ def forge_verified_organ_bridge(
         capability_forge_v1.STATE = orig_state
 
 
+def _organ_source_is_self_recursive(source_code: str) -> bool:
+    """True iff some function body calls its own name (nested `_q` self-call, not the outer driver)."""
+    src = str(source_code or "")
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return "def _q" in src and src.count("_q(") > 1
+    for fn in ast.walk(tree):
+        if not isinstance(fn, ast.FunctionDef):
+            continue
+        for node in fn.body:
+            for inner in ast.walk(node):
+                if isinstance(inner, ast.Call) and isinstance(inner.func, ast.Name) and inner.func.id == fn.name:
+                    return True
+    return False
+
+
 def _compute_ast_behavioral_descriptor(source_or_diff: str) -> dict[str, Any]:
     """Compute structural MAP-Elites behavioral coordinates `(loop_depth_bin, uses_memo_or_index)`."""
     added_lines: list[str] = []
@@ -2453,6 +2470,72 @@ class QualityDiversitySelfArchive:
             "replaced_incumbent": replaced,
             "total_elites": len(cells),
         }
+
+    def record_organ_source(
+        self,
+        *,
+        source_code: str,
+        organ_id: str,
+        score: float,
+        stratum: str = "POLICY",
+    ) -> dict[str, Any]:
+        """MAP-Elites cell for a `P_t` organ source (structurally diverse POLICY genomes)."""
+        state = self._load()
+        cells = state.setdefault("cells", {})
+        b_desc = _compute_ast_behavioral_descriptor(source_code)
+        recursive = _organ_source_is_self_recursive(source_code)
+        b_desc["recursive"] = recursive
+        rec_bin = "rec" if recursive else "flat"
+        imm_bin = "imm" if "def _immediate" in source_code else "noimm"
+        cell_key = f"{stratum}::{b_desc['loop_depth_bin']}::{b_desc['index_bin']}::{rec_bin}::{imm_bin}"
+        qd_score = float(score)
+        incumbent = cells.get(cell_key)
+        replaced = incumbent is None or qd_score >= float(incumbent.get("qd_score") or 0.0)
+        if replaced:
+            cells[cell_key] = {
+                "organ_id": organ_id,
+                "stratum": stratum,
+                "source_code": source_code,
+                "behavioral_descriptor": b_desc,
+                "qd_score": round(qd_score, 4),
+                "recursive": recursive,
+            }
+            tmp = self.archive_path.with_suffix(".tmp")
+            tmp.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            tmp.replace(self.archive_path)
+        return {
+            "cell_key": cell_key,
+            "behavioral_descriptor": b_desc,
+            "replaced_incumbent": replaced,
+            "total_elites": len(cells),
+        }
+
+    def elite_organ_sources(self, *, stratum: str = "POLICY", limit: int = 4) -> list[str]:
+        """Diverse elite organ sources across MAP-Elites niches."""
+        cells = self._load().get("cells") or {}
+        ranked = sorted(
+            (dict(v) for v in cells.values() if isinstance(v, Mapping) and v.get("source_code")),
+            key=lambda rec: (-float(rec.get("qd_score") or 0.0), str(rec.get("organ_id") or "")),
+        )
+        out: list[str] = []
+        seen_src: set[str] = set()
+        seen_niche: set[str] = set()
+        for rec in ranked:
+            if str(rec.get("stratum") or stratum) != stratum:
+                continue
+            src = rec.get("source_code")
+            if not isinstance(src, str) or src in seen_src:
+                continue
+            bd = rec.get("behavioral_descriptor") or {}
+            niche = f"{bd.get('loop_depth_bin')}:{bd.get('index_bin')}:{rec.get('recursive')}"
+            if niche in seen_niche and len(out) >= 1:
+                continue
+            seen_niche.add(niche)
+            seen_src.add(src)
+            out.append(src)
+            if len(out) >= limit:
+                break
+        return out
 
     def select_stepping_stone_elites(self, *, limit: int = 4) -> list[dict[str, Any]]:
         """Return diverse elite stepping stones across distinct `(axis, loop_depth_bin, index_bin)` niches."""
