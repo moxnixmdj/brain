@@ -28,7 +28,7 @@
     ],
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "producer_cognition_model_dependency_count": 0,
-    "progress_class": "SHAPE_OF_THE_HYPOTHESIS_SPACE_EXTENDED_BY_EVIDENCE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
       "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
       "canonical/runtime/settlement_v1.py",
