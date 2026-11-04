@@ -1,466 +1,351 @@
-"""Notions: expectations derived from a program's own structure, so the creature can find work unassigned.
+"""Tentative questions about source code, with explicit provenance and feedback.
 
-WHY THIS EXISTS
----------------
-Twenty-three passes built organs that act on a *failing test*. Interpretation reads a measurement out of
-an assertion's failure; the fitted grammar is scored against an owed value; hole detection watches
-verified repairs; competence counts wins. Every one of them is downstream of a failing assertion that
-somebody else wrote.
+A disagreement is an observation, not a specification.  In particular, similar
+names do not establish that two functions should agree, and a failed equality does
+not say which function is wrong.  This module proposes questions from source
+structure; it does not give those questions authority to change the workspace.
 
-Measured 2026-11-05: hand the creature a module with `rect_area(w, h)` returning `w + h`, a correct
-sibling `rect_perimeter` returning `2 * (w + h)`, a correct `square_area`, and a placeholder test file
-that asserts nothing. Six cycles produced NO action. Nothing was wrong as far as it was concerned,
-because nothing had ever told it what right looks like.
-
-That is the deepest gap, and it is not a missing repair rule. It is missing *doubt*: the creature has
-no expectations, so it has nothing to be surprised by, so it has no work of its own.
-
-WHAT A NOTION IS
-----------------
-A notion is a checkable expectation about a piece of code, generated from the code itself:
-
-    * SYMMETRY   two functions with the same parameter names ought to relate the same way.
-                 `rect_perimeter(w, h) = 2 * (w + h)` and `rect_area(w, h)` over the same names invite
-                 the question of whether `rect_area` is a sum while its sibling is a product-scaled sum.
-    * IDENTITY   a function's own docstring or name declares a relation a substitute can test.
-                 `square_area(s) = s * s` versus a suspected `rect_area` calls the same code path with
-                 one argument -- if `rect_area(s, s)` disagrees with `square_area(s)`, one of them is wrong.
-    * AGREEMENT  two independent implementations of the same idea ought to agree. A test that compares
-                 them is written by the creature, not by me.
-
-NOTIONS ARE REFUTABLE OR THEY ARE NOT NOTIONS
----------------------------------------------
-Each notion must be falsifiable by construction: it names a claim and a way to check it. Anything
-unfalsifiable ("this code looks messy") is refused here rather than at the board, so the creature never
-spends a cycle on an opinion.
-
-AND THEY ARE ALLOWED TO BE WRONG
---------------------------------
-A notion that fires on correct code is not a bug in this module; it is the normal cost of having
-expectations at all. What matters is that a fired notion is a *testable claim* -- running the check
-either produces evidence (a disagreement) or does not, and the outcome is recorded so the notion that
-fired on everything becomes visibly uninformative.
-
-WHERE THE VALUES COME FROM
---------------------------
-Not from me. The literals in a notion are drawn from the source: parameter names, the constants already
-written in the sibling functions, and the docstring's own described inputs. Where a value cannot be
-derived from the code, no notion is emitted.
-
-WHAT THIS IS NOT
-----------------
-It cannot invent a specification. It finds *internal inconsistency* -- two parts of a program that
-disagree with each other. A program containing one self-consistent lie is invisible to it, and I should
-say so before someone mistakes this for verification.
-
-Authority NONE, spend $0, `truth.achieved` false.
+The static numeric model is deliberately limited and never executes the source.
+A reviewer may confirm or reject a question, identify a trusted reference, and
+supply independent examples.  Such feedback is scoped to the exact source hash
+and is used to rank future questions; the ranking itself never authorizes a test
+or repair.  A feedback reference is a caller-supplied claim, not authenticated
+proof of independent verification.
 """
-
 from __future__ import annotations
 
-import ast
-import itertools
+import hashlib
 import json
+import math
+import os
 import pathlib
 import re
-from typing import Any, Callable, Iterable, Mapping, Sequence
+import tempfile
+from typing import Any, Callable, Iterable, Mapping
+
+from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
+from canonical.swe_kernel.expression_hypotheses_v1 import evaluate, function_models, same_number
 
 SCHEMA = "BRAIN_NOTIONS_V1"
+MAX_FINDINGS = 512
 
 
-def _params(fn: ast.FunctionDef | ast.AsyncFunctionDef) -> list[str]:
-    return [a.arg for a in fn.args.args]
-
-
-def _returns_expr(fn: ast.AST) -> ast.AST | None:
-    for node in ast.walk(fn):
-        if isinstance(node, ast.Return):
-            return node.value
-    return None
-
-
-def _mentions(node: ast.AST | None, name: str) -> bool:
-    return any(isinstance(n, ast.Name) and n.id == name for n in ast.walk(node)) if node is not None else False
-
-
-def _constants(node: ast.AST | None) -> list[int | float]:
-    if node is None:
-        return []
-    return [n.value for n in ast.walk(node)
-            if isinstance(n, ast.Constant) and isinstance(n.value, (int, float)) and not isinstance(n.value, bool)]
+def _identifier(kind: str, module: str, digest: str, left: str, right: str, arity: int) -> str:
+    payload = json.dumps([kind, module, digest, left, right, arity], separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 class Notion:
-    """One expectation about the world, with the check that could refute it."""
+    """A refutable question; ``fired`` means disagreement, not an identified bug."""
 
-    __slots__ = ("kind", "subject", "claim", "check", "fired", "declined", "value", "arity")
+    __slots__ = ("kind", "subject", "claim", "check", "fired", "declined", "value", "arity",
+                 "module", "source_sha256", "left", "right", "id")
 
     def __init__(self, kind: str, subject: str, claim: str, check: Callable[[], Any],
-                 value: float = 1.0, arity: int = 0) -> None:
-        self.kind = kind
-        self.subject = subject
-        self.claim = claim
-        self.check = check
+                 value: float = 1.0, arity: int = 0, *, module: str = "",
+                 source_sha256: str = "", left: str = "", right: str = "") -> None:
+        self.kind, self.subject, self.claim, self.check = kind, subject, claim, check
         self.fired: bool | None = None
-        self.declined: bool = False
-        self.value = value
-        self.arity: int = arity
+        self.declined = False
+        self.value, self.arity = value, arity
+        self.module, self.source_sha256 = module, source_sha256
+        self.left, self.right = left, right
+        self.id = _identifier(kind, module, source_sha256, left, right, arity)
 
     def evaluate(self) -> dict[str, Any]:
-        """Run the check. `fired=True` means the expectation was violated, not satisfied.
-
-        MEASURED 2026-11-05 and the worst bug in this module: `except: ok = False` treated *could not
-        run* as *refuted*, so `fired = not ok` turned every notion that declined to speak -- the whole
-        point of the declining convention -- into a firing one. A crash, a missing function and a
-        genuine disagreement were indistinguishable on the board. Three states, not two: fired, held,
-        and declined.
-        """
+        base = {"id": self.id, "kind": self.kind, "subject": self.subject, "claim": self.claim,
+                "module": self.module, "source_sha256": self.source_sha256,
+                "left": self.left, "right": self.right, "arity": self.arity,
+                "provenance": "bounded_static_model", "authority": "hypothesis"}
         try:
             result = self.check()
-        except Exception as exc:  # noqa: BLE001 - a notion that cannot run is a notion that declines
-            self.fired = False
-            self.declined = True
-            return {"kind": self.kind, "subject": self.subject, "claim": self.claim,
-                    "fired": False, "declined": True,
-                    "detail": f"declines ({type(exc).__name__}): {exc}"}
-        # A check may return two, or three, values: (held, detail?, declined?).
-        ok, detail = result[0], result[1]
-        declined = bool(result[2]) if len(result) > 2 else False
-        self.fired = (not ok) and not declined
-        self.declined = declined
-        return {
-            "kind": self.kind,
-            "subject": self.subject,
-            "claim": self.claim,
-            "fired": self.fired,
-            "declined": declined,
-            "detail": detail,
-        }
+            if isinstance(result, Mapping):
+                held = bool(result.get("held"))
+                declined = bool(result.get("declined"))
+                detail = str(result.get("detail", ""))
+                observations = list(result.get("observations") or [])
+            elif isinstance(result, (tuple, list)) and len(result) >= 2:
+                held, detail = bool(result[0]), str(result[1])
+                declined = bool(result[2]) if len(result) > 2 else False
+                observations = []
+            else:
+                raise ValueError("invalid check result")
+        except Exception as exc:  # a failed model is not a violated expectation
+            self.fired, self.declined = False, True
+            return {**base, "fired": False, "declined": True,
+                    "detail": f"declined: {type(exc).__name__}", "observations": []}
+        self.fired, self.declined = not held and not declined, declined
+        return {**base, "fired": self.fired, "declined": declined,
+                "detail": detail, "observations": observations}
 
     def to_dict(self) -> dict[str, Any]:
-        return {"kind": self.kind, "subject": self.subject, "claim": self.claim}
-
-
-_STOP_TOKENS = frozenset({"v1", "get", "calc", "the", "of", "and", "for", "to", "by"})
-
-
-def _load_module(source: str, module_name: str) -> tuple[dict[str, Any], Exception | None]:
-    """Execute the source in a namespace. Import failures make the notions unusable, which is recorded."""
-    ns: dict[str, Any] = {}
-    try:
-        exec(compile(source, f"<notions:{module_name}>", "exec"), ns)  # noqa: S102 - the module under study
-        return ns, None
-    except Exception as exc:  # noqa: BLE001
-        return ns, exc
-
-
-def _sample_values(params: Sequence[str], constants: Sequence[float]) -> list[tuple]:
-    """Inputs for a check, taken from the SOURCE: the constants the program itself contains.
-
-    A notion that used values I invented would be testing my taste. These come from the code's own
-    literals, so a disagreement is between the program and itself.
-    """
-    base = sorted({int(c) for c in constants if isinstance(c, (int, float)) and c == int(c) and 1 <= c <= 12})
-    # Sample a GRID, not just the literals the source happens to contain. MEASURED 2026-11-05: drawing
-    # inputs only from the module's own constants gave a single sample of (2, 2), and at (2, 2) a sum and
-    # a product are both 4 -- so the notions fired identically on buggy and correct code and discriminated
-    # nothing. A check that cannot separate two programs is not a test of either; it is decoration.
-    vals = sorted(set(base) | {2, 3, 4, 5})
-    if not params:
-        return [()]
-    out: list[tuple] = []
-    for combo in itertools.product(vals, repeat=len(params)):
-        if len(set(combo)) == 1 and len(params) > 1:
-            continue  # all-equal inputs hide sum-vs-product differences; keep them separate
-        out.append(combo)
-        if len(out) >= 6:
-            break
-    return out or [tuple(vals[0] for _ in params)]
+        return {"id": self.id, "kind": self.kind, "subject": self.subject, "claim": self.claim}
 
 
 def notions_for_source(source: str, module_name: str = "mod") -> list[Notion]:
-    """Derive every falsifiable expectation this module can find in one piece of source."""
-    try:
-        tree = ast.parse(source)
-    except SyntaxError:
+    """Suggest equal-input relations without assuming their semantic validity.
+
+    Only single-return numeric functions in a small statically interpretable subset
+    are considered.  The four probe inputs are exploration choices, not source
+    specifications.  Every eligible narrow/wide pair is considered regardless of
+    its name; names may later be learned as *ranking features*, never as proof.
+    """
+    models = function_models(source)
+    if not models:
         return []
-    fns = [n for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]
-    if not fns:
-        return []
-    ns, exec_err = _load_module(source, module_name)
+    digest = hashlib.sha256(source.encode("utf-8")).hexdigest()
     out: list[Notion] = []
-
-    # --- SYMMETRY: two functions that compute the SAME quantity with the SAME scale are related ------
-    # MEASURED 2026-11-05, twice. First version: fired whenever two same-signature functions differed,
-    # which on correct code (an area beside a perimeter) is true by construction -- it fired on the buggy
-    # module AND the fixed one, so it carried no information and a test built from it could never be
-    # satisfied, and on the board it VETOED a real repair. Second version: I made it decline, and the
-    # decline came back as a fire because `evaluate` treated "cannot run" as "refuted". Both are the same
-    # error in different clothes -- reporting an opinion where nothing was measured.
-    #
-    # What is actually measurable: if two functions share their constants, they share a scale, so their
-    # ratio is invariant across inputs and one can be an exact multiple of the other. THAT is a claim
-    # with a truth value, and a violation of it is a real internal inconsistency. Otherwise this notion
-    # has nothing to say about the pair and says so.
-    by_sig: dict[tuple[str, ...], list[ast.FunctionDef]] = {}
-    for fn in fns:
-        by_sig.setdefault(tuple(_params(fn)), []).append(fn)
-    for sig, group in by_sig.items():
-        if len(sig) < 2:
+    for left in models.values():
+        if len(left.params) != 1:
             continue
-        for a, b in itertools.combinations(group, 2):
-            fa, fb = ns.get(a.name), ns.get(b.name)
-            if not callable(fa) or not callable(fb):
+        for right in models.values():
+            if len(right.params) <= 1:
                 continue
-            if not (set(_constants(_returns_expr(a))) & set(_constants(_returns_expr(b)))):
-                continue  # different scale: no shared quantity, no claim
-            samples = _sample_values(sig, _constants(_returns_expr(a)) + _constants(_returns_expr(b)))
-            if len(samples) < 2:
-                continue
+            if len(out) >= 128:
+                return out
 
-            def _check(fa=fa, fb=fb, samples=samples, a=a.name, b=b.name) -> tuple[bool, str]:
-                outs = []
-                for smp in samples:
-                    try:
-                        outs.append((tuple(smp), float(fa(*smp)), float(fb(*smp))))
-                    except Exception:  # noqa: BLE001 - a sample one function rejects is not a sample
-                        continue
-                ratios = [y / x for _s, x, y in outs if x]
-                if len(ratios) < 2:
-                    return False, "declines: not enough evaluable samples", True
-                if (max(ratios) - min(ratios)) > 1e-9:
-                    return False, (f"declines: {a}/{b} ratio drifts over samples "
-                                   f"({min(ratios):.4g}..{max(ratios):.4g}), so they do not share a "
-                                   f"scale and neither indicts the other"), True
-                # The ratio holds. Now require it to be an exact structural multiple, which is what a
-                # shared scale means; a drifting-free but arbitrary ratio is still just two functions.
-                r = ratios[0]
-                if abs(r - round(r, 6)) > 1e-9 and abs(1 / r - round(1 / r, 6)) > 1e-9:
-                    return False, f"declines: ratio {r:.6g} is not a structural multiple", True
-                return True, f"{a} and {b} hold the fixed ratio {r:.6g} across {len(ratios)} sample(s)"
+            def check(left=left, right=right) -> dict[str, Any]:
+                observations: list[dict[str, Any]] = []
+                for value in (2, 3, 4, 5):
+                    left_ok, a = evaluate(left, (value,))
+                    right_ok, b = evaluate(right, (value,) * len(right.params))
+                    if left_ok and right_ok:
+                        observations.append({"input": value, "left": a, "right": b,
+                                             "left_name": left.name, "right_name": right.name})
+                if len(observations) < 2:
+                    return {"declined": True, "detail": "fewer than two safely modelled inputs",
+                            "observations": observations}
+                disagreements = [o for o in observations if not same_number(o["left"], o["right"])]
+                return {"held": not disagreements, "observations": observations,
+                        "detail": (f"{len(disagreements)} disagreement(s) among {len(observations)} "
+                                   "statically modelled inputs; relation and blame are unconfirmed")}
 
             out.append(Notion(
-                kind="SYMMETRY",
-                subject=f"{a.name}/{b.name}",
-                claim=(f"`{a.name}` and `{b.name}` share their constants ({', '.join(sig)}), so one is a "
-                       f"fixed multiple of the other on every input"),
-                check=_check,
-                value=1.0,
+                kind="IDENTITY", subject=f"{left.name} vs {right.name}(equal args)",
+                claim=f"Could {left.name}(x) equal {right.name}(x, ... , x)?",
+                check=check, value=1.0, arity=len(right.params), module=module_name,
+                source_sha256=digest, left=left.name, right=right.name,
             ))
+    return out
 
-    # --- IDENTITY: a function of fewer arguments is the degenerate case of one of more ------------
-    # A cube is a box with equal sides. A square is a rectangle with equal sides. The degenerate input
-    # is always "every argument equal", whatever the arities are -- MEASURED 2026-11-05, three failures
-    # on the way to this line, each fixed by removing an assumption I had smuggled in:
-    #   * pairing only 1-arg with 2-arg meant `cube_volume(s)` vs `box_volume(l, w, h)` got no notion;
-    #   * pairing every low-arity function with every higher one gave `square_area vs rect_perimeter`,
-    #     a category error that fires on correct code and VETOED a real repair on the board;
-    #   * a purely numeric near-miss test cannot separate those -- a defect that happens to be right at
-    #     one sample (w + h == w * h at 2) and a category error that crosses at one sample (16 == 16)
-    #     look identical.
-    # What separates them is the program's own declaration: functions that compute the same quantity
-    # share a word in their names. That is reading what the source already says, not a table of formulas.
-    # Two descriptions of one quantity agree on most inputs and differ on a few; the check declines
-    # unless it sees exactly that.
-    for s_fn in fns:
-        for p_fn in fns:
-            if p_fn is s_fn or len(_params(p_fn)) <= len(_params(s_fn)):
-                continue
-            _ta = set(s_fn.name.split("_")) - _STOP_TOKENS
-            _tb = set(p_fn.name.split("_")) - _STOP_TOKENS
-            if not (_ta & _tb):
-                continue
-            fs, fp = ns.get(s_fn.name), ns.get(p_fn.name)
-            if not callable(fs) or not callable(fp):
-                continue
-            consts = _constants(_returns_expr(s_fn)) + _constants(_returns_expr(p_fn))
-            samples = _sample_values(("x",), consts)
-            if not samples:
-                continue
-            _arity = len(_params(p_fn))
 
-            def _check(fs=fs, fp=fp, samples=samples, s_fn=s_fn.name, p_fn=p_fn.name,
-                       arity=_arity) -> tuple[bool, str]:
-                # EVERY sample counts. MEASURED 2026-11-05: the first version returned True on the first
-                # sample that agreed, and at s=2 a buggy `w + h` gives 4 while `s * s` gives 4 -- so the
-                # check stopped before reaching s=3 where 6 != 9 and the bug was never seen. A check that
-                # exits on its first success cannot find an intermittent disagreement.
-                bad: list[str] = []
-                for (v,) in samples:
-                    args = [v] * arity
-                    try:
-                        x, y = float(fs(v)), float(fp(*args))
-                    except Exception:  # noqa: BLE001
-                        continue
-                    if abs(x - y) >= 1e-9:
-                        bad.append(f"{s_fn}({v})={fs(v)} vs {p_fn}{tuple(args)}={fp(*args)}")
-                if bad:
-                    # The pairing rule has already established that these two compute the same quantity,
-                    # so a disagreement needs no corroboration from a near-miss. MEASURED 2026-11-05:
-                    # requiring the pair to agree on some inputs first made the notion DECLINE on a
-                    # genuinely broken `cube_volume(s) -> 6 * s`, which disagrees with `box_volume` at
-                    # every sample precisely because it is wrong -- the near-miss requirement was
-                    # quietly demanding that a bug be almost correct.
-                    return False, ("; ".join(bad[:2]) +
-                                   " -- two descriptions of the same quantity disagree")
-                return True, f"all {len(samples)} sample(s) agree"
-
-            out.append(Notion(
-                kind="IDENTITY",
-                subject=f"{s_fn.name} vs {p_fn.name}(equal args)",
-                claim=(f"`{s_fn.name}(x)` and `{p_fn.name}` called with every argument equal to `x` "
-                       f"describe the same degenerate case; if they disagree, one of the two is wrong"),
-                check=_check,
-                value=1.5,
-                arity=_arity,
-            ))
-
-    # --- AGREEMENT: a name that promises a relation, checked against the arithmetic it contains -------
-    # `rect_perimeter(w, h) -> 2 * (w + h)` states its own relation with constants already present. A
-    # sibling that reuses the same parameters but different constants invites the same question. This is
-    # derived from the source's own literals, never from a table of known-correct formulas.
-    for fn in fns:
-        body = _returns_expr(fn)
-        consts = _constants(body)
-        if not consts or len(_params(fn)) < 2:
-            continue
-        for other in fns:
-            if other is fn or tuple(_params(other)) != tuple(_params(fn)):
-                continue
-            oc = _constants(_returns_expr(other))
-            if not oc:
-                continue
-            if set(oc) == set(consts):
-                continue  # same constants: nothing distinct to compare
-            fo, ff = ns.get(other.name), ns.get(fn.name)
-            if not callable(fo) or not callable(ff):
-                continue
-            samples = _sample_values(tuple(_params(fn)), consts + oc)
-
-            def _check(fo=fo, ff=ff, samples=samples, n1=other.name, n2=fn.name) -> tuple[bool, str]:
-                # Not a verdict on the code: a claim that the DIFFERENT CONSTANTS produce a ratio worth
-                # examining. It fires when the ratio of the two functions varies across samples, which
-                # is exactly when a fixed relationship (like a scale factor) is being assumed and is not
-                # holding.
-                ratios: list[float] = []
-                for s in samples:
-                    a, b = ff(*s), fo(*s)
-                    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))) or abs(float(b)) < 1e-12:
-                        return True, "undefined ratio; nothing to claim"
-                    ratios.append(float(a) / float(b))
-                if len(ratios) < 2:
-                    return True, "single sample; a varying ratio cannot be shown"
-                spread = max(ratios) - min(ratios)
-                return spread < 1e-9, f"ratios of {n2}/{n1} over samples: {[round(r, 4) for r in ratios]}"
-
-            out.append(Notion(
-                kind="AGREEMENT",
-                subject=f"{fn.name} vs {other.name}",
-                claim=(f"`{fn.name}` and `{other.name}` share parameters but use different constants "
-                       f"({sorted(set(consts))} vs {sorted(set(oc))}); if their ratio is not stable, "
-                       f"one of them is not the scaled version of the other"),
-                check=_check,
-                value=1.0,
-            ))
-
-    # De-duplicate: IDENTITY was emitted three times for the same pair because the single/pair loops
-    # were nested inside a third loop. Two notions with the same subject are one notion.
-    seen_keys: set[tuple[str, str]] = set()
-    unique: list[Notion] = []
-    for n in out:
-        k = (n.kind, n.subject)
-        if k in seen_keys:
-            continue
-        seen_keys.add(k)
-        unique.append(n)
-    if exec_err is not None:
-        # A module that will not import cannot support any notion; say so instead of reporting silence.
-        return unique
-    return unique
+def _features(finding: Mapping[str, Any]) -> set[str]:
+    """Generic, data-derived lexical/structural features, not a list of meanings."""
+    left = set(re.findall(r"[a-z]+|[0-9]+", str(finding.get("left", "")).lower()))
+    right = set(re.findall(r"[a-z]+|[0-9]+", str(finding.get("right", "")).lower()))
+    return ({f"left:{x}" for x in left} | {f"right:{x}" for x in right} |
+            {f"shared:{x}" for x in left & right} |
+            {f"kind:{finding.get('kind')}", f"arity:{finding.get('arity')}"})
 
 
 class NotionStore:
-    """Remembers which notions fired, so a notion that fires on everything becomes visibly useless."""
+    """Persists questions and caller-supplied reviews, without self-authorization."""
 
     def __init__(self, path: str | pathlib.Path | None = None) -> None:
         self.path = pathlib.Path(path) if path else None
         self.seen: dict[str, dict[str, float]] = {}
+        self.findings: dict[str, dict[str, Any]] = {}
+        self.reviews: dict[str, dict[str, Any]] = {}
+        self.examples: dict[str, list[dict[str, Any]]] = {}
+        self.plans: dict[str, dict[str, Any]] = {}
         self.load()
 
     def to_dict(self) -> dict[str, Any]:
-        return {"schema": SCHEMA, "seen": self.seen}
+        return {"schema": SCHEMA, "seen": self.seen, "findings": self.findings,
+                "reviews": self.reviews, "examples": self.examples, "plans": self.plans}
 
     def load(self) -> None:
-        if not self.path or not self.path.is_file():
+        if not can_read_memory() or not self.path or not self.path.is_file():
             return
         try:
-            d = json.loads(self.path.read_text(encoding="utf-8"))
-            if isinstance(d, dict) and d.get("schema") == SCHEMA and isinstance(d.get("seen"), dict):
-                self.seen = d["seen"]
+            data = json.loads(self.path.read_text(encoding="utf-8"))
+            if not isinstance(data, dict) or data.get("schema") != SCHEMA:
+                return
+            for name in ("seen", "findings", "reviews", "examples", "plans"):
+                value = data.get(name)
+                if not isinstance(value, dict):
+                    continue
+                if name == "examples":
+                    clean = {k: [row for row in v if isinstance(row, dict)]
+                             for k, v in value.items() if isinstance(k, str) and isinstance(v, list)}
+                else:
+                    clean = {k: v for k, v in value.items() if isinstance(k, str) and isinstance(v, dict)}
+                setattr(self, name, clean)
         except (ValueError, OSError, TypeError):
             return
 
     def save(self) -> None:
-        if not self.path:
+        if not can_write_memory() or not self.path:
             return
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        tmp: str | None = None
         try:
-            self.path.parent.mkdir(parents=True, exist_ok=True)
-            tmp = self.path.with_suffix(self.path.suffix + ".tmp")
-            tmp.write_text(json.dumps(self.to_dict(), indent=2, sort_keys=True), encoding="utf-8")
-            tmp.replace(self.path)
-        except OSError:
-            return
+            # A unique temporary file prevents concurrent writers from sharing
+            # the same scratch path. Explicit write failures must reach callers;
+            # otherwise a review could appear saved when it was discarded.
+            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.path.parent,
+                                             prefix=".notions-", delete=False) as handle:
+                tmp = handle.name
+                json.dump(self.to_dict(), handle, indent=2, sort_keys=True)
+                handle.flush()
+                os.fsync(handle.fileno())
+            os.replace(tmp, self.path)
+            tmp = None
+        finally:
+            if tmp is not None:
+                pathlib.Path(tmp).unlink(missing_ok=True)
 
     @staticmethod
     def key(n: Notion) -> str:
         return f"{n.kind}::{n.subject}"
 
     def record(self, results: Iterable[Mapping[str, Any]]) -> None:
-        for r in results:
-            k = f"{r.get('kind')}::{r.get('subject')}"
-            slot = self.seen.setdefault(k, {"evaluated": 0.0, "fired": 0.0, "declined": 0.0})
-            slot["evaluated"] += 1
-            slot.setdefault("declined", 0.0)
-            if r.get("fired"):
-                slot["fired"] += 1
-            if r.get("declined"):
-                slot["declined"] += 1
-        self.save()
+        """Remember each exact source/question once; repeated sensing is not new evidence."""
+        if not can_write_memory():
+            return
+        self.load()
+        changed = False
+        for raw in results:
+            r = dict(raw)
+            key = str(r.get("id") or "")
+            if not key:
+                continue
+            if key not in self.findings and len(self.findings) >= MAX_FINDINGS:
+                continue
+            first_observation = key not in self.findings
+            if self.findings.get(key) != r:
+                self.findings[key] = r
+                changed = True
+            # Count distinct source/question pairs, not repeated reads. These
+            # are diagnostics, not labels or authorization.
+            if first_observation:
+                skey = f"{r.get('kind')}::{r.get('subject')}"
+                slot = self.seen.setdefault(skey, {"evaluated": 0.0, "fired": 0.0, "declined": 0.0})
+                slot["evaluated"] += 1
+                slot["fired"] += float(bool(r.get("fired")))
+                slot["declined"] += float(bool(r.get("declined")))
+                changed = True
+        if changed:
+            self.save()
 
-    def is_noise(self, n: Notion, *, min_evidence: int = 2, max_rate: float = 0.98) -> bool:
-        """True when this notion has fired on essentially everything it has ever looked at.
+    def review(self, finding_id: str, *, decision: str, reviewer: str, basis: str,
+               trusted_function: str | None = None) -> dict[str, Any]:
+        """Record a caller's explicit relation decision, not a self-generated label.
 
-        A notion that fires on correct code as readily as on broken code cannot be a reason to edit
-        anything -- that is the distinction MEASURED 2026-11-05 between `square_area vs rect_area(x,x)`
-        (fires on the defect, holds on the fix) and `square_area vs rect_perimeter(x,x)` (fires on
-        both, because an area and a perimeter are simply different quantities). Requiring evidence
-        from more than one evaluation keeps a first-ever look from being dismissed on no record.
+        ``basis`` identifies the outside evidence or human decision. This API does
+        not authenticate it. A confirmed relation alone does not identify blame;
+        the caller may additionally identify a reference they choose to trust.
         """
-        slot = self.seen.get(self.key(n)) or {}
-        evaluated = float(slot.get("evaluated") or 0.0)
-        if evaluated < min_evidence:
-            return False
-        return (float(slot.get("fired") or 0.0) / evaluated) >= max_rate
+        if not can_write_memory():
+            raise PermissionError("memory policy forbids feedback")
+        self.load()
+        finding = self.findings.get(finding_id)
+        if not finding or not finding.get("fired") or finding.get("declined"):
+            raise ValueError("unknown or non-firing question")
+        if (decision not in ("confirm", "reject") or not isinstance(reviewer, str) or not reviewer.strip()
+                or not isinstance(basis, str) or not basis.strip()):
+            raise ValueError("an explicit decision, reviewer and basis are required")
+        if trusted_function is not None and trusted_function not in {finding.get("left"), finding.get("right")}:
+            raise ValueError("reference must be one of the two functions")
+        if decision == "reject" and trusted_function is not None:
+            raise ValueError("a rejected relation cannot have a trusted reference")
+        review = {"decision": decision, "reviewer": reviewer[:200], "basis": basis[:500],
+                  "trusted_function": trusted_function}
+        previous = self.reviews.get(finding_id)
+        if previous != review:
+            self.reviews[finding_id] = review
+            # Old examples and plans cannot be reused after a change in authority.
+            self.examples.pop(finding_id, None)
+            self.plans.pop(finding_id, None)
+            self.save()
+        return dict(review)
+
+    def record_plan(self, finding_id: str, plan: Mapping[str, Any]) -> None:
+        if not can_write_memory():
+            return
+        self.load()
+        if finding_id not in self.findings:
+            return
+        value = dict(plan)
+        if self.plans.get(finding_id) != value:
+            self.plans[finding_id] = value
+            self.save()
+
+    def answer(self, finding_id: str, *, args: list[int | float], expected: int | float,
+               reviewer: str, basis: str) -> dict[str, Any]:
+        """Record an external answer to the currently proposed input, once."""
+        if not can_write_memory():
+            raise PermissionError("memory policy forbids feedback")
+        self.load()
+        review = self.reviews.get(finding_id) or {}
+        plan = self.plans.get(finding_id) or {}
+        query = plan.get("next_query") or {}
+        if (review.get("decision") != "confirm" or not review.get("trusted_function")
+                or not isinstance(args, list) or query.get("args") != args
+                or any(type(a) not in (int, float) or (isinstance(a, float) and not math.isfinite(a)) for a in args)):
+            raise ValueError("answer does not match an active, reviewed query")
+        if (not isinstance(reviewer, str) or not reviewer.strip() or not isinstance(basis, str)
+                or not basis.strip() or type(expected) not in (int, float)):
+            raise ValueError("an independent numeric answer and its provenance are required")
+        if isinstance(expected, int) and expected.bit_length() > 80:
+            raise ValueError("answer exceeds numeric budget")
+        if isinstance(expected, float) and (not math.isfinite(expected) or abs(expected) > 1e20):
+            raise ValueError("answer exceeds numeric budget")
+        prior = self.examples.setdefault(finding_id, [])
+        if any(e.get("args") == args for e in prior):
+            raise ValueError("query was already answered")
+        example = {"args": list(args), "expected": expected, "reviewer": reviewer[:200], "basis": basis[:500]}
+        prior.append(example)
+        # Require a new plan before accepting another answer; the model must actually update.
+        self.plans.pop(finding_id, None)
+        self.save()
+        return dict(example)
+
+    def score(self, finding: Mapping[str, Any]) -> float:
+        """A learned review-priority score, not a probability or a permission.
+
+        Each distinct reviewed question contributes once.  A feature's signed
+        frequency is learned from feedback, not authored as an error-class table.
+        Leave the current question out so its own label cannot score itself.
+        """
+        wanted = _features(finding)
+        if not wanted:
+            return 0.0
+        counts: dict[str, list[int]] = {f: [0, 0] for f in wanted}
+        current_signature = (finding.get("source_sha256"), finding.get("left"),
+                             finding.get("right"), finding.get("arity"))
+        grouped: dict[tuple[Any, ...], tuple[Mapping[str, Any], set[str]]] = {}
+        for fid, review in self.reviews.items():
+            old = self.findings.get(fid)
+            if not old or review.get("decision") not in {"confirm", "reject"}:
+                continue
+            signature = (old.get("source_sha256"), old.get("left"), old.get("right"), old.get("arity"))
+            if signature == current_signature:
+                continue  # no self-evidence, including copies in a different path
+            if signature not in grouped:
+                grouped[signature] = (old, set())
+            grouped[signature][1].add(str(review["decision"]))
+        for old, decisions in grouped.values():
+            if len(decisions) != 1:
+                continue  # conflicting reviews of identical evidence are not a label
+            label = 0 if "confirm" in decisions else 1
+            for feature in wanted & _features(old):
+                counts[feature][label] += 1
+        return round(sum((p - n) / (p + n + 2) for p, n in counts.values()) / len(wanted), 6)
+
+    def is_noise(self, n: Notion, **_: Any) -> bool:
+        """Fire frequency cannot establish semantic validity; retained for compatibility."""
+        return False
 
     def informativeness(self, n: Notion) -> float:
-        """How much a fired notion is worth. A notion that fires on every module tells you nothing."""
-        slot = self.seen.get(self.key(n))
-        if not slot or slot.get("evaluated", 0) <= 0:
-            return 1.0
-        rate = slot["fired"] / slot["evaluated"]
-        return max(0.0, 1.0 - abs(rate - 0.5) * 2.0)
+        return self.score(n.evaluate())
 
     def summary(self) -> Mapping[str, Any]:
-        return {"schema": SCHEMA, "tracked": len(self.seen), "seen": self.seen,
+        return {"schema": SCHEMA, "tracked": len(self.findings), "reviewed": len(self.reviews),
+                "pending_examples": sum(bool(p.get("next_query")) for p in self.plans.values()),
                 "persisted_to": str(self.path) if self.path else None}
 
 
-_LIVE: NotionStore | None = None
-
-
 def live_notions(path: str | pathlib.Path | None = None) -> NotionStore:
-    global _LIVE
-    p = pathlib.Path(path) if path else None
-    if _LIVE is None or _LIVE.path != p:
-        _LIVE = NotionStore(p)
-    return _LIVE
+    """Load current feedback; do not keep a stale process-wide cache after review."""
+    return NotionStore(path if can_read_memory() else None)

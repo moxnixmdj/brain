@@ -2223,10 +2223,9 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
             # MEASURED 2026-11-05: a CALL-versus-CALL assertion (`f(x) == g(x)`) was skipped entirely,
             # so every property-style test -- including any test a notion could generate, since a notion
             # is a relation between two things in the program -- produced NO_LITERAL_CALL_TO_PERTURB and
-            # the repair was discarded as if it had been refuted. The owed value can be computed from
-            # the other side of the comparison when that side is a literal-argument call; what matters
-            # is that the expected value is independently determinable, not that it is typed as a
-            # literal in the source.
+            # the repair was discarded as if it had been refuted. The other side
+            # can be evaluated for an input-sensitivity check, but it is part of
+            # the same candidate and is NOT an independent correctness oracle.
             if not isinstance(expected_node, _ast.Call) or expected_node.keywords:
                 continue
             try:
@@ -2261,17 +2260,15 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
     call_src, func_src, args, op, expected = cases[0]
     _pair_other: str | None = None
     if isinstance(expected, tuple) and expected and expected[0] == "__CALLPAIR__":
-        # Call-vs-call: the owed value is whatever the OTHER call returns for the same arguments, so it
-        # is computed here from the repaired namespace rather than read from the source. This keeps the
-        # probe's guarantee -- the expected value cannot be fitted to the candidate -- because the other
-        # function is part of the program under study, not part of the candidate.
+        # The peer value is also produced by the candidate. Equality plus
+        # responsiveness is not an independent correctness or blame oracle.
         _pair_other, _pair_other_args, expected = expected[1], expected[2], None
 
-    # Namespace = the test's own imports, resolved inside the workspace. Scanning the whole tree is
-    # how this once took minutes on a real repository; a probe too slow to run says no by default.
-    ns: dict[str, Any] = {"__name__": "_probe_ns"}
-    executed: list[str] = []
-    targets: list[pathlib.Path] = []
+    # Locate only modules named by the test, but execute neither them nor the
+    # call in this process.  The old implementation used host ``exec``/``eval``:
+    # merely checking a candidate could execute arbitrary workspace side effects.
+    targets: list[str] = []
+    ws_root = ws_root.resolve()
     for node in _ast.walk(tree):
         mods: list[str] = []
         if isinstance(node, _ast.ImportFrom) and node.module:
@@ -2281,70 +2278,170 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
         for mod in mods:
             rel = pathlib.Path(*mod.split("."))
             for cand in (ws_root / rel.with_suffix(".py"), ws_root / rel / "__init__.py"):
-                if cand.is_file() and cand not in targets:
-                    targets.append(cand)
-    for cand in targets:
-        try:
-            if cand.stat().st_size > 400_000:
-                return {"generalizes": False, "reason": f"REPAIRED_CODE_TOO_LARGE: {cand.name}"}
-            exec(compile(cand.read_text(encoding="utf-8"), str(cand), "exec"), ns)  # noqa: S102
-            executed.append(str(cand.relative_to(ws_root)))
-        except Exception as exc:  # noqa: BLE001
-            return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
-    if not executed:
+                try:
+                    if not cand.is_file() or not cand.resolve().is_relative_to(ws_root):
+                        continue
+                    if cand.stat().st_size > 400_000:
+                        return {"generalizes": False, "reason": f"REPAIRED_CODE_TOO_LARGE: {cand.name}"}
+                    rel_name = cand.relative_to(ws_root).as_posix()
+                    if rel_name not in targets:
+                        targets.append(rel_name)
+                except (OSError, ValueError):
+                    continue
+    if not targets:
         return {"generalizes": False, "reason": "TEST_IMPORTS_NO_WORKSPACE_MODULE"}
-
-    def _call_with(values: tuple) -> Any:
-        # Rebuild from the recorded callee, so `C()`, `ops['add']`, `make()` and a bare name are all
-        # the same thing to the probe: an expression to execute against the repaired code.
-        return eval(f"{func_src}({', '.join(repr(v) for v in values)})", ns)  # noqa: S307
-
-    if _pair_other is not None:
-        try:
-            # Each side is evaluated with ITS OWN arguments. The first attempt passed the left call's
-            # arguments to the right function, which for `square_area(3) == rect_area(3, 3)` meant
-            # `rect_area(3)` and a TypeError that refused a correct repair for the wrong reason.
-            expected = eval(
-                f"{_pair_other}({', '.join(repr(v) for v in _pair_other_args)})", ns  # noqa: S307
-            )
-        except Exception as exc:  # noqa: BLE001
-            return {"generalizes": False, "reason": f"CALLPAIR_OTHER_RAISES: {type(exc).__name__}"}
 
     args_a = tuple(_perturb(a, i, 0) for i, a in enumerate(args))
     args_b = tuple(_perturb(a, i, 1) for i, a in enumerate(args_a))
-    try:
-        produced = _call_with(args)
-        out_a = _call_with(args_a)
-        out_b = _call_with(args_b)
-    except Exception as exc:  # noqa: BLE001
-        return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
-
-    matches_owed = (produced == expected) if op == "==" else (produced is expected)
-    ignores_inputs = out_a == out_b and not isinstance(expected, bool)
-    # An identity function survives every shape-preserving perturbation, so no held-out input of
-    # this form can tell `head(xs) -> xs` apart from a correct `head`. That is a property of the
-    # *evidence*, not of the repair: the owed assertion carries nothing that discriminates them.
-    # Credit is withheld, and the reason says so rather than pretending the code was exonerated.
-    identity_like = all(isinstance(o, (list, tuple, str)) and o == a[0]
-                        for o, a in ((out_a, args_a), (out_b, args_b)))
-    generalizes = bool(matches_owed and not ignores_inputs and not identity_like)
-    return {
-        "generalizes": generalizes,
-        "args": list(args),
-        "perturbed": [list(args_a), list(args_b)],
-        "produced": produced,
-        "produced_perturbed": [out_a, out_b],
-        "expected": expected,
-        "ignores_inputs": ignores_inputs,
-        "identity_like": identity_like,
-        "source": ",".join(executed),
-        "subject": func_src,
-        "reason": ("REPAIRED_CODE_DISAGREES_WITH_OWED_TEST" if not matches_owed
-                   else "OUTPUT_IGNORES_INPUTS" if ignores_inputs
-                   else "TEST_CANNOT_DISTINGUISH_IDENTITY" if identity_like
+    payload = {"targets": targets, "func": func_src, "args": args, "args_a": args_a,
+               "args_b": args_b, "op": op, "expected": expected,
+               "pair_other": _pair_other,
+               "pair_args": _pair_other_args if _pair_other is not None else ()}
+    worker = "payload = " + repr(payload) + "\n" + r'''
+import json, pathlib, sys
+# Keep basic output bindings before workspace code runs. This prevents simple
+# print replacement, but is NOT an isolation boundary inside the interpreter.
+_emit_result, _encode_result, _represent_result = sys.stdout.write, json.dumps, repr
+ns = {"__name__": "_probe_ns"}
+try:
+    for rel in payload["targets"]:
+        source = pathlib.Path(rel).read_text(encoding="utf-8")
+        exec(compile(source, rel, "exec"), ns)
+    def call(values):
+        return eval(payload["func"] + "(" + ", ".join(repr(x) for x in values) + ")", ns)
+    expected = payload["expected"]
+    if payload["pair_other"] is not None:
+        expected = eval(payload["pair_other"] + "(" + ", ".join(repr(x) for x in payload["pair_args"]) + ")", ns)
+    args, args_a, args_b = payload["args"], payload["args_a"], payload["args_b"]
+    produced, out_a, out_b = call(args), call(args_a), call(args_b)
+    matches = (produced == expected) if payload["op"] == "==" else (produced is expected)
+    ignores = out_a == out_b and not isinstance(expected, bool)
+    identity = all(isinstance(o, (list, tuple, str)) and o == a[0]
+                   for o, a in ((out_a, args_a), (out_b, args_b)))
+    result = {
+        "generalizes": bool(matches and not ignores and not identity),
+        "args": list(args), "perturbed": [list(args_a), list(args_b)],
+        "produced": produced, "produced_perturbed": [out_a, out_b], "expected": expected,
+        "ignores_inputs": bool(ignores), "identity_like": bool(identity),
+        "scope": "input_sensitivity_only", "proves_correctness": False,
+        "source": ",".join(payload["targets"]), "subject": payload["func"],
+        "reason": ("REPAIRED_CODE_DISAGREES_WITH_OWED_TEST" if not matches
+                   else "OUTPUT_IGNORES_INPUTS" if ignores
+                   else "TEST_CANNOT_DISTINGUISH_IDENTITY" if identity
                    else "BOOLEAN_RESULT_INPUT_SENSITIVITY_UNPROBED" if isinstance(expected, bool)
                    else "RESPONDS_TO_INPUT"),
     }
+except BaseException as exc:
+    result = {"generalizes": False, "reason": "REPAIRED_CODE_RAISES: " + type(exc).__name__}
+_emit_result("BRAIN_PROBE_RESULT " + _encode_result(result, default=_represent_result) + "\n")
+'''
+    import sys as _sys
+    from canonical.runtime import brokered_workspace_execution_v1 as _broker
+
+    res = _broker.run_staged_confined_command(
+        ws_root, [_sys.executable, "-c", worker], publish=False, timeout=8,
+        pythonpath_work=True, task_id="generalization-probe", goal="check candidate input sensitivity",
+    )
+    if not res.get("ok") or not res.get("confined") or not res.get("live_workspace_untouched"):
+        return {"generalizes": False, "reason": str(res.get("blocked") or "CONFINED_PROBE_FAILED")}
+    prefix = "BRAIN_PROBE_RESULT "
+    records = [line for line in str(res.get("stdout") or "").splitlines() if line.startswith(prefix)]
+    if len(records) != 1:
+        return {"generalizes": False, "reason": "CONFINED_PROBE_RESULT_AMBIGUOUS" if records else "CONFINED_PROBE_RESULT_MISSING"}
+    try:
+        result = json.loads(records[0][len(prefix):])
+    except (TypeError, ValueError):
+        return {"generalizes": False, "reason": "CONFINED_PROBE_RESULT_INVALID"}
+    if isinstance(result, dict) and isinstance(result.get("generalizes"), bool):
+        return result
+    return {"generalizes": False, "reason": "CONFINED_PROBE_RESULT_INVALID"}
+
+
+
+def _notion_repair_scope(test_file: pathlib.Path, ws_root: pathlib.Path,
+                         staged: Mapping[str, str]) -> str | None:
+    """Restrict reviewed-notion patches to the reviewed expression and source version.
+
+    The marker grants no authority: it only adds restrictions. User-authored tests
+    without a marker retain the existing path. Malformed markers fail closed.
+    """
+    try:
+        first = test_file.read_text(encoding="utf-8").splitlines()[0]
+    except (OSError, UnicodeError, IndexError):
+        return "NOTION_SCOPE_UNREADABLE"
+    prefix = "# brain-notion-v1 "
+    if not first.startswith(prefix):
+        return None
+    try:
+        binding = json.loads(first[len(prefix):])
+        module, source_hash = binding["module"], binding["source_sha256"]
+        target, reference = binding["target"], binding["reference"]
+        if (not all(isinstance(x, str) and x for x in (module, source_hash, target, reference))
+                or not target.isidentifier() or not reference.isidentifier() or target == reference
+                or set(staged) != {module}):
+            return "NOTION_SCOPE_INVALID"
+        root = ws_root.resolve()
+        path = (root / module).resolve()
+        if not path.is_relative_to(root) or not path.is_file():
+            return "NOTION_SCOPE_INVALID"
+        before = path.read_text(encoding="utf-8")
+        if hashlib.sha256(before.encode("utf-8")).hexdigest() != source_hash:
+            return "NOTION_SOURCE_CHANGED"
+        from canonical.swe_kernel.expression_hypotheses_v1 import only_target_expression_changed
+        if not only_target_expression_changed(before, staged[module], target):
+            return "NOTION_SCOPE_CHANGED_OTHER_CODE"
+    except (OSError, UnicodeError, ValueError, TypeError, KeyError, RecursionError):
+        return "NOTION_SCOPE_INVALID"
+    return None
+
+
+def _publish_notion_candidate(ws_root: pathlib.Path, test_file: pathlib.Path,
+                              staged: Mapping[str, str]) -> tuple[bool, dict[str, Any] | None, str | None]:
+    """Check a reviewed-notion candidate in a private stage before broker publication.
+
+    The broker enforces a single target, preserves the test file, checks source
+    drift and atomically replaces the target. Its carrier is not independently
+    qualified; this is not a claim of hostile-code certification.
+    """
+    import sys as _sys
+    from canonical.runtime import brokered_workspace_execution_v1 as _broker
+    from canonical.swe_kernel.autonomous_awake_loop_v1 import _run_py_test_file
+
+    ws_root = ws_root.resolve()
+    try:
+        rel_test = test_file.resolve().relative_to(ws_root).as_posix()
+        test_bytes = test_file.read_bytes()
+        if not test_bytes.startswith(b"# brain-notion-v1 ") or len(staged) != 1:
+            return False, None, "NOTION_SCOPE_INVALID"
+        initial_error = _notion_repair_scope(test_file, ws_root, staged)
+        if initial_error:
+            return False, None, initial_error
+        target = next(iter(staged))
+    except (OSError, ValueError, TypeError):
+        return False, None, "NOTION_SCOPE_INVALID"
+    checked: dict[str, Any] = {"generalization": None}
+
+    def checker(stage_dir: pathlib.Path) -> bool:
+        try:
+            if test_file.read_bytes() != test_bytes or (stage_dir / rel_test).read_bytes() != test_bytes:
+                return False
+            if _notion_repair_scope(test_file, ws_root, staged):
+                return False
+            ok, _ = _run_py_test_file(stage_dir / rel_test, stage_dir, timeout=120.0)
+            if not ok:
+                return False
+            checked["generalization"] = _generalization_probe(stage_dir / rel_test, stage_dir)
+            return bool(checked["generalization"].get("generalizes"))
+        except (OSError, ValueError, TypeError):
+            return False
+
+    res = _broker.run_staged_confined_command(
+        ws_root, [_sys.executable, "-c", "pass"], checker=checker, publish=True,
+        target=target, protected_tests=(rel_test,), candidate_overrides=staged,
+        timeout=8, task_id="reviewed-notion-repair", goal="check reviewed examples and publish one scoped edit",
+    )
+    ok = bool(res.get("ok") and res.get("confined") and res.get("published"))
+    return ok, checked["generalization"], None if ok else str(res.get("blocked") or "NOTION_PUBLICATION_REFUSED")
 
 
 def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
@@ -2452,16 +2549,34 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
                 rep = {"repaired": 0, "failures_found": 0, "crystallized_skills": [],
                        "error": f"{type(exc).__name__}: {str(exc)[:200]}"}
         ok = (not _green_before) and int(rep.get("repaired") or 0) > 0
-        # Trial, then decide. The order matters and it took three attempts to get right: the owed
-        # test must be run with the candidate IN the world (otherwise it simply re-reports the
-        # original failure), and the generalization probe must inspect the code that is actually
-        # there. So the organ's staged candidate is written first, measured, and rolled back
-        # byte-for-byte if it does not hold up. A rejected candidate leaves no trace; an accepted
-        # one is the only thing the creature gets to keep.
+        # Reviewed-notion candidates are checked in a private stage before the
+        # single-file broker publishes them. The older path for other tests still
+        # writes into the live workspace before its checks and rolls back on
+        # failure; it is not a transactional publication guarantee.
         generalization = None
         accepted: list[str] = []
         staged = dict(rep.get("staged") or {})
-        if ok and staged:
+        scope_block = None
+        notion_test = False
+        if _owed:
+            try:
+                notion_test = (pathlib.Path(ws_target) / _owed[0]).read_bytes().startswith(b"# brain-notion-v1 ")
+            except OSError:
+                pass
+        if ok and not staged:
+            ok = False
+        if ok and staged and _owed:
+            _test_path = pathlib.Path(ws_target) / _owed[0]
+            scope_block = _notion_repair_scope(_test_path, pathlib.Path(ws_target), staged)
+            if scope_block:
+                ok = False
+        if ok and staged and notion_test:
+            ok, generalization, scope_block = _publish_notion_candidate(
+                pathlib.Path(ws_target), pathlib.Path(ws_target) / _owed[0], staged
+            )
+            if ok:
+                accepted = sorted(staged)
+        elif ok and staged:
             originals: dict[str, bytes | None] = {}
             for _rel in staged:
                 _dst = pathlib.Path(ws_target) / _rel
@@ -2510,17 +2625,20 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
         )
         return {
             "ok": ok,
-            "verified": True,
-            "correct": ok,
+            # Caller-supplied examples and our own checker are not an independent
+            # verifier of intent; do not turn a local test pass into verified truth.
+            "verified": False if notion_test else True,
+            "correct": None if notion_test else ok,
+            "verification_scope": "reviewed examples and input sensitivity" if notion_test else "owed test and input sensitivity",
             "value": work.value if ok else 0.0,
             "predicted_probability": p_hat,
             "surprise": settle_rep["surprise"],
             "generalization": generalization,
             "accepted_into_world": accepted,
-            "blocked": None if ok else (
+            "blocked": None if ok else (scope_block or (
                 "REPAIR_DOES_NOT_GENERALIZE" if generalization and not generalization["generalizes"]
                 else "UNREPAIRED_FAILING_TESTS"
-            ),
+            )),
         }
 
     if work.id.startswith("chase:"):
@@ -2655,6 +2773,7 @@ def run_sovereign_board(
     # caller had handed it. The organ that finds failing tests (`_sense_failing_workspace_tests`)
     # only ever ran on `live_autonomous_cycle`, which is not the live path -- so the creature could
     # repair, but could not notice that anything needed repair.
+    notion_review = None
     if not extra_failing_tests and getattr(creature, "workspace_root", None):
         try:
             from canonical.swe_kernel.autonomous_awake_loop_v1 import AwakeAgencyDaemon
@@ -2664,8 +2783,12 @@ def run_sovereign_board(
                 skill_store_path=creature.root / "awake_sense" / "skills.sqlite",
             )
             extra_failing_tests = [(rel, sig) for rel, sig in _sensor._sense_failing_workspace_tests()]
-        except Exception:  # noqa: BLE001 - a world that cannot be sensed is a world with no known work
+            notion_review = {"store": str(_sensor.notions_path),
+                             "findings": list(_sensor.notion_findings),
+                             "authority": "questions only; feedback is caller-supplied"}
+        except Exception as exc:  # noqa: BLE001 - report uncertainty rather than claiming an empty world
             extra_failing_tests = ()
+            notion_review = {"error": f"{type(exc).__name__}: {str(exc)[:200]}", "findings": []}
     reg_ids, inspected_ids = _registry_and_inspectors()
     already_onboarded = {cid: True for cid in (set(inspected_ids) | set(creature.onboarded_capabilities.keys()))}
 
@@ -2725,6 +2848,7 @@ def run_sovereign_board(
         "hard_slice_plan": hard_plan,
         "authored": authored,
         "run": run_rep,
+        "notion_review": notion_review,
         "onboarded_capabilities": sorted(creature.onboarded_capabilities.keys()),
         "derived_flight_metrics": creature.derived_flight.metrics(),
         "onboarding_factory_metrics": creature.onboarding_factory.summary() if hasattr(creature.onboarding_factory, "summary") else {"onboarded": len(creature.onboarded_capabilities), "attempted": len(creature.onboarding_factory.attempts)},

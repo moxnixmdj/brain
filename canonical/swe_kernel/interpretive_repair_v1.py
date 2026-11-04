@@ -199,173 +199,150 @@ def _split_args(raw: str) -> list[Any] | None:
 
 
 def parse_pytest_evidence(reason_text: str) -> list[dict[str, Any]]:
-    """Read a failure the way the world actually emits it, which is NOT the format I designed for.
+    """Read pytest comparisons without turning a peer's output into ground truth.
 
-    Measured 2026-11-05: I wrote the SEEN parser below against the cow-zygote screen's own report shape,
-    and at this call site the text arriving was pytest's:
-
-        E   assert 5 == 3.5
-        E    +  where 5 = f(7, 2)
-
-    A parser that only knows the shape I invented reads nothing in practice. So the measurement is read
-    in the form it really comes in: the owed value from the `assert` comparison, and the produced value
-    with its argument tuple from the `where` line that follows it.
+    ``where`` and ``and`` in one assertion can describe two calls.  An equality
+    failure constrains their relationship but does not identify either call as
+    correct, regardless of which one happened to appear on the left.
     """
     if not isinstance(reason_text, str):
         return []
-    where_re = re.compile(r"where\s+(.+?)\s*=\s*([A-Za-z_][\w.]*)\((.*)\)\s*$")
-    # pytest prints the comparison FIRST and the `where` line after it, so the two are collected in
-    # separate passes and paired by value: the produced number on the where-line must be one side of
-    # the assert, and the owed value is the other side. My first attempt required the where-line to
-    # come first and silently read nothing -- the format I assumed, again.
-    asserts: list[tuple[str, str]] = []
-    wheres: list[dict[str, Any]] = []
-    # pytest prints TWO `where` lines when an assertion compares two calls:
-    #     E    +  where 9 = square_area(3)
-    #     E    +  and   6 = rect_area(3, 3)
-    # The first version only read `where`, so a comparison between two CALLS -- the exact form a
-    # property-style test takes -- produced no evidence at all. The implicated call is the one whose
-    # value differs from the other side of the comparison, which is what the pairing below decides.
-    and_res = re.compile(r"(?:where|and)\s+(.+?)\s*=\s*([A-Za-z_][\w.]*)\((.*)\)\s*$")
+    where_re = re.compile(r"(?:where|and)\s+(.+?)\s*=\s*([A-Za-z_][\w.]*)\((.*)\)\s*$")
+    blocks: list[dict[str, Any]] = []
+    current: dict[str, Any] | None = None
     for raw in reason_text.splitlines():
         line = raw.strip()
-        if line.startswith("E"):
+        if line == "E" or line.startswith("E "):
             line = line[1:].strip()
-        if not line:
-            continue
-        m = where_re.search(line) or and_res.search(line)
-        if m:
-            produced = _read_arg(m.group(1))
-            args = _split_args(m.group(3))
-            if produced is not _UNREADABLE and args:
-                wheres.append({
-                    "subject": m.group(2).rsplit(".", 1)[-1],
-                    "args": args,
-                    "produced": produced,
-                    "call": f"{m.group(2)}({m.group(3)})",
-                })
-            continue
         if line.startswith("assert ") and "==" in line:
             parts = line[len("assert "):].split("==")
+            current = None
             if len(parts) == 2:
-                asserts.append((parts[0].strip(), parts[1].strip()))
+                left, right = _read_arg(parts[0]), _read_arg(parts[1])
+                if left is not _UNREADABLE and right is not _UNREADABLE:
+                    current = {"left": left, "right": right, "calls": []}
+                    blocks.append(current)
+            continue
+        match = where_re.search(line)
+        if current is None or not match:
+            continue
+        produced = _read_arg(match.group(1))
+        args = _split_args(match.group(3))
+        if produced is not _UNREADABLE and args:
+            current["calls"].append({"subject": match.group(2).rsplit(".", 1)[-1],
+                                     "args": args, "produced": produced,
+                                     "call": f"{match.group(2)}({match.group(3)})"})
     rows: list[dict[str, Any]] = []
-    for w in wheres:
-        prod = w["produced"]
-        for left, right in asserts:
-            lv, rv = _read_arg(left), _read_arg(right)
-            owed = None
-            if lv is not _UNREADABLE and lv == prod and rv is not _UNREADABLE and rv != prod:
-                owed = rv
-            elif rv is not _UNREADABLE and rv == prod and lv is not _UNREADABLE and lv != prod:
-                owed = lv
-            if owed is not None:
-                rows.append({**w, "expected": owed})
-                break
+    seen_rows: set[str] = set()
+    for block in blocks:
+        left, right, calls = block["left"], block["right"], block["calls"]
+        # Only mark a comparison relational if there are calls explaining BOTH
+        # displayed values. Extra nested `where` lines do not manufacture blame.
+        peer = (any(w["produced"] == left for w in calls) and
+                any(w["produced"] == right for w in calls) and left != right)
+        for call in calls:
+            produced = call["produced"]
+            if produced == left and left != right:
+                expected = right
+            elif produced == right and left != right:
+                expected = left
+            else:
+                continue
+            row = {**call, "expected": expected,
+                   "expected_source": "peer_observation" if peer else "assertion"}
+            signature = repr(row)
+            if signature not in seen_rows:
+                seen_rows.add(signature)
+                rows.append(row)
     return rows
 
 
-def parse_evidence(reason_text: str) -> list[dict[str, Any]]:
-    """Read the screen's own report into `{call, args, produced, expected}` rows.
+def _call_from_ast(node: Any) -> dict[str, Any] | None:
+    import ast as _ast
+    if not isinstance(node, _ast.Call) or node.keywords:
+        return None
+    if isinstance(node.func, _ast.Name):
+        subject = node.func.id
+    elif isinstance(node.func, _ast.Attribute):
+        subject = node.func.attr
+    else:
+        return None
+    try:
+        args = [_ast.literal_eval(arg) for arg in node.args]
+    except (ValueError, SyntaxError, TypeError, RecursionError, MemoryError):
+        return None
+    if not args:
+        return None
+    return {"subject": subject, "args": args, "call": _ast.unparse(node)}
 
-    This is the only place the creature consumes a measurement, and it consumes it as *numbers*, not as
-    a failure class. A row that cannot be read numerically is dropped, never guessed at.
-    """
+
+def parse_evidence(reason_text: str) -> list[dict[str, Any]]:
+    """Read measurements while preserving whether an expected value is a peer output."""
+    import ast as _ast
     if not isinstance(reason_text, str):
         return []
     rows = parse_pytest_evidence(reason_text)
-    for blob in _SEEN_RE.findall(reason_text):
+    decoder = json.JSONDecoder()
+    # raw_decode handles nested arrays in outputs, unlike a non-greedy `]` regex.
+    for match in re.finditer(r"SEEN\s+", reason_text):
         try:
-            entries = json.loads(blob)
+            entries, _ = decoder.raw_decode(reason_text[match.end():])
         except (ValueError, TypeError):
             continue
         for ent in entries if isinstance(entries, list) else []:
             if not isinstance(ent, Mapping):
                 continue
-            at = str(ent.get("at") or "").strip()
-            seen = ent.get("seen") or []
-            m = _CALL_RE.match(at)
-            if not m:
-                m = re.search(r"([A-Za-z_][\w.]*)\s*\((.*)\)", at)
-            if not m or not isinstance(seen, Sequence) or len(seen) < 2:
+            seen = ent.get("seen")
+            if not isinstance(seen, (list, tuple)) or len(seen) < 2:
                 continue
-            args = _split_args(m.group(2))
-            if args is None or not args:
+            values = [_read_arg(str(seen[0])), _read_arg(str(seen[1]))]
+            if _UNREADABLE in values:
                 continue
-            produced, expected = _read_arg(str(seen[0])), _read_arg(str(seen[1]))
-            if produced is _UNREADABLE or expected is _UNREADABLE:
+            try:
+                parsed = _ast.parse(str(ent.get("at") or ""), mode="eval").body
+            except (SyntaxError, ValueError, RecursionError):
                 continue
-            rows.append(
-                {
-                    "call": m.group(0),
-                    "subject": m.group(1).rsplit(".", 1)[-1],
-                    "args": args,
-                    "produced": produced,
-                    "expected": expected,
-                }
-            )
-    return rows
-
-
-def _single_param_functions(source_text: str):
-    """Yield `(function_name, parameter_name)` for every one-parameter function in the source."""
-    import ast as _ast
-
-    try:
-        tree = _ast.parse(source_text)
-    except SyntaxError:
-        return
-    for node in tree.body:
-        if isinstance(node, _ast.FunctionDef) and len(node.args.args) == 1:
-            yield node.name, node.args.args[0].arg
+            if isinstance(parsed, _ast.Compare) and len(parsed.comparators) == 1:
+                calls = [_call_from_ast(parsed.left), _call_from_ast(parsed.comparators[0])]
+                peer = calls[0] is not None and calls[1] is not None
+                for i, call in enumerate(calls):
+                    if call is not None:
+                        rows.append({**call, "produced": values[i], "expected": values[1-i],
+                                     "expected_source": "peer_observation" if peer else "assertion"})
+            else:
+                call = _call_from_ast(parsed)
+                if call:
+                    rows.append({**call, "produced": values[0], "expected": values[1],
+                                 "expected_source": "assertion"})
+    unique: list[dict[str, Any]] = []
+    seen_signatures: set[str] = set()
+    for row in rows:
+        signature = repr(row)
+        if signature not in seen_signatures:
+            seen_signatures.add(signature)
+            unique.append(row)
+    return unique
 
 
 def explain(args: Sequence[Any], owed: Any) -> list[tuple[str, str]]:
-    """Every operator in the language that turns these arguments into the owed value.
-
-    Returns `(operator_name, justification)` pairs. The justification is a display string -- the point
-    is that a hypothesis always carries the reason it was proposed, which a bare habit edge cannot.
-    """
-    if not args:
+    """Reflectively test binary operators folded across all observed arguments."""
+    import copy as _copy
+    import functools as _functools
+    if len(args) < 2 or len(args) > 4:
         return []
     out: list[tuple[str, str]] = []
-    # ONE ARGUMENT IS ENOUGH. MEASURED 2026-11-05: `explain` returned [] for anything with fewer than
-    # two arguments, so the row that names the failing function itself -- `cube_volume(3)` produced 9,
-    # owed 18 -- was the one row no hypothesis was ever derived from, while its sibling's row was.
-    # A square of one number is an operator applied to one number; refusing to look was the whole bug.
-    for name, symbol in _UNARY_SYMBOL.items():
-        rest = args[1:]
-        try:
-            total = float(args[0])
-            for x in rest:
-                total = float(_OP_FN["mul"](total, x))
-            if rest:
-                continue  # multi-argument unary reasoning is ambiguous; not claimed here
-            if abs(float(_UNARY_FN[name](args[0])) - float(owed)) < 1e-9:
-                out.append((name, f"({symbol})({args[0]}) == {owed}"))
-        except Exception:
-            continue
-    a, b = (args[0], args[1]) if len(args) >= 2 else (None, None)
-    if len(args) < 2:
-        return out
     for name, fn in _OP_FN.items():
+        # Do not allow an arithmetic hypothesis probe to construct huge integers.
+        if name in {"pow", "ipow"} and any(isinstance(x, int) and abs(x) > 12 for x in args[1:]):
+            continue
         try:
-            if fn(a, b) == owed:
+            values = _copy.deepcopy(list(args))
+            if _functools.reduce(fn, values) == owed:
                 sym = _NAME_TO_SYMBOL.get(name, name)
-                out.append((name, f"{a} {sym} {b} == {owed}"))
+                out.append((name, f"{' {} '.format(sym).join(map(str, args))} == {owed}"))
         except Exception:
             continue
     return out
-
-
-# Unary operators: a single argument can still determine an owed value, and the shape of a one-number
-# function (`s * s`, `s ** 3`) is exactly where a degenerate-case notion points.
-# The template IS the hypothesis: the check evaluates it, and the edit substitutes the source's own
-# parameter name into it. One representation, so a hypothesis can never be checked with one shape and
-# written with another.
-_UNARY_TEMPLATE = {"square": "x ** 2", "cube": "x ** 3", "neg": "-x"}
-_UNARY_FN = {k: (lambda x, t=v: eval(t, {"x": x})) for k, v in _UNARY_TEMPLATE.items()}
-_UNARY_SYMBOL = dict(_UNARY_TEMPLATE)
 
 
 class InterpretiveRepair:
@@ -420,6 +397,8 @@ class InterpretiveRepair:
         """Turn a failure report into explanations, stored as candidate hypotheses."""
         found: list[dict[str, Any]] = []
         for row in parse_evidence(reason_text):
+            if row.get("expected_source") == "peer_observation":
+                continue
             for name, why in explain(row["args"], row["expected"]):
                 sym = _NAME_TO_SYMBOL.get(name, name)
                 self._record(row["subject"], name, why, row)
@@ -455,12 +434,6 @@ class InterpretiveRepair:
         epistemic content of the module: an explanation must survive the evidence that already agreed
         with the code, not only the evidence that did not.
         """
-        if name in _UNARY_FN:
-            # A one-argument hypothesis is checked by its own template, not by a binary operator table.
-            # MEASURED 2026-11-05: `consistent` returned False for every name absent from `_OP_FN`, so
-            # `cube` -- the correct explanation of `cube_volume(3)` owing 27 -- was recorded, ranked,
-            # and then silently dropped as inconsistent. Supported-by-construction means checked here.
-            return True
         fn = _OP_FN.get(name)
         if fn is None:
             return False
@@ -508,38 +481,27 @@ class InterpretiveRepair:
         return [(name, why) for _n, _h, _i, name, why in ranked]
 
     # -- proposal -----------------------------------------------------------------------------
-    def propose(self, source_text: str, *_, limit: int = 8, **__) -> list[str]:
-        """Rewrite the source's binary-operator tokens toward the operators the evidence supports.
+    def propose(self, source_text: str, *evidence: Any, limit: int = 8, **__) -> list[str]:
+        """Offer source-derived expression and supported-operator candidates for screening.
 
-        Deliberately narrow: it only rewrites an operator this module has a *supported hypothesis* for,
-        and only when the hypothesis differs from what is written. It never proposes a constant, because
-        no constant is ever a hypothesis.
+        Candidate generation does not establish correctness. In particular, an
+        observed peer output is not treated as an independently owed value.
         """
-        if not isinstance(source_text, str) or not source_text.strip():
+        if not isinstance(source_text, str) or not source_text.strip() or limit <= 0:
             return []
+        reason = str(evidence[0]) if evidence else ""
+        rows = [r for r in parse_evidence(reason) if r.get("expected_source") != "peer_observation"]
         out: list[str] = []
-        # Every subject's understanding is usable here: an operator means the same thing wherever it is
-        # written. Subject-specific evidence only decides ranking (see `supported_global`).
+        for cand in self._source_expression_rewrites(source_text, rows):
+            if cand not in out:
+                out.append(cand)
+                if len(out) >= limit:
+                    return out
         targets_all = self.supported_global()
-        if not targets_all:
+        if not out and not targets_all:
             return []
-        # Which subject is this? The module-level function that owns the failing line. Cheap and
-        # honest: if the file has exactly one function, that is the subject; otherwise the hypotheses
-        # for each subject are tried in turn and the screen decides.
         lines = source_text.splitlines(True)
-        # Every supported operator is offered, not only the best-ranked one. Measured 2026-11-05:
-        # taking `targets[0]` alone meant one unmappable top candidate (an in-place variant) made the
-        # whole subject produce nothing, and the correct edit one rank below was never seen.
         for name, _why in targets_all:
-            # A one-argument hypothesis is a SHAPE (`x ** 3`), not a symbol, so it must be handled
-            # before the symbol lookup: MEASURED 2026-11-05, `cube` has no entry in `_NAME_TO_SYMBOL`,
-            # the `continue` ran first, and the rewrite that would have repaired `6 * s -> s ** 3` was
-            # unreachable while the hypothesis itself was recorded and visibly supported.
-            for cand in self._unary_rewrites(lines, name, source_text):
-                if cand not in out:
-                    out.append(cand)
-                    if len(out) >= limit:
-                        return out
             sym = _NAME_TO_SYMBOL.get(name)
             if not sym:
                 continue
@@ -548,22 +510,46 @@ class InterpretiveRepair:
                     out.append(cand)
                     if len(out) >= limit:
                         return out
-        # OPERAND repair, a different kind of edit to the same line. MEASURED 2026-11-05: `a + a` owed
-        # `f(3, 4) == 7` was interpretable all along (the hypothesis was plain `add`) and was still never
-        # repaired, because every rewrite only touched the operator token. The vocabulary already holds
-        # what is needed: the source names its parameters, and substituting one for another is an edit
-        # the creature can make without being told that "the wrong variable was used".
-        for cand in self._all_operator_rewrites(lines, name, sym, source_text):
-            if cand not in out:
-                out.append(cand)
-                if len(out) >= limit:
-                    return out
+            for cand in self._all_operator_rewrites(source_text, sym, rows):
+                if cand not in out:
+                    out.append(cand)
+                    if len(out) >= limit:
+                        return out
         for cand in self._operand_rewrites(lines, source_text):
             if cand not in out:
                 out.append(cand)
                 if len(out) >= limit:
                     return out
         return out
+
+    def _source_expression_rewrites(self, source_text: str, rows: Sequence[Mapping[str, Any]]):
+        """Rebind expressions already present in source, filtered by an owed example."""
+        from canonical.swe_kernel.expression_hypotheses_v1 import (
+            evaluate_expression, expression_candidates, function_models, replace_return_expression, same_number,
+        )
+        models = function_models(source_text)
+        subjects = list(dict.fromkeys(str(row.get("subject") or "") for row in rows))
+        for subject in subjects:
+            target = models.get(subject)
+            relevant = [r for r in rows if r.get("subject") == subject]
+            if not target or not relevant or any(
+                not isinstance(r.get("args"), (list, tuple)) or len(r["args"]) != len(target.params)
+                for r in relevant
+            ):
+                continue
+            templates = [m for m in models.values() if m.name != target.name]
+            candidates, _truncated = expression_candidates(target, templates)
+            for expr in candidates:
+                # Every independently asserted example already in the failure
+                # report is evidence.  Fitting only the first diagonal example
+                # lets many wrong bindings consume the entire candidate budget.
+                if not all((lambda result: result[0] and same_number(result[1], row.get("expected")))(
+                        evaluate_expression(expr, dict(zip(target.params, row["args"]))))
+                           for row in relevant):
+                    continue
+                candidate = replace_return_expression(source_text, target, expr)
+                if candidate:
+                    yield candidate
 
     def _operand_rewrites(self, lines, source_text):
         """Replace a repeated operand with the other parameter the source declares."""
@@ -602,44 +588,32 @@ class InterpretiveRepair:
                     if cand != source_text:
                         yield cand
 
-    def _all_operator_rewrites(self, lines, name, sym, source_text):
-        """Apply the supported operator to EVERY operator token on the failing line at once.
-
-        MEASURED 2026-11-05: a module with `box_volume(l, w, h) -> l + w + h` against the fired notion
-        `cube_volume(3) == 27` was repaired by no producer. The evidence was interpretable and `*` was
-        supported, but every rewrite in this module substitutes ONE operator token, so the correct edit
-        `l * w * h` -- two substitutions -- was outside the hypothesis space. Both operators being wrong
-        is not a rarer defect than one; it is the ordinary shape of `sum` where a `product` belongs.
-        A multi-operand repair has to be expressible, or the vocabulary cannot describe it.
-        """
-        import re as _re
-
-        op_re = _re.compile(r"(?<=[\w\)]) (\+|-|\*|/|//|%|\*\*) (?=[\w\(])")
-        for row, line in enumerate(lines):
-            if not op_re.search(line):
-                continue
-            new_line = op_re.sub(lambda m: f" {sym} " if m.group(1) != sym else m.group(0), line)
-            if new_line != line:
-                cand = "".join(lines[:row]) + new_line + "".join(lines[row + 1:])
-                if cand != source_text:
-                    yield cand
-
-    def _unary_rewrites(self, lines, name, source_text):
-        """Write a one-argument hypothesis into the returned expression, using the source's parameter."""
-        template = _UNARY_TEMPLATE.get(name)
-        if template is None:
+    def _all_operator_rewrites(self, source_text: str, sym: str, rows: Sequence[Mapping[str, Any]]):
+        """Replace arithmetic operators together in a modelled target expression."""
+        import ast as _ast
+        import copy as _copy
+        from canonical.swe_kernel.expression_hypotheses_v1 import function_models, replace_return_expression
+        try:
+            example = _ast.parse(f"a {sym} b", mode="eval").body
+        except SyntaxError:
             return
-        for fname, param in _single_param_functions(source_text):
-            for row, line in enumerate(lines):
-                if "return" not in line:
-                    continue
-                indent = line[: len(line) - len(line.lstrip())]
-                cand_line = f"{indent}return {template.replace('x', param)}\n"
-                if cand_line == line:
-                    continue
-                cand = "".join(lines[:row]) + cand_line + "".join(lines[row + 1:])
-                if cand != source_text:
-                    yield cand
+        if not isinstance(example, _ast.BinOp):
+            return
+        subjects = {str(row.get("subject")) for row in rows}
+        for model in function_models(source_text).values():
+            if subjects and model.name not in subjects:
+                continue
+
+            class Replace(_ast.NodeTransformer):
+                def visit_BinOp(self, node):
+                    node = self.generic_visit(node)
+                    node.op = _copy.deepcopy(example.op)
+                    return node
+
+            expr = _ast.fix_missing_locations(Replace().visit(_copy.deepcopy(model.expression)))
+            candidate = replace_return_expression(source_text, model, expr)
+            if candidate:
+                yield candidate
 
     @staticmethod
     def _token_index(line: str, sym: str) -> int:

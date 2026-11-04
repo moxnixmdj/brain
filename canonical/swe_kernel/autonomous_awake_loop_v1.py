@@ -108,6 +108,67 @@ def promote_closed_lesson_to_workflow_db(
     return {"promoted": False, "reason": "NO_PROMOTABLE_TRACE_ARTIFACT"}
 
 
+def _bounded_python_sources(root: pathlib.Path, limit: int = 40) -> list[pathlib.Path]:
+    """Find a bounded number of files without traversing caches or vendor trees."""
+    out: list[pathlib.Path] = []
+    for directory, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs if d not in {".git", "__pycache__", "node_modules", ".venv", ".pytest_cache", ".mypy_cache"})
+        for name in sorted(files):
+            if not name.endswith(".py") or name.startswith("test_"):
+                continue
+            out.append(pathlib.Path(directory) / name)
+            if len(out) >= limit:
+                return out
+    return out
+
+
+def _fair_candidates(by_tool: Mapping[str, Sequence[str]], order: Sequence[str], original: str) -> list[str]:
+    """Interleave unique candidates so a prolific tool cannot monopolize a screen."""
+    queues = [iter(by_tool.get(tool) or ()) for tool in order]
+    out: list[str] = []
+    seen = {original, ""}
+    while queues:
+        remaining = []
+        for queue in queues:
+            try:
+                candidate = next(queue)
+            except StopIteration:
+                continue
+            remaining.append(queue)
+            if candidate not in seen:
+                seen.add(candidate)
+                out.append(candidate)
+        queues = remaining
+    return out
+
+
+def _screen_observations(screen: Mapping[str, Any], candidate_count: int,
+                         verified_index: int | None) -> list[tuple[int, bool]]:
+    """Only actual, authoritative test outcomes are learning evidence.
+
+    The broker deliberately returns all indices as `passing_indices` when a
+    screen cannot be trusted, and stop-on-first-pass omits later candidates.
+    Neither placeholder indices nor timeouts are measured successes/failures.
+    """
+    if not (screen.get("ok") and screen.get("confined") and screen.get("screen_authoritative")
+            and screen.get("live_workspace_untouched")):
+        return []
+    out: list[tuple[int, bool]] = []
+    seen: set[int] = set()
+    for detail in screen.get("candidates") or []:
+        if not isinstance(detail, Mapping):
+            continue
+        idx = detail.get("index")
+        if type(idx) is not int or not 0 <= idx < candidate_count or idx in seen:
+            continue
+        seen.add(idx)
+        if detail.get("passed") is True and idx == verified_index:
+            out.append((idx, True))
+        elif detail.get("passed") is False and detail.get("failure") == "TEST_FAILED":
+            out.append((idx, False))
+    return out
+
+
 # Per-candidate wallclock budget for every confined batch screen.
 #
 # Measured 2026-11-05: an honest candidate takes a MEDIAN of 4 ms (min 4 ms, max 215 ms across
@@ -499,6 +560,7 @@ class AwakeAgencyDaemon:
             (_store_p.parent / "notions.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_notions_{ws_hash}.json")
         )
+        self.notion_findings: list[dict[str, Any]] = []
         self.competence_path = (
             (_store_p.parent / "tool_competence.json") if _store_p is not None
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_competence_{ws_hash}.json")
@@ -512,8 +574,8 @@ class AwakeAgencyDaemon:
             else (pathlib.Path(tempfile.gettempdir()) / f"brain_synth_{ws_hash}.json")
         )
         self.interpretations_path = (
-            (_store_p.parent / "interpretations.json") if _store_p is not None
-            else (pathlib.Path(tempfile.gettempdir()) / f"brain_interp_{ws_hash}.json")
+            (_store_p.parent / "interpretations_grounded_v2.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_interp_grounded_v2_{ws_hash}.json")
         )
         if r3_state_path is not None:
             self.r3_state_path = pathlib.Path(r3_state_path).resolve()
@@ -686,67 +748,126 @@ class AwakeAgencyDaemon:
         except Exception:
             pass
 
-    def _author_tests_from_notions(self, src_files: Sequence[pathlib.Path]) -> list[pathlib.Path]:
-        """Derive falsifiable expectations from the modules themselves and write them as tests.
+    def investigate_workspace(self) -> list[dict[str, Any]]:
+        """Inspect bounded source candidates without creating tests or changing code.
 
-        This is the only producer of work in this file that does not begin with a failing assertion
-        somebody else wrote. It is deliberately narrow: a notion that cannot be stated as a concrete
-        assertion is dropped rather than guessed at, a module that already has a real test file is left
-        alone (an authored test outranks an invented one), and every notion's fire is recorded so one
-        that fires on everything can be seen to be worthless.
+        Findings are questions, not bugs.  Reviews and answers are supplied through
+        ``NotionStore`` at ``self.notions_path`` and bound to the source hash.
         """
-        try:
-            from canonical.swe_kernel.notions_v1 import live_notions, notions_for_source
-        except Exception:  # noqa: BLE001
-            return []
+        sources = _bounded_python_sources(self.workspace_root)
+        self._author_tests_from_notions(sources, allow_authoring=False)
+        return list(self.notion_findings)
+
+    def _author_tests_from_notions(self, src_files: Sequence[pathlib.Path], *,
+                                   allow_authoring: bool = True) -> list[pathlib.Path]:
+        """Surface tentative questions; author tests only from explicit external feedback.
+
+        A firing relation and its learned priority are not a specification.  Even
+        confirming the relation is insufficient to choose which function to trust.
+        A scoped review, a reference, and answers to independent queries are required
+        before this method writes a test.  The bounded model never certifies intent.
+        """
+        from canonical.swe_kernel.expression_hypotheses_v1 import investigate
+        from canonical.swe_kernel.notions_v1 import live_notions, notions_for_source
+
         store = live_notions(self.notions_path)
         authored: list[pathlib.Path] = []
+        self.notion_findings = []
         for mod in list(src_files)[:12]:
-            if mod.name.startswith("test_") or mod.name == "__init__.py":
+            if mod.suffix != ".py" or mod.name.startswith("test_") or mod.name == "__init__.py":
                 continue
             try:
+                rel_mod = mod.relative_to(self.workspace_root)
+                if not mod.resolve().is_relative_to(self.workspace_root) or mod.stat().st_size > 400_000:
+                    continue
+                parts = rel_mod.with_suffix("").parts
+                if not all(part.isidentifier() for part in parts):
+                    continue
                 src = mod.read_text(encoding="utf-8")
-            except OSError:
+            except (OSError, UnicodeError, ValueError):
                 continue
-            found = notions_for_source(src, mod.stem)
-            if not found:
-                continue
+            found = notions_for_source(src, rel_mod.as_posix())
             results = [n.evaluate() for n in found]
             store.record(results)
-            try:
-                names = {f.name for f in ast.parse(src).body if isinstance(f, ast.FunctionDef)}
-            except SyntaxError:
-                continue
             lines: list[str] = []
-            for n, r in zip(found, results):
-                if not r["fired"] or r.get("declined"):
+            imports: set[str] = set()
+            test_binding: dict[str, str] | None = None
+            for n, result in zip(found, results):
+                if not result.get("fired") or result.get("declined"):
                     continue
-                # A notion that has fired on everything it has ever seen is not a reason to edit the
-                # code; it is a sign that the expectation does not describe this program. Skipping it
-                # here is what keeps noise off the board, where it would otherwise be written into a
-                # test file and veto every repair of the module -- MEASURED 2026-11-05: the perimeter
-                # identity did exactly that to a correct `return w * h` fix.
-                if store.is_noise(n):
-                    continue
-                expr = self._notion_to_assertion(n, names)
-                if expr is None:
-                    continue
-                lines += [f"def test_notion_{len(lines) // 4}():",
-                          f"    # notion [{n.kind}] {n.claim[:110]}", f"    assert {expr}", ""]
+                review = store.reviews.get(n.id) or {}
+                finding = {**result, "priority_score": store.score(result),
+                           "status": "needs_review" if n.id in store.findings else "feedback_storage_unavailable"}
+                decision = review.get("decision")
+                trusted = review.get("trusted_function")
+                if decision == "reject":
+                    finding["status"] = "rejected_by_reviewer"
+                elif decision == "confirm" and not trusted:
+                    finding["status"] = "needs_reference"
+                elif decision == "confirm" and trusted in {n.left, n.right}:
+                    target = n.right if trusted == n.left else n.left
+                    examples = store.examples.get(n.id) or []
+                    plan = investigate(src, target_name=target, reference_name=trusted,
+                                       observations=result.get("observations") or [], examples=examples)
+                    store.record_plan(n.id, plan)
+                    finding.update({"status": plan["status"], "trusted_function": trusted,
+                                    "target_function": target, "plan": plan})
+                    # Bounded agreement is not proof, but the tests below are
+                    # justified by an explicit review and external examples.  No
+                    # score, name overlap or self-generated output grants authority.
+                    if allow_authoring and plan["status"] == "bounded_agreement" and test_binding is None:
+                        test_binding = {"module": rel_mod.as_posix(), "source_sha256": n.source_sha256,
+                                        "target": target, "reference": trusted, "finding_id": n.id}
+                        target_arity = n.arity if target == n.right else 1
+                        trusted_arity = n.arity if trusted == n.right else 1
+                        checks: list[tuple[list[Any], Any, list[Any] | None]] = []
+                        for observation in result.get("observations") or []:
+                            v = observation["input"]
+                            expected = observation["left"] if trusted == n.left else observation["right"]
+                            checks.append(([v] * target_arity, expected, [v] * trusted_arity))
+                        for example in examples:
+                            checks.append((list(example["args"]), example["expected"], None))
+                        imports.update((target, trusted))
+                        for i, (args, expected, anchor_args) in enumerate(checks):
+                            call = f"{target}({', '.join(repr(x) for x in args)})"
+                            lines.extend([f"def test_notion_{n.id[:12]}_{i}():",
+                                          f"    assert {call} == {expected!r}"])
+                            if anchor_args is not None:
+                                anchor = f"{trusted}({', '.join(repr(x) for x in anchor_args)})"
+                                lines.append(f"    assert {anchor} == {expected!r}")
+                            lines.append("")
+                self.notion_findings.append(finding)
             if not lines:
                 continue
-            target = self.workspace_root / "tests" / f"test_{mod.stem}.py"
-            if target.exists():
+            # Existing repair localization uses a module's stem. If another module
+            # has that stem, decline rather than let it repair the wrong file.
+            matches = [p for p in self.workspace_root.rglob(mod.name)
+                       if ".git" not in p.parts and "__pycache__" not in p.parts
+                       and p.is_file() and p.suffix == ".py"]
+            if len(matches) != 1:
+                for finding in self.notion_findings:
+                    if test_binding and finding["id"] == test_binding["finding_id"]:
+                        finding["status"] = "ambiguous_module_stem"
                 continue
-            # Import the MODULE the notion is about, by its real dotted path. MEASURED 2026-11-05:
-            # writing `from pkg import *` against an empty `__init__.py` meant every notion died as a
-            # NameError before it reached an assertion -- the test file looked authored and measured
-            # nothing, and the repair engine had no disagreement to interpret.
-            dotted = ".".join(mod.relative_to(self.workspace_root).with_suffix("").parts)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(f"from {dotted} import *  # noqa: F401,F403\n\n" + "\n".join(lines),
-                              encoding="utf-8")
-            authored.append(target)
+            target_file = self.workspace_root / "tests" / f"test_{mod.stem}.py"
+            try:
+                # Do not overwrite a user test, follow a symlink outside the
+                # workspace, or use an approval for source that has since changed.
+                if target_file.exists() or not target_file.resolve().is_relative_to(self.workspace_root):
+                    continue
+                if mod.read_text(encoding="utf-8") != src:
+                    continue
+                target_file.parent.mkdir(parents=True, exist_ok=True)
+                import json as _json
+                with target_file.open("x", encoding="utf-8") as stream:
+                    stream.write("# brain-notion-v1 " + _json.dumps(test_binding, sort_keys=True) + "\n")
+                    stream.write("# Based on explicitly supplied review and examples; not a proof.\n")
+                    stream.write(f"from {'.'.join(parts)} import {', '.join(sorted(imports))}\n\n")
+                    stream.write("\n".join(lines))
+                authored.append(target_file)
+            except (OSError, UnicodeError):
+                continue
+        self.notion_findings.sort(key=lambda f: (-f["priority_score"], f["id"]))
         return authored
 
     def _fast_file_sha256(self, fp: pathlib.Path) -> str:
@@ -812,18 +933,9 @@ class AwakeAgencyDaemon:
         poly_tests.sort()
         src_files.sort()
         if not test_files and not poly_tests:
-            # NOBODY WROTE A TEST. Measured 2026-11-05 (S29): handed `rect_area(w, h)` returning
-            # `w + h`, a correct sibling, and a placeholder test, the creature took zero actions -- and
-            # with no test file at all, this sensor returned `[]` before it ever looked at the code.
-            # The sensor was not failing to find work; it was incapable of conceiving of any. Every
-            # other organ downstream acts on a failing assertion someone else wrote.
-            #
-            # So the creature supplies its own doubt. Notions are derived from the program's own
-            # structure (a degenerate input where two functions must agree, a symmetry that must hold),
-            # each is falsifiable by construction, and a fired notion becomes a test file the creature
-            # writes and names after the module it indicts -- which is what makes the existing repair
-            # path reachable, since it maps `test_<stem>.py` to `<stem>.py`.
-            #
+            # Without tests, inspect the source for questions. A disagreement or
+            # name similarity is NOT an oracle. Tests are created only after the
+            # exact question is reviewed and independent examples are supplied.
             # A scope was requested: invent nothing outside it.
             if within is None:
                 authored = self._author_tests_from_notions(src_files)
@@ -967,32 +1079,6 @@ class AwakeAgencyDaemon:
             "stale_rules": stale_rules,
             "newly_noted_gap_ids": noted_gaps,
         }
-
-    @staticmethod
-    def _notion_to_assertion(n, names: set[str]) -> str | None:
-        """Express a fired notion as an assertion, using only what the notion itself names.
-
-        MEASURED 2026-11-05: this parsed the subject with a regex matching the literal string `(x, x)`.
-        When the subject changed to `(equal args)` so the notion could cover any arity, the regex
-        stopped matching, returned None, and EVERY notion was silently dropped -- the creature wrote no
-        test, and the result was indistinguishable from having no notion machinery at all. That is the
-        fourth silent no-op in this series, so the rule now is: the assertion is built from the same
-        pair of names and the same arity the notion was constructed with, not from its prose.
-        """
-        import re as _re
-
-        m = _re.match(r"(\w+) vs (\w+)\(", str(getattr(n, "subject", "")))
-        if not m or m.group(1) not in names or m.group(2) not in names:
-            return None
-        a, b = m.group(1), m.group(2)
-        kind = str(getattr(n, "kind", ""))
-        arity = int(getattr(n, "arity", 0) or 0)
-        if kind == "IDENTITY" and arity:
-            return f"{a}(3) == {b}({', '.join(['3'] * arity)})"
-        if kind == "SYMMETRY" and arity:
-            args = ", ".join("2" if i % 2 == 0 else "3" for i in range(arity))
-            return f"{a}({args}) + {b}({args}) == {b}({args}) + {a}({args})"
-        return None
 
     def _repair_multifile_python_confined(
         self,
@@ -1138,55 +1224,15 @@ class AwakeAgencyDaemon:
                 and _is_polyglot_test_filename(p.name)
             )[:8]
         if not test_files and not poly_test_files:
-            # NOTHING OWES A TEST. Measured 2026-11-05: handed a module with `rect_area(w, h)` returning
-            # `w + h` and a placeholder test asserting nothing, six cycles produced no action -- every
-            # organ in this file acts on a failing assertion somebody else wrote. So the creature looks
-            # for its own reasons to act: notions derived from the program's own structure, each one a
-            # falsifiable expectation, turned into a test it writes itself and names after the module it
-            # indicts. This is the only path here that does not begin with work handed to it.
-            from canonical.swe_kernel.notions_v1 import notions_for_source, live_notions
-
-            _notions = live_notions(self.notions_path)
-            _authored: list[str] = []
-            for _mod in sorted(p for p in self.workspace_root.glob("**/*.py")
-                               if "__pycache__" not in p.parts and ".git" not in p.parts)[:12]:
-                try:
-                    _src = _mod.read_text(encoding="utf-8")
-                except OSError:
-                    continue
-                _found = notions_for_source(_src, _mod.stem)
-                if not _found:
-                    continue
-                _results = [n.evaluate() for n in _found]
-                _notions.record(_results)
-                _fired = [n for n, r in zip(_found, _results) if r["fired"]]
-                if not _fired:
-                    continue
-                # Only notions that name the module's own functions can become a test of that module.
-                _names = {f.name for f in ast.parse(_src).body if isinstance(f, ast.FunctionDef)}
-                _lines = ["from pkg import *  # noqa", ""]
-                _usable = 0
-                for _n in _fired:
-                    _expr = self._notion_to_assertion(_n, _names)
-                    if _expr is None:
-                        continue
-                    _lines.append(f"def test_notion_{_usable}():")
-                    _lines.append(f"    # notion [{_n.kind}] {_n.claim[:110]}")
-                    _lines.append(f"    assert {_expr}")
-                    _lines.append("")
-                    _usable += 1
-                if not _usable:
-                    continue
-                _tf = self.workspace_root / "tests" / f"test_{_mod.stem}.py"
-                if _tf.exists():
-                    continue  # a real test file outranks an invented one, always
-                _tf.parent.mkdir(parents=True, exist_ok=True)
-                _tf.write_text("\n".join(_lines), encoding="utf-8")
-                _authored.append(str(_tf.relative_to(self.workspace_root)))
-                test_files.append(_tf)
-            if not test_files and not poly_test_files:
+            # The sensor and the direct experiment entry point share the same
+            # review/feedback gate.  Previously this second copy bypassed the
+            # noise check and imported from a hard-coded package.
+            sources = _bounded_python_sources(self.workspace_root)
+            test_files = self._author_tests_from_notions(sources)
+            if not test_files:
                 return {"tested": 0, "failures_found": 0, "repaired": 0,
-                        "crystallized_skills": [], "notions_authored_tests": 0}
+                        "crystallized_skills": [], "notions_authored_tests": 0,
+                        "notion_findings": list(self.notion_findings)}
 
         repaired_records: list[dict[str, Any]] = []
         _staged: dict[str, str] = {}
@@ -1393,7 +1439,8 @@ class AwakeAgencyDaemon:
                 # Learn from THIS failure before proposing: the evidence is in hand, and a mechanism
                 # that only ever learns after a success cannot help with the failure in front of it.
                 _interp.interpret(str(fail_out))
-                _rows = _interp.parse_rows(str(fail_out))
+                _rows = [r for r in _interp.parse_rows(str(fail_out))
+                         if r.get("expected_source") != "peer_observation"]
                 _args = _rows[0]["args"] if _rows else []
                 _owed = _rows[0]["expected"] if _rows else None
 
@@ -1411,24 +1458,15 @@ class AwakeAgencyDaemon:
                     "deterministic_ast": _propose_deterministic_ast_repairs(before_src, max_candidates=16),
                 }
                 _competence.note_produced(_kind, {k: len(v) for k, v in _by_tool.items()})
-                # ORDER BY MEASURED COMPETENCE, not by the order I happened to write the calls in. The
-                # first-ranked tool's candidates are screened first, so the earn-rate is what the
-                # creature pays attention to; every tool still contributes, so nothing is lost by being
-                # ranked low.
+                # Learned order may influence the first position, but it must not
+                # monopolize the finite screen budget. Concatenating full tool
+                # lists let two prolific tools occupy all 36 slots before a later
+                # tool's *already produced correct candidate* was ever screened.
+                # Interleave the available lists and retain the cap. Past misses
+                # are not proof that a new candidate is useless, so a producer
+                # with a current candidate is not hard-pruned by old counts.
                 _order = _competence.rank(_kind)
-                # ... and a tool measured to NEVER produce for this kind is not consulted at all. This
-                # is the only form of the competence model that can actually save work: reordering was
-                # measured to save nothing (14 candidates screened cold, 14 warm), because every tool
-                # runs regardless. Scope is deliberately narrow -- never-produced is the one failure
-                # that justifies not asking, since a tool that produces wrong candidates might produce
-                # the right one and only the screen can tell.
-                _consult = {t: _competence.should_consult(_kind, t) for t in _by_tool}
-                raw_cands = [c for tool in _order if _consult.get(tool, True)
-                             for c in (_by_tool.get(tool) or [])]
-                all_cands: list[str] = []
-                for c_item in raw_cands:
-                    if c_item and c_item != before_src and c_item not in all_cands:
-                        all_cands.append(c_item)
+                all_cands = _fair_candidates(_by_tool, _order, before_src)
 
                 if all_cands:
                     batch_screen = broker.run_confined_python_candidate_batch(
@@ -1441,34 +1479,34 @@ class AwakeAgencyDaemon:
                         allow_cow_hardlinks=True,
                     )
                     pass_idxs = batch_screen.get("passing_indices") or []
-                    # The screen already executed every candidate. Until now the result was read for
-                    # the winner and the rest was thrown away -- the larger half of the signal. Every
-                    # pass and every rejection is evidence about which edits work in this codebase.
-                    _resid = {int(d.get("index", i)): d for i, d in enumerate(batch_screen.get("candidates") or [])}
-                    for _i, _c in enumerate(all_cands[:36]):
-                        _d = _resid.get(_i) or {}
-                        _ok = _i in [int(x) for x in pass_idxs]
-                        # A VERIFIED repair that the grammar cannot describe is the only trustworthy
-                        # evidence that a shape is missing: a rejected candidate being unexplainable
-                        # means nothing, because most edits are wrong.
-                        if _ok and _synth.signature(before_src, _c) is None:
-                            _growth.note_unexplained(before_src, _c)
-                        _r = None
-                        try:
-                            _r = abs(float(_owed) - float(_d.get("produced"))) if _owed is not None and _d.get("produced") is not None else None
-                        except (TypeError, ValueError):
-                            _r = None
-                        _synth.observe(before_src, _c, passed=_ok, residual=_r)
-                    if batch_screen.get("ok") and batch_screen.get("confined") and pass_idxs:
-                        cand_win = all_cands[int(pass_idxs[0])]
-                        # Which tool actually produced the winner? This is the only evidence that says
-                        # a producer is good rather than merely productive.
-                        for _tool, _outs in _by_tool.items():
-                            if cand_win in _outs:
-                                _competence.note_win(_kind, _tool)
-                                break
-                        if _verify_in_cow(cand_win):
-                            solved_src = cand_win
+                    screened = all_cands[:36]
+                    verified_index: int | None = None
+                    if (batch_screen.get("ok") and batch_screen.get("confined")
+                            and batch_screen.get("screen_authoritative")
+                            and batch_screen.get("live_workspace_untouched") and pass_idxs):
+                        first = pass_idxs[0]
+                        details = batch_screen.get("candidates") or []
+                        if (type(first) is int and 0 <= first < len(screened)
+                                and any(d.get("index") == first and d.get("passed") is True
+                                        for d in details if isinstance(d, Mapping))):
+                            cand_win = screened[first]
+                            if _verify_in_cow(cand_win):
+                                verified_index = first
+                                solved_src = cand_win
+                                for _tool, _outs in _by_tool.items():
+                                    if cand_win in _outs:
+                                        _competence.note_win(_kind, _tool)
+                                        break
+                                if _synth.signature(before_src, cand_win) is None:
+                                    _growth.note_unexplained(before_src, cand_win)
+                    # Stop-on-first-pass may leave most of a batch unreported;
+                    # an unavailable broker can also return placeholder pass
+                    # indices. Neither is an outcome. Learn only from reported,
+                    # authoritative executions, and count a win only after the
+                    # candidate also passed the full test in the CoW workspace.
+                    for _i, _ok in _screen_observations(batch_screen, len(screened), verified_index):
+                        _synth.observe(before_src, screened[_i], passed=_ok)
+
                 if solved_src is None:
                     cow_write_text(cow_mod, before_src)
                     mf_out = self._repair_multifile_python_confined(cow_root, cow_tf, fail_out, _staged)
