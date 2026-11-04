@@ -317,7 +317,61 @@ _PROBE_SETS = (
     [0.0],
     [1.0, 1.0, 4.0],
     [0.5, 2.25, 9.0, 1.75],
+    # the rest are here to SEPARATE operators from each other, not to exercise them:
+    # repeats, two values, an outlier, an ascending run, and a single value. min and max
+    # agree on every ascending run, so a set without an unordered case cannot tell either
+    # from a median.
+    [10.0, 10.0],
+    [1.0, 2.0, 3.0],
+    [100.0, 1.0, 1.0],
+    [7.0],
+    [3.0, 1.0, 3.0, 1.0],
 )
+
+
+def _agrees_with(fn, other, probes=None) -> bool:
+    """Do these two arithmetics give the same number on every probe, to the last bit?"""
+    for values in (probes or _PROBE_SETS):
+        try:
+            a, b = float(fn(list(values))), float(other(list(values)))
+        except Exception:
+            return False
+        if a != a or b != b:            # NaN agrees with nothing
+            return False
+        if abs(a - b) > 1e-9:
+            return False
+    return True
+
+
+def indistinguishable_from(kind: str, fn) -> list[str]:
+    """Which already-declared operators is this arithmetic the SAME FUNCTION as?
+
+    A CAPABILITY THAT CANNOT BE TOLD APART FROM ONE ALREADY PRESENT IS NOT A CAPABILITY.
+
+    Declaring `median` as `min` passed every check last round: the words were the
+    question's, the arithmetic ran, and the induced laws (within_inputs, is_one_of_the
+    inputs, bounded_by_extremes) were all true of it -- because min, max and median are
+    structurally identical: permutation-invariant, positively homogeneous, and inside
+    their inputs. NO predicate on (inputs, result) can separate them, so no amount of
+    inventing more values would have caught it. `I.answer("what is the median qty")`
+    returned 5 with verified=True.
+
+    What separates them is not a property of one operator, it is a COMPARISON against the
+    operators that already exist. `min` is already declared, so an arithmetic identical to
+    `min` adds nothing and must not be allowed to claim a new name. The rivals are not a
+    list somebody wrote -- they are whatever is declared, which is why this check gets
+    stronger on its own as the vocabulary grows.
+    """
+    rivals = []
+    for other in aggregate_names():
+        if other == kind:
+            continue
+        try:
+            if _agrees_with(fn, _AGGREGATES[other]["fn"]):
+                rivals.append(other)
+        except (KeyError, TypeError):
+            continue
+    return rivals
 
 
 def _law_is_falsifiable(kind: str, fn, laws) -> str | None:
@@ -593,6 +647,12 @@ def declare_aggregate(kind: str, words, fn, laws=()) -> None:
     reason = _law_is_falsifiable(kind, fn, tuple(laws))
     if reason is not None:
         raise ValueError(reason)
+    same_as = indistinguishable_from(kind, fn)
+    if same_as:
+        raise ValueError(
+            f"{kind}: this arithmetic is the SAME FUNCTION as {', '.join(same_as)} on "
+            "every value it was shown, so it adds no capability -- a new name for an "
+            "operator that already exists is not a new operator")
     _AGG_WORDS[kind] = {str(w).strip().lower() for w in words}
     _AGGREGATES[kind] = {"fn": fn, "laws": tuple(laws)}
 
