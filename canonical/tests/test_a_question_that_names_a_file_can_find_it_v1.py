@@ -511,3 +511,58 @@ def test_a_name_hit_beside_a_body_hit_does_not_cover_the_body_term():
     named_hits = [h for h in answer["hits"]
                   if h.get("matched") in ("filename", "listing") and h.get("term") == "notes"]
     assert named_hits, "the fixture must produce a name hit carrying `notes`"
+
+
+# ---------------------------------------------------------------------------
+# A refusal must never be a confident claim about a file that was never opened.
+# ---------------------------------------------------------------------------
+
+def test_a_csv_is_text_and_can_be_searched():
+    """`.csv` was not in the extension list, so the door skipped every CSV.
+
+    It would answer "how many rows are in sales.csv" while refusing "what is amount in
+    sales.csv" with NOT_IN_NAMED_FILE -- asserting a word absent from a file it never
+    read. That is the worst shape of wrong: the refusal names a place it did not look.
+    """
+    root = _tree(**{"sales.csv": "region,amount\nnorth,100\nsouth,250\n"})
+    answer = I.answer("what is amount in sales.csv", root)
+    assert answer["verdict"] == "GROUNDED", answer["verdict"]
+    assert answer["unresolved_terms"] == []
+    assert answer["answered"] is True
+
+
+def test_text_ness_is_decided_from_the_bytes_not_a_list():
+    """The extension is a hint; the bytes are the fact."""
+    root = _tree(**{"Makefile": "all:\n\techo build\n",  # no extension at all
+                    "notes.rst": "# heading\n"})
+    assert I._is_readable_text(Path(root) / "Makefile") is True
+    assert I._is_readable_text(Path(root) / "notes.rst") is True
+
+    binary = Path(root) / "blob.dat"
+    binary.write_bytes(b"\x00\x01\x02binary")
+    assert I._is_readable_text(binary) is False
+
+
+def test_a_file_with_no_extension_can_be_named_and_read():
+    """`Makefile` has no dot, so `_FILE_MENTION` never saw it and it fell through to a
+    tree-wide search that reported the filename as an unresolved word."""
+    root = _tree(**{"Makefile": "all:\n\techo build\n"})
+    assert I._named_file("what does Makefile say", root) == "Makefile"
+    answer = I.answer("what does Makefile say", root)
+    assert answer["verdict"] == "READ", answer["verdict"]
+    assert answer["unresolved_terms"] == []
+
+
+def test_the_word_pass_does_not_invent_filenames():
+    """Only a word that IS a file here becomes the named file."""
+    root = _tree(**{"data.py": "x = 1\n"})
+    assert I._named_file("what is the profit in data.py", root) == "data.py"
+    assert I._named_file("what is the profit", root) is None
+
+
+def test_a_word_absent_from_a_readable_csv_is_reported_as_absent():
+    """The flip side: now that it CAN be searched, an absent word is a real refusal."""
+    root = _tree(**{"sales.csv": "region,amount\nnorth,100\n"})
+    answer = I.answer("what is zzz_absent in sales.csv", root)
+    assert answer["verdict"] == "NOT_IN_NAMED_FILE"
+    assert answer["unresolved_terms"] == ["zzz_absent"]

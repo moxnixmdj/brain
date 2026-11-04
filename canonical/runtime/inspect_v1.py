@@ -42,6 +42,18 @@ _SKIP = re.compile(
     re.I,
 )
 
+# AN EXTENSION LIST IS A GUESS ABOUT CONTENT; THE BYTES ARE THE FACT.
+#
+# `.csv` was not in the list, so `find` and `search_named` skipped every CSV -- while
+# `compute` happily counted their rows. The door would answer "how many rows are in
+# sales.csv" and refuse "what is amount in sales.csv" with NOT_IN_NAMED_FILE, a
+# confident claim that a word is absent from a file it never opened. That is the worst
+# kind of wrong: the refusal names a place it did not look.
+#
+# Adding `.csv` would fix the instance and leave the cause, so the list is now a hint
+# and the decision is made from the file itself: a NUL byte means binary, and valid
+# UTF-8 means text. Kept as a fast path for the common extensions so the ordinary case
+# does not pay for a read.
 _TEXT_SUFFIX = {
     ".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".json", ".toml", ".yml",
     ".yaml", ".md", ".rst", ".txt", ".cfg", ".ini", ".sh", ".html", ".css",
@@ -123,6 +135,31 @@ def listing(root: str, limit: int = 40) -> list[dict]:
     return out
 
 
+def _is_readable_text(path: Path) -> bool:
+    """Is this file text a person could read out?
+
+    Extension first as a fast path, then the bytes. A file with no extension at all --
+    `Makefile`, `Dockerfile`, a `.gitignore`-less script -- is text and was previously
+    invisible to the door, which is the same defect as the missing `.csv` entry from the
+    other side.
+    """
+    if path.suffix.lower() in _TEXT_SUFFIX:
+        return True
+    try:
+        if path.stat().st_size > _MAX_BYTES:
+            return False
+        head = path.read_bytes()[:4096]
+    except OSError:
+        return False
+    if b"\x00" in head:
+        return False
+    try:
+        head.decode("utf-8")
+    except UnicodeDecodeError:
+        return False
+    return True
+
+
 def find(root: str, terms: list[str], limit: int = 40) -> list[dict]:
     """Where the project mentions these words.
 
@@ -150,7 +187,7 @@ def find(root: str, terms: list[str], limit: int = 40) -> list[dict]:
         rel = path.relative_to(base).as_posix()
         if _SKIP.search(rel):
             continue
-        if path.suffix.lower() not in _TEXT_SUFFIX:
+        if not _is_readable_text(path):
             continue
         # A QUESTION ABOUT A FILE NAMES THE FILE, AND THAT NAME IS NOT IN ITS BODY.
         #
@@ -238,13 +275,26 @@ _FILE_MENTION = re.compile(r"[A-Za-z0-9_.\-/]+\.[A-Za-z0-9]{1,6}\b")
 
 
 def _named_file(question: str, root: str) -> str | None:
-    """The file the question is about, if it names exactly one that exists here."""
+    """The file the question is about, if it names exactly one that exists here.
+
+    Two passes, because a file is named by a path or by a bare word that happens to be
+    a file. `Makefile` has no extension and was therefore never a `_FILE_MENTION`, so
+    "what does Makefile say" did not recognise the file it named and fell back to
+    searching the tree. The word pass only accepts words that ARE files here, so an
+    ordinary noun in the question does not become a filename by accident.
+    """
     base = Path(root)
-    found = []
-    for m in _FILE_MENTION.finditer(question or ""):
+    text = question or ""
+    found: list[str] = []
+    for m in _FILE_MENTION.finditer(text):
         cand = m.group(0)
-        if (base / cand).is_file():
+        if (base / cand).is_file() and cand not in found:
             found.append(cand)
+    if not found:
+        for word in re.findall(r"[A-Za-z0-9_.\-]+", text):
+            cand = word.strip(".,;:\"'()")
+            if cand and cand not in found and (base / cand).is_file():
+                found.append(cand)
     return found[0] if len(found) == 1 else None
 
 
@@ -343,7 +393,7 @@ def search_named(root: str, rel: str, terms: list[str], limit: int = 40) -> list
     path = Path(root) / rel
     if not path.is_file():
         return []
-    if path.suffix.lower() not in _TEXT_SUFFIX:
+    if not _is_readable_text(path):
         return []
     try:
         if path.stat().st_size > _MAX_BYTES:
