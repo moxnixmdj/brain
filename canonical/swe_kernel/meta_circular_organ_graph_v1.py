@@ -1503,53 +1503,125 @@ def _solve_affine_cofactor(
 
 def _detected_cofactors(
     examples: Sequence[tuple[tuple[Any, ...], Any]], k: int, param: str
-) -> list[tuple[str, str]]:
-    """Co-factors the DIFFERENCE TEST says are present, rather than ones that were anticipated.
+) -> list[tuple[str, str, Any]]:
+    """Co-factors DETECTED by differencing, at any polynomial degree and for exponentials.
 
-    `D_k(x) = y(x+k) - y(x)` equals zero for any period-k table, `c*k` for an affine co-factor, and a
-    non-constant sequence otherwise. That third case is the interesting one: it means a co-factor
-    whose difference is itself structured. The test reports it; the grammar then only has to express
-    what was DETECTED.
+    Round 29 replaced a handwritten cofactor list [x, 2x, x*x, const] with the differencing rule
 
-    Returns `(name, expression)` pairs to try. Deliberately empty rather than padded with guesses:
-    an undetected co-factor must produce a refusal, not a lucky hit, because a hit from an unmeasured
-    rule cannot be told apart from one that happened to fit.
+        D_k(x) = y(x+k) - y(x) = s(x+k) - s(x)
+
+    and recovered affine and QUADRATIC coefficients. That was still two shapes -- a shorter list, not
+    no list. Measured 2026-11-04: `T(x) + x**3` and `T(x) + 2**x` both returned
+    CONTRADICTORY_OR_OUT_OF_GRAMMAR. The degree was the next thing I had typed.
+
+    The general rule is the same rule. Difference at lag k once to kill the table, then IDENTIFY what
+    survives rather than assume its shape:
+
+    POLYNOMIAL. If s(x) = a*x^d then D_k has degree d-1, so unit-differencing D_k d-1 times leaves a
+    constant
+        C = a * d * k * (d-1)!   =>   a = C / (k * d!)
+    Verified independently for d=2,3,4 at k=3 and k=5: the constant came back 6, 18, 72 and 10, 30,
+    120, and C/(k*d!) recovered a=1 exactly every time. The DEGREE is the number of differences it
+    took to flatten, which is measured, not searched.
+
+    EXPONENTIAL. If s(x) = A*r^x then D_k(x) = A*r^x*(r^k - 1), whose consecutive RATIO is exactly r.
+    So a constant ratio identifies base r with no fitting, for any r > 1.
+
+    Anything that is neither refuses. That is the correct answer and it is also the guarantee that a
+    success here cannot be a lucky fit: the shape is named before the block is solved.
     """
-    # A quadratic co-factor is DETECTED, not listed, and the detection is a difference of
-    # differences. If s(x) = a*x*x then
-    #     D_k(x)  = 2*a*k*x + a*k*k
-    # so the SECOND difference D_k(x+1) - D_k(x) = 2*a*k is constant, and `a` is that constant over
-    # 2k. Two differences are what separates a quadratic from a line: a line has a constant first
-    # difference and a zero second one, so it is already covered by the division rule above and
-    # cannot be double-counted here.
-    #
-    # MEASURED 2026-11-04: this rule was the thing the handwritten entry `x*x` was standing in for,
-    # and removing that entry without adding the rule silently cost `T(x) + x*x` -- it went from
-    # DISAMBIGUATED to HELD_OUT_REFUTED, which is a capability loss disguised as a cleanup. The
-    # entry was never the problem on its own; the problem was that nothing could DERIVE it.
     table = {float(xin[0]): float(outv) for xin, outv in examples}
-    firsts: dict[float, float] = {}
-    for x, y in table.items():
-        y_next = table.get(x + float(k))
-        if y_next is not None:
-            firsts[x] = y_next - y
-    seconds = [
-        firsts[x + 1.0] - firsts[x]
-        for x in sorted(firsts)
-        if (x + 1.0) in firsts
-    ]
-    if len(seconds) >= 2 and (max(seconds) - min(seconds)) <= 1e-9:
-        second = seconds[0]
-        if abs(second) > 1e-12:
-            a = second / (2.0 * float(k))
-            return [
-                (
-                    f"table_k{k}_plus_{a:g}x2",
-                    f"({a!r} * {param} * {param})",
-                    (lambda c: lambda x: c * x * x)(a),
-                )
-            ]
-    return []  # type: ignore[return-value]
+    order = sorted(table)
+    # Only contiguous stretches can be unit-differenced, and only points with their lag-k partner can
+    # form D_k at all. Building both restrictions here keeps every downstream test on real evidence.
+    contig: list[float] = []
+    run: list[float] = []
+    for i, x in enumerate(order):
+        if i and abs(x - order[i - 1] - 1.0) > 1e-12:
+            if len(run) > len(contig):
+                contig = run
+            run = []
+        run.append(x)
+    if len(run) > len(contig):
+        contig = run
+    if len(contig) < 4:
+        return []
+    contig_set = set(contig)
+    pairs = [(x, x + float(k)) for x in contig if (x + float(k)) in contig_set]
+    if len(pairs) < 5:
+        return []
+
+    # D_k on the contiguous stretch, in x order.
+    dk: list[float] = []
+    for x, _xk in pairs:
+        dk.append(table[x + float(k)] - table[x])
+    # Trim to the longest run that is actually consecutive in D_k's own index so unit differencing is
+    # meaningful: the pairs are consecutive in x by construction of `contig`.
+    if len(dk) < 5:
+        return []
+
+    scale = max(1.0, max(abs(v) for v in dk))
+
+    def _flat(seq: Sequence[float]) -> float | None:
+        if not seq:
+            return None
+        lo, hi = min(seq), max(seq)
+        return seq[0] if (hi - lo) <= 1e-7 * max(1.0, scale) else None
+
+    # --- POLYNOMIAL: d-1 differences of D_k leave constant C = a*k*d!
+    # A SHORT DIFFERENCE SEQUENCE ALWAYS FLATTENS, BY EXHAUSTION. Measured 2026-11-04: with few
+    # points the detector reported `poly6`, `poly8` -- a degree that merely means "fewer samples than
+    # terms". That is not a discovery, it is arithmetic running out of room, and it is the same error
+    # as reading a budget limit as a statement about the grammar.
+    #
+    # The fix is not a bigger cap. It is that a fit must have MARGIN: at least two points of
+    # redundancy beyond the degree it claims, so the flatness is supported by data and not by the
+    # absence of it. Otherwise the detector reports nothing and the creature refuses, which is the
+    # honest outcome when the evidence cannot yet distinguish a polynomial from an exponential.
+    seq = list(dk)
+    depth = 0
+    while 1 <= len(seq) and depth < 8:
+        c = _flat(seq)
+        if c is not None:
+            d = depth + 1  # degree of s
+            if len(dk) < d + 2:
+                # Not enough redundancy to believe this degree. Fall through to the exponential test,
+                # and if that also fails, refuse.
+                break
+            denom = float(k) * math.factorial(d)
+            a = c / denom if abs(denom) > 1e-12 else 0.0
+            if abs(a) > 1e-12:
+                return [
+                    (
+                        f"table_k{k}_plus_poly{d}",
+                        f"({a!r} * ({param} ** {d}))",
+                        (lambda co, dd: lambda x: co * (x ** dd))(a, d),
+                    )
+                ]
+            break
+        seq = [seq[i + 1] - seq[i] for i in range(len(seq) - 1)]
+        depth += 1
+
+    # --- EXPONENTIAL: constant ratio of D_k is the base.
+    if all(abs(v) > 1e-12 for v in dk):
+        ratios = [dk[i + 1] / dk[i] for i in range(len(dk) - 1)]
+        if (max(ratios) - min(ratios)) <= 1e-9 * max(1.0, abs(ratios[0])) and abs(ratios[0]) > 1e-9:
+            r = ratios[0]
+            # A is not fitted: pick the point whose x is smallest and solve after removing the table.
+            # The table block is solved downstream, so the coefficient here only has to be consistent
+            # with D_k, and D_k = A*r^x*(r^k - 1) gives A directly.
+            x0 = pairs[0][0]
+            factor = (r ** float(k)) - 1.0
+            if abs(factor) > 1e-12:
+                A = dk[0] / ((r ** x0) * factor)
+                return [
+                    (
+                        f"table_k{k}_plus_exp{r:g}",
+                        f"({A!r} * ({r!r} ** {param}))",
+                        (lambda co, rr: lambda x: co * (rr ** x))(A, r),
+                    )
+                ]
+    return []
 
 
 def _solve_composed_table(

@@ -30950,7 +30950,7 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 312,
+  "knowledge_documents": 313,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6697,
   "routing_tokens": 2360,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "79c0c8518d0f55e148002937b1905a8f44c169b339e3496b103a9065c0f22a1c"
+  "value": "8a0d04af7e314b0a61f4374da552640b2fc592e8aad42ea77df3f5c401d15e61"
  },
  "engines": [
   {
@@ -54904,6 +54904,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 4915,
+   "headings": [
+    "Round 30: the degree was also mine",
+    "What round 29 actually achieved, stated precisely",
+    "The rule, generalised",
+    "Measured — all 0 wrong on held-out",
+    "The defect I introduced in this very round, and caught",
+    "A nondeterminism that was not one",
+    "Why this is the right layer",
+    "Measured state"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_DEGREE_WAS_ALSO_MINE_20261104_V1.md",
+   "sha256": "486f6defb853d09f92a44b07f7288082ec382ffa96165269173f49544e0a7c08",
+   "summary": "Round 29 removed a handwritten cofactor list and replaced it with a rule. That was real. This round found that the rule had **a list inside it**, one layer down.",
+   "terms": {
+    "26": 2,
+    "29": 5,
+    "2x": 2,
+    "30": 4,
+    "about": 2,
+    "actually": 2,
+    "affine": 2,
+    "after": 2,
+    "algebra": 2,
+    "all": 3,
+    "also": 2,
+    "answer": 2,
+    "any": 4,
+    "back": 2,
+    "base": 5,
+    "bases": 2,
+    "before": 5,
+    "coefficients": 3,
+    "constant": 3,
+    "d_k": 3,
+    "degree": 8,
+    "detector": 3,
+    "difference": 4,
+    "exactly": 4,
+    "exponential": 4,
+    "had": 3,
+    "lag": 4,
+    "list": 5,
+    "measured": 4,
+    "mine": 3,
+    "no": 8,
+    "not": 7,
+    "now": 3,
+    "one": 6,
+    "period": 3,
+    "points": 4,
+    "polynomial": 3,
+    "recovered": 3,
+    "refused": 8,
+    "round": 12,
+    "rule": 3,
+    "same": 5,
+    "solved": 9,
+    "t+x": 4,
+    "than": 3,
+    "typed": 4,
+    "would": 3,
+    "wrong": 3
+   },
+   "title": "Round 30: the degree was also mine",
+   "title_terms": [
+    "30",
+    "also",
+    "degree",
+    "mine",
+    "round"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6040,
    "headings": [
     "THE GRAMMAR CAN NOW FIND WHAT NO WRITER KNEW",
@@ -68734,10 +68810,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1106,
+  "included_source_count": 1107,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5344d6ee2196cbbc50a00b2c6caecc05f081a08567634f8f2ee0796dbc6dfccf"
+  "source_tree_digest": "12daaed6d7c03ca240403d2fb7f92ec4c1893dadfefcaae8813bfec4243c24ca"
  },
  "research_index": [
   {
@@ -224305,6 +224381,29 @@
    }
   },
   {
+   "action_id": "THE_DEGREE_WAS_ALSO_MINE_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/THE_DEGREE_WAS_ALSO_MINE_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_DEGREE_WAS_ALSO_MINE_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "48babb2451911fe66cc25b32b71c26a477c5b772b4c6a7ba143094f9fef6ed3e",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "also": 1,
+    "degree": 1,
+    "derive_what_is_a_theorem_and_name_what_is_only_a_policy": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "mine": 1,
+    "only_a_claim_the_evidence_could_have_refuted_may_become_permanent__zero_capability_credit__zero_terminal_credit__no_family_flipped__not_emergence": 1,
+    "the_crystallizer_asked_does_it_fit_and_accepted_the_answer_it_never_asked_could_this_have_been_wrong_so_three_observations_that_exactly_determine_an_affine_fits_three_parameters_were_treated_as_corroboration_and_a_body_wrong_on_every_unseen_input_became_a_law": 1,
+    "the_degree_was_also_mine_20261104_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1",
    "capability": false,
    "date": "2026-11-04",
@@ -224657,29 +224756,6 @@
     "v1": 2,
     "word": 2,
     "wrong": 4
-   }
-  },
-  {
-   "action_id": "THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1",
-   "capability": false,
-   "date": "2026-11-04",
-   "id": "research:canonical/action_intents/THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_LANGUAGE_WAS_A_LIST_I_TYPED_20261104_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a94df36a10a5f83c3e5ceee0b505b852e6a01e4ee679ac464af5b81c22ec1fb8",
-   "status": "",
-   "terms": {
-    "20261104": 1,
-    "derive_what_is_a_theorem_and_name_what_is_only_a_policy": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "language": 1,
-    "list": 1,
-    "only_a_claim_the_evidence_could_have_refuted_may_become_permanent__zero_capability_credit__zero_terminal_credit__no_family_flipped__not_emergence": 1,
-    "the_crystallizer_asked_does_it_fit_and_accepted_the_answer_it_never_asked_could_this_have_been_wrong_so_three_observations_that_exactly_determine_an_affine_fits_three_parameters_were_treated_as_corroboration_and_a_body_wrong_on_every_unseen_input_became_a_law": 1,
-    "the_language_was_a_list_i_typed_20261104_v1": 1,
-    "typed": 1,
-    "v1": 1
    }
   },
   {
