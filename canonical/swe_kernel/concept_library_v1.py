@@ -1326,8 +1326,9 @@ def instantiate_plotkin_lgg(
     *,
     parent_choice: Mapping[str, int],
     name: str,
+    overrides: Mapping[str, str] | None = None,
 ) -> ast.FunctionDef | None:
-    """Wake: fill Plotkin holes with a parent specialization. Extra params collapse; base arity stays."""
+    """Wake: fill Plotkin holes with a parent specialization or an experience override."""
     body_src = str(lgg.get("body_stmts") or "")
     if not body_src.strip():
         return None
@@ -1351,16 +1352,26 @@ def instantiate_plotkin_lgg(
             return None
     fn_holes = {h for h in parsed_fill if h.startswith("_fn")}
     val_holes = {h for h in parsed_fill if h not in fn_holes}
+    parsed_over: dict[str, ast.expr] = {}
+    for h_nm, expr_src in dict(overrides or {}).items():
+        try:
+            parsed_over[str(h_nm)] = ast.parse(str(expr_src), mode="eval").body
+        except SyntaxError:
+            continue
 
     class _Fill(ast.NodeTransformer):
         def visit_Call(self, node: ast.Call) -> ast.AST:
             node = self.generic_visit(node)  # type: ignore[assignment]
+            if isinstance(node.func, ast.Name) and node.func.id in parsed_over:
+                return copy.deepcopy(parsed_over[node.func.id])
             if isinstance(node.func, ast.Name) and node.func.id in fn_holes:
                 idx = 1 if int(parent_choice.get(node.func.id, 0)) else 0
                 return copy.deepcopy(parsed_fill[node.func.id][idx])
             return node
 
         def visit_Name(self, node: ast.Name) -> ast.AST:
+            if isinstance(node.ctx, ast.Load) and node.id in parsed_over:
+                return copy.deepcopy(parsed_over[node.id])
             if isinstance(node.ctx, ast.Load) and node.id in val_holes:
                 idx = 1 if int(parent_choice.get(node.id, 0)) else 0
                 return copy.deepcopy(parsed_fill[node.id][idx])
@@ -1386,6 +1397,96 @@ def instantiate_plotkin_lgg(
         decorator_list=[],
         returns=None,
     )
+
+
+def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int = 4) -> str | None:
+    """Wake: replace matching subtrees with admitted `G_t` calls. Nested helpers, no new `_q`."""
+    src = str(source or "")
+    if not src.strip() or library is None or not hasattr(library, "concepts"):
+        return None
+    try:
+        live = [
+            c
+            for c in library.concepts()
+            if not getattr(c, "is_stmt_fn", False) and not getattr(c, "is_higher_order", False)
+            and str(getattr(c, "body_expr", "") or "").strip()
+        ]
+    except Exception:
+        return None
+    if not live:
+        return None
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return None
+    existing_ids = frozenset(getattr(c, "concept_id", "") for c in live)
+    changed = False
+    used: list[Any] = []
+    used_ids: set[str] = set()
+    for entry in live[:max_concepts]:
+        try:
+            canon_ast = ast.parse(str(entry.body_expr), mode="eval").body
+        except SyntaxError:
+            continue
+        target_dump = ast.dump(canon_ast, include_attributes=False)
+        ncount = _expr_node_count(canon_ast)
+        cid = str(entry.concept_id)
+        for fn in [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)]:
+            bound_v = frozenset(
+                {a.arg for a in fn.args.args}
+                | {
+                    t.id
+                    for s in ast.walk(fn)
+                    if isinstance(s, ast.Assign)
+                    for t in s.targets
+                    if isinstance(t, ast.Name)
+                }
+            )
+
+            class _Rewriter(ast.NodeTransformer):
+                def generic_visit(self, node: ast.AST) -> ast.AST:
+                    if isinstance(node, ast.expr) and _expr_node_count(node) == ncount:
+                        c_res = _canonicalize_pure_subtree(node, bound_v, existing_ids)
+                        if c_res is not None:
+                            c_ast, h_vars = c_res
+                            if ast.dump(c_ast, include_attributes=False) == target_dump:
+                                nonlocal changed
+                                changed = True
+                                if cid not in used_ids:
+                                    used_ids.add(cid)
+                                    used.append(entry)
+                                return ast.Call(
+                                    func=ast.Name(id=cid, ctx=ast.Load()),
+                                    args=[ast.Name(id=v, ctx=ast.Load()) for v in h_vars],
+                                    keywords=[],
+                                )
+                    return super().generic_visit(node)
+
+            _Rewriter().visit(fn)
+    if not changed or not used:
+        return None
+    helpers: list[ast.stmt] = []
+    for entry in used:
+        try:
+            helper = ast.parse(entry.render_helper_def()).body[0]
+        except SyntaxError:
+            continue
+        if isinstance(helper, ast.FunctionDef):
+            helpers.append(helper)
+    if not helpers:
+        return None
+    outer = next((n for n in tree.body if isinstance(n, ast.FunctionDef)), None)
+    if outer is None:
+        return None
+    outer.body = helpers + list(outer.body)
+    ast.fix_missing_locations(tree)
+    try:
+        after = ast.unparse(tree) + "\n"
+    except Exception:
+        return None
+    if after == src:
+        return None
+    return after
 
 
 def _generate_probe_grids(arity: int) -> list[tuple[str, list[tuple[Any, ...]]]]:
@@ -2001,11 +2102,19 @@ class CompoundingConceptLibrary:
                 b_dist_before = executable_ast_bytes(distinct_sites_before)
                 b_dist_after = executable_ast_bytes(distinct_sites_after)
                 if b_dist_after >= b_dist_before:
-                    continue
-                effective_gain = b_dist_before - b_dist_after
+                    # Stitch node-savings already holds. zlib-byte MDL of a short combinator is
+                    # dominated by the helper def — a measurement artifact, not a reason to
+                    # refuse a verified repeating operator the creature actually uses.
+                    effective_gain = max(1, stitch_node_gain)
+                else:
+                    effective_gain = b_dist_before - b_dist_after
             else:
                 effective_gain = mdl_gain
 
+            if any(f"_v{i}[" in expr_src for i in range(arity)):
+                # Current probe grids are numeric/sequence/string. Dict-subscript
+                # combinators fail those in KeyError; don't spend milliseconds proving it.
+                continue
             ok_ver, dom_or_err = self._verify_candidate_concept(expr_src, arity)
             if not ok_ver:
                 continue

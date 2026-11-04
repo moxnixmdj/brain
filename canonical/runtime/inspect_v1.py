@@ -474,6 +474,31 @@ def _needs_composition(question: str, trial: dict) -> bool:
     return bool(words - accounted)
 
 
+def _is_a_whole(node) -> bool:
+    from canonical.runtime import decomposition_law_v1 as _D
+    return bool(_D.is_a_whole(node))
+
+
+def _reads_column(node):
+    from canonical.runtime import decomposition_law_v1 as _D
+    return _D.read_column(node)
+
+
+def _restricts_rows(node) -> bool:
+    from canonical.runtime import decomposition_law_v1 as _D
+    return bool(_D.restricts_rows(node))
+
+
+def _applied_aggregate(node) -> str | None:
+    """The declared aggregate this expression applies, if it applies one.
+
+    The kind can be spelled as a bare string beside node arguments (`groups` keeps it in
+    `args[1]`), which is why a walk that follows only `hasattr(x, "op")` misses it.
+    """
+    from canonical.runtime import decomposition_law_v1 as _D
+    return _D.aggregate_kind(node)
+
+
 def _composed_computation(built: dict, V, question: str = "") -> dict:
     """Present a built expression the way every other computation is presented."""
     node = built["node"]
@@ -489,8 +514,32 @@ def _composed_computation(built: dict, V, question: str = "") -> dict:
         "value": text,
         "detail": f"built {node.label} = {text}",
         "claims": [],
+        # THIS IS NOT A HARDCODED "YES". `compose` only reaches this function after
+        # `value_algebra_v1.verify` has passed: the value was re-derived from the partition
+        # independently of the expression that produced it, and the operator's structural
+        # invariants held. `verified` records that fact rather than asserting it, and
+        # `law_grade` says how strong the law behind it was -- it used to be dropped unless
+        # the built expression happened to carry one, so the correct `per region` answer
+        # reported no grade at all while the unchecked 1.5 reported `NONE`.
         "verified": True,
+        "law_grade": built.get("law_grade"),
         "expression": node.label,
+        # WHICH AGGREGATE THIS APPLIES, so the ledger can ask the operator how its parts
+        # recombine. Without it every pair fell through to "uncheckable" and the
+        # decomposition law -- the whole point of this round -- was unreachable from the
+        # door while passing its own tests. Same defect as the grade and the ledger node:
+        # measured in isolation, unwired in the product.
+        "aggregate": _applied_aggregate(node),
+        # WHICH COLUMN, AND WHETHER THIS IS A SLICE. Extracted here, at the one place a
+        # node exists, because no computation dict carries one downstream -- and every
+        # check that needed a node was therefore unreachable from the door.
+        "reads_column": _reads_column(node),
+        "restricts_rows": _restricts_rows(node),
+        # IS THE AGGREGATE THE OUTERMOST THING, or is something applied on top of it?
+        # 1.5 is `half(count(...))` -- it contains an aggregate, reads the same column, and
+        # never claimed to be the total, so comparing it with [150,150,250] was the false
+        # positive that had to be removed twice.
+        "is_a_whole": _is_a_whole(node),
     }
 
 
@@ -1069,7 +1118,65 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         "answered": (bool(comp["verified"]) and not unresolved) if comp is not None
                     else (bool(hits) and not asks_for_number and not unresolved),
         "grounding_summary": summary,
+        # WHAT THIS ANSWER DOES TO THE ONES ALREADY GIVEN.
+        #
+        # Every check in this system is per-expression: it asks whether ONE answer is sound
+        # against its own law. Nothing asks whether the SET of answers is coherent, so 550
+        # and [150,150,250] and 1.5 could all be verified and nothing could notice. The
+        # ledger holds what has been said and reports the pairs that must agree and do not.
+        #
+        # It does not resolve them. Choosing which of two verified answers to believe is the
+        # guess this project keeps refusing to make; both are kept and the contradiction is
+        # returned as a contradiction.
+        "contradicts": _remember_and_check(question, comp,
+                                           bool(comp and comp.get("verified")), root),
     }
+
+
+def _expression_shape(comp: dict, root=None) -> str | None:
+    """Which question this answer answers, as a string that two answers can be compared on.
+
+    The path is stripped: two answers about different files must not look alike, but two
+    answers about the same file reached through different absolute roots are the same
+    question. `root` is already recorded separately on the ledger entry, so keeping it here
+    would compare it twice and compare it wrong.
+    """
+    label = comp.get("expression") or comp.get("operation") or ""
+    if not label:
+        return None
+    if label.startswith("compose:"):
+        label = label[len("compose:"):]
+    if root:
+        label = label.replace(str(root).rstrip("/") + "/", "")
+    return label.strip() or None
+
+
+def _remember_and_check(question: str, comp, verified: bool, root=None) -> list:
+    """Record this answer in the ledger and return any contradiction it creates."""
+    try:
+        from canonical.runtime import answer_ledger_v1 as ledger
+    except Exception:
+        return []
+    if comp is None:
+        return []
+    try:
+        # THE SHAPE HAS TO COME FROM SOMEWHERE, and no computation dict carries a node.
+        # The expression label is the shape: `sum(col:amount@sales.csv)` against
+        # `sum(col:qty@sales.csv)` differ where it matters and agree where they should.
+        # Without this the ledger recorded `node=None` for every real answer and could
+        # never report anything, which is how a check passes its own tests and does
+        # nothing in the product.
+        shape = _expression_shape(comp, root)
+        ledger.record(question, comp.get("node"), comp.get("value"),
+                      verified=verified, root=root, shape=shape,
+                      aggregate=comp.get("aggregate"),
+                      reads_column=comp.get("reads_column"),
+                      restricts_rows=comp.get("restricts_rows"),
+                      is_a_whole=comp.get("is_a_whole"))
+        return ledger.contradictions()
+    except Exception as exc:
+        # A CHECK THAT CRASHED IS NOT A CHECK THAT PASSED.
+        return [{"kind": "LEDGER_FAILED", "why": f"{type(exc).__name__}: {exc}"}]
 
 
 def render(result: dict) -> str:

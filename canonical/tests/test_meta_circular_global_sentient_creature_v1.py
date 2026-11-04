@@ -560,6 +560,79 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
         self.assertTrue(rec_calls)
         self.assertNotIn("or[", ast.unparse(q_fn).replace(" ", ""))
 
+    def test_sleep_admits_policy_concepts_and_wake_rewrites_the_organ(self):
+        """G_t grows from living POLICY programs; wake instantiates — not a static `_q` recipe."""
+        from canonical.swe_kernel.concept_library_v1 import (
+            CompoundingConceptLibrary,
+            rewrite_source_with_concepts,
+        )
+
+        factory = MCOG.compile_policy_organ()
+        structs = MCOG._structural_policy_mutations(factory.source_code)
+        self.assertGreaterEqual(len(structs), 2)
+        with tempfile.TemporaryDirectory() as td:
+            lib = CompoundingConceptLibrary(pathlib.Path(td) / "g.json")
+            res = lib.sleep_abstract([factory.source_code, structs[0], structs[1]])
+            self.assertGreaterEqual(res["admitted_count"], 1, res)
+            woken = rewrite_source_with_concepts(factory.source_code, lib)
+            self.assertIsNotNone(woken)
+            self.assertNotEqual(woken, factory.source_code)
+            self.assertTrue(any(c.concept_id in woken for c in lib.concepts()))
+            organ = MCOG.make_organ(
+                stratum=MCOG.POLICY,
+                name="instrumental_policy",
+                task_signature="policy::instrumental_q",
+                entrypoint="score_actions",
+                source_code=woken,
+            )
+            self.assertTrue(MCOG.admit_policy_organ(organ).get("ok"))
+            ranked = organ.invoke(
+                [
+                    {"id": "shiny", "value": 12.0, "cost": 1.0},
+                    {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+                    {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+                ],
+                3.0,
+                None,
+            )
+            self.assertEqual(ranked[0]["id"], "forge_sensor")
+
+    def test_experience_fills_plotkin_holes_from_skill_organs(self):
+        """HO child-scorer hole is filled by a synthesized SKILL, not a parent AST copy."""
+        factory = MCOG.compile_policy_organ(
+            learned_immediate="if failed == 1:\n    return (value * 0)\nreturn value\n"
+        )
+        self.assertIn("def _immediate", factory.source_code)
+        flats = MCOG._structural_policy_mutations(factory.source_code)
+        self.assertTrue(flats)
+        tmpl = "_immediate(by_id[{u}]['value'], by_id[{u}]['cost'], burns.get({u}, 0.0))"
+        kids = MCOG._hors_crossover_mutations(
+            factory.source_code, flats[0], skill_templates=(tmpl,)
+        )
+        self.assertTrue(any("_immediate(" in k and "by_id[" in k for k in kids))
+        board = [
+            {"id": "shiny", "value": 12.0, "cost": 1.0},
+            {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+            {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+        ]
+        admitted = 0
+        for src in kids:
+            if "_immediate(" not in src:
+                continue
+            organ = MCOG.make_organ(
+                stratum=MCOG.POLICY,
+                name="instrumental_policy",
+                task_signature="policy::instrumental_q",
+                entrypoint="score_actions",
+                source_code=src,
+            )
+            if not MCOG.admit_policy_organ(organ).get("ok"):
+                continue
+            ranked = organ.invoke(board, 3.0, None)
+            self.assertEqual(ranked[0]["id"], "forge_sensor")
+            admitted += 1
+        self.assertGreaterEqual(admitted, 1)
+
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")
         self.assertIsNotNone(simplified)

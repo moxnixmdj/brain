@@ -3413,11 +3413,16 @@ def _nested_named_function(source_code: str, name: str) -> ast.FunctionDef | Non
     return None
 
 
-def _hors_crossover_mutations(src_a: str, src_b: str) -> list[str]:
-    """Invent a POLICY genome by Plotkin LGG of two living organs, filling holes from both parents.
+def _hors_crossover_mutations(
+    src_a: str,
+    src_b: str,
+    *,
+    skill_templates: Sequence[str] = (),
+) -> list[str]:
+    """Invent a POLICY genome by Plotkin LGG, filling holes from parents AND experience SKILLs.
 
-    Not a compiler pass on one `_q`: rec × flat anti-unifies the child-scorer and the candidate
-    set, then mixed instantiations are new programs Ring-0 still has to admit.
+    Parent mixes recombine living genomes. `skill_templates` are `{u}`-exprs from synthesized
+    SKILL organs (traces), not parent source — the operator in the hole comes from the world.
     """
     src_a = str(src_a or "")
     src_b = str(src_b or "")
@@ -3448,18 +3453,10 @@ def _hors_crossover_mutations(src_a: str, src_b: str) -> list[str]:
     n_extra = len(extra_holes)
     out: list[str] = []
     seen: set[str] = {src_a, src_b}
-    # Mixed fillings only: skip all-parent-A and all-parent-B (those ARE the parents).
-    masks = range(1, (1 << n_extra) - 1) if n_extra >= 2 else range(1, 1 << n_extra)
-    for mask in masks:
-        if len(out) >= 4:
-            break
-        choice = {h: (mask >> i) & 1 for i, h in enumerate(extra_holes)}
-        try:
-            new_q = instantiate_plotkin_lgg(lgg, parent_choice=choice, name="_q")
-        except Exception:
-            continue
+
+    def _emit(new_q: ast.FunctionDef | None) -> None:
         if new_q is None:
-            continue
+            return
         for parent in (src_a, src_b):
             try:
                 tree = ast.parse(parent)
@@ -3477,6 +3474,52 @@ def _hors_crossover_mutations(src_a: str, src_b: str) -> list[str]:
             if text and text not in seen:
                 seen.add(text)
                 out.append(text)
+
+    # Mixed fillings only: skip all-parent-A and all-parent-B (those ARE the parents).
+    masks = range(1, (1 << n_extra) - 1) if n_extra >= 2 else range(1, 1 << n_extra)
+    for mask in masks:
+        if len(out) >= 4:
+            break
+        choice = {h: (mask >> i) & 1 for i, h in enumerate(extra_holes)}
+        try:
+            _emit(instantiate_plotkin_lgg(lgg, parent_choice=choice, name="_q"))
+        except Exception:
+            continue
+
+    # Experience: fill each arity-1 HO hole with a SKILL expr of the captured child id.
+    ho_params = [p for p, ar in (lgg.get("callable_params") or ()) if int(ar) == 1]
+    body_src = str(lgg.get("body_stmts") or "")
+    arg_by_fn: dict[str, str] = {}
+    try:
+        for nd in ast.walk(ast.parse(body_src)):
+            if (
+                isinstance(nd, ast.Call)
+                and isinstance(nd.func, ast.Name)
+                and nd.func.id in ho_params
+                and nd.args
+            ):
+                arg_by_fn.setdefault(nd.func.id, ast.unparse(nd.args[0]))
+    except SyntaxError:
+        arg_by_fn = {}
+    for tmpl in skill_templates:
+        if len(out) >= 6:
+            break
+        t = str(tmpl or "")
+        if not t or "{u}" not in t:
+            continue
+        for fn_nm, u_nm in arg_by_fn.items():
+            if len(out) >= 6:
+                break
+            expr = t.replace("{u}", u_nm)
+            choice = {h: 0 for h in extra_holes}
+            try:
+                _emit(
+                    instantiate_plotkin_lgg(
+                        lgg, parent_choice=choice, name="_q", overrides={fn_nm: expr}
+                    )
+                )
+            except Exception:
+                continue
     return out
 
 
@@ -3545,9 +3588,18 @@ def _successors_from_incumbent_source(
     peer_sources: Sequence[str] = (),
 ) -> list[str]:
     """RSA/egraph/`G_t` mutations of incumbent source. Not a factory."""
-    del concept_library  # used by callers when synthesizing bodies
     out: list[str] = []
     src = source_code
+    if concept_library is not None:
+        try:
+            from canonical.swe_kernel.concept_library_v1 import rewrite_source_with_concepts
+
+            woken = rewrite_source_with_concepts(src, concept_library)
+        except Exception:
+            woken = None
+        if woken:
+            out.append(woken)
+            src = woken
     if learned_immediate:
         patched = _apply_nested_fn(
             src,
@@ -3596,15 +3648,26 @@ def _successors_from_incumbent_source(
             structural.extend(_structural_policy_mutations(seed))
         except Exception:
             continue
+    skill_templates: list[str] = []
+    if "def _immediate" in src or "def _immediate" in source_code:
+        skill_templates.append(
+            "_immediate(by_id[{u}]['value'], by_id[{u}]['cost'], burns.get({u}, 0.0))"
+        )
+    if "def _combine" in src or "def _combine" in source_code:
+        skill_templates.append(
+            "_combine(by_id[{u}]['value'], by_id[{u}]['cost'], 0.0)"
+        )
     invented: list[str] = []
     for peer in [*peer_sources, *structural]:
         if not peer or peer == source_code:
             continue
         try:
-            invented.extend(_hors_crossover_mutations(source_code, peer))
+            invented.extend(
+                _hors_crossover_mutations(src, peer, skill_templates=skill_templates)
+            )
         except Exception:
             continue
-        if len(invented) >= 4:
+        if len(invented) >= 6:
             break
     rewritten: list[str] = []
     for s in [source_code, *out, *structural, *invented]:
@@ -4207,6 +4270,17 @@ class MetaCircularOrganGraph:
             boot.metadata["bootstrap_factory"] = True
             candidates.append(boot)
         else:
+            if self.concept_library is not None and hasattr(self.concept_library, "sleep_abstract"):
+                sleep_corpus = [o.source_code for o in self.organs_in_stratum(POLICY)[:8]]
+                try:
+                    sleep_corpus.extend(_structural_policy_mutations(incumbent.source_code)[:2])
+                except Exception:
+                    pass
+                if len(sleep_corpus) >= 2:
+                    try:
+                        self.concept_library.sleep_abstract(sleep_corpus)
+                    except Exception:
+                        pass
             md = incumbent.metadata or {}
             if md.get("learned_immediate") and isinstance(md.get("learned_immediate_src"), str):
                 if not learned:
