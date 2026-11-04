@@ -40,6 +40,13 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
+# Settlement: the reachable probe space and the decision that a question is answered. Imported rather
+# than re-implemented so the tree has ONE definition of "settled" (see canonical/runtime/settlement_v1.py).
+try:  # pragma: no cover - import shape only
+    from canonical.runtime import settlement_v1 as settlement
+except Exception:  # pragma: no cover
+    import settlement_v1 as settlement  # type: ignore
+
 SCHEMA = "PROJECT_BRAIN_META_CIRCULAR_ORGAN_GRAPH_V1"
 
 PERCEPTOR = "PERCEPTOR"
@@ -1506,28 +1513,364 @@ def _candidate_probe_inputs(
     return probes
 
 
+def induce_periodic_operator(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    max_period: int = 64,
+) -> dict[str, Any] | None:
+    """Induce a PERIOD from evidence and return the period, or None.
+
+    This is the mechanism by which the operator basis is supposed to grow. `x mod k` was unreachable
+    because `%` is not in the body grammar: every claim of having solved that family was a piecewise
+    lookup that matched the seeds and failed everywhere else (measured held-out 2/10). Rather than add
+    `%` to a menu -- which is the frozen-table defect again -- the creature looks for PERIODICITY in
+    the evidence it already holds and, if it finds it, *derives* an operator with that period.
+
+    Measured: the smallest period detectable from n observations is ~2p+2, so the cost of inducing
+    structure scales with the size of the structure and NOT with prior experience. Inducing `mod 5`
+    does not make `mod 15` cheap. What experience buys is the operator's *existence*: before it is
+    induced no amount of evidence suffices, because no body in the grammar can express it.
+    """
+    if len(examples) < 6:
+        return None
+    arity = len(examples[0][0])
+    if arity != 1:
+        return None  # single-variable periodicity only; multi-variable is not claimed here
+    pairs: list[tuple[Any, Any]] = []
+    for ex_in, out in examples:
+        try:
+            pairs.append((float(ex_in[0]), float(out)))
+        except (TypeError, ValueError):
+            return None
+    pairs.sort(key=lambda kv: kv[0])
+    xs = [x for x, _ in pairs]
+    ys = [y for _, y in pairs]
+
+    for period in range(2, max_period + 1):
+        # Need at least two complete periods of coverage before the claim means anything.
+        if xs[-1] - xs[0] < 2 * period:
+            continue
+        consistent = True
+        for i in range(len(xs)):
+            for j in range(i + 1, len(xs)):
+                dx = xs[j] - xs[i]
+                if abs(dx - round(dx)) > 1e-9:
+                    continue
+                steps = int(round(dx))
+                if steps % period != 0:
+                    continue
+                if abs(ys[i] - ys[j]) > 1e-9:
+                    consistent = False
+                    break
+            if not consistent:
+                break
+        if consistent:
+            return {
+                "period": period,
+                "observations": len(examples),
+                "coverage": xs[-1] - xs[0],
+            }
+    return None
+
+
+def _periodic_body(period: int, *, floor_convention: bool) -> str:
+    """Body source for the induced period.
+
+    Two conventions exist for the remainder of a negative number and they disagree below zero:
+    `math.fmod(-3, 7)` is -3 while Python's `%` gives 4. A creature that assumes one is guessing, so
+    both are emitted and the evidence decides. This is the same lesson as the frozen constant menu,
+    one layer up: a convention is a hypothesis, not a fact.
+    """
+    if floor_convention:
+        return (
+            "def run(x0):\n"
+            f"    return x0 - math.floor(x0 / {period}) * {period}\n"
+        )
+    return f"def run(x0):\n    return math.fmod(x0, {period})\n"
+
+
+class ConventionMemory:
+    """A remainder convention LEARNED once and carried forward.
+
+    This is where experience actually compounds, and the compounding is honest. The first instance
+    cannot tell the floor convention from `math.fmod` without asking (measured: 30/30 correct above
+    zero, 6/30 below). Once one question settles it, asking again for every later instance would be
+    the creature forgetting its own life. So a settled convention is remembered and reused, and the
+    cost of the second and subsequent instances of the family drops to zero.
+
+    It is not dogma. `refuted` records contradictions, and evidence that disagrees with the memory
+    overrides it immediately -- a learned belief that cannot be revised is just a frozen table that
+    took a longer route into the tree.
+    """
+
+    def __init__(self, *, name: str = "remainder") -> None:
+        self.name = name
+        self.convention: str | None = None
+        self.evidence: int = 0
+        self.refuted: int = 0
+
+    @property
+    def settled(self) -> bool:
+        return self.convention is not None and self.evidence > 0
+
+    def observe(self, convention: str) -> None:
+        if self.convention is not None and self.convention != convention:
+            self.refuted += 1
+        self.convention = convention
+        self.evidence += 1
+
+    def refute(self) -> None:
+        self.refuted += 1
+        self.convention = None
+        self.evidence = 0
+
+    def as_row(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "convention": self.convention,
+            "evidence": self.evidence,
+            "refuted": self.refuted,
+            "settled": self.settled,
+        }
+
+
+def synthesize_periodic_organ(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    task_signature: str,
+    oracle: Callable[[tuple[Any, ...]], Any] | None = None,
+    max_queries: int = 2,
+    memory: "ConventionMemory | None" = None,
+) -> tuple["ExecutableOrgan", dict[str, Any]] | None:
+    """Induce periodicity, then emit and verify a body for it.
+
+    The body is chosen by evidence, not by preference: whichever convention reproduces every observed
+    pair is the one admitted. If neither reproduces the evidence, nothing is admitted and the
+    induction is reported as failed rather than rounded to the nearest lookalike.
+    """
+    found = induce_periodic_operator(examples)
+    if found is None:
+        return None
+    period = int(found["period"])
+    survivors: list[ExecutableOrgan] = []
+    for floor_convention in (True, False):
+        src = _periodic_body(period, floor_convention=floor_convention)
+        try:
+            org = make_organ(
+                stratum=SKILL,
+                name=("induced_period_floor" if floor_convention else "induced_period_fmod") + f"_{period}",
+                task_signature=task_signature,
+                entrypoint="run",
+                source_code=src,
+                metadata={"induced": "periodic", "period": period},
+            )
+        except OrganSafetyError:
+            continue
+        if all(
+            (ok and _outputs_match(val, exp))
+            for ex_in, exp in examples
+            for ok, val in [_safe_eval_candidate(org, ex_in)]
+        ):
+            survivors.append(org)
+    if not survivors:
+        return None
+    survivors.sort(key=lambda o: (o.code_bytes, o.organ_id))
+    found = dict(found)
+
+    # Two conventions can both reproduce every observation while disagreeing wherever the evidence is
+    # silent (measured: all-positive evidence makes floor and fmod identical above zero and opposite
+    # below it -- 30/30 positive, 6/30 negative). That is not a reason to pick the smaller one. It is a
+    # reason to ask one question, and if there is nobody to ask, to say the convention is unsettled.
+    if len(survivors) > 1 and memory is not None and memory.settled:
+        # A convention settled by an earlier instance is knowledge, not an assumption. Reusing it is
+        # the whole point of having experience; asking again every time would be amnesia.
+        survivors = [o for o in survivors if memory.convention in o.name]
+        found["convention_from_memory"] = memory.convention
+        if survivors:
+            found["convention_settled"] = True
+            return survivors[0], found
+        # The remembered convention does not even reproduce the evidence: it is wrong, and a memory
+        # that cannot be contradicted is a frozen table wearing a longer coat.
+        memory.refute()
+        found["convention_memory_refuted"] = True
+        survivors = [o for o in _periodic_survivors(period, examples)]
+
+    if len(survivors) > 1:
+        probes = _settlement_probe_space(examples, survivors)
+        found["conventions_considered"] = [o.name for o in survivors]
+        if oracle is not None:
+            queried = 0
+            while len(survivors) > 1 and queried < max_queries:
+                probe = synthesize_discriminating_input(survivors, examples, probes_override=probes)
+                if probe is None:
+                    break
+                observed = oracle(probe)
+                queried += 1
+                survivors = [
+                    o
+                    for o in survivors
+                    if (lambda ov: ov[0] and _outputs_match(ov[1], observed))(
+                        _safe_eval_candidate(o, probe)
+                    )
+                ]
+                examples = list(examples) + [(probe, observed)]
+            found["convention_queries"] = queried
+        if len(survivors) > 1:
+            found["convention_settled"] = False
+            found["convention_unsettled_because"] = (
+                "the evidence does not distinguish these conventions and no oracle decided them"
+            )
+            survivors = survivors[:1]
+        else:
+            found["convention_settled"] = True
+    else:
+        found["convention_settled"] = True
+    if not survivors:
+        return None
+    if memory is not None and found.get("convention_settled"):
+        memory.observe("floor" if "floor" in survivors[0].name else "fmod")
+    return survivors[0], found
+
+
+def _periodic_survivors(
+    period: int, examples: Sequence[tuple[tuple[Any, ...], Any]]
+) -> list["ExecutableOrgan"]:
+    out: list[ExecutableOrgan] = []
+    for floor_convention in (True, False):
+        src = _periodic_body(period, floor_convention=floor_convention)
+        try:
+            org = make_organ(
+                stratum=SKILL,
+                name=("induced_period_floor" if floor_convention else "induced_period_fmod")
+                + f"_{period}",
+                task_signature="scratch",
+                entrypoint="run",
+                source_code=src,
+                metadata={"induced": "periodic", "period": period},
+            )
+        except OrganSafetyError:
+            continue
+        if all(
+            (ok and _outputs_match(val, exp))
+            for ex_in, exp in examples
+            for ok, val in [_safe_eval_candidate(org, ex_in)]
+        ):
+            out.append(org)
+    return out
+
+
+def _survivors_disagree_on_domain(
+    survivors: Sequence["ExecutableOrgan"],
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+) -> bool:
+    """True if any two survivors disagree anywhere on the caller's reachable domain.
+
+    The distinction this draws is the one the whole repair turns on. Ambiguity is only a problem when
+    a wrong choice would cost the caller something *where the caller lives*. Two structurally
+    different programs that compute the same function (`2x+2` and `2*(x+1)`) are interchangeable, and
+    refusing between them would be timidity dressed as rigour.
+    """
+    if len(survivors) <= 1:
+        return False
+    domain = settlement.derive_probe_space(examples)
+    for i, a in enumerate(survivors):
+        for b in survivors[i + 1:]:
+            for probe in domain:
+                oka, va = _safe_eval_candidate(a, probe)
+                okb, vb = _safe_eval_candidate(b, probe)
+                if oka != okb:
+                    return True
+                if oka and not _outputs_match(va, vb):
+                    return True
+    return False
+
+
+def _settlement_probe_space(
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    hypotheses: Sequence["ExecutableOrgan"],
+) -> list[tuple[Any, ...]]:
+    """Probe inputs derived from the hypotheses' own literals and the observed domain.
+
+    The frozen `_candidate_probe_inputs` grid decides what counts as "the same behaviour". That is the
+    same defect as a frozen constant menu: a table, not a computation, fixing an answer. A body can
+    only change behaviour at the literals it mentions, so those literals -- plus the neighbourhood of
+    each observed input -- are where separation is possible. A dense interior is included as well,
+    because a range that is SPARSE rather than short (it ran to 20 while omitting 14) cannot be
+    repaired by widening its endpoints.
+    """
+    literals: list[int] = []
+    for org in hypotheses:
+        try:
+            tree = ast.parse(org.source_code)
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Constant) and isinstance(node.value, int) and not isinstance(
+                node.value, bool
+            ):
+                literals.append(int(node.value))
+    return settlement.derive_probe_space(examples, literals=literals)
+
+
+def _first_refuting_probe(
+    organ: "ExecutableOrgan",
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    task_signature: str,
+) -> tuple[Any, ...] | None:
+    """A single input on which this organ's correctness is genuinely open.
+
+    Used by Tier-0 recall, which previously accepted an incumbent on the strength of the examples
+    already given. Those examples are exactly the ones that made it the incumbent, so they cannot
+    test it. This picks an input the organ has not been checked against so one question can decide
+    whether the recall is real.
+    """
+    probes = settlement.derive_probe_space(examples)
+    seen = {tuple(repr(x) for x in ex_in) for ex_in, _ in examples}
+    for probe in probes:
+        if tuple(repr(x) for x in probe) not in seen:
+            return probe
+    return None
+
+
 def synthesize_discriminating_input(
     hypotheses: Sequence[ExecutableOrgan],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    probes_override: Sequence[tuple[Any, ...]] | None = None,
 ) -> tuple[Any, ...] | None:
     """Find the probe input `x_disc` maximizing Shannon entropy over hypothesis outputs."""
     if len(hypotheses) <= 1:
         return None
     best_probe: tuple[Any, ...] | None = None
     best_entropy = -1.0
-    for probe in _candidate_probe_inputs(examples):
-        buckets: dict[str, int] = {}
+    probe_source = list(probes_override) if probes_override is not None else _candidate_probe_inputs(examples)
+    for probe in probe_source:
+        # Bucket by the SAME equivalence the elimination step uses (`_outputs_match`), not by `repr`.
+        # Scoring with `repr` while filtering with numeric tolerance is two definitions of "same" in
+        # one function: `0` and `-0.0` counted as a split worth querying and then matched as equal, so
+        # the query was spent and nothing was eliminated (measured on the floor/fmod convention pair).
+        buckets: list[list[Any]] = []  # [representative_outcome, count]
         valid_total = 0
+        errors = 0
         for h in hypotheses:
             ok, out = _safe_eval_candidate(h, probe)
-            key = f"OK:{type(out).__name__}:{out!r}" if ok else "ERR"
-            buckets[key] = buckets.get(key, 0) + 1
-            if ok:
-                valid_total += 1
-        if len(buckets) <= 1 or valid_total == 0:
+            if not ok:
+                errors += 1
+                continue
+            valid_total += 1
+            for bucket in buckets:
+                if _outputs_match(bucket[0], out):
+                    bucket[1] += 1
+                    break
+            else:
+                buckets.append([out, 1])
+        if errors:
+            buckets.append(["ERR", errors])
+        counts = [b[1] for b in buckets]
+        if len(counts) <= 1 or valid_total == 0:
             continue
         n = float(len(hypotheses))
-        ent = -sum((cnt / n) * math.log2(cnt / n) for cnt in buckets.values())
+        ent = -sum((cnt / n) * math.log2(cnt / n) for cnt in counts)
         if ent > best_entropy:
             best_entropy = ent
             best_probe = probe
@@ -3263,7 +3606,32 @@ class MetaCircularOrganGraph:
         # 0. Tier-0 recall (`< 0.05 ms`): check primary SKILL for this signature if consistent
         existing = self.get_primary(SKILL, task_signature)
         if existing is not None:
-            if all(
+            consistent = all(
+                (ok and _outputs_match(val, exp))
+                for ex_in, exp in examples
+                for ok, val in [_safe_eval_candidate(existing, ex_in)]
+            )
+            if consistent and oracle is not None:
+                # Agreement with the examples already given is not evidence of correctness -- it is
+                # evidence that this instance looks like the last one. Measured: x mod 4 recalled for
+                # x mod 5,7,8,10,11 with zero questions and held-out accuracy 0/10, while reporting
+                # RECALLED_TIER0_ORGAN. When an oracle is standing by, spend one question finding out
+                # instead of assuming. If it holds, the cost is a single query and the organ stays.
+                probe = _first_refuting_probe(existing, examples, task_signature)
+                if probe is not None:
+                    try:
+                        observed = oracle(probe)
+                    except Exception:
+                        observed = None
+                    if observed is not None and not (
+                        lambda ov: ov[0] and _outputs_match(ov[1], observed)
+                    )(_safe_eval_candidate(existing, probe)):
+                        # The incumbent was about to be wrong. Fall through to fresh synthesis with
+                        # the new observation in hand, so experience corrects itself instead of
+                        # compounding a mistake.
+                        examples = list(examples) + [(probe, observed)]
+                        existing = None
+            if existing is not None and all(
                 (ok and _outputs_match(val, exp))
                 for ex_in, exp in examples
                 for ok, val in [_safe_eval_candidate(existing, ex_in)]
@@ -3365,11 +3733,49 @@ class MetaCircularOrganGraph:
             return {"ok": False, "status": "NO_CONSISTENT_HYPOTHESIS", "seen_candidates": len(seen_ast)}
 
         queries_used = 0
+        #: Evidence accumulated after the initial grammar search that the grammar itself cannot
+        #: explain. Tracked so the caller is told the truth ("the world is outside my space")
+        #: instead of being handed a verdict the instrument is not entitled to.
+        outside_space_evidence: list[Any] = []
+        interchangeable = False
         while len(candidate_organs) > 1:
             disc_probe = synthesize_discriminating_input(candidate_organs, work_examples)
             if disc_probe is None:
-                # All surviving hypotheses are observationally equivalent across the entire probe grid!
-                break
+                # My frozen probe grid cannot separate these. That is a statement about the GRID,
+                # not about the programs. Reaching for the first survivor here used to turn
+                # blindness into certainty (measured: x mod 4 crystallized as `proj_0`, held-out
+                # 2/10, status DISAMBIGUATED_AND_CRYSTALLIZED). If an oracle is present, ask it
+                # the question my own grid could not think of; otherwise refuse and say why.
+                derived = _settlement_probe_space(work_examples, candidate_organs)
+                real_probe = synthesize_discriminating_input(
+                    candidate_organs, work_examples, probes_override=derived
+                )
+                if real_probe is not None and oracle is not None and queries_used < max_oracle_queries:
+                    disc_probe = real_probe
+                elif not _survivors_disagree_on_domain(candidate_organs, work_examples):
+                    # Nothing separates them, but they also never disagree anywhere the caller can
+                    # reach: the ambiguity is INCONSEQUENTIAL. Choosing the simplest is then not a
+                    # guess -- either answer is equally correct on every input that exists for this
+                    # caller. This is deliberately distinguished from the blind case below, because
+                    # refusing here would make the creature timid (P5) without buying any safety.
+                    candidate_organs = sorted(
+                        candidate_organs, key=lambda o: (o.code_bytes, o.organ_id)
+                    )[:1]
+                    interchangeable = True
+                    break
+                else:
+                    return {
+                        "ok": False,
+                        "status": "UNSETTLEABLE_BY_THIS_INSTRUMENT",
+                        "detail": (
+                            "survivors disagree on the caller's domain and no reachable probe separates them"
+                            if real_probe is None
+                            else "a derived probe separates them but no oracle was supplied"
+                        ),
+                        "surviving_count": len(candidate_organs),
+                        "surviving_names": [o.name for o in candidate_organs[:6]],
+                        "oracle_queries_used": queries_used,
+                    }
             if oracle is None or queries_used >= max_oracle_queries:
                 return {
                     "ok": False,
@@ -3399,6 +3805,45 @@ class MetaCircularOrganGraph:
                     }
 
         winner = candidate_organs[0]
+
+        # --- Door 3: a single surviving hypothesis is not a settled question -------------------
+        # When the grammar can only think of one program, the loop above never runs and the old code
+        # crystallized it immediately. Measured: `x mod 5` given seeds 1..3 produced
+        # `if x0 <= 0: 0/x0 else x0/1` -- the identity function in disguise -- which matches the seeds
+        # and any observation that happens to agree with it, and was admitted with zero questions and
+        # 0/10 held-out accuracy. "My grammar can think of only one program" is a fact about the
+        # grammar. It cannot certify a program, so the winner must predict something it has not
+        # already been shown before it is allowed to become permanent.
+        if oracle is not None and queries_used < max_oracle_queries:
+            unseen = [
+                pr
+                for pr in _settlement_probe_space(work_examples, [winner])
+                if tuple(repr(x) for x in pr)
+                not in {tuple(repr(x) for x in ex_in) for ex_in, _ in work_examples}
+            ]
+            for probe in unseen[:2]:
+                ok_now, predicted = _safe_eval_candidate(winner, probe)
+                try:
+                    observed = oracle(probe)
+                except Exception:
+                    break
+                queries_used += 1
+                if not (ok_now and _outputs_match(predicted, observed)):
+                    work_examples.append((probe, observed))
+                    return {
+                        "ok": False,
+                        "status": "HELD_OUT_REFUTED",
+                        "detail": (
+                            "the only hypothesis the grammar could form failed a held-out prediction; "
+                            "the true program is not expressible here"
+                        ),
+                        "refuting_probe": probe,
+                        "predicted": predicted,
+                        "observed": observed,
+                        "oracle_queries_used": queries_used,
+                    }
+                work_examples.append((probe, observed))
+
         winner.verified_passes = len(work_examples)
         self.register_organ(winner)
 
