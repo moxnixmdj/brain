@@ -7,7 +7,7 @@
  "route_id": "THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1",
  "date": "2026-11-04",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "3920898055453f1d8a57bf4687853510701496ad",
+ "canonical_base_commit": "0827db4e07af0075d9128308e3622cf099136988",
  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -95,7 +95,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "3920898055453f1d8a57bf4687853510701496ad",
+  "canonical_base_commit": "0827db4e07af0075d9128308e3622cf099136988",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "SOUNDNESS_VIOLATIONS_ARE_DETECTED_INSIDE_THE_SEARCH_AND_ABORT_THE_QUESTION__THE_CREATURE_DISTRUSTS_ITS_OWN_OPERATOR_INSTEAD_OF_ANSWERING_WRONG",

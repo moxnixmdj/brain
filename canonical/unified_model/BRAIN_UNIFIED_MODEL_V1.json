@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 295,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6685,
+  "research_index_records": 6686,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e7412ea5647721e83cdea098b0931f950d559f3bb90b4b5dbefc42c114b9e392"
+  "value": "ba9783a7c45aacce4b7237125e640a6f5478855d230c936e61b576ca8e6ff4f7"
  },
  "engines": [
   {
@@ -222539,6 +222539,30 @@
    }
   },
   {
+   "action_id": "THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CHECK_IS_PART_OF_THE_CHOICE_NOT_A_GATE_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a0353df9d978d6c495921af34d55a6767178bed733ef4fcf0d5c86c21dfd5e83",
+   "status": "",
+   "terms": {
+    "answers_that_are_sound_by_construction_rather_than_audited_afterwards": 1,
+    "check": 1,
+    "choice": 1,
+    "gate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "part": 1,
+    "soundness_as_a_search_criterion_over_the_whole_expression": 1,
+    "the_check_is_part_of_the_choice_not_a_gate_v1": 1,
+    "v1": 1,
+    "verify_could_reject_a_wrong_answer_and_nothing_consulted_it_while_choosing__with_a_lossy_groups_the_search_returned_150_150_with_west_missing_and_verify_said_false_on_exactly_that_result": 1
+   }
+  },
+  {
    "action_id": "THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -298348,9 +298372,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/value_algebra_v1.py",
-   "sha256": "4f58f86bf6eb6fff6bf236a359a50b8b55df20b8f18ce5140ea66279ec70ad38",
+   "sha256": "dcc0e0187d06d65c739d5a6b17fe0231e49a853d337dc25c1ce252de62cfc962",
    "summary": "Answers are BUILT OUT OF typed pieces, not looked up in a menu.",
-   "symbol_count": 36,
+   "symbol_count": 40,
    "symbols": [
     "EvalError",
     "Lexicon",
@@ -298358,12 +298382,14 @@
     "_aggregate",
     "_candidate_columns",
     "_cell_of",
+    "_child_nodes",
     "_column_at",
     "_column_leaf",
     "_columns",
     "_digits",
     "_double",
     "_eq_text",
+    "_evaluate",
     "_fmt",
     "_half",
     "_holds_invariants",
@@ -298373,16 +298399,13 @@
     "_negate",
     "_norm",
     "_numeric_candidates",
-    "_numeric_columns",
-    "_read_text",
-    "_row_leaf"
+    "_numeric_columns"
    ],
    "terms": {
     "aggregate": 1,
     "algebra": 1,
     "answers": 1,
     "built": 1,
-    "candidate_columns": 1,
     "cell_of": 1,
     "column_at": 1,
     "column_leaf": 1,
@@ -298391,7 +298414,7 @@
     "double": 1,
     "eq_text": 1,
     "evalerror": 1,
-    "evaluate": 1,
+    "evaluate": 2,
     "fmt": 1,
     "half": 1,
     "length": 1,
