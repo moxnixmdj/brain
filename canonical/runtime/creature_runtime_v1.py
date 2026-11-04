@@ -812,6 +812,20 @@ class Creature:
         if catalog_action and outcome.get('ok') is True:
             finished['information'] = dict(outcome['information'])
         self._self.finish(finished)
+        try:
+            feat = (self._work_features or {}).get(work.id) or {}
+            self.organ_graph.record_transition(
+                action_id=str(work.id),
+                cost=float(work.cost),
+                failed=outcome.get("ok") is not True,
+                value=float(work.value),
+                delta={
+                    "unlocks": list(feat.get("unlocks") or ()),
+                    "requires": list(feat.get("requires") or ()),
+                },
+            )
+        except Exception:
+            pass
         self._save()
         row = {"status": "WORKED", "work": work.id, "cost": work.cost,
                "life_remaining": self._life.remaining, "posture": posture, **outcome}
