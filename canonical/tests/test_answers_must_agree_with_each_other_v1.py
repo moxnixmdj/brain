@@ -501,3 +501,46 @@ def test_is_a_whole_is_decided_by_where_the_aggregate_sits():
     covered = V._n("map", ("half", whole), V.NUMBER, set(), "m")
     assert D.is_a_whole(whole) is True
     assert D.is_a_whole(covered) is False
+
+
+def test_a_breakdown_of_sums_is_not_checked_against_a_minimum(tmp_path):
+    """FOUND ON MERGED MAIN, as a contradiction between two CORRECT answers.
+
+    `[150, 150, 250]` is one SUM per region. `50` is the SMALLEST amount. The check took
+    the aggregate from the WHOLE side -- `min` -- recombined the sums with `min`, got 150,
+    and reported a disagreement with 50. The parts' own aggregate is what has to recombine:
+    a breakdown of sums is not a breakdown of minima, whatever they read.
+
+    One side cannot dictate the law for both.
+    """
+    root = _tree(tmp_path, **{"sales.csv": SALES})
+    for question in ("what is the total amount per region",
+                     "what is the largest amount",
+                     "what is the smallest amount",
+                     "what is the average amount",
+                     "what is the total amount in west"):
+        out = I.answer(question, root)
+        assert out["contradicts"] == [], (question, out["contradicts"])
+
+
+def test_mismatched_aggregates_are_reported_uncheckable_not_compared():
+    verdict = D.check_parts_against_whole(None, [150.0, 150.0, 250.0], None, 50.0,
+                                          kind="min", parts_kind="sum")
+    assert verdict["verdict"] == "uncheckable", verdict
+    assert "breakdown and total of one quantity" in verdict["why"]
+
+
+def test_eleven_correct_answers_on_one_tree_report_nothing(tmp_path):
+    """The whole conversation, every aggregate, one tree."""
+    root = _tree(tmp_path, **{"sales.csv": SALES,
+                              "stock.csv": "item,qty\nbolt,5\nnut,15\nbolt,7\n"})
+    questions = ("what is the total amount", "what is the total qty",
+                 "what is the total amount in west", "what is the total amount in north",
+                 "what is the total amount per region", "count the items",
+                 "how many regions", "what is the largest amount",
+                 "what is the smallest amount", "what is the average amount",
+                 "what is the total amount divided by how many regions")
+    for question in questions:
+        out = I.answer(question, root)
+        assert out["contradicts"] == [], (question, out["contradicts"])
+    assert len(L.entries()) == len(questions)
