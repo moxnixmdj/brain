@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "action_id": "ANSWER_SPACE_BUILT_FROM_VOCABULARY_20261104",
-  "action_intent_id": "THE_ANSWER_SPACE_IS_A_PRODUCT_OF_THE_VOCABULARY_V1",
+  "action_id": "OPERATOR_IS_ONE_DECLARATION_AND_IS_CHECKABLE_20261104",
+  "action_intent_id": "AN_OPERATOR_IS_ONE_DECLARATION_AND_IS_CHECKABLE_V1",
   "action_kind": "GOVERNANCE_GUARD",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "route_id": "ZERO_TEMPLATE_SEVEN_STRATUM_CREATURE_20261104_V1",
   "date": "2026-11-04",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "55d2522cc20d01960b7ceeeb895f7fd6bf26dc2f",
+  "canonical_base_commit": "499f731c1be053a2dc6afce06ad0a4f1ad4908aa",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -19,14 +19,14 @@
   "weakens_existing_guard": false,
   "benchmark_or_family_rank_authority": false,
   "highest_leverage_now": true,
-  "action_summary": "Add a type-directed enumerator that builds every well-typed composition of the operator table to a fixed point, consulted only where the hand-written search can build nothing. Growth is measured as a PRODUCT: declaring one operator as data yields 17 new expressions and 7 new shapes, every one containing it; removing the declaration restores the exact previous count.",
+  "action_summary": "Make an operator one declaration -- words, arithmetic, law -- so the parts cannot disagree; refuse a declaration with no law; consult that law as an invariant while choosing. Corrects the previous round's overstated claim, which patched the arithmetic from the test and called it a declaration.",
   "selected_route": "ENUMERATE_BY_OPERATOR_TYPE_THEN_CHOOSE_WITH_THE_INHERITED_RULES",
-  "causal_blocker": "The answer space was a hand-written list -- sixteen candidates.append sites, eight word sets, eighteen lex.set tests, five distinct structures -- so a question whose shape nobody appended was refused while its pieces existed in the same file.",
-  "expected_parent_change": "Questions naming a column instead of a file are answered from the column's referent; questions needing an unappended operator are answered once that operator is declared as data.",
-  "expected_parent_frontier_change": "The answer space becomes a function of the operator vocabulary.",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The answer space was a hand-written list -- sixteen candidates.append sites, eight word sets, eighteen lex.set tests, five distinct structures -- so a question whose shape nobody appended was refused while its pieces existed in the same file.",
-  "falsification_condition": "Declaring a new operator as data produces no new expressions, or produces expressions not containing it, or removing the declaration does not restore the previous count, or an answer the existing search already gave changes.",
-  "stop_condition": "ENUMERATOR_DEFERS_TO_EXISTING_SEARCH__99_TESTS_PASS__117_CASE_SWEEP_UNCHANGED_AT_116__12_OF_12_THROUGH_THE_FRONT_DOOR__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "causal_blocker": "An aggregate was stated in five places that had no way to check each other -- its words, its arithmetic in a hardcoded dict, its arity in the enumerator's type table, its word-accounting, and its invariant. A declaration without arithmetic enumerated and raised KeyError when evaluated, and carried NO invariant, because the invariant walk returned True for every aggregate except sum.",
+  "expected_parent_change": "A declared operator carries its arithmetic and its law in one place; a declaration without a law is refused before anything is written; and a declared operator violating its own law is refused while choosing rather than reported as an unverified answer.",
+  "expected_parent_frontier_change": "Capability can grow from data without outrunning the ability to check it.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::An aggregate was stated in five places that had no way to check each other -- its words, its arithmetic in a hardcoded dict, its arity in the enumerator's type table, its word-accounting, and its invariant. A declaration without arithmetic enumerated and raised KeyError when evaluated, and carried NO invariant, because the invariant walk returned True for every aggregate except sum.",
+  "falsification_condition": "A vocabulary entry alone produces an evaluable operator, or a declaration without a law is accepted, or a declared operator violating its law is returned as an answer, or a declaration reaches one reader and not another.",
+  "stop_condition": "ONE_DECLARATION_IS_ENOUGH__A_LAWLESS_ONE_IS_REFUSED__A_LYING_ONE_IS_REFUSED_WHILE_CHOOSING__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
   "explicit_user_authorization": "Owner directive 2026-11-04, repeated six times: 'You sure this is the smartest approach? You must think from the deepest layer, from first principles of everything. And don't forget we want a very smart, most advanced, sentient-like creature. We don't want a static code.' Then: 'go'. The answer given each round was No. $0 spend, zero capability credit claimed.",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -61,9 +61,9 @@
     ],
     "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S"
   },
-  "measured_effect": "DECLARING_ONE_OPERATOR_AS_DATA_YIELDS_17_NEW_EXPRESSIONS_AND_7_NEW_SHAPES_EVERY_ONE_CONTAINING_IT__REMOVAL_RESTORES_THE_EXACT_COUNT__99_TESTS_PASS__SWEEP_UNCHANGED__12_OF_12_THROUGH_THE_FRONT_DOOR",
+  "measured_effect": "ONE_DECLARATION_ANSWERS_MEDIAN_QTY_7.0_WITH_TOTAL_UNCHANGED_AT_27__LAWLESS_DECLARATION_REFUSED_WITH_NOTHING_LEFT_BEHIND__LYING_DECLARATION_REFUSED_AT_SELECTION__108_TESTS_PASS__SWEEP_UNCHANGED",
   "load_bearing_primary": {
-    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__WHAT_IS_MEASURED_IS_THAT_DECLARING_AN_OPERATOR_AS_DATA_ADDS_EVERY_COMPOSITION_CONTAINING_IT_WITH_NO_SENTENCE_WRITTEN_AND_THAT_REMOVING_IT_RESTORES_THE_PREVIOUS_COUNT_EXACTLY",
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__WHAT_IS_MEASURED_IS_THAT_A_DECLARATION_WHICH_CANNOT_BE_CHECKED_IS_REFUSED_AND_THAT_A_DECLARED_OPERATOR_VIOLATING_ITS_OWN_LAW_IS_REFUSED_WHILE_CHOOSING",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": "1",
@@ -87,19 +87,20 @@
   },
   "prior_work_reused": "The choice rules -- a word is spent once; filter on full accounting then fewest operators; ties go to the operator the question named; 'per' is a filter not a rank -- are the incumbent search's, kept rather than re-derived. The existing search still runs first and answers everything it always answered.",
   "recursive_obs": {
-    "canonical_base_commit": "55d2522cc20d01960b7ceeeb895f7fd6bf26dc2f",
+    "canonical_base_commit": "499f731c1be053a2dc6afce06ad0a4f1ad4908aa",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-    "real_outcome": "ANSWER_SPACE_ENUMERATED_FROM_OPERATOR_TABLE_TO_A_FIXED_POINT_WITH_THE_HAND_WRITTEN_SEARCH_RETAINED_AS_THE_FIRST_ROUTE",
+    "real_outcome": "OPERATOR_DECLARED_ONCE_WITH_ARITHMETIC_AND_LAW__UNCHECKABLE_DECLARATIONS_REFUSED__ONE_VOCABULARY",
     "selected_route": "ENUMERATE_BY_OPERATOR_TYPE_THEN_CHOOSE_WITH_THE_INHERITED_RULES",
     "selected_surviving_route": "DECLARE_OPERATORS_AS_DATA_AND_ENUMERATE_THEIR_TYPED_COMPOSITIONS_INSTEAD_OF_APPENDING_SENTENCES",
     "deleted_or_bypassed_paths": [
-      "SIXTEEN_CANDIDATES_APPEND_SITES",
-      "EIGHT_HAND_MAINTAINED_WORD_SETS_AS_THE_ONLY_VOCABULARY",
-      "A_SECOND_COPY_OF_THE_VOCABULARY_IMPORTED_BY_NAME_AT_MODULE_LOAD"
+      "THE_HARDCODED_FIVE_ENTRY_AGGREGATE_DICT",
+      "THE_TRIALS_SECOND_COPY_OF_THE_AGGREGATE_VOCABULARY",
+      "AN_INVARIANT_WALK_THAT_EXEMPTED_EVERY_AGGREGATE_EXCEPT_SUM",
+      "A_GROWTH_TEST_THAT_PATCHED_THE_ARITHMETIC_AND_CALLED_IT_A_DECLARATION"
     ],
-    "stop_condition": "ENUMERATOR_DEFERS_TO_EXISTING_SEARCH__99_TESTS_PASS__117_CASE_SWEEP_UNCHANGED_AT_116__12_OF_12_THROUGH_THE_FRONT_DOOR__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
-    "expected_parent_level_state_change": "The answer space becomes a function of the operator vocabulary.",
+    "stop_condition": "ONE_DECLARATION_IS_ENOUGH__A_LAWLESS_ONE_IS_REFUSED__A_LYING_ONE_IS_REFUSED_WHILE_CHOOSING__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+    "expected_parent_level_state_change": "Capability can grow from data without outrunning the ability to check it.",
     "why_selected_route_is_fastest_sufficient": "THE_EXISTING_SEARCH_ALREADY_ENCODES_314_LINES_OF_MEASURED_RULES__ENUMERATION_REUSES_THEM_INSTEAD_OF_RE_DERIVING_THEM_AND_IS_CONSULTED_ONLY_WHERE_THEY_PRODUCE_NOTHING",
     "iteration_limit": 4,
     "routes_considered": [
@@ -122,7 +123,7 @@
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "INTRINSIC__THE_SET_OF_ANSERABLE_QUESTIONS_WAS_THE_SET_OF_SENTENCES_SOMEBODY_WROTE",
-      "surviving_causal_blocker": "A_FIXED_MENU_CANNOT_ANSWER_A_SHAPE_NOBODY_APPENDED_WHILE_ITS_PIECES_SIT_UNUSED",
+      "surviving_causal_blocker": "CAPABILITY_COULD_GROW_FASTER_THAN_THE_ABILITY_TO_CHECK_IT",
       "delete_bypass_substitute_options": [
         "DELETE_THE_APPENDS_BY_DERIVING_THEM_FROM_THE_OPERATOR_TABLE",
         "BYPASS_THE_LIST_WHEN_IT_BUILDS_NOTHING",
@@ -144,7 +145,7 @@
       "external_existing_routes_checked": [
         "NONE_NEEDED__PURE_STDLIB_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
       ],
-      "surviving_gap": "THE_OPERATOR_IS_STILL_FIVE_STATEMENTS__ARITY_EVALUATION_WORDS_INVARIANTS_AND_A_SECOND_TABLE"
+      "surviving_gap": "THE_LAW_IS_THE_WEAKEST_ONE_THAT_IS_TRUE__A_STRONGER_LAW_PER_OPERATOR_IS_STILL_WRITTEN_BY_HAND"
     },
     "obs_inherited_system": {
       "adjacent_capabilities_absorbed": [
@@ -232,5 +233,5 @@
       "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
     }
   },
-  "next_step": "Collapse the operator's five statements -- arity, evaluation, words, invariants and the second type table -- into one record, and measure whether this round's defects are expressible at all once there is nowhere for two copies to disagree."
+  "next_step": "Let the creature PROPOSE a law for an operator it has seen fail, and reject proposals that no data can falsify -- the difference between a declaration that is checkable and one that merely contains a check."
 }
