@@ -1,0 +1,422 @@
+{
+ "attempted": 50,
+ "authority": "NO_CAPABILITY_CREDIT_SANDBOX_MEASUREMENT_ONLY",
+ "claims_behind_the_boundary": 413,
+ "claims_now_settleable": 35,
+ "how": "a throwaway `git archive HEAD` copy; the adapter is imported FROM the copy, so every path it derives from __file__ points inside it; the copy is destroyed",
+ "non_claims": [
+  "RUNNING_IN_A_COPY_DOES_NOT_MAKE_UNTRUSTED_CODE_SAFE_IN_GENERAL",
+  "A_CAPABILITY_THAT_REACHES_THE_NETWORK_STILL_REACHES_THE_NETWORK",
+  "THE_COPY_EXCLUDES_UNCOMMITTED_WORK_ON_PURPOSE"
+ ],
+ "produced_output": 4,
+ "question": "Can the capabilities that leave their world be run without letting them reach this one?",
+ "real_tree_changed": false,
+ "real_tree_diff_before_after": {
+  "after": " M canonical/tests/test_world_forge_v1.py\n M canonical/tools/capability_world_v1.py\n M canonical/tools/claim_miner_v1.py\n M canonical/tools/world_forge_v1.py\n M canonical/verification/CLAIM_MINE_V1.json\n M canonical/verification/WORLD_FORGE_V1.json\n?? canonical/tools/sandboxed_world_v1.py\n",
+  "before": " M canonical/tests/test_world_forge_v1.py\n M canonical/tools/capability_world_v1.py\n M canonical/tools/claim_miner_v1.py\n M canonical/tools/world_forge_v1.py\n M canonical/verification/CLAIM_MINE_V1.json\n M canonical/verification/WORLD_FORGE_V1.json\n?? canonical/tools/sandboxed_world_v1.py\n"
+ },
+ "rows": [
+  {
+   "capability": "archive.verify.tar_gz.gnu",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "auto.apt.zint",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "auto.npm.dfinity-cbor",
+   "claims": 8,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "auto.npm.msgpack-msgpack",
+   "claims": 8,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "auto.npm.shelacek-ubjson",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "chart.raster.axis_title_unit_binding.v1",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_MISSING_PACKAGE",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "code.patch.tree_sitter.verify.v1",
+   "claims": 11,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "evidence.oracle.hypothesis_property.v1",
+   "claims": 10,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "git.repository.operate.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "http.json.fetch_from_state",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "image.code.decode.zbarimg",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "image.extract.ocr.tesseract",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "ROUNDS_EXHAUSTED",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "image.qr.generate.qrencode",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "json.query.jq",
+   "claims": 11,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "pdf.extract.ocr.tesseract",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "ROUNDS_EXHAUSTED",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "pypi.provenance.audit_live_artifact",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.contract.check.crosshair.v1",
+   "claims": 0,
+   "keys": 10,
+   "reached": true,
+   "stopped_by": null,
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "python.fault.localize.dynamic.dataflow.v1",
+   "claims": 14,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.fault.provenance.interprocedural.value.v1",
+   "claims": 14,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.patch.search.test_guided.ast.v1",
+   "claims": 18,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.refactor.extract_function.v1",
+   "claims": 12,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.refactor.inline_helper.v1",
+   "claims": 10,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "TIMEOUT"
+  },
+  {
+   "capability": "python.refactor.rename_parameter.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.refactor.rename_symbol.v1",
+   "claims": 16,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.repo.diff_apply_full_testgate.v1",
+   "claims": 11,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.repo.pr_realize.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.repository.acceptance.measure.v1",
+   "claims": 15,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.review.diff_coverage_gate.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.review.diff_mutation_gate.v1",
+   "claims": 15,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.review.diff_perf_gate.v1",
+   "claims": 14,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.review.diff_security_gate.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "ROUNDS_EXHAUSTED",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.review.diff_static_triage.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "ROUNDS_EXHAUSTED",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.review.diff_type_gate.v1",
+   "claims": 13,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "ROUNDS_EXHAUSTED",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.software.issue_to_pr.orchestrate.v1",
+   "claims": 14,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.software.repair.apply.verified.v1",
+   "claims": 11,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.source.symbols.index.ast",
+   "claims": 13,
+   "keys": 13,
+   "reached": true,
+   "stopped_by": null,
+   "verdict": "CLAIM_CHECKED"
+  },
+  {
+   "capability": "python.source.test_adequacy.v1",
+   "claims": 12,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "python.tests.audit.unittest",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.tests.generate.scaffold.v1",
+   "claims": 12,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.tests.synthesize.pynguin.v1",
+   "claims": 9,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "python.vcs.merge_conflict.resolve.v1",
+   "claims": 9,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "CRASHED"
+  },
+  {
+   "capability": "shell.command.run",
+   "claims": 9,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "software.repair.choreograph.crossfile.v1",
+   "claims": 8,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "UNREPAIRABLE_NOT_UNDERSTOOD",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "software.review.gate.composer.v1",
+   "claims": 8,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "source.authority.identity.ror",
+   "claims": 9,
+   "keys": 13,
+   "reached": true,
+   "stopped_by": null,
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "source.evidence.extract.objective_grounded.stdlib",
+   "claims": 13,
+   "keys": 17,
+   "reached": true,
+   "stopped_by": null,
+   "verdict": "CLAIM_FALSE"
+  },
+  {
+   "capability": "web.browser.rendered.capture.chromedriver",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "web.release.verify.independent_http",
+   "claims": 0,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  },
+  {
+   "capability": "yaml.to_json.yq",
+   "claims": 8,
+   "keys": 0,
+   "reached": false,
+   "stopped_by": "LOOP_NO_PROGRESS",
+   "verdict": "REFUSED_NAMED"
+  }
+ ],
+ "schema": "PROJECT_BRAIN_SANDBOXED_WORLD_V1"
+}

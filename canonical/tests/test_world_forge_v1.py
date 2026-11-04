@@ -115,3 +115,77 @@ def test_no_operator_knows_a_capability_name():
     offenders += sorted({entry.get("adapter_module") for entry in registry.values()
                          if entry.get("adapter_module") and entry["adapter_module"] in source})
     assert not offenders, f"a repair names a specific capability or adapter: {offenders[:5]}"
+
+
+# --------------------------------------------------------------------------- the harness lies it told
+def test_a_caption_is_not_a_capability():
+    """The unsafe check was a substring test. `requests` in a docstring excluded eleven
+    capabilities from ever being tested -- 122 claims that could never be settled by anyone."""
+    from canonical.tools.capability_world_v1 import reaches_unsafe
+    assert not reaches_unsafe('"""This adapter never makes requests to the network."""\n'
+                              'def run(args, root):\n    return {"output_verified": True}\n')
+    assert not reaches_unsafe('REQUIRED = {"requests": 1}\n')
+    assert reaches_unsafe("import subprocess\n")
+    assert reaches_unsafe("from urllib import request\n")
+    assert reaches_unsafe("import os\nos.system('x')\n")
+
+
+def test_an_adapter_that_exits_is_refusing_not_silent(monkeypatch, capsys):
+    """Six capabilities were recorded as NO_OUTPUT because the adapter printed its refusal and
+    called sys.exit(), killing the worker before it could report. The harness's problem was being
+    described as the capability's silence. The worker is exercised in-process, because the point
+    under test is what the worker does when the adapter takes the process down."""
+    import json
+    import tempfile
+    adapter = ROOT / "canonical/runtime/bound_capabilities/_forge_exit_probe_v1.py"
+    adapter.write_text('import json, sys\n\n\ndef run(args, root):\n'
+                       '    print(json.dumps({"error": True, "reason": "WIDGET_REQUIRED"}),\n'
+                       '          file=sys.stderr)\n    sys.exit(1)\n', encoding="utf-8")
+    entry = {"action_template": {"args": {"input_path": "${input.input_path}"},
+                                "expect": {"field": "output_verified", "value": True}},
+             "adapter_module": "_forge_exit_probe_v1", "result_fields": ["output_verified"]}
+    monkeypatch.setattr(forge, "registry", lambda: {"probe.exit": entry})
+    directory = tempfile.mkdtemp(prefix="probe_")
+    try:
+        forge._worker("probe.exit", "_forge_exit_probe_v1", directory,
+                      json.dumps(forge.blank_recipe(entry)))
+        printed = capsys.readouterr().out.strip().splitlines()
+    finally:
+        adapter.unlink(missing_ok=True)
+    assert printed, "the worker printed nothing at all -- that is the bug being guarded against"
+    line = [l for l in printed if l.startswith(forge.SENTINEL)]
+    assert line, f"no sentinel line among {printed!r}"
+    result = json.loads(line[-1][len(forge.SENTINEL):])
+    assert result["verdict"] == "REFUSED_NAMED", result
+    assert "REFUSAL_EXIT" in result["detail"], result
+
+
+def test_a_result_that_cannot_be_told_from_the_world_is_not_a_result():
+    """The forge parsed the LAST line of stdout as its own verdict. One adapter printed JSON and
+    exited, so the adapter's error became the forge's verdict. The sentinel exists for this."""
+    assert forge.SENTINEL.strip(), "no sentinel"
+    source = (ROOT / "canonical/tools/world_forge_v1.py").read_text(encoding="utf-8")
+    assert 'lines = [l for l in (done.stdout or "").splitlines() if l.startswith(SENTINEL)]' in source
+
+
+def test_refusing_is_a_dead_end_when_the_question_is_what_it_returns():
+    """A refusal is a good outcome for a capability and useless for a claim about its output.
+    The two goals must not be the same set of verdicts."""
+    assert "REFUSED_NAMED" in forge.DECLARED
+    assert "REFUSED_NAMED" not in forge.OUTPUT
+    assert set(forge.OUTPUT) < set(forge.DECLARED)
+
+
+def test_a_named_missing_path_is_created_generically():
+    recipe, op = forge.operators("x", "y", _recipe({}),
+                                 _failure("RuntimeError: PATH_MISSING:module.py"))
+    assert op == "CREATE_THE_FILE_IT_NAMED", op
+    assert "module.py" in recipe["files"]
+
+
+def test_the_sandbox_is_imported_from_the_copy_not_from_here():
+    """An adapter resolves its own paths from __file__. Importing it from the repository while
+    handing it a temporary root means it edits the real tree and reports success about a
+    directory nobody looked at."""
+    source = (ROOT / "canonical/tools/world_forge_v1.py").read_text(encoding="utf-8")
+    assert 'path = base / "canonical/runtime/bound_capabilities" / f"{module}.py"' in source

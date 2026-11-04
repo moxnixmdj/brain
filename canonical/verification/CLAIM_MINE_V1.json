@@ -24,16 +24,16 @@
   },
   "RESULT_FIELD": {
    "CONTRADICTED": 1,
-   "HOLDS": 245,
-   "UNTESTABLE": 860
+   "HOLDS": 286,
+   "UNTESTABLE": 819
   }
  },
  "by_verdict": {
   "CONTRADICTED": 6,
   "HISTORICAL": 11058,
-  "HOLDS": 5608,
+  "HOLDS": 5649,
   "UNPAIRED": 2881,
-  "UNTESTABLE": 1393
+  "UNTESTABLE": 1352
  },
  "claims_enumerated_by_a_person": 0,
  "claims_mined": 20946,

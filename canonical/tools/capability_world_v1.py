@@ -66,6 +66,45 @@ REGISTRY = ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
 ADAPTERS = ROOT / "canonical/runtime/bound_capabilities"
 
 TIMEOUT_S = 25
+
+
+def reaches_unsafe(source: str) -> bool:
+    """Does this code actually import or call something that can leave its world?
+
+    Measured 2026-11-04: this was a substring test. The word `requests` appears in comments and
+    in `"required": ...` keys, and eleven capabilities were excluded from ever being tested
+    because of prose -- 122 claims that could never be settled. A caption is not a capability.
+    The AST answers the question the substring was trying to ask, and it answers it the same
+    way for every file: an import statement, or a call to the thing itself.
+    """
+    import ast
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return True                    # unparseable is not a licence to run it
+    unsafe_roots = {"socket", "urllib", "http", "requests", "subprocess", "selenium",
+                    "playwright", "multiprocessing", "threading", "pty", "os"}
+    unsafe_calls = {"os.system", "os.popen", "os.execv", "os.execvp", "os.fork", "os.spawnl"}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                root = alias.name.split(".")[0]
+                if root in unsafe_roots and root != "os":
+                    return True
+        elif isinstance(node, ast.ImportFrom):
+            if node.module and node.module.split(".")[0] in unsafe_roots - {"os"}:
+                return True
+        elif isinstance(node, ast.Call):
+            target = node.func
+            dotted = ""
+            while isinstance(target, ast.Attribute):
+                dotted = target.attr + "." + dotted
+                target = target.value
+            if isinstance(target, ast.Name):
+                dotted = target.id + "." + dotted
+            if dotted.rstrip(".") in unsafe_calls:
+                return True
+    return False
 # Four worlds per capability, because one world per capability cannot teach a general rule and
 # cannot distinguish "this capability always fails" from "this input always fails". The variant
 # is part of what the creature can see, so a rule like "malformed json is refused, not parsed"
@@ -138,7 +177,7 @@ def senses(capability_id: str, entry: dict) -> dict[str, float]:
         "adapter_try_blocks": float(len(re.findall(r"^\s*try:", source, re.M))),
         "third_party_imports": float(len(imports - set(sys.stdlib_module_names))),
         "missing_module_imports": float(len(missing)),
-        "reaches_unsafe": float(any(u in source for u in UNSAFE)),
+        "reaches_unsafe": float(reaches_unsafe(source)),
         "declared_result_fields": float(len(entry.get("result_fields") or [])),
         "expects_verified": float(expect.get("field") in ("output_verified", "verified")),
         "expects_pass": float(expect.get("field") == "pass"),
@@ -273,7 +312,7 @@ def harvest() -> dict:
         # argument set in a fresh directory. Excluding it would have shrunk the world by 20
         # capabilities for no reason.
         source = path.read_text(encoding="utf-8")
-        if any(u in source for u in UNSAFE):
+        if reaches_unsafe(source):
             skipped[capability_id] = "reaches a subprocess, the network, or a browser"
             continue
         for variant in VARIANTS:

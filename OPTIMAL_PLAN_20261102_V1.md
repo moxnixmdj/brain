@@ -1366,3 +1366,127 @@ Adding `doubt` moved the organ-set pin, deliberately and in this commit, with th
 beside it. The property being protected is not "the set never changes" — it is "the set never
 changes *at runtime*, because of something on disk". A closed set with an explicit, reviewed edit
 is the mechanism working; a set that grows because a file appeared is the bug.
+
+## Execution log 15 — the world got wider, and the gap that is left is not code (2026-11-04)
+
+Log 14 ended with a number that made the next step obvious: the creature doubted 1,106 claims and
+could settle **245**. A doubt you cannot resolve is not curiosity. So this log is only about
+widening the world, and about reporting honestly where widening stops working.
+
+### Three lies the harness was telling
+
+Each of these made a capability look worse than it is, and each was found by measuring rather than
+by reading.
+
+**1. A caption is not a capability.** The unsafe check was `if "subprocess" in source`. The word
+appears in docstrings and in `"required": ...` keys. **Eleven capabilities — 122 claims — had never
+been testable because of prose.** An AST answers the question the substring was trying to ask:
+what does this code import, and what does it call. 61 exclusions became 50, and the 50 are real.
+
+**2. A refusal that exits was recorded as silence.** One adapter printed its error as JSON and
+called `sys.exit()`, which killed my worker before it could report. Six capabilities were filed as
+`NO_OUTPUT` — *the harness's problem, described as the capability's silence.* The worker now catches
+`SystemExit` and reports it as a refusal, and it extracts the adapter's own `"reason"` so the forge
+can read the world specification instead of my placeholder.
+
+**3. The last line of stdout is not necessarily mine.** The forge parsed `lines[-1]` as its verdict.
+An adapter that prints JSON owns that line. Results are now written behind a sentinel; a result that
+cannot be told apart from the world's chatter is not a result.
+
+### Two goals, not one
+
+A refusal is a **good** outcome for a capability and a **dead end** for a claim about what it
+returns. The forge had a single notion of "finished", so 24 capabilities refused cleanly and settled
+none of their 222 claims. There are now two goals — `DECLARED` (it spoke) and `OUTPUT` (it did the
+thing) — and the claim miner asks for `OUTPUT`.
+
+### What widened
+
+| | log 14 | now |
+|---|---|---|
+| capabilities attempted | 58 | **88** |
+| reaching a verdict of their own | 31 | **61** |
+| producing output (settleable) | 12 | **37** |
+| **behavioural claims settled** | **245** of 1,106 | **286** of 1,106 |
+| claims contradicted | 1 | 1 (the same one) |
+
+### The boundary: satisfied, not removed
+
+**50 capabilities import `subprocess`, `socket` or a browser, and 413 claims live behind them.**
+The refusal to run them is a safety property — an adapter that shells out can edit the tree it is
+standing in, and one already did in log 12.
+
+So the boundary is satisfied instead of moved: the capability runs inside a **throwaway
+`git archive HEAD` copy**, and — the detail that makes it real — it is **imported from the copy**,
+so every path it derives from `__file__` points inside the copy. Then the copy is destroyed, and the
+real tree is checked before and after.
+
+Measured over all 50:
+
+| | |
+|---|---|
+| capabilities behind the boundary | 50 |
+| produced output in a sandbox | **4** |
+| claims now settleable | **35** |
+| **real tree changed by any run** | **False** |
+
+That is a small yield, and it is the finding, not a failure of the sandbox.
+
+### Why widening stopped paying
+
+Every remaining refusal is a **domain** requirement, not a fixture error:
+
+```
+MODULE_MUST_BE_PY            ANCHOR_NOT_DIRECTORY        MEASURED_TREE_BYTE_LIMIT
+PYTHON_LIBRARY_CONTRACT_INCOMPLETE   PYTHON_CODEC_CONTRACT_INCOMPLETE
+```
+
+and the rest need tools this machine does not have: `PIL`, `openpyxl`, `sympy`, `pypdf`,
+`tesseract`, `zbarimg`, `pandoc`, plus npm and apt packages. No generic operator can invent a
+tesseract binary. **The remaining ~800 claims cannot be settled by better code. They need either
+spend or an environment that has the tools.**
+
+I did add the two operators that *are* still generic — a named argument must end in `.py`, a named
+argument must be a directory — because those are about shape, not domain. They moved four
+capabilities. The rest I refused to add, because an operator per capability is a person's work
+wearing a machine's clothes, which is the exact thing the no-names test exists to stop.
+
+### One idea I measured and rejected
+
+Static testing: "does the declared field appear anywhere in the adapter's source?" It would cover
+all 141 capabilities without executing anything. Calibrated against the 12 capabilities where I have
+execution ground truth: **99% precision** on the "present" direction (97 of 98 claim-instances) —
+genuinely good.
+
+Then I looked at where it would actually fire: **31 claims**, and the ones I inspected are all
+*delegation* — the keys are built by an imported module, so the adapter's source legitimately does
+not contain them. Static absence would have been a false-positive generator. **Rejected, not
+built.** The measurement is in the log rather than in the code because a weaker oracle that mostly
+fires wrongly is worse than no oracle.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| The harness no longer reports its own failures as the capability's silence | **TRUE** | 6 mutants around sentinel / SystemExit / goal all killed |
+| The unsafe check now means what it says | **TRUE** | 122 claims freed from comments; `os.system` still blocked (mutant killed) |
+| Subprocess capabilities can be run without touching this tree | **TRUE** | 50 runs, `real_tree_changed: False` |
+| That unlocked their claims | **FALSE** | 4 of 50, 35 of 413 claims |
+| Most claims can be settled | **FALSE** | 286 of 1,106 = 26% |
+| The remaining gap is a code problem | **FALSE** | it is missing binaries and domain worlds |
+| Unaided closure for classes that matter | **STILL 0** | one lead, still unfixed |
+
+### What the deepest layer says now
+
+Three logs have widened the world and the settled-claim number has gone 245 → 286. The curve is
+flat because the constraint was never the world-builder — it is that **most of what this repository
+claims about itself cannot be checked without tools it does not have.** That is an authority
+question (may I install things?) and a scope question (which capabilities matter at all), not an
+engineering one.
+
+I will not spend money to find out, because that is a stated law. So the honest next move is not
+another widening: it is to **fix the one real defect this machinery found** and prove the fix with
+the same oracle that found it — closing the loop from "doubt" to "settled", which is the first time
+in fifteen logs that the system would have found, fixed and verified something with nobody pointing.
+
+No capability credit. Drift guard unchanged.

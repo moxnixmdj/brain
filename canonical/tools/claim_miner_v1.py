@@ -361,11 +361,19 @@ def _run(capability_id: str) -> dict:
     one run answers every claim that capability makes about what it returns."""
     if capability_id in _RUNS:
         return _RUNS[capability_id]
-    from canonical.tools import world_forge_v1 as forge
     from canonical.tools.capability_world_v1 import registry
+    from canonical.tools.sandboxed_world_v1 import run_in_sandbox
     try:
         module = registry()[capability_id].get("adapter_module") or ""
-        outcome = forge.forge(capability_id, module)
+        # Ask for OUTPUT, not merely for a verdict. Measured 2026-11-04: with the forge's own
+        # goal, 24 capabilities refused cleanly and settled none of their 222 claims -- a
+        # refusal is a good outcome for a capability and useless for a claim about what it
+        # returns. The goal decides what counts as finished.
+        #
+        # And run it in a sandbox: a capability that shells out is imported from a throwaway
+        # copy of the tree, so the paths it derives from __file__ point inside the copy. The
+        # boundary is satisfied rather than removed.
+        outcome = run_in_sandbox(capability_id, module, goal="OUTPUT")
     except Exception as exc:                                            # noqa: BLE001
         outcome = {"reached": False, "stopped_by": f"ERROR:{type(exc).__name__}"}
     _RUNS[capability_id] = outcome
