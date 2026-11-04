@@ -2185,31 +2185,62 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
     except OSError as exc:
         return {"generalizes": False, "reason": f"UNREADABLE_OWED_TEST: {exc}"}
 
-    pat = _re.compile(
-        r"assert\s+([A-Za-z_][\w.]*)\(([^()]*)\)\s*(==|is)\s*([^\n#]+)"
-    )
-    cases = []
-    for fn_name, arg_src, op, exp_src in pat.findall(txt):
-        try:
-            args = _ast.literal_eval(f"({arg_src},)")
-            expected = _ast.literal_eval(exp_src.strip())
-        except Exception:
-            continue
-        if args:
-            cases.append((fn_name, args, op, expected))
+    # Evidence the probe could not previously see. The old extractor was a regex over
+    # `assert name(args) == literal`, so `assert Calc().add(7, 2) == 9` produced no case and an
+    # honest O(1) repair came back `NO_LITERAL_CALL_TO_PERTURB` -- a false negative, measured
+    # 2026-11-05, which silently rejected every repair living on a method rather than a bare
+    # function. Parsing the assertion instead of scanning it finds both forms: a plain call, or a
+    # method on a constructed receiver. Nothing about what counts as generalizing is weakened
+    # here; the probe just stops being blind to half the code it is asked about.
+    cases: list[tuple[str, str | None, tuple, str, Any]] = []  # (callable, receiver class, args, op, expected)
+    try:
+        _tree = _ast.parse(txt)
+    except SyntaxError:
+        _tree = None
+    if _tree is not None:
+        for node in _ast.walk(_tree):
+            if not isinstance(node, _ast.Assert):
+                continue
+            test = node.test
+            if not isinstance(test, _ast.Compare) or len(test.comparators) != 1:
+                continue
+            call = test.left
+            if not isinstance(call, _ast.Call):
+                continue
+            op = "==" if isinstance(test.ops[0], _ast.Eq) else (
+                "is" if isinstance(test.ops[0], _ast.Is) else None)
+            if op is None:
+                continue
+            try:
+                args = tuple(_ast.literal_eval(a) for a in call.args)
+                if call.keywords:
+                    continue
+                expected = _ast.literal_eval(test.comparators[0])
+            except Exception:
+                continue
+            if not args:
+                continue
+            fn = call.func
+            if isinstance(fn, _ast.Name):
+                cases.append((fn.id, None, args, op, expected))
+            elif isinstance(fn, _ast.Attribute):
+                recv = fn.value
+                cls = None
+                if isinstance(recv, _ast.Call) and isinstance(recv.func, _ast.Name) and not recv.args:
+                    cls = recv.func.id
+                elif isinstance(recv, _ast.Name):
+                    cls = recv.id  # an instance/class referenced by name in the test
+                if cls is not None:
+                    cases.append((fn.attr, cls, args, op, expected))
     if not cases:
         return {"generalizes": False, "reason": "NO_LITERAL_CALL_TO_PERTURB"}
 
-    fn_name, args, op, expected = cases[0]
-    short = fn_name.split(".")[-1]
+    short, receiver_cls, args, op, expected = cases[0]
 
     # Locate the definition by following the test's own imports. Scanning the tree is how this once
     # took minutes on a real repository; a probe too slow to run is a probe that silently says no.
     candidates: list[pathlib.Path] = []
-    try:
-        tree = _ast.parse(txt)
-    except SyntaxError:
-        tree = None
+    tree = _tree
     if tree is not None:
         for node in _ast.walk(tree):
             mods: list[str] = []
@@ -2225,20 +2256,35 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
     target = None
     for cand in candidates:
         try:
-            if f"def {short}(" in cand.read_text(encoding="utf-8", errors="replace"):
-                target = cand
-                break
+            text_c = cand.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
+        if f"def {short}(" in text_c and (
+            receiver_cls is None or f"class {receiver_cls}" in text_c
+        ):
+            target = cand
+            break
     if target is None:
         return {"generalizes": False, "reason": f"DEFINITION_NOT_FOUND: {short}"}
 
     try:
         ns: dict[str, Any] = {}
         exec(compile(target.read_text(encoding="utf-8"), str(target), "exec"), ns)  # noqa: S102
-        fn = ns.get(short)
-        if fn is None:
-            return {"generalizes": False, "reason": f"NOT_CALLABLE: {short}"}
+        if receiver_cls is None:
+            fn = ns.get(short)
+            subject = short
+        else:
+            _obj = ns.get(receiver_cls)
+            if not isinstance(_obj, type):
+                return {"generalizes": False, "reason": f"NOT_CALLABLE: {receiver_cls}"}
+            try:
+                _inst = _obj()
+            except Exception as exc:  # noqa: BLE001
+                return {"generalizes": False, "reason": f"RECEIVER_NOT_CONSTRUCTIBLE: {type(exc).__name__}"}
+            fn = getattr(_inst, short, None)
+            subject = f"{receiver_cls}.{short}"
+        if not callable(fn):
+            return {"generalizes": False, "reason": f"NOT_CALLABLE: {subject}"}
     except Exception as exc:  # noqa: BLE001
         return {"generalizes": False, "reason": f"REPAIRED_CODE_RAISES: {type(exc).__name__}"}
 
@@ -2270,6 +2316,7 @@ def _generalization_probe(test_file: pathlib.Path, ws_root: pathlib.Path) -> dic
         "ignores_inputs": ignores_inputs,
         "identity_like": identity_like,
         "source": str(target.relative_to(ws_root)),
+        "subject": subject,
         "reason": ("REPAIRED_CODE_DISAGREES_WITH_OWED_TEST" if not matches_owed
                    else "OUTPUT_IGNORES_INPUTS" if ignores_inputs
                    else "TEST_CANNOT_DISTINGUISH_IDENTITY" if identity_like

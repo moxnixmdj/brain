@@ -1379,6 +1379,9 @@ class VerifiedSkillStore:
                     eval_list = batch
 
             for cand in eval_list:
+                # One evaluation per candidate. An earlier revision memoized results against the
+                # world fingerprint; measured 2026-11-05 with the duplicate recall sites removed, it
+                # changed no evaluation counts and no timings, so it was deleted rather than shipped.
                 verification = evaluate(verifier, cand, required_verification_kind, scope_id)
                 if verification is not None:
                     hit = _commit_verified_hit(rule, cand, verification, scope_tier, recall_strategy)

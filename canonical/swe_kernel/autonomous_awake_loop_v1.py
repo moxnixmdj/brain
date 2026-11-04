@@ -1077,58 +1077,11 @@ class AwakeAgencyDaemon:
                     for m in re.findall(rf'{re.escape(cow_mod.name)}", line (\d+)', fail_out)
                 ]
 
-                # Tier A: Scoped TEST_SUITE recall (PR-C2 AST/CST narrowed_pattern + operator/semantic/E-Graph),
-                # falling back strictly to context-anchored CALLER_PREDICATE (no broadening) for legacy rules.
-                recalled = self.skill_store.recall_and_apply_verified(
-                    source_text=before_src,
-                    language="python",
-                    verifier=project_oracle,
-                    required_verification_kind="TEST_SUITE",
-                    scope_id=_awake_scope,
-                    context={"dependencies": {}, "preconditions": {}, "suspect_lines": suspect_lines},
-                    allow_scope_escalation=True,
-                    allow_cross_scope_transfer=True,
-                    suspect_lines=suspect_lines,
-                )
-                if isinstance(recalled, Mapping) and recalled.get("recall") is None:
-                    # A broadening path could not run because a parser is absent.
-                    # Keep the named reason and do not fall through as if the rule
-                    # had failed to apply.
-                    self._substrate_missing = dict(recalled.get("substrate_missing") or {})
-                    recalled = None
-                if recalled is None:
-                    cow_write_text(cow_mod, before_src)
-                    # The same contract oracle Tier A uses. `_verify_in_cow` is a local closure, and
-                    # a TEST_SUITE scope can never be satisfied by one: measured 2026-11-05, every
-                    # Tier B recall raised TEST_SUITE_REQUIRES_CONTRACT_ORACLE and the fallback was
-                    # silently swallowed, so the creature applied its own memory only when a
-                    # candidate happened to be generated anyway. The oracle that knows the scope was
-                    # already built three lines above and simply was not passed.
-                    recalled = self.skill_store.recall_and_apply_verified(
-                        source_text=before_src,
-                        language="python",
-                        verifier=project_oracle,
-                        required_verification_kind="TEST_SUITE",
-                        scope_id=_awake_scope,
-                        context={"dependencies": {}, "preconditions": {}, "suspect_lines": suspect_lines},
-                        allow_scope_escalation=False,
-                        suspect_lines=suspect_lines,
-                    )
-                if isinstance(recalled, Mapping) and recalled.get("recall") is None:
-                    self._substrate_missing = dict(recalled.get("substrate_missing") or {})
-                    recalled = None
-                if recalled is not None:
-                    patched = str(recalled["patched_source"])
-                    cow_write_text(cow_mod, patched)
-                    if self.apply_verified_repairs and self._note_staged_change(_staged, str(rel_mod), patched):
-                        repaired_records.append({
-                            "module": str(rel_mod),
-                            "mode": "VERIFIED_SKILL_RECALL",
-                            "scope_tier": recalled.get("scope_tier"),
-                            "skill_id": recalled.get("skill_id"),
-                        })
-                        continue
-
+                # Memory is not consulted here. It runs as a FALLBACK after every deterministic
+                # synthesizer below has failed on this module (search for MEMORY AS FALLBACK).
+                # Measured 2026-11-05: asked first, recall was a pure tax -- one contract-suite
+                # run per repair (~0.15-0.3 s), warm never faster than cold, because the cheap
+                # synthesizers already find these fixes for free.
                 # Tier B: Zero-LLM repo synthesizers (`python_test_guided_patch_search_v1._candidate_specs`
                 # + STUN condition-guard synthesis + deterministic AST synthesis) screened in ONE
                 # `< 25 ms` `PersistentConfinedZygote` CoW batch (`0` host `exec()`).
@@ -1219,6 +1172,46 @@ class AwakeAgencyDaemon:
                             "skill_ids": coupled_out.get("crystallized_skill_ids") or [],
                         })
                         continue
+                    # MEMORY AS FALLBACK, NOT AS PRESEARCH (S1 in FIRST_PRINCIPLES_SIX, measured
+                    # 2026-11-05). Consulted first, recall was a pure tax: every repair paid one
+                    # contract-suite run (~0.15-0.3 s) whether or not memory held anything relevant,
+                    # and warm runs were never faster than cold ones at any module size tried, because
+                    # the deterministic synthesizers already find these fixes for free.
+                    #
+                    # Here it costs nothing on the ordinary path and is asked exactly when it is the
+                    # only thing left: the confined candidate batch, the confined multi-file repair,
+                    # and the coupled zygote repair have all failed to produce a patch for this
+                    # module. If memory holds a fix verified for this scope, this turns an
+                    # unrepaired module into a repaired one -- which is the only regime where a
+                    # memory can pay, and the regime a cheap local search can never cover.
+                    recalled = self.skill_store.recall_and_apply_verified(
+                        source_text=before_src,
+                        language="python",
+                        verifier=project_oracle,
+                        required_verification_kind="TEST_SUITE",
+                        scope_id=_awake_scope,
+                        context={"dependencies": {}, "preconditions": {}, "suspect_lines": suspect_lines},
+                        allow_scope_escalation=True,
+                        allow_cross_scope_transfer=True,
+                        suspect_lines=suspect_lines,
+                    )
+                    if isinstance(recalled, Mapping) and recalled.get("recall") is None:
+                        self._substrate_missing = dict(recalled.get("substrate_missing") or {})
+                        recalled = None
+                    if recalled is not None and recalled.get("patched_source") is not None:
+                        _mem_patch = str(recalled["patched_source"])
+                        cow_write_text(cow_mod, _mem_patch)
+                        if self.apply_verified_repairs and self._note_staged_change(
+                            _staged, str(rel_mod), _mem_patch
+                        ):
+                            repaired_records.append({
+                                "module": str(rel_mod),
+                                "mode": "MEMORY_FALLBACK_RECALL",
+                                "scope_tier": recalled.get("scope_tier"),
+                                "skill_id": recalled.get("skill_id"),
+                            })
+                            continue
+                        cow_write_text(cow_mod, before_src)
                     ledger.note(
                         f"unrepaired failing module {rel_mod}",
                         why=fail_out[:160],
