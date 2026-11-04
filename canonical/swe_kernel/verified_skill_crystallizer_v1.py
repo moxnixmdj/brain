@@ -889,6 +889,24 @@ def verify_rule_on_mutated_twin(
 # 3. Persistent SQLite WAL Verified Skill Store
 # ---------------------------------------------------------------------------
 
+def _same_program(a: str, b: str) -> bool:
+    """Equal as programs, not as bytes.
+
+    Whitespace and a trailing newline are not part of what a repair means. Comparing source text
+    made the crystallizer reject its own verified repairs (measured 2026-11-05), which left the
+    creature unable to retain anything it learned. When either side does not parse, fall back to
+    exact comparison rather than guessing.
+    """
+    if a == b:
+        return True
+    try:
+        import ast as _ast
+
+        return _ast.dump(_ast.parse(a)) == _ast.dump(_ast.parse(b))
+    except SyntaxError:
+        return False
+
+
 class VerifiedSkillStore:
     """SQLite WAL store of scoped hypotheses; retrieval always re-verifies."""
 
@@ -964,8 +982,16 @@ class VerifiedSkillStore:
                                            expected_after_snippet=after_snippet):
             return {"crystallized": False, "reason": "FAILED_MUTATED_TWIN_VERIFICATION"}
 
-        if contract is not None and not any(c == after_snippet for c in itertools.islice(
-                iter_crystallized_code_rule_candidates(before_snippet, rule), 64)):
+        # The rule must generate the verified repair. Compare ASTs, not strings: the rule engine
+        # emits 'return (a + b)\n' while the repair path stages 'return (a + b)\n\n', and an exact
+        # string comparison turned a trailing newline into "this rule cannot reproduce its own
+        # worked example". Measured 2026-11-05: that single gate rejected every repair the creature
+        # made, so the skill store stayed empty across runs and the creature re-solved from scratch
+        # forever. What the gate means to ask is "does this rule produce this program", and two
+        # programs that differ only in trailing whitespace are the same program.
+        if contract is not None and not any(
+                _same_program(c, after_snippet)
+                for c in itertools.islice(iter_crystallized_code_rule_candidates(before_snippet, rule), 64)):
             return {"crystallized": False, "reason": "RULE_DOES_NOT_REPRODUCE_VERIFIED_EXAMPLE"}
         rule['record_version'] = 1
         rule['state'] = 'ACTIVE'

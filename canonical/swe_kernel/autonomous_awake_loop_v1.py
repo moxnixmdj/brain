@@ -1098,10 +1098,19 @@ class AwakeAgencyDaemon:
                     recalled = None
                 if recalled is None:
                     cow_write_text(cow_mod, before_src)
+                    # The same contract oracle Tier A uses. `_verify_in_cow` is a local closure, and
+                    # a TEST_SUITE scope can never be satisfied by one: measured 2026-11-05, every
+                    # Tier B recall raised TEST_SUITE_REQUIRES_CONTRACT_ORACLE and the fallback was
+                    # silently swallowed, so the creature applied its own memory only when a
+                    # candidate happened to be generated anyway. The oracle that knows the scope was
+                    # already built three lines above and simply was not passed.
                     recalled = self.skill_store.recall_and_apply_verified(
                         source_text=before_src,
                         language="python",
-                        verifier=_verify_in_cow,
+                        verifier=project_oracle,
+                        required_verification_kind="TEST_SUITE",
+                        scope_id=_awake_scope,
+                        context={"dependencies": {}, "preconditions": {}, "suspect_lines": suspect_lines},
                         allow_scope_escalation=False,
                         suspect_lines=suspect_lines,
                     )
