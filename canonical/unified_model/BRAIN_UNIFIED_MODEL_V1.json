@@ -30950,9 +30950,9 @@
   "bound_capabilities": 149,
   "capabilities": 443,
   "engines": 26,
-  "knowledge_documents": 313,
+  "knowledge_documents": 314,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6698,
+  "research_index_records": 6701,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dafae4a6bd07fee15ff86cede91dce10fa4123311ca57103107419f2b821978d"
+  "value": "ef63abca0ab89fb2e6b90a7165d90ff90844ea8910c9ab6b16c21014039933fc"
  },
  "engines": [
   {
@@ -55503,6 +55503,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8931,
+   "headings": [
+    "The language was growing, but only in its own image",
+    "What I was asked, and what I had been answering",
+    "The measurement",
+    "The fix, and why it is deliberately small",
+    "The four defects that change surfaced",
+    "A correction I had to make to myself",
+    "What is actually new",
+    "What this still is not"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1.md",
+   "sha256": "20d6b04b6e7b8ba108614abfb16b000523d65c9736766feebbc2e5413a3f8f30",
+   "summary": "**Round 31 — 2026-11-04** `authority: NONE` · `truth.achieved: false` · $0 · no external models · no neural weights",
+   "terms": {
+    "all": 6,
+    "already": 5,
+    "answer": 5,
+    "asked": 4,
+    "asserts": 4,
+    "because": 5,
+    "been": 5,
+    "both": 8,
+    "but": 4,
+    "composer": 6,
+    "constant": 4,
+    "creature": 12,
+    "emitted": 4,
+    "every": 5,
+    "evidence": 6,
+    "false": 4,
+    "floor": 4,
+    "grammar": 6,
+    "had": 10,
+    "here": 4,
+    "hypothesis": 4,
+    "language": 4,
+    "law": 10,
+    "laws": 4,
+    "learned": 7,
+    "moved": 4,
+    "must": 5,
+    "my": 7,
+    "never": 7,
+    "new": 6,
+    "no": 6,
+    "not": 18,
+    "nothing": 9,
+    "now": 5,
+    "numbers": 5,
+    "one": 14,
+    "only": 5,
+    "position": 5,
+    "program": 5,
+    "round": 9,
+    "rounds": 6,
+    "same": 6,
+    "space": 5,
+    "table": 8,
+    "test": 6,
+    "were": 8,
+    "wrong": 10,
+    "zero": 5
+   },
+   "title": "The language was growing, but only in its own image",
+   "title_terms": [
+    "but",
+    "growing",
+    "image",
+    "language",
+    "only",
+    "own"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6945,
    "headings": [
     "The World Is Allowed to Say No",
@@ -68810,10 +68887,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1107,
+  "included_source_count": 1108,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "12daaed6d7c03ca240403d2fb7f92ec4c1893dadfefcaae8813bfec4243c24ca"
+  "source_tree_digest": "f291f025c9130b15fad04761bf591e28e947ee471e5a79023951e2703439f2b6"
  },
  "research_index": [
   {
@@ -197828,6 +197905,47 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
+   "schema": "",
+   "sha256": "84c982419be34eac3b691da1a553bbf5a3822f9d04bf41d2d48cc244446483c7",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.2.0": 1,
+    "finite": 1,
+    "pytest": 1,
+    "search.cpython": 1,
+    "test": 1,
+    "verifier": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
+   "schema": "",
+   "sha256": "34350ba7b0b496fcfa22a7b144587c838fac47f2fcf7ce12d60eb0010fa734e7",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.2.0": 1,
+    "causal": 1,
+    "falsification": 1,
+    "owned": 1,
+    "pytest": 1,
+    "test": 1,
+    "v1.cpython": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
@@ -225331,6 +225449,31 @@
     "the_shipping_path_recorded_only_successes_so_it_repaid_for_the_same_dead_route_on_every_run_v1_20261022_v1": 1,
     "v1": 2,
     "write_the_front_doors_outcome_into_the_pathology_memory_the_repository_already_has_for_failures_as_well_as_successes_unwrapping_the_reason_code_from_the_blocker_envelope_so_the_unit_of_memory_is_the_pathology_and_not_the_envelope__selected__measured_at_front_door_pathology_cells_zero_to_one_per_run_with_selection_unchanged_at_22_of_23_and_acceptance_unchanged_at_12_of_23_and_zero_new_failures": 1
+   }
+  },
+  {
+   "action_id": "THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_SPACE_GREW_ONLY_IN_ITS_OWN_IMAGE_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4db148b5dafbe1a04c25845e1f1342eeabe9d1c1f030024c940e49d4bb6b51a3",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "a_learned_law_had_no_term_position_so_a_new_law_could_only_be_composed_with_another_law_and_never_used_as_a_cofactor__omega_t_plus_1_contained_only_more_instances_of_the_shapes_in_omega_t": 1,
+    "a_learned_law_may_now_sit_inside_an_expression_as_a_term_with_its_cofactor_solved_per_residue__complexity_ordered_by_numeric_literals_not_bytes__a_period_table_declares_itself_undefined_off_the_integers_instead_of_extrapolating__undefined_is_distinguished_from_wrong_in_all_three_places__zero_capability_credit__zero_terminal_credit__not_emergence": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "give_a_learned_law_a_term_position_and_solve_its_cofactor_per_residue": 1,
+    "grew": 1,
+    "image": 1,
+    "only": 1,
+    "own": 1,
+    "space": 1,
+    "the_space_grew_only_in_its_own_image_20261104_v1": 1,
+    "v1": 1
    }
   },
   {
@@ -290389,7 +290532,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/settlement_v1.py",
-   "sha256": "637a7ebc128915639b305d01383396977c8606022f0a589bd8ac2702beb0bca9",
+   "sha256": "4d72451c19792a78cd88b1905eb28c12cd9d94525f4a8bf8fda7c85519831263",
    "summary": "Settlement V1: *settled* is a computed quantity, never a reached state.",
    "symbol_count": 15,
    "symbols": [
