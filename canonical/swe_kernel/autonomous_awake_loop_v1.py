@@ -486,6 +486,13 @@ class AwakeAgencyDaemon:
         self.workflow_db_path = (
             pathlib.Path(workflow_db_path) if workflow_db_path else None
         )
+        # Habits live beside the skill store, so a creature that keeps its memories keeps its
+        # habits too -- and one that is given a fresh store starts genuinely naive.
+        _store_p = pathlib.Path(skill_store_path) if skill_store_path else None
+        self.habits_path = (
+            (_store_p.parent / "learned_edit_habits.json") if _store_p is not None
+            else (pathlib.Path(tempfile.gettempdir()) / f"brain_habits_{ws_hash}.json")
+        )
         if r3_state_path is not None:
             self.r3_state_path = pathlib.Path(r3_state_path).resolve()
         elif journal_dir is not None:
@@ -1157,6 +1164,13 @@ class AwakeAgencyDaemon:
                 # BINDING / SIGNATURE / SYNTAX were solved by NO producer at all. The gap was a
                 # missing capability, not missing scheduling. A misspelled identifier is the tractable
                 # third of it, and this repairs it from the file's own vocabulary.
+                # LEARNED HABITS go in the same list as every authored producer. They are the only
+                # entries the creature taught itself: each is a substitution it was never told about,
+                # derived from its own earlier successes and composed by transitive closure. Screened
+                # by execution exactly like the rest, so a bad habit costs probes and nothing else.
+                from canonical.swe_kernel.learned_edit_habits_v1 import live_habits
+
+                _habits = live_habits(self.habits_path)
                 from canonical.swe_kernel.binding_repair_v1 import propose_binding_repairs
                 from canonical.swe_kernel.signature_repair_v1 import propose_signature_repairs
                 # Syntax repairs exist because a file that does not parse makes every other reading
@@ -1166,7 +1180,8 @@ class AwakeAgencyDaemon:
                 from canonical.swe_kernel.syntax_repair_v1 import propose_syntax_repairs
 
                 raw_cands = (
-                    propose_operator_family_swaps(before_src, max_candidates=24)
+                    _habits.propose(before_src, limit=8)
+                    + propose_operator_family_swaps(before_src, max_candidates=24)
                     + propose_binding_repairs(before_src, fail_out, max_candidates=6)
                     + propose_signature_repairs(before_src, fail_out, max_candidates=6)
                     + propose_syntax_repairs(before_src, fail_out, max_candidates=6)
@@ -1311,6 +1326,10 @@ class AwakeAgencyDaemon:
                         twin_oracle=oracle,
                     )
                 cow_write_text(cow_mod, solved_src)
+                # Learning is automatic, not a separate pass. A verified repair is the only evidence
+                # this system has that an edit was RIGHT, so it is the only thing worth abstracting
+                # from -- and it is free here, because the pair is already in hand for crystallization.
+                _habits.observe_repair(before_src, solved_src)
                 if cryst.get("crystallized") and cryst.get("skill_id"):
                     rule_exp.record_taught(
                         self.skill_store.db_path,
