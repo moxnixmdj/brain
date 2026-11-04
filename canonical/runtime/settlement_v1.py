@@ -721,3 +721,128 @@ def acquire_period(
         "questions": asked,
         "reason": f"no period up to {max_period} matched after {asked} questions",
     }
+
+
+# ---------------------------------------------------------------------------------------------
+# Inducing a period TABLE: the structure comes from the world, not from a template I wrote
+# ---------------------------------------------------------------------------------------------
+def table_evidence_requirement(period: int, *, factor: int = 4) -> int:
+    """How many observations a period table needs before it may claim a structure.
+
+    Exposed so a caller can BUDGET for the compression rule instead of discovering it by failing.
+    The rule itself is that the block must be at most a quarter of the evidence, which is what
+    separates an induction from a restatement.
+    """
+    return factor * int(period)
+
+
+def induce_periodic_table(
+    observations: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    max_period: int = 64,
+) -> dict[str, Any] | None:
+    """Find the smallest period-table hypothesis that explains the evidence exactly.
+
+    A ramp like `x mod k` can be recovered by inducing its parameter, but a ramp is a SHAPE I wrote
+    down. A function that repeats an arbitrary block -- period 3, values `[5, -2, 7]`, forever -- is
+    refused by that machinery (measured: NO_CONSISTENT_HYPOTHESIS), even though it is perfectly
+    periodic and three questions determine it completely.
+
+    The hypothesis returned here is `f(x) = block[x mod period]`, where `block` is whatever the world
+    put there. That is a claim about infinitely many inputs, not a memory of the ones observed: it
+    predicts `f(-1)` and `f(500)` from evidence at `0,1,2`, and any single input can falsify it. A
+    lookup that memorised pairs made no such claim, which is why it scored 2/10 the moment it left its
+    evidence.
+
+    The block is only believed if it is EXACTLY periodic in the evidence -- every observation must sit
+    where the block says it should -- and the smallest such period wins, so a 40-entry table is never
+    preferred over a 3-entry one that explains the same data.
+    """
+    if len(observations) < 3:
+        return None
+    try:
+        pairs = sorted((float(x[0]), float(y)) for x, y in observations)
+    except (TypeError, ValueError, IndexError):
+        return None
+    xs = [x for x, _ in pairs]
+    ys = [y for _, y in pairs]
+    if len(set(xs)) != len(xs):
+        return None
+    if any(abs(x - round(x)) > 1e-9 for x in xs):
+        return None  # a table over integer residues only
+
+    ints = [int(round(x)) for x in xs]
+    origin = min(ints)
+    for period in range(2, max_period + 1):
+        covered = len({i % period for i in ints})
+        # A block inferred from only a fragment of itself is not yet a block. The same coverage lesson
+        # as before: sparse, scattered evidence must not be allowed to manufacture a period.
+        if covered < period:
+            continue
+        block: dict[int, float] = {}
+        consistent = True
+        for i, y in zip(ints, ys):
+            slot = i % period
+            if slot in block:
+                if abs(block[slot] - y) > 1e-9:
+                    consistent = False
+                    break
+            else:
+                block[slot] = y
+        if consistent and len(block) == period:
+            # A table with close to one entry per observation explains the evidence by RESTATING it.
+            # That is a memory, not an induction: it predicts nothing beyond what it was told, which is
+            # exactly the 2/10 lookup this project already removed. The bound must scale with the
+            # evidence -- a fixed number here would be another ceiling on learning, and a fixed
+            # threshold of 16 already cost a full round. Requiring the block to be at most a quarter of
+            # the observations means the claim must cover at least four times its own size.
+            if len(pairs) < 4 * period:
+                continue
+            return {
+                "period": period,
+                "block": [block[k] for k in range(period)],
+                "origin": origin,
+                "evidence": len(pairs),
+                # Description length in the only currency that matters here: how many values must be
+                # stated versus how many observations they explain. A table with nearly as many
+                # entries as observations is memorisation and is reported as such.
+                "compression": len(pairs) / float(period),
+            }
+    return None
+
+
+def candidate_period(
+    observations: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    max_period: int = 64,
+) -> int | None:
+    """Smallest period consistent with the evidence so far, even if not yet fully covered.
+
+    `induce_periodic_table` requires complete coverage plus a compression margin, so it cannot be used
+    to answer "how much more evidence do I need?". This can: it looks for the smallest period that does
+    not CONTRADICT the evidence, which is exactly the quantity a collection loop must budget against.
+    """
+    if len(observations) < 2:
+        return None
+    try:
+        pairs = sorted((float(x[0]), float(y)) for x, y in observations)
+    except (TypeError, ValueError, IndexError):
+        return None
+    if any(abs(x - round(x)) > 1e-9 for x in [p[0] for p in pairs]):
+        return None
+    ints = [int(round(x)) for x, _ in pairs]
+    ys = [y for _, y in pairs]
+    for period in range(2, max_period + 1):
+        block: dict[int, float] = {}
+        ok = True
+        for i, y in zip(ints, ys):
+            slot = i % period
+            if slot in block:
+                if abs(block[slot] - y) > 1e-9:
+                    ok = False
+                    break
+            else:
+                block[slot] = y
+        if ok:
+            return period
+    return None
