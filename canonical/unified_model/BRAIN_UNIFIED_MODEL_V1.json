@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "894b08751e9b8e70a853ec9540f970d1ecbdf84aa364405d815b57541164ec9e"
+  "value": "59b23191f4b6a4199830712f4a5c09a44c694476f67fbd7ce633a564b1b15ede"
  },
  "engines": [
   {
@@ -218887,7 +218887,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "92b8d7e305e5b5cd51afc47d1ac75d864a2a43d3a611055b77e203e90803c21b",
+   "sha256": "b4ccf1f8f4eef804480c0489715106eded242e04c16ff3a7013b2e05333f2f85",
    "status": "",
    "terms": {
     "20261104": 1,
