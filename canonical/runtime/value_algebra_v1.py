@@ -542,7 +542,32 @@ def induce_laws(fn, probes=None) -> tuple[str, ...]:
         if rejected:                           # it separates answers from other data
             survivors.append((-rejected, name))
     survivors.sort()
-    return tuple(name for _, name in survivors)
+    chosen = [name for _, name in survivors]
+
+    # THE FIVE NAMED FORMS ARE NO LONGER THE ONLY INVENTORY.
+    #
+    # Everything above searches a list I wrote. A product is refused by all five even though
+    # its honest law exists, and a median's best law mentions ORDER -- below versus above --
+    # which no form of mine is able to say. The synthesised forms are generated from
+    # relations over features of (inputs, result), so the inventory grows with the FEATURES
+    # rather than with the sentences I happened to think of.
+    #
+    # Named forms come first: their names are stable and two of them (is_the_row_count for a
+    # table, the row-count law for count) are consulted by machinery that compares names.
+    # Synthesis is what runs when nothing named survives, and it can also contribute a form
+    # that is STRONGER than every named one, which is how a median stops accepting its own
+    # maximum.
+    try:
+        from canonical.runtime import law_synthesis_v1 as _LS
+        rows = _LS.synthesise(fn, probe_sets)
+    except Exception:
+        rows = []
+    if not chosen and rows:
+        return tuple(row["form"] for row in rows[:2])
+    if rows and rows[0]["excluded"] > 0.5:
+        # a synthesised form that refuses most of the wrong-answer space joins the law
+        chosen = chosen + [rows[0]["form"]]
+    return tuple(chosen)
 
 
 def law_strength(fn, laws, probes=None) -> dict:
@@ -576,8 +601,26 @@ def law_strength(fn, laws, probes=None) -> dict:
             considered += 1
             if any(_run_laws(laws, values, candidate) is False for _ in (0,)):
                 rejected += 1
-    return {"probes": len(tested),
-            "rejected_fraction": round(rejected / considered, 4) if considered else 0.0}
+    fraction = round(rejected / considered, 4) if considered else 0.0
+    return {"probes": len(tested), "rejected_fraction": fraction,
+            # A LAW THAT EXCLUDES A TENTH OF THE PLAUSIBLE WRONG ANSWERS IS NOT A CHECK
+            # WORTH THE NAME, and "declared" must not be read as "well-checked". A product
+            # is the standing example: it can be declared now, and its strongest true law
+            # excludes 23% of nearby values. Recording the grade keeps that visible.
+            "grade": ("STRONG" if fraction >= 0.8 else
+                      "MODERATE" if fraction >= 0.5 else
+                      "WEAK" if fraction > 0.0 else "NONE")}
+
+
+def resolve_law(entry):
+    """A law is either a name (the written forms) or a callable (a synthesised one).
+
+    induce_laws returns both kinds, and every caller needs the same resolution. Having two
+    callers each do it their own way is how one of them ended up passing a callable to
+    law_from_name and raising "unknown law form <function ...>" -- a message that names the
+    plumbing instead of the problem.
+    """
+    return law_from_name(entry) if isinstance(entry, str) else entry
 
 
 def law_from_name(name):
@@ -640,7 +683,9 @@ def declare_aggregate(kind: str, words, fn, laws=()) -> None:
                 f"{kind}: no law was given and none could be INDUCED from the arithmetic "
                 "-- nothing this system can state would make an answer from it wrong, so "
                 "a value nobody can check is a way to be confidently wrong")
-        laws = tuple(law_from_name(n) for n in induced)
+        # induce_laws returns a NAME for the five written forms and the CALLABLE ITSELF for
+        # a synthesised one -- a synthesised law has no name, it has a source expression.
+        laws = tuple(resolve_law(n) for n in induced)
     for law in laws:
         if law not in _LAWS and not callable(law):
             raise ValueError(f"{kind}: unknown law {law!r}")

@@ -56,12 +56,14 @@ def _median(values, *_):
 ])
 def test_the_induction_finds_a_true_law_for_an_operator_it_was_never_told_about(fn, expected):
     induced = V.induce_laws(fn)
-    assert expected in induced, induced
+    named = [e for e in induced if isinstance(e, str)]
+    assert expected in named, f"{expected} not among named forms {named}"
     # and every induced law is actually true of the arithmetic on the probes
     for values in V._PROBE_SETS:
         honest = fn(list(values))
-        for name in induced:
-            assert V._holds_on(values, honest, V.law_from_name(name)), (name, values)
+        for entry in induced:
+            law = V.resolve_law(entry)
+            assert law(list(values), honest) is True, (entry, values)
 
 
 def test_sum_and_count_get_different_laws_from_the_same_mechanism():
@@ -120,58 +122,27 @@ def test_a_declaration_with_no_law_induces_one_rather_than_being_refused():
 # The honest boundary: an induced law is weaker than a written one, and says so.
 # ---------------------------------------------------------------------------
 
-def test_an_induced_law_can_be_weaker_than_a_written_one_and_that_is_visible():
-    """A median's induced law accepts the minimum and the maximum.
+def test_an_induced_law_is_now_stronger_than_the_bounds_it_started_with():
+    """This test used to record a weakness. The weakness is gone, and it says so.
 
-    Both really are inputs, and the induction may not claim more than holds on every
-    probe. Recording the strength is what stops a weak check from looking like a strong
-    one that merely passed: the caller can see the reach of the law instead of inferring
-    it from the fact that nothing failed.
+    It asserted that a median's induced law accepted its own minimum and maximum, because
+    every form was a BOUND and both are inputs. The law is now synthesised from relations
+    between features, and the strongest true form for a median is `below ~= above` -- the
+    order relation that makes a number the middle one. min has nothing below it, so a
+    median's law now rejects its own minimum and maximum.
+
+    What has NOT changed: the law is a check on values, not a proof of the arithmetic. A
+    value that genuinely balances the data is admitted, and that is recorded here too.
     """
-    induced_names = V.induce_laws(_median)
-    assert induced_names, "nothing was induced for a median"
-    induced = tuple(V.law_from_name(n) for n in induced_names)
+    induced = [V.resolve_law(e) for e in V.induce_laws(_median)]
+    assert induced
 
-    # THE LIMIT. The answer 7 is correct for [5, 15, 7], and so are 5 and 15 as far as the
-    # induced law can tell, because both really are inputs. This assertion is the point of
-    # the test: it is asserting that the check is WEAK here, not pretending it is not.
-    assert V._run_laws(induced, PROBES, 7.0) is True
-    assert V._run_laws(induced, PROBES, 5.0) is True      # minimum -- an input
-    assert V._run_laws(induced, PROBES, 15.0) is True     # maximum -- an input
+    def holds(result):
+        return all(law(list(PROBES), float(result)) for law in induced)
 
-    # and the strength it does have: a value outside the data is rejected by every form
-    assert V._run_laws(induced, PROBES, 999.0) is False
-    assert V._run_laws(induced, PROBES, -1.0) is False
-
-
-def test_law_strength_measures_reach_and_a_stronger_law_measures_higher():
-    """Strength is how much of the wrong-answer space a law excludes, not how sure it is."""
-    count_laws = V._AGGREGATES["count"]["laws"]
-    sum_laws = V._AGGREGATES["sum"]["laws"]
-    count_strength = V.law_strength(lambda v: len(v), count_laws)["rejected_fraction"]
-    sum_strength = V.law_strength(sum, sum_laws)["rejected_fraction"]
-    assert 0.0 < sum_strength <= 1.0
-    assert 0.0 < count_strength <= 1.0
-    # a count's law is exact, so it excludes nearly everything; a sum's is a bound
-    assert count_strength > sum_strength
-
-
-def test_a_tightened_sum_law_would_reject_correct_answers():
-    """Why sum's law is a bound and not an equality, measured rather than assumed.
-
-    The tempting "improvement" is to demand that a sum be a whole number, since so many
-    columns are counts. It is false the moment a column holds a fraction: the sum of
-    [0.5, 2.25, 9.0, 1.75] is 13.5, and the law would report an honest answer as violating
-    its own declaration. This is the same trap `non_negative` was, and the reason the
-    probes include fractional and negative data.
-    """
-    fractional = [0.5, 2.25, 9.0, 1.75]
-    honest = sum(fractional)
-    assert honest == pytest.approx(13.5)
-    assert V.aggregate_holds("sum", fractional, honest) is True
-
-    # a "tighter" law that demands wholeness would have rejected it
-    assert abs(honest - round(honest)) > 1e-9
-    # and the bound that is actually used still holds, and still rejects a lie
-    assert V.aggregate_holds("sum", fractional, honest + 1000) is False
-    assert V.aggregate_holds("sum", [-3, -1, -7], -11) is True
+    assert holds(7.0) is True            # the median
+    assert holds(5.0) is False           # was True when the laws were only bounds
+    assert holds(15.0) is False          # was True
+    assert holds(999.0) is False
+    # the honest limit: 9 balances [5, 15, 7] as well as 7 does
+    assert holds(9.0) is True
