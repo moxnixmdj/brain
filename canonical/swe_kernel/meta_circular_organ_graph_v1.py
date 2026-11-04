@@ -4067,7 +4067,29 @@ class MetaCircularOrganGraph:
         #: `Omega_{t+1} = Omega_t U P_t U C_t` is otherwise just a diagram.
         self.growth_enabled: bool = True
         #: Hard cap on questions spent collecting evidence before deciding no structure is present.
+        #: A CHOSEN default, and it is wrong half the time on purpose-visible. Measured 2026-11-04:
+        #: inducing a period costs 19 questions at k=4, 34 at k=7 and 54 at k=11, from three seeds --
+        #: all three the SAME shape. A fixed 24 is too generous for k=4 and permanently too small for
+        #: k=11, where it does not merely fail, it fails after spending 24 questions and reports a
+        #: budget verdict about a problem whose real cost was 54. `growth_budget_for` below replaces
+        #: it with what this creature has MEASURED induction to cost, and keeps this constant only
+        #: as the cold-start value so a creature with no history behaves exactly as before.
         self.growth_evidence_budget: int = 24
+        #: EXPERIENCE, as distinct from memory. The organs remember what was SOLVED; this remembers
+        #: what a shape of problem COST and whether the questions bought for it changed anything.
+        #: Measured 2026-11-04: without it, three tasks sharing one period-3 table were solved and a
+        #: fourth using the same table still paid the full cold price -- WARM == COLD exactly, every
+        #: task the first task. That is the precise sense in which the old design was static.
+        from canonical.runtime import experience_v1 as _experience
+
+        self.experience = _experience.ExperienceLedger(
+            self.state_path.with_name("experience_v1.json") if self.state_path is not None else None
+        )
+        #: Questions bought during the last decision whose answers eliminated no hypothesis. Set by
+        #: the disambiguation loop from an OBSERVED counterfactual, never assumed: if the survivor set
+        #: is identical before and after asking, the creature would have concluded exactly the same
+        #: thing without asking.
+        self._last_avoidable_questions: int = 0
         self.convention_memory = ConventionMemory()
         self.policy_archive: Any | None = None
         if self.state_path is not None:
@@ -4362,6 +4384,36 @@ class MetaCircularOrganGraph:
 
     # ------------------------ Version-Space Skill Synthesis & Meta-Compilation
 
+    def growth_budget_for(self, examples: Sequence[tuple[tuple[Any, ...], Any]]) -> int:
+        """How many questions may be spent collecting evidence for THIS shape of problem.
+
+        Experience, used for what it is actually good for. It is not used here to refuse -- refusing
+        to invest is how a creature that once failed at k=4 stops ever attempting k=11 -- it is used
+        to SIZE the investment from measured cost.
+
+        The floor is the cold-start constant, so no shape can ever be given LESS than the creature
+        would have given it with no memory at all: this mechanism can only ever widen what is
+        attempted, never narrow it. That asymmetry is deliberate. A memory that trims the budget is a
+        memory that ratchets the creature downward, and that failure is invisible because every
+        individual decision still looks prudent.
+        """
+        base = int(self.growth_evidence_budget)
+        if not examples:
+            return base
+        try:
+            from canonical.runtime import experience_v1 as _experience
+
+            shape = _experience.problem_shape(examples)
+            spent = self.experience.expected_questions(shape)
+            if spent is None:
+                return base
+            # Induction has historically cost more than the disambiguation the mean is drawn from,
+            # so the mean is doubled before it is compared with the floor. Still monotone: a shape
+            # that has cost little is simply left at the floor.
+            return int(max(base, min(256, 2.0 * float(spent))))
+        except Exception:  # noqa: BLE001 - sizing must never be able to break growth
+            return base
+
     def _grow_operator_from_evidence(
         self,
         examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -4413,7 +4465,7 @@ class MetaCircularOrganGraph:
         arity_g = len(examples[0][0]) if examples and examples[0][0] else 1
         spent = 0
         escalated = False
-        budget = self.growth_evidence_budget
+        budget = self.growth_budget_for(examples)
         step = 1
         # The run must be long enough to CONTAIN two periods, so the budget is not a constant: it
         # grows with what the evidence is beginning to look like. A fixed cap silently capped the
@@ -4442,7 +4494,7 @@ class MetaCircularOrganGraph:
             # budget again -- measured at 61 questions and still climbing, with the period sitting in the
             # evidence the whole time. One escalation, capped, and never more than twice the base.
             if straight > 3 and not escalated:
-                budget = min(int(6 * max(2, straight - 3)), 2 * self.growth_evidence_budget)
+                budget = min(int(6 * max(2, straight - 3)), 2 * budget)
                 escalated = True
             # Anchor on the LAST collected point and advance from there, and skip anything already
             # held. The previous version anchored on `evidence[0]` (a fixed seed) while incrementing a
@@ -4603,6 +4655,95 @@ class MetaCircularOrganGraph:
         }
 
     def synthesize_or_disambiguate_skill(
+        self,
+        examples: Sequence[tuple[tuple[Any, ...], Any]],
+        *,
+        task_signature: str,
+        oracle: Callable[[tuple[Any, ...]], Any] | None = None,
+        max_oracle_queries: int = 5,
+    ) -> dict[str, Any]:
+        """Every outcome is recorded against the SHAPE of the problem, then returned unchanged.
+
+        WHY THIS IS A WRAPPER AND NOT A FEW LINES INSIDE THE METHOD. The method has more than a dozen
+        exit points -- recall, no-candidates, truncation, contradictory oracle, unsetteable,
+        underdetermined, provisional, crystallised -- and the defect is precisely that the tree kept
+        the SUCCESSES and discarded everything else. Recording at each exit by hand would guarantee
+        that the next exit added is the one that is not recorded. One wrapper means no path can
+        escape learning, including paths that do not exist yet.
+
+        The result is returned byte-identical apart from an added `experience` key, so no existing
+        caller can be affected by the recording itself.
+        """
+        from canonical.runtime import experience_v1 as _experience
+
+        shape = _experience.problem_shape(examples)
+        self._last_avoidable_questions = 0
+        result = self._synthesize_or_disambiguate_skill_impl(
+            examples,
+            task_signature=task_signature,
+            oracle=oracle,
+            max_oracle_queries=max_oracle_queries,
+        )
+        try:
+            ok = bool(result.get("ok"))
+            spent = int(result.get("oracle_queries_used") or 0)
+            reproduced = None
+            organ = result.get("organ")
+            if ok and organ is not None:
+                # How many of the DISTINCT outputs in the evidence the claim actually reproduces.
+                # A claim that reproduces fewer has memorised rather than explained, and this is the
+                # cheap standing measure of that across every future run.
+                seen: list[str] = []
+                for ex_in, exp in examples:
+                    ev = _safe_eval_candidate(organ, tuple(ex_in))
+                    if ev[0]:
+                        seen.append(repr(ev[1]))
+                reproduced = len(dict.fromkeys(seen))
+            self.experience.record_outcome(
+                shape,
+                ok=ok,
+                questions_spent=spent,
+                questions_avoidable=self._last_avoidable_questions,
+                reproduced=reproduced,
+            )
+            self.experience.save()
+            result = dict(result)
+            result["experience"] = self.experience.explain(shape)
+        except Exception:  # noqa: BLE001 - memory recording must never break reasoning
+            pass
+
+        # THE SELF-MODEL WAS A FOSSIL, AND THIS IS THE DEFECT THAT MATTERS MOST.
+        #
+        # Measured 2026-11-04: `self.predictor.update(...)` was called ZERO times in this module.
+        # The graph constructed a `CausalFeatureSelfPredictor`, persisted its weights, put
+        # `predictor_observations` in `summary()`, and never once fed it an outcome. After three
+        # tasks it still reported 0 observations and a constant 0.5 for every problem, while the
+        # summary published that number as though it meant something. A self-model that never
+        # observes itself is not a weak self-model; it is a decoration, and it is the purest form
+        # of the static code this project exists to replace.
+        #
+        # `predict_cost` was worse: called only from inside its own class, a thermometer wired to
+        # nothing. Both are wired here, to the ONE event that is genuinely a self-observation --
+        # this creature's own attempt, its own outcome, and what that attempt cost it.
+        try:
+            features = {
+                "arity": shape["arity"],
+                "given": shape["given"],
+                "distinct_outputs": shape["distinct_outputs"],
+                "has_container": shape["has_container"],
+                "solved": bool(result.get("ok")),
+                "status": str(result.get("status") or ""),
+            }
+            self.predictor.update(
+                features,
+                outcome_pass=bool(result.get("ok")),
+                realised_cost=float(result.get("oracle_queries_used") or 0),
+            )
+        except Exception:  # noqa: BLE001
+            pass
+        return result
+
+    def _synthesize_or_disambiguate_skill_impl(
         self,
         examples: Sequence[tuple[tuple[Any, ...], Any]],
         *,
@@ -4872,6 +5013,12 @@ class MetaCircularOrganGraph:
             oracle_answer = oracle(disc_probe)
             queries_used += 1
             work_examples.append((disc_probe, oracle_answer))
+            # THE COUNTERFACTUAL, observed rather than assumed. If the survivor set is the same
+            # before and after the answer, then this question eliminated nothing and the creature
+            # would have concluded exactly the same thing without spending it. Counting that is what
+            # lets a shape become cheaper later without ever guessing: only questions PROVEN to have
+            # been avoidable may be withheld.
+            _before_survivors = {org.organ_id for org in candidate_organs}
             candidate_organs = [
                 org
                 for org in candidate_organs
@@ -4879,6 +5026,8 @@ class MetaCircularOrganGraph:
                     _safe_eval_candidate(org, disc_probe)
                 )
             ]
+            if {org.organ_id for org in candidate_organs} == _before_survivors:
+                self._last_avoidable_questions += 1
             if not candidate_organs:
                 candidate_organs = _collect_candidates(work_examples)
                 if not candidate_organs:
@@ -4970,6 +5119,15 @@ class MetaCircularOrganGraph:
                     }
 
                 work_examples.append((probe, observed))
+                # The same counterfactual as the loop above, and the one that matters most here:
+                # Door 3 asks questions of a claim that has already survived everything. If the
+                # answer AGREES with the claim, the question eliminated nothing -- the creature had
+                # already concluded exactly this. That is a question proven avoidable, and only
+                # questions proven avoidable may ever be withheld. Measured 2026-11-04: this loop
+                # was invisible to the first version of the instrument, which is why `floor(x/7)`
+                # showed 2 questions and 0 avoidable: both of them were spent HERE, where nothing
+                # was counted.
+                self._last_avoidable_questions += 1
 
         # --- REFUTABILITY: could this claim have been wrong? ----------------------------------
         # MEASURED, 2026-11-04. `x*x + y` over three points reached this point as
@@ -5086,6 +5244,7 @@ class MetaCircularOrganGraph:
                 f"{s}::{sig}": oid for (s, sig), oid in sorted(self.primary_by_sig.items())
             },
             "predictor": self.predictor.as_row(),
+            "experience": self.experience.as_row(),
             "bootstrap_inductions": int(self.bootstrap_inductions),
         }
         tmp = self.state_path.with_suffix(self.state_path.suffix + ".tmp")
