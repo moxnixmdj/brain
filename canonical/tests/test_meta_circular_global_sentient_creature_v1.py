@@ -378,7 +378,9 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
             self.assertIsNotNone(pol)
             self.assertNotEqual(pol.organ_id, boot_id)
-            self.assertTrue(pol.metadata.get("learned_immediate") or "burned" in pol.source_code)
+            self.assertTrue(pol.metadata.get("from_incumbent"))
+            self.assertIn(boot_id, pol.parent_organ_ids)
+            self.assertFalse(pol.metadata.get("bootstrap_factory"))
             self.assertIn("_immediate", pol.source_code)
             ranked = pol.invoke(
                 [
@@ -386,7 +388,7 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
                     {"id": "safe", "value": 10.0, "cost": 1.0},
                 ],
                 10.0,
-                None,
+                {"burned": 1.0, "safe": 0.0},
             )
             self.assertEqual(ranked[0]["id"], "safe")
             # Instrumental Q still prefers the 0-reward unlocker after rewrite
@@ -416,6 +418,25 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             ]
             self.assertGreaterEqual(len(combiners), 1)
             self.assertTrue(MCOG._policy_organ_holds_ring0(pol))
+
+    def test_policy_factory_is_bootstrap_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
+            graph.record_transition(action_id="a", cost=1.0, failed=True, value=4.0, delta={})
+            graph.record_transition(action_id="b", cost=1.0, failed=False, value=4.0, delta={"ok": 1.0})
+            boot = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(boot)
+            self.assertTrue(boot.metadata.get("bootstrap_factory"))
+            self.assertEqual(boot.parent_organ_ids, ())
+            boot_id = boot.organ_id
+            graph.record_transition(action_id="a", cost=1.0, failed=True, value=4.0, delta={})
+            graph.record_transition(action_id="b", cost=1.0, failed=False, value=4.0, delta={"ok": 1.0})
+            evolved = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
+            self.assertIsNotNone(evolved)
+            if evolved.organ_id != boot_id:
+                self.assertTrue(evolved.metadata.get("from_incumbent"))
+                self.assertIn(boot_id, evolved.parent_organ_ids)
+                self.assertFalse(evolved.metadata.get("bootstrap_factory"))
 
     def test_egraph_simplifies_admitted_skill_expressions(self):
         simplified = MCOG._egraph_simplify_expr("(x0 * 1) + 0")

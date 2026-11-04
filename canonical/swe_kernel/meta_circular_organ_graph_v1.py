@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import ast
 import collections
+import copy
 import hashlib
 import json
 import math
@@ -2565,6 +2566,187 @@ def compile_policy_organ(
     return organ
 
 
+def _stmts_from_body(body: str, *, name: str, args: Sequence[str]) -> ast.FunctionDef:
+    sig = ", ".join(args)
+    src = f"def {name}({sig}):\n" + _indent_block(body, 4) + "\n"
+    fn = ast.parse(src).body[0]
+    if not isinstance(fn, ast.FunctionDef):
+        raise OrganSafetyError("NESTED_FN_PARSE")
+    return fn
+
+
+def _ast_call(name: str, args: Sequence[ast.expr]) -> ast.Call:
+    return ast.Call(func=ast.Name(id=name, ctx=ast.Load()), args=list(args), keywords=[])
+
+
+def _node_field(field: str) -> ast.Subscript:
+    return ast.Subscript(
+        value=ast.Name(id="node", ctx=ast.Load()),
+        slice=ast.Constant(value=field),
+        ctx=ast.Load(),
+    )
+
+
+def _rewire_q_immediate(body: list[ast.stmt]) -> list[ast.stmt]:
+    call = _ast_call("_immediate", [_node_field("value"), _node_field("cost"), ast.Name(id="p_burn", ctx=ast.Load())])
+    out: list[ast.stmt] = []
+    for stmt in body:
+        if (
+            isinstance(stmt, ast.If)
+            and isinstance(stmt.test, ast.UnaryOp)
+            and isinstance(stmt.test.op, ast.Not)
+            and isinstance(stmt.test.operand, ast.Name)
+            and stmt.test.operand.id == "structured"
+        ):
+            stmt = ast.If(test=stmt.test, body=[ast.Return(value=copy.deepcopy(call))], orelse=list(stmt.orelse))
+        elif (
+            isinstance(stmt, ast.Assign)
+            and len(stmt.targets) == 1
+            and isinstance(stmt.targets[0], ast.Name)
+            and stmt.targets[0].id == "immediate"
+        ):
+            stmt = ast.Assign(targets=stmt.targets, value=copy.deepcopy(call))
+        out.append(stmt)
+    return out
+
+
+def _rewire_q_combiner(body: list[ast.stmt]) -> list[ast.stmt]:
+    call = _ast_call(
+        "_combine",
+        [
+            ast.Name(id="immediate", ctx=ast.Load()),
+            _node_field("cost"),
+            ast.Name(id="future", ctx=ast.Load()),
+        ],
+    )
+    out: list[ast.stmt] = []
+    for stmt in body:
+        if (
+            isinstance(stmt, ast.If)
+            and isinstance(stmt.test, ast.UnaryOp)
+            and isinstance(stmt.test.op, ast.Not)
+            and isinstance(stmt.test.operand, ast.Name)
+            and stmt.test.operand.id == "structured"
+        ):
+            out.append(stmt)
+            continue
+        if isinstance(stmt, ast.Return) and stmt.value is not None:
+            names = {n.id for n in ast.walk(stmt.value) if isinstance(n, ast.Name)}
+            if "immediate" in names or "_combine" in names:
+                stmt = ast.Return(value=copy.deepcopy(call))
+        out.append(stmt)
+    return out
+
+
+def _apply_nested_fn(
+    source_code: str,
+    *,
+    fn_name: str,
+    args: Sequence[str],
+    body: str,
+    rewire: Callable[[list[ast.stmt]], list[ast.stmt]] | None,
+) -> str | None:
+    """Patch incumbent `score_actions`: insert/replace a nested organ, keep the walk."""
+    try:
+        tree = ast.parse(source_code)
+    except SyntaxError:
+        return None
+    host = next((n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "score_actions"), None)
+    if host is None:
+        return None
+    try:
+        nested = _stmts_from_body(body, name=fn_name, args=args)
+    except Exception:
+        return None
+    replaced = False
+    for i, stmt in enumerate(host.body):
+        if isinstance(stmt, ast.FunctionDef) and stmt.name == fn_name:
+            host.body[i] = nested
+            replaced = True
+            break
+    if not replaced:
+        idx = next((i for i, s in enumerate(host.body) if isinstance(s, ast.FunctionDef)), len(host.body))
+        host.body.insert(idx, nested)
+        if rewire is not None:
+            for stmt in host.body:
+                if isinstance(stmt, ast.FunctionDef) and stmt.name == "_q":
+                    stmt.body = rewire(stmt.body)
+    ast.fix_missing_locations(tree)
+    try:
+        return ast.unparse(tree) + "\n"
+    except Exception:
+        return None
+
+
+def _successors_from_incumbent_source(
+    source_code: str,
+    *,
+    learned_immediate: str | None,
+    learned_combiner: str | None,
+    concept_library: Any | None = None,
+) -> list[str]:
+    """RSA/egraph/`G_t` mutations of incumbent source. Not a factory."""
+    del concept_library  # used by callers when synthesizing bodies
+    out: list[str] = []
+    src = source_code
+    if learned_immediate:
+        patched = _apply_nested_fn(
+            src,
+            fn_name="_immediate",
+            args=("value", "cost", "failed"),
+            body=learned_immediate,
+            rewire=_rewire_q_immediate,
+        )
+        if patched:
+            out.append(patched)
+            src = patched
+    if learned_combiner:
+        patched_c = _apply_nested_fn(
+            src,
+            fn_name="_combine",
+            args=("immediate", "cost", "future"),
+            body=learned_combiner,
+            rewire=_rewire_q_combiner,
+        )
+        if patched_c:
+            out.append(patched_c)
+        if learned_immediate and src != source_code:
+            only_comb = _apply_nested_fn(
+                source_code,
+                fn_name="_combine",
+                args=("immediate", "cost", "future"),
+                body=learned_combiner,
+                rewire=_rewire_q_combiner,
+            )
+            if only_comb:
+                out.append(only_comb)
+    try:
+        from canonical.swe_kernel.recursive_self_architect_v1 import mutate_organ_source
+    except Exception:
+        mutate_organ_source = None  # type: ignore[assignment]
+    if mutate_organ_source is not None:
+        seeds = [source_code, *out[:2]]
+        for seed in seeds:
+            try:
+                out.extend(list(mutate_organ_source(seed) or ())[:2])
+            except Exception:
+                continue
+    rewritten: list[str] = []
+    for s in [source_code, *out]:
+        eg = _egraph_simplify_organ_source(s)
+        if eg:
+            rewritten.append(eg)
+    out.extend(rewritten)
+    seen: set[str] = {source_code}
+    uniq: list[str] = []
+    for s in out:
+        if not s or s in seen:
+            continue
+        seen.add(s)
+        uniq.append(s)
+    return uniq[:8]
+
+
 def synthesize_world_model_organ(
     transitions: Sequence[Mapping[str, Any]],
     *,
@@ -2906,7 +3088,7 @@ class MetaCircularOrganGraph:
             return
 
     def evolve_policy_from_traces(self) -> ExecutableOrgan | None:
-        """Replace the POLICY organ. Incumbent stays if structural Ring-0 or held-out fails."""
+        """Factory is bootstrap only. Successors mutate the incumbent organ under Ring-0."""
         if len(self._world_transitions) < 2:
             return None
         traces = self._world_transitions[-16:]
@@ -2925,75 +3107,57 @@ class MetaCircularOrganGraph:
         for existing in self.organs_in_stratum(POLICY):
             if not _policy_respects_trace_ranking(existing, traces):
                 existing.verified_failures += 1
-        io_sig = [
-            list(row)
-            for row in sorted(
-                {
-                    (
-                        round(float(tr.get("value") or 0.0), 6),
-                        round(float(tr.get("cost") or 0.0), 6),
-                        1 if tr.get("failed") else 0,
-                    )
-                    for tr in traces
-                }
-            )
-        ]
-        cached = None
-        if incumbent is not None:
-            md = incumbent.metadata or {}
-            if md.get("learned_immediate") and md.get("trace_io_sig") == io_sig:
-                cached = md.get("learned_immediate_src")
-        learned = (
-            cached
-            if isinstance(cached, str) and cached.strip()
-            else _synthesize_immediate_from_traces(traces, concept_library=self.concept_library)
-        )
+
+        learned = _synthesize_immediate_from_traces(traces, concept_library=self.concept_library)
         if isinstance(learned, str):
             learned = _simplify_statement_body(learned)
         comb_learned = _synthesize_combiner_from_traces(traces, concept_library=self.concept_library)
         if isinstance(comb_learned, str):
             comb_learned = _simplify_statement_body(comb_learned)
+
         candidates: list[ExecutableOrgan] = []
-        if learned:
-            synth = compile_policy_organ(
-                learned_immediate=learned, empirical_burns=burns, combiner_src=comb_learned
+        if incumbent is None:
+            boot = compile_policy_organ(empirical_burns=burns)
+            boot.verified_passes = max(boot.verified_passes, len(self._world_transitions))
+            boot.metadata["bootstrap_factory"] = True
+            candidates.append(boot)
+        else:
+            md = incumbent.metadata or {}
+            if md.get("learned_immediate") and isinstance(md.get("learned_immediate_src"), str):
+                if not learned:
+                    learned = str(md.get("learned_immediate_src"))
+            srcs = _successors_from_incumbent_source(
+                incumbent.source_code,
+                learned_immediate=learned,
+                learned_combiner=comb_learned,
+                concept_library=self.concept_library,
             )
-            synth.metadata["learned_immediate_src"] = learned
-            synth.metadata["trace_io_sig"] = io_sig
-            if comb_learned:
-                synth.metadata["learned_combiner_src"] = comb_learned
-            synth.verified_passes = max(synth.verified_passes, len(self._world_transitions) + 8)
-            candidates.append(synth)
-            if comb_learned:
-                # Also try learned immediate with bootstrap combiner if synth combiner exists.
-                mixed = compile_policy_organ(learned_immediate=learned, empirical_burns=burns)
-                mixed.metadata["learned_immediate_src"] = learned
-                mixed.metadata["trace_io_sig"] = io_sig
-                mixed.verified_passes = max(mixed.verified_passes, len(self._world_transitions) + 4)
-                candidates.append(mixed)
-        boot = compile_policy_organ(empirical_burns=burns)
-        boot.verified_passes = max(boot.verified_passes, len(self._world_transitions))
-        candidates.append(boot)
-        rewritten: list[ExecutableOrgan] = []
-        for organ in candidates:
-            simplified_src = _egraph_simplify_organ_source(organ.source_code)
-            if not simplified_src or simplified_src == organ.source_code:
-                continue
-            try:
-                rec = make_organ(
-                    stratum=POLICY,
-                    name=organ.name + "_egraph",
-                    task_signature="policy::instrumental_q",
-                    entrypoint=organ.entrypoint,
-                    source_code=simplified_src,
-                    metadata=dict(organ.metadata),
-                )
-            except OrganSafetyError:
-                continue
-            rec.verified_passes = organ.verified_passes
-            rec.metadata["egraph_rewritten"] = True
-            rewritten.append(rec)
-        candidates.extend(rewritten)
+            for src in srcs:
+                try:
+                    rec = make_organ(
+                        stratum=POLICY,
+                        name=incumbent.name,
+                        task_signature="policy::instrumental_q",
+                        entrypoint=incumbent.entrypoint,
+                        source_code=src,
+                        parent_organ_ids=(incumbent.organ_id, *incumbent.parent_organ_ids)[:8],
+                        metadata={
+                            **dict(incumbent.metadata),
+                            "from_incumbent": True,
+                            "bootstrap_factory": False,
+                            "learned_immediate": bool(learned),
+                            "learned_combiner": bool(comb_learned),
+                        },
+                    )
+                except OrganSafetyError:
+                    continue
+                rec.verified_passes = max(incumbent.verified_passes, len(self._world_transitions) + 8)
+                if learned:
+                    rec.metadata["learned_immediate_src"] = learned
+                if comb_learned:
+                    rec.metadata["learned_combiner_src"] = comb_learned
+                candidates.append(rec)
+
         for organ in candidates:
             verdict = admit_policy_organ(organ, traces)
             if not verdict.get("ok"):

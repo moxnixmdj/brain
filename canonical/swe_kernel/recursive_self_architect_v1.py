@@ -89,6 +89,41 @@ def admit_policy_organ(organ: Any, traces: Sequence[Mapping[str, Any]] = ()) -> 
 
     return _admit(organ, traces)
 
+
+def mutate_organ_source(source_code: str) -> list[str]:
+    """RSA Op1 on an in-memory organ source (no Ring-1 `.py` file)."""
+    src = str(source_code or "")
+    if not src.strip():
+        return []
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    if not isinstance(tree, ast.Module):
+        return []
+    pure = _infer_module_pure_functions(tree)
+    out: list[str] = []
+    seen: set[str] = {src}
+    for nd in tree.body:
+        if not isinstance(nd, ast.FunctionDef):
+            continue
+        try:
+            lowered = _lower_function_via_semantic_dataflow(nd, pure, tree)
+        except Exception:
+            continue
+        for cand_tree, _law in lowered[:3]:
+            try:
+                after = ast.unparse(cand_tree) + "\n"
+            except Exception:
+                continue
+            if after in seen:
+                continue
+            seen.add(after)
+            out.append(after)
+            if len(out) >= 4:
+                return out
+    return out
+
 RING0_IMMUTABLE_PREFIXES: tuple[str, ...] = (
     "execution_guard/",
     "canonical/governance/",
@@ -2481,6 +2516,10 @@ class RecursiveSelfArchitect:
     def admit_policy_organ(self, organ: Any, traces: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any]:
         """Admit a POLICY organ into `P_t` only if Ring-0 structural + held-out return pass."""
         return admit_policy_organ(organ, traces)
+
+    def mutate_organ_source(self, source_code: str) -> list[str]:
+        """Apply RSA operators to a `P_t` organ source, not a Ring-1 file."""
+        return mutate_organ_source(source_code)
 
     def run_self_improvement_cycle(
         self,
