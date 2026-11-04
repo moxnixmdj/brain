@@ -263,6 +263,20 @@ def last_admissible_bodies() -> list[str]:
     return list(_LAST_ADMISSIBLE)
 
 
+def _is_statement_block(body_src: str) -> bool:
+    """True when `body_src` is already a sequence of statements rather than one expression.
+
+    Only the STUN arms pass statements. Deciding on the TEXT alone is wrong: `return_ratio` and
+    `x.returncode` both start with the letters `return` without being statements.
+    """
+    for line in body_src.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        return stripped.startswith("return ") or stripped == "return" or stripped.endswith(":")
+    return False
+
+
 def synthesize_python_function_body(
     param_names: Sequence[str],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -316,12 +330,27 @@ def synthesize_python_function_body(
     # vacuous enumeration -- sweeping max_weight still surfaced only one body per weight, because a
     # match returns from inside the search and multiplicity was never observable.
     admissible_bodies: list[str] = []
+    if collect_admissible:
+        # Clear at the START. Measured 2026-11-04: the 1-level STUN arm below returned a body
+        # instead of recording it, so a collecting call could exit without reaching the handoff at
+        # the end -- and `last_admissible_bodies()` then reported the PREVIOUS call's bodies to a
+        # caller that had every reason to believe it was asking a fresh question. The module
+        # answered "12 admissible, PROVISIONAL" for data that admits none. Clearing here makes a
+        # stale report impossible regardless of which exit is taken.
+        _LAST_ADMISSIBLE.clear()
 
     def _finish(body_code: str) -> str:
         return _materialize_concept_helpers(body_code, concept_entries, active_lib)
 
     def _record(expr_src: str) -> None:
-        body = _finish(f"return {expr_src}")
+        # Two dialects reach this function: an EXPRESSION (from `_try_register`) and a complete
+        # BODY (from the STUN arms, which return their own `return`s). Wrapping the second in
+        # `return` produced `return if x <= 0:` -- a body that does not compile, recorded as
+        # admissible, and then handed to `demand_evidence`, which saw 50 such entries collapse to
+        # ONE behaviour signature ("<does not compile>") and reported DETERMINED. Measured
+        # 2026-11-04. `_finish` is idempotent for already-`return`ed text, so always routing
+        # through it makes the dialect distinction impossible to get wrong.
+        body = _finish(expr_src if _is_statement_block(expr_src) else f"return {expr_src}")
         key = " ".join(body.split())
         if key not in {" ".join(b.split()) for b in admissible_bodies}:
             admissible_bodies.append(body)
@@ -589,7 +618,15 @@ def synthesize_python_function_body(
         if else_cands:
             e_then = min(then_cands, key=len)
             e_else = min(else_cands, key=len)
-            return _finish(f"if {p_src}:\n    return {e_then}\nreturn {e_else}")
+            stun1 = f"if {p_src}:\n    return {e_then}\nreturn {e_else}"
+            if collect_admissible:
+                # This arm was the only early return that ignored the collection flag. A piecewise
+                # body IS an admissible body -- arguably the most interesting one, since it appears
+                # exactly when the data changes regime mid-range -- so failing to record it is the
+                # same class of error as failing to see a second explanation at all.
+                _record(stun1)
+                continue
+            return _finish(stun1)
 
     # 2-level STUN: if P1: return E1 / elif P2: return E2 / return E3
     for i, (p1_src, pm1) in enumerate(predicates[:40]):

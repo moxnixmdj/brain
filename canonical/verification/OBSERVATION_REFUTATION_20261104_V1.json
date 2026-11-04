@@ -1,0 +1,350 @@
+{
+  "authority": "NONE",
+  "findings": [
+    {
+      "id": "truthful_oracle_settles_in_one_question",
+      "pass": true,
+      "question": "with a truthful oracle does the loop reach DETERMINED in a single question?",
+      "questions_asked": 1,
+      "status": "DETERMINED"
+    },
+    {
+      "id": "impossible_answer_is_refuted_not_unresolved",
+      "pass": true,
+      "question": "is an answer no admissible body predicts reported as REFUTED?",
+      "status": "REFUTED"
+    },
+    {
+      "id": "refutation_does_not_fall_back_to_the_cheapest_body",
+      "pass": true,
+      "question": "does a refuted loop keep handing back a body anyway?",
+      "reported_chosen": ""
+    },
+    {
+      "id": "the_contradiction_is_located",
+      "obs": [
+        {
+          "asked_at": [
+            -3.5
+          ],
+          "chosen": "",
+          "examples": 4,
+          "explanations": null,
+          "observed": 99.0,
+          "predicted_by_chosen": -7.0,
+          "programs": 0,
+          "status": "REFUTED",
+          "step": 1,
+          "suspects": {
+            "authority": "NONE",
+            "decisive": false,
+            "restorers": [
+              3
+            ],
+            "suspects": [
+              {
+                "example": [
+                  [
+                    1
+                  ],
+                  2.0
+                ],
+                "index": 0,
+                "restores_prior": false,
+                "without_it_explanations": 4,
+                "without_it_programs": 14
+              },
+              {
+                "example": [
+                  [
+                    2
+                  ],
+                  4.0
+                ],
+                "index": 1,
+                "restores_prior": false,
+                "without_it_explanations": 3,
+                "without_it_programs": 14
+              },
+              {
+                "example": [
+                  [
+                    3
+                  ],
+                  6.0
+                ],
+                "index": 2,
+                "restores_prior": false,
+                "without_it_explanations": 6,
+                "without_it_programs": 14
+              },
+              {
+                "example": [
+                  [
+                    -3.5
+                  ],
+                  99.0
+                ],
+                "index": 3,
+                "restores_prior": true,
+                "without_it_explanations": 3,
+                "without_it_programs": 12
+              }
+            ],
+            "why": "4 observations can each be blamed; naming one would be a guess"
+          },
+          "why": "the answer is inconsistent with every explanation that was admissible before it was given; the model and this observation cannot both be true"
+        }
+      ],
+      "pass": true,
+      "question": "does the report say what the creature predicted and what it saw?"
+    },
+    {
+      "id": "never_described_stays_unresolved",
+      "pass": true,
+      "question": "is a grammar that never fit kept distinct from a contradicted one?",
+      "status": "UNRESOLVED"
+    },
+    {
+      "decisive": false,
+      "id": "blame_is_a_set_not_a_culprit",
+      "pass": true,
+      "question": "does drop-one name several suspects rather than invent one?",
+      "suspects": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "the_injected_observation_restores_the_prior_model",
+      "pass": true,
+      "question": "is the observation that actually broke the model the one whose removal restores it?",
+      "restorers": [
+        3
+      ]
+    },
+    {
+      "id": "restoring_the_prior_is_also_the_confirmation_bias",
+      "pass": true,
+      "question": "when a true observation is the only one that disagrees with the model, does the same test try to delete it?",
+      "trap_restorers": [
+        3
+      ]
+    },
+    {
+      "id": "the_injected_observation_is_among_the_suspects",
+      "pass": true,
+      "question": "does the set of suspects contain the observation that was actually lying?",
+      "suspects": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          -3.5
+        ]
+      ]
+    }
+  ],
+  "passed": 9,
+  "runs": {
+    "blame": {
+      "authority": "NONE",
+      "decisive": false,
+      "restorers": [
+        3
+      ],
+      "suspects": [
+        {
+          "example": [
+            [
+              1
+            ],
+            2.0
+          ],
+          "index": 0,
+          "restores_prior": false,
+          "without_it_explanations": 4,
+          "without_it_programs": 14
+        },
+        {
+          "example": [
+            [
+              2
+            ],
+            4.0
+          ],
+          "index": 1,
+          "restores_prior": false,
+          "without_it_explanations": 3,
+          "without_it_programs": 14
+        },
+        {
+          "example": [
+            [
+              3
+            ],
+            6.0
+          ],
+          "index": 2,
+          "restores_prior": false,
+          "without_it_explanations": 6,
+          "without_it_programs": 14
+        },
+        {
+          "example": [
+            [
+              -3.5
+            ],
+            99.0
+          ],
+          "index": 3,
+          "restores_prior": true,
+          "without_it_explanations": 3,
+          "without_it_programs": 12
+        }
+      ],
+      "why": "4 observations can each be blamed; naming one would be a guess"
+    },
+    "refuting": {
+      "authority": "NONE",
+      "chosen": "",
+      "examples": 4,
+      "explanations": 0,
+      "params": [
+        "x"
+      ],
+      "programs": 0,
+      "questions_asked": 1,
+      "schema": "PROJECT_BRAIN_OBSERVATION_REFUTATION_V1",
+      "status": "REFUTED",
+      "trajectory": [
+        {
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 3,
+          "explanations": 3,
+          "programs": 12,
+          "status": "PROVISIONAL",
+          "step": 0
+        },
+        {
+          "asked_at": [
+            -3.5
+          ],
+          "chosen": "",
+          "examples": 4,
+          "explanations": null,
+          "observed": 99.0,
+          "predicted_by_chosen": -7.0,
+          "programs": 0,
+          "status": "REFUTED",
+          "step": 1,
+          "suspects": {
+            "authority": "NONE",
+            "decisive": false,
+            "restorers": [
+              3
+            ],
+            "suspects": [
+              {
+                "example": [
+                  [
+                    1
+                  ],
+                  2.0
+                ],
+                "index": 0,
+                "restores_prior": false,
+                "without_it_explanations": 4,
+                "without_it_programs": 14
+              },
+              {
+                "example": [
+                  [
+                    2
+                  ],
+                  4.0
+                ],
+                "index": 1,
+                "restores_prior": false,
+                "without_it_explanations": 3,
+                "without_it_programs": 14
+              },
+              {
+                "example": [
+                  [
+                    3
+                  ],
+                  6.0
+                ],
+                "index": 2,
+                "restores_prior": false,
+                "without_it_explanations": 6,
+                "without_it_programs": 14
+              },
+              {
+                "example": [
+                  [
+                    -3.5
+                  ],
+                  99.0
+                ],
+                "index": 3,
+                "restores_prior": true,
+                "without_it_explanations": 3,
+                "without_it_programs": 12
+              }
+            ],
+            "why": "4 observations can each be blamed; naming one would be a guess"
+          },
+          "why": "the answer is inconsistent with every explanation that was admissible before it was given; the model and this observation cannot both be true"
+        }
+      ]
+    },
+    "truthful": {
+      "authority": "NONE",
+      "chosen": "return ((x * 2) / 1)",
+      "examples": 4,
+      "explanations": 1,
+      "params": [
+        "x"
+      ],
+      "programs": 3,
+      "questions_asked": 1,
+      "schema": "PROJECT_BRAIN_OBSERVATION_REFUTATION_V1",
+      "status": "DETERMINED",
+      "trajectory": [
+        {
+          "chosen": "return ((2 / 1) * x)",
+          "examples": 3,
+          "explanations": 3,
+          "programs": 12,
+          "status": "PROVISIONAL",
+          "step": 0
+        },
+        {
+          "asked_at": [
+            -3.5
+          ],
+          "chosen": "return ((x * 2) / 1)",
+          "examples": 4,
+          "explanations": 1,
+          "observed": -7.0,
+          "predicted_by_chosen": -7.0,
+          "programs": 3,
+          "status": "DETERMINED",
+          "step": 1
+        }
+      ]
+    }
+  },
+  "schema": "PROJECT_BRAIN_OBSERVATION_REFUTATION_V1",
+  "total": 9
+}
