@@ -1743,6 +1743,7 @@ class AwakeAgencyDaemon:
                     separators=(",", ":"),
                 )
                 og.perceive_or_synthesize_reader(blob, format_tag="awake_sense_json")
+                og.evolve_policy_from_traces()
         except Exception:
             pass
         failing_pairs = self._sense_failing_workspace_tests()
