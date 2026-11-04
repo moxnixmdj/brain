@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 253,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6652,
+  "research_index_records": 6653,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 438,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "feb2d90b902ea6badd056bda0c3a5a36b914a8408ed9283b16cf009dee0ccd47"
+  "value": "372748a73c550623ec556b17744d02ef47727bf88c331d56d2cb54f2f384a412"
  },
  "engines": [
   {
@@ -218880,6 +218880,34 @@
    }
   },
   {
+   "action_id": "THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_DOOR_ANSWERS_QUESTIONS_IT_USED_TO_REPORT_SUCCESS_IT_NEVER_EARNED_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7bb55c773a6e1057b9dd2e4601154af63558556dfc0497ae74bd31f92b029eb4",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "answer_questions_through_the_existing_front_door_without_adding_a_verifier": 1,
+    "answers": 1,
+    "door": 1,
+    "earned": 1,
+    "front_door_answers_and_refuses_correctly_on_a_tree_nobody_wrote_fixtures_for__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "never": 1,
+    "questions": 1,
+    "report": 1,
+    "success": 1,
+    "the_door_answers_questions_it_used_to_report_success_it_never_earned_20261104_v1": 1,
+    "the_inspect_door_answered_one_of_nine_plain_questions_and_reported_grounded_verified_true_for_how_many_lines_are_in_data_py_with_no_number_in_the_answer_on_16bf5e1ca5": 1,
+    "used": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_DOOR_REACHES_WHAT_THE_MACHINE_CAN_DO_V1_20261101_V1",
    "capability": false,
    "date": "2026-11-01",
@@ -226629,7 +226657,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/autonomous_v1.py",
-   "sha256": "0c6d37f42649e287c92ab74c95bad2962bfa7f0b700208642b14b637d05744f7",
+   "sha256": "b9a1f621126f5261297741c24e2592eeaadcc247935cd5f5a773323e4ed91c1f",
    "summary": "Plain sentence in. Nothing else supplied by a human.",
    "symbol_count": 10,
    "symbols": [
@@ -255467,27 +255495,53 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "7737cbd326235a9fe855442bb217f2af5f7653bc403d58256454fe626bf6037f",
+   "sha256": "c9d8a726d6384612d08021d8b5da0da0dde8f5f96a6c27c05100a5a258192d21",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
-   "symbol_count": 4,
+   "symbol_count": 17,
    "symbols": [
+    "_computation_holds",
+    "_drop_path_fragments",
+    "_is_readable_text",
+    "_named_file",
+    "_path_components",
+    "_project_files",
+    "accounted_terms",
     "answer",
+    "compute",
     "find",
+    "listing",
     "question_terms",
-    "render"
+    "read_content",
+    "render",
+    "search_named",
+    "wants_a_listing",
+    "wants_content"
    ],
    "terms": {
     "about": 1,
+    "accounted_terms": 1,
     "answer": 3,
+    "computation_holds": 1,
+    "compute": 1,
     "computer": 1,
+    "drop_path_fragments": 1,
     "evidence": 1,
     "find": 1,
     "inspect": 1,
+    "is_readable_text": 1,
+    "listing": 1,
     "made": 1,
+    "named_file": 1,
+    "path_components": 1,
+    "project_files": 1,
     "question": 1,
     "question_terms": 1,
+    "read_content": 1,
     "render": 1,
-    "v1": 1
+    "search_named": 1,
+    "v1": 1,
+    "wants_a_listing": 1,
+    "wants_content": 1
    }
   },
   {
