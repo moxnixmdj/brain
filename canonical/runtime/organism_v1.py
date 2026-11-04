@@ -68,6 +68,7 @@ import json
 import math
 import sys
 import time
+import tempfile
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -77,7 +78,8 @@ if str(ROOT) not in sys.path:
 
 SCHEMA = "PROJECT_BRAIN_ORGANISM_V1"
 STATE = ROOT / "canonical/astra_runtime/state/ORGANISM_V1.json"
-JOURNAL_CAP = 4000           # entries kept on disk; the head is trimmed, never rewritten
+JOURNAL_CAP = 4000
+EXPERIENCE_CAP = 600           # entries kept on disk; the head is trimmed, never rewritten
 EXPLORE_C = 1.2              # UCB exploration weight
 # How much an unresolved oddity outranks a settled success. Measured 2026-11-04: with a flat
 # +0.5 the organism preferred a target confirmed nine times over one that had surprised it three
@@ -93,6 +95,12 @@ CURIOSITY = 1.0
 # (t35, t38, t39: predicted EFFECT_HELD, observed INPUTS_IGNORED_SILENTLY). A lifetime average
 # is a memory of the dead world. Expectations come from the last few encounters.
 RECENT_WINDOW = 3
+
+# A model is only allowed to speak for a target it has never seen once it has seen enough
+# elsewhere to be worth listening to. Below these, the organism falls back to the target's own
+# record -- which for a new target is silence, exactly as in log 11.
+MODEL_MIN_EVIDENCE = 3
+MODEL_MIN_CONFIDENCE = 0.75
 RETIRE_AFTER_CONFIRMATIONS = 2
 REOPEN_AFTER_TICKS = 25
 MAX_IDLE_TICKS = 6         # resting is allowed; resting FOREVER is not (see _still_asleep)
@@ -113,6 +121,7 @@ def blank_state() -> dict:
         "targets": {},
         "journal": [],
         "counts": {"actions": 0, "predicted": 0, "surprised": 0, "idle_ticks": 0,
+                   "model_regrown": 0,
                    "refused": 0, "confirmations": 0},
         "stop_reason": None,
     }
@@ -188,6 +197,14 @@ class Organ:
     def observe(self, target: Mapping[str, Any], acted: Mapping[str, Any]) -> Any:
         raise NotImplementedError
 
+    def senses(self, target: Mapping[str, Any]) -> dict[str, float]:
+        """What this organ can see about a target BEFORE acting. The model's only input.
+
+        An organ that offers nothing here simply never gets a model prediction, which is the
+        honest outcome: no senses, no expectation.
+        """
+        return {}
+
 
 class _LoopOrgan(Organ):
     """An organ backed by one defect class from the self-maintenance loop."""
@@ -219,6 +236,17 @@ class _LoopOrgan(Organ):
         per new state of the world instead of one per tick.
         """
         return _expected(record, default="FIXED")
+
+    def senses(self, target):
+        defect = target.get("defect") or {}
+        path = str(defect.get("path") or defect.get("state_path") or "")
+        return {
+            "is_loop_defect": 1.0,
+            "path_depth": float(path.count("/")),
+            "path_is_json": float(path.endswith(".json")),
+            "path_is_canonical": float(path.startswith("canonical/")),
+            "defect_has_path": float(bool(path)),
+        }
 
     def act(self, target):
         return self.klass.fix(target["defect"])
@@ -255,6 +283,26 @@ class EffectOrgan(Organ):
 
     def predict(self, target, record):
         return _expected(record, default=None)
+
+    def senses(self, target):
+        situation = target["situation"]
+        supplied = []
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                situation.build(root)
+                supplied = [str(x) for x in situation.supplied(root)]
+        except Exception:                                              # noqa: BLE001
+            supplied = []
+        return {
+            "is_effect": 1.0,
+            "expects_effect": float(bool(getattr(situation, "expects_effect", True))),
+            "n_supplied": float(len(supplied)),
+            "supplied_all_prefixed": float(bool(supplied) and
+                                           all(x.startswith("canonical/") for x in supplied)),
+            "capability_is_archive": float(
+                str(getattr(situation, "capability_id", "")).startswith("archive")),
+        }
 
     def act(self, target):
         from canonical.tools import executed_effect_oracle_v1 as oracle
@@ -391,9 +439,26 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
     organ_row = state.setdefault("organs", {}).setdefault(
         name, {"attempts": 0, "confirmations": 0, "surprises": 0})
 
-    prediction = organ.predict(target, record)
+    # A model of the world, if it has anything to say about a target it has never met, speaks
+    # first. This is the difference between a lookup table and a creature: log 11 could only
+    # predict a target it had already tried.
+    from canonical.runtime import belief_v1 as belief
+    model = state.setdefault("belief", belief.blank())
+    senses = organ.senses(target)
+    prediction = None
+    if senses:
+        candidate = belief.predict(model, senses)
+        if (candidate is not None and belief.confidence(model, senses) >= MODEL_MIN_CONFIDENCE
+                and sum(belief._counts(belief._walk(model["root"], senses)).values())
+                >= MODEL_MIN_EVIDENCE):
+            prediction = candidate
+    from_model = prediction is not None
+    if prediction is None:
+        prediction = organ.predict(target, record)
     _append(state, {"tick": tick_no, "kind": "PREDICTION", "organ": name,
-                    "target": target["id"], "predicts": prediction})
+                    "target": target["id"], "predicts": prediction,
+                    "from_model": from_model,
+                    "first_visit": int(record.get("attempts", 0)) == 0})
 
     acted = organ.act(target)
 
@@ -430,6 +495,19 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
         record["surprises"] = int(record.get("surprises", 0)) + 1
     if str(observation).startswith("REFUSED"):
         state["counts"]["refused"] += 1
+
+    # Teach, then re-grow. The model learns from every experience, and a surprise is the only
+    # event that can add a distinction to it -- because a distinction is only worth adding when
+    # the current one was wrong.
+    if senses:
+        belief.observe(model, senses, str(observation))
+        experience = state.setdefault("experiences", [])
+        experience.append({"group": f"{name}::{target['id']}", "signals": senses,
+                           "verdict": str(observation)})
+        del experience[:-EXPERIENCE_CAP]
+        if surprise and len(experience) >= belief.MIN_EXAMPLES_FOR_SPLIT:
+            belief.fit(model, experience)
+            state["counts"]["model_regrown"] = state["counts"].get("model_regrown", 0) + 1
 
     return {"tick": tick_no, "organ": name, "target": target["id"],
             "predicted": prediction, "observed": observation, "surprise": surprise,
@@ -510,6 +588,12 @@ def summary(state: Mapping[str, Any]) -> dict:
         "predicted": predicted,
         "unpredicted": actions - predicted,
         "surprises": counts.get("surprised", 0),
+        "from_model": sum(1 for e in journal
+                          if e.get("kind") == "PREDICTION" and e.get("from_model")),
+        "from_model_on_first_visit": sum(
+            1 for e in journal if e.get("kind") == "PREDICTION"
+            and e.get("from_model") and e.get("first_visit")),
+        "model_regrown": counts.get("model_regrown", 0),
         "surprise_rate_when_predicted": (round(counts.get("surprised", 0) / predicted, 4)
                                          if predicted else None),
         "surprise_early": round(sum(early) / len(early), 4) if early else None,

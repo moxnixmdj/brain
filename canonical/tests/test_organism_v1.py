@@ -300,3 +300,18 @@ def test_a_long_happy_history_does_not_outvote_a_fresh_breakage():
     assert rows[0]["observed"] == "BROKEN" and rows[0]["predicted"] == "OK"
     assert rows[1]["predicted"] == "BROKEN", (
         "it saw the breakage and still expected the old world: memory, not learning")
+
+
+def test_the_journal_says_where_a_prediction_came_from():
+    """A prediction from the model and a prediction from the target's own record are different
+    claims. If the log cannot tell them apart, no one can check whether the model ever spoke
+    about something it had never seen -- and that is the only reason the model is here."""
+    state = _state()
+    stub = Stub("o", ["FIXED"] * 6, targets=("t1", "t2", "t3"))
+    stub.senses = lambda target: {"s": 1.0}
+    for _ in range(6):
+        org.tick(state, {"o": stub})
+    predictions = [e for e in state["journal"] if e["kind"] == "PREDICTION"]
+    assert predictions, "nothing was predicted"
+    assert all("from_model" in e and "first_visit" in e for e in predictions), (
+        "a prediction without provenance cannot be audited")

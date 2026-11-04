@@ -1027,3 +1027,113 @@ separates a maintenance daemon from a creature that grows.
 
 Drift guard unchanged: red on `LIVE_CHALLENGER_FRONTIER_EXEMPTION_NOT_ALLOWED_FOR_ACTION_KIND`,
 awaiting an owner decision. No capability credit.
+
+## Execution log 12 — it has a model now, and the model says the world is too thin (2026-11-04)
+
+Log 11 was rejected for the fifth time, correctly. The organism acted, predicted, was surprised and
+survived a restart, but its prediction machinery was a **lookup table**: `effect::archive_of_plain_
+repository_files` learned a verdict at t35 and that knowledge was bound to a string. Given a second
+capability that silently drops inputs, it would have been surprised again, from zero. A system that
+can only remember cannot get better at anything it has not already done.
+
+### What was built
+
+**`canonical/runtime/belief_v1.py`** — a model of the world, not a table of the past.
+
+* It predicts from **senses**: numeric signals readable before acting.
+* It **grows its own distinctions**. It starts as one leaf with the base rate and adds a split only
+  when the split earns it. The candidate space is generated mechanically from every signal and
+  every observed threshold; nothing is enumerated by hand.
+* Acceptance requires all of: **improvement on average, improvement in every group, p < 0.01/rank
+  against a shuffled-verdict null, and survival under a second, independent grouping.**
+* It **abstains** when it knows nothing, and abstention is never scored as a correct answer.
+
+**`canonical/tools/capability_world_v1.py`** — a world for every capability the registry declares.
+
+| before | after |
+|---|---|
+| 4 situations, all hand-written, one adapter | **77 capabilities × 6 worlds = 462 observed outcomes** |
+| a person chose each input | every declared input synthesised from its own name, in a fresh directory, in its own process, under a timeout |
+| 2 of 141 capabilities situated | 77 of 141, with the 64 excluded for stated reasons (61 reach a subprocess/network/browser, 3 have no adapter on disk) |
+
+Verdict distribution over 462 worlds: 270 CRASHED, 137 REFUSED_NAMED, 30 CLAIM_CHECKED,
+13 CLAIM_FALSE, 6 CLAIM_FIELD_ABSENT, 6 NO_OUTPUT.
+
+### The measurement this log exists for
+
+Can it predict what a capability will do **before running it**, for a capability it has never run?
+Split **by capability**, so no held-out capability appears in training in any world.
+
+| number | value |
+|---|---|
+| holdout accuracy | **0.4839** |
+| majority baseline | **0.4839** |
+| lift | **0.0 (0 examples)** |
+| log 11's identity table | **0.0** — it answers nothing for a capability it has never met |
+| in-sample accuracy | 0.5637 (memory, not learning) |
+| distinctions accepted | **0** |
+
+**The model learned nothing on this world, and it was right not to.** A permissive tree with all
+guards removed reaches **CV 0.637 against 0.584** — a real +5.3 points, while scoring **0.861
+in-sample**. So the senses carry a little signal, the optimism gap is large, and my gate at
+n=77 capabilities is too strict to separate +5.3 from luck. Reported as such: not earned.
+
+The most tempting number in this log was a hand rule that scored **0.729** against a 0.542 baseline
+on one holdout split. It was an artifact: on that split the base rate happened to be REFUSED while
+the full world's base rate is CRASHED, and the rule's two buckets both have CRASHED as their
+majority. A rule that agrees with the base rate is not a discovery.
+
+### Six real bugs, all found by the measurement, none by reading the code
+
+1. **Information gain with the sign reversed.** It preferred the split that explained the *least*
+   about the verdict, and chose a noise signal over the informative one.
+2. **Growing from an empty leaf.** The baseline scored 0.000, so every candidate looked like a huge
+   improvement. A model always has a prior; the question is whether a distinction beats it.
+3. **A permutation test that failed open.** A cursor ran past the end of a shuffled list, emptied a
+   bucket by the third fold, and returned p=1.0 for a perfect distinction. It fails closed now.
+4. **Fold deltas with the sign reversed**, so a +0.69 improvement on every fold was recorded as
+   −0.69 of harm and a perfectly learnable world was rejected as noise.
+5. **Single-slice validation.** Eight validation capabilities were so unrepresentative that an
+   undifferentiated leaf scored 0.903 there and 0.484 on the real holdout. Selection is now by
+   folds over groups.
+6. **A gate that was too loose.** A 2% margin accepted 27 splits in 20 pure-noise worlds. Now:
+   **1 in 20**, with the true rule still detected (1.000 against a 0.515 baseline, and 19 of 20
+   noise worlds refused).
+
+### Wired into the creature, not beside it
+
+`organism_v1.tick` now asks the model first and falls back to the target's own record only when the
+model abstains (below 3 observations or 0.75 confidence). Every experience teaches the model, and a
+**surprise is the only event that re-grows it** — because a distinction is only worth adding when
+the current one was wrong. The model lives in the organism's persisted state, so it survives
+restarts the same way its life does. The journal records `from_model` and `first_visit` per
+prediction, so the transfer claim is auditable rather than asserted.
+
+Live, 24 ticks, fresh state: 14 actions, 10 predicted, 2 surprises, **2 predictions from the model**,
+**0 of them on a first visit**, 2 re-grows. The creature speaks through its model; it does not yet
+speak about anything it has never seen.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| It has a falsifiable model rather than a lookup table | **TRUE** | 9 tests; a distinction must beat a shuffled null, every group, and a second grouping |
+| Its idea space grows without a person enumerating it | **TRUE** | candidates generated from all senses × all thresholds; 5/5 mutants killed |
+| It refuses structure in a world that has none | **TRUE** | 1 accepted split in 20 noise worlds |
+| It learns a rule it can see, out of group | **TRUE** | 1.000 holdout vs 0.515 baseline |
+| It predicts an unrun capability better than the base rate | **FALSE** | 0.4839 vs 0.4839, 0 examples; ceiling +5.3 not separable at this n |
+| The world grew from 2 situations to 77 | **TRUE** | 462 worlds, 64 exclusions each with a stated reason |
+| A bigger world means better senses | **FALSE** | more worlds, same thin senses; the ceiling moved 5 points, not 25 |
+
+### What this says about the approach
+
+The binding constraint is no longer the model, the loop, or the agenda. It is **what the body can
+see**. Six worlds per capability and a static read of its source text predict almost nothing about
+whether it will refuse, crash, or lie — the optimistic in-sample number (0.861) and the honest
+cross-validated one (0.637 against 0.584) are the whole gap between a system that looks smart and
+one that is.
+
+The next widening is therefore sensory, not structural: a capability's outcome depends on what it
+does with a *malformed* thing, and the only way to know that is to have seen it handle one. That is
+a claim to test, not a conclusion to assert. No capability credit; unaided closure for classes that
+matter is still 0. Drift guard unchanged.

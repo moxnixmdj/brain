@@ -1,0 +1,117 @@
+{
+ "authority": "NO_CAPABILITY_CREDIT_TRANSFER_MEASUREMENT_ONLY",
+ "capabilities": 77,
+ "holdout_accuracy": 0.4839,
+ "holdout_answered": 186,
+ "holdout_baseline_majority": 0.4839,
+ "holdout_baseline_right": 90,
+ "holdout_capabilities": 31,
+ "holdout_examples": 186,
+ "holdout_right": 90,
+ "identity_table_accuracy": 0.0,
+ "identity_table_right": 0,
+ "lift_in_examples": 0,
+ "lift_over_baseline": 0.0,
+ "non_claims": [
+  "HOLDOUT_ACCURACY_IS_MEANINGLESS_WITHOUT_THE_BASELINE_BESIDE_IT",
+  "A_MECHANICAL_WORLD_DOES_NOT_ESTABLISH_SEMANTIC_CORRECTNESS",
+  "FIFTY_EIGHT_CAPABILITIES_IS_NOT_A_LARGE_WORLD",
+  "THE_SENSES_ARE_GIVEN_THE_IDEAS_OVER_THEM_ARE_GROWN"
+ ],
+ "on_training_accuracy": 0.5637,
+ "question": "Can it predict what a capability will do, in a world it has never entered, for a capability it has never run?",
+ "schema": "PROJECT_BRAIN_CAPABILITY_TRANSFER_V1",
+ "seed": 20261104,
+ "split": "by capability, so no held-out capability appears in training in any world",
+ "structure": {
+  "accepted": [],
+  "non_claims": [
+   "SIGNALS_ARE_SENSES_GIVEN_BY_THE_BODY_NOT_IDEAS_INVENTED",
+   "THE_IDEA_SPACE_OVER_THOSE_SENSES_IS_GROWN_AND_VALIDATED_HERE",
+   "ACCURACY_IS_MEANINGLESS_WITHOUT_THE_BASELINE_IT_IS_COMPARED_TO"
+  ],
+  "rejected": [
+   {
+    "accepted": false,
+    "attempts": [
+     {
+      "cv_after": 0.5925,
+      "cv_before": 0.6512,
+      "reason": "no_out_of_group_improvement",
+      "signal": "declared_result_fields",
+      "threshold": 5.5,
+      "worst_fold_delta": -0.1515
+     },
+     {
+      "cv_after": 0.5994,
+      "cv_before": 0.6512,
+      "reason": "no_out_of_group_improvement",
+      "signal": "declared_result_fields",
+      "threshold": 7.5,
+      "worst_fold_delta": -0.1515
+     },
+     {
+      "cv_after": 0.6512,
+      "cv_before": 0.6512,
+      "reason": "no_out_of_group_improvement",
+      "signal": "adapter_raises",
+      "threshold": 1.5,
+      "worst_fold_delta": 0.0
+     },
+     {
+      "cv_after": 0.6512,
+      "cv_before": 0.6512,
+      "reason": "no_out_of_group_improvement",
+      "signal": "adapter_raises",
+      "threshold": 2.5,
+      "worst_fold_delta": 0.0
+     },
+     {
+      "cv_after": 0.6512,
+      "cv_before": 0.6512,
+      "reason": "no_out_of_group_improvement",
+      "signal": "adapter_lines",
+      "threshold": 45.0,
+      "worst_fold_delta": 0.0
+     },
+     {
+      "cv_after": 0.5925,
+      "cv_before": 0.6512,
+      "reason": "no_out_of_group_improvement",
+      "signal": "declared_result_fields",
+      "threshold": 6.5,
+      "worst_fold_delta": -0.1515
+     }
+    ],
+    "depth": 0
+   }
+  ],
+  "schema": "PROJECT_BRAIN_BELIEF_V1",
+  "seen": 480,
+  "splits_accepted": 0,
+  "splits_proposed": 1,
+  "structure": {
+   "leaf": {
+    "CLAIM_CHECKED": 36,
+    "CLAIM_FALSE": 24,
+    "CLAIM_FIELD_ABSENT": 12,
+    "CRASHED": 295,
+    "NO_OUTPUT": 12,
+    "REFUSED_NAMED": 101
+   }
+  }
+ },
+ "train_capabilities": 34,
+ "train_examples": 204,
+ "validation_capabilities": 12,
+ "validation_examples": 72,
+ "verdict_counts": {
+  "CLAIM_CHECKED": 30,
+  "CLAIM_FALSE": 13,
+  "CLAIM_FIELD_ABSENT": 6,
+  "CRASHED": 270,
+  "NO_OUTPUT": 6,
+  "REFUSED_NAMED": 137
+ },
+ "world_size": 462
+}
