@@ -132,6 +132,25 @@ def _order_expressions(max_groups: int = 3):
                 yield f"(s[{n1}/{d1}]+s[{n2}/{d2}])/2", pair
 
 
+#: A DEMONSTRATION SHORTER THAN THIS CANNOT TELL SOME CANDIDATES APART AT ALL.
+#:
+#: Measured, and this is the reason `median` could never be acquired. Five positional-read
+#: candidates -- (s[0/1]+s[1/1])/2, (s[0/2]+s[2/2])/2, (s[0/3]+s[3/3])/2, (s[0/4]+s[3/4])/2,
+#: (s[0/4]+s[4/4])/2 -- return EXACTLY ONE value on every list of length 3 and length 4:
+#:
+#:     len=3 -> 1 distinct value      len=4 -> 1 distinct value
+#:     len=5 -> 2 distinct values     len=7 -> 2 distinct values     len=10 -> 2 distinct values
+#:
+#: They are different formulae that agree on every short list, because the index clamps to
+#: the ends. Every example the system had ever been given was length 3 or 4, so it was
+#: searching a space where its target was IMMATERIAL -- and then reporting "ambiguous",
+#: which is a true statement about its evidence and a false one about the question.
+#:
+#: This is the difference between refusing and being unable to look. A refusal that reports
+#: ambiguity must be checkable against whether the probes COULD have separated anything.
+MINIMUM_DISCRIMINATING_LENGTH = 5
+
+
 def _candidates():
     """Compose the primitives into candidate arithmetics. No names, no target operator."""
     base = [
@@ -365,10 +384,32 @@ def acquire_from_examples(kind: str, words, examples) -> dict:
                 "detail": (f"no combiner satisfies all {len(examples)} example(s); the last "
                            f"one was {list(values)} -> {answer}")}
     if len(matches) > 1:
+        # TWO KINDS OF AMBIGUITY, AND ONLY ONE OF THEM IS THE ASKER'S PROBLEM.
+        #
+        # `ambiguous` was reported for both, which made a reachable dead end look like an
+        # unreachable one. Measured on `median`: the examples left exactly two candidates
+        # standing, and NO question in the pool separates them -- because they are the same
+        # function written twice (s[2/2-1] and s[4/2-1] are both the middle index). Asking
+        # again can never help, and telling the asker to try is a request that cannot be
+        # satisfied.
+        #
+        # But when a question DOES exist, the system should say which one -- that is the
+        # difference between "I cannot tell" and "tell me this".
+        question = next_example(matches)
+        if question is None:
+            return {"acquired": False, "reason": "indistinguishable",
+                    "detail": (f"the {len(matches)} remaining readings are the SAME function on "
+                               f"every list that can be asked about, so no further example can "
+                               f"separate them -- this is a limit of the vocabulary, not of "
+                               f"the evidence"),
+                    "alternatives": [m["arity"] for m in matches]}
         return {"acquired": False, "reason": "ambiguous",
-                "detail": (f"{len(matches)} combiners satisfy all {len(examples)} example(s) "
-                           f"and they are different functions"),
-                "alternatives": [m["arity"] for m in matches]}
+                "detail": (f"{len(matches)} combiners satisfy all {len(examples)} example(s); "
+                           f"one more example would rule some out"),
+                "alternatives": [m["arity"] for m in matches],
+                "next_example": question["probe"],
+                "ask": question["ask"],
+                "worst_case_remaining": question["worst_case_remaining"]}
     row = matches[0]
     try:
         V.declare_aggregate(kind, words, row["fn"], row["laws"])
@@ -393,3 +434,90 @@ def acquire(kind: str, words) -> dict:
             "detail": (f"{len(admissible)} distinct combiners are expressible and all of them "
                        "are checkable, so the word alone does not say which one is meant"),
             "expressible": len(admissible)}
+
+
+def _distinct_outputs(standing, probe) -> dict:
+    """Which candidate answers what, on this probe. The only thing a question can reveal."""
+    buckets: dict = {}
+    for row in standing:
+        try:
+            key = round(float(row["fn"](list(probe))), 9)
+        except Exception:
+            key = "ERROR"
+        buckets.setdefault(key, []).append(row["arity"])
+    return buckets
+
+
+def _probe_pool(max_len: int = 8) -> list[list]:
+    """Lists worth asking about. Deliberately spans LENGTH, not just values.
+
+    Measured: five positional candidates return one identical value on every list of length
+    3 or 4 and only separate at length 5. A pool of short probes can therefore report
+    "ambiguous" forever while never having asked a question capable of disambiguating
+    anything -- and that report is true about the evidence and useless about the problem.
+    """
+    pool = [
+        [1, 2, 3], [1, 2, 4], [1, 2, 10], [0, 1, 100], [-5, 0, 5], [1, 1, 2],
+        [1, 2, 3, 4], [1, 2, 10, 20], [2, 4, 6, 8],
+    ]
+    for n in range(5, max_len + 1):
+        pool.append(list(range(1, n + 1)))          # evenly spaced, long enough to separate
+        pool.append([1, 2, 3, 4, 5, 6, 7, 8, 9, 10][:n])
+    pool.append([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    seen, out = set(), []
+    for p in pool:
+        key = tuple(p)
+        if key not in seen:
+            seen.add(key)
+            out.append(p)
+    return out
+
+
+def next_example(standing) -> dict | None:
+    """The ONE demonstration that would cut the remaining candidates most evenly.
+
+    THIS IS THE QUESTION THE SYSTEM NEVER ASKED. It could learn from examples and, when the
+    examples were not enough, it said `ambiguous` and stopped -- reporting a dead end it had
+    never checked the reachability of. But the choice is not a guess: for each probe, the
+    candidates partition by the answer they would give, and the best question is the one
+    whose WORST-CASE partition is smallest. That is computable from the candidate set alone,
+    with no knowledge of which answer the asker has in mind.
+
+    Returns the probe to demonstrate, how many distinct answers are possible, and the
+    worst case -- or None when no probe in the pool separates anything, which means the
+    remaining candidates are the same function on everything we can ask about and the honest
+    thing to report is that the vocabulary itself is the limit.
+    """
+    standing = [r for r in standing if r.get("admitted")]
+    if len(standing) < 2:
+        return None
+    best = None
+    for probe in _probe_pool():
+        buckets = _distinct_outputs(standing, probe)
+        sizes = [len(v) for v in buckets.values()]
+        if len(buckets) < 2:
+            continue
+        worst = max(sizes)
+        # prefer the smallest worst case, then the most balanced split, then the SHORTEST
+        # probe -- a shorter demonstration is easier to give and just as decisive.
+        score = (worst, -len(buckets), len(probe))
+        if best is None or score < best[0]:
+            best = (score, probe, len(buckets), worst)
+    if best is None:
+        return None
+    _, probe, n_answers, worst = best
+    return {
+        "probe": list(probe),
+        "answers_possible": n_answers,
+        "worst_case_remaining": worst,
+        "standing": len(standing),
+        # what a person would actually be asked
+        "ask": (f"what is <word>({', '.join(str(x) for x in probe)})? "
+                f"-- any of {n_answers} answers would rule out some of the "
+                f"{len(standing)} readings still standing"),
+    }
+
+
+def _reachable(standing) -> bool:
+    """Could ANY question in the pool separate the remaining candidates?"""
+    return next_example(standing) is not None

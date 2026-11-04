@@ -729,6 +729,74 @@ def _computation_holds(comp: dict, root: str) -> bool:
     return False
 
 
+def _teachable(word: str, root: str) -> dict | None:
+    """If `word` is a word we could LEARN, say what would teach it. Never what it means.
+
+    THE DOOR USED TO SAY NOTHING. `what is the skew of amount` came back
+    PARTIALLY_GROUNDED with `skew` unresolved and `detail: None`: true, and useless. The
+    asker could not tell whether the word was a column it had not read, a typo, or an
+    operator the creature could acquire if shown two examples.
+
+    This is the second of those, and it is the only one the asker can act on. The question
+    is computed, not guessed -- `operator_acquisition_v1.next_example` partitions the
+    candidate set by the answer each would give and returns the demonstration whose
+    worst-case partition is smallest. Nothing here proposes a MEANING for the word; it
+    proposes a TEST.
+
+    Returns None when the word cannot be taught, so a question that is simply missing data
+    is not turned into a request for examples it does not want.
+    """
+    if not word or not word.isalpha() or len(word) < 2:
+        return None
+    try:
+        from canonical.runtime import operator_acquisition_v1 as _A
+        from canonical.runtime import value_algebra_v1 as _V
+    except Exception:
+        return None
+    # A word that already names a column in this tree is data, not an operator: teaching it
+    # would shadow the column and answer a different question.
+    try:
+        for path in sorted(Path(root).rglob("*.csv")):
+            head = path.read_text(errors="ignore").splitlines()[:1]
+            if head and word.lower() in [c.strip().lower() for c in head[0].split(",")]:
+                return None
+    except OSError:
+        pass
+    try:
+        if any(word.lower() in ws for ws in _V._AGG_WORDS.values()):
+            return None
+        standing = [r for r in _A.survey() if r.get("admitted")]
+        question = _A.next_example(standing)
+    except Exception:
+        return None
+    if question is None:
+        return None
+    return {
+        "word": word,
+        "probe": question["probe"],
+        "ask": (f"show what {word}({', '.join(str(x) for x in question['probe'])}) is, "
+                f"and it can be learned rather than guessed"),
+        "readings_standing": question["standing"],
+    }
+
+
+_RESTORED = False
+
+
+def _restore_acquired_operators() -> None:
+    """Bring taught operators into this process, once. Never raises."""
+    global _RESTORED
+    if _RESTORED:
+        return
+    _RESTORED = True
+    try:
+        from canonical.runtime import acquired_operator_memory_v1 as _M
+        _M.restore()
+    except Exception:
+        # A vocabulary that cannot be restored is the vocabulary that was declared.
+        return
+
+
 def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     """Answer by reading, and ground every line of the answer."""
     if not Path(root).is_dir():
@@ -740,6 +808,20 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
             "detail": f"{root!r} is not a directory; nothing could be read",
         }
     terms = question_terms(question)
+    # AN OPERATOR THE CREATURE INDUCED MUST BE PRESENT BEFORE IT ANSWERS.
+    #
+    # Without this, `acquire_from_examples` could genuinely derive a new operator, the door
+    # would answer with it, and the next process would report the same word as unexplained
+    # -- measured: taught `spreadv` from two worked examples, answered 300 through the door,
+    # then a fresh process returned PARTIALLY_GROUNDED with `spreadv` unresolved. Learning
+    # that does not survive is a demonstration, not a capability.
+    #
+    # This restores from the store and re-derives each taught operator through the same
+    # gates that admitted it (see acquired_operator_memory_v1: the DEMONSTRATION is stored,
+    # never the function). It is idempotent -- `already_declared` short-circuits -- and it
+    # cannot fail an answer: a store that will not load leaves the vocabulary exactly as it
+    # was declared in source.
+    _restore_acquired_operators()
     # A listing question asks for a SET, not for a word occurrence. Routing it to
     # `find` is what made "list the files in this directory" return NOTHING_FOUND on a
     # directory holding three files: no term in it names anything inside the tree.
@@ -1042,8 +1124,23 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         ambiguous = dict(getattr(_ve, "_AMBIGUOUS_COLUMNS", {}) or {})
     except Exception:
         ambiguous = {}
+    # ASK THE REFERENT QUESTION BEFORE DECIDING WHAT HAPPENED, because the answer decides it.
+    referent = _checks_its_referent(question, comp, root)
     if ambiguous and comp is None:
         verdict = "AMBIGUOUS_REFERENT"
+    elif comp is not None and comp["verified"] and (referent or {}).get("verdict") == "ignores":
+        # THE ARITHMETIC HOLDS AND IT IS NOT AN ANSWER TO THIS QUESTION.
+        #
+        # `what is the total amount times region` returns 6 from
+        # double(count(sum(amount) by region)): verified, reproducible, and it never reads
+        # an amount. Reporting COMPUTED for that put it in the same verdict as `550` for
+        # `what is the total amount`, which is how a caller -- and a reader -- was expected
+        # to tell them apart. Nothing could.
+        #
+        # It is not NOTHING_FOUND either: something was computed and it was checkably not
+        # about the question. This is the third distinct reason in the same family as
+        # AMBIGUOUS_REFERENT, and the reason has to name itself.
+        verdict = "REFERENT_NOT_READ"
     elif comp is not None and comp["verified"] and comp["operation"] == "read_content" and unresolved:
         # It read the file and some of what was asked about is still unaccounted for.
         verdict = "READ_INCOMPLETE"
@@ -1089,6 +1186,13 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         "all_grounded": bool(hits) and grounded == len(hits),
         "computation": comp,
         "unresolved_terms": unresolved,
+        # WHAT WOULD END THIS, IF ANYTHING WOULD.
+        #
+        # Only for words that could actually be learned. A refusal that carries no way out
+        # is a dead end; a refusal that carries the wrong way out is worse, so a word that
+        # names an existing column -- missing data rather than a missing operator -- gets
+        # nothing here.
+        "teachable": ([t for t in (_teachable(w, root) for w in unresolved) if t] or None),
         # WHAT WAS TRIED AND FAILED, not just what won.
         #
         # The trial keeps every attempt -- including the ones that did not re-check and
@@ -1115,7 +1219,19 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # the original defect, one layer up: the operation was real, and the subject was
         # never dealt with. An answer needs the work to hold AND the question's words to
         # be accounted for.
-        "answered": (bool(comp["verified"]) and not unresolved) if comp is not None
+        # AN ANSWER THAT IGNORES ITS OWN REFERENT IS NOT ANSWERED.
+        #
+        # The referent check shipped last round computed `ignores` and then nothing read
+        # it: `what is the total amount times region` still returned verified=True,
+        # answered=True, COMPUTED -- identical to a correct answer in every field a caller
+        # looks at. A distinction that changes no behaviour is not a distinction; it is a
+        # comment with a dict around it.
+        #
+        # `ignores` means the expression never reads the column the question names, which
+        # is the strongest possible evidence that it is not an answer. It is the same
+        # arithmetic as the `unresolved` term beside it: real work, and the question not
+        # dealt with.
+        "answered": (_answer_stands(comp, unresolved, referent)) if comp is not None
                     else (bool(hits) and not asks_for_number and not unresolved),
         "grounding_summary": summary,
         # WHAT THIS ANSWER DOES TO THE ONES ALREADY GIVEN.
@@ -1144,8 +1260,24 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # never about it. The probe value is derived from the data so the perturbation is
         # always real -- a fixed probe accused three correct answers of ignoring the column
         # they were entirely made of, on a tree that already held that value.
-        "depends_on_referent": _checks_its_referent(question, comp, root),
+        "depends_on_referent": referent,
     }
+
+
+def _answer_stands(comp, unresolved, referent: dict) -> bool:
+    """Does the work hold, the question's words get accounted for, AND the answer be about
+    the thing that was asked?
+
+    Three separate ways an answer can fail, and only the first two were ever checked. A
+    referent verdict of `uncheckable` does not block: "I could not test this" is not
+    evidence against it, and blocking on it would refuse every text-referent question in
+    the system.
+    """
+    if not comp.get("verified"):
+        return False
+    if unresolved:
+        return False
+    return (referent or {}).get("verdict") != "ignores"
 
 
 def _checks_its_referent(question: str, comp, root) -> dict:
@@ -1184,7 +1316,8 @@ def _checks_its_referent(question: str, comp, root) -> dict:
             _IN_REFERENT_PROBE = False
 
     try:
-        return _R.check(root, question, ask)
+        return _R.check_answer(root, question, ask,
+                               answer=(comp or {}).get("value"))
     except Exception as exc:
         # A CHECK THAT CRASHED IS NOT A CHECK THAT PASSED.
         return {"verdict": "uncheckable", "why": f"the check raised {type(exc).__name__}: {exc}"}

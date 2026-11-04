@@ -544,3 +544,12 @@ def test_eleven_correct_answers_on_one_tree_report_nothing(tmp_path):
         out = I.answer(question, root)
         assert out["contradicts"] == [], (question, out["contradicts"])
     assert len(L.entries()) == len(questions)
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

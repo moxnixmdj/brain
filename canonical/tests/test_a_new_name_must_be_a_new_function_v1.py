@@ -185,3 +185,12 @@ def test_the_probes_contain_data_that_separates_the_hardest_pair():
     assert has_unsorted, "a probe set of only ascending runs cannot separate min from max"
     has_repeats = any(len(set(values)) < len(values) for values in V._PROBE_SETS)
     assert has_repeats
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

@@ -48,9 +48,9 @@
           "version": "3.2.9",
           "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"
         },
-        "output_bytes": 5310,
+        "output_bytes": 5309,
         "output_path": "canonical/astra_runtime/tmp/typed_swe_reports/12f8c37663b0_typed_swe_report.json",
-        "output_sha256": "41e211665d45777dc2cfda9aea969d177f25f7c904f5773f86454e27757ae7be",
+        "output_sha256": "f2029208391cf77ad0e6fea219703b5ac750678f2829a1d7a1685ae9e910b950",
         "output_verified": true,
         "row_count": 1,
         "status_value": "PASS"
@@ -76,7 +76,7 @@
       }
     }
   ],
-  "created_at_utc": "2026-11-04T12:54:14.396639+00:00",
+  "created_at_utc": "2026-11-04T20:45:22.420130+00:00",
   "mission_id": "KIND138",
   "next_action_index": 2,
   "plan_sha256": "884cf86fefb721ed972164063411d3bbf149e3d22cd728cc6550b508907c8b0b",
@@ -85,5 +85,5 @@
   "status": "COMPLETE",
   "step_id": "live-raw-goal-controller",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-11-04T12:54:15.281794+00:00"
+  "updated_at_utc": "2026-11-04T20:45:23.038542+00:00"
 }

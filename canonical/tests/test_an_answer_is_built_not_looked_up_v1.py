@@ -553,3 +553,12 @@ def test_the_memo_serves_only_the_node_it_stored(tmp_path):
     assert V.evaluate(node) == 3, "the memo served a value belonging to another node"
     assert V._EVAL_MEMO[id(node)][0] is node
     V._reset_memo()
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

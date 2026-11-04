@@ -225,3 +225,12 @@ def test_a_declared_operator_is_judged_like_any_other(tmp_path, median_declared)
     assert built["value"] == pytest.approx(7)
     assert V.holds(built["node"], 7.0) is True
     assert V.holds(built["node"], 99.0) is False
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

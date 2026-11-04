@@ -195,3 +195,12 @@ def test_a_question_with_no_rivals_reports_zero(tmp_path):
     # a direct row count is not produced by the enumeration, so it carries no rival count;
     # either way it must never be a number that claims rivals were counted when none were
     assert comp.get("rival_readings") is None or isinstance(comp.get("rival_readings"), int)
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

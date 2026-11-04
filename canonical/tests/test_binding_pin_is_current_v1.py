@@ -408,3 +408,12 @@ def test_a_broken_audit_never_removes_capabilities(monkeypatch):
     av = A.available(reg)
     assert not any("verification_evidence_is_stale" in m for m in av.values())
     A._STALE_CACHE.clear()
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield

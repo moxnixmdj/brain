@@ -14,6 +14,8 @@ Each test fails if filename matching is removed.
 """
 from __future__ import annotations
 
+import pytest
+
 import pathlib
 import sys
 import tempfile
@@ -596,3 +598,12 @@ def test_a_word_absent_from_a_readable_csv_is_reported_as_absent():
     answer = I.answer("what is zzz_absent in sales.csv", root)
     assert answer["answered"] is False
     assert answer["unresolved_terms"] == ["zzz_absent"]
+
+
+@pytest.fixture(autouse=True)
+def _no_persistent_memory():
+    """A test run must not write to the creature's committed memory store."""
+    from canonical.tests._memory import no_persistent_memory
+
+    with no_persistent_memory():
+        yield
