@@ -75,6 +75,13 @@ from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
 
 SCHEMA = "PROJECT_BRAIN_RECURSIVE_SELF_ARCHITECT_V1"
 
+
+def referee_executable_organ(source_code: str) -> dict[str, Any]:
+    """Ring-0 admission for `P_t` organ sources (POLICY/PERCEPTOR/SKILL), not only Ring-1 `.py` diffs."""
+    from canonical.swe_kernel.meta_circular_organ_graph_v1 import ring0_referee_organ_source
+
+    return ring0_referee_organ_source(source_code)
+
 RING0_IMMUTABLE_PREFIXES: tuple[str, ...] = (
     "execution_guard/",
     "canonical/governance/",
@@ -2459,6 +2466,10 @@ class RecursiveSelfArchitect:
         self.profiler = EmpiricalZygoteProfiler()
         self.archive = QualityDiversitySelfArchive(self.state_dir / "qd_self_archive_v1.json")
         self.concept_library = concept_library or CompoundingConceptLibrary(self.state_dir / "concept_library_v1.json")
+
+    def referee_executable_organ(self, source_code: str) -> dict[str, Any]:
+        """Point Ring-0 at organ sources in `P_t` (AST firewall), not only Ring-1 files."""
+        return referee_executable_organ(source_code)
 
     def run_self_improvement_cycle(
         self,

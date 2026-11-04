@@ -21,8 +21,10 @@ Seven reflective strata — none of which is a frozen menu of templates:
                            hardcoded sum/prod/constants checklist).
   6. `META_SYNTHESIZER`  : higher-order anti-unification + exact coefficient
                            solving (no frozen integer lattice).
-  7. `POLICY`            : multi-step instrumental Q so 0-immediate-reward
-                           tools/sensors/verifiers inherit unlocking value.
+  7. `POLICY`            : observational-synthesized immediate
+                           `(value, cost, failed) -> realized` plus the
+                           unlock-graph bootstrap prior; sealed Ring-0
+                           `forge_sensor` board admits or the incumbent stays.
 """
 from __future__ import annotations
 
@@ -2112,78 +2114,226 @@ def rank_instrumental_actions(
     return ranked
 
 
+def _indent_block(src: str, spaces: int) -> str:
+    """Re-indent a statement body, preserving relative indent (STUN if/else)."""
+    pad = " " * max(0, int(spaces))
+    stripped = src.strip("\n")
+    indents = [len(ln) - len(ln.lstrip(" ")) for ln in stripped.splitlines() if ln.strip()]
+    base = min(indents) if indents else 0
+    out: list[str] = []
+    for ln in stripped.splitlines():
+        if not ln.strip():
+            out.append("")
+            continue
+        out.append(pad + ln[base:])
+    return "\n".join(out)
+
+
+def ring0_referee_organ_source(source_code: str) -> dict[str, Any]:
+    """Ring-0 AST firewall on a `P_t` organ source (not a Ring-1 `.py` patch)."""
+    try:
+        verify_pure_organ_ast(source_code)
+    except OrganSafetyError as exc:
+        return {"ok": False, "ring0": "REFUSED", "reason": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "ring0": "REFUSED", "reason": type(exc).__name__}
+    return {"ok": True, "ring0": "ADMITTED"}
+
+
+def _policy_organ_holds_ring0(organ: ExecutableOrgan) -> bool:
+    """Sealed boards: burned loses to safe; `forge_sensor` still unlocks the master goal."""
+    try:
+        organ.ensure_compiled()
+        burned = organ.invoke(
+            [
+                {"id": "burned", "value": 10.0, "cost": 1.0},
+                {"id": "safe", "value": 10.0, "cost": 1.0},
+            ],
+            10.0,
+            {"burned": 1.0, "safe": 0.0},
+        )
+        if not burned or str(burned[0].get("id")) != "safe":
+            return False
+        forged = organ.invoke(
+            [
+                {"id": "shiny", "value": 12.0, "cost": 1.0},
+                {"id": "forge_sensor", "value": 0.0, "cost": 1.0, "unlocks": ("master_goal",)},
+                {"id": "master_goal", "value": 100.0, "cost": 1.0, "requires": ("forge_sensor",)},
+            ],
+            3.0,
+            None,
+        )
+        if not forged or str(forged[0].get("id")) != "forge_sensor":
+            return False
+    except Exception:
+        return False
+    return True
+
+
+def _synthesize_immediate_from_traces(
+    transitions: Sequence[Mapping[str, Any]],
+    *,
+    concept_library: Any | None = None,
+) -> str | None:
+    """Observational bank + `G_t`: `(value, cost, failed) -> realized` body, or None."""
+    rows: list[tuple[float, float, float, float]] = []
+    seen: set[tuple[Any, ...]] = set()
+    for tr in transitions:
+        cost = float(tr.get("cost") or 1.0)
+        failed_flag = bool(tr.get("failed"))
+        failed = 1.0 if failed_flag else 0.0
+        raw_v = tr.get("value")
+        if raw_v is None:
+            delta = tr.get("delta") or {}
+            nums = [
+                float(v)
+                for v in (delta.values() if isinstance(delta, Mapping) else ())
+                if isinstance(v, (int, float)) and not isinstance(v, bool)
+            ]
+            raw_v = nums[0] if nums else 1.0
+        value = float(raw_v)
+        realized = 0.0 if failed_flag else value
+        key = (round(value, 9), round(cost, 9), failed, round(realized, 9))
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append((value, cost, failed, realized))
+        if len(rows) >= 12:
+            break
+    if len(rows) < 2:
+        return None
+    try:
+        from canonical.runtime.swe_observational_program_synthesizer_v1 import (
+            synthesize_python_function_body,
+        )
+    except Exception:
+        return None
+
+    vary_cost = len({round(r[1], 9) for r in rows}) > 1
+    attempts: list[tuple[list[str], list[tuple[tuple[Any, ...], Any]]]] = []
+    if not vary_cost:
+        attempts.append(
+            (
+                ["value", "failed"],
+                [((v, f), r) for v, c, f, r in rows],
+            )
+        )
+    attempts.append(
+        (
+            ["value", "cost", "failed"],
+            [((v, c, f), r) for v, c, f, r in rows],
+        )
+    )
+    for names, examples in attempts:
+        try:
+            body = synthesize_python_function_body(
+                names,
+                examples,
+                extra_constants=(),
+                max_weight=3,
+                max_bank_size=80,
+                concept_library=concept_library,
+            )
+        except Exception:
+            body = None
+        if isinstance(body, str) and "return" in body:
+            return body.strip() + "\n"
+    return None
+
+
 def compile_policy_organ(
     *,
     name: str = "instrumental_policy",
     gamma: float = 0.92,
     horizon: int = 3,
     empirical_burns: Mapping[str, float] | None = None,
+    learned_immediate: str | None = None,
 ) -> ExecutableOrgan:
-    """Compile an evolvable POLICY organ; `empirical_burns` are wake-residual fail-rates."""
+    """Compile a POLICY organ.
+
+    `learned_immediate` is a synthesized `(value, cost, failed)` body. `gamma`
+    is the unlock-graph bootstrap prior, not the law. `empirical_burns` are
+    p_burn defaults from wake residuals when the caller omits them.
+    """
     observed = {str(k): float(v) for k, v in dict(empirical_burns or {}).items()}
-    src = f"""
-def score_actions(actions, remaining_budget, p_burn_by_id=None):
-    by_id = {{}}
-    for raw in actions:
-        aid = str(raw.get('id') or '')
-        if not aid:
-            continue
-        by_id[aid] = {{
-            'id': aid,
-            'value': float(raw.get('value') or 0.0),
-            'cost': max(1e-9, float(raw.get('cost') or 1.0)),
-            'unlocks': tuple(str(x) for x in (raw.get('unlocks') or ())),
-            'requires': tuple(str(x) for x in (raw.get('requires') or ())),
-        }}
-    burns = dict(p_burn_by_id or {{}})
-    for _k, _v in {observed!r}.items():
-        burns.setdefault(_k, _v)
-    gamma = {float(gamma)!r}
-    horizon = {int(horizon)!r}
-    structured = any(n['unlocks'] or n['requires'] for n in by_id.values())
-
-    def _q(aid, done, budget, depth):
-        if depth <= 0 or budget <= 1e-12:
-            return 0.0
-        node = by_id[aid]
-        for r in node['requires']:
-            if r not in done:
-                return -1e9
-        if node['cost'] > budget + 1e-12:
-            return -1e9
-        p_burn = burns.get(aid, 0.0)
-        if not structured:
-            return (node['value'] / node['cost']) * (1.0 - 0.85 * p_burn)
-        immediate = node['value'] * (1.0 - 0.85 * p_burn)
-        leftover = budget - node['cost']
-        nxt = set(done)
-        nxt.add(aid)
-        future = 0.0
-        unlocked = [u for u in node['unlocks'] if u in by_id and u not in nxt]
-        candidates = unlocked or [k for k in by_id if k not in nxt]
-        if candidates and leftover > 0:
-            future = max(_q(u, nxt, leftover, depth - 1) for u in candidates)
-        return immediate - node['cost'] * 0.05 + gamma * future
-
-    ranked = []
-    for aid, node in by_id.items():
-        qv = _q(aid, set(), float(remaining_budget), horizon)
-        row = dict(node)
-        row['q'] = qv
-        ranked.append(row)
-    ranked.sort(key=lambda r: (r['q'], -r['cost'], r['id']), reverse=True)
-    return ranked
-"""
+    imm_src = (learned_immediate or "").strip()
+    if imm_src:
+        imm_def = "    def _immediate(value, cost, failed):\n" + _indent_block(imm_src, 8) + "\n"
+        unstructured = "            return _immediate(node['value'], node['cost'], p_burn)\n"
+        structured_imm = "        immediate = _immediate(node['value'], node['cost'], p_burn)\n"
+    else:
+        imm_def = ""
+        unstructured = "            return (node['value'] / node['cost']) * (1.0 - 0.85 * p_burn)\n"
+        structured_imm = "        immediate = node['value'] * (1.0 - 0.85 * p_burn)\n"
+    src = (
+        "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
+        "    by_id = {}\n"
+        "    for raw in actions:\n"
+        "        aid = str(raw.get('id') or '')\n"
+        "        if not aid:\n"
+        "            continue\n"
+        "        by_id[aid] = {\n"
+        "            'id': aid,\n"
+        "            'value': float(raw.get('value') or 0.0),\n"
+        "            'cost': max(1e-9, float(raw.get('cost') or 1.0)),\n"
+        "            'unlocks': tuple(str(x) for x in (raw.get('unlocks') or ())),\n"
+        "            'requires': tuple(str(x) for x in (raw.get('requires') or ())),\n"
+        "        }\n"
+        "    burns = dict(p_burn_by_id or {})\n"
+        f"    for _k, _v in {observed!r}.items():\n"
+        "        burns.setdefault(_k, _v)\n"
+        f"    gamma = {float(gamma)!r}\n"
+        f"    horizon = {int(horizon)!r}\n"
+        "    structured = any(n['unlocks'] or n['requires'] for n in by_id.values())\n"
+        "\n"
+        + imm_def
+        + "    def _q(aid, done, budget, depth):\n"
+        "        if depth <= 0 or budget <= 1e-12:\n"
+        "            return 0.0\n"
+        "        node = by_id[aid]\n"
+        "        for r in node['requires']:\n"
+        "            if r not in done:\n"
+        "                return -1e9\n"
+        "        if node['cost'] > budget + 1e-12:\n"
+        "            return -1e9\n"
+        "        p_burn = burns.get(aid, 0.0)\n"
+        "        if not structured:\n"
+        + unstructured
+        + structured_imm
+        + "        leftover = budget - node['cost']\n"
+        "        nxt = set(done)\n"
+        "        nxt.add(aid)\n"
+        "        future = 0.0\n"
+        "        unlocked = [u for u in node['unlocks'] if u in by_id and u not in nxt]\n"
+        "        candidates = unlocked or [k for k in by_id if k not in nxt]\n"
+        "        if candidates and leftover > 0:\n"
+        "            future = max(_q(u, nxt, leftover, depth - 1) for u in candidates)\n"
+        "        return immediate - node['cost'] * 0.05 + gamma * future\n"
+        "\n"
+        "    ranked = []\n"
+        "    for aid, node in by_id.items():\n"
+        "        qv = _q(aid, set(), float(remaining_budget), horizon)\n"
+        "        row = dict(node)\n"
+        "        row['q'] = qv\n"
+        "        ranked.append(row)\n"
+        "    ranked.sort(key=lambda r: (r['q'], -r['cost'], r['id']), reverse=True)\n"
+        "    return ranked\n"
+    )
     organ = make_organ(
         stratum=POLICY,
         name=name,
         task_signature="policy::instrumental_q",
         entrypoint="score_actions",
         source_code=src,
-        metadata={"gamma": gamma, "horizon": horizon, "empirical_burns": observed},
+        metadata={
+            "gamma": gamma,
+            "horizon": horizon,
+            "empirical_burns": observed,
+            "learned_immediate": bool(imm_src),
+        },
     )
-    if observed:
-        organ.verified_passes = max(1, len(observed))
+    if observed or imm_src:
+        organ.verified_passes = max(1, len(observed) + (8 if imm_src else 0))
     return organ
 
 
@@ -2455,6 +2605,7 @@ class MetaCircularOrganGraph:
         self.predictor = CausalFeatureSelfPredictor()
         self.concept_library = concept_library
         self._world_transitions: list[dict[str, Any]] = []
+        self.bootstrap_inductions: int = 0
         if self.state_path is not None and self.state_path.is_file():
             self._load()
 
@@ -2504,16 +2655,18 @@ class MetaCircularOrganGraph:
         cost: float,
         failed: bool,
         delta: Mapping[str, Any] | None = None,
+        value: float | None = None,
     ) -> None:
         """Accumulate wake traces and compile a WORLD_MODEL organ when enough exist."""
-        self._world_transitions.append(
-            {
-                "action": str(action_id),
-                "cost": float(cost),
-                "failed": bool(failed),
-                "delta": dict(delta or {}),
-            }
-        )
+        row: dict[str, Any] = {
+            "action": str(action_id),
+            "cost": float(cost),
+            "failed": bool(failed),
+            "delta": dict(delta or {}),
+        }
+        if value is not None:
+            row["value"] = float(value)
+        self._world_transitions.append(row)
         if len(self._world_transitions) < 2 or len(self._world_transitions) % 2 != 0:
             return
         try:
@@ -2525,12 +2678,13 @@ class MetaCircularOrganGraph:
             return
 
     def evolve_policy_from_traces(self) -> ExecutableOrgan | None:
-        """Rewrite the POLICY organ from WORLD_MODEL residuals (fail-rates). The incumbent dies if Pareto-dominated."""
+        """Synthesize the POLICY immediate from wake residuals. Incumbent stays if Ring-0 fails."""
         if len(self._world_transitions) < 2:
             return None
+        traces = self._world_transitions[-16:]
         counts: dict[str, int] = {}
         fails: dict[str, int] = {}
-        for tr in self._world_transitions[-16:]:
+        for tr in traces:
             aid = str(tr.get("action") or tr.get("action_id") or "")
             if not aid:
                 continue
@@ -2539,10 +2693,49 @@ class MetaCircularOrganGraph:
         if not counts:
             return None
         burns = {k: fails[k] / max(1, counts[k]) for k in counts}
-        organ = compile_policy_organ(empirical_burns=burns)
-        organ.verified_passes = max(organ.verified_passes, len(self._world_transitions))
-        self.register_organ(organ)
-        return organ
+        incumbent = self.get_primary(POLICY, "policy::instrumental_q")
+        io_sig = [
+            list(row)
+            for row in sorted(
+                {
+                    (
+                        round(float(tr.get("value") or 0.0), 6),
+                        round(float(tr.get("cost") or 0.0), 6),
+                        1 if tr.get("failed") else 0,
+                    )
+                    for tr in traces
+                }
+            )
+        ]
+        cached = None
+        if incumbent is not None:
+            md = incumbent.metadata or {}
+            if md.get("learned_immediate") and md.get("trace_io_sig") == io_sig:
+                cached = md.get("learned_immediate_src")
+        learned = (
+            cached
+            if isinstance(cached, str) and cached.strip()
+            else _synthesize_immediate_from_traces(traces, concept_library=self.concept_library)
+        )
+        candidates: list[ExecutableOrgan] = []
+        if learned:
+            synth = compile_policy_organ(learned_immediate=learned, empirical_burns=burns)
+            synth.metadata["learned_immediate_src"] = learned
+            synth.metadata["trace_io_sig"] = io_sig
+            synth.verified_passes = max(synth.verified_passes, len(self._world_transitions) + 8)
+            candidates.append(synth)
+        boot = compile_policy_organ(empirical_burns=burns)
+        boot.verified_passes = max(boot.verified_passes, len(self._world_transitions))
+        candidates.append(boot)
+        for organ in candidates:
+            if not _policy_organ_holds_ring0(organ):
+                continue
+            self.register_organ(organ)
+            # Ring-0-admitted synthesized law is primary even if Occam prefers a smaller bootstrap.
+            self.primary_by_sig[(POLICY, "policy::instrumental_q")] = organ.organ_id
+            self._save()
+            return organ
+        return incumbent
 
     # ------------------------------------------------- Sensorogenesis API
 
@@ -2585,18 +2778,22 @@ class MetaCircularOrganGraph:
                 "composed_from_existing": True,
             }
 
-        # 3. Online epistemic sensorogenesis (induce a new grammar)
+        # 3. Last resort: induce a bootstrap primitive (counted; becomes an operator, not a 9th kind)
         all_samples = [raw_sample, *extra_samples]
         new_organ = synthesize_perceptor_organ(all_samples, format_tag=format_tag)
         if new_organ is None:
             return {"ok": False, "reason": "NO_VERIFIED_ROUNDTRIP_PERCEPTOR_FOUND"}
         self.register_organ(new_organ)
+        self.bootstrap_inductions += 1
+        self._save()
         parsed = new_organ.invoke(raw_sample)
         return {
             "ok": True,
             "parsed": parsed,
             "organ_id": new_organ.organ_id,
             "synthesized_new_organ": True,
+            "induced_bootstrap_primitive": True,
+            "bootstrap_inductions": self.bootstrap_inductions,
         }
 
     # ------------------------ Version-Space Skill Synthesis & Meta-Compilation
@@ -2787,6 +2984,7 @@ class MetaCircularOrganGraph:
             "total_organs": len(self.organs),
             "by_stratum": by_stratum,
             "predictor_observations": self.predictor.observations,
+            "bootstrap_inductions": int(self.bootstrap_inductions),
         }
 
     def _save(self) -> None:
@@ -2800,6 +2998,7 @@ class MetaCircularOrganGraph:
                 f"{s}::{sig}": oid for (s, sig), oid in sorted(self.primary_by_sig.items())
             },
             "predictor": self.predictor.as_row(),
+            "bootstrap_inductions": int(self.bootstrap_inductions),
         }
         tmp = self.state_path.with_suffix(self.state_path.suffix + ".tmp")
         tmp.write_text(json.dumps(payload, indent=1, sort_keys=True) + "\n", encoding="utf-8")
@@ -2825,3 +3024,7 @@ class MetaCircularOrganGraph:
                 self.primary_by_sig[(s, sig)] = str(oid)
         if isinstance(raw.get("predictor"), Mapping):
             self.predictor = CausalFeatureSelfPredictor.from_row(raw["predictor"])
+        try:
+            self.bootstrap_inductions = max(0, int(raw.get("bootstrap_inductions") or 0))
+        except (TypeError, ValueError):
+            self.bootstrap_inductions = 0

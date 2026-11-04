@@ -39,6 +39,7 @@ from canonical.runtime import mortality_and_triage_v1 as M  # noqa: E402
 from canonical.runtime import self_authored_obligations_v1 as SAO  # noqa: E402
 from canonical.runtime import self_prediction_baseline_v1 as SPB  # noqa: E402
 from canonical.swe_kernel import meta_circular_organ_graph_v1 as MCOG  # noqa: E402
+from canonical.swe_kernel import recursive_self_architect_v1 as RSA  # noqa: E402
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as RIDG  # noqa: E402
 
 
@@ -286,9 +287,14 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             graph = MCOG.MetaCircularOrganGraph(pathlib.Path(tmp) / "organs.json")
             inner = graph.perceive_or_synthesize_reader('{"a": 1, "b": 2}', format_tag="json")
             self.assertTrue(inner["ok"], inner)
+            self.assertTrue(inner.get("induced_bootstrap_primitive"))
+            self.assertGreaterEqual(graph.bootstrap_inductions, 1)
+            induced = graph.bootstrap_inductions
             wrapped = graph.perceive_or_synthesize_reader('WRAP:{"a": 1, "b": 2}', format_tag="wrap_json")
             self.assertTrue(wrapped["ok"], wrapped)
             self.assertTrue(wrapped.get("composed_from_existing") or wrapped["synthesized_new_organ"])
+            self.assertFalse(wrapped.get("induced_bootstrap_primitive", False))
+            self.assertEqual(graph.bootstrap_inductions, induced)
             self.assertEqual(wrapped["parsed"]["data"]["b"], 2)
             # Negative: unstructured noise still rejected
             noise = graph.perceive_or_synthesize_reader("@@@UNSTRUCTURED_CORRUPTED_NOISE_WITHOUT_GRAMMAR@@@")
@@ -366,13 +372,14 @@ class MetaCircularOrganGraphTests(unittest.TestCase):
             graph.register_organ(boot)
             boot_id = graph.get_primary(MCOG.POLICY, "policy::instrumental_q").organ_id
             for _ in range(2):
-                graph.record_transition(action_id="burned", cost=1.0, failed=True, delta={})
+                graph.record_transition(action_id="burned", cost=1.0, failed=True, value=10.0, delta={})
             for _ in range(2):
-                graph.record_transition(action_id="safe", cost=1.0, failed=False, delta={"ok": 1.0})
+                graph.record_transition(action_id="safe", cost=1.0, failed=False, value=10.0, delta={"ok": 1.0})
             pol = graph.get_primary(MCOG.POLICY, "policy::instrumental_q")
             self.assertIsNotNone(pol)
-            self.assertIn("burned", pol.source_code)
             self.assertNotEqual(pol.organ_id, boot_id)
+            self.assertTrue(pol.metadata.get("learned_immediate") or "burned" in pol.source_code)
+            self.assertIn("_immediate", pol.source_code)
             ranked = pol.invoke(
                 [
                     {"id": "burned", "value": 10.0, "cost": 1.0},
@@ -800,6 +807,23 @@ class CreatureCounterexampleClosureTests(unittest.TestCase):
                     "    return list(actions)\n"
                 ),
             )
+
+    def test_ring0_referees_organ_sources_not_only_py_files(self):
+        refused = RSA.referee_executable_organ(
+            "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
+            "    open('/tmp/life_ledger', 'w').write('inf')\n"
+            "    return list(actions)\n"
+        )
+        self.assertFalse(refused["ok"])
+        self.assertEqual(refused["ring0"], "REFUSED")
+        admitted = RSA.referee_executable_organ(
+            "def score_actions(actions, remaining_budget, p_burn_by_id=None):\n"
+            "    return list(actions)\n"
+        )
+        self.assertTrue(admitted["ok"])
+        self.assertEqual(admitted["ring0"], "ADMITTED")
+        constant_imm = MCOG.compile_policy_organ(learned_immediate="return 1.0\n")
+        self.assertFalse(MCOG._policy_organ_holds_ring0(constant_imm))
 
     def test_unified_planner_exposes_organ_graph_and_global_extrapolation(self):
         with tempfile.TemporaryDirectory() as tmp:
