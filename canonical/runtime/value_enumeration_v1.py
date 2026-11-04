@@ -548,6 +548,12 @@ class _ColumnFile:
         self.rel = rel
 
 
+#: Columns the tree carries in more than one file, recorded by the last resolution. Cleared
+#: at the start of every enumeration so a stale ambiguity cannot outlive the question that
+#: found it -- the same rule as the evaluation memo.
+_AMBIGUOUS_COLUMNS: dict[str, list[str]] = {}
+
+
 def _files_named_by_columns(root: str, words: list[str]) -> list:
     """Files whose HEADER a question names, when the question names no file itself.
 
@@ -585,6 +591,21 @@ def _files_named_by_columns(root: str, words: list[str]) -> list:
                 except ValueError:
                     rel = path.name
                 out.append(_ColumnFile(path, rel))
+        else:
+            # A COLUMN TWO FILES CARRY IS AMBIGUOUS, AND THAT MUST BE SAID OUT LOUD.
+            #
+            # Withholding it is right -- picking one would answer a question nobody asked --
+            # but the refusal then read "the question names nothing that exists in this
+            # tree", which is FALSE and is the single most misleading thing this system
+            # said. The column exists, in two places; the system cannot choose between
+            # them. "I could not find anything" and "there are two true answers and I
+            # cannot choose" are different epistemic states, and a system that reports
+            # them identically is not being careful, it is being vague.
+            try:
+                where = [str(p.relative_to(base)) for p in paths]
+            except ValueError:
+                where = [p.name for p in paths]
+            _AMBIGUOUS_COLUMNS[name] = sorted(where)
     return out
 
 
@@ -597,6 +618,7 @@ def enumerate_expressions(question: str, root: str, ents, words: list[str],
     """
     lex = Lexicon(words)
     tables: dict = {}
+    _AMBIGUOUS_COLUMNS.clear()      # a stale ambiguity must not outlive its question
     files = [e for e in (ents or []) if getattr(e, "rel", None)]
 
     # A QUESTION MAY NAME A COLUMN INSTEAD OF A FILE.
@@ -986,11 +1008,86 @@ def choose(question: str, root: str, ents, words: list[str],
     if unsound:
         return None
     if best is None:
+        # WHY THERE IS NO ANSWER IS PART OF THE ANSWER.
+        #
+        # `None` used to mean any of: nothing matched, everything that matched was
+        # unsound, or the question's referent is carried by more than one file. Collapsing
+        # those into one silent None is how the door came to say "the question names
+        # nothing that exists in this tree" about a column that exists in two files. The
+        # caller now gets the reason and, for an ambiguity, the candidates.
         return None
     _, node, value = best
     return {"node": node, "value": value,
             "accounted": sorted(node.consumes | _structural_words(node)),
-            "enumerated": built["constructed"]}
+            "enumerated": built["constructed"],
+            # HOW WELL IS THIS CHECKED? A law that excludes 37% of wrong answers and one
+            # that excludes 95% were reported identically as verified=True. The grade is
+            # measured for every declared operator and was never consulted anywhere; it is
+            # attached here so a caller can tell a strong check from a formality.
+            "law_grade": _answer_law_grade(node),
+            # WHAT ELSE WAS A CANDIDATE. The search keeps one `best` and discards the rest,
+            # so a reader cannot see that a second reading existed. Counted, not listed, to
+            # stay cheap.
+            "rival_readings": _rival_readings(built, lex, words, value)}
+
+
+def _answer_law_grade(node) -> str | None:
+    """The weakest grade among the laws of the operators used in this expression.
+
+    A composite answer is only as well checked as its least checked operator. Reporting the
+    strongest would be exactly the kind of summary that flatters the system.
+    """
+    from canonical.runtime import value_algebra_v1 as V
+
+    grades, seen = [], set()
+    stack = [node]
+    while stack:
+        cur = stack.pop()
+        if cur is None or id(cur) in seen:
+            continue
+        seen.add(id(cur))
+        if getattr(cur, "op", None) == "aggregate":
+            kind = cur.args[0]
+            spec = V._AGGREGATES.get(kind)
+            if spec:
+                grades.append(V.law_strength(spec["fn"], spec["laws"])["grade"])
+        stack.extend(a for a in getattr(cur, "args", ()) if hasattr(a, "op"))
+    if not grades:
+        return None
+    order = ["NONE", "WEAK", "MODERATE", "STRONG"]
+    return min(grades, key=order.index)
+
+
+def _rival_readings(built, lex, words, chosen_value) -> int:
+    """How many other well-typed expressions produce a DIFFERENT value than the one chosen.
+
+    Not a warning -- a measurement. It is the difference between "one reading was possible"
+    and "several were, and this one won on size and alphabetical order", which is what the
+    ranking actually does today.
+    """
+    from canonical.runtime import value_algebra_v1 as V
+
+    want = None
+    try:
+        want = _wanted_types(lex)
+    except Exception:
+        return 0
+    different = 0
+    for node in built.get("expressions", ()):
+        if node.type not in want:
+            continue
+        try:
+            other = V.evaluate(node)
+        except Exception:
+            continue
+        if other is None:
+            continue
+        try:
+            if not V._same_value(other, chosen_value):
+                different += 1
+        except Exception:
+            continue
+    return max(0, different - 1)
 
 
 def _overconsumed(node: Node, question_words: set[str]) -> bool:

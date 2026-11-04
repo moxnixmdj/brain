@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 304,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6694,
+  "research_index_records": 6695,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 444,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "650ca021e5b30947699384d5be176c9fb4f326fd913b0dfd56f5635c196e2be2"
+  "value": "ede975762f999351c1e6b67145956fe69201e9779d4a603cded6a1fd2fd6508d"
  },
  "engines": [
   {
@@ -214603,6 +214603,51 @@
    }
   },
   {
+   "action_id": "A_REFUSAL_HAS_TO_SAY_WHICH_REFUSAL_IT_IS",
+   "capability": false,
+   "date": "2026-11-04",
+   "id": "research:canonical/action_intents/A_REFUSAL_HAS_TO_SAY_WHICH_REFUSAL_IT_IS_20261104_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REFUSAL_HAS_TO_SAY_WHICH_REFUSAL_IT_IS_20261104_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7d2ef0f26d8371c280ab3d7682c6dff339692ca3a7408c6c052e8a36d838391f",
+   "status": "",
+   "terms": {
+    "20261104": 1,
+    "37": 1,
+    "95": 1,
+    "a_refusal_has_to_say_which_refusal_it_is": 1,
+    "ambiguity": 1,
+    "answer": 2,
+    "because": 1,
+    "both": 1,
+    "built": 1,
+    "cannot": 1,
+    "choose": 2,
+    "computed": 1,
+    "distinguish": 1,
+    "empty": 1,
+    "enumerate_by_operator_type_then_choose_with_the_inherited_rules": 1,
+    "everything": 1,
+    "excluded": 1,
+    "false": 1,
+    "first": 1,
+    "found": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inherited": 1,
+    "know": 1,
+    "knows": 1,
+    "law": 1,
+    "law_strength": 1,
+    "like": 1,
+    "looked": 2,
+    "not": 2,
+    "one": 3,
+    "refusal": 2,
+    "system": 2
+   }
+  },
+  {
    "action_id": "A_REFUSAL_IS_NOT_ANSWERED_BY_A_SUBSTITUTE_V1_20261030_V1",
    "capability": false,
    "date": "2026-10-30",
@@ -260574,7 +260619,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/inspect_v1.py",
-   "sha256": "cdaab39cb1ec96ade1e41ab1a7e913a322bff4d33721404f8eed98f5e30027c4",
+   "sha256": "7faace5418c0aada74283d4a9ba283c2d1b5d85e61e2c9c85ea60f3c4719dd5e",
    "summary": "Answer a question about a computer, with the answer made of evidence.",
    "symbol_count": 20,
    "symbols": [
@@ -266933,7 +266978,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/operation_trial_v1.py",
-   "sha256": "dd0075062a85ef0be28d46dc2236dd21151350e38c7cf73845b8cd3de5e609c8",
+   "sha256": "5d0bf90a8cc075a44f57c590598a322e8458779a48672a15c1374c3fbd4c80fb",
    "summary": "A question is an attempt, not a classification.",
    "symbol_count": 26,
    "symbols": [
@@ -299526,12 +299571,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/value_enumeration_v1.py",
-   "sha256": "b67986e8f3d81cc42c3122946e00a6233c28d811f3070092a1e9fe4edd73da6f",
+   "sha256": "d4485758b5928f95a3020b8de619273c24fcc45296fe6f459aa93348dcb6cf3d",
    "summary": "An answer is SEARCHED FOR, not looked up in a list of sentences.",
-   "symbol_count": 36,
+   "symbol_count": 38,
    "symbols": [
     "_ColumnFile",
     "_algebra",
+    "_answer_law_grade",
     "_apply",
     "_as_path",
     "_asks_how_many",
@@ -299550,10 +299596,9 @@
     "_read_columns",
     "_reads_aggregate_column",
     "_rel_of",
+    "_rival_readings",
     "_row_columns",
-    "_row_words",
-    "_sentence_position",
-    "_size"
+    "_row_words"
    ],
    "terms": {
     "algebra": 1,

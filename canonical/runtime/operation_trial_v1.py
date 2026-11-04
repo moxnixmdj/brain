@@ -189,9 +189,20 @@ def _subject_words(question: str, ents: list[Entity]) -> list[str]:
     address = {seg.lower() for e in ents for seg in e.rel.replace("\\", "/").split("/")}
     address |= {e.rel.lower() for e in ents}
     out: list[str] = []
-    for w in re.findall(r"[A-Za-z_][A-Za-z0-9_.\-]{1,}", question or ""):
+    # A ONE-LETTER NAME IS A NAME.
+    #
+    # The pattern required two characters and the length guard dropped the rest, so a
+    # column called `x` -- which is what most real tables call their only numeric column --
+    # could not be referred to at all. "what is the total x" against a one-file tree with a
+    # column x came back "the question names nothing that exists in this tree", which was
+    # false. The question cannot be answered because the word never arrived, and a word
+    # dropped by the tokenizer cannot be reported as a word that was never found.
+    #
+    # Short words that are ordinary English are still excluded by _GLUE, which is where
+    # that judgement belongs -- it names words, not lengths.
+    for w in re.findall(r"[A-Za-z_][A-Za-z0-9_.\-]*", question or ""):
         low = w.lower()
-        if low in _GLUE or len(low) < 2:
+        if low in _GLUE:
             continue
         if low in address:
             continue
