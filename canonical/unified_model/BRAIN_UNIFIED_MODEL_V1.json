@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d32a6932213154e7c8d4b243314d1ef855c7c20388411b93695f5555ef4d77a2"
+  "value": "90fa443fb0701e7f9289092f6fb86e2f20bd732a9659c37763f57345970b3323"
  },
  "engines": [
   {
@@ -246809,7 +246809,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/decomposition_law_v1.py",
-   "sha256": "f147febe592687e2bcef7217ea804ed2300c7e6e4a6f1408957586122f978301",
+   "sha256": "80bc1510d24aa8aa1cbbe18ebd24bc15013e4e62df0691d2bf6f9054bcda616d",
    "summary": "Whether one answer can be checked against another is DISCOVERED, not declared.",
    "symbol_count": 11,
    "symbols": [
