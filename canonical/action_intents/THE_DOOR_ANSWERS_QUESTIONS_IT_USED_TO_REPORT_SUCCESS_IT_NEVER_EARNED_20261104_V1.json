@@ -89,7 +89,7 @@
   "v22_prewrite_admission": {
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-    "checked_at_utc": "2026-11-04T02:00:00Z",
+    "checked_at_utc": "2026-11-04T01:01:54Z",
     "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
     "mode": "ACTIVE_INTERFACE",
     "fresh_reality_authority": false,
@@ -155,7 +155,7 @@
     ],
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-11-04T02:00:00Z",
+      "checked_at_utc": "2026-11-04T01:01:54Z",
       "max_age_hours": 24,
       "incumbent_route": "INSPECT_V1_FIND_OVER_CONTENTS_ONLY_WITH_ONE_GROUNDED_WORD_FOR_EVIDENCE_AND_ANSWER",
       "source_classes_checked": [
@@ -288,7 +288,7 @@
       "negative_search_summary": "SEARCHED_BOTH_CLASSES_FOR_A_ROUTE_THAT_IS_STRONGER_ON_VERIFIABILITY_WITHOUT_A_MODEL__EVERY_EXTERNAL_ROUTE_FOUND_PUTS_A_GENERAL_MODEL_IN_THE_PRODUCER_PATH_OR_NEEDS_HUMAN_LABELLED_JUDGEMENT_WHICH_THE_SANDBOX_CANNOT_SUPPLY__THE_GAP_THAT_SURVIVES_IS_ARITHMETIC_BEYOND_LINE_ROW_AND_FILE_COUNTS",
       "selected_route": "SEARCH_BODIES_NOT_ONLY_NAMES_COUNT_INSTEAD_OF_CITING_LIST_A_DIRECTORY_AS_A_SET_AND_NAME_UNFOUND_TERMS",
       "selected_route_preflight": {
-        "checked_at_utc": "2026-11-04T02:00:00Z",
+        "checked_at_utc": "2026-11-04T01:01:54Z",
         "max_age_hours": 2,
         "selected_route": "SEARCH_BODIES_NOT_ONLY_NAMES_COUNT_INSTEAD_OF_CITING_LIST_A_DIRECTORY_AS_A_SET_AND_NAME_UNFOUND_TERMS",
         "status": "READY",
