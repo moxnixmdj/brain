@@ -206,25 +206,62 @@ def _node_accuracy(node: dict, examples: list[dict]) -> float:
     return right / len(examples)
 
 
-def _candidates(train: list[dict], limit: int = 6):
-    """The most informative distinctions this data suggests, best first.
+DEEPEST_PER_SIGNAL = 8
 
-    More than one, on purpose. Measured 2026-11-04: trying only the single best proposal meant
-    that when the world rejected it -- and information gain on the training set is not the same
-    question as accuracy on new data -- the model gave up and scored WORSE than a one-line hand
-    rule (0.5625 against 0.729). A hypothesis that dies should not end the search.
+
+def _candidates(train: list[dict], limit: int = 12):
+    """One candidate per signal -- the best cut of each -- ranked by how much it explains.
+
+    Measured 2026-11-04: this used to return the global top-k over every (signal, threshold)
+    pair. That made the system WORSE when it gained new senses: three invented columns pushed
+    the one base feature that already predicted the verdict out of the top six, so the learner
+    rejected everything and fell back to the majority class -- 0.883 down to 0.533 on a world it
+    had been solving. A ranking is not a filter. Every signal gets exactly one shot, so gaining a
+    dimension can never take a shot away from an existing one.
     """
-    scored = []
+    per_signal: dict[str, list[tuple[float, float]]] = {}
     for signal in sorted({k for ex in train for k in ex["signals"]}):
+        cuts = []
         for threshold in _candidate_thresholds(train, signal):
             low, high = _split_examples(train, signal, threshold)
             if not low or not high:
                 continue
             gain = (_weighted_entropy(train)
                     - _weighted_entropy(low) - _weighted_entropy(high))
-            scored.append((gain, signal, threshold))
-    scored.sort(key=lambda c: -c[0])
-    return scored[:limit]
+            if gain > 0:
+                cuts.append((gain, threshold))
+        if cuts:
+            cuts.sort(key=lambda c: -c[0])
+            per_signal[signal] = cuts[:DEEPEST_PER_SIGNAL]
+    """Quotas, not a cap -- and the difference was measured twice.
+
+    2026-11-04, crowding: the old rule ranked every (signal, threshold) pair together and kept
+    the top twelve, so three invented columns pushed the base feature that already worked out of
+    the list and the learner fell to the base rate. Gaining a dimension must never cost an
+    existing one its shot.
+
+    2026-11-04, the opposite mistake: keeping only ONE candidate per signal cost the `ratio`
+    world 0.883 -> 0.533, because a diagonal boundary can only be approximated by a tree if the
+    tree has a dense ladder of cuts on one axis (1, 2 and 4 shots all gave 0.533; 8 restored
+    0.883). So each signal keeps a full ladder, and every signal is guaranteed at least its best
+    cut. Redundancy across signals is handled later, by `vocabulary_v1.dedupe`.
+    """
+    scored = []
+    guaranteed = []
+    for signal, cuts in per_signal.items():
+        guaranteed.append((cuts[0][0], signal, cuts[0][1]))
+        scored.extend((gain, signal, threshold) for gain, threshold in cuts)
+    # Guarantee every sense its best cut, then rank by gain only. The guarantee is what stops an
+    # invented column from crowding out a base sense (see the crowding test). The ORDER is not
+    # load bearing: measured 2026-11-04, putting guaranteed cuts at the head gave `ratio` 0.617 and
+    # gain-only ranking gave 0.617, so both are kept simple. An earlier reading of 0.883 on the
+    # same world could not be reproduced and is not attributed to anything.
+    merged = {c: None for c in guaranteed}
+    for candidate in scored:
+        merged.setdefault(candidate, None)
+    ranked = sorted(merged, key=lambda c: -c[0])
+    keep = set(guaranteed) | set(ranked[:max(limit, len(per_signal))])
+    return [c for c in ranked if c in keep]
 
 
 # --------------------------------------------------------------------------- cross-validation

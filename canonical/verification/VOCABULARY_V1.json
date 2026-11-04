@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_VOCABULARY_V1",
+  "generated_by": "canonical/tools/vocabulary_probe_v1.py",
+  "what_this_is": "Whether a running system can grow the set of distinctions it thinks in. The algebra is given; which compositions become permanent is decided against held-out experience by the system itself. No feature is enumerated by a person.",
+  "offline": {
+    "ratio": {
+      "fixed_vocabulary": 0.6167,
+      "invented_vocabulary": 0.6167,
+      "invented": [
+        "sub(a, b)",
+        "div(a, b)"
+      ],
+      "proposed": 13,
+      "person_enumerated_features": 0
+    },
+    "product": {
+      "fixed_vocabulary": 0.85,
+      "invented_vocabulary": 0.9833,
+      "invented": [
+        "mul(a, b)",
+        "add(a, b)"
+      ],
+      "proposed": 13,
+      "person_enumerated_features": 0
+    },
+    "sum": {
+      "fixed_vocabulary": 0.8167,
+      "invented_vocabulary": 1.0,
+      "invented": [
+        "add(a, b)",
+        "mul(a, b)"
+      ],
+      "proposed": 13,
+      "person_enumerated_features": 0
+    },
+    "xor": {
+      "fixed_vocabulary": 0.5833,
+      "invented_vocabulary": 0.8667,
+      "invented": [
+        "maxdiff(a, b)",
+        "mindiff(a, b)",
+        "sub(a, b)",
+        "div(a, b)"
+      ],
+      "proposed": 5,
+      "person_enumerated_features": 0
+    },
+    "_noise": {
+      "worlds": 8,
+      "invented": 0
+    }
+  },
+  "live": {
+    "seeds": 30,
+    "ticks": 160,
+    "product": {
+      "frozen_prediction_accuracy": 0.4467,
+      "growing_prediction_accuracy": 0.6838,
+      "worlds_that_invented": 16,
+      "predictions_frozen": 295,
+      "predictions_growing": 1573
+    },
+    "noise": {
+      "worlds_that_invented": 1,
+      "false_invention_rate": 0.0333
+    }
+  },
+  "honest_failures": [
+    "ratio is unsolved: 0.883 fixed -> 0.533 invented, because the tree that approximates the diagonal loses its ladder when composed columns are added",
+    "the live loop predicts rarely, so the growing-vs-frozen contrast rests on a small number of predictions rather than on a large sample",
+    "one live noise stream in thirty still invents a distinction",
+    "the permutation gate has never fired in 52 measured offline worlds; the load-bearing guards are the per-fold rule and the pay-for-itself check"
+  ],
+  "person_enumerated_distinctions": 0,
+  "authority": "NONE",
+  "terminal_truth": false
+}

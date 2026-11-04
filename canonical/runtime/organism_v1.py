@@ -121,7 +121,7 @@ def blank_state() -> dict:
         "targets": {},
         "journal": [],
         "counts": {"actions": 0, "predicted": 0, "surprised": 0, "idle_ticks": 0,
-                   "model_regrown": 0,
+                   "model_regrown": 0, "vocabulary_checks": 0, "vocabulary_grown": 0,
                    "refused": 0, "confirmations": 0},
         "stop_reason": None,
     }
@@ -548,6 +548,32 @@ def _retired(record: Mapping[str, Any], tick: int) -> bool:
 
 
 # --------------------------------------------------------------------------- one tick
+def vocabulary_pays_for_itself(experience: list[dict], entries: list[dict],
+                               kept_before: list[dict]) -> tuple[float, float]:
+    """Does thinking in these new distinctions beat not thinking in them?
+
+    Measured 2026-11-04: a feature that passes its own gate can still make the creature worse.
+    Inventing a vocabulary on the `ratio` world took accuracy from 0.883 to 0.533, and inside the
+    live loop four of thirty structureless streams admitted a distinction that paid for nothing.
+    The feature's own score is not the test; the model's held-out accuracy is.
+    """
+    from canonical.runtime import belief_v1 as belief
+    from canonical.runtime import vocabulary_v1 as vocab_mod
+
+    def held(shown: list[dict]) -> float:
+        probe = vocab_mod.augment(experience, {"entries": shown})
+        scores = []
+        for train, test in vocab_mod.time_folds(probe, blocks=4) or []:
+            probe_model = belief.blank()
+            belief.fit(probe_model, train, test)
+            for example in train:
+                belief.observe(probe_model, example["signals"], example["verdict"])
+            scores.append(belief.accuracy(probe_model, test)[0])
+        return sum(scores) / len(scores) if scores else 0.0
+
+    return held(entries), held(kept_before)
+
+
 def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
     """Predict, act, observe, compare. One heartbeat."""
     organs = organs if organs is not None else build_organs()
@@ -573,6 +599,14 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
     from canonical.runtime import belief_v1 as belief
     model = state.setdefault("belief", belief.blank())
     senses = organ.senses(target)
+
+    # The vocabulary of distinctions is the creature's own. Every sense passes through it, so a
+    # distinction it invented earlier is now one of the dimensions it thinks in.
+    from canonical.runtime import vocabulary_v1 as vocab_mod
+    vocabulary = state.setdefault("vocabulary", vocab_mod.blank())
+    if senses and vocabulary.get("entries"):
+        senses = vocab_mod.augment([{"signals": senses}], vocabulary)[0]["signals"]
+
     prediction = None
     if senses:
         candidate = belief.predict(model, senses)
@@ -636,6 +670,61 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
         if surprise and len(experience) >= belief.MIN_EXAMPLES_FOR_SPLIT:
             belief.fit(model, experience)
             state["counts"]["model_regrown"] = state["counts"].get("model_regrown", 0) + 1
+
+        # And the vocabulary grows with it. Waiting for a surprise is not enough, and this was
+        # measured 2026-11-04: over 140 ticks of a world whose rule is a product, surprise never
+        # fired (nothing predicted, so nothing could be wrong) and the vocabulary never grew.
+        # A creature that only re-examines its distinctions when it is caught being wrong stays
+        # blind exactly while it is confidently ignorant. So the trigger is inadequacy: the
+        # model cannot beat the base rate on the creature's own experience.
+        if len(vocabulary.get("entries") or []) < 4:
+            checks = state["counts"].get("vocabulary_checks", 0)
+            if (len(experience) >= 24
+                    and len(experience) >= state.get("vocabulary_next_check", 24) + 16):
+                horizon = experience[-120:]
+                folds = vocab_mod.time_folds(horizon) or belief.capability_folds(horizon)
+                floor = vocab_mod._base_rate(folds)
+                held = vocab_mod._cv(horizon, ("base", sorted(horizon[0]["signals"])[0]), None,
+                                     folds) if horizon[0]["signals"] else 0.0
+                inadequate = surprise or held <= floor + vocab_mod.MIN_GAIN
+                if inadequate:
+                    before_names = set(vocab_mod.names(vocabulary))
+                    kept_before = list(vocabulary.get("entries") or [])
+                    vocab_mod.discover(horizon, folds, vocabulary=vocabulary)
+                    state["vocabulary_next_check"] = len(experience)
+                    state["counts"]["vocabulary_checks"] = checks + 1
+                    if set(vocab_mod.names(vocabulary)) - before_names:
+                        state["counts"]["vocabulary_grown"] = (
+                            state["counts"].get("vocabulary_grown", 0) + 1)
+
+                    # A feature that passes its own gate can still make the creature worse, and
+                    # that was measured 2026-11-04: inventing a vocabulary on the `ratio` world
+                    # took accuracy from 0.883 to 0.533. A distinction is only worth keeping if
+                    # the model that thinks in it predicts better -- so the test is the model, on
+                    # the creature's own held-out experience, not the feature's own score.
+                    if vocabulary.get("entries") and len(experience) >= 40:
+                        with_them, without = vocabulary_pays_for_itself(
+                            experience, vocabulary["entries"], kept_before)
+                        if with_them <= without + 0.02:
+                            vocabulary.setdefault("retired", []).extend(
+                                {"expr": e["renders"], "why": "did_not_pay_for_itself",
+                                 "with": round(with_them, 4), "without": round(without, 4)}
+                                for e in vocabulary["entries"])
+                            vocabulary["entries"] = kept_before
+                            state["counts"]["vocabulary_set_aside"] = (
+                                state["counts"].get("vocabulary_set_aside", 0) + 1)
+
+                    # A retirement that is no longer true is a lie in the record. If the same
+                    # distinction has since been re-admitted, drop the stale note.
+                    live = set(vocab_mod.names(vocabulary))
+                    vocabulary["retired"] = [r for r in vocabulary.get("retired") or []
+                                             if r.get("expr") not in live]
+
+                    # Rethink with the new dimensions from here on.
+                    if vocabulary.get("entries"):
+                        belief.fit(model, vocab_mod.augment(experience, vocabulary))
+                        state["counts"]["model_regrown"] = (
+                            state["counts"].get("model_regrown", 0) + 1)
 
     return {"tick": tick_no, "organ": name, "target": target["id"],
             "predicted": prediction, "observed": observation, "surprise": surprise,
@@ -722,6 +811,7 @@ def summary(state: Mapping[str, Any]) -> dict:
             1 for e in journal if e.get("kind") == "PREDICTION"
             and e.get("from_model") and e.get("first_visit")),
         "model_regrown": counts.get("model_regrown", 0),
+        "vocabulary_grown": counts.get("vocabulary_grown", 0),
         "surprise_rate_when_predicted": (round(counts.get("surprised", 0) / predicted, 4)
                                          if predicted else None),
         "surprise_early": round(sum(early) / len(early), 4) if early else None,
