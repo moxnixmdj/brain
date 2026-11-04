@@ -22,29 +22,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from canonical.runtime import belief_v1 as belief  # noqa: E402
+from canonical.tools.worlds_v1 import world           # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_LEARNER_V1"
 OUT = ROOT / "canonical" / "verification" / "LEARNER_V1.json"
-RULES = ("and", "or", "product", "xor")
-
-
-def world(kind: str, n: int, seed: int) -> list[dict]:
-    rng = random.Random(seed)
-    rows = []
-    for index in range(n):
-        a, b = rng.random(), rng.random()
-        if kind == "and":
-            verdict = "BOTH" if (a > 0.5 and b > 0.5) else "NOT"
-        elif kind == "or":
-            verdict = "ANY" if (a > 0.5 or b > 0.5) else "NEITHER"
-        elif kind == "product":
-            verdict = "HIGH" if a * b > 0.25 else "LOW"
-        elif kind == "xor":
-            verdict = "DIFF" if (a > 0.5) != (b > 0.5) else "SAME"
-        else:
-            verdict = rng.choice(["X", "Y"])
-        rows.append({"group": f"g{index}", "signals": {"a": a, "b": b}, "verdict": verdict})
-    return rows
+RULES = ("and", "or", "product", "xor")   # names must exist in tools/worlds_v1.py
 
 
 def measure_rule(kind: str, seeds: int = 6) -> dict:

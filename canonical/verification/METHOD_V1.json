@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_METHOD_V1",
+  "generated_by": "canonical/tools/method_probe_v1.py",
+  "what_this_is": "The learning method is chosen by measurement from a generated space of methods, instead of being fixed by whoever wrote the code. Whether that is worth anything is a number below.",
+  "offline": {
+    "and": {
+      "heldout": 0.9806,
+      "baseline": 0.7694,
+      "worlds_that_adopted": "0 of 4",
+      "methods_chosen": {
+        "tree(depth=2)[raw]": 2,
+        "belief[incumbent]": 1,
+        "nearest(k=5)[raw]": 1
+      }
+    },
+    "or": {
+      "heldout": 0.975,
+      "baseline": 0.7583,
+      "worlds_that_adopted": "0 of 4",
+      "methods_chosen": {
+        "tree(depth=2)[raw]": 1,
+        "belief[incumbent]": 2,
+        "nearest(k=1)[raw]": 1
+      }
+    },
+    "xor": {
+      "heldout": 0.9306,
+      "baseline": 0.5167,
+      "worlds_that_adopted": "3 of 4",
+      "methods_chosen": {
+        "nearest(k=1)[invented]": 1,
+        "tree(depth=3)[raw]": 1,
+        "nearest(k=5)[raw]": 1,
+        "nearest(k=11)[raw]": 1
+      }
+    },
+    "circles": {
+      "heldout": 0.9472,
+      "baseline": 0.7111,
+      "worlds_that_adopted": "3 of 4",
+      "methods_chosen": {
+        "nearest(k=5)[raw]": 1,
+        "nearest(k=1)[raw]": 3
+      }
+    },
+    "product": {
+      "heldout": 0.9778,
+      "baseline": 0.625,
+      "worlds_that_adopted": "3 of 4",
+      "methods_chosen": {
+        "stump[invented]": 3,
+        "nearest(k=1)[invented]": 1
+      }
+    },
+    "sum": {
+      "heldout": 0.975,
+      "baseline": 0.525,
+      "worlds_that_adopted": "4 of 4",
+      "methods_chosen": {
+        "stump[invented]": 4
+      }
+    },
+    "stripe": {
+      "heldout": 0.9944,
+      "baseline": 0.625,
+      "worlds_that_adopted": "1 of 4",
+      "methods_chosen": {
+        "belief[incumbent]": 3,
+        "stump[raw]": 1
+      }
+    }
+  },
+  "noise": {
+    "heldout": 0.47,
+    "baseline": 0.4978,
+    "worlds_that_adopted": "0 of 10",
+    "methods_chosen": {
+      "nearest(k=11)[raw]": 2,
+      "nearest(k=5)[raw]": 3,
+      "stump[raw]": 2,
+      "nearest(k=5)[invented]": 1,
+      "nearest(k=1)[raw]": 2
+    }
+  },
+  "live": {
+    "xor": {
+      "incumbent_only": 0.6,
+      "predictions_incumbent": 10,
+      "with_method_choice": 0.8855,
+      "predictions_with_methods": 166,
+      "method_picked": "nearest(k=5)[invented]"
+    },
+    "noise": {
+      "incumbent_only": 0.5,
+      "predictions_incumbent": 2,
+      "with_method_choice": 0.5238,
+      "predictions_with_methods": 42,
+      "method_picked": "nearest(k=5)[invented]"
+    }
+  },
+  "honest_failures": [
+    "the method PRIMITIVES are still mine: tree and nearest neighbour are a person's idea of what hypotheses are thinkable",
+    "one structureless world in forty adopts a method; measured out of sample it did no harm, but the claim was not warranted",
+    "a greedy axis-aligned tree still cannot learn xor (0.625 on its own training data) -- the world was reached by a different family, not by a deeper tree"
+  ],
+  "authority": "NONE",
+  "terminal_truth": false
+}

@@ -23,25 +23,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from canonical.runtime import belief_v1 as belief   # noqa: E402
+from canonical.tools import worlds_v1                # noqa: E402
 
 
 def world(kind: str, n: int, seed: int) -> list[dict]:
-    rng = random.Random(seed)
-    out = []
-    for index in range(n):
-        a, b = rng.random(), rng.random()
-        if kind == "and":
-            verdict = "BOTH" if (a > 0.5 and b > 0.5) else "NOT"
-        elif kind == "or":
-            verdict = "ANY" if (a > 0.5 or b > 0.5) else "NEITHER"
-        elif kind == "xor":
-            verdict = "DIFF" if (a > 0.5) != (b > 0.5) else "SAME"
-        elif kind == "product":
-            verdict = "HIGH" if a * b > 0.25 else "LOW"
-        else:
-            verdict = rng.choice(["X", "Y"])
-        out.append({"group": f"g{index}", "signals": {"a": a, "b": b}, "verdict": verdict})
-    return out
+    return worlds_v1.world(kind, n, seed)
 
 
 def learned(kind: str, train_seed: int = 1, test_seed: int = 51) -> tuple[float, float, dict]:

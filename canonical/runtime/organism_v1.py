@@ -574,6 +574,57 @@ def vocabulary_pays_for_itself(experience: list[dict], entries: list[dict],
     return held(entries), held(kept_before)
 
 
+def chosen_method(experience: list[dict], vocabulary: dict) -> dict:
+    """Ask the creature how it should think here, and record the answer either way.
+
+    In-memory, because a fitted nearest-neighbour list is not state that belongs in a saved journal;
+    the DECISION is what persists, and it is re-derived from experience when the process restarts.
+    """
+    from canonical.runtime import method_v1 as method_mod
+
+    if len(experience) < 40:
+        return {"adopted": False, "reason": "not_enough_experience"}
+    folds = vocab_mod_folds(experience)
+    decision = method_mod.choose(experience, folds, vocabulary=vocabulary)
+    named = decision["chosen"]
+    chosen = [m for m in method_mod.method_space(bool(vocabulary.get("entries")))
+              if m.name == (named.name if hasattr(named, "name") else named)]
+    return {"adopted": bool(decision.get("adopted")), "reason": decision.get("reason"),
+            "method": (chosen[0].name if chosen else None),
+            "cv": decision.get("cv")}
+
+
+_PREDICTORS: dict[int, tuple] = {}
+
+
+def method_predictor(state: dict, experience: list[dict], vocabulary: dict):
+    """The fitted predictor for the method the creature adopted, rebuilt when the evidence changes."""
+    from canonical.runtime import method_v1 as method_mod
+
+    decision = state.get("method") or {}
+    name = decision.get("method")
+    if not decision.get("adopted") or not name:
+        return None
+    stamp = (len(experience), name)
+    cached = _PREDICTORS.get(id(state))
+    if cached and cached[0] == stamp:
+        return cached[1]
+    space = method_mod.method_space(bool(vocabulary.get("entries")))
+    chosen = next((m for m in space if m.name == name), None)
+    if chosen is None:
+        return None
+    rows = method_mod._prepare(chosen, experience, vocabulary)
+    predictor = method_mod.make(chosen, method_mod.names_of(rows))(rows)
+    _PREDICTORS[id(state)] = (stamp, (chosen, predictor))
+    return (chosen, predictor)
+
+
+def vocab_mod_folds(experience: list[dict]):
+    from canonical.runtime import belief_v1 as belief
+    from canonical.runtime import vocabulary_v1 as vocab_mod
+    return vocab_mod.time_folds(experience) or belief.capability_folds(experience)
+
+
 def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
     """Predict, act, observe, compare. One heartbeat."""
     organs = organs if organs is not None else build_organs()
@@ -607,8 +658,16 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
     if senses and vocabulary.get("entries"):
         senses = vocab_mod.augment([{"signals": senses}], vocabulary)[0]["signals"]
 
+    # If the creature has adopted a way of thinking that beats its incumbent here, that is how it
+    # predicts. Otherwise the incumbent speaks, which is what it has always done.
     prediction = None
+    adopted = None
     if senses:
+        framed = method_predictor(state, state.get("experiences") or [], vocabulary)
+        if framed is not None:
+            adopted, predictor = framed
+            prediction = predictor.predict(senses)
+    if senses and prediction is None:
         candidate = belief.predict(model, senses)
         if (candidate is not None and belief.confidence(model, senses) >= MODEL_MIN_CONFIDENCE
                 and sum(belief._counts(belief._walk(model["root"], senses)).values())
@@ -619,7 +678,9 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
         prediction = organ.predict(target, record)
     _append(state, {"tick": tick_no, "kind": "PREDICTION", "organ": name,
                     "target": target["id"], "predicts": prediction,
-                    "from_model": from_model,
+                    "from_model": prediction is not None and not from_model,
+                    "from_method": adopted.name if adopted is not None and prediction is not None
+                    else None,
                     "first_visit": int(record.get("attempts", 0)) == 0})
 
     acted = organ.act(target)
@@ -677,6 +738,10 @@ def tick(state: dict, organs: Mapping[str, Organ] | None = None) -> dict:
         # A creature that only re-examines its distinctions when it is caught being wrong stays
         # blind exactly while it is confidently ignorant. So the trigger is inadequacy: the
         # model cannot beat the base rate on the creature's own experience.
+        # How should it think here? Asked of the creature's own experience, not of me.
+        if len(experience) >= 40 and len(experience) % 40 == 0:
+            state["method"] = chosen_method(experience, vocabulary)
+
         if len(vocabulary.get("entries") or []) < 4:
             checks = state["counts"].get("vocabulary_checks", 0)
             if (len(experience) >= 24

@@ -245,14 +245,24 @@ def _live(rule, seed=7, ticks=160, grow=True):
 
     state = organism.blank_state()
     organs = {"geometry": Geometry()}
+    real_chosen = organism.chosen_method
+    if not grow:
+        organism.chosen_method = lambda *a, **k: {"adopted": False, "reason": "frozen_control"}
     hits = predicted = 0
-    for _ in range(ticks):
+    try:
+      for _ in range(ticks):
         if not grow:
-            state["vocabulary_next_check"] = 10 ** 9   # the creature cannot grow a distinction
+            # The control has to freeze EVERYTHING that learns, or it is not a control. Measured
+            # 2026-11-04: after method choice went live, this "frozen" run was still adopting a
+            # method and the contrast it reported was no longer about the vocabulary.
+            state["vocabulary_next_check"] = 10 ** 9
+            state["method"] = {"adopted": False}
         row = organism.tick(state, organs)
         if row.get("predicted") is not None:
             predicted += 1
             hits += int(row["predicted"] == row["observed"])
+    finally:
+        organism.chosen_method = real_chosen
     return (hits / predicted if predicted else 0.0), predicted, state
 
 

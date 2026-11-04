@@ -1725,3 +1725,113 @@ branch and it fails completely. So the next layer is not more vocabulary and not
 is a representation where the branch decides what is asked next. I will not pretend this log is that.
 
 Authority: **NONE**. Terminal truth: `false`. No capability credit.
+
+---
+
+## Log 18 — The method was the one thing I never let it choose
+
+Seventeen logs. The beliefs grew; the vocabulary grew; the tree shape grew. The **learning
+procedure** did not move once, and every number in it was mine: depth, width, minimum gain, minimum
+leaf, and the choice of an axis-aligned greedy tree at all.
+
+That last one is not an implementation detail. It is the thing that decides what the creature is
+capable of. `xor` failed in logs 9, 16 and 17 — not because xor is hard, but because every cut of
+it has zero information gain and the only hypothesis space available was one that chose cuts by
+information gain. The failure was mine, wearing the world's clothes.
+
+So the method became an object of measurement: a space of methods is generated, each is fitted and
+scored out-of-fold on the creature's own experience, and it adopts the one that measurably predicts
+better — or keeps what it has.
+
+### The space is a product, not a list
+
+`{tree(depth 1..3), nearest(k 1, 5, 11), stump} × {raw senses, invented features}` plus the
+incumbent. One combination — **nearest neighbours over invented features** — is nowhere in this
+repository written down, and the creature picked it for xor. That is what crossing a space buys that
+enumerating one does not.
+
+### Measured, chosen on its own experience, scored on worlds it never saw
+
+| world | creature's method choice | held out | majority baseline | adopted |
+|---|---|---|---|---|
+| `xor` | nearest(k=1/5/11) | **0.931** | 0.517 | 3 of 4 |
+| `circles` | nearest(k=1, k=5) | **0.947** | 0.711 | 3 of 4 |
+| `product` | stump over invented feature | **0.978** | 0.625 | 3 of 4 |
+| `sum` | stump over invented feature | **0.975** | 0.525 | 4 of 4 |
+| `and` | tree(depth=2) or incumbent | 0.981 | 0.769 | 0 of 4 |
+| `or` | tree(depth=2) or incumbent | 0.975 | 0.758 | 0 of 4 |
+| `stripe` | incumbent | 0.994 | 0.625 | 1 of 4 |
+| noise, 10 worlds | — | 0.470 | 0.498 | **0 of 10** |
+
+For comparison, log 17 measured xor at 0.506 (base rate) and circles at 0.800. Those were not
+limitations of the worlds. They were limitations of one hypothesis family.
+
+Two rows matter as much as the top: on `and`/`or`/`stripe` the creature **declines** to change,
+because its incumbent already wins. A system that always adopts the winner would be replacing a
+working method to satisfy a search.
+
+### Alive, not invoked
+
+The real `organism_v1.tick` loop, 200 ticks, same world and seed, the only difference being whether
+the creature may use the method it adopted:
+
+| live world | incumbent only | with method choice | method picked |
+|---|---|---|---|
+| xor | 0.600 (n=10 predictions) | **0.886** (n=166) | nearest(k=5)[invented] |
+| noise | 0.500 (n=2) | 0.524 (n=42) | nearest(k=5)[invented] |
+
+Artifact: `canonical/verification/METHOD_V1.json` from `canonical/tools/method_probe_v1.py`.
+
+### The bug that made me distrust the first table
+
+The winner's permutation null was broken and it looked conservative: it scored the *original*
+verdicts thirty times, because `score()` reads its data from the folds, and I passed the real folds
+into a null built for shuffled labels. Every world failed it, including learnable ones. It was found
+by asserting the **passing** case.
+
+And before that: `circles` measured 0.476 and I nearly wrote it up as a method failure. It had never
+been measured — the probe imported another probe's generator, which had no `circles` branch and fell
+through to noise, still returning a number. That is the fourth fixture bug in four logs, so the
+cause was removed rather than the instance: **one generator**, `canonical/tools/worlds_v1.py`, with
+`check()` asserting every named world actually has the labels its name claims, and an unknown name
+raising instead of falling through.
+
+### Mutation
+
+12 mutants across the method gate; **8 killed**. Survivors, reported:
+
+| survivor | why | what it means |
+|---|---|---|
+| delete the winner null | the regroup checks and the incumbent comparison catch the same worlds | the null is a backstop here, as the split-level p-gate was in log 16 |
+| delete the selection-time incumbent test | subsumed by the like-for-like regroup comparison | **removed from the code**, not kept as decoration |
+
+One more honest negative: a greedy axis-aligned tree still cannot learn xor — 0.625 on its own
+training data, because greedy gain never proposes a cut at 0.5. I expected per-branch recursion to
+fix that and it did not. What fixed it was a different **family**. That is the argument for choosing
+methods over tuning one, and it is a stronger argument than the one I set out to make.
+
+### What is real and what is not
+
+| claim | verdict | evidence |
+|---|---|---|
+| The creature chooses its learning method by measurement | **TRUE** | 7 worlds, method picked varies by world, declines where incumbent wins |
+| That choice reaches worlds the incumbent cannot | **TRUE** | xor 0.931 vs 0.517; circles 0.947 vs 0.711 |
+| It happens in a live loop, not on invocation | **TRUE** | xor 0.886 against 0.600 incumbent-only, 166 predictions |
+| It does not manufacture methods on noise | **TRUE, not clean** | 0 of 10 offline; **1 in 40 offline** and 1 live, both measured harmless out of sample |
+| The method primitives are no longer mine | **FALSE** | tree and nearest neighbour are still a person's idea of a hypothesis |
+| A deeper axis-aligned tree learns xor | **FALSE** | 0.625; a different family learned it |
+| Unaided closure for classes that matter | **STILL 0** | bookkeeping 100% (N=2); the real lead, N=1, unfixed |
+
+### What the deepest layer says now
+
+Three layers have come off: the beliefs (log 9), the vocabulary they are stated in (log 16), and now
+the procedure that learns them (log 18). What remains is the layer underneath all three: **the
+primitives**. A tree, a distance, a threshold — those are a person's idea of what a hypothesis is.
+The creature now composes and chooses among hypotheses; it does not invent the kind.
+
+That is the next static thing, and I can see two honest ways at it: search a space in which the
+*representation itself* is a program the system writes, or let it build representations from the
+data's own invariances rather than from operators I named. Neither is a token change, and saying
+this log removed them would be false.
+
+Authority: **NONE**. Terminal truth: `false`. No capability credit.
