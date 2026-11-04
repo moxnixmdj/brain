@@ -92,7 +92,7 @@
   "canonical/runtime/domain_of_verification_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "d4c7c53f5dbdf428d84b5d89d8096529679e5dea",
+  "canonical_base_commit": "3c3f7976390319674838ce436d88bb58ab4b5968",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "BANK_TRUNCATION_EXPOSED_AND_FIXED__COLLECTION_RESTORED__EXPLANATIONS_EXECUTABLE__REFUTATION_TRIGGERS_ON_A_CONTRADICTED_PREDICTION",
