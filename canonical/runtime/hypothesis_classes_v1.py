@@ -91,6 +91,13 @@ FITS = "FITS"
 UNDERDETERMINED = "UNDERDETERMINED"     # not enough points to pin the parameters
 INCONSISTENT = "INCONSISTENT"           # enough points, and they do not lie on the family
 UNSUPPORTED = "UNSUPPORTED"             # the points are not even in the class's domain
+# Every class that could be TESTED was refuted. This is not the same as "no class fits yet":
+# an observation cannot rescue an ontology that has no class for the data, and telling the caller
+# "ask me again" would spend its only scarce resource on a question already known to be useless.
+# Measured 2026-11-04: `relu` and `mod 2` were reported PROVISIONAL while affine was INCONSISTENT
+# and power could not even be pinned -- the same conflation of budget-failure with world-fact that
+# `SEARCH_TRUNCATED` was introduced to fix one layer down.
+ONTOLOGY_EXHAUSTED = "ONTOLOGY_EXHAUSTED"
 
 
 def _exact(value: Any) -> Fraction | None:
@@ -180,10 +187,19 @@ class Power:
         pairs = [(_exact(x), y) for x, y in exact if _exact(x) != 0]
         if len(pairs) < 2:
             return {"class": Power.name, "status": UNDERDETERMINED, "needs": 2, "have": len(pairs)}
-        (x1, y1), (x2, y2) = pairs[0], pairs[1]
-        if x1 == x2 or y1 == 0 or y2 == 0:
-            return {"class": Power.name, "status": UNDERDETERMINED, "needs": 2, "have": len(pairs),
-                    "why": "a zero ordinate cannot pin a scale factor"}
+        # A non-zero ordinate on a non-zero input FORCES the scale factor for a given exponent, so
+        # two such points are enough to test the family. Returning UNDERDETERMINED whenever any
+        # ordinate is zero let refuting data be reported as "not enough information" -- and those
+        # two demand opposite repairs.
+        usable = [(x, y) for x, y in pairs if y != 0]
+        if len(usable) < 2:
+            return {"class": Power.name, "status": UNDERDETERMINED, "needs": 2, "have": len(usable),
+                    "why": ("fewer than two observations have a non-zero ordinate, so no scale "
+                            "factor is forced and the family cannot be tested")}
+        (x1, y1), (x2, y2) = usable[0], usable[1]
+        if x1 == x2:
+            return {"class": Power.name, "status": UNDERDETERMINED, "needs": 2, "have": len(usable),
+                    "why": "the two usable observations share an input"}
         for k in (1, 2, 3, 4, -1, -2):
             a = y1 / (x1 ** k)
             if all(a * (x ** k) == y for x, y in pairs):
@@ -196,6 +212,39 @@ class Power:
                         "predicate": f"lambda x: {_num(a)} * x ** {k}", "exact": True}
         return {"class": Power.name, "status": INCONSISTENT, "needs": 2, "have": len(pairs),
                 "why": "no integer exponent with a constant scale fits all the observations"}
+
+
+class Constant:
+    """`c`. One parameter, so ONE observation pins it -- which is both its use and its danger.
+
+    A piecewise function's branch is very often constant (`relu` below zero, a clipped region, a
+    regime that has saturated), and a two-parameter family cannot be pinned by the single
+    observation such a branch usually gets. But a constant pinned by one point is a MEMORISED VALUE,
+    not a fitted hypothesis: from `f(-1) = 0` nothing follows about `f(-7)`. This class is therefore
+    only ever used inside a composition, where the free-parameter count is checked against the
+    number of observations -- see `compose`, which refuses to call a zero-surplus fit determined.
+    """
+
+    name = "constant"
+    template = "c"
+    params_needed = 1
+
+    @staticmethod
+    def fit(points: Sequence[tuple[Any, Any]]) -> dict[str, Any]:
+        exact = [(_exact(x), _exact(y)) for x, y in points]
+        if any(y is None for _x, y in exact) or any(x is None for x, _y in exact):
+            return _unsupported(Constant.name)
+        if not exact:
+            return {"class": Constant.name, "status": UNDERDETERMINED, "needs": 1, "have": 0}
+        values = {y for _x, y in exact}
+        if len(values) > 1:
+            return {"class": Constant.name, "status": INCONSISTENT, "needs": 1, "have": len(exact),
+                    "why": "the observations take more than one value, so no constant fits"}
+        value = exact[0][1]
+        return {"class": Constant.name, "status": FITS, "parameters": {"c": _num(value)},
+                "needs": 1, "have": len(exact), "surplus": max(0, len(exact) - 1),
+                "predicate": "lambda x: %s" % _num(value), "exact": True,
+                "reconstructed": (_reconstruct(value) != value)}
 
 
 def _num(value: Fraction) -> Any:
@@ -217,7 +266,12 @@ def _unsupported(name: str) -> dict[str, Any]:
             "why": "an observation is not an exact rational, so the class cannot be tested exactly"}
 
 
-FAMILIES = {Affine.name: Affine, Power.name: Power}
+FAMILIES = {Affine.name: Affine, Power.name: Power, Constant.name: Constant}
+
+# Inside a composition a constant branch is the only thing that can explain a lone observation, so
+# it is available there. `determine` keeps its original default: a bare constant explanation of a
+# multi-point sample is not a hypothesis anyone should be offered.
+COMPOSITION_FAMILIES = ("affine", "power", "constant")
 
 
 def fit_all(points: Sequence[tuple[Any, Any]],
@@ -242,9 +296,37 @@ def determine(points: Sequence[tuple[Any, Any]],
     fits = fit_all(points, families)
     fitting = [f for f in fits if f["status"] == FITS]
     distinct: list[dict[str, Any]] = []
+
+    def _constant_value(fit: dict[str, Any]) -> Any:
+        """The value a fit returns for every input, if it is constant, else None."""
+        p = fit.get("parameters") or {}
+        if fit.get("class") == "constant":
+            return p.get("c")
+        if fit.get("class") == "affine" and p.get("a") == 0:
+            return p.get("b")
+        return None
+
     for f in fitting:
         if f.get("subsumed_by") in {d["class"] for d in distinct}:
             continue
+        # A zero-slope line IS a constant, and a constant IS a zero-slope line. Counting them
+        # separately would report two explanations where there is one function -- the same defect
+        # as counting `2*x` and `(x/1)*2` separately, one level up. Measured 2026-11-04: the
+        # `relu` left branch {(-2,0),(-1,0)} produced exactly this pair.
+        value = _constant_value(f)
+        if value is not None:
+            same = [d for d in distinct if _constant_value(d) == value]
+            if same:
+                # ...and when two descriptions are the SAME function, keep the one that is better
+                # supported, not the one that came first in the family list. Measured: `affine`
+                # with a=0 explains {(-2,0),(-1,0)} using two parameters and zero observations to
+                # spare, while `constant` explains it with one parameter and one to spare. Keeping
+                # the list-order winner made the better-supported description invisible and left
+                # `relu` reported as PROVISIONAL for want of a spare observation it actually had.
+                best = max([f] + same, key=lambda d: (d.get("surplus", 0), -d.get("needs", 0)))
+                distinct = [d for d in distinct if _constant_value(d) != value]
+                distinct.append(best)
+                continue
         distinct.append(f)
     under = [f for f in fits if f["status"] == UNDERDETERMINED]
 
@@ -253,10 +335,21 @@ def determine(points: Sequence[tuple[Any, Any]],
         why = ("exactly one family fits and pins its parameters"
                if len(distinct) == 1 else
                "%d different families fit; the observations do not choose between them" % len(distinct))
+    elif any(f["status"] == INCONSISTENT for f in fits) and not under:
+        # ONTOLOGY_EXHAUSTED requires that NOTHING is still merely unpinned. Refuted and unpinned are
+        # different findings and must not be ranked: a refuted class wanted an observation and got a
+        # contradiction; an unpinned class has not seen enough of the data yet. Measured: the region
+        # {(-2,0), (-1,0), (2,2)} refutes `affine` on its third point while `power` still needs a
+        # second non-zero ordinate, and declaring that ONTOLOGY_EXHAUSTED told the caller to acquire
+        # a new CLASS when one more observation would have settled it.
+        status = ONTOLOGY_EXHAUSTED
+        why = ("every class that could be tested was refuted by the observations; no further input "
+               "will help, because the gap is in the ontology and not in the evidence")
     elif under:
         status = "PROVISIONAL"
         why = ("no family is pinned yet; %d need more distinct inputs, and asking for one is a "
-               "well-formed question" % len(under))
+               "well-formed question (some classes were refuted outright, but at least one is "
+               "still merely unpinned, so more data can still help)" % len(under))
     else:
         status = "UNRESOLVED"
         why = "no family in this ontology explains the observations"
@@ -302,6 +395,18 @@ def question_for(points: Sequence[tuple[Any, Any]], family: str = "affine") -> d
             "authority": "NONE"}
 
 
+COMPOSITION_CASES = {
+    # two regimes, both affine; the true boundary is at 2.5, which no grid of whole numbers reaches
+    "regime change at 2.5": [((0,), 1.0), ((1,), 3.0), ((2,), 5.0), ((3,), 8.0), ((4,), 10.0),
+                             ((5,), 12.0)],
+    # the classic kink: constant below zero, identity above
+    "relu": [((-2,), 0.0), ((-1,), 0.0), ((2,), 2.0), ((3,), 3.0), ((4,), 4.0)],
+    # saturated above zero, doubling below
+    "clipped": [((-2,), 99.0), ((-1,), 99.0), ((1,), 2.0), ((2,), 4.0), ((3,), 6.0)],
+    # NOT a split of anything in this ontology -- must be refused, not fitted
+    "mod 2": [((0,), 0.0), ((1,), 1.0), ((2,), 0.0), ((3,), 1.0), ((4,), 0.0), ((5,), 1.0)],
+}
+
 CASES = {
     # the line the string search could not fit at any affordable budget
     "3x+1": [((0,), 1.0), ((1,), 4.0), ((2,), 7.0)],
@@ -314,6 +419,89 @@ CASES = {
     # the quadratic the search saw as three explanations
     "x*x": [((1,), 1.0), ((2,), 4.0), ((3,), 9.0), ((4,), 16.0)],
 }
+
+
+def compose_and_verify(points: Sequence[tuple[Any, Any]],
+                       param_names: Sequence[str] = ("x",),
+                       families: Sequence[str] = COMPOSITION_FAMILIES) -> dict[str, Any]:
+    """Compose, compile, and check the program against the observations with the search's checker."""
+    flat = [(args[0], value) for args, value in points]
+    result = compose(flat, families)
+    body = compile_composed(result)
+    if body is None:
+        # `errors` is present on every path. A caller should never have to know which branch ran to
+        # find out whether anything was verified -- the same defect as `demand_evidence` reporting
+        # `chosen` on only some branches, which cost a round of KeyErrors.
+        return {"reached": False, "status": result["status"], "body": None,
+                "why": result["why"], "verified_against": 0, "errors": [],
+                "composition": result, "authority": "NONE"}
+    from canonical.runtime.generalization_check_v1 import _compile_body
+
+    fn = _compile_body(body, list(param_names))
+    errors = []
+    for args, want in points:
+        try:
+            got = fn(*args)
+        except Exception as exc:  # noqa: BLE001
+            errors.append({"args": list(args), "error": repr(exc)})
+            continue
+        if not _same(got, want):
+            errors.append({"args": list(args), "got": got, "want": want})
+    return {"reached": not errors, "status": "DETERMINED", "body": body,
+            "verified_against": len(points), "errors": errors, "composition": result,
+            "why": result["why"], "authority": "NONE"}
+
+
+def _composition_findings() -> list[dict[str, Any]]:
+    """The round-11 pre-registration, scored."""
+    composed = {name: compose_and_verify(ex, ["x"])
+                for name, ex in COMPOSITION_CASES.items()}
+
+    relu_thin = compose_and_verify([((-1,), 0.0), ((2,), 2.0), ((3,), 3.0)], ["x"])
+    exhaustion = determine([(-1, 0.0), (2, 2.0), (3, 3.0)])
+    one_short = determine([(0, 1.0)])
+    headline = determine([(1, 2.0), (2, 4.0), (3, 6.0)])
+
+    return [
+        {"id": "an_exhausted_ontology_is_not_reported_as_ask_me_again",
+         "question": "does a refuted-and-unpinned-free ontology stop asking for data?",
+         "status": exhaustion["status"], "one_short_status": one_short["status"],
+         "pass": exhaustion["status"] == ONTOLOGY_EXHAUSTED
+                 and one_short["status"] == "PROVISIONAL"},
+
+        {"id": "relu_composes_from_two_branches",
+         "question": "is a kink at zero explained by two families rather than by 50 programs?",
+         "body": composed["relu"]["body"], "branches": composed["relu"]["composition"]["branches"],
+         "pass": composed["relu"]["reached"] and
+                 composed["relu"]["composition"]["branches"] == 2},
+
+        {"id": "a_regime_change_composes",
+         "question": "does a boundary no whole-number grid would hit get found?",
+         "split_at": composed["regime change at 2.5"]["composition"]["split_at"],
+         "pass": composed["regime change at 2.5"]["reached"]
+                 and composed["regime change at 2.5"]["composition"]["split_at"] == "5/2"},
+
+        {"id": "mod_two_is_refused_rather_than_fitted",
+         "question": "does the mechanism decline to invent a boundary to match its answers?",
+         "status": composed["mod 2"]["status"],
+         "pass": composed["mod 2"]["status"] == ONTOLOGY_EXHAUSTED},
+
+        {"id": "composed_bodies_verify_against_the_search_checker",
+         "question": "does the compiled program reproduce every observation?",
+         "errors": [composed[k]["errors"] for k in composed],
+         "pass": all(not composed[k]["errors"]
+                     for k in composed if composed[k]["reached"])},
+
+        {"id": "two_branches_need_four_observations",
+         "question": "is the evidence requirement of a composition computed rather than guessed?",
+         "needs": relu_thin["composition"]["needs"], "status": relu_thin["status"],
+         "pass": relu_thin["composition"]["needs"] == 4 and relu_thin["status"] == "PROVISIONAL"},
+
+        {"id": "composition_does_not_replace_the_family_layer",
+         "question": "does a one-region explanation still come back as one explanation?",
+         "explanations": headline["explanations"],
+         "pass": headline["explanations"] == 1 and headline["status"] == "DETERMINED"},
+    ]
 
 
 def run() -> dict[str, Any]:
@@ -374,9 +562,17 @@ def run() -> dict[str, Any]:
          "explanations": headline["explanations"], "all_statuses": [f["status"] for f in headline["all"]],
          "pass": headline["explanations"] == 1},
     ]
+    findings = findings + _composition_findings()
+    composed_rows = []
+    for name, ex in COMPOSITION_CASES.items():
+        r = compose_and_verify(ex, ["x"])
+        composed_rows.append({"case": name, "status": r["status"], "reached": r["reached"],
+                              "branches": r["composition"]["branches"],
+                              "split_at": r["composition"]["split_at"],
+                              "body": r["body"]})
     passed = sum(1 for f in findings if f["pass"])
     return {"schema": SCHEMA, "passed": passed, "total": len(findings), "findings": findings,
-            "cases": rows, "authority": "NONE"}
+            "cases": rows, "composition": composed_rows, "authority": "NONE"}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -394,12 +590,16 @@ def main(argv: list[str] | None = None) -> int:
     print()
     for f in doc["findings"]:
         print("  %-52s %s" % (f["id"], "PASS" if f["pass"] else "FAIL"))
+    print()
+    for row in doc["composition"]:
+        print("%-22s %-20s branches=%d split_at=%s" % (
+            row["case"], row["status"], row["branches"], row["split_at"]))
+        if row["body"]:
+            print("      " + row["body"].replace("\n", "\n      "))
     print("\n%d/%d findings as predicted" % (doc["passed"], doc["total"]))
     return 0
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
 
 
 # ---------------------------------------------------------------------------------------------
@@ -417,6 +617,8 @@ def compile_body(fit: dict[str, Any]) -> str | None:
         return None
     p = fit.get("parameters") or {}
     cls = fit.get("class")
+    if cls == "constant":
+        return "return %s" % _literal(p.get("c"))
     if cls == "affine":
         a, b = p.get("a"), p.get("b")
         # `a` and `b` arrive as int OR as "n/d" strings, because an exact rational is not an int.
@@ -535,3 +737,169 @@ def _same(got: Any, want: Any, tol: float = 1e-9) -> bool:
     if isinstance(got, (int, float)) and isinstance(want, (int, float)):
         return abs(float(got) - float(want)) <= tol * max(1.0, abs(float(want)))
     return got == want
+
+
+# ---------------------------------------------------------------------------------------------
+# Composition: one hypothesis per region, with the boundary SEARCHED
+# ---------------------------------------------------------------------------------------------
+#
+# Both mechanisms in this repository fail on the same input class -- data that changes regime --
+# and both fail the same way: by refusing to have a second kind of object.
+#
+#   the string search   enumerates 50 interchangeable piecewise programs and cannot say which one
+#   the family layer    refuses outright, because no single family covers both regions
+#
+# The repair is not a larger grammar. It is a SPLIT: `if x <= s: family_A else: family_B`, with the
+# boundary `s` discovered from the observations rather than assumed to be a tidy number. A cut is
+# searched at the MIDPOINT between adjacent observations, so a boundary at 1.5 is found exactly as
+# readily as one at 2 -- the earlier version of this kind of code in this repository swept a grid of
+# whole numbers and would have missed half the boundaries in the world.
+
+MAX_BRANCHES = 2          # measured, not aspirational: 3 branches on 6 points fits anything
+
+
+def _cuts(sorted_points: Sequence[tuple[Fraction, Fraction]]) -> list[Fraction]:
+    """Every boundary position the data distinguishes: a midpoint between adjacent inputs."""
+    out: list[Fraction] = []
+    for i in range(len(sorted_points) - 1):
+        lo = sorted_points[i][0]
+        hi = sorted_points[i + 1][0]
+        if lo != hi:
+            out.append((lo + hi) / 2)
+    return out
+
+
+def compose(points: Sequence[tuple[Any, Any]],
+            families: Sequence[str] = COMPOSITION_FAMILIES,
+            max_branches: int = MAX_BRANCHES) -> dict[str, Any]:
+    """Explain the observations as regions, each with its own family and its own parameters.
+
+    A one-region explanation is just a family fit. A two-region explanation needs BOTH parts to be
+    pinned: a branch with one observation is not a hypothesis, it is a value.
+    """
+    exact = [( _exact(x), _exact(y)) for x, y in points]
+    if any(x is None or y is None for x, y in exact):
+        return {"status": UNSUPPORTED, "why": "an observation is not an exact rational",
+                "branches": [], "authority": "NONE"}
+    ordered = sorted(exact, key=lambda p: p[0])
+
+    # One region: the plain family fit, so composition never reports less than the family layer.
+    single = determine([( _num(x), _num(y)) for x, y in ordered], families)
+    if single["status"] == "DETERMINED":
+        return {"status": "DETERMINED", "branches": 1, "split_at": None,
+                "fits": single["fits"], "needs": single["fits"][0].get("needs", 0),
+                "why": "one family explains every observation; no split is needed",
+                "interpretation": single, "authority": "NONE"}
+
+    if max_branches < 2:
+        return {"status": single["status"], "branches": 0, "split_at": None, "fits": [],
+                "needs": single.get("needs", 0), "why": single["why"],
+                "interpretation": single, "authority": "NONE"}
+
+    best: dict[str, Any] | None = None
+    tried: list[dict[str, Any]] = []
+    for cut in _cuts(ordered):
+        left = [(x, y) for x, y in ordered if x <= cut]
+        right = [(x, y) for x, y in ordered if x > cut]
+        if not left or not right:
+            continue
+        lfit = _fit_region(left, families)
+        rfit = _fit_region(right, families)
+        # A branch must be PINNED BY MORE DATA THAN IT HAS PARAMETERS. Without this check a constant
+        # branch is "pinned" by its single observation and so is every two-parameter branch by two
+        # observations, which lets k free parameters absorb k points -- the composed explanation
+        # then fits perfectly and says nothing. Measured: `mod 2` is exactly this pattern, and a
+        # version of this function without the check reported it DETERMINED with zero surplus.
+        lpinned = bool(lfit.get("pinned")) and lfit.get("surplus", 0) >= 1
+        rpinned = bool(rfit.get("pinned")) and rfit.get("surplus", 0) >= 1
+        row = {"split_at": _num(cut), "left": lfit, "right": rfit,
+               "pinned": lpinned and rpinned,
+               "underdetermined_by": [
+                   side for side, ok, fit in (("left", lpinned, lfit), ("right", rpinned, rfit))
+                   if not ok]}
+        tried.append(row)
+        if row["pinned"] and best is None:
+            best = row
+            break
+
+    if best is None:
+        # Honest refusal, and note the two ways of getting here are DIFFERENT diagnoses.
+        fits_exist = any(t_["left"].get("pinned") and t_["right"].get("pinned") for t_ in tried)
+        distinct_inputs = len({x for x, _y in ordered})
+        if fits_exist:
+            # A split explains the data, but with no observation to spare on at least one side --
+            # so the explanation has as many degrees of freedom as it has facts. More data would
+            # settle it, which is exactly what PROVISIONAL means.
+            return {"status": "PROVISIONAL", "branches": 0, "split_at": None,
+                    "fits": [], "needs": 4,
+                    "why": ("a split fits, but at least one branch has no observation beyond its "
+                            "own parameters, so it is memorising rather than explaining; more "
+                            "observations would settle it"),
+                    "tried_cuts": len(tried), "interpretation": single, "authority": "NONE"}
+        if distinct_inputs < 4:
+            return {"status": "PROVISIONAL", "branches": 0, "split_at": None, "fits": [],
+                    "needs": 4,
+                    "why": ("a two-branch explanation needs 4 observations -- two per branch, and "
+                            "one spare on each side -- and %d distinct inputs were supplied"
+                            % distinct_inputs),
+                    "tried_cuts": len(tried), "interpretation": single, "authority": "NONE"}
+        return {"status": ONTOLOGY_EXHAUSTED, "branches": 0, "split_at": None, "fits": [],
+                "needs": 4,
+                "why": ("no boundary splits the observations into regions that any family in this "
+                        "ontology can each explain; the gap is in the classes, not the data"),
+                "tried_cuts": len(tried), "interpretation": single, "authority": "NONE"}
+
+    needs = (best["left"].get("needs", 2) or 2) + (best["right"].get("needs", 2) or 2)
+    return {
+        "status": "DETERMINED",
+        "branches": 2,
+        "split_at": best["split_at"],
+        "fits": [best["left"], best["right"]],
+        "needs": needs,
+        # The boundary is a PARAMETER with no evidence of its own: the data locate it only between
+        # two adjacent inputs. Saying so keeps a fitted boundary from reading as if it were solved.
+        "boundary_is_bounded": "any cut between the same two observations would fit equally",
+        "why": ("two families, each pinned, on either side of a boundary the observations locate "
+                "only up to the gap between adjacent inputs"),
+        "interpretation": single,
+        "authority": "NONE",
+    }
+
+
+def _fit_region(region: Sequence[tuple[Fraction, Fraction]],
+                families: Sequence[str]) -> dict[str, Any]:
+    verdict = determine([(_num(x), _num(y)) for x, y in region], families)
+    if verdict["status"] == "DETERMINED":
+        fit = dict(verdict["fits"][0])
+        fit["observations"] = len(region)
+        # Say PINNED here, in this function's own vocabulary. The fit's own `status` is FITS, and a
+        # caller comparing it against "DETERMINED" silently never sees a pinned branch -- measured
+        # 2026-11-04, the third time in this session that two modules named the same state
+        # differently and the comparison failed quietly instead of loudly.
+        fit["pinned"] = True
+        return fit
+    return {"class": None, "status": verdict["status"], "parameters": None, "pinned": False,
+            "observations": len(region), "why": verdict["why"]}
+
+
+def compile_composed(result: dict[str, Any]) -> str | None:
+    """A composed explanation that cannot be written as a program has not been reached."""
+    if result.get("status") != "DETERMINED":
+        return None
+    fits = result.get("fits") or []
+    if result.get("branches") == 1 and fits:
+        return compile_body(fits[0])
+    if len(fits) != 2:
+        return None
+    left, right = fits
+    lb, rb = compile_body(left), compile_body(right)
+    if lb is None or rb is None:
+        return None
+    cut = _literal(result["split_at"])
+    lret = lb[len("return "):].strip()
+    rret = rb[len("return "):].strip()
+    return "if x <= %s:\n    return %s\nreturn %s" % (cut, lret, rret)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

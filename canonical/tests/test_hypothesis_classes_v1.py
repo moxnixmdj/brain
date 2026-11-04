@@ -207,3 +207,109 @@ def test_a_grouping_over_a_truncated_enumeration_says_so():
     about the ones that fit in the bank, which is a different and weaker statement."""
     state = demand_evidence(["x"], [((1,), 2.0), ((2,), 4.0), ((3,), 6.0)])
     assert "TRUNCATED" in state["grouping_basis"] or state["coverage"]["complete"] is True
+
+
+# ============================================================================================
+# Round 11: composition, and an ontology that says when it is out of ideas
+# ============================================================================================
+
+from canonical.runtime.hypothesis_classes_v1 import (  # noqa: E402
+    ONTOLOGY_EXHAUSTED,
+    compose,
+    compose_and_verify,
+)
+
+RELU = [((-2,), 0.0), ((-1,), 0.0), ((2,), 2.0), ((3,), 3.0), ((4,), 4.0)]
+REGIME = [((0,), 1.0), ((1,), 3.0), ((2,), 5.0), ((3,), 8.0), ((4,), 10.0), ((5,), 12.0)]
+MOD2 = [((0,), 0.0), ((1,), 1.0), ((2,), 0.0), ((3,), 1.0), ((4,), 0.0), ((5,), 1.0)]
+
+
+def test_an_exhausted_ontology_stops_asking_for_data():
+    """`relu` was reported PROVISIONAL while every testable class was refuted.
+
+    PROVISIONAL means "ask me again". When the gap is a missing CLASS, no observation will ever
+    close it, and asking spends the creature's only scarce resource on a question whose answer is
+    already known to be useless. The difference between "not yet described" and "cannot be
+    described by anything I have" is the same distinction SEARCH_TRUNCATED draws one layer down.
+    """
+    from canonical.runtime.hypothesis_classes_v1 import determine
+
+    assert determine([(-1, 0.0), (2, 2.0), (3, 3.0)])["status"] == ONTOLOGY_EXHAUSTED
+    # but a class that is merely one input short is still a well-formed question
+    assert determine([(0, 1.0)])["status"] == "PROVISIONAL"
+
+
+def test_a_refuted_class_does_not_outvote_an_unpinned_one():
+    """{(-2,0),(-1,0),(2,2)} refutes affine while power still needs one more non-zero ordinate.
+    Declaring that exhausted tells the caller to acquire a class when one observation would do."""
+    from canonical.runtime.hypothesis_classes_v1 import determine
+
+    assert determine([(-2, 0.0), (-1, 0.0), (2, 2.0)],
+                     ("affine", "power", "constant"))["status"] == "PROVISIONAL"
+
+
+def test_relu_composes_into_two_branches_and_verifies():
+    out = compose_and_verify(RELU, ["x"])
+    assert out["reached"] is True
+    assert out["composition"]["branches"] == 2
+    assert out["errors"] == []
+    assert "return 0" in out["body"] and "return x" in out["body"]
+
+
+def test_a_boundary_between_observations_is_found():
+    """The true split is at 2.5. A sweep over whole numbers could never find it, and this
+    mechanism does not sweep whole numbers."""
+    out = compose_and_verify(REGIME, ["x"])
+    assert out["reached"] is True
+    assert out["composition"]["split_at"] == "5/2"
+
+
+def test_mod_two_is_refused_rather_than_fitted():
+    """Alternating outputs are not a split of any family here. A mechanism that fitted them would
+    be inventing a boundary to match its own answers."""
+    out = compose_and_verify(MOD2, ["x"])
+    assert out["status"] == ONTOLOGY_EXHAUSTED
+    assert out["body"] is None
+
+
+def test_a_branch_must_be_pinned_by_more_data_than_it_has_parameters():
+    """A constant branch is 'pinned' by one observation, which is memorisation, not explanation.
+
+    The first version of `compose` accepted any pinned branch and so reported `relu` from four
+    points -- where a constant branch has one observation and one parameter, and the affine branch
+    on the other side has two of each. Zero degrees of freedom is not a fit.
+    """
+    thin = compose_and_verify([((-1,), 0.0), ((2,), 2.0), ((3,), 3.0)], ["x"])
+    assert thin["status"] == "PROVISIONAL"
+    assert thin["composition"]["needs"] == 4
+    assert thin["body"] is None
+
+
+def test_a_zero_slope_line_and_a_constant_are_one_explanation():
+    """`a*x + b` with a=0 IS `c`. Counting both would recreate the 12-programs-one-function defect
+    one layer up -- and the better-supported description must be the one that survives."""
+    from canonical.runtime.hypothesis_classes_v1 import determine
+
+    verdict = determine([(-2, 0.0), (-1, 0.0), (-3, 0.0)], ("affine", "power", "constant"))
+    assert verdict["explanations"] == 1
+    # the survivor is the one with observations to spare, not whichever came first in the list
+    assert verdict["fits"][0]["surplus"] == 2
+
+
+def test_composition_is_not_claimed_to_replace_the_other_mechanisms():
+    """P8, asserted rather than hoped: `mod 2` is refused by both, and the one-region case still
+    returns exactly one explanation."""
+    from canonical.runtime.hypothesis_classes_v1 import determine
+
+    assert compose_and_verify(MOD2, ["x"])["status"] == ONTOLOGY_EXHAUSTED
+    single = determine([(1, 2.0), (2, 4.0), (3, 6.0)])
+    assert single["status"] == "DETERMINED" and single["explanations"] == 1
+    # and the composed form of a one-region explanation does not add a branch
+    assert compose_and_verify([((1,), 2.0), ((2,), 4.0), ((3,), 6.0)], ["x"])["composition"]["branches"] == 1
+
+
+def test_every_result_carries_a_verification_count():
+    """A caller must never have to know which branch ran to find out whether anything was checked."""
+    for pts in (RELU, MOD2, [((1,), 2.0), ((2,), 4.0)]):
+        out = compose_and_verify(pts, ["x"])
+        assert "verified_against" in out and "errors" in out
