@@ -1,0 +1,41 @@
+{
+  "versioned_modules": 2212,
+  "families": 1801,
+  "current": 1801,
+  "superseded": 411,
+  "families_with_one_version": 1650,
+  "largest_families": [
+    [
+      "canonical/research/bytes/tools/rebuild_candidate",
+      32
+    ],
+    [
+      "canonical/runtime/r2_direct_end_to_end_adequacy",
+      21
+    ],
+    [
+      "canonical/runtime/osworld_v21_brain_subject",
+      19
+    ],
+    [
+      "canonical/runtime/source_aligned_semantic_proof",
+      15
+    ],
+    [
+      "canonical/runtime/osworld_v21_workflow_policy",
+      13
+    ],
+    [
+      "canonical/runtime/p3_real_context_v3_admission",
+      12
+    ],
+    [
+      "canonical/runtime/retrieval_live_provider_arena",
+      12
+    ],
+    [
+      "canonical/runtime/universal_verified_adaptive_solver",
+      12
+    ]
+  ]
+}
