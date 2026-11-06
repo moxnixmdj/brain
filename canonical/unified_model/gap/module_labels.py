@@ -37,6 +37,8 @@ def main() -> None:
     for p in tracked:
         if p.startswith(("canonical/tests/", "tests/")):
             label, basis = "TEST", "path"
+        elif p.startswith("canonical/unified_model/gap/"):
+            label, basis = "ANALYSIS_TOOL", "path"
         elif p in indexed:
             label, basis = "INDEXED", indexed[p]
         elif p in versions:

@@ -5163,11 +5163,12 @@ canonical/tools/self_audit_benchmark_v1.py,CURRENT,version_family
 canonical/tools/semantic_join_benchmark_v1.py,CURRENT,version_family
 canonical/tools/sentient_branch_probe_v1.py,CURRENT,version_family
 canonical/tools/shared_skill_transfer_benchmark_v1.py,CURRENT,version_family
-canonical/unified_model/gap/classify_gap.py,UNCLASSIFIED,gap_group
-canonical/unified_model/gap/model_gap.py,UNCLASSIFIED,gap_group
-canonical/unified_model/gap/runtime_triage.py,UNCLASSIFIED,gap_group
-canonical/unified_model/gap/triage.py,UNCLASSIFIED,gap_group
-canonical/unified_model/gap/version_families.py,UNCLASSIFIED,gap_group
+canonical/unified_model/gap/classify_gap.py,ANALYSIS_TOOL,path
+canonical/unified_model/gap/model_gap.py,ANALYSIS_TOOL,path
+canonical/unified_model/gap/module_labels.py,ANALYSIS_TOOL,path
+canonical/unified_model/gap/runtime_triage.py,ANALYSIS_TOOL,path
+canonical/unified_model/gap/triage.py,ANALYSIS_TOOL,path
+canonical/unified_model/gap/version_families.py,ANALYSIS_TOOL,path
 canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py,CURRENT,version_family
 canonical/verification/p3_bound_relevance_cegar_loop_v21_replay_v1.py,CURRENT,version_family
 canonical/verification/p3_explicit_weighted_salience_cell_replay_v1.py,CURRENT,version_family
