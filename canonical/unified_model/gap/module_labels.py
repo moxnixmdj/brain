@@ -43,10 +43,12 @@ def main() -> None:
             label, basis = "INDEXED", indexed[p]
         elif p in versions:
             label, basis = versions[p], "version_family"
-        elif p in runtime:
+        elif p.startswith("canonical/runtime/") and p in runtime:
             label, basis = runtime[p], "runtime_triage"
         else:
             label, basis = gap_group.get(p, "UNCLASSIFIED"), "gap_group"
+            if not p.startswith("canonical/runtime/") and label == "RUNTIME_MODULE":
+                label = "OUTSIDE_RUNTIME_REVIEW"
         rows.append({"path": p, "label": label, "basis": basis})
 
     paths = [r["path"] for r in rows]

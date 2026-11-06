@@ -45,10 +45,10 @@ def main() -> None:
             label, basis = "GUARD", "path"
         elif name.startswith("_"):
             label, basis = "HELPER", "name"
-        elif p in triage:
+        elif p.startswith("canonical/runtime/") and p in triage:
             label, basis = triage[p], "runtime_triage"
         else:
-            label, basis = "UNUSED_SCOPE", "outside_index_scope"
+            label, basis = "OUTSIDE_RUNTIME_REVIEW", "outside_runtime_rules"
         rows.append({"path": p, "label": label, "basis": basis})
 
     with (OUT / "real_gap_labels.csv").open("w", newline="") as fh:
