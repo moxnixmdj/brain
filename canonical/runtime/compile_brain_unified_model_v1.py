@@ -1209,6 +1209,39 @@ def _module_labels_block(base: Path) -> dict[str, Any]:
     }
 
 
+GOVERNED_RECORD_DIRS = (
+    ("ACTION_INTENT", "canonical/action_intents"),
+    ("LAW", "canonical/laws"),
+    ("GOVERNANCE_RECORD", "canonical/governance"),
+    ("VERIFICATION_RECORD", "canonical/verification"),
+)
+
+
+def _governed_records_block(base: Path) -> dict[str, Any]:
+    """Index the decision and evidence records the model otherwise ignores.
+
+    One row per file: path, kind, byte size and sha256. Contents are not copied;
+    the hash lets a reader confirm the record is the one that was indexed. The
+    file set is the tree itself, so recompilation stays byte-identical.
+    """
+    rows: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    for kind, rel_dir in GOVERNED_RECORD_DIRS:
+        directory = base / rel_dir
+        if not directory.is_dir():
+            continue
+        for path in sorted(p for p in directory.rglob("*") if p.is_file() and ".git" not in p.parts):
+            raw = path.read_bytes()
+            rows.append({
+                "path": path.relative_to(base).as_posix(),
+                "kind": kind,
+                "bytes": len(raw),
+                "sha256": digest_bytes(raw),
+            })
+            counts[kind] = counts.get(kind, 0) + 1
+    return {"counts": dict(sorted(counts.items())), "total": len(rows), "rows": rows}
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
@@ -1281,6 +1314,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "knowledge": knowledge,
         "source_index": source_index,
         "module_labels": _module_labels_block(base),
+        "governed_records": _governed_records_block(base),
         "research_index": research_index,
         "grammar": grammar,
         "counts": {
