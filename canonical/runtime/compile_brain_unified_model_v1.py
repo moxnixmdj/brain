@@ -1242,6 +1242,50 @@ def _governed_records_block(base: Path) -> dict[str, Any]:
     return {"counts": dict(sorted(counts.items())), "total": len(rows), "rows": rows}
 
 
+def _document_kind(rel: str) -> str:
+    if "/" not in rel:
+        return "ROOT_DOC"
+    if rel.startswith("canonical/laws/"):
+        return "LAW_TEXT"
+    return "DOC"
+
+
+def _document_block(base: Path) -> dict[str, Any]:
+    """Index the prose documents (Markdown and text) so their ideas are addressable.
+
+    One row per file: path, kind, size, sha256, first H1 title, and the first 12
+    headings. The body is not copied; the hash identifies the exact text indexed.
+    """
+    rows: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    paths = sorted(
+        p for pattern in ("*.md", "*.txt")
+        for p in base.rglob(pattern)
+        if p.is_file() and ".git" not in p.parts
+    )
+    for path in paths:
+        rel = path.relative_to(base).as_posix()
+        raw = path.read_bytes()
+        text = raw.decode("utf-8", errors="replace")
+        headings = [
+            line.lstrip("#").strip()[:160]
+            for line in text.splitlines()
+            if line.startswith("#")
+        ]
+        title = next((h for h in headings if h), "")
+        kind = _document_kind(rel)
+        rows.append({
+            "path": rel,
+            "kind": kind,
+            "bytes": len(raw),
+            "sha256": digest_bytes(raw),
+            "title": title,
+            "headings": headings[:12],
+        })
+        counts[kind] = counts.get(kind, 0) + 1
+    return {"counts": dict(sorted(counts.items())), "total": len(rows), "rows": rows}
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
@@ -1315,6 +1359,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "source_index": source_index,
         "module_labels": _module_labels_block(base),
         "governed_records": _governed_records_block(base),
+        "documents": _document_block(base),
         "research_index": research_index,
         "grammar": grammar,
         "counts": {

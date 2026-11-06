@@ -5,7 +5,7 @@ compiled into a single model.
 
 ```
 canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json
-model digest: 8093c19cb6cee9148d8bc6917c6a3ee4f5c0028950c412667addba794ad3daf9
+model digest: f62b8fad282def2f6e0c81b5fdc132e8fc5721178f87122cbc37c91bf6b3a0e0
 ```
 
 This is a **compiled projection**, not a new authority. It is a deterministic
@@ -22,6 +22,7 @@ function of the repository tree: compile it twice and you get the same bytes.
 | Source index | **1,948** | `canonical/runtime` modules recorded as addressable but not executable (444 entry points) |
 | Module labels | **5,297** | One label per tracked Python file, from `canonical/unified_model/gap/` (`module_labels` block) |
 | Governed records | **6,781** | Action intents (780), laws (59), governance records (3,219), verification records (2,723); path, kind, size and sha256 only (`governed_records` block) |
+| Documents | **343** | Prose documents (root docs 137, law texts 59, other docs 147): path, kind, size, sha256, title and first headings (`documents` block) |
 | Routing vocabulary | **2,360** | Tokens compiled from declared triggers, weighted by inverse document frequency |
 | Weights | **0** | This artifact contains no trained parameters and never claims any |
 
