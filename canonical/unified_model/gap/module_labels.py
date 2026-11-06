@@ -29,6 +29,10 @@ def main() -> None:
 
     model_index = json.loads((TREE / "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json").read_text())["source_index"]
     indexed = {e["path"]: e.get("classification", "") for e in model_index}
+    capability_model = json.loads((TREE / "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json").read_text())["capabilities"]
+    capability_sources = {
+        (c.get("provenance") or {}).get("source_path") for c in capability_model
+    } - {None}
     versions = {r["path"]: r["status"] for r in load_csv("version_families.csv")}
     runtime = {r["path"]: r["label"] for r in load_csv("runtime_triage.csv")}
     gap_group = {r["path"]: r["group"] for r in load_csv("gap_classified.csv")}
@@ -41,6 +45,8 @@ def main() -> None:
             label, basis = "ANALYSIS_TOOL", "path"
         elif p in indexed:
             label, basis = "INDEXED", indexed[p]
+        elif p in capability_sources:
+            label, basis = "CAPABILITY_SOURCE", "capability_provenance"
         elif p in versions:
             label, basis = versions[p], "version_family"
         elif p.startswith("canonical/runtime/") and p in runtime:

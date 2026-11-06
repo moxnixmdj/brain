@@ -1,18 +1,18 @@
 {
-  "tracked_py_files": 5296,
-  "labelled_exactly_once": 5296,
+  "tracked_py_files": 5297,
+  "labelled_exactly_once": 5297,
   "unclassified": 0,
   "labels": {
     "TEST": 2444,
     "INDEXED": 1948,
-    "CURRENT": 480,
+    "CURRENT": 335,
+    "CAPABILITY_SOURCE": 215,
     "OUTSIDE_RUNTIME_REVIEW": 175,
-    "SUPERSEDED": 94,
+    "SUPERSEDED": 63,
     "EXPERIMENT_OR_PROBE": 44,
     "INTERNAL_HELPER": 43,
-    "RETIRE_CANDIDATE": 31,
-    "USED": 21,
-    "ANALYSIS_TOOL": 9,
+    "USED": 13,
+    "ANALYSIS_TOOL": 10,
     "GUARD": 7
   }
 }
