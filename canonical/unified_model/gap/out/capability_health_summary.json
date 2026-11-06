@@ -1,0 +1,11 @@
+{
+  "verified_bound_capabilities": 149,
+  "health": {
+    "NO_RUN_TESTS_IMPORT_IT": 143,
+    "IMPORTING_TESTS_PASS": 5,
+    "SOME_IMPORTING_TESTS_FAIL": 1
+  },
+  "speed_measured": false,
+  "improvement_measured": false,
+  "caveat": "static import attribution; health is test-based, not a performance measure"
+}
