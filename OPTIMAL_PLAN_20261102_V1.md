@@ -2010,3 +2010,94 @@ thing.
 
 Authority: **NONE**. Terminal truth: `false`. No capability credit. Unaided closure for classes that
 matter: **still 0**.
+
+---
+
+## Log 21 — it must know everything, and knowing was never in the system (2026-11-06)
+
+**What was static.** Not the hypothesis language this time. The **knowledge itself lived outside the
+creature**. Twenty logs produced 2,666 verification records and twenty-one entries of conclusion, and
+the creature had read none of them: I read the repository, decided what it meant, and wrote the
+lesson into a module by hand. Every previous log removed a layer of authored *reasoning*. This one
+removes the authored *memory*, which is why it is the first log that could even in principle produce
+unaided closure — you cannot notice your own regression if you do not remember what you disproved.
+
+Measured before: 2,140 runtime modules, **235 name the evidence corpus**, 219 distinct artifacts are
+hardcoded by name inside them, and **0 walk it**. Each of those 235 reads the one artifact it was
+written against. A point read is not knowledge; nothing could answer a question about the record.
+
+**What was built.** `canonical/runtime/knowledge_v1.py` ingests the whole record with no curated
+list: every JSON under `canonical/verification`, every verdict row in the plan, and — after the
+measurement below forced it — every log *paragraph*, not just its tables. It answers questions with
+provenance, says `unknown` when it does not hold the answer, and can check a candidate claim against
+everything it already recorded as FALSE.
+
+### What is real
+
+| Claim | Verdict | Measurement |
+|---|---|---|
+| It holds the entire record | **TRUE, as storage** | 2,666 / 2,666 evidence records, 0 unrepresented, 77 verdict claims, 279 log paragraphs |
+| It can answer questions about itself | **TRUE** | 8/8 answerable on the tuning battery, with correct log provenance |
+| It says `unknown` instead of guessing | **TRUE, on held-out data** | 8/8 unanswerable refused on a set that never informed a decision |
+| Its retrieval generalises | **PARTLY** | 14/14 tuned, 10/10 on a set I then saw, **9/10 on data that never informed a decision** |
+| It refuses a claim its own record falsified | **TRUE, narrowly** | 3/3 restatements refused, 2/2 controls clean |
+| That refusal survives rewording | **FALSE** | 0/2 paraphrases caught at two shared terms |
+| Holding it means knowing it | **FALSE** | paraphrase retrieval fails; see the limit below |
+| Its record contradicts itself | **FALSE, so far** | 0 disagreements across 2,425 schemas that carry a verdict |
+| Unaided closure for classes that matter | **STILL 0** | this is the precondition, not the thing |
+
+### The mistake I made twice, in the instrument
+
+Both were caught by measuring the detector instead of trusting it, and both are recorded because
+this log is about exactly that failure.
+
+1. **`"glob" in text` matched the word "glob**al**"** and reported 78 corpus-walking modules that do
+   not exist. The real number is 0. The check is now `walks_corpus()`, with a positive and a negative
+   control in the tests.
+2. **The accounting test could not fail.** With every file in the real corpus parseable, a mutant
+   that deletes the "this file was dropped" branch passed — the test could not tell "nothing was
+   dropped" from "drops silently". It now runs against a forced corpus containing a corrupt file and
+   a JSON list, and both mutants die.
+
+### The retrieval number, stated the way it was obtained
+
+A 14-question tuning set scored 14/14 — worth nothing, because the rule (paragraph-level chunking,
+unseen words counting against an answer, container words like `log` excluded) was chosen while
+looking at that set's misses. A held-out set scored 7/10, the rule was revised, and it then scored
+10/10 — also worth little, because I had already seen it. A third set, written after the rule was
+final and measured **once**, scored **9/10**: eight of eight unanswerable questions refused, and the
+single miss is `what did log 16 grow`, where the record says *grew* — there is no stemming. That
+9/10 is the only number here that has never informed a decision.
+
+### The gate I built, measured, and withdrew
+
+The obvious next move is to let the live loop consult its own record before adopting anything. I
+wired it into `organism_v1.chosen_method` and then measured the gate itself:
+
+| conflict rule | paraphrases caught | false conflicts on an unrelated sentence |
+|---|---|---|
+| two shared terms | **0 / 2** | 0 |
+| one shared term | **2 / 2** | **15** |
+
+Both settings are unusable: two terms is blind to rewording, one term fires on prose about nothing.
+The wiring is **reverted**, not shipped. A gate that fails silently in one direction and loudly in
+the other is worse than no gate, and pretending the 3/3 restatement result covered this would be the
+exact dishonesty this repository exists to prevent.
+
+### What the deepest layer says now
+
+The creature now *holds* everything it has ever established, and that is a real change: it can be
+asked about its own record and answer, and it can be shown a claim it already disproved and refuse
+it. But **holding is not knowing.** It holds 279 paragraphs it cannot paraphrase, 2,666 records
+whose *meaning* it does not represent, and a refusal rule that only works when the wording repeats.
+The gap between the two is not a threshold to tune — it is the difference between a lookup table and
+an understanding, and it is where the next layer lives.
+
+Two honest consequences. First, unaided closure is still **0**: the creature can now in principle
+catch a repeated falsified claim, but it has not caught one, because none of the defects it faces are
+restatements of things it already recorded. Second, the knowledge substrate is exactly the kind of
+thing I have been told eight times not to present as the plan: a store that a human queries. What
+makes this different is not the store — it is that the store is now the creature's own record, and
+every future log must *use* it rather than extend it.
+
+Authority: **NONE**. Terminal truth: `false`. No capability credit. Unaided closure: **still 0**.

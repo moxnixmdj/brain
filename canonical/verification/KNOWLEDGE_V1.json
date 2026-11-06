@@ -1,0 +1,406 @@
+{
+  "schema": "PROJECT_BRAIN_KNOWLEDGE_V1",
+  "measured": "2026-11-06",
+  "before": {
+    "runtime_modules": 2140,
+    "modules_naming_the_corpus": 235,
+    "distinct_artifacts_hardcoded": 219,
+    "modules_that_walk_the_whole_corpus": 0,
+    "names": [
+      "aa_briefcase_current_evidence_indistinguishability_v1.py",
+      "abc_observable_trace_scope_rebind_verifier_v1.py",
+      "adaptive_terminal_closure_controller_v1.py",
+      "adaptive_terminal_closure_controller_v2.py"
+    ],
+    "walkers": []
+  },
+  "coverage": {
+    "evidence_files": 2666,
+    "represented": 2666,
+    "unrepresented": 0,
+    "log_claims": 77,
+    "log_sections": 279,
+    "plan_table_rows": 327,
+    "fraction_represented": 1.0
+  },
+  "battery": {
+    "rows": [
+      {
+        "question": "what did log 19 conclude about program synthesis",
+        "expected": "19",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 19 \u2014 the shape of a thought (2026-11-05)",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "what did log 20 conclude about novelty",
+        "expected": "20",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 20 \u2014 constants it derives, and a reason to keep a thought that is not yet right (2026-11-05)",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "how many worlds did log 18 measure",
+        "expected": "18",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 18 \u2014 The method was the one thing I never let it choose",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "what did log 16 do about vocabulary",
+        "expected": "16",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 16 \u2014 It grew a word for something nobody told it about",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "did nearest neighbour solve xor",
+        "expected": "18",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 18 \u2014 The method was the one thing I never let it choose",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "what was the result of the program synthesis search",
+        "expected": "19",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 19 \u2014 the shape of a thought (2026-11-05)",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "xor3 parity separability",
+        "expected": null,
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 20 \u2014 constants it derives, and a reason to keep a thought that is not yet right (2026-11-05)",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "the operator list is no longer mine",
+        "expected": null,
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 20 \u2014 constants it derives, and a reason to keep a thought that is not yet right (2026-11-05)",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "what is the weather in Cairo",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the record never mentions ['cairo', 'weather']"
+      },
+      {
+        "question": "who won the football match on Sunday",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.24 of the question (shared: ['match'])"
+      },
+      {
+        "question": "what is the airspeed velocity of an unladen swallow",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the record never mentions ['airspeed', 'swallow', 'unladen', 'velocity']"
+      },
+      {
+        "question": "how many users signed up last month",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.20 of the question (shared: ['last'])"
+      },
+      {
+        "question": "which planet is closest to the sun",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the record never mentions ['closest', 'planet', 'sun']"
+      },
+      {
+        "question": "what does the vendor charge per seat",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.19 of the question (shared: ['per'])"
+      }
+    ],
+    "questions": 14,
+    "correct": 14,
+    "answered_what_it_holds": 8,
+    "answerable_questions": 8,
+    "stayed_silent_when_it_did_not_know": 6,
+    "unanswerable_questions": 6
+  },
+  "held_out": {
+    "rows": [
+      {
+        "question": "what did log 17 conclude about the conjunction",
+        "expected": "17",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 17 \u2014 The model could not learn a conjunction, and I had not measured it",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "did the model learn a conjunction",
+        "expected": "17",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 17 \u2014 The model could not learn a conjunction, and I had not measured it",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "how many employees does the vendor have",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.25 of the question (shared: ['have'])"
+      },
+      {
+        "question": "which city hosts the olympics",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the record never mentions ['city', 'hosts', 'olympics']"
+      },
+      {
+        "question": "what is the population of the capital",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the record never mentions ['capital', 'population']"
+      },
+      {
+        "question": "who wrote the constitution",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.44 of the question (shared: ['wrote'])"
+      },
+      {
+        "question": "what time does the store open",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.38 of the question (shared: ['store'])"
+      },
+      {
+        "question": "how much does a ticket cost",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.44 of the question (shared: ['cost'])"
+      },
+      {
+        "question": "what is the chemical formula for water",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.32 of the question (shared: ['formula'])"
+      },
+      {
+        "question": "when was the last release published",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.29 of the question (shared: ['published'])"
+      }
+    ],
+    "questions": 10,
+    "correct": 10,
+    "answered_what_it_holds": 2,
+    "answerable_questions": 2,
+    "stayed_silent_when_it_did_not_know": 8,
+    "unanswerable_questions": 8
+  },
+  "held_out_v2": {
+    "rows": [
+      {
+        "question": "what did log 16 grow",
+        "expected": "16",
+        "status": "unknown",
+        "provenance": null,
+        "correct": false,
+        "reason": "the record never mentions ['grow']"
+      },
+      {
+        "question": "what did log 18 let the creature choose",
+        "expected": "18",
+        "status": "known",
+        "provenance": "OPTIMAL_PLAN_20261102_V1.md:Log 18 \u2014 The method was the one thing I never let it choose",
+        "correct": true,
+        "reason": null
+      },
+      {
+        "question": "what did the auditors say about the merger",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.22 of the question (shared: ['about'])"
+      },
+      {
+        "question": "which university did the author attend",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.32 of the question (shared: ['author'])"
+      },
+      {
+        "question": "how many calories are in a banana",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the record never mentions ['banana', 'calories']"
+      },
+      {
+        "question": "what is the exchange rate for the euro",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.25 of the question (shared: ['rate'])"
+      },
+      {
+        "question": "when does the next train leave",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.40 of the question (shared: ['next', 'when'])"
+      },
+      {
+        "question": "what is the boiling point of mercury",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.32 of the question (shared: ['point'])"
+      },
+      {
+        "question": "who is the current mayor",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.39 of the question (shared: ['current'])"
+      },
+      {
+        "question": "how deep is the ocean",
+        "expected": "UNANSWERABLE",
+        "status": "unknown",
+        "provenance": null,
+        "correct": true,
+        "reason": "the closest record explains only 0.50 of the question (shared: ['deep'])"
+      }
+    ],
+    "questions": 10,
+    "correct": 9,
+    "answered_what_it_holds": 1,
+    "answerable_questions": 2,
+    "stayed_silent_when_it_did_not_know": 8,
+    "unanswerable_questions": 8
+  },
+  "teeth": {
+    "refused": [
+      {
+        "claim": "the operator list is no longer mine",
+        "conflicts": 3,
+        "first": "OPTIMAL_PLAN_20261102_V1.md:Log 18 \u2014 The method was the one thing I never let it choose"
+      },
+      {
+        "claim": "a deeper axis-aligned tree learns xor",
+        "conflicts": 2,
+        "first": "OPTIMAL_PLAN_20261102_V1.md:Log 17 \u2014 The model could not learn a conjunction, and I had not measured it"
+      },
+      {
+        "claim": "the method primitives are no longer mine",
+        "conflicts": 3,
+        "first": "OPTIMAL_PLAN_20261102_V1.md:Log 18 \u2014 The method was the one thing I never let it choose"
+      }
+    ],
+    "controls": 2,
+    "falsified_claims_refused": 3,
+    "falsified_claims": 3,
+    "controls_correctly_clean": 2,
+    "controls_total": 2
+  },
+  "honesty": {
+    "paraphrase_rows": [
+      {
+        "question": "what did the twentieth log find",
+        "status": "unknown",
+        "reason": "the closest record explains only 0.45 of the question (shared: ['find'])"
+      },
+      {
+        "question": "which approach did it reject in the seventeenth entry",
+        "status": "unknown",
+        "reason": "the closest record explains only 0.24 of the question (shared: ['entry'])"
+      },
+      {
+        "question": "summarise the latest findings",
+        "status": "unknown",
+        "reason": "the closest record explains only 0.25 of the question (shared: ['findings'])"
+      }
+    ],
+    "paraphrases_admitted": 0,
+    "paraphrases": 3,
+    "self_contradictions": [],
+    "schemas_with_a_verdict": 2425,
+    "record_disagrees_with_itself": false
+  },
+  "conflict_limits": {
+    "two_terms": {
+      "paraphrases_caught": 0,
+      "paraphrases": 2,
+      "false_conflicts_on_unrelated": [
+        0,
+        0,
+        0
+      ]
+    },
+    "one_term": {
+      "paraphrases_caught": 2,
+      "paraphrases": 2,
+      "false_conflicts_on_unrelated": [
+        15,
+        0,
+        0
+      ]
+    },
+    "reading": "neither setting is usable: two terms is blind to rewording, one term fires on prose about nothing. The gate stays out of the live loop until conflict can be judged by meaning rather than by shared tokens"
+  },
+  "headline": {
+    "what_it_holds": "2666 of 2666 evidence records, 77 verdict claims and 279 log sections",
+    "what_it_held_before": "no module could answer a question about the record: 384 named the corpus, each pointing at the one artifact it was written against, and none walked it",
+    "can_answer_about_itself": true,
+    "can_refuse_its_own_regressions": true,
+    "cannot": "understand any of it -- retrieval is token overlap, so a paraphrase is `unknown`; this is the difference between remembering and knowing"
+  },
+  "authority": "NONE",
+  "terminal_truth": false
+}
