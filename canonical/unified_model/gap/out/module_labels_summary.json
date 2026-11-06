@@ -1,0 +1,17 @@
+{
+  "tracked_py_files": 5292,
+  "labelled_exactly_once": 5292,
+  "unclassified": 5,
+  "labels": {
+    "TEST": 2444,
+    "INDEXED": 1948,
+    "CURRENT": 480,
+    "USED": 127,
+    "RETIRE_CANDIDATE": 100,
+    "SUPERSEDED": 94,
+    "EXPERIMENT_OR_PROBE": 44,
+    "INTERNAL_HELPER": 43,
+    "GUARD": 7,
+    "UNCLASSIFIED": 5
+  }
+}
