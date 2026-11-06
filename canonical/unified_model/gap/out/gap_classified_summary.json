@@ -1,0 +1,28 @@
+{
+  "unindexed_non_test_py": 895,
+  "by_group": [
+    [
+      "VERSIONED_MODULE",
+      574
+    ],
+    [
+      "RUNTIME_MODULE",
+      227
+    ],
+    [
+      "EXPERIMENT_OR_PROBE",
+      44
+    ],
+    [
+      "INTERNAL_HELPER",
+      43
+    ],
+    [
+      "GUARD",
+      7
+    ]
+  ],
+  "with_main_block": 400,
+  "imported_by_some_other_file": 323,
+  "imported_by_none": 572
+}
