@@ -15,11 +15,13 @@ function of the repository tree: compile it twice and you get the same bytes.
 
 | Layer | Count | What it is |
 |---|---|---|
-| Capabilities | **364** | 69 promoted bound capabilities + 295 receipt-backed capabilities from the live verified registry |
-| Engines | **26** | 25 unified-cognitive-fabric modes + 1 meta orchestrator |
+| Capabilities | **443** | 149 bound capabilities + 294 receipt-backed capabilities (`counts` block in the artifact) |
+| Engines | **26** | Engine rows compiled from the unified-cognitive-fabric surfaces and the meta orchestrator |
 | Skills | **18** | Internalized `SKILL.md` procedures with their operational lines |
-| Knowledge | **168** | 59 laws, 95 documents, 14 structured records — indexed by hash, headings and terms |
-| Routing vocabulary | **1,775** | Tokens compiled from declared triggers, weighted by inverse document frequency |
+| Knowledge | **304** | Knowledge documents indexed by hash, headings and terms (`counts.knowledge_documents`) |
+| Source index | **1,948** | `canonical/runtime` modules recorded as addressable but not executable (444 entry points) |
+| Module labels | **5,297** | One label per tracked Python file, from `canonical/unified_model/gap/` (`module_labels` block) |
+| Routing vocabulary | **2,360** | Tokens compiled from declared triggers, weighted by inverse document frequency |
 | Weights | **0** | This artifact contains no trained parameters and never claims any |
 
 Knowledge is *indexed, not embedded*: the model stores each document's path,
