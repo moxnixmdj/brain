@@ -1,0 +1,50 @@
+{
+  "files": 175,
+  "labels": {
+    "REFERENCED_BY_RECORD": 159,
+    "REFERENCED_BY_CODE_ONLY": 6,
+    "UNREFERENCED": 10
+  },
+  "by_dir_unreferenced": [
+    [
+      "chain_mission.py",
+      1
+    ],
+    [
+      "generate_guarded_http2_parent_plan.py",
+      1
+    ],
+    [
+      "generated_tests/pkg",
+      1
+    ],
+    [
+      "generated_tests/src",
+      1
+    ],
+    [
+      "generated_tests/test_scaffold_src",
+      1
+    ],
+    [
+      "test_coding_goal_reuse_probe_20261102.py",
+      1
+    ],
+    [
+      "test_computer_goal_reuse_probe_20261102.py",
+      1
+    ],
+    [
+      "test_isolated_computer_learning_probe_20261102.py",
+      1
+    ],
+    [
+      "tools/l6_fetch.py",
+      1
+    ],
+    [
+      "tools/repin_probe_sites.py",
+      1
+    ]
+  ]
+}
