@@ -1,0 +1,10 @@
+{
+  "runtime_modules": 227,
+  "labels": {
+    "USED": 127,
+    "RETIRE_CANDIDATE": 100
+  },
+  "used_by_main_only": 39,
+  "used_by_import_only": 70,
+  "retire_candidate_lines": 12117
+}
