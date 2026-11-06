@@ -1,0 +1,15 @@
+{
+  "uncovered_files": 687,
+  "labelled_exactly_once": 687,
+  "labels": {
+    "CURRENT": 335,
+    "USED": 119,
+    "RETIRE_CANDIDATE": 69,
+    "SUPERSEDED": 63,
+    "EXPERIMENT_OR_PROBE": 44,
+    "HELPER": 43,
+    "ANALYSIS_TOOL": 7,
+    "GUARD": 7
+  },
+  "unused_scope_by_dir": []
+}
