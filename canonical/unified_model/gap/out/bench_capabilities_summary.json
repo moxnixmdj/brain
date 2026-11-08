@@ -1,0 +1,38 @@
+{
+  "repeats_per_test_file": 3,
+  "capabilities": 6,
+  "per_capability": {
+    "chart.raster.curve_value_query.v1": {
+      "runs": 3,
+      "pass_rate": 1.0,
+      "median_seconds": 0.67
+    },
+    "chart.raster.curve_x_at_y_query.v1": {
+      "runs": 3,
+      "pass_rate": 1.0,
+      "median_seconds": 0.65
+    },
+    "chart.raster.direct_curve_label_family_rank.v1": {
+      "runs": 3,
+      "pass_rate": 1.0,
+      "median_seconds": 0.67
+    },
+    "chart.raster.legend_style_binding.v1": {
+      "runs": 3,
+      "pass_rate": 1.0,
+      "median_seconds": 1.68
+    },
+    "chart.raster.scene_graph.v1": {
+      "runs": 3,
+      "pass_rate": 1.0,
+      "median_seconds": 0.94
+    },
+    "python.repository.acceptance.measure.v1": {
+      "runs": 3,
+      "pass_rate": 0.0,
+      "median_seconds": 3.86
+    }
+  },
+  "power_measured_against_baseline": false,
+  "caveat": "reliability and speed of existing tests; no task set and no baseline in the repo"
+}
