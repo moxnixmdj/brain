@@ -1,0 +1,7 @@
+{
+  "verified_bound_capabilities": 149,
+  "results": {
+    "FOUND_SELF_CONFIDENT": 149
+  },
+  "caveat": "routes each capability's declared triggers; does not execute anything"
+}
