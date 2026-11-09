@@ -1,0 +1,76 @@
+{
+  "tracked_py_files": 5287,
+  "model_source_index_entries": 1948,
+  "indexed_and_in_tree": 1948,
+  "unindexed_py_files": 3339,
+  "indexed_but_not_in_tree": 0,
+  "model_classifications": {
+    "ORPHAN": 1464,
+    "ENTRY_POINT": 444,
+    "INTERNAL_HELPER": 38,
+    "UNPARSEABLE": 2
+  },
+  "top_unindexed_directories": [
+    [
+      "canonical/tests",
+      2439
+    ],
+    [
+      "canonical/runtime",
+      387
+    ],
+    [
+      "canonical/capabilities",
+      136
+    ],
+    [
+      "canonical/research",
+      110
+    ],
+    [
+      "canonical/astra_runtime",
+      57
+    ],
+    [
+      "execution_guard",
+      42
+    ],
+    [
+      "canonical/swe_kernel",
+      38
+    ],
+    [
+      "swe_probe_20261029",
+      26
+    ],
+    [
+      "canonical/tools",
+      22
+    ],
+    [
+      "canonical/verification",
+      14
+    ],
+    [
+      "canonical/experiments",
+      13
+    ],
+    [
+      "canonical/integrations",
+      7
+    ],
+    [
+      "swe_probe_20261030",
+      7
+    ],
+    [
+      "scripts",
+      5
+    ],
+    [
+      "tests",
+      5
+    ]
+  ],
+  "stale_examples": []
+}

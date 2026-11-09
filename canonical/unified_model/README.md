@@ -5,7 +5,7 @@ compiled into a single model.
 
 ```
 canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json
-model digest: d050fac698df59ab70e251cf2f03f11cb280d702b0edc0c64e1b1dc7bfb9f33e
+model digest: see the `digest` block of BRAIN_UNIFIED_MODEL_V1.json (quoting it here would make the README depend on the model that indexes it)
 ```
 
 This is a **compiled projection**, not a new authority. It is a deterministic
@@ -15,11 +15,15 @@ function of the repository tree: compile it twice and you get the same bytes.
 
 | Layer | Count | What it is |
 |---|---|---|
-| Capabilities | **364** | 69 promoted bound capabilities + 295 receipt-backed capabilities from the live verified registry |
-| Engines | **26** | 25 unified-cognitive-fabric modes + 1 meta orchestrator |
+| Capabilities | **443** | 149 bound capabilities + 294 receipt-backed capabilities (`counts` block in the artifact) |
+| Engines | **26** | Engine rows compiled from the unified-cognitive-fabric surfaces and the meta orchestrator |
 | Skills | **18** | Internalized `SKILL.md` procedures with their operational lines |
-| Knowledge | **168** | 59 laws, 95 documents, 14 structured records — indexed by hash, headings and terms |
-| Routing vocabulary | **1,775** | Tokens compiled from declared triggers, weighted by inverse document frequency |
+| Knowledge | **304** | Knowledge documents indexed by hash, headings and terms (`counts.knowledge_documents`) |
+| Source index | **1,948** | `canonical/runtime` modules recorded as addressable but not executable (444 entry points) |
+| Module labels | **5,297** | One label per tracked Python file, from `canonical/unified_model/gap/` (`module_labels` block) |
+| Governed records | **6,781** | Action intents (780), laws (59), governance records (3,219), verification records (2,723); path, kind, size and sha256 only (`governed_records` block) |
+| Documents | **343** | Prose documents (root docs 137, law texts 59, other docs 147): path, kind, size, sha256, title and first headings (`documents` block) |
+| Routing vocabulary | **2,360** | Tokens compiled from declared triggers, weighted by inverse document frequency |
 | Weights | **0** | This artifact contains no trained parameters and never claims any |
 
 Knowledge is *indexed, not embedded*: the model stores each document's path,

@@ -1179,6 +1179,113 @@ def _theory_block() -> dict[str, Any]:
     }
 
 
+MODULE_LABELS_PATH = "canonical/unified_model/gap/out/module_labels.csv"
+
+
+def _module_labels_block(base: Path) -> dict[str, Any]:
+    """One label per tracked Python file, read from the committed gap table.
+
+    The table is produced by canonical/unified_model/gap/module_labels.py. It is
+    a plain committed file, so recompilation stays byte-identical. Its own digest
+    is recorded so the labels cannot change without changing the model digest.
+    """
+    import csv
+
+    target = base / MODULE_LABELS_PATH
+    if not target.is_file():
+        return {"source": MODULE_LABELS_PATH, "present": False}
+    raw = target.read_bytes()
+    rows = list(csv.DictReader(raw.decode("utf-8").splitlines()))
+    counts: dict[str, int] = {}
+    for row in rows:
+        counts[row["label"]] = counts.get(row["label"], 0) + 1
+    return {
+        "source": MODULE_LABELS_PATH,
+        "present": True,
+        "sha256": digest_bytes(raw),
+        "files": len(rows),
+        "counts": dict(sorted(counts.items())),
+        "labels": {row["path"]: row["label"] for row in rows},
+    }
+
+
+GOVERNED_RECORD_DIRS = (
+    ("ACTION_INTENT", "canonical/action_intents"),
+    ("LAW", "canonical/laws"),
+    ("GOVERNANCE_RECORD", "canonical/governance"),
+    ("VERIFICATION_RECORD", "canonical/verification"),
+)
+
+
+def _governed_records_block(base: Path) -> dict[str, Any]:
+    """Index the decision and evidence records the model otherwise ignores.
+
+    One row per file: path, kind, byte size and sha256. Contents are not copied;
+    the hash lets a reader confirm the record is the one that was indexed. The
+    file set is the tree itself, so recompilation stays byte-identical.
+    """
+    rows: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    for kind, rel_dir in GOVERNED_RECORD_DIRS:
+        directory = base / rel_dir
+        if not directory.is_dir():
+            continue
+        for path in sorted(p for p in directory.rglob("*") if p.is_file() and ".git" not in p.parts):
+            raw = path.read_bytes()
+            rows.append({
+                "path": path.relative_to(base).as_posix(),
+                "kind": kind,
+                "bytes": len(raw),
+                "sha256": digest_bytes(raw),
+            })
+            counts[kind] = counts.get(kind, 0) + 1
+    return {"counts": dict(sorted(counts.items())), "total": len(rows), "rows": rows}
+
+
+def _document_kind(rel: str) -> str:
+    if "/" not in rel:
+        return "ROOT_DOC"
+    if rel.startswith("canonical/laws/"):
+        return "LAW_TEXT"
+    return "DOC"
+
+
+def _document_block(base: Path) -> dict[str, Any]:
+    """Index the prose documents (Markdown and text) so their ideas are addressable.
+
+    One row per file: path, kind, size, sha256, first H1 title, and the first 12
+    headings. The body is not copied; the hash identifies the exact text indexed.
+    """
+    rows: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    paths = sorted(
+        p for pattern in ("*.md", "*.txt")
+        for p in base.rglob(pattern)
+        if p.is_file() and ".git" not in p.parts
+    )
+    for path in paths:
+        rel = path.relative_to(base).as_posix()
+        raw = path.read_bytes()
+        text = raw.decode("utf-8", errors="replace")
+        headings = [
+            line.lstrip("#").strip()[:160]
+            for line in text.splitlines()
+            if line.startswith("#")
+        ]
+        title = next((h for h in headings if h), "")
+        kind = _document_kind(rel)
+        rows.append({
+            "path": rel,
+            "kind": kind,
+            "bytes": len(raw),
+            "sha256": digest_bytes(raw),
+            "title": title,
+            "headings": headings[:12],
+        })
+        counts[kind] = counts.get(kind, 0) + 1
+    return {"counts": dict(sorted(counts.items())), "total": len(rows), "rows": rows}
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
@@ -1250,6 +1357,9 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "skills": skills,
         "knowledge": knowledge,
         "source_index": source_index,
+        "module_labels": _module_labels_block(base),
+        "governed_records": _governed_records_block(base),
+        "documents": _document_block(base),
         "research_index": research_index,
         "grammar": grammar,
         "counts": {

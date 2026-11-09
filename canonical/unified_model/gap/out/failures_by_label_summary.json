@@ -1,0 +1,37 @@
+{
+  "failing_test_files": 353,
+  "unresolved_imports": 468,
+  "by_label": [
+    {
+      "label": "INDEXED",
+      "module_hits_from_failing_tests": 222,
+      "failing_test_files": 152
+    },
+    {
+      "label": "CURRENT",
+      "module_hits_from_failing_tests": 82,
+      "failing_test_files": 29
+    },
+    {
+      "label": "TEST",
+      "module_hits_from_failing_tests": 6,
+      "failing_test_files": 5
+    },
+    {
+      "label": "INTERNAL_HELPER",
+      "module_hits_from_failing_tests": 5,
+      "failing_test_files": 5
+    },
+    {
+      "label": "SUPERSEDED",
+      "module_hits_from_failing_tests": 2,
+      "failing_test_files": 2
+    },
+    {
+      "label": "CAPABILITY_SOURCE",
+      "module_hits_from_failing_tests": 1,
+      "failing_test_files": 1
+    }
+  ],
+  "caveat": "static import attribution; a failing test marks every module it imports"
+}

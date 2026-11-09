@@ -1,0 +1,33 @@
+{
+  "failing_or_erroring_cases": 274,
+  "by_outcome": {
+    "fail": 274
+  },
+  "by_bucket": {
+    "ASSERTION": 261,
+    "DRIFT_OR_HASH": 5,
+    "OTHER_EXCEPTION": 5,
+    "UNKNOWN": 2,
+    "MISSING_FILE": 1
+  },
+  "files": 4,
+  "files_with_one_failure": 0,
+  "top_files": [
+    [
+      "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py",
+      233
+    ],
+    [
+      "canonical/tests/test_front_door_crossfile_task_v1.py",
+      23
+    ],
+    [
+      "canonical/tests/test_goal_front_compiler_v1.py",
+      15
+    ],
+    [
+      "canonical/tests/test_jit_knowledge_v1.py",
+      3
+    ]
+  ]
+}

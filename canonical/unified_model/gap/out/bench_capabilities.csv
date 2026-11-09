@@ -1,0 +1,19 @@
+capability_id,test_file,repeat,exit_code,passed,seconds,summary
+chart.raster.curve_value_query.v1,canonical/tests/test_chart_curve_value_query_v1.py,1,0,True,6.29,10 passed in 2.69s
+chart.raster.curve_value_query.v1,canonical/tests/test_chart_curve_value_query_v1.py,2,0,True,0.67,10 passed in 0.43s
+chart.raster.curve_value_query.v1,canonical/tests/test_chart_curve_value_query_v1.py,3,0,True,0.64,10 passed in 0.41s
+chart.raster.curve_x_at_y_query.v1,canonical/tests/test_chart_curve_x_at_y_query_v1.py,1,0,True,0.65,11 passed in 0.40s
+chart.raster.curve_x_at_y_query.v1,canonical/tests/test_chart_curve_x_at_y_query_v1.py,2,0,True,0.63,11 passed in 0.41s
+chart.raster.curve_x_at_y_query.v1,canonical/tests/test_chart_curve_x_at_y_query_v1.py,3,0,True,0.69,11 passed in 0.43s
+chart.raster.direct_curve_label_family_rank.v1,canonical/tests/test_chart_direct_curve_label_family_rank_v1.py,1,0,True,0.72,13 passed in 0.41s
+chart.raster.direct_curve_label_family_rank.v1,canonical/tests/test_chart_direct_curve_label_family_rank_v1.py,2,0,True,0.64,13 passed in 0.42s
+chart.raster.direct_curve_label_family_rank.v1,canonical/tests/test_chart_direct_curve_label_family_rank_v1.py,3,0,True,0.67,13 passed in 0.41s
+chart.raster.legend_style_binding.v1,canonical/tests/test_chart_legend_style_binding_v1.py,1,0,True,1.69,7 passed in 1.45s
+chart.raster.legend_style_binding.v1,canonical/tests/test_chart_legend_style_binding_v1.py,2,0,True,1.65,7 passed in 1.42s
+chart.raster.legend_style_binding.v1,canonical/tests/test_chart_legend_style_binding_v1.py,3,0,True,1.68,7 passed in 1.42s
+chart.raster.scene_graph.v1,canonical/tests/test_chart_raster_scene_graph_v1.py,1,0,True,0.95,6 passed in 0.69s
+chart.raster.scene_graph.v1,canonical/tests/test_chart_raster_scene_graph_v1.py,2,0,True,0.94,6 passed in 0.69s
+chart.raster.scene_graph.v1,canonical/tests/test_chart_raster_scene_graph_v1.py,3,0,True,0.88,6 passed in 0.66s
+python.repository.acceptance.measure.v1,canonical/tests/test_repair_search_reuse_v1.py,1,1,False,6.22,"4 failed, 14 passed in 3.57s"
+python.repository.acceptance.measure.v1,canonical/tests/test_repair_search_reuse_v1.py,2,1,False,3.86,"4 failed, 14 passed in 3.64s"
+python.repository.acceptance.measure.v1,canonical/tests/test_repair_search_reuse_v1.py,3,1,False,3.84,"4 failed, 14 passed in 3.55s"
