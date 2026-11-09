@@ -56,6 +56,23 @@ TEST_SET = [
     ("pull out lines 3 to 9 of parser.py into their own function", "python.refactor.extract_function.v1"),
 ]
 
+# Written after the patterns were fixed and NOT used to tune them. This is the
+# honest number: the patterns were never adjusted for it.
+THIRD_SET = [
+    ("hey can you get rid of the helper functions nobody references anymore", "python.source.dead_code.v1"),
+    ("is there any place where a token or password got typed straight into the source", "python.source.secret_scan.v1"),
+    ("git says the tests went red somewhere, find the offending commit", "git.history.bisect_regression.v1"),
+    ("put the words 'remember the milk' into a file named reminders.txt", "text.file.write"),
+    ("how convoluted is parse_rules, give me a number", "python.source.complexity.v1"),
+    ("change every occurrence of user_id to account_id", "python.refactor.rename_symbol.v1"),
+    ("grab a screenshot of example.net's front page", "web.browser.rendered.capture.chromedriver"),
+    ("give load_data a new argument called chunk_size", "python.source.add_parameter.v1"),
+    ("does my branch introduce anything risky security wise", "python.review.diff_security_gate.v1"),
+    ("if I introduced a bug here, would the existing tests find it", "python.source.test_adequacy.v1"),
+    ("run pwd in the terminal", "shell.command.run"),
+    ("create a brand new function named double that doubles its input", "python.source.add_function.v1"),
+]
+
 
 def route(goal):
     for cid, pat in PATTERNS:
@@ -84,4 +101,5 @@ def run(name, rows):
 if __name__ == "__main__":
     run("DEV ", DEV_SET)
     run("TEST", TEST_SET)
+    run("THIRD", THIRD_SET)
     sys.exit(0)
