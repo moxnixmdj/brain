@@ -74,7 +74,14 @@ THIRD_SET = [
 ]
 
 
+# A request with a second step ('... and then ...', '..., then ...') cannot be
+# answered by one tool honestly, so it is refused rather than half-done.
+COMPOUND = re.compile(r"\bthen\b", re.IGNORECASE)
+
+
 def route(goal):
+    if COMPOUND.search(goal):
+        return None
     for cid, pat in PATTERNS:
         if re.search(pat, goal, re.IGNORECASE):
             return cid
