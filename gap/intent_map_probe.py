@@ -76,7 +76,7 @@ THIRD_SET = [
 
 # A request with a second step ('... and then ...', '..., then ...') cannot be
 # answered by one tool honestly, so it is refused rather than half-done.
-COMPOUND = re.compile(r"\bthen\b", re.IGNORECASE)
+COMPOUND = re.compile(r"\bthen\b|\band also\b", re.IGNORECASE)
 
 
 # Actions no registered tool performs (desktop control, clicking, typing, email,
@@ -89,6 +89,7 @@ UNSUPPORTED = re.compile(
 
 
 def route(goal):
+    goal = goal.replace("`", "")  # `run ls -la` is the same request as run ls -la
     if COMPOUND.search(goal) or UNSUPPORTED.search(goal):
         return None
     for cid, pat in PATTERNS:
