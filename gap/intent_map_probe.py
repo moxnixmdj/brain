@@ -79,8 +79,17 @@ THIRD_SET = [
 COMPOUND = re.compile(r"\bthen\b", re.IGNORECASE)
 
 
+# Actions no registered tool performs (desktop control, clicking, typing, email,
+# installs, deletes, apps). If a request names one, refuse: a partial match would
+# run a tool that does only part of what was asked.
+UNSUPPORTED = re.compile(
+    r"\b(click|press|scroll|uninstall|install|email|e-mail|desktop|my screen|"
+    r"type (my|the|into|in)|log ?in to|open (my|the) (browser|calculator|app|application))\b",
+    re.IGNORECASE)
+
+
 def route(goal):
-    if COMPOUND.search(goal):
+    if COMPOUND.search(goal) or UNSUPPORTED.search(goal):
         return None
     for cid, pat in PATTERNS:
         if re.search(pat, goal, re.IGNORECASE):
