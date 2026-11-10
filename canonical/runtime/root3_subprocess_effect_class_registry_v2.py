@@ -47,16 +47,25 @@ _LEGACY_LINE_REMAP: dict[str, dict[int, int]] = {
     },
     "canonical/runtime/astra_runtime.py": {
         # 2026-10-28: staged replay routes (+N lines) re-anchored to semantic legacy lines.
+        # 2026-11-09: re-anchored AGAIN. Measured: five of the six entries above pointed
+        # at lines that no longer contain `subprocess.run` (781/859/1309/1653/6405 had
+        # drifted to 862/940/1408/1769/6539 by later non-bug edits). The gate then raised
+        # LEGACY_VERIFIED_SITE_DISAPPEARED and made NINE test files uncollectable, so the
+        # whole suite could not run and no round could see it.
+        # The obligation count is unchanged -- six sites in, six sites out -- only the line
+        # numbers moved. A line-pinned registry breaks on any unrelated edit and, when it
+        # breaks, it does so by making tests disappear rather than by failing loudly.
         400: 325,
-        781: 595,
-        859: 673,
-        1309: 939,
-        1653: 1215,
-        6405: 5777,
+        862: 595,
+        940: 673,
+        1408: 939,
+        1769: 1215,
+        6539: 5777,
     },
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": {23: 21},
     "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": {53: 32},
-    "canonical/runtime/bound_capabilities/python_test_audit.py": {136: 50},
+    # 2026-11-09: was {136: 50}; the call has since moved to line 144.
+    "canonical/runtime/bound_capabilities/python_test_audit.py": {144: 50},
 }
 
 # Legacy pins whose semantic obligation is discharged by refactor on #6300:

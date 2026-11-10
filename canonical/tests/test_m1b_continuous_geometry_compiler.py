@@ -11,6 +11,16 @@ from pathlib import Path
 # test_capability_composer_v1.py already uses.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "runtime"))
 
+# 2026-11-09: cadquery needs libGL.so.1, which this host does not have. Importing it at
+# module scope made the whole file a COLLECTION ERROR, and a collection error in a full
+# run takes the reporting down with it -- so the suite could not be summarised at all.
+# A missing system library is a SKIP, not a collection failure: it says nothing about
+# whether the code is correct, only that this machine cannot run it.
+try:
+    import cadquery as _cadquery_probe  # noqa: F401
+except Exception as _cadquery_err:  # pragma: no cover - environment dependent
+    raise unittest.SkipTest(f"cadquery unavailable on this host: {_cadquery_err}")
+
 from m1b_continuous_geometry_compiler import compile_contract
 from cad_partspec_generator import normalize_to_mm, spec_to_code
 
