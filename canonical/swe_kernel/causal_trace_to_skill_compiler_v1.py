@@ -906,6 +906,18 @@ def _carried_step_is_admissible(step: Mapping[str, Any]) -> bool:
     carrier's read-only set, any write flag -- False. The caller then emits the original
     refusal rather than inventing a reason.
     """
+    layer = str(step.get("layer") or "")
+    if layer == "cli_pipeline":
+        stages = step.get("stages")
+        if not isinstance(stages, (list, tuple)) or len(stages) < 2:
+            return False
+        try:
+            from canonical.runtime import admitted_confinement_execution_v1 as carrier
+            verdict = carrier.admission_verdict_for_pipe(
+                [[str(a) for a in st] for st in stages])
+        except Exception:  # noqa: BLE001 - an unaskable gate is not a pass
+            return False
+        return bool(verdict.get("admitted"))
     argv = step.get("argv")
     if not isinstance(argv, (list, tuple)) or not argv:
         return False
@@ -929,7 +941,7 @@ def _steps_are_all_carried(steps: Sequence[Mapping[str, Any]]) -> bool:
     for step in steps:
         if not isinstance(step, Mapping):
             return False
-        if str(step.get("layer") or "") != "cli_exec":
+        if str(step.get("layer") or "") not in {"cli_exec", "cli_pipeline"}:
             return False
         if not _carried_step_is_admissible(step):
             return False
@@ -959,7 +971,7 @@ def execute_compiled_steps(
     # of its own; it only stops refusing the one thing that is now possible.
     for index, step in enumerate(steps):
         if isinstance(step, Mapping) and str(step.get("layer") or "") in {"cli_exec", "cli_pipeline"}:
-            if str(step.get("layer")) == "cli_pipeline" or not _carried_step_is_admissible(step):
+            if not _carried_step_is_admissible(step):
                 return {"ok": False, "status": boundary.STATUS,
                         "failure_class": boundary.FAILURE_CLASS,
                         "reason": boundary.FAILURE_CLASS, "failed_step": index,
@@ -1020,6 +1032,34 @@ def execute_compiled_steps(
             if not _ok:
                 return {"ok": False, "status": str(_out.get("status") or boundary.STATUS),
                         "failure_class": "CARRIED_CLI_STEP_FAILED",
+                        "reason": str(_out.get("status") or ""), "failed_step": idx,
+                        "step_receipts": step_receipts}
+
+        elif layer == "cli_pipeline":
+            # A PIPE OF ADMITTED READS (r43). Each stage is translated at the carrier
+            # boundary exactly like a cli_exec argument, then the pipe is built by the
+            # carrier from STRUCTURE -- the trace never supplies a command string.
+            from canonical.runtime import admitted_confinement_execution_v1 as _carrier
+            _raw_stages = [[str(a) for a in st] for st in (step.get("stages") or [])]
+            _stages = [[argv[0]] + [_carrier_path(a, work_dir) for a in argv[1:]] for argv in _raw_stages]
+            try:
+                _out = _carrier.execute_pipe_confined(_stages, workspace_root=str(work_dir))
+            except FileNotFoundError:
+                _out = {"pass": False, "status": "FAIL_CLOSED__PROGRAM_NOT_INSTALLED",
+                        "exit": None, "confined": None, "live_workspace_untouched": None}
+            _ok = _out.get("pass") is True
+            step_receipts.append({
+                "step": idx, "layer": layer, "ok": _ok,
+                "stages": _stages, "stages_asked": _raw_stages,
+                "stdout": _out.get("stdout"), "exit": _out.get("exit"),
+                "confined": _out.get("confined"),
+                "live_workspace_untouched": _out.get("live_workspace_untouched"),
+                "status": _out.get("status"),
+                "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
+            })
+            if not _ok:
+                return {"ok": False, "status": str(_out.get("status") or boundary.STATUS),
+                        "failure_class": "CARRIED_CLI_PIPE_FAILED",
                         "reason": str(_out.get("status") or ""), "failed_step": idx,
                         "step_receipts": step_receipts}
 

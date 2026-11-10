@@ -1,0 +1,81 @@
+{
+  "claim_id": "COMPOSITION_IS_BUILT_AND_IT_IS_NOT_ENOUGH_20261109_V1",
+  "round": 43,
+  "date": "2026-11-09",
+  "type": "CAPABILITY BUILT + CEILING MEASURED",
+  "title": "Two admitted verbs can now be piped, and a composite skill learned from ONE demonstration answers correctly on unseen files. It still does not give 'anything on a computer', and the arithmetic says why.",
+  "what_i_built": {
+    "function": "admitted_confinement_execution_v1.execute_pipe_confined(stages)",
+    "design": "The caller supplies STRUCTURE -- [['sort','-u','f'],['wc','-l']] -- never a command string. Every stage passes the same admission_verdict a lone command does. Any argument containing | & ; > < backtick $ ( ) { } is refused. The command string is built internally with shlex.quote.",
+    "why_not_just_allow_sh": "sh -c would let structural intent ride inside a scalar: 'sort f; rm -rf /', $(...), backticks, > in an argument. The authority granted is exactly 'read-only verb A stdout is read-only verb B stdin'. Nothing else is expressible.",
+    "gate_wiring": "cli_pipeline is now admissible in _carried_step_is_admissible, executes in a new branch of execute_compiled_steps, and is accepted by _steps_are_all_carried.",
+    "defects_fixed_this_round": [
+      "_WRITE_FLAGS matched only the exact string '--output', so 'sort --output=x' slipped through. Now matched on flag.split('=',1)[0]. This was a REAL admission hole in the single-command path too, not only in pipes.",
+      "The host's /bin/sh is dash and has no 'sh -o pipefail' -- it exits 2 with 'Illegal option'. Pipes now use bash when present, else plain sh. pipefail is error reporting, never a safety property."
+    ]
+  },
+  "what_works": {
+    "13_attacks": "13 of 13 refused (semicolon, $( ), backtick, pipe-in-arg, redirect, writer program, sh, python3, git, uninstalled verb, single stage, empty stage, --output=x).",
+    "correctness": "sort -u | wc -l -> 4 on a 7-line/4-unique file. Three-stage sort -u | rev | head -2 -> elppa, iwik. Live tree untouched.",
+    "the_ceiling_moved": "A composite skill taught from ONE pipeline demonstration QUALIFIES (held-out instance + sabotage control) and answers correctly on a file with DIFFERENT contents: 3 of 4 composites.",
+    "the_4th_failed_honestly": "'sort -u | nl -ba' produces multi-line output; stdout_integer is the wrong postcondition; it REFUSED rather than lying. That is the r42 defect staying fixed."
+  },
+  "why_it_is_still_not_anything_on_a_computer": {
+    "the_arithmetic": {
+      "osworld_2_0_length": "~318 tool calls per task (median human 1.6 h)",
+      "opus_5_5_binary": "48.7%",
+      "implied_per_step_reliability": "0.487^(1/318) = 99.774%",
+      "table": {
+        "85%": "0.0000%",
+        "90%": "0.0000%",
+        "95%": "0.0000%",
+        "99%": "4.09%",
+        "99.5%": "20.31%",
+        "99.9%": "72.75%"
+      },
+      "conclusion": "Learning every action perfectly is necessary and nowhere near sufficient. At 99% per-step reliability a 318-step task completes 4% of the time. CHAIN LENGTH, not missing knowledge, is the binding constraint. This is also why 'give it the smartest actions' does not solve it: the actions are not the problem."
+    },
+    "the_composition_cliff": {
+      "measured_2026": "Two to three skills lift an agent's pass rate by 18.6 points; four or more lift it by 5.9 -- a 68% collapse in marginal contribution (84 benchmark tasks).",
+      "joint_adherence": "If each skill is followed 90% of the time in isolation, four active skills are jointly satisfied 66% of the time; ten, 35%.",
+      "attack_surface_is_path_level": "CompoSkill (arXiv 2608.16246): skills that each pass a per-skill scanner can form a risky composition; Chain Formation Rate up to 83.3%. Safety of the parts does not compose into safety of the chain."
+    },
+    "what_this_system_still_cannot_do": [
+      "write a file",
+      "run a program",
+      "fetch a URL",
+      "git",
+      "any of the 13 writer verbs",
+      "sed -i",
+      "anything outside the 33 installed read verbs"
+    ]
+  },
+  "what_is_real_vs_not": {
+    "REAL": [
+      "One demonstration of a single-step read command persists across process death and answers on new data: 23/33, 23/23 correct (r42).",
+      "Two or more admitted read verbs now compose, and a composite skill is learned from one demonstration: 3/4 (r43).",
+      "Admission is enforced per stage; 13 smuggling shapes refused; a write-flag hole closed.",
+      "The ceiling genuinely moved this round: 23 parallel capabilities -> compositions of those 23."
+    ],
+    "NOT_REAL": [
+      "That composition reaches 'anything on a computer'. It is still read-only, admitted verbs only, no writes, no network, no code execution.",
+      "That a chain of learned actions stays reliable. At 99% per step a 318-step task is 4%. Opus 5.5 needs 99.774% per step to hit 48.7%.",
+      "That more skills monotonically help. Beyond 3, marginal gain collapses from 18.6 to 5.9 points.",
+      "That safety composes. Per-skill safety does not imply chain safety (CompoSkill, CFR 83.3%).",
+      "That any of this touches a public benchmark: still ZERO public-benchmark numbers."
+    ]
+  },
+  "the_sentience_claim": "Unchanged. What exists now is a durable table of anchored regexes plus a pipe builder that refuses anything not in a read-only allowlist. It has no persistent state about itself, no goals of its own, no preference, and no representation of 'I'. A capability ceiling moving up is not a mind; it is a wider door. The 2026 consensus recorded since r35 stands unchanged.",
+  "the_smartest_things_to_do_next": {
+    "1": "Raise PER-STEP reliability rather than per-task knowledge, because the arithmetic says that is the binding constraint: 99.774% per step is what 48.7% at 318 steps requires. Every step handed to deterministic code leaves the exponent (a validated pipeline stage is ~100% reliable; a model decision is not).",
+    "2": "Keep chains SHORT. The composition cliff (18.6pp -> 5.9pp at 4+ skills) and the 0.9^n adherence math both say two or three vetted stages beat a long clever plan. The pipeline I just built is exactly this, and it should stay bounded.",
+    "3": "Build a DAG with typed pre/postconditions before building a longer chain (AgentSkillOS; GraSP 2604.17870: the bottleneck has shifted from availability to orchestration).",
+    "4": "Keep the per-stage admission check. CompoSkill shows individually-safe skills compose into unsafe chains, so safety must be re-evaluated at the path level -- which this design already does, because the pipe as a whole is re-checked after every stage is checked."
+  },
+  "artifacts": {
+    "tests_new": "canonical/tests/test_two_admitted_verbs_can_be_piped_v1.py (19)",
+    "test_updated": "test_instant_learning_end_to_end_v1.py::test_a_pipeline_is_still_refused -> now asserts a vetted pipe IS carried and a shell stage is NOT",
+    "regression_sweep": "48 passed across 6 files",
+    "r41_track": "unchanged 23/33"
+  }
+}

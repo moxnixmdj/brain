@@ -105,7 +105,7 @@ def admission_verdict(command: str | Sequence[str]) -> dict[str, Any]:
     if shutil.which(prog) is None:
         return {"admitted": False, "reason": "PROGRAM_NOT_INSTALLED:" + prog}
     for flag in argv[1:]:
-        if flag in _WRITE_FLAGS.get(prog, ()):
+        if flag in _WRITE_FLAGS.get(prog, ()) or flag.split("=", 1)[0] in _WRITE_FLAGS.get(prog, ()):
             return {"admitted": False, "reason": "WRITE_FLAG_STATED:" + prog + " " + flag}
         # a redirection is a write even when the program is a reader
         if flag[:1] in (">",) or flag.startswith(">>"):
@@ -227,3 +227,121 @@ SUPERSESSION_NOTE = (
     "This is the admitted path the refusal was waiting for, and it reports "
     "carrier_qualified=False exactly as the broker does."
 )
+
+
+# --------------------------------------------------------------------------------------
+# A PIPE OF ADMITTED VERBS (r43, 2026-11-09)
+#
+# r42 measured the ceiling: 23 single-step read verbs pass, and NO TWO OF THEM CAN BE
+# CHAINED, because every cli_exec step is launched independently and `cli_pipeline` is
+# refused. Composition is the multiplier the whole thesis needs -- 23 verbs in parallel is
+# 23 capabilities; 23 that sequence is thousands. So the refusal was the ceiling, not a
+# safety property worth keeping at that price.
+#
+# THE RULE THAT DOES NOT MOVE
+# ---------------------------
+# `sh` is refused and stays refused. The pipe is NOT a shell. A shell would let anything
+# be smuggled through a string: `sh -c "sort f; rm -rf /"`, `$(...)`, backticks, `|`
+# inside an argument, `>` in an argument. Instead the caller supplies STRUCTURE --
+# a list of stages, each an argv -- and this function:
+#
+#   1. requires every stage to be a non-empty argv whose program is admitted by
+#      `admission_verdict` (read-only set, not a writer, no write flag, no redirect,
+#      actually installed on this host);
+#   2. refuses any argument containing a shell metacharacter, so no stage can smuggle
+#      structural intent inside a scalar;
+#   3. quotes every argument itself when it builds the command line.
+#
+# So the authority granted is EXACTLY: "read-only verb A's stdout is read-only verb B's
+# stdin." Nothing else is expressible. The shell is used as a joiner, not as an interpreter
+# of anything the caller wrote.
+# --------------------------------------------------------------------------------------
+
+_PIPE_METACHARS = ("|", "&", ";", ">", "<", "`", "$", "(", ")", "{", "}", "\n", "\r")
+
+
+def admission_verdict_for_pipe(stages: Sequence[Sequence[str]]) -> dict[str, Any]:
+    """Decide whether a PIPE of admitted verbs may run. Pure, no side effects.
+
+    Every stage is checked by the same `admission_verdict` a single command goes through,
+    so a pipe can never admit something a lone command could not.
+    """
+    if not isinstance(stages, (list, tuple)) or len(stages) < 2:
+        return {"admitted": False, "reason": "PIPE_NEEDS_AT_LEAST_TWO_STAGES"}
+    if len(stages) > 8:
+        return {"admitted": False, "reason": "PIPE_TOO_LONG"}
+    checked: list[list[str]] = []
+    for index, stage in enumerate(stages):
+        if not isinstance(stage, (list, tuple)) or not stage:
+            return {"admitted": False, "reason": f"PIPE_STAGE_EMPTY:{index}"}
+        argv = [str(a) for a in stage]
+        for arg in argv:
+            # Structural intent must be expressed as structure, never inside a scalar.
+            if any(meta in arg for meta in _PIPE_METACHARS):
+                return {"admitted": False, "reason": f"PIPE_ARGUMENT_CARRIES_STRUCTURE:{argv[0]}"}
+        verdict = admission_verdict(argv)
+        if not verdict.get("admitted"):
+            return {"admitted": False, "reason": f"PIPE_STAGE_{index}_REFUSED:" + str(verdict["reason"])}
+        checked.append(argv)
+    return {"admitted": True, "stages": checked,
+            "command": " | ".join(" ".join(shlex.quote(a) for a in argv) for argv in checked)}
+
+
+def execute_pipe_confined(
+    stages: Sequence[Sequence[str]],
+    *,
+    workspace_root: str = ".",
+    timeout: int = 20,
+    task_id: str = "admitted-pipe",
+    goal: str = "execute a stated pipe of read-only commands",
+) -> dict[str, Any]:
+    """Run a pipe of admitted read-only verbs under the carrier, or refuse.
+
+    `stages` is structure: [["sort","-u","f"], ["wc","-l"]]. It is NOT a command string,
+    and no string is accepted. The returned dict has the same shape as `execute_confined`.
+    """
+    verdict = admission_verdict_for_pipe(stages)
+    if not verdict.get("admitted"):
+        return {"schema": SCHEMA, "pass": False, "status": "REFUSED__" + str(verdict["reason"]),
+                "carrier_qualified": False, "argv": None, "stages": None}
+
+    try:
+        from canonical.runtime import brokered_workspace_execution_v1 as broker
+        from canonical.runtime import computer_execution_boundary_v1 as boundary
+    except Exception as exc:  # noqa: BLE001
+        return {"schema": SCHEMA, "pass": False,
+                "status": "REFUSED__CARRIER_UNIMPORTABLE:" + str(exc),
+                "carrier_qualified": False, "argv": verdict["command"], "stages": verdict["stages"]}
+
+    if not broker.namespace_broker_available():
+        return {"schema": SCHEMA, "pass": False, "status": boundary.STATUS,
+                "carrier_qualified": False, "argv": verdict["command"],
+                "stages": verdict["stages"], "reason": "NAMESPACE_BROKER_UNAVAILABLE"}
+
+    # The host's /bin/sh is dash, which has no `-o pipefail` (measured: it exits 2 with
+    # "Illegal option -o pipefail"). Prefer bash for correct failure propagation; fall back
+    # to plain sh. Neither choice is a safety property -- every stage already passed
+    # admission individually, and the command string is built here, never supplied.
+    _shell = ["bash", "-o", "pipefail", "-c"] if shutil.which("bash") else ["sh", "-c"]
+    out = broker.run_staged_confined_command(
+        workspace_root, _shell + [verdict["command"]],
+        timeout=timeout, task_id=task_id, goal=goal,
+    )
+    confined = out.get("confined") is True
+    untouched = out.get("live_workspace_untouched") is True
+    exit_code = out.get("exit")
+    ok = bool(out.get("ok")) and confined and untouched and exit_code == 0
+    return {
+        "schema": SCHEMA, "pass": ok,
+        "status": STATUS if ok else "FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT",
+        "argv": verdict["command"], "stages": verdict["stages"],
+        "program": "PIPE", "confined": confined, "live_workspace_untouched": untouched,
+        "carrier_qualified": bool(out.get("carrier_qualified")),
+        "exit": exit_code, "timed_out": bool(out.get("timed_out")),
+        "stdout": out.get("stdout"), "stderr": out.get("stderr"),
+        "changed_files": out.get("changed_files"),
+        "verified_by": "LIVE_TREE_HASH_UNCHANGED_AND_NAMESPACE_CONFINED_EVERY_STAGE_ADMITTED",
+        "honesty": ("Each stage passed admission_verdict independently. No caller-supplied "
+                    "shell string is ever interpreted: the command is built here with quoting, "
+                    "and any argument carrying | & ; > < ` $ ( ) {{ }} is refused."),
+    }
