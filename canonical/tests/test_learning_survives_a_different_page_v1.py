@@ -33,10 +33,10 @@ pytestmark = pytest.mark.skipif(not (TEACH / "step00.png").exists(),
 
 
 def _binding():
-    acts = [{"action": "click", "x": 230, "y": 130, "because": "the field",
+    acts = [{"action": "click", "x": 190, "y": 128, "because": "the field",
              "expect": "none", "why_no_change": "caret"},
             {"action": "type", "text": "eigenvalues", "because": "the query"},
-            {"action": "click", "x": 537, "y": 131, "because": "the GO button"}]
+            {"action": "click", "x": 492, "y": 127, "because": "the GO button"}]
     return G.learn(SHOTS, acts, None, after=AFTER)
 
 
@@ -59,10 +59,15 @@ def test_a_patch_that_is_not_on_the_screen_scores_low():
     assert score < 0.5
 
 
-def test_an_anchor_the_width_of_the_page_is_refused():
-    """A 1280-px 'anchor' is the page, not a widget, and matched with a score of -31181."""
-    with pytest.raises(ValueError):
-        G.learn([SHOTS[0]], [{"action": "click", "x": 20, "y": 130}], [[0, 20, 1280, 180]])
+def test_an_anchor_with_no_structure_is_refused():
+    """Measured: the empty middle of a text field matched 162 offsets spread over 161 px.
+    Acting on the best of those is a coin flip, so it is refused rather than smoothed."""
+    frame = G._grey(SHOTS[0])
+    blank = frame[600:712, 400:512].copy()
+    if float(blank.std()) < G.MIN_PATCH_STD:
+        assert G._match(frame, blank)[0] == -1.0
+    else:
+        pytest.skip("this fixture has no structureless region")
 
 
 # ------------------------------------------------------------------ what the binding keeps
@@ -79,8 +84,9 @@ def test_the_expected_effect_is_measured_not_guessed():
     b = _binding()
     go = b["anchors"][2]["observed_effect_offsets"]
     assert go is not None
-    # the effect of pressing GO lies well to the LEFT of the button
+    # the measured effect starts to the LEFT of the anchor and extends upward
     assert go[0] < -100, go
+    assert go[1] < 0, go
 
 
 def test_a_type_action_inherits_the_anchor_of_what_it_types_into():

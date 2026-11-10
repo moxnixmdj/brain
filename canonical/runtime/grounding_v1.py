@@ -58,7 +58,14 @@ MIN_PATCH_STD = 4.0        # a patch flatter than this has no structure to locat
 # that (and broke a working 5/5); a distance-based rule does not.  Ambiguity only matters
 # when the equally-good matches are FAR APART, because then two different widgets on the
 # page look the same and the matcher cannot know which one the demonstration meant.
-MAX_TIE_SPREAD = 2.5       # in anchor-widths: beyond this the matches are different things
+# The right measure, reached by getting it wrong twice.  First a COUNT of ties (162 for the
+# empty text field) -- wrong, because those 162 were all inside one field and every one was
+# a valid place to click.  Then a spread in units of 2.5 anchor widths -- also wrong, for
+# the same patch: a 56-px patch whose 162 ties span 161 px is a patch that cannot say where
+# it is, and 161 px is under 2.5 x 56.  The unit that works is the PATCH ITSELF: if the
+# equally-good matches are spread further than the patch's own size, then "the best match"
+# is an arbitrary choice among many, and acting on it is a coin flip.
+MAX_TIE_SPREAD = 1.0       # in units of the patch's own width/height
 AMBIGUOUS_MARGIN = 0.03    # a second peak within this of the best makes the match ambiguous
 
 
