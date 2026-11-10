@@ -945,6 +945,32 @@ def select_or_ask(
     }
 
 
+
+def _refuse_if_operations_tie(skills: list[dict[str, Any]], goal: str) -> list[dict[str, Any]]:
+    """Return [] when the top of the candidate list holds more than one real operation."""
+    words = {w for w in re.findall(r"[a-z0-9]{2,}", goal.lower()) if w not in _STOP_WORDS}
+    scored: list[tuple[int, dict[str, Any]]] = []
+    for s in skills:
+        if not isinstance(s, Mapping):
+            continue
+        header = str(s.get("goal_skeleton") or "").split("?")[0]
+        row_words = {w for w in re.findall(r"[a-z0-9]{2,}", header.lower())
+                     if w not in _STOP_WORDS}
+        scored.append((len(words & row_words), s))
+    if not scored:
+        return skills
+    best = max(sc for sc, _ in scored)
+    if best == 0:
+        # No word evidence. Refusing here would also disable the verb-selection fallback,
+        # which reaches its candidate by program name rather than by wording (r50) -- measured:
+        # a 10-skill catalog went from answering correctly to returning None. The zero-overlap
+        # case is handled by the door (`answer_or_ask` -> select_or_ask -> ASK), not here.
+        return skills
+    top_sigs = {_operation_signature(s) for sc, s in scored if sc == best}
+    if len(top_sigs) > 1:
+        return []
+    return skills
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
@@ -3070,7 +3096,8 @@ def recall_and_execute_workflow(
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     previous_attempt = False
 
-    for skill in _candidate_skills_for_words(goal_words, db_path, goal=goal):
+    for skill in _refuse_if_operations_tie(
+            _candidate_skills_for_words(goal_words, db_path, goal=goal), goal):
         # ONE definition of "does this skeleton apply", shared with the candidate builder.
         # The rule used to exist twice; both were once patched separately and the skill that
         # gate one admitted was dropped by gate two.
