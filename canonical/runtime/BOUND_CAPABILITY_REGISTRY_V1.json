@@ -4055,6 +4055,87 @@
     "state_path": "canonical/astra_runtime/state/HARDCORE_ORCHESTRATION_BRIDGE_ENUMERATION_V1.json"
    }
   },
+  "pdf.document.create.from_text": {
+   "action_template": {
+    "args": {
+     "capability_id": "pdf.document.create.from_text",
+     "output_path": "${input.output_path}",
+     "text": "${input.text}",
+     "title": "${input.title}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "pdf_generate_from_text",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "input_names": [
+    "text",
+    "title",
+    "output_path"
+   ],
+   "keywords": [
+    "pdf",
+    "document",
+    "report",
+    "write",
+    "produce",
+    "create",
+    "generate",
+    "make",
+    "export",
+    "render",
+    "deliverable",
+    "author",
+    "draft",
+    "compose",
+    "output",
+    "save",
+    "build"
+   ],
+   "limitations": [
+    "Single page, text only, PDFDocEncoding subset (printable ASCII); refuses text needing font embedding.",
+    "Writes repository-local files only."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "pdf.document.available",
+    "pdf.document.generated",
+    "pdf.output.available"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_bytes",
+    "output_sha256",
+    "page_count",
+    "text_lines_written",
+    "text_lines_reparsed",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/pdf_generate_from_text.py",
+    "module": "pdf_generate_from_text"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified_by": "pypdf.PdfReader",
+    "mission_id": "ASTRA-VERIFY-PDF-PRODUCER-001",
+    "observed_effect": {
+     "output_bytes": 671,
+     "output_sha256": "be9659624b58fffc4ed7619867e51d99e77accca356219a220e6be73def511d3"
+    },
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PDF-PRODUCER-001__RECEIPT.json"
+   }
+  },
   "pdf.extract.ocr.tesseract": {
    "action_template": {
     "args": {
