@@ -1,0 +1,50 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "ONE_NEW_TASK_COSTS_THREE_MODEL_CALLS_AND_THE_REUSE_IS_BLOCKED_20261109_V1",
+  "round": 70,
+  "date": "2026-11-09",
+  "the_number_owed": "what does one genuinely new computer task cost",
+  "setup": {
+    "page": "an inbox the model had never seen: filter input, APPLY button, six messages",
+    "goal": "show only the urgent messages",
+    "pre_registration": "the model's four proposals and confidences written to canonical/evaluation/one_new_task/proposals_20261109_v1.json BEFORE anything ran"
+  },
+  "teach_cost": {
+    "verdict": "ANSWERED",
+    "model_proposals": 3,
+    "model_verifications": 3,
+    "total_model_calls": 6,
+    "steps": 3,
+    "gate_failures": 0,
+    "wall_clock_seconds": 2.79,
+    "result": "heading reads 'Inbox - 3 shown' with exactly the three urgent messages",
+    "evidence": "canonical/evaluation/one_new_task/result_urgent_filtered.png"
+  },
+  "reuse_cost": {
+    "verdict": "BLOCKED",
+    "why": "the learned trajectory stores the typed value as PIXELS. A new goal ('show only the messages about refund') gets the old word 'urgent' typed, because nothing in the record says which part of the goal produced it."
+  },
+  "what_was_fixed": {
+    "module": "canonical/runtime/parameterise_v1.py",
+    "what": "a goal-derived literal becomes a SLOT; a new goal fills it",
+    "measured": "'show only the urgent messages' -> type {slot0}; then 'about refund' -> refund, 'from alice' -> alice, 'the invoice messages' -> invoice, 'billing' -> billing",
+    "bugs": ["the first version bound function words as values: 'about', then 'from'"]
+  },
+  "what_remains_blocked": {
+    "problem": "an EMPTY TEXT FIELD cannot be located by appearance",
+    "measurement": "a 40x40 patch of the blank input matched 453 offsets spread over 258 px; a 112x112 patch matched 122 offsets",
+    "why_thresholds_cannot_fix_it": "every threshold that accepts the patch is choosing one of hundreds of equally good places and calling it a match",
+    "what_would_fix_it": "a structural signal -- the page's own tree -- rather than pixels. The repo already forbids DOM and Accessibility in the visual executor on purpose, so this is a design decision to revisit, not a bug to patch."
+  },
+  "the_shape_of_the_last_six_rounds": {
+    "r65": "a demonstration transfers to a new INSTANCE of the taught task (5/5)",
+    "r66": "two skills compose into a task neither was taught; coverage 1+1=3",
+    "r67": "a library is worth what can be FOUND in it; 0/10 in natural language",
+    "r68": "hierarchy does not rescue word overlap; structure decays more slowly",
+    "r69": "the structure result was largely a hand-written lexicon; the model is exact on held-out vocabulary",
+    "r70": "a new task costs 6 model calls and 3 steps -- and the learned procedure cannot yet be reused on a new goal, because the value was stored as pixels and the field cannot be relocated"
+  },
+  "what_this_does_not_prove": ["one task, one page", "a public benchmark number: still zero"],
+  "next": ["give grounding a structural signal so an empty field can be located, and measure whether reuse then works end to end",
+           "a public benchmark number, still owed"]
+}
