@@ -2907,6 +2907,40 @@ def infer_contract_from_goal(goal: str) -> dict[str, Any]:
     return {"kind": "stdout_lines"}
 
 
+
+def answer_or_ask(
+    goal: str,
+    *,
+    cwd: str | pathlib.Path | None = None,
+    db_path: pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """The door a caller should use. Execute if the sentence is enough; ask if it is not.
+
+    `recall_and_execute_workflow` returns None for everything it cannot do, and None is the
+    same value for "no skill has ever been taught", "the verbs conflict", and "the sentence
+    does not say which of these you meant". r55 measured that the last case is the common one:
+    7 of 8 asks in a user's own words tie at the top even for a perfect word selector.
+
+    A None that cannot be told apart from absence is not a refusal, it is a shrug. This
+    wrapper keeps the old function's contract untouched and adds the distinction:
+
+        answered     -- a skill ran and the answer verified
+        ask          -- nothing to run, or several operations tie, with the options named
+        unanswerable -- nothing could be tried for a reason that is not a choice
+    """
+    got = recall_and_execute_workflow(goal, cwd=cwd, db_path=db_path)
+    if got is not None:
+        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED", "answer": got.get("answer"),
+                "result": got}
+    ask = select_or_ask(goal, db_path=db_path)
+    if ask.get("verdict") == "SELECTED":
+        # selected uniquely but execution failed; say so rather than offering a menu
+        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "UNANSWERABLE",
+                "reason": "SELECTED_BUT_DID_NOT_RUN", "selected": ask.get("operation"),
+                "asked": goal}
+    return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ASK", "question": ask.get("question"),
+            "options": ask.get("options", []), "reason": ask.get("reason"), "asked": goal}
+
 def answer_provenance(postcondition: Mapping[str, Any],
                       execution_result: Mapping[str, Any],
                       *, goal: str | None = None) -> dict[str, Any]:

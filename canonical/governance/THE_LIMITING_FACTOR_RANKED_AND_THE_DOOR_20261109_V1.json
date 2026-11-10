@@ -1,0 +1,46 @@
+{
+  "round": 56,
+  "date": "2026-11-09",
+  "title": "The door is built; the limiting factors are ranked by measured numbers, and only one of them is a language problem",
+  "what_was_built": {
+    "function": "answer_or_ask(goal, cwd, db_path)",
+    "problem_it_closes": "recall_and_execute_workflow returned None for three different situations -- nothing taught, verbs conflict, sentence cannot choose -- and a caller could not tell them apart",
+    "verdicts": ["ANSWERED", "ASK (with named options and a reason)", "UNANSWERABLE (selected but did not run)"],
+    "compatibility": "the old function is untouched and still returns None, so nothing downstream changes behaviour"
+  },
+  "the_limiting_factor_ranking": {
+    "method": "each factor carries the number that was actually measured, not an estimate. Ranked by what stops the stated goal.",
+    "factors": [
+      {"rank": 1, "factor": "there is no model", "measured": "0 trained parameters, 0 weights, $0 per task. This system is a skill index plus a carrier. It cannot read a new codebase, cannot reason about a stack trace, cannot write code.",
+       "stands_between": "every clause of the thesis that begins 'and then it solves everything'", "who_closes_it": "nobody in this repo. It needs a language model and that is the one thing a zero-weight system cannot manufacture."},
+      {"rank": 2, "factor": "physics / actuator floor", "measured": "no display, no browser, no pointer driver, no GUI toolkit, no Docker. 45 of 47 Unix binaries. On OSWorld 2.0 the frontier scores 20.6% binary / 54.8% partial even with all of them.",
+       "stands_between": "'anything on a computer'", "who_closes_it": "a real desktop and a vision model. Both are outside this sandbox."},
+      {"rank": 3, "factor": "the horizon wall", "measured": "at 99.9% per step, 318 steps succeeds 72.75% of the time; at 99.5%, 20.31%; at 99%, 4.09%.",
+       "stands_between": "'permanently' in any long workflow", "who_closes_it": "nothing available. It is arithmetic, and it binds every agent including the frontier ones."},
+      {"rank": 4, "factor": "composition", "measured": "two learned operations from one sentence -> None. The pipe layer exists and needs the trace to record a pipe; it does not compose from prose.",
+       "stands_between": "'solves everything'", "who_closes_it": "a planner. Rank 1 already says there is none."},
+      {"rank": 5, "factor": "discovery", "measured": "'unique lines of the largest .log file in <dir>' -> None. The goal must name its object.",
+       "stands_between": "real tasks, which almost never name their object", "who_closes_it": "search plus a model to decide what to search for."},
+      {"rank": 6, "factor": "confusability", "measured": "4 near-duplicate skills break selection at |S|=4. 30 distinct skills do not.",
+       "stands_between": "catalogs of any useful size", "who_closes_it": "a canonicalization pass that refuses to store two skills with the same operation signature. That is cheap and this repo does not do it."},
+      {"rank": 7, "factor": "selection under paraphrase", "measured": "7 of 8 asks tie at the top for a PERFECT word selector at |S|=30. 6 of 8 at |S|=9.",
+       "stands_between": "a user who does not speak the teaching sentence", "who_closes_it": "asking, now built, or a language model. More cue words provably cannot."}
+    ],
+    "the_ranking_rule_that_matters": "the factor this project has spent the most rounds on is the SMALLEST one. Ranks 1-5 are walls made of missing parts. Rank 7 is a language problem with a cheap correct answer, and it consumed rounds 34-56.",
+    "consequence_for_the_fastest_path": "the fastest path is not faster work on rank 7. It is to stop, because ranks 1-5 cannot be closed from inside this repository, and every round spent on rank 6-7 is a round that produces a true, well-measured, irrelevant result."
+  },
+  "external_agreement_2026": {
+    "Binding Constraint Thesis (arXiv 2605.23950)": "the harness -- context construction, tool interaction, orchestration and verification -- is often a stronger determinant of agent performance than the model it wraps; performance variance decomposes into model, harness and interaction terms, and for long-horizon tasks the latter two dominate",
+    "theory of constraints applied to agents (2026)": "'optimization of non-bottleneck resources cannot increase system throughput'; improvements to non-constraints increase local efficiency at the cost of system-level imbalance",
+    "what_this_round_adds": "the harness claim is true and it is not this project's problem. This project has no model at all. A perfect harness around no model is a perfect harness around no model."
+  },
+  "the_most_useful_thing_to_do_next": {
+    "ranked": "1. stop adding capability and write the licence that says what this is. 2. canonicalize operation signatures so the catalog cannot self-poison. 3. audit evidence omission in the answers that already carry provenance.",
+    "why_the_licence_is_first": "the single largest risk in this repository is not a defect. It is that a reader takes the governance record, which is unusually honest, as a description of a system that does more than it does. The record now says plainly: permanence is real, everything downstream of selection is not."
+  },
+  "honest_verdict": {
+    "against_the_standing_claim": "learn once -> permanent -> therefore all problems and any computer use: still false, and now ranked. The permanence is real and is the only mechanism at full strength. Everything the thesis needs next is either missing (ranks 1-5) or cheap and unbuilt (rank 6).",
+    "sentience": "unchanged across sixteen rounds of asking: no evidence, no mechanism, no test that could settle it. This round added a door that can say 'I do not know which you meant', which is the closest thing to self-knowledge in the codebase and is still a branch on a dict."
+  },
+  "regression": {"files": 19, "passed": 137, "xfailed": 1, "r46_baseline": "23/23 unchanged"}
+}
