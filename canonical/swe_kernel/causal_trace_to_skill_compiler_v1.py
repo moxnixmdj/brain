@@ -73,6 +73,8 @@ _STOP_WORDS = frozenset({
 
 _WORKFLOW_MEM_CACHE: dict[str, list[dict[str, Any]]] = {}
 _WORKFLOW_INDEX_CACHE: dict[str, dict[str, list[dict[str, Any]]]] = {}
+_WORKFLOW_MEM_STAMP: dict[str, tuple[int, int]] = {}
+
 _AUTO_SEEDED_DBS: set[str] = set()
 
 
@@ -2102,8 +2104,26 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
     key = str(target_db)
     cached = _WORKFLOW_MEM_CACHE.get(key)
     if cached is not None:
-        conn.close()
-        return cached
+        # THE CACHE MUST NOT OUTLIVE THE FILE IT DESCRIBES.
+        #
+        # Measured 2026-11-09 and PROVEN, not inferred: replace a store file with a different
+        # one and this process keeps answering from the old one. Worse, every stat-based
+        # defence fails on this host: after `shutil.copyfile` the mtime_ns, ctime_ns, st_size
+        # and st_ino were ALL IDENTICAL, so a (mtime,size) or even (mtime,size,ctime,ino)
+        # stamp reports "same file" while the bytes differ. No stamp can be trusted here.
+        #
+        # So the rule is the simple one: a lookup re-reads. One small table, ~1 ms, versus a
+        # store that silently forgets everything taught to it after the first read in a
+        # process. The connection is closed first because it was opened before this decision
+        # and may hold a stale snapshot -- popping the cache and then querying THAT
+        # connection returned zero skills for a store that had one.
+        _WORKFLOW_MEM_CACHE.pop(key, None)
+        _WORKFLOW_INDEX_CACHE.pop(key, None)
+        try:
+            conn.close()
+        except Exception:  # noqa: BLE001 - a connection we are discarding
+            pass
+        target_db, conn = _connect_db(db_path)
     try:
         rows = conn.execute(
             """
@@ -2130,6 +2150,11 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             "artifact_sha256": r[8],
         })
     _WORKFLOW_MEM_CACHE[key] = out
+    try:
+        _st = target_db.stat()
+        _WORKFLOW_MEM_STAMP[key] = (_st.st_mtime_ns, _st.st_size)
+    except OSError:
+        _WORKFLOW_MEM_STAMP.pop(key, None)
     # Build O(1) rarest-anchor-token inverted index so lookup stays sub-millisecond at 10,000+ skills
     doc_freq: dict[str, int] = {}
     for sk in out:
@@ -2229,8 +2254,10 @@ def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | No
     """
     target_db = db_path or _default_workflow_db()
     key = str(target_db)
-    if key not in _WORKFLOW_INDEX_CACHE:
-        _load_cached_skills(db_path)
+    # Always load. `_load_cached_skills` is where freshness lives, and this function used to
+    # skip it whenever an index existed -- so a store replaced on disk was served from a
+    # stale index and the candidate list came back empty for a skill that was right there.
+    _load_cached_skills(db_path)
     inv = _WORKFLOW_INDEX_CACHE.get(key) or {}
     candidates: list[dict[str, Any]] = list(inv.get("__ALL_EMPTY__") or [])
     seen_ids = {s["skill_id"] for s in candidates}

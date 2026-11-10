@@ -47,6 +47,7 @@ true, and this module repeats it rather than hiding it.
 from __future__ import annotations
 
 import shlex
+import shutil
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_ADMITTED_CONFINEMENT_EXECUTION_V1"
@@ -91,6 +92,18 @@ def admission_verdict(command: str | Sequence[str]) -> dict[str, Any]:
         return {"admitted": False, "reason": "PROGRAM_WRITES_BY_DESIGN:" + prog}
     if prog not in READ_ONLY_PROGRAMS:
         return {"admitted": False, "reason": "PROGRAM_NOT_IN_READ_ONLY_SET:" + prog}
+    # THE TABLE PROMISES VERBS THE MACHINE MAY NOT HAVE.
+    #
+    # Measured 2026-11-09: of 37 real verbs in READ_ONLY_PROGRAMS, 33 are installed and 4
+    # (column, hexdump, look, xxd) are NOT. `admission_verdict(["xxd","d.txt"])` returned
+    # admitted=True and the exec then raised FileNotFoundError out of the carrier. An
+    # admission table that admits a program the host cannot run is a promise the system
+    # cannot keep, and a learned skill built on it can never execute.
+    #
+    # Absence is reported as a NAMED REFUSAL rather than discovered as an exception, so a
+    # caller gets a reason it can triage instead of a traceback it has to guess at.
+    if shutil.which(prog) is None:
+        return {"admitted": False, "reason": "PROGRAM_NOT_INSTALLED:" + prog}
     for flag in argv[1:]:
         if flag in _WRITE_FLAGS.get(prog, ()):
             return {"admitted": False, "reason": "WRITE_FLAG_STATED:" + prog + " " + flag}

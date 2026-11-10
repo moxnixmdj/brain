@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 309,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6732,
+  "research_index_records": 6733,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7574e418f28d997b2d9a1043986e2b28da72e82b69f368c07e5a235e3f68089e"
+  "value": "a29558911b25ad1d81d5eb2717f7d0817055b32c807586d2998c6372e779fbe3"
  },
  "engines": [
   {
@@ -72234,6 +72234,26 @@
     "v1": 1,
     "v2": 1,
     "witness": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/BORN_GENERAL_NOT_RESCUED_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/BORN_GENERAL_NOT_RESCUED_20261109_V1.json",
+   "schema": "brain.governance.BORN_GENERAL_NOT_RESCUED_20261109_V1",
+   "sha256": "47036add7b0b484ce599fc7fd777ed671c8adadc909ba9038e16931f191a592d",
+   "status": "COMPILE_TIME_GENERALISATION_LANDED__NO_REGRESSIONS",
+   "terms": {
+    "20261109": 1,
+    "born": 1,
+    "compile_time_generalisation_landed__no_regressions": 1,
+    "general": 1,
+    "not": 1,
+    "rescued": 1,
+    "v1": 1
    }
   },
   {
@@ -230969,7 +230989,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/admitted_confinement_execution_v1.py",
-   "sha256": "992feaf0e5fdd799ca92afdc8c0e361c822ca7c0b48bfc76c64bbd7a59b64bdb",
+   "sha256": "0a699b3f108a682b69ec7f05982318f5963afc30d87af5471c164fbf45f376c7",
    "summary": "The admitted confinement carrier — turns a boundary refusal into confined execution.",
    "symbol_count": 5,
    "symbols": [
