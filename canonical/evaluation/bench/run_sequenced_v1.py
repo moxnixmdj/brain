@@ -15,6 +15,7 @@ Design, and why each part is honest:
 The only difference from v3 is the gate and the retry. Everything else is held fixed.
 """
 import json, sys, time, pathlib
+SUFFIX = sys.argv[1] if len(sys.argv) > 1 else "v1"
 sys.path.insert(0, "/home/user/brain")
 from canonical.runtime import bench_miniwob_v1 as B, address_v1 as A, bench_parse_v1 as PP
 from canonical.runtime import act_loop_v1 as L
@@ -142,7 +143,7 @@ for i, t in enumerate(tasks, 1):
 ch.close()
 
 win = [x for x in rows if x["done"] and isinstance(x["reward"],(int,float)) and x["reward"] > 0]
-out = pathlib.Path("/home/user/brain/canonical/evaluation/bench/result_sequenced_v1.json")
+out = pathlib.Path(f"/home/user/brain/canonical/evaluation/bench/result_sequenced_{SUFFIX}.json")
 out.write_text(json.dumps({"n":len(rows),"success":len(win),"seconds":round(time.time()-t0,1),
                            "success_rate":round(len(win)/len(rows)*100,1),"tasks":rows}, indent=1))
 print(f"\nSEQUENCED+GATED: {len(win)}/130 = {len(win)/len(rows)*100:.1f}%  ({time.time()-t0:.0f}s)")
