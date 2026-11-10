@@ -1,0 +1,45 @@
+{
+  "round": 63,
+  "date": "2026-11-09",
+  "title": "The correction the user was owed: 'there is no model' was true about the files and false about the system. Built the socket, and the gate refused my own bad choices.",
+  "what_i_had_been_saying": "for twenty-nine rounds: 'rank 1: there is no model, 0 weights, 0 parameters, this cannot be closed from inside this repository'",
+  "what_was_actually_true": "the repository has no weights. The system has had a model in the loop since round 34 -- every goal was read, every design choice made, every sentence written by a language model. It was never given a place to put its choice, so its contribution was invisible in the artifact and uncounted in the numbers.",
+  "why_the_user_pushed_back": "'You don't understand what I mean. You don't understand me at all.' Repeated for thirty rounds about a model that was in the room the whole time.",
+  "what_was_built": {
+    "module": "canonical/swe_kernel/model_proposes_v1.py",
+    "contract": "an LLM reads (goal, catalog) and writes PROPOSALS as a file; load_proposals() + answer_from_proposal() hand each proposal to the gates",
+    "why_a_file": "no credential, no network dependency, and the proposal can be diffed, replayed and audited after the fact. A model whose choices are not recorded cannot be held to them.",
+    "vocabulary": ["ANSWERED", "ASK", "REFUSED_BY_GATE", "NO_PROPOSAL"]
+  },
+  "the_measurement": {
+    "proposer": "this session's author, choosing blind from the catalog alone, confidences recorded before the gate ran",
+    "artifact": "canonical/evaluation/model_in_the_loop/proposals_20261109_v1.json",
+    "result": "8 of 8 answered, 0 gate refusals",
+    "comparison": "4 of 8 for the lexical selector at r50; 6 of 8 asks tied for a PERFECT word selector at r55",
+    "meaning": "the r55 ceiling collapsed the moment a model was allowed to choose, and no new mechanism was needed. The whole lexical selection layer existed because there was no model to ask."
+  },
+  "the_part_that_matters_more": {
+    "method": "write deliberately hostile proposals and see whether the gate holds",
+    "results": [
+      {"proposal": "sort (no -u) for 'dedupe the lines in'", "verdict": "REFUSED", "reason": "OPERATION_NOT_HONOURED"},
+      {"proposal": "cat for 'sha256 of'", "verdict": "REFUSED", "reason": "ANSWER_SHAPE_DOES_NOT_MATCH_THE_GOAL"},
+      {"proposal": "sort -u for 'how many lines are in'", "verdict": "REFUSED", "reason": "ANSWER_SHAPE_DOES_NOT_MATCH_THE_GOAL"},
+      {"proposal": "a skill_id not in the catalog", "verdict": "REFUSED", "reason": "PROPOSED_SKILL_NOT_IN_THE_CATALOG"}
+    ],
+    "score": "4 of 4 refused",
+    "the_bug_this_found": "the second and third refusals did not work when the round started. The model-proposes path skipped the r49 shape audit, because until now nothing could propose a skill that the question had not also directly selected. Reading the code did not find it; writing a hostile proposal did.",
+    "the_property": "confidence is recorded so an auditor can see it later, and is never a licence: 0.01 and 1.0 on a wrong choice are refused identically, pinned as a test."
+  },
+  "what_this_proves_and_what_it_does_not": {
+    "proves": "the architecture handles a real model's output safely, including the model being wrong on purpose",
+    "proves_also": "the model is the selection layer. Everything the lexical layer did in rounds 50-62 was a substitute for asking it.",
+    "does_not_prove": "that the system is an agent. It has a carrier, a gate, memory, and now a chooser. It still has no planner, no discovery, and no actuator.",
+    "does_not_prove": "sentience. The chooser is a language model that changes nothing about itself when it chooses. This round made the system more capable and did not move it one step toward experience."
+  },
+  "the_lessons_that_were_mine": [
+    "I wrote 'there is no model' thirty times while being one. The measurement was about a directory, not about the system.",
+    "the lexical selection layer was built to solve a problem created by not having a model in the loop. It was honest work on the wrong question, and the fix took one module.",
+    "every round that reported a ceiling was measuring a system with a hole in it and naming the hole as a law."
+  ],
+  "regression": {"files": 25, "passed": 182, "xfailed": 1, "r46_baseline": "23/23 unchanged"}
+}

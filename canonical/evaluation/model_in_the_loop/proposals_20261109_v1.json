@@ -1,0 +1,23 @@
+{
+  "schema": "MODEL_PROPOSALS_V1",
+  "model": "the agent writing this session",
+  "note": "Written blind: the author saw the catalog (8 skills, operations and taught_as) and the ask, and nothing else. Confidence is genuine and recorded before the gate ran.",
+  "proposals": [
+    {"ask": "give me the distinct lines of", "skill_id": "workflow.8ca1a6b92e32fb6f", "operation_guess": "sort -u",
+     "confidence": 0.95, "because": "distinct == remove duplicates == sort -u"},
+    {"ask": "dedupe the lines in", "skill_id": "workflow.8ca1a6b92e32fb6f", "operation_guess": "sort -u",
+     "confidence": 0.92, "because": "dedupe is the common word for remove duplicates; plain sort keeps them"},
+    {"ask": "how many lines are in", "skill_id": "workflow.80c610296128c5e9", "operation_guess": "wc -l",
+     "confidence": 0.97, "because": "count the lines"},
+    {"ask": "tally the rows of", "skill_id": "workflow.80c610296128c5e9", "operation_guess": "wc -l",
+     "confidence": 0.80, "because": "tally = count; rows = lines in a text file. Slightly lower: 'rows' could imply a delimited table"},
+    {"ask": "sha256 of", "skill_id": "workflow.cdf25bf76fcab41d", "operation_guess": "sha256sum",
+     "confidence": 0.99, "because": "names the command"},
+    {"ask": "show me the content of", "skill_id": "workflow.4ff6fc3c74495713", "operation_guess": "cat",
+     "confidence": 0.95, "because": "content of a file = print it"},
+    {"ask": "flip each line of", "skill_id": "workflow.7fc5428e65f899e3", "operation_guess": "rev",
+     "confidence": 0.85, "because": "each line, so the reversal is per-line: rev. tac would reverse the ORDER of lines, which would be 'the lines' not 'each line'"},
+    {"ask": "backwards", "skill_id": "workflow.4316241c88038ca7", "operation_guess": "tac",
+     "confidence": 0.60, "because": "a file read backwards most naturally means last line first: tac. Genuinely ambiguous with rev and I am not confident"}
+  ]
+}
