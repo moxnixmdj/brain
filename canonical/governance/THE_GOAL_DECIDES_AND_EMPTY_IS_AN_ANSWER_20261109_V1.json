@@ -1,0 +1,65 @@
+{
+  "claim_id": "THE_GOAL_DECIDES_AND_EMPTY_IS_AN_ANSWER_20261109_V1",
+  "round": 46,
+  "date": "2026-11-09",
+  "type": "CAPABILITY BUILT + ONE MORE SELF-INFLICTED DEFECT",
+  "title": "23 of 23 read verbs now return the real command's output on a file they never saw. Two rounds ago it was 1 of 23. Both causes were mine.",
+  "the_headline_number": {
+    "measured": "teach all 23 verbs with postcondition=None (the GOAL decides the type), ask on a file with different contents, compare to the real command's output",
+    "progression": {
+      "before r45": "1/23 correct (only 'unique lines', by luck of shape)",
+      "after r45 typed answers": "20/23",
+      "after r46 goal-driven + empty-as-answer": "23/23"
+    },
+    "what_changed": "nothing about the learner. The learner never failed. The system was answering a question nobody asked, and calling a legitimate empty result a crash."
+  },
+  "defect_one_the_teacher_chose_the_type": {
+    "finding": "Every skill in the track was taught with postcondition={'kind':'stdout_line_count'}, so all 23 answered 'how many lines did the program print'.",
+    "note": "this was MY harness choice in r41, not a property of the engine. The engine accepted any contract; I passed the same one 23 times.",
+    "fix": "postcondition is now optional. postcondition=None calls infer_contract_from_goal(goal): 'how many'/'count' -> integer, 'sha256'/'md5'/'checksum' -> first token, listing phrasings -> lines, otherwise lines. Simple and literal by design; named as a heuristic, not comprehension."
+  },
+  "defect_two_no_match_was_a_crash": {
+    "finding": "`grep PATTERN f` exits 1 when nothing matches. The carrier treated ANY non-zero exit as a failed step, so an empty answer became FAIL_CLOSED and a grep skill could not even be taught on a file with no matches.",
+    "fix": "exit_one_means_empty(program, code): only for grep/egrep/fgrep/uniq/diff/cmp, only exit code 1. The step is still ok=False and is reported as EMPTY_RESULT -- explicitly NOT success, so an empty answer and a breakage stay distinguishable in the receipt.",
+    "verified_both_directions": {
+      "grep no match": "empty_result=True",
+      "wc on a missing file": "empty_result=False",
+      "cat on a missing file": "empty_result=False",
+      "grep exit 2": "empty_result=False"
+    },
+    "external_confirmation": "This is the field's problem too, on this exact date: a NousResearch/hermes-agent issue opened 2026-11-09 reports that grep/diff exit 1 classified as informational are still reported as failures to post-tool-call observers. A second 2026 thread documents null collapsing 'no results' and 'tool didn't run' into one indistinguishable signal. The distinction I added is the one the ecosystem is still getting wrong."
+  },
+  "the_sharper_warning_from_that_same_reading": "The other 2026 thread is about agents that APPEAR to succeed -- a tool returned null, the agent read it as 'no results found', and confidently reported that a whole field of research does not exist. My fix makes empty answers first-class, which makes that failure MORE reachable, not less. So the next requirement is not another verb: it is that a typed answer is never allowed to stand as a factual claim without a source.",
+  "what_is_real_vs_not": {
+    "REAL": [
+      "23/23 read verbs return the real command output on unseen files with different contents (measured r46).",
+      "The goal now determines the answer type: hash, integer, lines, text.",
+      "A legitimate empty result is a first-class answer ([]), distinct from a breakage, with the distinction surviving into the receipt.",
+      "Safety unchanged and re-verified: writers refused, shell refused, pipe smuggling refused, live tree untouched.",
+      "Everything from r41-r45 still stands: permanence 23/23, composition 3/4, environment shift 23/23 in three of five, typed answers."
+    ],
+    "NOT_REAL": [
+      "That this is general learning. It is 23 single-step read verbs on a shell. The learner still maps one anchored sentence to one argv.",
+      "That the reliability arithmetic moved: 318-step tasks at 99% per step remain 4.09%; Opus 5.5 needs 99.774% per step for 48.7%.",
+      "That a path containing a space works (r45, still unfixed).",
+      "That anything touches a public benchmark: still ZERO public-benchmark numbers.",
+      "That 'shape is not truth' is solved. A well-typed 64-char hash is still just a string."
+    ]
+  },
+  "the_sentience_claim": "Unchanged, and now easier to state precisely. Twenty-three verbs returning their own program's output is a correct lookup table -- better than what I had two rounds ago and still a table. Nothing here has a model of itself, a goal of its own, a preference, or a representation of the environment beyond a bound parameter. Every improvement this project has made is a software-engineering improvement to a table.",
+  "the_smartest_things_to_do_next": {
+    "1": "Never let a typed answer stand as a factual claim without a source. 23/23 correct on the shell is exactly the condition under which an empty answer starts to look like a finding. Attach the argv, the file, and the exit semantics to every answer.",
+    "2": "Propagate empty_result through the pipe layer as well as the single-command layer (done here for stage N, but a mid-pipe no-match is still a hard stop).",
+    "3": "Fix the space-in-path two-parameter bug (r45) before it is baked into more skills.",
+    "4": "Still no write access. 23/23 reads is the first time the read path is trustworthy; writes should not arrive until the empty-vs-failure distinction has been exercised outside a test."
+  },
+  "artifacts": {
+    "tests_new": "canonical/tests/test_the_goal_decides_the_answer_type_v1.py (16)",
+    "changed": [
+      "causal_trace_to_skill_compiler_v1.py -- infer_contract_from_goal, optional postcondition, empty_result accepted as a completed step",
+      "admitted_confinement_execution_v1.py -- exit_one_means_empty, EMPTY_RESULT status in both single-command and pipe paths"
+    ],
+    "regression_sweep": "85 passed across 10 files",
+    "r41_track": "unchanged 23/33 (it still passes its own postcondition explicitly)"
+  }
+}

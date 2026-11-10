@@ -156,11 +156,19 @@ def execute_confined(
     untouched = out.get("live_workspace_untouched") is True
     exit_code = out.get("exit")
     ok = bool(out.get("ok")) and confined and untouched and exit_code == 0
+    # See exit_one_means_empty: `grep P f` exiting 1 means NOTHING MATCHED, which is an
+    # answer, not a breakage. Reported as EMPTY_RESULT -- explicitly not as success, so an
+    # empty answer and a crash remain distinguishable to every caller downstream.
+    empty_result = bool(not ok and confined and untouched
+                        and exit_one_means_empty(verdict["program"], exit_code))
 
     return {
         "schema": SCHEMA,
         "pass": ok,
-        "status": STATUS if ok else "FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT",
+        "empty_result": empty_result,
+        "status": (STATUS if ok else
+                   ("EMPTY_RESULT__NO_MATCH" if empty_result
+                    else "FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT")),
         "argv": verdict["argv"],
         "program": verdict["program"],
         "confined": confined,
@@ -331,9 +339,14 @@ def execute_pipe_confined(
     untouched = out.get("live_workspace_untouched") is True
     exit_code = out.get("exit")
     ok = bool(out.get("ok")) and confined and untouched and exit_code == 0
+    empty_result = False
+    if not ok and confined and untouched and exit_one_means_empty(verdict["stages"][-1][0], exit_code):
+        empty_result = True
     return {
-        "schema": SCHEMA, "pass": ok,
-        "status": STATUS if ok else "FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT",
+        "schema": SCHEMA, "pass": ok, "empty_result": empty_result,
+        "status": (STATUS if ok else
+                   ("EMPTY_RESULT__NO_MATCH" if empty_result
+                    else "FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT")),
         "argv": verdict["command"], "stages": verdict["stages"],
         "program": "PIPE", "confined": confined, "live_workspace_untouched": untouched,
         "carrier_qualified": bool(out.get("carrier_qualified")),
@@ -345,3 +358,29 @@ def execute_pipe_confined(
                     "shell string is ever interpreted: the command is built here with quoting, "
                     "and any argument carrying | & ; > < ` $ ( ) {{ }} is refused."),
     }
+
+
+# --------------------------------------------------------------------------------------
+# EXIT-1 IS SOMETIMES THE ANSWER (r46, 2026-11-09)
+#
+# A pipeline of admitted verbs fails if ANY stage fails. That is right for a broken file
+# (`wc` exit 2 = no such file) and wrong for the commonest read-only idiom there is:
+#   grep PATTERN f   -> exit 1 means NO LINES MATCHED. The correct answer is "none".
+# `uniq -u`, `diff`, `cmp` and `egrep`/`fgrep` behave the same way.
+#
+# Measured 2026-11-09: teaching "lines containing zzz" failed qualification on a file with
+# no matches, and recall returned None, because the carrier treated the empty answer as a
+# broken command.
+#
+# The rule here is deliberately narrow:
+#   * only programs whose exit 1 is DOCUMENTED as "no match / not different"
+#   * only exit code 1 -- 2 and above keep failing
+#   * the step is still marked `ok=False`; it is reported as EMPTY_RESULT, not success.
+#     An empty answer and a crash must stay distinguishable in the receipt.
+# --------------------------------------------------------------------------------------
+_NO_MATCH_EXIT_ONE = frozenset({"grep", "egrep", "fgrep", "uniq", "diff", "cmp"})
+
+
+def exit_one_means_empty(program: str, exit_code: int | None) -> bool:
+    """True when this program's exit 1 means 'nothing matched', not 'it broke'."""
+    return int(exit_code or 0) == 1 and str(program or "").rsplit("/", 1)[-1] in _NO_MATCH_EXIT_ONE

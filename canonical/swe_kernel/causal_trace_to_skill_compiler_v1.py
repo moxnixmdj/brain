@@ -1020,8 +1020,10 @@ def execute_compiled_steps(
                 _out = {"pass": False, "status": "FAIL_CLOSED__PROGRAM_NOT_INSTALLED",
                         "exit": None, "confined": None, "live_workspace_untouched": None}
             _ok = _out.get("pass") is True
+            _empty = bool(_out.get("empty_result"))
             step_receipts.append({
-                "step": idx, "layer": layer, "ok": _ok,
+                "step": idx, "layer": layer, "ok": _ok or _empty,
+                "empty_result": _empty,
                 "argv": _argv, "argv_asked": _raw_argv, "stdout": _out.get("stdout"),
                 "exit": _out.get("exit"),
                 "confined": _out.get("confined"),
@@ -1029,7 +1031,7 @@ def execute_compiled_steps(
                 "status": _out.get("status"),
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             })
-            if not _ok:
+            if not _ok and not _empty:
                 return {"ok": False, "status": str(_out.get("status") or boundary.STATUS),
                         "failure_class": "CARRIED_CLI_STEP_FAILED",
                         "reason": str(_out.get("status") or ""), "failed_step": idx,
@@ -1957,7 +1959,7 @@ def compile_and_qualify_skill(
     *,
     goal: str,
     trace: Mapping[str, Any] | Sequence[Mapping[str, Any]],
-    postcondition: Mapping[str, Any],
+    postcondition: Mapping[str, Any] | None = None,
     heldout_goal: str | None = None,
     heldout_cwd: str | pathlib.Path | None = None,
     heldout_setup: Callable[[pathlib.Path], None] | None = None,
@@ -1968,7 +1970,14 @@ def compile_and_qualify_skill(
     source_channel: str = "k2_or_sandbox_acquisition",
     db_path: pathlib.Path | None = None,
 ) -> dict[str, Any]:
-    """Compile one acquisition trace, qualify on untouched held-out + sabotage control, and persist."""
+    """Compile one acquisition trace, qualify on untouched held-out + sabotage control, and persist.
+
+    `postcondition=None` means: let the GOAL decide the answer type (infer_contract_from_goal).
+    That is the difference between a skill that answers what was asked and a skill that only
+    reports how many lines a program printed.
+    """
+    if postcondition is None:
+        postcondition = infer_contract_from_goal(goal)
     from canonical.runtime.memory_policy_v1 import can_write_memory
 
     if not can_write_memory():
@@ -2599,6 +2608,35 @@ def _heldout_pre_state(postcondition: Mapping[str, Any], steps, *,
             except Exception:  # noqa: BLE001 - unreadable is unobservable, not a pass
                 receipts = []
     return {"step_receipts": receipts, "pre_state": True}
+
+
+def infer_contract_from_goal(goal: str) -> dict[str, Any]:
+    """Choose the ANSWER TYPE from what the goal ASKS, not from what the teacher picked.
+
+    Measured r44/r45: every skill answered 'how many lines did the program print' because
+    the caller chose stdout_line_count for all 23 verbs. That made 'sha256 of <f>' answer
+    1 and 'contents of <f>' answer 7. The bottleneck was never the learner; it was that
+    nobody asked the goal what it wanted.
+
+    Deliberately simple and literal -- a wrong guess presented confidently is worse than an
+    honest default. This is a heuristic over English, not comprehension, and it is named as
+    such.
+    """
+    g = " ".join(str(goal or "").lower().split())
+    if not g:
+        return {"kind": "stdout_text"}
+    counting = ("how many", "count ", "count the", "number of", "how much of")
+    digest = ("sha256", "sha1", "md5", "checksum", "cksum", "hash of", "digest of")
+    listing = ("first two lines", "last two lines", "lines containing", "lines matching",
+               "unique lines", "reverse each line", "reverse the order", "collapse repeats",
+               "number the lines", "first column")
+    if any(c in g for c in counting):
+        return {"kind": "stdout_integer_value"}
+    if any(d in g for d in digest):
+        return {"kind": "stdout_first_token"}
+    if any(l in g for l in listing):
+        return {"kind": "stdout_lines"}
+    return {"kind": "stdout_lines"}
 
 
 def _contract_answer(postcondition: Mapping[str, Any],
