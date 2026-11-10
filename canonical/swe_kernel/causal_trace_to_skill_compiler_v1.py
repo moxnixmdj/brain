@@ -76,6 +76,8 @@ _WORKFLOW_INDEX_CACHE: dict[str, dict[str, list[dict[str, Any]]]] = {}
 _AUTO_SEEDED_DBS: set[str] = set()
 
 
+_INTENT_TOKEN = "__intent__"
+
 def _repo_root() -> pathlib.Path:
     return pathlib.Path(__file__).resolve().parents[2]
 
@@ -503,6 +505,48 @@ def _hole_pattern(hole: str) -> str:
     return r"(.+?)"
 
 
+_INTENT_PROBES = ("unique", "distinct", "different", "duplicate", "repeated",
+                  "repeating", "deduplicated", "count", "total", "number")
+
+
+def _intent_bearing_words(goal: str) -> set[str]:
+    """Words whose EXACT IDENTITY does not change the goal's intent.
+
+    Round 36 fixed recall so an already-stored specialist could survive a synonym. That
+    left the real defect in place: `anti_unify_workflow` freezes the literal adjective into
+    the skeleton AND the regex, so every skill compiled from then on is BORN a specialist
+    and has to be rescued at recall time. Measured 2026-11-09 -- the field has the same
+    answer: PolySkill (ICLR 2026) lifts cross-site reuse from <31% to 73% by separating a
+    skill's abstract GOAL from its concrete IMPLEMENTATION, and Memory Transfer Learning
+    (2026) finds high-level insights transfer while low-level traces induce NEGATIVE
+    transfer. Generalising after the fact is the wrong end of the pipeline.
+
+    A word is intent-bearing when swapping it for an unrelated probe leaves `query_kind`
+    reporting the SAME intent. "unique" is intent-bearing for `uniquelines` (so is
+    "distinct"); "lines" is not, because swapping it changes what is being counted. Such a
+    word carries no binding information -- it names the OPERATION, not the object -- so it
+    must not be a skeleton token a paraphrase has to reproduce.
+    """
+    intent = _intent_of(goal)
+    if intent is None:
+        return set()
+    out: set[str] = set()
+    for word in set(re.findall(r"[A-Za-z][A-Za-z-]+", goal)):
+        low = word.lower()
+        if low in _STOP_WORDS:
+            continue
+        for probe in _INTENT_PROBES:
+            if probe == low:
+                continue
+            alternative = re.sub(rf"\b{re.escape(word)}\b", probe, goal, count=1)
+            if alternative == goal:
+                continue
+            if _intent_of(alternative) == intent:
+                out.add(low)
+                break
+    return out
+
+
 def anti_unify_workflow(
     goal: str,
     elevated_steps: Sequence[Mapping[str, Any]],
@@ -617,15 +661,40 @@ def anti_unify_workflow(
     abstract_steps = _substitute_in_obj(list(elevated_steps), val_to_hole)
     abstract_post = _substitute_in_obj(dict(postcondition), val_to_hole)
 
-    skel_words = sorted({
+    skel_words = {
         w for w in re.findall(r"[a-z]{2,}", re.sub(r"\?[a-z]+\d+", " ", goal_skeleton.lower()))
         if w not in _STOP_WORDS
-    })
+    }
+    # A SKILL MUST NOT BE BORN A SPECIALIST.
+    #
+    # The intent-bearing word names the OPERATION and carries no binding; requiring a
+    # paraphrase to reproduce it verbatim is what made "distinct" miss a skill taught on
+    # "unique". Dropping it here is the compile-time form of round 36's recall-time fix,
+    # so a newly taught skill is general in its own record rather than rescued later.
+    # The word stays in `goal_skeleton` (it is the readable name of the skill) and in
+    # `goal_regex` (recall widens exactly that one token); it is no longer a hard
+    # precondition on the caller's wording.
+    _drop = _intent_bearing_words(goal_clean)
+    skel_words = sorted(w for w in skel_words if w not in _drop)
+    # Removing the intent-bearing word can leave NO anchor at all (`how many unique lines
+    # in F` -> []), and an empty skeleton matches every skill, which is worse than a
+    # specialist: it is a false pass waiting to happen. The intent noun replaces the word
+    # it came from, so the record still carries exactly one hard requirement -- the right
+    # one. Recall admits a skill either by skeleton coverage or by `_same_intent`, so this
+    # stays reachable while refusing a different question.
+    _goal_intent = _intent_of(goal_clean)
+    if _goal_intent is not None:
+        skel_words = [w for w in skel_words if w != _INTENT_TOKEN]
+        skel_words = sorted(set(skel_words) | {_INTENT_TOKEN})
+        _intent_skeleton = True
+    else:
+        _intent_skeleton = False
 
     return {
         "goal_skeleton": goal_skeleton,
         "goal_regex": goal_regex,
         "skeleton_tokens": skel_words,
+        "skeleton_intent": _goal_intent if _intent_skeleton else None,
         "param_order": param_order,
         "abstract_steps": abstract_steps,
         "abstract_postcondition": abstract_post,
@@ -2079,6 +2148,11 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
     # skill was taught with this MEANING", using the tree's existing intent noun so both
     # sentences the tree already calls `uniquelines` can find each other.
     for sk in out:
+        # A skill may carry the intent TWICE -- as the reserved skeleton token (new skills)
+        # and as the abstract meaning of its readable skeleton (every skill, new or old).
+        # Index under the intent either way so a paraphrase can reach it whichever shape it
+        # was stored in. Old records are not migrated: reading both shapes is cheaper and
+        # cannot corrupt a record that already proved itself.
         sk_intent = _intent_of(str(sk.get("goal_skeleton") or "").replace("?", ""))
         if sk_intent is not None:
             inv.setdefault("__INTENT__" + sk_intent, []).append(sk)
@@ -2108,6 +2182,42 @@ def _same_intent(skill: Mapping[str, Any], goal: str) -> bool:
     return taught is not None and taught == asked
 
 
+def _skeleton_matches(skill: Mapping[str, Any], goal_words: set[str], goal: str | None) -> bool:
+    """Does this skill's skeleton apply to this goal?
+
+    Two ways to qualify, and only two:
+      * every literal skeleton word appears in the goal (the original rule), and
+      * the reserved `__intent__` token, which stands for the goal's abstract intent and is
+        satisfied when `query_kind` reports the SAME intent for the skill and the question.
+
+    The intent token exists because the word that carries the intent ("unique") is exactly
+    the word a paraphrase changes ("distinct"), so requiring it literally is what made the
+    store a specialist. A skill with NO literal words left is not a wildcard: it still has to
+    clear the intent token, which is a real requirement. That distinction matters -- an empty
+    skeleton that matched everything would be worse than a specialist, because it would
+    answer questions it was never taught.
+    """
+    tokens = set(skill.get("skeleton_tokens") or [])
+    if not tokens:
+        return True
+    literal = {t for t in tokens if t != _INTENT_TOKEN}
+    words_cover = not literal or (literal <= goal_words)
+    intent_cover = False
+    if goal is not None:
+        taught = _intent_of(str(skill.get("goal_skeleton") or "").replace("?", ""))
+        asked = _intent_of(goal)
+        intent_cover = taught is not None and taught == asked
+    if _INTENT_TOKEN in tokens:
+        # The reserved token is a HARD requirement: it is the whole skeleton anchor.
+        return intent_cover
+    # Legacy shape (no intent token): literal coverage was the only rule, and it is what
+    # made "distinct" miss. Accept the intent as an ALTERNATIVE signal so a skill stored
+    # before this change becomes paraphrase-tolerant without a migration -- but keep the
+    # literal rule, because a goal with no recognisable intent must still reach a skill
+    # taught with the exact wording.
+    return words_cover or (intent_cover and literal)
+
+
 def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | None = None,
                                *, goal: str | None = None) -> list[dict[str, Any]]:
     """Candidate skills for a goal, matched by WORD and by INTENT.
@@ -2126,7 +2236,7 @@ def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | No
     seen_ids = {s["skill_id"] for s in candidates}
     for w in goal_words:
         for sk in inv.get(w) or ():
-            if sk["skill_id"] not in seen_ids:
+            if sk["skill_id"] not in seen_ids and _skeleton_matches(sk, goal_words, goal):
                 seen_ids.add(sk["skill_id"])
                 candidates.append(sk)
     # THE INDEX IS KEYED ON SURFACE WORDS, SO A PARAPHRASE IS NEVER A CANDIDATE.
@@ -2290,14 +2400,11 @@ def recall_and_execute_workflow(
     previous_attempt = False
 
     for skill in _candidate_skills_for_words(goal_words, db_path, goal=goal):
-        skel_tokens = set(skill.get("skeleton_tokens") or [])
-        if skel_tokens and not (skel_tokens <= goal_words):
-            # SECOND COPY OF THE SAME GATE. The skeleton test appears here AND in the
-            # candidate builder; patching one left "distinct" returning None for an hour
-            # because the candidate arrived and this line dropped it. Both now admit an
-            # intent match, and `_same_intent` is the single definition of "same meaning".
-            if not _same_intent(skill, goal):
-                continue
+        # ONE definition of "does this skeleton apply", shared with the candidate builder.
+        # The rule used to exist twice; both were once patched separately and the skill that
+        # gate one admitted was dropped by gate two.
+        if not _skeleton_matches(skill, goal_words, goal):
+            continue
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None:
             continue
