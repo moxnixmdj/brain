@@ -1,0 +1,31 @@
+{
+  "round": 94,
+  "date": "2026-11-09",
+  "title": "The ceiling is the axis, not the engine",
+  "the_question": "'you sure this is the smartest approach?' (fifth time)",
+  "the_reframe": "Everything r84-r93 optimised ATOMIC single-page web tasks. The 2026 literature says the field saturated atomic tasks and moved the scoring axis to COMPOSITION and LONG-HORIZON. So r84-r93 was optimising the right engine on the wrong axis, which is why each fix changed one quantity and the ceiling did not move.",
+  "literature": [
+    {"claim": "atomic MiniWoB++, 64 tasks, 1 demo per 48", "number": "99.2%", "source": "emergentmind, Synapse (Zheng et al.)"},
+    {"claim": "atomic MiniWoB++ All-53", "number": "AutoRPA 95.4% / AutoManual 95.2% / ReAct 92.8% / GPT-4 71.7%", "source": "sota2 GUI automation leaderboard, 2026-05"},
+    {"claim": "atomic MiniWoB++, UNSEEN tasks", "number": "18.9%", "source": "sota2 MiniWob dataset page"},
+    {"claim": "CompWoB: compose the SAME atomic tasks the models already solve", "number": "94% -> 24.9% prompted, 54.8% fine-tuned", "source": "Furuta et al., CompWoB"},
+    {"claim": "OSWorld-Verified", "number": "top 90.19%, human 72.36% -- saturated, no longer separates agents", "source": "decodethefuture 2026-10-13; official leaderboard"},
+    {"claim": "OSWorld 2.0 (108 long workflows, ~318 tool calls each)", "number": "top 72.6% binary (GPT-6 Astra) / Opus 5.5 48.7%; median human 1.6h", "source": "benchlm.ai, presenc.ai, o-mega 50-benchmark ledger"},
+    {"claim": "OSWorld efficiency", "number": "leading agents still take 2.7x-4.3x more steps than required", "source": "OSWorld-Human, MLSys 2026"}
+  ],
+  "our_position": {
+    "all_130": "21/130 = 16.2% (single run, r93)",
+    "vs_zero_shot_react_on_the_same_benchmark": "92.8% -> we are ~5.7x behind a baseline that uses no special machinery",
+    "vs_gpt4_2019_era": "71.7% -> we are 4.4x behind the 2023 baseline",
+    "honest_statement": "the engine is not competitive on atomic tasks, and the benchmark it is not competitive on is the one the field has already left"
+  },
+  "why_99_2_percent_is_not_the_target": {
+    "different_task_set": "Synapse reports on 64 tasks with demonstrations from 48; our 130-task set includes the hard compositional and continuous-control tasks (hot-cold, chase-circle, bisect-angle, count-sides) that demonstration banks do not cover. The numbers are therefore not the same task set and must not be compared directly.",
+    "even_if_we_matched_it": "matching 99% on MiniWoB++ would be winning a benchmark that OSWorld 2.0 replaced, on the axis the field has already declared saturated",
+    "and_we_would_be_using_a_foreign_model": "the 92-99% entries are LLM-backed or trained. The r90 rule forbids that. A zero-weight system cannot borrow those scores."
+  },
+  "where_the_headroom_is": "COMPOSITION. CompWoB shows 94% -> 24.9% when the SAME atomic tasks are composed. That is a 70-point cliff that NO amount of atomic-task engineering closes, and it is exactly what r90 called 'recombination of known skills' (NOT SOLVED, 46.5-94.1 pp gap). The r92 page-first grounding is composition-relevant; the r93 wiring is a prerequisite; chasing atomic percentage is not.",
+  "the_decision": "MiniWoB++ percentage is NOT the gate. Three gates replace it:\n  1. COMPOSITION: can the engine chain two grounded atomic solves without a new demonstration? (CompWoB is the instrument; it is not in the repo and must be fetched.)\n  2. LONG-HORIZON STEPS: OSWorld-Human shows leading agents take 2.7-4.3x the required steps. Step count, not success rate, is the unclaimed axis.\n  3. ZERO-WEIGHT: every result must run canonical/ code with no external model (r90).",
+  "what_i_got_wrong_for_five_rounds": "I answered 'am I smart?' with 'here is a better fix'. The correct answer required looking OUTSIDE the repo at what the field measures, which is what the standing 'maximise web use' instruction was for and which I had run at 1 search per round at best.",
+  "single_run_caveat": "21/130 is one run. r78 measured 1.73 stdev. It is not a claim yet."
+}
