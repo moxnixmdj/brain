@@ -1,0 +1,28 @@
+{
+  "round": 88,
+  "date": "2026-11-09",
+  "title": "The router is honest, and it says the demonstration class is empty",
+  "new_module": "canonical/runtime/task_class_router_v1.py",
+  "two_errors_on_the_way": [
+    {"error": "addressability tested before literals", "effect": "REFUSE on all 130 tasks, including the 8 the executor wins", "law_applied": "a gate that refuses everything is not a decision, it is a stub wearing a verdict"},
+    {"error": "two orthogonal questions collapsed into one verdict", "effect": "'can a skill be compiled?' answered REFUSE and was read as 'refuse the task'", "fix": "separate SKILL_COMPILABLE/SKILL_NOT_COMPILABLE from ATTEMPT_EXECUTE/BINDER/PIXEL/DEMONSTRATE/REFUSE"}
+  ],
+  "the_measurement": {
+    "attempt_route_vs_outcome": {
+      "ATTEMPT_PIXEL": {"n": 123, "won": 8, "rate": "7%"},
+      "ATTEMPT_DEMONSTRATE": {"n": 7, "won": 0, "rate": "0%"}
+    },
+    "what_predicts_success": {
+      "has_literal": {"n": 37, "won": 8, "rate": "22%"},
+      "predicate_referent": {"n": 7, "won": 0, "rate": "0%"},
+      "no_literal_no_predicate": {"n": 86, "won": 0, "rate": "0%"}
+    },
+    "interpretation": "a literal in the goal is a near-perfect predictor of where this system can win. The two classes that need something OTHER than a literal are currently zero -- not because they are impossible, but because nothing here can name their target."
+  },
+  "what_the_empty_class_means_for_the_thesis": {
+    "claim": "learn once, permanently, then solve everything",
+    "status": "the mechanism is real and measured (4/4 unseen goals at 2-4 ms on an addressable effect; 5/7 stable on form binding), but the class it serves is exactly the class that ALREADY has a literal. In this suite the demonstration-needing class is 7 tasks and the system wins 0 of them.",
+    "the_honest_gap": "a demonstration gives you a REPLAY of what was shown. Turning it into a capability that generalises to a predicate ('the shortest one' -> any instance) requires the ABILITY TO IDENTIFY the property, which is semantics, not procedure. A demonstration cannot supply semantics. That is the boundary, and it is not an implementation detail."
+  },
+  "tests": {"new_file": "canonical/tests/test_the_router_decides_before_acting_v1.py", "new_passed": 5, "suite_across_twelve_files": 66}
+}
