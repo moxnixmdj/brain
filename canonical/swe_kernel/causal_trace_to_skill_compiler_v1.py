@@ -531,6 +531,24 @@ class _Unused:
     """kept so the original definition site below stays unchanged in the diff"""
 
 
+def _cookiejar_from(snapshot: Sequence[Mapping[str, Any]]) -> "http.cookiejar.CookieJar":
+    jar = http.cookiejar.CookieJar()
+    for c in snapshot:
+        try:
+            jar.set_cookie(http.cookiejar.Cookie(
+                0, str(c.get("name", "")), str(c.get("value", "")), None, False,
+                str(c.get("domain", "") or ""), True, True, str(c.get("path", "/") or "/"),
+                True, False, None, False, None, None, {}))
+        except Exception:
+            continue
+    return jar
+
+
+def json_safe(result: Mapping[str, Any]) -> dict[str, Any]:
+    """A result dict callers may store, log or hash. Removes live handles only."""
+    return {k: ("<live>" if k.startswith("_") else v) for k, v in result.items()}
+
+
 def _instantiate_obj(obj: Any, bindings: Mapping[str, str]) -> Any:
     if isinstance(obj, str):
         if obj in bindings and obj.startswith("?num"):
@@ -1798,7 +1816,22 @@ def execute_compiled_steps(
         else:
             return {"ok": False, "failed_step": idx, "reason": f"UNSUPPORTED_COMPILED_LAYER:{layer}", "step_receipts": step_receipts}
 
-    return {"ok": True, "step_receipts": step_receipts, "_http_opener": http_opener}
+    # The live opener must keep working for session-carrying verification, but a result dict
+    # that cannot be serialised is not a result. Return a JSON-safe cookie snapshot beside it
+    # and let the verifier rebuild an opener from that snapshot when it needs one.
+    try:
+        _ck = [{"name": c.name, "value": c.value, "domain": c.domain, "path": c.path}
+               for c in http_opener.handlers and [] or []]
+    except Exception:
+        _ck = []
+    try:
+        _jar = http_opener.__dict__.get("_cookies") or http_opener.__dict__.get("cookiejar")
+        _ck = [{"name": c.name, "value": c.value, "domain": getattr(c, "domain", ""),
+                "path": getattr(c, "path", "/")} for c in (_jar or [])]
+    except Exception:
+        pass
+    return {"ok": True, "step_receipts": step_receipts, "_http_opener": http_opener,
+            "cookies": _ck}
 
 
 def verify_postcondition(
@@ -1872,6 +1905,10 @@ def verify_postcondition(
     if kind == "http_get_contains":
         url = str(postcondition["url"])
         opener = (execution_result or {}).get("_http_opener")
+        if not hasattr(opener, "open") and (execution_result or {}).get("cookies"):
+            # rebuilt from the JSON-safe snapshot
+            opener = urllib.request.build_opener(
+                urllib.request.HTTPCookieProcessor(_cookiejar_from((execution_result or {})["cookies"])))
         try:
             if opener is not None:
                 with opener.open(url, timeout=10) as resp:
