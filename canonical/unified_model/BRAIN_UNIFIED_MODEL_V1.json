@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 309,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6730,
+  "research_index_records": 6732,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5c17b1313850ce0569ba25c1a302af1864b1c20f657487ba78fb6b27225e168b"
+  "value": "7574e418f28d997b2d9a1043986e2b28da72e82b69f368c07e5a235e3f68089e"
  },
  "engines": [
   {
@@ -93092,6 +93092,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/IT_LEARNS_A_SPECIALIST_NOT_A_CREATURE_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/IT_LEARNS_A_SPECIALIST_NOT_A_CREATURE_20261109_V1.json",
+   "schema": "brain.governance.IT_LEARNS_A_SPECIALIST_NOT_A_CREATURE_20261109_V1",
+   "sha256": "c985c7066a4a2912cf80ab6b50763fdafe44dfdb6825e68adc64bf2831c87c14",
+   "status": "COMPOUNDING_MEASURED_AND_FALSIFIED__ONE_TRANSFER_BUILT_AND_MEASURED",
+   "terms": {
+    "20261109": 1,
+    "compounding_measured_and_falsified__one_transfer_built_and_measured": 1,
+    "creature": 1,
+    "learns": 1,
+    "not": 1,
+    "specialist": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/governance/JIT_KNOWLEDGE_CAPABILITY_NONSMUGGLING_BOUNDARY_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -137058,6 +137078,25 @@
     "actually": 1,
     "here": 1,
     "sandbox_measurement_only__zero_terminal_credit": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/WHAT_SOLVED_AND_WHAT_DID_NOT_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/WHAT_SOLVED_AND_WHAT_DID_NOT_20261109_V1.json",
+   "schema": "brain.governance.WHAT_SOLVED_AND_WHAT_DID_NOT_20261109_V1",
+   "sha256": "270cdacabbdbe87986fc5b63b47a7db88510adf649c46cbe5afeaffd3f1cfc59",
+   "status": "MEASURED__ONE_CLAIM_CORRECTED__ONE_DEFECT_FOUND_AND_FIXED",
+   "terms": {
+    "20261109": 1,
+    "did": 1,
+    "measured__one_claim_corrected__one_defect_found_and_fixed": 1,
+    "not": 1,
+    "solved": 1,
     "v1": 1
    }
   },

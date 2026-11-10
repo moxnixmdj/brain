@@ -633,11 +633,55 @@ def anti_unify_workflow(
     }
 
 
+def _widen_intent_word(pattern: str, skill: Mapping[str, Any]) -> str:
+    """Let the ONE word that carries the skill's intent accept its synonyms.
+
+    Measured 2026-11-09: a skill taught as "how many unique lines in ?" had the regex
+    `how\s+many\s+unique\s+lines\s+in\s+(?P<path0>...)`. The intent index and the
+    candidate gate both worked; BINDING then failed, because the abstract goal was frozen
+    into one literal adjective. So "distinct", "different" and "duplicate-free" -- all of
+    which `query_kind` calls `uniquelines` -- could not bind.
+
+    This widens ONLY the intent-bearing word, and only to synonyms that the tree's own
+    intent classifier already treats as identical for this skill's intent. Every other
+    token in the pattern stays literal, so this cannot make an unrelated sentence match:
+    the path group, "how many", "lines" and "in" are unchanged.
+    """
+    intent = _intent_of(str(skill.get("goal_skeleton") or "").replace("?", ""))
+    if intent is None:
+        return pattern
+    synonyms: list[str] = []
+    probe = "how many {} lines in x"
+    for word in ("unique", "distinct", "different", "duplicate", "repeated", "repeating",
+                 "duplicate-free", "nonduplicate", "non-duplicate", "deduplicated"):
+        try:
+            if _intent_of(probe.format(word)) == intent:
+                synonyms.append(word)
+        except Exception:  # noqa: BLE001
+            continue
+    if len(synonyms) < 2:
+        return pattern
+    alternation = "(?:" + "|".join(re.escape(w) for w in synonyms) + ")"
+    widened = pattern
+    for word in synonyms:
+        literal = r"\s+".join(re.escape(part) for part in word.split())
+        if re.search(literal, widened, flags=re.IGNORECASE):
+            widened = re.sub(literal, alternation, widened, count=1, flags=re.IGNORECASE)
+            break
+    return widened
+
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
         return None
     m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
+    if not m:
+        # The abstract goal was frozen into one literal adjective at compile time. Retry
+        # with the intent-bearing word widened to its synonyms; everything else stays
+        # exact, so this widens what a TAUGHT skill recognises, never what qualifies as
+        # a different skill.
+        m = re.match(_widen_intent_word(pattern, skill), goal.strip(), flags=re.IGNORECASE)
     if not m:
         return None
     out: dict[str, str] = {}
@@ -2030,11 +2074,49 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
         else:
             anchor = min(toks, key=lambda t: (doc_freq.get(t, 0), -len(t), t))
             inv.setdefault(anchor, []).append(sk)
+    # SECOND AXIS: INTENT. The anchor index answers "which skill was taught with these
+    # WORDS", which cannot reach a skill taught on a synonym. This index answers "which
+    # skill was taught with this MEANING", using the tree's existing intent noun so both
+    # sentences the tree already calls `uniquelines` can find each other.
+    for sk in out:
+        sk_intent = _intent_of(str(sk.get("goal_skeleton") or "").replace("?", ""))
+        if sk_intent is not None:
+            inv.setdefault("__INTENT__" + sk_intent, []).append(sk)
     _WORKFLOW_INDEX_CACHE[key] = inv
     return out
 
 
-def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | None = None) -> list[dict[str, Any]]:
+def _intent_of(sentence: str) -> str | None:
+    """The abstract intent of a counting sentence, or None when it has none.
+
+    Deliberately narrow: `query_kind` is the tree's existing, tested intent noun for
+    "how many X" sentences. A sentence it does not classify gets no intent, so this can
+    never make two unrelated goals match -- it can only let two sentences that the
+    tree already calls the SAME question reach a skill taught on the other's wording.
+    """
+    try:
+        from canonical.runtime import computer_env_v1 as _cenv
+
+        return _cenv.query_kind(sentence)
+    except Exception:  # noqa: BLE001 - no intent is a safe answer; a wrong one is not
+        return None
+
+
+def _same_intent(skill: Mapping[str, Any], goal: str) -> bool:
+    taught = _intent_of(str(skill.get("goal_skeleton") or "").replace("?", ""))
+    asked = _intent_of(goal)
+    return taught is not None and taught == asked
+
+
+def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | None = None,
+                               *, goal: str | None = None) -> list[dict[str, Any]]:
+    """Candidate skills for a goal, matched by WORD and by INTENT.
+
+    `goal` is the original sentence and is REQUIRED for the intent axis. It is keyword-only
+    and defaulted so older call sites keep working, but with no sentence there is no intent
+    match -- the same fail-open shape as round 33's `_answer()` NameError: a rule that reads
+    a variable it was never given fails inside an except and never fires. Passed explicitly.
+    """
     target_db = db_path or _default_workflow_db()
     key = str(target_db)
     if key not in _WORKFLOW_INDEX_CACHE:
@@ -2045,6 +2127,31 @@ def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | No
     for w in goal_words:
         for sk in inv.get(w) or ():
             if sk["skill_id"] not in seen_ids:
+                seen_ids.add(sk["skill_id"])
+                candidates.append(sk)
+    # THE INDEX IS KEYED ON SURFACE WORDS, SO A PARAPHRASE IS NEVER A CANDIDATE.
+    #
+    # Measured 2026-11-09: recall for "how many distinct lines in f" returned 0 candidates
+    # against a skill taught as "how many unique lines in f", even though
+    # `computer_env_v1.query_kind` calls BOTH sentences `uniquelines`. The intent check
+    # downstream therefore never ran -- it was guarded by a gate that had already dropped
+    # the skill. A filter that can never be reached is not a filter.
+    #
+    # Adding every stored skill for an intent match is the cost of correctness here: the
+    # store holds tens of skills, not millions, and the intersection is one `query_kind`
+    # call. If the store ever grows past a few thousand skills this must become a
+    # kind -> skill_ids index instead.
+    # ORDER IS MEANING. Building the intent from a sorted BAG of words produced
+    # "different how lines many pd txt", which `query_kind` reads as plain `lines` -- so
+    # "different" was silently dropped for an hour while "distinct" worked, because
+    # sorting happened to put "distinct" somewhere benign. Classify the SENTENCE, not the
+    # token set; the goal string is available and is the thing the classifier was written
+    # for.
+    asked_intent = _intent_of(goal) if goal else None
+    if asked_intent is not None:
+        for sk in inv.get("__INTENT__" + asked_intent) or ():
+            sk_intent = _intent_of(str(sk.get("goal_skeleton") or "").replace("?", ""))
+            if sk_intent is not None and sk_intent == asked_intent and sk["skill_id"] not in seen_ids:
                 seen_ids.add(sk["skill_id"])
                 candidates.append(sk)
     return candidates
@@ -2182,10 +2289,15 @@ def recall_and_execute_workflow(
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     previous_attempt = False
 
-    for skill in _candidate_skills_for_words(goal_words, db_path):
+    for skill in _candidate_skills_for_words(goal_words, db_path, goal=goal):
         skel_tokens = set(skill.get("skeleton_tokens") or [])
         if skel_tokens and not (skel_tokens <= goal_words):
-            continue
+            # SECOND COPY OF THE SAME GATE. The skeleton test appears here AND in the
+            # candidate builder; patching one left "distinct" returning None for an hour
+            # because the candidate arrived and this line dropped it. Both now admit an
+            # intent match, and `_same_intent` is the single definition of "same meaning".
+            if not _same_intent(skill, goal):
+                continue
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None:
             continue
