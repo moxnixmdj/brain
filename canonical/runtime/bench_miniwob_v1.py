@@ -97,9 +97,22 @@ class ScoreChannel:
                        "clickCount": 1})
 
     def type_text(self, text):
-        """Printable characters only. MiniWob inputs are plain ASCII."""
+        """Printable characters only. MiniWob inputs are plain ASCII.
+
+        MEASURED FAILURE (r85). This sent `type: "char"` alone, which inserts a character
+        but fires no keyDown/keyUp and therefore no `input` event. A plain <input> that
+        polls .value still looked fine, so the defect stayed invisible -- but jQuery UI's
+        datepicker and any listener-bound field never saw the text. Typing into
+        `choose-date` left the box EMPTY while the coordinate was confirmed correct by
+        elementFromPoint. A real key press is down + char + up.
+        """
+        # keyDown with a `text` field INSERTS the character, and a following `char` inserts
+        # it AGAIN: "abc" arrived as "aabbcc" (measured r85). keyDown must carry no text;
+        # `char` carries it; keyUp closes the press.
         for ch in text:
+            self.call("Input.dispatchKeyEvent", {"type": "keyDown"})
             self.call("Input.dispatchKeyEvent", {"type": "char", "text": ch})
+            self.call("Input.dispatchKeyEvent", {"type": "keyUp"})
             time.sleep(0.012)
 
     def goal(self):

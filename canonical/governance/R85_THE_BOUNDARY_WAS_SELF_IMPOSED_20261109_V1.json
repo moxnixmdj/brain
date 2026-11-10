@@ -1,0 +1,32 @@
+{
+  "round": 85,
+  "date": "2026-11-09",
+  "title": "The addressability boundary was partly self-imposed",
+  "the_correction": {
+    "r84_said": "'129 of 130 MiniWob families expose no code-readable terminal state'",
+    "wrong_because": "MiniWob's own scorer reads WOB_DONE_GLOBAL and WOB_REWARD_GLOBAL through Runtime.evaluate. The terminal state was ALWAYS readable as code.",
+    "what_made_it_unreadable": "the r82 decision to forbid Runtime.evaluate in the vision channel. Right for ACT, wrong for VERIFY.",
+    "split": {"act": "pixels and input events only, unchanged", "verify": "typed read-only state questions with a data-only selector"}
+  },
+  "new_module": "canonical/runtime/state_read_v1.py",
+  "channel_safety": {
+    "allowed": ["Runtime.enable", "Runtime.evaluate", "Page.enable", "Page.captureScreenshot", "Emulation.setDeviceMetricsOverride"],
+    "forbidden": ["Input.*", "Page.navigate", "Runtime.callFunctionOn", "Debugger.*"],
+    "question_shapes": ["text_of", "count_of", "list_of", "value_of", "visible_of", "centre_of", "hit_at"],
+    "selector_guard": "a selector containing ; => ( ) { } = ` \\ eval function constructor is refused, so a read can never become an execution"
+  },
+  "two_input_defects_found_by_using_it": [
+    {"id": "no_key_down", "symptom": "typing into a listener-bound field left it EMPTY while elementFromPoint confirmed the click landed on the right node", "cause": "type_text sent only Input.dispatchKeyEvent{type:char}; no keyDown, so no input event"},
+    {"id": "double_insertion", "symptom": "\"abc\" arrived as \"aabbcc\" in a plain <input>", "cause": "keyDown carrying a `text` field inserts the character, and the following `char` inserts it again"}
+  ],
+  "planner_findings": {
+    "plan_status_across_130": {"NO_LITERAL_never_attempted": 92, "ALREADY_PRESENT": 17, "NO_ROUTE": 12, "SOLVED": 9},
+    "won_by_status": {"NO_LITERAL_never_attempted": 0, "ALREADY_PRESENT": 7, "NO_ROUTE": 0, "SOLVED": 1},
+    "the_planner_produced_a_plan_for_1_of_130_and_it_won": true,
+    "fixed": "plan_to_reveal returned NO_ROUTE on an EMPTY capability library -- a refusal dressed as a judgement. Now NOT_LOOKED.",
+    "self_correction": "an independent check of mine read NO_ROUTE from a perfectly good planner because I used the wrong capability dict shape (pre/add/del instead of requires/provides). The planner was not broken; my test was."
+  },
+  "suite": {"result": "9/130", "unchanged": true, "attempted": 38, "success_on_attempted": "9/38 = 23.7%", "honest_read": "the typing fix changed nothing measurable; the planner was never the bottleneck because it was almost never invoked"},
+  "the_real_limiting_factor": "The answer is not in the goal text and not on screen: it is behind exactly one disclosure. 30 reveal_target tasks yield one quoted literal; 7 are already visible; 12 get NO_ROUTE; the probe loop that would DISCOVER the disclosure is gated behind a first NO_ROUTE and is too shallow. The sequence is: search, then plan -- the loop does plan, then search.",
+  "tests": {"new_file": "canonical/tests/test_state_read_and_the_typing_fidelity_v1.py", "new_passed": 8, "suite_across_nine_files": 48}
+}

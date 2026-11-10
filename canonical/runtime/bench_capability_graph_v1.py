@@ -96,6 +96,14 @@ def plan_to_reveal(initial: frozenset[str], target: str, capabilities: list[dict
     want = f"name:{target.strip().lower()}"
     if want in initial:
         return {"status": "ALREADY_PRESENT", "plan": [], "total_cost": 0.0}
+    # MEASURED FAILURE (r85). `plan_to_reveal` was called with an EMPTY capability list and
+    # returned NO_ROUTE -- a refusal that looks principled and is really "I did not look".
+    # 12 of 130 tasks ended this way. An empty library cannot support a route, so the honest
+    # answer is not NO_ROUTE but NOT_LOOKED. Search first; refusing before searching is a
+    # default dressed as a judgement.
+    if not capabilities:
+        return {"status": "NOT_LOOKED", "plan": [], "total_cost": 0.0,
+                "why": "no capabilities observed yet; a route cannot exist before probing"}
     problem = {
         "initial_facts": sorted(initial),
         "target_effects": [want],
