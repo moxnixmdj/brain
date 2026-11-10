@@ -1,0 +1,27 @@
+{
+  "round": 92,
+  "date": "2026-11-09",
+  "title": "The right inversion, four bugs, and an honest stop",
+  "the_question_asked": "'you sure this is the smartest approach?'",
+  "the_answer": "no. The approach was wrong: I was writing REGEXES TO PARSE ENGLISH (verb lists, capitalisation rules, date grammar). That is 1990s NLP, and every failure was a failure of that idea, not of its implementation.",
+  "the_inversion": {
+    "principle": "the goal is UNDERSPECIFIED LANGUAGE; the page is FULLY SPECIFIED DATA. Do not parse the query -- search the index.",
+    "mechanism": "candidates = every string the page actually renders; target = the longest candidate the goal mentions; refusal on ties",
+    "why_it_is_better": "no verb list, no capitalisation rule, no date grammar, no demonstration, and every answer is a string the page renders, so it is clickable and checkable by construction",
+    "module": "canonical/runtime/page_first_grounding_v1.py"
+  },
+  "four_bugs_found_and_fixed_in_one_round": [
+    {"bug": "the goal is rendered onto the page", "symptom": "'Click on the numbers in ascending order.' matched as its own target", "fix": "exclude page strings that CONTAIN and are longer than the goal"},
+    {"bug": "the goal-exclusion filter removed the target", "symptom": "'Tab #1' on the page AND in the goal was deleted -> NOT_MENTIONED on a trivially solvable task", "fix": "exclude only the rendered goal, never a page string that appears in it"},
+    {"bug": "boilerplate deleted rather than demoted", "symptom": "ONE/TWO filtered out entirely", "fix": "rank, never delete"},
+    {"bug": "boilerplate ranked by length", "symptom": "target='Submit' on 4 of 6 tasks, because 'Submit' appears in almost every goal", "fix": "demote boilerplate below EVERY non-boilerplate match"},
+    {"bug": "the DOM query discarded every <option>", "symptom": "choose-list saw only ['Submit']", "fix": "NOT YET APPLIED"}
+  ],
+  "measured_status": {
+    "end_to_end_grounded_and_clicked": "2/6",
+    "what_is_real": "click-tab grounds correctly and wins (0.909); the inversion finds real targets",
+    "what_is_not": "the remaining failures are candidate-collection bugs, not failures of the inversion"
+  },
+  "why_i_am_stopping_here_rather_than_shipping": "eight changes across two rounds on an uncommitted measurement is how a harness becomes a tuning set. The next measurement must be on goals and pages the extractor was NOT designed against (r69), and the candidate collector must be fixed first.",
+  "the_honest_reading": "the inversion is the right idea and is not yet a working module. Saying 'the inversion works, 2/6' would repeat the r87 error of reporting a number from a broken instrument."
+}
