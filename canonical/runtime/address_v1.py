@@ -122,7 +122,7 @@ def boxes(address: Address, selector: str) -> list[dict]:
     return out
 
 
-def ax_nodes(address: Address) -> list[dict]:
+def ax_nodes(address: Address, keep_text: bool = False) -> list[dict]:
     """The accessibility tree, flattened to what addressing needs: role, name, geometry."""
     address.call("Accessibility.enable")
     tree = address.call("Accessibility.getFullAXTree").get("nodes", [])
@@ -133,7 +133,9 @@ def ax_nodes(address: Address) -> list[dict]:
         bid = n.get("backendDOMNodeId")
         if not role or bid is None:
             continue
-        if role in {"generic", "none", "InlineTextBox", "StaticText", "RootWebArea"}:
+        if role in {"generic", "none", "InlineTextBox", "RootWebArea"}:
+            continue
+        if role == "StaticText" and not keep_text:
             continue
         box = None
         try:
@@ -146,6 +148,13 @@ def ax_nodes(address: Address) -> list[dict]:
             box = None
         out.append({"role": str(role), "name": str(name or ""), "box": box})
     return out
+
+
+def read_text(address: Address) -> list[dict]:
+    """Visible text nodes with geometry. Needed the moment a goal says 'the 13th word' or
+    'the value of First name': the answer is written on the page, not in the structure."""
+    return [n for n in ax_nodes(address, keep_text=True)
+            if n["role"] in ("StaticText", "LabelText", "text") and n["name"].strip()]
 
 
 def find(address: Address, role: str | None = None, name: str | None = None) -> dict | None:

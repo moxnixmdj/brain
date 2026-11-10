@@ -1,0 +1,139 @@
+[
+ {
+  "task": "click-collapsible-2",
+  "name": "a",
+  "addressable_before_reveal": false,
+  "n_pool": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "tab",
+   "tablist"
+  ],
+  "plan": "click_named",
+  "pool_names": [
+   "Section #1",
+   "Section #2",
+   "Section #3"
+  ]
+ },
+ {
+  "task": "click-pie",
+  "name": "l",
+  "addressable_before_reveal": false,
+  "n_pool": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "plan": "click_named",
+  "pool_names": []
+ },
+ {
+  "task": "click-dialog",
+  "name": "x",
+  "addressable_before_reveal": false,
+  "n_pool": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "dialog",
+   "paragraph"
+  ],
+  "plan": "click_named",
+  "pool_names": [
+   "Close"
+  ]
+ },
+ {
+  "task": "click-tab-2-easy",
+  "name": "elit",
+  "addressable_before_reveal": false,
+  "n_pool": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "plan": "click_named",
+  "pool_names": [
+   "Tab #1",
+   "Tab #1"
+  ]
+ },
+ {
+  "task": "click-menu-2",
+  "name": "Menu",
+  "addressable_before_reveal": true,
+  "n_pool": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "plan": "click_named",
+  "pool_names": [
+   "Menu"
+  ]
+ },
+ {
+  "task": "click-scroll-list",
+  "name": "Central African Republic from the scrol",
+  "addressable_before_reveal": false,
+  "n_pool": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "listbox",
+   "option"
+  ],
+  "plan": "click_named",
+  "pool_names": [
+   "Submit",
+   "Dominican Republic",
+   "Central African Republ",
+   "Russian Federation",
+   "Cameroon",
+   "Myanmar",
+   "Comoros",
+   "Paraguay"
+  ]
+ },
+ {
+  "task": "choose-list",
+  "name": "Ninnette",
+  "addressable_before_reveal": false,
+  "n_pool": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "combobox"
+  ],
+  "plan": "click_named",
+  "pool_names": [
+   "Submit"
+  ]
+ },
+ {
+  "task": "social-media",
+  "name": "Copy link to Tweet",
+  "addressable_before_reveal": false,
+  "n_pool": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "plan": "click_named",
+  "pool_names": []
+ }
+]
