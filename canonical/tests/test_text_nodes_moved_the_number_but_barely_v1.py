@@ -45,7 +45,9 @@ def test_the_prediction_held_in_direction():
 
 
 def test_and_was_almost_worthless_in_magnitude():
-    assert V3["success_rate"] - V1["success_rate"] == 1.6
+    # 13.1 - 11.5 is 1.5999999999999996 in binary floating point. Comparing storage
+    # formats with == is the same class of error as comparing two screenshots byte-for-byte.
+    assert round(V3["success_rate"] - V1["success_rate"], 1) == 1.6
 
 
 def test_the_real_finding_is_the_parsed_but_unsolved_set():
