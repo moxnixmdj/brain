@@ -1,0 +1,62 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_FIRST_PUBLIC_BENCHMARK_NUMBER_20261109_V1",
+  "round": 73,
+  "date": "2026-11-09",
+  "what_was_owed": "a public benchmark number. Every result in rounds 34-72 was measured on pages authored inside this repo, which is a closed loop and cannot be evidence for anything general.",
+  "benchmark": {
+    "name": "MiniWob++ (Farama Foundation, pip miniwob 1.1.0, git clone 2026-08)",
+    "tasks_available": 130,
+    "tasks_run": 130,
+    "selection_by_author": "none -- the list is the contents of the html directory",
+    "goal_source": "the live page's #query element at run time",
+    "scoring": "WOB_REWARD_GLOBAL > 0, read AFTER the episode, never in scope when acting",
+    "clock": "MiniWob++ decays reward by time inside each episode, so these scores are not comparable to an untimed benchmark"
+  },
+  "result": {
+    "success": 15,
+    "of": 130,
+    "rate": "11.5%",
+    "model_calls": 0,
+    "rung": "ADDRESSED",
+    "wall_clock_seconds": 332,
+    "per_goal_shape": {"click_named": "7/23 30.4%", "click_first": "4/9 44.4%", "type_named": "2/8 25.0%", "click_two": "1/2", "click_nth_tab": "1/1", "unknown": "0/87 0.0%"}
+  },
+  "published_comparison": {
+    "human": "~100%",
+    "WebGUM": "94.2%",
+    "GPT-4": "71.7%",
+    "SeeAct with a11y tree, mobile MiniWob": "66.1%",
+    "this_work": "11.5%",
+    "verdict": "7x to 8x below the best published systems. This is not competitive and must not be presented as such."
+  },
+  "the_finding_that_matters_more_than_the_score": {
+    "addressable": "113/130 tasks exposed named or interactive structure = 86.9% (measured, census_130_v1.json)",
+    "used_by_the_policy": "the parser bucketed 87/130 goals as 'unknown' and attempted nothing",
+    "conclusion": "the ladder solved WHERE things are. It solved nothing about WHAT the instruction means. The binding constraint was always the parser, and 86.9% addressability means the ceiling was never the page."
+  },
+  "the_three_harness_bugs_that_produced_three_false_zeros": [
+    "ax_nodes returns a box, not x/y -- every click raised KeyError and the per-task except swallowed it: reported 0/25",
+    "Input.dispatchKeyEvent was not on the score channel allowlist -- every typing task failed silently: reported 2/25 then 6/25",
+    "the first 0/25 was 100% instrument error. A benchmark score is worth exactly the credibility of the harness, and mine was wrong three times before it was right."
+  ],
+  "honest_reading_rules": [
+    "allowed: the goal sentence from the live page (it is the user's instruction)",
+    "allowed: roles, accessible names, geometry of the current screen",
+    "banned: task HTML/JS source to find answers",
+    "banned: reading the reward before or during an action",
+    "no per-task code, no task-name special-casing, no model"
+  ],
+  "what_this_proves": [
+    "a zero-model, zero-parameter agent acts correctly on published tasks it has never seen",
+    "structure addressing is not specific to pages authored here"
+  ],
+  "what_this_does_not_prove": [
+    "competitiveness -- it is 7x worse than GPT-4 on the same suite",
+    "generality -- the goal parser covers a handful of shapes",
+    "anything about sentience"
+  ],
+  "next": ["write the goal parser as a proper semantic layer, not a regex ladder",
+           "measure how far the parser alone moves the number at zero model calls",
+           "then re-measure with the model in the decision seat, rung 3, and report the cost delta"]
+}

@@ -1,0 +1,2000 @@
+[
+ {
+  "task": "ascending-numbers",
+  "goal": "Click on the numbers in ascending order.",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "bisect-angle",
+  "goal": "Create a line that bisects the angle evenly in two, then press submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "book-flight",
+  "goal": "Book the cheapest one-way flight from: Oshkosh, WI to: Providence, RI on 12/22/2016.",
+  "nodes": 12,
+  "named": 4,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "status",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "book-flight-nodelay",
+  "goal": "Book the shortest one-way flight from: RST to: Mccook, NE on 10/29/2016.",
+  "nodes": 12,
+  "named": 4,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "status",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "button-delay",
+  "goal": "Click button ONE, wait 2 seconds, then click button TWO.",
+  "nodes": 7,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "buy-ticket",
+  "goal": "Buy the ticket with the most expensive cost.",
+  "nodes": 13,
+  "named": 4,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "chase-circle",
+  "goal": "Keep your mouse inside the circle as it moves around.",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "choose-date",
+  "goal": "Select 08/19/2016 as the date and hit submit.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "choose-date-easy",
+  "goal": "Select 12/11/2016 as the date and hit submit.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "choose-date-medium",
+  "goal": "Select 11/16/2016 as the date and hit submit.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "choose-date-nodelay",
+  "goal": "Select 04/17/2016 as the date and hit submit.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "choose-list",
+  "goal": "Select Bernadene from the list and click Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "combobox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "circle-center",
+  "goal": "Find and click on the center of the circle, then press submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-button",
+  "goal": "Click on the \"Cancel\" button.",
+  "nodes": 15,
+  "named": 2,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-button-sequence",
+  "goal": "Click button ONE, then click button TWO.",
+  "nodes": 7,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-checkboxes",
+  "goal": "Select g6B and click Submit.",
+  "nodes": 11,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-checkboxes-large",
+  "goal": "Select gvublt, Pk, fD, VCL, iholA4o, 58, cuJL, zJ, 45NtBsJ, gH and click Submit.",
+  "nodes": 29,
+  "named": 12,
+  "interactive": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-checkboxes-soft",
+  "goal": "Select words similar to sinful, answer and click Submit.",
+  "nodes": 17,
+  "named": 6,
+  "interactive": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-checkboxes-transfer",
+  "goal": "Select sA, 2lo4XOC and click Submit.",
+  "nodes": 17,
+  "named": 6,
+  "interactive": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-collapsible",
+  "goal": "Expand the section below and click submit.",
+  "nodes": 10,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "tab",
+   "tablist"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-collapsible-2",
+  "goal": "Expand the sections below, to find and click on the link \"Morbi\".",
+  "nodes": 9,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "tab",
+   "tablist"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-collapsible-2-nodelay",
+  "goal": "Expand the sections below, to find and click on the link \"quis\".",
+  "nodes": 9,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "tab",
+   "tablist"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-collapsible-nodelay",
+  "goal": "Expand the section below and click submit.",
+  "nodes": 10,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "tab",
+   "tablist"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-color",
+  "goal": "Click on the lime colored box.",
+  "nodes": 5,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "click-dialog",
+  "goal": "Close the dialog box by clicking the \"x\".",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "dialog",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-dialog-2",
+  "goal": "Click the button in the dialog box labeled \"Cancel\".",
+  "nodes": 10,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "dialog",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-link",
+  "goal": "Click on the link \"Sed\".",
+  "nodes": 5,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "click-menu",
+  "goal": "Select Tonia>Gabi",
+  "nodes": 10,
+  "named": 4,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "menu",
+   "menuitem"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-menu-2",
+  "goal": "Click the \"Menu\" button, and then find and click on the item labeled \"Next\".",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-option",
+  "goal": "Select jQ and click Submit.",
+  "nodes": 15,
+  "named": 5,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "radio"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-pie",
+  "goal": "Expand the pie menu below and click on the item labeled \"3\".",
+  "nodes": 17,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "click-pie-nodelay",
+  "goal": "Expand the pie menu below and click on the item labeled \"X\".",
+  "nodes": 17,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "click-scroll-list",
+  "goal": "Select Martinique, Norfolk Island from the scroll list and click Submit.",
+  "nodes": 17,
+  "named": 11,
+  "interactive": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "listbox",
+   "option"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-shades",
+  "goal": "Select all the shades of blue and press Submit.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-shape",
+  "goal": "Click on a small item",
+  "nodes": 13,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "click-tab",
+  "goal": "Click on Tab #3.",
+  "nodes": 14,
+  "named": 7,
+  "interactive": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-tab-2",
+  "goal": "Switch between the tabs to find and click on the link \"dui.\".",
+  "nodes": 14,
+  "named": 7,
+  "interactive": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-tab-2-easy",
+  "goal": "Switch between the tabs to find and click on the link \"Vulputate.\".",
+  "nodes": 10,
+  "named": 3,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-tab-2-hard",
+  "goal": "Switch between the tabs to find and click on the link \"Diam\".",
+  "nodes": 20,
+  "named": 13,
+  "interactive": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-tab-2-medium",
+  "goal": "Switch between the tabs to find and click on the link \"pellentesque\".",
+  "nodes": 12,
+  "named": 5,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-test",
+  "goal": "Click the button.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-test-2",
+  "goal": "Click button ONE.",
+  "nodes": 7,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-test-transfer",
+  "goal": "Click button ONE.",
+  "nodes": 7,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "click-widget",
+  "goal": "Click on a \"radio\" widget.",
+  "nodes": 10,
+  "named": 4,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "checkbox",
+   "radio",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "copy-paste",
+  "goal": "Copy the text in the textarea below, paste it into the textbox and press Submit.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "copy-paste-2",
+  "goal": "Copy the text from the 2nd text area below and paste it into the text input, then press Submit.",
+  "nodes": 12,
+  "named": 1,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "count-shape",
+  "goal": "How many 0s are there?",
+  "nodes": 11,
+  "named": 5,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "count-sides",
+  "goal": "Press the button that correctly denotes how many sides the shape has.",
+  "nodes": 11,
+  "named": 5,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "daily-calendar",
+  "goal": "Create a 60 mins event named \"Gym\", between 12PM and 4PM.",
+  "nodes": 5,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-box",
+  "goal": "Drag the smaller box so that it is completely inside the larger box.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-circle",
+  "goal": "Drag the circle right then press Submit.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-cube",
+  "goal": "Move the cube around so that \"5\" is the active side facing the user.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-items",
+  "goal": "Drag Donelle up by one position.",
+  "nodes": 11,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "list",
+   "listitem"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-items-grid",
+  "goal": "Drag Lorne to the bottom right.",
+  "nodes": 15,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "list",
+   "listitem"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-shapes",
+  "goal": "Drag all circles into the black box.",
+  "nodes": 11,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-shapes-2",
+  "goal": "Drag all triangles into the left box, and everything else into the right box.",
+  "nodes": 12,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-single-shape",
+  "goal": "Drag the item right then press Submit.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "drag-sort-numbers",
+  "goal": "Sort the numbers in increasing order, starting with the lowest number at the top of the list.",
+  "nodes": 11,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "list",
+   "listitem"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "draw-circle",
+  "goal": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "draw-line",
+  "goal": "Draw a horizontal line that runs through the dot, then press submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox",
+  "goal": "Find the email by Verile and click the star icon to mark it as important.",
+  "nodes": 25,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-delete",
+  "goal": "Find the email by Jilli and click the trash icon to delete it.",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-forward",
+  "goal": "Find the email by Margy and forward that email to Libbi.",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-forward-nl",
+  "goal": "The mail by Meriel should be forwarded to Elena.",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-forward-nl-turk",
+  "goal": "Look for the email that Henriette wrote in this email app and forward it to Windy",
+  "nodes": 29,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-important",
+  "goal": "Find the email by Merna and click the star icon to mark it as important.",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-nl-turk",
+  "goal": "forward Adelheid's email to Rebeka",
+  "nodes": 29,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-noscroll",
+  "goal": "Find the email by Didi and forward that email to Adriana.",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-reply",
+  "goal": "Find the email by Jeralee and reply to them with the text \"Faucibus diam rutrum habitant.\".",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "email-inbox-star-reply",
+  "goal": "Find the email by Sean and click the star icon to mark it as important.",
+  "nodes": 13,
+  "named": 1,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "enter-date",
+  "goal": "Enter 09/07/2011 as the date and hit submit.",
+  "nodes": 11,
+  "named": 5,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "Date",
+   "LabelText",
+   "button",
+   "spinbutton"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "enter-password",
+  "goal": "Enter the password \"j1Al\" into both text fields and press submit.",
+  "nodes": 12,
+  "named": 1,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "enter-text",
+  "goal": "Enter \"Michel\" into the text field and press Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "enter-text-2",
+  "goal": "Type \"joye\" in all upper case letters in the text input and press Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "enter-text-dynamic",
+  "goal": "Enter \"1mF\" into the text field and press Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "enter-time",
+  "goal": "Enter 10:31 AM as the time and press submit.",
+  "nodes": 11,
+  "named": 5,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "InputTime",
+   "LabelText",
+   "button",
+   "spinbutton"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "find-greatest",
+  "goal": "Find and pick the card with the greatest number, then press submit.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "find-midpoint",
+  "goal": "Find and click on the shortest mid-point between the two points, then press submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "find-word",
+  "goal": "Find the 1st word in the paragraph, type that into the textbox and press \"Submit\".",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "focus-text",
+  "goal": "Focus into the textbox.",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "focus-text-2",
+  "goal": "Focus into the 2nd input textbox.",
+  "nodes": 8,
+  "named": 0,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "form-sequence",
+  "goal": "Select 7 with the slider, click the 1st checkbox, then hit Submit.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "checkbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "form-sequence-2",
+  "goal": "Check the 1st radio button and enter the number \"8\" into the 2nd textbox.",
+  "nodes": 12,
+  "named": 1,
+  "interactive": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "radio",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "form-sequence-3",
+  "goal": "Choose 6 ft from the dropdown, then click the button labeled \"Maybe\".",
+  "nodes": 10,
+  "named": 3,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "combobox",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "generate-number",
+  "goal": "Generate a number less than 8, then press submit.",
+  "nodes": 7,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "grid-coordinate",
+  "goal": "Click on the grid coordinate (-2,0).",
+  "nodes": 31,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "guess-number",
+  "goal": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "form",
+   "spinbutton"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "highlight-text",
+  "goal": "Highlight the text in the paragraph below and click submit.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "highlight-text-2",
+  "goal": "Highlight the text in the 2nd paragraph and click submit.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "hot-cold",
+  "goal": "Find and click on the HOT area.",
+  "nodes": 5,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "hover-shape",
+  "goal": "Keep the mouse hovered over the colored square.",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "identify-shape",
+  "goal": "Click the button that best describes the figure below.",
+  "nodes": 11,
+  "named": 5,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "login-user",
+  "goal": "Enter the username \"kasie\" and the password \"h1\" into the text fields and press login.",
+  "nodes": 12,
+  "named": 1,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "login-user-popup",
+  "goal": "Enter the username \"deneen\" and the password \"xF\" into the text fields and press login.",
+  "nodes": 12,
+  "named": 1,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "moving-items",
+  "goal": "Click as many moving circles as possible.",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "multi-layouts",
+  "goal": "Search for thriller movies directed by Dominguez from year 1982.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "multi-orderings",
+  "goal": "Search for mystery movies directed by Rollins from year 2013.",
+  "nodes": 18,
+  "named": 3,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "cell",
+   "row",
+   "rowheader",
+   "table",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "navigate-tree",
+  "goal": "Navigate through the file tree. Find and click on the folder or file named \"Riley\".",
+  "nodes": 10,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "list",
+   "listitem"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "number-checkboxes",
+  "goal": "Draw the number \"6\" in the checkboxes using the example on the right and press Submit when finished.",
+  "nodes": 50,
+  "named": 1,
+  "interactive": 29,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "checkbox",
+   "complementary",
+   "image",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "odd-or-even",
+  "goal": "Mark the numbers below as odd or even and press submit when done.",
+  "nodes": 12,
+  "named": 7,
+  "interactive": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "order-food",
+  "goal": "Order one of each item: Coconut mango tart, Chicken wings",
+  "nodes": 29,
+  "named": 24,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "phone-book",
+  "goal": "Find Nessa in the contact book and click on their phone number.",
+  "nodes": 14,
+  "named": 6,
+  "interactive": 5,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "link",
+   "list",
+   "listitem"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "read-table",
+  "goal": "Enter the value of Language into the text field and press Submit.",
+  "nodes": 23,
+  "named": 11,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "cell",
+   "row",
+   "table",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "read-table-2",
+  "goal": "Enter the value that corresponds with each label into the form and submit when done.",
+  "nodes": 26,
+  "named": 11,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "cell",
+   "row",
+   "table",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "resize-textarea",
+  "goal": "Resize the textarea so that the width is larger than its initial size then press Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "right-angle",
+  "goal": "Add a third point to create a right angle, then press submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "scroll-text",
+  "goal": "Find the last word in the text area, enter it into the text field and hit Submit.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 3,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "scroll-text-2",
+  "goal": "Scroll the textarea to the top of the text hit submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "search-engine",
+  "goal": "Use the textbox to enter \"Emile\" and press \"Search\", then find and click the 6th search result.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "list",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "sign-agreement",
+  "goal": "Scroll to the bottom of the textarea, enter the name \"Ashlea\" then press \"Cancel\"",
+  "nodes": 10,
+  "named": 4,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "simon-says",
+  "goal": "Push the buttons in the order displayed.",
+  "nodes": 10,
+  "named": 0,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "simple-algebra",
+  "goal": "Solve for x and type your answer into the textbox. Press Submit when done.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "simple-arithmetic",
+  "goal": "Solve the math problem and type your answer into the textbox. Press submit when done.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "social-media",
+  "goal": "For the user @deneen, click on the \"Block\" button.",
+  "nodes": 29,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "social-media-all",
+  "goal": "Click the \"Reply\" button on all posts by @vitae and then click Submit.",
+  "nodes": 51,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "social-media-some",
+  "goal": "Click the \"Share\" button on 1 post by @olin and then click Submit.",
+  "nodes": 39,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "stock-market",
+  "goal": "Buy PWH stock when the price is less than $68.50.",
+  "nodes": 9,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "terminal",
+  "goal": "Use the terminal below to delete a file ending with the extension .jpg",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "text-editor",
+  "goal": "Using the text editor, give everything the style italics and press Submit.",
+  "nodes": 14,
+  "named": 1,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image",
+   "paragraph"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "text-transform",
+  "goal": "Type the text below into the text field and press Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "tic-tac-toe",
+  "goal": "Playing as 'X', win a game of tic-tac-toe.",
+  "nodes": 6,
+  "named": 0,
+  "interactive": 0,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "addressable": false,
+  "canvas_only": false
+ },
+ {
+  "task": "unicode-test",
+  "goal": "Click on the \"\u00c3\u2013K\" button.",
+  "nodes": 12,
+  "named": 2,
+  "interactive": 4,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-autocomplete",
+  "goal": "Enter an item that starts with \"Mol\" and ends with \"va\".",
+  "nodes": 9,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "status",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-autocomplete-nodelay",
+  "goal": "Enter an item that starts with \"Nau\" and ends with \"uru\".",
+  "nodes": 9,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "status",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-colorwheel",
+  "goal": "Select purple with the color picker and hit Submit.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-colorwheel-2",
+  "goal": "Select the following color  with the color picker and hit Submit.",
+  "nodes": 8,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-slider",
+  "goal": "Select 59 with the slider and hit Submit.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-slider-2",
+  "goal": "Set the sliders to the combination [17,7,9] and submit.",
+  "nodes": 6,
+  "named": 1,
+  "interactive": 1,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "use-spinner",
+  "goal": "Select 3 with the spinner and hit Submit.",
+  "nodes": 8,
+  "named": 2,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "spinbutton"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ },
+ {
+  "task": "visual-addition",
+  "goal": "Type the total number of blocks into the textbox and press Submit.",
+  "nodes": 7,
+  "named": 1,
+  "interactive": 2,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "addressable": true,
+  "canvas_only": false
+ }
+]
