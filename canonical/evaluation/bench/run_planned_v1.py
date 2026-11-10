@@ -57,6 +57,7 @@ for i, t in enumerate(tasks, 1):
         ns, tx = snap()
         f0 = facts(ns, tx)
         caps = []
+        caps_seen = set()
         controls = [n for n in ns if n["role"] in POOL and n["name"].strip()]
 
         # PROBE AND ACT IN THE SAME EPISODE. Measured: every re-navigation starts a NEW
@@ -70,20 +71,30 @@ for i, t in enumerate(tasks, 1):
             pr = {"status": "SOLVED", "plan": []}; r["strategy"] = "fill_value"
         elif lit:
             r["strategy"] = "reveal_target"
-            # is it already there, untouched?
-            pr = G.plan_to_reveal(f0, lit, caps)
-            if pr["status"] == "NO_ROUTE":
+            # SEARCH, THEN PLAN -- repeatedly. The original order was plan, then (only on
+            # failure) probe once, re-plan, and NEVER ACT on what the re-plan learned. The
+            # code's order was the opposite of the problem's order (r85). A refusal before
+            # searching is a default dressed as a judgement.
+            pr = {"status": "NOT_LOOKED", "plan": [], "total_cost": 0.0}
+            for _rd in range(3):
+                pr = G.plan_to_reveal(f0, lit, caps)
+                if pr["status"] in ("SOLVED", "ALREADY_PRESENT"):
+                    break
+                uncovered = [c for c in controls if c["name"].strip()
+                             and f"use:{c['role']}:{c['name'].strip()}" not in caps_seen]
+                if not uncovered:
+                    break
                 # learn what each control reveals, WITHOUT re-navigating: click, observe,
                 # click again to restore (toggles are their own inverse on this page).
-                for ctl in controls[:8]:
+                for ctl in uncovered[:8]:
                     before = facts(*snap())
-                    ch.click(*centre(ctl)); r["probes"] += 1; time.sleep(0.28)
+                    ch.click(*centre(ctl)); r["probes"] += 1; time.sleep(0.26)
                     after = facts(*snap())
                     rev = {x.split("name:",1)[1] for x in (after - before) if x.startswith("name:")}
                     caps.append(G.capability_for(ctl["name"].strip(), rev, ctl["role"]))
-                    ch.click(*centre(ctl)); r["probes"] += 1; time.sleep(0.22)
+                    caps_seen.add(f"use:{ctl['role']}:{ctl['name'].strip()}")
+                    ch.click(*centre(ctl)); r["probes"] += 1; time.sleep(0.20)
                 f0 = facts(*snap())
-                pr = G.plan_to_reveal(f0, lit, caps)
         else:
             # 93/130 arrived here and NOTHING was done, then the task was scored as a failure.
             # "Did not try" and "tried and failed" were the same number. -- a_r83
