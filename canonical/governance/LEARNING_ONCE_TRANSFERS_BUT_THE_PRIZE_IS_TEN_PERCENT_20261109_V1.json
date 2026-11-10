@@ -1,0 +1,49 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "LEARNING_ONCE_TRANSFERS_BUT_THE_PRIZE_IS_TEN_PERCENT_20261109_V1",
+  "round": 65,
+  "date": "2026-11-09",
+  "question": "Does one demonstration, then permanent re-use, solve any computer use?",
+  "measured_before": {
+    "what_r64_built": "replay keyed on the hash of the starting screen",
+    "result": "1/5 pages -- it survived only the page it was taught on",
+    "verdict": "a hash is a guarantee about one screenshot; one screenshot is not a task"
+  },
+  "measured_after": {
+    "what_r65_built": "grounding_v1: anchors (what the widgets looked like) + effects measured in pixels from the demonstration and stored relative to the anchor",
+    "variants": ["same page", "heading renamed", "button moved 120px", "cookie banner pushed it down", "serif font, 44px, different text"],
+    "grounded": "5/5",
+    "answered_with_zero_model_calls": "5/5",
+    "evidence": "canonical/evaluation/the_loop/transferred_goal_reached.png"
+  },
+  "the_number_that_matters": {
+    "definition": "trajectories that replay without a model on a page they were not taught on",
+    "before": "1/5", "after": "5/5",
+    "honest_scope": "five variants of one five-element page. THIS IS NOT A BENCHMARK."
+  },
+  "external_evidence_for_what_this_is_worth": {
+    "skillmigrator_arxiv_2606.17645": "layout-anchored skill transfer across sites reduces average LLM-action count by 8-10% at matched task success on Mind2Web and WebArena",
+    "gui_vs_cli_2026_06_22": "GUI agents are bottlenecked by visual grounding and long workflow execution; CLI agents by skill coverage gaps and implicit-default reconstruction",
+    "work2skill_arxiv_2610.12984": "removing visual/UI/keylog evidence drops skill induction success by 14-22 percentage points; the evidence, not the induction, carries the result",
+    "conclusion": "the transfer mechanism is real, published, and worth about a tenth of the model calls -- not a solution to computer use"
+  },
+  "what_this_does_NOT_establish": [
+    "that a learned skill generalises to a NEW task (it generalises to a new INSTANCE of a taught task)",
+    "that the library compounds: r59 measured that adding skills degrades findability and that deleting the row removes the capability -- it files, it does not learn",
+    "that 318-step workflows are reachable: 99% per step over 318 steps is 4.09%",
+    "any benchmark number. There are still zero."
+  ],
+  "bugs_found_by_running_it": [
+    "float32 overflow in the FFT made every real-screen match score 1,000,000+, while a synthetic float64 test passed",
+    "a patch demeaned and then raw-summed: returned -27.7 where the answer was 1.0",
+    "a 1280-pixel-wide 'anchor' is the page, not a widget",
+    "structureless patches match everywhere: a blank 112px crop had 162 equally good offsets",
+    "grounded actions shipped with no coordinates and no reason; the gate refused all of them, correctly",
+    "a type action's region was guessed from the widget box; the caret is at position 0 at the far left",
+    "pressing GO changes the heading, hundreds of pixels from the button: the effect must be MEASURED, not inferred from the widget",
+    "searching for a 'distinctive' anchor window scored 0/5 where a plain box scored 5/5 -- over-engineering broke a working thing",
+    "ambiguity is a DISTANCE between matches, not a count of matches: the empty field's 162 ties were all inside the field and all valid"
+  ],
+  "next": ["the compounding question: does the library make NEW tasks cheaper, or only old ones cheaper",
+           "a public benchmark number, still owed"]
+}
