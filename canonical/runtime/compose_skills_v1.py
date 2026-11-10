@@ -143,3 +143,83 @@ def run_plan(plan: Mapping[str, Any], library: Mapping[str, Any], browser: Any,
             "steps_done": steps_done,
             "seconds": round(time.time() - t0, 2),
             "final_screenshot": str(shot_dir / f"after_{len(plan['plan']):02d}.png")}
+
+
+# ============================================================================ routing
+# The collapse this section answers, measured before writing a line of it:
+#
+#   a library of ten skills, goals phrased in the library's own words   10/10 planned
+#   the SAME ten tasks, phrased the way a person asks                    0/10 planned
+#
+# So a library's value is not what it contains.  It is what can be FOUND in it.  A literal
+# planner is a filing cabinet with no index: everything is there and nothing can be reached.
+#
+# The router below is deliberately mechanical -- word overlap, nothing learned, no model --
+# because the point is to measure the ceiling of cheap retrieval before spending anything
+# expensive on it.  It reports its own confidence, refuses to guess between close
+# candidates, and names the words it did not account for.  Those three behaviours matter
+# more than the accuracy: a router that guesses silently is worse than one that asks.
+
+_STOP = frozenset("""a an the this that these those me my it its of in on at to for with and or
+but then please show give put get make do does did be is are was were some any""".split())
+
+
+def _words(s: str) -> list[str]:
+    w = []
+    for t in "".join(c.lower() if c.isalnum() else " " for c in s).split():
+        if t in _STOP or len(t) <= 2:
+            continue
+        w.append(t[:-1] if len(t) > 4 and t.endswith("s") else t)
+    return w
+
+
+def _stem_set(s: str) -> frozenset[str]:
+    return frozenset(_words(s))
+
+
+def route(goal: str, library: Mapping[str, Any], *, min_margin: float = 0.15,
+          min_hits: int = 1) -> dict[str, Any]:
+    """Pick skills for a goal, or refuse.  No model, no learning, no scores that flatter.
+
+    Each stage of the goal is routed separately: the goal is split on the connectors the
+    planner already knows, and every piece is matched against every trigger.  Overlap is
+    measured on stems, weighted by how rare a word is across the library -- a word that
+    appears in every trigger distinguishes nothing.
+    """
+    pieces = [p for p in goal.replace(",", " then ").split(" then ") if p.strip()]
+    chosen: list[dict[str, Any]] = []
+    for piece in pieces:
+        gw = _stem_set(piece)
+        if not gw:
+            continue
+        # rarity weight: 1/(how many triggers contain the word)
+        df: dict[str, int] = {}
+        for s in library.values():
+            for w in _stem_set(s["trigger"].replace(SLOT, " ")):
+                df[w] = df.get(w, 0) + 1
+        scored = []
+        for name, skill in library.items():
+            tw = _stem_set(skill["trigger"].replace(SLOT, " "))
+            hits = gw & tw
+            if len(hits) < min_hits:
+                continue
+            score = sum(1.0 / df.get(w, len(library)) for w in hits) / max(1, len(tw))
+            scored.append((score, len(hits), name, sorted(hits)))
+        scored.sort(reverse=True)
+        if not scored:
+            return {"schema": "ROUTE_V1", "verdict": "NO_ROUTE", "unrouted": piece.strip(),
+                    "chosen": chosen, "because": "no trigger shares a word with this"}
+        best = scored[0]
+        if len(scored) > 1:
+            margin = best[0] - scored[1][0]
+            if margin < min_margin or (best[1] == scored[1][1] and abs(margin) < 1e-9):
+                return {"schema": "ROUTE_V1", "verdict": "AMBIGUOUS",
+                        "between": [best[2], scored[1][2]], "margin": round(margin, 4),
+                        "unrouted": piece.strip(), "chosen": chosen,
+                        "because": "two skills explain this request equally well"}
+        chosen.append({"skill": best[2], "piece": piece.strip(), "matched": best[3],
+                       "score": round(best[0], 4)})
+    if not chosen:
+        return {"schema": "ROUTE_V1", "verdict": "NO_ROUTE", "unrouted": goal, "chosen": []}
+    return {"schema": "ROUTE_V1", "verdict": "ROUTED", "chosen": chosen,
+            "confidence": round(min(c["score"] for c in chosen), 4)}

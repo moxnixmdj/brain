@@ -1,0 +1,43 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "A_LIBRARY_IS_WORTH_WHAT_CAN_BE_FOUND_IN_IT_20261109_V1",
+  "round": 67,
+  "date": "2026-11-09",
+  "question": "How many skills before coverage saturates, and does findability degrade first?",
+  "answer": "Findability does not degrade first. It degrades ALWAYS. The library is worth nothing until the right skill can be found, and finding is the bottleneck -- not learning.",
+  "measured_here": {
+    "ten_skills_goals_in_library_words": "10/10 planned, no model",
+    "the_same_ten_tasks_phrased_by_a_person": "0/10 planned, no model",
+    "mechanical_router_stems_and_rarity_weights": "3/10, no model",
+    "model_filling_only_the_router_refusals": "10/10 -- 3 free, 7 needed the model",
+    "hostile_routes_refused": "6/6 (invented skill, bindingless skill, empty, missing field, abstain, admitted gap)",
+    "confidence_as_licence": "1.0 and 0.01 on an invented skill are refused identically"
+  },
+  "external_measurement_is_worse_than_mine": {
+    "princeton_ucsd_8135_runs": "retrieval precision 29.6% at 5 skills -> 3.3% at 100",
+    "phase_transition_arxiv_2601.04748": "selection accuracy is flat to a capacity threshold then drops sharply; semantic CONFUSABILITY, not raw size, drives it; hierarchical routing mitigates",
+    "progressive_disclosure_arxiv_2609.35692": "eager loading degrades faster; retrieval falls 1.00 at N=5 to 0.125 at N=50 for Qwen3-14B",
+    "procedural_anchoring_study": "65.7% of successful skill cases are procedural anchoring; only 4.5% are explicit knowledge injection",
+    "maliciousskillbench": "9,740 skills, 7,505 malicious; detectors 0.88-0.93 F1 in-distribution, 0.65-0.67 under source shift"
+  },
+  "what_this_does_to_the_thesis": {
+    "the_claim": "learn a thing once and it is permanently available",
+    "the_measurement": "it is permanently STORED; availability is a separate, unsolved problem that gets WORSE as the library grows",
+    "so": "'instant learning' solves the cheap half. The expensive half -- finding the learned thing among the others -- is where the library dies, and adding skills makes it worse. A library of 100 is 9x less precise than a library of 5.",
+    "and": "r52 in this repo measured the same effect from the other side: teaching more near-duplicates made selection worse"
+  },
+  "the_smart_response_measured_partly": {
+    "hierarchical_routing": "the literature's answer; NOT built here",
+    "progressive_disclosure": "the literature's answer; NOT built here",
+    "what_was_built": "a mechanical router that reports its own doubt, plus a model that is called ONLY where the router refuses -- 3/10 free, 10/10 with 7 model calls",
+    "why_that_matters": "it turns retrieval into a cost curve instead of a cliff, and it keeps the model out of the 30% of cases that never needed it"
+  },
+  "what_this_does_not_prove": [
+    "that my 10/10 generalises: ten hand-routed sentences by one model is not a benchmark",
+    "that hierarchical routing works at 200 skills -- that is the literature's claim, not mine",
+    "a public benchmark number. Still zero."
+  ],
+  "next": ["hierarchical routing: categories, then skills inside them, measured against flat routing at 10/25/50/100",
+           "confusability: how alike do two skills have to be before routing collapses",
+           "a public benchmark number, still owed"]
+}
