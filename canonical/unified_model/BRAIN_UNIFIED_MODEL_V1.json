@@ -30955,13 +30955,13 @@
   "research_index_records": 6728,
   "routing_tokens": 2360,
   "skills": 18,
-  "source_index_entry_points": 460,
-  "source_index_modules": 1966
+  "source_index_entry_points": 462,
+  "source_index_modules": 1968
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c3beb547e9c6bd124a57dfbb12d14e20c4d07d3f87bd8fc8cf59e67f237b1faa"
+  "value": "4dbacb2984b13b15350b20a7f3ab9108b6d6a74144226828254e7ed359eada34"
  },
  "engines": [
   {
@@ -84067,7 +84067,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/governance/EVERY_VALUABLE_THING_PRICED_20261109_V2.json",
    "schema": "brain.governance.EVERY_VALUABLE_THING_PRICED_20261109_V2",
-   "sha256": "81181872f9af1a45ca163487aee056aefd7e44a911913eef19b33184f973bc6e",
+   "sha256": "30e9c64525f799ba4ed7bb6114965de04d0d5c8458815f984d0bfa80bbc358a4",
    "status": "",
    "terms": {
     "20261109": 1,
@@ -237220,13 +237220,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_one_model_v3.py",
-   "sha256": "d774a87fa928c1a9b0192fac8eb081bd804a92a72a32ec33cfe1d5663b1d44ab",
+   "sha256": "154f0fde2e08527e24ca5130480271be64566ac1d2af112a9301c296f065f90b",
    "summary": "THE ONE MODEL — a single door onto every proven layer of Project Brain.",
-   "symbol_count": 13,
+   "symbol_count": 15,
    "symbols": [
     "_answer",
+    "_contract_state",
     "_h100_registry",
     "_infer_target",
+    "_is_counting",
     "_is_question",
     "_looks_tabular",
     "_needs_from_status",
@@ -237241,12 +237243,14 @@
    "terms": {
     "answer": 1,
     "brain": 2,
+    "contract_state": 1,
     "door": 1,
     "every": 1,
     "h100_capabilities": 1,
     "h100_registry": 1,
     "infer_target": 1,
     "inventory": 1,
+    "is_counting": 1,
     "is_question": 1,
     "layer": 1,
     "looks_tabular": 1,
@@ -244641,7 +244645,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "3350220d33092de3c82675c9a9a42423eed66cc4c064266ed27a0a1666ba0ca4",
+   "sha256": "aad61e3f746c13c6a9169a652c097ccedc64880098a71974ec4d5dbb312f3801",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 60,
    "symbols": [
@@ -252134,6 +252138,34 @@
     "validate_url": 1,
     "verify_npm_sri": 1,
     "write_json_atomic": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/failure_triage_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/failure_triage_v1.py",
+   "sha256": "dc780926179608e72cb37a1c059131af449dda0aabb1c86fb93fe5462236bb38",
+   "summary": "FAILURE TRIAGE — every failure gets a CAUSE and a RECOVERY, not a retry.",
+   "symbol_count": 2,
+   "symbols": [
+    "self_check",
+    "triage"
+   ],
+   "terms": {
+    "cause": 1,
+    "every": 1,
+    "failure": 3,
+    "gets": 1,
+    "not": 1,
+    "recovery": 1,
+    "retry": 1,
+    "self_check": 1,
+    "triage": 3,
+    "v1": 1
    }
   },
   {
@@ -293715,6 +293747,53 @@
     "state": 1,
     "sub-100": 1,
     "sub100mb": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/supreme_gate_engine_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/supreme_gate_engine_v1.py",
+   "sha256": "dff1fceed9950149ad5ffae967cfaeca93f35ca9e30e73fcff03a9014279fedf",
+   "summary": "SUPREME GATE ENGINE — the 775 lines of discipline, made executable.",
+   "symbol_count": 11,
+   "symbols": [
+    "SubmissionBlocked",
+    "_contract_gate_ids",
+    "_good",
+    "_has_counts",
+    "_nonempty",
+    "audit",
+    "contract_coverage",
+    "demo",
+    "main",
+    "require_authorized",
+    "self_check"
+   ],
+   "terms": {
+    "775": 1,
+    "audit": 1,
+    "contract_coverage": 1,
+    "contract_gate_ids": 1,
+    "demo": 1,
+    "discipline": 1,
+    "engine": 2,
+    "executable": 1,
+    "gate": 2,
+    "good": 1,
+    "has_counts": 1,
+    "lines": 1,
+    "made": 1,
+    "main": 1,
+    "nonempty": 1,
+    "require_authorized": 1,
+    "self_check": 1,
+    "submissionblocked": 1,
+    "supreme": 2,
     "v1": 1
    }
   },

@@ -1790,6 +1790,10 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
 _PROBE_KINDS: dict[str, tuple[str, ...]] = {
     "lines": ("lines", "line", "newlines", "newline", "rows", "row"),
     "words": ("words", "word"),
+    # Declared so that "unique words" RESOLVES and is then refused by the bridge with a
+    # named reason. Undeclared, it was a query_kind of None and the door executed
+    # something else. A refusal a caller can read is worth more than a fast wrong answer.
+    "uniquewords": ("unique words", "distinct words", "distinct word"),
     "bytes": ("bytes", "byte", "size"),
     "characters": ("characters", "character", "chars", "char"),
     "uniquelines": ("unique lines", "uniquelines", "distinct lines",
@@ -2015,6 +2019,16 @@ _PROBE_SIZES = (7, 13)
 # question containing the word 'lines' would have to be refused.
 _REFINES = {"uniquelines": "lines", "lineswith": "lines",
           "duplicatelines": "lines"}
+# "how many unique words" was not here, so it did not resolve to ANY kind: the resolution
+# loop reached the ambiguity check, found no relationship between `uniquelines` (matched by
+# the bare word "unique") and `words`, and returned None. With no kind, the door fell past
+# the bridge and ran a RAW `wc -w` that answered 6 where the question meant 4.
+#
+# The same reasoning that admits "unique lines" as a refinement of "lines" admits "unique
+# words" as a refinement of "words": same noun, narrowed by the same adjective. The KIND is
+# still refused downstream, because no single admitted program computes it -- but it is now
+# refused BY NAME instead of silently mis-answered.
+_REFINES.update({"uniquewords": "words", "distinctwords": "words"})
 
 _LITERAL_TRIGGERS = ("containing", "contain", "contains", "mentioning",
                      "mention", "mentions", "matching", "match", "matches",

@@ -151,7 +151,8 @@ def resolve(
                                               "confident": True, "coverage": 1.0},
                                        trace=trace, t0=t0,
                                        layer="CONFINED_QUERY_BRIDGE",
-                                       carried=_r, acquisition=None)
+                                       carried=_r, acquisition=None,
+                                       _is_counting_question=True)
         except Exception as exc:  # noqa: BLE001 - a fast layer that fails must not break the door
             step("fast_carrier_failed", error=str(exc)[:120])
 
@@ -321,7 +322,8 @@ def resolve(
                  untouched=carried.get("live_workspace_untouched"))
             if carried.get("pass"):
                 return _answer(route, trace, t0, layer="ADMITTED_CONFINEMENT",
-                               carried=carried, acquisition=acquisition)
+                               carried=carried, acquisition=acquisition,
+                               _is_counting_question=_is_counting(goal))
             return _refusal(route, trace, t0, reason=str(carried.get("status")),
                             detail=carried, acquisition=acquisition)
         status_txt = str(bound.get("status") or "")
@@ -345,7 +347,8 @@ def resolve(
             step("carrier", pass_=carried.get("pass"), confined=carried.get("confined"))
             if carried.get("pass"):
                 return _answer(route, trace, t0, layer="ADMITTED_CONFINEMENT",
-                               carried=carried, acquisition=acquisition)
+                               carried=carried, acquisition=acquisition,
+                               _is_counting_question=_is_counting(goal))
             return _refusal(route, trace, t0, reason=str(carried.get("status")),
                             detail=carried, acquisition=acquisition)
         return _refusal(route, trace, t0,
@@ -436,16 +439,75 @@ def _rebase_argv(argv: list[str], root: str, goal: str) -> list[str]:
 
 
 # -------------------------------------------------------------------------- shape ---
+def _is_counting(goal: str) -> bool:
+    """Is this a "how many X" question? Used to demand a number, not a listing."""
+    try:
+        from canonical.runtime import computer_env_v1 as _cenv
+
+        return _cenv.query_kind(goal) is not None
+    except Exception:  # noqa: BLE001 - fail closed: a counting answer with no number is no pass
+        return True
+
+
 def _answer(route, trace, t0, *, layer, result=None, compiled=None, carried=None,
-            h100=None, acquisition=None) -> dict:
+            h100=None, acquisition=None, _is_counting_question: bool = False) -> dict:
     # The number the caller asked for, lifted out of whichever receipt holds it. Every
     # layer below answers by returning a receipt; a caller should not have to know the
     # shape of the layer that answered.
     _ans = None
     for _src in (carried, result, compiled, h100):
-        if isinstance(_src, dict) and _src.get("answer") is not None:
-            _ans = _src.get("answer")
+        if not isinstance(_src, dict):
+            continue
+        # `value` before `answer`. The bridge returns `answer` as a display STRING and
+        # `value` as the typed number, which is a defensible split -- but a door that
+        # surfaces '6' on one path and 6 on another makes every caller write `int(x)`
+        # or compare against the wrong type. The door speaks in types.
+        if _src.get("value") is not None and not isinstance(_src.get("value"), (dict, list)):
+            _ans = _src.get("value")
             break
+        if _src.get("answer") is not None:
+            _ans = _src.get("answer")
+            if isinstance(_ans, str) and _ans.strip().lstrip("-").isdigit():
+                _ans = int(_ans.strip())
+            break
+    # A QUESTION THAT GOT NO ANSWER IS NOT A PASS.
+    #
+    # Measured 2026-11-09: `how many unique words in data.txt` returned pass=True,
+    # layer=ADMITTED_CONFINEMENT, answer=None. The carrier had run `wc -w` and printed
+    # "6 data.txt" -- a correct execution of the WRONG command, reported as success. A
+    # caller that checks `pass` gets a green light and no number, which is the failure mode
+    # this whole project exists to refuse: a report asserting success with no evidence.
+    #
+    # A layer that executed but produced no answer is a refusal with a receipt, and it says
+    # so. This is in `_answer` rather than at the call site so no future layer can bypass it.
+    # The rule applies to the BRIDGE, which exists to answer a counting question, and not
+    # to a stated command, whose evidence IS its stdout. Measured 2026-11-09: applying it to
+    # both broke `sort -u data.txt`, which correctly runs, prints, and is followed by the
+    # caller -- a listing is the answer to "run this", and demanding an integer there would
+    # be demanding the wrong shape back.
+    # Keyed on WHAT WAS ASKED, not on which layer answered. A counting question
+    # ("how many ...") must come back with a number; a stated command ("sort -u x") comes
+    # back with its output, which is the answer to what was asked. Measured 2026-11-09:
+    # `unique words` is refused by the bridge and then falls to the raw carrier, so keying
+    # on the bridge's own layer missed the exact case this rule exists for.
+    # `_answer` has no `goal` parameter, so the first version of this guard raised
+    # NameError, the except swallowed it, and the rule silently never fired -- a fail-open
+    # inside the code written to prevent a fail-open. The question is now passed explicitly
+    # by the caller, and an unanswerable question object means the rule DOES fire (fail
+    # closed), because a counting answer with no number is never a pass.
+    _asked_to_count = _is_counting_question
+    if _ans is None and _asked_to_count:
+        return _refusal(route, trace, t0,
+                        reason="FAIL_CLOSED__EXECUTION_PRODUCED_NO_ANSWER",
+                        detail={"layer": layer,
+                                "carried_status": (carried or {}).get("status"),
+                                "carried_stdout": str((carried or {}).get("stdout"))[:200],
+                                "confined": (carried or {}).get("confined"),
+                                "live_workspace_untouched": (carried or {}).get("live_workspace_untouched"),
+                                "why": ("the program ran under an admitted confinement but its "
+                                        "output is not an answer to the question asked"),
+                                "fix": "ask a shape the carrier can compute, or supply the metric explicitly"},
+                        acquisition=acquisition)
     return {
         "schema": SCHEMA, "model_id": MODEL_ID, "version": VERSION,
         "operation": "RESOLVE", "pass": True, "layer": layer,
@@ -510,7 +572,27 @@ def inventory() -> dict:
             "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
             "NO_BENCHMARK_FRONTIER_CLAIM__HLE_ARC_SWEBENCH_OSWORLD_NEVER_RUN_HERE",
         ],
+        # Does this model ENFORCE the engineering contract it ships with? Measured, not
+        # asserted: the gate engine is asked whether it implements every gate the Supreme
+        # contract declares. On 2026-11-09 the honest answer changed from "nothing enforces
+        # it" (zero Python references to the contract) to "10 of 10 gates, 13 tests".
+        "engineering_contract_enforced": _contract_state(),
     }
+
+
+def _contract_state() -> dict:
+    """The gate engine's coverage of the shipped contract, or why it cannot be asked."""
+    try:
+        from canonical.runtime import supreme_gate_engine_v1 as gates
+
+        cov = gates.contract_coverage()
+        return {"engine": "supreme_gate_engine_v1",
+                "declared": cov["declared_count"],
+                "implemented": cov["implemented_count"],
+                "complete": cov["complete"],
+                "missing": cov["missing_from_engine"]}
+    except Exception as exc:  # noqa: BLE001 - an unaskable gate is reported as unenforced
+        return {"engine": None, "complete": False, "error": str(exc)[:120]}
 
 
 def status() -> dict:

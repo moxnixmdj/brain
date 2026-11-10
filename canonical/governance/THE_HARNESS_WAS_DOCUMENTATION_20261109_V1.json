@@ -1,0 +1,83 @@
+{
+ "schema": "brain.governance.THE_HARNESS_WAS_DOCUMENTATION_20261109_V1",
+ "date": "2026-11-09",
+ "round": 33,
+ "status": "THE_HIGHEST_VALUE_ASSET_WAS_A_775_LINE_FRAMEWORK_THAT_NOTHING_ENFORCED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "what_i_found_by_looking_before_building": {
+  "the_asset": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/",
+  "what_it_contains": [
+   "SKILL.md (mandatory 5-document load protocol)",
+   "references/constitution.md (115 lines)",
+   "references/operating-protocol.md (358 lines)",
+   "references/sub-agent-profiles.md (137 lines)",
+   "references/environment-profile.md (85 lines)",
+   "references/persistent-state.md (80 lines)",
+   "SUPREME_EXECUTION_CONTRACT_V1.json -- 10 mandatory gates, 13 required receipt fields, status MANDATORY_FAIL_CLOSED_INTEGRATION_GLUE",
+   "INTERNALIZATION_MANIFEST.json -- 7/7 source blobs integrity-matched to upstream commit c062bec"
+  ],
+  "the_measurement": "grep -rln 'SUPREME_EXECUTION_CONTRACT|supreme_c062bec|submission_gates' --include=*.py canonical/  ->  ZERO RESULTS",
+  "what_that_means": "775 lines of engineering discipline, a fail-closed contract, and a verified upstream import, executed by no code in the repository. The framework's own SKILL.md says it 'is guidance, not a runtime enforcement mechanism'. That sentence was true, and being true is what made it the largest unclaimed asset here."
+ },
+ "why_this_was_the_right_place_to_spend__the_2026_evidence": {
+  "same_model_different_harness": "6.7% -> 68.3% on coding benchmarks from changing only the edit-tool format (Grok Code Fast); 52.8% -> 66.5% on Terminal-Bench 2.0 changing nothing but the scaffold (LangChain coding agent)",
+  "token_tax": "up to 40x token difference between harnesses on an identical model (KDD 2026 scaffold-effect study); Terminal-Bench 2.0 paper reports Opus 4.5 at 52.1% vs 57.8% across harnesses with a 65x token difference",
+  "the_inference_that_matters_here": "if scaffolding beats the model when the model HAS weights, it is everything when the model has none, because there is nowhere else for the capability to live",
+  "and_for_speed": "every gate below costs 98 microseconds, so 'insanely fast' and 'enforced' are not in tension"
+ },
+ "what_i_built_and_measured": {
+  "supreme_gate_engine_v1": {
+   "what": "the 10 declared gates and 13 required fields, executable; fail-closed; two terminal verdicts only",
+   "coverage": "10 of 10 declared gates implemented, proven by contract_coverage() against the contract file itself",
+   "self_check": "19 distinct negative cases -- every gate removed in turn, a boolean posing as test evidence, a prose test claim, a known acceptance gap, a read solution, an unrecognised contamination state, an unrecognised risk class, and a caller asserting its own authorization past a failed gate",
+   "cost": "98 microseconds per audit",
+   "tests": "13"
+  },
+  "failure_triage_v1": {
+   "what": "maps the 150+ FAIL_CLOSED__*/FAIL__* statuses this tree emits onto 8 causes and 7 recovery actions",
+   "the_design_law_enforced_by_the_self_check": "two causes that share an action are one cause wearing two names -- the self-check found exactly that violation in my own first draft (CONTAMINATION and EXECUTION_FAILED both said FIX_THEN_RETRY) and it was split",
+   "the_rule_that_matters": "a PROVEN_LIMIT is never retryable, and an UNKNOWN failure STOPS rather than loops -- an unrecognised status is a hole in the table, not an invitation to retry",
+   "cost": "under 200 microseconds per triage",
+   "tests": "10"
+  },
+  "wired_into_the_model": "brain_one_model_v3.inventory() now reports engineering_contract_enforced, so the model states whether it enforces the contract it ships with rather than leaving a reader to grep for it"
+ },
+ "THREE_REAL_DEFECTS_FOUND_WHILE_DOING_THIS": [
+  {
+   "defect": "'how many unique words in data.txt' returned pass=True, answer=None",
+   "how_it_happened": "there was no refinement edge from `uniquelines` to `words`, so the question resolved to NO kind; with no kind, the door fell past the confined bridge and ran a raw `wc -w`, which printed '6 data.txt' and exited 0",
+   "why_that_is_the_worst_kind_of_wrong": "it is a correct execution of the wrong command, reported as success. A caller checking `pass` gets a green light and a number that answers a different question",
+   "fix_1": "`unique words` is declared as a refinement of `words`, so it RESOLVES and is then refused by name -- a refusal a caller can read beats a fast wrong answer",
+   "fix_2": "a counting question that produced no number now returns FAIL_CLOSED__EXECUTION_PRODUCED_NO_ANSWER with the confinement evidence attached",
+   "fix_2_scope": "narrowed twice before it was right: keying on the bridge layer missed the case (the bridge refuses it first, and the raw carrier answers), while applying it to stated commands broke `sort -u data.txt`, whose listing IS its answer. The rule now keys on WHAT WAS ASKED."
+  },
+  {
+   "defect": "my own guard failed open",
+   "detail": "the first version of the rule referenced `goal`, which is not a parameter of `_answer`; the NameError was swallowed by the except clause and the rule silently never fired. A fail-open inside the code written to prevent a fail-open.",
+   "fix": "the question is passed explicitly by the caller, and the module default is fail-CLOSED"
+  },
+  {
+   "defect": "the door returned '6' (string) on one path and 6 (int) on another",
+   "detail": "the bridge returns `answer` as a display string and `value` as the typed number. A caller comparing == 6 passed on one layer and failed on the other.",
+   "fix": "the door surfaces the typed value first and coerces a digit string; the bridge keeps its split, because display and type are genuinely different jobs"
+  }
+ ],
+ "what_is_not_done_and_must_not_be_claimed": [
+  "the gate engine enforces submission discipline; it does NOT make the model smarter. Nothing here improves the 22.2% SWE rate.",
+  "the 10 gates are the contract's own gates, not a validated predictor of patch quality. No experiment yet shows that passing all 10 correlates with a green suite.",
+  "failure_triage_v1 routes on status STRINGS, which is a heuristic. It is a table, not a proof, and an unrecognised status stops rather than guesses -- which is the best available behaviour, not a guarantee.",
+  "the Supreme documents themselves (775 lines) are still prose a reader must apply; only the 10 gates became code."
+ ],
+ "the_next_harness_step__identified_not_built": "The 2026 literature converges on four harness moves: structure-aware error recovery (done here), context compaction, plan/execute separation, and a search subagent. Of those, SEARCH is the highest measured ROI -- WarpGrep as a search subagent added +2.1 to +3.7 points on SWE-bench Pro across every model tested. This tree has capability_selection_retrieval_v1 and adaptive_retrieval_query_expansion_v1, but no subagent that searches the repository and reports locations rather than content. That is the next build.",
+ "suite": "113 passed + 911 subtests across 8 files; guard PASS 17/0",
+ "counts": {
+  "capabilities": 443,
+  "compiled_bytes": 10220235
+ },
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}
