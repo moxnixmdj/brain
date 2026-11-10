@@ -102,6 +102,11 @@ def _default_workflow_db() -> pathlib.Path:
 def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqlite3.Connection]:
     is_default = db_path is None and not os.environ.get("BRAIN_COMPILED_WORKFLOW_DB")
     target = db_path or _default_workflow_db()
+    # A path-shaped str is not a Path. Every caller that passed a str got away with it only
+    # while the file already existed, because sqlite3.connect() accepts a str. The first call
+    # that needed to CREATE the parent directory died on `.parent`. Normalise once, here.
+    if not isinstance(target, pathlib.Path):
+        target = pathlib.Path(target)
     target.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(target), timeout=10.0)
     conn.execute("PRAGMA journal_mode=WAL")
@@ -1384,6 +1389,14 @@ def verify_postcondition(
         # to the number is a shape error, not a wrong answer.
         expected_n = postcondition.get("equals", postcondition.get("count", postcondition.get("expected")))
         receipts = list((execution_result or {}).get("step_receipts") or [])
+        # A step does NOT receive the previous step's stdout: every cli_exec step is launched
+        # independently through the carrier, and cli_pipeline is refused at the boundary. So
+        # for a multi-step sequence this "count" would be the line count of the LAST step's
+        # own output -- a number that describes the procedure, not the file. Measured
+        # 2026-11-09: `sort -u f` then `wc -l f` qualified then answered 1 for a 3-line
+        # answer. Refusing is correct; a confidently wrong answer is the worst outcome.
+        if len(receipts) > 1:
+            return False, "POSTCONDITION_STDOUT_LINE_COUNT_UNDEFINED_FOR_MULTI_STEP"
         text = ""
         for receipt in receipts:
             text = str(receipt.get("stdout") or "")

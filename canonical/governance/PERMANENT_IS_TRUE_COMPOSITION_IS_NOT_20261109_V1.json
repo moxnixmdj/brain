@@ -1,0 +1,61 @@
+{
+  "claim_id": "PERMANENT_IS_TRUE_COMPOSITION_IS_NOT_20261109_V1",
+  "round": 42,
+  "date": "2026-11-09",
+  "type": "MEASUREMENT + DEFECT FIX",
+  "title": "One demonstration does persist permanently and does answer on files it never saw. Two skills cannot be chained, and until this round a chained skill answered wrongly instead of refusing.",
+  "the_three_pillars_tested_separately": {
+    "1_permanence_across_a_process_boundary": {
+      "method": "PHASE A taught 23 verbs into a durable sqlite file. A BRAND NEW interpreter (PHASE B) recalled each one against a file that DID NOT EXIST during teaching and had DIFFERENT contents. Ground truth computed independently by running each verb natively.",
+      "result": "recalled 23/23; AND returned the correct answer 23/23",
+      "verdict": "TRUE. The skill survives process death and the file it names. First time measured rather than asserted.",
+      "what_it_is_not": "The retrieval used the SAME sentence it was taught with. Nothing here shows generalisation, only persistence."
+    },
+    "2_instant_learning_in_a_new_environment": {
+      "method": "The skilldb was created in one process and opened in a second; fixtures were written fresh at recall time.",
+      "result": "23/23",
+      "verdict": "TRUE FOR THIS ENVIRONMENT CLASS -- one host, one filesystem, one sandbox, the same 33 read verbs. A genuinely new environment (different OS, different installed tools, a browser, a desktop) was NOT tested, and the standing 2026 evidence says skills transfer poorly to unseen sites (PolySkill: Skill Reusability <4%; SkillLens: 25% negative transfer).",
+      "what_it_is_not": "Not evidence of arbitrary-environment learning. It is one environment, reused."
+    },
+    "3_composition": {
+      "method": "Teach a two-step skill ['sort -u f'] then ['wc -l f'] -- the natural 'count the unique lines' composite -- and see what it answers.",
+      "result": "It QUALIFIED (held-out + sabotage control) and then answered 1 where the truth was 3. Repeated across three composites: 1 vs 3; 1 vs 0; 2 vs [apple,apple]. Every multi-step skill returned the line count of the LAST program's own stdout.",
+      "cause": "Every cli_exec step is launched independently through the carrier (execute_compiled_steps L960-1040). No step receives the previous step's stdout. cli_pipeline is refused at the boundary (L962). So step 2 re-reads the file from scratch, and stdout_line_count counted the last receipt's output instead of the answer.",
+      "verdict": "FALSE, and it was FALSE SILENTLY -- the worst outcome. Fixed this round: a multi-step stdout_line_count now fails closed with POSTCONDITION_STDOUT_LINE_COUNT_UNDEFINED_FOR_MULTI_STEP.",
+      "why_this_is_the_answer_to_the_thesis": "Composition is the multiplier the claim needs. 23 verbs used in parallel is 23 capabilities. 23 verbs that sequence is thousands. The ceiling is 23 and not one more, because the chain does not exist."
+    }
+  },
+  "4_retrieval_is_lexical_not_semantic": {
+    "method": "Eight phrasings of one skill whose stored skeleton is 'unique lines of ?path0'.",
+    "result": "2 of 8 fired. The exact sentence fired. 'distinct lines of' fired. Every phrasing that ADDED a word failed: 'show unique lines of', 'the unique lines of', 'list unique lines of', 'unique lines for', 'unique lines in'.",
+    "cause": "goal_regex is anchored: ^\\s*unique\\s+lines\\s+of\\s+(?P<path0>...)\\.?\\s*$. A synonym table exists for ONE word; a prefix verb or a different preposition is a miss.",
+    "verdict": "The retrieval is a regular expression over the teaching sentence, not an understanding of the request. 'Have it do it once and it knows the task' is not what happens -- it knows one SENTENCE.",
+    "external_2026": "SkillReason (arXiv 2608.08640) exists precisely because realistic user requests are concise and underspecified; Graph-of-Skills (arXiv 2604.05333) notes lexical retrieval is robust for filenames but brittle under paraphrase. Named by the field."
+  },
+  "what_is_real_vs_not": {
+    "REAL": [
+      "A single-step read-only command, demonstrated once, persists across process death and answers correctly on a file with new contents (23/23).",
+      "Admission is honest: 33 of 37 verbs installed; sh/bash/python3/git/curl/rm refused by the gate.",
+      "The refusal path is fail-closed and tested."
+    ],
+    "NOT_REAL": [
+      "That a taught skill can be chained with another. It cannot; cli_pipeline is refused.",
+      "That a taught skill fires when the user asks in their own words. 2 of 8 phrasings.",
+      "That instant learning works in arbitrary environments. One environment was tested.",
+      "That any of this reaches write, network, code execution or git. All refused.",
+      "That the numbers touch OSWorld 2.0 (Opus 5.5 binary 48.7%, this system ZERO_CREDIT) or SWE-bench Pro (89.9% vs 22.2%)."
+    ]
+  },
+  "the_sentience_claim": "Unchanged and unhelped. A durable table of 23 anchored regexes mapping sentences to argument vectors is a lookup table: no state, no self-model, no goals, no preference. The 2026 consensus recorded in r35-r41 stands -- none confirmed, LLM substrates rated below chickens on leading indicator checklists, behavioural evidence formally insufficient (TiCS Apr 2026). Nothing measured this round moves that.",
+  "the_smartest_next_thing": {
+    "1": "Make the pipeline a first-class step. `sh` is rightly refused, but a `cli_pipe` layer that admits ONLY verbs from READ_ONLY_PROGRAMS and joins them with a real pipe is the smallest change that multiplies 23 capabilities into compositions -- and it is where the whole 2026 literature says the bottleneck now sits (GraSP 2604.17870: 'the bottleneck has shifted from skill availability to skill orchestration'; SkillComposer 2606.32025; SkillWeaver 2606.18051: decomposition quality is the primary bottleneck at 34.2% category recall).",
+    "2": "Replace goal_regex with retrieval over (skeleton, argument roles, verb set). One exemplar cannot teach a paraphrase; a retriever can be built from the 23 skeletons that already exist.",
+    "3": "Only after 1 and 2: a write layer. It is refused by design and should stay refused until composition is trustworthy, because a wrongly-composed write is destructive where a wrongly-composed read is merely wrong."
+  },
+  "artifacts": {
+    "tests": "canonical/tests/test_a_second_step_cannot_read_the_first_ones_output_v1.py (3)",
+    "defect_fixed": "causal_trace_to_skill_compiler_v1.py _verify_postcondition stdout_line_count: multi-step now fails closed",
+    "r41_track_unchanged": "23/33"
+  },
+  "preexisting_failures_not_chased": "The 3 failures in test_a_skill_is_bound_where_the_carrier_can_reach_it_v1.py reproduce IDENTICALLY with the patch stashed (3 failed / 29 passed both ways) -- test-order pollution via BRAIN_COMPILED_WORKFLOW_DB, not a regression."
+}
