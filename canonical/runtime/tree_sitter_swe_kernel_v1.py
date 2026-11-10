@@ -174,7 +174,16 @@ def source_files(source_root: pathlib.Path, *, max_files: int = MAX_FILES) -> li
             if path.is_file() and detect_language(path):
                 files.append(path)
                 if len(files) > max_files:
-                    raise TreeSitterSWEError("SOURCE_FILE_LIMIT_EXCEEDED")
+                    # `max_files` is a CEILING on how much work to do, not a demand that the
+                    # tree be small enough. Measured 2026-11-09: `source_files(root,
+                    # max_files=20)` raised SOURCE_FILE_LIMIT_EXCEEDED on a 38-file tree, so
+                    # every caller passing its own budget got an exception instead of a
+                    # bounded slice -- and `code.index.tree_sitter.incremental.v1` looked
+                    # broken to anyone who passed `max_files` at all.
+                    #
+                    # Truncation is the caller's stated intent. The bound is still enforced;
+                    # it is simply enforced by stopping, which is what a ceiling means.
+                    return sorted(files[:max_files])
     return sorted(files)
 
 
@@ -250,19 +259,61 @@ def analysis_context() -> dict[str, Any]:
 
 @lru_cache(maxsize=None)
 def _language_for(language: str):
+    """Resolve a tree-sitter grammar, preferring the maintained per-language package.
+
+    Measured 2026-11-09: `tree-sitter-languages` is pinned to an older tree-sitter and dies
+    with `TypeError: __init__() takes exactly 1 argument (2 given)` on tree-sitter 0.26,
+    while `tree-sitter-python` works. The kernel imported ONLY the stale bundle, so every
+    parse raised TREE_SITTER_LANGUAGE_UNAVAILABLE:python even with a working grammar
+    installed -- six bound capabilities dead for a packaging reason, not a capability one.
+
+    Order: the maintained single-language package first, the legacy bundle second. Both are
+    tried; whichever resolves is cached. A missing grammar still raises, so this widens what
+    works without widening what is silently assumed.
+    """
+    module_name = {"python": "tree_sitter_python",
+                   "javascript": "tree_sitter_javascript",
+                   "typescript": "tree_sitter_typescript",
+                   "rust": "tree_sitter_rust",
+                   "go": "tree_sitter_go"}.get(language)
+    if module_name:
+        try:
+            import importlib
+
+            mod = importlib.import_module(module_name)
+            return mod.language()
+        except Exception:  # noqa: BLE001 - fall through to the legacy bundle
+            pass
     from tree_sitter_languages import get_language
+
     return get_language(language)
 
 
 def parser_for(language: str):
+    """Build a parser for `language`, tolerating both tree-sitter constructor APIs.
+
+    tree-sitter 0.26 removed `Parser()` + `set_language()`; the constructor now takes the
+    language directly. Measured 2026-11-09: the old two-step form raised
+    TREE_SITTER_LANGUAGE_UNAVAILABLE for a grammar that had loaded successfully, so the
+    failure was reported as a missing language while the real cause was an API change.
+    Both forms are attempted, current first.
+    """
     try:
         from tree_sitter import Parser
-        parser = Parser()
-        parser.set_language(_language_for(language))
-        return parser
     except ImportError as exc:
         raise TreeSitterSWEError("TREE_SITTER_SUBSTRATE_MISSING") from exc
-    except Exception as exc:
+    lang = _language_for(language)
+    try:
+        from tree_sitter import Language
+
+        return Parser(Language(lang) if not isinstance(lang, Language) else lang)
+    except Exception:  # noqa: BLE001 - fall back to the pre-0.22 API
+        pass
+    try:
+        parser = Parser()
+        parser.set_language(lang)
+        return parser
+    except Exception as exc:  # noqa: BLE001 - both forms failed: a real grammar problem
         raise TreeSitterSWEError("TREE_SITTER_LANGUAGE_UNAVAILABLE:" + language) from exc
 
 

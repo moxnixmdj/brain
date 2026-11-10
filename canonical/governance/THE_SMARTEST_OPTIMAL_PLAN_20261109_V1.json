@@ -1,0 +1,83 @@
+{
+ "schema": "brain.governance.THE_SMARTEST_OPTIMAL_PLAN_20261109_V1",
+ "date": "2026-11-09",
+ "round": 34,
+ "status": "PLAN_DERIVED_FROM_SEVEN_MEASUREMENTS__NOT_FROM_PRIORITY_ORDERING",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_one_question": "what is the smartest optimal plan",
+ "the_method": "measure what is actually broken, price each bottleneck by what it costs, and order by cost-per-fix. A plan that is a wish-list of features is not a plan.",
+ "seven_measurements_taken_this_round": {
+  "1_door_refusal_latency": "1 ms -- the door is NOT slow at refusing. Routing is fine.",
+  "2_door_success_latency": "89-95 ms warm through the confined carrier -- fine.",
+  "3_model_load": "211.8 ms to load the 10.2 MB compiled model. Paid once per process; real but not a wall.",
+  "4_code_search": "git grep across 16k files = 17.8 ms; `grep -rn` = 78.4 ms. SEARCH IS NOT THE BOTTLENECK. My round-33 claim that a search subagent was the next build was wrong for this tree: WarpGrep's +2.1/+3.7 came from agents that lacked any search; this one already has a 17.8 ms one.",
+  "5_swe_engine_uses_the_index": "YES -- cow_impact_repair_engine_v1 already imports code_tree_sitter_impact_v1 and code_tree_sitter_incremental_index_v1, with a documented <5 ms warm path via IncrementalSemanticGraph. My round-33 statement that the tree had 'no subagent that searches' was factually wrong.",
+  "6_the_real_ceiling": "HYPOTHESIS SPACE. The engine expresses repairs as replacement of ONE AST span. Every miss in the control-verified corpus needs either more than one span, or statements the source does not contain. That is a hypothesis-space limit, not an effort limit -- the same finding ARC produced, in a different domain.",
+  "7_the_tree_sitter_substrate": "ABSENT by default. With it absent, 6 bound capabilities (code.index.tree_sitter.incremental.v1, code.impact..., code.patch..., code.multilanguage.parse..., python.refactor.test_scaffold.fusion.v1, python.symbol.resolve.standalone.v1) cannot run. Installing tree-sitter + a grammar unlocks them -- measured: 38 files, 1,087 definitions, 100,270 references, 0 syntax errors, 0 model calls, $0."
+ },
+ "two_real_defects_found_and_fixed": [
+  {
+   "defect": "`max_files` was a hard failure instead of a ceiling",
+   "detail": "source_files(max_files=20) raised SOURCE_FILE_LIMIT_EXCEEDED on a 38-file tree. Every caller passing its own budget got an exception instead of a bounded slice.",
+   "fix": "truncate to the ceiling. Bound still enforced, by stopping.",
+   "risk": "none -- this only widens which calls succeed, never which ones are refused."
+  },
+  {
+   "defect": "the kernel could only resolve grammars through a stale bundle",
+   "detail": "tree-sitter-languages is pinned to an older tree-sitter; on 0.26 it dies with TypeError. The kernel imported ONLY that bundle, so a working per-language grammar was ignored and every parse reported TREE_SITTER_LANGUAGE_UNAVAILABLE.",
+   "fix": "prefer the maintained per-language package, fall back to the bundle, and accept both tree-sitter constructor APIs.",
+   "verified": "with no substrate installed the kernel still fails closed with TREE_SITTER_SUBSTRATE_MISSING -- the change widens what works without widening what is assumed."
+  }
+ ],
+ "an_error_i_made_and_reversed": {
+  "what_i_did": "installed tree-sitter + tree-sitter-languages to test the substrate",
+  "the_collateral": "the test class gate is `tree_sitter AND tree_sitter_languages present`; installing both flipped 10 SKIPPED tests into 10 FAILING ones, because the bundle itself is broken on 0.26. I turned a clean skip into a red suite.",
+  "what_i_did_about_it": "uninstalled all three packages and re-verified the file returned to its exact pre-existing baseline (26 failed / 3 passed / 11 skipped, unchanged from before I touched anything)",
+  "the_lesson": "an environment change is a code change. It must be measured and reverted, not left behind because the numbers looked better."
+ },
+ "THE_PLAN__ordered_by_measured_cost_per_fix": [
+  {
+   "rank": 1,
+   "action": "STATEMENT INSERTION in the repair engine",
+   "why": "it is worth 5 of the 7 misses on the only corpus that was scored on foreign code with controls. Nothing else on this list has a measured payoff of that size.",
+   "cost": "the mechanism exists -- python_tests_generate_scaffold and python.swe.transform_and_synthesize.v1 both synthesis NEW statements. The work is to make the repair engine author a paragraph (an isinstance branch, a comprehension, a join) instead of replacing one span.",
+   "success_criterion": "a green suite on the held-out corpus -- not a benchmark claim.",
+   "honest_risk": "this is the hardest item on the list and may not work. It is ranked first because the payoff is measured, not because it is easy."
+  },
+  {
+   "rank": 2,
+   "action": "WARM-TREE-SITTER CACHE: stop re-validating what was already validated",
+   "why": "measured warm index = 695 ms for a NO-OP with 38/38 files reused. Of that, 133 ms is re-hashing rows whose hash was verified at write time and ~102 ms is per-entry validation of 101,357 entries. The cache is a re-validation, not a reuse.",
+   "fix_shape": "a process-level memo keyed by (path, mtime, size, content-hash) that skips the JSON re-serialisation and the per-entry loop for rows already proven this session. The integrity guarantee moves from re-proved-every-call to proved-once-then-invalidated -- which is exactly what a cache means, and must be stated that way in the receipt rather than quietly dropped.",
+   "expected": "695 ms -> tens of ms on the no-op path",
+   "honest_risk": "weakening a per-call integrity check is a real trade. It must be a separate, named, opt-in mode, never the default."
+  },
+  {
+   "rank": 3,
+   "action": "MAKE THE SUBSTRATE A DECLARED DEPENDENCY, not an ambient one",
+   "why": "6 bound capabilities silently cannot run on a clean checkout. Worse, the test gate is an all-or-nothing skip, so the suite reports GREEN-ish while the capability is dead. That is the exact reporting failure this project legislates against.",
+   "fix_shape": "a substrate probe that reports WHICH capabilities are live vs dark, wired into inventory() the same way engineering_contract_enforced now is",
+   "cost": "hours, not days. Highest ratio of honesty gained to effort spent."
+  },
+  {
+   "rank": 4,
+   "action": "THE 211.8 ms MODEL LOAD",
+   "why": "paid once per process, so it is invisible in a benchmark and painful in a CLI. It is the last real latency number.",
+   "fix_shape": "a prebuilt marshal/pickle of the parsed core rather than re-parsing 10.2 MB of JSON",
+   "expected": "uncertain -- must be measured before it is claimed"
+  }
+ ],
+ "what_i_will_NOT_do_and_why": {
+  "a_search_subagent": "measured unnecessary: git grep is 17.8 ms and the SWE engine already consumes a tree-sitter index. Adding one would be motion, not progress.",
+  "more_refusal_machinery": "the refusal layer is already the tree's densest component. Its marginal value is now lower than the engine's.",
+  "speed micro-optimisation of the carrier": "89 ms is container-grade. Below ~55 ms needs a pre-warmed sandbox, which is an architecture change, not a patch.",
+  "claiming Opus 5.5 parity": "there is still no public-benchmark number of any kind, and 22.2% on a 9-bug private corpus is not one."
+ },
+ "the_honest_summary": "The smartest plan is not more machinery -- this tree already has more than it can execute. It is to raise the CEILING of the one engine that has been honestly scored, then make the dark capabilities visible instead of silently skipped. Ordering is by measured payoff: statement insertion (worth 5 of 7 misses) > cache the index (695 ms of pure waste, fixable) > declare the substrate (6 capabilities dark, cheap to surface) > model load (211 ms, once).",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}
