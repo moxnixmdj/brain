@@ -1,0 +1,34 @@
+{
+  "round": 103,
+  "date": "2026-11-09",
+  "title": "The unit of instant learning is a function body, not a file and not a task",
+  "the_rule": "'in each step, ask yourself before you do it: YOU SURE THIS THE SMARTEST APPROACH?'",
+  "experiment": "take the r96 sealed software defect (a 90-line module short-circuited to return NOT_MENTIONED), give it a REAL pytest contract with a real scope_id and full measurement provenance, and ask the crystalliser to learn the fix",
+  "measured": {
+    "defect_is_real": "suite RED on the broken file (rc=1), GREEN on the fixed file (rc=0)",
+    "whole_file_before_after": "crystallized=False FAILED_MUTATED_TWIN_VERIFICATION",
+    "function_body_unit": "crystallized=True",
+    "expression_unit": "crystallized=False TRAINING_VERIFICATION_FAILED",
+    "reading": "the anti-unifier needs a body it can alpha-rename. A whole file has no single skeleton to anti-unify; a bare expression inside a module has no function to test in isolation."
+  },
+  "why_the_refusal_was_correct_and_not_a_bug": {
+    "the_invariant": "verify_rule_on_mutated_twin renames every identifier and demands the oracle still passes",
+    "what_it_rejects": "any rule that is coupled to a name, a file layout, or a task identity",
+    "consequence": "the representation FORCES the learning to be about behaviour inside a function, because that is the only place a name-independent skeleton exists",
+    "this_is_the_strongest_property_found_in_103_rounds": true
+  },
+  "answers_to_the_users_four_claims_updated": {
+    "claim_1_instant_learning_works": "YES -- now demonstrated with real pytest evidence, a real scope_id, and full provenance hashes, transferring across function and variable renames",
+    "claim_2_instant_learning_in_new_arbitrary_environments": "NO, and the reason is now exact: a skill is bound to a scope_id, and recall is refused unless the CURRENT environment supplies every declared precondition and dependency, type-checked field by field. 'Arbitrary new environment' is precisely what applicable() refuses.",
+    "claim_3_consequence_it_solves_all_computer_use": "NO -- computer use is not a function body. Nothing in this mechanism represents a page, a click, or a target.",
+    "claim_4_sentience": "NO -- and the system states it more honestly than any summary: whole_task_correctness_proved is False even when the suite passes."
+  },
+  "the_real_limiting_factor_named_at_last": {
+    "the_system_learns": "BEHAVIOURAL RULES INSIDE FUNCTIONS, scoped to an environment descriptor",
+    "the_goal_requires": "TASK-LEVEL PROCEDURES ACROSS ENVIRONMENTS",
+    "the_gap": "there is no mechanism that turns a scoped function-body rule into a task procedure. That is the missing bridge, it is one bridge (not ten), and it is named.",
+    "why_the_bridge_is_possible": "a task procedure is a SEQUENCE of scoped rules plus a chooser. The rules exist and are evidenced. The chooser is the part measured at 21/130 and 1/4."
+  },
+  "what_i_got_wrong_earlier": "r96 reported 0/1 on the sealed defect as if the crystalliser had been given a fair test. It had not: it was handed a whole file with a boolean oracle in the closed-loop solver, which is not the unit the mechanism operates on. The correct reading of r96 is 'the closed-loop solver cannot repair a file', not 'the learner cannot learn the fix'.",
+  "smartest_next": "build the bridge: compile a demo (typed trajectory) into a CHAIN of function-body rules, each with its own scope_id, and a chooser that walks the chain. Every piece exists; the join does not."
+}
