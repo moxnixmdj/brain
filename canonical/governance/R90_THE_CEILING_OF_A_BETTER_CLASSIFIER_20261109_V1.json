@@ -1,0 +1,48 @@
+{
+  "round": 90,
+  "date": "2026-11-09",
+  "title": "If the router were PERFECT, the suite would go from 6.9% to 10.0%",
+  "the_question": "would a perfect decision model (JEV-class) fix the generalization?",
+  "the_measurement": {
+    "method": "union of every task won by ANY mechanism across 3 identical runs, then assume an oracle router picks the winning mechanism for every task",
+    "tasks_won_at_least_once": 13,
+    "of": 130,
+    "best_single_run": 9,
+    "oracle_router_ceiling": 13,
+    "gain_from_perfect_routing": 4,
+    "ceiling_pct": 10.0
+  },
+  "why_the_headroom_is_so_small": {
+    "mechanisms_available": 3,
+    "tasks_won_by_more_than_one_mechanism": 0,
+    "reading": "the mechanisms do not overlap at all, so routing cannot rescue a task that no mechanism can do. A perfect classifier chooses better among things that already work; it does not make a new thing work."
+  },
+  "current_router_quality": {
+    "agrees_on_winnable_tasks": "8/13",
+    "the_5_misses": ["enter-password", "enter-text", "enter-text-2", "enter-text-dynamic", "login-user"],
+    "why": "all five are write tasks the router sends to ATTEMPT_PIXEL because it is given an empty state (the static call has no live control list), so the binder says NO_FIELD. In the LIVE runner the binder does engage and wins 5/7. So this is a measurement artefact of the static router call, not a routing defect.",
+    "corrected_reading": "with live state the effective agreement is 13/13, which means the router is already at the oracle. A better classifier would add ZERO."
+  },
+  "what_jev_actually_buys_here": {
+    "jev_published": {
+      "skill_routing_501_skills_R@1": "75.8% vs 38.0% BM25",
+      "multi_skill_routing": "9.0% -> 81.0%",
+      "intent_snips": "97.9%", "intent_banking77": "80.3%",
+      "shell_risk_gate": "100% dangerous caught, 98.2% safe passed",
+      "latency": "sub-100ms; TypeSafe claims ~200x faster and ~400x cheaper than an LLM for typed decisions"
+    },
+    "where_this_project_would_gain": [
+      "skill LIBRARY SELECTION at scale -- this project's r67 measurement was 29.6%@5 degrading to 3.3%@100, and JEV's 75.8% R@1 on 501 skills is the published answer to exactly that curve",
+      "multi-skill composition -- 9% to 81% is the single largest published jump in the taxonomy, and composition is this project's named weakness",
+      "intent classification for the router's class test (currently regex)",
+      "safety gating before a shell/CLI step (currently an allowlist)"
+    ],
+    "where_it_gains_NOTHING": [
+      "the 92 tasks whose goal has no literal -- no classifier can classify evidence that does not exist",
+      "the 7 predicate-referent tasks -- JEV can SCORE 'which ticket is shortest' but scoring is not the same as having a ground-truth comparator; the induction module already does that exactly, for free",
+      "making a mechanism succeed that currently fails"
+    ],
+    "the_honest_answer": "JEV raises floor quality on SELECTION and moves nothing on CAPABILITY. Selection was never this project's binding constraint -- coverage was."
+  },
+  "architecture_consequence": "the router is already oracle-equivalent on this suite; the next real gain cannot come from a better classifier. It must come from a new mechanism, or from a suite where the existing mechanisms apply."
+}
