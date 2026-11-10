@@ -1,0 +1,54 @@
+{
+  "round": 54,
+  "date": "2026-11-09",
+  "title": "The worst defect found in nineteen rounds: a two-step skill answered 0 where the truth was 3, and every instrument in the project said PASS",
+  "how_it_was_found": "the round was scheduled to audit multi-step answers for the first time. The probe returned 0 immediately, before any audit ran.",
+  "the_defect": {
+    "skill_as_recorded": ["cli_exec: sort -u <file>", "cli_exec: wc -l"],
+    "compile": "PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED",
+    "execution": "step 0 printed 'a\\nb\\nz\\n' to its own receipt; step 1 ran with stdin=DEVNULL, wc got EOF, printed '0' and exited 0",
+    "answer": 0,
+    "truth": 3,
+    "reported": "pass: true, STDOUT_INTEGER_VERIFIED:0",
+    "cause": "cli_exec steps are executed independently with stdin=subprocess.DEVNULL. There is no dataflow between steps.",
+    "control": "the same intent recorded as ONE cli_pipeline step answers 3, correctly"
+  },
+  "why_every_instrument_missed_it": {
+    "carrier": "confinement was real, the live workspace was untouched, and wc exiting 0 on empty input is correct behaviour. Nothing to report.",
+    "verifier": "a genuinely empty file also yields 0 / STDOUT_INTEGER_VERIFIED:0. The broken answer and the honest empty answer are byte-identical in the receipt.",
+    "derivation_audit": "returns NOT_AUDITABLE__MULTI_STEP. It refuses rather than catches.",
+    "shape_audit": "SHAPE_MATCHES_THE_GOAL -- a count was asked for and a count came back.",
+    "conclusion": "the wrong answer is indistinguishable from the right one, and from a legitimately empty one, using every check this project has."
+  },
+  "the_honest_answer_is_also_unauditable": {
+    "pipeline_answer": 3,
+    "verification": "STDOUT_INTEGER_VERIFIED:3",
+    "audit": "NOT_AUDITABLE__PIPELINE",
+    "implication": "r48's headline, 23/23 ANSWER_MATCHES_ITS_SOURCE, was 23 single-command answers. No multi-step answer has ever been auditable in this project, and none had ever been attempted before this round."
+  },
+  "the_fix": {
+    "where": "compile time, before the trace is elevated and before donor deletion",
+    "rule": "a step list containing more than one cli_exec is refused",
+    "status": "FAIL_CLOSED__MULTI_STEP_CLI_EXEC_IS_NOT_A_PIPELINE",
+    "reason_given_to_the_caller": "cli_exec steps run with stdin closed, so a second cli_exec cannot read the first one's output. Record the pipeline as one cli_pipeline step, or the two reads as separate skills.",
+    "why_compile_time": "the mistake is made when the trace is recorded. Refusing there costs nothing, and the alternative is a silently wrong answer."
+  },
+  "corroboration_2026": {
+    "rtk-ai/rtk issue 4091": "'wc does not read stdin -- silent false zero on redirect and pipe ... when no file operand is given, it prints 0 and exits 0, making it indistinguishable from a real empty file'",
+    "D10Scot/Dispatcharr PR 240": "'the redirect discards the sentence explaining the emptiness, which leaves empty-because-it-worked and empty-because-it-failed indistinguishable ... a pipe throws away the exit code ... | head, | wc -l and | grep all launder a failure into a plausible empty answer'",
+    "note": "the same defect class, in production, in the same week, found independently. It is not specific to this project and it is not fixed by better evaluation of final outputs."
+  },
+  "the_standing_claim_again": "learn once and it is permanent, therefore solve everything on a computer. This round: a skill that was taught, qualified, stored and permanently recallable produced an answer of 0 where the truth was 3, with a clean bill of health from every check. Permanence faithfully reproduces whatever the demonstration actually captured, including a demonstration that captured two steps which never talked to each other.",
+  "regression": {"files": 17, "passed": 126, "xfailed": 1, "r46_baseline": "23/23 unchanged"},
+  "what_is_real": [
+    "the pipeline layer answers correctly when the trace records a pipeline",
+    "the defect is now refused at compile time rather than answered",
+    "the refusal states the cause and the remedy"
+  ],
+  "what_is_not_real": [
+    "that a correct-looking answer is evidence of a correct pipeline",
+    "that auditability covers multi-step work -- it does not, by explicit refusal",
+    "that permanence implies correctness"
+  ],
+  "next": ["evidence omission", "make multi-step answers auditable", "write layer, last"]
+}

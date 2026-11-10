@@ -2079,6 +2079,37 @@ def compile_and_qualify_skill(
             "status": "SKIPPED__MEMORY_POLICY_WRITE_DISABLED",
         }
     t0 = time.perf_counter_ns()
+    # TWO cli_exec STEPS ARE NOT A PIPELINE (r54).
+    #
+    # Each cli_exec step is executed independently with stdin=DEVNULL. A skill recorded as
+    # [sort -u <file>, wc -l] therefore runs sort, discards its output, then runs wc on an
+    # empty stdin, which prints 0 and exits 0. It compiled, qualified, executed, reported
+    # pass=true and STDOUT_INTEGER_VERIFIED:0, and the truth was 3. The same intent written
+    # as ONE cli_pipeline step answers 3. Both compiled before this guard existed.
+    #
+    # The carrier cannot catch it: confinement is real, the workspace is untouched, and wc
+    # exiting 0 on empty input is correct behaviour. The verifier cannot catch it: a wrong 0
+    # and a real empty file give the identical answer and the identical verification reason.
+    # The auditor cannot catch it: it refuses multi-step answers as NOT_AUDITABLE.
+    #
+    # So the refusal belongs here, at compile time, where the mistake is made. A step list
+    # with more than one cli_exec is either a pipe written as two steps (unexecutable as
+    # recorded) or two independent reads whose join the recorder never stated. Neither is a
+    # demonstration of a pipeline, and both are refused rather than answered.
+    _step_layers = [str(s.get("layer")) for s in (trace or []) if isinstance(s, Mapping)]
+    if _step_layers.count("cli_exec") > 1:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__MULTI_STEP_CLI_EXEC_IS_NOT_A_PIPELINE",
+            "reason": (
+                "cli_exec steps run with stdin closed, so a second cli_exec cannot read the "
+                "first one's output. Record the pipeline as one cli_pipeline step, or the two "
+                "reads as separate skills."
+            ),
+            "layers_recorded": _step_layers,
+        }
+
     elevated = elevate_trace_to_fastest_layer(trace)
     steps = elevated["elevated_steps"]
     if not steps:
