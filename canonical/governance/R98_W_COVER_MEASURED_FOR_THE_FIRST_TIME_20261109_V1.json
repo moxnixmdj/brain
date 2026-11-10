@@ -1,0 +1,55 @@
+{
+  "round": 98,
+  "date": "2026-11-09",
+  "title": "W_COVER measured for the first time: what the model can actually produce",
+  "the_question": "'you sure this is the smartest approach?' (ninth time)",
+  "the_answer": "no reframing this round. The binding quantity named in r97 -- W_COVER, positive professional task coverage -- is measured for the first time.",
+  "instrument": "unified model, digest 908bedbb, 443 capabilities; executed through verified_bound_capability_execution_adapter_v1 (re-reads the live registry, re-renders the frozen template, re-verifies the trace). No external model, no network. r90 gate: PASSES.",
+  "routing_layer_result": {
+    "test": "route a professional-production goal to a capability",
+    "result": "6/6 correct target in top-1 (json.file.write, xlsx.table.create_from_json_records, ...)",
+    "reading": "ROUTING WORKS. It was never the bottleneck. r93's diagnosis holds and now has a clean confirmation on a second task family."
+  },
+  "execution_layer_result": {
+    "producers_in_model": 12,
+    "attempted_with_correct_contracts": 9,
+    "executed_successfully": 3,
+    "detail": {
+      "json.file.write": "PASS",
+      "text.file.write": "PASS",
+      "xlsx.table.create_from_json_records": "PASS -- 5333-byte valid OOXML workbook, 10 parts, shared strings ['region','revenue','units','Qena','Cairo'] -- real data, real file, verified by an independent reader",
+      "docx.document.create_from_json_record": "FAIL_CLOSED JSON_DOCX_SPEC_UNRESOLVED",
+      "sqlite.table.create_from_json_records": "FAIL_CLOSED SQLITE_COLUMNS_UNRESOLVED",
+      "archive.tar_gz.create_from_manifest": "FAIL_CLOSED BOUND_TEMPLATE_RENDER_FAILED",
+      "python.tests.generate.scaffold.v1": "CRASH (prints JSON and exits instead of raising)"
+    }
+  },
+  "the_structurally_important_finding": {
+    "gdpval_deliverable_mix": {"xlsx": 65, "pdf": 85, "docx": 64, "zip": "rest"},
+    "model_producer_coverage": {"xlsx": 1, "docx": 2, "pdf": 0, "csv": 0, "pptx": 0, "png": 0, "svg": 0, "html": 0},
+    "pdf_capabilities_in_model": "3, and all 3 are EXTRACTORS (read a pdf), ZERO producers (make a pdf)",
+    "consequence": "the single most common GDPval deliverable -- pdf, 85 of 220 -- has NO producer in a 443-capability model. W_COVER is bounded above by the producer set, not by routing, not by intelligence. A perfect router over 443 capabilities still cannot emit a pdf."
+  },
+  "the_w_cover_number": {
+    "definition": "share of GDPval deliverable extensions for which the model holds at least one RUNNABLE and CORRECT producer",
+    "measured": "1 of 4 top-level families (xlsx) = 25% by family",
+    "by_row_frequency": "xlsx 65/220 = 29.5% of tasks have a producer; pdf 85/220 = 0%; docx 64/220 present but producer FAIL_CLOSED on the declared contract",
+    "honest_statement": "on the best reading, W_COVER_STRUCTURAL <= 29.5%; on the strict reading (only producers that actually executed), 1 of 220 deliverable families is demonstrated end-to-end",
+    "whole_task_semantic_membership_from_the_repo": "0 of 220 (pre-existing artifact, unchanged by this round)"
+  },
+  "what_is_real": "a 443-capability zero-weight model routed a real professional goal correctly and emitted a genuine, independently-validated Excel workbook from structured data. That had never been done in this project before this round.",
+  "what_is_not_real": "that constitutes GDPval capability. GDPval-AA compares complete submissions against a frozen Opus 5.5 reference at elo 1846, with ~47 rubric items per task. Three successful file writers are not a submission.",
+  "the_binding_constraint_named_for_the_first_time": {
+    "not_routing": "routing is 6/6",
+    "not_weights": "the model has none and does not need any to write an xlsx",
+    "not_verification": "the adapter verified every trace",
+    "it_is_SUPPLY": "the model holds producers for 1 of the 4 deliverable families GDPval asks for, and 0 producers for the most common one. Capability coverage, not capability quality, is the ceiling.",
+    "implication": "the correct next build is not a better router or a better agent. It is PRODUCERS -- pdf first (85 tasks), then repair docx and sqlite to honour their own declared contracts."
+  },
+  "runner_side_defects_found": {
+    "solve_reroutes": "UnifiedModel.solve(goal, inputs) routes the goal text again, so a goal that names the effect rather than the capability can be silently diverted; my first sweep had 0/12 for exactly this reason",
+    "input_name_mismatch": "the declared input contract differs per capability (spec vs content, json_path vs records); a caller cannot infer it",
+    "crash_instead_of_raise": "python.tests.generate.scaffold.v1 prints JSON and exits rather than raising, so a programmatic caller sees a crash",
+    "registry_lacks_libraries": "docx.document.create.python_docx fails on BOUND_APT_METADATA_NOT_FOUND:python3-docx even though the library is installed -- the binding is to apt metadata, not to the import"
+  }
+}
