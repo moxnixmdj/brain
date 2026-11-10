@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R113_FIVE_INSTRUMENT_FAULTS_V1",
+  "date": "2026-11-09",
+  "headline": "6/6 sealed defects repaired, verified and byte-exact on jinja2-3.1.4, a repo the system had never seen; zero weights, zero model, zero network",
+  "the_five_faults_that_were_hiding_it": [
+    {"fault": "PYTHONNOUSERSITE=1 in the trace child", "effect": "markupsafe invisible, pytest collection aborted, SBFL returned ok:True with total_tests=0", "fixed_in": "r112 NO_TESTS_DISCOVERED"},
+    {"fault": "propose_operator_swaps(limit=6)", "effect": "correct fix ranked 7 of 129 on compiler.py; solver could not reach the answer it held", "fixed_in": "r113 _GEN_LIMIT=256"},
+    {"fault": "cand_diag timeout=15.0 with 851 explicit test_files", "effect": "per-file trace path needs minutes; timeout read as 'candidate is wrong'; correct candidate discarded for being slow to prove", "fixed_in": "r113b failing-nodeids-only fallback verdict"},
+    {"fault": "fast screen gate still_f >= len(failing_nodeids)", "effect": "a candidate that reduced 14 failures to 4 passed the screen as progress, flooding the beam", "fixed_in": "documented, not yet changed"},
+    {"fault": "_sabotage_control_kills_suite(suspect_fn)", "effect": "sabotaged the function SBFL guessed (visitor) instead of the function the candidate changed; no test failed; every operator repair rejected BY CONSTRUCTION", "fixed_in": "r113c _actual_changed_function"}
+  ],
+  "measurement": {
+    "corpus": "jinja2-3.1.4 sdist, 851 tests, unseen",
+    "defects": 6,
+    "defect_class": "single-operator '+' -> '-'",
+    "repaired_verified_exact": "6/6",
+    "per_case": [
+      {"file": "bccache.py", "line": 390, "candidates": 5, "seconds": 43, "restored_exactly": true},
+      {"file": "compiler.py", "line": 93, "candidates": 29, "seconds": 68, "restored_exactly": true},
+      {"file": "filters.py", "line": 312, "candidates": 48, "seconds": 67, "restored_exactly": true},
+      {"file": "lexer.py", "line": 239, "candidates": 19, "seconds": 53, "restored_exactly": true},
+      {"file": "runtime.py", "line": 192, "candidates": 31, "seconds": 61, "restored_exactly": true},
+      {"file": "utils.py", "line": 305, "candidates": 14, "seconds": 52, "restored_exactly": true}
+    ],
+    "sbfl_file_recall": "6/6 at rank 1-1-1-1-2-2",
+    "sbfl_line_recall": "0/6 (not required; the skill operates on token patterns, not lines)"
+  },
+  "what_this_does_not_show": [
+    "only one defect class (single-operator swap) was exercised",
+    "only one repository was used",
+    "43-68 seconds per repair is slower than a frontier model",
+    "the fast-screen gate (fault 4) is documented but still present",
+    "computer use remains unsolved: no coverage spectrum, no oracle, 2/12 agreement"
+  ],
+  "law_confirmed": "every failure this round was a measurement failure wearing the costume of a capability failure"
+}

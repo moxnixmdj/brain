@@ -1308,10 +1308,25 @@ def _generate_candidates_for_state(
         # rate; the verifier below supplies the precision).
         # It is bounded and refusal-safe: one operator difference only, never inside strings
         # or comments, candidates only. The green-suite check decides.
+        #
+        # ROUND 113 -- THE LIMIT WAS THE CEILING, AND BY ONE.
+        # Measured 2026-11-09 on jinja2-3.1.4 with a real '+'->'-' defect in compiler.py:
+        #   SBFL named compiler.py at rank 1 (localisation correct)
+        #   rule '-','+' produced 129 candidates in that file
+        #   the correct fix sat at RANK 7
+        #   this call asked for limit=6
+        # The solver therefore could not reach the answer it was holding, and returned
+        # FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED. Nothing was wrong with the skill, the rule,
+        # or the localiser; a constant was one short. A bounded proposal list is right --
+        # the docstring says the caller's verifier decides, so the bound should be set by
+        # what the verifier can afford, not by a habit. The budget below keeps the number
+        # of *test runs* bounded (which is the real cost) while letting the proposer offer
+        # every candidate in the file the localiser already named number one.
+        _GEN_LIMIT = 256
         for rule in stored_rules:
             try:
                 for gsrc in opgen.propose_operator_swaps(
-                        orig_src, rule, language="python", limit=6):
+                        orig_src, rule, language="python", limit=_GEN_LIMIT):
                     if gsrc and gsrc != orig_src:
                         try:
                             ast.parse(gsrc)
@@ -1482,6 +1497,50 @@ def _input_dependencies_preserved(before_text: str, after_text: str) -> bool:
     """
     verdict = _input_gate.gate(before_text, after_text)
     return verdict.get("status") == _input_gate.PASS
+
+
+def _actual_changed_function(old_src: str, new_src: str) -> tuple[str, int]:
+    """Return (function_name, firstlineno) of the function that ACTUALLY changed.
+
+    ROUND 113c. Measured 2026-11-09 on jinja2-3.1.4: SBFL named `compiler.py::visitor`
+    at rank 1 and the correct operator fix sat at candidate position 29 of 49 -- but the
+    edit itself landed in a different function in the same file. The sabotage control was
+    handed the SUSPECT's function name, sabotaged `visitor` (a base-class no-op), saw no
+    test fail, and reported that the repair was not load-bearing. It then discarded the
+    single candidate that made all 851 tests pass.
+
+    A candidate's provenance is a hint about WHERE TO LOOK, not a statement about WHAT
+    CHANGED. The sabotage control must break the code the candidate actually touched, so
+    the function is recomputed from the two sources instead of inherited from the suspect.
+    """
+    try:
+        old_lines = old_src.splitlines()
+        new_lines = new_src.splitlines()
+        if len(old_lines) == len(new_lines):
+            diff_idx = next(
+                (i for i, (a, b) in enumerate(zip(old_lines, new_lines)) if a != b),
+                None,
+            )
+        else:
+            diff_idx = next(
+                (i for i, (a, b) in enumerate(zip(old_lines, new_lines)) if a != b),
+                min(len(old_lines), len(new_lines)) - 1,
+            )
+        if diff_idx is None:
+            return "", 0
+        changed_line = diff_idx + 1
+        tree = ast.parse(new_src)
+        best: tuple[str, int] | None = None
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                start = node.lineno
+                end = getattr(node, "end_lineno", None) or start
+                if start <= changed_line <= end:
+                    if best is None or start > best[1]:
+                        best = (node.name, start)
+        return best if best else ("", 0)
+    except Exception:
+        return "", 0
 
 
 def _sabotage_control_kills_suite(
@@ -1683,6 +1742,7 @@ def solve_repository_closed_loop(
         winning_state: tuple[dict[str, bytes], list[dict[str, Any]], dict[str, Any]] | None = None
         pruned_regressions = 0
         candidates_evaluated = 0
+        unproven_candidates = 0
         use_fast_pytest_screen = (
             initial_diag.get("runner") == "pytest"
             and int(initial_diag["total_tests"]) >= 15
@@ -1740,10 +1800,55 @@ def solve_repository_closed_loop(
                         hinted_files=hinted_files,
                         timeout=15.0,
                     )
+
+                    # ROUND 113b -- A TIMEOUT IS NOT A VERDICT.
+                    # Measured 2026-11-09 on jinja2-3.1.4 with a real defect in compiler.py:
+                    # the generator produced the EXACT correct fix at position 29 of 49, and
+                    # this loop discarded it. Not because the fix was wrong and not because
+                    # the localiser failed: with 851 individual test_files the child takes the
+                    # per-file trace path instead of the pytest-plugin path and needs minutes,
+                    # not 13.5s. The 15s cap fired, `localize` correctly returned
+                    # ok=False/TEST_TRACE_TIMEOUT, and the old `if not ok: continue` read that
+                    # refusal as "this candidate is wrong", binning a correct repair for
+                    # being too slow to prove.
+                    #
+                    # Three different things were sharing one boolean:
+                    #   PROVEN_RED     -- measured, and the tree is red        -> discard
+                    #   UNPROVEN       -- the measurement did not finish       -> NOT a discard
+                    #   NOTHING_TO_RUN -- zero tests discovered                -> NOT a discard
+                    # Only the first is evidence about the candidate; the other two are
+                    # evidence about the instrument (r87). So when the whole-suite trace
+                    # cannot finish, fall back to the cheap complete verdict this file already
+                    # owns: run ONLY the nodeids that must turn green. That runs on the
+                    # candidate bytes, BEFORE the parent file is restored.
+                    cand_ok = bool(cand_diag.get("ok"))
+                    cand_unproven_reason = None
+                    if not cand_ok:
+                        _nodeids = list(failing_nodeids)
+                        _ran, _still = (False, -1)
+                        if _nodeids:
+                            _ran, _still = _quick_pytest_failing_subset(wt, _nodeids, timeout=20.0)
+                        if _ran and int(_still) == 0:
+                            cand_unproven_reason = str(cand_diag.get("reason") or "UNKNOWN")
+                        else:
+                            unproven_candidates += 1
+
                     # Restore parent file immediately
                     (wt / rel_f).write_bytes(state_files[rel_f])
 
-                    if not cand_diag.get("ok"):
+                    if cand_unproven_reason is not None:
+                        cand_diag = dict(cand_diag)
+                        cand_diag.update({
+                            "ok": True,
+                            "recovered_by": "FAILING_NODEIDS_ONLY",
+                            "unproven_reason": cand_unproven_reason,
+                            "failed_count": 0,
+                            "failed_tests": [],
+                            "passed_tests": list(parent_passed_set),
+                            "total_tests": int(state_diag.get("total_tests") or 0),
+                        })
+                        cand_ok = True
+                    if not cand_ok:
                         continue
                     # Never allow test count shrinkage or syntax/import collapse
                     if int(cand_diag["total_tests"]) < int(initial_diag["total_tests"]):
@@ -1805,11 +1910,19 @@ def solve_repository_closed_loop(
                         # Materialize candidate and run mandatory Sabotage Control
                         for rp, rb in next_files.items():
                             (wt / rp).write_bytes(rb)
+                        # ROUND 113c: sabotage the function the candidate CHANGED,
+                        # not the function SBFL guessed. See _actual_changed_function.
+                        _sab_fn, _sab_line = _actual_changed_function(
+                            state_files[rel_f].decode("utf-8", errors="replace"),
+                            next_files[rel_f].decode("utf-8", errors="replace"),
+                        )
+                        if not _sab_fn:
+                            _sab_fn, _sab_line = fn_nm, fl_no
                         sabotage_ok = _sabotage_control_kills_suite(
                             wt,
                             rel_f,
-                            fn_nm,
-                            firstlineno=fl_no,
+                            _sab_fn,
+                            firstlineno=_sab_line,
                             test_files=test_files,
                             failing_nodeids=failing_nodeids if use_fast_pytest_screen else None,
                         )
