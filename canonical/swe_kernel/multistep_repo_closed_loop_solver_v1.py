@@ -759,6 +759,7 @@ def _surgical_span_mutations(
     line_scores: Mapping[int, float] | None = None,
     *,
     firstlineno: int = 0,
+    file_scope: bool = False,
 ) -> list[tuple[str, str]]:
     """Produce minimal 1-line span-preserving AST repairs ordered by statement-level Ochiai."""
     try:
@@ -790,16 +791,24 @@ def _surgical_span_mutations(
         (ast.NotEq, " == ", "neq_to_eq"),
     ]
 
+    # ROUND 115 -- same lesson as _replace_ast_node_in_function: fn_name is a hint.
+    # `file_scope=True` walks every function in the file so a correct revert cannot be
+    # missed because the traceback named the base class instead of the override.
     for node in ast.walk(tree):
-        if not (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == fn_name):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             continue
-        if firstlineno > 0 and node.lineno != firstlineno:
-            continue
+        if not file_scope:
+            if node.name != fn_name:
+                continue
+            if firstlineno > 0 and node.lineno != firstlineno:
+                continue
 
         for sub in ast.walk(node):
             lineno = getattr(sub, "lineno", None)
-            if hot_set and lineno is not None and not any(abs(lineno - hl) <= 2 for hl in hot_set):
-                continue
+            # ROUND 114 -- +/-2-LINE WINDOW ORDERING, NOT FILTERING. See C2 for the
+            # measurement: hot_lines is function-granular, so a +/-2 statement window
+            # around it discards nearly everything this mechanism can produce. Ochiai
+            # still sorts the output; the suite still decides what is true (r106).
             prio = max(
                 (scores.get(lineno + d, 0.0) for d in (-1, 0, 1, 2) if lineno is not None),
                 default=0.0,
@@ -921,6 +930,7 @@ def _replace_ast_node_in_function(
     mutator_fn: Any,
     *,
     firstlineno: int = 0,
+    file_scope: bool = False,
 ) -> list[tuple[str, str]]:
     """Apply `mutator_fn(fn_node) -> list[(label, new_fn_node)]` and splice cleanly into `src`."""
     try:
@@ -929,9 +939,28 @@ def _replace_ast_node_in_function(
         return []
     lines = src.splitlines(keepends=True)
     results: list[tuple[str, str]] = []
+    # ROUND 115 -- THE LOCALIZER NAMES A FRAME, NOT THE FAULT.
+    # Measured 2026-11-09 on jinja2-3.1.4: a seeded `and` -> `or` defect on compiler.py
+    # line 65 lives in `Visitor.visit_BinOp`. The traceback's innermost source frame is the
+    # base-class no-op `Visitor.visitor`, so SBFL reported `compiler.py::visitor` at rank 1,
+    # this function was scoped to `visitor`, and the correct revert was NEVER GENERATED
+    # (35 candidates in the pool, exact revert absent). The same shape broke `off-by-one`
+    # on compiler.py:229.
+    #
+    # That is the third appearance of one error: a provenance hint used as a constraint.
+    # The sabotage control did it (it broke the suspect's function instead of the changed
+    # one); SBFL's own granularity does it (it attributes an execution to the enclosing
+    # function, never to the statement); and here the generator does it. So: when fn_name
+    # yields nothing, or when the caller asks for file scope, mutate EVERY function in the
+    # file. The suite is the arbiter; the function name is only a place to look first.
+    _target_names = [fn_name] if fn_name else []
+    if file_scope:
+        _target_names = None  # sentinel: every function in the file
     for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == fn_name:
-            if firstlineno > 0 and node.lineno != firstlineno:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and (
+            _target_names is None or node.name in _target_names
+        ):
+            if _target_names is not None and firstlineno > 0 and node.lineno != firstlineno:
                 continue
             # Only splice top-level or class-method functions cleanly with indentation preserved
             fn_start = node.lineno - 1
@@ -994,8 +1023,17 @@ def _deductive_ast_mutations(fn_node: ast.FunctionDef | ast.AsyncFunctionDef, ho
     all_nodes = list(ast.walk(fn_node))
     for idx, sub in enumerate(all_nodes):
         lineno = getattr(sub, "lineno", None)
+        # ROUND 114 -- HOT-LINE ORDERING, NOT HOT-LINE FILTERING.
+        # This used to `continue`, which discarded every mutation outside an SBFL hot line.
+        # Measured 2026-11-09: SBFL ranks by FUNCTION (line-rank was 0/6 on six seeded
+        # defects) because `_rel_source` attributes each trace event to the enclosing
+        # function, never to a statement inside it. So `hot_lines` was function-granular
+        # noise being used as a statement-level filter, and it silently removed almost all
+        # of this mechanism's candidates on every real file. Ochiai ordering still puts the
+        # most suspicious statements first; the rest are still offered, and the test suite
+        # decides. Selection belongs to the verifier, never to a prior (r106).
         if hot_set and lineno is not None and lineno not in hot_set:
-            continue
+            pass
 
         # 1. Binary operator repairs + off-by-one constant adjustments
         if isinstance(sub, ast.BinOp):
@@ -1228,6 +1266,9 @@ def _concurrency_rlock_candidates(src: str, fn_name: str) -> list[tuple[str, str
         return []
 
 
+synthesis_refused_dropped_call = 0
+
+
 def _generate_candidates_for_state(
     worktree: pathlib.Path,
     diag: Mapping[str, Any],
@@ -1354,6 +1395,16 @@ def _generate_candidates_for_state(
 
         # Mechanism B2: Live runtime assertion trace observational synthesis (for standalone non-pytest modules)
         if test_files and fn_nm and not is_pytest_suite and len(orig_src) <= 12_000:
+            # ROUND 116 -- SYNTHESIS MAY NOT SOLVE THE TESTS BY ABANDONING THE CALL.
+            # Measured 2026-11-09 on the repo's own coupled-billing fixture: candidate #4
+            # (live_trace_synthesis "return (sum(items) - disc)") made both visible tests
+            # green without calling `apply_discount`, so the real bug survived and the run
+            # still reported PASS with one changed file.
+            # The refusal itself lives in repair_input_dependency_gate_v1 (PATCH_STOPPED_CALLING),
+            # enforced at candidate ADMISSION, exactly as that module's own test docstring
+            # specifies: "enforced at candidate admission -- not after the winner is chosen,
+            # so the search still has the chance to find an honest repair". Duplicating the
+            # check here would have been a second, weaker copy in the wrong place.
             try:
                 synth_list = wb_synth.synthesize_candidates_for_file(
                     fpath, worktree, test_files
@@ -1366,17 +1417,26 @@ def _generate_candidates_for_state(
 
         # Mechanism C1: Surgical 1-line UTF-8 span-preserving AST repairs ordered by statement Ochiai
         for tag, c_src in _surgical_span_mutations(
-            orig_src, fn_nm, hot_lines, line_scores, firstlineno=fl_no
+            orig_src, fn_nm, hot_lines, line_scores, firstlineno=fl_no, file_scope=True
         ):
             _add_to(bucket, rel_f, fn_nm, fl_no, f"surgical_ast:{tag}", c_src)
 
-        # Mechanism C2: Function-level deductive AST mutations (range/augassign/const) on small modules
-        if len(orig_src) <= 6_000:
+        # Mechanism C2: Function-level deductive AST mutations (range/augassign/const).
+        # ROUND 114 -- THE SIZE GATE WAS THE CEILING FOR EVERY MECHANISM BUT ONE.
+        # This used to read `if len(orig_src) <= 6_000:`. Every jinja2 source file is
+        # 20-90 KB, so every comparison flip, off-by-one, augmented-assignment swap and
+        # `and`/`or` flip was disabled on every real module. Measured 2026-11-09: the only
+        # mechanism that ever fired on a real repository was operator_generalization, which
+        # is why 6/6 and 0/774 before it were both about ONE defect class. A size gate that
+        # excludes every real file is not a safety measure; it is a stub (r88).
+        # The cost of widening it is candidate count, which the verifier bounds anyway.
+        if len(orig_src) <= 400_000:
             for tag, c_src in _replace_ast_node_in_function(
                 orig_src,
                 fn_nm,
                 lambda fn_node, hl=hot_lines: _deductive_ast_mutations(fn_node, hl),
                 firstlineno=fl_no,
+                file_scope=True,
             ):
                 _add_to(bucket, rel_f, fn_nm, fl_no, f"deductive_ast:{tag}", c_src)
 
