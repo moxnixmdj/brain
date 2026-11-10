@@ -160,8 +160,12 @@ def run_plan(plan: Mapping[str, Any], library: Mapping[str, Any], browser: Any,
 # candidates, and names the words it did not account for.  Those three behaviours matter
 # more than the accuracy: a router that guesses silently is worse than one that asks.
 
+# Function words only.  An earlier list also contained "show", "give", "put", "get", "make"
+# -- every one of which is an ACTION VERB in ordinary requests.  Deleting them before routing
+# is why "SHOW me the file" could not find "open the file": the verb had already been thrown
+# away.  Found by measuring 13 failures and reading them instead of guessing again.
 _STOP = frozenset("""a an the this that these those me my it its of in on at to for with and or
-but then please show give put get make do does did be is are was were some any""".split())
+but then please do does did be is are was were some any""".split())
 
 
 def _words(s: str) -> list[str]:
