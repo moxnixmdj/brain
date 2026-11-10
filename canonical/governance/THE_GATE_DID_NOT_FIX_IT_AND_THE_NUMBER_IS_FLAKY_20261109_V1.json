@@ -1,0 +1,38 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_GATE_DID_NOT_FIX_IT_AND_THE_NUMBER_IS_FLAKY_20261109_V1",
+  "round": 77,
+  "date": "2026-11-09",
+  "the_prediction": "r76, before running: if sequencing is the constraint, a per-step causal gate plus a retry should recover a meaningful part of the 37 parsed-but-failed tasks.",
+  "the_four_runs": {
+    "v1 one action, no gate": "15/130 11.5%",
+    "v2 bad grammar": "13/130 10.0%",
+    "v3 StaticText visible": "17/130 13.1%",
+    "v4 subgoals + gate + retry": "18/130 13.8%"
+  },
+  "verdict_on_the_prediction": "WRONG for the gate, RIGHT for sequencing. The first gated run with two bugs scored 14/130 -- worse than having no gate. After fixing submit-gating and typing it scored 18/130. The gate alone is not the mechanism.",
+  "what_the_gate_actually_did": {
+    "steps_caught_as_no_ops": 31,
+    "steps_that_passed": 44,
+    "tasks_with_a_caught_no_op": 24,
+    "honest_reading": "the gate did its job -- it noticed steps that changed nothing. That did not win tasks by itself. Acting more than once, on a named target per step, is what won tasks."
+  },
+  "the_flaky_result_and_why_it_is_recorded": {
+    "what_happened": "click-menu scored -1 -> 0.898 in the buggy run and -1 again in the final run, two runs apart, same code path",
+    "consequence": "a single run per task cannot separate 18 from 14. The 18 is not a stable measurement and must not be quoted as one.",
+    "what_would_fix_it": "N seeds per task and a pass^k style statistic, which is exactly the criticism levelled at tau2 and at every single-seed agent benchmark"
+  },
+  "scoring_convention": {
+    "any_positive_reward_published_convention": "18/130 13.8%",
+    "clean_wins_reward_at_least_0.5": "16/130 12.3%",
+    "partial_credits": ["click-checkboxes-soft 0.166", "use-colorwheel-2 0.369"]
+  },
+  "the_fifteen_wrong_clicks": {
+    "count": 15,
+    "examples": ["choose-date x4 -1", "enter-date -1", "enter-time -1", "click-menu -1", "use-slider -1", "use-spinner -1"],
+    "why_it_matters": "these are not failures of inaction. The system clicked the wrong thing and was punished for it. A refusal would have scored 0; the agent scored below zero. That is worse than doing nothing, and it is the direct cost of acting without understanding the widget."
+  },
+  "what_this_does_not_prove": ["that 18 is reproducible", "that any change beat published systems"],
+  "next": ["run the same configuration 3 times and report the spread before quoting any number again",
+           "the 15 wrong clicks are the most expensive single category -- find out what a refusal would have cost"]
+}
