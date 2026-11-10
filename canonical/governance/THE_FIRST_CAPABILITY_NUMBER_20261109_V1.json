@@ -1,0 +1,90 @@
+{
+  "claim_id": "THE_FIRST_CAPABILITY_NUMBER_20261109_V1",
+  "round": 41,
+  "date": "2026-11-09",
+  "type": "MEASUREMENT",
+  "title": "23 of 33 installed read verbs complete demonstrate -> qualify -> recall. Zero learner failures.",
+  "question": "Of the verbs the ceiling admits (37, r38), how many can the learner take from one demonstration to a correct answer on a file it has never seen?",
+  "answer": {
+    "installed_of_admitted": "33 of 37",
+    "pass": 23,
+    "not_exercised": 10,
+    "learner_failures": 0,
+    "pass_rate": "23/33"
+  },
+  "passed_verbs": [
+    "cat",
+    "cksum",
+    "cut",
+    "egrep",
+    "expand",
+    "fgrep",
+    "fmt",
+    "fold",
+    "grep",
+    "head",
+    "md5sum",
+    "nl",
+    "od",
+    "paste",
+    "rev",
+    "sed",
+    "sha256sum",
+    "sort",
+    "tac",
+    "tail",
+    "unexpand",
+    "uniq",
+    "wc"
+  ],
+  "not_exercised": {
+    "needs_two_input_files": [
+      "comm",
+      "diff",
+      "join"
+    ],
+    "takes_no_input_file": [
+      "basename",
+      "dirname",
+      "realpath",
+      "seq",
+      "stat"
+    ],
+    "reads_stdin_not_a_path": [
+      "tr"
+    ]
+  },
+  "unreachable": {
+    "awk": {
+      "verdict": "ADMITTED_BUT_CANNOT_RUN_IN_CARRIER",
+      "evidence": "`awk 1 d.txt` exits 0 natively under the worker's exact PATH/env, and fails inside the confined worker (WORKER_STATUS:CHILD_EXITED) with no stderr surfaced. `true`, `cat`, `grep` all run in the same carrier, so this is awk-specific.",
+      "classification": "CEILING DEFECT, not a learner failure. The admission table promises a capability the sandbox does not deliver -- the same class of defect as the 4 admitted-but-uninstalled verbs found in r38, now with a subtler cause."
+    }
+  },
+  "what_was_my_fault": {
+    "tr": "Demonstrated as `tr a-z A-Z <path>`. tr takes no filename operand; the carrier correctly refused with `tr: extra operand`. A demonstration of a command that does not exist.",
+    "awk_first_attempt": "Demonstrated as `awk '{print $0}' <path>`. Replaced with `awk 1`, which then exposed the carrier defect above."
+  },
+  "why_this_is_the_first_real_number": "Before r40 every attempt failed on a path, so the count was not computable. r39-r40 fixed the path. This is the first measurement of demonstrated capability that is not confounded by a reachability bug.",
+  "what_it_does_not_say": [
+    "It does not say the learner generalises: each pass is one verb, one fixture kind, one held-out file. No verb was tested across a different input shape.",
+    "It does not say anything about writing. The 13 writer programs are still refused at the door.",
+    "It is NOT a public benchmark. OSWorld 2.0 binary 48.7% / SWE-bench Pro 89.9% for Opus 5.5 remain untouched by this number, because those measure autonomy and write capability, which are zero here.",
+    "23/33 measures the ceiling of a read-only shell pipeline. It is a real capability number and a narrow one."
+  ],
+  "artifacts": {
+    "harness": "canonical/tools/read_verb_track_v1.py",
+    "tests": "canonical/tests/test_the_verb_track_v1.py",
+    "tests_passing": "6"
+  },
+  "external_frame_2026": {
+    "why_this_matters": "A public benchmark exists for exactly this measurement. It says where my number sits and which of my bugs the field had already named.",
+    "SkillLearnBench_arXiv_2604_20087": "CMU+Amazon, Apr 2026. 20 skill-dependent tasks, 15 sub-domains, multi-instance. Best of four continual-learning methods covers only ~45% of the gap between no-skill and human-authored skills. Skills help on clear reusable workflows and HURT on open-ended tasks. External feedback compounds; SELF-feedback alone causes recursive drift. Stronger models do NOT reliably produce better skills.",
+    "the_named_failure_is_my_r39_bug": "Their case study: Opus writes skills that HARDCODE the instance -- projection EPSG:4087, column 'PlateName', filter 'PA' -- scoring high on skill quality but failing when instances vary. Sonnet writes skills that iterate over candidate column names and fall back. My r39 skill hardcoded the bare basename 'data.txt' and died the moment the carrier staged a copy. Same defect, same cause: a skill that encodes the instance instead of the procedure.",
+    "what_my_r40_fix_actually_is": "_carrier_path translates an argument into workspace-relative form only when the file exists in the staged workspace. It is a GROUNDING fix -- the skill stops naming a place and starts naming a role. It is not a generalisation fix and does not claim to be.",
+    "SkillCraft_arXiv_2603_00718": "Mar 2026. Skill saving and reuse cuts token usage up to 80%. This is an EFFICIENCY result, not a capability result -- it does not contradict my measured 0 net saving, because I measured wall-clock on 10 heterogeneous kinds while they measure tokens on compositional tool tasks.",
+    "SkillLens_25pct": "25% of skill deployments are NEGATIVE transfer; ALFWorld 47%. Format is irrelevant, content depth decides, and 'reads well' predicts 'performs well' poorly (46.4% = random).",
+    "OSWorld_2_0_confirmed": "Binary is the primary metric and stays low: Opus 5.5 48.7% binary against 81.8% partial. Vendors lead with partial; comparing a partial score to a binary score manufactures a fake 63-point jump. Human time ~1.6 h/task, ~318 tool calls/task.",
+    "the_honest_placement": "23/33 is a real number in the ONE region the 2026 literature says skill learning works: clear, reusable, single-step shell pipelines. It is not evidence for the user's claim, because the claim is about open-ended tasks in arbitrary environments, which is precisely where the literature measures skills HURTING performance."
+  }
+}
