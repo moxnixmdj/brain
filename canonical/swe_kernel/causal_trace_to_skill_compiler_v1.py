@@ -294,7 +294,21 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
                 "content": str(fw["content"]),
             })
 
-    has_direct_causal_shortcut = bool(elevated or inline_direct)
+    # MEASURED FAILURE (r83, hit immediately). `elevated` at this point holds only Rules
+    # A/B/C. A demonstrated `cli_exec` step is still sitting in raw_steps, so it could not
+    # count as the shortcut, every UI step survived, and Layer 3 produced 5 steps where it
+    # had produced 1. The rule "prune UI superseded by a direct effect" must also see a
+    # direct effect that is still IN the trace.
+    _direct_in_trace = any(
+        isinstance(st, Mapping)
+        and (str(st.get("layer") or "").lower() in {"cli", "cli_exec", "subprocess", "cli_pipeline",
+                                                    "semantic_dom", "sqlite_exec", "sqlite_query",
+                                                    "http_request", "confined_python_exec"}
+             or isinstance(st.get("argv"), list))
+        and st.get("undone") is not True
+        for st in raw_steps
+    )
+    has_direct_causal_shortcut = bool(elevated or inline_direct or _direct_in_trace)
 
     # Process explicit steps: prune UI steps superseded by direct HTTP/SQLite/file shortcuts,
     # prune failed/no-op exploratory CLI commands, and elevate remaining pixel steps to semantic DOM.
@@ -312,17 +326,27 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
             pruned_ui_steps += 1
             continue
 
+        # A raw UI step is anything that is NOT already a direct executable layer. The first
+        # version required layer=="pixel_ui" or type in {...}, so a step tagged
+        # {"layer": "click"} matched NEITHER and fell through every branch: zero steps
+        # elevated, dominant_layer "none", and no error. Measured on the L4 inbox demo.
         is_ui = (
-            layer in {"pixel_ui", "gui", "browser_ui", "mouse", "keyboard", "pixel_click", "ui_type", "ui_scroll"}
+            layer in {"pixel_ui", "gui", "browser_ui", "mouse", "keyboard", "pixel_click",
+                      "ui_type", "ui_scroll", "click", "type", "key", "scroll", "drag",
+                      "keypress", "wait", "screenshot"}
             or layer.startswith(("pixel_", "ui_"))
-            or op_type in {"click", "double_click", "move", "scroll", "type", "keypress", "drag", "wait"}
+            or op_type in {"click", "double_click", "move", "scroll", "type", "keypress",
+                           "drag", "wait"}
         )
         if is_ui and has_direct_causal_shortcut:
             pruned_ui_steps += 1
             continue
 
         if is_ui:
-            sem = _semantic_selector_from_dom(st, dom_elements)
+            probe = dict(st)
+            if layer in {"key", "type", "keypress"} and probe.get("text"):
+                probe.setdefault("value", probe["text"])
+            sem = _semantic_selector_from_dom(probe, dom_elements)
             if sem is not None:
                 elevated.append(sem)
             elif op_type not in {"move", "wait"}:
@@ -636,6 +660,37 @@ def anti_unify_workflow(
     param_order: list[str] = []
     counts: dict[str, int] = {}
 
+    # MEASURED FAILURE (r83): goal "show only the urgent messages" + step value "urgent"
+    # produced params: [] because "urgent" is not quoted, so the skill typed "urgent" forever.
+    # The right place to fix it is HERE and ONLY for values that were typed into a widget --
+    # never for a request body whose KEYS are field names. A generic word scan that rewrote
+    # every occurrence turned {"sku": "A-100"} into {"?str1": "?str0"} and broke the Layer 2
+    # result. Scope is everything.
+    _typed_values = set()
+    for _st in elevated_steps:
+        if isinstance(_st, Mapping) and str(_st.get("layer") or "") == "semantic_dom":
+            if _st.get("value"):
+                _typed_values.add(str(_st["value"]))
+    for _tok in sorted(set(str(goal).split()), key=lambda t: -len(t)):
+        _clean = _tok.strip(".,;:\\\"'!?")
+        if len(_clean) < 3 or _clean not in _typed_values:
+            continue
+        if _clean in {v for _, v in candidates}:
+            continue
+        # Anchor the hole where the VALUE goes, not where the first matching word sits.
+        # "show only the urgent messages" anchored at "urgent" gives
+        # "show only the ?str0 messages", which only binds goals that ALSO say "urgent".
+        # The hole belongs after the verb: "show only {X} messages".
+        _g = str(goal)
+        _verbs = ("show", "list", "filter", "display", "get", "find")
+        _low = _g.lower()
+        _vpos = min((_low.find(v + " ") for v in _verbs if _low.find(v + " ") >= 0), default=-1)
+        _tpos = _low.find(_clean.lower())
+        if _vpos >= 0 and 0 <= _vpos < _tpos:
+            candidates.append(("str_loose", _clean))
+        else:
+            candidates.append(("str", _clean))
+
     for kind, val in candidates:
         if not val or val in val_to_hole:
             continue
@@ -779,7 +834,7 @@ def anti_unify_workflow(
 
 
 def _widen_intent_word(pattern: str, skill: Mapping[str, Any]) -> str:
-    """Let the ONE word that carries the skill's intent accept its synonyms.
+    r"""Let the ONE word that carries the skill's intent accept its synonyms.Let the ONE word that carries the skill's intent accept its synonyms.
 
     Measured 2026-11-09: a skill taught as "how many unique lines in ?" had the regex
     `how\s+many\s+unique\s+lines\s+in\s+(?P<path0>...)`. The intent index and the
@@ -1296,6 +1351,22 @@ def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] 
         # exact, so this widens what a TAUGHT skill recognises, never what qualifies as
         # a different skill.
         m = re.match(_widen_intent_word(pattern, skill), goal.strip(), flags=re.IGNORECASE)
+    if not m and any(str(h).startswith("?str_loose") for h in (skill.get("param_order") or [])):
+        # A loose hole is a value whose position in the sentence is not fixed by the goal
+        # shape ("show only the urgent messages" / "... the messages about refund" /
+        # "... messages from alice"). Bind it as the FIRST content token that is not part of
+        # the frozen skeleton -- a stated heuristic, not a semantic parse.
+        _skel_words = {w.strip("?0123456789").lower()
+                       for w in str(skill.get("goal_skeleton") or "").split()}
+        _skip = _skel_words | {"the", "a", "an", "about", "from", "for", "with", "by", "in",
+                               "of", "on", "to", "and", "only", "all", "messages", "message"}
+        for w in goal.split():
+            c = w.strip(".,;:\\\"'!?")
+            if len(c) >= 3 and c.lower() not in _skip:
+                out_loose = {h: c for h in (skill.get("param_order") or [])
+                             if str(h).startswith("?str_loose")}
+                return out_loose or None
+        return None
     if not m:
         return None
     out: dict[str, str] = {}
@@ -1490,6 +1561,7 @@ def execute_compiled_steps(
     steps: Sequence[Mapping[str, Any]],
     *,
     cwd: str | pathlib.Path | None = None,
+    bindings: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     """Execute concrete instantiated steps deterministically with zero model calls.
 
@@ -1499,6 +1571,29 @@ def execute_compiled_steps(
     certify their effects or confine them.
     """
     from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    # MEASURED FAILURE (r83, Layer 4). Executing a compiled skill with an UNBOUND hole
+    # submitted the literal string "?str_loose0" to the server and returned ok:True.
+    # The filter was never applied: page stayed "Inbox - 5 shown", and the receipt for
+    # every step read ok:true. A hole that reaches the wire is a broken plan, not a
+    # running one, so it is refused BEFORE the first stage -- the same preflight rule
+    # this function already uses for inadmissible CLI.
+    if bindings:
+        steps = _instantiate_obj(list(steps), bindings)
+    _unbound: list[str] = []
+    def _scan(obj: Any) -> None:
+        if isinstance(obj, str):
+            if re.fullmatch(r"\?[a-z_]+\d+", obj):
+                _unbound.append(obj)
+        elif isinstance(obj, list):
+            for x in obj: _scan(x)
+        elif isinstance(obj, Mapping):
+            for k, v in obj.items(): _scan(k); _scan(v)
+    _scan(list(steps))
+    if _unbound:
+        return {"ok": False, "reason": f"UNBOUND_PARAMETERS:{sorted(set(_unbound))}",
+                "step_receipts": [], "executed_steps": 0}
+
     # The refusal was "no admitted confinement exists". One does now (round 28 measured
     # it: confined True, live_workspace_untouched True). So a cli_exec step is not
     # refused -- it is ROUTED, and the routing decides. A step with no carrier verdict is
@@ -1730,6 +1825,13 @@ def execute_compiled_steps(
                 current_dom_url = str(step["url"])
             op = str(step.get("op") or "").upper()
             sel = step.get("selector") if isinstance(step.get("selector"), Mapping) else {}
+            # MEASURED FAILURE (r83): the compiler emits a typing step as CLICK_SEMANTIC with
+            # a `value` (the box gets clicked, then typed into). The executor treated EVERY
+            # CLICK_SEMANTIC as a submit, so the value was dropped and the page came back
+            # unfiltered -- "Inbox - 5 shown" for a goal that wanted 3, reported ok:True.
+            # A semantic click that carries a value is a FILL.
+            if op == "CLICK_SEMANTIC" and step.get("value") is not None:
+                op = "FILL_SEMANTIC"
             if op == "FILL_SEMANTIC":
                 field_key = str(sel.get("name") or sel.get("aria") or sel.get("placeholder") or "")
                 if field_key:

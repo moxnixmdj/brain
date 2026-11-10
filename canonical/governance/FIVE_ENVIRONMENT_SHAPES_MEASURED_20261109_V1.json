@@ -1,0 +1,41 @@
+{
+  "round": 83,
+  "date": "2026-11-09",
+  "title": "Fifth environment shape (semantic_dom, L4) and the addressability boundary",
+  "shapes_measured": {
+    "python_file_op": {"layer": 1, "status": "holds"},
+    "sqlite_exec": {"layer": 1, "status": "holds"},
+    "http_request": {"layer": 2, "status": "holds", "cost_ms": 2.0},
+    "cli_exec": {"layer": 3, "status": "holds", "cost_ms_steady": 97, "cost_ms_first": 206, "note": "~95ms is the confinement boundary; declared budget of <50ms was optimistic by ~2x"},
+    "semantic_dom": {"layer": 4, "status": "holds_when_state_is_addressable", "cost_ms": [2.1, 4.2]}
+  },
+  "measured": {
+    "demonstration": "click box, type 'urgent', click APPLY (the r82 browser sequence)",
+    "learned_skeleton": "show only the ?str_loose0 messages",
+    "params": ["?str_loose0"],
+    "unseen_goals_correct": "4/4",
+    "oracle": "independent GET ?filter=<token>, not the skill",
+    "model_calls": 0,
+    "random_access_note": "3 of 4 goals had never been executed; only 'urgent' was demonstrated"
+  },
+  "four_defects_found_all_reported_success": [
+    {"id": "layer_click_not_ui", "symptom": "elevated [] and dominant_layer 'none', no exception", "because": "layer=='click' matched neither the UI branch nor any executable branch"},
+    {"id": "value_not_parameterised", "symptom": "params == []", "because": "the typed value was not quoted in the goal so it was never a candidate; the skill would type 'urgent' forever -- a recording"},
+    {"id": "unbound_hole_reached_the_wire", "symptom": "ok:true with the literal string '?str_loose0' submitted", "because": "execute_compiled_steps never called _instantiate_obj; bindings were the caller's unenforced duty"},
+    {"id": "valued_click_executed_as_submit", "symptom": "ok:true and 'Inbox - 5 shown' for a goal that wanted 3", "because": "the executor treated every CLICK_SEMANTIC as a submit and dropped the value"}
+  ],
+  "cross_layer_regression_caught": {
+    "defect": "fixing is_ui broke Layer 3: cli_exec trace produced 5 steps instead of 1",
+    "because": "has_direct_causal_shortcut was computed before the loop, so a cli_exec still in raw_steps could not count as the shortcut",
+    "test_that_caught_it": "test_fourth_environment_shape_cli_layer3_v1.py::test_a_cli_effect_elevates_and_prunes_the_ui"
+  },
+  "the_boundary": {
+    "statement": "Layer 4 is a skill exactly when the postcondition is addressable. A filter whose state is in the URL has an exact postcondition and elevates. A filter whose state exists only in the DOM (onclick toggling row display) has no addressable state.",
+    "discriminator": {"server_rendered_8901": {"?filter=urgent": "Inbox - 3 shown", "?filter=invoice": "Inbox - 1 shown"}, "client_side_8895": "no URL reproduces the filtered state; both parameters ignored"},
+    "executor_behaviour_on_the_js_page": "refuses loudly with NO_SEMANTIC_FORM_AT_URL -- no silent success",
+    "why_it_cannot_be_recovered": "the vision channel's CDP allowlist has no Runtime.evaluate; a client-side filter can be SEEN but not ADDRESSED"
+  },
+  "tests": {"new_file": "canonical/tests/test_fifth_environment_shape_semantic_dom_l4_v1.py", "new_passed": 8, "suite_across_seven_files": 35},
+  "failure_class_running_count": 6,
+  "failure_class": "a success flag is not a postcondition"
+}
