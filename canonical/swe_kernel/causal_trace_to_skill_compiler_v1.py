@@ -1444,6 +1444,11 @@ def verify_postcondition(
             expected_n = expected_n  # fall through to the mismatch below with 0 lines
         got = len([ln for ln in text.splitlines() if ln.strip()])
         if got == 0:
+            # DO NOT "fix" this into a pass. `causal_ablation_pass = not pre_ok` requires
+            # this check to FAIL on empty receipts before the skill runs; allowing 0 to
+            # verify makes the ablation control silently invert and the ownership gate
+            # starts rejecting every skill (measured 2026-11-09). The price is that a
+            # genuinely empty result cannot be verified -- a known, named limit.
             return False, "POSTCONDITION_STDOUT_LINE_COUNT_ZERO"
         if expected_n is not None and str(got) != str(expected_n):
             return False, f"POSTCONDITION_STDOUT_LINE_COUNT_MISMATCH:{got}!={expected_n}"
