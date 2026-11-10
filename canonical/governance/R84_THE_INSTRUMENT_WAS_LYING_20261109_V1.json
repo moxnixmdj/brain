@@ -1,0 +1,42 @@
+{
+  "round": 84,
+  "date": "2026-11-09",
+  "title": "9/130 was a coverage number, not a capability number",
+  "headline": {
+    "reported_r83": "9/130 = 6.9%",
+    "what_it_actually_measures": "coverage, not capability",
+    "attempted": 37,
+    "never_attempted": 93,
+    "success_on_attempted": "9/37 = 24.3%",
+    "success_on_never_attempted": "0/93 by construction"
+  },
+  "instrument_defects": [
+    {"id": "plan_len_never_assigned", "detail": "initialised to 0 at the row dict and never written again; every task read 'planner produced nothing'. Fixed: assigned from len(pr['plan']). A test now asserts the assignment exists.", "note": "my FIRST attempt to fix this silently did not apply, and the test caught it"},
+    {"id": "no_literal_branch_did_nothing", "detail": "93/130 goals contain no quoted literal; that branch set status NO_LITERAL and performed zero actions, then the task was scored as a failure. 'Did not try' and 'tried and failed' were the same number. Fixed: strategy field records fill_value / reveal_target / not_attempted_no_literal."},
+    {"id": "classifier_defaulted_to_accusation", "detail": "the addressability probe returned render_only when it found NO signal of either kind, silently labelling 52 families as pixel problems. Fixed: a fourth class, dom_only_unobservable. A default must never be an accusation."},
+    {"id": "a_form_is_a_transport_not_a_channel", "detail": "a bare <form> tag made a page skillable; every MiniWob family has one. Fixed: a form only counts when something NAMES the effect (named input, URL, fetch, store)."},
+    {"id": "my_own_withdrawn_claim", "detail": "I reported '12.5% addressable vs 0% render-only' for one round. It was contaminated by the never-attempted bug: tasks that were never attempted cannot be evidence about addressability. Withdrawn."}
+  ],
+  "addressability_now_measured": {
+    "module": "canonical/runtime/addressability_probe_v1.py",
+    "taxonomy_source": "StateAct (arXiv 2607.22798) -- state-addressable / hybrid / render-only, and its delegation rule: use the GUI only when no code path to the target can be found by probing",
+    "miniwob_130": {"state_addressable": 1, "hybrid": 0, "render_only": 77, "dom_only_unobservable": 52},
+    "live_validation": {"http://127.0.0.1:8901/inbox": "skillable (measured end to end: 4/4 unseen goals)", "http://127.0.0.1:8895/": "render_only (measured: refuses loudly)"},
+    "verdict": "129 of 130 MiniWob families expose no code-readable terminal state. The five shapes are real; the suite is almost entirely outside their class."
+  },
+  "the_rule": "A SKILL REQUIRES AN ADDRESSABLE POSTCONDITION.",
+  "what_this_does_to_the_thesis": {
+    "instant_learning_once_demonstrated": "REAL for state-addressable effects, measured 4/4 unseen goals at 2-4 ms with zero model calls",
+    "permanence": "REAL while the environment and the skill library survive; unmeasured beyond that",
+    "transfer_to_new_environments": "PARTIAL -- Layer 2 (http_request) transfers because an HTTP contract is a contract; Layer 4 does not transfer across a re-skin because a semantic selector names a role+name that a redesign changes",
+    "sentience": "NO -- no self-model survives a reset"
+  },
+  "web": {
+    "fetches_this_round": 1,
+    "sources_that_matched_the_measurement": [
+      "StateAct 2607.22798: same three-class taxonomy, GUI needed on 28/108 tasks = 1.1% of steps, partial success 54.8% -> 61.6% at ~9x lower cost",
+      "Programming with Pixels (ICLR 2026): pure-visual CUAs 22.9%, plus file-edit and bash APIs 50.7% -- the addressability lever, measured independently",
+      "CLI-Anything 2606.03854: GUI-centric design 'fundamentally misaligns with agent capabilities'"
+    ]
+  }
+}

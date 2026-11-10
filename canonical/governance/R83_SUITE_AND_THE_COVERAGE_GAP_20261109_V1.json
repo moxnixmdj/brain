@@ -12,7 +12,7 @@
     "seconds": 327,
     "previous_runs": {"r80_planned": 10, "r73_baseline_first_public": 15},
     "spread_caveat": "SINGLE RUN. r78 measured 18/15/18 across three runs (stdev 1.73) at a different configuration, so 9 vs 10 is NOT a difference. It is also NOT an improvement, which is the only claim that matters.",
-    "verdict": "THE SKILL MACHINERY HAS NOT PRODUCED A BENCHMARK GAIN. Five shapes are real and measured; the benchmark did not move."
+    "verdict": "SUPERSEDED BY R84: this number measured COVERAGE, not capability. 93 of the 130 tasks were never attempted (their goals contain no quoted literal, and that branch performed no actions). Corrected decomposition: 9/37 = 24.3% on attempted."
   },
   "why_this_is_expected_and_not_an_excuse": {
     "finding": "the five shapes are exactly the class whose postcondition is addressable; MiniWob is overwhelmingly the class where it is not",

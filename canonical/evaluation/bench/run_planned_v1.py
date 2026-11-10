@@ -38,7 +38,12 @@ def centre(n):
 
 rows = []
 for i, t in enumerate(tasks, 1):
-    r = {"task": t, "probes": 0, "plan_len": 0, "refused": False, "error": None}
+    # `plan_len` was initialised here and NEVER assigned again, so every row read plan_len 0
+    # -- won and lost alike. It made the run look like the planner had produced nothing in
+    # either direction. `strategy` is the honest field: 93 of 130 tasks took the no-literal
+    # branch below, which did NOTHING, and were then counted as failures.
+    r = {"task": t, "probes": 0, "plan_len": 0, "refused": False, "error": None,
+         "strategy": "unset"}
     try:
         ch.navigate(B.BASE.format(task=t)); time.sleep(0.95)
         ch.click(80, 104); time.sleep(0.95)
@@ -62,8 +67,9 @@ for i, t in enumerate(tasks, 1):
         # state we are actually in, and never navigate again.
 
         if r.get("is_value") and lit:
-            pr = {"status": "SOLVED", "plan": []}
+            pr = {"status": "SOLVED", "plan": []}; r["strategy"] = "fill_value"
         elif lit:
+            r["strategy"] = "reveal_target"
             # is it already there, untouched?
             pr = G.plan_to_reveal(f0, lit, caps)
             if pr["status"] == "NO_ROUTE":
@@ -79,7 +85,11 @@ for i, t in enumerate(tasks, 1):
                 f0 = facts(*snap())
                 pr = G.plan_to_reveal(f0, lit, caps)
         else:
-            pr = {"status": "NO_LITERAL"}
+            # 93/130 arrived here and NOTHING was done, then the task was scored as a failure.
+            # "Did not try" and "tried and failed" were the same number. -- a_r83
+            pr = {"status": "NO_LITERAL"}; r["strategy"] = "not_attempted_no_literal"
+        r["plan_len"] = len(pr.get("plan") or [])
+        r["plan_status"] = pr["status"]
         if pr["status"] in ("SOLVED", "ALREADY_PRESENT"):
             from canonical.runtime import text_locate_v1 as TL
             def read():
