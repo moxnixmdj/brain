@@ -1,0 +1,538 @@
+{
+ "schema": "brain.real_repo_instance_miner.v1",
+ "repos_scanned": [
+  "pallets/markupsafe",
+  "pallets/werkzeug",
+  "pallets/itsdangerous",
+  "pallets/jinja",
+  "pallets/click",
+  "more-itertools/more-itertools",
+  "pytest-dev/pluggy",
+  "tox-dev/filelock"
+ ],
+ "commits_inspected": 47,
+ "commits_offered_to_verification": 33,
+ "valid_instances": 14,
+ "rejections": 33,
+ "rejection_reasons": {
+  "NO_TEST_CHANGED": 13,
+  "REVERT_DOES_NOT_FAIL": 1,
+  "NO_TESTS_DIR": 4,
+  "FIX_CONTROL_NOT_GREEN": 14,
+  "NO_SOURCE_CHANGED": 1
+ },
+ "valid_yield_pct": 42.4,
+ "instances": [
+  {
+   "id": "jinja_c8fdce1e",
+   "repo": "pallets/jinja",
+   "sha": "c8fdce1e0333f1122b244b03a48535fdd7b03d91",
+   "parent": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+   "subject": "Fix bug involving calling set on a template parameter within all branches of an if block (#1665)",
+   "valid": true,
+   "fix_control": "54 passed 0 failed",
+   "revert_control": "53 passed 1 failed",
+   "src_files": [
+    "src/jinja2/idtracking.py"
+   ],
+   "test_files": [
+    "tests/test_regression.py"
+   ]
+  },
+  {
+   "id": "jinja_66587ce9",
+   "repo": "pallets/jinja",
+   "sha": "66587ce989e5a478e0bb165371fa2b9d42b7040f",
+   "parent": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+   "subject": "Fix bug where set would sometimes fail within if",
+   "valid": true,
+   "fix_control": "54 passed 0 failed",
+   "revert_control": "53 passed 1 failed",
+   "src_files": [
+    "src/jinja2/idtracking.py"
+   ],
+   "test_files": [
+    "tests/test_regression.py"
+   ]
+  },
+  {
+   "id": "click_8c73ff13",
+   "repo": "pallets/click",
+   "sha": "8c73ff134480f436faa0d041bd19aaf949aac22c",
+   "parent": "bb695aaecdef95832d167fc1d508921745aa824e",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar` (#3884)",
+   "valid": true,
+   "fix_control": "676 passed 0 failed",
+   "revert_control": "667 passed 9 failed",
+   "src_files": [
+    "src/click/core.py"
+   ],
+   "test_files": [
+    "tests/test_options.py"
+   ]
+  },
+  {
+   "id": "click_c53d3732",
+   "repo": "pallets/click",
+   "sha": "c53d3732b98c764932e146c007146ad402acb229",
+   "parent": "bb695aaecdef95832d167fc1d508921745aa824e",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar`",
+   "valid": true,
+   "fix_control": "676 passed 0 failed",
+   "revert_control": "667 passed 9 failed",
+   "src_files": [
+    "src/click/core.py"
+   ],
+   "test_files": [
+    "tests/test_options.py"
+   ]
+  },
+  {
+   "id": "click_70689853",
+   "repo": "pallets/click",
+   "sha": "70689853e39c30e36eb0d83d586cc914a74db9d3",
+   "parent": "d036881798e34289a49b18a5c550c7cf687e5a7a",
+   "subject": "Fix short help abbreviation (#3865)",
+   "valid": true,
+   "fix_control": "36 passed 0 failed",
+   "revert_control": "30 passed 6 failed",
+   "src_files": [
+    "src/click/utils.py"
+   ],
+   "test_files": [
+    "tests/test_utils/test_make_default_short_help.py"
+   ]
+  },
+  {
+   "id": "click_f67c2bb6",
+   "repo": "pallets/click",
+   "sha": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+   "parent": "6d5bac5c712195cbfa9666ba0ecbf0573cdea356",
+   "subject": "Fix short help abbreviation",
+   "valid": true,
+   "fix_control": "36 passed 0 failed",
+   "revert_control": "30 passed 6 failed",
+   "src_files": [
+    "src/click/utils.py"
+   ],
+   "test_files": [
+    "tests/test_utils/test_make_default_short_help.py"
+   ]
+  },
+  {
+   "id": "more-itertools_f42daddf",
+   "repo": "more-itertools/more-itertools",
+   "sha": "f42daddf205f335fea6e200dad46049f33e71221",
+   "parent": "08dca284ba5446a026afdc34067b658f9da989eb",
+   "subject": "Merge pull request #1345 from chengzhudejing/fix/numeric-range-large-equality-hash",
+   "valid": true,
+   "fix_control": "626 passed 0 failed",
+   "revert_control": "624 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_c6292147",
+   "repo": "more-itertools/more-itertools",
+   "sha": "c629214760c78c0a2235e896d335cccfb3a64466",
+   "parent": "08dca284ba5446a026afdc34067b658f9da989eb",
+   "subject": "Fix numeric_range equality and hashing above sys.maxsize",
+   "valid": true,
+   "fix_control": "626 passed 0 failed",
+   "revert_control": "624 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_69dbc339",
+   "repo": "more-itertools/more-itertools",
+   "sha": "69dbc3392928afe1cc892a387bf0e721522f21c2",
+   "parent": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+   "subject": "Merge pull request #1322 from feiiiiii5/fix/peekable-slice-negative-step",
+   "valid": true,
+   "fix_control": "622 passed 0 failed",
+   "revert_control": "620 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_fbd55137",
+   "repo": "more-itertools/more-itertools",
+   "sha": "fbd55137fe47b44f55190c3714c75f1b21bf834d",
+   "parent": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+   "subject": "fix: validate the chunk size in chunked_even",
+   "valid": true,
+   "fix_control": "622 passed 0 failed",
+   "revert_control": "620 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_e6ce1b0f",
+   "repo": "more-itertools/more-itertools",
+   "sha": "e6ce1b0f65a57c459fc5004ad84158447b65b0ac",
+   "parent": "b21ec4ee8e139ebe297e2221980a694bebb69523",
+   "subject": "Fix peekable slice with negative step and omitted stop unnecessarily caching entire iterable",
+   "valid": true,
+   "fix_control": "621 passed 0 failed",
+   "revert_control": "620 passed 1 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_81c21a8d",
+   "repo": "more-itertools/more-itertools",
+   "sha": "81c21a8db1c922260cd673841257fb9b112c1318",
+   "parent": "1ea82a711c69f590054987b5cb194157f8ce8ac4",
+   "subject": "Merge branch 'DawnofGenX-fix-bucket-falsey-validator-1308'",
+   "valid": true,
+   "fix_control": "620 passed 0 failed",
+   "revert_control": "619 passed 1 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_67fcf640",
+   "repo": "more-itertools/more-itertools",
+   "sha": "67fcf640477c78605580f5ee703a54c73c1e7a8a",
+   "parent": "1ea82a711c69f590054987b5cb194157f8ce8ac4",
+   "subject": "fix: honour a falsey validator in bucket (#1308)",
+   "valid": true,
+   "fix_control": "620 passed 0 failed",
+   "revert_control": "619 passed 1 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  },
+  {
+   "id": "more-itertools_1ea82a71",
+   "repo": "more-itertools/more-itertools",
+   "sha": "1ea82a711c69f590054987b5cb194157f8ce8ac4",
+   "parent": "790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5",
+   "subject": "Merge pull request #1305 from 00200200/fix/ichunked-zero-n",
+   "valid": true,
+   "fix_control": "619 passed 0 failed",
+   "revert_control": "617 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ]
+  }
+ ],
+ "inspected": [
+  {
+   "repo": "pallets/markupsafe",
+   "sha": "73c3be15",
+   "subject": "fix wheel builds (#536)",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/markupsafe",
+   "sha": "d8ae19e6",
+   "subject": "fix wheel builds",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/markupsafe",
+   "sha": "ff06d77e",
+   "subject": "fix performance regression in striptags (#522)",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/werkzeug",
+   "sha": "76d289ca",
+   "subject": "fix types and docs for `run_wsgi_app`",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/werkzeug",
+   "sha": "92229dc4",
+   "subject": "fix type_checking deprecation guard",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/itsdangerous",
+   "sha": "c294b2fb",
+   "subject": "fix pyright findings",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "ece7c271",
+   "subject": "fix ruff pyupgrade findings",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "a3dce7bb",
+   "subject": "fix type/lint/format findings",
+   "reason": null
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "c8fdce1e",
+   "subject": "Fix bug involving calling set on a template parameter within all branches of an if block (#1665)",
+   "reason": null
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "66587ce9",
+   "subject": "Fix bug where set would sometimes fail within if",
+   "reason": null
+  },
+  {
+   "repo": "pallets/click",
+   "sha": "8c73ff13",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar` (#3884)",
+   "reason": null
+  },
+  {
+   "repo": "pallets/click",
+   "sha": "c53d3732",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar`",
+   "reason": null
+  },
+  {
+   "repo": "pallets/click",
+   "sha": "70689853",
+   "subject": "Fix short help abbreviation (#3865)",
+   "reason": null
+  },
+  {
+   "repo": "pallets/click",
+   "sha": "f67c2bb6",
+   "subject": "Fix short help abbreviation",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "00383df5",
+   "subject": "Merge pull request #1349 from Dhairya-007/fix-generator-return-types",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "dbffa3c2",
+   "subject": "Merge pull request #1346 from abhishekcpp007/fix-concurrent-tee-serialize-stubs",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "0672d325",
+   "subject": "Fix the concurrent_tee and serialize stubs",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "f42daddf",
+   "subject": "Merge pull request #1345 from chengzhudejing/fix/numeric-range-large-equality-hash",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "c6292147",
+   "subject": "Fix numeric_range equality and hashing above sys.maxsize",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "69dbc339",
+   "subject": "Merge pull request #1322 from feiiiiii5/fix/peekable-slice-negative-step",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "fbd55137",
+   "subject": "fix: validate the chunk size in chunked_even",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "e6ce1b0f",
+   "subject": "Fix peekable slice with negative step and omitted stop unnecessarily caching entire iterable",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "81c21a8d",
+   "subject": "Merge branch 'DawnofGenX-fix-bucket-falsey-validator-1308'",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "67fcf640",
+   "subject": "fix: honour a falsey validator in bucket (#1308)",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "1ea82a71",
+   "subject": "Merge pull request #1305 from 00200200/fix/ichunked-zero-n",
+   "reason": null
+  },
+  {
+   "repo": "more-itertools/more-itertools",
+   "sha": "790bb0bb",
+   "subject": "Merge pull request #1303 from feiiiiii5/fix/numeric-range-doc",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pytest-dev/pluggy",
+   "sha": "49c07369",
+   "subject": "Merge pull request #809 from SIBTAIN-ASAD/fix-entrypoint-declined-distributions",
+   "reason": null
+  },
+  {
+   "repo": "pytest-dev/pluggy",
+   "sha": "4d6b10d2",
+   "subject": "Fix declined entry point distribution tracking",
+   "reason": null
+  },
+  {
+   "repo": "pytest-dev/pluggy",
+   "sha": "20950ae1",
+   "subject": "Merge pull request #799 from RonnyPfannschmidt/fix-792-tracing-robust",
+   "reason": null
+  },
+  {
+   "repo": "pytest-dev/pluggy",
+   "sha": "6995073d",
+   "subject": "Merge pull request #776 from RonnyPfannschmidt/fix/uv-lock-pytest-downgrade",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pytest-dev/pluggy",
+   "sha": "e108fa44",
+   "subject": "fix: skip registered entrypoint plugins without checking truthiness",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "2e1eaaa7",
+   "subject": "\ud83d\udc1b fix(api): expire at the exact timeout (#922)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "b57bd7be",
+   "subject": "\ud83d\udd12 fix(docker): pin images and pip installs by hash (#912)",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "179df40a",
+   "subject": "\ud83d\udd0e fix(type): annotate lock for ty 0.0.99 (#913)",
+   "reason": "NO_SOURCE_CHANGED"
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "030c5e2c",
+   "subject": "\ud83d\udc1b fix(rw): reject a non-bool blocking (#908)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "ff847352",
+   "subject": "\ud83d\udc1b fix(lease): reclaim dead holders after duration changes (#900)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "77eb01a2",
+   "subject": "\ud83d\udc1b fix(soft): restore raced stale markers (#899)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "21bc2505",
+   "subject": "\ud83d\udc1b fix(rw): close a link directory an ACL opened (#898)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "160141c4",
+   "subject": "\ud83d\udc1b fix(import): raise for a missing read-write module (#880)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "cb18d9eb",
+   "subject": "\ud83d\udc1b fix(win32): reclaim a soft lock from an exited holder (#874)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "adbcde94",
+   "subject": "\ud83d\udc1b fix(lease): reset the claim in a fork child (#868)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "193c7dd9",
+   "subject": "\ud83d\udc1b fix(soft-rw): treat FreeBSD's EMLINK as a symlink refusal (#866)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "bc92a5bc",
+   "subject": "\ud83d\udc1b fix(api): skip mkdir on a nested acquire (#878)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "1f87ca80",
+   "subject": "\ud83d\udc1b fix(api): reject a non-bool blocking in acquire() (#870)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "3a3bf14b",
+   "subject": "\ud83d\udc1b fix(unix): reopen a denied lock at the pinned path (#889)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "5bfde289",
+   "subject": "\ud83d\udc1b fix(soft): ignore a restore claim with an invalid pid (#871)",
+   "reason": null
+  },
+  {
+   "repo": "tox-dev/filelock",
+   "sha": "2d4b738a",
+   "subject": "\ud83d\udc1b fix(soft): clean up a marker whose identity read failed (#869)",
+   "reason": null
+  }
+ ],
+ "trained_parameters": 0,
+ "external_model_calls": 0,
+ "incremental_spend_usd": 0
+}

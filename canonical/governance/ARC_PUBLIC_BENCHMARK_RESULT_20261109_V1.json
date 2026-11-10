@@ -1,0 +1,91 @@
+{
+ "schema": "brain.governance.arc_public_benchmark_result.v1",
+ "date": "2026-11-09",
+ "status": "PUBLIC_BENCHMARK_MEASURED_AND_THE_RULE_LIST_CEILING_DEMONSTRATED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "why_this_file_exists": {
+  "the_problem": "every earlier performance number in this project was a SELF-REPORT: a frozen corpus we wrote, scored by a scorer we wrote. None of them is a public benchmark.",
+  "the_correction": "take a public benchmark whose tasks nobody in this repository authored, run it, and report the number as it falls.",
+  "the_instruction_this_obeys": "use the web to the fullest; you can take any perfect solutions there or any code in the repos there"
+ },
+ "benchmark": {
+  "name": "ARC-AGI-1 evaluation split",
+  "tasks_used": 200,
+  "of_total_public_eval_tasks": 400,
+  "source": "github.com/fchollet/ARC-AGI/data/evaluation",
+  "authorship": "Francois Chollet / ARC Prize Foundation -- nobody in this repository wrote a task",
+  "why_this_benchmark": "it is the one the project's own governance already tracks against Opus 5.5, and it is weightless-solvable in principle"
+ },
+ "result": {
+  "tasks": 200,
+  "solved": 3,
+  "accuracy_pct": 1.5,
+  "solved_ids": [
+   "00576224",
+   "60c09cac",
+   "(connect family)"
+  ],
+  "trained_parameters": 0,
+  "gradient_steps": 0,
+  "epochs": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0,
+  "wall_clock_ms_for_all_200_tasks": 1600,
+  "ms_per_task": 8.0,
+  "rules_used": {
+   "mirrortile": 1,
+   "connect": 1,
+   "tile2": 1
+  },
+  "superseded_measurement": "2/200 = 1.0% with a 20-rule list; raised to 3/200 = 1.5% by adding 5 structural primitives",
+  "data_in_repo": "canonical/evaluation/arc_agi1_eval_sample (200 real tasks)"
+ },
+ "how_it_works": {
+  "method": "INDUCE a rule from the demonstrations, VERIFY it reproduces EVERY demonstration exactly, and only then APPLY it to the test input",
+  "fail_closed": "a rule that misses one demonstration is discarded, never patched",
+  "hypothesis_space": [
+   "identity, flip h/v, rot90/180/270, transpose, antitranspose",
+   "crop to the non-background rectangle",
+   "tile 2x, tile 3x, the mirrored 3-block tiling",
+   "cell-wise colour map, constant output",
+   "fill enclosed background regions",
+   "recolour objects by size, majority colour"
+  ],
+  "what_is_NOT_in_it": "no neural network, no gradient, no learned vector, no external model"
+ },
+ "honest_comparison": {
+  "this_solver": "1.0% on ARC-AGI-1 eval, 200 tasks",
+  "published_symbolic_ARC_AGI_2": "1.67/240 hidden, 1/120 public (Bose 2026, pure symbolic DSL, CPU, no LLM)",
+  "published_VSA_neurosymbolic": "10.8% ARC-AGI-1 train, 3.0% ARC-AGI-1 eval (Joffe & Eliasmith 2026, Nature)",
+  "published_no_pretraining_neural": "20% ARC-AGI-1 eval (CompressARC, learns on the single puzzle at inference, 76K params)",
+  "Opus_5_5_claimed_by_this_repo": "ARC-AGI-1 98.5%, ARC-AGI-2 93.3% (from canonical/governance/OPUS55_ABSTRACT_GENERALIZATION_ARC_AGI_BOUNDARY_V1.json)",
+  "the_gap_is_structural": "1.0% versus 98.5% is not a tuning gap. It is the difference between a rule list and a system that builds a representation of the task."
+ },
+ "what_the_web_taught_that_changes_the_plan": [
+  {
+   "finding": "Tycho (NIMI, 2026) writes PYTHON CODE as falsifiable hypotheses about each environment, verifies predictions against observations, refactors toward simpler abstractions, and plans by simulation -- writing no weight matrix at all.",
+   "why_it_matters": "this is the architecture this project already has, in a different vocabulary: it is exactly the shape of canonical/action_intents (a named claim + a measurement + a falsification condition).",
+   "action": "the ARC solver should grow toward write-a-program-and-verify-it, not toward a bigger rule list. The rule list is the reason 198 of 200 tasks refuse."
+  },
+  {
+   "finding": "CompressARC solves 20% of ARC-AGI-1 eval with NO pretraining, by minimising the description length of the target puzzle during inference only, with 76K parameters.",
+   "why_it_matters": "it is the closest published thing to this project's thesis: inference-time learning, no training corpus.",
+   "action": "MDL as a search objective is the single highest-value import. It replaces 'which rule matches' with 'which program is shortest', which is a gradient the rule list does not have."
+  },
+  {
+   "finding": "VSA-based ARC work scores 3.0% on ARC-AGI-1 eval, and the authors argue the proper solution is neurosymbolic.",
+   "why_it_matters": "it bounds what hyperdimensional representation alone can buy on this benchmark: about 3x this solver, not 100x.",
+   "action": "do not expect the hyperdimensional layer to close the ARC gap. Measure it, but do not promise it."
+  }
+ ],
+ "next_highest_value_step": "MDL-guided program search over a small DSL, growing the hypothesis space from 20 rules to an enumerable program space, with the same verify-everything discipline. The 198 refusals are the training signal, and they are already labelled.",
+ "what_is_NOT_claimed": [
+  "NOT_AN_ARC_AGI_PARITY_CLAIM",
+  "NOT_A_COMPETITIVE_ARC_SOLVER",
+  "NOT_A_GENERALISATION_ESTIMATE__200_OF_400_PUBLIC_TASKS",
+  "NO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "6_of_the_14_frozen_M0A_cases_are_still_the_only_language_result_and_their_heldout_is_spent"
+ ],
+ "truth_achieved": false,
+ "the_decisive_result": "depth-2 composition adds ZERO tasks over depth 1 and costs 170x wall clock; no primitive solves more than one task"
+}

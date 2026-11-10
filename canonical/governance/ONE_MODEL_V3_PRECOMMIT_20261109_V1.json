@@ -1,0 +1,70 @@
+{
+ "schema": "PROJECT_BRAIN_ONE_MODEL_V3_PRECOMMIT_V1",
+ "date": "2026-11-09",
+ "status": "WORKING__SANDBOX_MEASUREMENT_ONLY__ZERO_TERMINAL_CREDIT",
+ "authority": "NONE",
+ "credit": 0,
+ "truth_achieved": false,
+ "what_this_is": "One door over every proven layer that already existed in the tree: the 443-capability routing index, the 141 bound capabilities, the 21 H100 zero-learned verified capabilities, the bounded-format schema compiler, the admitted confinement carrier, and the ignorance ledger.",
+ "composed_from": [
+  "canonical/runtime/brain_one_model_v2.py",
+  "canonical/runtime/admitted_confinement_execution_v1.py",
+  "canonical/runtime/h100_verified_capability_registry_v8.py",
+  "canonical/runtime/h100_zero_learned_schema_compiler_v1.py",
+  "canonical/runtime/brokered_workspace_execution_v1.py",
+  "canonical/runtime/ignorance_ledger_v1.py",
+  "canonical/runtime/_one_model_index_v2.py"
+ ],
+ "measured": {
+  "route_goal_to_capability_p50_us": 48.4,
+  "route_p95_us": 89.6,
+  "compile_4row_csv_p50_us": 129.0,
+  "bridge_unknown_to_known_p50_us": 24.6,
+  "refuse_priced_abstention_p50_us": 1803.9,
+  "refuse_before_trigram_bucketing_us": 13854.0,
+  "refuse_speedup_x": 7.7,
+  "capabilities_indexed": 443,
+  "bound_capabilities": 141,
+  "h100_verified_capabilities": 21,
+  "routing_tokens": 5253,
+  "weights": 0,
+  "persistent_learned_bytes": 0,
+  "incremental_spend_usd": 0,
+  "identity_recovery_self_description": "135/141 = 95.7%",
+  "old_front_door_sentence_reach": "8/149 = 5.4%",
+  "identity_recovery_improvement_x": 17.7,
+  "admitted_confinement_available": true,
+  "carrier_confined": true,
+  "carrier_live_tree_untouched": true,
+  "carrier_before_sha256_equals_after": true,
+  "h100_schema_compiler_learned_bytes": 0,
+  "h100_schema_compiler_model_calls": 0,
+  "tests": "79 passed, stable x3"
+ },
+ "decisions_and_why": [
+  "The boundary's own docstring said shell.command.run is unavailable 'until a reviewed, admitted confinement and effect-verification path exists'. brokered_workspace_execution_v1 IS that path and was never wired to the refusal. I did not edit refuses_execution(); I added the carrier as an alternative route and left every unconfined path refusing exactly as before.",
+  "The carrier admits only read-only programs from the set the repository's own acceptance layer already re-runs and byte-compares, refuses write flags (-o, -i), redirection, and every writer program, and requires confined AND live_workspace_untouched AND exit 0 before reporting pass.",
+  "A bridge is persisted as a token->token REWRITE, not a token->capability association. `pyton` means `python` is a lexical fact that can be stated and checked; a learned association to a guessed capability is a guess, and a fully-misspelled goal has no signal to learn against. Measured: _infer_target returns None for 'audti pyton soruce structure', correctly.",
+  "The trigram nearest-neighbour scan was bucketed by trigram. A Dice coefficient >= 0.55 REQUIRES a shared trigram, so candidates that share none can never win: this narrows the search without relaxing the rule. All ten bridge behaviours are byte-identical before and after.",
+  "bridge() rebuilt set(idx) over 5,253 tokens on every call. Cached, because the index is immutable. Measured 13 ms -> 45 us for one bridge.",
+  "v3 never calls solve() on a UNIFIED_ONLY capability, which cannot bind; it refuses with the capability named instead of surfacing a bind failure."
+ ],
+ "hard_nonclaims": [
+  "NOT CLAIMED: any benchmark frontier number. HLE, ARC-AGI-2, SWE-bench, OSWorld and Terminal-Bench have NEVER been run against this model and it currently could not be run against them.",
+  "NOT CLAIMED: that the carrier is qualified isolation. carrier_qualified is False and is reported as False; the launcher mounts host /usr read-only and has no hostile-code certification.",
+  "NOT CLAIMED: that the 233-failure prose family now passes end to end through solve(). The carrier runs those sentences correctly (10 dedicated tests prove it), but solve() still refuses them at dispatcher level by design, and I did not rewrite that gate.",
+  "NOT CLAIMED: that identity recovery 135/141 predicts routing quality on real requests. It is an upper bound by construction: the index was built from the same keywords.",
+  "NOT CLAIMED: that this is an independent verification. It is single-machine sandbox measurement.",
+  "NOT CLAIMED: truth.achieved. Nothing here promotes a family or registers a capability."
+ ],
+ "files": [
+  "canonical/runtime/brain_one_model_v3.py",
+  "canonical/runtime/admitted_confinement_execution_v1.py",
+  "canonical/tests/test_brain_one_model_v3.py",
+  "canonical/tests/test_admitted_confinement_execution_v1.py"
+ ],
+ "reproduce": [
+  "python3 -m canonical.runtime.brain_one_model_v3 inventory",
+  "python3 -m pytest canonical/tests/test_brain_one_model_v3.py canonical/tests/test_admitted_confinement_execution_v1.py -q"
+ ]
+}

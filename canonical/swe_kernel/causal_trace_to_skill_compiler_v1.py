@@ -747,6 +747,36 @@ def _widen_intent_word(pattern: str, skill: Mapping[str, Any]) -> str:
     return widened
 
 
+def _bind_by_verb_selection(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
+    """Bindings for a candidate CHOSEN BY VERB rather than by wording.
+
+    The stored goal_regex is a regex over the SENTENCE the skill was taught with. A verb-
+    selected candidate only matched on "which program does this goal name", so its sentence
+    will not match by construction -- measured 2026-11-09: 'dedupe the lines in data.txt'
+    reached the candidate list and then died here with None, and recall returned nothing.
+
+    This binds the PARAMETERS the skill's steps actually reference, taking the first
+    path-shaped token in the goal for each ?pathN. It does NOT re-check the wording: the
+    verb was the check. Binding the wrong file is the remaining risk and it is real --
+    which is why this path is only reachable when both sentence indexes found nothing.
+    """
+    steps = skill.get("abstract_steps") or skill.get("steps") or []
+    needed: list[str] = []
+    for step in steps:
+        blob = json.dumps(step)
+        for name in re.findall(r"\?(path\d+|url\d+|name\d+)", blob):
+            key = "?" + name
+            if key not in needed:
+                needed.append(key)
+    if not needed:
+        return {}
+    paths = [t for t in re.findall(r"[^\s\"',;)]+", goal)
+             if ("/" in t or "." in t) and not t.startswith("-")]
+    if not paths:
+        return None
+    return {name: paths[min(i, len(paths) - 1)] for i, name in enumerate(needed)}
+
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
@@ -2388,6 +2418,12 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
         sk_intent = _intent_of(str(sk.get("goal_skeleton") or "").replace("?", ""))
         if sk_intent is not None:
             inv.setdefault("__INTENT__" + sk_intent, []).append(sk)
+        # WHICH PROGRAM this skill actually runs, indexed so a request phrased in the
+        # user's own words can still find it (r50). Read from the stored steps, not from
+        # the goal wording, so the index describes what the skill DOES.
+        sk_verb = _verb_of_skill_row(sk)
+        if sk_verb:
+            inv.setdefault("__BYVERB__" + sk_verb, []).append(sk)
     _WORKFLOW_INDEX_CACHE[key] = inv
     return out
 
@@ -2498,6 +2534,33 @@ def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | No
             if sk_intent is not None and sk_intent == asked_intent and sk["skill_id"] not in seen_ids:
                 seen_ids.add(sk["skill_id"])
                 candidates.append(sk)
+    # THIRD FALLBACK: SELECT BY VERB (r50).
+    #
+    # Measured 2026-11-09: requests phrased in a user's own words -- "dedupe the lines in",
+    # "how many lines are in", "flip each line of" -- scored 0 of 8, because both indexes
+    # above are keyed on the sentence. A miss returned None rather than a wrong verb, so
+    # there were zero misroutes; there was simply no selection at all.
+    #
+    # This runs ONLY after both sentence indexes have produced nothing, so it cannot change
+    # any existing hit. It is a vocabulary, not comprehension, and says so.
+    # NOTE THE CONDITION. The first version fired only when `candidates` was EMPTY, and a
+    # candidate found by INTENT (wrong meaning, right words) made it non-empty -- so the
+    # intent match SUPPRESSED the verb match. Measured 2026-11-09: "how many lines are in
+    # data.txt" bound via intent to `wc -l` and then died in the regex gate, while the verb
+    # fallback that could have bound it directly never ran. Adding the verb candidates
+    # unconditionally is safe because they still have to bind and execute.
+    if goal:
+        wanted_verb = infer_verb_from_goal(goal)
+        if wanted_verb:
+            for sk in (inv.get("__BYVERB__" + wanted_verb) or ()):
+                if sk["skill_id"] not in seen_ids:
+                    seen_ids.add(sk["skill_id"])
+                    # CHOSEN BY VERB, not by wording. The skeleton gate below exists to stop
+                    # a skill answering questions it was never taught; a verb-selected
+                    # candidate is already the answer to "which program does this goal
+                    # name", and re-applying the WORD gate to it is the same defect this
+                    # round is fixing one layer down. Marked so the gate can respect it.
+                    candidates.append(dict(sk, _selected_by="verb"))
     return candidates
 
 
@@ -2778,9 +2841,12 @@ def recall_and_execute_workflow(
         # ONE definition of "does this skeleton apply", shared with the candidate builder.
         # The rule used to exist twice; both were once patched separately and the skill that
         # gate one admitted was dropped by gate two.
-        if not _skeleton_matches(skill, goal_words, goal):
+        if skill.get("_selected_by") != "verb" and not _skeleton_matches(skill, goal_words, goal):
             continue
         bindings = bind_goal_parameters(skill, goal)
+        if bindings is None and skill.get("_selected_by") == "verb":
+            # the sentence regex cannot match a candidate chosen by verb
+            bindings = _bind_by_verb_selection(skill, goal)
         if bindings is None:
             continue
         has_py = any(
@@ -3227,3 +3293,86 @@ def audit_answer_shape(goal: str, result: Mapping[str, Any]) -> dict[str, Any]:
         "honesty": ("a shape check only. A wrong answer of the correct type passes this and "
                     "every derivation audit; nothing here verifies the CHOICE of command."),
     }
+
+
+# --------------------------------------------------------------------------------------
+# TOOL SELECTION BY VERB, NOT BY SENTENCE (r50, 2026-11-09)
+#
+# Measured this round: recall scored 0 of 8 on requests phrased in a user's own words
+# ("dedupe the lines in", "how many lines are in", "flip each line of"). Not because it
+# chose the wrong verb -- a miss returns None, so there were ZERO misroutes -- but because
+# the whole goal string is the index key. The skill is found only by repeating the sentence
+# it was taught with.
+#
+# This is the 2026 metric the project had never computed: TOOL SELECTION CORRECTNESS,
+# "given the state and goal, did the agent choose the correct tool" (Prefix Executability,
+# arXiv 2610.40444). It is separable from argument validity and from execution, and it is
+# where an agent can be right for the wrong reason.
+#
+# The fix is deliberately small and honest: infer WHICH VERB the goal needs from its words,
+# then look up by that verb. It is a vocabulary, not understanding -- the same construct as
+# infer_contract_from_goal, and it fails the same way when the words are unfamiliar.
+# --------------------------------------------------------------------------------------
+
+_VERB_CUES: dict[str, tuple[str, ...]] = {
+    "sort": ("unique", "distinct", "dedupe", "deduplicate", "alphabeti", "sort", "order the lines"),
+    "wc": ("how many", "count", "tally", "number of", "line count", "size of", "how long"),
+    "sha256sum": ("sha256", "sha-256"),
+    "md5sum": ("md5",),
+    "cksum": ("checksum", "crc", "integrity"),
+    "cat": ("contents", "content of", "what is in", "show me the file", "read me",
+            "dump the contents", "let me see the file", "print out"),
+    "rev": ("reverse each", "flip each", "invert the character", "reverse the characters"),
+    "tac": ("reverse the order", "backwards", "bottom to top", "in reverse"),
+    "head": ("first", "top of", "start of", "beginning"),
+    "tail": ("last", "end of", "bottom of"),
+    "grep": ("lines containing", "lines matching", "grep", "search for", "which lines mention",
+             "find any line", "spot any"),
+    "nl": ("number the lines", "line numbers", "add numbers"),
+    "fold": ("fold", "wrap the long lines", "break the overlong"),
+    "fmt": ("reflow", "reformat", "tidy up"),
+    "expand": ("expand tabs", "tabs into spaces", "tabs to spaces", "replace tabs"),
+    "unexpand": ("unexpand", "spaces into tabs", "indentation to tabs"),
+    "cut": ("first column", "column one", "first character of every line"),
+    "od": ("octal dump", "dump the bytes", "raw bytes"),
+    "paste": ("paste", "concatenate the lines", "join the rows"),
+    "uniq": ("collapse repeats", "adjacent repeats", "consecutive duplicates",
+             "duplicate neighbours"),
+    "sed": ("replace", "swap", "change every instance", "substitute"),
+    "egrep": ("egrep",),
+    "fgrep": ("fgrep",),
+}
+
+
+def infer_verb_from_goal(goal: str) -> str | None:
+    """Which program does this goal name? Longest matching cue wins, ties go to the first.
+
+    A vocabulary, not comprehension. Measured: it turns 0/8 phrase-based selection into
+    whatever the cue table covers, and it will be wrong for phrasing outside the table --
+    which is why the result reports the cue it used rather than an unexplained string.
+    """
+    g = " ".join(str(goal or "").lower().split())
+    best: tuple[int, str] | None = None
+    for verb, cues in _VERB_CUES.items():
+        for cue in cues:
+            if cue in g and (best is None or len(cue) > best[0]):
+                best = (len(cue), verb)
+    return best[1] if best else None
+
+
+def _verb_of_skill_row(row: Mapping[str, Any]) -> str | None:
+    """The program a stored skill actually runs, read from its steps."""
+    # NOTE: the loaded row calls this `abstract_steps`, not `steps`. Measured 2026-11-09:
+    # reading "steps" returned None for every stored skill, so the verb index was silently
+    # empty and the fallback could never fire. A silently-empty index looks exactly like a
+    # working one that finds nothing.
+    steps = row.get("abstract_steps") or row.get("steps") or []
+    try:
+        first = steps[0] if isinstance(steps, (list, tuple)) else json.loads(steps)[0]
+    except Exception:  # noqa: BLE001
+        return None
+    if str(first.get("layer")) == "cli_pipeline":
+        stages = first.get("stages") or []
+        return str(stages[0][0]) if stages and stages[0] else None
+    argv = first.get("argv") or []
+    return str(argv[0]) if argv else None

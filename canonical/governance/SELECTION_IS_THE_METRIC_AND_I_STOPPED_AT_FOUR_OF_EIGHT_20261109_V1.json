@@ -1,0 +1,82 @@
+{
+  "round": 50,
+  "date": "2026-11-09",
+  "title": "Selection correctness is the metric this project never computed; measured 0/8, fixed to 4/8, refused to fix the rest",
+  "why_this_metric": {
+    "source": "Prefix Executability, arXiv 2610.40444; 2026 agent-evaluation taxonomies",
+    "definition": "given the state and the goal, did the agent choose the correct tool",
+    "scored_against": "an allowlist, deterministically, with no LLM judge",
+    "separate_from": ["schema validity", "argument validity", "execution success", "side-effect correctness"],
+    "the_sentence_that_names_the_hole": "an agent might select the wrong tool, recover by accident, and still produce a correct answer. It would pass output-only evaluation, but you have now masked a systematic decision flaw that will surface under slightly different conditions.",
+    "why_it_matters_here": "r46-r49 built a pipeline that answers correctly, carries provenance, survives re-derivation, and passes a shape audit. None of those instruments can see whether the SKILL was chosen for the right reason. This round measured that and it was near zero."
+  },
+  "measurement": [
+    {
+      "condition": "asked in the exact teaching sentence, 5 verbs",
+      "score": "5/5",
+      "verdict": "circular, reported only as a control",
+      "reason": "the goal string is the index key, so retrieval returns what was written. This is a dictionary lookup wearing a test's clothes and was flagged in the same breath as it was measured."
+    },
+    {
+      "condition": "asked in a new user's own words, 8 asks, one skill store per case",
+      "score": "0/8",
+      "hits": 0,
+      "misroutes": 0,
+      "result": "all eight returned None",
+      "interpretation": "selection failed by ABSENCE, never by ERROR. Recall never offered a wrong verb. That is why four rounds of correctness work never exposed it: nothing wrong was ever returned, so nothing wrong was ever caught."
+    },
+    {
+      "condition": "after the verb-selection layer",
+      "score": "4/8",
+      "ok": ["dedupe the lines in -> sort", "sha256 of -> sha256sum", "show me the content of -> cat", "backwards -> tac"],
+      "miss": ["give me the distinct lines of", "how many lines are in", "tally the rows of", "flip each line of"],
+      "misroutes": 0
+    }
+  ],
+  "what_was_built": {
+    "infer_verb_from_goal": "_VERB_CUES longest-cue-wins over the 37 admitted verbs; a vocabulary, not comprehension",
+    "byverb_index": "__BYVERB__ built inside _load_cached_skills(); reads abstract_steps because loaded rows have no 'steps' key",
+    "selection_fallback": "fires unconditionally when a goal exists; an earlier version guarded it with 'if not candidates' and an intent candidate silently suppressed it",
+    "skeleton_bypass": "_skeleton_matches is skipped for verb-selected candidates; the word gate exists to stop a skill answering an untaught question, and a verb-selected candidate was already chosen by program name",
+    "binding": "_bind_by_verb_selection() binds ?pathN positionally because bind_goal_parameters matches goal_regex against the TEACHING sentence and returns None by construction"
+  },
+  "refusal": {
+    "available_fix": "add four more cue phrases",
+    "what_that_would_produce": "8/8",
+    "why_it_was_not_done": "the four missing asks are the held-out set. Editing the vocabulary until the held-out set turns green is not fixing selection, it is copying the answer key. r47 already rejected this move; doing it now would be the same act one round later with a bigger number attached.",
+    "cost_of_the_refusal": "the project states 4/8 where a worse-faith project states 8/8"
+  },
+  "structural_cause_stated_not_hidden": "Recall still gates on sentence-shaped checks written for a different sentence. The verb layer reaches the candidate but the remaining four phrasings are not in any cue table, and no amount of fixing the plumbing downstream of the cue table reaches a sentence the table cannot read.",
+  "web_evidence_for_the_refusal": {
+    "berkeley_2026": "eight prominent agent benchmarks shown gameable to near-perfect scores without solving a single underlying task",
+    "one_shot_trap_2026": "in a Terminal-Bench 2.0 lifecycle study, GEPA's optimized agent transferred BELOW the unoptimized baseline on new tasks while looking competitive on the tuning set",
+    "single_before_after_warning": "if you report a single before-and-after number you are measuring the wrong thing",
+    "swebench_verified_audit_2026": "at least 59.4% of the hard subset's test cases judged flawed",
+    "takeaway": "the moment a small eval becomes the target, its number stops being a measurement. 4/8 with four named misses is a measurement; 8/8 after tuning is a transcript of the test file."
+  },
+  "correction_to_my_own_numbers": {
+    "previously_stated": "SWE-bench Pro 89.9%, OSWorld 2.0 binary 48.7%",
+    "2026_board_figures_seen_this_round": "SWE-bench Pro public 61.5% +/- 3.1 (top listed); OSWorld 2.0 20.6% binary / 54.8% partial",
+    "honest_position": "frontier headline figures vary by board, harness and date by tens of points. The gap argument does not depend on which figure is used, because this project scores ZERO on all of them. Quote the conservative figure.",
+    "do_not": "keep repeating the most flattering frontier number as if it were stable"
+  },
+  "honest_verdict": {
+    "selection_in_new_words": "4/8",
+    "misroute_rate": "0/8",
+    "comparison_target": "a 2026 frontier agent given the same 37-verb allowlist would likely score 8/8 here; the gap is in the cue vocabulary, which is a language model's job and not a fixed table's",
+    "the_standing_claim_that_this_round_tests": "instant learning plus permanence would give perfect selection",
+    "result_against_that_claim": "permanence held (r42). Transfer held (r44). Selection of the permanently learned skill from new words did NOT: 4/8. A skill that cannot be found is not a skill you have.",
+    "sentience": "unchanged and unaddressed by this round: zero evidence, no mechanism, and this round measured a lookup table"
+  },
+  "regression": {
+    "files": 15,
+    "passed": 114,
+    "r46_baseline_unchanged": "23/23"
+  },
+  "next": [
+    "the space-in-path inexpressibility",
+    "audit the multi-step answers the pipeline layer produces (never audited)",
+    "evidence omission r47 flagged but never built",
+    "the write layer, last"
+  ]
+}

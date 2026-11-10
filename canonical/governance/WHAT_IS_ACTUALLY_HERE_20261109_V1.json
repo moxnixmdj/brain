@@ -1,0 +1,64 @@
+{
+ "schema": "PROJECT_BRAIN_WHAT_IS_ACTUALLY_HERE_V1",
+ "date": "2026-11-09",
+ "status": "SANDBOX_MEASUREMENT_ONLY__ZERO_TERMINAL_CREDIT",
+ "authority": "NONE",
+ "credit": 0,
+ "truth_achieved": false,
+ "what_this_round_found_that_previous_rounds_missed": [
+  {
+   "thing": "canonical/runtime/value_algebra_v1.py (2,253 lines)",
+   "what_it_is": "A COMPOSITIONAL answer engine: 'answers are BUILT OUT OF typed pieces, not looked up in a menu'. It enumerates operators that TYPE-CHECK against values the tree provides, so a question nobody wrote down can still be answered. It carries its own independent verification (re-derives every node, checks the partition sums to the whole).",
+   "value": "\u2605\u2605\u2605\u2605\u2605 THE HIGHEST-VALUE THING I HAVE FOUND. This is the 'understands structure' layer I twice told the user did not exist. It does exist.",
+   "measured": "6/6 correct answers verified live: count 3, total 500, max 250, mean 166.666667, 'which region has largest' -> west, doubled 500. 4-34 ms. Zero weights, zero model calls."
+  },
+  {
+   "thing": "canonical/runtime/autonomous_v1.py + inspect_v1.py + operation_trial_v1.py",
+   "what_it_is": "The real question door: A.run(goal=..., root=...). I had been calling value_algebra.compose() directly with the wrong arguments and concluding it refused everything.",
+   "value": "\u2605\u2605\u2605\u2605\u2605 the correct entry point"
+  },
+  {
+   "thing": "canonical/runtime/hle_mcq_retrieval_vote_v1.py, hle_exact_retrieval_span_v1.py, tb_science_zero_model_scientific_kernel_v1.py",
+   "what_it_is": "Brain-owned deterministic benchmark candidate generators. 'No LLM/model is called. Gold is never read.'",
+   "value": "\u2605\u2605\u2605\u2605\u2606 these are the benchmark-facing modules \u2014 the ones that make an HLE claim testable. I previously said HLE was 'never run and cannot be run'. A deterministic HLE candidate generator exists.",
+   "honesty": "a candidate generator is not a score. It emits fallible candidates with no correctness authority."
+  },
+  {
+   "thing": "canonical/runtime/ignorance_ledger_v1.py \u2014 now WIRED",
+   "what_it_is": "Ranked, priced model of its own ignorance: value = p_useful/(1+cost), untried gaps score 0.5.",
+   "value": "\u2605\u2605\u2605\u2605\u2606 measured live: 91 open gaps, 29 tried, 3 ever helped. Top priced gap 'probe:>|stdin' at 0.312.",
+   "note": "this was one of the five open wires from my last census; running the answer door populated it."
+  }
+ ],
+ "the_false_pass_i_fixed": {
+  "question": "what is the total of the amounts in a.csv and b.csv   (a.csv=10,20  b.csv=30,40)",
+  "returned": "30 (a.csv alone) with verified=true, reason=ANSWER_GROUNDED, grounded=2/2",
+  "why_every_check_passed": "every check asks whether the EXPRESSION is sound against the file it chose to read. None asked whether the expression read every subject the SENTENCE named. The single-file answer is bit-identical to a correct one, so a caller could not tell.",
+  "fix": "a fourth condition in inspect_v1._answer_stands: subject coverage. It reads named files from the question text and the provenance from the composition's own subject/detail, so the expression cannot satisfy it by agreeing with itself.",
+  "measured_after": "6 genuine answers still verified; the false pass now returns PARTIAL_ANSWER. 7/7 correct behaviour. 36/36 tests pass in that family."
+ },
+ "regressions": "ZERO. Verified by stashing my inspect_v1 change and re-running the one test that fails: test_the_audit_reports_that_file_and_not_its_siblings fails identically WITHOUT my change (pre-existing).",
+ "tests": {
+  "new_test_file": "canonical/tests/test_a_question_with_two_subjects_needs_two.py (4 tests)",
+  "existing_family": "test_an_answer_is_built_not_looked_up_v1.py 32/32",
+  "my_model_suite": "79/79 stable x3",
+  "guard": "repo_integrity_guard 17 rules 0 violations PASS"
+ },
+ "measured_latency": {
+  "answer_compound_question_ms": "4.1 - 34.2",
+  "route_goal_to_capability_us": 48.4,
+  "schema_compile_4row_csv_us": 129.0,
+  "bridge_unknown_to_known_us": 24.6,
+  "refuse_priced_abstention_us": 1803.9
+ },
+ "hard_nonclaims": [
+  "NOT CLAIMED: any HLE, ARC-AGI-2, SWE-bench, OSWorld or Terminal-Bench score. Candidate generators exist; no benchmark has been run end to end here and I ran none.",
+  "NOT CLAIMED: that value_algebra understands open-domain language. It answers questions whose structure TYPE-CHECKS against values in the tree. That is compositional and bounded, not general.",
+  "NOT CLAIMED: parity with Opus 5.5 on any published row.",
+  "NOT CLAIMED: truth.achieved. Nothing here promotes a family or registers a capability."
+ ],
+ "files": [
+  "canonical/runtime/inspect_v1.py (coverage check)",
+  "canonical/tests/test_a_question_with_two_subjects_needs_two.py (new)"
+ ]
+}

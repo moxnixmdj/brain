@@ -1,0 +1,116 @@
+{
+ "schema": "brain.governance.THREE_ENGINES_ONE_QUESTION_NONE_CONNECTED_20261109_V1",
+ "date": "2026-11-09",
+ "round": 27,
+ "status": "THE_RIGHT_ANSWER_EXISTED_AND_FOUR_LAYERS_ABOVE_IT_ROUTED_SOMEWHERE_ELSE",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_finding": {
+  "one_question": "how many unique lines in data.txt",
+  "engine_1_query_engine": {
+   "call": "computer_env_v1.answer_query",
+   "answer": "8",
+   "correct": true,
+   "ms": 22,
+   "callers_in_the_controller_or_door": 0
+  },
+  "engine_2_composer": {
+   "call": "composer_route_v1.route",
+   "chain": [
+    "python.source.definition_count.v1"
+   ],
+   "meaning": "a counter of Python function and class definitions, chosen to answer a question about lines in a text file"
+  },
+  "engine_3_admission": {
+   "call": "capability_selection_retrieval_v1.admit",
+   "verdict": "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
+   "correct": true,
+   "call_sites_in_composer_route_v1": 0
+  },
+  "the_gap": "the correct engine was never called, the correct guard was never asked, and the wrong engine ran. Four components, each individually correct, with no wire between them."
+ },
+ "what_was_fixed_and_measured": [
+  {
+   "fix": "SQL step preconditions now check the world they act on",
+   "before": "check_step_preconditions verified binaries, HTTP schemes and Python syntax. For a sqlite_exec step it checked nothing, returned PRECONDITIONS_OK, and the step raised sqlite3.OperationalError: no such table: items out of the caller.",
+   "after": "the database must exist and every table the statement names must be there. PRECONDITION_SQLITE_TABLE_MISSING:items is returned BEFORE anything is written.",
+   "theory": "ToolGate (ACL 2026, findings): each tool is a Hoare contract whose precondition gates invocation. A precondition that does not check the world it guards is not one.",
+   "tests": 4
+  },
+  {
+   "fix": "the composer chain is admitted before it executes",
+   "before": "composer_route_v1.route() never called admit(). grep count: 0. It returned the source-code counter for a text-file question and the controller executed it.",
+   "after": "the controller asks admit() for every step of the chain before executing and refuses with FAIL_CLOSED__COMPOSER_ROUTE_NOT_ADMITTED, naming DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT and reporting executed=false, side_effects_may_exist=false.",
+   "tests": 5
+  },
+  {
+   "fix": "route() was called twice; the first graph walk was discarded",
+   "before": "routed = croute.route(goal, g=_cached_composer_graph()) ; routed = croute.route(goal)",
+   "after": "one call",
+   "why_it_mattered": "a full graph walk per solve whose cost no caller ever saw. Not a correctness bug; a tax on every solve."
+  }
+ ],
+ "the_almost_mistake_worth_recording": {
+  "what_i_did": "first version of the chain gate refused on ANY admission refusal",
+  "what_it_broke": "test_phase2_semantic_web_form_to_direct_http_generalization stopped passing -- a test that had been green before this round",
+  "why_it_was_wrong": "the refusal was BINDING_REFUSED:target_path:0_type_compatible_existing_files_named -- a fact about which files existed when the registry was built, not about the call. The door binds its own output path. Gating on it cost a working route.",
+  "correction": "the gate was narrowed to the four rules that say the SENTENCE is the wrong shape for the CAPABILITY: DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT, REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER, PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT, READ_ONLY_QUESTION_CANNOT_MUTATE_SOURCE",
+  "result": "back to the exact baseline of 3 failed / 2 passed on that file, with the Phase-3 failure now naming the true cause instead of COMPOSER_STEP_RAISED",
+  "lesson": "a precondition that is not about the world it guards is noise, and noise here costs a working route. I found this because a passing test started failing, not because I reasoned about it."
+ },
+ "two_independent_gates_now_confirmed": {
+  "learn_true": {
+   "status": "FAIL_CLOSED__COMPOSER_ROUTE_NOT_ADMITTED",
+   "reason": "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
+   "executed": false
+  },
+  "learn_false": {
+   "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+   "executed": false
+  },
+  "meaning": "the door already refused read-only goals earlier in the pipeline. The chain gate closes the path that composes first and never asks."
+ },
+ "regression_status": {
+  "file": "canonical/tests/test_acquisition_to_execution_engine_v1.py",
+  "before_this_round": "3 failed / 2 passed",
+  "after_this_round": "3 failed / 2 passed",
+  "the_same_three": [
+   "phase1 confinement refusal (correct behaviour, test predates the guard)",
+   "phase2 confinement refusal (same)",
+   "phase3 routing (now names DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT instead of COMPOSER_STEP_RAISED)"
+  ],
+  "nothing_was_lost_and_nothing_was_gained": true,
+  "and_no_previously_passing_test_broke": true
+ },
+ "external_sources_that_named_the_principle": [
+  {
+   "source": "ToolGate (arXiv 2601.04688, ACL 2026 Findings)",
+   "finding": "each tool is a Hoare-style contract: a precondition gates invocation and a postcondition determines whether the result may be committed to state. Symbolic state evolves only through verified tool executions."
+  },
+  {
+   "source": "OATS (arXiv 2603.13426)",
+   "finding": "outcome-aware tool selection; static lexical retrieval beats dense embedding on tool selection (NDCG@5 0.853 vs 0.834) and runs ~1000x faster on CPU"
+  },
+  {
+   "source": "semantic tool routers, 2026 aggregate",
+   "finding": "tool-selection accuracy collapses as the catalog grows (78% at 10 tools, ~40% at 100, 13.6% at 741) and semantic routing stays above 83% -- the failure this round reproduced at catalog size 443 was a SUBJECT mismatch, not a recall failure"
+  }
+ ],
+ "what_remains_open": {
+  "the_query_still_is_not_served": "after the gate, 'how many unique lines in data.txt' is REFUSED rather than answered wrongly. That is an improvement in honesty and not an improvement in capability. The wire from the composer chain to answer_query does not exist and I did not build it this round.",
+  "why_i_did_not_build_it": "answer_query runs host programs against a file. The door refuses that until an admitted confinement exists. Running it from a chain would route around the very refusal the project is right to keep. The wire needs the confinement decision, not a code change.",
+  "coding_rate_unchanged": "1 of 9 unique bugs = 11.1%",
+  "computer_use_unchanged": "semantic oracle exists (round 25), zero terminal results on a real desktop"
+ },
+ "what_this_round_is_worth": "three engines that each answered correctly and were never introduced to one another. The damage was not a wrong answer; it was a wrong answer ARRIVING FROM THE WRONG ENGINE and being certified as the answer. Refusing is worth less than answering and worth far more than lying.",
+ "tests_added": {
+  "demonstrate_once_transfers": 9,
+  "composer_chain_is_admitted": 5
+ },
+ "suite_state": "39 passed across the four new files; guard PASS 17/0; 443 capabilities; compiled 10,211,919 bytes",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

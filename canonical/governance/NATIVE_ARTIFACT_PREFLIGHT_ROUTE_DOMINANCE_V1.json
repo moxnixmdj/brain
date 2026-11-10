@@ -15,7 +15,7 @@
     "INDEPENDENT_PUBLIC_RUNNER_PASS"
   ],
   "dominated_bounded_route": {
-    "candidate": "canonical/runtime/native_artifact_information_safe_candidate.py",
+    "candidate": "canonical/runtime/native_artifact_information_safe_proof.py",
     "proof": "canonical/runtime/native_artifact_information_safe_proof.py",
     "reason": [
       "SYNTHETIC_OOXML_FIXTURES_DO_NOT_ESTABLISH_REAL_NATIVE_FORMAT_REOPEN",

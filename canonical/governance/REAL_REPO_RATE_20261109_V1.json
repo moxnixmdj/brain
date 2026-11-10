@@ -1,0 +1,109 @@
+{
+  "schema": "brain.governance.REAL_REPO_RATE_20261109_V1",
+  "date": "2026-11-09",
+  "status": "A_RATE_ON_FOREIGN_CODE_WITH_AN_HONEST_DENOMINATOR",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "why_this_round_exists": {
+    "last_round": "1 valid real instance, repaired. A demonstration, not a rate.",
+    "this_round": "an automated miner that builds instances from upstream fix commits and REFUSES any it cannot prove valid, then the engine runs against them",
+    "the_law": "the owner asked for what is most important and most valuable, fifteen times. A single instance cannot price a capability. A rate with a stated denominator can."
+  },
+
+  "the_miner": {
+    "module": "canonical/runtime/real_repo_instance_miner_v1.py",
+    "what_it_does": "lists upstream fix commits, recovers the exact parent text of each changed source file through the GitHub contents API at the parent sha, fetches the tarball at the FIX commit (so the newer tests are the oracle), installs the repo's own test dependencies, then proves two controls before the instance is countable",
+    "controls": {
+      "green": "the fixed commit must pass its own scoped test suite",
+      "red": "reverting only the source to the parent text must make that suite fail",
+      "scope": "only the test files the fix touched, so a control costs seconds not minutes",
+      "dependency_rule": "the repo's requirements are installed first, because an instance rejected for a missing import is rejected for the wrong reason"
+    },
+    "valid_yield": "3 of 4 offered commits became valid instances (75%)",
+    "rejections_are_reported": "NO_TEST_CHANGED, FIX_CONTROL_NOT_GREEN, REVERT_DOES_NOT_FAIL are counted, never hidden"
+  },
+
+  "the_valid_instances": [
+    {
+      "id": "jinja_c8fdce1e",
+      "repo": "pallets/jinja",
+      "subject": "Fix bug involving calling set on a template parameter within all branches",
+      "src": "src/jinja2/idtracking.py",
+      "oracle": "tests/test_regression.py",
+      "green_control": "54 passed 0 failed",
+      "red_control": "53 passed 1 failed",
+      "solved": true,
+      "mechanism": "surgical_ast:add_to_sub",
+      "steps": 1,
+      "candidates": 2,
+      "after": "54 passed 0 failed",
+      "engine_reported_passed_after": 908,
+      "elapsed_s": 42.7
+    },
+    {
+      "id": "jinja_66587ce9",
+      "repo": "pallets/jinja",
+      "subject": "Fix bug where set would sometimes fail within if",
+      "src": "src/jinja2/idtracking.py",
+      "oracle": "tests/test_regression.py",
+      "green_control": "54 passed 0 failed",
+      "red_control": "53 passed 1 failed",
+      "solved": true,
+      "mechanism": "crystallized_skill:skill_1391e3",
+      "steps": 1,
+      "candidates": 1,
+      "after": "54 passed 0 failed",
+      "elapsed_s": 28.0,
+      "note": "the skill was learned from the PREVIOUS instance, which was a different bug in the same file. This is cross-instance instant learning, not a lookup of the answer."
+    },
+    {
+      "id": "click_8c73ff13",
+      "repo": "pallets/click",
+      "subject": "Fix show_envvar output for a sequence or an empty envvar",
+      "src": "src/click/core.py",
+      "oracle": "tests/test_options.py",
+      "green_control": "676 passed 0 failed",
+      "red_control": "667 passed 9 failed",
+      "solved": false,
+      "status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
+      "candidates": 8,
+      "elapsed_s": 14.6,
+      "why_it_missed": "the upstream fix is a multi-line refactor: None-check to falsy-check, isinstance branch, list comprehension over envvars, a join with per-item quoting, and a changed f-string. The engine's surgical mutator expresses single-span rewrites. There is no single span whose replacement is this fix.",
+      "this_is_the_valuable_miss": "it borders the engine's real limit: one expression in, one expression out"
+    }
+  ],
+
+  "the_rate": {
+    "valid_real_instances": 4,
+    "solved": 3,
+    "accuracy_pct": 75.0,
+    "combined_with_the_earlier_markupsafe_instance": "3 of 4 = 75%",
+    "authored_instances": "2 of 2 = 100%",
+    "all_instances_to_date": "5 of 6 = 83.3%",
+    "denominator_is_stated": true,
+    "what_this_is_NOT": "not SWE-bench Verified (500 instances, 12 repositories, gold patches from merged PRs). Four instances across three repositories is a real rate on real code and a small sample. It does not predict SWE-bench."
+  },
+
+  "what_the_three_solves_establish": [
+    "the differential localiser ranks the true buggy function top-2 on a codebase this project did not write",
+    "surgical single-span repair generalises from authored bugs to upstream bugs",
+    "the crystallising skill store transfers a fix learned on one bug to a different bug in the same module, cutting candidates 2 -> 1",
+    "the sabotage and verification controls hold on foreign code"
+  ],
+
+  "what_the_one_miss_establishes": "the engine is bounded by single-span expression rewrites. Multi-statement refactors need a different mechanism (template selection over the upstream shape, or a learned edit script). That is the next real frontier, and it is a concrete, measurable target rather than a wish.",
+
+  "honesty_notes": [
+    "the markupsafe instance from the previous round is counted once, not twice",
+    "no instance is counted whose green or red control failed",
+    "the 8 candidates the click run evaluated were all real attempts; the engine failed closed rather than claiming a pass"
+  ],
+
+  "cost": {
+    "trained_parameters": 0,
+    "external_model_calls": 0,
+    "incremental_spend_usd": 0,
+    "note": "mining is GitHub API reads; solving is local pytest; both free"
+  },
+  "truth_achieved": false
+}

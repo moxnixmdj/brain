@@ -1,0 +1,101 @@
+{
+ "schema": "brain.real_repo_instance_miner.v1",
+ "repos_scanned": [
+  "pallets/jinja",
+  "pallets/click"
+ ],
+ "commits_inspected": 5,
+ "commits_offered_to_verification": 4,
+ "valid_instances": 3,
+ "rejections": 2,
+ "rejection_reasons": {
+  "NO_TEST_CHANGED": 1,
+  "REVERT_DOES_NOT_FAIL": 1
+ },
+ "valid_yield_pct": 75.0,
+ "instances": [
+  {
+   "id": "jinja_c8fdce1e",
+   "repo": "pallets/jinja",
+   "sha": "c8fdce1e0333f1122b244b03a48535fdd7b03d91",
+   "parent": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+   "subject": "Fix bug involving calling set on a template parameter within all branches of an if block (#1665)",
+   "valid": true,
+   "fix_control": "54 passed 0 failed",
+   "revert_control": "53 passed 1 failed",
+   "src_files": [
+    "src/jinja2/idtracking.py"
+   ],
+   "test_files": [
+    "tests/test_regression.py"
+   ]
+  },
+  {
+   "id": "jinja_66587ce9",
+   "repo": "pallets/jinja",
+   "sha": "66587ce989e5a478e0bb165371fa2b9d42b7040f",
+   "parent": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+   "subject": "Fix bug where set would sometimes fail within if",
+   "valid": true,
+   "fix_control": "54 passed 0 failed",
+   "revert_control": "53 passed 1 failed",
+   "src_files": [
+    "src/jinja2/idtracking.py"
+   ],
+   "test_files": [
+    "tests/test_regression.py"
+   ]
+  },
+  {
+   "id": "click_8c73ff13",
+   "repo": "pallets/click",
+   "sha": "8c73ff134480f436faa0d041bd19aaf949aac22c",
+   "parent": "bb695aaecdef95832d167fc1d508921745aa824e",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar` (#3884)",
+   "valid": true,
+   "fix_control": "676 passed 0 failed",
+   "revert_control": "667 passed 9 failed",
+   "src_files": [
+    "src/click/core.py"
+   ],
+   "test_files": [
+    "tests/test_options.py"
+   ]
+  }
+ ],
+ "inspected": [
+  {
+   "repo": "pallets/jinja",
+   "sha": "ece7c271",
+   "subject": "fix ruff pyupgrade findings",
+   "reason": "NO_TEST_CHANGED"
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "a3dce7bb",
+   "subject": "fix type/lint/format findings",
+   "reason": null
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "c8fdce1e",
+   "subject": "Fix bug involving calling set on a template parameter within all branches of an if block (#1665)",
+   "reason": null
+  },
+  {
+   "repo": "pallets/jinja",
+   "sha": "66587ce9",
+   "subject": "Fix bug where set would sometimes fail within if",
+   "reason": null
+  },
+  {
+   "repo": "pallets/click",
+   "sha": "8c73ff13",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar` (#3884)",
+   "reason": null
+  }
+ ],
+ "trained_parameters": 0,
+ "external_model_calls": 0,
+ "incremental_spend_usd": 0
+}

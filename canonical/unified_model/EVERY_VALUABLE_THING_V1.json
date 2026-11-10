@@ -1,0 +1,393 @@
+{
+ "schema": "brain.every_valuable_thing.v1",
+ "law": "SEE_EVERY_IMPORTANT_OR_VALUABLE_THING__WHAT_IT_IS_AND_HOW_VALUABLE",
+ "generated_from": "git ls-files + evidence inside each file",
+ "complete_over": "every git-tracked file in this repository",
+ "totals": {
+  "files_tracked": 16312,
+  "bytes_tracked": 235686593,
+  "reachable_by_one_model": 8949,
+  "unreachable": 7363
+ },
+ "value_classes": {
+  "LAW__A_DEFECT_NAMED_AND_MEASURED": {
+   "what_it_is": "A named causal blocker, its measurement, its falsification condition, its stop condition. The project's decisions, each one checkable.",
+   "files": 934,
+   "top": [
+    {
+     "path": "canonical/action_intents/A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1.json",
+     "score": 132.6
+    },
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "canonical/action_intents/A_REPORT_VERB_IS_NOT_A_SOURCE_WRITE_V1_20261027_V1.json",
+     "score": 120.4
+    },
+    {
+     "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+     "score": 119.9
+    },
+    {
+     "path": "canonical/action_intents/A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING_V1_20261026_V1.json",
+     "score": 118.3
+    }
+   ]
+  },
+  "REFUSAL_MACHINERY": {
+   "what_it_is": "Code that can say no to its own output.",
+   "files": 13508,
+   "top": [
+    {
+     "path": "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+     "score": 132.7
+    },
+    {
+     "path": "canonical/action_intents/A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1.json",
+     "score": 132.6
+    },
+    {
+     "path": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+     "score": 131.2
+    },
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "HARDCORE_SWE_PROBLEMS_20261029_V1.md",
+     "score": 121.0
+    }
+   ]
+  },
+  "THEOREM__A_PROVEN_LIMIT": {
+   "what_it_is": "A demonstration that something cannot be done, which stops wasted work.",
+   "files": 1922,
+   "top": [
+    {
+     "path": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+     "score": 131.2
+    },
+    {
+     "path": "HARDCORE_SWE_PROBLEMS_20261029_V1.md",
+     "score": 121.0
+    },
+    {
+     "path": "HARDCORE_SWE_PROBLEMS_20261031_V3.md",
+     "score": 104.7
+    },
+    {
+     "path": "TERMINAL_CRITICAL_PATH_PLAN_20261013.md",
+     "score": 98.2
+    },
+    {
+     "path": "canonical/action_intents/OPTIMAL_UNIFIED_CREATURE_AND_PRC2_20261102_V1.json",
+     "score": 97.2
+    }
+   ]
+  },
+  "BENCHMARK__A_NUMBER": {
+   "what_it_is": "A measurement with a number in it.",
+   "files": 5777,
+   "top": [
+    {
+     "path": "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+     "score": 132.7
+    },
+    {
+     "path": "canonical/action_intents/A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1.json",
+     "score": 132.6
+    },
+    {
+     "path": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+     "score": 131.2
+    },
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "HARDCORE_SWE_PROBLEMS_20261029_V1.md",
+     "score": 121.0
+    }
+   ]
+  },
+  "SKILL__A_PROCEDURE_THAT_RUNS": {
+   "what_it_is": "A procedure the model can apply, stored as text, applied with zero training.",
+   "files": 1236,
+   "top": [
+    {
+     "path": "canonical/runtime/live_brain_route_admission_v1.py",
+     "score": 118.4
+    },
+    {
+     "path": "canonical/runtime/goal_front_compiler_v1.py",
+     "score": 109.9
+    },
+    {
+     "path": "canonical/tests/test_live_brain_route_admission_v1.py",
+     "score": 103.5
+    },
+    {
+     "path": "canonical/action_intents/BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1.json",
+     "score": 95.7
+    },
+    {
+     "path": "canonical/action_intents/UNPARSEABLE_NEIGHBOUR_DOES_NOT_ABORT_REPAIR_V1_20261023_V1.json",
+     "score": 94.6
+    }
+   ]
+  },
+  "BOUND_CAPABILITY__AN_EXECUTABLE": {
+   "what_it_is": "An executable adapter with declared inputs and a receipt.",
+   "files": 668,
+   "top": [
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "HARDCORE_SWE_PROBLEMS_20261029_V1.md",
+     "score": 121.0
+    },
+    {
+     "path": "canonical/action_intents/A_REPORT_VERB_IS_NOT_A_SOURCE_WRITE_V1_20261027_V1.json",
+     "score": 120.4
+    },
+    {
+     "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+     "score": 119.9
+    },
+    {
+     "path": "canonical/action_intents/A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1.json",
+     "score": 117.6
+    }
+   ]
+  },
+  "ENGINE__A_MODE_OF_REASONING": {
+   "what_it_is": "A named mode the fabric can enter.",
+   "files": 609,
+   "top": [
+    {
+     "path": "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+     "score": 132.7
+    },
+    {
+     "path": "canonical/action_intents/A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1.json",
+     "score": 132.6
+    },
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "canonical/action_intents/A_REPORT_VERB_IS_NOT_A_SOURCE_WRITE_V1_20261027_V1.json",
+     "score": 120.4
+    },
+    {
+     "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+     "score": 119.9
+    }
+   ]
+  },
+  "CORRECTION__A_CLAIM_FALSIFIED": {
+   "what_it_is": "A place the project proved itself wrong. The most valuable kind of record.",
+   "files": 764,
+   "top": [
+    {
+     "path": "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+     "score": 132.7
+    },
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "canonical/action_intents/A_REPORT_VERB_IS_NOT_A_SOURCE_WRITE_V1_20261027_V1.json",
+     "score": 120.4
+    },
+    {
+     "path": "HARDCORE_SWE_ALL_PROBLEMS_20261030_V2.md",
+     "score": 117.0
+    },
+    {
+     "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
+     "score": 116.7
+    }
+   ]
+  },
+  "INVENTORY__A_CENSUS": {
+   "what_it_is": "A count of what exists.",
+   "files": 2875,
+   "top": [
+    {
+     "path": "WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md",
+     "score": 132.7
+    },
+    {
+     "path": "canonical/action_intents/A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1.json",
+     "score": 132.6
+    },
+    {
+     "path": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+     "score": 131.2
+    },
+    {
+     "path": "canonical/action_intents/HARVEST_HIDDEN_DETERMINISTIC_KERNELS_AS_HARDCORE_SWE_V1_20261027_V1.json",
+     "score": 123.9
+    },
+    {
+     "path": "HARDCORE_SWE_PROBLEMS_20261029_V1.md",
+     "score": 121.0
+    }
+   ]
+  },
+  "WEIGHTLESS__NO_TRAINED_PARAMETER": {
+   "what_it_is": "Evidence that a result needed no trained parameter.",
+   "files": 273,
+   "top": [
+    {
+     "path": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+     "score": 131.2
+    },
+    {
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 100.7
+    },
+    {
+     "path": "canonical/action_intents/UNIFIED_BRAIN_MODEL_V1_20261020_V1.json",
+     "score": 78.3
+    },
+    {
+     "path": "canonical/runtime/h100_computer_use_registry_v1.py",
+     "score": 71.2
+    },
+    {
+     "path": "canonical/verification/H100_ZERO_LEARNED_SEMANTIC_PARAPHRASE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+     "score": 60.7
+    }
+   ]
+  }
+ },
+ "one_model": {
+  "artifact": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+  "counts": {
+   "bound_capabilities": 149,
+   "capabilities": 443,
+   "engines": 26,
+   "knowledge_documents": 309,
+   "receipt_backed_capabilities": 294,
+   "research_index_records": 6703,
+   "routing_tokens": 2360,
+   "skills": 18,
+   "source_index_entry_points": 450,
+   "source_index_modules": 1956
+  },
+  "theory": {
+   "capability_policy": "MUST_RUN_WITH_EVERY_OUTSIDE_MODEL_DELETED",
+   "effective_intelligence": "BRAIN_OWNED_CAPABILITY_MECHANISMS + EXTERNAL_JIT_KNOWLEDGE + GENERAL_COMPUTATION_SUBSTRATE",
+   "knowledge_policy": "EXTERNAL_JUST_IN_TIME__NEVER_COUNTED_AS_CAPABILITY",
+   "producer_cognition_model_dependency_count": 0
+  },
+  "non_claims": [
+   "NOT_A_TRAINED_NEURAL_NETWORK__CONTAINS_NO_WEIGHTS",
+   "NOT_AN_INDEPENDENT_VERIFICATION__SANDBOX_MEASUREMENT_ONLY",
+   "NOT_TERMINAL_AUTHORITY__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+   "NOT_A_REPLACEMENT_FOR_THE_LIVE_REGISTRY_OR_LAWS",
+   "KNOWLEDGE_IS_INDEXED_NOT_EMBEDDED__RETRIEVED_JUST_IN_TIME",
+   "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
+   "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
+   "RESEARCH_INDEX_IS_EVIDENCE_ABOUT_CAPABILITIES__NOT_A_CAPABILITY_ITSELF"
+  ]
+ },
+ "pricing_weights": [
+  {
+   "signal": "REFUSAL__CAN_SAY_NO",
+   "tier": 1,
+   "weight": 10
+  },
+  {
+   "signal": "VERIFICATION__CAN_CHECK",
+   "tier": 1,
+   "weight": 9
+  },
+  {
+   "signal": "THEOREM__CAN_PROVE_LIMIT",
+   "tier": 1,
+   "weight": 9
+  },
+  {
+   "signal": "BENCHMARK__HAS_A_NUMBER",
+   "tier": 1,
+   "weight": 8
+  },
+  {
+   "signal": "TASK_GENERATOR__MAKES_TRUTH",
+   "tier": 2,
+   "weight": 7
+  },
+  {
+   "signal": "COMPOSITION__COMBINES",
+   "tier": 2,
+   "weight": 6
+  },
+  {
+   "signal": "ROUTING__CHOOSES",
+   "tier": 2,
+   "weight": 6
+  },
+  {
+   "signal": "LEARNING__CHANGES_ITSELF",
+   "tier": 2,
+   "weight": 6
+  },
+  {
+   "signal": "SEMANTICS__MEANS_NOT_SPELLS",
+   "tier": 2,
+   "weight": 6
+  },
+  {
+   "signal": "INSTANT__NO_TRAINING",
+   "tier": 2,
+   "weight": 5
+  },
+  {
+   "signal": "EXECUTION__ACTS",
+   "tier": 3,
+   "weight": 4
+  },
+  {
+   "signal": "PERSISTENCE__REMEMBERS",
+   "tier": 3,
+   "weight": 3
+  },
+  {
+   "signal": "TEST__PINS_BEHAVIOUR",
+   "tier": 3,
+   "weight": 3
+  },
+  {
+   "signal": "GOVERNANCE__SETS_A_RULE",
+   "tier": 3,
+   "weight": 3
+  },
+  {
+   "signal": "SPEED__MEASURED_LATENCY",
+   "tier": 3,
+   "weight": 3
+  },
+  {
+   "signal": "CENSUS__COUNTS_THINGS",
+   "tier": 3,
+   "weight": 2
+  }
+ ],
+ "tiers": {
+  "1": "TIER 1 \u2014 CAN REFUTE, PROVE, OR MEASURE",
+  "2": "TIER 2 \u2014 CAN REASON, COMPOSE, ROUTE, LEARN",
+  "3": "TIER 3 \u2014 CAN ACT, REMEMBER, PIN, GOVERN",
+  "4": "TIER 4 \u2014 SUPPORT, FORMAT, GLUE"
+ }
+}

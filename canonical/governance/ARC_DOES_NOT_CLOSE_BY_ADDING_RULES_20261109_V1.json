@@ -1,0 +1,124 @@
+{
+ "schema": "brain.governance.ARC_DOES_NOT_CLOSE_BY_ADDING_RULES_20261109_V1",
+ "date": "2026-11-09",
+ "status": "MEASURED_FOUR_WAYS__THE_RULE_LIST_AND_DESCRIPTION_LIST_ARE_BOTH_EXHAUSTED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_question": "can this project's no-weights model reach Claude Opus 5.5 on a public benchmark by growing its rule list?",
+ "the_answer_measured": "no, and the arithmetic is now explicit",
+ "the_experiment": {
+  "benchmark": "ARC-AGI-1 evaluation split, public tasks from github.com/fchollet/ARC-AGI",
+  "tasks": 200,
+  "tasks_authored_here": 0,
+  "data_location": "canonical/evaluation/arc_agi1_eval_sample (1.5 MB, 200 real tasks, in-repo so the number is reproducible)"
+ },
+ "measurements": [
+  {
+   "stage": "rule list, 20 hand-written rules",
+   "solved": 2,
+   "of": 200,
+   "accuracy_pct": 1.0,
+   "note": "mirrortile and tile2 only"
+  },
+  {
+   "stage": "rule list + 5 structural primitives (fill holes, mirror-complete, rays, connect, split-panel)",
+   "solved": 3,
+   "of": 200,
+   "accuracy_pct": 1.5,
+   "note": "the new primitives added exactly one task, `connect`"
+  },
+  {
+   "stage": "MDL program search, depth 1 (25 primitives)",
+   "solved": 3,
+   "of": 200,
+   "accuracy_pct": 1.5,
+   "wall_clock": "1.6 s",
+   "note": "same three tasks; no primitive solves more than ONE task"
+  },
+  {
+   "stage": "MDL program search, depth 2 (625 ordered compositions)",
+   "solved": 3,
+   "of": 200,
+   "accuracy_pct": 1.5,
+   "wall_clock_ms": 269174,
+   "note": "COMPOSITION BUYS NOTHING AND COSTS 170x. Depth 2 == depth 1."
+  }
+ ],
+ "the_decisive_measurement": {
+  "per_primitive_coverage": {
+   "mirrortile": 1,
+   "connect": 1,
+   "tile2": 1
+  },
+  "every_other_primitive": 0,
+  "distinct_tasks_reachable_at_depth_1": 3,
+  "implication": "adding a hand-written rule buys roughly one task and never more. 197 tasks are outside the closure of everything this project can currently express."
+ },
+ "why_the_task_population_says_nothing_else_helps": {
+  "same_shape_tasks": 134,
+  "of_which_pure_recolour": 27,
+  "of_which_need_STRUCTURAL_change": 107,
+  "output_larger": 18,
+  "output_smaller_or_other": 48,
+  "reading": "the majority need a structural transformation the DSL cannot express -- symmetry completion, periodicity, ray casting from arbitrary objects, occlusion inference. A bigger flat list does not reach them, which is why depth-2 composition added zero."
+ },
+ "what_the_web_says_this_means": {
+  "pure_symbolic_dsl_published": "1.67/240 on ARC-AGI-2 hidden (Bose 2026) -- the same ceiling this measurement hit",
+  "vsa_neurosymbolic_published": "3.0% ARC-AGI-1 eval (Joffe & Eliasmith 2026, Nature) -- about 2x this solver",
+  "no_pretraining_neural_published": "20% ARC-AGI-1 eval (CompressARC, arXiv 2512.06104) -- 13x this solver, and it learns on the single puzzle",
+  "code_as_hypothesis_published": "Tycho (NIMI 2026) writes Python as falsifiable hypotheses and verifies against observations -- architecturally identical to this project's action_intents",
+  "opus_5_5_reference": "98.5% ARC-AGI-1 / 93.3% ARC-AGI-2 per this repo's own OPUS55_ABSTRACT_GENERALIZATION record",
+  "conclusion": "1.5% is not a failure of effort. It is the measured ceiling of a rule list, and it agrees with the published ceiling of the same strategy."
+ },
+ "what_would_actually_move_it": [
+  "REPRESENTATION, not rules: the published jump from ~1.7% to 20% comes from an objective (MDL) applied to a LEARNED representation, not from a bigger primitive set",
+  "PER-TASK SEARCH over a PROGRAM SPACE that composes objects, symmetry and periodicity, with description length as the cost -- CompressARC's formulation",
+  "REUSE ACROSS TASKS: this project's own law records are the natural library; the crystallizer already stores verified procedures. The published analogue is corpus-guided library learning (Stitch/LILO), 1000-10000x faster than DreamCoder"
+ ],
+ "what_is_NOT_claimed": [
+  "NOT_A_PARITY_CLAIM__1.5_PERCENT_VS_98.5_PERCENT",
+  "NOT_A_COMPETITIVE_ARC_SOLVER",
+  "NOT_AN_ESTIMATE_OVER_ALL_400_PUBLIC_EVAL_TASKS",
+  "THE_DEPTH_2_RUN_IS_INCLUDED_BECAUSE_ITS_NULL_RESULT_IS_THE_POINT"
+ ],
+ "cost": {
+  "incremental_spend_usd": 0,
+  "trained_parameters": 0,
+  "gradient_steps": 0,
+  "external_model_calls": 0
+ },
+ "truth_achieved": false,
+ "stage_two__structure_induction": {
+  "module": "canonical/runtime/arc_structure_induction_v1.py",
+  "method": "MDL over discovered structure: lattice period, symmetry completion, scale, tile, recolour, constant, sub-grid window, object read-out",
+  "result": {
+   "solved": 1,
+   "of": 200,
+   "accuracy_pct": 0.5
+  },
+  "honest_reading": "WORSE than the simpler 25-primitive search (3/200). A richer hypothesis set did not help, because the hypotheses are aimed at the wrong problem shape.",
+  "per_hypothesis_coverage_all_demos": {
+   "lattice": 1,
+   "scaled": 1,
+   "recolour": 0,
+   "constant": 0,
+   "symmetry": 0,
+   "tiled": 0,
+   "extract_object": 0,
+   "subgrid_window": 0
+  },
+  "why_they_all_missed": {
+   "symmetry": "not one of the first 80 same-size tasks has a symmetric OUTPUT that its input is half of; the hypothesis is simply not what this benchmark asks",
+   "subgrid_window": "the 10 tasks whose output is a sub-grid are 1x1 OUTPUTS -- find-the-odd-cell -- not window extractions",
+   "recolour": "zero tasks are a pure per-cell colour substitution",
+   "the_134_same_size_tasks": "they need structural inference (symmetry of objects, periodicity of patterns, ray casting, occlusion) that none of these descriptions express"
+  },
+  "probe_correction": "an earlier probe reported `symmetry` holding on 34 tasks. It was wrong: the probe caught an UnboundLocalError and counted the failure as a hit. The true count is ZERO. A probe that catches an exception and counts it as a pass is the exact failure mode this project has laws against."
+ },
+ "the_arithmetic_now_measured_four_ways": [
+  "20 hand-written rules -> 2/200",
+  "25 rules incl. 5 structural -> 3/200  (+1 per 5 rules)",
+  "depth-2 composition of all 625 ordered pairs -> 3/200 (+0, at 170x cost)",
+  "8 structure hypotheses with MDL ordering -> 1/200 (-2)"
+ ],
+ "conclusion": "adding hypotheses does not move this number. Four independent attempts, four flat or negative results. The published jump to 20 percent is not a bigger hypothesis set; it is a LEARNED REPRESENTATION with a compression objective, which this project does not yet have."
+}

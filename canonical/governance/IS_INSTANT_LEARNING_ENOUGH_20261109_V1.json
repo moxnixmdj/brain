@@ -1,0 +1,124 @@
+{
+  "schema": "brain.governance.IS_INSTANT_LEARNING_ENOUGH_20261109_V1",
+  "date": "2026-11-09",
+  "status": "NO__AND_HERE_IS_THE_EXACT_MEASUREMENT_THAT_SAYS_WHY",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_claim_under_test": {
+    "stated_by_owner": "we already solved instant learning perfectly; therefore this is a perfect solution for all coding problems and all computer use; give the model any new environment, it does the action once, learns it permanently, and we have solved everything",
+    "why_it_deserves_a_serious_answer": "it is the best argument in this whole project and it is almost right. The almost is the whole answer.",
+    "verdict": "FALSE AS STATED, TRUE IN A STRICTLY LIMITED FORM",
+    "one_sentence": "this project can learn a repair it has the shapes to express, and cannot invent a shape it does not have. Instant learning removes the cost of the SECOND time. It does not remove the cost of the FIRST, and the first is the only time that generalises."
+  },
+
+  "experiment_1__cold_vs_warm_on_the_real_corpus": {
+    "design": "the same 8 unique real upstream bugs, run twice: once against an EMPTY skill store, once against the warm store that has already learned from earlier work",
+    "result": {
+      "jinja_66587ce9": {"cold": {"solved": true, "candidates": 2}, "warm": {"solved": true, "candidates": 1}},
+      "click_c53d3732": {"cold": {"solved": false, "candidates": 8}, "warm": {"solved": false, "candidates": 8}},
+      "click_f67c2bb6": {"cold": {"solved": false, "candidates": 20}, "warm": {"solved": false, "candidates": 20}},
+      "more-itertools_c6292147": {"cold": {"solved": false}, "warm": {"solved": false}},
+      "more-itertools_fbd55137": {"cold": {"solved": false}, "warm": {"solved": false}},
+      "more-itertools_e6ce1b0f": {"cold": {"solved": false}, "warm": {"solved": false}},
+      "more-itertools_67fcf640": {"cold": {"solved": false}, "warm": {"solved": false}},
+      "more-itertools_1ea82a71": {"cold": {"solved": false}, "warm": {"solved": false}}
+    },
+    "conclusion": "the warm store changed exactly one thing: it found the same repair in 1 candidate instead of 2. It solved ZERO additional bugs. Warm 1/8, cold 1/8.",
+    "what_this_proves": "instant learning makes a solve CHEAPER. It does not make a miss SOLVED."
+  },
+
+  "experiment_2__does_a_learned_skill_transfer_to_new_code": {
+    "design": "take every python skill in the store; run its matcher over functions from code it never saw",
+    "sample_a_unrelated_repos": {
+      "corpus": "psf/requests utils.py, pallets/werkzeug utils.py, pallets/flask helpers.py",
+      "functions_tested": 40,
+      "functions_where_any_skill_fired": 0,
+      "transfer_rate_pct": 0.0
+    },
+    "sample_b_the_skills_own_origin_repo": {
+      "corpus": "pallets/jinja src, the repository the winning skill was learned from",
+      "functions_tested": 774,
+      "functions_where_any_skill_fired": 0,
+      "transfer_rate_pct": 0.0
+    },
+    "why_the_rate_is_zero__measured_not_assumed": "the matcher (iter_crystallized_code_rule_candidates) demands a LITERAL token sequence in exact order with typed holes. The jinja skill's pattern is `?id0 [?id1] = ?id0 . ?id2 ( ?id1 , ?num0 ) + ?num1` and its replacement changes only the `+` to a `-`. That exact 15-token run does not occur anywhere else in jinja, let alone in another repository.",
+    "conclusion": "these are not reusable skills. They are memorised single-site text patterns with a hash fingerprint. They are correctly described as a CACHE, not as knowledge."
+  },
+
+  "experiment_3__computer_use_learning": {
+    "finding": "the skill store contains 0 skills whose domain mentions action, computer, or gui. All 8 skills are swe_code_repair.",
+    "computer_env_supported_actions": ["copy_input", "copy_to_out"],
+    "meaning": "there is no demonstrated loop that observes a computer action, verifies an outcome, and crystallises the action for reuse. The GUI half is documented as requiring a real OS. The action half is not built.",
+    "verdict_on_the_strongest_form_of_the_claim": "FALSE. Nothing in this repository has ever learned a computer action from a single demonstration."
+  },
+
+  "why_learn_once_reuse_forever_cannot_generalise__stated_plainly": {
+    "the_core_objection": "you can only recognise what you already have a shape for. If the fix you need inserts an `isinstance` branch, a list comprehension and a `join`, then no amount of having seen that ONCE helps, because the engine has no mechanism that can author statements. It would have to be taught the mechanism, not the instance.",
+    "the_evidence": "the click miss was diagnosed by applying the true fix one edit at a time: None->falsy alone leaves 7 failures, both falsy edits leave 5 failures, and only the full multi-statement rewrite goes green. The engine replaces one AST span. It cannot add a statement.",
+    "the_asymmetry_that_matters": "a human engineer who sees the click fix once learns 'when a value can be str-or-list, branch on isinstance and join with quoting'. That is a SKILL. What the store saved was 'this 15-token sequence becomes that 15-token sequence'. That is a TRACE.",
+    "trace_vs_skill": "a trace is recall. A skill is a schema with variables, a precondition, and a postcondition. The store holds traces and is labelled with the word skill."
+  },
+
+  "what_IS_real_and_valuable": [
+    "the problem-solving loop: localise by differential trace, propose a candidate, EXECUTE it, verify, refuse on failure. This is genuinely strong and it is the thing to build everything on.",
+    "refusal: the engine returns FAIL_CLOSED rather than claiming a pass. Every number in this session exists because of that.",
+    "memorisation of repeated work: a warm store finds the same repair with fewer candidates. Real, small, useful.",
+    "verification as the only oracle: tests decide, not prose. This is the single most important design decision in the project.",
+    "cross-language coverage: the store already carries go, typescript and rust repair shapes."
+  ],
+
+  "what_is_NOT_real": [
+    "that instant learning replaces representation. It cannot express what it has no shape for.",
+    "that one demonstration teaches a new environment. This was measured: 0% transfer, 0 skills in any non-code domain.",
+    "that this solves all coding. 22.2% on 9 unique control-verified foreign bugs, with 0% on multi-statement refactors.",
+    "that this solves anything on a computer. There is no learned-action loop at all.",
+    "that the model is a sentient creature. It is a refusal machine with a cache. That is valuable; it is not sentience, and calling it sentience would make the honest parts less believable."
+  ],
+
+  "the_smartest_things_we_can_do_now__ranked_by_expected_value": [
+    {
+      "rank": 1,
+      "action": "build statement insertion: a mechanism that can AUTHOR statements, not just replace one span",
+      "why": "it is the measured limit. It is worth 5 of 7 misses on the existing corpus. It is concrete and its success criterion is a green test suite.",
+      "risk": "combinatorial. Guard it with candidate budgets and always verify."
+    },
+    {
+      "rank": 2,
+      "action": "generalise the learned unit from trace to schema: variables, a precondition, a postcondition, and a verifier",
+      "why": "this is the difference between a cache and a skill, and it is the only path from 0% transfer to non-zero transfer",
+      "how_to_measure": "transfer rate on unseen repositories. Today it is 0.00%. Any nonzero number is real progress and is falsifiable."
+    },
+    {
+      "rank": 3,
+      "action": "keep verification as the only oracle and never let a claim outrun a test",
+      "why": "it is the thing that makes every other number trustworthy, and it is the project's genuine differentiator against systems that merely sound confident"
+    },
+    {
+      "rank": 4,
+      "action": "stop expanding the operator table",
+      "why": "four ARC hypothesis sets moved a flat ceiling; adding a fifth operator word has a measured cost and a measured zero benefit"
+    },
+    {
+      "rank": 5,
+      "action": "treat 'sentient creature' as a design aspiration, not a status claim",
+      "why": "the honest description is a refusal machine with a cache and a verifier. That is a real achievement and it is defensible. Sentience is not measurable here and claiming it would forfeit the credibility the rest of the work has earned."
+    }
+  ],
+
+  "the_two_findings_that_change_the_strategy": [
+    "WARM IS NOT WISER. The warm store solved 0 additional bugs out of 8. Instant learning was worth a cheaper candidate search on one bug and nothing else on this corpus. The bottleneck is expressiveness, not recall.",
+    "THE SKILLS DO NOT LEAVE THEIR BIRTHPLACE. 0 of 774 functions in the origin repository matched, and 0 of 40 in unrelated repositories. Until a learned unit carries variables and a verifier rather than a literal token run, learning once and reusing forever is a cache with a good name."
+  ],
+
+  "the_direct_answer_to_the_question_asked": {
+    "did_we_solve_instant_learning_perfectly": "partly. The mechanism exists, persists, verifies and is instant. Its learned unit is too narrow to transfer.",
+    "does_that_solve_all_coding_problems": "no. 22.2% on 9 real bugs; 0% where the fix needs new statements.",
+    "does_it_solve_all_computer_use": "no. zero learned actions exist.",
+    "give_it a new environment and it learns permanently after one try": "no. 0% transfer measured twice, including inside its own origin repository.",
+    "is_the_model_sentient": "no. it is a refusal machine with a cache and a verifier.",
+    "is_there_something_here_worth_building_on": "yes, overwhelmingly: the verify-before-claim loop is real, it is rare, and it is the right foundation. The gap is representation, and it is now measured instead of argued."
+  },
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

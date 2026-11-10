@@ -1,0 +1,391 @@
+{
+ "schema": "brain.real_repo_eval.v1",
+ "corpus": "canonical/evaluation/real_instances_v2.json",
+ "instance_rows_run": 14,
+ "unique_bugs": 9,
+ "solved": 1,
+ "accuracy_pct": 11.1,
+ "skipped": 5,
+ "by_repo": {
+  "pallets/jinja": "1/1",
+  "pallets/click": "0/3",
+  "more-itertools/more-itertools": "0/5"
+ },
+ "mechanisms_used": {
+  "crystallized_skill:skill_1391e3": 1
+ },
+ "median_elapsed_ms": 20377,
+ "trained_parameters": 0,
+ "external_model_calls": 0,
+ "incremental_spend_usd": 0,
+ "results": [
+  {
+   "id": "jinja_c8fdce1e",
+   "repo": "pallets/jinja",
+   "sha": "c8fdce1e0333f1122b244b03a48535fdd7b03d91",
+   "parent": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+   "subject": "Fix bug involving calling set on a template parameter within all branches of an if block (#1665)",
+   "valid": true,
+   "fix_control": "54 passed 0 failed",
+   "revert_control": "53 passed 1 failed",
+   "src_files": [
+    "src/jinja2/idtracking.py"
+   ],
+   "test_files": [
+    "tests/test_regression.py"
+   ],
+   "skipped": false,
+   "red_before": "53 passed 1 failed",
+   "after": "54 passed 0 failed",
+   "engine_status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED",
+   "verified": true,
+   "steps": 1,
+   "candidates": 1,
+   "mechanisms": [
+    "crystallized_skill:skill_1391e3"
+   ],
+   "solved": true,
+   "elapsed_ms": 30087
+  },
+  {
+   "id": "jinja_66587ce9",
+   "repo": "pallets/jinja",
+   "sha": "66587ce989e5a478e0bb165371fa2b9d42b7040f",
+   "parent": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+   "subject": "Fix bug where set would sometimes fail within if",
+   "valid": true,
+   "fix_control": "54 passed 0 failed",
+   "revert_control": "53 passed 1 failed",
+   "src_files": [
+    "src/jinja2/idtracking.py"
+   ],
+   "test_files": [
+    "tests/test_regression.py"
+   ],
+   "skipped": false,
+   "red_before": "53 passed 1 failed",
+   "after": "54 passed 0 failed",
+   "engine_status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED",
+   "verified": true,
+   "steps": 1,
+   "candidates": 1,
+   "mechanisms": [
+    "crystallized_skill:skill_1391e3"
+   ],
+   "solved": true,
+   "elapsed_ms": 30226
+  },
+  {
+   "id": "click_8c73ff13",
+   "repo": "pallets/click",
+   "sha": "8c73ff134480f436faa0d041bd19aaf949aac22c",
+   "parent": "bb695aaecdef95832d167fc1d508921745aa824e",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar` (#3884)",
+   "valid": true,
+   "fix_control": "676 passed 0 failed",
+   "revert_control": "667 passed 9 failed",
+   "src_files": [
+    "src/click/core.py"
+   ],
+   "test_files": [
+    "tests/test_options.py"
+   ],
+   "skipped": false,
+   "red_before": "667 passed 9 failed",
+   "after": "667 passed 9 failed",
+   "engine_status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
+   "verified": false,
+   "steps": null,
+   "candidates": 10,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 16820
+  },
+  {
+   "id": "click_c53d3732",
+   "repo": "pallets/click",
+   "sha": "c53d3732b98c764932e146c007146ad402acb229",
+   "parent": "bb695aaecdef95832d167fc1d508921745aa824e",
+   "subject": "Fix `show_envvar` output for a sequence or an empty `envvar`",
+   "valid": true,
+   "fix_control": "676 passed 0 failed",
+   "revert_control": "667 passed 9 failed",
+   "src_files": [
+    "src/click/core.py"
+   ],
+   "test_files": [
+    "tests/test_options.py"
+   ],
+   "skipped": false,
+   "red_before": "667 passed 9 failed",
+   "after": "667 passed 9 failed",
+   "engine_status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
+   "verified": false,
+   "steps": null,
+   "candidates": 10,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 16530
+  },
+  {
+   "id": "click_70689853",
+   "repo": "pallets/click",
+   "sha": "70689853e39c30e36eb0d83d586cc914a74db9d3",
+   "parent": "d036881798e34289a49b18a5c550c7cf687e5a7a",
+   "subject": "Fix short help abbreviation (#3865)",
+   "valid": true,
+   "fix_control": "36 passed 0 failed",
+   "revert_control": "30 passed 6 failed",
+   "src_files": [
+    "src/click/utils.py"
+   ],
+   "test_files": [
+    "tests/test_utils/test_make_default_short_help.py"
+   ],
+   "skipped": false,
+   "red_before": "30 passed 6 failed",
+   "after": "30 passed 6 failed",
+   "engine_status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
+   "verified": false,
+   "steps": null,
+   "candidates": 24,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 25194
+  },
+  {
+   "id": "click_f67c2bb6",
+   "repo": "pallets/click",
+   "sha": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+   "parent": "6d5bac5c712195cbfa9666ba0ecbf0573cdea356",
+   "subject": "Fix short help abbreviation",
+   "valid": true,
+   "fix_control": "36 passed 0 failed",
+   "revert_control": "30 passed 6 failed",
+   "src_files": [
+    "src/click/utils.py"
+   ],
+   "test_files": [
+    "tests/test_utils/test_make_default_short_help.py"
+   ],
+   "skipped": false,
+   "red_before": "30 passed 6 failed",
+   "after": "30 passed 6 failed",
+   "engine_status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
+   "verified": false,
+   "steps": null,
+   "candidates": 24,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 24849
+  },
+  {
+   "id": "more-itertools_f42daddf",
+   "repo": "more-itertools/more-itertools",
+   "sha": "f42daddf205f335fea6e200dad46049f33e71221",
+   "parent": "08dca284ba5446a026afdc34067b658f9da989eb",
+   "subject": "Merge pull request #1345 from chengzhudejing/fix/numeric-range-large-equality-hash",
+   "valid": true,
+   "fix_control": "626 passed 0 failed",
+   "revert_control": "624 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "624 passed 2 failed",
+   "after": "624 passed 2 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20336
+  },
+  {
+   "id": "more-itertools_c6292147",
+   "repo": "more-itertools/more-itertools",
+   "sha": "c629214760c78c0a2235e896d335cccfb3a64466",
+   "parent": "08dca284ba5446a026afdc34067b658f9da989eb",
+   "subject": "Fix numeric_range equality and hashing above sys.maxsize",
+   "valid": true,
+   "fix_control": "626 passed 0 failed",
+   "revert_control": "624 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "624 passed 2 failed",
+   "after": "624 passed 2 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20369
+  },
+  {
+   "id": "more-itertools_69dbc339",
+   "repo": "more-itertools/more-itertools",
+   "sha": "69dbc3392928afe1cc892a387bf0e721522f21c2",
+   "parent": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+   "subject": "Merge pull request #1322 from feiiiiii5/fix/peekable-slice-negative-step",
+   "valid": true,
+   "fix_control": "622 passed 0 failed",
+   "revert_control": "620 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "620 passed 2 failed",
+   "after": "620 passed 2 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20358
+  },
+  {
+   "id": "more-itertools_fbd55137",
+   "repo": "more-itertools/more-itertools",
+   "sha": "fbd55137fe47b44f55190c3714c75f1b21bf834d",
+   "parent": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+   "subject": "fix: validate the chunk size in chunked_even",
+   "valid": true,
+   "fix_control": "622 passed 0 failed",
+   "revert_control": "620 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "620 passed 2 failed",
+   "after": "620 passed 2 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20353
+  },
+  {
+   "id": "more-itertools_e6ce1b0f",
+   "repo": "more-itertools/more-itertools",
+   "sha": "e6ce1b0f65a57c459fc5004ad84158447b65b0ac",
+   "parent": "b21ec4ee8e139ebe297e2221980a694bebb69523",
+   "subject": "Fix peekable slice with negative step and omitted stop unnecessarily caching entire iterable",
+   "valid": true,
+   "fix_control": "621 passed 0 failed",
+   "revert_control": "620 passed 1 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "620 passed 1 failed",
+   "after": "620 passed 1 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20370
+  },
+  {
+   "id": "more-itertools_81c21a8d",
+   "repo": "more-itertools/more-itertools",
+   "sha": "81c21a8db1c922260cd673841257fb9b112c1318",
+   "parent": "1ea82a711c69f590054987b5cb194157f8ce8ac4",
+   "subject": "Merge branch 'DawnofGenX-fix-bucket-falsey-validator-1308'",
+   "valid": true,
+   "fix_control": "620 passed 0 failed",
+   "revert_control": "619 passed 1 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "619 passed 1 failed",
+   "after": "619 passed 1 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20403
+  },
+  {
+   "id": "more-itertools_67fcf640",
+   "repo": "more-itertools/more-itertools",
+   "sha": "67fcf640477c78605580f5ee703a54c73c1e7a8a",
+   "parent": "1ea82a711c69f590054987b5cb194157f8ce8ac4",
+   "subject": "fix: honour a falsey validator in bucket (#1308)",
+   "valid": true,
+   "fix_control": "620 passed 0 failed",
+   "revert_control": "619 passed 1 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "619 passed 1 failed",
+   "after": "619 passed 1 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20423
+  },
+  {
+   "id": "more-itertools_1ea82a71",
+   "repo": "more-itertools/more-itertools",
+   "sha": "1ea82a711c69f590054987b5cb194157f8ce8ac4",
+   "parent": "790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5",
+   "subject": "Merge pull request #1305 from 00200200/fix/ichunked-zero-n",
+   "valid": true,
+   "fix_control": "619 passed 0 failed",
+   "revert_control": "617 passed 2 failed",
+   "src_files": [
+    "more_itertools/more.py"
+   ],
+   "test_files": [
+    "tests/test_more.py"
+   ],
+   "skipped": false,
+   "red_before": "617 passed 2 failed",
+   "after": "617 passed 2 failed",
+   "engine_status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT",
+   "verified": false,
+   "steps": null,
+   "candidates": null,
+   "mechanisms": [],
+   "solved": false,
+   "elapsed_ms": 20377
+  }
+ ]
+}

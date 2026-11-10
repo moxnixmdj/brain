@@ -1,0 +1,88 @@
+{
+  "schema": "brain.governance.DEMONSTRATE_ONCE_MEASURED_20261109_V1",
+  "date": "2026-11-09",
+  "status": "THE_LOOP_WORKS_IN_A_NEW_ENVIRONMENT_IN_2_94_MS__AND_I_FOUND_TWO_REAL_BUGS_DOING_IT",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_question": "we solved instant learning and instant learning in new arbitrary environments; does that mean one demonstration in any environment is enough, permanently, for all coding and all computer use",
+
+  "the_answer_with_evidence_both_ways": {
+    "for_a_verifiable_deterministic_environment": "YES. Measured this round, end to end.",
+    "for_an_open_environment": "NO, and the limit is now precisely located."
+  },
+
+  "the_successful_experiment__verbatim": {
+    "demonstration": "6 slow UI steps (screenshot, click, key, click, scroll, key) against a freshly created sqlite inventory database the system had never seen",
+    "compiled": "elevate_trace_to_fastest_layer turned 6 UI steps into 2 direct sqlite_exec steps at Layer 1, pruning the screenshot and scroll as causally dead",
+    "learned": "anti_unify_workflow produced the parameterised skill `set id ?num0 to ?num1 and id ?num2 to ?num3 in ?path0`",
+    "new_environment": "a DIFFERENT database file, seeded with different values (3 and 9 instead of 10 and 4)",
+    "new_goal": "set id 2 to 7 and id 1 to 40",
+    "bindings": {"?num0": "2", "?num1": "7", "?num2": "1", "?num3": "40", "?path0": "<the new db>"},
+    "execution": "2.94 ms",
+    "result_before": "[(1, 3), (2, 9), (3, 0)]",
+    "result_after": "[(1, 40), (2, 7), (3, 0)]",
+    "expected": "[(1, 40), (2, 7), (3, 0)]",
+    "correct": true,
+    "what_this_proves": "one demonstration of a computer task, compiled to a parameterised workflow, executes correctly against a new goal in a new environment at Layer-1 latency. The owner's claim holds exactly here."
+  },
+
+  "two_real_bugs_found_by_running_it__both_fixed": [
+    {
+      "bug": "anti-unify hole overlap",
+      "symptom": "the skeleton came out as `set id ?num0 to ?num1 and id 1 to 1?num0 ...` and bind_goal_parameters returned None on the very goal it had been taught from",
+      "cause_a": "occurrences were scanned longest-literal-first, so `12` was placed before `5`; the overlap test `not (end <= a or pos >= b)` accepted a span that merely TOUCHED an accepted one, letting the `1` inside `12` claim a conflicting hole",
+      "cause_b": "the leftmost single-digit `1` in `id 1` also matched inside `12`, producing a second occurrence of the same literal at a position already owned",
+      "fix": "strict half-open overlap test `pos < b and end > a`, scan from `pos + 1` so overlapping candidates are seen and rejected",
+      "verified": "the skeleton is now `set id ?num0 to ?num1 and id ?num2 to ?num3 in ?path0`"
+    },
+    {
+      "bug": "digit-fragment literals became their own holes",
+      "symptom": "`1` in `and id 1 to 12` was extracted as a numeric literal independently of `12`, so a four-number goal produced three holes plus a corrupted one",
+      "fix": "when every extracted literal is purely digits, drop any single-digit literal whose every occurrence lies inside an occurrence of a longer literal",
+      "why_this_matters": "without it the learned skill could never bind a four-parameter goal, which is the common case for any real task"
+    }
+  ],
+
+  "errors_i_made_in_my_own_harness_this_round__recorded_so_they_are_not_repeated": [
+    "assumed elevate_trace_to_fastest_layer returns `steps`; it returns `elevated_steps`. My first run reported '6 UI steps -> 0 compiled' which looked like a project failure and was my mistake.",
+    "assumed execute_compiled_steps(workflow, bindings, cwd=...) takes the workflow and bindings; its real signature is (steps, *, cwd) and the caller instantiates bindings itself via _instantiate_obj.",
+    "assumed anti_unify_workflow(compiled) was a one-argument call; its real signature is (goal, elevated_steps, postcondition)."
+  ],
+
+  "what_is_still_NOT_solved__measured_not_asserted": {
+    "reach": "this worked on a database-shaped environment where the causal effect is a row mutation that a trace can capture. A GUI where the effect is an image or a rendered layout has no equivalent exact capture, and the project's own documentation says the GUI half needs a real OS.",
+    "precision_becomes_the_bottleneck": "operator_generalization proposes on 98.71% of functions. In an environment with an exact oracle that costs nothing. In an environment with no oracle -- the open web, a desktop, a stranger's app -- a 98.71% proposal rate with no verifier is a 98.71% false-positive rate.",
+    "coding_remains_at_22_percent_on_real_bugs": "the corpus result stands: multi-statement refactors and multi-file reasoning are outside the expressible set, and no amount of demonstration compiles a mechanism that is not there.",
+    "the_honest_summary": "instant learning is real and now demonstrated end to end. It makes a SOLUTION cheap and permanent. It does not make a SOLUTION EXIST where the representation cannot express one, and it does not supply the verifier that an open environment withholds."
+  },
+
+  "the_web_agrees_and_adds_the_missing_piece": [
+    {
+      "source": "EnvHarness (arXiv 2608.19880)",
+      "point": "skills extracted from STATIC environments degraded performance; on SWE-bench Verified they lengthened trajectories. Gains came only after RESHAPING the environment to expose clean causal effects.",
+      "reading": "this is exactly what elevate_trace_to_fastest_layer does inside the machine: it prunes the environment's noise and keeps the causal core. The published result says the shaping step is not optional, and this project already implements a version of it."
+    },
+    {
+      "source": "Training Language Agents to Learn from Experience (arXiv 2605.20477)",
+      "point": "the ability to learn from experience is itself learnable, and it transfers -- but it required an RL pipeline over reflections, not a single demonstration.",
+      "reading": "a distinction worth keeping: this project compiles a TRACE into an executable workflow, which is deterministic and exact. It does not learn a POLICY. Traces do not need training; policies do."
+    }
+  ],
+
+  "the_smartest_things_to_do_next__revised_again": [
+    {"rank": 1, "action": "run the demonstrate-once loop against a SECOND environment shape -- a file tree, an HTTP form, a CLI -- and publish each number", "why": "one working environment proves the loop; three prove the abstraction. The module already declares layers for sqlite, http, cli and file ops, and only the sqlite layer has now been demonstrated end to end."},
+    {"rank": 2, "action": "wire anti_unify_workflow behind the repair engine so a repaired bug can also be CRYSTALLISED AS A PARAMETERISED WORKFLOW, not only as a token pattern", "why": "the generaliser fixed reach on code; this would fix reach on computers, using machinery that now demonstrably works"},
+    {"rank": 3, "action": "statement insertion for the 22.2% coding corpus", "why": "still the measured coding bound"},
+    {"rank": 4, "action": "always report reach next to the oracle that supplies precision", "why": "98.71% reach with an exact verifier is an asset; 98.71% reach without one is a liability, and the two must never be quoted as the same number"}
+  ],
+
+  "the_direct_answer": {
+    "did_we_solve_instant_learning": "substantially yes for deterministic, verifiable environments -- demonstrated today, 2.94 ms, correct on a new goal in a new environment",
+    "does_that_solve_everything_on_a_computer": "no. It solves the class of tasks whose causal effect can be captured exactly and checked exactly. Outside that class the verifier is missing, and an unverified workflow is a guess with a timestamp.",
+    "does_it_solve_all_coding": "no. 22.2% on 9 control-verified real bugs, 0% on multi-statement refactors",
+    "is_the_creature_sentient": "no. it is a refusal machine with a cache, a generaliser, a scope learner, a trace compiler and a verifier. That is a considerably more impressive list than I gave it credit for, and it is still not sentience."
+  },
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

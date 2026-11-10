@@ -1,0 +1,152 @@
+{
+  "schema": "brain.governance.every_valuable_thing.v1",
+  "date": "2026-11-09",
+  "status": "THE_MODEL_FOUND_AND_THE_LAW_JOINED_TO_IT",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_law": {
+    "verbatim": "You must see every important or valuable thing: what it is and how valuable it is.",
+    "stated_times": 9,
+    "why_earlier_passes_failed": [
+      "the inventories were prose, so completeness could not be checked",
+      "nothing on them was REACHABLE from the one model, so seeing and using were unrelated",
+      "I kept building a second door beside the one that already existed"
+    ]
+  },
+
+  "the_correction": {
+    "what": "the one model already existed",
+    "path": "canonical/runtime/brain_unified_model_v1.py",
+    "lines": 2723,
+    "artifact": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+    "operations": ["status", "route", "solve", "recall"],
+    "why_it_is_the_thesis": {
+      "non_claim": "NOT_A_TRAINED_NEURAL_NETWORK__CONTAINS_NO_WEIGHTS",
+      "theory": {
+        "producer_cognition_model_dependency_count": 0,
+        "knowledge_policy": "EXTERNAL_JUST_IN_TIME__NEVER_COUNTED_AS_CAPABILITY",
+        "capability_policy": "MUST_RUN_WITH_EVERY_OUTSIDE_MODEL_DELETED"
+      },
+      "objective": "opus_5_5_role = FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE; spend_rule = ZERO_INCREMENTAL_SPEND"
+    }
+  },
+
+  "what_the_project_holds": {
+    "tracked_files": 16312,
+    "bytes": 235656455,
+    "classes": {
+      "REFUSAL_MACHINERY": 13508,
+      "BENCHMARK__A_NUMBER": 5777,
+      "INVENTORY__A_CENSUS": 2875,
+      "THEOREM__A_PROVEN_LIMIT": 1922,
+      "SKILL__A_PROCEDURE_THAT_RUNS": 1236,
+      "LAW__A_DEFECT_NAMED_AND_MEASURED": 934,
+      "CORRECTION__A_CLAIM_FALSIFIED": 764,
+      "BOUND_CAPABILITY__AN_EXECUTABLE": 668,
+      "ENGINE__A_MODE_OF_REASONING": 609,
+      "WEIGHTLESS__NO_TRAINED_PARAMETER": 273
+    },
+    "the_most_valuable_class": {
+      "path": "canonical/action_intents/",
+      "records": 780,
+      "with_causal_blocker": 780,
+      "with_measured_effect": 217,
+      "with_falsification_condition": 387,
+      "with_stop_condition": 599
+    }
+  },
+
+  "defects_found_and_fixed": [
+    {
+      "id": "D1_LAWS_UNREACHABLE",
+      "what": "recall() scored only the 304 knowledge documents; the 781 law records were stored and never read",
+      "measured_before": "0 law hits of 6, on three separate exact law queries",
+      "second_cause": "tokenize() keeps '_' inside a token, so a law stem became the single token a_census_that_cannot_fail_is_not_a_gate, which can never overlap a worded query",
+      "measured_after": "8/8 law queries return the law first",
+      "latency_after": "3.4-6.0 ms median over 1,085 documents",
+      "pinned_by": "canonical/tests/test_the_model_can_reach_its_own_laws_v1.py (12 tests)"
+    },
+    {
+      "id": "D2_STALE_ARTIFACT",
+      "what": "8 runtime modules were in the tree and not in the artifact, including every module written this session; the partition test failed BEFORE any change by me",
+      "fix": "recompiled to a fixed point twice",
+      "measured_after": "60 passed, 911 subtests, 0 failed"
+    },
+    {
+      "id": "D3_BLIND_SPOT_NOT_REPORTED",
+      "what": "status() reported its own counts and never its own reachability",
+      "fix": "status().reachability computed from git ls-files against the artifact's own indexes",
+      "now_reports": {
+        "files_tracked": 16312,
+        "reachable_any_way": 8949,
+        "files_not_reachable": 7363,
+        "unreachable_with_real_signals": 6223,
+        "laws_present": 781,
+        "laws_reachable": 781
+      }
+    }
+  ],
+
+  "still_unreachable_frontier": {
+    "count": 7363,
+    "with_real_signals": 6223,
+    "by_directory": {
+      "canonical/tests": 2404,
+      "canonical/astra_runtime/evidence": 931,
+      "canonical/astra_runtime/state": 381,
+      ".github/workflows": 330,
+      "canonical/astra_runtime/missions": 321,
+      "canonical/runtime": 299,
+      "canonical/capabilities/opus55": 269,
+      "canonical/reasoning": 157,
+      "canonical/evidence": 145
+    },
+    "sharpest": [
+      "canonical/tests/test_goal_front_compiler_v1.py  (111.5)",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py  (109.5)",
+      "canonical/tests/test_live_brain_route_admission_v1.py  (103.5)",
+      "canonical/swe_kernel/recursive_self_architect_v1.py  (96.7)",
+      "canonical/swe_kernel/upstream_routing_ledger_v1.py  (95.9)"
+    ],
+    "the_one_thing_that_matters": "the 2,404 tests define what this model must do, and the model cannot read them"
+  },
+
+  "verified_by_execution": {
+    "test_brain_unified_model_v1.py": "60 passed, 911 subtests, 0 failed",
+    "test_the_model_can_reach_its_own_laws_v1.py": "12 passed",
+    "test_computer_env_v1.py": "79 passed, 3 failed",
+    "test_transfer_learning_v1.py": "24 passed",
+    "test_ignorance_ledger_v1.py": "13 passed",
+    "test_goal_chase_v1.py": "16 passed",
+    "test_a_learned_skill_is_durable_and_general_v1.py": "8 passed",
+    "test_scoped_skill_verification_and_restart_v1.py": "32 passed",
+    "test_autonomous_verified_self_improvement_v1.py": "33 passed",
+    "test_integrated_autonomous_loop_v1.py": "4 passed",
+    "census_every_valuable_thing_v1.py": "16312 files priced",
+    "repo_integrity_guard_v1.py": "rules=17 violations=0 PASS"
+  },
+
+  "thesis_evidence_already_in_tree": {
+    "source": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+    "priced_rank": "3rd of 16,312 files (128.2)",
+    "results": {
+      "numeric_novelty_and_primitive_repair": "12/12 frozen tasks, persistent_learned_bytes 0, external_frontier_model_calls 0",
+      "bounded_schema_compilation": "8/8",
+      "structural_role_induction": "5/5 identifiable, 1/1 ambiguous abstained",
+      "semantic_paraphrase": "8/8 identifiable, 2/2 abstained",
+      "jit_lexical_relation": "3/3, 2/2 mandatory abstentions",
+      "compiled_macro_chain_depth_8": "3/3, search-space reduction 167961x, ~2 ms"
+    },
+    "deduction": "THE_OBSERVED_NUMERIC_RESIDUAL_WAS_PRIMITIVE_GRAMMAR_COVERAGE_NOT_LEARNED_REPRESENTATION"
+  },
+
+  "what_is_NOT_real": [
+    "no public benchmark score. HLE, ARC-AGI-2, SWE-bench, OSWorld, Terminal-Bench: none run end to end.",
+    "not Opus 5.5. strong on bounded verifiable tasks; refuses outside them by construction.",
+    "6223 priced files still unreachable, including 2404 tests and all of canonical/swe_kernel.",
+    "this session's resolver: heldout is SPENT, so no clean generalisation number survives.",
+    "hyperdimensional semantics: wired into a door and measured inert."
+  ],
+
+  "truth_achieved": false
+}

@@ -1,15 +1,114 @@
 {
  "gaps": {
+  "g01a6c934a52936268c50f0f960dcba9c3bab786e3879dbdeb1b5273ce47b76c2": {
+   "cost": 1.0,
+   "created": 1794251108.8836765,
+   "helped": 0,
+   "id": "g01a6c934a52936268c50f0f960dcba9c3bab786e3879dbdeb1b5273ce47b76c2",
+   "last_seen": 1794251108.8836765,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root28e4d083ec35"
+  },
+  "g047f2b3e016c53d9312708202f08ecf3ca649f30f737ad3765ac3f5434c1db65": {
+   "cost": 1.0,
+   "created": 1794249880.7839715,
+   "helped": 0,
+   "id": "g047f2b3e016c53d9312708202f08ecf3ca649f30f737ad3765ac3f5434c1db65",
+   "last_seen": 1794249880.7839715,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root58da511de0e2"
+  },
+  "g047fbdc6ccaafd2eb1932e252e7a89d9348c79ace164975c1800fd97960e8eeb": {
+   "cost": 1.0,
+   "created": 1794309965.0506573,
+   "helped": 0,
+   "id": "g047fbdc6ccaafd2eb1932e252e7a89d9348c79ace164975c1800fd97960e8eeb",
+   "last_seen": 1794309965.0506573,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootdb1114a87be0"
+  },
+  "g06be769968913cf36188be8406b4f897b5b4fecbff6536d5db96dfc9de2ff5df": {
+   "cost": 1.0,
+   "created": 1794309978.6515787,
+   "helped": 0,
+   "id": "g06be769968913cf36188be8406b4f897b5b4fecbff6536d5db96dfc9de2ff5df",
+   "last_seen": 1794309978.6515787,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root7a2e9be36b34"
+  },
+  "g0734e639820fb24255569d946d65350f967e57b85d8fab98720e84562044b450": {
+   "cost": 1.0,
+   "created": 1794250213.5189068,
+   "helped": 0,
+   "id": "g0734e639820fb24255569d946d65350f967e57b85d8fab98720e84562044b450",
+   "last_seen": 1794250213.5189068,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator rootc7f71da6fed7"
+  },
+  "g07e12d2fad6be3321ca77f07bbd823f5259deae86f25c8e1acbf2e59c3a45e94": {
+   "cost": 1.0,
+   "created": 1794309965.2306082,
+   "helped": 0,
+   "id": "g07e12d2fad6be3321ca77f07bbd823f5259deae86f25c8e1acbf2e59c3a45e94",
+   "last_seen": 1794309965.2306082,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root76569fd1d36b"
+  },
+  "g0a269c1064807bae8a976d48f15a7d75c4a63b7ad25d53696623e56bbd1fad1f": {
+   "cost": 1.0,
+   "created": 1794307682.5817719,
+   "helped": 0,
+   "id": "g0a269c1064807bae8a976d48f15a7d75c4a63b7ad25d53696623e56bbd1fad1f",
+   "last_seen": 1794307682.5817719,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootcbbb93601d6d"
+  },
+  "g0ba0df20a263fa52f50af4a403aa78e9ce6c35ac00f7d17f6923e199b82d067f": {
+   "cost": 1.0,
+   "created": 1794309656.4371254,
+   "helped": 0,
+   "id": "g0ba0df20a263fa52f50af4a403aa78e9ce6c35ac00f7d17f6923e199b82d067f",
+   "last_seen": 1794309656.4371254,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root481cee66abbe"
+  },
+  "g0ba999b3b7ccd9b10d5753db082edabad97fd74ed62f0bec4021bb8e1cb33649": {
+   "cost": 1.0,
+   "created": 1794308806.8326232,
+   "helped": 0,
+   "id": "g0ba999b3b7ccd9b10d5753db082edabad97fd74ed62f0bec4021bb8e1cb33649",
+   "last_seen": 1794308806.8326232,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root9ec8c4c495c5"
+  },
   "g1025082313878": {
    "cost": 1.0,
    "created": 1793264684.326955,
    "helped": 0,
    "id": "g1025082313878",
-   "last_seen": 1793264684.5930302,
+   "last_seen": 1794253287.9258068,
    "resolved": false,
    "trials": 0,
-   "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
-   "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+   "what": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2",
+   "why": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
   "g1051569409963": {
    "cost": 1.0,
@@ -77,6 +176,39 @@
    "what": "probe:>|positional",
    "why": "empirical cli probe"
   },
+  "g1218f36640faab1f9e16aba404edf23b19e26bdb5529b42da849414ef1ca8f30": {
+   "cost": 1.0,
+   "created": 1794311637.6028802,
+   "helped": 0,
+   "id": "g1218f36640faab1f9e16aba404edf23b19e26bdb5529b42da849414ef1ca8f30",
+   "last_seen": 1794311637.6028802,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootfd5717a0027a"
+  },
+  "g13990c32303d316015a356e7ad331745105dace2aaba32e799cc46ce74c57504": {
+   "cost": 1.0,
+   "created": 1794306021.1768007,
+   "helped": 0,
+   "id": "g13990c32303d316015a356e7ad331745105dace2aaba32e799cc46ce74c57504",
+   "last_seen": 1794306021.1768007,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root61cbba437043"
+  },
+  "g13c94fd30199727e7e138e7f8ce71145714dc057892be51db28c9bad5b54f6ac": {
+   "cost": 1.0,
+   "created": 1794308615.1235397,
+   "helped": 0,
+   "id": "g13c94fd30199727e7e138e7f8ce71145714dc057892be51db28c9bad5b54f6ac",
+   "last_seen": 1794308615.1235397,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root8ad00e52216a"
+  },
   "g141732298032": {
    "cost": 1.0,
    "created": 1793264802.120144,
@@ -98,6 +230,17 @@
    "trials": 0,
    "what": "get the writing out of that there pdf thing",
    "why": "raw goal compilation gap"
+  },
+  "g17a4b7e7ba792eb51628a017d18bf539b282bc1a433290674e58bdff0fecf35b": {
+   "cost": 1.0,
+   "created": 1794308565.2707987,
+   "helped": 0,
+   "id": "g17a4b7e7ba792eb51628a017d18bf539b282bc1a433290674e58bdff0fecf35b",
+   "last_seen": 1794308565.2707987,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root3c23232f0010"
   },
   "g180142073164": {
    "cost": 1.0,
@@ -121,6 +264,50 @@
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
+  "g1a4ff2b21f59bef5fa4fff2b881439e784aadbc4c5ec27afca308ee10c9da6e4": {
+   "cost": 1.0,
+   "created": 1794308559.3295732,
+   "helped": 0,
+   "id": "g1a4ff2b21f59bef5fa4fff2b881439e784aadbc4c5ec27afca308ee10c9da6e4",
+   "last_seen": 1794308559.3295732,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root08ae736d5265"
+  },
+  "g1cd15de00b92c7b7029e3d21214089f775cb9d8b19be700fee07ad88cb4d8411": {
+   "cost": 1.0,
+   "created": 1794307574.7906723,
+   "helped": 0,
+   "id": "g1cd15de00b92c7b7029e3d21214089f775cb9d8b19be700fee07ad88cb4d8411",
+   "last_seen": 1794307574.7906723,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root2a9ca9036d88"
+  },
+  "g1d6fc20d0beaed3cd8a2c513ad38f739cd4d47af0ef8a8ee4b89e799e78b43b5": {
+   "cost": 1.0,
+   "created": 1794250269.1564806,
+   "helped": 0,
+   "id": "g1d6fc20d0beaed3cd8a2c513ad38f739cd4d47af0ef8a8ee4b89e799e78b43b5",
+   "last_seen": 1794250269.1564806,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootc3e10a9b771d"
+  },
+  "g213c42f74fb60bb599a4df81e7571dca7d32d61eee9ff21cc5a3eb86e2f93bd6": {
+   "cost": 1.0,
+   "created": 1794308810.4540129,
+   "helped": 0,
+   "id": "g213c42f74fb60bb599a4df81e7571dca7d32d61eee9ff21cc5a3eb86e2f93bd6",
+   "last_seen": 1794308810.4540129,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root18eb7b6f64e7"
+  },
   "g222975461607": {
    "cost": 1.0,
    "created": 1793271690.7518563,
@@ -131,6 +318,39 @@
    "trials": 0,
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+  },
+  "g229c585fac439d33c162a25e7d2cbcaeaf788a8d7593c569f1725e14413daebc": {
+   "cost": 1.0,
+   "created": 1794310074.628534,
+   "helped": 0,
+   "id": "g229c585fac439d33c162a25e7d2cbcaeaf788a8d7593c569f1725e14413daebc",
+   "last_seen": 1794310074.628534,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root3e19919d605e"
+  },
+  "g23e708301be9098bbb5a353b2fcf77da4380a6015312d791622ef7d3ebc9dd3e": {
+   "cost": 1.0,
+   "created": 1794308559.0503833,
+   "helped": 0,
+   "id": "g23e708301be9098bbb5a353b2fcf77da4380a6015312d791622ef7d3ebc9dd3e",
+   "last_seen": 1794308559.0503833,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root08ae736d5265"
+  },
+  "g240e2315e39750ca3256de9c9179072ee5370313f81fd3c1d04b7c2e08c060dd": {
+   "cost": 1.0,
+   "created": 1794310004.3921099,
+   "helped": 0,
+   "id": "g240e2315e39750ca3256de9c9179072ee5370313f81fd3c1d04b7c2e08c060dd",
+   "last_seen": 1794310004.3921099,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root3e20786dc57b"
   },
   "g246678589635": {
    "cost": 1.0,
@@ -175,6 +395,17 @@
    "trials": 0,
    "what": "transcribe the audio in this recording to text",
    "why": "raw goal compilation gap"
+  },
+  "g2811c1ea05f244595a2757dbf486ffe3352c39b1c71d0384ea2f2311737fc9e1": {
+   "cost": 1.0,
+   "created": 1794309959.8671732,
+   "helped": 0,
+   "id": "g2811c1ea05f244595a2757dbf486ffe3352c39b1c71d0384ea2f2311737fc9e1",
+   "last_seen": 1794309959.8671732,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root1919fd7ca899"
   },
   "g284143994353": {
    "cost": 1.0,
@@ -231,6 +462,28 @@
    "what": "probe:--outfile|positional",
    "why": "empirical cli probe"
   },
+  "g2f0477b937675388f005b86596a973953de681e76a3c94e42f311954e45ddd08": {
+   "cost": 1.0,
+   "created": 1794308641.5292106,
+   "helped": 0,
+   "id": "g2f0477b937675388f005b86596a973953de681e76a3c94e42f311954e45ddd08",
+   "last_seen": 1794308641.5292106,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root90d81a194df0"
+  },
+  "g30230b0301db6b2c9273511020785581532a253661eb30058d1b3dafee80658e": {
+   "cost": 1.0,
+   "created": 1794309978.6485443,
+   "helped": 0,
+   "id": "g30230b0301db6b2c9273511020785581532a253661eb30058d1b3dafee80658e",
+   "last_seen": 1794309978.6485443,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root7a2e9be36b34"
+  },
   "g320504364511": {
    "cost": 1.0,
    "created": 1793437356.3111854,
@@ -241,6 +494,17 @@
    "trials": 0,
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
+  },
+  "g3237d7551999836b1bddac02536c6157dbf3792df313758cd39501db13fa759f": {
+   "cost": 1.0,
+   "created": 1794311637.6067069,
+   "helped": 0,
+   "id": "g3237d7551999836b1bddac02536c6157dbf3792df313758cd39501db13fa759f",
+   "last_seen": 1794311637.6067069,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootfd5717a0027a"
   },
   "g328299222626": {
    "cost": 1.0,
@@ -253,6 +517,17 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g328acf9e6a864b0673135be13ddb4f645d4ac9ca34e5eef8b73e0f4e70c64e5d": {
+   "cost": 1.0,
+   "created": 1794309656.2481139,
+   "helped": 0,
+   "id": "g328acf9e6a864b0673135be13ddb4f645d4ac9ca34e5eef8b73e0f4e70c64e5d",
+   "last_seen": 1794309656.2481139,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootc6415eb24911"
+  },
   "g329815205364": {
    "cost": 1.0,
    "created": 1793264466.9956858,
@@ -263,6 +538,17 @@
    "trials": 2,
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
+  },
+  "g36e381c15cb37d9587f1565723473ddc991a1cda84d6017ab8515031dda6e8a9": {
+   "cost": 1.0,
+   "created": 1794310479.2237544,
+   "helped": 0,
+   "id": "g36e381c15cb37d9587f1565723473ddc991a1cda84d6017ab8515031dda6e8a9",
+   "last_seen": 1794310479.2237544,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root6f048a3952b7"
   },
   "g373341029941": {
    "cost": 1.0,
@@ -286,6 +572,28 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g379fc375bd11b194a1f39331cd37b79ed1b937d266ff6df28d2d1f1b4071f548": {
+   "cost": 1.0,
+   "created": 1794249797.9471855,
+   "helped": 0,
+   "id": "g379fc375bd11b194a1f39331cd37b79ed1b937d266ff6df28d2d1f1b4071f548",
+   "last_seen": 1794249797.9471855,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root1ed7d8f29879"
+  },
+  "g37de9621f79ee87e6c1bd8701e6cd85930326ee0dd44fda4b03bf8816ae3e8e6": {
+   "cost": 1.0,
+   "created": 1794308620.783877,
+   "helped": 0,
+   "id": "g37de9621f79ee87e6c1bd8701e6cd85930326ee0dd44fda4b03bf8816ae3e8e6",
+   "last_seen": 1794308620.783877,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootcc949684793d"
+  },
   "g391544667495": {
    "cost": 1.0,
    "created": 1793292752.7970102,
@@ -307,6 +615,17 @@
    "trials": 0,
    "what": "practice:python_fault_localize",
    "why": "live learning cycle"
+  },
+  "g3f88a65979cb6bdbc2dc61d0d722c755510f6b8ad963d8c07ca51c956e0b1fc3": {
+   "cost": 1.0,
+   "created": 1794251440.9759295,
+   "helped": 0,
+   "id": "g3f88a65979cb6bdbc2dc61d0d722c755510f6b8ad963d8c07ca51c956e0b1fc3",
+   "last_seen": 1794251443.9451969,
+   "resolved": false,
+   "trials": 0,
+   "what": "amounts",
+   "why": "unknown_operator rootcdb4ee2aea69"
   },
   "g40774542697": {
    "cost": 1.0,
@@ -363,6 +682,17 @@
    "what": "practice:python_ast_patch_search",
    "why": "live learning cycle"
   },
+  "g453f0e9e22e941f29737a5d6e9b16d0387fbe2584e43f0dda35192160e141682": {
+   "cost": 1.0,
+   "created": 1794249748.704743,
+   "helped": 0,
+   "id": "g453f0e9e22e941f29737a5d6e9b16d0387fbe2584e43f0dda35192160e141682",
+   "last_seen": 1794249760.2093258,
+   "resolved": false,
+   "trials": 0,
+   "what": "digits",
+   "why": "unknown_operator rootc220abfa99d4"
+  },
   "g454877037181": {
    "cost": 1.0,
    "created": 1793274053.8795629,
@@ -373,6 +703,17 @@
    "trials": 0,
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+  },
+  "g462703bb522b9a85d87b282fd60e7d4e8ec1e29be4ac3f98b98c417302ee4650": {
+   "cost": 1.0,
+   "created": 1794308853.6531208,
+   "helped": 0,
+   "id": "g462703bb522b9a85d87b282fd60e7d4e8ec1e29be4ac3f98b98c417302ee4650",
+   "last_seen": 1794308853.6531208,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootbd37383323a1"
   },
   "g464063506591": {
    "cost": 1.0,
@@ -407,6 +748,17 @@
    "what": "probe:-o|-d",
    "why": "empirical cli probe"
   },
+  "g47da980146370f89b7768e96be2517256bd38ab2b721cda3231239fee92402c7": {
+   "cost": 1.0,
+   "created": 1794308810.4514017,
+   "helped": 0,
+   "id": "g47da980146370f89b7768e96be2517256bd38ab2b721cda3231239fee92402c7",
+   "last_seen": 1794308810.4514017,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root18eb7b6f64e7"
+  },
   "g482551162764": {
    "cost": 1.0,
    "created": 1793266064.3790646,
@@ -418,6 +770,17 @@
    "what": "probe:--output|stdin",
    "why": "empirical cli probe"
   },
+  "g484343aac7bba3aba356724d012f06e01dfd99862dbc22333f99e22ff8d31c60": {
+   "cost": 1.0,
+   "created": 1794249818.706861,
+   "helped": 0,
+   "id": "g484343aac7bba3aba356724d012f06e01dfd99862dbc22333f99e22ff8d31c60",
+   "last_seen": 1794249818.706861,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator roota6f07d280c57"
+  },
   "g4939909819": {
    "cost": 1.0,
    "created": 1793297609.2038324,
@@ -428,6 +791,116 @@
    "trials": 0,
    "what": "probe:--output|stdin",
    "why": "empirical cli probe"
+  },
+  "g498a7584f5fa14ed15b98199a68524cd3b989e268f9b9e9502010b3da8ee0aab": {
+   "cost": 1.0,
+   "created": 1794308603.3716385,
+   "helped": 0,
+   "id": "g498a7584f5fa14ed15b98199a68524cd3b989e268f9b9e9502010b3da8ee0aab",
+   "last_seen": 1794308603.3716385,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root8199b8ee9ef6"
+  },
+  "g4ad4ea812dff393c25c8b8cb58e098d5a327ab45fd289c4149efa00e9aeddfff": {
+   "cost": 1.0,
+   "created": 1794310074.4711998,
+   "helped": 0,
+   "id": "g4ad4ea812dff393c25c8b8cb58e098d5a327ab45fd289c4149efa00e9aeddfff",
+   "last_seen": 1794310074.4711998,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root9b52a70c5b49"
+  },
+  "g4b5aab10b3ffc3633fb77d22b001968cd48a9548ade05e9894097340b1a77501": {
+   "cost": 1.0,
+   "created": 1794304855.9941025,
+   "helped": 0,
+   "id": "g4b5aab10b3ffc3633fb77d22b001968cd48a9548ade05e9894097340b1a77501",
+   "last_seen": 1794304855.9941025,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root73537f157f4c"
+  },
+  "g4bb9866f181adf0d78dbdfcc1c119fb963eaa4cb155b12cb140432475ef2ad8b": {
+   "cost": 1.0,
+   "created": 1794310978.4719095,
+   "helped": 0,
+   "id": "g4bb9866f181adf0d78dbdfcc1c119fb963eaa4cb155b12cb140432475ef2ad8b",
+   "last_seen": 1794310978.4719095,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root362a7eb3e8e5"
+  },
+  "g4bbfdaf53dd3478a51ce64bd6c89987ad90ec6b92f7cff5426c82c87790889d3": {
+   "cost": 1.0,
+   "created": 1794310004.5835044,
+   "helped": 0,
+   "id": "g4bbfdaf53dd3478a51ce64bd6c89987ad90ec6b92f7cff5426c82c87790889d3",
+   "last_seen": 1794310004.5835044,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootd0efce63d068"
+  },
+  "g4dacd192a23cb346d944c278afe9555c885cf1a9dace1887d1948db007669ce7": {
+   "cost": 1.0,
+   "created": 1794311415.1589935,
+   "helped": 0,
+   "id": "g4dacd192a23cb346d944c278afe9555c885cf1a9dace1887d1948db007669ce7",
+   "last_seen": 1794311415.1589935,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root711307def1ff"
+  },
+  "g4e1f996f065374e3a5b0387df15c807d3cbf9df92495ce0bf265b0c89b7f1521": {
+   "cost": 1.0,
+   "created": 1794306016.581503,
+   "helped": 0,
+   "id": "g4e1f996f065374e3a5b0387df15c807d3cbf9df92495ce0bf265b0c89b7f1521",
+   "last_seen": 1794306016.7382493,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root75c958e7a05e"
+  },
+  "g4ed83e1a32f6e59f7d4af781a58b3bd69ae6bd8962810c4eb374ff77a8fccf08": {
+   "cost": 1.0,
+   "created": 1794250297.0291042,
+   "helped": 0,
+   "id": "g4ed83e1a32f6e59f7d4af781a58b3bd69ae6bd8962810c4eb374ff77a8fccf08",
+   "last_seen": 1794250297.0291042,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootcef191a83e29"
+  },
+  "g4f7dc92ff3b52f57a84049411f640c76430f7117812fe9c56bfc8c8ac460a6e3": {
+   "cost": 1.0,
+   "created": 1794311180.0983865,
+   "helped": 0,
+   "id": "g4f7dc92ff3b52f57a84049411f640c76430f7117812fe9c56bfc8c8ac460a6e3",
+   "last_seen": 1794311180.0983865,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootedc834cc5116"
+  },
+  "g4ff18dbe2ad847dde0ce44e4064e1112b4e2b463f1d2baed79e39a9799a04914": {
+   "cost": 1.0,
+   "created": 1794311415.155545,
+   "helped": 0,
+   "id": "g4ff18dbe2ad847dde0ce44e4064e1112b4e2b463f1d2baed79e39a9799a04914",
+   "last_seen": 1794311415.155545,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root711307def1ff"
   },
   "g50740825268": {
    "cost": 1.0,
@@ -451,6 +924,17 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g527b70b37955e591cfebc1b772d4e21db2a9506d01bef5e71e6f9035724df929": {
+   "cost": 1.0,
+   "created": 1794311180.2542124,
+   "helped": 0,
+   "id": "g527b70b37955e591cfebc1b772d4e21db2a9506d01bef5e71e6f9035724df929",
+   "last_seen": 1794311180.2542124,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root73c2764bdbe5"
+  },
   "g540894358288": {
    "cost": 1.0,
    "created": 1793264466.994915,
@@ -461,6 +945,17 @@
    "trials": 2,
    "what": "probe:--output|--input",
    "why": "empirical cli probe"
+  },
+  "g54891102820873fb6176c575c514dde137c7e0f1fc496624a4f9e6860e213ba4": {
+   "cost": 1.0,
+   "created": 1794311637.7525005,
+   "helped": 0,
+   "id": "g54891102820873fb6176c575c514dde137c7e0f1fc496624a4f9e6860e213ba4",
+   "last_seen": 1794311637.7525005,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root9a4acd2881da"
   },
   "g551145256379": {
    "cost": 1.0,
@@ -483,6 +978,39 @@
    "trials": 3,
    "what": "probe:>|stdin",
    "why": "empirical cli probe"
+  },
+  "g55a7f44bcb751db22b3ffd152cd8c90b6c795da5fa9cfcd57f038fccb191f355": {
+   "cost": 1.0,
+   "created": 1794311414.9666448,
+   "helped": 0,
+   "id": "g55a7f44bcb751db22b3ffd152cd8c90b6c795da5fa9cfcd57f038fccb191f355",
+   "last_seen": 1794311414.9666448,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root23143badd448"
+  },
+  "g55c8d15bdb22e1b4108aafc7e0e111f70942ca30b13e72d576d1d75dbcdd4d59": {
+   "cost": 1.0,
+   "created": 1794308627.8553147,
+   "helped": 0,
+   "id": "g55c8d15bdb22e1b4108aafc7e0e111f70942ca30b13e72d576d1d75dbcdd4d59",
+   "last_seen": 1794308627.8553147,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root843fca2dcefb"
+  },
+  "g567591f9edef7c1d186fa5c82f18fe344a529b6cbd040200f2b6740f0c793e2c": {
+   "cost": 1.0,
+   "created": 1794308641.531651,
+   "helped": 0,
+   "id": "g567591f9edef7c1d186fa5c82f18fe344a529b6cbd040200f2b6740f0c793e2c",
+   "last_seen": 1794308641.531651,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root90d81a194df0"
   },
   "g573174454126": {
    "cost": 1.0,
@@ -539,6 +1067,61 @@
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
   },
+  "g597ab728e6bf69030a76f7578568043c444547bc3fa6f83b624f472258e62b5a": {
+   "cost": 1.0,
+   "created": 1794308603.5519795,
+   "helped": 0,
+   "id": "g597ab728e6bf69030a76f7578568043c444547bc3fa6f83b624f472258e62b5a",
+   "last_seen": 1794308603.5519795,
+   "resolved": false,
+   "trials": 0,
+   "what": "per",
+   "why": "unknown_operator root8199b8ee9ef6"
+  },
+  "g5984e3214f3154480f538bcac88e8fd4221f0f48dfb4a263e1515cb18eccd666": {
+   "cost": 1.0,
+   "created": 1794308603.3695369,
+   "helped": 0,
+   "id": "g5984e3214f3154480f538bcac88e8fd4221f0f48dfb4a263e1515cb18eccd666",
+   "last_seen": 1794308603.3695369,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root8199b8ee9ef6"
+  },
+  "g5d38050a2649eae537ebb2dfed64be6789cc7f6ec1446b5cdbac776f173ceba2": {
+   "cost": 1.0,
+   "created": 1794250268.796958,
+   "helped": 0,
+   "id": "g5d38050a2649eae537ebb2dfed64be6789cc7f6ec1446b5cdbac776f173ceba2",
+   "last_seen": 1794250268.796958,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator rootc08d3ff7cd39"
+  },
+  "g5e4e0ffc689fda82b16c34b38ccec8d93f94a30c257592ebdc0af674882f654a": {
+   "cost": 1.0,
+   "created": 1794308565.2685218,
+   "helped": 0,
+   "id": "g5e4e0ffc689fda82b16c34b38ccec8d93f94a30c257592ebdc0af674882f654a",
+   "last_seen": 1794308565.2685218,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root3c23232f0010"
+  },
+  "g60cbcefde71a438c32532bc26c25537571fce7d615d08564ec53f28bebcbc46a": {
+   "cost": 1.0,
+   "created": 1794308628.0351868,
+   "helped": 0,
+   "id": "g60cbcefde71a438c32532bc26c25537571fce7d615d08564ec53f28bebcbc46a",
+   "last_seen": 1794308628.0351868,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root8320dc3ff412"
+  },
   "g610520316647": {
    "cost": 1.0,
    "created": 1793295116.2316787,
@@ -560,6 +1143,17 @@
    "trials": 0,
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
+  },
+  "g622d626c2fe5edba07a0ac445f20be210e9345d33a69672368f7bac953f7bf15": {
+   "cost": 1.0,
+   "created": 1794308819.8653598,
+   "helped": 0,
+   "id": "g622d626c2fe5edba07a0ac445f20be210e9345d33a69672368f7bac953f7bf15",
+   "last_seen": 1794308819.8653598,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root47d843f4d71b"
   },
   "g625226148224": {
    "cost": 1.0,
@@ -594,6 +1188,17 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g63cabbcedb0cb6f425a3609ca3ba8f481b2fd3e05883a5dd3f257f16c241c32b": {
+   "cost": 1.0,
+   "created": 1794309010.7251353,
+   "helped": 0,
+   "id": "g63cabbcedb0cb6f425a3609ca3ba8f481b2fd3e05883a5dd3f257f16c241c32b",
+   "last_seen": 1794309010.7251353,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootb595b457b172"
+  },
   "g649971403698": {
    "cost": 1.0,
    "created": 1793297609.1985967,
@@ -627,6 +1232,28 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g66e3d4b81d77e1fa68c88987d071f6001cf1a4b7611c73c108d07402609b9597": {
+   "cost": 1.0,
+   "created": 1794310755.355073,
+   "helped": 0,
+   "id": "g66e3d4b81d77e1fa68c88987d071f6001cf1a4b7611c73c108d07402609b9597",
+   "last_seen": 1794310755.355073,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root0e7cc36c8232"
+  },
+  "g66e7269e4b3159ec0d906a0c6091ac7653fbf9c311904fa3cef03c2854fff3e8": {
+   "cost": 1.0,
+   "created": 1794249818.708728,
+   "helped": 0,
+   "id": "g66e7269e4b3159ec0d906a0c6091ac7653fbf9c311904fa3cef03c2854fff3e8",
+   "last_seen": 1794249818.708728,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator roota6f07d280c57"
+  },
   "g674706362179": {
    "cost": 1.0,
    "created": 1793264764.3637917,
@@ -659,6 +1286,72 @@
    "trials": 0,
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+  },
+  "g69f201391f4e137a9aa6d31235cc5ccecc1efd563d6156482b79ece8487b490c": {
+   "cost": 1.0,
+   "created": 1794308829.4554791,
+   "helped": 0,
+   "id": "g69f201391f4e137a9aa6d31235cc5ccecc1efd563d6156482b79ece8487b490c",
+   "last_seen": 1794308829.4554791,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root08006e0bd958"
+  },
+  "g6bb6d859ee3cfab39f9237e428cf05b2e290423e36653a9e3fc94d1ab58e7df9": {
+   "cost": 1.0,
+   "created": 1794308816.8720653,
+   "helped": 0,
+   "id": "g6bb6d859ee3cfab39f9237e428cf05b2e290423e36653a9e3fc94d1ab58e7df9",
+   "last_seen": 1794308816.8720653,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootc6eccc47768f"
+  },
+  "g6d4cd5df20b0b1d86bedcf2d145b8c8fb2ee61a0257ab56a0e6e6a3541b8d467": {
+   "cost": 1.0,
+   "created": 1794308806.8353622,
+   "helped": 0,
+   "id": "g6d4cd5df20b0b1d86bedcf2d145b8c8fb2ee61a0257ab56a0e6e6a3541b8d467",
+   "last_seen": 1794308806.8353622,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root9ec8c4c495c5"
+  },
+  "g6e7687e20977dc54e4bcac8538e758b15c81d38f30af405e9be35c991c5433eb": {
+   "cost": 1.0,
+   "created": 1794307678.8970716,
+   "helped": 0,
+   "id": "g6e7687e20977dc54e4bcac8538e758b15c81d38f30af405e9be35c991c5433eb",
+   "last_seen": 1794307679.0568182,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootff38db8a08e4"
+  },
+  "g6e7ff608d0ebcd0136834c180a749126d6e949f5b60cc53eef007b17399a0798": {
+   "cost": 1.0,
+   "created": 1794310479.4120498,
+   "helped": 0,
+   "id": "g6e7ff608d0ebcd0136834c180a749126d6e949f5b60cc53eef007b17399a0798",
+   "last_seen": 1794310479.4120498,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator roota5ab6a0be8a4"
+  },
+  "g6fab28c39c27295257a8523e5c6516f7a4377e956a2fcb8d423ad59b327c266e": {
+   "cost": 1.0,
+   "created": 1794308628.0375178,
+   "helped": 0,
+   "id": "g6fab28c39c27295257a8523e5c6516f7a4377e956a2fcb8d423ad59b327c266e",
+   "last_seen": 1794308628.0375178,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root8320dc3ff412"
   },
   "g703274280680": {
    "cost": 1.0,
@@ -715,6 +1408,39 @@
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
+  "g7289c765ea9846f0c00cf3afe593981543fa59e42db303244fb41ad47f738f2f": {
+   "cost": 1.0,
+   "created": 1794311180.257883,
+   "helped": 0,
+   "id": "g7289c765ea9846f0c00cf3afe593981543fa59e42db303244fb41ad47f738f2f",
+   "last_seen": 1794311180.257883,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root73c2764bdbe5"
+  },
+  "g72ba5b5d01093d5b895b79f714179fd6b92e39a864be0dfef9ba1499d8555026": {
+   "cost": 1.0,
+   "created": 1794250193.886633,
+   "helped": 0,
+   "id": "g72ba5b5d01093d5b895b79f714179fd6b92e39a864be0dfef9ba1499d8555026",
+   "last_seen": 1794250193.886633,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootd18f47e0d9b8"
+  },
+  "g745e476412affbc0f6521a715ba627071e7e80aafd43a6c6d0546de64cbdb980": {
+   "cost": 1.0,
+   "created": 1794308839.0724404,
+   "helped": 0,
+   "id": "g745e476412affbc0f6521a715ba627071e7e80aafd43a6c6d0546de64cbdb980",
+   "last_seen": 1794308839.0724404,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root1fe3e4f0cbc9"
+  },
   "g747114716060": {
    "cost": 1.0,
    "created": 1793438053.7653565,
@@ -726,6 +1452,17 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g75f7d3cfc72cfbbb25f6b27eb844bc7b1958ddd287fd4769eec2bf6d3f24b430": {
+   "cost": 1.0,
+   "created": 1794309011.372177,
+   "helped": 0,
+   "id": "g75f7d3cfc72cfbbb25f6b27eb844bc7b1958ddd287fd4769eec2bf6d3f24b430",
+   "last_seen": 1794309011.372177,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootbe5fd3c45ea8"
+  },
   "g779741228193": {
    "cost": 1.0,
    "created": 1793266400.9047797,
@@ -736,6 +1473,83 @@
    "trials": 0,
    "what": "practice:math_numeric_sympy",
    "why": "live learning cycle"
+  },
+  "g7a0abed081a57f190760852b6b1f1ec4bbd53ac21e5a6a2e71ad45bd71ac0148": {
+   "cost": 1.0,
+   "created": 1794309010.7873344,
+   "helped": 0,
+   "id": "g7a0abed081a57f190760852b6b1f1ec4bbd53ac21e5a6a2e71ad45bd71ac0148",
+   "last_seen": 1794309010.7873344,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootb595b457b172"
+  },
+  "g7a989da44da84880fcd0ef5b449c0f6d5e38dc4629538856f4dda2e9b7ee362c": {
+   "cost": 1.0,
+   "created": 1794311637.748774,
+   "helped": 0,
+   "id": "g7a989da44da84880fcd0ef5b449c0f6d5e38dc4629538856f4dda2e9b7ee362c",
+   "last_seen": 1794311637.748774,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root9a4acd2881da"
+  },
+  "g7e201d7d78c5ab0ba95040dc3f70a18aac0bceb7cf35eef00cf7494d3e3567f2": {
+   "cost": 1.0,
+   "created": 1794308565.5205457,
+   "helped": 0,
+   "id": "g7e201d7d78c5ab0ba95040dc3f70a18aac0bceb7cf35eef00cf7494d3e3567f2",
+   "last_seen": 1794308565.5205457,
+   "resolved": false,
+   "trials": 0,
+   "what": "bytes",
+   "why": "unknown_operator root3c23232f0010"
+  },
+  "g7e750b5cd66c50ed8d0ae07424ef667912afed345040e1896f4ce75a25f9f708": {
+   "cost": 1.0,
+   "created": 1794309965.227736,
+   "helped": 0,
+   "id": "g7e750b5cd66c50ed8d0ae07424ef667912afed345040e1896f4ce75a25f9f708",
+   "last_seen": 1794309965.227736,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root76569fd1d36b"
+  },
+  "g7e8dc2c7d044eb0a2f393e9f08a69afe52c27bf121ebbdb5be8d80a11b693c81": {
+   "cost": 1.0,
+   "created": 1794249880.782159,
+   "helped": 0,
+   "id": "g7e8dc2c7d044eb0a2f393e9f08a69afe52c27bf121ebbdb5be8d80a11b693c81",
+   "last_seen": 1794249880.782159,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root58da511de0e2"
+  },
+  "g7fd3dc80de52de56cea929833b1670bf9fc94a8ea79359bde3cec120c9860880": {
+   "cost": 1.0,
+   "created": 1794308832.8618314,
+   "helped": 0,
+   "id": "g7fd3dc80de52de56cea929833b1670bf9fc94a8ea79359bde3cec120c9860880",
+   "last_seen": 1794308832.8618314,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootcb57853b086e"
+  },
+  "g806d726b8766bb0fdb90d5cddf040249ea247e1386ffbff8f85004cfe23eab97": {
+   "cost": 1.0,
+   "created": 1794308829.4581292,
+   "helped": 0,
+   "id": "g806d726b8766bb0fdb90d5cddf040249ea247e1386ffbff8f85004cfe23eab97",
+   "last_seen": 1794308829.4581292,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root08006e0bd958"
   },
   "g807026147686": {
    "cost": 1.0,
@@ -770,6 +1584,17 @@
    "what": "transcribe the audio in this recording to text",
    "why": "raw goal compilation gap"
   },
+  "g82df52bd1a1f347b15bed1038413582a7ff319a7200092dec3f9703e66d62167": {
+   "cost": 1.0,
+   "created": 1794309011.3860314,
+   "helped": 0,
+   "id": "g82df52bd1a1f347b15bed1038413582a7ff319a7200092dec3f9703e66d62167",
+   "last_seen": 1794309011.3860314,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootbe5fd3c45ea8"
+  },
   "g84707193898": {
    "cost": 1.0,
    "created": 1793297609.2007535,
@@ -780,6 +1605,17 @@
    "trials": 2,
    "what": "probe:--file|positional",
    "why": "empirical cli probe"
+  },
+  "g8476eae6091713e8817a053c03554eb802b257440c7c376e1c8061f2b321fdea": {
+   "cost": 1.0,
+   "created": 1794308620.786202,
+   "helped": 0,
+   "id": "g8476eae6091713e8817a053c03554eb802b257440c7c376e1c8061f2b321fdea",
+   "last_seen": 1794308620.786202,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootcc949684793d"
   },
   "g869610903178": {
    "cost": 1.0,
@@ -792,6 +1628,17 @@
    "what": "probe:--outfile|stdin",
    "why": "empirical cli probe"
   },
+  "g86d00d3e008b3e9c1642146eb7d4ecf8b3ffc9c63ebe229db20150cb8369a8c4": {
+   "cost": 1.0,
+   "created": 1794308559.5507498,
+   "helped": 0,
+   "id": "g86d00d3e008b3e9c1642146eb7d4ecf8b3ffc9c63ebe229db20150cb8369a8c4",
+   "last_seen": 1794308559.5507498,
+   "resolved": false,
+   "trials": 0,
+   "what": "sky",
+   "why": "unknown_operator root08ae736d5265"
+  },
   "g880454033332": {
    "cost": 1.0,
    "created": 1793266064.3747246,
@@ -802,6 +1649,72 @@
    "trials": 3,
    "what": "probe:>|positional",
    "why": "empirical cli probe"
+  },
+  "g88f5b744f58d83b1bbd5e283be6c8a2f758cff4d546daf2025ac27d24239f6e4": {
+   "cost": 1.0,
+   "created": 1794310479.227067,
+   "helped": 0,
+   "id": "g88f5b744f58d83b1bbd5e283be6c8a2f758cff4d546daf2025ac27d24239f6e4",
+   "last_seen": 1794310479.227067,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root6f048a3952b7"
+  },
+  "g894dbbaf5eea526e1ebae7129aed65d72ac0ee1c8b09877e4b14763703f0b11d": {
+   "cost": 1.0,
+   "created": 1794308614.9423175,
+   "helped": 0,
+   "id": "g894dbbaf5eea526e1ebae7129aed65d72ac0ee1c8b09877e4b14763703f0b11d",
+   "last_seen": 1794308614.9423175,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root0dec7c4d9be4"
+  },
+  "g8a3897c5f4a559d5eeec2de9631eb7abaf3706c3ac8ee0afa007e90add19734e": {
+   "cost": 1.0,
+   "created": 1794310755.2050054,
+   "helped": 0,
+   "id": "g8a3897c5f4a559d5eeec2de9631eb7abaf3706c3ac8ee0afa007e90add19734e",
+   "last_seen": 1794310755.2050054,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootef8408c6717e"
+  },
+  "g8ae484f82d26964f3e1ed824f8acfcd0a7d2a7512d061b7ac3da869538b9662d": {
+   "cost": 1.0,
+   "created": 1794310074.6251962,
+   "helped": 0,
+   "id": "g8ae484f82d26964f3e1ed824f8acfcd0a7d2a7512d061b7ac3da869538b9662d",
+   "last_seen": 1794310074.6251962,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root3e19919d605e"
+  },
+  "g8d0069a4f1b68e40aebf2c252cd47eeec18691d179f3d5e8c11ec6b348ca4920": {
+   "cost": 1.0,
+   "created": 1794308559.3849247,
+   "helped": 0,
+   "id": "g8d0069a4f1b68e40aebf2c252cd47eeec18691d179f3d5e8c11ec6b348ca4920",
+   "last_seen": 1794308559.3849247,
+   "resolved": false,
+   "trials": 0,
+   "what": "bytes",
+   "why": "unknown_operator root08ae736d5265"
+  },
+  "g90946487b5dcbb63a859ca08985b8dd3db01866e0b44e002e525e4f473dbe81b": {
+   "cost": 1.0,
+   "created": 1794308559.5485842,
+   "helped": 0,
+   "id": "g90946487b5dcbb63a859ca08985b8dd3db01866e0b44e002e525e4f473dbe81b",
+   "last_seen": 1794308559.5485842,
+   "resolved": false,
+   "trials": 0,
+   "what": "colour",
+   "why": "unknown_operator root08ae736d5265"
   },
   "g941143180589": {
    "cost": 1.0,
@@ -880,6 +1793,17 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g97dd56f1f050c10eec96e793e22e6d11ca19d1e16848af59c956ccd64e57547f": {
+   "cost": 1.0,
+   "created": 1794310978.6423786,
+   "helped": 0,
+   "id": "g97dd56f1f050c10eec96e793e22e6d11ca19d1e16848af59c956ccd64e57547f",
+   "last_seen": 1794310978.6423786,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root975f0e7b26fa"
+  },
   "g982917211091": {
    "cost": 1.0,
    "created": 1793266064.3773258,
@@ -891,6 +1815,28 @@
    "what": "probe:--file|positional",
    "why": "empirical cli probe"
   },
+  "g98469b05586f874d565dfc9fba16430a49180e2e37615958d5e050b0d9555f20": {
+   "cost": 1.0,
+   "created": 1794309965.047588,
+   "helped": 0,
+   "id": "g98469b05586f874d565dfc9fba16430a49180e2e37615958d5e050b0d9555f20",
+   "last_seen": 1794309965.047588,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootdb1114a87be0"
+  },
+  "g9875abee903dcd393b8037dfc281b3e789b61cb76929598d260fa0036a708a22": {
+   "cost": 1.0,
+   "created": 1794310755.358355,
+   "helped": 0,
+   "id": "g9875abee903dcd393b8037dfc281b3e789b61cb76929598d260fa0036a708a22",
+   "last_seen": 1794310755.358355,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root0e7cc36c8232"
+  },
   "g991901507885": {
    "cost": 1.0,
    "created": 1793266064.3796365,
@@ -901,6 +1847,501 @@
    "trials": 1,
    "what": "probe:--outfile|stdin",
    "why": "empirical cli probe"
+  },
+  "g9df7ca1d9ff33e64528fae04aef765b363a09aeb65f3412e043494f0141fb1d3": {
+   "cost": 1.0,
+   "created": 1794310479.4087481,
+   "helped": 0,
+   "id": "g9df7ca1d9ff33e64528fae04aef765b363a09aeb65f3412e043494f0141fb1d3",
+   "last_seen": 1794310479.4087481,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator roota5ab6a0be8a4"
+  },
+  "g9edee7c9817c8c7c4ebde6fb3baf078cce5f8b112edf21859dde4adfc2863bea": {
+   "cost": 1.0,
+   "created": 1794310004.5803876,
+   "helped": 0,
+   "id": "g9edee7c9817c8c7c4ebde6fb3baf078cce5f8b112edf21859dde4adfc2863bea",
+   "last_seen": 1794310004.5803876,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootd0efce63d068"
+  },
+  "g9f37aa829e5afe55071ef70112f6d5f8c990651ac34d499ccb52c4bc07726892": {
+   "cost": 1.0,
+   "created": 1794309656.2511952,
+   "helped": 0,
+   "id": "g9f37aa829e5afe55071ef70112f6d5f8c990651ac34d499ccb52c4bc07726892",
+   "last_seen": 1794309656.2511952,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootc6415eb24911"
+  },
+  "ga4222d8990b0e25d85e8659545f173b3c8a355ce40895d1960cedc561bf538eb": {
+   "cost": 1.0,
+   "created": 1794308819.8627167,
+   "helped": 0,
+   "id": "ga4222d8990b0e25d85e8659545f173b3c8a355ce40895d1960cedc561bf538eb",
+   "last_seen": 1794308819.8627167,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root47d843f4d71b"
+  },
+  "ga5bb7dc6d342d3a85841c5908fded4ca7ff7968628947b631e46a524d823fa5a": {
+   "cost": 1.0,
+   "created": 1794308565.5227454,
+   "helped": 0,
+   "id": "ga5bb7dc6d342d3a85841c5908fded4ca7ff7968628947b631e46a524d823fa5a",
+   "last_seen": 1794308565.5227454,
+   "resolved": false,
+   "trials": 0,
+   "what": "per",
+   "why": "unknown_operator root3c23232f0010"
+  },
+  "ga7c56258f1e1a424d4cb8673447749be059164c85d5f32d630cccd63a6de0bc5": {
+   "cost": 1.0,
+   "created": 1794311414.971975,
+   "helped": 0,
+   "id": "ga7c56258f1e1a424d4cb8673447749be059164c85d5f32d630cccd63a6de0bc5",
+   "last_seen": 1794311414.971975,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root23143badd448"
+  },
+  "gaa734856610d98eceb2ad260f96faf31f139b609090550ae3e97211a423bf4de": {
+   "cost": 1.0,
+   "created": 1794308614.9448245,
+   "helped": 0,
+   "id": "gaa734856610d98eceb2ad260f96faf31f139b609090550ae3e97211a423bf4de",
+   "last_seen": 1794308614.9448245,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root0dec7c4d9be4"
+  },
+  "gafb91613a6ab194c5f59604cb003c7ea1680a9a0e5936c508595161a92641447": {
+   "cost": 1.0,
+   "created": 1794249830.0020382,
+   "helped": 0,
+   "id": "gafb91613a6ab194c5f59604cb003c7ea1680a9a0e5936c508595161a92641447",
+   "last_seen": 1794249830.0020382,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root2ff32b67ca95"
+  },
+  "gb8e655c8b42af14feb1ed8be2feb78575dd1737af24bebafd4e2114c3bb80e57": {
+   "cost": 1.0,
+   "created": 1794251110.687136,
+   "helped": 0,
+   "id": "gb8e655c8b42af14feb1ed8be2feb78575dd1737af24bebafd4e2114c3bb80e57",
+   "last_seen": 1794251110.687136,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator root8edf0f31628c"
+  },
+  "gbe93d01fbf840b64f60995e532f68513f70037bd75a164b059e8b3ca0fb4a8be": {
+   "cost": 1.0,
+   "created": 1794310004.3950593,
+   "helped": 0,
+   "id": "gbe93d01fbf840b64f60995e532f68513f70037bd75a164b059e8b3ca0fb4a8be",
+   "last_seen": 1794310004.3950593,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root3e20786dc57b"
+  },
+  "gbf0c362012c8d51d35371eda39f1a0d13c2a4bcf911dacddc4f4700e34c2280f": {
+   "cost": 1.0,
+   "created": 1794308839.0752587,
+   "helped": 0,
+   "id": "gbf0c362012c8d51d35371eda39f1a0d13c2a4bcf911dacddc4f4700e34c2280f",
+   "last_seen": 1794308839.0752587,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root1fe3e4f0cbc9"
+  },
+  "gbfe6e620177e6c2ac36d40156677fb2f022d34acb863c5dc13abf8d6c6137938": {
+   "cost": 1.0,
+   "created": 1794250193.8848312,
+   "helped": 0,
+   "id": "gbfe6e620177e6c2ac36d40156677fb2f022d34acb863c5dc13abf8d6c6137938",
+   "last_seen": 1794250193.8848312,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootd18f47e0d9b8"
+  },
+  "gc13b1bb7952e6256c9eea8f77819a0719c9d057d3e214ec6e64d4174dae55d99": {
+   "cost": 1.0,
+   "created": 1794309978.4643896,
+   "helped": 0,
+   "id": "gc13b1bb7952e6256c9eea8f77819a0719c9d057d3e214ec6e64d4174dae55d99",
+   "last_seen": 1794309978.4643896,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root8af9d60e3415"
+  },
+  "gc1a7ee2b5be79bc5356a2fe8f79be302e9d041f937b6df999a0710e6db69306d": {
+   "cost": 1.0,
+   "created": 1794308816.7283936,
+   "helped": 0,
+   "id": "gc1a7ee2b5be79bc5356a2fe8f79be302e9d041f937b6df999a0710e6db69306d",
+   "last_seen": 1794308816.7283936,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootaf203b336903"
+  },
+  "gc6650257ff676953a8ac9802ead7901864e3157e835449b150b21082b7d2a177": {
+   "cost": 1.0,
+   "created": 1794308570.873076,
+   "helped": 0,
+   "id": "gc6650257ff676953a8ac9802ead7901864e3157e835449b150b21082b7d2a177",
+   "last_seen": 1794308570.873076,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator roota80cfd4e5835"
+  },
+  "gc7e524dbdaf4fee608c668b328cbc0c2e120f7ce4306f4bd95ff3b2d24fc0d9d": {
+   "cost": 1.0,
+   "created": 1794308641.7130666,
+   "helped": 0,
+   "id": "gc7e524dbdaf4fee608c668b328cbc0c2e120f7ce4306f4bd95ff3b2d24fc0d9d",
+   "last_seen": 1794308641.7130666,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root6ed914ed06db"
+  },
+  "gcaafdb5417b458b24805eb969244e18050c7be9b9e39bcc638f705a0a4a03442": {
+   "cost": 1.0,
+   "created": 1794306016.654102,
+   "helped": 0,
+   "id": "gcaafdb5417b458b24805eb969244e18050c7be9b9e39bcc638f705a0a4a03442",
+   "last_seen": 1794306016.682681,
+   "resolved": false,
+   "trials": 0,
+   "what": "distinct",
+   "why": "unknown_operator root75c958e7a05e"
+  },
+  "gce4b8949b5be403b3ef0e7c5f7fa4a344f8d7dc5c2aa43ef8ee7e8fde94ecac6": {
+   "cost": 1.0,
+   "created": 1794308627.85762,
+   "helped": 0,
+   "id": "gce4b8949b5be403b3ef0e7c5f7fa4a344f8d7dc5c2aa43ef8ee7e8fde94ecac6",
+   "last_seen": 1794308627.85762,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root843fca2dcefb"
+  },
+  "gd0e5b8bb834388cf051eaae4ced921b61a4ebd730c96443b35c8454003d77054": {
+   "cost": 1.0,
+   "created": 1794309656.434378,
+   "helped": 0,
+   "id": "gd0e5b8bb834388cf051eaae4ced921b61a4ebd730c96443b35c8454003d77054",
+   "last_seen": 1794309656.434378,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root481cee66abbe"
+  },
+  "gd47d99d2da35b81f611b48de3817c05cf1ec30ba03e0c1ad6a0ca0264390e0e9": {
+   "cost": 1.0,
+   "created": 1794310978.478252,
+   "helped": 0,
+   "id": "gd47d99d2da35b81f611b48de3817c05cf1ec30ba03e0c1ad6a0ca0264390e0e9",
+   "last_seen": 1794310978.478252,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root362a7eb3e8e5"
+  },
+  "gdbe027b1d37a3ad242d2472d7e89061a814d01b61fc5c6ed45a69af339723b25": {
+   "cost": 1.0,
+   "created": 1794250297.0309007,
+   "helped": 0,
+   "id": "gdbe027b1d37a3ad242d2472d7e89061a814d01b61fc5c6ed45a69af339723b25",
+   "last_seen": 1794250297.0309007,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootcef191a83e29"
+  },
+  "gdc33c2371e85a95f921141b8cdd88891f50d02dacaca3a3694cd40c8e47670d8": {
+   "cost": 1.0,
+   "created": 1794249797.9455388,
+   "helped": 0,
+   "id": "gdc33c2371e85a95f921141b8cdd88891f50d02dacaca3a3694cd40c8e47670d8",
+   "last_seen": 1794249797.9455388,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root1ed7d8f29879"
+  },
+  "gdc61aa5bec32c754ae68671a591e3153f6b06e756f954037aaeb930b9874c3e2": {
+   "cost": 1.0,
+   "created": 1794308816.8746123,
+   "helped": 0,
+   "id": "gdc61aa5bec32c754ae68671a591e3153f6b06e756f954037aaeb930b9874c3e2",
+   "last_seen": 1794308816.8746123,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootc6eccc47768f"
+  },
+  "gdde46d43f0159f4994c2dcc79447bf93f1b8dc1462c08a5dca0c382bf8d43f52": {
+   "cost": 1.0,
+   "created": 1794306025.979816,
+   "helped": 0,
+   "id": "gdde46d43f0159f4994c2dcc79447bf93f1b8dc1462c08a5dca0c382bf8d43f52",
+   "last_seen": 1794306025.979816,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root48e59fa6c104"
+  },
+  "gde5bbd9a044338bfefb9197531b9823ab78946623f6fd7b4143725d78538170b": {
+   "cost": 1.0,
+   "created": 1794310074.4651968,
+   "helped": 0,
+   "id": "gde5bbd9a044338bfefb9197531b9823ab78946623f6fd7b4143725d78538170b",
+   "last_seen": 1794310074.4651968,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root9b52a70c5b49"
+  },
+  "gdf21bb373571f61010762254045341fd309d10d2afe5134b30d4ee35c65e31eb": {
+   "cost": 1.0,
+   "created": 1794308806.9889753,
+   "helped": 0,
+   "id": "gdf21bb373571f61010762254045341fd309d10d2afe5134b30d4ee35c65e31eb",
+   "last_seen": 1794308806.9889753,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootabdcac805ea7"
+  },
+  "ge27a6429cab3f631cd94d6da692e6cd7e541184cecc54ffa9cd795f5d4c9750c": {
+   "cost": 1.0,
+   "created": 1794308816.730997,
+   "helped": 0,
+   "id": "ge27a6429cab3f631cd94d6da692e6cd7e541184cecc54ffa9cd795f5d4c9750c",
+   "last_seen": 1794308816.730997,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootaf203b336903"
+  },
+  "ge2ac107713de65e9fbce93f2b9d721ad194e319361acce80efda15b593bbbdb3": {
+   "cost": 1.0,
+   "created": 1794308832.8644147,
+   "helped": 0,
+   "id": "ge2ac107713de65e9fbce93f2b9d721ad194e319361acce80efda15b593bbbdb3",
+   "last_seen": 1794308832.8644147,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootcb57853b086e"
+  },
+  "ge301987b190dee9a11b10ad62d53814cffade5123737f8e5b92045a39c577b73": {
+   "cost": 1.0,
+   "created": 1794309978.4612877,
+   "helped": 0,
+   "id": "ge301987b190dee9a11b10ad62d53814cffade5123737f8e5b92045a39c577b73",
+   "last_seen": 1794309978.4612877,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root8af9d60e3415"
+  },
+  "ge3317329b665e49131419c125b6386c3ffa2dcf47e352322da6a67d131bef8c4": {
+   "cost": 1.0,
+   "created": 1794310978.6389828,
+   "helped": 0,
+   "id": "ge3317329b665e49131419c125b6386c3ffa2dcf47e352322da6a67d131bef8c4",
+   "last_seen": 1794310978.6389828,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root975f0e7b26fa"
+  },
+  "ge3a34d597af92cfa87bdf41ce1308510e66ed07bf5cc37be546c73f34ba8bcb6": {
+   "cost": 1.0,
+   "created": 1794250269.1582434,
+   "helped": 0,
+   "id": "ge3a34d597af92cfa87bdf41ce1308510e66ed07bf5cc37be546c73f34ba8bcb6",
+   "last_seen": 1794250269.1582434,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootc3e10a9b771d"
+  },
+  "ge59ccfd669cf8942d98ae795e504fbc2279d1c132d436427ccb4ffa21edf8f8b": {
+   "cost": 1.0,
+   "created": 1794308570.876848,
+   "helped": 0,
+   "id": "ge59ccfd669cf8942d98ae795e504fbc2279d1c132d436427ccb4ffa21edf8f8b",
+   "last_seen": 1794308570.876848,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator roota80cfd4e5835"
+  },
+  "ge802b65a45f44466c393723b81c74629c71cc7048c5ab9b29998ba102a804a55": {
+   "cost": 1.0,
+   "created": 1794249830.0003066,
+   "helped": 0,
+   "id": "ge802b65a45f44466c393723b81c74629c71cc7048c5ab9b29998ba102a804a55",
+   "last_seen": 1794249830.0003066,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root2ff32b67ca95"
+  },
+  "geb6ea9277d4242ec822b3b2a670d300f786520fc6ed92c5640de0d21464014f5": {
+   "cost": 1.0,
+   "created": 1794308559.0482717,
+   "helped": 0,
+   "id": "geb6ea9277d4242ec822b3b2a670d300f786520fc6ed92c5640de0d21464014f5",
+   "last_seen": 1794308559.3275342,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root08ae736d5265"
+  },
+  "ged35b6aceae5572e5203c6aa3c0bd0300ba4b2ff7abb65099f176ae94f84c727": {
+   "cost": 1.0,
+   "created": 1794311180.102166,
+   "helped": 0,
+   "id": "ged35b6aceae5572e5203c6aa3c0bd0300ba4b2ff7abb65099f176ae94f84c727",
+   "last_seen": 1794311180.102166,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootedc834cc5116"
+  },
+  "geee41dfa05a5f71d13a160a7ec1a898327b5530b0229d8793ce2eefa34225d25": {
+   "cost": 1.0,
+   "created": 1794308806.9863765,
+   "helped": 0,
+   "id": "geee41dfa05a5f71d13a160a7ec1a898327b5530b0229d8793ce2eefa34225d25",
+   "last_seen": 1794308806.9863765,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootabdcac805ea7"
+  },
+  "gef5cbf98b4dcb2f4948ba016d6eacb7bcc898ac62aa50891e9d047f99bc906f4": {
+   "cost": 1.0,
+   "created": 1794308559.386862,
+   "helped": 0,
+   "id": "gef5cbf98b4dcb2f4948ba016d6eacb7bcc898ac62aa50891e9d047f99bc906f4",
+   "last_seen": 1794308559.386862,
+   "resolved": false,
+   "trials": 0,
+   "what": "per",
+   "why": "unknown_operator root08ae736d5265"
+  },
+  "gf08b0a0584d8d227c38215f5bdfbb19be9900fe8da93faea341a9d38781ab010": {
+   "cost": 1.0,
+   "created": 1794308641.710566,
+   "helped": 0,
+   "id": "gf08b0a0584d8d227c38215f5bdfbb19be9900fe8da93faea341a9d38781ab010",
+   "last_seen": 1794308641.710566,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root6ed914ed06db"
+  },
+  "gf52463df80ab7fdcdcd88a4ae6d3644385319656fa162b209a952a742ac87746": {
+   "cost": 1.0,
+   "created": 1794309931.3335385,
+   "helped": 0,
+   "id": "gf52463df80ab7fdcdcd88a4ae6d3644385319656fa162b209a952a742ac87746",
+   "last_seen": 1794309959.86409,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator root1919fd7ca899"
+  },
+  "gf7b3cb6df61897daa3977ae1154c14c8d8212ef3f9b011377f9c16917893ec21": {
+   "cost": 1.0,
+   "created": 1794308853.6563885,
+   "helped": 0,
+   "id": "gf7b3cb6df61897daa3977ae1154c14c8d8212ef3f9b011377f9c16917893ec21",
+   "last_seen": 1794308853.6563885,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator rootbd37383323a1"
+  },
+  "gf9eec1fe3882f6c5318ffcf5109e3b1e13164f02f6cbb28853c21ace7b6caffa": {
+   "cost": 1.0,
+   "created": 1794308603.5495362,
+   "helped": 0,
+   "id": "gf9eec1fe3882f6c5318ffcf5109e3b1e13164f02f6cbb28853c21ace7b6caffa",
+   "last_seen": 1794308603.5495362,
+   "resolved": false,
+   "trials": 0,
+   "what": "bytes",
+   "why": "unknown_operator root8199b8ee9ef6"
+  },
+  "gfab04f2addbfcc455fb6db60e9811a5f994b1a53a391068b92e44e77933e4e98": {
+   "cost": 1.0,
+   "created": 1794251108.8818715,
+   "helped": 0,
+   "id": "gfab04f2addbfcc455fb6db60e9811a5f994b1a53a391068b92e44e77933e4e98",
+   "last_seen": 1794251108.8818715,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root28e4d083ec35"
+  },
+  "gfbcbbb127f9c902140759c6033c6ff524f2b492caf904b7abf06f2215a0bacac": {
+   "cost": 1.0,
+   "created": 1794308615.1263003,
+   "helped": 0,
+   "id": "gfbcbbb127f9c902140759c6033c6ff524f2b492caf904b7abf06f2215a0bacac",
+   "last_seen": 1794308615.1263003,
+   "resolved": false,
+   "trials": 0,
+   "what": "words",
+   "why": "unknown_operator root8ad00e52216a"
+  },
+  "gfe31a176909187f12c93f85a9bba4f72bc13dd73cc64f21b96f0272a2c5bfee7": {
+   "cost": 1.0,
+   "created": 1794250298.9508023,
+   "helped": 0,
+   "id": "gfe31a176909187f12c93f85a9bba4f72bc13dd73cc64f21b96f0272a2c5bfee7",
+   "last_seen": 1794250298.9508023,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator root3d6dc0adb0af"
+  },
+  "gfec46656e3a3640581daf9f00b6d0906ebd5071c99f7a347e84bf0c04a10cfcb": {
+   "cost": 1.0,
+   "created": 1794310755.2013102,
+   "helped": 0,
+   "id": "gfec46656e3a3640581daf9f00b6d0906ebd5071c99f7a347e84bf0c04a10cfcb",
+   "last_seen": 1794310755.2013102,
+   "resolved": false,
+   "trials": 0,
+   "what": "unique",
+   "why": "unknown_operator rootef8408c6717e"
   }
  },
  "schema": "PROJECT_BRAIN_IGNORANCE_LEDGER_V1"
