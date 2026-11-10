@@ -1129,6 +1129,93 @@ def verify_operation_commitment(
         return True, f"OPERATION_COMMITTED:{token}"
     return False, f"OPERATION_NOT_HONOURED__ASKED_FOR_{token}"
 
+
+# --------------------------------------------------------------------------------------------
+# r62: ASK ONLY WHEN THE ANSWER WOULD DIFFER.
+#
+# Measured: two tied operations do not always disagree on the input in front of them.
+#
+#     file WITH duplicates : sort -> [a,b,z,z]   sort -u -> [a,b,z]   tie MATTERS
+#     file with NO duplicates: sort -> [a,b,z]   sort -u -> [a,b,z]   tie is EMPTY
+#
+# Asking in the second case is friction with no information behind it. 2026 measures this as
+# over-clarification and treats it as a defect in its own right (the Entity Binding paper
+# reports 0.0% over-clarification and calls the absence important).
+#
+# So: when the top of the candidate list is tied, evaluate every tied operation on the real
+# input and compare the answers. If they agree, the choice does not exist and either may be
+# returned -- reported as decided by equivalence, so no downstream reader mistakes it for a
+# retrieval win. If they disagree, ask, and now the question is demonstrably load-bearing.
+#
+# BOUNDED ON PURPOSE. Only read-only carried steps are evaluated: an operation that writes
+# cannot be run for comparison, because comparing it would perform it. `_steps_are_all_carried`
+# is the existing read-only guarantee and is the gate used here, not a new one.
+# --------------------------------------------------------------------------------------------
+
+
+def answer_by_equivalence(
+    goal: str,
+    *,
+    cwd: str | pathlib.Path | None = None,
+    db_path: pathlib.Path | None = None,
+) -> dict[str, Any] | None:
+    """Return an ANSWERED record when all tied operations agree; else None.
+
+    None means "the tie is real" -- the caller asks. It never means the comparison failed
+    quietly: every failure mode returns None, and None is the safe direction.
+    """
+    words = {w for w in re.findall(r"[a-z0-9]{2,}", goal.lower()) if w not in _STOP_WORDS}
+    rows = [r for r in _load_cached_skills(db_path=db_path) if isinstance(r, Mapping)]
+    scored: list[tuple[int, Mapping[str, Any]]] = []
+    for row in rows:
+        header = str(row.get("goal_skeleton") or "").split("?")[0]
+        row_words = {w for w in re.findall(r"[a-z0-9]{2,}", header.lower())
+                     if w not in _STOP_WORDS}
+        scored.append((len(words & row_words), row))
+    if not scored:
+        return None
+    best = max(sc for sc, _ in scored)
+    top = [r for sc, r in scored if sc == best]
+    by_sig: dict[str, Mapping[str, Any]] = {}
+    for row in top:
+        by_sig.setdefault(_operation_signature(row), row)
+    if len(by_sig) < 2:
+        return None
+
+    outcomes: list[tuple[str, Any, Mapping[str, Any], Mapping[str, Any]]] = []
+    for sig, skill in by_sig.items():
+        bindings = _bind_by_verb_selection(skill, goal, cwd)
+        if bindings is None:
+            return None
+        steps = _instantiate_obj(skill["abstract_steps"], bindings)
+        if not _steps_are_all_carried(steps):
+            # a writer cannot be compared by running it
+            return None
+        res = execute_compiled_steps(steps, cwd=cwd)
+        if not res.get("ok"):
+            return None
+        ok, _why = verify_postcondition(skill.get("abstract_postcondition"),
+                                        cwd=cwd, execution_result=res)
+        if not ok:
+            return None
+        outcomes.append((sig, _contract_answer(skill.get("abstract_postcondition"), res), skill, res))
+
+    answers = [a for _s, a, _k, _r in outcomes]
+    if any(a != answers[0] for a in answers[1:]):
+        return None
+    sig, ans, skill, res = outcomes[0]
+    return {
+        "answer": ans,
+        "skill_id": skill.get("skill_id"),
+        "operation": sig,
+        "decided_by": "EXTENSIONAL_EQUIVALENCE",
+        "compared": [s for s, _a, _k, _r in outcomes],
+        "note": ("every tied operation returns the same answer on this input, so the choice "
+                 "does not exist here. This is not a selection win and must not be counted "
+                 "as one."),
+        "result": res,
+    }
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
@@ -3146,6 +3233,13 @@ def answer_or_ask(
                                                                "operation": _op,
                                                                "skill_id": _sid},
                                 "result": _res}
+    # r62: a tie that produces the same answer on this input is not a choice.
+    _eq = answer_by_equivalence(goal, cwd=cwd, db_path=db_path)
+    if _eq is not None:
+        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED", "answer": _eq["answer"],
+                "decided_by": _eq["decided_by"], "compared": _eq["compared"],
+                "learned_from_clarification": None, "result": _eq["result"],
+                "note": _eq["note"]}
     ask = select_or_ask(goal, db_path=db_path)
     if ask.get("verdict") == "SELECTED":
         # selected uniquely but execution failed; say so rather than offering a menu
