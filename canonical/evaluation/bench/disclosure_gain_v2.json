@@ -1,0 +1,66 @@
+[
+ {
+  "task": "click-collapsible-2",
+  "literal": "vulputate",
+  "reveals": 3,
+  "cumulative_names": 3,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "click-collapsible-2-nodelay",
+  "literal": "et",
+  "reveals": 3,
+  "cumulative_names": 3,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "click-tab-2",
+  "literal": "mollis",
+  "reveals": 3,
+  "cumulative_names": 3,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "click-tab-2-easy",
+  "literal": "elit",
+  "reveals": 1,
+  "cumulative_names": 1,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "click-tab-2-hard",
+  "literal": "at",
+  "reveals": 2,
+  "cumulative_names": 2,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "click-tab-2-medium",
+  "literal": "urna",
+  "reveals": 2,
+  "cumulative_names": 2,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "navigate-tree",
+  "literal": "Donovan",
+  "reveals": 2,
+  "cumulative_names": 0,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ },
+ {
+  "task": "search-engine",
+  "literal": "Joye",
+  "reveals": 5,
+  "cumulative_names": 14,
+  "on_screen_t0": false,
+  "found_after_reveal": false
+ }
+]

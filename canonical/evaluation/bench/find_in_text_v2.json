@@ -1,0 +1,130 @@
+[
+ {
+  "task": "click-collapsible-2",
+  "literal": "est",
+  "found": true,
+  "reveals": 1,
+  "hit_role": "StaticText",
+  "hit": "Faucibus. Congue egestas nibh est velit "
+ },
+ {
+  "task": "click-collapsible-2-nodelay",
+  "literal": "arcu",
+  "found": true,
+  "reveals": 1,
+  "hit_role": "StaticText",
+  "hit": " arcu tellus viverra risus, "
+ },
+ {
+  "task": "click-tab-2",
+  "literal": "convallis",
+  "found": true,
+  "reveals": 3,
+  "hit_role": "StaticText",
+  "hit": "Convallis"
+ },
+ {
+  "task": "click-tab-2-easy",
+  "literal": "lectus",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "lectus."
+ },
+ {
+  "task": "click-tab-2-hard",
+  "literal": "placerat",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "Placerat"
+ },
+ {
+  "task": "click-tab-2-medium",
+  "literal": "leo",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "leo."
+ },
+ {
+  "task": "navigate-tree",
+  "literal": "kenda",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "Kenda"
+ },
+ {
+  "task": "search-engine",
+  "literal": "keli",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "Keli"
+ },
+ {
+  "task": "click-pie",
+  "literal": "s",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "S"
+ },
+ {
+  "task": "click-pie-nodelay",
+  "literal": "d",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "Expand the pie menu below and click on t"
+ },
+ {
+  "task": "social-media",
+  "literal": "retweet",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "Retweet"
+ },
+ {
+  "task": "click-dialog",
+  "literal": "x",
+  "found": false,
+  "reveals": 1,
+  "hit_role": null,
+  "hit": null
+ },
+ {
+  "task": "click-dialog-2",
+  "literal": "x",
+  "found": false,
+  "reveals": 1,
+  "hit_role": null,
+  "hit": null
+ },
+ {
+  "task": "click-link",
+  "literal": "scelerisque",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "scelerisque"
+ },
+ {
+  "task": "email-inbox-important",
+  "literal": "",
+  "found": false,
+  "reveals": 0,
+  "hit_role": null,
+  "hit": null
+ },
+ {
+  "task": "click-menu-2",
+  "literal": "menu",
+  "found": true,
+  "reveals": 0,
+  "hit_role": "StaticText",
+  "hit": "Click the \"Menu\" button, and then find a"
+ }
+]

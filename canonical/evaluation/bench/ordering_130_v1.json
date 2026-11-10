@@ -1,0 +1,1738 @@
+[
+ {
+  "task": "ascending-numbers",
+  "goal": "Click on the numbers in ascending order.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "bisect-angle",
+  "goal": "Create a line that bisects the angle evenly in two, then press submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "book-flight",
+  "goal": "Book the cheapest one-way flight from: Scranton, PA to: DTW on 11/24/2016.",
+  "literal": null,
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "status",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "book-flight-nodelay",
+  "goal": "Book the cheapest one-way flight from: MRY to: San Juan, Puerto Rico on 11/13/2016.",
+  "literal": null,
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "status",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "button-delay",
+  "goal": "Click button ONE, wait 3 seconds, then click button TWO.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "buy-ticket",
+  "goal": "Buy the ticket with the most expensive cost.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "chase-circle",
+  "goal": "Keep your mouse inside the circle as it moves around.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "choose-date",
+  "goal": "Select 04/09/2016 as the date and hit submit.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "choose-date-easy",
+  "goal": "Select 12/17/2016 as the date and hit submit.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "choose-date-medium",
+  "goal": "Select 12/16/2016 as the date and hit submit.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "choose-date-nodelay",
+  "goal": "Select 10/27/2016 as the date and hit submit.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "choose-list",
+  "goal": "Select Kenya from the list and click Submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "combobox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "circle-center",
+  "goal": "Find and click on the center of the circle, then press submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-button",
+  "goal": "Click on the \"yes\" button.",
+  "literal": "yes",
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": true
+ },
+ {
+  "task": "click-button-sequence",
+  "goal": "Click button ONE, then click button TWO.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-checkboxes",
+  "goal": "Select qRco, sOfDG and click Submit.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-checkboxes-large",
+  "goal": "Select BfW, 0Mfa, hYT, 0LwY, pwgKi8N, rCkPti, 1t7he, OqPY and click Submit.",
+  "literal": null,
+  "nodes": 29,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-checkboxes-soft",
+  "goal": "Select words similar to rabbit, tiny, weird, kill, house and click Submit.",
+  "literal": null,
+  "nodes": 19,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-checkboxes-transfer",
+  "goal": "Select q2h3 and click Submit.",
+  "literal": null,
+  "nodes": 19,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "checkbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-collapsible",
+  "goal": "Expand the section below and click submit.",
+  "literal": null,
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "tab",
+   "tablist"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-collapsible-2",
+  "goal": "Expand the sections below, to find and click on the link \"faucibus\".",
+  "literal": "faucibus",
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "tab",
+   "tablist"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-collapsible-2-nodelay",
+  "goal": "Expand the sections below, to find and click on the link \"lacus,\".",
+  "literal": "lacus,",
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "tab",
+   "tablist"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-collapsible-nodelay",
+  "goal": "Expand the section below and click submit.",
+  "literal": null,
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "tab",
+   "tablist"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-color",
+  "goal": "Click on the  colored box.",
+  "literal": null,
+  "nodes": 5,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-dialog",
+  "goal": "Close the dialog box by clicking the \"x\".",
+  "literal": "x",
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "dialog",
+   "paragraph"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-dialog-2",
+  "goal": "Click the button in the dialog box labeled \"x\".",
+  "literal": "x",
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "dialog",
+   "paragraph"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-link",
+  "goal": "Click on the link \"eu,\".",
+  "literal": "eu,",
+  "nodes": 5,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-menu",
+  "goal": "Select Wynn>Hope",
+  "literal": null,
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "menu",
+   "menuitem"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-menu-2",
+  "goal": "Click the \"Menu\" button, and then find and click on the item with the  icon.",
+  "literal": "Menu",
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": true
+ },
+ {
+  "task": "click-option",
+  "goal": "Select 8ijC and click Submit.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "radio"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-pie",
+  "goal": "Expand the pie menu below and click on the item labeled \"5\".",
+  "literal": "5",
+  "nodes": 15,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-pie-nodelay",
+  "goal": "Expand the pie menu below and click on the item labeled \"n\".",
+  "literal": "n",
+  "nodes": 21,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-scroll-list",
+  "goal": "Select Central African Republic, Zimbabwe from the scroll list and click Submit.",
+  "literal": null,
+  "nodes": 15,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "listbox",
+   "option"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-shades",
+  "goal": "Select all the shades of blue and press Submit.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-shape",
+  "goal": "Click on a A",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-tab",
+  "goal": "Click on Tab #2.",
+  "literal": null,
+  "nodes": 14,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-tab-2",
+  "goal": "Switch between the tabs to find and click on the link \"eget\".",
+  "literal": "eget",
+  "nodes": 14,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-tab-2-easy",
+  "goal": "Switch between the tabs to find and click on the link \"nisl\".",
+  "literal": "nisl",
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-tab-2-hard",
+  "goal": "Switch between the tabs to find and click on the link \"vitae,\".",
+  "literal": "vitae,",
+  "nodes": 16,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-tab-2-medium",
+  "goal": "Switch between the tabs to find and click on the link \"Egestas\".",
+  "literal": "Egestas",
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "link",
+   "paragraph",
+   "tab",
+   "tablist",
+   "tabpanel"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "click-test",
+  "goal": "Click the button.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-test-2",
+  "goal": "Click button ONE.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-test-transfer",
+  "goal": "Click button ONE.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "click-widget",
+  "goal": "Click on a \"textarea\" widget.",
+  "literal": "textarea",
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "checkbox",
+   "radio",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "copy-paste",
+  "goal": "Copy the text in the textarea below, paste it into the textbox and press Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "copy-paste-2",
+  "goal": "Copy the text from the 3rd text area below and paste it into the text input, then press Submit.",
+  "literal": null,
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "count-shape",
+  "goal": "How many black items are there?",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "count-sides",
+  "goal": "Press the button that correctly denotes how many sides the shape has.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "daily-calendar",
+  "goal": "Create a 1.5 hours event named \"Meeting\", between 12PM and 4PM.",
+  "literal": "Meeting",
+  "nodes": 5,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "drag-box",
+  "goal": "Drag the smaller box so that it is completely inside the larger box.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-circle",
+  "goal": "Drag the circle right then press Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-cube",
+  "goal": "Move the cube around so that \"2\" is the active side facing the user.",
+  "literal": "2",
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "drag-items",
+  "goal": "Drag Aurel to the 5th position.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "list",
+   "listitem"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-items-grid",
+  "goal": "Drag Dorothea to the center right.",
+  "literal": null,
+  "nodes": 15,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "list",
+   "listitem"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-shapes",
+  "goal": "Drag all triangles into the black box.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-shapes-2",
+  "goal": "Drag all triangles into the left box, and everything else into the right box.",
+  "literal": null,
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-single-shape",
+  "goal": "Drag the item down then press Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "drag-sort-numbers",
+  "goal": "Sort the numbers in increasing order, starting with the lowest number at the top of the list.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "list",
+   "listitem"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "draw-circle",
+  "goal": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "draw-line",
+  "goal": "Draw a horizontal line that runs through the dot, then press submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox",
+  "goal": "Find the email by Beverlie and forward that email to Polly.",
+  "literal": null,
+  "nodes": 23,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-delete",
+  "goal": "Find the email by Renell and click the trash icon to delete it.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-forward",
+  "goal": "Find the email by Bird and forward that email to Dulcie.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-forward-nl",
+  "goal": "Coletta wants the email you got from Kristan.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-forward-nl-turk",
+  "goal": "Please send Doralyn Suzann's email.",
+  "literal": null,
+  "nodes": 15,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-important",
+  "goal": "Find the email by Terza and click the star icon to mark it as important.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-nl-turk",
+  "goal": "Copy the email from Virginie and send it to Tabbatha.",
+  "literal": null,
+  "nodes": 27,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-noscroll",
+  "goal": "Find the email by Noami and forward that email to Ramona.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "email-inbox-reply",
+  "goal": "Find the email by Madge and reply to them with the text \"Id. Blandit. Proin ridiculus.\".",
+  "literal": "Id. Blandit. Proin ridiculus.",
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "email-inbox-star-reply",
+  "goal": "Find the email by Alfie and click the star icon to mark it as important.",
+  "literal": null,
+  "nodes": 13,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "enter-date",
+  "goal": "Enter 10/18/2015 as the date and hit submit.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "Date",
+   "LabelText",
+   "button",
+   "spinbutton"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "enter-password",
+  "goal": "Enter the password \"paOyp\" into both text fields and press submit.",
+  "literal": "paOyp",
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "enter-text",
+  "goal": "Enter \"Leonie\" into the text field and press Submit.",
+  "literal": "Leonie",
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "enter-text-2",
+  "goal": "Type \"livia\" in all upper case letters in the text input and press Submit.",
+  "literal": "livia",
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "enter-text-dynamic",
+  "goal": "Enter \"GnK\" into the text field and press Submit.",
+  "literal": "GnK",
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "enter-time",
+  "goal": "Enter 11:19 PM as the time and press submit.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "InputTime",
+   "LabelText",
+   "button",
+   "spinbutton"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "find-greatest",
+  "goal": "Find and pick the card with the greatest number, then press submit.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "find-midpoint",
+  "goal": "Find and click on the shortest mid-point between the two points, then press submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "find-word",
+  "goal": "Find the 4th word in the paragraph, type that into the textbox and press \"Submit\".",
+  "literal": "Submit",
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": true
+ },
+ {
+  "task": "focus-text",
+  "goal": "Focus into the textbox.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "focus-text-2",
+  "goal": "Focus into the 2nd input textbox.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "form-sequence",
+  "goal": "Select 1 with the slider, click the 3rd checkbox, then hit Submit.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "checkbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "form-sequence-2",
+  "goal": "Check the 1st radio button and enter the number \"10\" into the 2nd textbox.",
+  "literal": "10",
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "radio",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "form-sequence-3",
+  "goal": "Choose 6 ft from the dropdown, then click the button labeled \"Yes\".",
+  "literal": "Yes",
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "combobox",
+   "textbox"
+  ],
+  "on_screen_at_t0": true
+ },
+ {
+  "task": "generate-number",
+  "goal": "Generate a number greater than 3, then press submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "grid-coordinate",
+  "goal": "Click on the grid coordinate (1,2).",
+  "literal": null,
+  "nodes": 31,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "graphics-symbol"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "guess-number",
+  "goal": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "form",
+   "spinbutton"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "highlight-text",
+  "goal": "Highlight the text in the paragraph below and click submit.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "highlight-text-2",
+  "goal": "Highlight the text in the 3rd paragraph and click submit.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "hot-cold",
+  "goal": "Find and click on the HOT area.",
+  "literal": null,
+  "nodes": 5,
+  "roles": [
+   "Canvas",
+   "LabelText"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "hover-shape",
+  "goal": "Keep the mouse hovered over the colored square.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "identify-shape",
+  "goal": "Click the button that best describes the figure below.",
+  "literal": null,
+  "nodes": 11,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "SvgRoot",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "login-user",
+  "goal": "Enter the username \"chas\" and the password \"HT\" into the text fields and press login.",
+  "literal": "chas",
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "login-user-popup",
+  "goal": "Enter the username \"leonie\" and the password \"K1o\" into the text fields and press login.",
+  "literal": "leonie",
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "paragraph",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "moving-items",
+  "goal": "Click as many moving circles as possible.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "multi-layouts",
+  "goal": "Search for comedy movies directed by Washington from year 1985.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "multi-orderings",
+  "goal": "Search for romance movies directed by Buckner from year 2001.",
+  "literal": null,
+  "nodes": 18,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "cell",
+   "row",
+   "rowheader",
+   "table",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "navigate-tree",
+  "goal": "Navigate through the file tree. Find and click on the folder or file named \"Kenda\".",
+  "literal": "Kenda",
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "list",
+   "listitem"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "number-checkboxes",
+  "goal": "Draw the number \"2\" in the checkboxes using the example on the right and press Submit when finished.",
+  "literal": "2",
+  "nodes": 50,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "checkbox",
+   "complementary",
+   "image",
+   "paragraph"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "odd-or-even",
+  "goal": "Mark the numbers below as odd or even and press submit when done.",
+  "literal": null,
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "order-food",
+  "goal": "Order 2 items that are dairy",
+  "literal": null,
+  "nodes": 29,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "phone-book",
+  "goal": "Find Carilyn in the contact book and click on their phone number.",
+  "literal": null,
+  "nodes": 14,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "heading",
+   "link",
+   "list",
+   "listitem"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "read-table",
+  "goal": "Enter the value of Language into the text field and press Submit.",
+  "literal": null,
+  "nodes": 23,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "cell",
+   "row",
+   "table",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "read-table-2",
+  "goal": "Enter the value that corresponds with each label into the form and submit when done.",
+  "literal": null,
+  "nodes": 26,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "cell",
+   "row",
+   "table",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "resize-textarea",
+  "goal": "Resize the textarea so that the height is smaller than its initial size then press Submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "right-angle",
+  "goal": "Add a third point to create a right angle, then press submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "scroll-text",
+  "goal": "Find the last word in the text area, enter it into the text field and hit Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "scroll-text-2",
+  "goal": "Scroll the textarea to the top of the text hit submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "search-engine",
+  "goal": "Use the textbox to enter \"Riley\" and press \"Search\", then find and click the 4th search result.",
+  "literal": "Riley",
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "list",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "sign-agreement",
+  "goal": "Scroll to the bottom of the textarea, enter the name \"Truman\" then press \"Cancel\"",
+  "literal": "Truman",
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "heading",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "simon-says",
+  "goal": "Push the buttons in the order displayed.",
+  "literal": null,
+  "nodes": 10,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "simple-algebra",
+  "goal": "Solve for x and type your answer into the textbox. Press Submit when done.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "simple-arithmetic",
+  "goal": "Solve the math problem and type your answer into the textbox. Press submit when done.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "social-media",
+  "goal": "For the user @suscipit, click on the \"Copy link to Tweet\" button.",
+  "literal": "Copy link to Tweet",
+  "nodes": 25,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "social-media-all",
+  "goal": "Click the \"Like\" button on all posts by @vitae and then click Submit.",
+  "literal": "Like",
+  "nodes": 43,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image",
+   "paragraph"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "social-media-some",
+  "goal": "Click the \"Retweet\" button on 3 posts by @myron and then click Submit.",
+  "literal": "Retweet",
+  "nodes": 43,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image",
+   "paragraph"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "stock-market",
+  "goal": "Buy MKS stock when the price is less than $27.40.",
+  "literal": null,
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "terminal",
+  "goal": "Use the terminal below to delete a file ending with the extension .gpg",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "text-editor",
+  "goal": "Using the text editor, give the text Eget the color orange.",
+  "literal": null,
+  "nodes": 14,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "image",
+   "paragraph"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "text-transform",
+  "goal": "Type the text below into the text field and press Submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "tic-tac-toe",
+  "goal": "Playing as 'X', win a game of tic-tac-toe.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "image"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "unicode-test",
+  "goal": "Click on the \"\u00c5\u008f\u2013\u00e6\u00b6\u02c6\" button.",
+  "literal": "\u00c5\u008f\u2013\u00e6\u00b6\u02c6",
+  "nodes": 12,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": true
+ },
+ {
+  "task": "use-autocomplete",
+  "goal": "Enter an item that starts with \"Pala\" and ends with \"au\".",
+  "literal": "Pala",
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "status",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "use-autocomplete-nodelay",
+  "goal": "Enter an item that starts with \"Sou\".",
+  "literal": "Sou",
+  "nodes": 9,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "status",
+   "textbox"
+  ],
+  "on_screen_at_t0": false
+ },
+ {
+  "task": "use-colorwheel",
+  "goal": "Select teal with the color picker and hit Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "use-colorwheel-2",
+  "goal": "Select the following color  with the color picker and hit Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "LineBreak",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "use-slider",
+  "goal": "Select 4 with the slider and hit Submit.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "use-slider-2",
+  "goal": "Set the sliders to the combination [15,8,20] and submit.",
+  "literal": null,
+  "nodes": 6,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "use-spinner",
+  "goal": "Select 8 with the spinner and hit Submit.",
+  "literal": null,
+  "nodes": 8,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "spinbutton"
+  ],
+  "on_screen_at_t0": null
+ },
+ {
+  "task": "visual-addition",
+  "goal": "Type the total number of blocks into the textbox and press Submit.",
+  "literal": null,
+  "nodes": 7,
+  "roles": [
+   "Canvas",
+   "LabelText",
+   "button",
+   "textbox"
+  ],
+  "on_screen_at_t0": null
+ }
+]

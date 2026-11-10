@@ -1,0 +1,114 @@
+[
+ {
+  "task": "click-collapsible-2",
+  "literal": "eget",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 3,
+  "hit": "Eget"
+ },
+ {
+  "task": "click-collapsible-2-nodelay",
+  "literal": "eget",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 3,
+  "hit": " Velit. Diam eget nascetur tellus, suspe"
+ },
+ {
+  "task": "click-tab-2",
+  "literal": "eget",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 2,
+  "hit": "eget."
+ },
+ {
+  "task": "click-tab-2-easy",
+  "literal": "aliquam",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "aliquam"
+ },
+ {
+  "task": "click-tab-2-hard",
+  "literal": "urna",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "urna"
+ },
+ {
+  "task": "click-tab-2-medium",
+  "literal": "eros",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "eros,"
+ },
+ {
+  "task": "navigate-tree",
+  "literal": "keneth",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 1,
+  "hit": "Keneth"
+ },
+ {
+  "task": "search-engine",
+  "literal": "dannie",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "Dannie"
+ },
+ {
+  "task": "click-pie",
+  "literal": "q",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "Q"
+ },
+ {
+  "task": "click-pie-nodelay",
+  "literal": "5",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "5"
+ },
+ {
+  "task": "social-media",
+  "literal": "share via dm",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "Share via DM"
+ },
+ {
+  "task": "click-dialog",
+  "literal": "x",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "Close the dialog box by clicking the \"x\""
+ },
+ {
+  "task": "email-inbox-important",
+  "literal": "",
+  "found_t0": null,
+  "found_after": false,
+  "reveals": 0,
+  "hit": null
+ },
+ {
+  "task": "click-link",
+  "literal": "scelerisque",
+  "found_t0": null,
+  "found_after": true,
+  "reveals": 0,
+  "hit": "Click on the link \"scelerisque\"."
+ }
+]
