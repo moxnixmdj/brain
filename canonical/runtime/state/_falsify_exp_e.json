@@ -1,0 +1,15 @@
+{
+ "cells": {
+  "falsify.cap|bound_pypi_install_failed": {
+   "first_seen": 1794307587.8341699,
+   "last_seen": 1.0,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "falsify.cap",
+   "why": "BOUND_PYPI_INSTALL_FAILED"
+  }
+ },
+ "resolutions": {}
+}

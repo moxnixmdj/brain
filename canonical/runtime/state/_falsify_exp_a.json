@@ -1,0 +1,22 @@
+{
+ "cells": {
+  "falsify.cap|always_fails": {
+   "first_seen": 1794307582.9337766,
+   "last_seen": 1794307582.9355748,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "falsify.cap",
+   "why": "always_fails"
+  }
+ },
+ "resolutions": {}
+}

@@ -533,6 +533,16 @@
    "where": "python.task.acceptance.measured.objective.v1",
    "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
   },
+  "software.hardcore.final.supercomposer.v1|failed": {
+   "first_seen": 1794307583.0314386,
+   "last_seen": 1794307583.0314415,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "software.hardcore.final.supercomposer.v1",
+   "why": "FAILED"
+  },
   "source.evidence.extract.objective_grounded.stdlib|source.candidate.provenance.verified": {
    "first_seen": 1792314706.0934482,
    "last_seen": 1792322665.8220468,

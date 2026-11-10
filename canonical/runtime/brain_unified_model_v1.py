@@ -64,6 +64,84 @@ STOPWORDS = frozenset(
 )
 TOKEN_CHARS = set("abcdefghijklmnopqrstuvwxyz0123456789_+.-")
 
+def _public_benchmark() -> dict[str, Any]:
+    """The recorded public-benchmark result, read from the governance record.
+
+    Deliberately NOT recomputed on every status call: the number should come from the
+    signed record, not from a fresh run that could drift from it.
+    """
+    try:
+        p = (Path(__file__).resolve().parents[2]
+             / "canonical/governance/ARC_PUBLIC_BENCHMARK_RESULT_20261109_V1.json")
+        d = json.loads(p.read_text())
+        r = d.get("result") or {}
+        return {
+            "benchmark": (d.get("benchmark") or {}).get("name"),
+            "tasks": r.get("tasks"),
+            "solved": r.get("solved"),
+            "accuracy_pct": r.get("accuracy_pct"),
+            "trained_parameters": r.get("trained_parameters"),
+            "external_model_calls": r.get("external_model_calls"),
+            "source_record": "canonical/governance/ARC_PUBLIC_BENCHMARK_RESULT_20261109_V1.json",
+            "note": "NOT_A_PARITY_CLAIM__200_of_400_public_tasks__reported_as_it_fell",
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {"error": str(exc)[:120]}
+
+
+def _reachability_gap() -> dict[str, Any]:
+    """How much of the repository this model can reach, computed, never assumed.
+
+    Cheap: `git ls-files` once, compared against the artifact's own `source_index`.
+    Reported as counts so the number cannot drift away from the truth.
+    """
+    try:
+        import subprocess
+
+        root = Path(__file__).resolve().parents[2]
+        out = subprocess.run(["git", "ls-files"], cwd=root, capture_output=True,
+                             text=True, timeout=20)
+        tracked = [p for p in out.stdout.splitlines() if p]
+        indexed = set()
+        with open(root / DEFAULT_ARTIFACT, encoding="utf-8") as fh:
+            art = json.load(fh)
+        for e in art.get("source_index") or []:
+            if e.get("path"):
+                indexed.add(e["path"])
+        research = set()
+        for e in art.get("research_index") or []:
+            if e.get("path"):
+                research.add(e["path"])
+        knowledge = set()
+        for e in art.get("knowledge") or []:
+            if e.get("path"):
+                knowledge.add(e["path"])
+        reachable = indexed | research | knowledge
+        laws = [p for p in tracked if "action_intents" in p]
+        unreachable = [p for p in tracked if p not in reachable]
+        # how many of the UNREACHABLE files carry real signals, so the gap has a weight
+        try:
+            import sys as _sys
+            _sys.path.insert(0, str(root))
+            from canonical.runtime import census_every_valuable_thing_v1 as _c
+            priced = _c.price(unreachable, {"paths": reachable}) if len(unreachable) < 20000 else []
+            weight = len([r for r in priced if r["score"] > 0])
+        except Exception:  # noqa: BLE001
+            weight = None
+        return {
+            "files_tracked": len(tracked),
+            "reachable_any_way": len(tracked) - len(unreachable),
+            "files_not_reachable": len(unreachable),
+            "unreachable_with_real_signals": weight,
+            "laws_present": len(laws),
+            "laws_reachable": len([p for p in laws if p in reachable]),
+            "note": ("REACHABLE_MEANS_ADDRESSABLE_NOT_EXECUTABLE__a law can be recalled "
+                     "by its own words; it is never reachable through solve()"),
+        }
+    except Exception as exc:  # noqa: BLE001 - a status call must never fail
+        return {"error": str(exc)[:160], "note": "reachability could not be computed"}
+
+
 NON_CLAIMS = (
     "NOT_A_TRAINED_NEURAL_NETWORK__CONTAINS_NO_WEIGHTS",
     "NOT_AN_INDEPENDENT_VERIFICATION__SANDBOX_MEASUREMENT_ONLY",
@@ -478,6 +556,17 @@ class UnifiedModel:
                 "routing_tokens": len(self.index),
             },
             "source_index_is_addressable_not_executable": True,
+            # ---- WHAT THIS MODEL CANNOT SEE ------------------------------------
+            # The one model indexes 1,948 of the repository's runtime modules. Every
+            # other tracked file -- including all 780 action-intent LAWS, each with its
+            # causal blocker, measurement, falsification and stop condition -- is
+            # outside it. Stating that here is not decoration: a model that reports its
+            # own numbers without its own blind spot is reporting half a status.
+            "reachability": _reachability_gap(),
+            # ---- THE ONE PUBLIC BENCHMARK NUMBER THIS SYSTEM HAS -----------------
+            # Every other performance figure in this project is a self-report. This one
+            # is measured on tasks nobody here wrote, and it is reported as it fell.
+            "public_benchmark": _public_benchmark(),
             "declared_dependencies_present": present,
             "declared_dependencies_missing": len(self.capabilities) - present,
             "objective": self._core_meta.get("objective_verbatim"),
@@ -831,16 +920,56 @@ class UnifiedModel:
 
     # ------------------------------------------------------------------ recall
 
+    def _recall_corpus(self) -> list[dict[str, Any]]:
+        """Everything recall may look at: knowledge documents AND the law records.
+
+        THE DEFECT THIS FIXES (measured): the artifact stores 781 action-intent LAW
+        records -- each with a causal blocker, a measurement, a falsification condition
+        and a stop condition -- and `recall()` scored only the 304 knowledge documents.
+        The laws were shipped and never read: three exact law queries returned 0 law
+        hits out of 6, buried under long historical inventories that merely repeat the
+        vocabulary.
+        """
+        if getattr(self, "_recall_corpus_cache", None) is not None:
+            return self._recall_corpus_cache
+        rows: list[dict[str, Any]] = list(self.knowledge)
+        try:
+            for r in (self.research_index or {}).values():
+                if not isinstance(r, Mapping):
+                    continue
+                if "action_intents" not in str(r.get("path") or ""):
+                    continue
+                stem = Path(str(r.get("path"))).stem
+                # strip the version/date suffix so the remaining words are the rule
+                rule = re.sub(r"(_V\d+)?(_20\d{6})?(_V\d+)?$", "", stem)
+                # `tokenize` keeps `_` inside a token, so an unsplit stem becomes the
+                # single token `a_census_that_cannot_fail_is_not_a_gate` and can never
+                # overlap a query written in words. The stem is split on `_` HERE, and
+                # the shared tokenizer is left alone so routing is untouched.
+                rows.append({
+                    **r,
+                    "title": rule.replace("_", " ").replace("-", " ").lower(),
+                    "title_terms": tokenize(rule.replace("_", " ").replace("-", " ")),
+                    "authority": "ACTION_INTENT_LAW",
+                })
+        except Exception:  # noqa: BLE001 - recall must not fail because of a join
+            pass
+        self._recall_corpus_cache = rows
+        return rows
+
     def recall(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
         terms = tokenize(query)
         if not terms:
             raise UnifiedModelError("RECALL_QUERY_EMPTY")
-        total_docs = max(1, len(self.knowledge))
+        corpus = self._recall_corpus()
+        total_docs = max(1, len(corpus))
         k1, b = 1.5, 0.75
         scored: list[tuple[float, dict[str, Any]]] = []
-        for i, row in enumerate(self.knowledge):
+        for i, row in enumerate(corpus):
             counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            length = self._knowledge_lengths[i] or 1
+            length = (self._knowledge_lengths[i]
+                      if i < len(self._knowledge_lengths) else
+                      sum(int(v) for v in (counts or {}).values())) or 1
             score = 0.0
             for term in terms:
                 tf = int(counts.get(term, 0))
@@ -854,7 +983,11 @@ class UnifiedModel:
             # A document's own title is the strongest statement of what it is
             # about. Body term statistics alone can bury a short current law
             # under a long historical one that merely repeats its vocabulary.
+            # A LAW IS NAMED BY ITS RULE, so its stem is a title like any other.
             title_terms = set(row.get("title_terms") or [])
+            if not title_terms and row.get("authority") == "ACTION_INTENT_LAW":
+                stem = Path(str(row.get("path"))).stem
+                title_terms = set(tokenize(stem.replace("_", " ").replace("-", " ")))
             if title_terms:
                 overlap = len(set(terms) & title_terms) / max(1, len(set(terms)))
                 if overlap >= 1.0:

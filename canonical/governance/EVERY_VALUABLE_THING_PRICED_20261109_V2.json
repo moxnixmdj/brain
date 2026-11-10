@@ -1,0 +1,178 @@
+{
+ "schema": "brain.governance.EVERY_VALUABLE_THING_PRICED_20261109_V2",
+ "date": "2026-11-09",
+ "round": 32,
+ "law_obeyed": "see every important or valuable thing: what it is and how valuable it is",
+ "how_this_was_built": "Not from memory. Every row names a file opened in this session, the number that prices it, and whether that number was MEASURED here, taken from a record in the tree, or is a bound rather than a measurement. Rows I could not verify are labelled UNVERIFIED, not omitted -- omission is how a census lies.",
+ "population": {
+  "git_tracked_files": 16312,
+  "python_files": 5288,
+  "python_files_carrying_verification_or_refusal_or_carrier_vocabulary": 4291,
+  "governance_records": 3242,
+  "action_intent_laws": 780,
+  "action_intent_laws_with_an_explicit_falsifier": 519,
+  "live_verified_capabilities": 443,
+  "compiled_model_bytes": 10217755
+ },
+ "the_bar_we_are_aiming_at_measured_from_the_web_2026_11_09": {
+  "claude_opus_5_5": {
+   "released": "2026-09-22",
+   "price": "$4 in / $20 out per MTok",
+   "context": "1M tokens",
+   "SWE_bench_Pro": "89.9%",
+   "SWE_bench_Multilingual": "93.9%",
+   "Terminal_Bench_4_0": "66.4% (vendor) / 59.6% (Artificial Analysis independent)",
+   "OSWorld_2_0": "81.8% partial / 48.7% binary (Anthropic system card)",
+   "HLE_with_tools": "67.7%",
+   "FrontierCode_v1_1": "54.4%",
+   "DeepSWE_v1_1": "74.2%",
+   "source": "morphllm.com/claude-benchmarks; codersera.com; presenc.ai OSWorld leaderboard"
+  },
+  "note_on_OSWorld": "the 61.4% 'SWE-bench Multimodal' and 81.8% OSWorld partial are VENDOR numbers. The binary OSWorld figure, which the OSWorld paper calls the primary metric, is 48.7%. Both are real; quoting only the higher one is how this field inflates.",
+  "what_this_means_for_us": "Opus 5.5 is a frontier TRAINED model with 1M context and native vision. It is not a reachable target for a zero-weight symbolic router this round. It is the DIRECTION, and the honest use of it is a private fixed-bar scorecard, never a parity claim."
+ },
+ "RANK_1__the_swe_repair_engine": {
+  "what": "a closed-loop repair engine that mines real upstream bug-fix commits, proves the fix control is green and the revert control is red, then repairs the bug with zero model calls",
+  "files": [
+   "canonical/runtime/real_repo_instance_miner_v1.py",
+   "canonical/runtime/real_repo_eval_v1.py",
+   "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+   "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+   "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py"
+  ],
+  "the_number": "2 of 9 unique control-verified upstream bugs = 22.2%",
+  "measured_where": "canonical/governance/REAL_REPO_RATE_CORRECTED_20261109_V1.json",
+  "status": "MEASURED -- and MEASURED HERE AGAIN this round by re-reading the record, not by re-running (the corpus needs network)",
+  "value": "HIGHEST-VALUE ENGINE. 100% on single-span bugs, 0% on multi-statement refactors. The failure mode is diagnosed, not guessed: click's fix needed statement INSERTION, which this engine cannot author.",
+  "honest_caveat": "9 bugs from 3 small Python libraries is a real rate on real code and a small sample from a narrow population. NOT comparable to any published SWE-bench number.",
+  "why_it_outranks_everything_else": "it is the only component in the tree that has been scored on code nobody here wrote, with a positive control proving the rig works."
+ },
+ "RANK_2__the_refusal_machinery": {
+  "what": "the single most common behaviour in the tree: saying NO with a named reason instead of guessing",
+  "files": [
+   "canonical/runtime/verifier_falsification_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/goal_front_compiler_v1.py",
+   "canonical/runtime/computer_execution_boundary_v1.py"
+  ],
+  "the_number": "verifier_falsification_v1.run() executed this round: a suite of adversarial probes, each answered SAID_NO",
+  "measured_here": true,
+  "value": "HIGH -- and under-priced by everyone. A component that can be trusted to refuse is worth more than one that is merely usually right, because its failures are visible.",
+  "honest_caveat": "refusal vocabulary appears 346 times in live_brain_route_admission_v1 alone; frequency is not quality. What prices this rank is that the probes are adversarial and the answers are checked."
+ },
+ "RANK_3__the_780_action_intent_laws": {
+  "what": "780 machine-readable laws each naming a causal blocker and an action kind; 519 carry an explicit falsification condition",
+  "files": [
+   "canonical/action_intents/ (780 files)"
+  ],
+  "the_number": "780 laws / 519 with a falsifier / 66.5% falsifiable",
+  "measured_here": true,
+  "value": "HIGH as a SPECIFICATION of what to build and what never to build again. It is the project's institutional memory of mistakes.",
+  "honest_caveat": "many are still status PROPOSED. A law that is proposed and never enforced is a note, not a law. I did not count how many are enforced."
+ },
+ "RANK_4__the_carrier_and_the_instant_learning_loop": {
+  "what": "one read-only program executed under an admitted namespace confinement, plus demonstrate-once -> crystallise with held-out + sabotage -> recall",
+  "files": [
+   "canonical/runtime/admitted_confinement_execution_v1.py",
+   "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+   "canonical/runtime/brokered_workspace_execution_v1.py",
+   "canonical/runtime/confined_query_bridge_v1.py",
+   "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+  ],
+  "the_number": "235.3 ms -> 88.8 ms per carried command; recall 7,400 ms -> 95 ms; transfer after ONE demonstration 2/6 -> 4/5 shapes",
+  "measured_here": true,
+  "value": "HIGH and unique in this tree: the only path where a learned skill RUNS UNDER A VERIFIED CONFINEMENT and the live tree is proven untouched.",
+  "honest_caveat": "the skill generalises across the SAME measurement shape. Three of the four shapes answered last round came from the CARRIER, not from learning. Do not merge those two numbers."
+ },
+ "RANK_5__the_self_falsification_records": {
+  "what": "records in which this project corrects its own previously published number",
+  "files": [
+   "canonical/governance/REAL_REPO_RATE_CORRECTED_20261109_V1.json",
+   "canonical/governance/ARC_DOES_NOT_CLOSE_BY_ADDING_RULES_20261109_V1.json",
+   "canonical/governance/WEB_CONFIRMS_THE_TREE_HEDGED_20261109_V1.json"
+  ],
+  "the_number": "the 75% -> 22.2% correction; the ARC rule-list ceiling at 1.5%",
+  "value": "VERY HIGH, and the least obvious. Every prediction market and every benchmark board punishes a project that keeps its old number. These records are why the rest of this census can be believed.",
+  "honest_caveat": "85 RETRACTED and 248 REFUSED records also exist. The retractions are the asset; the refusals are the mechanism that produced them."
+ },
+ "RANK_6__the_weightsless_unifier": {
+  "what": "one compiled artifact: 443 capabilities, 1,966 source-index modules, 6,727 research records, 2,360 routing tokens, 10,217,755 bytes",
+  "files": [
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+   "canonical/runtime/compile_brain_unified_model_v1.py",
+   "canonical/runtime/brain_unified_model_v1.py"
+  ],
+  "the_number": "0 weights, 0 trained parameters, $0 runtime spend",
+  "measured_here": true,
+  "value": "HIGH as a ROUTER and a catalogue. It is genuinely one artifact and it genuinely carries every capability the tree can bind.",
+  "honest_caveat_that_prices_it_down": "443 INDEXED, 141 BOUND through the door, 26 engines that do work. And 2,215 of 2,335 runtime modules are NOT bound to any capability. The index is not the capability."
+ },
+ "RANK_7__the_H100_zero_learned_bytes_frontier": {
+  "what": "a schema compiler that learns a table's shape from observations with 0 persistent learned bytes and 0 external model calls",
+  "files": [
+   "canonical/runtime/h100_zero_learned_schema_compiler_v1.py"
+  ],
+  "the_number": "12/12 earlier rounds; h100_persistent_learned_bytes = 0 measured this round via inventory()",
+  "value": "MEDIUM-HIGH: this is the purest instance of the project's actual thesis -- generalisation with zero stored parameters.",
+  "honest_caveat": "12 cases is a demonstration, not a rate."
+ },
+ "RANK_8__proven_limits_and_corrections": {
+  "what": "records that state what CANNOT be done, with a proof or a measured ceiling: no-go results, lower bounds, non-identifiability",
+  "files": [
+   "canonical/governance/ (limits)",
+   "canonical/laws/ (59 files)"
+  ],
+  "the_number": "25 governance records carry an explicit lower-bound / impossibility / no-go statement; 85 RETRACTED; 248 REFUSED",
+  "measured_here": true,
+  "value": "MEDIUM-HIGH: a proven limit saves every future round from re-attempting it. The ARC 1.5% ceiling is worth more than a 2% claim would be."
+ },
+ "WHAT_I_FOUND_THAT_IS_PRICED_TOO_HIGH": [
+  {
+   "asset": "the compiled unified model, on a per-byte basis",
+   "why": "10.2 MB of index prices as 'the model' but only 141 of 443 capabilities are BOUND and 26 engines actually execute. The right unit is BOUND capabilities, and that number is 141, not 443."
+  },
+  {
+   "asset": "the ARC-AGI result",
+   "why": "1.5% on 200 public tasks is a real measurement of a real limit. It is NOT a capability, and it must never appear in the same table as a capability claim."
+  },
+  {
+   "asset": "the 3,242 governance records, counted as output",
+   "why": "1,047 are CANDIDATE and 83 have NO_STATUS. Counting proposals as assets is the exact error this project legislates against. 681 PROVEN is the defensible number."
+  }
+ ],
+ "THE_TWO_REAL_GAPS_between_this_and_Opus_5_5": {
+  "gap_1__verbosity_before_answer": {
+   "measured_this_round": "brain_one_model_v3.resolve() spends 445 ms and reaches REFUSAL__INPUT_BINDING_REQUIRED on a question the carrier answers in ~100 ms",
+   "why_this_is_the_gap_that_matters": "Opus 5.5 answers a request in ONE pass. This door spends its latency on understanding, routing, binding, and refusing before it executes. The fix is not a faster component -- it is asking the CHEAPEST CAPABLE LAYER FIRST and only falling back to the expensive understanding stack when that layer refuses.",
+   "precedent_in_2026_research": "compute-optimal test-time allocation: adapt the budget to problem difficulty rather than running the full cascade every time (Snell et al., and the 2026 T^2 scaling laws). A counting question is EASY. It should not pay for the compound-question machinery."
+  },
+  "gap_2__the_harness_is_the_model_and_ours_is_thin": {
+   "the_2026_evidence": "the same model moves 6.7% -> 68.3% on SWE-bench by changing only the edit-tool format (Grok Code Fast); LangChain's agent 52.8% -> 66.5% on Terminal-Bench 2.0 changing nothing but the scaffold; up to 40x token difference between harnesses on the same model.",
+   "what_this_means_for_a_weightless_system": "if scaffolding is worth more than the model when the model has weights, it is worth EVERYTHING when the model has none. There is no other place for capability to live. There is exactly one shell/bound loop at the top level (closed_loop_autonomous_controller_v1); the SWE agent came from mini_swe_agent (vendored under canonical/capabilities/internalized/software_engineering/) rather than a first-class harness.",
+   "the_action": "the highest-ROI next build is a first-class harness: structure-aware error recovery, context compaction, plan/execute separation, and a search subagent -- the four moves the 2026 literature converges on. It costs no weights and no training."
+  }
+ },
+ "what_is_still_not_real": [
+  "no SWE-bench Pro / Terminal-Bench / OSWorld number of any kind. The 22.2% is a private corpus.",
+  "no Opus 5.5 parity anywhere, and none is claimed.",
+  "ARC-AGI 1.5%.",
+  "2,215 of 2,335 runtime modules are not reachable through the door.",
+  "the harness is thin -- the largest known free multiplier is the one we have the least of."
+ ],
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false,
+ "GAP_1_CLOSED_THIS_ROUND": {
+  "what_was_wrong": "brain_one_model_v3.resolve() spent 445 ms and returned FAIL_CLOSED__INPUT_BINDING_REQUIRED:path for a counting question the confined carrier answers correctly.",
+  "why": "the door ran its whole understanding -> route -> bind -> refuse cascade BEFORE any layer that could execute. Measured: the carrier answered in 162 ms and the cascade then refused anyway, because the binder wanted an input the carrier does not need.",
+  "the_fix": "the cheapest capable layer is asked first. query_kind() + file extraction decide in ~1 ms whether a verified single-program answer exists; if it does, the carrier answers and the door returns. If not, the full stack runs exactly as before. Nothing that used to answer is skipped -- the fast layer is strictly narrower and declines by returning no answer.",
+  "measured_after": "445 ms -> 93 ms warm, layer=CONFINED_QUERY_BRIDGE, answer=8, pass=True, confined=True, live_workspace_untouched=True",
+  "and_the_second_fix": "`answer` is now lifted to the top level of every resolve() result. A caller should not have to know which layer answered in order to read the number.",
+  "regression_check": "85 passed + 911 subtests across the door, carrier, instant-learning and latency suites; guard PASS 17/0",
+  "not_claimed": "this does not make the door fast in general. It makes the ALREADY-SOLVED single-question path fast. The compound-question path still pays the full cascade, and that is the next gap."
+ },
+ "status_after_this_round": "CENSUS_WRITTEN_AND_RANK_1_GAP_CLOSED__RANK_2_GAP_THE_HARNESS_IS_NEXT"
+}

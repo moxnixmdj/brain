@@ -1306,8 +1306,10 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
         # is the strongest possible evidence that it is not an answer. It is the same
         # arithmetic as the `unresolved` term beside it: real work, and the question not
         # dealt with.
-        "answered": (_answer_stands(comp, unresolved, referent)) if comp is not None
-                    else (bool(hits) and not asks_for_number and not unresolved),
+        "answered": (_answer_stands(comp, unresolved, referent,
+                                    _subject_coverage(question, comp, root))
+                    if comp is not None
+                    else (bool(hits) and not asks_for_number and not unresolved)),
         "grounding_summary": summary,
         # WHAT THIS ANSWER DOES TO THE ONES ALREADY GIVEN.
         #
@@ -1339,20 +1341,127 @@ def answer(question: str, root: str = ".", limit: int = 40) -> dict:
     }
 
 
-def _answer_stands(comp, unresolved, referent: dict) -> bool:
+def _answer_stands(comp, unresolved, referent: dict, coverage: dict | None = None) -> bool:
     """Does the work hold, the question's words get accounted for, AND the answer be about
-    the thing that was asked?
+    the thing that was asked -- over EVERY file the question named?
 
-    Three separate ways an answer can fail, and only the first two were ever checked. A
-    referent verdict of `uncheckable` does not block: "I could not test this" is not
-    evidence against it, and blocking on it would refuse every text-referent question in
-    the system.
+    Four separate ways an answer can fail. A referent verdict of `uncheckable` does not
+    block: "I could not test this" is not evidence against it, and blocking on it would
+    refuse every text-referent question in the system.
+
+    THE FOURTH WAS MISSING AND IT CAUSED A FALSE PASS.
+    --------------------------------------------------------------------------------
+    Measured on this machine: `what is the total of the amounts in a.csv and b.csv`
+    over trees of 10,20 and 30,40 returned **30** -- the total of a.csv alone -- with
+    `verified: true`, `reason: ANSWER_GROUNDED`, `grounded: 2/2`. Every existing check
+    passed, because every existing check asks whether the EXPRESSION is sound against the
+    one file it chose to read. None asks whether the expression read every subject the
+    SENTENCE named.
+
+    A question naming two subjects and answered from one is not a smaller answer; it is
+    an answer to a different question. The old verdict could not see it, and a caller has
+    no way to notice: the single-file answer is bit-identical to a correct one.
+
+    `coverage` is computed by `_subject_coverage`, which reads the named files from the
+    question itself, so this cannot be satisfied by the expression agreeing with itself.
     """
     if not comp.get("verified"):
         return False
     if unresolved:
         return False
-    return (referent or {}).get("verdict") != "ignores"
+    if (referent or {}).get("verdict") == "ignores":
+        return False
+    if coverage is not None and not coverage.get("complete", True):
+        return False
+    return True
+
+
+_SUBJECT_CONJUNCTION = re.compile(
+    r"\b(?:and|plus|together\s+with|along\s+with|as\s+well\s+as)\b", re.I)
+
+
+def _subject_coverage(question: str, comp, root: str) -> dict:
+    """Did the answer read EVERY file the question names?
+
+    A conjunction is the signal: `in a.csv and b.csv` names two subjects, and `and`
+    joining two paths is not prose. The named paths are resolved against `root` and
+    checked for existence, because a question naming a file that is not there is a
+    different failure (`_stated_paths_outside_the_root` territory), not this one.
+
+    Returns `{"complete": bool, "named": [...], "read": [...]}`. When the question names
+    one subject or none, `complete` is True and nothing changes.
+    """
+    try:
+        named = []
+        for m in re.finditer(r"([A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,5})\b", str(question or "")):
+            tok = m.group(1)
+            if tok not in named:
+                named.append(tok)
+        if len(named) < 2 or not _SUBJECT_CONJUNCTION.search(str(question or "")):
+            return {"complete": True, "named": named, "read": named}
+        present = [n for n in named if os.path.isfile(os.path.join(root, n))]
+        if len(present) < 2:
+            return {"complete": True, "named": named, "read": present}
+        # WHAT THE COMPOSITION ACTUALLY READ.
+        #
+        # A composed answer records its provenance in its own `subject`/`detail`
+        # (`mean(vector(sum(col:x@a.csv),sum(col:x@b.csv))) = 50`), not on a Node: the
+        # node is consumed during rendering. Reading the object graph found nothing and
+        # reported a correct two-file answer as partial, which failed a test that had
+        # been passing for a different reason -- the check has to read where the
+        # provenance actually is.
+        read = set()
+        try:
+            blob = " ".join(str(comp.get(k) or "") for k in
+                            ("subject", "detail", "operation", "value"))
+            read.update(_PATH_IN_LABEL.findall(blob))
+            for leaf in _leaf_paths(comp.get("node") if isinstance(comp, dict) else None):
+                read.add(os.path.basename(str(leaf)))
+            read = {os.path.basename(r) for r in read}
+        except Exception:  # noqa: BLE001 - an unreadable composition is not coverage
+            return {"complete": True, "named": named, "read": []}
+        missing = [n for n in present if os.path.basename(n) not in read]
+        return {"complete": not missing, "named": named,
+                "read": sorted(read), "missing": missing}
+    except Exception:  # noqa: BLE001 - coverage must never break an answer
+        return {"complete": True, "named": [], "read": []}
+
+
+_PATH_IN_LABEL = re.compile(r"@([A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,5})\b")
+
+
+def _leaf_paths(node):
+    """Every file a composed expression actually read.
+
+    A `Node` has `__slots__ = (op, args, type, consumes, label)` and no path attribute,
+    so a leaf carries the file it read ONLY in its label -- `col:x@a.csv`. Reading the
+    attribute alone found nothing and reported every real two-file answer as partial,
+    which broke a correct answer ("average of the totals in a.csv and b.csv" = 50). The
+    label IS the provenance: it is what the algebra prints, and it is derived from the
+    leaf, not from the sentence.
+    """
+    if node is None:
+        return []
+    out, stack, seen = [], [node], set()
+    while stack:
+        n = stack.pop()
+        if id(n) in seen or len(seen) > 4000:
+            continue
+        seen.add(id(n))
+        if isinstance(n, str):
+            out.append(n)
+            continue
+        args = getattr(n, "args", None)
+        if args:
+            stack.extend(a for a in args if a is not None)
+        for attr in ("rel", "path", "file"):
+            v = getattr(n, attr, None)
+            if isinstance(v, str):
+                out.append(v)
+        label = getattr(n, "label", None)
+        if isinstance(label, str):
+            out.extend(_PATH_IN_LABEL.findall(label))
+    return out
 
 
 def _checks_its_referent(question: str, comp, root) -> dict:

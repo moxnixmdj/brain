@@ -1,0 +1,12 @@
+{
+ "cells": {},
+ "resolutions": {
+  "astra|canary|final|frames": {
+   "capability_id": "image.extract.ocr.tesseract",
+   "goal": "run ocr on canonical/astra/canary_frames/006-c-final.png",
+   "last_used": 1794307582.9361026,
+   "taught_at": 1794307582.936102,
+   "uses": 0
+  }
+ }
+}

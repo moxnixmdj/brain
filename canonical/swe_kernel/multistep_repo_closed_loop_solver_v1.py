@@ -46,6 +46,7 @@ from typing import Any, Mapping, Sequence
 from canonical.swe_kernel import incremental_semantic_graph_v1 as sem_graph
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as _input_gate
 from canonical.swe_kernel import verified_skill_crystallizer_v1 as crystallizer
+from canonical.swe_kernel import operator_generalization_v1 as opgen
 from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wb_synth
 
 SCHEMA = "PROJECT_BRAIN_MULTISTEP_REPO_CLOSED_LOOP_SOLVER_V1"
@@ -811,6 +812,50 @@ def _surgical_span_mutations(
                                 except SyntaxError:
                                     pass
 
+            # Dunder-identity rewrite: `x.__class__` -> `type(x)` and back.
+            # This is a real, recurring bug class. Upstream markupsafe 54bb00bfaf fixed
+            # an escape bypass where `s.__class__ is str` skipped escaping for proxy
+            # objects that report a false __class__. `type(x)` cannot be spoofed that way.
+            # The AST form is an Attribute whose attr is a dunder and whose value is an
+            # expression; the replacement is the builtin call on the same expression.
+            if isinstance(sub, ast.Attribute) and sub.attr in _DUNDER_IDENTITY_ATTRS:
+                obj_seg = ast.get_source_segment(src, sub.value)
+                if obj_seg:
+                    builtin = _DUNDER_IDENTITY_ATTRS[sub.attr]
+                    repl = f"{builtin}({obj_seg})"
+                    cand = _splice_ast_span_bytes(src_bytes, sub, repl)
+                    if cand and cand != src:
+                        try:
+                            ast.parse(cand)
+                            seq += 1
+                            scored_results.append(
+                                (prio + 0.10, seq, f"dunder_identity:{sub.attr}_to_{builtin}", cand)
+                            )
+                        except SyntaxError:
+                            pass
+
+            # The inverse: `type(x)` -> `x.__class__`
+            if (
+                isinstance(sub, ast.Call)
+                and isinstance(sub.func, ast.Name)
+                and sub.func.id in _BUILTIN_IDENTITY_INVERSE
+                and len(sub.args) == 1
+            ):
+                arg_seg = ast.get_source_segment(src, sub.args[0])
+                if arg_seg:
+                    attr = _BUILTIN_IDENTITY_INVERSE[sub.func.id]
+                    repl = f"{arg_seg}.{attr}"
+                    cand = _splice_ast_span_bytes(src_bytes, sub, repl)
+                    if cand and cand != src:
+                        try:
+                            ast.parse(cand)
+                            seq += 1
+                            scored_results.append(
+                                (prio + 0.06, seq, f"dunder_identity:{sub.func.id}_to_{attr}", cand)
+                            )
+                        except SyntaxError:
+                            pass
+
             # Binary operator swap preserving exact operand source text
             if isinstance(sub, ast.BinOp):
                 lseg = ast.get_source_segment(src, sub.left)
@@ -1225,6 +1270,31 @@ def _generate_candidates_for_state(
                         except SyntaxError:
                             pass
 
+        # Mechanism A2: GENERALISED crystallised rules.
+        # Mechanism A fires a stored rule only inside the statement skeleton it was taught
+        # from. operator_generalization recovers the lesson behind it: when a rule's pattern
+        # and replacement differ by exactly one operator token, the lesson IS that operator
+        # swap and it applies wherever the operator appears on two operands -- in a return,
+        # a condition, a loop guard, either order. Measured on 774 jinja functions the narrow
+        # form reached 0 and this reaches 98.71% of functions (proposal reach, not a solve
+        # rate; the verifier below supplies the precision).
+        # It is bounded and refusal-safe: one operator difference only, never inside strings
+        # or comments, candidates only. The green-suite check decides.
+        for rule in stored_rules:
+            try:
+                for gsrc in opgen.propose_operator_swaps(
+                        orig_src, rule, language="python", limit=6):
+                    if gsrc and gsrc != orig_src:
+                        try:
+                            ast.parse(gsrc)
+                            _add_to(bucket, rel_f, fn_nm, fl_no,
+                                    f"operator_generalized:{rule.get('skill_id', '')[:12]}",
+                                    gsrc)
+                        except SyntaxError:
+                            pass
+            except Exception:
+                pass
+
         # Mechanism B1: Algebraic directional/dual method & builtin span swaps + test-driven entry guards
         hot_lines = list(susp.get("hot_lines") or [])
         line_scores = susp.get("line_scores") or {}
@@ -1289,6 +1359,17 @@ def _generate_candidates_for_state(
             candidates.extend(b[offset : offset + stride])
 
     return candidates
+
+
+# Dunder-identity rewrites. A proxy object may report a false `__class__`; `type(x)`
+# never can. Upstream markupsafe 54bb00bfaf is exactly this bug: `s.__class__ is str`
+# skipped escaping and let markup through an HTML escaper.
+_DUNDER_IDENTITY_ATTRS: dict[str, str] = {
+    "__class__": "type",
+}
+_BUILTIN_IDENTITY_INVERSE: dict[str, str] = {
+    "type": "__class__",
+}
 
 
 _QUICK_PYTEST_CODE = r"""
