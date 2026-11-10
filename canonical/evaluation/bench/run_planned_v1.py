@@ -171,10 +171,69 @@ for i, t in enumerate(tasks, 1):
             # The choice is deliberately dumb and stated: the first visible control in
             # role order. Anything smarter is a claim that needs its own measurement.
             _clicked = False
-            if "button" in goal.lower() or "click" in goal.lower():
+            # MEASURED FAILURE (r106). The guard was `"button" in goal or "click" in goal`,
+            # which excluded 19 of the 25 tasks that reach this branch -- including
+            # "Buy the ticket with the longest duration", "Book the shortest one-way
+            # flight", "Sort the numbers in increasing order" and "Focus into the textbox".
+            # Every one of those is a predicate task, i.e. exactly what the inducer exists
+            # to handle. The reasoner was gated behind the word "click".
+            if True:
                 try:
                     from canonical.runtime.bound_capabilities import rendered_page_act as _RPA
-                    for _c in controls:
+                    # ROUND 106 -- THE INDUCER DECIDES, IT DOES NOT VOTE AFTERWARDS.
+                    # r104 ran the inducer only AFTER the actuator had already guessed right,
+                    # so a rule could never change an outcome. Read the page ONCE, induce a
+                    # rule from the goal's own comparative word (longest/shortest/greatest/
+                    # least), and click what the RULE ranks first. If no rule is available,
+                    # fall back to the dumb order and label it honestly.
+                    _ordered = list(controls)
+                    try:
+                        from canonical.runtime import predicate_induction_v1 as _PI
+                        import json as _j, urllib.request as _u
+                        _pg = [x for x in _j.loads(_u.urlopen("http://127.0.0.1:9222/json/list").read())
+                               if x["type"] == "page"]
+                        _w = websocket.create_connection(_pg[0]["webSocketDebuggerUrl"],
+                                                         timeout=20, origin="http://127.0.0.1:9222")
+                        _dom_expr = ("JSON.stringify(Array.from(document.querySelectorAll('#area *'))"
+                                     ".filter(e=>e.getBoundingClientRect().width>0)"
+                                     ".map(e=>({id:e.id||'',text:(e.innerText||'').trim().slice(0,60),"
+                                     "cls:e.className||'',attrs:Object.fromEntries("
+                                     "Array.from(e.attributes).filter(a=>a.name.startsWith('data-'))"
+                                     ".map(a=>[a.name,a.value]))})))")
+                        _w.send(_j.dumps({"id": 1, "method": "Runtime.evaluate",
+                                          "params": {"expression": _dom_expr, "returnByValue": True}}))
+                        while True:
+                            _mm = _j.loads(_w.recv())
+                            if _mm.get("id") == 1:
+                                _dom = _j.loads((_mm.get("result", {}).get("result", {})
+                                                 or {}).get("value") or "[]"); break
+                        _w.close()
+                        _gl = goal.lower()
+                        _dir = ("max" if any(w in _gl for w in ("longest", "greatest", "largest",
+                                                                "most", "maximum", "increasing"))
+                                else "min" if any(w in _gl for w in ("shortest", "smallest",
+                                                                     "least", "minimum", "cheapest"))
+                                else None)
+                        if _dir:
+                            _prof = [(_PI.numeric_profile(e, _dom), e) for e in _dom]
+                            _prof = [(p, e) for p, e in _prof if p]
+                            if len(_prof) >= 2:
+                                _pick = (max(_prof, key=lambda t: sum(t[0].values())) if _dir == "max"
+                                         else min(_prof, key=lambda t: sum(t[0].values())))
+                                _cname = _pick[1]["text"]
+                                _match = [c for c in controls if c["name"].strip() == _cname]
+                                if _match:
+                                    _ordered = _match + [c for c in controls if c is not _match[0]]
+                                    r["induction"] = "DECIDED:" + _dir
+                                else:
+                                    r["induction"] = "NO_CONTROL_MATCH"
+                            else:
+                                r["induction"] = "NO_NUMERIC_CANDIDATES"
+                        else:
+                            r["induction"] = "NO_COMPARATIVE_WORD"
+                    except Exception as _ie:
+                        r["induction"] = "error:" + str(_ie)[:50]
+                    for _c in _ordered:
                         _xy = None
                         try:
                             _xy = centre(_c)
@@ -193,49 +252,6 @@ for i, t in enumerate(tasks, 1):
                     r["actuator"] = "used" if _clicked else "tried"
                 except Exception as _e:
                     r["actuator"] = "error:" + str(_e)[:60]
-            # ROUND 104 -- THE INDUCER, WIRED IN FOR THE FIRST TIME IN 104 ROUNDS.
-            # predicate_induction_v1 appears in this file ONLY inside a comment (line 97).
-            # It has never executed. It is the module that holds the user's own thesis --
-            # "one demonstration beats generated numbers on a new instance" -- and it took
-            # an audit of my own earlier audit to notice it was still in the drawer.
-            #
-            # A demonstration is available here: the actuator just chose a control and the
-            # PAGE graded the choice. That is exactly the (chosen, candidates) pair the
-            # inducer needs -- a real demonstration with an oracle, not one written by me.
-            if _clicked and len(controls) > 1:
-                try:
-                    from canonical.runtime import predicate_induction_v1 as PI
-                    import json as _json, urllib.request as _ur
-                    _pages = [x for x in _json.loads(_ur.urlopen("http://127.0.0.1:9222/json/list").read())
-                              if x["type"] == "page"]
-                    _ws = websocket.create_connection(_pages[0]["webSocketDebuggerUrl"],
-                                                      timeout=20, origin="http://127.0.0.1:9222")
-                    _expr = ("JSON.stringify(Array.from(document.querySelectorAll('#area *'))"
-                             ".filter(e=>e.getBoundingClientRect().width>0)"
-                             ".map(e=>({id:e.id||'',text:(e.innerText||'').trim().slice(0,40),"
-                             "cls:e.className||'',attrs:Object.fromEntries("
-                             "Array.from(e.attributes).filter(a=>a.name.startsWith('data-'))"
-                             ".map(a=>[a.name,a.value]))})))")
-                    _ws.send(_json.dumps({"id": 1, "method": "Runtime.evaluate",
-                                          "params": {"expression": _expr, "returnByValue": True}}))
-                    _dom = []
-                    while True:
-                        _m = _json.loads(_ws.recv())
-                        if _m.get("id") == 1:
-                            _dom = _json.loads((_m.get("result", {}).get("result", {}) or {}).get("value") or "[]")
-                            break
-                    _ws.close()
-                    _hit = [n["name"] for n in controls]
-                    _chosen = next((e for e in _dom if e["text"] and e["text"] in _hit), None)
-                    if _chosen:
-                        _rule = PI.induce(_chosen, _dom)
-                        r["induction"] = _rule.get("status")
-                        if _rule.get("status") == "INDUCED":
-                            r["induced_rule"] = {k: _rule.get(k) for k in ("quantity", "direction")}
-                    else:
-                        r["induction"] = "NO_MATCHING_CHOSEN"
-                except Exception as _ie:
-                    r["induction"] = "error:" + str(_ie)[:60]
             pr = {"status": "SOLVED" if _clicked else "NO_LITERAL"}
             r["strategy"] = "actuator_no_literal" if _clicked else "not_attempted_no_literal"
         r["plan_len"] = len(pr.get("plan") or [])

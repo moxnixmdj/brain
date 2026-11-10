@@ -86,7 +86,7 @@ def run(args, root):
         # A rendered-page actuator that can be pointed at the open internet is not a
         # capability, it is an egress channel. Benchmark pages are local.
         raise RuntimeError("URL_NOT_LOCAL_BENCHMARK_PAGE")
-    if action not in ("click", "type", "select", "press"):
+    if action not in ("click", "type", "select", "press", "focus"):
         raise RuntimeError("ACTION_NOT_SUPPORTED:" + action)
 
     ws = _connect()

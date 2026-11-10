@@ -1,0 +1,36 @@
+{
+  "round": 107,
+  "date": "2026-11-09",
+  "title": "The cross-element wall: the quantity and the action live on different nodes",
+  "the_rule": "'in each step ask: YOU SURE THIS THE SMARTEST APPROACH?'",
+  "what_was_measured_this_round": {
+    "buy-ticket container-level induction, 10 runs": {"rewards": [-1, 0.859, -1, 0.859, -0.5, 0.859, -1, -1, -0.5, -1], "won": "3/10"},
+    "goal": "'Buy the ticket with the longest duration.'",
+    "page": "<div class='flight'><div class='time-duration' data-duration='29478765'>8h 11m</div><button class='buy-ticket' data-price='181'>Book for $181</button></div>"
+  },
+  "the_two_real_findings": {
+    "1_the_quantity_and_the_target_are_on_different_elements": "numeric_profile ranges over LEAVES. The decision ranges over CONTAINERS. The inducer can profile 'data-duration' or 'data-price' but has no representation that relates a quantity on one node to a clickable action on a sibling node. Measured: profiling leaves gives {'index': 0,1,2}; profiling containers requires the caller to aggregate the subtree first, which no module does.",
+    "2_the_task_is_NOT_adversarial_and_the_failures_are_mine": "checked the source: MAX_TRIPS=4, no 'tampered' string, longestTrip compares data-duration exactly. The -1 / -0.5 split is the SHAPED reward for a near miss, which means the rule chose the right flight and the CLICK landed elsewhere. The cause is a stale bounding-box coordinate measured before the layout settled, not a benchmark trap."
+  },
+  "what_the_inducer_can_and_cannot_do_now": {
+    "CAN": "recover (quantity, direction) from a single demonstration of a choice among siblings, including a bare numeral (fixed r105) and containers when the caller aggregates their subtree (shown this round: the first rule recovered was exactly {duration, max})",
+    "CANNOT": "relate a quantity on one element to a click action on a DIFFERENT element. That relation is the whole of 'buy the ticket with the longest duration'."
+  },
+  "the_honest_stop": "buy-ticket is 1 of 130 tasks. Two rounds have now been spent on it. The suite produced 26/130 three times running under three different wiring changes, which is the strongest available signal that the remaining gap is NOT plumbing. Continuing to tune one task would be the tenth instance of optimising the instrument instead of measuring the claim.",
+  "where_the_gap_actually_is_and_it_is_one_thing": {
+    "computer_use": "0 verifiable atomic steps (r104: a page grader fires once, at the END)",
+    "coding": "every step is a function body with a pytest oracle -- which is why the crystalliser COMPOSES there (r103, proved) and cannot even start here",
+    "the_unifying_statement": "the system learns fast wherever an oracle can judge a PART. Computer use supplies one oracle for the WHOLE. That single difference explains r96 (0/1 on a file), r103 (composition works in code), and r104 (INDUCED: 0 in the suite)."
+  },
+  "what_is_real_after_107_rounds": [
+    "instant learning works: real pytest, real scope_id, full provenance, transfers across renames (r103)",
+    "it COMPOSES: two independently learned rules produce an answer never demonstrated (r103)",
+    "it induces predicates from ONE choice and generalises to new numbers (r105)",
+    "grounding by page-first intersection: 21/130 -> the suite works end to end (r93)"
+  ],
+  "what_is_not_real_and_will_not_be_claimed": [
+    "that this solves any computer use: 0 verifiable atomic steps",
+    "that the total is improving: 26/130 x3, inside 1.73 stdev",
+    "sentience: whole_task_correctness_proved is False on every success"
+  ]
+}
