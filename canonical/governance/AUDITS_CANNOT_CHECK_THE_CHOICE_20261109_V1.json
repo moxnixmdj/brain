@@ -1,0 +1,61 @@
+{
+  "claim_id": "AUDITS_CANNOT_CHECK_THE_CHOICE_20261109_V1",
+  "round": 49,
+  "date": "2026-11-09",
+  "type": "CAPABILITY BUILT + THE HOLE DEMONSTRATED",
+  "title": "Inputs are now snapshotted so the audit cannot be fooled by drift, and a second layer catches an answer of the wrong kind. Both layers still pass a wrong answer of the right kind -- demonstrated, not assumed.",
+  "built_1_input_snapshot": {
+    "what": "provenance.inputs records a sha256 and byte count for every file the argv names, taken at answer time.",
+    "why": "r48's stated limit: the auditor re-ran commands against the CURRENT filesystem, so a changed file flipped the verdict. That was the auditor blaming the skill for the auditor's own staleness.",
+    "measured": {
+      "unchanged input": "ANSWER_MATCHES_ITS_SOURCE",
+      "file edited afterwards": "NOT_AUDITABLE__INPUTS_CHANGED_SINCE_THE_ANSWER + drift record with both hashes",
+      "file deleted afterwards": "same refusal, drift change=GONE",
+      "23 track answers with snapshots": "23/23 ANSWER_MATCHES_ITS_SOURCE, 0 unauditable"
+    }
+  },
+  "built_2_shape_audit": {
+    "what": "audit_answer_shape(goal, result) compares the type the GOAL asks for against the type the answer IS.",
+    "why": "r48's other stated limit: every audit answered 'is the answer derivable from its argv', never 'is that argv the right thing to run'.",
+    "the_demonstration": "A skill taught honestly on 'unique lines of' was rewritten to claim the goal 'count the lines of' while keeping `sort -u`. Asked for a count it returned ['apple','zebra'] -- truth was 3. The derivation audit said ANSWER_MATCHES_ITS_SOURCE. The shape audit said SHAPE_MISMATCH__GOAL_ASKED_FOR_A_DIFFERENT_KIND, goal stdout_integer_value vs answer stdout_lines.",
+    "so": "the two layers now disagree correctly, and the disagreement is information."
+  },
+  "what_is_still_open_and_pinned": {
+    "a_wrong_answer_of_the_right_type_passes_everything": "'count the unique lines' against a goal of 'count the lines' is an integer either way. No deterministic comparator can tell, and a test asserts this passes so nobody can claim it was closed.",
+    "the_audit_checks_DERIVATION_never_CHOICE": "A confidently wrong argv that is internally consistent audits clean. Nothing here asks whether the command was the right one for the goal.",
+    "the_shape_audit_is_a_heuristic": "it reads the goal's wording with the same 28/30 vocabulary. A goal phrased outside that vocabulary gets the wrong requested type and the shape audit becomes noise.",
+    "no_snapshot_of_the_world": "only files the argv NAMES are hashed. A command whose output depends on anything else (locale, time, another process) is not covered."
+  },
+  "the_2026_literature_says_this_is_the_known_gap": {
+    "prefix_executability_arxiv_2610_40444": "'outcome-only and prefix-level rankings diverge: agents whose execution is conditioned on an unverified plan often achieve higher final success while substantially lowering executability.' Its deterministic prefix scorer checks tool existence, argument binding, type-compatible references, preconditions and benchmark acceptance -- no LLM judge.",
+    "the_sentence_that_names_this_project": "from the 2026 agent-evaluation reading: 'an agent might select the wrong tool, recover by accident, and still produce a correct answer. It would pass output-only evaluation, but you have now masked a systematic decision flaw that will surface under slightly different conditions.'",
+    "the_layer_i_have_not_built": "tool SELECTION correctness -- 'given the state and goal, did the agent choose the correct tool'. That is exactly the r48/r49 hole, it is a first-class 2026 metric, and this system has no measurement of it at all."
+  },
+  "what_is_real_vs_not": {
+    "REAL": [
+      "The audit now refuses to speak when its inputs have changed, instead of blaming the skill.",
+      "A wrong-kind answer is caught by a second layer (demonstrated on a rewritten skill).",
+      "23/23 answers still audit clean against snapshotted inputs.",
+      "Every prior result holds: 23/23 correctness, 28/30 typed heuristic on fresh phrasings, conflation probe clean, composition, environment shift, permanence."
+    ],
+    "NOT_REAL": [
+      "That answers are verified. Two layers verify derivation and kind; neither verifies choice.",
+      "That the system can tell a right command from a wrong one that happens to fit the goal's type.",
+      "That this is replay. Inputs are hashed, not snapshotted for re-execution; a command depending on anything but a named file is uncovered.",
+      "That any of it reaches write, network, code execution, git: still refused.",
+      "That the arithmetic moved: 318 steps at 99% per step remains 4.09%. Still ZERO public-benchmark numbers."
+    ]
+  },
+  "the_sentience_claim": "Unchanged. Two audit layers and a third still missing -- and the missing one is the one that would matter. Being able to check that an answer follows from its source is a property of a well-formed table. Being able to ask whether you chose the right action is a property of a system with a model of its own goals. This project has the first and demonstrably lacks the second: it will happily answer a counting question with a list and cannot notice.",
+  "the_smartest_things_to_do_next": {
+    "1": "Measure tool SELECTION correctness. It is the 2026 metric this project has never computed, it is the exact hole demonstrated this round, and it needs no new capability -- only a labelled expectation of which verb the goal implies.",
+    "2": "Choose the contract from the goal at RECALL time as well as teach time, so a rewritten skill that claims a counting goal is refused rather than answered.",
+    "3": "Add prefix-level executability: check each step against preconditions before running, not only after.",
+    "4": "Still no writes. Every audit here depends on re-running the command; a write cannot be audited that way without doing it twice."
+  },
+  "artifacts": {
+    "tests_new": "canonical/tests/test_the_answer_cannot_drift_from_its_inputs_v1.py (7)",
+    "changed": "causal_trace_to_skill_compiler_v1.py -- _snapshot_inputs(), provenance.inputs, drift check in the audit, audit_answer_shape()",
+    "regression_sweep": "109 passed across 14 files"
+  }
+}

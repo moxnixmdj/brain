@@ -2678,6 +2678,11 @@ def answer_provenance(postcondition: Mapping[str, Any],
                          "reproducible from it and from nothing else"),
         "steps": steps,
         "workspace": str(execution_result.get("_workspace") or "") or None,
+        # WHAT THE ARGV READ, hashed at answer time. Without this the audit is
+        # re-derivation against a moving world (r48's stated limit).
+        "inputs": _snapshot_inputs(
+            (steps[0].get("argv") or []) if len(steps) == 1 else [],
+            pathlib.Path(execution_result["_workspace"]) if execution_result.get("_workspace") else None),
         "empty_result": empty,
         "claim": ("an EMPTY RESULT: this is 'nothing matched', not 'the tool failed'"
                   if empty else "derived from the stdout hashes above"),
@@ -2841,6 +2846,7 @@ def recall_and_execute_workflow(
             # number. The verifier already computes this; report the same value the
             # verification used rather than making every caller re-derive it.
             "answer": _contract_answer(inst_post, exec_res),
+            "shape_audit": audit_answer_shape(goal, {"answer": _contract_answer(inst_post, exec_res)}),
             "provenance": answer_provenance(
                 inst_post, dict(exec_res, _workspace=str(cwd or "")), goal=goal),
             "carried_only": bool(require_carried),
@@ -3092,6 +3098,21 @@ def audit_answer_by_rederivation(result: Mapping[str, Any]) -> dict[str, Any]:
                 "verdict": "NOT_AUDITABLE__WORKSPACE_UNKNOWN",
                 "hint": "the recorded argv is workspace-relative; without the workspace "
                         "it cannot be replayed, and guessing one would be a false audit"}
+    # DID THE INPUTS MOVE? r48's audit re-ran against the CURRENT filesystem, so a file
+    # that changed between answer and audit could silently flip the verdict either way.
+    # The snapshot was taken at answer time; comparing it now turns "it matched when I
+    # checked" into "it matched against THESE bytes". A mismatch does not mean the answer
+    # was wrong -- it means this audit cannot speak about it, and says so.
+    drifted: list[dict[str, Any]] = []
+    for record in (provenance.get("inputs") or []):
+        try:
+            now = hashlib.sha256(pathlib.Path(record["resolved"]).read_bytes()).hexdigest()
+        except OSError:
+            drifted.append({"path": record.get("path"), "change": "GONE"})
+            continue
+        if now != record.get("sha256"):
+            drifted.append({"path": record.get("path"), "change": "CONTENT_CHANGED",
+                            "was_sha256": record.get("sha256"), "now_sha256": now})
     try:
         proc = subprocess.run([str(a) for a in argv], capture_output=True, text=True,
                               timeout=30, stdin=subprocess.DEVNULL, cwd=str(replay_cwd))
@@ -3103,13 +3124,106 @@ def audit_answer_by_rederivation(result: Mapping[str, Any]) -> dict[str, Any]:
     rederived = _contract_answer(contract, replay)
     stated = (result or {}).get("answer")
     same = rederived == stated
+    if drifted:
+        return {
+            "schema": "ANSWER_AUDIT_V1",
+            "auditable": False,
+            "verdict": "NOT_AUDITABLE__INPUTS_CHANGED_SINCE_THE_ANSWER",
+            "drift": drifted,
+            "would_have_said": ("ANSWER_MATCHES_ITS_SOURCE" if same
+                                else "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE"),
+            "note": ("the inputs are not the bytes the answer was derived from. The replay "
+                     "result below is about the CURRENT file and cannot confirm the answer."),
+            "answer_stated": stated,
+            "answer_rederived": rederived,
+        }
     return {
         "schema": "ANSWER_AUDIT_V1",
         "auditable": True,
         "verdict": "ANSWER_MATCHES_ITS_SOURCE" if same else "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE",
+        "inputs_unchanged_since_answer": True,
         "answer_stated": stated,
         "answer_rederived": rederived,
         "argv_replayed": [str(a) for a in argv],
         "replay_exit": proc.returncode,
         "method": "deterministic re-derivation; no model, no trust in the skill",
+    }
+
+
+def _snapshot_inputs(argv: Sequence[str], work_dir: pathlib.Path | None) -> list[dict[str, Any]]:
+    """Hash every file this argv names, so the answer can be audited later.
+
+    r48's closing limit: the auditor re-ran commands against the CURRENT filesystem, which
+    makes it re-derivation, not replay -- if the file changed, the verdict changes. The
+    2026 replay literature is blunt about why that is not enough (arXiv 2607.16200 is
+    reviewed as definitional; its referees note that re-execution is not replay).
+
+    This records what the argv READ, not what it did. A hash of the input at answer time
+    turns "the answer matched when I checked" into "the answer matched against THESE bytes".
+    Deliberately cheap: stat + sha256 of named files, no snapshotting of the world.
+    """
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for arg in list(argv)[1:]:
+        a = str(arg)
+        if not a or a.startswith("-"):
+            continue
+        candidate = pathlib.Path(a)
+        if not candidate.is_absolute() and work_dir is not None:
+            candidate = pathlib.Path(work_dir) / candidate
+        try:
+            if not candidate.is_file():
+                continue
+            key = str(candidate.resolve())
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({"path": str(candidate), "resolved": key,
+                        "sha256": hashlib.sha256(candidate.read_bytes()).hexdigest(),
+                        "bytes": candidate.stat().st_size})
+        except OSError:
+            continue
+    return out
+
+
+def audit_answer_shape(goal: str, result: Mapping[str, Any]) -> dict[str, Any]:
+    """SECOND AUDIT LAYER: does the answer have the SHAPE the goal asked for?
+
+    r48's audit checks derivation -- is the answer what the argv produces. Demonstrated
+    2026-11-09 that this is not enough: a skill whose goal says "count the lines" can hold
+    an argv of `sort -u` and the derivation audit says ANSWER_MATCHES_ITS_SOURCE while the
+    answer is ['apple','zebra'] and the truth was 3. Internally consistent, wrong for the
+    goal, audited clean.
+
+    This compares the goal's requested type against the answer's actual type. Cheap, and
+    it closes the shape half of that hole.
+
+    IT IS NOT A PROOF AND MUST NOT BE REPORTED AS ONE: a wrong answer of the RIGHT type
+    passes. "count the unique lines" against a goal of "count the lines" is an integer
+    either way.
+    """
+    want = str(infer_contract_from_goal(goal).get("kind") or "")
+    answer = (result or {}).get("answer")
+    if isinstance(answer, bool) or answer is None:
+        got = "none"
+    elif isinstance(answer, int):
+        got = "stdout_integer_value"
+    elif isinstance(answer, list):
+        got = "stdout_lines"
+    elif isinstance(answer, str):
+        got = "stdout_text_or_token"
+    else:
+        got = "unknown"
+    if want == "stdout_line_count_or_zero":
+        want = "stdout_integer_value"
+    compatible = (want == got) or (want == "stdout_first_token" and got == "stdout_text_or_token") \
+        or (want == "stdout_text" and got == "stdout_text_or_token")
+    return {
+        "schema": "ANSWER_SHAPE_AUDIT_V1",
+        "goal_requested_type": want,
+        "answer_actual_type": got,
+        "shape_matches": bool(compatible),
+        "verdict": "SHAPE_MATCHES_THE_GOAL" if compatible else "SHAPE_MISMATCH__GOAL_ASKED_FOR_A_DIFFERENT_KIND",
+        "honesty": ("a shape check only. A wrong answer of the correct type passes this and "
+                    "every derivation audit; nothing here verifies the CHOICE of command."),
     }
