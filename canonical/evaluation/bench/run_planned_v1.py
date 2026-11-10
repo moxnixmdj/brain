@@ -12,7 +12,7 @@ Per task:
 Cost is honest: probing costs actions. Every probed click is counted and reported. The
 question is not "how few actions" but "does ordering by plan beat ordering by guess".
 """
-import json, sys, time, pathlib, re
+import json, sys, time, pathlib, re, urllib.request
 sys.path.insert(0, "/home/user/brain")
 from canonical.runtime import bench_miniwob_v1 as B, address_v1 as A
 from canonical.runtime import bench_capability_graph_v1 as G
@@ -23,6 +23,34 @@ POOL = {"button","link","option","tab","menuitem","listitem","radio","checkbox",
 
 tasks = sorted(p.stem for p in pathlib.Path("/tmp/miniwob++/miniwob/html/miniwob").glob("*.html"))
 ch = B.ScoreChannel(); t0 = time.time()
+# A READ-ONLY state channel beside the act channel. Reading cannot cause an effect, so the
+# r82 restriction on Runtime.evaluate applies to ACT only, never to VERIFY (r85).
+RDC = None
+class _RD:
+    """Lazy state channel: no Runtime.evaluate in the act path, by construction."""
+    def __init__(self):
+        global RDC
+        import websocket
+        from canonical.runtime import state_read_v1 as SR
+        pages = [x for x in json.loads(urllib.request.urlopen("http://127.0.0.1:9222/json/list").read())
+                 if x["type"] == "page"]
+        RDC = SR.StateReadChannel(websocket.create_connection(pages[0]["webSocketDebuggerUrl"],
+                                                              timeout=25, origin="http://127.0.0.1:9222"))
+        self.SR = SR
+        self._mod = SR
+    def ask(self, chan, question, selector):
+        """Ask the read channel, opening it on first use."""
+        global RDC
+        if RDC is None:
+            self.__init__()
+        return RDC.ask(question, selector)
+
+    def centre_of(self, chan, eid):
+        global RDC
+        if RDC is None:
+            self.__init__()
+        return self.SR.centre_of(RDC, eid)
+RD = _RD()
 
 def snap():
     a = A.Address(A.target_url())
@@ -54,6 +82,14 @@ for i, t in enumerate(tasks, 1):
         m = Q.search(goal); lit = (m.group(1).strip().strip(".,;:") if m else "")
         r["literal"] = lit
         r["is_value"] = bool(TYPE_VERB.match(goal))
+        # A silent except here hid a lazy-init bug for one full round: RDC was None and the
+        # empty list was indistinguishable from "the page has no controls". Record the
+        # failure instead of swallowing it. -- a_r87
+        try:
+            mb_state = RD.ask(None, "list_of", "input,textarea,button") or []
+        except Exception as _e:
+            mb_state = []
+            r["read_error"] = str(_e)[:120]
         ns, tx = snap()
         f0 = facts(ns, tx)
         caps = []
@@ -109,7 +145,35 @@ for i, t in enumerate(tasks, 1):
                 tt = [x for x in A.read_text(aa) if x.get("box")]
                 aa.close(); return nn, tt
             low = lit.lower()
+            # A goal whose write shape is arity>=2, spread across fields, or transformed was
+            # planned correctly and then lost at the binder. Measured r86: those were ALL of
+            # the SOLVED-but-lost tasks. Plan the writes from the goal text and the page's
+            # own control list (state channel), not from a single literal.
+            from canonical.runtime import multi_bind_v1 as MB
+            _mb = None
             if r.get("is_value"):
+                try:
+                    _mb = MB.plan_multi_bind(goal, mb_state)
+                except Exception:
+                    _mb = None
+            if _mb and _mb["status"] == "SOLVED":
+                for _fid, _val in _mb["writes"]:
+                    _c = None
+                    try:
+                        _c = RD.centre_of(RDC, _fid) if RDC else None
+                    except Exception:
+                        _c = None
+                    if _c:
+                        ch.click(*_c); ch.type_text(str(_val)); r["probes"] += 2; time.sleep(0.15)
+                _btns = [n for n in (mb_state or []) if str(n.get("tag","")).upper() == "BUTTON" and n.get("vis")]
+                for _b in _btns:
+                    if str(_b.get("text","")).strip().lower() in ("submit","go","send","done","sign in","login"):
+                        try: _bc = RD.centre_of(RDC, _b["id"]) if RDC else None
+                        except Exception: _bc = None
+                        if _bc: ch.click(*_bc); r["probes"] += 1; time.sleep(0.3)
+                        break
+                r["binder"] = _mb["status"]; r["binder_mode"] = _mb.get("mode")
+            elif r.get("is_value"):
                 ns, tx = read()
                 tb = [n for n in ns if n["role"] in ("textbox","combobox","searchbox")]
                 if tb:

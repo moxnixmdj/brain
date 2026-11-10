@@ -128,8 +128,14 @@ def hit_at(channel: "StateReadChannel", x: float, y: float) -> Any:
 
 
 def centre_of(channel: "StateReadChannel", element_id: str) -> list[float] | None:
-    """Where the page says a node is. Never a pixel measurement."""
-    return channel.ask("centre_of", "#" + element_id)
+    """Where the page says a node is. Never a pixel measurement.
+
+    Accepts "tt" or "#tt". The first version prefixed '#' unconditionally, so a caller
+    passing "#tt" produced "##tt" -- an invalid selector, which querySelector rejects, so
+    the read silently returned None and the click never happened (measured r87).
+    """
+    sel = element_id if element_id.startswith("#") else "#" + element_id
+    return channel.ask("centre_of", sel)
 
 
 def _selector_is_data(selector: str) -> bool:

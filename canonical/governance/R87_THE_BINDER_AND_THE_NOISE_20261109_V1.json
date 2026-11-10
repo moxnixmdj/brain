@@ -1,0 +1,33 @@
+{
+  "round": 87,
+  "date": "2026-11-09",
+  "title": "The binder works (5/7 every run); the total moved inside noise",
+  "three_runs_identical_code": {
+    "totals": [11, 8, 8],
+    "mean": 9.0, "stdev": 1.41, "range": "8-11",
+    "binder_class_wins": [5, 5, 5],
+    "binder_class_tasks": 7,
+    "the_control": "the binder class is STABLE at 5/7. The suite total is not: the click/reveal class swings run to run."
+  },
+  "what_i_reported_and_must_correct": [
+    {"claim": "13/130 (r87 first run)", "status": "NOISE -- the binder had not engaged (0 tasks); the 13 came from the click class"},
+    {"claim": "11/130 (r87b)", "status": "INSIDE NOISE -- indistinguishable from 8"},
+    {"claim": "'first real gain in four rounds'", "status": "WITHDRAWN -- true of the binder class (0/6 -> 5/7 at 75%), not of the suite total"}
+  ],
+  "the_real_result": {
+    "module": "canonical/runtime/multi_bind_v1.py",
+    "old_model": "one literal into one control; covered 32/130 goals; won 0 of the 6 binder-shaped tasks",
+    "new_model": "every literal bound in order to fields from the page's own control list; 5 of 7 binder tasks won in EVERY run",
+    "literature": {"FormFactory arXiv 2506.01520": "no frontier MLLM above 5% on form filling; end-to-end completion under 2%", "FormGym EACL 2026": "field LOCALIZATION is the bottleneck; Claude Computer Use 21.1%", "how_this_differs": "localization is sidestepped entirely -- field identity comes from the DOM, never from a guessed coordinate"}
+  },
+  "two_bugs_that_hid_the_fix": [
+    {"id": "lazy_init_swallowed", "symptom": "binder engaged on 0 tasks while every receipt read clean", "cause": "_RD.__init__ ran but self.SR was assigned only inside it; the first ask preceded RDC, and `except Exception: mb_state = []` made failure identical to 'the page has no controls'"},
+    {"id": "double_hash_selector", "symptom": "centre_of returned None for a node value_of could read", "cause": "the helper prefixed '#' unconditionally, so '#tt' became '##tt'; an invalid selector throws inside querySelector and the read returned None"}
+  ],
+  "laws_reaffirmed": {
+    "r77": "report the spread or do not report the number -- applied here for the first time on the suite",
+    "r73": "a benchmark score is worth exactly the credibility of its harness",
+    "silent_except": "an except that substitutes an empty list for an error is indistinguishable from a true empty result. Record the error."
+  },
+  "tests": {"new_file": "canonical/tests/test_multi_bind_and_the_field_arity_v1.py", "new_passed": 8}
+}
