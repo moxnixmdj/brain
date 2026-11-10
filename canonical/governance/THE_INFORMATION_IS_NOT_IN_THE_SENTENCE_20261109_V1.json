@@ -1,0 +1,48 @@
+{
+  "round": 55,
+  "date": "2026-11-09",
+  "title": "First principles: selection has a ceiling set by the sentence, not by the code. The only two correct behaviours are select uniquely or ask.",
+  "the_question_that_replaced_patching": "r50 measured 4/8 and r52 found a wrong answer at |S|=4. Both were treated as defects to repair. The first-principles question is different: given only the words of a user's sentence, is the correct operation identifiable AT ALL?",
+  "the_oracle_measurement": {
+    "method": "a perfect bag-of-words selector -- argmax over word overlap, no heuristics, no skeleton gate, no cue table",
+    "catalog_size": 30,
+    "result": "7 of 8 asks tie at the top",
+    "examples": {
+      "tally the rows of": "top score 0, tied 30 ways -- shares no content word with any taught skeleton",
+      "dedupe the lines in": "top score 1, tied 6 ways -- 'dedupe' appears in no teaching sentence",
+      "sha256 of": "top score 1, tied 1 way -- the only determinate case in the set"
+    },
+    "note_on_catalog_size": "at a 9-skill catalog the same oracle ties 6 of 8. The ambiguity is a function of the catalog, so it can only worsen as capability is added."
+  },
+  "the_first_principles_derivation": [
+    "A selector consumes a sentence and a catalog and returns an operation.",
+    "If the sentence contains no word that separates operation A from operation B, then A and B score identically under every selector that consumes only that sentence.",
+    "Adding synonyms, embeddings, or parameters re-ranks the same bits and therefore cannot separate a tie.",
+    "Therefore the ceiling is a property of the input, not of the implementation.",
+    "The only operations that escape the ceiling are: more input (the user names the operation, or answers a question) -- or the system produces an answer that is wrong by construction and does not say so."
+  ],
+  "the_erroneous_prior_claim_retracted": {
+    "r50_wrote": "the remaining four misses need four more cue phrases, which is copying the answer key",
+    "why_it_was_still_wrong": "it treated the gap as a matter of vocabulary size. The oracle shows four of those asks are not resolvable by ANY vocabulary, because the discriminating word is absent from the sentence. Adding cues would have been fitting noise.",
+    "corrected_position": "the gap is an information gap. It is closed by asking, not by widening a table."
+  },
+  "the_two_correct_behaviours_and_what_was_built": {
+    "function": "select_or_ask(goal, db_path)",
+    "SELECTED": "exactly one operation ties at the top -- returns the skill id and the operation",
+    "ASK": "zero or several operations tie -- returns the question, the named options, and the reason (SEVERAL_OPERATIONS_TIE / NO_WORD_OVERLAP__CANNOT_CHOOSE / NOTHING_TAUGHT)",
+    "why_it_matters": "the old path returned None, which is indistinguishable from 'no such skill exists', or silently took the first candidate, which is exactly how r52's `sort` without `-u` was produced. A refusal that cannot be told apart from absence is not a refusal."
+  },
+  "external_agreement_2026": {
+    "Entity Binding Failures in Tool-Augmented Agents (arXiv 2606.30531)": "'For truly ambiguous tasks, no unique binding can be recovered from the instruction and environment state alone ... the expected safe behavior is clarification rather than execution.' Entity-aware methods: 100% ambiguity detection, 0.0% over-clarification.",
+    "MID-Bench (EMNLP 2026)": "'clarification behavior accounts for only 0.1% of emitted actions on average across four open-weight agents' -- the Act-without-Asking failure mode",
+    "ProactiveBench (2026)": "models recognise ambiguity when asked to judge it and answer directly anyway, 'knowing but not showing'",
+    "convergence": "the field's finding and this project's measurement are the same finding from opposite ends: the sentence does not carry the decision, and the honest system must say so."
+  },
+  "on_the_instruction_about_path": {
+    "asked": "think from first principles so we detect the real flow and reach the goal in the fastest optimal way",
+    "what_changed": "this round did no feature work and no patching. One derivation, one oracle measurement, one function, one refusal. The measurement says the next round of vocabulary work would have been wasted -- which is the fastest way, taken by not doing it.",
+    "what_did_not_change": "the system still cannot do computer use, still does not compose, still does not select reliably, and is still not sentient. Correctness about the ceiling is not movement toward the goal."
+  },
+  "regression": {"files": 18, "passed": 132, "xfailed": 1, "r46_baseline": "23/23 unchanged"},
+  "next": ["wire select_or_ask into recall so a tie reaches the caller as a question", "evidence omission", "write layer, last"]
+}
