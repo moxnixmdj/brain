@@ -1,0 +1,33 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "FOUR_ENVIRONMENT_SHAPES_MEASURED_20261109_V1",
+  "round": 82, "date": "2026-11-09",
+  "the_claim_under_test": "one demonstration in any environment is enough, permanently, for all computer use",
+  "shapes_now_demonstrated_end_to_end": {
+    "sqlite_exec__L1": "prior record + re-verified this session",
+    "python_file_op__L1": "round 80; needed _rebase_step_paths because the demonstrated absolute path was baked in",
+    "http_request__L2": "round 81; six UI steps -> one POST -> parameterised -> new order at 2.0 ms with no browser",
+    "cli_exec__L3": "this round; wc -l under admitted confinement, filename parameterised as ?path0"
+  },
+  "the_front_half_is_now_closed_for_http": {
+    "before": "observed_effects.http_exchanges was hand-written; the harness already knew the answer",
+    "now": "trace_capture_v1 subscribes to the browser's own Network events. It cannot click, type, navigate or evaluate -- ALLOWED_HERE is {Network.enable, Network.disable}",
+    "measured": "a real click sequence on a live form captured POST /orders {csrf: LIVE-TOK, sku: A-100, qty: 40, go: ''} 201; learned {sku: ?str0, qty: ?num0}; new goal Z-777 x3 executed 201 at 2.0 ms",
+    "significance": "the demonstration now comes from a real person clicking, not from a harness that knows the answer"
+  },
+  "measured_costs_not_declared_ones": {
+    "http_request": "2.0 ms (declared <15 ms) -- better than declared",
+    "python_file_op": "0.06 ms elevation; write is a single syscall",
+    "cli_exec": "97 ms steady state, 206 ms first call (declared <50 ms) -- 2x WORSE than declared",
+    "why": "bare subprocess.run is 2.0 ms; the confinement boundary is ~95 ms of that",
+    "position": "that is the price of safety, and it is the correct price. But the layer table must not keep claiming <50 ms."
+  },
+  "what_this_now_supports": "the owner's thesis, in the shape that is actually true: ONE demonstration becomes a PERMANENT, PARAMETERISED, INSTANT skill in FOUR independent environment shapes, each with an exact verifier, at zero trained parameters and zero model calls",
+  "what_it_still_does_not_support": {
+    "the_open_environment_case": "semantic_dom (L4) is not demonstrated; a GUI whose effect is a rendered image has no exact capture",
+    "anything_on_a_computer": "no. This is four verifier-bearing shapes out of an open set.",
+    "no_benchmark_numbers": ["SWE-bench Verified", "OSWorld"],
+    "no_sentience": "round 43, zero"
+  },
+  "next": "semantic_dom (L4): demonstrate a task whose only effect is a change in the DOM, and see whether the change can be verified exactly enough to be called a skill."
+}
