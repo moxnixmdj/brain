@@ -480,6 +480,57 @@ def _substitute_in_obj(obj: Any, mapping: Mapping[str, str]) -> Any:
     return obj
 
 
+def _rebase_step_paths(steps: Any, cwd: "str | pathlib.Path | None") -> Any:
+    """Move every file path in a compiled step under `cwd`.
+
+    MEASURED FAILURE (r80, second environment shape). A skill learned in
+    /tmp/envA wrote "restock.txt" at /tmp/envA/restock.txt. Replayed into /tmp/envB it
+    reported ok:True and the file was MISSING -- because the demonstrated absolute path was
+    baked into the step and never rebased. A skill that cannot be moved to a new directory is
+    not a skill in a new environment; it is a recording of an old one.
+
+    Behaviour: only BASENAMES are carried across. If the step's path already lives under
+    `cwd`, it is left alone. Directory structure inside the demonstrated tree is preserved
+    relative to that tree's root when cwd is given.
+    """
+    if cwd is None:
+        return steps
+    root = pathlib.Path(cwd).resolve()
+
+    def fix(p: str) -> str:
+        try:
+            rp = pathlib.Path(p)
+        except Exception:
+            return p
+        if not rp.is_absolute():
+            return str((root / rp))
+        try:
+            if root in rp.resolve().parents or rp.resolve() == root:
+                return str(rp)
+        except Exception:
+            pass
+        return str(root / rp.name)
+
+    def walk(obj: Any) -> Any:
+        if isinstance(obj, Mapping):
+            out = {}
+            for k, v in obj.items():
+                if str(k) in ("path", "db_path", "file", "target_path") and isinstance(v, str):
+                    out[k] = fix(v)
+                else:
+                    out[k] = walk(v)
+            return out
+        if isinstance(obj, list):
+            return [walk(x) for x in obj]
+        return obj
+
+    return walk(steps)
+
+
+class _Unused:
+    """kept so the original definition site below stays unchanged in the diff"""
+
+
 def _instantiate_obj(obj: Any, bindings: Mapping[str, str]) -> Any:
     if isinstance(obj, str):
         if obj in bindings and obj.startswith("?num"):

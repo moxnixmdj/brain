@@ -1,0 +1,36 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "SECOND_ENVIRONMENT_SHAPE_FILE_TREE_MEASURED_20261109_V1",
+  "round": 80, "date": "2026-11-09",
+  "what_was_owed": "DEMONSTRATE_ONCE_MEASURED_20261109_V1 ranked as its first next action: 'run the demonstrate-once loop against a SECOND environment shape and publish each number. One working environment proves the loop; three prove the abstraction.' Only sqlite_exec had ever been demonstrated.",
+  "the_second_shape": {
+    "layer": "python_file_op (Layer 1, <2 ms)",
+    "demonstration": "a UI-shaped 5-step trace around ONE causal file write, in /tmp/envA",
+    "elevated": "1 step, 0.06 ms, all UI steps pruned",
+    "learned": "content 'restock ?str0 by ?num0 units', holes [?str0, ?num0], goal_skeleton 'write the restock note for ?str0 by ?num0 units'",
+    "reused": "new goal 'write the restock note for B-200 by 500 units' -> bindings {'?str0':'B-200','?num0':'500'}",
+    "executed": "/tmp/envB, ok:True, /tmp/envB/restock.txt = 'restock B-200 by 500 units'",
+    "old_world_untouched": true
+  },
+  "the_bug_this_shape_found_that_the_database_shape_could_not": {
+    "symptom": "execute_compiled_steps returned ok:True and the file in the new environment was MISSING",
+    "cause": "the demonstrated ABSOLUTE PATH was baked into the instantiated step; nothing rebased it",
+    "why_sqlite_never_showed_it": "the recorded db_path was also absolute, and the test that exercises it reuses the same database",
+    "fix": "_rebase_step_paths(steps, cwd) in causal_trace_to_skill_compiler_v1",
+    "significance": "a skill that cannot move to a new directory is not a skill in a new environment, it is a recording of an old one. THIS IS NOT AN ABSTRACTION TEST -- it is the definition of the claim."
+  },
+  "the_recurring_failure_class__third_instance": [
+    "r64: ok path returned while the PNG was truncated",
+    "r74: benchmark runner swallowed a KeyError and reported 0/25",
+    "r80: execute returned ok:True and wrote to the wrong absolute path",
+    "the lesson, unchanged: a success flag is not a postcondition"
+  ],
+  "state_of_the_abstraction_claim": {
+    "shapes_demonstrated": ["sqlite_exec (Layer 1)", "python_file_op (Layer 1)"],
+    "shapes_declared_but_not_demonstrated": ["http_request (Layer 2)", "cli_exec (Layer 3)", "semantic_dom (Layer 4)"],
+    "verdict": "two of the declared shapes now work end to end. The abstraction is supported, not proven: two points do not determine a curve."
+  },
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "what_is_still_NOT_real": ["no SWE-bench Verified score", "no OSWorld score", "ARC-AGI 1.5%", "no sentience, 41 rounds"],
+  "next": "http_request (Layer 2) is the next shape: it has an exact verifier (status + response body) and it is the layer where a browser demonstration becomes an API call, which is the whole thesis."
+}
