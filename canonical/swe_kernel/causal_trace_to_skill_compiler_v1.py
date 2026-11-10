@@ -1060,6 +1060,75 @@ def _recall_clarification(goal: str, conn) -> tuple[str, str, str] | None:
         return None
     return (row[0], row[1], row[2]) if row else None
 
+
+# --------------------------------------------------------------------------------------------
+# r61: WIDEN THE GATE FROM ANSWER KIND TO OPERATION.
+#
+# Measured this round on the real record:
+#
+#     taught 'sort -u'          postcondition = {'kind': 'stdout_lines'}
+#     taught 'sort'             postcondition = {'kind': 'stdout_lines'}
+#
+# Identical. The postcondition describes how to check the OUTPUT SHAPE and says nothing about
+# which operation produced it, so "unique lines of" answered by plain `sort` verifies, and
+# returns the duplicates it was asked to remove. r60 measured 3/3 type-changing wrong picks
+# caught; this was the one it could not see.
+#
+# The fix is not a new oracle. It is one more field in the contract: the operation the
+# sub-goal commits to, and a check that the steps that actually ran are that operation.
+# "Distinct" goals already name something the steps must contain; this makes that name
+# load-bearing rather than decorative.
+# --------------------------------------------------------------------------------------------
+
+# goal phrasing -> an element the executed argv must contain for that phrasing to be honoured
+_OPERATION_COMMITMENTS = (
+    (("unique", "distinct", "dedupe", "dedup"), {"-u"}),
+    (("count", "tally", "number of lines", "how many"), None),   # count is a KIND, not a flag
+    (("sha256", "checksum"), None),
+)
+
+
+def infer_operation_commitment(goal: str) -> tuple[str, str] | None:
+    """Return ('contains', '<token>') when the goal's wording demands a specific flag.
+
+    Deliberately narrow. It returns a commitment only where the phrase names a behaviour the
+    argv can be checked for. Where the wording is silent, it returns None and the existing
+    kind check stands alone -- a gate that fires on wording it cannot verify is a gate that
+    rejects correct answers, which r53 already paid for once.
+    """
+    low = goal.lower()
+    for cues, required in _OPERATION_COMMITMENTS:
+        if required is None:
+            continue
+        if any(c in low for c in cues):
+            return ("contains", sorted(required)[0])
+    return None
+
+
+def verify_operation_commitment(
+    commitment: tuple[str, str] | None,
+    execution_result: Mapping[str, Any] | None,
+) -> tuple[bool, str]:
+    """Did the steps that actually ran honour the operation the goal named?"""
+    if commitment is None:
+        return True, "NO_OPERATION_COMMITMENT_IN_THE_GOAL"
+    relation, token = commitment
+    if execution_result is None:
+        return False, "OPERATION_COMMITMENT_UNVERIFIABLE__NO_EXECUTION"
+    argvs: list[list[str]] = []
+    for receipt in (execution_result.get("step_receipts") or []):
+        if isinstance(receipt, Mapping):
+            if receipt.get("argv"):
+                argvs.append([str(a) for a in receipt["argv"]])
+            for stage in (receipt.get("stages") or []):
+                argvs.append([str(a) for a in stage])
+    if not argvs:
+        return False, "OPERATION_COMMITMENT_UNVERIFIABLE__NO_ARGV"
+    hit = any(token in argv for argv in argvs)
+    if hit:
+        return True, f"OPERATION_COMMITTED:{token}"
+    return False, f"OPERATION_NOT_HONOURED__ASKED_FOR_{token}"
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
@@ -3265,6 +3334,12 @@ def recall_and_execute_workflow(
             continue
         ok, reason = verify_postcondition(inst_post, cwd=cwd, execution_result=exec_res)
         if not ok:
+            continue
+        # r61: the postcondition checks what the answer LOOKS like. This checks that the
+        # operation the question named is the operation that ran.
+        _commit = infer_operation_commitment(goal)
+        _cok, _creason = verify_operation_commitment(_commit, exec_res)
+        if not _cok:
             continue
         # Record hit count asynchronously-safe in WAL
         target_db, conn = _connect_db(db_path)
