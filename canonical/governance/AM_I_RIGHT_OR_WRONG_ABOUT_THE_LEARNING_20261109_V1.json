@@ -1,0 +1,33 @@
+{
+  "round": 59,
+  "date": "2026-11-09",
+  "title": "Direct answer to a direct question: partly right. Faster and more reversible than fine-tuning -- yes. Better learning than current methods -- no, and the field's own test says so.",
+  "the_question": "isn't all of this a revolutionary way to make agents learn faster and better than the current way they learn, for the most advanced coding and computer use?",
+  "answer": "WRONG ON 'LEARNING'. RIGHT ON 'FASTER AND CHEAPER THAN FINE-TUNING'. WRONG ON 'CODING AND COMPUTER USE'.",
+  "claim_1_faster_than_fine_tuning": {
+    "verdict": "RIGHT, and the margin is large",
+    "measured_here": "one demonstration -> milliseconds, no GPU, one row, exactly reversible (restore a file copy and the capability returns byte-identical)",
+    "fine_tuning_comparison": "every new fact costs a retrain, risks catastrophic forgetting of others, and deletion requires machine unlearning. 2026 calls this 'the parallel learning tax'",
+    "what_makes_it_stronger_than_it_sounds": "exact reversibility. Delete the row and the capability is gone; restore it and it is back. No other learning mechanism in this comparison can do that."
+  },
+  "claim_2_better_learning": {
+    "verdict": "WRONG",
+    "the_field_criterion": "'What happens if memory is wiped? If the gain vanishes, it was memory.'",
+    "measured": "before wipe: ANSWERED ['q','z']. after wipe: ASK, NOTHING_TAUGHT. The file, the program and the process were unchanged; only the row was removed",
+    "peer_numbers": "Skill-GRPO, a skill-retrieval baseline, falls 80.5 -> 60.2 on ALFWorld-3B when skills are withheld. SKILL0 states the premise: the model 'never truly acquires the knowledge it merely follows'",
+    "what_it_is": "procedural memory externalised, or more plainly: filing. Very good filing. Not learning in the sense that makes a model more capable of the next untaught task."
+  },
+  "claim_3_most_advanced_coding_and_computer_use": {
+    "verdict": "WRONG, and it is the weakest of the three",
+    "coding": "there is no model. 0 parameters. A system that cannot read a code file cannot produce advanced coding, and adding four billion skills does not change what reads the skill description",
+    "computer_use": "no display, no browser, no pointer driver, no GUI toolkit in this runtime. And 2026: OSExpert reports 0-10% success on unseen UIs, AgentNet fine-tuning on 22.5K human trajectories dropped UI-TARS 7B from 26.3% to 8-10%",
+    "the_structural_reason": "one-demonstration learning cannot produce generalisation across an application family. It produces an operator that transitions from unknown to known. Most of the work remains adjacent-to-the-new."
+  },
+  "where_the_flat_answer_is_too_harsh": {
+    "the_measured_contrast": "after teaching 12 more operations, the original skill still executed correctly BY ID. It was not corrupted. Only FINDING it degraded.",
+    "why_that_matters": "catastrophic forgetting damages the skill. This damages the pointer. Losing reachability is recoverable -- one clarification, one better index -- while losing the capability is not. The system is more benign than the thing it is being compared to."
+  },
+  "the_genuinely_strong_result_of_this_project": "both the learn AND the forget are grants the user makes. Adding a capability is one demonstration; removing it is one row; restoring it is one file copy. Nothing in the weights is at stake because there are no weights. Fine-tuning cannot offer that, and 2026's own comparison tables put memory-augmented approaches at 'strongest retention, nothing in the model changes'.",
+  "the_honest_headline": "this is not a revolutionary way to learn. It is a very good way to REMEMBER, and the two are confused everywhere in the industry, including in the question.",
+  "regression": {"files": 21, "passed": 154, "xfailed": 1, "r46_baseline": "23/23 unchanged"}
+}
