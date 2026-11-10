@@ -91,6 +91,34 @@ for i, t in enumerate(tasks, 1):
             mb_state = []
             r["read_error"] = str(_e)[:120]
         ns, tx = snap()
+
+        # ROUND 93 -- THE THING THAT WAS MISSING FOR TEN ROUNDS.
+        # Six modules were built and left OUT of this loop: page_first_grounding_v1,
+        # predicate_induction_v1, task_class_router_v1, addressability_probe_v1,
+        # goal_arity_v1, target_extraction_v2. The benchmark has therefore been measuring
+        # the OLD parser (`text_locate_v1.best_run`) while every round reported on new
+        # instruments that were never called. An improvement that is not wired in cannot
+        # show up in any number, and "the number did not move" was me not connecting it.
+        #
+        # Grounding now comes from the PAGE, in priority order:
+        #   1. page-first intersection  -- a target the page actually renders
+        #   2. quoted literal           -- the old path, kept as a fallback
+        #   3. nothing                  -- reported honestly
+        try:
+            from canonical.runtime import page_first_grounding_v1 as PFG
+            _live = RD.ask(None, "list_of", "#area *") or []
+            _strings = [str(x.get("text") or "") for x in _live if str(x.get("text") or "").strip()]
+            _g = PFG.ground(goal, _strings)
+            r["grounding"] = _g["status"]
+            if _g["status"] == "GROUNDED" and _g.get("target"):
+                lit = _g["target"]
+                r["literal"] = lit
+                r["literal_source"] = "page"
+            else:
+                r["literal_source"] = "quote" if lit else "none"
+        except Exception as _e:
+            r["grounding"] = "ERROR:" + str(_e)[:80]
+
         f0 = facts(ns, tx)
         caps = []
         caps_seen = set()
@@ -132,8 +160,8 @@ for i, t in enumerate(tasks, 1):
                     ch.click(*centre(ctl)); r["probes"] += 1; time.sleep(0.20)
                 f0 = facts(*snap())
         else:
-            # 93/130 arrived here and NOTHING was done, then the task was scored as a failure.
-            # "Did not try" and "tried and failed" were the same number. -- a_r83
+            # Reached only when page-grounding AND quoting both failed. Still recorded as
+            # "did not try", never as an attempted failure. -- a_r83, extended r93
             pr = {"status": "NO_LITERAL"}; r["strategy"] = "not_attempted_no_literal"
         r["plan_len"] = len(pr.get("plan") or [])
         r["plan_status"] = pr["status"]
