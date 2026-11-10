@@ -1,0 +1,89 @@
+{
+ "schema": "brain.governance.THE_SKILL_COULD_NOT_FIND_ITS_FILE_20261109_V1",
+ "date": "2026-11-09",
+ "round": 39,
+ "status": "ONE_DEMONSTRATION_MEASURED_END_TO_END__A_PATH_DEFECT_FOUND",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "why_this_round_exists": "The claim has been asked five times and the answer has held since r35. But one clause had never been tested end-to-end: 'after he does them at least once, he would learn all of those permanently'. Every prior learning test used the shipped skill or a fixture. This round teaches a genuinely NEW skill and measures all four properties.",
+ "the_four_properties__measured": {
+  "1_learns_from_one_demonstration": "YES -- compile_and_qualify_skill returned PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED on a single trace",
+  "2_reaches_a_new_environment": "YES -- the learned skill HIT on a database it was never trained on",
+  "3_survives_paraphrase": "YES -- 'turn on the language option' reached a skill taught with those words; a paraphrase HIT; 'turn OFF...' correctly MISSED",
+  "4_permanent": "PARTIAL -- the RECORD persists on disk across processes; the CAPABILITY does not always, and the reason is the defect below"
+ },
+ "the_defect": {
+  "what_i_saw": "held-out qualification failed with FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT",
+  "what_that_looks_like": "a safety refusal, which reads as the system being careful",
+  "what_it_actually_is": "EXIT CODE 2 -- the command could not find its file. Confinement held the entire time (confined: True, live_workspace_untouched: True).",
+  "the_mechanism_measured": {
+   "carrier_stages_a_workspace_and_runs_with_it_as_cwd": true,
+   "bare_filename": {
+    "argv": [
+     "sort",
+     "-u",
+     "data.txt"
+    ],
+    "exit": 0,
+    "works": true
+   },
+   "repo_relative_path": {
+    "argv": [
+     "sort",
+     "-u",
+     "canonical/astra_runtime/tmp/x/data.txt"
+    ],
+    "exit": 2,
+    "works": false
+   }
+  },
+  "why_it_matters": "A skill compiled from a goal naming a repo-relative path stores an argv the carrier can never satisfy. The skill is correct, the store is correct, the carrier is correct, and the learned capability is still dead -- because nothing checked that they agree about what a path means. It fails as a SAFETY refusal, so it looks like care rather than inability.",
+  "nothing_was_weakened_to_work_around_it": "no confinement rule was changed; the finding is that path binding and carrier staging disagree"
+ },
+ "what_this_settles_about_the_thesis": {
+  "fabrication": "a learned skill is not a script -- it is a parameterized program with a postcondition and a held-out qualification gate",
+  "generalisation": "genuine but NARROW: it generalises across instances of the SAME operation (a different file, a different database), not across operations",
+  "permanence": "the bytes are permanent; permission to EXECUTE is re-established per call and can fail for reasons that have nothing to do with the skill",
+  "exceeding_the_carrier": "no -- still 37 read verbs, still no compile/build/install/fetch/write",
+  "learning_a_new_KIND": "no -- r36 measured 0 net saving across 10 never-seen kinds"
+ },
+ "the_shipped_skill_works_when_reachable": {
+  "test": "the one skill in the store, bound to a bare filename in its own workspace",
+  "unique": "HIT answer=2",
+  "distinct": "HIT answer=2",
+  "different": "HIT answer=2",
+  "wrong_intent_words": "MISS",
+  "reading": "the software is sound. The mismatch is a path-binding assumption, not a broken learner."
+ },
+ "pinned_by": "canonical/tests/test_a_skill_is_bound_where_the_carrier_can_reach_it_v1.py (6 tests): bare filename reachable, repo-relative NOT reachable, the shipped skill answers, survives paraphrase, refuses a different intent",
+ "the_answer_unchanged": {
+  "compounding": "0 net saving across 10 never-seen kinds",
+  "learning_to_learn": "3/10 against a random policy",
+  "general_environment_learning": "bounded random walking; 81% coverage at 200 trials; goal never reached",
+  "any_computer_use": "37 read verbs, 33 installed; no compile, build, install, fetch, or write",
+  "sentience": "no",
+  "public_benchmark_number": "zero"
+ },
+ "smartest_next_moves__ranked": [
+  {
+   "rank": 1,
+   "action": "BIND PATHS AT THE CARRIER'S ROOT, NOT THE REPO'S",
+   "why": "this is the only thing between the measured learner and a working capability. It is a binding rule, not a new subsystem, and it is worth more than any further generalisation work because right now the shipped skill can only run from a workspace whose cwd happens to match."
+  },
+  {
+   "rank": 2,
+   "action": "MAKE THE FAILURE LEGIBLE: exit 2 must not surface as a confinement refusal",
+   "why": "this defect hid for an unknown number of rounds behind a status string that means 'safety' when it meant 'file not found'. A refusal that misnames its cause costs more than a refusal."
+  },
+  {
+   "rank": 3,
+   "action": "MEASURE THE STORE AGAIN AFTER RANK 1",
+   "why": "the honest question is how many of the 37 verbs can be taught, executed and replayed end-to-end. Today the answer is one, and only from a matching cwd."
+  }
+ ],
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}
