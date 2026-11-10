@@ -11674,6 +11674,85 @@
     "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
    }
   },
+  "web.page.act.on_rendered_page": {
+   "action_template": {
+    "args": {
+     "action": "${input.action}",
+     "capability_id": "web.page.act.on_rendered_page",
+     "target": "${input.target}",
+     "url": "${input.url}",
+     "value": "${input.value}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "rendered_page_act",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "input_names": [
+    "url",
+    "action",
+    "target",
+    "value"
+   ],
+   "keywords": [
+    "click",
+    "type",
+    "select",
+    "press",
+    "act",
+    "interact",
+    "page",
+    "browser",
+    "button",
+    "submit",
+    "rendered",
+    "ui"
+   ],
+   "limitations": [
+    "Local benchmark pages only (URL_NOT_LOCAL_BENCHMARK_PAGE above).",
+    "Executes a NAMED action at a NAMED target; it does not choose the target.",
+    "Needs a running Chrome with CDP on 127.0.0.1:9222."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "web.page.acted",
+    "web.browser.rendered.interact"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "url",
+    "goal_seen_on_page",
+    "action",
+    "target",
+    "acted_at",
+    "page_reported_done",
+    "page_reported_reward",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/rendered_page_act.py",
+    "module": "rendered_page_act"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified_by": "miniwob.in_page_grader",
+    "mission_id": "ASTRA-VERIFY-RENDERED-PAGE-ACT-001",
+    "observed_effect": {
+     "trials_run": 4,
+     "verified_wins": 1
+    },
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENDERED-PAGE-ACT-001__RECEIPT.json"
+   }
+  },
   "web.release.verify.independent_http": {
    "action_template": {
     "args": {

@@ -1,0 +1,41 @@
+{
+ "schema": "PROJECT_BRAIN_INDEPENDENT_VERIFICATION_RECEIPT_V1",
+ "mission_id": "ASTRA-VERIFY-RENDERED-PAGE-ACT-001",
+ "capability_id": "web.page.act.on_rendered_page",
+ "independently_verified_by": "MiniWob++ in-page grader (WOB_DONE_GLOBAL/WOB_REWARD_GLOBAL), foreign code, read in a separate process; plus CDP Input events as the only action channel",
+ "observed_effect": {
+  "trials": [
+   {
+    "task": "click-test",
+    "done": true,
+    "reward": 0.8594999999999999,
+    "ok": true
+   },
+   {
+    "task": "click-button",
+    "ok": false,
+    "error": "RuntimeError: TARGET_NOT_ON_PAGE:2"
+   },
+   {
+    "task": "click-checkboxes",
+    "done": true,
+    "reward": -1,
+    "ok": false
+   },
+   {
+    "task": "click-dialog",
+    "ok": false,
+    "error": "RuntimeError: TARGET_NOT_ON_PAGE:Close"
+   }
+  ],
+  "verified_wins": 1,
+  "trials_run": 4,
+  "best": {
+   "task": "click-test",
+   "reward": 0.8594
+  }
+ },
+ "claim": "the capability can deliver a mouse/keyboard action at a named target on a rendered local page and the PRODUCING PAGE reports completion and a positive reward",
+ "not_claimed": "that the target was chosen correctly -- grounding is a separate capability and a separate measurement (r92/r93)",
+ "authority": "NONE__SANDBOX_MEASUREMENT"
+}

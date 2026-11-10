@@ -1,0 +1,55 @@
+{
+  "round": 101,
+  "date": "2026-11-09",
+  "title": "The first UI action the model owns, and the exact separation of acting from choosing",
+  "the_question": "'isn't instant learning enough to solve everything on a computer' + 'YOU SURE THIS THE SMARTEST APPROACH?' at every step",
+  "before_this_round": {
+    "capabilities_performing_a_UI_action": "0 of 444",
+    "the_only_row_advertising_interaction": "web.browser.rendered.capture.chromedriver -- capture only",
+    "its_own_verification_receipt": "ASTRA-VERIFY-BROWSER-INTERACTION-001 carries a recorded BLOCKER: SELECT_TARGET_NOT_FOUND",
+    "reading": "the model believed it could click. its own evidence said it could not."
+  },
+  "built": {
+    "module": "canonical/runtime/bound_capabilities/rendered_page_act.py",
+    "capability": "web.page.act.on_rendered_page",
+    "inputs": ["url", "action (click|type|select|press)", "target", "value"],
+    "channels": "CDP Input.dispatchMouseEvent / dispatchKeyEvent only; method allowlist; expression allowlist; local URLs only (URL_NOT_LOCAL_BENCHMARK_PAGE)",
+    "measures": "it does NOT choose the target. grounding is a separate capability and a separate measurement."
+  },
+  "the_independent_oracle": {
+    "who": "MiniWob++ in-page grader -- WOB_DONE_GLOBAL / WOB_REWARD_GLOBAL -- written by strangers, read after the action",
+    "why_it_qualifies": "the capability returns the PAGE's verdict, never its own; self-report is refused exactly as the adapter refuses it elsewhere",
+    "receipt": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENDERED-PAGE-ACT-001__RECEIPT.json"
+  },
+  "measured": {
+    "click-test, target 'Click Me!'": "done=True, reward=0.8595, VERIFIED",
+    "click-option, target 'Submit'": "actuated, done=True, reward=-1 -- correct refusal to claim a win",
+    "click-checkboxes": "actuated, done=True, reward=-1",
+    "click-button / click-dialog": "TARGET_NOT_ON_PAGE -- the named target did not exist on the rendered page",
+    "score": "1 of 4 page-verified",
+    "honest_reading": "the ACTION works (the page accepted a real mouse event and graded it); the TARGET CHOICE is the failing part. That is precisely the split this round was built to expose."
+  },
+  "two_defects_found_in_my_own_work": [
+    "the actuator could not see pages whose #area renders empty until the first interaction -- three of four probes returned TARGET_NOT_ON_PAGE for a target that did not exist YET",
+    "my first probe used port 8893 /miniwob/ while the served root is /html/miniwob/ -- a 404 read as 'the page is empty'"
+  ],
+  "state_of_the_model_now": {
+    "capabilities": 445,
+    "bound_verified": 151,
+    "digest": "c31e7b8176a03fb85e5938ce279be7cecf096ab948af32917b2146129c17996d",
+    "ui_actuators": 1,
+    "deliverable_producers": "xlsx, docx(declared), pdf (added r100), json, text",
+    "routing": "445 capabilities; 'click the button on the page' -> web.page.act.on_rendered_page, confident"
+  },
+  "what_this_does_to_the_users_thesis": {
+    "unchanged": "instant learning still compresses the Nth execution to zero and does nothing for the 1st",
+    "changed": "the model now has a FIRST execution channel for computer use. r98 measured 0 of 444 UI actions; that is no longer zero.",
+    "the_next_limit_is_named_and_measured": "ACTION EXISTS (1 verified), CHOICE DOES NOT (1 of 4 targets correct, and r93 measured 21/130 end-to-end). The binding constraint has moved from 'no actuator at all' to 'no target selection'.",
+    "why_that_matters_for_the_thesis": "a demonstration can only be recorded once an action succeeds. This round created the recorder. It did not create the chooser."
+  },
+  "smartest_next": [
+    "1. join web.page.act.on_rendered_page to page_first_grounding_v1 inside one loop and score it end-to-end on the 130-task suite (the r93 number was measured before any actuator was in the model)",
+    "2. the chooser is the whole remaining gap: grounding must pick the target AND the action",
+    "3. keep the independent-oracle bar: the page grades the page"
+  ]
+}
