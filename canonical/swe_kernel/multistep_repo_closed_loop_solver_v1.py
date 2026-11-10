@@ -672,6 +672,34 @@ def localize_faults_by_differential_trace(
                     pass
 
     suspects.sort(key=lambda s: (-s["score"], -s.get("max_line_ochiai", 0.0), -s["ochiai"], s["file"], s["function"]))
+
+    # ROUND 112 -- ZERO TESTS IS NOT SUCCESS. Measured 2026-11-09 on jinja2-3.1.4:
+    #   localize_faults_by_differential_trace() returned
+    #       {"ok": True, "runner": "pytest", "total_tests": 0, "failed_count": 0}
+    #   while the child's stderr read
+    #       ImportError while loading conftest 'tests/conftest.py'
+    # The child forces PYTHONNOUSERSITE=1, so a user-site dependency (markupsafe) was
+    # invisible, collection aborted before importing a single test, and the runner
+    # reported an empty pass. `ok: True` then meant "I proved nothing, successfully".
+    #
+    # This is r87 exactly ("a silent empty result is indistinguishable from a true
+    # empty result"), and it is worse than silent here because the empty result carried
+    # a success flag. A suite that did not run cannot certify a tree, so `ok` is False
+    # whenever nothing was discovered, and the child's stderr travels with the answer
+    # so the reason is never guesswork.
+    if total_passed + total_failed == 0:
+        return {
+            "ok": False,
+            "reason": "NO_TESTS_DISCOVERED",
+            "runner": runner_kind,
+            "passed_count": 0,
+            "failed_count": 0,
+            "total_tests": 0,
+            "test_files": list(data.get("test_files") or []),
+            "suspects": [],
+            "child_stderr": (proc.stderr or "")[-1200:],
+        }
+
     return {
         "ok": True,
         "runner": runner_kind,
@@ -1955,11 +1983,52 @@ def solve_repository_closed_loop(
             for rel_p in changed_files:
                 (src_root / rel_p).write_bytes(final_files[rel_p])
 
+        # ROUND 111 -- POST-APPLY RE-VERIFICATION. THE FALSE PASS IS FIXED HERE.
+        # Measured before this guard: on a sealed defect the solver returned
+        #   PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED, verified=True,
+        #   passed_count=11, failed_count=0
+        # while the repository's own pytest was byte-identically red both before and after
+        # (3 failed, 8 passed). The diagnostic that produced failed_count=0 was measured on
+        # `next_files` inside the beam, and `apply_to_source` is False by default, so the
+        # bytes were never written to src_root. The status described a worktree that was
+        # then discarded, and `changed_files` described diffs that did not exist on disk.
+        #
+        # A repair that is not measured on the tree it claims to have repaired is not a
+        # repair -- the same law as r84's "a field never written is not a measurement",
+        # one level up. So: re-run the suite ON THE CONTENTS BEING RETURNED, and refuse to
+        # name PASS unless THAT run is green.
+        if not apply_to_source:
+            for rel_p, blob in final_files.items():
+                (wt / rel_p).write_bytes(blob)
+        post_apply = localize_faults_by_differential_trace(
+            src_root if apply_to_source else wt,
+            test_files=test_files,
+            timeout=min(60.0, max(20.0, timeout_s)),
+        )
+        post_failed = int(post_apply.get("failed_count") or 0)
+        if not post_apply.get("ok") or post_failed > 0:
+            return {
+                "schema": SCHEMA,
+                "ok": False,
+                "verified": False,
+                "sabotage_control_passed": True,
+                "status": "FAIL_CLOSED__POST_APPLY_SUITE_RED",
+                "reason": "POST_APPLY_SUITE_RED",
+                "post_apply_failed_count": post_failed,
+                "post_apply_passed_count": int(post_apply.get("passed_count") or 0),
+                "initial_failed_count": initial_diag["failed_count"],
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
+
         return {
             "schema": SCHEMA,
             "ok": True,
             "verified": True,
             "sabotage_control_passed": True,
+            "post_apply_verified": True,
+            "post_apply_passed_count": int(post_apply.get("passed_count") or 0),
             "refused_by_input_dependency_gate": refused_by_input_gate,
             "applied_to_source": apply_to_source,
             "status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED",
