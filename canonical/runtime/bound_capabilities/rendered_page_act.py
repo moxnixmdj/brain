@@ -81,7 +81,8 @@ def run(args, root):
     action = str(args.get("action") or "").strip().lower()
     target = str(args.get("target") or "").strip()
     value = args.get("value")
-    if not url.startswith("http://127.0.0.1:") and not url.startswith("http://localhost:"):
+    x, y = args.get("x"), args.get("y")
+    if url and not url.startswith("http://127.0.0.1:") and not url.startswith("http://localhost:"):
         # A rendered-page actuator that can be pointed at the open internet is not a
         # capability, it is an egress channel. Benchmark pages are local.
         raise RuntimeError("URL_NOT_LOCAL_BENCHMARK_PAGE")
@@ -92,8 +93,9 @@ def run(args, root):
     try:
         _call(ws, 1, "Page.enable")
         _call(ws, 2, "Runtime.enable")
-        _call(ws, 3, "Page.navigate", {"url": url})
-        time.sleep(1.2)
+        if url:
+            _call(ws, 3, "Page.navigate", {"url": url})
+            time.sleep(1.2)
         # MEASURED (r101). Several MiniWob tasks render an EMPTY #area and an empty
         # #query until the first user interaction starts the episode: click-button,
         # click-option and click-tab all reported goal='' area='' immediately after
@@ -101,10 +103,11 @@ def run(args, root):
         # has always clicked once to start. Without this the actuator cannot see the
         # page it is supposed to act on and reports TARGET_NOT_ON_PAGE for a target
         # that does not exist yet.
-        for t in ("mousePressed", "mouseReleased"):
-            _call(ws, 4, "Input.dispatchMouseEvent",
-                  {"type": t, "x": 80.0, "y": 104.0, "button": "left", "clickCount": 1})
-        time.sleep(1.4)
+        if url:
+            for t in ("mousePressed", "mouseReleased"):
+                _call(ws, 4, "Input.dispatchMouseEvent",
+                      {"type": t, "x": 80.0, "y": 104.0, "button": "left", "clickCount": 1})
+            time.sleep(1.4)
 
         def ev(expr, i):
             r = _call(ws, i, "Runtime.evaluate", {"expression": expr, "returnByValue": True})
@@ -119,17 +122,20 @@ def run(args, root):
                                                          "windowsVirtualKeyCode": 13})
             where = {"via": "enter"}
         else:
-            hit = ev(_find_expr(target), 11)
-            if not hit:
-                raise RuntimeError("TARGET_NOT_ON_PAGE:" + target[:60])
-            h = json.loads(hit)
+            if x is not None and y is not None:
+                h = {"x": float(x), "y": float(y), "tag": "COORDINATE"}
+            else:
+                hit = ev(_find_expr(target), 11)
+                if not hit:
+                    raise RuntimeError("TARGET_NOT_ON_PAGE:" + target[:60])
+                h = json.loads(hit)
             _call(ws, 12, "Input.dispatchMouseEvent",
                   {"type": "mousePressed", "x": h["x"], "y": h["y"], "button": "left",
                    "clickCount": 1})
             _call(ws, 13, "Input.dispatchMouseEvent",
                   {"type": "mouseReleased", "x": h["x"], "y": h["y"], "button": "left",
                    "clickCount": 1})
-            if action in ("type",) and value is not None:
+            if value is not None and action in ("type", "select"):
                 for ch in str(value):
                     _call(ws, 14, "Input.dispatchKeyEvent", {"type": "keyDown"})
                     _call(ws, 15, "Input.dispatchKeyEvent", {"type": "char", "text": ch})

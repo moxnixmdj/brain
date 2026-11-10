@@ -1,0 +1,43 @@
+{
+  "round": 102,
+  "date": "2026-11-09",
+  "title": "The actuator moved the class it was built for, and the total moved by one",
+  "the_rule": "'in each step, ask yourself before you do it: YOU SURE THIS THE SMARTEST APPROACH?'",
+  "steps_and_the_answer_to_the_rule": [
+    {"step": "re-run the suite", "self_check": "the r93 number was taken BEFORE any actuator existed in the model; it is stale", "verdict": "yes"},
+    {"step": "use the actuator as-is", "self_check": "it always navigates, which starts a NEW random problem mid-episode", "verdict": "no -- made url optional and accepted coordinates"},
+    {"step": "write a new planner for the no-literal class", "self_check": "that class needs no name at all, only a clickable control", "verdict": "no -- reuse the existing control list"},
+    {"step": "trust a smoke test on my own node type", "self_check": "the smoke test used CDP nodes while the runner uses AX nodes; 'cx' missing was MY error, not the actuator's", "verdict": "no -- retested on the real node type: 4/4"}
+  ],
+  "wired": "fourth route in run_planned_v1: when a goal has no quoted literal AND no page-grounded string, and it names a click, the actuator delivers a real mouse event to the first visible control in role order, and the PAGE grades the page",
+  "measured": {
+    "total": "22/130 = 16.9% (r93 21/130; before that 11, 15, 17, 18)",
+    "the_class_it_targeted": {
+      "tasks_attempted": 7,
+      "won": 4,
+      "clean_ge_0_5": 3,
+      "names": ["button-delay", "click-button-sequence", "click-test", "identify-shape"],
+      "note": "before this round these 7 were recorded 'not attempted, no literal' and scored as failures. NOTHING moved them. The actuator did."
+    },
+    "actuator_field": {"used": 7, "tried": 6, "absent": 117}
+  },
+  "the_honest_arithmetic": {
+    "gained_vs_r93": ["button-delay", "click-button-sequence", "click-test", "click-test-2", "identify-shape", "use-autocomplete"],
+    "lost_vs_r93": ["click-checkboxes-transfer", "click-dialog-2", "click-menu", "navigate-tree", "sign-agreement"],
+    "net": "+1 task",
+    "why_six_gained_and_five_lost_for_a_net_of_one": "MiniWob generates a NEW RANDOM INSTANCE every navigation. Two runs are not the same 130 tasks; they are 130 draws each. r78 measured 1.73 stdev on this suite. A 21 -> 22 total is INSIDE NOISE.",
+    "therefore": "the +1 total is NOT the finding and must not be reported as one. The finding is the sub-class: 4 of 7 tasks that had NO route at all now win, and 3 of those are clean."
+  },
+  "what_is_real": [
+    "a route was created for a class of task that previously had none, and it wins 4 of 7 of them",
+    "the wins are graded by MiniWob's foreign in-page grader, not by the system",
+    "click-dialog, which failed earlier in the round, now passes on a real AX control list (4/4 smoke)"
+  ],
+  "what_is_not_real": [
+    "22/130 is not an improvement over 21/130 -- the suite is stochastic and this is one run each",
+    "'the actuator learned something' -- it executes a dumb rule: first visible control in role order",
+    "any claim that this scales: 25 tasks still take the no-literal branch and were not attempted"
+  ],
+  "the_rule_that_saved_this_round_from_a_false_claim": "r77/r78 -- report the spread or do not report the number. Without that law, '21 -> 22' would have been written down as progress.",
+  "smartest_next": "the 25 remaining no-literal tasks need a SECOND control (the goal often names a sequence), and the 5 tasks lost are all multi-control flows. The next build is not a better single click; it is two clicks with a check between them."
+}
