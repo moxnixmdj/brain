@@ -2625,8 +2625,14 @@ def infer_contract_from_goal(goal: str) -> dict[str, Any]:
     g = " ".join(str(goal or "").lower().split())
     if not g:
         return {"kind": "stdout_text"}
-    counting = ("how many", "count ", "count the", "number of", "how much of")
-    digest = ("sha256", "sha1", "md5", "checksum", "cksum", "hash of", "digest of")
+    # Vocabulary widened 2026-11-09 against NATURAL phrasings, not the track's own goals.
+    # Measured honestly: the first version scored 23/27 on goals written the way a person
+    # would type them, missing 'crc', 'fingerprint', 'tally', 'size ... in lines'. The 23/23
+    # it scored on the track was a closed loop -- those goals were written to match it.
+    counting = ("how many", "count ", "count the", "number of", "tally", "size of",
+                "how much of", "line count", "what is the size")
+    digest = ("sha256", "sha1", "md5", "checksum", "cksum", "hash of", "digest of",
+              "crc", "fingerprint", "checksum of")
     listing = ("first two lines", "last two lines", "lines containing", "lines matching",
                "unique lines", "reverse each line", "reverse the order", "collapse repeats",
                "number the lines", "first column")
@@ -2637,6 +2643,46 @@ def infer_contract_from_goal(goal: str) -> dict[str, Any]:
     if any(l in g for l in listing):
         return {"kind": "stdout_lines"}
     return {"kind": "stdout_lines"}
+
+
+def answer_provenance(postcondition: Mapping[str, Any],
+                      execution_result: Mapping[str, Any],
+                      *, goal: str | None = None) -> dict[str, Any]:
+    """WHERE an answer came from, in a form a caller can check.
+
+    r46 ended with the warning that a typed answer must never stand as a factual claim
+    without its source, and that 23/23 correct is exactly the condition under which an
+    empty result starts to look like a finding. This is the source.
+
+    A number with no pedigree is indistinguishable from a guess that happens to be right.
+    """
+    receipts = list((execution_result or {}).get("step_receipts") or [])
+    steps = []
+    for receipt in receipts:
+        steps.append({
+            "layer": receipt.get("layer"),
+            "argv": receipt.get("argv") or receipt.get("stages"),
+            "argv_asked": receipt.get("argv_asked") or receipt.get("stages_asked"),
+            "exit": receipt.get("exit"),
+            "empty_result": bool(receipt.get("empty_result")),
+            "stdout_sha256": (hashlib.sha256(str(receipt.get("stdout") or "").encode()).hexdigest()
+                              if receipt.get("stdout") is not None else None),
+            "stdout_bytes": len(str(receipt.get("stdout") or "")),
+        })
+    empty = any(s["empty_result"] for s in steps)
+    return {
+        "schema": "ANSWER_PROVENANCE_V1",
+        "goal": goal,
+        "answer_type": str((postcondition or {}).get("kind") or ""),
+        "how_to_check": ("run the argv below against the same input; the answer must be "
+                         "reproducible from it and from nothing else"),
+        "steps": steps,
+        "empty_result": empty,
+        "claim": ("an EMPTY RESULT: this is 'nothing matched', not 'the tool failed'"
+                  if empty else "derived from the stdout hashes above"),
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+    }
 
 
 def _contract_answer(postcondition: Mapping[str, Any],
@@ -2794,6 +2840,7 @@ def recall_and_execute_workflow(
             # number. The verifier already computes this; report the same value the
             # verification used rather than making every caller re-derive it.
             "answer": _contract_answer(inst_post, exec_res),
+            "provenance": answer_provenance(inst_post, exec_res, goal=goal),
             "carried_only": bool(require_carried),
             "all_steps_carried": _steps_are_all_carried(inst_steps),
             "step_receipts": exec_res["step_receipts"],
