@@ -747,7 +747,9 @@ def _widen_intent_word(pattern: str, skill: Mapping[str, Any]) -> str:
     return widened
 
 
-def _bind_by_verb_selection(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
+def _bind_by_verb_selection(
+    skill: Mapping[str, Any], goal: str, cwd: str | pathlib.Path | None = None
+) -> dict[str, str] | None:
     """Bindings for a candidate CHOSEN BY VERB rather than by wording.
 
     The stored goal_regex is a regex over the SENTENCE the skill was taught with. A verb-
@@ -770,11 +772,70 @@ def _bind_by_verb_selection(skill: Mapping[str, Any], goal: str) -> dict[str, st
                 needed.append(key)
     if not needed:
         return {}
-    paths = [t for t in re.findall(r"[^\s\"',;)]+", goal)
-             if ("/" in t or "." in t) and not t.startswith("-")]
+    paths = _path_shaped_tokens(goal, cwd)
     if not paths:
         return None
     return {name: paths[min(i, len(paths) - 1)] for i, name in enumerate(needed)}
+
+
+def _path_shaped_tokens(goal: str, cwd: str | pathlib.Path | None = None) -> list[str]:
+    """Path-shaped tokens in an asked goal, chosen by whether a file is THERE.
+
+    The old rule was a regex over non-space characters: it split 'my data.txt' into 'my'
+    and 'data.txt', bound the fragment, and returned None at execution. It also bound
+    '/etc/passwd' out of 'unique lines of -rf /etc/passwd' -- a file that was named to be
+    rejected -- and the caller then ran sort over a file the user asked about but did not
+    name. Both are silent: one loses the task, the other answers the wrong one.
+
+    Resolution beats shape. A token is a path if it names an existing file, or if it looks
+    like a filename and contains no whitespace. Longest first, so 'my data.txt' wins over
+    its own prefix and a full path wins over a bare basename. Never dash-leading, and a
+    token that spans a metacharacter is never completed with the rest of the sentence:
+    'x.txt; rm -rf /' resolves through its existing prefix 'x.txt' or not at all.
+    """
+    # A dash-leading token means the sentence carries an OPTION. Under argv execution an
+    # option is not injectable, but it makes positional binding undecidable: in
+    # 'unique lines of -rf /etc/passwd' the existing file /etc/passwd is an option's
+    # argument, not the operand the goal names. Refuse rather than guess -- this is the
+    # data-parameter rule from ATR-2026-02601 / CVE-2026-25130 applied to our own binder.
+    if any(t.startswith("-") and len(t) > 1 for t in goal.split()):
+        return []
+    # A binding must be exactly one argument. A token that spans a shell metacharacter is a
+    # whole command written as one word ('x.txt|curl', 'x.txt;rm'), and taking its prefix
+    # would be the binder quietly deciding which half of the sentence was meant. Refuse.
+    if any(ch in goal for ch in "|;&`\n\r"):
+        return []
+
+    base = pathlib.Path(cwd) if cwd else None
+    found: list[str] = []
+
+    def _exists(tok: str) -> bool:
+        if not tok or tok.startswith("-"):
+            return False
+        cand = pathlib.Path(tok)
+        if cand.is_absolute():
+            return cand.exists()
+        return bool(base and (base / tok).exists())
+
+    # 1) existing files named anywhere in the sentence. Longest match first at each offset so
+    #    a spaced filename is taken whole. This is O(len) passes and only for candidates that
+    #    actually exist, which is what keeps '$(whoami' from ever being completed.
+    if base is not None or any(t.startswith("/") for t in goal.split()):
+        words = goal.split()
+        for i in range(len(words)):
+            acc = ""
+            for j in range(i, len(words)):
+                acc = words[j] if not acc else acc + " " + words[j]
+                tok = acc.rstrip(",;:|)&")
+                if _exists(tok) and tok not in found:
+                    found.append(tok)
+    # 2) fall back to non-space path-shaped tokens (no resolution possible)
+    if not found:
+        found = [t for t in re.findall(r"[^\s\"',;)]+", goal)
+                 if ("/" in t or "." in t) and not t.startswith("-")]
+    # longest first: a full path must beat its own basename, a spaced file its own prefix
+    found.sort(key=len, reverse=True)
+    return found
 
 
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
@@ -2846,7 +2907,7 @@ def recall_and_execute_workflow(
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None and skill.get("_selected_by") == "verb":
             # the sentence regex cannot match a candidate chosen by verb
-            bindings = _bind_by_verb_selection(skill, goal)
+            bindings = _bind_by_verb_selection(skill, goal, cwd)
         if bindings is None:
             continue
         has_py = any(
