@@ -2677,6 +2677,7 @@ def answer_provenance(postcondition: Mapping[str, Any],
         "how_to_check": ("run the argv below against the same input; the answer must be "
                          "reproducible from it and from nothing else"),
         "steps": steps,
+        "workspace": str(execution_result.get("_workspace") or "") or None,
         "empty_result": empty,
         "claim": ("an EMPTY RESULT: this is 'nothing matched', not 'the tool failed'"
                   if empty else "derived from the stdout hashes above"),
@@ -2840,7 +2841,8 @@ def recall_and_execute_workflow(
             # number. The verifier already computes this; report the same value the
             # verification used rather than making every caller re-derive it.
             "answer": _contract_answer(inst_post, exec_res),
-            "provenance": answer_provenance(inst_post, exec_res, goal=goal),
+            "provenance": answer_provenance(
+                inst_post, dict(exec_res, _workspace=str(cwd or "")), goal=goal),
             "carried_only": bool(require_carried),
             "all_steps_carried": _steps_are_all_carried(inst_steps),
             "step_receipts": exec_res["step_receipts"],
@@ -3040,3 +3042,74 @@ def prune_non_causal_steps_counterfactually(
         "k3_external_llm_calls": 0,
     }
 
+
+
+def audit_answer_by_rederivation(result: Mapping[str, Any]) -> dict[str, Any]:
+    """INDEPENDENT AUDIT: re-derive the answer from the recorded argv and compare.
+
+    r47 built provenance -- argv, exit, stdout hash. arXiv 2610.09581 shows why a receipt
+    is not an audit: a reader can retrieve every literal source correctly and still emit
+    unsupported attribution, 22 of 26 undetectable from the answer. The fix in that paper
+    is a DETERMINISTIC same-packet comparator that was grounded-correct throughout.
+
+    This is that comparator for one narrow case. It does not ask the skill anything. It
+    takes provenance.steps[*].argv, runs it itself, applies the SAME answer contract to
+    its OWN stdout, and compares. If they differ, the answer was not derivable from its
+    own stated source -- which is the definition of an unsupported finding.
+
+    Deliberately narrow: it re-derives from argv, so it can only audit contracts over a
+    process's stdout. A file-reading contract has no single argv to replay and is
+    reported NOT_AUDITABLE rather than silently passed.
+    """
+    provenance = dict((result or {}).get("provenance") or {})
+    steps = list(provenance.get("steps") or [])
+    if not steps:
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__NO_STEPS"}
+    if len(steps) != 1:
+        # A composite answer depends on more than one argv; replaying a subset would be a
+        # guess dressed as an audit.
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__MULTI_STEP"}
+    step = steps[0]
+    argv = step.get("argv")
+    if step.get("layer") == "cli_pipeline":
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__PIPELINE"}
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__NO_ARGV"}
+
+    contract = {"kind": provenance.get("answer_type") or ""}
+    # The recorded argv is the TRANSLATED form (`beta.txt`), which only resolves inside the
+    # workspace the carrier staged. Replaying it from the auditor's own cwd re-derives
+    # nothing and reports [] or None -- measured 2026-11-09: 20 of 23 answers appeared
+    # "not derivable" purely because the auditor looked in the wrong directory. An auditor
+    # that cannot resolve its own inputs must fail loudly, not produce a verdict.
+    replay_cwd = provenance.get("workspace")
+    if not replay_cwd or not pathlib.Path(str(replay_cwd)).is_dir():
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__WORKSPACE_UNKNOWN",
+                "hint": "the recorded argv is workspace-relative; without the workspace "
+                        "it cannot be replayed, and guessing one would be a false audit"}
+    try:
+        proc = subprocess.run([str(a) for a in argv], capture_output=True, text=True,
+                              timeout=30, stdin=subprocess.DEVNULL, cwd=str(replay_cwd))
+        replay = {"step_receipts": [{"stdout": proc.stdout, "exit": proc.returncode}]}
+    except Exception as exc:  # noqa: BLE001 - an audit that cannot run is not a pass
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": f"NOT_AUDITABLE__REPLAY_FAILED:{type(exc).__name__}"}
+
+    rederived = _contract_answer(contract, replay)
+    stated = (result or {}).get("answer")
+    same = rederived == stated
+    return {
+        "schema": "ANSWER_AUDIT_V1",
+        "auditable": True,
+        "verdict": "ANSWER_MATCHES_ITS_SOURCE" if same else "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE",
+        "answer_stated": stated,
+        "answer_rederived": rederived,
+        "argv_replayed": [str(a) for a in argv],
+        "replay_exit": proc.returncode,
+        "method": "deterministic re-derivation; no model, no trust in the skill",
+    }
