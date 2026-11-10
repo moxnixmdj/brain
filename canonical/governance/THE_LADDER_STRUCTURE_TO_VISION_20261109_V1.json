@@ -1,0 +1,36 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_LADDER_STRUCTURE_TO_VISION_20261109_V1",
+  "round": 72,
+  "date": "2026-11-09",
+  "the_test_set_up_last_round": "a page with NO accessible roles -- canvas-drawn, one AX node -- to find exactly where structure addressing dies",
+  "measured_where_it_dies": {
+    "canvas_page_ax_nodes_with_geometry": 1,
+    "that_node": "role=Canvas name='' box (0,0)-(900,520)",
+    "find(role=textbox)": "None",
+    "find(name=APPLY)": "None",
+    "structured_page_for_comparison": "role=textbox name='filter' box (34,120)-(314,148) -> centre (174,134)"
+  },
+  "the_ladder": {
+    "RUNG_1_ADDRESSED": {"when": "the page declares roles and names", "cost": "3 CDP reads, 0 model calls", "measured": "reuse with a new parameter on a MOVED layout (+banner, 4x padding): 3/3 steps, heading 'Inbox - 1 shown', carol"},
+    "RUNG_2_ANCHORED": {"when": "no roles but the widget has appearance", "cost": "one template match", "known_limit": "cannot locate an empty field (r70: 453 ties over 258px)"},
+    "RUNG_3_LOOKED_AT": {"when": "nothing to address, nothing distinctive to match", "cost": "model on every step", "measured": "canvas page, same goal: 2 model calls, 1 step, 0.98s"}
+  },
+  "the_bug_that_validates_the_design": {
+    "what_the_model_proposed": "three actions: click filter, type urgent, click APPLY",
+    "what_the_page_needed": "ONE action -- the first click assigns the value and redraws",
+    "gate_verdicts": ["step 1 refused at first with THE_PAGE_MOVED_OUTSIDE_THE_NAMED_WIDGET (outside=0.0071) because the claim named only the box while the list and heading also changed -- the gate was right, the claim was wrong",
+                      "after correcting the claim, step 1 CAUSAL_OK and step 2 refused with NOTHING_CHANGED_BUT_A_CHANGE_WAS_CLAIMED -- the model over-planned and the gate caught it"],
+    "why_it_matters": "on a page with no structure at all, the division still held: the model decided, the gate verified, and the gate was correct both times it fired"
+  },
+  "the_cost_table": {"ADDRESSED": {"model_calls": 0, "steps": 3}, "LOOKED_AT": {"model_calls": 2, "steps": 1}},
+  "what_this_says_about_anything_on_a_computer": {
+    "not": "a single mechanism that handles any computer use",
+    "but": "a ladder with a cheap rung and an expensive one, and a FIRST STEP that measures which rung it is on before acting",
+    "the_honest_gap": "the expensive rung is what every computer-use agent does by default, and it is why OSWorld-class scores sit near 20%. The cheap rung is only reachable where the interface declares itself."
+  },
+  "what_this_does_not_prove": ["two pages", "no benchmark", "no public number: still zero"],
+  "next": ["rung 2 as a real fallback: measure ANCHORED on pages with no roles but with appearance",
+           "the rung-selection probe as the first step of every act() run",
+           "a public benchmark number, still owed"]
+}
