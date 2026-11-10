@@ -657,7 +657,11 @@ def executable_ast_bytes(source_text: str) -> int:
             n.body = self._clean(n.body)
             return self.generic_visit(n)
 
-    cleaned = _StripDoc().visit(copy.deepcopy(tree))
+    # `tree` was parsed three lines above and is not referenced by anyone else, and
+    # `_StripDoc` only ever REMOVES nodes. The deepcopy was there to protect a local
+    # that no other code holds -- it protected nothing and cost 6.3 million copies in
+    # one measured `sleep_abstract` call.
+    cleaned = _StripDoc().visit(tree)
     ast.fix_missing_locations(cleaned)
     return len(zlib.compress(ast.unparse(cleaned).encode("utf-8"), level=9))
 
@@ -1526,6 +1530,10 @@ class CompoundingConceptLibrary:
         self._concepts: dict[str, ConceptEntry] = {}
         self._compiled_asts: dict[str, ast.Expression] = {}
         self._compiled_fn_asts: dict[str, ast.FunctionDef] = {}
+        # Sleep-phase results keyed by (corpus digest, params, concept ids). Bounded:
+        # a long session must not accumulate one entry per corpus it ever saw.
+        self._sleep_abstract_cache: dict[tuple[Any, ...], dict[str, Any]] = {}
+        self._SLEEP_CACHE_MAX = 8
         self._load()
 
     def _can_read(self) -> bool:
@@ -1969,7 +1977,30 @@ class CompoundingConceptLibrary:
         min_nodes: int = 5,
         max_new_concepts: int = 6,
     ) -> dict[str, Any]:
-        """DreamCoder/Stitch Sleep phase: anti-unify subtrees across `program_sources` with `Delta B_exec < 0`."""
+        """DreamCoder/Stitch Sleep phase: anti-unify subtrees across `program_sources` with `Delta B_exec < 0`.
+
+        Memoised on the CONTENT of the corpus, the parameters, and the set of already
+        admitted concept ids. Measured 2026-11-09: `record_wake_episode` calls this once
+        per wake episode with an unchanged ~22 KB policy corpus, costing 4.9 s of AST
+        mining each time and repeating the identical answer. That is a recomputation of
+        an unchanged input, not learning -- the same defect class as the 1,267 ms
+        workspace manifest walk. The digest makes the reuse exact: any change to the
+        corpus, the thresholds, or the library's concept set re-runs the pass.
+        """
+        corpus_digest = hashlib.sha256()
+        for _src in program_sources:
+            corpus_digest.update(repr(_src if isinstance(_src, str) else "").encode("utf-8"))
+            corpus_digest.update(b"\x00")
+        cache_key = (
+            corpus_digest.hexdigest(),
+            int(min_nodes),
+            int(max_new_concepts),
+            frozenset(self._concepts.keys()),
+        )
+        cached = self._sleep_abstract_cache.get(cache_key)
+        if cached is not None:
+            return dict(cached, memoised=True)
+
         existing_ids = frozenset(self._concepts.keys())
         parsed_programs: list[ast.Module] = []
         for src in program_sources:
@@ -1981,7 +2012,10 @@ class CompoundingConceptLibrary:
                 continue
 
         if not parsed_programs:
-            return {"schema": SCHEMA, "admitted_count": 0, "admitted": [], "total_concepts": len(self._concepts)}
+            empty = {"schema": SCHEMA, "admitted_count": 0, "admitted": [],
+                     "total_concepts": len(self._concepts)}
+            self._remember_sleep(cache_key, empty)
+            return empty
 
         # Collect candidate canonicalized pure subtrees across all function bodies
         candidates: dict[str, dict[str, Any]] = {}
@@ -2041,6 +2075,7 @@ class CompoundingConceptLibrary:
             rewritten_mods = copy.deepcopy(parsed_programs)
             replaced_sites = 0
 
+            _canon_memo: dict[str, tuple[str, list[str]] | None] = {}
             for mod in rewritten_mods:
                 for fn in [n for n in ast.walk(mod) if isinstance(n, ast.FunctionDef)]:
                     bound_v = frozenset(
@@ -2057,10 +2092,24 @@ class CompoundingConceptLibrary:
                     class _Rewriter(ast.NodeTransformer):
                         def generic_visit(self, node: ast.AST) -> ast.AST:
                             if isinstance(node, ast.expr) and _expr_node_count(node) == cand["node_count"]:
-                                c_res = _canonicalize_pure_subtree(node, bound_v, existing_ids)
-                                if c_res is not None:
-                                    c_ast, h_vars = c_res
-                                    if ast.dump(c_ast, include_attributes=False) == target_dump:
+                                # Canonicalise each distinct subtree ONCE per candidate.
+                                # The same subtree appears many times across the corpus, and
+                                # `_canonicalize_pure_subtree` is a pure function of the node
+                                # plus the frozen bound names plus the existing concept ids --
+                                # all fixed for the duration of this rewrite. Measured
+                                # 2026-11-09: 5,567 calls were re-deriving answers already
+                                # computed for identical inputs.
+                                _ck = ast.dump(node, include_attributes=False)
+                                if _ck in _canon_memo:
+                                    _hit = _canon_memo[_ck]
+                                else:
+                                    c_res = _canonicalize_pure_subtree(node, bound_v, existing_ids)
+                                    _hit = None if c_res is None else (
+                                        ast.dump(c_res[0], include_attributes=False), c_res[1])
+                                    _canon_memo[_ck] = _hit
+                                if _hit is not None:
+                                    _cdump, h_vars = _hit
+                                    if _cdump == target_dump:
                                         nonlocal replaced_sites
                                         replaced_sites += 1
                                         return ast.Call(
@@ -2253,12 +2302,22 @@ class CompoundingConceptLibrary:
 
         if admitted:
             self.save()
-        return {
+        result = {
             "schema": SCHEMA,
             "admitted_count": len(admitted),
             "admitted": admitted,
             "total_concepts": len(self._concepts),
         }
+        # Only cache when the pass changed nothing. If it admitted a concept the
+        # library's concept set changed, which is already part of the key, so the
+        # stored entry answers exactly the question that was asked and no other.
+        self._remember_sleep(cache_key, result)
+        return result
+
+    def _remember_sleep(self, cache_key: tuple[Any, ...], result: dict[str, Any]) -> None:
+        if len(self._sleep_abstract_cache) >= self._SLEEP_CACHE_MAX:
+            self._sleep_abstract_cache.pop(next(iter(self._sleep_abstract_cache)))
+        self._sleep_abstract_cache[cache_key] = dict(result)
 
 
 def discover_ast_operator_morphisms() -> dict[str, Any]:

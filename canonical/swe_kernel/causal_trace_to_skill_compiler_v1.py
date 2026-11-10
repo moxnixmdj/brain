@@ -163,7 +163,7 @@ def _semantic_selector_from_dom(point_step: Mapping[str, Any], dom_elements: Seq
     if matched is None and target_hint:
         low = target_hint.lower()
         for el in dom_elements:
-            for field in ("aria", "name", "placeholder", "text", "id"):
+            for field in ("aria", "name", "placeholder", "text", "id", "automation_id", "label"):
                 val = str(el.get(field) or "").strip()
                 if val and val.lower() == low:
                     matched = el
@@ -175,7 +175,8 @@ def _semantic_selector_from_dom(point_step: Mapping[str, Any], dom_elements: Seq
         return None
 
     selector: dict[str, str] = {}
-    for key in ("role", "name", "aria", "placeholder", "tag", "type", "text"):
+    for key in ("role", "name", "aria", "placeholder", "tag", "type", "text",
+                "automation_id", "identifier", "label"):
         val = str(matched.get(key) or "").strip()
         if val:
             selector[key] = val[:200]
@@ -430,15 +431,32 @@ def _substitute_in_obj(obj: Any, mapping: Mapping[str, str]) -> Any:
     """Replace concrete parameter values inside nested step/postcondition structures."""
     if isinstance(obj, str):
         out = obj
+        # A hole name contains digits and letters that a later (or the same) value
+        # can match. Measured 2026-11-09 on `UPDATE items SET qty = 40 WHERE id = 1`:
+        # the value "1" was substituted INSIDE the hole "?num0", producing
+        # `SET qty = ?num?num0 WHERE id = ?num0` -- a program that cannot parse.
+        # Shield every hole already present before substituting any value.
+        holes_present: list[str] = []
+        for _h in {h for h in mapping.values() if h}:
+            if _h in out:
+                token = f"\x00{len(holes_present)}\x00"
+                holes_present.append(_h)
+                out = out.replace(_h, token)
         # Longest values first so URLs/paths are replaced whole before substrings
         for raw_val, hole in sorted(mapping.items(), key=lambda kv: -len(kv[0])):
             if raw_val and raw_val in out:
-                out = out.replace(raw_val, hole)
+                if raw_val.isdigit():
+                    # A bare number must match a whole token, or "1" eats the 1 in "12".
+                    out = re.sub(rf"(?<![0-9A-Za-z_]){re.escape(raw_val)}(?![0-9A-Za-z_])", lambda _m, _h=hole: _h, out)
+                else:
+                    out = out.replace(raw_val, hole)
             elif hole.startswith("?url") and raw_val.startswith(("http://", "https://")):
                 sp = urllib.parse.urlsplit(raw_val)
                 origin = f"{sp.scheme}://{sp.netloc}"
                 if origin and origin in out:
                     out = out.replace(origin, f"{{{{origin:{hole}}}}}")
+        for _i, _h in enumerate(holes_present):
+            out = out.replace(f"\x00{_i}\x00", _h)
         return out
     if isinstance(obj, list):
         return [_substitute_in_obj(x, mapping) for x in obj]
@@ -517,17 +535,44 @@ def anti_unify_workflow(
 
     # Build goal skeleton + anchored regex preserving exact occurrence order of holes in goal
     goal_clean = goal.strip().rstrip(".")
+    # Drop literals that are only ever DIGIT FRAGMENTS of a longer literal. "1" in
+    # "id 1 to 12" is a bare digit inside a number the goal already models as "12"; taking it
+    # as a second hole produced the skeleton `set id ?num0 to ?num1 and id 1 to 1?num0`.
+    _digits_only = all(v.strip().isdigit() for v in val_to_hole)
+    if _digits_only:
+        _longer = [v for v in val_to_hole if len(v) > 1]
+        for v in list(val_to_hole):
+            if len(v) == 1 and any(v in w and w != v for w in _longer):
+                # only drop it if EVERY occurrence sits inside an occurrence of a longer literal
+                starts, pos = [], 0
+                while (pos := goal_clean.find(v, pos)) >= 0:
+                    starts.append(pos); pos += 1
+                covered = bool(starts) and all(
+                    any(w.find(v) <= p < w.find(v) + len(w)
+                        for w in _longer
+                        for p in [goal_clean.find(w)] if p >= 0)
+                    for s_ in starts for p in [s_])
+                if covered:
+                    del val_to_hole[v]
+
     occ: list[tuple[int, int, str]] = []
-    for val, hole in sorted(val_to_hole.items(), key=lambda kv: -len(kv[0])):
+    # Longest literal first, then LEFT-MOST, and reject any candidate whose span merely
+    # TOUCHES an accepted span. The previous test `not (end <= a or pos >= b)` accepted a
+    # span that exactly abutted an accepted one, so the "1" inside "12" could claim a second
+    # occurrence after "12" had already taken that region. The skeleton then interleaved two
+    # conflicting holes and bind_goal_parameters could never match its own demonstration.
+    # Measured 2026-11-09: "set id 2 to 5 and id 1 to 12" produced the skeleton
+    # `set id ?num0 to ?num1 and id 1 to 1?num0 ...` and bound nothing.
+    for val, hole in sorted(val_to_hole.items(), key=lambda kv: (-len(kv[0]), kv[0])):
         start = 0
         while True:
             pos = goal_clean.find(val, start)
             if pos < 0:
                 break
             end = pos + len(val)
-            if not any(not (end <= a or pos >= b) for a, b, _ in occ):
+            if not any(pos < b and end > a for a, b, _ in occ):
                 occ.append((pos, end, hole))
-            start = end
+            start = pos + 1
     occ.sort(key=lambda t: t[0])
 
     skeleton_parts: list[str] = []
@@ -662,6 +707,43 @@ def _subst_dynamic_tokens(val: Any, dyn: Mapping[str, str]) -> Any:
     return val
 
 
+def _carried_step_is_admissible(step: Mapping[str, Any]) -> bool:
+    """A cli_exec step may run only if the carrier would admit exactly this argv.
+
+    Deliberately conservative: any doubt, any missing argv, any program outside the
+    carrier's read-only set, any write flag -- False. The caller then emits the original
+    refusal rather than inventing a reason.
+    """
+    argv = step.get("argv")
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return False
+    try:
+        from canonical.runtime import admitted_confinement_execution_v1 as carrier
+        verdict = carrier.admission_verdict([str(a) for a in argv])
+    except Exception:  # noqa: BLE001 - an unaskable gate is not a pass
+        return False
+    return bool(verdict.get("admitted"))
+
+
+def _steps_are_all_carried(steps: Sequence[Mapping[str, Any]]) -> bool:
+    """Every step is an argv the carrier would admit. Anything else is not carried.
+
+    Used by callers that must not fall back to an unconfined execution path for a
+    task shape the confinement rule covers. Conservative by construction: a step that
+    is not `cli_exec`, or whose argv the carrier would refuse, answers False.
+    """
+    if not steps:
+        return False
+    for step in steps:
+        if not isinstance(step, Mapping):
+            return False
+        if str(step.get("layer") or "") != "cli_exec":
+            return False
+        if not _carried_step_is_admissible(step):
+            return False
+    return True
+
+
 def execute_compiled_steps(
     steps: Sequence[Mapping[str, Any]],
     *,
@@ -675,12 +757,21 @@ def execute_compiled_steps(
     certify their effects or confine them.
     """
     from canonical.runtime import computer_execution_boundary_v1 as boundary
+    # The refusal was "no admitted confinement exists". One does now (round 28 measured
+    # it: confined True, live_workspace_untouched True). So a cli_exec step is not
+    # refused -- it is ROUTED, and the routing decides. A step with no carrier verdict is
+    # still refused exactly as before: the default must stay fail-closed.
+    #
+    # `_carried` is checked against the carrier's own admission rules BEFORE anything
+    # runs, and the carrier re-checks them when it runs. This function adds no authority
+    # of its own; it only stops refusing the one thing that is now possible.
     for index, step in enumerate(steps):
         if isinstance(step, Mapping) and str(step.get("layer") or "") in {"cli_exec", "cli_pipeline"}:
-            return {"ok": False, "status": boundary.STATUS,
-                    "failure_class": boundary.FAILURE_CLASS,
-                    "reason": boundary.FAILURE_CLASS, "failed_step": index,
-                    "step_receipts": []}
+            if str(step.get("layer")) == "cli_pipeline" or not _carried_step_is_admissible(step):
+                return {"ok": False, "status": boundary.STATUS,
+                        "failure_class": boundary.FAILURE_CLASS,
+                        "reason": boundary.FAILURE_CLASS, "failed_step": index,
+                        "step_receipts": []}
     work_dir = pathlib.Path(cwd).resolve() if cwd else pathlib.Path.cwd()
     step_receipts: list[dict[str, Any]] = []
     pending_dom_fills: dict[str, str] = {}
@@ -708,6 +799,29 @@ def execute_compiled_steps(
                 "path": str(target), "bytes": target.stat().st_size,
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             })
+
+        elif layer == "cli_exec":
+            # Run it under the carrier the refusal was waiting for. The carrier's own
+            # invariants are the evidence: confined, live tree untouched, exit status.
+            # A step that gets here has already passed _carried_step_is_admissible.
+            from canonical.runtime import admitted_confinement_execution_v1 as _carrier
+            _argv = [str(a) for a in (step.get("argv") or [])]
+            _out = _carrier.execute_confined(_argv, workspace_root=str(work_dir))
+            _ok = _out.get("pass") is True
+            step_receipts.append({
+                "step": idx, "layer": layer, "ok": _ok,
+                "argv": _argv, "stdout": _out.get("stdout"),
+                "exit": _out.get("exit"),
+                "confined": _out.get("confined"),
+                "live_workspace_untouched": _out.get("live_workspace_untouched"),
+                "status": _out.get("status"),
+                "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
+            })
+            if not _ok:
+                return {"ok": False, "status": str(_out.get("status") or boundary.STATUS),
+                        "failure_class": "CARRIED_CLI_STEP_FAILED",
+                        "reason": str(_out.get("status") or ""), "failed_step": idx,
+                        "step_receipts": step_receipts}
 
         elif layer == "sqlite_exec":
             db_file = _resolve_local_path(str(step["db_path"]), work_dir)
@@ -1069,6 +1183,24 @@ def verify_postcondition(
                     return False, f"POSTCONDITION_JSON_SUBSET_MISMATCH:{k}"
         return True, "HTTP_STATUS_JSON_VERIFIED"
 
+    if kind == "stdout_line_count":
+        # For a program whose output IS a set -- `sort -u`, `grep -f` -- the answer to
+        # "how many" is the number of non-empty lines it printed. Comparing its stdout
+        # to the number is a shape error, not a wrong answer.
+        expected_n = postcondition.get("equals", postcondition.get("count", postcondition.get("expected")))
+        receipts = list((execution_result or {}).get("step_receipts") or [])
+        text = ""
+        for receipt in receipts:
+            text = str(receipt.get("stdout") or "")
+        if not text:
+            expected_n = expected_n  # fall through to the mismatch below with 0 lines
+        got = len([ln for ln in text.splitlines() if ln.strip()])
+        if got == 0:
+            return False, "POSTCONDITION_STDOUT_LINE_COUNT_ZERO"
+        if expected_n is not None and str(got) != str(expected_n):
+            return False, f"POSTCONDITION_STDOUT_LINE_COUNT_MISMATCH:{got}!={expected_n}"
+        return True, f"STDOUT_LINE_COUNT_VERIFIED:{got}"
+
     if kind == "step_response_contains":
         expected = str(postcondition.get("contains") or "")
         receipts = list((execution_result or {}).get("step_receipts") or [])
@@ -1076,7 +1208,148 @@ def verify_postcondition(
             return False, "POSTCONDITION_RESPONSE_MISSING"
         return True, "STEP_RESPONSE_VERIFIED"
 
+    # ------------------------------------------------------------------ #
+    # Semantic UI postconditions.
+    #
+    # Measured 2026-11-09: the oracle had 10 kinds and every one of them was
+    # byte/row equality -- file, json, sqlite, http, stdout. Not one could read
+    # a GUI. That is why the computer-use family (compressed by
+    # SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2 to the single leaf
+    # BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001) has a verified mechanism, a
+    # frozen binding, and ZERO terminal results.
+    #
+    # The fix is not a vision model. It is the same move the compiler already
+    # makes when it elevates a pixel click to a semantic DOM selector: check the
+    # ACCESSIBILITY TREE, which is exact, cheap, deterministic and diffable.
+    #
+    # External corroboration, all 2026:
+    #   - Vercel agent-desktop (Oct 2026): acts on UIA refs, re-snapshots to
+    #     confirm; "refs are snapshot-scoped; a stale ref returns STALE_REF".
+    #   - Playwright MCP: "every state-changing action should have a postcondition";
+    #     a semantic check such as 'heading named Order confirmed is visible' is
+    #     less ambiguous than deciding whether pixels resemble a success page.
+    #   - xa11y / Cloudflare /accessibilityTree: the same convergence.
+    # ------------------------------------------------------------------ #
+    if kind == "stdout_line_count":
+        # Cannot be corrupted on disk: the stdout lives in the execution result. The
+        # negative control is the mismatched expectation the caller supplies
+        # (heldout_postcondition expects a specific count), which is how
+        # _sabotage_world already handles the other stdout kinds.
+        return True
+    if kind.startswith("ui_"):
+        nodes = _ui_nodes(postcondition, execution_result)
+        if nodes is None:
+            return False, "POSTCONDITION_UI_TREE_UNAVAILABLE"
+
+        if kind == "ui_element_present":
+            if _match_nodes(nodes, postcondition.get("match") or {}):
+                return True, "UI_ELEMENT_PRESENT_VERIFIED"
+            return False, "POSTCONDITION_UI_ELEMENT_ABSENT"
+
+        if kind == "ui_element_absent":
+            if _match_nodes(nodes, postcondition.get("match") or {}):
+                return False, "POSTCONDITION_UI_ELEMENT_STILL_PRESENT"
+            return True, "UI_ELEMENT_ABSENT_VERIFIED"
+
+        if kind == "ui_value_equals":
+            want = str(postcondition.get("equals") if "equals" in postcondition
+                       else postcondition.get("value"))
+            hits = _match_nodes(nodes, postcondition.get("match") or {})
+            if not hits:
+                return False, "POSTCONDITION_UI_ELEMENT_ABSENT"
+            for node in hits:
+                if str(node.get("value")) == want:
+                    return True, "UI_VALUE_VERIFIED"
+            got = [str(n.get("value")) for n in hits]
+            return False, f"POSTCONDITION_UI_VALUE_MISMATCH:{got}"
+
+        if kind == "ui_text_contains":
+            expected = str(postcondition.get("contains") or "")
+            if not expected:
+                return False, "POSTCONDITION_UI_TEXT_EMPTY"
+            for node in nodes:
+                if expected in str(node.get("name") or "") or expected in str(node.get("value") or ""):
+                    return True, "UI_TEXT_VERIFIED"
+            return False, "POSTCONDITION_UI_TEXT_MISSING"
+
+        if kind == "ui_element_state_equals":
+            want_state = str(postcondition.get("state") or "").lower()
+            want_val = postcondition.get("equals", postcondition.get("state_value", True))
+            hits = _match_nodes(nodes, postcondition.get("match") or {})
+            if not hits:
+                return False, "POSTCONDITION_UI_ELEMENT_ABSENT"
+            for node in hits:
+                if str(node.get(want_state)).lower() == str(want_val).lower():
+                    return True, "UI_STATE_VERIFIED"
+            return False, f"POSTCONDITION_UI_STATE_MISMATCH:{want_state}"
+
+        return False, f"UNSUPPORTED_POSTCONDITION_KIND:{kind}"
+
     return False, f"UNSUPPORTED_POSTCONDITION_KIND:{kind}"
+
+
+def _ui_nodes(postcondition: Mapping[str, Any],
+              execution_result: Mapping[str, Any] | None) -> list[Mapping[str, Any]] | None:
+    """Return the accessibility tree to check, or None when there is none.
+
+    None is deliberately distinct from []: an empty tree is a real observation
+    ('I looked and nothing was there'), a missing tree is not. A verifier that
+    cannot see must say so rather than answer.
+    """
+    raw = postcondition.get("ui_tree")
+    if raw is None:
+        raw = (execution_result or {}).get("ui_tree")
+    if raw is None:
+        return None
+    if isinstance(raw, Mapping):
+        raw = raw.get("nodes") or raw.get("tree") or []
+    # str and bytes ARE Sequence. Without this guard a malformed tree degraded to
+    # [] -- 'I looked and found nothing' -- instead of None, 'I could not look'.
+    # Those must never be the same answer.
+    if isinstance(raw, (str, bytes)) or not isinstance(raw, Sequence):
+        return None
+    return [n for n in raw if isinstance(n, Mapping)]
+
+
+_SELECTOR_KEYS = ("role", "name", "text", "automation_id", "identifier", "label")
+
+
+def _match_nodes(nodes: Sequence[Mapping[str, Any]],
+                 match: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Match on semantics -- role/name/label/identifier -- never coordinates.
+
+    `contains=True` switches name/text matching to substring. Substring matching
+    is opt-in because the loose form is how a wrong element gets accepted.
+    """
+    if not isinstance(match, Mapping):
+        return []
+    # An empty or non-semantic selector must match NOTHING. Silently ignoring an
+    # unknown key leaves an empty selector, which matches everything -- that is
+    # precisely how "click Save" gets satisfied by a coordinate. Caught by
+    # test_matching_is_on_semantics_never_coordinates.
+    semantic = {k: v for k, v in match.items() if k in _SELECTOR_KEYS}
+    if not semantic:
+        return []
+    match = semantic
+    substring = bool(match.get("contains"))
+    out: list[Mapping[str, Any]] = []
+    for node in nodes:
+        ok = True
+        for key in _SELECTOR_KEYS:
+            if key not in match:
+                continue
+            want = str(match[key])
+            got = str(node.get(key) if node.get(key) is not None else node.get("value"))
+            if substring and key in {"name", "text"}:
+                if want.lower() not in got.lower():
+                    ok = False
+                    break
+            elif want != got:
+                ok = False
+                break
+        if ok:
+            out.append(node)
+    return out
 
 
 def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool:
@@ -1099,6 +1372,21 @@ def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool
     if kind in {"http_get_contains", "step_response_contains"}:
         # Tested via mutated expected token in negative-control verification
         return True
+    if kind.startswith("ui_"):
+        # The tree lives in the postcondition, not on disk, so corrupt it in
+        # place. Without this the new kinds would be self-certifying: a verifier
+        # that cannot be made to say NO is not a verifier.
+        if kind in {"ui_element_present", "ui_value_equals", "ui_text_contains",
+                    "ui_element_state_equals"}:
+            if "ui_tree" in postcondition:
+                postcondition["ui_tree"] = []
+                return True
+            return False
+        if kind == "ui_element_absent":
+            # Sabotage an absence check by making the element appear.
+            postcondition["ui_tree"] = [dict(postcondition.get("match") or {"role": "sabotage"})]
+            return True
+        return False
     return False
 
 
@@ -1171,14 +1459,35 @@ def _clone_sqlite_twin_world(
             if not cols_info:
                 continue
             col_names = [str(c[1]) for c in cols_info]
+            # Bound `?` parameters are consumed IN THE ORDER THEY APPEAR across SET
+            # and WHERE. The previous code always used params[0] for every `?` and
+            # skipped `?` entirely in WHERE, so a two-parameter UPDATE
+            # ("SET qty = ? WHERE id = ?") seeded a twin row that the postcondition
+            # could not find: measured 2026-11-09, heldout_reason
+            # POSTCONDITION_SQLITE_NO_ROW. The compiler emits exactly this shape, so
+            # its preferred output could never qualify.
+            _params = list(step.get("params") or [])
+            _cursor = [0]
+
+            def _next_param() -> Any:
+                if _cursor[0] >= len(_params):
+                    return None
+                v = _params[_cursor[0]]
+                _cursor[0] += 1
+                return v
+
             set_targets: dict[str, Any] = {}
             for assign in set_clause.split(","):
                 if "=" in assign:
                     lhs, rhs = assign.split("=", 1)
                     cname = lhs.strip().strip('"`[]')
                     rval_raw = rhs.strip()
-                    if rval_raw == "?" and step.get("params"):
-                        rval = _instantiate_obj(step["params"][0], twin_bindings)
+                    if rval_raw == "?":
+                        _pv = _next_param()
+                        rval = (_instantiate_obj(_pv, twin_bindings)
+                                if _pv is not None else None)
+                        if rval is None:
+                            continue
                     else:
                         rval = str(_instantiate_obj(rval_raw, twin_bindings)).strip("'\"")
                     set_targets[cname] = rval
@@ -1190,7 +1499,12 @@ def _clone_sqlite_twin_world(
             ):
                 wc = wm.group(1).strip().strip('"`[]')
                 wv_raw = wm.group(2).strip()
-                if wv_raw != "?":
+                if wv_raw == "?":
+                    _pv = _next_param()
+                    if _pv is None:
+                        continue
+                    where_targets[wc] = str(_instantiate_obj(_pv, twin_bindings)).strip("'\"")
+                else:
                     where_targets[wc] = str(_instantiate_obj(wv_raw, twin_bindings)).strip("'\"")
 
             sample = src_con.execute(f"SELECT * FROM {table} LIMIT 1").fetchone()
@@ -1762,7 +2076,85 @@ def check_step_preconditions(steps: Sequence[Mapping[str, Any]], *, cwd: str | p
                 _ast.parse(code)
             except SyntaxError:
                 return False, "PRECONDITION_INVALID_PYTHON_SYNTAX"
+        elif layer == "sqlite_exec":
+            # A PRECONDITION THAT DOES NOT CHECK THE WORLD IT ACTS ON IS NOT ONE.
+            #
+            # Measured 2026-11-09: a skill compiled against table `items` matched the
+            # goal "set id 1 to 77 in other.sqlite", this function said
+            # PRECONDITIONS_OK, and the execution raised
+            # "sqlite3.OperationalError: no such table: items" out of the caller.
+            #
+            # ToolGate (ACL 2026) formalises each tool as a Hoare contract whose
+            # precondition gates invocation. The cheapest sound form of that for a
+            # SQL step is: the database exists and every table the statement names
+            # is really there. Check before writing, not after failing.
+            db_raw = st.get("db_path")
+            if db_raw:
+                _db = _resolve_local_path(str(db_raw), pathlib.Path(cwd) if cwd else pathlib.Path.cwd())
+                if not _db.is_file():
+                    return False, f"PRECONDITION_SQLITE_DB_MISSING:{_db.name}"
+                try:
+                    _names = _sqlite_tables_named(str(st.get("sql") or ""))
+                except Exception:
+                    _names = set()
+                if _names:
+                    _con = sqlite3.connect(str(_db), timeout=5.0)
+                    try:
+                        _have = {str(r[0]) for r in _con.execute(
+                            "SELECT name FROM sqlite_master WHERE type='table'")}
+                    finally:
+                        _con.close()
+                    _missing = sorted(n for n in _names if n not in _have)
+                    if _missing:
+                        return False, "PRECONDITION_SQLITE_TABLE_MISSING:" + ",".join(_missing)
     return True, "PRECONDITIONS_OK"
+
+
+_SQL_NOISE = {
+    "set", "where", "values", "into", "sqlite_master", "table", "select", "from",
+    "update", "insert", "delete", "primary", "key", "integer", "text", "real",
+    "blob", "null", "and", "or", "not", "in", "if", "exists", "as", "on", "by",
+}
+
+
+def _sqlite_tables_named(sql: str) -> set[str]:
+    """Tables a single SQL statement names, without a SQL parser.
+
+    Deliberately conservative: it returns names, and a name that is not a table is
+    caught by the check itself. It does not try to understand subqueries.
+    """
+    named: set[str] = set()
+    for m in re.finditer(r"\b(?:FROM|INTO|UPDATE|JOIN)\s+([A-Za-z_][A-Za-z0-9_]*)",
+                         sql, re.IGNORECASE):
+        tok = m.group(1)
+        if tok.lower() not in _SQL_NOISE:
+            named.add(tok)
+    return named
+
+
+def _contract_answer(postcondition: Mapping[str, Any],
+                     execution_result: Mapping[str, Any]) -> Any:
+    """The value the skill's postcondition says is the answer, or None.
+
+    Deliberately narrow: it only speaks for contracts whose answer is unambiguous.
+    Anything else returns None so the caller keeps whatever it already had, rather
+    than this function inventing an answer for a contract it does not understand.
+    """
+    kind = str((postcondition or {}).get("kind") or "")
+    receipts = list((execution_result or {}).get("step_receipts") or [])
+    text = ""
+    for receipt in receipts:
+        if receipt.get("stdout") is not None:
+            text = str(receipt.get("stdout") or "")
+    if kind == "stdout_line_count":
+        n = len([ln for ln in text.splitlines() if ln.strip()])
+        return n if n > 0 else None
+    if kind == "stdout_integer":
+        stripped = text.strip()
+        return int(stripped) if stripped.isdigit() else None
+    if kind == "stdout_equals":
+        return text if text else None
+    return None
 
 
 def recall_and_execute_workflow(
@@ -1770,8 +2162,17 @@ def recall_and_execute_workflow(
     *,
     cwd: str | pathlib.Path | None = None,
     db_path: pathlib.Path | None = None,
+    require_carried: bool = False,
 ) -> dict[str, Any] | None:
-    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
+    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check.
+
+    `require_carried=True` narrows the search to skills whose instantiated steps the
+    admitted carrier would run. It exists because the controller used to skip recall
+    entirely for "computer shape" goals -- a rule written when recall executed
+    unconfined. Since round 30 the carrier runs those steps, so the honest filter is
+    "is this skill carried", not "is this goal a computer shape". A skill that fails
+    the filter is skipped; the caller's existing refusal still applies.
+    """
     from canonical.runtime.memory_policy_v1 import can_read_memory
 
     if not can_read_memory():
@@ -1795,11 +2196,22 @@ def recall_and_execute_workflow(
         if has_py and any(any(ch in str(v) for ch in ("'", '"', "\n", "\r", "\\")) for v in bindings.values()):
             continue
         inst_steps = _instantiate_obj(skill["abstract_steps"], bindings)
+        if require_carried and not _steps_are_all_carried(inst_steps):
+            continue
         pre_ok, _ = check_step_preconditions(inst_steps, cwd=cwd)
         if not pre_ok:
             continue
         inst_post = _instantiate_obj(skill["abstract_postcondition"], bindings)
-        exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
+        # A learned skill matched the SENTENCE, not the WORLD. Measured 2026-11-09:
+        # a skill compiled against `items` matched the goal "set id 1 to 77 in
+        # other.sqlite" and raised OperationalError: no such table: items out of the
+        # caller. A shape mismatch is a refusal, not an exception -- the door turns an
+        # exception into COMPOSER_STEP_OUTCOME_UNCERTAIN and loses the reason.
+        try:
+            exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
+        except Exception as exc:  # noqa: BLE001 - any step failure is a candidate miss
+            last_error = f"{type(exc).__name__}:{exc}"
+            continue
         if exec_res.get("status") == boundary.STATUS:
             # Earlier candidate workflows may already have had effects even if
             # they failed their postconditions; do not claim otherwise.
@@ -1834,6 +2246,14 @@ def recall_and_execute_workflow(
             "artifact_sha256": skill["artifact_sha256"],
             "bindings": bindings,
             "verification_reason": reason,
+            # What the ANSWER is, per the skill's own contract. A set-printing program
+            # answers "how many" with the line count of what it printed, so returning its
+            # stdout as the answer would hand the caller a listing where it asked for a
+            # number. The verifier already computes this; report the same value the
+            # verification used rather than making every caller re-derive it.
+            "answer": _contract_answer(inst_post, exec_res),
+            "carried_only": bool(require_carried),
+            "all_steps_carried": _steps_are_all_carried(inst_steps),
             "step_receipts": exec_res["step_receipts"],
             "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
             "model_dependency_count": 0,
