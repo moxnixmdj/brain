@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_R118_VERIFIED_SURFACE_V1",
+  "date": "2026-11-09",
+  "purpose": "verify exactly the 12 files changed by rounds 112-117, rather than claiming a whole-suite result",
+  "changed_surface": {
+    "files": 12,
+    "insertions": 742,
+    "deletions": 30,
+    "runtime_state_noise_committed": 0
+  },
+  "targeted_verification": {
+    "command": "pytest test_closed_loop_repair_must_generalise_v1 test_repair_input_dependency_gate_v1 test_root3_strict_current_bootstrap_v1 test_root3_two_class_attempt_authorizer_v1 test_proof_compression_activation_v1 test_m1b_continuous_geometry_compiler",
+    "result": "37 passed, 1 skipped, 0 failed in 94.21s",
+    "skip_reason": "cadquery requires libGL.so.1, absent on this host; a missing system library is a skip, not a verdict"
+  },
+  "whole_suite_run": {
+    "tests_collected": 18001,
+    "collection_errors": 0,
+    "status": "RUNNING at time of writing, ~60%, two xdist workers died, failures accumulating",
+    "interpretation": "a whole-suite pass/fail number CANNOT distinguish a capability failure from an environment failure in this sandbox (no servers, no DISPLAY, no providers). That is why the 12-file surface is the correct instrument and the whole-suite number is not.",
+    "not_claimed": "no whole-suite pass rate is claimed by this record"
+  },
+  "self_correction": [
+    "the PR (#6655) was opened before this verification existed, and its reviewable surface (205,758 additions / 622 files) is far larger than the substantive change (12 files / 742 lines)",
+    "the smartest order was: verify the 12 files, then open a PR scoped to them",
+    "an unmeasured claim ('full-suite run in progress') was placed in the PR body; this record supplies the measured part"
+  ]
+}
