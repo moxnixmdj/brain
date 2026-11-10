@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 309,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6728,
+  "research_index_records": 6730,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4dbacb2984b13b15350b20a7f3ab9108b6d6a74144226828254e7ed359eada34"
+  "value": "5c17b1313850ce0569ba25c1a302af1864b1c20f657487ba78fb6b27225e168b"
  },
  "engines": [
   {
@@ -132647,6 +132647,24 @@
    "action_id": "",
    "capability": false,
    "date": "2026-11-09",
+   "id": "research:canonical/governance/THE_HARNESS_WAS_DOCUMENTATION_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/THE_HARNESS_WAS_DOCUMENTATION_20261109_V1.json",
+   "schema": "brain.governance.THE_HARNESS_WAS_DOCUMENTATION_20261109_V1",
+   "sha256": "6c6da0382d770f1aeaf9e371ba0fe370627cb3ad2bbac744dea891dd328b8d06",
+   "status": "THE_HIGHEST_VALUE_ASSET_WAS_A_775_LINE_FRAMEWORK_THAT_NOTHING_ENFORCED",
+   "terms": {
+    "20261109": 1,
+    "documentation": 1,
+    "harness": 1,
+    "the_highest_value_asset_was_a_775_line_framework_that_nothing_enforced": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
    "id": "research:canonical/governance/THE_QUESTION_IS_NOW_ANSWERED_UNDER_CONFINEMENT_20261109_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/governance/THE_QUESTION_IS_NOW_ANSWERED_UNDER_CONFINEMENT_20261109_V1.json",
@@ -132661,6 +132679,25 @@
     "now": 1,
     "question": 1,
     "under": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/THE_SMARTEST_OPTIMAL_PLAN_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/THE_SMARTEST_OPTIMAL_PLAN_20261109_V1.json",
+   "schema": "brain.governance.THE_SMARTEST_OPTIMAL_PLAN_20261109_V1",
+   "sha256": "5eb9e0cd27324a05fb52c6d54e403269f6e6d9b23b6defc6b5d72d4638981d28",
+   "status": "PLAN_DERIVED_FROM_SEVEN_MEASUREMENTS__NOT_FROM_PRIORITY_ORDERING",
+   "terms": {
+    "20261109": 1,
+    "optimal": 1,
+    "plan": 1,
+    "plan_derived_from_seven_measurements__not_from_priority_ordering": 1,
+    "smartest": 1,
     "v1": 1
    }
   },
@@ -237220,7 +237257,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_one_model_v3.py",
-   "sha256": "154f0fde2e08527e24ca5130480271be64566ac1d2af112a9301c296f065f90b",
+   "sha256": "fc45d241f1225f10328723696a138347afcec3a83e8593f88a0224111708ee8e",
    "summary": "THE ONE MODEL — a single door onto every proven layer of Project Brain.",
    "symbol_count": 15,
    "symbols": [
@@ -299134,7 +299171,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/tree_sitter_swe_kernel_v1.py",
-   "sha256": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+   "sha256": "cabf6857a09a0b533d91166e59fd82137b9564f7eb5d58146303166ef32ac5b9",
    "summary": "Shared deterministic tree-sitter SWE substrate.",
    "symbol_count": 28,
    "symbols": [

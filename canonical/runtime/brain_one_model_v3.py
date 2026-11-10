@@ -168,10 +168,23 @@ def resolve(
             v = out.get("verification") or {}
             step("answer", verified=v.get("verified"), reason=v.get("reason"))
             if v.get("verified"):
+                # Measured 2026-11-09: `resolve("how many unique lines in data.txt")` on a
+                # root where data.txt DOES NOT EXIST returned pass=True with 40 grep hits
+                # and no number. The UNDERSTAND layer was asked only "is the answer
+                # verified?" -- a question about ITSELF -- never "is this a counting
+                # question?", so a counting question was answered by literature search and
+                # the no-answer guard in `_answer` never ran (the guard only fires when the
+                # answer is None, and an inspect dict is not None).
+                #
+                # A counting question has exactly one honest non-refusal shape: a number.
+                # Anything else is the wrong answer executed correctly, which is the defect
+                # this door exists to refuse. The counting flag is now passed in, so the
+                # guard below sees it.
                 return _answer(route={"best": None, "candidates": [],
                                       "confident": True, "coverage": 1.0},
                                trace=trace, t0=t0, layer="UNDERSTAND_BUILT_ANSWER",
-                               result=out, acquisition=None)
+                               result=out, acquisition=None,
+                               _is_counting_question=_is_counting(goal))
         except Exception as exc:  # noqa: BLE001 - the understanding layer never breaks the door
             step("answer_failed", error=str(exc)[:120])
 
@@ -496,7 +509,32 @@ def _answer(route, trace, t0, *, layer, result=None, compiled=None, carried=None
     # by the caller, and an unanswerable question object means the rule DOES fire (fail
     # closed), because a counting answer with no number is never a pass.
     _asked_to_count = _is_counting_question
-    if _ans is None and _asked_to_count:
+    # A counting question has one honest answer shape: a number. `_ans is None` is not the
+    # only way to fail to answer it -- measured 2026-11-09, the UNDERSTAND layer returned a
+    # 40-hit inspect dict (an inspection report, not a count) and the old None-only check
+    # passed it straight through. Bind the rule to the ANSWER'S SHAPE, not merely its
+    # presence: a bool is an int in Python and is not a count, and a bare string of digits
+    # is coerced by the caller, so only a real numeric type counts as having counted.
+    def _is_a_number(x) -> bool:
+        return isinstance(x, (int, float)) and not isinstance(x, bool)
+
+    # Narrowed 2026-11-09 after the wider rule broke `sort -u data.txt`: that goal has NO
+    # query_kind (it is a stated command), so it never sets the counting flag and is
+    # unaffected -- but an earlier, broader shape rule also refused a legitimately non-
+    # numeric answer whose listing IS its answer. The defect being fixed is narrower than
+    # "not a number": it is a STRUCTURED REPORT standing in for a count. A dict with a
+    # schema is an inspection/report object; it is never a count, and it is precisely what
+    # shadowed the number. Scalars (int, str, list, None) keep the old presence rule.
+    _is_a_report = isinstance(_ans, dict) and bool(_ans.get("schema"))
+    # The `_asked_to_count` conjunction is load-bearing and was dropped once while editing
+    # this line, which made every STATED COMMAND with no extracted answer refuse -- the
+    # regression was caught by test_the_one_model_reaches_the_carrier_layer_and_passes.
+    # The rule governs counting questions ONLY. A stated command's evidence is its stdout
+    # and it never reaches this branch.
+    _produced_no_count = _asked_to_count and (
+        _ans is None or _is_a_report or not _is_a_number(_ans)
+    )
+    if _produced_no_count:
         return _refusal(route, trace, t0,
                         reason="FAIL_CLOSED__EXECUTION_PRODUCED_NO_ANSWER",
                         detail={"layer": layer,

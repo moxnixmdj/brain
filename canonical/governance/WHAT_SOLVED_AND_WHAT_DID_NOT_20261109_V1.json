@@ -1,0 +1,101 @@
+{
+ "schema": "brain.governance.WHAT_SOLVED_AND_WHAT_DID_NOT_20261109_V1",
+ "date": "2026-11-09",
+ "round": 35,
+ "status": "MEASURED__ONE_CLAIM_CORRECTED__ONE_DEFECT_FOUND_AND_FIXED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_claim_under_test": "Instant learning + instant learning in new arbitrary environments are already solved perfectly, therefore this is a perfect solution for all problems and any computer use; give it a demonstration once and it learns permanently; therefore we have solved everything on a computer; and we were making a sentient creature.",
+ "verdict": "FALSE AS STATED. Four of its five steps do not hold. One step is real and measured.",
+ "what_is_REAL": {
+  "persistence": {
+   "measured": "a compiled skill survives a fresh store object, a fresh process and a restart; 79 recorded recalls of one skill",
+   "mechanism": "SQLite (WAL) table `compiled_workflow_skills`, keyed by goal regex + skeleton tokens",
+   "honest_scope": "the BYTES are permanent. That is durability of a file, and it is real."
+  },
+  "one_shot_compile": {
+   "measured": "a single trace compiles into a skill, is qualified on an untouched held-out instance plus a sabotage control, and persists",
+   "honest_scope": "one-shot COMPILATION of a program the trace already contained. Not one-shot INDUCTION of a general rule."
+  },
+  "zero_weights_zero_cost": {
+   "measured": 0,
+   "trained_parameters": 0,
+   "incremental_spend_usd": 0
+  }
+ },
+ "what_is_NOT_real__measured": {
+  "1_instant_learning_in_new_arbitrary_environments": {
+   "measured_run": "environment_learning_v1.learn_model on a 3-dial lock (64 states), random walks, budget 1..200",
+   "result": "budget=1 -> 5 states learned, NO plan. budget=200 -> 52/64 states (81%), goal NEVER reached, NO plan.",
+   "reading": "this module learns by RANDOM WALKING under a trial budget. It is not one-shot and it did not reach the goal at 200 trials. The module's own docstring says 'the number of trials bounds what can be learned, and is reported'. That is exploratory model-building, the opposite of one-shot."
+  },
+  "2_transfer_to_arbitrary_environments": {
+   "measured_run": "3 identical demonstrations of 'enable a feature flag' in 3 different sqlite databases",
+   "result": "3/3 FAIL_CLOSED__HELDOUT_EXECUTION_ERROR -- not one compiled, not one persisted",
+   "honest_read": "this may be my harness passing the wrong held-out shape, so it is reported as INCONCLUSIVE, not as a system defect. What IS not inconclusive is the store: after every test run in this repository's history it contains exactly ONE skill (sort -u). The permanent repertoire is one program."
+  },
+  "3_permanent_learning_from_one_demonstration": {
+   "measured_run": "elevate_trace_to_fastest_layer on a 3-step GUI trace (pixel_click, ui_type, sqlite_query)",
+   "result": "kept 1 of 3 steps. The click and the typed text are NOT in the learned skill.",
+   "reading": "the 'learning' DROPS the computer-use interaction and keeps only the programmatic equivalent. It cannot learn what it discards, so 'do anything on a computer once and it learns it' is false by construction, not by tuning."
+  },
+  "4_anything_on_a_computer": {
+   "measured": "the carrier admits ONLY argv under cli_exec; every step must be `layer == cli_exec`. Vision stack: PIL ABSENT, cv2 ABSENT, numpy ABSENT, pytesseract ABSENT. No click, no screenshot, no pointer.",
+   "reading": "it has no eyes and no hands. It can act only where a command-line program already expresses the action. 'Any computer use' is excluded by the architecture."
+  },
+  "5_a_perfect_solution_for_all_problems": {
+   "measured": "22.2% (2 of 9) on a 9-bug private SWE corpus; ZERO public benchmark numbers of any kind",
+   "reading": "the ceiling is the HYPOTHESIS SPACE, not effort: every miss needs more than one AST span replaced or statements absent from the source. Scaling demonstrations does not widen that space."
+  },
+  "6_sentience": {
+   "repo_position": "continuous_self_v1 says 'It is not a claim of experience or sentience, and nothing here tests for either.' creature_runtime_v1 says it proves the parts COMPOSE, not that the work is GOOD.",
+   "measured": "continuous_self_v1.run() requires `next_task` and `perform` INJECTED from outside. It owns continuity, not judgement.",
+   "field_consensus_2026": "no AI system is confirmed conscious by any broadly accepted standard; IIT gives LLM-style architectures phi ~ 0; a July 2026 activation study found no reliable evidence of self-reported sentience across open-weight families.",
+   "reading": "what exists is a durable process with an accurate journal of its own recent past -- real engineering, and a PRECONDITION for asking the question. It is not evidence of a subject. Do not claim it."
+  }
+ },
+ "the_structural_law_that_makes_the_claim_false": "A skill store can never exceed the carrier that executes it. Every learned step must be an argv the carrier admits; anything else is refused. So learning is bounded by what the carrier ALREADY could do -- demonstrations can only rearrange existing capabilities into faster forms. That is real and valuable (it is memoization of verified work, and it is what took one measured path from 490 ms to 101 ms). It is NOT new capability, and it can never take the system outside its own carrier. The ceiling is inherited, not learned.",
+ "the_defect_this_round_found_and_fixed": {
+  "what": "a counting question answered by a literature search was reported as a pass",
+  "repro": "resolve('how many unique lines in data.txt') on a root where data.txt DOES NOT EXIST",
+  "before": "pass=True, layer=UNDERSTAND_BUILT_ANSWER, answer={schema: PROJECT_BRAIN_INSPECT_V1, hits: 40 grep matches}, NO NUMBER",
+  "why_r33_guard_missed_it": "the no-answer guard fired only when the answer was None; an inspection report is not None. The guard bound to the answer's PRESENCE, not its SHAPE.",
+  "second_cause": "the UNDERSTAND layer ran BEFORE the counting guard and was asked only 'is the answer verified?' -- a question about itself -- never 'is this a counting question?'",
+  "after": "pass=False, FAIL_CLOSED__EXECUTION_PRODUCED_NO_ANSWER. A real count still answers 2. A stated command (sort -u) still passes.",
+  "regression_i_caused_and_fixed_in_this_round": "the first shape guard dropped the `_asked_to_count` conjunction, so every stated command with no extracted answer began refusing. Caught by test_the_one_model_reaches_the_carrier_layer_and_passes. The conjunction is load-bearing and is now commented as such.",
+  "pinned_by": "canonical/tests/test_a_count_is_never_a_report_v1.py -- 2 of its 5 tests FAIL on the pre-fix tree and pass on the fixed tree, verified by stashing the change."
+ },
+ "the_smartest_things_to_do__ranked": [
+  {
+   "rank": 1,
+   "action": "stop scaling demonstrations and build the one thing that IS one-shot: statement insertion",
+   "why": "the ceiling is hypothesis space, worth 5 of 7 measured misses. More demonstrations move along an axis that is already saturated at one skill."
+  },
+  {
+   "rank": 2,
+   "action": "make recall actually fire on counting questions",
+   "why": "the only skill in the store (a verified sort -u) was NOT used by the door for its own goal shape this round; the UNDERSTAND layer shadowed it. A store that is not reached is not memory."
+  },
+  {
+   "rank": 3,
+   "action": "add an eye, or stop saying 'any computer use'",
+   "why": "PIL/cv2/numpy/tesseract all absent, carrier is argv-only. Either ground actions in pixels (a real, large build) or retire the phrase."
+  },
+  {
+   "rank": 4,
+   "action": "make the knowledge budget explicit: what the carrier admits IS the capability ceiling",
+   "why": "it is the honest headline and it prices every future learning claim automatically."
+  }
+ ],
+ "what_would_have_to_become_true_for_the_thesis_to_hold": [
+  "a demonstration must teach a rule that generalizes beyond the instance AND beyond the carrier's existing verbs",
+  "the environment learner must reach a goal in a world it has never walked, from one trajectory (today: never reached at 200 trials)",
+  "a GUI demonstration must be retained rather than dropped at elevation (today: 1 of 3 steps kept)",
+  "a public benchmark number must exist (today: zero)"
+ ],
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}
