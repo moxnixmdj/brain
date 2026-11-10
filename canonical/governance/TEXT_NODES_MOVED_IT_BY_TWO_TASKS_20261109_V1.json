@@ -1,0 +1,28 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "TEXT_NODES_MOVED_IT_BY_TWO_TASKS_20261109_V1",
+  "round": 76,
+  "date": "2026-11-09",
+  "the_prediction": "r75, before running: including StaticText should beat 15/130",
+  "the_result": {"baseline_names_only": "15/130 11.5%", "with_text_nodes": "17/130 13.1%",
+                 "gained": 6, "lost": 4, "net": "+2 tasks, +1.6pp",
+                 "verdict": "direction correct, magnitude almost worthless"},
+  "the_number_that_matters": {
+    "named_widget_tasks": 77,
+    "parsed_and_acted": 54,
+    "solved": 17,
+    "parsed_acted_and_still_failed": 37,
+    "reading": "the parser understands 54 of 130 goals and finishes 17. The gap is not reading and not seeing. It is SEQUENCING: the policy performs one action and checks a reward."
+  },
+  "examples_of_the_missing_layer": {
+    "click-checkboxes-large": "names six tokens, must tick exactly those, then Submit",
+    "choose-date": "drive a calendar to a date; currently scores -1, a WRONG click, not inaction",
+    "click-menu": "open menu, then submenu, then leaf",
+    "search-engine": "type, submit, WAIT for results, then click one"
+  },
+  "the_thing_this_system_already_has_and_the_benchmark_policy_does_not": "a per-step post-condition and a gate. act_loop_v1 validates every step causally; the benchmark policy takes one action and reads a reward. The 37 failures are exactly the tasks where 'did that step work?' matters.",
+  "corrections_made_during_the_round": ["asserted 33 stuck tasks from an eyeball count; the data says 37. Fixed the assertion, not the data."],
+  "what_this_does_not_prove": ["that the act loop would fix the 37 -- untested", "any improvement over published systems"],
+  "next": ["run the benchmark THROUGH act_loop_v1 with the model removed but the per-step gate kept, to isolate sequencing from understanding",
+           "predict before running: if sequencing is the constraint, the gate alone should recover a meaningful part of the 37"]
+}
