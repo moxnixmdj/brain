@@ -92,3 +92,33 @@ def test_a_tie_is_not_a_decision():
     tie = [{"id": "t1", "attrs": {"data-duration": "5"}},
            {"id": "t2", "attrs": {"data-duration": "5"}}]
     assert apply_rule(r["rule"], tie) is None
+
+
+# --- r105: the inducer was handed POSITION instead of VALUE ----------------------
+# numeric_profile read data-* attributes, $money and duration text, but NOT a bare
+# numeral. find-greatest renders the number the goal is about as the card's visible
+# text, so three cards profiled as {'index': 0/1/2} and every choice returned NO_RULE.
+# The inducer was reported as failing to reason while it had never been shown the
+# quantity. This is r91 (the extractor, not the reasoner) in a second place.
+
+def test_a_bare_numeral_is_a_quantity():
+    from canonical.runtime.predicate_induction_v1 import numeric_profile
+    assert numeric_profile({"text": "7", "cls": "card"}, []) == {"text_number": 7.0}
+
+
+def test_one_demonstration_induces_max_and_applies_to_new_numbers():
+    from canonical.runtime.predicate_induction_v1 import induce, apply_rule
+    demo = [{"id": "a", "text": "3", "cls": "card"}, {"id": "b", "text": "2", "cls": "card"},
+            {"id": "c", "text": "7", "cls": "card"}]
+    r = induce(demo[2], demo)                      # 7 was chosen
+    assert r["status"] == "INDUCED"
+    assert r["rule"]["quantity"] == "text_number" and r["rule"]["direction"] == "max"
+    new = [{"id": "x", "text": "4"}, {"id": "y", "text": "11"}, {"id": "z", "text": "9"}]
+    assert apply_rule(r["rule"], new)["text"] == "11"
+
+
+def test_the_opposite_choice_induces_the_opposite_rule():
+    from canonical.runtime.predicate_induction_v1 import induce
+    demo = [{"id": "a", "text": "3"}, {"id": "b", "text": "2"}, {"id": "c", "text": "7"}]
+    r = induce(demo[1], demo)                      # 2 was chosen
+    assert r["rule"]["direction"] == "min"

@@ -13,6 +13,7 @@ Cost is honest: probing costs actions. Every probed click is counted and reporte
 question is not "how few actions" but "does ordering by plan beat ordering by guess".
 """
 import json, sys, time, pathlib, re, urllib.request
+import websocket
 sys.path.insert(0, "/home/user/brain")
 from canonical.runtime import bench_miniwob_v1 as B, address_v1 as A
 from canonical.runtime import bench_capability_graph_v1 as G
@@ -192,6 +193,49 @@ for i, t in enumerate(tasks, 1):
                     r["actuator"] = "used" if _clicked else "tried"
                 except Exception as _e:
                     r["actuator"] = "error:" + str(_e)[:60]
+            # ROUND 104 -- THE INDUCER, WIRED IN FOR THE FIRST TIME IN 104 ROUNDS.
+            # predicate_induction_v1 appears in this file ONLY inside a comment (line 97).
+            # It has never executed. It is the module that holds the user's own thesis --
+            # "one demonstration beats generated numbers on a new instance" -- and it took
+            # an audit of my own earlier audit to notice it was still in the drawer.
+            #
+            # A demonstration is available here: the actuator just chose a control and the
+            # PAGE graded the choice. That is exactly the (chosen, candidates) pair the
+            # inducer needs -- a real demonstration with an oracle, not one written by me.
+            if _clicked and len(controls) > 1:
+                try:
+                    from canonical.runtime import predicate_induction_v1 as PI
+                    import json as _json, urllib.request as _ur
+                    _pages = [x for x in _json.loads(_ur.urlopen("http://127.0.0.1:9222/json/list").read())
+                              if x["type"] == "page"]
+                    _ws = websocket.create_connection(_pages[0]["webSocketDebuggerUrl"],
+                                                      timeout=20, origin="http://127.0.0.1:9222")
+                    _expr = ("JSON.stringify(Array.from(document.querySelectorAll('#area *'))"
+                             ".filter(e=>e.getBoundingClientRect().width>0)"
+                             ".map(e=>({id:e.id||'',text:(e.innerText||'').trim().slice(0,40),"
+                             "cls:e.className||'',attrs:Object.fromEntries("
+                             "Array.from(e.attributes).filter(a=>a.name.startsWith('data-'))"
+                             ".map(a=>[a.name,a.value]))})))")
+                    _ws.send(_json.dumps({"id": 1, "method": "Runtime.evaluate",
+                                          "params": {"expression": _expr, "returnByValue": True}}))
+                    _dom = []
+                    while True:
+                        _m = _json.loads(_ws.recv())
+                        if _m.get("id") == 1:
+                            _dom = _json.loads((_m.get("result", {}).get("result", {}) or {}).get("value") or "[]")
+                            break
+                    _ws.close()
+                    _hit = [n["name"] for n in controls]
+                    _chosen = next((e for e in _dom if e["text"] and e["text"] in _hit), None)
+                    if _chosen:
+                        _rule = PI.induce(_chosen, _dom)
+                        r["induction"] = _rule.get("status")
+                        if _rule.get("status") == "INDUCED":
+                            r["induced_rule"] = {k: _rule.get(k) for k in ("quantity", "direction")}
+                    else:
+                        r["induction"] = "NO_MATCHING_CHOSEN"
+                except Exception as _ie:
+                    r["induction"] = "error:" + str(_ie)[:60]
             pr = {"status": "SOLVED" if _clicked else "NO_LITERAL"}
             r["strategy"] = "actuator_no_literal" if _clicked else "not_attempted_no_literal"
         r["plan_len"] = len(pr.get("plan") or [])

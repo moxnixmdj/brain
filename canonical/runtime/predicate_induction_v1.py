@@ -50,6 +50,17 @@ def numeric_profile(element: Mapping[str, Any], dom: Sequence[Mapping[str, Any]]
     money = re.search(r"\$(\d+(?:\.\d+)?)", text)
     if money:
         out.setdefault("price_text", float(money.group(1)))
+
+    # MEASURED FAILURE (r105). find-greatest renders the number the goal is ABOUT as the
+    # card's bare visible text: <div class="card">2</div>. numeric_profile read data-*
+    # attributes, $money and duration text -- and NOT a bare numeral -- so the three cards
+    # profiled as {'index': 0}, {'index': 1}, {'index': 2}: their POSITION, not their value.
+    # Every chosen card then produced NO_RULE, and the inducer was reported as failing to
+    # reason while it had never been shown the quantity. This is r91 in a second place:
+    # the extractor, not the reasoner.
+    bare = re.fullmatch(r"\s*(-?\d+(?:\.\d+)?)\s*", text)
+    if bare:
+        out.setdefault("text_number", float(bare.group(1)))
     return out
 
 
