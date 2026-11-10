@@ -806,6 +806,78 @@ def _resolve_local_path(raw_path: str, cwd: pathlib.Path) -> pathlib.Path:
     return p if p.is_absolute() else (cwd / p)
 
 
+def _carrier_path(arg: str, work_dir: pathlib.Path) -> str:
+    """Rewrite a repo-relative argument into the path shape the CARRIER can actually see.
+
+    Measured 2026-11-09, and this is the defect that made a learned skill dead: the carrier
+    stages `workspace_root` as `/input`, copies it to `/work/project`, and runs the argv with
+    THAT as cwd. So the carrier's filesystem contains the workspace and nothing else. It has
+    never heard of the repository.
+
+        ["sort","-u","data.txt"]                                -> exit 0
+        ["sort","-u","canonical/astra_runtime/tmp/x/data.txt"]  -> exit 2   (no such file)
+
+    A skill compiled from a goal that named a repo-relative path therefore stores an argv the
+    carrier can never satisfy, and it fails as FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_
+    CONFINEMENT -- which reads like a safety refusal and is really "file not found".
+
+    This function is a TRANSLATION, not a widening: it only rewrites a path that is inside
+    `work_dir`, because only those files are staged. A path outside the workspace is returned
+    UNCHANGED so the carrier refuses it exactly as before. Nothing gains reach.
+
+    Rules, in order:
+      * a token with no '/' is already workspace-relative -- unchanged.
+      * an absolute path under work_dir becomes its relative remainder.
+      * a relative path that resolves under work_dir becomes the relative remainder.
+      * anything else (absolute outside, '..' escape, a URL, a flag) is left alone.
+    """
+    if not arg or arg.startswith("-") or "://" in arg or "/" not in arg:
+        return arg
+    work = work_dir.resolve()
+
+    def _inside(p: pathlib.Path) -> bool:
+        try:
+            p.resolve().relative_to(work)
+            return True
+        except (ValueError, OSError):
+            return False
+
+    candidate = pathlib.Path(arg)
+    # 1. already workspace-relative -- but ONLY if the file is actually there.
+    #
+    # `relative_to` is a string operation, not an existence test: `w/canonical/x/y` is
+    # trivially "inside" `w`, so this branch used to accept a REPO-relative path, rewrite it
+    # to itself, and return. The carrier then failed with exit 2 and the failure surfaced as
+    # a confinement refusal. A path-shaped string is not a path.
+    if not candidate.is_absolute() and (work / candidate).exists() and _inside(work / candidate):
+        return str((work / candidate).resolve().relative_to(work))
+    # 2. absolute inside the workspace
+    if candidate.is_absolute() and candidate.exists() and _inside(candidate):
+        return str(candidate.resolve().relative_to(work))
+    # 3. A REPO-RELATIVE path. This is what a skill stores, and it is the case that made a
+    #    learned skill dead: `canonical/astra_runtime/tmp/x/data.txt` is meaningful to the
+    #    repository and meaningless inside a staged workspace. Resolve it against the CFG root
+    #    -- the nearest ancestor holding `.git` OR `canonical` -- and, only if that lands
+    #    inside the staged workspace, hand the carrier the relative remainder.
+    for base in _candidate_roots(work):
+        if (base / candidate).exists() and _inside(base / candidate):
+            return str((base / candidate).resolve().relative_to(work))
+    return arg
+
+
+def _candidate_roots(work: pathlib.Path) -> list[pathlib.Path]:
+    """Where a repo-relative path could be rooted, nearest first. Never guessed."""
+    roots: list[pathlib.Path] = []
+    for start in (work, pathlib.Path.cwd(), pathlib.Path(__file__).resolve()):
+        cur = start if start.is_dir() else start.parent
+        for parent in [cur, *cur.parents]:
+            if (parent / ".git").exists() or (parent / "canonical").is_dir():
+                if parent not in roots:
+                    roots.append(parent)
+                break
+    return roots
+
+
 def _subst_dynamic_tokens(val: Any, dyn: Mapping[str, str]) -> Any:
     """Substitute `{{hidden:csrf_token}}` or `{{json:token}}` from previous step responses."""
     if isinstance(val, str):
@@ -920,12 +992,20 @@ def execute_compiled_steps(
             # invariants are the evidence: confined, live tree untouched, exit status.
             # A step that gets here has already passed _carried_step_is_admissible.
             from canonical.runtime import admitted_confinement_execution_v1 as _carrier
-            _argv = [str(a) for a in (step.get("argv") or [])]
-            _out = _carrier.execute_confined(_argv, workspace_root=str(work_dir))
+            _raw_argv = [str(a) for a in (step.get("argv") or [])]
+            # The carrier cannot see the repository. Translate each argument that names a
+            # file inside the staged workspace into the workspace-relative form it can reach;
+            # leave everything else alone so the carrier's own refusal still applies.
+            _argv = [_raw_argv[0]] + [_carrier_path(a, work_dir) for a in _raw_argv[1:]] if _raw_argv else []
+            try:
+                _out = _carrier.execute_confined(_argv, workspace_root=str(work_dir))
+            except FileNotFoundError:
+                _out = {"pass": False, "status": "FAIL_CLOSED__PROGRAM_NOT_INSTALLED",
+                        "exit": None, "confined": None, "live_workspace_untouched": None}
             _ok = _out.get("pass") is True
             step_receipts.append({
                 "step": idx, "layer": layer, "ok": _ok,
-                "argv": _argv, "stdout": _out.get("stdout"),
+                "argv": _argv, "argv_asked": _raw_argv, "stdout": _out.get("stdout"),
                 "exit": _out.get("exit"),
                 "confined": _out.get("confined"),
                 "live_workspace_untouched": _out.get("live_workspace_untouched"),

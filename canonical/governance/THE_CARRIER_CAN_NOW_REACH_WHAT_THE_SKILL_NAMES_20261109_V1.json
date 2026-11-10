@@ -1,0 +1,96 @@
+{
+ "schema": "brain.governance.THE_CARRIER_CAN_NOW_REACH_WHAT_THE_SKILL_NAMES_20261109_V1",
+ "date": "2026-11-09",
+ "round": 40,
+ "status": "LEARNED_CLI_SKILL_NOW_COMPILES_QUALIFIES_RECALLS_AND_SURVIVES_A_PROCESS",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "why_this_round_exists": "r39 found the defect and named the fix (#1: bind paths at the carrier's root, not the repo's) but did not build it. This round builds it, because it was the only thing standing between a measured learner and a working capability.",
+ "the_defect_in_one_table": {
+  "carrier_stages": "workspace_root -> /input -> copied to /work/project; argv runs with THAT as cwd",
+  "carrier_has_never_heard_of_the_repository": true,
+  "bare_filename": {
+   "argv": [
+    "sort",
+    "-u",
+    "data.txt"
+   ],
+   "exit": 0,
+   "works": true
+  },
+  "repo_relative": {
+   "argv": [
+    "sort",
+    "-u",
+    "canonical/astra_runtime/tmp/x/data.txt"
+   ],
+   "exit": 2,
+   "works": false
+  },
+  "how_it_surfaced": "FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT -- a SAFETY refusal standing in for 'file not found'",
+  "cost_of_that": "the learned capability was dead and the error message pointed at the one component that was working"
+ },
+ "the_fix": {
+  "what": "`_carrier_path(arg, work_dir)` rewrites an argument into the workspace-relative form the carrier can reach",
+  "when_it_fires": "ONLY when the named file actually exists inside the staged workspace",
+  "what_is_left_alone_and_still_refused": [
+   "absolute paths outside the workspace",
+   ".. escapes",
+   "flags",
+   "URLs",
+   "paths that do not exist"
+  ],
+  "principle": "a TRANSLATION, not a widening -- nothing gains reach",
+  "no_confinement_rule_was_weakened": true,
+  "receipt": "each cli step now records both `argv` (what ran) and `argv_asked` (what the skill stored), so a translation is auditable rather than invisible"
+ },
+ "the_bug_inside_the_bug": {
+  "what": "the first version of the translation did nothing, silently",
+  "why": "it used `pathlib.relative_to`, which is a STRING operation, not an existence test. `w/canonical/x/y` is trivially 'inside' `w`, so a repo-relative path was 'translated' to itself and the carrier still failed.",
+  "lesson": "a path-shaped string is not a path. Existence is now required, and a test pins it."
+ },
+ "the_breakthrough__measured": {
+  "before": "compile_and_qualify_skill -> FAIL_CLOSED__TRANSFER_OWNERSHIP_GATE_REJECTED (heldout_ok False, CARRIER_DID_NOT_ESTABLISH_CONFINEMENT)",
+  "after": "compile_and_qualify_skill -> PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED",
+  "recall_same_process": "HIT answer=3",
+  "recall_fresh_process": "HIT answer=3",
+  "what_was_taught": "a NEW cli skill: 'how many unique lines in <repo-relative path>' -> sort -u, postcondition stdout_line_count",
+  "reading": "One demonstration of a genuinely new CLI skill now: compiles, qualifies against an untouched held-out instance and a sabotage control, persists, and answers in a fresh interpreter. That is the complete loop this project has been claiming, and until this round it was broken by a path."
+ },
+ "regressions": {
+  "before_and_after": "6 failed / 41 passed, IDENTICAL both runs",
+  "verified_by": "stashing only causal_trace_to_skill_compiler_v1.py",
+  "the_6": "the long-known stale test_acquisition_to_execution_engine_v1 family + 2 route-guard subtests"
+ },
+ "what_this_does_NOT_change": {
+  "compounding": "0 net saving across 10 never-seen kinds -- learning a NEW KIND is still not possible",
+  "learning_to_learn": "3/10 against a random policy",
+  "general_environment_learning": "bounded random walking; 81% coverage at 200 trials; goal never reached",
+  "any_computer_use": "37 read verbs, 33 installed; no compile, build, install, fetch, or write",
+  "sentience": "no",
+  "public_benchmark_number": "zero"
+ },
+ "what_it_DOES_change": "The loop is now closed for the 37 read verbs instead of being closed only for skills whose paths happened to match the carrier's cwd. The honest next measurement is how many of those 37 verbs can be taught, qualified, executed and replayed end-to-end -- before this round the answer was not computable because every attempt failed on a path.",
+ "smartest_next_moves__ranked": [
+  {
+   "rank": 1,
+   "action": "MEASURE THE 37-VERB TRACK",
+   "why": "the loop is finally closed, so the number is finally computable. Teach, qualify, recall for each admitted verb, and publish the count. That is the first real capability number this project can produce."
+  },
+  {
+   "rank": 2,
+   "action": "STOP LETTING exit 2 SURFACE AS A CONFINEMENT REFUSAL",
+   "why": "r39's #2, still true. The refusal taxonomy has a cause for CARRIER refusal and none for 'the program could not find its file'. One defect hid behind the other for an unknown number of rounds."
+  },
+  {
+   "rank": 3,
+   "action": "DECIDE WHETHER KIND-LEVEL COMPOUNDING IS IN SCOPE",
+   "why": "r36 measured 0/10 twice. If it is in scope it needs a key that is not the kind; if it is not, say so once and stop re-testing it."
+  }
+ ],
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

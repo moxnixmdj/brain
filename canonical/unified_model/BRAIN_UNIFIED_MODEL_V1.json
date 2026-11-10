@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 309,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6733,
+  "research_index_records": 6735,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a29558911b25ad1d81d5eb2717f7d0817055b32c807586d2998c6372e779fbe3"
+  "value": "b4f24089d10f1698016bd380a64dbb4194c3b80d14adbf71c205289881e69fb0"
  },
  "engines": [
   {
@@ -132687,6 +132687,24 @@
    "action_id": "",
    "capability": false,
    "date": "2026-11-09",
+   "id": "research:canonical/governance/THE_CEILING_COUNTED_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/THE_CEILING_COUNTED_20261109_V1.json",
+   "schema": "brain.governance.THE_CEILING_COUNTED_20261109_V1",
+   "sha256": "23b669cd9fc22f8f4791b4989ca3287a2c70cf4e2e5e22877648d165dcd21f9a",
+   "status": "CEILING_MEASURED_FOR_THE_FIRST_TIME__TWO_DEFECTS_FIXED",
+   "terms": {
+    "20261109": 1,
+    "ceiling": 1,
+    "ceiling_measured_for_the_first_time__two_defects_fixed": 1,
+    "counted": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
    "id": "research:canonical/governance/THE_HARNESS_WAS_DOCUMENTATION_20261109_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/governance/THE_HARNESS_WAS_DOCUMENTATION_20261109_V1.json",
@@ -132719,6 +132737,26 @@
     "now": 1,
     "question": 1,
     "under": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/THE_SKILL_COULD_NOT_FIND_ITS_FILE_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/THE_SKILL_COULD_NOT_FIND_ITS_FILE_20261109_V1.json",
+   "schema": "brain.governance.THE_SKILL_COULD_NOT_FIND_ITS_FILE_20261109_V1",
+   "sha256": "a5523951e7a5db69fa2d6dd463e476a23ed6cc8f5bf51e28b3c125a09ec26d0b",
+   "status": "ONE_DEMONSTRATION_MEASURED_END_TO_END__A_PATH_DEFECT_FOUND",
+   "terms": {
+    "20261109": 1,
+    "file": 1,
+    "find": 1,
+    "not": 1,
+    "one_demonstration_measured_end_to_end__a_path_defect_found": 1,
+    "skill": 1,
     "v1": 1
    }
   },
