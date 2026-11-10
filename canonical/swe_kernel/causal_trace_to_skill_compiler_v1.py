@@ -1394,6 +1394,52 @@ def verify_postcondition(
             return False, f"POSTCONDITION_NOT_INTEGER:{out_txt!r}"
         return True, "STDOUT_INTEGER_VERIFIED"
 
+    if kind in ("stdout_lines", "stdout_text", "stdout_first_token",
+                "stdout_line_count_or_zero", "stdout_integer_value"):
+        receipts = list((execution_result or {}).get("step_receipts") or [])
+        if not receipts:
+            return False, "POSTCONDITION_NO_RECEIPTS"
+        out_txt = str(receipts[-1].get("stdout") or "")
+        if kind == "stdout_lines":
+            want = postcondition.get("equals")
+            got_lines = [ln for ln in out_txt.splitlines()]
+            if want is not None and got_lines != list(want):
+                return False, f"POSTCONDITION_LINES_MISMATCH:{got_lines[:3]!r}!={list(want)[:3]!r}"
+            return True, f"STDOUT_LINES_VERIFIED:{len(got_lines)}"
+        if kind == "stdout_text":
+            want = str(postcondition.get("equals") or "")
+            if want and out_txt.strip() != want.strip():
+                return False, "POSTCONDITION_TEXT_MISMATCH"
+            return True, f"STDOUT_TEXT_VERIFIED:{len(out_txt)}"
+        if kind == "stdout_integer_value":
+            parts = out_txt.strip().split()
+            if not parts:
+                if str(postcondition.get("equals")) == "0":
+                    return True, "STDOUT_INTEGER_VERIFIED:0"
+                return False, "POSTCONDITION_INTEGER_EMPTY"
+            try:
+                got_i = int(parts[0])
+            except ValueError:
+                return False, f"POSTCONDITION_NOT_INTEGER:{parts[0]!r}"
+            want_i = postcondition.get("equals", postcondition.get("expected"))
+            if want_i is not None and str(got_i) != str(want_i):
+                return False, f"POSTCONDITION_INTEGER_MISMATCH:{got_i}!={want_i}"
+            return True, f"STDOUT_INTEGER_VERIFIED:{got_i}"
+        if kind == "stdout_first_token":
+            parts = out_txt.split()
+            if not parts:
+                return False, "POSTCONDITION_FIRST_TOKEN_EMPTY"
+            want = postcondition.get("equals")
+            if want is not None and parts[0] != str(want):
+                return False, f"POSTCONDITION_FIRST_TOKEN_MISMATCH:{parts[0]!r}"
+            return True, f"STDOUT_FIRST_TOKEN_VERIFIED:{parts[0][:16]}"
+        # stdout_line_count_or_zero
+        got_n = len([ln for ln in out_txt.splitlines() if ln.strip()])
+        want_n = postcondition.get("equals", postcondition.get("expected"))
+        if want_n is not None and str(got_n) != str(want_n):
+            return False, f"POSTCONDITION_COUNT_MISMATCH:{got_n}!={want_n}"
+        return True, f"STDOUT_LINE_COUNT_VERIFIED:{got_n}"
+
     if kind == "stdout_equals":
         receipts = list((execution_result or {}).get("step_receipts") or [])
         if not receipts:
@@ -2045,7 +2091,21 @@ def compile_and_qualify_skill(
         # straight out of this function, so a caller could not distinguish "this skill does not
         # transfer" from "this function is broken".
         try:
-            pre_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result={})
+            # EXPLICIT ABLATION (r45). The old form was `causal_ablation_pass = not pre_ok`
+            # against an EMPTY execution result, which is only meaningful when every
+            # postcondition kind happens to fail on an empty world. Measured 2026-11-09: the
+            # moment `stdout_line_count` was allowed to verify 0, every skill was refused
+            # with REQUIRED_TRUE_MISSING:causal_ablation_pass, because the control inverted
+            # silently. A control that infers itself from an unrelated check failing is
+            # fragile in a way its own tests cannot see.
+            #
+            # Now the ablation ASKS THE HELD-OUT WORLD DIRECTLY, with the same check that
+            # will be applied after the skill runs. If the goal's condition already holds
+            # before anything executes, the skill proved nothing.
+            pre_ok, _ = verify_postcondition(
+                inst_post, cwd=work_dir,
+                execution_result=_heldout_pre_state(inst_post, inst_steps, cwd=work_dir),
+            )
         except Exception as exc:  # noqa: BLE001 - any inability to check is a non-qualification
             return {
                 "schema": SCHEMA,
@@ -2514,6 +2574,33 @@ def _sqlite_tables_named(sql: str) -> set[str]:
     return named
 
 
+def _heldout_pre_state(postcondition: Mapping[str, Any], steps, *,
+                       cwd: pathlib.Path | None = None) -> dict[str, Any]:
+    """The held-out world AS IT IS, before the skill runs -- for the causal ablation.
+
+    For contracts that read a FILE (file_contains, file_nonempty, ...) the pre-state is the
+    file's current contents. For contracts that read a PROCESS'S STDOUT there is no
+    pre-state: nothing has run, so no program has printed. Returning an empty receipt set
+    for those is honest -- and `verify_postcondition` already fails closed on it, which is
+    the behaviour the ablation needs. The difference from before is that this is now
+    STATED rather than inferred from whatever a generic empty check happened to do.
+    """
+    receipts: list[dict[str, Any]] = []
+    kind = str((postcondition or {}).get("kind") or "")
+    if kind.startswith("file_") and postcondition.get("path"):
+        target = pathlib.Path(str(postcondition["path"]))
+        if not target.is_absolute() and cwd is not None:
+            target = pathlib.Path(cwd) / target
+        if target.exists() and target.is_file():
+            try:
+                receipts.append({"step": -1, "layer": "pre_state",
+                                 "path": str(target),
+                                 "stdout": target.read_text(encoding="utf-8", errors="replace")})
+            except Exception:  # noqa: BLE001 - unreadable is unobservable, not a pass
+                receipts = []
+    return {"step_receipts": receipts, "pre_state": True}
+
+
 def _contract_answer(postcondition: Mapping[str, Any],
                      execution_result: Mapping[str, Any]) -> Any:
     """The value the skill's postcondition says is the answer, or None.
@@ -2534,6 +2621,39 @@ def _contract_answer(postcondition: Mapping[str, Any],
     if kind == "stdout_integer":
         stripped = text.strip()
         return int(stripped) if stripped.isdigit() else None
+    # ---- TYPED ANSWERS (r45) ---------------------------------------------------------
+    # Until now a skill could only answer "how many lines did you print". Measured r44:
+    # all 23 verbs returned exactly that, 23/23, and 'sha256 of <f>' answered 1. The
+    # system had no way to return the lines, or the hash, or zero.
+    #
+    # These three kinds give the answer a TYPE. They are deliberately literal -- the raw
+    # text, not a parsed interpretation -- because a wrong parse presented confidently is
+    # worse than honest text.
+    if kind == "stdout_lines":
+        return [ln for ln in text.splitlines()]          # includes "" -> a real empty answer
+    if kind == "stdout_text":
+        return text                                      # verbatim, whitespace preserved
+    if kind == "stdout_first_token":
+        parts = text.split()
+        return parts[0] if parts else None               # e.g. the hash from `sha256sum <f>`
+    if kind == "stdout_integer_value":
+        # The INTEGER THE PROGRAM PRINTED, not the number of lines it printed.
+        # `wc -l f` prints "4 f" -- one line. Counting lines answers 1 and reports it as
+        # verified (measured r44). Parsing the leading integer answers 4, and on an empty
+        # file answers 0, so zero becomes sayable without touching stdout_line_count.
+        head = text.strip().split()
+        if not head:
+            return "" if "0" == str(postcondition.get("equals")) else None
+        try:
+            return int(head[0])
+        except ValueError:
+            return None
+    if kind == "stdout_line_count_or_zero":
+        # The count, INCLUDING zero. Deliberately a separate kind from stdout_line_count:
+        # that one must keep failing closed on empty because `causal_ablation_pass = not
+        # pre_ok` infers the control from it. This kind is for callers who asked a
+        # counting question and need 0 to be sayable.
+        return len([ln for ln in text.splitlines() if ln.strip()])
     if kind == "stdout_equals":
         return text if text else None
     return None
