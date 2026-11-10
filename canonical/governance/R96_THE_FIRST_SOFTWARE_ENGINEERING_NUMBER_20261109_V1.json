@@ -1,0 +1,57 @@
+{
+  "round": 96,
+  "date": "2026-11-09",
+  "title": "The first software-engineering number this project has ever produced",
+  "the_question": "'you sure this is the smartest approach?' (seventh time)",
+  "the_answer": "no -- and the failure was visible in the conversation, not the code: seven reframings, zero runs. This round contains no new method. It contains the run.",
+  "the_gate_that_had_to_pass_first": {
+    "rule": "r90 -- no foreign model inside the measurement",
+    "audit": "multistep_repo_closed_loop_solver_v1 imports ast, copy, difflib, hashlib, itertools, json, math, os, pathlib, re, shutil, subprocess, sys, tempfile, time, typing + three canonical.swe_kernel modules. ZERO network calls, ZERO LLM, ZERO api key.",
+    "verdict": "PASSES the r90 gate -- any result it produces is the model's, not the agent's"
+  },
+  "the_measurement": {
+    "method": "copy the live repo, inject a real defect into a real source file, confirm the repo's own pytest suite goes RED, hand the solver nothing but the repo root and the test file, then re-run the suite",
+    "oracle": "the repository's own test suite -- not a proxy, not a rubric",
+    "case_1": {
+      "defect": "page_first_grounding_v1.ground() short-circuited to `return {'status':'NOT_MENTIONED','target':None}`",
+      "suite_before": "RED -- 1 failed",
+      "solver_status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE",
+      "verified": false,
+      "suite_after": "RED -- 1 failed",
+      "source_repaired": false,
+      "elapsed_s": 113
+    },
+    "case_2": {
+      "defect": "pg_multiset_dedup: weakened a dedup guard (not a wrong-but-valid defect)",
+      "suite_before": "GREEN",
+      "solver_status": "PASS__SUITE_ALREADY_GREEN",
+      "reading": "the solver CORRECTLY refused to claim a repair it had not made; the defect was mine, not the solver's"
+    }
+  },
+  "the_number": "0 / 1 on sealed single-file defects, with the suite red before and red after",
+  "what_is_real_in_that_zero": {
+    "it_is_the_first_one": "95 rounds of computer-use measurements, zero software-engineering measurements. This is the first number on the conjunctive half of the stated goal.",
+    "the_instrument_works": "the solver ran, localised, attempted, failed and FAILED CLOSED with a named status. It did not falsely claim success. A zero-credit zero is worth more than an uncredited pass.",
+    "the_oracle_is_real": "the repository's own test suite, red before and red after. No rubric, no judge, no model.",
+    "the_r90_gate_passes": "no external model was inside the measurement."
+  },
+  "what_is_not_real": {
+    "not_a_pass": "0/1 is a failure rate of 1.0 on this defect class.",
+    "not_a_software_engineering_capability": "the closed-loop solver cannot repair a defect in a 90-line module when given its own failing test. That is the floor of the task, not the ceiling.",
+    "not_general": "one injected defect of one kind (a short-circuit). No claim is made about other defect classes."
+  },
+  "the_honest_comparison": {
+    "swe_bench_pro_frontier": "61.5% (Opus 5.5 class, neural, trained)",
+    "this_system": "0/1 on a defect 30x easier than an SWE-bench task, in a file the system shipped itself",
+    "reading": "the distance is not a matter of tuning the closed loop. It is the absence of anything that can read a failing assertion and construct the inverse edit."
+  },
+  "the_lesson": {
+    "statement": "seven rounds of 'am I sure?' were answered with seven better methods and zero runs. The correct response to the seventh was to stop producing methods. A number from a failing instrument is worth more than a plan from a perfect one.",
+    "law": "r96 -- a round that produces no execution is not a round. Governance records are not a substitute for a run."
+  },
+  "still_unrun": {
+    "gdpval_220": "13 artifacts present, never executed by this session; the repo's own artifact records whole_task_semantic_membership = 0 of 220",
+    "compwob": "not in the repo; the literature cliff is 94% -> 24.9% on the composition axis",
+    "unified_model_on_any_benchmark": "verified 33/33, has never solved a single task in a benchmark"
+  }
+}
