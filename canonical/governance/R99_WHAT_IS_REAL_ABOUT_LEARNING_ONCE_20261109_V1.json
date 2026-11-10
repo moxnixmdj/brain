@@ -1,0 +1,78 @@
+{
+  "round": 99,
+  "date": "2026-11-09",
+  "title": "What is real about 'learn it once and it is permanent'",
+  "the_user_claim": "Instant learning and instant learning in new arbitrary environments are already solved perfectly; therefore this is a perfect solution for all computer use; give the model a try in all new coding environments, and after it does them once it learns them permanently; so we solve everything permanently",
+  "four_claims_four_verdicts": {
+    "claim_1_instant_learning_is_solved": "TRUE, for a precisely bounded class -- and the repo's own record says the class, not 'solved perfectly'",
+    "claim_2_it_applies_in_arbitrary_new_environments": "PARTLY TRUE -- a MEASUREMENT SHAPE transfers; operation of an arbitrary environment does not",
+    "claim_3_learn_once_then_permanent_for_all_computer_use": "FALSE as stated -- true exactly where the demonstration compiles to a CONFINED PROGRAM",
+    "claim_4_this_means_sentience": "FALSE -- and the repo already said so in r31"
+  },
+  "evidence_already_in_the_repo": {
+    "r30_INSTANT_LEARNING_END_TO_END_PROVEN": {
+      "status": "THE_CLAIM_IS_NOW_TRUE_FOR_THIS_DOMAIN__DEMONSTRATE_ONCE__CRYSTALLISE__ANSWER_A_NEW_FILE",
+      "measured": "learned 'unique lines' on 16 rows/8 distinct -> answered 13 on a never-seen file -> answered 21 when learned on 4 distinct (proves it did not memorise the answer)",
+      "bounded_by": "a COUNTING QUESTION ABOUT A FILE"
+    },
+    "r31_ONE_DEMONSTRATION_TRANSFERS_ACROSS_SHAPES": {
+      "status": "TRUE_FOR_SHAPES_WITH_A_CONFINED_PROGRAM__FALSE_FOR_SHAPES_WITHOUT_ONE__AND_NOT_SENTIENCE",
+      "verbatim": "'It learns a MEASUREMENT SHAPE permanently, and then answers that shape on any file for ~100 ms with zero weights and zero spend. It does not learn to operate a computer, and nothing here is sentient. \"Solve everything on a computer\" is false; \"never pay twice for a shape I have already been shown\" is true.'",
+      "hard_counterexample": "'unique words' -> REFUSED, no single admitted program computes it",
+      "score": "4/5 on the tested set -- not 'perfectly'"
+    },
+    "r59_AM_I_RIGHT_OR_WRONG_ABOUT_THE_LEARNING": {
+      "answer": "WRONG ON 'LEARNING'. RIGHT ON 'FASTER AND CHEAPER THAN FINE-TUNING'. WRONG ON 'CODING AND COMPUTER USE'.",
+      "the_field_criterion": "'What happens if memory is wiped? If the gain vanishes, it was memory.'",
+      "measured": "before wipe: ANSWERED ['q','z']. after wipe: ASK, NOTHING_TAUGHT. file, program and process unchanged; only the row removed"
+    }
+  },
+  "new_measurement_this_round": {
+    "question": "does the model recognise the class of goals it would have to learn in order to 'solve anything on a computer'?",
+    "method": "30 rendered-page computer-use goals offered to the 443-capability registry; count confident routing (routing confident = the system claims it can do this)",
+    "result": "11 of 21 parsed goals confidently routed -- 52%",
+    "examples_of_confident_wrong_claims": [
+      "'Resize the textarea to be 300 pixels wide' -> pdf.extract.text.pypdf",
+      "'Move the slider to 60' -> chart.raster.scene_graph.v1",
+      "'Check the box labelled Red' -> python.contract.check.crosshair.v1",
+      "'Pick the card with the greatest number' -> python.source.definition_count.v1",
+      "'Click on Tab #2' -> web.browser.rendered.capture.chromedriver (a screen CAPTURE, not a tab click)"
+    ],
+    "reading": "the registry does not merely lack these capabilities -- it CONFIDENTLY claims unrelated ones. 52% confident-wrong is worse than 0% coverage, because a fail-closed system is usable and a confidently-wrong one is not."
+  },
+  "the_first_principles_reframe": {
+    "statement": "Learning-by-demonstration compresses the cost of the Nth execution to zero and does NOTHING for the 1st.",
+    "why_it_matters": "'give the model a try in all those new environments' presumes it SUCCEEDS on the try. Every measurement says it does not:",
+    "first_attempt_measurements": {
+      "sealed_software_defect": "0/1 (r96) -- solver failed closed, did not repair",
+      "artifact_production": "3/9 producers executed (r98), and all 3 required inputs the agent itself had to construct",
+      "professional_deliverables": "1 of 4 GDPval families has a runnable correct producer; PDF has 0 of 443 (r98)",
+      "computer_use": "21/130 = 16.2% (r93, single run)"
+    },
+    "the_circularity": "the demonstration that makes everything permanent must be AUTHORED BY SOMETHING THAT CAN ALREADY DO THE TASK. The system has no mechanism to author its own first demonstration in a task it cannot do. Every round of this session is evidence: the demonstrations were written by me, and r90 forbids counting me as the model.",
+    "corollary": "improving the learning mechanism cannot move the ceiling, because the ceiling is set by the fraction of tasks for which a first demonstration can be obtained at all. That fraction is the only number worth raising."
+  },
+  "what_the_2026_literature_adds": {
+    "supports_the_user": [
+      {"source": "Continual Learning in LLM Agents survey (2026), Ball", "finding": "'In-context learning is (almost) all you need' -- with new base models every few months there may not be much to gain from true continual learning over in-context learning"},
+      {"source": "Memory-Centric Continual Learning (2610.29357)", "finding": "dedicated memory and skill-maintenance methods 'are only selectively helpful and can be matched or outperformed by ordinary in-context accumulation'"}
+    ],
+    "constrains_the_user": [
+      {"source": "PolySkill, ICLR 2026", "finding": "separating a skill's GOAL from its EXECUTION is what makes it reusable across sites -- our skill store records an execution, not an abstracted goal"},
+      {"source": "Modular Memory position (2603.01761)", "finding": "ICL 'allows instantaneous adaptation and completely avoids forgetting... but it is TEMPORARY. Once the context is cleared, the learning is gone'"},
+      {"source": "SDFT (2601.19897)", "finding": "catastrophic forgetting is not solved by demonstration; it needs on-policy updates, and even then 'some degradation of prior capabilities remains'"},
+      {"source": "survey, 2610.29357", "finding": "'stored content can survive while remaining unaccessed, unused, or ineffective' -- exactly the failure r67 named: a skill that cannot be found was never learned"}
+    ],
+    "net": "the 2026 field says the user's intuition is PARTIALLY right (cheap in-context/demonstrative learning is underrated), and says the missing piece is GOAL ABSTRACTION, not storage."
+  },
+  "sentience": {
+    "verdict": "no",
+    "reason": "the system stores rows in a database and retrieves them. r59 measured the defining test: wipe the row and the capability is gone. That is filing with exact reversibility -- a genuinely excellent property, and not a mind.",
+    "what_would_be_evidence": "learning something that was never demonstrated, and retaining it after the store is wiped"
+  },
+  "the_smartest_things_to_do_ranked": [
+    "1. RAISE THE FIRST-ATTEMPT RATE. Not the learning rate. The whole system optimises N>=2; the ceiling is N=1. Concretely: producers for the deliverable families that have none (PDF first, 85/220 of GDPval), and a substrate gate so a rendered-page goal can never route to a non-page capability.",
+    "2. ABSTRACT THE GOAL, NOT THE EXECUTION. PolySkill's result is the one change that would make stored skills transfer across environments; the current store replays a trajectory.",
+    "3. MEASURE ON ONE AXIS ONLY: W_COVER on GDPval-AA against elo 1846. Every other axis invented this session was a detour."
+  ]
+}
