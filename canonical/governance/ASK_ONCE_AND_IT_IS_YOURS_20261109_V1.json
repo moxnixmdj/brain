@@ -1,0 +1,28 @@
+{
+  "round": 58,
+  "date": "2026-11-09",
+  "title": "The one part of the thesis that survives intact: one answer to one question is learned, permanent, and carries to a new file",
+  "the_first_principles_move": "r55-r57 made the system refuse a tie and ask. That is correct and, on its own, a regression in usefulness: the same user is asked the same question forever. An asked-and-answered ambiguity is not ambiguous any more. The missing component was memory keyed by the PHRASE rather than by the document.",
+  "the_measurement": {
+    "first_ask_tied": "ASK",
+    "user_answers_the_unique_lines_one": "remember_clarification(goal, skill_id)",
+    "second_ask_same_file": "ANSWERED -> ['q','z'], reporting which clarification it used",
+    "third_ask_DIFFERENT_file_same_phrase": "ANSWERED -> ['a','b']",
+    "scoped_correctly": "a different phrasing does not inherit the choice"
+  },
+  "why_this_is_the_thesis_working": "the standing claim is 'teach it once and it has it permanently, in new environments'. Here a clarification -- one turn, one choice -- is learned, persisted in sqlite, applied to the same phrasing on a file the system has never seen, and it survives restart like every other row. This is the only place in fifty-eight rounds where the claim's shape and the measurement agree without qualification.",
+  "what_it_is_not": {
+    "not_zero_shot": "it still cannot act on a phrasing it has never been taught or asked about",
+    "not_a_semantic_parser": "the phrase key is a sorted word set with the operand stripped; 'dedupe the lines in' and 'dedupe lines in' collide, and so do their negatives",
+    "not_a_model": "0 parameters. It remembers a choice; it does not understand one."
+  },
+  "transfer_requires_the_phrase": "the carry to a new file works because the key drops the operand. It does NOT carry to a paraphrase: taught 'dedupe the lines in', the system will still ask about 'remove duplicates from'. That boundary is the same information ceiling measured in r55, moved one level up: what is learned is a phrase-to-operation binding, not a concept.",
+  "external_agreement_2026": {
+    "When RAG Users Ask Vague Questions": "'the conversation does not carry the clarification across turns; the learned default carries it across requests' -- and 'without the learned-default table, silent inference is just guessing'",
+    "ReferClaw (arXiv 2611.07683)": "bounded clarification turns; 'learns from verified interaction feedback so that disambiguation mistakes are not repeated'",
+    "PAHF (arXiv 2602.16173)": "pre-action clarification plus a persistent preference memory; asking before acting beats post-action correction at the first interaction"
+  },
+  "where_this_deliberately_diverges": "those systems learn a default for a missing FIELD and apply it silently inside a confidence band. This learns which of several TAUGHT OPERATIONS a repeated PHRASE means, with no confidence band and no threshold: one answer, one phrase, no other. The memory decides WHICH skill; the carrier still executes it and the postcondition still verifies it, so a remembered choice that cannot verify falls back to asking rather than returning an answer.",
+  "honest_scope": "this closes one seam. It does not touch ranks 1-5 of the r56 ranking: there is still no model, no desktop, no planner, no discovery, and the horizon wall is unchanged. A system that remembers which `wc` you meant is a better filing cabinet, not an agent.",
+  "regression": {"files": 20, "passed": 149, "xfailed": 1, "r46_baseline": "23/23 unchanged"}
+}

@@ -971,6 +971,95 @@ def _refuse_if_operations_tie(skills: list[dict[str, Any]], goal: str) -> list[d
         return []
     return skills
 
+
+# --------------------------------------------------------------------------------------------
+# r58: LEARN THE DEFAULT. ASK ONCE, NOT EVERY TIME.
+#
+# r55-r57 made the system refuse a tie and raise it as a question. That is correct and it is
+# also, on its own, a regression in usefulness: a user who says "dedupe the lines in" twice
+# gets asked twice, having answered once. The missing piece is a table that remembers the
+# answer keyed by the PHRASE, not by the document (2026: "the conversation does not carry the
+# clarification across turns; the learned default carries it across requests").
+#
+# Where this deliberately diverges from the 2026 pattern: those systems learn a DEFAULT for a
+# missing FIELD (which document, which page) and apply it silently when confident. This one
+# resolves an OPERATION for a repeated PHRASE. Same shape, narrower scope, and it asserts no
+# confidence band -- one answer to one question, applied to that phrase and no other.
+# --------------------------------------------------------------------------------------------
+
+_CLARIFY_TABLE = "clarification_defaults"
+_CLARIFY_SCHEMA = """
+CREATE TABLE IF NOT EXISTS clarification_defaults (
+    phrase_key     TEXT PRIMARY KEY,
+    phrase          TEXT NOT NULL,
+    skill_id        TEXT NOT NULL,
+    operation       TEXT NOT NULL,
+    times_applied   INTEGER NOT NULL DEFAULT 0,
+    created_ns      INTEGER NOT NULL
+)
+"""
+
+
+def _phrase_key(goal: str) -> str:
+    """The user's words, minus the file they named, so the same phrasing under a different
+    path is the same question. Word-set and order-insensitive: 'dedupe the lines in' and
+    'in dedupe the lines' are one phrase."""
+    import re as _re
+    # Strip the operand before keying. "dedupe the lines in a.txt" and
+    # "dedupe the lines in b.log" are the same question; keeping the filename in the key
+    # made them two, which was measured immediately after the first write.
+    operand = set()
+    for tok in goal.split():
+        stripped = tok.strip("\"'(),;:!?")
+        if "/" in stripped or "." in stripped:
+            operand.add(stripped)
+            operand.update(part for part in _re.split(r"[/.]", stripped) if part)
+    words = [w for w in _re.findall(r"[a-z0-9]{2,}", goal.lower())
+             if w not in _STOP_WORDS and w not in {o.lower() for o in operand}]
+    return " ".join(sorted(words))
+
+
+def remember_clarification(goal: str, skill_id: str, *, db_path: pathlib.Path | None = None) -> dict[str, Any]:
+    """Record that, for this phrasing, the user chose this skill. One row per phrase."""
+    import sqlite3
+    import time as _time
+    target_db, conn = _connect_db(db_path)
+    try:
+        conn.execute(_CLARIFY_SCHEMA)
+        # the column is steps_json, not abstract_steps -- the row key and the column name differ
+        rows = conn.execute(
+            "SELECT steps_json FROM compiled_workflow_skills WHERE skill_id = ?", (skill_id,)
+        ).fetchall()
+        if not rows:
+            return {"schema": "CLARIFICATION_V1", "stored": False, "reason": "NO_SUCH_SKILL"}
+        op = " ".join([str(a) for a in (json.loads(rows[0][0])[0].get("argv") or [])][:2])
+        key = _phrase_key(goal)
+        if not key:
+            return {"schema": "CLARIFICATION_V1", "stored": False, "reason": "EMPTY_PHRASE"}
+        conn.execute(
+            "INSERT INTO clarification_defaults (phrase_key, phrase, skill_id, operation, times_applied, created_ns)"
+            " VALUES (?,?,?,?,0,?)"
+            " ON CONFLICT(phrase_key) DO UPDATE SET skill_id=excluded.skill_id,"
+            " operation=excluded.operation, phrase=excluded.phrase",
+            (key, goal.strip(), skill_id, op, _time.time_ns()),
+        )
+        conn.commit()
+        return {"schema": "CLARIFICATION_V1", "stored": True, "phrase_key": key,
+                "skill_id": skill_id, "operation": op}
+    finally:
+        conn.close()
+
+
+def _recall_clarification(goal: str, conn) -> tuple[str, str, str] | None:
+    try:
+        row = conn.execute(
+            "SELECT skill_id, operation, phrase FROM clarification_defaults WHERE phrase_key = ?",
+            (_phrase_key(goal),),
+        ).fetchone()
+    except sqlite3.Error:
+        return None
+    return (row[0], row[1], row[2]) if row else None
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
@@ -2958,6 +3047,36 @@ def answer_or_ask(
     if got is not None:
         return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED", "answer": got.get("answer"),
                 "result": got}
+    # ASK ONCE, NOT EVERY TIME: a phrasing whose answer the user already gave is not
+    # ambiguous any more. The learned row is keyed by the PHRASE, never by the document, and
+    # it only decides WHICH of the taught skills to run -- the carrier still executes it and
+    # the postcondition still verifies it, so a bad remembered answer fails loudly rather
+    # than quietly.
+    _tdb, _conn = _connect_db(db_path)
+    try:
+        remembered = _recall_clarification(goal, _conn)
+    finally:
+        _conn.close()
+    if remembered is not None:
+        _sid, _op, _phrase = remembered
+        _rows = [r for r in _load_cached_skills(db_path=db_path) if r.get("skill_id") == _sid]
+        if _rows:
+            _skill = _rows[0]
+            _b = _bind_by_verb_selection(_skill, goal, cwd)
+            if _b is not None:
+                _steps = _instantiate_obj(_skill["abstract_steps"], _b)
+                _res = execute_compiled_steps(_steps, cwd=cwd)
+                if _res.get("ok"):
+                    _pc = _skill.get("abstract_postcondition")
+                    _ok, _why = verify_postcondition(_pc, cwd=cwd, execution_result=_res)
+                    if _ok:
+                        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED",
+                                "answer": _contract_answer(_pc, _res),
+                                "verification_reason": _why,
+                                "learned_from_clarification": {"phrase": _phrase,
+                                                               "operation": _op,
+                                                               "skill_id": _sid},
+                                "result": _res}
     ask = select_or_ask(goal, db_path=db_path)
     if ask.get("verdict") == "SELECTED":
         # selected uniquely but execution failed; say so rather than offering a menu
