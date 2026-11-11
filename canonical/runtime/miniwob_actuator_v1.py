@@ -974,7 +974,27 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         act.ev("(()=>{const e=document.activeElement;"
                "if(e&&e.value!==undefined){e.value='';"
                "e.dispatchEvent(new Event('input',{bubbles:true}))}})()")
-        act.type_text(str(value))
+        # A SUGGESTION FIELD ACCEPTS ONLY WHAT WAS CHOSEN FROM ITS LIST.
+        #
+        # Measured 2026-11-09 on `book-flight`: the field is a jQuery autocomplete.
+        # Typing the whole value ("Pasco, WA") opens NO list, because the list matches on
+        # the leading text; the field then holds text the page never accepted, `search`
+        # does nothing, and the reward stays 0 while the action string says filled. Typing
+        # a prefix ("Roche") opens "Roche Harbor, WA (RCE) / Rochester, MN (RST) / ...".
+        # So: type a PREFIX, wait for the list, and click the entry that contains the
+        # value the sentence supplied. If no list appears the field is a plain input and
+        # the old behaviour is unchanged.
+        _typed_as_prefix = False
+        try:
+            _probe = str(value).split(",")[0].strip()
+            _probe = _probe.split("/")[0].strip()[:5] or str(value)[:5]
+            act.type_text(_probe)
+            _typed_as_prefix = True
+            time.sleep(0.55)
+        except Exception:  # noqa: BLE001
+            _typed_as_prefix = False
+        if not _typed_as_prefix:
+            act.type_text(str(value))
         act.ev("(()=>{const e=document.activeElement;if(e){"
                "e.dispatchEvent(new Event('input',{bubbles:true}));"
                "e.dispatchEvent(new Event('change',{bubbles:true}));"
@@ -997,6 +1017,31 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         if not landed:
             skipped.append(role + ":NOT_APPLIED")
             continue
+        # A FIELD THAT OFFERS A MENU IS NOT FILLED UNTIL THE MENU IS CHOSEN.
+        # (this runs after the prefix typing above, which is what opens the menu)
+        #
+        # Measured 2026-11-09 on `book-flight`: the page exposes #flight-from with
+        # placeholder "From:". Typing "BWD" leaves e.value == "BWD" and opens a single
+        # suggestion, "Brawnwood, TX (BWD)". The field LOOKS filled and the page's own
+        # state is still unset, so the booking validates as empty and the episode scores
+        # zero -- with an action string that says filled. Reading the value back is not
+        # proof the page accepted it; the page's suggestion list is the thing that has to
+        # be answered. The menu is matched on the value the goal supplied, so this cannot
+        # pick a suggestion the instruction did not ask for.
+        try:
+            _item = act.ev(
+                "(()=>{const want=%s.toLowerCase();"
+                "const li=[...document.querySelectorAll('.ui-menu-item,.ui-autocomplete li,[role=option]')];"
+                "for(const e of li){const t=(e.innerText||'').toLowerCase();"
+                "if(t.includes(want)){const r=e.getBoundingClientRect();"
+                "if(r.width>0&&r.height>0)return r.x+r.width/2+','+(r.y+r.height/2)}}"
+                "return ''})()" % json.dumps(str(value)))
+            if _item:
+                _cx, _cy = [float(x) for x in str(_item).split(",")]
+                act.click(_cx, _cy)
+                time.sleep(0.12)
+        except Exception:  # noqa: BLE001 - a menu that is not there is not a failure
+            pass
         filled.append("%s=%s" % (role, value))
 
     # submit, if the page has anything that looks like one
@@ -1007,6 +1052,29 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         if act.click_el(sel):
             time.sleep(0.35)
             break
+    # A FORM IS NOT SUBMITTED UNTIL THE CONTROL THAT SUBMITS IT IS PRESSED.
+    #
+    # Measured 2026-11-09 on `book-flight`: after this filler ran, the page held
+    # flight-from=Manistee, flight-to=Anchorage, datepicker=12/27/2016 -- every value the
+    # sentence supplied, correctly bound -- and the reward was 0, because the page's own
+    # `search` button was never pressed. The form was complete and unfinished. Submit is
+    # attempted only when a submit-shaped control exists, and it is not required, so a
+    # page without one is unchanged.
+    try:
+        if filled:
+            _btn = act.ev(
+                "(()=>{const b=[...document.querySelectorAll('button,input[type=submit],[role=button]')]"
+                ".filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0});"
+                "const h=b.find(e=>/search|submit|find|go|book|continue/i.test("
+                "(e.id||'')+' '+(e.innerText||'')+' '+(e.value||'')));"
+                "if(!h)return '';const r=h.getBoundingClientRect();"
+                "return (r.x+r.width/2)+','+(r.y+r.height/2)})()")
+            if _btn:
+                _bx, _by = [float(x) for x in str(_btn).split(",")]
+                act.click(_bx, _by)
+                time.sleep(0.20)
+    except Exception:  # noqa: BLE001
+        pass
     return "filled:%s%s" % (";".join(filled) or "none",
                             (";skipped:" + ",".join(skipped)) if skipped else "")
 

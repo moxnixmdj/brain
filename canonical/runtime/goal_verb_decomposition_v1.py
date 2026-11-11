@@ -105,12 +105,24 @@ SLOT_PATTERNS = (
     ("reference",   r'"([^"]{1,40})"'),
     ("reference",   r"\u201c([^\u201d]{1,40})\u201d"),
     ("reference",   r"'([^']{1,40})'"),
-    ("origin",      r"\bfrom\s+([A-Z][\w .'-]{1,30}?)(?=\s+to\b|\s*,|$)"),
-    ("destination", r"\bto\s+([A-Z][\w .'-]{1,30}?)(?=\s*(?:,|departing|returning|on\b|$))"),
-    ("destination", r"\bto\s+([A-Z][\w .'-]{1,30})"),
-    ("depart",      r"\bdeparting\s+(?:on\s+)?([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{4}-\d{2}-\d{2})"),
-    ("return",      r"\breturning\s+(?:on\s+)?([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{4}-\d{2}-\d{2})"),
-    ("date",        r"\bon\s+([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+)"),
+    # THE SENTENCES SAY `from: X` AND THE PATTERNS SAID `from X`.
+    #
+    # Measured 2026-11-09 against the live corpus: "Book the cheapest one-way flight
+    # from: Kakhonak, AK to: Havasupai, AZ on 10/14/2016." matched NONE of the four
+    # travel patterns, because each required `from ` followed immediately by a capital
+    # letter and MiniWob writes `from:` with a colon. Three tasks (book-flight,
+    # book-flight-nodelay, and their nodelay twin) were refused as unreadable while
+    # every value they need sat in the sentence. The colon is optional below, and the
+    # date pattern accepts the M/D/YYYY form the corpus actually uses.
+    # A CITY NAME CONTAINS A SLASH. "Ventura/Oxnard, CA" matched none of the character
+    # classes below and `origin` was silently skipped while destination and date filled.
+    # The class now admits '/', which is what the corpus actually writes.
+    ("origin",      r"\bfrom:?\s+([A-Z][\w .,'/\-]{1,30}?)(?=\s+to:?\b|\s*,|$)"),
+    ("destination", r"\bto:?\s+([A-Z][\w .,'/\-]{1,30}?)(?=\s*(?:,|departing|returning|on\b|$))"),
+    ("destination", r"\bto:?\s+([A-Z][\w .,'/\-]{1,30})"),
+    ("depart",      r"\bdeparting\s+(?:on\s+)?([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{4}-\d{2}-\d{2}|\d{1,2}/\d{1,2}/\d{4})"),
+    ("return",      r"\breturning\s+(?:on\s+)?([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{4}-\d{2}-\d{2}|\d{1,2}/\d{1,2}/\d{4})"),
+    ("date",        r"\bon\s+([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{1,2}/\d{1,2}/\d{4})"),
     ("amount",      r"\b(?:amount|total|price)\s+(?:of\s+)?([\d.,]+)"),
     ("email",       r"([\w.+-]+@[\w-]+\.[\w.]+)"),
 )
